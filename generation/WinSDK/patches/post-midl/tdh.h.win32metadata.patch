@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
-index 8842ce318f..100bcc47ca 100644
+index 8842ce318f..05a94bc558 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
 @@ -19,6 +19,7 @@ Abstract:
@@ -159,6 +159,15 @@ index 8842ce318f..100bcc47ca 100644
  __stdcall
  TdhFormatProperty(
      _In_ PTRACE_EVENT_INFO EventInfo,
+@@ -1019,7 +1023,7 @@ TdhFormatProperty(
+     _In_ USHORT UserDataLength,
+     _In_reads_bytes_(UserDataLength) PBYTE UserData,
+     _Inout_ PULONG BufferSize,
+-    _Out_writes_bytes_opt_(*BufferSize) PWCHAR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_opt_(*BufferSize) PWCHAR Buffer,
+     _Out_ PUSHORT UserDataConsumed
+     );
+ #endif
 @@ -1031,15 +1035,15 @@ TdhFormatProperty(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  

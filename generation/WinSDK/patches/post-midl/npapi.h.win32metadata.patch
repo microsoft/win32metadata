@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h
-index e395c5312d..4645399437 100644
+index e395c5312d..e1cbe5245f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h
 @@ -1,3 +1,4 @@
@@ -170,15 +170,23 @@ index e395c5312d..4645399437 100644
      _In_    DWORD    dwAveCharPerLine
      );
  
-@@ -511,7 +512,7 @@ typedef DWORD (APIENTRY *PF_NPDirectoryNotify) (
+@@ -511,14 +512,14 @@ typedef DWORD (APIENTRY *PF_NPDirectoryNotify) (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -VOID
-+_Windows_SupportedOS_WindowsXP_ VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ VOID
  WNetSetLastErrorA(
      _In_ DWORD   err,
      _In_ LPSTR   lpError,
+     _In_ LPSTR   lpProviders
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ WNetSetLastErrorW(
+     _In_ DWORD   err,
+     _In_ LPWSTR  lpError,
 @@ -615,7 +616,7 @@ typedef struct _NOTIFYINFO {
  typedef struct _NOTIFYADD {
      HWND            hwndOwner;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
-index d9f81143fb..49ed798c85 100644
+index d9f81143fb..702bff1fdc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 @@ -430,6 +430,7 @@ extern "C"{
@@ -410,7 +410,7 @@ index d9f81143fb..49ed798c85 100644
          virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  long lTimeout,
              /* [annotation][in] */ 
@@ -419,7 +419,7 @@ index d9f81143fb..49ed798c85 100644
              _Out_  ULONG *puReturned) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE NextAsync( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE NextAsync( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE NextAsync( 
              /* [annotation][in] */ 
              _In_  ULONG uCount,
              /* [annotation][in] */ 
@@ -428,7 +428,7 @@ index d9f81143fb..49ed798c85 100644
              _Out_  IEnumWbemClassObject **ppEnum) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  long lTimeout,
              /* [annotation][in] */ 

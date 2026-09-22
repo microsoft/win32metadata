@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
-index 0d77f58e08..b4451f9f83 100644
+index 0d77f58e08..ed9cba017c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -585,7 +585,7 @@ index 0d77f58e08..b4451f9f83 100644
  WlanExtractPsdIEDataList(
      _In_ HANDLE hClientHandle,
      _In_ DWORD dwIeDataSize,
-@@ -1562,7 +1563,7 @@ WlanExtractPsdIEDataList(
+@@ -1562,32 +1563,32 @@ WlanExtractPsdIEDataList(
  );
  
  
@@ -594,7 +594,8 @@ index 0d77f58e08..b4451f9f83 100644
  WlanReasonCodeToString(
      _In_ DWORD dwReasonCode,
      _In_ DWORD dwBufferSize,
-@@ -1570,24 +1571,24 @@ WlanReasonCodeToString(
+-    _In_reads_(dwBufferSize) PWCHAR pStringBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_(dwBufferSize) PWCHAR pStringBuffer,
      _Reserved_ PVOID pReserved
  );
  

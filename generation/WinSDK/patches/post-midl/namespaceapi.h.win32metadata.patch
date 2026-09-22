@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
-index 589691ede1..38641185eb 100644
+index 589691ede1..904dbd3034 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
 @@ -15,6 +15,7 @@
@@ -14,7 +14,7 @@ index 589691ede1..38641185eb 100644
  
  #define PRIVATE_NAMESPACE_FLAG_DESTROY      0x00000001
  
-+_Win32_RAIIFree_(ClosePrivateNamespace) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(ClosePrivateNamespace) 
 +
 +
  WINBASEAPI
@@ -24,7 +24,7 @@ index 589691ede1..38641185eb 100644
      _In_ LPCWSTR lpAliasPrefix
      );
  
-+_Win32_RAIIFree_(ClosePrivateNamespace) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(ClosePrivateNamespace) 
 +
 +
  WINBASEAPI
@@ -44,7 +44,7 @@ index 589691ede1..38641185eb 100644
      _In_ ULONG Flags
      );
  
-+_Win32_RAIIFree_(DeleteBoundaryDescriptor) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(DeleteBoundaryDescriptor) 
 +
 +
 +

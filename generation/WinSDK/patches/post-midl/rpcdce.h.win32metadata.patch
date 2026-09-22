@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h
-index e3f1c4421b..8bd1f9bee9 100644
+index e3f1c4421b..622ab1786c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h
 @@ -1,3 +1,4 @@
@@ -48,7 +48,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -57,7 +57,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -102,7 +102,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -111,7 +111,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -129,7 +129,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -138,7 +138,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -147,7 +147,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -156,7 +156,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -165,7 +165,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcStringFreeA (
@@ -173,7 +173,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcStringFreeW (
@@ -191,7 +191,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -200,7 +200,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -236,7 +236,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -245,7 +245,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -281,7 +281,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcProtseqVectorFreeA (
@@ -289,7 +289,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcProtseqVectorFreeW (
@@ -415,7 +415,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -424,7 +424,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -433,7 +433,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -442,7 +442,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -451,7 +451,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -460,7 +460,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -469,7 +469,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -478,7 +478,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -487,7 +487,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -496,7 +496,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_WindowsXP_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -505,7 +505,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -514,7 +514,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_WindowsXP_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -613,7 +613,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -622,7 +622,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -631,7 +631,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -640,7 +640,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -658,7 +658,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -667,7 +667,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -902,7 +902,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef _AUTH_IDENTITY_A_DEFINED
  
 -RPCRTAPI
-+_Windows_SupportedOS_WindowsVista_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcBindingCreateA (
@@ -911,7 +911,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #endif // _AUTH_IDENTITY_A_DEFINED
  
 -RPCRTAPI
-+_Windows_SupportedOS_WindowsVista_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcBindingCreateW (
@@ -974,7 +974,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -983,7 +983,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -992,7 +992,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcBindingInqAuthClientExA (
@@ -1001,7 +1001,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcBindingInqAuthClientExW (
@@ -1010,7 +1010,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1019,7 +1019,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1028,7 +1028,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1037,7 +1037,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1046,7 +1046,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1055,7 +1055,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1064,7 +1064,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1073,7 +1073,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1091,7 +1091,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1100,7 +1100,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1181,7 +1181,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  
  /* client/server */
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1190,7 +1190,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  
  /* client/server */
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1199,7 +1199,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  
  /* client/server */
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1208,7 +1208,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  
  /* client/server */
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1262,7 +1262,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1271,7 +1271,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1280,7 +1280,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1289,7 +1289,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1307,7 +1307,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1316,7 +1316,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1343,7 +1343,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1352,7 +1352,7 @@ index e3f1c4421b..8bd1f9bee9 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_Windows2000_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCRTAPI
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
@@ -1379,7 +1379,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  
  /* server */
 -RPCRTAPI
-+_Windows_SupportedOS_Windows8_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcServerInterfaceGroupCreateW (
@@ -1388,7 +1388,7 @@ index e3f1c4421b..8bd1f9bee9 100644
  
  /* server */
 -RPCRTAPI
-+_Windows_SupportedOS_Windows8_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcServerInterfaceGroupCreateA (

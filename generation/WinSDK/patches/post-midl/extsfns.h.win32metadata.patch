@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h b/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
-index 7a1aff61bd..24def3fd99 100644
+index 7a1aff61bd..0bac27f7f5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index 7a1aff61bd..24def3fd99 100644
  /*++
  
  Copyright (c) Microsoft Corporation
+@@ -328,7 +329,7 @@ typedef struct _KDEXT_PROCESS_FIND_PARAMS {
+     ULONG    SizeofStruct;
+     ULONG    Pid;
+     ULONG    Session;
+-    PCHAR    ImageName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR    ImageName;
+ } KDEXT_PROCESS_FIND_PARAMS, *PKDEXT_PROCESS_FIND_PARAMS;
+ 
+ typedef HRESULT
 @@ -1607,20 +1608,20 @@ DECLARE_INTERFACE(IDebugFAEntryTags)
      // Looksup Type associated for the failure tag
      STDMETHOD_(FA_ENTRY_TYPE, GetType)(
@@ -412,3 +421,24 @@ index 7a1aff61bd..24def3fd99 100644
          ) PURE;
  
      STDMETHOD(AttributeSet)(
+@@ -2645,17 +2646,17 @@ typedef VOID
+ typedef struct _DEBUG_TRIAGE_FOLLOWUP_INFO {
+     ULONG SizeOfStruct;      // Must be == sizeof (DEBUG_TRIAGE_FOLLOWUP_INFO)
+     ULONG OwnerNameSize;     // Size of allocated buffer
+-    PCHAR OwnerName;         // Followup owner name returned in this
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR OwnerName;         // Followup owner name returned in this
+                              // Caller should initialize the name buffer
+ } DEBUG_TRIAGE_FOLLOWUP_INFO, *PDEBUG_TRIAGE_FOLLOWUP_INFO;
+ 
+ typedef struct _DEBUG_TRIAGE_FOLLOWUP_INFO_2 {
+     ULONG SizeOfStruct;      // Must be == sizeof (DEBUG_TRIAGE_FOLLOWUP_INFO_2)
+     ULONG OwnerNameSize;     // Size of allocated buffer
+-    PCHAR OwnerName;         // Followup owner name returned in this
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR OwnerName;         // Followup owner name returned in this
+                              // Caller should initialize the name buffer
+     ULONG FeaturePathSize;   // Feature path size
+-    PCHAR FeaturePath;       // Feature path in the bug management tool (PS, VSO, etc.)
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR FeaturePath;       // Feature path in the bug management tool (PS, VSO, etc.)
+ } DEBUG_TRIAGE_FOLLOWUP_INFO_2, *PDEBUG_TRIAGE_FOLLOWUP_INFO_2;
+ 
+ #define TRIAGE_FOLLOWUP_FAIL    0

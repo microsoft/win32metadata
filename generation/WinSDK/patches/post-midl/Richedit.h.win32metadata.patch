@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
-index 5bebec4417..4b4d13ddc7 100644
+index 5bebec4417..30435bb6a7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 @@ -11,6 +11,7 @@
@@ -31,8 +31,12 @@ index 5bebec4417..4b4d13ddc7 100644
  } ENDCOMPOSITIONNOTIFY;
  
  // Constants for ENDCOMPOSITIONNOTIFY dwCode
-@@ -674,12 +675,12 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
- typedef struct _charformat
+@@ -671,28 +672,28 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
+ #endif
+ 
+ // All character format measurements are in twips 
+-typedef struct _charformat
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _charformat
  {
  	UINT		cbSize;
 -	DWORD		dwMask;
@@ -47,8 +51,9 @@ index 5bebec4417..4b4d13ddc7 100644
  	BYTE		bPitchAndFamily;
  	char		szFaceName[LF_FACESIZE];
  } CHARFORMATA;
-@@ -687,12 +688,12 @@ typedef struct _charformat
- typedef struct _charformatw
+ 
+-typedef struct _charformatw
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _charformatw
  {
  	UINT		cbSize;
 -	DWORD		dwMask;
@@ -63,8 +68,12 @@ index 5bebec4417..4b4d13ddc7 100644
  	BYTE		bPitchAndFamily;
  	WCHAR		szFaceName[LF_FACESIZE];
  } CHARFORMATW;
-@@ -1133,8 +1134,8 @@ typedef struct _formatrange
- typedef struct _paraformat
+@@ -1130,11 +1131,11 @@ typedef struct _formatrange
+ #define lDefaultTab 720
+ #define MAX_TABLE_CELLS 63
+ 
+-typedef struct _paraformat
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _paraformat
  {
  	UINT	cbSize;
 -	DWORD	dwMask;
@@ -151,7 +160,7 @@ index 5bebec4417..4b4d13ddc7 100644
  	UINT	codepage;		// Code page for translation (CP_ACP for sys default,
  							//	1200 for Unicode, -1 for control default)
  	LPCSTR	lpDefaultChar;	// Replacement for unmappable chars
-@@ -1528,7 +1529,7 @@ typedef struct _gettextex
+@@ -1528,13 +1529,13 @@ typedef struct _gettextex
  // EM_GETTEXTLENGTHEX info; this struct is passed in the wparam of the msg 
  typedef struct _gettextlengthex
  {
@@ -160,6 +169,22 @@ index 5bebec4417..4b4d13ddc7 100644
  	UINT	codepage;		// Code page for translation (CP_ACP for default,
  							//	1200 for Unicode)
  } GETTEXTLENGTHEX;
+ 	
+ // BiDi specific features 
+-typedef struct _bidioptions
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _bidioptions
+ {
+ 	UINT	cbSize;
+ 	WORD	wMask;
+@@ -1601,7 +1602,7 @@ typedef struct hyphresult
+ } HYPHRESULT;
+ 
+ void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
+-typedef struct tagHyphenateInfo
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagHyphenateInfo
+ {
+ 	SHORT cbSize;			// Size of HYPHENATEINFO structure
+ 	SHORT dxHyphenateZone;	// If a space character is closer to the margin
 @@ -1643,4 +1644,880 @@ typedef struct tagHyphenateInfo
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

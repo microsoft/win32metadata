@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
-index 17c21ea419..79fd772d38 100644
+index 17c21ea419..c2d9c3a7d7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
 @@ -18,6 +18,7 @@ Abstract:
@@ -44,7 +44,16 @@ index 17c21ea419..79fd772d38 100644
  #include <pshpack8.h>
  
 -typedef struct _SAFER_CODE_PROPERTIES_V1
-+typedef struct   _SAFER_CODE_PROPERTIES_V1
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _SAFER_CODE_PROPERTIES_V1
+ {
+ 
+     //
+@@ -186,7 +209,7 @@ typedef struct _SAFER_CODE_PROPERTIES_V1
+ 
+ } SAFER_CODE_PROPERTIES_V1, *PSAFER_CODE_PROPERTIES_V1;
+ 
+-typedef struct _SAFER_CODE_PROPERTIES_V2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SAFER_CODE_PROPERTIES_V2
  {
  
      //
@@ -93,6 +102,15 @@ index 17c21ea419..79fd772d38 100644
  {
      //
      // header.dwIdentificationType must be SaferIdentityTypeImageName
+@@ -496,7 +519,7 @@ typedef struct _SAFER_PATHNAME_IDENTIFICATION
+     // filepath or name, possibly with vars
+     //
+ 
+-    PWCHAR ImageName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR ImageName;
+ 
+     //
+     // any combo of SAFER_POLICY_* flags
 @@ -506,7 +529,7 @@ typedef struct _SAFER_PATHNAME_IDENTIFICATION
  
  } SAFER_PATHNAME_IDENTIFICATION, *PSAFER_PATHNAME_IDENTIFICATION;

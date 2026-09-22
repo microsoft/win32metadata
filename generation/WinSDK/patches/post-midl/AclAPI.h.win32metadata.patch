@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h
-index 3eaee66118..183b5d2b3c 100644
+index 3eaee66118..be29b364e9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AclAPI.h
 @@ -17,6 +17,7 @@ Abstract:
@@ -14,7 +14,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_ BOOL                       SecuritySet     // Whether security was set
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) 
 +
  WINADVAPI
  DWORD
@@ -23,7 +23,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_  PACL           OldAcl,
      _Out_ PACL              * NewAcl
      );
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) 
 +
  WINADVAPI
  DWORD
@@ -32,7 +32,7 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) 
 +
  WINADVAPI
  DWORD
@@ -42,7 +42,7 @@ index 3eaee66118..183b5d2b3c 100644
      _Outptr_result_buffer_(*pcCountOfExplicitEntries) PEXPLICIT_ACCESS_A  * pListOfExplicitEntries
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetExplicitEntriesFromAclW(
@@ -51,7 +51,7 @@ index 3eaee66118..183b5d2b3c 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetEffectiveRightsFromAclA(
@@ -60,7 +60,7 @@ index 3eaee66118..183b5d2b3c 100644
      _Out_ PACCESS_MASK  pAccessRights
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetEffectiveRightsFromAclW(
@@ -69,7 +69,7 @@ index 3eaee66118..183b5d2b3c 100644
  
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetAuditedPermissionsFromAclA(
@@ -78,7 +78,7 @@ index 3eaee66118..183b5d2b3c 100644
      _Out_ PACCESS_MASK  pFailedAuditRights
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetAuditedPermissionsFromAclW(
@@ -87,7 +87,7 @@ index 3eaee66118..183b5d2b3c 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetNamedSecurityInfoA(
@@ -102,7 +102,7 @@ index 3eaee66118..183b5d2b3c 100644
      _Out_ PSECURITY_DESCRIPTOR   * ppSecurityDescriptor
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetNamedSecurityInfoW(
@@ -134,7 +134,7 @@ index 3eaee66118..183b5d2b3c 100644
      );
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  SetNamedSecurityInfoA(
@@ -148,7 +148,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ PACL              pSacl
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  SetNamedSecurityInfoW(
@@ -180,7 +180,7 @@ index 3eaee66118..183b5d2b3c 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetInheritanceSourceA(
@@ -196,7 +196,7 @@ index 3eaee66118..183b5d2b3c 100644
      _Out_ PINHERITED_FROMA         pInheritArray
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  GetInheritanceSourceW(
@@ -221,7 +221,7 @@ index 3eaee66118..183b5d2b3c 100644
      );
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  TreeResetNamedSecurityInfoA(
@@ -237,7 +237,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ PVOID                Args
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  TreeResetNamedSecurityInfoW(
@@ -253,7 +253,7 @@ index 3eaee66118..183b5d2b3c 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  TreeSetNamedSecurityInfoA(
@@ -272,7 +272,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ PVOID                Args
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  TreeSetNamedSecurityInfoW(
@@ -294,7 +294,7 @@ index 3eaee66118..183b5d2b3c 100644
  //----------------------------------------------------------------------------
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  BuildSecurityDescriptorA(
@@ -303,7 +303,7 @@ index 3eaee66118..183b5d2b3c 100644
      _Outptr_result_bytebuffer_(*pSizeNewSD) PSECURITY_DESCRIPTOR  * pNewSD
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  BuildSecurityDescriptorW(
@@ -312,7 +312,7 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  LookupSecurityDescriptorPartsA(
@@ -321,7 +321,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_  PSECURITY_DESCRIPTOR pSD
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) WINADVAPI
  DWORD
  WINAPI
  LookupSecurityDescriptorPartsW(
@@ -330,7 +330,7 @@ index 3eaee66118..183b5d2b3c 100644
  //----------------------------------------------------------------------------
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildExplicitAccessWithNameA(
@@ -342,7 +342,7 @@ index 3eaee66118..183b5d2b3c 100644
 +    _Win32_AssociatedEnum_(ACE_FLAGS) _In_       DWORD               Inheritance
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildExplicitAccessWithNameW(
@@ -355,12 +355,30 @@ index 3eaee66118..183b5d2b3c 100644
      );
  #ifdef UNICODE
  #define BuildExplicitAccessWithName  BuildExplicitAccessWithNameW
+@@ -477,7 +484,7 @@ BuildExplicitAccessWithNameW(
+ #define BuildExplicitAccessWithName  BuildExplicitAccessWithNameA
+ #endif // !UNICODE
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINADVAPI
+ VOID
+ WINAPI
+ BuildImpersonateExplicitAccessWithNameA(
+@@ -488,7 +495,7 @@ BuildImpersonateExplicitAccessWithNameA(
+     _In_    ACCESS_MODE         AccessMode,
+     _In_    DWORD               Inheritance
+     );
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ VOID
+ WINAPI
+ BuildImpersonateExplicitAccessWithNameW(
 @@ -505,14 +512,14 @@ BuildImpersonateExplicitAccessWithNameW(
  #define BuildImpersonateExplicitAccessWithName  BuildImpersonateExplicitAccessWithNameA
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithNameA(
@@ -368,16 +386,33 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ LPSTR     pName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithNameW(
+@@ -525,14 +532,14 @@ BuildTrusteeWithNameW(
+ #define BuildTrusteeWithName  BuildTrusteeWithNameA
+ #endif // !UNICODE
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINADVAPI
+ VOID
+ WINAPI
+ BuildImpersonateTrusteeA(
+     _Inout_ PTRUSTEE_A  pTrustee,
+     _In_opt_ PTRUSTEE_A  pImpersonateTrustee
+     );
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ VOID
+ WINAPI
+ BuildImpersonateTrusteeW(
 @@ -545,14 +552,14 @@ BuildImpersonateTrusteeW(
  #define BuildImpersonateTrustee  BuildImpersonateTrusteeA
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithSidA(
@@ -385,7 +420,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ PSID        pSid
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithSidW(
@@ -394,7 +429,7 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithObjectsAndSidA(
@@ -403,7 +438,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ PSID               pSid
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithObjectsAndSidW(
@@ -412,7 +447,7 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithObjectsAndNameA(
@@ -421,7 +456,7 @@ index 3eaee66118..183b5d2b3c 100644
      _In_opt_ LPSTR             Name
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
  BuildTrusteeWithObjectsAndNameW(
@@ -430,14 +465,14 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  LPSTR
  WINAPI
  GetTrusteeNameA(
      _In_ PTRUSTEE_A  pTrustee
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  LPWSTR
  WINAPI
  GetTrusteeNameW(
@@ -446,14 +481,14 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  TRUSTEE_TYPE
  WINAPI
  GetTrusteeTypeA(
      _In_opt_ PTRUSTEE_A  pTrustee
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  TRUSTEE_TYPE
  WINAPI
  GetTrusteeTypeW(
@@ -462,14 +497,46 @@ index 3eaee66118..183b5d2b3c 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  TRUSTEE_FORM
  WINAPI
  GetTrusteeFormA(
      _In_ PTRUSTEE_A  pTrustee
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINADVAPI
  TRUSTEE_FORM
  WINAPI
  GetTrusteeFormW(
+@@ -673,13 +680,13 @@ GetTrusteeFormW(
+ #define GetTrusteeForm  GetTrusteeFormA
+ #endif // !UNICODE
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINADVAPI
+ MULTIPLE_TRUSTEE_OPERATION
+ WINAPI
+ GetMultipleTrusteeOperationA(
+     _In_opt_ PTRUSTEE_A  pTrustee
+     );
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ MULTIPLE_TRUSTEE_OPERATION
+ WINAPI
+ GetMultipleTrusteeOperationW(
+@@ -691,13 +698,13 @@ GetMultipleTrusteeOperationW(
+ #define GetMultipleTrusteeOperation  GetMultipleTrusteeOperationA
+ #endif // !UNICODE
+ 
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINADVAPI
+ PTRUSTEE_A
+ WINAPI
+ GetMultipleTrusteeA(
+     _In_opt_ PTRUSTEE_A  pTrustee
+     );
+-WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINADVAPI
+ PTRUSTEE_W
+ WINAPI
+ GetMultipleTrusteeW(

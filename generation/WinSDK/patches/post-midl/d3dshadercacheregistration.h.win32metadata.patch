@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3dshadercacheregistration.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3dshadercacheregistration.h
+index a20c2db34d..ff878e1a40 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3dshadercacheregistration.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3dshadercacheregistration.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -127,7 +128,7 @@ EXTERN_C const IID IID_ID3DShaderCacheInstallerClient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a16ee930-d9f6-4222-a514-244473e5d266")
++    MIDL_INTERFACE("a16ee930-d9f6-4222-a514-244473e5d266") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3DShaderCacheInstallerClient
+     {
+     public:
+@@ -230,7 +231,7 @@ EXTERN_C const IID IID_ID3DShaderCacheComponent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eed1bf00-f5c7-4cf7-885c-d0f9c0cb4828")
++    MIDL_INTERFACE("eed1bf00-f5c7-4cf7-885c-d0f9c0cb4828") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3DShaderCacheComponent : public IUnknown
+     {
+     public:
+@@ -410,7 +411,7 @@ EXTERN_C const IID IID_ID3DShaderCacheApplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc688ee2-1b35-4913-93be-1ca3fa7df39e")
++    MIDL_INTERFACE("fc688ee2-1b35-4913-93be-1ca3fa7df39e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3DShaderCacheApplication : public IUnknown
+     {
+     public:
+@@ -639,7 +640,7 @@ EXTERN_C const IID IID_ID3DShaderCacheInstaller;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bbe30de1-6318-4526-ae17-776693191bb4")
++    MIDL_INTERFACE("bbe30de1-6318-4526-ae17-776693191bb4") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3DShaderCacheInstaller : public IUnknown
+     {
+     public:
+@@ -862,7 +863,7 @@ EXTERN_C const IID IID_ID3DShaderCacheExplorer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("90432322-32f5-487f-9264-e9390fa58b2a")
++    MIDL_INTERFACE("90432322-32f5-487f-9264-e9390fa58b2a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3DShaderCacheExplorer : public IUnknown
+     {
+     public:
+@@ -957,7 +958,7 @@ EXTERN_C const IID IID_ID3DShaderCacheInstallerFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09b2dfe4-840f-401a-804c-0dd8aadc9e9f")
++    MIDL_INTERFACE("09b2dfe4-840f-401a-804c-0dd8aadc9e9f") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3DShaderCacheInstallerFactory : public IUnknown
+     {
+     public:

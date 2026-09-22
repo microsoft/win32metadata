@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h b/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h
-index ead4e5da49..c435bcb5e1 100644
+index ead4e5da49..85fac15301 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h
 @@ -1,3 +1,4 @@
@@ -39,7 +39,7 @@ index ead4e5da49..c435bcb5e1 100644
              _Out_  DWORD *pRetVal) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsSystemSoundsSession( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsSystemSoundsSession( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsSystemSoundsSession( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetDuckingPreference( 
              /* [annotation][in] */ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h
-index 8721bd1db9..25a04c6ce4 100644
+index 8721bd1db9..5ab7e73881 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h
 @@ -16,6 +16,7 @@
@@ -368,7 +368,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ HANDLE hMutex
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -387,7 +387,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ BOOL bAlertable
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -397,7 +397,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ BOOL bAlertable
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -407,7 +407,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define MUTEX_MODIFY_STATE  MUTANT_QUERY_STATE
  #define MUTEX_ALL_ACCESS    MUTANT_ALL_ACCESS
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -418,7 +418,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_opt_ LPCSTR lpName
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -429,7 +429,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define CreateMutex  CreateMutexA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -447,7 +447,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define OpenMutex  OpenMutexW
  #endif
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -458,7 +458,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_opt_ LPCSTR lpName
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -469,7 +469,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define CreateEvent  CreateEventA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -484,7 +484,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ LPCSTR lpName
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -502,7 +502,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define OpenEvent  OpenEventA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -529,7 +529,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_     DWORD dwTimerHighValue
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -601,7 +601,7 @@ index 8721bd1db9..25a04c6ce4 100644
 +#pragma pop_macro("CREATE_MUTEX_INITIAL_OWNER")
 +#endif
 +
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -617,7 +617,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ DWORD dwDesiredAccess
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -650,7 +650,7 @@ index 8721bd1db9..25a04c6ce4 100644
 +#pragma pop_macro("CREATE_EVENT_MANUAL_RESET")
 +#endif
 +
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -666,7 +666,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ DWORD dwDesiredAccess
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -686,7 +686,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define CreateEventEx  CreateEventExA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -716,7 +716,7 @@ index 8721bd1db9..25a04c6ce4 100644
 +#pragma pop_macro("CREATE_WAITABLE_TIMER_MANUAL_RESET")
 +#endif
 +
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -823,7 +823,7 @@ index 8721bd1db9..25a04c6ce4 100644
  
  #ifndef MIDL_PASS
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -833,7 +833,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #pragma region Application or OneCore Family or Games Partition
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) 
 +
 +_Win32_SetLastError_
  WINBASEAPI
@@ -843,7 +843,7 @@ index 8721bd1db9..25a04c6ce4 100644
      _In_ DWORD dwMilliseconds
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -854,7 +854,7 @@ index 8721bd1db9..25a04c6ce4 100644
  #define CreateSemaphore  CreateSemaphoreW
  #endif
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UserEnv.h b/generation/WinSDK/RecompiledIdlHeaders/um/UserEnv.h
-index d4252ba3f2..f5451a7c39 100644
+index d4252ba3f2..2567188466 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/UserEnv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/UserEnv.h
 @@ -1,3 +1,4 @@
@@ -12,14 +12,14 @@ index d4252ba3f2..f5451a7c39 100644
  #define PI_APPLYPOLICY  0x00000002      // Apply NT4 style policy
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  LoadUserProfileA(
      _In_    HANDLE          hToken,
      _Inout_ LPPROFILEINFOA  lpProfileInfo);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  LoadUserProfileW(
@@ -37,14 +37,14 @@ index d4252ba3f2..f5451a7c39 100644
  //=============================================================================
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetProfilesDirectoryA(
      _Out_writes_opt_(*lpcchSize)    LPSTR lpProfileDir,
      _Inout_                         LPDWORD lpcchSize);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetProfilesDirectoryW(
@@ -62,7 +62,7 @@ index d4252ba3f2..f5451a7c39 100644
  #if(WINVER >= 0x0500)
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  DeleteProfileA (
@@ -70,7 +70,7 @@ index d4252ba3f2..f5451a7c39 100644
      _In_opt_    LPCSTR    lpProfilePath,
      _In_opt_    LPCSTR    lpComputerName);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  DeleteProfileW (
@@ -88,14 +88,14 @@ index d4252ba3f2..f5451a7c39 100644
  #if(WINVER >= 0x0500)
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetDefaultUserProfileDirectoryA(
      _Out_writes_opt_(*lpcchSize)    LPSTR lpProfileDir,
      _Inout_                         LPDWORD lpcchSize);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetDefaultUserProfileDirectoryW(
@@ -104,14 +104,14 @@ index d4252ba3f2..f5451a7c39 100644
  #if(WINVER >= 0x0500)
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetAllUsersProfileDirectoryA(
      _Out_writes_opt_(*lpcchSize)    LPSTR lpProfileDir,
      _Inout_                         LPDWORD lpcchSize);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetAllUsersProfileDirectoryW(
@@ -120,7 +120,7 @@ index d4252ba3f2..f5451a7c39 100644
  //=============================================================================
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetUserProfileDirectoryA(
@@ -128,7 +128,7 @@ index d4252ba3f2..f5451a7c39 100644
      _Out_writes_opt_(*lpcchSize)    LPSTR lpProfileDir,
      _Inout_                         LPDWORD lpcchSize);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetUserProfileDirectoryW(
@@ -155,7 +155,7 @@ index d4252ba3f2..f5451a7c39 100644
  #if(WINVER >= 0x0500)
  
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  ExpandEnvironmentStringsForUserA(
@@ -164,7 +164,7 @@ index d4252ba3f2..f5451a7c39 100644
      _Out_writes_(dwSize)    LPSTR     lpDest,
      _In_                    DWORD       dwSize);
 -USERENVAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  ExpandEnvironmentStringsForUserW(
@@ -227,7 +227,7 @@ index d4252ba3f2..f5451a7c39 100644
  #define GPO_LIST_FLAG_NO_SECURITYFILTERS 0x00000008 // Ignore security filters
  
 -USERENVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetGPOListA (
@@ -236,7 +236,7 @@ index d4252ba3f2..f5451a7c39 100644
      _In_        DWORD       dwFlags,
      _Outptr_ PGROUP_POLICY_OBJECTA * pGPOList);
 -USERENVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  GetGPOListW (
@@ -245,13 +245,13 @@ index d4252ba3f2..f5451a7c39 100644
  #if(WINVER >= 0x0500)
  
 -USERENVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  FreeGPOListA (
      _In_        PGROUP_POLICY_OBJECTA   pGPOList);
 -USERENVAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ USERENVAPI
  BOOL
  WINAPI
  FreeGPOListW (
@@ -260,7 +260,7 @@ index d4252ba3f2..f5451a7c39 100644
  #if(WINVER >= 0x0500)
  
 -USERENVAPI
-+_Windows_SupportedOS_WindowsVista_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ USERENVAPI
  DWORD
  WINAPI
  GetAppliedGPOListA (
@@ -269,7 +269,7 @@ index d4252ba3f2..f5451a7c39 100644
      _In_        GUID        *pGuidExtension,
      _Outptr_ PGROUP_POLICY_OBJECTA   *ppGPOList);
 -USERENVAPI
-+_Windows_SupportedOS_WindowsVista_ USERENVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ USERENVAPI
  DWORD
  WINAPI
  GetAppliedGPOListW (

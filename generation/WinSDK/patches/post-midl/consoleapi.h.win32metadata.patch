@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
-index 7b3cad0d54..2e7a5d8e5b 100644
+index 7b3cad0d54..8e47dc516c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 @@ -17,6 +17,7 @@
@@ -164,7 +164,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -173,7 +173,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -182,7 +182,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
  // begin_consoleapi_h
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -191,7 +191,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -200,7 +200,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
  } CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -209,7 +209,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -218,7 +218,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
  #endif // !UNICODE
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -227,7 +227,7 @@ index 7b3cad0d54..2e7a5d8e5b 100644
      );
  
 +
-+_Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI

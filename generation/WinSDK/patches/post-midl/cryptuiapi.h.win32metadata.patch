@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
-index 15570d3ced..832c8fd842 100644
+index 15570d3ced..5e1a96511a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
 @@ -1,3 +1,4 @@
@@ -61,7 +61,7 @@ index 15570d3ced..832c8fd842 100644
      LPCWSTR                 pwszDescription;
      LPCWSTR                 pwszMoreInfoLocation;		
      LPCSTR                  pszHashAlg;
-@@ -469,13 +470,13 @@ typedef const CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO *PCCRYPTUI_WIZ_DIGITAL_SIGN
+@@ -469,21 +470,21 @@ typedef const CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO *PCCRYPTUI_WIZ_DIGITAL_SIGN
  typedef struct _CRYPTUI_WIZ_DIGITAL_SIGN_INFO
  {
      DWORD                                           dwSize;			
@@ -76,8 +76,9 @@ index 15570d3ced..832c8fd842 100644
 +    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN) DWORD                                           dwSigningCertChoice;
      union
      {
-         PCCERT_CONTEXT                              pSigningCertContext;
-@@ -483,7 +484,7 @@ typedef struct _CRYPTUI_WIZ_DIGITAL_SIGN_INFO
+-        PCCERT_CONTEXT                              pSigningCertContext;
++        _WIN32META_ANNOTATION_("win32metadata:const") PCCERT_CONTEXT                              pSigningCertContext;
+         PCCRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO       pSigningCertStore;
          PCCRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO    pSigningCertPvkInfo;
      };
      LPCWSTR                                         pwszTimestampURL;
@@ -127,7 +128,7 @@ index 15570d3ced..832c8fd842 100644
  //                                 while the dialog was open
  //
 -_Success_(return == TRUE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
  BOOL
  WINAPI
  CryptUIDlgViewCertificateW(
@@ -136,7 +137,7 @@ index 15570d3ced..832c8fd842 100644
          );
  
 -_Success_(return == TRUE)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
  BOOL
  WINAPI
  CryptUIDlgViewCertificateA(
@@ -149,6 +150,15 @@ index 15570d3ced..832c8fd842 100644
                                                  //          If can one of the following:
                                                  //          CRYPTUI_WIZ_EXPORT_CERT_CONTEXT
                                                  //          CRYPTUI_WIZ_EXPORT_CTL_CONTEXT
+@@ -771,7 +772,7 @@ typedef struct _CRYPTUI_WIZ_EXPORT_INFO
+ 						                        //	        CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY
+     union
+ 	{
+-	PCCERT_CONTEXT      pCertContext;
++	_WIN32META_ANNOTATION_("win32metadata:const") PCCERT_CONTEXT      pCertContext;
+         PCCTL_CONTEXT       pCTLContext;
+         PCCRL_CONTEXT       pCRLContext;
+         HCERTSTORE          hCertStore;
 @@ -811,7 +812,7 @@ typedef const CRYPTUI_WIZ_EXPORT_INFO *PCCRYPTUI_WIZ_EXPORT_INFO;
  typedef struct _CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO
  {
@@ -181,7 +191,14 @@ index 15570d3ced..832c8fd842 100644
                                                  //          If can one of the following:
                                                  //          CRYPTUI_WIZ_IMPORT_SUBJECT_FILE
                                                  //          CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT
-@@ -909,7 +910,7 @@ typedef struct _CRYPTUI_WIZ_IMPORT_SUBJECT_INFO
+@@ -903,13 +904,13 @@ typedef struct _CRYPTUI_WIZ_IMPORT_SUBJECT_INFO
+     union
+ 	{
+ 		LPCWSTR          	pwszFileName;	
+-        PCCERT_CONTEXT      pCertContext;
++        _WIN32META_ANNOTATION_("win32metadata:const") PCCERT_CONTEXT      pCertContext;
+         PCCTL_CONTEXT       pCTLContext;
+         PCCRL_CONTEXT       pCRLContext;
          HCERTSTORE          hCertStore;
      };
  

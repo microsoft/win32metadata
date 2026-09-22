@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
-index c6ad9cf7d8..8e71df1e05 100644
+index c6ad9cf7d8..14890408be 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
 @@ -17,6 +17,7 @@
@@ -39,7 +39,7 @@ index c6ad9cf7d8..8e71df1e05 100644
  
  #endif //(WINVER >= 0x0600)
  
-+_Win32_AssociatedEnum_(COMPARESTRING_RESULT) _Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(COMPARESTRING_RESULT) _Windows_SupportedOS_Windows2000_
 +
  WINBASEAPI
  int
@@ -48,7 +48,7 @@ index c6ad9cf7d8..8e71df1e05 100644
  #define CompareString  CompareStringW
  #endif
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  int
@@ -63,7 +63,7 @@ index c6ad9cf7d8..8e71df1e05 100644
  #define FoldString  FoldStringW
  #endif
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -72,7 +72,7 @@ index c6ad9cf7d8..8e71df1e05 100644
  #define GetStringTypeEx  GetStringTypeExW
  #endif
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -92,8 +92,9 @@ index c6ad9cf7d8..8e71df1e05 100644
  MultiByteToWideChar(
      _In_ UINT CodePage,
 -    _In_ DWORD dwFlags,
+-    _In_NLS_string_(cbMultiByte) LPCCH lpMultiByteStr,
 +    _Win32_AssociatedEnum_(MULTI_BYTE_TO_WIDE_CHAR_FLAGS) _In_ DWORD dwFlags,
-     _In_NLS_string_(cbMultiByte) LPCCH lpMultiByteStr,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_NLS_string_(cbMultiByte) LPCCH lpMultiByteStr,
      _In_ int cbMultiByte,
      _Out_writes_to_opt_(cchWideChar,return) LPWSTR lpWideCharStr,
      _In_ int cchWideChar
@@ -105,3 +106,12 @@ index c6ad9cf7d8..8e71df1e05 100644
  WINBASEAPI
  _Success_(return != 0)
           _When_((cchWideChar == -1) && (cbMultiByte != 0), _Post_equal_to_(_String_length_(lpMultiByteStr)+1))
+@@ -141,7 +160,7 @@ WideCharToMultiByte(
+     _In_ int cchWideChar,
+     _Out_writes_bytes_to_opt_(cbMultiByte,return) LPSTR lpMultiByteStr,
+     _In_ int cbMultiByte,
+-    _In_opt_ LPCCH lpDefaultChar,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_ LPCCH lpDefaultChar,
+     _Out_opt_ LPBOOL lpUsedDefaultChar
+     );
+ 

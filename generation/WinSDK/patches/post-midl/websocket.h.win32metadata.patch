@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h b/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h
-index eaf1937156..df18da4d3b 100644
+index eaf1937156..67dff0fd49 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h
 @@ -25,6 +25,7 @@ extern "C"
@@ -19,6 +19,18 @@ index eaf1937156..df18da4d3b 100644
  {
      WEB_SOCKET_PROPERTY_TYPE Type;
      PVOID pvValue;
+@@ -98,9 +99,9 @@ typedef struct _WEB_SOCKET_PROPERTY
+ 
+ typedef struct _WEB_SOCKET_HTTP_HEADER
+ {
+-    PCHAR pcName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR pcName;
+     ULONG ulNameLength;
+-    PCHAR pcValue;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR pcValue;
+     ULONG ulValueLength;
+ } WEB_SOCKET_HTTP_HEADER, *PWEB_SOCKET_HTTP_HEADER;
+ 
 @@ -120,10 +121,14 @@ typedef union _WEB_SOCKET_BUFFER
      } CloseStatus;
  } WEB_SOCKET_BUFFER, *PWEB_SOCKET_BUFFER;

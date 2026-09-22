@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Authif.h b/generation/WinSDK/RecompiledIdlHeaders/um/Authif.h
+index 9cf21d013e..391947a2ea 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Authif.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Authif.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*/////////////////////////////////////////////////////////////////////////////
+ //
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -342,7 +343,7 @@ typedef enum _RADIUS_EXTENSION_POINT {
+  * extension must not modify this struct. All changes must be made by using the
+  * supplied callback functions.
+  */
+-typedef struct _RADIUS_ATTRIBUTE_ARRAY {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _RADIUS_ATTRIBUTE_ARRAY {
+ 
+    /* Size of this structure in bytes. */
+    DWORD cbSize;
+@@ -410,7 +411,7 @@ typedef struct _RADIUS_ATTRIBUTE_ARRAY {
+  * processing. The extension must not modify this struct. All changes must be
+  * made by using the supplied callback functions.
+  */
+-typedef struct _RADIUS_EXTENSION_CONTROL_BLOCK  {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _RADIUS_EXTENSION_CONTROL_BLOCK  {
+ 
+    /* Size of this structure. */
+    DWORD cbSize;

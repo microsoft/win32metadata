@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
-index 5734a93b98..46a4200acc 100644
+index 5734a93b98..2b0f4133a5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
 @@ -30,6 +30,7 @@
@@ -86,7 +86,7 @@ index 5734a93b98..46a4200acc 100644
  NTAPI
  RtlUnicodeStringToOemString(
      POEM_STRING DestinationString,
-@@ -843,7 +844,7 @@ RtlUnicodeStringToOemString(
+@@ -843,11 +844,11 @@ RtlUnicodeStringToOemString(
  //     set CodePage to CP_ACP
  //     set cbMultiByte to 0
  //
@@ -95,6 +95,11 @@ index 5734a93b98..46a4200acc 100644
  NTAPI
  RtlUnicodeToMultiByteSize(
      _Out_ PULONG BytesInMultiByteString,
+-    _In_reads_bytes_(BytesInUnicodeString) PWCH UnicodeString,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(BytesInUnicodeString) PWCH UnicodeString,
+     _In_ ULONG BytesInUnicodeString
+     );
+ 
 @@ -855,7 +856,7 @@ RtlUnicodeToMultiByteSize(
  // Use the C runtime function instead
  //     strtol

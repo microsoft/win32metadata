@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
-index f53062cac7..ff8595cf63 100644
+index f53062cac7..8097537d15 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
 @@ -15,6 +15,7 @@
@@ -152,7 +152,7 @@ index f53062cac7..ff8595cf63 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0 && return < uSize)
@@ -161,7 +161,7 @@ index f53062cac7..ff8595cf63 100644
      _In_ UINT uSize
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0 && return < uSize)
@@ -170,7 +170,7 @@ index f53062cac7..ff8595cf63 100644
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Must_inspect_result_
@@ -179,7 +179,7 @@ index f53062cac7..ff8595cf63 100644
      _In_ UINT uSize
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Must_inspect_result_
@@ -188,7 +188,7 @@ index f53062cac7..ff8595cf63 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0 && return < uSize)
@@ -197,7 +197,7 @@ index f53062cac7..ff8595cf63 100644
      _In_ UINT uSize
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0 && return < uSize)
@@ -206,7 +206,7 @@ index f53062cac7..ff8595cf63 100644
      ComputerNameMax
  } COMPUTER_NAME_FORMAT ;
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -215,7 +215,7 @@ index f53062cac7..ff8595cf63 100644
      _Inout_ LPDWORD nSize
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -224,7 +224,7 @@ index f53062cac7..ff8595cf63 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -238,19 +238,23 @@ index f53062cac7..ff8595cf63 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -391,6 +450,8 @@ SetSystemTime(
+@@ -390,7 +449,9 @@ SetSystemTime(
+ #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
- NOT_BUILD_WINDOWS_DEPRECATE
+-NOT_BUILD_WINDOWS_DEPRECATE
++_WIN32META_ANNOTATION_("win32metadata:ansi") NOT_BUILD_WINDOWS_DEPRECATE
 +_Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
  BOOL
-@@ -400,6 +461,8 @@ GetVersionExA(
+@@ -399,7 +460,9 @@ GetVersionExA(
+     _Inout_ LPOSVERSIONINFOA lpVersionInformation
      );
  
- NOT_BUILD_WINDOWS_DEPRECATE
+-NOT_BUILD_WINDOWS_DEPRECATE
++_WIN32META_ANNOTATION_("win32metadata:unicode") NOT_BUILD_WINDOWS_DEPRECATE
 +_Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
@@ -399,7 +403,7 @@ index f53062cac7..ff8595cf63 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -408,7 +412,7 @@ index f53062cac7..ff8595cf63 100644
      _In_ LPCSTR lpComputerName
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -417,7 +421,7 @@ index f53062cac7..ff8595cf63 100644
  #define SetComputerName  SetComputerNameA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL

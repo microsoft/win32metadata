@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
-index 84f72a0add..91ec59a9db 100644
+index 84f72a0add..cf8bce2b3d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Server APIs */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingExportA(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_CSTR EntryName,
@@ -21,7 +21,7 @@ index 84f72a0add..91ec59a9db 100644
  
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingUnexportA(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_CSTR EntryName,
@@ -30,7 +30,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingExportW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,
@@ -39,7 +39,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingUnexportW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,
@@ -48,7 +48,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Server PnP APIs */
  
 -RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
  RpcNsBindingExportPnPA(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_CSTR EntryName,
@@ -57,7 +57,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
  RpcNsBindingUnexportPnPA(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_CSTR EntryName,
@@ -66,7 +66,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
  RpcNsBindingExportPnPW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,
@@ -75,7 +75,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPC_STATUS RPC_ENTRY
  RpcNsBindingUnexportPnPW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,
@@ -84,7 +84,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Client APIs */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingLookupBeginA(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_CSTR EntryName,
@@ -93,7 +93,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingLookupBeginW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,
@@ -117,7 +117,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Group APIs */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupDeleteA(
 -    _In_ unsigned long GroupNameSyntax,
 +    _Win32_AssociatedEnum_(GROUP_NAME_SYNTAX) _In_ unsigned long GroupNameSyntax,
@@ -125,7 +125,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrAddA(
      _In_ unsigned long GroupNameSyntax,
      _In_ RPC_CSTR GroupName,
@@ -134,7 +134,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrRemoveA(
      _In_ unsigned long GroupNameSyntax,
      _In_ RPC_CSTR GroupName,
@@ -143,7 +143,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrInqBeginA(
      _In_ unsigned long GroupNameSyntax,
      _In_ RPC_CSTR GroupName,
@@ -152,7 +152,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrInqNextA(
      _Inout_ RPC_NS_HANDLE InquiryContext,
      _Outptr_ RPC_CSTR __RPC_FAR *MemberName
@@ -161,7 +161,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupDeleteW(
 -    _In_ unsigned long GroupNameSyntax,
 +    _Win32_AssociatedEnum_(GROUP_NAME_SYNTAX) _In_ unsigned long GroupNameSyntax,
@@ -169,7 +169,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrAddW(
      _In_ unsigned long GroupNameSyntax,
      _In_ RPC_WSTR GroupName,
@@ -178,7 +178,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrRemoveW(
      _In_ unsigned long GroupNameSyntax,
      _In_ RPC_WSTR GroupName,
@@ -187,7 +187,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrInqBeginW(
      _In_ unsigned long GroupNameSyntax,
      _In_ RPC_WSTR GroupName,
@@ -196,7 +196,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsGroupMbrInqNextW(
      _Inout_ RPC_NS_HANDLE InquiryContext,
      _Outptr_ RPC_WSTR __RPC_FAR *MemberName
@@ -213,14 +213,14 @@ index 84f72a0add..91ec59a9db 100644
  /* Profile APIs */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileDeleteA(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_CSTR ProfileName
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltAddA(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_CSTR ProfileName,
@@ -229,7 +229,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltRemoveA(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_CSTR ProfileName,
@@ -238,7 +238,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltInqBeginA(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_CSTR ProfileName,
@@ -247,7 +247,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltInqNextA(
      _In_ RPC_NS_HANDLE InquiryContext,
      _Out_opt_ RPC_IF_ID __RPC_FAR *IfId,
@@ -256,14 +256,14 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileDeleteW(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_WSTR ProfileName
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltAddW(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_WSTR ProfileName,
@@ -272,7 +272,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltRemoveW(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_WSTR ProfileName,
@@ -281,7 +281,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltInqBeginW(
      _In_ unsigned long ProfileNameSyntax,
      _In_ RPC_WSTR ProfileName,
@@ -290,7 +290,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsProfileEltInqNextW(
      _In_ RPC_NS_HANDLE InquiryContext,
      _Out_opt_ RPC_IF_ID __RPC_FAR *IfId,
@@ -307,7 +307,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Entry object APIs */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsEntryObjectInqBeginA(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_CSTR EntryName,
@@ -316,7 +316,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsEntryObjectInqBeginW(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_WSTR EntryName,
@@ -340,7 +340,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Management and MISC APIs */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsEntryExpandNameA(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_CSTR EntryName,
@@ -348,7 +348,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtBindingUnexportA(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_CSTR EntryName,
@@ -357,21 +357,21 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtEntryCreateA(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_CSTR EntryName
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtEntryDeleteA(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_CSTR EntryName
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtEntryInqIfIdsA(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_CSTR EntryName,
@@ -400,7 +400,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsEntryExpandNameW(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_WSTR EntryName,
@@ -408,7 +408,7 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtBindingUnexportW(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_WSTR EntryName,
@@ -417,21 +417,21 @@ index 84f72a0add..91ec59a9db 100644
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtEntryCreateW(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_WSTR EntryName
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtEntryDeleteW(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_WSTR EntryName
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtEntryInqIfIdsW(
      _In_ unsigned long EntryNameSyntax,
      _In_ RPC_WSTR EntryName,
@@ -440,7 +440,7 @@ index 84f72a0add..91ec59a9db 100644
  /* Client API's implemented in wrappers. */
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingImportBeginA(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_CSTR EntryName,
@@ -449,7 +449,7 @@ index 84f72a0add..91ec59a9db 100644
  #ifdef RPC_UNICODE_SUPPORTED
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
-+_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingImportBeginW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,

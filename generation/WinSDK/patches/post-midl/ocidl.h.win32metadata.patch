@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
-index 7b7e6ba75d..e58ff907dc 100644
+index 7b7e6ba75d..408b449069 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
 @@ -1,3 +1,4 @@
@@ -17,7 +17,7 @@ index 7b7e6ba75d..e58ff907dc 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cConnections,
              /* [annotation][length_is][size_is][out] */ 
@@ -40,7 +40,7 @@ index 7b7e6ba75d..e58ff907dc 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cConnections,
              /* [annotation][length_is][size_is][out] */ 
@@ -207,7 +207,7 @@ index 7b7e6ba75d..e58ff907dc 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE Load( 
              /* [annotation][size_is][in] */ 
@@ -221,7 +221,7 @@ index 7b7e6ba75d..e58ff907dc 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Load( 
              /* [annotation][in] */ 
@@ -377,7 +377,7 @@ index 7b7e6ba75d..e58ff907dc 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cElt,
              /* [annotation][length_is][size_is][out] */ 
@@ -395,7 +395,7 @@ index 7b7e6ba75d..e58ff907dc 100644
              _In_  IOleParentUndoUnit *pPUU) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Close( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Close( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Close( 
              /* [annotation][in] */ 
              _In_  IOleParentUndoUnit *pPUU,
              /* [annotation][in] */ 
@@ -470,7 +470,7 @@ index 7b7e6ba75d..e58ff907dc 100644
              _In_  BOOL fSaveAllProperties) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
      };
      
@@ -483,7 +483,15 @@ index 7b7e6ba75d..e58ff907dc 100644
      IAdviseSinkEx : public IAdviseSink
      {
      public:
-@@ -7586,7 +7587,7 @@ typedef struct tagQACONTAINER
+@@ -7579,14 +7580,14 @@ enum tagQACONTAINERFLAGS
+ 
+ typedef /* [public][uuid] */  DECLSPEC_UUID("66504301-BE0F-101A-8BBB-00AA00300CAB") DWORD OLE_COLOR;
+ 
+-typedef struct tagQACONTAINER
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagQACONTAINER
+     {
+     ULONG cbSize;
+     IOleClientSite *pClientSite;
      IAdviseSinkEx *pAdviseSink;
      IPropertyNotifySink *pPropertyNotifySink;
      IUnknown *pUnkEventSink;
@@ -492,8 +500,12 @@ index 7b7e6ba75d..e58ff907dc 100644
      OLE_COLOR colorFore;
      OLE_COLOR colorBack;
      IFont *pFont;
-@@ -7602,11 +7603,11 @@ typedef struct tagQACONTAINER
- typedef struct tagQACONTROL
+@@ -7599,14 +7600,14 @@ typedef struct tagQACONTAINER
+     IServiceProvider *pServiceProvider;
+     } 	QACONTAINER;
+ 
+-typedef struct tagQACONTROL
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagQACONTROL
      {
      ULONG cbSize;
 -    DWORD dwMiscStatus;

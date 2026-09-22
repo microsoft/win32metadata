@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
-index 7c68a997c8..44bf2cd619 100644
+index 7c68a997c8..04e8f57df1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 7c68a997c8..44bf2cd619 100644
  /********************************************************************************
  *                                                                               *
  * mmeapi.h -- ApiSet Contract for api-ms-win-mm-mme-l1-1-0                      *
+@@ -78,7 +79,7 @@ typedef WAVECALLBACK FAR *LPWAVECALLBACK;
+ 
+ /* wave data block header */
+ typedef struct wavehdr_tag {
+-    LPSTR       lpData;                 /* pointer to locked data buffer */
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") LPSTR       lpData;                 /* pointer to locked data buffer */
+     DWORD       dwBufferLength;         /* length of data buffer */
+     DWORD       dwBytesRecorded;        /* used for input only */
+     DWORD_PTR   dwUser;                 /* for client's use */
+@@ -322,7 +323,7 @@ typedef struct pcmwaveformat_tag {
+  *  extended waveform format structure used for all non-PCM formats. this
+  *  structure is common to all non-PCM formats.
+  */
+-typedef struct tWAVEFORMATEX
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tWAVEFORMATEX
+ {
+     WORD        wFormatTag;         /* format type */
+     WORD        nChannels;          /* number of channels (i.e. mono, stereo...) */
 @@ -338,7 +339,7 @@ typedef struct tWAVEFORMATEX
  typedef const WAVEFORMATEX FAR *LPCWAVEFORMATEX;
  
@@ -16,6 +34,42 @@ index 7c68a997c8..44bf2cd619 100644
  UINT
  WINAPI
  waveOutGetNumDevs(
+@@ -347,7 +348,7 @@ waveOutGetNumDevs(
+ 
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveOutGetDevCapsA(
+@@ -356,7 +357,7 @@ waveOutGetDevCapsA(
+     _In_ UINT cbwoc
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveOutGetDevCapsW(
+@@ -399,7 +400,7 @@ WINMMAPI MMRESULT WINAPI waveOutSetVolume(UINT uId, DWORD dwVolume);
+ 
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveOutGetErrorTextA(
+@@ -408,7 +409,7 @@ waveOutGetErrorTextA(
+     _In_ UINT cchText
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveOutGetErrorTextW(
 @@ -427,26 +428,26 @@ waveOutGetErrorTextW(
  MMRESULT WINAPI waveOutGetErrorText(MMRESULT mmrError, LPSTR pszText, UINT cchText);
  #endif
@@ -161,6 +215,42 @@ index 7c68a997c8..44bf2cd619 100644
  UINT
  WINAPI
  waveInGetNumDevs(
+@@ -576,7 +577,7 @@ waveInGetNumDevs(
+ 
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveInGetDevCapsA(
+@@ -585,7 +586,7 @@ waveInGetDevCapsA(
+     _In_ UINT cbwic
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveInGetDevCapsW(
+@@ -606,7 +607,7 @@ MMRESULT WINAPI waveInGetDevCaps(UINT uDeviceID, LPWAVEINCAPS pwic, UINT cbwic);
+ 
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveInGetErrorTextA(
+@@ -615,7 +616,7 @@ waveInGetErrorTextA(
+     _In_ UINT cchText
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MMRESULT
+ WINAPI
+ waveInGetErrorTextW(
 @@ -634,26 +635,26 @@ waveInGetErrorTextW(
  MMRESULT WINAPI waveInGetErrorText(MMRESULT mmrError, LPSTR pszText, UINT cchText);
  #endif
@@ -359,7 +449,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiOutGetDevCapsA(
@@ -368,7 +458,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiOutGetDevCapsW(
@@ -377,7 +467,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiOutGetErrorTextA(
@@ -386,7 +476,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiOutGetErrorTextW(
@@ -497,7 +587,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiInGetDevCapsA(
@@ -506,7 +596,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiInGetDevCapsW(
@@ -515,7 +605,7 @@ index 7c68a997c8..44bf2cd619 100644
  #define midiInGetDevCaps  midiInGetDevCapsA
  #endif // !UNICODE
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiInGetErrorTextA(
@@ -524,7 +614,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  midiInGetErrorTextW(
@@ -624,7 +714,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  auxGetDevCapsA(
@@ -633,7 +723,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  auxGetDevCapsW(
@@ -669,7 +759,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetDevCapsA(
@@ -678,7 +768,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetDevCapsW(
@@ -735,7 +825,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetLineInfoA(
@@ -744,7 +834,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetLineInfoW(
@@ -762,7 +852,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetLineControlsA(
@@ -771,7 +861,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetLineControlsW(
@@ -780,7 +870,7 @@ index 7c68a997c8..44bf2cd619 100644
  #ifdef _WIN32
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetControlDetailsA(
@@ -789,7 +879,7 @@ index 7c68a997c8..44bf2cd619 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
  mixerGetControlDetailsW(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
-index 8b038177ce..9e2ee696ca 100644
+index 8b038177ce..305b47b542 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
 @@ -1,3 +1,4 @@
@@ -16,3 +16,75 @@ index 8b038177ce..9e2ee696ca 100644
  RPC_STATUS
  RPC_ENTRY
  I_RpcBindingInqLocalClientPID (
+@@ -568,7 +569,7 @@ I_RpcBindingHandleToAsyncHandle (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -578,7 +579,7 @@ I_RpcNsBindingSetEntryNameW (
+     _In_ RPC_WSTR EntryName
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -588,7 +589,7 @@ I_RpcNsBindingSetEntryNameA (
+     _In_ RPC_CSTR EntryName
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerUseProtseqEp2A (
+@@ -600,7 +601,7 @@ I_RpcServerUseProtseqEp2A (
+     _In_ void * Policy
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerUseProtseqEp2W (
+@@ -612,7 +613,7 @@ I_RpcServerUseProtseqEp2W (
+     _In_ void * Policy
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerUseProtseq2W (
+@@ -623,7 +624,7 @@ I_RpcServerUseProtseq2W (
+     _In_ void * Policy
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerUseProtseq2A (
+@@ -691,7 +692,7 @@ I_RpcServerStartService (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -700,7 +701,7 @@ I_RpcBindingInqDynamicEndpointW (
+     _Outptr_result_maybenull_ RPC_WSTR __RPC_FAR *DynamicEndpoint
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY

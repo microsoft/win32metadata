@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
-index 76d48264e9..4f77aecdac 100644
+index 76d48264e9..6a2f6b3ee5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -14,7 +14,7 @@ index 76d48264e9..4f77aecdac 100644
  
  #if (WINVER >= _WIN32_WINNT_WIN2K)
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
  BOOL
  WINAPI
 +_Win32_SetLastError_
@@ -27,7 +27,7 @@ index 76d48264e9..4f77aecdac 100644
      _Out_opt_ PBOOL bRebootRequired
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
  BOOL
  WINAPI
 +_Win32_SetLastError_
@@ -62,7 +62,7 @@ index 76d48264e9..4f77aecdac 100644
  
  #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_
  BOOL
  WINAPI
 +_Win32_SetLastError_
@@ -74,7 +74,7 @@ index 76d48264e9..4f77aecdac 100644
      _Out_opt_ PBOOL NeedReboot
      );
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_
  BOOL
  WINAPI
 +_Win32_SetLastError_
@@ -101,7 +101,7 @@ index 76d48264e9..4f77aecdac 100644
  #define DIURFLAG_VALID              (DIURFLAG_NO_REMOVE_INF |\
                                       DIURFLAG_RESERVED      )
  
-+_Windows_SupportedOS_10240_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_10240_ 
  BOOL
  WINAPI
 +_Win32_SetLastError_
@@ -113,8 +113,9 @@ index 76d48264e9..4f77aecdac 100644
      _Out_opt_ PBOOL NeedReboot
      );
  
+-BOOL
 +
- BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
  WINAPI
 +_Win32_SetLastError_
  DiUninstallDriverA(

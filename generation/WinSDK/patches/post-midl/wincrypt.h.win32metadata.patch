@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
-index 924c87c472..23a8e1d134 100644
+index 924c87c472..44846dfdf5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 924c87c472..23a8e1d134 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptAcquireContextA(
@@ -21,7 +21,7 @@ index 924c87c472..23a8e1d134 100644
      _In_        DWORD       dwFlags
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptAcquireContextW(
@@ -234,7 +234,7 @@ index 924c87c472..23a8e1d134 100644
      );
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptSignHashA(
@@ -243,7 +243,7 @@ index 924c87c472..23a8e1d134 100644
      _Inout_                                       DWORD       *pdwSigLen
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptSignHashW(
@@ -252,7 +252,7 @@ index 924c87c472..23a8e1d134 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptVerifySignatureA(
@@ -261,7 +261,7 @@ index 924c87c472..23a8e1d134 100644
      _In_                    DWORD       dwFlags
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptVerifySignatureW(
@@ -270,7 +270,7 @@ index 924c87c472..23a8e1d134 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptSetProviderA(
@@ -278,7 +278,7 @@ index 924c87c472..23a8e1d134 100644
      _In_    DWORD       dwProvType
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptSetProviderW(
@@ -287,7 +287,7 @@ index 924c87c472..23a8e1d134 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptSetProviderExA(
@@ -296,7 +296,7 @@ index 924c87c472..23a8e1d134 100644
      _In_        DWORD dwFlags
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  CryptSetProviderExW(
@@ -305,7 +305,7 @@ index 924c87c472..23a8e1d134 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(0 != return) BOOL
  WINAPI
  CryptGetDefaultProviderA(
@@ -314,7 +314,7 @@ index 924c87c472..23a8e1d134 100644
      _Inout_                                         DWORD   *pcbProvName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(0 != return) BOOL
  WINAPI
  CryptGetDefaultProviderW(
@@ -323,7 +323,7 @@ index 924c87c472..23a8e1d134 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(0 != return) BOOL
  WINAPI
  CryptEnumProviderTypesA(
@@ -332,7 +332,7 @@ index 924c87c472..23a8e1d134 100644
      _Inout_                                         DWORD   *pcbTypeName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(0 != return) BOOL
  WINAPI
  CryptEnumProviderTypesW(
@@ -341,7 +341,7 @@ index 924c87c472..23a8e1d134 100644
  #endif // !UNICODE
  
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(0 != return) BOOL
  WINAPI
  CryptEnumProvidersA(
@@ -350,7 +350,7 @@ index 924c87c472..23a8e1d134 100644
      _Inout_                                             DWORD   *pcbProvName
      );
 -WINADVAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  _Success_(0 != return) BOOL
  WINAPI
  CryptEnumProvidersW(
@@ -390,6 +390,15 @@ index 924c87c472..23a8e1d134 100644
      CERT_RDN_VALUE_BLOB     Value;
  } CERT_RDN_ATTR, *PCERT_RDN_ATTR;
  
+@@ -2383,7 +2384,7 @@ typedef struct _CERT_INFO {
+     CRYPT_BIT_BLOB              IssuerUniqueId;
+     CRYPT_BIT_BLOB              SubjectUniqueId;
+     DWORD                       cExtension;
+-    PCERT_EXTENSION             rgExtension;
++    _WIN32META_ANNOTATION_("win32metadata:array_count_field=cExtension") PCERT_EXTENSION             rgExtension;
+ } CERT_INFO, *PCERT_INFO;
+ // certenrolls_end
+ 
 @@ -2631,11 +2632,11 @@ typedef struct _CRYPT_CSP_PROVIDER {
  //  for the lpszStructType, the hex dump of the encoded BLOB will be returned.
  //  User can set the flag CRYPT_FORMAT_STR_NO_HEX to disable the hex dump.
@@ -404,7 +413,15 @@ index 924c87c472..23a8e1d134 100644
      _In_ DWORD dwFormatType,
      _In_ DWORD dwFormatStrType,
      _In_opt_ void *pFormatStruct,
-@@ -2730,24 +2731,24 @@ typedef struct _CRYPT_ENCODE_PARA {
+@@ -2723,31 +2724,31 @@ typedef VOID (WINAPI *PFN_CRYPT_FREE)(
+     );
+ 
+ 
+-typedef struct _CRYPT_ENCODE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_ENCODE_PARA {
+     DWORD                   cbSize;
+     PFN_CRYPT_ALLOC         pfnAlloc;           // OPTIONAL
+     PFN_CRYPT_FREE          pfnFree;            // OPTIONAL
  } CRYPT_ENCODE_PARA, *PCRYPT_ENCODE_PARA;
  
  
@@ -434,7 +451,14 @@ index 924c87c472..23a8e1d134 100644
      _In_ LPCSTR lpszStructType,
      _In_ const void *pvStructInfo,
      _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
-@@ -2835,11 +2836,11 @@ typedef struct _CRYPT_DECODE_PARA {
+@@ -2829,17 +2830,17 @@ CryptEncodeObject(
+ // this flag will UTF8 percent encode those characters which are not IA5.
+ #define CRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG (CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG | CRYPT_ENCODE_ENABLE_UTF8PERCENT_FLAG)
+ 
+-typedef struct _CRYPT_DECODE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_DECODE_PARA {
+     DWORD                   cbSize;
+     PFN_CRYPT_ALLOC         pfnAlloc;           // OPTIONAL
      PFN_CRYPT_FREE          pfnFree;            // OPTIONAL
  } CRYPT_DECODE_PARA, *PCRYPT_DECODE_PARA;
  
@@ -631,6 +655,15 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  CryptEnumOIDFunction(
+@@ -6356,7 +6357,7 @@ CryptEnumOIDFunction(
+ //+-------------------------------------------------------------------------
+ //  OID Information
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_OID_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_OID_INFO {
+     DWORD           cbSize;
+     LPCSTR          pszOID;
+     LPCWSTR         pwszName;
 @@ -6519,7 +6520,7 @@ typedef const CRYPT_OID_INFO CCRYPT_OID_INFO, *PCCRYPT_OID_INFO;
  //  Setting dwGroupId to 0, searches all groups according to the dwKeyType.
  //  Otherwise, only the dwGroupId is searched.
@@ -685,6 +718,15 @@ index 924c87c472..23a8e1d134 100644
      LPWSTR                  pwszCNGSignHashAlgids;
      LPWSTR                  pwszCNGPubKeyMinBitLengths; // Optional
  } CERT_STRONG_SIGN_SERIALIZED_INFO, *PCERT_STRONG_SIGN_SERIALIZED_INFO;
+@@ -6718,7 +6719,7 @@ typedef struct _CERT_STRONG_SIGN_SERIALIZED_INFO {
+ //  #define BCRYPT_SHA512_ALGORITHM                 L"SHA512"
+ //
+ 
+-typedef struct _CERT_STRONG_SIGN_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_STRONG_SIGN_PARA {
+     DWORD                   cbSize;
+ 
+     DWORD                   dwInfoChoice;
 @@ -6855,7 +6856,7 @@ typedef struct _CERT_ISSUER_SERIAL_NUMBER {
  //  Certificate Identifier
  //--------------------------------------------------------------------------
@@ -694,6 +736,60 @@ index 924c87c472..23a8e1d134 100644
      union {
          // CERT_ID_ISSUER_SERIAL_NUMBER
          CERT_ISSUER_SERIAL_NUMBER   IssuerSerialNumber;
+@@ -6918,7 +6919,7 @@ typedef struct _CERT_ID {
+ //
+ //  CMS signed messages allow the inclusion of Attribute Certs.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_SIGNER_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_SIGNER_ENCODE_INFO {
+     DWORD                       cbSize;
+     PCERT_INFO                  pCertInfo;
+ 
+@@ -6950,7 +6951,7 @@ typedef struct _CMSG_SIGNER_ENCODE_INFO {
+ #endif
+ } CMSG_SIGNER_ENCODE_INFO, *PCMSG_SIGNER_ENCODE_INFO;
+ 
+-typedef struct _CMSG_SIGNED_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_SIGNED_ENCODE_INFO {
+     DWORD                       cbSize;
+     DWORD                       cSigners;
+     PCMSG_SIGNER_ENCODE_INFO    rgSigners;
+@@ -7011,7 +7012,7 @@ typedef struct _CMSG_SIGNED_ENCODE_INFO {
+ typedef struct _CMSG_RECIPIENT_ENCODE_INFO CMSG_RECIPIENT_ENCODE_INFO,
+     *PCMSG_RECIPIENT_ENCODE_INFO;
+ 
+-typedef struct _CMSG_ENVELOPED_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_ENVELOPED_ENCODE_INFO {
+     DWORD                       cbSize;
+     HCRYPTPROV_LEGACY           hCryptProv;
+     CRYPT_ALGORITHM_IDENTIFIER  ContentEncryptionAlgorithm;
+@@ -7059,7 +7060,7 @@ typedef struct _CMSG_ENVELOPED_ENCODE_INFO {
+ //  KeyEncryptionAlgorithm.Parameters.cbData == 0, then, the default
+ //  parameters are used and encoded.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO {
+     DWORD                       cbSize;
+     CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
+     void                        *pvKeyEncryptionAuxInfo;
+@@ -7108,7 +7109,7 @@ typedef struct _CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO {
+ //  For the ECC szOID_DH_SINGLE_PASS_STDDH_SHA1_KDF KeyEncryptionAlgorithm
+ //  the CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE must be specified.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO {
+     DWORD                       cbSize;
+     CRYPT_BIT_BLOB              RecipientPublicKey;
+     CERT_ID                     RecipientId;
+@@ -7120,7 +7121,7 @@ typedef struct _CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO {
+ } CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO,
+     *PCMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO;
+ 
+-typedef struct _CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
+     DWORD                       cbSize;
+     CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
+     void                        *pvKeyEncryptionAuxInfo;
 @@ -7136,7 +7137,7 @@ typedef struct _CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
      HCRYPTPROV_LEGACY           hCryptProv;
      DWORD                       dwKeySpec;
@@ -703,6 +799,69 @@ index 924c87c472..23a8e1d134 100644
      union {
          // CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE
          //
+@@ -7176,7 +7177,7 @@ typedef struct _CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
+ //
+ //  Mail list recipients aren't supported using CNG.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO {
+     DWORD                       cbSize;
+     CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
+     void                        *pvKeyEncryptionAuxInfo;
+@@ -7234,7 +7235,7 @@ struct _CMSG_RECIPIENT_ENCODE_INFO {
+ //  If CMSG_SP3_COMPATIBLE_ENCRYPT_FLAG is set in dwBitLen, then, SP3
+ //  compatible encryption is done and the bit length is ignored.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_RC2_AUX_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_RC2_AUX_INFO {
+     DWORD                       cbSize;
+     DWORD                       dwBitLen;
+ } CMSG_RC2_AUX_INFO, *PCMSG_RC2_AUX_INFO;
+@@ -7252,7 +7253,7 @@ typedef struct _CMSG_RC2_AUX_INFO {
+ //
+ //  SP3 compatible encryption isn't supported using CNG.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_SP3_COMPATIBLE_AUX_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_SP3_COMPATIBLE_AUX_INFO {
+     DWORD                       cbSize;
+     DWORD                       dwFlags;
+ } CMSG_SP3_COMPATIBLE_AUX_INFO, *PCMSG_SP3_COMPATIBLE_AUX_INFO;
+@@ -7274,7 +7275,7 @@ typedef struct _CMSG_SP3_COMPATIBLE_AUX_INFO {
+ //
+ //  RC4 isn't supported using CNG.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_RC4_AUX_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_RC4_AUX_INFO {
+     DWORD                       cbSize;
+     DWORD                       dwBitLen;
+ } CMSG_RC4_AUX_INFO, *PCMSG_RC4_AUX_INFO;
+@@ -7288,7 +7289,7 @@ typedef struct _CMSG_RC4_AUX_INFO {
+ //  signer's authenticated or unauthenticated attributes. Otherwise, a
+ //  combination of the CMSG_SIGNED_ENCODE_INFO and CMSG_ENVELOPED_ENCODE_INFO.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO {
+     DWORD                       cbSize;
+     CMSG_SIGNED_ENCODE_INFO     SignedInfo;
+     CMSG_ENVELOPED_ENCODE_INFO  EnvelopedInfo;
+@@ -7310,7 +7311,7 @@ typedef struct _CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO {
+ //
+ //  pvHashAuxInfo currently isn't used and must be set to NULL.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_HASHED_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_HASHED_ENCODE_INFO {
+     DWORD                       cbSize;
+     HCRYPTPROV_LEGACY           hCryptProv;
+     CRYPT_ALGORITHM_IDENTIFIER  HashAlgorithm;
+@@ -7327,7 +7328,7 @@ typedef struct _CMSG_HASHED_ENCODE_INFO {
+ //
+ //  pvEncryptionAuxInfo currently isn't used and must be set to NULL.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_ENCRYPTED_ENCODE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_ENCRYPTED_ENCODE_INFO {
+     DWORD                       cbSize;
+     CRYPT_ALGORITHM_IDENTIFIER  ContentEncryptionAlgorithm;
+     void                        *pvEncryptionAuxInfo;
 @@ -7401,13 +7402,13 @@ typedef struct _CMSG_STREAM_INFO {
  //  The pStreamInfo parameter needs to be set to stream the encoded message
  //  output.
@@ -791,6 +950,69 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  CryptMsgControl(
+@@ -8139,7 +8140,7 @@ CryptMsgControl(
+ //  of CMSG_VERIFY_SIGNER_NULL may be specified to verify this no signature
+ //  case.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA {
+     DWORD               cbSize;
+     HCRYPTPROV_LEGACY   hCryptProv;
+     DWORD               dwSignerIndex;
+@@ -8192,7 +8193,7 @@ typedef struct _CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA {
+ //
+ //  Note, the message can only be decrypted once.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CTRL_DECRYPT_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_DECRYPT_PARA {
+     DWORD       cbSize;
+ 
+     // NCryptIsKeyHandle() is called to determine the union choice.
+@@ -8232,7 +8233,7 @@ typedef struct _CMSG_CTRL_DECRYPT_PARA {
+ //
+ //  Note, the message can only be decrypted once.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CTRL_KEY_TRANS_DECRYPT_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_KEY_TRANS_DECRYPT_PARA {
+     DWORD                           cbSize;
+     // NCryptIsKeyHandle() is called to determine the union choice.
+     union {
+@@ -8276,7 +8277,7 @@ typedef struct _CMSG_CTRL_KEY_TRANS_DECRYPT_PARA {
+ //
+ //  Note, the message can only be decrypted once.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CTRL_KEY_AGREE_DECRYPT_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_KEY_AGREE_DECRYPT_PARA {
+     DWORD                           cbSize;
+ 
+     // NCryptIsKeyHandle() is called to determine the union choice.
+@@ -8320,7 +8321,7 @@ typedef struct _CMSG_CTRL_KEY_AGREE_DECRYPT_PARA {
+ //
+ //  Mail list recipients aren't supported using CNG.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CTRL_MAIL_LIST_DECRYPT_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_MAIL_LIST_DECRYPT_PARA {
+     DWORD                           cbSize;
+     HCRYPTPROV                      hCryptProv;
+     PCMSG_MAIL_LIST_RECIPIENT_INFO  pMailList;
+@@ -8382,7 +8383,7 @@ typedef struct _CMSG_CTRL_MAIL_LIST_DECRYPT_PARA {
+ //  The unauthenticated attribute is input in the form of an encoded blob.
+ //--------------------------------------------------------------------------
+ 
+-typedef struct _CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA {
+     DWORD               cbSize;
+     DWORD               dwSignerIndex;
+     CRYPT_DATA_BLOB     blob;
+@@ -8398,7 +8399,7 @@ typedef struct _CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA {
+ //  a 0-based index.
+ //--------------------------------------------------------------------------
+ 
+-typedef struct _CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA {
+     DWORD               cbSize;
+     DWORD               dwSignerIndex;
+     DWORD               dwUnauthAttrIndex;
 @@ -8468,7 +8469,7 @@ typedef struct _CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA {
  //  The only fields referenced from pciCountersigner are SerialNumber, Issuer,
  //  and SubjectPublicKeyInfo.
@@ -827,7 +1049,40 @@ index 924c87c472..23a8e1d134 100644
  WINAPI
  CryptMsgCountersignEncoded(
      _In_ DWORD dwEncodingType,
-@@ -8805,7 +8806,7 @@ typedef struct _CMSG_KEY_AGREE_ENCRYPT_INFO {
+@@ -8623,7 +8624,7 @@ typedef BOOL (WINAPI *PFN_CMSG_IMPORT_ENCRYPT_KEY) (
+ //  When, fCNG is TRUE, the hCNGContentEncryptKey choice is selected and
+ //  pbCNGContentEncryptKeyObject and pbContentEncryptKey will be pfnAlloc'ed.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CONTENT_ENCRYPT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CONTENT_ENCRYPT_INFO {
+     DWORD                       cbSize;
+     HCRYPTPROV_LEGACY           hCryptProv;
+     CRYPT_ALGORITHM_IDENTIFIER  ContentEncryptionAlgorithm;
+@@ -8728,7 +8729,7 @@ typedef BOOL (WINAPI *PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY) (
+ //  The following data structure contains the information updated by the
+ //  ExportKeyTrans installable function.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_KEY_TRANS_ENCRYPT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_KEY_TRANS_ENCRYPT_INFO {
+     DWORD                       cbSize;
+     DWORD                       dwRecipientIndex;
+     CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
+@@ -8789,7 +8790,7 @@ typedef BOOL (WINAPI *PFN_CMSG_EXPORT_KEY_TRANS) (
+ //  ExportKeyAgree installable function for each encrypted key agree
+ //  recipient.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_KEY_AGREE_KEY_ENCRYPT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_KEY_AGREE_KEY_ENCRYPT_INFO {
+     DWORD                       cbSize;
+     CRYPT_DATA_BLOB             EncryptedKey;
+ } CMSG_KEY_AGREE_KEY_ENCRYPT_INFO, *PCMSG_KEY_AGREE_KEY_ENCRYPT_INFO;
+@@ -8800,12 +8801,12 @@ typedef struct _CMSG_KEY_AGREE_KEY_ENCRYPT_INFO {
+ //  The following data structure contains the information applicable to
+ //  all recipients. Its updated by the ExportKeyAgree installable function.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_KEY_AGREE_ENCRYPT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_KEY_AGREE_ENCRYPT_INFO {
+     DWORD                       cbSize;
      DWORD                       dwRecipientIndex;
      CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
      CRYPT_DATA_BLOB             UserKeyingMaterial;
@@ -836,6 +1091,24 @@ index 924c87c472..23a8e1d134 100644
      union {
          // CMSG_KEY_AGREE_ORIGINATOR_CERT
          CERT_ID                     OriginatorCertId;
+@@ -8895,7 +8896,7 @@ typedef BOOL (WINAPI *PFN_CMSG_EXPORT_KEY_AGREE) (
+ //  The following data structure contains the information updated by the
+ //  ExportMailList installable function.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_MAIL_LIST_ENCRYPT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_MAIL_LIST_ENCRYPT_INFO {
+     DWORD                       cbSize;
+     DWORD                       dwRecipientIndex;
+     CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
+@@ -9004,7 +9005,7 @@ typedef BOOL (WINAPI *PFN_CMSG_IMPORT_MAIL_LIST) (
+ //  pbContentEncryptKey and pbCNGContentEncryptKeyObject are allocated
+ //  and freed via pfnAlloc and pfnFree.
+ //--------------------------------------------------------------------------
+-typedef struct _CMSG_CNG_CONTENT_DECRYPT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMSG_CNG_CONTENT_DECRYPT_INFO {
+     DWORD                       cbSize;
+     CRYPT_ALGORITHM_IDENTIFIER  ContentEncryptionAlgorithm;
+     PFN_CMSG_ALLOC              pfnAlloc;
 @@ -9183,7 +9184,7 @@ typedef void *HCERTSTORE;
  //--------------------------------------------------------------------------
  // certenrolls_begin -- CERT_CONTEXT
@@ -863,6 +1136,15 @@ index 924c87c472..23a8e1d134 100644
      DWORD                   cProvParam;
      PCRYPT_KEY_PROV_PARAM   rgProvParam;
      DWORD                   dwKeySpec;
+@@ -9559,7 +9560,7 @@ typedef struct _CRYPT_KEY_PROV_INFO {
+ //  dwKeySpec is set to the special CERT_NCRYPT_KEY_SPEC to select the
+ //  hNCryptKey choice.
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_KEY_CONTEXT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_KEY_CONTEXT {
+     DWORD           cbSize;           // sizeof(CERT_KEY_CONTEXT)
+     union {
+         HCRYPTPROV          hCryptProv;
 @@ -10572,15 +10573,15 @@ typedef struct _CERT_LDAP_STORE_OPENED_PARA {
  //      attribute.
  //
@@ -883,7 +1165,13 @@ index 924c87c472..23a8e1d134 100644
      _In_opt_ const void *pvPara
      );
  
-@@ -10605,7 +10606,7 @@ typedef struct _CERT_STORE_PROV_INFO {
+@@ -10600,12 +10601,12 @@ typedef void *HCERTSTOREPROV;
+ // zeroed with cbSize set before the provider is called. If the provider
+ // doesn't need to be called again after the open it doesn't need to
+ // make any updates to the CERT_STORE_PROV_INFO.
+-typedef struct _CERT_STORE_PROV_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_STORE_PROV_INFO {
+     DWORD               cbSize;
      DWORD               cStoreProvFunc;
      void                **rgpvStoreProvFunc;
      HCERTSTOREPROV      hStoreProv;
@@ -904,6 +1192,15 @@ index 924c87c472..23a8e1d134 100644
      _In_opt_ const void *pvPara,
      _In_ HCERTSTORE hCertStore,
      _Inout_ PCERT_STORE_PROV_INFO pStoreProvInfo
+@@ -10851,7 +10852,7 @@ typedef BOOL (WINAPI *PFN_CERT_STORE_PROV_CONTROL)(
+     _In_opt_ void const *pvCtrlPara
+     );
+ 
+-typedef struct _CERT_STORE_PROV_FIND_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_STORE_PROV_FIND_INFO {
+     DWORD               cbSize;
+     DWORD               dwMsgAndCertEncodingType;
+     DWORD               dwFindFlags;
 @@ -10941,7 +10942,7 @@ typedef BOOL (WINAPI *PFN_CERT_STORE_PROV_GET_CTL_PROPERTY)(
  //+-------------------------------------------------------------------------
  //  Duplicate a cert store handle
@@ -1015,7 +1312,7 @@ index 924c87c472..23a8e1d134 100644
  //  to store properties for the certificate.
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  PCCERT_CONTEXT
  WINAPI
  CertCreateCertificateContext(
@@ -1372,6 +1669,24 @@ index 924c87c472..23a8e1d134 100644
      _In_opt_ const void *pvFindPara,
      _In_opt_ PCCTL_CONTEXT pPrevCtlContext
      );
+@@ -12775,7 +12776,7 @@ CertFindCTLInStore(
+ #define CTL_FIND_SUBJECT            4
+ #define CTL_FIND_EXISTING           5
+ 
+-typedef struct _CTL_FIND_USAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CTL_FIND_USAGE_PARA {
+     DWORD               cbSize;
+     CTL_USAGE           SubjectUsage;   // optional
+     CRYPT_DATA_BLOB     ListIdentifier; // optional
+@@ -12788,7 +12789,7 @@ typedef struct _CTL_FIND_USAGE_PARA {
+ #define CTL_FIND_SAME_USAGE_FLAG    0x1
+ 
+ 
+-typedef struct _CTL_FIND_SUBJECT_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CTL_FIND_SUBJECT_PARA {
+     DWORD                   cbSize;
+     PCTL_FIND_USAGE_PARA    pUsagePara; // optional
+     DWORD                   dwSubjectType;
 @@ -12861,13 +12862,13 @@ typedef struct _CTL_FIND_SUBJECT_PARA {
  //  ppCtlContext can be NULL, indicating the caller isn't interested
  //  in getting the CTL_CONTEXT of the added or existing CTL.
@@ -1493,6 +1808,15 @@ index 924c87c472..23a8e1d134 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
+@@ -13178,7 +13179,7 @@ typedef BOOL (WINAPI *PFN_CERT_CREATE_CONTEXT_SORT_FUNC)(
+     _Inout_opt_ void *pvSort
+     );
+ 
+-typedef struct _CERT_CREATE_CONTEXT_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CREATE_CONTEXT_PARA {
+     DWORD                               cbSize;
+     PFN_CRYPT_FREE                      pfnFree;    // OPTIONAL
+     void                                *pvFree;    // OPTIONAL
 @@ -13222,7 +13223,7 @@ typedef struct _CERT_CREATE_CONTEXT_PARA {
  //  free context API. The context can be duplicated by calling the
  //  appropriate duplicate context API.
@@ -1502,6 +1826,24 @@ index 924c87c472..23a8e1d134 100644
  const void *
  WINAPI
  CertCreateContext(
+@@ -13282,7 +13283,7 @@ CertCreateContext(
+ //
+ //  Currently, no system store information is persisted.
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_SYSTEM_STORE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_SYSTEM_STORE_INFO {
+     DWORD   cbSize;
+ } CERT_SYSTEM_STORE_INFO, *PCERT_SYSTEM_STORE_INFO;
+ 
+@@ -13328,7 +13329,7 @@ typedef struct _CERT_SYSTEM_STORE_INFO {
+ //  When the system store is opened, its physical stores are ordered
+ //  according to the dwPriority. A larger dwPriority indicates higher priority.
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_PHYSICAL_STORE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_PHYSICAL_STORE_INFO {
+     DWORD               cbSize;
+     LPSTR               pszOpenStoreProvider;   // REG_SZ
+     DWORD               dwOpenEncodingType;     // REG_DWORD
 @@ -13380,7 +13381,7 @@ typedef struct _CERT_PHYSICAL_STORE_INFO {
  //  Set CERT_STORE_CREATE_NEW_FLAG to cause a failure if the system store
  //  already exists in the store location.
@@ -1664,6 +2006,24 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  CertEnumSubjectInSortedCTL(
+@@ -13896,7 +13897,7 @@ CertEnumSubjectInSortedCTL(
+ #pragma region Application Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-typedef struct _CTL_VERIFY_USAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CTL_VERIFY_USAGE_PARA {
+     DWORD                   cbSize;
+     CRYPT_DATA_BLOB         ListIdentifier;     // OPTIONAL
+     DWORD                   cCtlStore;
+@@ -13905,7 +13906,7 @@ typedef struct _CTL_VERIFY_USAGE_PARA {
+     HCERTSTORE              *rghSignerStore;    // OPTIONAL
+ } CTL_VERIFY_USAGE_PARA, *PCTL_VERIFY_USAGE_PARA;
+ 
+-typedef struct _CTL_VERIFY_USAGE_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CTL_VERIFY_USAGE_STATUS {
+     DWORD                   cbSize;
+     DWORD                   dwError;
+     DWORD                   dwFlags;
 @@ -13977,7 +13978,7 @@ typedef struct _CTL_VERIFY_USAGE_STATUS {
  //      CRYPT_E_NOT_IN_CTL
  //      CRYPT_E_NO_TRUSTED_SIGNER
@@ -1673,7 +2033,30 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  CertVerifyCTLUsage(
-@@ -14111,7 +14112,7 @@ typedef struct _CERT_REVOCATION_STATUS {
+@@ -14005,7 +14006,7 @@ CertVerifyCTLUsage(
+ //  This data structure is updated by a CRL revocation type handler
+ //  with the base and possibly the delta CRL used.
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_REVOCATION_CRL_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_REVOCATION_CRL_INFO {
+     DWORD                   cbSize;
+     PCCRL_CONTEXT           pBaseCrlContext;
+     PCCRL_CONTEXT           pDeltaCrlContext;
+@@ -14046,7 +14047,7 @@ typedef struct _CERT_REVOCATION_CHAIN_PARA
+ //  revocation status relative to the time given otherwise the answer may be
+ //  independent of time or relative to current time
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_REVOCATION_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_REVOCATION_PARA {
+     DWORD                       cbSize;
+     PCCERT_CONTEXT              pIssuerCert;
+     DWORD                       cCertStore;
+@@ -14107,11 +14108,11 @@ typedef struct _CERT_REVOCATION_PARA {
+ //  functions, the dwIndex, dwError and dwReason have been zero'ed.
+ //  If present, fHasFreshnessTime and dwFreshnessTime have been zero'ed.
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_REVOCATION_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_REVOCATION_STATUS {
      DWORD                   cbSize;
      DWORD                   dwIndex;
      DWORD                   dwError;
@@ -2213,7 +2596,7 @@ index 924c87c472..23a8e1d134 100644
  //  Note: csz includes the NULL char.
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  DWORD
  WINAPI
  CertRDNValueToStrA(
@@ -2222,7 +2605,7 @@ index 924c87c472..23a8e1d134 100644
  //  Note: csz includes the NULL char.
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  DWORD
  WINAPI
  CertRDNValueToStrW(
@@ -2231,7 +2614,7 @@ index 924c87c472..23a8e1d134 100644
  //--------------------------------------------------------------------------
  
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  DWORD
  WINAPI
  CertNameToStrA(
@@ -2244,7 +2627,7 @@ index 924c87c472..23a8e1d134 100644
      _In_ DWORD csz
      );
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  DWORD
  WINAPI
  CertNameToStrW(
@@ -2261,7 +2644,7 @@ index 924c87c472..23a8e1d134 100644
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  BOOL
  WINAPI
  CertStrToNameA(
@@ -2278,7 +2661,7 @@ index 924c87c472..23a8e1d134 100644
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  BOOL
  WINAPI
  CertStrToNameW(
@@ -2295,7 +2678,7 @@ index 924c87c472..23a8e1d134 100644
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  DWORD
  WINAPI
  CertGetNameStringA(
@@ -2304,7 +2687,7 @@ index 924c87c472..23a8e1d134 100644
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  DWORD
  WINAPI
  CertGetNameStringW(
@@ -2317,9 +2700,57 @@ index 924c87c472..23a8e1d134 100644
      _In_ PCERT_INFO pSignerId,    // Only the Issuer and SerialNumber
                                  // fields have been updated
      _In_ HCERTSTORE hMsgCertStore
-@@ -16374,7 +16375,7 @@ typedef struct _CRYPT_HASH_MESSAGE_PARA {
+@@ -16179,7 +16180,7 @@ typedef PCCERT_CONTEXT (WINAPI *PFN_CRYPT_GET_SIGNER_CERTIFICATE)(
+ //  pvHashEncryptionAuxInfo currently isn't used and must be set to NULL if
+ //  present in the data structure.
  //--------------------------------------------------------------------------
- typedef struct _CRYPT_KEY_SIGN_MESSAGE_PARA {
+-typedef struct _CRYPT_SIGN_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_SIGN_MESSAGE_PARA {
+     DWORD                       cbSize;
+     DWORD                       dwMsgEncodingType;
+     PCCERT_CONTEXT              pSigningCert;
+@@ -16231,7 +16232,7 @@ typedef struct _CRYPT_SIGN_MESSAGE_PARA {
+ //  cbSize must be set to the sizeof(CRYPT_VERIFY_MESSAGE_PARA) or else
+ //  LastError will be updated with E_INVALIDARG.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_VERIFY_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_VERIFY_MESSAGE_PARA {
+     DWORD                               cbSize;
+     DWORD                               dwMsgAndCertEncodingType;
+     HCRYPTPROV_LEGACY                   hCryptProv;
+@@ -16291,7 +16292,7 @@ typedef struct _CRYPT_VERIFY_MESSAGE_PARA {
+ //  For CMS messages, CRYPT_MESSAGE_KEYID_RECIPIENT_FLAG may be set to identify
+ //  recipients by their Key Identifier and not their Issuer and Serial Number.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_ENCRYPT_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_ENCRYPT_MESSAGE_PARA {
+     DWORD                       cbSize;
+     DWORD                       dwMsgEncodingType;
+     HCRYPTPROV_LEGACY           hCryptProv;
+@@ -16325,7 +16326,7 @@ typedef struct _CRYPT_ENCRYPT_MESSAGE_PARA {
+ //  cbSize must be set to the sizeof(CRYPT_DECRYPT_MESSAGE_PARA) or else
+ //  LastError will be updated with E_INVALIDARG.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_DECRYPT_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_DECRYPT_MESSAGE_PARA {
+     DWORD                   cbSize;
+     DWORD                   dwMsgAndCertEncodingType;
+     DWORD                   cCertStore;
+@@ -16352,7 +16353,7 @@ typedef struct _CRYPT_DECRYPT_MESSAGE_PARA {
+ //  cbSize must be set to the sizeof(CRYPT_HASH_MESSAGE_PARA) or else
+ //  LastError will be updated with E_INVALIDARG.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_HASH_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_HASH_MESSAGE_PARA {
+     DWORD                       cbSize;
+     DWORD                       dwMsgEncodingType;
+     HCRYPTPROV_LEGACY           hCryptProv;
+@@ -16372,9 +16373,9 @@ typedef struct _CRYPT_HASH_MESSAGE_PARA {
+ //  cbSize must be set to the sizeof(CRYPT_KEY_SIGN_MESSAGE_PARA) or else
+ //  LastError will be updated with E_INVALIDARG.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_KEY_SIGN_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_KEY_SIGN_MESSAGE_PARA {
      DWORD                       cbSize;
 -    DWORD                       dwMsgAndCertEncodingType;
 +    _Win32_AssociatedEnum_(CERT_QUERY_ENCODING_TYPE) DWORD                       dwMsgAndCertEncodingType;
@@ -2335,6 +2766,15 @@ index 924c87c472..23a8e1d134 100644
  
      CRYPT_ALGORITHM_IDENTIFIER  HashAlgorithm;
      void                        *pvHashAuxInfo;
+@@ -16402,7 +16403,7 @@ typedef struct _CRYPT_KEY_SIGN_MESSAGE_PARA {
+ //  cbSize must be set to the sizeof(CRYPT_KEY_VERIFY_MESSAGE_PARA) or else
+ //  LastError will be updated with E_INVALIDARG.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_KEY_VERIFY_MESSAGE_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_KEY_VERIFY_MESSAGE_PARA {
+     DWORD                   cbSize;
+     DWORD                   dwMsgEncodingType;
+     HCRYPTPROV_LEGACY       hCryptProv;
 @@ -16420,7 +16421,7 @@ typedef struct _CRYPT_KEY_VERIFY_MESSAGE_PARA {
  //  If fDetachedSignature is TRUE, the "to be signed" content isn't included
  //  in the encoded signed blob.
@@ -2475,7 +2915,7 @@ index 924c87c472..23a8e1d134 100644
  
  
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  HCERTSTORE
  WINAPI
  CertOpenSystemStoreA(
@@ -2483,7 +2923,7 @@ index 924c87c472..23a8e1d134 100644
      _In_ LPCSTR            szSubsystemProtocol
      );
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  HCERTSTORE
  WINAPI
  CertOpenSystemStoreW(
@@ -2492,7 +2932,7 @@ index 924c87c472..23a8e1d134 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  BOOL
  WINAPI
  CertAddEncodedCertificateToSystemStoreA(
@@ -2501,7 +2941,7 @@ index 924c87c472..23a8e1d134 100644
      _In_ DWORD           cbCertEncoded
      );
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINCRYPT32API
  BOOL
  WINAPI
  CertAddEncodedCertificateToSystemStoreW(
@@ -2566,12 +3006,72 @@ index 924c87c472..23a8e1d134 100644
      );
  
  WINCRYPT32API
+@@ -17334,7 +17335,7 @@ typedef struct _CRYPT_BLOB_ARRAY {
+     PCRYPT_DATA_BLOB rgBlob;
+ } CRYPT_BLOB_ARRAY, *PCRYPT_BLOB_ARRAY;
+ 
+-typedef struct _CRYPT_CREDENTIALS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_CREDENTIALS {
+     DWORD  cbSize;
+     LPCSTR pszCredentialsOid;
+     LPVOID pvCredentials;
+@@ -17349,12 +17350,12 @@ typedef struct _CRYPT_CREDENTIALS {
+ #define CREDENTIAL_OID_PASSWORD_CREDENTIALS CREDENTIAL_OID_PASSWORD_CREDENTIALS_A
+ #endif //UNICODE
+ 
+-typedef struct _CRYPT_PASSWORD_CREDENTIALSA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_PASSWORD_CREDENTIALSA {
+     DWORD   cbSize;
+     LPSTR   pszUsername;
+     LPSTR   pszPassword;
+ } CRYPT_PASSWORD_CREDENTIALSA, *PCRYPT_PASSWORD_CREDENTIALSA;
+-typedef struct _CRYPT_PASSWORD_CREDENTIALSW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_PASSWORD_CREDENTIALSW {
+     DWORD   cbSize;
+     LPWSTR  pszUsername;
+     LPWSTR  pszPassword;
+@@ -17582,7 +17583,7 @@ typedef VOID (WINAPI *PFN_FREE_ENCODED_OBJECT_FUNC) (
+ //
+ // Cryptnet URL Cache Pre-Fetch Info
+ //
+-typedef struct _CRYPTNET_URL_CACHE_PRE_FETCH_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPTNET_URL_CACHE_PRE_FETCH_INFO {
+     DWORD           cbSize;
+     DWORD           dwObjectType;
+ 
+@@ -17612,7 +17613,7 @@ typedef struct _CRYPTNET_URL_CACHE_PRE_FETCH_INFO {
+ //
+ // Cryptnet URL Cache Flush Info
+ //
+-typedef struct _CRYPTNET_URL_CACHE_FLUSH_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPTNET_URL_CACHE_FLUSH_INFO {
+     DWORD           cbSize;
+     // If pre-fetching is enabled, following is ignored
+     //
+@@ -17633,7 +17634,7 @@ typedef struct _CRYPTNET_URL_CACHE_FLUSH_INFO {
+ //
+ // Cryptnet URL Cache Response Info
+ //
+-typedef struct _CRYPTNET_URL_CACHE_RESPONSE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPTNET_URL_CACHE_RESPONSE_INFO {
+     DWORD           cbSize;
+     WORD            wResponseType;
+     WORD            wResponseFlags;
+@@ -17660,7 +17661,7 @@ typedef struct _CRYPTNET_URL_CACHE_RESPONSE_INFO {
+ // All unused fields in this data structure must be zeroed. More fields
+ // could be added in a future release.
+ //
+-typedef struct _CRYPT_RETRIEVE_AUX_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_RETRIEVE_AUX_INFO {
+     DWORD                               cbSize;
+     FILETIME                            *pLastSyncTime;
+ 
 @@ -17732,7 +17733,7 @@ typedef struct _CRYPT_RETRIEVE_AUX_INFO {
  #pragma region Desktop Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  _Success_(return == TRUE)
  BOOL
  WINAPI
@@ -2580,10 +3080,19 @@ index 924c87c472..23a8e1d134 100644
      _Inout_opt_ PCRYPT_RETRIEVE_AUX_INFO pAuxInfo
      );
 -WINCRYPT32API
-+_Windows_SupportedOS_WindowsXP_ WINCRYPT32API
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ WINCRYPT32API
  _Success_(return == TRUE)
  BOOL
  WINAPI
+@@ -17878,7 +17879,7 @@ typedef struct _CRYPT_URL_ARRAY {
+     LPWSTR* rgwszUrl;
+ } CRYPT_URL_ARRAY, *PCRYPT_URL_ARRAY;
+ 
+-typedef struct _CRYPT_URL_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_URL_INFO {
+     DWORD   cbSize;
+ 
+     // Seconds between syncs
 @@ -17891,13 +17892,13 @@ typedef struct _CRYPT_URL_INFO {
      DWORD   *rgcGroupEntry;
  } CRYPT_URL_INFO, *PCRYPT_URL_INFO;
@@ -2600,6 +3109,15 @@ index 924c87c472..23a8e1d134 100644
      _Out_writes_bytes_to_opt_(*pcbUrlArray, *pcbUrlArray) PCRYPT_URL_ARRAY pUrlArray,
      _Inout_ DWORD* pcbUrlArray,
      _Out_writes_bytes_to_opt_(*pcbUrlInfo, *pcbUrlInfo) PCRYPT_URL_INFO pUrlInfo,
+@@ -18050,7 +18051,7 @@ typedef const CERT_CRL_CONTEXT_PAIR *PCCERT_CRL_CONTEXT_PAIR;
+ //  All unused fields in this data structure must be zeroed. More fields
+ //  could be added in a future release.
+ //--------------------------------------------------------------------------
+-typedef struct _CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO {
+     DWORD                       cbSize;
+ 
+     // If > 0, check that the CRL's number is >=
 @@ -18224,13 +18225,13 @@ CryptFlushTimeValidObject (
  //      CRYPT_OID_USE_CURVE_NAME_FOR_ENCODE_FLAG
  //      CRYPT_OID_USE_CURVE_PARAMETERS_FOR_ENCODE_FLAG
@@ -2657,6 +3175,15 @@ index 924c87c472..23a8e1d134 100644
      _In_opt_ LPCSTR pszPubKeyOID,
      _In_reads_bytes_(cbPubKeyStruc) const PUBLICKEYSTRUC *pPubKeyStruc,
      _In_ DWORD cbPubKeyStruc,
+@@ -19491,7 +19492,7 @@ typedef HANDLE HCERTCHAINENGINE;
+ // chain engine flags
+ // #define CERT_CHAIN_DISABLE_AIA                      0x00002000
+ 
+-typedef struct _CERT_CHAIN_ENGINE_CONFIG {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_ENGINE_CONFIG {
+ 
+     DWORD       cbSize;
+     HCERTSTORE  hRestrictedRoot;
 @@ -19525,20 +19526,20 @@ typedef struct _CERT_CHAIN_ENGINE_CONFIG {
  #define CERT_CHAIN_EXCLUSIVE_ENABLE_CA_FLAG                 0x00000001
  #endif
@@ -2690,6 +3217,60 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  CertResyncCertificateChainEngine (
+@@ -19686,7 +19687,7 @@ typedef struct _CERT_TRUST_STATUS {
+ // Revocation Information
+ //
+ 
+-typedef struct _CERT_REVOCATION_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_REVOCATION_INFO {
+ 
+     DWORD                       cbSize;
+     DWORD                       dwRevocationResult;
+@@ -19707,7 +19708,7 @@ typedef struct _CERT_REVOCATION_INFO {
+ // Trust List Information
+ //
+ 
+-typedef struct _CERT_TRUST_LIST_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_TRUST_LIST_INFO {
+ 
+     DWORD         cbSize;
+     PCTL_ENTRY    pCtlEntry;
+@@ -19719,7 +19720,7 @@ typedef struct _CERT_TRUST_LIST_INFO {
+ // Chain Element
+ //
+ 
+-typedef struct _CERT_CHAIN_ELEMENT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_ELEMENT {
+ 
+     DWORD                 cbSize;
+     PCCERT_CONTEXT        pCertContext;
+@@ -19742,7 +19743,7 @@ typedef const CERT_CHAIN_ELEMENT* PCCERT_CHAIN_ELEMENT;
+ // rgpElements[cElement-1] is the self-signed "root" certificate chain element
+ //
+ 
+-typedef struct _CERT_SIMPLE_CHAIN {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_SIMPLE_CHAIN {
+ 
+     DWORD                 cbSize;
+     CERT_TRUST_STATUS     TrustStatus;
+@@ -19775,7 +19776,7 @@ typedef const CERT_SIMPLE_CHAIN* PCCERT_SIMPLE_CHAIN;
+ typedef struct _CERT_CHAIN_CONTEXT CERT_CHAIN_CONTEXT, *PCERT_CHAIN_CONTEXT;
+ typedef const CERT_CHAIN_CONTEXT *PCCERT_CHAIN_CONTEXT;
+ 
+-struct _CERT_CHAIN_CONTEXT {
++struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_CONTEXT {
+     DWORD                   cbSize;
+     CERT_TRUST_STATUS       TrustStatus;
+     DWORD                   cChain;
+@@ -19827,7 +19828,7 @@ typedef struct _CTL_USAGE_MATCH {
+ 
+ } CTL_USAGE_MATCH, *PCTL_USAGE_MATCH;
+ 
+-typedef struct _CERT_CHAIN_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_PARA {
+ 
+     DWORD            cbSize;
+     CERT_USAGE_MATCH RequestedUsage;
 @@ -19990,7 +19991,7 @@ typedef struct _CERT_CHAIN_PARA {
  // dwInfoStatus.
  #define CERT_CHAIN_ENABLE_DISALLOWED_CA             0x00020000
@@ -2717,6 +3298,15 @@ index 924c87c472..23a8e1d134 100644
  PCCERT_CHAIN_CONTEXT
  WINAPI
  CertDuplicateCertificateChain (
+@@ -20033,7 +20034,7 @@ CertDuplicateCertificateChain (
+ //  data structures. CertGetCertificateChain() populates when it calls
+ //  the CertVerifyRevocation() API.
+ //--------------------------------------------------------------------------
+-struct _CERT_REVOCATION_CHAIN_PARA {
++struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_REVOCATION_CHAIN_PARA {
+     DWORD                       cbSize;
+     HCERTCHAINENGINE            hChainEngine;
+     HCERTSTORE                  hAdditionalStore;
 @@ -20100,13 +20101,13 @@ typedef struct _CRL_REVOCATION_INFO {
  //  NOTE: a NON-NULL pPrevChainContext is always CertFreeCertificateChain'ed by
  //  this function, even for an error.
@@ -2734,15 +3324,36 @@ index 924c87c472..23a8e1d134 100644
      _In_ DWORD dwFindType,
      _In_opt_ const void *pvFindPara,
      _In_opt_ PCCERT_CHAIN_CONTEXT pPrevChainContext
-@@ -20257,7 +20258,7 @@ typedef struct _CERT_CHAIN_FIND_BY_ISSUER_PARA {
+@@ -20169,7 +20170,7 @@ typedef BOOL (WINAPI *PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK)(
+     _Inout_opt_ void *pvFindArg
+     );
+ 
+-typedef struct _CERT_CHAIN_FIND_BY_ISSUER_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_FIND_BY_ISSUER_PARA {
+     DWORD                                   cbSize;
+ 
+     // If pszUsageIdentifier == NULL, matches any usage.
+@@ -20255,9 +20256,9 @@ typedef struct _CERT_CHAIN_FIND_BY_ISSUER_PARA {
+ //+=========================================================================
+ //  Certificate Chain Policy Data Structures and APIs
  //==========================================================================
- typedef struct _CERT_CHAIN_POLICY_PARA {
+-typedef struct _CERT_CHAIN_POLICY_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_POLICY_PARA {
      DWORD                   cbSize;
 -    DWORD                   dwFlags;
 +    _Win32_AssociatedEnum_(CERT_CHAIN_POLICY_FLAGS) DWORD                   dwFlags;
      void                    *pvExtraPolicyPara;     // pszPolicyOID specific
  } CERT_CHAIN_POLICY_PARA, *PCERT_CHAIN_POLICY_PARA;
  
+@@ -20266,7 +20267,7 @@ typedef struct _CERT_CHAIN_POLICY_PARA {
+ // dwError applies to the lChainIndex'ed chain. Otherwise, the dwError applies
+ // to the certificate element at
+ // pChainContext->rgpChain[lChainIndex]->rgpElement[lElementIndex].
+-typedef struct _CERT_CHAIN_POLICY_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_CHAIN_POLICY_STATUS {
+     DWORD                   cbSize;
+     DWORD                   dwError;
+     LONG                    lChainIndex;
 @@ -20334,7 +20335,7 @@ typedef struct _CERT_CHAIN_POLICY_STATUS {
  //  In addition to returning dwError, in pPolicyStatus, policy OID specific
  //  extra status may be returned via pvExtraPolicyStatus.
@@ -2752,6 +3363,32 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  CertVerifyCertificateChainPolicy(
+@@ -20388,14 +20389,14 @@ CertVerifyCertificateChainPolicy(
+ //--------------------------------------------------------------------------
+ 
+ // dwRegPolicySettings are defined in wintrust.h
+-typedef struct _AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA {
+     DWORD               cbSize;
+     DWORD               dwRegPolicySettings;
+     PCMSG_SIGNER_INFO   pSignerInfo;                // optional
+ } AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA,
+     *PAUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA;
+ 
+-typedef struct _AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS {
+     DWORD               cbSize;
+     BOOL                fCommercial;        // obtained from signer statement
+ } AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS,
+@@ -20413,7 +20414,7 @@ typedef struct _AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS {
+ //--------------------------------------------------------------------------
+ 
+ // dwRegPolicySettings are defined in wintrust.h
+-typedef struct _AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA {
+     DWORD               cbSize;
+     DWORD               dwRegPolicySettings;
+     BOOL                fCommercial;
 @@ -20438,7 +20439,7 @@ typedef struct _HTTPSPolicyCallbackData
          DWORD           cbSize;         // sizeof(HTTPSPolicyCallbackData);
      } DUMMYUNIONNAME;
@@ -2761,21 +3398,73 @@ index 924c87c472..23a8e1d134 100644
  #                       define      AUTHTYPE_CLIENT         1
  #                       define      AUTHTYPE_SERVER         2
  
-@@ -20554,7 +20555,7 @@ typedef struct _HTTPSPolicyCallbackData
+@@ -20552,13 +20553,13 @@ typedef struct _HTTPSPolicyCallbackData
+ //  a combination of CERT_ROOT_PROGRAM_FLAG_* flags.
+ //--------------------------------------------------------------------------
  
- typedef struct _EV_EXTRA_CERT_CHAIN_POLICY_PARA {
+-typedef struct _EV_EXTRA_CERT_CHAIN_POLICY_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _EV_EXTRA_CERT_CHAIN_POLICY_PARA {
      DWORD               cbSize;
 -    DWORD               dwRootProgramQualifierFlags;
 +    _Win32_AssociatedEnum_(CERT_ROOT_PROGRAM_FLAGS) DWORD               dwRootProgramQualifierFlags;
  } EV_EXTRA_CERT_CHAIN_POLICY_PARA,
      *PEV_EXTRA_CERT_CHAIN_POLICY_PARA;
  
+-typedef struct _EV_EXTRA_CERT_CHAIN_POLICY_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _EV_EXTRA_CERT_CHAIN_POLICY_STATUS {
+     DWORD   cbSize;
+     DWORD   dwQualifiers;
+     DWORD   dwIssuanceUsageIndex;
+@@ -20584,7 +20585,7 @@ typedef struct _EV_EXTRA_CERT_CHAIN_POLICY_STATUS {
+ //  Roots not in compliance with the Microsoft Root Program.
+ //--------------------------------------------------------------------------
+ #define SSL_F12_ERROR_TEXT_LENGTH   256
+-typedef struct _SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS {
+     DWORD   cbSize;
+     DWORD   dwErrorLevel;
+     DWORD   dwErrorCategory;
+@@ -20657,7 +20658,7 @@ typedef struct _SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS {
+ #define SSL_HPKP_PKP_RO_HEADER_INDEX    1
+ #define SSL_HPKP_HEADER_COUNT           2
+ 
+-typedef struct _SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA {
+     DWORD               cbSize;
+     DWORD               dwReserved;
+     LPWSTR              pwszServerName;
+@@ -20716,14 +20717,14 @@ typedef struct _SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA {
+ //  for either MITM or MISMATCH error.
+ //--------------------------------------------------------------------------
+ 
+-typedef struct _SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA {
+     DWORD   cbSize;
+     DWORD   dwReserved;
+     PCWSTR  pwszServerName;
+ } SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA, *PSSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA;
+ 
+ #define SSL_KEY_PIN_ERROR_TEXT_LENGTH   512
+-typedef struct _SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS {
+     DWORD   cbSize;
+     LONG    lError;
+     WCHAR   wszErrorText[SSL_KEY_PIN_ERROR_TEXT_LENGTH];  // Localized
+@@ -20747,7 +20748,7 @@ typedef struct _SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS {
+ //  pvExtraPolicyStatus must be set to point to the following
+ //  CT_EXTRA_CHAIN_POLICY_STATUS data structure
+ //--------------------------------------------------------------------------
+-typedef struct _CT_EXTRA_CERT_CHAIN_POLICY_STATUS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CT_EXTRA_CERT_CHAIN_POLICY_STATUS {
+     DWORD   cbSize;
+     LONG    lErrorStatus;
+     LONG    lErrorSubStatus;
 @@ -20830,7 +20831,7 @@ typedef struct _CT_EXTRA_CERT_CHAIN_POLICY_STATUS {
  // *pdwSkip returns the character count of skipped strings, optional
  // *pdwFlags returns the actual format used in the conversion, optional
  //--------------------------------------------------------------------------
 -_Success_(return)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
  WINAPI
@@ -2793,7 +3482,7 @@ index 924c87c472..23a8e1d134 100644
  // *pdwFlags returns the actual format used in the conversion, optional
  //--------------------------------------------------------------------------
 -_Success_(return)
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
  WINAPI
@@ -2811,7 +3500,7 @@ index 924c87c472..23a8e1d134 100644
  // including null-terminator
  //--------------------------------------------------------------------------
 -_Success_(return)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
  WINAPI
@@ -2828,7 +3517,7 @@ index 924c87c472..23a8e1d134 100644
  // including null-terminator
  //--------------------------------------------------------------------------
 -_Success_(return)
-+_Windows_SupportedOS_WindowsXP_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
  WINAPI
@@ -2892,6 +3581,24 @@ index 924c87c472..23a8e1d134 100644
  BOOL
  WINAPI
  PFXExportCertStore(
+@@ -21292,7 +21293,7 @@ typedef struct _CERT_SERVER_OCSP_RESPONSE_CONTEXT
+ typedef const CERT_SERVER_OCSP_RESPONSE_CONTEXT
+     *PCCERT_SERVER_OCSP_RESPONSE_CONTEXT;
+ 
+-struct _CERT_SERVER_OCSP_RESPONSE_CONTEXT {
++struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_SERVER_OCSP_RESPONSE_CONTEXT {
+     DWORD       cbSize;
+     BYTE        *pbEncodedOcspResponse;
+     DWORD       cbEncodedOcspResponse;
+@@ -21317,7 +21318,7 @@ typedef VOID (CALLBACK *PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK)(
+ //+-------------------------------------------------------------------------
+ //  Server OCSP response open parameters
+ //--------------------------------------------------------------------------
+-typedef struct _CERT_SERVER_OCSP_RESPONSE_OPEN_PARA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CERT_SERVER_OCSP_RESPONSE_OPEN_PARA {
+     DWORD                                           cbSize;
+     DWORD                                           dwFlags;
+ 
 @@ -21372,7 +21373,7 @@ typedef struct _CERT_SERVER_OCSP_RESPONSE_OPEN_PARA {
  //  CertCloseServerOcspResponse() must be called to close the returned
  //  handle.
@@ -3027,6 +3734,15 @@ index 924c87c472..23a8e1d134 100644
      _In_opt_ LPVOID pPluginContext);
  
  
+@@ -22071,7 +22072,7 @@ typedef void (WINAPI *PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER)(
+     _In_ PCRYPT_DATA_BLOB pIdentifier);
+ 
+ 
+-typedef struct _CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE
+ {
+     _Field_range_(sizeof(CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE), sizeof(CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE)) DWORD cbSize;
+     PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET pfnGet;
 @@ -22205,4 +22206,1685 @@ typedef WINCRYPT32API BOOL (WINAPI *PFN_CERT_IS_WEAK_HASH)(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion

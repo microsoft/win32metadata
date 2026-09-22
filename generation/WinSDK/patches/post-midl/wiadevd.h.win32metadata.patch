@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h b/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
-index e7e196b86d..fa59fb7d57 100644
+index e7e196b86d..7e23f91320 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index e7e196b86d..fa59fb7d57 100644
  /****************************************************************************
  *
  *  (C) COPYRIGHT 1998-2000, MICROSOFT CORP.
+@@ -35,7 +36,7 @@ extern "C" {
+ 
+ #undef  INTERFACE
+ #define INTERFACE IWiaUIExtension2
+-typedef struct tagDEVICEDIALOGDATA2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagDEVICEDIALOGDATA2
+ {
+     DWORD           cbSize;           // Size of the structure in bytes
+     IWiaItem2       *pIWiaItemRoot;   // Valid root item
 @@ -57,7 +58,7 @@ DECLARE_INTERFACE_IID_(IWiaUIExtension2, IUnknown, "305600d7-5088-46d7-9a15-b77b
  
      // *** IWiaUIExtension2 methods ***
@@ -16,6 +25,15 @@ index e7e196b86d..fa59fb7d57 100644
  };
  
  // {305600d7-5088-46d7-9a15-b77b09cdba7a}
+@@ -65,7 +66,7 @@ DEFINE_GUID(IID_IWiaUIExtension2, 0x305600D7, 0x5088, 0x46D7, 0x9A, 0x15, 0xB7,
+ 
+ #endif //#if (_WIN32_WINNT >= 0x0600)
+ 
+-typedef struct tagDEVICEDIALOGDATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagDEVICEDIALOGDATA
+ {
+     DWORD            cbSize;           // Size of the structure in bytes
+     HWND             hwndParent;       // Parent window
 @@ -92,8 +93,8 @@ DECLARE_INTERFACE_IID_(IWiaUIExtension, IUnknown, "da319113-50ee-4c80-b460-57d00
  
      // *** IWiaUIExtension methods ***

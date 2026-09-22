@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h b/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
-index b4bcae7af2..bbeccaaf6d 100644
+index b4bcae7af2..3cd1afd440 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
 @@ -104,6 +104,7 @@ extern "C"{
@@ -20,7 +20,7 @@ index b4bcae7af2..bbeccaaf6d 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
@@ -29,7 +29,7 @@ index b4bcae7af2..bbeccaaf6d 100644
              _Out_opt_  ULONG *pceltFetched) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          

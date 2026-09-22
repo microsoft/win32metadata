@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
-index dee3a82100..9952ebd2bd 100644
+index dee3a82100..8d7e2d14de 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
 @@ -1,3 +1,4 @@
@@ -57,7 +57,7 @@ index dee3a82100..9952ebd2bd 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -_Check_return_ WINOLEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ WINOLEAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ WINOLEAPI
  CoInitializeEx(
 -    _In_opt_ LPVOID pvReserved,
 -    _In_ DWORD dwCoInit
@@ -672,7 +672,7 @@ index dee3a82100..9952ebd2bd 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -_Check_return_ WINOLEAPI
-+_Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ WINOLEAPI
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ _Win32_PreserveResult_ _Check_return_ WINOLEAPI
  CoGetTreatAsClass(
      _In_ REFCLSID clsidOld,
      _Out_ LPCLSID pClsidNew

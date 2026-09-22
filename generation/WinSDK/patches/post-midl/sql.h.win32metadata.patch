@@ -1,0 +1,200 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sql.h b/generation/WinSDK/RecompiledIdlHeaders/um/sql.h
+index 4e28c3269a..1b7398fbf5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sql.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sql.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************
+ *                                                       *
+ *   Copyright (C) Microsoft. All rights reserved.       *
+@@ -652,7 +653,7 @@ SQLRETURN  SQL_API SQLColAttribute (SQLHSTMT StatementHandle,
+ #endif
+ 
+ 
+-SQLRETURN  SQL_API SQLColumns(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLColumns(SQLHSTMT StatementHandle,
+            _In_reads_opt_(NameLength1) SQLCHAR *CatalogName, SQLSMALLINT NameLength1,
+            _In_reads_opt_(NameLength2) SQLCHAR *SchemaName, SQLSMALLINT NameLength2,
+            _In_reads_opt_(NameLength3) SQLCHAR *TableName, SQLSMALLINT NameLength3,
+@@ -664,7 +665,7 @@ SQLRETURN SQL_API SQLCompleteAsync(SQLSMALLINT    HandleType,
+                                    _Out_ RETCODE* AsyncRetCodePtr);
+ #endif
+ 
+-SQLRETURN  SQL_API SQLConnect(SQLHDBC ConnectionHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLConnect(SQLHDBC ConnectionHandle,
+            _In_reads_(NameLength1) SQLCHAR *ServerName, SQLSMALLINT NameLength1,
+            _In_reads_(NameLength2) SQLCHAR *UserName, SQLSMALLINT NameLength2,
+            _In_reads_(NameLength3) SQLCHAR *Authentication, SQLSMALLINT NameLength3);
+@@ -674,13 +675,13 @@ SQLRETURN  SQL_API SQLCopyDesc(SQLHDESC SourceDescHandle,
+            SQLHDESC TargetDescHandle);
+ #endif
+ 
+-SQLRETURN  SQL_API SQLDataSources(SQLHENV EnvironmentHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLDataSources(SQLHENV EnvironmentHandle,
+            SQLUSMALLINT Direction, _Out_writes_opt_(BufferLength1) SQLCHAR *ServerName,
+            SQLSMALLINT BufferLength1, _Out_opt_ SQLSMALLINT *NameLength1Ptr,
+            _Out_writes_opt_(BufferLength2) SQLCHAR *Description, SQLSMALLINT BufferLength2,
+            _Out_opt_ SQLSMALLINT *NameLength2Ptr);
+ 
+-SQLRETURN  SQL_API SQLDescribeCol(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLDescribeCol(SQLHSTMT StatementHandle,
+            SQLUSMALLINT ColumnNumber, _Out_writes_opt_(BufferLength) SQLCHAR *ColumnName,
+            SQLSMALLINT BufferLength, _Out_opt_ SQLSMALLINT *NameLength,
+            _Out_opt_ SQLSMALLINT *DataType, _Out_opt_ SQLULEN *ColumnSize,
+@@ -693,13 +694,13 @@ SQLRETURN  SQL_API SQLEndTran(SQLSMALLINT HandleType, SQLHANDLE Handle,
+            SQLSMALLINT CompletionType);
+ #endif
+ 
+-SQLRETURN  SQL_API SQLError(SQLHENV EnvironmentHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLError(SQLHENV EnvironmentHandle,
+            SQLHDBC ConnectionHandle, SQLHSTMT StatementHandle,
+            _Out_writes_(6) SQLCHAR *Sqlstate, _Out_opt_ SQLINTEGER *NativeError,
+            _Out_writes_opt_(BufferLength) SQLCHAR *MessageText, SQLSMALLINT BufferLength,
+            _Out_opt_ SQLSMALLINT *TextLength);
+ 
+-SQLRETURN  SQL_API SQLExecDirect
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLExecDirect
+ (
+     SQLHSTMT StatementHandle,
+     _In_reads_opt_(TextLength) SQLCHAR* StatementText,
+@@ -727,7 +728,7 @@ SQLRETURN  SQL_API SQLFreeStmt(SQLHSTMT StatementHandle,
+            SQLUSMALLINT Option);
+ 
+ #if (ODBCVER >= 0x0300)
+-SQLRETURN  SQL_API SQLGetConnectAttr(SQLHDBC ConnectionHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetConnectAttr(SQLHDBC ConnectionHandle,
+            SQLINTEGER Attribute, _Out_writes_opt_(_Inexpressible_(BufferLength)) SQLPOINTER Value,
+            SQLINTEGER BufferLength, _Out_opt_ SQLINTEGER *StringLengthPtr);
+ __declspec(deprecated("ODBC API: SQLGetConnectOption is deprecated. Please use SQLGetConnectAttr instead."))
+@@ -736,7 +737,7 @@ __declspec(deprecated("ODBC API: SQLGetConnectOption is deprecated. Please use S
+ SQLRETURN  SQL_API SQLGetConnectOption(SQLHDBC ConnectionHandle,
+            SQLUSMALLINT Option, SQLPOINTER Value);
+ 
+-SQLRETURN  SQL_API SQLGetCursorName
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetCursorName
+ (
+     SQLHSTMT StatementHandle,
+     _Out_writes_opt_(BufferLength) SQLCHAR *CursorName,
+@@ -751,24 +752,24 @@ SQLRETURN  SQL_API SQLGetData(SQLHSTMT StatementHandle,
+            _Out_opt_ SQLLEN *StrLen_or_IndPtr);
+ 
+ #if (ODBCVER >= 0x0300)
+-SQLRETURN  SQL_API SQLGetDescField(SQLHDESC DescriptorHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetDescField(SQLHDESC DescriptorHandle,
+            SQLSMALLINT RecNumber, SQLSMALLINT FieldIdentifier,
+            _Out_writes_opt_(_Inexpressible_(BufferLength)) SQLPOINTER Value, SQLINTEGER BufferLength,
+            _Out_opt_ SQLINTEGER *StringLength);
+ 
+-SQLRETURN  SQL_API SQLGetDescRec(SQLHDESC DescriptorHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetDescRec(SQLHDESC DescriptorHandle,
+            SQLSMALLINT RecNumber, _Out_writes_opt_(BufferLength) SQLCHAR *Name,
+            SQLSMALLINT BufferLength, _Out_opt_ SQLSMALLINT *StringLengthPtr,
+            _Out_opt_ SQLSMALLINT *TypePtr, _Out_opt_ SQLSMALLINT *SubTypePtr,
+            _Out_opt_ SQLLEN     *LengthPtr, _Out_opt_ SQLSMALLINT *PrecisionPtr,
+            _Out_opt_ SQLSMALLINT *ScalePtr, _Out_opt_ SQLSMALLINT *NullablePtr);
+ 
+-SQLRETURN  SQL_API SQLGetDiagField(SQLSMALLINT HandleType, SQLHANDLE Handle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetDiagField(SQLSMALLINT HandleType, SQLHANDLE Handle,
+            SQLSMALLINT RecNumber, SQLSMALLINT DiagIdentifier,
+            _Out_writes_opt_(_Inexpressible_(BufferLength)) SQLPOINTER DiagInfo, SQLSMALLINT BufferLength,
+            _Out_opt_ SQLSMALLINT *StringLength);
+ 
+-SQLRETURN  SQL_API SQLGetDiagRec
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetDiagRec
+ (
+     SQLSMALLINT HandleType,
+     SQLHANDLE Handle,
+@@ -791,13 +792,13 @@ SQLRETURN  SQL_API SQLGetFunctions(SQLHDBC ConnectionHandle,
+            _Out_writes_opt_(_Inexpressible_("Buffer length pfExists points to depends on fFunction value.")) 
+            SQLUSMALLINT *Supported);
+ 
+-_Success_(return == SQL_SUCCESS)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Success_(return == SQL_SUCCESS)
+ SQLRETURN  SQL_API SQLGetInfo(SQLHDBC ConnectionHandle,
+            SQLUSMALLINT InfoType, _Out_writes_bytes_opt_(BufferLength) SQLPOINTER InfoValue,
+            SQLSMALLINT BufferLength, _Out_opt_ SQLSMALLINT *StringLengthPtr);
+ 
+ #if (ODBCVER >= 0x0300)
+-SQLRETURN  SQL_API SQLGetStmtAttr(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetStmtAttr(SQLHSTMT StatementHandle,
+            SQLINTEGER Attribute, _Out_writes_opt_(_Inexpressible_(BufferLength)) SQLPOINTER Value,
+            SQLINTEGER BufferLength, _Out_opt_ SQLINTEGER *StringLength);
+ __declspec(deprecated("ODBC API: SQLGetStmtOption is deprecated. Please use SQLGetStmtAttr instead."))
+@@ -806,7 +807,7 @@ __declspec(deprecated("ODBC API: SQLGetStmtOption is deprecated. Please use SQLG
+ SQLRETURN  SQL_API SQLGetStmtOption(SQLHSTMT StatementHandle,
+            SQLUSMALLINT Option, SQLPOINTER Value);
+ 
+-SQLRETURN  SQL_API SQLGetTypeInfo(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLGetTypeInfo(SQLHSTMT StatementHandle,
+            SQLSMALLINT DataType);
+ 
+ SQLRETURN  SQL_API SQLNumResultCols(SQLHSTMT StatementHandle,
+@@ -815,7 +816,7 @@ SQLRETURN  SQL_API SQLNumResultCols(SQLHSTMT StatementHandle,
+ SQLRETURN  SQL_API SQLParamData(SQLHSTMT StatementHandle,
+            _Out_opt_ SQLPOINTER *Value);
+ 
+-SQLRETURN  SQL_API SQLPrepare
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLPrepare
+ (
+     SQLHSTMT StatementHandle,
+     _In_reads_(TextLength) SQLCHAR* StatementText,
+@@ -829,7 +830,7 @@ SQLRETURN  SQL_API SQLRowCount(_In_ SQLHSTMT StatementHandle,
+                                _Out_ SQLLEN* RowCount);
+ 
+ #if (ODBCVER >= 0x0300)
+-SQLRETURN  SQL_API SQLSetConnectAttr(SQLHDBC ConnectionHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLSetConnectAttr(SQLHDBC ConnectionHandle,
+            SQLINTEGER Attribute, _In_reads_bytes_opt_(StringLength) SQLPOINTER Value,
+            SQLINTEGER StringLength);
+ __declspec(deprecated("ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead."))
+@@ -838,7 +839,7 @@ __declspec(deprecated("ODBC API: SQLSetConnectOption is deprecated. Please use S
+ SQLRETURN  SQL_API SQLSetConnectOption(SQLHDBC ConnectionHandle,
+            SQLUSMALLINT Option, SQLULEN Value);
+ 
+-SQLRETURN  SQL_API SQLSetCursorName
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLSetCursorName
+ (
+     SQLHSTMT StatementHandle,
+     _In_reads_(NameLength) SQLCHAR* CursorName,
+@@ -846,7 +847,7 @@ SQLRETURN  SQL_API SQLSetCursorName
+ );
+ 
+ #if (ODBCVER >= 0x0300)
+-SQLRETURN  SQL_API SQLSetDescField(SQLHDESC DescriptorHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLSetDescField(SQLHDESC DescriptorHandle,
+            SQLSMALLINT RecNumber, SQLSMALLINT FieldIdentifier,
+            _In_reads_(_Inexpressible_(BufferLength)) SQLPOINTER Value, SQLINTEGER BufferLength);
+ 
+@@ -870,7 +871,7 @@ SQLRETURN  SQL_API SQLSetParam(SQLHSTMT StatementHandle,
+            _Inout_ SQLLEN *StrLen_or_Ind);
+ 
+ #if (ODBCVER >= 0x0300)
+-SQLRETURN  SQL_API SQLSetStmtAttr(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLSetStmtAttr(SQLHSTMT StatementHandle,
+            SQLINTEGER Attribute, _In_reads_(_Inexpressible_(StringLength)) SQLPOINTER Value,
+            SQLINTEGER StringLength);
+ __declspec(deprecated("ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead."))
+@@ -879,20 +880,20 @@ __declspec(deprecated("ODBC API: SQLSetStmtOption is deprecated. Please use SQLS
+ SQLRETURN  SQL_API SQLSetStmtOption(SQLHSTMT StatementHandle,
+            SQLUSMALLINT Option, SQLULEN Value);
+ 
+-SQLRETURN  SQL_API SQLSpecialColumns(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLSpecialColumns(SQLHSTMT StatementHandle,
+            SQLUSMALLINT IdentifierType, 
+            _In_reads_opt_(NameLength1) SQLCHAR *CatalogName, SQLSMALLINT NameLength1,
+            _In_reads_opt_(NameLength2) SQLCHAR *SchemaName, SQLSMALLINT NameLength2, 
+            _In_reads_opt_(NameLength3) SQLCHAR *TableName, SQLSMALLINT NameLength3, 
+            SQLUSMALLINT Scope, SQLUSMALLINT Nullable);
+ 
+-SQLRETURN  SQL_API SQLStatistics(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLStatistics(SQLHSTMT StatementHandle,
+            _In_reads_opt_(NameLength1) SQLCHAR *CatalogName, SQLSMALLINT NameLength1,
+            _In_reads_opt_(NameLength2) SQLCHAR *SchemaName, SQLSMALLINT NameLength2,
+            _In_reads_opt_(NameLength3) SQLCHAR *TableName, SQLSMALLINT NameLength3,
+            SQLUSMALLINT Unique, SQLUSMALLINT Reserved);
+ 
+-SQLRETURN  SQL_API SQLTables(SQLHSTMT StatementHandle,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN  SQL_API SQLTables(SQLHSTMT StatementHandle,
+            _In_reads_opt_(NameLength1) SQLCHAR *CatalogName, SQLSMALLINT NameLength1,
+            _In_reads_opt_(NameLength2) SQLCHAR *SchemaName, SQLSMALLINT NameLength2,
+            _In_reads_opt_(NameLength3) SQLCHAR *TableName, SQLSMALLINT NameLength3,

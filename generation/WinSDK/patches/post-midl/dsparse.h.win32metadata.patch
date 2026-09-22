@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
-index 885f3d642d..99a4fb12c0 100644
+index 885f3d642d..bd97322a88 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 @@ -27,6 +27,7 @@ Notes:
@@ -23,7 +23,7 @@ index 885f3d642d..99a4fb12c0 100644
  //
  //
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  _Success_(return == ERROR_SUCCESS)
@@ -32,7 +32,7 @@ index 885f3d642d..99a4fb12c0 100644
      _Out_writes_to_opt_(*pcSpnLength, *pcSpnLength) LPWSTR pszSpn
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  _Success_(return == ERROR_SUCCESS)
@@ -41,7 +41,7 @@ index 885f3d642d..99a4fb12c0 100644
  // All arguments except pszSpn are optional.
  //
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  DSPARSE
@@ -50,7 +50,7 @@ index 885f3d642d..99a4fb12c0 100644
      _Out_opt_ USHORT *pInstancePort
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  DSPARSE
@@ -59,38 +59,70 @@ index 885f3d642d..99a4fb12c0 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  _Success_(return == 0)
  DSPARSE
-@@ -273,6 +284,8 @@ DsQuoteRdnValueW(
-     _Out_writes_to_(*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPWCH    psQuotedRdnValue
+@@ -270,9 +281,11 @@ DsQuoteRdnValueW(
+     DWORD    cUnquotedRdnValueLength,
+     _In_reads_(cUnquotedRdnValueLength) IN     LPCWCH   psUnquotedRdnValue,
+     _Inout_ DWORD    *pcQuotedRdnValueLength,
+-    _Out_writes_to_(*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPWCH    psQuotedRdnValue
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_to_(*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPWCH    psQuotedRdnValue
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  _Success_(return == 0)
  DSPARSE
+@@ -280,9 +293,9 @@ DWORD
+ WINAPI
+ DsQuoteRdnValueA(
+     DWORD    cUnquotedRdnValueLength,
+-    _In_reads_ (cUnquotedRdnValueLength) IN     LPCCH    psUnquotedRdnValue,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_ (cUnquotedRdnValueLength) IN     LPCCH    psUnquotedRdnValue,
+     _Inout_ DWORD    *pcQuotedRdnValueLength,
+-    _Out_writes_to_ (*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPCH     psQuotedRdnValue
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_to_ (*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPCH     psQuotedRdnValue
+ );
+ 
+ #ifdef UNICODE
 @@ -371,6 +384,8 @@ Return Value:
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  _Success_(return == 0)
  DSPARSE
-@@ -383,6 +398,8 @@ DsUnquoteRdnValueW(
-     _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPWCH    psUnquotedRdnValue
+@@ -380,9 +395,11 @@ DsUnquoteRdnValueW(
+     DWORD    cQuotedRdnValueLength,
+     _In_reads_ (cQuotedRdnValueLength) LPCWCH   psQuotedRdnValue,
+     _Inout_ DWORD    *pcUnquotedRdnValueLength,
+-    _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPWCH    psUnquotedRdnValue
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPWCH    psUnquotedRdnValue
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  _Check_return_
  _Success_(return == 0)
  DSPARSE
+@@ -390,9 +407,9 @@ DWORD
+ WINAPI
+ DsUnquoteRdnValueA(
+     DWORD    cQuotedRdnValueLength,
+-    _In_reads_ (cQuotedRdnValueLength) LPCCH    psQuotedRdnValue,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_ (cQuotedRdnValueLength) LPCCH    psQuotedRdnValue,
+     _Inout_ DWORD    *pcUnquotedRdnValueLength,
+-    _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPCH     psUnquotedRdnValue
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPCH     psUnquotedRdnValue
+ );
+ 
+ #ifdef UNICODE
 @@ -493,6 +510,8 @@ Return Value:
          All output parameters are undefined.
  
@@ -104,7 +136,7 @@ index 885f3d642d..99a4fb12c0 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  DSPARSE
  BOOL
@@ -113,7 +145,7 @@ index 885f3d642d..99a4fb12c0 100644
       _Out_opt_ DS_MANGLE_FOR *peDsMangleFor
       );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  DSPARSE
  BOOL
@@ -122,7 +154,7 @@ index 885f3d642d..99a4fb12c0 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  DSPARSE
  BOOL
@@ -131,7 +163,7 @@ index 885f3d642d..99a4fb12c0 100644
      DS_MANGLE_FOR eDsMangleForDesired
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  DSPARSE
  BOOL
@@ -140,7 +172,7 @@ index 885f3d642d..99a4fb12c0 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  DSPARSE
  BOOL
@@ -149,7 +181,7 @@ index 885f3d642d..99a4fb12c0 100644
      DS_MANGLE_FOR eDsMangleFor
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
 +
  DSPARSE
  BOOL
@@ -159,7 +191,7 @@ index 885f3d642d..99a4fb12c0 100644
  //
  
 -DSPARSE
-+_Win32_ImportLibrary_("dsparse.dll") DSPARSE
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("dsparse.dll") DSPARSE
  DWORD
  WINAPI
  DsCrackSpn2A(
@@ -168,7 +200,7 @@ index 885f3d642d..99a4fb12c0 100644
      );
  
 -DSPARSE
-+_Win32_ImportLibrary_("dsparse.dll") DSPARSE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("dsparse.dll") DSPARSE
  DWORD
  WINAPI
  DsCrackSpn2W(

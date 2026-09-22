@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h b/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h
-index 31f1eae70a..8fd7877212 100644
+index 31f1eae70a..68ba7d56dd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/traffic.h
 @@ -19,6 +19,7 @@ Abstract:
@@ -107,7 +107,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcOpenInterfaceA(
      _In_  LPSTR           pInterfaceName,
@@ -118,7 +118,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcOpenInterfaceW(
      _In_  LPWSTR          pInterfaceName,
@@ -154,7 +154,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcQueryFlowA(
      _In_                       LPSTR       pFlowName,
@@ -163,7 +163,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcQueryFlowW(
      _In_                       LPWSTR      pFlowName,
@@ -172,7 +172,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcSetFlowA(
      _In_                    LPSTR       pFlowName,
@@ -181,7 +181,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcSetFlowW(
      _In_                    LPWSTR      pFlowName,
@@ -202,7 +202,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcGetFlowNameA(
      _In_                  HANDLE  FlowHandle,
@@ -211,7 +211,7 @@ index 31f1eae70a..8fd7877212 100644
      );
  
 -ULONG
-+_Windows_SupportedOS_Windows2000_ ULONG
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ ULONG
  APIENTRY
  TcGetFlowNameW(
      _In_                  HANDLE  FlowHandle,

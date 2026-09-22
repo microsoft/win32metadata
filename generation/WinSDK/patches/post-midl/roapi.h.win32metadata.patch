@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
-index d7429649bb..e096f99482 100644
+index d7429649bb..c58b00e7d0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
 @@ -13,6 +13,7 @@
@@ -15,7 +15,7 @@ index d7429649bb..e096f99482 100644
  
  // Ro initialization flags; passed to Windows::Runtime::Initialize
 -typedef enum RO_INIT_TYPE
-+typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ RO_INIT_TYPE
++typedef enum   RO_INIT_TYPE
  {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)

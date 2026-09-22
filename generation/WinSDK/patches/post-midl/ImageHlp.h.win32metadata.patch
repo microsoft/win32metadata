@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
-index 1cdaaf102c..45ef15ccd5 100644
+index 1cdaaf102c..b8caf75d25 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -60,7 +60,7 @@ index 1cdaaf102c..45ef15ccd5 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_WindowsXP_ DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ DWORD
  IMAGEAPI
  MapFileAndCheckSumA (
      _In_ PCSTR Filename,
@@ -69,7 +69,7 @@ index 1cdaaf102c..45ef15ccd5 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_WindowsXP_ DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ DWORD
  IMAGEAPI
  MapFileAndCheckSumW (
      _In_ PCWSTR Filename,

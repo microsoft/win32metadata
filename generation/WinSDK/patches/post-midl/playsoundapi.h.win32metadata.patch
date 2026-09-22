@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
-index 3ee73f72b5..c6b0a139c7 100644
+index 3ee73f72b5..cbf1ef907d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,32 @@ index 3ee73f72b5..c6b0a139c7 100644
  /********************************************************************************
  *                                                                               *
  * playsoundapi.h -- ApiSet Contract for api-ms-win-mm-playsound-l1-1-0          *
-@@ -104,7 +105,7 @@ WINAPI
+@@ -34,7 +35,7 @@ extern "C" {
+ 
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ BOOL
+ WINAPI
+ sndPlaySoundA(
+@@ -42,7 +43,7 @@ sndPlaySoundA(
+     _In_ UINT fuSound
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ BOOL
+ WINAPI
+ sndPlaySoundW(
+@@ -98,22 +99,22 @@ BOOL WINAPI sndPlaySound(LPCSTR pszSound, UINT fuSound);
+ #define SND_ALIAS_SYSTEMEXCLAMATION     sndAlias('S', '!')
+ #define SND_ALIAS_SYSTEMDEFAULT         sndAlias('S', 'D')
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ BOOL
+ WINAPI
  PlaySoundA(
      _In_opt_ LPCSTR pszSound,
      _In_opt_ HMODULE hmod,
@@ -15,8 +40,10 @@ index 3ee73f72b5..c6b0a139c7 100644
 +    _Win32_AssociatedEnum_(SND_FLAGS) _In_ DWORD fdwSound
      );
  
- WINMMAPI
-@@ -113,7 +114,7 @@ WINAPI
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ BOOL
+ WINAPI
  PlaySoundW(
      _In_opt_ LPCWSTR pszSound,
      _In_opt_ HMODULE hmod,

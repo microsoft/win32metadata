@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h
-index db2e6ddba6..894980ba1b 100644
+index db2e6ddba6..e454a905e8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h
 @@ -1,3 +1,4 @@
@@ -22,6 +22,24 @@ index db2e6ddba6..894980ba1b 100644
          /* [case()] */ PRODUCTID TaskProductID;
          /* [case()] */ PRODUCTID TileProductID;
          /* [case()] */ PM_APPTASKTYPE AppTaskType;
+@@ -584,7 +585,7 @@ enum _tagPM_LOGO_SIZE
+         PM_LOGO_SIZE_INVALID	= ( PM_LOGO_SIZE_LARGE + 1 ) 
+     } 	PM_LOGO_SIZE;
+ 
+-typedef struct _tagPM_STARTAPPBLOB
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagPM_STARTAPPBLOB
+     {
+     ULONG cbSize;
+     GUID ProductID;
+@@ -605,7 +606,7 @@ typedef struct _tagPM_INVOCATIONINFO
+     /* [string] */ BSTR URIFragmentOrArgs;
+     } 	PM_INVOCATIONINFO;
+ 
+-typedef struct _tagPM_STARTTILEBLOB
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagPM_STARTTILEBLOB
+     {
+     ULONG cbSize;
+     PRODUCTID ProductID;
 @@ -3922,7 +3923,7 @@ EXTERN_C const IID IID_IPMExtensionFileExtensionInfo;
          
          virtual HRESULT STDMETHODCALLTYPE get_AllFileTypes( 

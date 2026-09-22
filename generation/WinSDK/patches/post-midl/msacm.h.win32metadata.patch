@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
-index 2f68eb6c5c..5bfcefe0b8 100644
+index 2f68eb6c5c..6498527ee7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
 @@ -1,3 +1,4 @@
@@ -48,7 +48,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmDriverAddA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddA
  (
      LPHACMDRIVERID          phadid,
      HINSTANCE               hinstModule,
@@ -57,7 +57,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmDriverAddW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddW
  (
      LPHACMDRIVERID          phadid,
      HINSTANCE               hinstModule,
@@ -111,7 +111,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmDriverDetailsA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsA
  (
      HACMDRIVERID            hadid,
      LPACMDRIVERDETAILSA     padd,
@@ -119,7 +119,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmDriverDetailsW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsW
  (
      HACMDRIVERID            hadid,
      LPACMDRIVERDETAILSW     padd,
@@ -128,7 +128,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFormatTagDetailsA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsA
  (
      HACMDRIVER              had,
      LPACMFORMATTAGDETAILSA  paftd,
@@ -136,7 +136,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFormatTagDetailsW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsW
  (
      HACMDRIVER              had,
      LPACMFORMATTAGDETAILSW  paftd,
@@ -145,7 +145,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFormatTagEnumA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumA
  (
      HACMDRIVER              had,
      LPACMFORMATTAGDETAILSA  paftd,
@@ -154,7 +154,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFormatTagEnumW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumW
  (
      HACMDRIVER              had,
      LPACMFORMATTAGDETAILSW  paftd,
@@ -163,7 +163,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFormatDetailsA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsA
  (
      HACMDRIVER              had,
      LPACMFORMATDETAILSA     pafd,
@@ -171,7 +171,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFormatDetailsW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsW
  (
      HACMDRIVER              had,
      LPACMFORMATDETAILSW     pafd,
@@ -180,7 +180,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFormatEnumA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumA
  (
      HACMDRIVER              had,
      LPACMFORMATDETAILSA     pafd,
@@ -189,7 +189,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFormatEnumW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumW
  (
      HACMDRIVER              had,
      LPACMFORMATDETAILSW     pafd,
@@ -207,13 +207,13 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFormatChooseA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseA
  (
      LPACMFORMATCHOOSEA      pafmtc
  );
  
 -MMRESULT ACMAPI acmFormatChooseW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseW
  (
      LPACMFORMATCHOOSEW      pafmtc
  );
@@ -222,7 +222,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFilterTagDetailsA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsA
  (
      HACMDRIVER              had,
      LPACMFILTERTAGDETAILSA  paftd,
@@ -230,7 +230,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFilterTagDetailsW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsW
  (
      HACMDRIVER              had,
      LPACMFILTERTAGDETAILSW  paftd,
@@ -239,7 +239,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFilterTagEnumA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumA
  (
      HACMDRIVER              had,
      LPACMFILTERTAGDETAILSA  paftd,
@@ -248,7 +248,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFilterTagEnumW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumW
  (
      HACMDRIVER              had,
      LPACMFILTERTAGDETAILSW  paftd,
@@ -257,7 +257,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFilterDetailsA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsA
  (
      HACMDRIVER              had,
      LPACMFILTERDETAILSA     pafd,
@@ -265,7 +265,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFilterDetailsW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsW
  (
      HACMDRIVER              had,
      LPACMFILTERDETAILSW     pafd,
@@ -274,7 +274,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFilterEnumA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumA
  (
      HACMDRIVER              had,
      LPACMFILTERDETAILSA     pafd,
@@ -283,7 +283,7 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  );
  
 -MMRESULT ACMAPI acmFilterEnumW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumW
  (
      HACMDRIVER              had,
      LPACMFILTERDETAILSW     pafd,
@@ -292,13 +292,13 @@ index 2f68eb6c5c..5bfcefe0b8 100644
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFilterChooseA
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseA
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseA
  (
      LPACMFILTERCHOOSEA      pafltrc
  );
  
 -MMRESULT ACMAPI acmFilterChooseW
-+_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseW
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseW
  (
      LPACMFILTERCHOOSEW      pafltrc
  );

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
-index 6db741e19a..d8d12c6eb7 100644
+index 6db741e19a..97c4033314 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
 @@ -1,3 +1,4 @@
@@ -7,24 +7,89 @@ index 6db741e19a..d8d12c6eb7 100644
  /*++
  
  Copyright (c) 1996-1999  Microsoft Corporation
+@@ -396,7 +397,7 @@ typedef struct ldap {
+     //  Following parameters MAY match up to reference implementation of LDAP
+     //
+ 
+-    PCHAR   ld_host;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR   ld_host;
+     ULONG   ld_version;
+     UCHAR   ld_lberoptions;
+ 
+@@ -411,8 +412,8 @@ typedef struct ldap {
+     ULONG   ld_sizelimit;
+ 
+     ULONG   ld_errno;
+-    PCHAR   ld_matched;
+-    PCHAR   ld_error;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR   ld_matched;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR   ld_error;
+     ULONG   ld_msgid;
+ 
+     UCHAR Reserved3[(6*sizeof(ULONG))+1];
+@@ -448,7 +449,7 @@ typedef struct l_timeval {
+ 
+ typedef struct berval {
+     ULONG  bv_len;
+-    PCHAR  bv_val;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR  bv_val;
+ } LDAP_BERVAL, * PLDAP_BERVAL, BERVAL, * PBERVAL, BerValue;
+ 
+ //
+@@ -490,7 +491,7 @@ typedef struct ldapmsg {
+ 
+ typedef struct ldapcontrolA {
+ 
+-    PCHAR         ldctl_oid;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR         ldctl_oid;
+     struct berval ldctl_value;
+     BOOLEAN       ldctl_iscritical;
+ 
+@@ -498,7 +499,7 @@ typedef struct ldapcontrolA {
+ 
+ typedef struct ldapcontrolW {
+ 
+-    PWCHAR        ldctl_oid;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR        ldctl_oid;
+     struct berval ldctl_value;
+     BOOLEAN       ldctl_iscritical;
+ 
+@@ -538,7 +539,7 @@ typedef struct ldapcontrolW {
+ 
+ typedef struct ldapmodW {
+      ULONG     mod_op;
+-     PWCHAR    mod_type;
++     _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR    mod_type;
+      union {
+         PWCHAR  *modv_strvals;
+         struct berval   **modv_bvals;
+@@ -547,7 +548,7 @@ typedef struct ldapmodW {
+ 
+ typedef struct ldapmodA {
+      ULONG     mod_op;
+-     PCHAR     mod_type;
++     _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR     mod_type;
+      union {
+         PCHAR  *modv_strvals;
+         struct berval   **modv_bvals;
 @@ -596,14 +597,14 @@ typedef struct ldapmodA {
  //  multi-thread: ldap_open*, ldap_init*, and ldap_sslinit* calls are safe.
  //
  
 -WINLDAPAPI LDAP * LDAPAPI ldap_openW( _In_ const PWSTR HostName, ULONG PortNumber );
 -WINLDAPAPI LDAP * LDAPAPI ldap_openA( _In_ const PSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_openW( _In_ const PWSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_openA( _In_ const PSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_openW( _In_ const PWSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_openA( _In_ const PSTR HostName, ULONG PortNumber );
  
 -WINLDAPAPI LDAP * LDAPAPI ldap_initW( _In_ const PWSTR HostName, ULONG PortNumber );
 -WINLDAPAPI LDAP * LDAPAPI ldap_initA( _In_ const PSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_initW( _In_ const PWSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_initA( _In_ const PSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_initW( _In_ const PWSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_initA( _In_ const PSTR HostName, ULONG PortNumber );
  
 -WINLDAPAPI LDAP * LDAPAPI ldap_sslinitW( _In_ PWSTR HostName, ULONG PortNumber, int secure );
 -WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, int secure );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitW( _In_ PWSTR HostName, ULONG PortNumber, int secure );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, int secure );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitW( _In_ PWSTR HostName, ULONG PortNumber, int secure );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, int secure );
  
  //
  //  when calling ldap_init, you can call ldap_connect explicitly to have the
@@ -44,9 +109,9 @@ index 6db741e19a..d8d12c6eb7 100644
 -WINLDAPAPI LDAP * LDAPAPI ldap_open( _In_ PSTR HostName, ULONG PortNumber );
 -WINLDAPAPI LDAP * LDAPAPI ldap_init( _In_ PSTR HostName, ULONG PortNumber );
 -WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, int secure );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_open( _In_ PSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_init( _In_ PSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, int secure );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_open( _In_ PSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_init( _In_ PSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, int secure );
  
  #endif
  
@@ -56,8 +121,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI LDAP * LDAPAPI cldap_openW( _In_ PWSTR HostName, ULONG PortNumber );
 -WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_openW( _In_ PWSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_openW( _In_ PWSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
  
  
  #if LDAP_UNICODE
@@ -66,7 +131,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
  
  #endif
  
@@ -87,13 +152,13 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_get_option( LDAP *ld, int option, void *outvalue );
 -WINLDAPAPI ULONG LDAPAPI ldap_get_optionW( LDAP *ld, int option, void *outvalue );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_option( LDAP *ld, int option, void *outvalue );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_optionW( LDAP *ld, int option, void *outvalue );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_option( LDAP *ld, int option, void *outvalue );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_optionW( LDAP *ld, int option, void *outvalue );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_set_option( LDAP *ld, int option, const void *invalue );
 -WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *invalue );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_set_option( LDAP *ld, int option, const void *invalue );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *invalue );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_set_option( LDAP *ld, int option, const void *invalue );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *invalue );
  
  #if LDAP_UNICODE
  
@@ -105,19 +170,19 @@ index 6db741e19a..d8d12c6eb7 100644
 -WINLDAPAPI ULONG LDAPAPI ldap_simple_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
 -WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
 -WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
 -WINLDAPAPI ULONG LDAPAPI ldap_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
 -WINLDAPAPI ULONG LDAPAPI ldap_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
 -WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bindW( LDAP *ld, _In_opt_ PWSTR dn, _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_ PWCHAR cred, ULONG method );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bindA( LDAP *ld, _In_opt_ PSTR dn, _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_ PCHAR cred, ULONG method );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_ PWCHAR cred, ULONG method );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_ PCHAR cred, ULONG method );
  
  
  //
@@ -126,7 +191,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 - WINLDAPAPI INT LDAPAPI ldap_sasl_bindA(
-+ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bindA(
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bindA(
           LDAP  *ExternalHandle,
           _In_ const  PSTR DistName,
           _In_ const PSTR AuthMechanism,
@@ -135,7 +200,7 @@ index 6db741e19a..d8d12c6eb7 100644
           );
  
 - WINLDAPAPI INT LDAPAPI ldap_sasl_bindW(
-+ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bindW(
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bindW(
           LDAP  *ExternalHandle,
           _In_ const PWSTR DistName,
           _In_ const PWSTR AuthMechanism,
@@ -144,7 +209,7 @@ index 6db741e19a..d8d12c6eb7 100644
           );
  
 - WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sA(
-+ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sA(
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sA(
           LDAP  *ExternalHandle,
           _In_ const PSTR DistName,
           _In_ const PSTR AuthMechanism,
@@ -153,7 +218,7 @@ index 6db741e19a..d8d12c6eb7 100644
           );
  
 - WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sW(
-+ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sW(
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sW(
           LDAP  *ExternalHandle,
           _In_ const PWSTR DistName,
           _In_ const PWSTR AuthMechanism,
@@ -163,13 +228,13 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_simple_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
 -WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
 -WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
  
  #define ldap_sasl_bind ldap_sasl_bindA
  #define ldap_sasl_bind_s ldap_sasl_bind_sA
@@ -178,7 +243,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_searchW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_searchW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_searchW(
          LDAP                  *ld,
          _In_opt_ const PWSTR  base,     // distinguished name or ""
          ULONG                 scope,          // LDAP_SCOPE_xxxx
@@ -187,7 +252,7 @@ index 6db741e19a..d8d12c6eb7 100644
          ULONG                 attrsonly       // boolean on whether to only return attr names
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_searchA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_searchA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_searchA(
          LDAP                  *ld,
          _In_opt_ const PSTR   base,     // distinguished name or ""
          ULONG                 scope,          // LDAP_SCOPE_xxxx
@@ -196,7 +261,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
          ULONG                   scope,
@@ -205,7 +270,7 @@ index 6db741e19a..d8d12c6eb7 100644
          _Outptr_result_maybenull_ LDAPMessage     **res
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
          ULONG                   scope,
@@ -214,7 +279,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
          ULONG                   scope,
@@ -223,7 +288,7 @@ index 6db741e19a..d8d12c6eb7 100644
          _Outptr_result_maybenull_ PLDAPMessage     *res
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
          ULONG                   scope,
@@ -232,7 +297,7 @@ index 6db741e19a..d8d12c6eb7 100644
  
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
          ULONG                   scope,
@@ -241,7 +306,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
          ULONG                   scope,
@@ -250,7 +315,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
          ULONG                   scope,
@@ -259,7 +324,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
          ULONG                   scope,
@@ -268,7 +333,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search(
          LDAP            *ld,
          _In_opt_ PSTR   base,           // distinguished name or ""
          ULONG           scope,          // LDAP_SCOPE_xxxx
@@ -277,7 +342,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_s(
          LDAP            *ld,
          _In_opt_ PSTR   base,
          ULONG           scope,
@@ -286,7 +351,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_st(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_st(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_st(
          LDAP            *ld,
          _In_opt_ PSTR   base,
          ULONG           scope,
@@ -295,7 +360,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
          LDAP            *ld,
          _In_opt_ PSTR   base,
          ULONG           scope,
@@ -304,7 +369,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
          LDAP            *ld,
          _In_opt_ PSTR   base,
          ULONG           scope,
@@ -313,14 +378,14 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI
  ldap_check_filterW(
          LDAP    *ld,
          _In_ PWSTR  SearchFilter
      );
  
 -WINLDAPAPI ULONG LDAPAPI
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI
  ldap_check_filterA(
          LDAP    *ld,
          _In_ PSTR   SearchFilter
@@ -330,16 +395,16 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modifyW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
 -WINLDAPAPI ULONG LDAPAPI ldap_modifyA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modifyW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modifyA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modifyW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modifyA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
          LDAPModW *mods[],
@@ -348,7 +413,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
          LDAP *ld,
          _In_ const PSTR dn,
          LDAPModA *mods[],
@@ -357,7 +422,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
          LDAPModW *mods[],
@@ -366,7 +431,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
          LDAPModA *mods[],
@@ -376,11 +441,11 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_s( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_s( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_s( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
          LDAP *ld,
          const PSTR dn,
          LDAPModA *mods[],
@@ -389,7 +454,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
          LDAP *ld,
          const PSTR dn,
          LDAPModA *mods[],
@@ -398,14 +463,14 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn2W (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2W (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2W (
      LDAP    *ExternalHandle,
      _In_ const PWSTR  DistinguishedName,
      _In_ const PWSTR  NewDistinguishedName,
      INT     DeleteOldRdn
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName,
@@ -414,27 +479,27 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdnW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdnW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdnW (
      LDAP    *ExternalHandle,
      _In_ const PWSTR   DistinguishedName,
      _In_ const PWSTR   NewDistinguishedName
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdnA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdnA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdnA (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sW (
      LDAP    *ExternalHandle,
      _In_ const PWSTR   DistinguishedName,
      _In_ const PWSTR   NewDistinguishedName,
      INT     DeleteOldRdn
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName,
@@ -442,13 +507,13 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sW (
      LDAP    *ExternalHandle,
      _In_ const PWSTR   DistinguishedName,
      _In_ const PWSTR   NewDistinguishedName
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName
@@ -457,27 +522,27 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn2 (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2 (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2 (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName,
      INT     DeleteOldRdn
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_s (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_s (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_s (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName,
      INT     DeleteOldRdn
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
      _In_ const PSTR   NewDistinguishedName
@@ -486,7 +551,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
          _In_ const PWSTR NewRDN,
@@ -495,7 +560,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
          LDAP *ld,
          _In_ const PSTR dn,
          _In_ const PSTR NewRDN,
@@ -504,7 +569,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
          _In_ const PWSTR NewRDN,
@@ -513,7 +578,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
          _In_ const PSTR NewRDN,
@@ -522,7 +587,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
          LDAP *ld,
          const PSTR dn,
          const PSTR NewRDN,
@@ -531,7 +596,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
          LDAP *ld,
          const PSTR dn,
          const PSTR NewRDN,
@@ -541,16 +606,16 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_addW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
 -WINLDAPAPI ULONG LDAPAPI ldap_addA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_addW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_addA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_addW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_addA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
 -WINLDAPAPI ULONG LDAPAPI ldap_add_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
          LDAPModW *attrs[],
@@ -559,7 +624,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
          LDAP *ld,
          _In_ const PSTR dn,
          LDAPModA *attrs[],
@@ -568,7 +633,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
          LDAPModW *attrs[],
@@ -577,7 +642,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
          LDAPModA *attrs[],
@@ -587,11 +652,11 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
 -WINLDAPAPI ULONG LDAPAPI ldap_add_s( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_s( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_s( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
          LDAP *ld,
          const PSTR dn,
          LDAPModA *attrs[],
@@ -600,7 +665,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
          LDAP *ld,
          const PSTR dn,
          LDAPModA *attrs[],
@@ -610,13 +675,13 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compareW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
 -WINLDAPAPI ULONG LDAPAPI ldap_compareA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compareW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compareA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compareW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compareA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_sW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_sW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_sW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
  
  #if LDAP_UNICODE
  
@@ -626,8 +691,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
  
  #endif
  
@@ -636,7 +701,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
          _In_ const PWSTR Attr,
@@ -645,7 +710,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
          LDAP *ld,
          _In_ const PSTR dn,
          _In_ const PSTR Attr,
@@ -654,7 +719,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
          _In_ const PWSTR Attr,
@@ -663,7 +728,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
          _In_ const PSTR Attr,
@@ -672,7 +737,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
          LDAP *ld,
          const PSTR dn,
          const PSTR Attr,
@@ -681,7 +746,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
          LDAP *ld,
          const PSTR dn,
          const PSTR Attr,
@@ -691,16 +756,16 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_deleteW( LDAP *ld, _In_ const PWSTR dn );
 -WINLDAPAPI ULONG LDAPAPI ldap_deleteA( LDAP *ld, _In_ const PSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_deleteW( LDAP *ld, _In_ const PWSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_deleteA( LDAP *ld, _In_ const PSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_deleteW( LDAP *ld, _In_ const PWSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_deleteA( LDAP *ld, _In_ const PSTR dn );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_sW( LDAP *ld, _In_ const PWSTR dn );
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_sA( LDAP *ld, _In_ const PSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_sW( LDAP *ld, _In_ const PWSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_sA( LDAP *ld, _In_ const PSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_sW( LDAP *ld, _In_ const PWSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_sA( LDAP *ld, _In_ const PSTR dn );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
          PLDAPControlW   *ServerControls,
@@ -709,7 +774,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
          LDAP *ld,
          _In_ const PSTR dn,
          PLDAPControlA   *ServerControls,
@@ -718,7 +783,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
          PLDAPControlW   *ServerControls,
@@ -726,7 +791,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
          PLDAPControlA   *ServerControls,
@@ -736,11 +801,11 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete( LDAP *ld, _In_ PSTR dn );
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_s( LDAP *ld, _In_ PSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete( LDAP *ld, _In_ PSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_s( LDAP *ld, _In_ PSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete( LDAP *ld, _In_ PSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_s( LDAP *ld, _In_ PSTR dn );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
          LDAP *ld,
          const PSTR dn,
          PLDAPControlA   *ServerControls,
@@ -749,7 +814,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
          LDAP *ld,
          const PSTR dn,
          PLDAPControlA   *ServerControls,
@@ -794,7 +859,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //  multi-thread: ldap_parse_result call is thread safe
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
          ULONG *ReturnCode,                             // returned by server
@@ -803,7 +868,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
          ULONG *ReturnCode,                            // returned by server
@@ -812,7 +877,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
          LDAP           *Connection,
          LDAPMessage    *ResultMessage,      // returned by server
          _Outptr_opt_result_maybenull_ PSTR          *ResultOID,          // free with ldap_memfree
@@ -821,7 +886,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
          LDAP           *Connection,
          LDAPMessage    *ResultMessage,      // returned by server
          _Outptr_opt_result_maybenull_ PWSTR          *ResultOID,         // free with ldap_memfree
@@ -830,22 +895,22 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_controls_freeA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_freeA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_freeA (
          LDAPControlA **Controls
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_control_freeA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_freeA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_freeA (
          LDAPControlA *Controls
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_controls_freeW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_freeW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_freeW (
          LDAPControlW **Control
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
          LDAPControlW *Control
          );
  
@@ -854,12 +919,12 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_free_controlsW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsW (
          LDAPControlW **Controls
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
          LDAPControlA **Controls
          );
  
@@ -868,7 +933,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #define ldap_parse_extended_result ldap_parse_extended_resultA
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
          ULONG *ReturnCode OPTIONAL,         // returned by server
@@ -877,17 +942,17 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_controls_free (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_free (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_free (
          LDAPControlA **Controls
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_control_free (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_free (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_free (
          LDAPControlA *Control
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
          LDAPControlA **Controls
          );
  
@@ -897,8 +962,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI PWCHAR LDAPAPI ldap_err2stringW( ULONG err );
 -WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_err2stringW( ULONG err );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_err2stringW( ULONG err );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
  
  #if LDAP_UNICODE
  
@@ -907,7 +972,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
  
  #endif
  
@@ -944,19 +1009,28 @@ index 6db741e19a..d8d12c6eb7 100644
  
  //
  //  A BerElement really maps out to a C++ class object that does BER encoding.
+@@ -2020,7 +2021,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_count_entries( LDAP *ld, LDAPMessage *res );
+ //
+ 
+ typedef struct berelement {
+-    PCHAR   opaque;     // this is an opaque structure used just for
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR   opaque;     // this is an opaque structure used just for
+                         // compatibility with reference implementation
+ } BerElement;
+ #define NULLBER ((BerElement *) 0)
 @@ -2031,13 +2032,13 @@ typedef struct berelement {
  //  multi-threaded apps) so it should not be freed.
  //
  
 -WINLDAPAPI PWCHAR LDAPAPI ldap_first_attributeW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_first_attributeW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_first_attributeW(
          LDAP            *ld,
          LDAPMessage     *entry,
          BerElement      **ptr
          );
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
          LDAP            *ld,
          LDAPMessage     *entry,
          BerElement      **ptr
@@ -965,7 +1039,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
          LDAP            *ld,
          LDAPMessage     *entry,
          BerElement      **ptr
@@ -974,14 +1048,14 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI PWCHAR LDAPAPI ldap_next_attributeW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_next_attributeW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_next_attributeW(
          LDAP            *ld,
          LDAPMessage     *entry,
          BerElement      *ptr
          );
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
          LDAP            *ld,
          LDAPMessage     *entry,
          BerElement      *ptr
@@ -990,7 +1064,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
          LDAP            *ld,
          LDAPMessage     *entry,
          BerElement      *ptr
@@ -999,13 +1073,13 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI _Ret_maybenull_ PWCHAR *LDAPAPI ldap_get_valuesW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PWCHAR *LDAPAPI ldap_get_valuesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PWCHAR *LDAPAPI ldap_get_valuesW(
          LDAP              *ld,
          LDAPMessage       *entry,
          _In_ const PWSTR  attr
          );
 -WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
          LDAP            *ld,
          LDAPMessage     *entry,
          _In_ const PSTR attr
@@ -1014,7 +1088,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
          LDAP            *ld,
          LDAPMessage     *entry,
          _In_ const PSTR attr
@@ -1023,13 +1097,13 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenW (
      LDAP            *ExternalHandle,
      LDAPMessage     *Message,
      _In_ const PWSTR          attr
      );
 -WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
      LDAP            *ExternalHandle,
      LDAPMessage     *Message,
      _In_ const PSTR           attr
@@ -1038,7 +1112,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
      LDAP            *ExternalHandle,
      LDAPMessage     *Message,
      _In_ const PSTR           attr
@@ -1048,8 +1122,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_count_valuesW( _In_opt_z_ PWCHAR *vals );
 -WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesW( _In_opt_z_ PWCHAR *vals );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesW( _In_opt_z_ PWCHAR *vals );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
  
  #if LDAP_UNICODE
  
@@ -1058,7 +1132,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
  
  #endif
  
@@ -1075,8 +1149,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI ULONG LDAPAPI ldap_value_freeW( _In_opt_z_ PWCHAR *vals );
 -WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_freeW( _In_opt_z_ PWCHAR *vals );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_freeW( _In_opt_z_ PWCHAR *vals );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
  
  #if LDAP_UNICODE
  
@@ -1085,7 +1159,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
  
  #endif
  
@@ -1103,8 +1177,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI PWCHAR LDAPAPI ldap_get_dnW( LDAP *ld, LDAPMessage *entry );
 -WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_get_dnW( LDAP *ld, LDAPMessage *entry );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_get_dnW( LDAP *ld, LDAPMessage *entry );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
  
  #if LDAP_UNICODE
  
@@ -1113,7 +1187,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
  
  #endif
  
@@ -1123,8 +1197,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI PWCHAR *LDAPAPI ldap_explode_dnW( _In_ const PWSTR dn, ULONG notypes );
 -WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR *LDAPAPI ldap_explode_dnW( _In_ const PWSTR dn, ULONG notypes );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR *LDAPAPI ldap_explode_dnW( _In_ const PWSTR dn, ULONG notypes );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
  
  #if LDAP_UNICODE
  
@@ -1133,7 +1207,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
  
  #endif
  
@@ -1143,8 +1217,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI PWCHAR LDAPAPI ldap_dn2ufnW( _In_ const PWSTR dn );
 -WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_dn2ufnW( _In_ const PWSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_dn2ufnW( _In_ const PWSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
  
  #if LDAP_UNICODE
  
@@ -1153,7 +1227,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
  
  #endif
  
@@ -1163,8 +1237,8 @@ index 6db741e19a..d8d12c6eb7 100644
  
 -WINLDAPAPI VOID LDAPAPI ldap_memfreeW( _In_ PWCHAR Block );
 -WINLDAPAPI VOID LDAPAPI ldap_memfreeA( _In_ PCHAR Block );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfreeW( _In_ PWCHAR Block );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfreeA( _In_ PCHAR Block );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfreeW( _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PWCHAR Block );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfreeA( _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCHAR Block );
  
 -WINLDAPAPI VOID LDAPAPI ber_bvfree( struct berval *bv );
 +_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ber_bvfree( struct berval *bv );
@@ -1176,7 +1250,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfree( _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCHAR Block );
  
  #endif
  
@@ -1185,12 +1259,12 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnW (
      _In_ const PWSTR ufn,
      _Outptr_ PWSTR *pDn
      );
 -WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
      _In_ const PSTR ufn,
      _Outptr_ PSTR *pDn
      );
@@ -1199,10 +1273,28 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_ufn2dn (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dn (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dn (
      _In_ const PSTR ufn,
      _Outptr_ PSTR *pDn
      );
+@@ -2385,7 +2386,7 @@ typedef struct ldapapiinfoW {
+     int    ldapai_api_version;      /* revision of API supported */
+     int    ldapai_protocol_version; /* highest LDAP version supported */
+     PWCHAR *ldapai_extensions;     /* names of API extensions */
+-    PWCHAR ldapai_vendor_name;     /* name of supplier */
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR ldapai_vendor_name;     /* name of supplier */
+     int    ldapai_vendor_version;   /* supplier-specific version times 100 */
+ 
+ } LDAPAPIInfoW;
+@@ -2403,7 +2404,7 @@ typedef struct ldap_apifeature_infoA {
+ typedef struct ldap_apifeature_infoW {
+     
+     int    ldapaif_info_version; /* version of this struct : LDAP_FEATURE_INFO_VERSION */
+-    PWCHAR ldapaif_name;         /* name of supported feature */
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR ldapaif_name;         /* name of supported feature */
+     int    ldapaif_version;      /* revision of supported feature */
+ 
+ } LDAPAPIFeatureInfoW;
 @@ -2426,7 +2427,7 @@ typedef struct ldap_apifeature_infoW {
  //  free all resources)
  //
@@ -1212,31 +1304,52 @@ index 6db741e19a..d8d12c6eb7 100644
      HANDLE hInstance
      );
  
-@@ -2458,13 +2459,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
+@@ -2458,16 +2459,16 @@ WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
  //  be used for attributes that really are raw binary.
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementW (
-    _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
+-   _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementW (
++   _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
     ULONG   sourceLength,
-    _Out_writes_bytes_opt_(destLength) PWCHAR   destFilterElement,
+-   _Out_writes_bytes_opt_(destLength) PWCHAR   destFilterElement,
++   _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_opt_(destLength) PWCHAR   destFilterElement,
     ULONG   destLength
     );
 -WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
-    _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
+-   _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
++   _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
     ULONG   sourceLength,
-    _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
-@@ -2477,7 +2478,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
+-   _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
++   _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
+    ULONG   destLength
+    );
+ 
+@@ -2477,10 +2478,10 @@ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
  
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
-    _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
+-   _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
++   _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
     ULONG   sourceLength,
-    _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
+-   _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
++   _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
+    ULONG   destLength
+    );
+ 
+@@ -2494,7 +2495,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
+ 
+ WINLDAPAPI ULONG LDAPAPI ldap_set_dbg_flags( ULONG NewFlags );
+ 
+-typedef ULONG (_cdecl *DBGPRINT)( PCCH Format, ... );
++typedef ULONG (_cdecl *DBGPRINT)( _WIN32META_ANNOTATION_("win32metadata:const") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCCH Format, ... );
+ 
+ WINLDAPAPI VOID LDAPAPI ldap_set_dbg_routine( DBGPRINT DebugPrintRoutine );
+ 
 @@ -2505,7 +2506,7 @@ WINLDAPAPI VOID LDAPAPI ldap_set_dbg_routine( DBGPRINT DebugPrintRoutine );
  //
  
@@ -1255,12 +1368,33 @@ index 6db741e19a..d8d12c6eb7 100644
  int LDAPAPI
  LdapUnicodeToUTF8(
      _In_reads_(cchSrc) LPCWSTR lpSrcStr,
+@@ -2541,16 +2542,16 @@ typedef struct ldapsearch LDAPSearch, *PLDAPSearch;
+ 
+ typedef struct ldapsortkeyW {
+ 
+-    PWCHAR  sk_attrtype;
+-    PWCHAR  sk_matchruleoid;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR  sk_attrtype;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR  sk_matchruleoid;
+     BOOLEAN sk_reverseorder;
+ 
+ } LDAPSortKeyW, *PLDAPSortKeyW;
+ 
+ typedef struct ldapsortkeyA {
+ 
+-    PCHAR   sk_attrtype;
+-    PCHAR   sk_matchruleoid;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR   sk_attrtype;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR   sk_matchruleoid;
+     BOOLEAN sk_reverseorder;
+ 
+ } LDAPSortKeyA, *PLDAPSortKeyA;
 @@ -2570,14 +2571,14 @@ typedef struct ldapsortkeyA {
  //  Use this one rather than ldap_encode_sort_control as this is per RFC.
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
          UCHAR           IsCritical,
@@ -1268,7 +1402,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPSortKeyW  *SortKeys,
          UCHAR           IsCritical,
@@ -1277,7 +1411,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPControlA  *Control,
          ULONG          *Result,
@@ -1285,7 +1419,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPControlW  *Control,
          ULONG          *Result,
@@ -1294,7 +1428,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
          UCHAR           IsCritical,
@@ -1302,7 +1436,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
          PLDAP           ExternalHandle,
          PLDAPControlA  *Control,
          ULONG          *Result,
@@ -1311,7 +1445,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPSortKeyW  *SortKeys,
          PLDAPControlW  Control,
@@ -1319,7 +1453,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
          PLDAPControlA  Control,
@@ -1328,7 +1462,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
          struct berval  *Cookie,
@@ -1337,7 +1471,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
          struct berval  *Cookie,
@@ -1346,7 +1480,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
          PLDAP           ExternalHandle,
          PLDAPControlW  *ServerControls,
          ULONG          *TotalCount,
@@ -1354,7 +1488,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
          PLDAP           ExternalHandle,
          PLDAPControlA  *ServerControls,
          ULONG          *TotalCount,
@@ -1363,7 +1497,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
          struct berval  *Cookie,
@@ -1372,7 +1506,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
          PLDAP           ExternalHandle,
          PLDAPControlA  *ServerControls,
          ULONG          *TotalCount,
@@ -1381,7 +1515,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #define LDAP_PAGED_RESULT_OID_STRING_W L"1.2.840.113556.1.4.319"
  
 -WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
          PLDAP           ExternalHandle,
          _In_ const PWSTR    DistinguishedName,
          ULONG           ScopeOfSearch,
@@ -1390,7 +1524,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
          PLDAP           ExternalHandle,
          _In_ const PSTR     DistinguishedName,
          ULONG           ScopeOfSearch,
@@ -1399,7 +1533,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
          PLDAP           ExternalHandle,
          const PSTR      DistinguishedName,
          ULONG           ScopeOfSearch,
@@ -1442,7 +1576,7 @@ index 6db741e19a..d8d12c6eb7 100644
  
  
 -WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
          PLDAP             ExternalHandle,
          PLDAPVLVInfo      VlvInfo,
          UCHAR             IsCritical,
@@ -1450,7 +1584,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
          PLDAP             ExternalHandle,
          PLDAPVLVInfo      VlvInfo,
          UCHAR             IsCritical,
@@ -1458,7 +1592,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
          PLDAP            ExternalHandle,
          PLDAPControlW   *Control,
          PULONG           TargetPos,
@@ -1467,7 +1601,7 @@ index 6db741e19a..d8d12c6eb7 100644
      );
  
 -WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
          PLDAP             ExternalHandle,
          PLDAPControlA    *Control,
          PULONG            TargetPos,
@@ -1476,7 +1610,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
      IN   PLDAP          ExternalHandle,
      OUT  PULONG         ServerReturnValue,
      OUT  LDAPMessage    **result,
@@ -1485,7 +1619,7 @@ index 6db741e19a..d8d12c6eb7 100644
  
  
 -WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
      IN   PLDAP          ExternalHandle,
      OUT  PULONG         ServerReturnValue,
      OUT  LDAPMessage    **result,
@@ -1526,14 +1660,14 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceW (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
          _Outptr_ PWCHAR **Referrals                   // free with ldap_value_freeW
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
          _Outptr_ PCHAR **Referrals                   // free with ldap_value_freeA
@@ -1542,7 +1676,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
          PCHAR **Referrals                   // free with ldap_value_free
@@ -1551,7 +1685,7 @@ index 6db741e19a..d8d12c6eb7 100644
  //
  
 -WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
          LDAP *ld,
          _In_ const PWSTR Oid,
          struct berval   *Data,
@@ -1560,7 +1694,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
          LDAP *ld,
          _In_ const PSTR Oid,
          struct berval   *Data,
@@ -1569,7 +1703,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
          LDAP            *ExternalHandle,
          _In_ PSTR           Oid,
          struct berval   *Data,
@@ -1578,7 +1712,7 @@ index 6db741e19a..d8d12c6eb7 100644
          );
  
 -WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
          LDAP            *ExternalHandle,
          _In_ PWSTR          Oid,
          struct berval   *Data,
@@ -1587,7 +1721,7 @@ index 6db741e19a..d8d12c6eb7 100644
  #else
  
 -WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
-+_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
          LDAP *ld,
          const PSTR Oid,
          struct berval   *Data,
@@ -1600,6 +1734,28 @@ index 6db741e19a..d8d12c6eb7 100644
          LDAP    *ld,
          ULONG   MessageNumber
          );
+@@ -3163,8 +3164,8 @@ WINLDAPAPI ULONG LDAPAPI ldap_close_extended_op(
+ typedef ULONG (_cdecl QUERYFORCONNECTION)(
+     PLDAP       PrimaryConnection,
+     PLDAP       ReferralFromConnection,
+-    PWCHAR      NewDN,
+-    PCHAR       HostName,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR      NewDN,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR       HostName,
+     ULONG       PortNumber,
+     PVOID       SecAuthIdentity,    // if null, use CurrentUser below
+     PVOID       CurrentUserToken,   // pointer to current user's LUID
+@@ -3187,8 +3188,8 @@ typedef ULONG (_cdecl QUERYFORCONNECTION)(
+ typedef BOOLEAN (_cdecl NOTIFYOFNEWCONNECTION) (
+     PLDAP       PrimaryConnection,
+     PLDAP       ReferralFromConnection,
+-    PWCHAR      NewDN,
+-    PCHAR       HostName,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR      NewDN,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR       HostName,
+     PLDAP       NewConnection,
+     ULONG       PortNumber,
+     PVOID       SecAuthIdentity,    // if null, use CurrentUser below
 @@ -3225,13 +3226,13 @@ typedef struct LdapReferralCallback {
  //  LdapGetLastError();
  //

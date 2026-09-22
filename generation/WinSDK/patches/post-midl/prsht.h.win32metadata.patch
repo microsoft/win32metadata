@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
-index 9b253c6dca..e9d4a4ca80 100644
+index 9b253c6dca..77e7c9a111 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
 @@ -1,4 +1,5 @@
@@ -32,10 +32,10 @@ index 9b253c6dca..e9d4a4ca80 100644
  #define PSCB_BUTTONPRESSED 3
  #endif  // NTDDI_VERSION >= NTDDI_WINXP
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) 
 +
  WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageA(LPCPROPSHEETPAGEA constPropSheetPagePointer);
-+_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) 
 +
  WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageW(LPCPROPSHEETPAGEW constPropSheetPagePointer);
 +_Windows_SupportedOS_WindowsVista_ 
@@ -43,10 +43,10 @@ index 9b253c6dca..e9d4a4ca80 100644
  WINCOMMCTRLAPI BOOL           WINAPI DestroyPropertySheetPage(HPROPSHEETPAGE);
  
 -WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
  
 -WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
  
  #ifdef UNICODE
  #define CreatePropertySheetPage  CreatePropertySheetPageW

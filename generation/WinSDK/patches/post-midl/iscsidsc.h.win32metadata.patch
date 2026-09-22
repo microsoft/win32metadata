@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h b/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h
-index 2b0657fc58..e9949aafd2 100644
+index 2b0657fc58..d8613df70e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/iscsidsc.h
 @@ -21,6 +21,7 @@
@@ -19,6 +19,54 @@ index 2b0657fc58..e9949aafd2 100644
  {   
     ULONGLONG AdapterUnique;
     ULONGLONG AdapterSpecific;
+@@ -650,8 +651,8 @@ typedef PISCSI_TARGET_PORTAL_GROUPA PISCSI_TARGET_PORTAL_GROUP;
+ typedef struct
+ {
+     ISCSI_UNIQUE_CONNECTION_ID ConnectionId;  // TODO: add connectionid to mof
+-    PWCHAR InitiatorAddress;
+-    PWCHAR TargetAddress;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR InitiatorAddress;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR TargetAddress;
+     USHORT InitiatorSocket;
+     USHORT TargetSocket;
+     UCHAR CID[2];
+@@ -660,9 +661,9 @@ typedef struct
+ typedef struct
+ {
+     ISCSI_UNIQUE_SESSION_ID SessionId;
+-    PWCHAR InitiatorName;
+-    PWCHAR TargetNodeName;
+-    PWCHAR TargetName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR InitiatorName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR TargetNodeName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR TargetName;
+     UCHAR ISID[6];
+     UCHAR TSID[2];
+     ULONG ConnectionCount;
+@@ -673,8 +674,8 @@ typedef struct
+ typedef struct
+ {
+     ISCSI_UNIQUE_CONNECTION_ID ConnectionId;  // TODO: add connectionid to mof
+-    PCHAR InitiatorAddress;
+-    PCHAR TargetAddress;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR InitiatorAddress;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR TargetAddress;
+     USHORT InitiatorSocket;
+     USHORT TargetSocket;
+     UCHAR CID[2];
+@@ -683,9 +684,9 @@ typedef struct
+ typedef struct
+ {
+     ISCSI_UNIQUE_SESSION_ID SessionId;
+-    PCHAR InitiatorName;
+-    PCHAR TargetNodeName;
+-    PCHAR TargetName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR InitiatorName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR TargetNodeName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR TargetName;
+     UCHAR ISID[6];
+     UCHAR TSID[2];
+     ULONG ConnectionCount;
 @@ -855,10 +856,14 @@ typedef struct
  
  #if ! (defined(MIDL_PASS))
@@ -29,7 +77,7 @@ index 2b0657fc58..e9949aafd2 100644
      PISCSI_VERSION_INFO VersionInfo
      );
  
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
 +
  ISDSC_STATUS ISDSC_API GetIScsiTargetInformationW(
      IN _In_ PWSTR TargetName,
@@ -38,7 +86,7 @@ index 2b0657fc58..e9949aafd2 100644
      OUT PVOID Buffer
      );
  
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ 
 +
  ISDSC_STATUS ISDSC_API GetIScsiTargetInformationA(
      IN _In_ PSTR TargetName,
@@ -48,20 +96,34 @@ index 2b0657fc58..e9949aafd2 100644
  #endif // UNICODE
  
 -ISDSC_STATUS ISDSC_API AddIScsiConnectionW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiConnectionW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiConnectionW(
      IN PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
      IN PVOID Reserved,
      IN ULONG InitiatorPortNumber,
-@@ -893,7 +900,7 @@ ISDSC_STATUS ISDSC_API AddIScsiConnectionW(
+@@ -889,11 +896,11 @@ ISDSC_STATUS ISDSC_API AddIScsiConnectionW(
+     IN OPTIONAL ISCSI_SECURITY_FLAGS SecurityFlags,
+     IN OPTIONAL PISCSI_LOGIN_OPTIONS LoginOptions,
+     IN OPTIONAL ULONG KeySize,
+-    IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
      OUT OPTIONAL PISCSI_UNIQUE_CONNECTION_ID ConnectionId
      );
      
 -ISDSC_STATUS ISDSC_API AddIScsiConnectionA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiConnectionA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiConnectionA(
      IN PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
      IN PVOID Reserved,
      IN ULONG InitiatorPortNumber,
-@@ -912,18 +919,18 @@ ISDSC_STATUS ISDSC_API AddIScsiConnectionA(
+@@ -901,7 +908,7 @@ ISDSC_STATUS ISDSC_API AddIScsiConnectionA(
+     IN OPTIONAL ISCSI_SECURITY_FLAGS SecurityFlags,
+     IN OPTIONAL PISCSI_LOGIN_OPTIONS LoginOptions,
+     IN OPTIONAL ULONG KeySize,
+-    IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
+     OUT OPTIONAL PISCSI_UNIQUE_CONNECTION_ID ConnectionId
+     );
+     
+@@ -912,21 +919,21 @@ ISDSC_STATUS ISDSC_API AddIScsiConnectionA(
  #endif // UNICODE
  
  
@@ -72,23 +134,28 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiTargetsW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetsW(
      IN BOOLEAN ForceUpdate,
      IN OUT PULONG BufferSize,
-     OUT _Inout_updates_opt_(*BufferSize) PWCHAR Buffer
+-    OUT _Inout_updates_opt_(*BufferSize) PWCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Inout_updates_opt_(*BufferSize) PWCHAR Buffer
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiTargetsA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetsA(
      IN BOOLEAN ForceUpdate,
      IN OUT PULONG BufferSize,
-     OUT _Inout_updates_opt_(*BufferSize) PCHAR Buffer
+-    OUT _Inout_updates_opt_(*BufferSize) PCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Inout_updates_opt_(*BufferSize) PCHAR Buffer
+     );
+ 
+ #ifdef UNICODE
 @@ -936,7 +943,7 @@ ISDSC_STATUS ISDSC_API ReportIScsiTargetsA(
  #endif
  
  
 -ISDSC_STATUS ISDSC_API AddIScsiStaticTargetW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiStaticTargetW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiStaticTargetW(
      IN _In_ PWSTR TargetName,
      IN OPTIONAL _In_opt_ PWSTR TargetAlias,
      IN ISCSI_TARGET_FLAGS TargetFlags,
@@ -97,7 +164,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API AddIScsiStaticTargetA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiStaticTargetA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiStaticTargetA(
      IN _In_ PSTR TargetName,
      IN OPTIONAL _In_opt_ PSTR TargetAlias,
      IN ISCSI_TARGET_FLAGS TargetFlags,
@@ -106,12 +173,12 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API RemoveIScsiStaticTargetW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiStaticTargetW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiStaticTargetW(
      IN _In_ PWSTR TargetName
      );
  
 -ISDSC_STATUS ISDSC_API RemoveIScsiStaticTargetA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiStaticTargetA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiStaticTargetA(
      IN _In_ PSTR TargetName
      );
  
@@ -120,7 +187,7 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API AddIScsiSendTargetPortalW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiSendTargetPortalW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiSendTargetPortalW(
      IN OPTIONAL _In_opt_ PWSTR InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN OPTIONAL PISCSI_LOGIN_OPTIONS LoginOptions,
@@ -129,7 +196,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API AddIScsiSendTargetPortalA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiSendTargetPortalA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddIScsiSendTargetPortalA(
      IN OPTIONAL _In_opt_ PSTR InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN OPTIONAL PISCSI_LOGIN_OPTIONS LoginOptions,
@@ -138,14 +205,14 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API RemoveIScsiSendTargetPortalW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiSendTargetPortalW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiSendTargetPortalW(
      IN OPTIONAL PWSTR _In_opt_ InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN PISCSI_TARGET_PORTALW Portal
      );
  
 -ISDSC_STATUS ISDSC_API RemoveIScsiSendTargetPortalA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiSendTargetPortalA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiSendTargetPortalA(
      IN OPTIONAL PSTR _In_opt_ InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN PISCSI_TARGET_PORTALA Portal
@@ -154,14 +221,14 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API RefreshIScsiSendTargetPortalW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshIScsiSendTargetPortalW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshIScsiSendTargetPortalW(
      IN OPTIONAL PWSTR _In_opt_ InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN PISCSI_TARGET_PORTALW Portal
      );
  
 -ISDSC_STATUS ISDSC_API RefreshIScsiSendTargetPortalA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshIScsiSendTargetPortalA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshIScsiSendTargetPortalA(
      IN OPTIONAL PSTR _In_opt_ InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN PISCSI_TARGET_PORTALA Portal
@@ -170,13 +237,13 @@ index 2b0657fc58..e9949aafd2 100644
  
  
 -ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsW(
      IN OUT PULONG PortalCount,
      IN OUT PISCSI_TARGET_PORTAL_INFOW PortalInfo
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsA(
      IN OUT PULONG PortalCount,
      IN OUT PISCSI_TARGET_PORTAL_INFOA PortalInfo
      );
@@ -185,14 +252,14 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsExW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsExW(
      OUT PULONG PortalCount,
      IN OUT PULONG PortalInfoSize,
      IN OUT PISCSI_TARGET_PORTAL_INFO_EXW PortalInfo
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsExA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiSendTargetPortalsExA(
      OUT PULONG PortalCount,
      IN OUT PULONG PortalInfoSize,
      IN OUT PISCSI_TARGET_PORTAL_INFO_EXA PortalInfo
@@ -201,32 +268,48 @@ index 2b0657fc58..e9949aafd2 100644
  
  
 -ISDSC_STATUS ISDSC_API LoginIScsiTargetW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API LoginIScsiTargetW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API LoginIScsiTargetW(
      IN _In_ PWSTR TargetName,
      IN BOOLEAN IsInformationalSession,
      IN OPTIONAL _In_opt_ PWSTR InitiatorInstance,
-@@ -1084,7 +1091,7 @@ ISDSC_STATUS ISDSC_API LoginIScsiTargetW(
+@@ -1078,13 +1085,13 @@ ISDSC_STATUS ISDSC_API LoginIScsiTargetW(
+     IN OPTIONAL PISCSI_TARGET_MAPPINGW Mappings,
+     IN OPTIONAL PISCSI_LOGIN_OPTIONS LoginOptions,
+     IN OPTIONAL ULONG KeySize,
+-    IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
+     IN BOOLEAN IsPersistent,
+     OUT PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
      OUT PISCSI_UNIQUE_CONNECTION_ID UniqueConnectionId
      );
  
 -ISDSC_STATUS ISDSC_API LoginIScsiTargetA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API LoginIScsiTargetA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API LoginIScsiTargetA(
      IN PSTR _In_ TargetName,
      IN BOOLEAN IsInformationalSession,
      IN OPTIONAL _In_opt_ PSTR InitiatorInstance,
+@@ -1094,7 +1101,7 @@ ISDSC_STATUS ISDSC_API LoginIScsiTargetA(
+     IN OPTIONAL PISCSI_TARGET_MAPPINGA Mappings,
+     IN OPTIONAL PISCSI_LOGIN_OPTIONS LoginOptions,
+     IN OPTIONAL ULONG KeySize,
+-    IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") IN OPTIONAL _In_reads_opt_(KeySize) PCHAR Key,
+     IN BOOLEAN IsPersistent,
+     OUT PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
+     OUT PISCSI_UNIQUE_CONNECTION_ID UniqueConnectionId
 @@ -1107,13 +1114,13 @@ ISDSC_STATUS ISDSC_API LoginIScsiTargetA(
  #endif
  
  
 -ISDSC_STATUS ISDSC_API ReportIScsiPersistentLoginsW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiPersistentLoginsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiPersistentLoginsW(
      OUT ULONG *Count,
      IN OUT PPERSISTENT_ISCSI_LOGIN_INFOW PersistentLoginInfo,
      IN OUT PULONG BufferSizeInBytes
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiPersistentLoginsA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiPersistentLoginsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiPersistentLoginsA(
      OUT ULONG *Count,
      IN OUT PPERSISTENT_ISCSI_LOGIN_INFOA PersistentLoginInfo,
      IN OUT PULONG BufferSizeInBytes
@@ -240,7 +323,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API RemoveIScsiPersistentTargetW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiPersistentTargetW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiPersistentTargetW(
      IN PWSTR _In_ InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN PWSTR _In_ TargetName,
@@ -248,7 +331,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API RemoveIScsiPersistentTargetA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiPersistentTargetA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveIScsiPersistentTargetA(
      IN PSTR _In_ InitiatorInstance,
      IN OPTIONAL ULONG InitiatorPortNumber,
      IN PSTR _In_ TargetName,
@@ -279,34 +362,38 @@ index 2b0657fc58..e9949aafd2 100644
      IN PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
      OUT PUCHAR ScsiStatus,
      IN OUT PULONG ResponseSize,
-@@ -1182,12 +1189,12 @@ ISDSC_STATUS ISDSC_API SendScsiReportLuns(
+@@ -1182,14 +1189,14 @@ ISDSC_STATUS ISDSC_API SendScsiReportLuns(
      OUT PUCHAR SenseBuffer
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListW(
      IN OUT ULONG *BufferSize,
-     OUT _Inout_updates_opt_(*BufferSize) PWCHAR Buffer
+-    OUT _Inout_updates_opt_(*BufferSize) PWCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Inout_updates_opt_(*BufferSize) PWCHAR Buffer
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListA(
      IN OUT PULONG BufferSize,
-     OUT _Inout_updates_opt_(*BufferSize) PCHAR Buffer
+-    OUT _Inout_updates_opt_(*BufferSize) PCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Inout_updates_opt_(*BufferSize) PCHAR Buffer
      );
+ 
+ #ifdef UNICODE
 @@ -1199,13 +1206,13 @@ ISDSC_STATUS ISDSC_API ReportIScsiInitiatorListA(
  #endif
  
  
 -ISDSC_STATUS ISDSC_API ReportActiveIScsiTargetMappingsW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportActiveIScsiTargetMappingsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportActiveIScsiTargetMappingsW(
      IN OUT PULONG BufferSize,
      OUT PULONG MappingCount,
      OUT PISCSI_TARGET_MAPPINGW Mappings
      );
  
 -ISDSC_STATUS ISDSC_API ReportActiveIScsiTargetMappingsA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportActiveIScsiTargetMappingsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportActiveIScsiTargetMappingsA(
      IN OUT PULONG BufferSize,
      OUT PULONG MappingCount,
      OUT PISCSI_TARGET_MAPPINGA Mappings
@@ -315,7 +402,7 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API SetIScsiTunnelModeOuterAddressW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiTunnelModeOuterAddressW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiTunnelModeOuterAddressW(
      IN OPTIONAL _In_opt_ PWSTR InitiatorName,
      IN ULONG InitiatorPortNumber,
      IN PWSTR _In_opt_ DestinationAddress,
@@ -324,7 +411,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
      
 -ISDSC_STATUS ISDSC_API SetIScsiTunnelModeOuterAddressA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiTunnelModeOuterAddressA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiTunnelModeOuterAddressA(
      IN OPTIONAL _In_opt_ PSTR InitiatorName,
      IN ULONG InitiatorPortNumber,
      IN PSTR _In_opt_ DestinationAddress,
@@ -333,7 +420,7 @@ index 2b0657fc58..e9949aafd2 100644
  
  
 -ISDSC_STATUS ISDSC_API SetIScsiIKEInfoW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiIKEInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiIKEInfoW(
      IN OPTIONAL _In_opt_ PWSTR InitiatorName,
      IN ULONG InitiatorPortNumber,
      IN PIKE_AUTHENTICATION_INFORMATION AuthInfo,
@@ -341,7 +428,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API SetIScsiIKEInfoA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiIKEInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiIKEInfoA(
      IN OPTIONAL _In_opt_ PSTR InitiatorName,
      IN ULONG InitiatorPortNumber,
      IN PIKE_AUTHENTICATION_INFORMATION AuthInfo,
@@ -350,7 +437,7 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API GetIScsiIKEInfoW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiIKEInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiIKEInfoW(
      IN OPTIONAL _In_opt_ PWSTR InitiatorName,
      IN ULONG InitiatorPortNumber,
      IN PULONG Reserved,                                        
@@ -358,7 +445,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API GetIScsiIKEInfoA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiIKEInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiIKEInfoA(
      IN OPTIONAL _In_opt_ PSTR InitiatorName,
      IN ULONG InitiatorPortNumber,
      IN PULONG Reserved,                                        
@@ -386,40 +473,43 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameW(
      IN OPTIONAL _In_opt_ PWSTR InitiatorNodeName
      );
  
 -ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameA(
      IN OPTIONAL _In_opt_ PSTR InitiatorNodeName
      );
  
-@@ -1310,11 +1317,11 @@ ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameA(
+@@ -1310,12 +1317,12 @@ ISDSC_STATUS ISDSC_API SetIScsiInitiatorNodeNameA(
  #define SetIScsiInitiatorNodeName SetIScsiInitiatorNodeNameA
  #endif
  
 -ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameW(
-      _Out_writes_(MAX_ISCSI_NAME_LEN+1) PWCHAR  InitiatorNodeName
+-     _Out_writes_(MAX_ISCSI_NAME_LEN+1) PWCHAR  InitiatorNodeName
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameW(
++     _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(MAX_ISCSI_NAME_LEN+1) PWCHAR  InitiatorNodeName
      );
  
 -ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameA(
-      _Out_writes_(MAX_ISCSI_NAME_LEN+1) PCHAR  InitiatorNodeName
+-     _Out_writes_(MAX_ISCSI_NAME_LEN+1) PCHAR  InitiatorNodeName
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameA(
++     _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_(MAX_ISCSI_NAME_LEN+1) PCHAR  InitiatorNodeName
      );
  
+ #ifdef UNICODE
 @@ -1324,11 +1331,11 @@ ISDSC_STATUS ISDSC_API GetIScsiInitiatorNodeNameA(
  #define GetIScsiInitiatorNodeName GetIScsiInitiatorNodeNameA
  #endif
  
 -ISDSC_STATUS ISDSC_API AddISNSServerW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddISNSServerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddISNSServerW(
      IN _In_ PWSTR Address
      );
  
 -ISDSC_STATUS ISDSC_API AddISNSServerA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddISNSServerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddISNSServerA(
      IN _In_ PSTR Address
      );
  
@@ -428,12 +518,12 @@ index 2b0657fc58..e9949aafd2 100644
  
  
 -ISDSC_STATUS ISDSC_API RemoveISNSServerW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveISNSServerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveISNSServerW(
      IN _In_ PWSTR Address
      );
  
 -ISDSC_STATUS ISDSC_API RemoveISNSServerA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveISNSServerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveISNSServerA(
      IN _In_ PSTR Address
      );
  #ifdef UNICODE
@@ -442,43 +532,47 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API RefreshISNSServerW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshISNSServerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshISNSServerW(
      IN _In_ PWSTR Address
      );
  
 -ISDSC_STATUS ISDSC_API RefreshISNSServerA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshISNSServerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RefreshISNSServerA(
      IN _In_ PSTR Address
      );
  #ifdef UNICODE
-@@ -1365,12 +1372,12 @@ ISDSC_STATUS ISDSC_API RefreshISNSServerA(
+@@ -1365,14 +1372,14 @@ ISDSC_STATUS ISDSC_API RefreshISNSServerA(
  #define RefreshISNSServer RefreshISNSServerA
  #endif
  
 -ISDSC_STATUS ISDSC_API ReportISNSServerListW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportISNSServerListW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportISNSServerListW(
      IN OUT PULONG BufferSizeInChar,
-     OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
+-    OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
      );
  
 -ISDSC_STATUS ISDSC_API ReportISNSServerListA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportISNSServerListA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportISNSServerListA(
      IN OUT PULONG BufferSizeInChar,
-     OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
+-    OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
      );
+ #ifdef UNICODE
+ #define ReportISNSServerList ReportISNSServerListW
 @@ -1382,13 +1389,13 @@ ISDSC_STATUS ISDSC_API ReportISNSServerListA(
  
  
  
 -ISDSC_STATUS ISDSC_API GetIScsiSessionListW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiSessionListW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiSessionListW(
      IN OUT ULONG *BufferSize,
      OUT ULONG *SessionCount,
      OUT OPTIONAL PISCSI_SESSION_INFOW SessionInfo
      );
  
 -ISDSC_STATUS ISDSC_API GetIScsiSessionListA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiSessionListA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetIScsiSessionListA(
      IN OUT ULONG *BufferSize,
      OUT ULONG *SessionCount,
      OUT OPTIONAL PISCSI_SESSION_INFOA SessionInfo
@@ -487,14 +581,14 @@ index 2b0657fc58..e9949aafd2 100644
  );
  
 -ISDSC_STATUS ISDSC_API GetDevicesForIScsiSessionW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetDevicesForIScsiSessionW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetDevicesForIScsiSessionW(
      IN PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
      IN OUT ULONG *DeviceCount,
      OUT PISCSI_DEVICE_ON_SESSIONW Devices
  );
  
 -ISDSC_STATUS ISDSC_API GetDevicesForIScsiSessionA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetDevicesForIScsiSessionA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API GetDevicesForIScsiSessionA(
      IN PISCSI_UNIQUE_SESSION_ID UniqueSessionId,
      IN OUT ULONG *DeviceCount,
      OUT PISCSI_DEVICE_ON_SESSIONA Devices
@@ -507,12 +601,12 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API AddPersistentIScsiDeviceW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddPersistentIScsiDeviceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddPersistentIScsiDeviceW(
      IN _In_ PWSTR DevicePath
  );
  
 -ISDSC_STATUS ISDSC_API AddPersistentIScsiDeviceA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddPersistentIScsiDeviceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddPersistentIScsiDeviceA(
      IN _In_ PSTR DevicePath
  );
  
@@ -521,16 +615,16 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceW(
      IN _In_ PWSTR DevicePath
  );
  
 -ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceA(
      IN _In_ PSTR DevicePath
  );
  
-@@ -1457,15 +1464,15 @@ ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceA(
+@@ -1457,17 +1464,17 @@ ISDSC_STATUS ISDSC_API RemovePersistentIScsiDeviceA(
  #define RemovePersistentIScsiDevice RemovePersistentIScsiDeviceA
  #endif
  
@@ -539,22 +633,26 @@ index 2b0657fc58..e9949aafd2 100644
  );
  
 -ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesW(
      IN OUT PULONG BufferSizeInChar,
-     OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
+-    OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
  );
  
 -ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesA(
      IN OUT PULONG BufferSizeInChar,
-     OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
+-    OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
  );
+ 
+ #ifdef UNICODE
 @@ -1476,7 +1483,7 @@ ISDSC_STATUS ISDSC_API ReportPersistentIScsiDevicesA(
  #define ReportPersistentIScsiDevices ReportPersistentIScsiDevicesA
  #endif
  
 -ISDSC_STATUS ISDSC_API ReportIScsiTargetPortalsW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetPortalsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetPortalsW(
      IN OPTIONAL _In_opt_ PWSTR InitiatorName,
      IN PWSTR _In_ TargetName,
      IN OPTIONAL PUSHORT TargetPortalTag,
@@ -563,7 +661,7 @@ index 2b0657fc58..e9949aafd2 100644
      );
  
 -ISDSC_STATUS ISDSC_API ReportIScsiTargetPortalsA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetPortalsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportIScsiTargetPortalsA(
      IN OPTIONAL _In_opt_ PSTR InitiatorName,
      IN PSTR _In_ TargetName,
      IN OPTIONAL PUSHORT TargetPortalTag,
@@ -572,12 +670,12 @@ index 2b0657fc58..e9949aafd2 100644
  #endif
  
 -ISDSC_STATUS ISDSC_API AddRadiusServerW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddRadiusServerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddRadiusServerW(
      IN _In_ PWSTR Address
      );
  
 -ISDSC_STATUS ISDSC_API AddRadiusServerA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddRadiusServerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API AddRadiusServerA(
      IN _In_ PSTR Address
      );
  
@@ -586,27 +684,31 @@ index 2b0657fc58..e9949aafd2 100644
  
  
 -ISDSC_STATUS ISDSC_API RemoveRadiusServerW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveRadiusServerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveRadiusServerW(
      IN _In_ PWSTR Address
      );
  
 -ISDSC_STATUS ISDSC_API RemoveRadiusServerA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveRadiusServerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API RemoveRadiusServerA(
      IN _In_ PSTR Address
      );
  #ifdef UNICODE
-@@ -1527,12 +1534,12 @@ ISDSC_STATUS ISDSC_API RemoveRadiusServerA(
+@@ -1527,14 +1534,14 @@ ISDSC_STATUS ISDSC_API RemoveRadiusServerA(
  #endif
  
  
 -ISDSC_STATUS ISDSC_API ReportRadiusServerListW(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportRadiusServerListW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportRadiusServerListW(
      IN OUT PULONG BufferSizeInChar,
-     OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
+-    OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Out_writes_opt_(*BufferSizeInChar) PWCHAR Buffer
      );
  
 -ISDSC_STATUS ISDSC_API ReportRadiusServerListA(
-+_Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportRadiusServerListA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ ISDSC_STATUS ISDSC_API ReportRadiusServerListA(
      IN OUT PULONG BufferSizeInChar,
-     OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
+-    OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") OUT _Out_writes_opt_(*BufferSizeInChar) PCHAR Buffer
      );
+ #ifdef UNICODE
+ #define ReportRadiusServerList ReportRadiusServerListW

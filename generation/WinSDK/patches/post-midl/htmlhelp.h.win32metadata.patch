@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h
-index 8e0828c8db..9662b3248a 100644
+index 8e0828c8db..2788482fed 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 8e0828c8db..9662b3248a 100644
  } HHNTRACK;
  
 -HWND
-+_Win32_ImportLibrary_("hhctrl.ocx") HWND
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("hhctrl.ocx") HWND
  WINAPI
  HtmlHelpA(
      _In_opt_ HWND hwndCaller,
@@ -23,7 +23,7 @@ index 8e0828c8db..9662b3248a 100644
      );
  
 -HWND
-+_Win32_ImportLibrary_("hhctrl.ocx") HWND
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("hhctrl.ocx") HWND
  WINAPI
  HtmlHelpW(
      _In_opt_ HWND hwndCaller,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h
-index 57d6e6d0f6..38e5973185 100644
+index 57d6e6d0f6..38820db437 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/joystickapi.h
 @@ -1,3 +1,4 @@
@@ -43,7 +43,7 @@ index 57d6e6d0f6..38e5973185 100644
      DWORD dwSize;                /* size of structure */
      DWORD dwFlags;               /* flags to indicate what to return */
      DWORD dwXpos;                /* x position */
-@@ -326,20 +327,20 @@ typedef struct joyinfoex_tag {
+@@ -326,38 +327,38 @@ typedef struct joyinfoex_tag {
  /* joystick function prototypes */
  
  #if (WINVER >= 0x0400)
@@ -68,8 +68,10 @@ index 57d6e6d0f6..38e5973185 100644
      void
      );
  
-@@ -348,16 +349,16 @@ joyGetNumDevs(
- WINMMAPI
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
  MMRESULT
  WINAPI
 -joyGetDevCapsA(
@@ -80,7 +82,7 @@ index 57d6e6d0f6..38e5973185 100644
      );
  
 -WINMMAPI
-+_Windows_SupportedOS_Windows2000_ WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINMMAPI
  MMRESULT
  WINAPI
 -joyGetDevCapsW(

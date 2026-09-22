@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
-index b6471c2900..0059f47797 100644
+index b6471c2900..dc9f7e69dd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
 @@ -27,6 +27,7 @@ Notes:
@@ -15,7 +15,7 @@ index b6471c2900..0059f47797 100644
  //      is a valid DNS domain name - i.e. not a NETBIOS domain name.
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -26,7 +26,7 @@ index b6471c2900..0059f47797 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -43,7 +43,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -55,7 +55,7 @@ index b6471c2900..0059f47797 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -73,7 +73,7 @@ index b6471c2900..0059f47797 100644
  //
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -85,7 +85,7 @@ index b6471c2900..0059f47797 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -103,7 +103,7 @@ index b6471c2900..0059f47797 100644
  //
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -115,7 +115,7 @@ index b6471c2900..0059f47797 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -133,7 +133,7 @@ index b6471c2900..0059f47797 100644
  //
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -145,7 +145,7 @@ index b6471c2900..0059f47797 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -163,7 +163,7 @@ index b6471c2900..0059f47797 100644
  //
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -173,7 +173,7 @@ index b6471c2900..0059f47797 100644
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -197,7 +197,7 @@ index b6471c2900..0059f47797 100644
  // DsUnBind
  //
  
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
 +
  NTDSAPI
  DWORD
@@ -205,7 +205,7 @@ index b6471c2900..0059f47797 100644
  DsUnBindW(
      _In_ HANDLE          *phDS);             // in
  
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ 
 +
  NTDSAPI
  DWORD
@@ -214,7 +214,7 @@ index b6471c2900..0059f47797 100644
  // null when the username is fully qualified, for example UPN format.
  //
  
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
 +
  _Check_return_
  NTDSAPI
@@ -224,7 +224,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -242,7 +242,7 @@ index b6471c2900..0059f47797 100644
  //
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -251,7 +251,7 @@ index b6471c2900..0059f47797 100644
  
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -260,14 +260,14 @@ index b6471c2900..0059f47797 100644
  //
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  void
  WINAPI
  DsFreeNameResultW(
      _In_ DS_NAME_RESULTW *pResult);          // in
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  void
  WINAPI
  DsFreeNameResultA(
@@ -276,7 +276,7 @@ index b6471c2900..0059f47797 100644
  // a bunch of SPNs for this service; free with DsFreeSpnArray
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -285,7 +285,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -294,7 +294,7 @@ index b6471c2900..0059f47797 100644
  // DsFreeSpnArray() -- Free array returned by DsGetSpn{A,W}
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  void
  WINAPI
  DsFreeSpnArrayA(
@@ -303,7 +303,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  void
  WINAPI
  DsFreeSpnArrayW(
@@ -312,7 +312,7 @@ index b6471c2900..0059f47797 100644
  // IN LPCTSTR   rpszSPN[]               // SPNs to add to altSecID property
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -321,7 +321,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -330,7 +330,7 @@ index b6471c2900..0059f47797 100644
  --*/
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -339,7 +339,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -348,7 +348,7 @@ index b6471c2900..0059f47797 100644
  --*/
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -357,7 +357,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -366,7 +366,7 @@ index b6471c2900..0059f47797 100644
  //   RETURNS: WIN32 STATUS
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -375,7 +375,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -384,7 +384,7 @@ index b6471c2900..0059f47797 100644
  */
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -393,7 +393,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -402,7 +402,7 @@ index b6471c2900..0059f47797 100644
  //   RETURNS: WIN32 STATUS
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -411,7 +411,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -420,7 +420,7 @@ index b6471c2900..0059f47797 100644
  //   RETURNS: WIN32 STATUS
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -429,7 +429,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -438,7 +438,7 @@ index b6471c2900..0059f47797 100644
  //   RETURNS: WIN32 STATUS
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -447,7 +447,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -456,7 +456,7 @@ index b6471c2900..0059f47797 100644
  //				object that will hold an array of error structures.
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -465,7 +465,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -474,7 +474,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -483,7 +483,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -492,7 +492,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -501,7 +501,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -510,7 +510,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -519,7 +519,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ PDS_NAME_RESULTA    *ppSites);      // out
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -528,7 +528,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -537,7 +537,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ PDS_NAME_RESULTA    *ppServers);    // out
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -546,7 +546,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -555,7 +555,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ PDS_NAME_RESULTA    *ppDomains);    // out
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -564,7 +564,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -573,7 +573,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ PDS_NAME_RESULTA    *ppServers);    // out
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -582,7 +582,7 @@ index b6471c2900..0059f47797 100644
  #define DS_LIST_ACCOUNT_OBJECT_FOR_SERVER   2
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -591,7 +591,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ PDS_NAME_RESULTA    *ppInfo);       // out
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -600,7 +600,7 @@ index b6471c2900..0059f47797 100644
  #define DS_ROLE_INFRASTRUCTURE_OWNER        4
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -609,7 +609,7 @@ index b6471c2900..0059f47797 100644
  
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -618,7 +618,7 @@ index b6471c2900..0059f47797 100644
  } DS_SITE_COST_INFO, *PDS_SITE_COST_INFO;
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -627,7 +627,7 @@ index b6471c2900..0059f47797 100644
      );
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI_POSTXP
  DWORD
  WINAPI
@@ -645,7 +645,7 @@ index b6471c2900..0059f47797 100644
  } DS_SCHEMA_GUID_MAPW, *PDS_SCHEMA_GUID_MAPW;
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -654,14 +654,14 @@ index b6471c2900..0059f47797 100644
      _Outptr_ DS_SCHEMA_GUID_MAPA     **ppGuidMap);   // out
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  VOID
  WINAPI
  DsFreeSchemaGuidMapA(
      _In_ PDS_SCHEMA_GUID_MAPA    pGuidMap);      // in
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -670,7 +670,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ DS_SCHEMA_GUID_MAPW     **ppGuidMap);   // out
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  VOID
  WINAPI
  DsFreeSchemaGuidMapW(
@@ -679,7 +679,7 @@ index b6471c2900..0059f47797 100644
  // live domain controllers for a domain.
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  _When_(InfoLevel == 1, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_1A))))
  _When_(InfoLevel == 2, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_2A))))
  _When_(InfoLevel == 3, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_3A))))
@@ -688,7 +688,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ VOID                     **ppInfo);      // out
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  _When_(InfoLevel == 1, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_1W))))
  _When_(InfoLevel == 2, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_2W))))
  _When_(InfoLevel == 3, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_3W))))
@@ -697,7 +697,7 @@ index b6471c2900..0059f47797 100644
      _Outptr_ VOID                     **ppInfo);      // out
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  VOID
  WINAPI
  DsFreeDomainControllerInfoA(
@@ -706,7 +706,7 @@ index b6471c2900..0059f47797 100644
      _In_reads_(cInfo) VOID                            *pInfo);        // in
  
 -NTDSAPI
-+_Windows_SupportedOS_WindowsVista_ NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
  VOID
  WINAPI
  DsFreeDomainControllerInfoW(
@@ -724,7 +724,7 @@ index b6471c2900..0059f47797 100644
      DWORD           dwFlags);   // in
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -733,7 +733,7 @@ index b6471c2900..0059f47797 100644
      ULONG           ulOptions);   // in
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -778,7 +778,7 @@ index b6471c2900..0059f47797 100644
  #endif
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -787,7 +787,7 @@ index b6471c2900..0059f47797 100644
      _In_ LPCWSTR                 DstPrincipal);          // in - SAM account name
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -796,7 +796,7 @@ index b6471c2900..0059f47797 100644
  // same domain.
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI
@@ -805,7 +805,7 @@ index b6471c2900..0059f47797 100644
      _In_ LPCWSTR                 DstPrincipal);          // in - distinguished name
  
 -_Check_return_
-+_Windows_SupportedOS_WindowsVista_ _Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
  NTDSAPI
  DWORD
  WINAPI

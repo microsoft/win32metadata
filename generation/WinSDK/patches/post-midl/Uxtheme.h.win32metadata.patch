@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
-index f4998fa422..27ea776608 100644
+index f4998fa422..dbb174dbc0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 @@ -10,6 +10,7 @@
@@ -745,8 +745,21 @@ index f4998fa422..27ea776608 100644
  BufferedPaintUnInit(
      VOID
      );
-@@ -1812,12 +1818,12 @@ typedef struct _BP_ANIMATIONPARAMS
- typedef struct _BP_PAINTPARAMS
+@@ -1795,7 +1801,7 @@ typedef enum _BP_ANIMATIONSTYLE
+ } BP_ANIMATIONSTYLE;
+ 
+ // BP_ANIMATIONPARAMS
+-typedef struct _BP_ANIMATIONPARAMS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _BP_ANIMATIONPARAMS
+ {
+     DWORD               cbSize;
+     DWORD               dwFlags; // BPAF_ flags
+@@ -1809,15 +1815,15 @@ typedef struct _BP_ANIMATIONPARAMS
+ 
+                                         
+ // BP_PAINTPARAMS
+-typedef struct _BP_PAINTPARAMS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _BP_PAINTPARAMS
  {
      DWORD                       cbSize;
 -    DWORD                       dwFlags; // BPPF_ flags

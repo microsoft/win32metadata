@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h
-index f3e7cbb510..592465d057 100644
+index f3e7cbb510..9472805866 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/minidumpapiset.h
 @@ -1,3 +1,4 @@
@@ -52,6 +52,15 @@ index f3e7cbb510..592465d057 100644
      ULONG32 DumpError;
      ULONG32 ExitStatus;
      ULONG64 CreateTime;
+@@ -1160,7 +1161,7 @@ typedef enum _THREAD_WRITE_FLAGS {
+ } THREAD_WRITE_FLAGS;
+ 
+ typedef struct _MINIDUMP_MODULE_CALLBACK {
+-    PWCHAR FullPath;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR FullPath;
+     ULONG64 BaseOfImage;
+     ULONG SizeOfImage;
+     ULONG CheckSum;
 @@ -1362,7 +1363,11 @@ typedef struct _MINIDUMP_CALLBACK_OUTPUT {
  // with the virtual protection attribute of PAGE_WRITECOMBINE.
  //

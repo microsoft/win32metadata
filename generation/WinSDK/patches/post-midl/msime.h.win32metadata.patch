@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msime.h b/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
-index 391a8813e9..2ed70a5761 100644
+index 391a8813e9..b81dff3de8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,56 @@ index 391a8813e9..2ed70a5761 100644
                              IMESHF *pshf                //(in) dictionary header
                              ) PURE;
 -    STDMETHOD(ExistWord)    (THIS_
-+    _Win32_PreserveResult_ STDMETHOD(ExistWord)    (THIS_
++    _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ STDMETHOD(ExistWord)    (THIS_
                              IMEWRD *pwrd                //(in) word to check
                              ) PURE;
      STDMETHOD(ExistDependency) (THIS_
+@@ -1018,7 +1019,7 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
+ #define IMEKMS_TYPECAND             7    //Reserved
+ 
+ 
+-typedef struct tagIMEKMSINIT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMEKMSINIT {
+     INT         cbSize;
+     HWND        hWnd;   // Window which receives notification from IME.
+                         // If hWnd is NULL, no notification is posted
+@@ -1053,20 +1054,20 @@ typedef struct tagIMEKMSKEY {
+     };
+ } IMEKMSKEY;
+ 
+-typedef struct tagIMEKMS {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMEKMS {
+     INT         cbSize;
+     HIMC        hIMC;
+     DWORD       cKeyList;
+     IMEKMSKEY   *pKeyList;
+ } IMEKMS;
+ 
+-typedef struct tagIMEKMSNTFY {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMEKMSNTFY {
+     INT         cbSize;
+     HIMC        hIMC;
+     BOOL        fSelect;
+ } IMEKMSNTFY;
+ 
+-typedef struct tagIMEKMSKMP {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMEKMSKMP {
+     INT         cbSize;         //[in] size of this structure
+     HIMC        hIMC;           //[in] Input context
+     LANGID      idLang;         //[in] Language ID
+@@ -1077,13 +1078,13 @@ typedef struct tagIMEKMSKMP {
+                                 //      Must be GlobalMemFree by clients
+ } IMEKMSKMP;
+ 
+-typedef struct tagIMEKMSINVK {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMEKMSINVK {
+     INT         cbSize;
+     HIMC        hIMC;
+     DWORD       dwControl;
+ } IMEKMSINVK;
+ 
+-typedef struct tagIMEKMSFUNCDESC {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagIMEKMSFUNCDESC {
+     INT         cbSize;         //[in] size of this structure
+     LANGID      idLang;         //[in] Language ID
+     DWORD       dwControl;      //[in] IME Functionality ID

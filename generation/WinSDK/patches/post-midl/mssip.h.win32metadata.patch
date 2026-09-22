@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h b/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
-index 9ba32f8775..766118494c 100644
+index 9ba32f8775..76aafdda57 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,33 @@ index 9ba32f8775..766118494c 100644
  //+-------------------------------------------------------------------------
  //
  //  Microsoft Windows - Internet Security
+@@ -75,7 +76,7 @@ typedef CRYPT_HASH_BLOB             CRYPT_DIGEST_DATA;
+ //  the ENTIRE structure to binary zero before the FIRST call is made.  Do
+ //  not initialize it BETWEEN calls!
+ //
+-typedef struct SIP_SUBJECTINFO_
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SIP_SUBJECTINFO_
+ {
+     DWORD                       cbSize;         // set to sizeof(SIP_SUBJECTINFO)
+     GUID                        *pgSubjectType; // subject type
+@@ -192,7 +193,7 @@ typedef struct MS_ADDINFO_DETACHEDSIG_
+ //
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-typedef struct _SIP_CAP_SET_V2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIP_CAP_SET_V2
+ {
+     DWORD cbSize;           //Size of this struct
+     DWORD dwVersion;        //The SIP API version being used, default to 2.
+@@ -202,7 +203,7 @@ typedef struct _SIP_CAP_SET_V2
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINBLUE)
+ 
+-typedef struct _SIP_CAP_SET_V3
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SIP_CAP_SET_V3
+ {
+     DWORD cbSize;           //Size of this struct
+     DWORD dwVersion;        //The SIP API version being used, default to 2.
 @@ -275,9 +276,9 @@ typedef struct SIP_INDIRECT_DATA_
  //                                      enough to hold the data.  pcbSignedDataMsg
  //                                      contains the required size.
@@ -58,6 +85,15 @@ index 9ba32f8775..766118494c 100644
                                  IN      SIP_SUBJECTINFO     *pSubjectInfo,
                                  IN      DWORD               dwIndex);
  
+@@ -431,7 +432,7 @@ typedef BOOL (WINAPI * pCryptSIPRemoveSignedDataMsg)(
+ // SIP_DISPATCH_INFO
+ //----------------------------------------------------------------------------
+ //
+-typedef struct SIP_DISPATCH_INFO_
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SIP_DISPATCH_INFO_
+ {
+     DWORD                           cbSize;     // = sizeof(SIP_DISPATCH_INFO)
+     HANDLE                          hSIP;       // used internal
 @@ -490,7 +491,7 @@ typedef struct SIP_ADD_NEWPROVIDER_
  //      TRUE:                           No fatal errors
  //      FALSE:                          Errors occured.  See GetLastError()

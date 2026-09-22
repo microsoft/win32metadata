@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
-index e067444153..81bc0a1c2d 100644
+index e067444153..240402df08 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -52,3 +52,21 @@ index e067444153..81bc0a1c2d 100644
          } connectivity;
  
          // header.type -> NLA_ICS
+@@ -635,7 +639,7 @@ typedef INT (PASCAL FAR * LPFN_RIONOTIFY)(
+ );
+ 
+ typedef RIO_BUFFERID (PASCAL FAR * LPFN_RIOREGISTERBUFFER)(
+-    _In_ PCHAR DataBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCHAR DataBuffer,
+     _In_ DWORD DataLength
+ );
+ 
+@@ -650,7 +654,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIORESIZEREQUESTQUEUE) (
+     _In_ DWORD MaxOutstandingSend
+ );
+ 
+-typedef struct _RIO_EXTENSION_FUNCTION_TABLE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _RIO_EXTENSION_FUNCTION_TABLE {
+     DWORD cbSize;
+ 
+     LPFN_RIORECEIVE RIOReceive;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8..94b39aa270 100644
+index 71ad8398e8..9ce2be6f4f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -176,11 +176,11 @@ index 71ad8398e8..94b39aa270 100644
  // API exported for browsing for containers.
  //
  
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
 +
 +
  STDAPI_(int) DsBrowseForContainerW(_Inout_ PDSBROWSEINFOW pInfo);
-+_Windows_SupportedOS_WindowsVista_ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ 
 +
 +
  STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);

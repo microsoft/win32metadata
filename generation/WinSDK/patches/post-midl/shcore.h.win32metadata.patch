@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
-index 96384d6a8e..1016f3247e 100644
+index 96384d6a8e..4e9b093ae2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
 @@ -6,20 +6,27 @@
@@ -17,7 +17,7 @@ index 96384d6a8e..1016f3247e 100644
  
  
 -typedef enum
-+typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++typedef enum  
  {
      BSOS_DEFAULT = 0,             // when creating a byte seeker over a stream, base randomaccessstream behavior on the STGM mode from IStream::Stat.
      BSOS_PREFERDESTINATIONSTREAM  // in addition, utilize IDestinationStreamFactory::GetDestinationStream.

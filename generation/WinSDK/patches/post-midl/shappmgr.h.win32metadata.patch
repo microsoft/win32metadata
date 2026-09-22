@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
-index 17c6b95748..c9a0faa2d2 100644
+index 17c6b95748..edbe1391d2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
 @@ -98,6 +98,7 @@ extern "C"{
@@ -10,6 +10,15 @@ index 17c6b95748..c9a0faa2d2 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
+@@ -134,7 +135,7 @@ enum _tagAppInfoFlags
+         AIM_UPDATEINFOURL	= 0x80000
+     } 	APPINFODATAFLAGS;
+ 
+-typedef struct _AppInfoData
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _AppInfoData
+     {
+     DWORD cbSize;
+     DWORD dwMask;
 @@ -189,8 +190,8 @@ EXTERN_C const IID IID_IShellApp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -30,6 +39,15 @@ index 17c6b95748..c9a0faa2d2 100644
      {
          CONST_VTBL struct IShellAppVtbl *lpVtbl;
      };
+@@ -329,7 +330,7 @@ enum _tagPublishedAppInfoFlags
+         PAI_EXPIRETIME	= 0x10
+     } 	PUBAPPINFOFLAGS;
+ 
+-typedef struct _PubAppInfo
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PubAppInfo
+     {
+     DWORD cbSize;
+     DWORD dwMask;
 @@ -347,8 +348,8 @@ EXTERN_C const IID IID_IPublishedApp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

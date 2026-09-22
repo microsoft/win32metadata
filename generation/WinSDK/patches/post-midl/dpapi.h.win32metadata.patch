@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
-index 29320701fe..d77f01a7a6 100644
+index 29320701fe..b90fe7d626 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
 @@ -11,6 +11,7 @@
@@ -24,7 +24,7 @@ index 29320701fe..d77f01a7a6 100644
  // Prompt struct -- what to tell users about the access
  //
 -typedef struct  _CRYPTPROTECT_PROMPTSTRUCT
-+typedef struct    _CRYPTPROTECT_PROMPTSTRUCT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")     _CRYPTPROTECT_PROMPTSTRUCT
  {
      DWORD cbSize;
      DWORD dwPromptFlags;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
-index ddcdcb381a..c5728bea76 100644
+index ddcdcb381a..1bbc0c93d3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -48,6 +48,15 @@ index ddcdcb381a..c5728bea76 100644
  {
      DWORD cEntries;
      WINHTTP_PROXY_RESULT_ENTRY *pEntries;
+@@ -377,7 +378,7 @@ typedef struct _WINHTTP_CERTIFICATE_INFO
+ 
+ #ifdef _WS2DEF_
+ 
+-typedef struct _WINHTTP_CONNECTION_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _WINHTTP_CONNECTION_INFO
+ {
+     DWORD cbSize;
+     SOCKADDR_STORAGE LocalAddress;  // local ip, local port
 @@ -939,24 +940,24 @@ typedef struct _WINHTTP_FAILED_CONNECTION_RETRIES
  #define WINHTTP_ENABLE_SPN_SERVER_PORT            0x00000001
  #define WINHTTP_OPTION_SPN_MASK                   WINHTTP_ENABLE_SPN_SERVER_PORT

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wow64apiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/wow64apiset.h
-index 55b1a9c0b6..b2f28423de 100644
+index 55b1a9c0b6..835a36105e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wow64apiset.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wow64apiset.h
 @@ -17,6 +17,7 @@
@@ -46,7 +46,7 @@ index 55b1a9c0b6..b2f28423de 100644
  #if !defined(RC_INVOKED)
  #if _WIN32_WINNT >= 0x0501 || defined(WINBASE_DECLARE_GET_SYSTEM_WOW64_DIRECTORY)
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _Must_inspect_result_
@@ -55,7 +55,7 @@ index 55b1a9c0b6..b2f28423de 100644
      _In_ UINT uSize
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _Must_inspect_result_
@@ -82,7 +82,7 @@ index 55b1a9c0b6..b2f28423de 100644
  
  #if (_WIN32_WINNT >= 0x0A00)
  
-+_Windows_SupportedOS_10586_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_10586_
 +_Win32_SetLastError_
  WINBASEAPI
  _Must_inspect_result_
@@ -95,7 +95,7 @@ index 55b1a9c0b6..b2f28423de 100644
 +    _Win32_AssociatedEnum_(IMAGE_FILE_MACHINE) _In_ WORD ImageFileMachineType
      );
  
-+_Windows_SupportedOS_10586_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_10586_
 +_Win32_SetLastError_
  WINBASEAPI
  _Must_inspect_result_

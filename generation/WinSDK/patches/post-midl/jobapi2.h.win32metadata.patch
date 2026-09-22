@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h
-index 636d693b59..186abc98c2 100644
+index 636d693b59..582cdde6b1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/jobapi2.h
 @@ -12,6 +12,7 @@
@@ -18,7 +18,7 @@ index 636d693b59..186abc98c2 100644
 +    _Win32_AssociatedEnum_(JOB_OBJECT_IO_RATE_CONTROL_FLAGS) ULONG ControlFlags;
  } JOBOBJECT_IO_RATE_CONTROL_INFORMATION;
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +
@@ -38,7 +38,7 @@ index 636d693b59..186abc98c2 100644
      _In_ _Frees_ptr_ VOID* Buffer
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
 +
 +_Win32_SetLastError_
 +

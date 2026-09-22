@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
-index b28b56862b..b7e01a76b8 100644
+index b28b56862b..775a60b25f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
 @@ -1,3 +1,4 @@
@@ -7,9 +7,12 @@ index b28b56862b..b7e01a76b8 100644
  /*-------------------------------------------------------------------
  //
  //  Copyright (C) Microsoft, 2007
-@@ -503,8 +504,8 @@ HRESULT
+@@ -501,10 +502,10 @@ HRESULT
+     Informational flags.
+ 
  ****************************************************************************/
- typedef struct _CRYPT_XML_STATUS{
+-typedef struct _CRYPT_XML_STATUS{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_STATUS{
      ULONG                               cbSize;    
 -    DWORD                               dwErrorStatus;
 -    DWORD                               dwInfoStatus;
@@ -18,7 +21,21 @@ index b28b56862b..b7e01a76b8 100644
  }CRYPT_XML_STATUS, *PCRYPT_XML_STATUS;
  
  #define CRYPT_XML_STATUS_NO_ERROR                           0x00000000
-@@ -640,7 +641,7 @@ typedef struct _CRYPT_XML_TRANSFORM_INFO{
+@@ -607,7 +608,7 @@ typedef struct _CRYPT_XML_STATUS{
+     </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_ALGORITHM{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_ALGORITHM{
+     ULONG                               cbSize;    
+     LPCWSTR                             wszAlgorithm;
+     CRYPT_XML_BLOB                      Encoded;
+@@ -636,11 +637,11 @@ typedef struct _CRYPT_XML_ALGORITHM{
+     [callback] Pointer to a function to create a transform. 
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_TRANSFORM_INFO{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_TRANSFORM_INFO{
      ULONG                               cbSize;    
      LPCWSTR                             wszAlgorithm;
      ULONG                               cbBufferSize;
@@ -27,6 +44,15 @@ index b28b56862b..b7e01a76b8 100644
      PFN_CRYPT_XML_CREATE_TRANSFORM      pfnCreateTransform;
  }CRYPT_XML_TRANSFORM_INFO, *PCRYPT_XML_TRANSFORM_INFO;
  
+@@ -674,7 +675,7 @@ typedef struct _CRYPT_XML_TRANSFORM_INFO{
+     Array of  PCRYPT_XML_TRANSFORM_INFO
+ 
+  ****************************************************************************/
+-typedef struct _CRYPT_XML_TRANSFORM_CHAIN_CONFIG{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_TRANSFORM_CHAIN_CONFIG{
+     ULONG                               cbSize;    
+     ULONG                               cTransformInfo;
+     _Field_size_(cTransformInfo)
 @@ -803,7 +804,7 @@ Schema:
  
  ****************************************************************************/
@@ -54,6 +80,60 @@ index b28b56862b..b7e01a76b8 100644
      union
      {
          LPCWSTR                         wszKeyName;
+@@ -1014,7 +1015,7 @@ Schema:
+    </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_KEY_INFO{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_KEY_INFO{
+     ULONG                               cbSize;
+     LPCWSTR                             wszId;
+     UINT                                cKeyInfo;
+@@ -1056,7 +1057,7 @@ typedef struct _CRYPT_XML_KEY_INFO{
+     each holding information about Transform applied to the signed data.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_REFERENCE{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_REFERENCE{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hReference;
+     LPCWSTR                             wszId;
+@@ -1104,7 +1105,7 @@ typedef struct _CRYPT_XML_REFERENCES{
+     Contains canonicalized <SignedInfo> element.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_SIGNED_INFO{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_SIGNED_INFO{
+     ULONG                               cbSize;    
+     LPCWSTR                             wszId;
+     CRYPT_XML_ALGORITHM                 Canonicalization;
+@@ -1158,7 +1159,7 @@ typedef struct _CRYPT_XML_SIGNED_INFO{
+     </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_OBJECT{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_OBJECT{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hObject;
+     LPCWSTR                             wszId;
+@@ -1209,7 +1210,7 @@ rgObject
+     </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_SIGNATURE{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_SIGNATURE{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hSignature;
+     LPCWSTR                             wszId;
+@@ -1240,7 +1241,7 @@ typedef struct _CRYPT_XML_SIGNATURE{
+     Contains XML document.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_DOC_CTXT{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_DOC_CTXT{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hDocCtxt;
+     CRYPT_XML_TRANSFORM_CHAIN_CONFIG    *pTransformsConfig;
 @@ -1258,7 +1259,7 @@ typedef struct _CRYPT_XML_DOC_CTXT{
   encapsulated by the handle is fully released.
  
@@ -234,7 +314,13 @@ index b28b56862b..b7e01a76b8 100644
  HRESULT
  WINAPI
  CryptXmlEncode(
-@@ -1867,7 +1868,7 @@ struct _CRYPT_XML_ALGORITHM_INFO
+@@ -1862,12 +1863,12 @@ NOTE: the BCrypt* and NCrypt* functions that are defined in Bcrypt.h and Ncrypt.
+ 
+ ****************************************************************************/
+ typedef 
+-struct _CRYPT_XML_ALGORITHM_INFO
++struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_ALGORITHM_INFO
+ {
      DWORD                               cbSize;
      WCHAR                               *wszAlgorithmURI;
      WCHAR                               *wszName;
@@ -258,6 +344,15 @@ index b28b56862b..b7e01a76b8 100644
      _Outptr_     CRYPT_XML_ALGORITHM_INFO        **ppAlgInfo
      );
  
+@@ -2319,7 +2320,7 @@ HRESULT
+         A pointer to the implementation of the CryptXmlDllGetAlgorithmInfo.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_CRYPTOGRAPHIC_INTERFACE{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_CRYPTOGRAPHIC_INTERFACE{
+     ULONG                               cbSize;
+     CryptXmlDllEncodeAlgorithm          fpCryptXmlEncodeAlgorithm;
+     CryptXmlDllCreateDigest             fpCryptXmlCreateDigest;
 @@ -2383,7 +2384,7 @@ _Success_( return == 0 )
  HRESULT
  (WINAPI * CryptXmlDllCreateKey)(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
-index a156d7da8a..47eca67b78 100644
+index a156d7da8a..efb8d06540 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
 @@ -18,6 +18,7 @@
@@ -28,7 +28,7 @@ index a156d7da8a..47eca67b78 100644
  /* init/uninit */
  
 -_Check_return_ WINOLEAPI  CoInitialize(_In_opt_ LPVOID pvReserved);
-+_Windows_SupportedOS_Windows2000_ 
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_Windows2000_ 
 +
 +_Win32_PreserveResult_
 +_Check_return_ WINOLEAPI  CoInitialize(_Reserved_ _In_opt_ LPVOID pvReserved);

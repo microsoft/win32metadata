@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
-index ea6c5c42ac..02518d40fa 100644
+index ea6c5c42ac..c176657b3c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
 @@ -19,6 +19,7 @@
@@ -37,8 +37,8 @@ index ea6c5c42ac..02518d40fa 100644
      IWeakReferenceSource : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE GetWeakReference( 
              /* [retval][out] */ __RPC__deref_out_opt IWeakReference **weakReference) = 0;
          

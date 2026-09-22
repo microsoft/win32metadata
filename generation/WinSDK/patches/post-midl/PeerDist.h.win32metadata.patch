@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h b/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h
-index 5653931322..c2b84198ed 100644
+index 5653931322..257a8fa81d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PeerDist.h
 @@ -21,6 +21,7 @@ Abstract:
@@ -188,7 +188,21 @@ index 5653931322..c2b84198ed 100644
          _In_ PEERDIST_INSTANCE_HANDLE hPeerDist,
          _In_ PEERDIST_CONTENT_HANDLE hContentHandle,
          _In_opt_ LPOVERLAPPED pOverlapped
-@@ -276,8 +277,8 @@ typedef struct peerdist_status_info_tag
+@@ -263,7 +264,7 @@ DWORD WINAPI PeerDistClientCancelAsyncOperation(
+ #define PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1 1L
+ #define PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2 2L
+ 
+-typedef struct peerdist_retrieval_options_tag 
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  peerdist_retrieval_options_tag 
+ {
+     DWORD cbSize;
+     DWORD dwContentInfoMinVersion;
+@@ -272,12 +273,12 @@ typedef struct peerdist_retrieval_options_tag
+ } PEERDIST_RETRIEVAL_OPTIONS, *PPEERDIST_RETRIEVAL_OPTIONS;
+ typedef const PEERDIST_RETRIEVAL_OPTIONS * PCPEERDIST_RETRIEVAL_OPTIONS;
+ 
+-typedef struct peerdist_status_info_tag
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  peerdist_status_info_tag
  {
      DWORD cbSize;
      PEERDIST_STATUS status;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
-index 0e58a78962..f6beddd6a5 100644
+index 0e58a78962..dda2be641c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
 @@ -132,6 +132,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 0e58a78962..f6beddd6a5 100644
  /* [local][unique][uuid][object] */ 
  
 -typedef struct _DOCHOSTUIINFO
-+typedef struct   _DOCHOSTUIINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _DOCHOSTUIINFO
      {
      ULONG cbSize;
 -    DWORD dwFlags;

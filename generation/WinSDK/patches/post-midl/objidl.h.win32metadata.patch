@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
-index 31f65e72f3..4264c5570a 100644
+index 31f65e72f3..e68d142e29 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 @@ -801,6 +801,7 @@ extern "C"{
@@ -110,7 +110,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][out] */ 
@@ -124,7 +124,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation] */ 
@@ -133,7 +133,7 @@ index 31f65e72f3..4264c5570a 100644
              _Out_opt_  ULONG *pceltFetched) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          
@@ -147,7 +147,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
              /* [annotation] */ 
              _Out_writes_bytes_to_(cb, *pcbRead)  void *pv,
              /* [annotation][in] */ 
@@ -156,7 +156,7 @@ index 31f65e72f3..4264c5570a 100644
              _Out_opt_  ULONG *pcbRead) = 0;
          
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Write( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Write( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Write( 
              /* [annotation] */ 
              _In_reads_bytes_(cb)  const void *pv,
              /* [annotation][in] */ 
@@ -165,7 +165,7 @@ index 31f65e72f3..4264c5570a 100644
  typedef /* [unique] */  __RPC_unique_pointer IStream *LPSTREAM;
  
 -typedef struct tagSTATSTG
-+typedef struct   tagSTATSTG
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    tagSTATSTG
      {
      LPOLESTR pwcsName;
      DWORD type;
@@ -270,6 +270,15 @@ index 31f65e72f3..4264c5570a 100644
      IPSFactoryBuffer : public IUnknown
      {
      public:
+@@ -4288,7 +4289,7 @@ EXTERN_C const IID IID_IPSFactoryBuffer;
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ #if  (_WIN32_WINNT >= 0x0400 ) || defined(_WIN32_DCOM) // DCOM
+ // This interface is only valid on Windows NT 4.0
+-typedef struct SChannelHookCallInfo
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  SChannelHookCallInfo
+     {
+     IID iid;
+     DWORD cbSize;
 @@ -4560,7 +4561,7 @@ extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0023_v0_0_s_ifspec;
  /* interface IClientSecurity */
  /* [uuid][object][local] */ 
@@ -573,7 +582,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation] */ 
@@ -582,7 +591,7 @@ index 31f65e72f3..4264c5570a 100644
              _Out_opt_  ULONG *pceltFetched) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE Skip( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          
@@ -630,7 +639,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Load( 
              /* [annotation][unique][in] */ 
@@ -648,7 +657,7 @@ index 31f65e72f3..4264c5570a 100644
              _Out_  IEnumMoniker **ppenumMoniker) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE IsEqual( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsEqual( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsEqual( 
              /* [annotation][unique][in] */ 
              _In_  IMoniker *pmkOtherMoniker) = 0;
          
@@ -743,7 +752,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Load( 
              /* [annotation][in] */ 
@@ -764,7 +773,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE InitNew( 
              /* [annotation][unique][in] */ 
@@ -805,7 +814,7 @@ index 31f65e72f3..4264c5570a 100644
      {
      public:
 -        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation] */ 
@@ -877,12 +886,12 @@ index 31f65e72f3..4264c5570a 100644
              _Inout_  STGMEDIUM *pmedium) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE QueryGetData( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE QueryGetData( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE QueryGetData( 
              /* [annotation][unique][in] */ 
              _In_  FORMATETC *pformatetc) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE GetCanonicalFormatEtc( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetCanonicalFormatEtc( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetCanonicalFormatEtc( 
              /* [annotation][unique][in] */ 
              _In_  FORMATETC *pformatectIn,
              /* [annotation][out] */ 

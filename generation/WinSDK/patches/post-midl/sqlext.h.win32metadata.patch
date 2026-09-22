@@ -1,0 +1,108 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
+index 3cc4f24de6..26b5fac043 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************
+ *                                                       *
+ *   Copyright (C) Microsoft. All rights reserved.       *
+@@ -1785,7 +1786,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ 
+ #ifndef RC_INVOKED
+ 
+-SQLRETURN SQL_API SQLDriverConnect(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLDriverConnect(
+     SQLHDBC            hdbc,
+     SQLHWND            hwnd,
+     _In_reads_(cchConnStrIn)
+@@ -1903,7 +1904,7 @@ SQLRETURN SQL_API SQLDriverConnect(
+ "VALUE,VALUES,VARCHAR,VARYING,VIEW,WHEN,WHENEVER,WHERE,WITH,WORK,WRITE,"\
+ "YEAR,ZONE"
+ 
+-SQLRETURN SQL_API SQLBrowseConnect(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLBrowseConnect(
+     SQLHDBC            hdbc,
+     _In_reads_(cchConnStrIn)
+     SQLCHAR           *szConnStrIn,
+@@ -1920,7 +1921,7 @@ SQLRETURN   SQL_API SQLBulkOperations(
+     SQLSMALLINT         Operation);
+ #endif  /* ODBCVER >= 0x0300 */
+ 
+-SQLRETURN SQL_API SQLColAttributes(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLColAttributes(
+     SQLHSTMT           hstmt,
+     SQLUSMALLINT       icol,
+     SQLUSMALLINT       fDescType,
+@@ -1929,7 +1930,7 @@ SQLRETURN SQL_API SQLColAttributes(
+     SQLSMALLINT       *pcbDesc,
+     SQLLEN            * pfDesc);
+ 
+-SQLRETURN SQL_API SQLColumnPrivileges(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLColumnPrivileges(
+     SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+@@ -1965,7 +1966,7 @@ SQLRETURN SQL_API SQLExtendedFetch(
+     _Out_opt_
+     SQLUSMALLINT      *rgfRowStatus);
+ 
+-SQLRETURN SQL_API SQLForeignKeys(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLForeignKeys(
+     SQLHSTMT           hstmt,
+     _In_reads_opt_(cchPkCatalogName)
+     SQLCHAR           *szPkCatalogName,
+@@ -1989,7 +1990,7 @@ SQLRETURN SQL_API SQLForeignKeys(
+ SQLRETURN SQL_API SQLMoreResults(
+     SQLHSTMT           hstmt);
+ 
+-SQLRETURN SQL_API SQLNativeSql
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLNativeSql
+ (
+     SQLHDBC            hdbc,
+     _In_reads_(cchSqlStrIn) SQLCHAR* szSqlStrIn,
+@@ -2009,7 +2010,7 @@ SQLRETURN SQL_API SQLParamOptions(
+     SQLULEN            crow,
+     SQLULEN            *pirow);
+ 
+-SQLRETURN SQL_API SQLPrimaryKeys(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLPrimaryKeys(
+     SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+@@ -2021,7 +2022,7 @@ SQLRETURN SQL_API SQLPrimaryKeys(
+     SQLCHAR           *szTableName,
+     SQLSMALLINT        cchTableName);
+ 
+-SQLRETURN SQL_API SQLProcedureColumns(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLProcedureColumns(
+     SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+@@ -2036,7 +2037,7 @@ SQLRETURN SQL_API SQLProcedureColumns(
+     SQLCHAR           *szColumnName,
+     SQLSMALLINT        cchColumnName);
+ 
+-SQLRETURN SQL_API SQLProcedures(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLProcedures(
+     SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+@@ -2056,7 +2057,7 @@ SQLRETURN SQL_API SQLSetPos(
+     SQLUSMALLINT       fOption,
+     SQLUSMALLINT       fLock);
+ 
+-SQLRETURN SQL_API SQLTablePrivileges(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLTablePrivileges(
+     SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+@@ -2068,7 +2069,7 @@ SQLRETURN SQL_API SQLTablePrivileges(
+     SQLCHAR           *szTableName,
+     SQLSMALLINT        cchTableName);
+ 
+-SQLRETURN SQL_API SQLDrivers(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLDrivers(
+     SQLHENV            henv,
+     SQLUSMALLINT       fDirection,
+     _Out_writes_opt_(cchDriverDescMax)

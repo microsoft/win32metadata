@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
-index 073a04f862..73a112f3e7 100644
+index 073a04f862..7aa276e7dc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
 @@ -15,6 +15,7 @@
@@ -154,7 +154,7 @@ index 073a04f862..73a112f3e7 100644
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
  WINBASEAPI
  VOID
  WINAPI
@@ -162,7 +162,7 @@ index 073a04f862..73a112f3e7 100644
      _In_ LPCSTR lpMessageText
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
  WINBASEAPI
  VOID
  WINAPI

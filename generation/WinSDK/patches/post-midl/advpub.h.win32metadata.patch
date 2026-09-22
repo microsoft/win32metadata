@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h b/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
-index cfe3e2f3f6..0226a5c27b 100644
+index cfe3e2f3f6..e3e6d2854a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
 @@ -1,3 +1,4 @@
@@ -7,14 +7,284 @@ index cfe3e2f3f6..0226a5c27b 100644
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
+@@ -51,8 +52,8 @@ extern "C" {
+ #endif
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI RunSetupCommandA(HWND hWnd, LPCSTR szCmdName, LPCSTR szInfSection, LPCSTR szDir, LPCSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
+-HRESULT WINAPI RunSetupCommandW(HWND hWnd, LPCWSTR szCmdName, LPCWSTR szInfSection, LPCWSTR szDir, LPCWSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RunSetupCommandA(HWND hWnd, LPCSTR szCmdName, LPCSTR szInfSection, LPCSTR szDir, LPCSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RunSetupCommandW(HWND hWnd, LPCWSTR szCmdName, LPCWSTR szInfSection, LPCWSTR szDir, LPCWSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
+ #ifdef UNICODE
+ #define RunSetupCommand  RunSetupCommandW
+ #else
+@@ -115,8 +116,8 @@ BOOL WINAPI NeedReboot(DWORD dwRebootCheck);
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI RebootCheckOnInstallA(HWND hwnd, LPCSTR pszINF, LPCSTR pszSec, DWORD dwReserved);
+-HRESULT WINAPI RebootCheckOnInstallW(HWND hwnd, LPCWSTR pszINF, LPCWSTR pszSec, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RebootCheckOnInstallA(HWND hwnd, LPCSTR pszINF, LPCSTR pszSec, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RebootCheckOnInstallW(HWND hwnd, LPCWSTR pszINF, LPCWSTR pszSec, DWORD dwReserved);
+ #ifdef UNICODE
+ #define RebootCheckOnInstall  RebootCheckOnInstallW
+ #else
+@@ -148,7 +149,7 @@ HRESULT WINAPI RebootCheckOnInstall(HWND hwnd, LPCSTR pszINF, LPCSTR pszSec, DWO
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI TranslateInfStringA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI TranslateInfStringA(
+     _In_ LPCSTR pszInfFilename,
+     _In_ LPCSTR pszInstallSection,
+     _In_ LPCSTR pszTranslateSection,
+@@ -158,7 +159,7 @@ HRESULT WINAPI TranslateInfStringA(
+     _Out_ PDWORD pdwRequiredSize,
+     _Reserved_ PVOID pvReserved
+     );
+-HRESULT WINAPI TranslateInfStringW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringW(
+     _In_ LPCWSTR pszInfFilename,
+     _In_ LPCWSTR pszInstallSection,
+     _In_ LPCWSTR pszTranslateSection,
 @@ -248,8 +249,8 @@ typedef STRTABLEA STRTABLE;
  typedef LPCSTRTABLEA LPCSTRTABLE;
  #endif // UNICODE
  
 -HRESULT WINAPI RegInstallA(HMODULE hmod, LPCSTR pszSection, const STRTABLEA* pstTable);
 -HRESULT WINAPI RegInstallW(HMODULE hmod, LPCWSTR pszSection, const STRTABLEW* pstTable);
-+_Windows_SupportedOS_10240_ HRESULT WINAPI RegInstallA(HMODULE hmod, LPCSTR pszSection, const STRTABLEA* pstTable);
-+_Windows_SupportedOS_10240_ HRESULT WINAPI RegInstallW(HMODULE hmod, LPCWSTR pszSection, const STRTABLEW* pstTable);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_10240_ HRESULT WINAPI RegInstallA(HMODULE hmod, LPCSTR pszSection, const STRTABLEA* pstTable);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_10240_ HRESULT WINAPI RegInstallW(HMODULE hmod, LPCWSTR pszSection, const STRTABLEW* pstTable);
  #ifdef UNICODE
  #define RegInstall  RegInstallW
+ #else
+@@ -303,7 +304,7 @@ HRESULT WINAPI LaunchINFSectionExA(
+     _In_ LPSTR pszParms,
+     _In_ INT nShow
+     );
+-HRESULT WINAPI LaunchINFSectionExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI LaunchINFSectionExW(
+     _In_opt_ HWND hwnd,
+     _In_opt_ HINSTANCE hInstance,
+     _In_ LPWSTR pszParms,
+@@ -367,8 +368,8 @@ typedef CABINFOA CABINFO;
+ typedef PCABINFOA PCABINFO;
+ #endif // UNICODE
+ 
+-HRESULT WINAPI ExecuteCabA(HWND hwnd, CABINFOA* pCab, LPVOID pReserved);
+-HRESULT WINAPI ExecuteCabW(HWND hwnd, CABINFOW* pCab, LPVOID pReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI ExecuteCabA(HWND hwnd, CABINFOA* pCab, LPVOID pReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI ExecuteCabW(HWND hwnd, CABINFOW* pCab, LPVOID pReserved);
+ #ifdef UNICODE
+ #define ExecuteCab  ExecuteCabW
+ #else
+@@ -429,8 +430,8 @@ HRESULT WINAPI ExecuteCab(HWND hwnd, CABINFOA* pCab, LPVOID pReserved);
+ #define AIF_QUIET               0x20000000              // No UI to the user
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI AdvInstallFileA(HWND hwnd, LPCSTR lpszSourceDir, LPCSTR lpszSourceFile, LPCSTR lpszDestDir, LPCSTR lpszDestFile, DWORD dwFlags, DWORD dwReserved);
+-HRESULT WINAPI AdvInstallFileW(HWND hwnd, LPCWSTR lpszSourceDir, LPCWSTR lpszSourceFile, LPCWSTR lpszDestDir, LPCWSTR lpszDestFile, DWORD dwFlags, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI AdvInstallFileA(HWND hwnd, LPCSTR lpszSourceDir, LPCSTR lpszSourceFile, LPCSTR lpszDestDir, LPCSTR lpszDestFile, DWORD dwFlags, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI AdvInstallFileW(HWND hwnd, LPCWSTR lpszSourceDir, LPCWSTR lpszSourceFile, LPCWSTR lpszDestDir, LPCWSTR lpszDestFile, DWORD dwFlags, DWORD dwReserved);
+ #ifdef UNICODE
+ #define AdvInstallFile  AdvInstallFileW
+ #else
+@@ -470,8 +471,8 @@ HRESULT WINAPI AdvInstallFile(HWND hwnd, LPCSTR lpszSourceDir, LPCSTR lpszSource
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI RegSaveRestoreA(HWND hWnd, LPCSTR pszTitleString, HKEY hkBckupKey, LPCSTR pcszRootKey, LPCSTR pcszSubKey, LPCSTR pcszValueName, DWORD dwFlags);
+-HRESULT WINAPI RegSaveRestoreW(HWND hWnd, LPCWSTR pszTitleString, HKEY hkBckupKey, LPCWSTR pcszRootKey, LPCWSTR pcszSubKey, LPCWSTR pcszValueName, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RegSaveRestoreA(HWND hWnd, LPCSTR pszTitleString, HKEY hkBckupKey, LPCSTR pcszRootKey, LPCSTR pcszSubKey, LPCSTR pcszValueName, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RegSaveRestoreW(HWND hWnd, LPCWSTR pszTitleString, HKEY hkBckupKey, LPCWSTR pcszRootKey, LPCWSTR pcszSubKey, LPCWSTR pcszValueName, DWORD dwFlags);
+ #ifdef UNICODE
+ #define RegSaveRestore  RegSaveRestoreW
+ #else
+@@ -492,8 +493,8 @@ HRESULT WINAPI RegSaveRestore(HWND hWnd, LPCSTR pszTitleString, HKEY hkBckupKey,
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI RegSaveRestoreOnINFA(HWND hWnd, LPCSTR pszTitle, LPCSTR pszINF, LPCSTR pszSection, HKEY hHKLMBackKey, HKEY hHKCUBackKey, DWORD dwFlags);
+-HRESULT WINAPI RegSaveRestoreOnINFW(HWND hWnd, LPCWSTR pszTitle, LPCWSTR pszINF, LPCWSTR pszSection, HKEY hHKLMBackKey, HKEY hHKCUBackKey, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RegSaveRestoreOnINFA(HWND hWnd, LPCSTR pszTitle, LPCSTR pszINF, LPCSTR pszSection, HKEY hHKLMBackKey, HKEY hHKCUBackKey, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RegSaveRestoreOnINFW(HWND hWnd, LPCWSTR pszTitle, LPCWSTR pszINF, LPCWSTR pszSection, HKEY hHKLMBackKey, HKEY hHKCUBackKey, DWORD dwFlags);
+ #ifdef UNICODE
+ #define RegSaveRestoreOnINF  RegSaveRestoreOnINFW
+ #else
+@@ -524,12 +525,12 @@ HRESULT WINAPI RegSaveRestoreOnINF(HWND hWnd, LPCSTR pszTitle, LPCSTR pszINF, LP
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI RegRestoreAllA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RegRestoreAllA(
+     _In_opt_ HWND hWnd,
+     _In_opt_ LPCSTR pszTitleString,
+     _In_ HKEY hkBckupKey
+     );
+-HRESULT WINAPI RegRestoreAllW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RegRestoreAllW(
+     _In_opt_ HWND hWnd,
+     _In_opt_ LPCWSTR pszTitleString,
+     _In_ HKEY hkBckupKey
+@@ -565,7 +566,7 @@ HRESULT WINAPI FileSaveRestoreA(
+     LPCSTR lpDir,
+     LPCSTR lpBaseName,
+     DWORD dwFlags);
+-HRESULT WINAPI FileSaveRestoreW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI FileSaveRestoreW(
+     HWND hDlg,
+     _In_opt_ LPWSTR lpFileList,
+     LPCWSTR lpDir,
+@@ -595,8 +596,8 @@ HRESULT WINAPI FileSaveRestore(
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI FileSaveRestoreOnINFA(HWND hWnd, LPCSTR pszTitle, LPCSTR pszINF, LPCSTR pszSection, LPCSTR pszBackupDir, LPCSTR pszBaseBackupFile, DWORD dwFlags);
+-HRESULT WINAPI FileSaveRestoreOnINFW(HWND hWnd, LPCWSTR pszTitle, LPCWSTR pszINF, LPCWSTR pszSection, LPCWSTR pszBackupDir, LPCWSTR pszBaseBackupFile, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI FileSaveRestoreOnINFA(HWND hWnd, LPCSTR pszTitle, LPCSTR pszINF, LPCSTR pszSection, LPCSTR pszBackupDir, LPCSTR pszBaseBackupFile, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI FileSaveRestoreOnINFW(HWND hWnd, LPCWSTR pszTitle, LPCWSTR pszINF, LPCWSTR pszSection, LPCWSTR pszBackupDir, LPCWSTR pszBaseBackupFile, DWORD dwFlags);
+ #ifdef UNICODE
+ #define FileSaveRestoreOnINF  FileSaveRestoreOnINFW
+ #else
+@@ -633,8 +634,8 @@ HRESULT WINAPI FileSaveRestoreOnINF(HWND hWnd, LPCSTR pszTitle, LPCSTR pszINF, L
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI AddDelBackupEntryA(_In_opt_ LPCSTR lpcszFileList, _In_opt_ LPCSTR lpcszBackupDir, _In_opt_ LPCSTR lpcszBaseName, DWORD dwFlags);
+-HRESULT WINAPI AddDelBackupEntryW(_In_opt_ LPCWSTR lpcszFileList, _In_opt_ LPCWSTR lpcszBackupDir, _In_opt_ LPCWSTR lpcszBaseName, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI AddDelBackupEntryA(_In_opt_ LPCSTR lpcszFileList, _In_opt_ LPCSTR lpcszBackupDir, _In_opt_ LPCSTR lpcszBaseName, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI AddDelBackupEntryW(_In_opt_ LPCWSTR lpcszFileList, _In_opt_ LPCWSTR lpcszBackupDir, _In_opt_ LPCWSTR lpcszBaseName, DWORD dwFlags);
+ #ifdef UNICODE
+ #define AddDelBackupEntry  AddDelBackupEntryW
+ #else
+@@ -661,11 +662,11 @@ HRESULT WINAPI AddDelBackupEntry(_In_opt_ LPCSTR lpcszFileList, _In_opt_ LPCSTR
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI FileSaveMarkNotExistA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI FileSaveMarkNotExistA(
+     _In_opt_ LPCSTR lpFileList,
+     _In_opt_ LPCSTR lpDir,
+     _In_opt_ LPCSTR lpBaseName);
+-HRESULT WINAPI FileSaveMarkNotExistW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI FileSaveMarkNotExistW(
+     _In_opt_ LPCWSTR lpFileList,
+     _In_opt_ LPCWSTR lpDir,
+     _In_opt_ LPCWSTR lpBaseName);
+@@ -691,8 +692,8 @@ HRESULT WINAPI FileSaveMarkNotExist(
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI GetVersionFromFileA(LPCSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
+-HRESULT WINAPI GetVersionFromFileW(LPCWSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI GetVersionFromFileA(LPCSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI GetVersionFromFileW(LPCWSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
+ #ifdef UNICODE
+ #define GetVersionFromFile  GetVersionFromFileW
+ #else
+@@ -712,8 +713,8 @@ HRESULT WINAPI GetVersionFromFile(LPCSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI GetVersionFromFileExA(LPCSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
+-HRESULT WINAPI GetVersionFromFileExW(LPCWSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI GetVersionFromFileExA(LPCSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI GetVersionFromFileExW(LPCWSTR lpszFilename, _Out_ LPDWORD pdwMSVer, _Out_ LPDWORD pdwLSVer, BOOL bVersion);
+ #ifdef UNICODE
+ #define GetVersionFromFileEx  GetVersionFromFileExW
+ #else
+@@ -746,8 +747,8 @@ BOOL WINAPI IsNTAdmin(DWORD dwReserved, DWORD *lpdwReserved);
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI DelNodeA(LPCSTR pszFileOrDirName, DWORD dwFlags);
+-HRESULT WINAPI DelNodeW(LPCWSTR pszFileOrDirName, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI DelNodeA(LPCSTR pszFileOrDirName, DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI DelNodeW(LPCWSTR pszFileOrDirName, DWORD dwFlags);
+ #ifdef UNICODE
+ #define DelNode  DelNodeW
+ #else
+@@ -777,7 +778,7 @@ HRESULT WINAPI DelNode(LPCSTR pszFileOrDirName, DWORD dwFlags);
+ 
+ #if (_WIN32_IE >= 0x0605)
+ HRESULT WINAPI DelNodeRunDLL32A(HWND hwnd, HINSTANCE hInstance, _Inout_ LPSTR pszParms, INT nShow);
+-HRESULT WINAPI DelNodeRunDLL32W(HWND hwnd, HINSTANCE hInstance, _Inout_ LPWSTR pszParms, INT nShow);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI DelNodeRunDLL32W(HWND hwnd, HINSTANCE hInstance, _Inout_ LPWSTR pszParms, INT nShow);
+ #ifdef UNICODE
+ #define DelNodeRunDLL32  DelNodeRunDLL32W
+ #else
+@@ -800,8 +801,8 @@ HRESULT WINAPI DelNodeRunDLL32(HWND hwnd, HINSTANCE hInstance, _Inout_ LPSTR psz
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI OpenINFEngineA(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
+-HRESULT WINAPI OpenINFEngineW(LPCWSTR pszInfFilename, LPCWSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI OpenINFEngineA(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI OpenINFEngineW(LPCWSTR pszInfFilename, LPCWSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
+ #ifdef UNICODE
+ #define OpenINFEngine  OpenINFEngineW
+ #else
+@@ -823,8 +824,8 @@ HRESULT WINAPI OpenINFEngine(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DW
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI TranslateInfStringExA(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
+-HRESULT WINAPI TranslateInfStringExW(HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI TranslateInfStringExA(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringExW(HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
+ #ifdef UNICODE
+ #define TranslateInfStringEx  TranslateInfStringExW
+ #else
+@@ -859,8 +860,8 @@ HRESULT WINAPI CloseINFEngine(HINF hInf);
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI ExtractFilesA(LPCSTR pszCabName, LPCSTR pszExpandDir, DWORD dwFlags, LPCSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
+-HRESULT WINAPI ExtractFilesW(LPCWSTR pszCabName, LPCWSTR pszExpandDir, DWORD dwFlags, LPCWSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI ExtractFilesA(LPCSTR pszCabName, LPCSTR pszExpandDir, DWORD dwFlags, LPCSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI ExtractFilesW(LPCWSTR pszCabName, LPCWSTR pszExpandDir, DWORD dwFlags, LPCWSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
+ #ifdef UNICODE
+ #define ExtractFiles  ExtractFilesW
+ #else
+@@ -882,7 +883,7 @@ HRESULT WINAPI ExtractFiles(LPCSTR pszCabName, LPCSTR pszExpandDir, DWORD dwFlag
+ 
+ #if (_WIN32_IE >= 0x0605)
+ INT     WINAPI LaunchINFSectionA(HWND hwndOwner, HINSTANCE hInstance, _Inout_ LPSTR pszParams, INT nShow);
+-INT     WINAPI LaunchINFSectionW(HWND hwndOwner, HINSTANCE hInstance, _Inout_ LPWSTR pszParams, INT nShow);
++_WIN32META_ANNOTATION_("win32metadata:unicode") INT     WINAPI LaunchINFSectionW(HWND hwndOwner, HINSTANCE hInstance, _Inout_ LPWSTR pszParams, INT nShow);
+ #ifdef UNICODE
+ #define LaunchINFSection  LaunchINFSectionW
+ #else
+@@ -914,8 +915,8 @@ INT     WINAPI LaunchINFSection(HWND hwndOwner, HINSTANCE hInstance, _Inout_ LPS
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI UserInstStubWrapperA(HWND hwnd, HINSTANCE hInstance, LPCSTR pszParms, INT nShow); 
+-HRESULT WINAPI UserInstStubWrapperW(HWND hwnd, HINSTANCE hInstance, LPCWSTR pszParms, INT nShow); 
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI UserInstStubWrapperA(HWND hwnd, HINSTANCE hInstance, LPCSTR pszParms, INT nShow); 
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI UserInstStubWrapperW(HWND hwnd, HINSTANCE hInstance, LPCWSTR pszParms, INT nShow); 
+ #ifdef UNICODE
+ #define UserInstStubWrapper  UserInstStubWrapperW
+ #else
+@@ -935,8 +936,8 @@ HRESULT WINAPI UserInstStubWrapper(HWND hwnd, HINSTANCE hInstance, LPCSTR pszPar
+ /////////////////////////////////////////////////////////////////////////////
+ 
+ #if (_WIN32_IE >= 0x0605)
+-HRESULT WINAPI UserUnInstStubWrapperA(HWND hwnd, HINSTANCE hInstance, LPCSTR pszParms, INT nShow); 
+-HRESULT WINAPI UserUnInstStubWrapperW(HWND hwnd, HINSTANCE hInstance, LPCWSTR pszParms, INT nShow); 
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI UserUnInstStubWrapperA(HWND hwnd, HINSTANCE hInstance, LPCSTR pszParms, INT nShow); 
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI UserUnInstStubWrapperW(HWND hwnd, HINSTANCE hInstance, LPCWSTR pszParms, INT nShow); 
+ #ifdef UNICODE
+ #define UserUnInstStubWrapper  UserUnInstStubWrapperW
+ #else
+@@ -985,8 +986,8 @@ typedef PERUSERSECTIONA PERUSERSECTION;
+ typedef PPERUSERSECTIONA PPERUSERSECTION;
+ #endif // UNICODE
+ 
+-HRESULT WINAPI SetPerUserSecValuesA(PERUSERSECTIONA* pPerUser);
+-HRESULT WINAPI SetPerUserSecValuesW(PERUSERSECTIONW* pPerUser);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI SetPerUserSecValuesA(PERUSERSECTIONA* pPerUser);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI SetPerUserSecValuesW(PERUSERSECTIONW* pPerUser);
+ #ifdef UNICODE
+ #define SetPerUserSecValues  SetPerUserSecValuesW
  #else

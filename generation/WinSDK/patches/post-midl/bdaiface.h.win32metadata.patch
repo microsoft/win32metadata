@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
-index 32f87f3e14..9eaf2202ae 100644
+index 32f87f3e14..8deeabf1f3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
 @@ -1,3 +1,4 @@
@@ -53,7 +53,7 @@ index 32f87f3e14..9eaf2202ae 100644
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Next( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG cRequest,
              /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) PID_MAP *pPIDMap,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
-index 09bb15cbc7..e792fba719 100644
+index 09bb15cbc7..0a0b9a77ab 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 @@ -1,3 +1,4 @@
@@ -21,7 +21,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  SymFindDebugInfoFile(
      _In_ HANDLE hProcess,
@@ -30,7 +30,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  SymFindDebugInfoFileW(
      _In_ HANDLE hProcess,
@@ -48,7 +48,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  FindDebugInfoFileEx (
      _In_ PCSTR FileName,
@@ -57,7 +57,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  FindDebugInfoFileExW (
      _In_ PCWSTR FileName,
@@ -66,7 +66,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymFindFileInPath(
      _In_ HANDLE hprocess,
@@ -84,7 +84,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymFindFileInPathW(
      _In_ HANDLE hprocess,
@@ -102,7 +102,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  SymFindExecutableImage(
      _In_ HANDLE hProcess,
@@ -111,7 +111,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  SymFindExecutableImageW(
      _In_ HANDLE hProcess,
@@ -129,7 +129,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  FindExecutableImageEx(
      _In_ PCSTR FileName,
@@ -138,7 +138,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -HANDLE
-+_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  IMAGEAPI
  FindExecutableImageExW(
      _In_ PCWSTR FileName,
@@ -195,7 +195,7 @@ index 09bb15cbc7..e792fba719 100644
  #endif
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SearchTreeForFile(
      _In_ PCSTR RootPath,
@@ -204,7 +204,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SearchTreeForFileW(
      _In_ PCWSTR RootPath,
@@ -213,7 +213,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  EnumDirTree(
      _In_opt_ HANDLE hProcess,
@@ -222,7 +222,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  EnumDirTreeW(
      _In_opt_ HANDLE hProcess,
@@ -240,7 +240,7 @@ index 09bb15cbc7..e792fba719 100644
  #define UNDNAME_NO_SPECIAL_SYMS          (0x4000)  // Don't undecorate special names (v-table, vcall, vector xxx, metatype, etc)
  
 -DWORD
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") DWORD
  IMAGEAPI
  WINAPI
  UnDecorateSymbolName(
@@ -249,7 +249,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -DWORD
-+_Win32_SetLastError_ DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ DWORD
  IMAGEAPI
  WINAPI
  UnDecorateSymbolNameW(
@@ -321,6 +321,42 @@ index 09bb15cbc7..e792fba719 100644
  IMAGEAPI
  GetTimestampForLoadedLibrary(
      _In_ HMODULE Module
+@@ -1525,7 +1526,7 @@ typedef struct _IMAGEHLP_LINE64 {
+     DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_LINE64)
+     PVOID    Key;                    // internal
+     DWORD    LineNumber;             // line number in file
+-    PCHAR    FileName;               // full filename
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR    FileName;               // full filename
+     DWORD64  Address;                // first instruction of line
+ } IMAGEHLP_LINE64, *PIMAGEHLP_LINE64;
+ 
+@@ -1545,7 +1546,7 @@ typedef struct _IMAGEHLP_LINE {
+     DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_LINE)
+     PVOID    Key;                    // internal
+     DWORD    LineNumber;             // line number in file
+-    PCHAR    FileName;               // full filename
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR    FileName;               // full filename
+     DWORD    Address;                // first instruction of line
+ } IMAGEHLP_LINE, *PIMAGEHLP_LINE;
+ 
+@@ -1553,7 +1554,7 @@ typedef struct _IMAGEHLP_LINEW {
+     DWORD    SizeOfStruct;           // set to sizeof(IMAGEHLP_LINE64)
+     PVOID    Key;                    // internal
+     DWORD    LineNumber;             // line number in file
+-    PCHAR    FileName;               // full filename
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR    FileName;               // full filename
+     DWORD64  Address;                // first instruction of line
+ } IMAGEHLP_LINEW, *PIMAGEHLP_LINEW;
+ #endif
+@@ -1564,7 +1565,7 @@ typedef struct _IMAGEHLP_LINEW {
+ 
+ typedef struct _SOURCEFILE {
+     DWORD64  ModBase;                // base address of loaded module
+-    PCHAR    FileName;               // full filename of source
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR    FileName;               // full filename of source
+ } SOURCEFILE, *PSOURCEFILE;
+ 
+ typedef struct _SOURCEFILEW {
 @@ -1610,6 +1611,28 @@ typedef struct _IMAGEHLP_CBA_READ_MEMORY {
      DWORD    *bytesread;                                // pointer to store amount of bytes read
  } IMAGEHLP_CBA_READ_MEMORY, *PIMAGEHLP_CBA_READ_MEMORY;
@@ -364,7 +400,8 @@ index 09bb15cbc7..e792fba719 100644
 -    DWORD severity;                                     // values from sevInfo to sevFatal
 +    _Win32_AssociatedEnum_(IMAGEHLP_CBA_EVENT_SEVERITY) DWORD severity;                                     // values from sevInfo to sevFatal
      DWORD code;                                         // numerical code IDs the error
-     PCHAR desc;                                         // may contain a text description of the error
+-    PCHAR desc;                                         // may contain a text description of the error
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR desc;                                         // may contain a text description of the error
      PVOID object;                                       // value dependant upon the error code
  } IMAGEHLP_CBA_EVENT, *PIMAGEHLP_CBA_EVENT;
  
@@ -393,7 +430,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCHAR
-+_Win32_SetLastError_ PCHAR
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Win32_SetLastError_ PCHAR
  IMAGEAPI
  SymSetHomeDirectory(
      _In_opt_ HANDLE hProcess,
@@ -401,7 +438,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PWSTR
-+_Win32_SetLastError_ PWSTR
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ PWSTR
  IMAGEAPI
  SymSetHomeDirectoryW(
      _In_opt_ HANDLE hProcess,
@@ -409,7 +446,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCHAR
-+_Win32_SetLastError_ PCHAR
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Win32_SetLastError_ PCHAR
  IMAGEAPI
  SymGetHomeDirectory(
 -    _In_ DWORD type,
@@ -419,7 +456,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PWSTR
-+_Win32_SetLastError_ PWSTR
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ PWSTR
  IMAGEAPI
  SymGetHomeDirectoryW(
 -    _In_ DWORD type,
@@ -479,7 +516,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymMatchString(
      _In_ PCSTR string,
@@ -488,7 +525,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymMatchStringA(
      _In_ PCSTR string,
@@ -497,7 +534,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymMatchStringW(
      _In_ PCWSTR string,
@@ -506,7 +543,7 @@ index 09bb15cbc7..e792fba719 100644
  #define PSYM_ENUMSOURCFILES_CALLBACK PSYM_ENUMSOURCEFILES_CALLBACK
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumSourceFiles(
      _In_ HANDLE hProcess,
@@ -515,7 +552,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumSourceFilesW(
      _In_ HANDLE hProcess,
@@ -551,7 +588,7 @@ index 09bb15cbc7..e792fba719 100644
  #endif
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  EnumerateLoadedModulesEx(
      _In_ HANDLE hProcess,
@@ -560,7 +597,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  EnumerateLoadedModulesExW(
      _In_ HANDLE hProcess,
@@ -641,7 +678,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymGetModuleInfoW  SymGetModuleInfoW64
  #else
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetModuleInfo(
      _In_ HANDLE hProcess,
@@ -650,7 +687,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetModuleInfoW(
      _In_ HANDLE hProcess,
@@ -677,7 +714,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumLines(
      _In_ HANDLE hProcess,
@@ -686,7 +723,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumLinesW(
      _In_ HANDLE hProcess,
@@ -713,7 +750,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetLineFromInlineContext(
      _In_ HANDLE hProcess,
@@ -722,7 +759,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetLineFromInlineContextW(
      _In_ HANDLE hProcess,
@@ -731,7 +768,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumSourceLines(
      _In_ HANDLE hProcess,
@@ -740,7 +777,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumSourceLinesW(
      _In_ HANDLE hProcess,
@@ -776,7 +813,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymGetLineFromAddrW SymGetLineFromAddrW64
  #else
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetLineFromAddr(
      _In_ HANDLE hProcess,
@@ -829,7 +866,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymGetLineNext SymGetLineNext64
  #else
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetLineNext(
      _In_ HANDLE hProcess,
@@ -855,7 +892,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymGetLinePrev SymGetLinePrev64
  #else
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetLinePrev(
      _In_ HANDLE hProcess,
@@ -873,7 +910,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymMatchFileName(
      _In_ PCSTR FileName,
@@ -882,7 +919,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymMatchFileNameW(
      _In_ PCWSTR FileName,
@@ -891,7 +928,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSourceFile(
      _In_ HANDLE hProcess,
@@ -900,7 +937,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSourceFileW(
      _In_ HANDLE hProcess,
@@ -909,7 +946,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSourceFileToken(
      _In_ HANDLE hProcess,
@@ -918,7 +955,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileTokenByTokenName(
      _In_ HANDLE hProcess,
@@ -927,7 +964,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileChecksumW(
      _In_ HANDLE hProcess,
@@ -936,7 +973,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSourceFileChecksum(
      _In_ HANDLE hProcess,
@@ -945,7 +982,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileTokenW(
      _In_ HANDLE hProcess,
@@ -954,7 +991,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileTokenByTokenNameW(
      _In_ HANDLE hProcess,
@@ -963,7 +1000,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSourceFileFromToken(
      _In_ HANDLE hProcess,
@@ -972,7 +1009,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileFromTokenByTokenName(
      _In_ HANDLE hProcess,
@@ -981,7 +1018,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileFromTokenW(
      _In_ HANDLE hProcess,
@@ -990,7 +1027,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceFileFromTokenByTokenNameW(
      _In_ HANDLE hProcess,
@@ -999,7 +1036,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSourceVarFromToken(
      _In_ HANDLE hProcess,
@@ -1008,7 +1045,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSourceVarFromTokenW(
      _In_ HANDLE hProcess,
@@ -1026,7 +1063,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymInitialize(
      _In_ HANDLE hProcess,
@@ -1035,7 +1072,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymInitializeW(
      _In_ HANDLE hProcess,
@@ -1044,7 +1081,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSearchPath(
      _In_ HANDLE hProcess,
@@ -1053,7 +1090,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetSearchPathW(
      _In_ HANDLE hProcess,
@@ -1062,7 +1099,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymSetSearchPath(
      _In_ HANDLE hProcess,
@@ -1071,7 +1108,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSetSearchPathW(
      _In_ HANDLE hProcess,
@@ -1080,7 +1117,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SLMFLAG_NO_SYMBOLS  0x4
  
 -DWORD64
-+_Win32_SetLastError_ DWORD64
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ DWORD64
  IMAGEAPI
  SymLoadModuleEx(
      _In_ HANDLE hProcess,
@@ -1098,7 +1135,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
 -DWORD64
-+_Win32_SetLastError_ DWORD64
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ DWORD64
  IMAGEAPI
  SymLoadModuleExW(
      _In_ HANDLE hProcess,
@@ -1259,7 +1296,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymFromAddr(
      _In_ HANDLE hProcess,
@@ -1268,7 +1305,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymFromAddrW(
      _In_ HANDLE hProcess,
@@ -1277,7 +1314,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymFromInlineContext(
      _In_ HANDLE hProcess,
@@ -1286,7 +1323,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymFromInlineContextW(
      _In_ HANDLE hProcess,
@@ -1295,7 +1332,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymFromToken(
      _In_ HANDLE hProcess,
@@ -1304,7 +1341,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymFromTokenW(
      _In_ HANDLE hProcess,
@@ -1313,7 +1350,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymNext(
      _In_ HANDLE hProcess,
@@ -1321,7 +1358,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymNextW(
      _In_ HANDLE hProcess,
@@ -1329,7 +1366,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymPrev(
      _In_ HANDLE hProcess,
@@ -1337,7 +1374,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymPrevW(
      _In_ HANDLE hProcess,
@@ -1346,7 +1383,7 @@ index 09bb15cbc7..e792fba719 100644
  // and differentiate between identically named symbols.
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymFromName(
      _In_ HANDLE hProcess,
@@ -1355,7 +1392,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymFromNameW(
      _In_ HANDLE hProcess,
@@ -1364,7 +1401,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumSymbols(
      _In_ HANDLE hProcess,
@@ -1373,7 +1410,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumSymbolsEx(
      _In_ HANDLE hProcess,
@@ -1382,7 +1419,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumSymbolsW(
      _In_ HANDLE hProcess,
@@ -1391,7 +1428,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumSymbolsExW(
      _In_ HANDLE hProcess,
@@ -1400,7 +1437,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumSymbolsForAddr(
      _In_ HANDLE hProcess,
@@ -1409,7 +1446,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymEnumSymbolsForAddrW(
      _In_ HANDLE hProcess,
@@ -1418,7 +1455,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SYMSEARCH_ALLITEMS      0X08    // search for everything in the pdb, not just normal scoped symbols
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSearch(
      _In_ HANDLE hProcess,
@@ -1427,7 +1464,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSearchW(
      _In_ HANDLE hProcess,
@@ -1436,7 +1473,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetScope(
      _In_ HANDLE hProcess,
@@ -1445,7 +1482,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymGetScopeW(
      _In_ HANDLE hProcess,
@@ -1454,7 +1491,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymFromIndex(
      _In_ HANDLE hProcess,
@@ -1463,7 +1500,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymFromIndexW(
      _In_ HANDLE hProcess,
@@ -1499,7 +1536,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumTypes(
      _In_ HANDLE hProcess,
@@ -1508,7 +1545,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumTypesW(
      _In_ HANDLE hProcess,
@@ -1517,7 +1554,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumTypesByName(
      _In_ HANDLE hProcess,
@@ -1526,7 +1563,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymEnumTypesByNameW(
      _In_ HANDLE hProcess,
@@ -1535,7 +1572,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetTypeFromName(
      _In_ HANDLE hProcess,
@@ -1544,7 +1581,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetTypeFromNameW(
      _In_ HANDLE hProcess,
@@ -1553,7 +1590,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymAddSymbol(
      _In_ HANDLE hProcess,
@@ -1562,7 +1599,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymAddSymbolW(
      _In_ HANDLE hProcess,
@@ -1571,7 +1608,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymDeleteSymbol(
      _In_ HANDLE hProcess,
@@ -1580,7 +1617,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymDeleteSymbolW(
      _In_ HANDLE hProcess,
@@ -1598,16 +1635,25 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymAddSourceStream(
+     _In_ HANDLE hProcess,
+@@ -3439,7 +3463,7 @@ SymAddSourceStream(
+ 
+ typedef BOOL (WINAPI *SYMADDSOURCESTREAM)(HANDLE, ULONG64, PCSTR, PBYTE, size_t);
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ IMAGEAPI
+ SymAddSourceStreamA(
      _In_ HANDLE hProcess,
 @@ -3451,7 +3475,7 @@ SymAddSourceStreamA(
  
  typedef BOOL (WINAPI *SYMADDSOURCESTREAMA)(HANDLE, ULONG64, PCSTR, PBYTE, size_t);
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymAddSourceStreamW(
      _In_ HANDLE hProcess,
@@ -1616,7 +1662,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSrvIsStoreW(
      _In_opt_ HANDLE hProcess,
@@ -1624,7 +1670,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSrvIsStore(
      _In_opt_ HANDLE hProcess,
@@ -1632,7 +1678,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCSTR
-+_Win32_SetLastError_ PCSTR
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ PCSTR
  IMAGEAPI
  SymSrvDeltaName(
      _In_ HANDLE hProcess,
@@ -1641,7 +1687,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCWSTR
-+_Win32_SetLastError_ PCWSTR
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ PCWSTR
  IMAGEAPI
  SymSrvDeltaNameW(
      _In_ HANDLE hProcess,
@@ -1650,7 +1696,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCSTR
-+_Win32_SetLastError_ PCSTR
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ PCSTR
  IMAGEAPI
  SymSrvGetSupplement(
      _In_ HANDLE hProcess,
@@ -1659,7 +1705,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCWSTR
-+_Win32_SetLastError_ PCWSTR
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ PCWSTR
  IMAGEAPI
  SymSrvGetSupplementW(
      _In_ HANDLE hProcess,
@@ -1668,7 +1714,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymSrvGetFileIndexes(
      _In_ PCSTR File,
@@ -1677,7 +1723,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymSrvGetFileIndexesW(
      _In_ PCWSTR File,
@@ -1686,7 +1732,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymSrvGetFileIndexStringW(
      _In_ HANDLE hProcess,
@@ -1695,7 +1741,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymSrvGetFileIndexString(
      _In_ HANDLE hProcess,
@@ -1704,7 +1750,7 @@ index 09bb15cbc7..e792fba719 100644
  } SYMSRV_INDEX_INFOW, *PSYMSRV_INDEX_INFOW;
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSrvGetFileIndexInfo(
      _In_ PCSTR File,
@@ -1713,7 +1759,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ BOOL
  IMAGEAPI
  SymSrvGetFileIndexInfoW(
      _In_ PCWSTR File,
@@ -1722,7 +1768,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCSTR
-+_Win32_SetLastError_ PCSTR
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ PCSTR
  IMAGEAPI
  SymSrvStoreSupplement(
      _In_ HANDLE hProcess,
@@ -1731,7 +1777,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCWSTR
-+_Win32_SetLastError_ PCWSTR
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ PCWSTR
  IMAGEAPI
  SymSrvStoreSupplementW(
      _In_ HANDLE hProcess,
@@ -1740,7 +1786,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -PCSTR
-+_Win32_SetLastError_ PCSTR
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ PCSTR
  IMAGEAPI
  SymSrvStoreFile(
      _In_ HANDLE hProcess,
@@ -1756,7 +1802,7 @@ index 09bb15cbc7..e792fba719 100644
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
 -PCWSTR
-+_Win32_SetLastError_ PCWSTR
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ PCWSTR
  IMAGEAPI
  SymSrvStoreFileW(
      _In_ HANDLE hProcess,
@@ -1772,7 +1818,7 @@ index 09bb15cbc7..e792fba719 100644
  } IMAGEHLP_SF_TYPE;
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSymbolFile(
      _In_opt_ HANDLE hProcess,
@@ -1787,7 +1833,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSymbolFileW(
      _In_opt_ HANDLE hProcess,
@@ -1798,6 +1844,24 @@ index 09bb15cbc7..e792fba719 100644
      _Out_writes_(cSymbolFile) PWSTR SymbolFile,
      _In_ size_t cSymbolFile,
      _Out_writes_(cDbgFile) PWSTR DbgFile,
+@@ -3694,7 +3718,7 @@ typedef BOOL (WINAPI *PDBGHELP_CREATE_USER_DUMP_CALLBACK)(
+     _In_opt_ PVOID UserData
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ WINAPI
+ DbgHelpCreateUserDump(
+     _In_opt_ LPCSTR FileName,
+@@ -3702,7 +3726,7 @@ DbgHelpCreateUserDump(
+     _In_opt_ PVOID UserData
+     );
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ WINAPI
+ DbgHelpCreateUserDumpW(
+     _In_opt_ LPCWSTR FileName,
 @@ -3721,7 +3745,7 @@ DbgHelpCreateUserDumpW(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
@@ -1884,7 +1948,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymEnumerateSymbolsW SymEnumerateSymbolsW64
  #else
 -DBHLP_DEPRECIATED
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") DBHLP_DEPRECIATED
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") DBHLP_DEPRECIATED
  BOOL
  IMAGEAPI
  SymEnumerateSymbols(
@@ -1893,7 +1957,7 @@ index 09bb15cbc7..e792fba719 100644
      );
  
 -DBHLP_DEPRECIATED
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") DBHLP_DEPRECIATED
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") DBHLP_DEPRECIATED
  BOOL
  IMAGEAPI
  SymEnumerateSymbolsW(
@@ -1929,7 +1993,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymGetSymNextW SymGetSymNextW64
  #else
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSymNext(
      _In_ HANDLE hProcess,
@@ -1947,7 +2011,7 @@ index 09bb15cbc7..e792fba719 100644
  #define SymGetSymPrevW SymGetSymPrevW64
  #else
 -BOOL
-+_Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_ _Win32_ImportLibrary_("dbghelp.dll") BOOL
  IMAGEAPI
  SymGetSymPrev(
      _In_ HANDLE hProcess,

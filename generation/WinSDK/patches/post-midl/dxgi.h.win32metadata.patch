@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
-index bc9f6717c7..48cedd34b6 100644
+index bc9f6717c7..9286607367 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
 @@ -1,3 +1,4 @@
@@ -29,7 +29,32 @@ index bc9f6717c7..48cedd34b6 100644
      } 	DXGI_SWAP_CHAIN_DESC;
  
  
-@@ -614,7 +619,7 @@ EXTERN_C const IID IID_IDXGIResource;
+@@ -318,7 +323,7 @@ EXTERN_C const IID IID_IDXGIObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aec22fb8-76f3-4639-9be0-28eb43a67a2e")
++    MIDL_INTERFACE("aec22fb8-76f3-4639-9be0-28eb43a67a2e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIObject : public IUnknown
+     {
+     public:
+@@ -468,7 +473,7 @@ EXTERN_C const IID IID_IDXGIDeviceSubObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3d3e0379-f9de-4d58-bb6c-18d62992f1a6")
++    MIDL_INTERFACE("3d3e0379-f9de-4d58-bb6c-18d62992f1a6") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIDeviceSubObject : public IDXGIObject
+     {
+     public:
+@@ -608,13 +613,13 @@ EXTERN_C const IID IID_IDXGIResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("035f3ab4-482e-4e50-b41f-8a7f8bd8960b")
++    MIDL_INTERFACE("035f3ab4-482e-4e50-b41f-8a7f8bd8960b") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIResource : public IDXGIDeviceSubObject
+     {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetSharedHandle( 
              /* [annotation][out] */ 
@@ -52,7 +77,23 @@ index bc9f6717c7..48cedd34b6 100644
          
      };
      
-@@ -980,13 +985,13 @@ EXTERN_C const IID IID_IDXGISurface;
+@@ -795,7 +800,7 @@ EXTERN_C const IID IID_IDXGIKeyedMutex;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9d8e1289-d7b3-465f-8126-250e349af85d")
++    MIDL_INTERFACE("9d8e1289-d7b3-465f-8126-250e349af85d") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIKeyedMutex : public IDXGIDeviceSubObject
+     {
+     public:
+@@ -974,19 +979,19 @@ EXTERN_C const IID IID_IDXGISurface;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cafcb56c-6ac3-4889-bf47-9e23bbd260ec")
++    MIDL_INTERFACE("cafcb56c-6ac3-4889-bf47-9e23bbd260ec") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGISurface : public IDXGIDeviceSubObject
+     {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetDesc( 
              /* [annotation][out] */ 
@@ -73,16 +114,21 @@ index bc9f6717c7..48cedd34b6 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("4AE63092-6327-4c1b-80AE-BFE12EA32B86")
-+    MIDL_INTERFACE("4AE63092-6327-4c1b-80AE-BFE12EA32B86") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("4AE63092-6327-4c1b-80AE-BFE12EA32B86") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      IDXGISurface1 : public IDXGISurface
      {
      public:
-@@ -1354,7 +1359,7 @@ EXTERN_C const IID IID_IDXGIAdapter;
+@@ -1350,11 +1355,11 @@ EXTERN_C const IID IID_IDXGIAdapter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2411e7e1-12ac-4ccf-bd14-9798e8534dc0")
++    MIDL_INTERFACE("2411e7e1-12ac-4ccf-bd14-9798e8534dc0") _WIN32META_ANNOTATION_("win32metadata:agile") 
      IDXGIAdapter : public IDXGIObject
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
              /* [annotation][in] */ 
              _In_  UINT Output,
              /* [annotation][out][in] */ 
@@ -95,7 +141,14 @@ index bc9f6717c7..48cedd34b6 100644
          
          virtual HRESULT STDMETHODCALLTYPE CheckInterfaceSupport( 
              /* [annotation][in] */ 
-@@ -1538,13 +1543,13 @@ EXTERN_C const IID IID_IDXGIOutput;
+@@ -1532,19 +1537,19 @@ EXTERN_C const IID IID_IDXGIOutput;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ae02eedb-c735-4690-8d52-5a8dc20213aa")
++    MIDL_INTERFACE("ae02eedb-c735-4690-8d52-5a8dc20213aa") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIOutput : public IDXGIObject
+     {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetDesc( 
              /* [annotation][out] */ 
@@ -111,12 +164,17 @@ index bc9f6717c7..48cedd34b6 100644
              /* [annotation][out][in] */ 
              _Inout_  UINT *pNumModes,
              /* [annotation][out] */ 
-@@ -1847,11 +1852,11 @@ EXTERN_C const IID IID_IDXGISwapChain;
+@@ -1843,15 +1848,15 @@ EXTERN_C const IID IID_IDXGISwapChain;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a")
++    MIDL_INTERFACE("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a") _WIN32META_ANNOTATION_("win32metadata:agile") 
      IDXGISwapChain : public IDXGIDeviceSubObject
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE Present( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Present( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Present( 
              /* [annotation][in] */ 
              _In_  UINT SyncInterval,
              /* [annotation][in] */ 
@@ -143,6 +201,15 @@ index bc9f6717c7..48cedd34b6 100644
          
          virtual HRESULT STDMETHODCALLTYPE ResizeTarget( 
              /* [annotation][in] */ 
+@@ -2156,7 +2161,7 @@ EXTERN_C const IID IID_IDXGIFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b7166ec-21c7-44ae-b21a-c9ae321ae369")
++    MIDL_INTERFACE("7b7166ec-21c7-44ae-b21a-c9ae321ae369") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIFactory : public IDXGIObject
+     {
+     public:
 @@ -2168,13 +2173,13 @@ EXTERN_C const IID IID_IDXGIFactory;
          
          virtual HRESULT STDMETHODCALLTYPE MakeWindowAssociation( 
@@ -155,7 +222,7 @@ index bc9f6717c7..48cedd34b6 100644
              _Out_  HWND *pWindowHandle) = 0;
          
 -        virtual HRESULT STDMETHODCALLTYPE CreateSwapChain( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE CreateSwapChain( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE CreateSwapChain( 
              /* [annotation][in] */ 
              _In_  IUnknown *pDevice,
              /* [annotation][in] */ 
@@ -168,6 +235,15 @@ index bc9f6717c7..48cedd34b6 100644
  
  
  extern RPC_IF_HANDLE __MIDL_itf_dxgi_0000_0010_v0_0_c_ifspec;
+@@ -2374,7 +2379,7 @@ EXTERN_C const IID IID_IDXGIDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("54ec77fa-1377-44e6-8c32-88fd5f44c84c")
++    MIDL_INTERFACE("54ec77fa-1377-44e6-8c32-88fd5f44c84c") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIDevice : public IDXGIObject
+     {
+     public:
 @@ -2579,7 +2584,11 @@ EXTERN_C const IID IID_IDXGIDevice;
  /* [local] */ 
  
@@ -195,12 +271,12 @@ index bc9f6717c7..48cedd34b6 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387")
-+    MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      IDXGIFactory1 : public IDXGIFactory
      {
      public:
 -        virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
-+        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
              /* [annotation][in] */ 
              _In_  UINT Adapter,
              /* [annotation][out] */ 
@@ -209,7 +285,7 @@ index bc9f6717c7..48cedd34b6 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("29038f61-3839-4626-91fd-086879011a05")
-+    MIDL_INTERFACE("29038f61-3839-4626-91fd-086879011a05") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("29038f61-3839-4626-91fd-086879011a05") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      IDXGIAdapter1 : public IDXGIAdapter
      {
      public:
@@ -225,7 +301,7 @@ index bc9f6717c7..48cedd34b6 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("77db970f-6276-48ba-ba28-070143b4392c")
-+    MIDL_INTERFACE("77db970f-6276-48ba-ba28-070143b4392c") _Windows_SupportedOS_Windows7_ 
++    MIDL_INTERFACE("77db970f-6276-48ba-ba28-070143b4392c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
      IDXGIDevice1 : public IDXGIDevice
      {
      public:

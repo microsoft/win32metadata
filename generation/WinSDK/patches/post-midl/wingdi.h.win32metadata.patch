@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
-index dded3769a1..b54c65d8db 100644
+index dded3769a1..0c9bf486b3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 @@ -1,3 +1,4 @@
@@ -224,8 +224,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI int WINAPI AddFontResourceA(_In_ LPCSTR);
 -WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI AddFontResourceA(_In_ LPCSTR);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI AddFontResourceA(_In_ LPCSTR);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
  #ifdef UNICODE
  #define AddFontResource  AddFontResourceW
  #else
@@ -250,8 +250,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI int   WINAPI ChoosePixelFormat( _In_ HDC hdc, _In_ CONST PIXELFORMATDESCRIPTOR *ppfd);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE  WINAPI CloseMetaFile( _In_ HDC hdc);
 +_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(GDI_REGION_TYPE) WINGDIAPI int     WINAPI CombineRgn( _In_opt_ HRGN hrgnDst, _In_opt_ HRGN hrgnSrc1, _In_opt_ HRGN hrgnSrc2, _Win32_AssociatedEnum_(RGN_COMBINE_MODE) _In_ int iMode);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE WINAPI CopyMetaFileA( _In_ HMETAFILE, _In_opt_ LPCSTR);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE WINAPI CopyMetaFileW( _In_ HMETAFILE, _In_opt_ LPCWSTR);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE WINAPI CopyMetaFileA( _In_ HMETAFILE, _In_opt_ LPCSTR);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE WINAPI CopyMetaFileW( _In_ HMETAFILE, _In_opt_ LPCWSTR);
  #ifdef UNICODE
  #define CopyMetaFile  CopyMetaFileW
  #else
@@ -271,8 +271,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HBITMAP WINAPI CreateCompatibleBitmap( _In_ HDC hdc, _In_ int cx, _In_ int cy);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HBITMAP WINAPI CreateDiscardableBitmap( _In_ HDC hdc, _In_ int cx, _In_ int cy);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateCompatibleDC( _In_opt_ HDC hdc);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateDCA( _In_opt_ LPCSTR pwszDriver, _In_opt_ LPCSTR pwszDevice, _In_opt_ LPCSTR pszPort, _In_opt_ CONST DEVMODEA * pdm);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateDCW( _In_opt_ LPCWSTR pwszDriver, _In_opt_ LPCWSTR pwszDevice, _In_opt_ LPCWSTR pszPort, _In_opt_ CONST DEVMODEW * pdm);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateDCA( _In_opt_ LPCSTR pwszDriver, _In_opt_ LPCSTR pwszDevice, _In_opt_ LPCSTR pszPort, _In_opt_ CONST DEVMODEA * pdm);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateDCW( _In_opt_ LPCWSTR pwszDriver, _In_opt_ LPCWSTR pwszDevice, _In_opt_ LPCWSTR pszPort, _In_opt_ CONST DEVMODEW * pdm);
  #ifdef UNICODE
  #define CreateDC  CreateDCW
  #else
@@ -290,8 +290,8 @@ index dded3769a1..b54c65d8db 100644
 + _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrushPt( _In_ CONST VOID *lpPackedDIB, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT iUsage);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HRGN    WINAPI CreateEllipticRgn( _In_ int x1, _In_ int y1, _In_ int x2, _In_ int y2);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HRGN    WINAPI CreateEllipticRgnIndirect( _In_ CONST RECT *lprect);
-+ _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontIndirectA( _In_ CONST LOGFONTA *lplf);
-+ _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontIndirectW( _In_ CONST LOGFONTW *lplf);
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontIndirectA( _In_ CONST LOGFONTA *lplf);
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontIndirectW( _In_ CONST LOGFONTW *lplf);
  #ifdef UNICODE
  #define CreateFontIndirect  CreateFontIndirectW
  #else
@@ -303,10 +303,10 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
 -                             _In_ DWORD bUnderline, _In_ DWORD bStrikeOut, _In_ DWORD iCharSet, _In_ DWORD iOutPrecision, _In_ DWORD iClipPrecision,
 -                             _In_ DWORD iQuality, _In_ DWORD iPitchAndFamily, _In_opt_ LPCWSTR pszFaceName);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontA( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontA( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
 +                             _In_ DWORD bUnderline, _In_ DWORD bStrikeOut, _Win32_AssociatedEnum_(FONT_CHARSET) _In_ DWORD iCharSet, _Win32_AssociatedEnum_(FONT_OUTPUT_PRECISION) _In_ DWORD iOutPrecision, _Win32_AssociatedEnum_(FONT_CLIP_PRECISION) _In_ DWORD iClipPrecision,
 +                             _Win32_AssociatedEnum_(FONT_QUALITY) _In_ DWORD iQuality, _In_ DWORD iPitchAndFamily, _In_opt_ LPCSTR pszFaceName);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
 +                             _In_ DWORD bUnderline, _In_ DWORD bStrikeOut, _Win32_AssociatedEnum_(FONT_CHARSET) _In_ DWORD iCharSet, _Win32_AssociatedEnum_(FONT_OUTPUT_PRECISION) _In_ DWORD iOutPrecision, _Win32_AssociatedEnum_(FONT_CLIP_PRECISION) _In_ DWORD iClipPrecision,
 +                             _Win32_AssociatedEnum_(FONT_QUALITY) _In_ DWORD iQuality, _In_ DWORD iPitchAndFamily, _In_opt_ LPCWSTR pszFaceName);
  #ifdef UNICODE
@@ -319,8 +319,8 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI HDC     WINAPI CreateICA( _In_opt_ LPCSTR pszDriver, _In_opt_ LPCSTR pszDevice, _In_opt_ LPCSTR pszPort, _In_opt_ CONST DEVMODEA * pdm);
 -WINGDIAPI HDC     WINAPI CreateICW( _In_opt_ LPCWSTR pszDriver, _In_opt_ LPCWSTR pszDevice, _In_opt_ LPCWSTR pszPort, _In_opt_ CONST DEVMODEW * pdm);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HBRUSH  WINAPI CreateHatchBrush( _Win32_AssociatedEnum_(HATCH_BRUSH_STYLE) _In_ int iHatch, _In_ COLORREF color);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateICA( _In_opt_ LPCSTR pszDriver, _In_opt_ LPCSTR pszDevice, _In_opt_ LPCSTR pszPort, _In_opt_ CONST DEVMODEA * pdm);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateICW( _In_opt_ LPCWSTR pszDriver, _In_opt_ LPCWSTR pszDevice, _In_opt_ LPCWSTR pszPort, _In_opt_ CONST DEVMODEW * pdm);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateICA( _In_opt_ LPCSTR pszDriver, _In_opt_ LPCSTR pszDevice, _In_opt_ LPCSTR pszPort, _In_opt_ CONST DEVMODEA * pdm);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC     WINAPI CreateICW( _In_opt_ LPCWSTR pszDriver, _In_opt_ LPCWSTR pszDevice, _In_opt_ LPCWSTR pszPort, _In_opt_ CONST DEVMODEW * pdm);
  #ifdef UNICODE
  #define CreateIC  CreateICW
  #else
@@ -328,8 +328,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI HDC     WINAPI CreateMetaFileA( _In_opt_ LPCSTR pszFile);
 -WINGDIAPI HDC     WINAPI CreateMetaFileW( _In_opt_ LPCWSTR pszFile);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile) WINGDIAPI HDC     WINAPI CreateMetaFileA( _In_opt_ LPCSTR pszFile);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile) WINGDIAPI HDC     WINAPI CreateMetaFileW( _In_opt_ LPCWSTR pszFile);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile) WINGDIAPI HDC     WINAPI CreateMetaFileA( _In_opt_ LPCSTR pszFile);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteMetaFile) WINGDIAPI HDC     WINAPI CreateMetaFileW( _In_opt_ LPCWSTR pszFile);
  #ifdef UNICODE
  #define CreateMetaFile  CreateMetaFileW
  #else
@@ -357,8 +357,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HRGN    WINAPI CreateRectRgn( _In_ int x1, _In_ int y1, _In_ int x2, _In_ int y2);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HRGN    WINAPI CreateRectRgnIndirect( _In_ CONST RECT *lprect);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HRGN    WINAPI CreateRoundRectRgn( _In_ int x1, _In_ int y1, _In_ int x2, _In_ int y2, _In_ int w, _In_ int h);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL    WINAPI CreateScalableFontResourceA( _In_ DWORD fdwHidden, _In_ LPCSTR lpszFont, _In_ LPCSTR lpszFile, _In_opt_ LPCSTR lpszPath);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL    WINAPI CreateScalableFontResourceW( _In_ DWORD fdwHidden, _In_ LPCWSTR lpszFont, _In_ LPCWSTR lpszFile, _In_opt_ LPCWSTR lpszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL    WINAPI CreateScalableFontResourceA( _In_ DWORD fdwHidden, _In_ LPCSTR lpszFont, _In_ LPCSTR lpszFile, _In_opt_ LPCSTR lpszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL    WINAPI CreateScalableFontResourceW( _In_ DWORD fdwHidden, _In_ LPCWSTR lpszFont, _In_ LPCWSTR lpszFile, _In_opt_ LPCWSTR lpszPath);
  #ifdef UNICODE
  #define CreateScalableFontResource  CreateScalableFontResourceW
  #else
@@ -383,7 +383,7 @@ index dded3769a1..b54c65d8db 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -WINSPOOLAPI
-+_Windows_SupportedOS_Windows2000_ WINSPOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINSPOOLAPI
  int
  WINAPI
  DeviceCapabilitiesA(
@@ -395,7 +395,7 @@ index dded3769a1..b54c65d8db 100644
      _In_opt_            CONST DEVMODEA   *pDevMode
      );
 -WINSPOOLAPI
-+_Windows_SupportedOS_Windows2000_ WINSPOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINSPOOLAPI
  int
  WINAPI
  DeviceCapabilitiesW(
@@ -422,8 +422,8 @@ index dded3769a1..b54c65d8db 100644
  #if(WINVER >= 0x0400)
 -WINGDIAPI int  WINAPI EnumFontFamiliesExA( _In_ HDC hdc, _In_ LPLOGFONTA lpLogfont, _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
 -WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesExA( _In_ HDC hdc, _In_ LPLOGFONTA lpLogfont, _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesExA( _In_ HDC hdc, _In_ LPLOGFONTA lpLogfont, _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
  #ifdef UNICODE
  #define EnumFontFamiliesEx  EnumFontFamiliesExW
  #else
@@ -433,8 +433,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI int  WINAPI EnumFontFamiliesA( _In_ HDC hdc, _In_opt_ LPCSTR lpLogfont, _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam);
 -WINGDIAPI int  WINAPI EnumFontFamiliesW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesA( _In_ HDC hdc, _In_opt_ LPCSTR lpLogfont, _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesA( _In_ HDC hdc, _In_opt_ LPCSTR lpLogfont, _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontFamiliesW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
  #ifdef UNICODE
  #define EnumFontFamilies  EnumFontFamiliesW
  #else
@@ -442,8 +442,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI int  WINAPI EnumFontsA( _In_ HDC hdc, _In_opt_ LPCSTR lpLogfont,  _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam);
 -WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontsA( _In_ HDC hdc, _In_opt_ LPCSTR lpLogfont,  _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontsA( _In_ HDC hdc, _In_opt_ LPCSTR lpLogfont,  _In_ FONTENUMPROCA lpProc, _In_ LPARAM lParam);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
  #ifdef UNICODE
  #define EnumFonts  EnumFontsW
  #else
@@ -519,8 +519,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI BOOL  WINAPI GetCharWidthA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
 -WINGDIAPI BOOL  WINAPI GetCharWidthW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidthA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidthW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidthA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidthW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
  #ifdef UNICODE
  #define GetCharWidth  GetCharWidthW
  #else
@@ -528,8 +528,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI BOOL  WINAPI GetCharWidth32A( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast,  _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
 -WINGDIAPI BOOL  WINAPI GetCharWidth32W( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast,  _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidth32A( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast,  _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidth32W( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast,  _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidth32A( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast,  _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI GetCharWidth32W( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast,  _Out_writes_(iLast + 1 - iFirst) LPINT lpBuffer);
  #ifdef UNICODE
  #define GetCharWidth32  GetCharWidth32W
  #else
@@ -537,8 +537,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI BOOL  APIENTRY GetCharWidthFloatA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
 -WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharWidthFloatA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharWidthFloatA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
  #ifdef UNICODE
  #define GetCharWidthFloat  GetCharWidthFloatW
  #else
@@ -546,12 +546,12 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
  
 -WINGDIAPI BOOL  APIENTRY GetCharABCWidthsA( _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsA( _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsA( _In_ HDC hdc,
                                              _In_ UINT wFirst,
                                              _In_ UINT wLast,
                                              _Out_writes_(wLast - wFirst + 1) LPABC lpABC);
 -WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
                                              _In_ UINT wFirst,
                                              _In_ UINT wLast,
                                              _Out_writes_(wLast - wFirst + 1) LPABC lpABC);
@@ -561,8 +561,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI BOOL  APIENTRY GetCharABCWidthsFloatA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPABCFLOAT lpABC);
 -WINGDIAPI BOOL  APIENTRY GetCharABCWidthsFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPABCFLOAT lpABC);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsFloatA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPABCFLOAT lpABC);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPABCFLOAT lpABC);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsFloatA( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPABCFLOAT lpABC);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) LPABCFLOAT lpABC);
  #ifdef UNICODE
  #define GetCharABCWidthsFloat  GetCharABCWidthsFloatW
  #else
@@ -596,7 +596,7 @@ index dded3769a1..b54c65d8db 100644
                                          );
  
 -WINGDIAPI DWORD WINAPI GetGlyphOutlineA(    _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphOutlineA(    _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphOutlineA(    _In_ HDC hdc,
                                              _In_ UINT uChar,
 -                                            _In_ UINT fuFormat,
 +                                            _Win32_AssociatedEnum_(GET_GLYPH_OUTLINE_FORMAT) _In_ UINT fuFormat,
@@ -606,7 +606,7 @@ index dded3769a1..b54c65d8db 100644
                                              _In_ CONST MAT2 *lpmat2
                                          );
 -WINGDIAPI DWORD WINAPI GetGlyphOutlineW(    _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphOutlineW(    _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphOutlineW(    _In_ HDC hdc,
                                              _In_ UINT uChar,
 -                                            _In_ UINT fuFormat,
 +                                            _Win32_AssociatedEnum_(GET_GLYPH_OUTLINE_FORMAT) _In_ UINT fuFormat,
@@ -625,8 +625,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetGraphicsMode( _In_ HDC hdc);
 +_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(HDC_MAP_MODE) WINGDIAPI int   WINAPI GetMapMode( _In_ HDC hdc);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI UINT  WINAPI GetMetaFileBitsEx(_In_ HMETAFILE hMF, _In_ UINT cbBuffer, _Out_writes_bytes_opt_(cbBuffer) LPVOID lpData);
-+_Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE   WINAPI GetMetaFileA( _In_ LPCSTR lpName);
-+_Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE   WINAPI GetMetaFileA( _In_ LPCSTR lpName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(DeleteMetaFile, -1, 0) WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
  #ifdef UNICODE
  #define GetMetaFile  GetMetaFileW
  #else
@@ -643,11 +643,11 @@ index dded3769a1..b54c65d8db 100644
  #ifndef NOTEXTMETRIC
  
 -WINGDIAPI UINT APIENTRY GetOutlineTextMetricsA( _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI UINT APIENTRY GetOutlineTextMetricsA( _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI UINT APIENTRY GetOutlineTextMetricsA( _In_ HDC hdc,
                                                  _In_ UINT cjCopy,
                                                  _Out_writes_bytes_opt_(cjCopy) LPOUTLINETEXTMETRICA potm);
 -WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
                                                  _In_ UINT cjCopy,
                                                  _Out_writes_bytes_opt_(cjCopy) LPOUTLINETEXTMETRICW potm);
  #ifdef UNICODE
@@ -702,7 +702,7 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI COLORREF WINAPI GetTextColor(_In_ HDC hdc);
  
 -WINGDIAPI
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI
  BOOL
  APIENTRY
  GetTextExtentPointA(
@@ -711,7 +711,7 @@ index dded3769a1..b54c65d8db 100644
      _Out_ LPSIZE lpsz
      );
 -WINGDIAPI
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI
  BOOL
  APIENTRY
  GetTextExtentPointW(
@@ -720,7 +720,7 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
  
 -WINGDIAPI
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI
  BOOL
  APIENTRY
  GetTextExtentPoint32A(
@@ -729,7 +729,7 @@ index dded3769a1..b54c65d8db 100644
      _Out_ LPSIZE psizl
      );
 -WINGDIAPI
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI
  BOOL
  APIENTRY
  GetTextExtentPoint32W(
@@ -738,7 +738,7 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
  
 -WINGDIAPI
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI
  BOOL
  APIENTRY
  GetTextExtentExPointA(
@@ -747,7 +747,7 @@ index dded3769a1..b54c65d8db 100644
      _Out_ LPSIZE lpSize
      );
 -WINGDIAPI
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI
  BOOL
  APIENTRY
  GetTextExtentExPointW(
@@ -765,8 +765,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI GetTextCharsetInfo( _In_ HDC hdc, _Out_opt_ LPFONTSIGNATURE lpSig, _In_ DWORD dwFlags);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL WINAPI TranslateCharsetInfo( _Inout_ DWORD FAR *lpSrc,  _Out_ LPCHARSETINFO lpCs, _Win32_AssociatedEnum_(TRANSLATE_CHARSET_INFO_FLAGS) _In_ DWORD dwFlags);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetFontLanguageInfo( _In_ HDC hdc);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetCharacterPlacementA(  _In_ HDC hdc, _In_reads_(nCount) LPCSTR lpString, _In_ int nCount, _In_ int nMexExtent, _Inout_ LPGCP_RESULTSA lpResults, _Win32_AssociatedEnum_(GET_CHARACTER_PLACEMENT_FLAGS) _In_ DWORD dwFlags);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetCharacterPlacementW(  _In_ HDC hdc, _In_reads_(nCount) LPCWSTR lpString, _In_ int nCount, _In_ int nMexExtent, _Inout_ LPGCP_RESULTSW lpResults, _Win32_AssociatedEnum_(GET_CHARACTER_PLACEMENT_FLAGS) _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetCharacterPlacementA(  _In_ HDC hdc, _In_reads_(nCount) LPCSTR lpString, _In_ int nCount, _In_ int nMexExtent, _Inout_ LPGCP_RESULTSA lpResults, _Win32_AssociatedEnum_(GET_CHARACTER_PLACEMENT_FLAGS) _In_ DWORD dwFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetCharacterPlacementW(  _In_ HDC hdc, _In_reads_(nCount) LPCWSTR lpString, _In_ int nCount, _In_ int nMexExtent, _Inout_ LPGCP_RESULTSW lpResults, _Win32_AssociatedEnum_(GET_CHARACTER_PLACEMENT_FLAGS) _In_ DWORD dwFlags);
  #ifdef UNICODE
  #define GetCharacterPlacement  GetCharacterPlacementW
  #else
@@ -778,8 +778,8 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI DWORD WINAPI GetGlyphIndicesA( _In_ HDC hdc, _In_reads_(c) LPCSTR lpstr, _In_ int c, _Out_writes_(c) LPWORD pgi, _In_ DWORD fl);
 -WINGDIAPI DWORD WINAPI GetGlyphIndicesW( _In_ HDC hdc, _In_reads_(c) LPCWSTR lpstr, _In_ int c, _Out_writes_(c) LPWORD pgi, _In_ DWORD fl);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetFontUnicodeRanges( _In_ HDC hdc, _Out_opt_ LPGLYPHSET lpgs);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphIndicesA( _In_ HDC hdc, _In_reads_(c) LPCSTR lpstr, _In_ int c, _Out_writes_(c) LPWORD pgi, _In_ DWORD fl);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphIndicesW( _In_ HDC hdc, _In_reads_(c) LPCWSTR lpstr, _In_ int c, _Out_writes_(c) LPWORD pgi, _In_ DWORD fl);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphIndicesA( _In_ HDC hdc, _In_reads_(c) LPCSTR lpstr, _In_ int c, _Out_writes_(c) LPWORD pgi, _In_ DWORD fl);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetGlyphIndicesW( _In_ HDC hdc, _In_reads_(c) LPCWSTR lpstr, _In_ int c, _Out_writes_(c) LPWORD pgi, _In_ DWORD fl);
  #ifdef UNICODE
  #define GetGlyphIndices  GetGlyphIndicesW
  #else
@@ -815,8 +815,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI int  WINAPI AddFontResourceExA( _In_ LPCSTR name, _In_ DWORD fl, _Reserved_ PVOID res);
 -WINGDIAPI int  WINAPI AddFontResourceExW( _In_ LPCWSTR name, _In_ DWORD fl, _Reserved_ PVOID res);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI AddFontResourceExA( _In_ LPCSTR name, _Win32_AssociatedEnum_(FONT_RESOURCE_CHARACTERISTICS) _In_ DWORD fl, _Reserved_ PVOID res);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI AddFontResourceExW( _In_ LPCWSTR name, _Win32_AssociatedEnum_(FONT_RESOURCE_CHARACTERISTICS) _In_ DWORD fl, _Reserved_ PVOID res);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI AddFontResourceExA( _In_ LPCSTR name, _Win32_AssociatedEnum_(FONT_RESOURCE_CHARACTERISTICS) _In_ DWORD fl, _Reserved_ PVOID res);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI AddFontResourceExW( _In_ LPCWSTR name, _Win32_AssociatedEnum_(FONT_RESOURCE_CHARACTERISTICS) _In_ DWORD fl, _Reserved_ PVOID res);
  #ifdef UNICODE
  #define AddFontResourceEx  AddFontResourceExW
  #else
@@ -824,8 +824,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI BOOL WINAPI RemoveFontResourceExA( _In_ LPCSTR name, _In_ DWORD fl, _Reserved_ PVOID pdv);
 -WINGDIAPI BOOL WINAPI RemoveFontResourceExW( _In_ LPCWSTR name, _In_ DWORD fl, _Reserved_ PVOID pdv);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceExA( _In_ LPCSTR name, _In_ DWORD fl, _Reserved_ PVOID pdv);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceExW( _In_ LPCWSTR name, _In_ DWORD fl, _Reserved_ PVOID pdv);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceExA( _In_ LPCSTR name, _In_ DWORD fl, _Reserved_ PVOID pdv);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceExW( _In_ LPCWSTR name, _In_ DWORD fl, _Reserved_ PVOID pdv);
  #ifdef UNICODE
  #define RemoveFontResourceEx  RemoveFontResourceExW
  #else
@@ -848,8 +848,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI HFONT  WINAPI CreateFontIndirectExA( _In_ CONST ENUMLOGFONTEXDVA *);
 -WINGDIAPI HFONT  WINAPI CreateFontIndirectExW( _In_ CONST ENUMLOGFONTEXDVW *);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT  WINAPI CreateFontIndirectExA( _In_ CONST ENUMLOGFONTEXDVA *);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT  WINAPI CreateFontIndirectExW( _In_ CONST ENUMLOGFONTEXDVW *);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT  WINAPI CreateFontIndirectExA( _In_ CONST ENUMLOGFONTEXDVA *);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINGDIAPI HFONT  WINAPI CreateFontIndirectExW( _In_ CONST ENUMLOGFONTEXDVW *);
  #ifdef UNICODE
  #define CreateFontIndirectEx  CreateFontIndirectExW
  #else
@@ -909,8 +909,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RectVisible(_In_ HDC hdc, _In_ CONST RECT * lprect);
 + _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI Rectangle(_In_ HDC hdc, _In_ int left, _In_ int top, _In_ int right, _In_ int bottom);
 + _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RestoreDC(_In_ HDC hdc, _In_ int nSavedDC);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC  WINAPI ResetDCA(_In_ HDC hdc, _In_ CONST DEVMODEA * lpdm);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC  WINAPI ResetDCW(_In_ HDC hdc, _In_ CONST DEVMODEW * lpdm);
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC  WINAPI ResetDCA(_In_ HDC hdc, _In_ CONST DEVMODEA * lpdm);
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI HDC  WINAPI ResetDCW(_In_ HDC hdc, _In_ CONST DEVMODEW * lpdm);
  #ifdef UNICODE
  #define ResetDC  ResetDCW
  #else
@@ -920,8 +920,8 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI BOOL WINAPI RemoveFontResourceA(_In_ LPCSTR lpFileName);
 -WINGDIAPI BOOL WINAPI RemoveFontResourceW(_In_ LPCWSTR lpFileName);
 + _Windows_SupportedOS_Windows2000_ WINGDIAPI UINT WINAPI RealizePalette(_In_ HDC hdc);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceA(_In_ LPCSTR lpFileName);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceW(_In_ LPCWSTR lpFileName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceA(_In_ LPCSTR lpFileName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI RemoveFontResourceW(_In_ LPCWSTR lpFileName);
  #ifdef UNICODE
  #define RemoveFontResource  RemoveFontResourceW
  #else
@@ -1109,8 +1109,8 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI HENHMETAFILE WINAPI CopyEnhMetaFileA( _In_ HENHMETAFILE hEnh, _In_opt_ LPCSTR lpFileName);
 -WINGDIAPI HENHMETAFILE WINAPI CopyEnhMetaFileW( _In_ HENHMETAFILE hEnh, _In_opt_ LPCWSTR lpFileName);
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE WINAPI CloseEnhMetaFile( _In_ HDC hdc);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE WINAPI CopyEnhMetaFileA( _In_ HENHMETAFILE hEnh, _In_opt_ LPCSTR lpFileName);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE WINAPI CopyEnhMetaFileW( _In_ HENHMETAFILE hEnh, _In_opt_ LPCWSTR lpFileName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE WINAPI CopyEnhMetaFileA( _In_ HENHMETAFILE hEnh, _In_opt_ LPCSTR lpFileName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE WINAPI CopyEnhMetaFileW( _In_ HENHMETAFILE hEnh, _In_opt_ LPCWSTR lpFileName);
  #ifdef UNICODE
  #define CopyEnhMetaFile  CopyEnhMetaFileW
  #else
@@ -1118,8 +1118,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI HDC   WINAPI CreateEnhMetaFileA( _In_opt_ HDC hdc, _In_opt_ LPCSTR lpFilename, _In_opt_ CONST RECT *lprc, _In_opt_ LPCSTR lpDesc);
 -WINGDIAPI HDC   WINAPI CreateEnhMetaFileW( _In_opt_ HDC hdc, _In_opt_ LPCWSTR lpFilename, _In_opt_ CONST RECT *lprc, _In_opt_ LPCWSTR lpDesc);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile) WINGDIAPI HDC   WINAPI CreateEnhMetaFileA( _In_opt_ HDC hdc, _In_opt_ LPCSTR lpFilename, _In_opt_ CONST RECT *lprc, _In_opt_ LPCSTR lpDesc);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile) WINGDIAPI HDC   WINAPI CreateEnhMetaFileW( _In_opt_ HDC hdc, _In_opt_ LPCWSTR lpFilename, _In_opt_ CONST RECT *lprc, _In_opt_ LPCWSTR lpDesc);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile) WINGDIAPI HDC   WINAPI CreateEnhMetaFileA( _In_opt_ HDC hdc, _In_opt_ LPCSTR lpFilename, _In_opt_ CONST RECT *lprc, _In_opt_ LPCSTR lpDesc);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile) WINGDIAPI HDC   WINAPI CreateEnhMetaFileW( _In_opt_ HDC hdc, _In_opt_ LPCWSTR lpFilename, _In_opt_ CONST RECT *lprc, _In_opt_ LPCWSTR lpDesc);
  #ifdef UNICODE
  #define CreateEnhMetaFile  CreateEnhMetaFileW
  #else
@@ -1132,8 +1132,8 @@ index dded3769a1..b54c65d8db 100644
                                          _In_opt_ LPVOID param, _In_opt_ CONST RECT * lpRect);
 -WINGDIAPI HENHMETAFILE  WINAPI GetEnhMetaFileA( _In_ LPCSTR lpName);
 -WINGDIAPI HENHMETAFILE  WINAPI GetEnhMetaFileW( _In_ LPCWSTR lpName);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE  WINAPI GetEnhMetaFileA( _In_ LPCSTR lpName);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE  WINAPI GetEnhMetaFileW( _In_ LPCWSTR lpName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE  WINAPI GetEnhMetaFileA( _In_ LPCSTR lpName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0) WINGDIAPI HENHMETAFILE  WINAPI GetEnhMetaFileW( _In_ LPCWSTR lpName);
  #ifdef UNICODE
  #define GetEnhMetaFile  GetEnhMetaFileW
  #else
@@ -1144,11 +1144,11 @@ index dded3769a1..b54c65d8db 100644
                                              _In_ UINT nSize,
                                              _Out_writes_bytes_opt_(nSize) LPBYTE lpData);
 -WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionA(  _In_ HENHMETAFILE hemf,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionA(  _In_ HENHMETAFILE hemf,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionA(  _In_ HENHMETAFILE hemf,
                                                      _In_ UINT cchBuffer,
                                                      _Out_writes_opt_(cchBuffer) LPSTR lpDescription);
 -WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
                                                      _In_ UINT cchBuffer,
                                                      _Out_writes_opt_(cchBuffer) LPWSTR lpDescription);
  #ifdef UNICODE
@@ -1201,8 +1201,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI BOOL WINAPI GetTextMetricsA( _In_ HDC hdc, _Out_ LPTEXTMETRICA lptm);
 -WINGDIAPI BOOL WINAPI GetTextMetricsW( _In_ HDC hdc, _Out_ LPTEXTMETRICW lptm);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI GetTextMetricsA( _In_ HDC hdc, _Out_ LPTEXTMETRICA lptm);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI GetTextMetricsW( _In_ HDC hdc, _Out_ LPTEXTMETRICW lptm);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI GetTextMetricsA( _In_ HDC hdc, _Out_ LPTEXTMETRICA lptm);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI GetTextMetricsW( _In_ HDC hdc, _Out_ LPTEXTMETRICW lptm);
  #ifdef UNICODE
  #define GetTextMetrics  GetTextMetricsW
  #else
@@ -1265,14 +1265,32 @@ index dded3769a1..b54c65d8db 100644
  
  #ifdef STRICT
  typedef BOOL (CALLBACK* ABORTPROC)( _In_ HDC, _In_ int);
+@@ -5122,7 +5123,7 @@ typedef BOOL (CALLBACK* ABORTPROC)( _In_ HDC, _In_ int);
+ typedef FARPROC ABORTPROC;
+ #endif
+ 
+-typedef struct _DOCINFOA {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DOCINFOA {
+     int     cbSize;
+     LPCSTR   lpszDocName;
+     LPCSTR   lpszOutput;
+@@ -5131,7 +5132,7 @@ typedef struct _DOCINFOA {
+     DWORD    fwType;
+ #endif /* WINVER */
+ } DOCINFOA, *LPDOCINFOA;
+-typedef struct _DOCINFOW {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DOCINFOW {
+     int     cbSize;
+     LPCWSTR  lpszDocName;
+     LPCWSTR  lpszOutput;
 @@ -5153,45 +5154,45 @@ typedef LPDOCINFOA LPDOCINFO;
  #define DI_ROPS_READ_DESTINATION    0x00000002
  #endif /* WINVER >= 0x0400 */
  
 - WINGDIAPI int WINAPI StartDocA(_In_ HDC hdc, _In_ CONST DOCINFOA *lpdi);
 - WINGDIAPI int WINAPI StartDocW(_In_ HDC hdc, _In_ CONST DOCINFOW *lpdi);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI StartDocA(_In_ HDC hdc, _In_ CONST DOCINFOA *lpdi);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI StartDocW(_In_ HDC hdc, _In_ CONST DOCINFOW *lpdi);
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI StartDocA(_In_ HDC hdc, _In_ CONST DOCINFOA *lpdi);
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int WINAPI StartDocW(_In_ HDC hdc, _In_ CONST DOCINFOW *lpdi);
  #ifdef UNICODE
  #define StartDoc  StartDocW
  #else
@@ -1333,9 +1351,10 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL WINAPI GetMiterLimit(_In_ HDC hdc, _Out_ PFLOAT plimit);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI GetArcDirection(_In_ HDC hdc);
  
- WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
+-WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
 -WINGDIAPI int   WINAPI GetObjectW(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetObjectW(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetObjectW(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
  #ifdef UNICODE
  #define GetObject  GetObjectW
  #else
@@ -1347,8 +1366,8 @@ index dded3769a1..b54c65d8db 100644
 - WINGDIAPI BOOL  WINAPI TextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCSTR lpString, _In_ int c);
 - WINGDIAPI BOOL  WINAPI TextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCWSTR lpString, _In_ int c);
 + _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI MoveToEx( _In_ HDC hdc, _In_ int x, _In_ int y, _Out_opt_ LPPOINT lppt);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI TextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCSTR lpString, _In_ int c);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI TextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCWSTR lpString, _In_ int c);
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI TextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCSTR lpString, _In_ int c);
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI TextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _In_reads_(c) LPCWSTR lpString, _In_ int c);
  #ifdef UNICODE
  #define TextOut  TextOutW
  #else
@@ -1356,8 +1375,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 - WINGDIAPI BOOL  WINAPI ExtTextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
 - WINGDIAPI BOOL  WINAPI ExtTextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCWSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI ExtTextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(ETO_OPTIONS) _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
-+ _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI ExtTextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(ETO_OPTIONS) _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCWSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
++ _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI ExtTextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(ETO_OPTIONS) _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
++ _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI ExtTextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(ETO_OPTIONS) _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCWSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
  #ifdef UNICODE
  #define ExtTextOut  ExtTextOutW
  #else
@@ -1365,8 +1384,8 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
 -WINGDIAPI BOOL  WINAPI PolyTextOutA(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTA * ppt, _In_ int nstrings);
 -WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI PolyTextOutA(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTA * ppt, _In_ int nstrings);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI PolyTextOutA(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTA * ppt, _In_ int nstrings);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
  #ifdef UNICODE
  #define PolyTextOut  PolyTextOutW
  #else
@@ -1422,8 +1441,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI SetBitmapDimensionEx( _In_ HBITMAP hbm, _In_ int w, _In_ int h, _Out_opt_ LPSIZE lpsz);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI SetBrushOrgEx( _In_ HDC hdc, _In_ int x, _In_ int y, _Out_opt_ LPPOINT lppt);
 +
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetTextFaceA( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPSTR lpName);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetTextFaceW( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPWSTR lpName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetTextFaceA( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPSTR lpName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetTextFaceW( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPWSTR lpName);
  #ifdef UNICODE
  #define GetTextFace  GetTextFaceW
  #else
@@ -1432,11 +1451,11 @@ index dded3769a1..b54c65d8db 100644
  } KERNINGPAIR, *LPKERNINGPAIR;
  
 -WINGDIAPI DWORD WINAPI GetKerningPairsA(    _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetKerningPairsA(    _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetKerningPairsA(    _In_ HDC hdc,
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
 -WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
  #ifdef UNICODE
@@ -1474,11 +1493,11 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI HCOLORSPACE WINAPI GetColorSpace( _In_ HDC hdc);
 -WINGDIAPI BOOL        WINAPI GetLogColorSpaceA( _In_ HCOLORSPACE hColorSpace,
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteColorSpace, -1, 0) WINGDIAPI HCOLORSPACE WINAPI GetColorSpace( _In_ HDC hdc);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetLogColorSpaceA( _In_ HCOLORSPACE hColorSpace,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetLogColorSpaceA( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEA lpBuffer,
                                                  _In_ DWORD nSize);
 -WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
  #ifdef UNICODE
@@ -1488,8 +1507,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI HCOLORSPACE WINAPI CreateColorSpaceA( _In_ LPLOGCOLORSPACEA lplcs);
 -WINGDIAPI HCOLORSPACE WINAPI CreateColorSpaceW( _In_ LPLOGCOLORSPACEW lplcs);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteColorSpace, -1, 0) WINGDIAPI HCOLORSPACE WINAPI CreateColorSpaceA( _In_ LPLOGCOLORSPACEA lplcs);
-+_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteColorSpace, -1, 0) WINGDIAPI HCOLORSPACE WINAPI CreateColorSpaceW( _In_ LPLOGCOLORSPACEW lplcs);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteColorSpace, -1, 0) WINGDIAPI HCOLORSPACE WINAPI CreateColorSpaceA( _In_ LPLOGCOLORSPACEA lplcs);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteColorSpace, -1, 0) WINGDIAPI HCOLORSPACE WINAPI CreateColorSpaceW( _In_ LPLOGCOLORSPACEW lplcs);
  #ifdef UNICODE
  #define CreateColorSpace  CreateColorSpaceW
  #else
@@ -1500,11 +1519,11 @@ index dded3769a1..b54c65d8db 100644
 -WINGDIAPI BOOL        WINAPI GetICMProfileA(    _In_ HDC hdc,
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteColorSpace, -1, 0) WINGDIAPI HCOLORSPACE WINAPI SetColorSpace( _In_ HDC hdc, _In_ HCOLORSPACE hcs);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI DeleteColorSpace( _In_ HCOLORSPACE hcs);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetICMProfileA(    _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetICMProfileA(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPSTR pszFilename);
 -WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
  #ifdef UNICODE
@@ -1514,8 +1533,8 @@ index dded3769a1..b54c65d8db 100644
  
 -WINGDIAPI BOOL        WINAPI SetICMProfileA( _In_ HDC hdc, _In_ LPSTR lpFileName);
 -WINGDIAPI BOOL        WINAPI SetICMProfileW( _In_ HDC hdc, _In_ LPWSTR lpFileName);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI SetICMProfileA( _In_ HDC hdc, _In_ LPSTR lpFileName);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI SetICMProfileW( _In_ HDC hdc, _In_ LPWSTR lpFileName);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI SetICMProfileA( _In_ HDC hdc, _In_ LPSTR lpFileName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI SetICMProfileW( _In_ HDC hdc, _In_ LPWSTR lpFileName);
  #ifdef UNICODE
  #define SetICMProfile  SetICMProfileW
  #else
@@ -1529,8 +1548,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI GetDeviceGammaRamp( _In_ HDC hdc, _Out_writes_bytes_(3*256*2) LPVOID lpRamp);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI SetDeviceGammaRamp( _In_ HDC hdc, _In_reads_bytes_(3*256*2)  LPVOID lpRamp);
 +_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI ColorMatchToTarget( _In_ HDC hdc, _In_ HDC hdcTarget, _Win32_AssociatedEnum_(COLOR_MATCH_TO_TARGET_ACTION) _In_ DWORD action);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int         WINAPI EnumICMProfilesA( _In_ HDC hdc, _In_ ICMENUMPROCA proc, _In_opt_ LPARAM param);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI int         WINAPI EnumICMProfilesA( _In_ HDC hdc, _In_ ICMENUMPROCA proc, _In_opt_ LPARAM param);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
  #ifdef UNICODE
  #define EnumICMProfiles  EnumICMProfilesW
  #else
@@ -1538,10 +1557,10 @@ index dded3769a1..b54c65d8db 100644
  #endif // !UNICODE
  // The Win95 update API UpdateICMRegKeyA is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
 -WINGDIAPI BOOL        WINAPI UpdateICMRegKeyA( _Reserved_ DWORD reserved, _In_ LPSTR lpszCMID, _In_ LPSTR lpszFileName, _In_ UINT command);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyA( _Reserved_ DWORD reserved, _In_ LPSTR lpszCMID, _In_ LPSTR lpszFileName, _Win32_AssociatedEnum_(ICM_COMMAND) _In_ UINT command);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyA( _Reserved_ DWORD reserved, _In_ LPSTR lpszCMID, _In_ LPSTR lpszFileName, _Win32_AssociatedEnum_(ICM_COMMAND) _In_ UINT command);
  // The Win95 update API UpdateICMRegKeyW is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
 -WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ LPWSTR lpszCMID, _In_ LPWSTR lpszFileName, _In_ UINT command);
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ LPWSTR lpszCMID, _In_ LPWSTR lpszFileName, _Win32_AssociatedEnum_(ICM_COMMAND) _In_ UINT command);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ LPWSTR lpszCMID, _In_ LPWSTR lpszFileName, _Win32_AssociatedEnum_(ICM_COMMAND) _In_ UINT command);
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
@@ -1614,8 +1633,8 @@ index dded3769a1..b54c65d8db 100644
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI PROC  WINAPI wglGetProcAddress(LPCSTR);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglMakeCurrent(HDC, HGLRC);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglShareLists(HGLRC, HGLRC);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontBitmapsA(HDC, DWORD, DWORD, DWORD);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontBitmapsW(HDC, DWORD, DWORD, DWORD);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontBitmapsA(HDC, DWORD, DWORD, DWORD);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontBitmapsW(HDC, DWORD, DWORD, DWORD);
  #ifdef UNICODE
  #define wglUseFontBitmaps  wglUseFontBitmapsW
  #else
@@ -1631,10 +1650,10 @@ index dded3769a1..b54c65d8db 100644
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
 -WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(HDC, DWORD, DWORD, DWORD, FLOAT,
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(HDC, DWORD, DWORD, DWORD, FLOAT,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
 -WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
  #define wglUseFontOutlines  wglUseFontOutlinesW

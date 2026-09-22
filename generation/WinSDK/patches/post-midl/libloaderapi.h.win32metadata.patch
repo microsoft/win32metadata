@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
-index b40e7819c5..6048c829e2 100644
+index b40e7819c5..e9f5076b4b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
 @@ -15,6 +15,7 @@
@@ -20,15 +20,17 @@ index b40e7819c5..6048c829e2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -134,6 +138,8 @@ DisableThreadLibraryCalls(
+@@ -134,7 +138,9 @@ DisableThreadLibraryCalls(
      _In_ HMODULE hLibModule
      );
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  _Ret_maybenull_
  HRSRC
+ WINAPI
 @@ -151,6 +157,8 @@ FindResourceExW(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
@@ -67,7 +69,7 @@ index b40e7819c5..6048c829e2 100644
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0)
@@ -76,7 +78,7 @@ index b40e7819c5..6048c829e2 100644
      _In_ DWORD nSize
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0)
@@ -85,7 +87,7 @@ index b40e7819c5..6048c829e2 100644
  #define GetModuleFileName  GetModuleFileNameA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _When_(lpModuleName == NULL,_Ret_notnull_)
@@ -94,7 +96,7 @@ index b40e7819c5..6048c829e2 100644
      _In_opt_ LPCSTR lpModuleName
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _When_(lpModuleName == NULL,_Ret_notnull_)
@@ -121,7 +123,7 @@ index b40e7819c5..6048c829e2 100644
  #define PGET_MODULE_HANDLE_EX  PGET_MODULE_HANDLE_EXA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -133,7 +135,7 @@ index b40e7819c5..6048c829e2 100644
 +    _Win32_RAIIFree_(FreeLibrary, 0) _Out_ HMODULE* phModule
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
@@ -161,7 +163,7 @@ index b40e7819c5..6048c829e2 100644
  
  typedef const REDIRECTION_DESCRIPTOR *PCREDIRECTION_DESCRIPTOR;
  
-+_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +
  WINBASEAPI
@@ -175,7 +177,7 @@ index b40e7819c5..6048c829e2 100644
 +    _In_ _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) DWORD dwFlags
      );
  
-+_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +
  WINBASEAPI
@@ -267,7 +269,7 @@ index b40e7819c5..6048c829e2 100644
 +#pragma pop_macro("DONT_RESOLVE_DLL_REFERENCES")
 +#endif
 +
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINBASEAPI
  _Ret_maybenull_
@@ -276,7 +278,7 @@ index b40e7819c5..6048c829e2 100644
      _In_ HRSRC hResInfo
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINUSERAPI
  int
@@ -285,7 +287,7 @@ index b40e7819c5..6048c829e2 100644
      _In_ int cchBufferMax
      );
  
-+_Windows_SupportedOS_Windows2000_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  WINUSERAPI
  int
@@ -345,7 +347,7 @@ index b40e7819c5..6048c829e2 100644
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -354,7 +356,7 @@ index b40e7819c5..6048c829e2 100644
      LANGID LangId
      );
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -363,7 +365,7 @@ index b40e7819c5..6048c829e2 100644
  #define EnumResourceLanguagesEx  EnumResourceLanguagesExA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -372,7 +374,7 @@ index b40e7819c5..6048c829e2 100644
      LANGID LangId
      );
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -381,7 +383,7 @@ index b40e7819c5..6048c829e2 100644
  #define EnumResourceNamesEx  EnumResourceNamesExA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -390,25 +392,27 @@ index b40e7819c5..6048c829e2 100644
      LANGID LangId
      );
  
-+_Windows_SupportedOS_WindowsVista_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
-@@ -580,6 +715,8 @@ EnumResourceTypesExW(
+@@ -580,7 +715,9 @@ EnumResourceTypesExW(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  _Ret_maybenull_
  HRSRC
+ WINAPI
 @@ -594,6 +731,9 @@ FindResourceW(
  #define FindResource  FindResourceW
  #endif
  
-+_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +
  WINBASEAPI
@@ -418,26 +422,28 @@ index b40e7819c5..6048c829e2 100644
      _In_ LPCSTR lpLibFileName
      );
  
-+_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
-@@ -622,6 +765,8 @@ LoadLibraryW(
+@@ -622,7 +765,9 @@ LoadLibraryW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
+-WINBASEAPI
 +
 +
- WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
  BOOL
  WINAPI
+ EnumResourceNamesW(
 @@ -632,6 +777,7 @@ EnumResourceNamesW(
      _In_ LONG_PTR lParam
      );
  
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI

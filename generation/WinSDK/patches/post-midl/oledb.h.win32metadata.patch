@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oledb.h b/generation/WinSDK/RecompiledIdlHeaders/um/oledb.h
-index 46f6243fba..6960915772 100644
+index 46f6243fba..9df3a64d11 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oledb.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oledb.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,15 @@ index 46f6243fba..6960915772 100644
      VARIANT vValues;
      } 	DBPROPINFO;
  
+@@ -2857,7 +2858,7 @@ typedef struct tagDBCONSTRAINTDESC
+ #define MDFF_ITALIC                  0x02
+ #define MDFF_UNDERLINE               0x04
+ #define MDFF_STRIKEOUT               0x08
+-typedef struct tagMDAXISINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMDAXISINFO
+     {
+     DBLENGTH cbSize;
+     DBCOUNTITEM iAxis;
 @@ -13095,9 +13096,9 @@ EXTERN_C const IID IID_IErrorLookup;
              /* [annotation][in] */ 
              _In_  LCID lcid,

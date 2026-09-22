@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h b/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h
-index b10ed97be2..e1d4d0daa3 100644
+index b10ed97be2..2aeccb23e1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h
 @@ -1,3 +1,4 @@
@@ -7,8 +7,40 @@ index b10ed97be2..e1d4d0daa3 100644
  /********************************************************
  *                                                       *
  *   Copyright (C) Microsoft. All rights reserved.       *
-@@ -663,7 +664,7 @@ SQLRETURN SQL_API SQLLinkedCatalogsA (SQLHSTMT, LPCSTR, SWORD);
- SQLRETURN SQL_API SQLLinkedCatalogsW (SQLHSTMT, LPCWSTR, SWORD);
+@@ -630,17 +631,17 @@ RETCODE SQL_API bcp_control (HDBC, INT, void *);
+ DBINT	SQL_API bcp_done (HDBC);
+ RETCODE SQL_API bcp_exec (HDBC, LPDBINT);
+ RETCODE SQL_API bcp_getcolfmt (HDBC, INT, INT, void *, INT, INT *);
+-RETCODE SQL_API bcp_initA (HDBC, LPCSTR, LPCSTR, LPCSTR, INT);
+-RETCODE SQL_API bcp_initW (HDBC, LPCWSTR, LPCWSTR, LPCWSTR, INT);
++_WIN32META_ANNOTATION_("win32metadata:ansi") RETCODE SQL_API bcp_initA (HDBC, LPCSTR, LPCSTR, LPCSTR, INT);
++_WIN32META_ANNOTATION_("win32metadata:unicode") RETCODE SQL_API bcp_initW (HDBC, LPCWSTR, LPCWSTR, LPCWSTR, INT);
+ RETCODE SQL_API bcp_moretext (HDBC, DBINT, LPCBYTE);
+-RETCODE SQL_API bcp_readfmtA (HDBC, LPCSTR);
+-RETCODE SQL_API bcp_readfmtW (HDBC, LPCWSTR);
++_WIN32META_ANNOTATION_("win32metadata:ansi") RETCODE SQL_API bcp_readfmtA (HDBC, LPCSTR);
++_WIN32META_ANNOTATION_("win32metadata:unicode") RETCODE SQL_API bcp_readfmtW (HDBC, LPCWSTR);
+ RETCODE SQL_API bcp_sendrow (HDBC);
+ RETCODE SQL_API bcp_setcolfmt (HDBC, INT, INT, void *, INT);
+-RETCODE SQL_API bcp_writefmtA (HDBC, LPCSTR);
+-RETCODE SQL_API bcp_writefmtW (HDBC, LPCWSTR);
+-CHAR *	SQL_API dbprtypeA (INT);
+-WCHAR * SQL_API dbprtypeW (INT);
++_WIN32META_ANNOTATION_("win32metadata:ansi") RETCODE SQL_API bcp_writefmtA (HDBC, LPCSTR);
++_WIN32META_ANNOTATION_("win32metadata:unicode") RETCODE SQL_API bcp_writefmtW (HDBC, LPCWSTR);
++_WIN32META_ANNOTATION_("win32metadata:ansi") CHAR *	SQL_API dbprtypeA (INT);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WCHAR * SQL_API dbprtypeW (INT);
+ 
+ #ifdef UNICODE
+ #define bcp_init		bcp_initW
+@@ -659,11 +660,11 @@ WCHAR * SQL_API dbprtypeW (INT);
+ 
+ //	SQL Server catalog extensions for distributed queries
+ SQLRETURN SQL_API SQLLinkedServers (SQLHSTMT);
+-SQLRETURN SQL_API SQLLinkedCatalogsA (SQLHSTMT, LPCSTR, SWORD);
+-SQLRETURN SQL_API SQLLinkedCatalogsW (SQLHSTMT, LPCWSTR, SWORD);
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLLinkedCatalogsA (SQLHSTMT, LPCSTR, SWORD);
++_WIN32META_ANNOTATION_("win32metadata:unicode") SQLRETURN SQL_API SQLLinkedCatalogsW (SQLHSTMT, LPCWSTR, SWORD);
  
  //	SQL Server extensions for server enumeration
 -HANDLE   SQL_API SQLInitEnumServers(_In_ LPWSTR pwchServerName, _In_ LPWSTR pwchInstanceName);

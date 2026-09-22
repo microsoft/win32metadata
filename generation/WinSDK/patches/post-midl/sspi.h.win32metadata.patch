@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
-index 06f5ed27e9..90a7c29e95 100644
+index 06f5ed27e9..6979834176 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 @@ -15,6 +15,7 @@
@@ -327,7 +327,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  AcquireCredentialsHandleA(
      _In_opt_  LPSTR pszPrincipal,                 // Name of principal
      _In_      LPSTR pszPackage,                   // Name of package
@@ -345,12 +345,21 @@ index 06f5ed27e9..90a7c29e95 100644
  SECURITY_STATUS SEC_ENTRY
  FreeCredentialsHandle(
      _In_ PCredHandle phCredential            // Handle to free
+@@ -1420,7 +1421,7 @@ typedef SECURITY_STATUS
+     void *,
+     PTimeStamp);
+ 
+-SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") SECURITY_STATUS SEC_ENTRY
+ AddCredentialsA(
+     _In_ PCredHandle hCredentials,
+     _In_opt_ LPSTR pszPrincipal,             // Name of principal
 @@ -1636,7 +1637,7 @@ SECURITY_STATUS SspiDeleteSecurityContextAsync(
  
  #if ISSP_MODE != 0
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsVista_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ SECURITY_STATUS SEC_ENTRY
  ChangeAccountPasswordW(
      _In_    SEC_WCHAR *  pszPackageName,
      _In_    SEC_WCHAR *  pszDomainName,
@@ -359,7 +368,7 @@ index 06f5ed27e9..90a7c29e95 100644
  
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsVista_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ SECURITY_STATUS SEC_ENTRY
  ChangeAccountPasswordA(
      _In_    SEC_CHAR *  pszPackageName,
      _In_    SEC_CHAR *  pszDomainName,
@@ -368,7 +377,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
  InitializeSecurityContextA(
      _In_opt_    PCredHandle phCredential,               // Cred to base context
      _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
@@ -383,7 +392,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // begin_ntifs
  
 -KSECDDDECLSPEC
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ KSECDDDECLSPEC
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  AcceptSecurityContext(
      _In_opt_    PCredHandle phCredential,               // Cred to base context
@@ -453,7 +462,7 @@ index 06f5ed27e9..90a7c29e95 100644
      PCtxtHandle, PSecBufferDesc);
  
 -KSECDDDECLSPEC
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  QueryContextAttributesW(
      _In_  PCtxtHandle phContext,              // Context to query
@@ -467,7 +476,7 @@ index 06f5ed27e9..90a7c29e95 100644
      void *);
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
  QueryContextAttributesExW(
      _In_  PCtxtHandle phContext,              // Context to query
 -    _In_  unsigned long ulAttribute,          // Attribute to query
@@ -480,7 +489,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  QueryContextAttributesA(
      _In_  PCtxtHandle phContext,              // Context to query
 -    _In_  unsigned long ulAttribute,          // Attribute to query
@@ -493,7 +502,7 @@ index 06f5ed27e9..90a7c29e95 100644
      void *);
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
  QueryContextAttributesExA(
      _In_  PCtxtHandle phContext,              // Context to query
 -    _In_  unsigned long ulAttribute,          // Attribute to query
@@ -506,7 +515,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #if (OSVER(NTDDI_VERSION) > NTDDI_WIN2K)
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
  SetContextAttributesW(
      _In_ PCtxtHandle phContext,                   // Context to Set
 -    _In_ unsigned long ulAttribute,               // Attribute to Set
@@ -519,7 +528,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
  SetContextAttributesA(
      _In_ PCtxtHandle phContext,                   // Context to Set
 -    _In_ unsigned long ulAttribute,               // Attribute to Set
@@ -532,17 +541,35 @@ index 06f5ed27e9..90a7c29e95 100644
  // begin_ntifs
  
 -KSECDDDECLSPEC
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  QueryCredentialsAttributesW(
      _In_    PCredHandle phCredential,           // Credential to query
+@@ -2011,7 +2012,7 @@ typedef SECURITY_STATUS
+     unsigned long,
+     void *);
+ 
+-SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:unicode") SECURITY_STATUS SEC_ENTRY
+ QueryCredentialsAttributesExW(
+     _In_    PCredHandle phCredential,           // Credential to query
+     _In_    unsigned long ulAttribute,          // Attribute to query
 @@ -2028,7 +2029,7 @@ typedef SECURITY_STATUS
  
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  QueryCredentialsAttributesA(
+     _In_    PCredHandle phCredential,           // Credential to query
+     _In_    unsigned long ulAttribute,          // Attribute to query
+@@ -2041,7 +2042,7 @@ typedef SECURITY_STATUS
+     unsigned long,
+     void *);
+ 
+-SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") SECURITY_STATUS SEC_ENTRY
+ QueryCredentialsAttributesExA(
      _In_    PCredHandle phCredential,           // Credential to query
      _In_    unsigned long ulAttribute,          // Attribute to query
 @@ -2073,7 +2074,7 @@ typedef SECURITY_STATUS
@@ -550,7 +577,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #if NTDDI_VERSION > NTDDI_WS03
  
 -KSECDDDECLSPEC
-+_Windows_SupportedOS_WindowsXP_ KSECDDDECLSPEC
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  SetCredentialsAttributesW(
      _In_ PCredHandle phCredential,                // Credential to Set
@@ -559,7 +586,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
  SetCredentialsAttributesA(
      _In_ PCredHandle phCredential,                // Credential to Set
      _In_ unsigned long ulAttribute,               // Attribute to Set
@@ -595,7 +622,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #define SECQOP_WRAP_OOB_DATA        0x40000000
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
  EncryptMessage( _In_    PCtxtHandle         phContext,
                  _In_    unsigned long       fQOP,
                  _In_    PSecBufferDesc      pMessage,
@@ -604,7 +631,7 @@ index 06f5ed27e9..90a7c29e95 100644
  
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
  DecryptMessage( _In_      PCtxtHandle         phContext,
                  _In_      PSecBufferDesc      pMessage,
                  _In_      unsigned long       MessageSeqNo,
@@ -613,7 +640,7 @@ index 06f5ed27e9..90a7c29e95 100644
  ///////////////////////////////////////////////////////////////////////////
  
 -KSECDDDECLSPEC
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  EnumerateSecurityPackagesW(
      _Out_       unsigned long * pcPackages,     // Receives num. packages
@@ -622,7 +649,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  EnumerateSecurityPackagesA(
      _Out_       unsigned long * pcPackages,     // Receives num. packages
      _Outptr_ PSecPkgInfoA  * ppPackageInfo    // Receives array of info
@@ -631,7 +658,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // end_ntifs
  
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  QuerySecurityPackageInfoA(
      _In_        LPSTR pszPackageName,           // Name of package
      _Outptr_ PSecPkgInfoA *ppPackageInfo     // Receives package info
@@ -654,7 +681,7 @@ index 06f5ed27e9..90a7c29e95 100644
  
  // end_ntifs
 -SECURITY_STATUS SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  ImportSecurityContextA(
      _In_  LPSTR                pszPackage,
      _In_  PSecBuffer           pPackedContext,        // (in) marshalled context
@@ -681,7 +708,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -PSecurityFunctionTableA SEC_ENTRY
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") PSecurityFunctionTableA SEC_ENTRY
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") PSecurityFunctionTableA SEC_ENTRY
  InitSecurityInterfaceA(
      void
      );
@@ -690,7 +717,7 @@ index 06f5ed27e9..90a7c29e95 100644
  // begin_ntifs
  
 -KSECDDDECLSPEC
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  PSecurityFunctionTableW SEC_ENTRY
  InitSecurityInterfaceW(
      void
@@ -698,7 +725,7 @@ index 06f5ed27e9..90a7c29e95 100644
  //
  
  
-+_Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslEnumerateProfilesA(
@@ -706,7 +733,7 @@ index 06f5ed27e9..90a7c29e95 100644
      _Out_       ULONG * ProfileCount
      );
  
-+_Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslEnumerateProfilesW(
@@ -714,7 +741,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #endif
  
  
-+_Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslGetProfilePackageA(
@@ -722,7 +749,7 @@ index 06f5ed27e9..90a7c29e95 100644
      );
  
  
-+_Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslGetProfilePackageW(
@@ -730,7 +757,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #define SaslGetProfilePackage   SaslGetProfilePackageA
  #endif
  
-+_Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslIdentifyPackageA(
@@ -738,7 +765,7 @@ index 06f5ed27e9..90a7c29e95 100644
      _Outptr_ PSecPkgInfoA * PackageInfo
      );
  
-+_Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslIdentifyPackageW(
@@ -746,7 +773,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #define SaslIdentifyPackage SaslIdentifyPackageA
  #endif
  
-+_Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslInitializeSecurityContextW(
@@ -762,7 +789,7 @@ index 06f5ed27e9..90a7c29e95 100644
      _Out_opt_   PTimeStamp                  ptsExpiry           // (out) Life span (OPT)
      );
  
-+_Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslInitializeSecurityContextA(
@@ -778,7 +805,7 @@ index 06f5ed27e9..90a7c29e95 100644
  #endif
  
  
-+_Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslAcceptSecurityContext(
@@ -1005,7 +1032,7 @@ index 06f5ed27e9..90a7c29e95 100644
  
  #define SECPKG_OPTIONS_PERMANENT    0x00000001
  
-+_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  AddSecurityPackageA(
@@ -1013,7 +1040,7 @@ index 06f5ed27e9..90a7c29e95 100644
      _In_opt_ PSECURITY_PACKAGE_OPTIONS pOptions
      );
  
-+_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  AddSecurityPackageW(
@@ -1021,14 +1048,14 @@ index 06f5ed27e9..90a7c29e95 100644
  #define AddSecurityPackage  AddSecurityPackageA
  #endif
  
-+_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  DeleteSecurityPackageA(
      _In_ LPSTR pszPackageName
      );
  
-+_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  DeleteSecurityPackageW(

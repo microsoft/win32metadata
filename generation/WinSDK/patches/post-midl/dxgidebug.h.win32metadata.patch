@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h
-index 3d605e99b2..fef1ee7c8f 100644
+index 3d605e99b2..b01b5f915d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxgidebug.h
 @@ -1,3 +1,4 @@
@@ -25,7 +25,7 @@ index 3d605e99b2..fef1ee7c8f 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("D67441C7-672A-476f-9E82-CD55B44949CE")
-+    MIDL_INTERFACE("D67441C7-672A-476f-9E82-CD55B44949CE") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("D67441C7-672A-476f-9E82-CD55B44949CE") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      IDXGIInfoQueue : public IUnknown
      {
      public:
@@ -34,7 +34,7 @@ index 3d605e99b2..fef1ee7c8f 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("119E7452-DE9E-40fe-8806-88F90C12B441")
-+    MIDL_INTERFACE("119E7452-DE9E-40fe-8806-88F90C12B441") _Windows_SupportedOS_Windows8_ 
++    MIDL_INTERFACE("119E7452-DE9E-40fe-8806-88F90C12B441") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
      IDXGIDebug : public IUnknown
      {
      public:
@@ -43,7 +43,7 @@ index 3d605e99b2..fef1ee7c8f 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
 -    MIDL_INTERFACE("c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550")
-+    MIDL_INTERFACE("c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550") _Windows_SupportedOS_Windows81_ 
++    MIDL_INTERFACE("c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows81_ 
      IDXGIDebug1 : public IDXGIDebug
      {
      public:

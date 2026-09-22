@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Rtutils.h b/generation/WinSDK/RecompiledIdlHeaders/um/Rtutils.h
-index 27b7e7a7f8..f51a4c614d 100644
+index 27b7e7a7f8..fe5a055d04 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Rtutils.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Rtutils.h
 @@ -1,3 +1,4 @@
@@ -7,21 +7,289 @@ index 27b7e7a7f8..f51a4c614d 100644
  /*++
  
  Copyright (c) Microsoft Corporation. All rights reserved.
-@@ -365,7 +366,7 @@ LogEventW(
+@@ -60,27 +61,27 @@ extern "C" {
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TraceRegisterExA(
+     IN  LPCSTR      lpszCallerName,
+     IN  DWORD       dwFlags
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TraceDeregisterA(
+     IN  DWORD       dwTraceID
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TraceDeregisterExA(
+     IN  DWORD       dwTraceID,
+     IN  DWORD       dwFlags
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TraceGetConsoleA(
+     IN  DWORD       dwTraceID,
+@@ -104,7 +105,7 @@ TracePrintfExA(
+     IN  ...         OPTIONAL
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TraceVprintfExA(
+     IN  DWORD       dwTraceID,
+@@ -113,7 +114,7 @@ TraceVprintfExA(
+     IN  va_list     arglist
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TracePutsExA(
+     IN  DWORD       dwTraceID,
+@@ -121,7 +122,7 @@ TracePutsExA(
+     IN  LPCSTR      lpszString
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ APIENTRY
+ TraceDumpExA(
+     IN  DWORD       dwTraceID,
+@@ -153,27 +154,27 @@ TraceDumpExA(
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TraceRegisterExW(
+     IN  LPCWSTR     lpszCallerName,
+     IN  DWORD       dwFlags
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TraceDeregisterW(
+     IN  DWORD       dwTraceID
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TraceDeregisterExW(
+     IN  DWORD       dwTraceID,
+     IN  DWORD       dwFlags
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TraceGetConsoleW(
+     IN  DWORD       dwTraceID,
+@@ -197,7 +198,7 @@ TracePrintfExW(
+     IN  ...         OPTIONAL
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TraceVprintfExW(
+     IN  DWORD       dwTraceID,
+@@ -206,7 +207,7 @@ TraceVprintfExW(
+     IN  va_list     arglist
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TracePutsExW(
+     IN  DWORD       dwTraceID,
+@@ -214,7 +215,7 @@ TracePutsExW(
+     IN  LPCWSTR     lpszString
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ APIENTRY
+ TraceDumpExW(
+     IN  DWORD       dwTraceID,
+@@ -291,7 +292,7 @@ TraceDumpExW(
+ //////////////////////////////////////////////////////////////////////////////
+ 
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ APIENTRY
+ LogErrorA(
+     IN DWORD    dwMessageId,
+@@ -300,7 +301,7 @@ LogErrorA(
+     IN DWORD    dwErrorCode
+ );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ APIENTRY
+ LogEventA(
+     IN DWORD   wEventType,
+@@ -316,7 +317,7 @@ LogEventA(
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ LogErrorW(
+     IN DWORD    dwMessageId,
+     IN DWORD    cNumberOfSubStrings,
+@@ -324,7 +325,7 @@ LogErrorW(
+     IN DWORD    dwErrorCode
+ );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ LogEventW(
+     IN DWORD   wEventType,
+     IN DWORD   dwMessageId,
+@@ -365,17 +366,17 @@ LogEventW(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
 -HANDLE
-+_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  RouterLogRegisterA(
      LPCSTR lpszSource
      );
-@@ -463,7 +464,7 @@ RouterGetErrorStringA(
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ RouterLogDeregisterA(
+     HANDLE hLogHandle
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ RouterLogEventA(
+     IN HANDLE hLogHandle,
+     IN DWORD dwEventType,
+@@ -385,7 +386,7 @@ RouterLogEventA(
+     IN DWORD dwErrorCode
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ RouterLogEventDataA(
+     IN HANDLE hLogHandle,
+     IN DWORD dwEventType,
+@@ -396,7 +397,7 @@ RouterLogEventDataA(
+     IN LPBYTE lpDataBytes
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ RouterLogEventStringA(
+     IN HANDLE hLogHandle,
+     IN DWORD dwEventType,
+@@ -407,7 +408,7 @@ RouterLogEventStringA(
+     IN DWORD dwErrorIndex
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ __cdecl
+ RouterLogEventExA(
+     IN HANDLE   hLogHandle,
+@@ -418,7 +419,7 @@ RouterLogEventExA(
+     ...
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:ansi") VOID
+ RouterLogEventValistExA(
+     IN HANDLE   hLogHandle,
+     IN DWORD    dwEventType,
+@@ -428,7 +429,7 @@ RouterLogEventValistExA(
+     IN va_list  arglist
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") DWORD
+ RouterGetErrorStringA(
+     IN  DWORD   dwErrorCode,
+     _Out_ OUT LPSTR * lplpszErrorString
+@@ -463,17 +464,17 @@ RouterGetErrorStringA(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
 -HANDLE
-+_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  RouterLogRegisterW(
      LPCWSTR lpszSource
      );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ RouterLogDeregisterW(
+     HANDLE hLogHandle
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ RouterLogEventW(
+     IN HANDLE hLogHandle,
+     IN DWORD dwEventType,
+@@ -483,7 +484,7 @@ RouterLogEventW(
+     IN DWORD dwErrorCode
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ RouterLogEventDataW(
+     IN HANDLE hLogHandle,
+     IN DWORD dwEventType,
+@@ -494,7 +495,7 @@ RouterLogEventDataW(
+     IN LPBYTE lpDataBytes
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ RouterLogEventStringW(
+     IN HANDLE hLogHandle,
+     IN DWORD dwEventType,
+@@ -505,7 +506,7 @@ RouterLogEventStringW(
+     IN DWORD dwErrorIndex
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ __cdecl
+ RouterLogEventExW(
+     IN HANDLE   hLogHandle,
+@@ -516,7 +517,7 @@ RouterLogEventExW(
+     ...
+     );
+ 
+-VOID
++_WIN32META_ANNOTATION_("win32metadata:unicode") VOID
+ RouterLogEventValistExW(
+     IN HANDLE   hLogHandle,
+     IN DWORD    dwEventType,
+@@ -526,7 +527,7 @@ RouterLogEventValistExW(
+     IN va_list  arglist
+     );
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") DWORD
+ RouterGetErrorStringW(
+     IN  DWORD    dwErrorCode,
+     _Out_ OUT LPWSTR * lplpwszErrorString

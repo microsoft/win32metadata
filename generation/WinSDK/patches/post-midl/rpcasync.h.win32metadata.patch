@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
-index 8597e21530..8c72891978 100644
+index 8597e21530..4a57c34519 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
 @@ -1,3 +1,4 @@
@@ -178,7 +178,7 @@ index 8597e21530..8c72891978 100644
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  
 -RPCRTAPI
-+_Windows_SupportedOS_WindowsXP_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcServerInqCallAttributesW (
@@ -187,7 +187,7 @@ index 8597e21530..8c72891978 100644
      );
  
 -RPCRTAPI
-+_Windows_SupportedOS_WindowsXP_ RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ RPCRTAPI
  RPC_STATUS
  RPC_ENTRY
  RpcServerInqCallAttributesA (

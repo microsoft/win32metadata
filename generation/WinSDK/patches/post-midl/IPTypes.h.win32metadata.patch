@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
-index 58f474bba2..8a4029ffa3 100644
+index 58f474bba2..84cc7b3be8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
 @@ -15,6 +15,7 @@ Module Name:
@@ -144,6 +144,25 @@ index 58f474bba2..8a4029ffa3 100644
      union {
          ULONGLONG Alignment;
          struct {
+@@ -292,14 +293,14 @@ typedef struct _IP_ADAPTER_ADDRESSES_LH {
+         };
+     };
+     struct _IP_ADAPTER_ADDRESSES_LH *Next;
+-    PCHAR AdapterName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR AdapterName;
+     PIP_ADAPTER_UNICAST_ADDRESS_LH FirstUnicastAddress;
+     PIP_ADAPTER_ANYCAST_ADDRESS_XP FirstAnycastAddress;
+     PIP_ADAPTER_MULTICAST_ADDRESS_XP FirstMulticastAddress;
+     PIP_ADAPTER_DNS_SERVER_ADDRESS_XP FirstDnsServerAddress;
+-    PWCHAR DnsSuffix;
+-    PWCHAR Description;
+-    PWCHAR FriendlyName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR DnsSuffix;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR Description;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR FriendlyName;
+     BYTE PhysicalAddress[MAX_ADAPTER_ADDRESS_LENGTH];
+     ULONG PhysicalAddressLength;
+     union {
 @@ -349,7 +350,7 @@ typedef struct _IP_ADAPTER_ADDRESSES_LH {
  } IP_ADAPTER_ADDRESSES_LH,
   *PIP_ADAPTER_ADDRESSES_LH;
@@ -153,6 +172,25 @@ index 58f474bba2..8a4029ffa3 100644
      union {
          ULONGLONG Alignment;
          struct {
+@@ -358,14 +359,14 @@ typedef struct _IP_ADAPTER_ADDRESSES_XP {
+         };
+     };
+     struct _IP_ADAPTER_ADDRESSES_XP *Next;
+-    PCHAR AdapterName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR AdapterName;
+     PIP_ADAPTER_UNICAST_ADDRESS_XP FirstUnicastAddress;
+     PIP_ADAPTER_ANYCAST_ADDRESS_XP FirstAnycastAddress;
+     PIP_ADAPTER_MULTICAST_ADDRESS_XP FirstMulticastAddress;
+     PIP_ADAPTER_DNS_SERVER_ADDRESS_XP FirstDnsServerAddress;
+-    PWCHAR DnsSuffix;
+-    PWCHAR Description;
+-    PWCHAR FriendlyName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR DnsSuffix;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR Description;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR FriendlyName;
+     BYTE PhysicalAddress[MAX_ADAPTER_ADDRESS_LENGTH];
+     DWORD PhysicalAddressLength;
+     DWORD Flags;
 @@ -418,7 +419,7 @@ typedef  IP_ADAPTER_ADDRESSES_XP *PIP_ADAPTER_ADDRESSES;
  // IP_PER_ADAPTER_INFO - per-adapter IP information such as DNS server list.
  //

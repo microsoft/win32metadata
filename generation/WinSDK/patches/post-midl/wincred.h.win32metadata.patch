@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
-index 091f30b30d..2158b228b9 100644
+index 091f30b30d..4a0a26730b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -91,7 +91,7 @@ index 091f30b30d..2158b228b9 100644
  #define CERT_HASH_LENGTH        20  // SHA1 hashes are used for cert hashes
  
 -typedef struct _CERT_CREDENTIAL_INFO {
-+typedef struct   _CERT_CREDENTIAL_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _CERT_CREDENTIAL_INFO {
      ULONG cbSize;
      UCHAR rgbHashOfCert[CERT_HASH_LENGTH];
  } CERT_CREDENTIAL_INFO, *PCERT_CREDENTIAL_INFO;
@@ -127,7 +127,7 @@ index 091f30b30d..2158b228b9 100644
  #define _CREDUI_INFO_DEFINED
  
 -typedef struct _CREDUI_INFOA
-+typedef struct   _CREDUI_INFOA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _CREDUI_INFOA
  {
      DWORD cbSize;
      HWND hwndParent;
@@ -136,7 +136,7 @@ index 091f30b30d..2158b228b9 100644
  } CREDUI_INFOA, *PCREDUI_INFOA;
  
 -typedef struct _CREDUI_INFOW
-+typedef struct   _CREDUI_INFOW
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _CREDUI_INFOW
  {
      DWORD cbSize;
      HWND hwndParent;
@@ -144,7 +144,7 @@ index 091f30b30d..2158b228b9 100644
  
  #define CRED_PRESERVE_CREDENTIAL_BLOB 0x1
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -152,7 +152,7 @@ index 091f30b30d..2158b228b9 100644
      _In_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -160,7 +160,7 @@ index 091f30b30d..2158b228b9 100644
  #endif // UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -172,7 +172,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_ PCREDENTIALW *Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -187,7 +187,7 @@ index 091f30b30d..2158b228b9 100644
  
  #define CRED_ENUMERATE_ALL_CREDENTIALS 0x1
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -199,7 +199,7 @@ index 091f30b30d..2158b228b9 100644
      _Outptr_result_buffer_(*Count) PCREDENTIALW **Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -214,7 +214,7 @@ index 091f30b30d..2158b228b9 100644
  #endif // UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -222,7 +222,7 @@ index 091f30b30d..2158b228b9 100644
      _In_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -230,7 +230,7 @@ index 091f30b30d..2158b228b9 100644
  #define CRED_CACHE_TARGET_INFORMATION 0x1
  
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -238,7 +238,7 @@ index 091f30b30d..2158b228b9 100644
      _Outptr_result_buffer_(*Count) PCREDENTIALW **Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -246,7 +246,7 @@ index 091f30b30d..2158b228b9 100644
  #endif // UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -257,7 +257,7 @@ index 091f30b30d..2158b228b9 100644
      _Reserved_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -272,7 +272,7 @@ index 091f30b30d..2158b228b9 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -284,7 +284,7 @@ index 091f30b30d..2158b228b9 100644
      _Reserved_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -300,7 +300,7 @@ index 091f30b30d..2158b228b9 100644
  #define CRED_ALLOW_NAME_RESOLUTION 0x1
  
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -308,7 +308,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_ PCREDENTIAL_TARGET_INFORMATIONW *TargetInfo
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -316,7 +316,7 @@ index 091f30b30d..2158b228b9 100644
  #define CredGetTargetInfo CredGetTargetInfoA
  #endif // UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -324,7 +324,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_ LPWSTR *MarshaledCredential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -332,7 +332,7 @@ index 091f30b30d..2158b228b9 100644
  #define CredMarshalCredential CredMarshalCredentialA
  #endif // UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -340,7 +340,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_ PVOID *Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -348,7 +348,7 @@ index 091f30b30d..2158b228b9 100644
  #define CredUnmarshalCredential CredUnmarshalCredentialA
  #endif // UNICODE
  
-+_Windows_SupportedOS_WindowsXP_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_  
  WINADVAPI
  BOOL
  WINAPI
@@ -356,7 +356,7 @@ index 091f30b30d..2158b228b9 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-+_Windows_SupportedOS_WindowsXP_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_  
  WINADVAPI
  BOOL
  WINAPI
@@ -365,7 +365,7 @@ index 091f30b30d..2158b228b9 100644
  #endif // UNICODE
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
 + 
  BOOL
  WINAPI
@@ -380,7 +380,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
 + 
  BOOL
  WINAPI
@@ -395,7 +395,7 @@ index 091f30b30d..2158b228b9 100644
  #endif //UNICODE
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
 + 
  BOOL
  WINAPI
@@ -409,7 +409,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
 + 
  BOOL
  WINAPI
@@ -424,7 +424,7 @@ index 091f30b30d..2158b228b9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 -_Success_(return)
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Success_(return)
 + 
  WINADVAPI
  BOOL
@@ -433,7 +433,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_opt_ CRED_PROTECTION_TYPE*         ProtectionType
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -442,7 +442,7 @@ index 091f30b30d..2158b228b9 100644
  #endif //UNICODE
  
 -_Success_(return)
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Success_(return)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Success_(return)
 + 
  WINADVAPI
  BOOL
@@ -451,7 +451,7 @@ index 091f30b30d..2158b228b9 100644
      _Inout_ DWORD*                              pcchMaxChars
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -459,7 +459,7 @@ index 091f30b30d..2158b228b9 100644
  #define CredUnprotect CredUnprotectA
  #endif //UNICODE
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -467,7 +467,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_ CRED_PROTECTION_TYPE* pProtectionType
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -475,7 +475,7 @@ index 091f30b30d..2158b228b9 100644
  
  
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -483,7 +483,7 @@ index 091f30b30d..2158b228b9 100644
      _Out_ PCREDENTIALW *Credential
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -508,7 +508,7 @@ index 091f30b30d..2158b228b9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -522,7 +522,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -541,7 +541,7 @@ index 091f30b30d..2158b228b9 100644
  #endif
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -555,7 +555,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -574,7 +574,7 @@ index 091f30b30d..2158b228b9 100644
  
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -584,7 +584,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -594,7 +594,7 @@ index 091f30b30d..2158b228b9 100644
  
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -608,7 +608,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -627,7 +627,7 @@ index 091f30b30d..2158b228b9 100644
  // to indicate it didn't
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ CREDUIAPI
 + 
  DWORD
  WINAPI
@@ -637,7 +637,7 @@ index 091f30b30d..2158b228b9 100644
      );
  
 -CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ CREDUIAPI
 + 
  DWORD
  WINAPI
