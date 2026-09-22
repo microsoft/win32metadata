@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h
-index 7516693aa2cc204a567f67590d5cba54191c78ee..4798b09208efdde30b54b86efe48f2ff1c5ee8f3 100644
+index 7516693aa2..0099e41766 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SearchAPI.h
 @@ -380,6 +380,7 @@ extern "C"{
@@ -10,6 +10,222 @@ index 7516693aa2cc204a567f67590d5cba54191c78ee..4798b09208efdde30b54b86efe48f2ff
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  typedef LONG ITEMID;
+@@ -403,7 +404,7 @@ EXTERN_C const IID IID_IUrlAccessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0b63e318-9ccc-11d0-bcdb-00805fccce04")
++    MIDL_INTERFACE("0b63e318-9ccc-11d0-bcdb-00805fccce04") _Windows_SupportedOS_WindowsXP_ 
+     IUrlAccessor : public IUnknown
+     {
+     public:
+@@ -686,7 +687,7 @@ EXTERN_C const IID IID_IUrlAccessor2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c7310734-ac80-11d1-8df3-00c04fb6ef4f")
++    MIDL_INTERFACE("c7310734-ac80-11d1-8df3-00c04fb6ef4f") _Windows_SupportedOS_WindowsXP_ 
+     IUrlAccessor2 : public IUrlAccessor
+     {
+     public:
+@@ -949,7 +950,7 @@ EXTERN_C const IID IID_IUrlAccessor3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6FBC7005-0455-4874-B8FF-7439450241A3")
++    MIDL_INTERFACE("6FBC7005-0455-4874-B8FF-7439450241A3") _Windows_SupportedOS_WindowsXP_ 
+     IUrlAccessor3 : public IUrlAccessor2
+     {
+     public:
+@@ -1216,7 +1217,7 @@ EXTERN_C const IID IID_IUrlAccessor4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5CC51041-C8D2-41d7-BCA3-9E9E286297DC")
++    MIDL_INTERFACE("5CC51041-C8D2-41d7-BCA3-9E9E286297DC") _Windows_SupportedOS_WindowsVista_ 
+     IUrlAccessor4 : public IUrlAccessor3
+     {
+     public:
+@@ -1520,7 +1521,7 @@ EXTERN_C const IID IID_IOpLockStatus;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c731065d-ac80-11d1-8df3-00c04fb6ef4f")
++    MIDL_INTERFACE("c731065d-ac80-11d1-8df3-00c04fb6ef4f") _Windows_SupportedOS_WindowsXP_ 
+     IOpLockStatus : public IUnknown
+     {
+     public:
+@@ -1534,7 +1535,7 @@ EXTERN_C const IID IID_IOpLockStatus;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetOplockEventHandle( 
+             /* [annotation][out] */ 
+-            _Outptr_  HANDLE *phOplockEv) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_  HANDLE *phOplockEv) = 0;
+         
+     };
+     
+@@ -1633,7 +1634,7 @@ EXTERN_C const IID IID_ISearchProtocolThreadContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c73106e1-ac80-11d1-8df3-00c04fb6ef4f")
++    MIDL_INTERFACE("c73106e1-ac80-11d1-8df3-00c04fb6ef4f") _Windows_SupportedOS_WindowsXP_ 
+     ISearchProtocolThreadContext : public IUnknown
+     {
+     public:
+@@ -1813,7 +1814,7 @@ EXTERN_C const IID IID_ISearchProtocol;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c73106ba-ac80-11d1-8df3-00c04fb6ef4f")
++    MIDL_INTERFACE("c73106ba-ac80-11d1-8df3-00c04fb6ef4f") _Windows_SupportedOS_WindowsXP_ 
+     ISearchProtocol : public IUnknown
+     {
+     public:
+@@ -1959,7 +1960,7 @@ EXTERN_C const IID IID_ISearchProtocol2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7789F0B2-B5B2-4722-8B65-5DBD150697A9")
++    MIDL_INTERFACE("7789F0B2-B5B2-4722-8B65-5DBD150697A9") _Windows_SupportedOS_WindowsXP_ 
+     ISearchProtocol2 : public ISearchProtocol
+     {
+     public:
+@@ -2113,7 +2114,7 @@ EXTERN_C const IID IID_IProtocolHandlerSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0b63e385-9ccc-11d0-bcdb-00805fccce04")
++    MIDL_INTERFACE("0b63e385-9ccc-11d0-bcdb-00805fccce04") _Windows_SupportedOS_WindowsXP_ 
+     IProtocolHandlerSite : public IUnknown
+     {
+     public:
+@@ -2227,7 +2228,7 @@ EXTERN_C const IID IID_ISearchRoot;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("04C18CCF-1F57-4CBD-88CC-3900F5195CE3")
++    MIDL_INTERFACE("04C18CCF-1F57-4CBD-88CC-3900F5195CE3") _Windows_SupportedOS_WindowsXP_ 
+     ISearchRoot : public IUnknown
+     {
+     public:
+@@ -2587,7 +2588,7 @@ EXTERN_C const IID IID_IEnumSearchRoots;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF52")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF52") _Windows_SupportedOS_WindowsXP_ 
+     IEnumSearchRoots : public IUnknown
+     {
+     public:
+@@ -2732,7 +2733,7 @@ EXTERN_C const IID IID_ISearchScopeRule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF53")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF53") _Windows_SupportedOS_WindowsXP_ 
+     ISearchScopeRule : public IUnknown
+     {
+     public:
+@@ -2858,7 +2859,7 @@ EXTERN_C const IID IID_IEnumSearchScopeRules;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF54")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF54") _Windows_SupportedOS_WindowsXP_ 
+     IEnumSearchScopeRules : public IUnknown
+     {
+     public:
+@@ -3005,7 +3006,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF55")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF55") _Windows_SupportedOS_WindowsXP_ 
+     ISearchCrawlScopeManager : public IUnknown
+     {
+     public:
+@@ -3335,7 +3336,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6292F7AD-4E19-4717-A534-8FC22BCD5CCD")
++    MIDL_INTERFACE("6292F7AD-4E19-4717-A534-8FC22BCD5CCD") _Windows_SupportedOS_Windows7_ 
+     ISearchCrawlScopeManager2 : public ISearchCrawlScopeManager
+     {
+     public:
+@@ -3343,7 +3344,7 @@ EXTERN_C const IID IID_ISearchCrawlScopeManager2;
+             /* [annotation][out] */ 
+             _Out_  long **plVersion,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phFileMapping) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phFileMapping) = 0;
+         
+     };
+     
+@@ -3649,7 +3650,7 @@ EXTERN_C const IID IID_ISearchItemsChangedSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF58")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF58") _Windows_SupportedOS_WindowsXP_ 
+     ISearchItemsChangedSink : public IUnknown
+     {
+     public:
+@@ -3782,7 +3783,7 @@ EXTERN_C const IID IID_ISearchPersistentItemsChangedSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A2FFDF9B-4758-4F84-B729-DF81A1A0612F")
++    MIDL_INTERFACE("A2FFDF9B-4758-4F84-B729-DF81A1A0612F") _Windows_SupportedOS_WindowsXP_ 
+     ISearchPersistentItemsChangedSink : public IUnknown
+     {
+     public:
+@@ -3903,7 +3904,7 @@ EXTERN_C const IID IID_ISearchViewChangedSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF65")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF65") _Windows_SupportedOS_WindowsXP_ 
+     ISearchViewChangedSink : public IUnknown
+     {
+     public:
+@@ -4025,7 +4026,7 @@ EXTERN_C const IID IID_ISearchNotifyInlineSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B5702E61-E75C-4B64-82A1-6CB4F832FCCF")
++    MIDL_INTERFACE("B5702E61-E75C-4B64-82A1-6CB4F832FCCF") _Windows_SupportedOS_WindowsXP_ 
+     ISearchNotifyInlineSite : public IUnknown
+     {
+     public:
+@@ -4183,7 +4184,7 @@ EXTERN_C const IID IID_ISearchCatalogManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF50")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF50") _Windows_SupportedOS_WindowsXP_ 
+     ISearchCatalogManager : public IUnknown
+     {
+     public:
+@@ -4659,7 +4660,7 @@ EXTERN_C const IID IID_ISearchCatalogManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7AC3286D-4D1D-4817-84FC-C1C85E3AF0D9")
++    MIDL_INTERFACE("7AC3286D-4D1D-4817-84FC-C1C85E3AF0D9") _Windows_SupportedOS_WindowsXP_ 
+     ISearchCatalogManager2 : public ISearchCatalogManager
+     {
+     public:
+@@ -5402,7 +5403,7 @@ EXTERN_C const IID IID_ISearchQueryHelper;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF63")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF63") _Windows_SupportedOS_WindowsXP_ 
+     ISearchQueryHelper : public IUnknown
+     {
+     public:
 @@ -5787,7 +5788,7 @@ EXTERN_C const IID IID_IRowsetPrioritization;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -46,3 +262,30 @@ index 7516693aa2cc204a567f67590d5cba54191c78ee..4798b09208efdde30b54b86efe48f2ff
      {
          CONST_VTBL struct IRowsetEventsVtbl *lpVtbl;
      };
+@@ -6098,7 +6099,7 @@ EXTERN_C const IID IID_ISearchManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF69")
++    MIDL_INTERFACE("AB310581-AC80-11D1-8DF3-00C04FB6EF69") _Windows_SupportedOS_WindowsXP_ 
+     ISearchManager : public IUnknown
+     {
+     public:
+@@ -6373,7 +6374,7 @@ EXTERN_C const IID IID_ISearchManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DBAB3F73-DB19-4A79-BFC0-A61A93886DDF")
++    MIDL_INTERFACE("DBAB3F73-DB19-4A79-BFC0-A61A93886DDF") _Windows_SupportedOS_Windows8_ 
+     ISearchManager2 : public ISearchManager
+     {
+     public:
+@@ -6629,7 +6630,7 @@ EXTERN_C const IID IID_ISearchLanguageSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("24C3CBAA-EBC1-491a-9EF1-9F6D8DEB1B8F")
++    MIDL_INTERFACE("24C3CBAA-EBC1-491a-9EF1-9F6D8DEB1B8F") _Windows_SupportedOS_WindowsXP_ 
+     ISearchLanguageSupport : public IUnknown
+     {
+     public:

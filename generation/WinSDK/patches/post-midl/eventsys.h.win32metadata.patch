@@ -1,0 +1,377 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h b/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
+index 2aacf2d541..a4cd76d720 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -279,7 +280,7 @@ EXTERN_C const IID IID_IEventSystem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4E14FB9F-2E22-11D1-9964-00C04FBBB345")
++    MIDL_INTERFACE("4E14FB9F-2E22-11D1-9964-00C04FBBB345") _Windows_SupportedOS_Windows2000_ 
+     IEventSystem : public IDispatch
+     {
+     public:
+@@ -309,7 +310,7 @@ EXTERN_C const IID IID_IEventSystem;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_EventObjectChangeEventClassID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrEventClassID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrEventClassID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryS( 
+             /* [annotation][in] */ 
+@@ -532,13 +533,13 @@ EXTERN_C const IID IID_IEventPublisher;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E341516B-2E32-11D1-9964-00C04FBBB345")
++    MIDL_INTERFACE("E341516B-2E32-11D1-9964-00C04FBBB345") _Windows_SupportedOS_Windows2000_ 
+     IEventPublisher : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PublisherID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPublisherID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPublisherID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PublisherID( 
+             /* [annotation][in] */ 
+@@ -546,7 +547,7 @@ EXTERN_C const IID IID_IEventPublisher;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PublisherName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPublisherName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPublisherName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PublisherName( 
+             /* [annotation][in] */ 
+@@ -554,7 +555,7 @@ EXTERN_C const IID IID_IEventPublisher;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PublisherType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPublisherType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPublisherType) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PublisherType( 
+             /* [annotation][in] */ 
+@@ -562,7 +563,7 @@ EXTERN_C const IID IID_IEventPublisher;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OwnerSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrOwnerSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrOwnerSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OwnerSID( 
+             /* [annotation][in] */ 
+@@ -570,7 +571,7 @@ EXTERN_C const IID IID_IEventPublisher;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDescription) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -858,13 +859,13 @@ EXTERN_C const IID IID_IEventClass;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fb2b72a0-7a68-11d1-88f9-0080c7d771bf")
++    MIDL_INTERFACE("fb2b72a0-7a68-11d1-88f9-0080c7d771bf") _Windows_SupportedOS_Windows2000_ 
+     IEventClass : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventClassID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrEventClassID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrEventClassID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventClassID( 
+             /* [annotation][in] */ 
+@@ -872,7 +873,7 @@ EXTERN_C const IID IID_IEventClass;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventClassName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrEventClassName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrEventClassName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventClassName( 
+             /* [annotation][in] */ 
+@@ -880,7 +881,7 @@ EXTERN_C const IID IID_IEventClass;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OwnerSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrOwnerSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrOwnerSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OwnerSID( 
+             /* [annotation][in] */ 
+@@ -888,7 +889,7 @@ EXTERN_C const IID IID_IEventClass;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FiringInterfaceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrFiringInterfaceID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrFiringInterfaceID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FiringInterfaceID( 
+             /* [annotation][in] */ 
+@@ -896,7 +897,7 @@ EXTERN_C const IID IID_IEventClass;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDescription) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -904,7 +905,7 @@ EXTERN_C const IID IID_IEventClass;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CustomConfigCLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrCustomConfigCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrCustomConfigCLSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CustomConfigCLSID( 
+             /* [annotation][in] */ 
+@@ -912,7 +913,7 @@ EXTERN_C const IID IID_IEventClass;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TypeLib( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrTypeLib) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrTypeLib) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TypeLib( 
+             /* [annotation][in] */ 
+@@ -1176,13 +1177,13 @@ EXTERN_C const IID IID_IEventClass2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fb2b72a1-7a68-11d1-88f9-0080c7d771bf")
++    MIDL_INTERFACE("fb2b72a1-7a68-11d1-88f9-0080c7d771bf") _Windows_SupportedOS_Windows2000_ 
+     IEventClass2 : public IEventClass
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_PublisherID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPublisherID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPublisherID) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_PublisherID( 
+             /* [annotation][in] */ 
+@@ -1190,7 +1191,7 @@ EXTERN_C const IID IID_IEventClass2;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MultiInterfacePublisherFilterCLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPubFilCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPubFilCLSID) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_MultiInterfacePublisherFilterCLSID( 
+             /* [annotation][in] */ 
+@@ -1543,13 +1544,13 @@ EXTERN_C const IID IID_IEventSubscription;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4A6B0E15-2E38-11D1-9965-00C04FBBB345")
++    MIDL_INTERFACE("4A6B0E15-2E38-11D1-9965-00C04FBBB345") _Windows_SupportedOS_Windows2000_ 
+     IEventSubscription : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubscriptionID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrSubscriptionID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrSubscriptionID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SubscriptionID( 
+             /* [annotation][in] */ 
+@@ -1557,7 +1558,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubscriptionName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrSubscriptionName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrSubscriptionName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SubscriptionName( 
+             /* [annotation][in] */ 
+@@ -1565,7 +1566,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PublisherID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPublisherID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPublisherID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PublisherID( 
+             /* [annotation][in] */ 
+@@ -1573,7 +1574,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventClassID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrEventClassID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrEventClassID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventClassID( 
+             /* [annotation][in] */ 
+@@ -1581,7 +1582,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MethodName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrMethodName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrMethodName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MethodName( 
+             /* [annotation][in] */ 
+@@ -1589,7 +1590,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubscriberCLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrSubscriberCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrSubscriberCLSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SubscriberCLSID( 
+             /* [annotation][in] */ 
+@@ -1613,7 +1614,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OwnerSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrOwnerSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrOwnerSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OwnerSID( 
+             /* [annotation][in] */ 
+@@ -1629,7 +1630,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDescription) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -1637,7 +1638,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MachineName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrMachineName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrMachineName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MachineName( 
+             /* [annotation][in] */ 
+@@ -1685,7 +1686,7 @@ EXTERN_C const IID IID_IEventSubscription;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_InterfaceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrInterfaceID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrInterfaceID) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_InterfaceID( 
+             /* [annotation][in] */ 
+@@ -2137,7 +2138,7 @@ EXTERN_C const IID IID_IFiringControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e0498c93-4efe-11d1-9971-00c04fbbb345")
++    MIDL_INTERFACE("e0498c93-4efe-11d1-9971-00c04fbbb345") _Windows_SupportedOS_Windows2000_ 
+     IFiringControl : public IDispatch
+     {
+     public:
+@@ -2289,7 +2290,7 @@ EXTERN_C const IID IID_IPublisherFilter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("465e5cc0-7b26-11d1-88fb-0080c7d771bf")
++    MIDL_INTERFACE("465e5cc0-7b26-11d1-88fb-0080c7d771bf") _Windows_SupportedOS_Windows2000_ 
+     IPublisherFilter : public IUnknown
+     {
+     public:
+@@ -2397,7 +2398,7 @@ EXTERN_C const IID IID_IMultiInterfacePublisherFilter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("465e5cc1-7b26-11d1-88fb-0080c7d771bf")
++    MIDL_INTERFACE("465e5cc1-7b26-11d1-88fb-0080c7d771bf") _Windows_SupportedOS_Windows2000_ 
+     IMultiInterfacePublisherFilter : public IUnknown
+     {
+     public:
+@@ -2513,7 +2514,7 @@ EXTERN_C const IID IID_IEventObjectChange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F4A07D70-2E25-11D1-9964-00C04FBBB345")
++    MIDL_INTERFACE("F4A07D70-2E25-11D1-9964-00C04FBBB345") _Windows_SupportedOS_Windows2000_ 
+     IEventObjectChange : public IUnknown
+     {
+     public:
+@@ -2659,7 +2660,7 @@ EXTERN_C const IID IID_IEventObjectChange2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7701A9C3-BD68-438f-83E0-67BF4F53A422")
++    MIDL_INTERFACE("7701A9C3-BD68-438f-83E0-67BF4F53A422") _Windows_SupportedOS_Windows2000_ 
+     IEventObjectChange2 : public IUnknown
+     {
+     public:
+@@ -2759,7 +2760,7 @@ EXTERN_C const IID IID_IEnumEventObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F4A07D63-2E25-11D1-9964-00C04FBBB345")
++    MIDL_INTERFACE("F4A07D63-2E25-11D1-9964-00C04FBBB345") _Windows_SupportedOS_Windows2000_ 
+     IEnumEventObject : public IUnknown
+     {
+     public:
+@@ -2775,7 +2776,7 @@ EXTERN_C const IID IID_IEnumEventObject;
+             /* [annotation][out] */ 
+             _Out_  ULONG *cRetElem) = 0;
+         
+-        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
++        _Win32_PreserveResult_ virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+@@ -2889,7 +2890,7 @@ EXTERN_C const IID IID_IEventObjectCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f89ac270-d4eb-11d1-b682-00805fc79216")
++    MIDL_INTERFACE("f89ac270-d4eb-11d1-b682-00805fc79216") _Windows_SupportedOS_Windows2000_ 
+     IEventObjectCollection : public IDispatch
+     {
+     public:
+@@ -3111,13 +3112,13 @@ EXTERN_C const IID IID_IEventProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("da538ee2-f4de-11d1-b6bb-00805fc79216")
++    MIDL_INTERFACE("da538ee2-f4de-11d1-b6bb-00805fc79216") _Windows_SupportedOS_Windows2000_ 
+     IEventProperty : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *propertyName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *propertyName) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -3302,7 +3303,7 @@ EXTERN_C const IID IID_IEventControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0343e2f4-86f6-11d1-b760-00c04fb926af")
++    MIDL_INTERFACE("0343e2f4-86f6-11d1-b760-00c04fb926af") _Windows_SupportedOS_Windows2000_ 
+     IEventControl : public IDispatch
+     {
+     public:
+@@ -3527,7 +3528,7 @@ EXTERN_C const IID IID_IMultiInterfaceEventControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0343e2f5-86f6-11d1-b760-00c04fb926af")
++    MIDL_INTERFACE("0343e2f5-86f6-11d1-b760-00c04fb926af") _Windows_SupportedOS_Windows2000_ 
+     IMultiInterfaceEventControl : public IUnknown
+     {
+     public:

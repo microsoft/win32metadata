@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h b/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h
-index 1b1db0b47b..717c2b6bf5 100644
+index 1b1db0b47b..10b79db4fc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 1b1db0b47b..717c2b6bf5 100644
      __in_opt PCZZWSTR pszzCompatibleIds;
      __in_opt const GUID *pContainerId;
 -    ULONG CapabilityFlags;
-+    _Win32_AssociatedEnum_(SW_DEVICE_CAPABILITIES) ULONG CapabilityFlags;
++     ULONG CapabilityFlags;
      __in_opt PCWSTR pszDeviceDescription;
      __in_opt PCWSTR pszDeviceLocation;
      __in_opt const SECURITY_DESCRIPTOR *pSecurityDescriptor;

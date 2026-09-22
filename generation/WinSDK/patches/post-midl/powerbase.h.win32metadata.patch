@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
+index 73c8bfd825..188d15c0da 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h
 @@ -17,6 +17,7 @@
@@ -92,7 +93,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powerbase.h b/generation/
 +    _In_ _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) DWORD Flags,
      _In_ HANDLE Recipient,
 -    _Out_ PHPOWERNOTIFY RegistrationHandle
-+    _Out_ _Win32_RAIIFree_(PowerUnregisterSuspendResumeNotification) PHPOWERNOTIFY RegistrationHandle
++    _Out_  PHPOWERNOTIFY RegistrationHandle
      );
  
  #endif

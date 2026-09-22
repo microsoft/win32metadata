@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
+index 589691ede1..38641185eb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
 @@ -15,6 +15,7 @@
@@ -13,9 +14,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generati
  
  #define PRIVATE_NAMESPACE_FLAG_DESTROY      0x00000001
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_SetLastError_
++_Win32_RAIIFree_(ClosePrivateNamespace) 
++
++
  WINBASEAPI
  HANDLE
  WINAPI
@@ -23,9 +24,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generati
      _In_ LPCWSTR lpAliasPrefix
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_SetLastError_
++_Win32_RAIIFree_(ClosePrivateNamespace) 
++
++
  WINBASEAPI
  HANDLE
  WINAPI
@@ -33,8 +34,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generati
      _In_ LPCWSTR lpAliasPrefix
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOLEAN
@@ -43,10 +44,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generati
      _In_ ULONG Flags
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_SetLastError_
-+_Win32_RAIIFree_(DeleteBoundaryDescriptor, 0)
++_Win32_RAIIFree_(DeleteBoundaryDescriptor) 
++
++
++
  WINBASEAPI
  HANDLE
  WINAPI
@@ -54,8 +55,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generati
      _In_ ULONG Flags
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -64,8 +65,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generati
      _In_ PSID RequiredSid
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBASEAPI
  VOID
  WINAPI

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h
-index fb2160014bdce4db96d0481fe3efcca542e20634..74c0cd45eb3be089241a8e7c0cf9bb3c7652d3eb 100644
+index fb2160014b..36738a3d1b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertExit.h
 @@ -74,6 +74,7 @@ extern "C"{
@@ -10,7 +10,7 @@ index fb2160014bdce4db96d0481fe3efcca542e20634..74c0cd45eb3be089241a8e7c0cf9bb3c
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #define EXITEVENT_INVALID               ( 0x0 )  // Invalid event
-@@ -103,7 +104,7 @@ EXTERN_C const IID IID_ICertExit;
+@@ -103,14 +104,14 @@ EXTERN_C const IID IID_ICertExit;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("e19ae1a0-7364-11d0-8816-00a0c903b83c")
@@ -19,6 +19,23 @@ index fb2160014bdce4db96d0481fe3efcca542e20634..74c0cd45eb3be089241a8e7c0cf9bb3c
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [annotation][in] */ 
+             _In_  const BSTR strConfig,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  LONG *pEventMask) = 0;
++            _Win32_AssociatedEnum_(CERT_EXIT_EVENT_MASK) _Out_retval_  LONG *pEventMask) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Notify( 
+             /* [annotation][in] */ 
+@@ -120,7 +121,7 @@ EXTERN_C const IID IID_ICertExit;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pstrDescription) = 0;
+         
+     };
+     
 @@ -221,7 +222,7 @@ EXTERN_C const IID IID_ICertExit;
          END_INTERFACE
      } ICertExitVtbl;
@@ -46,3 +63,45 @@ index fb2160014bdce4db96d0481fe3efcca542e20634..74c0cd45eb3be089241a8e7c0cf9bb3c
      {
          CONST_VTBL struct ICertExit2Vtbl *lpVtbl;
      };
+@@ -483,6 +484,41 @@ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned lo
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("EXITEVENT_CERTDENIED")
++#undef EXITEVENT_CERTDENIED
++#pragma push_macro("EXITEVENT_CERTISSUED")
++#undef EXITEVENT_CERTISSUED
++#pragma push_macro("EXITEVENT_CERTPENDING")
++#undef EXITEVENT_CERTPENDING
++#pragma push_macro("EXITEVENT_CERTRETRIEVEPENDING")
++#undef EXITEVENT_CERTRETRIEVEPENDING
++#pragma push_macro("EXITEVENT_CERTREVOKED")
++#undef EXITEVENT_CERTREVOKED
++#pragma push_macro("EXITEVENT_CRLISSUED")
++#undef EXITEVENT_CRLISSUED
++#pragma push_macro("EXITEVENT_SHUTDOWN")
++#undef EXITEVENT_SHUTDOWN
++enum [[clang::flag_enum]] CERT_EXIT_EVENT_MASK : unsigned int
++{
++    EXITEVENT_CERTDENIED = 4U,
++    EXITEVENT_CERTISSUED = 1U,
++    EXITEVENT_CERTPENDING = 2U,
++    EXITEVENT_CERTRETRIEVEPENDING = 16U,
++    EXITEVENT_CERTREVOKED = 8U,
++    EXITEVENT_CRLISSUED = 32U,
++    EXITEVENT_SHUTDOWN = 64U,
++};
++#pragma pop_macro("EXITEVENT_SHUTDOWN")
++#pragma pop_macro("EXITEVENT_CRLISSUED")
++#pragma pop_macro("EXITEVENT_CERTREVOKED")
++#pragma pop_macro("EXITEVENT_CERTRETRIEVEPENDING")
++#pragma pop_macro("EXITEVENT_CERTPENDING")
++#pragma pop_macro("EXITEVENT_CERTISSUED")
++#pragma pop_macro("EXITEVENT_CERTDENIED")
++#endif
++
+ #endif
+ 
+ 

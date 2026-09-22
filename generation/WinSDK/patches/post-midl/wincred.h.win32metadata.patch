@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
-index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e45902063f964d2c 100644
+index 091f30b30d..2158b228b9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -15,7 +15,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CRED_MAX_ATTRIBUTES 64
  
 -typedef struct _CREDENTIAL_ATTRIBUTEA {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDENTIAL_ATTRIBUTEA {
++typedef struct   _CREDENTIAL_ATTRIBUTEA {
      LPSTR Keyword;
      DWORD Flags;
      DWORD ValueSize;
@@ -23,34 +23,57 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  } CREDENTIAL_ATTRIBUTEA, *PCREDENTIAL_ATTRIBUTEA;
  
 -typedef struct _CREDENTIAL_ATTRIBUTEW {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDENTIAL_ATTRIBUTEW {
++typedef struct   _CREDENTIAL_ATTRIBUTEW {
  #ifdef MIDL_PASS
      [string] wchar_t * Keyword;
  #else // MIDL_PASS
-@@ -467,7 +468,7 @@ typedef PCREDENTIAL_ATTRIBUTEA PCREDENTIAL_ATTRIBUTE;
+@@ -467,24 +468,24 @@ typedef PCREDENTIAL_ATTRIBUTEA PCREDENTIAL_ATTRIBUTE;
  //
  // A credential
  //
 -typedef struct _CREDENTIALA {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDENTIALA {
-     DWORD Flags;
-     DWORD Type;
+-    DWORD Flags;
+-    DWORD Type;
++typedef struct   _CREDENTIALA {
++    _Win32_AssociatedEnum_(CRED_FLAGS) DWORD Flags;
++    _Win32_AssociatedEnum_(CRED_TYPE) DWORD Type;
      LPSTR TargetName;
-@@ -482,7 +483,7 @@ typedef struct _CREDENTIALA {
+     LPSTR Comment;
+     FILETIME LastWritten;
+     DWORD CredentialBlobSize;
+     _Field_size_bytes_(CredentialBlobSize) LPBYTE CredentialBlob;
+-    DWORD Persist;
++    _Win32_AssociatedEnum_(CRED_PERSIST) DWORD Persist;
+     DWORD AttributeCount;
+     PCREDENTIAL_ATTRIBUTEA Attributes;
+     LPSTR TargetAlias;
      LPSTR UserName;
  } CREDENTIALA, *PCREDENTIALA;
  
 -typedef struct _CREDENTIALW {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDENTIALW {
-     DWORD Flags;
-     DWORD Type;
+-    DWORD Flags;
+-    DWORD Type;
++typedef struct   _CREDENTIALW {
++    _Win32_AssociatedEnum_(CRED_FLAGS) DWORD Flags;
++    _Win32_AssociatedEnum_(CRED_TYPE) DWORD Type;
  #ifdef MIDL_PASS
+     [string,max_is(CRED_MAX_GENERIC_TARGET_NAME_LENGTH-1)] wchar_t *TargetName;
+ #else // MIDL_PASS
+@@ -504,7 +505,7 @@ typedef struct _CREDENTIALW {
+     [size_is(CredentialBlobSize)]
+ #endif // MIDL_PASS
+     LPBYTE CredentialBlob;
+-    DWORD Persist;
++    _Win32_AssociatedEnum_(CRED_PERSIST) DWORD Persist;
+ #ifdef MIDL_PASS
+     [range(0,CRED_MAX_ATTRIBUTES)]
+ #endif // MIDL_PASS
 @@ -551,7 +552,7 @@ typedef PCREDENTIALA PCREDENTIAL;
  // A credential target
  //
  
 -typedef struct _CREDENTIAL_TARGET_INFORMATIONA {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDENTIAL_TARGET_INFORMATIONA {
++typedef struct   _CREDENTIAL_TARGET_INFORMATIONA {
      LPSTR TargetName;
      LPSTR NetbiosServerName;
      LPSTR DnsServerName;
@@ -59,7 +82,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  } CREDENTIAL_TARGET_INFORMATIONA, *PCREDENTIAL_TARGET_INFORMATIONA;
  
 -typedef struct _CREDENTIAL_TARGET_INFORMATIONW {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDENTIAL_TARGET_INFORMATIONW {
++typedef struct   _CREDENTIAL_TARGET_INFORMATIONW {
  #ifdef MIDL_PASS
      [string,max_is(CRED_MAX_DOMAIN_TARGET_NAME_LENGTH-1)] wchar_t *TargetName;
      [string,max_is(CRED_MAX_DOMAIN_TARGET_NAME_LENGTH-1)] wchar_t *NetbiosServerName;
@@ -68,7 +91,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CERT_HASH_LENGTH        20  // SHA1 hashes are used for cert hashes
  
 -typedef struct _CERT_CREDENTIAL_INFO {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CERT_CREDENTIAL_INFO {
++typedef struct   _CERT_CREDENTIAL_INFO {
      ULONG cbSize;
      UCHAR rgbHashOfCert[CERT_HASH_LENGTH];
  } CERT_CREDENTIAL_INFO, *PCERT_CREDENTIAL_INFO;
@@ -77,7 +100,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  //
  
 -typedef struct _USERNAME_TARGET_CREDENTIAL_INFO {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _USERNAME_TARGET_CREDENTIAL_INFO {
++typedef struct   _USERNAME_TARGET_CREDENTIAL_INFO {
      LPWSTR UserName;
  } USERNAME_TARGET_CREDENTIAL_INFO, *PUSERNAME_TARGET_CREDENTIAL_INFO;
  
@@ -86,7 +109,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  //
  
 -typedef enum _CRED_MARSHAL_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CRED_MARSHAL_TYPE {
++typedef enum   _CRED_MARSHAL_TYPE {
      CertCredential = 1,
      UsernameTargetCredential,
      BinaryBlobCredential,
@@ -95,7 +118,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  //
  
 -typedef enum _CRED_PROTECTION_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _CRED_PROTECTION_TYPE {
++typedef enum   _CRED_PROTECTION_TYPE {
      CredUnprotected,
      CredUserProtection,
      CredTrustedProtection,
@@ -104,7 +127,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define _CREDUI_INFO_DEFINED
  
 -typedef struct _CREDUI_INFOA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDUI_INFOA
++typedef struct   _CREDUI_INFOA
  {
      DWORD cbSize;
      HWND hwndParent;
@@ -113,7 +136,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  } CREDUI_INFOA, *PCREDUI_INFOA;
  
 -typedef struct _CREDUI_INFOW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CREDUI_INFOW
++typedef struct   _CREDUI_INFOW
  {
      DWORD cbSize;
      HWND hwndParent;
@@ -121,7 +144,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  
  #define CRED_PRESERVE_CREDENTIAL_BLOB 0x1
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -129,47 +152,69 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _In_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -881,6 +884,7 @@ CredWriteA (
+@@ -881,22 +884,24 @@ CredWriteA (
  #endif // UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -891,6 +895,7 @@ CredReadW (
+ CredReadW (
+     _In_ LPCWSTR TargetName,
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
+     _Reserved_ DWORD Flags,
      _Out_ PCREDENTIALW *Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -914,6 +919,7 @@ CredReadA (
+ CredReadA (
+     _In_ LPCSTR TargetName,
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
+     _Reserved_ DWORD Flags,
+     _Out_ PCREDENTIALA *Credential
+     );
+@@ -914,22 +919,24 @@ CredReadA (
  
  #define CRED_ENUMERATE_ALL_CREDENTIALS 0x1
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -924,6 +930,7 @@ CredEnumerateW (
+ CredEnumerateW (
+     _In_opt_ LPCWSTR Filter,
+-    _Reserved_ DWORD Flags,
++    _Win32_AssociatedEnum_(CRED_ENUMERATE_FLAGS) _Reserved_ DWORD Flags,
+     _Out_ DWORD *Count,
      _Outptr_result_buffer_(*Count) PCREDENTIALW **Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
+ CredEnumerateA (
+     _In_opt_ LPCSTR Filter,
+-    _Reserved_ DWORD Flags,
++    _Win32_AssociatedEnum_(CRED_ENUMERATE_FLAGS) _Reserved_ DWORD Flags,
+     _Out_ DWORD *Count,
+     _Outptr_result_buffer_(*Count) PCREDENTIALA **Credential
+     );
 @@ -941,6 +948,7 @@ CredEnumerateA (
  #endif // UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -177,7 +222,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _In_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -185,7 +230,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CRED_CACHE_TARGET_INFORMATION 0x1
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -193,47 +238,69 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Outptr_result_buffer_(*Count) PCREDENTIALW **Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -1001,6 +1012,7 @@ CredReadDomainCredentialsA (
+@@ -1001,21 +1012,23 @@ CredReadDomainCredentialsA (
  #endif // UNICODE
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -1010,6 +1022,7 @@ CredDeleteW (
+ CredDeleteW (
+     _In_ LPCWSTR TargetName,
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
      _Reserved_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -1031,6 +1044,7 @@ CredDeleteA (
+ CredDeleteA (
+     _In_ LPCSTR TargetName,
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
+     _Reserved_ DWORD Flags
+     );
+ 
+@@ -1031,23 +1044,25 @@ CredDeleteA (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -1041,6 +1055,7 @@ CredRenameW (
+ CredRenameW (
+     _In_ LPCWSTR OldTargetName,
+     _In_ LPCWSTR NewTargetName,
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
      _Reserved_ DWORD Flags
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
+ CredRenameA (
+     _In_ LPCSTR OldTargetName,
+     _In_ LPCSTR NewTargetName,
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
+     _Reserved_ DWORD Flags
+     );
+ 
 @@ -1070,6 +1085,7 @@ CredRenameA (
  #define CRED_ALLOW_NAME_RESOLUTION 0x1
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -241,7 +308,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Out_ PCREDENTIAL_TARGET_INFORMATIONW *TargetInfo
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -249,7 +316,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CredGetTargetInfo CredGetTargetInfoA
  #endif // UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -257,7 +324,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Out_ LPWSTR *MarshaledCredential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -265,7 +332,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CredMarshalCredential CredMarshalCredentialA
  #endif // UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -273,7 +340,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Out_ PVOID *Credential
      );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -281,7 +348,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CredUnmarshalCredential CredUnmarshalCredentialA
  #endif // UNICODE
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  WINADVAPI
  BOOL
  WINAPI
@@ -289,47 +356,76 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -1169,6 +1192,7 @@ CredIsMarshaledCredentialA(
+@@ -1168,11 +1191,12 @@ CredIsMarshaledCredentialA(
+ #define CredIsMarshaledCredential CredIsMarshaledCredentialA
  #endif // UNICODE
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++ 
  BOOL
  WINAPI
  CredUnPackAuthenticationBufferW(
-@@ -1184,6 +1208,7 @@ CredUnPackAuthenticationBufferW(
+-    _In_ DWORD                                      dwFlags,
++    _Win32_AssociatedEnum_(CRED_PACK_FLAGS) _In_ DWORD                                      dwFlags,
+     _In_reads_bytes_(cbAuthBuffer) PVOID                 pAuthBuffer,
+     _In_ DWORD                                      cbAuthBuffer,
+     _Out_writes_opt_(*pcchMaxUserName) LPWSTR       pszUserName,
+@@ -1183,11 +1207,12 @@ CredUnPackAuthenticationBufferW(
+     _Inout_ DWORD*                                  pcchMaxPassword
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++ 
  BOOL
  WINAPI
  CredUnPackAuthenticationBufferA(
-@@ -1205,6 +1230,7 @@ CredUnPackAuthenticationBufferA(
+-    _In_ DWORD                                      dwFlags,
++    _Win32_AssociatedEnum_(CRED_PACK_FLAGS) _In_ DWORD                                      dwFlags,
+     _In_reads_bytes_(cbAuthBuffer) PVOID                 pAuthBuffer,
+     _In_ DWORD                                      cbAuthBuffer,
+     _Out_writes_opt_(*pcchlMaxUserName) LPSTR       pszUserName,
+@@ -1204,22 +1229,24 @@ CredUnPackAuthenticationBufferA(
+ #define CredUnPackAuthenticationBuffer CredUnPackAuthenticationBufferA
  #endif //UNICODE
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++ 
  BOOL
  WINAPI
  CredPackAuthenticationBufferW(
-@@ -1216,6 +1242,7 @@ CredPackAuthenticationBufferW(
+-    _In_ DWORD                                      dwFlags,
++    _Win32_AssociatedEnum_(CRED_PACK_FLAGS) _In_ DWORD                                      dwFlags,
+     _In_ LPWSTR                                     pszUserName,
+     _In_ LPWSTR                                     pszPassword,
+     _Out_writes_bytes_opt_(*pcbPackedCredentials) PBYTE   pPackedCredentials,
+     _Inout_ DWORD*                                  pcbPackedCredentials
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CREDUIAPI
++ 
  BOOL
  WINAPI
  CredPackAuthenticationBufferA(
-@@ -1239,6 +1266,7 @@ CredPackAuthenticationBufferA(
+-    _In_ DWORD                                      dwFlags,
++    _Win32_AssociatedEnum_(CRED_PACK_FLAGS) _In_ DWORD                                      dwFlags,
+     _In_ LPSTR                                      pszUserName,
+     _In_ LPSTR                                      pszPassword,
+     _Out_writes_bytes_opt_(*pcbPackedCredentials) PBYTE   pPackedCredentials,
+@@ -1238,7 +1265,8 @@ CredPackAuthenticationBufferA(
+ #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
- _Success_(return)
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-_Success_(return)
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Success_(return)
++ 
  WINADVAPI
  BOOL
  WINAPI
@@ -337,15 +433,17 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Out_opt_ CRED_PROTECTION_TYPE*         ProtectionType
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
-@@ -1287,6 +1316,7 @@ CredProtectA(
+@@ -1286,7 +1315,8 @@ CredProtectA(
+ #define CredProtect CredProtectA
  #endif //UNICODE
  
- _Success_(return)
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-_Success_(return)
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Success_(return)
++ 
  WINADVAPI
  BOOL
  WINAPI
@@ -353,7 +451,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Inout_ DWORD*                              pcchMaxChars
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -361,7 +459,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  #define CredUnprotect CredUnprotectA
  #endif //UNICODE
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -369,7 +467,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Out_ CRED_PROTECTION_TYPE* pProtectionType
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -377,7 +475,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  
  
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -385,7 +483,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      _Out_ PCREDENTIALW *Credential
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -393,7 +491,7 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
  
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
  WINADVAPI
  BOOL
  WINAPI
@@ -401,103 +499,428 @@ index 091f30b30de99a134948ac5233d7e05204956d59..d25542460b7c372ebec73f80e4590206
      );
  
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  WINADVAPI
  VOID
  WINAPI
-@@ -1407,6 +1444,7 @@ CredFree (
+@@ -1406,7 +1443,8 @@ CredFree (
+ #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIPromptForCredentialsW(
-@@ -1423,6 +1461,7 @@ CredUIPromptForCredentialsW(
+@@ -1419,10 +1457,11 @@ CredUIPromptForCredentialsW(
+     _Inout_updates_(ulPasswordBufferSize) PWSTR pszPassword,
+     _In_ ULONG ulPasswordBufferSize,
+     _Inout_opt_ BOOL *save,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(CREDUI_FLAGS) _In_ DWORD dwFlags
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIPromptForCredentialsA(
-@@ -1445,6 +1484,7 @@ CredUIPromptForCredentialsA(
+@@ -1435,7 +1474,7 @@ CredUIPromptForCredentialsA(
+     _Inout_updates_(ulPasswordBufferSize) PSTR pszPassword,
+     _In_ ULONG ulPasswordBufferSize,
+     _Inout_opt_ BOOL *save,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(CREDUI_FLAGS) _In_ DWORD dwFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -1444,7 +1483,8 @@ CredUIPromptForCredentialsA(
+ #define CredUIPromptForCredentials CredUIPromptForCredentialsA
  #endif
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsVista_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIPromptForWindowsCredentialsW(
-@@ -1460,6 +1500,7 @@ CredUIPromptForWindowsCredentialsW(
+@@ -1456,10 +1496,11 @@ CredUIPromptForWindowsCredentialsW(
+     _Outptr_result_bytebuffer_to_(*pulOutAuthBufferSize, *pulOutAuthBufferSize) LPVOID * ppvOutAuthBuffer,
+     _Out_ ULONG * pulOutAuthBufferSize,
+     _Inout_opt_ BOOL *pfSave,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(CREDUIWIN_FLAGS) _In_ DWORD dwFlags
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsVista_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIPromptForWindowsCredentialsA(
-@@ -1482,6 +1523,7 @@ CredUIPromptForWindowsCredentialsA(
+@@ -1471,7 +1512,7 @@ CredUIPromptForWindowsCredentialsA(
+     _Outptr_result_bytebuffer_to_(*pulOutAuthBufferSize, *pulOutAuthBufferSize) LPVOID * ppvOutAuthBuffer,
+     _Out_ ULONG * pulOutAuthBufferSize,
+     _Inout_opt_ BOOL *pfSave,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(CREDUIWIN_FLAGS) _In_ DWORD dwFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -1481,7 +1522,8 @@ CredUIPromptForWindowsCredentialsA(
+ #endif
  
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIParseUserNameW(
-@@ -1493,6 +1535,7 @@ CredUIParseUserNameW(
+@@ -1492,7 +1534,8 @@ CredUIParseUserNameW(
+     _In_ ULONG domainBufferSize
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WIN32_ERROR) CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIParseUserNameA(
-@@ -1512,6 +1555,7 @@ CredUIParseUserNameA(
+@@ -1511,7 +1554,8 @@ CredUIParseUserNameA(
  
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ 
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUICmdLinePromptForCredentialsW(
-@@ -1527,6 +1571,7 @@ CredUICmdLinePromptForCredentialsW(
+@@ -1523,10 +1567,11 @@ CredUICmdLinePromptForCredentialsW(
+     _Inout_updates_(ulPasswordBufferSize) PWSTR pszPassword,
+     _In_ ULONG ulPasswordBufferSize,
+     _Inout_opt_ PBOOL pfSave,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(CREDUI_FLAGS) _In_ DWORD dwFlags
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUICmdLinePromptForCredentialsA(
-@@ -1553,6 +1598,7 @@ CredUICmdLinePromptForCredentialsA(
+@@ -1538,7 +1583,7 @@ CredUICmdLinePromptForCredentialsA(
+     _Inout_updates_(ulPasswordBufferSize) PSTR pszPassword,
+     _In_ ULONG ulPasswordBufferSize,
+     _Inout_opt_ PBOOL pfSave,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(CREDUI_FLAGS) _In_ DWORD dwFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -1552,7 +1597,8 @@ CredUICmdLinePromptForCredentialsA(
+ // via CredUIGetCredentials or CredUIPromptForCredentials worked, or with bConfirm set to FALSE
  // to indicate it didn't
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIConfirmCredentialsW(
-@@ -1561,6 +1607,7 @@ CredUIConfirmCredentialsW(
+@@ -1560,7 +1606,8 @@ CredUIConfirmCredentialsW(
+     _In_ BOOL  bConfirm
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIConfirmCredentialsA(
-@@ -1576,6 +1623,7 @@ CredUIConfirmCredentialsA(
+@@ -1575,7 +1622,8 @@ CredUIConfirmCredentialsA(
+ #endif
  
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIStoreSSOCredW (
-@@ -1586,6 +1634,7 @@ CredUIStoreSSOCredW (
+@@ -1585,7 +1633,8 @@ CredUIStoreSSOCredW (
+     _In_ BOOL   bPersist
      );
  
- CREDUIAPI
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-CREDUIAPI
++_Windows_SupportedOS_WindowsXP_ CREDUIAPI
++ 
  DWORD
  WINAPI
  CredUIReadSSOCredW (
+@@ -1607,6 +1656,261 @@ CredUIReadSSOCredW (
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRED_FLAGS_PASSWORD_FOR_CERT")
++#undef CRED_FLAGS_PASSWORD_FOR_CERT
++#pragma push_macro("CRED_FLAGS_PROMPT_NOW")
++#undef CRED_FLAGS_PROMPT_NOW
++#pragma push_macro("CRED_FLAGS_USERNAME_TARGET")
++#undef CRED_FLAGS_USERNAME_TARGET
++#pragma push_macro("CRED_FLAGS_OWF_CRED_BLOB")
++#undef CRED_FLAGS_OWF_CRED_BLOB
++#pragma push_macro("CRED_FLAGS_REQUIRE_CONFIRMATION")
++#undef CRED_FLAGS_REQUIRE_CONFIRMATION
++#pragma push_macro("CRED_FLAGS_WILDCARD_MATCH")
++#undef CRED_FLAGS_WILDCARD_MATCH
++#pragma push_macro("CRED_FLAGS_VSM_PROTECTED")
++#undef CRED_FLAGS_VSM_PROTECTED
++#pragma push_macro("CRED_FLAGS_NGC_CERT")
++#undef CRED_FLAGS_NGC_CERT
++#pragma push_macro("CRED_FLAGS_VALID_FLAGS")
++#undef CRED_FLAGS_VALID_FLAGS
++#pragma push_macro("CRED_FLAGS_VALID_INPUT_FLAGS")
++#undef CRED_FLAGS_VALID_INPUT_FLAGS
++enum [[clang::flag_enum]] CRED_FLAGS : unsigned int
++{
++    CRED_FLAGS_PASSWORD_FOR_CERT = 1U,
++    CRED_FLAGS_PROMPT_NOW = 2U,
++    CRED_FLAGS_USERNAME_TARGET = 4U,
++    CRED_FLAGS_OWF_CRED_BLOB = 8U,
++    CRED_FLAGS_REQUIRE_CONFIRMATION = 16U,
++    CRED_FLAGS_WILDCARD_MATCH = 32U,
++    CRED_FLAGS_VSM_PROTECTED = 64U,
++    CRED_FLAGS_NGC_CERT = 128U,
++    CRED_FLAGS_VALID_FLAGS = 61695U,
++    CRED_FLAGS_VALID_INPUT_FLAGS = 61599U,
++};
++#pragma pop_macro("CRED_FLAGS_VALID_INPUT_FLAGS")
++#pragma pop_macro("CRED_FLAGS_VALID_FLAGS")
++#pragma pop_macro("CRED_FLAGS_NGC_CERT")
++#pragma pop_macro("CRED_FLAGS_VSM_PROTECTED")
++#pragma pop_macro("CRED_FLAGS_WILDCARD_MATCH")
++#pragma pop_macro("CRED_FLAGS_REQUIRE_CONFIRMATION")
++#pragma pop_macro("CRED_FLAGS_OWF_CRED_BLOB")
++#pragma pop_macro("CRED_FLAGS_USERNAME_TARGET")
++#pragma pop_macro("CRED_FLAGS_PROMPT_NOW")
++#pragma pop_macro("CRED_FLAGS_PASSWORD_FOR_CERT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRED_TYPE_GENERIC")
++#undef CRED_TYPE_GENERIC
++#pragma push_macro("CRED_TYPE_DOMAIN_PASSWORD")
++#undef CRED_TYPE_DOMAIN_PASSWORD
++#pragma push_macro("CRED_TYPE_DOMAIN_CERTIFICATE")
++#undef CRED_TYPE_DOMAIN_CERTIFICATE
++#pragma push_macro("CRED_TYPE_DOMAIN_VISIBLE_PASSWORD")
++#undef CRED_TYPE_DOMAIN_VISIBLE_PASSWORD
++#pragma push_macro("CRED_TYPE_GENERIC_CERTIFICATE")
++#undef CRED_TYPE_GENERIC_CERTIFICATE
++#pragma push_macro("CRED_TYPE_DOMAIN_EXTENDED")
++#undef CRED_TYPE_DOMAIN_EXTENDED
++#pragma push_macro("CRED_TYPE_MAXIMUM")
++#undef CRED_TYPE_MAXIMUM
++#pragma push_macro("CRED_TYPE_MAXIMUM_EX")
++#undef CRED_TYPE_MAXIMUM_EX
++enum CRED_TYPE : unsigned int
++{
++    CRED_TYPE_GENERIC = 1U,
++    CRED_TYPE_DOMAIN_PASSWORD = 2U,
++    CRED_TYPE_DOMAIN_CERTIFICATE = 3U,
++    CRED_TYPE_DOMAIN_VISIBLE_PASSWORD = 4U,
++    CRED_TYPE_GENERIC_CERTIFICATE = 5U,
++    CRED_TYPE_DOMAIN_EXTENDED = 6U,
++    CRED_TYPE_MAXIMUM = 7U,
++    CRED_TYPE_MAXIMUM_EX = 1007U,
++};
++#pragma pop_macro("CRED_TYPE_MAXIMUM_EX")
++#pragma pop_macro("CRED_TYPE_MAXIMUM")
++#pragma pop_macro("CRED_TYPE_DOMAIN_EXTENDED")
++#pragma pop_macro("CRED_TYPE_GENERIC_CERTIFICATE")
++#pragma pop_macro("CRED_TYPE_DOMAIN_VISIBLE_PASSWORD")
++#pragma pop_macro("CRED_TYPE_DOMAIN_CERTIFICATE")
++#pragma pop_macro("CRED_TYPE_DOMAIN_PASSWORD")
++#pragma pop_macro("CRED_TYPE_GENERIC")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRED_PERSIST_NONE")
++#undef CRED_PERSIST_NONE
++#pragma push_macro("CRED_PERSIST_SESSION")
++#undef CRED_PERSIST_SESSION
++#pragma push_macro("CRED_PERSIST_LOCAL_MACHINE")
++#undef CRED_PERSIST_LOCAL_MACHINE
++#pragma push_macro("CRED_PERSIST_ENTERPRISE")
++#undef CRED_PERSIST_ENTERPRISE
++enum CRED_PERSIST : unsigned int
++{
++    CRED_PERSIST_NONE = 0U,
++    CRED_PERSIST_SESSION = 1U,
++    CRED_PERSIST_LOCAL_MACHINE = 2U,
++    CRED_PERSIST_ENTERPRISE = 3U,
++};
++#pragma pop_macro("CRED_PERSIST_ENTERPRISE")
++#pragma pop_macro("CRED_PERSIST_LOCAL_MACHINE")
++#pragma pop_macro("CRED_PERSIST_SESSION")
++#pragma pop_macro("CRED_PERSIST_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CREDUI_FLAGS_ALWAYS_SHOW_UI")
++#undef CREDUI_FLAGS_ALWAYS_SHOW_UI
++#pragma push_macro("CREDUI_FLAGS_COMPLETE_USERNAME")
++#undef CREDUI_FLAGS_COMPLETE_USERNAME
++#pragma push_macro("CREDUI_FLAGS_DO_NOT_PERSIST")
++#undef CREDUI_FLAGS_DO_NOT_PERSIST
++#pragma push_macro("CREDUI_FLAGS_EXCLUDE_CERTIFICATES")
++#undef CREDUI_FLAGS_EXCLUDE_CERTIFICATES
++#pragma push_macro("CREDUI_FLAGS_EXPECT_CONFIRMATION")
++#undef CREDUI_FLAGS_EXPECT_CONFIRMATION
++#pragma push_macro("CREDUI_FLAGS_GENERIC_CREDENTIALS")
++#undef CREDUI_FLAGS_GENERIC_CREDENTIALS
++#pragma push_macro("CREDUI_FLAGS_INCORRECT_PASSWORD")
++#undef CREDUI_FLAGS_INCORRECT_PASSWORD
++#pragma push_macro("CREDUI_FLAGS_KEEP_USERNAME")
++#undef CREDUI_FLAGS_KEEP_USERNAME
++#pragma push_macro("CREDUI_FLAGS_PASSWORD_ONLY_OK")
++#undef CREDUI_FLAGS_PASSWORD_ONLY_OK
++#pragma push_macro("CREDUI_FLAGS_PERSIST")
++#undef CREDUI_FLAGS_PERSIST
++#pragma push_macro("CREDUI_FLAGS_REQUEST_ADMINISTRATOR")
++#undef CREDUI_FLAGS_REQUEST_ADMINISTRATOR
++#pragma push_macro("CREDUI_FLAGS_REQUIRE_CERTIFICATE")
++#undef CREDUI_FLAGS_REQUIRE_CERTIFICATE
++#pragma push_macro("CREDUI_FLAGS_REQUIRE_SMARTCARD")
++#undef CREDUI_FLAGS_REQUIRE_SMARTCARD
++#pragma push_macro("CREDUI_FLAGS_SERVER_CREDENTIAL")
++#undef CREDUI_FLAGS_SERVER_CREDENTIAL
++#pragma push_macro("CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX")
++#undef CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX
++#pragma push_macro("CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS")
++#undef CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS
++#pragma push_macro("CREDUI_FLAGS_VALIDATE_USERNAME")
++#undef CREDUI_FLAGS_VALIDATE_USERNAME
++enum [[clang::flag_enum]] CREDUI_FLAGS : unsigned int
++{
++    CREDUI_FLAGS_ALWAYS_SHOW_UI = 128U,
++    CREDUI_FLAGS_COMPLETE_USERNAME = 2048U,
++    CREDUI_FLAGS_DO_NOT_PERSIST = 2U,
++    CREDUI_FLAGS_EXCLUDE_CERTIFICATES = 8U,
++    CREDUI_FLAGS_EXPECT_CONFIRMATION = 131072U,
++    CREDUI_FLAGS_GENERIC_CREDENTIALS = 262144U,
++    CREDUI_FLAGS_INCORRECT_PASSWORD = 1U,
++    CREDUI_FLAGS_KEEP_USERNAME = 1048576U,
++    CREDUI_FLAGS_PASSWORD_ONLY_OK = 512U,
++    CREDUI_FLAGS_PERSIST = 4096U,
++    CREDUI_FLAGS_REQUEST_ADMINISTRATOR = 4U,
++    CREDUI_FLAGS_REQUIRE_CERTIFICATE = 16U,
++    CREDUI_FLAGS_REQUIRE_SMARTCARD = 256U,
++    CREDUI_FLAGS_SERVER_CREDENTIAL = 16384U,
++    CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX = 64U,
++    CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS = 524288U,
++    CREDUI_FLAGS_VALIDATE_USERNAME = 1024U,
++};
++#pragma pop_macro("CREDUI_FLAGS_VALIDATE_USERNAME")
++#pragma pop_macro("CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS")
++#pragma pop_macro("CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX")
++#pragma pop_macro("CREDUI_FLAGS_SERVER_CREDENTIAL")
++#pragma pop_macro("CREDUI_FLAGS_REQUIRE_SMARTCARD")
++#pragma pop_macro("CREDUI_FLAGS_REQUIRE_CERTIFICATE")
++#pragma pop_macro("CREDUI_FLAGS_REQUEST_ADMINISTRATOR")
++#pragma pop_macro("CREDUI_FLAGS_PERSIST")
++#pragma pop_macro("CREDUI_FLAGS_PASSWORD_ONLY_OK")
++#pragma pop_macro("CREDUI_FLAGS_KEEP_USERNAME")
++#pragma pop_macro("CREDUI_FLAGS_INCORRECT_PASSWORD")
++#pragma pop_macro("CREDUI_FLAGS_GENERIC_CREDENTIALS")
++#pragma pop_macro("CREDUI_FLAGS_EXPECT_CONFIRMATION")
++#pragma pop_macro("CREDUI_FLAGS_EXCLUDE_CERTIFICATES")
++#pragma pop_macro("CREDUI_FLAGS_DO_NOT_PERSIST")
++#pragma pop_macro("CREDUI_FLAGS_COMPLETE_USERNAME")
++#pragma pop_macro("CREDUI_FLAGS_ALWAYS_SHOW_UI")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRED_ENUMERATE_ALL_CREDENTIALS")
++#undef CRED_ENUMERATE_ALL_CREDENTIALS
++enum [[clang::flag_enum]] CRED_ENUMERATE_FLAGS : unsigned int
++{
++    CRED_ENUMERATE_ALL_CREDENTIALS = 1U,
++};
++#pragma pop_macro("CRED_ENUMERATE_ALL_CREDENTIALS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CREDUIWIN_GENERIC")
++#undef CREDUIWIN_GENERIC
++#pragma push_macro("CREDUIWIN_CHECKBOX")
++#undef CREDUIWIN_CHECKBOX
++#pragma push_macro("CREDUIWIN_AUTHPACKAGE_ONLY")
++#undef CREDUIWIN_AUTHPACKAGE_ONLY
++#pragma push_macro("CREDUIWIN_IN_CRED_ONLY")
++#undef CREDUIWIN_IN_CRED_ONLY
++#pragma push_macro("CREDUIWIN_ENUMERATE_ADMINS")
++#undef CREDUIWIN_ENUMERATE_ADMINS
++#pragma push_macro("CREDUIWIN_ENUMERATE_CURRENT_USER")
++#undef CREDUIWIN_ENUMERATE_CURRENT_USER
++#pragma push_macro("CREDUIWIN_SECURE_PROMPT")
++#undef CREDUIWIN_SECURE_PROMPT
++#pragma push_macro("CREDUIWIN_PREPROMPTING")
++#undef CREDUIWIN_PREPROMPTING
++#pragma push_macro("CREDUIWIN_PACK_32_WOW")
++#undef CREDUIWIN_PACK_32_WOW
++enum [[clang::flag_enum]] CREDUIWIN_FLAGS : unsigned int
++{
++    CREDUIWIN_GENERIC = 1U,
++    CREDUIWIN_CHECKBOX = 2U,
++    CREDUIWIN_AUTHPACKAGE_ONLY = 16U,
++    CREDUIWIN_IN_CRED_ONLY = 32U,
++    CREDUIWIN_ENUMERATE_ADMINS = 256U,
++    CREDUIWIN_ENUMERATE_CURRENT_USER = 512U,
++    CREDUIWIN_SECURE_PROMPT = 4096U,
++    CREDUIWIN_PREPROMPTING = 8192U,
++    CREDUIWIN_PACK_32_WOW = 268435456U,
++};
++#pragma pop_macro("CREDUIWIN_PACK_32_WOW")
++#pragma pop_macro("CREDUIWIN_PREPROMPTING")
++#pragma pop_macro("CREDUIWIN_SECURE_PROMPT")
++#pragma pop_macro("CREDUIWIN_ENUMERATE_CURRENT_USER")
++#pragma pop_macro("CREDUIWIN_ENUMERATE_ADMINS")
++#pragma pop_macro("CREDUIWIN_IN_CRED_ONLY")
++#pragma pop_macro("CREDUIWIN_AUTHPACKAGE_ONLY")
++#pragma pop_macro("CREDUIWIN_CHECKBOX")
++#pragma pop_macro("CREDUIWIN_GENERIC")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRED_PACK_PROTECTED_CREDENTIALS")
++#undef CRED_PACK_PROTECTED_CREDENTIALS
++#pragma push_macro("CRED_PACK_WOW_BUFFER")
++#undef CRED_PACK_WOW_BUFFER
++#pragma push_macro("CRED_PACK_GENERIC_CREDENTIALS")
++#undef CRED_PACK_GENERIC_CREDENTIALS
++#pragma push_macro("CRED_PACK_ID_PROVIDER_CREDENTIALS")
++#undef CRED_PACK_ID_PROVIDER_CREDENTIALS
++enum [[clang::flag_enum]] CRED_PACK_FLAGS : unsigned int
++{
++    CRED_PACK_PROTECTED_CREDENTIALS = 1U,
++    CRED_PACK_WOW_BUFFER = 2U,
++    CRED_PACK_GENERIC_CREDENTIALS = 4U,
++    CRED_PACK_ID_PROVIDER_CREDENTIALS = 8U,
++};
++#pragma pop_macro("CRED_PACK_ID_PROVIDER_CREDENTIALS")
++#pragma pop_macro("CRED_PACK_GENERIC_CREDENTIALS")
++#pragma pop_macro("CRED_PACK_WOW_BUFFER")
++#pragma pop_macro("CRED_PACK_PROTECTED_CREDENTIALS")
++#endif
++
+ #endif // _WINCRED_H_
+ 
+ 

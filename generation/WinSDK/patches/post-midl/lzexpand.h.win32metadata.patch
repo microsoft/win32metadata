@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
+index 88e197e4df..dd51d38b08 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
 @@ -21,6 +21,7 @@ Revision History:
@@ -9,84 +10,123 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h b/generation/W
  
  #ifdef __cplusplus
  extern "C" {
-@@ -75,7 +76,7 @@ _Success_(return >= 0)
+@@ -62,7 +63,7 @@ LZDone(
+     );
+ 
+ 
+-_Success_(return >= 0)
++_Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ LONG
+ APIENTRY
+@@ -71,36 +72,36 @@ CopyLZFile(
+     _In_ INT hfDest
+     );
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  LONG
  APIENTRY
 -LZCopy(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZCopy(
++  LZCopy(
      _In_ INT hfSource,
      _In_ INT hfDest
      );
-@@ -84,7 +85,7 @@ _Success_(return >= 0)
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  INT
  APIENTRY
 -LZInit(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZInit(
++  LZInit(
      _In_ INT hfSource
      );
  
-@@ -92,7 +93,7 @@ _Success_(return >= 0)
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  INT
  APIENTRY
 -GetExpandedNameA(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ GetExpandedNameA(
++  GetExpandedNameA(
      _In_ LPSTR lpszSource,
      _Out_writes_(MAX_PATH) LPSTR lpszBuffer
      );
-@@ -100,7 +101,7 @@ _Success_(return >= 0)
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  INT
  APIENTRY
 -GetExpandedNameW(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ GetExpandedNameW(
++  GetExpandedNameW(
      _In_ LPWSTR lpszSource,
      _Out_writes_(MAX_PATH) LPWSTR lpszBuffer
      );
-@@ -114,7 +115,7 @@ _Success_(return >= 0)
+@@ -110,23 +111,23 @@ GetExpandedNameW(
+ #define GetExpandedName  GetExpandedNameA
+ #endif // !UNICODE
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  INT
  APIENTRY
 -LZOpenFileA(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZOpenFileA(
++  LZOpenFileA(
      _In_ LPSTR lpFileName,
      _Inout_ LPOFSTRUCT lpReOpenBuf,
-     _In_ WORD wStyle
-@@ -123,7 +124,7 @@ _Success_(return >= 0)
+-    _In_ WORD wStyle
++    _Win32_AssociatedEnum_(LZOPENFILE_STYLE) _In_ WORD wStyle
+     );
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  INT
  APIENTRY
 -LZOpenFileW(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZOpenFileW(
++  LZOpenFileW(
      _In_ LPWSTR lpFileName,
      _Inout_ LPOFSTRUCT lpReOpenBuf,
-     _In_ WORD wStyle
-@@ -138,7 +139,7 @@ _Success_(return >= 0)
+-    _In_ WORD wStyle
++    _Win32_AssociatedEnum_(LZOPENFILE_STYLE) _In_ WORD wStyle
+     );
+ #ifdef UNICODE
+ #define LZOpenFile  LZOpenFileW
+@@ -134,29 +135,29 @@ LZOpenFileW(
+ #define LZOpenFile  LZOpenFileA
+ #endif // !UNICODE
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  LONG
  APIENTRY
 -LZSeek(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZSeek(
++  LZSeek(
      _In_ INT hFile,
      _In_ LONG lOffset,
      _In_ INT iOrigin
-@@ -148,7 +149,7 @@ _Success_(return >= 0)
+     );
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
  _Check_return_
  INT
  APIENTRY
 -LZRead(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZRead(
++  LZRead(
      _In_ INT hFile,
      _Out_writes_bytes_to_(cbRead, return) CHAR* lpBuffer,
      _In_ INT cbRead
-@@ -156,7 +157,7 @@ LZRead(
+     );
  
- VOID
+-VOID
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") VOID
  APIENTRY
 -LZClose(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ LZClose(
++  LZClose(
      _In_ INT hFile
      );
  

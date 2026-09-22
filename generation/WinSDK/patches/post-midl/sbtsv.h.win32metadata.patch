@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h b/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h
-index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b8bdd3a11 100644
+index 5a0cc11dfc..8dc5047d19 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h
 @@ -293,10 +293,11 @@ extern "C"{
@@ -11,7 +11,7 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  typedef /* [v1_enum] */ 
 -enum _TS_SB_SORT_BY
-+enum _Windows_SupportedOS_Server2012_ _TS_SB_SORT_BY
++enum  _TS_SB_SORT_BY
      {
          TS_SB_SORT_BY_NONE	= 0,
          TS_SB_SORT_BY_NAME	= 0x1,
@@ -123,7 +123,7 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
          CONST_VTBL struct ITsSbOrchestrationVtbl *lpVtbl;
      };
-@@ -997,7 +998,7 @@ EXTERN_C const IID IID_ITsSbEnvironment;
+@@ -997,12 +998,12 @@ EXTERN_C const IID IID_ITsSbEnvironment;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256")
@@ -132,6 +132,12 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServerWeight( 
+             /* [annotation][retval][out] */ 
 @@ -1068,7 +1069,7 @@ EXTERN_C const IID IID_ITsSbEnvironment;
          END_INTERFACE
      } ITsSbEnvironmentVtbl;
@@ -141,7 +147,7 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
          CONST_VTBL struct ITsSbEnvironmentVtbl *lpVtbl;
      };
-@@ -1123,7 +1124,7 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
+@@ -1123,12 +1124,12 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("24FDB7AC-FEA6-11DC-9672-9A8956D89593")
@@ -150,6 +156,12 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+     };
+     
 @@ -1164,7 +1165,7 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
          END_INTERFACE
      } ITsSbLoadBalanceResultVtbl;
@@ -159,7 +171,7 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
          CONST_VTBL struct ITsSbLoadBalanceResultVtbl *lpVtbl;
      };
-@@ -1210,7 +1211,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+@@ -1210,12 +1211,12 @@ EXTERN_C const IID IID_ITsSbTarget;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("16616ECC-272D-411D-B324-126893033856")
@@ -168,6 +180,48 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetName( 
+             /* [annotation][in] */ 
+@@ -1223,7 +1224,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FarmName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FarmName( 
+             /* [annotation][in] */ 
+@@ -1231,7 +1232,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetFQDN( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TargetFqdnName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TargetFqdnName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetFQDN( 
+             /* [annotation][in] */ 
+@@ -1239,7 +1240,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetNetbios( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TargetNetbiosName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TargetNetbiosName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetNetbios( 
+             /* [annotation][in] */ 
+@@ -1275,7 +1276,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnvironmentName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnvironmentName( 
+             /* [annotation][in] */ 
 @@ -1439,7 +1440,7 @@ EXTERN_C const IID IID_ITsSbTarget;
          END_INTERFACE
      } ITsSbTargetVtbl;
@@ -186,6 +240,38 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SessionId( 
+@@ -1548,7 +1549,7 @@ EXTERN_C const IID IID_ITsSbSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *targetName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *targetName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetName( 
+             /* [annotation][in] */ 
+@@ -1556,11 +1557,11 @@ EXTERN_C const IID IID_ITsSbSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Username( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *domain) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *domain) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+             /* [annotation][retval][out] */ 
+@@ -1588,7 +1589,7 @@ EXTERN_C const IID IID_ITsSbSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitialProgram( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *app) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *app) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InitialProgram( 
+             /* [annotation][in] */ 
 @@ -1740,7 +1741,7 @@ EXTERN_C const IID IID_ITsSbSession;
          END_INTERFACE
      } ITsSbSessionVtbl;
@@ -231,7 +317,7 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
          CONST_VTBL struct ITsSbResourceNotificationExVtbl *lpVtbl;
      };
-@@ -2112,7 +2113,7 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+@@ -2112,12 +2113,12 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("523D1083-89BE-48DD-99EA-04E82FFA7265")
@@ -240,6 +326,35 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartTime( 
+             /* [annotation][retval][out] */ 
+@@ -2133,11 +2134,11 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Identifier( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pIdentifier) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pIdentifier) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Label( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pLabel) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pLabel) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Context( 
+             /* [annotation][retval][out] */ 
+@@ -2145,7 +2146,7 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Plugin( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pPlugin) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pPlugin) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
+             /* [annotation][retval][out] */ 
 @@ -2233,7 +2234,7 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
          END_INTERFACE
      } ITsSbTaskInfoVtbl;
@@ -465,7 +580,7 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
          CONST_VTBL struct ITsSbTaskPluginNotifySinkVtbl *lpVtbl;
      };
-@@ -3673,7 +3674,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+@@ -3673,20 +3674,20 @@ EXTERN_C const IID IID_ITsSbClientConnection;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("18857499-AD61-4B1B-B7DF-CBCD41FB8338")
@@ -474,6 +589,40 @@ index 5a0cc11dfc99ca1dd95f2cb623f957a10519dab0..7897920d4536815b66c92a91e4056c0b
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitialProgram( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoadBalanceResult( 
+             /* [annotation][retval][out] */ 
+@@ -3694,7 +3695,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FarmName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][local] */ HRESULT STDMETHODCALLTYPE PutContext( 
+             /* [annotation] */ 
+@@ -3718,7 +3719,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SamUserAccount( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientConnectionPropertySet( 
+             /* [annotation][retval][out] */ 
 @@ -3862,7 +3863,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
          END_INTERFACE
      } ITsSbClientConnectionVtbl;

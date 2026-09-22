@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h
-index 3de8dba663..19fe5ef05b 100644
+index 3de8dba663..f368f01772 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/emi.h
 @@ -1,3 +1,4 @@
@@ -12,25 +12,25 @@ index 3de8dba663..19fe5ef05b 100644
  #define EMI_VERSION_V2                       2
  
 -typedef enum
-+typedef enum _Windows_SupportedOS_10240_
++typedef enum 
  {
      EmiMeasurementUnitPicowattHours
  } EMI_MEASUREMENT_UNIT;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_10240_
++typedef struct 
  {
      USHORT EmiVersion;
  } EMI_VERSION;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_10240_
++typedef struct 
  {
      ULONG MetadataSize;
  } EMI_METADATA_SIZE;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_10240_
++typedef struct 
  {
      ULONGLONG AbsoluteEnergy;
      ULONGLONG AbsoluteTime;
@@ -39,7 +39,7 @@ index 3de8dba663..19fe5ef05b 100644
  //
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_10240_
++typedef struct 
  {
      EMI_MEASUREMENT_UNIT MeasurementUnit; 
      WCHAR HardwareOEM[EMI_NAME_MAX];
@@ -48,7 +48,7 @@ index 3de8dba663..19fe5ef05b 100644
  //
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_17763_
++typedef struct 
  {
      EMI_MEASUREMENT_UNIT MeasurementUnit;
      USHORT ChannelNameSize;
@@ -56,7 +56,7 @@ index 3de8dba663..19fe5ef05b 100644
  } EMI_CHANNEL_V2;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_17763_
++typedef struct 
  {
      WCHAR HardwareOEM[EMI_NAME_MAX];
      WCHAR HardwareModel[EMI_NAME_MAX];
@@ -65,7 +65,7 @@ index 3de8dba663..19fe5ef05b 100644
  } EMI_METADATA_V2;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_17763_
++typedef struct 
  {
      EMI_CHANNEL_MEASUREMENT_DATA ChannelData[ANYSIZE_ARRAY];
  } EMI_MEASUREMENT_DATA_V2;

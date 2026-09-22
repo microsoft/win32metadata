@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/segment.h b/generation/WinSDK/RecompiledIdlHeaders/um/segment.h
-index 206ea4d005369c8527c72831ede0871628e30978..70e1b67e128ad4f14661d02aa3fdfa5724195e28 100644
+index 206ea4d005..b73d1f8c45 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/segment.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/segment.h
 @@ -561,6 +561,7 @@ extern "C"{
@@ -46,3 +46,419 @@ index 206ea4d005369c8527c72831ede0871628e30978..70e1b67e128ad4f14661d02aa3fdfa57
      {
          CONST_VTBL struct IMSVidGraphSegmentContainerVtbl *lpVtbl;
      };
+@@ -2729,13 +2730,13 @@ EXTERN_C const IID IID_IMSVidDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1C15D47C-911D-11d2-B632-00C04F79498E")
++    MIDL_INTERFACE("1C15D47C-911D-11d2-B632-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidDevice : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Name) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
+             /* [annotation][retval][out] */ 
+@@ -2751,11 +2752,11 @@ EXTERN_C const IID IID_IMSVidDevice;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Category( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Guid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Guid) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ClassID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Clsid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Clsid) = 0;
+         
+         virtual /* [restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__Category( 
+             /* [annotation][retval][out] */ 
+@@ -2992,7 +2993,7 @@ EXTERN_C const IID IID_IMSVidDevice2;
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DevicePath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *DevPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *DevPath) = 0;
+         
+     };
+     
+@@ -3073,7 +3074,7 @@ EXTERN_C const IID IID_IMSVidInputDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B0353D-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B0353D-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidInputDevice : public IMSVidDevice
+     {
+     public:
+@@ -3616,7 +3617,7 @@ EXTERN_C const IID IID_IMSVidVideoInputDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1C15D47F-911D-11d2-B632-00C04F79498E")
++    MIDL_INTERFACE("1C15D47F-911D-11d2-B632-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidVideoInputDevice : public IMSVidInputDevice
+     {
+     public:
+@@ -3857,7 +3858,7 @@ EXTERN_C const IID IID_IMSVidPlayback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B03538-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B03538-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidPlayback : public IMSVidInputDevice
+     {
+     public:
+@@ -4422,7 +4423,7 @@ EXTERN_C const IID IID_IMSVidTuner;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1C15D47D-911D-11d2-B632-00C04F79498E")
++    MIDL_INTERFACE("1C15D47D-911D-11d2-B632-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidTuner : public IMSVidVideoInputDevice
+     {
+     public:
+@@ -4866,7 +4867,7 @@ EXTERN_C const IID IID_IMSVidAnalogTuner;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1C15D47E-911D-11d2-B632-00C04F79498E")
++    MIDL_INTERFACE("1C15D47E-911D-11d2-B632-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidAnalogTuner : public IMSVidTuner
+     {
+     public:
+@@ -5821,13 +5822,13 @@ EXTERN_C const IID IID_IMSVidFilePlayback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B03539-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B03539-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidFilePlayback : public IMSVidPlayback
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FileName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *FileName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *FileName) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FileName( 
+             /* [annotation][in] */ 
+@@ -6915,7 +6916,7 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  VARIANT_BOOL fFormat,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strAudioLang) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strAudioLang) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ShowMenu( 
+             /* [annotation][in] */ 
+@@ -6975,7 +6976,7 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalTitleTime( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TitlesAvailable( 
+             /* [annotation][retval][out] */ 
+@@ -7007,17 +7008,17 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentTime( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DVDTimeCode2bstr( 
+             /* [annotation][in] */ 
+             _In_  long timeCode,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pTimeStr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pTimeStr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DVDDirectory( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DVDDirectory( 
+             /* [annotation][in] */ 
+@@ -7046,7 +7047,7 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubpictureLanguage( 
+             long lStream,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strLanguage) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strLanguage) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAudioStream( 
+             /* [annotation][retval][out] */ 
+@@ -7086,7 +7087,7 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DVDUniqueID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AcceptParentalLevelChange( 
+             /* [annotation][in] */ 
+@@ -7170,7 +7171,7 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+             /* [annotation][in] */ 
+             _In_  long lStringIndex,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pstrText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pstrText) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DVDTextNumberOfStrings( 
+             /* [annotation][in] */ 
+@@ -7244,7 +7245,7 @@ EXTERN_C const IID IID_IMSVidWebDVD;
+             /* [annotation][in] */ 
+             _In_  long lcid,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *lang) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *lang) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_KaraokeAudioPresentationMode( 
+             /* [annotation][retval][out] */ 
+@@ -8550,7 +8551,7 @@ EXTERN_C const IID IID_IMSVidWebDVD2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7027212F-EE9A-4a7c-8B67-F023714CDAFF")
++    MIDL_INTERFACE("7027212F-EE9A-4a7c-8B67-F023714CDAFF") _Windows_SupportedOS_Windows7_ 
+     IMSVidWebDVD2 : public IMSVidWebDVD
+     {
+     public:
+@@ -10663,7 +10664,7 @@ EXTERN_C const IID IID_IMSVidOutputDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B03546-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B03546-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidOutputDevice : public IMSVidDevice
+     {
+     public:
+@@ -11033,7 +11034,7 @@ EXTERN_C const IID IID_IMSVidFeature;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B03547-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B03547-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidFeature : public IMSVidDevice
+     {
+     public:
+@@ -11403,7 +11404,7 @@ EXTERN_C const IID IID_IMSVidEncoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C0020FD4-BEE7-43d9-A495-9F213117103D")
++    MIDL_INTERFACE("C0020FD4-BEE7-43d9-A495-9F213117103D") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidEncoder : public IMSVidFeature
+     {
+     public:
+@@ -11650,7 +11651,7 @@ EXTERN_C const IID IID_IMSVidClosedCaptioning;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("99652EA1-C1F7-414f-BB7B-1C967DE75983")
++    MIDL_INTERFACE("99652EA1-C1F7-414f-BB7B-1C967DE75983") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidClosedCaptioning : public IMSVidFeature
+     {
+     public:
+@@ -11897,7 +11898,7 @@ EXTERN_C const IID IID_IMSVidClosedCaptioning2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E00CB864-A029-4310-9987-A873F5887D97")
++    MIDL_INTERFACE("E00CB864-A029-4310-9987-A873F5887D97") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidClosedCaptioning2 : public IMSVidClosedCaptioning
+     {
+     public:
+@@ -12853,7 +12854,7 @@ EXTERN_C const IID IID_IMSVidDataServices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("334125C1-77E5-11d3-B653-00C04F79498E")
++    MIDL_INTERFACE("334125C1-77E5-11d3-B653-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidDataServices : public IMSVidFeature
+     {
+     public:
+@@ -13240,13 +13241,13 @@ EXTERN_C const IID IID_IMSVidVideoRenderer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B03540-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B03540-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidVideoRenderer : public IMSVidOutputDevice
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CustomCompositorClass( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *CompositorCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *CompositorCLSID) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CustomCompositorClass( 
+             /* [annotation][in] */ 
+@@ -14545,7 +14546,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferRecordingControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("160621AA-BBBC-4326-A824-C395AEBC6E74")
++    MIDL_INTERFACE("160621AA-BBBC-4326-A824-C395AEBC6E74") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidStreamBufferRecordingControl : public IDispatch
+     {
+     public:
+@@ -14785,7 +14786,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("159DBB45-CD1B-4dab-83EA-5CB1F4F21D07")
++    MIDL_INTERFACE("159DBB45-CD1B-4dab-83EA-5CB1F4F21D07") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidStreamBufferSink : public IMSVidOutputDevice
+     {
+     public:
+@@ -14803,7 +14804,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSink;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SinkName( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SinkName( 
+             /* [annotation][in] */ 
+@@ -15405,7 +15406,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSink3;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AudioAnalysisFilter( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszCLSID) = 0;
+         
+         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__AudioAnalysisFilter( 
+             /* [annotation][in] */ 
+@@ -15421,7 +15422,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSink3;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VideoAnalysisFilter( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszCLSID) = 0;
+         
+         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__VideoAnalysisFilter( 
+             /* [annotation][in] */ 
+@@ -15437,7 +15438,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSink3;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DataAnalysisFilter( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszCLSID) = 0;
+         
+         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__DataAnalysisFilter( 
+             /* [annotation][in] */ 
+@@ -16465,7 +16466,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSinkEvent4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1B01DCB0-DAF0-412c-A5D1-590C7F62E2B8")
++    MIDL_INTERFACE("1B01DCB0-DAF0-412c-A5D1-590C7F62E2B8") _Windows_SupportedOS_Windows7_ 
+     IMSVidStreamBufferSinkEvent4 : public IMSVidStreamBufferSinkEvent3
+     {
+     public:
+@@ -16672,7 +16673,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EB0C8CF9-6950-4772-87B1-47D11CF3A02F")
++    MIDL_INTERFACE("EB0C8CF9-6950-4772-87B1-47D11CF3A02F") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidStreamBufferSource : public IMSVidFilePlayback
+     {
+     public:
+@@ -18453,7 +18454,7 @@ EXTERN_C const IID IID_IMSVidStreamBufferV2SourceEvent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("49C771F9-41B2-4CF7-9F9A-A313A8F6027E")
++    MIDL_INTERFACE("49C771F9-41B2-4CF7-9F9A-A313A8F6027E") _Windows_SupportedOS_Windows7_ 
+     IMSVidStreamBufferV2SourceEvent : public IMSVidFilePlaybackEvent
+     {
+     public:
+@@ -18722,7 +18723,7 @@ EXTERN_C const IID IID_IMSVidVideoRenderer2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6BDD5C1E-2810-4159-94BC-05511AE8549B")
++    MIDL_INTERFACE("6BDD5C1E-2810-4159-94BC-05511AE8549B") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidVideoRenderer2 : public IMSVidVideoRenderer
+     {
+     public:
+@@ -20042,7 +20043,7 @@ EXTERN_C const IID IID_IMSVidEVR;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("15E496AE-82A8-4cf9-A6B6-C561DC60398F")
++    MIDL_INTERFACE("15E496AE-82A8-4cf9-A6B6-C561DC60398F") _Windows_SupportedOS_WindowsVista_ 
+     IMSVidEVR : public IMSVidVideoRenderer
+     {
+     public:
+@@ -20754,7 +20755,7 @@ EXTERN_C const IID IID_IMSVidAudioRenderer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37B0353F-A4C8-11d2-B634-00C04F79498E")
++    MIDL_INTERFACE("37B0353F-A4C8-11d2-B634-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidAudioRenderer : public IMSVidOutputDevice
+     {
+     public:
+@@ -21178,7 +21179,7 @@ EXTERN_C const IID IID_IMSVidAudioRendererEvent2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E3F55729-353B-4c43-A028-50F79AA9A907")
++    MIDL_INTERFACE("E3F55729-353B-4c43-A028-50F79AA9A907") _Windows_SupportedOS_Windows7_ 
+     IMSVidAudioRendererEvent2 : public IMSVidAudioRendererEvent
+     {
+     public:
+@@ -21402,7 +21403,7 @@ EXTERN_C const IID IID_IMSVidInputDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C5702CD1-9B79-11d3-B654-00C04F79498E")
++    MIDL_INTERFACE("C5702CD1-9B79-11d3-B654-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidInputDevices : public IDispatch
+     {
+     public:
+@@ -21607,7 +21608,7 @@ EXTERN_C const IID IID_IMSVidOutputDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C5702CD2-9B79-11d3-B654-00C04F79498E")
++    MIDL_INTERFACE("C5702CD2-9B79-11d3-B654-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidOutputDevices : public IDispatch
+     {
+     public:
+@@ -21812,7 +21813,7 @@ EXTERN_C const IID IID_IMSVidVideoRendererDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C5702CD3-9B79-11d3-B654-00C04F79498E")
++    MIDL_INTERFACE("C5702CD3-9B79-11d3-B654-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidVideoRendererDevices : public IDispatch
+     {
+     public:
+@@ -22017,7 +22018,7 @@ EXTERN_C const IID IID_IMSVidAudioRendererDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C5702CD4-9B79-11d3-B654-00C04F79498E")
++    MIDL_INTERFACE("C5702CD4-9B79-11d3-B654-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidAudioRendererDevices : public IDispatch
+     {
+     public:
+@@ -22222,7 +22223,7 @@ EXTERN_C const IID IID_IMSVidFeatures;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C5702CD5-9B79-11d3-B654-00C04F79498E")
++    MIDL_INTERFACE("C5702CD5-9B79-11d3-B654-00C04F79498E") _Windows_SupportedOS_WindowsXP_ 
+     IMSVidFeatures : public IDispatch
+     {
+     public:

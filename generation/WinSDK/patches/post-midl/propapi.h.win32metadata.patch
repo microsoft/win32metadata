@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
+index 858a29dbe1..399d4983db 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
 @@ -1,4 +1,5 @@
@@ -7,12 +8,16 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h b/generation/Wi
  
  //+-------------------------------------------------------------------------
  //
-@@ -33,7 +34,7 @@ typedef VOID* NTPROP;
- EXTERN_C
+@@ -30,10 +31,10 @@ typedef VOID* NTPROP;
+ 
+ #include <propidl.h>
+ 
+-EXTERN_C
++_Windows_SupportedOS_Windows2000_ EXTERN_C
  _Success_(TRUE)  /* Raises status on failure */
  ULONG __stdcall
 -StgPropertyLengthAsVariant(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgPropertyLengthAsVariant(
++  StgPropertyLengthAsVariant(
              _In_reads_bytes_(cbProp) const SERIALIZEDPROPERTYVALUE* pProp,
              _In_ ULONG cbProp,
              _In_ USHORT CodePage,

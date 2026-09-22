@@ -1,0 +1,110 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
+index ba094eef74..3b62d1efc3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************\
+ *
+ * Copyright (c) 1998-2001, Microsoft Corp.  All Rights Reserved.
+@@ -301,7 +302,7 @@ GdipPathIterGetCount(GpPathIterator* iterator, INT* count);
+ GpStatus WINGDIPAPI
+ GdipPathIterGetSubpathCount(GpPathIterator* iterator, INT* count);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterIsValid(GpPathIterator* iterator, BOOL* valid);
+ 
+ GpStatus WINGDIPAPI
+@@ -923,10 +924,10 @@ GdipSetPenWidth(GpPen *pen, REAL width);
+ GpStatus WINGDIPAPI
+ GdipGetPenWidth(GpPen *pen, REAL *width);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipSetPenUnit(GpPen *pen, GpUnit unit);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPenUnit(GpPen *pen, GpUnit *unit);
+ 
+ GpStatus WINGDIPAPI
+@@ -1065,7 +1066,7 @@ GpStatus WINGDIPAPI
+ GdipCloneCustomLineCap(GpCustomLineCap* customCap,
+                        GpCustomLineCap** clonedCap);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetCustomLineCapType(GpCustomLineCap* customCap,
+                        CustomLineCapType* capType);
+ 
+@@ -1287,7 +1288,7 @@ GpStatus WINGDIPAPI
+ GdipGetImageItemData(GpImage *image, ImageItemData* item);
+ #endif //(GDIPVER >= 0x0110)
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipImageForceValidation(GpImage *image);
+ 
+ //----------------------------------------------------------------------------
+@@ -1657,7 +1658,7 @@ GdipRotateWorldTransform(GpGraphics *graphics, REAL angle,
+ GpStatus WINGDIPAPI
+ GdipGetWorldTransform(GpGraphics *graphics, GpMatrix *matrix);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipResetPageTransform(GpGraphics *graphics);
+ 
+ GpStatus WINGDIPAPI
+@@ -1846,11 +1847,11 @@ GpStatus WINGDIPAPI
+ GdipFillPolygonI(GpGraphics *graphics, GpBrush *brush,
+                  GDIPCONST GpPoint *points, INT count, GpFillMode fillMode);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipFillPolygon2(GpGraphics *graphics, GpBrush *brush,
+                  GDIPCONST GpPointF *points, INT count);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipFillPolygon2I(GpGraphics *graphics, GpBrush *brush,
+                   GDIPCONST GpPoint *points, INT count);
+ 
+@@ -2250,7 +2251,7 @@ GdipGetHemfFromMetafile(
+     HENHMETAFILE *      hEmf
+     );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipCreateStreamOnFile(GDIPCONST WCHAR * filename, UINT access, 
+                        IStream **stream);
+ 
+@@ -2731,24 +2732,24 @@ GdipEmfToWmfBits(
+     INT          eFlags
+ );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipSetImageAttributesCachedBackground(
+     GpImageAttributes *imageattr,
+     BOOL enableFlag
+ );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipTestControl(
+     GpTestControlEnum control,
+     void * param
+ );
+ 
+-GpStatus WINAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINAPI
+ GdiplusNotificationHook(
+     OUT ULONG_PTR *token
+ );
+ 
+-VOID WINAPI
++_Win32_ImportLibrary_("gdiplus.dll") VOID WINAPI
+ GdiplusNotificationUnhook(
+     ULONG_PTR token
+ );

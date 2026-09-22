@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8..a215235628 100644
+index 71ad8398e8..19f4f0a705 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -15,7 +15,7 @@ index 71ad8398e8..a215235628 100644
  #define CFSTR_DSOBJECTNAMES TEXT("DsObjectNames")
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD   dwFlags;                    // item flags
      DWORD   dwProviderFlags;            // flags for item provider
@@ -24,7 +24,7 @@ index 71ad8398e8..a215235628 100644
  } DSOBJECT, * LPDSOBJECT;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      CLSID    clsidNamespace;            // namespace identifier (indicates which namespace selection from)
      UINT     cItems;                    // number of objects
@@ -33,7 +33,7 @@ index 71ad8398e8..a215235628 100644
  #define CFSTR_DSDISPLAYSPECOPTIONS CFSTR_DS_DISPLAY_SPEC_OPTIONS
  
 -typedef struct _DSDISPLAYSPECOPTIONS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSDISPLAYSPECOPTIONS
++typedef struct   _DSDISPLAYSPECOPTIONS
  {
      DWORD   dwSize;                             // size of struct, for versioning
      DWORD   dwFlags;                            // invocation flags
@@ -42,7 +42,7 @@ index 71ad8398e8..a215235628 100644
  #define CFSTR_DSPROPERTYPAGEINFO TEXT("DsPropPageInfo")
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD offsetString;                 // offset to UNICODE string
  } DSPROPERTYPAGEINFO, * LPDSPROPERTYPAGEINFO;
@@ -91,7 +91,7 @@ index 71ad8398e8..a215235628 100644
  #define DSCCIF_HASWIZARDPRIMARYPAGE     0x00000002  // = 1 => returning a primary wizard dlg CLSID
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD dwFlags;
      CLSID clsidWizardDialog;
@@ -141,7 +141,7 @@ index 71ad8398e8..a215235628 100644
  //---------------------------------------------------------------------------//
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD           cbStruct;       // size of structure in bytes
      HWND            hwndOwner;      // dialog owner
@@ -150,7 +150,7 @@ index 71ad8398e8..a215235628 100644
  } DSBROWSEINFOW, *PDSBROWSEINFOW;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD           cbStruct;
      HWND            hwndOwner;
@@ -159,7 +159,7 @@ index 71ad8398e8..a215235628 100644
  #define DSB_MAX_DISPLAYNAME_CHARS   64
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD           cbStruct;
      LPCWSTR         pszADsPath;     // ADS paths are always Unicode
@@ -168,7 +168,7 @@ index 71ad8398e8..a215235628 100644
  } DSBITEMW, *PDSBITEMW;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD           cbStruct;
      LPCWSTR         pszADsPath;     // ADS paths are always Unicode
@@ -176,26 +176,32 @@ index 71ad8398e8..a215235628 100644
  // API exported for browsing for containers.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ 
++
++
  STDAPI_(int) DsBrowseForContainerW(_Inout_ PDSBROWSEINFOW pInfo);
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ 
++
++
  STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
  
  #ifdef UNICODE
-@@ -471,7 +511,12 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
+@@ -471,12 +511,17 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
  
  // NOTE: these are here to keep old clients building - remove soon
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_RAIIFree_(DestroyIcon, 0)
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyIcon, -1, 0) 
++
++
  STDAPI_(HICON) DsGetIcon(DWORD dwFlags, LPCWSTR pszObjectClass, INT cxImage, INT cyImage);
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI DsGetFriendlyClassName(LPCWSTR pszObjectClass, _Out_writes_(cchBuffer) LPWSTR pszBuffer, UINT cchBuffer);
  
  
+ #ifdef  __cplusplus
+-struct __declspec(uuid("1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")) IDsDisplaySpecifier;
++struct _Windows_SupportedOS_WindowsVista_  __declspec(uuid("1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")) IDsDisplaySpecifier;
+ #endif
+ 
+ #endif  // GUID_DEFS_ONLY

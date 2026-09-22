@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h
-index b47ee1ff02..f8a553cbce 100644
+index b47ee1ff02..fb7d505273 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index b47ee1ff02..f8a553cbce 100644
         SdpQueryUuidUnion u;
  
 -    USHORT uuidType;
-+    _Win32_AssociatedEnum_(SDP_SPECIFICTYPE) USHORT uuidType;
++     USHORT uuidType;
  } SdpQueryUuid;
  
  

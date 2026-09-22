@@ -1,0 +1,137 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/activdbg.h b/generation/WinSDK/RecompiledIdlHeaders/um/activdbg.h
+index 5d2e025b56..aa547eac8c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/activdbg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/activdbg.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -2135,7 +2136,7 @@ EXTERN_C const IID IID_IDebugExpression;
+             /* [annotation][out] */ 
+             _Out_  HRESULT *phrResult,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrResult) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrResult) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetResultAsDebugProperty( 
+             /* [annotation][out] */ 
+@@ -2276,7 +2277,7 @@ EXTERN_C const IID IID_IDebugExpressionContext;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLanguageInfo( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrLanguageName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrLanguageName,
+             /* [annotation][out] */ 
+             _Out_  GUID *pLanguageID) = 0;
+         
+@@ -2473,13 +2474,13 @@ EXTERN_C const IID IID_IDebugStackFrame;
+             /* [annotation][in] */ 
+             _In_  BOOL fLong,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDescription) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLanguageString( 
+             /* [annotation][in] */ 
+             _In_  BOOL fLong,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrLanguage) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrLanguage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetThread( 
+             /* [annotation][out] */ 
+@@ -3720,7 +3721,7 @@ EXTERN_C const IID IID_IDebugDocumentInfo;
+             /* [annotation][in] */ 
+             _In_  DOCUMENTNAMETYPE dnt,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDocumentClassId( 
+             /* [annotation][out] */ 
+@@ -4702,13 +4703,13 @@ EXTERN_C const IID IID_IDebugDocumentTextExternalAuthor;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPathName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrLongName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrLongName,
+             /* [annotation][out] */ 
+             _Out_  BOOL *pfIsOriginalFile) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFileName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrShortName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrShortName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE NotifyChanged( void) = 0;
+         
+@@ -5582,13 +5583,13 @@ EXTERN_C const IID IID_IDebugDocumentHost;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPathName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrLongName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrLongName,
+             /* [annotation][out] */ 
+             _Out_  BOOL *pfIsOriginalFile) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFileName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrShortName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrShortName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE NotifyChanged( void) = 0;
+         
+@@ -6915,7 +6916,7 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRootNode( 
+             /* [annotation][out] */ 
+@@ -8943,9 +8944,9 @@ EXTERN_C const IID IID_IRemoteDebugApplicationThread;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDescription,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDescription,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrState) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetNextStatement( 
+             /* [annotation][in] */ 
+@@ -10139,7 +10140,7 @@ EXTERN_C const IID IID_IDebugFormatter;
+             /* [annotation][in] */ 
+             _In_  ULONG nRadix,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVariantForString( 
+             /* [annotation][in] */ 
+@@ -10149,11 +10150,11 @@ EXTERN_C const IID IID_IDebugFormatter;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStringForVarType( 
+             /* [annotation][in] */ 
+-            _In_  VARTYPE vt,
++            _Win32_AssociatedEnum_(VARENUM) _In_  VARTYPE vt,
+             /* [annotation][in] */ 
+             _In_  TYPEDESC *ptdescArrayType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+     };
+     
+@@ -10278,7 +10279,7 @@ EXTERN_C const IID IID_ISimpleConnectionPoint;
+             /* [annotation][length_is][size_is][out] */ 
+             _Out_writes_to_(cEvents,*pcEventsFetched)  DISPID *prgid,
+             /* [annotation][length_is][size_is][out] */ 
+-            _Out_writes_to_(cEvents,*pcEventsFetched)  BSTR *prgbstr,
++            _Win32_RAIIFree_(SysFreeString) _Out_writes_to_(cEvents,*pcEventsFetched)  BSTR *prgbstr,
+             /* [annotation][out] */ 
+             _Out_  ULONG *pcEventsFetched) = 0;
+         

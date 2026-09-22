@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h b/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h
-index 157f8ea..a3785c9 100644
+index 157f8ea4ea..fbd8b924f4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mcx.h
 @@ -9,6 +9,8 @@
@@ -16,7 +16,7 @@ index 157f8ea..a3785c9 100644
  #endif
  
 -typedef struct _MODEMDEVCAPS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _MODEMDEVCAPS {
++typedef struct   _MODEMDEVCAPS {
      DWORD   dwActualSize;
      DWORD   dwRequiredSize;
      DWORD   dwDevSpecificOffset;
@@ -40,7 +40,7 @@ index 157f8ea..a3785c9 100644
  } MODEMDEVCAPS, *PMODEMDEVCAPS, *LPMODEMDEVCAPS;
  
 -typedef struct _MODEMSETTINGS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _MODEMSETTINGS {
++typedef struct   _MODEMSETTINGS {
      DWORD   dwActualSize;
      DWORD   dwRequiredSize;
      DWORD   dwDevSpecificOffset;

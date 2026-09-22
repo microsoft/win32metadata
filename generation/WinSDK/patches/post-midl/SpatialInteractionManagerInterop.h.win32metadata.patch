@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SpatialInteractionManagerInterop.h b/generation/WinSDK/RecompiledIdlHeaders/um/SpatialInteractionManagerInterop.h
-index b1d63af14e..05c3040080 100644
+index b1d63af14e..c7d94f4545 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SpatialInteractionManagerInterop.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SpatialInteractionManagerInterop.h
 @@ -19,6 +19,7 @@
@@ -10,11 +10,16 @@ index b1d63af14e..05c3040080 100644
  #include "rpcndr.h"
  
  #ifndef __RPCNDR_H_VERSION__
-@@ -89,6 +90,7 @@ EXTERN_C const IID IID_ISpatialInteractionManagerInterop;
+@@ -85,10 +86,11 @@ EXTERN_C const IID IID_ISpatialInteractionManagerInterop;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5C4EE536-6A98-4B86-A170-587013D6FD4B")
++    MIDL_INTERFACE("5C4EE536-6A98-4B86-A170-587013D6FD4B") _Windows_SupportedOS_15063_ 
      ISpatialInteractionManagerInterop : public IInspectable
      {
      public:
-+        _Windows_SupportedOS_15063_
++        
          virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
              /* [annotation][in] */ 
              _In_  HWND window,

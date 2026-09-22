@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
-index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6375ed15c 100644
+index 15b1d4a0e7..7eeb19ff03 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
 @@ -19,6 +19,7 @@ Abstract:
@@ -10,243 +10,582 @@ index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6
  
  //////////////////////////////////////////////////////////////////////////////
  //                                                                          //
-@@ -79,6 +80,7 @@ extern "C" {
+@@ -78,7 +79,8 @@ extern "C" {
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetNumberOfInterfaces(
-@@ -94,6 +96,7 @@ GetNumberOfInterfaces(
+@@ -93,7 +95,8 @@ GetNumberOfInterfaces(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetIfEntry(
-@@ -107,6 +110,7 @@ GetIfEntry(
+@@ -106,7 +109,8 @@ GetIfEntry(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetIfTable(
-@@ -122,6 +126,7 @@ GetIfTable(
+@@ -121,7 +125,8 @@ GetIfTable(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetIpAddrTable(
-@@ -152,6 +157,7 @@ GetIpNetTable(
+@@ -136,7 +141,7 @@ GetIpAddrTable(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetIpNetTable(
+@@ -151,7 +156,8 @@ GetIpNetTable(
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetIpForwardTable(
-@@ -584,6 +590,7 @@ GetUdpStatisticsEx2(
+@@ -172,7 +178,7 @@ GetIpForwardTable(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcpTable(
+@@ -181,7 +187,7 @@ GetTcpTable(
+     _In_                             BOOL          Order
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ GetExtendedTcpTable(
+@@ -211,7 +217,7 @@ GetExtendedTcpTable(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ GetOwnerModuleFromTcpEntry(
+@@ -227,7 +233,7 @@ GetOwnerModuleFromTcpEntry(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetUdpTable(
+@@ -236,7 +242,7 @@ GetUdpTable(
+     _In_                             BOOL          Order
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ GetExtendedUdpTable(
+@@ -254,7 +260,7 @@ GetExtendedUdpTable(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ GetOwnerModuleFromUdpEntry(
+@@ -265,7 +271,7 @@ GetOwnerModuleFromUdpEntry(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcpTable2(
+@@ -318,7 +324,7 @@ AllocateAndGetUdpExTableFromStack(
+ //
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcp6Table(
+@@ -327,7 +333,7 @@ GetTcp6Table(
+     _In_                         BOOL           Order
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcp6Table2(
+@@ -340,7 +346,7 @@ GetTcp6Table2(
+ 
+ #ifdef WINAPI
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetPerTcpConnectionEStats(
+@@ -357,7 +363,7 @@ GetPerTcpConnectionEStats(
+     _In_ ULONG RodSize
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ SetPerTcpConnectionEStats(
+@@ -371,7 +377,7 @@ SetPerTcpConnectionEStats(
+ 
+ #ifdef _WS2IPDEF_
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetPerTcp6ConnectionEStats(
+@@ -388,7 +394,7 @@ GetPerTcp6ConnectionEStats(
+     _In_  ULONG RodSize
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ SetPerTcp6ConnectionEStats(
+@@ -404,7 +410,7 @@ SetPerTcp6ConnectionEStats(
+ 
+ #endif // WINAPI
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ GetOwnerModuleFromTcp6Entry(
+@@ -414,7 +420,7 @@ GetOwnerModuleFromTcp6Entry(
+     _Inout_                   PDWORD                        pdwSize
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetUdp6Table(
+@@ -423,7 +429,7 @@ GetUdp6Table(
+     _In_                         BOOL           Order
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ GetOwnerModuleFromUdp6Entry(
+@@ -455,7 +461,7 @@ GetOwnerModuleFromPidAndInfo(
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetIpStatistics(
+@@ -470,7 +476,7 @@ GetIpStatistics(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetIcmpStatistics(
+@@ -485,14 +491,14 @@ GetIcmpStatistics(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcpStatistics(
+     _Out_ PMIB_TCPSTATS Statistics
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetUdpStatistics(
+@@ -501,7 +507,7 @@ GetUdpStatistics(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ SetIpStatisticsEx(
+@@ -517,7 +523,7 @@ SetIpStatisticsEx(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetIpStatisticsEx(
+@@ -525,7 +531,7 @@ GetIpStatisticsEx(
+     _In_  ULONG Family
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetIcmpStatisticsEx(
+@@ -533,7 +539,7 @@ GetIcmpStatisticsEx(
+     _In_  ULONG Family
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcpStatisticsEx(
+@@ -541,7 +547,7 @@ GetTcpStatisticsEx(
+     _In_  ULONG Family
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetUdpStatisticsEx(
+@@ -551,7 +557,7 @@ GetUdpStatisticsEx(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_16299_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetTcpStatisticsEx2(
+@@ -559,7 +565,7 @@ GetTcpStatisticsEx2(
+     _In_  ULONG Family
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_16299_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetUdpStatisticsEx2(
+@@ -583,7 +589,8 @@ GetUdpStatisticsEx2(
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SetIfEntry(
-@@ -601,6 +608,7 @@ SetIfEntry(
+@@ -600,21 +607,24 @@ SetIfEntry(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  CreateIpForwardEntry(
-@@ -608,6 +616,7 @@ CreateIpForwardEntry(
+     _In_ PMIB_IPFORWARDROW pRoute
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SetIpForwardEntry(
-@@ -615,6 +624,7 @@ SetIpForwardEntry(
+     _In_ PMIB_IPFORWARDROW pRoute
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  DeleteIpForwardEntry(
-@@ -633,6 +643,7 @@ DeleteIpForwardEntry(
+@@ -632,7 +642,8 @@ DeleteIpForwardEntry(
+ //////////////////////////////////////////////////////////////////////////////
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SetIpStatistics(
-@@ -647,6 +658,7 @@ SetIpStatistics(
+@@ -646,7 +657,8 @@ SetIpStatistics(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SetIpTTL(
-@@ -662,6 +674,7 @@ SetIpTTL(
+@@ -661,28 +673,32 @@ SetIpTTL(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  CreateIpNetEntry(
-@@ -669,6 +682,7 @@ CreateIpNetEntry(
+     _In_ PMIB_IPNETROW    pArpEntry
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SetIpNetEntry(
-@@ -676,6 +690,7 @@ SetIpNetEntry(
+     _In_ PMIB_IPNETROW    pArpEntry
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  DeleteIpNetEntry(
-@@ -683,6 +698,7 @@ DeleteIpNetEntry(
+     _In_ PMIB_IPNETROW    pArpEntry
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  FlushIpNetTable(
-@@ -699,6 +715,7 @@ FlushIpNetTable(
+@@ -698,7 +714,8 @@ FlushIpNetTable(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  CreateProxyArpEntry(
-@@ -708,6 +725,7 @@ CreateProxyArpEntry(
+@@ -707,7 +724,8 @@ CreateProxyArpEntry(
+     _In_  DWORD   dwIfIndex
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  DeleteProxyArpEntry(
-@@ -725,6 +743,7 @@ DeleteProxyArpEntry(
+@@ -724,14 +742,16 @@ DeleteProxyArpEntry(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SetTcpEntry(
-@@ -732,6 +751,7 @@ SetTcpEntry(
+     _In_ PMIB_TCPROW pTcpRow
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetInterfaceInfo(
-@@ -772,6 +792,7 @@ NhpAllocateAndGetInterfaceInfoFromStack(
+@@ -751,7 +771,7 @@ GetUniDirectionalAdapterInfo(
+ #ifndef NHPALLOCATEANDGETINTERFACEINFOFROMSTACK_DEFINED
+ #define NHPALLOCATEANDGETINTERFACEINFOFROMSTACK_DEFINED
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+ NhpAllocateAndGetInterfaceInfoFromStack(
+@@ -771,7 +791,8 @@ NhpAllocateAndGetInterfaceInfoFromStack(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetBestInterface(
-@@ -788,6 +809,7 @@ GetBestInterface(
+@@ -787,7 +808,8 @@ GetBestInterface(
+ 
  #pragma warning(push)
  #pragma warning(disable:4115)
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetBestInterfaceEx(
-@@ -813,6 +835,7 @@ GetBestInterfaceEx(
+@@ -812,7 +834,8 @@ GetBestInterfaceEx(
+ //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetBestRoute(
-@@ -822,6 +845,7 @@ GetBestRoute(
+@@ -821,30 +844,34 @@ GetBestRoute(
+     _Out_     PMIB_IPFORWARDROW   pBestRoute
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  NotifyAddrChange(
-@@ -830,6 +854,7 @@ NotifyAddrChange(
+-    _Out_ PHANDLE      Handle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE      Handle,
+     _In_  LPOVERLAPPED overlapped
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  NotifyRouteChange(
-@@ -838,6 +863,7 @@ NotifyRouteChange(
+-    _Out_ PHANDLE      Handle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE      Handle,
+     _In_  LPOVERLAPPED overlapped
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
++ 
  BOOL
  WINAPI
  CancelIPChangeNotify(
-@@ -845,6 +871,7 @@ CancelIPChangeNotify(
+     _In_  LPOVERLAPPED notifyOverlapped
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetAdapterIndex(
-@@ -853,6 +880,7 @@ GetAdapterIndex(
+@@ -852,7 +879,8 @@ GetAdapterIndex(
+     _Inout_ PULONG IfIndex
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  AddIPAddress(
-@@ -864,6 +892,7 @@ AddIPAddress(
+@@ -863,7 +891,8 @@ AddIPAddress(
+     _Out_ PULONG  NTEInstance
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  DeleteIPAddress(
-@@ -878,6 +907,7 @@ DeleteIPAddress(
+@@ -877,7 +906,8 @@ DeleteIPAddress(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2KSP1)
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetNetworkParams(
-@@ -935,6 +965,7 @@ GetAdaptersAddresses(
+@@ -892,7 +922,7 @@ GetNetworkParams(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetAdaptersInfo(
+@@ -920,12 +950,12 @@ GetAdapterOrderMap(
+ // The following functions require Winsock2.
+ //
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ GetAdaptersAddresses(
+     _In_ ULONG Family,
+-    _In_ ULONG Flags,
++    _Win32_AssociatedEnum_(GET_ADAPTERS_ADDRESSES_FLAGS) _In_ ULONG Flags,
+     _Reserved_ PVOID Reserved,
+     _Out_writes_bytes_opt_(*SizePointer) PIP_ADAPTER_ADDRESSES AdapterAddresses,
+     _Inout_ PULONG SizePointer
+@@ -934,7 +964,8 @@ GetAdaptersAddresses(
+ #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN2KSP1)
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetPerAdapterInfo(
@@ -255,7 +594,7 @@ index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6
  #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
  
 -typedef struct _INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES
-+typedef struct _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ _INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES
++typedef struct   _INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES
  {
      BOOLEAN PtpV2OverUdpIPv4EventMessageReceive;
      BOOLEAN PtpV2OverUdpIPv4AllMessageReceive;
@@ -264,7 +603,7 @@ index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6
  } INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES, *PINTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES;
  
 -typedef struct _INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES
-+typedef struct _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ _INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES
++typedef struct   _INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES
  {
      BOOLEAN AllReceive;
      BOOLEAN AllTransmit;
@@ -272,7 +611,7 @@ index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6
  DECLARE_HANDLE(HIFTIMESTAMPCHANGE);
  
  IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_
++ 
  DWORD
  WINAPI
  GetInterfaceActiveTimestampCapabilities(
@@ -280,112 +619,197 @@ index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6
      );
  
  IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_
++ 
  DWORD
  WINAPI
  GetInterfaceSupportedTimestampCapabilities(
-@@ -1027,6 +1060,7 @@ typedef
+@@ -1027,15 +1060,17 @@ typedef
  INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK *PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK;
  
  IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_
++ 
  DWORD
  WINAPI
  RegisterInterfaceTimestampConfigChange(
-@@ -1036,6 +1070,7 @@ RegisterInterfaceTimestampConfigChange(
+     _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
+     _In_opt_ PVOID CallerContext,
+-    _Out_ HIFTIMESTAMPCHANGE *NotificationHandle
++    _Win32_RAIIFree_(UnregisterInterfaceTimestampConfigChange, -1, 0) _Out_ HIFTIMESTAMPCHANGE *NotificationHandle
      );
  
  IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_
++ 
  VOID
  WINAPI
  UnregisterInterfaceTimestampConfigChange(
-@@ -1179,6 +1214,7 @@ CancelIfTimestampConfigChange(
+@@ -1178,21 +1213,24 @@ CancelIfTimestampConfigChange(
+ #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  IpReleaseAddress(
-@@ -1186,6 +1222,7 @@ IpReleaseAddress(
+     _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  IpRenewAddress(
-@@ -1193,6 +1230,7 @@ IpRenewAddress(
+     _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  SendARP(
-@@ -1203,6 +1241,7 @@ SendARP(
+@@ -1202,7 +1240,8 @@ SendARP(
+     _Inout_ PULONG  PhyAddrLen
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
  BOOL
  WINAPI
  GetRTTAndHopCount(
-@@ -1213,6 +1252,7 @@ GetRTTAndHopCount(
+@@ -1212,22 +1251,25 @@ GetRTTAndHopCount(
+     _Out_ PULONG RTT
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetFriendlyIfIndex(
-@@ -1220,6 +1260,7 @@ GetFriendlyIfIndex(
+     _In_ DWORD IfIndex
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  EnableRouter(
-@@ -1228,6 +1269,7 @@ EnableRouter(
+-    _Out_ HANDLE* pHandle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* pHandle,
+     _Out_ OVERLAPPED* pOverlapped
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  UnenableRouter(
-@@ -1236,6 +1278,7 @@ UnenableRouter(
+@@ -1235,15 +1277,17 @@ UnenableRouter(
+     _Out_opt_ LPDWORD lpdwEnableCount
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  DisableMediaSense(
-@@ -1244,6 +1287,7 @@ DisableMediaSense(
+-    _Out_ HANDLE *pHandle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE *pHandle,
+     _In_  OVERLAPPED *pOverLapped
      );
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  RestoreMediaSense(
-@@ -1254,6 +1298,7 @@ RestoreMediaSense(
+@@ -1253,7 +1297,8 @@ RestoreMediaSense(
+ 
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  GetIpErrorString(
+@@ -1264,7 +1309,7 @@ GetIpErrorString(
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ #ifdef _WS2DEF_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ ResolveNeighbor(
+@@ -1279,7 +1324,7 @@ ResolveNeighbor(
+ // Port reservation API routines.
+ //
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ CreatePersistentTcpPortReservation(
+@@ -1288,7 +1333,7 @@ CreatePersistentTcpPortReservation(
+     _Out_ PULONG64 Token
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ CreatePersistentUdpPortReservation(
+@@ -1297,7 +1342,7 @@ CreatePersistentUdpPortReservation(
+     _Out_ PULONG64 Token
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ DeletePersistentTcpPortReservation(
+@@ -1305,7 +1350,7 @@ DeletePersistentTcpPortReservation(
+     _In_ USHORT NumberOfPorts
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ DeletePersistentUdpPortReservation(
+@@ -1313,7 +1358,7 @@ DeletePersistentUdpPortReservation(
+     _In_ USHORT NumberOfPorts
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ LookupPersistentTcpPortReservation(
+@@ -1322,7 +1367,7 @@ LookupPersistentTcpPortReservation(
+     _Out_ PULONG64 Token
+     );
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
+ ULONG
+ WINAPI
+ LookupPersistentUdpPortReservation(
 @@ -1396,7 +1441,7 @@ LookupPersistentUdpPortReservation(
  #define NET_STRING_ANY_SERVICE_NO_SCOPE   (NET_STRING_NAMED_SERVICE  | \
                                             NET_STRING_IP_SERVICE_NO_SCOPE)
  
 -typedef enum NET_ADDRESS_FORMAT_
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NET_ADDRESS_FORMAT_
++typedef enum   NET_ADDRESS_FORMAT_
  {
     NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
  
@@ -394,15 +818,17 @@ index 15b1d4a0e7c1c157ef70b2bb0505f853996599a4..f02db94a10c82d98e0c757edf0e582f6
  	// app must include winsock2.h, ws2ipdef.h, and windns.h to use this API
  
 -typedef struct NET_ADDRESS_INFO_
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NET_ADDRESS_INFO_
++typedef struct   NET_ADDRESS_INFO_
  {
     NET_ADDRESS_FORMAT Format;
  
-@@ -1428,6 +1473,7 @@ typedef struct NET_ADDRESS_INFO_
+@@ -1427,7 +1472,8 @@ typedef struct NET_ADDRESS_INFO_
+ 
  } NET_ADDRESS_INFO, *PNET_ADDRESS_INFO;
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  ParseNetworkString(

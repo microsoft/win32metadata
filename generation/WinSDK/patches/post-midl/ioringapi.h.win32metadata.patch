@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h
+index f7ec762e06..c4e3a0087b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h
 @@ -1,3 +1,4 @@
@@ -6,12 +7,69 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ioringapi.h b/generation/
  /*******************************************************************
  *                                                                  *
  * ioringapi.h -- ApiSet Contract for api-ms-win-core-ioring-l1     *
-@@ -205,7 +206,7 @@ CreateIoRing(
+@@ -195,36 +196,36 @@ typedef struct IORING_CQE
+ extern "C" {
+ #endif
+ 
+-STDAPI QueryIoRingCapabilities(_Out_ IORING_CAPABILITIES* capabilities);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI QueryIoRingCapabilities(_Out_ IORING_CAPABILITIES* capabilities);
+ 
+-STDAPI_(BOOL) IsIoRingOpSupported(_In_ HIORING ioRing, IORING_OP_CODE op);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI_(BOOL) IsIoRingOpSupported(_In_ HIORING ioRing, IORING_OP_CODE op);
+ 
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI
+ CreateIoRing(
+     IORING_VERSION ioringVersion,
      IORING_CREATE_FLAGS flags,
      UINT32 submissionQueueSize,
      UINT32 completionQueueSize,
 -    _Out_ HIORING* h
-+    _Out_ HIORING* _Win32_RAIIFree_(CloseIoRing) h
++    _Win32_RAIIFree_(CloseIoRing, -1, 0) _Out_ HIORING*  h
      );
  
- STDAPI GetIoRingInfo(_In_ HIORING ioRing, _Out_ IORING_INFO* info);
+-STDAPI GetIoRingInfo(_In_ HIORING ioRing, _Out_ IORING_INFO* info);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI GetIoRingInfo(_In_ HIORING ioRing, _Out_ IORING_INFO* info);
+ 
+-STDAPI SubmitIoRing(_In_ HIORING ioRing, UINT32 waitOperations, UINT32 milliseconds, _Out_opt_ UINT32* submittedEntries);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI SubmitIoRing(_In_ HIORING ioRing, UINT32 waitOperations, UINT32 milliseconds, _Out_opt_ UINT32* submittedEntries);
+ 
+-STDAPI CloseIoRing(_In_ _Post_ptr_invalid_ HIORING ioRing);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI CloseIoRing(_In_ _Post_ptr_invalid_ HIORING ioRing);
+ 
+-STDAPI PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") _Win32_PreserveResult_ STDAPI PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
+ 
+-STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);
+ 
+ // Submission Queue entry builders
+ 
+ // Builds a submission queue entry for IORING_OP_CANCEL
+-STDAPI BuildIoRingCancelRequest(_In_ HIORING ioRing, _In_ IORING_HANDLE_REF file, UINT_PTR opToCancel, UINT_PTR userData);
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI BuildIoRingCancelRequest(_In_ HIORING ioRing, _In_ IORING_HANDLE_REF file, UINT_PTR opToCancel, UINT_PTR userData);
+ 
+ // Builds a submission queue entry for IORING_OP_READ
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI
+ BuildIoRingReadFile(
+     _In_ HIORING ioRing,
+     IORING_HANDLE_REF fileRef,
+@@ -236,7 +237,7 @@ BuildIoRingReadFile(
+     );
+ 
+ // Builds a submission queue entry for IORING_OP_REGISTER_FILES
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI
+ BuildIoRingRegisterFileHandles(
+     _In_ HIORING ioRing,
+     UINT32 count,
+@@ -245,7 +246,7 @@ BuildIoRingRegisterFileHandles(
+     );
+ 
+ // Builds a submission queue entry for IORING_OP_REGISTER_BUFFERS
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-ioring-l1-1-0.dll") STDAPI
+ BuildIoRingRegisterBuffers(
+     _In_ HIORING ioRing,
+     UINT32 count,

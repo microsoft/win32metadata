@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h b/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h
-index 8294a832b9..71a626cf4c 100644
+index 8294a832b9..e7a514c6b3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h
 @@ -36,6 +36,7 @@ Authors:
@@ -19,7 +19,7 @@ index 8294a832b9..71a626cf4c 100644
  WinUsb_Initialize(
      _In_  HANDLE DeviceHandle,
 -    _Out_ PWINUSB_INTERFACE_HANDLE InterfaceHandle
-+    _Out_ _Win32_RAIIFree_(WinUsb_Free) PWINUSB_INTERFACE_HANDLE InterfaceHandle
++    _Win32_RAIIFree_(WinUsb_Free, 0) _Out_  PWINUSB_INTERFACE_HANDLE InterfaceHandle
      );
  
  
@@ -33,7 +33,7 @@ index 8294a832b9..71a626cf4c 100644
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  UCHAR AssociatedInterfaceIndex,
 -    _Out_ PWINUSB_INTERFACE_HANDLE AssociatedInterfaceHandle
-+    _Out_ _Win32_RAIIFree_(WinUsb_Free) PWINUSB_INTERFACE_HANDLE AssociatedInterfaceHandle
++    _Win32_RAIIFree_(WinUsb_Free, 0) _Out_  PWINUSB_INTERFACE_HANDLE AssociatedInterfaceHandle
      );
  
  
@@ -88,7 +88,7 @@ index 8294a832b9..71a626cf4c 100644
  BOOL __stdcall
  WinUsb_QueryPipeEx(
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
-@@ -142,6 +152,7 @@ WinUsb_QueryPipeEx(
+@@ -142,88 +152,99 @@ WinUsb_QueryPipeEx(
      _Out_ PWINUSB_PIPE_INFORMATION_EX PipeInformationEx
      );
  
@@ -96,7 +96,10 @@ index 8294a832b9..71a626cf4c 100644
  BOOL __stdcall
  WinUsb_SetPipePolicy(
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
-@@ -151,6 +162,7 @@ WinUsb_SetPipePolicy(
+     _In_  UCHAR PipeID,
+-    _In_  ULONG PolicyType,
++    _Win32_AssociatedEnum_(WINUSB_PIPE_POLICY) _In_  ULONG PolicyType,
+     _In_  ULONG ValueLength,
      _In_reads_bytes_(ValueLength) PVOID Value
      );
  
@@ -104,7 +107,10 @@ index 8294a832b9..71a626cf4c 100644
  BOOL __stdcall
  WinUsb_GetPipePolicy(
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
-@@ -160,54 +172,61 @@ WinUsb_GetPipePolicy(
+     _In_  UCHAR PipeID,
+-    _In_  ULONG PolicyType,
++    _Win32_AssociatedEnum_(WINUSB_PIPE_POLICY) _In_  ULONG PolicyType,
+     _Inout_ PULONG ValueLength,
      _Out_writes_bytes_(*ValueLength) PVOID Value
      );
  
@@ -114,11 +120,11 @@ index 8294a832b9..71a626cf4c 100644
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  UCHAR PipeID,
 -    _Out_writes_bytes_to_opt_(BufferLength,*LengthTransferred) PUCHAR Buffer,
-+    _Win32_Retained_ _Out_writes_bytes_to_opt_(BufferLength,*LengthTransferred) PUCHAR Buffer,
++     _Out_writes_bytes_to_opt_(BufferLength,*LengthTransferred) PUCHAR Buffer,
      _In_  ULONG BufferLength,
      _Out_opt_ PULONG LengthTransferred,
 -    _In_opt_ LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _In_opt_ LPOVERLAPPED Overlapped
++     _In_opt_ LPOVERLAPPED Overlapped
      );
  
 +_Win32_SetLastError_
@@ -127,11 +133,11 @@ index 8294a832b9..71a626cf4c 100644
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  UCHAR PipeID,
 -    _In_reads_bytes_(BufferLength) PUCHAR Buffer,
-+    _Win32_Retained_ _In_reads_bytes_(BufferLength) PUCHAR Buffer,
++     _In_reads_bytes_(BufferLength) PUCHAR Buffer,
      _In_  ULONG BufferLength,
      _Out_opt_ PULONG LengthTransferred,
 -    _In_opt_ LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _In_opt_ LPOVERLAPPED Overlapped
++     _In_opt_ LPOVERLAPPED Overlapped
      );
  
 +_Win32_SetLastError_
@@ -140,11 +146,11 @@ index 8294a832b9..71a626cf4c 100644
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  WINUSB_SETUP_PACKET SetupPacket,
 -    _Out_writes_bytes_to_opt_(BufferLength, *LengthTransferred) PUCHAR Buffer,
-+    _Win32_Retained_ _Out_writes_bytes_to_opt_(BufferLength, *LengthTransferred) PUCHAR Buffer,
++     _Out_writes_bytes_to_opt_(BufferLength, *LengthTransferred) PUCHAR Buffer,
      _In_  ULONG BufferLength,
      _Out_opt_ PULONG LengthTransferred,
 -    _In_opt_  LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _In_opt_  LPOVERLAPPED Overlapped
++     _In_opt_  LPOVERLAPPED Overlapped
      );
  
 +_Win32_SetLastError_
@@ -172,7 +178,9 @@ index 8294a832b9..71a626cf4c 100644
  BOOL __stdcall
  WinUsb_SetPowerPolicy(
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
-@@ -216,6 +235,7 @@ WinUsb_SetPowerPolicy(
+-    _In_  ULONG PolicyType,
++    _Win32_AssociatedEnum_(WINUSB_POWER_POLICY) _In_  ULONG PolicyType,
+     _In_  ULONG ValueLength,
      _In_reads_bytes_(ValueLength) PVOID Value
      );
  
@@ -180,7 +188,9 @@ index 8294a832b9..71a626cf4c 100644
  BOOL __stdcall
  WinUsb_GetPowerPolicy(
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
-@@ -224,6 +244,7 @@ WinUsb_GetPowerPolicy(
+-    _In_  ULONG PolicyType,
++    _Win32_AssociatedEnum_(WINUSB_POWER_POLICY) _In_  ULONG PolicyType,
+     _Inout_ PULONG ValueLength,
      _Out_writes_bytes_(*ValueLength) PVOID Value
      );
  
@@ -188,6 +198,24 @@ index 8294a832b9..71a626cf4c 100644
  BOOL __stdcall
  WinUsb_GetOverlappedResult(
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
+@@ -232,7 +253,7 @@ WinUsb_GetOverlappedResult(
+     _In_  BOOL bWait
+     );
+ 
+-PUSB_INTERFACE_DESCRIPTOR __stdcall
++_Win32_SetLastError_ PUSB_INTERFACE_DESCRIPTOR __stdcall
+ WinUsb_ParseConfigurationDescriptor(
+     _In_  PUSB_CONFIGURATION_DESCRIPTOR ConfigurationDescriptor,
+     _In_  PVOID StartPosition,
+@@ -243,7 +264,7 @@ WinUsb_ParseConfigurationDescriptor(
+     _In_  LONG InterfaceProtocol
+     );
+ 
+-PUSB_COMMON_DESCRIPTOR __stdcall
++_Win32_SetLastError_ PUSB_COMMON_DESCRIPTOR __stdcall
+ WinUsb_ParseDescriptors(
+     _In_reads_bytes_(TotalLength) PVOID    DescriptorBuffer,
+     _In_  ULONG    TotalLength,
 @@ -251,65 +272,81 @@ WinUsb_ParseDescriptors(
      _In_  LONG     DescriptorType
      );
@@ -214,7 +242,7 @@ index 8294a832b9..71a626cf4c 100644
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  UCHAR PipeID,
 -    _Inout_updates_bytes_(BufferLength) PUCHAR Buffer,
-+    _Win32_Retained_ _Inout_updates_bytes_(BufferLength) PUCHAR Buffer,
++     _Inout_updates_bytes_(BufferLength) PUCHAR Buffer,
      _In_  ULONG BufferLength,
      _Out_ PWINUSB_ISOCH_BUFFER_HANDLE IsochBufferHandle
      );
@@ -234,7 +262,7 @@ index 8294a832b9..71a626cf4c 100644
      _In_  ULONG Length,
      _Inout_ PULONG FrameNumber,
 -    _In_opt_ LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _In_opt_ LPOVERLAPPED Overlapped
++     _In_opt_ LPOVERLAPPED Overlapped
      );
  
 +_Windows_SupportedOS_Windows81_
@@ -247,8 +275,8 @@ index 8294a832b9..71a626cf4c 100644
      _In_  ULONG NumberOfPackets,
 -    _Out_writes_(NumberOfPackets) PUSBD_ISO_PACKET_DESCRIPTOR IsoPacketDescriptors,
 -    _In_opt_ LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _Out_writes_(NumberOfPackets) PUSBD_ISO_PACKET_DESCRIPTOR IsoPacketDescriptors,
-+    _Win32_Retained_ _In_opt_ LPOVERLAPPED Overlapped
++     _Out_writes_(NumberOfPackets) PUSBD_ISO_PACKET_DESCRIPTOR IsoPacketDescriptors,
++     _In_opt_ LPOVERLAPPED Overlapped
      );
  
 +_Windows_SupportedOS_Windows81_
@@ -259,7 +287,7 @@ index 8294a832b9..71a626cf4c 100644
      _In_  ULONG Length,
      _In_  BOOL ContinueStream,
 -    _In_opt_ LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _In_opt_ LPOVERLAPPED Overlapped
++     _In_opt_ LPOVERLAPPED Overlapped
      );
  
 +_Windows_SupportedOS_Windows81_
@@ -272,8 +300,8 @@ index 8294a832b9..71a626cf4c 100644
      _In_  ULONG NumberOfPackets,
 -    _Out_writes_(NumberOfPackets) PUSBD_ISO_PACKET_DESCRIPTOR IsoPacketDescriptors,
 -    _In_opt_ LPOVERLAPPED Overlapped
-+    _Win32_Retained_ _Out_writes_(NumberOfPackets) PUSBD_ISO_PACKET_DESCRIPTOR IsoPacketDescriptors,
-+    _Win32_Retained_ _In_opt_ LPOVERLAPPED Overlapped
++     _Out_writes_(NumberOfPackets) PUSBD_ISO_PACKET_DESCRIPTOR IsoPacketDescriptors,
++     _In_opt_ LPOVERLAPPED Overlapped
      );
  
  
@@ -281,24 +309,24 @@ index 8294a832b9..71a626cf4c 100644
  
  #endif
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  BOOL __stdcall WinUsb_StartTrackingForTimeSync (
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  PUSB_START_TRACKING_FOR_TIME_SYNC_INFORMATION StartTrackingInfo
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  BOOL __stdcall WinUsb_GetCurrentFrameNumberAndQpc (
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,
      _In_  PUSB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION FrameQpcInfo
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  BOOL __stdcall WinUsb_StopTrackingForTimeSync (
      _In_  WINUSB_INTERFACE_HANDLE InterfaceHandle,

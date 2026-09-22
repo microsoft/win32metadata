@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h b/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h
-index eb5e609b4b709d9dacfa574c269f2a5d3c9bbeec..ad9102e999312c2e24d403a0141232c58e8ac1fe 100644
+index eb5e609b4b..0d16dc6286 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h
 @@ -32,6 +32,7 @@
@@ -15,7 +15,7 @@ index eb5e609b4b709d9dacfa574c269f2a5d3c9bbeec..ad9102e999312c2e24d403a0141232c5
      
      MIDL_INTERFACE("6ecda518-2010-4437-8bc3-46e752b7b172")
 -    ICcgDomainAuthCredentials : public IUnknown
-+    _Windows_SupportedOS_17763_ ICcgDomainAuthCredentials : public IUnknown
++     ICcgDomainAuthCredentials : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetPasswordCredentials( 

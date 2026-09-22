@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roregistrationapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roregistrationapi.h
-index 955c66f868..a19ec9946d 100644
+index 955c66f868..b73438d461 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roregistrationapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roregistrationapi.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,7 @@ index 955c66f868..a19ec9946d 100644
  /*****************************************************************************
   **                                                                         **
   ** RoRegistrationApi.h - Header for Windows Runtime catalog registrations. **
-@@ -56,6 +57,7 @@ ROAPI
+@@ -56,19 +57,21 @@ ROAPI
  _Check_return_
  HRESULT
  WINAPI
@@ -15,11 +15,19 @@ index 955c66f868..a19ec9946d 100644
  RoGetActivatableClassRegistration(
      _In_ HSTRING activatableClassId,
      _COM_Outptr_ PActivatableClassRegistration* activatableClassRegistration
-@@ -66,6 +68,7 @@ _On_failure_(_At_(*activatableClassIds, _Post_ _Null_))
+     );
+ 
+-ROAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-registration-l1-1-0.dll") ROAPI
+ _On_failure_(_At_(*activatableClassIds, _Post_ _Null_))
  _Check_return_
  HRESULT
  WINAPI
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++ 
  RoGetServerActivatableClasses(
      _In_ HSTRING serverName,
-     _When_(return >= 0, _Outptr_result_buffer_(*count)) HSTRING** activatableClassIds,
+-    _When_(return >= 0, _Outptr_result_buffer_(*count)) HSTRING** activatableClassIds,
++    _Win32_RAIIFree_(WindowsDeleteString) _When_(return >= 0, _Outptr_result_buffer_(*count)) HSTRING** activatableClassIds,
+     _Out_ DWORD* count
+     );
+ 

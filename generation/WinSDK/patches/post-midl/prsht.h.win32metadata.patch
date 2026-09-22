@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
-index 9b253c6dcaac6dd5b3483ab6f1f79d47a46b16c2..9a119ba123bfcc784170ec4e1f7d3a9973563543 100644
+index 9b253c6dca..0a8cb71b8b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
 @@ -1,4 +1,5 @@
@@ -8,27 +8,74 @@ index 9b253c6dcaac6dd5b3483ab6f1f79d47a46b16c2..9a119ba123bfcc784170ec4e1f7d3a99
  
  /*****************************************************************************\
  *                                                                             *
+@@ -101,8 +102,8 @@ struct _PROPSHEETPAGEA;
+ struct _PROPSHEETPAGEW;
+ #endif
+ 
+-typedef UINT (CALLBACK *LPFNPSPCALLBACKA)(HWND hwnd, UINT uMsg, struct _PROPSHEETPAGEA *ppsp);
+-typedef UINT (CALLBACK *LPFNPSPCALLBACKW)(HWND hwnd, UINT uMsg, struct _PROPSHEETPAGEW *ppsp);
++typedef UINT (CALLBACK *LPFNPSPCALLBACKA)(HWND hwnd, _Win32_AssociatedEnum_(PSPCB_MESSAGE) UINT uMsg, struct _PROPSHEETPAGEA *ppsp);
++typedef UINT (CALLBACK *LPFNPSPCALLBACKW)(HWND hwnd, _Win32_AssociatedEnum_(PSPCB_MESSAGE) UINT uMsg, struct _PROPSHEETPAGEW *ppsp);
+ 
+ #ifdef UNICODE
+ #define LPFNPSPCALLBACK         LPFNPSPCALLBACKW
 @@ -199,7 +200,7 @@ typedef struct _PROPSHEETPAGEA_V1
  } PROPSHEETPAGEA_V1, *LPPROPSHEETPAGEA_V1;
  typedef const PROPSHEETPAGEA_V1 *LPCPROPSHEETPAGEA_V1;
  
 -typedef struct _PROPSHEETPAGEA_V2
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _PROPSHEETPAGEA_V2
++typedef struct   _PROPSHEETPAGEA_V2
  {
      PROPSHEETPAGEA_V1_FIELDS
  
-@@ -582,8 +583,14 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
+@@ -582,13 +583,19 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
  #define PSCB_BUTTONPRESSED 3
  #endif  // NTDDI_VERSION >= NTDDI_WINXP
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) 
++
  WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageA(LPCPROPSHEETPAGEA constPropSheetPagePointer);
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) 
++
  WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageW(LPCPROPSHEETPAGEW constPropSheetPagePointer);
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINCOMMCTRLAPI BOOL           WINAPI DestroyPropertySheetPage(HPROPSHEETPAGE);
  
- WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
+-WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetA(LPCPROPSHEETHEADERA);
+ 
+-WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
+ 
+ #ifdef UNICODE
+ #define CreatePropertySheetPage  CreatePropertySheetPageW
+@@ -907,5 +914,28 @@ typedef struct _PSHNOTIFY
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma warning(pop)
++
++#ifdef WIN32METADATA
++#pragma push_macro("PSPCB_ADDREF")
++#undef PSPCB_ADDREF
++#pragma push_macro("PSPCB_CREATE")
++#undef PSPCB_CREATE
++#pragma push_macro("PSPCB_RELEASE")
++#undef PSPCB_RELEASE
++#pragma push_macro("PSPCB_SI_INITDIALOG")
++#undef PSPCB_SI_INITDIALOG
++enum PSPCB_MESSAGE : unsigned int
++{
++    PSPCB_ADDREF = 0U,
++    PSPCB_CREATE = 2U,
++    PSPCB_RELEASE = 1U,
++    PSPCB_SI_INITDIALOG = 1025U,
++};
++#pragma pop_macro("PSPCB_SI_INITDIALOG")
++#pragma pop_macro("PSPCB_RELEASE")
++#pragma pop_macro("PSPCB_CREATE")
++#pragma pop_macro("PSPCB_ADDREF")
++#endif
++
+ #endif
+ 

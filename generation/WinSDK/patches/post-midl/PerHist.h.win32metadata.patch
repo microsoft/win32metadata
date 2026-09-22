@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h b/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
-index 8e78d8f770368679c8184b829afb0c70b1be3eff..c191a0cb01404d76e300106f85973e31f32bd86e 100644
+index 8e78d8f770..220407350a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
 @@ -78,6 +78,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 8e78d8f770368679c8184b829afb0c70b1be3eff..c191a0cb01404d76e300106f85973e31
      
      MIDL_INTERFACE("91A565C1-E38F-11d0-94BF-00A0C9055CBF")
 -    IPersistHistory : public IPersist
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IPersistHistory : public IPersist
++      IPersistHistory : public IPersist
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE LoadHistory( 

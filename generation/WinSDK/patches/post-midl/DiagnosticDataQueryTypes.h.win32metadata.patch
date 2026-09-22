@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h
-index 5bad92868a3063471f0ad86b5a5abbeb554046a0..a94c595f8c75eb3da413fa32d90d6df0dbee2d8c 100644
+index 5bad92868a..5df2a78bd0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h
 @@ -28,6 +28,7 @@
@@ -15,7 +15,7 @@ index 5bad92868a3063471f0ad86b5a5abbeb554046a0..a94c595f8c75eb3da413fa32d90d6df0
      } 	DdqAccessLevel;
  
 -typedef struct tagDIAGNOSTIC_DATA_RECORD
-+typedef struct _Windows_SupportedOS_19041_ tagDIAGNOSTIC_DATA_RECORD
++typedef struct  tagDIAGNOSTIC_DATA_RECORD
      {
      INT64 rowId;
      UINT64 timestamp;

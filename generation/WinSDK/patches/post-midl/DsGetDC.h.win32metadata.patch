@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h b/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h
-index ec178be31a..971413e7fd 100644
+index ec178be31a..f7f42013a6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DsGetDC.h
 @@ -27,6 +27,7 @@ Notes:
@@ -15,7 +15,7 @@ index ec178be31a..971413e7fd 100644
  //
  
 -typedef struct _DOMAIN_CONTROLLER_INFOA {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DOMAIN_CONTROLLER_INFOA {
++typedef struct   _DOMAIN_CONTROLLER_INFOA {
      LPSTR DomainControllerName;
      LPSTR DomainControllerAddress;
      ULONG DomainControllerAddressType;
@@ -24,7 +24,7 @@ index ec178be31a..971413e7fd 100644
  } DOMAIN_CONTROLLER_INFOA, *PDOMAIN_CONTROLLER_INFOA;
  
 -typedef struct _DOMAIN_CONTROLLER_INFOW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DOMAIN_CONTROLLER_INFOW {
++typedef struct   _DOMAIN_CONTROLLER_INFOW {
  #ifdef MIDL_PASS
      [string,unique] wchar_t *DomainControllerName;
  #else // MIDL_PASS
@@ -32,8 +32,8 @@ index ec178be31a..971413e7fd 100644
  // Function Prototypes
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  _Success_(return == ERROR_SUCCESS)
  DSGETDCAPI
  DWORD
@@ -42,11 +42,11 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPCSTR SiteName,
      _In_ ULONG Flags,
 -    _Outptr_result_nullonfailure_ PDOMAIN_CONTROLLER_INFOA *DomainControllerInfo
-+    _Outptr_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) PDOMAIN_CONTROLLER_INFOA *DomainControllerInfo
++    _Outptr_result_nullonfailure_  PDOMAIN_CONTROLLER_INFOA *DomainControllerInfo
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  _Success_(return == ERROR_SUCCESS)
  DSGETDCAPI
  DWORD
@@ -55,7 +55,7 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPCWSTR SiteName,
      _In_ ULONG Flags,
 -    _Outptr_result_nullonfailure_ PDOMAIN_CONTROLLER_INFOW *DomainControllerInfo
-+    _Outptr_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) PDOMAIN_CONTROLLER_INFOW *DomainControllerInfo
++    _Outptr_result_nullonfailure_  PDOMAIN_CONTROLLER_INFOW *DomainControllerInfo
      );
  
  #ifdef UNICODE
@@ -63,8 +63,8 @@ index ec178be31a..971413e7fd 100644
  #define DsGetDcName DsGetDcNameA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  _Success_(return == ERROR_SUCCESS)
  DSGETDCAPI
  DWORD
@@ -72,19 +72,20 @@ index ec178be31a..971413e7fd 100644
  DsGetSiteNameA(
      _In_opt_ LPCSTR ComputerName,
 -    _Outptr_result_nullonfailure_ LPSTR *SiteName
-+    _Outptr_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) LPSTR *SiteName
++    _Outptr_result_nullonfailure_  LPSTR *SiteName
      );
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
  DsGetSiteNameW(
      _In_opt_ LPCWSTR ComputerName,
 -    _Outptr_result_nullonfailure_ LPWSTR *SiteName
-+    _Outptr_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) LPWSTR *SiteName
++    _Outptr_result_nullonfailure_  LPWSTR *SiteName
      );
  
  #ifdef UNICODE
@@ -92,8 +93,8 @@ index ec178be31a..971413e7fd 100644
  #define DsGetSiteName DsGetSiteNameA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -101,17 +102,19 @@ index ec178be31a..971413e7fd 100644
      _In_ LPCWSTR SubnetName
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  DWORD
  WINAPI
-@@ -306,6 +319,8 @@ DsValidateSubnetNameA(
+@@ -305,7 +318,9 @@ DsValidateSubnetNameA(
+ //
  #ifdef _WINSOCK2API_
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -120,12 +123,13 @@ index ec178be31a..971413e7fd 100644
      _In_ DWORD EntryCount,
      _In_reads_(EntryCount) PSOCKET_ADDRESS SocketAddresses,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) LPWSTR **SiteNames
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPWSTR **SiteNames
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount)  LPWSTR **SiteNames
      );
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -134,16 +138,18 @@ index ec178be31a..971413e7fd 100644
      _In_ DWORD EntryCount,
      _In_reads_(EntryCount) PSOCKET_ADDRESS SocketAddresses,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) LPSTR **SiteNames
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPSTR **SiteNames
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount)  LPSTR **SiteNames
      );
  
  #ifdef UNICODE
-@@ -334,6 +351,8 @@ DsAddressToSiteNamesA(
+@@ -333,7 +350,9 @@ DsAddressToSiteNamesA(
+ #define DsAddressToSiteNames DsAddressToSiteNamesA
  #endif // !UNICODE
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -153,13 +159,14 @@ index ec178be31a..971413e7fd 100644
      _In_reads_(EntryCount) PSOCKET_ADDRESS SocketAddresses,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) LPWSTR **SiteNames,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) LPWSTR **SubnetNames
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPWSTR **SiteNames,
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPWSTR **SubnetNames
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount)  LPWSTR **SiteNames,
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount)  LPWSTR **SubnetNames
      );
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -169,8 +176,8 @@ index ec178be31a..971413e7fd 100644
      _In_reads_(EntryCount) PSOCKET_ADDRESS SocketAddresses,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) LPSTR **SiteNames,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) LPSTR **SubnetNames
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPSTR **SiteNames,
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPSTR **SubnetNames
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount)  LPSTR **SiteNames,
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(EntryCount)  LPSTR **SubnetNames
      );
  
  #ifdef UNICODE
@@ -179,7 +186,7 @@ index ec178be31a..971413e7fd 100644
  //
  
 -typedef struct _DS_DOMAIN_TRUSTSW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_DOMAIN_TRUSTSW {
++typedef struct   _DS_DOMAIN_TRUSTSW {
  
      //
      // Name of the trusted domain.
@@ -188,16 +195,18 @@ index ec178be31a..971413e7fd 100644
  // ANSI version of the above struct
  //
 -typedef struct _DS_DOMAIN_TRUSTSA {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_DOMAIN_TRUSTSA {
++typedef struct   _DS_DOMAIN_TRUSTSA {
      LPSTR NetbiosDomainName;
      LPSTR DnsDomainName;
      ULONG Flags;
-@@ -459,24 +480,28 @@ typedef struct _DS_DOMAIN_TRUSTSA {
+@@ -458,25 +479,29 @@ typedef struct _DS_DOMAIN_TRUSTSA {
+ #define PDS_DOMAIN_TRUSTS PDS_DOMAIN_TRUSTSA
  #endif // !UNICODE
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -205,13 +214,14 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPWSTR ServerName,
      _In_ ULONG Flags,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*DomainCount) PDS_DOMAIN_TRUSTSW *Domains,
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*DomainCount) _Win32_RAIIFree_(NetApiBufferFree) PDS_DOMAIN_TRUSTSW *Domains,
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*DomainCount)  PDS_DOMAIN_TRUSTSW *Domains,
      _Out_ PULONG DomainCount
      );
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -219,16 +229,18 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPSTR ServerName,
      _In_ ULONG Flags,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*DomainCount) PDS_DOMAIN_TRUSTSA *Domains,
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*DomainCount) _Win32_RAIIFree_(NetApiBufferFree) PDS_DOMAIN_TRUSTSA *Domains,
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*DomainCount)  PDS_DOMAIN_TRUSTSA *Domains,
      _Out_ PULONG DomainCount
      );
  
-@@ -494,6 +519,8 @@ DsEnumerateDomainTrustsA (
+@@ -493,7 +518,9 @@ DsEnumerateDomainTrustsA (
+ 
  #if defined(_NTLSA_) || defined(_NTSECAPI_)
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -237,15 +249,16 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPCWSTR TrustedDomainName,
      _In_ DWORD Flags,
 -    _Outptr_result_nullonfailure_ PLSA_FOREST_TRUST_INFORMATION *ForestTrustInfo
-+    _Outptr_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) PLSA_FOREST_TRUST_INFORMATION *ForestTrustInfo
++    _Outptr_result_nullonfailure_  PLSA_FOREST_TRUST_INFORMATION *ForestTrustInfo
      );
  
  #define DS_GFTI_UPDATE_TDO      0x1     // Update TDO with information returned
  #define DS_GFTI_VALID_FLAGS     0x1     // All valid flags to DsGetForestTrustInformation
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -254,14 +267,15 @@ index ec178be31a..971413e7fd 100644
      _In_ PLSA_FOREST_TRUST_INFORMATION NewForestTrustInfo,
      _In_opt_ PLSA_FOREST_TRUST_INFORMATION OldForestTrustInfo,
 -    _Outptr_result_nullonfailure_ PLSA_FOREST_TRUST_INFORMATION *MergedForestTrustInfo
-+    _Outptr_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) PLSA_FOREST_TRUST_INFORMATION *MergedForestTrustInfo
++    _Outptr_result_nullonfailure_  PLSA_FOREST_TRUST_INFORMATION *MergedForestTrustInfo
      );
  
  #endif // _NTLSA_ || _NTSECAPI_
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -269,12 +283,13 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPCWSTR ServerName,
      _Out_ PULONG EntryCount,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*EntryCount) LPWSTR **SiteNames
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPWSTR **SiteNames
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*EntryCount)  LPWSTR **SiteNames
      );
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -282,7 +297,7 @@ index ec178be31a..971413e7fd 100644
      _In_opt_ LPCSTR ServerName,
      _Out_ PULONG EntryCount,
 -    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*EntryCount) LPSTR **SiteNames
-+    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*EntryCount) _Win32_RAIIFree_(NetApiBufferFree) LPSTR **SiteNames
++    _Outptr_result_nullonfailure_ _Outptr_result_buffer_(*EntryCount)  LPSTR **SiteNames
      );
  
  #ifdef UNICODE
@@ -290,8 +305,8 @@ index ec178be31a..971413e7fd 100644
  #define DsGetDcSiteCoverage DsGetDcSiteCoverageA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -299,8 +314,8 @@ index ec178be31a..971413e7fd 100644
      _In_ LPWSTR DnsHostName
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -308,8 +323,8 @@ index ec178be31a..971413e7fd 100644
              DS_WRITABLE_REQUIRED )
  
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -321,8 +336,8 @@ index ec178be31a..971413e7fd 100644
 +    _Out_ _Win32_RAIIFree_(DsGetDcCloseW) PHANDLE RetGetDcContext
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -335,12 +350,14 @@ index ec178be31a..971413e7fd 100644
      );
  
  #ifdef UNICODE
-@@ -633,25 +674,29 @@ DsGetDcOpenA(
+@@ -632,26 +673,30 @@ DsGetDcOpenA(
+ #define DsGetDcOpen DsGetDcOpenA
  #endif // !UNICODE
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -349,13 +366,14 @@ index ec178be31a..971413e7fd 100644
      _Out_opt_ PULONG SockAddressCount,
 -    _Outptr_opt_result_buffer_(*SockAddressCount) LPSOCKET_ADDRESS *SockAddresses,
 -    _Outptr_opt_result_nullonfailure_ LPWSTR *DnsHostName
-+    _Outptr_opt_result_buffer_(*SockAddressCount) _Win32_RAIIFree_(LocalFree) LPSOCKET_ADDRESS *SockAddresses,
-+    _Outptr_opt_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) LPWSTR *DnsHostName
++    _Outptr_opt_result_buffer_(*SockAddressCount)  LPSOCKET_ADDRESS *SockAddresses,
++    _Outptr_opt_result_nullonfailure_  LPWSTR *DnsHostName
      );
  
- _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
++
++
  DSGETDCAPI
  DWORD
  WINAPI
@@ -364,8 +382,8 @@ index ec178be31a..971413e7fd 100644
      _Out_opt_ PULONG SockAddressCount,
 -    _Outptr_opt_result_buffer_(*SockAddressCount) LPSOCKET_ADDRESS *SockAddresses,
 -    _Outptr_opt_result_nullonfailure_ LPSTR *DnsHostName
-+    _Outptr_opt_result_buffer_(*SockAddressCount) _Win32_RAIIFree_(LocalFree) LPSOCKET_ADDRESS *SockAddresses,
-+    _Outptr_opt_result_nullonfailure_ _Win32_RAIIFree_(NetApiBufferFree) LPSTR *DnsHostName
++    _Outptr_opt_result_buffer_(*SockAddressCount)  LPSOCKET_ADDRESS *SockAddresses,
++    _Outptr_opt_result_nullonfailure_  LPSTR *DnsHostName
      );
  
  #ifdef UNICODE
@@ -373,8 +391,28 @@ index ec178be31a..971413e7fd 100644
  #define DsGetDcNext DsGetDcNextA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DSGETDCAPI
  VOID
  WINAPI
+@@ -683,4 +730,19 @@ DsGetDcCloseW(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DS_INET_ADDRESS")
++#undef DS_INET_ADDRESS
++#pragma push_macro("DS_NETBIOS_ADDRESS")
++#undef DS_NETBIOS_ADDRESS
++enum KERB_ADDRESS_TYPE : unsigned int
++{
++    DS_INET_ADDRESS = 1U,
++    DS_NETBIOS_ADDRESS = 2U,
++};
++#pragma pop_macro("DS_NETBIOS_ADDRESS")
++#pragma pop_macro("DS_INET_ADDRESS")
++#endif
++
+ #endif // _DSGETDC_

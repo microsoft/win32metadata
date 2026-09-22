@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
+index af6fcb5bcc..790fbb5289 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1996-1999 Microsoft Corporation
+@@ -248,7 +249,7 @@ typedef ISceSvcAttachmentPersistInfo __RPC_FAR *LPSCESVCATTACHMENTPERSISTINFO;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+ 
+-    MIDL_INTERFACE("6d90e0d0-200d-11d1-affb-00c04fb984f9")
++    MIDL_INTERFACE("6d90e0d0-200d-11d1-affb-00c04fb984f9") _Windows_SupportedOS_WindowsXP_ 
+ 
+     ISceSvcAttachmentPersistInfo : public IUnknown
+     {
+@@ -259,7 +260,7 @@ typedef ISceSvcAttachmentPersistInfo __RPC_FAR *LPSCESVCATTACHMENTPERSISTINFO;
+             /* [out] */ PVOID *ppvData,
+             /* [out] */ PBOOL pbOverwriteAll ) = 0;
+ 
+-        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
++        _Win32_PreserveResult_ virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
+             /* [in] */  LPTSTR lpTemplateName ) = 0;
+ 
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FreeBuffer(
+@@ -347,7 +348,7 @@ typedef ISceSvcAttachmentData __RPC_FAR *LPSCESVCATTACHMENTDATA;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+ 
+-    MIDL_INTERFACE("17c35fde-200d-11d1-affb-00c04fb984f9")
++    MIDL_INTERFACE("17c35fde-200d-11d1-affb-00c04fb984f9") _Windows_SupportedOS_WindowsXP_ 
+ 
+     ISceSvcAttachmentData  : public IUnknown
+     {
+@@ -461,6 +462,29 @@ typedef ISceSvcAttachmentData __RPC_FAR *LPSCESVCATTACHMENTDATA;
+ 
+ //#endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SCE_LOG_LEVEL_ALWAYS")
++#undef SCE_LOG_LEVEL_ALWAYS
++#pragma push_macro("SCE_LOG_LEVEL_ERROR")
++#undef SCE_LOG_LEVEL_ERROR
++#pragma push_macro("SCE_LOG_LEVEL_DETAIL")
++#undef SCE_LOG_LEVEL_DETAIL
++#pragma push_macro("SCE_LOG_LEVEL_DEBUG")
++#undef SCE_LOG_LEVEL_DEBUG
++enum SCE_LOG_ERR_LEVEL : int
++{
++    SCE_LOG_LEVEL_ALWAYS = 0,
++    SCE_LOG_LEVEL_ERROR = 1,
++    SCE_LOG_LEVEL_DETAIL = 2,
++    SCE_LOG_LEVEL_DEBUG = 3,
++};
++#pragma pop_macro("SCE_LOG_LEVEL_DEBUG")
++#pragma pop_macro("SCE_LOG_LEVEL_DETAIL")
++#pragma pop_macro("SCE_LOG_LEVEL_ERROR")
++#pragma pop_macro("SCE_LOG_LEVEL_ALWAYS")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 

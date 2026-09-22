@@ -1,0 +1,1002 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h b/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h
+index abc4b80aa0..97ab494c3f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+---------------------------------------------------------------------------
+ //
+ // Microsoft Windows
+@@ -311,7 +312,7 @@ NOT_BUILD_WINDOWS_DEPRECATE
+ typedef struct peer_graph_event_data_tag {
+     PEER_GRAPH_EVENT_TYPE eventType;
+     union {
+-       PEER_GRAPH_STATUS_FLAGS                  dwStatus;
++       _Win32_AssociatedEnum_(PEER_GRAPH_STATUS_FLAGS) PEER_GRAPH_STATUS_FLAGS                  dwStatus;
+        PEER_EVENT_INCOMING_DATA                 incomingData;
+        PEER_EVENT_RECORD_CHANGE_DATA            recordChangeData;
+        PEER_EVENT_CONNECTION_CHANGE_DATA        connectionChangeData;
+@@ -365,41 +366,41 @@ typedef struct peer_security_interface_tag {
+ /////////////////////////////////////////////////////////////////////////////
+ // API Definitions
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphStartup(
+                 _In_  WORD                  wVersionRequested,
+                 _Out_ PPEER_VERSION_DATA    pVersionData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphShutdown();
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ VOID WINAPI PeerGraphFreeData(
+                 _In_  PVOID       pvData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetItemCount(
+                 _In_    HPEERENUM   hPeerEnum,
+                 _Out_   ULONG       * pCount);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetNextItem(
+                 _In_  HPEERENUM     hPeerEnum,
+                 _Inout_ ULONG       * pCount,
+                 _Outptr_result_buffer_(*pCount) PVOID ** pppvItems);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphEndEnumeration(
+                 _In_  HPEERENUM   hPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphCreate(
+                 _In_    PPEER_GRAPH_PROPERTIES          pGraphProperties,
+                 _In_    PCWSTR                          pwzDatabaseName,
+                 _In_opt_ PPEER_SECURITY_INTERFACE       pSecurityInterface,
+                 _Out_   HGRAPH                          * phGraph);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphOpen(
+                 _In_  PCWSTR                                            pwzGraphId,
+                 _In_  PCWSTR                                            pwzPeerId,
+@@ -409,48 +410,48 @@ HRESULT WINAPI PeerGraphOpen(
+                 _In_reads_opt_(cRecordTypeSyncPrecedence) const GUID   * pRecordTypeSyncPrecedence,
+                 _Out_ HGRAPH                                            * phGraph);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphListen(
+                 _In_  HGRAPH        hGraph,
+                 _In_opt_ DWORD      dwScope,
+                 _In_opt_  DWORD     dwScopeId,
+                 _In_opt_  WORD      wPort);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphConnect(
+                 _In_  HGRAPH            hGraph,
+                 _In_opt_  PCWSTR        pwzPeerId,
+                 _In_  PPEER_ADDRESS     pAddress,
+                 _Out_ ULONGLONG         * pullConnectionId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphClose(
+                 _In_  HGRAPH      hGraph);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphDelete(
+                 _In_  PCWSTR      pwzGraphId,
+                 _In_  PCWSTR      pwzPeerId,
+                 _In_  PCWSTR      pwzDatabaseName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetStatus(
+                 _In_  HGRAPH       hGraph,
+                 _Out_   DWORD      * pdwStatus);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetProperties(
+                 _In_  HGRAPH                        hGraph,
+                 _Outptr_ PPEER_GRAPH_PROPERTIES  * ppGraphProperties);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphSetProperties(
+                 _In_  HGRAPH                    hGraph,
+                 _In_  PPEER_GRAPH_PROPERTIES    pGraphProperties);
+ 
+ // Eventing interfaces
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphRegisterEvent(
+                 _In_  HGRAPH                    hGraph,
+                 _In_  HANDLE                    hEvent,
+@@ -458,11 +459,11 @@ HRESULT WINAPI PeerGraphRegisterEvent(
+                 _In_reads_(cEventRegistrations) PEER_GRAPH_EVENT_REGISTRATION  * pEventRegistrations,
+                 _Out_ HPEEREVENT                * phPeerEvent);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphUnregisterEvent(
+                 _In_  HPEEREVENT   hPeerEvent);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetEventData(
+                 _In_  HPEEREVENT                    hPeerEvent,
+                 _Outptr_ PPEER_GRAPH_EVENT_DATA  * ppEventData);
+@@ -470,53 +471,53 @@ HRESULT WINAPI PeerGraphGetEventData(
+ 
+ // Data Storage
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetRecord(
+                 _In_  HGRAPH             hGraph,
+                 _In_  const GUID         * pRecordId,
+                 _Outptr_ PPEER_RECORD * ppRecord);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphAddRecord(
+                 _In_  HGRAPH        hGraph,
+                 _In_  PPEER_RECORD  pRecord,
+                 _Out_ GUID          * pRecordId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphUpdateRecord(
+                 _In_  HGRAPH            hGraph,
+                 _In_  PPEER_RECORD      pRecord);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphDeleteRecord(
+                 _In_  HGRAPH       hGraph,
+                 _In_  const GUID * pRecordId,
+                 _In_  BOOL         fLocal);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphEnumRecords(
+                 _In_  HGRAPH            hGraph,
+                 _In_opt_  const GUID    * pRecordType,
+                 _In_opt_  PCWSTR        pwzPeerId,
+                 _Out_ HPEERENUM         * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphSearchRecords(
+                 _In_  HGRAPH        hGraph,
+                 _In_  PCWSTR        pwzCriteria,
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphExportDatabase(
+                 _In_  HGRAPH       hGraph,
+                 _In_  PCWSTR       pwzFilePath);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphImportDatabase(
+                 _In_  HGRAPH       hGraph,
+                 _In_  PCWSTR       pwzFilePath);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphValidateDeferredRecords(
+                 _In_  HGRAPH                        hGraph,
+                 _In_  ULONG                         cRecordIds,
+@@ -525,14 +526,14 @@ HRESULT WINAPI PeerGraphValidateDeferredRecords(
+ 
+ // Node/Connection interfaces
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphOpenDirectConnection(
+                 _In_  HGRAPH            hGraph,
+                 _In_  PCWSTR            pwzPeerId,
+                 _In_  PPEER_ADDRESS     pAddress,
+                 _Out_ ULONGLONG         * pullConnectionId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphSendData(
+                 _In_  HGRAPH                hGraph,
+                 _In_  ULONGLONG             ullConnectionId,
+@@ -540,46 +541,46 @@ HRESULT WINAPI PeerGraphSendData(
+                 _In_  ULONG                 cbData,
+                 _In_reads_bytes_(cbData) PVOID   pvData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphCloseDirectConnection(
+                 _In_  HGRAPH       hGraph,
+                 _In_  ULONGLONG    ullConnectionId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphEnumConnections(
+                 _In_  HGRAPH        hGraph,
+                 _In_  DWORD         dwFlags,         // PEER_CONNECTION_FLAGS
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphEnumNodes(
+                 _In_  HGRAPH        hGraph,
+                 _In_opt_ PCWSTR     pwzPeerId,
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphSetPresence(
+                 _In_  HGRAPH       hGraph,
+                 _In_  BOOL         fPresent);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphGetNodeInfo(
+                 _In_  HGRAPH                hGraph,
+                 _In_  ULONGLONG             ullNodeId,
+                 _Outptr_ PPEER_NODE_INFO * ppNodeInfo);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphSetNodeAttributes(
+                 _In_  HGRAPH       hGraph,
+                 _In_  PCWSTR       pwzAttributes);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphPeerTimeToUniversalTime(
+                 _In_  HGRAPH       hGraph,
+                 _In_  FILETIME *   pftPeerTime,
+                 _Out_ FILETIME *   pftUniversalTime);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2pgraph.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGraphUniversalTimeToPeerTime(
+                 _In_  HGRAPH       hGraph,
+                 _In_  FILETIME *   pftUniversalTime,
+@@ -599,22 +600,22 @@ HRESULT WINAPI PeerGraphUniversalTimeToPeerTime(
+ 
+ #include <wincrypt.h>
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ VOID    WINAPI PeerFreeData(
+                 _In_opt_    LPCVOID     pvData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGetItemCount(
+                 _In_    HPEERENUM       hPeerEnum,
+                 _Out_   ULONG           * pCount);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGetNextItem(
+                 _In_  HPEERENUM                     hPeerEnum,
+                 _Inout_ ULONG                       * pCount,
+                 _Outptr_result_buffer_(*pCount) PVOID   ** pppvItems);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerEndEnumeration(
+                 _In_  HPEERENUM    hPeerEnum);
+ 
+@@ -848,27 +849,27 @@ typedef struct peer_name_pair_tag {
+ 
+ #ifndef MIDL_PASS
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupStartup(
+                 _In_  WORD                  wVersionRequested,
+                 _Out_ PPEER_VERSION_DATA    pVersionData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupShutdown();
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupCreate(
+                 _In_  PPEER_GROUP_PROPERTIES    pProperties,
+                 _Out_ HGROUP                    * phGroup);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupOpen(
+                 _In_  PCWSTR       pwzIdentity,
+                 _In_  PCWSTR       pwzGroupPeerName,
+                 _In_opt_  PCWSTR   pwzCloud,
+                 _Out_ HGROUP       * phGroup);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupJoin(
+                 _In_  PCWSTR        pwzIdentity,
+                 _In_  PCWSTR        pwzInvitation,
+@@ -877,7 +878,7 @@ HRESULT WINAPI PeerGroupJoin(
+ 
+ 
+ #if NTDDI_VERSION >= NTDDI_VISTA
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupPasswordJoin(
+                 _In_  PCWSTR        pwzIdentity,
+                 _In_  PCWSTR        pwzInvitation,
+@@ -886,28 +887,28 @@ HRESULT WINAPI PeerGroupPasswordJoin(
+                 _Out_ HGROUP        * phGroup);
+ #endif
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupConnect(
+                 _In_  HGROUP       hGroup);
+ 
+ #if NTDDI_VERSION >= NTDDI_VISTA
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupConnectByAddress(
+                 _In_  HGROUP                            hGroup,
+                       ULONG                             cAddresses,
+                 _In_reads_(cAddresses) PPEER_ADDRESS   pAddresses);
+ #endif
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupClose(
+                 _In_  HGROUP       hGroup);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupDelete(
+                 _In_  PCWSTR       pwzIdentity,
+                 _In_  PCWSTR       pwzGroupPeerName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupCreateInvitation(
+                 _In_  HGROUP                        hGroup,
+                 _In_  PCWSTR                        pwzIdentityInfo,
+@@ -917,58 +918,58 @@ HRESULT WINAPI PeerGroupCreateInvitation(
+                 _Outptr_ PWSTR                   * ppwzInvitation);
+ 
+ #if NTDDI_VERSION >= NTDDI_VISTA
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupCreatePasswordInvitation(
+                 _In_  HGROUP        hGroup,
+                 _Outptr_ PWSTR   * ppwzInvitation);
+ #endif
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupParseInvitation(
+                 _In_  PCWSTR                        pwzInvitation,
+                 _Outptr_ PPEER_INVITATION_INFO   * ppInvitationInfo);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupGetStatus(
+                 _In_  HGROUP        hGroup,
+                 _Out_ DWORD         * pdwStatus);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupGetProperties(
+                 _In_  HGROUP                        hGroup,
+                 _Outptr_ PPEER_GROUP_PROPERTIES  * ppProperties);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupSetProperties(
+                 _In_  HGROUP                    hGroup,
+                 _In_  PPEER_GROUP_PROPERTIES    pProperties);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupEnumMembers(
+                 _In_  HGROUP        hGroup,
+                 _In_  DWORD         dwFlags,      // PEER_MEMBER_FLAGS
+                 _In_opt_ PCWSTR     pwzIdentity,
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupOpenDirectConnection(
+                 _In_  HGROUP            hGroup,
+                 _In_  PCWSTR            pwzIdentity,
+                 _In_  PPEER_ADDRESS     pAddress,
+                 _Out_ ULONGLONG         * pullConnectionId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupCloseDirectConnection(
+                 _In_  HGROUP       hGroup,
+                 _In_  ULONGLONG    ullConnectionId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupEnumConnections(
+                 _In_  HGROUP        hGroup,
+                 _In_  DWORD         dwFlags,         // PEER_CONNECTION_FLAGS
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupSendData(
+                 _In_  HGROUP                hGroup,
+                 _In_  ULONGLONG             ullConnectionId,
+@@ -979,7 +980,7 @@ HRESULT WINAPI PeerGroupSendData(
+ 
+ // Eventing interfaces
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupRegisterEvent(
+                 _In_  HGROUP                hGroup,
+                 _In_  HANDLE                hEvent,
+@@ -987,11 +988,11 @@ HRESULT WINAPI PeerGroupRegisterEvent(
+                 _In_reads_(cEventRegistration) PEER_GROUP_EVENT_REGISTRATION   * pEventRegistrations,
+                 _Out_ HPEEREVENT            * phPeerEvent);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupUnregisterEvent(
+                 _In_  HPEEREVENT   hPeerEvent);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupGetEventData(
+                 _In_  HPEEREVENT                    hPeerEvent,
+                 _Outptr_ PPEER_GROUP_EVENT_DATA  * ppEventData);
+@@ -999,51 +1000,51 @@ HRESULT WINAPI PeerGroupGetEventData(
+ 
+ // Data Storage
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupGetRecord(
+                 _In_  HGROUP                hGroup,
+                 _In_  const GUID            * pRecordId,
+                 _Outptr_ PPEER_RECORD    * ppRecord);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupAddRecord(
+                 _In_  HGROUP        hGroup,
+                 _In_  PPEER_RECORD pRecord,
+                 _Out_ GUID          * pRecordId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupUpdateRecord(
+                 _In_  HGROUP        hGroup,
+                 _In_  PPEER_RECORD pRecord);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupDeleteRecord(
+                 _In_  HGROUP       hGroup,
+                 _In_  const GUID * pRecordId);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupEnumRecords(
+                 _In_  HGROUP        hGroup,
+                 _In_opt_ const GUID * pRecordType,
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupSearchRecords(
+                 _In_  HGROUP        hGroup,
+                 _In_  PCWSTR        pwzCriteria,
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupExportDatabase(
+                 _In_  HGROUP       hGroup,
+                 _In_  PCWSTR       pwzFilePath);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupImportDatabase(
+                 _In_  HGROUP       hGroup,
+                 _In_  PCWSTR       pwzFilePath);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupIssueCredentials(
+                 _In_ HGROUP                     hGroup,
+                 _In_ PCWSTR                     pwzSubjectIdentity,
+@@ -1051,13 +1052,13 @@ HRESULT WINAPI PeerGroupIssueCredentials(
+                 _In_ DWORD                      dwFlags,
+                 _Outptr_opt_ PWSTR           * ppwzInvitation);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupExportConfig(
+                 _In_  HGROUP        hGroup,
+                 _In_  PCWSTR        pwzPassword,
+                 _Outptr_ PWSTR   * ppwzXML);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupImportConfig(
+                 _In_ PCWSTR         pwzXML,
+                 _In_ PCWSTR         pwzPassword,
+@@ -1065,20 +1066,20 @@ HRESULT WINAPI PeerGroupImportConfig(
+                 _Outptr_ PWSTR   * ppwzIdentity,
+                 _Outptr_ PWSTR   * ppwzGroup);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupPeerTimeToUniversalTime(
+                 _In_  HGROUP       hGroup,
+                 _In_  FILETIME *   pftPeerTime,
+                 _Out_ FILETIME *   pftUniversalTime);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupUniversalTimeToPeerTime(
+                 _In_  HGROUP       hGroup,
+                 _In_  FILETIME *   pftUniversalTime,
+                 _Out_ FILETIME *   pftPeerTime);
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN7
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerGroupResumePasswordAuthentication(
+                 _In_ HGROUP hGroup,
+                 _In_ HPEEREVENT hPeerEventHandle);
+@@ -1099,65 +1100,65 @@ HRESULT WINAPI PeerGroupResumePasswordAuthentication(
+ 
+ // API Definitions
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityCreate(
+                 _In_opt_  PCWSTR        pwzClassifier,
+                 _In_opt_  PCWSTR        pwzFriendlyName,
+                 _In_opt_  HCRYPTPROV    hCryptProv,
+                 _Outptr_ PWSTR       * ppwzIdentity);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityGetFriendlyName(
+                 _In_opt_  PCWSTR    pwzIdentity,
+                 _Outptr_ PWSTR   * ppwzFriendlyName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentitySetFriendlyName(
+                 _In_opt_  PCWSTR    pwzIdentity,
+                 _In_  PCWSTR       pwzFriendlyName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityGetCryptKey(
+                 _In_opt_  PCWSTR    pwzIdentity,
+                 _Out_ HCRYPTPROV    * phCryptProv);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityDelete(
+                 _In_  PCWSTR       pwzIdentity);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerEnumIdentities(
+                 _Out_ HPEERENUM  * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerEnumGroups(
+                 _In_  PCWSTR        pwzIdentity,
+                 _Out_ HPEERENUM     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCreatePeerName(
+                 _In_opt_ PCWSTR     pwzIdentity,
+                 _In_opt_ PCWSTR     pwzClassifier,
+                 _Outptr_ PWSTR   * ppwzPeerName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityGetXML(
+                 _In_opt_  PCWSTR    pwzIdentity,
+                 _Outptr_ PWSTR   * ppwzIdentityXML);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityExport(
+                 _In_opt_  PCWSTR    pwzIdentity,
+                 _In_  PCWSTR        pwzPassword,
+                 _Outptr_ PWSTR   * ppwzExportXML);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityImport(
+                 _In_  PCWSTR        pwzImportXML,
+                 _In_  PCWSTR        pwzPassword,
+                 _Outptr_ PWSTR   * ppwzIdentity);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerIdentityGetDefault(
+                 _Outptr_ PWSTR   * ppwzPeerName);
+ 
+@@ -1264,23 +1265,23 @@ typedef PPEER_PEOPLE_NEAR_ME *PPPEER_PEOPLE_NEAR_ME;
+ /////////////////////////////////////////////////////////////////////////////
+ // APIs
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabStartup(
+                 _In_  WORD      wVersionRequested);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabShutdown();
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabSignin(
+                 _In_opt_    HWND      hwndParent,
+                 _In_        DWORD     dwSigninOptions);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabSignout(
+                 _In_  DWORD     dwSigninOptions);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetSigninOptions(
+                 _Out_  DWORD    * pdwSigninOptions);
+ 
+@@ -1353,72 +1354,72 @@ typedef const PEER_APPLICATION_REGISTRATION_INFO * PCPEER_APPLICATION_REGISTRATI
+ // API's
+ 
+ // AppInvite sender side API's
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabAsyncInviteContact(
+                     _In_opt_ PCPEER_CONTACT             pcContact,
+                     _In_  PCPEER_ENDPOINT               pcEndpoint,
+                     _In_  PCPEER_INVITATION             pcInvitation,
+                     _In_opt_  HANDLE                    hEvent,
+-                    _Out_opt_ HANDLE                    * phInvitation);
++                    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE                    * phInvitation);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetInvitationResponse(
+                     _In_  HANDLE                            hInvitation,
+                     _Outptr_ PPEER_INVITATION_RESPONSE   * ppInvitationResponse);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabCancelInvitation(
+                     _In_  HANDLE        hInvitation);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabCloseHandle(
+                     _In_  HANDLE        hInvitation);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabInviteContact(
+                     _In_opt_     PCPEER_CONTACT             pcContact,
+                     _In_  PCPEER_ENDPOINT                   pcEndpoint,
+                     _In_  PCPEER_INVITATION                 pcInvitation,
+                     _Outptr_ PPEER_INVITATION_RESPONSE   * ppResponse);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabAsyncInviteEndpoint(
+                     _In_  PCPEER_ENDPOINT               pcEndpoint,
+                     _In_  PCPEER_INVITATION             pcInvitation,
+                     _In_opt_  HANDLE                    hEvent,
+-                    _Out_opt_ HANDLE                    * phInvitation);
++                    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE                    * phInvitation);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabInviteEndpoint(
+                     _In_  PCPEER_ENDPOINT                   pcEndpoint,
+                     _In_  PCPEER_INVITATION                 pcInvitation,
+                     _Outptr_ PPEER_INVITATION_RESPONSE   * ppResponse);
+ 
+ // AppInvite receiver side API's
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetAppLaunchInfo(
+                     _Outptr_ PPEER_APP_LAUNCH_INFO       * ppLaunchInfo);
+ 
+ // Applications registration API's
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabRegisterApplication(
+                     _In_ PCPEER_APPLICATION_REGISTRATION_INFO   pcApplication,
+-                    _In_ PEER_APPLICATION_REGISTRATION_TYPE     registrationType);
++                    _Win32_AssociatedEnum_(PEER_APPLICATION_REGISTRATION_TYPE) _In_ PEER_APPLICATION_REGISTRATION_TYPE     registrationType);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabUnregisterApplication(
+                     _In_ const GUID                             * pApplicationId,
+-                    _In_ PEER_APPLICATION_REGISTRATION_TYPE     registrationType);
++                    _Win32_AssociatedEnum_(PEER_APPLICATION_REGISTRATION_TYPE) _In_ PEER_APPLICATION_REGISTRATION_TYPE     registrationType);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetApplicationRegistrationInfo(
+                     _In_ const GUID                                     * pApplicationId,
+-                    _In_ PEER_APPLICATION_REGISTRATION_TYPE             registrationType,
++                    _Win32_AssociatedEnum_(PEER_APPLICATION_REGISTRATION_TYPE) _In_ PEER_APPLICATION_REGISTRATION_TYPE             registrationType,
+                     _Outptr_ PPEER_APPLICATION_REGISTRATION_INFO     * ppApplication);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabEnumApplicationRegistrationInfo(
+-                    _In_  PEER_APPLICATION_REGISTRATION_TYPE      registrationType,
++                    _Win32_AssociatedEnum_(PEER_APPLICATION_REGISTRATION_TYPE) _In_  PEER_APPLICATION_REGISTRATION_TYPE      registrationType,
+                     _Out_ HPEERENUM                               * phPeerEnum);
+ #endif // MIDL_PASS
+ 
+@@ -1459,68 +1460,68 @@ typedef const PEER_PRESENCE_INFO * PCPEER_PRESENCE_INFO;
+ // API's
+ 
+ // Subscriber
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetPresenceInfo(
+                 _In_opt_  PCPEER_ENDPOINT           pcEndpoint,
+                 _Outptr_ PPEER_PRESENCE_INFO     *ppPresenceInfo);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabEnumApplications(
+                 _In_opt_  PCPEER_ENDPOINT           pcEndpoint,
+                 _In_opt_  const GUID                * pApplicationId,
+                 _Out_ HPEERENUM                     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabEnumObjects(
+                 _In_opt_ PCPEER_ENDPOINT            pcEndpoint,
+                 _In_opt_ const GUID                 * pObjectId,
+                 _Out_ HPEERENUM                     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabEnumEndpoints(
+                 _In_opt_    PCPEER_CONTACT          pcContact,
+                 _Out_ HPEERENUM                     * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabRefreshEndpointData(
+                 _In_ PCPEER_ENDPOINT                pcEndpoint);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabDeleteEndpointData(
+                 _In_ PCPEER_ENDPOINT                pcEndpoint);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabQueryContactData(
+                 _In_opt_ PCPEER_ENDPOINT            pcEndpoint,
+                 _Outptr_ PWSTR                   * ppwzContactData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabSubscribeEndpointData(
+                 _In_ const PCPEER_ENDPOINT        pcEndpoint);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabUnsubscribeEndpointData(
+                 _In_ const PCPEER_ENDPOINT        pcEndpoint);
+ 
+ // Publisher
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabSetPresenceInfo(
+                 _In_ PCPEER_PRESENCE_INFO    pcPresenceInfo);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetEndpointName(
+                 _Outptr_ PWSTR            * ppwzEndpointName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabSetEndpointName(
+                 _In_ PCWSTR                  pwzEndpointName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabSetObject(
+                 _In_ PCPEER_OBJECT           pcObject);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabDeleteObject(
+                 _In_ const GUID              * pObjectId);
+ 
+@@ -1669,19 +1670,19 @@ typedef struct peer_event_request_status_changed_data_tag {
+ /////////////////////////////////////////////////////////////////////////////
+ // API's
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabRegisterEvent(
+                 _In_ HANDLE                       hEvent,
+                 _In_ DWORD                        cEventRegistration,
+                 _In_reads_(cEventRegistration) PEER_COLLAB_EVENT_REGISTRATION * pEventRegistrations,
+                 _Out_ HPEEREVENT                  *phPeerEvent);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetEventData(
+                 _In_  HPEEREVENT                        hPeerEvent,
+                 _Outptr_ PPEER_COLLAB_EVENT_DATA     * ppEventData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabUnregisterEvent(
+                 _In_ HPEEREVENT                         hPeerEvent);
+ 
+@@ -1694,7 +1695,7 @@ HRESULT WINAPI PeerCollabUnregisterEvent(
+ /////////////////////////////////////////////////////////////////////////////
+ // API's
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabEnumPeopleNearMe(
+                 _Out_ HPEERENUM                 *phPeerEnum);
+ 
+@@ -1707,34 +1708,34 @@ HRESULT WINAPI PeerCollabEnumPeopleNearMe(
+ /////////////////////////////////////////////////////////////////////////////
+ // API's
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabAddContact(
+                 _In_           PCWSTR           pwzContactData,
+                 _Outptr_opt_ PPEER_CONTACT   * ppContact);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabDeleteContact(
+                 _In_           PCWSTR           pwzPeerName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabGetContact(
+                 _In_opt_ PCWSTR                 pwzPeerName,
+                 _Outptr_ PPEER_CONTACT       * ppContact);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabUpdateContact(
+                 _In_    PCPEER_CONTACT          pContact);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabEnumContacts(
+                 _Out_ HPEERENUM                 * phPeerEnum);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabExportContact(
+                 _In_opt_  PCWSTR                pwzPeerName,
+                 _Outptr_ PWSTR               * ppwzContactData);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerCollabParseContact(
+                 _In_        PCWSTR              pwzContactData,
+                 _Outptr_ PPEER_CONTACT       * ppContact);
+@@ -1796,46 +1797,46 @@ typedef struct peer_pnrp_registration_info_tag {
+ /////////////////////////////////////////////////////////////////////////////
+ // API's
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerNameToPeerHostName(
+                 _In_    PCWSTR      pwzPeerName,
+                 _Outptr_ PWSTR   *ppwzHostName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerHostNameToPeerName(
+                 _In_  PCWSTR        pwzHostName,
+                 _Outptr_ PWSTR   *ppwzPeerName);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpStartup(
+                 _In_ WORD           wVersionRequested);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpShutdown();
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpRegister(
+                   _In_  PCWSTR                            pcwzPeerName,
+                   _In_opt_  PPEER_PNRP_REGISTRATION_INFO  pRegistrationInfo,
+                   _Out_ HREGISTRATION                    *phRegistration);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpUpdateRegistration(
+                   _In_ HREGISTRATION                 hRegistration,
+                   _In_ PPEER_PNRP_REGISTRATION_INFO  pRegistrationInfo);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpUnregister(
+                 _In_ HREGISTRATION   hRegistration);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpResolve(
+                   _In_ PCWSTR                           pcwzPeerName,
+                   _In_opt_ PCWSTR                       pcwzCloudName,
+                   _Inout_ ULONG                         *pcEndpoints,
+                   _Outptr_result_buffer_(*pcEndpoints) PPEER_PNRP_ENDPOINT_INFO  *ppEndpoints);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpStartResolve(
+                   _In_  PCWSTR          pcwzPeerName,
+                   _In_opt_  PCWSTR      pcwzCloudName,
+@@ -1843,17 +1844,17 @@ HRESULT WINAPI PeerPnrpStartResolve(
+                   _In_  HANDLE          hEvent,
+                   _Out_ HRESOLUTION    *phResolve);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpGetCloudInfo(
+                   _Out_ ULONG                                               *pcNumClouds,
+                   _Outptr_result_buffer_(*pcNumClouds) PPEER_PNRP_CLOUD_INFO    *ppCloudInfo);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpGetEndpoint(
+                   _In_  HRESOLUTION                       hResolve,
+                   _Outptr_ PPEER_PNRP_ENDPOINT_INFO   *ppEndpoint);
+ 
+-NOT_BUILD_WINDOWS_DEPRECATE
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
+ HRESULT WINAPI PeerPnrpEndResolve(
+                   _In_ HRESOLUTION   hResolve);
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h b/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h
-index d3993236e0..50b300c187 100644
+index d3993236e0..5b586ef90c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h
 @@ -5,6 +5,7 @@
@@ -15,7 +15,7 @@ index d3993236e0..50b300c187 100644
  // The enum values match the equivalent VARIANT types.
  //
 -enum HTTP_TRACE_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ HTTP_TRACE_TYPE
++enum   HTTP_TRACE_TYPE
  { 
      HTTP_TRACE_TYPE_BYTE = 17,         // mof type "uint8"
      HTTP_TRACE_TYPE_USHORT = 18,       // mof type "uint16"
@@ -24,7 +24,7 @@ index d3993236e0..50b300c187 100644
  //
  
 -struct HTTP_TRACE_EVENT
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ HTTP_TRACE_EVENT
++struct   HTTP_TRACE_EVENT
  {
      //
      // Trace Provider (such as "WWW Server")
@@ -33,7 +33,7 @@ index d3993236e0..50b300c187 100644
  // (for example the "GENERAL_REQUEST_START" event contains an item with the Request URL)
  
 -struct HTTP_TRACE_EVENT_ITEM
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ HTTP_TRACE_EVENT_ITEM
++struct   HTTP_TRACE_EVENT_ITEM
  {
      //
      // Friendly name of the item (for example "RequestUrl")
@@ -42,7 +42,7 @@ index d3993236e0..50b300c187 100644
  //
  
 -struct HTTP_TRACE_CONFIGURATION
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ HTTP_TRACE_CONFIGURATION
++struct   HTTP_TRACE_CONFIGURATION
  {
      LPCGUID     pProviderGuid;
      DWORD       dwAreas;

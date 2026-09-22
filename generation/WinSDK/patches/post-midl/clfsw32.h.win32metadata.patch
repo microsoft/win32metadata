@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
+index 90d850f66c..16166f95a4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
 @@ -26,6 +26,7 @@
@@ -9,15 +10,60 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/Wi
  
  #pragma region Desktop Family or BootableSku Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
-@@ -162,7 +163,7 @@ CLFSUSER_API ULONG WINAPI LsnRecordSequence (
+@@ -111,7 +112,7 @@ typedef PVOID CLFS_LOG_ARCHIVE_CONTEXT, *PCLFS_LOG_ARCHIVE_CONTEXT;
+ // making this call.
+ //------------------------------------------------------------------------------
+ 
+-CLFSUSER_API CLFS_LSN WINAPI LsnCreate (
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API CLFS_LSN WINAPI LsnCreate (
+                     IN CLFS_CONTAINER_ID    cidContainer,
+                     IN ULONG                offBlock,
+                     IN ULONG                cRecord
+@@ -125,7 +126,7 @@ CLFSUSER_API CLFS_LSN WINAPI LsnCreate (
+ // Entry point to extract the container identifier from the LSN.
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API CLFS_CONTAINER_ID WINAPI LsnContainer (
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API CLFS_CONTAINER_ID WINAPI LsnContainer (
+                     IN const CLFS_LSN* plsn
+                     );
+ #endif /* _WIN32_WINNT */
+@@ -137,7 +138,7 @@ CLFSUSER_API CLFS_CONTAINER_ID WINAPI LsnContainer (
+ // Entry point to extract the block offset from the LSN.
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API ULONG WINAPI LsnBlockOffset (
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API ULONG WINAPI LsnBlockOffset (
+                     IN const CLFS_LSN* plsn
+                     );
+ #endif /* _WIN32_WINNT */
+@@ -149,7 +150,7 @@ CLFSUSER_API ULONG WINAPI LsnBlockOffset (
+ // Entry point to extract the bucket identifier from the LSN.
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API ULONG WINAPI LsnRecordSequence (
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API ULONG WINAPI LsnRecordSequence (
+                     IN const CLFS_LSN* plsn
+                     );
+ #endif /* _WIN32_WINNT */
+@@ -162,13 +163,13 @@ CLFSUSER_API ULONG WINAPI LsnRecordSequence (
  // containers lying in a given directory path.
  //------------------------------------------------------------------------------
  
 -CLFSUSER_API HANDLE WINAPI CreateLogFile (
-+CLFSUSER_API HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CreateLogFile (
++_Win32_RAIIFree_(CloseHandle, -1, 0) CLFSUSER_API HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ CreateLogFile (
                      IN LPCWSTR pszLogFileName,
                      IN ACCESS_MASK fDesiredAccess,
-                     IN DWORD dwShareMode,
+-                    IN DWORD dwShareMode,
++                    _Win32_AssociatedEnum_(FILE_SHARE_MODE) IN DWORD dwShareMode,
+                     IN LPSECURITY_ATTRIBUTES psaLogFile OPTIONAL,
+-                    IN ULONG fCreateDisposition,
+-                    IN ULONG fFlagsAndAttributes
++                    _Win32_AssociatedEnum_(FILE_CREATION_DISPOSITION) IN ULONG fCreateDisposition,
++                    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) IN ULONG fFlagsAndAttributes
+                     );
+ #endif /* _WIN32_WINNT */
+ 
 @@ -180,7 +181,7 @@ CLFSUSER_API HANDLE WINAPI CreateLogFile (
  // storage by handle.
  //------------------------------------------------------------------------------
@@ -180,7 +226,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/Wi
                      IN PVOID pvReadContext,
                      OUT PVOID *ppvRestartBuffer,
                      OUT PULONG pcbRestartBuffer,
-@@ -466,7 +467,7 @@ CLFSUSER_API BOOL WINAPI ReadPreviousLogRestartArea (
+@@ -466,12 +467,12 @@ CLFSUSER_API BOOL WINAPI ReadPreviousLogRestartArea (
  // Write a new restart area to a physical or client log stream.
  //------------------------------------------------------------------------------
  
@@ -189,6 +235,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/Wi
                      IN OUT PVOID pvMarshal,
                      IN PVOID pvRestartBuffer,
                      IN ULONG cbRestartBuffer,
+                     IN PCLFS_LSN plsnBase OPTIONAL,
+-                    IN ULONG fFlags,
++                    _Win32_AssociatedEnum_(CLFS_FLAG) IN ULONG fFlags,
+                     OUT PULONG pcbWritten OPTIONAL,
+                     OUT PCLFS_LSN plsnNext OPTIONAL,
+                     IN OUT LPOVERLAPPED pOverlapped OPTIONAL
 @@ -500,7 +501,7 @@ CLFSUSER_API BOOL WINAPI GetLogReservationInfo (
  // Set a new base LSN for a log stream without writing a restart record.
  //------------------------------------------------------------------------------
@@ -234,6 +286,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/Wi
                      IN PVOID pvMarshal,
                      IN PCLFS_WRITE_ENTRY rgWriteEntries OPTIONAL,
                      IN ULONG cWriteEntries,
+@@ -567,7 +568,7 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLog (
+                     IN PCLFS_LSN plsnPrevious OPTIONAL,
+                     IN ULONG cReserveRecords,
+                     IN OUT LONGLONG rgcbReservation [] OPTIONAL,
+-                    IN ULONG fFlags,
++                    _Win32_AssociatedEnum_(CLFS_FLAG) IN ULONG fFlags,
+                     OUT PCLFS_LSN plsn OPTIONAL,
+                     IN OUT LPOVERLAPPED pOverlapped OPTIONAL
+                     );
 @@ -581,7 +582,7 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLog (
  // log stream, honoring an alignment between write entries.
  //------------------------------------------------------------------------------
@@ -243,15 +304,27 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/Wi
                      IN PVOID pvMarshal,
                      IN PCLFS_WRITE_ENTRY rgWriteEntries OPTIONAL,
                      IN ULONG cWriteEntries,
-@@ -604,7 +605,7 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLogAligned (
+@@ -590,7 +591,7 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLogAligned (
+                     IN PCLFS_LSN plsnPrevious OPTIONAL,
+                     IN ULONG cReserveRecords,
+                     IN OUT LONGLONG rgcbReservation [] OPTIONAL,
+-                    IN ULONG fFlags,
++                    _Win32_AssociatedEnum_(CLFS_FLAG) IN ULONG fFlags,
+                     OUT PCLFS_LSN plsn OPTIONAL,
+                     IN OUT LPOVERLAPPED pOverlapped OPTIONAL
+                     );
+@@ -604,9 +605,9 @@ CLFSUSER_API BOOL WINAPI ReserveAndAppendLogAligned (
  // flush all buffers to the disk.
  //------------------------------------------------------------------------------
  
 -CLFSUSER_API BOOL WINAPI FlushLogBuffers (
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ FlushLogBuffers (
                      IN PVOID pvMarshal,
-                     IN OUT LPOVERLAPPED pOverlapped OPTIONAL
+-                    IN OUT LPOVERLAPPED pOverlapped OPTIONAL
++                    _Win32_Retained_ IN OUT LPOVERLAPPED pOverlapped OPTIONAL
                      );
+ #endif /* _WIN32_WINNT */
+ 
 @@ -618,7 +619,7 @@ CLFSUSER_API BOOL WINAPI FlushLogBuffers (
  // queue and flush all buffers up to the target LSN to the disk.
  //------------------------------------------------------------------------------

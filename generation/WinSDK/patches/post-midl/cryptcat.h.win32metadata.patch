@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptcat.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptcat.h
-index 86c4754e10..a5493177e5 100644
+index 86c4754e10..c4290a4f43 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptcat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptcat.h
 @@ -1,9 +1,11 @@
@@ -10,7 +10,7 @@ index 86c4754e10..a5493177e5 100644
  extern "C" {
  #endif
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++ 
  LPWSTR WINAPI CryptCATCDFEnumMembersByCDFTagEx(
    _In_    CRYPTCATCDF                  *pCDF,
    _Inout_ LPWSTR                       pwszPrevCDFTag,
@@ -18,7 +18,7 @@ index 86c4754e10..a5493177e5 100644
    _In_    LPVOID                       pvReserved
  );
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++ 
  CRYPTCATATTRIBUTE* WINAPI CryptCATCDFEnumAttributesWithCDFTag(
    _In_ CRYPTCATCDF                  *pCDF,
    _In_ LPWSTR                       pwszMemberTag,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h
-index d2c47a145842c3c9f0c64f345a2796b8cb01024c..4b16a262fb4cd2a2ce5a0b0213348aa27ddb3aba 100644
+index d2c47a1458..b332308a18 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h
 @@ -12,6 +12,7 @@
@@ -15,7 +15,7 @@ index d2c47a145842c3c9f0c64f345a2796b8cb01024c..4b16a262fb4cd2a2ce5a0b0213348aa2
  
      // List of functions corresponding to the particular EAP method
 -    typedef struct _EAP_AUTHENTICATOR_METHOD_ROUTINES
-+    typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EAP_AUTHENTICATOR_METHOD_ROUTINES
++    typedef struct   _EAP_AUTHENTICATOR_METHOD_ROUTINES
      {
          DWORD dwSizeInBytes; // unused
          EAP_METHOD_TYPE* pEapType;

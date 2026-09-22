@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winml.h b/generation/WinSDK/RecompiledIdlHeaders/um/winml.h
-index 0716ef3305762aaea79022ffac0fa2086bb13d09..9481c16c76c330df31456d8d7ff8f4794cc998d7 100644
+index 0716ef3305..22cbec2e20 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winml.h
 @@ -32,6 +32,7 @@
@@ -15,7 +15,43 @@ index 0716ef3305762aaea79022ffac0fa2086bb13d09..9481c16c76c330df31456d8d7ff8f479
      } 	WINML_BINDING_TYPE;
  
 -typedef struct WINML_TENSOR_BINDING_DESC
-+typedef struct _Windows_SupportedOS_17134_ WINML_TENSOR_BINDING_DESC
++typedef struct  WINML_TENSOR_BINDING_DESC
      {
      WINML_TENSOR_DATA_TYPE DataType;
      /* [annotation] */ 
+@@ -291,7 +292,7 @@ EXTERN_C const IID IID_IWinMLModel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e2eeb6a9-f31f-4055-a521-e30b5b33664a")
++    MIDL_INTERFACE("e2eeb6a9-f31f-4055-a521-e30b5b33664a") _Windows_SupportedOS_17134_ 
+     IWinMLModel : public IUnknown
+     {
+     public:
+@@ -441,7 +442,7 @@ EXTERN_C const IID IID_IWinMLEvaluationContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("95848f9e-583d-4054-af12-916387cd8426")
++    MIDL_INTERFACE("95848f9e-583d-4054-af12-916387cd8426") _Windows_SupportedOS_17134_ 
+     IWinMLEvaluationContext : public IUnknown
+     {
+     public:
+@@ -562,7 +563,7 @@ EXTERN_C const IID IID_IWinMLRuntime;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a0425329-40ae-48d9-bce3-829ef7b8a41a")
++    MIDL_INTERFACE("a0425329-40ae-48d9-bce3-829ef7b8a41a") _Windows_SupportedOS_17134_ 
+     IWinMLRuntime : public IUnknown
+     {
+     public:
+@@ -697,7 +698,7 @@ EXTERN_C const IID IID_IWinMLRuntimeFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a807b84d-4ae5-4bc0-a76a-941aa246bd41")
++    MIDL_INTERFACE("a807b84d-4ae5-4bc0-a76a-941aa246bd41") _Windows_SupportedOS_17134_ 
+     IWinMLRuntimeFactory : public IUnknown
+     {
+     public:

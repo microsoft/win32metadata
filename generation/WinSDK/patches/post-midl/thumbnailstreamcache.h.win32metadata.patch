@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h b/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h
-index a6087505720dda112c32c421daa5884195de8ee9..831fd2a2819dd3811469088a598ca9428d819fcc 100644
+index a608750572..b7db93b70c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/thumbnailstreamcache.h
 @@ -80,10 +80,11 @@ extern "C"{
@@ -11,16 +11,18 @@ index a6087505720dda112c32c421daa5884195de8ee9..831fd2a2819dd3811469088a598ca942
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  typedef /* [v1_enum] */ 
 -enum ThumbnailStreamCacheOptions
-+enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ ThumbnailStreamCacheOptions
++enum   ThumbnailStreamCacheOptions
      {
          ExtractIfNotCached	= 0,
          ReturnOnlyIfCached	= 0x1,
-@@ -109,7 +110,7 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
+@@ -108,8 +109,8 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("90E11430-9569-41D8-AE75-6D4D2AE7CCA0")
+-    MIDL_INTERFACE("90E11430-9569-41D8-AE75-6D4D2AE7CCA0")
 -    IThumbnailStreamCache : public IUnknown
-+    _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IThumbnailStreamCache : public IUnknown
++    MIDL_INTERFACE("90E11430-9569-41D8-AE75-6D4D2AE7CCA0") _Windows_SupportedOS_10240_ 
++      IThumbnailStreamCache : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetThumbnailStream( 

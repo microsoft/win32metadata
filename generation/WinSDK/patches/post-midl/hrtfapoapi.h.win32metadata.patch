@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
-index a1c2a9980d..d2c07a4aad 100644
+index a1c2a9980d..06fdaa92ac 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
 @@ -10,6 +10,7 @@
@@ -14,7 +14,7 @@ index a1c2a9980d..d2c07a4aad 100644
  //! Returns:
  //!     S_OK for success, any other value indicates failure.
  //!     Returns E_NOTIMPL on unsupported platforms.
-+_Windows_SupportedOS_10240_
++
  STDAPI CreateHrtfApo(
      //! Pointer to an HrtfApoInit struct. Specifies parameters for XAPO interface initialization.
      _In_ const HrtfApoInit* init, 

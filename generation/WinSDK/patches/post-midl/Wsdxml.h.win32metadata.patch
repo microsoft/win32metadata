@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
-index b3e27f7c97a7ffc73a827540bd219fe7db7171a1..8d318b1fd62d7abb883964f92d14c14ec175ee05 100644
+index b3e27f7c97..b17ed9ac66 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
 @@ -67,6 +67,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index b3e27f7c97a7ffc73a827540bd219fe7db7171a1..8d318b1fd62d7abb883964f92d14c14e
  typedef const WSDXML_TYPE *PCWSDXML_TYPE;
  
 -typedef struct _WSD_DATETIME
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_DATETIME
++typedef struct   _WSD_DATETIME
      {
      BOOL isPositive;
      ULONG year;
@@ -24,16 +24,33 @@ index b3e27f7c97a7ffc73a827540bd219fe7db7171a1..8d318b1fd62d7abb883964f92d14c14e
      } 	WSD_DATETIME;
  
 -typedef struct _WSD_DURATION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_DURATION
++typedef struct   _WSD_DURATION
      {
      BOOL isPositive;
      ULONG year;
-@@ -235,7 +236,7 @@ EXTERN_C const IID IID_IWSDXMLContext;
+@@ -210,12 +211,12 @@ enum __MIDL___MIDL_itf_wsdxml_0000_0000_0001
+ #define WSDXML_TYPE_ENCODING(typeIndex,layerNumber) ((((DWORD)layerNumber) << 28) | typeIndex)
+ #define WSDXML_NAMESPACE_ENCODING(namespaceIndex,layerNumber) ((((WORD)layerNumber) << 12) | namespaceIndex)
+ #define WSDXML_NAME_ENCODING(nameIndex,nameSpaceEncoding) ((((DWORD)nameSpaceEncoding) << 16) | nameIndex)
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDXMLGetNameFromBuiltinNamespace(
+     _In_ LPCWSTR pszNamespace,
+     _In_ LPCWSTR pszName,
+     _Outptr_ WSDXML_NAME** ppName);
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDXMLCreateContext(
+     _Outptr_ IWSDXMLContext** ppContext);
+ 
+@@ -234,8 +235,8 @@ EXTERN_C const IID IID_IWSDXMLContext;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")
+-    MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")
 -    IWSDXMLContext : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDXMLContext : public IUnknown
++    MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0") _Windows_SupportedOS_WindowsVista_ 
++      IWSDXMLContext : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE AddNamespace( 
@@ -46,3 +63,205 @@ index b3e27f7c97a7ffc73a827540bd219fe7db7171a1..8d318b1fd62d7abb883964f92d14c14e
      {
          CONST_VTBL struct IWSDXMLContextVtbl *lpVtbl;
      };
+@@ -399,6 +400,201 @@ extern RPC_IF_HANDLE __MIDL_itf_wsdxml_0000_0001_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("OpNone")
++#undef OpNone
++#pragma push_macro("OpEndOfTable")
++#undef OpEndOfTable
++#pragma push_macro("OpBeginElement_")
++#undef OpBeginElement_
++#pragma push_macro("OpBeginAnyElement")
++#undef OpBeginAnyElement
++#pragma push_macro("OpEndElement")
++#undef OpEndElement
++#pragma push_macro("OpElement_")
++#undef OpElement_
++#pragma push_macro("OpAnyElement")
++#undef OpAnyElement
++#pragma push_macro("OpAnyElements")
++#undef OpAnyElements
++#pragma push_macro("OpAnyText")
++#undef OpAnyText
++#pragma push_macro("OpAttribute_")
++#undef OpAttribute_
++#pragma push_macro("OpBeginChoice")
++#undef OpBeginChoice
++#pragma push_macro("OpEndChoice")
++#undef OpEndChoice
++#pragma push_macro("OpBeginSequence")
++#undef OpBeginSequence
++#pragma push_macro("OpEndSequence")
++#undef OpEndSequence
++#pragma push_macro("OpBeginAll")
++#undef OpBeginAll
++#pragma push_macro("OpEndAll")
++#undef OpEndAll
++#pragma push_macro("OpAnything")
++#undef OpAnything
++#pragma push_macro("OpAnyNumber")
++#undef OpAnyNumber
++#pragma push_macro("OpOneOrMore")
++#undef OpOneOrMore
++#pragma push_macro("OpOptional")
++#undef OpOptional
++#pragma push_macro("OpFormatBool_")
++#undef OpFormatBool_
++#pragma push_macro("OpFormatInt8_")
++#undef OpFormatInt8_
++#pragma push_macro("OpFormatInt16_")
++#undef OpFormatInt16_
++#pragma push_macro("OpFormatInt32_")
++#undef OpFormatInt32_
++#pragma push_macro("OpFormatInt64_")
++#undef OpFormatInt64_
++#pragma push_macro("OpFormatUInt8_")
++#undef OpFormatUInt8_
++#pragma push_macro("OpFormatUInt16_")
++#undef OpFormatUInt16_
++#pragma push_macro("OpFormatUInt32_")
++#undef OpFormatUInt32_
++#pragma push_macro("OpFormatUInt64_")
++#undef OpFormatUInt64_
++#pragma push_macro("OpFormatUnicodeString_")
++#undef OpFormatUnicodeString_
++#pragma push_macro("OpFormatDom_")
++#undef OpFormatDom_
++#pragma push_macro("OpFormatStruct_")
++#undef OpFormatStruct_
++#pragma push_macro("OpFormatUri_")
++#undef OpFormatUri_
++#pragma push_macro("OpFormatUuidUri_")
++#undef OpFormatUuidUri_
++#pragma push_macro("OpFormatName_")
++#undef OpFormatName_
++#pragma push_macro("OpFormatListInsertTail_")
++#undef OpFormatListInsertTail_
++#pragma push_macro("OpFormatType_")
++#undef OpFormatType_
++#pragma push_macro("OpFormatDynamicType_")
++#undef OpFormatDynamicType_
++#pragma push_macro("OpFormatLookupType_")
++#undef OpFormatLookupType_
++#pragma push_macro("OpFormatDuration_")
++#undef OpFormatDuration_
++#pragma push_macro("OpFormatDateTime_")
++#undef OpFormatDateTime_
++#pragma push_macro("OpFormatFloat_")
++#undef OpFormatFloat_
++#pragma push_macro("OpFormatDouble_")
++#undef OpFormatDouble_
++#pragma push_macro("OpProcess_")
++#undef OpProcess_
++#pragma push_macro("OpQualifiedAttribute_")
++#undef OpQualifiedAttribute_
++#pragma push_macro("OpFormatXMLDeclaration_")
++#undef OpFormatXMLDeclaration_
++#pragma push_macro("OpFormatMax")
++#undef OpFormatMax
++enum WSDXML_OP : int
++{
++    OpNone = 0,
++    OpEndOfTable = 1,
++    OpBeginElement_ = 2,
++    OpBeginAnyElement = 3,
++    OpEndElement = 4,
++    OpElement_ = 5,
++    OpAnyElement = 6,
++    OpAnyElements = 7,
++    OpAnyText = 8,
++    OpAttribute_ = 9,
++    OpBeginChoice = 10,
++    OpEndChoice = 11,
++    OpBeginSequence = 12,
++    OpEndSequence = 13,
++    OpBeginAll = 14,
++    OpEndAll = 15,
++    OpAnything = 16,
++    OpAnyNumber = 17,
++    OpOneOrMore = 18,
++    OpOptional = 19,
++    OpFormatBool_ = 20,
++    OpFormatInt8_ = 21,
++    OpFormatInt16_ = 22,
++    OpFormatInt32_ = 23,
++    OpFormatInt64_ = 24,
++    OpFormatUInt8_ = 25,
++    OpFormatUInt16_ = 26,
++    OpFormatUInt32_ = 27,
++    OpFormatUInt64_ = 28,
++    OpFormatUnicodeString_ = 29,
++    OpFormatDom_ = 30,
++    OpFormatStruct_ = 31,
++    OpFormatUri_ = 32,
++    OpFormatUuidUri_ = 33,
++    OpFormatName_ = 34,
++    OpFormatListInsertTail_ = 35,
++    OpFormatType_ = 36,
++    OpFormatDynamicType_ = 37,
++    OpFormatLookupType_ = 38,
++    OpFormatDuration_ = 39,
++    OpFormatDateTime_ = 40,
++    OpFormatFloat_ = 41,
++    OpFormatDouble_ = 42,
++    OpProcess_ = 43,
++    OpQualifiedAttribute_ = 44,
++    OpFormatXMLDeclaration_ = 45,
++    OpFormatMax = 46,
++};
++#pragma pop_macro("OpFormatMax")
++#pragma pop_macro("OpFormatXMLDeclaration_")
++#pragma pop_macro("OpQualifiedAttribute_")
++#pragma pop_macro("OpProcess_")
++#pragma pop_macro("OpFormatDouble_")
++#pragma pop_macro("OpFormatFloat_")
++#pragma pop_macro("OpFormatDateTime_")
++#pragma pop_macro("OpFormatDuration_")
++#pragma pop_macro("OpFormatLookupType_")
++#pragma pop_macro("OpFormatDynamicType_")
++#pragma pop_macro("OpFormatType_")
++#pragma pop_macro("OpFormatListInsertTail_")
++#pragma pop_macro("OpFormatName_")
++#pragma pop_macro("OpFormatUuidUri_")
++#pragma pop_macro("OpFormatUri_")
++#pragma pop_macro("OpFormatStruct_")
++#pragma pop_macro("OpFormatDom_")
++#pragma pop_macro("OpFormatUnicodeString_")
++#pragma pop_macro("OpFormatUInt64_")
++#pragma pop_macro("OpFormatUInt32_")
++#pragma pop_macro("OpFormatUInt16_")
++#pragma pop_macro("OpFormatUInt8_")
++#pragma pop_macro("OpFormatInt64_")
++#pragma pop_macro("OpFormatInt32_")
++#pragma pop_macro("OpFormatInt16_")
++#pragma pop_macro("OpFormatInt8_")
++#pragma pop_macro("OpFormatBool_")
++#pragma pop_macro("OpOptional")
++#pragma pop_macro("OpOneOrMore")
++#pragma pop_macro("OpAnyNumber")
++#pragma pop_macro("OpAnything")
++#pragma pop_macro("OpEndAll")
++#pragma pop_macro("OpBeginAll")
++#pragma pop_macro("OpEndSequence")
++#pragma pop_macro("OpBeginSequence")
++#pragma pop_macro("OpEndChoice")
++#pragma pop_macro("OpBeginChoice")
++#pragma pop_macro("OpAttribute_")
++#pragma pop_macro("OpAnyText")
++#pragma pop_macro("OpAnyElements")
++#pragma pop_macro("OpAnyElement")
++#pragma pop_macro("OpElement_")
++#pragma pop_macro("OpEndElement")
++#pragma pop_macro("OpBeginAnyElement")
++#pragma pop_macro("OpBeginElement_")
++#pragma pop_macro("OpEndOfTable")
++#pragma pop_macro("OpNone")
++#endif
++
+ #endif
+ 
+ 

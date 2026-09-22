@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ResourceIndexer.h b/generation/WinSDK/RecompiledIdlHeaders/um/ResourceIndexer.h
-index f0efd89f11..93d52ade16 100644
+index f0efd89f11..acf9c6e6d4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ResourceIndexer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ResourceIndexer.h
 @@ -7,6 +7,7 @@
@@ -15,26 +15,26 @@ index f0efd89f11..93d52ade16 100644
  #endif
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
++typedef struct  
  {
      PWSTR name;
      PWSTR value;
  } IndexedResourceQualifier;
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI CreateResourceIndexer(
      _In_ PCWSTR projectRoot,
      _In_opt_ PCWSTR extensionDllPath,
 -    _Outptr_ PVOID* ppResourceIndexer);
-+    _Outptr_ _Win32_RAIIFree_(DestroyResourceIndexer) PVOID* ppResourceIndexer);
++    _Outptr_  PVOID* ppResourceIndexer);
++
++_Windows_SupportedOS_10240_ 
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
  void DestroyResourceIndexer(_In_opt_ PVOID resourceIndexer);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI IndexFilePath(
      _In_ PVOID resourceIndexer,
      _In_ PCWSTR filePath,
@@ -42,8 +42,8 @@ index f0efd89f11..93d52ade16 100644
      _Out_ ULONG* pQualifierCount,
      _Out_writes_(*pQualifierCount) IndexedResourceQualifier** ppQualifiers);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  void DestroyIndexedResults(
      _In_opt_ PWSTR resourceUri,
      _In_ ULONG qualifierCount,

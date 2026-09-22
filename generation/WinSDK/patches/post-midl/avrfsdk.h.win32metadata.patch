@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
+index a2c5a1128b..37e9e2b30f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
 @@ -24,6 +24,7 @@ Revision History:
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/Wi
  #define AVRF_MAX_TRACES 32
  
 -typedef struct _AVRF_BACKTRACE_INFORMATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AVRF_BACKTRACE_INFORMATION {
++typedef struct   _AVRF_BACKTRACE_INFORMATION {
      ULONG   Depth;
      ULONG   Index;
      ULONG64 ReturnAddresses[AVRF_MAX_TRACES];
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/Wi
  };
  
 -typedef struct _AVRF_HEAP_ALLOCATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AVRF_HEAP_ALLOCATION {
++typedef struct   _AVRF_HEAP_ALLOCATION {
      ULONG64 HeapHandle;
      ULONG64 UserAllocation;    
      ULONG64 UserAllocationSize;
@@ -32,7 +33,42 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/Wi
  };
  
 -typedef struct _AVRF_HANDLE_OPERATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AVRF_HANDLE_OPERATION {
++typedef struct   _AVRF_HANDLE_OPERATION {
      ULONG64 Handle;
      ULONG  ProcessId;
      ULONG  ThreadId;
+@@ -140,11 +141,11 @@ typedef ULONG
+ #define AVRF_ENUM_RESOURCES_FLAGS_SUSPEND             0x00000001
+ #define AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES 0x00000002
+ 
+-ULONG NTAPI
++_Win32_ImportLibrary_("verifier.dll") ULONG NTAPI
+ VerifierEnumerateResource(
+     HANDLE Process,
+-    ULONG  Flags,    
+-    ULONG  ResourceType,
++    _Win32_AssociatedEnum_(VERIFIER_ENUM_RESOURCE_FLAGS) ULONG  Flags,    
++    _Win32_AssociatedEnum_(eAvrfResourceTypes) ULONG  ResourceType,
+     AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback,
+     PVOID  EnumerationContext
+     );
+@@ -166,4 +167,19 @@ VerifierIsPerUserSettingsEnabled(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES")
++#undef AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES
++#pragma push_macro("AVRF_ENUM_RESOURCES_FLAGS_SUSPEND")
++#undef AVRF_ENUM_RESOURCES_FLAGS_SUSPEND
++enum [[clang::flag_enum]] VERIFIER_ENUM_RESOURCE_FLAGS : unsigned int
++{
++    AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES = 2U,
++    AVRF_ENUM_RESOURCES_FLAGS_SUSPEND = 1U,
++};
++#pragma pop_macro("AVRF_ENUM_RESOURCES_FLAGS_SUSPEND")
++#pragma pop_macro("AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES")
++#endif
++
+ #endif /*AVRFSDK*/

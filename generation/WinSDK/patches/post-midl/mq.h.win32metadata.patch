@@ -1,0 +1,131 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h
+index 6aa2b19df6..b8458b8835 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+  
+ /*++
+ 
+@@ -2276,7 +2277,7 @@ MQLocateBegin(
+     _In_opt_ MQRESTRICTION* pRestriction,
+     _In_ MQCOLUMNSET* pColumns,
+     _In_ MQSORTSET* pSort,
+-    _Out_ PHANDLE phEnum
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE phEnum
+     );
+ 
+ HRESULT
+@@ -2343,7 +2344,7 @@ HRESULT
+ APIENTRY
+ MQCreateCursor(
+     _In_ QUEUEHANDLE hQueue,
+-    _Out_ PHANDLE phCursor
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE phCursor
+     );
+ 
+ HRESULT
+@@ -2386,7 +2387,7 @@ HRESULT
+ APIENTRY
+ MQSetQueueSecurity(
+     _In_ LPCWSTR lpwcsFormatName,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _In_opt_ PSECURITY_DESCRIPTOR pSecurityDescriptor
+     );
+ 
+@@ -2445,7 +2446,7 @@ APIENTRY
+ MQGetSecurityContext(
+     _In_reads_bytes_opt_(dwCertBufferLength) PVOID lpCertBuffer,
+     _In_ DWORD dwCertBufferLength,
+-    _Out_ HANDLE* phSecurityContext
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phSecurityContext
+     );
+ 
+ HRESULT
+@@ -2453,7 +2454,7 @@ APIENTRY
+ MQGetSecurityContextEx(
+     _In_reads_bytes_opt_(dwCertBufferLength) PVOID lpCertBuffer,
+     _In_ DWORD dwCertBufferLength,
+-    _Out_ HANDLE* phSecurityContext
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phSecurityContext
+     );
+ 
+ VOID
+@@ -2535,5 +2536,76 @@ MQMoveMessage(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MQSEC_DELETE_QUEUE")
++#undef MQSEC_DELETE_QUEUE
++#pragma push_macro("MQSEC_GET_QUEUE_PERMISSIONS")
++#undef MQSEC_GET_QUEUE_PERMISSIONS
++#pragma push_macro("MQSEC_CHANGE_QUEUE_PERMISSIONS")
++#undef MQSEC_CHANGE_QUEUE_PERMISSIONS
++#pragma push_macro("MQSEC_TAKE_QUEUE_OWNERSHIP")
++#undef MQSEC_TAKE_QUEUE_OWNERSHIP
++#pragma push_macro("MQSEC_RECEIVE_MESSAGE")
++#undef MQSEC_RECEIVE_MESSAGE
++#pragma push_macro("MQSEC_RECEIVE_JOURNAL_MESSAGE")
++#undef MQSEC_RECEIVE_JOURNAL_MESSAGE
++#pragma push_macro("MQSEC_QUEUE_GENERIC_READ")
++#undef MQSEC_QUEUE_GENERIC_READ
++#pragma push_macro("MQSEC_QUEUE_GENERIC_WRITE")
++#undef MQSEC_QUEUE_GENERIC_WRITE
++#pragma push_macro("MQSEC_QUEUE_GENERIC_ALL")
++#undef MQSEC_QUEUE_GENERIC_ALL
++#pragma push_macro("MQSEC_DELETE_MESSAGE")
++#undef MQSEC_DELETE_MESSAGE
++#pragma push_macro("MQSEC_PEEK_MESSAGE")
++#undef MQSEC_PEEK_MESSAGE
++#pragma push_macro("MQSEC_WRITE_MESSAGE")
++#undef MQSEC_WRITE_MESSAGE
++#pragma push_macro("MQSEC_DELETE_JOURNAL_MESSAGE")
++#undef MQSEC_DELETE_JOURNAL_MESSAGE
++#pragma push_macro("MQSEC_SET_QUEUE_PROPERTIES")
++#undef MQSEC_SET_QUEUE_PROPERTIES
++#pragma push_macro("MQSEC_GET_QUEUE_PROPERTIES")
++#undef MQSEC_GET_QUEUE_PROPERTIES
++#pragma push_macro("MQSEC_QUEUE_GENERIC_EXECUTE")
++#undef MQSEC_QUEUE_GENERIC_EXECUTE
++enum [[clang::flag_enum]] MQQUEUEACCESSMASK : unsigned int
++{
++    MQSEC_DELETE_QUEUE = 65536U,
++    MQSEC_GET_QUEUE_PERMISSIONS = 131072U,
++    MQSEC_CHANGE_QUEUE_PERMISSIONS = 262144U,
++    MQSEC_TAKE_QUEUE_OWNERSHIP = 524288U,
++    MQSEC_RECEIVE_MESSAGE = 3U,
++    MQSEC_RECEIVE_JOURNAL_MESSAGE = 10U,
++    MQSEC_QUEUE_GENERIC_READ = 131115U,
++    MQSEC_QUEUE_GENERIC_WRITE = 131108U,
++    MQSEC_QUEUE_GENERIC_ALL = 983103U,
++    MQSEC_DELETE_MESSAGE = 1U,
++    MQSEC_PEEK_MESSAGE = 2U,
++    MQSEC_WRITE_MESSAGE = 4U,
++    MQSEC_DELETE_JOURNAL_MESSAGE = 8U,
++    MQSEC_SET_QUEUE_PROPERTIES = 16U,
++    MQSEC_GET_QUEUE_PROPERTIES = 32U,
++    MQSEC_QUEUE_GENERIC_EXECUTE = 0U,
++};
++#pragma pop_macro("MQSEC_QUEUE_GENERIC_EXECUTE")
++#pragma pop_macro("MQSEC_GET_QUEUE_PROPERTIES")
++#pragma pop_macro("MQSEC_SET_QUEUE_PROPERTIES")
++#pragma pop_macro("MQSEC_DELETE_JOURNAL_MESSAGE")
++#pragma pop_macro("MQSEC_WRITE_MESSAGE")
++#pragma pop_macro("MQSEC_PEEK_MESSAGE")
++#pragma pop_macro("MQSEC_DELETE_MESSAGE")
++#pragma pop_macro("MQSEC_QUEUE_GENERIC_ALL")
++#pragma pop_macro("MQSEC_QUEUE_GENERIC_WRITE")
++#pragma pop_macro("MQSEC_QUEUE_GENERIC_READ")
++#pragma pop_macro("MQSEC_RECEIVE_JOURNAL_MESSAGE")
++#pragma pop_macro("MQSEC_RECEIVE_MESSAGE")
++#pragma pop_macro("MQSEC_TAKE_QUEUE_OWNERSHIP")
++#pragma pop_macro("MQSEC_CHANGE_QUEUE_PERMISSIONS")
++#pragma pop_macro("MQSEC_GET_QUEUE_PERMISSIONS")
++#pragma pop_macro("MQSEC_DELETE_QUEUE")
++#endif
++
+ #endif // __MQ_H__
+ 

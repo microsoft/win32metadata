@@ -1,0 +1,106 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h
+index 66582f1991..9e38b2bc61 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wldp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -458,10 +459,10 @@ typedef HRESULT(WINAPI *PWLDP_QUERYDYNAMICODETRUST_API)(
+ // This routine queries Windows Lockdown mode.
+ // 
+ 
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpQueryWindowsLockdownMode(
+-    _Out_ PWLDP_WINDOWS_LOCKDOWN_MODE lockdownMode
++    _Win32_AssociatedEnum_(WLDP_WINDOWS_LOCKDOWN_MODE) _Out_ PWLDP_WINDOWS_LOCKDOWN_MODE lockdownMode
+     );
+ 
+ typedef HRESULT(WINAPI *PWLDP_QUERYWINDOWSLOCKDOWNMODE_API)(
+@@ -488,10 +489,10 @@ typedef HRESULT(WINAPI* PWLDP_QUERYDEVICESECURITYINFORMATION_API)(
+ // This routine queries CI lock down restriction. 
+ //
+ 
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpQueryWindowsLockdownRestriction(
+-    _Out_ PWLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction
++    _Win32_AssociatedEnum_(WLDP_WINDOWS_LOCKDOWN_RESTRICTION) _Out_ PWLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction
+ );
+ 
+ typedef HRESULT(WINAPI *PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API)(
+@@ -501,10 +502,10 @@ typedef HRESULT(WINAPI *PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API)(
+ // This routine sets CI lock down restriction.
+ //
+ 
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpSetWindowsLockdownRestriction(
+-    _In_ WLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction
++    _Win32_AssociatedEnum_(WLDP_WINDOWS_LOCKDOWN_RESTRICTION) _In_ WLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction
+     );
+ 
+ typedef HRESULT(WINAPI *PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API)(
+@@ -517,7 +518,7 @@ typedef HRESULT(WINAPI *PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API)(
+ //
+ // This routine queries if a particular PackageFamilyName would pass the currently installed CIPolicy
+ //
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpIsAppApprovedByPolicy(
+     _In_ PCWSTR PackageFamilyName,
+@@ -533,10 +534,10 @@ typedef HRESULT(WINAPI *PWLDP_ISAPPAPPROVEDBYPOLICY_API)(
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_MN
+ 
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpQueryPolicySettingEnabled(
+-    _In_ WLDP_POLICY_SETTING Setting,
++    _Win32_AssociatedEnum_(WLDP_POLICY_SETTING) _In_ WLDP_POLICY_SETTING Setting,
+     _Out_ PBOOL Enabled
+ );
+ 
+@@ -545,7 +546,7 @@ typedef HRESULT(WINAPI *PWLDP_QUERYPOLICYSETTINGENABLED_API)(
+     _Out_ PBOOL Enabled
+     );
+ 
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpQueryPolicySettingEnabled2(
+     _In_ PCWSTR SettingString,
+@@ -560,7 +561,7 @@ typedef HRESULT(WINAPI *PWLDP_QUERYPOLICYSETTINGENABLED2_API)(
+ //
+ //    This function checks the security watermark state of 10x system
+ //
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpIsWcosProductionConfiguration(
+     _Out_ PBOOL IsProductionConfiguration
+@@ -568,7 +569,7 @@ WldpIsWcosProductionConfiguration(
+ 
+ typedef HRESULT(WINAPI *PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API)(_Out_ PBOOL IsProductionConfiguration);
+ 
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpResetWcosProductionConfiguration();
+ 
+@@ -577,7 +578,7 @@ typedef HRESULT(WINAPI *PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API)();
+ //
+ //    This function checks the security configuration state of the non-10x system
+ //
+-HRESULT
++_Win32_ImportLibrary_("wldp.dll") HRESULT
+ WINAPI
+ WldpIsProductionConfiguration(
+     _Out_ PBOOL IsProductionConfiguration

@@ -1,0 +1,79 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h
+index 3f8a2fd8c5..6519b5163f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ //
+@@ -168,14 +169,14 @@ extern "C" {
+ //
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10StateBlockMaskUnion(_In_ D3D10_STATE_BLOCK_MASK *pA, _In_ D3D10_STATE_BLOCK_MASK *pB, _Out_ D3D10_STATE_BLOCK_MASK *pResult);
+-HRESULT WINAPI D3D10StateBlockMaskIntersect(_In_ D3D10_STATE_BLOCK_MASK *pA, _In_ D3D10_STATE_BLOCK_MASK *pB, _Out_ D3D10_STATE_BLOCK_MASK *pResult);
+-HRESULT WINAPI D3D10StateBlockMaskDifference(_In_ D3D10_STATE_BLOCK_MASK *pA, _In_ D3D10_STATE_BLOCK_MASK *pB, _Out_ D3D10_STATE_BLOCK_MASK *pResult);
+-HRESULT WINAPI D3D10StateBlockMaskEnableCapture(_Inout_ D3D10_STATE_BLOCK_MASK *pMask, D3D10_DEVICE_STATE_TYPES StateType, UINT RangeStart, UINT RangeLength);
+-HRESULT WINAPI D3D10StateBlockMaskDisableCapture(_Inout_ D3D10_STATE_BLOCK_MASK *pMask, D3D10_DEVICE_STATE_TYPES StateType, UINT RangeStart, UINT RangeLength);
+-HRESULT WINAPI D3D10StateBlockMaskEnableAll(_Out_ D3D10_STATE_BLOCK_MASK *pMask);
+-HRESULT WINAPI D3D10StateBlockMaskDisableAll(_Out_ D3D10_STATE_BLOCK_MASK *pMask);
+-BOOL    WINAPI D3D10StateBlockMaskGetSetting(_In_ D3D10_STATE_BLOCK_MASK *pMask, D3D10_DEVICE_STATE_TYPES StateType, UINT Entry);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskUnion(_In_ D3D10_STATE_BLOCK_MASK *pA, _In_ D3D10_STATE_BLOCK_MASK *pB, _Out_ D3D10_STATE_BLOCK_MASK *pResult);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskIntersect(_In_ D3D10_STATE_BLOCK_MASK *pA, _In_ D3D10_STATE_BLOCK_MASK *pB, _Out_ D3D10_STATE_BLOCK_MASK *pResult);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskDifference(_In_ D3D10_STATE_BLOCK_MASK *pA, _In_ D3D10_STATE_BLOCK_MASK *pB, _Out_ D3D10_STATE_BLOCK_MASK *pResult);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskEnableCapture(_Inout_ D3D10_STATE_BLOCK_MASK *pMask, D3D10_DEVICE_STATE_TYPES StateType, UINT RangeStart, UINT RangeLength);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskDisableCapture(_Inout_ D3D10_STATE_BLOCK_MASK *pMask, D3D10_DEVICE_STATE_TYPES StateType, UINT RangeStart, UINT RangeLength);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskEnableAll(_Out_ D3D10_STATE_BLOCK_MASK *pMask);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10StateBlockMaskDisableAll(_Out_ D3D10_STATE_BLOCK_MASK *pMask);
++_Win32_ImportLibrary_("d3d10.dll") BOOL    WINAPI D3D10StateBlockMaskGetSetting(_In_ D3D10_STATE_BLOCK_MASK *pMask, D3D10_DEVICE_STATE_TYPES StateType, UINT Entry);
+ 
+ //----------------------------------------------------------------------------
+ // D3D10CreateStateBlock
+@@ -197,7 +198,7 @@ BOOL    WINAPI D3D10StateBlockMaskGetSetting(_In_ D3D10_STATE_BLOCK_MASK *pMask,
+ //      bit mask
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10CreateStateBlock(_In_ ID3D10Device *pDevice, _In_ D3D10_STATE_BLOCK_MASK *pStateBlockMask, _Out_ ID3D10StateBlock **ppStateBlock);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10CreateStateBlock(_In_ ID3D10Device *pDevice, _In_ D3D10_STATE_BLOCK_MASK *pStateBlockMask, _Out_ ID3D10StateBlock **ppStateBlock);
+ 
+ #ifdef __cplusplus
+ }
+@@ -273,8 +274,8 @@ typedef struct _D3D10_EFFECT_TYPE_DESC
+     LPCSTR  TypeName;               // Name of the type 
+                                     // (e.g. "float4" or "MyStruct")
+ 
+-    D3D10_SHADER_VARIABLE_CLASS    Class;  // (e.g. scalar, vector, object, etc.)
+-    D3D10_SHADER_VARIABLE_TYPE     Type;   // (e.g. float, texture, vertexshader, etc.)
++    _Win32_AssociatedEnum_(D3D_SHADER_VARIABLE_CLASS) D3D10_SHADER_VARIABLE_CLASS    Class;  // (e.g. scalar, vector, object, etc.)
++    _Win32_AssociatedEnum_(D3D_SHADER_VARIABLE_TYPE) D3D10_SHADER_VARIABLE_TYPE     Type;   // (e.g. float, texture, vertexshader, etc.)
+     
+     UINT    Elements;               // Number of elements in this type
+                                     // (0 if not an array) 
+@@ -1424,14 +1425,14 @@ extern "C" {
+ //
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10CompileEffectFromMemory(_In_reads_bytes_(DataLength) void *pData, SIZE_T DataLength, LPCSTR pSrcFileName, _In_opt_ CONST D3D10_SHADER_MACRO *pDefines, 
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10CompileEffectFromMemory(_In_reads_bytes_(DataLength) void *pData, SIZE_T DataLength, LPCSTR pSrcFileName, _In_opt_ CONST D3D10_SHADER_MACRO *pDefines, 
+     _In_opt_ ID3D10Include *pInclude, UINT HLSLFlags, UINT FXFlags, 
+     _Out_ ID3D10Blob **ppCompiledEffect, _Out_opt_ ID3D10Blob **ppErrors);
+ 
+-HRESULT WINAPI D3D10CreateEffectFromMemory(_In_reads_bytes_(DataLength) void *pData, SIZE_T DataLength, UINT FXFlags, _In_ ID3D10Device *pDevice, 
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10CreateEffectFromMemory(_In_reads_bytes_(DataLength) void *pData, SIZE_T DataLength, UINT FXFlags, _In_ ID3D10Device *pDevice, 
+     _In_opt_ ID3D10EffectPool *pEffectPool, _Out_ ID3D10Effect **ppEffect);
+ 
+-HRESULT WINAPI D3D10CreateEffectPoolFromMemory(_In_reads_bytes_(DataLength) void *pData, SIZE_T DataLength, UINT FXFlags, _In_ ID3D10Device *pDevice,
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10CreateEffectPoolFromMemory(_In_reads_bytes_(DataLength) void *pData, SIZE_T DataLength, UINT FXFlags, _In_ ID3D10Device *pDevice,
+     _Out_ ID3D10EffectPool **ppEffectPool);
+ 
+ 
+@@ -1449,7 +1450,7 @@ HRESULT WINAPI D3D10CreateEffectPoolFromMemory(_In_reads_bytes_(DataLength) void
+ //      Returns a buffer containing the disassembled effect.
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10DisassembleEffect(_In_ ID3D10Effect *pEffect, BOOL EnableColorCode, _Out_ ID3D10Blob **ppDisassembly);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10DisassembleEffect(_In_ ID3D10Effect *pEffect, BOOL EnableColorCode, _Out_ ID3D10Blob **ppDisassembly);
+ 
+ #ifdef __cplusplus
+ }

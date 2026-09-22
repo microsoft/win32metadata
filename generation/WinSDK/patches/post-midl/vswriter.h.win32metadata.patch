@@ -1,0 +1,92 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h b/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
+index 0ac2f8f91c..8b40f692a2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -167,12 +168,12 @@ class IVssWMFiledesc
+ public:
+     // get path to toplevel directory
+     STDMETHOD(GetPath)(
+-        _Out_   BSTR *pbstrPath
++        _Win32_RAIIFree_(SysFreeString) _Out_   BSTR *pbstrPath
+         ) = 0;
+ 
+     // get filespec (may include wildcards)
+     STDMETHOD(GetFilespec)(
+-        _Out_   BSTR *pbstrFilespec
++        _Win32_RAIIFree_(SysFreeString) _Out_   BSTR *pbstrFilespec
+         ) = 0;
+ 
+     // is path a directory or root of a tree
+@@ -182,7 +183,7 @@ public:
+ 
+     // alternate location for files
+     STDMETHOD(GetAlternateLocation)(
+-        _Out_   BSTR *pbstrAlternateLocation
++        _Win32_RAIIFree_(SysFreeString) _Out_   BSTR *pbstrAlternateLocation
+         ) = 0;
+ 
+     // backup type
+@@ -500,13 +501,13 @@ public:
+     // get the failure message set during prepareforbackup
+     STDMETHOD(GetPrepareForBackupFailureMsg)
+         (
+-        _Outptr_result_maybenull_ BSTR* pbstrFailureMsg
++        _Win32_RAIIFree_(SysFreeString) _Outptr_result_maybenull_ BSTR* pbstrFailureMsg
+         ) = 0;
+ 
+     // get the failure message set during postsnapshot
+     STDMETHOD(GetPostSnapshotFailureMsg)
+         (
+-        _Outptr_result_maybenull_ BSTR* pbstrFailureMsg
++        _Win32_RAIIFree_(SysFreeString) _Outptr_result_maybenull_ BSTR* pbstrFailureMsg
+         ) = 0;
+ 
+ 
+@@ -520,13 +521,13 @@ public:
+     STDMETHOD(GetRollForward)
+         (
+         _Out_ VSS_ROLLFORWARD_TYPE* pRollType,
+-        _Outptr_result_maybenull_ BSTR* pbstrPoint
++        _Win32_RAIIFree_(SysFreeString) _Outptr_result_maybenull_ BSTR* pbstrPoint
+         ) = 0;
+ 
+     // get the restore name
+     STDMETHOD(GetRestoreName)
+         (
+-        _Outptr_result_maybenull_ BSTR* pbstrName
++        _Win32_RAIIFree_(SysFreeString) _Outptr_result_maybenull_ BSTR* pbstrName
+         ) = 0;
+ };
+ 
+@@ -547,7 +548,7 @@ public:
+         (
+         _Out_       HRESULT *phr,
+         _Out_       HRESULT *phrApplication,
+-        _Out_       BSTR    *pbstrApplicationMessage,
++        _Win32_RAIIFree_(SysFreeString) _Out_       BSTR    *pbstrApplicationMessage,
+         _Out_       DWORD   *pdwReserved
+         ) = 0;
+ };
+@@ -841,7 +842,7 @@ public:
+ 
+     // save document as an XML string
+     STDMETHOD(SaveAsXML)(
+-        _Out_   BSTR *pbstrXML
++        _Win32_RAIIFree_(SysFreeString) _Out_   BSTR *pbstrXML
+         ) = 0;
+ };
+ 
+@@ -1382,7 +1383,7 @@ public:
+ 
+ 
+ extern "C"  {
+-    HRESULT STDAPICALLTYPE CreateVssExpressWriterInternal
++    _Windows_SupportedOS_Windows7_ HRESULT STDAPICALLTYPE CreateVssExpressWriterInternal
+         (
+         _Out_ IVssExpressWriter **ppWriter
+         );

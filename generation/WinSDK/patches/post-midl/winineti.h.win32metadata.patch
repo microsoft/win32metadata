@@ -1,0 +1,166 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
+index 63c850c407..6fce0faea6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ #include <winapifamily.h>
+ 
+@@ -1042,7 +1043,7 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ (0x100)
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ_WRITE (0x300)
+ 
+-BOOLAPI CreateUrlCacheContainerA(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI CreateUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ LPCSTR lpCachePrefix,
+     _In_opt_ LPCSTR lpszCachePath,
+@@ -1052,7 +1053,7 @@ BOOLAPI CreateUrlCacheContainerA(
+     _Reserved_ LPVOID pvBuffer,
+     _Reserved_ LPDWORD cbBuffer
+     );
+-BOOLAPI CreateUrlCacheContainerW(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI CreateUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ LPCWSTR lpCachePrefix,
+     _In_opt_ LPCWSTR lpszCachePath,
+@@ -1068,11 +1069,11 @@ BOOLAPI CreateUrlCacheContainerW(
+ #define CreateUrlCacheContainer  CreateUrlCacheContainerA
+ #endif // !UNICODE
+ 
+-BOOLAPI DeleteUrlCacheContainerA(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI DeleteUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ DWORD dwOptions
+     );
+-BOOLAPI DeleteUrlCacheContainerW(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI DeleteUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ DWORD dwOptions
+     );
+@@ -1112,14 +1113,14 @@ typedef LPINTERNET_CACHE_CONTAINER_INFOA LPINTERNET_CACHE_CONTAINER_INFO;
+ //  FindFirstContainer options
+ #define CACHE_FIND_CONTAINER_RETURN_NOCHANGE (0x1)
+ 
+-INTERNETAPI_(HANDLE)
++_Win32_RAIIFree_(CloseHandle, -1, 0) INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheContainerA(
+     _Inout_ LPDWORD pdwModified,
+     _Out_writes_bytes_(*lpcbContainerInfo) LPINTERNET_CACHE_CONTAINER_INFOA lpContainerInfo,
+     _Inout_ LPDWORD lpcbContainerInfo,
+     _In_ DWORD dwOptions
+     );
+-INTERNETAPI_(HANDLE)
++_Win32_RAIIFree_(CloseHandle, -1, 0) INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheContainerW(
+     _Inout_ LPDWORD pdwModified,
+     _Out_writes_bytes_(*lpcbContainerInfo) LPINTERNET_CACHE_CONTAINER_INFOW lpContainerInfo,
+@@ -1161,12 +1162,12 @@ typedef enum {
+ } WININET_SYNC_MODE;
+ 
+ 
+-BOOLAPI FreeUrlCacheSpaceA(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI FreeUrlCacheSpaceA(
+     _In_opt_ LPCSTR lpszCachePath,
+     _In_ DWORD dwSize,
+     _In_ DWORD dwFilter
+     );
+-BOOLAPI FreeUrlCacheSpaceW(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI FreeUrlCacheSpaceW(
+     _In_opt_ LPCWSTR lpszCachePath,
+     _In_ DWORD dwSize,
+     _In_ DWORD dwFilter
+@@ -1229,17 +1230,17 @@ DWORD UrlCacheGetGlobalCacheSize(
+ #define CACHE_CONFIG_CONTENT_USAGE_FC                                0x00002000
+ #define CACHE_CONFIG_STICKY_CONTENT_USAGE_FC                         0x00004000
+ 
+-BOOLAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOLAPI
+ GetUrlCacheConfigInfoA(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOA lpCacheConfigInfo,
+     _Reserved_ LPDWORD lpcbCacheConfigInfo,
+-    _In_ DWORD dwFieldControl
++    _Win32_AssociatedEnum_(CACHE_CONFIG) _In_ DWORD dwFieldControl
+     );
+-BOOLAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOLAPI
+ GetUrlCacheConfigInfoW(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOW lpCacheConfigInfo,
+     _Reserved_ LPDWORD lpcbCacheConfigInfo,
+-    _In_ DWORD dwFieldControl
++    _Win32_AssociatedEnum_(CACHE_CONFIG) _In_ DWORD dwFieldControl
+     );
+ #ifdef UNICODE
+ #define GetUrlCacheConfigInfo  GetUrlCacheConfigInfoW
+@@ -1715,7 +1716,7 @@ UrlCacheFindFirstEntry(
+     _In_ DWORD dwFilter,
+     _In_ GROUPID GroupId,
+     _Out_ PURLCACHE_ENTRY_INFO pCacheEntryInfo,
+-    _Out_ HANDLE *phFind
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE *phFind
+ );
+ 
+ URLCACHEAPI
+@@ -1863,7 +1864,7 @@ BOOLAPI
+ ReadGuidsForConnectedNetworks(
+     _Out_opt_ DWORD *pcNetworks,
+     _Out_opt_ PWSTR **pppwszNetworkGuids,
+-    _Out_opt_ BSTR  **pppbstrNetworkNames,
++    _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR  **pppbstrNetworkNames,
+     _Out_opt_ PWSTR **pppwszGWMacs,
+     _Out_opt_ DWORD *pcGatewayMacs,
+     _Out_opt_ DWORD *pdwFlags
+@@ -2328,5 +2329,52 @@ typedef DWORD
+ #endif
+ 
+ #endif // !define(_WININETEX_)
++
++#ifdef WIN32METADATA
++#pragma push_macro("CACHE_CONFIG_FORCE_CLEANUP_FC")
++#undef CACHE_CONFIG_FORCE_CLEANUP_FC
++#pragma push_macro("CACHE_CONFIG_DISK_CACHE_PATHS_FC")
++#undef CACHE_CONFIG_DISK_CACHE_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_SYNC_MODE_FC")
++#undef CACHE_CONFIG_SYNC_MODE_FC
++#pragma push_macro("CACHE_CONFIG_CONTENT_PATHS_FC")
++#undef CACHE_CONFIG_CONTENT_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_HISTORY_PATHS_FC")
++#undef CACHE_CONFIG_HISTORY_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_COOKIES_PATHS_FC")
++#undef CACHE_CONFIG_COOKIES_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_QUOTA_FC")
++#undef CACHE_CONFIG_QUOTA_FC
++#pragma push_macro("CACHE_CONFIG_USER_MODE_FC")
++#undef CACHE_CONFIG_USER_MODE_FC
++#pragma push_macro("CACHE_CONFIG_CONTENT_USAGE_FC")
++#undef CACHE_CONFIG_CONTENT_USAGE_FC
++#pragma push_macro("CACHE_CONFIG_STICKY_CONTENT_USAGE_FC")
++#undef CACHE_CONFIG_STICKY_CONTENT_USAGE_FC
++enum CACHE_CONFIG : unsigned int
++{
++    CACHE_CONFIG_FORCE_CLEANUP_FC = 32U,
++    CACHE_CONFIG_DISK_CACHE_PATHS_FC = 64U,
++    CACHE_CONFIG_SYNC_MODE_FC = 128U,
++    CACHE_CONFIG_CONTENT_PATHS_FC = 256U,
++    CACHE_CONFIG_HISTORY_PATHS_FC = 1024U,
++    CACHE_CONFIG_COOKIES_PATHS_FC = 512U,
++    CACHE_CONFIG_QUOTA_FC = 2048U,
++    CACHE_CONFIG_USER_MODE_FC = 4096U,
++    CACHE_CONFIG_CONTENT_USAGE_FC = 8192U,
++    CACHE_CONFIG_STICKY_CONTENT_USAGE_FC = 16384U,
++};
++#pragma pop_macro("CACHE_CONFIG_STICKY_CONTENT_USAGE_FC")
++#pragma pop_macro("CACHE_CONFIG_CONTENT_USAGE_FC")
++#pragma pop_macro("CACHE_CONFIG_USER_MODE_FC")
++#pragma pop_macro("CACHE_CONFIG_QUOTA_FC")
++#pragma pop_macro("CACHE_CONFIG_COOKIES_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_HISTORY_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_CONTENT_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_SYNC_MODE_FC")
++#pragma pop_macro("CACHE_CONFIG_DISK_CACHE_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_FORCE_CLEANUP_FC")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

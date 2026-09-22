@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h
-index 16e9b47f8e..cbbdd5b345 100644
+index 16e9b47f8e..5824b2eb82 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 16e9b47f8e..cbbdd5b345 100644
  #define WCM_MAX_PROFILE_NAME 256
  
 -    typedef enum _WCM_PROPERTY
-+    typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_PROPERTY
++    typedef enum   _WCM_PROPERTY
      {
          wcm_global_property_domain_policy,
          wcm_global_property_minimize_policy,
@@ -21,7 +21,7 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_PROPERTY, *PWCM_PROPERTY;
  
 -    typedef enum _WCM_MEDIA_TYPE
-+    typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_MEDIA_TYPE
++    typedef enum   _WCM_MEDIA_TYPE
      {
          wcm_media_unknown,
          wcm_media_ethernet,
@@ -30,14 +30,14 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_MEDIA_TYPE, *PWCM_MEDIA_TYPE;
  
 -    typedef struct _WCM_POLICY_VALUE
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_POLICY_VALUE
++    typedef struct   _WCM_POLICY_VALUE
      {
          BOOL fValue;
          BOOL fIsGroupPolicy;
      } WCM_POLICY_VALUE, *PWCM_POLICY_VALUE;
  
 -    typedef struct _WCM_PROFILE_INFO
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_PROFILE_INFO
++    typedef struct   _WCM_PROFILE_INFO
      {
          WCHAR strProfileName[WCM_MAX_PROFILE_NAME];
          GUID AdapterGUID;
@@ -45,7 +45,7 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_PROFILE_INFO, *PWCM_PROFILE_INFO;
  
 -    typedef struct _WCM_PROFILE_INFO_LIST
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_PROFILE_INFO_LIST
++    typedef struct   _WCM_PROFILE_INFO_LIST
      {
          DWORD dwNumberOfItems;
  
@@ -54,7 +54,7 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_PROFILE_INFO_LIST, *PWCM_PROFILE_INFO_LIST;
  
 -    typedef enum _WCM_CONNECTION_COST
-+    typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_CONNECTION_COST
++    typedef enum   _WCM_CONNECTION_COST
      {
          // cost level
          WCM_CONNECTION_COST_UNKNOWN = 0x0,
@@ -63,7 +63,7 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_CONNECTION_COST, *PWCM_CONNECTION_COST;
  
 -    typedef enum _WCM_CONNECTION_COST_SOURCE
-+    typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_CONNECTION_COST_SOURCE
++    typedef enum   _WCM_CONNECTION_COST_SOURCE
      {
          WCM_CONNECTION_COST_SOURCE_DEFAULT = 0,
          WCM_CONNECTION_COST_SOURCE_GP = 1,
@@ -72,16 +72,16 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_CONNECTION_COST_SOURCE, *PWCM_CONNECTION_COST_SOURCE;
  
 -    typedef struct _WCM_CONNECTION_COST_DATA
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_CONNECTION_COST_DATA
++    typedef struct   _WCM_CONNECTION_COST_DATA
      {
 -        DWORD ConnectionCost; // a bit-or of WCM_CONNECTION_COST
-+        _Win32_AssociatedEnum_(WCM_CONNECTION_COST) DWORD ConnectionCost; // a bit-or of WCM_CONNECTION_COST
++         DWORD ConnectionCost; // a bit-or of WCM_CONNECTION_COST
          WCM_CONNECTION_COST_SOURCE CostSource;
          // other fields will be added later
      } WCM_CONNECTION_COST_DATA, *PWCM_CONNECTION_COST_DATA;
  
 -    typedef struct _WCM_TIME_INTERVAL
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_TIME_INTERVAL
++    typedef struct   _WCM_TIME_INTERVAL
      {
          WORD wYear;         // [0, 30827]
          WORD wMonth;        // [0,12]
@@ -90,14 +90,14 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_TIME_INTERVAL;
  
 -    typedef struct _WCM_USAGE_DATA
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_USAGE_DATA
++    typedef struct   _WCM_USAGE_DATA
      {
          DWORD UsageInMegabytes;
          FILETIME LastSyncTime;
      } WCM_USAGE_DATA, *PWCM_USAGE_DATA;
  
 -    typedef struct WCM_BILLING_CYCLE_INFO
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WCM_BILLING_CYCLE_INFO
++    typedef struct   WCM_BILLING_CYCLE_INFO
      {
          FILETIME StartDate;
          WCM_TIME_INTERVAL Duration;
@@ -105,7 +105,7 @@ index 16e9b47f8e..cbbdd5b345 100644
      } WCM_BILLING_CYCLE_INFO;
  
 -    typedef struct _WCM_DATAPLAN_STATUS
-+    typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WCM_DATAPLAN_STATUS
++    typedef struct   _WCM_DATAPLAN_STATUS
      {
          WCM_USAGE_DATA UsageData;
          DWORD DataLimitInMegabytes;
@@ -113,7 +113,7 @@ index 16e9b47f8e..cbbdd5b345 100644
  
  #ifndef __midl
  
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++    _Windows_SupportedOS_Windows8_  
      DWORD WINAPI WcmQueryProperty(
          _In_opt_ const GUID* pInterface, // NULL for global properties
          _In_opt_ LPCWSTR strProfileName,
@@ -121,9 +121,9 @@ index 16e9b47f8e..cbbdd5b345 100644
          _Reserved_ void* pReserved,
          _Out_ PDWORD pdwDataSize,
 -        _Outptr_result_buffer_maybenull_(*pdwDataSize) PBYTE* ppData);
-+        _Outptr_result_buffer_maybenull_(*pdwDataSize) _Win32_RAIIFree_(WcmFreeMemory) PBYTE* ppData);
++        _Outptr_result_buffer_maybenull_(*pdwDataSize)  PBYTE* ppData);
  
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++    _Windows_SupportedOS_Windows8_  
      DWORD WINAPI WcmSetProperty(
          _In_opt_ const GUID* pInterface, // NULL for global properties
          _In_opt_ LPCWSTR strProfileName,
@@ -132,15 +132,15 @@ index 16e9b47f8e..cbbdd5b345 100644
          _In_reads_opt_(dwDataSize) const BYTE* pbData);
  
 -    DWORD WINAPI WcmGetProfileList(_Reserved_ void* pReserved, _Outptr_ WCM_PROFILE_INFO_LIST** ppProfileList);
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
-+    DWORD WINAPI WcmGetProfileList(_Reserved_ void* pReserved, _Outptr_ _Win32_RAIIFree_(WcmFreeMemory) WCM_PROFILE_INFO_LIST** ppProfileList);
++    _Windows_SupportedOS_Windows8_  
++    DWORD WINAPI WcmGetProfileList(_Reserved_ void* pReserved, _Outptr_  WCM_PROFILE_INFO_LIST** ppProfileList);
  
      // Ethernet pseudo-profiles should not be included in pProfileList
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++    _Windows_SupportedOS_Windows8_  
      DWORD WINAPI WcmSetProfileList(
          _In_ WCM_PROFILE_INFO_LIST* pProfileList, _In_ DWORD dwPosition, _In_ BOOL fIgnoreUnknownProfiles, _Reserved_ void* pReserved);
  
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++    _Windows_SupportedOS_Windows8_  
      void WINAPI WcmFreeMemory(__deallocate(Mem) void* pMemory);
  
  #endif // not __midl

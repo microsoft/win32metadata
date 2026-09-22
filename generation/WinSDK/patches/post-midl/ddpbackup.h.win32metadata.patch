@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+index 70fcb7c665..a98d5994a0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
 @@ -86,17 +86,18 @@ extern "C"{
@@ -10,7 +11,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h b/generation/
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #if (NTDDI_VERSION >= NTDDI_WIN8)
 -typedef struct _DEDUP_CONTAINER_EXTENT
-+typedef struct _Windows_SupportedOS_Server2012_ _DEDUP_CONTAINER_EXTENT
++typedef struct  _DEDUP_CONTAINER_EXTENT
      {
      ULONG ContainerIndex;
      hyper StartOffset;
@@ -18,7 +19,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h b/generation/
      } 	DEDUP_CONTAINER_EXTENT;
  
 -typedef struct _DDP_FILE_EXTENT
-+typedef struct _Windows_SupportedOS_Server2012_ _DDP_FILE_EXTENT
++typedef struct  _DDP_FILE_EXTENT
      {
      hyper Length;
      hyper Offset;
+@@ -125,7 +126,7 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7BACC67A-2F1D-42D0-897E-6FF62DD533BB")
++    MIDL_INTERFACE("7BACC67A-2F1D-42D0-897E-6FF62DD533BB") _Windows_SupportedOS_Server2012_ 
+     IDedupReadFileCallback : public IUnknown
+     {
+     public:
+@@ -278,7 +279,7 @@ EXTERN_C const IID IID_IDedupBackupSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C719D963-2B2D-415E-ACF7-7EB7CA596FF4")
++    MIDL_INTERFACE("C719D963-2B2D-415E-ACF7-7EB7CA596FF4") _Windows_SupportedOS_Server2012_ 
+     IDedupBackupSupport : public IUnknown
+     {
+     public:

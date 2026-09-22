@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h b/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h
-index ab0ef556ea..aa5511020d 100644
+index ab0ef556ea..6526c0cc84 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h
 @@ -15,6 +15,7 @@ Revision History:
@@ -15,7 +15,7 @@ index ab0ef556ea..aa5511020d 100644
  #endif
  
 -typedef enum
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef enum  
  {
      kPerUser,
      kAllUsers,
@@ -23,7 +23,7 @@ index ab0ef556ea..aa5511020d 100644
  } PrintAsyncNotifyUserFilter;
  
 -typedef enum
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef enum  
  {
      kBiDirectional,
      kUniDirectional
@@ -31,8 +31,8 @@ index ab0ef556ea..aa5511020d 100644
          THIS
          ) PURE;
  
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(AcquireData)(
           THIS_
           _Outptr_opt_result_buffer_(*pSize) BYTE             **ppNotificationData,
@@ -40,8 +40,8 @@ index ab0ef556ea..aa5511020d 100644
           _Outptr_opt_                   PrintAsyncNotificationType **ppSchema
           ) PURE;
  
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(ReleaseData)(
          THIS
          ) PURE;
@@ -49,17 +49,17 @@ index ab0ef556ea..aa5511020d 100644
          THIS
          ) PURE;
  
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    _Win32_PreserveResult_
++    
++    
++    
      STDMETHOD(SendNotification)(
           THIS_
           _In_ IPrintAsyncNotifyDataObject *pData
           ) PURE;
  
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    _Win32_PreserveResult_
++    
++    
++    
      STDMETHOD(CloseChannel)(
           THIS_
           _In_ IPrintAsyncNotifyDataObject *pData
@@ -67,18 +67,18 @@ index ab0ef556ea..aa5511020d 100644
          THIS
          ) PURE;
  
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    _Win32_PreserveResult_
++    
++    
++    
      STDMETHOD(OnEventNotify)(
           THIS_
           _In_ IPrintAsyncNotifyChannel    *pChannel,
           _In_ IPrintAsyncNotifyDataObject *pData
           ) PURE;
  
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
-+    _Win32_PreserveResult_
++    
++    
++    
      STDMETHOD(ChannelClosed)(
           THIS_
           _In_ IPrintAsyncNotifyChannel    *pChannel,
@@ -86,11 +86,11 @@ index ab0ef556ea..aa5511020d 100644
  
  #undef INTERFACE
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WINAPI
-+_Win32_PreserveResult_
++
  RegisterForPrintAsyncNotifications(
      _In_opt_ PCWSTR                            pszName,
      _In_     PrintAsyncNotificationType*       pNotificationType,
@@ -98,23 +98,23 @@ index ab0ef556ea..aa5511020d 100644
               PrintAsyncNotifyConversationStyle eConversationStyle,
      _In_     IPrintAsyncNotifyCallback*        pCallback,
 -    _Out_    HANDLE*                           phNotify
-+    _Out_    _Win32_RAIIFree_(UnRegisterForPrintAsyncNotifications) HANDLE*                           phNotify
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_     HANDLE*                           phNotify
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WINAPI
-+_Win32_PreserveResult_
++
  UnRegisterForPrintAsyncNotifications(
      _In_     HANDLE
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WINAPI
-+_Win32_PreserveResult_
++
  CreatePrintAsyncNotifyChannel(
      _In_opt_ PCWSTR                            pszName,
      _In_     PrintAsyncNotificationType*       pNotificationType,
@@ -123,7 +123,7 @@ index ab0ef556ea..aa5511020d 100644
      );
  
 -typedef enum
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef enum  
  {
      CHANNEL_CLOSED_BY_SERVER                    = 0x01,
      CHANNEL_CLOSED_BY_ANOTHER_LISTENER          = 0x02,
