@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
-index f78b0cef08..fa7830203b 100644
+index f78b0cef08..0809f1af2a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 @@ -1,3 +1,4 @@
@@ -946,6 +946,15 @@ index f78b0cef08..fa7830203b 100644
  #ifdef UNICODE
  #define SHRegGetBoolUSValue  SHRegGetBoolUSValueW
  #else
+@@ -1788,7 +1789,7 @@ DECLARE_INTERFACE_IID_( IQueryAssociations, IUnknown, "c46ca590-3c3f-11d2-bee6-0
+     // IQueryAssociations methods
+     STDMETHOD (Init)(THIS_ _In_ ASSOCF flags, _In_opt_ LPCWSTR pszAssoc, _In_opt_ HKEY hkProgid, _In_opt_ HWND hwnd) PURE;
+     STDMETHOD (GetString)(THIS_ _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut) PURE;
+-    STDMETHOD (GetKey)(THIS_ _In_ ASSOCF flags, _In_ ASSOCKEY key, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut) PURE;
++    STDMETHOD (GetKey)(THIS_ _In_ ASSOCF flags, _In_ ASSOCKEY key, _In_opt_ LPCWSTR pszExtra, _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phkeyOut) PURE;
+     STDMETHOD (GetData)(THIS_ _In_ ASSOCF flags, _In_ ASSOCDATA data, _In_opt_ LPCWSTR pszExtra, _Out_writes_bytes_opt_(*pcbOut) void * pvOut, _Inout_opt_ DWORD *pcbOut) PURE;
+     STDMETHOD (GetEnum)(THIS_ _In_ ASSOCF flags, _In_ ASSOCENUM assocenum, _In_opt_ LPCWSTR pszExtra, _In_ REFIID riid, _Outptr_ void **ppvOut) PURE;
+ };
 @@ -1796,7 +1797,7 @@ DECLARE_INTERFACE_IID_( IQueryAssociations, IUnknown, "c46ca590-3c3f-11d2-bee6-0
  
  // use CLSID_QueryAssociations for clsid, object implements IQueryAssociations

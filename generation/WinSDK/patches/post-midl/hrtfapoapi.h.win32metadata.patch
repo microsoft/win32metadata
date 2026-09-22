@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
-index a1c2a9980d..06fdaa92ac 100644
+index a1c2a9980d..2d76283e41 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
 @@ -10,6 +10,7 @@
@@ -22,22 +22,22 @@ index a1c2a9980d..06fdaa92ac 100644
  
      // HRTF params
      //! The position of the sound relative to the listener.
-+    _Windows_SupportedOS_10240_
-+    _Windows_SupportedOS_Server2016_
++    
++    
      STDMETHOD(SetSourcePosition)(THIS_ _In_ const HrtfPosition* position) PURE;
      //! The rotation matrix for the source orientation, with respect to the listener's frame of reference (the listener's coordinate system).
-+    _Windows_SupportedOS_10240_
-+    _Windows_SupportedOS_Server2016_
++    
++    
      STDMETHOD(SetSourceOrientation)(THIS_ _In_ const HrtfOrientation* orientation) PURE;
      //! The custom direct path gain value for the current source position. Valid only for sounds played with the HrtfDistanceDecayType. Custom decay type.
-+    _Windows_SupportedOS_10240_
-+    _Windows_SupportedOS_Server2016_
++    
++    
      STDMETHOD(SetSourceGain)(THIS_ _In_ float gain) PURE;
  
      // Distance cue params
      //! Selects the acoustic environment to simulate.
-+    _Windows_SupportedOS_10240_
-+    _Windows_SupportedOS_Server2016_
++    
++    
      STDMETHOD(SetEnvironment)(THIS_ _In_ HrtfEnvironment environment) PURE;
  };
  

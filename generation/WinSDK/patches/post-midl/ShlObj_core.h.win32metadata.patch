@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
-index 04174f8702..cb899fdd72 100644
+index 04174f8702..e197edb0ec 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 @@ -6,6 +6,7 @@ File: shlobj_core.h
@@ -25,6 +25,28 @@ index 04174f8702..cb899fdd72 100644
  
  
  //===========================================================================
+@@ -245,8 +248,8 @@ DECLARE_INTERFACE_IID_(IExtractIconA, IUnknown, "000214eb-0000-0000-c000-0000000
+     STDMETHOD(Extract)(THIS_
+                  _In_  PCSTR   pszFile,
+                        UINT    nIconIndex,
+-             _Out_opt_ HICON   *phiconLarge,
+-             _Out_opt_ HICON   *phiconSmall,
++             _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON   *phiconLarge,
++             _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON   *phiconSmall,
+                        UINT    nIconSize) PURE;
+ };
+ 
+@@ -267,8 +270,8 @@ DECLARE_INTERFACE_IID_(IExtractIconW, IUnknown, "000214fa-0000-0000-c000-0000000
+     STDMETHOD(Extract)(THIS_
+                   _In_ PCWSTR  pszFile,
+                        UINT    nIconIndex,
+-             _Out_opt_ HICON   *phiconLarge,
+-             _Out_opt_ HICON   *phiconSmall,
++             _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON   *phiconLarge,
++             _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON   *phiconSmall,
+                        UINT    nIconSize) PURE;
+ };
+ 
 @@ -386,7 +389,9 @@ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c
  #define IDO_SHGIOI_LINK   0x0FFFFFFE
  #define IDO_SHGIOI_SLOWFILE 0x0FFFFFFFD
@@ -45,6 +67,17 @@ index 04174f8702..cb899fdd72 100644
  {
      DWORD   cbSize;             // Size of this extra data block
      DWORD   dwSignature;        // signature of this extra data block
+@@ -599,8 +604,8 @@ DECLARE_INTERFACE_IID_(IURLSearchHook, IUnknown, "ac60f6a0-0fd9-11d0-99cb-00c04f
+ 
+ DECLARE_INTERFACE_IID_(ISearchContext, IUnknown, "09F656A2-41AF-480C-88F7-16CC0D164615")
+ {
+-    STDMETHOD(GetSearchUrl)(THIS_ _Outptr_ BSTR * pbstrSearchUrl) PURE;
+-    STDMETHOD(GetSearchText)(THIS_ _Outptr_ BSTR * pbstrSearchText) PURE;
++    STDMETHOD(GetSearchUrl)(THIS_ _Win32_RAIIFree_(SysFreeString) _Outptr_ BSTR * pbstrSearchUrl) PURE;
++    STDMETHOD(GetSearchText)(THIS_ _Win32_RAIIFree_(SysFreeString) _Outptr_ BSTR * pbstrSearchText) PURE;
+     STDMETHOD(GetSearchStyle)(THIS_ _Out_ DWORD * pdwSearchStyle) PURE;
+ };
+ 
 @@ -650,25 +655,27 @@ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc
  #define FCIDM_MENU_EXPLORE          (FCIDM_GLOBALFIRST+0x0150)
  #define FCIDM_MENU_FAVORITES        (FCIDM_GLOBALFIRST+0x0170)
@@ -293,6 +326,15 @@ index 04174f8702..cb899fdd72 100644
  
  //
  // IShellChangeNotify
+@@ -2086,7 +2093,7 @@ DECLARE_INTERFACE_IID_(IShellChangeNotify, IUnknown, "D82BE2B1-5764-11D0-A96E-00
+ 
+ DECLARE_INTERFACE_IID_(IQueryInfo, IUnknown, "00021500-0000-0000-c000-000000000046")
+ {
+-    STDMETHOD(GetInfoTip)(THIS_ DWORD dwFlags, _Outptr_ PWSTR *ppwszTip) PURE;
++    STDMETHOD(GetInfoTip)(THIS_ _Win32_AssociatedEnum_(QITIPF_FLAGS) DWORD dwFlags, _Outptr_ PWSTR *ppwszTip) PURE;
+     STDMETHOD(GetInfoFlags)(THIS_ _Out_ DWORD *pdwFlags) PURE;
+ };
+ 
 @@ -2152,7 +2159,7 @@ typedef struct SHARDAPPIDINFOLINK
  #endif
  
@@ -600,6 +642,24 @@ index 04174f8702..cb899fdd72 100644
  
  //
  // Callback interface for the IShellView object returned from SHCreateShellFolderView.
+@@ -2836,7 +2847,7 @@ SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPAR
+ 
+ DECLARE_INTERFACE_IID_(IShellFolderViewCB, IUnknown, "2047E320-F2A9-11CE-AE65-08002B2E1262")
+ {
+-    STDMETHOD(MessageSFVCB)(THIS_ UINT uMsg, WPARAM wParam, LPARAM lParam) PURE;
++    STDMETHOD(MessageSFVCB)(THIS_ _Win32_AssociatedEnum_(SFVM_MESSAGE_ID) UINT uMsg, WPARAM wParam, LPARAM lParam) PURE;
+ };
+ 
+ #include <pshpack8.h>
+@@ -2978,7 +2989,7 @@ DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-0800
+     STDMETHOD(SetPoints) (THIS_ _In_ IDataObject *pDataObject) PURE; // copies points of current selection in to data object.  Call is not needed if drag operation was originated by the IShellView.
+     STDMETHOD(GetItemSpacing) (THIS_ _Out_ ITEMSPACING *pSpacing) PURE; // use IFolderView::GetSpacing instead.  GetItemSpacing returns the spacing for small and large view modes only, returning S_OK if the current view mode is is positionable, S_FALSE otherwise.
+     STDMETHOD(SetCallback) (THIS_ _In_opt_ IShellFolderViewCB* pNewCB, _Outptr_result_maybenull_ IShellFolderViewCB** ppOldCB) PURE; // replace the IShellFolderViewCB that the IShellView uses
+-    STDMETHOD(Select) ( THIS_  UINT dwFlags ) PURE; // SFVS_ select flags: select all, select none, invert selection
++    STDMETHOD(Select) ( THIS_  _Win32_AssociatedEnum_(SFVS_SELECT) UINT dwFlags ) PURE; // SFVS_ select flags: select all, select none, invert selection
+     STDMETHOD(QuerySupport) (THIS_ _Inout_ UINT * pdwSupport ) PURE; // does nothing, returns S_OK.
+     STDMETHOD(SetAutomationObject)(THIS_ _In_opt_ IDispatch* pdisp) PURE; // replaces the IShellView's internal automation object.
+ };
 @@ -2992,11 +3003,11 @@ typedef struct _SFV_CREATE
      IShellFolderViewCB* psfvcb; // No callback if NULL
  } SFV_CREATE;

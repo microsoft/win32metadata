@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
-index bb349ec0bb..99dc76d2ae 100644
+index bb349ec0bb..24cfe4b498 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
 @@ -12,6 +12,7 @@
@@ -19,6 +19,39 @@ index bb349ec0bb..99dc76d2ae 100644
      LONGLONG QuotaUsed;
      LONGLONG QuotaThreshold;
      LONGLONG QuotaLimit;
+@@ -329,12 +330,12 @@ DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-E
+ 
+     STDMETHOD(AddUserSid)(THIS_
+         PSID pUserSid,
+-        DWORD fNameResolution,
++        _Win32_AssociatedEnum_(DISKQUOTA_USERNAME_RESOLVE) DWORD fNameResolution,
+         PDISKQUOTA_USER *ppUser) PURE;
+ 
+     STDMETHOD(AddUserName)(THIS_
+         LPCWSTR pszLogonName,
+-        DWORD fNameResolution,
++        _Win32_AssociatedEnum_(DISKQUOTA_USERNAME_RESOLVE) DWORD fNameResolution,
+         PDISKQUOTA_USER *ppUser) PURE;
+ 
+     STDMETHOD(DeleteUser)(THIS_
+@@ -342,7 +343,7 @@ DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-E
+ 
+     STDMETHOD(FindUserSid)(THIS_
+         PSID pUserSid,
+-        DWORD fNameResolution,
++        _Win32_AssociatedEnum_(DISKQUOTA_USERNAME_RESOLVE) DWORD fNameResolution,
+         PDISKQUOTA_USER *ppUser) PURE;
+ 
+     STDMETHOD(FindUserName)(THIS_
+@@ -352,7 +353,7 @@ DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-E
+     STDMETHOD(CreateEnumUsers)(THIS_
+         PSID *rgpUserSids,
+         DWORD cpSids,
+-        DWORD fNameResolution,
++        _Win32_AssociatedEnum_(DISKQUOTA_USERNAME_RESOLVE) DWORD fNameResolution,
+         PENUM_DISKQUOTA_USERS *ppEnum) PURE;
+ 
+     STDMETHOD(CreateUserBatch)(THIS_
 @@ -386,5 +387,24 @@ typedef IDiskQuotaEvents DISKQUOTA_EVENTS, *PDISKQUOTA_EVENTS;
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

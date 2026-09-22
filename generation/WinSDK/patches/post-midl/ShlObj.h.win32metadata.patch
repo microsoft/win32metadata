@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
-index 62644da172..f470ee26c6 100644
+index 62644da172..54998ecc84 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 @@ -10,6 +10,7 @@ File: shlobj.h
@@ -10,6 +10,15 @@ index 62644da172..f470ee26c6 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -456,7 +457,7 @@ DECLARE_INTERFACE_IID_(IThumbnailCapture, IUnknown, "4ea39266-7211-409f-b622-f63
+     // *** IThumbnailCapture methods ***
+     STDMETHOD (CaptureThumbnail)    ( THIS_ _In_ const SIZE * pMaxSize,
+                                       _In_ IUnknown * pHTMLDoc2,
+-                                      _Out_ HBITMAP * phbmThumbnail ) PURE;
++                                      _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_ HBITMAP * phbmThumbnail ) PURE;
+ };
+ typedef IThumbnailCapture * LPTHUMBNAILCAPTURE;
+ 
 @@ -686,7 +687,7 @@ typedef IADesktopP2 * LPADESKTOPP2;
  
  typedef struct {
@@ -58,6 +67,15 @@ index 62644da172..f470ee26c6 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)
  #undef  INTERFACE
+@@ -844,7 +849,7 @@ DECLARE_INTERFACE_IID_(IBanneredBar, IUnknown, "596A9A94-013E-11d1-8D34-00A0C90F
+     STDMETHOD(SetIconSize)(THIS_ DWORD iIcon) PURE;
+     STDMETHOD(GetIconSize)(THIS_ _Out_ DWORD* piIcon) PURE;
+     STDMETHOD(SetBitmap)(THIS_ _In_ HBITMAP hBitmap) PURE;
+-    STDMETHOD(GetBitmap)(THIS_ _Out_ HBITMAP* phBitmap) PURE;
++    STDMETHOD(GetBitmap)(THIS_ _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_ HBITMAP* phBitmap) PURE;
+ };
+ 
+ 
 @@ -869,7 +874,7 @@ typedef TBINFO * LPTBINFO;
  SHSTDAPI_(BOOL) SHOpenPropSheetA(_In_opt_ LPCSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
                                   _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
