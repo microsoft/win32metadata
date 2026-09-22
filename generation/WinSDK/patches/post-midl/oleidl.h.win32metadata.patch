@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
+index 6faefa61fe..e5aa96104f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
 @@ -236,6 +236,7 @@ extern "C"{
@@ -9,12 +10,216 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h b/generation/Win
  #if _MSC_VER >= 1200
  #pragma warning(push)
  #pragma warning(disable:4820) /* padding added after data member */
+@@ -262,7 +263,7 @@ EXTERN_C const IID IID_IOleAdviseHolder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000111-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000111-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleAdviseHolder : public IUnknown
+     {
+     public:
+@@ -424,7 +425,7 @@ EXTERN_C const IID IID_IOleCache;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000011e-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000011e-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleCache : public IUnknown
+     {
+     public:
+@@ -606,7 +607,7 @@ EXTERN_C const IID IID_IOleCache2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000128-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000128-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleCache2 : public IOleCache
+     {
+     public:
+@@ -614,7 +615,7 @@ EXTERN_C const IID IID_IOleCache2;
+             /* [annotation][in] */ 
+             _In_  LPDATAOBJECT pDataObject,
+             /* [annotation][in] */ 
+-            _In_  DWORD grfUpdf,
++            _Win32_AssociatedEnum_(UPDFCACHE_FLAGS) _In_  DWORD grfUpdf,
+             /* [annotation][in] */ 
+             _Reserved_  LPVOID pReserved) = 0;
+         
+@@ -799,7 +800,7 @@ EXTERN_C const IID IID_IOleCacheControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000129-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000129-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleCacheControl : public IUnknown
+     {
+     public:
+@@ -895,7 +896,7 @@ EXTERN_C const IID IID_IParseDisplayName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000011a-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000011a-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IParseDisplayName : public IUnknown
+     {
+     public:
+@@ -996,13 +997,13 @@ EXTERN_C const IID IID_IOleContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000011b-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000011b-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleContainer : public IParseDisplayName
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE EnumObjects( 
+             /* [annotation][in] */ 
+-            _In_  DWORD grfFlags,
++            _Win32_AssociatedEnum_(OLECONTF) _In_  DWORD grfFlags,
+             /* [annotation][out] */ 
+             _Out_  IEnumUnknown **ppenum) = 0;
+         
+@@ -1118,7 +1119,7 @@ EXTERN_C const IID IID_IOleClientSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000118-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000118-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleClientSite : public IUnknown
+     {
+     public:
+@@ -1126,9 +1127,9 @@ EXTERN_C const IID IID_IOleClientSite;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMoniker( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwAssign,
++            _Win32_AssociatedEnum_(OLEGETMONIKER) _In_  DWORD dwAssign,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwWhichMoniker,
++            _Win32_AssociatedEnum_(OLEWHICHMK) _In_  DWORD dwWhichMoniker,
+             /* [annotation][out] */ 
+             _Out_  IMoniker **ppmk) = 0;
+         
+@@ -1328,7 +1329,7 @@ EXTERN_C const IID IID_IOleObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000112-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000112-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleObject : public IUnknown
+     {
+     public:
+@@ -1348,19 +1349,19 @@ EXTERN_C const IID IID_IOleObject;
+         
+         virtual HRESULT STDMETHODCALLTYPE Close( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwSaveOption) = 0;
++            _Win32_AssociatedEnum_(OLECLOSE) _In_  DWORD dwSaveOption) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetMoniker( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwWhichMoniker,
++            _Win32_AssociatedEnum_(OLEWHICHMK) _In_  DWORD dwWhichMoniker,
+             /* [annotation][unique][in] */ 
+             _In_  IMoniker *pmk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMoniker( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwAssign,
++            _Win32_AssociatedEnum_(OLEGETMONIKER) _In_  DWORD dwAssign,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwWhichMoniker,
++            _Win32_AssociatedEnum_(OLEWHICHMK) _In_  DWORD dwWhichMoniker,
+             /* [annotation][out] */ 
+             _Out_  IMoniker **ppmk) = 0;
+         
+@@ -1406,19 +1407,19 @@ EXTERN_C const IID IID_IOleObject;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetUserType( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFormOfType,
++            _Win32_AssociatedEnum_(USERCLASSTYPE) _In_  DWORD dwFormOfType,
+             /* [annotation][out] */ 
+             _Out_  LPOLESTR *pszUserType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetExtent( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDrawAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwDrawAspect,
+             /* [annotation][in] */ 
+             _In_  SIZEL *psizel) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetExtent( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDrawAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwDrawAspect,
+             /* [annotation][out] */ 
+             _Out_  SIZEL *psizel) = 0;
+         
+@@ -1438,9 +1439,9 @@ EXTERN_C const IID IID_IOleObject;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMiscStatus( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwAspect,
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwStatus) = 0;
++            _Win32_AssociatedEnum_(OLEMISC) _Out_  DWORD *pdwStatus) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetColorScheme( 
+             /* [annotation][in] */ 
+@@ -1782,7 +1783,7 @@ EXTERN_C const IID IID_IOleWindow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000114-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000114-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleWindow : public IUnknown
+     {
+     public:
+@@ -1901,7 +1902,7 @@ EXTERN_C const IID IID_IOleLink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000011d-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000011d-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleLink : public IUnknown
+     {
+     public:
+@@ -2138,7 +2139,7 @@ EXTERN_C const IID IID_IOleItemContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000011c-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000011c-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleItemContainer : public IOleContainer
+     {
+     public:
+@@ -2324,7 +2325,7 @@ EXTERN_C const IID IID_IOleInPlaceUIWindow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000115-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000115-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceUIWindow : public IOleWindow
+     {
+     public:
+@@ -2475,7 +2476,7 @@ EXTERN_C const IID IID_IOleInPlaceActiveObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000117-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000117-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceActiveObject : public IOleWindow
+     {
+     public:
 @@ -2668,7 +2669,7 @@ void __RPC_STUB IOleInPlaceActiveObject_RemoteResizeBorder_Stub(
  
  typedef /* [unique] */  __RPC_unique_pointer IOleInPlaceFrame *LPOLEINPLACEFRAME;
  
 -typedef struct tagOIFI
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagOIFI
++typedef struct   tagOIFI
      {
      UINT cb;
      BOOL fMDIApp;
@@ -23,16 +228,425 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h b/generation/Win
  typedef struct tagOIFI *LPOLEINPLACEFRAMEINFO;
  
 -typedef struct tagOleMenuGroupWidths
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagOleMenuGroupWidths
++typedef struct   tagOleMenuGroupWidths
      {
      LONG width[ 6 ];
      } 	OLEMENUGROUPWIDTHS;
-@@ -4385,7 +4386,7 @@ extern RPC_IF_HANDLE __MIDL_itf_oleidl_0000_0024_v0_0_s_ifspec;
+@@ -2693,7 +2694,7 @@ EXTERN_C const IID IID_IOleInPlaceFrame;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000116-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000116-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceFrame : public IOleInPlaceUIWindow
+     {
+     public:
+@@ -2921,7 +2922,7 @@ EXTERN_C const IID IID_IOleInPlaceObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000113-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000113-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceObject : public IOleWindow
+     {
+     public:
+@@ -3060,7 +3061,7 @@ EXTERN_C const IID IID_IOleInPlaceSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000119-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000119-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceSite : public IOleWindow
+     {
+     public:
+@@ -3360,13 +3361,13 @@ EXTERN_C const IID IID_IViewObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000010d-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000010d-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IViewObject : public IUnknown
+     {
+     public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Draw( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDrawAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwDrawAspect,
+             /* [annotation][in] */ 
+             _In_  LONG lindex,
+             /* [annotation][unique][in] */ 
+@@ -3389,7 +3390,7 @@ EXTERN_C const IID IID_IViewObject;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetColorSet( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDrawAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwDrawAspect,
+             /* [annotation][in] */ 
+             _In_  LONG lindex,
+             /* [annotation][unique][in] */ 
+@@ -3403,7 +3404,7 @@ EXTERN_C const IID IID_IViewObject;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Freeze( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDrawAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwDrawAspect,
+             /* [annotation][in] */ 
+             _In_  LONG lindex,
+             /* [annotation][unique][in] */ 
+@@ -3417,7 +3418,7 @@ EXTERN_C const IID IID_IViewObject;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetAdvise( 
+             /* [annotation][in] */ 
+-            _In_  DWORD aspects,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD aspects,
+             /* [annotation][in] */ 
+             _In_  DWORD advf,
+             /* [annotation][unique][in] */ 
+@@ -3688,13 +3689,13 @@ EXTERN_C const IID IID_IViewObject2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000127-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000127-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IViewObject2 : public IViewObject
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetExtent( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDrawAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwDrawAspect,
+             /* [annotation][in] */ 
+             _In_  LONG lindex,
+             /* [annotation][unique][in] */ 
+@@ -3887,19 +3888,19 @@ EXTERN_C const IID IID_IDropSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000121-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000121-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IDropSource : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual HRESULT STDMETHODCALLTYPE QueryContinueDrag( 
+             /* [annotation][in] */ 
+             _In_  BOOL fEscapePressed,
+             /* [annotation][in] */ 
+-            _In_  DWORD grfKeyState) = 0;
++            _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) _In_  DWORD grfKeyState) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GiveFeedback( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GiveFeedback( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwEffect) = 0;
++            _Win32_AssociatedEnum_(DROPEFFECT) _In_  DWORD dwEffect) = 0;
+         
+     };
+     
+@@ -4025,7 +4026,7 @@ EXTERN_C const IID IID_IDropTarget;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000122-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000122-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IDropTarget : public IUnknown
+     {
+     public:
+@@ -4033,19 +4034,19 @@ EXTERN_C const IID IID_IDropTarget;
+             /* [annotation][unique][in] */ 
+             _In_  IDataObject *pDataObj,
+             /* [annotation][in] */ 
+-            _In_  DWORD grfKeyState,
++            _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) _In_  DWORD grfKeyState,
+             /* [annotation][in] */ 
+             _In_  POINTL pt,
+             /* [annotation][out][in] */ 
+-            _Inout_  DWORD *pdwEffect) = 0;
++            _Win32_AssociatedEnum_(DROPEFFECT) _Inout_  DWORD *pdwEffect) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DragOver( 
+             /* [annotation][in] */ 
+-            _In_  DWORD grfKeyState,
++            _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) _In_  DWORD grfKeyState,
+             /* [annotation][in] */ 
+             _In_  POINTL pt,
+             /* [annotation][out][in] */ 
+-            _Inout_  DWORD *pdwEffect) = 0;
++            _Win32_AssociatedEnum_(DROPEFFECT) _Inout_  DWORD *pdwEffect) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DragLeave( void) = 0;
+         
+@@ -4053,11 +4054,11 @@ EXTERN_C const IID IID_IDropTarget;
+             /* [annotation][unique][in] */ 
+             _In_  IDataObject *pDataObj,
+             /* [annotation][in] */ 
+-            _In_  DWORD grfKeyState,
++            _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) _In_  DWORD grfKeyState,
+             /* [annotation][in] */ 
+             _In_  POINTL pt,
+             /* [annotation][out][in] */ 
+-            _Inout_  DWORD *pdwEffect) = 0;
++            _Win32_AssociatedEnum_(DROPEFFECT) _Inout_  DWORD *pdwEffect) = 0;
+         
+     };
+     
+@@ -4179,7 +4180,7 @@ EXTERN_C const IID IID_IDropSourceNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000012B-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000012B-0000-0000-C000-000000000046") _Windows_SupportedOS_WindowsVista_ 
+     IDropSourceNotify : public IUnknown
+     {
+     public:
+@@ -4275,7 +4276,7 @@ EXTERN_C const IID IID_IEnterpriseDropTarget;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("390E3878-FD55-4E18-819D-4682081C0CFD")
++    MIDL_INTERFACE("390E3878-FD55-4E18-819D-4682081C0CFD") _Windows_SupportedOS_10240_ 
+     IEnterpriseDropTarget : public IUnknown
+     {
+     public:
+@@ -4385,12 +4386,12 @@ extern RPC_IF_HANDLE __MIDL_itf_oleidl_0000_0024_v0_0_s_ifspec;
  
  typedef /* [unique] */  __RPC_unique_pointer IEnumOLEVERB *LPENUMOLEVERB;
  
 -typedef struct tagOLEVERB
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagOLEVERB
++typedef struct   tagOLEVERB
      {
-     LONG lVerb;
+-    LONG lVerb;
++    _Win32_AssociatedEnum_(OLEIVERB) LONG lVerb;
      LPOLESTR lpszVerbName;
+-    DWORD fuFlags;
+-    DWORD grfAttribs;
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) DWORD fuFlags;
++    _Win32_AssociatedEnum_(OLEVERBATTRIB) DWORD grfAttribs;
+     } 	OLEVERB;
+ 
+ typedef struct tagOLEVERB *LPOLEVERB;
+@@ -4407,7 +4408,7 @@ EXTERN_C const IID IID_IEnumOLEVERB;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000104-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000104-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IEnumOLEVERB : public IUnknown
+     {
+     public:
+@@ -4558,75 +4559,75 @@ extern RPC_IF_HANDLE __MIDL_itf_oleidl_0000_0025_v0_0_s_ifspec;
+ 
+ /* Additional Prototypes for ALL interfaces */
+ 
+-unsigned long             __RPC_USER  CLIPFORMAT_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLIPFORMAT * ); 
+-unsigned char * __RPC_USER  CLIPFORMAT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLIPFORMAT * ); 
+-unsigned char * __RPC_USER  CLIPFORMAT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLIPFORMAT * ); 
+-void                      __RPC_USER  CLIPFORMAT_UserFree(     __RPC__in unsigned long *, __RPC__in CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  CLIPFORMAT_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  CLIPFORMAT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  CLIPFORMAT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  CLIPFORMAT_UserFree(     __RPC__in unsigned long *, __RPC__in CLIPFORMAT * ); 
+ 
+-unsigned long             __RPC_USER  HACCEL_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HACCEL * ); 
+-unsigned char * __RPC_USER  HACCEL_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HACCEL * ); 
+-unsigned char * __RPC_USER  HACCEL_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HACCEL * ); 
+-void                      __RPC_USER  HACCEL_UserFree(     __RPC__in unsigned long *, __RPC__in HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HACCEL_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HACCEL_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HACCEL_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HACCEL_UserFree(     __RPC__in unsigned long *, __RPC__in HACCEL * ); 
+ 
+-unsigned long             __RPC_USER  HDC_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HDC * ); 
+-unsigned char * __RPC_USER  HDC_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HDC * ); 
+-unsigned char * __RPC_USER  HDC_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HDC * ); 
+-void                      __RPC_USER  HDC_UserFree(     __RPC__in unsigned long *, __RPC__in HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HDC_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HDC_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HDC_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HDC_UserFree(     __RPC__in unsigned long *, __RPC__in HDC * ); 
+ 
+-unsigned long             __RPC_USER  HGLOBAL_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HGLOBAL * ); 
+-unsigned char * __RPC_USER  HGLOBAL_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HGLOBAL * ); 
+-unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
+-void                      __RPC_USER  HGLOBAL_UserFree(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HGLOBAL_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HGLOBAL_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HGLOBAL_UserFree(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
+ 
+ unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+-unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+-unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+-void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
+-
+-unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+-unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+-unsigned char * __RPC_USER  HWND_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+-void                      __RPC_USER  HWND_UserFree(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+-
+-unsigned long             __RPC_USER  STGMEDIUM_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in STGMEDIUM * ); 
+-unsigned char * __RPC_USER  STGMEDIUM_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in STGMEDIUM * ); 
+-unsigned char * __RPC_USER  STGMEDIUM_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out STGMEDIUM * ); 
+-void                      __RPC_USER  STGMEDIUM_UserFree(     __RPC__in unsigned long *, __RPC__in STGMEDIUM * ); 
+-
+-unsigned long             __RPC_USER  CLIPFORMAT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLIPFORMAT * ); 
+-unsigned char * __RPC_USER  CLIPFORMAT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLIPFORMAT * ); 
+-unsigned char * __RPC_USER  CLIPFORMAT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLIPFORMAT * ); 
+-void                      __RPC_USER  CLIPFORMAT_UserFree64(     __RPC__in unsigned long *, __RPC__in CLIPFORMAT * ); 
+-
+-unsigned long             __RPC_USER  HACCEL_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HACCEL * ); 
+-unsigned char * __RPC_USER  HACCEL_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HACCEL * ); 
+-unsigned char * __RPC_USER  HACCEL_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HACCEL * ); 
+-void                      __RPC_USER  HACCEL_UserFree64(     __RPC__in unsigned long *, __RPC__in HACCEL * ); 
+-
+-unsigned long             __RPC_USER  HDC_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HDC * ); 
+-unsigned char * __RPC_USER  HDC_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HDC * ); 
+-unsigned char * __RPC_USER  HDC_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HDC * ); 
+-void                      __RPC_USER  HDC_UserFree64(     __RPC__in unsigned long *, __RPC__in HDC * ); 
+-
+-unsigned long             __RPC_USER  HGLOBAL_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HGLOBAL * ); 
+-unsigned char * __RPC_USER  HGLOBAL_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HGLOBAL * ); 
+-unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
+-void                      __RPC_USER  HGLOBAL_UserFree64(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
+-
+-unsigned long             __RPC_USER  HMENU_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+-unsigned char * __RPC_USER  HMENU_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+-unsigned char * __RPC_USER  HMENU_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+-void                      __RPC_USER  HMENU_UserFree64(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
+-
+-unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+-unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+-unsigned char * __RPC_USER  HWND_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+-void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+-
+-unsigned long             __RPC_USER  STGMEDIUM_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in STGMEDIUM * ); 
+-unsigned char * __RPC_USER  STGMEDIUM_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in STGMEDIUM * ); 
+-unsigned char * __RPC_USER  STGMEDIUM_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out STGMEDIUM * ); 
+-void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsigned long *, __RPC__in STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HWND_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HWND_UserFree(     __RPC__in unsigned long *, __RPC__in HWND * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  STGMEDIUM_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  STGMEDIUM_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  STGMEDIUM_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  STGMEDIUM_UserFree(     __RPC__in unsigned long *, __RPC__in STGMEDIUM * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  CLIPFORMAT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  CLIPFORMAT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  CLIPFORMAT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLIPFORMAT * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  CLIPFORMAT_UserFree64(     __RPC__in unsigned long *, __RPC__in CLIPFORMAT * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HACCEL_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HACCEL_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HACCEL_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HACCEL * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HACCEL_UserFree64(     __RPC__in unsigned long *, __RPC__in HACCEL * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HDC_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HDC_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HDC_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HDC * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HDC_UserFree64(     __RPC__in unsigned long *, __RPC__in HDC * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HGLOBAL_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HGLOBAL_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HGLOBAL_UserFree64(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMENU_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMENU_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMENU_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HMENU_UserFree64(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HWND_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned long *, __RPC__in HWND * ); 
++
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  STGMEDIUM_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  STGMEDIUM_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  STGMEDIUM_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out STGMEDIUM * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsigned long *, __RPC__in STGMEDIUM * ); 
+ 
+ /* [local] */ HRESULT STDMETHODCALLTYPE IOleCache2_UpdateCache_Proxy( 
+     IOleCache2 * This,
+@@ -4823,6 +4824,75 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("UPDFCACHE_ALL")
++#undef UPDFCACHE_ALL
++#pragma push_macro("UPDFCACHE_ALLBUTNODATACACHE")
++#undef UPDFCACHE_ALLBUTNODATACACHE
++#pragma push_macro("UPDFCACHE_NORMALCACHE")
++#undef UPDFCACHE_NORMALCACHE
++#pragma push_macro("UPDFCACHE_IFBLANK")
++#undef UPDFCACHE_IFBLANK
++#pragma push_macro("UPDFCACHE_ONLYIFBLANK")
++#undef UPDFCACHE_ONLYIFBLANK
++#pragma push_macro("UPDFCACHE_NODATACACHE")
++#undef UPDFCACHE_NODATACACHE
++#pragma push_macro("UPDFCACHE_ONSAVECACHE")
++#undef UPDFCACHE_ONSAVECACHE
++#pragma push_macro("UPDFCACHE_ONSTOPCACHE")
++#undef UPDFCACHE_ONSTOPCACHE
++#pragma push_macro("UPDFCACHE_IFBLANKORONSAVECACHE")
++#undef UPDFCACHE_IFBLANKORONSAVECACHE
++enum [[clang::flag_enum]] UPDFCACHE_FLAGS : unsigned int
++{
++    UPDFCACHE_ALL = 2147483647U,
++    UPDFCACHE_ALLBUTNODATACACHE = 2147483646U,
++    UPDFCACHE_NORMALCACHE = 8U,
++    UPDFCACHE_IFBLANK = 16U,
++    UPDFCACHE_ONLYIFBLANK = 2147483648U,
++    UPDFCACHE_NODATACACHE = 1U,
++    UPDFCACHE_ONSAVECACHE = 2U,
++    UPDFCACHE_ONSTOPCACHE = 4U,
++    UPDFCACHE_IFBLANKORONSAVECACHE = 18U,
++};
++#pragma pop_macro("UPDFCACHE_IFBLANKORONSAVECACHE")
++#pragma pop_macro("UPDFCACHE_ONSTOPCACHE")
++#pragma pop_macro("UPDFCACHE_ONSAVECACHE")
++#pragma pop_macro("UPDFCACHE_NODATACACHE")
++#pragma pop_macro("UPDFCACHE_ONLYIFBLANK")
++#pragma pop_macro("UPDFCACHE_IFBLANK")
++#pragma pop_macro("UPDFCACHE_NORMALCACHE")
++#pragma pop_macro("UPDFCACHE_ALLBUTNODATACACHE")
++#pragma pop_macro("UPDFCACHE_ALL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DROPEFFECT_NONE")
++#undef DROPEFFECT_NONE
++#pragma push_macro("DROPEFFECT_COPY")
++#undef DROPEFFECT_COPY
++#pragma push_macro("DROPEFFECT_MOVE")
++#undef DROPEFFECT_MOVE
++#pragma push_macro("DROPEFFECT_LINK")
++#undef DROPEFFECT_LINK
++#pragma push_macro("DROPEFFECT_SCROLL")
++#undef DROPEFFECT_SCROLL
++enum [[clang::flag_enum]] DROPEFFECT : unsigned int
++{
++    DROPEFFECT_NONE = 0U,
++    DROPEFFECT_COPY = 1U,
++    DROPEFFECT_MOVE = 2U,
++    DROPEFFECT_LINK = 4U,
++    DROPEFFECT_SCROLL = 2147483648U,
++};
++#pragma pop_macro("DROPEFFECT_SCROLL")
++#pragma pop_macro("DROPEFFECT_LINK")
++#pragma pop_macro("DROPEFFECT_MOVE")
++#pragma pop_macro("DROPEFFECT_COPY")
++#pragma pop_macro("DROPEFFECT_NONE")
++#endif
++
+ #endif
+ 
+ 

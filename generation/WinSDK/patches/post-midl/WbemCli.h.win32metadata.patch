@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
-index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814ebbbfb4368 100644
+index d9f81143fb..bb0ae02883 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 @@ -430,6 +430,7 @@ extern "C"{
@@ -10,16 +10,76 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
  #pragma region Desktop Family or WinMgmt Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT)
  
-@@ -894,7 +895,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+@@ -485,7 +486,11 @@ enum tag_WBEM_CHANGE_FLAG_TYPE
+     } 	WBEM_CHANGE_FLAG_TYPE;
+ 
+ typedef /* [v1_enum] */ 
+-enum tag_WBEM_GENERIC_FLAG_TYPE
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ tag_WBEM_GENERIC_FLAG_TYPE
+     {
+         WBEM_FLAG_RETURN_IMMEDIATELY	= 0x10,
+         WBEM_FLAG_RETURN_WBEM_COMPLETE	= 0,
+@@ -893,8 +898,8 @@ EXTERN_C const IID IID_IWbemClassObject;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("dc12a681-737f-11cf-884d-00aa004b2e24")
+-    MIDL_INTERFACE("dc12a681-737f-11cf-884d-00aa004b2e24")
 -    IWbemClassObject : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemClassObject : public IUnknown
++    MIDL_INTERFACE("dc12a681-737f-11cf-884d-00aa004b2e24") _Windows_SupportedOS_WindowsVista_ 
++      IWbemClassObject : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetQualifierSet( 
-@@ -1261,7 +1262,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+@@ -928,7 +933,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+             /* [annotation][string][in] */ 
+             _In_  LPCWSTR wszQualifierName,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_CONDITION_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  VARIANT *pQualifierVal,
+             /* [annotation][out] */ 
+@@ -962,7 +967,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+             /* [annotation][in] */ 
+             _In_  long lFlags,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pstrObjectText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pstrObjectText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SpawnDerivedClass( 
+             /* [annotation][in] */ 
+@@ -978,7 +983,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+         
+         virtual HRESULT STDMETHODCALLTYPE CompareTo( 
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_COMPARISON_FLAG) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemClassObject *pCompareTo) = 0;
+         
+@@ -986,7 +991,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+             /* [annotation][string][in] */ 
+             _In_  LPCWSTR wszName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pstrClassName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pstrClassName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE InheritsFrom( 
+             /* [annotation][in] */ 
+@@ -1039,7 +1044,7 @@ EXTERN_C const IID IID_IWbemClassObject;
+             /* [annotation][string][in] */ 
+             _In_  LPCWSTR wszMethodName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pstrClassName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pstrClassName) = 0;
+         
+     };
+     
+@@ -1261,7 +1266,7 @@ EXTERN_C const IID IID_IWbemClassObject;
          END_INTERFACE
      } IWbemClassObjectVtbl;
  
@@ -28,16 +88,27 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemClassObjectVtbl *lpVtbl;
      };
-@@ -1376,7 +1377,7 @@ EXTERN_C const IID IID_IWbemObjectAccess;
+@@ -1375,8 +1380,8 @@ EXTERN_C const IID IID_IWbemObjectAccess;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("49353c9a-516b-11d1-aea6-00c04fb68820")
+-    MIDL_INTERFACE("49353c9a-516b-11d1-aea6-00c04fb68820")
 -    IWbemObjectAccess : public IWbemClassObject
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectAccess : public IWbemClassObject
++    MIDL_INTERFACE("49353c9a-516b-11d1-aea6-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IWbemObjectAccess : public IWbemClassObject
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetPropertyHandle( 
-@@ -1751,7 +1752,7 @@ EXTERN_C const IID IID_IWbemObjectAccess;
+@@ -1433,7 +1438,7 @@ EXTERN_C const IID IID_IWbemObjectAccess;
+             /* [annotation][in] */ 
+             _In_  long lHandle,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pstrName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pstrName,
+             /* [annotation][out] */ 
+             _Out_  CIMTYPE *pType) = 0;
+         
+@@ -1751,7 +1756,7 @@ EXTERN_C const IID IID_IWbemObjectAccess;
          END_INTERFACE
      } IWbemObjectAccessVtbl;
  
@@ -46,16 +117,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemObjectAccessVtbl *lpVtbl;
      };
-@@ -1897,7 +1898,7 @@ EXTERN_C const IID IID_IWbemQualifierSet;
+@@ -1896,8 +1901,8 @@ EXTERN_C const IID IID_IWbemQualifierSet;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("dc12a680-737f-11cf-884d-00aa004b2e24")
+-    MIDL_INTERFACE("dc12a680-737f-11cf-884d-00aa004b2e24")
 -    IWbemQualifierSet : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemQualifierSet : public IUnknown
++    MIDL_INTERFACE("dc12a680-737f-11cf-884d-00aa004b2e24") _Windows_SupportedOS_WindowsVista_ 
++      IWbemQualifierSet : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Get( 
-@@ -2020,7 +2021,7 @@ EXTERN_C const IID IID_IWbemQualifierSet;
+@@ -2020,7 +2025,7 @@ EXTERN_C const IID IID_IWbemQualifierSet;
          END_INTERFACE
      } IWbemQualifierSetVtbl;
  
@@ -64,16 +137,215 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemQualifierSetVtbl *lpVtbl;
      };
-@@ -2084,7 +2085,7 @@ EXTERN_C const IID IID_IWbemServices;
+@@ -2083,15 +2088,15 @@ EXTERN_C const IID IID_IWbemServices;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("9556dc99-828c-11cf-a37e-00aa003240c7")
+-    MIDL_INTERFACE("9556dc99-828c-11cf-a37e-00aa003240c7")
 -    IWbemServices : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemServices : public IUnknown
++    MIDL_INTERFACE("9556dc99-828c-11cf-a37e-00aa003240c7") _Windows_SupportedOS_WindowsVista_ 
++      IWbemServices : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OpenNamespace( 
-@@ -2625,7 +2626,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strNamespace,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [unique][in][out] */ __RPC__deref_opt_inout_opt IWbemServices **ppWorkingNamespace,
+@@ -2103,7 +2108,7 @@ EXTERN_C const IID IID_IWbemServices;
+         
+         virtual HRESULT STDMETHODCALLTYPE QueryObjectSink( 
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][out] */ 
+             _Out_  IWbemObjectSink **ppResponseHandler) = 0;
+         
+@@ -2111,7 +2116,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strObjectPath,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [unique][in][out] */ __RPC__deref_opt_inout_opt IWbemClassObject **ppObject,
+@@ -2121,7 +2126,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strObjectPath,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2131,7 +2136,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  IWbemClassObject *pObject,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [unique][in][out] */ __RPC__deref_opt_inout_opt IWbemCallResult **ppCallResult) = 0;
+@@ -2140,7 +2145,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  IWbemClassObject *pObject,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2150,7 +2155,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strClass,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [unique][in][out] */ __RPC__deref_opt_inout_opt IWbemCallResult **ppCallResult) = 0;
+@@ -2159,7 +2164,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strClass,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2169,7 +2174,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strSuperclass,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][out] */ 
+@@ -2179,7 +2184,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strSuperclass,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2189,7 +2194,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  IWbemClassObject *pInst,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [unique][in][out] */ __RPC__deref_opt_inout_opt IWbemCallResult **ppCallResult) = 0;
+@@ -2198,7 +2203,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  IWbemClassObject *pInst,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2208,7 +2213,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strObjectPath,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [unique][in][out] */ __RPC__deref_opt_inout_opt IWbemCallResult **ppCallResult) = 0;
+@@ -2217,7 +2222,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strObjectPath,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2227,7 +2232,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strFilter,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][out] */ 
+@@ -2237,7 +2242,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strFilter,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2249,7 +2254,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strQuery,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][out] */ 
+@@ -2261,7 +2266,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strQuery,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2273,7 +2278,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strQuery,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][out] */ 
+@@ -2285,7 +2290,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strQuery,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2297,7 +2302,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strMethodName,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2311,7 +2316,7 @@ EXTERN_C const IID IID_IWbemServices;
+             /* [annotation][in] */ 
+             _In_  const BSTR strMethodName,
+             /* [annotation][in] */ 
+-            _In_  long lFlags,
++            _Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE) _In_  long lFlags,
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][in] */ 
+@@ -2625,7 +2630,7 @@ EXTERN_C const IID IID_IWbemServices;
          END_INTERFACE
      } IWbemServicesVtbl;
  
@@ -82,16 +354,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemServicesVtbl *lpVtbl;
      };
-@@ -2737,7 +2738,7 @@ EXTERN_C const IID IID_IWbemLocator;
+@@ -2736,8 +2741,8 @@ EXTERN_C const IID IID_IWbemLocator;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("dc12a687-737f-11cf-884d-00aa004b2e24")
+-    MIDL_INTERFACE("dc12a687-737f-11cf-884d-00aa004b2e24")
 -    IWbemLocator : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemLocator : public IUnknown
++    MIDL_INTERFACE("dc12a687-737f-11cf-884d-00aa004b2e24") _Windows_SupportedOS_WindowsVista_ 
++      IWbemLocator : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE ConnectServer( 
-@@ -2806,7 +2807,7 @@ EXTERN_C const IID IID_IWbemLocator;
+@@ -2806,7 +2811,7 @@ EXTERN_C const IID IID_IWbemLocator;
          END_INTERFACE
      } IWbemLocatorVtbl;
  
@@ -100,16 +374,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemLocatorVtbl *lpVtbl;
      };
-@@ -2852,7 +2853,7 @@ EXTERN_C const IID IID_IWbemObjectSink;
+@@ -2851,8 +2856,8 @@ EXTERN_C const IID IID_IWbemObjectSink;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("7c857801-7381-11cf-884d-00aa004b2e24")
+-    MIDL_INTERFACE("7c857801-7381-11cf-884d-00aa004b2e24")
 -    IWbemObjectSink : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSink : public IUnknown
++    MIDL_INTERFACE("7c857801-7381-11cf-884d-00aa004b2e24") _Windows_SupportedOS_WindowsVista_ 
++      IWbemObjectSink : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Indicate( 
-@@ -2919,7 +2920,7 @@ EXTERN_C const IID IID_IWbemObjectSink;
+@@ -2919,7 +2924,7 @@ EXTERN_C const IID IID_IWbemObjectSink;
          END_INTERFACE
      } IWbemObjectSinkVtbl;
  
@@ -118,16 +394,42 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemObjectSinkVtbl *lpVtbl;
      };
-@@ -2968,7 +2969,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+@@ -2967,13 +2972,13 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("027947e1-d731-11ce-a357-000000000001")
+-    MIDL_INTERFACE("027947e1-d731-11ce-a357-000000000001")
 -    IEnumWbemClassObject : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumWbemClassObject : public IUnknown
++    MIDL_INTERFACE("027947e1-d731-11ce-a357-000000000001") _Windows_SupportedOS_WindowsVista_ 
++      IEnumWbemClassObject : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
-@@ -3065,7 +3066,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  long lTimeout,
+             /* [annotation][in] */ 
+@@ -2983,7 +2988,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+             /* [annotation][out] */ 
+             _Out_  ULONG *puReturned) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE NextAsync( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE NextAsync( 
+             /* [annotation][in] */ 
+             _In_  ULONG uCount,
+             /* [annotation][in] */ 
+@@ -2993,7 +2998,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
+             /* [annotation][out] */ 
+             _Out_  IEnumWbemClassObject **ppEnum) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+             _In_  long lTimeout,
+             /* [annotation][in] */ 
+@@ -3065,7 +3070,7 @@ EXTERN_C const IID IID_IEnumWbemClassObject;
          END_INTERFACE
      } IEnumWbemClassObjectVtbl;
  
@@ -136,16 +438,27 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IEnumWbemClassObjectVtbl *lpVtbl;
      };
-@@ -3123,7 +3124,7 @@ EXTERN_C const IID IID_IWbemCallResult;
+@@ -3122,8 +3127,8 @@ EXTERN_C const IID IID_IWbemCallResult;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("44aca675-e8fc-11d0-a07c-00c04fb68820")
+-    MIDL_INTERFACE("44aca675-e8fc-11d0-a07c-00c04fb68820")
 -    IWbemCallResult : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemCallResult : public IUnknown
++    MIDL_INTERFACE("44aca675-e8fc-11d0-a07c-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IWbemCallResult : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetResultObject( 
-@@ -3210,7 +3211,7 @@ EXTERN_C const IID IID_IWbemCallResult;
+@@ -3136,7 +3141,7 @@ EXTERN_C const IID IID_IWbemCallResult;
+             /* [annotation][in] */ 
+             _In_  long lTimeout,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pstrResultString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pstrResultString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetResultServices( 
+             /* [annotation][in] */ 
+@@ -3210,7 +3215,7 @@ EXTERN_C const IID IID_IWbemCallResult;
          END_INTERFACE
      } IWbemCallResultVtbl;
  
@@ -154,16 +467,27 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemCallResultVtbl *lpVtbl;
      };
-@@ -3265,7 +3266,7 @@ EXTERN_C const IID IID_IWbemContext;
+@@ -3264,8 +3269,8 @@ EXTERN_C const IID IID_IWbemContext;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("44aca674-e8fc-11d0-a07c-00c04fb68820")
+-    MIDL_INTERFACE("44aca674-e8fc-11d0-a07c-00c04fb68820")
 -    IWbemContext : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemContext : public IUnknown
++    MIDL_INTERFACE("44aca674-e8fc-11d0-a07c-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IWbemContext : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Clone( 
-@@ -3410,7 +3411,7 @@ EXTERN_C const IID IID_IWbemContext;
+@@ -3286,7 +3291,7 @@ EXTERN_C const IID IID_IWbemContext;
+             /* [annotation][in] */ 
+             _In_  long lFlags,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pstrName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pstrName,
+             /* [annotation][out] */ 
+             _Out_  VARIANT *pValue) = 0;
+         
+@@ -3410,7 +3415,7 @@ EXTERN_C const IID IID_IWbemContext;
          END_INTERFACE
      } IWbemContextVtbl;
  
@@ -172,16 +496,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemContextVtbl *lpVtbl;
      };
-@@ -3480,7 +3481,7 @@ EXTERN_C const IID IID_IUnsecuredApartment;
+@@ -3479,8 +3484,8 @@ EXTERN_C const IID IID_IUnsecuredApartment;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("1cfaba8c-1523-11d1-ad79-00c04fd8fdff")
+-    MIDL_INTERFACE("1cfaba8c-1523-11d1-ad79-00c04fd8fdff")
 -    IUnsecuredApartment : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IUnsecuredApartment : public IUnknown
++    MIDL_INTERFACE("1cfaba8c-1523-11d1-ad79-00c04fd8fdff") _Windows_SupportedOS_WindowsVista_ 
++      IUnsecuredApartment : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateObjectStub( 
-@@ -3525,7 +3526,7 @@ EXTERN_C const IID IID_IUnsecuredApartment;
+@@ -3525,7 +3530,7 @@ EXTERN_C const IID IID_IUnsecuredApartment;
          END_INTERFACE
      } IUnsecuredApartmentVtbl;
  
@@ -190,7 +516,7 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IUnsecuredApartmentVtbl *lpVtbl;
      };
-@@ -3571,7 +3572,7 @@ EXTERN_C const IID IID_IWbemUnsecuredApartment;
+@@ -3571,7 +3576,7 @@ EXTERN_C const IID IID_IWbemUnsecuredApartment;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("31739d04-3471-4cf4-9a7c-57a44ae71956")
@@ -199,7 +525,7 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateSinkStub( 
-@@ -3632,7 +3633,7 @@ EXTERN_C const IID IID_IWbemUnsecuredApartment;
+@@ -3632,7 +3637,7 @@ EXTERN_C const IID IID_IWbemUnsecuredApartment;
          END_INTERFACE
      } IWbemUnsecuredApartmentVtbl;
  
@@ -208,16 +534,36 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemUnsecuredApartmentVtbl *lpVtbl;
      };
-@@ -3682,7 +3683,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+@@ -3681,8 +3686,8 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("eb87e1bc-3233-11d2-aec9-00c04fb68820")
+-    MIDL_INTERFACE("eb87e1bc-3233-11d2-aec9-00c04fb68820")
 -    IWbemStatusCodeText : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemStatusCodeText : public IUnknown
++    MIDL_INTERFACE("eb87e1bc-3233-11d2-aec9-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IWbemStatusCodeText : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetErrorCodeText( 
-@@ -3757,7 +3758,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+@@ -3693,7 +3698,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+             /* [annotation][in] */ 
+             _In_  long lFlags,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *MessageText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *MessageText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFacilityCodeText( 
+             /* [annotation][in] */ 
+@@ -3703,7 +3708,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
+             /* [annotation][in] */ 
+             _In_  long lFlags,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *MessageText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *MessageText) = 0;
+         
+     };
+     
+@@ -3757,7 +3762,7 @@ EXTERN_C const IID IID_IWbemStatusCodeText;
          END_INTERFACE
      } IWbemStatusCodeTextVtbl;
  
@@ -226,16 +572,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemStatusCodeTextVtbl *lpVtbl;
      };
-@@ -3806,7 +3807,7 @@ EXTERN_C const IID IID_IWbemBackupRestore;
+@@ -3805,8 +3810,8 @@ EXTERN_C const IID IID_IWbemBackupRestore;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("C49E32C7-BC8B-11d2-85D4-00105A1F8304")
+-    MIDL_INTERFACE("C49E32C7-BC8B-11d2-85D4-00105A1F8304")
 -    IWbemBackupRestore : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestore : public IUnknown
++    MIDL_INTERFACE("C49E32C7-BC8B-11d2-85D4-00105A1F8304") _Windows_SupportedOS_WindowsVista_ 
++      IWbemBackupRestore : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Backup( 
-@@ -3865,7 +3866,7 @@ EXTERN_C const IID IID_IWbemBackupRestore;
+@@ -3865,7 +3870,7 @@ EXTERN_C const IID IID_IWbemBackupRestore;
          END_INTERFACE
      } IWbemBackupRestoreVtbl;
  
@@ -244,16 +592,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemBackupRestoreVtbl *lpVtbl;
      };
-@@ -3914,7 +3915,7 @@ EXTERN_C const IID IID_IWbemBackupRestoreEx;
+@@ -3913,8 +3918,8 @@ EXTERN_C const IID IID_IWbemBackupRestoreEx;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("A359DEC5-E813-4834-8A2A-BA7F1D777D76")
+-    MIDL_INTERFACE("A359DEC5-E813-4834-8A2A-BA7F1D777D76")
 -    IWbemBackupRestoreEx : public IWbemBackupRestore
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestoreEx : public IWbemBackupRestore
++    MIDL_INTERFACE("A359DEC5-E813-4834-8A2A-BA7F1D777D76") _Windows_SupportedOS_WindowsVista_ 
++      IWbemBackupRestoreEx : public IWbemBackupRestore
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Pause( void) = 0;
-@@ -3973,7 +3974,7 @@ EXTERN_C const IID IID_IWbemBackupRestoreEx;
+@@ -3973,7 +3978,7 @@ EXTERN_C const IID IID_IWbemBackupRestoreEx;
          END_INTERFACE
      } IWbemBackupRestoreExVtbl;
  
@@ -262,16 +612,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemBackupRestoreExVtbl *lpVtbl;
      };
-@@ -4029,7 +4030,7 @@ EXTERN_C const IID IID_IWbemRefresher;
+@@ -4028,8 +4033,8 @@ EXTERN_C const IID IID_IWbemRefresher;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("49353c99-516b-11d1-aea6-00c04fb68820")
+-    MIDL_INTERFACE("49353c99-516b-11d1-aea6-00c04fb68820")
 -    IWbemRefresher : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemRefresher : public IUnknown
++    MIDL_INTERFACE("49353c99-516b-11d1-aea6-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IWbemRefresher : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Refresh( 
-@@ -4070,7 +4071,7 @@ EXTERN_C const IID IID_IWbemRefresher;
+@@ -4070,7 +4075,7 @@ EXTERN_C const IID IID_IWbemRefresher;
          END_INTERFACE
      } IWbemRefresherVtbl;
  
@@ -280,16 +632,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemRefresherVtbl *lpVtbl;
      };
-@@ -4116,7 +4117,7 @@ EXTERN_C const IID IID_IWbemHiPerfEnum;
+@@ -4115,8 +4120,8 @@ EXTERN_C const IID IID_IWbemHiPerfEnum;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("2705C288-79AE-11d2-B348-00105A1F8177")
+-    MIDL_INTERFACE("2705C288-79AE-11d2-B348-00105A1F8177")
 -    IWbemHiPerfEnum : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemHiPerfEnum : public IUnknown
++    MIDL_INTERFACE("2705C288-79AE-11d2-B348-00105A1F8177") _Windows_SupportedOS_WindowsVista_ 
++      IWbemHiPerfEnum : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE AddObjects( 
-@@ -4219,7 +4220,7 @@ EXTERN_C const IID IID_IWbemHiPerfEnum;
+@@ -4219,7 +4224,7 @@ EXTERN_C const IID IID_IWbemHiPerfEnum;
          END_INTERFACE
      } IWbemHiPerfEnumVtbl;
  
@@ -298,16 +652,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemHiPerfEnumVtbl *lpVtbl;
      };
-@@ -4274,7 +4275,7 @@ EXTERN_C const IID IID_IWbemConfigureRefresher;
+@@ -4273,8 +4278,8 @@ EXTERN_C const IID IID_IWbemConfigureRefresher;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("49353c92-516b-11d1-aea6-00c04fb68820")
+-    MIDL_INTERFACE("49353c92-516b-11d1-aea6-00c04fb68820")
 -    IWbemConfigureRefresher : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemConfigureRefresher : public IUnknown
++    MIDL_INTERFACE("49353c92-516b-11d1-aea6-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IWbemConfigureRefresher : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE AddObjectByPath( 
-@@ -4419,7 +4420,7 @@ EXTERN_C const IID IID_IWbemConfigureRefresher;
+@@ -4419,7 +4424,7 @@ EXTERN_C const IID IID_IWbemConfigureRefresher;
          END_INTERFACE
      } IWbemConfigureRefresherVtbl;
  
@@ -316,16 +672,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemConfigureRefresherVtbl *lpVtbl;
      };
-@@ -4577,7 +4578,7 @@ EXTERN_C const IID IID_IWbemObjectSinkEx;
+@@ -4576,8 +4581,8 @@ EXTERN_C const IID IID_IWbemObjectSinkEx;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("e7d35cfa-348b-485e-b524-252725d697ca")
+-    MIDL_INTERFACE("e7d35cfa-348b-485e-b524-252725d697ca")
 -    IWbemObjectSinkEx : public IWbemObjectSink
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSinkEx : public IWbemObjectSink
++    MIDL_INTERFACE("e7d35cfa-348b-485e-b524-252725d697ca") _Windows_SupportedOS_WindowsVista_ 
++      IWbemObjectSinkEx : public IWbemObjectSink
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE WriteMessage( 
-@@ -4722,7 +4723,7 @@ EXTERN_C const IID IID_IWbemObjectSinkEx;
+@@ -4722,7 +4727,7 @@ EXTERN_C const IID IID_IWbemObjectSinkEx;
          END_INTERFACE
      } IWbemObjectSinkExVtbl;
  
@@ -334,16 +692,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemObjectSinkExVtbl *lpVtbl;
      };
-@@ -4787,7 +4788,7 @@ EXTERN_C const IID IID_IWbemShutdown;
+@@ -4786,8 +4791,8 @@ EXTERN_C const IID IID_IWbemShutdown;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("b7b31df9-d515-11d3-a11c-00105a1f515a")
+-    MIDL_INTERFACE("b7b31df9-d515-11d3-a11c-00105a1f515a")
 -    IWbemShutdown : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemShutdown : public IUnknown
++    MIDL_INTERFACE("b7b31df9-d515-11d3-a11c-00105a1f515a") _Windows_SupportedOS_WindowsVista_ 
++      IWbemShutdown : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Shutdown( 
-@@ -4836,7 +4837,7 @@ EXTERN_C const IID IID_IWbemShutdown;
+@@ -4836,7 +4841,7 @@ EXTERN_C const IID IID_IWbemShutdown;
          END_INTERFACE
      } IWbemShutdownVtbl;
  
@@ -352,16 +712,27 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemShutdownVtbl *lpVtbl;
      };
-@@ -4908,7 +4909,7 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
+@@ -4907,8 +4912,8 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("bfbf883a-cad7-11d3-a11b-00105a1f515a")
+-    MIDL_INTERFACE("bfbf883a-cad7-11d3-a11b-00105a1f515a")
 -    IWbemObjectTextSrc : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectTextSrc : public IUnknown
++    MIDL_INTERFACE("bfbf883a-cad7-11d3-a11b-00105a1f515a") _Windows_SupportedOS_WindowsVista_ 
++      IWbemObjectTextSrc : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetText( 
-@@ -4991,7 +4992,7 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
+@@ -4921,7 +4926,7 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
+             /* [annotation][in] */ 
+             _In_  IWbemContext *pCtx,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *strText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *strText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateFromText( 
+             /* [annotation][in] */ 
+@@ -4991,7 +4996,7 @@ EXTERN_C const IID IID_IWbemObjectTextSrc;
          END_INTERFACE
      } IWbemObjectTextSrcVtbl;
  
@@ -370,16 +741,18 @@ index d9f81143fb19d2b2fc66653a75f86bf61faebbb9..5fc3b0131cba646bb6cd0240687814eb
      {
          CONST_VTBL struct IWbemObjectTextSrcVtbl *lpVtbl;
      };
-@@ -5078,7 +5079,7 @@ EXTERN_C const IID IID_IMofCompiler;
+@@ -5077,8 +5082,8 @@ EXTERN_C const IID IID_IMofCompiler;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("6daf974e-2e37-11d2-aec9-00c04fb68820")
+-    MIDL_INTERFACE("6daf974e-2e37-11d2-aec9-00c04fb68820")
 -    IMofCompiler : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IMofCompiler : public IUnknown
++    MIDL_INTERFACE("6daf974e-2e37-11d2-aec9-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
++      IMofCompiler : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CompileFile( 
-@@ -5231,7 +5232,7 @@ EXTERN_C const IID IID_IMofCompiler;
+@@ -5231,7 +5236,7 @@ EXTERN_C const IID IID_IMofCompiler;
          END_INTERFACE
      } IMofCompilerVtbl;
  

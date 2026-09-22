@@ -1,15 +1,18 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h
-index ff81a7e716..03e975b869 100644
+index ff81a7e716..26d239b43b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/robuffer.h
-@@ -15,6 +15,7 @@
+@@ -15,8 +15,9 @@
  #include <apiset.h>
  #include <apisetcconv.h>
  #include <objidl.h>
 +#include "win32metadata_annotations.h"
  
- STDAPI
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-robuffer-l1-1-0.dll") STDAPI
  RoGetBufferMarshaler(
+     _Outptr_ IMarshal** bufferMarshaler
+     );
 @@ -24,9 +25,11 @@ RoGetBufferMarshaler(
  #ifdef __cplusplus
  namespace Windows { namespace Storage { namespace Streams {

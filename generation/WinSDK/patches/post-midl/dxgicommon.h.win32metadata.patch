@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgicommon.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgicommon.h
-index 2ecad0e542..46ef70fd38 100644
+index 2ecad0e542..87bc4ff274 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgicommon.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgicommon.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 2ecad0e542..46ef70fd38 100644
  } DXGI_SAMPLE_DESC;
  
 -typedef enum DXGI_COLOR_SPACE_TYPE
-+typedef enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DXGI_COLOR_SPACE_TYPE
++typedef enum   DXGI_COLOR_SPACE_TYPE
  {
      DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709             = 0,
      DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709             = 1,

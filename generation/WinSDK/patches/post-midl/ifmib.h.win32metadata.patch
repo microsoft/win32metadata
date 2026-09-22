@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h
-index 0a7c989bc07de338045d56895d9e5667832ac989..6cd1693ff45ad9641c1ae7850e5f65ab0228e3bc 100644
+index 0a7c989bc0..af46792e8f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h
 @@ -18,6 +18,7 @@ Abstract:
@@ -15,7 +15,7 @@ index 0a7c989bc07de338045d56895d9e5667832ac989..6cd1693ff45ad9641c1ae7850e5f65ab
  #endif
  
 -typedef struct _MIB_IFNUMBER
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_IFNUMBER
++typedef struct   _MIB_IFNUMBER
  {
      DWORD    dwValue;
  } MIB_IFNUMBER, *PMIB_IFNUMBER;
@@ -24,7 +24,7 @@ index 0a7c989bc07de338045d56895d9e5667832ac989..6cd1693ff45ad9641c1ae7850e5f65ab
  #define MAX_INTERFACE_NAME_LEN 256
  
 -typedef struct _MIB_IFROW {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_IFROW {
++typedef struct   _MIB_IFROW {
      WCHAR wszName[MAX_INTERFACE_NAME_LEN];
      IF_INDEX dwIndex;
      IFTYPE dwType;
@@ -33,7 +33,7 @@ index 0a7c989bc07de338045d56895d9e5667832ac989..6cd1693ff45ad9641c1ae7850e5f65ab
  } MIB_IFROW, *PMIB_IFROW;
  
 -typedef struct _MIB_IFTABLE {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_IFTABLE {
++typedef struct   _MIB_IFTABLE {
      DWORD dwNumEntries;
      MIB_IFROW table[ANY_SIZE];
  } MIB_IFTABLE, *PMIB_IFTABLE;

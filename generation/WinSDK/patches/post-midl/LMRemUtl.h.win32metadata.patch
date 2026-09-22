@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
-index 574d8faaf86c4a29620838552f80217b5d897294..997e056678c112ba3f0d72f33b5284e0ab5b7dd8 100644
+index 574d8faaf8..4e28675610 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
 @@ -26,6 +26,7 @@ Environment:
@@ -10,32 +10,69 @@ index 574d8faaf86c4a29620838552f80217b5d897294..997e056678c112ba3f0d72f33b5284e0
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -57,14 +58,18 @@ typedef LPWSTR LPDESC;
+@@ -57,18 +58,22 @@ typedef LPWSTR LPDESC;
  // Function Prototypes
  //
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  _Check_return_
  _Success_( return == 0 )
  NET_API_STATUS NET_API_FUNCTION
  NetRemoteTOD (
      _In_opt_ LPCWSTR UncServerName,
 -    _Outptr_result_bytebuffer_(sizeof(TIME_OF_DAY_INFO)) LPBYTE *BufferPtr
-+    _Win32_RAIIFree_(NetApiBufferFree) _Outptr_result_bytebuffer_(sizeof(TIME_OF_DAY_INFO)) LPBYTE *BufferPtr
++     _Outptr_result_bytebuffer_(sizeof(TIME_OF_DAY_INFO)) LPBYTE *BufferPtr
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetRemoteComputerSupports(
      IN LPCWSTR UncServerName OPTIONAL,   // Must start with "\\".
+-    IN DWORD OptionsWanted,             // Set SUPPORTS_ bits wanted.
++    _Win32_AssociatedEnum_(NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS) IN DWORD OptionsWanted,             // Set SUPPORTS_ bits wanted.
+     OUT LPDWORD OptionsSupported        // Supported features, masked.
+     );
+ 
 @@ -104,7 +109,7 @@ RxRemoteApi(
  //  Data Structures
  //
  
 -typedef struct _TIME_OF_DAY_INFO {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TIME_OF_DAY_INFO {
++typedef struct   _TIME_OF_DAY_INFO {
      DWORD      tod_elapsedt;
      DWORD      tod_msecs;
      DWORD      tod_hours;
+@@ -150,4 +155,31 @@ typedef struct _TIME_OF_DAY_INFO {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SUPPORTS_REMOTE_ADMIN_PROTOCOL")
++#undef SUPPORTS_REMOTE_ADMIN_PROTOCOL
++#pragma push_macro("SUPPORTS_RPC")
++#undef SUPPORTS_RPC
++#pragma push_macro("SUPPORTS_SAM_PROTOCOL")
++#undef SUPPORTS_SAM_PROTOCOL
++#pragma push_macro("SUPPORTS_UNICODE")
++#undef SUPPORTS_UNICODE
++#pragma push_macro("SUPPORTS_LOCAL")
++#undef SUPPORTS_LOCAL
++enum NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS : unsigned int
++{
++    SUPPORTS_REMOTE_ADMIN_PROTOCOL = 2U,
++    SUPPORTS_RPC = 4U,
++    SUPPORTS_SAM_PROTOCOL = 8U,
++    SUPPORTS_UNICODE = 16U,
++    SUPPORTS_LOCAL = 32U,
++};
++#pragma pop_macro("SUPPORTS_LOCAL")
++#pragma pop_macro("SUPPORTS_UNICODE")
++#pragma pop_macro("SUPPORTS_SAM_PROTOCOL")
++#pragma pop_macro("SUPPORTS_RPC")
++#pragma pop_macro("SUPPORTS_REMOTE_ADMIN_PROTOCOL")
++#endif
++
+ #endif //_LMREMUTL_

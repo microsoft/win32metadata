@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h
-index 0b231f7fd4e5fc688f86a4353dd53a5be3116147..8fb3bae9e844195aa0b19286165ea940f8059961 100644
+index 0b231f7fd4..75ac496060 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/physicalmonitorenumerationapi.h
 @@ -5,6 +5,7 @@
@@ -15,16 +15,47 @@ index 0b231f7fd4e5fc688f86a4353dd53a5be3116147..8fb3bae9e844195aa0b19286165ea940
      Physical Monitor Structures 
  ******************************************************************************/
 -typedef struct _PHYSICAL_MONITOR
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _PHYSICAL_MONITOR
++typedef struct   _PHYSICAL_MONITOR
  {
      HANDLE hPhysicalMonitor;
      WCHAR szPhysicalMonitorDescription[PHYSICAL_MONITOR_DESCRIPTION_SIZE];
-@@ -67,6 +68,8 @@ HRESULT WINAPI GetPhysicalMonitorsFromIDirect3DDevice9
+@@ -43,32 +44,34 @@ typedef struct _PHYSICAL_MONITOR
+ /******************************************************************************
+     Physical Monitor Enumeration Functions
+ ******************************************************************************/
+-_BOOL WINAPI GetNumberOfPhysicalMonitorsFromHMONITOR
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI GetNumberOfPhysicalMonitorsFromHMONITOR
+     ( 
+     HMONITOR hMonitor, 
+     _Out_ LPDWORD pdwNumberOfPhysicalMonitors
+     );
+-HRESULT WINAPI GetNumberOfPhysicalMonitorsFromIDirect3DDevice9
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI GetNumberOfPhysicalMonitorsFromIDirect3DDevice9
+     (
+     _In_ IDirect3DDevice9* pDirect3DDevice9,
+     _Out_ LPDWORD pdwNumberOfPhysicalMonitors
+     );
+ 
+-_BOOL WINAPI GetPhysicalMonitorsFromHMONITOR
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI GetPhysicalMonitorsFromHMONITOR
+     ( 
+     _In_ HMONITOR hMonitor,
+     _In_ DWORD dwPhysicalMonitorArraySize,
+     _Out_writes_(dwPhysicalMonitorArraySize) LPPHYSICAL_MONITOR pPhysicalMonitorArray
+     );
+-HRESULT WINAPI GetPhysicalMonitorsFromIDirect3DDevice9
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI GetPhysicalMonitorsFromIDirect3DDevice9
+     ( 
+     _In_ IDirect3DDevice9* pDirect3DDevice9,
+     _In_ DWORD dwPhysicalMonitorArraySize,
      _Out_writes_(dwPhysicalMonitorArraySize) LPPHYSICAL_MONITOR pPhysicalMonitorArray
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ 
++
  _BOOL WINAPI DestroyPhysicalMonitor( _In_ HANDLE hMonitor );
- _BOOL WINAPI DestroyPhysicalMonitors
+-_BOOL WINAPI DestroyPhysicalMonitors
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI DestroyPhysicalMonitors
      ( 
+     _In_ DWORD dwPhysicalMonitorArraySize,
+     _In_reads_(dwPhysicalMonitorArraySize) LPPHYSICAL_MONITOR pPhysicalMonitorArray

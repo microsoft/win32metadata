@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h
+index 9993b298c7..adb829e2e3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************
+ *
+ * Copyright (c) 2000-2003 Microsoft Corporation
+@@ -144,7 +145,7 @@ struct GdiplusStartupOutput
+ // input  - may not be NULL
+ // output - may be NULL only if input->SuppressBackgroundThread is FALSE.
+ 
+-extern "C" Status WINAPI GdiplusStartup(
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("gdiplus.dll") extern "C" Status WINAPI GdiplusStartup(
+     OUT ULONG_PTR *token,
+     const GdiplusStartupInput *input,
+     OUT GdiplusStartupOutput *output);
+@@ -155,7 +156,7 @@ extern "C" Status WINAPI GdiplusStartup(
+ // GDI+ API's may not be called after GdiplusShutdown. Pay careful attention
+ // to GDI+ object destructors.
+ 
+-extern "C" VOID WINAPI GdiplusShutdown(ULONG_PTR token);
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("gdiplus.dll") extern "C" VOID WINAPI GdiplusShutdown(ULONG_PTR token);
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(pop)

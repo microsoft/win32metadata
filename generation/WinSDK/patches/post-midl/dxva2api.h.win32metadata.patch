@@ -1,0 +1,528 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h
+index b89e8eefd8..75c8949888 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -589,7 +590,7 @@ typedef struct _DXVA2_ConfigPictureDecode
+ 
+ typedef struct _DXVA2_DecodeBufferDesc
+     {
+-    DWORD CompressedBufferType;
++    _Win32_AssociatedEnum_(DXVA2_BufferfType) DWORD CompressedBufferType;
+     UINT BufferIndex;
+     UINT DataOffset;
+     UINT DataSize;
+@@ -670,7 +671,7 @@ EXTERN_C const IID IID_IDirect3DDeviceManager9;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75")
++    MIDL_INTERFACE("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75") _Windows_SupportedOS_WindowsVista_ 
+     IDirect3DDeviceManager9 : public IUnknown
+     {
+     public:
+@@ -682,7 +683,7 @@ EXTERN_C const IID IID_IDirect3DDeviceManager9;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenDeviceHandle( 
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phDevice) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phDevice) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CloseDeviceHandle( 
+             /* [annotation][in] */ 
+@@ -859,7 +860,7 @@ EXTERN_C const IID IID_IDirectXVideoAccelerationService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc51a550-d5e7-11d9-af55-00054e43ff02")
++    MIDL_INTERFACE("fc51a550-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoAccelerationService : public IUnknown
+     {
+     public:
+@@ -877,7 +878,7 @@ EXTERN_C const IID IID_IDirectXVideoAccelerationService;
+             /* [annotation][in] */ 
+             _In_  DWORD Usage,
+             /* [annotation][in] */ 
+-            _In_  DWORD DxvaType,
++            _Win32_AssociatedEnum_(DXVA2_VideoRenderTargetType) _In_  DWORD DxvaType,
+             /* [annotation][size_is][out] */ 
+             _Out_writes_(BackBuffers+1)  IDirect3DSurface9 **ppSurface,
+             /* [annotation][out][in] */ 
+@@ -978,7 +979,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoderService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc51a551-d5e7-11d9-af55-00054e43ff02")
++    MIDL_INTERFACE("fc51a551-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoDecoderService : public IDirectXVideoAccelerationService
+     {
+     public:
+@@ -1178,7 +1179,7 @@ EXTERN_C const IID IID_IDirectXVideoProcessorService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc51a552-d5e7-11d9-af55-00054e43ff02")
++    MIDL_INTERFACE("fc51a552-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoProcessorService : public IDirectXVideoAccelerationService
+     {
+     public:
+@@ -1478,7 +1479,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f2b0810a-fd00-43c9-918c-df94e2d8ef7d")
++    MIDL_INTERFACE("f2b0810a-fd00-43c9-918c-df94e2d8ef7d") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoDecoder : public IUnknown
+     {
+     public:
+@@ -1500,7 +1501,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoder;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBuffer( 
+             /* [annotation][in] */ 
+-            _In_  UINT BufferType,
++            _Win32_AssociatedEnum_(DXVA2_BufferfType) _In_  UINT BufferType,
+             /* [annotation][out] */ 
+             _Out_  void **ppBuffer,
+             /* [annotation][out] */ 
+@@ -1671,7 +1672,7 @@ EXTERN_C const IID IID_IDirectXVideoProcessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8c3a39f0-916e-4690-804f-4c8001355d25")
++    MIDL_INTERFACE("8c3a39f0-916e-4690-804f-4c8001355d25") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoProcessor : public IUnknown
+     {
+     public:
+@@ -1875,7 +1876,7 @@ EXTERN_C const IID IID_IDirectXVideoMemoryConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b7f916dd-db3b-49c1-84d7-e45ef99ec726")
++    MIDL_INTERFACE("b7f916dd-db3b-49c1-84d7-e45ef99ec726") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoMemoryConfiguration : public IUnknown
+     {
+     public:
+@@ -1971,11 +1972,11 @@ EXTERN_C const IID IID_IDirectXVideoMemoryConfiguration;
+ /* interface __MIDL_itf_dxva2api_0000_0007 */
+ /* [local] */ 
+ 
+-STDAPI DXVA2CreateDirect3DDeviceManager9(
++_Windows_SupportedOS_WindowsVista_ STDAPI DXVA2CreateDirect3DDeviceManager9(
+     _Out_ UINT* pResetToken,
+     _Outptr_ IDirect3DDeviceManager9** ppDeviceManager
+     );
+-STDAPI DXVA2CreateVideoService(
++_Windows_SupportedOS_WindowsVista_ STDAPI DXVA2CreateVideoService(
+     _In_ IDirect3DDevice9* pDD,
+     _In_ REFIID riid,
+     _Outptr_ void** ppService
+@@ -2018,6 +2019,405 @@ extern RPC_IF_HANDLE __MIDL_itf_dxva2api_0000_0007_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_DeinterlaceTech_Unknown")
++#undef DXVA2_DeinterlaceTech_Unknown
++#pragma push_macro("DXVA2_DeinterlaceTech_BOBLineReplicate")
++#undef DXVA2_DeinterlaceTech_BOBLineReplicate
++#pragma push_macro("DXVA2_DeinterlaceTech_BOBVerticalStretch")
++#undef DXVA2_DeinterlaceTech_BOBVerticalStretch
++#pragma push_macro("DXVA2_DeinterlaceTech_BOBVerticalStretch4Tap")
++#undef DXVA2_DeinterlaceTech_BOBVerticalStretch4Tap
++#pragma push_macro("DXVA2_DeinterlaceTech_MedianFiltering")
++#undef DXVA2_DeinterlaceTech_MedianFiltering
++#pragma push_macro("DXVA2_DeinterlaceTech_EdgeFiltering")
++#undef DXVA2_DeinterlaceTech_EdgeFiltering
++#pragma push_macro("DXVA2_DeinterlaceTech_FieldAdaptive")
++#undef DXVA2_DeinterlaceTech_FieldAdaptive
++#pragma push_macro("DXVA2_DeinterlaceTech_PixelAdaptive")
++#undef DXVA2_DeinterlaceTech_PixelAdaptive
++#pragma push_macro("DXVA2_DeinterlaceTech_MotionVectorSteered")
++#undef DXVA2_DeinterlaceTech_MotionVectorSteered
++#pragma push_macro("DXVA2_DeinterlaceTech_InverseTelecine")
++#undef DXVA2_DeinterlaceTech_InverseTelecine
++#pragma push_macro("DXVA2_DeinterlaceTech_Mask")
++#undef DXVA2_DeinterlaceTech_Mask
++enum DXVA2_DeinterlaceTech : int
++{
++    DXVA2_DeinterlaceTech_Unknown = 0,
++    DXVA2_DeinterlaceTech_BOBLineReplicate = 1,
++    DXVA2_DeinterlaceTech_BOBVerticalStretch = 2,
++    DXVA2_DeinterlaceTech_BOBVerticalStretch4Tap = 4,
++    DXVA2_DeinterlaceTech_MedianFiltering = 8,
++    DXVA2_DeinterlaceTech_EdgeFiltering = 16,
++    DXVA2_DeinterlaceTech_FieldAdaptive = 32,
++    DXVA2_DeinterlaceTech_PixelAdaptive = 64,
++    DXVA2_DeinterlaceTech_MotionVectorSteered = 128,
++    DXVA2_DeinterlaceTech_InverseTelecine = 256,
++    DXVA2_DeinterlaceTech_Mask = 511,
++};
++#pragma pop_macro("DXVA2_DeinterlaceTech_Mask")
++#pragma pop_macro("DXVA2_DeinterlaceTech_InverseTelecine")
++#pragma pop_macro("DXVA2_DeinterlaceTech_MotionVectorSteered")
++#pragma pop_macro("DXVA2_DeinterlaceTech_PixelAdaptive")
++#pragma pop_macro("DXVA2_DeinterlaceTech_FieldAdaptive")
++#pragma pop_macro("DXVA2_DeinterlaceTech_EdgeFiltering")
++#pragma pop_macro("DXVA2_DeinterlaceTech_MedianFiltering")
++#pragma pop_macro("DXVA2_DeinterlaceTech_BOBVerticalStretch4Tap")
++#pragma pop_macro("DXVA2_DeinterlaceTech_BOBVerticalStretch")
++#pragma pop_macro("DXVA2_DeinterlaceTech_BOBLineReplicate")
++#pragma pop_macro("DXVA2_DeinterlaceTech_Unknown")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_NoiseFilterLumaLevel")
++#undef DXVA2_NoiseFilterLumaLevel
++#pragma push_macro("DXVA2_NoiseFilterLumaThreshold")
++#undef DXVA2_NoiseFilterLumaThreshold
++#pragma push_macro("DXVA2_NoiseFilterLumaRadius")
++#undef DXVA2_NoiseFilterLumaRadius
++#pragma push_macro("DXVA2_NoiseFilterChromaLevel")
++#undef DXVA2_NoiseFilterChromaLevel
++#pragma push_macro("DXVA2_NoiseFilterChromaThreshold")
++#undef DXVA2_NoiseFilterChromaThreshold
++#pragma push_macro("DXVA2_NoiseFilterChromaRadius")
++#undef DXVA2_NoiseFilterChromaRadius
++#pragma push_macro("DXVA2_DetailFilterLumaLevel")
++#undef DXVA2_DetailFilterLumaLevel
++#pragma push_macro("DXVA2_DetailFilterLumaThreshold")
++#undef DXVA2_DetailFilterLumaThreshold
++#pragma push_macro("DXVA2_DetailFilterLumaRadius")
++#undef DXVA2_DetailFilterLumaRadius
++#pragma push_macro("DXVA2_DetailFilterChromaLevel")
++#undef DXVA2_DetailFilterChromaLevel
++#pragma push_macro("DXVA2_DetailFilterChromaThreshold")
++#undef DXVA2_DetailFilterChromaThreshold
++#pragma push_macro("DXVA2_DetailFilterChromaRadius")
++#undef DXVA2_DetailFilterChromaRadius
++enum DXVA2_FilterType : int
++{
++    DXVA2_NoiseFilterLumaLevel = 1,
++    DXVA2_NoiseFilterLumaThreshold = 2,
++    DXVA2_NoiseFilterLumaRadius = 3,
++    DXVA2_NoiseFilterChromaLevel = 4,
++    DXVA2_NoiseFilterChromaThreshold = 5,
++    DXVA2_NoiseFilterChromaRadius = 6,
++    DXVA2_DetailFilterLumaLevel = 7,
++    DXVA2_DetailFilterLumaThreshold = 8,
++    DXVA2_DetailFilterLumaRadius = 9,
++    DXVA2_DetailFilterChromaLevel = 10,
++    DXVA2_DetailFilterChromaThreshold = 11,
++    DXVA2_DetailFilterChromaRadius = 12,
++};
++#pragma pop_macro("DXVA2_DetailFilterChromaRadius")
++#pragma pop_macro("DXVA2_DetailFilterChromaThreshold")
++#pragma pop_macro("DXVA2_DetailFilterChromaLevel")
++#pragma pop_macro("DXVA2_DetailFilterLumaRadius")
++#pragma pop_macro("DXVA2_DetailFilterLumaThreshold")
++#pragma pop_macro("DXVA2_DetailFilterLumaLevel")
++#pragma pop_macro("DXVA2_NoiseFilterChromaRadius")
++#pragma pop_macro("DXVA2_NoiseFilterChromaThreshold")
++#pragma pop_macro("DXVA2_NoiseFilterChromaLevel")
++#pragma pop_macro("DXVA2_NoiseFilterLumaRadius")
++#pragma pop_macro("DXVA2_NoiseFilterLumaThreshold")
++#pragma pop_macro("DXVA2_NoiseFilterLumaLevel")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_NoiseFilterTech_Unsupported")
++#undef DXVA2_NoiseFilterTech_Unsupported
++#pragma push_macro("DXVA2_NoiseFilterTech_Unknown")
++#undef DXVA2_NoiseFilterTech_Unknown
++#pragma push_macro("DXVA2_NoiseFilterTech_Median")
++#undef DXVA2_NoiseFilterTech_Median
++#pragma push_macro("DXVA2_NoiseFilterTech_Temporal")
++#undef DXVA2_NoiseFilterTech_Temporal
++#pragma push_macro("DXVA2_NoiseFilterTech_BlockNoise")
++#undef DXVA2_NoiseFilterTech_BlockNoise
++#pragma push_macro("DXVA2_NoiseFilterTech_MosquitoNoise")
++#undef DXVA2_NoiseFilterTech_MosquitoNoise
++#pragma push_macro("DXVA2_NoiseFilterTech_Mask")
++#undef DXVA2_NoiseFilterTech_Mask
++enum DXVA2_NoiseFilterTech : int
++{
++    DXVA2_NoiseFilterTech_Unsupported = 0,
++    DXVA2_NoiseFilterTech_Unknown = 1,
++    DXVA2_NoiseFilterTech_Median = 2,
++    DXVA2_NoiseFilterTech_Temporal = 4,
++    DXVA2_NoiseFilterTech_BlockNoise = 8,
++    DXVA2_NoiseFilterTech_MosquitoNoise = 16,
++    DXVA2_NoiseFilterTech_Mask = 31,
++};
++#pragma pop_macro("DXVA2_NoiseFilterTech_Mask")
++#pragma pop_macro("DXVA2_NoiseFilterTech_MosquitoNoise")
++#pragma pop_macro("DXVA2_NoiseFilterTech_BlockNoise")
++#pragma pop_macro("DXVA2_NoiseFilterTech_Temporal")
++#pragma pop_macro("DXVA2_NoiseFilterTech_Median")
++#pragma pop_macro("DXVA2_NoiseFilterTech_Unknown")
++#pragma pop_macro("DXVA2_NoiseFilterTech_Unsupported")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_DetailFilterTech_Unsupported")
++#undef DXVA2_DetailFilterTech_Unsupported
++#pragma push_macro("DXVA2_DetailFilterTech_Unknown")
++#undef DXVA2_DetailFilterTech_Unknown
++#pragma push_macro("DXVA2_DetailFilterTech_Edge")
++#undef DXVA2_DetailFilterTech_Edge
++#pragma push_macro("DXVA2_DetailFilterTech_Sharpening")
++#undef DXVA2_DetailFilterTech_Sharpening
++#pragma push_macro("DXVA2_DetailFilterTech_Mask")
++#undef DXVA2_DetailFilterTech_Mask
++enum DXVA2_DetailFilterTech : int
++{
++    DXVA2_DetailFilterTech_Unsupported = 0,
++    DXVA2_DetailFilterTech_Unknown = 1,
++    DXVA2_DetailFilterTech_Edge = 2,
++    DXVA2_DetailFilterTech_Sharpening = 4,
++    DXVA2_DetailFilterTech_Mask = 7,
++};
++#pragma pop_macro("DXVA2_DetailFilterTech_Mask")
++#pragma pop_macro("DXVA2_DetailFilterTech_Sharpening")
++#pragma pop_macro("DXVA2_DetailFilterTech_Edge")
++#pragma pop_macro("DXVA2_DetailFilterTech_Unknown")
++#pragma pop_macro("DXVA2_DetailFilterTech_Unsupported")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_ProcAmp_None")
++#undef DXVA2_ProcAmp_None
++#pragma push_macro("DXVA2_ProcAmp_Brightness")
++#undef DXVA2_ProcAmp_Brightness
++#pragma push_macro("DXVA2_ProcAmp_Contrast")
++#undef DXVA2_ProcAmp_Contrast
++#pragma push_macro("DXVA2_ProcAmp_Hue")
++#undef DXVA2_ProcAmp_Hue
++#pragma push_macro("DXVA2_ProcAmp_Saturation")
++#undef DXVA2_ProcAmp_Saturation
++#pragma push_macro("DXVA2_ProcAmp_Mask")
++#undef DXVA2_ProcAmp_Mask
++enum DXVA2_ProcAmp : int
++{
++    DXVA2_ProcAmp_None = 0,
++    DXVA2_ProcAmp_Brightness = 1,
++    DXVA2_ProcAmp_Contrast = 2,
++    DXVA2_ProcAmp_Hue = 4,
++    DXVA2_ProcAmp_Saturation = 8,
++    DXVA2_ProcAmp_Mask = 15,
++};
++#pragma pop_macro("DXVA2_ProcAmp_Mask")
++#pragma pop_macro("DXVA2_ProcAmp_Saturation")
++#pragma pop_macro("DXVA2_ProcAmp_Hue")
++#pragma pop_macro("DXVA2_ProcAmp_Contrast")
++#pragma pop_macro("DXVA2_ProcAmp_Brightness")
++#pragma pop_macro("DXVA2_ProcAmp_None")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_VideoProcess_None")
++#undef DXVA2_VideoProcess_None
++#pragma push_macro("DXVA2_VideoProcess_YUV2RGB")
++#undef DXVA2_VideoProcess_YUV2RGB
++#pragma push_macro("DXVA2_VideoProcess_StretchX")
++#undef DXVA2_VideoProcess_StretchX
++#pragma push_macro("DXVA2_VideoProcess_StretchY")
++#undef DXVA2_VideoProcess_StretchY
++#pragma push_macro("DXVA2_VideoProcess_AlphaBlend")
++#undef DXVA2_VideoProcess_AlphaBlend
++#pragma push_macro("DXVA2_VideoProcess_SubRects")
++#undef DXVA2_VideoProcess_SubRects
++#pragma push_macro("DXVA2_VideoProcess_SubStreams")
++#undef DXVA2_VideoProcess_SubStreams
++#pragma push_macro("DXVA2_VideoProcess_SubStreamsExtended")
++#undef DXVA2_VideoProcess_SubStreamsExtended
++#pragma push_macro("DXVA2_VideoProcess_YUV2RGBExtended")
++#undef DXVA2_VideoProcess_YUV2RGBExtended
++#pragma push_macro("DXVA2_VideoProcess_AlphaBlendExtended")
++#undef DXVA2_VideoProcess_AlphaBlendExtended
++#pragma push_macro("DXVA2_VideoProcess_Constriction")
++#undef DXVA2_VideoProcess_Constriction
++#pragma push_macro("DXVA2_VideoProcess_NoiseFilter")
++#undef DXVA2_VideoProcess_NoiseFilter
++#pragma push_macro("DXVA2_VideoProcess_DetailFilter")
++#undef DXVA2_VideoProcess_DetailFilter
++#pragma push_macro("DXVA2_VideoProcess_PlanarAlpha")
++#undef DXVA2_VideoProcess_PlanarAlpha
++#pragma push_macro("DXVA2_VideoProcess_LinearScaling")
++#undef DXVA2_VideoProcess_LinearScaling
++#pragma push_macro("DXVA2_VideoProcess_GammaCompensated")
++#undef DXVA2_VideoProcess_GammaCompensated
++#pragma push_macro("DXVA2_VideoProcess_MaintainsOriginalFieldData")
++#undef DXVA2_VideoProcess_MaintainsOriginalFieldData
++#pragma push_macro("DXVA2_VideoProcess_Mask")
++#undef DXVA2_VideoProcess_Mask
++enum DXVA2_VideoProcess : int
++{
++    DXVA2_VideoProcess_None = 0,
++    DXVA2_VideoProcess_YUV2RGB = 1,
++    DXVA2_VideoProcess_StretchX = 2,
++    DXVA2_VideoProcess_StretchY = 4,
++    DXVA2_VideoProcess_AlphaBlend = 8,
++    DXVA2_VideoProcess_SubRects = 16,
++    DXVA2_VideoProcess_SubStreams = 32,
++    DXVA2_VideoProcess_SubStreamsExtended = 64,
++    DXVA2_VideoProcess_YUV2RGBExtended = 128,
++    DXVA2_VideoProcess_AlphaBlendExtended = 256,
++    DXVA2_VideoProcess_Constriction = 512,
++    DXVA2_VideoProcess_NoiseFilter = 1024,
++    DXVA2_VideoProcess_DetailFilter = 2048,
++    DXVA2_VideoProcess_PlanarAlpha = 4096,
++    DXVA2_VideoProcess_LinearScaling = 8192,
++    DXVA2_VideoProcess_GammaCompensated = 16384,
++    DXVA2_VideoProcess_MaintainsOriginalFieldData = 32768,
++    DXVA2_VideoProcess_Mask = 65535,
++};
++#pragma pop_macro("DXVA2_VideoProcess_Mask")
++#pragma pop_macro("DXVA2_VideoProcess_MaintainsOriginalFieldData")
++#pragma pop_macro("DXVA2_VideoProcess_GammaCompensated")
++#pragma pop_macro("DXVA2_VideoProcess_LinearScaling")
++#pragma pop_macro("DXVA2_VideoProcess_PlanarAlpha")
++#pragma pop_macro("DXVA2_VideoProcess_DetailFilter")
++#pragma pop_macro("DXVA2_VideoProcess_NoiseFilter")
++#pragma pop_macro("DXVA2_VideoProcess_Constriction")
++#pragma pop_macro("DXVA2_VideoProcess_AlphaBlendExtended")
++#pragma pop_macro("DXVA2_VideoProcess_YUV2RGBExtended")
++#pragma pop_macro("DXVA2_VideoProcess_SubStreamsExtended")
++#pragma pop_macro("DXVA2_VideoProcess_SubStreams")
++#pragma pop_macro("DXVA2_VideoProcess_SubRects")
++#pragma pop_macro("DXVA2_VideoProcess_AlphaBlend")
++#pragma pop_macro("DXVA2_VideoProcess_StretchY")
++#pragma pop_macro("DXVA2_VideoProcess_StretchX")
++#pragma pop_macro("DXVA2_VideoProcess_YUV2RGB")
++#pragma pop_macro("DXVA2_VideoProcess_None")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_VPDev_HardwareDevice")
++#undef DXVA2_VPDev_HardwareDevice
++#pragma push_macro("DXVA2_VPDev_EmulatedDXVA1")
++#undef DXVA2_VPDev_EmulatedDXVA1
++#pragma push_macro("DXVA2_VPDev_SoftwareDevice")
++#undef DXVA2_VPDev_SoftwareDevice
++#pragma push_macro("DXVA2_VPDev_Mask")
++#undef DXVA2_VPDev_Mask
++enum DXVA2_VPDev : int
++{
++    DXVA2_VPDev_HardwareDevice = 1,
++    DXVA2_VPDev_EmulatedDXVA1 = 2,
++    DXVA2_VPDev_SoftwareDevice = 4,
++    DXVA2_VPDev_Mask = 7,
++};
++#pragma pop_macro("DXVA2_VPDev_Mask")
++#pragma pop_macro("DXVA2_VPDev_SoftwareDevice")
++#pragma pop_macro("DXVA2_VPDev_EmulatedDXVA1")
++#pragma pop_macro("DXVA2_VPDev_HardwareDevice")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_SampleData_RFF")
++#undef DXVA2_SampleData_RFF
++#pragma push_macro("DXVA2_SampleData_TFF")
++#undef DXVA2_SampleData_TFF
++#pragma push_macro("DXVA2_SampleData_RFF_TFF_Present")
++#undef DXVA2_SampleData_RFF_TFF_Present
++#pragma push_macro("DXVA2_SampleData_Mask")
++#undef DXVA2_SampleData_Mask
++enum DXVA2_SampleData : int
++{
++    DXVA2_SampleData_RFF = 1,
++    DXVA2_SampleData_TFF = 2,
++    DXVA2_SampleData_RFF_TFF_Present = 4,
++    DXVA2_SampleData_Mask = 65535,
++};
++#pragma pop_macro("DXVA2_SampleData_Mask")
++#pragma pop_macro("DXVA2_SampleData_RFF_TFF_Present")
++#pragma pop_macro("DXVA2_SampleData_TFF")
++#pragma pop_macro("DXVA2_SampleData_RFF")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_DestData_RFF")
++#undef DXVA2_DestData_RFF
++#pragma push_macro("DXVA2_DestData_TFF")
++#undef DXVA2_DestData_TFF
++#pragma push_macro("DXVA2_DestData_RFF_TFF_Present")
++#undef DXVA2_DestData_RFF_TFF_Present
++#pragma push_macro("DXVA2_DestData_Mask")
++#undef DXVA2_DestData_Mask
++enum DXVA2_DestData : int
++{
++    DXVA2_DestData_RFF = 1,
++    DXVA2_DestData_TFF = 2,
++    DXVA2_DestData_RFF_TFF_Present = 4,
++    DXVA2_DestData_Mask = 65535,
++};
++#pragma pop_macro("DXVA2_DestData_Mask")
++#pragma pop_macro("DXVA2_DestData_RFF_TFF_Present")
++#pragma pop_macro("DXVA2_DestData_TFF")
++#pragma pop_macro("DXVA2_DestData_RFF")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_PictureParametersBufferType")
++#undef DXVA2_PictureParametersBufferType
++#pragma push_macro("DXVA2_MacroBlockControlBufferType")
++#undef DXVA2_MacroBlockControlBufferType
++#pragma push_macro("DXVA2_ResidualDifferenceBufferType")
++#undef DXVA2_ResidualDifferenceBufferType
++#pragma push_macro("DXVA2_DeblockingControlBufferType")
++#undef DXVA2_DeblockingControlBufferType
++#pragma push_macro("DXVA2_InverseQuantizationMatrixBufferType")
++#undef DXVA2_InverseQuantizationMatrixBufferType
++#pragma push_macro("DXVA2_SliceControlBufferType")
++#undef DXVA2_SliceControlBufferType
++#pragma push_macro("DXVA2_BitStreamDateBufferType")
++#undef DXVA2_BitStreamDateBufferType
++#pragma push_macro("DXVA2_MotionVectorBuffer")
++#undef DXVA2_MotionVectorBuffer
++#pragma push_macro("DXVA2_FilmGrainBuffer")
++#undef DXVA2_FilmGrainBuffer
++enum DXVA2_BufferfType : int
++{
++    DXVA2_PictureParametersBufferType = 0,
++    DXVA2_MacroBlockControlBufferType = 1,
++    DXVA2_ResidualDifferenceBufferType = 2,
++    DXVA2_DeblockingControlBufferType = 3,
++    DXVA2_InverseQuantizationMatrixBufferType = 4,
++    DXVA2_SliceControlBufferType = 5,
++    DXVA2_BitStreamDateBufferType = 6,
++    DXVA2_MotionVectorBuffer = 7,
++    DXVA2_FilmGrainBuffer = 8,
++};
++#pragma pop_macro("DXVA2_FilmGrainBuffer")
++#pragma pop_macro("DXVA2_MotionVectorBuffer")
++#pragma pop_macro("DXVA2_BitStreamDateBufferType")
++#pragma pop_macro("DXVA2_SliceControlBufferType")
++#pragma pop_macro("DXVA2_InverseQuantizationMatrixBufferType")
++#pragma pop_macro("DXVA2_DeblockingControlBufferType")
++#pragma pop_macro("DXVA2_ResidualDifferenceBufferType")
++#pragma pop_macro("DXVA2_MacroBlockControlBufferType")
++#pragma pop_macro("DXVA2_PictureParametersBufferType")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXVA2_VideoDecoderRenderTarget")
++#undef DXVA2_VideoDecoderRenderTarget
++#pragma push_macro("DXVA2_VideoProcessorRenderTarget")
++#undef DXVA2_VideoProcessorRenderTarget
++#pragma push_macro("DXVA2_VideoSoftwareRenderTarget")
++#undef DXVA2_VideoSoftwareRenderTarget
++enum DXVA2_VideoRenderTargetType : int
++{
++    DXVA2_VideoDecoderRenderTarget = 0,
++    DXVA2_VideoProcessorRenderTarget = 1,
++    DXVA2_VideoSoftwareRenderTarget = 2,
++};
++#pragma pop_macro("DXVA2_VideoSoftwareRenderTarget")
++#pragma pop_macro("DXVA2_VideoProcessorRenderTarget")
++#pragma pop_macro("DXVA2_VideoDecoderRenderTarget")
++#endif
++
+ #endif
+ 
+ 

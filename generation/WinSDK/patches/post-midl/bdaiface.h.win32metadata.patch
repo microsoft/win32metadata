@@ -1,0 +1,323 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
+index 32f87f3e14..f47b336282 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bdaiface.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -2805,7 +2806,7 @@ EXTERN_C const IID IID_IBDA_AutoDemodulateEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34518D13-1182-48e6-B28F-B24987787326")
++    MIDL_INTERFACE("34518D13-1182-48e6-B28F-B24987787326") _Windows_SupportedOS_WindowsVista_ 
+     IBDA_AutoDemodulateEx : public IBDA_AutoDemodulate
+     {
+     public:
+@@ -3822,7 +3823,11 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator3;
+ /* [local] */ 
+ 
+ typedef /* [public] */ 
+-enum __MIDL___MIDL_itf_bdaiface_0000_0019_0001
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL___MIDL_itf_bdaiface_0000_0019_0001
+     {
+         KSPROPERTY_IPSINK_MULTICASTLIST	= 0,
+         KSPROPERTY_IPSINK_ADAPTER_DESCRIPTION	= ( KSPROPERTY_IPSINK_MULTICASTLIST + 1 ) ,
+@@ -4065,11 +4070,11 @@ EXTERN_C const IID IID_IBDA_IPSinkInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_AdapterIPAddress( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrBuffer) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrBuffer) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_AdapterDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrBuffer) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrBuffer) = 0;
+         
+     };
+     
+@@ -4170,10 +4175,10 @@ EXTERN_C const IID IID_IEnumPIDMap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("afb6c2a2-2c41-11d3-8a60-0000f81e0e4a")
++    MIDL_INTERFACE("afb6c2a2-2c41-11d3-8a60-0000f81e0e4a") _Windows_SupportedOS_Windows2000_ 
+     IEnumPIDMap : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG cRequest,
+@@ -4298,7 +4303,7 @@ EXTERN_C const IID IID_IMPEG2PIDMap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("afb6c2a1-2c41-11d3-8a60-0000f81e0e4a")
++    MIDL_INTERFACE("afb6c2a1-2c41-11d3-8a60-0000f81e0e4a") _Windows_SupportedOS_WindowsXP_ 
+     IMPEG2PIDMap : public IUnknown
+     {
+     public:
+@@ -4595,7 +4600,7 @@ EXTERN_C const IID IID_IBDA_EasMessage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D806973D-3EBE-46de-8FBB-6358FE784208")
++    MIDL_INTERFACE("D806973D-3EBE-46de-8FBB-6358FE784208") _Windows_SupportedOS_WindowsVista_ 
+     IBDA_EasMessage : public IUnknown
+     {
+     public:
+@@ -4791,7 +4796,7 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CD51F1E0-7BE9-4123-8482-A2A796C0A6B0")
++    MIDL_INTERFACE("CD51F1E0-7BE9-4123-8482-A2A796C0A6B0") _Windows_SupportedOS_WindowsVista_ 
+     IBDA_ConditionalAccess : public IUnknown
+     {
+     public:
+@@ -4801,15 +4806,15 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
+             /* [annotation][out] */ 
+             _Out_  SmartCardAssociationType *pCardAssociation,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrCardError,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrCardError,
+             /* [annotation][out] */ 
+             _Out_  VARIANT_BOOL *pfOOBLocked) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_SmartCardInfo( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrCardName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrCardName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrCardManufacturer,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrCardManufacturer,
+             /* [annotation][out] */ 
+             _Out_  VARIANT_BOOL *pfDaylightSavings,
+             /* [annotation][out] */ 
+@@ -4817,7 +4822,7 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
+             /* [annotation][out] */ 
+             _Out_  LONG *plTimeZoneOffsetMinutes,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrLanguage,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrLanguage,
+             /* [annotation][out] */ 
+             _Out_  EALocationCodeType *pEALocationCode) = 0;
+         
+@@ -4854,7 +4859,7 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
+             /* [annotation][in] */ 
+             _In_  BYTE byDialogNumber,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrURL) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrURL) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE InformUIClosed( 
+             /* [annotation][in] */ 
+@@ -5166,7 +5171,7 @@ EXTERN_C const IID IID_IBDA_DRM;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F98D88B0-1992-4cd6-A6D9-B9AFAB99330D")
++    MIDL_INTERFACE("F98D88B0-1992-4cd6-A6D9-B9AFAB99330D") _Windows_SupportedOS_WindowsVista_ 
+     IBDA_DRM : public IUnknown
+     {
+     public:
+@@ -5285,7 +5290,7 @@ EXTERN_C const IID IID_IBDA_NameValueService;
+             /* [annotation][in] */ 
+             _In_  ULONG ulIndex,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetValue( 
+             /* [annotation][in] */ 
+@@ -5293,7 +5298,7 @@ EXTERN_C const IID IID_IBDA_NameValueService;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrLanguage,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetValue( 
+             /* [annotation][in] */ 
+@@ -5427,7 +5432,7 @@ EXTERN_C const IID IID_IBDA_ConditionalAccessEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("497C3418-23CB-44ba-BB62-769F506FCEA7")
++    MIDL_INTERFACE("497C3418-23CB-44ba-BB62-769F506FCEA7") _Windows_SupportedOS_Windows7_ 
+     IBDA_ConditionalAccessEx : public IUnknown
+     {
+     public:
+@@ -5623,7 +5628,7 @@ EXTERN_C const IID IID_IBDA_ISDBConditionalAccess;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5E68C627-16C2-4e6c-B1E2-D00170CDAA0F")
++    MIDL_INTERFACE("5E68C627-16C2-4e6c-B1E2-D00170CDAA0F") _Windows_SupportedOS_Windows7_ 
+     IBDA_ISDBConditionalAccess : public IUnknown
+     {
+     public:
+@@ -5727,7 +5732,7 @@ EXTERN_C const IID IID_IBDA_EventingService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("207C413F-00DC-4c61-BAD6-6FEE1FF07064")
++    MIDL_INTERFACE("207C413F-00DC-4c61-BAD6-6FEE1FF07064") _Windows_SupportedOS_Windows7_ 
+     IBDA_EventingService : public IUnknown
+     {
+     public:
+@@ -5960,7 +5965,7 @@ EXTERN_C const IID IID_IBDA_Encoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3a8bad59-59fe-4559-a0ba-396cfaa98ae3")
++    MIDL_INTERFACE("3a8bad59-59fe-4559-a0ba-396cfaa98ae3") _Windows_SupportedOS_Windows7_ 
+     IBDA_Encoder : public IUnknown
+     {
+     public:
+@@ -6270,7 +6275,7 @@ EXTERN_C const IID IID_IBDA_FDC;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("138adc7e-58ae-437f-b0b4-c9fe19d5b4ac")
++    MIDL_INTERFACE("138adc7e-58ae-437f-b0b4-c9fe19d5b4ac") _Windows_SupportedOS_Windows7_ 
+     IBDA_FDC : public IUnknown
+     {
+     public:
+@@ -6284,9 +6289,9 @@ EXTERN_C const IID IID_IBDA_FDC;
+             /* [annotation][out] */ 
+             _Out_  BOOL *CurrentSpectrumInversion,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *CurrentPIDList,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *CurrentPIDList,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *CurrentTIDList,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *CurrentTIDList,
+             /* [annotation][out] */ 
+             _Out_  BOOL *Overflow) = 0;
+         
+@@ -6308,7 +6313,7 @@ EXTERN_C const IID IID_IBDA_FDC;
+             /* [annotation][in] */ 
+             _In_  BSTR TidsToAdd,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *CurrentTidList) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *CurrentTidList) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemoveTid( 
+             /* [annotation][in] */ 
+@@ -6479,7 +6484,7 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C0AFCB73-23E7-4bc6-BAFA-FDC167B4719F")
++    MIDL_INTERFACE("C0AFCB73-23E7-4bc6-BAFA-FDC167B4719F") _Windows_SupportedOS_Windows7_ 
+     IBDA_GuideDataDeliveryService : public IUnknown
+     {
+     public:
+@@ -6501,7 +6506,7 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
+             /* [annotation][in] */ 
+             _In_  ULONG64 ul64ServiceIdx,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrTuneXml) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrTuneXml) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetServices( 
+             /* [annotation][out][in] */ 
+@@ -6513,7 +6518,7 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrTuneXml,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrServiceDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrServiceDescription) = 0;
+         
+     };
+     
+@@ -6668,7 +6673,7 @@ EXTERN_C const IID IID_IBDA_DRMService;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDRMStatus( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDrmUuidList,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDrmUuidList,
+             /* [annotation][out] */ 
+             _Out_  GUID *DrmUuid) = 0;
+         
+@@ -7247,7 +7252,7 @@ EXTERN_C const IID IID_IBDA_DRIDRMService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1F9BC2A5-44A3-4c52-AAB1-0BBCE5A1381D")
++    MIDL_INTERFACE("1F9BC2A5-44A3-4c52-AAB1-0BBCE5A1381D") _Windows_SupportedOS_Windows7_ 
+     IBDA_DRIDRMService : public IUnknown
+     {
+     public:
+@@ -7257,7 +7262,7 @@ EXTERN_C const IID IID_IBDA_DRIDRMService;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDRMStatus( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDrmUuidList,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDrmUuidList,
+             /* [annotation][out] */ 
+             _Out_  GUID *DrmUuid) = 0;
+         
+@@ -7583,7 +7588,7 @@ EXTERN_C const IID IID_IBDA_MUX;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("942AAFEC-4C05-4c74-B8EB-8706C2A4943F")
++    MIDL_INTERFACE("942AAFEC-4C05-4c74-B8EB-8706C2A4943F") _Windows_SupportedOS_Windows7_ 
+     IBDA_MUX : public IUnknown
+     {
+     public:
+@@ -7813,7 +7818,7 @@ EXTERN_C const IID IID_IBDA_UserActivityService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("53B14189-E478-4b7a-A1FF-506DB4B99DFE")
++    MIDL_INTERFACE("53B14189-E478-4b7a-A1FF-506DB4B99DFE") _Windows_SupportedOS_Windows7_ 
+     IBDA_UserActivityService : public IUnknown
+     {
+     public:
+@@ -7931,7 +7936,7 @@ EXTERN_C const IID IID_IESEvent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1F0E5357-AF43-44e6-8547-654C645145D2")
++    MIDL_INTERFACE("1F0E5357-AF43-44e6-8547-654C645145D2") _Windows_SupportedOS_Windows7_ 
+     IESEvent : public IUnknown
+     {
+     public:
+@@ -7953,7 +7958,7 @@ EXTERN_C const IID IID_IESEvent;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStringData( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrData) = 0;
+         
+     };
+     
+@@ -8070,7 +8075,7 @@ EXTERN_C const IID IID_IESEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ABD414BF-CFE5-4e5e-AF5B-4B4E49C5BFEB")
++    MIDL_INTERFACE("ABD414BF-CFE5-4e5e-AF5B-4B4E49C5BFEB") _Windows_SupportedOS_Windows7_ 
+     IESEvents : public IUnknown
+     {
+     public:
+@@ -8161,7 +8166,7 @@ EXTERN_C const IID IID_IBroadcastEvent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B21263F-26E8-489d-AAC4-924F7EFD9511")
++    MIDL_INTERFACE("3B21263F-26E8-489d-AAC4-924F7EFD9511") _Windows_SupportedOS_WindowsXP_ 
+     IBroadcastEvent : public IUnknown
+     {
+     public:

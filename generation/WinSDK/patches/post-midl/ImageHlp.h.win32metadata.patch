@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
-index 1cdaaf102cd0984398d9f3ed7103b8c438ea54d7..4f766ac5c2c44d82f2b8079074a74ec2552ec3cd 100644
+index 1cdaaf102c..45ef15ccd5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -14,8 +14,8 @@ index 1cdaaf102cd0984398d9f3ed7103b8c438ea54d7..4f766ac5c2c44d82f2b8079074a74ec2
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  BOOL
  IMAGEAPI
  BindImage(
@@ -23,17 +23,189 @@ index 1cdaaf102cd0984398d9f3ed7103b8c438ea54d7..4f766ac5c2c44d82f2b8079074a74ec2
      );
  
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  BOOL
  IMAGEAPI
  BindImageEx(
+@@ -206,7 +211,7 @@ BindImageEx(
+                                                 //  (same as NT 3.1->NT 4.0)
+ #define BIND_REPORT_64BIT_VA   0x00000010
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ ReBaseImage(
+     _In_ PCSTR CurrentImageName,
+@@ -223,7 +228,7 @@ ReBaseImage(
+     _In_ ULONG TimeStamp             // new timestamp for image, if non-zero
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ ReBaseImage64(
+     _In_ PCSTR CurrentImageName,
 @@ -271,6 +276,8 @@ ReBaseImage64(
  // Define checksum function prototypes.
  //
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  PIMAGE_NT_HEADERS
  IMAGEAPI
  CheckSumMappedFile (
+@@ -280,7 +287,7 @@ CheckSumMappedFile (
+     _Out_ PDWORD CheckSum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsXP_ DWORD
+ IMAGEAPI
+ MapFileAndCheckSumA (
+     _In_ PCSTR Filename,
+@@ -288,7 +295,7 @@ MapFileAndCheckSumA (
+     _Out_ PDWORD CheckSum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsXP_ DWORD
+ IMAGEAPI
+ MapFileAndCheckSumW (
+     _In_ PCWSTR Filename,
+@@ -302,21 +309,21 @@ MapFileAndCheckSumW (
+ #define MapFileAndCheckSum  MapFileAndCheckSumA
+ #endif // !UNICODE
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ GetImageConfigInformation(
+     _In_ PLOADED_IMAGE LoadedImage,
+     _Out_ PIMAGE_LOAD_CONFIG_DIRECTORY ImageConfigInformation
+     );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ DWORD
+ IMAGEAPI
+ GetImageUnusedHeaderBytes(
+     _In_ PLOADED_IMAGE LoadedImage,
+     _Out_ PDWORD SizeUnusedHeaderBytes
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ SetImageConfigInformation(
+     _Inout_ PLOADED_IMAGE LoadedImage,
+@@ -336,7 +343,7 @@ typedef PVOID DIGEST_HANDLE;
+ 
+ typedef BOOL (WINAPI *DIGEST_FUNCTION) (DIGEST_HANDLE refdata, PBYTE pData, DWORD dwLength);
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ ImageGetDigestStream(
+     _In_ HANDLE FileHandle,
+@@ -345,7 +352,7 @@ ImageGetDigestStream(
+     _In_ DIGEST_HANDLE DigestHandle
+     );
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ IMAGEAPI
+ ImageAddCertificate(
+@@ -354,14 +361,14 @@ ImageAddCertificate(
+     _Out_ PDWORD Index
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ ImageRemoveCertificate(
+     _In_ HANDLE FileHandle,
+     _In_ DWORD Index
+     );
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ IMAGEAPI
+ ImageEnumerateCertificates(
+@@ -372,7 +379,7 @@ ImageEnumerateCertificates(
+     _In_opt_ DWORD IndexCount
+     );
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ IMAGEAPI
+ ImageGetCertificateData(
+@@ -382,7 +389,7 @@ ImageGetCertificateData(
+     _Inout_ PDWORD RequiredLength
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ ImageGetCertificateHeader(
+     _In_ HANDLE FileHandle,
+@@ -390,20 +397,20 @@ ImageGetCertificateHeader(
+     _Inout_ LPWIN_CERTIFICATE Certificateheader
+     );
+ 
+-PLOADED_IMAGE
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ PLOADED_IMAGE
+ IMAGEAPI
+ ImageLoad(
+     _In_ PCSTR DllName,
+     _In_opt_ PCSTR DllPath
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ ImageUnload(
+     _Inout_ PLOADED_IMAGE LoadedImage
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ MapAndLoad(
+     _In_ PCSTR ImageName,
+@@ -413,13 +420,13 @@ MapAndLoad(
+     _In_ BOOL ReadOnly
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ UnMapAndLoad(
+     _Inout_ PLOADED_IMAGE LoadedImage
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ TouchFileTimes (
+     _In_ HANDLE FileHandle,
+@@ -435,7 +442,7 @@ SplitSymbols (
+     _In_ ULONG Flags
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ IMAGEAPI
+ UpdateDebugInfoFile(
+     _In_ PCSTR ImageFileName,
+@@ -444,7 +451,7 @@ UpdateDebugInfoFile(
+     _In_ PIMAGE_NT_HEADERS32 NtHeaders
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ BOOL
+ IMAGEAPI
+ UpdateDebugInfoFileEx(
+     _In_ PCSTR ImageFileName,

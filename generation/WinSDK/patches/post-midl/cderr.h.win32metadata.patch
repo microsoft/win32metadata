@@ -1,0 +1,164 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/cderr.h b/generation/WinSDK/RecompiledIdlHeaders/shared/cderr.h
+index aadc309c50..1890b08de9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/cderr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/cderr.h
+@@ -59,4 +59,159 @@
+ 
+ #define CCERR_CHOOSECOLORCODES 0x5000
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CDERR_DIALOGFAILURE")
++#undef CDERR_DIALOGFAILURE
++#pragma push_macro("CDERR_GENERALCODES")
++#undef CDERR_GENERALCODES
++#pragma push_macro("CDERR_STRUCTSIZE")
++#undef CDERR_STRUCTSIZE
++#pragma push_macro("CDERR_INITIALIZATION")
++#undef CDERR_INITIALIZATION
++#pragma push_macro("CDERR_NOTEMPLATE")
++#undef CDERR_NOTEMPLATE
++#pragma push_macro("CDERR_NOHINSTANCE")
++#undef CDERR_NOHINSTANCE
++#pragma push_macro("CDERR_LOADSTRFAILURE")
++#undef CDERR_LOADSTRFAILURE
++#pragma push_macro("CDERR_FINDRESFAILURE")
++#undef CDERR_FINDRESFAILURE
++#pragma push_macro("CDERR_LOADRESFAILURE")
++#undef CDERR_LOADRESFAILURE
++#pragma push_macro("CDERR_LOCKRESFAILURE")
++#undef CDERR_LOCKRESFAILURE
++#pragma push_macro("CDERR_MEMALLOCFAILURE")
++#undef CDERR_MEMALLOCFAILURE
++#pragma push_macro("CDERR_MEMLOCKFAILURE")
++#undef CDERR_MEMLOCKFAILURE
++#pragma push_macro("CDERR_NOHOOK")
++#undef CDERR_NOHOOK
++#pragma push_macro("CDERR_REGISTERMSGFAIL")
++#undef CDERR_REGISTERMSGFAIL
++#pragma push_macro("PDERR_PRINTERCODES")
++#undef PDERR_PRINTERCODES
++#pragma push_macro("PDERR_SETUPFAILURE")
++#undef PDERR_SETUPFAILURE
++#pragma push_macro("PDERR_PARSEFAILURE")
++#undef PDERR_PARSEFAILURE
++#pragma push_macro("PDERR_RETDEFFAILURE")
++#undef PDERR_RETDEFFAILURE
++#pragma push_macro("PDERR_LOADDRVFAILURE")
++#undef PDERR_LOADDRVFAILURE
++#pragma push_macro("PDERR_GETDEVMODEFAIL")
++#undef PDERR_GETDEVMODEFAIL
++#pragma push_macro("PDERR_INITFAILURE")
++#undef PDERR_INITFAILURE
++#pragma push_macro("PDERR_NODEVICES")
++#undef PDERR_NODEVICES
++#pragma push_macro("PDERR_NODEFAULTPRN")
++#undef PDERR_NODEFAULTPRN
++#pragma push_macro("PDERR_DNDMMISMATCH")
++#undef PDERR_DNDMMISMATCH
++#pragma push_macro("PDERR_CREATEICFAILURE")
++#undef PDERR_CREATEICFAILURE
++#pragma push_macro("PDERR_PRINTERNOTFOUND")
++#undef PDERR_PRINTERNOTFOUND
++#pragma push_macro("PDERR_DEFAULTDIFFERENT")
++#undef PDERR_DEFAULTDIFFERENT
++#pragma push_macro("CFERR_CHOOSEFONTCODES")
++#undef CFERR_CHOOSEFONTCODES
++#pragma push_macro("CFERR_NOFONTS")
++#undef CFERR_NOFONTS
++#pragma push_macro("CFERR_MAXLESSTHANMIN")
++#undef CFERR_MAXLESSTHANMIN
++#pragma push_macro("FNERR_FILENAMECODES")
++#undef FNERR_FILENAMECODES
++#pragma push_macro("FNERR_SUBCLASSFAILURE")
++#undef FNERR_SUBCLASSFAILURE
++#pragma push_macro("FNERR_INVALIDFILENAME")
++#undef FNERR_INVALIDFILENAME
++#pragma push_macro("FNERR_BUFFERTOOSMALL")
++#undef FNERR_BUFFERTOOSMALL
++#pragma push_macro("FRERR_FINDREPLACECODES")
++#undef FRERR_FINDREPLACECODES
++#pragma push_macro("FRERR_BUFFERLENGTHZERO")
++#undef FRERR_BUFFERLENGTHZERO
++#pragma push_macro("CCERR_CHOOSECOLORCODES")
++#undef CCERR_CHOOSECOLORCODES
++enum COMMON_DLG_ERRORS : unsigned int
++{
++    CDERR_DIALOGFAILURE = 65535U,
++    CDERR_GENERALCODES = 0U,
++    CDERR_STRUCTSIZE = 1U,
++    CDERR_INITIALIZATION = 2U,
++    CDERR_NOTEMPLATE = 3U,
++    CDERR_NOHINSTANCE = 4U,
++    CDERR_LOADSTRFAILURE = 5U,
++    CDERR_FINDRESFAILURE = 6U,
++    CDERR_LOADRESFAILURE = 7U,
++    CDERR_LOCKRESFAILURE = 8U,
++    CDERR_MEMALLOCFAILURE = 9U,
++    CDERR_MEMLOCKFAILURE = 10U,
++    CDERR_NOHOOK = 11U,
++    CDERR_REGISTERMSGFAIL = 12U,
++    PDERR_PRINTERCODES = 4096U,
++    PDERR_SETUPFAILURE = 4097U,
++    PDERR_PARSEFAILURE = 4098U,
++    PDERR_RETDEFFAILURE = 4099U,
++    PDERR_LOADDRVFAILURE = 4100U,
++    PDERR_GETDEVMODEFAIL = 4101U,
++    PDERR_INITFAILURE = 4102U,
++    PDERR_NODEVICES = 4103U,
++    PDERR_NODEFAULTPRN = 4104U,
++    PDERR_DNDMMISMATCH = 4105U,
++    PDERR_CREATEICFAILURE = 4106U,
++    PDERR_PRINTERNOTFOUND = 4107U,
++    PDERR_DEFAULTDIFFERENT = 4108U,
++    CFERR_CHOOSEFONTCODES = 8192U,
++    CFERR_NOFONTS = 8193U,
++    CFERR_MAXLESSTHANMIN = 8194U,
++    FNERR_FILENAMECODES = 12288U,
++    FNERR_SUBCLASSFAILURE = 12289U,
++    FNERR_INVALIDFILENAME = 12290U,
++    FNERR_BUFFERTOOSMALL = 12291U,
++    FRERR_FINDREPLACECODES = 16384U,
++    FRERR_BUFFERLENGTHZERO = 16385U,
++    CCERR_CHOOSECOLORCODES = 20480U,
++};
++#pragma pop_macro("CCERR_CHOOSECOLORCODES")
++#pragma pop_macro("FRERR_BUFFERLENGTHZERO")
++#pragma pop_macro("FRERR_FINDREPLACECODES")
++#pragma pop_macro("FNERR_BUFFERTOOSMALL")
++#pragma pop_macro("FNERR_INVALIDFILENAME")
++#pragma pop_macro("FNERR_SUBCLASSFAILURE")
++#pragma pop_macro("FNERR_FILENAMECODES")
++#pragma pop_macro("CFERR_MAXLESSTHANMIN")
++#pragma pop_macro("CFERR_NOFONTS")
++#pragma pop_macro("CFERR_CHOOSEFONTCODES")
++#pragma pop_macro("PDERR_DEFAULTDIFFERENT")
++#pragma pop_macro("PDERR_PRINTERNOTFOUND")
++#pragma pop_macro("PDERR_CREATEICFAILURE")
++#pragma pop_macro("PDERR_DNDMMISMATCH")
++#pragma pop_macro("PDERR_NODEFAULTPRN")
++#pragma pop_macro("PDERR_NODEVICES")
++#pragma pop_macro("PDERR_INITFAILURE")
++#pragma pop_macro("PDERR_GETDEVMODEFAIL")
++#pragma pop_macro("PDERR_LOADDRVFAILURE")
++#pragma pop_macro("PDERR_RETDEFFAILURE")
++#pragma pop_macro("PDERR_PARSEFAILURE")
++#pragma pop_macro("PDERR_SETUPFAILURE")
++#pragma pop_macro("PDERR_PRINTERCODES")
++#pragma pop_macro("CDERR_REGISTERMSGFAIL")
++#pragma pop_macro("CDERR_NOHOOK")
++#pragma pop_macro("CDERR_MEMLOCKFAILURE")
++#pragma pop_macro("CDERR_MEMALLOCFAILURE")
++#pragma pop_macro("CDERR_LOCKRESFAILURE")
++#pragma pop_macro("CDERR_LOADRESFAILURE")
++#pragma pop_macro("CDERR_FINDRESFAILURE")
++#pragma pop_macro("CDERR_LOADSTRFAILURE")
++#pragma pop_macro("CDERR_NOHINSTANCE")
++#pragma pop_macro("CDERR_NOTEMPLATE")
++#pragma pop_macro("CDERR_INITIALIZATION")
++#pragma pop_macro("CDERR_STRUCTSIZE")
++#pragma pop_macro("CDERR_GENERALCODES")
++#pragma pop_macro("CDERR_DIALOGFAILURE")
++#endif
++
+ #endif  /* !_INC_CDERR */

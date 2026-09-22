@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanihv.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanihv.h
+index 54e97a0aee..5e25a39626 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanihv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanihv.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2005 Microsoft Corporation
+@@ -606,7 +607,7 @@ DWORD
+ (
+     _In_        PDOT11_ADAPTER    pDot11Adapter,
+     _In_opt_    HANDLE            hDot11SvcHandle,
+-    _Out_       PHANDLE           phIhvExtAdapter
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_       PHANDLE           phIhvExtAdapter
+ );
+ 
+ 

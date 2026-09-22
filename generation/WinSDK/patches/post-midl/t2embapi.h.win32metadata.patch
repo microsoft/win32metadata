@@ -1,0 +1,273 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h
+index d32deebe8e..d3c65e893f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*************************************************************************
+ *                                                                        *
+ * t2embapi.h -- OpenType embedding services dll (T2EMBED.DLL)            *
+@@ -178,12 +179,12 @@ typedef struct
+ 
+ /* Font Embedding APIs ----------------------------------------------------*/
+ 
+-LONG WINAPI TTEmbedFont
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTEmbedFont
+ (
+     _In_ HDC       hDC,                    // device-context handle
+-    _In_ ULONG     ulFlags,                // flags specifying the request
+-    _In_ ULONG     ulCharSet,              // flags specifying char set
+-    _Out_ ULONG*    pulPrivStatus,          // upon completion contains embedding priv of font
++    _Win32_AssociatedEnum_(TTEMBED_FLAGS) _In_ ULONG     ulFlags,                // flags specifying the request
++    _Win32_AssociatedEnum_(EMBED_FONT_CHARSET) _In_ ULONG     ulCharSet,              // flags specifying char set
++    _Win32_AssociatedEnum_(EMBEDDED_FONT_PRIV_STATUS) _Out_ ULONG*    pulPrivStatus,          // upon completion contains embedding priv of font
+     _Out_ ULONG*    pulStatus,              // on completion may contain status flags for request
+     __callback WRITEEMBEDPROC lpfnWriteToStream, // callback function for doc/disk writes
+     _In_ LPVOID    lpvWriteStream,         // the output stream token
+@@ -196,14 +197,14 @@ LONG WINAPI TTEmbedFont
+     _In_opt_ TTEMBEDINFO* pTTEmbedInfo         // optional security
+ );
+ 
+-LONG WINAPI TTEmbedFontFromFileA
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTEmbedFontFromFileA
+ (
+     _In_    HDC       hDC,                    // device-context handle
+     _In_    LPCSTR    szFontFileName,         // TrueType font file name
+     _In_    USHORT    usTTCIndex,             // If file image is a TTC, this must be zero based index
+-    _In_    ULONG     ulFlags,                // flags specifying the request
+-    _In_    ULONG     ulCharSet,              // flags specifying char set
+-    _Out_   ULONG*    pulPrivStatus,          // upon completion contains embedding priv of font
++    _Win32_AssociatedEnum_(TTEMBED_FLAGS) _In_    ULONG     ulFlags,                // flags specifying the request
++    _Win32_AssociatedEnum_(EMBED_FONT_CHARSET) _In_    ULONG     ulCharSet,              // flags specifying char set
++    _Win32_AssociatedEnum_(EMBEDDED_FONT_PRIV_STATUS) _Out_   ULONG*    pulPrivStatus,          // upon completion contains embedding priv of font
+     _Out_   ULONG*    pulStatus,              // on completion may contain status flags for request
+     __callback WRITEEMBEDPROC lpfnWriteToStream, // callback function for doc/disk writes
+     _In_    LPVOID    lpvWriteStream,         // the output stream token
+@@ -216,14 +217,14 @@ LONG WINAPI TTEmbedFontFromFileA
+     _In_opt_ TTEMBEDINFO* pTTEmbedInfo         // optional security
+ );
+ 
+-LONG WINAPI TTLoadEmbeddedFont
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTLoadEmbeddedFont
+ (
+-    _Out_ HANDLE*   phFontReference,            // on completion, contains handle to identify embedded font installed
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE*   phFontReference,            // on completion, contains handle to identify embedded font installed
+                                         // on system
+     _In_ ULONG    ulFlags,                  // flags specifying the request 
+-    _Out_ ULONG*    pulPrivStatus,          // on completion, contains the embedding status
+-    _In_ ULONG     ulPrivs,                 // allows for the reduction of licensing privileges
+-    _Out_ ULONG*    pulStatus,              // on completion, may contain status flags for request 
++    _Win32_AssociatedEnum_(EMBEDDED_FONT_PRIV_STATUS) _Out_ ULONG*    pulPrivStatus,          // on completion, contains the embedding status
++    _Win32_AssociatedEnum_(FONT_LICENSE_PRIVS) _In_ ULONG     ulPrivs,                 // allows for the reduction of licensing privileges
++    _Win32_AssociatedEnum_(TTLOAD_EMBEDDED_FONT_STATUS) _Out_ ULONG*    pulStatus,              // on completion, may contain status flags for request 
+     _In_ READEMBEDPROC lpfnReadFromStream,  // callback function for doc/disk reads
+     _In_ LPVOID    lpvReadStream,           // the input stream token
+     _In_opt_ LPWSTR    szWinFamilyName,         // the new 16 bit windows family name can be NULL
+@@ -231,32 +232,32 @@ LONG WINAPI TTLoadEmbeddedFont
+     _In_opt_ TTLOADINFO* pTTLoadInfo                // optional security
+ );
+ 
+-LONG WINAPI TTGetEmbeddedFontInfo
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTGetEmbeddedFontInfo
+ (   
+-    _In_ ULONG     ulFlags,                  // flags specifying the request
++    _Win32_AssociatedEnum_(TTEMBED_FLAGS) _In_ ULONG     ulFlags,                  // flags specifying the request
+     _Out_ ULONG*    pulPrivStatus,            // on completion, contains the embedding status
+-    _In_ ULONG     ulPrivs,                  // allows for the reduction of licensing privileges
++    _Win32_AssociatedEnum_(FONT_LICENSE_PRIVS) _In_ ULONG     ulPrivs,                  // allows for the reduction of licensing privileges
+     _Out_ ULONG*    pulStatus,                // on completion, may contain status flags for request
+     __callback READEMBEDPROC lpfnReadFromStream,   // callback function for doc/disk reads
+     _In_ LPVOID    lpvReadStream,            // the input stream token   
+     _In_opt_ TTLOADINFO* pTTLoadInfo             // optional security
+ );
+ 
+-LONG WINAPI TTDeleteEmbeddedFont
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTDeleteEmbeddedFont
+ (
+     _In_ HANDLE    hFontReference,   // Reference to font value provided by load functions                                       
+     _In_ ULONG     ulFlags,
+     _Out_ ULONG*    pulStatus
+ );
+ 
+-LONG WINAPI TTGetEmbeddingType
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTGetEmbeddingType
+ (
+     _In_ HDC         hDC,                   // device context handle
+-    _Out_ ULONG*      pulEmbedType           // upon completion, contains the
++    _Win32_AssociatedEnum_(EMBEDDED_FONT_PRIV_STATUS) _Out_ ULONG*      pulEmbedType           // upon completion, contains the
+                                        // embedding status
+ );
+ 
+-LONG WINAPI TTCharToUnicode
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTCharToUnicode
+ (   
+     _In_ HDC         hDC,                // device context handle
+     _In_reads_(ulCharCodeSize) UCHAR*      pucCharCodes,       // array of 8 bit character codes to convert
+@@ -266,7 +267,7 @@ LONG WINAPI TTCharToUnicode
+     _In_ ULONG       ulFlags             // Control flags
+ );
+ 
+-LONG WINAPI TTRunValidationTests
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTRunValidationTests
+ (
+     _In_ HDC                         hDC,        // device context handle
+     _In_ TTVALIDATIONTESTSPARAMS*    pTestParam  // 
+@@ -275,31 +276,31 @@ LONG WINAPI TTRunValidationTests
+ 
+ /* Font Enabling APIs -----------------------------------------------------*/
+ 
+-LONG WINAPI TTIsEmbeddingEnabled
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTIsEmbeddingEnabled
+ (
+     _In_ HDC                     hDC,            // device context handle
+     _Out_ BOOL*           pbEnabled       // upon completion will indicate if enabled
+ );
+ 
+-LONG WINAPI TTIsEmbeddingEnabledForFacename
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTIsEmbeddingEnabledForFacename
+ (
+     _In_ LPCSTR           lpszFacename,   // facename
+     _Out_ BOOL*           pbEnabled       // upon completion will indicate if enabled
+ );
+ 
+-LONG WINAPI TTEnableEmbeddingForFacename
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTEnableEmbeddingForFacename
+ (                                   // If fEnable != 0, it removes the indicated
+     _In_ LPCSTR           lpszFacename,   // typeface name from the "embedding
+     _In_ BOOL            bEnable         // exclusion list".  Else, it enters the
+ );                                  // indicated typeface name in the "embedding
+                                     // exclusion list".
+ 
+-LONG WINAPI TTEmbedFontEx
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTEmbedFontEx
+ (
+     _In_ HDC       hDC,                    // device-context handle
+-    _In_ ULONG     ulFlags,                // flags specifying the request
+-    _In_ ULONG     ulCharSet,              // flags specifying char set
+-    _Out_ ULONG*    pulPrivStatus,          // upon completion contains embedding priv of font
++    _Win32_AssociatedEnum_(TTEMBED_FLAGS) _In_ ULONG     ulFlags,                // flags specifying the request
++    _Win32_AssociatedEnum_(EMBED_FONT_CHARSET) _In_ ULONG     ulCharSet,              // flags specifying char set
++    _Win32_AssociatedEnum_(EMBEDDED_FONT_PRIV_STATUS) _Out_ ULONG*    pulPrivStatus,          // upon completion contains embedding priv of font
+     _Out_ ULONG*    pulStatus,              // on completion may contain status flags for request
+     __callback WRITEEMBEDPROC lpfnWriteToStream, // callback function for doc/disk writes
+     _In_ LPVOID    lpvWriteStream,         // the output stream token
+@@ -312,13 +313,13 @@ LONG WINAPI TTEmbedFontEx
+     _In_opt_ TTEMBEDINFO* pTTEmbedInfo         // optional security
+ );
+ 
+-LONG WINAPI TTRunValidationTestsEx
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTRunValidationTestsEx
+ (
+     _In_ HDC                         hDC,        // device context handle
+     _In_ TTVALIDATIONTESTSPARAMSEX*  pTestParam  // 
+ );
+ 
+-LONG WINAPI TTGetNewFontName
++_Windows_SupportedOS_Windows2000_ LONG WINAPI TTGetNewFontName
+ (
+     _In_                  HANDLE* phFontReference,    // contains handle to identify embedded font installed
+                                                             // on system
+@@ -336,4 +337,103 @@ LONG WINAPI TTGetNewFontName
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTEMBED_EMBEDEUDC")
++#undef TTEMBED_EMBEDEUDC
++#pragma push_macro("TTEMBED_RAW")
++#undef TTEMBED_RAW
++#pragma push_macro("TTEMBED_SUBSET")
++#undef TTEMBED_SUBSET
++#pragma push_macro("TTEMBED_TTCOMPRESSED")
++#undef TTEMBED_TTCOMPRESSED
++enum [[clang::flag_enum]] TTEMBED_FLAGS : unsigned int
++{
++    TTEMBED_EMBEDEUDC = 32U,
++    TTEMBED_RAW = 0U,
++    TTEMBED_SUBSET = 1U,
++    TTEMBED_TTCOMPRESSED = 4U,
++};
++#pragma pop_macro("TTEMBED_TTCOMPRESSED")
++#pragma pop_macro("TTEMBED_SUBSET")
++#pragma pop_macro("TTEMBED_RAW")
++#pragma pop_macro("TTEMBED_EMBEDEUDC")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CHARSET_UNICODE")
++#undef CHARSET_UNICODE
++#pragma push_macro("CHARSET_SYMBOL")
++#undef CHARSET_SYMBOL
++enum EMBED_FONT_CHARSET : unsigned int
++{
++    CHARSET_UNICODE = 1U,
++    CHARSET_SYMBOL = 2U,
++};
++#pragma pop_macro("CHARSET_SYMBOL")
++#pragma pop_macro("CHARSET_UNICODE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("EMBED_PREVIEWPRINT")
++#undef EMBED_PREVIEWPRINT
++#pragma push_macro("EMBED_EDITABLE")
++#undef EMBED_EDITABLE
++#pragma push_macro("EMBED_INSTALLABLE")
++#undef EMBED_INSTALLABLE
++#pragma push_macro("EMBED_NOEMBEDDING")
++#undef EMBED_NOEMBEDDING
++enum EMBEDDED_FONT_PRIV_STATUS : unsigned int
++{
++    EMBED_PREVIEWPRINT = 1U,
++    EMBED_EDITABLE = 2U,
++    EMBED_INSTALLABLE = 3U,
++    EMBED_NOEMBEDDING = 4U,
++};
++#pragma pop_macro("EMBED_NOEMBEDDING")
++#pragma pop_macro("EMBED_INSTALLABLE")
++#pragma pop_macro("EMBED_EDITABLE")
++#pragma pop_macro("EMBED_PREVIEWPRINT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTLOAD_FONT_SUBSETTED")
++#undef TTLOAD_FONT_SUBSETTED
++#pragma push_macro("TTLOAD_FONT_IN_SYSSTARTUP")
++#undef TTLOAD_FONT_IN_SYSSTARTUP
++enum [[clang::flag_enum]] TTLOAD_EMBEDDED_FONT_STATUS : unsigned int
++{
++    TTLOAD_FONT_SUBSETTED = 1U,
++    TTLOAD_FONT_IN_SYSSTARTUP = 2U,
++};
++#pragma pop_macro("TTLOAD_FONT_IN_SYSSTARTUP")
++#pragma pop_macro("TTLOAD_FONT_SUBSETTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LICENSE_PREVIEWPRINT")
++#undef LICENSE_PREVIEWPRINT
++#pragma push_macro("LICENSE_EDITABLE")
++#undef LICENSE_EDITABLE
++#pragma push_macro("LICENSE_INSTALLABLE")
++#undef LICENSE_INSTALLABLE
++#pragma push_macro("LICENSE_NOEMBEDDING")
++#undef LICENSE_NOEMBEDDING
++#pragma push_macro("LICENSE_DEFAULT")
++#undef LICENSE_DEFAULT
++enum FONT_LICENSE_PRIVS : unsigned int
++{
++    LICENSE_PREVIEWPRINT = 4U,
++    LICENSE_EDITABLE = 8U,
++    LICENSE_INSTALLABLE = 0U,
++    LICENSE_NOEMBEDDING = 2U,
++    LICENSE_DEFAULT = 0U,
++};
++#pragma pop_macro("LICENSE_DEFAULT")
++#pragma pop_macro("LICENSE_NOEMBEDDING")
++#pragma pop_macro("LICENSE_INSTALLABLE")
++#pragma pop_macro("LICENSE_EDITABLE")
++#pragma pop_macro("LICENSE_PREVIEWPRINT")
++#endif
++
+ #endif //__t2embapi__

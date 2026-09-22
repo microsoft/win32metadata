@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
-index 1c968ff809bc2c89fbacb0ab51c53511505da7a1..ebaf56b92538bdc9f9c665ae01e0def35367ac4c 100644
+index 1c968ff809..6f96566043 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
 @@ -146,6 +146,7 @@ extern "C"{
@@ -10,15 +10,56 @@ index 1c968ff809bc2c89fbacb0ab51c53511505da7a1..ebaf56b92538bdc9f9c665ae01e0def3
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  // this assert will cause compilation breaks in clients whose code would cause stack corruption
-@@ -198,7 +199,7 @@ EXTERN_C const IID IID_IDiscRecorder;
+@@ -197,8 +198,8 @@ EXTERN_C const IID IID_IDiscRecorder;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("85AC9776-CA88-4cf2-894E-09598C078A41")
+-    MIDL_INTERFACE("85AC9776-CA88-4cf2-894E-09598C078A41")
 -    IDiscRecorder : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IDiscRecorder : public IUnknown
++    MIDL_INTERFACE("85AC9776-CA88-4cf2-894E-09598C078A41") _Windows_SupportedOS_WindowsXP_ 
++      IDiscRecorder : public IUnknown
      {
      public:
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Init( 
+@@ -212,7 +213,7 @@ EXTERN_C const IID IID_IDiscRecorder;
+             /* [out] */ __RPC__out ULONG *pulReturnSizeRequired) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRecorderType( 
+-            /* [out] */ __RPC__out long *fTypeCode) = 0;
++            /* [out] */ _Win32_AssociatedEnum_(RECORDER_TYPES) __RPC__out long *fTypeCode) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDisplayNames( 
+             /* [unique][out][in] */ __RPC__deref_opt_inout_opt BSTR *pbstrVendorID,
+@@ -220,10 +221,10 @@ EXTERN_C const IID IID_IDiscRecorder;
+             /* [unique][out][in] */ __RPC__deref_opt_inout_opt BSTR *pbstrRevision) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetBasePnPID( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBasePnPID) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrBasePnPID) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPath( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPath) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPath) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRecorderProperties( 
+             /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppPropStg) = 0;
+@@ -232,13 +233,13 @@ EXTERN_C const IID IID_IDiscRecorder;
+             /* [in] */ __RPC__in_opt IPropertyStorage *pPropStg) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRecorderState( 
+-            /* [out] */ __RPC__out ULONG *pulDevStateFlags) = 0;
++            /* [out] */ _Win32_AssociatedEnum_(DISC_RECORDER_STATE_FLAGS) __RPC__out ULONG *pulDevStateFlags) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OpenExclusive( void) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryMediaType( 
+-            /* [out] */ __RPC__out long *fMediaType,
+-            /* [out] */ __RPC__out long *fMediaFlags) = 0;
++            /* [out] */ _Win32_AssociatedEnum_(MEDIA_TYPES) __RPC__out long *fMediaType,
++            /* [out] */ _Win32_AssociatedEnum_(MEDIA_FLAGS) __RPC__out long *fMediaFlags) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryMediaInfo( 
+             /* [out] */ __RPC__out byte *pbSessions,
 @@ -364,7 +365,7 @@ EXTERN_C const IID IID_IDiscRecorder;
          END_INTERFACE
      } IDiscRecorderVtbl;
@@ -28,12 +69,14 @@ index 1c968ff809bc2c89fbacb0ab51c53511505da7a1..ebaf56b92538bdc9f9c665ae01e0def3
      {
          CONST_VTBL struct IDiscRecorderVtbl *lpVtbl;
      };
-@@ -690,7 +691,7 @@ EXTERN_C const IID IID_IRedbookDiscMaster;
+@@ -689,8 +690,8 @@ EXTERN_C const IID IID_IRedbookDiscMaster;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("E3BC42CD-4E5C-11D3-9144-00104BA11C5E")
+-    MIDL_INTERFACE("E3BC42CD-4E5C-11D3-9144-00104BA11C5E")
 -    IRedbookDiscMaster : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IRedbookDiscMaster : public IUnknown
++    MIDL_INTERFACE("E3BC42CD-4E5C-11D3-9144-00104BA11C5E") _Windows_SupportedOS_WindowsXP_ 
++      IRedbookDiscMaster : public IUnknown
      {
      public:
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTotalAudioTracks( 
@@ -46,3 +89,56 @@ index 1c968ff809bc2c89fbacb0ab51c53511505da7a1..ebaf56b92538bdc9f9c665ae01e0def3
      {
          CONST_VTBL struct IRedbookDiscMasterVtbl *lpVtbl;
      };
+@@ -850,7 +851,7 @@ EXTERN_C const IID IID_IJolietDiscMaster;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E3BC42CE-4E5C-11D3-9144-00104BA11C5E")
++    MIDL_INTERFACE("E3BC42CE-4E5C-11D3-9144-00104BA11C5E") _Windows_SupportedOS_WindowsXP_ 
+     IJolietDiscMaster : public IUnknown
+     {
+     public:
+@@ -991,7 +992,7 @@ EXTERN_C const IID IID_IDiscMasterProgressEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EC9E51C1-4E5D-11D3-9144-00104BA11C5E")
++    MIDL_INTERFACE("EC9E51C1-4E5D-11D3-9144-00104BA11C5E") _Windows_SupportedOS_WindowsXP_ 
+     IDiscMasterProgressEvents : public IUnknown
+     {
+     public:
+@@ -1167,7 +1168,7 @@ EXTERN_C const IID IID_IDiscMaster;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("520CCA62-51A5-11D3-9144-00104BA11C5E")
++    MIDL_INTERFACE("520CCA62-51A5-11D3-9144-00104BA11C5E") _Windows_SupportedOS_WindowsXP_ 
+     IDiscMaster : public IUnknown
+     {
+     public:
+@@ -1427,6 +1428,25 @@ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned lo
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("RECORDER_BURNING")
++#undef RECORDER_BURNING
++#pragma push_macro("RECORDER_DOING_NOTHING")
++#undef RECORDER_DOING_NOTHING
++#pragma push_macro("RECORDER_OPENED")
++#undef RECORDER_OPENED
++enum DISC_RECORDER_STATE_FLAGS : unsigned int
++{
++    RECORDER_BURNING = 2U,
++    RECORDER_DOING_NOTHING = 0U,
++    RECORDER_OPENED = 1U,
++};
++#pragma pop_macro("RECORDER_OPENED")
++#pragma pop_macro("RECORDER_DOING_NOTHING")
++#pragma pop_macro("RECORDER_BURNING")
++#endif
++
+ #endif
+ 
+ 

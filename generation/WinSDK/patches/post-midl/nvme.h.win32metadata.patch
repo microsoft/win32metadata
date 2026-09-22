@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h b/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h
-index ad3e9af54a5c23567d36096df056496480820c94..2bd675787e906490ec8ae1c23e4dda328e70be98 100644
+index ad3e9af54a..36e5a5cd16 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h
 @@ -20,6 +20,7 @@ Revision:
@@ -15,7 +15,7 @@ index ad3e9af54a5c23567d36096df056496480820c94..2bd675787e906490ec8ae1c23e4dda32
  // Offset 0020h: NvmePropNSSR (NVM Subsystem Reset)
  //
 -typedef struct _NVME_NVM_SUBSYSTEM_RESET {
-+typedef struct _Windows_SupportedOS_10240_ _NVME_NVM_SUBSYSTEM_RESET {
++typedef struct  _NVME_NVM_SUBSYSTEM_RESET {
  
      ULONG   NSSRC;                  // RW - NVM Subsystem Reset Control (NSSRC)
  

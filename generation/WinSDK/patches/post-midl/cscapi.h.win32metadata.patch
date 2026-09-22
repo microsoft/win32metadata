@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h
-index e67a96293f89c272c7dbfc8609b9ad5e210fffb1..5cdd49f6356528e7f21837356728b60a062d84ee 100644
+index e67a96293f..a9a306468d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscapi.h
 @@ -21,6 +21,7 @@ Abstract:
@@ -14,8 +14,8 @@ index e67a96293f89c272c7dbfc8609b9ad5e210fffb1..5cdd49f6356528e7f21837356728b60a
  // If *pbRebootRequired returns TRUE, a system restart is necessary to 
  // complete the operation.
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(DWORD)
  OfflineFilesEnable(
      _In_ BOOL bEnable, 
@@ -23,8 +23,8 @@ index e67a96293f89c272c7dbfc8609b9ad5e210fffb1..5cdd49f6356528e7f21837356728b60a
  // Start Offline Files feature if it's available. 
  // If the feature is not available then a ERROR_NOT_SUPPORTED error is returned.
  //
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  STDAPI_(DWORD)
  OfflineFilesStart(
      );
@@ -32,8 +32,17 @@ index e67a96293f89c272c7dbfc8609b9ad5e210fffb1..5cdd49f6356528e7f21837356728b60a
  //  - enabled/disabled describes the configured state as last successfully set by 
  //    OfflineFilesEnable().
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(DWORD)
  OfflineFilesQueryStatus(
      _Out_opt_ BOOL *pbActive,
+@@ -78,7 +85,7 @@ OfflineFilesQueryStatus(
+ //    If the status is inactive/enabled/available then the OfflineFilesStart function
+ //    can be used to transition the Offline Files feature to active state (no reboot required). 
+ //
+-STDAPI_(DWORD)
++_Windows_SupportedOS_Windows8_ STDAPI_(DWORD)
+ OfflineFilesQueryStatusEx(
+     _Out_opt_ BOOL *pbActive,
+     _Out_opt_ BOOL *pbEnabled,

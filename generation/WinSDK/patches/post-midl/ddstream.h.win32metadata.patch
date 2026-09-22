@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
+index 9feefe6cbf..2b1dcf2846 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
+@@ -528,6 +528,17 @@ extern RPC_IF_HANDLE __MIDL_itf_ddstream_0000_0002_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DDSFF_PROGRESSIVERENDER")
++#undef DDSFF_PROGRESSIVERENDER
++enum [[clang::flag_enum]] DDSFF_FLAGS : int
++{
++    DDSFF_PROGRESSIVERENDER = 1,
++};
++#pragma pop_macro("DDSFF_PROGRESSIVERENDER")
++#endif
++
+ #endif
+ 
+ 

@@ -1,0 +1,192 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h
+index 6d1307a7e3..07480260f6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  *
+@@ -137,7 +138,7 @@ typedef struct {
+  *
+  * @return allocated alljoyn_busobject
+  */
+-extern AJ_API alljoyn_busobject AJ_CALL alljoyn_busobject_create(const char* path, QCC_BOOL isPlaceholder,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_busobject AJ_CALL alljoyn_busobject_create(const char* path, QCC_BOOL isPlaceholder,
+                                                                  const alljoyn_busobject_callbacks* callbacks_in, const void* context_in);
+ 
+ /**
+@@ -145,7 +146,7 @@ extern AJ_API alljoyn_busobject AJ_CALL alljoyn_busobject_create(const char* pat
+  *
+  * @param bus Bus to destroy.
+  */
+-extern AJ_API void AJ_CALL alljoyn_busobject_destroy(alljoyn_busobject bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busobject_destroy(alljoyn_busobject bus);
+ 
+ /**
+  * Return the path for the object
+@@ -153,7 +154,7 @@ extern AJ_API void AJ_CALL alljoyn_busobject_destroy(alljoyn_busobject bus);
+  * @param bus alljoyn_busobject on which to get the path.
+  * @return Object path
+  */
+-extern AJ_API const char* AJ_CALL alljoyn_busobject_getpath(alljoyn_busobject bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_busobject_getpath(alljoyn_busobject bus);
+ 
+ 
+ /**
+@@ -165,7 +166,7 @@ extern AJ_API const char* AJ_CALL alljoyn_busobject_getpath(alljoyn_busobject bu
+  * @param val       The new value of the property
+  * @param id        ID of the session we broadcast the signal to (0 for all)
+  */
+-extern AJ_API void AJ_CALL alljoyn_busobject_emitpropertychanged(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busobject_emitpropertychanged(alljoyn_busobject bus,
+                                                                  const char* ifcName,
+                                                                  const char* propName,
+                                                                  alljoyn_msgarg val,
+@@ -180,7 +181,7 @@ extern AJ_API void AJ_CALL alljoyn_busobject_emitpropertychanged(alljoyn_busobje
+  * @param numProps  The size of the propNames array
+  * @param id        ID of the session we broadcast the signal to (0 for all)
+  */
+-extern AJ_API void AJ_CALL alljoyn_busobject_emitpropertieschanged(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busobject_emitpropertieschanged(alljoyn_busobject bus,
+                                                                    const char* ifcName,
+                                                                    const char** propNames,
+                                                                    size_t numProps,
+@@ -197,7 +198,7 @@ extern AJ_API void AJ_CALL alljoyn_busobject_emitpropertieschanged(alljoyn_busob
+  * @param bufferSz  The size of the buffer provided.
+  * @return The size of the name string, if the returned value is > bufferSz, the entire name was not copied into buffer.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_busobject_getname(alljoyn_busobject bus, char* buffer, size_t bufferSz);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_busobject_getname(alljoyn_busobject bus, char* buffer, size_t bufferSz);
+ 
+ /**
+  * Add an unnanounced interface to this object. If the interface has properties this will also add the
+@@ -217,7 +218,7 @@ extern AJ_API size_t AJ_CALL alljoyn_busobject_getname(alljoyn_busobject bus, ch
+  *      - #ER_BUS_IFACE_ALREADY_EXISTS if the interface already exists.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_addinterface(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_addinterface(alljoyn_busobject bus,
+                                                              const alljoyn_interfacedescription iface);
+ 
+ /**
+@@ -234,7 +235,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_addinterface(alljoyn_busobject b
+  *      - #ER_OK if the method handler was added.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_addmethodhandler(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_addmethodhandler(alljoyn_busobject bus,
+                                                                  const alljoyn_interfacedescription_member member,
+                                                                  alljoyn_messagereceiver_methodhandler_ptr handler,
+                                                                  void* context);
+@@ -250,7 +251,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_addmethodhandler(alljoyn_busobje
+  *      - #ER_OK if all the methods were added
+  *      - #ER_BUS_NO_SUCH_INTERFACE is method can not be added because interface does not exist.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_addmethodhandlers(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_addmethodhandlers(alljoyn_busobject bus,
+                                                                   const alljoyn_busobject_methodentry* entries,
+                                                                   size_t numEntries);
+ 
+@@ -265,7 +266,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_addmethodhandlers(alljoyn_busobj
+  *      - #ER_OK if successful
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_args(alljoyn_busobject bus, alljoyn_message msg,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_args(alljoyn_busobject bus, alljoyn_message msg,
+                                                                  const alljoyn_msgarg args, size_t numArgs);
+ /**
+  * Reply to a method call with an error message
+@@ -278,7 +279,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_args(alljoyn_busobje
+  *      - #ER_OK if successful
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_err(alljoyn_busobject bus, alljoyn_message msg,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_err(alljoyn_busobject bus, alljoyn_message msg,
+                                                                 const char* error, const char* errorMessage);
+ /**
+  * Reply to a method call with an error message
+@@ -290,7 +291,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_err(alljoyn_busobjec
+  *      - #ER_OK if successful
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_status(alljoyn_busobject bus, alljoyn_message msg, QStatus status);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_status(alljoyn_busobject bus, alljoyn_message msg, _Win32_AssociatedEnum_(QStatus) QStatus status);
+ 
+ /**
+  * Get a reference to the underlying alljoyn_busattachment
+@@ -306,7 +307,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_methodreply_status(alljoyn_busob
+  *
+  * @return a reference to the alljoyn_busattachment
+  */
+-extern AJ_API const alljoyn_busattachment AJ_CALL alljoyn_busobject_getbusattachment(alljoyn_busobject bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_busattachment AJ_CALL alljoyn_busobject_getbusattachment(alljoyn_busobject bus);
+ /**
+  * Send a signal.
+  *
+@@ -333,7 +334,7 @@ extern AJ_API const alljoyn_busattachment AJ_CALL alljoyn_busobject_getbusattach
+  *      - #ER_OK if successful
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_signal(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_signal(alljoyn_busobject bus,
+                                                        const char* destination,
+                                                        alljoyn_sessionid sessionId,
+                                                        const alljoyn_interfacedescription_member signal,
+@@ -350,7 +351,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_signal(alljoyn_busobject bus,
+  * @param serialNumber    Serial number of previously sent sessionless signal.
+  * @return   ER_OK if successful.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_cancelsessionlessmessage_serial(alljoyn_busobject bus, uint32_t serialNumber);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_cancelsessionlessmessage_serial(alljoyn_busobject bus, uint32_t serialNumber);
+ 
+ /**
+  * Remove sessionless message sent from this object from local router's
+@@ -360,7 +361,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_cancelsessionlessmessage_serial(
+  * @param msg    Message to be removed.
+  * @return   ER_OK if successful.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_cancelsessionlessmessage(alljoyn_busobject bus, const alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_cancelsessionlessmessage(alljoyn_busobject bus, const alljoyn_message msg);
+ 
+ /**
+  * Indicates if this object is secure.
+@@ -370,7 +371,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_cancelsessionlessmessage(alljoyn
+  * @return Return QCC_TRUE if authentication is required to emit signals or
+  *                call methods on this object.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_busobject_issecure(alljoyn_busobject bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_busobject_issecure(alljoyn_busobject bus);
+ 
+ /**
+  * Get a list of the interfaces that are added to this alljoyn_busobject that will be announced.
+@@ -384,7 +385,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_busobject_issecure(alljoyn_busobject bus)
+  *    is larger than `numInterfaces` then only `numInterfaces` will be returned.
+  *
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_busobject_getannouncedinterfacenames(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_busobject_getannouncedinterfacenames(alljoyn_busobject bus,
+                                                                           const char** interfaces,
+                                                                           size_t numInterfaces);
+ 
+@@ -404,9 +405,9 @@ extern AJ_API size_t AJ_CALL alljoyn_busobject_getannouncedinterfacenames(alljoy
+  *  - #ER_OK if successful
+  *  - #ER_BUS_OBJECT_NO_SUCH_INTERFACE if the interface is not part of the bus object.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_setannounceflag(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_setannounceflag(alljoyn_busobject bus,
+                                                                 const alljoyn_interfacedescription iface,
+-                                                                alljoyn_about_announceflag isAnnounced);
++                                                                _Win32_AssociatedEnum_(alljoyn_about_announceflag) alljoyn_about_announceflag isAnnounced);
+ 
+ 
+ /**
+@@ -427,7 +428,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busobject_setannounceflag(alljoyn_busobjec
+  *      - #ER_BUS_IFACE_ALREADY_EXISTS if the interface already exists.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busobject_addinterface_announced(alljoyn_busobject bus,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_busobject_addinterface_announced(alljoyn_busobject bus,
+                                                                        const alljoyn_interfacedescription iface);
+ 
+ #ifdef __cplusplus

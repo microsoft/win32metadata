@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
-index 70dab08452..b8998a93a3 100644
+index fa89c10069..36e9dff7c0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/enclaveapi.h
 @@ -17,6 +17,7 @@
@@ -14,8 +14,8 @@ index 70dab08452..b8998a93a3 100644
  #pragma region Desktop Family or OneCore Or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -24,8 +24,8 @@ index 70dab08452..b8998a93a3 100644
      _In_ DWORD flEnclaveType
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Ret_maybenull_
@@ -34,8 +34,8 @@ index 70dab08452..b8998a93a3 100644
      _Out_opt_ LPDWORD lpEnclaveError
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -44,8 +44,8 @@ index 70dab08452..b8998a93a3 100644
      _Out_opt_ LPDWORD lpEnclaveError
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -54,9 +54,9 @@ index 70dab08452..b8998a93a3 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
-+_Win32_SetLastError_
++
++
++
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -64,8 +64,8 @@ index 70dab08452..b8998a93a3 100644
      _In_ LPCSTR lpImageName
      );
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -74,8 +74,8 @@ index 70dab08452..b8998a93a3 100644
  #define LoadEnclaveImage  LoadEnclaveImageA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -84,8 +84,8 @@ index 70dab08452..b8998a93a3 100644
      _Out_ LPVOID* lpReturnValue
      );
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -94,8 +94,8 @@ index 70dab08452..b8998a93a3 100644
      _In_ BOOL fWait
      );
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)

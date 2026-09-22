@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h
-index 59c12438772cc67f7bf635825b7bde3ecba4028f..5bf3f401827b5c0391dc233480e25802489aea30 100644
+index 59c1243877..7eb8ea4409 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h
 @@ -24,12 +24,15 @@ extern "C"
@@ -13,8 +13,8 @@ index 59c12438772cc67f7bf635825b7bde3ecba4028f..5bf3f401827b5c0391dc233480e25802
  
  #if NTDDI_VERSION >= NTDDI_WIN8
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  HRESULT WINAPI SetSocketMediaStreamingMode(_In_ BOOL value);
  
  #endif // NTDDI_VERSION >= NTDDI_WIN8

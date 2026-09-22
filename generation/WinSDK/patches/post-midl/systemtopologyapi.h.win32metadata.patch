@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/systemtopologyapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/systemtopologyapi.h
-index 9b41bbbc5c..4d2e1247e6 100644
+index 9b41bbbc5c..f11eb82fd0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/systemtopologyapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/systemtopologyapi.h
 @@ -17,6 +17,7 @@
@@ -14,7 +14,7 @@ index 9b41bbbc5c..4d2e1247e6 100644
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -31,7 +31,7 @@ index 9b41bbbc5c..4d2e1247e6 100644
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_FE)
  
  _Success_(return != false)
-+_Win32_SetLastError_
++
  WINBASEAPI
  BOOL
  WINAPI

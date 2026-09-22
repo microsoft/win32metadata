@@ -1,0 +1,535 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
+index 7fa7fd00c3..84273777d2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -398,7 +399,7 @@ NDRSContextUnmarshall2(
+     _In_ unsigned long        Flags
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsDestroyClientContext (
+@@ -1297,7 +1298,7 @@ NdrServerGetSupportedSyntaxes(
+     // SAL can't adequately express buffer sizes from rpc format strings
+ #pragma warning(disable:28740)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleTypeMarshall(
+@@ -1306,7 +1307,7 @@ NdrSimpleTypeMarshall(
+     unsigned char           FormatChar
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrPointerMarshall(
+@@ -1335,7 +1336,7 @@ NdrCsTagMarshall(
+ 
+ /* Structures */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrSimpleStructMarshall(
+@@ -1362,7 +1363,7 @@ NdrConformantVaryingStructMarshall(
+     PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexStructMarshall(
+@@ -1409,7 +1410,7 @@ NdrVaryingArrayMarshall(
+     PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexArrayMarshall(
+@@ -1429,7 +1430,7 @@ NdrNonConformantStringMarshall(
+     PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantStringMarshall(
+@@ -1482,7 +1483,7 @@ NdrXmitOrRepAsMarshall(
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrUserMarshalMarshall(
+@@ -1493,7 +1494,7 @@ NdrUserMarshalMarshall(
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrInterfacePointerMarshall(
+@@ -1536,7 +1537,7 @@ NdrServerContextNewMarshall(
+  * Unmarshall routines
+  */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleTypeUnmarshall(
+@@ -1599,7 +1600,7 @@ NdrCorrelationFree(
+     PMIDL_STUB_MESSAGE      pStubMsg
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrPointerUnmarshall(
+@@ -1611,7 +1612,7 @@ NdrPointerUnmarshall(
+ 
+ /* Structures */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrSimpleStructUnmarshall(
+@@ -1641,7 +1642,7 @@ NdrConformantVaryingStructUnmarshall(
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexStructUnmarshall(
+@@ -1663,7 +1664,7 @@ NdrFixedArrayUnmarshall(
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantArrayUnmarshall(
+@@ -1693,7 +1694,7 @@ NdrVaryingArrayUnmarshall(
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexArrayUnmarshall(
+@@ -1715,7 +1716,7 @@ NdrNonConformantStringUnmarshall(
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantStringUnmarshall(
+@@ -1773,7 +1774,7 @@ NdrXmitOrRepAsUnmarshall(
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrUserMarshalUnmarshall(
+@@ -1785,7 +1786,7 @@ NdrUserMarshalUnmarshall(
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrInterfacePointerUnmarshall(
+@@ -1815,7 +1816,7 @@ NdrServerContextUnmarshall(
+ 
+ /* New context handle flavors */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ NDR_SCONTEXT
+ RPC_ENTRY
+ NdrContextHandleInitialize(
+@@ -1835,7 +1836,7 @@ NdrServerContextNewUnmarshall(
+  * Buffer sizing routines
+  */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPointerBufferSize(
+@@ -1864,7 +1865,7 @@ NdrCsTagBufferSize(
+ 
+ /* Structures */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleStructBufferSize(
+@@ -1891,7 +1892,7 @@ NdrConformantVaryingStructBufferSize(
+     PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrComplexStructBufferSize(
+@@ -1938,7 +1939,7 @@ NdrVaryingArrayBufferSize(
+     PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrComplexArrayBufferSize(
+@@ -1949,7 +1950,7 @@ NdrComplexArrayBufferSize(
+ 
+ /* Strings */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantStringBufferSize(
+@@ -2011,7 +2012,7 @@ NdrXmitOrRepAsBufferSize(
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrUserMarshalBufferSize(
+@@ -2022,7 +2023,7 @@ NdrUserMarshalBufferSize(
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrInterfacePointerBufferSize(
+@@ -2033,7 +2034,7 @@ NdrInterfacePointerBufferSize(
+ 
+ // Context Handle size
+ //
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrContextHandleSize(
+@@ -2227,7 +2228,7 @@ NdrInterfacePointerMemorySize(
+  * Freeing routines
+  */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPointerFree(
+@@ -2374,7 +2375,7 @@ NdrXmitOrRepAsFree(
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrUserMarshalFree(
+@@ -2385,7 +2386,7 @@ NdrUserMarshalFree(
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrInterfacePointerFree(
+@@ -2407,7 +2408,7 @@ NdrConvert2(
+     long                    NumberParams
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConvert(
+@@ -2660,7 +2661,7 @@ struct IRpcStubBuffer;      // Forward declaration
+ 
+ 
+ // Raw RPC only
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrAsyncServerCall(
+@@ -2701,7 +2702,7 @@ NdrDcomAsyncStubCall(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ long
+ RPC_ENTRY
+ NdrStubCall2(
+@@ -2711,7 +2712,7 @@ NdrStubCall2(
+     unsigned long  *            pdwStubPhase
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerCall2(
+@@ -2791,42 +2792,42 @@ RPC_CLIENT_FREE (
+      RpcSs* package
+ --*/
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ RpcSsAllocate (
+     _In_ size_t Size
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsDisableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsEnableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsFree (
+     _In_ void  * NodeToFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_SS_THREAD_HANDLE
+ RPC_ENTRY
+ RpcSsGetThreadHandle (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsSetClientAllocFree (
+@@ -2834,14 +2835,14 @@ RpcSsSetClientAllocFree (
+     _In_ RPC_CLIENT_FREE   * ClientFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsSetThreadHandle (
+     _In_ RPC_SS_THREAD_HANDLE Id
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsSwapClientAllocFree (
+@@ -2855,7 +2856,7 @@ RpcSsSwapClientAllocFree (
+      RpcSm* package
+ --*/
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ RpcSmAllocate (
+@@ -2863,49 +2864,49 @@ RpcSmAllocate (
+     _Out_ RPC_STATUS  *   pStatus
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmClientFree (
+     _In_  void        *   pNodeToFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmDestroyClientContext (
+     _In_ void         * * ContextHandle
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmDisableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmEnableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmFree (
+     _In_ void         *   NodeToFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_SS_THREAD_HANDLE
+ RPC_ENTRY
+ RpcSmGetThreadHandle (
+     _Out_ RPC_STATUS  *   pStatus
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmSetClientAllocFree (
+@@ -2913,14 +2914,14 @@ RpcSmSetClientAllocFree (
+     _In_ RPC_CLIENT_FREE  * ClientFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmSetThreadHandle (
+     _In_ RPC_SS_THREAD_HANDLE Id
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmSwapClientAllocFree (
+@@ -3012,7 +3013,7 @@ NdrAllocate(
+     size_t                  Len
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrClearOutParameters(
+@@ -3026,14 +3027,14 @@ NdrClearOutParameters(
+  * Proxy APIs
+  ****************************************************************************/
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ NdrOleAllocate (
+     _In_ size_t Size
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrOleFree (
+@@ -3155,7 +3156,7 @@ typedef struct _NDR_USER_MARSHAL_INFO
+ #endif
+ 
+ 
+-RPC_STATUS
++_Windows_SupportedOS_Windows2000_ RPC_STATUS
+ RPC_ENTRY
+ NdrGetUserMarshalInfo (
+     _In_ unsigned long * pFlags,
+@@ -3226,7 +3227,7 @@ Ndr64AsyncServerCall64(
+     PRPC_MESSAGE                pRpcMsg
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void
+ RPC_ENTRY
+ Ndr64AsyncServerCallAll(
+@@ -3266,7 +3267,7 @@ Ndr64DcomAsyncStubCall(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ long
+ RPC_ENTRY
+ NdrStubCall3 (
+@@ -3276,7 +3277,7 @@ NdrStubCall3 (
+     unsigned long  *            pdwStubPhase
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerCallAll(
+@@ -3334,7 +3335,7 @@ NdrPartialIgnoreServerInitialize(
+     );
+ 
+ 
+-void RPC_ENTRY
++_Windows_SupportedOS_WindowsXP_ void RPC_ENTRY
+ RpcUserFree( handle_t AsyncHandle, void * pBuffer );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */

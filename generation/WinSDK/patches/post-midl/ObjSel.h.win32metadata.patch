@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
-index 777e9002b1..eafc50b5bc 100644
+index 777e9002b1..8b55ccabff 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
 @@ -16,6 +16,7 @@
@@ -15,7 +15,7 @@ index 777e9002b1..eafc50b5bc 100644
  */
  
 -typedef struct _DSOP_UPLEVEL_FILTER_FLAGS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_UPLEVEL_FILTER_FLAGS
++typedef struct   _DSOP_UPLEVEL_FILTER_FLAGS
  {
      ULONG       flBothModes;
      ULONG       flMixedModeOnly;
@@ -23,7 +23,7 @@ index 777e9002b1..eafc50b5bc 100644
  } DSOP_UPLEVEL_FILTER_FLAGS;
  
 -typedef struct _DSOP_FILTER_FLAGS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_FILTER_FLAGS
++typedef struct   _DSOP_FILTER_FLAGS
  {
      DSOP_UPLEVEL_FILTER_FLAGS   Uplevel;
      ULONG                       flDownlevel;
@@ -32,7 +32,7 @@ index 777e9002b1..eafc50b5bc 100644
  */
  
 -typedef struct _DSOP_SCOPE_INIT_INFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_SCOPE_INIT_INFO
++typedef struct   _DSOP_SCOPE_INIT_INFO
  {
      ULONG               cbSize;
      ULONG               flType;
@@ -41,7 +41,7 @@ index 777e9002b1..eafc50b5bc 100644
  */
  
 -typedef struct _DSOP_INIT_INFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSOP_INIT_INFO
++typedef struct   _DSOP_INIT_INFO
  {
      ULONG                       cbSize;
      PCWSTR                      pwzTargetComputer;
@@ -50,7 +50,7 @@ index 777e9002b1..eafc50b5bc 100644
  
  
 -typedef struct _DS_SELECTION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_SELECTION
++typedef struct   _DS_SELECTION
  {
      PWSTR      pwzName;
      PWSTR      pwzADsPath;
@@ -59,7 +59,7 @@ index 777e9002b1..eafc50b5bc 100644
  
  
 -typedef struct _DS_SELECTION_LIST
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_SELECTION_LIST
++typedef struct   _DS_SELECTION_LIST
  {
      ULONG           cItems;
      ULONG           cFetchedAttributes;
@@ -67,15 +67,15 @@ index 777e9002b1..eafc50b5bc 100644
      // *** IDsObjectPicker methods ***
  
      // Sets scope, filter, etc. for use with next invocation of dialog
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(Initialize)(
          THIS_
          PDSOP_INIT_INFO pInitInfo) PURE;
  
      // Creates the modal DS Object Picker dialog.
-+    _Windows_SupportedOS_WindowsVista_
-+    _Windows_SupportedOS_Server2008_
++    
++    
      STDMETHOD(InvokeDialog)(
           THIS_
           HWND               hwndParent,

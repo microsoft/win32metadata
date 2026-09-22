@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h b/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h
-index 8849f94de1..6505f0a2c7 100644
+index 8849f94de1..fc980cdf2a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h
 @@ -20,6 +20,7 @@ Environment:
@@ -14,7 +14,7 @@ index 8849f94de1..6505f0a2c7 100644
  // APIs.
  //
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  DWORD
  WDSBPAPI
  WdsBpParseInitialize (
@@ -22,11 +22,11 @@ index 8849f94de1..6505f0a2c7 100644
      _In_ ULONG uPacketLen,
      _Out_opt_ PBYTE pbPacketType,
 -    _Out_ HANDLE *phHandle
-+    _Out_ _Win32_RAIIFree_(WdsBpCloseHandle) HANDLE *phHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phHandle
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  DWORD
  WDSBPAPI
  WdsBpParseInitializev6 (
@@ -34,26 +34,26 @@ index 8849f94de1..6505f0a2c7 100644
      _In_ ULONG uPacketLen,
      _Out_opt_ PBYTE pbPacketType,
 -    _Out_ HANDLE *phHandle
-+    _Out_ _Win32_RAIIFree_(WdsBpCloseHandle) HANDLE *phHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phHandle
      );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  DWORD
  WDSBPAPI
  WdsBpInitialize (
      _In_ BYTE bPacketType,
 -    _Out_ HANDLE *phHandle
-+    _Out_ _Win32_RAIIFree_(WdsBpCloseHandle) HANDLE *phHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phHandle
      );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  DWORD
  WDSBPAPI
  WdsBpCloseHandle (
      _In_ HANDLE hHandle
      );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WDSBPAPI
@@ -61,7 +61,7 @@ index 8849f94de1..6505f0a2c7 100644
      _Out_opt_ PULONG puBytes
      );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  DWORD
  WDSBPAPI
  WdsBpAddOption (
@@ -69,7 +69,7 @@ index 8849f94de1..6505f0a2c7 100644
      _In_reads_bytes_(uValueLen) PVOID pValue
      );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WDSBPAPI

@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h b/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
+index b4bcae7af2..040cf83400 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h
 @@ -104,6 +104,7 @@ extern "C"{
@@ -9,12 +10,61 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/comcat.h b/generation/Win
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
+@@ -184,10 +185,10 @@ EXTERN_C const IID IID_IEnumGUID;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0002E000-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0002E000-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IEnumGUID : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+@@ -196,7 +197,7 @@ EXTERN_C const IID IID_IEnumGUID;
+             /* [annotation][out] */ 
+             _Out_opt_  ULONG *pceltFetched) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt) = 0;
+         
 @@ -343,7 +344,7 @@ extern RPC_IF_HANDLE __MIDL_itf_comcat_0000_0001_v0_0_s_ifspec;
  
  typedef /* [unique] */  __RPC_unique_pointer IEnumCATEGORYINFO *LPENUMCATEGORYINFO;
  
 -typedef struct tagCATEGORYINFO
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagCATEGORYINFO
++typedef struct   tagCATEGORYINFO
      {
      CATID catid;
      LCID lcid;
+@@ -357,7 +358,7 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0002E011-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0002E011-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IEnumCATEGORYINFO : public IUnknown
+     {
+     public:
+@@ -500,7 +501,7 @@ EXTERN_C const IID IID_ICatRegister;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0002E012-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0002E012-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     ICatRegister : public IUnknown
+     {
+     public:
+@@ -705,7 +706,7 @@ EXTERN_C const IID IID_ICatInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0002E013-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0002E013-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     ICatInformation : public IUnknown
+     {
+     public:

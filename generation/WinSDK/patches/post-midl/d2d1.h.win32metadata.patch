@@ -1,0 +1,190 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h
+index 86eb97eb3b..3bb1359466 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //---------------------------------------------------------------------------
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+ //
+@@ -3574,57 +3575,57 @@ interface DX_DECLARE_INTERFACE("06152247-6f50-465a-9245-118bfd3b6007") ID2D1Fact
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-typedef interface ID2D1Resource ID2D1Resource;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1Resource ID2D1Resource;
+ 
+-typedef interface ID2D1Image ID2D1Image;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1Image ID2D1Image;
+ 
+-typedef interface ID2D1Bitmap ID2D1Bitmap;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1Bitmap ID2D1Bitmap;
+ 
+-typedef interface ID2D1GradientStopCollection ID2D1GradientStopCollection;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1GradientStopCollection ID2D1GradientStopCollection;
+ 
+ typedef interface ID2D1Brush ID2D1Brush;
+ 
+-typedef interface ID2D1BitmapBrush ID2D1BitmapBrush;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1BitmapBrush ID2D1BitmapBrush;
+ 
+-typedef interface ID2D1SolidColorBrush ID2D1SolidColorBrush;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1SolidColorBrush ID2D1SolidColorBrush;
+ 
+-typedef interface ID2D1LinearGradientBrush ID2D1LinearGradientBrush;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1LinearGradientBrush ID2D1LinearGradientBrush;
+ 
+-typedef interface ID2D1RadialGradientBrush ID2D1RadialGradientBrush;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1RadialGradientBrush ID2D1RadialGradientBrush;
+ 
+-typedef interface ID2D1StrokeStyle ID2D1StrokeStyle;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1StrokeStyle ID2D1StrokeStyle;
+ 
+ typedef interface ID2D1Geometry ID2D1Geometry;
+ 
+-typedef interface ID2D1RectangleGeometry ID2D1RectangleGeometry;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1RectangleGeometry ID2D1RectangleGeometry;
+ 
+-typedef interface ID2D1RoundedRectangleGeometry ID2D1RoundedRectangleGeometry;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1RoundedRectangleGeometry ID2D1RoundedRectangleGeometry;
+ 
+-typedef interface ID2D1EllipseGeometry ID2D1EllipseGeometry;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1EllipseGeometry ID2D1EllipseGeometry;
+ 
+-typedef interface ID2D1GeometryGroup ID2D1GeometryGroup;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1GeometryGroup ID2D1GeometryGroup;
+ 
+-typedef interface ID2D1TransformedGeometry ID2D1TransformedGeometry;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1TransformedGeometry ID2D1TransformedGeometry;
+ 
+ typedef interface ID2D1SimplifiedGeometrySink ID2D1SimplifiedGeometrySink;
+ 
+-typedef interface ID2D1GeometrySink ID2D1GeometrySink;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1GeometrySink ID2D1GeometrySink;
+ 
+ typedef interface ID2D1TessellationSink ID2D1TessellationSink;
+ 
+-typedef interface ID2D1PathGeometry ID2D1PathGeometry;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1PathGeometry ID2D1PathGeometry;
+ 
+-typedef interface ID2D1Mesh ID2D1Mesh;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1Mesh ID2D1Mesh;
+ 
+-typedef interface ID2D1Layer ID2D1Layer;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1Layer ID2D1Layer;
+ 
+-typedef interface ID2D1DrawingStateBlock ID2D1DrawingStateBlock;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1DrawingStateBlock ID2D1DrawingStateBlock;
+ 
+ typedef interface ID2D1RenderTarget ID2D1RenderTarget;
+ 
+ typedef interface ID2D1BitmapRenderTarget ID2D1BitmapRenderTarget;
+ 
+-typedef interface ID2D1HwndRenderTarget ID2D1HwndRenderTarget;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1HwndRenderTarget ID2D1HwndRenderTarget;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+@@ -3632,7 +3633,7 @@ typedef interface ID2D1HwndRenderTarget ID2D1HwndRenderTarget;
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef interface ID2D1GdiInteropRenderTarget ID2D1GdiInteropRenderTarget;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1GdiInteropRenderTarget ID2D1GdiInteropRenderTarget;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+@@ -3640,7 +3641,7 @@ typedef interface ID2D1GdiInteropRenderTarget ID2D1GdiInteropRenderTarget;
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-typedef interface ID2D1DCRenderTarget ID2D1DCRenderTarget;
++_Windows_SupportedOS_Windows7_ typedef interface ID2D1DCRenderTarget ID2D1DCRenderTarget;
+ 
+ typedef interface ID2D1Factory ID2D1Factory;
+ 
+@@ -3663,7 +3664,7 @@ extern "C"
+     // This export cannot be in a namespace because compiler name mangling isn't consistent
+     // also, this must be 'C' callable.
+     //
+-    HRESULT WINAPI
++    _Windows_SupportedOS_Windows7_ HRESULT WINAPI
+     D2D1CreateFactory(
+         _In_ D2D1_FACTORY_TYPE factoryType,
+         _In_ REFIID riid,
+@@ -3672,14 +3673,14 @@ extern "C"
+         );
+ 
+ 
+-    void WINAPI
++    _Windows_SupportedOS_Windows7_ void WINAPI
+     D2D1MakeRotateMatrix(
+         _In_ FLOAT angle,
+         _In_ D2D1_POINT_2F center,
+         _Out_ D2D1_MATRIX_3X2_F *matrix
+         );
+ 
+-    void WINAPI
++    _Windows_SupportedOS_Windows7_ void WINAPI
+     D2D1MakeSkewMatrix(
+         _In_ FLOAT angleX,
+         _In_ FLOAT angleY,
+@@ -3687,12 +3688,12 @@ extern "C"
+         _Out_ D2D1_MATRIX_3X2_F *matrix
+         );
+ 
+-    BOOL WINAPI
++    _Windows_SupportedOS_Windows7_ BOOL WINAPI
+     D2D1IsMatrixInvertible(
+         _In_ CONST D2D1_MATRIX_3X2_F *matrix
+         );
+ 
+-    BOOL WINAPI
++    _Windows_SupportedOS_Windows7_ BOOL WINAPI
+     D2D1InvertMatrix(
+         _Inout_ D2D1_MATRIX_3X2_F *matrix
+         );
+@@ -3766,4 +3767,43 @@ D2D1CreateFactory(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_NEAREST_NEIGHBOR")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_NEAREST_NEIGHBOR
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_LINEAR")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_LINEAR
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_CUBIC")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_CUBIC
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_MULTI_SAMPLE_LINEAR")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_MULTI_SAMPLE_LINEAR
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_HIGH_QUALITY_CUBIC")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_HIGH_QUALITY_CUBIC
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_FANT")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_FANT
++#pragma push_macro("D2D1_INTERPOLATION_MODE_DEFINITION_MIPMAP_LINEAR")
++#undef D2D1_INTERPOLATION_MODE_DEFINITION_MIPMAP_LINEAR
++enum D2D1_INTERPOLATION_MODE_DEFINITION : int
++{
++    D2D1_INTERPOLATION_MODE_DEFINITION_NEAREST_NEIGHBOR = 0,
++    D2D1_INTERPOLATION_MODE_DEFINITION_LINEAR = 1,
++    D2D1_INTERPOLATION_MODE_DEFINITION_CUBIC = 2,
++    D2D1_INTERPOLATION_MODE_DEFINITION_MULTI_SAMPLE_LINEAR = 3,
++    D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC = 4,
++    D2D1_INTERPOLATION_MODE_DEFINITION_HIGH_QUALITY_CUBIC = 5,
++    D2D1_INTERPOLATION_MODE_DEFINITION_FANT = 6,
++    D2D1_INTERPOLATION_MODE_DEFINITION_MIPMAP_LINEAR = 7,
++};
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_MIPMAP_LINEAR")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_FANT")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_HIGH_QUALITY_CUBIC")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_MULTI_SAMPLE_LINEAR")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_CUBIC")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_LINEAR")
++#pragma pop_macro("D2D1_INTERPOLATION_MODE_DEFINITION_NEAREST_NEIGHBOR")
++#endif
++
+ #endif // #ifndef _D2D1_H_

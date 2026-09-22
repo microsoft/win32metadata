@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
-index a08f793dc1..f66b84c40f 100644
+index a08f793dc1..76217883bc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
 @@ -32,6 +32,7 @@ Revision History:
@@ -15,7 +15,7 @@ index a08f793dc1..f66b84c40f 100644
  
  
 -typedef struct tagQOCINFO
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ tagQOCINFO
++typedef struct   tagQOCINFO
  {
      DWORD dwSize;
      DWORD dwFlags;
@@ -23,8 +23,8 @@ index a08f793dc1..f66b84c40f 100644
  
  #if !defined(__midl)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  BOOL APIENTRY
  IsDestinationReachableA(
@@ -32,8 +32,8 @@ index a08f793dc1..f66b84c40f 100644
      LPQOCINFO lpQOCInfo
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  BOOL APIENTRY
  IsDestinationReachableW(
@@ -41,8 +41,8 @@ index a08f793dc1..f66b84c40f 100644
      LPQOCINFO lpQOCInfo
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  BOOL APIENTRY
  IsNetworkAlive(

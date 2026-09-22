@@ -1,0 +1,254 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h
+index a6bfbbb4ec..0410b8abf8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwmapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ // Copyright (C) Microsoft Corporation. All rights reserved.
+ #ifndef _DWMAPI_H_
+ #define _DWMAPI_H_
+@@ -377,7 +378,7 @@ typedef struct _DWM_PRESENT_PARAMETERS
+ 
+ #define DWM_FRAME_DURATION_DEFAULT -1
+ 
+-DWMAPI_(BOOL)
++_Windows_SupportedOS_WindowsVista_ DWMAPI_(BOOL)
+ DwmDefWindowProc(
+     _In_ HWND hWnd,
+     UINT msg,
+@@ -386,7 +387,7 @@ DwmDefWindowProc(
+     _Out_ LRESULT *plResult
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmEnableBlurBehindWindow(
+     HWND hWnd,
+     _In_ const DWM_BLURBEHIND* pBlurBehind
+@@ -396,7 +397,7 @@ DwmEnableBlurBehindWindow(
+ #define DWM_EC_ENABLECOMPOSITION          1
+ 
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmEnableComposition(
+     UINT uCompositionAction
+     );
+@@ -405,89 +406,89 @@ DwmEnableComposition(
+ #pragma deprecated (DwmEnableComposition)
+ #endif
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmEnableMMCSS(
+     BOOL fEnableMMCSS
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmExtendFrameIntoClientArea(
+     HWND hWnd,
+     _In_ const MARGINS* pMarInset
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmGetColorizationColor(
+     _Out_ DWORD* pcrColorization,
+     _Out_ BOOL* pfOpaqueBlend
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmGetCompositionTimingInfo(
+     HWND hwnd,
+     _Out_ DWM_TIMING_INFO* pTimingInfo
+     );
+ 
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmGetWindowAttribute(
+     HWND hwnd,
+-    DWORD dwAttribute,
++    _Win32_AssociatedEnum_(DWMWINDOWATTRIBUTE) DWORD dwAttribute,
+     _Out_writes_bytes_(cbAttribute) PVOID pvAttribute,
+     DWORD cbAttribute
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmIsCompositionEnabled(
+     _Out_ BOOL* pfEnabled
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmModifyPreviousDxFrameDuration(
+     HWND hwnd,
+     INT cRefreshes,
+     BOOL fRelative
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmQueryThumbnailSourceSize(
+     HTHUMBNAIL hThumbnail,
+     _Out_ PSIZE pSize
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmRegisterThumbnail(
+     HWND hwndDestination,
+     HWND hwndSource,
+     _Out_ PHTHUMBNAIL phThumbnailId
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmSetDxFrameDuration(
+     HWND hwnd,
+     INT cRefreshes
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmSetPresentParameters(
+     HWND hwnd,
+    _Inout_ DWM_PRESENT_PARAMETERS* pPresentParams
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmSetWindowAttribute(
+     HWND hwnd,
+-    DWORD dwAttribute,
++    _Win32_AssociatedEnum_(DWMWINDOWATTRIBUTE) DWORD dwAttribute,
+     _In_reads_bytes_(cbAttribute) LPCVOID pvAttribute,
+     DWORD cbAttribute
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmUnregisterThumbnail(
+     HTHUMBNAIL hThumbnailId
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmUpdateThumbnailProperties(
+     HTHUMBNAIL hThumbnailId,
+     _In_ const DWM_THUMBNAIL_PROPERTIES* ptnProperties
+@@ -496,36 +497,36 @@ DwmUpdateThumbnailProperties(
+ #if(_WIN32_WINNT >= 0x0601)
+ #define DWM_SIT_DISPLAYFRAME    0x00000001  // Display a window frame around the provided bitmap
+ 
+-DWMAPI DwmSetIconicThumbnail(
++_Windows_SupportedOS_Windows7_ DWMAPI DwmSetIconicThumbnail(
+     HWND hwnd,
+     HBITMAP hbmp,
+     DWORD dwSITFlags
+     );
+ 
+-DWMAPI DwmSetIconicLivePreviewBitmap(
++_Windows_SupportedOS_Windows7_ DWMAPI DwmSetIconicLivePreviewBitmap(
+     HWND hwnd,
+     HBITMAP hbmp,
+     _In_opt_ POINT *pptClient,
+     DWORD dwSITFlags
+     );
+ 
+-DWMAPI DwmInvalidateIconicBitmaps(
++_Windows_SupportedOS_Windows7_ DWMAPI DwmInvalidateIconicBitmaps(
+     HWND hwnd
+     );
+ 
+ #endif /* _WIN32_WINNT >= 0x0601 */
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmAttachMilContent(
+     _In_ HWND hwnd
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmDetachMilContent(
+     _In_ HWND hwnd
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmFlush();
+ 
+ #ifndef MILCORE_KERNEL_COMPONENT
+@@ -551,20 +552,20 @@ typedef MilMatrix3x2D MIL_MATRIX3X2D;
+ #define MILCORE_MIL_MATRIX3X2D_COMPAT_TYPEDEF
+ #endif // MILCORE_MIL_MATRIX3X2D_COMPAT_TYPEDEF
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmGetGraphicsStreamTransformHint(
+     UINT uIndex,
+     _Out_ MilMatrix3x2D *pTransform
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmGetGraphicsStreamClient(
+     UINT uIndex,
+     _Out_ UUID *pClientUuid
+     );
+ #endif // MILCORE_KERNEL_COMPONENT
+ 
+-DWMAPI
++_Windows_SupportedOS_WindowsVista_ DWMAPI
+ DwmGetTransportAttributes(
+     _Out_writes_(1) BOOL *pfIsRemoting,
+     _Out_writes_(1) BOOL *pfIsConnected,
+@@ -578,7 +579,7 @@ enum DWMTRANSITION_OWNEDWINDOW_TARGET
+     DWMTRANSITION_OWNEDWINDOW_REPOSITION    = 0,
+ };
+ 
+-DWMAPI
++_Windows_SupportedOS_Windows8_ DWMAPI
+ DwmTransitionOwnedWindow(
+     HWND hwnd,
+     enum DWMTRANSITION_OWNEDWINDOW_TARGET target
+@@ -602,7 +603,7 @@ enum GESTURE_TYPE
+     GT_TOUCH_PRESSANDTAP        = 10,
+ };
+ 
+-DWMAPI
++_Windows_SupportedOS_Windows8_ DWMAPI
+ DwmRenderGesture(
+     _In_ enum GESTURE_TYPE gt,
+     _In_ UINT cContacts,
+@@ -610,7 +611,7 @@ DwmRenderGesture(
+     _In_reads_(cContacts) const POINT *pPoints
+     );
+ 
+-DWMAPI
++_Windows_SupportedOS_Windows8_ DWMAPI
+ DwmTetherContact(
+     DWORD dwPointerID,
+     BOOL fEnable,
+@@ -630,7 +631,7 @@ enum DWM_SHOWCONTACT
+ };
+ DEFINE_ENUM_FLAG_OPERATORS(DWM_SHOWCONTACT);
+ 
+-DWMAPI
++_Windows_SupportedOS_Windows8_ DWMAPI
+ DwmShowContact(
+     DWORD dwPointerID,
+     enum DWM_SHOWCONTACT eShowContact
+@@ -688,7 +689,7 @@ enum DWM_TAB_WINDOW_REQUIREMENTS
+ DEFINE_ENUM_FLAG_OPERATORS(DWM_TAB_WINDOW_REQUIREMENTS);
+ 
+ // Checks the requirements needed to get tabs in the application title bar.
+-DWMAPI DwmGetUnmetTabRequirements(_In_opt_ HWND appWindow, _Out_ enum DWM_TAB_WINDOW_REQUIREMENTS* value);
++_Windows_SupportedOS_17134_ DWMAPI DwmGetUnmetTabRequirements(_In_opt_ HWND appWindow, _Out_ enum DWM_TAB_WINDOW_REQUIREMENTS* value);
+ 
+ #endif // NTDDI_WIN10_RS4
+ 

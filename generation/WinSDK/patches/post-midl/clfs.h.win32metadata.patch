@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
+index f987975a89..f25d3dc52f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 @@ -21,6 +21,7 @@
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLS_LSN
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_LSN
++typedef struct  _CLS_LSN
  {
  
      ULONGLONG               Internal;
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef enum _CLFS_CONTEXT_MODE
-+typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_CONTEXT_MODE
++typedef enum  _CLFS_CONTEXT_MODE
  {
      ClfsContextNone = 0x00,
      ClfsContextUndoNext,
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLFS_NODE_ID
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLFS_NODE_ID
++typedef struct  _CLFS_NODE_ID
  {
      ULONG   cType;                                      // CLFS node type.
      ULONG   cbNode;                                     // CLFS node size.
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLS_WRITE_ENTRY
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_WRITE_ENTRY
++typedef struct  _CLS_WRITE_ENTRY
  {
      PVOID Buffer;
      ULONG ByteLength;
@@ -50,7 +51,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLS_INFORMATION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_INFORMATION
++typedef struct  _CLS_INFORMATION
  {
      LONGLONG TotalAvailable;                            // Total log data space available.
      LONGLONG CurrentAvailable;                          // Usable space in the log file.
@@ -59,7 +60,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLS_CONTAINER_INFORMATION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_CONTAINER_INFORMATION
++typedef struct  _CLS_CONTAINER_INFORMATION
  {
      ULONG FileAttributes;                    // File system attribute flag.
      ULONGLONG CreationTime;                  // File creation time.
@@ -68,7 +69,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef enum _CLFS_IOSTATS_CLASS
-+typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_IOSTATS_CLASS
++typedef enum  _CLFS_IOSTATS_CLASS
  {
      ClfsIoStatsDefault = 0x0000,
      ClfsIoStatsMax     = 0xFFFF
@@ -77,7 +78,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLS_IO_STATISTICS_HEADER
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_IO_STATISTICS_HEADER
++typedef struct  _CLS_IO_STATISTICS_HEADER
  {
      UCHAR                ubMajorVersion;     // Major version of the statistics buffer.
      UCHAR                ubMinorVersion;     // Minor version of the statistics buffer.
@@ -86,7 +87,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  
  #if (NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)
 -typedef struct _CLS_IO_STATISTICS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_IO_STATISTICS
++typedef struct  _CLS_IO_STATISTICS
  {
      CLS_IO_STATISTICS_HEADER hdrIoStats;    // Statistics buffer header.
      ULONGLONG cFlush;                       // Flush count.
@@ -95,7 +96,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef struct _CLS_ARCHIVE_DESCRIPTOR
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLS_ARCHIVE_DESCRIPTOR
++typedef struct  _CLS_ARCHIVE_DESCRIPTOR
  {
      ULONGLONG coffLow;
      ULONGLONG coffHigh;
@@ -104,7 +105,37 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/W
  //
  
 -typedef enum _CLFS_LOG_ARCHIVE_MODE
-+typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_LOG_ARCHIVE_MODE
++typedef enum  _CLFS_LOG_ARCHIVE_MODE
  {
  
      ClfsLogArchiveEnabled = 0x01,
+@@ -1301,6 +1302,29 @@ operator>=
+ // end_wdm
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CLFS_FLAG_FORCE_APPEND")
++#undef CLFS_FLAG_FORCE_APPEND
++#pragma push_macro("CLFS_FLAG_FORCE_FLUSH")
++#undef CLFS_FLAG_FORCE_FLUSH
++#pragma push_macro("CLFS_FLAG_NO_FLAGS")
++#undef CLFS_FLAG_NO_FLAGS
++#pragma push_macro("CLFS_FLAG_USE_RESERVATION")
++#undef CLFS_FLAG_USE_RESERVATION
++enum [[clang::flag_enum]] CLFS_FLAG : unsigned int
++{
++    CLFS_FLAG_FORCE_APPEND = 1U,
++    CLFS_FLAG_FORCE_FLUSH = 2U,
++    CLFS_FLAG_NO_FLAGS = 0U,
++    CLFS_FLAG_USE_RESERVATION = 4U,
++};
++#pragma pop_macro("CLFS_FLAG_USE_RESERVATION")
++#pragma pop_macro("CLFS_FLAG_NO_FLAGS")
++#pragma pop_macro("CLFS_FLAG_FORCE_FLUSH")
++#pragma pop_macro("CLFS_FLAG_FORCE_APPEND")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU) */
+ #pragma endregion
+ 

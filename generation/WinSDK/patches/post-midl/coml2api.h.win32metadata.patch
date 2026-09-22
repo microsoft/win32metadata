@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h b/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h
+index a818bd60b2..eec47f33c9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h
 @@ -1,3 +1,4 @@
@@ -6,62 +7,83 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h b/generation/W
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
-@@ -83,7 +84,7 @@ typedef DWORD STGFMT;
+@@ -81,61 +82,61 @@ typedef DWORD STGFMT;
+ #define STGFMT_DOCUMENT         0
+ 
  // Structured storage APIs
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgCreateDocfile(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgCreateDocfile(
++  StgCreateDocfile(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
-     _In_ DWORD grfMode,
+-    _In_ DWORD grfMode,
++    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
      _Reserved_ DWORD reserved,
-@@ -92,7 +93,7 @@ StgCreateDocfile(
+     _Outptr_ IStorage** ppstgOpen
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgCreateDocfileOnILockBytes(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgCreateDocfileOnILockBytes(
++  StgCreateDocfileOnILockBytes(
      _In_ ILockBytes* plkbyt,
-     _In_ DWORD grfMode,
+-    _In_ DWORD grfMode,
++    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
      _In_ DWORD reserved,
-@@ -101,7 +102,7 @@ StgCreateDocfileOnILockBytes(
+     _Outptr_ IStorage** ppstgOpen
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgOpenStorage(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgOpenStorage(
++  StgOpenStorage(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
      _In_opt_ IStorage* pstgPriority,
-     _In_ DWORD grfMode,
-@@ -112,7 +113,7 @@ StgOpenStorage(
+-    _In_ DWORD grfMode,
++    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
+     _In_opt_z_ SNB snbExclude,
+     _In_ DWORD reserved,
+     _Outptr_ IStorage** ppstgOpen
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgOpenStorageOnILockBytes(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgOpenStorageOnILockBytes(
++  StgOpenStorageOnILockBytes(
      _In_ ILockBytes* plkbyt,
      _In_opt_ IStorage* pstgPriority,
-     _In_ DWORD grfMode,
-@@ -123,19 +124,19 @@ StgOpenStorageOnILockBytes(
+-    _In_ DWORD grfMode,
++    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
+     _In_opt_z_ SNB snbExclude,
+     _Reserved_ DWORD reserved,
+     _Outptr_ IStorage** ppstgOpen
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgIsStorageFile(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgIsStorageFile(
++  StgIsStorageFile(
      _In_ _Null_terminated_ const WCHAR* pwcsName
      );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgIsStorageILockBytes(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgIsStorageILockBytes(
++  StgIsStorageILockBytes(
      _In_ ILockBytes* plkbyt
      );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgSetTimes(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgSetTimes(
++  StgSetTimes(
      _In_ _Null_terminated_ const WCHAR* lpszName,
      _In_opt_ const FILETIME* pctime,
      _In_opt_ const FILETIME* patime,
@@ -70,125 +92,242 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h b/generation/W
  #endif
  
 -typedef struct tagSTGOPTIONS
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagSTGOPTIONS
++typedef struct   tagSTGOPTIONS
  {
      USHORT usVersion;            // Versions 1 and 2 supported
      USHORT reserved;             // must be 0 for padding
-@@ -163,7 +164,7 @@ typedef struct tagSTGOPTIONS
+@@ -161,11 +162,11 @@ typedef struct tagSTGOPTIONS
+ #endif
+ } STGOPTIONS;
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgCreateStorageEx(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgCreateStorageEx(
++  StgCreateStorageEx(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
-     _In_ DWORD grfMode,
+-    _In_ DWORD grfMode,
++    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
      _In_ DWORD stgfmt,
-@@ -176,7 +177,7 @@ StgCreateStorageEx(
+     _In_ DWORD grfAttrs,
+     _Inout_opt_ STGOPTIONS* pStgOptions,
+@@ -174,11 +175,11 @@ StgCreateStorageEx(
+     _Outptr_ void** ppObjectOpen
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgOpenStorageEx(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgOpenStorageEx(
++  StgOpenStorageEx(
      _In_ _Null_terminated_ const WCHAR* pwcsName,
-     _In_ DWORD grfMode,
+-    _In_ DWORD grfMode,
++    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
      _In_ DWORD stgfmt,
-@@ -191,7 +192,7 @@ StgOpenStorageEx(
+     _In_ DWORD grfAttrs,
+     _Inout_opt_ STGOPTIONS* pStgOptions,
+@@ -189,9 +190,9 @@ StgOpenStorageEx(
  
- _Check_return_
+ #ifndef _STGCREATEPROPSTG_DEFINED_
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgCreatePropStg(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgCreatePropStg(
++  StgCreatePropStg(
      _In_ IUnknown* pUnk,
      _In_ REFFMTID fmtid,
      _In_ const CLSID* pclsid,
-@@ -202,7 +203,7 @@ StgCreatePropStg(
+@@ -200,9 +201,9 @@ StgCreatePropStg(
+     _Outptr_ IPropertyStorage** ppPropStg
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgOpenPropStg(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgOpenPropStg(
++  StgOpenPropStg(
      _In_ IUnknown* pUnk,
      _In_ REFFMTID fmtid,
      _In_ DWORD grfFlags,
-@@ -212,7 +213,7 @@ StgOpenPropStg(
+@@ -210,9 +211,9 @@ StgOpenPropStg(
+     _Outptr_ IPropertyStorage** ppPropStg
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -StgCreatePropSetStg(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ StgCreatePropSetStg(
++  StgCreatePropSetStg(
      _In_ IStorage* pStorage,
      _Reserved_ DWORD dwReserved,
      _Outptr_ IPropertySetStorage** ppPropSetStg
-@@ -222,14 +223,14 @@ StgCreatePropSetStg(
+@@ -220,16 +221,16 @@ StgCreatePropSetStg(
  
- _Check_return_
+ #define CCH_MAX_PROPSTG_NAME    31
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -FmtIdToPropStgName(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ FmtIdToPropStgName(
++  FmtIdToPropStgName(
      _In_ const FMTID* pfmtid,
      _Out_writes_(CCH_MAX_PROPSTG_NAME+1) LPOLESTR oszName
      );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -PropStgNameToFmtId(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ PropStgNameToFmtId(
++  PropStgNameToFmtId(
      _In_ const LPOLESTR oszName,
      _Out_ FMTID* pfmtid
      );
-@@ -238,25 +239,25 @@ PropStgNameToFmtId(
+@@ -237,53 +238,132 @@ PropStgNameToFmtId(
+ #endif // _STGCREATEPROPSTG_DEFINED_
  
  // Helper functions
- WINOLEAPI
+-WINOLEAPI
 -ReadClassStg(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ReadClassStg(
++_Windows_SupportedOS_Windows2000_ WINOLEAPI
++  ReadClassStg(
      _In_ LPSTORAGE pStg,
      _Out_ CLSID  FAR * pclsid
      );
  
- WINOLEAPI
+-WINOLEAPI
 -WriteClassStg(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ WriteClassStg(
++_Windows_SupportedOS_Windows2000_ WINOLEAPI
++  WriteClassStg(
      _In_ LPSTORAGE pStg,
      _In_ REFCLSID rclsid
      );
  
- WINOLEAPI
+-WINOLEAPI
 -ReadClassStm(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ReadClassStm(
++_Windows_SupportedOS_Windows2000_ WINOLEAPI
++  ReadClassStm(
      _In_ LPSTREAM pStm,
      _Out_ CLSID  FAR * pclsid
      );
  
- WINOLEAPI
+-WINOLEAPI
 -WriteClassStm(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ WriteClassStm(
++_Windows_SupportedOS_Windows2000_ WINOLEAPI
++  WriteClassStm(
      _In_ LPSTREAM pStm,
      _In_ REFCLSID rclsid
      );
-@@ -264,14 +265,14 @@ WriteClassStm(
+ 
  // Storage utility APIs
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -GetHGlobalFromILockBytes(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ GetHGlobalFromILockBytes(
++  GetHGlobalFromILockBytes(
      _In_ LPLOCKBYTES plkbyt,
-     _Out_ HGLOBAL  FAR * phglobal
+-    _Out_ HGLOBAL  FAR * phglobal
++    _Win32_RAIIFree_(GlobalFree, -1, 0) _Out_ HGLOBAL  FAR * phglobal
      );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
  WINOLEAPI
 -CreateILockBytesOnHGlobal(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ CreateILockBytesOnHGlobal(
++  CreateILockBytesOnHGlobal(
      _In_opt_ HGLOBAL hGlobal,
      _In_ BOOL fDeleteOnRelease,
      _Outptr_ LPLOCKBYTES  FAR * pplkbyt
-@@ -279,7 +280,7 @@ CreateILockBytesOnHGlobal(
+     );
  
  // ConvertTo APIs
- WINOLEAPI
+-WINOLEAPI
 -GetConvertStg(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ GetConvertStg(
++_Windows_SupportedOS_Windows2000_ WINOLEAPI
++  GetConvertStg(
      _In_ LPSTORAGE pStg
      );
  
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("STGM_DIRECT")
++#undef STGM_DIRECT
++#pragma push_macro("STGM_TRANSACTED")
++#undef STGM_TRANSACTED
++#pragma push_macro("STGM_SIMPLE")
++#undef STGM_SIMPLE
++#pragma push_macro("STGM_READ")
++#undef STGM_READ
++#pragma push_macro("STGM_WRITE")
++#undef STGM_WRITE
++#pragma push_macro("STGM_READWRITE")
++#undef STGM_READWRITE
++#pragma push_macro("STGM_SHARE_DENY_NONE")
++#undef STGM_SHARE_DENY_NONE
++#pragma push_macro("STGM_SHARE_DENY_READ")
++#undef STGM_SHARE_DENY_READ
++#pragma push_macro("STGM_SHARE_DENY_WRITE")
++#undef STGM_SHARE_DENY_WRITE
++#pragma push_macro("STGM_SHARE_EXCLUSIVE")
++#undef STGM_SHARE_EXCLUSIVE
++#pragma push_macro("STGM_PRIORITY")
++#undef STGM_PRIORITY
++#pragma push_macro("STGM_DELETEONRELEASE")
++#undef STGM_DELETEONRELEASE
++#pragma push_macro("STGM_NOSCRATCH")
++#undef STGM_NOSCRATCH
++#pragma push_macro("STGM_CREATE")
++#undef STGM_CREATE
++#pragma push_macro("STGM_CONVERT")
++#undef STGM_CONVERT
++#pragma push_macro("STGM_FAILIFTHERE")
++#undef STGM_FAILIFTHERE
++#pragma push_macro("STGM_NOSNAPSHOT")
++#undef STGM_NOSNAPSHOT
++#pragma push_macro("STGM_DIRECT_SWMR")
++#undef STGM_DIRECT_SWMR
++enum [[clang::flag_enum]] STGM : unsigned int
++{
++    STGM_DIRECT = 0U,
++    STGM_TRANSACTED = 65536U,
++    STGM_SIMPLE = 134217728U,
++    STGM_READ = 0U,
++    STGM_WRITE = 1U,
++    STGM_READWRITE = 2U,
++    STGM_SHARE_DENY_NONE = 64U,
++    STGM_SHARE_DENY_READ = 48U,
++    STGM_SHARE_DENY_WRITE = 32U,
++    STGM_SHARE_EXCLUSIVE = 16U,
++    STGM_PRIORITY = 262144U,
++    STGM_DELETEONRELEASE = 67108864U,
++    STGM_NOSCRATCH = 1048576U,
++    STGM_CREATE = 4096U,
++    STGM_CONVERT = 131072U,
++    STGM_FAILIFTHERE = 0U,
++    STGM_NOSNAPSHOT = 2097152U,
++    STGM_DIRECT_SWMR = 4194304U,
++};
++#pragma pop_macro("STGM_DIRECT_SWMR")
++#pragma pop_macro("STGM_NOSNAPSHOT")
++#pragma pop_macro("STGM_FAILIFTHERE")
++#pragma pop_macro("STGM_CONVERT")
++#pragma pop_macro("STGM_CREATE")
++#pragma pop_macro("STGM_NOSCRATCH")
++#pragma pop_macro("STGM_DELETEONRELEASE")
++#pragma pop_macro("STGM_PRIORITY")
++#pragma pop_macro("STGM_SHARE_EXCLUSIVE")
++#pragma pop_macro("STGM_SHARE_DENY_WRITE")
++#pragma pop_macro("STGM_SHARE_DENY_READ")
++#pragma pop_macro("STGM_SHARE_DENY_NONE")
++#pragma pop_macro("STGM_READWRITE")
++#pragma pop_macro("STGM_WRITE")
++#pragma pop_macro("STGM_READ")
++#pragma pop_macro("STGM_SIMPLE")
++#pragma pop_macro("STGM_TRANSACTED")
++#pragma pop_macro("STGM_DIRECT")
++#endif
++
+ #endif     // __COML2API_H__

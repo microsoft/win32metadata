@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h b/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
+index 83ce06fff2..c6753ed7db 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
+@@ -697,4 +697,15 @@ DEFINE_GUID(CLSID_ITEngStemmer,
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("ITWW_OPEN_CONNECT")
++#undef ITWW_OPEN_CONNECT
++enum [[clang::flag_enum]] WORD_WHEEL_OPEN_FLAGS : unsigned int
++{
++    ITWW_OPEN_CONNECT = 0U,
++};
++#pragma pop_macro("ITWW_OPEN_CONNECT")
++#endif
++
+ #endif  // __INFOTECH_H__

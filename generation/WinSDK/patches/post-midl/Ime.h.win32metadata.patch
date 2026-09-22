@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
-index 838b76e8e6..1c2d4be3b0 100644
+index 838b76e8e6..93376f52d0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
 @@ -15,6 +15,7 @@ Abstract:
@@ -14,11 +14,11 @@ index 838b76e8e6..1c2d4be3b0 100644
  
  #define IME_MAXPROCESS 32
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  LRESULT WINAPI SendIMEMessageExA( IN HWND, IN LPARAM);
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  LRESULT WINAPI SendIMEMessageExW( IN HWND, IN LPARAM);
  #ifdef UNICODE
  #define SendIMEMessageEx  SendIMEMessageExW
@@ -27,7 +27,7 @@ index 838b76e8e6..1c2d4be3b0 100644
  // IMESTRUCT structure for SendIMEMessageEx
  //
 -typedef struct tagIMESTRUCT {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagIMESTRUCT {
++typedef struct   tagIMESTRUCT {
      UINT     fnc;        // function code
      WPARAM   wParam;     // word parameter
      UINT     wCount;     // word counter

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h b/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h
-index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b49828ec15 100644
+index 7c304702ef..b29b4ccdd4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/structuredquery.h
 @@ -249,6 +249,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum tagSTRUCTURED_QUERY_SYNTAX
-+enum _Windows_SupportedOS_Windows7_ tagSTRUCTURED_QUERY_SYNTAX
++enum  tagSTRUCTURED_QUERY_SYNTAX
      {
          SQS_NO_SYNTAX	= 0,
          SQS_ADVANCED_QUERY_SYNTAX	= ( SQS_NO_SYNTAX + 1 ) ,
@@ -24,7 +24,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum tagSTRUCTURED_QUERY_SINGLE_OPTION
-+enum _Windows_SupportedOS_Server2003_ tagSTRUCTURED_QUERY_SINGLE_OPTION
++enum  tagSTRUCTURED_QUERY_SINGLE_OPTION
      {
          SQSO_SCHEMA	= 0,
          SQSO_LOCALE_WORD_BREAKING	= ( SQSO_SCHEMA + 1 ) ,
@@ -33,7 +33,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum tagSTRUCTURED_QUERY_MULTIOPTION
-+enum _Windows_SupportedOS_Server2003_ tagSTRUCTURED_QUERY_MULTIOPTION
++enum  tagSTRUCTURED_QUERY_MULTIOPTION
      {
          SQMO_VIRTUAL_PROPERTY	= 0,
          SQMO_DEFAULT_PROPERTY	= ( SQMO_VIRTUAL_PROPERTY + 1 ) ,
@@ -42,7 +42,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum tagSTRUCTURED_QUERY_PARSE_ERROR
-+enum _Windows_SupportedOS_Server2003_ tagSTRUCTURED_QUERY_PARSE_ERROR
++enum  tagSTRUCTURED_QUERY_PARSE_ERROR
      {
          SQPE_NONE	= 0,
          SQPE_EXTRA_OPENING_PARENTHESIS	= ( SQPE_NONE + 1 ) ,
@@ -51,7 +51,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum STRUCTURED_QUERY_RESOLVE_OPTION
-+enum _Windows_SupportedOS_Server2003_ STRUCTURED_QUERY_RESOLVE_OPTION
++enum  STRUCTURED_QUERY_RESOLVE_OPTION
      {
          SQRO_DEFAULT	= 0,
          SQRO_DONT_RESOLVE_DATETIME	= 0x1,
@@ -60,7 +60,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  DEFINE_ENUM_FLAG_OPERATORS(STRUCTURED_QUERY_RESOLVE_OPTION);
  typedef /* [v1_enum] */ 
 -enum CASE_REQUIREMENT
-+enum _Windows_SupportedOS_Windows7_ CASE_REQUIREMENT
++enum  CASE_REQUIREMENT
      {
          CASE_REQUIREMENT_ANY	= 0,
          CASE_REQUIREMENT_UPPER_IF_AQS	= ( CASE_REQUIREMENT_ANY + 1 ) 
@@ -68,7 +68,7 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum tagINTERVAL_LIMIT_KIND
-+enum _Windows_SupportedOS_Server2003_ tagINTERVAL_LIMIT_KIND
++enum  tagINTERVAL_LIMIT_KIND
      {
          ILK_EXPLICIT_INCLUDED	= 0,
          ILK_EXPLICIT_EXCLUDED	= ( ILK_EXPLICIT_INCLUDED + 1 ) ,
@@ -77,16 +77,43 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
  
  typedef /* [v1_enum] */ 
 -enum tagQUERY_PARSER_MANAGER_OPTION
-+enum _Windows_SupportedOS_Server2003_ tagQUERY_PARSER_MANAGER_OPTION
++enum  tagQUERY_PARSER_MANAGER_OPTION
      {
          QPMO_SCHEMA_BINARY_NAME	= 0,
          QPMO_PRELOCALIZED_SCHEMA_BINARY_PATH	= ( QPMO_SCHEMA_BINARY_NAME + 1 ) ,
+@@ -370,7 +371,7 @@ EXTERN_C const IID IID_IQueryParser;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2EBDEE67-3505-43f8-9946-EA44ABC8E5B0")
++    MIDL_INTERFACE("2EBDEE67-3505-43f8-9946-EA44ABC8E5B0") _Windows_SupportedOS_WindowsXP_ 
+     IQueryParser : public IUnknown
+     {
+     public:
+@@ -600,7 +601,7 @@ EXTERN_C const IID IID_IConditionFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A5EFE073-B16F-474f-9F3E-9F8B497A3E08")
++    MIDL_INTERFACE("A5EFE073-B16F-474f-9F3E-9F8B497A3E08") _Windows_SupportedOS_WindowsXP_ 
+     IConditionFactory : public IUnknown
+     {
+     public:
+@@ -790,7 +791,7 @@ EXTERN_C const IID IID_IQuerySolution;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D6EBC66B-8921-4193-AFDD-A1789FB7FF57")
++    MIDL_INTERFACE("D6EBC66B-8921-4193-AFDD-A1789FB7FF57") _Windows_SupportedOS_WindowsXP_ 
+     IQuerySolution : public IConditionFactory
+     {
+     public:
 @@ -985,7 +986,7 @@ EXTERN_C const IID IID_IQuerySolution;
  /* [local] */ 
  
  typedef /* [v1_enum] */ 
 -enum CONDITION_CREATION_OPTIONS
-+enum _Windows_SupportedOS_Windows7_ CONDITION_CREATION_OPTIONS
++enum  CONDITION_CREATION_OPTIONS
      {
          CONDITION_CREATION_DEFAULT	= 0,
          CONDITION_CREATION_NONE	= 0,
@@ -108,12 +135,111 @@ index 2ce948c8c51f4e26482c04844e3a7796254f31d8..01327ff69e685adc12471cd1e98093b4
      {
          CONST_VTBL struct IConditionFactory2Vtbl *lpVtbl;
      };
+@@ -1453,7 +1454,7 @@ EXTERN_C const IID IID_IConditionGenerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("92D2CC58-4386-45a3-B98C-7E0CE64A4117")
++    MIDL_INTERFACE("92D2CC58-4386-45a3-B98C-7E0CE64A4117") _Windows_SupportedOS_WindowsXP_ 
+     IConditionGenerator : public IUnknown
+     {
+     public:
+@@ -1641,7 +1642,7 @@ EXTERN_C const IID IID_IInterval;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6BF0A714-3C18-430b-8B5D-83B1C234D3DB")
++    MIDL_INTERFACE("6BF0A714-3C18-430b-8B5D-83B1C234D3DB") _Windows_SupportedOS_WindowsXP_ 
+     IInterval : public IUnknown
+     {
+     public:
+@@ -1740,7 +1741,7 @@ EXTERN_C const IID IID_IMetaData;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("780102B0-C43B-4876-BC7B-5E9BA5C88794")
++    MIDL_INTERFACE("780102B0-C43B-4876-BC7B-5E9BA5C88794") _Windows_SupportedOS_WindowsXP_ 
+     IMetaData : public IUnknown
+     {
+     public:
+@@ -1840,7 +1841,7 @@ EXTERN_C const IID IID_IEntity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("24264891-E80B-4fd3-B7CE-4FF2FAE8931F")
++    MIDL_INTERFACE("24264891-E80B-4fd3-B7CE-4FF2FAE8931F") _Windows_SupportedOS_WindowsXP_ 
+     IEntity : public IUnknown
+     {
+     public:
+@@ -2038,7 +2039,7 @@ EXTERN_C const IID IID_IRelationship;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2769280B-5108-498c-9C7F-A51239B63147")
++    MIDL_INTERFACE("2769280B-5108-498c-9C7F-A51239B63147") _Windows_SupportedOS_WindowsXP_ 
+     IRelationship : public IUnknown
+     {
+     public:
+@@ -2181,7 +2182,7 @@ EXTERN_C const IID IID_INamedEntity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ABDBD0B1-7D54-49fb-AB5C-BFF4130004CD")
++    MIDL_INTERFACE("ABDBD0B1-7D54-49fb-AB5C-BFF4130004CD") _Windows_SupportedOS_WindowsXP_ 
+     INamedEntity : public IUnknown
+     {
+     public:
+@@ -2281,7 +2282,7 @@ EXTERN_C const IID IID_ISchemaProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CF89BCB-394C-49b2-AE28-A59DD4ED7F68")
++    MIDL_INTERFACE("8CF89BCB-394C-49b2-AE28-A59DD4ED7F68") _Windows_SupportedOS_WindowsXP_ 
+     ISchemaProvider : public IUnknown
+     {
+     public:
+@@ -2482,7 +2483,7 @@ EXTERN_C const IID IID_ITokenCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("22D8B4F2-F577-4adb-A335-C2AE88416FAB")
++    MIDL_INTERFACE("22D8B4F2-F577-4adb-A335-C2AE88416FAB") _Windows_SupportedOS_WindowsXP_ 
+     ITokenCollection : public IUnknown
+     {
+     public:
+@@ -2606,7 +2607,7 @@ EXTERN_C const IID IID_INamedEntityCollector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AF2440F6-8AFC-47d0-9A7F-396A0ACFB43D")
++    MIDL_INTERFACE("AF2440F6-8AFC-47d0-9A7F-396A0ACFB43D") _Windows_SupportedOS_WindowsXP_ 
+     INamedEntityCollector : public IUnknown
+     {
+     public:
+@@ -2717,7 +2718,7 @@ EXTERN_C const IID IID_ISchemaLocalizerSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CA3FDCA2-BFBE-4eed-90D7-0CAEF0A1BDA1")
++    MIDL_INTERFACE("CA3FDCA2-BFBE-4eed-90D7-0CAEF0A1BDA1") _Windows_SupportedOS_WindowsXP_ 
+     ISchemaLocalizerSupport : public IUnknown
+     {
+     public:
+@@ -2808,7 +2809,7 @@ EXTERN_C const IID IID_IQueryParserManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A879E3C4-AF77-44fb-8F37-EBD1487CF920")
++    MIDL_INTERFACE("A879E3C4-AF77-44fb-8F37-EBD1487CF920") _Windows_SupportedOS_WindowsXP_ 
+     IQueryParserManager : public IUnknown
+     {
+     public:
 @@ -2937,7 +2938,7 @@ EXTERN_C const IID IID_IQueryParserManager;
  /* interface __MIDL_itf_structuredquery_0000_0015 */
  /* [local] */ 
  
 -typedef struct tagHITRANGE
-+typedef struct _Windows_SupportedOS_Windows7_ tagHITRANGE
++typedef struct  tagHITRANGE
      {
      ULONG iPosition;
      ULONG cLength;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
-index 0bf1a86aa193c8e681c251cb027bc0470b1177ce..054310121857c99477bafdc2584e26b638fbc4d7 100644
+index 0bf1a86aa1..69ce575b29 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
 @@ -100,6 +100,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 0bf1a86aa193c8e681c251cb027bc0470b1177ce..054310121857c99477bafdc2584e26b6
      
      MIDL_INTERFACE("d5f78c80-5252-11cf-90fa-00AA0042106e")
 -    ITargetFrame : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetFrame : public IUnknown
++      ITargetFrame : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetFrameName( 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
-index 66b7b85c33d34b19aacda03bcbafe0c58f3dfce6..04ccfc4f3ec6e3dcce8cbe9c86118a52cfe7a2d0 100644
+index 66b7b85c33..fbd7cd8b24 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
 @@ -118,6 +118,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 66b7b85c33d34b19aacda03bcbafe0c58f3dfce6..04ccfc4f3ec6e3dcce8cbe9c86118a52
  typedef /* [unique] */  __RPC_unique_pointer IEnumItemProperties *LPENUMITEMPROPERTIES;
  
 -typedef struct _tagITEMPROP
-+typedef struct _Windows_SupportedOS_Server2003_ _tagITEMPROP
++typedef struct  _tagITEMPROP
      {
      VARIANT variantValue;
      LPWSTR pwszName;

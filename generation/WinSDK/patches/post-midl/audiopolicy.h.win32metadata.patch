@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h b/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h
+index ead4e5da49..c435bcb5e1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audiopolicy.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -148,7 +149,7 @@ EXTERN_C const IID IID_IAudioSessionEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("24918ACC-64B3-37C1-8CA9-74A66E9957A8")
++    MIDL_INTERFACE("24918ACC-64B3-37C1-8CA9-74A66E9957A8") _Windows_SupportedOS_WindowsVista_ 
+     IAudioSessionEvents : public IUnknown
+     {
+     public:
+@@ -335,7 +336,7 @@ EXTERN_C const IID IID_IAudioSessionControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F4B1A599-7266-4319-A8CA-E70ACB11E8CD")
++    MIDL_INTERFACE("F4B1A599-7266-4319-A8CA-E70ACB11E8CD") _Windows_SupportedOS_WindowsVista_ 
+     IAudioSessionControl : public IUnknown
+     {
+     public:
+@@ -544,7 +545,7 @@ EXTERN_C const IID IID_IAudioSessionControl2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d")
++    MIDL_INTERFACE("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d") _Windows_SupportedOS_Windows7_ 
+     IAudioSessionControl2 : public IAudioSessionControl
+     {
+     public:
+@@ -560,7 +561,7 @@ EXTERN_C const IID IID_IAudioSessionControl2;
+             /* [annotation][out] */ 
+             _Out_  DWORD *pRetVal) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE IsSystemSoundsSession( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsSystemSoundsSession( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetDuckingPreference( 
+             /* [annotation][in] */ 
+@@ -764,7 +765,7 @@ EXTERN_C const IID IID_IAudioSessionManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BFA971F1-4D5E-40BB-935E-967039BFBEE4")
++    MIDL_INTERFACE("BFA971F1-4D5E-40BB-935E-967039BFBEE4") _Windows_SupportedOS_WindowsVista_ 
+     IAudioSessionManager : public IUnknown
+     {
+     public:
+@@ -880,7 +881,7 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C3B284D4-6D39-4359-B3CF-B56DDB3BB39C")
++    MIDL_INTERFACE("C3B284D4-6D39-4359-B3CF-B56DDB3BB39C") _Windows_SupportedOS_Windows7_ 
+     IAudioVolumeDuckNotification : public IUnknown
+     {
+     public:
+@@ -984,7 +985,7 @@ EXTERN_C const IID IID_IAudioSessionNotification;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("641DD20B-4D41-49CC-ABA3-174B9477BB08")
++    MIDL_INTERFACE("641DD20B-4D41-49CC-ABA3-174B9477BB08") _Windows_SupportedOS_Windows7_ 
+     IAudioSessionNotification : public IUnknown
+     {
+     public:
+@@ -1071,7 +1072,7 @@ EXTERN_C const IID IID_IAudioSessionEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E2F5BB11-0570-40CA-ACDD-3AA01277DEE8")
++    MIDL_INTERFACE("E2F5BB11-0570-40CA-ACDD-3AA01277DEE8") _Windows_SupportedOS_Windows7_ 
+     IAudioSessionEnumerator : public IUnknown
+     {
+     public:
+@@ -1175,7 +1176,7 @@ EXTERN_C const IID IID_IAudioSessionManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F")
++    MIDL_INTERFACE("77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F") _Windows_SupportedOS_Windows7_ 
+     IAudioSessionManager2 : public IAudioSessionManager
+     {
+     public:

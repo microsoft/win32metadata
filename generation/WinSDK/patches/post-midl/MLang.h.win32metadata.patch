@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h b/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
-index 76ae304d67a95005c6aa1187cdc85a6265d472f0..5e3ebd3432bc07aa5ab0c0e115418d111d7e88c3 100644
+index 76ae304d67..15798c6d28 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
 @@ -207,6 +207,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 76ae304d67a95005c6aa1187cdc85a6265d472f0..5e3ebd3432bc07aa5ab0c0e115418d11
      
      MIDL_INTERFACE("275c23e3-3747-11d0-9fea-00aa003f8646")
 -    IEnumCodePage : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumCodePage : public IUnknown
++      IEnumCodePage : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Clone( 
@@ -33,7 +33,7 @@ index 76ae304d67a95005c6aa1187cdc85a6265d472f0..5e3ebd3432bc07aa5ab0c0e115418d11
      
      MIDL_INTERFACE("3dc39d1d-c030-11d0-b81b-00c04fc9b31f")
 -    IEnumRfc1766 : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumRfc1766 : public IUnknown
++      IEnumRfc1766 : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Clone( 
@@ -46,3 +46,39 @@ index 76ae304d67a95005c6aa1187cdc85a6265d472f0..5e3ebd3432bc07aa5ab0c0e115418d11
      {
          CONST_VTBL struct IEnumRfc1766Vtbl *lpVtbl;
      };
+@@ -2413,7 +2414,7 @@ EXTERN_C const IID IID_IMultiLanguage;
+             /* [annotation][in] */ 
+             _In_  LCID Locale,
+             /* [annotation][out] */ 
+-            _Outptr_  BSTR *pbstrRfc1766) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_  BSTR *pbstrRfc1766) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLcidFromRfc1766( 
+             /* [annotation][out] */ 
+@@ -2842,7 +2843,7 @@ EXTERN_C const IID IID_IMultiLanguage2;
+             /* [annotation][in] */ 
+             _In_  LCID Locale,
+             /* [annotation][out] */ 
+-            _Outptr_  BSTR *pbstrRfc1766) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_  BSTR *pbstrRfc1766) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLcidFromRfc1766( 
+             /* [annotation][out] */ 
+@@ -3620,7 +3621,7 @@ EXTERN_C const IID IID_IMLangFontLink;
+             /* [in] */ DWORD dwCodePages,
+             /* [in] */ HFONT hSrcFont,
+             /* [annotation][out] */ 
+-            _Out_opt_  HFONT *phDestFont) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_opt_  HFONT *phDestFont) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ReleaseFont( 
+             /* [annotation][in] */ 
+@@ -3813,7 +3814,7 @@ EXTERN_C const IID IID_IMLangFontLink2;
+             /* [in] */ DWORD dwCodePages,
+             /* [in] */ WCHAR chSrc,
+             /* [annotation][out] */ 
+-            _Out_opt_  HFONT *pFont) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_opt_  HFONT *pFont) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFontUnicodeRanges( 
+             /* [in] */ HDC hDC,

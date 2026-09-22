@@ -1,0 +1,241 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h
+index 1777c4b579..a75de73734 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines the alljoyn_securityapplicationproxy and related functions.
+@@ -41,7 +42,7 @@ typedef struct _alljoyn_securityapplicationproxy_handle* alljoyn_securityapplica
+  *
+  * @return alljoyn_sessionport with the value of the reserved port.
+  */
+-AJ_API alljoyn_sessionport AJ_CALL alljoyn_securityapplicationproxy_getpermissionmanagementsessionport();
++_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_sessionport AJ_CALL alljoyn_securityapplicationproxy_getpermissionmanagementsessionport();
+ 
+ /**
+  * Creates a Security 2.0 proxy object used to manage the remote application's security settings.
+@@ -53,7 +54,7 @@ AJ_API alljoyn_sessionport AJ_CALL alljoyn_securityapplicationproxy_getpermissio
+  *
+  * @return   The alljoyn_securityapplicationproxy. Has to be later destroyed using alljoyn_securityapplicationproxy_destroy.
+  */
+-AJ_API alljoyn_securityapplicationproxy AJ_CALL alljoyn_securityapplicationproxy_create(alljoyn_busattachment bus,
++_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_securityapplicationproxy AJ_CALL alljoyn_securityapplicationproxy_create(alljoyn_busattachment bus,
+                                                                                         AJ_PCSTR appBusName,
+                                                                                         alljoyn_sessionid sessionId);
+ 
+@@ -62,7 +63,7 @@ AJ_API alljoyn_securityapplicationproxy AJ_CALL alljoyn_securityapplicationproxy
+  *
+  * @param[in]    proxy   The alljoyn_securityapplicationproxy being destroyed.
+  */
+-AJ_API void AJ_CALL alljoyn_securityapplicationproxy_destroy(alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_securityapplicationproxy_destroy(alljoyn_securityapplicationproxy proxy);
+ 
+ /**
+  * Claims the application. The application is provided an identity certificate chain with
+@@ -95,7 +96,7 @@ AJ_API void AJ_CALL alljoyn_securityapplicationproxy_destroy(alljoyn_securityapp
+  *          - #ER_OK If successful.
+  *          - Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_claim(alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_claim(alljoyn_securityapplicationproxy proxy,
+                                                               AJ_PCSTR caKey,
+                                                               AJ_PCSTR identityCertificateChain,
+                                                               const uint8_t* groupId,
+@@ -115,14 +116,14 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_claim(alljoyn_securityap
+  *          - #ER_OK If successful.
+  *          - Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getmanifesttemplate(alljoyn_securityapplicationproxy proxy, AJ_PSTR* manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getmanifesttemplate(alljoyn_securityapplicationproxy proxy, AJ_PSTR* manifestTemplateXml);
+ 
+ /**
+  * Frees the memory allocated for the manifest template inside alljoyn_securityapplicationproxy_get_manifest_template.
+  *
+  * @param[in]   manifestTemplateXml Manifest string created using alljoyn_securityapplicationproxy_getmanifesttemplate.
+  */
+-AJ_API void AJ_CALL alljoyn_securityapplicationproxy_manifesttemplate_destroy(AJ_PSTR manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_securityapplicationproxy_manifesttemplate_destroy(AJ_PSTR manifestTemplateXml);
+ 
+ /**
+  * Representation of the current state of the application.
+@@ -135,7 +136,7 @@ AJ_API void AJ_CALL alljoyn_securityapplicationproxy_manifesttemplate_destroy(AJ
+  *          - #ER_OK If successful.
+  *          - Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getapplicationstate(alljoyn_securityapplicationproxy proxy, alljoyn_applicationstate* applicationState);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getapplicationstate(alljoyn_securityapplicationproxy proxy, _Win32_AssociatedEnum_(alljoyn_applicationstate) alljoyn_applicationstate* applicationState);
+ 
+ /**
+  * The authentication mechanisms the managed application supports for the claim process.
+@@ -149,7 +150,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getapplicationstate(allj
+  *          - #ER_OK If successful.
+  *          - Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilities(alljoyn_securityapplicationproxy proxy, alljoyn_claimcapabilities* capabilities);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilities(alljoyn_securityapplicationproxy proxy, alljoyn_claimcapabilities* capabilities);
+ 
+ /**
+  * The additional information on the claim capabilities supported by the managed application.
+@@ -163,7 +164,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilities(all
+  *          - #ER_OK If successful.
+  *          - Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(alljoyn_securityapplicationproxy proxy, alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(alljoyn_securityapplicationproxy proxy, alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
+ 
+ /**
+  * This method allows the admin to retrieve the active policy from an application.
+@@ -175,7 +176,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilitiesaddi
+  *          - #ER_OK                If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getpolicy(alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getpolicy(alljoyn_securityapplicationproxy proxy,
+                                                                   AJ_PSTR* policyXml);
+ 
+ /**
+@@ -188,7 +189,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getpolicy(alljoyn_securi
+  *          - #ER_OK                If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getdefaultpolicy(alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getdefaultpolicy(alljoyn_securityapplicationproxy proxy,
+                                                                          AJ_PSTR* policyXml);
+ 
+ /**
+@@ -199,7 +200,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getdefaultpolicy(alljoyn
+  *                                          alljoyn_securityapplicationproxy_getpolicy or
+  *                                          alljoyn_securityapplicationproxy_getdefaultpolicy.
+  */
+-AJ_API void AJ_CALL alljoyn_securityapplicationproxy_policy_destroy(AJ_PSTR policyXml);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_securityapplicationproxy_policy_destroy(AJ_PSTR policyXml);
+ 
+ /**
+  * This method allows an admin to install the permission policy to the
+@@ -227,7 +228,7 @@ AJ_API void AJ_CALL alljoyn_securityapplicationproxy_policy_destroy(AJ_PSTR poli
+  *          - #ER_XML_MALFORMED     Error raised when the provided XML is not in supported policy format.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updatepolicy(alljoyn_securityapplicationproxy proxy, AJ_PCSTR policyXml);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updatepolicy(alljoyn_securityapplicationproxy proxy, AJ_PCSTR policyXml);
+ 
+ /**
+  * This method allows an admin to update the application's identity certificate and manifests.
+@@ -258,7 +259,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updatepolicy(alljoyn_sec
+  *          - #ER_XML_MALFORMED             Error raised the manifest is not compliant with the required format.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updateidentity(alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updateidentity(alljoyn_securityapplicationproxy proxy,
+                                                                        AJ_PCSTR identityCertificateChain,
+                                                                        AJ_PCSTR* manifestsXmls, size_t manifestsCount);
+ 
+@@ -279,7 +280,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updateidentity(alljoyn_s
+  *          - #ER_INVALID_CERTIFICATE   Error raised when the membership certificate is not valid.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_installmembership(alljoyn_securityapplicationproxy proxy, AJ_PCSTR membershipCertificateChain);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_installmembership(alljoyn_securityapplicationproxy proxy, AJ_PCSTR membershipCertificateChain);
+ 
+ /**
+  * This method allows an admin to reset the application to its original state
+@@ -297,7 +298,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_installmembership(alljoy
+  *          - #ER_PERMISSION_DENIED Error raised when the caller does not have permission.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_reset(alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_reset(alljoyn_securityapplicationproxy proxy);
+ 
+ /**
+  * This method allows an admin to remove the currently installed policy. The
+@@ -311,7 +312,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_reset(alljoyn_securityap
+  *          - #ER_PERMISSION_DENIED Error raised when the caller does not have permission.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_resetpolicy(alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_resetpolicy(alljoyn_securityapplicationproxy proxy);
+ 
+ /**
+  * Informs the remote appllication that the Security Manager will start changing its
+@@ -326,7 +327,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_resetpolicy(alljoyn_secu
+  *          - #ER_OK If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_startmanagement(alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_startmanagement(alljoyn_securityapplicationproxy proxy);
+ 
+ /**
+  * Informs the remote application that all of the Security 2.0 configuration started with
+@@ -338,7 +339,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_startmanagement(alljoyn_
+  *          - #ER_OK If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_endmanagement(alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_endmanagement(alljoyn_securityapplicationproxy proxy);
+ 
+ /**
+  * Retrieves (in PEM format) the public ECC key used by the managed application.
+@@ -351,14 +352,14 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_endmanagement(alljoyn_se
+  *          - #ER_OK If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_geteccpublickey(alljoyn_securityapplicationproxy proxy, AJ_PSTR* eccPublicKey);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_geteccpublickey(alljoyn_securityapplicationproxy proxy, AJ_PSTR* eccPublicKey);
+ 
+ /**
+  * Frees the memory allocated while calling alljoyn_securityapplicationproxy_geteccpublickey.
+  *
+  * @param[in]   eccPublicKey   The public ECC key returned by alljoyn_securityapplicationproxy_geteccpublickey.
+  */
+-AJ_API void AJ_CALL alljoyn_securityapplicationproxy_eccpublickey_destroy(AJ_PSTR eccPublicKey);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_securityapplicationproxy_eccpublickey_destroy(AJ_PSTR eccPublicKey);
+ 
+ /**
+  * Adds an identity certificate thumbprint to and signs the manifest XML.
+@@ -378,7 +379,7 @@ AJ_API void AJ_CALL alljoyn_securityapplicationproxy_eccpublickey_destroy(AJ_PST
+  *          - #ER_XML_MALFORMED If the unsigned manifest is not compliant with the required format.
+  *          - Other error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_signmanifest(AJ_PCSTR unsignedManifestXml,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_signmanifest(AJ_PCSTR unsignedManifestXml,
+                                                                      AJ_PCSTR identityCertificatePem,
+                                                                      AJ_PCSTR signingPrivateKeyPem,
+                                                                      AJ_PSTR* signedManifestXml);
+@@ -388,7 +389,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_signmanifest(AJ_PCSTR un
+  *
+  * @param[in]   signedManifestXml   The signed manifest returned by alljoyn_securityapplicationproxy_signmanifest.
+  */
+-AJ_API void AJ_CALL alljoyn_securityapplicationproxy_manifest_destroy(AJ_PSTR signedManifestXml);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_securityapplicationproxy_manifest_destroy(AJ_PSTR signedManifestXml);
+ 
+ /**
+  * Adds an identity certificate thumbprint and retrieves the digest of the manifest XML for signing.
+@@ -407,7 +408,7 @@ AJ_API void AJ_CALL alljoyn_securityapplicationproxy_manifest_destroy(AJ_PSTR si
+  *          - #ER_XML_MALFORMED If the unsigned manifest is not compliant with the required format.
+  *          - Other error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_computemanifestdigest(AJ_PCSTR unsignedManifestXml,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_computemanifestdigest(AJ_PCSTR unsignedManifestXml,
+                                                                               AJ_PCSTR identityCertificatePem,
+                                                                               uint8_t** digest,
+                                                                               size_t* digestSize);
+@@ -417,7 +418,7 @@ AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_computemanifestdigest(AJ
+  *
+  * @param[in]   digest                   Digest array returned by alljoyn_securityapplicationproxy_computemanifestdigest.
+  */
+-AJ_API void AJ_CALL alljoyn_securityapplicationproxy_digest_destroy(uint8_t* digest);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_securityapplicationproxy_digest_destroy(uint8_t* digest);
+ 
+ /**
+  * Adds an identity certificate thumbprint and sets the signature to a provided signature. The signature should
+@@ -439,7 +440,7 @@ AJ_API void AJ_CALL alljoyn_securityapplicationproxy_digest_destroy(uint8_t* dig
+  *          - #ER_XML_MALFORMED If the unsigned manifest is not compliant with the required format.
+  *          - Other error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_setmanifestsignature(AJ_PCSTR unsignedManifestXml,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_setmanifestsignature(AJ_PCSTR unsignedManifestXml,
+                                                                              AJ_PCSTR identityCertificatePem,
+                                                                              const uint8_t* signature,
+                                                                              size_t signatureSize,

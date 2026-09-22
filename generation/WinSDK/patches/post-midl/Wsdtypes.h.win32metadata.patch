@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
-index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc086810eb 100644
+index 098cbbaad2..3cd933d5e9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
 @@ -14,6 +14,7 @@
@@ -15,7 +15,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  } DeviceDiscoveryMechanism;
  
 -typedef enum _WSD_PROTOCOL_TYPE
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_PROTOCOL_TYPE
++typedef enum   _WSD_PROTOCOL_TYPE
  {
      WSD_PT_NONE  = 0x00,
      WSD_PT_UDP   = 0x01,
@@ -24,7 +24,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  } WSD_PROTOCOL_TYPE;
  
 -typedef struct _WSD_OPERATION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_OPERATION
++typedef struct   _WSD_OPERATION
  {
      WSDXML_TYPE* RequestType;
      WSDXML_TYPE* ResponseType;
@@ -33,7 +33,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Context for handling incoming messages.
  //
 -struct _WSD_HANDLER_CONTEXT
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_HANDLER_CONTEXT
++struct   _WSD_HANDLER_CONTEXT
  {
      PWSD_SOAP_MESSAGE_HANDLER Handler;
      void* PVoid;
@@ -42,7 +42,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // WSDEventType distinguishes types of events produced by the session layer.
  //
 -typedef enum _WSDEventType
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDEventType
++typedef enum   _WSDEventType
  {
      WSDET_NONE                 = 0,
      WSDET_INCOMING_MESSAGE     = 1,
@@ -51,7 +51,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  } WSDEventType;
  
 -typedef struct _WSD_SYNCHRONOUS_RESPONSE_CONTEXT
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SYNCHRONOUS_RESPONSE_CONTEXT
++typedef struct   _WSD_SYNCHRONOUS_RESPONSE_CONTEXT
  {
      HRESULT hr;
      HANDLE eventHandle;
@@ -60,7 +60,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  } WSD_SYNCHRONOUS_RESPONSE_CONTEXT;
  
 -typedef struct _WSD_PORT_TYPE
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_PORT_TYPE
++typedef struct   _WSD_PORT_TYPE
  {
      DWORD EncodedName;
      DWORD OperationCount;
@@ -69,7 +69,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_RELATIONSHIP_METADATA
  // 
 -struct _WSD_RELATIONSHIP_METADATA
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_RELATIONSHIP_METADATA
++struct   _WSD_RELATIONSHIP_METADATA
  {
      const WCHAR* Type;
      WSD_HOST_METADATA* Data;
@@ -78,7 +78,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SERVICE_METADATA_LIST
  // 
 -struct _WSD_SERVICE_METADATA_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SERVICE_METADATA_LIST
++struct   _WSD_SERVICE_METADATA_LIST
  {
      WSD_SERVICE_METADATA_LIST* Next;
      WSD_SERVICE_METADATA* Element;
@@ -87,7 +87,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_HOST_METADATA
  // 
 -struct _WSD_HOST_METADATA
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_HOST_METADATA
++struct   _WSD_HOST_METADATA
  {
      WSD_SERVICE_METADATA* Host; // optional
      WSD_SERVICE_METADATA_LIST* Hosted; // optional
@@ -96,7 +96,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_ENDPOINT_REFERENCE_LIST
  // 
 -struct _WSD_ENDPOINT_REFERENCE_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_ENDPOINT_REFERENCE_LIST
++struct   _WSD_ENDPOINT_REFERENCE_LIST
  {
      WSD_ENDPOINT_REFERENCE_LIST* Next;
      WSD_ENDPOINT_REFERENCE* Element;
@@ -105,7 +105,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SERVICE_METADATA
  // 
 -struct _WSD_SERVICE_METADATA
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SERVICE_METADATA
++struct   _WSD_SERVICE_METADATA
  {
      WSD_ENDPOINT_REFERENCE_LIST* EndpointReference;
      WSD_NAME_LIST* Types; // optional
@@ -114,7 +114,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_THIS_DEVICE_METADATA
  // 
 -struct _WSD_THIS_DEVICE_METADATA
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_THIS_DEVICE_METADATA
++struct   _WSD_THIS_DEVICE_METADATA
  {
      WSD_LOCALIZED_STRING_LIST* FriendlyName;
      const WCHAR* FirmwareVersion; // optional
@@ -123,7 +123,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_THIS_MODEL_METADATA
  // 
 -struct _WSD_THIS_MODEL_METADATA
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_THIS_MODEL_METADATA
++struct   _WSD_THIS_MODEL_METADATA
  {
      WSD_LOCALIZED_STRING_LIST* Manufacturer;
      const WCHAR* ManufacturerUrl; // optional
@@ -132,7 +132,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_LOCALIZED_STRING_LIST
  // 
 -struct _WSD_LOCALIZED_STRING_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_LOCALIZED_STRING_LIST
++struct   _WSD_LOCALIZED_STRING_LIST
  {
      WSD_LOCALIZED_STRING_LIST* Next;
      WSD_LOCALIZED_STRING* Element;
@@ -141,7 +141,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SOAP_FAULT_REASON
  // 
 -struct _WSD_SOAP_FAULT_REASON
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SOAP_FAULT_REASON
++struct   _WSD_SOAP_FAULT_REASON
  {
      WSD_LOCALIZED_STRING_LIST* Text;
  };
@@ -150,7 +150,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SOAP_FAULT_SUBCODE
  // 
 -struct _WSD_SOAP_FAULT_SUBCODE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SOAP_FAULT_SUBCODE
++struct   _WSD_SOAP_FAULT_SUBCODE
  {
      WSDXML_NAME* Value;
      WSD_SOAP_FAULT_SUBCODE* Subcode; // optional
@@ -159,7 +159,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SOAP_FAULT_CODE
  // 
 -struct _WSD_SOAP_FAULT_CODE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SOAP_FAULT_CODE
++struct   _WSD_SOAP_FAULT_CODE
  {
      WSDXML_NAME* Value;
      WSD_SOAP_FAULT_SUBCODE* Subcode; // optional
@@ -168,7 +168,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SOAP_FAULT
  // 
 -struct _WSD_SOAP_FAULT
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SOAP_FAULT
++struct   _WSD_SOAP_FAULT
  {
      WSD_SOAP_FAULT_CODE* Code;
      WSD_SOAP_FAULT_REASON* Reason;
@@ -177,7 +177,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_APP_SEQUENCE
  // 
 -struct _WSD_APP_SEQUENCE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_APP_SEQUENCE
++struct   _WSD_APP_SEQUENCE
  {
      ULONGLONG InstanceId;
      const WCHAR* SequenceId; // optional
@@ -186,7 +186,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_HEADER_RELATESTO
  // 
 -struct _WSD_HEADER_RELATESTO
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_HEADER_RELATESTO
++struct   _WSD_HEADER_RELATESTO
  {
      WSDXML_NAME* RelationshipType; // optional
      const WCHAR* MessageID;
@@ -195,7 +195,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SOAP_HEADER
  // 
 -struct _WSD_SOAP_HEADER
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SOAP_HEADER
++struct   _WSD_SOAP_HEADER
  {
      const WCHAR* To;
      const WCHAR* Action;
@@ -204,7 +204,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SOAP_MESSAGE
  // 
 -struct _WSD_SOAP_MESSAGE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SOAP_MESSAGE
++struct   _WSD_SOAP_MESSAGE
  {
      WSD_SOAP_HEADER Header;
      void* Body;
@@ -213,7 +213,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_RESOLVE_MATCHES
  // 
 -struct _WSD_RESOLVE_MATCHES
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_RESOLVE_MATCHES
++struct   _WSD_RESOLVE_MATCHES
  {
      WSD_RESOLVE_MATCH* ResolveMatch; // optional
      WSDXML_ELEMENT* Any; // optional
@@ -222,7 +222,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_RESOLVE_MATCH
  // 
 -struct _WSD_RESOLVE_MATCH
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_RESOLVE_MATCH
++struct   _WSD_RESOLVE_MATCH
  {
      WSD_ENDPOINT_REFERENCE* EndpointReference;
      WSD_NAME_LIST* Types; // optional
@@ -231,7 +231,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_RESOLVE
  // 
 -struct _WSD_RESOLVE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_RESOLVE
++struct   _WSD_RESOLVE
  {
      WSD_ENDPOINT_REFERENCE* EndpointReference;
      WSDXML_ELEMENT* Any; // optional
@@ -240,7 +240,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_PROBE_MATCH
  // 
 -struct _WSD_PROBE_MATCH
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_PROBE_MATCH
++struct   _WSD_PROBE_MATCH
  {
      WSD_ENDPOINT_REFERENCE* EndpointReference;
      WSD_NAME_LIST* Types; // optional
@@ -249,7 +249,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_PROBE_MATCH_LIST
  // 
 -struct _WSD_PROBE_MATCH_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_PROBE_MATCH_LIST
++struct   _WSD_PROBE_MATCH_LIST
  {
      WSD_PROBE_MATCH_LIST* Next;
      WSD_PROBE_MATCH* Element;
@@ -258,7 +258,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_PROBE_MATCHES
  // 
 -struct _WSD_PROBE_MATCHES
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_PROBE_MATCHES
++struct   _WSD_PROBE_MATCHES
  {
      WSD_PROBE_MATCH_LIST* ProbeMatch;
      WSDXML_ELEMENT* Any; // optional
@@ -267,7 +267,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_PROBE
  // 
 -struct _WSD_PROBE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_PROBE
++struct   _WSD_PROBE
  {
      WSD_NAME_LIST* Types; // optional
      WSD_SCOPES* Scopes; // optional
@@ -276,7 +276,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_BYE
  // 
 -struct _WSD_BYE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_BYE
++struct   _WSD_BYE
  {
      WSD_ENDPOINT_REFERENCE* EndpointReference;
      WSDXML_ELEMENT* Any; // optional
@@ -285,7 +285,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_SCOPES
  // 
 -struct _WSD_SCOPES
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_SCOPES
++struct   _WSD_SCOPES
  {
      const WCHAR* MatchBy; // optional
      WSD_URI_LIST* Scopes; // optional
@@ -294,7 +294,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_NAME_LIST
  // 
 -struct _WSD_NAME_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_NAME_LIST
++struct   _WSD_NAME_LIST
  {
      WSD_NAME_LIST* Next;
      WSDXML_NAME* Element;
@@ -303,7 +303,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_HELLO
  // 
 -struct _WSD_HELLO
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_HELLO
++struct   _WSD_HELLO
  {
      WSD_ENDPOINT_REFERENCE* EndpointReference;
      WSD_NAME_LIST* Types; // optional
@@ -312,7 +312,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_REFERENCE_PARAMETERS
  // 
 -struct _WSD_REFERENCE_PARAMETERS
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_REFERENCE_PARAMETERS
++struct   _WSD_REFERENCE_PARAMETERS
  {
      WSDXML_ELEMENT* Any; // optional
  };
@@ -321,7 +321,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_REFERENCE_PROPERTIES
  // 
 -struct _WSD_REFERENCE_PROPERTIES
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_REFERENCE_PROPERTIES
++struct   _WSD_REFERENCE_PROPERTIES
  {
      WSDXML_ELEMENT* Any; // optional
  };
@@ -330,7 +330,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_ENDPOINT_REFERENCE
  // 
 -struct _WSD_ENDPOINT_REFERENCE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_ENDPOINT_REFERENCE
++struct   _WSD_ENDPOINT_REFERENCE
  {
      const WCHAR* Address;
      WSD_REFERENCE_PROPERTIES ReferenceProperties; // optional
@@ -339,7 +339,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_METADATA_SECTION
  // 
 -struct _WSD_METADATA_SECTION
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_METADATA_SECTION
++struct   _WSD_METADATA_SECTION
  {
      const WCHAR* Dialect;
      const WCHAR* Identifier; // optional
@@ -348,7 +348,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_METADATA_SECTION_LIST
  // 
 -struct _WSD_METADATA_SECTION_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_METADATA_SECTION_LIST
++struct   _WSD_METADATA_SECTION_LIST
  {
      WSD_METADATA_SECTION_LIST* Next;
      WSD_METADATA_SECTION* Element;
@@ -357,7 +357,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_URI_LIST
  // 
 -struct _WSD_URI_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_URI_LIST
++struct   _WSD_URI_LIST
  {
      WSD_URI_LIST* Next;
      const WCHAR* Element;
@@ -366,7 +366,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_EVENTING_FILTER_ACTION
  // 
 -struct _WSD_EVENTING_FILTER_ACTION
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_EVENTING_FILTER_ACTION
++struct   _WSD_EVENTING_FILTER_ACTION
  {
      WSD_URI_LIST* Actions;
  };
@@ -375,7 +375,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_EVENTING_FILTER
  // 
 -struct _WSD_EVENTING_FILTER
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_EVENTING_FILTER
++struct   _WSD_EVENTING_FILTER
  {
      const WCHAR* Dialect; // optional
      WSD_EVENTING_FILTER_ACTION* FilterAction;
@@ -384,7 +384,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_EVENTING_EXPIRES
  // 
 -struct _WSD_EVENTING_EXPIRES
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_EVENTING_EXPIRES
++struct   _WSD_EVENTING_EXPIRES
  {
      WSD_DURATION* Duration;
      WSD_DATETIME* DateTime;
@@ -393,7 +393,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_EVENTING_DELIVERY_MODE_PUSH
  // 
 -struct _WSD_EVENTING_DELIVERY_MODE_PUSH
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_EVENTING_DELIVERY_MODE_PUSH
++struct   _WSD_EVENTING_DELIVERY_MODE_PUSH
  {
      WSD_ENDPOINT_REFERENCE* NotifyTo;
  };
@@ -402,7 +402,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_EVENTING_DELIVERY_MODE
  // 
 -struct _WSD_EVENTING_DELIVERY_MODE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_EVENTING_DELIVERY_MODE
++struct   _WSD_EVENTING_DELIVERY_MODE
  {
      const WCHAR* Mode; // optional
      WSD_EVENTING_DELIVERY_MODE_PUSH* Push;
@@ -411,7 +411,7 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
  // Structure definition WSD_LOCALIZED_STRING
  // 
 -struct _WSD_LOCALIZED_STRING
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_LOCALIZED_STRING
++struct   _WSD_LOCALIZED_STRING
  {
      const WCHAR* lang; // optional
      const WCHAR* String;
@@ -420,13 +420,13 @@ index 098cbbaad286b1c5e74ecb80b01f57603449935e..4e15f7f6b2d95591e7e65a3b3f03abcc
   
  
 -typedef struct _WSD_UNKNOWN_LOOKUP
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_UNKNOWN_LOOKUP
++typedef struct   _WSD_UNKNOWN_LOOKUP
  {
      WSDXML_ELEMENT* Any;
  } WSD_UNKNOWN_LOOKUP;
  
 -struct _WSD_EVENT
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSD_EVENT
++struct   _WSD_EVENT
  {
      HRESULT Hr;
      DWORD EventType;

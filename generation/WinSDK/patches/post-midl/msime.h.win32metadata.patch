@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msime.h b/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
+index 391a8813e9..2ed70a5761 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*----------------------------------------------------------------------------
+     %%File: MSIME.H
+ 
+@@ -763,7 +764,7 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
+     STDMETHOD(SetHeader)    (THIS_
+                             IMESHF *pshf                //(in) dictionary header
+                             ) PURE;
+-    STDMETHOD(ExistWord)    (THIS_
++    _Win32_PreserveResult_ STDMETHOD(ExistWord)    (THIS_
+                             IMEWRD *pwrd                //(in) word to check
+                             ) PURE;
+     STDMETHOD(ExistDependency) (THIS_

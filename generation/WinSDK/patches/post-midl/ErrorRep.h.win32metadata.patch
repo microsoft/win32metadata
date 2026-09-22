@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h b/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h
-index b3b706b1ccb20d7296aaeb39b3d57648a59b987d..d4ab21e2ef103592f0238f928a9d5f9df090b77f 100644
+index b3b706b1cc..05d3aa7658 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h
 @@ -18,6 +18,7 @@ extern "C" {
@@ -14,15 +14,24 @@ index b3b706b1ccb20d7296aaeb39b3d57648a59b987d..d4ab21e2ef103592f0238f928a9d5f9d
      frrvErrDoubleFault,
  } EFaultRepRetVal;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  EFaultRepRetVal APIENTRY ReportFault(_In_ LPEXCEPTION_POINTERS pep, _In_ DWORD dwOpt);
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  BOOL            APIENTRY AddERExcludedApplicationA(_In_ LPCSTR szApplication);
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  BOOL            APIENTRY AddERExcludedApplicationW(_In_ LPCWSTR wszApplication);
  
  
+@@ -59,7 +66,7 @@ typedef EFaultRepRetVal (APIENTRY *pfn_ADDEREXCLUDEDAPPLICATIONW)(_In_ LPCWSTR);
+ // 
+ //+++++++++++++++++++++ Hang reporting api ++++++++++++++++++++++++++++++++
+ //
+-HRESULT 
++_Windows_SupportedOS_WindowsVista_ HRESULT 
+ WINAPI
+ WerReportHang(
+     _In_ HWND hwndHungApp,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
-index 76d48264e9..a0c2ba3afa 100644
+index 76d48264e9..4f77aecdac 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/newdev.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -10,7 +10,7 @@ index 76d48264e9..a0c2ba3afa 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -37,8 +38,10 @@ extern "C" {
+@@ -37,23 +38,27 @@ extern "C" {
  
  #if (WINVER >= _WIN32_WINNT_WIN2K)
  
@@ -21,7 +21,9 @@ index 76d48264e9..a0c2ba3afa 100644
  UpdateDriverForPlugAndPlayDevicesA(
      _In_opt_  HWND hwndParent,
      _In_      LPCSTR HardwareId,
-@@ -47,8 +50,10 @@ UpdateDriverForPlugAndPlayDevicesA(
+     _In_      LPCSTR FullInfPath,
+-    _In_      DWORD InstallFlags,
++    _Win32_AssociatedEnum_(UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS) _In_      DWORD InstallFlags,
      _Out_opt_ PBOOL bRebootRequired
      );
  
@@ -32,7 +34,13 @@ index 76d48264e9..a0c2ba3afa 100644
  UpdateDriverForPlugAndPlayDevicesW(
      _In_opt_  HWND hwndParent,
      _In_      LPCWSTR HardwareId,
-@@ -74,8 +79,10 @@ UpdateDriverForPlugAndPlayDevicesW(
+     _In_      LPCWSTR FullInfPath,
+-    _In_      DWORD InstallFlags,
++    _Win32_AssociatedEnum_(UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS) _In_      DWORD InstallFlags,
+     _Out_opt_ PBOOL bRebootRequired
+     );
+ 
+@@ -74,14 +79,16 @@ UpdateDriverForPlugAndPlayDevicesW(
  #define DIIDFLAG_INSTALLCOPYINFDRIVERS  0x00000008      // Install any extra INFs specified via CopyInf directive.
  #define DIIDFLAG_BITS                   0x0000000F
  
@@ -43,7 +51,14 @@ index 76d48264e9..a0c2ba3afa 100644
  DiInstallDevice(
      _In_opt_  HWND hwndParent,
      _In_      HDEVINFO DeviceInfoSet,
-@@ -125,8 +132,10 @@ DiInstallDevice(
+     _In_      PSP_DEVINFO_DATA DeviceInfoData,
+     _In_opt_  PSP_DRVINFO_DATA DriverInfoData,
+-    _In_      DWORD Flags,
++    _Win32_AssociatedEnum_(DIINSTALLDEVICE_FLAGS) _In_      DWORD Flags,
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
+@@ -125,21 +132,25 @@ DiInstallDevice(
  
  #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
  
@@ -54,7 +69,8 @@ index 76d48264e9..a0c2ba3afa 100644
  DiInstallDriverW(
      _In_opt_  HWND hwndParent,
      _In_      LPCWSTR InfPath,
-@@ -134,8 +143,10 @@ DiInstallDriverW(
+-    _In_      DWORD Flags,
++    _Win32_AssociatedEnum_(DIINSTALLDRIVER_FLAGS) _In_      DWORD Flags,
      _Out_opt_ PBOOL NeedReboot
      );
  
@@ -65,6 +81,11 @@ index 76d48264e9..a0c2ba3afa 100644
  DiInstallDriverA(
      _In_opt_  HWND hwndParent,
      _In_      LPCSTR InfPath,
+-    _In_      DWORD Flags,
++    _Win32_AssociatedEnum_(DIINSTALLDRIVER_FLAGS) _In_      DWORD Flags,
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
 @@ -153,8 +164,10 @@ DiInstallDriverA(
  
  
@@ -76,28 +97,34 @@ index 76d48264e9..a0c2ba3afa 100644
  DiUninstallDevice(
      _In_      HWND hwndParent,
      _In_      HDEVINFO DeviceInfoSet,
-@@ -176,8 +189,10 @@ DiUninstallDevice(
+@@ -176,21 +189,25 @@ DiUninstallDevice(
  #define DIURFLAG_VALID              (DIURFLAG_NO_REMOVE_INF |\
                                       DIURFLAG_RESERVED      )
  
-+_Windows_SupportedOS_15063_
++_Windows_SupportedOS_10240_ 
  BOOL
  WINAPI
 +_Win32_SetLastError_
  DiUninstallDriverW(
      _In_opt_  HWND hwndParent,
      _In_      LPCWSTR InfPath,
-@@ -185,8 +200,10 @@ DiUninstallDriverW(
+-    _In_      DWORD Flags,
++    _Win32_AssociatedEnum_(DIUNINSTALLDRIVER_FLAGS) _In_      DWORD Flags,
      _Out_opt_ PBOOL NeedReboot
      );
  
-+_Windows_SupportedOS_15063_
++
  BOOL
  WINAPI
 +_Win32_SetLastError_
  DiUninstallDriverA(
      _In_opt_  HWND hwndParent,
      _In_      LPCSTR InfPath,
+-    _In_      DWORD Flags,
++    _Win32_AssociatedEnum_(DIUNINSTALLDRIVER_FLAGS) _In_      DWORD Flags,
+     _Out_opt_ PBOOL NeedReboot
+     );
+ 
 @@ -203,8 +220,10 @@ DiUninstallDriverA(
  
  
@@ -109,7 +136,7 @@ index 76d48264e9..a0c2ba3afa 100644
  DiShowUpdateDevice(
      _In_opt_  HWND hwndParent,
      _In_      HDEVINFO DeviceInfoSet,
-@@ -221,8 +240,10 @@ DiShowUpdateDevice(
+@@ -221,13 +240,15 @@ DiShowUpdateDevice(
  #define ROLLBACK_BITS                   0x00000001
  
  
@@ -120,3 +147,138 @@ index 76d48264e9..a0c2ba3afa 100644
  DiRollbackDriver(
      _In_      HDEVINFO DeviceInfoSet,
      _In_      PSP_DEVINFO_DATA DeviceInfoData,
+     _In_opt_  HWND hwndParent,
+-    _In_      DWORD Flags,
++    _Win32_AssociatedEnum_(DIROLLBACKDRIVER_FLAGS) _In_      DWORD Flags,
+     _Out_opt_ PBOOL NeedReboot
+     );
+ #endif // (WINVER >= _WIN32_WINNT_LONGHORN)
+@@ -253,5 +274,128 @@ DiShowUpdateDriver(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DIIDFLAG_SHOWSEARCHUI")
++#undef DIIDFLAG_SHOWSEARCHUI
++#pragma push_macro("DIIDFLAG_NOFINISHINSTALLUI")
++#undef DIIDFLAG_NOFINISHINSTALLUI
++#pragma push_macro("DIIDFLAG_INSTALLNULLDRIVER")
++#undef DIIDFLAG_INSTALLNULLDRIVER
++#pragma push_macro("DIIDFLAG_INSTALLCOPYINFDRIVERS")
++#undef DIIDFLAG_INSTALLCOPYINFDRIVERS
++#pragma push_macro("DIIDFLAG_BITS")
++#undef DIIDFLAG_BITS
++enum [[clang::flag_enum]] DIINSTALLDEVICE_FLAGS : unsigned int
++{
++    DIIDFLAG_SHOWSEARCHUI = 1U,
++    DIIDFLAG_NOFINISHINSTALLUI = 2U,
++    DIIDFLAG_INSTALLNULLDRIVER = 4U,
++    DIIDFLAG_INSTALLCOPYINFDRIVERS = 8U,
++    DIIDFLAG_BITS = 15U,
++};
++#pragma pop_macro("DIIDFLAG_BITS")
++#pragma pop_macro("DIIDFLAG_INSTALLCOPYINFDRIVERS")
++#pragma pop_macro("DIIDFLAG_INSTALLNULLDRIVER")
++#pragma pop_macro("DIIDFLAG_NOFINISHINSTALLUI")
++#pragma pop_macro("DIIDFLAG_SHOWSEARCHUI")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DIIRFLAG_BITS")
++#undef DIIRFLAG_BITS
++#pragma push_macro("DIIRFLAG_SYSTEM_BITS")
++#undef DIIRFLAG_SYSTEM_BITS
++#pragma push_macro("DIIRFLAG_INF_ALREADY_COPIED")
++#undef DIIRFLAG_INF_ALREADY_COPIED
++#pragma push_macro("DIIRFLAG_FORCE_INF")
++#undef DIIRFLAG_FORCE_INF
++#pragma push_macro("DIIRFLAG_HW_USING_THE_INF")
++#undef DIIRFLAG_HW_USING_THE_INF
++#pragma push_macro("DIIRFLAG_HOTPATCH")
++#undef DIIRFLAG_HOTPATCH
++#pragma push_macro("DIIRFLAG_NOBACKUP")
++#undef DIIRFLAG_NOBACKUP
++#pragma push_macro("DIIRFLAG_PRE_CONFIGURE_INF")
++#undef DIIRFLAG_PRE_CONFIGURE_INF
++#pragma push_macro("DIIRFLAG_INSTALL_AS_SET")
++#undef DIIRFLAG_INSTALL_AS_SET
++enum [[clang::flag_enum]] DIINSTALLDRIVER_FLAGS : unsigned int
++{
++    DIIRFLAG_BITS = 106U,
++    DIIRFLAG_SYSTEM_BITS = 127U,
++    DIIRFLAG_INF_ALREADY_COPIED = 1U,
++    DIIRFLAG_FORCE_INF = 2U,
++    DIIRFLAG_HW_USING_THE_INF = 4U,
++    DIIRFLAG_HOTPATCH = 8U,
++    DIIRFLAG_NOBACKUP = 16U,
++    DIIRFLAG_PRE_CONFIGURE_INF = 32U,
++    DIIRFLAG_INSTALL_AS_SET = 64U,
++};
++#pragma pop_macro("DIIRFLAG_INSTALL_AS_SET")
++#pragma pop_macro("DIIRFLAG_PRE_CONFIGURE_INF")
++#pragma pop_macro("DIIRFLAG_NOBACKUP")
++#pragma pop_macro("DIIRFLAG_HOTPATCH")
++#pragma pop_macro("DIIRFLAG_HW_USING_THE_INF")
++#pragma pop_macro("DIIRFLAG_FORCE_INF")
++#pragma pop_macro("DIIRFLAG_INF_ALREADY_COPIED")
++#pragma pop_macro("DIIRFLAG_SYSTEM_BITS")
++#pragma pop_macro("DIIRFLAG_BITS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DIURFLAG_VALID")
++#undef DIURFLAG_VALID
++#pragma push_macro("DIURFLAG_NO_REMOVE_INF")
++#undef DIURFLAG_NO_REMOVE_INF
++#pragma push_macro("DIURFLAG_RESERVED")
++#undef DIURFLAG_RESERVED
++enum [[clang::flag_enum]] DIUNINSTALLDRIVER_FLAGS : unsigned int
++{
++    DIURFLAG_VALID = 3U,
++    DIURFLAG_NO_REMOVE_INF = 1U,
++    DIURFLAG_RESERVED = 2U,
++};
++#pragma pop_macro("DIURFLAG_RESERVED")
++#pragma pop_macro("DIURFLAG_NO_REMOVE_INF")
++#pragma pop_macro("DIURFLAG_VALID")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ROLLBACK_FLAG_NO_UI")
++#undef ROLLBACK_FLAG_NO_UI
++#pragma push_macro("ROLLBACK_BITS")
++#undef ROLLBACK_BITS
++enum [[clang::flag_enum]] DIROLLBACKDRIVER_FLAGS : unsigned int
++{
++    ROLLBACK_FLAG_NO_UI = 1U,
++    ROLLBACK_BITS = 1U,
++};
++#pragma pop_macro("ROLLBACK_BITS")
++#pragma pop_macro("ROLLBACK_FLAG_NO_UI")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("INSTALLFLAG_FORCE")
++#undef INSTALLFLAG_FORCE
++#pragma push_macro("INSTALLFLAG_READONLY")
++#undef INSTALLFLAG_READONLY
++#pragma push_macro("INSTALLFLAG_NONINTERACTIVE")
++#undef INSTALLFLAG_NONINTERACTIVE
++#pragma push_macro("INSTALLFLAG_BITS")
++#undef INSTALLFLAG_BITS
++enum [[clang::flag_enum]] UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS : unsigned int
++{
++    INSTALLFLAG_FORCE = 1U,
++    INSTALLFLAG_READONLY = 2U,
++    INSTALLFLAG_NONINTERACTIVE = 4U,
++    INSTALLFLAG_BITS = 7U,
++};
++#pragma pop_macro("INSTALLFLAG_BITS")
++#pragma pop_macro("INSTALLFLAG_NONINTERACTIVE")
++#pragma pop_macro("INSTALLFLAG_READONLY")
++#pragma pop_macro("INSTALLFLAG_FORCE")
++#endif
++
+ #endif // _INC_NEWDEV
+ 

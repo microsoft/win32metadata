@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
-index 3754ec4..480cc17 100644
+index 7b3cad0d54..98e38ccdf6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 @@ -17,6 +17,7 @@
@@ -23,7 +23,7 @@ index 3754ec4..480cc17 100644
      ALLOC_CONSOLE_RESULT_EXISTING_CONSOLE = 2
  } ALLOC_CONSOLE_RESULT, *PALLOC_CONSOLE_RESULT;
  
-+_Windows_SupportedOS_26100_
++
  WINBASEAPI
  HRESULT
  WINAPI
@@ -40,7 +40,7 @@ index 3754ec4..480cc17 100644
  
  #if (_WIN32_WINNT >= 0x0500)
  
-+_Windows_SupportedOS_WindowsXP_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -132,7 +132,7 @@ index 3754ec4..480cc17 100644
 +#pragma pop_macro("ENABLE_PROCESSED_INPUT")
 +#endif
 +
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -143,7 +143,7 @@ index 3754ec4..480cc17 100644
 +    _Out_ _Win32_AssociatedEnum_(CONSOLE_MODE) LPDWORD lpMode
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -154,7 +154,7 @@ index 3754ec4..480cc17 100644
 +    _In_ _Win32_AssociatedEnum_(CONSOLE_MODE) DWORD dwMode
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -163,7 +163,7 @@ index 3754ec4..480cc17 100644
      _Out_ LPDWORD lpNumberOfEvents
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -172,7 +172,7 @@ index 3754ec4..480cc17 100644
      _Out_ _Deref_out_range_(<=, nLength) LPDWORD lpNumberOfEventsRead
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -181,7 +181,7 @@ index 3754ec4..480cc17 100644
  
  // begin_consoleapi_h
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -190,7 +190,7 @@ index 3754ec4..480cc17 100644
      _Out_ LPDWORD lpNumberOfEventsRead
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -199,7 +199,7 @@ index 3754ec4..480cc17 100644
      ULONG dwControlKeyState;
  } CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -208,7 +208,7 @@ index 3754ec4..480cc17 100644
      _In_opt_ PCONSOLE_READCONSOLE_CONTROL pInputControl
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -217,7 +217,7 @@ index 3754ec4..480cc17 100644
  #define ReadConsole  ReadConsoleA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -226,7 +226,7 @@ index 3754ec4..480cc17 100644
      _Reserved_ LPVOID lpReserved
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -235,7 +235,7 @@ index 3754ec4..480cc17 100644
      _In_ DWORD CtrlType
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -244,7 +244,7 @@ index 3754ec4..480cc17 100644
  // CreatePseudoConsole Flags
  #define PSEUDOCONSOLE_INHERIT_CURSOR (0x1)
  
-+_Windows_SupportedOS_17763_
++
  WINBASEAPI
  HRESULT
  WINAPI
@@ -253,10 +253,10 @@ index 3754ec4..480cc17 100644
      _In_ HANDLE hOutput,
      _In_ DWORD dwFlags,
 -    _Out_ HPCON* phPC
-+    _Out_ _Win32_RAIIFree_(ClosePseudoConsole) HPCON* phPC
++    _Win32_RAIIFree_(ClosePseudoConsole, -1, 0) _Out_  HPCON* phPC
      );
  
-+_Windows_SupportedOS_17763_
++
  WINBASEAPI
  HRESULT
  WINAPI
@@ -264,7 +264,7 @@ index 3754ec4..480cc17 100644
      _In_ COORD size
      );
  
-+_Windows_SupportedOS_17763_
++
  WINBASEAPI
  VOID
  WINAPI
@@ -272,7 +272,7 @@ index 3754ec4..480cc17 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
  
-+_Windows_SupportedOS_26100_
++
  WINBASEAPI
  HRESULT
  WINAPI

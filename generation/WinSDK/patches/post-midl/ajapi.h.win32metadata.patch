@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h
+index 21066144c2..dcdc2b2513 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines the attributes of exported functions.
+@@ -169,12 +170,12 @@ typedef enum {
+  *
+  * @return the number of callbacks processed.
+  */
+-extern AJ_API int AJ_CALL alljoyn_unity_deferred_callbacks_process();
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API int AJ_CALL alljoyn_unity_deferred_callbacks_process();
+ 
+ /**
+  * Enable/disable main thread callback behavior.
+  */
+-extern AJ_API void AJ_CALL alljoyn_unity_set_deferred_callback_mainthread_only(QCC_BOOL mainthread_only);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_unity_set_deferred_callback_mainthread_only(QCC_BOOL mainthread_only);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

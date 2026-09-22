@@ -1,8 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
-index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbbf80d98cd 100644
+index 01a3b56cc5..b75bf6be4c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
-@@ -9,6 +9,7 @@
+@@ -9,20 +9,21 @@
  
  #ifndef DWRITE_3_H_INCLUDED
  #define DWRITE_3_H_INCLUDED
@@ -10,12 +10,33 @@ index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbb
  
  #pragma once
  
+ #include <DWrite_2.h>
+ 
+-interface IDWriteFontFaceReference;
+-interface IDWriteFont3;
+-interface IDWriteFontFace3;
+-interface IDWriteFontSet;
++interface _Windows_SupportedOS_10240_  IDWriteFontFaceReference;
++interface _Windows_SupportedOS_10240_  IDWriteFont3;
++interface _Windows_SupportedOS_10240_  IDWriteFontFace3;
++interface _Windows_SupportedOS_10240_  IDWriteFontSet;
+ interface IDWriteFontSetBuilder;
+-interface IDWriteFontCollection1;
+-interface IDWriteFontFamily1;
++interface _Windows_SupportedOS_Windows7_  IDWriteFontCollection1;
++interface _Windows_SupportedOS_10240_  IDWriteFontFamily1;
+ interface IDWriteStringList;
+-interface IDWriteFontDownloadQueue;
++interface _Windows_SupportedOS_Windows81_  IDWriteFontDownloadQueue;
+ 
+ 
+ /// <summary>
 @@ -61,7 +62,7 @@ interface IDWriteFontDownloadQueue;
  /// <summary>
  /// The font property enumeration identifies a string in a font.
  /// </summary>
 -enum DWRITE_FONT_PROPERTY_ID
-+enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_FONT_PROPERTY_ID
++enum   DWRITE_FONT_PROPERTY_ID
  {
      /// <summary>
      /// Unspecified font property identifier.
@@ -24,7 +45,7 @@ index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbb
  /// building a font set with explicit properties.
  /// </summary>
 -struct DWRITE_FONT_PROPERTY
-+struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_FONT_PROPERTY
++struct   DWRITE_FONT_PROPERTY
  {
      /// <summary>
      /// Specifies the requested font property, such as DWRITE_FONT_PROPERTY_ID_FAMILY_NAME.
@@ -33,7 +54,7 @@ index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbb
  /// Specifies the locality of a resource.
  /// </summary>
 -enum DWRITE_LOCALITY
-+enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_LOCALITY
++enum   DWRITE_LOCALITY
  {
      /// <summary>
      /// The resource is remote, and information is unknown yet, including the file size and date.
@@ -42,7 +63,7 @@ index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbb
  /// Represents a method of rendering glyphs.
  /// </summary>
 -enum DWRITE_RENDERING_MODE1
-+enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_RENDERING_MODE1
++enum   DWRITE_RENDERING_MODE1
  {
      /// <summary>
      /// Specifies that the rendering mode is determined automatically based on the font and size.
@@ -51,7 +72,7 @@ index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbb
  /// Specify whether DWRITE_FONT_METRICS::lineGap value should be part of the line metrics. 
  /// </summary>
 -enum DWRITE_FONT_LINE_GAP_USAGE
-+enum _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_FONT_LINE_GAP_USAGE
++enum   DWRITE_FONT_LINE_GAP_USAGE
  {
      /// <summary>
      /// The usage of the font line gap depends on the method used for text layout.
@@ -60,7 +81,16 @@ index 01a3b56cc5c618e1d510251269a8d2ee67d8078e..54f3d2d1ffa3746db9fb2936613d8dbb
  /// The DWRITE_LINE_SPACING structure specifies the parameters used to specify how to manage space between lines.
  /// </summary>
 -struct DWRITE_LINE_SPACING
-+struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ DWRITE_LINE_SPACING
++struct   DWRITE_LINE_SPACING
  {
      /// <summary>
      /// Method used to determine line spacing.
+@@ -4216,7 +4217,7 @@ struct DWRITE_PAINT_ELEMENT
+             /// <summary>
+             /// Specifies the compositing or blending mode.
+             /// </summary>
+-            DWRITE_COLOR_COMPOSITE_MODE mode;
++            _Win32_AssociatedEnum_(DWRITE_COLOR_COMPOSITE_MODE) DWRITE_COLOR_COMPOSITE_MODE mode;
+         } composite;
+     } paint;
+ };

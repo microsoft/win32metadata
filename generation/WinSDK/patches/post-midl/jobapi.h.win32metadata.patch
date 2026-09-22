@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/jobapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/jobapi.h
-index 611069d3b2..50310dcc19 100644
+index 611069d3b2..b9722cc0d2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/jobapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/jobapi.h
 @@ -17,6 +17,7 @@
@@ -14,8 +14,8 @@ index 611069d3b2..50310dcc19 100644
  
  #if (_WIN32_WINNT >= 0x0501)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
-index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f806855d855a3 100644
+index 2571b34bb4..6af91f179c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
 @@ -19,6 +19,7 @@ Revision History:
@@ -15,7 +15,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef enum _LSA_TOKEN_INFORMATION_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TOKEN_INFORMATION_TYPE {
++typedef enum   _LSA_TOKEN_INFORMATION_TYPE {
      LsaTokenInformationNull,  // Implies LSA_TOKEN_INFORMATION_NULL data type
      LsaTokenInformationV1,    // Implies LSA_TOKEN_INFORMATION_V1 data type
      LsaTokenInformationV2,    // Implies LSA_TOKEN_INFORMATION_V2 data type
@@ -24,7 +24,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef struct _LSA_TOKEN_INFORMATION_NULL {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TOKEN_INFORMATION_NULL {
++typedef struct   _LSA_TOKEN_INFORMATION_NULL {
  
      //
      // Time at which the security context becomes invalid.
@@ -33,7 +33,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef struct _LSA_TOKEN_INFORMATION_V1 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_TOKEN_INFORMATION_V1 {
++typedef struct   _LSA_TOKEN_INFORMATION_V1 {
  
      //
      // Time at which the security context becomes invalid.
@@ -42,7 +42,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef struct _LSA_TOKEN_INFORMATION_V3 {
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _LSA_TOKEN_INFORMATION_V3 {
++typedef struct   _LSA_TOKEN_INFORMATION_V3 {
  
      //
      // Time at which the security context becomes invalid.
@@ -51,7 +51,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  // authentication packages.
  //
 -typedef struct _LSA_DISPATCH_TABLE {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_DISPATCH_TABLE {
++typedef struct   _LSA_DISPATCH_TABLE {
      PLSA_CREATE_LOGON_SESSION CreateLogonSession;
      PLSA_DELETE_LOGON_SESSION DeleteLogonSession;
      PLSA_ADD_CREDENTIAL AddCredential;
@@ -60,7 +60,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef struct _SECPKG_CLIENT_INFO {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_CLIENT_INFO {
++typedef struct   _SECPKG_CLIENT_INFO {
      LUID            LogonId;            // Effective Logon Id
      ULONG           ProcessID;          // Process Id of caller
      ULONG           ThreadID;           // Thread Id of caller
@@ -69,7 +69,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  #define SECPKG_CLIENT_THREAD_TERMINATED     0x02    // The client thread has terminated
  
 -typedef struct _SECPKG_CALL_INFO {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_CALL_INFO {
++typedef struct   _SECPKG_CALL_INFO {
      ULONG           ProcessId;
      ULONG           ThreadId;
      ULONG           Attributes;
@@ -78,7 +78,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  } SECPKG_FAILURE_REASON, * PSECPKG_FAILURE_REASON;
  
 -typedef struct _SECPKG_SUPPLEMENTAL_CRED {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_SUPPLEMENTAL_CRED {
++typedef struct   _SECPKG_SUPPLEMENTAL_CRED {
      UNICODE_STRING PackageName;
      ULONG CredentialSize;
  #ifdef MIDL_PASS
@@ -87,14 +87,14 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  } SECPKG_SUPPLEMENTAL_CRED, *PSECPKG_SUPPLEMENTAL_CRED;
  
 -typedef struct _SECPKG_BYTE_VECTOR
-+typedef struct _Windows_SupportedOS_Windows7_ _SECPKG_BYTE_VECTOR
++typedef struct  _SECPKG_BYTE_VECTOR
  {
      ULONG ByteArrayOffset; // each element is a byte
      USHORT ByteArrayLength;
  } SECPKG_BYTE_VECTOR, *PSECPKG_BYTE_VECTOR;
  
 -typedef struct _SECPKG_SHORT_VECTOR
-+typedef struct _Windows_SupportedOS_Windows7_ _SECPKG_SHORT_VECTOR
++typedef struct  _SECPKG_SHORT_VECTOR
  {
      ULONG ShortArrayOffset; // each element is a short
      USHORT ShortArrayCount; // number of characters
@@ -103,7 +103,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef struct _SECPKG_SUPPLIED_CREDENTIAL {
-+typedef struct _Windows_SupportedOS_Windows7_ _SECPKG_SUPPLIED_CREDENTIAL {
++typedef struct  _SECPKG_SUPPLIED_CREDENTIAL {
      USHORT cbHeaderLength; // the length of the header
      USHORT cbStructureLength; //  pay load length including the header
      SECPKG_SHORT_VECTOR UserName; // unicode only
@@ -112,7 +112,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  #define SECPKG_CREDENTIAL_FLAGS_CREDMAN_CRED   0x2
  
 -typedef struct _SECPKG_CREDENTIAL {
-+typedef struct _Windows_SupportedOS_Windows7_ _SECPKG_CREDENTIAL {
++typedef struct  _SECPKG_CREDENTIAL {
      ULONG64 Version; // contains SECPKG_CREDENTIAL_VERSION
      USHORT cbHeaderLength;   // the length of the header
      ULONG cbStructureLength; // pay load length including the header,
@@ -121,7 +121,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  typedef ULONG_PTR LSA_SEC_HANDLE;
  typedef LSA_SEC_HANDLE * PLSA_SEC_HANDLE;
 -typedef struct _SECPKG_SUPPLEMENTAL_CRED_ARRAY {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_SUPPLEMENTAL_CRED_ARRAY {
++typedef struct   _SECPKG_SUPPLEMENTAL_CRED_ARRAY {
      ULONG CredentialCount;
  #ifdef MIDL_PASS
      [size_is(CredentialCount)] SECPKG_SUPPLEMENTAL_CRED Credentials[*];
@@ -130,7 +130,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef struct _SECPKG_PRIMARY_CRED {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_PRIMARY_CRED {
++typedef struct   _SECPKG_PRIMARY_CRED {
      LUID LogonId;
      UNICODE_STRING DownlevelName;   // Sam Account Name
      UNICODE_STRING DomainName;      // Netbios domain name where account is located
@@ -139,7 +139,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  #define SECPKG_STATE_RESERVED_1                   0x80000000
  
 -typedef struct _SECPKG_PARAMETERS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_PARAMETERS {
++typedef struct   _SECPKG_PARAMETERS {
      ULONG           Version;
      ULONG           MachineState;
      ULONG           SetupMode;
@@ -148,7 +148,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef enum _SECPKG_EXTENDED_INFORMATION_CLASS {
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_EXTENDED_INFORMATION_CLASS {
++typedef enum   _SECPKG_EXTENDED_INFORMATION_CLASS {
      SecpkgGssInfo = 1,
      SecpkgContextThunks,
      SecpkgMutualAuthLevel,
@@ -157,51 +157,51 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  } SECPKG_EXTENDED_INFORMATION_CLASS;
  
 -typedef struct _SECPKG_GSS_INFO {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_GSS_INFO {
++typedef struct   _SECPKG_GSS_INFO {
      ULONG   EncodedIdLength;
      UCHAR   EncodedId[4];
  } SECPKG_GSS_INFO, * PSECPKG_GSS_INFO;
  
 -typedef struct _SECPKG_CONTEXT_THUNKS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_CONTEXT_THUNKS {
++typedef struct   _SECPKG_CONTEXT_THUNKS {
      ULONG   InfoLevelCount;
      ULONG   Levels[1];
  } SECPKG_CONTEXT_THUNKS, *PSECPKG_CONTEXT_THUNKS;
  
 -typedef struct _SECPKG_MUTUAL_AUTH_LEVEL {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_MUTUAL_AUTH_LEVEL {
++typedef struct   _SECPKG_MUTUAL_AUTH_LEVEL {
      ULONG   MutualAuthLevel;
  } SECPKG_MUTUAL_AUTH_LEVEL, * PSECPKG_MUTUAL_AUTH_LEVEL;
  
 -typedef struct _SECPKG_WOW_CLIENT_DLL {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _SECPKG_WOW_CLIENT_DLL {
++typedef struct   _SECPKG_WOW_CLIENT_DLL {
      SECURITY_STRING WowClientDllPath;
  } SECPKG_WOW_CLIENT_DLL, * PSECPKG_WOW_CLIENT_DLL;
  
  #define SECPKG_MAX_OID_LENGTH   32
  
 -typedef struct _SECPKG_SERIALIZED_OID {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _SECPKG_SERIALIZED_OID {
++typedef struct   _SECPKG_SERIALIZED_OID {
      ULONG OidLength;
      ULONG OidAttributes;
      UCHAR OidValue[ SECPKG_MAX_OID_LENGTH ];
  } SECPKG_SERIALIZED_OID, * PSECPKG_SERIALIZED_OID;
  
 -typedef struct _SECPKG_EXTRA_OIDS {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _SECPKG_EXTRA_OIDS {
++typedef struct   _SECPKG_EXTRA_OIDS {
      ULONG   OidCount;
      SECPKG_SERIALIZED_OID Oids[ 1 ];
  } SECPKG_EXTRA_OIDS, * PSECPKG_EXTRA_OIDS;
  
  // used by Nego2
 -typedef struct _SECPKG_NEGO2_INFO {
-+typedef struct _Windows_SupportedOS_Windows7_ _SECPKG_NEGO2_INFO {
++typedef struct  _SECPKG_NEGO2_INFO {
      UCHAR AuthScheme[16]; // auth id
      ULONG PackageFlags;
  } SECPKG_NEGO2_INFO, * PSECPKG_NEGO2_INFO;
  
 -typedef struct _SECPKG_EXTENDED_INFORMATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_EXTENDED_INFORMATION {
++typedef struct   _SECPKG_EXTENDED_INFORMATION {
      SECPKG_EXTENDED_INFORMATION_CLASS   Class;
      union {
          SECPKG_GSS_INFO            GssInfo;
@@ -210,7 +210,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  } SECPKG_EXTENDED_INFORMATION, * PSECPKG_EXTENDED_INFORMATION;
  
 -typedef struct  _SECPKG_TARGETINFO
-+typedef struct  _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_TARGETINFO
++typedef struct    _SECPKG_TARGETINFO
  {
      PSID    DomainSid;
      PCWSTR  ComputerName;
@@ -219,7 +219,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  #define SECURITY_USER_DATA_DEFINED
  
 -typedef struct _SECURITY_USER_DATA {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_USER_DATA {
++typedef struct   _SECURITY_USER_DATA {
      SECURITY_STRING UserName;           // User name
      SECURITY_STRING LogonDomainName;    // Domain the user logged on to
      SECURITY_STRING LogonServer;        // Server that logged the user on
@@ -228,7 +228,7 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
      );
  
 -typedef enum _SECPKG_SESSIONINFO_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_SESSIONINFO_TYPE {
++typedef enum   _SECPKG_SESSIONINFO_TYPE {
      SecSessionPrimaryCred       // SessionInformation is SECPKG_PRIMARY_CRED
  } SECPKG_SESSIONINFO_TYPE;
  
@@ -237,25 +237,27 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  //
  
 -typedef enum _SECPKG_NAME_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_NAME_TYPE {
++typedef enum   _SECPKG_NAME_TYPE {
      SecNameSamCompatible,
      SecNameAlternateId,
      SecNameFlat,
-@@ -1591,7 +1592,7 @@ typedef NTSTATUS
+@@ -1591,8 +1592,8 @@ typedef NTSTATUS
  #define NOTIFY_CLASS_DOMAIN_CHANGE      3
  #define NOTIFY_CLASS_REGISTRY_CHANGE    4
  
 -typedef struct _SECPKG_EVENT_PACKAGE_CHANGE {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_EVENT_PACKAGE_CHANGE {
-     ULONG   ChangeType;
+-    ULONG   ChangeType;
++typedef struct   _SECPKG_EVENT_PACKAGE_CHANGE {
++    _Win32_AssociatedEnum_(SECPKG_PACKAGE_CHANGE_TYPE) ULONG   ChangeType;
      LSA_SEC_HANDLE  PackageId;
      SECURITY_STRING PackageName;
+ } SECPKG_EVENT_PACKAGE_CHANGE, * PSECPKG_EVENT_PACKAGE_CHANGE;
 @@ -1610,7 +1611,7 @@ typedef struct _SECPKG_PARAMETERS SECPKG_EVENT_DOMAIN_CHANGE;
  typedef struct _SECPKG_PARAMETERS * PSECPKG_EVENT_DOMAIN_CHANGE;
  
  
 -typedef struct _SECPKG_EVENT_NOTIFY {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_EVENT_NOTIFY {
++typedef struct   _SECPKG_EVENT_NOTIFY {
      ULONG EventClass;
      ULONG Reserved;
      ULONG EventDataSize;
@@ -264,16 +266,25 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  #define _ENCRYPTED_CREDENTIAL_DEFINED
  
 -typedef struct _ENCRYPTED_CREDENTIALW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _ENCRYPTED_CREDENTIALW {
++typedef struct   _ENCRYPTED_CREDENTIALW {
  
      //
      // The credential
+@@ -1829,7 +1830,7 @@ extern "C"
+ {
+ #endif
+ 
+-NTSTATUS
++_Windows_SupportedOS_WindowsVista_ NTSTATUS
+ CredMarshalTargetInfo (
+     _In_        PCREDENTIAL_TARGET_INFORMATIONW InTargetInfo,
+     _Outptr_result_bytebuffer_(*BufferSize) PUSHORT     *Buffer,
 @@ -1884,7 +1885,7 @@ typedef struct _SEC_WINNT_AUTH_IDENTITY_EX32 {
  } SEC_WINNT_AUTH_IDENTITY_EX32, * PSEC_WINNT_AUTH_IDENTITY_EX32;
  
  // Functions provided by the SPM to the packages:
 -typedef struct _LSA_SECPKG_FUNCTION_TABLE {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_SECPKG_FUNCTION_TABLE {
++typedef struct   _LSA_SECPKG_FUNCTION_TABLE {
      PLSA_CREATE_LOGON_SESSION CreateLogonSession;
      PLSA_DELETE_LOGON_SESSION DeleteLogonSession;
      PLSA_ADD_CREDENTIAL AddCredential;
@@ -282,25 +293,95 @@ index 2571b34bb41b766e4c195326c952b10e4a076e16..37ff423b5497c796cccb38a1263f8068
  typedef LSA_LOCATE_PKG_BY_ID * PLSA_LOCATE_PKG_BY_ID;
  
 -typedef struct _SECPKG_DLL_FUNCTIONS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_DLL_FUNCTIONS {
++typedef struct   _SECPKG_DLL_FUNCTIONS {
      PLSA_ALLOCATE_LSA_HEAP AllocateHeap;
      PLSA_FREE_LSA_HEAP FreeHeap;
      PLSA_REGISTER_CALLBACK RegisterCallback;
+@@ -2310,7 +2311,7 @@ typedef NTSTATUS
+     _In_ LSA_SEC_HANDLE CredHandle,
+     _In_ LSA_SEC_HANDLE ContextHandle,
+     _In_ const UNICODE_STRING* TargetName,
+-    _Out_ PHANDLE RedirectedLogonHandle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE RedirectedLogonHandle,
+     _Out_ PLSA_REDIRECTED_LOGON_CALLBACK* Callback,
+     _Out_ PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK* CleanupCallback,
+     _Out_ PULONG LogonBufferSize,
+@@ -2321,7 +2322,7 @@ typedef NTSTATUS
+ (NTAPI SpGetRemoteCredGuardSupplementalCredsFn) (
+     _In_ LSA_SEC_HANDLE CredHandle,
+     _In_ const UNICODE_STRING* TargetName,
+-    _Out_ PHANDLE RedirectedLogonHandle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE RedirectedLogonHandle,
+     _Out_ PLSA_REDIRECTED_LOGON_CALLBACK* Callback,
+     _Out_ PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK* CleanupCallback,
+     _Out_ PULONG SupplementalCredsSize,
 @@ -2335,7 +2336,7 @@ typedef NTSTATUS
      _Outptr_result_bytebuffer_(*SupplementalCredsSize) PVOID * SupplementalCreds
      );
  
 -typedef struct _SECPKG_FUNCTION_TABLE {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_FUNCTION_TABLE {
++typedef struct   _SECPKG_FUNCTION_TABLE {
      PLSA_AP_INITIALIZE_PACKAGE InitializePackage;                           // SECPKG_INTERFACE_VERSION
      PLSA_AP_LOGON_USER LogonUser;                                           // SECPKG_INTERFACE_VERSION
      PLSA_AP_CALL_PACKAGE CallPackage;                                       // SECPKG_INTERFACE_VERSION
+@@ -2445,7 +2446,7 @@ typedef NTSTATUS
+ typedef NTSTATUS
+ (NTAPI SpGetContextTokenFn)(
+     _In_ LSA_SEC_HANDLE ContextHandle,
+-    _Out_ PHANDLE ImpersonationToken
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE ImpersonationToken
+     );
+ 
+ 
+@@ -2454,7 +2455,7 @@ typedef NTSTATUS
+     _In_        LSA_SEC_HANDLE phContext,             // (in) context to export
+     _In_        ULONG          fFlags,                // (in) option flags
+     _Out_       PSecBuffer     pPackedContext,        // (out) marshalled context
+-    _Out_opt_   PHANDLE        pToken                 // (out, optional) token handle for impersonation
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   PHANDLE        pToken                 // (out, optional) token handle for impersonation
+     );
+ 
+ typedef NTSTATUS
 @@ -2510,7 +2511,7 @@ typedef NTSTATUS
      _Out_ PULONG MarshaledAttributeDataSize,
      _Outptr_result_bytebuffer_(*MarshaledAttributeDataSize) PBYTE * MarshaledAttributeData);
  
 -typedef struct _SECPKG_USER_FUNCTION_TABLE {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECPKG_USER_FUNCTION_TABLE {
++typedef struct   _SECPKG_USER_FUNCTION_TABLE {
      SpInstanceInitFn *                      InstanceInit;
      SpInitUserModeContextFn *               InitUserModeContext;
      SpMakeSignatureFn *                     MakeSignature;
+@@ -2744,7 +2745,7 @@ typedef NTSTATUS
+ typedef NTSTATUS
+ (NTAPI KspGetTokenFn)(
+     _In_ LSA_SEC_HANDLE ContextId,
+-    _Out_opt_ PHANDLE ImpersonationToken,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ PHANDLE ImpersonationToken,
+     _Outptr_opt_ PACCESS_TOKEN * RawToken
+     );
+ 
+@@ -2824,5 +2825,24 @@ extern SECPKG_KERNEL_FUNCTIONS KspKernelFunctions;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECPKG_PACKAGE_CHANGE_LOAD")
++#undef SECPKG_PACKAGE_CHANGE_LOAD
++#pragma push_macro("SECPKG_PACKAGE_CHANGE_UNLOAD")
++#undef SECPKG_PACKAGE_CHANGE_UNLOAD
++#pragma push_macro("SECPKG_PACKAGE_CHANGE_SELECT")
++#undef SECPKG_PACKAGE_CHANGE_SELECT
++enum SECPKG_PACKAGE_CHANGE_TYPE : unsigned int
++{
++    SECPKG_PACKAGE_CHANGE_LOAD = 0U,
++    SECPKG_PACKAGE_CHANGE_UNLOAD = 1U,
++    SECPKG_PACKAGE_CHANGE_SELECT = 2U,
++};
++#pragma pop_macro("SECPKG_PACKAGE_CHANGE_SELECT")
++#pragma pop_macro("SECPKG_PACKAGE_CHANGE_UNLOAD")
++#pragma pop_macro("SECPKG_PACKAGE_CHANGE_LOAD")
++#endif
++
+ #endif /* _NTSECPKG_ */
+ 

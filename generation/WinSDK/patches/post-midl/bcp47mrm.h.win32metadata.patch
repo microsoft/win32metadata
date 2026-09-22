@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h b/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h
-index cb54c28507924d2ddb13f8bdfa813b616fa6286e..8e173541e516d55fc9eb265882255a49709f8fcc 100644
+index cb54c28507..fe7ad33060 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h
 @@ -3,6 +3,7 @@
@@ -14,7 +14,7 @@ index cb54c28507924d2ddb13f8bdfa813b616fa6286e..8e173541e516d55fc9eb265882255a49
      _In_ wchar_t wchListDelimiter,
      _Out_ double * pClosestDistance);
   
-+_Windows_SupportedOS_17763_
++
  STDAPI_(bool) IsWellFormedTag(_In_ PCWSTR pszTag);
  #endif
  

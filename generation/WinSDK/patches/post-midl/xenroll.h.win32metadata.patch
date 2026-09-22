@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h b/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
-index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d3126e98702c 100644
+index eda8c1dbb8..521acb2310 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
 @@ -134,6 +134,7 @@ extern "C"{
@@ -10,15 +10,146 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -153,7 +154,7 @@ EXTERN_C const IID IID_ICEnroll;
+@@ -152,8 +153,8 @@ EXTERN_C const IID IID_ICEnroll;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("43F8F288-7A20-11D0-8F06-00C04FC295E1")
+-    MIDL_INTERFACE("43F8F288-7A20-11D0-8F06-00C04FC295E1")
 -    ICEnroll : public IDispatch
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll : public IDispatch
++    MIDL_INTERFACE("43F8F288-7A20-11D0-8F06-00C04FC295E1") _Windows_SupportedOS_WindowsXP_ 
++      ICEnroll : public IDispatch
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE createFilePKCS10( 
+@@ -167,35 +168,35 @@ EXTERN_C const IID IID_ICEnroll;
+         virtual HRESULT STDMETHODCALLTYPE createPKCS10( 
+             /* [in] */ __RPC__in BSTR DNName,
+             /* [in] */ __RPC__in BSTR Usage,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPKCS10) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pPKCS10) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE acceptPKCS7( 
+             /* [in] */ __RPC__in BSTR PKCS7) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getCertFromPKCS7( 
+             /* [in] */ __RPC__in BSTR wszPKCS7,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCert) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE enumProviders( 
+             /* [in] */ LONG dwIndex,
+             /* [in] */ LONG dwFlags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrProvName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE enumContainers( 
+             /* [in] */ LONG dwIndex,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE freeRequestInfo( 
+             /* [in] */ __RPC__in BSTR PKCS7OrPKCS10) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreName( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreType( 
+             /* [in] */ __RPC__in BSTR bstrType) = 0;
+@@ -207,13 +208,13 @@ EXTERN_C const IID IID_ICEnroll;
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreName( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreType( 
+             /* [in] */ __RPC__in BSTR bstrType) = 0;
+@@ -225,13 +226,13 @@ EXTERN_C const IID IID_ICEnroll;
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreName( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreType( 
+             /* [in] */ __RPC__in BSTR bstrType) = 0;
+@@ -243,13 +244,13 @@ EXTERN_C const IID IID_ICEnroll;
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreName( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreType( 
+             /* [in] */ __RPC__in BSTR bstrType) = 0;
+@@ -261,13 +262,13 @@ EXTERN_C const IID IID_ICEnroll;
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContainerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrContainer) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrContainer) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ContainerName( 
+             /* [in] */ __RPC__in BSTR bstrContainer) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvider) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrProvider) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ProviderName( 
+             /* [in] */ __RPC__in BSTR bstrProvider) = 0;
+@@ -315,19 +316,19 @@ EXTERN_C const IID IID_ICEnroll;
+             /* [in] */ BOOL fBool) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SPCFileName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_SPCFileName( 
+             /* [in] */ __RPC__in BSTR bstr) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PVKFileName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_PVKFileName( 
+             /* [in] */ __RPC__in BSTR bstr) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgorithm( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_HashAlgorithm( 
+             /* [in] */ __RPC__in BSTR bstr) = 0;
 @@ -688,7 +689,7 @@ EXTERN_C const IID IID_ICEnroll;
          END_INTERFACE
      } ICEnrollVtbl;
@@ -28,12 +159,14 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct ICEnrollVtbl *lpVtbl;
      };
-@@ -912,7 +913,7 @@ EXTERN_C const IID IID_ICEnroll2;
+@@ -911,8 +912,8 @@ EXTERN_C const IID IID_ICEnroll2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("704ca730-c90b-11d1-9bec-00c04fc295e1")
+-    MIDL_INTERFACE("704ca730-c90b-11d1-9bec-00c04fc295e1")
 -    ICEnroll2 : public ICEnroll
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll2 : public ICEnroll
++    MIDL_INTERFACE("704ca730-c90b-11d1-9bec-00c04fc295e1") _Windows_SupportedOS_WindowsXP_ 
++      ICEnroll2 : public ICEnroll
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE addCertTypeToRequest( 
@@ -46,15 +179,26 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct ICEnroll2Vtbl *lpVtbl;
      };
-@@ -1564,7 +1565,7 @@ EXTERN_C const IID IID_ICEnroll3;
+@@ -1563,8 +1564,8 @@ EXTERN_C const IID IID_ICEnroll3;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("c28c2d95-b7de-11d2-a421-00c04f79fe8e")
+-    MIDL_INTERFACE("c28c2d95-b7de-11d2-a421-00c04f79fe8e")
 -    ICEnroll3 : public ICEnroll2
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll3 : public ICEnroll2
++    MIDL_INTERFACE("c28c2d95-b7de-11d2-a421-00c04f79fe8e") _Windows_SupportedOS_WindowsXP_ 
++      ICEnroll3 : public ICEnroll2
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE InstallPKCS7( 
+@@ -1587,7 +1588,7 @@ EXTERN_C const IID IID_ICEnroll3;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlgName( 
+             /* [in] */ LONG algID,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ReuseHardwareKeyIfUnableToGenNew( 
+             /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew) = 0;
 @@ -2074,7 +2075,7 @@ EXTERN_C const IID IID_ICEnroll3;
          END_INTERFACE
      } ICEnroll3Vtbl;
@@ -64,15 +208,108 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct ICEnroll3Vtbl *lpVtbl;
      };
-@@ -2360,7 +2361,7 @@ EXTERN_C const IID IID_ICEnroll4;
+@@ -2359,31 +2360,31 @@ EXTERN_C const IID IID_ICEnroll4;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("c1f1188a-2eb5-4a80-841b-7e729a356d90")
+-    MIDL_INTERFACE("c1f1188a-2eb5-4a80-841b-7e729a356d90")
 -    ICEnroll4 : public ICEnroll3
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ ICEnroll4 : public ICEnroll3
++    MIDL_INTERFACE("c1f1188a-2eb5-4a80-841b-7e729a356d90") _Windows_SupportedOS_WindowsXP_ 
++      ICEnroll4 : public ICEnroll3
      {
      public:
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_PrivateKeyArchiveCertificate( 
+             /* [in] */ __RPC__in BSTR bstrCert) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PrivateKeyArchiveCertificate( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCert) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ThumbPrint( 
+             /* [in] */ __RPC__in BSTR bstrThumbPrint) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ThumbPrint( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrThumbPrint) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrThumbPrint) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE binaryToString( 
+             /* [in] */ LONG Flags,
+             /* [in] */ __RPC__in BSTR strBinary,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncoded) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncoded) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE stringToBinary( 
+             /* [in] */ LONG Flags,
+             /* [in] */ __RPC__in BSTR strEncoded,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE addExtensionToRequest( 
+             /* [in] */ LONG Flags,
+@@ -2405,13 +2406,13 @@ EXTERN_C const IID IID_ICEnroll4;
+         virtual HRESULT STDMETHODCALLTYPE resetAttributes( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createRequest( 
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_CREATE_REQUEST_FLAGS) LONG Flags,
+             /* [in] */ __RPC__in BSTR strDNName,
+             /* [in] */ __RPC__in BSTR Usage,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrRequest) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrRequest) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createFileRequest( 
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_CREATE_REQUEST_FLAGS) LONG Flags,
+             /* [in] */ __RPC__in BSTR strDNName,
+             /* [in] */ __RPC__in BSTR strUsage,
+             /* [in] */ __RPC__in BSTR strRequestFileName) = 0;
+@@ -2424,15 +2425,15 @@ EXTERN_C const IID IID_ICEnroll4;
+         
+         virtual HRESULT STDMETHODCALLTYPE getCertFromResponse( 
+             /* [in] */ __RPC__in BSTR strResponse,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCert) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrCert) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getCertFromFileResponse( 
+             /* [in] */ __RPC__in BSTR strResponseFileName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCert) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrCert) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createPFX( 
+             /* [in] */ __RPC__in BSTR strPassword,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrPFX) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrPFX) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createFilePFX( 
+             /* [in] */ __RPC__in BSTR strPassword,
+@@ -2446,15 +2447,15 @@ EXTERN_C const IID IID_ICEnroll4;
+         
+         virtual HRESULT STDMETHODCALLTYPE enumPendingRequest( 
+             /* [in] */ LONG lIndex,
+-            /* [in] */ LONG lDesiredProperty,
++            /* [in] */ _Win32_AssociatedEnum_(PENDING_REQUEST_DESIRED_PROPERTY) LONG lDesiredProperty,
+             /* [retval][out] */ __RPC__out VARIANT *pvarProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE removePendingRequest( 
+             /* [in] */ __RPC__in BSTR strThumbprint) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetKeyLenEx( 
+-            /* [in] */ LONG lSizeSpec,
+-            /* [in] */ LONG lKeySpec,
++            /* [in] */ _Win32_AssociatedEnum_(XEKL_KEYSIZE) LONG lSizeSpec,
++            /* [in] */ _Win32_AssociatedEnum_(XEKL_KEYSPEC) LONG lKeySpec,
+             /* [retval][out] */ __RPC__out LONG *pdwKeySize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE InstallPKCS7Ex( 
+@@ -2462,7 +2463,7 @@ EXTERN_C const IID IID_ICEnroll4;
+             /* [retval][out] */ __RPC__out LONG *plCertInstalled) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE addCertTypeToRequestEx( 
+-            /* [in] */ LONG lType,
++            /* [in] */ _Win32_AssociatedEnum_(ADDED_CERT_TYPE) LONG lType,
+             /* [in] */ __RPC__in BSTR bstrOIDOrName,
+             /* [in] */ LONG lMajorVersion,
+             /* [in] */ BOOL fMinorVersion,
 @@ -3152,7 +3153,7 @@ EXTERN_C const IID IID_ICEnroll4;
          END_INTERFACE
      } ICEnroll4Vtbl;
@@ -82,12 +319,14 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct ICEnroll4Vtbl *lpVtbl;
      };
-@@ -3538,7 +3539,7 @@ EXTERN_C const IID IID_IEnroll;
+@@ -3537,8 +3538,8 @@ EXTERN_C const IID IID_IEnroll;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("acaa7838-4585-11d1-ab57-00c04fc295e1")
+-    MIDL_INTERFACE("acaa7838-4585-11d1-ab57-00c04fc295e1")
 -    IEnroll : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll : public IUnknown
++    MIDL_INTERFACE("acaa7838-4585-11d1-ab57-00c04fc295e1") _Windows_SupportedOS_WindowsXP_ 
++      IEnroll : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE createFilePKCS10WStr( 
@@ -100,12 +339,14 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct IEnrollVtbl *lpVtbl;
      };
-@@ -4395,7 +4396,7 @@ EXTERN_C const IID IID_IEnroll2;
+@@ -4394,8 +4395,8 @@ EXTERN_C const IID IID_IEnroll2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("c080e199-b7df-11d2-a421-00c04f79fe8e")
+-    MIDL_INTERFACE("c080e199-b7df-11d2-a421-00c04f79fe8e")
 -    IEnroll2 : public IEnroll
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll2 : public IEnroll
++    MIDL_INTERFACE("c080e199-b7df-11d2-a421-00c04f79fe8e") _Windows_SupportedOS_WindowsXP_ 
++      IEnroll2 : public IEnroll
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE InstallPKCS7Blob( 
@@ -118,15 +359,61 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct IEnroll2Vtbl *lpVtbl;
      };
-@@ -5242,7 +5243,7 @@ EXTERN_C const IID IID_IEnroll4;
+@@ -5241,8 +5242,8 @@ EXTERN_C const IID IID_IEnroll4;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("f8053fe5-78f4-448f-a0db-41d61b73446b")
+-    MIDL_INTERFACE("f8053fe5-78f4-448f-a0db-41d61b73446b")
 -    IEnroll4 : public IEnroll2
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnroll4 : public IEnroll2
++    MIDL_INTERFACE("f8053fe5-78f4-448f-a0db-41d61b73446b") _Windows_SupportedOS_WindowsXP_ 
++      IEnroll4 : public IEnroll2
      {
      public:
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ThumbPrintWStr( 
+@@ -5288,13 +5289,13 @@ EXTERN_C const IID IID_IEnroll4;
+         virtual HRESULT STDMETHODCALLTYPE resetAttributes( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createRequestWStr( 
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_CREATE_REQUEST_FLAGS) LONG Flags,
+             /* [in] */ LPCWSTR pwszDNName,
+             /* [in] */ LPCWSTR pwszUsage,
+             /* [out] */ PCRYPT_DATA_BLOB pblobRequest) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createFileRequestWStr( 
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_CREATE_REQUEST_FLAGS) LONG Flags,
+             /* [in] */ LPCWSTR pwszDNName,
+             /* [in] */ LPCWSTR pwszUsage,
+             /* [in] */ LPCWSTR pwszRequestFileName) = 0;
+@@ -5329,15 +5330,15 @@ EXTERN_C const IID IID_IEnroll4;
+         
+         virtual HRESULT STDMETHODCALLTYPE enumPendingRequestWStr( 
+             /* [in] */ LONG lIndex,
+-            /* [in] */ LONG lDesiredProperty,
++            /* [in] */ _Win32_AssociatedEnum_(PENDING_REQUEST_DESIRED_PROPERTY) LONG lDesiredProperty,
+             /* [out] */ LPVOID ppProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE removePendingRequestWStr( 
+             /* [in] */ CRYPT_DATA_BLOB thumbPrintBlob) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetKeyLenEx( 
+-            /* [in] */ LONG lSizeSpec,
+-            /* [in] */ LONG lKeySpec,
++            /* [in] */ _Win32_AssociatedEnum_(XEKL_KEYSIZE) LONG lSizeSpec,
++            /* [in] */ _Win32_AssociatedEnum_(XEKL_KEYSPEC) LONG lKeySpec,
+             /* [retval][out] */ LONG *pdwKeySize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE InstallPKCS7BlobEx( 
+@@ -5345,7 +5346,7 @@ EXTERN_C const IID IID_IEnroll4;
+             /* [retval][out] */ LONG *plCertInstalled) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddCertTypeToRequestWStrEx( 
+-            /* [in] */ LONG lType,
++            /* [in] */ _Win32_AssociatedEnum_(ADDED_CERT_TYPE) LONG lType,
+             /* [in] */ LPCWSTR pwszOIDOrName,
+             /* [in] */ LONG lMajorVersion,
+             /* [in] */ BOOL fMinorVersion,
 @@ -6047,7 +6048,7 @@ EXTERN_C const IID IID_IEnroll4;
          END_INTERFACE
      } IEnroll4Vtbl;
@@ -136,3 +423,105 @@ index eda8c1dbb8d51c00d9f83882d842df47803ce1d3..50011bb95e19fa13ac6edacdf4e7d312
      {
          CONST_VTBL struct IEnroll4Vtbl *lpVtbl;
      };
+@@ -6538,6 +6539,101 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("XEPR_CADNS")
++#undef XEPR_CADNS
++#pragma push_macro("XEPR_CAFRIENDLYNAME")
++#undef XEPR_CAFRIENDLYNAME
++#pragma push_macro("XEPR_CANAME")
++#undef XEPR_CANAME
++#pragma push_macro("XEPR_HASH")
++#undef XEPR_HASH
++#pragma push_macro("XEPR_REQUESTID")
++#undef XEPR_REQUESTID
++enum PENDING_REQUEST_DESIRED_PROPERTY : int
++{
++    XEPR_CADNS = 1,
++    XEPR_CAFRIENDLYNAME = 3,
++    XEPR_CANAME = 2,
++    XEPR_HASH = 8,
++    XEPR_REQUESTID = 4,
++};
++#pragma pop_macro("XEPR_REQUESTID")
++#pragma pop_macro("XEPR_HASH")
++#pragma pop_macro("XEPR_CANAME")
++#pragma pop_macro("XEPR_CAFRIENDLYNAME")
++#pragma pop_macro("XEPR_CADNS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XEKL_KEYSIZE_MIN")
++#undef XEKL_KEYSIZE_MIN
++#pragma push_macro("XEKL_KEYSIZE_MAX")
++#undef XEKL_KEYSIZE_MAX
++#pragma push_macro("XEKL_KEYSIZE_INC")
++#undef XEKL_KEYSIZE_INC
++enum XEKL_KEYSIZE : int
++{
++    XEKL_KEYSIZE_MIN = 1,
++    XEKL_KEYSIZE_MAX = 2,
++    XEKL_KEYSIZE_INC = 3,
++};
++#pragma pop_macro("XEKL_KEYSIZE_INC")
++#pragma pop_macro("XEKL_KEYSIZE_MAX")
++#pragma pop_macro("XEKL_KEYSIZE_MIN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XECR_CMC")
++#undef XECR_CMC
++#pragma push_macro("XECR_PKCS10_V1_5")
++#undef XECR_PKCS10_V1_5
++#pragma push_macro("XECR_PKCS10_V2_0")
++#undef XECR_PKCS10_V2_0
++#pragma push_macro("XECR_PKCS7")
++#undef XECR_PKCS7
++enum CERT_CREATE_REQUEST_FLAGS : int
++{
++    XECR_CMC = 3,
++    XECR_PKCS10_V1_5 = 4,
++    XECR_PKCS10_V2_0 = 1,
++    XECR_PKCS7 = 2,
++};
++#pragma pop_macro("XECR_PKCS7")
++#pragma pop_macro("XECR_PKCS10_V2_0")
++#pragma pop_macro("XECR_PKCS10_V1_5")
++#pragma pop_macro("XECR_CMC")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XECT_EXTENSION_V1")
++#undef XECT_EXTENSION_V1
++#pragma push_macro("XECT_EXTENSION_V2")
++#undef XECT_EXTENSION_V2
++enum ADDED_CERT_TYPE : int
++{
++    XECT_EXTENSION_V1 = 1,
++    XECT_EXTENSION_V2 = 2,
++};
++#pragma pop_macro("XECT_EXTENSION_V2")
++#pragma pop_macro("XECT_EXTENSION_V1")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XEKL_KEYSPEC_KEYX")
++#undef XEKL_KEYSPEC_KEYX
++#pragma push_macro("XEKL_KEYSPEC_SIG")
++#undef XEKL_KEYSPEC_SIG
++enum XEKL_KEYSPEC : int
++{
++    XEKL_KEYSPEC_KEYX = 1,
++    XEKL_KEYSPEC_SIG = 2,
++};
++#pragma pop_macro("XEKL_KEYSPEC_SIG")
++#pragma pop_macro("XEKL_KEYSPEC_KEYX")
++#endif
++
+ #endif
+ 
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
-index b7d55db8586c7f29469f62e9eb58b199a594f965..c4c0cda349058efa366b22a12d60700545d402fd 100644
+index b7d55db858..29687e7f44 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertAdm.h
 @@ -157,6 +157,7 @@ extern "C"{
@@ -19,6 +19,30 @@ index b7d55db8586c7f29469f62e9eb58b199a594f965..c4c0cda349058efa366b22a12d607005
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE IsValidCertificate( 
+@@ -242,7 +243,7 @@ EXTERN_C const IID IID_ICertAdmin;
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG RequestId,
+             /* [in] */ __RPC__in const BSTR strExtensionName,
+-            /* [in] */ LONG Type,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG Type,
+             /* [in] */ LONG Flags,
+             /* [in] */ __RPC__in const VARIANT *pvarValue) = 0;
+         
+@@ -262,12 +263,12 @@ EXTERN_C const IID IID_ICertAdmin;
+         virtual HRESULT STDMETHODCALLTYPE GetCRL( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCRL) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrCRL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ImportCertificate( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ __RPC__in const BSTR strCertificate,
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_IMPORT_FLAGS) LONG Flags,
+             /* [retval][out] */ __RPC__out LONG *pRequestId) = 0;
+         
+     };
 @@ -409,7 +410,7 @@ EXTERN_C const IID IID_ICertAdmin;
          END_INTERFACE
      } ICertAdminVtbl;
@@ -37,6 +61,54 @@ index b7d55db8586c7f29469f62e9eb58b199a594f965..c4c0cda349058efa366b22a12d607005
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE PublishCRLs( 
+@@ -539,7 +540,7 @@ EXTERN_C const IID IID_ICertAdmin2;
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG PropId,
+             /* [in] */ LONG PropIndex,
+-            /* [in] */ LONG PropType,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG PropType,
+             /* [in] */ __RPC__in VARIANT *pvarPropertyValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCAPropertyFlags( 
+@@ -550,13 +551,13 @@ EXTERN_C const IID IID_ICertAdmin2;
+         virtual HRESULT STDMETHODCALLTYPE GetCAPropertyDisplayName( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG PropId,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDisplayName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrDisplayName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetArchivedKey( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG RequestId,
+             /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrArchivedKey) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrArchivedKey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConfigEntry( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+@@ -574,18 +575,18 @@ EXTERN_C const IID IID_ICertAdmin2;
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG RequestId,
+             /* [in] */ __RPC__in const BSTR strCertHash,
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_IMPORT_FLAGS) LONG Flags,
+             /* [in] */ __RPC__in const BSTR strKey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMyRoles( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+-            /* [retval][out] */ __RPC__out LONG *pRoles) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(CERTADMIN_GET_ROLES_FLAGS) __RPC__out LONG *pRoles) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DeleteRow( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_DELETE_ROW_FLAGS) LONG Flags,
+             /* [in] */ DATE Date,
+-            /* [in] */ LONG Table,
++            /* [in] */ _Win32_AssociatedEnum_(CVRC_TABLE) LONG Table,
+             /* [in] */ LONG RowId,
+             /* [retval][out] */ __RPC__out LONG *pcDeleted) = 0;
+         
 @@ -817,7 +818,7 @@ EXTERN_C const IID IID_ICertAdmin2;
          END_INTERFACE
      } ICertAdmin2Vtbl;
@@ -46,3 +118,160 @@ index b7d55db8586c7f29469f62e9eb58b199a594f965..c4c0cda349058efa366b22a12d607005
      {
          CONST_VTBL struct ICertAdmin2Vtbl *lpVtbl;
      };
+@@ -936,12 +937,12 @@ EXTERN_C const IID IID_IOCSPProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("66FB7839-5F04-4C25-AD18-9FF1A8376EE0")
++    MIDL_INTERFACE("66FB7839-5F04-4C25-AD18-9FF1A8376EE0") _Windows_SupportedOS_Server2008_ 
+     IOCSPProperty : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+@@ -1107,7 +1108,7 @@ EXTERN_C const IID IID_IOCSPPropertyCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2597C18D-54E6-4B74-9FA9-A6BFDA99CBBE")
++    MIDL_INTERFACE("2597C18D-54E6-4B74-9FA9-A6BFDA99CBBE") _Windows_SupportedOS_Server2008_ 
+     IOCSPPropertyCollection : public IDispatch
+     {
+     public:
+@@ -1330,18 +1331,18 @@ EXTERN_C const IID IID_IOCSPCAConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AEC92B40-3D46-433F-87D1-B84D5C1E790D")
++    MIDL_INTERFACE("AEC92B40-3D46-433F-87D1-B84D5C1E790D") _Windows_SupportedOS_Server2008_ 
+     IOCSPCAConfiguration : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Identifier( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CACertificate( 
+             /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgorithm( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_HashAlgorithm( 
+             /* [in] */ __RPC__in const BSTR newVal) = 0;
+@@ -1368,13 +1369,13 @@ EXTERN_C const IID IID_IOCSPCAConfiguration;
+             /* [retval][out] */ __RPC__out ULONG *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSPName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_KeySpec( 
+             /* [retval][out] */ __RPC__out ULONG *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderCLSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ProviderCLSID( 
+             /* [in] */ __RPC__in const BSTR newVal) = 0;
+@@ -1395,13 +1396,13 @@ EXTERN_C const IID IID_IOCSPCAConfiguration;
+             /* [in] */ VARIANT newVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SigningCertificateTemplate( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SigningCertificateTemplate( 
+             /* [in] */ __RPC__in const BSTR newVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CAConfig( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CAConfig( 
+             /* [in] */ __RPC__in const BSTR newVal) = 0;
+@@ -1721,7 +1722,7 @@ EXTERN_C const IID IID_IOCSPCAConfigurationCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2BEBEA0B-5ECE-4F28-A91C-86B4BB20F0D3")
++    MIDL_INTERFACE("2BEBEA0B-5ECE-4F28-A91C-86B4BB20F0D3") _Windows_SupportedOS_Server2008_ 
+     IOCSPCAConfigurationCollection : public IDispatch
+     {
+     public:
+@@ -1922,7 +1923,7 @@ EXTERN_C const IID IID_IOCSPAdmin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("322E830D-67DB-4FE9-9577-4596D9F09294")
++    MIDL_INTERFACE("322E830D-67DB-4FE9-9577-4596D9F09294") _Windows_SupportedOS_Server2008_ 
+     IOCSPAdmin : public IDispatch
+     {
+     public:
+@@ -1953,7 +1954,7 @@ EXTERN_C const IID IID_IOCSPAdmin;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurity( 
+             /* [in] */ __RPC__in const BSTR bstrServerName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSigningCertificates( 
+             /* [in] */ __RPC__in const BSTR bstrServerName,
+@@ -2305,6 +2306,51 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CDR_EXPIRED")
++#undef CDR_EXPIRED
++#pragma push_macro("CDR_REQUEST_LAST_CHANGED")
++#undef CDR_REQUEST_LAST_CHANGED
++enum CERT_DELETE_ROW_FLAGS : int
++{
++    CDR_EXPIRED = 1,
++    CDR_REQUEST_LAST_CHANGED = 2,
++};
++#pragma pop_macro("CDR_REQUEST_LAST_CHANGED")
++#pragma pop_macro("CDR_EXPIRED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CA_ACCESS_ADMIN")
++#undef CA_ACCESS_ADMIN
++#pragma push_macro("CA_ACCESS_AUDITOR")
++#undef CA_ACCESS_AUDITOR
++#pragma push_macro("CA_ACCESS_ENROLL")
++#undef CA_ACCESS_ENROLL
++#pragma push_macro("CA_ACCESS_OFFICER")
++#undef CA_ACCESS_OFFICER
++#pragma push_macro("CA_ACCESS_OPERATOR")
++#undef CA_ACCESS_OPERATOR
++#pragma push_macro("CA_ACCESS_READ")
++#undef CA_ACCESS_READ
++enum [[clang::flag_enum]] CERTADMIN_GET_ROLES_FLAGS : unsigned int
++{
++    CA_ACCESS_ADMIN = 1U,
++    CA_ACCESS_AUDITOR = 4U,
++    CA_ACCESS_ENROLL = 512U,
++    CA_ACCESS_OFFICER = 2U,
++    CA_ACCESS_OPERATOR = 8U,
++    CA_ACCESS_READ = 256U,
++};
++#pragma pop_macro("CA_ACCESS_READ")
++#pragma pop_macro("CA_ACCESS_OPERATOR")
++#pragma pop_macro("CA_ACCESS_OFFICER")
++#pragma pop_macro("CA_ACCESS_ENROLL")
++#pragma pop_macro("CA_ACCESS_AUDITOR")
++#pragma pop_macro("CA_ACCESS_ADMIN")
++#endif
++
+ #endif
+ 
+ 

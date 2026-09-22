@@ -1,0 +1,566 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h
+index d93002900f..1afeec19f0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1218,7 +1219,11 @@ enum D3D11_USAGE
+     } 	D3D11_USAGE;
+ 
+ typedef 
+-enum D3D11_BIND_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ D3D11_BIND_FLAG
+     {
+         D3D11_BIND_VERTEX_BUFFER	= 0x1L,
+         D3D11_BIND_INDEX_BUFFER	= 0x2L,
+@@ -1233,14 +1238,22 @@ enum D3D11_BIND_FLAG
+     } 	D3D11_BIND_FLAG;
+ 
+ typedef 
+-enum D3D11_CPU_ACCESS_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ D3D11_CPU_ACCESS_FLAG
+     {
+         D3D11_CPU_ACCESS_WRITE	= 0x10000L,
+         D3D11_CPU_ACCESS_READ	= 0x20000L
+     } 	D3D11_CPU_ACCESS_FLAG;
+ 
+ typedef 
+-enum D3D11_RESOURCE_MISC_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ D3D11_RESOURCE_MISC_FLAG
+     {
+         D3D11_RESOURCE_MISC_GENERATE_MIPS	= 0x1L,
+         D3D11_RESOURCE_MISC_SHARED	= 0x2L,
+@@ -1287,7 +1300,11 @@ enum D3D11_RAISE_FLAG
+     } 	D3D11_RAISE_FLAG;
+ 
+ typedef 
+-enum D3D11_CLEAR_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ D3D11_CLEAR_FLAG
+     {
+         D3D11_CLEAR_DEPTH	= 0x1L,
+         D3D11_CLEAR_STENCIL	= 0x2L
+@@ -1387,7 +1404,7 @@ EXTERN_C const IID IID_ID3D11DeviceChild;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1841e5c8-16b0-489b-bcc8-44cfb0d5deae")
++    MIDL_INTERFACE("1841e5c8-16b0-489b-bcc8-44cfb0d5deae") _Windows_SupportedOS_Windows7_ 
+     ID3D11DeviceChild : public IUnknown
+     {
+     public:
+@@ -1650,7 +1667,7 @@ EXTERN_C const IID IID_ID3D11DepthStencilState;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1")
++    MIDL_INTERFACE("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1") _Windows_SupportedOS_Windows7_ 
+     ID3D11DepthStencilState : public ID3D11DeviceChild
+     {
+     public:
+@@ -1881,7 +1898,7 @@ EXTERN_C const IID IID_ID3D11BlendState;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75b68faa-347d-4159-8f45-a0640f01cd9a")
++    MIDL_INTERFACE("75b68faa-347d-4159-8f45-a0640f01cd9a") _Windows_SupportedOS_Windows7_ 
+     ID3D11BlendState : public ID3D11DeviceChild
+     {
+     public:
+@@ -2085,7 +2102,7 @@ EXTERN_C const IID IID_ID3D11RasterizerState;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7")
++    MIDL_INTERFACE("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7") _Windows_SupportedOS_Windows7_ 
+     ID3D11RasterizerState : public ID3D11DeviceChild
+     {
+     public:
+@@ -2247,7 +2264,7 @@ EXTERN_C const IID IID_ID3D11Resource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dc8e63f3-d12b-4952-b47b-5e45026a862d")
++    MIDL_INTERFACE("dc8e63f3-d12b-4952-b47b-5e45026a862d") _Windows_SupportedOS_Windows7_ 
+     ID3D11Resource : public ID3D11DeviceChild
+     {
+     public:
+@@ -2399,9 +2416,9 @@ typedef struct D3D11_BUFFER_DESC
+     {
+     UINT ByteWidth;
+     D3D11_USAGE Usage;
+-    UINT BindFlags;
+-    UINT CPUAccessFlags;
+-    UINT MiscFlags;
++    _Win32_AssociatedEnum_(D3D11_BIND_FLAG) UINT BindFlags;
++    _Win32_AssociatedEnum_(D3D11_CPU_ACCESS_FLAG) UINT CPUAccessFlags;
++    _Win32_AssociatedEnum_(D3D11_RESOURCE_MISC_FLAG) UINT MiscFlags;
+     UINT StructureByteStride;
+     } 	D3D11_BUFFER_DESC;
+ 
+@@ -2448,7 +2465,7 @@ EXTERN_C const IID IID_ID3D11Buffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("48570b85-d1ee-4fcd-a250-eb350722b037")
++    MIDL_INTERFACE("48570b85-d1ee-4fcd-a250-eb350722b037") _Windows_SupportedOS_Windows7_ 
+     ID3D11Buffer : public ID3D11Resource
+     {
+     public:
+@@ -2607,9 +2624,9 @@ typedef struct D3D11_TEXTURE1D_DESC
+     UINT ArraySize;
+     DXGI_FORMAT Format;
+     D3D11_USAGE Usage;
+-    UINT BindFlags;
+-    UINT CPUAccessFlags;
+-    UINT MiscFlags;
++    _Win32_AssociatedEnum_(D3D11_BIND_FLAG) UINT BindFlags;
++    _Win32_AssociatedEnum_(D3D11_CPU_ACCESS_FLAG) UINT CPUAccessFlags;
++    _Win32_AssociatedEnum_(D3D11_RESOURCE_MISC_FLAG) UINT MiscFlags;
+     } 	D3D11_TEXTURE1D_DESC;
+ 
+ #if !defined( D3D11_NO_HELPERS ) && defined( __cplusplus )
+@@ -2659,7 +2676,7 @@ EXTERN_C const IID IID_ID3D11Texture1D;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c")
++    MIDL_INTERFACE("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c") _Windows_SupportedOS_Windows7_ 
+     ID3D11Texture1D : public ID3D11Resource
+     {
+     public:
+@@ -2820,9 +2837,9 @@ typedef struct D3D11_TEXTURE2D_DESC
+     DXGI_FORMAT Format;
+     DXGI_SAMPLE_DESC SampleDesc;
+     D3D11_USAGE Usage;
+-    UINT BindFlags;
+-    UINT CPUAccessFlags;
+-    UINT MiscFlags;
++    _Win32_AssociatedEnum_(D3D11_BIND_FLAG) UINT BindFlags;
++    _Win32_AssociatedEnum_(D3D11_CPU_ACCESS_FLAG) UINT CPUAccessFlags;
++    _Win32_AssociatedEnum_(D3D11_RESOURCE_MISC_FLAG) UINT MiscFlags;
+     } 	D3D11_TEXTURE2D_DESC;
+ 
+ #if !defined( D3D11_NO_HELPERS ) && defined( __cplusplus )
+@@ -2878,7 +2895,7 @@ EXTERN_C const IID IID_ID3D11Texture2D;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6f15aaf2-d208-4e89-9ab4-489535d34f9c")
++    MIDL_INTERFACE("6f15aaf2-d208-4e89-9ab4-489535d34f9c") _Windows_SupportedOS_Windows7_ 
+     ID3D11Texture2D : public ID3D11Resource
+     {
+     public:
+@@ -3038,9 +3055,9 @@ typedef struct D3D11_TEXTURE3D_DESC
+     UINT MipLevels;
+     DXGI_FORMAT Format;
+     D3D11_USAGE Usage;
+-    UINT BindFlags;
+-    UINT CPUAccessFlags;
+-    UINT MiscFlags;
++    _Win32_AssociatedEnum_(D3D11_BIND_FLAG) UINT BindFlags;
++    _Win32_AssociatedEnum_(D3D11_CPU_ACCESS_FLAG) UINT CPUAccessFlags;
++    _Win32_AssociatedEnum_(D3D11_RESOURCE_MISC_FLAG) UINT MiscFlags;
+     } 	D3D11_TEXTURE3D_DESC;
+ 
+ #if !defined( D3D11_NO_HELPERS ) && defined( __cplusplus )
+@@ -3092,7 +3109,7 @@ EXTERN_C const IID IID_ID3D11Texture3D;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("037e866e-f56d-4357-a8af-9dabbe6e250e")
++    MIDL_INTERFACE("037e866e-f56d-4357-a8af-9dabbe6e250e") _Windows_SupportedOS_Windows7_ 
+     ID3D11Texture3D : public ID3D11Resource
+     {
+     public:
+@@ -3271,7 +3288,7 @@ EXTERN_C const IID IID_ID3D11View;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("839d1216-bb2e-412b-b7f4-a9dbebe08ed1")
++    MIDL_INTERFACE("839d1216-bb2e-412b-b7f4-a9dbebe08ed1") _Windows_SupportedOS_Windows7_ 
+     ID3D11View : public ID3D11DeviceChild
+     {
+     public:
+@@ -3486,7 +3503,7 @@ typedef struct D3D11_TEX2DMS_ARRAY_SRV
+ typedef struct D3D11_SHADER_RESOURCE_VIEW_DESC
+     {
+     DXGI_FORMAT Format;
+-    D3D11_SRV_DIMENSION ViewDimension;
++    _Win32_AssociatedEnum_(D3D_SRV_DIMENSION) D3D11_SRV_DIMENSION ViewDimension;
+     union 
+         {
+         D3D11_BUFFER_SRV Buffer;
+@@ -3723,7 +3740,7 @@ EXTERN_C const IID IID_ID3D11ShaderResourceView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b0e06fe0-8192-4e1a-b1ca-36d7414710b2")
++    MIDL_INTERFACE("b0e06fe0-8192-4e1a-b1ca-36d7414710b2") _Windows_SupportedOS_Windows7_ 
+     ID3D11ShaderResourceView : public ID3D11View
+     {
+     public:
+@@ -4106,7 +4123,7 @@ EXTERN_C const IID IID_ID3D11RenderTargetView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dfdba067-0b8d-4865-875b-d7b4516cc164")
++    MIDL_INTERFACE("dfdba067-0b8d-4865-875b-d7b4516cc164") _Windows_SupportedOS_Windows7_ 
+     ID3D11RenderTargetView : public ID3D11View
+     {
+     public:
+@@ -4585,7 +4602,7 @@ EXTERN_C const IID IID_ID3D11DepthStencilView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9fdac92a-1876-48c3-afad-25b94f84a9b6")
++    MIDL_INTERFACE("9fdac92a-1876-48c3-afad-25b94f84a9b6") _Windows_SupportedOS_Windows7_ 
+     ID3D11DepthStencilView : public ID3D11View
+     {
+     public:
+@@ -4946,7 +4963,7 @@ EXTERN_C const IID IID_ID3D11UnorderedAccessView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28acf509-7f5c-48f6-8611-f316010a6380")
++    MIDL_INTERFACE("28acf509-7f5c-48f6-8611-f316010a6380") _Windows_SupportedOS_Windows7_ 
+     ID3D11UnorderedAccessView : public ID3D11View
+     {
+     public:
+@@ -5090,7 +5107,7 @@ EXTERN_C const IID IID_ID3D11VertexShader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3b301d64-d678-4289-8897-22f8928b72f3")
++    MIDL_INTERFACE("3b301d64-d678-4289-8897-22f8928b72f3") _Windows_SupportedOS_Windows7_ 
+     ID3D11VertexShader : public ID3D11DeviceChild
+     {
+     public:
+@@ -5211,7 +5228,7 @@ EXTERN_C const IID IID_ID3D11HullShader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd")
++    MIDL_INTERFACE("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd") _Windows_SupportedOS_Windows7_ 
+     ID3D11HullShader : public ID3D11DeviceChild
+     {
+     public:
+@@ -5332,7 +5349,7 @@ EXTERN_C const IID IID_ID3D11DomainShader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f582c508-0f36-490c-9977-31eece268cfa")
++    MIDL_INTERFACE("f582c508-0f36-490c-9977-31eece268cfa") _Windows_SupportedOS_Windows7_ 
+     ID3D11DomainShader : public ID3D11DeviceChild
+     {
+     public:
+@@ -5453,7 +5470,7 @@ EXTERN_C const IID IID_ID3D11GeometryShader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("38325b96-effb-4022-ba02-2e795b70275c")
++    MIDL_INTERFACE("38325b96-effb-4022-ba02-2e795b70275c") _Windows_SupportedOS_Windows7_ 
+     ID3D11GeometryShader : public ID3D11DeviceChild
+     {
+     public:
+@@ -5574,7 +5591,7 @@ EXTERN_C const IID IID_ID3D11PixelShader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ea82e40d-51dc-4f33-93d4-db7c9125ae8c")
++    MIDL_INTERFACE("ea82e40d-51dc-4f33-93d4-db7c9125ae8c") _Windows_SupportedOS_Windows7_ 
+     ID3D11PixelShader : public ID3D11DeviceChild
+     {
+     public:
+@@ -5695,7 +5712,7 @@ EXTERN_C const IID IID_ID3D11ComputeShader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4f5b196e-c2bd-495e-bd01-1fded38e4969")
++    MIDL_INTERFACE("4f5b196e-c2bd-495e-bd01-1fded38e4969") _Windows_SupportedOS_Windows7_ 
+     ID3D11ComputeShader : public ID3D11DeviceChild
+     {
+     public:
+@@ -5816,7 +5833,7 @@ EXTERN_C const IID IID_ID3D11InputLayout;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e4819ddc-4cf0-4025-bd26-5de82a3e07b7")
++    MIDL_INTERFACE("e4819ddc-4cf0-4025-bd26-5de82a3e07b7") _Windows_SupportedOS_Windows7_ 
+     ID3D11InputLayout : public ID3D11DeviceChild
+     {
+     public:
+@@ -6133,7 +6150,7 @@ EXTERN_C const IID IID_ID3D11SamplerState;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("da6fea51-564c-4487-9810-f0d0f9b4e3a5")
++    MIDL_INTERFACE("da6fea51-564c-4487-9810-f0d0f9b4e3a5") _Windows_SupportedOS_Windows7_ 
+     ID3D11SamplerState : public ID3D11DeviceChild
+     {
+     public:
+@@ -6329,7 +6346,7 @@ EXTERN_C const IID IID_ID3D11Asynchronous;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b")
++    MIDL_INTERFACE("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b") _Windows_SupportedOS_Windows7_ 
+     ID3D11Asynchronous : public ID3D11DeviceChild
+     {
+     public:
+@@ -6525,7 +6542,7 @@ EXTERN_C const IID IID_ID3D11Query;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d6c00747-87b7-425e-b84d-44d108560afd")
++    MIDL_INTERFACE("d6c00747-87b7-425e-b84d-44d108560afd") _Windows_SupportedOS_Windows7_ 
+     ID3D11Query : public ID3D11Asynchronous
+     {
+     public:
+@@ -6667,7 +6684,7 @@ EXTERN_C const IID IID_ID3D11Predicate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9eb576dd-9f77-4d86-81aa-8bab5fe490e2")
++    MIDL_INTERFACE("9eb576dd-9f77-4d86-81aa-8bab5fe490e2") _Windows_SupportedOS_Windows7_ 
+     ID3D11Predicate : public ID3D11Query
+     {
+     public:
+@@ -6888,7 +6905,7 @@ EXTERN_C const IID IID_ID3D11Counter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6e8c49fb-a371-4770-b440-29086022b741")
++    MIDL_INTERFACE("6e8c49fb-a371-4770-b440-29086022b741") _Windows_SupportedOS_Windows7_ 
+     ID3D11Counter : public ID3D11Asynchronous
+     {
+     public:
+@@ -7064,7 +7081,7 @@ EXTERN_C const IID IID_ID3D11ClassInstance;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a6cd7faa-b0b7-4a2f-9436-8662a65797cb")
++    MIDL_INTERFACE("a6cd7faa-b0b7-4a2f-9436-8662a65797cb") _Windows_SupportedOS_Windows7_ 
+     ID3D11ClassInstance : public ID3D11DeviceChild
+     {
+     public:
+@@ -7245,7 +7262,7 @@ EXTERN_C const IID IID_ID3D11ClassLinkage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ddf57cba-9543-46e4-a12b-f207a0fe7fed")
++    MIDL_INTERFACE("ddf57cba-9543-46e4-a12b-f207a0fe7fed") _Windows_SupportedOS_Windows7_ 
+     ID3D11ClassLinkage : public ID3D11DeviceChild
+     {
+     public:
+@@ -7420,7 +7437,7 @@ EXTERN_C const IID IID_ID3D11CommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a24bc4d1-769e-43f7-8013-98ff566c18e2")
++    MIDL_INTERFACE("a24bc4d1-769e-43f7-8013-98ff566c18e2") _Windows_SupportedOS_Windows7_ 
+     ID3D11CommandList : public ID3D11DeviceChild
+     {
+     public:
+@@ -7784,7 +7801,7 @@ EXTERN_C const IID IID_ID3D11DeviceContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c0bfa96c-e089-44fb-8eaf-26f8796190da")
++    MIDL_INTERFACE("c0bfa96c-e089-44fb-8eaf-26f8796190da") _Windows_SupportedOS_Windows7_ 
+     ID3D11DeviceContext : public ID3D11DeviceChild
+     {
+     public:
+@@ -7929,7 +7946,7 @@ EXTERN_C const IID IID_ID3D11DeviceContext;
+         
+         virtual void STDMETHODCALLTYPE IASetPrimitiveTopology( 
+             /* [annotation] */ 
+-            _In_  D3D11_PRIMITIVE_TOPOLOGY Topology) = 0;
++            _Win32_AssociatedEnum_(D3D_PRIMITIVE_TOPOLOGY) _In_  D3D11_PRIMITIVE_TOPOLOGY Topology) = 0;
+         
+         virtual void STDMETHODCALLTYPE VSSetShaderResources( 
+             /* [annotation] */ 
+@@ -8374,7 +8391,7 @@ EXTERN_C const IID IID_ID3D11DeviceContext;
+         
+         virtual void STDMETHODCALLTYPE IAGetPrimitiveTopology( 
+             /* [annotation] */ 
+-            _Out_  D3D11_PRIMITIVE_TOPOLOGY *pTopology) = 0;
++            _Win32_AssociatedEnum_(D3D_PRIMITIVE_TOPOLOGY) _Out_  D3D11_PRIMITIVE_TOPOLOGY *pTopology) = 0;
+         
+         virtual void STDMETHODCALLTYPE VSGetShaderResources( 
+             /* [annotation] */ 
+@@ -10213,7 +10230,7 @@ EXTERN_C const IID IID_ID3D11VideoDecoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C")
++    MIDL_INTERFACE("3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoDecoder : public ID3D11DeviceChild
+     {
+     public:
+@@ -10225,7 +10242,7 @@ EXTERN_C const IID IID_ID3D11VideoDecoder;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDriverHandle( 
+             /* [annotation] */ 
+-            _Out_  HANDLE *pDriverHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pDriverHandle) = 0;
+         
+     };
+     
+@@ -10590,7 +10607,7 @@ EXTERN_C const IID IID_ID3D11VideoProcessorEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("31627037-53AB-4200-9061-05FAA9AB45F9")
++    MIDL_INTERFACE("31627037-53AB-4200-9061-05FAA9AB45F9") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoProcessorEnumerator : public ID3D11DeviceChild
+     {
+     public:
+@@ -10926,7 +10943,7 @@ EXTERN_C const IID IID_ID3D11VideoProcessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C")
++    MIDL_INTERFACE("1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoProcessor : public ID3D11DeviceChild
+     {
+     public:
+@@ -11094,7 +11111,7 @@ EXTERN_C const IID IID_ID3D11AuthenticatedChannel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3015A308-DCBD-47aa-A747-192486D14D4A")
++    MIDL_INTERFACE("3015A308-DCBD-47aa-A747-192486D14D4A") _Windows_SupportedOS_Windows8_ 
+     ID3D11AuthenticatedChannel : public ID3D11DeviceChild
+     {
+     public:
+@@ -11110,7 +11127,7 @@ EXTERN_C const IID IID_ID3D11AuthenticatedChannel;
+         
+         virtual void STDMETHODCALLTYPE GetChannelHandle( 
+             /* [annotation] */ 
+-            _Out_  HANDLE *pChannelHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pChannelHandle) = 0;
+         
+     };
+     
+@@ -11511,7 +11528,7 @@ EXTERN_C const IID IID_ID3D11CryptoSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9B32F9AD-BDCC-40a6-A39D-D5C865845720")
++    MIDL_INTERFACE("9B32F9AD-BDCC-40a6-A39D-D5C865845720") _Windows_SupportedOS_Windows8_ 
+     ID3D11CryptoSession : public ID3D11DeviceChild
+     {
+     public:
+@@ -11535,7 +11552,7 @@ EXTERN_C const IID IID_ID3D11CryptoSession;
+         
+         virtual void STDMETHODCALLTYPE GetCryptoSessionHandle( 
+             /* [annotation] */ 
+-            _Out_  HANDLE *pCryptoSessionHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pCryptoSessionHandle) = 0;
+         
+     };
+     
+@@ -11731,7 +11748,7 @@ EXTERN_C const IID IID_ID3D11VideoDecoderOutputView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C2931AEA-2A85-4f20-860F-FBA1FD256E18")
++    MIDL_INTERFACE("C2931AEA-2A85-4f20-860F-FBA1FD256E18") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoDecoderOutputView : public ID3D11View
+     {
+     public:
+@@ -11906,7 +11923,7 @@ EXTERN_C const IID IID_ID3D11VideoProcessorInputView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("11EC5A5F-51DC-4945-AB34-6E8C21300EA5")
++    MIDL_INTERFACE("11EC5A5F-51DC-4945-AB34-6E8C21300EA5") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoProcessorInputView : public ID3D11View
+     {
+     public:
+@@ -12088,7 +12105,7 @@ EXTERN_C const IID IID_ID3D11VideoProcessorOutputView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A048285E-25A9-4527-BD93-D68B68C44254")
++    MIDL_INTERFACE("A048285E-25A9-4527-BD93-D68B68C44254") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoProcessorOutputView : public ID3D11View
+     {
+     public:
+@@ -12232,7 +12249,7 @@ EXTERN_C const IID IID_ID3D11VideoContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("61F21C45-3C0E-4a74-9CEA-67100D9AD5E4")
++    MIDL_INTERFACE("61F21C45-3C0E-4a74-9CEA-67100D9AD5E4") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoContext : public ID3D11DeviceChild
+     {
+     public:
+@@ -13751,7 +13768,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("10EC4D5B-975A-4689-B9E4-D0AAC30FE333")
++    MIDL_INTERFACE("10EC4D5B-975A-4689-B9E4-D0AAC30FE333") _Windows_SupportedOS_Windows8_ 
+     ID3D11VideoDevice : public IUnknown
+     {
+     public:
+@@ -14175,7 +14192,7 @@ EXTERN_C const IID IID_ID3D11Device;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("db6f6ddb-ac77-4e88-8253-819df9bbf140")
++    MIDL_INTERFACE("db6f6ddb-ac77-4e88-8253-819df9bbf140") _Windows_SupportedOS_Windows7_ 
+     ID3D11Device : public IUnknown
+     {
+     public:
+@@ -15034,7 +15051,11 @@ EXTERN_C const IID IID_ID3D11Device;
+ /* [local] */ 
+ 
+ typedef 
+-enum D3D11_CREATE_DEVICE_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ D3D11_CREATE_DEVICE_FLAG
+     {
+         D3D11_CREATE_DEVICE_SINGLETHREADED	= 0x1,
+         D3D11_CREATE_DEVICE_DEBUG	= 0x2,
+@@ -15111,7 +15132,7 @@ HRESULT WINAPI D3D11CreateDevice(
+     _In_opt_ IDXGIAdapter* pAdapter,
+     D3D_DRIVER_TYPE DriverType,
+     HMODULE Software,
+-    UINT Flags,
++    _Win32_AssociatedEnum_(D3D11_CREATE_DEVICE_FLAG) UINT Flags,
+     _In_reads_opt_( FeatureLevels ) CONST D3D_FEATURE_LEVEL* pFeatureLevels,
+     UINT FeatureLevels,
+     UINT SDKVersion,
+@@ -15185,7 +15206,7 @@ HRESULT WINAPI D3D11CreateDeviceAndSwapChain(
+     _In_opt_ IDXGIAdapter* pAdapter,
+     D3D_DRIVER_TYPE DriverType,
+     HMODULE Software,
+-    UINT Flags,
++    _Win32_AssociatedEnum_(D3D11_CREATE_DEVICE_FLAG) UINT Flags,
+     _In_reads_opt_( FeatureLevels ) CONST D3D_FEATURE_LEVEL* pFeatureLevels,
+     UINT FeatureLevels,
+     UINT SDKVersion,

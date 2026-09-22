@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
+index 5259993040..21a788c173 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
 @@ -13,6 +13,7 @@ Module Name:   dhcpsapi.h
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  typedef DWORD DHCP_OPTION_ID;
  
 -typedef struct _DATE_TIME {
-+typedef struct _Windows_SupportedOS_Server2000_ _DATE_TIME {
++typedef struct  _DATE_TIME {
      DWORD dwLowDateTime;
      DWORD dwHighDateTime;
  } DATE_TIME,*PDATE_TIME, *LPDATE_TIME;
@@ -23,14 +24,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  typedef DWORD DHCP_RESUME_HANDLE;
  
 -typedef struct _DHCP_IP_RANGE {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_IP_RANGE {
++typedef struct  _DHCP_IP_RANGE {
      DHCP_IP_ADDRESS StartAddress;
      DHCP_IP_ADDRESS EndAddress;
  } DHCP_IP_RANGE, *LPDHCP_IP_RANGE;
  
  
 -typedef struct _DHCP_BINARY_DATA {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_BINARY_DATA {
++typedef struct  _DHCP_BINARY_DATA {
      DWORD  DataLength;
  
  #if defined(MIDL_PASS)
@@ -39,7 +40,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  typedef DHCP_BINARY_DATA DHCP_CLIENT_UID;
  
 -typedef struct _DHCP_HOST_INFO {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_HOST_INFO {
++typedef struct  _DHCP_HOST_INFO {
      DHCP_IP_ADDRESS IpAddress;      // minimum information always available
      LPWSTR          NetBiosName;    // optional information
      LPWSTR          HostName;       // optional information
@@ -48,7 +49,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DWORD_DWORD {
-+typedef struct _Windows_SupportedOS_Server2000_ _DWORD_DWORD {
++typedef struct  _DWORD_DWORD {
      DWORD DWord1;
      DWORD DWord2;
  } DWORD_DWORD, *LPDWORD_DWORD;
@@ -57,7 +58,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  //
  
 -typedef struct _DHCP_SUBNET_INFO {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SUBNET_INFO {
++typedef struct  _DHCP_SUBNET_INFO {
      DHCP_IP_ADDRESS   SubnetAddress;
      DHCP_IP_MASK      SubnetMask;
      LPWSTR            SubnetName;
@@ -66,7 +67,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_IP_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_IP_ARRAY {
++typedef struct  _DHCP_IP_ARRAY {
      DWORD NumElements;
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -75,14 +76,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_IP_ARRAY, *LPDHCP_IP_ARRAY;
  
 -typedef struct _DHCP_IP_CLUSTER {
-+typedef struct _Windows_SupportedOS_Server2003_ _DHCP_IP_CLUSTER {
++typedef struct  _DHCP_IP_CLUSTER {
      DHCP_IP_ADDRESS ClusterAddress; // First IP address of the cluster.
      DWORD           ClusterMask;    // Cluster usage mask, 0xFFFFFFFF
                                      //  indicates the cluster is fully used.
  } DHCP_IP_CLUSTER, *LPDHCP_IP_CLUSTER;
  
 -typedef struct _DHCP_IP_RESERVATION {
-+typedef struct _Windows_SupportedOS_Server2003_ _DHCP_IP_RESERVATION {
++typedef struct  _DHCP_IP_RESERVATION {
      DHCP_IP_ADDRESS ReservedIpAddress;
      DHCP_CLIENT_UID *ReservedForClient;
  } DHCP_IP_RESERVATION, *LPDHCP_IP_RESERVATION;
@@ -91,7 +92,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_OPTION_DATA_ELEMENT {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_OPTION_DATA_ELEMENT {
++typedef struct  _DHCP_OPTION_DATA_ELEMENT {
      DHCP_OPTION_DATA_TYPE    OptionType;
  #if defined(MIDL_PASS)
      [switch_is(OptionType), switch_type(DHCP_OPTION_DATA_TYPE)]
@@ -100,7 +101,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  #endif
  
 -typedef struct _DHCP_OPTION_DATA {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_OPTION_DATA {
++typedef struct  _DHCP_OPTION_DATA {
      DWORD NumElements; // number of option elements in the pointed array
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -109,7 +110,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_OPTION_TYPE, *LPDHCP_OPTION_TYPE;
  
 -typedef struct _DHCP_OPTION {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_OPTION {
++typedef struct  _DHCP_OPTION {
      DHCP_OPTION_ID   OptionID;
      LPWSTR           OptionName;
      LPWSTR           OptionComment;
@@ -118,7 +119,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_OPTION, *LPDHCP_OPTION;
  
 -typedef struct _DHCP_OPTION_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_OPTION_ARRAY {
++typedef struct  _DHCP_OPTION_ARRAY {
      DWORD NumElements; // number of options in the pointed array
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -127,13 +128,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_OPTION_ARRAY, *LPDHCP_OPTION_ARRAY;
  
 -typedef struct _DHCP_OPTION_VALUE {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_OPTION_VALUE {
++typedef struct  _DHCP_OPTION_VALUE {
      DHCP_OPTION_ID   OptionID;
      DHCP_OPTION_DATA Value;
  } DHCP_OPTION_VALUE, *LPDHCP_OPTION_VALUE;
  
 -typedef struct _DHCP_OPTION_VALUE_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2008_ _DHCP_OPTION_VALUE_ARRAY {
++typedef struct  _DHCP_OPTION_VALUE_ARRAY {
      DWORD NumElements; // number of options in the pointed array
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -142,7 +143,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_OPTION_SCOPE_TYPE, *LPDHCP_OPTION_SCOPE_TYPE;
  
 -typedef struct _DHCP_RESERVED_SCOPE {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_RESERVED_SCOPE {
++typedef struct  _DHCP_RESERVED_SCOPE {
      DHCP_IP_ADDRESS ReservedIpAddress;
      DHCP_IP_ADDRESS ReservedIpSubnetAddress;
  } DHCP_RESERVED_SCOPE, *LPDHCP_RESERVED_SCOPE;
@@ -151,7 +152,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_RESERVED_SCOPE6, *LPDHCP_RESERVED_SCOPE6;
  
 -typedef struct _DHCP_OPTION_SCOPE_INFO6 {
-+typedef struct _Windows_SupportedOS_Server2008_ _DHCP_OPTION_SCOPE_INFO6 {
++typedef struct  _DHCP_OPTION_SCOPE_INFO6 {
      DHCP_OPTION_SCOPE_TYPE6 ScopeType;
  #if defined(MIDL_PASS)
      [switch_is(ScopeType), switch_type(DHCP_OPTION_SCOPE_TYPE6)]
@@ -160,7 +161,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  //
  
 -typedef struct _DHCP_CLIENT_INFO {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_CLIENT_INFO {
++typedef struct  _DHCP_CLIENT_INFO {
      DHCP_IP_ADDRESS ClientIpAddress;      // currently assigned IP address.
      DHCP_IP_MASK    SubnetMask;
      DHCP_CLIENT_UID ClientHardwareAddress;
@@ -169,7 +170,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_CLIENT_INFO, *LPDHCP_CLIENT_INFO;
  
 -typedef struct _DHCP_CLIENT_INFO_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_CLIENT_INFO_ARRAY {
++typedef struct  _DHCP_CLIENT_INFO_ARRAY {
      DWORD NumElements;
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -178,7 +179,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY, *LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY;
  
 -typedef struct _DHCP_CLIENT_INFO_PB {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_CLIENT_INFO_PB {
++typedef struct  _DHCP_CLIENT_INFO_PB {
      DHCP_IP_ADDRESS   ClientIpAddress;
      DHCP_IP_MASK      SubnetMask;
      DHCP_CLIENT_UID   ClientHardwareAddress;
@@ -187,7 +188,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_CLIENT_INFO_PB, *LPDHCP_CLIENT_INFO_PB;
  
 -typedef struct _DHCP_CLIENT_INFO_PB_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_CLIENT_INFO_PB_ARRAY {
++typedef struct  _DHCP_CLIENT_INFO_PB_ARRAY {
      DWORD NumElements;
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -196,7 +197,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_SEARCH_INFO_TYPE, *LPDHCP_SEARCH_INFO_TYPE;
  
 -typedef struct _DHCP_CLIENT_SEARCH_INFO {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_CLIENT_SEARCH_INFO {
++typedef struct  _DHCP_CLIENT_SEARCH_INFO {
      DHCP_SEARCH_INFO_TYPE SearchType;
  #if defined(MIDL_PASS)
      [switch_is(SearchType), switch_type(DHCP_SEARCH_INFO_TYPE)]
@@ -205,7 +206,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  //
  
 -typedef struct _SCOPE_MIB_INFO {
-+typedef struct _Windows_SupportedOS_Windows7_ _SCOPE_MIB_INFO {
++typedef struct  _SCOPE_MIB_INFO {
      DHCP_IP_ADDRESS Subnet;
      DWORD NumAddressesInuse;
      DWORD NumAddressesFree;
@@ -214,7 +215,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_MIB_INFO_VQ, *LPDHCP_MIB_INFO_VQ;
  
 -typedef struct _SCOPE_MIB_INFO_V5 {
-+typedef struct _Windows_SupportedOS_Windows7_ _SCOPE_MIB_INFO_V5 {
++typedef struct  _SCOPE_MIB_INFO_V5 {
      DHCP_IP_ADDRESS Subnet;
      DWORD NumAddressesInuse;
      DWORD NumAddressesFree;
@@ -222,7 +223,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } SCOPE_MIB_INFO_V5, *LPSCOPE_MIB_INFO_V5;
  
 -typedef struct _DHCP_MIB_INFO_V5 {
-+typedef struct _Windows_SupportedOS_Windows7_ _DHCP_MIB_INFO_V5 {
++typedef struct  _DHCP_MIB_INFO_V5 {
      DWORD Discovers;
      DWORD Offers;
      DWORD Requests;
@@ -231,7 +232,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_SERVER_CONFIG_INFO {
-+typedef struct _Windows_SupportedOS_Server2003_ _DHCP_SERVER_CONFIG_INFO {
++typedef struct  _DHCP_SERVER_CONFIG_INFO {
      DWORD APIProtocolSupport;       // bit map of the protocols supported.
      LPWSTR DatabaseName;            // JET database name.
      LPWSTR DatabasePath;            // JET database path.
@@ -240,14 +241,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_IP_RESERVATION_V4 {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_IP_RESERVATION_V4 {
++typedef struct  _DHCP_IP_RESERVATION_V4 {
      DHCP_IP_ADDRESS  ReservedIpAddress;
      DHCP_CLIENT_UID *ReservedForClient;
      BYTE             bAllowedClientTypes;
  } DHCP_IP_RESERVATION_V4, *LPDHCP_IP_RESERVATION_V4;
  
 -typedef struct _DHCP_IP_RESERVATION_INFO {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_IP_RESERVATION_INFO {
++typedef struct  _DHCP_IP_RESERVATION_INFO {
      DHCP_IP_ADDRESS             ReservedIpAddress;
      DHCP_CLIENT_UID             ReservedForClient;
      LPWSTR                      ReservedClientName;
@@ -256,7 +257,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_IP_RESERVATION_INFO, *LPDHCP_IP_RESERVATION_INFO;
  
 -typedef struct _DHCP_RESERVATION_INFO_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_RESERVATION_INFO_ARRAY {
++typedef struct  _DHCP_RESERVATION_INFO_ARRAY {
      DWORD NumElements;
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -265,7 +266,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_SERVER_CONFIG_INFO_V4 {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SERVER_CONFIG_INFO_V4 {
++typedef struct  _DHCP_SERVER_CONFIG_INFO_V4 {
      DWORD APIProtocolSupport;
      LPWSTR DatabaseName;
      LPWSTR DatabasePath;
@@ -274,7 +275,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_SUPER_SCOPE_TABLE_ENTRY {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SUPER_SCOPE_TABLE_ENTRY {
++typedef struct  _DHCP_SUPER_SCOPE_TABLE_ENTRY {
      DHCP_IP_ADDRESS SubnetAddress; // subnet address
      DWORD  SuperScopeNumber;       // super scope group number
      DWORD  NextInSuperScope;       // index of the next subnet in the superscope
@@ -283,7 +284,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_SUPER_SCOPE_TABLE
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SUPER_SCOPE_TABLE
++typedef struct  _DHCP_SUPER_SCOPE_TABLE
  {
      DWORD cEntries;
  #if defined( MIDL_PASS )
@@ -292,7 +293,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  #define     _ST_SRVR_H_
  
 -typedef struct _DHCP_ALL_OPTION_VALUES_PB {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_ALL_OPTION_VALUES_PB {
++typedef struct  _DHCP_ALL_OPTION_VALUES_PB {
      DWORD                          Flags;         // must be zero -- not used
      DWORD                          NumElements;   // the # of elements in array of Options below..
  #if       defined(MIDL_PASS)
@@ -301,7 +302,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_ALL_OPTION_VALUES_PB, *LPDHCP_ALL_OPTION_VALUES_PB;
  
 -typedef struct _DHCPDS_SERVER {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCPDS_SERVER {
++typedef struct  _DHCPDS_SERVER {
      DWORD                          Version;
      LPWSTR                         ServerName;
      DWORD                          ServerAddress;
@@ -310,7 +311,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  }   DHCPDS_SERVER, *LPDHCPDS_SERVER, *PDHCPDS_SERVER;
  
 -typedef     struct                 _DHCPDS_SERVERS {
-+typedef     struct                 _Windows_SupportedOS_Server2000_ _DHCPDS_SERVERS {
++typedef     struct                  _DHCPDS_SERVERS {
      DWORD                          Flags;
      DWORD                          NumElements;
      LPDHCPDS_SERVER                Servers;
@@ -319,7 +320,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_BOOTP_IP_RANGE {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_BOOTP_IP_RANGE {
++typedef struct  _DHCP_BOOTP_IP_RANGE {
      DHCP_IP_ADDRESS StartAddress;
      DHCP_IP_ADDRESS EndAddress;
      ULONG BootpAllocated;
@@ -328,7 +329,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_SUBNET_ELEMENT_DATA_V5 {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SUBNET_ELEMENT_DATA_V5 {
++typedef struct  _DHCP_SUBNET_ELEMENT_DATA_V5 {
      DHCP_SUBNET_ELEMENT_TYPE ElementType;
  #if defined(MIDL_PASS)
      [switch_is(ELEMENT_MASK(ElementType)), switch_type(DHCP_SUBNET_ELEMENT_TYPE)]
@@ -337,7 +338,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_SUBNET_ELEMENT_DATA_V5, *LPDHCP_SUBNET_ELEMENT_DATA_V5;
  
 -typedef struct _DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 {
++typedef struct  _DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 {
      DWORD NumElements;
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -346,7 +347,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  #define DHCP_ENDPOINT_FLAG_CANT_MODIFY 0x01
  
 -typedef struct _DHCP_BIND_ELEMENT {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_BIND_ELEMENT {
++typedef struct  _DHCP_BIND_ELEMENT {
      ULONG           Flags;
      BOOL            fBoundToDHCPServer;
      DHCP_IP_ADDRESS AdapterPrimaryAddress;
@@ -355,7 +356,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_BIND_ELEMENT, *LPDHCP_BIND_ELEMENT;
  
 -typedef struct _DHCP_BIND_ELEMENT_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2000_ _DHCP_BIND_ELEMENT_ARRAY {
++typedef struct  _DHCP_BIND_ELEMENT_ARRAY {
      DWORD NumElements;
  #if defined (MIDL_PASS)
      [size_is(NumElements)]
@@ -364,7 +365,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_POL_COND
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_POL_COND
++typedef struct  _DHCP_POL_COND
  {
      DWORD               ParentExpr;
      DHCP_POL_ATTR_TYPE  Type;
@@ -373,7 +374,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_POL_COND, *PDHCP_POL_COND, *LPDHCP_POL_COND;
  
 -typedef struct _DHCP_POL_COND_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_POL_COND_ARRAY {
++typedef struct  _DHCP_POL_COND_ARRAY {
      DWORD               NumElements;
      #if defined( MIDL_PASS )
      [ size_is( NumElements ) ]
@@ -382,14 +383,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_POL_COND_ARRAY, *PDHCP_POL_COND_ARRAY, *LPDHCP_POL_COND_ARRAY;
  
 -typedef struct _DHCP_POL_EXPR
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_POL_EXPR
++typedef struct  _DHCP_POL_EXPR
  {
      DWORD               ParentExpr;
      DHCP_POL_LOGIC_OPER Operator;
  } DHCP_POL_EXPR, *PDHCP_POL_EXPR, *LPDHCP_POL_EXPR;
  
 -typedef struct _DHCP_POL_EXPR_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_POL_EXPR_ARRAY {
++typedef struct  _DHCP_POL_EXPR_ARRAY {
      DWORD               NumElements;
       #if defined( MIDL_PASS )
      [ size_is( NumElements ) ]
@@ -398,7 +399,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_POL_EXPR_ARRAY, *PDHCP_POL_EXPR_ARRAY, *LPDHCP_POL_EXPR_ARRAY;
  
 -typedef struct _DHCP_IP_RANGE_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_IP_RANGE_ARRAY {
++typedef struct  _DHCP_IP_RANGE_ARRAY {
      DWORD           NumElements;
      #if defined( MIDL_PASS )
      [ size_is( NumElements ) ]
@@ -407,7 +408,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  //
  
 -typedef struct _DHCP_POLICY
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_POLICY
++typedef struct  _DHCP_POLICY
  {
      LPWSTR                  PolicyName;
      BOOL                    IsGlobalPolicy;
@@ -416,10 +417,48 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCP_POLICY, *PDHCP_POLICY, *LPDHCP_POLICY;
  
 -typedef struct _DHCP_POLICY_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_POLICY_ARRAY {
++typedef struct  _DHCP_POLICY_ARRAY {
      DWORD       NumElements;
      #if defined( MIDL_PASS )
      [ size_is( NumElements ) ]
+@@ -1825,32 +1826,32 @@ typedef struct
+ //
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpAddFilterV4(
+     _In_opt_z_ DHCP_CONST WCHAR     *ServerIpAddress,
+     _In_       DHCP_FILTER_ADD_INFO *AddFilterInfo,
+     _In_       BOOL                 ForceFlag
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpDeleteFilterV4(
+     _In_opt_z_ DHCP_CONST WCHAR  *ServerIpAddress,
+     _In_       DHCP_ADDR_PATTERN *DeleteFilterInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetFilterV4(
+     _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
+     _In_       DHCP_FILTER_GLOBAL_INFO *GlobalFilterInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetFilterV4(
+     _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
+     _Out_      DHCP_FILTER_GLOBAL_INFO *GlobalFilterInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumFilterV4(
+     _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
+     _Inout_    LPDHCP_ADDR_PATTERN     ResumeHandle,
 @@ -1867,28 +1868,28 @@ DhcpEnumFilterV4(
  //
  
@@ -453,6 +492,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_   DHCP_CONST WCHAR    *ServerIpAddress,
      _Inout_      DHCP_RESUME_HANDLE  *ResumeHandle,
      _In_         DWORD               PreferredMaximum,
+@@ -1897,7 +1898,7 @@ DhcpEnumSubnets(
+     _Out_        DWORD               *ElementsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpAddSubnetElement(
+     _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
+                DHCP_IP_ADDRESS            SubnetAddress,
 @@ -1905,7 +1906,7 @@ DhcpAddSubnetElement(
      );
  
@@ -462,6 +510,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_ DHCP_CONST WCHAR                 *ServerIpAddress,
                 DHCP_IP_ADDRESS                  SubnetAddress,
                 DHCP_SUBNET_ELEMENT_TYPE         EnumElementType,
+@@ -1916,7 +1917,7 @@ DhcpEnumSubnetElements(
+                DWORD                            *ElementsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpRemoveSubnetElement(
+     _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
+                DHCP_IP_ADDRESS          SubnetAddress,
 @@ -1925,7 +1926,7 @@ DhcpRemoveSubnetElement(
      );
  
@@ -471,7 +528,65 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
                 DHCP_IP_ADDRESS   SubnetAddress,
                 DHCP_FORCE_FLAG   ForceFlag
-@@ -1988,7 +1989,7 @@ DhcpSetOptionValues(
+@@ -1935,28 +1936,28 @@ DhcpDeleteSubnet(
+ // Option APIs
+ //
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpCreateOption(
+     _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
+                DHCP_OPTION_ID           OptionID,
+                DHCP_CONST DHCP_OPTION * OptionInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetOptionInfo(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+                DHCP_OPTION_ID    OptionID,
+     DHCP_CONST DHCP_OPTION      *OptionInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetOptionInfo(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+                DHCP_OPTION_ID   OptionID,
+                LPDHCP_OPTION    *OptionInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumOptions(
+     _In_opt_z_ DHCP_CONST WCHAR    *ServerIpAddress,
+                DHCP_RESUME_HANDLE  *ResumeHandle,
+@@ -1966,13 +1967,13 @@ DhcpEnumOptions(
+                DWORD               *OptionsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpRemoveOption(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+                DHCP_OPTION_ID   OptionID
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetOptionValue(
+     _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
+                DHCP_OPTION_ID          OptionID,
+@@ -1980,7 +1981,7 @@ DhcpSetOptionValue(
+     DHCP_CONST DHCP_OPTION_DATA       *OptionValue
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetOptionValues(
+     _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
+     DHCP_CONST DHCP_OPTION_SCOPE_INFO  *ScopeInfo,
+@@ -1988,14 +1989,14 @@ DhcpSetOptionValues(
      );
  
  DWORD DHCP_API_FUNCTION
@@ -480,6 +595,63 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
                 DHCP_OPTION_ID         OptionID,
      DHCP_CONST DHCP_OPTION_SCOPE_INFO *ScopeInfo,
+     LPDHCP_OPTION_VALUE *OptionValue
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumOptionValues(
+     _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
+     DHCP_CONST DHCP_OPTION_SCOPE_INFO    *ScopeInfo,
+@@ -2006,7 +2007,7 @@ DhcpEnumOptionValues(
+                DWORD                     *OptionsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpRemoveOptionValue(
+     _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
+                DHCP_OPTION_ID          OptionID,
+@@ -2016,26 +2017,26 @@ DhcpRemoveOptionValue(
+ //
+ // Client APIs
+ //
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpCreateClientInfoVQ(
+     _In_opt_z_ DHCP_CONST WCHAR    *ServerIpAddress,
+     DHCP_CONST DHCP_CLIENT_INFO_VQ *ClientInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetClientInfoVQ(
+     _In_opt_z_ DHCP_CONST WCHAR    *ServerIpAddress,
+     DHCP_CONST DHCP_CLIENT_INFO_VQ *ClientInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetClientInfoVQ(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     DHCP_CONST DHCP_SEARCH_INFO *SearchInfo,
+     LPDHCP_CLIENT_INFO_VQ       *ClientInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumSubnetClientsVQ(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                DHCP_IP_ADDRESS              SubnetAddress,
+@@ -2046,7 +2047,7 @@ DhcpEnumSubnetClientsVQ(
+                DWORD                       *ClientsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumSubnetClientsFilterStatusInfo(
+     _In_opt_z_ DHCP_CONST WCHAR                       *ServerIpAddress,
+                DHCP_IP_ADDRESS                        SubnetAddress,
 @@ -2058,32 +2059,32 @@ DhcpEnumSubnetClientsFilterStatusInfo(
      );
  
@@ -518,6 +690,41 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
                 DHCP_IP_ADDRESS          SubnetAddress,
                 DHCP_RESUME_HANDLE       *ResumeHandle,
+@@ -2093,7 +2094,7 @@ DhcpEnumSubnetClients(
+                DWORD                    *ClientsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetClientOptions(
+     _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
+                DHCP_IP_ADDRESS     ClientIpAddress,
+@@ -2107,7 +2108,7 @@ DhcpGetMibInfo(
+     LPDHCP_MIB_INFO *MibInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerSetConfig(
+     _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
+                DWORD                     FieldsToSet,
+@@ -2115,14 +2116,14 @@ DhcpServerSetConfig(
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerGetConfig(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     LPDHCP_SERVER_CONFIG_INFO *ConfigInfo
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpScanDatabase(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+                DHCP_IP_ADDRESS   SubnetAddress,
 @@ -2131,12 +2132,12 @@ DhcpScanDatabase(
      );
  
@@ -533,6 +740,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_ LPWSTR  ServerIpAddress,
               LPDWORD MajorVersion,
               LPDWORD MinorVersion
+@@ -2145,7 +2146,7 @@ DhcpGetVersion(
+ 
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpAddSubnetElementV4(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                DHCP_IP_ADDRESS             SubnetAddress,
 @@ -2153,7 +2154,7 @@ DhcpAddSubnetElementV4(
      );
  
@@ -542,6 +758,144 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_ DHCP_CONST WCHAR                    *ServerIpAddress,
                 DHCP_IP_ADDRESS                     SubnetAddress,
                 DHCP_SUBNET_ELEMENT_TYPE            EnumElementType,
+@@ -2164,7 +2165,7 @@ DhcpEnumSubnetElementsV4(
+                DWORD                               *ElementsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpRemoveSubnetElementV4(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                DHCP_IP_ADDRESS             SubnetAddress,
+@@ -2173,21 +2174,21 @@ DhcpRemoveSubnetElementV4(
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpCreateClientInfoV4(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     DHCP_CONST DHCP_CLIENT_INFO_V4 *ClientInfo
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetClientInfoV4(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     DHCP_CONST DHCP_CLIENT_INFO_V4 *ClientInfo
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetClientInfoV4(
+     _In_opt_z_ DHCP_CONST WCHAR      *ServerIpAddress,
+     DHCP_CONST DHCP_SEARCH_INFO      *SearchInfo,
+@@ -2195,7 +2196,7 @@ DhcpGetClientInfoV4(
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumSubnetClientsV4(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                DHCP_IP_ADDRESS             SubnetAddress,
+@@ -2207,21 +2208,21 @@ DhcpEnumSubnetClientsV4(
+     );
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerSetConfigV4(
+     _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
+                DWORD                        FieldsToSet,
+                LPDHCP_SERVER_CONFIG_INFO_V4 ConfigInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerGetConfigV4(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     LPDHCP_SERVER_CONFIG_INFO_V4 *ConfigInfo
+     );
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpSetSuperScopeV4(
+     _In_opt_z_ DHCP_CONST WCHAR  *ServerIpAddress,
+     DHCP_CONST DHCP_IP_ADDRESS    SubnetAddress,
+@@ -2229,13 +2230,13 @@ DhcpSetSuperScopeV4(
+     DHCP_CONST BOOL               ChangeExisting
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpDeleteSuperScopeV4(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     _In_ DHCP_CONST LPWSTR      SuperScopeName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetSuperScopeInfoV4(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+     LPDHCP_SUPER_SCOPE_TABLE *SuperScopeTable
+@@ -2246,7 +2247,7 @@ DhcpGetSuperScopeInfoV4(
+ 
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumSubnetClientsV5(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                DHCP_IP_ADDRESS             SubnetAddress,
+@@ -2260,7 +2261,7 @@ DhcpEnumSubnetClientsV5(
+ 
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpCreateOptionV5(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2271,7 +2272,7 @@ DhcpCreateOptionV5(
+ ) ;
+ 
+ 
+-DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT if option does not exist
++_Windows_SupportedOS_Server2008_ DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT if option does not exist
+ DhcpSetOptionInfoV5(                              // Modify existing option's fields
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2282,7 +2283,7 @@ DhcpSetOptionInfoV5(                              // Modify existing option's fi
+ ) ;
+ 
+ 
+-DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT
++_Windows_SupportedOS_Server2008_ DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT
+ DhcpGetOptionInfoV5(                              // retrieve the information from off the mem structures
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2293,7 +2294,7 @@ DhcpGetOptionInfoV5(                              // retrieve the information fr
+ ) ;
+ 
+ 
+-DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT if option does not exist
++_Windows_SupportedOS_Server2008_ DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT if option does not exist
+ DhcpEnumOptionsV5(                                // enumerate the options defined
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2307,7 +2308,7 @@ DhcpEnumOptionsV5(                                // enumerate the options defin
+ ) ;
+ 
+ 
+-DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT if option not existent
++_Windows_SupportedOS_Server2008_ DWORD                                             // ERROR_DHCP_OPTION_NOT_PRESENT if option not existent
+ DhcpRemoveOptionV5(                               // remove the option definition from the registry
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
 @@ -2318,7 +2319,7 @@ DhcpRemoveOptionV5(                               // remove the option definitio
  
  
@@ -551,6 +905,42 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               IN      DHCP_OPTION_ID         OptionId,
+@@ -2329,7 +2330,7 @@ DhcpSetOptionValueV5(                             // replace or add a new option
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpSetOptionValuesV5(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2340,7 +2341,7 @@ DhcpSetOptionValuesV5(
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetOptionValueV5(                             // fetch the required option at required level
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2351,7 +2352,7 @@ DhcpGetOptionValueV5(                             // fetch the required option a
+              OUT     LPDHCP_OPTION_VALUE   *OptionValue
+ ) ;
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetOptionValueV6(                             // fetch the required option at required level
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2363,7 +2364,7 @@ DhcpGetOptionValueV6(                             // fetch the required option a
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpEnumOptionValuesV5(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
 @@ -2379,7 +2380,7 @@ DhcpEnumOptionValuesV5(
  
  
@@ -560,7 +950,61 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               IN      DHCP_OPTION_ID         OptionID,
-@@ -2443,7 +2444,7 @@ DhcpGetAllOptions(
+@@ -2389,7 +2390,7 @@ DhcpRemoveOptionValueV5(
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpCreateClass(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+@@ -2397,7 +2398,7 @@ DhcpCreateClass(
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpModifyClass(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+@@ -2405,7 +2406,7 @@ DhcpModifyClass(
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpDeleteClass(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+@@ -2413,7 +2414,7 @@ DhcpDeleteClass(
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetClassInfo(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+@@ -2422,7 +2423,7 @@ DhcpGetClassInfo(
+ ) ;
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpEnumClasses(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+@@ -2435,7 +2436,7 @@ DhcpEnumClasses(
+ 
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetAllOptions(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
+@@ -2443,13 +2444,13 @@ DhcpGetAllOptions(
  ) ;
  
  DWORD DHCP_API_FUNCTION
@@ -569,6 +1013,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_ IN       LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetAllOptionValues(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,
 @@ -2458,7 +2459,7 @@ DhcpGetAllOptionValues(
  ) ;
  
@@ -720,6 +1171,31 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_      LPWSTR                 ServerIpAddress,
            IN      DWORD                  Flags,
            IN      DHCP_OPTION_ID         OptionId,
+@@ -2645,21 +2646,21 @@ DhcpSetOptionValueV6(
+ 
+ 
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetSubnetInfoVQ(
+     _In_opt_z_ DHCP_CONST WCHAR      *ServerIpAddress,
+                DHCP_IP_ADDRESS       SubnetAddress,
+     _Out_      LPDHCP_SUBNET_INFO_VQ *SubnetInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpCreateSubnetVQ(
+     _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
+                DHCP_IP_ADDRESS          SubnetAddress,
+     _In_ DHCP_CONST DHCP_SUBNET_INFO_VQ *SubnetInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetSubnetInfoVQ(
+     _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
+                DHCP_IP_ADDRESS          SubnetAddress,
 @@ -2667,7 +2668,7 @@ DhcpSetSubnetInfoVQ(
      );
  
@@ -738,7 +1214,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      VOID
  );
  
-@@ -2694,7 +2695,7 @@ DhcpDsInit(
+@@ -2694,12 +2695,12 @@ DhcpDsInit(
  //DOC called exactly once for each process, and only at termination.  Note that
  //DOC it is safe to call this function even if DhcpDsInit does not succeed.
  VOID
@@ -747,7 +1223,39 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      VOID
  );
  
-@@ -2732,7 +2733,7 @@ DhcpServerQueryAttributes(                        // query multiple attributes
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpSetThreadOptions(                             // set options for current thread
+     IN      DWORD                  Flags,         // options, currently 0 or DHCP_FLAGS_DONT_ACCESS_DS
+     IN      LPVOID                 Reserved       // must be NULL, reserved for future
+@@ -2707,14 +2708,14 @@ DhcpSetThreadOptions(                             // set options for current thr
+ 
+ //DOC DhcpGetThreadOptions retrieves the current thread options as set by DhcpSetThreadOptions.
+ //DOC If none were set, the return value is zero.
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetThreadOptions(                             // get current thread options
+     OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
+     IN OUT  LPVOID                 Reserved       // must be NULL, reserved for future
+ );
+ 
+ 
+-DWORD                                             // Status code
++_Windows_SupportedOS_Server2008_ DWORD                                             // Status code
+ DhcpServerQueryAttribute(                         // get a server status
+     _In_opt_ IN      LPWSTR                 ServerIpAddr,  // String form of server IP
+              IN      ULONG                  dwReserved,    // reserved for future
+@@ -2722,7 +2723,7 @@ DhcpServerQueryAttribute(                         // get a server status
+              OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
+ );
+ 
+-DWORD                                             // Status code
++_Windows_SupportedOS_Server2008_ DWORD                                             // Status code
+ DhcpServerQueryAttributes(                        // query multiple attributes
+     _In_opt_ IN      LPWSTR                 ServerIpAddr,  // String form of server IP
+              IN      ULONG                  dwReserved,    // reserved for future
+@@ -2732,12 +2733,12 @@ DhcpServerQueryAttributes(                        // query multiple attributes
  );
  
  DWORD                                             // Status code
@@ -756,6 +1264,79 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_ IN      LPWSTR                 ServerIpAddr,  // String form of server IP
               IN      ULONG                  dwReserved     // reserved for future
  );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpAuditLogSetParams(                            // set some auditlogging params
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  Flags,         // currently must be zero
+@@ -2747,7 +2748,7 @@ DhcpAuditLogSetParams(                            // set some auditlogging param
+              IN      DWORD                  MinSpaceOnDisk     // mininum amt of free disk space
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpAuditLogGetParams(
+     _In_opt_        IN      LPWSTR                 ServerIpAddress,
+                     IN      DWORD                  Flags,
+@@ -2760,7 +2761,7 @@ DhcpAuditLogGetParams(
+ 
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpServerQueryDnsRegCredentials(
+     _In_opt_ IN              LPWSTR ServerIpAddress,
+              IN              ULONG  UnameSize, //in BYTES
+@@ -2777,7 +2778,7 @@ DhcpServerSetDnsRegCredentials(
+     _In_opt_ IN LPWSTR Passwd
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpServerSetDnsRegCredentialsV5(
+     _In_opt_ IN LPWSTR ServerIpAddress,
+     _In_opt_ IN LPWSTR Uname,
+@@ -2785,13 +2786,13 @@ DhcpServerSetDnsRegCredentialsV5(
+     _In_opt_ IN LPWSTR Passwd
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpServerBackupDatabase(
+     _In_opt_ IN LPWSTR ServerIpAddress,
+     _In_ IN LPWSTR Path
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpServerRestoreDatabase(
+     _In_opt_ IN LPWSTR ServerIpAddress,
+     _In_ IN LPWSTR Path
+@@ -2801,20 +2802,20 @@ DhcpServerRestoreDatabase(
+ //  All Quarantine related APIs
+ //
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerSetConfigVQ(
+     _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
+                DWORD                        FieldsToSet,
+                LPDHCP_SERVER_CONFIG_INFO_VQ ConfigInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerGetConfigVQ(
+     _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
+                LPDHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetServerSpecificStrings(
+     _In_opt_z_ DHCP_CONST WCHAR               *ServerIpAddress,
+                LPDHCP_SERVER_SPECIFIC_STRINGS *ServerSpecificStrings
 @@ -2826,21 +2827,21 @@ DhcpServerAuditlogParamsFree(
      );
  
@@ -825,6 +1406,130 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IPV6_ADDRESS           SubnetAddress,
                 DHCP_RESUME_IPV6_HANDLE     *ResumeHandle,
+@@ -2895,14 +2896,14 @@ DhcpEnumSubnetClientsV6(
+                DWORD                       *ClientsTotal
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerGetConfigV6(
+     _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
+                LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
+                LPDHCP_SERVER_CONFIG_INFO_V6 *ConfigInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpServerSetConfigV6(
+     _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
+                LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
+@@ -2910,70 +2911,70 @@ DhcpServerSetConfigV6(
+                LPDHCP_SERVER_CONFIG_INFO_V6 ConfigInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpSetSubnetInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
+                DHCP_IPV6_ADDRESS      SubnetAddress,    
+                LPDHCP_SUBNET_INFO_V6  SubnetInfo
+ );
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ DhcpGetMibInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR *  ServerIpAddress,
+                LPDHCP_MIB_INFO_V6 *MibInfo
+ );
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetServerBindingInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                ULONG                       Flags,
+                LPDHCPV6_BIND_ELEMENT_ARRAY *BindElementsInfo
+ );
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetServerBindingInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+                ULONG                       Flags,
+                LPDHCPV6_BIND_ELEMENT_ARRAY BindElementInfo
+ );
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetClientInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR    *ServerIpAddress,
+     DHCP_CONST DHCP_CLIENT_INFO_V6 *ClientInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetClientInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR      *ServerIpAddress,
+     DHCP_CONST DHCP_SEARCH_INFO_V6   *SearchInfo,
+                LPDHCP_CLIENT_INFO_V6 *ClientInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpDeleteClientInfoV6(
+     _In_opt_z_ DHCP_CONST WCHAR    *ServerIpAddress,
+     DHCP_CONST DHCP_SEARCH_INFO_V6 *ClientInfo
+     );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpCreateClassV6(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+              IN      LPDHCP_CLASS_INFO_V6   ClassInfo
+ );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpModifyClassV6(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+              IN      LPDHCP_CLASS_INFO_V6      ClassInfo
+ );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpDeleteClassV6(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+     _In_     IN      LPWSTR                 ClassName
+ );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpEnumClassesV6(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+              IN      DWORD                  ReservedMustBeZero,
+@@ -2984,21 +2985,21 @@ DhcpEnumClassesV6(
+              OUT     DWORD                 *nTotal
+ );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpSetSubnetDelayOffer (
+     _In_opt_ IN          LPWSTR             ServerIpAddress,
+              IN          DHCP_IP_ADDRESS    SubnetAddress,
+              IN          USHORT             TimeDelayInMilliseconds
+ );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetSubnetDelayOffer (
+     _In_opt_ IN          LPWSTR             ServerIpAddress,
+              IN          DHCP_IP_ADDRESS    SubnetAddress,
+              IN          USHORT *           TimeDelayInMilliseconds
+ );
+ 
+-DWORD DHCP_API_FUNCTION
++_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
+ DhcpGetMibInfoV5(
+ _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
+ OUT        LPDHCP_MIB_INFO_V5 *MibInfo
 @@ -3011,7 +3012,7 @@ _In_opt_ LPWSTR  pServer
  
  
@@ -875,7 +1580,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } FSM_STATE;
  
 -typedef struct _DHCP_FAILOVER_RELATIONSHIP
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_FAILOVER_RELATIONSHIP
++typedef struct  _DHCP_FAILOVER_RELATIONSHIP
  {
  
      DHCP_IP_ADDRESS            PrimaryServer;
@@ -884,7 +1589,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCP_FAILOVER_RELATIONSHIP_ARRAY
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_FAILOVER_RELATIONSHIP_ARRAY
++typedef struct  _DHCP_FAILOVER_RELATIONSHIP_ARRAY
  {
      DWORD                         NumElements;
  #if defined(MIDL_PASS)
@@ -893,7 +1598,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  
  
 -typedef struct _DHCPV4_FAILOVER_CLIENT_INFO {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCPV4_FAILOVER_CLIENT_INFO {
++typedef struct  _DHCPV4_FAILOVER_CLIENT_INFO {
      DHCP_IP_ADDRESS         ClientIpAddress;    // currently assigned IP address.
      DHCP_IP_MASK            SubnetMask;
      DHCP_CLIENT_UID         ClientHardwareAddress;
@@ -902,7 +1607,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCPV4_FAILOVER_CLIENT_INFO, *LPDHCPV4_FAILOVER_CLIENT_INFO;
  
 -typedef struct _DHCPV4_FAILOVER_CLIENT_INFO_ARRAY {
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCPV4_FAILOVER_CLIENT_INFO_ARRAY {
++typedef struct  _DHCPV4_FAILOVER_CLIENT_INFO_ARRAY {
      DWORD NumElements;
  #if defined(MIDL_PASS)
      [size_is(NumElements)]
@@ -911,7 +1616,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/W
  } DHCPV4_FAILOVER_CLIENT_INFO_EX, *LPDHCPV4_FAILOVER_CLIENT_INFO_EX;
  
 -typedef struct _DHCP_FAILOVER_STATISTICS
-+typedef struct _Windows_SupportedOS_Server2012_ _DHCP_FAILOVER_STATISTICS
++typedef struct  _DHCP_FAILOVER_STATISTICS
  {
      DWORD       NumAddr;
      DWORD       AddrFree;

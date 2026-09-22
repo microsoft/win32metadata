@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanihvtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanihvtypes.h
-index 3fcfea1ddd..1e7cb386ab 100644
+index 3fcfea1ddd..6b7a5fcd0a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanihvtypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanihvtypes.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 3fcfea1ddd..1e7cb386ab 100644
  // as may be needed by the IHVs
  typedef
 -struct _DOT11_MSSECURITY_SETTINGS
-+struct _Windows_SupportedOS_WindowsVista_ _DOT11_MSSECURITY_SETTINGS
++struct  _DOT11_MSSECURITY_SETTINGS
  {
     DOT11_AUTH_ALGORITHM dot11AuthAlgorithm;
     DOT11_CIPHER_ALGORITHM dot11CipherAlgorithm;
@@ -21,7 +21,7 @@ index 3fcfea1ddd..1e7cb386ab 100644
  
  typedef
 -struct _DOT11EXT_IHV_SSID_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _DOT11EXT_IHV_SSID_LIST
++struct  _DOT11EXT_IHV_SSID_LIST
  {
      ULONG                                   ulCount;
  #ifdef __midl
@@ -30,7 +30,7 @@ index 3fcfea1ddd..1e7cb386ab 100644
  // IHV profile.
  typedef
 -struct _DOT11EXT_IHV_PROFILE_PARAMS
-+struct _Windows_SupportedOS_WindowsVista_ _DOT11EXT_IHV_PROFILE_PARAMS
++struct  _DOT11EXT_IHV_PROFILE_PARAMS
  {
     PDOT11EXT_IHV_SSID_LIST      pSsidList;
     DOT11_BSS_TYPE               BssType;
@@ -39,7 +39,7 @@ index 3fcfea1ddd..1e7cb386ab 100644
  // for the UI extension
  typedef
 -struct _DOT11EXT_IHV_PARAMS
-+struct _Windows_SupportedOS_WindowsVista_ _DOT11EXT_IHV_PARAMS
++struct  _DOT11EXT_IHV_PARAMS
  {
     DOT11EXT_IHV_PROFILE_PARAMS  dot11ExtIhvProfileParams;
     WCHAR                        wstrProfileName[MS_MAX_PROFILE_NAME_LENGTH];

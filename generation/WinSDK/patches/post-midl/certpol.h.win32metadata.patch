@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h
+index 134c458f3b..1cbc19350d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -101,7 +102,7 @@ EXTERN_C const IID IID_ICertPolicy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("38bb5a00-7636-11d0-b413-00a0c91bbf8c")
++    MIDL_INTERFACE("38bb5a00-7636-11d0-b413-00a0c91bbf8c") _Windows_SupportedOS_Server2003_ 
+     ICertPolicy : public IDispatch
+     {
+     public:
+@@ -123,7 +124,7 @@ EXTERN_C const IID IID_ICertPolicy;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pstrDescription) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ShutDown( void) = 0;
+         
+@@ -301,7 +302,7 @@ EXTERN_C const IID IID_ICertPolicy2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3db4910e-8001-4bf1-aa1b-f43a808317a0")
++    MIDL_INTERFACE("3db4910e-8001-4bf1-aa1b-f43a808317a0") _Windows_SupportedOS_Server2003_ 
+     ICertPolicy2 : public ICertPolicy
+     {
+     public:

@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
+index b507083f3a..9319ad9734 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h
 @@ -142,6 +142,7 @@ extern "C"{
@@ -14,16 +15,124 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h b/generatio
  DEFINE_PROPERTYKEY(PKEY_AudioEndpointSettings_LaunchContract, 0x14242002, 0x0320, 0x4de4, 0x95, 0x55, 0xa7, 0xd8, 0x2b, 0x73, 0xc2, 0x86, 1);
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 -typedef struct tagDIRECTX_AUDIO_ACTIVATION_PARAMS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagDIRECTX_AUDIO_ACTIVATION_PARAMS
++typedef struct   tagDIRECTX_AUDIO_ACTIVATION_PARAMS
      {
      DWORD cbDirectXAudioActivationParams;
      GUID guidAudioSession;
+@@ -269,7 +270,7 @@ EXTERN_C const IID IID_IMMNotificationClient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7991EEC9-7E89-4D85-8390-6C703CEC60C0")
++    MIDL_INTERFACE("7991EEC9-7E89-4D85-8390-6C703CEC60C0") _Windows_SupportedOS_WindowsVista_ 
+     IMMNotificationClient : public IUnknown
+     {
+     public:
+@@ -277,7 +278,7 @@ EXTERN_C const IID IID_IMMNotificationClient;
+             /* [annotation][in] */ 
+             _In_  LPCWSTR pwstrDeviceId,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwNewState) = 0;
++            _Win32_AssociatedEnum_(DEVICE_STATE) _In_  DWORD dwNewState) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnDeviceAdded( 
+             /* [annotation][in] */ 
+@@ -424,7 +425,7 @@ EXTERN_C const IID IID_IMMDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D666063F-1587-4E43-81F1-B948E807363F")
++    MIDL_INTERFACE("D666063F-1587-4E43-81F1-B948E807363F") _Windows_SupportedOS_WindowsVista_ 
+     IMMDevice : public IUnknown
+     {
+     public:
+@@ -432,7 +433,7 @@ EXTERN_C const IID IID_IMMDevice;
+             /* [annotation][in] */ 
+             _In_  REFIID iid,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwClsCtx,
++            _Win32_AssociatedEnum_(CLSCTX) _In_  DWORD dwClsCtx,
+             /* [annotation][unique][in] */ 
+             _In_opt_  PROPVARIANT *pActivationParams,
+             /* [annotation][iid_is][out] */ 
+@@ -440,7 +441,7 @@ EXTERN_C const IID IID_IMMDevice;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OpenPropertyStore( 
+             /* [annotation][in] */ 
+-            _In_  DWORD stgmAccess,
++            _Win32_AssociatedEnum_(STGM) _In_  DWORD stgmAccess,
+             /* [annotation][out] */ 
+             _Out_  IPropertyStore **ppProperties) = 0;
+         
+@@ -450,7 +451,7 @@ EXTERN_C const IID IID_IMMDevice;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetState( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwState) = 0;
++            _Win32_AssociatedEnum_(DEVICE_STATE) _Out_  DWORD *pdwState) = 0;
+         
+     };
+     
+@@ -566,7 +567,7 @@ EXTERN_C const IID IID_IMMDeviceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0BD7A1BE-7A1A-44DB-8397-CC5392387B5E")
++    MIDL_INTERFACE("0BD7A1BE-7A1A-44DB-8397-CC5392387B5E") _Windows_SupportedOS_WindowsVista_ 
+     IMMDeviceCollection : public IUnknown
+     {
+     public:
+@@ -670,7 +671,7 @@ EXTERN_C const IID IID_IMMEndpoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1BE09788-6894-4089-8586-9A2A6C265AC5")
++    MIDL_INTERFACE("1BE09788-6894-4089-8586-9A2A6C265AC5") _Windows_SupportedOS_WindowsVista_ 
+     IMMEndpoint : public IUnknown
+     {
+     public:
+@@ -757,7 +758,7 @@ EXTERN_C const IID IID_IMMDeviceEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A95664D2-9614-4F35-A746-DE8DB63617E6")
++    MIDL_INTERFACE("A95664D2-9614-4F35-A746-DE8DB63617E6") _Windows_SupportedOS_WindowsVista_ 
+     IMMDeviceEnumerator : public IUnknown
+     {
+     public:
+@@ -765,7 +766,7 @@ EXTERN_C const IID IID_IMMDeviceEnumerator;
+             /* [annotation][in] */ 
+             _In_  EDataFlow dataFlow,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwStateMask,
++            _Win32_AssociatedEnum_(DEVICE_STATE) _In_  DWORD dwStateMask,
+             /* [annotation][out] */ 
+             _Out_  IMMDeviceCollection **ppDevices) = 0;
+         
+@@ -1042,7 +1043,7 @@ EXTERN_C const IID IID_IActivateAudioInterfaceCompletionHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("41D949AB-9862-444A-80F6-C261334DA5EB")
++    MIDL_INTERFACE("41D949AB-9862-444A-80F6-C261334DA5EB") _Windows_SupportedOS_Windows8_ 
+     IActivateAudioInterfaceCompletionHandler : public IUnknown
+     {
+     public:
+@@ -1129,7 +1130,7 @@ EXTERN_C const IID IID_IActivateAudioInterfaceAsyncOperation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("72A22D78-CDE4-431D-B8CC-843A71199B6D")
++    MIDL_INTERFACE("72A22D78-CDE4-431D-B8CC-843A71199B6D") _Windows_SupportedOS_Windows8_ 
+     IActivateAudioInterfaceAsyncOperation : public IUnknown
+     {
+     public:
 @@ -1222,7 +1223,7 @@ EXTERN_C const IID IID_IActivateAudioInterfaceAsyncOperation;
  // * activation parameters specific to the interface being activated
  // and asynchronously returns a pointer to the specified interface
  // ----------------------------------------------------------------------
 -STDAPI ActivateAudioInterfaceAsync(
-+STDAPI _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ActivateAudioInterfaceAsync(
++_Windows_SupportedOS_Windows8_ STDAPI   ActivateAudioInterfaceAsync(
      _In_ LPCWSTR deviceInterfacePath,
      _In_ REFIID riid,
      _In_opt_ PROPVARIANT *activationParams,
@@ -32,7 +141,37 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmdeviceapi.h b/generatio
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 -typedef /* [public] */ struct __MIDL___MIDL_itf_mmdeviceapi_0000_0008_0001
-+typedef /* [public] */ struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ __MIDL___MIDL_itf_mmdeviceapi_0000_0008_0001
++typedef /* [public] */ struct   __MIDL___MIDL_itf_mmdeviceapi_0000_0008_0001
      {
      LPARAM AddPageParam;
      IMMDevice *pEndpoint;
+@@ -1570,6 +1571,29 @@ extern RPC_IF_HANDLE __MIDL_itf_mmdeviceapi_0000_0011_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DEVICE_STATE_ACTIVE")
++#undef DEVICE_STATE_ACTIVE
++#pragma push_macro("DEVICE_STATE_DISABLED")
++#undef DEVICE_STATE_DISABLED
++#pragma push_macro("DEVICE_STATE_NOTPRESENT")
++#undef DEVICE_STATE_NOTPRESENT
++#pragma push_macro("DEVICE_STATE_UNPLUGGED")
++#undef DEVICE_STATE_UNPLUGGED
++enum DEVICE_STATE : unsigned int
++{
++    DEVICE_STATE_ACTIVE = 1U,
++    DEVICE_STATE_DISABLED = 2U,
++    DEVICE_STATE_NOTPRESENT = 4U,
++    DEVICE_STATE_UNPLUGGED = 8U,
++};
++#pragma pop_macro("DEVICE_STATE_UNPLUGGED")
++#pragma pop_macro("DEVICE_STATE_NOTPRESENT")
++#pragma pop_macro("DEVICE_STATE_DISABLED")
++#pragma pop_macro("DEVICE_STATE_ACTIVE")
++#endif
++
+ #endif
+ 
+ 

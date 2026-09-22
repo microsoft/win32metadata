@@ -1,0 +1,129 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
+index 09088fa285..4ccea37bf0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*+--------------------------------------------------------------------------
+ 
+  Microsoft Windows
+@@ -75,7 +76,7 @@ extern "C" {
+ 
+ typedef struct _SI_OBJECT_INFO
+ {
+-    DWORD       dwFlags;
++    _Win32_AssociatedEnum_(SI_OBJECT_INFO_FLAGS) DWORD       dwFlags;
+     HINSTANCE   hInstance;          // resources (e.g. strings) reside here
+     LPWSTR      pszServerName;      // must be present
+     LPWSTR      pszObjectName;      // must be present
+@@ -147,7 +148,7 @@ typedef struct _SI_ACCESS
+ typedef struct _SI_INHERIT_TYPE
+ {
+     const GUID *pguid;
+-    ULONG       dwFlags;
++    _Win32_AssociatedEnum_(ACE_FLAGS) ULONG       dwFlags;
+     LPCWSTR     pszName;            // may be resource ID
+ } SI_INHERIT_TYPE, *PSI_INHERIT_TYPE;
+ 
+@@ -419,12 +420,12 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
+ EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb, 0xb0, 0xe1, 0x2, 0x55, 0xf2, 0xd);
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-HPROPSHEETPAGE ACLUIAPI CreateSecurityPage(_In_ LPSECURITYINFO psi );
+-BOOL ACLUIAPI EditSecurity(_In_ HWND hwndOwner,
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) HPROPSHEETPAGE ACLUIAPI CreateSecurityPage(_In_ LPSECURITYINFO psi );
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL ACLUIAPI EditSecurity(_In_ HWND hwndOwner,
+                            _In_ LPSECURITYINFO psi );
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-HRESULT ACLUIAPI EditSecurityAdvanced(_In_ HWND hwndOwner,
++_Windows_SupportedOS_WindowsVista_ HRESULT ACLUIAPI EditSecurityAdvanced(_In_ HWND hwndOwner,
+                                       _In_ LPSECURITYINFO psi,
+                                       _In_ SI_PAGE_TYPE   uSIPage );
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+@@ -444,4 +445,85 @@ HRESULT ACLUIAPI EditSecurityAdvanced(_In_ HWND hwndOwner,
+ #else
+ #pragma warning(default:4001)
+ #endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SI_ADVANCED")
++#undef SI_ADVANCED
++#pragma push_macro("SI_EDIT_AUDITS")
++#undef SI_EDIT_AUDITS
++#pragma push_macro("SI_EDIT_PROPERTIES")
++#undef SI_EDIT_PROPERTIES
++enum [[clang::flag_enum]] SECURITY_INFO_PAGE_FLAGS : unsigned int
++{
++    SI_ADVANCED = 16U,
++    SI_EDIT_AUDITS = 2U,
++    SI_EDIT_PROPERTIES = 128U,
++};
++#pragma pop_macro("SI_EDIT_PROPERTIES")
++#pragma pop_macro("SI_EDIT_AUDITS")
++#pragma pop_macro("SI_ADVANCED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SI_AUDITS_ELEVATION_REQUIRED")
++#undef SI_AUDITS_ELEVATION_REQUIRED
++#pragma push_macro("SI_DISABLE_DENY_ACE")
++#undef SI_DISABLE_DENY_ACE
++#pragma push_macro("SI_EDIT_EFFECTIVE")
++#undef SI_EDIT_EFFECTIVE
++#pragma push_macro("SI_ENABLE_CENTRAL_POLICY")
++#undef SI_ENABLE_CENTRAL_POLICY
++#pragma push_macro("SI_ENABLE_EDIT_ATTRIBUTE_CONDITION")
++#undef SI_ENABLE_EDIT_ATTRIBUTE_CONDITION
++#pragma push_macro("SI_MAY_WRITE")
++#undef SI_MAY_WRITE
++#pragma push_macro("SI_NO_ADDITIONAL_PERMISSION")
++#undef SI_NO_ADDITIONAL_PERMISSION
++#pragma push_macro("SI_OWNER_ELEVATION_REQUIRED")
++#undef SI_OWNER_ELEVATION_REQUIRED
++#pragma push_macro("SI_PERMS_ELEVATION_REQUIRED")
++#undef SI_PERMS_ELEVATION_REQUIRED
++#pragma push_macro("SI_RESET_DACL")
++#undef SI_RESET_DACL
++#pragma push_macro("SI_RESET_OWNER")
++#undef SI_RESET_OWNER
++#pragma push_macro("SI_RESET_SACL")
++#undef SI_RESET_SACL
++#pragma push_macro("SI_SCOPE_ELEVATION_REQUIRED")
++#undef SI_SCOPE_ELEVATION_REQUIRED
++#pragma push_macro("SI_VIEW_ONLY")
++#undef SI_VIEW_ONLY
++enum [[clang::flag_enum]] SI_OBJECT_INFO_FLAGS : unsigned int
++{
++    SI_AUDITS_ELEVATION_REQUIRED = 33554432U,
++    SI_DISABLE_DENY_ACE = 2147483648U,
++    SI_EDIT_EFFECTIVE = 131072U,
++    SI_ENABLE_CENTRAL_POLICY = 1073741824U,
++    SI_ENABLE_EDIT_ATTRIBUTE_CONDITION = 536870912U,
++    SI_MAY_WRITE = 268435456U,
++    SI_NO_ADDITIONAL_PERMISSION = 2097152U,
++    SI_OWNER_ELEVATION_REQUIRED = 67108864U,
++    SI_PERMS_ELEVATION_REQUIRED = 16777216U,
++    SI_RESET_DACL = 262144U,
++    SI_RESET_OWNER = 1048576U,
++    SI_RESET_SACL = 524288U,
++    SI_SCOPE_ELEVATION_REQUIRED = 134217728U,
++    SI_VIEW_ONLY = 4194304U,
++};
++#pragma pop_macro("SI_VIEW_ONLY")
++#pragma pop_macro("SI_SCOPE_ELEVATION_REQUIRED")
++#pragma pop_macro("SI_RESET_SACL")
++#pragma pop_macro("SI_RESET_OWNER")
++#pragma pop_macro("SI_RESET_DACL")
++#pragma pop_macro("SI_PERMS_ELEVATION_REQUIRED")
++#pragma pop_macro("SI_OWNER_ELEVATION_REQUIRED")
++#pragma pop_macro("SI_NO_ADDITIONAL_PERMISSION")
++#pragma pop_macro("SI_MAY_WRITE")
++#pragma pop_macro("SI_ENABLE_EDIT_ATTRIBUTE_CONDITION")
++#pragma pop_macro("SI_ENABLE_CENTRAL_POLICY")
++#pragma pop_macro("SI_EDIT_EFFECTIVE")
++#pragma pop_macro("SI_DISABLE_DENY_ACE")
++#pragma pop_macro("SI_AUDITS_ELEVATION_REQUIRED")
++#endif
++
+ #endif

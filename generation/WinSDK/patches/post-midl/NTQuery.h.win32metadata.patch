@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h
-index 0875971291..0fe9893d58 100644
+index 0875971291..6ae00f8806 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h
 @@ -16,6 +16,7 @@
@@ -14,8 +14,8 @@ index 0875971291..0fe9893d58 100644
  // Minimal support for persistent handlers.
  //
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  STDAPI LoadIFilter( PCWSTR pwcsPath,
                      _In_ IUnknown * pUnkOuter,
                      _Outptr_ void ** ppIUnk );
@@ -23,14 +23,14 @@ index 0875971291..0fe9893d58 100644
                        REFIID riid,
                        _Outptr_ void ** ppIUnk );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  STDAPI BindIFilterFromStorage(_In_ IStorage * pStg,
                                _In_ IUnknown * pUnkOuter,
                                _Outptr_ void ** ppIUnk );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  STDAPI BindIFilterFromStream(_In_ IStream * pStm,
                               _In_ IUnknown * pUnkOuter,
                               _Outptr_ void ** ppIUnk );
@@ -48,7 +48,7 @@ index 0875971291..0fe9893d58 100644
  #define CI_STATE_DEFINED
  #include <pshpack4.h>
 -typedef struct  _CI_STATE
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_  _CI_STATE
++typedef struct    _CI_STATE
      {
      DWORD cbStruct;
      DWORD cWordList;

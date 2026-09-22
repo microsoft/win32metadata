@@ -1,0 +1,85 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
+index 622f492e8e..b6e750f242 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -235,7 +236,7 @@ EXTERN_C const IID IID_ITaskTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("148BD52B-A2AB-11CE-B11F-00AA00530503")
++    MIDL_INTERFACE("148BD52B-A2AB-11CE-B11F-00AA00530503") _Windows_SupportedOS_Windows2000_ 
+     ITaskTrigger : public IUnknown
+     {
+     public:
+@@ -359,7 +360,7 @@ EXTERN_C const IID IID_IScheduledWorkItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a6b952f0-a4b1-11d0-997d-00aa006887ec")
++    MIDL_INTERFACE("a6b952f0-a4b1-11d0-997d-00aa006887ec") _Windows_SupportedOS_Windows2000_ 
+     IScheduledWorkItem : public IUnknown
+     {
+     public:
+@@ -861,7 +862,7 @@ EXTERN_C const IID IID_ITask;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("148BD524-A2AB-11CE-B11F-00AA00530503")
++    MIDL_INTERFACE("148BD524-A2AB-11CE-B11F-00AA00530503") _Windows_SupportedOS_Windows2000_ 
+     ITask : public IScheduledWorkItem
+     {
+     public:
+@@ -1384,10 +1385,10 @@ EXTERN_C const IID IID_IEnumWorkItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("148BD528-A2AB-11CE-B11F-00AA00530503")
++    MIDL_INTERFACE("148BD528-A2AB-11CE-B11F-00AA00530503") _Windows_SupportedOS_Windows2000_ 
+     IEnumWorkItems : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+@@ -1396,7 +1397,7 @@ EXTERN_C const IID IID_IEnumWorkItems;
+             /* [annotation][out] */ 
+             _Out_  ULONG *pceltFetched) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt) = 0;
+         
+@@ -1525,7 +1526,7 @@ EXTERN_C const IID IID_ITaskScheduler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("148BD527-A2AB-11CE-B11F-00AA00530503")
++    MIDL_INTERFACE("148BD527-A2AB-11CE-B11F-00AA00530503") _Windows_SupportedOS_Windows2000_ 
+     ITaskScheduler : public IUnknown
+     {
+     public:
+@@ -1762,7 +1763,7 @@ EXTERN_C const IID IID_IProvideTaskPage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4086658a-cbbb-11cf-b604-00c04fd8d565")
++    MIDL_INTERFACE("4086658a-cbbb-11cf-b604-00c04fd8d565") _Windows_SupportedOS_Windows2000_ 
+     IProvideTaskPage : public IUnknown
+     {
+     public:
+@@ -1772,7 +1773,7 @@ EXTERN_C const IID IID_IProvideTaskPage;
+             /* [annotation][in] */ 
+             _In_  BOOL fPersistChanges,
+             /* [annotation][out] */ 
+-            _Out_  HPROPSHEETPAGE *phPage) = 0;
++            _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) _Out_  HPROPSHEETPAGE *phPage) = 0;
+         
+     };
+     

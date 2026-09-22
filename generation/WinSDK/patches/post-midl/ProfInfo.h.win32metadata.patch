@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h b/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h
-index 1d3282510e..04b8f13e55 100644
+index 1d3282510e..2b07c5c819 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 1d3282510e..04b8f13e55 100644
  #endif  // __midl
  
 -typedef struct _PROFILEINFOA {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _PROFILEINFOA {
++typedef struct   _PROFILEINFOA {
      DWORD       dwSize;                 // Set to sizeof(PROFILEINFO) before calling
      DWORD       dwFlags;                // See PI_ flags defined in userenv.h
      MIDL_STRING LPSTR       lpUserName;             // User name (required)
@@ -21,7 +21,7 @@ index 1d3282510e..04b8f13e55 100644
  #endif
      } PROFILEINFOA, FAR * LPPROFILEINFOA;
 -typedef struct _PROFILEINFOW {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _PROFILEINFOW {
++typedef struct   _PROFILEINFOW {
      DWORD       dwSize;                 // Set to sizeof(PROFILEINFO) before calling
      DWORD       dwFlags;                // See PI_ flags defined in userenv.h
      MIDL_STRING LPWSTR      lpUserName;             // User name (required)

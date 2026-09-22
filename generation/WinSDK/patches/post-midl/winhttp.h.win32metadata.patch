@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+index ddcdcb381a..f2eae3f2e2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -9,12 +10,21 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -196,7 +197,7 @@ typedef LPURL_COMPONENTS LPURL_COMPONENTSW;
+ 
+ typedef struct _WINHTTP_PROXY_INFO
+ {
+-    DWORD  dwAccessType;      // see WINHTTP_ACCESS_* types below
++    _Win32_AssociatedEnum_(WINHTTP_ACCESS_TYPE) DWORD  dwAccessType;      // see WINHTTP_ACCESS_* types below
+     LPWSTR lpszProxy;         // proxy server list
+     LPWSTR lpszProxyBypass;   // proxy bypass list
+ } WINHTTP_PROXY_INFO, *LPWINHTTP_PROXY_INFO, *PWINHTTP_PROXY_INFO;
 @@ -249,7 +250,7 @@ typedef struct _WINHTTP_AUTOPROXY_OPTIONS
  // see WinHttpGetProxyForUrlEx and WinHttpGetProxyResult, use WinHttpFreeProxyResult to free its members.
  //
  
 -typedef struct _WINHTTP_PROXY_RESULT_ENTRY
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WINHTTP_PROXY_RESULT_ENTRY
++typedef struct   _WINHTTP_PROXY_RESULT_ENTRY
  {
      BOOL            fProxy;                // Is this a proxy or DIRECT?
      BOOL            fBypass;               // If DIRECT, is it bypassing a proxy (intranet) or is all traffic DIRECT (internet)
@@ -23,30 +33,54 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  } WINHTTP_PROXY_RESULT_ENTRY;
  
 -typedef struct _WINHTTP_PROXY_RESULT
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WINHTTP_PROXY_RESULT
++typedef struct   _WINHTTP_PROXY_RESULT
  {
      DWORD cEntries;
      WINHTTP_PROXY_RESULT_ENTRY *pEntries;
-@@ -939,7 +940,7 @@ typedef struct _WINHTTP_FAILED_CONNECTION_RETRIES
+@@ -939,24 +940,24 @@ typedef struct _WINHTTP_FAILED_CONNECTION_RETRIES
  #define WINHTTP_ENABLE_SPN_SERVER_PORT            0x00000001
  #define WINHTTP_OPTION_SPN_MASK                   WINHTTP_ENABLE_SPN_SERVER_PORT
  
 -typedef struct tagWINHTTP_CREDS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWINHTTP_CREDS
++typedef struct   tagWINHTTP_CREDS
  {
      LPSTR lpszUserName;
      LPSTR lpszPassword;
-@@ -951,7 +952,7 @@ typedef struct tagWINHTTP_CREDS
+     LPSTR lpszRealm;
+-    DWORD dwAuthScheme;
++    _Win32_AssociatedEnum_(WINHTTP_CREDS_AUTHSCHEME) DWORD dwAuthScheme;
+     LPSTR lpszHostName;
+     DWORD dwPort;
+ } WINHTTP_CREDS, *PWINHTTP_CREDS;
  
  // structure for WINHTTP_OPTION_GLOBAL_SERVER_CREDS and
  // WINHTTP_OPTION_GLOBAL_PROXY_CREDS
 -typedef struct tagWINHTTP_CREDS_EX
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWINHTTP_CREDS_EX
++typedef struct   tagWINHTTP_CREDS_EX
  {
      LPSTR lpszUserName;
      LPSTR lpszPassword;
-@@ -1598,7 +1599,7 @@ WinHttpSetStatusCallback
- WINHTTPAPI
+     LPSTR lpszRealm;
+-    DWORD dwAuthScheme;
++    _Win32_AssociatedEnum_(WINHTTP_CREDS_AUTHSCHEME) DWORD dwAuthScheme;
+     LPSTR lpszHostName;
+     DWORD dwPort;
+     LPSTR lpszUrl;
+@@ -1584,7 +1585,7 @@ typedef struct _WINHTTP_CURRENT_USER_IE_PROXY_CONFIG
+ // prototypes
+ //
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
+ WINHTTP_STATUS_CALLBACK
+ WINAPI
+ WinHttpSetStatusCallback
+@@ -1595,28 +1596,28 @@ WinHttpSetStatusCallback
+     IN DWORD_PTR dwReserved
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpTimeFromSystemTime
@@ -54,8 +88,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      _In_ CONST SYSTEMTIME *pst,  // input GMT time
      _Out_writes_bytes_(WINHTTP_TIME_FORMAT_BUFSIZE) LPWSTR pwszTime // output string buffer
-@@ -1607,7 +1608,7 @@ WinHttpTimeFromSystemTime
- WINHTTPAPI
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpTimeToSystemTime
@@ -63,8 +99,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      _In_z_ LPCWSTR pwszTime,        // NULL terminated string
      _Out_ SYSTEMTIME *pst           // output in GMT time
-@@ -1616,7 +1617,7 @@ WinHttpTimeToSystemTime
- WINHTTPAPI
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpCrackUrl
@@ -72,7 +110,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      _In_reads_(dwUrlLength) LPCWSTR pwszUrl,
      _In_ DWORD dwUrlLength,
-@@ -1628,7 +1629,7 @@ _Success_(return != FALSE)
+@@ -1624,14 +1625,14 @@ WinHttpCrackUrl
+     _Inout_ LPURL_COMPONENTS lpUrlComponents
+ );
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return != FALSE)
  WINHTTPAPI
  BOOL
  WINAPI
@@ -80,20 +123,45 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 +_Win32_SetLastError_ WinHttpCreateUrl
  (
      _In_ LPURL_COMPONENTS lpUrlComponents,
-     _In_ DWORD dwFlags,
-@@ -1644,8 +1645,8 @@ WinHttpCreateUrl
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(WIN_HTTP_CREATE_URL_FLAGS) _In_ DWORD dwFlags,
+     _Out_writes_to_opt_(*pdwUrlLength, *pdwUrlLength) LPWSTR pwszUrl,
+     _Inout_ LPDWORD pdwUrlLength
+ );
+@@ -1642,10 +1643,10 @@ WinHttpCreateUrl
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
+-WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
  
 -WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
 -WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
-+WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
-+WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
-@@ -1668,7 +1669,7 @@ WinHttpOpen
- WINHTTPAPI
+@@ -1653,27 +1654,27 @@ WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INF
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
+ HINTERNET
+ WINAPI
+ WinHttpOpen
+ (
+     _In_opt_z_ LPCWSTR pszAgentW,
+-    _In_ DWORD dwAccessType,
++    _Win32_AssociatedEnum_(WINHTTP_ACCESS_TYPE) _In_ DWORD dwAccessType,
+     _In_opt_z_ LPCWSTR pszProxyW,
+     _In_opt_z_ LPCWSTR pszProxyBypassW,
+     _In_ DWORD dwFlags
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpCloseHandle
@@ -101,8 +169,18 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hInternet
  );
-@@ -1687,7 +1688,7 @@ WinHttpConnect
- WINHTTPAPI
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
+ HINTERNET
+ WINAPI
+ WinHttpConnect
+@@ -1684,10 +1685,10 @@ WinHttpConnect
+     IN DWORD dwReserved
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpReadData
@@ -110,8 +188,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hRequest,
      _Out_writes_bytes_to_(dwNumberOfBytesToRead, *lpdwNumberOfBytesRead) __out_data_source(NETWORK) LPVOID lpBuffer,
-@@ -1712,7 +1713,7 @@ WinHttpReadDataEx
- WINHTTPAPI
+@@ -1709,10 +1710,10 @@ WinHttpReadDataEx
+     _In_reads_bytes_opt_(cbProperty) PVOID pvProperty
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpWriteData
@@ -119,8 +201,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hRequest,
      _In_reads_bytes_opt_(dwNumberOfBytesToWrite) LPCVOID lpBuffer,
-@@ -1723,7 +1724,7 @@ WinHttpWriteData
- WINHTTPAPI
+@@ -1720,20 +1721,20 @@ WinHttpWriteData
+     OUT LPDWORD lpdwNumberOfBytesWritten
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpQueryDataAvailable
@@ -128,7 +214,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hRequest,
      __out_data_source(NETWORK) LPDWORD lpdwNumberOfBytesAvailable
-@@ -1733,7 +1734,7 @@ _Success_(return != FALSE)
+ );
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return != FALSE)
  WINHTTPAPI
  BOOL
  WINAPI
@@ -137,8 +226,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hInternet,
      IN DWORD dwOption,
-@@ -1744,7 +1745,7 @@ WinHttpQueryOption
- WINHTTPAPI
+@@ -1741,10 +1742,10 @@ WinHttpQueryOption
+     IN OUT LPDWORD lpdwBufferLength
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpSetOption
@@ -146,8 +239,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      _In_opt_ HINTERNET hInternet,
      _In_ DWORD dwOption,
-@@ -1770,7 +1771,7 @@ WinHttpSetOption
- WINHTTPAPI
+@@ -1767,10 +1768,10 @@ WinHttpSetOption
+     _In_ DWORD dwBufferLength
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpSetTimeouts
@@ -155,8 +252,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET    hInternet,           // Session/Request handle.
      IN int          nResolveTimeout,
-@@ -1824,7 +1825,7 @@ WinHttpOpenRequest
- WINHTTPAPI
+@@ -1807,7 +1808,7 @@ WinHttpIsHostInProxyBypassList
+ // prototypes
+ //
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
+ HINTERNET
+ WINAPI
+ WinHttpOpenRequest
+@@ -1818,13 +1819,13 @@ WinHttpOpenRequest
+     IN LPCWSTR pwszVersion,
+     IN LPCWSTR pwszReferrer OPTIONAL,
+     IN LPCWSTR FAR * ppwszAcceptTypes OPTIONAL,
+-    IN DWORD dwFlags
++    _Win32_AssociatedEnum_(WINHTTP_OPEN_REQUEST_FLAGS) IN DWORD dwFlags
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpAddRequestHeaders
@@ -164,8 +278,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hRequest,
      _When_(dwHeadersLength == (DWORD)-1, _In_z_)
-@@ -1850,7 +1851,7 @@ WinHttpAddRequestHeadersEx
- WINHTTPAPI
+@@ -1847,10 +1848,10 @@ WinHttpAddRequestHeadersEx
+     _In_reads_(cHeaders) WINHTTP_EXTENDED_HEADER *pHeaders
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpSendRequest
@@ -173,8 +291,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hRequest,
      _In_reads_opt_(dwHeadersLength) LPCWSTR lpszHeaders,
-@@ -1864,7 +1865,7 @@ WinHttpSendRequest
- WINHTTPAPI
+@@ -1861,10 +1862,10 @@ WinHttpSendRequest
+     IN DWORD_PTR dwContext
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpSetCredentials
@@ -182,8 +304,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET   hRequest,        // HINTERNET handle returned by WinHttpOpenRequest.
      IN DWORD       AuthTargets,     // Only WINHTTP_AUTH_TARGET_SERVER and
-@@ -1884,7 +1885,7 @@ WinHttpSetCredentials
- WINHTTPAPI
+@@ -1881,10 +1882,10 @@ WinHttpSetCredentials
+     IN LPVOID      pAuthParams
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpQueryAuthSchemes
@@ -191,8 +317,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN  HINTERNET   hRequest,             // HINTERNET handle returned by WinHttpOpenRequest
      OUT LPDWORD     lpdwSupportedSchemes, // a bitmap of available Authentication Schemes
-@@ -1917,7 +1918,7 @@ WinHttpQueryAuthParams
- WINHTTPAPI
+@@ -1914,20 +1915,20 @@ WinHttpQueryAuthParams
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpReceiveResponse
@@ -200,7 +330,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN HINTERNET hRequest,
      IN LPVOID lpReserved
-@@ -1927,7 +1928,7 @@ _Success_(return != FALSE)
+ );
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return != FALSE)
  WINHTTPAPI
  BOOL
  WINAPI
@@ -209,8 +342,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN     HINTERNET hRequest,
      IN     DWORD     dwInfoLevel,
-@@ -1982,7 +1983,7 @@ WinHttpFreeQueryConnectionGroupResult
- WINHTTPAPI
+@@ -1979,19 +1980,19 @@ WinHttpFreeQueryConnectionGroupResult
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpDetectAutoProxyConfigUrl
@@ -218,8 +355,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      DWORD dwAutoDetectFlags,
      _Outptr_result_maybenull_ LPWSTR * ppwstrAutoConfigUrl
-@@ -1991,7 +1992,7 @@ WinHttpDetectAutoProxyConfigUrl
- WINHTTPAPI
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpGetProxyForUrl
@@ -227,53 +366,73 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  (
      IN  HINTERNET                   hSession,
      IN  LPCWSTR                     lpcwszUrl,
-@@ -2002,7 +2003,7 @@ WinHttpGetProxyForUrl
- WINHTTPAPI
+@@ -1999,19 +2000,19 @@ WinHttpGetProxyForUrl
+     OUT WINHTTP_PROXY_INFO *        pProxyInfo
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpCreateProxyResolver
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpCreateProxyResolver
++  WinHttpCreateProxyResolver
  (
      _In_ HINTERNET hSession,
      _Out_ HINTERNET *phResolver
-@@ -2011,7 +2012,7 @@ WinHttpCreateProxyResolver
- WINHTTPAPI
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpGetProxyForUrlEx
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpGetProxyForUrlEx
++  WinHttpGetProxyForUrlEx
  (
      _In_ HINTERNET hResolver,
      _In_ PCWSTR pcwszUrl,
-@@ -2035,7 +2036,7 @@ WinHttpGetProxyForUrlEx2
- WINHTTPAPI
+@@ -2032,10 +2033,10 @@ WinHttpGetProxyForUrlEx2
+     _In_opt_ DWORD_PTR pContext
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpGetProxyResult
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpGetProxyResult
++  WinHttpGetProxyResult
  (
      _In_ HINTERNET hResolver,
      _Out_ WINHTTP_PROXY_RESULT *pProxyResult
-@@ -2053,7 +2054,7 @@ WinHttpGetProxyResultEx
- WINHTTPAPI
+@@ -2050,10 +2051,10 @@ WinHttpGetProxyResultEx
+     _Out_ WINHTTP_PROXY_RESULT_EX *pProxyResultEx
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  VOID
  WINAPI
 -WinHttpFreeProxyResult
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpFreeProxyResult
++  WinHttpFreeProxyResult
  (
      _Inout_ WINHTTP_PROXY_RESULT *pProxyResult
  );
-@@ -2069,7 +2070,7 @@ WinHttpFreeProxyResultEx
- WINHTTPAPI
+@@ -2066,19 +2067,19 @@ WinHttpFreeProxyResultEx
+     _Inout_ WINHTTP_PROXY_RESULT_EX *pProxyResultEx
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpResetAutoProxy
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpResetAutoProxy
++  WinHttpResetAutoProxy
  (
      _In_ HINTERNET hSession,
      _In_ DWORD dwFlags
-@@ -2078,7 +2079,7 @@ WinHttpResetAutoProxy
- WINHTTPAPI
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI
  BOOL
  WINAPI
 -WinHttpGetIEProxyConfigForCurrentUser
@@ -286,68 +445,189 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  } WINHTTP_WEB_SOCKET_CLOSE_STATUS;
  
 -typedef struct _WINHTTP_WEB_SOCKET_ASYNC_RESULT
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WINHTTP_WEB_SOCKET_ASYNC_RESULT
++typedef struct   _WINHTTP_WEB_SOCKET_ASYNC_RESULT
  {
      WINHTTP_ASYNC_RESULT AsyncResult;
      WINHTTP_WEB_SOCKET_OPERATION Operation;
  } WINHTTP_WEB_SOCKET_ASYNC_RESULT;
  
 -typedef struct _WINHTTP_WEB_SOCKET_STATUS
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _WINHTTP_WEB_SOCKET_STATUS
++typedef struct   _WINHTTP_WEB_SOCKET_STATUS
  {
      DWORD dwBytesTransferred;
      WINHTTP_WEB_SOCKET_BUFFER_TYPE eBufferType;
-@@ -2184,7 +2185,7 @@ typedef struct _WINHTTP_WEB_SOCKET_STATUS
- WINHTTPAPI
+@@ -2181,19 +2182,19 @@ typedef struct _WINHTTP_WEB_SOCKET_STATUS
+ #define WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH 123
+ #define WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE 15000
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINHTTPAPI
  HINTERNET
  WINAPI
 -WinHttpWebSocketCompleteUpgrade
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpWebSocketCompleteUpgrade
++  WinHttpWebSocketCompleteUpgrade
  (
      _In_ HINTERNET hRequest,
      _In_opt_ DWORD_PTR pContext
-@@ -2193,7 +2194,7 @@ WinHttpWebSocketCompleteUpgrade
- WINHTTPAPI
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpWebSocketSend
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpWebSocketSend
++  WinHttpWebSocketSend
  (
      _In_ HINTERNET hWebSocket,
      _In_ WINHTTP_WEB_SOCKET_BUFFER_TYPE eBufferType,
-@@ -2204,7 +2205,7 @@ WinHttpWebSocketSend
- WINHTTPAPI
+@@ -2201,10 +2202,10 @@ WinHttpWebSocketSend
+     _In_ DWORD dwBufferLength
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpWebSocketReceive
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpWebSocketReceive
++  WinHttpWebSocketReceive
  (
      _In_ HINTERNET hWebSocket,
      _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
-@@ -2216,7 +2217,7 @@ WinHttpWebSocketReceive
- WINHTTPAPI
+@@ -2213,10 +2214,10 @@ WinHttpWebSocketReceive
+     _Out_ WINHTTP_WEB_SOCKET_BUFFER_TYPE *peBufferType
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpWebSocketShutdown
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpWebSocketShutdown
++  WinHttpWebSocketShutdown
  (
      _In_ HINTERNET hWebSocket,
      _In_ USHORT usStatus,
-@@ -2227,7 +2228,7 @@ WinHttpWebSocketShutdown
- WINHTTPAPI
+@@ -2224,10 +2225,10 @@ WinHttpWebSocketShutdown
+     _In_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpWebSocketClose
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpWebSocketClose
++  WinHttpWebSocketClose
  (
      _In_ HINTERNET hWebSocket,
      _In_ USHORT usStatus,
-@@ -2238,7 +2239,7 @@ WinHttpWebSocketClose
- WINHTTPAPI
+@@ -2235,10 +2236,10 @@ WinHttpWebSocketClose
+     _In_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength
+ );
+ 
+-WINHTTPAPI
++_Windows_SupportedOS_Windows8_ WINHTTPAPI
  DWORD
  WINAPI
 -WinHttpWebSocketQueryCloseStatus
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WinHttpWebSocketQueryCloseStatus
++  WinHttpWebSocketQueryCloseStatus
  (
      _In_ HINTERNET hWebSocket,
      _Out_ USHORT *pusStatus,
+@@ -2524,5 +2525,98 @@ typedef struct _WINHTTP_FAST_FORWARDING_STATUS
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WINHTTP_FLAG_BYPASS_PROXY_CACHE")
++#undef WINHTTP_FLAG_BYPASS_PROXY_CACHE
++#pragma push_macro("WINHTTP_FLAG_ESCAPE_DISABLE")
++#undef WINHTTP_FLAG_ESCAPE_DISABLE
++#pragma push_macro("WINHTTP_FLAG_ESCAPE_DISABLE_QUERY")
++#undef WINHTTP_FLAG_ESCAPE_DISABLE_QUERY
++#pragma push_macro("WINHTTP_FLAG_ESCAPE_PERCENT")
++#undef WINHTTP_FLAG_ESCAPE_PERCENT
++#pragma push_macro("WINHTTP_FLAG_NULL_CODEPAGE")
++#undef WINHTTP_FLAG_NULL_CODEPAGE
++#pragma push_macro("WINHTTP_FLAG_REFRESH")
++#undef WINHTTP_FLAG_REFRESH
++#pragma push_macro("WINHTTP_FLAG_SECURE")
++#undef WINHTTP_FLAG_SECURE
++enum [[clang::flag_enum]] WINHTTP_OPEN_REQUEST_FLAGS : unsigned int
++{
++    WINHTTP_FLAG_BYPASS_PROXY_CACHE = 256U,
++    WINHTTP_FLAG_ESCAPE_DISABLE = 64U,
++    WINHTTP_FLAG_ESCAPE_DISABLE_QUERY = 128U,
++    WINHTTP_FLAG_ESCAPE_PERCENT = 4U,
++    WINHTTP_FLAG_NULL_CODEPAGE = 8U,
++    WINHTTP_FLAG_REFRESH = 256U,
++    WINHTTP_FLAG_SECURE = 8388608U,
++};
++#pragma pop_macro("WINHTTP_FLAG_SECURE")
++#pragma pop_macro("WINHTTP_FLAG_REFRESH")
++#pragma pop_macro("WINHTTP_FLAG_NULL_CODEPAGE")
++#pragma pop_macro("WINHTTP_FLAG_ESCAPE_PERCENT")
++#pragma pop_macro("WINHTTP_FLAG_ESCAPE_DISABLE_QUERY")
++#pragma pop_macro("WINHTTP_FLAG_ESCAPE_DISABLE")
++#pragma pop_macro("WINHTTP_FLAG_BYPASS_PROXY_CACHE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ICU_ESCAPE")
++#undef ICU_ESCAPE
++#pragma push_macro("ICU_REJECT_USERPWD")
++#undef ICU_REJECT_USERPWD
++#pragma push_macro("ICU_DECODE")
++#undef ICU_DECODE
++enum WIN_HTTP_CREATE_URL_FLAGS : unsigned int
++{
++    ICU_ESCAPE = 2147483648U,
++    ICU_REJECT_USERPWD = 16384U,
++    ICU_DECODE = 268435456U,
++};
++#pragma pop_macro("ICU_DECODE")
++#pragma pop_macro("ICU_REJECT_USERPWD")
++#pragma pop_macro("ICU_ESCAPE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WINHTTP_ACCESS_TYPE_NO_PROXY")
++#undef WINHTTP_ACCESS_TYPE_NO_PROXY
++#pragma push_macro("WINHTTP_ACCESS_TYPE_DEFAULT_PROXY")
++#undef WINHTTP_ACCESS_TYPE_DEFAULT_PROXY
++#pragma push_macro("WINHTTP_ACCESS_TYPE_NAMED_PROXY")
++#undef WINHTTP_ACCESS_TYPE_NAMED_PROXY
++#pragma push_macro("WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY")
++#undef WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY
++enum WINHTTP_ACCESS_TYPE : unsigned int
++{
++    WINHTTP_ACCESS_TYPE_NO_PROXY = 1U,
++    WINHTTP_ACCESS_TYPE_DEFAULT_PROXY = 0U,
++    WINHTTP_ACCESS_TYPE_NAMED_PROXY = 3U,
++    WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY = 4U,
++};
++#pragma pop_macro("WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY")
++#pragma pop_macro("WINHTTP_ACCESS_TYPE_NAMED_PROXY")
++#pragma pop_macro("WINHTTP_ACCESS_TYPE_DEFAULT_PROXY")
++#pragma pop_macro("WINHTTP_ACCESS_TYPE_NO_PROXY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WINHTTP_AUTH_SCHEME_BASIC")
++#undef WINHTTP_AUTH_SCHEME_BASIC
++#pragma push_macro("WINHTTP_AUTH_SCHEME_NTLM")
++#undef WINHTTP_AUTH_SCHEME_NTLM
++#pragma push_macro("WINHTTP_AUTH_SCHEME_NEGOTIATE")
++#undef WINHTTP_AUTH_SCHEME_NEGOTIATE
++enum WINHTTP_CREDS_AUTHSCHEME : unsigned int
++{
++    WINHTTP_AUTH_SCHEME_BASIC = 1U,
++    WINHTTP_AUTH_SCHEME_NTLM = 2U,
++    WINHTTP_AUTH_SCHEME_NEGOTIATE = 16U,
++};
++#pragma pop_macro("WINHTTP_AUTH_SCHEME_NEGOTIATE")
++#pragma pop_macro("WINHTTP_AUTH_SCHEME_NTLM")
++#pragma pop_macro("WINHTTP_AUTH_SCHEME_BASIC")
++#endif
++
+ #endif // !defined(_WINHTTPX_)
+ 

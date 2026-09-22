@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
+index d1bd0b9577..e9090dc02f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
 @@ -1,4 +1,5 @@
@@ -12,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/Win
  
  
 -typedef struct _CERTIFICATE_BLOB {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CERTIFICATE_BLOB {
++typedef struct   _CERTIFICATE_BLOB {
  
      DWORD   dwCertEncodingType;
  
@@ -21,7 +22,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/Win
  //
  
 -typedef struct _EFS_HASH_BLOB {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _EFS_HASH_BLOB {
++typedef struct   _EFS_HASH_BLOB {
  
  #ifdef MIDL_PASS
      [range(0,100)] 
@@ -30,7 +31,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/Win
  //
  
 -typedef struct _ENCRYPTION_CERTIFICATE {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _ENCRYPTION_CERTIFICATE {
++typedef struct   _ENCRYPTION_CERTIFICATE {
      DWORD cbTotalLength;
      SID * pUserSid;
      PEFS_CERTIFICATE_BLOB pCertBlob;
@@ -39,7 +40,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/Win
  
  
 -typedef struct _ENCRYPTION_CERTIFICATE_HASH {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _ENCRYPTION_CERTIFICATE_HASH {
++typedef struct   _ENCRYPTION_CERTIFICATE_HASH {
      DWORD cbTotalLength;
      SID * pUserSid;
      PEFS_HASH_BLOB  pHash;
@@ -48,43 +49,52 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/Win
  } ENCRYPTION_CERTIFICATE_HASH, *PENCRYPTION_CERTIFICATE_HASH;
  
 -typedef struct _ENCRYPTION_CERTIFICATE_HASH_LIST {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _ENCRYPTION_CERTIFICATE_HASH_LIST {
++typedef struct   _ENCRYPTION_CERTIFICATE_HASH_LIST {
  #ifdef MIDL_PASS
      [range(0,500)] 
  #endif // MIDL_PASS
-@@ -321,7 +322,7 @@ typedef struct _ENCRYPTION_PROTECTOR_LIST {
- WINADVAPI
+@@ -318,36 +319,36 @@ typedef struct _ENCRYPTION_PROTECTOR_LIST {
+ //----------------------------------------------------------------------------------/
+ 
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
 -QueryUsersOnEncryptedFile(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ QueryUsersOnEncryptedFile(
++  QueryUsersOnEncryptedFile(
      _In_            LPCWSTR                                 lpFileName,
      _Outptr_     PENCRYPTION_CERTIFICATE_HASH_LIST      *pUsers
      );
-@@ -330,7 +331,7 @@ QueryUsersOnEncryptedFile(
- WINADVAPI
+ 
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
 -QueryRecoveryAgentsOnEncryptedFile(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ QueryRecoveryAgentsOnEncryptedFile(
++  QueryRecoveryAgentsOnEncryptedFile(
      _In_            LPCWSTR                                 lpFileName,
      _Outptr_     PENCRYPTION_CERTIFICATE_HASH_LIST      *pRecoveryAgents
      );
-@@ -339,7 +340,7 @@ QueryRecoveryAgentsOnEncryptedFile(
- WINADVAPI
+ 
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
 -RemoveUsersFromEncryptedFile(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ RemoveUsersFromEncryptedFile(
++  RemoveUsersFromEncryptedFile(
      _In_    LPCWSTR                             lpFileName,
      _In_    PENCRYPTION_CERTIFICATE_HASH_LIST   pHashes
      );
-@@ -347,7 +348,7 @@ RemoveUsersFromEncryptedFile(
- WINADVAPI
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
 -AddUsersToEncryptedFile(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ AddUsersToEncryptedFile(
++  AddUsersToEncryptedFile(
      _In_    LPCWSTR                         lpFileName,
      _In_    PENCRYPTION_CERTIFICATE_LIST    pEncryptionCertificates
      );
@@ -97,20 +107,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/Win
      _In_opt_    PENCRYPTION_CERTIFICATE     pEncryptionCertificate
      );
  
-@@ -394,14 +395,14 @@ SetUserFileEncryptionKeyEx(
- WINADVAPI
+@@ -391,17 +392,17 @@ SetUserFileEncryptionKeyEx(
+ 
+ #endif // #if (NTDDI_VERSION >= NTDDI_VISTA) 
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  VOID
  WINAPI
 -FreeEncryptionCertificateHashList(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ FreeEncryptionCertificateHashList(
++  FreeEncryptionCertificateHashList(
      _In_    PENCRYPTION_CERTIFICATE_HASH_LIST       pUsers
      );
  
- WINADVAPI
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  BOOL
  WINAPI
 -EncryptionDisable(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_ EncryptionDisable(
++  _Win32_SetLastError_ EncryptionDisable(
      _In_ LPCWSTR DirPath,
           BOOL        Disable
      );

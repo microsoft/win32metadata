@@ -1,0 +1,128 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h b/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h
+index 3aad0d3e65..96ec22cd26 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -148,7 +149,11 @@ enum __MIDL___MIDL_itf_amstream_0000_0000_0003
+         AMMSF_RUN	= 0x8
+     } ;
+ typedef /* [public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_amstream_0000_0000_0004
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL___MIDL_itf_amstream_0000_0000_0004
+     {
+         Disabled	= 0,
+         ReadData	= 1,
+@@ -179,7 +184,7 @@ EXTERN_C const IID IID_IAMMultiMediaStream;
+             /* [annotation][in] */ 
+             _In_  STREAM_TYPE StreamType,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _Win32_AssociatedEnum_(AMMSF_MMS_INIT_FLAGS) _In_  DWORD dwFlags,
+             /* [annotation][in] */ 
+             _In_  IGraphBuilder *pFilterGraph) = 0;
+         
+@@ -197,7 +202,7 @@ EXTERN_C const IID IID_IAMMultiMediaStream;
+             /* [annotation][in] */ 
+             _In_  const MSPID *PurposeId,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _Win32_AssociatedEnum_(AMMSF_MS_FLAGS) _In_  DWORD dwFlags,
+             /* [annotation][out] */ 
+             _Out_  IMediaStream **ppNewStream) = 0;
+         
+@@ -978,7 +983,7 @@ EXTERN_C const IID IID_IDirectDrawMediaSampleAllocator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB6B4AFC-F6E4-11d0-900D-00C04FD9189D")
++    MIDL_INTERFACE("AB6B4AFC-F6E4-11d0-900D-00C04FD9189D") _Windows_SupportedOS_Windows2000_ 
+     IDirectDrawMediaSampleAllocator : public IUnknown
+     {
+     public:
+@@ -1063,7 +1068,7 @@ EXTERN_C const IID IID_IDirectDrawMediaSample;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB6B4AFE-F6E4-11d0-900D-00C04FD9189D")
++    MIDL_INTERFACE("AB6B4AFE-F6E4-11d0-900D-00C04FD9189D") _Windows_SupportedOS_Windows2000_ 
+     IDirectDrawMediaSample : public IUnknown
+     {
+     public:
+@@ -1754,6 +1759,69 @@ extern RPC_IF_HANDLE __MIDL_itf_amstream_0000_0007_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("AMMSF_NOGRAPHTHREAD")
++#undef AMMSF_NOGRAPHTHREAD
++enum [[clang::flag_enum]] AMMSF_MMS_INIT_FLAGS : int
++{
++    AMMSF_NOGRAPHTHREAD = 1,
++};
++#pragma pop_macro("AMMSF_NOGRAPHTHREAD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("AMMSF_ADDDEFAULTRENDERER")
++#undef AMMSF_ADDDEFAULTRENDERER
++#pragma push_macro("AMMSF_CREATEPEER")
++#undef AMMSF_CREATEPEER
++#pragma push_macro("AMMSF_STOPIFNOSAMPLES")
++#undef AMMSF_STOPIFNOSAMPLES
++#pragma push_macro("AMMSF_NOSTALL")
++#undef AMMSF_NOSTALL
++enum [[clang::flag_enum]] AMMSF_MS_FLAGS : int
++{
++    AMMSF_ADDDEFAULTRENDERER = 1,
++    AMMSF_CREATEPEER = 2,
++    AMMSF_STOPIFNOSAMPLES = 4,
++    AMMSF_NOSTALL = 8,
++};
++#pragma pop_macro("AMMSF_NOSTALL")
++#pragma pop_macro("AMMSF_STOPIFNOSAMPLES")
++#pragma pop_macro("AMMSF_CREATEPEER")
++#pragma pop_macro("AMMSF_ADDDEFAULTRENDERER")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("AMMSF_RENDERTYPEMASK")
++#undef AMMSF_RENDERTYPEMASK
++#pragma push_macro("AMMSF_RENDERTOEXISTING")
++#undef AMMSF_RENDERTOEXISTING
++#pragma push_macro("AMMSF_RENDERALLSTREAMS")
++#undef AMMSF_RENDERALLSTREAMS
++#pragma push_macro("AMMSF_NORENDER")
++#undef AMMSF_NORENDER
++#pragma push_macro("AMMSF_NOCLOCK")
++#undef AMMSF_NOCLOCK
++#pragma push_macro("AMMSF_RUN")
++#undef AMMSF_RUN
++enum [[clang::flag_enum]] AMMSF_RENDER_FLAGS : int
++{
++    AMMSF_RENDERTYPEMASK = 3,
++    AMMSF_RENDERTOEXISTING = 0,
++    AMMSF_RENDERALLSTREAMS = 1,
++    AMMSF_NORENDER = 2,
++    AMMSF_NOCLOCK = 4,
++    AMMSF_RUN = 8,
++};
++#pragma pop_macro("AMMSF_RUN")
++#pragma pop_macro("AMMSF_NOCLOCK")
++#pragma pop_macro("AMMSF_NORENDER")
++#pragma pop_macro("AMMSF_RENDERALLSTREAMS")
++#pragma pop_macro("AMMSF_RENDERTOEXISTING")
++#pragma pop_macro("AMMSF_RENDERTYPEMASK")
++#endif
++
+ #endif
+ 
+ 

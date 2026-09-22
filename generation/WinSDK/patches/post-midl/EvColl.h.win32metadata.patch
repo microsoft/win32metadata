@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
+index 75c4bc628b..6f32380492 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -14,11 +15,11 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
  
  
 -EC_HANDLE WINAPI EcOpenSubscriptionEnum(
-+EC_HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcOpenSubscriptionEnum(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ EC_HANDLE WINAPI   EcOpenSubscriptionEnum(
      DWORD Flags 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcEnumNextSubscription( 
      EC_HANDLE SubscriptionEnum,
      DWORD SubscriptionNameBufferSize,
@@ -27,13 +28,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
      );
  
 -EC_HANDLE WINAPI EcOpenSubscription(
-+EC_HANDLE WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcOpenSubscription(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ EC_HANDLE WINAPI   EcOpenSubscription(
      LPCWSTR SubscriptionName,
      DWORD AccessMask,
      DWORD Flags 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcSetSubscriptionProperty( 
      EC_HANDLE Subscription,
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
      PEC_VARIANT PropertyValue
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcGetSubscriptionProperty( 
      EC_HANDLE Subscription,
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
@@ -49,25 +50,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
      _Out_ PDWORD PropertyValueBufferUsed 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcSaveSubscription( 
      EC_HANDLE Subscription,
      DWORD Flags
      );
  
 -BOOL WINAPI EcDeleteSubscription(
-+BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcDeleteSubscription(
++_Windows_SupportedOS_WindowsVista_ BOOL WINAPI   EcDeleteSubscription(
      LPCWSTR SubscriptionName,
      DWORD   Flags 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcGetObjectArraySize( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray,
      _Out_ PDWORD ObjectArraySize 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcSetObjectArrayProperty( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
@@ -75,7 +76,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
      PEC_VARIANT PropertyValue
      );
   
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcGetObjectArrayProperty( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
@@ -83,19 +84,19 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
      _Out_ PDWORD PropertyValueBufferUsed 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcInsertObjectArrayElement( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
      DWORD ArrayIndex 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcRemoveObjectArrayElement( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
      DWORD ArrayIndex 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcGetSubscriptionRunTimeStatus( 
      LPCWSTR SubscriptionName,
      EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID StatusInfoId,
@@ -104,13 +105,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/Win
      );
  
 -BOOL WINAPI EcRetrySubscription(
-+BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ EcRetrySubscription(
++_Windows_SupportedOS_WindowsVista_ BOOL WINAPI   EcRetrySubscription(
      LPCWSTR SubscriptionName,
      LPCWSTR EventSourceName,
      DWORD Flags 
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcClose( 
      EC_HANDLE Object
      );

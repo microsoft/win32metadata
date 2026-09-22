@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h
-index 9e950406ce1a4be771f2a6cd9c5e8564d3e1f431..5f84510b83b2ed9324347dd2ec41f8e481cd6f04 100644
+index 9e950406ce..308cc83dcf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wpcapi.h
 @@ -159,6 +159,7 @@ extern "C"{
@@ -28,7 +28,7 @@ index 9e950406ce1a4be771f2a6cd9c5e8564d3e1f431..5f84510b83b2ed9324347dd2ec41f8e4
      {
          CONST_VTBL struct IWPCProviderStateVtbl *lpVtbl;
      };
-@@ -283,7 +284,7 @@ EXTERN_C const IID IID_IWPCProviderConfig;
+@@ -283,12 +284,12 @@ EXTERN_C const IID IID_IWPCProviderConfig;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("BEF54196-2D02-4a26-B6E5-D65AF295D0F1")
@@ -37,6 +37,21 @@ index 9e950406ce1a4be771f2a6cd9c5e8564d3e1f431..5f84510b83b2ed9324347dd2ec41f8e4
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetUserSummary( 
+             /* [in] */ __RPC__in BSTR bstrSID,
+-            /* [string][out] */ __RPC__deref_out_opt_string BSTR *pbstrUserSummary) = 0;
++            /* [string][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt_string BSTR *pbstrUserSummary) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Configure( 
+             /* [unique][in] */ __RPC__in_opt HWND hWnd,
+@@ -297,7 +298,7 @@ EXTERN_C const IID IID_IWPCProviderConfig;
+         virtual HRESULT STDMETHODCALLTYPE RequestOverride( 
+             /* [unique][in] */ __RPC__in_opt HWND hWnd,
+             /* [string][in] */ __RPC__in_string BSTR bstrPath,
+-            /* [in] */ DWORD dwFlags) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(WPCFLAG_RESTRICTION) DWORD dwFlags) = 0;
+         
+     };
+     
 @@ -345,7 +346,7 @@ EXTERN_C const IID IID_IWPCProviderConfig;
          END_INTERFACE
      } IWPCProviderConfigVtbl;
@@ -46,3 +61,72 @@ index 9e950406ce1a4be771f2a6cd9c5e8564d3e1f431..5f84510b83b2ed9324347dd2ec41f8e4
      {
          CONST_VTBL struct IWPCProviderConfigVtbl *lpVtbl;
      };
+@@ -417,7 +418,7 @@ EXTERN_C const IID IID_IWPCSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8FDF6CA1-0189-47e4-B670-1A8A4636E340")
++    MIDL_INTERFACE("8FDF6CA1-0189-47e4-B670-1A8A4636E340") _Windows_SupportedOS_WindowsVista_ 
+     IWPCSettings : public IUnknown
+     {
+     public:
+@@ -428,7 +429,7 @@ EXTERN_C const IID IID_IWPCSettings;
+             /* [out] */ __RPC__out SYSTEMTIME *pTime) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRestrictions( 
+-            /* [out] */ __RPC__out DWORD *pdwRestrictions) = 0;
++            /* [out] */ _Win32_AssociatedEnum_(WPCFLAG_RESTRICTION) __RPC__out DWORD *pdwRestrictions) = 0;
+         
+     };
+     
+@@ -523,7 +524,7 @@ EXTERN_C const IID IID_IWPCGamesSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("95E87780-E158-489e-B452-BBB850790715")
++    MIDL_INTERFACE("95E87780-E158-489e-B452-BBB850790715") _Windows_SupportedOS_WindowsVista_ 
+     IWPCGamesSettings : public IWPCSettings
+     {
+     public:
+@@ -649,12 +650,12 @@ EXTERN_C const IID IID_IWPCWebSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FFCCBDB8-0992-4c30-B0F1-1CBB09C240AA")
++    MIDL_INTERFACE("FFCCBDB8-0992-4c30-B0F1-1CBB09C240AA") _Windows_SupportedOS_WindowsVista_ 
+     IWPCWebSettings : public IWPCSettings
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSettings( 
+-            /* [out] */ __RPC__out DWORD *pdwSettings) = 0;
++            /* [out] */ _Win32_AssociatedEnum_(WPCFLAG_WEB_SETTING) __RPC__out DWORD *pdwSettings) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RequestURLOverride( 
+             /* [unique][in] */ __RPC__in_opt HWND hWnd,
+@@ -792,7 +793,7 @@ EXTERN_C const IID IID_IWindowsParentalControlsCore;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4FF40A0F-3F3B-4d7c-A41B-4F39D7B44D05")
++    MIDL_INTERFACE("4FF40A0F-3F3B-4d7c-A41B-4F39D7B44D05") _Windows_SupportedOS_WindowsVista_ 
+     IWindowsParentalControlsCore : public IUnknown
+     {
+     public:
+@@ -915,7 +916,7 @@ EXTERN_C const IID IID_IWindowsParentalControls;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28B4D88B-E072-49e6-804D-26EDBE21A7B9")
++    MIDL_INTERFACE("28B4D88B-E072-49e6-804D-26EDBE21A7B9") _Windows_SupportedOS_WindowsVista_ 
+     IWindowsParentalControls : public IWindowsParentalControlsCore
+     {
+     public:
+@@ -1037,7 +1038,7 @@ EXTERN_C const IID IID_IWPCProviderSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("41EBA572-23ED-4779-BEC1-8DF96206C44C")
++    MIDL_INTERFACE("41EBA572-23ED-4779-BEC1-8DF96206C44C") _Windows_SupportedOS_Windows7_ 
+     IWPCProviderSupport : public IUnknown
+     {
+     public:

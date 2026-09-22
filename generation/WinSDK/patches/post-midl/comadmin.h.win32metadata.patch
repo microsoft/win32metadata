@@ -1,0 +1,144 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h
+index b9dd713f4f..8b32ee781e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ComAdmin.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -169,7 +170,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DD662187-DFC2-11d1-A2CF-00805FC79235")
++    MIDL_INTERFACE("DD662187-DFC2-11d1-A2CF-00805FC79235") _Windows_SupportedOS_Windows2000_ 
+     ICOMAdminCatalog : public IDispatch
+     {
+     public:
+@@ -227,13 +228,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrApplicationFile,
+             /* [annotation][in] */ 
+-            _In_  long lOptions) = 0;
++            _Win32_AssociatedEnum_(COMAdminApplicationExportOptions) _In_  long lOptions) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstallApplication( 
+             /* [annotation][in] */ 
+             _In_  BSTR bstrApplicationFile,
+             /* [optional][in] */ __RPC__in BSTR bstrDestinationDirectory,
+-            /* [optional][in] */ long lOptions,
++            /* [optional][in] */ _Win32_AssociatedEnum_(COMAdminApplicationInstallOptions) long lOptions,
+             /* [optional][in] */ __RPC__in BSTR bstrUserId,
+             /* [optional][in] */ __RPC__in BSTR bstrPassword,
+             /* [optional][in] */ __RPC__in BSTR bstrRSN) = 0;
+@@ -284,9 +285,9 @@ EXTERN_C const IID IID_ICOMAdminCatalog;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrApplicationFile,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrApplicationName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrApplicationName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrApplicationDescription,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrApplicationDescription,
+             /* [annotation][out] */ 
+             _Out_  VARIANT_BOOL *pbHasUsers,
+             /* [annotation][out] */ 
+@@ -772,7 +773,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("790C6E0B-9194-4cc9-9426-A48A63185696")
++    MIDL_INTERFACE("790C6E0B-9194-4cc9-9426-A48A63185696") _Windows_SupportedOS_WindowsXP_ 
+     ICOMAdminCatalog2 : public ICOMAdminCatalog
+     {
+     public:
+@@ -788,7 +789,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+             /* [annotation][in] */ 
+             _In_  long lProcessID,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrApplicationInstanceID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrApplicationInstanceID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ShutdownApplicationInstances( 
+             /* [annotation][in] */ 
+@@ -822,7 +823,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+             /* [annotation][in] */ 
+             _In_  long lMaxImages,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDumpFile) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDumpFile) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsApplicationInstanceDumpSupported( 
+             /* [annotation][retval][out] */ 
+@@ -854,13 +855,13 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrApplicationIDOrName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPartitionID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPartitionID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetPartitionName( 
+             /* [annotation][in] */ 
+             _In_  BSTR bstrApplicationIDOrName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPartitionName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPartitionName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CurrentPartition( 
+             /* [annotation][in] */ 
+@@ -868,15 +869,15 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentPartitionID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPartitionID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPartitionID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentPartitionName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPartitionName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPartitionName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GlobalPartitionID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrGlobalPartitionID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrGlobalPartitionID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE FlushPartitionCache( void) = 0;
+         
+@@ -953,7 +954,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrPartitionFileName,
+             /* [annotation][in] */ 
+-            _In_  long lOptions) = 0;
++            _Win32_AssociatedEnum_(COMAdminApplicationExportOptions) _In_  long lOptions) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstallPartition( 
+             /* [annotation][in] */ 
+@@ -961,7 +962,7 @@ EXTERN_C const IID IID_ICOMAdminCatalog2;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrDestDirectory,
+             /* [annotation][in] */ 
+-            _In_  long lOptions,
++            _Win32_AssociatedEnum_(COMAdminApplicationInstallOptions) _In_  long lOptions,
+             /* [annotation][in] */ 
+             _In_  BSTR bstrUserID,
+             /* [annotation][in] */ 
+@@ -1763,7 +1764,7 @@ EXTERN_C const IID IID_ICatalogObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6eb22871-8a19-11d0-81b6-00a0c9231c29")
++    MIDL_INTERFACE("6eb22871-8a19-11d0-81b6-00a0c9231c29") _Windows_SupportedOS_Windows2000_ 
+     ICatalogObject : public IDispatch
+     {
+     public:
+@@ -2006,7 +2007,7 @@ EXTERN_C const IID IID_ICatalogCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6eb22872-8a19-11d0-81b6-00a0c9231c29")
++    MIDL_INTERFACE("6eb22872-8a19-11d0-81b6-00a0c9231c29") _Windows_SupportedOS_Windows2000_ 
+     ICatalogCollection : public IDispatch
+     {
+     public:

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/edpwin32.h b/generation/WinSDK/RecompiledIdlHeaders/um/edpwin32.h
-index fedec64c5b..175596e2a7 100644
+index fedec64c5b..034c236ad5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/edpwin32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/edpwin32.h
 @@ -14,6 +14,7 @@
@@ -14,7 +14,7 @@ index fedec64c5b..175596e2a7 100644
  
  #if NTDDI_VERSION >= NTDDI_WIN10_TH2
  
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
  STDAPI ProtectFileToEnterpriseIdentity(
      _In_ PCWSTR fileOrFolderPath,
      _In_ PCWSTR identity

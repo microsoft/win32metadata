@@ -1,0 +1,32 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertSrv.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertSrv.h
+index c1b2e93eb2..41dbeebbd9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertSrv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertSrv.h
+@@ -1405,4 +1405,27 @@ typedef struct _CAINFO
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("PROPTYPE_BINARY")
++#undef PROPTYPE_BINARY
++#pragma push_macro("PROPTYPE_DATE")
++#undef PROPTYPE_DATE
++#pragma push_macro("PROPTYPE_LONG")
++#undef PROPTYPE_LONG
++#pragma push_macro("PROPTYPE_STRING")
++#undef PROPTYPE_STRING
++enum CERT_PROPERTY_TYPE : int
++{
++    PROPTYPE_BINARY = 3,
++    PROPTYPE_DATE = 2,
++    PROPTYPE_LONG = 1,
++    PROPTYPE_STRING = 4,
++};
++#pragma pop_macro("PROPTYPE_STRING")
++#pragma pop_macro("PROPTYPE_LONG")
++#pragma pop_macro("PROPTYPE_DATE")
++#pragma pop_macro("PROPTYPE_BINARY")
++#endif
++
+ #endif // _CERTSRV_H_

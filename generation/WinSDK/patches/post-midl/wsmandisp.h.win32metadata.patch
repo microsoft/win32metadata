@@ -1,0 +1,238 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h
+index 0737af6d9f..6186f83efa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -351,7 +352,7 @@ EXTERN_C const IID IID_IWSMan;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("190D8637-5CD3-496d-AD24-69636BB5A3B5")
++    MIDL_INTERFACE("190D8637-5CD3-496d-AD24-69636BB5A3B5") _Windows_SupportedOS_WindowsVista_ 
+     IWSMan : public IDispatch
+     {
+     public:
+@@ -371,11 +372,11 @@ EXTERN_C const IID IID_IWSMan;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CommandLine( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+     };
+     
+@@ -551,7 +552,7 @@ EXTERN_C const IID IID_IWSManEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2D53BDAA-798E-49e6-A1AA-74D01256F411")
++    MIDL_INTERFACE("2D53BDAA-798E-49e6-A1AA-74D01256F411") _Windows_SupportedOS_WindowsVista_ 
+     IWSManEx : public IWSMan
+     {
+     public:
+@@ -621,7 +622,7 @@ EXTERN_C const IID IID_IWSManEx;
+             /* [annotation][in] */ 
+             _In_  DWORD errorNumber,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *errorMessage) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *errorMessage) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumerationFlagHierarchyDeep( 
+             /* [annotation][retval][out] */ 
+@@ -998,7 +999,7 @@ EXTERN_C const IID IID_IWSManEx2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1D1B5AE0-42D9-4021-8261-3987619512E9")
++    MIDL_INTERFACE("1D1B5AE0-42D9-4021-8261-3987619512E9") _Windows_SupportedOS_WindowsVista_ 
+     IWSManEx2 : public IWSManEx
+     {
+     public:
+@@ -1375,7 +1376,7 @@ EXTERN_C const IID IID_IWSManEx3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6400E966-011D-4eac-8474-049E0848AFAD")
++    MIDL_INTERFACE("6400E966-011D-4eac-8474-049E0848AFAD") _Windows_SupportedOS_Windows7_ 
+     IWSManEx3 : public IWSManEx2
+     {
+     public:
+@@ -1840,13 +1841,13 @@ EXTERN_C const IID IID_IWSManConnectionOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F704E861-9E52-464f-B786-DA5EB2320FDD")
++    MIDL_INTERFACE("F704E861-9E52-464f-B786-DA5EB2320FDD") _Windows_SupportedOS_WindowsVista_ 
+     IWSManConnectionOptions : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UserName( 
+             /* [annotation][in] */ 
+@@ -2015,13 +2016,13 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EF43EDF7-2A48-4d93-9526-8BD6AB6D4A6B")
++    MIDL_INTERFACE("EF43EDF7-2A48-4d93-9526-8BD6AB6D4A6B") _Windows_SupportedOS_WindowsVista_ 
+     IWSManConnectionOptionsEx : public IWSManConnectionOptions
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CertificateThumbprint( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *thumbprint) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *thumbprint) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_CertificateThumbprint( 
+             /* [annotation][in] */ 
+@@ -2205,7 +2206,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F500C9EC-24EE-48ab-B38D-FC9A164C658E")
++    MIDL_INTERFACE("F500C9EC-24EE-48ab-B38D-FC9A164C658E") _Windows_SupportedOS_Windows7_ 
+     IWSManConnectionOptionsEx2 : public IWSManConnectionOptionsEx
+     {
+     public:
+@@ -2504,7 +2505,7 @@ EXTERN_C const IID IID_IWSManSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FC84FC58-1286-40c4-9DA0-C8EF6EC241E0")
++    MIDL_INTERFACE("FC84FC58-1286-40c4-9DA0-C8EF6EC241E0") _Windows_SupportedOS_WindowsVista_ 
+     IWSManSession : public IDispatch
+     {
+     public:
+@@ -2514,7 +2515,7 @@ EXTERN_C const IID IID_IWSManSession;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  long flags,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *resource) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *resource) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Put( 
+             /* [annotation][in] */ 
+@@ -2524,7 +2525,7 @@ EXTERN_C const IID IID_IWSManSession;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  long flags,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *resultResource) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *resultResource) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Create( 
+             /* [annotation][in] */ 
+@@ -2534,7 +2535,7 @@ EXTERN_C const IID IID_IWSManSession;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  long flags,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *newUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *newUri) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Delete( 
+             /* [annotation][in] */ 
+@@ -2570,11 +2571,11 @@ EXTERN_C const IID IID_IWSManSession;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  long flags,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *result) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *result) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_BatchItems( 
+             /* [annotation][retval][out] */ 
+@@ -2868,13 +2869,13 @@ EXTERN_C const IID IID_IWSManEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F3457CA9-ABB9-4fa5-B850-90E8CA300E7F")
++    MIDL_INTERFACE("F3457CA9-ABB9-4fa5-B850-90E8CA300E7F") _Windows_SupportedOS_WindowsVista_ 
+     IWSManEnumerator : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ReadItem( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *resource) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *resource) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AtEndOfStream( 
+             /* [annotation][retval][out] */ 
+@@ -2882,7 +2883,7 @@ EXTERN_C const IID IID_IWSManEnumerator;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+     };
+     
+@@ -3043,7 +3044,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A7A1BA28-DE41-466a-AD0A-C4059EAD7428")
++    MIDL_INTERFACE("A7A1BA28-DE41-466a-AD0A-C4059EAD7428") _Windows_SupportedOS_WindowsVista_ 
+     IWSManResourceLocator : public IDispatch
+     {
+     public:
+@@ -3053,7 +3054,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ResourceURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *uri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *uri) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddSelector( 
+             /* [annotation][in] */ 
+@@ -3065,7 +3066,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_FragmentPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *text) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *text) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_FragmentPath( 
+             /* [annotation][in] */ 
+@@ -3073,7 +3074,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_FragmentDialect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *text) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *text) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_FragmentDialect( 
+             /* [annotation][in] */ 
+@@ -3099,7 +3100,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Error( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+     };
+     
+@@ -3446,7 +3447,7 @@ EXTERN_C const IID IID_IWSManInternal;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  long flags,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *resource) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *resource) = 0;
+         
+     };
+     

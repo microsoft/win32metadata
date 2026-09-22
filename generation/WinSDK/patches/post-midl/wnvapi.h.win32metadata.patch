@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wnvapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wnvapi.h
-index 292b851272..6eb819d608 100644
+index 292b851272..48a8ee12c0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wnvapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wnvapi.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 292b851272..6eb819d608 100644
  #define WNV_API_MINOR_VERSION_0 0
  
 -typedef enum _WNV_NOTIFICATION_TYPE {
-+typedef enum _Windows_SupportedOS_Server2012_ _WNV_NOTIFICATION_TYPE {
++typedef enum  _WNV_NOTIFICATION_TYPE {
      WnvPolicyMismatchType,
      WnvRedirectType,
      WnvObjectChangeType,
@@ -20,7 +20,7 @@ index 292b851272..6eb819d608 100644
  } WNV_NOTIFICATION_TYPE, *PWNV_NOTIFICATION_TYPE;
  
 -typedef enum _WNV_OBJECT_TYPE {
-+typedef enum _Windows_SupportedOS_Server2012_ _WNV_OBJECT_TYPE {
++typedef enum  _WNV_OBJECT_TYPE {
      WnvProviderAddressType,
      WnvCustomerAddressType,
      WnvObjectTypeMax
@@ -29,14 +29,14 @@ index 292b851272..6eb819d608 100644
  } WNV_CA_NOTIFICATION_TYPE, *PWNV_CA_NOTIFICATION_TYPE;
  
 -typedef struct _WNV_OBJECT_HEADER {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_OBJECT_HEADER {
++typedef struct  _WNV_OBJECT_HEADER {
      UCHAR MajorVersion;
      UCHAR MinorVersion;
      ULONG Size;
  } WNV_OBJECT_HEADER, *PWNV_OBJECT_HEADER;
  
 -typedef struct _WNV_NOTIFICATION_PARAM {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_NOTIFICATION_PARAM {
++typedef struct  _WNV_NOTIFICATION_PARAM {
      WNV_OBJECT_HEADER Header;
      WNV_NOTIFICATION_TYPE NotificationType;
      ULONG PendingNotifications;
@@ -44,7 +44,7 @@ index 292b851272..6eb819d608 100644
  } WNV_NOTIFICATION_PARAM, *PWNV_NOTIFICATION_PARAM;
  
 -typedef struct _WNV_IP_ADDRESS {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_IP_ADDRESS {
++typedef struct  _WNV_IP_ADDRESS {
      union {
          IN_ADDR v4;
          IN6_ADDR v6;
@@ -53,7 +53,7 @@ index 292b851272..6eb819d608 100644
  } WNV_IP_ADDRESS, *PWNV_IP_ADDRESS;
  
 -typedef struct _WNV_POLICY_MISMATCH_PARAM {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_POLICY_MISMATCH_PARAM {
++typedef struct  _WNV_POLICY_MISMATCH_PARAM {
      ADDRESS_FAMILY CAFamily;
      ADDRESS_FAMILY PAFamily;
      ULONG VirtualSubnetId;
@@ -62,7 +62,7 @@ index 292b851272..6eb819d608 100644
  } WNV_POLICY_MISMATCH_PARAM, *PWNV_POLICY_MISMATCH_PARAM;
  
 -typedef struct _WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
++typedef struct  _WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
      ADDRESS_FAMILY PAFamily;
      WNV_IP_ADDRESS PA;
      NL_DAD_STATE AddressState;
@@ -71,7 +71,7 @@ index 292b851272..6eb819d608 100644
  } WNV_CUSTOMER_ADDRESS_CHANGE_PARAM, *PWNV_CUSTOMER_ADDRESS_CHANGE_PARAM;
  
 -typedef struct _WNV_OBJECT_CHANGE_PARAM {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_OBJECT_CHANGE_PARAM {
++typedef struct  _WNV_OBJECT_CHANGE_PARAM {
      WNV_OBJECT_TYPE ObjectType;
      union {
          WNV_PROVIDER_ADDRESS_CHANGE_PARAM ProviderAddressChange;
@@ -80,15 +80,18 @@ index 292b851272..6eb819d608 100644
  } WNV_OBJECT_CHANGE_PARAM, *PWNV_OBJECT_CHANGE_PARAM;
  
 -typedef struct _WNV_REDIRECT_PARAM {
-+typedef struct _Windows_SupportedOS_Server2012_ _WNV_REDIRECT_PARAM {
++typedef struct  _WNV_REDIRECT_PARAM {
      ADDRESS_FAMILY CAFamily;
      ADDRESS_FAMILY PAFamily;
      ADDRESS_FAMILY NewPAFamily;
-@@ -116,15 +117,17 @@ extern "C" {
+@@ -114,17 +115,19 @@ typedef struct _WNV_REDIRECT_PARAM {
+ #ifdef __cplusplus
+ extern "C" {
  #endif  // __cplusplus
- HANDLE
+-HANDLE
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
  WINAPI
-+_Windows_SupportedOS_Server2012_ _Win32_RAIIFree_(CloseHandle, 0)
++_Windows_SupportedOS_Server2012_ 
  WnvOpen(
      );
  
@@ -99,7 +102,7 @@ index 292b851272..6eb819d608 100644
      HANDLE WnvHandle,
      PWNV_NOTIFICATION_PARAM NotificationParam,
 -    LPOVERLAPPED Overlapped,
-+    _Win32_Retained_ LPOVERLAPPED Overlapped,
++     LPOVERLAPPED Overlapped,
      PULONG BytesTransferred
      );
  

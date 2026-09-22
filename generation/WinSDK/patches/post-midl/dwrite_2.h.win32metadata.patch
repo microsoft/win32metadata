@@ -1,8 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_2.h
-index 9fb86ff4698f7cad406ef79b7255390bf1f697f6..845c0b45cb52bedeeff8163529dff0e01b526576 100644
+index 9fb86ff469..60fb3b8924 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_2.h
-@@ -9,6 +9,7 @@
+@@ -9,13 +9,14 @@
  
  #ifndef DWRITE_2_H_INCLUDED
  #define DWRITE_2_H_INCLUDED
@@ -10,12 +10,20 @@ index 9fb86ff4698f7cad406ef79b7255390bf1f697f6..845c0b45cb52bedeeff8163529dff0e0
  
  #pragma once
  
+ #include <DWrite_1.h>
+ 
+ 
+-interface IDWriteFontFallback;
++interface _Windows_SupportedOS_Windows81_  IDWriteFontFallback;
+ 
+ 
+ /// <summary>
 @@ -41,7 +42,7 @@ enum DWRITE_OPTICAL_ALIGNMENT
  /// <summary>
  /// Whether to enable grid-fitting of glyph outlines (a.k.a. hinting).
  /// </summary>
 -enum DWRITE_GRID_FIT_MODE
-+enum _Windows_SupportedOS_Windows81_ DWRITE_GRID_FIT_MODE
++enum  DWRITE_GRID_FIT_MODE
  {
      /// <summary>
      /// Choose grid fitting base on the font's gasp table information.
@@ -24,7 +32,7 @@ index 9fb86ff4698f7cad406ef79b7255390bf1f697f6..845c0b45cb52bedeeff8163529dff0e0
  /// given base glyph run.
  /// </summary>
 -struct DWRITE_COLOR_GLYPH_RUN
-+struct _Windows_SupportedOS_Windows81_ DWRITE_COLOR_GLYPH_RUN
++struct  DWRITE_COLOR_GLYPH_RUN
  {
      /// <summary>
      /// Glyph run to render.

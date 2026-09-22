@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
+index 2f8b77ff0e..cf852a2135 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
 @@ -37,6 +37,7 @@ Abstract:
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  #pragma region Common structures
  
 -typedef enum PRJ_NOTIFY_TYPES
-+typedef enum _Windows_SupportedOS_17763_ PRJ_NOTIFY_TYPES
++typedef enum  PRJ_NOTIFY_TYPES
  {
      PRJ_NOTIFY_NONE                                 = 0x00000000,
      PRJ_NOTIFY_SUPPRESS_NOTIFICATIONS               = 0x00000001,
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  // This enum shares the same value space as PRJ_NOTIFY_TYPES, but
  // these values are not bit flags.
 -typedef enum PRJ_NOTIFICATION
-+typedef enum _Windows_SupportedOS_17763_ PRJ_NOTIFICATION
++typedef enum  PRJ_NOTIFICATION
  {
      PRJ_NOTIFICATION_FILE_OPENED                        = 0x00000002,
      PRJ_NOTIFICATION_NEW_FILE_CREATED                   = 0x00000004,
@@ -32,13 +33,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE);
  
 -typedef enum PRJ_EXT_INFO_TYPE {
-+typedef enum _Windows_SupportedOS_19041_ PRJ_EXT_INFO_TYPE {
++typedef enum  PRJ_EXT_INFO_TYPE {
      PRJ_EXT_INFO_TYPE_SYMLINK = 1
  } PRJ_EXT_INFO_TYPE;
  
  
 -typedef struct PRJ_EXTENDED_INFO {
-+typedef struct _Windows_SupportedOS_19041_ PRJ_EXTENDED_INFO {
++typedef struct  PRJ_EXTENDED_INFO {
  
      PRJ_EXT_INFO_TYPE InfoType;
  
@@ -54,14 +55,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  #pragma region Virtualization instance APIs
  
 -typedef struct PRJ_NOTIFICATION_MAPPING
-+typedef struct _Windows_SupportedOS_17763_ PRJ_NOTIFICATION_MAPPING
++typedef struct  PRJ_NOTIFICATION_MAPPING
  {
      PRJ_NOTIFY_TYPES NotificationBitMask;
      PCWSTR NotificationRoot;
  } PRJ_NOTIFICATION_MAPPING;
  
 -typedef enum PRJ_STARTVIRTUALIZING_FLAGS
-+typedef enum _Windows_SupportedOS_17763_ PRJ_STARTVIRTUALIZING_FLAGS
++typedef enum  PRJ_STARTVIRTUALIZING_FLAGS
  {
      PRJ_FLAG_NONE                       = 0x00000000,
      PRJ_FLAG_USE_NEGATIVE_PATH_CACHE    = 0x00000001
@@ -70,7 +71,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  DEFINE_ENUM_FLAG_OPERATORS(PRJ_STARTVIRTUALIZING_FLAGS);
  
 -typedef struct PRJ_STARTVIRTUALIZING_OPTIONS
-+typedef struct _Windows_SupportedOS_17763_ PRJ_STARTVIRTUALIZING_OPTIONS
++typedef struct  PRJ_STARTVIRTUALIZING_OPTIONS
  {
      PRJ_STARTVIRTUALIZING_FLAGS Flags;
      UINT32 PoolThreadCount;
@@ -100,7 +101,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
      );
  
 -typedef struct PRJ_VIRTUALIZATION_INSTANCE_INFO
-+typedef struct _Windows_SupportedOS_17763_ PRJ_VIRTUALIZATION_INSTANCE_INFO
++typedef struct  PRJ_VIRTUALIZATION_INSTANCE_INFO
  {
      GUID InstanceID;
      UINT32 WriteAlignment;
@@ -117,13 +118,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  #pragma region Placeholder and File APIs
  
 -typedef enum PRJ_PLACEHOLDER_ID
-+typedef enum _Windows_SupportedOS_17763_ PRJ_PLACEHOLDER_ID
++typedef enum  PRJ_PLACEHOLDER_ID
  {
      PRJ_PLACEHOLDER_ID_LENGTH = 128
  } PRJ_PLACEHOLDER_ID;
  
 -typedef struct PRJ_PLACEHOLDER_VERSION_INFO
-+typedef struct _Windows_SupportedOS_17763_ PRJ_PLACEHOLDER_VERSION_INFO
++typedef struct  PRJ_PLACEHOLDER_VERSION_INFO
  {
      UINT8 ProviderID[PRJ_PLACEHOLDER_ID_LENGTH];
      UINT8 ContentID[PRJ_PLACEHOLDER_ID_LENGTH];
@@ -139,7 +140,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
      );
  
 -typedef struct PRJ_FILE_BASIC_INFO {
-+typedef struct _Windows_SupportedOS_17763_ PRJ_FILE_BASIC_INFO {
++typedef struct  PRJ_FILE_BASIC_INFO {
      BOOLEAN IsDirectory;
      INT64 FileSize;
      LARGE_INTEGER CreationTime;
@@ -148,7 +149,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  } PRJ_FILE_BASIC_INFO;
  
 -typedef struct PRJ_PLACEHOLDER_INFO
-+typedef struct _Windows_SupportedOS_17763_ PRJ_PLACEHOLDER_INFO
++typedef struct  PRJ_PLACEHOLDER_INFO
  {
      PRJ_FILE_BASIC_INFO FileBasicInfo;
  
@@ -175,7 +176,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
      );
  
 -typedef enum PRJ_UPDATE_TYPES
-+typedef enum _Windows_SupportedOS_17763_ PRJ_UPDATE_TYPES
++typedef enum  PRJ_UPDATE_TYPES
  {
      PRJ_UPDATE_NONE                 = 0x00000000,
      PRJ_UPDATE_ALLOW_DIRTY_METADATA = 0x00000001,
@@ -184,7 +185,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  DEFINE_ENUM_FLAG_OPERATORS(PRJ_UPDATE_TYPES);
  
 -typedef enum PRJ_UPDATE_FAILURE_CAUSES
-+typedef enum _Windows_SupportedOS_17763_ PRJ_UPDATE_FAILURE_CAUSES
++typedef enum  PRJ_UPDATE_FAILURE_CAUSES
  {
      PRJ_UPDATE_FAILURE_CAUSE_NONE           = 0x00000000,
      PRJ_UPDATE_FAILURE_CAUSE_DIRTY_METADATA = 0x00000001,
@@ -220,7 +221,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
      );
  
 -typedef enum PRJ_FILE_STATE
-+typedef enum _Windows_SupportedOS_17763_ PRJ_FILE_STATE
++typedef enum  PRJ_FILE_STATE
  {
      PRJ_FILE_STATE_PLACEHOLDER          = 0x00000001,
      PRJ_FILE_STATE_HYDRATED_PLACEHOLDER = 0x00000002,
@@ -252,14 +253,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
  #pragma region Callback support
  
 -typedef enum PRJ_CALLBACK_DATA_FLAGS
-+typedef enum _Windows_SupportedOS_17763_ PRJ_CALLBACK_DATA_FLAGS
++typedef enum  PRJ_CALLBACK_DATA_FLAGS
  {
      PRJ_CB_DATA_FLAG_ENUM_RESTART_SCAN          = 0x00000001,
      PRJ_CB_DATA_FLAG_ENUM_RETURN_SINGLE_ENTRY   = 0x00000002
  } PRJ_CALLBACK_DATA_FLAGS;
  
 -typedef struct PRJ_CALLBACK_DATA
-+typedef struct _Windows_SupportedOS_17763_ PRJ_CALLBACK_DATA
++typedef struct  PRJ_CALLBACK_DATA
  {
      UINT32 Size;
      PRJ_CALLBACK_DATA_FLAGS Flags;
@@ -268,26 +269,33 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/genera
      );
  
 -typedef struct PRJ_CALLBACKS {
-+typedef struct _Windows_SupportedOS_17763_ PRJ_CALLBACKS {
++typedef struct  PRJ_CALLBACKS {
      PRJ_START_DIRECTORY_ENUMERATION_CB* StartDirectoryEnumerationCallback;
      PRJ_END_DIRECTORY_ENUMERATION_CB* EndDirectoryEnumerationCallback;
      PRJ_GET_DIRECTORY_ENUMERATION_CB* GetDirectoryEnumerationCallback;
-@@ -447,13 +448,13 @@ typedef struct PRJ_CALLBACKS {
+@@ -447,19 +448,19 @@ typedef struct PRJ_CALLBACKS {
      PRJ_CANCEL_COMMAND_CB* CancelCommandCallback;
  } PRJ_CALLBACKS;
  
 -typedef enum PRJ_COMPLETE_COMMAND_TYPE
-+typedef enum _Windows_SupportedOS_17763_ PRJ_COMPLETE_COMMAND_TYPE
++typedef enum  PRJ_COMPLETE_COMMAND_TYPE
  {
      PRJ_COMPLETE_COMMAND_TYPE_NOTIFICATION = 1,
      PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION = 2
  } PRJ_COMPLETE_COMMAND_TYPE;
  
 -typedef struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
-+typedef struct _Windows_SupportedOS_17763_ _Windows_SupportedOS_Server2016_ PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
++typedef struct   PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
  
      PRJ_COMPLETE_COMMAND_TYPE CommandType;
  
+     union {
+         struct {
+-            PRJ_NOTIFY_TYPES NotificationMask;
++            _Win32_AssociatedEnum_(PRJ_NOTIFY_TYPES) PRJ_NOTIFY_TYPES NotificationMask;
+         } Notification;
+ 
+         struct {
 @@ -470,7 +471,7 @@ typedef struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
  } PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS;
  

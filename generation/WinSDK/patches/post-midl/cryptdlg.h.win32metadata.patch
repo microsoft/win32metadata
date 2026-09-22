@@ -1,0 +1,154 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
+index 13feace6a3..9f8900334d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+---------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -110,7 +111,7 @@ typedef struct tagCSSA {
+     HWND                hwndParent;
+     HINSTANCE           hInstance;
+     LPCSTR              pTemplateName;
+-    DWORD               dwFlags;
++    _Win32_AssociatedEnum_(CERT_SELECT_STRUCT_FLAGS) DWORD               dwFlags;
+     LPCSTR              szTitle;
+     DWORD               cCertStore;
+     HCERTSTORE *        arrayCertStore;
+@@ -130,7 +131,7 @@ typedef struct tagCSSW {
+     HWND                hwndParent;
+     HINSTANCE           hInstance;
+     LPCWSTR             pTemplateName;
+-    DWORD               dwFlags;
++    _Win32_AssociatedEnum_(CERT_SELECT_STRUCT_FLAGS) DWORD               dwFlags;
+     LPCWSTR             szTitle;
+     DWORD               cCertStore;
+     HCERTSTORE *        arrayCertStore;
+@@ -194,7 +195,7 @@ typedef struct tagCERT_VIEWPROPERTIES_STRUCT_A {
+     DWORD               dwSize;
+     HWND                hwndParent;
+     HINSTANCE           hInstance;
+-    DWORD               dwFlags;
++    _Win32_AssociatedEnum_(CERT_VIEWPROPERTIES_STRUCT_FLAGS) DWORD               dwFlags;
+     LPCSTR              szTitle;
+     PCCERT_CONTEXT      pCertContext;
+     LPSTR *             arrayPurposes;
+@@ -219,7 +220,7 @@ typedef struct tagCERT_VIEWPROPERTIES_STRUCT_W {
+     DWORD               dwSize;
+     HWND                hwndParent;
+     HINSTANCE           hInstance;
+-    DWORD               dwFlags;
++    _Win32_AssociatedEnum_(CERT_VIEWPROPERTIES_STRUCT_FLAGS) DWORD               dwFlags;
+     LPCWSTR             szTitle;
+     PCCERT_CONTEXT      pCertContext;
+     LPSTR *             arrayPurposes;
+@@ -440,7 +441,7 @@ typedef struct _CERT_VERIFY_CERTIFICATE_TRUST {
+ 
+ typedef struct _CTL_MODIFY_REQUEST {
+     PCCERT_CONTEXT      pccert;         // Certificate to change trust on
+-    DWORD               dwOperation;    // Operation to be performed
++    _Win32_AssociatedEnum_(CTL_MODIFY_REQUEST_OPERATION) DWORD               dwOperation;    // Operation to be performed
+     DWORD               dwError;        // Operation error code
+ } CTL_MODIFY_REQUEST, * PCTL_MODIFY_REQUEST;
+ 
+@@ -483,4 +484,99 @@ WINAPI FormatVerisignExtension(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CSS_HIDE_PROPERTIES")
++#undef CSS_HIDE_PROPERTIES
++#pragma push_macro("CSS_ENABLEHOOK")
++#undef CSS_ENABLEHOOK
++#pragma push_macro("CSS_ALLOWMULTISELECT")
++#undef CSS_ALLOWMULTISELECT
++#pragma push_macro("CSS_SHOW_HELP")
++#undef CSS_SHOW_HELP
++#pragma push_macro("CSS_ENABLETEMPLATE")
++#undef CSS_ENABLETEMPLATE
++#pragma push_macro("CSS_ENABLETEMPLATEHANDLE")
++#undef CSS_ENABLETEMPLATEHANDLE
++enum [[clang::flag_enum]] CERT_SELECT_STRUCT_FLAGS : unsigned int
++{
++    CSS_HIDE_PROPERTIES = 1U,
++    CSS_ENABLEHOOK = 2U,
++    CSS_ALLOWMULTISELECT = 4U,
++    CSS_SHOW_HELP = 16U,
++    CSS_ENABLETEMPLATE = 32U,
++    CSS_ENABLETEMPLATEHANDLE = 64U,
++};
++#pragma pop_macro("CSS_ENABLETEMPLATEHANDLE")
++#pragma pop_macro("CSS_ENABLETEMPLATE")
++#pragma pop_macro("CSS_SHOW_HELP")
++#pragma pop_macro("CSS_ALLOWMULTISELECT")
++#pragma pop_macro("CSS_ENABLEHOOK")
++#pragma pop_macro("CSS_HIDE_PROPERTIES")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CM_ENABLEHOOK")
++#undef CM_ENABLEHOOK
++#pragma push_macro("CM_SHOW_HELP")
++#undef CM_SHOW_HELP
++#pragma push_macro("CM_SHOW_HELPICON")
++#undef CM_SHOW_HELPICON
++#pragma push_macro("CM_ENABLETEMPLATE")
++#undef CM_ENABLETEMPLATE
++#pragma push_macro("CM_HIDE_ADVANCEPAGE")
++#undef CM_HIDE_ADVANCEPAGE
++#pragma push_macro("CM_HIDE_TRUSTPAGE")
++#undef CM_HIDE_TRUSTPAGE
++#pragma push_macro("CM_NO_NAMECHANGE")
++#undef CM_NO_NAMECHANGE
++#pragma push_macro("CM_NO_EDITTRUST")
++#undef CM_NO_EDITTRUST
++#pragma push_macro("CM_HIDE_DETAILPAGE")
++#undef CM_HIDE_DETAILPAGE
++#pragma push_macro("CM_ADD_CERT_STORES")
++#undef CM_ADD_CERT_STORES
++enum [[clang::flag_enum]] CERT_VIEWPROPERTIES_STRUCT_FLAGS : unsigned int
++{
++    CM_ENABLEHOOK = 1U,
++    CM_SHOW_HELP = 2U,
++    CM_SHOW_HELPICON = 4U,
++    CM_ENABLETEMPLATE = 8U,
++    CM_HIDE_ADVANCEPAGE = 16U,
++    CM_HIDE_TRUSTPAGE = 32U,
++    CM_NO_NAMECHANGE = 64U,
++    CM_NO_EDITTRUST = 128U,
++    CM_HIDE_DETAILPAGE = 256U,
++    CM_ADD_CERT_STORES = 512U,
++};
++#pragma pop_macro("CM_ADD_CERT_STORES")
++#pragma pop_macro("CM_HIDE_DETAILPAGE")
++#pragma pop_macro("CM_NO_EDITTRUST")
++#pragma pop_macro("CM_NO_NAMECHANGE")
++#pragma pop_macro("CM_HIDE_TRUSTPAGE")
++#pragma pop_macro("CM_HIDE_ADVANCEPAGE")
++#pragma pop_macro("CM_ENABLETEMPLATE")
++#pragma pop_macro("CM_SHOW_HELPICON")
++#pragma pop_macro("CM_SHOW_HELP")
++#pragma pop_macro("CM_ENABLEHOOK")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CTL_MODIFY_REQUEST_ADD_TRUSTED")
++#undef CTL_MODIFY_REQUEST_ADD_TRUSTED
++#pragma push_macro("CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED")
++#undef CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED
++#pragma push_macro("CTL_MODIFY_REQUEST_REMOVE")
++#undef CTL_MODIFY_REQUEST_REMOVE
++enum CTL_MODIFY_REQUEST_OPERATION : unsigned int
++{
++    CTL_MODIFY_REQUEST_ADD_TRUSTED = 3U,
++    CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED = 1U,
++    CTL_MODIFY_REQUEST_REMOVE = 2U,
++};
++#pragma pop_macro("CTL_MODIFY_REQUEST_REMOVE")
++#pragma pop_macro("CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED")
++#pragma pop_macro("CTL_MODIFY_REQUEST_ADD_TRUSTED")
++#endif
++
+ #endif // _CRYPTDLG_H_

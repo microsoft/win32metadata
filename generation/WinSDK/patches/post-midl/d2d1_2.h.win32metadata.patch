@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
+index 6b6df02c52..da3a3e04bd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
 @@ -20,6 +20,7 @@
@@ -14,10 +15,30 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h b/generation/Win
  /// Specifies the extent to which D2D will throttle work sent to the GPU.
  /// </summary>
 -typedef enum D2D1_RENDERING_PRIORITY
-+typedef enum _Windows_SupportedOS_Windows81_ D2D1_RENDERING_PRIORITY
++typedef enum  D2D1_RENDERING_PRIORITY
  {
      D2D1_RENDERING_PRIORITY_NORMAL = 0,
      D2D1_RENDERING_PRIORITY_LOW = 1,
+@@ -167,15 +168,15 @@ interface DX_DECLARE_INTERFACE("9eb767fd-4269-4467-b8c2-eb30cb305743") ID2D1Comm
+ #ifdef D2D_USE_C_DEFINITIONS
+ 
+ 
+-typedef interface ID2D1GeometryRealization ID2D1GeometryRealization;
++_Windows_SupportedOS_Windows81_ typedef interface ID2D1GeometryRealization ID2D1GeometryRealization;
+ 
+-typedef interface ID2D1DeviceContext1 ID2D1DeviceContext1;
++_Windows_SupportedOS_Windows81_ typedef interface ID2D1DeviceContext1 ID2D1DeviceContext1;
+ 
+ typedef interface ID2D1Device1 ID2D1Device1;
+ 
+-typedef interface ID2D1Factory2 ID2D1Factory2;
++_Windows_SupportedOS_Windows81_ typedef interface ID2D1Factory2 ID2D1Factory2;
+ 
+-typedef interface ID2D1CommandSink1 ID2D1CommandSink1;
++_Windows_SupportedOS_Windows81_ typedef interface ID2D1CommandSink1 ID2D1CommandSink1;
+ 
+ #endif
+ 
 @@ -187,7 +188,7 @@ extern "C"
  
  #if NTDDI_VERSION >= NTDDI_WINBLUE

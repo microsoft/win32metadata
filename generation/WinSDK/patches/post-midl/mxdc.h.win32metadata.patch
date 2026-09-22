@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h b/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h
-index f9cfcd2508..ec3c324d2f 100644
+index f9cfcd2508..0fc5114775 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mxdc.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -15,7 +15,7 @@ index f9cfcd2508..ec3c324d2f 100644
  {
      DWORD dwSize;                /* Size of the structue and data        */
 -    DWORD dwResourceType;        /* Resource Type, "MXDC_S0_PAGE_ENUMS"  */
-+    _Win32_AssociatedEnum_(MXDC_S0_PAGE_ENUMS) DWORD dwResourceType;        /* Resource Type, "MXDC_S0_PAGE_ENUMS"  */
++     DWORD dwResourceType;        /* Resource Type, "MXDC_S0_PAGE_ENUMS"  */
      BYTE  szUri[MAX_PATH];       /* URI sting of the resource            */
      DWORD dwDataSize;            /* The resource's data byte size        */
      BYTE  bData[1];              /* The resource's data                  */

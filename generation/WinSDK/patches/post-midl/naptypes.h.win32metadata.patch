@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h
+index ef0fbb75a3..6c864f612d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h
 @@ -56,6 +56,7 @@ extern "C"{
@@ -14,14 +15,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
  typedef FILETIME ProbationTime;
  
 -typedef struct tagCountedString
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagCountedString
++typedef struct   tagCountedString
      {
      UINT16 length;
      /* [string][size_is][range] */ WCHAR *string;
      } 	CountedString;
  
 -typedef struct tagIsolationInfo
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIsolationInfo
++typedef struct   tagIsolationInfo
      {
      IsolationState isolationState;
      ProbationTime probEndTime;
@@ -29,7 +30,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
      } 	IsolationInfo;
  
 -typedef struct tagIsolationInfoEx
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIsolationInfoEx
++typedef struct   tagIsolationInfoEx
      {
      IsolationState isolationState;
      ExtendedIsolationState extendedIsolationState;
@@ -38,7 +39,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
      } 	FailureCategory;
  
 -typedef struct tagFailureCategoryMapping
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagFailureCategoryMapping
++typedef struct   tagFailureCategoryMapping
      {
      BOOL mappingCompliance[ 5 ];
      } 	FailureCategoryMapping;
@@ -47,7 +48,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
  typedef /* [range] */ __RPC__range(0,maxEnforcerCount) UINT16 EnforcementEntityCount;
  
 -typedef struct tagCorrelationId
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagCorrelationId
++typedef struct   tagCorrelationId
      {
      GUID connId;
      FILETIME timeStamp;
@@ -56,20 +57,20 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
  typedef UINT32 MessageId;
  
 -typedef struct tagResultCodes
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagResultCodes
++typedef struct   tagResultCodes
      {
      /* [range] */ UINT16 count;
      /* [size_is] */ HRESULT *results;
      } 	ResultCodes;
  
 -typedef struct tagIpv4Address
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIpv4Address
++typedef struct   tagIpv4Address
      {
      BYTE addr[ 4 ];
      } 	Ipv4Address;
  
 -typedef struct tagIpv6Address
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagIpv6Address
++typedef struct   tagIpv6Address
      {
      BYTE addr[ 16 ];
      } 	Ipv6Address;
@@ -78,7 +79,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
      } 	FixupState;
  
 -typedef struct tagFixupInfo
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagFixupInfo
++typedef struct   tagFixupInfo
      {
      FixupState state;
      Percentage percentage;
@@ -87,7 +88,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
      } 	NapNotifyType;
  
 -typedef struct tagSystemHealthAgentState
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagSystemHealthAgentState
++typedef struct   tagSystemHealthAgentState
      {
      SystemHealthEntityId id;
      ResultCodes shaResultCodes;
@@ -96,7 +97,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
      } 	SystemHealthAgentState;
  
 -typedef struct tagSoHAttribute
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagSoHAttribute
++typedef struct   tagSoHAttribute
      {
      UINT16 type;
      /* [range] */ UINT16 size;
@@ -105,14 +106,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/naptypes.h b/generation/W
  typedef struct tagNetworkSoH NetworkSoHResponse;
  
 -typedef struct tagPrivateData
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagPrivateData
++typedef struct   tagPrivateData
      {
      /* [range] */ UINT16 size;
      /* [size_is] */ BYTE *data;
      } 	PrivateData;
  
 -typedef struct tagNapComponentRegistrationInfo
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagNapComponentRegistrationInfo
++typedef struct   tagNapComponentRegistrationInfo
      {
      NapComponentId id;
      CountedString friendlyName;

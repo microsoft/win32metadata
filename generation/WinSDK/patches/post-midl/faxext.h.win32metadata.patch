@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxExt.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxExt.h
+index 34bf0971a5..fa99862c45 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxExt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxExt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -96,7 +97,7 @@ FaxExtRegisterForEvents (
+     LPCWSTR                     lpcwstrDataGUID,// GUID of data
+     PFAX_EXT_CONFIG_CHANGE      lpConfigChangeCallback
+ );
+-typedef HANDLE (CALLBACK *PFAX_EXT_REGISTER_FOR_EVENTS) (HINSTANCE, DWORD, FAX_ENUM_DEVICE_ID_SOURCE, LPCWSTR, PFAX_EXT_CONFIG_CHANGE);
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef HANDLE (CALLBACK *PFAX_EXT_REGISTER_FOR_EVENTS) (HINSTANCE, DWORD, FAX_ENUM_DEVICE_ID_SOURCE, LPCWSTR, PFAX_EXT_CONFIG_CHANGE);
+ 
+ //
+ // Prototype of FaxExtUnregisterForEvents

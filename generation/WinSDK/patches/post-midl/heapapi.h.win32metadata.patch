@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
+index d72e8f8ca0..cb3d2e1bd5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
 @@ -17,6 +17,7 @@
@@ -14,25 +15,29 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  //
  
 -typedef struct _HEAP_SUMMARY {
-+typedef struct _Windows_SupportedOS_20348_ _HEAP_SUMMARY {
++typedef struct  _HEAP_SUMMARY {
      DWORD cb;
      SIZE_T cbAllocated;
      SIZE_T cbCommitted;
-@@ -53,6 +54,9 @@ typedef PHEAP_SUMMARY LPHEAP_SUMMARY;
+@@ -53,16 +54,21 @@ typedef PHEAP_SUMMARY LPHEAP_SUMMARY;
  // Prototypes
  //
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +_Win32_RAIIFree_(HeapDestroy)
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -63,6 +67,8 @@ HeapCreate(
+ WINAPI
+ HeapCreate(
+-    _In_ DWORD flOptions,
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD flOptions,
+     _In_ SIZE_T dwInitialSize,
      _In_ SIZE_T dwMaximumSize
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -41,36 +46,54 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
      _In_ HANDLE hHeap
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
  WINBASEAPI
  _Ret_maybenull_
  _Post_writable_byte_size_(dwBytes)
-@@ -82,6 +89,7 @@ HeapAlloc(
+@@ -78,10 +85,11 @@ LPVOID
+ WINAPI
+ HeapAlloc(
+     _In_ HANDLE hHeap,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD dwFlags,
      _In_ SIZE_T dwBytes
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
  WINBASEAPI
  _Success_(return != 0)
  _Ret_maybenull_
-@@ -96,6 +104,8 @@ HeapReAlloc(
+@@ -91,30 +99,35 @@ LPVOID
+ WINAPI
+ HeapReAlloc(
+     _Inout_ HANDLE hHeap,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD dwFlags,
+     _Frees_ptr_opt_ LPVOID lpMem,
      _In_ SIZE_T dwBytes
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -106,6 +116,7 @@ HeapFree(
+ WINAPI
+ HeapFree(
+     _Inout_ HANDLE hHeap,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD dwFlags,
      __drv_freesMem(Mem) _Frees_ptr_opt_ LPVOID lpMem
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
  WINBASEAPI
  SIZE_T
  WINAPI
-@@ -115,6 +126,8 @@ HeapSize(
+ HeapSize(
+     _In_ HANDLE hHeap,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD dwFlags,
      _In_ LPCVOID lpMem
      );
  
@@ -79,17 +102,19 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -122,6 +135,8 @@ GetProcessHeap(
+@@ -122,14 +135,18 @@ GetProcessHeap(
      VOID
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  SIZE_T
  WINAPI
-@@ -130,6 +145,8 @@ HeapCompact(
-     _In_ DWORD dwFlags
+ HeapCompact(
+     _In_ HANDLE hHeap,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD dwFlags
      );
  
 +_Windows_SupportedOS_WindowsXP_
@@ -97,7 +122,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  WINBASEAPI
  BOOL
  WINAPI
-@@ -146,6 +163,7 @@ HeapSetInformation(
+@@ -146,12 +163,13 @@ HeapSetInformation(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -105,11 +130,18 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  WINBASEAPI
  BOOL
  WINAPI
+ HeapValidate(
+     _In_ HANDLE hHeap,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(HEAP_FLAGS) _In_ DWORD dwFlags,
+     _In_opt_ LPCVOID lpMem
+     );
+ 
 @@ -161,6 +179,7 @@ HeapValidate(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
-+_Windows_SupportedOS_20348_
++
  BOOL
  WINAPI
  HeapSummary(
@@ -117,7 +149,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
@@ -126,7 +158,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
      _Out_writes_to_(NumberOfHeaps,return) PHANDLE ProcessHeaps
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -135,7 +167,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/Wi
      _In_ HANDLE hHeap
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL

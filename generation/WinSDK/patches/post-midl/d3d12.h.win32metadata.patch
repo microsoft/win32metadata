@@ -1,0 +1,72 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
+index c103a80d02..f25629664a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -7171,7 +7172,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+         
+         virtual void STDMETHODCALLTYPE IASetPrimitiveTopology( 
+             /* [annotation] */ 
+-            _In_  D3D12_PRIMITIVE_TOPOLOGY PrimitiveTopology) = 0;
++            _Win32_AssociatedEnum_(D3D_PRIMITIVE_TOPOLOGY) _In_  D3D12_PRIMITIVE_TOPOLOGY PrimitiveTopology) = 0;
+         
+         virtual void STDMETHODCALLTYPE RSSetViewports( 
+             /* [annotation] */ 
+@@ -10991,7 +10992,7 @@ EXTERN_C const IID IID_ID3D12Device;
+             /* [annotation] */ 
+             _In_opt_  LPCWSTR Name,
+             /* [annotation] */ 
+-            _Out_  HANDLE *pHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenSharedHandle( 
+             /* [annotation] */ 
+@@ -11006,7 +11007,7 @@ EXTERN_C const IID IID_ID3D12Device;
+             _In_  LPCWSTR Name,
+             DWORD Access,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *pNTHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pNTHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE MakeResident( 
+             UINT NumObjects,
+@@ -17419,7 +17420,7 @@ enum D3D12_SERIALIZED_BLOCK_TYPE
+ 
+ typedef struct D3D12_RAYTRACING_SERIALIZED_BLOCK
+     {
+-    D3D12_RAYTRACING_SERIALIZED_BLOCK_TYPE Type;
++    _Win32_AssociatedEnum_(D3D12_SERIALIZED_BLOCK_TYPE) D3D12_RAYTRACING_SERIALIZED_BLOCK_TYPE Type;
+     UINT64 NumBlockPointersAfterHeader;
+     } 	D3D12_RAYTRACING_SERIALIZED_BLOCK;
+ 
+@@ -17560,7 +17561,7 @@ EXTERN_C const IID IID_ID3D12Device5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8b4f173b-2fea-4b80-8f58-4307191ab95d")
++    MIDL_INTERFACE("8b4f173b-2fea-4b80-8f58-4307191ab95d") _Windows_SupportedOS_17763_ 
+     ID3D12Device5 : public ID3D12Device4
+     {
+     public:
+@@ -35087,7 +35088,7 @@ EXTERN_C const IID IID_ID3D12VirtualizationGuestDevice;
+             /* [annotation] */ 
+             _In_  ID3D12DeviceChild *pObject,
+             /* [annotation] */ 
+-            _Out_  HANDLE *pHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateFenceFd( 
+             /* [annotation] */ 
+@@ -35625,7 +35626,7 @@ EXTERN_C const IID IID_ID3D12PageableTools;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAllocation( 
+             /* [annotation] */ 
+-            _Inout_  D3D12_GPU_VIRTUAL_ADDRESS_RANGE *pAllocation) = 0;
++            _Win32_Retval_ _Inout_  D3D12_GPU_VIRTUAL_ADDRESS_RANGE *pAllocation) = 0;
+         
+     };
+     

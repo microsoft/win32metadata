@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dde.h b/generation/WinSDK/RecompiledIdlHeaders/um/dde.h
-index e47a5d7987123cca8b5de231391bf79c9487bf7f..17aba2449d779d4d560baf5862c4e3344e1a8688 100644
+index e47a5d7987..c501ca85b6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dde.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dde.h
 @@ -17,6 +17,7 @@
@@ -14,8 +14,8 @@ index e47a5d7987123cca8b5de231391bf79c9487bf7f..17aba2449d779d4d560baf5862c4e334
   * DDE SECURITY
   */
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
  BOOL
  WINAPI
  DdeSetQualityOfService(
@@ -23,8 +23,23 @@ index e47a5d7987123cca8b5de231391bf79c9487bf7f..17aba2449d779d4d560baf5862c4e334
      CONST SECURITY_QUALITY_OF_SERVICE *pqosNew,
      PSECURITY_QUALITY_OF_SERVICE pqosPrev);
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
  BOOL
  WINAPI
  ImpersonateDdeClientWindow(
+@@ -193,10 +198,10 @@ ImpersonateDdeClientWindow(
+ /*
+  * DDE message packing APIs
+  */
+-LPARAM APIENTRY PackDDElParam(_In_ UINT msg, _In_ UINT_PTR uiLo, _In_ UINT_PTR uiHi);
+-BOOL   APIENTRY UnpackDDElParam(_In_ UINT msg, _In_ LPARAM lParam, _Out_ PUINT_PTR puiLo, _Out_ PUINT_PTR puiHi);
+-BOOL   APIENTRY FreeDDElParam(_In_ UINT msg, _In_ LPARAM lParam);
+-LPARAM APIENTRY ReuseDDElParam(LPARAM lParam, UINT msgIn, UINT msgOut, UINT_PTR uiLo, UINT_PTR uiHi);
++_Windows_SupportedOS_Windows2000_ LPARAM APIENTRY PackDDElParam(_In_ UINT msg, _In_ UINT_PTR uiLo, _In_ UINT_PTR uiHi);
++_Windows_SupportedOS_Windows2000_ BOOL   APIENTRY UnpackDDElParam(_In_ UINT msg, _In_ LPARAM lParam, _Out_ PUINT_PTR puiLo, _Out_ PUINT_PTR puiHi);
++_Windows_SupportedOS_Windows2000_ BOOL   APIENTRY FreeDDElParam(_In_ UINT msg, _In_ LPARAM lParam);
++_Windows_SupportedOS_Windows2000_ LPARAM APIENTRY ReuseDDElParam(LPARAM lParam, UINT msgIn, UINT msgOut, UINT_PTR uiLo, UINT_PTR uiHi);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

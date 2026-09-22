@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h
-index 78285b58a1169e60fde7f6ba0652462b53e9a82b..056bb2f87e05313b9e87d601566244f18bfd143f 100644
+index 78285b58a1..e4fb4a42bb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ipmib.h
 @@ -21,6 +21,7 @@ Abstract:
@@ -15,7 +15,39 @@ index 78285b58a1169e60fde7f6ba0652462b53e9a82b..056bb2f87e05313b9e87d601566244f1
  #define MIB_IPADDR_DNS_ELIGIBLE 0X0100 // Address is published in DNS.
  
 -typedef struct _MIB_IPADDRROW_XP {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_IPADDRROW_XP {
++typedef struct   _MIB_IPADDRROW_XP {
      DWORD dwAddr;
      IF_INDEX dwIndex;
      DWORD dwMask;
+@@ -111,11 +112,11 @@ typedef struct _MIB_IPFORWARDROW {
+     IF_INDEX dwForwardIfIndex;
+     union {
+         DWORD dwForwardType;              // Old field name uses DWORD type.
+-        MIB_IPFORWARD_TYPE ForwardType;   // New field name uses enum type.
++        _Win32_AssociatedEnum_(MIB_IPFORWARD_TYPE) MIB_IPFORWARD_TYPE ForwardType;   // New field name uses enum type.
+     };
+     union {
+         DWORD dwForwardProto;             // Old field name uses DWORD type.
+-        MIB_IPFORWARD_PROTO ForwardProto; // New field name uses enum type.
++        _Win32_AssociatedEnum_(NL_ROUTE_PROTOCOL) MIB_IPFORWARD_PROTO ForwardProto; // New field name uses enum type.
+     };
+     DWORD dwForwardAge;
+     DWORD dwForwardNextHopAS;
+@@ -158,7 +159,7 @@ typedef struct _MIB_IPNETROW_LH {
+     DWORD dwAddr;
+     union {
+         DWORD dwType;           // Old field name was just a DWORD.
+-        MIB_IPNET_TYPE Type;    // New field name uses the enum type.
++        _Win32_AssociatedEnum_(MIB_IPNET_TYPE) MIB_IPNET_TYPE Type;    // New field name uses the enum type.
+     };
+ } MIB_IPNETROW_LH, *PMIB_IPNETROW_LH;
+ 
+@@ -201,7 +202,7 @@ typedef enum {
+ typedef struct _MIB_IPSTATS_LH {
+     union {
+         DWORD dwForwarding;
+-        MIB_IPSTATS_FORWARDING Forwarding;
++        _Win32_AssociatedEnum_(MIB_IPSTATS_FORWARDING) MIB_IPSTATS_FORWARDING Forwarding;
+     };
+     DWORD dwDefaultTTL;
+     DWORD dwInReceives;

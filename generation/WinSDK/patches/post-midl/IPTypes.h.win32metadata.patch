@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
-index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2de9bfba5 100644
+index 58f474bba2..8a4029ffa3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IPTypes.h
 @@ -15,6 +15,7 @@ Module Name:
@@ -15,7 +15,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  //
  
 -typedef struct _IP_ADDR_STRING {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_ADDR_STRING {
++typedef struct   _IP_ADDR_STRING {
      struct _IP_ADDR_STRING* Next;
      IP_ADDRESS_STRING IpAddress;
      IP_MASK_STRING IpMask;
@@ -24,7 +24,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  //
  
 -typedef struct _IP_ADAPTER_INFO {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_ADAPTER_INFO {
++typedef struct   _IP_ADAPTER_INFO {
      struct _IP_ADAPTER_INFO* Next;
      DWORD ComboIndex;
      char AdapterName[MAX_ADAPTER_NAME_LENGTH + 4];
@@ -33,25 +33,51 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  typedef NL_DAD_STATE IP_DAD_STATE;
  
 -typedef struct _IP_ADAPTER_UNICAST_ADDRESS_LH {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_UNICAST_ADDRESS_LH {
++typedef struct   _IP_ADAPTER_UNICAST_ADDRESS_LH {
      union {
          ULONGLONG Alignment;
          struct {
+@@ -121,9 +122,9 @@ typedef struct _IP_ADAPTER_UNICAST_ADDRESS_LH {
+     struct _IP_ADAPTER_UNICAST_ADDRESS_LH *Next;
+     SOCKET_ADDRESS Address;
+ 
+-    IP_PREFIX_ORIGIN PrefixOrigin;
+-    IP_SUFFIX_ORIGIN SuffixOrigin;
+-    IP_DAD_STATE DadState;
++    _Win32_AssociatedEnum_(NL_PREFIX_ORIGIN) IP_PREFIX_ORIGIN PrefixOrigin;
++    _Win32_AssociatedEnum_(NL_SUFFIX_ORIGIN) IP_SUFFIX_ORIGIN SuffixOrigin;
++    _Win32_AssociatedEnum_(NL_DAD_STATE) IP_DAD_STATE DadState;
+ 
+     ULONG ValidLifetime;
+     ULONG PreferredLifetime;
 @@ -132,7 +133,7 @@ typedef struct _IP_ADAPTER_UNICAST_ADDRESS_LH {
  } IP_ADAPTER_UNICAST_ADDRESS_LH,
   *PIP_ADAPTER_UNICAST_ADDRESS_LH;
  
 -typedef struct _IP_ADAPTER_UNICAST_ADDRESS_XP {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_UNICAST_ADDRESS_XP {
++typedef struct   _IP_ADAPTER_UNICAST_ADDRESS_XP {
      union {
          ULONGLONG Alignment;
          struct {
+@@ -143,9 +144,9 @@ typedef struct _IP_ADAPTER_UNICAST_ADDRESS_XP {
+     struct _IP_ADAPTER_UNICAST_ADDRESS_XP *Next;
+     SOCKET_ADDRESS Address;
+ 
+-    IP_PREFIX_ORIGIN PrefixOrigin;
+-    IP_SUFFIX_ORIGIN SuffixOrigin;
+-    IP_DAD_STATE DadState;
++    _Win32_AssociatedEnum_(NL_PREFIX_ORIGIN) IP_PREFIX_ORIGIN PrefixOrigin;
++    _Win32_AssociatedEnum_(NL_SUFFIX_ORIGIN) IP_SUFFIX_ORIGIN SuffixOrigin;
++    _Win32_AssociatedEnum_(NL_DAD_STATE) IP_DAD_STATE DadState;
+ 
+     ULONG ValidLifetime;
+     ULONG PreferredLifetime;
 @@ -166,7 +167,7 @@ typedef  IP_ADAPTER_UNICAST_ADDRESS_XP *PIP_ADAPTER_UNICAST_ADDRESS;
  #define IP_ADAPTER_ADDRESS_DNS_ELIGIBLE 0x01
  #define IP_ADAPTER_ADDRESS_TRANSIENT    0x02
  
 -typedef struct _IP_ADAPTER_ANYCAST_ADDRESS_XP {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_ANYCAST_ADDRESS_XP {
++typedef struct   _IP_ADAPTER_ANYCAST_ADDRESS_XP {
      union {
          ULONGLONG Alignment;
          struct {
@@ -60,7 +86,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  #endif
  
 -typedef struct _IP_ADAPTER_MULTICAST_ADDRESS_XP {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_MULTICAST_ADDRESS_XP {
++typedef struct   _IP_ADAPTER_MULTICAST_ADDRESS_XP {
      union {
          ULONGLONG Alignment;
          struct {
@@ -69,7 +95,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  #endif
  
 -typedef struct _IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
++typedef struct   _IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
      union {
          ULONGLONG Alignment;
          struct {
@@ -78,7 +104,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  #endif
  
 -typedef struct _IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
++typedef struct   _IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
      union {
          ULONGLONG Alignment;
          struct {
@@ -87,7 +113,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  
  
 -typedef struct _IP_ADAPTER_GATEWAY_ADDRESS_LH {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _IP_ADAPTER_GATEWAY_ADDRESS_LH {
++typedef struct   _IP_ADAPTER_GATEWAY_ADDRESS_LH {
      union {
          ULONGLONG Alignment;
          struct {
@@ -96,7 +122,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  #endif
  
 -typedef struct _IP_ADAPTER_PREFIX_XP {
-+typedef struct _Windows_SupportedOS_Server2003_ _IP_ADAPTER_PREFIX_XP {
++typedef struct  _IP_ADAPTER_PREFIX_XP {
      union {
          ULONGLONG Alignment;
          struct {
@@ -105,7 +131,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  #endif
  
 -typedef struct _IP_ADAPTER_DNS_SUFFIX {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _IP_ADAPTER_DNS_SUFFIX {
++typedef struct   _IP_ADAPTER_DNS_SUFFIX {
      struct _IP_ADAPTER_DNS_SUFFIX *Next;
      WCHAR String[MAX_DNS_SUFFIX_STRING_LENGTH];
  }IP_ADAPTER_DNS_SUFFIX, *PIP_ADAPTER_DNS_SUFFIX;
@@ -114,7 +140,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  #define IP_ADAPTER_IPV6_MANAGE_ADDRESS_CONFIG 0x00000200
  
 -typedef struct _IP_ADAPTER_ADDRESSES_LH {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_ADDRESSES_LH {
++typedef struct   _IP_ADAPTER_ADDRESSES_LH {
      union {
          ULONGLONG Alignment;
          struct {
@@ -123,7 +149,7 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
   *PIP_ADAPTER_ADDRESSES_LH;
  
 -typedef struct _IP_ADAPTER_ADDRESSES_XP {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _IP_ADAPTER_ADDRESSES_XP {
++typedef struct   _IP_ADAPTER_ADDRESSES_XP {
      union {
          ULONGLONG Alignment;
          struct {
@@ -132,7 +158,63 @@ index 58f474bba2b1ad0a38a608f0e24417bef0b252b8..90bcc3b12716334831b78fc7b946e0b2
  //
  
 -typedef struct _IP_PER_ADAPTER_INFO_W2KSP1 {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IP_PER_ADAPTER_INFO_W2KSP1 {
++typedef struct   _IP_PER_ADAPTER_INFO_W2KSP1 {
      UINT AutoconfigEnabled;
      UINT AutoconfigActive;
      PIP_ADDR_STRING CurrentDnsServer;
+@@ -480,4 +481,55 @@ typedef IP_INTERFACE_NAME_INFO_W2KSP1 *PIP_INTERFACE_NAME_INFO;
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("GAA_FLAG_SKIP_UNICAST")
++#undef GAA_FLAG_SKIP_UNICAST
++#pragma push_macro("GAA_FLAG_SKIP_ANYCAST")
++#undef GAA_FLAG_SKIP_ANYCAST
++#pragma push_macro("GAA_FLAG_SKIP_MULTICAST")
++#undef GAA_FLAG_SKIP_MULTICAST
++#pragma push_macro("GAA_FLAG_SKIP_DNS_SERVER")
++#undef GAA_FLAG_SKIP_DNS_SERVER
++#pragma push_macro("GAA_FLAG_INCLUDE_PREFIX")
++#undef GAA_FLAG_INCLUDE_PREFIX
++#pragma push_macro("GAA_FLAG_SKIP_FRIENDLY_NAME")
++#undef GAA_FLAG_SKIP_FRIENDLY_NAME
++#pragma push_macro("GAA_FLAG_INCLUDE_WINS_INFO")
++#undef GAA_FLAG_INCLUDE_WINS_INFO
++#pragma push_macro("GAA_FLAG_INCLUDE_GATEWAYS")
++#undef GAA_FLAG_INCLUDE_GATEWAYS
++#pragma push_macro("GAA_FLAG_INCLUDE_ALL_INTERFACES")
++#undef GAA_FLAG_INCLUDE_ALL_INTERFACES
++#pragma push_macro("GAA_FLAG_INCLUDE_ALL_COMPARTMENTS")
++#undef GAA_FLAG_INCLUDE_ALL_COMPARTMENTS
++#pragma push_macro("GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER")
++#undef GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER
++enum [[clang::flag_enum]] GET_ADAPTERS_ADDRESSES_FLAGS : unsigned int
++{
++    GAA_FLAG_SKIP_UNICAST = 1U,
++    GAA_FLAG_SKIP_ANYCAST = 2U,
++    GAA_FLAG_SKIP_MULTICAST = 4U,
++    GAA_FLAG_SKIP_DNS_SERVER = 8U,
++    GAA_FLAG_INCLUDE_PREFIX = 16U,
++    GAA_FLAG_SKIP_FRIENDLY_NAME = 32U,
++    GAA_FLAG_INCLUDE_WINS_INFO = 64U,
++    GAA_FLAG_INCLUDE_GATEWAYS = 128U,
++    GAA_FLAG_INCLUDE_ALL_INTERFACES = 256U,
++    GAA_FLAG_INCLUDE_ALL_COMPARTMENTS = 512U,
++    GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER = 1024U,
++};
++#pragma pop_macro("GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER")
++#pragma pop_macro("GAA_FLAG_INCLUDE_ALL_COMPARTMENTS")
++#pragma pop_macro("GAA_FLAG_INCLUDE_ALL_INTERFACES")
++#pragma pop_macro("GAA_FLAG_INCLUDE_GATEWAYS")
++#pragma pop_macro("GAA_FLAG_INCLUDE_WINS_INFO")
++#pragma pop_macro("GAA_FLAG_SKIP_FRIENDLY_NAME")
++#pragma pop_macro("GAA_FLAG_INCLUDE_PREFIX")
++#pragma pop_macro("GAA_FLAG_SKIP_DNS_SERVER")
++#pragma pop_macro("GAA_FLAG_SKIP_MULTICAST")
++#pragma pop_macro("GAA_FLAG_SKIP_ANYCAST")
++#pragma pop_macro("GAA_FLAG_SKIP_UNICAST")
++#endif
++
+ #endif

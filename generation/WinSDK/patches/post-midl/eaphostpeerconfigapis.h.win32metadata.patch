@@ -1,0 +1,130 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h
+index 81a842fde0..bca3aee86b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ ///////////////////////////////////////////////////////////////////////////////
+ //
+ // Copyright (c) Microsoft Corporation
+@@ -28,7 +29,7 @@ extern "C"
+ 
+     // This API is used to enumerate all the EAP Methods installed and available for use; this
+     // includes legacy EAP Methods too. Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerGetMethods(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerGetMethods(
+         // API fills the structure to have installed EAP Methods. Caller should free the inner pointers
+         // using EapHostPeerFreeMemory starting at the inner most pointer.
+         _Out_ EAP_METHOD_INFO_ARRAY* pEapMethodInfoArray,
+@@ -37,7 +38,7 @@ extern "C"
+ 
+     // This API is used to retrieve the method properties for a specific configuration
+     // It returns non zero return code upon error.
+-    DWORD WINAPI EapHostPeerGetMethodProperties(
++    _Windows_SupportedOS_Windows7_ DWORD WINAPI EapHostPeerGetMethodProperties(
+         // The version number of the API.
+         _In_ DWORD dwVersion,
+         // A combination of EAP flags that describe the EAP authentication session behavior.
+@@ -63,7 +64,7 @@ extern "C"
+ 
+     // This API is used to invoke configure UI of the specified EAP Method.
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerInvokeConfigUI(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerInvokeConfigUI(
+         // window handle of the parent window under which configuration dialog will show up
+         _In_ HWND hwndParent,
+         // Flags to control the behavior of the EAP Method.
+@@ -85,7 +86,7 @@ extern "C"
+     // This API is used to obtain the fields to be shown in Single Sign On scenario for
+     // showing UI in long screen. The structures returned have details on how to show the fields.
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerQueryCredentialInputFields(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerQueryCredentialInputFields(
+         // handle to the impersonation token that is used while single sign on.
+         _In_ HANDLE hUserImpersonationToken,
+         // identifies the EAP Method supplicant wants to use
+@@ -106,7 +107,7 @@ extern "C"
+     // Supplicant up on receiving user inputs from Single Sign On UI, calls this API to obtain
+     // credential blob that could used start authentication
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerQueryUserBlobFromCredentialInputFields(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerQueryUserBlobFromCredentialInputFields(
+         // handle to the impersonation token that is used while single sign on.
+         _In_ HANDLE hUserImpersonationToken,
+         // identifies the EAP Method supplicant wants to use
+@@ -133,7 +134,7 @@ extern "C"
+ 
+     // Tunnel Methods call this function to invoke Identity UI of the inner Methods.
+     // This function returns the identity as well as the credentials to use to start the authentication.
+-    DWORD WINAPI EapHostPeerInvokeIdentityUI(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerInvokeIdentityUI(
+         // API's version number for ease of interoperability. It must be 0.
+         _In_ DWORD dwVersion,
+         // identifies the EAP Method supplicant wants to use
+@@ -167,7 +168,7 @@ extern "C"
+     // supplicant should call EapHostPeerGetUIContext to get UI context data. After that. it then should call this
+     // API from a process where UI can be brought up.
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerInvokeInteractiveUI(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerInvokeInteractiveUI(
+         // window handle of the parent window under which dialog will show up
+         _In_ HWND hwndParent,
+         // size of UIcontext data received from EapHostPeerGetUIContext call
+@@ -188,7 +189,7 @@ extern "C"
+     // EapHostPeerResponseInvokeUi actionCode from EAPHost. If the return value from this API is
+     // EAP_E_EAPHOST_METHOD_OPERATION_NOT_SUPPORTED, then supplicant should fall back to traditional model of invoking method
+     // interactive UI, i.e. by calling EapHostPeerInvokeInteractiveUI() API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerQueryInteractiveUIInputFields(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerQueryInteractiveUIInputFields(
+         // API's version number for ease of interoperability. It must be 0.
+         _In_ DWORD dwVersion,
+         // control the behavior of the EAP Methods
+@@ -207,7 +208,7 @@ extern "C"
+ 
+     // This API will enable supplicants to convert user information into a user-blob which can be consumed by EAPHost runtime APIs
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerQueryUIBlobFromInteractiveUIInputFields(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerQueryUIBlobFromInteractiveUIInputFields(
+         // API's version number for ease of interoperability. It must be 0.
+         _In_ DWORD dwVersion,
+         // control the behavior of the EAP Methods
+@@ -233,7 +234,7 @@ extern "C"
+     // Supplicant can utilize XML based EAP configuration storing, managing, editing. When it wants to call EapHostPeerConfigureUI
+     // or when it has to start authentication, it calls this API to convert XML configuration into blob.
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerConfigXml2Blob(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerConfigXml2Blob(
+         // controls the behavior of the EAP Method
+         _In_ DWORD dwFlags,
+         // a node containing EAP XML configuration inside it
+@@ -250,7 +251,7 @@ extern "C"
+     // Supplicant can utilize XML based EAP credentials storing, managing, editing. When it wants to start
+     // authentication, it calls this API to convert XML based credentials into blob.
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerCredentialsXml2Blob(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerCredentialsXml2Blob(
+         // controls the behavior of the EAP Method
+         _In_ DWORD dwFlags,
+         // XML node that contains credentials
+@@ -272,7 +273,7 @@ extern "C"
+     // Supplicant can utilize XML based EAP credentials storing, managing, editing. When it wants to start
+     // convert configuration blob to XML, it can call this API.
+     // API Returns non zero return code up on error.
+-    DWORD WINAPI EapHostPeerConfigBlob2Xml(
++    _Windows_SupportedOS_WindowsVista_ DWORD WINAPI EapHostPeerConfigBlob2Xml(
+         // controls the behavior of the EAP Method
+         _In_ DWORD dwFlags,
+         // identifies the EAP Method
+@@ -289,10 +290,10 @@ extern "C"
+ 
+     // Supplicant calls this API to free memory returned by Config APIs. Supplicant should not use this API
+     // for freeing EAP_ERROR structure.
+-    VOID WINAPI EapHostPeerFreeMemory(BYTE* pData);
++    _Windows_SupportedOS_WindowsVista_ VOID WINAPI EapHostPeerFreeMemory(BYTE* pData);
+ 
+     // Supplicant calls this API to free EAP_ERROR memory, which will get filled when an API fails.
+-    VOID WINAPI EapHostPeerFreeErrorMemory(EAP_ERROR* pEapError);
++    _Windows_SupportedOS_WindowsVista_ VOID WINAPI EapHostPeerFreeErrorMemory(EAP_ERROR* pEapError);
+ 
+ #ifdef __cplusplus
+ }

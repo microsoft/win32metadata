@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
+index f53062cac7..ab4b869a85 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
 @@ -15,6 +15,7 @@
@@ -9,6 +10,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  #include <minwindef.h>
  #include <minwinbase.h>
  
+@@ -48,7 +49,7 @@ typedef struct _SYSTEM_INFO {
+     union {
+         DWORD dwOemId;          // Obsolete field...do not use
+         struct {
+-            WORD wProcessorArchitecture;
++            _Win32_AssociatedEnum_(PROCESSOR_ARCHITECTURE) WORD wProcessorArchitecture;
+             WORD wReserved;
+         } DUMMYSTRUCTNAME;
+     } DUMMYUNIONNAME;
 @@ -80,13 +81,37 @@ typedef struct _MEMORYSTATUSEX {
  #define USER_CET_ENVIRONMENT_VBS_ENCLAVE          0x00000010
  #define USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE    0x00000011
@@ -76,7 +86,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
  
-+_Windows_SupportedOS_20348_
++
  WINBASEAPI
  BOOL
  WINAPI
@@ -132,9 +142,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_10240_
++_Win32_ImportLibrary_("api-ms-win-core-sysinfo-l1-2-4.dll") _Windows_SupportedOS_10240_
 +_Win32_SetLastError_
-+_Win32_ImportLibrary_("api-ms-win-core-version-l1-2-3.dll")
++
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -250,7 +260,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  #define GetVersionEx  GetVersionExA
  #endif // !UNICODE
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -287,6 +297,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  WINBASEAPI
  BOOL
  WINAPI
+@@ -473,7 +542,7 @@ GetProductInfo(
+     _In_ DWORD dwOSMinorVersion,
+     _In_ DWORD dwSpMajorVersion,
+     _In_ DWORD dwSpMinorVersion,
+-    _Out_ PDWORD pdwReturnedProductType
++    _Win32_AssociatedEnum_(OS_PRODUCT_TYPE) _Out_ PDWORD pdwReturnedProductType
+     );
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
 @@ -486,6 +555,8 @@ GetProductInfo(
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -300,7 +319,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  #pragma region OneCore Family or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  UINT
  WINAPI
@@ -308,7 +327,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
      _In_ DWORD BufferSize
      );
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  UINT
  WINAPI
@@ -316,7 +335,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
      _Inout_ LPDWORD nSize
      );
  
-+_Windows_SupportedOS_WindowsVistaSP1_
++_Windows_SupportedOS_WindowsVista_ 
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
@@ -334,9 +353,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
      _In_ BOOL bTimeAdjustmentDisabled
      );
  
-+_Windows_SupportedOS_10240_
++_Win32_ImportLibrary_("api-ms-win-core-sysinfo-l1-2-4.dll") _Windows_SupportedOS_10240_
 +_Win32_SetLastError_
-+_Win32_ImportLibrary_("api-ms-win-core-version-l1-2-3.dll")
++
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
@@ -362,8 +381,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
  
-+_Windows_SupportedOS_10240_
-+_Win32_ImportLibrary_("kernelbase.dll")
++_Win32_ImportLibrary_("api-ms-win-core-sysinfo-l1-2-3.dll") _Windows_SupportedOS_10240_
++
  WINBASEAPI
  HRESULT
  WINAPI
@@ -407,7 +426,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation
  
  #if defined(NTDDI_WIN11_GE) && (NTDDI_VERSION >= NTDDI_WIN11_GE)
  
-+_Win32_SetLastError_
++
  WINBASEAPI
  BOOL
  WINAPI

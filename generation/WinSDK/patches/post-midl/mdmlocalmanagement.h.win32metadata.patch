@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h b/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h
-index b322a4c8e7..586f108201 100644
+index b322a4c8e7..fb0f9d5ad6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mdmlocalmanagement.h
 @@ -16,6 +16,7 @@ Notes:
@@ -15,7 +15,7 @@ index b322a4c8e7..586f108201 100644
  ApplyLocalManagementSyncML(
      _In_                          PCWSTR syncMLRequest,
 -    _Outptr_opt_result_maybenull_ PWSTR* syncMLResult
-+    _Outptr_opt_result_maybenull_ _Win32_RAIIFree_(LocalFree) PWSTR* syncMLResult
++    _Outptr_opt_result_maybenull_  PWSTR* syncMLResult
      );
  
  /*++

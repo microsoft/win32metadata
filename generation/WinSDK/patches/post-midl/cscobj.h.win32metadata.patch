@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
-index 31cf48fdf988e31b317d1d3585ec38291a969be6..19553a5f97f023a5044662492fddd6adb09e0885 100644
+index 31cf48fdf9..175fd46a8f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 @@ -337,6 +337,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index 31cf48fdf988e31b317d1d3585ec38291a969be6..19553a5f97f023a5044662492fddd6ad
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  typedef 
-@@ -796,7 +797,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
+@@ -795,8 +796,8 @@ EXTERN_C const IID IID_IOfflineFilesEvents;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("E25585C1-0CAA-4eb1-873B-1CAE5B77C314")
+-    MIDL_INTERFACE("E25585C1-0CAA-4eb1-873B-1CAE5B77C314")
 -    IOfflineFilesEvents : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents : public IUnknown
++    MIDL_INTERFACE("E25585C1-0CAA-4eb1-873B-1CAE5B77C314") _Windows_SupportedOS_WindowsVista_ 
++      IOfflineFilesEvents : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CacheMoved( 
@@ -28,12 +30,14 @@ index 31cf48fdf988e31b317d1d3585ec38291a969be6..19553a5f97f023a5044662492fddd6ad
      {
          CONST_VTBL struct IOfflineFilesEventsVtbl *lpVtbl;
      };
-@@ -1184,7 +1185,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
+@@ -1183,8 +1184,8 @@ EXTERN_C const IID IID_IOfflineFilesEvents2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("1EAD8F56-FF76-4faa-A795-6F6EF792498B")
+-    MIDL_INTERFACE("1EAD8F56-FF76-4faa-A795-6F6EF792498B")
 -    IOfflineFilesEvents2 : public IOfflineFilesEvents
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents2 : public IOfflineFilesEvents
++    MIDL_INTERFACE("1EAD8F56-FF76-4faa-A795-6F6EF792498B") _Windows_SupportedOS_WindowsVista_ 
++      IOfflineFilesEvents2 : public IOfflineFilesEvents
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE ItemReconnectBegin( void) = 0;
@@ -46,3 +50,295 @@ index 31cf48fdf988e31b317d1d3585ec38291a969be6..19553a5f97f023a5044662492fddd6ad
      {
          CONST_VTBL struct IOfflineFilesEvents2Vtbl *lpVtbl;
      };
+@@ -1562,7 +1563,7 @@ EXTERN_C const IID IID_IOfflineFilesEvents3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9ba04a45-ee69-42f0-9ab1-7db5c8805808")
++    MIDL_INTERFACE("9ba04a45-ee69-42f0-9ab1-7db5c8805808") _Windows_SupportedOS_Windows7_ 
+     IOfflineFilesEvents3 : public IOfflineFilesEvents2
+     {
+     public:
+@@ -2382,7 +2383,7 @@ EXTERN_C const IID IID_IOfflineFilesEventsFilter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("33FC4E1B-0716-40fa-BA65-6E62A84A846F")
++    MIDL_INTERFACE("33FC4E1B-0716-40fa-BA65-6E62A84A846F") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesEventsFilter : public IUnknown
+     {
+     public:
+@@ -2498,7 +2499,7 @@ EXTERN_C const IID IID_IOfflineFilesErrorInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7112FA5F-7571-435a-8EB7-195C7C1429BC")
++    MIDL_INTERFACE("7112FA5F-7571-435a-8EB7-195C7C1429BC") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesErrorInfo : public IUnknown
+     {
+     public:
+@@ -2593,7 +2594,7 @@ EXTERN_C const IID IID_IOfflineFilesSyncErrorItemInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ECDBAF0D-6A18-4d55-8017-108F7660BA44")
++    MIDL_INTERFACE("ECDBAF0D-6A18-4d55-8017-108F7660BA44") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSyncErrorItemInfo : public IUnknown
+     {
+     public:
+@@ -2701,7 +2702,7 @@ EXTERN_C const IID IID_IOfflineFilesSyncErrorInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("59F95E46-EB54-49d1-BE76-DE95458D01B0")
++    MIDL_INTERFACE("59F95E46-EB54-49d1-BE76-DE95458D01B0") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSyncErrorInfo : public IOfflineFilesErrorInfo
+     {
+     public:
+@@ -2876,7 +2877,7 @@ EXTERN_C const IID IID_IOfflineFilesProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FAD63237-C55B-4911-9850-BCF96D4C979E")
++    MIDL_INTERFACE("FAD63237-C55B-4911-9850-BCF96D4C979E") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesProgress : public IUnknown
+     {
+     public:
+@@ -2982,7 +2983,7 @@ EXTERN_C const IID IID_IOfflineFilesSimpleProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C34F7F9B-C43D-4f9d-A776-C0EB6DE5D401")
++    MIDL_INTERFACE("C34F7F9B-C43D-4f9d-A776-C0EB6DE5D401") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSimpleProgress : public IOfflineFilesProgress
+     {
+     public:
+@@ -3108,7 +3109,7 @@ EXTERN_C const IID IID_IOfflineFilesSyncProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6931F49A-6FC7-4c1b-B265-56793FC451B7")
++    MIDL_INTERFACE("6931F49A-6FC7-4c1b-B265-56793FC451B7") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSyncProgress : public IOfflineFilesProgress
+     {
+     public:
+@@ -3236,7 +3237,7 @@ EXTERN_C const IID IID_IOfflineFilesSyncConflictHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B6DD5092-C65C-46b6-97B8-FADD08E7E1BE")
++    MIDL_INTERFACE("B6DD5092-C65C-46b6-97B8-FADD08E7E1BE") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSyncConflictHandler : public IUnknown
+     {
+     public:
+@@ -3330,7 +3331,7 @@ EXTERN_C const IID IID_IOfflineFilesItemFilter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F4B5A26C-DC05-4f20-ADA4-551F1077BE5C")
++    MIDL_INTERFACE("F4B5A26C-DC05-4f20-ADA4-551F1077BE5C") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesItemFilter : public IUnknown
+     {
+     public:
+@@ -3446,7 +3447,7 @@ EXTERN_C const IID IID_IOfflineFilesItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4a753da6-e044-4f12-a718-5d14d079a906")
++    MIDL_INTERFACE("4a753da6-e044-4f12-a718-5d14d079a906") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesItem : public IUnknown
+     {
+     public:
+@@ -3574,7 +3575,7 @@ EXTERN_C const IID IID_IOfflineFilesServerItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9B1C9576-A92B-4151-8E9E-7C7B3EC2E016")
++    MIDL_INTERFACE("9B1C9576-A92B-4151-8E9E-7C7B3EC2E016") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesServerItem : public IOfflineFilesItem
+     {
+     public:
+@@ -3688,7 +3689,7 @@ EXTERN_C const IID IID_IOfflineFilesShareItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BAB7E48D-4804-41b5-A44D-0F199B06B145")
++    MIDL_INTERFACE("BAB7E48D-4804-41b5-A44D-0F199B06B145") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesShareItem : public IOfflineFilesItem
+     {
+     public:
+@@ -3802,7 +3803,7 @@ EXTERN_C const IID IID_IOfflineFilesDirectoryItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2273597A-A08C-4a00-A37A-C1AE4E9A1CFD")
++    MIDL_INTERFACE("2273597A-A08C-4a00-A37A-C1AE4E9A1CFD") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesDirectoryItem : public IOfflineFilesItem
+     {
+     public:
+@@ -3916,7 +3917,7 @@ EXTERN_C const IID IID_IOfflineFilesFileItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8dfadead-26c2-4eff-8a72-6b50723d9a00")
++    MIDL_INTERFACE("8dfadead-26c2-4eff-8a72-6b50723d9a00") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesFileItem : public IOfflineFilesItem
+     {
+     public:
+@@ -4052,7 +4053,7 @@ EXTERN_C const IID IID_IEnumOfflineFilesItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DA70E815-C361-4407-BC0B-0D7046E5F2CD")
++    MIDL_INTERFACE("DA70E815-C361-4407-BC0B-0D7046E5F2CD") _Windows_SupportedOS_WindowsVista_ 
+     IEnumOfflineFilesItems : public IUnknown
+     {
+     public:
+@@ -4171,7 +4172,7 @@ EXTERN_C const IID IID_IOfflineFilesItemContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3836F049-9413-45dd-BF46-B5AAA82DC310")
++    MIDL_INTERFACE("3836F049-9413-45dd-BF46-B5AAA82DC310") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesItemContainer : public IUnknown
+     {
+     public:
+@@ -4280,10 +4281,10 @@ EXTERN_C const IID IID_IOfflineFilesChangeInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A96E6FA4-E0D1-4c29-960B-EE508FE68C72")
++    MIDL_INTERFACE("A96E6FA4-E0D1-4c29-960B-EE508FE68C72") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesChangeInfo : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual HRESULT STDMETHODCALLTYPE IsDirty( 
+             /* [out] */ __RPC__out BOOL *pbDirty) = 0;
+         
+@@ -4419,7 +4420,7 @@ EXTERN_C const IID IID_IOfflineFilesDirtyInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0f50ce33-bac9-4eaa-a11d-da0e527d047d")
++    MIDL_INTERFACE("0f50ce33-bac9-4eaa-a11d-da0e527d047d") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesDirtyInfo : public IUnknown
+     {
+     public:
+@@ -4514,7 +4515,7 @@ EXTERN_C const IID IID_IOfflineFilesFileSysInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BC1A163F-7BFD-4d88-9C66-96EA9A6A3D6B")
++    MIDL_INTERFACE("BC1A163F-7BFD-4d88-9C66-96EA9A6A3D6B") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesFileSysInfo : public IUnknown
+     {
+     public:
+@@ -4632,7 +4633,7 @@ EXTERN_C const IID IID_IOfflineFilesPinInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5B2B0655-B3FD-497d-ADEB-BD156BC8355B")
++    MIDL_INTERFACE("5B2B0655-B3FD-497d-ADEB-BD156BC8355B") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesPinInfo : public IUnknown
+     {
+     public:
+@@ -4768,7 +4769,7 @@ EXTERN_C const IID IID_IOfflineFilesPinInfo2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("623C58A2-42ED-4ad7-B69A-0F1B30A72D0D")
++    MIDL_INTERFACE("623C58A2-42ED-4ad7-B69A-0F1B30A72D0D") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesPinInfo2 : public IOfflineFilesPinInfo
+     {
+     public:
+@@ -4897,7 +4898,7 @@ EXTERN_C const IID IID_IOfflineFilesTransparentCacheInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3")
++    MIDL_INTERFACE("bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3") _Windows_SupportedOS_Windows7_ 
+     IOfflineFilesTransparentCacheInfo : public IUnknown
+     {
+     public:
+@@ -4981,7 +4982,7 @@ EXTERN_C const IID IID_IOfflineFilesGhostInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2B09D48C-8AB5-464f-A755-A59D92F99429")
++    MIDL_INTERFACE("2B09D48C-8AB5-464f-A755-A59D92F99429") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesGhostInfo : public IUnknown
+     {
+     public:
+@@ -5065,7 +5066,7 @@ EXTERN_C const IID IID_IOfflineFilesConnectionInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EFB23A09-A867-4be8-83A6-86969A7D0856")
++    MIDL_INTERFACE("EFB23A09-A867-4be8-83A6-86969A7D0856") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesConnectionInfo : public IUnknown
+     {
+     public:
+@@ -5196,7 +5197,7 @@ EXTERN_C const IID IID_IOfflineFilesShareInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7BCC43E7-31CE-4ca4-8CCD-1CFF2DC494DA")
++    MIDL_INTERFACE("7BCC43E7-31CE-4ca4-8CCD-1CFF2DC494DA") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesShareInfo : public IUnknown
+     {
+     public:
+@@ -5302,7 +5303,7 @@ EXTERN_C const IID IID_IOfflineFilesSuspend;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("62c4560f-bc0b-48ca-ad9d-34cb528d99a9")
++    MIDL_INTERFACE("62c4560f-bc0b-48ca-ad9d-34cb528d99a9") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSuspend : public IUnknown
+     {
+     public:
+@@ -5386,7 +5387,7 @@ EXTERN_C const IID IID_IOfflineFilesSuspendInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a457c25b-4e9c-4b04-85af-8932ccd97889")
++    MIDL_INTERFACE("a457c25b-4e9c-4b04-85af-8932ccd97889") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSuspendInfo : public IUnknown
+     {
+     public:
+@@ -5472,7 +5473,7 @@ EXTERN_C const IID IID_IOfflineFilesSetting;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D871D3F7-F613-48a1-827E-7A34E560FFF6")
++    MIDL_INTERFACE("D871D3F7-F613-48a1-827E-7A34E560FFF6") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesSetting : public IUnknown
+     {
+     public:
+@@ -5652,7 +5653,7 @@ EXTERN_C const IID IID_IEnumOfflineFilesSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("729680C4-1A38-47bc-9E5C-02C51562AC30")
++    MIDL_INTERFACE("729680C4-1A38-47bc-9E5C-02C51562AC30") _Windows_SupportedOS_WindowsVista_ 
+     IEnumOfflineFilesSettings : public IUnknown
+     {
+     public:
+@@ -5771,7 +5772,7 @@ EXTERN_C const IID IID_IOfflineFilesCache;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("855d6203-7914-48b9-8d40-4c56f5acffc5")
++    MIDL_INTERFACE("855d6203-7914-48b9-8d40-4c56f5acffc5") _Windows_SupportedOS_WindowsVista_ 
+     IOfflineFilesCache : public IUnknown
+     {
+     public:
+@@ -6135,7 +6136,7 @@ EXTERN_C const IID IID_IOfflineFilesCache2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8c075039-1551-4ed9-8781-56705c04d3c0")
++    MIDL_INTERFACE("8c075039-1551-4ed9-8781-56705c04d3c0") _Windows_SupportedOS_Windows7_ 
+     IOfflineFilesCache2 : public IOfflineFilesCache
+     {
+     public:

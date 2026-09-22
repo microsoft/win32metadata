@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
-index c712ccb473696c41aeaded29e789d3019b1b72c2..0930e30339419f3a93f63b23ecbf0ef6a2f4482e 100644
+index c712ccb473..1091883f1e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
 @@ -17,6 +17,7 @@
@@ -10,21 +10,26 @@ index c712ccb473696c41aeaded29e789d3019b1b72c2..0930e30339419f3a93f63b23ecbf0ef6
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -29,6 +30,8 @@ extern "C" {            /* Assume C declarations for C++ */
+@@ -29,10 +30,12 @@ extern "C" {            /* Assume C declarations for C++ */
  
  /****** Shapshot function **********************************************/
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++
  HANDLE
  WINAPI
  CreateToolhelp32Snapshot(
+-    DWORD dwFlags,
++    _Win32_AssociatedEnum_(CREATE_TOOLHELP_SNAPSHOT_FLAGS) DWORD dwFlags,
+     DWORD th32ProcessID
+     );
+ 
 @@ -63,7 +66,7 @@ CreateToolhelp32Snapshot(
  
  /****** heap walking ***************************************************/
  
 -typedef struct tagHEAPLIST32
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ tagHEAPLIST32
++typedef struct   tagHEAPLIST32
  {
      SIZE_T dwSize;
      DWORD  th32ProcessID;   // owning process
@@ -32,8 +37,8 @@ index c712ccb473696c41aeaded29e789d3019b1b72c2..0930e30339419f3a93f63b23ecbf0ef6
  #define HF32_DEFAULT      1  // process's default heap
  #define HF32_SHARED       2  // is shared heap
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  BOOL
  WINAPI
  Heap32ListFirst(
@@ -41,8 +46,185 @@ index c712ccb473696c41aeaded29e789d3019b1b72c2..0930e30339419f3a93f63b23ecbf0ef6
      LPHEAPLIST32 lphl
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
  BOOL
  WINAPI
  Heap32ListNext(
+@@ -98,7 +105,7 @@ typedef struct tagHEAPENTRY32
+     HANDLE hHandle;     // Handle of this heap block
+     ULONG_PTR dwAddress;   // Linear address of start of block
+     SIZE_T dwBlockSize; // Size of block in bytes
+-    DWORD  dwFlags;
++    _Win32_AssociatedEnum_(HEAPENTRY32_FLAGS) DWORD  dwFlags;
+     DWORD  dwLockCount;
+     DWORD  dwResvd;
+     DWORD  th32ProcessID;   // owning process
+@@ -113,7 +120,7 @@ typedef HEAPENTRY32 *  LPHEAPENTRY32;
+ #define LF32_FREE     0x00000002
+ #define LF32_MOVEABLE 0x00000004
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Heap32First(
+     LPHEAPENTRY32 lphe,
+@@ -121,13 +128,13 @@ Heap32First(
+     ULONG_PTR th32HeapID
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Heap32Next(
+     LPHEAPENTRY32 lphe
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ BOOL
+ WINAPI
+ Toolhelp32ReadProcessMemory(
+     DWORD th32ProcessID,
+@@ -155,14 +162,14 @@ typedef struct tagPROCESSENTRY32W
+ typedef PROCESSENTRY32W *  PPROCESSENTRY32W;
+ typedef PROCESSENTRY32W *  LPPROCESSENTRY32W;
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Process32FirstW(
+     HANDLE hSnapshot,
+     LPPROCESSENTRY32W lppe
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Process32NextW(
+     HANDLE hSnapshot,
+@@ -185,14 +192,14 @@ typedef struct tagPROCESSENTRY32
+ typedef PROCESSENTRY32 *  PPROCESSENTRY32;
+ typedef PROCESSENTRY32 *  LPPROCESSENTRY32;
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Process32First(
+     HANDLE hSnapshot,
+     LPPROCESSENTRY32 lppe
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Process32Next(
+     HANDLE hSnapshot,
+@@ -222,14 +229,14 @@ typedef struct tagTHREADENTRY32
+ typedef THREADENTRY32 *  PTHREADENTRY32;
+ typedef THREADENTRY32 *  LPTHREADENTRY32;
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Thread32First(
+     HANDLE hSnapshot,
+     LPTHREADENTRY32 lpte
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Thread32Next(
+     HANDLE hSnapshot,
+@@ -254,14 +261,14 @@ typedef struct tagMODULEENTRY32W
+ typedef MODULEENTRY32W *  PMODULEENTRY32W;
+ typedef MODULEENTRY32W *  LPMODULEENTRY32W;
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Module32FirstW(
+     HANDLE hSnapshot,
+     LPMODULEENTRY32W lpme
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Module32NextW(
+     HANDLE hSnapshot,
+@@ -289,14 +296,14 @@ typedef MODULEENTRY32 *  LPMODULEENTRY32;
+ // in th32ProcessID's process context.
+ //
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Module32First(
+     HANDLE hSnapshot,
+     LPMODULEENTRY32 lpme
+     );
+ 
+-BOOL
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
+ WINAPI
+ Module32Next(
+     HANDLE hSnapshot,
+@@ -318,4 +325,57 @@ Module32Next(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TH32CS_INHERIT")
++#undef TH32CS_INHERIT
++#pragma push_macro("TH32CS_SNAPALL")
++#undef TH32CS_SNAPALL
++#pragma push_macro("TH32CS_SNAPHEAPLIST")
++#undef TH32CS_SNAPHEAPLIST
++#pragma push_macro("TH32CS_SNAPMODULE")
++#undef TH32CS_SNAPMODULE
++#pragma push_macro("TH32CS_SNAPMODULE32")
++#undef TH32CS_SNAPMODULE32
++#pragma push_macro("TH32CS_SNAPPROCESS")
++#undef TH32CS_SNAPPROCESS
++#pragma push_macro("TH32CS_SNAPTHREAD")
++#undef TH32CS_SNAPTHREAD
++enum [[clang::flag_enum]] CREATE_TOOLHELP_SNAPSHOT_FLAGS : unsigned int
++{
++    TH32CS_INHERIT = 2147483648U,
++    TH32CS_SNAPALL = 15U,
++    TH32CS_SNAPHEAPLIST = 1U,
++    TH32CS_SNAPMODULE = 8U,
++    TH32CS_SNAPMODULE32 = 16U,
++    TH32CS_SNAPPROCESS = 2U,
++    TH32CS_SNAPTHREAD = 4U,
++};
++#pragma pop_macro("TH32CS_SNAPTHREAD")
++#pragma pop_macro("TH32CS_SNAPPROCESS")
++#pragma pop_macro("TH32CS_SNAPMODULE32")
++#pragma pop_macro("TH32CS_SNAPMODULE")
++#pragma pop_macro("TH32CS_SNAPHEAPLIST")
++#pragma pop_macro("TH32CS_SNAPALL")
++#pragma pop_macro("TH32CS_INHERIT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LF32_FIXED")
++#undef LF32_FIXED
++#pragma push_macro("LF32_FREE")
++#undef LF32_FREE
++#pragma push_macro("LF32_MOVEABLE")
++#undef LF32_MOVEABLE
++enum HEAPENTRY32_FLAGS : unsigned int
++{
++    LF32_FIXED = 1U,
++    LF32_FREE = 2U,
++    LF32_MOVEABLE = 4U,
++};
++#pragma pop_macro("LF32_MOVEABLE")
++#pragma pop_macro("LF32_FREE")
++#pragma pop_macro("LF32_FIXED")
++#endif
++
+ #endif // _INC_TOOLHELP32

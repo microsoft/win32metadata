@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/evntcons.h b/generation/WinSDK/RecompiledIdlHeaders/um/evntcons.h
-index 5c058be115..641bdd9319 100644
+index 5c058be115..8fcecd561c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/evntcons.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/evntcons.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -15,7 +15,7 @@ index 5c058be115..641bdd9319 100644
  #ifndef EVENT_HEADER_EXTENDED_DATA_ITEM_DEF
  #define EVENT_HEADER_EXTENDED_DATA_ITEM_DEF
 -typedef struct _EVENT_HEADER_EXTENDED_DATA_ITEM {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_HEADER_EXTENDED_DATA_ITEM {
++typedef struct   _EVENT_HEADER_EXTENDED_DATA_ITEM {
  
      USHORT      Reserved1;                      // Reserved for internal use
      USHORT      ExtType;                        // Extended info type
@@ -24,64 +24,64 @@ index 5c058be115..641bdd9319 100644
  //
  
 -typedef struct _EVENT_EXTENDED_ITEM_INSTANCE {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_INSTANCE {
++typedef struct   _EVENT_EXTENDED_ITEM_INSTANCE {
      ULONG InstanceId;
      ULONG ParentInstanceId;
      GUID  ParentGuid;
  } EVENT_EXTENDED_ITEM_INSTANCE, *PEVENT_EXTENDED_ITEM_INSTANCE;
  
 -typedef struct _EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID {
++typedef struct   _EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID {
      GUID  RelatedActivityId;
  } EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID, *PEVENT_EXTENDED_ITEM_RELATED_ACTIVITYID;
  
 -typedef struct _EVENT_EXTENDED_ITEM_TS_ID {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_TS_ID {
++typedef struct   _EVENT_EXTENDED_ITEM_TS_ID {
      ULONG SessionId;
  } EVENT_EXTENDED_ITEM_TS_ID, *PEVENT_EXTENDED_ITEM_TS_ID;
  
 -typedef struct _EVENT_EXTENDED_ITEM_STACK_TRACE32 {
-+typedef struct _Windows_SupportedOS_Windows7_ _EVENT_EXTENDED_ITEM_STACK_TRACE32 {
++typedef struct  _EVENT_EXTENDED_ITEM_STACK_TRACE32 {
      ULONG64 MatchId;
      ULONG   Address[ANYSIZE_ARRAY];
  } EVENT_EXTENDED_ITEM_STACK_TRACE32, *PEVENT_EXTENDED_ITEM_STACK_TRACE32;
  
 -typedef struct _EVENT_EXTENDED_ITEM_STACK_TRACE64 {
-+typedef struct _Windows_SupportedOS_Windows7_ _EVENT_EXTENDED_ITEM_STACK_TRACE64 {
++typedef struct  _EVENT_EXTENDED_ITEM_STACK_TRACE64 {
      ULONG64 MatchId;
      ULONG64 Address[ANYSIZE_ARRAY];
  } EVENT_EXTENDED_ITEM_STACK_TRACE64, *PEVENT_EXTENDED_ITEM_STACK_TRACE64;
  
 -typedef struct _EVENT_EXTENDED_ITEM_STACK_KEY32 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_STACK_KEY32 {
++typedef struct   _EVENT_EXTENDED_ITEM_STACK_KEY32 {
      ULONG64 MatchId;
      ULONG StackKey;
      ULONG Padding;
  } EVENT_EXTENDED_ITEM_STACK_KEY32, *PEVENT_EXTENDED_ITEM_STACK_KEY32;
  
 -typedef struct _EVENT_EXTENDED_ITEM_STACK_KEY64 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_STACK_KEY64 {
++typedef struct   _EVENT_EXTENDED_ITEM_STACK_KEY64 {
      ULONG64 MatchId;
      ULONG64 StackKey;
  } EVENT_EXTENDED_ITEM_STACK_KEY64, *PEVENT_EXTENDED_ITEM_STACK_KEY64;
  
 -typedef struct _EVENT_EXTENDED_ITEM_PEBS_INDEX {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_PEBS_INDEX {
++typedef struct   _EVENT_EXTENDED_ITEM_PEBS_INDEX {
      ULONG64 PebsIndex;
  } EVENT_EXTENDED_ITEM_PEBS_INDEX, *PEVENT_EXTENDED_ITEM_PEBS_INDEX;
  
 -typedef struct _EVENT_EXTENDED_ITEM_PMC_COUNTERS {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_PMC_COUNTERS {
++typedef struct   _EVENT_EXTENDED_ITEM_PMC_COUNTERS {
      ULONG64 Counter[ANYSIZE_ARRAY];
  } EVENT_EXTENDED_ITEM_PMC_COUNTERS, *PEVENT_EXTENDED_ITEM_PMC_COUNTERS;
  
 -typedef struct _EVENT_EXTENDED_ITEM_PROCESS_START_KEY {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_PROCESS_START_KEY {
++typedef struct   _EVENT_EXTENDED_ITEM_PROCESS_START_KEY {
      ULONG64 ProcessStartKey;
  } EVENT_EXTENDED_ITEM_PROCESS_START_KEY, *PEVENT_EXTENDED_ITEM_PROCESS_START_KEY;
  
 -typedef struct _EVENT_EXTENDED_ITEM_EVENT_KEY {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_EXTENDED_ITEM_EVENT_KEY {
++typedef struct   _EVENT_EXTENDED_ITEM_EVENT_KEY {
      ULONG64 Key;
  } EVENT_EXTENDED_ITEM_EVENT_KEY, *PEVENT_EXTENDED_ITEM_EVENT_KEY;
  
@@ -90,7 +90,7 @@ index 5c058be115..641bdd9319 100644
  #ifndef EVENT_HEADER_DEF
  #define EVENT_HEADER_DEF
 -typedef struct _EVENT_HEADER {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_HEADER {
++typedef struct   _EVENT_HEADER {
  
      USHORT              Size;                   // Event Size
      USHORT              HeaderType;             // Header Type
@@ -99,7 +99,7 @@ index 5c058be115..641bdd9319 100644
  #ifndef EVENT_RECORD_DEF
  #define EVENT_RECORD_DEF
 -typedef struct _EVENT_RECORD {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EVENT_RECORD {
++typedef struct   _EVENT_RECORD {
  
      EVENT_HEADER        EventHeader;            // Event header
      ETW_BUFFER_CONTEXT  BufferContext;          // Buffer context
@@ -108,7 +108,7 @@ index 5c058be115..641bdd9319 100644
  //
  
 -typedef enum {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ {
++typedef enum   {
      EtwProviderTraitTypeGroup  = 1, // Provider group GUID.
      EtwProviderTraitDecodeGuid = 2, // Decode GUID (when different from control GUID)
      EtwProviderTraitTypeMax
@@ -117,7 +117,7 @@ index 5c058be115..641bdd9319 100644
  //
  
 -typedef enum {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ {
++typedef enum   {
      EventSecuritySetDACL,
      EventSecuritySetSACL,
      EventSecurityAddDACL,
@@ -125,14 +125,14 @@ index 5c058be115..641bdd9319 100644
  } EVENTSECURITYOPERATION;
  
  #if (WINVER >= _WIN32_WINNT_LONGHORN)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  ULONG
  EVNTAPI
  EventAccessControl(
      _In_ LPGUID Guid,
 -    _In_ ULONG Operation,
-+    _Win32_AssociatedEnum_(EVENTSECURITYOPERATION) _In_ ULONG Operation,
++     _In_ ULONG Operation,
      _In_ PSID Sid,
      _In_ ULONG Rights,
      _In_ BOOLEAN AllowOrDeny
@@ -140,8 +140,8 @@ index 5c058be115..641bdd9319 100644
  #endif
  
  #if (WINVER >= _WIN32_WINNT_LONGHORN)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  ULONG
  EVNTAPI
  EventAccessQuery(
@@ -149,8 +149,8 @@ index 5c058be115..641bdd9319 100644
  #endif
  
  #if (WINVER >= _WIN32_WINNT_LONGHORN)
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  ULONG
  EVNTAPI
  EventAccessRemove(

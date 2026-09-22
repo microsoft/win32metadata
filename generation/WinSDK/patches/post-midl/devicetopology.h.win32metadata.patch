@@ -1,0 +1,225 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h b/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h
+index f246eba7fe..fdfb035db4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -742,7 +743,7 @@ EXTERN_C const IID IID_IPerChannelDbLevel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C2F8E001-F205-4BC9-99BC-C13B1E048CCB")
++    MIDL_INTERFACE("C2F8E001-F205-4BC9-99BC-C13B1E048CCB") _Windows_SupportedOS_WindowsVista_ 
+     IPerChannelDbLevel : public IUnknown
+     {
+     public:
+@@ -930,7 +931,7 @@ EXTERN_C const IID IID_IAudioVolumeLevel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7FB7B48F-531D-44A2-BCB3-5AD5A134B3DC")
++    MIDL_INTERFACE("7FB7B48F-531D-44A2-BCB3-5AD5A134B3DC") _Windows_SupportedOS_WindowsVista_ 
+     IAudioVolumeLevel : public IPerChannelDbLevel
+     {
+     public:
+@@ -1077,7 +1078,7 @@ EXTERN_C const IID IID_IAudioChannelConfig;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BB11C46F-EC28-493C-B88A-5DB88062CE98")
++    MIDL_INTERFACE("BB11C46F-EC28-493C-B88A-5DB88062CE98") _Windows_SupportedOS_WindowsVista_ 
+     IAudioChannelConfig : public IUnknown
+     {
+     public:
+@@ -1179,7 +1180,7 @@ EXTERN_C const IID IID_IAudioLoudness;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7D8B1437-DD53-4350-9C1B-1EE2890BD938")
++    MIDL_INTERFACE("7D8B1437-DD53-4350-9C1B-1EE2890BD938") _Windows_SupportedOS_WindowsVista_ 
+     IAudioLoudness : public IUnknown
+     {
+     public:
+@@ -1283,7 +1284,7 @@ EXTERN_C const IID IID_IAudioInputSelector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4F03DC02-5E6E-4653-8F72-A030C123D598")
++    MIDL_INTERFACE("4F03DC02-5E6E-4653-8F72-A030C123D598") _Windows_SupportedOS_WindowsVista_ 
+     IAudioInputSelector : public IUnknown
+     {
+     public:
+@@ -1387,7 +1388,7 @@ EXTERN_C const IID IID_IAudioOutputSelector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BB515F69-94A7-429e-8B9C-271B3F11A3AB")
++    MIDL_INTERFACE("BB515F69-94A7-429e-8B9C-271B3F11A3AB") _Windows_SupportedOS_WindowsVista_ 
+     IAudioOutputSelector : public IUnknown
+     {
+     public:
+@@ -1491,7 +1492,7 @@ EXTERN_C const IID IID_IAudioMute;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DF45AEEA-B74A-4B6B-AFAD-2366B6AA012E")
++    MIDL_INTERFACE("DF45AEEA-B74A-4B6B-AFAD-2366B6AA012E") _Windows_SupportedOS_WindowsVista_ 
+     IAudioMute : public IUnknown
+     {
+     public:
+@@ -1595,7 +1596,7 @@ EXTERN_C const IID IID_IAudioBass;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A2B1A1D9-4DB3-425D-A2B2-BD335CB3E2E5")
++    MIDL_INTERFACE("A2B1A1D9-4DB3-425D-A2B2-BD335CB3E2E5") _Windows_SupportedOS_WindowsVista_ 
+     IAudioBass : public IPerChannelDbLevel
+     {
+     public:
+@@ -1742,7 +1743,7 @@ EXTERN_C const IID IID_IAudioMidrange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5E54B6D7-B44B-40D9-9A9E-E691D9CE6EDF")
++    MIDL_INTERFACE("5E54B6D7-B44B-40D9-9A9E-E691D9CE6EDF") _Windows_SupportedOS_WindowsVista_ 
+     IAudioMidrange : public IPerChannelDbLevel
+     {
+     public:
+@@ -1889,7 +1890,7 @@ EXTERN_C const IID IID_IAudioTreble;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0A717812-694E-4907-B74B-BAFA5CFDCA7B")
++    MIDL_INTERFACE("0A717812-694E-4907-B74B-BAFA5CFDCA7B") _Windows_SupportedOS_WindowsVista_ 
+     IAudioTreble : public IPerChannelDbLevel
+     {
+     public:
+@@ -2036,7 +2037,7 @@ EXTERN_C const IID IID_IAudioAutoGainControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85401FD4-6DE4-4b9d-9869-2D6753A82F3C")
++    MIDL_INTERFACE("85401FD4-6DE4-4b9d-9869-2D6753A82F3C") _Windows_SupportedOS_WindowsVista_ 
+     IAudioAutoGainControl : public IUnknown
+     {
+     public:
+@@ -2140,7 +2141,7 @@ EXTERN_C const IID IID_IAudioPeakMeter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DD79923C-0599-45e0-B8B6-C8DF7DB6E796")
++    MIDL_INTERFACE("DD79923C-0599-45e0-B8B6-C8DF7DB6E796") _Windows_SupportedOS_WindowsVista_ 
+     IAudioPeakMeter : public IUnknown
+     {
+     public:
+@@ -2244,7 +2245,7 @@ EXTERN_C const IID IID_IDeviceSpecificProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B22BCBF-2586-4af0-8583-205D391B807C")
++    MIDL_INTERFACE("3B22BCBF-2586-4af0-8583-205D391B807C") _Windows_SupportedOS_WindowsVista_ 
+     IDeviceSpecificProperty : public IUnknown
+     {
+     public:
+@@ -2388,7 +2389,7 @@ EXTERN_C const IID IID_IKsFormatSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3CB4A69D-BB6F-4D2B-95B7-452D2C155DB5")
++    MIDL_INTERFACE("3CB4A69D-BB6F-4D2B-95B7-452D2C155DB5") _Windows_SupportedOS_WindowsVista_ 
+     IKsFormatSupport : public IUnknown
+     {
+     public:
+@@ -2494,7 +2495,7 @@ EXTERN_C const IID IID_IKsJackDescription;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4509F757-2D46-4637-8E62-CE7DB944F57B")
++    MIDL_INTERFACE("4509F757-2D46-4637-8E62-CE7DB944F57B") _Windows_SupportedOS_WindowsVista_ 
+     IKsJackDescription : public IUnknown
+     {
+     public:
+@@ -2596,7 +2597,7 @@ EXTERN_C const IID IID_IKsJackDescription2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("478F3A9B-E0C9-4827-9228-6F5505FFE76A")
++    MIDL_INTERFACE("478F3A9B-E0C9-4827-9228-6F5505FFE76A") _Windows_SupportedOS_Windows7_ 
+     IKsJackDescription2 : public IUnknown
+     {
+     public:
+@@ -2818,7 +2819,7 @@ EXTERN_C const IID IID_IKsJackSinkInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D9BD72ED-290F-4581-9FF3-61027A8FE532")
++    MIDL_INTERFACE("D9BD72ED-290F-4581-9FF3-61027A8FE532") _Windows_SupportedOS_Windows7_ 
+     IKsJackSinkInformation : public IUnknown
+     {
+     public:
+@@ -2992,7 +2993,7 @@ EXTERN_C const IID IID_IPartsList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6DAA848C-5EB0-45CC-AEA5-998A2CDA1FFB")
++    MIDL_INTERFACE("6DAA848C-5EB0-45CC-AEA5-998A2CDA1FFB") _Windows_SupportedOS_WindowsVista_ 
+     IPartsList : public IUnknown
+     {
+     public:
+@@ -3096,7 +3097,7 @@ EXTERN_C const IID IID_IPart;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AE2DE0E4-5BCA-4F2D-AA46-5D13F8FDB3A9")
++    MIDL_INTERFACE("AE2DE0E4-5BCA-4F2D-AA46-5D13F8FDB3A9") _Windows_SupportedOS_WindowsVista_ 
+     IPart : public IUnknown
+     {
+     public:
+@@ -3355,7 +3356,7 @@ EXTERN_C const IID IID_IConnector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9c2c4058-23f5-41de-877a-df3af236a09e")
++    MIDL_INTERFACE("9c2c4058-23f5-41de-877a-df3af236a09e") _Windows_SupportedOS_WindowsVista_ 
+     IConnector : public IUnknown
+     {
+     public:
+@@ -3529,7 +3530,7 @@ EXTERN_C const IID IID_ISubunit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("82149A85-DBA6-4487-86BB-EA8F7FEFCC71")
++    MIDL_INTERFACE("82149A85-DBA6-4487-86BB-EA8F7FEFCC71") _Windows_SupportedOS_WindowsVista_ 
+     ISubunit : public IUnknown
+     {
+     public:
+@@ -3603,7 +3604,7 @@ EXTERN_C const IID IID_IControlInterface;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("45d37c3f-5140-444a-ae24-400789f3cbf3")
++    MIDL_INTERFACE("45d37c3f-5140-444a-ae24-400789f3cbf3") _Windows_SupportedOS_WindowsVista_ 
+     IControlInterface : public IUnknown
+     {
+     public:
+@@ -3703,7 +3704,7 @@ EXTERN_C const IID IID_IControlChangeNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A09513ED-C709-4d21-BD7B-5F34C47F3947")
++    MIDL_INTERFACE("A09513ED-C709-4d21-BD7B-5F34C47F3947") _Windows_SupportedOS_WindowsVista_ 
+     IControlChangeNotify : public IUnknown
+     {
+     public:
+@@ -3794,7 +3795,7 @@ EXTERN_C const IID IID_IDeviceTopology;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2A07407E-6497-4A18-9787-32F79BD0D98F")
++    MIDL_INTERFACE("2A07407E-6497-4A18-9787-32F79BD0D98F") _Windows_SupportedOS_WindowsVista_ 
+     IDeviceTopology : public IUnknown
+     {
+     public:

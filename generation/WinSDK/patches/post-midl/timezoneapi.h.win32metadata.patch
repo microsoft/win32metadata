@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
-index 0a3847b..d7f8aa1 100644
+index 7b72887b26..e85cfb2c59 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
 @@ -18,6 +18,7 @@
@@ -15,7 +15,7 @@ index 0a3847b..d7f8aa1 100644
  #define TIME_ZONE_ID_INVALID ((DWORD)0xFFFFFFFF)
  
 -typedef struct _TIME_ZONE_INFORMATION {
-+typedef struct _Windows_SupportedOS_Windows2000_ _TIME_ZONE_INFORMATION {
++typedef struct  _TIME_ZONE_INFORMATION {
      LONG Bias;
      WCHAR StandardName[ 32 ];
      SYSTEMTIME StandardDate;
@@ -24,7 +24,7 @@ index 0a3847b..d7f8aa1 100644
  } TIME_ZONE_INFORMATION, *PTIME_ZONE_INFORMATION, *LPTIME_ZONE_INFORMATION;
  
 -typedef struct _TIME_DYNAMIC_ZONE_INFORMATION {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _TIME_DYNAMIC_ZONE_INFORMATION {
++typedef struct  _TIME_DYNAMIC_ZONE_INFORMATION {
      LONG Bias;
      WCHAR StandardName[ 32 ];
      SYSTEMTIME StandardDate;
@@ -100,10 +100,12 @@ index 0a3847b..d7f8aa1 100644
  DWORD
  WINAPI
  GetDynamicTimeZoneInformation(
-@@ -133,6 +150,7 @@ GetDynamicTimeZoneInformation(
+@@ -132,7 +149,8 @@ GetDynamicTimeZoneInformation(
+ 
  #if (_WIN32_WINNT >= 0x0601)
  
- _Success_(return != FALSE)
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsVista_ _Success_(return != FALSE)
 +_Win32_SetLastError_
  BOOL
  WINAPI

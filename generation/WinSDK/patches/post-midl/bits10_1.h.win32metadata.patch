@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
-index 7d0155672514e6e9ee232d995fc3d64b44a66402..5fe532d4841fcc41c79b6af1aed57044ce275811 100644
+index 7d01556725..24b571505b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
 @@ -105,6 +105,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index 7d0155672514e6e9ee232d995fc3d64b44a66402..5fe532d4841fcc41c79b6af1aed57044
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -124,7 +125,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
+@@ -123,8 +124,8 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("98c97bd2-e32b-4ad8-a528-95fd8b16bd42")
+-    MIDL_INTERFACE("98c97bd2-e32b-4ad8-a528-95fd8b16bd42")
 -    IBackgroundCopyCallback3 : public IBackgroundCopyCallback2
-+    _Windows_SupportedOS_Server2016_ IBackgroundCopyCallback3 : public IBackgroundCopyCallback2
++    MIDL_INTERFACE("98c97bd2-e32b-4ad8-a528-95fd8b16bd42") _Windows_SupportedOS_15063_ 
++     IBackgroundCopyCallback3 : public IBackgroundCopyCallback2
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE FileRangesTransferred( 
@@ -28,12 +30,14 @@ index 7d0155672514e6e9ee232d995fc3d64b44a66402..5fe532d4841fcc41c79b6af1aed57044
      {
          CONST_VTBL struct IBackgroundCopyCallback3Vtbl *lpVtbl;
      };
-@@ -267,7 +268,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
+@@ -266,8 +267,8 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("CF6784F7-D677-49FD-9368-CB47AEE9D1AD")
+-    MIDL_INTERFACE("CF6784F7-D677-49FD-9368-CB47AEE9D1AD")
 -    IBackgroundCopyFile6 : public IBackgroundCopyFile5
-+    _Windows_SupportedOS_Server2016_ IBackgroundCopyFile6 : public IBackgroundCopyFile5
++    MIDL_INTERFACE("CF6784F7-D677-49FD-9368-CB47AEE9D1AD") _Windows_SupportedOS_15063_ 
++     IBackgroundCopyFile6 : public IBackgroundCopyFile5
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE UpdateDownloadPosition( 

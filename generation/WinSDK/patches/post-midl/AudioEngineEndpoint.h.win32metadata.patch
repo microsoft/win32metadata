@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
+index 2908b5869d..15f61f09dc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
 @@ -148,6 +148,7 @@ extern "C"{
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/g
  
  typedef 
 -enum AE_POSITION_FLAGS
-+enum _Windows_SupportedOS_Windows7_ AE_POSITION_FLAGS
++enum  AE_POSITION_FLAGS
      {
          POSITION_INVALID	= 0,
          POSITION_DISCONTINUOUS	= 1,
@@ -23,7 +24,97 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/g
      } 	AE_POSITION_FLAGS;
  
 -typedef struct AE_CURRENT_POSITION
-+typedef struct _Windows_SupportedOS_Windows7_ AE_CURRENT_POSITION
++typedef struct  AE_CURRENT_POSITION
      {
      UINT64 u64DevicePosition;
      UINT64 u64StreamPosition;
+@@ -208,7 +209,7 @@ EXTERN_C const IID IID_IAudioEndpoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("30A99515-1527-4451-AF9F-00C5F0234DAF")
++    MIDL_INTERFACE("30A99515-1527-4451-AF9F-00C5F0234DAF") _Windows_SupportedOS_Windows7_ 
+     IAudioEndpoint : public IUnknown
+     {
+     public:
+@@ -347,7 +348,7 @@ EXTERN_C const IID IID_IAudioEndpointRT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DFD2005F-A6E5-4d39-A265-939ADA9FBB4D")
++    MIDL_INTERFACE("DFD2005F-A6E5-4d39-A265-939ADA9FBB4D") _Windows_SupportedOS_Windows7_ 
+     IAudioEndpointRT : public IUnknown
+     {
+     public:
+@@ -465,7 +466,7 @@ EXTERN_C const IID IID_IAudioInputEndpointRT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8026AB61-92B2-43c1-A1DF-5C37EBD08D82")
++    MIDL_INTERFACE("8026AB61-92B2-43c1-A1DF-5C37EBD08D82") _Windows_SupportedOS_Windows7_ 
+     IAudioInputEndpointRT : public IUnknown
+     {
+     public:
+@@ -582,7 +583,7 @@ EXTERN_C const IID IID_IAudioOutputEndpointRT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8FA906E4-C31C-4e31-932E-19A66385E9AA")
++    MIDL_INTERFACE("8FA906E4-C31C-4e31-932E-19A66385E9AA") _Windows_SupportedOS_Windows7_ 
+     IAudioOutputEndpointRT : public IUnknown
+     {
+     public:
+@@ -695,7 +696,7 @@ EXTERN_C const IID IID_IAudioDeviceEndpoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D4952F5A-A0B2-4cc4-8B82-9358488DD8AC")
++    MIDL_INTERFACE("D4952F5A-A0B2-4cc4-8B82-9358488DD8AC") _Windows_SupportedOS_Windows7_ 
+     IAudioDeviceEndpoint : public IUnknown
+     {
+     public:
+@@ -974,7 +975,7 @@ EXTERN_C const IID IID_IAudioEndpointOffloadStreamMute;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DFE21355-5EC2-40E0-8D6B-710AC3C00249")
++    MIDL_INTERFACE("DFE21355-5EC2-40E0-8D6B-710AC3C00249") _Windows_SupportedOS_Windows8_ 
+     IAudioEndpointOffloadStreamMute : public IUnknown
+     {
+     public:
+@@ -1178,7 +1179,7 @@ EXTERN_C const IID IID_IAudioEndpointLastBufferControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F8520DD3-8F9D-4437-9861-62F584C33DD6")
++    MIDL_INTERFACE("F8520DD3-8F9D-4437-9861-62F584C33DD6") _Windows_SupportedOS_Windows81_ 
+     IAudioEndpointLastBufferControl : public IUnknown
+     {
+     public:
+@@ -1274,7 +1275,7 @@ EXTERN_C const IID IID_IAudioLfxControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("076A6922-D802-4F83-BAF6-409D9CA11BFE")
++    MIDL_INTERFACE("076A6922-D802-4F83-BAF6-409D9CA11BFE") _Windows_SupportedOS_Windows8_ 
+     IAudioLfxControl : public IUnknown
+     {
+     public:
+@@ -1374,7 +1375,7 @@ EXTERN_C const IID IID_IHardwareAudioEngineBase;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EDDCE3E4-F3C1-453a-B461-223563CBD886")
++    MIDL_INTERFACE("EDDCE3E4-F3C1-453a-B461-223563CBD886") _Windows_SupportedOS_Windows8_ 
+     IHardwareAudioEngineBase : public IUnknown
+     {
+     public:
+@@ -1537,7 +1538,7 @@ EXTERN_C const IID IID_IAudioEndpointControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C684B72A-6DF4-4774-BDF9-76B77509B653")
++    MIDL_INTERFACE("C684B72A-6DF4-4774-BDF9-76B77509B653") _Windows_SupportedOS_Windows7_ 
+     IAudioEndpointControl : public IUnknown
+     {
+     public:

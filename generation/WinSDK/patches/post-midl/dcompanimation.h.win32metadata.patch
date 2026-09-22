@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h b/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h
-index 3a46a8c0d2..7e3ca86d5b 100644
+index 3a46a8c0d2..9104aaaf15 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dcompanimation.h
 @@ -19,6 +19,7 @@
@@ -10,21 +10,26 @@ index 3a46a8c0d2..7e3ca86d5b 100644
  #include "rpcndr.h"
  
  #ifndef __RPCNDR_H_VERSION__
-@@ -93,11 +94,17 @@ EXTERN_C const IID IID_IDCompositionAnimation;
+@@ -89,15 +90,21 @@ EXTERN_C const IID IID_IDCompositionAnimation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CBFD91D9-51B2-45e4-B3DE-D19CCFB863C5")
++    MIDL_INTERFACE("CBFD91D9-51B2-45e4-B3DE-D19CCFB863C5") _Windows_SupportedOS_Windows8_ 
      IDCompositionAnimation : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE SetAbsoluteBeginTime( 
              LARGE_INTEGER beginTime) = 0;
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE AddCubic( 
              double beginOffset,
              float constantCoefficient,
@@ -32,8 +37,8 @@ index 3a46a8c0d2..7e3ca86d5b 100644
              float quadraticCoefficient,
              float cubicCoefficient) = 0;
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE AddSinusoidal( 
              double beginOffset,
              float bias,
@@ -41,14 +46,14 @@ index 3a46a8c0d2..7e3ca86d5b 100644
              float frequency,
              float phase) = 0;
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE AddRepeat( 
              double beginOffset,
              double durationToRepeat) = 0;
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE End( 
              double endOffset,
              float endValue) = 0;

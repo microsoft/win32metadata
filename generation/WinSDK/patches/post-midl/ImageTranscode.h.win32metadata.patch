@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImageTranscode.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImageTranscode.h
-index 470e656e43..b5557d13cd 100644
+index 470e656e43..89f9a6461e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ImageTranscode.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImageTranscode.h
 @@ -19,6 +19,7 @@
@@ -10,18 +10,23 @@ index 470e656e43..b5557d13cd 100644
  #include "rpcndr.h"
  
  #ifndef __RPCNDR_H_VERSION__
-@@ -109,11 +110,13 @@ EXTERN_C const IID IID_ITranscodeImage;
+@@ -105,15 +106,17 @@ EXTERN_C const IID IID_ITranscodeImage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BAE86DDD-DC11-421c-B7AB-CC55D1D65C44")
++    MIDL_INTERFACE("BAE86DDD-DC11-421c-B7AB-CC55D1D65C44") _Windows_SupportedOS_WindowsVista_ 
      ITranscodeImage : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_WindowsVista_
-+        _Windows_SupportedOS_Server2008_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE TranscodeImage( 
              /* [in] */ __RPC__in_opt IShellItem *pShellItem,
              /* [in] */ UINT uiMaxWidth,
              /* [in] */ UINT uiMaxHeight,
 -            /* [in] */ DWORD flags,
-+            /* [in] */ _Win32_AssociatedEnum_(TI_FLAGS) DWORD flags,
++            /* [in] */  DWORD flags,
              /* [in] */ __RPC__in_opt IStream *pvImage,
              /* [out] */ __RPC__out UINT *puiWidth,
              /* [out] */ __RPC__out UINT *puiHeight) = 0;

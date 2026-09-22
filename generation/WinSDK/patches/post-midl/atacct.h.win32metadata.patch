@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/atacct.h b/generation/WinSDK/RecompiledIdlHeaders/um/atacct.h
-index 9a15929012155aa014cac1c94b919fd36455ea11..3f5a40f7ebf8b1170281c82d8685929862a3dd38 100644
+index 9a15929012..5387ec7ce5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/atacct.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/atacct.h
 @@ -17,6 +17,7 @@ Revision History:
@@ -14,7 +14,7 @@ index 9a15929012155aa014cac1c94b919fd36455ea11..3f5a40f7ebf8b1170281c82d86859298
  extern "C" {
  #endif
  
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
  STDAPI
  GetNetScheduleAccountInformation(
      IN    LPCWSTR pwszServerName,
@@ -22,7 +22,7 @@ index 9a15929012155aa014cac1c94b919fd36455ea11..3f5a40f7ebf8b1170281c82d86859298
      OUT _Out_writes_(ccAccount)  WCHAR wszAccount[]
      );
  
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
  STDAPI
  SetNetScheduleAccountInformation(
      IN    LPCWSTR pwszServerName,

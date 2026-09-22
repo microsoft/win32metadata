@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h
-index 7c56afab8d6eccec9fb19c922d52c826edbf0c51..c12b9b3adab2ba78d96fa611d563a6f2054a4267 100644
+index 7c56afab8d..7489e8c1ce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits2_5.h
 @@ -87,6 +87,7 @@ extern "C"{
@@ -15,19 +15,40 @@ index 7c56afab8d6eccec9fb19c922d52c826edbf0c51..c12b9b3adab2ba78d96fa611d563a6f2
  
  typedef 
 -enum BG_CERT_STORE_LOCATION
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ BG_CERT_STORE_LOCATION
++enum   BG_CERT_STORE_LOCATION
      {
          BG_CERT_STORE_LOCATION_CURRENT_USER	= 0,
          BG_CERT_STORE_LOCATION_LOCAL_MACHINE	= ( BG_CERT_STORE_LOCATION_CURRENT_USER + 1 ) ,
-@@ -119,7 +120,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions;
+@@ -118,8 +119,8 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("f1bd1079-9f01-4bdc-8036-f09b70095066")
+-    MIDL_INTERFACE("f1bd1079-9f01-4bdc-8036-f09b70095066")
 -    IBackgroundCopyJobHttpOptions : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyJobHttpOptions : public IUnknown
++    MIDL_INTERFACE("f1bd1079-9f01-4bdc-8036-f09b70095066") _Windows_SupportedOS_WindowsVista_ 
++      IBackgroundCopyJobHttpOptions : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetClientCertificateByID( 
+@@ -142,15 +143,15 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions;
+         virtual HRESULT STDMETHODCALLTYPE GetClientCertificate( 
+             /* [ref][out] */ __RPC__out BG_CERT_STORE_LOCATION *pStoreLocation,
+             /* [ref][out] */ __RPC__deref_out_opt LPWSTR *pStoreName,
+-            /* [ref][size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(20) byte **ppCertHashBlob,
+-            /* [ref][out] */ __RPC__deref_out_opt LPWSTR *pSubjectName) = 0;
++            /* [ref][size_is][size_is][out] */ _Win32_RAIIFree_(CoTaskMemFree) __RPC__deref_out_ecount_full_opt(20) byte **ppCertHashBlob,
++            /* [ref][out] */ _Win32_RAIIFree_(CoTaskMemFree) __RPC__deref_out_opt LPWSTR *pSubjectName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetCustomHeaders( 
+             /* [annotation][unique][in] */ 
+             _In_  LPCWSTR RequestHeaders) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCustomHeaders( 
+-            /* [ref][out] */ __RPC__deref_out_opt LPWSTR *pRequestHeaders) = 0;
++            /* [ref][out] */ _Win32_RAIIFree_(CoTaskMemFree) __RPC__deref_out_opt LPWSTR *pRequestHeaders) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetSecurityFlags( 
+             /* [annotation][in] */ 
 @@ -240,7 +241,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions;
          END_INTERFACE
      } IBackgroundCopyJobHttpOptionsVtbl;

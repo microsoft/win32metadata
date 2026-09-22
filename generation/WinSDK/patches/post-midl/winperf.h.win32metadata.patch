@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h b/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h
-index 83e9335336fd4ccee8a86e1b16125e39e63e9184..f9b2a5645cc812c3c8c4d673b93f010f84df556a 100644
+index 83e9335336..f0ac3a62b6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winperf.h
 @@ -1,4 +1,5 @@
@@ -13,7 +13,35 @@ index 83e9335336fd4ccee8a86e1b16125e39e63e9184..f9b2a5645cc812c3c8c4d673b93f010f
  
  
 -typedef struct _PERF_DATA_BLOCK {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _PERF_DATA_BLOCK {
++typedef struct   _PERF_DATA_BLOCK {
      WCHAR           Signature[4];       // Signature: Unicode "PERF"
      DWORD           LittleEndian;       // 0 = Big Endian, 1 = Little Endian
      DWORD           Version;            // Version of these data structures
+@@ -774,4 +775,27 @@ typedef DWORD (APIENTRY PM_CLOSE_PROC)(void);
+ #pragma warning(pop)
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("PERF_DETAIL_NOVICE")
++#undef PERF_DETAIL_NOVICE
++#pragma push_macro("PERF_DETAIL_ADVANCED")
++#undef PERF_DETAIL_ADVANCED
++#pragma push_macro("PERF_DETAIL_EXPERT")
++#undef PERF_DETAIL_EXPERT
++#pragma push_macro("PERF_DETAIL_WIZARD")
++#undef PERF_DETAIL_WIZARD
++enum PERF_DETAIL : unsigned int
++{
++    PERF_DETAIL_NOVICE = 100U,
++    PERF_DETAIL_ADVANCED = 200U,
++    PERF_DETAIL_EXPERT = 300U,
++    PERF_DETAIL_WIZARD = 400U,
++};
++#pragma pop_macro("PERF_DETAIL_WIZARD")
++#pragma pop_macro("PERF_DETAIL_EXPERT")
++#pragma pop_macro("PERF_DETAIL_ADVANCED")
++#pragma pop_macro("PERF_DETAIL_NOVICE")
++#endif
++
+ #endif // _WINPERF_

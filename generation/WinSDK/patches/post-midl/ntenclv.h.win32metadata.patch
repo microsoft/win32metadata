@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h b/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h
-index 236e62f746..428b5b2024 100644
+index 26882f4210..d38af989fa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h
 @@ -17,11 +17,16 @@ Abstract:
@@ -14,8 +14,8 @@ index 236e62f746..428b5b2024 100644
  
 -typedef enum ENCLAVE_SEALING_IDENTITY_POLICY {
 +typedef enum
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    ENCLAVE_SEALING_IDENTITY_POLICY {
      ENCLAVE_IDENTITY_POLICY_SEAL_INVALID = 0,
      ENCLAVE_IDENTITY_POLICY_SEAL_EXACT_CODE,
@@ -26,8 +26,8 @@ index 236e62f746..428b5b2024 100644
  
 -typedef struct ENCLAVE_IDENTITY {
 +typedef struct
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    ENCLAVE_IDENTITY {
      UINT8 OwnerId[IMAGE_ENCLAVE_LONG_ID_LENGTH];
      UINT8 UniqueId[IMAGE_ENCLAVE_LONG_ID_LENGTH];
@@ -36,7 +36,7 @@ index 236e62f746..428b5b2024 100644
      UINT32 EnclaveSvn;
      UINT32 SecureKernelSvn;
      UINT32 PlatformSvn;
-+    _Win32_AssociatedEnum_(ENCLAVE_IDENTITY_FLAGS)
++    
      UINT32 Flags;
      UINT32 SigningLevel;
      UINT32 EnclaveType;
@@ -60,8 +60,8 @@ index 236e62f746..428b5b2024 100644
  
 -typedef struct VBS_ENCLAVE_REPORT_PKG_HEADER {
 +typedef struct
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    VBS_ENCLAVE_REPORT_PKG_HEADER {
      UINT32 PackageSize;
      UINT32 Version;
@@ -72,8 +72,8 @@ index 236e62f746..428b5b2024 100644
  
 -typedef struct VBS_ENCLAVE_REPORT {
 +typedef struct
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    VBS_ENCLAVE_REPORT {
      UINT32 ReportSize;
      UINT32 ReportVersion;
@@ -83,10 +83,10 @@ index 236e62f746..428b5b2024 100644
  
 -typedef struct VBS_ENCLAVE_REPORT_VARDATA_HEADER {
 +typedef struct
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    VBS_ENCLAVE_REPORT_VARDATA_HEADER {
-+    _Win32_AssociatedEnum_(VBS_ENCLAVE_REPORT_DATA_TYPE)
++    
      UINT32 DataType;
      UINT32 Size;
  } VBS_ENCLAVE_REPORT_VARDATA_HEADER;
@@ -105,8 +105,8 @@ index 236e62f746..428b5b2024 100644
 +#endif
 +
 +typedef struct
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    VBS_ENCLAVE_REPORT_MODULE {
      VBS_ENCLAVE_REPORT_VARDATA_HEADER Header;
      UINT8 UniqueId[IMAGE_ENCLAVE_LONG_ID_LENGTH];
@@ -117,8 +117,8 @@ index 236e62f746..428b5b2024 100644
  
 -typedef struct ENCLAVE_INFORMATION {
 +typedef struct
-+    _Windows_SupportedOS_16299_
-+    _Windows_SupportedOS_Server2016_
++    
++    
 +    ENCLAVE_INFORMATION {
      ULONG EnclaveType;
      ULONG Reserved;

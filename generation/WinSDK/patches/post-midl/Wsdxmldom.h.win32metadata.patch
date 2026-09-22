@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h
-index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d50e432d9 100644
+index faca69e7b0..e1a4ea37a4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h
 @@ -17,6 +17,7 @@
@@ -15,7 +15,7 @@ index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d
  typedef struct _WSDXML_ELEMENT_LIST WSDXML_ELEMENT_LIST;
  
 -struct _WSDXML_NAMESPACE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_NAMESPACE
++struct   _WSDXML_NAMESPACE
  {
      const WCHAR* Uri;
      const WCHAR* PreferredPrefix;
@@ -24,21 +24,21 @@ index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d
  };
  
 -struct _WSDXML_NAME
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_NAME
++struct   _WSDXML_NAME
  {
      WSDXML_NAMESPACE* Space;
      WCHAR* LocalName;
  };
  
 -struct _WSDXML_TYPE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_TYPE
++struct   _WSDXML_TYPE
  {
      const WCHAR* Uri;
      const BYTE* Table;
  };
  
 -struct _WSDXML_PREFIX_MAPPING
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_PREFIX_MAPPING
++struct   _WSDXML_PREFIX_MAPPING
  {
      DWORD Refs;
      WSDXML_PREFIX_MAPPING* Next;
@@ -47,7 +47,7 @@ index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d
  };
  
 -struct _WSDXML_ATTRIBUTE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_ATTRIBUTE
++struct   _WSDXML_ATTRIBUTE
  {
      WSDXML_ELEMENT* Element;
      WSDXML_ATTRIBUTE* Next;
@@ -56,7 +56,7 @@ index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d
  };
  
 -struct _WSDXML_NODE
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_NODE
++struct   _WSDXML_NODE
  {
      enum
      {   
@@ -65,7 +65,7 @@ index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d
  };
  
 -struct _WSDXML_ELEMENT
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_ELEMENT
++struct   _WSDXML_ELEMENT
  {
      WSDXML_NODE Node;
      WSDXML_NAME* Name;
@@ -74,14 +74,14 @@ index faca69e7b014bab4a920c0c6ef733526abb6c9bb..cf47dde418c3b6241ea2d5a983fee36d
  };
  
 -struct _WSDXML_TEXT
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_TEXT
++struct   _WSDXML_TEXT
  {
  	WSDXML_NODE Node;
      WCHAR* Text;
  };
  
 -struct _WSDXML_ELEMENT_LIST
-+struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WSDXML_ELEMENT_LIST
++struct   _WSDXML_ELEMENT_LIST
  {
      WSDXML_ELEMENT_LIST* Next;
      WSDXML_ELEMENT* Element;

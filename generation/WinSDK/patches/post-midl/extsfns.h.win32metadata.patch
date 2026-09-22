@@ -1,0 +1,414 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h b/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
+index 7a1aff61bd..24def3fd99 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation
+@@ -1607,20 +1608,20 @@ DECLARE_INTERFACE(IDebugFAEntryTags)
+     // Looksup Type associated for the failure tag
+     STDMETHOD_(FA_ENTRY_TYPE, GetType)(
+         THIS_
+-        _In_ FA_TAG Tag
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag
+         ) PURE;
+ 
+     // Sets Type associated for the failure tag
+     STDMETHOD(SetType)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _In_ FA_ENTRY_TYPE EntryType
+         ) PURE;
+ 
+     // Looksup description and name for the failure tag
+     STDMETHOD(GetProperties)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_writes_bytes_opt_(*NameSize) PSTR Name,
+         _Inout_opt_ PULONG NameSize,
+         _Out_writes_bytes_opt_(*DescSize) PSTR Description,
+@@ -1633,7 +1634,7 @@ DECLARE_INTERFACE(IDebugFAEntryTags)
+     // previous definition(s)
+     STDMETHOD(SetProperties)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _In_opt_ PCSTR Name,
+         _In_opt_ PCSTR Description,
+         _In_opt_ ULONG Flags
+@@ -1645,7 +1646,7 @@ DECLARE_INTERFACE(IDebugFAEntryTags)
+         THIS_
+         _In_opt_ PCSTR PluginId,
+         _In_ PCSTR TagName,
+-        _Out_ FA_TAG* Tag
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _Out_ FA_TAG* Tag
+         ) PURE;
+ 
+     // This allows extensions to check if a given failure
+@@ -1654,13 +1655,13 @@ DECLARE_INTERFACE(IDebugFAEntryTags)
+     // the predefined tag values in this header file
+     STDMETHOD_(BOOL, IsValidTagToSet)(
+         THIS_
+-        _In_ FA_TAG Tag
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag
+         ) PURE;
+ };
+ 
+ typedef struct _FA_ENTRY
+ {
+-    FA_TAG Tag;
++    _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag;
+     USHORT FullSize;
+     USHORT DataSize;
+ } FA_ENTRY, *PFA_ENTRY;
+@@ -1704,34 +1705,34 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis, IUnknown)
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, Get)(
+         THIS_
+-        FA_TAG Tag
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, GetNext)(
+         THIS_
+         PFA_ENTRY Entry,
+-        FA_TAG Tag,
+-        FA_TAG TagMask
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG TagMask
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, GetString)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _Out_writes_bytes_(MaxSize) PSTR Str,
+         ULONG MaxSize
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, GetBuffer)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _Out_writes_bytes_(Size) PVOID Buf,
+         ULONG Size
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, GetUlong)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _Out_ PULONG Value
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, GetUlong64)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _Out_ PULONG64 Value
+         ) PURE;
+     STDMETHOD_(PFA_ENTRY, NextEntry)(
+@@ -1786,7 +1787,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, Get)(
+         THIS_
+-        _In_ FA_TAG Tag
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag
+         ) PURE;
+     // Looks up next FA_ENTRY after the given 'Entry' by
+     // matching with Tag & and TagMask
+@@ -1794,14 +1795,14 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     STDMETHOD_(PFA_ENTRY, GetNext)(
+         THIS_
+         _In_ PFA_ENTRY Entry,
+-        _In_ FA_TAG Tag,
+-        _In_ FA_TAG TagMask
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG TagMask
+         ) PURE;
+     // Looksup FA_ENTRY by tag and copies its string value
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetString)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_writes_(MaxSize) PSTR Str,
+         _In_ ULONG MaxSize
+         ) PURE;
+@@ -1809,7 +1810,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetBuffer)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_writes_bytes_(Size) PVOID Buf,
+         _In_ ULONG Size
+         ) PURE;
+@@ -1817,14 +1818,14 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetUlong)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_ PULONG Value
+         ) PURE;
+     // Looksup FA_ENTRY by tag and copies its ULONG64 value
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetUlong64)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_ PULONG64 Value
+         ) PURE;
+     // Looks up next FA_ENTRY after the given 'Entry'
+@@ -1843,7 +1844,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetString)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         PCSTR Str
+         ) PURE;
+     // Sets the given extension command and its
+@@ -1852,7 +1853,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetExtensionCommand)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         PCSTR Extension
+         ) PURE;
+     // Sets the given ULONG value for corresponding tag
+@@ -1860,7 +1861,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetUlong)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG Value
+         ) PURE;
+     // Sets the given ULONG64 value for corresponding tag
+@@ -1868,7 +1869,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetUlong64)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG64 Value
+         ) PURE;
+     // Sets the given Buffer value for corresponding tag
+@@ -1876,7 +1877,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetBuffer)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ FA_ENTRY_TYPE EntryType,
+         _In_reads_bytes_(Size) PVOID Buf,
+         _In_ ULONG Size
+@@ -1886,35 +1887,35 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, AddString)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ PCSTR Str
+         ) PURE;
+     // Sets the given extension command and its
+     // argument for corresponding tag in a new entry
+     STDMETHOD_(PFA_ENTRY, AddExtensionCommand)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ PCSTR Extension
+         ) PURE;
+     // Sets the given ULONG value for corresponding tag
+     // in a new entry
+     STDMETHOD_(PFA_ENTRY, AddUlong)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG Value
+         ) PURE;
+     // Sets the given ULONG64 value for corresponding tag
+     // in a new entry
+     STDMETHOD_(PFA_ENTRY, AddUlong64)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG64 Value
+         ) PURE;
+     // Sets the given Buffer value for corresponding tag
+     // in a new entry
+     STDMETHOD_(PFA_ENTRY, AddBuffer)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ FA_ENTRY_TYPE EntryType,
+         _In_reads_bytes_(Size) PVOID const Buf,
+         _In_ ULONG Size
+@@ -1937,7 +1938,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis2, IUnknown)
+     // Adds another analysis object as structured data in a new entry
+     STDMETHOD(AddStructuredAnalysisData)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ IDebugFailureAnalysis2 *Analysis
+         ) PURE;
+ };
+@@ -1989,7 +1990,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, Get)(
+         THIS_
+-        _In_ FA_TAG Tag
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag
+         ) PURE;
+     // Looks up next FA_ENTRY after the given 'Entry' by
+     // matching with Tag & and TagMask
+@@ -1997,14 +1998,14 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     STDMETHOD_(PFA_ENTRY, GetNext)(
+         THIS_
+         _In_ PFA_ENTRY Entry,
+-        _In_ FA_TAG Tag,
+-        _In_ FA_TAG TagMask
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG TagMask
+         ) PURE;
+     // Looksup FA_ENTRY by tag and copies its string value
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetString)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_writes_(MaxSize) PSTR Str,
+         _In_ ULONG MaxSize
+         ) PURE;
+@@ -2012,7 +2013,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetBuffer)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_writes_bytes_(Size) PVOID Buf,
+         _In_ ULONG Size
+         ) PURE;
+@@ -2020,14 +2021,14 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetUlong)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_ PULONG Value
+         ) PURE;
+     // Looksup FA_ENTRY by tag and copies its ULONG64 value
+     // Returns NULL if tag is not found
+     STDMETHOD_(PFA_ENTRY, GetUlong64)(
+         THIS_
+-        _In_ FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) _In_ FA_TAG Tag,
+         _Out_ PULONG64 Value
+         ) PURE;
+     // Looks up next FA_ENTRY after the given 'Entry'
+@@ -2046,7 +2047,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetString)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         PCSTR Str
+         ) PURE;
+     // Sets the given extension command and its
+@@ -2055,7 +2056,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetExtensionCommand)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         PCSTR Extension
+         ) PURE;
+     // Sets the given ULONG value for corresponding tag
+@@ -2063,7 +2064,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetUlong)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG Value
+         ) PURE;
+     // Sets the given ULONG64 value for corresponding tag
+@@ -2071,7 +2072,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetUlong64)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG64 Value
+         ) PURE;
+     // Sets the given Buffer value for corresponding tag
+@@ -2079,7 +2080,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, SetBuffer)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ FA_ENTRY_TYPE EntryType,
+         _In_reads_bytes_(Size) PVOID Buf,
+         _In_ ULONG Size
+@@ -2089,35 +2090,35 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // present.
+     STDMETHOD_(PFA_ENTRY, AddString)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ PCSTR Str
+         ) PURE;
+     // Sets the given extension command and its
+     // argument for corresponding tag in a new entry
+     STDMETHOD_(PFA_ENTRY, AddExtensionCommand)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ PCSTR Extension
+         ) PURE;
+     // Sets the given ULONG value for corresponding tag
+     // in a new entry
+     STDMETHOD_(PFA_ENTRY, AddUlong)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG Value
+         ) PURE;
+     // Sets the given ULONG64 value for corresponding tag
+     // in a new entry
+     STDMETHOD_(PFA_ENTRY, AddUlong64)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ ULONG64 Value
+         ) PURE;
+     // Sets the given Buffer value for corresponding tag
+     // in a new entry
+     STDMETHOD_(PFA_ENTRY, AddBuffer)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ FA_ENTRY_TYPE EntryType,
+         _In_reads_bytes_(Size) PVOID const Buf,
+         _In_ ULONG Size
+@@ -2140,7 +2141,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     // Adds another analysis object as structured data in a new entry
+     STDMETHOD(AddStructuredAnalysisData)(
+         THIS_
+-        FA_TAG Tag,
++        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
+         _In_ IDebugFailureAnalysis2 *Analysis
+         ) PURE;
+ 
+@@ -2164,7 +2165,7 @@ DECLARE_INTERFACE_(IDebugFailureAnalysis3, IUnknown)
+     STDMETHOD(AttributeGetName)(
+         THIS_
+         _In_ ULONG nIndex,
+-        _Out_ BSTR* pName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* pName
+         ) PURE;
+ 
+     STDMETHOD(AttributeSet)(

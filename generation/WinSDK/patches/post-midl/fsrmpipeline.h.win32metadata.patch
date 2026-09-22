@@ -1,0 +1,357 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmpipeline.h b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmpipeline.h
+index 965b9d514e..1775201598 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmpipeline.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmpipeline.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -253,13 +254,13 @@ EXTERN_C const IID IID_IFsrmPropertyDefinition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ede0150f-e9a3-419c-877c-01fe5d24c5d3")
++    MIDL_INTERFACE("ede0150f-e9a3-419c-877c-01fe5d24c5d3") _Windows_SupportedOS_Server2008_ 
+     IFsrmPropertyDefinition : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -561,7 +562,7 @@ EXTERN_C const IID IID_IFsrmPropertyDefinition2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("47782152-d16c-4229-b4e1-0ddfe308b9f6")
++    MIDL_INTERFACE("47782152-d16c-4229-b4e1-0ddfe308b9f6") _Windows_SupportedOS_Server2012_ 
+     IFsrmPropertyDefinition2 : public IFsrmPropertyDefinition
+     {
+     public:
+@@ -571,7 +572,7 @@ EXTERN_C const IID IID_IFsrmPropertyDefinition2;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
+             /* [annotation][in] */ 
+@@ -895,25 +896,25 @@ EXTERN_C const IID IID_IFsrmPropertyDefinitionValue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E946D148-BD67-4178-8E22-1C44925ED710")
++    MIDL_INTERFACE("E946D148-BD67-4178-8E22-1C44925ED710") _Windows_SupportedOS_Server2012_ 
+     IFsrmPropertyDefinitionValue : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *displayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *displayName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *description) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *description) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UniqueID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *uniqueID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *uniqueID) = 0;
+         
+     };
+     
+@@ -1083,17 +1084,17 @@ EXTERN_C const IID IID_IFsrmProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4a73fee4-4102-4fcc-9ffb-38614f9ee768")
++    MIDL_INTERFACE("4a73fee4-4102-4fcc-9ffb-38614f9ee768") _Windows_SupportedOS_Server2008_ 
+     IFsrmProperty : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Sources( 
+             /* [annotation][retval][out] */ 
+@@ -1271,13 +1272,13 @@ EXTERN_C const IID IID_IFsrmRule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cb0df960-16f5-4495-9079-3f9360d831df")
++    MIDL_INTERFACE("cb0df960-16f5-4495-9079-3f9360d831df") _Windows_SupportedOS_Server2008_ 
+     IFsrmRule : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -1289,7 +1290,7 @@ EXTERN_C const IID IID_IFsrmRule;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModuleDefinitionName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *moduleDefinitionName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *moduleDefinitionName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ModuleDefinitionName( 
+             /* [annotation][in] */ 
+@@ -1605,7 +1606,7 @@ EXTERN_C const IID IID_IFsrmClassificationRule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("afc052c2-5315-45ab-841b-c6db0e120148")
++    MIDL_INTERFACE("afc052c2-5315-45ab-841b-c6db0e120148") _Windows_SupportedOS_Server2008_ 
+     IFsrmClassificationRule : public IFsrmRule
+     {
+     public:
+@@ -1619,7 +1620,7 @@ EXTERN_C const IID IID_IFsrmClassificationRule;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyAffected( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *property) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *property) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PropertyAffected( 
+             /* [annotation][in] */ 
+@@ -1627,7 +1628,7 @@ EXTERN_C const IID IID_IFsrmClassificationRule;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
+             /* [annotation][in] */ 
+@@ -1970,13 +1971,13 @@ EXTERN_C const IID IID_IFsrmPipelineModuleDefinition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("515c1277-2c81-440e-8fcf-367921ed4f59")
++    MIDL_INTERFACE("515c1277-2c81-440e-8fcf-367921ed4f59") _Windows_SupportedOS_Server2008_ 
+     IFsrmPipelineModuleDefinition : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModuleClsid( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *moduleClsid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *moduleClsid) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ModuleClsid( 
+             /* [annotation][in] */ 
+@@ -1984,7 +1985,7 @@ EXTERN_C const IID IID_IFsrmPipelineModuleDefinition;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -1992,7 +1993,7 @@ EXTERN_C const IID IID_IFsrmPipelineModuleDefinition;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Company( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *company) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *company) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Company( 
+             /* [annotation][in] */ 
+@@ -2000,7 +2001,7 @@ EXTERN_C const IID IID_IFsrmPipelineModuleDefinition;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Version( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *version) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *version) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Version( 
+             /* [annotation][in] */ 
+@@ -2395,7 +2396,7 @@ EXTERN_C const IID IID_IFsrmClassifierModuleDefinition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bb36ea26-6318-4b8c-8592-f72dd602e7a5")
++    MIDL_INTERFACE("bb36ea26-6318-4b8c-8592-f72dd602e7a5") _Windows_SupportedOS_Server2008_ 
+     IFsrmClassifierModuleDefinition : public IFsrmPipelineModuleDefinition
+     {
+     public:
+@@ -2823,7 +2824,7 @@ EXTERN_C const IID IID_IFsrmStorageModuleDefinition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("15a81350-497d-4aba-80e9-d4dbcc5521fe")
++    MIDL_INTERFACE("15a81350-497d-4aba-80e9-d4dbcc5521fe") _Windows_SupportedOS_Server2008_ 
+     IFsrmStorageModuleDefinition : public IFsrmPipelineModuleDefinition
+     {
+     public:
+@@ -3251,7 +3252,7 @@ EXTERN_C const IID IID_IFsrmClassificationManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d2dc89da-ee91-48a0-85d8-cc72a56f7d04")
++    MIDL_INTERFACE("d2dc89da-ee91-48a0-85d8-cc72a56f7d04") _Windows_SupportedOS_Windows8_ 
+     IFsrmClassificationManager : public IDispatch
+     {
+     public:
+@@ -3273,7 +3274,7 @@ EXTERN_C const IID IID_IFsrmClassificationManager;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClassificationReportMailTo( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailTo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailTo) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ClassificationReportMailTo( 
+             /* [annotation][in] */ 
+@@ -3289,11 +3290,11 @@ EXTERN_C const IID IID_IFsrmClassificationManager;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClassificationLastReportPathWithoutExtension( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *lastReportPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *lastReportPath) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClassificationLastError( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *lastError) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *lastError) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClassificationRunningStatus( 
+             /* [annotation][retval][out] */ 
+@@ -3822,7 +3823,7 @@ EXTERN_C const IID IID_IFsrmClassificationManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0004c1c9-127e-4765-ba07-6a3147bca112")
++    MIDL_INTERFACE("0004c1c9-127e-4765-ba07-6a3147bca112") _Windows_SupportedOS_Windows8_ 
+     IFsrmClassificationManager2 : public IFsrmClassificationManager
+     {
+     public:
+@@ -4271,25 +4272,25 @@ EXTERN_C const IID IID_IFsrmPropertyBag;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("774589d1-d300-4f7a-9a24-f7b766800250")
++    MIDL_INTERFACE("774589d1-d300-4f7a-9a24-f7b766800250") _Windows_SupportedOS_Server2008_ 
+     IFsrmPropertyBag : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RelativePath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *volumeName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *volumeName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RelativeNamespaceRoot( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *relativeNamespaceRoot) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *relativeNamespaceRoot) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeIndex( 
+             /* [annotation][retval][out] */ 
+@@ -4329,7 +4330,7 @@ EXTERN_C const IID IID_IFsrmPropertyBag;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OwnerSid( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ownerSid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ownerSid) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FilePropertyNames( 
+             /* [annotation][retval][out] */ 
+@@ -4696,7 +4697,7 @@ EXTERN_C const IID IID_IFsrmPropertyBag2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0e46bdbd-2402-4fed-9c30-9266e6eb2cc9")
++    MIDL_INTERFACE("0e46bdbd-2402-4fed-9c30-9266e6eb2cc9") _Windows_SupportedOS_Server2012_ 
+     IFsrmPropertyBag2 : public IFsrmPropertyBag
+     {
+     public:
+@@ -5060,7 +5061,7 @@ EXTERN_C const IID IID_IFsrmPipelineModuleImplementation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b7907906-2b02-4cb5-84a9-fdf54613d6cd")
++    MIDL_INTERFACE("b7907906-2b02-4cb5-84a9-fdf54613d6cd") _Windows_SupportedOS_Server2008_ 
+     IFsrmPipelineModuleImplementation : public IDispatch
+     {
+     public:
+@@ -5224,7 +5225,7 @@ EXTERN_C const IID IID_IFsrmClassifierModuleImplementation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c968fc6-6edb-4051-9c18-73b7291ae106")
++    MIDL_INTERFACE("4c968fc6-6edb-4051-9c18-73b7291ae106") _Windows_SupportedOS_Server2008_ 
+     IFsrmClassifierModuleImplementation : public IFsrmPipelineModuleImplementation
+     {
+     public:
+@@ -5260,7 +5261,7 @@ EXTERN_C const IID IID_IFsrmClassifierModuleImplementation;
+             /* [annotation][in] */ 
+             _In_  BSTR property,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *value,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *value,
+             /* [annotation][in] */ 
+             _In_  FSRM_OBJECT_ID idRule,
+             /* [annotation][in] */ 
+@@ -5489,7 +5490,7 @@ EXTERN_C const IID IID_IFsrmStorageModuleImplementation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0af4a0da-895a-4e50-8712-a96724bcec64")
++    MIDL_INTERFACE("0af4a0da-895a-4e50-8712-a96724bcec64") _Windows_SupportedOS_Server2008_ 
+     IFsrmStorageModuleImplementation : public IFsrmPipelineModuleImplementation
+     {
+     public:
+@@ -5683,7 +5684,7 @@ EXTERN_C const IID IID_IFsrmPipelineModuleConnector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c16014f3-9aa1-46b3-b0a7-ab146eb205f2")
++    MIDL_INTERFACE("c16014f3-9aa1-46b3-b0a7-ab146eb205f2") _Windows_SupportedOS_Server2008_ 
+     IFsrmPipelineModuleConnector : public IDispatch
+     {
+     public:
+@@ -5693,11 +5694,11 @@ EXTERN_C const IID IID_IFsrmPipelineModuleConnector;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModuleName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HostingUserAccount( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userAccount) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userAccount) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HostingProcessPid( 
+             /* [annotation][retval][out] */ 

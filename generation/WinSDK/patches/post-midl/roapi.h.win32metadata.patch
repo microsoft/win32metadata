@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
-index d7429649bb..e42b92e7a7 100644
+index d7429649bb..e096f99482 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
 @@ -13,6 +13,7 @@
@@ -23,8 +23,8 @@ index d7429649bb..e42b92e7a7 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  // forward declarations of the dllexport'd versions
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT
@@ -34,16 +34,16 @@ index d7429649bb..e42b92e7a7 100644
      _In_ RO_INIT_TYPE initType
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  void
  WINAPI
  RoUninitialize(
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT
@@ -51,8 +51,8 @@ index d7429649bb..e42b92e7a7 100644
      _COM_Outptr_ IInspectable** instance
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT
@@ -64,8 +64,8 @@ index d7429649bb..e42b92e7a7 100644
 +    _Out_ _Win32_RAIIFree_(RoRevokeActivationFactories) RO_REGISTRATION_COOKIE* cookie
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  void
  WINAPI
@@ -73,8 +73,8 @@ index d7429649bb..e42b92e7a7 100644
      _In_ RO_REGISTRATION_COOKIE cookie
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT
@@ -82,8 +82,8 @@ index d7429649bb..e42b92e7a7 100644
  typedef interface IApartmentShutdown IApartmentShutdown;
  DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT
@@ -95,8 +95,8 @@ index d7429649bb..e42b92e7a7 100644
 +    _Out_ _Win32_RAIIFree_(RoUnregisterForApartmentShutdown) APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT
@@ -104,8 +104,8 @@ index d7429649bb..e42b92e7a7 100644
      _In_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE regCookie
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
++
  ROAPI
  _Check_return_
  HRESULT

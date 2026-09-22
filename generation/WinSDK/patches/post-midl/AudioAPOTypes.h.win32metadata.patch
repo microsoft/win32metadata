@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioAPOTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/AudioAPOTypes.h
-index e56fe0c29f2590fbc4a4a500f3459c8278be798d..bf4f4d5254bef692702bec599449d8bccaa98aac 100644
+index e56fe0c29f..05a6e56bb1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AudioAPOTypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AudioAPOTypes.h
 @@ -3,6 +3,7 @@
@@ -15,7 +15,7 @@ index e56fe0c29f2590fbc4a4a500f3459c8278be798d..bf4f4d5254bef692702bec599449d8bc
  // an APO_CONNECTION_PROPERTY structure associated with it. The buffer
  // for each connection may be either invalid, valid, or silent.
 -typedef enum APO_BUFFER_FLAGS
-+typedef enum _Windows_SupportedOS_Windows7_ APO_BUFFER_FLAGS
++typedef enum  APO_BUFFER_FLAGS
  {
      // BUFFER_INVALID means that there is no valid data in  the connection
      // buffer. The buffer pointer will still be valid and capable of holding
@@ -24,7 +24,7 @@ index e56fe0c29f2590fbc4a4a500f3459c8278be798d..bf4f4d5254bef692702bec599449d8bc
  // is passed in IAudioInputEndpointRT::GetInputDataPointer and
  // IAudioOutputEndpointRT::ReleaseOutputDataPointer.
 -typedef struct APO_CONNECTION_PROPERTY
-+typedef struct _Windows_SupportedOS_Windows7_ APO_CONNECTION_PROPERTY
++typedef struct  APO_CONNECTION_PROPERTY
  {
      // The connection buffer. APOs use this buffer to read and write
      // audio data.
@@ -33,7 +33,7 @@ index e56fe0c29f2590fbc4a4a500f3459c8278be798d..bf4f4d5254bef692702bec599449d8bc
  
  // This structure defines V2 of the APO_CONNECTION_PROPERTY.
 -typedef struct APO_CONNECTION_PROPERTY_V2
-+typedef struct _Windows_SupportedOS_20348_ APO_CONNECTION_PROPERTY_V2
++typedef struct  APO_CONNECTION_PROPERTY_V2
  {
      APO_CONNECTION_PROPERTY   property;
      UINT64                    u64QPCTime;

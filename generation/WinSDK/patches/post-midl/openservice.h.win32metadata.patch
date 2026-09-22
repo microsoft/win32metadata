@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h b/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
-index b0ffeb0f3ea5cb67a0e7ef8cdbb352fdd6996b99..affdfa3d84baa745c6de0c4a10e2a01f3df1e95c 100644
+index b0ffeb0f3e..d648a816dc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
 @@ -160,6 +160,7 @@ extern "C"{
@@ -15,10 +15,19 @@ index b0ffeb0f3ea5cb67a0e7ef8cdbb352fdd6996b99..affdfa3d84baa745c6de0c4a10e2a01f
      
      MIDL_INTERFACE("75cb4db9-6da0-4da3-83ce-422b6a433346")
 -    IOpenServiceActivityInput : public IUnknown
-+    _Windows_SupportedOS_Windows7_ IOpenServiceActivityInput : public IUnknown
++     IOpenServiceActivityInput : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetVariable( 
+@@ -207,7 +208,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
+             /* [annotation][unique][in] */ 
+             _In_  LPCWSTR pwzVariableType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrVariableContent) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrVariableContent) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE HasVariable( 
+             /* [annotation][in] */ 
 @@ -275,7 +276,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
          END_INTERFACE
      } IOpenServiceActivityInputVtbl;
@@ -33,7 +42,7 @@ index b0ffeb0f3ea5cb67a0e7ef8cdbb352fdd6996b99..affdfa3d84baa745c6de0c4a10e2a01f
      
      MIDL_INTERFACE("e289deab-f709-49a9-b99e-282364074571")
 -    IOpenServiceActivityOutputContext : public IUnknown
-+    _Windows_SupportedOS_Windows7_ IOpenServiceActivityOutputContext : public IUnknown
++     IOpenServiceActivityOutputContext : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Navigate( 
@@ -46,3 +55,77 @@ index b0ffeb0f3ea5cb67a0e7ef8cdbb352fdd6996b99..affdfa3d84baa745c6de0c4a10e2a01f
      {
          CONST_VTBL struct IOpenServiceActivityOutputContextVtbl *lpVtbl;
      };
+@@ -470,7 +471,7 @@ EXTERN_C const IID IID_IOpenService;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetID( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrID) = 0;
+         
+     };
+     
+@@ -767,45 +768,45 @@ EXTERN_C const IID IID_IOpenServiceActivity;
+             /* [annotation][in] */ 
+             _In_  IOpenServiceActivityInput *pInput,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrStatusText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHomepageUrl( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrHomepageUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrHomepageUrl) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDisplayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDisplayName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDescription) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCategoryName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrCategoryName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrCategoryName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIconPath( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrIconPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrIconPath) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIcon( 
+             /* [annotation][in] */ 
+             _In_  BOOL fSmallIcon,
+             /* [annotation][out] */ 
+-            _Out_  HICON *phIcon) = 0;
++            _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_  HICON *phIcon) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescriptionFilePath( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrXmlPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrXmlPath) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDownloadUrl( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrXmlUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrXmlUri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInstallUrl( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrInstallUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrInstallUri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsEnabled( 
+             /* [annotation][out] */ 
+@@ -1249,7 +1250,7 @@ EXTERN_C const IID IID_IOpenServiceActivityCategory;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetActivityEnumerator( 
+             /* [annotation][in] */ 

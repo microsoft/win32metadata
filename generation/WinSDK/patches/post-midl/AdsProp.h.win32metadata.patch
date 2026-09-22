@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h
-index 740baae061..5f02eb6af7 100644
+index 740baae061..2ce3c79de7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdsProp.h
 @@ -21,6 +21,7 @@
@@ -15,7 +15,7 @@ index 740baae061..5f02eb6af7 100644
  //
  //-----------------------------------------------------------------------------
 -typedef struct _ADSPROPINITPARAMS {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ADSPROPINITPARAMS {
++typedef struct   _ADSPROPINITPARAMS {
      DWORD              dwSize;          // Set this to the size of the struct.
      DWORD              dwFlags;         // Reserved for future use.
      HRESULT            hr;              // If this is non-zero, then the others
@@ -24,7 +24,7 @@ index 740baae061..5f02eb6af7 100644
  //
  //-----------------------------------------------------------------------------
 -typedef struct _ADSPROPERROR {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ADSPROPERROR {
++typedef struct   _ADSPROPERROR {
      HWND               hwndPage;        // The HWND of the page that had the error
      PWSTR              pszPageTitle;    // The title of the page that had the error
      PWSTR              pszObjPath;      // Path to the object that the error occurred on
@@ -32,8 +32,8 @@ index 740baae061..5f02eb6af7 100644
  //  Returns:    HRESULTs.
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI
  ADsPropCreateNotifyObj(LPDATAOBJECT pAppThdDataObj, _In_ PWSTR pwzADsObjName,
                         HWND * phNotifyObj);
@@ -41,8 +41,8 @@ index 740baae061..5f02eb6af7 100644
  //              writable attributes.
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(BOOL)
  ADsPropGetInitInfo(HWND hNotifyObj, PADSPROPINITPARAMS pInitParams);
  
@@ -50,8 +50,8 @@ index 740baae061..5f02eb6af7 100644
  //              multi-select property pages
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(BOOL)
  ADsPropSetHwndWithTitle(HWND hNotifyObj, HWND hPage, _In_ PTSTR ptzTitle);
  
@@ -59,8 +59,8 @@ index 740baae061..5f02eb6af7 100644
  //              window.
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(BOOL)
  ADsPropSetHwnd(HWND hNotifyObj, HWND hPage);
  
@@ -68,8 +68,8 @@ index 740baae061..5f02eb6af7 100644
  //              array or if the array pointer is NULL.
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(BOOL)
  ADsPropCheckIfWritable(_In_ const PWSTR pwzAttr, const PADS_ATTR_INFO pWritableAttrs);
  
@@ -77,8 +77,8 @@ index 740baae061..5f02eb6af7 100644
  //  Returns:    FALSE if the notify window has gone away for some reason.
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(BOOL)
  ADsPropSendErrorMessage(HWND hNotifyObj, PADSPROPERROR pError);
  
@@ -86,8 +86,8 @@ index 740baae061..5f02eb6af7 100644
  //  Returns:    FALSE if the notify window has gone away for some reason.
  //
  //-----------------------------------------------------------------------------
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  STDAPI_(BOOL)
  ADsPropShowErrorDialog(HWND hNotifyObj, HWND hPage);
  

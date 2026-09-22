@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xmllite.h b/generation/WinSDK/RecompiledIdlHeaders/um/xmllite.h
+index d4182bd150..608e2822ee 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xmllite.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xmllite.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -351,7 +352,7 @@ EXTERN_C const IID IID_IXmlReader;
+             /* [annotation] */ 
+             _In_opt_  LONG_PTR pValue) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Read( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Read( 
+             /* [annotation] */ 
+             _Out_opt_  XmlNodeType *pNodeType) = 0;
+         
+@@ -359,11 +360,11 @@ EXTERN_C const IID IID_IXmlReader;
+             /* [annotation] */ 
+             _Out_  XmlNodeType *pNodeType) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE MoveToFirstAttribute( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE MoveToFirstAttribute( void) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE MoveToNextAttribute( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE MoveToNextAttribute( void) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE MoveToAttributeByName( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE MoveToAttributeByName( 
+             /* [annotation] */ 
+             _In_  LPCWSTR pwszLocalName,
+             /* [annotation] */ 
+@@ -401,7 +402,7 @@ EXTERN_C const IID IID_IXmlReader;
+             /* [annotation] */ 
+             _Out_opt_  UINT *pcwchValue) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE ReadValueChunk( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE ReadValueChunk( 
+             /* [annotation] */ 
+             _Out_writes_to_(cwchChunkSize, *pcwchRead)  WCHAR *pwchBuffer,
+             /* [annotation] */ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h b/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h
-index fe36433191..dfa73d4551 100644
+index fe36433191..756e12f3f7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index fe36433191..dfa73d4551 100644
     [v1_enum]
  #endif
 -enum _EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION
++enum   _EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION
  {
     // Discard the request as EAP cannot use it.
     EAP_METHOD_AUTHENTICATOR_RESPONSE_DISCARD = 0,
@@ -21,7 +21,7 @@ index fe36433191..dfa73d4551 100644
  } EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION;
  
 -typedef struct _EAP_METHOD_AUTHENTICATOR_RESULT
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EAP_METHOD_AUTHENTICATOR_RESULT
++typedef struct   _EAP_METHOD_AUTHENTICATOR_RESULT
  {
     BOOL fIsSuccess;
     DWORD dwFailureReason;
@@ -30,7 +30,7 @@ index fe36433191..dfa73d4551 100644
     [v1_enum]
  #endif
 -enum tagEapPeerMethodResponseAction
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapPeerMethodResponseAction
++enum   tagEapPeerMethodResponseAction
  {
          // Discard the request as EAP cannot use it.
          EapPeerMethodResponseActionDiscard = 0,
@@ -39,7 +39,7 @@ index fe36433191..dfa73d4551 100644
  // Structures used by EAP methods on the peer to communicate with the host.
  
 -typedef struct tagEapPeerMethodOuput 
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapPeerMethodOuput 
++typedef struct   tagEapPeerMethodOuput 
  {
          //EapPeerMethodDecision decision;
          //EapPeerMethodState state;
@@ -48,7 +48,7 @@ index fe36433191..dfa73d4551 100644
     [v1_enum]
  #endif
 -enum tagEapPeerMethodResultReason
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapPeerMethodResultReason
++enum   tagEapPeerMethodResultReason
  {
     EapPeerMethodResultUnknown = 1,
     EapPeerMethodResultSuccess,

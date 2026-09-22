@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h b/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h
-index 8cdcf31bcbb90e1a5c7282e88906dd39a7fed6e3..96923492576f0fe4f96fc411834146b0e195966b 100644
+index 8cdcf31bcb..e4e20cf67a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/TSGPolicyEngine.h
 @@ -88,10 +88,11 @@ extern "C"{
@@ -11,7 +11,7 @@ index 8cdcf31bcbb90e1a5c7282e88906dd39a7fed6e3..96923492576f0fe4f96fc411834146b0
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  typedef /* [public][public][public][public] */ 
 -enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0001
-+enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0001
++enum  __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0001
      {
          AA_AUTH_MIN	= 0,
          AA_AUTH_BASIC	= ( AA_AUTH_MIN + 1 ) ,
@@ -20,7 +20,7 @@ index 8cdcf31bcbb90e1a5c7282e88906dd39a7fed6e3..96923492576f0fe4f96fc411834146b0
  
  typedef /* [public][public] */ 
 -enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0002
-+enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0002
++enum  __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0002
      {
          AA_MAIN_SESSION_CREATION	= 0,
          AA_SUB_SESSION_CREATION	= ( AA_MAIN_SESSION_CREATION + 1 ) ,
@@ -29,7 +29,7 @@ index 8cdcf31bcbb90e1a5c7282e88906dd39a7fed6e3..96923492576f0fe4f96fc411834146b0
  
  typedef /* [public] */ 
 -enum __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0005
-+enum _Windows_SupportedOS_Windows7_ __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0005
++enum  __MIDL___MIDL_itf_tsgpolicyengine_0000_0000_0005
      {
          EnableAllRedirections	= 0,
          DisableAllRedirections	= ( EnableAllRedirections + 1 ) ,

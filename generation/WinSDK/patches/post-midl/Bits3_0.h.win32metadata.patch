@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
-index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1e3ac4cb2 100644
+index f397dc1bff..2565f9d364 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
 @@ -186,6 +186,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -205,7 +206,7 @@ EXTERN_C const IID IID_IBitsPeerCacheRecord;
+@@ -204,8 +205,8 @@ EXTERN_C const IID IID_IBitsPeerCacheRecord;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdeaf-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdeaf-489e-11d9-a9cd-000d56965251")
 -    IBitsPeerCacheRecord : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBitsPeerCacheRecord : public IUnknown
++    MIDL_INTERFACE("659cdeaf-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IBitsPeerCacheRecord : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetId( 
@@ -28,12 +30,14 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IBitsPeerCacheRecordVtbl *lpVtbl;
      };
-@@ -360,7 +361,7 @@ EXTERN_C const IID IID_IEnumBitsPeerCacheRecords;
+@@ -359,8 +360,8 @@ EXTERN_C const IID IID_IEnumBitsPeerCacheRecords;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdea4-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdea4-489e-11d9-a9cd-000d56965251")
 -    IEnumBitsPeerCacheRecords : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumBitsPeerCacheRecords : public IUnknown
++    MIDL_INTERFACE("659cdea4-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IEnumBitsPeerCacheRecords : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -46,12 +50,14 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IEnumBitsPeerCacheRecordsVtbl *lpVtbl;
      };
-@@ -501,7 +502,7 @@ EXTERN_C const IID IID_IBitsPeer;
+@@ -500,8 +501,8 @@ EXTERN_C const IID IID_IBitsPeer;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdea2-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdea2-489e-11d9-a9cd-000d56965251")
 -    IBitsPeer : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBitsPeer : public IUnknown
++    MIDL_INTERFACE("659cdea2-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IBitsPeer : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetPeerName( 
@@ -64,12 +70,14 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IBitsPeerVtbl *lpVtbl;
      };
-@@ -608,7 +609,7 @@ EXTERN_C const IID IID_IEnumBitsPeers;
+@@ -607,8 +608,8 @@ EXTERN_C const IID IID_IEnumBitsPeers;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdea5-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdea5-489e-11d9-a9cd-000d56965251")
 -    IEnumBitsPeers : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumBitsPeers : public IUnknown
++    MIDL_INTERFACE("659cdea5-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IEnumBitsPeers : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -82,15 +90,26 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IEnumBitsPeersVtbl *lpVtbl;
      };
-@@ -752,7 +753,7 @@ EXTERN_C const IID IID_IBitsPeerCacheAdministration;
+@@ -751,8 +752,8 @@ EXTERN_C const IID IID_IBitsPeerCacheAdministration;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdead-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdead-489e-11d9-a9cd-000d56965251")
 -    IBitsPeerCacheAdministration : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBitsPeerCacheAdministration : public IUnknown
++    MIDL_INTERFACE("659cdead-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IBitsPeerCacheAdministration : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetMaximumCacheSize( 
+@@ -764,7 +765,7 @@ EXTERN_C const IID IID_IBitsPeerCacheAdministration;
+         virtual HRESULT STDMETHODCALLTYPE GetMaximumContentAge( 
+             /* [out][ref] */ __RPC__out ULONG *pSeconds) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE SetMaximumContentAge( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE SetMaximumContentAge( 
+             ULONG Seconds) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConfigurationFlags( 
 @@ -899,7 +900,7 @@ EXTERN_C const IID IID_IBitsPeerCacheAdministration;
          END_INTERFACE
      } IBitsPeerCacheAdministrationVtbl;
@@ -100,12 +119,14 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IBitsPeerCacheAdministrationVtbl *lpVtbl;
      };
-@@ -987,7 +988,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob4;
+@@ -986,8 +987,8 @@ EXTERN_C const IID IID_IBackgroundCopyJob4;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdeae-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdeae-489e-11d9-a9cd-000d56965251")
 -    IBackgroundCopyJob4 : public IBackgroundCopyJob3
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyJob4 : public IBackgroundCopyJob3
++    MIDL_INTERFACE("659cdeae-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IBackgroundCopyJob4 : public IBackgroundCopyJob3
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetPeerCachingFlags( 
@@ -118,15 +139,23 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IBackgroundCopyJob4Vtbl *lpVtbl;
      };
-@@ -1539,7 +1540,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile3;
+@@ -1538,13 +1539,13 @@ EXTERN_C const IID IID_IBackgroundCopyFile3;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdeaa-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdeaa-489e-11d9-a9cd-000d56965251")
 -    IBackgroundCopyFile3 : public IBackgroundCopyFile2
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyFile3 : public IBackgroundCopyFile2
++    MIDL_INTERFACE("659cdeaa-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IBackgroundCopyFile3 : public IBackgroundCopyFile2
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetTemporaryName( 
+             /* [annotation][out] */ 
+-            _Out_  LPWSTR *pFilename) = 0;
++            _Win32_RAIIFree_(CoTaskMemFree) _Out_  LPWSTR *pFilename) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetValidationState( 
+             /* [annotation][in] */ 
 @@ -1641,7 +1642,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile3;
          END_INTERFACE
      } IBackgroundCopyFile3Vtbl;
@@ -136,12 +165,14 @@ index f397dc1bff9ab2ef13f4d26bab106eddd0d26267..a6dd82f5839020dfecc34300253cc5c1
      {
          CONST_VTBL struct IBackgroundCopyFile3Vtbl *lpVtbl;
      };
-@@ -1713,7 +1714,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback2;
+@@ -1712,8 +1713,8 @@ EXTERN_C const IID IID_IBackgroundCopyCallback2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("659cdeac-489e-11d9-a9cd-000d56965251")
+-    MIDL_INTERFACE("659cdeac-489e-11d9-a9cd-000d56965251")
 -    IBackgroundCopyCallback2 : public IBackgroundCopyCallback
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyCallback2 : public IBackgroundCopyCallback
++    MIDL_INTERFACE("659cdeac-489e-11d9-a9cd-000d56965251") _Windows_SupportedOS_WindowsVista_ 
++      IBackgroundCopyCallback2 : public IBackgroundCopyCallback
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE FileTransferred( 

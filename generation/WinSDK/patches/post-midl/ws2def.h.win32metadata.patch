@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h
-index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df78090770b0be9ea 100644
+index 95fb10c5d3..e7b165ddc5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h
 @@ -30,6 +30,7 @@ Environment:
@@ -15,7 +15,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
   * SockAddr Information
   */
 -typedef struct _SOCKET_ADDRESS {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SOCKET_ADDRESS {
++typedef struct   _SOCKET_ADDRESS {
      _Field_size_bytes_(iSockaddrLength) LPSOCKADDR lpSockaddr;
  
  //  ESP: 791.
@@ -24,7 +24,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
   * CSAddr Information
   */
 -typedef struct _CSADDR_INFO {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _CSADDR_INFO {
++typedef struct   _CSADDR_INFO {
      SOCKET_ADDRESS LocalAddr ;
      SOCKET_ADDRESS RemoteAddr ;
      INT iSocketType ;
@@ -33,7 +33,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  
  #if(_WIN32_WINNT >= 0x0602)
 -typedef struct _SOCKET_PROCESSOR_AFFINITY {
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _SOCKET_PROCESSOR_AFFINITY {
++typedef struct   _SOCKET_PROCESSOR_AFFINITY {
      PROCESSOR_NUMBER Processor;
      USHORT NumaNodeId;
      USHORT Reserved;
@@ -42,7 +42,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
   */
  
 -typedef struct _WSABUF {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _WSABUF {
++typedef struct   _WSABUF {
      ULONG len;     /* the length of the buffer */
      _Field_size_bytes_(len) CHAR FAR *buf; /* the pointer to the buffer */
  } WSABUF, FAR * LPWSABUF;
@@ -51,7 +51,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
   */
  
 -typedef struct _WSAMSG {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _WSAMSG {
++typedef struct   _WSAMSG {
      _Field_size_bytes_(namelen) LPSOCKADDR       name;              /* Remote address */
      INT              namelen;           /* Remote address length */
      LPWSABUF         lpBuffers;         /* Data buffer array */
@@ -60,7 +60,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  //
  
 -typedef struct addrinfo
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ addrinfo
++typedef struct   addrinfo
  {
      int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                 ai_family;      // PF_xxx
@@ -69,7 +69,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  ADDRINFOA, *PADDRINFOA;
  
 -typedef struct addrinfoW
-+typedef struct _Windows_SupportedOS_Server2003_ addrinfoW
++typedef struct  addrinfoW
  {
      int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                 ai_family;      // PF_xxx
@@ -78,7 +78,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  #pragma endregion
  
 -typedef struct addrinfoexW
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ addrinfoexW
++typedef struct   addrinfoexW
  {
      int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                 ai_family;      // PF_xxx
@@ -87,7 +87,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  #pragma endregion
  
 -typedef struct addrinfoex2W
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ addrinfoex2W
++typedef struct   addrinfoex2W
  {
      int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                  ai_family;      // PF_xxx
@@ -96,7 +96,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  } ADDRINFOEX2W, *PADDRINFOEX2W, *LPADDRINFOEX2W;
  
 -typedef struct addrinfoex3
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ addrinfoex3
++typedef struct   addrinfoex3
  {
      int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                  ai_family;      // PF_xxx
@@ -105,7 +105,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  } ADDRINFOEX3, *PADDRINFOEX3, *LPADDRINFOEX3;
  
 -typedef struct addrinfoex4
-+typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ addrinfoex4
++typedef struct   addrinfoex4
  {
      int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                  ai_family;      // PF_xxx
@@ -114,7 +114,7 @@ index 95fb10c5d34be89ccb97ba8691c71f41d7a95f17..2784c6548b4b48d00433ae4df7809077
  } ADDRINFOEX4, *PADDRINFOEX4, *LPADDRINFOEX4;
  
 -typedef struct addrinfoex5
-+typedef struct _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ addrinfoex5
++typedef struct   addrinfoex5
  {
      int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
      int                  ai_family;      // PF_xxx

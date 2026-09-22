@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h b/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
-index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e414b6c72 100644
+index ab597d6598..93f807d7ad 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
 @@ -120,10 +120,11 @@ extern "C"{
@@ -11,7 +11,7 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  typedef /* [v1_enum] */ 
 -enum WTS_FLAGS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ WTS_FLAGS
++enum   WTS_FLAGS
      {
          WTS_NONE	= 0,
          WTS_EXTRACT	= 0,
@@ -20,7 +20,7 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
  DEFINE_ENUM_FLAG_OPERATORS(WTS_CACHEFLAGS)
  typedef /* [v1_enum] */ 
 -enum WTS_CONTEXTFLAGS
-+enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ WTS_CONTEXTFLAGS
++enum   WTS_CONTEXTFLAGS
      {
          WTSCF_DEFAULT	= 0,
          WTSCF_APPSTYLE	= 0x1,
@@ -29,19 +29,36 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
      } 	WTS_ALPHATYPE;
  
 -typedef struct WTS_THUMBNAILID
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ WTS_THUMBNAILID
++typedef struct   WTS_THUMBNAILID
      {
      BYTE rgbKey[ 16 ];
      } 	WTS_THUMBNAILID;
-@@ -203,7 +204,7 @@ EXTERN_C const IID IID_ISharedBitmap;
+@@ -202,13 +203,13 @@ EXTERN_C const IID IID_ISharedBitmap;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("091162a4-bc96-411f-aae8-c5122cd03363")
+-    MIDL_INTERFACE("091162a4-bc96-411f-aae8-c5122cd03363")
 -    ISharedBitmap : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISharedBitmap : public IUnknown
++    MIDL_INTERFACE("091162a4-bc96-411f-aae8-c5122cd03363") _Windows_SupportedOS_WindowsVista_ 
++      ISharedBitmap : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetSharedBitmap( 
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbm) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbm) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSize( 
+             /* [annotation][out] */ 
+@@ -226,7 +227,7 @@ EXTERN_C const IID IID_ISharedBitmap;
+         
+         virtual HRESULT STDMETHODCALLTYPE Detach( 
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbm) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbm) = 0;
+         
+     };
+     
 @@ -288,7 +289,7 @@ EXTERN_C const IID IID_ISharedBitmap;
          END_INTERFACE
      } ISharedBitmapVtbl;
@@ -51,12 +68,14 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
      {
          CONST_VTBL struct ISharedBitmapVtbl *lpVtbl;
      };
-@@ -346,7 +347,7 @@ EXTERN_C const IID IID_IThumbnailCache;
+@@ -345,8 +346,8 @@ EXTERN_C const IID IID_IThumbnailCache;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("F676C15D-596A-4ce2-8234-33996F445DB1")
+-    MIDL_INTERFACE("F676C15D-596A-4ce2-8234-33996F445DB1")
 -    IThumbnailCache : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IThumbnailCache : public IUnknown
++    MIDL_INTERFACE("F676C15D-596A-4ce2-8234-33996F445DB1") _Windows_SupportedOS_WindowsVista_ 
++      IThumbnailCache : public IUnknown
      {
      public:
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetThumbnail( 
@@ -69,15 +88,25 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
      {
          CONST_VTBL struct IThumbnailCacheVtbl *lpVtbl;
      };
-@@ -520,7 +521,7 @@ EXTERN_C const IID IID_IThumbnailProvider;
+@@ -519,15 +520,15 @@ EXTERN_C const IID IID_IThumbnailProvider;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("e357fccd-a995-4576-b01f-234630154e96")
+-    MIDL_INTERFACE("e357fccd-a995-4576-b01f-234630154e96")
 -    IThumbnailProvider : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IThumbnailProvider : public IUnknown
++    MIDL_INTERFACE("e357fccd-a995-4576-b01f-234630154e96") _Windows_SupportedOS_WindowsVista_ 
++      IThumbnailProvider : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetThumbnail( 
+             /* [annotation][in] */ 
+             _In_  UINT cx,
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbmp,
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbmp,
+             /* [annotation][out] */ 
+             _Out_  WTS_ALPHATYPE *pdwAlpha) = 0;
+         
 @@ -569,7 +570,7 @@ EXTERN_C const IID IID_IThumbnailProvider;
          END_INTERFACE
      } IThumbnailProviderVtbl;
@@ -87,12 +116,14 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
      {
          CONST_VTBL struct IThumbnailProviderVtbl *lpVtbl;
      };
-@@ -615,7 +616,7 @@ EXTERN_C const IID IID_IThumbnailSettings;
+@@ -614,8 +615,8 @@ EXTERN_C const IID IID_IThumbnailSettings;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("F4376F00-BEF5-4d45-80F3-1E023BBF1209")
+-    MIDL_INTERFACE("F4376F00-BEF5-4d45-80F3-1E023BBF1209")
 -    IThumbnailSettings : public IUnknown
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IThumbnailSettings : public IUnknown
++    MIDL_INTERFACE("F4376F00-BEF5-4d45-80F3-1E023BBF1209") _Windows_SupportedOS_Windows8_ 
++      IThumbnailSettings : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetContext( 
@@ -105,12 +136,14 @@ index ab597d65987785b43c12082ea15c3fa48a649d8d..70f730ef8a2fb9f43f473c3dc1315f9e
      {
          CONST_VTBL struct IThumbnailSettingsVtbl *lpVtbl;
      };
-@@ -702,7 +703,7 @@ EXTERN_C const IID IID_IThumbnailCachePrimer;
+@@ -701,8 +702,8 @@ EXTERN_C const IID IID_IThumbnailCachePrimer;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("0f03f8fe-2b26-46f0-965a-212aa8d66b76")
+-    MIDL_INTERFACE("0f03f8fe-2b26-46f0-965a-212aa8d66b76")
 -    IThumbnailCachePrimer : public IUnknown
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IThumbnailCachePrimer : public IUnknown
++    MIDL_INTERFACE("0f03f8fe-2b26-46f0-965a-212aa8d66b76") _Windows_SupportedOS_Windows8_ 
++      IThumbnailCachePrimer : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE PageInThumbnail( 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h b/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
-index dcdbb3ad3a..95f3399622 100644
+index dcdbb3ad3a..3dc059a5c1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
 @@ -4,6 +4,7 @@
@@ -22,8 +22,8 @@ index dcdbb3ad3a..95f3399622 100644
                              _Out_ LPSECURITYINFO *ppSI,
 -                            _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
 -                            _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
-+                            _Win32_Retained_ _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
-+                            _Win32_Retained_ _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
++                             _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
++                             _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
                              LPARAM lpContext);
  
  // Flags for DSCreateISecurityInfoObject
@@ -41,8 +41,8 @@ index dcdbb3ad3a..95f3399622 100644
                                _Out_ LPSECURITYINFO *ppSI,
 -                              _In_opt_ PFNREADOBJECTSECURITY  pfnReadSD,
 -                              _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
-+                              _Win32_Retained_ _In_opt_ PFNREADOBJECTSECURITY  pfnReadSD,
-+                              _Win32_Retained_ _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
++                               _In_opt_ PFNREADOBJECTSECURITY  pfnReadSD,
++                               _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
                                LPARAM lpContext);
  
  
@@ -55,11 +55,12 @@ index dcdbb3ad3a..95f3399622 100644
  DSCreateSecurityPage(LPCWSTR pwszObjectPath,
                       LPCWSTR pwszObjectClass,
                       DWORD dwFlags,
-                      _Out_ HPROPSHEETPAGE *phPage,
+-                     _Out_ HPROPSHEETPAGE *phPage,
 -                     _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
 -                     _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
-+                     _Win32_Retained_ _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
-+                     _Win32_Retained_ _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
++                     _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0) _Out_ HPROPSHEETPAGE *phPage,
++                      _In_opt_ PFNREADOBJECTSECURITY pfnReadSD,
++                      _In_opt_ PFNWRITEOBJECTSECURITY pfnWriteSD,
                       LPARAM lpContext);
  
  //+---------------------------------------------------------------------------

@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h b/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h
+index 067cfca449..5378473419 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h
 @@ -1,3 +1,4 @@
@@ -6,6 +7,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oobenotification.h b/gene
  /********************************************************************************
  *                                                                               *
  * oobenotification.h - API Set Contract for api-ms-win-oobe-notification-l1      *
+@@ -52,7 +53,7 @@ VOID
+     _In_opt_ PVOID CallbackContext
+     );
+ 
+-_Check_return_
++_Win32_SetLastError_ _Check_return_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
 @@ -64,7 +65,7 @@ _Check_return_
  _Success_(return != FALSE)
  BOOL

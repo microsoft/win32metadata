@@ -1,0 +1,474 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
+index 2bd1b450dc..30d2fa4d4e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -373,7 +374,7 @@ typedef /* [unique] */  __RPC_unique_pointer wireSAFEARRAY *wirePSAFEARRAY;
+ typedef struct tagSAFEARRAY
+     {
+     USHORT cDims;
+-    USHORT fFeatures;
++    _Win32_AssociatedEnum_(ADVANCED_FEATURE_FLAGS) USHORT fFeatures;
+     ULONG cbElements;
+     ULONG cLocks;
+     PVOID pvData;
+@@ -479,7 +480,7 @@ struct tagVARIANT
+         {
+         struct __tagVARIANT
+             {
+-            VARTYPE vt;
++            _Win32_AssociatedEnum_(VARENUM) VARTYPE vt;
+             WORD wReserved1;
+             WORD wReserved2;
+             WORD wReserved3;
+@@ -657,7 +658,7 @@ typedef struct tagTYPEDESC
+         /* [case()] */ HREFTYPE hreftype;
+         /* [default] */  /* Empty union arm */ 
+         } 	DUMMYUNIONNAME;
+-    VARTYPE vt;
++    _Win32_AssociatedEnum_(VARENUM) VARTYPE vt;
+     } 	TYPEDESC;
+ 
+ typedef struct tagARRAYDESC
+@@ -678,7 +679,7 @@ typedef struct tagPARAMDESCEX *LPPARAMDESCEX;
+ typedef struct tagPARAMDESC
+     {
+     LPPARAMDESCEX pparamdescex;
+-    USHORT wParamFlags;
++    _Win32_AssociatedEnum_(PARAMFLAGS) USHORT wParamFlags;
+     } 	PARAMDESC;
+ 
+ typedef struct tagPARAMDESC *LPPARAMDESC;
+@@ -702,7 +703,7 @@ typedef struct tagPARAMDESC *LPPARAMDESC;
+ typedef struct tagIDLDESC
+     {
+     ULONG_PTR dwReserved;
+-    USHORT wIDLFlags;
++    _Win32_AssociatedEnum_(IDLFLAGS) USHORT wIDLFlags;
+     } 	IDLDESC;
+ 
+ typedef struct tagIDLDESC *LPIDLDESC;
+@@ -851,7 +852,7 @@ typedef struct tagFUNCDESC
+     SHORT oVft;
+     SHORT cScodes;
+     ELEMDESC elemdescFunc;
+-    WORD wFuncFlags;
++    _Win32_AssociatedEnum_(FUNCFLAGS) WORD wFuncFlags;
+     } 	FUNCDESC;
+ 
+ typedef struct tagFUNCDESC *LPFUNCDESC;
+@@ -883,7 +884,7 @@ typedef struct tagVARDESC
+         /* [case()] */ VARIANT *lpvarValue;
+         } 	DUMMYUNIONNAME;
+     ELEMDESC elemdescVar;
+-    WORD wVarFlags;
++    _Win32_AssociatedEnum_(VARFLAGS) WORD wVarFlags;
+     VARKIND varkind;
+     } 	VARDESC;
+ 
+@@ -1047,7 +1048,7 @@ EXTERN_C const IID IID_ICreateTypeInfo;
+             /* [annotation][in] */ 
+             _In_  UINT index,
+             /* [annotation][in] */ 
+-            _In_  INT implTypeFlags) = 0;
++            _Win32_AssociatedEnum_(IMPLTYPEFLAGS) _In_  INT implTypeFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetAlignment( 
+             /* [annotation][in] */ 
+@@ -2689,7 +2690,7 @@ EXTERN_C const IID IID_IEnumVARIANT;
+     MIDL_INTERFACE("00020404-0000-0000-C000-000000000046")
+     IEnumVARIANT : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+@@ -2698,7 +2699,7 @@ EXTERN_C const IID IID_IEnumVARIANT;
+             /* [annotation][out] */ 
+             _Out_  ULONG *pCeltFetched) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt) = 0;
+         
+@@ -3075,7 +3076,7 @@ EXTERN_C const IID IID_ITypeInfo;
+             /* [annotation][in] */ 
+             _In_  MEMBERID memid,
+             /* [annotation][length_is][size_is][out] */ 
+-            __RPC__out_ecount_part(cMaxNames, *pcNames)  BSTR *rgBstrNames,
++            _Win32_RAIIFree_(SysFreeString) __RPC__out_ecount_part(cMaxNames, *pcNames)  BSTR *rgBstrNames,
+             /* [annotation][in] */ 
+             _In_  UINT cMaxNames,
+             /* [annotation][out] */ 
+@@ -3091,7 +3092,7 @@ EXTERN_C const IID IID_ITypeInfo;
+             /* [annotation][in] */ 
+             _In_  UINT index,
+             /* [annotation][out] */ 
+-            _Out_  INT *pImplTypeFlags) = 0;
++            _Win32_AssociatedEnum_(IMPLTYPEFLAGS) _Out_  INT *pImplTypeFlags) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetIDsOfNames( 
+             /* [annotation][size_is][in] */ 
+@@ -3121,13 +3122,13 @@ EXTERN_C const IID IID_ITypeInfo;
+             /* [annotation][in] */ 
+             _In_  MEMBERID memid,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrName,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrName,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrDocString,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrDocString,
+             /* [annotation][out] */ 
+             _Out_  DWORD *pdwHelpContext,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrHelpFile) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrHelpFile) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetDllEntry( 
+             /* [annotation][in] */ 
+@@ -3135,9 +3136,9 @@ EXTERN_C const IID IID_ITypeInfo;
+             /* [annotation][in] */ 
+             _In_  INVOKEKIND invKind,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrDllName,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrDllName,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrName,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrName,
+             /* [annotation][out] */ 
+             _Out_  WORD *pwOrdinal) = 0;
+         
+@@ -3167,7 +3168,7 @@ EXTERN_C const IID IID_ITypeInfo;
+             /* [annotation][in] */ 
+             _In_  MEMBERID memid,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstrMops) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstrMops) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetContainingTypeLib( 
+             /* [annotation][out] */ 
+@@ -3772,11 +3773,11 @@ EXTERN_C const IID IID_ITypeInfo2;
+             /* [annotation][in] */ 
+             _In_  LCID lcid,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pbstrHelpString,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pbstrHelpString,
+             /* [annotation][out] */ 
+             _Out_  DWORD *pdwHelpStringContext,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pbstrHelpStringDll) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pbstrHelpStringDll) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAllCustData( 
+             /* [annotation][out] */ 
+@@ -4392,13 +4393,13 @@ EXTERN_C const IID IID_ITypeLib;
+             /* [annotation][in] */ 
+             _In_  INT index,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrName,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrName,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrDocString,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrDocString,
+             /* [annotation][out] */ 
+             _Out_  DWORD *pdwHelpContext,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pBstrHelpFile) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pBstrHelpFile) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsName( 
+             /* [annotation][out][in] */ 
+@@ -4748,11 +4749,11 @@ EXTERN_C const IID IID_ITypeLib2;
+             /* [annotation][in] */ 
+             _In_  LCID lcid,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pbstrHelpString,
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pbstrHelpString,
+             /* [annotation][out] */ 
+             _Out_  DWORD *pdwHelpStringContext,
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pbstrHelpStringDll) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pbstrHelpStringDll) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAllCustData( 
+             /* [annotation][out] */ 
+@@ -5176,15 +5177,15 @@ EXTERN_C const IID IID_IErrorInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSource( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstrSource) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstrSource) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstrDescription) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHelpFile( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstrHelpFile) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstrHelpFile) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHelpContext( 
+             /* [annotation][out] */ 
+@@ -5830,7 +5831,7 @@ EXTERN_C const IID IID_IRecordInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][out] */ 
+-            __RPC__deref_out_opt  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt  BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSize( 
+             /* [annotation][out] */ 
+@@ -5882,7 +5883,7 @@ EXTERN_C const IID IID_IRecordInfo;
+             /* [annotation][out][in] */ 
+             _Inout_  ULONG *pcNames,
+             /* [annotation][length_is][size_is][out] */ 
+-            __RPC__out_ecount_part(*pcNames, *pcNames)  BSTR *rgBstrNames) = 0;
++            _Win32_RAIIFree_(SysFreeString) __RPC__out_ecount_part(*pcNames, *pcNames)  BSTR *rgBstrNames) = 0;
+         
+         virtual BOOL STDMETHODCALLTYPE IsMatchingType( 
+             /* [annotation][in] */ 
+@@ -6465,7 +6466,7 @@ EXTERN_C const IID IID_ITypeLibRegistration;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVersion( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pVersion) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pVersion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLcid( 
+             /* [annotation][out] */ 
+@@ -6473,15 +6474,15 @@ EXTERN_C const IID IID_ITypeLibRegistration;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetWin32Path( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pWin32Path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pWin32Path) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetWin64Path( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pWin64Path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pWin64Path) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pDisplayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pDisplayName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
+             /* [annotation][out] */ 
+@@ -6489,7 +6490,7 @@ EXTERN_C const IID IID_ITypeLibRegistration;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHelpDir( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pHelpDir) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pHelpDir) = 0;
+         
+     };
+     
+@@ -6642,35 +6643,35 @@ extern RPC_IF_HANDLE __MIDL_itf_oaidl_0000_0023_v0_0_s_ifspec;
+ 
+ /* Additional Prototypes for ALL interfaces */
+ 
+-unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+-unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+-unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+-void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+ unsigned long             __RPC_USER  CLEANLOCALSTORAGE_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLEANLOCALSTORAGE * ); 
+ unsigned char * __RPC_USER  CLEANLOCALSTORAGE_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLEANLOCALSTORAGE * ); 
+ unsigned char * __RPC_USER  CLEANLOCALSTORAGE_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLEANLOCALSTORAGE * ); 
+ void                      __RPC_USER  CLEANLOCALSTORAGE_UserFree(     __RPC__in unsigned long *, __RPC__in CLEANLOCALSTORAGE * ); 
+ 
+-unsigned long             __RPC_USER  VARIANT_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
+-unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
+-unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+-void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  VARIANT_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+-unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+-unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+-unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+-void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+ unsigned long             __RPC_USER  CLEANLOCALSTORAGE_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLEANLOCALSTORAGE * ); 
+ unsigned char * __RPC_USER  CLEANLOCALSTORAGE_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in CLEANLOCALSTORAGE * ); 
+ unsigned char * __RPC_USER  CLEANLOCALSTORAGE_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out CLEANLOCALSTORAGE * ); 
+ void                      __RPC_USER  CLEANLOCALSTORAGE_UserFree64(     __RPC__in unsigned long *, __RPC__in CLEANLOCALSTORAGE * ); 
+ 
+-unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
+-unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
+-unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+-void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+ 
+ /* [local] */ HRESULT STDMETHODCALLTYPE IDispatch_Invoke_Proxy( 
+     IDispatch * This,
+@@ -7242,6 +7243,147 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("FADF_AUTO")
++#undef FADF_AUTO
++#pragma push_macro("FADF_STATIC")
++#undef FADF_STATIC
++#pragma push_macro("FADF_EMBEDDED")
++#undef FADF_EMBEDDED
++#pragma push_macro("FADF_FIXEDSIZE")
++#undef FADF_FIXEDSIZE
++#pragma push_macro("FADF_RECORD")
++#undef FADF_RECORD
++#pragma push_macro("FADF_HAVEIID")
++#undef FADF_HAVEIID
++#pragma push_macro("FADF_HAVEVARTYPE")
++#undef FADF_HAVEVARTYPE
++#pragma push_macro("FADF_BSTR")
++#undef FADF_BSTR
++#pragma push_macro("FADF_UNKNOWN")
++#undef FADF_UNKNOWN
++#pragma push_macro("FADF_DISPATCH")
++#undef FADF_DISPATCH
++#pragma push_macro("FADF_VARIANT")
++#undef FADF_VARIANT
++#pragma push_macro("FADF_RESERVED")
++#undef FADF_RESERVED
++enum [[clang::flag_enum]] ADVANCED_FEATURE_FLAGS : unsigned short
++{
++    FADF_AUTO = 1,
++    FADF_STATIC = 2,
++    FADF_EMBEDDED = 4,
++    FADF_FIXEDSIZE = 16,
++    FADF_RECORD = 32,
++    FADF_HAVEIID = 64,
++    FADF_HAVEVARTYPE = 128,
++    FADF_BSTR = 256,
++    FADF_UNKNOWN = 512,
++    FADF_DISPATCH = 1024,
++    FADF_VARIANT = 2048,
++    FADF_RESERVED = 61448,
++};
++#pragma pop_macro("FADF_RESERVED")
++#pragma pop_macro("FADF_VARIANT")
++#pragma pop_macro("FADF_DISPATCH")
++#pragma pop_macro("FADF_UNKNOWN")
++#pragma pop_macro("FADF_BSTR")
++#pragma pop_macro("FADF_HAVEVARTYPE")
++#pragma pop_macro("FADF_HAVEIID")
++#pragma pop_macro("FADF_RECORD")
++#pragma pop_macro("FADF_FIXEDSIZE")
++#pragma pop_macro("FADF_EMBEDDED")
++#pragma pop_macro("FADF_STATIC")
++#pragma pop_macro("FADF_AUTO")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("IMPLTYPEFLAG_FDEFAULT")
++#undef IMPLTYPEFLAG_FDEFAULT
++#pragma push_macro("IMPLTYPEFLAG_FSOURCE")
++#undef IMPLTYPEFLAG_FSOURCE
++#pragma push_macro("IMPLTYPEFLAG_FRESTRICTED")
++#undef IMPLTYPEFLAG_FRESTRICTED
++#pragma push_macro("IMPLTYPEFLAG_FDEFAULTVTABLE")
++#undef IMPLTYPEFLAG_FDEFAULTVTABLE
++enum [[clang::flag_enum]] IMPLTYPEFLAGS : int
++{
++    IMPLTYPEFLAG_FDEFAULT = 1,
++    IMPLTYPEFLAG_FSOURCE = 2,
++    IMPLTYPEFLAG_FRESTRICTED = 4,
++    IMPLTYPEFLAG_FDEFAULTVTABLE = 8,
++};
++#pragma pop_macro("IMPLTYPEFLAG_FDEFAULTVTABLE")
++#pragma pop_macro("IMPLTYPEFLAG_FRESTRICTED")
++#pragma pop_macro("IMPLTYPEFLAG_FSOURCE")
++#pragma pop_macro("IMPLTYPEFLAG_FDEFAULT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("IDLFLAG_NONE")
++#undef IDLFLAG_NONE
++#pragma push_macro("IDLFLAG_FIN")
++#undef IDLFLAG_FIN
++#pragma push_macro("IDLFLAG_FOUT")
++#undef IDLFLAG_FOUT
++#pragma push_macro("IDLFLAG_FLCID")
++#undef IDLFLAG_FLCID
++#pragma push_macro("IDLFLAG_FRETVAL")
++#undef IDLFLAG_FRETVAL
++enum [[clang::flag_enum]] IDLFLAGS : unsigned short
++{
++    IDLFLAG_NONE = 0,
++    IDLFLAG_FIN = 1,
++    IDLFLAG_FOUT = 2,
++    IDLFLAG_FLCID = 4,
++    IDLFLAG_FRETVAL = 8,
++};
++#pragma pop_macro("IDLFLAG_FRETVAL")
++#pragma pop_macro("IDLFLAG_FLCID")
++#pragma pop_macro("IDLFLAG_FOUT")
++#pragma pop_macro("IDLFLAG_FIN")
++#pragma pop_macro("IDLFLAG_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PARAMFLAG_NONE")
++#undef PARAMFLAG_NONE
++#pragma push_macro("PARAMFLAG_FIN")
++#undef PARAMFLAG_FIN
++#pragma push_macro("PARAMFLAG_FOUT")
++#undef PARAMFLAG_FOUT
++#pragma push_macro("PARAMFLAG_FLCID")
++#undef PARAMFLAG_FLCID
++#pragma push_macro("PARAMFLAG_FRETVAL")
++#undef PARAMFLAG_FRETVAL
++#pragma push_macro("PARAMFLAG_FOPT")
++#undef PARAMFLAG_FOPT
++#pragma push_macro("PARAMFLAG_FHASDEFAULT")
++#undef PARAMFLAG_FHASDEFAULT
++#pragma push_macro("PARAMFLAG_FHASCUSTDATA")
++#undef PARAMFLAG_FHASCUSTDATA
++enum [[clang::flag_enum]] PARAMFLAGS : unsigned short
++{
++    PARAMFLAG_NONE = 0,
++    PARAMFLAG_FIN = 1,
++    PARAMFLAG_FOUT = 2,
++    PARAMFLAG_FLCID = 4,
++    PARAMFLAG_FRETVAL = 8,
++    PARAMFLAG_FOPT = 16,
++    PARAMFLAG_FHASDEFAULT = 32,
++    PARAMFLAG_FHASCUSTDATA = 64,
++};
++#pragma pop_macro("PARAMFLAG_FHASCUSTDATA")
++#pragma pop_macro("PARAMFLAG_FHASDEFAULT")
++#pragma pop_macro("PARAMFLAG_FOPT")
++#pragma pop_macro("PARAMFLAG_FRETVAL")
++#pragma pop_macro("PARAMFLAG_FLCID")
++#pragma pop_macro("PARAMFLAG_FOUT")
++#pragma pop_macro("PARAMFLAG_FIN")
++#pragma pop_macro("PARAMFLAG_NONE")
++#endif
++
+ #endif
+ 
+ 

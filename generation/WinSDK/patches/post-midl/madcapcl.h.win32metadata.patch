@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
+index 381c04598d..997ae7a0f7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 @@ -7,6 +7,7 @@ extern "C" {
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/W
  --*/
  
 -typedef struct _MCAST_CLIENT_UID {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MCAST_CLIENT_UID {
++typedef struct   _MCAST_CLIENT_UID {
      LPBYTE ClientUID;
      DWORD ClientUIDLength;
  } MCAST_CLIENT_UID, *LPMCAST_CLIENT_UID;
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/W
  
  
 -typedef struct _MCAST_SCOPE_CTX {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MCAST_SCOPE_CTX {
++typedef struct   _MCAST_SCOPE_CTX {
      IPNG_ADDRESS      ScopeID;
      IPNG_ADDRESS      Interface;
      IPNG_ADDRESS      ServerID;
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/W
  
  
 -typedef struct _MCAST_SCOPE_ENTRY {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MCAST_SCOPE_ENTRY {
++typedef struct   _MCAST_SCOPE_ENTRY {
      MCAST_SCOPE_CTX ScopeCtx;
      IPNG_ADDRESS      LastAddr;
      DWORD       TTL;
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/W
  
  
 -typedef struct _MCAST_LEASE_REQUEST {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MCAST_LEASE_REQUEST {
++typedef struct   _MCAST_LEASE_REQUEST {
      LONG        LeaseStartTime;
      LONG        MaxLeaseStartTime;
      DWORD       LeaseDuration;
@@ -50,16 +51,19 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/W
  
  
 -typedef struct _MCAST_LEASE_RESPONSE {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MCAST_LEASE_RESPONSE {
++typedef struct   _MCAST_LEASE_RESPONSE {
      LONG        LeaseStartTime;
      LONG        LeaseEndTime;
      IPNG_ADDRESS  ServerAddress;
-@@ -207,25 +208,25 @@ Members:
+@@ -205,27 +206,27 @@ Members:
  
- DWORD
+ --*/
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -McastApiStartup(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastApiStartup(
++  McastApiStartup(
      IN  OUT  PDWORD   Version
      );
  
@@ -70,44 +74,54 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/W
      VOID
      );
  
- DWORD
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -McastGenUID(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastGenUID(
++  McastGenUID(
      IN OUT LPMCAST_CLIENT_UID    pRequestID
      );
  
- DWORD
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -McastEnumerateScopes(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastEnumerateScopes(
++  McastEnumerateScopes(
      IN     IP_ADDR_FAMILY       AddrFamily,
      IN     BOOL                 ReQuery,
      IN OUT PMCAST_SCOPE_ENTRY   pScopeList,
-@@ -235,7 +236,7 @@ McastEnumerateScopes(
+@@ -233,9 +234,9 @@ McastEnumerateScopes(
+     OUT    PDWORD               pScopeCount
+     );
  
- DWORD
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -McastRequestAddress(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastRequestAddress(
++  McastRequestAddress(
      IN     IP_ADDR_FAMILY           AddrFamily,
      IN     LPMCAST_CLIENT_UID       pRequestID,
      IN     PMCAST_SCOPE_CTX         pScopeCtx,
-@@ -245,7 +246,7 @@ McastRequestAddress(
+@@ -243,18 +244,18 @@ McastRequestAddress(
+     IN OUT PMCAST_LEASE_RESPONSE    pAddrResponse
+     );
  
- DWORD
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -McastRenewAddress(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastRenewAddress(
++  McastRenewAddress(
      IN     IP_ADDR_FAMILY           AddrFamily,
      IN     LPMCAST_CLIENT_UID       pRequestID,
      IN     PMCAST_LEASE_REQUEST     pRenewRequest,
-@@ -254,7 +255,7 @@ McastRenewAddress(
+     IN OUT PMCAST_LEASE_RESPONSE    pRenewResponse
+     );
  
- DWORD
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -McastReleaseAddress(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastReleaseAddress(
++  McastReleaseAddress(
      IN     IP_ADDR_FAMILY          AddrFamily,
      IN     LPMCAST_CLIENT_UID      pRequestID,
      IN     PMCAST_LEASE_REQUEST    pReleaseRequest

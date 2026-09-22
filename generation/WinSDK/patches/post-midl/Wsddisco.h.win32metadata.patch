@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h
-index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e2c59a965 100644
+index d472ea14d3..64debaae82 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h
 @@ -103,6 +103,7 @@ extern "C"{
@@ -10,12 +10,29 @@ index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -141,7 +142,7 @@ EXTERN_C const IID IID_IWSDiscoveryProvider;
+@@ -112,12 +113,12 @@ extern "C"{
+ 
+ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateDiscoveryProvider(
+     IWSDXMLContext* pContext,
+     _Outptr_ IWSDiscoveryProvider** ppProvider);
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-HRESULT WINAPI
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI
+ WSDCreateDiscoveryProvider2(
+     IWSDXMLContext* pContext,
+     _In_reads_opt_(dwConfigParamCount) WSD_CONFIG_PARAM* pConfigParams,
+@@ -140,8 +141,8 @@ EXTERN_C const IID IID_IWSDiscoveryProvider;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8FFC8E55-F0EB-480F-88B7-B435DD281D45")
+-    MIDL_INTERFACE("8FFC8E55-F0EB-480F-88B7-B435DD281D45")
 -    IWSDiscoveryProvider : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryProvider : public IUnknown
++    MIDL_INTERFACE("8FFC8E55-F0EB-480F-88B7-B435DD281D45") _Windows_SupportedOS_WindowsVista_ 
++      IWSDiscoveryProvider : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetAddressFamily( 
@@ -28,12 +45,14 @@ index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e
      {
          CONST_VTBL struct IWSDiscoveryProviderVtbl *lpVtbl;
      };
-@@ -322,7 +323,7 @@ EXTERN_C const IID IID_IWSDiscoveryProviderNotify;
+@@ -321,8 +322,8 @@ EXTERN_C const IID IID_IWSDiscoveryProviderNotify;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("73ee3ced-b6e6-4329-a546-3e8ad46563d2")
+-    MIDL_INTERFACE("73ee3ced-b6e6-4329-a546-3e8ad46563d2")
 -    IWSDiscoveryProviderNotify : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryProviderNotify : public IUnknown
++    MIDL_INTERFACE("73ee3ced-b6e6-4329-a546-3e8ad46563d2") _Windows_SupportedOS_WindowsVista_ 
++      IWSDiscoveryProviderNotify : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Add( 
@@ -46,12 +65,14 @@ index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e
      {
          CONST_VTBL struct IWSDiscoveryProviderNotifyVtbl *lpVtbl;
      };
-@@ -452,7 +453,7 @@ EXTERN_C const IID IID_IWSDiscoveredService;
+@@ -451,8 +452,8 @@ EXTERN_C const IID IID_IWSDiscoveredService;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("4BAD8A3B-B374-4420-9632-AAC945B374AA")
+-    MIDL_INTERFACE("4BAD8A3B-B374-4420-9632-AAC945B374AA")
 -    IWSDiscoveredService : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveredService : public IUnknown
++    MIDL_INTERFACE("4BAD8A3B-B374-4420-9632-AAC945B374AA") _Windows_SupportedOS_WindowsVista_ 
++      IWSDiscoveredService : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetEndpointReference( 
@@ -64,12 +85,29 @@ index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e
      {
          CONST_VTBL struct IWSDiscoveredServiceVtbl *lpVtbl;
      };
-@@ -693,7 +694,7 @@ EXTERN_C const IID IID_IWSDiscoveryPublisher;
+@@ -664,12 +665,12 @@ EXTERN_C const IID IID_IWSDiscoveredService;
+ /* interface __MIDL_itf_wsddisco_0000_0003 */
+ /* [local] */ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateDiscoveryPublisher(
+     IWSDXMLContext* pContext,
+     _Outptr_ IWSDiscoveryPublisher** ppPublisher);
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-HRESULT WINAPI
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI
+ WSDCreateDiscoveryPublisher2(
+     IWSDXMLContext* pContext,
+     _In_reads_opt_(dwConfigParamCount) WSD_CONFIG_PARAM* pConfigParams,
+@@ -692,8 +693,8 @@ EXTERN_C const IID IID_IWSDiscoveryPublisher;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("AE01E1A8-3FF9-4148-8116-057CC616FE13")
+-    MIDL_INTERFACE("AE01E1A8-3FF9-4148-8116-057CC616FE13")
 -    IWSDiscoveryPublisher : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryPublisher : public IUnknown
++    MIDL_INTERFACE("AE01E1A8-3FF9-4148-8116-057CC616FE13") _Windows_SupportedOS_WindowsVista_ 
++      IWSDiscoveryPublisher : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetAddressFamily( 
@@ -82,12 +120,14 @@ index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e
      {
          CONST_VTBL struct IWSDiscoveryPublisherVtbl *lpVtbl;
      };
-@@ -1212,7 +1213,7 @@ EXTERN_C const IID IID_IWSDiscoveryPublisherNotify;
+@@ -1211,8 +1212,8 @@ EXTERN_C const IID IID_IWSDiscoveryPublisherNotify;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("e67651b0-337a-4b3c-9758-733388568251")
+-    MIDL_INTERFACE("e67651b0-337a-4b3c-9758-733388568251")
 -    IWSDiscoveryPublisherNotify : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryPublisherNotify : public IUnknown
++    MIDL_INTERFACE("e67651b0-337a-4b3c-9758-733388568251") _Windows_SupportedOS_WindowsVista_ 
++      IWSDiscoveryPublisherNotify : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE ProbeHandler( 
@@ -100,12 +140,14 @@ index d472ea14d33555a2f7a7d205c47ffe6ba003dbdf..2011842b48fbbbab321c2279284c075e
      {
          CONST_VTBL struct IWSDiscoveryPublisherNotifyVtbl *lpVtbl;
      };
-@@ -1320,7 +1321,7 @@ EXTERN_C const IID IID_IWSDScopeMatchingRule;
+@@ -1319,8 +1320,8 @@ EXTERN_C const IID IID_IWSDScopeMatchingRule;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("fcafe424-fef5-481a-bd9f-33ce0574256f")
+-    MIDL_INTERFACE("fcafe424-fef5-481a-bd9f-33ce0574256f")
 -    IWSDScopeMatchingRule : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDScopeMatchingRule : public IUnknown
++    MIDL_INTERFACE("fcafe424-fef5-481a-bd9f-33ce0574256f") _Windows_SupportedOS_WindowsVista_ 
++      IWSDScopeMatchingRule : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetScopeRule( 

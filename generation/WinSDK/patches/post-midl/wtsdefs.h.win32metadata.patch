@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h
-index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e695347092a5796b8 100644
+index abee1ac6a1..bba54cc44e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h
 @@ -15,6 +15,7 @@
@@ -15,7 +15,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  } _WTS_TIME_ZONE_INFORMATION, WTS_TIME_ZONE_INFORMATION, *PWTS_TIME_ZONE_INFORMATION;
  
 -typedef struct _WRDS_DYNAMIC_TIME_ZONE_INFORMATION {
-+typedef struct _Windows_SupportedOS_Server2012_ _WRDS_DYNAMIC_TIME_ZONE_INFORMATION {
++typedef struct  _WRDS_DYNAMIC_TIME_ZONE_INFORMATION {
      LONG Bias;
      WCHAR StandardName[ 32 ];
      WTS_SYSTEMTIME StandardDate;
@@ -24,7 +24,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  typedef PWTS_LICENSE_CAPABILITIES PWRDS_LICENSE_CAPABILITIES;
  
 -typedef enum _WRDS_CONNECTION_SETTING_LEVEL {
-+typedef enum _Windows_SupportedOS_Server2012_ _WRDS_CONNECTION_SETTING_LEVEL {
++typedef enum  _WRDS_CONNECTION_SETTING_LEVEL {
      WRDS_CONNECTION_SETTING_LEVEL_INVALID,
      WRDS_CONNECTION_SETTING_LEVEL_1,
  } WRDS_CONNECTION_SETTING_LEVEL, *PWRDS_CONNECTION_SETTING_LEVEL;
@@ -32,7 +32,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  #define WRDS_CONNECTION_SETTING_CURRENT_LEVEL WRDS_CONNECTION_SETTING_LEVEL_1
  
 -typedef enum _WRDS_LISTENER_SETTING_LEVEL {
-+typedef enum _Windows_SupportedOS_Server2012_ _WRDS_LISTENER_SETTING_LEVEL {
++typedef enum  _WRDS_LISTENER_SETTING_LEVEL {
      WRDS_LISTENER_SETTING_LEVEL_INVALID,
      WRDS_LISTENER_SETTING_LEVEL_1,
  } WRDS_LISTENER_SETTING_LEVEL, *PWRDS_LISTENER_SETTING_LEVEL;
@@ -40,7 +40,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  #define WRDS_LISTENER_SETTING_CURRENT_LEVEL WRDS_LISTENER_SETTING_LEVEL_1
  
 -typedef enum _WRDS_SETTING_TYPE {
-+typedef enum _Windows_SupportedOS_Server2012_ _WRDS_SETTING_TYPE {
++typedef enum  _WRDS_SETTING_TYPE {
      WRDS_SETTING_TYPE_INVALID,
      WRDS_SETTING_TYPE_MACHINE,                  // Machine GP
      WRDS_SETTING_TYPE_USER,                     // User GP
@@ -48,7 +48,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  } WRDS_SETTING_TYPE, *PWRDS_SETTING_TYPE;
  
 -typedef enum _WRDS_SETTING_STATUS {
-+typedef enum _Windows_SupportedOS_Server2012_ _WRDS_SETTING_STATUS {
++typedef enum  _WRDS_SETTING_STATUS {
      WRDS_SETTING_STATUS_NOTAPPLICABLE = -1,
      WRDS_SETTING_STATUS_DISABLED,
      WRDS_SETTING_STATUS_ENABLED,
@@ -56,7 +56,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  } WRDS_SETTING_STATUS, *PWRDS_SETTING_STATUS;
  
 -typedef enum _WRDS_SETTING_LEVEL {
-+typedef enum _Windows_SupportedOS_Server2012_ _WRDS_SETTING_LEVEL {
++typedef enum  _WRDS_SETTING_LEVEL {
      WRDS_SETTING_LEVEL_INVALID,
      WRDS_SETTING_LEVEL_1,
  } WRDS_SETTING_LEVEL, *PWRDS_SETTING_LEVEL;
@@ -64,7 +64,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  #define WRDS_SETTING_CURRENT_LEVEL WRDS_SETTING_LEVEL_1
  
 -typedef struct _WRDS_LISTENER_SETTINGS_1 {
-+typedef struct _Windows_SupportedOS_Server2012_ _WRDS_LISTENER_SETTINGS_1 {
++typedef struct  _WRDS_LISTENER_SETTINGS_1 {
  
      ULONG                       MaxProtocolListenerConnectionCount; // ULONG_MAX means maximum allowed
  
@@ -73,7 +73,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  #endif
  
 -typedef struct _WRDS_CONNECTION_SETTINGS_1 {
-+typedef struct _Windows_SupportedOS_Server2012_ _WRDS_CONNECTION_SETTINGS_1 {
++typedef struct  _WRDS_CONNECTION_SETTINGS_1 {
  
      BOOLEAN                     fInheritInitialProgram;
      BOOLEAN                     fInheritColorDepth;
@@ -82,7 +82,7 @@ index abee1ac6a1663274ba5869f93262d471e33fde4b..8e05acc233544a6270d7728e69534709
  // It will only contain the fields which have a policy. 
  //
 -typedef struct _WRDS_SETTINGS_1 {
-+typedef struct _Windows_SupportedOS_Server2012_ _WRDS_SETTINGS_1 {
++typedef struct  _WRDS_SETTINGS_1 {
  
      WRDS_SETTING_STATUS     WRdsDisableClipStatus;
      ULONG                   WRdsDisableClipValue;

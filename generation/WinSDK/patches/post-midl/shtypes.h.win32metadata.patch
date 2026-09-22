@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h
-index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55e0f7394b 100644
+index ed9335e9ef..18a29f3949 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shtypes.h
 @@ -28,6 +28,7 @@
@@ -15,7 +15,7 @@ index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55
  //
  #include <pshpack1.h>
 -typedef struct _SHITEMID
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _SHITEMID
++typedef struct   _SHITEMID
      {
      USHORT cb;
      BYTE abID[ 1 ];
@@ -24,7 +24,7 @@ index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55
  //
  #include <pshpack1.h>
 -typedef struct _SHELLDETAILS
-+typedef struct _Windows_SupportedOS_Server2003_ _SHELLDETAILS
++typedef struct  _SHELLDETAILS
      {
      int fmt;
      int cxChar;
@@ -33,7 +33,7 @@ index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55
  #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
  typedef /* [v1_enum] */ 
 -enum tagPERCEIVED
-+enum _Windows_SupportedOS_Server2003_ tagPERCEIVED
++enum  tagPERCEIVED
      {
          PERCEIVED_TYPE_FIRST	= -3,
          PERCEIVED_TYPE_CUSTOM	= -3,
@@ -42,7 +42,7 @@ index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 -typedef struct _COMDLG_FILTERSPEC
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _COMDLG_FILTERSPEC
++typedef struct   _COMDLG_FILTERSPEC
      {
      /* [string] */ LPCWSTR pszName;
      /* [string] */ LPCWSTR pszSpec;
@@ -51,7 +51,7 @@ index ed9335e9efe7ed77987b7e966fb0f20b256e8af8..5ca1f6dc09a902a9ddb961f5f12e7d55
  
  typedef /* [v1_enum] */ 
 -enum DEVICE_SCALE_FACTOR
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ DEVICE_SCALE_FACTOR
++enum   DEVICE_SCALE_FACTOR
      {
          DEVICE_SCALE_FACTOR_INVALID	= 0,
          SCALE_100_PERCENT	= 100,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h
-index a2eb0ec995..80ac00f227 100644
+index a2eb0ec995..051321ee0b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h
 @@ -1,3 +1,4 @@
@@ -7,11 +7,16 @@ index a2eb0ec995..80ac00f227 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -89,6 +90,7 @@ EXTERN_C const IID IID_IMFDLNASinkInit;
+@@ -85,10 +86,11 @@ EXTERN_C const IID IID_IMFDLNASinkInit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0c012799-1b61-4c10-bda9-04445be5f561")
++    MIDL_INTERFACE("0c012799-1b61-4c10-bda9-04445be5f561") _Windows_SupportedOS_Windows7_ 
      IMFDLNASinkInit : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_Windows7_
++        
          virtual HRESULT STDMETHODCALLTYPE Initialize( 
              IMFByteStream *pByteStream,
              BOOL fPal) = 0;
@@ -20,7 +25,7 @@ index a2eb0ec995..80ac00f227 100644
  EXTERN_GUID( MF_MP2DLNA_ENCODE_QUALITY, 0xb52379d7, 0x1d46, 0x4fb6, 0xa3, 0x17, 0xa4, 0xa5, 0xf6, 0x09, 0x59, 0xf8);
  EXTERN_GUID( MF_MP2DLNA_STATISTICS, 0x75e488a3, 0xd5ad, 0x4898, 0x85, 0xe0, 0xbc, 0xce, 0x24, 0xa7, 0x22, 0xd7 );
 -typedef struct _MFMPEG2DLNASINKSTATS         
-+typedef struct _Windows_SupportedOS_Windows7_ _MFMPEG2DLNASINKSTATS         
++typedef struct  _MFMPEG2DLNASINKSTATS         
  {                                            
     DWORDLONG  cBytesWritten;                 
     BOOL       fPAL;                          

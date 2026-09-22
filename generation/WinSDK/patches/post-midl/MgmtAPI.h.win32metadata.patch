@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
-index b581486345d24408970ebb019dc8a78359df94f1..8be8a15e995fa46c2473f7503137b9ec3edac8ab 100644
+index b581486345..d1ad0af2dc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
 @@ -19,6 +19,7 @@ Abstract:
@@ -14,8 +14,8 @@ index b581486345d24408970ebb019dc8a78359df94f1..8be8a15e995fa46c2473f7503137b9ec
  //                                                                           //
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
  LPSNMP_MGR_SESSION
  SNMP_FUNC_TYPE
  SnmpMgrOpen(
@@ -23,17 +23,80 @@ index b581486345d24408970ebb019dc8a78359df94f1..8be8a15e995fa46c2473f7503137b9ec
      IN INT   nRetries                       // Comm time-out/retry count
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
  BOOL
  SNMP_FUNC_TYPE
  SnmpMgrCtl(
-@@ -95,6 +100,8 @@ SnmpMgrCtl(
+@@ -95,60 +100,62 @@ SnmpMgrCtl(
      LPDWORD            lpcbBytesReturned    // space used from lpvOutBuffer
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  BOOL
  SNMP_FUNC_TYPE
  SnmpMgrClose(
+     IN LPSNMP_MGR_SESSION session           // SNMP session pointer
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpMgrRequest(
+     IN     LPSNMP_MGR_SESSION session,           // SNMP session pointer
+     IN     BYTE               requestType,       // Get, GetNext, or Set
+     IN OUT RFC1157VarBindList *variableBindings, // Varible bindings
+-       OUT AsnInteger         *errorStatus,      // Result error status
++       _Win32_AssociatedEnum_(SNMP_ERROR_STATUS) OUT AsnInteger         *errorStatus,      // Result error status
+        OUT AsnInteger         *errorIndex        // Result error index
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrStrToOid(
+     _In_opt_  LPSTR         string,         // OID string to be converted
+     OUT AsnObjectIdentifier *oid            // OID internal representation
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrOidToStr(
+     IN  AsnObjectIdentifier *oid,           // OID to be converted
+     _Outptr_opt_ LPSTR   *string         // OID string representation
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrTrapListen(
+     OUT HANDLE *phTrapAvailable             // Event indicating trap available
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrGetTrap(
+     OUT AsnObjectIdentifier *enterprise,         // Generating enterprise
+     OUT AsnNetworkAddress   *IPAddress,          // Generating IP address
+-    OUT AsnInteger          *genericTrap,        // Generic trap type
++    _Win32_AssociatedEnum_(SNMP_GENERICTRAP) OUT AsnInteger          *genericTrap,        // Generic trap type
+     OUT AsnInteger          *specificTrap,       // Enterprise specific type
+     OUT AsnTimeticks        *timeStamp,          // Time stamp
+     OUT RFC1157VarBindList  *variableBindings    // Variable bindings
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrGetTrapEx(
+     OUT AsnObjectIdentifier *enterprise,       // Generating enterprise
+     OUT AsnNetworkAddress   *agentAddress,     // Generating agent addr
+     OUT AsnNetworkAddress   *sourceAddress,    // Generating network addr
+-    OUT AsnInteger          *genericTrap,      // Generic trap type
++    _Win32_AssociatedEnum_(SNMP_GENERICTRAP) OUT AsnInteger          *genericTrap,      // Generic trap type
+     OUT AsnInteger          *specificTrap,     // Enterprise specific type
+     OUT AsnOctetString      *community,        // Generating community
+     OUT AsnTimeticks        *timeStamp,        // Time stamp

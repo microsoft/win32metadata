@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
-index d366ad37a0ada0e112f0a16aa95d5859131ca3a5..0804aa426bcf2f23fac48ca02de1ae22c3e57af5 100644
+index d366ad37a0..a4c66772aa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
 @@ -376,6 +376,7 @@ extern "C"{
@@ -10,15 +10,26 @@ index d366ad37a0ada0e112f0a16aa95d5859131ca3a5..0804aa426bcf2f23fac48ca02de1ae22
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #define IMAPI2FS_BOOT_ENTRY_COUNT_MAX    32
-@@ -433,7 +434,7 @@ EXTERN_C const IID IID_IBootOptions;
+@@ -432,8 +433,8 @@ EXTERN_C const IID IID_IBootOptions;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("2C941FD4-975B-59BE-A960-9A2A262853A5")
+-    MIDL_INTERFACE("2C941FD4-975B-59BE-A960-9A2A262853A5")
 -    IBootOptions : public IDispatch
-+    _Windows_SupportedOS_Server2003_ IBootOptions : public IDispatch
++    MIDL_INTERFACE("2C941FD4-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
++     IBootOptions : public IDispatch
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BootImage( 
+@@ -442,7 +443,7 @@ EXTERN_C const IID IID_IBootOptions;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Manufacturer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Manufacturer( 
+             /* [annotation][in] */ 
 @@ -603,7 +604,7 @@ EXTERN_C const IID IID_IBootOptions;
          END_INTERFACE
      } IBootOptionsVtbl;
@@ -28,15 +39,23 @@ index d366ad37a0ada0e112f0a16aa95d5859131ca3a5..0804aa426bcf2f23fac48ca02de1ae22
      {
          CONST_VTBL struct IBootOptionsVtbl *lpVtbl;
      };
-@@ -686,7 +687,7 @@ EXTERN_C const IID IID_IProgressItem;
+@@ -685,13 +686,13 @@ EXTERN_C const IID IID_IProgressItem;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("2C941FD5-975B-59BE-A960-9A2A262853A5")
+-    MIDL_INTERFACE("2C941FD5-975B-59BE-A960-9A2A262853A5")
 -    IProgressItem : public IDispatch
-+    _Windows_SupportedOS_Server2003_ IProgressItem : public IDispatch
++    MIDL_INTERFACE("2C941FD5-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
++     IProgressItem : public IDispatch
      {
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *desc) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *desc) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FirstBlock( 
+             /* [annotation][retval][out] */ 
 @@ -806,7 +807,7 @@ EXTERN_C const IID IID_IProgressItem;
          END_INTERFACE
      } IProgressItemVtbl;
@@ -46,3 +65,251 @@ index d366ad37a0ada0e112f0a16aa95d5859131ca3a5..0804aa426bcf2f23fac48ca02de1ae22
      {
          CONST_VTBL struct IProgressItemVtbl *lpVtbl;
      };
+@@ -873,7 +874,7 @@ EXTERN_C const IID IID_IEnumProgressItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FD6-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FD6-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IEnumProgressItems : public IUnknown
+     {
+     public:
+@@ -1019,7 +1020,7 @@ EXTERN_C const IID IID_IProgressItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FD7-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FD7-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IProgressItems : public IDispatch
+     {
+     public:
+@@ -1245,7 +1246,7 @@ EXTERN_C const IID IID_IFileSystemImageResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FD8-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FD8-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IFileSystemImageResult : public IDispatch
+     {
+     public:
+@@ -1267,7 +1268,7 @@ EXTERN_C const IID IID_IFileSystemImageResult;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DiscId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+     };
+     
+@@ -1446,7 +1447,7 @@ EXTERN_C const IID IID_IFileSystemImageResult2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B507CA29-2204-11DD-966A-001AA01BBC58")
++    MIDL_INTERFACE("B507CA29-2204-11DD-966A-001AA01BBC58") _Windows_SupportedOS_Windows7_ 
+     IFileSystemImageResult2 : public IFileSystemImageResult
+     {
+     public:
+@@ -1639,17 +1640,17 @@ EXTERN_C const IID IID_IFsiItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FD9-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FD9-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IFsiItem : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FullPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreationTime( 
+             /* [annotation][retval][out] */ 
+@@ -1687,13 +1688,13 @@ EXTERN_C const IID IID_IFsiItem;
+             /* [annotation][in] */ 
+             _In_  FsiFileSystems fileSystem,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE FileSystemPath( 
+             /* [annotation][in] */ 
+             _In_  FsiFileSystems fileSystem,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+     };
+     
+@@ -1939,7 +1940,7 @@ EXTERN_C const IID IID_IEnumFsiItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FDA-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FDA-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IEnumFsiItems : public IUnknown
+     {
+     public:
+@@ -2085,7 +2086,7 @@ EXTERN_C const IID IID_IFsiFileItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FDB-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FDB-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IFsiFileItem : public IFsiItem
+     {
+     public:
+@@ -2408,7 +2409,7 @@ EXTERN_C const IID IID_IFsiFileItem2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("199D0C19-11E1-40eb-8EC2-C8C822A07792")
++    MIDL_INTERFACE("199D0C19-11E1-40eb-8EC2-C8C822A07792") _Windows_SupportedOS_WindowsVista_ 
+     IFsiFileItem2 : public IFsiFileItem
+     {
+     public:
+@@ -2779,7 +2780,7 @@ EXTERN_C const IID IID_IFsiNamedStreams;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ED79BA56-5294-4250-8D46-F9AECEE23459")
++    MIDL_INTERFACE("ED79BA56-5294-4250-8D46-F9AECEE23459") _Windows_SupportedOS_WindowsVista_ 
+     IFsiNamedStreams : public IDispatch
+     {
+     public:
+@@ -2963,7 +2964,7 @@ EXTERN_C const IID IID_IFsiDirectoryItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FDC-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FDC-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IFsiDirectoryItem : public IFsiItem
+     {
+     public:
+@@ -3354,7 +3355,7 @@ EXTERN_C const IID IID_IFsiDirectoryItem2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F7FB4B9B-6D96-4d7b-9115-201B144811EF")
++    MIDL_INTERFACE("F7FB4B9B-6D96-4d7b-9115-201B144811EF") _Windows_SupportedOS_WindowsVista_ 
+     IFsiDirectoryItem2 : public IFsiDirectoryItem
+     {
+     public:
+@@ -3717,7 +3718,7 @@ EXTERN_C const IID IID_IFileSystemImage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FE1-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FE1-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     IFileSystemImage : public IDispatch
+     {
+     public:
+@@ -3746,14 +3747,14 @@ EXTERN_C const IID IID_IFileSystemImage;
+             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_VolumeName( 
+             /* [annotation][in] */ 
+             _In_  BSTR newVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ImportedVolumeName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BootImageOptions( 
+             /* [retval][ref][out] */ __RPC__deref_out_opt IBootOptions **pVal) = 0;
+@@ -3769,7 +3770,7 @@ EXTERN_C const IID IID_IFileSystemImage;
+             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WorkingDirectory( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
+             /* [annotation][in] */ 
+@@ -3839,7 +3840,7 @@ EXTERN_C const IID IID_IFileSystemImage;
+             /* [retval][ref][out] */ __RPC__out FsiItemType *itemType) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CalculateDiscIdentifier( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *discIdentifier) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *discIdentifier) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IdentifyFileSystemsOnDisc( 
+             /* [annotation][in] */ 
+@@ -3875,13 +3876,13 @@ EXTERN_C const IID IID_IFileSystemImage;
+             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem **newItem) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeNameUDF( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeNameJoliet( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeNameISO9660( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StageFiles( 
+             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
+@@ -4455,7 +4456,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D7644B2C-1537-4767-B62F-F1387B02DDFD")
++    MIDL_INTERFACE("D7644B2C-1537-4767-B62F-F1387B02DDFD") _Windows_SupportedOS_WindowsVista_ 
+     IFileSystemImage2 : public IFileSystemImage
+     {
+     public:
+@@ -5042,7 +5043,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7CFF842C-7E97-4807-8304-910DD8F7C051")
++    MIDL_INTERFACE("7CFF842C-7E97-4807-8304-910DD8F7C051") _Windows_SupportedOS_WindowsVista_ 
+     IFileSystemImage3 : public IFileSystemImage2
+     {
+     public:
+@@ -5671,7 +5672,7 @@ EXTERN_C const IID IID_DFileSystemImageEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C941FDF-975B-59BE-A960-9A2A262853A5")
++    MIDL_INTERFACE("2C941FDF-975B-59BE-A960-9A2A262853A5") _Windows_SupportedOS_WindowsVista_ 
+     DFileSystemImageEvents : public IDispatch
+     {
+     public:
+@@ -5841,7 +5842,7 @@ EXTERN_C const IID IID_DFileSystemImageImportEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D25C30F9-4087-4366-9E24-E55BE286424B")
++    MIDL_INTERFACE("D25C30F9-4087-4366-9E24-E55BE286424B") _Windows_SupportedOS_WindowsVista_ 
+     DFileSystemImageImportEvents : public IDispatch
+     {
+     public:
+@@ -6014,12 +6015,12 @@ EXTERN_C const IID IID_IIsoImageManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6CA38BE5-FBBB-4800-95A1-A438865EB0D4")
++    MIDL_INTERFACE("6CA38BE5-FBBB-4800-95A1-A438865EB0D4") _Windows_SupportedOS_WindowsVista_ 
+     IIsoImageManager : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Stream( 
+             /* [annotation][retval][out] */ 

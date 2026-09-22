@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/tbs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/tbs.h
+index c6e1f5d903..5b494cc585 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/tbs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/tbs.h
 @@ -18,6 +18,7 @@ Contents:   Definitions and prototypes for the TBS (TPM Base Services) for
@@ -14,52 +15,62 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/tbs.h b/generation/Wi
  #define TBS_OWNERAUTH_TYPE_STORAGE_20      13
  
 -typedef struct tdTBS_CONTEXT_PARAMS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tdTBS_CONTEXT_PARAMS
++typedef struct   tdTBS_CONTEXT_PARAMS
  {
      UINT32 version;
  } TBS_CONTEXT_PARAMS, *PTBS_CONTEXT_PARAMS;
  typedef const TBS_CONTEXT_PARAMS *PCTBS_CONTEXT_PARAMS;
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsi_Context_Create(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ Tbsi_Context_Create(
++_Windows_SupportedOS_WindowsVista_ TBS_RESULT WINAPI
++  Tbsi_Context_Create(
      _In_ PCTBS_CONTEXT_PARAMS pContextParams,
      _Out_ PTBS_HCONTEXT phContext);
  
-@@ -105,11 +106,11 @@ Tbsi_Tpm_Vendor_Maintenance_Mode(
+@@ -104,12 +105,12 @@ Tbsi_Tpm_Vendor_Maintenance_Mode(
+     _In_ PCTBS_CONTEXT_PARAMS pContextParams,
      _Out_ PTBS_HCONTEXT phContext);
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsip_Context_Close(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ Tbsip_Context_Close(
++_Windows_SupportedOS_WindowsVista_ TBS_RESULT WINAPI
++  Tbsip_Context_Close(
      _In_ TBS_HCONTEXT   hContext);
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsip_Submit_Command(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ Tbsip_Submit_Command(
++_Windows_SupportedOS_WindowsVista_ TBS_RESULT WINAPI
++  Tbsip_Submit_Command(
      _In_ TBS_HCONTEXT hContext,
      _In_ TBS_COMMAND_LOCALITY Locality,
      _In_ TBS_COMMAND_PRIORITY Priority,
-@@ -119,11 +120,11 @@ Tbsip_Submit_Command(
+@@ -118,12 +119,12 @@ Tbsip_Submit_Command(
+     _Out_writes_bytes_(*pcbResult) PBYTE pabResult,
      _Inout_ PUINT32 pcbResult);
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsip_Cancel_Commands(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ Tbsip_Cancel_Commands(
++_Windows_SupportedOS_WindowsVista_ TBS_RESULT WINAPI
++  Tbsip_Cancel_Commands(
      _In_ TBS_HCONTEXT hContext);
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsi_Physical_Presence_Command(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ Tbsi_Physical_Presence_Command(
++_Windows_SupportedOS_WindowsVista_ TBS_RESULT WINAPI
++  Tbsi_Physical_Presence_Command(
      _In_ TBS_HCONTEXT hContext,
      _In_reads_bytes_(cbInput) PCBYTE pabInput,
      _In_ UINT32 cbInput,
-@@ -136,7 +137,7 @@ Tbsi_Physical_Presence_Command(
+@@ -134,9 +135,9 @@ Tbsi_Physical_Presence_Command(
  
- _Success_(return == TBS_SUCCESS)
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
+ 
+-_Success_(return == TBS_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == TBS_SUCCESS)
  TBS_RESULT WINAPI
 -Tbsi_Get_TCG_Log(
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ Tbsi_Get_TCG_Log(
++  Tbsi_Get_TCG_Log(
      _In_ TBS_HCONTEXT hContext,
      _Out_writes_bytes_to_opt_(*pOutputBufLen, *pOutputBufLen) PBYTE pOutputBuf,
      _Inout_ PUINT32 pOutputBufLen);
@@ -68,31 +79,35 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/tbs.h b/generation/Wi
  #define TPM_IFTYPE_SPB            5 // 2.0: SPB attached
  
 -typedef struct _TPM_DEVICE_INFO
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _TPM_DEVICE_INFO
++typedef struct   _TPM_DEVICE_INFO
  {
      UINT32      structVersion;      // = 1 for now
      UINT32      tpmVersion;         // 1.2 / 2.0
-@@ -214,20 +215,20 @@ typedef const TPM_DEVICE_INFO *PCTPM_DEVICE_INFO;
+@@ -213,21 +214,21 @@ typedef struct _TPM_DEVICE_INFO
+ typedef const TPM_DEVICE_INFO *PCTPM_DEVICE_INFO;
  #endif //TPM_VERSION_UNKNOWN
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsi_GetDeviceInfo(
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ Tbsi_GetDeviceInfo(
++_Windows_SupportedOS_Windows8_ TBS_RESULT WINAPI
++  Tbsi_GetDeviceInfo(
      _In_ UINT32 Size,
      _Out_writes_bytes_(Size) PVOID Info);
  
- _Success_(return == TBS_SUCCESS)
+-_Success_(return == TBS_SUCCESS)
++_Windows_SupportedOS_Windows8_ _Success_(return == TBS_SUCCESS)
  TBS_RESULT WINAPI
 -Tbsi_Get_OwnerAuth(
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ Tbsi_Get_OwnerAuth(
++  Tbsi_Get_OwnerAuth(
      _In_ TBS_HCONTEXT hContext,
      _In_ TBS_OWNERAUTH_TYPE ownerauthType,
      _Out_writes_bytes_to_opt_(*pOutputBufLen, *pOutputBufLen) PBYTE pOutputBuf,
      _Inout_  PUINT32 pOutputBufLen);
  
- TBS_RESULT WINAPI
+-TBS_RESULT WINAPI
 -Tbsi_Revoke_Attestation();
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ Tbsi_Revoke_Attestation();
++_Windows_SupportedOS_Windows8_ TBS_RESULT WINAPI
++  Tbsi_Revoke_Attestation();
  
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  

@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h
+index 2da791bcfc..f5f8368511 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h
 @@ -13,6 +13,7 @@
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_WHERE, MCI_PUT, MCI_FREEZE, MCI_UNFREEZE cmds */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
  #ifdef MCI_USE_OFFEXT
      POINT   ptOffset;
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_CAPTURE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPSTR   lpstrFileName;
  #ifdef MCI_USE_OFFEXT
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  #endif
  } MCI_DGV_CAPTURE_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPWSTR  lpstrFileName;
  #ifdef MCI_USE_OFFEXT
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_COPY command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwFrom;
      DWORD   dwTo;
@@ -50,7 +51,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_CUE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwTo;
  } MCI_DGV_CUE_PARMS;
@@ -59,7 +60,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_CUT command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwFrom;
      DWORD   dwTo;
@@ -68,7 +69,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_DELETE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwFrom;
      DWORD   dwTo;
@@ -77,14 +78,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_INFO command message */
  
 -typedef struct  {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_  {
++typedef struct    {
      DWORD_PTR   dwCallback;
      LPSTR   lpstrReturn;
      DWORD   dwRetSize;
      DWORD   dwItem;
  } MCI_DGV_INFO_PARMSA;
 -typedef struct  {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_  {
++typedef struct    {
      DWORD_PTR   dwCallback;
      LPWSTR  lpstrReturn;
      DWORD   dwRetSize;
@@ -93,7 +94,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_LIST command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPSTR   lpstrReturn;
      DWORD   dwLength;
@@ -102,7 +103,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
      LPSTR   lpstrAlgorithm;
  } MCI_DGV_LIST_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPWSTR  lpstrReturn;
      DWORD   dwLength;
@@ -111,7 +112,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_MONITOR command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwSource;
      DWORD   dwMethod;
@@ -120,7 +121,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_OPEN command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      UINT    wDeviceID;
  #ifndef _WIN32
@@ -129,7 +130,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  #endif
  } MCI_DGV_OPEN_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      UINT    wDeviceID;
  #ifndef _WIN32
@@ -138,7 +139,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_PASTE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwTo;
  #ifdef MCI_USE_OFFEXT
@@ -147,7 +148,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_QUALITY command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD       dwItem;
      LPSTR       lpstrName;
@@ -155,7 +156,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
      DWORD       dwHandle;
  } MCI_DGV_QUALITY_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD       dwItem;
      LPWSTR      lpstrName;
@@ -164,7 +165,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_RECORD command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwFrom;
      DWORD   dwTo;
@@ -173,13 +174,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_RESERVE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPSTR   lpstrPath;
      DWORD   dwSize;
  } MCI_DGV_RESERVE_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPWSTR  lpstrPath;
      DWORD   dwSize;
@@ -188,7 +189,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_RESTORE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPSTR   lpstrFileName;
  #ifdef MCI_USE_OFFEXT
@@ -197,7 +198,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  #endif
  } MCI_DGV_RESTORE_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPWSTR  lpstrFileName;
  #ifdef MCI_USE_OFFEXT
@@ -206,13 +207,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_SAVE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPSTR   lpstrFileName;
      RECT    rc;
  } MCI_DGV_SAVE_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      LPWSTR  lpstrFileName;
      RECT    rc;
@@ -221,7 +222,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_SET command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwTimeFormat;
      DWORD   dwAudio;
@@ -230,7 +231,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_SETAUDIO command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwItem;
      DWORD   dwValue;
@@ -239,7 +240,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
      LPSTR   lpstrQuality;
  } MCI_DGV_SETAUDIO_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwItem;
      DWORD   dwValue;
@@ -248,7 +249,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_SIGNAL command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwPosition;
      DWORD   dwPeriod;
@@ -257,7 +258,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_SETVIDEO command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwItem;
      DWORD   dwValue;
@@ -266,7 +267,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
      DWORD   dwSourceNumber;
  } MCI_DGV_SETVIDEO_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwItem;
      DWORD   dwValue;
@@ -275,7 +276,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_STATUS command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR dwCallback;
      DWORD_PTR dwReturn;
      DWORD   dwItem;
@@ -284,7 +285,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
      DWORD   dwReference;
  } MCI_DGV_STATUS_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR dwCallback;
      DWORD_PTR dwReturn;
      DWORD   dwItem;
@@ -293,7 +294,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_STEP command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      DWORD   dwFrames;
  } MCI_DGV_STEP_PARMS;
@@ -302,7 +303,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_UPDATE command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
  #ifdef MCI_USE_OFFEXT
      POINT   ptOffset;
@@ -311,7 +312,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
  /* parameter block for MCI_WINDOW command message */
  
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      HWND    hWnd;
  #ifndef _WIN32
@@ -320,7 +321,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Digitalv.h b/generation/W
      LPSTR   lpstrText;
  } MCI_DGV_WINDOW_PARMSA;
 -typedef struct {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ {
++typedef struct   {
      DWORD_PTR   dwCallback;
      HWND    hWnd;
  #ifndef _WIN32

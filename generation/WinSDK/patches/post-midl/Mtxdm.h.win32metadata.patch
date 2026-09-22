@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mtxdm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mtxdm.h
-index dfcfa823b2..b76a26c5c2 100644
+index dfcfa823b2..891ba93aaf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Mtxdm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mtxdm.h
 @@ -3,6 +3,7 @@
@@ -14,8 +14,8 @@ index dfcfa823b2..b76a26c5c2 100644
  // GetDispenserManager
  // A Dispenser calls this API to get a reference to DispenserManager.
  //
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  __declspec(dllimport) HRESULT __cdecl GetDispenserManager(IDispenserManager**);
  
  

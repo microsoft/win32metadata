@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h b/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h
-index 4d02d13095..90009d80c0 100644
+index 4d02d13095..d635743924 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h
 @@ -24,6 +24,7 @@ Revision History:
@@ -14,8 +14,8 @@ index 4d02d13095..90009d80c0 100644
  } PROTECTED_FILE_DATA, *PPROTECTED_FILE_DATA;
  
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -24,8 +24,8 @@ index 4d02d13095..90009d80c0 100644
      IN PPROTECTED_FILE_DATA ProtFileData
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  BOOL
  WINAPI
  SfcIsFileProtected(
@@ -33,8 +33,8 @@ index 4d02d13095..90009d80c0 100644
      IN LPCWSTR ProtFileName
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  BOOL
  WINAPI
  SfcIsKeyProtected(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
-index 04174f8702cef388c97f2f363713cd47c457e79a..5655b8d5402c9f551ef0691891247fbd6a139dab 100644
+index 04174f8702..cb899fdd72 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 @@ -6,6 +6,7 @@ File: shlobj_core.h
@@ -10,21 +10,29 @@ index 04174f8702cef388c97f2f363713cd47c457e79a..5655b8d5402c9f551ef0691891247fbd
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -100,6 +101,8 @@ extern "C" {            /* Assume C declarations for C++ */
+@@ -100,10 +101,12 @@ extern "C" {            /* Assume C declarations for C++ */
  //
  //===========================================================================
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_WindowsXP_ 
++
  _Check_return_
  SHSTDAPI SHGetMalloc(_Outptr_ IMalloc **ppMalloc);   // CoGetMalloc(MEMCTX_TASK,ppMalloc)
- SHSTDAPI_(void *) SHAlloc(SIZE_T cb);                   // CoTaskMemAlloc(cb)
-@@ -387,6 +390,8 @@ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c
+-SHSTDAPI_(void *) SHAlloc(SIZE_T cb);                   // CoTaskMemAlloc(cb)
+-SHSTDAPI_(void)   SHFree(_In_opt_ void * pv);           // CoTaskMemFree(pv)
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void *) SHAlloc(SIZE_T cb);                   // CoTaskMemAlloc(cb)
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void)   SHFree(_In_opt_ void * pv);           // CoTaskMemFree(pv)
+ 
+ 
+ //===========================================================================
+@@ -386,7 +389,9 @@ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c
+ #define IDO_SHGIOI_LINK   0x0FFFFFFE
  #define IDO_SHGIOI_SLOWFILE 0x0FFFFFFFD
  #define IDO_SHGIOI_DEFAULT  0x0FFFFFFFC
- SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
+-SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHGetIconOverlayIndexA(_In_opt_ LPCSTR pszIconPath, int iIconIndex);
++_Windows_SupportedOS_Windows2000_ 
++
  SHSTDAPI_(int) SHGetIconOverlayIndexW(_In_opt_ LPCWSTR pszIconPath, int iIconIndex);
  #ifdef UNICODE
  #define SHGetIconOverlayIndex  SHGetIconOverlayIndexW
@@ -33,16 +41,1800 @@ index 04174f8702cef388c97f2f363713cd47c457e79a..5655b8d5402c9f551ef0691891247fbd
  #endif
  
 -typedef struct tagDATABLOCKHEADER
-+typedef struct _Windows_SupportedOS_Server2000_ tagDATABLOCKHEADER
++typedef struct  tagDATABLOCKHEADER
  {
      DWORD   cbSize;             // Size of this extra data block
      DWORD   dwSignature;        // signature of this extra data block
-@@ -650,6 +655,8 @@ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc
+@@ -650,25 +655,27 @@ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc
  #define FCIDM_MENU_EXPLORE          (FCIDM_GLOBALFIRST+0x0150)
  #define FCIDM_MENU_FAVORITES        (FCIDM_GLOBALFIRST+0x0170)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  SHSTDAPI_(PIDLIST_RELATIVE)     ILClone(_In_ PCUIDLIST_RELATIVE pidl);
- SHSTDAPI_(PITEMID_CHILD)        ILCloneFirst(_In_ PCUIDLIST_RELATIVE pidl);
- SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCombine(_In_opt_ PCIDLIST_ABSOLUTE pidl1, _In_opt_ PCUIDLIST_RELATIVE pidl2);
+-SHSTDAPI_(PITEMID_CHILD)        ILCloneFirst(_In_ PCUIDLIST_RELATIVE pidl);
+-SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCombine(_In_opt_ PCIDLIST_ABSOLUTE pidl1, _In_opt_ PCUIDLIST_RELATIVE pidl2);
+-SHSTDAPI_(void)                 ILFree(_In_opt_ PIDLIST_RELATIVE pidl);
+-SHSTDAPI_(PUIDLIST_RELATIVE)    ILGetNext(_In_opt_ PCUIDLIST_RELATIVE pidl);
+-SHSTDAPI_(UINT)                 ILGetSize(_In_opt_ PCUIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PITEMID_CHILD)        ILCloneFirst(_In_ PCUIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCombine(_In_opt_ PCIDLIST_ABSOLUTE pidl1, _In_opt_ PCUIDLIST_RELATIVE pidl2);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void)                 ILFree(_In_opt_ PIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PUIDLIST_RELATIVE)    ILGetNext(_In_opt_ PCUIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(UINT)                 ILGetSize(_In_opt_ PCUIDLIST_RELATIVE pidl);
+ SHSTDAPI_(PUIDLIST_RELATIVE)    ILFindChild(_In_ PIDLIST_ABSOLUTE pidlParent, _In_ PCIDLIST_ABSOLUTE pidlChild);
+-SHSTDAPI_(PUITEMID_CHILD)       ILFindLastID(_In_ PCUIDLIST_RELATIVE pidl);
+-SHSTDAPI_(BOOL)                 ILRemoveLastID(_Inout_opt_ PUIDLIST_RELATIVE pidl);
+-SHSTDAPI_(BOOL)                 ILIsEqual(_In_ PCIDLIST_ABSOLUTE pidl1, _In_ PCIDLIST_ABSOLUTE pidl2);
+-SHSTDAPI_(BOOL)                 ILIsParent(_In_ PCIDLIST_ABSOLUTE pidl1, _In_ PCIDLIST_ABSOLUTE pidl2, BOOL fImmediate);
+-SHSTDAPI                        ILSaveToStream(_In_ IStream *pstm, _In_ PCUIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PUITEMID_CHILD)       ILFindLastID(_In_ PCUIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL)                 ILRemoveLastID(_Inout_opt_ PUIDLIST_RELATIVE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL)                 ILIsEqual(_In_ PCIDLIST_ABSOLUTE pidl1, _In_ PCIDLIST_ABSOLUTE pidl2);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL)                 ILIsParent(_In_ PCIDLIST_ABSOLUTE pidl1, _In_ PCIDLIST_ABSOLUTE pidl2, BOOL fImmediate);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI                        ILSaveToStream(_In_ IStream *pstm, _In_ PCUIDLIST_RELATIVE pidl);
+ EXTERN_C DECLSPEC_DEPRECATED HRESULT STDAPICALLTYPE ILLoadFromStream(_In_ IStream *pstm, _Inout_ PIDLIST_RELATIVE *pidl); // use ILLoadFromStreamEx instead
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ SHSTDAPI                        ILLoadFromStreamEx(_In_ IStream *pstm, _Outptr_ PIDLIST_RELATIVE *pidl);
+ #endif // NTDDI_VISTA
+ 
+-SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathA(_In_ PCSTR pszPath);
+-SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathW(_In_ PCWSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathA(_In_ PCSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathW(_In_ PCWSTR pszPath);
+ 
+ #ifdef NO_WRAPPERS_FOR_ILCREATEFROMPATH
+ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPath(_In_ PCTSTR pszPath);
+@@ -680,7 +687,7 @@ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPath(_In_ PCTSTR pszPath);
+ #endif  // !UNICODE
+ #endif  // NO_WRAPPERS_FOR_ILCREATEFROMPATH
+ 
+-SHSTDAPI SHILCreateFromPath(_In_ PCWSTR pszPath, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _Inout_opt_ DWORD *rgfInOut);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHILCreateFromPath(_In_ PCWSTR pszPath, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _Inout_opt_ DWORD *rgfInOut);
+ 
+ 
+ #define VOID_OFFSET(pv, cb)     ((void*)(((BYTE*)(pv))+(cb)))
+@@ -733,7 +740,7 @@ extern "C" {
+ 
+ #endif // defined(STRICT_TYPED_ITEMIDS) && defined(__cplusplus)
+ 
+-SHSTDAPI_(PIDLIST_RELATIVE) ILAppendID(_In_opt_ PIDLIST_RELATIVE pidl, _In_ LPCSHITEMID pmkid, BOOL fAppend);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_RELATIVE) ILAppendID(_In_opt_ PIDLIST_RELATIVE pidl, _In_ LPCSHITEMID pmkid, BOOL fAppend);
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+@@ -748,17 +755,17 @@ enum
+ 
+ 
+ typedef int GPFIDL_FLAGS;
+-SHSTDAPI_(BOOL) SHGetPathFromIDListEx(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(cchPath) PWSTR pszPath, DWORD cchPath, GPFIDL_FLAGS uOpts);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI_(BOOL) SHGetPathFromIDListEx(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(cchPath) PWSTR pszPath, DWORD cchPath, GPFIDL_FLAGS uOpts);
+ #endif // NTDDI_VISTA
+ //
+ // SHGetPathFromIDListW is the old version of SHGetPathFromIDListEx that assumes the size of the buffer (MAX_PATH).
+ // The pidl should point to a file system object.
+-_Success_(return != 0)
++_Windows_SupportedOS_WindowsXP_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) SHGetPathFromIDListA(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(MAX_PATH) LPSTR pszPath);
+ //
+ // SHGetPathFromIDListW is the old version of SHGetPathFromIDListEx that assumes the size of the buffer (MAX_PATH).
+ // The pidl should point to a file system object.
+-_Success_(return != 0)
++_Windows_SupportedOS_WindowsXP_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(MAX_PATH) LPWSTR pszPath);
+ #ifdef UNICODE
+ #define SHGetPathFromIDList  SHGetPathFromIDListW
+@@ -766,9 +773,9 @@ SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(M
+ #define SHGetPathFromIDList  SHGetPathFromIDListA
+ #endif // !UNICODE
+ 
+-SHSTDAPI_(int) SHCreateDirectory(_In_opt_ HWND hwnd, _In_ PCWSTR pszPath);
+-SHSTDAPI_(int) SHCreateDirectoryExA(_In_opt_ HWND hwnd, _In_ LPCSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
+-SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) SHCreateDirectory(_In_opt_ HWND hwnd, _In_ PCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHCreateDirectoryExA(_In_opt_ HWND hwnd, _In_ LPCSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
+ #ifdef UNICODE
+ #define SHCreateDirectoryEx  SHCreateDirectoryExW
+ #else
+@@ -782,11 +789,11 @@ SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _I
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+-SHSTDAPI SHOpenFolderAndSelectItems(_In_ PCIDLIST_ABSOLUTE pidlFolder, UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl, DWORD dwFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHOpenFolderAndSelectItems(_In_ PCIDLIST_ABSOLUTE pidlFolder, UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl, DWORD dwFlags);
+ 
+ //  deprecated because of parameter ambiguity
+ //  call SHCreateItemWithParent() or SHCreateItemFromIDList() instead
+-SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShellFolder *psfParent, _In_ PCUITEMID_CHILD pidl, _Outptr_ IShellItem **ppsi);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShellFolder *psfParent, _In_ PCUITEMID_CHILD pidl, _Outptr_ IShellItem **ppsi);
+ 
+ #endif
+ 
+@@ -890,13 +897,13 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
+ #endif  // NTDDI_WINXP
+ #define CSIDL_FLAG_MASK                 0xFF00        // mask for all possible flag values
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ STDAPI SHGetSpecialFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
+ 
+-SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
+-_Success_(return != 0)
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) SHGetSpecialFolderPathA(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
+-_Success_(return != 0)
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
+ #ifdef UNICODE
+ #define SHGetSpecialFolderPath  SHGetSpecialFolderPathW
+@@ -905,33 +912,33 @@ SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_P
+ #endif // !UNICODE
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+-SHSTDAPI_(void) SHFlushSFCache(void);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) SHFlushSFCache(void);
+ 
+ typedef enum {
+     SHGFP_TYPE_CURRENT  = 0,   // current value for user, verify it exists
+     SHGFP_TYPE_DEFAULT  = 1,   // default value, may not exist
+ } SHGFP_TYPE;
+ 
+-SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
+-SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
++_Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
+ #ifdef UNICODE
+ #define SHGetFolderPath  SHGetFolderPathW
+ #else
+ #define SHGetFolderPath  SHGetFolderPathA
+ #endif // !UNICODE
+-SHSTDAPI SHGetFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHGetFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
+ #endif  // NTDDI_WIN2K
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-STDAPI SHSetFolderPathA(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCSTR pszPath);
+-STDAPI SHSetFolderPathW(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCWSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHSetFolderPathA(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHSetFolderPathW(_In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define SHSetFolderPath  SHSetFolderPathW
+ #else
+ #define SHSetFolderPath  SHSetFolderPathA
+ #endif // !UNICODE
+-STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
+-STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
+ #ifdef UNICODE
+ #define SHGetFolderPathAndSubDir  SHGetFolderPathAndSubDirW
+ #else
+@@ -1031,28 +1038,28 @@ typedef enum
+ } KNOWN_FOLDER_FLAG;
+ 
+ 
+-DEFINE_ENUM_FLAG_OPERATORS(KNOWN_FOLDER_FLAG)
++_Windows_SupportedOS_WindowsVista_ DEFINE_ENUM_FLAG_OPERATORS(KNOWN_FOLDER_FLAG)
+ 
+ STDAPI SHGetKnownFolderIDList(_In_ REFKNOWNFOLDERID rfid,
+                               _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
+                               _In_opt_ HANDLE hToken,
+                               _Outptr_ PIDLIST_ABSOLUTE *ppidl);
+ 
+-STDAPI SHSetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
++_Windows_SupportedOS_WindowsVista_ STDAPI SHSetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
+                             _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
+                             _In_opt_ HANDLE hToken,
+                             _In_ PCWSTR pszPath);
+ 
+-STDAPI SHGetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
+-                            _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
++_Windows_SupportedOS_WindowsVista_ STDAPI SHGetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
++                            _Win32_AssociatedEnum_(KNOWN_FOLDER_FLAG) _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
+                             _In_opt_ HANDLE hToken,
+-                            _Outptr_ PWSTR *ppszPath); // free *ppszPath with CoTaskMemFree
++                            _Win32_RAIIFree_(CoTaskMemFree) _Outptr_ PWSTR *ppszPath); // free *ppszPath with CoTaskMemFree
+ 
+ #endif  // NTDDI_VISTA
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ // returns IShellItem or related interface
+-STDAPI SHGetKnownFolderItem(_In_ REFKNOWNFOLDERID rfid,
++_Windows_SupportedOS_Windows7_ STDAPI SHGetKnownFolderItem(_In_ REFKNOWNFOLDERID rfid,
+                             _In_ KNOWN_FOLDER_FLAG flags,
+                             _In_opt_ HANDLE hToken,
+                             _In_ REFIID riid,
+@@ -1114,7 +1121,7 @@ typedef struct
+ #include <poppack.h>        /* Return to byte packing */
+ 
+ // Gets/Sets the Folder Custom Settings for pszPath based on dwReadWrite. dwReadWrite can be FCS_READ/FCS_WRITE/FCS_FORCEWRITE
+-SHSTDAPI SHGetSetFolderCustomSettings(_Inout_ LPSHFOLDERCUSTOMSETTINGS pfcs, _In_ PCWSTR pszPath, DWORD dwReadWrite);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetSetFolderCustomSettings(_Inout_ LPSHFOLDERCUSTOMSETTINGS pfcs, _In_ PCWSTR pszPath, DWORD dwReadWrite);
+ 
+ #endif //NTDDI_VISTA
+ #endif  // NTDDI_WIN2K
+@@ -1207,8 +1214,8 @@ typedef struct _browseinfoW {
+ #define BFFM_SETOKTEXT          (WM_USER + 105) // Unicode only
+ #define BFFM_SETEXPANDED        (WM_USER + 106) // Unicode only
+ 
+-SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderA(_In_ LPBROWSEINFOA lpbi);
+-SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderA(_In_ LPBROWSEINFOA lpbi);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
+ 
+ #ifdef UNICODE
+ #define SHBrowseForFolder   SHBrowseForFolderW
+@@ -1232,7 +1239,7 @@ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
+ //
+ //-------------------------------------------------------------------------
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
+ SHSTDAPI SHLoadInProc(_In_ REFCLSID rclsid);
+ 
+ 
+@@ -1271,7 +1278,7 @@ enum
+ //
+ //  CoCreateInstance(CLSID_Desktop, NULL, CLSCTX_INPROC, IID_PPV_ARGS(&pshf));
+ //
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
+ SHSTDAPI SHGetDesktopFolder(_Outptr_ IShellFolder **ppshf);
+ 
+ // this interface is deprecated, data sources should
+@@ -2057,7 +2064,7 @@ typedef struct _SHChangeNotifyEntry
+ //
+ //  APIs
+ //
+-SHSTDAPI_(void) SHChangeNotify(LONG wEventId, UINT uFlags, _In_opt_ LPCVOID dwItem1, _In_opt_ LPCVOID dwItem2);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) SHChangeNotify(_Win32_AssociatedEnum_(SHCNE_ID) LONG wEventId, _Win32_AssociatedEnum_(SHCNF_FLAGS) UINT uFlags, _In_opt_ LPCVOID dwItem1, _In_opt_ LPCVOID dwItem2);
+ 
+ //
+ // IShellChangeNotify
+@@ -2152,7 +2159,7 @@ typedef struct SHARDAPPIDINFOLINK
+ #endif
+ 
+ // The type of the data pointed to by pv is a function of uFlags values that are SHARD_XXX values.  PV can be a PCIDLIST_ABSOLUTE, PCWSTR, PCSTR, SHARDAPPIDINFO, or SHARDAPPIDINFOIDLIST.
+-SHSTDAPI_(void) SHAddToRecentDocs(UINT uFlags, _In_opt_ LPCVOID pv);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) SHAddToRecentDocs(UINT uFlags, _In_opt_ LPCVOID pv);
+ 
+ 
+ #include <pshpack1.h>
+@@ -2177,9 +2184,9 @@ typedef struct _SHChangeUpdateImageIDList {
+     WCHAR szName[MAX_PATH];
+     USHORT cbZero;
+ } SHChangeUpdateImageIDList, * LPSHChangeUpdateImageIDList;
+-SHSTDAPI_(int) SHHandleUpdateImage(_In_ PCIDLIST_ABSOLUTE pidlExtra);
+-SHSTDAPI_(void) SHUpdateImageA(_In_ LPCSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
+-SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) SHHandleUpdateImage(_In_ PCIDLIST_ABSOLUTE pidlExtra);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHUpdateImageA(_In_ LPCSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
+ #ifdef UNICODE
+ #define SHUpdateImage  SHUpdateImageW
+ #else
+@@ -2187,8 +2194,8 @@ SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags
+ #endif // !UNICODE
+ #endif /* NTDDI_WIN2K */
+ 
+-SHSTDAPI_(ULONG) SHChangeNotifyRegister(_In_ HWND hwnd, int fSources, LONG fEvents, UINT wMsg, int cEntries, _In_ const SHChangeNotifyEntry *pshcne);
+-SHSTDAPI_(BOOL) SHChangeNotifyDeregister(ULONG ulID);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(ULONG) SHChangeNotifyRegister(_In_ HWND hwnd, _Win32_AssociatedEnum_(SHCNRF_SOURCE) int fSources, LONG fEvents, UINT wMsg, int cEntries, _In_ const SHChangeNotifyEntry *pshcne);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SHChangeNotifyDeregister(ULONG ulID);
+ 
+ typedef enum
+ {
+@@ -2196,14 +2203,14 @@ typedef enum
+     SCNRT_DISABLE = 1,
+ } SCNRT_STATUS;
+ 
+-SHSTDAPI_(HANDLE) SHChangeNotification_Lock(_In_ HANDLE hChange, DWORD dwProcId, _Outptr_opt_result_buffer_(2) PIDLIST_ABSOLUTE **pppidl, _Out_opt_ LONG *plEvent);
+-SHSTDAPI_(BOOL) SHChangeNotification_Unlock(_In_ HANDLE hLock);
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(SHChangeNotification_Unlock) SHSTDAPI_(HANDLE) SHChangeNotification_Lock(_In_ HANDLE hChange, DWORD dwProcId, _Outptr_opt_result_buffer_(2) PIDLIST_ABSOLUTE **pppidl, _Out_opt_ LONG *plEvent);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) SHChangeNotification_Unlock(_In_ HANDLE hLock);
+ // The pidls that are given to the view via the ChangeNotifyEvents are simple Pidls,
+ // SHGetRealIDL() will convert them to true PIDLs.
+-SHSTDAPI SHGetRealIDL(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidlSimple, _Outptr_ PITEMID_CHILD *ppidlReal);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetRealIDL(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidlSimple, _Outptr_ PITEMID_CHILD *ppidlReal);
+ 
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
+ SHSTDAPI SHGetInstanceExplorer(_Outptr_ IUnknown **ppunk);
+ 
+ //
+@@ -2246,7 +2253,7 @@ SHSTDAPI SHGetInstanceExplorer(_Outptr_ IUnknown **ppunk);
+ #include <pshpack8.h>
+ 
+ typedef struct _SHDESCRIPTIONID {
+-    DWORD   dwDescriptionId;
++    _Win32_AssociatedEnum_(SHDID_ID) DWORD   dwDescriptionId;
+     CLSID   clsid;
+ } SHDESCRIPTIONID, *LPSHDESCRIPTIONID;
+ 
+@@ -2254,8 +2261,8 @@ typedef struct _SHDESCRIPTIONID {
+ 
+ // these delegate to IShellFolder2::GetDetailsEx()
+ 
+-SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
+-SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
+ #ifdef UNICODE
+ #define SHGetDataFromIDList  SHGetDataFromIDListW
+ #else
+@@ -2274,19 +2281,19 @@ SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl,
+ #define PRF_REQUIREABSOLUTE         0x0010
+ #endif
+ 
+-SHSTDAPI_(int) RestartDialog(_In_opt_ HWND hwnd, _In_opt_ PCWSTR pszPrompt, DWORD dwReturn);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) RestartDialog(_In_opt_ HWND hwnd, _In_opt_ PCWSTR pszPrompt, DWORD dwReturn);
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-SHSTDAPI_(int) RestartDialogEx(_In_opt_ HWND hwnd, _In_opt_ PCWSTR pszPrompt, DWORD dwReturn, DWORD dwReasonCode);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) RestartDialogEx(_In_opt_ HWND hwnd, _In_opt_ PCWSTR pszPrompt, DWORD dwReturn, DWORD dwReasonCode);
+ #endif
+ 
+-SHSTDAPI SHCoCreateInstance(_In_opt_ PCWSTR pszCLSID, _In_opt_ const CLSID *pclsid, _In_opt_ IUnknown *pUnkOuter, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHCoCreateInstance(_In_opt_ PCWSTR pszCLSID, _In_opt_ const CLSID *pclsid, _In_opt_ IUnknown *pUnkOuter, _In_ REFIID riid, _Outptr_ void **ppv);
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-SHSTDAPI SHCreateDataObject(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_ UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl, _In_opt_ IDataObject *pdtInner, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHCreateDataObject(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_ UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl, _In_opt_ IDataObject *pdtInner, _In_ REFIID riid, _Outptr_ void **ppv);
+ #endif
+-SHSTDAPI CIDLData_CreateFromIDArray(_In_ PCIDLIST_ABSOLUTE pidlFolder, _In_ UINT cidl, _In_reads_opt_(cidl) PCUIDLIST_RELATIVE_ARRAY apidl, _Outptr_ IDataObject **ppdtobj);
+-SHSTDAPI SHCreateStdEnumFmtEtc(_In_ UINT cfmt, _In_reads_(cfmt) const FORMATETC afmt[], _Outptr_ IEnumFORMATETC **ppenumFormatEtc);
+-SHSTDAPI SHDoDragDrop(_In_opt_ HWND hwnd, _In_ IDataObject *pdata, _In_opt_ IDropSource *pdsrc, _In_ DWORD dwEffect, _Out_ DWORD *pdwEffect);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI CIDLData_CreateFromIDArray(_In_ PCIDLIST_ABSOLUTE pidlFolder, _In_ UINT cidl, _In_reads_opt_(cidl) PCUIDLIST_RELATIVE_ARRAY apidl, _Outptr_ IDataObject **ppdtobj);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHCreateStdEnumFmtEtc(_In_ UINT cfmt, _In_reads_(cfmt) const FORMATETC afmt[], _Outptr_ IEnumFORMATETC **ppenumFormatEtc);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHDoDragDrop(_In_opt_ HWND hwnd, _In_ IDataObject *pdata, _In_opt_ IDropSource *pdsrc, _Win32_AssociatedEnum_(DROPEFFECT) _In_ DWORD dwEffect, _Win32_AssociatedEnum_(DROPEFFECT) _Out_ DWORD *pdwEffect);
+ // stuff for doing auto scrolling
+ #define NUM_POINTS      3
+ typedef struct {        // asd
+@@ -2297,13 +2304,13 @@ typedef struct {        // asd
+     DWORD dwTimes[NUM_POINTS];
+ } AUTO_SCROLL_DATA;
+ 
+-SHSTDAPI_(BOOL) DAD_SetDragImage(HIMAGELIST him, POINT * pptOffset);
+-SHSTDAPI_(BOOL) DAD_DragEnterEx(HWND hwndTarget, const POINT ptStart);
+-SHSTDAPI_(BOOL) DAD_DragEnterEx2(_In_ HWND hwndTarget, const POINT ptStart, _In_opt_ IDataObject *pdtObject);
+-SHSTDAPI_(BOOL) DAD_ShowDragImage(BOOL fShow);
+-SHSTDAPI_(BOOL) DAD_DragMove(POINT pt);
+-SHSTDAPI_(BOOL) DAD_DragLeave(void);
+-SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, AUTO_SCROLL_DATA *pad, const POINT *pptNow);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_SetDragImage(HIMAGELIST him, POINT * pptOffset);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragEnterEx(HWND hwndTarget, const POINT ptStart);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragEnterEx2(_In_ HWND hwndTarget, const POINT ptStart, _In_opt_ IDataObject *pdtObject);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_ShowDragImage(BOOL fShow);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragMove(POINT pt);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragLeave(void);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, AUTO_SCROLL_DATA *pad, const POINT *pptNow);
+ typedef struct {
+     WORD cLength;
+     WORD nVersion;
+@@ -2326,10 +2333,10 @@ typedef struct {
+ #define CABINETSTATE_VERSION 2
+ 
+ // APIs for reading and writing the cabinet state.
+-SHSTDAPI_(BOOL) ReadCabinetState(_Out_writes_bytes_(cLength) CABINETSTATE *pcs, int cLength);
+-SHSTDAPI_(BOOL) WriteCabinetState(_In_ CABINETSTATE *pcs);
+-SHSTDAPI_(BOOL) PathMakeUniqueName(_Out_writes_(cchMax) PWSTR pszUniqueName, UINT cchMax, _In_ PCWSTR pszTemplate, _In_opt_ PCWSTR pszLongPlate, _In_opt_ PCWSTR pszDir);
+-SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) ReadCabinetState(_Out_writes_bytes_(cLength) CABINETSTATE *pcs, int cLength);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) WriteCabinetState(_In_ CABINETSTATE *pcs);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) PathMakeUniqueName(_Out_writes_(cchMax) PWSTR pszUniqueName, UINT cchMax, _In_ PCWSTR pszTemplate, _In_opt_ PCWSTR pszLongPlate, _In_opt_ PCWSTR pszDir);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
+ //
+ //  Return codes from PathCleanupSpec.  Negative return values are
+ //  unrecoverable errors
+@@ -2340,21 +2347,21 @@ SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
+ #define PCS_TRUNCATED       0x00000004
+ #define PCS_PATHTOOLONG     0x00000008  // Always combined with FATAL
+ 
+-SHSTDAPI_(int) PathCleanupSpec(_In_opt_ PCWSTR pszDir, _Inout_ PWSTR pszSpec);
++_Windows_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(PCS_RET) SHSTDAPI_(int) PathCleanupSpec(_In_opt_ PCWSTR pszDir, _Inout_ PWSTR pszSpec);
+ 
+-SHSTDAPI_(int) PathResolve(_Inout_updates_(MAX_PATH) PWSTR pszPath, _In_opt_ PZPCWSTR dirs, UINT fFlags);
+-SHSTDAPI_(BOOL) GetFileNameFromBrowse(_In_opt_ HWND hwnd, _Inout_updates_(cchFilePath) PWSTR pszFilePath, UINT cchFilePath,
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(int) PathResolve(_Inout_updates_(MAX_PATH) PWSTR pszPath, _In_opt_ PZPCWSTR dirs, _Win32_AssociatedEnum_(PRF_FLAGS) UINT fFlags);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) GetFileNameFromBrowse(_In_opt_ HWND hwnd, _Inout_updates_(cchFilePath) PWSTR pszFilePath, UINT cchFilePath,
+                                       _In_opt_ PCWSTR pszWorkingDir, _In_ PCWSTR pszDefExt, _In_opt_ PCWSTR pszFilters, _In_opt_ PCWSTR pszTitle);
+-SHSTDAPI_(int) DriveType(int iDrive);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) DriveType(int iDrive);
+ 
+-SHSTDAPI_(int) RealDriveType(int iDrive, BOOL fOKToHitNet);
+-SHSTDAPI_(int) IsNetDrive(int iDrive);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) RealDriveType(int iDrive, BOOL fOKToHitNet);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int) IsNetDrive(int iDrive);
+ // Flags for Shell_MergeMenus
+ #define MM_ADDSEPARATOR         0x00000001L
+ #define MM_SUBMENUSHAVEIDS      0x00000002L
+ #define MM_DONTREMOVESEPS       0x00000004L
+ 
+-SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInsert, UINT uIDAdjust, UINT uIDAdjustMax, ULONG uFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInsert, UINT uIDAdjust, UINT uIDAdjustMax, _Win32_AssociatedEnum_(MM_FLAGS) ULONG uFlags);
+ 
+ 
+ /*
+@@ -2372,7 +2379,7 @@ SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInser
+  *
+  *     TRUE if the Properties command was invoked
+  */
+-SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType, _In_ PCWSTR pszObjectName, _In_opt_ PCWSTR pszPropertyPage);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _Win32_AssociatedEnum_(SHOP_TYPE) _In_ DWORD shopObjectType, _In_ PCWSTR pszObjectName, _In_opt_ PCWSTR pszPropertyPage);
+ 
+ #define SHOP_PRINTERNAME 0x00000001  // pszObjectName points to a printer friendly name
+ #define SHOP_FILEPATH    0x00000002  // pszObjectName points to a fully qualified path+file name
+@@ -2447,7 +2454,7 @@ SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType
+  *      last time".
+  *
+  */
+-SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT options);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, _Win32_AssociatedEnum_(SHFMT_ID) UINT fmtID, _Win32_AssociatedEnum_(SHFMT_OPT) UINT options);
+ 
+ //
+ // Special value of fmtID which means "use the default format"
+@@ -2471,9 +2478,9 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
+ #define HPSXA_DEFINED
+ DECLARE_HANDLE( HPSXA );
+ #endif
+-WINSHELLAPI void WINAPI SHDestroyPropSheetExtArray(_In_ HPSXA hpsxa);
+-WINSHELLAPI UINT WINAPI SHAddFromPropSheetExtArray(_In_ HPSXA hpsxa, _In_ LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam);
+-WINSHELLAPI UINT WINAPI SHReplaceFromPropSheetExtArray(_In_ HPSXA hpsxa, UINT uPageID, _In_ LPFNADDPROPSHEETPAGE lpfnReplaceWith, LPARAM lParam);
++_Windows_SupportedOS_WindowsXP_ WINSHELLAPI void WINAPI SHDestroyPropSheetExtArray(_In_ HPSXA hpsxa);
++_Windows_SupportedOS_Windows2000_ WINSHELLAPI UINT WINAPI SHAddFromPropSheetExtArray(_In_ HPSXA hpsxa, _In_ LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam);
++_Windows_SupportedOS_WindowsXP_ WINSHELLAPI UINT WINAPI SHReplaceFromPropSheetExtArray(_In_ HPSXA hpsxa, UINT uPageID, _In_ LPFNADDPROPSHEETPAGE lpfnReplaceWith, LPARAM lParam);
+ 
+ // shell restriction values, parameter for SHRestricted()
+ typedef enum RESTRICTIONS
+@@ -2698,33 +2705,33 @@ typedef enum RESTRICTIONS
+ #endif  // NTDDI_VISTA
+ #endif  // NTDDI_WINXPSP2
+ } RESTRICTIONS;
+-SHSTDAPI_(IStream *) OpenRegStream(_In_ HKEY hkey, _In_opt_ PCWSTR pszSubkey, _In_opt_ PCWSTR pszValue, DWORD grfMode);
+-SHSTDAPI_(BOOL) SHFindFiles(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ PCIDLIST_ABSOLUTE pidlSaveFile);
+-SHSTDAPI_(void) PathGetShortPath(_Inout_updates_(MAX_PATH) PWSTR pszLongPath);
+-_Success_(return != 0)
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(IStream *) OpenRegStream(_In_ HKEY hkey, _In_opt_ PCWSTR pszSubkey, _In_opt_ PCWSTR pszValue, DWORD grfMode);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SHFindFiles(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ PCIDLIST_ABSOLUTE pidlSaveFile);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) PathGetShortPath(_Inout_updates_(MAX_PATH) PWSTR pszLongPath);
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) PathYetAnotherMakeUniqueName(_Out_writes_(MAX_PATH) PWSTR pszUniqueName, _In_ PCWSTR pszPath, _In_opt_ PCWSTR pszShort, _In_opt_ PCWSTR pszFileSpec);
+-SHSTDAPI_(BOOL) Win32DeleteFile(_In_ PCWSTR pszPath);
+-SHSTDAPI_(DWORD) SHRestricted(RESTRICTIONS rest);
+-SHSTDAPI_(BOOL) SignalFileOpen(_In_ PCIDLIST_ABSOLUTE pidl);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) Win32DeleteFile(_In_ PCWSTR pszPath);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(DWORD) SHRestricted(RESTRICTIONS rest);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SignalFileOpen(_In_ PCIDLIST_ABSOLUTE pidl);
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-SHSTDAPI AssocGetDetailsOfPropKey(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _In_ const PROPERTYKEY *pkey, _Out_ VARIANT *pv, _Out_opt_ BOOL *pfFoundPropKey);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI AssocGetDetailsOfPropKey(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _In_ const PROPERTYKEY *pkey, _Out_ VARIANT *pv, _Out_opt_ BOOL *pfFoundPropKey);
+ #endif
+ 
+ 
+ // both ANSI and UNICODE
+ SHSTDAPI SHStartNetConnectionDialogA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR pszRemoteName, DWORD dwType);
+ // both ANSI and UNICODE
+-SHSTDAPI SHStartNetConnectionDialogW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRemoteName, DWORD dwType);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHStartNetConnectionDialogW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRemoteName, DWORD dwType);
+ #ifdef UNICODE
+ #define SHStartNetConnectionDialog  SHStartNetConnectionDialogW
+ #else
+ #define SHStartNetConnectionDialog  SHStartNetConnectionDialogA
+ #endif // !UNICODE
+-SHSTDAPI SHDefExtractIconA(_In_ LPCSTR pszIconFile, int iIndex, UINT uFlags,
+-                           _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
+-SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
+-                           _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
++_Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ SHSTDAPI SHDefExtractIconA(_In_ LPCSTR pszIconFile, int iIndex, UINT uFlags,
++                           _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconLarge, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconSmall, UINT nIconSize);
++_Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
++                           _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconLarge, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_opt_ HICON *phiconSmall, UINT nIconSize);
+ #ifdef UNICODE
+ #define SHDefExtractIcon  SHDefExtractIconW
+ #else
+@@ -2734,7 +2741,11 @@ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
+ // Elevation
+ 
+ // OpenAsInfo flags
+-enum tagOPEN_AS_INFO_FLAGS {
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ tagOPEN_AS_INFO_FLAGS {
+     OAIF_ALLOW_REGISTRATION = 0x00000001,     // enable the "always use this file" checkbox (NOTE if you don't pass this, it will be disabled)
+     OAIF_REGISTER_EXT       = 0x00000002,     // do the registration after the user hits "ok"
+     OAIF_EXEC               = 0x00000004,     // execute file after registering
+@@ -2765,14 +2776,14 @@ typedef struct _openasinfo
+ #include <poppack.h>        /* Return to byte packing */
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-SHSTDAPI SHOpenWithDialog(_In_opt_ HWND hwndParent, _In_ const OPENASINFO* poainfo);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHOpenWithDialog(_In_opt_ HWND hwndParent, _In_ const OPENASINFO* poainfo);
+ #endif // NTDDI_VISTA
+ 
+-SHSTDAPI_(BOOL) Shell_GetImageLists(_Out_opt_ HIMAGELIST *phiml, _Out_opt_ HIMAGELIST *phimlSmall);
+-SHSTDAPI_(int)  Shell_GetCachedImageIndex(_In_ PCWSTR pwszIconPath, int iIconIndex, UINT uIconFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) Shell_GetImageLists(_Win32_RAIIFree_(ImageList_Destroy, -1, 0) _Out_opt_ HIMAGELIST *phiml, _Win32_RAIIFree_(ImageList_Destroy, -1, 0) _Out_opt_ HIMAGELIST *phimlSmall);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndex(_In_ PCWSTR pwszIconPath, int iIconIndex, UINT uIconFlags);
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-SHSTDAPI_(int)  Shell_GetCachedImageIndexA(_In_ LPCSTR pszIconPath, int iIconIndex, UINT uIconFlags);
+-SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndexA(_In_ LPCSTR pszIconPath, int iIconIndex, UINT uIconFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
+ #ifdef UNICODE
+ #define Shell_GetCachedImageIndex  Shell_GetCachedImageIndexW
+ #else
+@@ -2789,7 +2800,7 @@ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIn
+ #define VALIDATEUNC_VALID       0x0007          // valid flags
+ #endif
+ 
+-SHSTDAPI_(BOOL) SHValidateUNC(_In_opt_ HWND hwndOwner, _Inout_ PWSTR pszFile, UINT fConnect);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) SHValidateUNC(_In_opt_ HWND hwndOwner, _Inout_ PWSTR pszFile, _Win32_AssociatedEnum_(VALIDATEUNC_OPTION) UINT fConnect);
+ #define PIFNAMESIZE     30
+ #define PIFSTARTLOCSIZE 63
+ #define PIFDEFPATHSIZE  64
+@@ -2817,15 +2828,15 @@ typedef UNALIGNED PROPPRG *PPROPPRG;
+ typedef UNALIGNED PROPPRG FAR *LPPROPPRG;
+ typedef const UNALIGNED PROPPRG FAR *LPCPROPPRG;
+ 
+-SHSTDAPI_(HANDLE) PifMgr_OpenProperties(_In_ PCWSTR pszApp, _In_opt_ PCWSTR pszPIF, UINT hInf, UINT flOpt);
+-SHSTDAPI_(int)    PifMgr_GetProperties(_In_opt_ HANDLE hProps, _In_opt_ PCSTR pszGroup, _Out_writes_bytes_opt_(cbProps) void *lpProps, int cbProps, UINT flOpt);
+-SHSTDAPI_(int)    PifMgr_SetProperties(_In_opt_ HANDLE hProps, _In_opt_ PCSTR pszGroup, _In_reads_bytes_(cbProps) const void *lpProps, int cbProps, UINT flOpt);
+-SHSTDAPI_(HANDLE) PifMgr_CloseProperties(_In_opt_ HANDLE hProps, UINT flOpt);
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) SHSTDAPI_(HANDLE) PifMgr_OpenProperties(_In_ PCWSTR pszApp, _In_opt_ PCWSTR pszPIF, UINT hInf, UINT flOpt);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int)    PifMgr_GetProperties(_In_opt_ HANDLE hProps, _In_opt_ PCSTR pszGroup, _Out_writes_bytes_opt_(cbProps) void *lpProps, int cbProps, UINT flOpt);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(int)    PifMgr_SetProperties(_In_opt_ HANDLE hProps, _In_opt_ PCSTR pszGroup, _In_reads_bytes_(cbProps) const void *lpProps, int cbProps, UINT flOpt);
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) SHSTDAPI_(HANDLE) PifMgr_CloseProperties(_In_opt_ HANDLE hProps, UINT flOpt);
+ 
+-SHSTDAPI_(void) SHSetInstanceExplorer(_In_opt_ IUnknown *punk);
+-SHSTDAPI_(BOOL) IsUserAnAdmin(void);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) SHSetInstanceExplorer(_In_opt_ IUnknown *punk);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) IsUserAnAdmin(void);
+ 
+-SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPARAM lParam);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPARAM lParam);
+ 
+ //
+ // Callback interface for the IShellView object returned from SHCreateShellFolderView.
+@@ -2992,11 +3003,11 @@ typedef struct _SFV_CREATE
+     IShellFolderViewCB* psfvcb; // No callback if NULL
+ } SFV_CREATE;
+ 
+-SHSTDAPI SHCreateShellFolderView(_In_ const SFV_CREATE* pcsfv, _Outptr_ IShellView ** ppsv);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHCreateShellFolderView(_In_ const SFV_CREATE* pcsfv, _Outptr_ IShellView ** ppsv);
+ typedef HRESULT (CALLBACK * LPFNDFMCALLBACK)(_In_opt_ IShellFolder *psf, _In_opt_ HWND hwnd,
+                                              _In_opt_ IDataObject *pdtobj, UINT uMsg, WPARAM wParam, LPARAM lParam);
+ 
+-SHSTDAPI CDefFolderMenu_Create2(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ HWND hwnd,
++_Windows_SupportedOS_Windows2000_ SHSTDAPI CDefFolderMenu_Create2(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ HWND hwnd,
+                                 UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl,
+                                 _In_opt_ IShellFolder *psf, _In_opt_ LPFNDFMCALLBACK pfn,
+                                 UINT nKeys, _In_reads_opt_(nKeys) const HKEY *ahkeys,
+@@ -3017,7 +3028,7 @@ typedef struct {
+ // used in the implemetnation of ::GetUIObjectOf()
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-SHSTDAPI SHCreateDefaultContextMenu(_In_ const DEFCONTEXTMENU *pdcm, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHCreateDefaultContextMenu(_In_ const DEFCONTEXTMENU *pdcm, _In_ REFIID riid, _Outptr_ void **ppv);
+ #endif // NTDDI_VISTA
+ 
+ // structure for lParam of DFM_INFOKECOMMANDEX
+@@ -3100,8 +3111,8 @@ typedef struct _CSFV
+ 
+ #include <poppack.h>        /* Return to byte packing */
+ 
+-SHSTDAPI_(IContextMenu *) SHFind_InitMenuPopup(_In_ HMENU hmenu, _In_opt_ HWND hwndOwner, UINT idCmdFirst, UINT idCmdLast);
+-SHSTDAPI SHCreateShellFolderViewEx(_In_ CSFV *pcsfv, _Outptr_ IShellView **ppsv);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(IContextMenu *) SHFind_InitMenuPopup(_In_ HMENU hmenu, _In_opt_ HWND hwndOwner, UINT idCmdFirst, UINT idCmdLast);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHCreateShellFolderViewEx(_In_ CSFV *pcsfv, _Outptr_ IShellView **ppsv);
+ 
+ 
+ // Legacy PROPIDs for Internet Shortcuts (FMTID_Intshcut) to be used with
+@@ -3313,7 +3324,7 @@ typedef struct {
+ #define SHELLSTATE_SIZE_IE4   FIELD_OFFSET(SHELLSTATE,uNotUsed)
+ #define SHELLSTATE_SIZE_WIN2K sizeof(SHELLSTATE)
+ 
+-SHSTDAPI_(void) SHGetSetSettings(_Inout_opt_ LPSHELLSTATE lpss, DWORD dwMask, BOOL bSet);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) SHGetSetSettings(_Inout_opt_ LPSHELLSTATE lpss, _Win32_AssociatedEnum_(SSF_MASK) DWORD dwMask, BOOL bSet);
+ 
+ //
+ //  SysFiles are these windows special files:
+@@ -3394,24 +3405,24 @@ typedef struct {
+ // When these settings change, a WM_SETTINGCHANGE message is sent
+ // with the string lParam value of "ShellState".
+ //
+-SHSTDAPI_(void) SHGetSettings(_Out_ SHELLFLAGSTATE *psfs, DWORD dwMask);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(void) SHGetSettings(_Out_ SHELLFLAGSTATE *psfs, DWORD dwMask);
+ 
+ //
+ // Given a pidl, you can get an interface pointer (as specified by riid) of the pidl's parent folder (in ppv)
+ // If ppidlLast is non-NULL, you can also get the pidl of the last item.
+ //
+-SHSTDAPI SHBindToParent(_In_ PCIDLIST_ABSOLUTE pidl, _In_ REFIID riid, _Outptr_ void **ppv, _Outptr_opt_ PCUITEMID_CHILD *ppidlLast);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHBindToParent(_In_ PCIDLIST_ABSOLUTE pidl, _In_ REFIID riid, _Outptr_ void **ppv, _Outptr_opt_ PCUITEMID_CHILD *ppidlLast);
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ // Same as SHBindToParent, except you also specify which root to use.
+-SHSTDAPI SHBindToFolderIDListParent(_In_opt_ IShellFolder *psfRoot, _In_ PCUIDLIST_RELATIVE pidl, _In_ REFIID riid, _Outptr_ void **ppv, _Outptr_opt_ PCUITEMID_CHILD *ppidlLast);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHBindToFolderIDListParent(_In_opt_ IShellFolder *psfRoot, _In_ PCUIDLIST_RELATIVE pidl, _In_ REFIID riid, _Outptr_ void **ppv, _Outptr_opt_ PCUITEMID_CHILD *ppidlLast);
+ 
+ // same as SHBindToFolderIDListParent but with a IBindCtx *pbc;
+-SHSTDAPI SHBindToFolderIDListParentEx(_In_opt_ IShellFolder *psfRoot, _In_ PCUIDLIST_RELATIVE pidl, _In_opt_ IBindCtx *ppbc, _In_ REFIID riid, _Outptr_ void **ppv, _Outptr_opt_ PCUITEMID_CHILD *ppidlLast);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHBindToFolderIDListParentEx(_In_opt_ IShellFolder *psfRoot, _In_ PCUIDLIST_RELATIVE pidl, _In_opt_ IBindCtx *ppbc, _In_ REFIID riid, _Outptr_ void **ppv, _Outptr_opt_ PCUITEMID_CHILD *ppidlLast);
+ 
+ // helper function that gets the desktop object, then calls BindToObject on that
+-SHSTDAPI SHBindToObject(_In_opt_ IShellFolder *psf, _In_ PCUIDLIST_RELATIVE pidl, _In_opt_ IBindCtx *pbc, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHBindToObject(_In_opt_ IShellFolder *psf, _In_ PCUIDLIST_RELATIVE pidl, _In_opt_ IBindCtx *pbc, _In_ REFIID riid, _Outptr_ void **ppv);
+ 
+ #endif // NTDDI_VISTA
+ 
+@@ -3445,7 +3456,7 @@ __inline BOOL IDListContainerIsConsistent(_In_reads_bytes_(cbAlloc) PCUIDLIST_RE
+ //  psfgaoOut is optional for SFGAO attributes
+ //
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _In_ SFGAOF sfgaoIn, _Out_opt_ SFGAOF *psfgaoOut);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _In_ SFGAOF sfgaoIn, _Out_opt_ SFGAOF *psfgaoOut);
+ #endif // NTDDI_WINXP
+ 
+ //
+@@ -3475,8 +3486,8 @@ SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr
+ #endif // NTDDI_WINXP
+ 
+ 
+-SHSTDAPI SHPathPrepareForWriteA(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCSTR pszPath, DWORD dwFlags);
+-SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHPathPrepareForWriteA(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCSTR pszPath, DWORD dwFlags);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
+ #ifdef UNICODE
+ #define SHPathPrepareForWrite  SHPathPrepareForWriteW
+ #else
+@@ -3521,7 +3532,7 @@ DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000
+ //  IPropertyStorage** ppstg,  // Address to receive requested vtable
+ //  puCodePage      //  Optional address to receive the code page ID for the set.
+ //
+-SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _In_opt_ const CLSID *pclsid, DWORD grfFlags, DWORD grfMode, DWORD dwDisposition, _Outptr_ IPropertyStorage** ppstg, _Out_opt_ UINT* puCodePage);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _In_opt_ const CLSID *pclsid, DWORD grfFlags, DWORD grfMode, DWORD dwDisposition, _Outptr_ IPropertyStorage** ppstg, _Out_opt_ UINT* puCodePage);
+ 
+ 
+ //  SHPropStgReadMultiple()
+@@ -3536,7 +3547,7 @@ SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _
+ //  rgpspec,   //Array of the properties to be read
+ //  rgvar      //Array of PROPVARIANTs containing the property values on return
+ //
+-SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Out_writes_all_(cpspec) PROPVARIANT rgvar[] );
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Out_writes_all_(cpspec) PROPVARIANT rgvar[] );
+ 
+ 
+ //  SHPropStgWriteMultiple()
+@@ -3552,35 +3563,35 @@ SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG
+ //  rgvar,     // Array of PROPVARIANT values
+ //  propidNameFirst // Minimum value for property identifiers. This value should be >= PID_FIRST_USABLE
+ //
+-SHSTDAPI SHPropStgWriteMultiple(_In_ IPropertyStorage* pps, _Inout_opt_ UINT* puCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Inout_updates_(cpspec) PROPVARIANT rgvar[], PROPID propidNameFirst );
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHPropStgWriteMultiple(_In_ IPropertyStorage* pps, _Inout_opt_ UINT* puCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Inout_updates_(cpspec) PROPVARIANT rgvar[], PROPID propidNameFirst );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ SHSTDAPI SHCreateFileExtractIconA(_In_ LPCSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
+-SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
+ #ifdef UNICODE
+ #define SHCreateFileExtractIcon  SHCreateFileExtractIconW
+ #else
+ #define SHCreateFileExtractIcon  SHCreateFileExtractIconA
+ #endif // !UNICODE
+ 
+-SHSTDAPI SHLimitInputEdit(_In_ HWND hwndEdit, _In_ IShellFolder *psf);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHLimitInputEdit(_In_ HWND hwndEdit, _In_ IShellFolder *psf);
+ 
+-STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttributeMask, _Out_opt_ DWORD *pdwAttributes, _Out_opt_ UINT *pcItems);
++_Windows_SupportedOS_WindowsXP_ _Win32_PreserveResult_ STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttributeMask, _Out_opt_ DWORD *pdwAttributes, _Out_opt_ UINT *pcItems);
+ 
+ #endif  // NTDDI_WINXP
+ 
+ // A usefull function in Defview for mapping idlist into index into system
+ // image list.  Optionally it can also look up the index of the selected
+ // icon.
+-SHSTDAPI_(int) SHMapPIDLToSystemImageListIndex(_In_ IShellFolder *pshf, _In_ PCUITEMID_CHILD pidl, _Out_opt_ int *piIndexSel);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) SHMapPIDLToSystemImageListIndex(_In_ IShellFolder *pshf, _In_ PCUITEMID_CHILD pidl, _Out_opt_ int *piIndexSel);
+ 
+-SHSTDAPI SHCLSIDFromString(_In_ PCWSTR psz, _Out_ CLSID *pclsid);
+-SHSTDAPI_(int) PickIconDlg(_In_opt_ HWND hwnd, _Inout_updates_(cchIconPath) PWSTR pszIconPath, UINT cchIconPath, _Inout_opt_ int *piIconIndex);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHCLSIDFromString(_In_ PCWSTR psz, _Out_ CLSID *pclsid);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(int) PickIconDlg(_In_opt_ HWND hwnd, _Inout_updates_(cchIconPath) PWSTR pszIconPath, UINT cchIconPath, _Inout_opt_ int *piIconIndex);
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ // returns an IStream or IStorage via riid/ppv
+-STDAPI StgMakeUniqueName(_In_ IStorage *pstgParent, _In_ PCWSTR pszFileSpec, _In_ DWORD grfMode, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_Windows7_ STDAPI StgMakeUniqueName(_In_ IStorage *pstgParent, _In_ PCWSTR pszFileSpec, _In_ DWORD grfMode, _In_ REFIID riid, _Outptr_ void **ppv);
+ #endif // NTDDI_WIN7
+ 
+ #if (_WIN32_IE >= _WIN32_IE_IE70)
+@@ -3599,5 +3610,1082 @@ typedef enum tagIESHORTCUTFLAGS
+ }
+ #endif  /* __cplusplus */
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHCNE_RENAMEITEM")
++#undef SHCNE_RENAMEITEM
++#pragma push_macro("SHCNE_CREATE")
++#undef SHCNE_CREATE
++#pragma push_macro("SHCNE_DELETE")
++#undef SHCNE_DELETE
++#pragma push_macro("SHCNE_MKDIR")
++#undef SHCNE_MKDIR
++#pragma push_macro("SHCNE_RMDIR")
++#undef SHCNE_RMDIR
++#pragma push_macro("SHCNE_MEDIAINSERTED")
++#undef SHCNE_MEDIAINSERTED
++#pragma push_macro("SHCNE_MEDIAREMOVED")
++#undef SHCNE_MEDIAREMOVED
++#pragma push_macro("SHCNE_DRIVEREMOVED")
++#undef SHCNE_DRIVEREMOVED
++#pragma push_macro("SHCNE_DRIVEADD")
++#undef SHCNE_DRIVEADD
++#pragma push_macro("SHCNE_NETSHARE")
++#undef SHCNE_NETSHARE
++#pragma push_macro("SHCNE_NETUNSHARE")
++#undef SHCNE_NETUNSHARE
++#pragma push_macro("SHCNE_ATTRIBUTES")
++#undef SHCNE_ATTRIBUTES
++#pragma push_macro("SHCNE_UPDATEDIR")
++#undef SHCNE_UPDATEDIR
++#pragma push_macro("SHCNE_UPDATEITEM")
++#undef SHCNE_UPDATEITEM
++#pragma push_macro("SHCNE_SERVERDISCONNECT")
++#undef SHCNE_SERVERDISCONNECT
++#pragma push_macro("SHCNE_UPDATEIMAGE")
++#undef SHCNE_UPDATEIMAGE
++#pragma push_macro("SHCNE_DRIVEADDGUI")
++#undef SHCNE_DRIVEADDGUI
++#pragma push_macro("SHCNE_RENAMEFOLDER")
++#undef SHCNE_RENAMEFOLDER
++#pragma push_macro("SHCNE_FREESPACE")
++#undef SHCNE_FREESPACE
++#pragma push_macro("SHCNE_EXTENDED_EVENT")
++#undef SHCNE_EXTENDED_EVENT
++#pragma push_macro("SHCNE_ASSOCCHANGED")
++#undef SHCNE_ASSOCCHANGED
++#pragma push_macro("SHCNE_DISKEVENTS")
++#undef SHCNE_DISKEVENTS
++#pragma push_macro("SHCNE_GLOBALEVENTS")
++#undef SHCNE_GLOBALEVENTS
++#pragma push_macro("SHCNE_ALLEVENTS")
++#undef SHCNE_ALLEVENTS
++#pragma push_macro("SHCNE_INTERRUPT")
++#undef SHCNE_INTERRUPT
++enum [[clang::flag_enum]] SHCNE_ID : unsigned int
++{
++    SHCNE_RENAMEITEM = 1U,
++    SHCNE_CREATE = 2U,
++    SHCNE_DELETE = 4U,
++    SHCNE_MKDIR = 8U,
++    SHCNE_RMDIR = 16U,
++    SHCNE_MEDIAINSERTED = 32U,
++    SHCNE_MEDIAREMOVED = 64U,
++    SHCNE_DRIVEREMOVED = 128U,
++    SHCNE_DRIVEADD = 256U,
++    SHCNE_NETSHARE = 512U,
++    SHCNE_NETUNSHARE = 1024U,
++    SHCNE_ATTRIBUTES = 2048U,
++    SHCNE_UPDATEDIR = 4096U,
++    SHCNE_UPDATEITEM = 8192U,
++    SHCNE_SERVERDISCONNECT = 16384U,
++    SHCNE_UPDATEIMAGE = 32768U,
++    SHCNE_DRIVEADDGUI = 65536U,
++    SHCNE_RENAMEFOLDER = 131072U,
++    SHCNE_FREESPACE = 262144U,
++    SHCNE_EXTENDED_EVENT = 67108864U,
++    SHCNE_ASSOCCHANGED = 134217728U,
++    SHCNE_DISKEVENTS = 145439U,
++    SHCNE_GLOBALEVENTS = 201687520U,
++    SHCNE_ALLEVENTS = 2147483647U,
++    SHCNE_INTERRUPT = 2147483648U,
++};
++#pragma pop_macro("SHCNE_INTERRUPT")
++#pragma pop_macro("SHCNE_ALLEVENTS")
++#pragma pop_macro("SHCNE_GLOBALEVENTS")
++#pragma pop_macro("SHCNE_DISKEVENTS")
++#pragma pop_macro("SHCNE_ASSOCCHANGED")
++#pragma pop_macro("SHCNE_EXTENDED_EVENT")
++#pragma pop_macro("SHCNE_FREESPACE")
++#pragma pop_macro("SHCNE_RENAMEFOLDER")
++#pragma pop_macro("SHCNE_DRIVEADDGUI")
++#pragma pop_macro("SHCNE_UPDATEIMAGE")
++#pragma pop_macro("SHCNE_SERVERDISCONNECT")
++#pragma pop_macro("SHCNE_UPDATEITEM")
++#pragma pop_macro("SHCNE_UPDATEDIR")
++#pragma pop_macro("SHCNE_ATTRIBUTES")
++#pragma pop_macro("SHCNE_NETUNSHARE")
++#pragma pop_macro("SHCNE_NETSHARE")
++#pragma pop_macro("SHCNE_DRIVEADD")
++#pragma pop_macro("SHCNE_DRIVEREMOVED")
++#pragma pop_macro("SHCNE_MEDIAREMOVED")
++#pragma pop_macro("SHCNE_MEDIAINSERTED")
++#pragma pop_macro("SHCNE_RMDIR")
++#pragma pop_macro("SHCNE_MKDIR")
++#pragma pop_macro("SHCNE_DELETE")
++#pragma pop_macro("SHCNE_CREATE")
++#pragma pop_macro("SHCNE_RENAMEITEM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHCNRF_InterruptLevel")
++#undef SHCNRF_InterruptLevel
++#pragma push_macro("SHCNRF_ShellLevel")
++#undef SHCNRF_ShellLevel
++#pragma push_macro("SHCNRF_RecursiveInterrupt")
++#undef SHCNRF_RecursiveInterrupt
++#pragma push_macro("SHCNRF_NewDelivery")
++#undef SHCNRF_NewDelivery
++enum [[clang::flag_enum]] SHCNRF_SOURCE : int
++{
++    SHCNRF_InterruptLevel = 1,
++    SHCNRF_ShellLevel = 2,
++    SHCNRF_RecursiveInterrupt = 4096,
++    SHCNRF_NewDelivery = 32768,
++};
++#pragma pop_macro("SHCNRF_NewDelivery")
++#pragma pop_macro("SHCNRF_RecursiveInterrupt")
++#pragma pop_macro("SHCNRF_ShellLevel")
++#pragma pop_macro("SHCNRF_InterruptLevel")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHCNF_IDLIST")
++#undef SHCNF_IDLIST
++#pragma push_macro("SHCNF_PATHA")
++#undef SHCNF_PATHA
++#pragma push_macro("SHCNF_PRINTERA")
++#undef SHCNF_PRINTERA
++#pragma push_macro("SHCNF_DWORD")
++#undef SHCNF_DWORD
++#pragma push_macro("SHCNF_PATHW")
++#undef SHCNF_PATHW
++#pragma push_macro("SHCNF_PRINTERW")
++#undef SHCNF_PRINTERW
++#pragma push_macro("SHCNF_TYPE")
++#undef SHCNF_TYPE
++#pragma push_macro("SHCNF_FLUSH")
++#undef SHCNF_FLUSH
++#pragma push_macro("SHCNF_FLUSHNOWAIT")
++#undef SHCNF_FLUSHNOWAIT
++#pragma push_macro("SHCNF_NOTIFYRECURSIVE")
++#undef SHCNF_NOTIFYRECURSIVE
++#pragma push_macro("SHCNF_PATH")
++#undef SHCNF_PATH
++#pragma push_macro("SHCNF_PRINTER")
++#undef SHCNF_PRINTER
++enum [[clang::flag_enum]] SHCNF_FLAGS : unsigned int
++{
++    SHCNF_IDLIST = 0U,
++    SHCNF_PATHA = 1U,
++    SHCNF_PRINTERA = 2U,
++    SHCNF_DWORD = 3U,
++    SHCNF_PATHW = 5U,
++    SHCNF_PRINTERW = 6U,
++    SHCNF_TYPE = 255U,
++    SHCNF_FLUSH = 4096U,
++    SHCNF_FLUSHNOWAIT = 12288U,
++    SHCNF_NOTIFYRECURSIVE = 65536U,
++    SHCNF_PATH = 5U,
++    SHCNF_PRINTER = 6U,
++};
++#pragma pop_macro("SHCNF_PRINTER")
++#pragma pop_macro("SHCNF_PATH")
++#pragma pop_macro("SHCNF_NOTIFYRECURSIVE")
++#pragma pop_macro("SHCNF_FLUSHNOWAIT")
++#pragma pop_macro("SHCNF_FLUSH")
++#pragma pop_macro("SHCNF_TYPE")
++#pragma pop_macro("SHCNF_PRINTERW")
++#pragma pop_macro("SHCNF_PATHW")
++#pragma pop_macro("SHCNF_DWORD")
++#pragma pop_macro("SHCNF_PRINTERA")
++#pragma pop_macro("SHCNF_PATHA")
++#pragma pop_macro("SHCNF_IDLIST")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("QITIPF_DEFAULT")
++#undef QITIPF_DEFAULT
++#pragma push_macro("QITIPF_USENAME")
++#undef QITIPF_USENAME
++#pragma push_macro("QITIPF_LINKNOTARGET")
++#undef QITIPF_LINKNOTARGET
++#pragma push_macro("QITIPF_LINKUSETARGET")
++#undef QITIPF_LINKUSETARGET
++#pragma push_macro("QITIPF_USESLOWTIP")
++#undef QITIPF_USESLOWTIP
++#pragma push_macro("QITIPF_SINGLELINE")
++#undef QITIPF_SINGLELINE
++#pragma push_macro("QIF_CACHED")
++#undef QIF_CACHED
++#pragma push_macro("QIF_DONTEXPANDFOLDER")
++#undef QIF_DONTEXPANDFOLDER
++enum [[clang::flag_enum]] QITIPF_FLAGS : int
++{
++    QITIPF_DEFAULT = 0,
++    QITIPF_USENAME = 1,
++    QITIPF_LINKNOTARGET = 2,
++    QITIPF_LINKUSETARGET = 4,
++    QITIPF_USESLOWTIP = 8,
++    QITIPF_SINGLELINE = 16,
++    QIF_CACHED = 1,
++    QIF_DONTEXPANDFOLDER = 2,
++};
++#pragma pop_macro("QIF_DONTEXPANDFOLDER")
++#pragma pop_macro("QIF_CACHED")
++#pragma pop_macro("QITIPF_SINGLELINE")
++#pragma pop_macro("QITIPF_USESLOWTIP")
++#pragma pop_macro("QITIPF_LINKUSETARGET")
++#pragma pop_macro("QITIPF_LINKNOTARGET")
++#pragma pop_macro("QITIPF_USENAME")
++#pragma pop_macro("QITIPF_DEFAULT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHDID_ROOT_REGITEM")
++#undef SHDID_ROOT_REGITEM
++#pragma push_macro("SHDID_FS_FILE")
++#undef SHDID_FS_FILE
++#pragma push_macro("SHDID_FS_DIRECTORY")
++#undef SHDID_FS_DIRECTORY
++#pragma push_macro("SHDID_FS_OTHER")
++#undef SHDID_FS_OTHER
++#pragma push_macro("SHDID_COMPUTER_DRIVE35")
++#undef SHDID_COMPUTER_DRIVE35
++#pragma push_macro("SHDID_COMPUTER_DRIVE525")
++#undef SHDID_COMPUTER_DRIVE525
++#pragma push_macro("SHDID_COMPUTER_REMOVABLE")
++#undef SHDID_COMPUTER_REMOVABLE
++#pragma push_macro("SHDID_COMPUTER_FIXED")
++#undef SHDID_COMPUTER_FIXED
++#pragma push_macro("SHDID_COMPUTER_NETDRIVE")
++#undef SHDID_COMPUTER_NETDRIVE
++#pragma push_macro("SHDID_COMPUTER_CDROM")
++#undef SHDID_COMPUTER_CDROM
++#pragma push_macro("SHDID_COMPUTER_RAMDISK")
++#undef SHDID_COMPUTER_RAMDISK
++#pragma push_macro("SHDID_COMPUTER_OTHER")
++#undef SHDID_COMPUTER_OTHER
++#pragma push_macro("SHDID_NET_DOMAIN")
++#undef SHDID_NET_DOMAIN
++#pragma push_macro("SHDID_NET_SERVER")
++#undef SHDID_NET_SERVER
++#pragma push_macro("SHDID_NET_SHARE")
++#undef SHDID_NET_SHARE
++#pragma push_macro("SHDID_NET_RESTOFNET")
++#undef SHDID_NET_RESTOFNET
++#pragma push_macro("SHDID_NET_OTHER")
++#undef SHDID_NET_OTHER
++#pragma push_macro("SHDID_COMPUTER_IMAGING")
++#undef SHDID_COMPUTER_IMAGING
++#pragma push_macro("SHDID_COMPUTER_AUDIO")
++#undef SHDID_COMPUTER_AUDIO
++#pragma push_macro("SHDID_COMPUTER_SHAREDDOCS")
++#undef SHDID_COMPUTER_SHAREDDOCS
++#pragma push_macro("SHDID_MOBILE_DEVICE")
++#undef SHDID_MOBILE_DEVICE
++#pragma push_macro("SHDID_REMOTE_DESKTOP_DRIVE")
++#undef SHDID_REMOTE_DESKTOP_DRIVE
++enum SHDID_ID : int
++{
++    SHDID_ROOT_REGITEM = 1,
++    SHDID_FS_FILE = 2,
++    SHDID_FS_DIRECTORY = 3,
++    SHDID_FS_OTHER = 4,
++    SHDID_COMPUTER_DRIVE35 = 5,
++    SHDID_COMPUTER_DRIVE525 = 6,
++    SHDID_COMPUTER_REMOVABLE = 7,
++    SHDID_COMPUTER_FIXED = 8,
++    SHDID_COMPUTER_NETDRIVE = 9,
++    SHDID_COMPUTER_CDROM = 10,
++    SHDID_COMPUTER_RAMDISK = 11,
++    SHDID_COMPUTER_OTHER = 12,
++    SHDID_NET_DOMAIN = 13,
++    SHDID_NET_SERVER = 14,
++    SHDID_NET_SHARE = 15,
++    SHDID_NET_RESTOFNET = 16,
++    SHDID_NET_OTHER = 17,
++    SHDID_COMPUTER_IMAGING = 18,
++    SHDID_COMPUTER_AUDIO = 19,
++    SHDID_COMPUTER_SHAREDDOCS = 20,
++    SHDID_MOBILE_DEVICE = 21,
++    SHDID_REMOTE_DESKTOP_DRIVE = 22,
++};
++#pragma pop_macro("SHDID_REMOTE_DESKTOP_DRIVE")
++#pragma pop_macro("SHDID_MOBILE_DEVICE")
++#pragma pop_macro("SHDID_COMPUTER_SHAREDDOCS")
++#pragma pop_macro("SHDID_COMPUTER_AUDIO")
++#pragma pop_macro("SHDID_COMPUTER_IMAGING")
++#pragma pop_macro("SHDID_NET_OTHER")
++#pragma pop_macro("SHDID_NET_RESTOFNET")
++#pragma pop_macro("SHDID_NET_SHARE")
++#pragma pop_macro("SHDID_NET_SERVER")
++#pragma pop_macro("SHDID_NET_DOMAIN")
++#pragma pop_macro("SHDID_COMPUTER_OTHER")
++#pragma pop_macro("SHDID_COMPUTER_RAMDISK")
++#pragma pop_macro("SHDID_COMPUTER_CDROM")
++#pragma pop_macro("SHDID_COMPUTER_NETDRIVE")
++#pragma pop_macro("SHDID_COMPUTER_FIXED")
++#pragma pop_macro("SHDID_COMPUTER_REMOVABLE")
++#pragma pop_macro("SHDID_COMPUTER_DRIVE525")
++#pragma pop_macro("SHDID_COMPUTER_DRIVE35")
++#pragma pop_macro("SHDID_FS_OTHER")
++#pragma pop_macro("SHDID_FS_DIRECTORY")
++#pragma pop_macro("SHDID_FS_FILE")
++#pragma pop_macro("SHDID_ROOT_REGITEM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHGDFIL_FINDDATA")
++#undef SHGDFIL_FINDDATA
++#pragma push_macro("SHGDFIL_NETRESOURCE")
++#undef SHGDFIL_NETRESOURCE
++#pragma push_macro("SHGDFIL_DESCRIPTIONID")
++#undef SHGDFIL_DESCRIPTIONID
++enum SHGDFIL_FORMAT : int
++{
++    SHGDFIL_FINDDATA = 1,
++    SHGDFIL_NETRESOURCE = 2,
++    SHGDFIL_DESCRIPTIONID = 3,
++};
++#pragma pop_macro("SHGDFIL_DESCRIPTIONID")
++#pragma pop_macro("SHGDFIL_NETRESOURCE")
++#pragma pop_macro("SHGDFIL_FINDDATA")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PRF_VERIFYEXISTS")
++#undef PRF_VERIFYEXISTS
++#pragma push_macro("PRF_TRYPROGRAMEXTENSIONS")
++#undef PRF_TRYPROGRAMEXTENSIONS
++#pragma push_macro("PRF_FIRSTDIRDEF")
++#undef PRF_FIRSTDIRDEF
++#pragma push_macro("PRF_DONTFINDLNK")
++#undef PRF_DONTFINDLNK
++#pragma push_macro("PRF_REQUIREABSOLUTE")
++#undef PRF_REQUIREABSOLUTE
++enum [[clang::flag_enum]] PRF_FLAGS : int
++{
++    PRF_VERIFYEXISTS = 1,
++    PRF_TRYPROGRAMEXTENSIONS = 3,
++    PRF_FIRSTDIRDEF = 4,
++    PRF_DONTFINDLNK = 8,
++    PRF_REQUIREABSOLUTE = 16,
++};
++#pragma pop_macro("PRF_REQUIREABSOLUTE")
++#pragma pop_macro("PRF_DONTFINDLNK")
++#pragma pop_macro("PRF_FIRSTDIRDEF")
++#pragma pop_macro("PRF_TRYPROGRAMEXTENSIONS")
++#pragma pop_macro("PRF_VERIFYEXISTS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PCS_FATAL")
++#undef PCS_FATAL
++#pragma push_macro("PCS_REPLACEDCHAR")
++#undef PCS_REPLACEDCHAR
++#pragma push_macro("PCS_REMOVEDCHAR")
++#undef PCS_REMOVEDCHAR
++#pragma push_macro("PCS_TRUNCATED")
++#undef PCS_TRUNCATED
++#pragma push_macro("PCS_PATHTOOLONG")
++#undef PCS_PATHTOOLONG
++enum [[clang::flag_enum]] PCS_RET : unsigned int
++{
++    PCS_FATAL = 2147483648U,
++    PCS_REPLACEDCHAR = 1U,
++    PCS_REMOVEDCHAR = 2U,
++    PCS_TRUNCATED = 4U,
++    PCS_PATHTOOLONG = 8U,
++};
++#pragma pop_macro("PCS_PATHTOOLONG")
++#pragma pop_macro("PCS_TRUNCATED")
++#pragma pop_macro("PCS_REMOVEDCHAR")
++#pragma pop_macro("PCS_REPLACEDCHAR")
++#pragma pop_macro("PCS_FATAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("MM_ADDSEPARATOR")
++#undef MM_ADDSEPARATOR
++#pragma push_macro("MM_SUBMENUSHAVEIDS")
++#undef MM_SUBMENUSHAVEIDS
++#pragma push_macro("MM_DONTREMOVESEPS")
++#undef MM_DONTREMOVESEPS
++enum [[clang::flag_enum]] MM_FLAGS : unsigned int
++{
++    MM_ADDSEPARATOR = 1U,
++    MM_SUBMENUSHAVEIDS = 2U,
++    MM_DONTREMOVESEPS = 4U,
++};
++#pragma pop_macro("MM_DONTREMOVESEPS")
++#pragma pop_macro("MM_SUBMENUSHAVEIDS")
++#pragma pop_macro("MM_ADDSEPARATOR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHOP_PRINTERNAME")
++#undef SHOP_PRINTERNAME
++#pragma push_macro("SHOP_FILEPATH")
++#undef SHOP_FILEPATH
++#pragma push_macro("SHOP_VOLUMEGUID")
++#undef SHOP_VOLUMEGUID
++enum [[clang::flag_enum]] SHOP_TYPE : int
++{
++    SHOP_PRINTERNAME = 1,
++    SHOP_FILEPATH = 2,
++    SHOP_VOLUMEGUID = 4,
++};
++#pragma pop_macro("SHOP_VOLUMEGUID")
++#pragma pop_macro("SHOP_FILEPATH")
++#pragma pop_macro("SHOP_PRINTERNAME")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHFMT_ID_DEFAULT")
++#undef SHFMT_ID_DEFAULT
++enum SHFMT_ID : unsigned int
++{
++    SHFMT_ID_DEFAULT = 65535U,
++};
++#pragma pop_macro("SHFMT_ID_DEFAULT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHFMT_OPT_NONE")
++#undef SHFMT_OPT_NONE
++#pragma push_macro("SHFMT_OPT_FULL")
++#undef SHFMT_OPT_FULL
++#pragma push_macro("SHFMT_OPT_SYSONLY")
++#undef SHFMT_OPT_SYSONLY
++enum [[clang::flag_enum]] SHFMT_OPT : int
++{
++    SHFMT_OPT_NONE = 0,
++    SHFMT_OPT_FULL = 1,
++    SHFMT_OPT_SYSONLY = 2,
++};
++#pragma pop_macro("SHFMT_OPT_SYSONLY")
++#pragma pop_macro("SHFMT_OPT_FULL")
++#pragma pop_macro("SHFMT_OPT_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHFMT_ERROR")
++#undef SHFMT_ERROR
++#pragma push_macro("SHFMT_CANCEL")
++#undef SHFMT_CANCEL
++#pragma push_macro("SHFMT_NOFORMAT")
++#undef SHFMT_NOFORMAT
++enum SHFMT_RET : unsigned int
++{
++    SHFMT_ERROR = 4294967295U,
++    SHFMT_CANCEL = 4294967294U,
++    SHFMT_NOFORMAT = 4294967293U,
++};
++#pragma pop_macro("SHFMT_NOFORMAT")
++#pragma pop_macro("SHFMT_CANCEL")
++#pragma pop_macro("SHFMT_ERROR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("VALIDATEUNC_CONNECT")
++#undef VALIDATEUNC_CONNECT
++#pragma push_macro("VALIDATEUNC_NOUI")
++#undef VALIDATEUNC_NOUI
++#pragma push_macro("VALIDATEUNC_PRINT")
++#undef VALIDATEUNC_PRINT
++#pragma push_macro("VALIDATEUNC_PERSIST")
++#undef VALIDATEUNC_PERSIST
++#pragma push_macro("VALIDATEUNC_VALID")
++#undef VALIDATEUNC_VALID
++enum [[clang::flag_enum]] VALIDATEUNC_OPTION : int
++{
++    VALIDATEUNC_CONNECT = 1,
++    VALIDATEUNC_NOUI = 2,
++    VALIDATEUNC_PRINT = 4,
++    VALIDATEUNC_PERSIST = 8,
++    VALIDATEUNC_VALID = 15,
++};
++#pragma pop_macro("VALIDATEUNC_VALID")
++#pragma pop_macro("VALIDATEUNC_PERSIST")
++#pragma pop_macro("VALIDATEUNC_PRINT")
++#pragma pop_macro("VALIDATEUNC_NOUI")
++#pragma pop_macro("VALIDATEUNC_CONNECT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SFVM_MERGEMENU")
++#undef SFVM_MERGEMENU
++#pragma push_macro("SFVM_INVOKECOMMAND")
++#undef SFVM_INVOKECOMMAND
++#pragma push_macro("SFVM_GETHELPTEXT")
++#undef SFVM_GETHELPTEXT
++#pragma push_macro("SFVM_GETTOOLTIPTEXT")
++#undef SFVM_GETTOOLTIPTEXT
++#pragma push_macro("SFVM_GETBUTTONINFO")
++#undef SFVM_GETBUTTONINFO
++#pragma push_macro("SFVM_GETBUTTONS")
++#undef SFVM_GETBUTTONS
++#pragma push_macro("SFVM_INITMENUPOPUP")
++#undef SFVM_INITMENUPOPUP
++#pragma push_macro("SFVM_FSNOTIFY")
++#undef SFVM_FSNOTIFY
++#pragma push_macro("SFVM_WINDOWCREATED")
++#undef SFVM_WINDOWCREATED
++#pragma push_macro("SFVM_GETDETAILSOF")
++#undef SFVM_GETDETAILSOF
++#pragma push_macro("SFVM_COLUMNCLICK")
++#undef SFVM_COLUMNCLICK
++#pragma push_macro("SFVM_QUERYFSNOTIFY")
++#undef SFVM_QUERYFSNOTIFY
++#pragma push_macro("SFVM_DEFITEMCOUNT")
++#undef SFVM_DEFITEMCOUNT
++#pragma push_macro("SFVM_DEFVIEWMODE")
++#undef SFVM_DEFVIEWMODE
++#pragma push_macro("SFVM_UNMERGEMENU")
++#undef SFVM_UNMERGEMENU
++#pragma push_macro("SFVM_UPDATESTATUSBAR")
++#undef SFVM_UPDATESTATUSBAR
++#pragma push_macro("SFVM_BACKGROUNDENUM")
++#undef SFVM_BACKGROUNDENUM
++#pragma push_macro("SFVM_DIDDRAGDROP")
++#undef SFVM_DIDDRAGDROP
++#pragma push_macro("SFVM_SETISFV")
++#undef SFVM_SETISFV
++#pragma push_macro("SFVM_THISIDLIST")
++#undef SFVM_THISIDLIST
++#pragma push_macro("SFVM_ADDPROPERTYPAGES")
++#undef SFVM_ADDPROPERTYPAGES
++#pragma push_macro("SFVM_BACKGROUNDENUMDONE")
++#undef SFVM_BACKGROUNDENUMDONE
++#pragma push_macro("SFVM_GETNOTIFY")
++#undef SFVM_GETNOTIFY
++#pragma push_macro("SFVM_GETSORTDEFAULTS")
++#undef SFVM_GETSORTDEFAULTS
++#pragma push_macro("SFVM_SIZE")
++#undef SFVM_SIZE
++#pragma push_macro("SFVM_GETZONE")
++#undef SFVM_GETZONE
++#pragma push_macro("SFVM_GETPANE")
++#undef SFVM_GETPANE
++#pragma push_macro("SFVM_GETHELPTOPIC")
++#undef SFVM_GETHELPTOPIC
++#pragma push_macro("SFVM_GETANIMATION")
++#undef SFVM_GETANIMATION
++enum SFVM_MESSAGE_ID : int
++{
++    SFVM_MERGEMENU = 1,
++    SFVM_INVOKECOMMAND = 2,
++    SFVM_GETHELPTEXT = 3,
++    SFVM_GETTOOLTIPTEXT = 4,
++    SFVM_GETBUTTONINFO = 5,
++    SFVM_GETBUTTONS = 6,
++    SFVM_INITMENUPOPUP = 7,
++    SFVM_FSNOTIFY = 14,
++    SFVM_WINDOWCREATED = 15,
++    SFVM_GETDETAILSOF = 23,
++    SFVM_COLUMNCLICK = 24,
++    SFVM_QUERYFSNOTIFY = 25,
++    SFVM_DEFITEMCOUNT = 26,
++    SFVM_DEFVIEWMODE = 27,
++    SFVM_UNMERGEMENU = 28,
++    SFVM_UPDATESTATUSBAR = 31,
++    SFVM_BACKGROUNDENUM = 32,
++    SFVM_DIDDRAGDROP = 36,
++    SFVM_SETISFV = 39,
++    SFVM_THISIDLIST = 41,
++    SFVM_ADDPROPERTYPAGES = 47,
++    SFVM_BACKGROUNDENUMDONE = 48,
++    SFVM_GETNOTIFY = 49,
++    SFVM_GETSORTDEFAULTS = 53,
++    SFVM_SIZE = 57,
++    SFVM_GETZONE = 58,
++    SFVM_GETPANE = 59,
++    SFVM_GETHELPTOPIC = 63,
++    SFVM_GETANIMATION = 68,
++};
++#pragma pop_macro("SFVM_GETANIMATION")
++#pragma pop_macro("SFVM_GETHELPTOPIC")
++#pragma pop_macro("SFVM_GETPANE")
++#pragma pop_macro("SFVM_GETZONE")
++#pragma pop_macro("SFVM_SIZE")
++#pragma pop_macro("SFVM_GETSORTDEFAULTS")
++#pragma pop_macro("SFVM_GETNOTIFY")
++#pragma pop_macro("SFVM_BACKGROUNDENUMDONE")
++#pragma pop_macro("SFVM_ADDPROPERTYPAGES")
++#pragma pop_macro("SFVM_THISIDLIST")
++#pragma pop_macro("SFVM_SETISFV")
++#pragma pop_macro("SFVM_DIDDRAGDROP")
++#pragma pop_macro("SFVM_BACKGROUNDENUM")
++#pragma pop_macro("SFVM_UPDATESTATUSBAR")
++#pragma pop_macro("SFVM_UNMERGEMENU")
++#pragma pop_macro("SFVM_DEFVIEWMODE")
++#pragma pop_macro("SFVM_DEFITEMCOUNT")
++#pragma pop_macro("SFVM_QUERYFSNOTIFY")
++#pragma pop_macro("SFVM_COLUMNCLICK")
++#pragma pop_macro("SFVM_GETDETAILSOF")
++#pragma pop_macro("SFVM_WINDOWCREATED")
++#pragma pop_macro("SFVM_FSNOTIFY")
++#pragma pop_macro("SFVM_INITMENUPOPUP")
++#pragma pop_macro("SFVM_GETBUTTONS")
++#pragma pop_macro("SFVM_GETBUTTONINFO")
++#pragma pop_macro("SFVM_GETTOOLTIPTEXT")
++#pragma pop_macro("SFVM_GETHELPTEXT")
++#pragma pop_macro("SFVM_INVOKECOMMAND")
++#pragma pop_macro("SFVM_MERGEMENU")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SFVS_SELECT_NONE")
++#undef SFVS_SELECT_NONE
++#pragma push_macro("SFVS_SELECT_ALLITEMS")
++#undef SFVS_SELECT_ALLITEMS
++#pragma push_macro("SFVS_SELECT_INVERT")
++#undef SFVS_SELECT_INVERT
++enum SFVS_SELECT : int
++{
++    SFVS_SELECT_NONE = 0,
++    SFVS_SELECT_ALLITEMS = 1,
++    SFVS_SELECT_INVERT = 2,
++};
++#pragma pop_macro("SFVS_SELECT_INVERT")
++#pragma pop_macro("SFVS_SELECT_ALLITEMS")
++#pragma pop_macro("SFVS_SELECT_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DFM_MERGECONTEXTMENU")
++#undef DFM_MERGECONTEXTMENU
++#pragma push_macro("DFM_INVOKECOMMAND")
++#undef DFM_INVOKECOMMAND
++#pragma push_macro("DFM_GETHELPTEXT")
++#undef DFM_GETHELPTEXT
++#pragma push_macro("DFM_WM_MEASUREITEM")
++#undef DFM_WM_MEASUREITEM
++#pragma push_macro("DFM_WM_DRAWITEM")
++#undef DFM_WM_DRAWITEM
++#pragma push_macro("DFM_WM_INITMENUPOPUP")
++#undef DFM_WM_INITMENUPOPUP
++#pragma push_macro("DFM_VALIDATECMD")
++#undef DFM_VALIDATECMD
++#pragma push_macro("DFM_MERGECONTEXTMENU_TOP")
++#undef DFM_MERGECONTEXTMENU_TOP
++#pragma push_macro("DFM_GETHELPTEXTW")
++#undef DFM_GETHELPTEXTW
++#pragma push_macro("DFM_INVOKECOMMANDEX")
++#undef DFM_INVOKECOMMANDEX
++#pragma push_macro("DFM_MAPCOMMANDNAME")
++#undef DFM_MAPCOMMANDNAME
++#pragma push_macro("DFM_GETDEFSTATICID")
++#undef DFM_GETDEFSTATICID
++#pragma push_macro("DFM_GETVERBW")
++#undef DFM_GETVERBW
++#pragma push_macro("DFM_GETVERBA")
++#undef DFM_GETVERBA
++#pragma push_macro("DFM_MERGECONTEXTMENU_BOTTOM")
++#undef DFM_MERGECONTEXTMENU_BOTTOM
++#pragma push_macro("DFM_MODIFYQCMFLAGS")
++#undef DFM_MODIFYQCMFLAGS
++enum DFM_MESSAGE_ID : int
++{
++    DFM_MERGECONTEXTMENU = 1,
++    DFM_INVOKECOMMAND = 2,
++    DFM_GETHELPTEXT = 5,
++    DFM_WM_MEASUREITEM = 6,
++    DFM_WM_DRAWITEM = 7,
++    DFM_WM_INITMENUPOPUP = 8,
++    DFM_VALIDATECMD = 9,
++    DFM_MERGECONTEXTMENU_TOP = 10,
++    DFM_GETHELPTEXTW = 11,
++    DFM_INVOKECOMMANDEX = 12,
++    DFM_MAPCOMMANDNAME = 13,
++    DFM_GETDEFSTATICID = 14,
++    DFM_GETVERBW = 15,
++    DFM_GETVERBA = 16,
++    DFM_MERGECONTEXTMENU_BOTTOM = 17,
++    DFM_MODIFYQCMFLAGS = 18,
++};
++#pragma pop_macro("DFM_MODIFYQCMFLAGS")
++#pragma pop_macro("DFM_MERGECONTEXTMENU_BOTTOM")
++#pragma pop_macro("DFM_GETVERBA")
++#pragma pop_macro("DFM_GETVERBW")
++#pragma pop_macro("DFM_GETDEFSTATICID")
++#pragma pop_macro("DFM_MAPCOMMANDNAME")
++#pragma pop_macro("DFM_INVOKECOMMANDEX")
++#pragma pop_macro("DFM_GETHELPTEXTW")
++#pragma pop_macro("DFM_MERGECONTEXTMENU_TOP")
++#pragma pop_macro("DFM_VALIDATECMD")
++#pragma pop_macro("DFM_WM_INITMENUPOPUP")
++#pragma pop_macro("DFM_WM_DRAWITEM")
++#pragma pop_macro("DFM_WM_MEASUREITEM")
++#pragma pop_macro("DFM_GETHELPTEXT")
++#pragma pop_macro("DFM_INVOKECOMMAND")
++#pragma pop_macro("DFM_MERGECONTEXTMENU")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DFM_CMD_DELETE")
++#undef DFM_CMD_DELETE
++#pragma push_macro("DFM_CMD_MOVE")
++#undef DFM_CMD_MOVE
++#pragma push_macro("DFM_CMD_COPY")
++#undef DFM_CMD_COPY
++#pragma push_macro("DFM_CMD_LINK")
++#undef DFM_CMD_LINK
++#pragma push_macro("DFM_CMD_PROPERTIES")
++#undef DFM_CMD_PROPERTIES
++#pragma push_macro("DFM_CMD_NEWFOLDER")
++#undef DFM_CMD_NEWFOLDER
++#pragma push_macro("DFM_CMD_PASTE")
++#undef DFM_CMD_PASTE
++#pragma push_macro("DFM_CMD_VIEWLIST")
++#undef DFM_CMD_VIEWLIST
++#pragma push_macro("DFM_CMD_VIEWDETAILS")
++#undef DFM_CMD_VIEWDETAILS
++#pragma push_macro("DFM_CMD_PASTELINK")
++#undef DFM_CMD_PASTELINK
++#pragma push_macro("DFM_CMD_PASTESPECIAL")
++#undef DFM_CMD_PASTESPECIAL
++#pragma push_macro("DFM_CMD_MODALPROP")
++#undef DFM_CMD_MODALPROP
++#pragma push_macro("DFM_CMD_RENAME")
++#undef DFM_CMD_RENAME
++enum DFM_CMD : int
++{
++    DFM_CMD_DELETE = -1,
++    DFM_CMD_MOVE = -2,
++    DFM_CMD_COPY = -3,
++    DFM_CMD_LINK = -4,
++    DFM_CMD_PROPERTIES = -5,
++    DFM_CMD_NEWFOLDER = -6,
++    DFM_CMD_PASTE = -7,
++    DFM_CMD_VIEWLIST = -8,
++    DFM_CMD_VIEWDETAILS = -9,
++    DFM_CMD_PASTELINK = -10,
++    DFM_CMD_PASTESPECIAL = -11,
++    DFM_CMD_MODALPROP = -12,
++    DFM_CMD_RENAME = -13,
++};
++#pragma pop_macro("DFM_CMD_RENAME")
++#pragma pop_macro("DFM_CMD_MODALPROP")
++#pragma pop_macro("DFM_CMD_PASTESPECIAL")
++#pragma pop_macro("DFM_CMD_PASTELINK")
++#pragma pop_macro("DFM_CMD_VIEWDETAILS")
++#pragma pop_macro("DFM_CMD_VIEWLIST")
++#pragma pop_macro("DFM_CMD_PASTE")
++#pragma pop_macro("DFM_CMD_NEWFOLDER")
++#pragma pop_macro("DFM_CMD_PROPERTIES")
++#pragma pop_macro("DFM_CMD_LINK")
++#pragma pop_macro("DFM_CMD_COPY")
++#pragma pop_macro("DFM_CMD_MOVE")
++#pragma pop_macro("DFM_CMD_DELETE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PID_IS_URL")
++#undef PID_IS_URL
++#pragma push_macro("PID_IS_NAME")
++#undef PID_IS_NAME
++#pragma push_macro("PID_IS_WORKINGDIR")
++#undef PID_IS_WORKINGDIR
++#pragma push_macro("PID_IS_HOTKEY")
++#undef PID_IS_HOTKEY
++#pragma push_macro("PID_IS_SHOWCMD")
++#undef PID_IS_SHOWCMD
++#pragma push_macro("PID_IS_ICONINDEX")
++#undef PID_IS_ICONINDEX
++#pragma push_macro("PID_IS_ICONFILE")
++#undef PID_IS_ICONFILE
++#pragma push_macro("PID_IS_WHATSNEW")
++#undef PID_IS_WHATSNEW
++#pragma push_macro("PID_IS_AUTHOR")
++#undef PID_IS_AUTHOR
++#pragma push_macro("PID_IS_DESCRIPTION")
++#undef PID_IS_DESCRIPTION
++#pragma push_macro("PID_IS_COMMENT")
++#undef PID_IS_COMMENT
++#pragma push_macro("PID_IS_ROAMED")
++#undef PID_IS_ROAMED
++enum PID_IS : int
++{
++    PID_IS_URL = 2,
++    PID_IS_NAME = 4,
++    PID_IS_WORKINGDIR = 5,
++    PID_IS_HOTKEY = 6,
++    PID_IS_SHOWCMD = 7,
++    PID_IS_ICONINDEX = 8,
++    PID_IS_ICONFILE = 9,
++    PID_IS_WHATSNEW = 10,
++    PID_IS_AUTHOR = 11,
++    PID_IS_DESCRIPTION = 12,
++    PID_IS_COMMENT = 13,
++    PID_IS_ROAMED = 15,
++};
++#pragma pop_macro("PID_IS_ROAMED")
++#pragma pop_macro("PID_IS_COMMENT")
++#pragma pop_macro("PID_IS_DESCRIPTION")
++#pragma pop_macro("PID_IS_AUTHOR")
++#pragma pop_macro("PID_IS_WHATSNEW")
++#pragma pop_macro("PID_IS_ICONFILE")
++#pragma pop_macro("PID_IS_ICONINDEX")
++#pragma pop_macro("PID_IS_SHOWCMD")
++#pragma pop_macro("PID_IS_HOTKEY")
++#pragma pop_macro("PID_IS_WORKINGDIR")
++#pragma pop_macro("PID_IS_NAME")
++#pragma pop_macro("PID_IS_URL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PID_INTSITE_WHATSNEW")
++#undef PID_INTSITE_WHATSNEW
++#pragma push_macro("PID_INTSITE_AUTHOR")
++#undef PID_INTSITE_AUTHOR
++#pragma push_macro("PID_INTSITE_LASTVISIT")
++#undef PID_INTSITE_LASTVISIT
++#pragma push_macro("PID_INTSITE_LASTMOD")
++#undef PID_INTSITE_LASTMOD
++#pragma push_macro("PID_INTSITE_VISITCOUNT")
++#undef PID_INTSITE_VISITCOUNT
++#pragma push_macro("PID_INTSITE_DESCRIPTION")
++#undef PID_INTSITE_DESCRIPTION
++#pragma push_macro("PID_INTSITE_COMMENT")
++#undef PID_INTSITE_COMMENT
++#pragma push_macro("PID_INTSITE_FLAGS")
++#undef PID_INTSITE_FLAGS
++#pragma push_macro("PID_INTSITE_CONTENTLEN")
++#undef PID_INTSITE_CONTENTLEN
++#pragma push_macro("PID_INTSITE_CONTENTCODE")
++#undef PID_INTSITE_CONTENTCODE
++#pragma push_macro("PID_INTSITE_RECURSE")
++#undef PID_INTSITE_RECURSE
++#pragma push_macro("PID_INTSITE_WATCH")
++#undef PID_INTSITE_WATCH
++#pragma push_macro("PID_INTSITE_SUBSCRIPTION")
++#undef PID_INTSITE_SUBSCRIPTION
++#pragma push_macro("PID_INTSITE_URL")
++#undef PID_INTSITE_URL
++#pragma push_macro("PID_INTSITE_TITLE")
++#undef PID_INTSITE_TITLE
++#pragma push_macro("PID_INTSITE_CODEPAGE")
++#undef PID_INTSITE_CODEPAGE
++#pragma push_macro("PID_INTSITE_TRACKING")
++#undef PID_INTSITE_TRACKING
++#pragma push_macro("PID_INTSITE_ICONINDEX")
++#undef PID_INTSITE_ICONINDEX
++#pragma push_macro("PID_INTSITE_ICONFILE")
++#undef PID_INTSITE_ICONFILE
++#pragma push_macro("PID_INTSITE_ROAMED")
++#undef PID_INTSITE_ROAMED
++enum PID_INTSITE : int
++{
++    PID_INTSITE_WHATSNEW = 2,
++    PID_INTSITE_AUTHOR = 3,
++    PID_INTSITE_LASTVISIT = 4,
++    PID_INTSITE_LASTMOD = 5,
++    PID_INTSITE_VISITCOUNT = 6,
++    PID_INTSITE_DESCRIPTION = 7,
++    PID_INTSITE_COMMENT = 8,
++    PID_INTSITE_FLAGS = 9,
++    PID_INTSITE_CONTENTLEN = 10,
++    PID_INTSITE_CONTENTCODE = 11,
++    PID_INTSITE_RECURSE = 12,
++    PID_INTSITE_WATCH = 13,
++    PID_INTSITE_SUBSCRIPTION = 14,
++    PID_INTSITE_URL = 15,
++    PID_INTSITE_TITLE = 16,
++    PID_INTSITE_CODEPAGE = 18,
++    PID_INTSITE_TRACKING = 19,
++    PID_INTSITE_ICONINDEX = 20,
++    PID_INTSITE_ICONFILE = 21,
++    PID_INTSITE_ROAMED = 34,
++};
++#pragma pop_macro("PID_INTSITE_ROAMED")
++#pragma pop_macro("PID_INTSITE_ICONFILE")
++#pragma pop_macro("PID_INTSITE_ICONINDEX")
++#pragma pop_macro("PID_INTSITE_TRACKING")
++#pragma pop_macro("PID_INTSITE_CODEPAGE")
++#pragma pop_macro("PID_INTSITE_TITLE")
++#pragma pop_macro("PID_INTSITE_URL")
++#pragma pop_macro("PID_INTSITE_SUBSCRIPTION")
++#pragma pop_macro("PID_INTSITE_WATCH")
++#pragma pop_macro("PID_INTSITE_RECURSE")
++#pragma pop_macro("PID_INTSITE_CONTENTCODE")
++#pragma pop_macro("PID_INTSITE_CONTENTLEN")
++#pragma pop_macro("PID_INTSITE_FLAGS")
++#pragma pop_macro("PID_INTSITE_COMMENT")
++#pragma pop_macro("PID_INTSITE_DESCRIPTION")
++#pragma pop_macro("PID_INTSITE_VISITCOUNT")
++#pragma pop_macro("PID_INTSITE_LASTMOD")
++#pragma pop_macro("PID_INTSITE_LASTVISIT")
++#pragma pop_macro("PID_INTSITE_AUTHOR")
++#pragma pop_macro("PID_INTSITE_WHATSNEW")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PIDISF_RECENTLYCHANGED")
++#undef PIDISF_RECENTLYCHANGED
++#pragma push_macro("PIDISF_CACHEDSTICKY")
++#undef PIDISF_CACHEDSTICKY
++#pragma push_macro("PIDISF_CACHEIMAGES")
++#undef PIDISF_CACHEIMAGES
++#pragma push_macro("PIDISF_FOLLOWALLLINKS")
++#undef PIDISF_FOLLOWALLLINKS
++enum [[clang::flag_enum]] PIDISF_FLAGS : int
++{
++    PIDISF_RECENTLYCHANGED = 1,
++    PIDISF_CACHEDSTICKY = 2,
++    PIDISF_CACHEIMAGES = 16,
++    PIDISF_FOLLOWALLLINKS = 32,
++};
++#pragma pop_macro("PIDISF_FOLLOWALLLINKS")
++#pragma pop_macro("PIDISF_CACHEIMAGES")
++#pragma pop_macro("PIDISF_CACHEDSTICKY")
++#pragma pop_macro("PIDISF_RECENTLYCHANGED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PIDISM_GLOBAL")
++#undef PIDISM_GLOBAL
++#pragma push_macro("PIDISM_WATCH")
++#undef PIDISM_WATCH
++#pragma push_macro("PIDISM_DONTWATCH")
++#undef PIDISM_DONTWATCH
++enum PIDISM_OPTIONS : int
++{
++    PIDISM_GLOBAL = 0,
++    PIDISM_WATCH = 1,
++    PIDISM_DONTWATCH = 2,
++};
++#pragma pop_macro("PIDISM_DONTWATCH")
++#pragma pop_macro("PIDISM_WATCH")
++#pragma pop_macro("PIDISM_GLOBAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PIDISR_UP_TO_DATE")
++#undef PIDISR_UP_TO_DATE
++#pragma push_macro("PIDISR_NEEDS_ADD")
++#undef PIDISR_NEEDS_ADD
++#pragma push_macro("PIDISR_NEEDS_UPDATE")
++#undef PIDISR_NEEDS_UPDATE
++#pragma push_macro("PIDISR_NEEDS_DELETE")
++#undef PIDISR_NEEDS_DELETE
++enum PIDISR_INFO : int
++{
++    PIDISR_UP_TO_DATE = 0,
++    PIDISR_NEEDS_ADD = 1,
++    PIDISR_NEEDS_UPDATE = 2,
++    PIDISR_NEEDS_DELETE = 3,
++};
++#pragma pop_macro("PIDISR_NEEDS_DELETE")
++#pragma pop_macro("PIDISR_NEEDS_UPDATE")
++#pragma pop_macro("PIDISR_NEEDS_ADD")
++#pragma pop_macro("PIDISR_UP_TO_DATE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SSF_SHOWALLOBJECTS")
++#undef SSF_SHOWALLOBJECTS
++#pragma push_macro("SSF_SHOWEXTENSIONS")
++#undef SSF_SHOWEXTENSIONS
++#pragma push_macro("SSF_HIDDENFILEEXTS")
++#undef SSF_HIDDENFILEEXTS
++#pragma push_macro("SSF_SERVERADMINUI")
++#undef SSF_SERVERADMINUI
++#pragma push_macro("SSF_SHOWCOMPCOLOR")
++#undef SSF_SHOWCOMPCOLOR
++#pragma push_macro("SSF_SORTCOLUMNS")
++#undef SSF_SORTCOLUMNS
++#pragma push_macro("SSF_SHOWSYSFILES")
++#undef SSF_SHOWSYSFILES
++#pragma push_macro("SSF_DOUBLECLICKINWEBVIEW")
++#undef SSF_DOUBLECLICKINWEBVIEW
++#pragma push_macro("SSF_SHOWATTRIBCOL")
++#undef SSF_SHOWATTRIBCOL
++#pragma push_macro("SSF_DESKTOPHTML")
++#undef SSF_DESKTOPHTML
++#pragma push_macro("SSF_WIN95CLASSIC")
++#undef SSF_WIN95CLASSIC
++#pragma push_macro("SSF_DONTPRETTYPATH")
++#undef SSF_DONTPRETTYPATH
++#pragma push_macro("SSF_SHOWINFOTIP")
++#undef SSF_SHOWINFOTIP
++#pragma push_macro("SSF_MAPNETDRVBUTTON")
++#undef SSF_MAPNETDRVBUTTON
++#pragma push_macro("SSF_NOCONFIRMRECYCLE")
++#undef SSF_NOCONFIRMRECYCLE
++#pragma push_macro("SSF_HIDEICONS")
++#undef SSF_HIDEICONS
++#pragma push_macro("SSF_FILTER")
++#undef SSF_FILTER
++#pragma push_macro("SSF_WEBVIEW")
++#undef SSF_WEBVIEW
++#pragma push_macro("SSF_SHOWSUPERHIDDEN")
++#undef SSF_SHOWSUPERHIDDEN
++#pragma push_macro("SSF_SEPPROCESS")
++#undef SSF_SEPPROCESS
++#pragma push_macro("SSF_NONETCRAWLING")
++#undef SSF_NONETCRAWLING
++#pragma push_macro("SSF_STARTPANELON")
++#undef SSF_STARTPANELON
++#pragma push_macro("SSF_SHOWSTARTPAGE")
++#undef SSF_SHOWSTARTPAGE
++#pragma push_macro("SSF_AUTOCHECKSELECT")
++#undef SSF_AUTOCHECKSELECT
++#pragma push_macro("SSF_ICONSONLY")
++#undef SSF_ICONSONLY
++#pragma push_macro("SSF_SHOWTYPEOVERLAY")
++#undef SSF_SHOWTYPEOVERLAY
++#pragma push_macro("SSF_SHOWSTATUSBAR")
++#undef SSF_SHOWSTATUSBAR
++enum [[clang::flag_enum]] SSF_MASK : unsigned int
++{
++    SSF_SHOWALLOBJECTS = 1U,
++    SSF_SHOWEXTENSIONS = 2U,
++    SSF_HIDDENFILEEXTS = 4U,
++    SSF_SERVERADMINUI = 4U,
++    SSF_SHOWCOMPCOLOR = 8U,
++    SSF_SORTCOLUMNS = 16U,
++    SSF_SHOWSYSFILES = 32U,
++    SSF_DOUBLECLICKINWEBVIEW = 128U,
++    SSF_SHOWATTRIBCOL = 256U,
++    SSF_DESKTOPHTML = 512U,
++    SSF_WIN95CLASSIC = 1024U,
++    SSF_DONTPRETTYPATH = 2048U,
++    SSF_SHOWINFOTIP = 8192U,
++    SSF_MAPNETDRVBUTTON = 4096U,
++    SSF_NOCONFIRMRECYCLE = 32768U,
++    SSF_HIDEICONS = 16384U,
++    SSF_FILTER = 65536U,
++    SSF_WEBVIEW = 131072U,
++    SSF_SHOWSUPERHIDDEN = 262144U,
++    SSF_SEPPROCESS = 524288U,
++    SSF_NONETCRAWLING = 1048576U,
++    SSF_STARTPANELON = 2097152U,
++    SSF_SHOWSTARTPAGE = 4194304U,
++    SSF_AUTOCHECKSELECT = 8388608U,
++    SSF_ICONSONLY = 16777216U,
++    SSF_SHOWTYPEOVERLAY = 33554432U,
++    SSF_SHOWSTATUSBAR = 67108864U,
++};
++#pragma pop_macro("SSF_SHOWSTATUSBAR")
++#pragma pop_macro("SSF_SHOWTYPEOVERLAY")
++#pragma pop_macro("SSF_ICONSONLY")
++#pragma pop_macro("SSF_AUTOCHECKSELECT")
++#pragma pop_macro("SSF_SHOWSTARTPAGE")
++#pragma pop_macro("SSF_STARTPANELON")
++#pragma pop_macro("SSF_NONETCRAWLING")
++#pragma pop_macro("SSF_SEPPROCESS")
++#pragma pop_macro("SSF_SHOWSUPERHIDDEN")
++#pragma pop_macro("SSF_WEBVIEW")
++#pragma pop_macro("SSF_FILTER")
++#pragma pop_macro("SSF_HIDEICONS")
++#pragma pop_macro("SSF_NOCONFIRMRECYCLE")
++#pragma pop_macro("SSF_MAPNETDRVBUTTON")
++#pragma pop_macro("SSF_SHOWINFOTIP")
++#pragma pop_macro("SSF_DONTPRETTYPATH")
++#pragma pop_macro("SSF_WIN95CLASSIC")
++#pragma pop_macro("SSF_DESKTOPHTML")
++#pragma pop_macro("SSF_SHOWATTRIBCOL")
++#pragma pop_macro("SSF_DOUBLECLICKINWEBVIEW")
++#pragma pop_macro("SSF_SHOWSYSFILES")
++#pragma pop_macro("SSF_SORTCOLUMNS")
++#pragma pop_macro("SSF_SHOWCOMPCOLOR")
++#pragma pop_macro("SSF_SERVERADMINUI")
++#pragma pop_macro("SSF_HIDDENFILEEXTS")
++#pragma pop_macro("SSF_SHOWEXTENSIONS")
++#pragma pop_macro("SSF_SHOWALLOBJECTS")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

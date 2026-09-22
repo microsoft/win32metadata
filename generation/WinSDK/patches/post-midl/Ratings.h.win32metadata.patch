@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
-index c68c36d24beba52b547c73ff7ba219ce4c4c26ec..54bc54a24a4f9c6d09aa97dbdba20943d8f119a1 100644
+index c68c36d24b..5127348d77 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
 @@ -8,6 +8,7 @@
@@ -14,18 +14,31 @@ index c68c36d24beba52b547c73ff7ba219ce4c4c26ec..54bc54a24a4f9c6d09aa97dbdba20943
  #include <winerror.h>
  #include <shlwapi.h>
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++
++
  STDAPI RatingEnable(HWND hwndParent, LPCSTR pszUsername, BOOL fEnable);
  STDAPI RatingEnableW(HWND hwndParent, LPCWSTR pszUsername, BOOL fEnable);
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++
++
  STDAPI RatingCheckUserAccess(_In_opt_ LPCSTR pszUsername, _In_opt_ LPCSTR pszURL, _In_opt_ LPCSTR pszRatingInfo,
      _In_reads_bytes_opt_(cbData) LPBYTE pData, DWORD cbData, _Out_opt_ void **ppRatingDetails);
  STDAPI RatingCheckUserAccessW(_In_opt_ LPCWSTR pszUsername, _In_opt_ LPCWSTR pszURL, _In_opt_ LPCWSTR pszRatingInfo,
      _In_reads_bytes_opt_(cbData) LPBYTE pData, DWORD cbData, _Out_opt_ void **ppRatingDetails);
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++
++
  STDAPI RatingAccessDeniedDialog(HWND hDlg, _In_opt_ LPCSTR pszUsername, LPCSTR pszContentDescription, _Out_ void *pRatingDetails);
  STDAPI RatingAccessDeniedDialogW(HWND hDlg, _In_opt_ LPCWSTR pszUsername, LPCWSTR pszContentDescription, _Out_ void *pRatingDetails);
  STDAPI RatingAccessDeniedDialog2(HWND hDlg, _In_opt_ LPCSTR pszUsername, _Out_ void *pRatingDetails);
+@@ -29,10 +36,10 @@ STDAPI RatingFreeDetails(_In_opt_ void *pRatingDetails);
+ STDAPI RatingObtainCancel(HANDLE hRatingObtainQuery);
+ STDAPI RatingObtainQuery(LPCSTR pszTargetUrl, DWORD dwUserData,
+     void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCSTR pszRating, void *lpvRatingDetails),
+-    _Out_opt_ HANDLE *phRatingObtainQuery);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
+ STDAPI RatingObtainQueryW(LPCWSTR pszTargetUrl, DWORD dwUserData,
+     void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCWSTR pszRating, void *lpvRatingDetails),
+-    _Out_opt_ HANDLE *phRatingObtainQuery);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
+ STDAPI RatingSetupUI(HWND hDlg, LPCSTR pszUsername);
+ STDAPI RatingSetupUIW(HWND hDlg, LPCWSTR pszUsername);
+ #ifdef _INC_COMMCTRL

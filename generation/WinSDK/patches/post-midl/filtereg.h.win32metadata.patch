@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h b/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h
-index ec5334e9dccaf866b7fa6d24cd733d4893dce365..bf94a949f8b981db69c5894fbd27490ff744c50f 100644
+index ec5334e9dc..3dde29bbd3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/filtereg.h
 @@ -75,6 +75,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index ec5334e9dccaf866b7fa6d24cd733d4893dce365..bf94a949f8b981db69c5894fbd27490f
  /* [unique][helpstring][uuid][object] */ 
  
 -typedef struct _FILTERED_DATA_SOURCES
-+typedef struct _Windows_SupportedOS_Windows7_ _FILTERED_DATA_SOURCES
++typedef struct  _FILTERED_DATA_SOURCES
      {
      const WCHAR *pwcsExtension;
      const WCHAR *pwcsMime;

@@ -1,7 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
+index 04b14e79ab..748852f87b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h
-@@ -19,6 +19,7 @@
+@@ -20,6 +20,7 @@
  
  #include "rpc.h"
  #include "rpcndr.h"
@@ -9,7 +10,91 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h b/generatio
  
  #ifndef __RPCNDR_H_VERSION__
  #error this stub requires an updated version of <rpcndr.h>
-@@ -2177,7 +2178,7 @@
+@@ -148,7 +149,7 @@ EXTERN_C const IID IID_IMFASFContentInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B1DCA5CD-D5DA-4451-8E9E-DB5C59914EAD")
++    MIDL_INTERFACE("B1DCA5CD-D5DA-4451-8E9E-DB5C59914EAD") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFContentInfo : public IUnknown
+     {
+     public:
+@@ -321,7 +322,7 @@ EXTERN_C const IID IID_IMFASFContentInfo;
+ /* interface __MIDL_itf_wmcontainer_0000_0001 */
+ /* [local] */ 
+ 
+-STDAPI MFCreateASFContentInfo( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFContentInfo( 
+         /* out */     IMFASFContentInfo     **ppIContentInfo);
+ 
+ 
+@@ -342,7 +343,7 @@ EXTERN_C const IID IID_IMFASFProfile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D267BF6A-028B-4e0d-903D-43F0EF82D0D4")
++    MIDL_INTERFACE("D267BF6A-028B-4e0d-903D-43F0EF82D0D4") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFProfile : public IMFAttributes
+     {
+     public:
+@@ -935,7 +936,7 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9E8AE8D2-DBBD-4200-9ACA-06E6DF484913")
++    MIDL_INTERFACE("9E8AE8D2-DBBD-4200-9ACA-06E6DF484913") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFStreamConfig : public IMFAttributes
+     {
+     public:
+@@ -1450,7 +1451,7 @@ EXTERN_C const IID IID_IMFASFMutualExclusion;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("12558291-E399-11D5-BC2A-00B0D0F3F4AB")
++    MIDL_INTERFACE("12558291-E399-11D5-BC2A-00B0D0F3F4AB") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFMutualExclusion : public IUnknown
+     {
+     public:
+@@ -1657,7 +1658,7 @@ EXTERN_C const IID IID_IMFASFStreamPrioritization;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("699bdc27-bbaf-49ff-8e38-9c39c9b5e088")
++    MIDL_INTERFACE("699bdc27-bbaf-49ff-8e38-9c39c9b5e088") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFStreamPrioritization : public IUnknown
+     {
+     public:
+@@ -1838,7 +1839,7 @@ EXTERN_C const IID IID_IMFASFIndexer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("53590F48-DC3B-4297-813F-787761AD7B3E")
++    MIDL_INTERFACE("53590F48-DC3B-4297-813F-787761AD7B3E") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFIndexer : public IUnknown
+     {
+     public:
+@@ -2117,9 +2118,9 @@ EXTERN_C const IID IID_IMFASFIndexer;
+ /* interface __MIDL_itf_wmcontainer_0000_0006 */
+ /* [local] */ 
+ 
+-STDAPI MFCreateASFIndexer( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFIndexer( 
+         /* out */     IMFASFIndexer         **ppIIndexer);
+-STDAPI MFCreateASFIndexerByteStream( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFIndexerByteStream( 
+         /* in */      IMFByteStream         *pIContentByteStream,
+         /* in */      QWORD                  cbIndexStartOffset,
+         /* out */     IMFByteStream        **pIIndexByteStream);
+@@ -2139,7 +2140,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("12558295-E399-11D5-BC2A-00B0D0F3F4AB")
++    MIDL_INTERFACE("12558295-E399-11D5-BC2A-00B0D0F3F4AB") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFSplitter : public IUnknown
+     {
+     public:
+@@ -2177,7 +2178,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
          
          virtual HRESULT STDMETHODCALLTYPE GetNextSample( 
              /* [annotation][out] */ 
@@ -18,7 +103,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h b/generatio
              /* [annotation][out] */ 
              _Out_  WORD *pwStreamNumber,
              /* [annotation][out] */ 
-@@ -2262,7 +2263,7 @@
+@@ -2262,7 +2263,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
          HRESULT ( STDMETHODCALLTYPE *GetNextSample )( 
              IMFASFSplitter * This,
              /* [annotation][out] */ 
@@ -27,3 +112,118 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcontainer.h b/generatio
              /* [annotation][out] */ 
              _Out_  WORD *pwStreamNumber,
              /* [annotation][out] */ 
+@@ -2342,7 +2343,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
+ /* interface __MIDL_itf_wmcontainer_0000_0007 */
+ /* [local] */ 
+ 
+-STDAPI MFCreateASFSplitter( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFSplitter( 
+         /* out */     IMFASFSplitter        **ppISplitter);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+@@ -2390,12 +2391,12 @@ EXTERN_GUID(MF_PD_ASF_INFO_HAS_VIDEO, 0x80e62296, 0x2296, 0x4a44, 0xb3, 0x1c, 0x
+ EXTERN_GUID(MF_PD_ASF_INFO_HAS_NON_AUDIO_VIDEO, 0x80e62297, 0x2296, 0x4a44, 0xb3, 0x1c, 0xd1, 0x3, 0xc6, 0xfe, 0xd2, 0x3c);
+ EXTERN_GUID(MF_ASFPROFILE_MINPACKETSIZE, 0x22587626, 0x47de, 0x4168, 0x87, 0xf5, 0xb5, 0xaa, 0x9b, 0x12, 0xa8, 0xf0);
+ EXTERN_GUID(MF_ASFPROFILE_MAXPACKETSIZE, 0x22587627, 0x47de, 0x4168, 0x87, 0xf5, 0xb5, 0xaa, 0x9b, 0x12, 0xa8, 0xf0);
+-STDAPI MFCreateASFProfile( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFProfile( 
+         /* out */     IMFASFProfile         **ppIProfile);
+-STDAPI MFCreateASFProfileFromPresentationDescriptor( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFProfileFromPresentationDescriptor( 
+         /* in  */     IMFPresentationDescriptor  *pIPD,
+         /* out */     IMFASFProfile             **ppIProfile);
+-STDAPI MFCreatePresentationDescriptorFromASFProfile( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreatePresentationDescriptorFromASFProfile( 
+         /* in  */     IMFASFProfile              *pIProfile,
+         /* out */     IMFPresentationDescriptor **ppIPD);
+ EXTERN_GUID(MF_ASFSTREAMCONFIG_LEAKYBUCKET1, 0xc69b5901, 0xea1a, 0x4c9b, 0xb6, 0x92, 0xe2, 0xa0, 0xd2, 0x9a, 0x8a, 0xdd);
+@@ -2455,7 +2456,7 @@ EXTERN_C const IID IID_IMFASFMultiplexer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("57BDD80A-9B38-4838-B737-C58F670D7D4F")
++    MIDL_INTERFACE("57BDD80A-9B38-4838-B737-C58F670D7D4F") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFMultiplexer : public IUnknown
+     {
+     public:
+@@ -2650,7 +2651,7 @@ EXTERN_C const IID IID_IMFASFMultiplexer;
+ /* interface __MIDL_itf_wmcontainer_0000_0008 */
+ /* [local] */ 
+ 
+-STDAPI MFCreateASFMultiplexer( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFMultiplexer( 
+         /* out */     IMFASFMultiplexer     **ppIMultiplexer);
+ #if (WINVER >= _WIN32_WINNT_WIN7) 
+ EXTERN_GUID( MFASFINDEXER_TYPE_TIMECODE, 0x49815231, 0x6bad, 0x44fd, 0x81, 0xa, 0x3f, 0x60, 0x98, 0x4e, 0xc7, 0xfd );
+@@ -2690,7 +2691,7 @@ EXTERN_C const IID IID_IMFASFStreamSelector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d01bad4a-4fa0-4a60-9349-c27e62da9d41")
++    MIDL_INTERFACE("d01bad4a-4fa0-4a60-9349-c27e62da9d41") _Windows_SupportedOS_WindowsVista_ 
+     IMFASFStreamSelector : public IUnknown
+     {
+     public:
+@@ -2994,37 +2995,37 @@ EXTERN_C const IID IID_IMFASFStreamSelector;
+ /* interface __MIDL_itf_wmcontainer_0000_0009 */
+ /* [local] */ 
+ 
+-STDAPI MFCreateASFStreamSelector( 
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFStreamSelector( 
+     /* in */ IMFASFProfile *pIASFProfile, 
+     /* out */ IMFASFStreamSelector **ppSelector );
+-STDAPI
++_Windows_SupportedOS_WindowsVista_ STDAPI
+ MFCreateASFMediaSink(
+     IMFByteStream *pIByteStream,
+     IMFMediaSink** ppIMediaSink
+     );
+-STDAPI MFCreateASFMediaSinkActivate(
++_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateASFMediaSinkActivate(
+     LPCWSTR pwszFileName,
+     IMFASFContentInfo *pContentInfo,
+     IMFActivate** ppIActivate
+     );
+-HRESULT STDMETHODCALLTYPE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("mf.dll") HRESULT STDMETHODCALLTYPE
+ MFCreateWMVEncoderActivate(
+     IMFMediaType * pMediaType, 
+     IPropertyStore * pEncodingConfigurationProperties, 
+     IMFActivate ** ppActivate 
+     );
+-HRESULT STDMETHODCALLTYPE
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("mf.dll") HRESULT STDMETHODCALLTYPE
+ MFCreateWMAEncoderActivate(
+     IMFMediaType * pMediaType, 
+     IPropertyStore * pEncodingConfigurationProperties, 
+     IMFActivate ** ppActivate 
+     );
+-STDAPI
++_Windows_SupportedOS_Windows7_ STDAPI
+ MFCreateASFStreamingMediaSink(
+     IMFByteStream *pIByteStream,
+     IMFMediaSink** ppIMediaSink
+     );
+-STDAPI MFCreateASFStreamingMediaSinkActivate(
++_Windows_SupportedOS_Windows7_ STDAPI MFCreateASFStreamingMediaSinkActivate(
+     IMFActivate *pByteStreamActivate,
+     IMFASFContentInfo *pContentInfo,
+     IMFActivate** ppIActivate
+@@ -3069,7 +3070,7 @@ EXTERN_C const IID IID_IMFDRMNetHelper;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3D1FF0EA-679A-4190-8D46-7FA69E8C7E15")
++    MIDL_INTERFACE("3D1FF0EA-679A-4190-8D46-7FA69E8C7E15") _Windows_SupportedOS_Windows7_ 
+     IMFDRMNetHelper : public IUnknown
+     {
+     public:
+@@ -3083,7 +3084,7 @@ EXTERN_C const IID IID_IMFDRMNetHelper;
+             /* [annotation][out] */ 
+             _Out_  DWORD *pcbLicenseResponse,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrKID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrKID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChainedLicenseResponse( 
+             /* [annotation][size_is][size_is][out] */ 

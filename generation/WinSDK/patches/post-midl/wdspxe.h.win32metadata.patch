@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
-index 662b0c9753..336bbd8280 100644
+index 662b0c9753..b48f1c1e13 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -15,7 +15,7 @@ index 662b0c9753..336bbd8280 100644
  } PXE_DHCP_MESSAGE, *PPXE_DHCP_MESSAGE;
  
 -typedef struct tagPXE_DHCPV6_OPTION
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ tagPXE_DHCPV6_OPTION
++typedef struct   tagPXE_DHCPV6_OPTION
  {
      WORD OptionCode;
      WORD DataLength;
@@ -23,14 +23,14 @@ index 662b0c9753..336bbd8280 100644
  } PXE_DHCPV6_OPTION, *PPXE_DHCPV6_OPTION;
  
 -typedef struct tagPXE_DHCPV6_MESSAGE_HEADER
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ tagPXE_DHCPV6_MESSAGE_HEADER
++typedef struct   tagPXE_DHCPV6_MESSAGE_HEADER
  {
      BYTE MessageType;
      BYTE Message[1];
  } PXE_DHCPV6_MESSAGE_HEADER, *PPXE_DHCPV6_MESSAGE_HEADER;
  
 -typedef struct tagPXE_DHCPV6_MESSAGE
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ tagPXE_DHCPV6_MESSAGE
++typedef struct   tagPXE_DHCPV6_MESSAGE
  {
      BYTE MessageType;
      BYTE TransactionIDByte1;
@@ -39,7 +39,7 @@ index 662b0c9753..336bbd8280 100644
  } PXE_DHCPV6_MESSAGE, *PPXE_DHCPV6_MESSAGE;
  
 -typedef struct tagPXE_DHCPV6_RELAY_MESSAGE
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ tagPXE_DHCPV6_RELAY_MESSAGE
++typedef struct   tagPXE_DHCPV6_RELAY_MESSAGE
  {
      BYTE MessageType;
      BYTE HopCount;
@@ -48,79 +48,198 @@ index 662b0c9753..336bbd8280 100644
  #define PXE_DHCPV6_RELAY_HOP_COUNT_LIMIT 32
  
 -typedef struct tagPXE_DHCPV6_NESTED_RELAY_MESSAGE
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ tagPXE_DHCPV6_NESTED_RELAY_MESSAGE
++typedef struct   tagPXE_DHCPV6_NESTED_RELAY_MESSAGE
  {
      //
      // A pointer to and the size of a nested RELAY-FORW message.
-@@ -278,14 +279,14 @@ PxeProviderQueryIndex (
- DWORD
+@@ -252,49 +253,49 @@ typedef ULONG PXE_PROVIDER_ATTRIBUTE;
+ //
+ // Provider Registration and Enumeration APIs
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeProviderRegister (
+     _In_ LPCWSTR pszProviderName,
+     _In_ LPCWSTR pszModulePath,
+     _In_ PXE_REG_INDEX Index,
+     _In_ BOOL bIsCritical,
+-    _Out_opt_ PHKEY phProviderKey
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_opt_ PHKEY phProviderKey
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeProviderUnRegister (
+     _In_ LPCWSTR pszProviderName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeProviderQueryIndex (
+     _In_ LPCWSTR pszProviderName,
+     _Out_ PULONG puIndex
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderEnumFirst (
 -    _Out_ HANDLE *phEnum
-+    _Win32_RAIIFree_(PxeProviderEnumClose) _Out_ HANDLE *phEnum
++    _Win32_RAIIFree_(CloseHandle, -1, 0)  _Out_ HANDLE *phEnum
      );
  
- DWORD
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderEnumNext (
      _In_ HANDLE hEnum,
 -    _Out_ PPXE_PROVIDER *ppProvider
-+    _Win32_RAIIFree_(PxeProviderFreeInfo) _Out_ PPXE_PROVIDER *ppProvider
++     _Out_ PPXE_PROVIDER *ppProvider
      );
  
- DWORD
-@@ -307,8 +308,8 @@ PXEAPI
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeProviderEnumClose (
+     _In_ HANDLE hEnum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PxeProviderFreeInfo (
+     _In_ PPXE_PROVIDER pProvider
+     );
+@@ -302,19 +303,19 @@ PxeProviderFreeInfo (
+ //
+ // Callback Registration
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
  PxeRegisterCallback (
      _In_ HANDLE hProvider,
      _In_ PXE_CALLBACK_TYPE CallbackType,
 -    _In_ PVOID pCallbackFunction,
 -    _In_opt_ PVOID pContext
-+    _Win32_Retained_ _In_ PVOID pCallbackFunction,
-+    _Win32_Retained_ _In_opt_ PVOID pContext
++     _In_ PVOID pCallbackFunction,
++     _In_opt_ PVOID pContext
      );
  
  //
+ // UDP Send/Boot Action
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeSendReply (
+     _In_ HANDLE hClientRequest,
+@@ -326,7 +327,7 @@ PxeSendReply (
+ //
+ // Notify of Async Processing
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeAsyncRecvDone (
+     _In_ HANDLE hClientRequest,
 @@ -358,6 +359,7 @@ PxeTraceV (
  //
  // Packet Allocation
  //
-+_Win32_SetLastError_
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_
  PVOID
  PXEAPI
  PxePacketAllocate (
+@@ -366,7 +368,7 @@ PxePacketAllocate (
+     _In_ ULONG uSize
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxePacketFree (
+     _In_ HANDLE hProvider,
+@@ -377,7 +379,7 @@ PxePacketFree (
+ //
+ // Provider Attributes
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeProviderSetAttribute (
+     _In_ HANDLE hProvider,
+@@ -389,7 +391,7 @@ PxeProviderSetAttribute (
+ //
+ // Dhcp Functions
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeDhcpInitialize (
+     _In_reads_bytes_(uRecvPacketLen) PVOID pRecvPacket,
 @@ -399,6 +401,8 @@ PxeDhcpInitialize (
      _Out_ PULONG puReplyPacketLen
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  DWORD
  PXEAPI
  PxeDhcpv6Initialize (
+@@ -409,7 +413,7 @@ PxeDhcpv6Initialize (
+     _Out_ PULONG pcbReplyUsed
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeDhcpAppendOption (
+     _Inout_updates_bytes_(uMaxReplyPacketLen) PVOID pReplyPacket,
 @@ -420,6 +424,8 @@ PxeDhcpAppendOption (
      _In_reads_bytes_opt_(bOptionLen) PVOID pValue
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  _Success_(return == ERROR_SUCCESS)
  DWORD
  PXEAPI
+@@ -432,7 +438,7 @@ PxeDhcpv6AppendOption (
+     _In_reads_bytes_(cbOption) PVOID pOption
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeDhcpAppendOptionRaw (
+     _Inout_updates_bytes_(uMaxReplyPacketLen) PVOID pReplyPacket,
 @@ -442,6 +448,8 @@ PxeDhcpAppendOptionRaw (
      _In_reads_bytes_(uBufferLen) PVOID pBuffer
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  _Success_(return == ERROR_SUCCESS)
  DWORD
  PXEAPI
+@@ -453,7 +461,7 @@ PxeDhcpv6AppendOptionRaw (
+     _In_reads_bytes_(cbBuffer) PVOID pBuffer
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeDhcpIsValid (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
 @@ -462,6 +470,8 @@ PxeDhcpIsValid (
      _Out_opt_ PBOOL pbPxeOptionPresent
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  DWORD
  PXEAPI
  PxeDhcpv6IsValid (
@@ -128,7 +247,7 @@ index 662b0c9753..336bbd8280 100644
      _Out_opt_ PBOOL pbPxeOptionPresent
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++_Windows_SupportedOS_Server2008_ 
  DWORD
  PXEAPI
  PxeDhcpGetOptionValue (
@@ -136,9 +255,9 @@ index 662b0c9753..336bbd8280 100644
      _Outptr_opt_result_bytebuffer_(*pbOptionLen) PVOID *ppOptionValue
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++_Windows_SupportedOS_Windows8_ 
++
++
  DWORD
  PXEAPI
  PxeDhcpv6GetOptionValue (
@@ -146,7 +265,7 @@ index 662b0c9753..336bbd8280 100644
      _Outptr_opt_result_bytebuffer_(*pwOptionLen) PVOID *ppOptionValue
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++_Windows_SupportedOS_Server2008_ 
  DWORD
  PXEAPI
  PxeDhcpGetVendorOptionValue (
@@ -154,9 +273,9 @@ index 662b0c9753..336bbd8280 100644
      _Outptr_opt_result_bytebuffer_(*pbOptionLen) PVOID *ppOptionValue
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++_Windows_SupportedOS_Windows8_ 
++
++
  DWORD
  PXEAPI
  PxeDhcpv6GetVendorOptionValue (
@@ -164,8 +283,8 @@ index 662b0c9753..336bbd8280 100644
      _Outptr_opt_result_bytebuffer_(*pwOptionLen) PVOID *ppOptionValue
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  DWORD
  PXEAPI
  PxeDhcpv6ParseRelayForw (
@@ -173,17 +292,26 @@ index 662b0c9753..336bbd8280 100644
      _Out_ PULONG pcbInnerPacket
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  DWORD
  PXEAPI
  PxeDhcpv6CreateRelayRepl (
+@@ -543,7 +565,7 @@ PxeDhcpv6CreateRelayRepl (
+ //
+ // Server Information
+ //
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeGetServerInfo (
+     _In_ PXE_GSI_TYPE uInfoType,
 @@ -551,6 +573,8 @@ PxeGetServerInfo (
      _In_ ULONG uBufferLen
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  DWORD
  PXEAPI
  PxeGetServerInfoEx (

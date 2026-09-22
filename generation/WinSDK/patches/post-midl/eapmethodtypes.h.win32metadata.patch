@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h
-index 710f1e8684a61116ff30099ba28ef9f2a3f02e62..b9b6d6d067455d027e14af3607bd170244f636d9 100644
+index 710f1e8684..e3167d2a5e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h
 @@ -12,6 +12,7 @@
@@ -15,7 +15,7 @@ index 710f1e8684a61116ff30099ba28ef9f2a3f02e62..b9b6d6d067455d027e14af3607bd1702
  
  // structure that represents EAP packet on the wire
 -typedef struct tagEapPacket
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapPacket
++typedef struct   tagEapPacket
  {
     BYTE Code;
     BYTE Id;
@@ -24,7 +24,7 @@ index 710f1e8684a61116ff30099ba28ef9f2a3f02e62..b9b6d6d067455d027e14af3607bd1702
  
  // possible values for 'code' in EAPPacket
 -enum tagEapCode
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapCode
++enum   tagEapCode
  {
     EapCodeMinimum = 1,
     EapCodeRequest = 1,

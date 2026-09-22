@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
+index 5dace4e7f5..1666ad79a5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h b/generation/W
  //
  
 -typedef enum _CLFS_MGMT_POLICY_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _CLFS_MGMT_POLICY_TYPE {
++typedef enum  _CLFS_MGMT_POLICY_TYPE {
  
      ClfsMgmtPolicyMaximumSize = 0x0,
      ClfsMgmtPolicyMinimumSize,
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h b/generation/W
  // via InstallLogPolicy (Win32) or ClfsMgmtInstallPolicy (kernel).
  //
 -typedef struct _CLFS_MGMT_POLICY {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLFS_MGMT_POLICY {
++typedef struct  _CLFS_MGMT_POLICY {
  
      //
      // Version of the structure.  Should be CLFS_MGMT_POLICY_VERSION.
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h b/generation/W
  //
  
 -typedef struct _CLFS_MGMT_NOTIFICATION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _CLFS_MGMT_NOTIFICATION
++typedef struct  _CLFS_MGMT_NOTIFICATION
  {
  
      //

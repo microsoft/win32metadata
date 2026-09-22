@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
-index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd2d66c22b 100644
+index 3557734acd..cc72d97185 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
 @@ -115,6 +115,7 @@ extern "C"{
@@ -15,16 +15,18 @@ index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd
  /* [object][helpstring][uuid] */ 
  
 -typedef struct _FILESETINFO
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _FILESETINFO
++typedef struct   _FILESETINFO
      {
      BSTR bstrRemoteFile;
      BSTR bstrLocalFile;
-@@ -169,7 +170,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
+@@ -168,8 +169,8 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("59f5553c-2031-4629-bb18-2645a6970947")
+-    MIDL_INTERFACE("59f5553c-2031-4629-bb18-2645a6970947")
 -    IBackgroundCopyJob1 : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyJob1 : public IUnknown
++    MIDL_INTERFACE("59f5553c-2031-4629-bb18-2645a6970947") _Windows_SupportedOS_WindowsXP_ 
++      IBackgroundCopyJob1 : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CancelJob( void) = 0;
@@ -37,12 +39,14 @@ index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd
      {
          CONST_VTBL struct IBackgroundCopyJob1Vtbl *lpVtbl;
      };
-@@ -363,7 +364,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs1;
+@@ -362,8 +363,8 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs1;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8baeba9d-8f1c-42c4-b82c-09ae79980d25")
+-    MIDL_INTERFACE("8baeba9d-8f1c-42c4-b82c-09ae79980d25")
 -    IEnumBackgroundCopyJobs1 : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyJobs1 : public IUnknown
++    MIDL_INTERFACE("8baeba9d-8f1c-42c4-b82c-09ae79980d25") _Windows_SupportedOS_WindowsXP_ 
++      IEnumBackgroundCopyJobs1 : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -60,16 +64,18 @@ index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd
  
  typedef 
 -enum GROUPPROP
-+enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ GROUPPROP
++enum   GROUPPROP
      {
          GROUPPROP_PRIORITY	= 0,
          GROUPPROP_REMOTEUSERID	= 1,
-@@ -524,7 +525,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
+@@ -523,8 +524,8 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("1ded80a7-53ea-424f-8a04-17fea9adc4f5")
+-    MIDL_INTERFACE("1ded80a7-53ea-424f-8a04-17fea9adc4f5")
 -    IBackgroundCopyGroup : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyGroup : public IUnknown
++    MIDL_INTERFACE("1ded80a7-53ea-424f-8a04-17fea9adc4f5") _Windows_SupportedOS_WindowsXP_ 
++      IBackgroundCopyGroup : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetProp( 
@@ -82,12 +88,14 @@ index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd
      {
          CONST_VTBL struct IBackgroundCopyGroupVtbl *lpVtbl;
      };
-@@ -828,7 +829,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyGroups;
+@@ -827,8 +828,8 @@ EXTERN_C const IID IID_IEnumBackgroundCopyGroups;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("d993e603-4aa4-47c5-8665-c20d39c2ba4f")
+-    MIDL_INTERFACE("d993e603-4aa4-47c5-8665-c20d39c2ba4f")
 -    IEnumBackgroundCopyGroups : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyGroups : public IUnknown
++    MIDL_INTERFACE("d993e603-4aa4-47c5-8665-c20d39c2ba4f") _Windows_SupportedOS_WindowsXP_ 
++      IEnumBackgroundCopyGroups : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -100,12 +108,14 @@ index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd
      {
          CONST_VTBL struct IEnumBackgroundCopyGroupsVtbl *lpVtbl;
      };
-@@ -971,7 +972,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
+@@ -970,8 +971,8 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("084f6593-3800-4e08-9b59-99fa59addf82")
+-    MIDL_INTERFACE("084f6593-3800-4e08-9b59-99fa59addf82")
 -    IBackgroundCopyCallback1 : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyCallback1 : public IUnknown
++    MIDL_INTERFACE("084f6593-3800-4e08-9b59-99fa59addf82") _Windows_SupportedOS_WindowsXP_ 
++      IBackgroundCopyCallback1 : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnStatus( 
@@ -118,12 +128,14 @@ index 3557734acdeef6e488608ad6ae1618c862c43985..a512e7f94fb3ec91134e6aeebc97a1fd
      {
          CONST_VTBL struct IBackgroundCopyCallback1Vtbl *lpVtbl;
      };
-@@ -1148,7 +1149,7 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
+@@ -1147,8 +1148,8 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8")
+-    MIDL_INTERFACE("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8")
 -    IBackgroundCopyQMgr : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyQMgr : public IUnknown
++    MIDL_INTERFACE("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8") _Windows_SupportedOS_WindowsXP_ 
++      IBackgroundCopyQMgr : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateGroup( 

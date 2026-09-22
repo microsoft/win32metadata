@@ -1,0 +1,124 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h b/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
+index b1c7fe0b7a..a4ec88d7d0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*	@doc EXTERNAL
+  *
+  *	@module TEXTSRV.H  Text Service Interface |
+@@ -113,7 +114,7 @@ enum CHANGETYPE
+  *	what actually happened for a change.
+  */
+ struct CHANGENOTIFY {
+-	DWORD	dwChangeType;				//@field TEXT changed, etc
++	_Win32_AssociatedEnum_(CHANGETYPE) DWORD	dwChangeType;				//@field TEXT changed, etc
+ 	void *	pvCookieData; 				//@field cookie for the undo action 
+ 										// associated with the change.
+ };
+@@ -185,7 +186,7 @@ public:
+ 	
+ 	//@cmember Rendering
+ 	virtual HRESULT		TxDraw(	
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,		
+ 							LONG  lindex,			
+ 							void * pvAspect,		 
+ 							DVTARGETDEVICE * ptd,									
+@@ -216,7 +217,7 @@ public:
+ 
+ 	//@cmember Setcursor
+ 	virtual HRESULT 	OnTxSetCursor(
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,		
+ 							LONG  lindex,			
+ 							void * pvAspect,		 
+ 							DVTARGETDEVICE * ptd,									
+@@ -228,7 +229,7 @@ public:
+ 
+ 	//@cmember Hit-test
+ 	virtual HRESULT 	TxQueryHitPoint(
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,		
+ 							LONG  lindex,			
+ 							void * pvAspect,		 
+ 							DVTARGETDEVICE * ptd,									
+@@ -328,7 +329,7 @@ public:
+ 	virtual BOOL		TxShowScrollBar(INT fnBar, BOOL fShow) = 0;
+ 
+ 	//@cmember Enable the scroll bar
+-	virtual BOOL		TxEnableScrollBar (INT fuSBFlags, INT fuArrowflags) = 0;
++	virtual BOOL		TxEnableScrollBar (_Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) INT fuSBFlags, INT fuArrowflags) = 0;
+ 
+ 	//@cmember Set the scroll range
+ 	virtual BOOL		TxSetScrollRange(
+@@ -369,7 +370,7 @@ public:
+ 							LPCRECT lprcClip,
+ 							HRGN hrgnUpdate, 
+ 							LPRECT lprcUpdate, 
+-							UINT fuScroll) = 0;
++							_Win32_AssociatedEnum_(SCROLL_WINDOW_FLAGS) UINT fuScroll) = 0;
+ 	
+ 	//@cmember Get mouse capture
+ 	virtual void		TxSetCapture(BOOL fCapture) = 0;
+@@ -405,7 +406,7 @@ public:
+ 	virtual HRESULT		TxGetParaFormat(const PARAFORMAT **ppPF) = 0;
+ 
+ 	//@cmember Get the background color for the window
+-	virtual COLORREF	TxGetSysColor(int nIndex) = 0;
++	virtual COLORREF	TxGetSysColor(_Win32_AssociatedEnum_(SYS_COLOR_INDEX) int nIndex) = 0;
+ 
+ 	//@cmember Get the background (either opaque or transparent)
+ 	virtual HRESULT		TxGetBackStyle(TXTBACKSTYLE *pstyle) = 0;
+@@ -438,7 +439,7 @@ public:
+ 	virtual HRESULT		TxNotify(DWORD iNotify, void *pv) = 0;
+ 
+ 	// East Asia Methods for getting the Input Context
+-	virtual HIMC		TxImmGetContext() = 0;
++	_Win32_RAIIFree_(ImmDestroyContext, -1, 0) virtual HIMC		TxImmGetContext() = 0;
+ 	virtual void		TxImmReleaseContext( HIMC himc ) = 0;
+ 
+ 	//@cmember Returns HIMETRIC size of the control bar.
+@@ -457,7 +458,7 @@ interface IRawElementProviderSimple;
+  *
+  *	@base	public | IUnknown 
+  */
+-interface DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
++interface _Windows_SupportedOS_Windows8_  DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE CreateProvider(
+ 		IRawElementProviderWindowlessSite *pSite, 
+@@ -473,7 +474,7 @@ struct UiaRect;
+  *
+  *	@base	public | IUnknown 
+  */
+-interface DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
++interface _Windows_SupportedOS_Windows8_  DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(UiaRect *pUiaRect) = 0;
+ 
+@@ -490,7 +491,7 @@ typedef int PROPERTYID;
+  *
+  *	@base	public | IUnknown 
+  */
+-interface IRicheditUiaOverrides : public IUnknown
++interface _Windows_SupportedOS_Windows8_  IRicheditUiaOverrides : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetPropertyOverrideValue(
+ 		PROPERTYID propertyId,
+@@ -546,13 +547,13 @@ public:					//@cmember Is a double click in the message queue?
+ 	virtual HRESULT		TxSetForegroundWindow() = 0;
+ 
+ 						//@cmember Set control window to foreground
+-	virtual HPALETTE	TxGetPalette() = 0;
++	_Win32_RAIIFree_(DeleteObject, -1, 0) virtual HPALETTE	TxGetPalette() = 0;
+ 
+ 						//@cmember Get East Asian flags
+ 	virtual HRESULT		TxGetEastAsianFlags(LONG *pFlags) = 0;
+ 
+ 						//@cmember Routes the cursor change to the winhost
+-	virtual HCURSOR		TxSetCursor2(HCURSOR hcur, BOOL bText) = 0;
++	_Win32_RAIIFree_(DestroyCursor, -1, 0) virtual HCURSOR		TxSetCursor2(HCURSOR hcur, BOOL bText) = 0;
+ 
+ 						//@cmember Notification that text services is freed
+ 	virtual void		TxFreeTextServicesNotification() = 0;

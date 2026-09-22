@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ApplicationStateListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ApplicationStateListener.h
+index 4187e52f69..a30563bd62 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ApplicationStateListener.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ApplicationStateListener.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines the alljoyn_applicationstatelistener and related functions that provide
+@@ -71,14 +72,14 @@ typedef struct {
+  *
+  * @return Handle to newly allocated alljoyn_applicationstatelistener.
+  */
+-AJ_API alljoyn_applicationstatelistener AJ_CALL alljoyn_applicationstatelistener_create(const alljoyn_applicationstatelistener_callbacks* callbacks, void* context);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_applicationstatelistener AJ_CALL alljoyn_applicationstatelistener_create(const alljoyn_applicationstatelistener_callbacks* callbacks, void* context);
+ 
+ /**
+  * Destroy an alljoyn_applicationstatelistener.
+  *
+  * @param[in] listener alljoyn_applicationstatelistener to destroy.
+  */
+-AJ_API void AJ_CALL alljoyn_applicationstatelistener_destroy(alljoyn_applicationstatelistener listener);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_applicationstatelistener_destroy(alljoyn_applicationstatelistener listener);
+ 
+ #ifdef __cplusplus
+ } /* extern "C"  */

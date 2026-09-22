@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h
-index 5b7a5d86ecdb30560af21a2acfc063ea46cc40f3..ef1ef5ad73a33c62b0e1c1a4ffb69a5ff543a15b 100644
+index 5b7a5d86ec..db4fa267e9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h
 @@ -7,6 +7,7 @@
@@ -15,7 +15,7 @@ index 5b7a5d86ecdb30560af21a2acfc063ea46cc40f3..ef1ef5ad73a33c62b0e1c1a4ffb69a5f
  /* Property Tag Array */
  
 -typedef struct _SPropTagArray
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SPropTagArray
++typedef struct   _SPropTagArray
  {
      ULONG   cValues;
      _Field_size_(cValues) 

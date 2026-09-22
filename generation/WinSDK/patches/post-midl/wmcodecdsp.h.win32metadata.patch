@@ -1,0 +1,162 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
+index 9c914cd297..a7c7f5a0ea 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1626,7 +1627,7 @@ EXTERN_C const IID IID_IWMVideoDecoderHurryup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("352bb3bd-2d4d-4323-9e71-dcdcfbd53ca6")
++    MIDL_INTERFACE("352bb3bd-2d4d-4323-9e71-dcdcfbd53ca6") _Windows_SupportedOS_WindowsXP_ 
+     IWMVideoDecoderHurryup : public IUnknown
+     {
+     public:
+@@ -1721,7 +1722,7 @@ EXTERN_C const IID IID_IWMVideoForceKeyFrame;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F8496BE-5B9A-41b9-A9E8-F21CD80596C2")
++    MIDL_INTERFACE("9F8496BE-5B9A-41b9-A9E8-F21CD80596C2") _Windows_SupportedOS_WindowsXP_ 
+     IWMVideoForceKeyFrame : public IUnknown
+     {
+     public:
+@@ -1803,7 +1804,7 @@ EXTERN_C const IID IID_IWMCodecStrings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A7B2504B-E58A-47fb-958B-CAC7165A057D")
++    MIDL_INTERFACE("A7B2504B-E58A-47fb-958B-CAC7165A057D") _Windows_SupportedOS_WindowsXP_ 
+     IWMCodecStrings : public IUnknown
+     {
+     public:
+@@ -1914,7 +1915,7 @@ EXTERN_C const IID IID_IWMCodecProps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2573e11a-f01a-4fdd-a98d-63b8e0ba9589")
++    MIDL_INTERFACE("2573e11a-f01a-4fdd-a98d-63b8e0ba9589") _Windows_SupportedOS_WindowsXP_ 
+     IWMCodecProps : public IUnknown
+     {
+     public:
+@@ -2025,7 +2026,7 @@ EXTERN_C const IID IID_IWMCodecLeakyBucket;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A81BA647-6227-43b7-B231-C7B15135DD7D")
++    MIDL_INTERFACE("A81BA647-6227-43b7-B231-C7B15135DD7D") _Windows_SupportedOS_WindowsXP_ 
+     IWMCodecLeakyBucket : public IUnknown
+     {
+     public:
+@@ -2142,7 +2143,7 @@ EXTERN_C const IID IID_IWMCodecOutputTimestamp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B72ADF95-7ADC-4a72-BC05-577D8EA6BF68")
++    MIDL_INTERFACE("B72ADF95-7ADC-4a72-BC05-577D8EA6BF68") _Windows_SupportedOS_WindowsXP_ 
+     IWMCodecOutputTimestamp : public IUnknown
+     {
+     public:
+@@ -2226,7 +2227,7 @@ EXTERN_C const IID IID_IWMVideoDecoderReconBuffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("45BDA2AC-88E2-4923-98BA-3949080711A3")
++    MIDL_INTERFACE("45BDA2AC-88E2-4923-98BA-3949080711A3") _Windows_SupportedOS_WindowsXP_ 
+     IWMVideoDecoderReconBuffer : public IUnknown
+     {
+     public:
+@@ -2332,7 +2333,7 @@ EXTERN_C const IID IID_IWMCodecPrivateData;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("73F0BE8E-57F7-4f01-AA66-9F57340CFE0E")
++    MIDL_INTERFACE("73F0BE8E-57F7-4f01-AA66-9F57340CFE0E") _Windows_SupportedOS_WindowsXP_ 
+     IWMCodecPrivateData : public IUnknown
+     {
+     public:
+@@ -2429,7 +2430,7 @@ EXTERN_C const IID IID_IWMSampleExtensionSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9bca9884-0604-4c2a-87da-793ff4d586c3")
++    MIDL_INTERFACE("9bca9884-0604-4c2a-87da-793ff4d586c3") _Windows_SupportedOS_WindowsXP_ 
+     IWMSampleExtensionSupport : public IUnknown
+     {
+     public:
+@@ -2515,7 +2516,7 @@ EXTERN_C const IID IID_IWMResamplerProps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E7E9984F-F09F-4da4-903F-6E2E0EFE56B5")
++    MIDL_INTERFACE("E7E9984F-F09F-4da4-903F-6E2E0EFE56B5") _Windows_SupportedOS_WindowsXP_ 
+     IWMResamplerProps : public IUnknown
+     {
+     public:
+@@ -2610,7 +2611,7 @@ EXTERN_C const IID IID_IWMResizerProps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("57665D4C-0414-4faa-905B-10E546F81C33")
++    MIDL_INTERFACE("57665D4C-0414-4faa-905B-10E546F81C33") _Windows_SupportedOS_WindowsXP_ 
+     IWMResizerProps : public IUnknown
+     {
+     public:
+@@ -3081,7 +3082,7 @@ EXTERN_C const IID IID_IWMColorConvProps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E6A49E22-C099-421d-AAD3-C061FB4AE85B")
++    MIDL_INTERFACE("E6A49E22-C099-421d-AAD3-C061FB4AE85B") _Windows_SupportedOS_WindowsXP_ 
+     IWMColorConvProps : public IUnknown
+     {
+     public:
+@@ -3992,7 +3993,7 @@ EXTERN_C const IID IID_ITocEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F22F5E06-585C-4def-8523-6555CFBC0CB3")
++    MIDL_INTERFACE("F22F5E06-585C-4def-8523-6555CFBC0CB3") _Windows_SupportedOS_WindowsVista_ 
+     ITocEntry : public IUnknown
+     {
+     public:
+@@ -4169,7 +4170,7 @@ EXTERN_C const IID IID_ITocEntryList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3A8CCCBD-0EFD-43a3-B838-F38A552BA237")
++    MIDL_INTERFACE("3A8CCCBD-0EFD-43a3-B838-F38A552BA237") _Windows_SupportedOS_WindowsVista_ 
+     ITocEntryList : public IUnknown
+     {
+     public:
+@@ -4303,7 +4304,7 @@ EXTERN_C const IID IID_IToc;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D6F05441-A919-423b-91A0-89D5B4A8AB77")
++    MIDL_INTERFACE("D6F05441-A919-423b-91A0-89D5B4A8AB77") _Windows_SupportedOS_WindowsVista_ 
+     IToc : public IUnknown
+     {
+     public:
+@@ -4511,7 +4512,7 @@ EXTERN_C const IID IID_ITocCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23fee831-ae96-42df-b170-25a04847a3ca")
++    MIDL_INTERFACE("23fee831-ae96-42df-b170-25a04847a3ca") _Windows_SupportedOS_WindowsVista_ 
+     ITocCollection : public IUnknown
+     {
+     public:
+@@ -4645,7 +4646,7 @@ EXTERN_C const IID IID_ITocParser;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ECFB9A55-9298-4f49-887F-0B36206599D2")
++    MIDL_INTERFACE("ECFB9A55-9298-4f49-887F-0B36206599D2") _Windows_SupportedOS_WindowsVista_ 
+     ITocParser : public IUnknown
+     {
+     public:

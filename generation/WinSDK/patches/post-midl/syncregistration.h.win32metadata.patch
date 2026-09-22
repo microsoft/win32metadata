@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h b/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
-index 1433c2af44c5ccd0751d90ed31f80b298753ea75..abe2f3c904a6c70163fd5472647558ff6068c7f8 100644
+index 1433c2af44..594d49405f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
 @@ -177,6 +177,7 @@ extern "C"{
@@ -15,7 +15,79 @@ index 1433c2af44c5ccd0751d90ed31f80b298753ea75..abe2f3c904a6c70163fd5472647558ff
  DEFINE_PROPERTYKEY(PKEY_CONFIGUI_MENUITEM_NOUI, 0x554b24ea, 0xe8e3, 0x45ba, 0x93, 0x52, 0xdf, 0xb5, 0x61, 0xe1, 0x71, 0xe4, 12);
  DEFINE_PROPERTYKEY(PKEY_CONFIGUI_MENUITEM, 0x554b24ea, 0xe8e3, 0x45ba, 0x93, 0x52, 0xdf, 0xb5, 0x61, 0xe1, 0x71, 0xe4, 13);
 -typedef struct _SyncProviderConfiguration
-+typedef struct _Windows_SupportedOS_Windows7_ _SyncProviderConfiguration
++typedef struct  _SyncProviderConfiguration
      {
      DWORD dwVersion;
      GUID guidInstanceId;
+@@ -258,7 +259,7 @@ EXTERN_C const IID IID_ISyncProviderRegistration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cb45953b-7624-47bc-a472-eb8cac6b222e")
++    MIDL_INTERFACE("cb45953b-7624-47bc-a472-eb8cac6b222e") _Windows_SupportedOS_Windows7_ 
+     ISyncProviderRegistration : public IUnknown
+     {
+     public:
+@@ -547,7 +548,7 @@ EXTERN_C const IID IID_IEnumSyncProviderConfigUIInfos;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f6be2602-17c6-4658-a2d7-68ed3330f641")
++    MIDL_INTERFACE("f6be2602-17c6-4658-a2d7-68ed3330f641") _Windows_SupportedOS_Windows7_ 
+     IEnumSyncProviderConfigUIInfos : public IUnknown
+     {
+     public:
+@@ -666,7 +667,7 @@ EXTERN_C const IID IID_IEnumSyncProviderInfos;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a04ba850-5eb1-460d-a973-393fcb608a11")
++    MIDL_INTERFACE("a04ba850-5eb1-460d-a973-393fcb608a11") _Windows_SupportedOS_Windows7_ 
+     IEnumSyncProviderInfos : public IUnknown
+     {
+     public:
+@@ -785,7 +786,7 @@ EXTERN_C const IID IID_ISyncProviderInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1ee135de-88a4-4504-b0d0-f7920d7e5ba6")
++    MIDL_INTERFACE("1ee135de-88a4-4504-b0d0-f7920d7e5ba6") _Windows_SupportedOS_Windows7_ 
+     ISyncProviderInfo : public IPropertyStore
+     {
+     public:
+@@ -914,7 +915,7 @@ EXTERN_C const IID IID_ISyncProviderConfigUIInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("214141ae-33d7-4d8d-8e37-f227e880ce50")
++    MIDL_INTERFACE("214141ae-33d7-4d8d-8e37-f227e880ce50") _Windows_SupportedOS_Windows7_ 
+     ISyncProviderConfigUIInfo : public IPropertyStore
+     {
+     public:
+@@ -1043,7 +1044,7 @@ EXTERN_C const IID IID_ISyncProviderConfigUI;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b0705f6-cbcd-4071-ab05-3bdc364d4a0c")
++    MIDL_INTERFACE("7b0705f6-cbcd-4071-ab05-3bdc364d4a0c") _Windows_SupportedOS_Windows7_ 
+     ISyncProviderConfigUI : public IUnknown
+     {
+     public:
+@@ -1172,7 +1173,7 @@ EXTERN_C const IID IID_IRegisteredSyncProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("913bcf76-47c1-40b5-a896-5e8a9c414c14")
++    MIDL_INTERFACE("913bcf76-47c1-40b5-a896-5e8a9c414c14") _Windows_SupportedOS_Windows7_ 
+     IRegisteredSyncProvider : public IUnknown
+     {
+     public:
+@@ -1300,7 +1301,7 @@ EXTERN_C const IID IID_ISyncRegistrationChange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eea0d9ae-6b29-43b4-9e70-e3ae33bb2c3b")
++    MIDL_INTERFACE("eea0d9ae-6b29-43b4-9e70-e3ae33bb2c3b") _Windows_SupportedOS_Windows7_ 
+     ISyncRegistrationChange : public IUnknown
+     {
+     public:
