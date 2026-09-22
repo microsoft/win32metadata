@@ -1,0 +1,282 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fsrm.h b/generation/WinSDK/RecompiledIdlHeaders/um/fsrm.h
+index 9b6d062fde..6e969c76c7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fsrm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fsrm.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -255,7 +256,7 @@ EXTERN_C const IID IID_IFsrmObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("22bcef93-4a3f-4183-89f9-2f8b8a628aee")
++    MIDL_INTERFACE("22bcef93-4a3f-4183-89f9-2f8b8a628aee") _Windows_SupportedOS_Server2008_ 
+     IFsrmObject : public IDispatch
+     {
+     public:
+@@ -265,7 +266,7 @@ EXTERN_C const IID IID_IFsrmObject;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *description) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *description) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -448,7 +449,7 @@ EXTERN_C const IID IID_IFsrmCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f76fbf3b-8ddd-4b42-b05a-cb1c3ff1fee8")
++    MIDL_INTERFACE("f76fbf3b-8ddd-4b42-b05a-cb1c3ff1fee8") _Windows_SupportedOS_Server2008_ 
+     IFsrmCollection : public IDispatch
+     {
+     public:
+@@ -683,7 +684,7 @@ EXTERN_C const IID IID_IFsrmMutableCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1bb617b8-3886-49dc-af82-a6c90fa35dda")
++    MIDL_INTERFACE("1bb617b8-3886-49dc-af82-a6c90fa35dda") _Windows_SupportedOS_Server2008_ 
+     IFsrmMutableCollection : public IFsrmCollection
+     {
+     public:
+@@ -939,7 +940,7 @@ EXTERN_C const IID IID_IFsrmCommittableCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96deb3b5-8b91-4a2a-9d93-80a35d8aa847")
++    MIDL_INTERFACE("96deb3b5-8b91-4a2a-9d93-80a35d8aa847") _Windows_SupportedOS_Server2008_ 
+     IFsrmCommittableCollection : public IFsrmMutableCollection
+     {
+     public:
+@@ -1197,7 +1198,7 @@ EXTERN_C const IID IID_IFsrmAction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6cd6408a-ae60-463b-9ef1-e117534d69dc")
++    MIDL_INTERFACE("6cd6408a-ae60-463b-9ef1-e117534d69dc") _Windows_SupportedOS_Server2008_ 
+     IFsrmAction : public IDispatch
+     {
+     public:
+@@ -1394,13 +1395,13 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d646567d-26ae-4caa-9f84-4e0aad207fca")
++    MIDL_INTERFACE("d646567d-26ae-4caa-9f84-4e0aad207fca") _Windows_SupportedOS_Server2008_ 
+     IFsrmActionEmail : public IFsrmAction
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailFrom( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailFrom) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailFrom) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailFrom( 
+             /* [annotation][in] */ 
+@@ -1408,7 +1409,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailReplyTo( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailReplyTo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailReplyTo) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailReplyTo( 
+             /* [annotation][in] */ 
+@@ -1416,7 +1417,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailTo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailTo) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
+             /* [annotation][in] */ 
+@@ -1424,7 +1425,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailCc( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailCc) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailCc) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailCc( 
+             /* [annotation][in] */ 
+@@ -1432,7 +1433,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailBcc( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailBcc) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailBcc) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailBcc( 
+             /* [annotation][in] */ 
+@@ -1440,7 +1441,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailSubject( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailSubject) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailSubject) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailSubject( 
+             /* [annotation][in] */ 
+@@ -1448,7 +1449,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MessageText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *messageText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *messageText) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MessageText( 
+             /* [annotation][in] */ 
+@@ -1756,7 +1757,7 @@ EXTERN_C const IID IID_IFsrmActionEmail2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8276702f-2532-4839-89bf-4872609a2ea4")
++    MIDL_INTERFACE("8276702f-2532-4839-89bf-4872609a2ea4") _Windows_SupportedOS_Server2008_ 
+     IFsrmActionEmail2 : public IFsrmActionEmail
+     {
+     public:
+@@ -2089,7 +2090,7 @@ EXTERN_C const IID IID_IFsrmActionReport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2dbe63c4-b340-48a0-a5b0-158e07fc567e")
++    MIDL_INTERFACE("2dbe63c4-b340-48a0-a5b0-158e07fc567e") _Windows_SupportedOS_Server2008_ 
+     IFsrmActionReport : public IFsrmAction
+     {
+     public:
+@@ -2103,7 +2104,7 @@ EXTERN_C const IID IID_IFsrmActionReport;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailTo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailTo) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
+             /* [annotation][in] */ 
+@@ -2321,7 +2322,7 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c8f96c3-5d94-4f37-a4f4-f56ab463546f")
++    MIDL_INTERFACE("4c8f96c3-5d94-4f37-a4f4-f56ab463546f") _Windows_SupportedOS_Server2008_ 
+     IFsrmActionEventLog : public IFsrmAction
+     {
+     public:
+@@ -2335,7 +2336,7 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MessageText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *messageText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *messageText) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MessageText( 
+             /* [annotation][in] */ 
+@@ -2553,13 +2554,13 @@ EXTERN_C const IID IID_IFsrmActionCommand;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("12937789-e247-4917-9c20-f3ee9c7ee783")
++    MIDL_INTERFACE("12937789-e247-4917-9c20-f3ee9c7ee783") _Windows_SupportedOS_Server2008_ 
+     IFsrmActionCommand : public IFsrmAction
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExecutablePath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *executablePath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *executablePath) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExecutablePath( 
+             /* [annotation][in] */ 
+@@ -2567,7 +2568,7 @@ EXTERN_C const IID IID_IFsrmActionCommand;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Arguments( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *arguments) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *arguments) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Arguments( 
+             /* [annotation][in] */ 
+@@ -2583,7 +2584,7 @@ EXTERN_C const IID IID_IFsrmActionCommand;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WorkingDirectory( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *workingDirectory) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *workingDirectory) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
+             /* [annotation][in] */ 
+@@ -2915,13 +2916,13 @@ EXTERN_C const IID IID_IFsrmSetting;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f411d4fd-14be-4260-8c40-03b7c95e608a")
++    MIDL_INTERFACE("f411d4fd-14be-4260-8c40-03b7c95e608a") _Windows_SupportedOS_Server2008_ 
+     IFsrmSetting : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SmtpServer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *smtpServer) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *smtpServer) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SmtpServer( 
+             /* [annotation][in] */ 
+@@ -2929,7 +2930,7 @@ EXTERN_C const IID IID_IFsrmSetting;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailFrom( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailFrom) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailFrom) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailFrom( 
+             /* [annotation][in] */ 
+@@ -2937,7 +2938,7 @@ EXTERN_C const IID IID_IFsrmSetting;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AdminEmail( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *adminEmail) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *adminEmail) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AdminEmail( 
+             /* [annotation][in] */ 
+@@ -3228,7 +3229,7 @@ EXTERN_C const IID IID_IFsrmPathMapper;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6f4dbfff-6920-4821-a6c3-b7e94c1fd60c")
++    MIDL_INTERFACE("6f4dbfff-6920-4821-a6c3-b7e94c1fd60c") _Windows_SupportedOS_Server2008_ 
+     IFsrmPathMapper : public IDispatch
+     {
+     public:
+@@ -3381,7 +3382,7 @@ EXTERN_C const IID IID_IFsrmExportImport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("efcb0ab1-16c4-4a79-812c-725614c3306b")
++    MIDL_INTERFACE("efcb0ab1-16c4-4a79-812c-725614c3306b") _Windows_SupportedOS_Server2008_ 
+     IFsrmExportImport : public IDispatch
+     {
+     public:
+@@ -3655,7 +3656,7 @@ EXTERN_C const IID IID_IFsrmDerivedObjectsResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("39322a2d-38ee-4d0d-8095-421a80849a82")
++    MIDL_INTERFACE("39322a2d-38ee-4d0d-8095-421a80849a82") _Windows_SupportedOS_Server2008_ 
+     IFsrmDerivedObjectsResult : public IDispatch
+     {
+     public:
+@@ -3817,7 +3818,7 @@ EXTERN_C const IID IID_IFsrmAccessDeniedRemediationClient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("40002314-590B-45A5-8E1B-8C05DA527E52")
++    MIDL_INTERFACE("40002314-590B-45A5-8E1B-8C05DA527E52") _Windows_SupportedOS_Server2012_ 
+     IFsrmAccessDeniedRemediationClient : public IDispatch
+     {
+     public:

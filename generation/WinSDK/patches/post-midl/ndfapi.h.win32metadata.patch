@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h
-index 1f76cedb7d..ee5206e32f 100644
+index 1f76cedb7d..81fd6abef1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h
 @@ -4,6 +4,7 @@
@@ -14,58 +14,58 @@ index 1f76cedb7d..ee5206e32f 100644
  #define NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI(message) __declspec(deprecated(message))
  #endif
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateIncident(_In_ LPCWSTR helperClassName, ULONG celt, _In_reads_(celt) HELPER_ATTRIBUTE* attributes, _Outptr_ NDFHANDLE* handle);
-+NdfCreateIncident(_In_ LPCWSTR helperClassName, ULONG celt, _In_reads_(celt) HELPER_ATTRIBUTE* attributes, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateIncident(_In_ LPCWSTR helperClassName, ULONG celt, _In_reads_(celt) HELPER_ATTRIBUTE* attributes, _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateWinSockIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateWinSockIncident(SOCKET sock, _In_opt_ LPCWSTR host, USHORT port, _In_opt_ LPCWSTR appId, _In_opt_ SID* userId, _Outptr_ NDFHANDLE* handle);
-+NdfCreateWinSockIncident(SOCKET sock, _In_opt_ LPCWSTR host, USHORT port, _In_opt_ LPCWSTR appId, _In_opt_ SID* userId, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateWinSockIncident(SOCKET sock, _In_opt_ LPCWSTR host, USHORT port, _In_opt_ LPCWSTR appId, _In_opt_ SID* userId, _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateWebIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateWebIncident(_In_ LPCWSTR url, _Outptr_ NDFHANDLE* handle);
-+NdfCreateWebIncident(_In_ LPCWSTR url, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateWebIncident(_In_ LPCWSTR url, _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateWebIncidentEx is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateWebIncidentEx(_In_ LPCWSTR url, BOOL useWinHTTP, _In_opt_ LPWSTR moduleName, _Outptr_ NDFHANDLE* handle);
-+NdfCreateWebIncidentEx(_In_ LPCWSTR url, BOOL useWinHTTP, _In_opt_ LPWSTR moduleName, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateWebIncidentEx(_In_ LPCWSTR url, BOOL useWinHTTP, _In_opt_ LPWSTR moduleName, _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateSharingIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateSharingIncident(_In_ LPCWSTR UNCPath, _Outptr_ NDFHANDLE* handle);
-+NdfCreateSharingIncident(_In_ LPCWSTR UNCPath, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateSharingIncident(_In_ LPCWSTR UNCPath, _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateDNSIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateDNSIncident(_In_ LPCWSTR hostname, WORD queryType, _Outptr_ NDFHANDLE* handle);
-+NdfCreateDNSIncident(_In_ LPCWSTR hostname, WORD queryType, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateDNSIncident(_In_ LPCWSTR hostname, WORD queryType, _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateConnectivityIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateConnectivityIncident(_Outptr_ NDFHANDLE* handle);
-+NdfCreateConnectivityIncident(_Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreateConnectivityIncident(_Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_Windows8_ 
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreateNetConnectionIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreateNetConnectionIncident(_Outptr_ NDFHANDLE* handle, GUID id);
-+NdfCreateNetConnectionIncident(_Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle, GUID id);
++NdfCreateNetConnectionIncident(_Outptr_  NDFHANDLE* handle, GUID id);
  
 +_Windows_SupportedOS_Windows7_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCreatePnrpIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
 -NdfCreatePnrpIncident(_In_ LPCWSTR cloudname, _In_opt_ LPCWSTR peername, _In_ BOOL diagnosePublish, _In_opt_ LPCWSTR appId, _Outptr_ NDFHANDLE* handle);
-+NdfCreatePnrpIncident(_In_ LPCWSTR cloudname, _In_opt_ LPCWSTR peername, _In_ BOOL diagnosePublish, _In_opt_ LPCWSTR appId, _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++NdfCreatePnrpIncident(_In_ LPCWSTR cloudname, _In_opt_ LPCWSTR peername, _In_ BOOL diagnosePublish, _In_opt_ LPCWSTR appId, _Outptr_  NDFHANDLE* handle);
  
  #define NDF_INBOUND_FLAG_EDGETRAVERSAL 0x00001
  #define NDF_INBOUND_FLAG_HEALTHCHECK 0x00002
@@ -92,15 +92,15 @@ index 1f76cedb7d..ee5206e32f 100644
      _In_opt_ SOCKET_ADDRESS_LIST* Addresses,
      _In_opt_ LPCWSTR appId,
 -    _Outptr_ NDFHANDLE* handle);
-+    _Outptr_ _Win32_RAIIFree_(NdfCloseIncident) NDFHANDLE* handle);
++    _Outptr_  NDFHANDLE* handle);
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfExecuteDiagnosis is deprecated and might not work on all platforms. For more info, see MSDN.")
  NdfExecuteDiagnosis(_In_ NDFHANDLE handle, _In_opt_ HWND hwnd);
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCloseIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
  NdfCloseIncident(NDFHANDLE handle);
  

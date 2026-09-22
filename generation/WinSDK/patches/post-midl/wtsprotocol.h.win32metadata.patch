@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h b/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h
-index dbecfb82c818ac3e7af07d77882da4d267dcf110..ddecf08bc1a7d072bf3da613d58b3e7f1d697e69 100644
+index dbecfb82c8..e997c595b1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h
 @@ -229,6 +229,7 @@ extern "C"{
@@ -10,6 +10,87 @@ index dbecfb82c818ac3e7af07d77882da4d267dcf110..ddecf08bc1a7d072bf3da613d58b3e7f
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
+@@ -255,7 +256,7 @@ EXTERN_C const IID IID_IWTSProtocolManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F9EAF6CC-ED79-4f01-821D-1F881B9F66CC")
++    MIDL_INTERFACE("F9EAF6CC-ED79-4f01-821D-1F881B9F66CC") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolManager : public IUnknown
+     {
+     public:
+@@ -402,7 +403,7 @@ EXTERN_C const IID IID_IWTSProtocolListener;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-45f0-4394-8f69-32b2bc0ef4ca")
++    MIDL_INTERFACE("23083765-45f0-4394-8f69-32b2bc0ef4ca") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolListener : public IUnknown
+     {
+     public:
+@@ -498,7 +499,7 @@ EXTERN_C const IID IID_IWTSProtocolListenerCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-1a2d-4de2-97de-4a35f260f0b3")
++    MIDL_INTERFACE("23083765-1a2d-4de2-97de-4a35f260f0b3") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolListenerCallback : public IUnknown
+     {
+     public:
+@@ -589,7 +590,7 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-9095-4648-98bf-ef81c914032d")
++    MIDL_INTERFACE("23083765-9095-4648-98bf-ef81c914032d") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolConnection : public IUnknown
+     {
+     public:
+@@ -1030,7 +1031,7 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-75eb-41fe-b4fb-e086242afa0f")
++    MIDL_INTERFACE("23083765-75eb-41fe-b4fb-e086242afa0f") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolConnectionCallback : public IUnknown
+     {
+     public:
+@@ -1163,7 +1164,7 @@ EXTERN_C const IID IID_IWTSProtocolShadowConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ee3b0c14-37fb-456b-bab3-6d6cd51e13bf")
++    MIDL_INTERFACE("ee3b0c14-37fb-456b-bab3-6d6cd51e13bf") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolShadowConnection : public IUnknown
+     {
+     public:
+@@ -1320,7 +1321,7 @@ EXTERN_C const IID IID_IWTSProtocolShadowCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("503a2504-aae5-4ab1-93e0-6d1c4bc6f71a")
++    MIDL_INTERFACE("503a2504-aae5-4ab1-93e0-6d1c4bc6f71a") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolShadowCallback : public IUnknown
+     {
+     public:
+@@ -1454,7 +1455,7 @@ EXTERN_C const IID IID_IWTSProtocolLicenseConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-178c-4079-8e4a-fea6496a4d70")
++    MIDL_INTERFACE("23083765-178c-4079-8e4a-fea6496a4d70") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolLicenseConnection : public IUnknown
+     {
+     public:
+@@ -1600,7 +1601,7 @@ EXTERN_C const IID IID_IWTSProtocolLogonErrorRedirector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FD9B61A7-2916-4627-8DEE-4328711AD6CB")
++    MIDL_INTERFACE("FD9B61A7-2916-4627-8DEE-4328711AD6CB") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolLogonErrorRedirector : public IUnknown
+     {
+     public:
 @@ -1777,7 +1778,7 @@ EXTERN_C const IID IID_IWRdsProtocolSettings;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -181,6 +262,33 @@ index dbecfb82c818ac3e7af07d77882da4d267dcf110..ddecf08bc1a7d072bf3da613d58b3e7f
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnBeginPainting( void) = 0;
+@@ -3312,7 +3313,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+             /* [annotation][string][in] */ 
+             _In_  LPCWSTR pszMessage,
+             /* [annotation][out] */ 
+-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
++            _Win32_AssociatedEnum_(WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RedirectMessage( 
+             /* [annotation][string][in] */ 
+@@ -3322,7 +3323,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+             /* [annotation][in] */ 
+             _In_  UINT uType,
+             /* [annotation][out] */ 
+-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
++            _Win32_AssociatedEnum_(WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RedirectLogonError( 
+             /* [annotation][in] */ 
+@@ -3336,7 +3337,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+             /* [annotation][in] */ 
+             _In_  UINT uType,
+             /* [annotation][out] */ 
+-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
++            _Win32_AssociatedEnum_(WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+         
+     };
+     
 @@ -3406,7 +3407,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
          END_INTERFACE
      } IWRdsProtocolLogonErrorRedirectorVtbl;

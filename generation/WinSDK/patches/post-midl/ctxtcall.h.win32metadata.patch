@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h b/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h
-index 1744722ad2..0428ad7970 100644
+index 1744722ad2..3cfe6916a6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h
 @@ -1,3 +1,4 @@
@@ -7,11 +7,16 @@ index 1744722ad2..0428ad7970 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -102,6 +103,7 @@ EXTERN_C const IID IID_IContextCallback;
+@@ -98,10 +99,11 @@ EXTERN_C const IID IID_IContextCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("000001da-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("000001da-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IContextCallback : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _Win32_PreserveResult_
++          
          virtual HRESULT STDMETHODCALLTYPE ContextCallback( 
              /* [annotation][in] */ 
              _In_  PFNCONTEXTCALL pfnCallback,

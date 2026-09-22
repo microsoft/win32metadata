@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
-index e0674441532295294b7d5fddde88833055fdb9e7..95c83a4468ac08b4aa59513ecb9089fedface998 100644
+index e067444153..81bc0a1c2d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -15,7 +15,7 @@ index e0674441532295294b7d5fddde88833055fdb9e7..95c83a4468ac08b4aa59513ecb9089fe
  #pragma endregion
  
 -typedef struct _TRANSMIT_FILE_BUFFERS {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _TRANSMIT_FILE_BUFFERS {
++typedef struct   _TRANSMIT_FILE_BUFFERS {
      LPVOID Head;
      DWORD HeadLength;
      LPVOID Tail;
@@ -43,3 +43,12 @@ index e0674441532295294b7d5fddde88833055fdb9e7..95c83a4468ac08b4aa59513ecb9089fe
  VOID
  PASCAL FAR
  GetAcceptExSockaddrs (
+@@ -395,7 +399,7 @@ typedef struct _NLA_BLOB {
+         // header.type -> NLA_CONNECTIVITY
+         struct {
+             NLA_CONNECTIVITY_TYPE type;
+-            NLA_INTERNET internet;
++            _Win32_AssociatedEnum_(NLA_INTERNET) NLA_INTERNET internet;
+         } connectivity;
+ 
+         // header.type -> NLA_ICS

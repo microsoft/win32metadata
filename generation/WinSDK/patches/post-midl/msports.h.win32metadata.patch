@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
-index f42471fd62..ff0e0afbf4 100644
+index f42471fd62..4a0b66b6e1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
 @@ -17,6 +17,7 @@
@@ -22,11 +22,11 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
++
++
  ComDBOpen (
 -    _Out_ PHCOMDB PHComDB
-+    _Out_ _Win32_RAIIFree_(ComDBClose, -1) PHCOMDB PHComDB
++    _Win32_RAIIFree_(ComDBClose, -1, 0) _Out_  PHCOMDB PHComDB
      );
  /*++
  
@@ -34,7 +34,7 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  ComDBClose (
      _In_ HCOMDB HComDB
      );
@@ -42,8 +42,8 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
++
++
  ComDBGetCurrentPortUsage (
      _In_        HCOMDB   HComDB,
      _Out_writes_bytes_opt_(BufferSize) PBYTE Buffer,
@@ -51,8 +51,8 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
++
++
  ComDBClaimNextFreePort (
      _In_ HCOMDB   HComDB,
      _Out_ LPDWORD ComNumber
@@ -60,8 +60,8 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
++
++
  ComDBClaimPort (
      _In_        HCOMDB   HComDB,
      _In_        DWORD    ComNumber,
@@ -69,8 +69,8 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
++
++
  ComDBReleasePort (
      _In_ HCOMDB   HComDB,
      _In_ DWORD    ComNumber
@@ -78,8 +78,8 @@ index f42471fd62..ff0e0afbf4 100644
  
  LONG
  WINAPI
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
++
++
  ComDBResizeDatabase (
      _In_ HCOMDB   HComDB,
      _In_ DWORD    NewSize

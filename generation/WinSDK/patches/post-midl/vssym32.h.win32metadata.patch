@@ -1,0 +1,1044 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vssym32.h b/generation/WinSDK/RecompiledIdlHeaders/um/vssym32.h
+index 8db1c56c7f..31c0568e7d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vssym32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vssym32.h
+@@ -749,4 +749,1039 @@ enum MENUBANDSTATES {
+ };
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TMT_RESERVEDLOW")
++#undef TMT_RESERVEDLOW
++#pragma push_macro("TMT_RESERVEDHIGH")
++#undef TMT_RESERVEDHIGH
++#pragma push_macro("TMT_DIBDATA")
++#undef TMT_DIBDATA
++#pragma push_macro("TMT_GLYPHDIBDATA")
++#undef TMT_GLYPHDIBDATA
++#pragma push_macro("TMT_ENUM")
++#undef TMT_ENUM
++#pragma push_macro("TMT_STRING")
++#undef TMT_STRING
++#pragma push_macro("TMT_INT")
++#undef TMT_INT
++#pragma push_macro("TMT_BOOL")
++#undef TMT_BOOL
++#pragma push_macro("TMT_COLOR")
++#undef TMT_COLOR
++#pragma push_macro("TMT_MARGINS")
++#undef TMT_MARGINS
++#pragma push_macro("TMT_FILENAME")
++#undef TMT_FILENAME
++#pragma push_macro("TMT_SIZE")
++#undef TMT_SIZE
++#pragma push_macro("TMT_POSITION")
++#undef TMT_POSITION
++#pragma push_macro("TMT_RECT")
++#undef TMT_RECT
++#pragma push_macro("TMT_FONT")
++#undef TMT_FONT
++#pragma push_macro("TMT_INTLIST")
++#undef TMT_INTLIST
++#pragma push_macro("TMT_HBITMAP")
++#undef TMT_HBITMAP
++#pragma push_macro("TMT_DISKSTREAM")
++#undef TMT_DISKSTREAM
++#pragma push_macro("TMT_STREAM")
++#undef TMT_STREAM
++#pragma push_macro("TMT_BITMAPREF")
++#undef TMT_BITMAPREF
++#pragma push_macro("TMT_FLOAT")
++#undef TMT_FLOAT
++#pragma push_macro("TMT_FLOATLIST")
++#undef TMT_FLOATLIST
++#pragma push_macro("TMT_COLORSCHEMES")
++#undef TMT_COLORSCHEMES
++#pragma push_macro("TMT_SIZES")
++#undef TMT_SIZES
++#pragma push_macro("TMT_CHARSET")
++#undef TMT_CHARSET
++#pragma push_macro("TMT_NAME")
++#undef TMT_NAME
++#pragma push_macro("TMT_DISPLAYNAME")
++#undef TMT_DISPLAYNAME
++#pragma push_macro("TMT_TOOLTIP")
++#undef TMT_TOOLTIP
++#pragma push_macro("TMT_COMPANY")
++#undef TMT_COMPANY
++#pragma push_macro("TMT_AUTHOR")
++#undef TMT_AUTHOR
++#pragma push_macro("TMT_COPYRIGHT")
++#undef TMT_COPYRIGHT
++#pragma push_macro("TMT_URL")
++#undef TMT_URL
++#pragma push_macro("TMT_VERSION")
++#undef TMT_VERSION
++#pragma push_macro("TMT_DESCRIPTION")
++#undef TMT_DESCRIPTION
++#pragma push_macro("TMT_FIRST_RCSTRING_NAME")
++#undef TMT_FIRST_RCSTRING_NAME
++#pragma push_macro("TMT_LAST_RCSTRING_NAME")
++#undef TMT_LAST_RCSTRING_NAME
++#pragma push_macro("TMT_CAPTIONFONT")
++#undef TMT_CAPTIONFONT
++#pragma push_macro("TMT_SMALLCAPTIONFONT")
++#undef TMT_SMALLCAPTIONFONT
++#pragma push_macro("TMT_MENUFONT")
++#undef TMT_MENUFONT
++#pragma push_macro("TMT_STATUSFONT")
++#undef TMT_STATUSFONT
++#pragma push_macro("TMT_MSGBOXFONT")
++#undef TMT_MSGBOXFONT
++#pragma push_macro("TMT_ICONTITLEFONT")
++#undef TMT_ICONTITLEFONT
++#pragma push_macro("TMT_HEADING1FONT")
++#undef TMT_HEADING1FONT
++#pragma push_macro("TMT_HEADING2FONT")
++#undef TMT_HEADING2FONT
++#pragma push_macro("TMT_BODYFONT")
++#undef TMT_BODYFONT
++#pragma push_macro("TMT_FIRSTFONT")
++#undef TMT_FIRSTFONT
++#pragma push_macro("TMT_LASTFONT")
++#undef TMT_LASTFONT
++#pragma push_macro("TMT_FLATMENUS")
++#undef TMT_FLATMENUS
++#pragma push_macro("TMT_FIRSTBOOL")
++#undef TMT_FIRSTBOOL
++#pragma push_macro("TMT_LASTBOOL")
++#undef TMT_LASTBOOL
++#pragma push_macro("TMT_SIZINGBORDERWIDTH")
++#undef TMT_SIZINGBORDERWIDTH
++#pragma push_macro("TMT_SCROLLBARWIDTH")
++#undef TMT_SCROLLBARWIDTH
++#pragma push_macro("TMT_SCROLLBARHEIGHT")
++#undef TMT_SCROLLBARHEIGHT
++#pragma push_macro("TMT_CAPTIONBARWIDTH")
++#undef TMT_CAPTIONBARWIDTH
++#pragma push_macro("TMT_CAPTIONBARHEIGHT")
++#undef TMT_CAPTIONBARHEIGHT
++#pragma push_macro("TMT_SMCAPTIONBARWIDTH")
++#undef TMT_SMCAPTIONBARWIDTH
++#pragma push_macro("TMT_SMCAPTIONBARHEIGHT")
++#undef TMT_SMCAPTIONBARHEIGHT
++#pragma push_macro("TMT_MENUBARWIDTH")
++#undef TMT_MENUBARWIDTH
++#pragma push_macro("TMT_MENUBARHEIGHT")
++#undef TMT_MENUBARHEIGHT
++#pragma push_macro("TMT_PADDEDBORDERWIDTH")
++#undef TMT_PADDEDBORDERWIDTH
++#pragma push_macro("TMT_FIRSTSIZE")
++#undef TMT_FIRSTSIZE
++#pragma push_macro("TMT_LASTSIZE")
++#undef TMT_LASTSIZE
++#pragma push_macro("TMT_MINCOLORDEPTH")
++#undef TMT_MINCOLORDEPTH
++#pragma push_macro("TMT_FIRSTINT")
++#undef TMT_FIRSTINT
++#pragma push_macro("TMT_LASTINT")
++#undef TMT_LASTINT
++#pragma push_macro("TMT_CSSNAME")
++#undef TMT_CSSNAME
++#pragma push_macro("TMT_XMLNAME")
++#undef TMT_XMLNAME
++#pragma push_macro("TMT_LASTUPDATED")
++#undef TMT_LASTUPDATED
++#pragma push_macro("TMT_ALIAS")
++#undef TMT_ALIAS
++#pragma push_macro("TMT_FIRSTSTRING")
++#undef TMT_FIRSTSTRING
++#pragma push_macro("TMT_LASTSTRING")
++#undef TMT_LASTSTRING
++#pragma push_macro("TMT_SCROLLBAR")
++#undef TMT_SCROLLBAR
++#pragma push_macro("TMT_BACKGROUND")
++#undef TMT_BACKGROUND
++#pragma push_macro("TMT_ACTIVECAPTION")
++#undef TMT_ACTIVECAPTION
++#pragma push_macro("TMT_INACTIVECAPTION")
++#undef TMT_INACTIVECAPTION
++#pragma push_macro("TMT_MENU")
++#undef TMT_MENU
++#pragma push_macro("TMT_WINDOW")
++#undef TMT_WINDOW
++#pragma push_macro("TMT_WINDOWFRAME")
++#undef TMT_WINDOWFRAME
++#pragma push_macro("TMT_MENUTEXT")
++#undef TMT_MENUTEXT
++#pragma push_macro("TMT_WINDOWTEXT")
++#undef TMT_WINDOWTEXT
++#pragma push_macro("TMT_CAPTIONTEXT")
++#undef TMT_CAPTIONTEXT
++#pragma push_macro("TMT_ACTIVEBORDER")
++#undef TMT_ACTIVEBORDER
++#pragma push_macro("TMT_INACTIVEBORDER")
++#undef TMT_INACTIVEBORDER
++#pragma push_macro("TMT_APPWORKSPACE")
++#undef TMT_APPWORKSPACE
++#pragma push_macro("TMT_HIGHLIGHT")
++#undef TMT_HIGHLIGHT
++#pragma push_macro("TMT_HIGHLIGHTTEXT")
++#undef TMT_HIGHLIGHTTEXT
++#pragma push_macro("TMT_BTNFACE")
++#undef TMT_BTNFACE
++#pragma push_macro("TMT_BTNSHADOW")
++#undef TMT_BTNSHADOW
++#pragma push_macro("TMT_GRAYTEXT")
++#undef TMT_GRAYTEXT
++#pragma push_macro("TMT_BTNTEXT")
++#undef TMT_BTNTEXT
++#pragma push_macro("TMT_INACTIVECAPTIONTEXT")
++#undef TMT_INACTIVECAPTIONTEXT
++#pragma push_macro("TMT_BTNHIGHLIGHT")
++#undef TMT_BTNHIGHLIGHT
++#pragma push_macro("TMT_DKSHADOW3D")
++#undef TMT_DKSHADOW3D
++#pragma push_macro("TMT_LIGHT3D")
++#undef TMT_LIGHT3D
++#pragma push_macro("TMT_INFOTEXT")
++#undef TMT_INFOTEXT
++#pragma push_macro("TMT_INFOBK")
++#undef TMT_INFOBK
++#pragma push_macro("TMT_BUTTONALTERNATEFACE")
++#undef TMT_BUTTONALTERNATEFACE
++#pragma push_macro("TMT_HOTTRACKING")
++#undef TMT_HOTTRACKING
++#pragma push_macro("TMT_GRADIENTACTIVECAPTION")
++#undef TMT_GRADIENTACTIVECAPTION
++#pragma push_macro("TMT_GRADIENTINACTIVECAPTION")
++#undef TMT_GRADIENTINACTIVECAPTION
++#pragma push_macro("TMT_MENUHILIGHT")
++#undef TMT_MENUHILIGHT
++#pragma push_macro("TMT_MENUBAR")
++#undef TMT_MENUBAR
++#pragma push_macro("TMT_FIRSTCOLOR")
++#undef TMT_FIRSTCOLOR
++#pragma push_macro("TMT_LASTCOLOR")
++#undef TMT_LASTCOLOR
++#pragma push_macro("TMT_FROMHUE1")
++#undef TMT_FROMHUE1
++#pragma push_macro("TMT_FROMHUE2")
++#undef TMT_FROMHUE2
++#pragma push_macro("TMT_FROMHUE3")
++#undef TMT_FROMHUE3
++#pragma push_macro("TMT_FROMHUE4")
++#undef TMT_FROMHUE4
++#pragma push_macro("TMT_FROMHUE5")
++#undef TMT_FROMHUE5
++#pragma push_macro("TMT_TOHUE1")
++#undef TMT_TOHUE1
++#pragma push_macro("TMT_TOHUE2")
++#undef TMT_TOHUE2
++#pragma push_macro("TMT_TOHUE3")
++#undef TMT_TOHUE3
++#pragma push_macro("TMT_TOHUE4")
++#undef TMT_TOHUE4
++#pragma push_macro("TMT_TOHUE5")
++#undef TMT_TOHUE5
++#pragma push_macro("TMT_FROMCOLOR1")
++#undef TMT_FROMCOLOR1
++#pragma push_macro("TMT_FROMCOLOR2")
++#undef TMT_FROMCOLOR2
++#pragma push_macro("TMT_FROMCOLOR3")
++#undef TMT_FROMCOLOR3
++#pragma push_macro("TMT_FROMCOLOR4")
++#undef TMT_FROMCOLOR4
++#pragma push_macro("TMT_FROMCOLOR5")
++#undef TMT_FROMCOLOR5
++#pragma push_macro("TMT_TOCOLOR1")
++#undef TMT_TOCOLOR1
++#pragma push_macro("TMT_TOCOLOR2")
++#undef TMT_TOCOLOR2
++#pragma push_macro("TMT_TOCOLOR3")
++#undef TMT_TOCOLOR3
++#pragma push_macro("TMT_TOCOLOR4")
++#undef TMT_TOCOLOR4
++#pragma push_macro("TMT_TOCOLOR5")
++#undef TMT_TOCOLOR5
++#pragma push_macro("TMT_TRANSPARENT")
++#undef TMT_TRANSPARENT
++#pragma push_macro("TMT_AUTOSIZE")
++#undef TMT_AUTOSIZE
++#pragma push_macro("TMT_BORDERONLY")
++#undef TMT_BORDERONLY
++#pragma push_macro("TMT_COMPOSITED")
++#undef TMT_COMPOSITED
++#pragma push_macro("TMT_BGFILL")
++#undef TMT_BGFILL
++#pragma push_macro("TMT_GLYPHTRANSPARENT")
++#undef TMT_GLYPHTRANSPARENT
++#pragma push_macro("TMT_GLYPHONLY")
++#undef TMT_GLYPHONLY
++#pragma push_macro("TMT_ALWAYSSHOWSIZINGBAR")
++#undef TMT_ALWAYSSHOWSIZINGBAR
++#pragma push_macro("TMT_MIRRORIMAGE")
++#undef TMT_MIRRORIMAGE
++#pragma push_macro("TMT_UNIFORMSIZING")
++#undef TMT_UNIFORMSIZING
++#pragma push_macro("TMT_INTEGRALSIZING")
++#undef TMT_INTEGRALSIZING
++#pragma push_macro("TMT_SOURCEGROW")
++#undef TMT_SOURCEGROW
++#pragma push_macro("TMT_SOURCESHRINK")
++#undef TMT_SOURCESHRINK
++#pragma push_macro("TMT_DRAWBORDERS")
++#undef TMT_DRAWBORDERS
++#pragma push_macro("TMT_NOETCHEDEFFECT")
++#undef TMT_NOETCHEDEFFECT
++#pragma push_macro("TMT_TEXTAPPLYOVERLAY")
++#undef TMT_TEXTAPPLYOVERLAY
++#pragma push_macro("TMT_TEXTGLOW")
++#undef TMT_TEXTGLOW
++#pragma push_macro("TMT_TEXTITALIC")
++#undef TMT_TEXTITALIC
++#pragma push_macro("TMT_COMPOSITEDOPAQUE")
++#undef TMT_COMPOSITEDOPAQUE
++#pragma push_macro("TMT_LOCALIZEDMIRRORIMAGE")
++#undef TMT_LOCALIZEDMIRRORIMAGE
++#pragma push_macro("TMT_IMAGECOUNT")
++#undef TMT_IMAGECOUNT
++#pragma push_macro("TMT_ALPHALEVEL")
++#undef TMT_ALPHALEVEL
++#pragma push_macro("TMT_BORDERSIZE")
++#undef TMT_BORDERSIZE
++#pragma push_macro("TMT_ROUNDCORNERWIDTH")
++#undef TMT_ROUNDCORNERWIDTH
++#pragma push_macro("TMT_ROUNDCORNERHEIGHT")
++#undef TMT_ROUNDCORNERHEIGHT
++#pragma push_macro("TMT_GRADIENTRATIO1")
++#undef TMT_GRADIENTRATIO1
++#pragma push_macro("TMT_GRADIENTRATIO2")
++#undef TMT_GRADIENTRATIO2
++#pragma push_macro("TMT_GRADIENTRATIO3")
++#undef TMT_GRADIENTRATIO3
++#pragma push_macro("TMT_GRADIENTRATIO4")
++#undef TMT_GRADIENTRATIO4
++#pragma push_macro("TMT_GRADIENTRATIO5")
++#undef TMT_GRADIENTRATIO5
++#pragma push_macro("TMT_PROGRESSCHUNKSIZE")
++#undef TMT_PROGRESSCHUNKSIZE
++#pragma push_macro("TMT_PROGRESSSPACESIZE")
++#undef TMT_PROGRESSSPACESIZE
++#pragma push_macro("TMT_SATURATION")
++#undef TMT_SATURATION
++#pragma push_macro("TMT_TEXTBORDERSIZE")
++#undef TMT_TEXTBORDERSIZE
++#pragma push_macro("TMT_ALPHATHRESHOLD")
++#undef TMT_ALPHATHRESHOLD
++#pragma push_macro("TMT_WIDTH")
++#undef TMT_WIDTH
++#pragma push_macro("TMT_HEIGHT")
++#undef TMT_HEIGHT
++#pragma push_macro("TMT_GLYPHINDEX")
++#undef TMT_GLYPHINDEX
++#pragma push_macro("TMT_TRUESIZESTRETCHMARK")
++#undef TMT_TRUESIZESTRETCHMARK
++#pragma push_macro("TMT_MINDPI1")
++#undef TMT_MINDPI1
++#pragma push_macro("TMT_MINDPI2")
++#undef TMT_MINDPI2
++#pragma push_macro("TMT_MINDPI3")
++#undef TMT_MINDPI3
++#pragma push_macro("TMT_MINDPI4")
++#undef TMT_MINDPI4
++#pragma push_macro("TMT_MINDPI5")
++#undef TMT_MINDPI5
++#pragma push_macro("TMT_TEXTGLOWSIZE")
++#undef TMT_TEXTGLOWSIZE
++#pragma push_macro("TMT_FRAMESPERSECOND")
++#undef TMT_FRAMESPERSECOND
++#pragma push_macro("TMT_PIXELSPERFRAME")
++#undef TMT_PIXELSPERFRAME
++#pragma push_macro("TMT_ANIMATIONDELAY")
++#undef TMT_ANIMATIONDELAY
++#pragma push_macro("TMT_GLOWINTENSITY")
++#undef TMT_GLOWINTENSITY
++#pragma push_macro("TMT_OPACITY")
++#undef TMT_OPACITY
++#pragma push_macro("TMT_COLORIZATIONCOLOR")
++#undef TMT_COLORIZATIONCOLOR
++#pragma push_macro("TMT_COLORIZATIONOPACITY")
++#undef TMT_COLORIZATIONOPACITY
++#pragma push_macro("TMT_MINDPI6")
++#undef TMT_MINDPI6
++#pragma push_macro("TMT_MINDPI7")
++#undef TMT_MINDPI7
++#pragma push_macro("TMT_GLYPHFONT")
++#undef TMT_GLYPHFONT
++#pragma push_macro("TMT_IMAGEFILE")
++#undef TMT_IMAGEFILE
++#pragma push_macro("TMT_IMAGEFILE1")
++#undef TMT_IMAGEFILE1
++#pragma push_macro("TMT_IMAGEFILE2")
++#undef TMT_IMAGEFILE2
++#pragma push_macro("TMT_IMAGEFILE3")
++#undef TMT_IMAGEFILE3
++#pragma push_macro("TMT_IMAGEFILE4")
++#undef TMT_IMAGEFILE4
++#pragma push_macro("TMT_IMAGEFILE5")
++#undef TMT_IMAGEFILE5
++#pragma push_macro("TMT_GLYPHIMAGEFILE")
++#undef TMT_GLYPHIMAGEFILE
++#pragma push_macro("TMT_IMAGEFILE6")
++#undef TMT_IMAGEFILE6
++#pragma push_macro("TMT_IMAGEFILE7")
++#undef TMT_IMAGEFILE7
++#pragma push_macro("TMT_TEXT")
++#undef TMT_TEXT
++#pragma push_macro("TMT_CLASSICVALUE")
++#undef TMT_CLASSICVALUE
++#pragma push_macro("TMT_OFFSET")
++#undef TMT_OFFSET
++#pragma push_macro("TMT_TEXTSHADOWOFFSET")
++#undef TMT_TEXTSHADOWOFFSET
++#pragma push_macro("TMT_MINSIZE")
++#undef TMT_MINSIZE
++#pragma push_macro("TMT_MINSIZE1")
++#undef TMT_MINSIZE1
++#pragma push_macro("TMT_MINSIZE2")
++#undef TMT_MINSIZE2
++#pragma push_macro("TMT_MINSIZE3")
++#undef TMT_MINSIZE3
++#pragma push_macro("TMT_MINSIZE4")
++#undef TMT_MINSIZE4
++#pragma push_macro("TMT_MINSIZE5")
++#undef TMT_MINSIZE5
++#pragma push_macro("TMT_NORMALSIZE")
++#undef TMT_NORMALSIZE
++#pragma push_macro("TMT_MINSIZE6")
++#undef TMT_MINSIZE6
++#pragma push_macro("TMT_MINSIZE7")
++#undef TMT_MINSIZE7
++#pragma push_macro("TMT_SIZINGMARGINS")
++#undef TMT_SIZINGMARGINS
++#pragma push_macro("TMT_CONTENTMARGINS")
++#undef TMT_CONTENTMARGINS
++#pragma push_macro("TMT_CAPTIONMARGINS")
++#undef TMT_CAPTIONMARGINS
++#pragma push_macro("TMT_BORDERCOLOR")
++#undef TMT_BORDERCOLOR
++#pragma push_macro("TMT_FILLCOLOR")
++#undef TMT_FILLCOLOR
++#pragma push_macro("TMT_TEXTCOLOR")
++#undef TMT_TEXTCOLOR
++#pragma push_macro("TMT_EDGELIGHTCOLOR")
++#undef TMT_EDGELIGHTCOLOR
++#pragma push_macro("TMT_EDGEHIGHLIGHTCOLOR")
++#undef TMT_EDGEHIGHLIGHTCOLOR
++#pragma push_macro("TMT_EDGESHADOWCOLOR")
++#undef TMT_EDGESHADOWCOLOR
++#pragma push_macro("TMT_EDGEDKSHADOWCOLOR")
++#undef TMT_EDGEDKSHADOWCOLOR
++#pragma push_macro("TMT_EDGEFILLCOLOR")
++#undef TMT_EDGEFILLCOLOR
++#pragma push_macro("TMT_TRANSPARENTCOLOR")
++#undef TMT_TRANSPARENTCOLOR
++#pragma push_macro("TMT_GRADIENTCOLOR1")
++#undef TMT_GRADIENTCOLOR1
++#pragma push_macro("TMT_GRADIENTCOLOR2")
++#undef TMT_GRADIENTCOLOR2
++#pragma push_macro("TMT_GRADIENTCOLOR3")
++#undef TMT_GRADIENTCOLOR3
++#pragma push_macro("TMT_GRADIENTCOLOR4")
++#undef TMT_GRADIENTCOLOR4
++#pragma push_macro("TMT_GRADIENTCOLOR5")
++#undef TMT_GRADIENTCOLOR5
++#pragma push_macro("TMT_SHADOWCOLOR")
++#undef TMT_SHADOWCOLOR
++#pragma push_macro("TMT_GLOWCOLOR")
++#undef TMT_GLOWCOLOR
++#pragma push_macro("TMT_TEXTBORDERCOLOR")
++#undef TMT_TEXTBORDERCOLOR
++#pragma push_macro("TMT_TEXTSHADOWCOLOR")
++#undef TMT_TEXTSHADOWCOLOR
++#pragma push_macro("TMT_GLYPHTEXTCOLOR")
++#undef TMT_GLYPHTEXTCOLOR
++#pragma push_macro("TMT_GLYPHTRANSPARENTCOLOR")
++#undef TMT_GLYPHTRANSPARENTCOLOR
++#pragma push_macro("TMT_FILLCOLORHINT")
++#undef TMT_FILLCOLORHINT
++#pragma push_macro("TMT_BORDERCOLORHINT")
++#undef TMT_BORDERCOLORHINT
++#pragma push_macro("TMT_ACCENTCOLORHINT")
++#undef TMT_ACCENTCOLORHINT
++#pragma push_macro("TMT_TEXTCOLORHINT")
++#undef TMT_TEXTCOLORHINT
++#pragma push_macro("TMT_HEADING1TEXTCOLOR")
++#undef TMT_HEADING1TEXTCOLOR
++#pragma push_macro("TMT_HEADING2TEXTCOLOR")
++#undef TMT_HEADING2TEXTCOLOR
++#pragma push_macro("TMT_BODYTEXTCOLOR")
++#undef TMT_BODYTEXTCOLOR
++#pragma push_macro("TMT_BGTYPE")
++#undef TMT_BGTYPE
++#pragma push_macro("TMT_BORDERTYPE")
++#undef TMT_BORDERTYPE
++#pragma push_macro("TMT_FILLTYPE")
++#undef TMT_FILLTYPE
++#pragma push_macro("TMT_SIZINGTYPE")
++#undef TMT_SIZINGTYPE
++#pragma push_macro("TMT_HALIGN")
++#undef TMT_HALIGN
++#pragma push_macro("TMT_CONTENTALIGNMENT")
++#undef TMT_CONTENTALIGNMENT
++#pragma push_macro("TMT_VALIGN")
++#undef TMT_VALIGN
++#pragma push_macro("TMT_OFFSETTYPE")
++#undef TMT_OFFSETTYPE
++#pragma push_macro("TMT_ICONEFFECT")
++#undef TMT_ICONEFFECT
++#pragma push_macro("TMT_TEXTSHADOWTYPE")
++#undef TMT_TEXTSHADOWTYPE
++#pragma push_macro("TMT_IMAGELAYOUT")
++#undef TMT_IMAGELAYOUT
++#pragma push_macro("TMT_GLYPHTYPE")
++#undef TMT_GLYPHTYPE
++#pragma push_macro("TMT_IMAGESELECTTYPE")
++#undef TMT_IMAGESELECTTYPE
++#pragma push_macro("TMT_GLYPHFONTSIZINGTYPE")
++#undef TMT_GLYPHFONTSIZINGTYPE
++#pragma push_macro("TMT_TRUESIZESCALINGTYPE")
++#undef TMT_TRUESIZESCALINGTYPE
++#pragma push_macro("TMT_USERPICTURE")
++#undef TMT_USERPICTURE
++#pragma push_macro("TMT_DEFAULTPANESIZE")
++#undef TMT_DEFAULTPANESIZE
++#pragma push_macro("TMT_BLENDCOLOR")
++#undef TMT_BLENDCOLOR
++#pragma push_macro("TMT_CUSTOMSPLITRECT")
++#undef TMT_CUSTOMSPLITRECT
++#pragma push_macro("TMT_ANIMATIONBUTTONRECT")
++#undef TMT_ANIMATIONBUTTONRECT
++#pragma push_macro("TMT_ANIMATIONDURATION")
++#undef TMT_ANIMATIONDURATION
++#pragma push_macro("TMT_TRANSITIONDURATIONS")
++#undef TMT_TRANSITIONDURATIONS
++#pragma push_macro("TMT_SCALEDBACKGROUND")
++#undef TMT_SCALEDBACKGROUND
++#pragma push_macro("TMT_ATLASIMAGE")
++#undef TMT_ATLASIMAGE
++#pragma push_macro("TMT_ATLASINPUTIMAGE")
++#undef TMT_ATLASINPUTIMAGE
++#pragma push_macro("TMT_ATLASRECT")
++#undef TMT_ATLASRECT
++enum THEME_PROPERTY_SYMBOL_ID : unsigned int
++{
++    TMT_RESERVEDLOW = 0U,
++    TMT_RESERVEDHIGH = 7999U,
++    TMT_DIBDATA = 2U,
++    TMT_GLYPHDIBDATA = 8U,
++    TMT_ENUM = 200U,
++    TMT_STRING = 201U,
++    TMT_INT = 202U,
++    TMT_BOOL = 203U,
++    TMT_COLOR = 204U,
++    TMT_MARGINS = 205U,
++    TMT_FILENAME = 206U,
++    TMT_SIZE = 207U,
++    TMT_POSITION = 208U,
++    TMT_RECT = 209U,
++    TMT_FONT = 210U,
++    TMT_INTLIST = 211U,
++    TMT_HBITMAP = 212U,
++    TMT_DISKSTREAM = 213U,
++    TMT_STREAM = 214U,
++    TMT_BITMAPREF = 215U,
++    TMT_FLOAT = 216U,
++    TMT_FLOATLIST = 217U,
++    TMT_COLORSCHEMES = 401U,
++    TMT_SIZES = 402U,
++    TMT_CHARSET = 403U,
++    TMT_NAME = 600U,
++    TMT_DISPLAYNAME = 601U,
++    TMT_TOOLTIP = 602U,
++    TMT_COMPANY = 603U,
++    TMT_AUTHOR = 604U,
++    TMT_COPYRIGHT = 605U,
++    TMT_URL = 606U,
++    TMT_VERSION = 607U,
++    TMT_DESCRIPTION = 608U,
++    TMT_FIRST_RCSTRING_NAME = 601U,
++    TMT_LAST_RCSTRING_NAME = 608U,
++    TMT_CAPTIONFONT = 801U,
++    TMT_SMALLCAPTIONFONT = 802U,
++    TMT_MENUFONT = 803U,
++    TMT_STATUSFONT = 804U,
++    TMT_MSGBOXFONT = 805U,
++    TMT_ICONTITLEFONT = 806U,
++    TMT_HEADING1FONT = 807U,
++    TMT_HEADING2FONT = 808U,
++    TMT_BODYFONT = 809U,
++    TMT_FIRSTFONT = 801U,
++    TMT_LASTFONT = 809U,
++    TMT_FLATMENUS = 1001U,
++    TMT_FIRSTBOOL = 1001U,
++    TMT_LASTBOOL = 1001U,
++    TMT_SIZINGBORDERWIDTH = 1201U,
++    TMT_SCROLLBARWIDTH = 1202U,
++    TMT_SCROLLBARHEIGHT = 1203U,
++    TMT_CAPTIONBARWIDTH = 1204U,
++    TMT_CAPTIONBARHEIGHT = 1205U,
++    TMT_SMCAPTIONBARWIDTH = 1206U,
++    TMT_SMCAPTIONBARHEIGHT = 1207U,
++    TMT_MENUBARWIDTH = 1208U,
++    TMT_MENUBARHEIGHT = 1209U,
++    TMT_PADDEDBORDERWIDTH = 1210U,
++    TMT_FIRSTSIZE = 1201U,
++    TMT_LASTSIZE = 1210U,
++    TMT_MINCOLORDEPTH = 1301U,
++    TMT_FIRSTINT = 1301U,
++    TMT_LASTINT = 1301U,
++    TMT_CSSNAME = 1401U,
++    TMT_XMLNAME = 1402U,
++    TMT_LASTUPDATED = 1403U,
++    TMT_ALIAS = 1404U,
++    TMT_FIRSTSTRING = 1401U,
++    TMT_LASTSTRING = 1404U,
++    TMT_SCROLLBAR = 1601U,
++    TMT_BACKGROUND = 1602U,
++    TMT_ACTIVECAPTION = 1603U,
++    TMT_INACTIVECAPTION = 1604U,
++    TMT_MENU = 1605U,
++    TMT_WINDOW = 1606U,
++    TMT_WINDOWFRAME = 1607U,
++    TMT_MENUTEXT = 1608U,
++    TMT_WINDOWTEXT = 1609U,
++    TMT_CAPTIONTEXT = 1610U,
++    TMT_ACTIVEBORDER = 1611U,
++    TMT_INACTIVEBORDER = 1612U,
++    TMT_APPWORKSPACE = 1613U,
++    TMT_HIGHLIGHT = 1614U,
++    TMT_HIGHLIGHTTEXT = 1615U,
++    TMT_BTNFACE = 1616U,
++    TMT_BTNSHADOW = 1617U,
++    TMT_GRAYTEXT = 1618U,
++    TMT_BTNTEXT = 1619U,
++    TMT_INACTIVECAPTIONTEXT = 1620U,
++    TMT_BTNHIGHLIGHT = 1621U,
++    TMT_DKSHADOW3D = 1622U,
++    TMT_LIGHT3D = 1623U,
++    TMT_INFOTEXT = 1624U,
++    TMT_INFOBK = 1625U,
++    TMT_BUTTONALTERNATEFACE = 1626U,
++    TMT_HOTTRACKING = 1627U,
++    TMT_GRADIENTACTIVECAPTION = 1628U,
++    TMT_GRADIENTINACTIVECAPTION = 1629U,
++    TMT_MENUHILIGHT = 1630U,
++    TMT_MENUBAR = 1631U,
++    TMT_FIRSTCOLOR = 1601U,
++    TMT_LASTCOLOR = 1631U,
++    TMT_FROMHUE1 = 1801U,
++    TMT_FROMHUE2 = 1802U,
++    TMT_FROMHUE3 = 1803U,
++    TMT_FROMHUE4 = 1804U,
++    TMT_FROMHUE5 = 1805U,
++    TMT_TOHUE1 = 1806U,
++    TMT_TOHUE2 = 1807U,
++    TMT_TOHUE3 = 1808U,
++    TMT_TOHUE4 = 1809U,
++    TMT_TOHUE5 = 1810U,
++    TMT_FROMCOLOR1 = 2001U,
++    TMT_FROMCOLOR2 = 2002U,
++    TMT_FROMCOLOR3 = 2003U,
++    TMT_FROMCOLOR4 = 2004U,
++    TMT_FROMCOLOR5 = 2005U,
++    TMT_TOCOLOR1 = 2006U,
++    TMT_TOCOLOR2 = 2007U,
++    TMT_TOCOLOR3 = 2008U,
++    TMT_TOCOLOR4 = 2009U,
++    TMT_TOCOLOR5 = 2010U,
++    TMT_TRANSPARENT = 2201U,
++    TMT_AUTOSIZE = 2202U,
++    TMT_BORDERONLY = 2203U,
++    TMT_COMPOSITED = 2204U,
++    TMT_BGFILL = 2205U,
++    TMT_GLYPHTRANSPARENT = 2206U,
++    TMT_GLYPHONLY = 2207U,
++    TMT_ALWAYSSHOWSIZINGBAR = 2208U,
++    TMT_MIRRORIMAGE = 2209U,
++    TMT_UNIFORMSIZING = 2210U,
++    TMT_INTEGRALSIZING = 2211U,
++    TMT_SOURCEGROW = 2212U,
++    TMT_SOURCESHRINK = 2213U,
++    TMT_DRAWBORDERS = 2214U,
++    TMT_NOETCHEDEFFECT = 2215U,
++    TMT_TEXTAPPLYOVERLAY = 2216U,
++    TMT_TEXTGLOW = 2217U,
++    TMT_TEXTITALIC = 2218U,
++    TMT_COMPOSITEDOPAQUE = 2219U,
++    TMT_LOCALIZEDMIRRORIMAGE = 2220U,
++    TMT_IMAGECOUNT = 2401U,
++    TMT_ALPHALEVEL = 2402U,
++    TMT_BORDERSIZE = 2403U,
++    TMT_ROUNDCORNERWIDTH = 2404U,
++    TMT_ROUNDCORNERHEIGHT = 2405U,
++    TMT_GRADIENTRATIO1 = 2406U,
++    TMT_GRADIENTRATIO2 = 2407U,
++    TMT_GRADIENTRATIO3 = 2408U,
++    TMT_GRADIENTRATIO4 = 2409U,
++    TMT_GRADIENTRATIO5 = 2410U,
++    TMT_PROGRESSCHUNKSIZE = 2411U,
++    TMT_PROGRESSSPACESIZE = 2412U,
++    TMT_SATURATION = 2413U,
++    TMT_TEXTBORDERSIZE = 2414U,
++    TMT_ALPHATHRESHOLD = 2415U,
++    TMT_WIDTH = 2416U,
++    TMT_HEIGHT = 2417U,
++    TMT_GLYPHINDEX = 2418U,
++    TMT_TRUESIZESTRETCHMARK = 2419U,
++    TMT_MINDPI1 = 2420U,
++    TMT_MINDPI2 = 2421U,
++    TMT_MINDPI3 = 2422U,
++    TMT_MINDPI4 = 2423U,
++    TMT_MINDPI5 = 2424U,
++    TMT_TEXTGLOWSIZE = 2425U,
++    TMT_FRAMESPERSECOND = 2426U,
++    TMT_PIXELSPERFRAME = 2427U,
++    TMT_ANIMATIONDELAY = 2428U,
++    TMT_GLOWINTENSITY = 2429U,
++    TMT_OPACITY = 2430U,
++    TMT_COLORIZATIONCOLOR = 2431U,
++    TMT_COLORIZATIONOPACITY = 2432U,
++    TMT_MINDPI6 = 2433U,
++    TMT_MINDPI7 = 2434U,
++    TMT_GLYPHFONT = 2601U,
++    TMT_IMAGEFILE = 3001U,
++    TMT_IMAGEFILE1 = 3002U,
++    TMT_IMAGEFILE2 = 3003U,
++    TMT_IMAGEFILE3 = 3004U,
++    TMT_IMAGEFILE4 = 3005U,
++    TMT_IMAGEFILE5 = 3006U,
++    TMT_GLYPHIMAGEFILE = 3008U,
++    TMT_IMAGEFILE6 = 3009U,
++    TMT_IMAGEFILE7 = 3010U,
++    TMT_TEXT = 3201U,
++    TMT_CLASSICVALUE = 3202U,
++    TMT_OFFSET = 3401U,
++    TMT_TEXTSHADOWOFFSET = 3402U,
++    TMT_MINSIZE = 3403U,
++    TMT_MINSIZE1 = 3404U,
++    TMT_MINSIZE2 = 3405U,
++    TMT_MINSIZE3 = 3406U,
++    TMT_MINSIZE4 = 3407U,
++    TMT_MINSIZE5 = 3408U,
++    TMT_NORMALSIZE = 3409U,
++    TMT_MINSIZE6 = 3410U,
++    TMT_MINSIZE7 = 3411U,
++    TMT_SIZINGMARGINS = 3601U,
++    TMT_CONTENTMARGINS = 3602U,
++    TMT_CAPTIONMARGINS = 3603U,
++    TMT_BORDERCOLOR = 3801U,
++    TMT_FILLCOLOR = 3802U,
++    TMT_TEXTCOLOR = 3803U,
++    TMT_EDGELIGHTCOLOR = 3804U,
++    TMT_EDGEHIGHLIGHTCOLOR = 3805U,
++    TMT_EDGESHADOWCOLOR = 3806U,
++    TMT_EDGEDKSHADOWCOLOR = 3807U,
++    TMT_EDGEFILLCOLOR = 3808U,
++    TMT_TRANSPARENTCOLOR = 3809U,
++    TMT_GRADIENTCOLOR1 = 3810U,
++    TMT_GRADIENTCOLOR2 = 3811U,
++    TMT_GRADIENTCOLOR3 = 3812U,
++    TMT_GRADIENTCOLOR4 = 3813U,
++    TMT_GRADIENTCOLOR5 = 3814U,
++    TMT_SHADOWCOLOR = 3815U,
++    TMT_GLOWCOLOR = 3816U,
++    TMT_TEXTBORDERCOLOR = 3817U,
++    TMT_TEXTSHADOWCOLOR = 3818U,
++    TMT_GLYPHTEXTCOLOR = 3819U,
++    TMT_GLYPHTRANSPARENTCOLOR = 3820U,
++    TMT_FILLCOLORHINT = 3821U,
++    TMT_BORDERCOLORHINT = 3822U,
++    TMT_ACCENTCOLORHINT = 3823U,
++    TMT_TEXTCOLORHINT = 3824U,
++    TMT_HEADING1TEXTCOLOR = 3825U,
++    TMT_HEADING2TEXTCOLOR = 3826U,
++    TMT_BODYTEXTCOLOR = 3827U,
++    TMT_BGTYPE = 4001U,
++    TMT_BORDERTYPE = 4002U,
++    TMT_FILLTYPE = 4003U,
++    TMT_SIZINGTYPE = 4004U,
++    TMT_HALIGN = 4005U,
++    TMT_CONTENTALIGNMENT = 4006U,
++    TMT_VALIGN = 4007U,
++    TMT_OFFSETTYPE = 4008U,
++    TMT_ICONEFFECT = 4009U,
++    TMT_TEXTSHADOWTYPE = 4010U,
++    TMT_IMAGELAYOUT = 4011U,
++    TMT_GLYPHTYPE = 4012U,
++    TMT_IMAGESELECTTYPE = 4013U,
++    TMT_GLYPHFONTSIZINGTYPE = 4014U,
++    TMT_TRUESIZESCALINGTYPE = 4015U,
++    TMT_USERPICTURE = 5001U,
++    TMT_DEFAULTPANESIZE = 5002U,
++    TMT_BLENDCOLOR = 5003U,
++    TMT_CUSTOMSPLITRECT = 5004U,
++    TMT_ANIMATIONBUTTONRECT = 5005U,
++    TMT_ANIMATIONDURATION = 5006U,
++    TMT_TRANSITIONDURATIONS = 6000U,
++    TMT_SCALEDBACKGROUND = 7001U,
++    TMT_ATLASIMAGE = 8000U,
++    TMT_ATLASINPUTIMAGE = 8001U,
++    TMT_ATLASRECT = 8002U,
++};
++#pragma pop_macro("TMT_ATLASRECT")
++#pragma pop_macro("TMT_ATLASINPUTIMAGE")
++#pragma pop_macro("TMT_ATLASIMAGE")
++#pragma pop_macro("TMT_SCALEDBACKGROUND")
++#pragma pop_macro("TMT_TRANSITIONDURATIONS")
++#pragma pop_macro("TMT_ANIMATIONDURATION")
++#pragma pop_macro("TMT_ANIMATIONBUTTONRECT")
++#pragma pop_macro("TMT_CUSTOMSPLITRECT")
++#pragma pop_macro("TMT_BLENDCOLOR")
++#pragma pop_macro("TMT_DEFAULTPANESIZE")
++#pragma pop_macro("TMT_USERPICTURE")
++#pragma pop_macro("TMT_TRUESIZESCALINGTYPE")
++#pragma pop_macro("TMT_GLYPHFONTSIZINGTYPE")
++#pragma pop_macro("TMT_IMAGESELECTTYPE")
++#pragma pop_macro("TMT_GLYPHTYPE")
++#pragma pop_macro("TMT_IMAGELAYOUT")
++#pragma pop_macro("TMT_TEXTSHADOWTYPE")
++#pragma pop_macro("TMT_ICONEFFECT")
++#pragma pop_macro("TMT_OFFSETTYPE")
++#pragma pop_macro("TMT_VALIGN")
++#pragma pop_macro("TMT_CONTENTALIGNMENT")
++#pragma pop_macro("TMT_HALIGN")
++#pragma pop_macro("TMT_SIZINGTYPE")
++#pragma pop_macro("TMT_FILLTYPE")
++#pragma pop_macro("TMT_BORDERTYPE")
++#pragma pop_macro("TMT_BGTYPE")
++#pragma pop_macro("TMT_BODYTEXTCOLOR")
++#pragma pop_macro("TMT_HEADING2TEXTCOLOR")
++#pragma pop_macro("TMT_HEADING1TEXTCOLOR")
++#pragma pop_macro("TMT_TEXTCOLORHINT")
++#pragma pop_macro("TMT_ACCENTCOLORHINT")
++#pragma pop_macro("TMT_BORDERCOLORHINT")
++#pragma pop_macro("TMT_FILLCOLORHINT")
++#pragma pop_macro("TMT_GLYPHTRANSPARENTCOLOR")
++#pragma pop_macro("TMT_GLYPHTEXTCOLOR")
++#pragma pop_macro("TMT_TEXTSHADOWCOLOR")
++#pragma pop_macro("TMT_TEXTBORDERCOLOR")
++#pragma pop_macro("TMT_GLOWCOLOR")
++#pragma pop_macro("TMT_SHADOWCOLOR")
++#pragma pop_macro("TMT_GRADIENTCOLOR5")
++#pragma pop_macro("TMT_GRADIENTCOLOR4")
++#pragma pop_macro("TMT_GRADIENTCOLOR3")
++#pragma pop_macro("TMT_GRADIENTCOLOR2")
++#pragma pop_macro("TMT_GRADIENTCOLOR1")
++#pragma pop_macro("TMT_TRANSPARENTCOLOR")
++#pragma pop_macro("TMT_EDGEFILLCOLOR")
++#pragma pop_macro("TMT_EDGEDKSHADOWCOLOR")
++#pragma pop_macro("TMT_EDGESHADOWCOLOR")
++#pragma pop_macro("TMT_EDGEHIGHLIGHTCOLOR")
++#pragma pop_macro("TMT_EDGELIGHTCOLOR")
++#pragma pop_macro("TMT_TEXTCOLOR")
++#pragma pop_macro("TMT_FILLCOLOR")
++#pragma pop_macro("TMT_BORDERCOLOR")
++#pragma pop_macro("TMT_CAPTIONMARGINS")
++#pragma pop_macro("TMT_CONTENTMARGINS")
++#pragma pop_macro("TMT_SIZINGMARGINS")
++#pragma pop_macro("TMT_MINSIZE7")
++#pragma pop_macro("TMT_MINSIZE6")
++#pragma pop_macro("TMT_NORMALSIZE")
++#pragma pop_macro("TMT_MINSIZE5")
++#pragma pop_macro("TMT_MINSIZE4")
++#pragma pop_macro("TMT_MINSIZE3")
++#pragma pop_macro("TMT_MINSIZE2")
++#pragma pop_macro("TMT_MINSIZE1")
++#pragma pop_macro("TMT_MINSIZE")
++#pragma pop_macro("TMT_TEXTSHADOWOFFSET")
++#pragma pop_macro("TMT_OFFSET")
++#pragma pop_macro("TMT_CLASSICVALUE")
++#pragma pop_macro("TMT_TEXT")
++#pragma pop_macro("TMT_IMAGEFILE7")
++#pragma pop_macro("TMT_IMAGEFILE6")
++#pragma pop_macro("TMT_GLYPHIMAGEFILE")
++#pragma pop_macro("TMT_IMAGEFILE5")
++#pragma pop_macro("TMT_IMAGEFILE4")
++#pragma pop_macro("TMT_IMAGEFILE3")
++#pragma pop_macro("TMT_IMAGEFILE2")
++#pragma pop_macro("TMT_IMAGEFILE1")
++#pragma pop_macro("TMT_IMAGEFILE")
++#pragma pop_macro("TMT_GLYPHFONT")
++#pragma pop_macro("TMT_MINDPI7")
++#pragma pop_macro("TMT_MINDPI6")
++#pragma pop_macro("TMT_COLORIZATIONOPACITY")
++#pragma pop_macro("TMT_COLORIZATIONCOLOR")
++#pragma pop_macro("TMT_OPACITY")
++#pragma pop_macro("TMT_GLOWINTENSITY")
++#pragma pop_macro("TMT_ANIMATIONDELAY")
++#pragma pop_macro("TMT_PIXELSPERFRAME")
++#pragma pop_macro("TMT_FRAMESPERSECOND")
++#pragma pop_macro("TMT_TEXTGLOWSIZE")
++#pragma pop_macro("TMT_MINDPI5")
++#pragma pop_macro("TMT_MINDPI4")
++#pragma pop_macro("TMT_MINDPI3")
++#pragma pop_macro("TMT_MINDPI2")
++#pragma pop_macro("TMT_MINDPI1")
++#pragma pop_macro("TMT_TRUESIZESTRETCHMARK")
++#pragma pop_macro("TMT_GLYPHINDEX")
++#pragma pop_macro("TMT_HEIGHT")
++#pragma pop_macro("TMT_WIDTH")
++#pragma pop_macro("TMT_ALPHATHRESHOLD")
++#pragma pop_macro("TMT_TEXTBORDERSIZE")
++#pragma pop_macro("TMT_SATURATION")
++#pragma pop_macro("TMT_PROGRESSSPACESIZE")
++#pragma pop_macro("TMT_PROGRESSCHUNKSIZE")
++#pragma pop_macro("TMT_GRADIENTRATIO5")
++#pragma pop_macro("TMT_GRADIENTRATIO4")
++#pragma pop_macro("TMT_GRADIENTRATIO3")
++#pragma pop_macro("TMT_GRADIENTRATIO2")
++#pragma pop_macro("TMT_GRADIENTRATIO1")
++#pragma pop_macro("TMT_ROUNDCORNERHEIGHT")
++#pragma pop_macro("TMT_ROUNDCORNERWIDTH")
++#pragma pop_macro("TMT_BORDERSIZE")
++#pragma pop_macro("TMT_ALPHALEVEL")
++#pragma pop_macro("TMT_IMAGECOUNT")
++#pragma pop_macro("TMT_LOCALIZEDMIRRORIMAGE")
++#pragma pop_macro("TMT_COMPOSITEDOPAQUE")
++#pragma pop_macro("TMT_TEXTITALIC")
++#pragma pop_macro("TMT_TEXTGLOW")
++#pragma pop_macro("TMT_TEXTAPPLYOVERLAY")
++#pragma pop_macro("TMT_NOETCHEDEFFECT")
++#pragma pop_macro("TMT_DRAWBORDERS")
++#pragma pop_macro("TMT_SOURCESHRINK")
++#pragma pop_macro("TMT_SOURCEGROW")
++#pragma pop_macro("TMT_INTEGRALSIZING")
++#pragma pop_macro("TMT_UNIFORMSIZING")
++#pragma pop_macro("TMT_MIRRORIMAGE")
++#pragma pop_macro("TMT_ALWAYSSHOWSIZINGBAR")
++#pragma pop_macro("TMT_GLYPHONLY")
++#pragma pop_macro("TMT_GLYPHTRANSPARENT")
++#pragma pop_macro("TMT_BGFILL")
++#pragma pop_macro("TMT_COMPOSITED")
++#pragma pop_macro("TMT_BORDERONLY")
++#pragma pop_macro("TMT_AUTOSIZE")
++#pragma pop_macro("TMT_TRANSPARENT")
++#pragma pop_macro("TMT_TOCOLOR5")
++#pragma pop_macro("TMT_TOCOLOR4")
++#pragma pop_macro("TMT_TOCOLOR3")
++#pragma pop_macro("TMT_TOCOLOR2")
++#pragma pop_macro("TMT_TOCOLOR1")
++#pragma pop_macro("TMT_FROMCOLOR5")
++#pragma pop_macro("TMT_FROMCOLOR4")
++#pragma pop_macro("TMT_FROMCOLOR3")
++#pragma pop_macro("TMT_FROMCOLOR2")
++#pragma pop_macro("TMT_FROMCOLOR1")
++#pragma pop_macro("TMT_TOHUE5")
++#pragma pop_macro("TMT_TOHUE4")
++#pragma pop_macro("TMT_TOHUE3")
++#pragma pop_macro("TMT_TOHUE2")
++#pragma pop_macro("TMT_TOHUE1")
++#pragma pop_macro("TMT_FROMHUE5")
++#pragma pop_macro("TMT_FROMHUE4")
++#pragma pop_macro("TMT_FROMHUE3")
++#pragma pop_macro("TMT_FROMHUE2")
++#pragma pop_macro("TMT_FROMHUE1")
++#pragma pop_macro("TMT_LASTCOLOR")
++#pragma pop_macro("TMT_FIRSTCOLOR")
++#pragma pop_macro("TMT_MENUBAR")
++#pragma pop_macro("TMT_MENUHILIGHT")
++#pragma pop_macro("TMT_GRADIENTINACTIVECAPTION")
++#pragma pop_macro("TMT_GRADIENTACTIVECAPTION")
++#pragma pop_macro("TMT_HOTTRACKING")
++#pragma pop_macro("TMT_BUTTONALTERNATEFACE")
++#pragma pop_macro("TMT_INFOBK")
++#pragma pop_macro("TMT_INFOTEXT")
++#pragma pop_macro("TMT_LIGHT3D")
++#pragma pop_macro("TMT_DKSHADOW3D")
++#pragma pop_macro("TMT_BTNHIGHLIGHT")
++#pragma pop_macro("TMT_INACTIVECAPTIONTEXT")
++#pragma pop_macro("TMT_BTNTEXT")
++#pragma pop_macro("TMT_GRAYTEXT")
++#pragma pop_macro("TMT_BTNSHADOW")
++#pragma pop_macro("TMT_BTNFACE")
++#pragma pop_macro("TMT_HIGHLIGHTTEXT")
++#pragma pop_macro("TMT_HIGHLIGHT")
++#pragma pop_macro("TMT_APPWORKSPACE")
++#pragma pop_macro("TMT_INACTIVEBORDER")
++#pragma pop_macro("TMT_ACTIVEBORDER")
++#pragma pop_macro("TMT_CAPTIONTEXT")
++#pragma pop_macro("TMT_WINDOWTEXT")
++#pragma pop_macro("TMT_MENUTEXT")
++#pragma pop_macro("TMT_WINDOWFRAME")
++#pragma pop_macro("TMT_WINDOW")
++#pragma pop_macro("TMT_MENU")
++#pragma pop_macro("TMT_INACTIVECAPTION")
++#pragma pop_macro("TMT_ACTIVECAPTION")
++#pragma pop_macro("TMT_BACKGROUND")
++#pragma pop_macro("TMT_SCROLLBAR")
++#pragma pop_macro("TMT_LASTSTRING")
++#pragma pop_macro("TMT_FIRSTSTRING")
++#pragma pop_macro("TMT_ALIAS")
++#pragma pop_macro("TMT_LASTUPDATED")
++#pragma pop_macro("TMT_XMLNAME")
++#pragma pop_macro("TMT_CSSNAME")
++#pragma pop_macro("TMT_LASTINT")
++#pragma pop_macro("TMT_FIRSTINT")
++#pragma pop_macro("TMT_MINCOLORDEPTH")
++#pragma pop_macro("TMT_LASTSIZE")
++#pragma pop_macro("TMT_FIRSTSIZE")
++#pragma pop_macro("TMT_PADDEDBORDERWIDTH")
++#pragma pop_macro("TMT_MENUBARHEIGHT")
++#pragma pop_macro("TMT_MENUBARWIDTH")
++#pragma pop_macro("TMT_SMCAPTIONBARHEIGHT")
++#pragma pop_macro("TMT_SMCAPTIONBARWIDTH")
++#pragma pop_macro("TMT_CAPTIONBARHEIGHT")
++#pragma pop_macro("TMT_CAPTIONBARWIDTH")
++#pragma pop_macro("TMT_SCROLLBARHEIGHT")
++#pragma pop_macro("TMT_SCROLLBARWIDTH")
++#pragma pop_macro("TMT_SIZINGBORDERWIDTH")
++#pragma pop_macro("TMT_LASTBOOL")
++#pragma pop_macro("TMT_FIRSTBOOL")
++#pragma pop_macro("TMT_FLATMENUS")
++#pragma pop_macro("TMT_LASTFONT")
++#pragma pop_macro("TMT_FIRSTFONT")
++#pragma pop_macro("TMT_BODYFONT")
++#pragma pop_macro("TMT_HEADING2FONT")
++#pragma pop_macro("TMT_HEADING1FONT")
++#pragma pop_macro("TMT_ICONTITLEFONT")
++#pragma pop_macro("TMT_MSGBOXFONT")
++#pragma pop_macro("TMT_STATUSFONT")
++#pragma pop_macro("TMT_MENUFONT")
++#pragma pop_macro("TMT_SMALLCAPTIONFONT")
++#pragma pop_macro("TMT_CAPTIONFONT")
++#pragma pop_macro("TMT_LAST_RCSTRING_NAME")
++#pragma pop_macro("TMT_FIRST_RCSTRING_NAME")
++#pragma pop_macro("TMT_DESCRIPTION")
++#pragma pop_macro("TMT_VERSION")
++#pragma pop_macro("TMT_URL")
++#pragma pop_macro("TMT_COPYRIGHT")
++#pragma pop_macro("TMT_AUTHOR")
++#pragma pop_macro("TMT_COMPANY")
++#pragma pop_macro("TMT_TOOLTIP")
++#pragma pop_macro("TMT_DISPLAYNAME")
++#pragma pop_macro("TMT_NAME")
++#pragma pop_macro("TMT_CHARSET")
++#pragma pop_macro("TMT_SIZES")
++#pragma pop_macro("TMT_COLORSCHEMES")
++#pragma pop_macro("TMT_FLOATLIST")
++#pragma pop_macro("TMT_FLOAT")
++#pragma pop_macro("TMT_BITMAPREF")
++#pragma pop_macro("TMT_STREAM")
++#pragma pop_macro("TMT_DISKSTREAM")
++#pragma pop_macro("TMT_HBITMAP")
++#pragma pop_macro("TMT_INTLIST")
++#pragma pop_macro("TMT_FONT")
++#pragma pop_macro("TMT_RECT")
++#pragma pop_macro("TMT_POSITION")
++#pragma pop_macro("TMT_SIZE")
++#pragma pop_macro("TMT_FILENAME")
++#pragma pop_macro("TMT_MARGINS")
++#pragma pop_macro("TMT_COLOR")
++#pragma pop_macro("TMT_BOOL")
++#pragma pop_macro("TMT_INT")
++#pragma pop_macro("TMT_STRING")
++#pragma pop_macro("TMT_ENUM")
++#pragma pop_macro("TMT_GLYPHDIBDATA")
++#pragma pop_macro("TMT_DIBDATA")
++#pragma pop_macro("TMT_RESERVEDHIGH")
++#pragma pop_macro("TMT_RESERVEDLOW")
++#endif
++
+ #endif //__VSSYM32_H__

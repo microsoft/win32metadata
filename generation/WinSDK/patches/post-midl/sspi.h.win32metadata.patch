@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
-index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0deec07fd899 100644
+index 06f5ed27e9..90a7c29e95 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 @@ -15,6 +15,7 @@
@@ -15,7 +15,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  
  #  ifndef _NTDEF_
 -typedef struct _SECURITY_STRING {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_STRING {
++typedef struct   _SECURITY_STRING {
      unsigned short      Length;
      unsigned short      MaximumLength;
  #    ifdef MIDL_PASS
@@ -24,7 +24,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  //
  
 -typedef struct _SecPkgInfoW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgInfoW
++typedef struct   _SecPkgInfoW
  {
      unsigned long fCapabilities;        // Capability bitmask
      unsigned short wVersion;            // Version of driver
@@ -33,7 +33,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // end_ntifs
  
 -typedef struct _SecPkgInfoA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgInfoA
++typedef struct   _SecPkgInfoA
  {
      unsigned long fCapabilities;        // Capability bitmask
      unsigned short wVersion;            // Version of driver
@@ -42,7 +42,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  //
  
 -typedef struct _SecBuffer {
-+typedef struct _Windows_SupportedOS_Windows81_ _SecBuffer {
++typedef struct  _SecBuffer {
      unsigned long cbBuffer;             // Size of the buffer, in bytes
      unsigned long BufferType;           // Type of the buffer (below)
  #ifdef MIDL_PASS
@@ -51,7 +51,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SecBuffer, * PSecBuffer;
  
 -typedef struct _SecBufferDesc {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecBufferDesc {
++typedef struct   _SecBufferDesc {
      unsigned long ulVersion;            // Version number
      unsigned long cBuffers;             // Number of buffers
  #ifdef MIDL_PASS
@@ -60,7 +60,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SEC_NEGOTIATION_INFO, * PSEC_NEGOTIATION_INFO ;
  
 -typedef struct _SEC_CHANNEL_BINDINGS {
-+typedef struct _Windows_SupportedOS_Windows7_ _SEC_CHANNEL_BINDINGS {
++typedef struct  _SEC_CHANNEL_BINDINGS {
      unsigned long  dwInitiatorAddrType;
      unsigned long  cbInitiatorLength;
      unsigned long  dwInitiatorOffset;
@@ -69,7 +69,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #define SECPKG_CRED_ATTR_PAC_BYPASS   5
  
 -typedef struct _SecPkgCredentials_NamesW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgCredentials_NamesW
++typedef struct   _SecPkgCredentials_NamesW
  {
  #ifdef MIDL_PASS
      [string]
@@ -78,7 +78,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // end_ntifs
  
 -typedef struct _SecPkgCredentials_NamesA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgCredentials_NamesA
++typedef struct   _SecPkgCredentials_NamesA
  {
  #ifdef MIDL_PASS
      [string]
@@ -87,7 +87,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #define SECPKG_ATTR_IS_LOOPBACK 37  // indicates authentication to localhost
  
 -typedef struct _SecPkgContext_SubjectAttributes {
-+typedef struct _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_ _SecPkgContext_SubjectAttributes {
++typedef struct   _SecPkgContext_SubjectAttributes {
      void* AttributeInfo; // contains a PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION structure
  } SecPkgContext_SubjectAttributes, *PSecPkgContext_SubjectAttributes;
  
@@ -96,7 +96,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  //
  
 -typedef enum _SECPKG_CRED_CLASS {
-+typedef enum _Windows_SupportedOS_Windows7_ _SECPKG_CRED_CLASS {
++typedef enum  _SECPKG_CRED_CLASS {
      SecPkgCredClass_None = 0,  // no creds
      SecPkgCredClass_Ephemeral = 10,  // logon creds
      SecPkgCredClass_PersistedGeneric = 20, // saved creds, not target specific
@@ -105,7 +105,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SECPKG_CRED_CLASS, * PSECPKG_CRED_CLASS;
  
 -typedef struct _SecPkgContext_CredInfo {
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_CredInfo {
++typedef struct  _SecPkgContext_CredInfo {
      SECPKG_CRED_CLASS CredClass;
      unsigned long IsPromptingNeeded;
  } SecPkgContext_CredInfo, *PSecPkgContext_CredInfo;
@@ -114,13 +114,13 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SecPkgContext_NegoPackageInfo, * PSecPkgContext_NegoPackageInfo;
  
 -typedef struct _SecPkgContext_NegoStatus
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_NegoStatus
++typedef struct  _SecPkgContext_NegoStatus
  {
      unsigned long LastStatus;
  } SecPkgContext_NegoStatus, * PSecPkgContext_NegoStatus;
  
 -typedef struct _SecPkgContext_Sizes
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_Sizes
++typedef struct   _SecPkgContext_Sizes
  {
      unsigned long cbMaxToken;
      unsigned long cbMaxSignature;
@@ -129,7 +129,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SecPkgContext_Sizes, * PSecPkgContext_Sizes;
  
 -typedef struct _SecPkgContext_StreamSizes
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_StreamSizes
++typedef struct   _SecPkgContext_StreamSizes
  {
      unsigned long   cbHeader;
      unsigned long   cbTrailer;
@@ -138,7 +138,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  typedef PSecPkgContext_StreamSizes PSecPkgContext_DatagramSizes;
  
 -typedef struct _SecPkgContext_NamesW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NamesW
++typedef struct   _SecPkgContext_NamesW
  {
      SEC_WCHAR * sUserName;
  } SecPkgContext_NamesW, * PSecPkgContext_NamesW;
@@ -146,7 +146,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // end_ntifs
  
 -typedef enum _SECPKG_ATTR_LCT_STATUS {
-+typedef enum _Windows_SupportedOS_Windows7_ _SECPKG_ATTR_LCT_STATUS {
++typedef enum  _SECPKG_ATTR_LCT_STATUS {
      SecPkgAttrLastClientTokenYes,
      SecPkgAttrLastClientTokenNo,
      SecPkgAttrLastClientTokenMaybe
@@ -154,12 +154,12 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  
  
 -typedef struct _SecPkgContext_LastClientTokenStatus {
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_LastClientTokenStatus {
++typedef struct  _SecPkgContext_LastClientTokenStatus {
      SECPKG_ATTR_LCT_STATUS LastClientTokenStatus;
  } SecPkgContext_LastClientTokenStatus, * PSecPkgContext_LastClientTokenStatus;
  
 -typedef struct _SecPkgContext_NamesA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NamesA
++typedef struct   _SecPkgContext_NamesA
  {
      SEC_CHAR * sUserName;
  } SecPkgContext_NamesA, * PSecPkgContext_NamesA;
@@ -168,14 +168,14 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // begin_ntifs
  
 -typedef struct _SecPkgContext_Lifespan
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_Lifespan
++typedef struct   _SecPkgContext_Lifespan
  {
      TimeStamp tsStart;
      TimeStamp tsExpiry;
  } SecPkgContext_Lifespan, * PSecPkgContext_Lifespan;
  
 -typedef struct _SecPkgContext_DceInfo
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_DceInfo
++typedef struct   _SecPkgContext_DceInfo
  {
      unsigned long AuthzSvc;
      void * pPac;
@@ -184,7 +184,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // end_ntifs
  
 -typedef struct _SecPkgContext_KeyInfoA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_KeyInfoA
++typedef struct   _SecPkgContext_KeyInfoA
  {
      SEC_CHAR *  sSignatureAlgorithmName;
      SEC_CHAR *  sEncryptAlgorithmName;
@@ -193,7 +193,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // begin_ntifs
  
 -typedef struct _SecPkgContext_KeyInfoW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_KeyInfoW
++typedef struct   _SecPkgContext_KeyInfoW
  {
      SEC_WCHAR * sSignatureAlgorithmName;
      SEC_WCHAR * sEncryptAlgorithmName;
@@ -202,7 +202,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #endif
  
 -typedef struct _SecPkgContext_AuthorityA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_AuthorityA
++typedef struct   _SecPkgContext_AuthorityA
  {
      SEC_CHAR *  sAuthorityName;
  } SecPkgContext_AuthorityA, * PSecPkgContext_AuthorityA;
@@ -210,7 +210,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // begin_ntifs
  
 -typedef struct _SecPkgContext_AuthorityW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_AuthorityW
++typedef struct   _SecPkgContext_AuthorityW
  {
      SEC_WCHAR * sAuthorityName;
  } SecPkgContext_AuthorityW, * PSecPkgContext_AuthorityW;
@@ -219,7 +219,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #endif
  
 -typedef struct _SecPkgContext_ProtoInfoA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_ProtoInfoA
++typedef struct   _SecPkgContext_ProtoInfoA
  {
      SEC_CHAR *  sProtocolName;
      unsigned long       majorVersion;
@@ -228,7 +228,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // begin_ntifs
  
 -typedef struct _SecPkgContext_ProtoInfoW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_ProtoInfoW
++typedef struct   _SecPkgContext_ProtoInfoW
  {
      SEC_WCHAR * sProtocolName;
      unsigned long majorVersion;
@@ -237,7 +237,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // begin_ntifs
  
 -typedef struct _SecPkgContext_PasswordExpiry
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_PasswordExpiry
++typedef struct   _SecPkgContext_PasswordExpiry
  {
      TimeStamp tsPasswordExpires;
  } SecPkgContext_PasswordExpiry, * PSecPkgContext_PasswordExpiry;
@@ -246,7 +246,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #endif // Greater than Windows Server 2003 RTM (SP1 and greater contains this)
  
 -typedef struct _SecPkgContext_SessionKey
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_SessionKey
++typedef struct   _SecPkgContext_SessionKey
  {
      unsigned long SessionKeyLength;
      _Field_size_bytes_(SessionKeyLength) unsigned char * SessionKey;
@@ -255,7 +255,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SecPkgContext_UserFlags, * PSecPkgContext_UserFlags;
  
 -typedef struct _SecPkgContext_Flags
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_Flags
++typedef struct   _SecPkgContext_Flags
  {
      unsigned long Flags;
  } SecPkgContext_Flags, * PSecPkgContext_Flags;
@@ -264,7 +264,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  
  
 -typedef struct _SecPkgContext_NegotiationInfoA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NegotiationInfoA
++typedef struct   _SecPkgContext_NegotiationInfoA
  {
      PSecPkgInfoA    PackageInfo ;
      unsigned long   NegotiationState ;
@@ -272,7 +272,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  
  // begin_ntifs
 -typedef struct _SecPkgContext_NegotiationInfoW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_NegotiationInfoW
++typedef struct   _SecPkgContext_NegotiationInfoW
  {
      PSecPkgInfoW    PackageInfo ;
      unsigned long   NegotiationState ;
@@ -281,13 +281,13 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #endif // !UNICODE
  
 -typedef struct _SecPkgContext_AccessToken
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_AccessToken
++typedef struct   _SecPkgContext_AccessToken
  {
      void * AccessToken;
  } SecPkgContext_AccessToken, * PSecPkgContext_AccessToken;
  
 -typedef struct _SecPkgContext_TargetInformation
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_TargetInformation
++typedef struct   _SecPkgContext_TargetInformation
  {
      unsigned long MarshalledTargetInfoLength;
      unsigned char * MarshalledTargetInfo;
@@ -296,20 +296,20 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  
  
 -typedef struct _SecPkgContext_ClientSpecifiedTarget
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_ClientSpecifiedTarget
++typedef struct  _SecPkgContext_ClientSpecifiedTarget
  {
      SEC_WCHAR * sTargetName;
  } SecPkgContext_ClientSpecifiedTarget, * PSecPkgContext_ClientSpecifiedTarget;
  
 -typedef struct _SecPkgContext_Bindings
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_Bindings
++typedef struct  _SecPkgContext_Bindings
  {
      unsigned long BindingsLength;
      _Field_size_bytes_(BindingsLength) SEC_CHANNEL_BINDINGS * Bindings;
  } SecPkgContext_Bindings, * PSecPkgContext_Bindings;
  
 -typedef enum _SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS
-+typedef enum _Windows_SupportedOS_Windows81_ _SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS
++typedef enum  _SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS
  {
      SecApplicationProtocolNegotiationStatus_None,
      SecApplicationProtocolNegotiationStatus_Success,
@@ -318,16 +318,352 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  } SecPkgContext_ApplicationProtocol, *PSecPkgContext_ApplicationProtocol;
  
 -typedef struct _SecPkgContext_NegotiatedTlsExtensions
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _SecPkgContext_NegotiatedTlsExtensions
++typedef struct   _SecPkgContext_NegotiatedTlsExtensions
  {
      unsigned long ExtensionsCount;                               // Number of negotiated TLS extensions.
      _Field_size_(ExtensionsCount) unsigned short * Extensions;   // Pointer to array of 2-byte TLS extension IDs (allocated by IANA).
+@@ -1341,11 +1342,11 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ AcquireCredentialsHandleA(
+     _In_opt_  LPSTR pszPrincipal,                 // Name of principal
+     _In_      LPSTR pszPackage,                   // Name of package
+-    _In_      unsigned long fCredentialUse,       // Flags indicating use
++    _Win32_AssociatedEnum_(SECPKG_CRED) _In_      unsigned long fCredentialUse,       // Flags indicating use
+     _In_opt_  void * pvLogonId,                   // Pointer to logon ID
+     _In_opt_  void * pAuthData,                   // Package specific data
+     _In_opt_  SEC_GET_KEY_FN pGetKeyFn,           // Pointer to GetKey() func
+@@ -1376,7 +1377,7 @@ typedef SECURITY_STATUS
+ 
+ // begin_ntifs
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ FreeCredentialsHandle(
+     _In_ PCredHandle phCredential            // Handle to free
+@@ -1636,7 +1637,7 @@ SECURITY_STATUS SspiDeleteSecurityContextAsync(
+ 
+ #if ISSP_MODE != 0
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsVista_ SECURITY_STATUS SEC_ENTRY
+ ChangeAccountPasswordW(
+     _In_    SEC_WCHAR *  pszPackageName,
+     _In_    SEC_WCHAR *  pszDomainName,
+@@ -1662,7 +1663,7 @@ typedef SECURITY_STATUS
+ 
+ 
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsVista_ SECURITY_STATUS SEC_ENTRY
+ ChangeAccountPasswordA(
+     _In_    SEC_CHAR *  pszPackageName,
+     _In_    SEC_CHAR *  pszDomainName,
+@@ -1745,12 +1746,12 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
+ InitializeSecurityContextA(
+     _In_opt_    PCredHandle phCredential,               // Cred to base context
+     _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
+     _In_opt_    SEC_CHAR * pszTargetName,       // Name of target
+-    _In_        unsigned long fContextReq,              // Context Requirements
++    _Win32_AssociatedEnum_(ISC_REQ_FLAGS) _In_        unsigned long fContextReq,              // Context Requirements
+     _In_        unsigned long Reserved1,                // Reserved, MBZ
+     _In_        unsigned long TargetDataRep,            // Data rep of target
+     _In_opt_    PSecBufferDesc pInput,                  // Input Buffers
+@@ -1786,13 +1787,13 @@ typedef SECURITY_STATUS
+ 
+ // begin_ntifs
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ AcceptSecurityContext(
+     _In_opt_    PCredHandle phCredential,               // Cred to base context
+     _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
+     _In_opt_    PSecBufferDesc pInput,                  // Input buffer
+-    _In_        unsigned long fContextReq,              // Context Requirements
++    _Win32_AssociatedEnum_(ASC_REQ_FLAGS) _In_        unsigned long fContextReq,              // Context Requirements
+     _In_        unsigned long TargetDataRep,            // Target Data Rep
+     _Inout_opt_ PCtxtHandle phNewContext,               // (out) New context handle
+     _Inout_opt_ PSecBufferDesc pOutput,                 // (inout) Output buffers
+@@ -1812,7 +1813,7 @@ typedef SECURITY_STATUS
+     unsigned long *,
+     PTimeStamp);
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ CompleteAuthToken(
+     _In_ PCtxtHandle phContext,              // Context to complete
+     _In_ PSecBufferDesc pToken               // Token to complete
+@@ -1823,7 +1824,7 @@ typedef SECURITY_STATUS
+     PCtxtHandle,
+     PSecBufferDesc);
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ _Check_return_
+ SECURITY_STATUS SEC_ENTRY
+ ImpersonateSecurityContext(
+@@ -1835,7 +1836,7 @@ typedef SECURITY_STATUS
+     PCtxtHandle);
+ 
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ RevertSecurityContext(
+     _In_ PCtxtHandle phContext               // Context from which to re
+@@ -1846,7 +1847,7 @@ typedef SECURITY_STATUS
+     PCtxtHandle);
+ 
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ QuerySecurityContextToken(
+     _In_  PCtxtHandle phContext,
+@@ -1857,7 +1858,7 @@ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_SECURITY_CONTEXT_TOKEN_FN)(
+     PCtxtHandle, void * *);
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ DeleteSecurityContext(
+     _In_ PCtxtHandle phContext               // Context to delete
+@@ -1867,7 +1868,7 @@ typedef SECURITY_STATUS
+ (SEC_ENTRY * DELETE_SECURITY_CONTEXT_FN)(
+     PCtxtHandle);
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ ApplyControlToken(
+     _In_ PCtxtHandle phContext,              // Context to modify
+@@ -1878,11 +1879,11 @@ typedef SECURITY_STATUS
+ (SEC_ENTRY * APPLY_CONTROL_TOKEN_FN)(
+     PCtxtHandle, PSecBufferDesc);
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesW(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _Win32_AssociatedEnum_(SECPKG_ATTR) _In_  unsigned long ulAttribute,          // Attribute to query
+     _Out_ void * pBuffer              // Buffer for attributes
+     );
+ 
+@@ -1892,10 +1893,10 @@ typedef SECURITY_STATUS
+     unsigned long,
+     void *);
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesExW(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _Win32_AssociatedEnum_(SECPKG_ATTR) _In_  unsigned long ulAttribute,          // Attribute to query
+     _Out_writes_bytes_(cbBuffer) void * pBuffer,    // Buffer for attributes
+     _In_  unsigned long cbBuffer              // Length of buffer
+     );
+@@ -1909,10 +1910,10 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesA(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _Win32_AssociatedEnum_(SECPKG_ATTR) _In_  unsigned long ulAttribute,          // Attribute to query
+     _Out_ void * pBuffer              // Buffer for attributes
+     );
+ 
+@@ -1922,10 +1923,10 @@ typedef SECURITY_STATUS
+     unsigned long,
+     void *);
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
+ QueryContextAttributesExA(
+     _In_  PCtxtHandle phContext,              // Context to query
+-    _In_  unsigned long ulAttribute,          // Attribute to query
++    _Win32_AssociatedEnum_(SECPKG_ATTR) _In_  unsigned long ulAttribute,          // Attribute to query
+     _Out_writes_bytes_(cbBuffer) void * pBuffer,    // Buffer for attributes
+     _In_  unsigned long cbBuffer              // Length of buffer
+     );
+@@ -1953,10 +1954,10 @@ typedef SECURITY_STATUS
+ 
+ #if (OSVER(NTDDI_VERSION) > NTDDI_WIN2K)
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
+ SetContextAttributesW(
+     _In_ PCtxtHandle phContext,                   // Context to Set
+-    _In_ unsigned long ulAttribute,               // Attribute to Set
++    _Win32_AssociatedEnum_(SECPKG_ATTR) _In_ unsigned long ulAttribute,               // Attribute to Set
+     _In_reads_bytes_(cbBuffer) void * pBuffer, // Buffer for attributes
+     _In_ unsigned long cbBuffer                   // Size (in bytes) of Buffer
+     );
+@@ -1972,10 +1973,10 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
+ SetContextAttributesA(
+     _In_ PCtxtHandle phContext,                   // Context to Set
+-    _In_ unsigned long ulAttribute,               // Attribute to Set
++    _Win32_AssociatedEnum_(SECPKG_ATTR) _In_ unsigned long ulAttribute,               // Attribute to Set
+     _In_reads_bytes_(cbBuffer) void * pBuffer, // Buffer for attributes
+     _In_ unsigned long cbBuffer                   // Size (in bytes) of Buffer
+     );
+@@ -1997,7 +1998,7 @@ typedef SECURITY_STATUS
+ 
+ // begin_ntifs
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ QueryCredentialsAttributesW(
+     _In_    PCredHandle phCredential,           // Credential to query
+@@ -2028,7 +2029,7 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ QueryCredentialsAttributesA(
+     _In_    PCredHandle phCredential,           // Credential to query
+     _In_    unsigned long ulAttribute,          // Attribute to query
+@@ -2073,7 +2074,7 @@ typedef SECURITY_STATUS
+ 
+ #if NTDDI_VERSION > NTDDI_WS03
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ SetCredentialsAttributesW(
+     _In_ PCredHandle phCredential,                // Credential to Set
+@@ -2093,7 +2094,7 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
+ SetCredentialsAttributesA(
+     _In_ PCredHandle phCredential,                // Credential to Set
+     _In_ unsigned long ulAttribute,               // Attribute to Set
+@@ -2118,7 +2119,7 @@ typedef SECURITY_STATUS
+ 
+ // begin_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ FreeContextBuffer(
+     _Inout_ PVOID pvContextBuffer      // buffer to free
+     );
+@@ -2161,7 +2162,7 @@ SecFreeCallContext(
+ ////
+ //////////////////////////////////////////////////////////////////
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ MakeSignature(
+     _In_ PCtxtHandle phContext,              // Context to use
+@@ -2178,7 +2179,7 @@ typedef SECURITY_STATUS
+     unsigned long);
+ 
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ VerifySignature(
+     _In_  PCtxtHandle phContext,              // Context to use
+@@ -2198,7 +2199,7 @@ typedef SECURITY_STATUS
+ #define SECQOP_WRAP_NO_ENCRYPT      0x80000001
+ #define SECQOP_WRAP_OOB_DATA        0x40000000
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
+ EncryptMessage( _In_    PCtxtHandle         phContext,
+                 _In_    unsigned long       fQOP,
+                 _In_    PSecBufferDesc      pMessage,
+@@ -2209,7 +2210,7 @@ typedef SECURITY_STATUS
+     PCtxtHandle, unsigned long, PSecBufferDesc, unsigned long);
+ 
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ SECURITY_STATUS SEC_ENTRY
+ DecryptMessage( _In_      PCtxtHandle         phContext,
+                 _In_      PSecBufferDesc      pMessage,
+                 _In_      unsigned long       MessageSeqNo,
+@@ -2231,7 +2232,7 @@ typedef SECURITY_STATUS
+ ////
+ ///////////////////////////////////////////////////////////////////////////
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ EnumerateSecurityPackagesW(
+     _Out_       unsigned long * pcPackages,     // Receives num. packages
+@@ -2245,7 +2246,7 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ EnumerateSecurityPackagesA(
+     _Out_       unsigned long * pcPackages,     // Receives num. packages
+     _Outptr_ PSecPkgInfoA  * ppPackageInfo    // Receives array of info
+@@ -2288,7 +2289,7 @@ typedef SECURITY_STATUS
+ 
+ // end_ntifs
+ 
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ QuerySecurityPackageInfoA(
+     _In_        LPSTR pszPackageName,           // Name of package
+     _Outptr_ PSecPkgInfoA *ppPackageInfo     // Receives package info
+@@ -2362,11 +2363,11 @@ DelegateSecurityContext(
+ ///////////////////////////////////////////////////////////////////////////
+ 
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ ExportSecurityContext(
+     _In_  PCtxtHandle          phContext,             // (in) context to export
+-    _In_  ULONG                fFlags,                // (in) option flags
++    _Win32_AssociatedEnum_(EXPORT_SECURITY_CONTEXT_FLAGS) _In_  ULONG                fFlags,                // (in) option flags
+     _Out_ PSecBuffer           pPackedContext,        // (out) marshalled context
+     _Out_ void * * pToken             // (out, optional) token handle for impersonation
+     );
+@@ -2405,7 +2406,7 @@ typedef SECURITY_STATUS
+     );
+ 
+ // end_ntifs
+-SECURITY_STATUS SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
+ ImportSecurityContextA(
+     _In_  LPSTR                pszPackage,
+     _In_  PSecBuffer           pPackedContext,        // (in) marshalled context
 @@ -2569,7 +2570,7 @@ SecLookupWellKnownSid(
  
  #define FreeCredentialHandle FreeCredentialsHandle
  
 -typedef struct _SECURITY_FUNCTION_TABLE_W {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_FUNCTION_TABLE_W {
++typedef struct   _SECURITY_FUNCTION_TABLE_W {
      unsigned long                       dwVersion;
      ENUMERATE_SECURITY_PACKAGES_FN_W    EnumerateSecurityPackagesW;
      QUERY_CREDENTIALS_ATTRIBUTES_FN_W   QueryCredentialsAttributesW;
@@ -336,10 +672,28 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // end_ntifs
  
 -typedef struct _SECURITY_FUNCTION_TABLE_A {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SECURITY_FUNCTION_TABLE_A {
++typedef struct   _SECURITY_FUNCTION_TABLE_A {
      unsigned long                       dwVersion;
      ENUMERATE_SECURITY_PACKAGES_FN_A    EnumerateSecurityPackagesA;
      QUERY_CREDENTIALS_ATTRIBUTES_FN_A   QueryCredentialsAttributesA;
+@@ -2693,7 +2694,7 @@ typedef struct _SECURITY_FUNCTION_TABLE_A {
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-PSecurityFunctionTableA SEC_ENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") PSecurityFunctionTableA SEC_ENTRY
+ InitSecurityInterfaceA(
+     void
+     );
+@@ -2703,7 +2704,7 @@ typedef PSecurityFunctionTableA
+ 
+ // begin_ntifs
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ PSecurityFunctionTableW SEC_ENTRY
+ InitSecurityInterfaceW(
+     void
 @@ -2730,6 +2731,7 @@ typedef PSecurityFunctionTableW
  //
  
@@ -388,30 +742,54 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  SECURITY_STATUS
  SEC_ENTRY
  SaslIdentifyPackageW(
-@@ -2792,6 +2799,7 @@ SaslIdentifyPackageW(
+@@ -2792,13 +2799,14 @@ SaslIdentifyPackageW(
  #define SaslIdentifyPackage SaslIdentifyPackageA
  #endif
  
-+_Windows_SupportedOS_Server2003_
++_Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslInitializeSecurityContextW(
-@@ -2809,6 +2817,7 @@ SaslInitializeSecurityContextW(
+     _In_opt_    PCredHandle                 phCredential,       // Cred to base context
+     _In_opt_    PCtxtHandle                 phContext,          // Existing context (OPT)
+     _In_opt_    LPWSTR                      pszTargetName,      // Name of target
+-    _In_        unsigned long               fContextReq,        // Context Requirements
++    _Win32_AssociatedEnum_(ISC_REQ_FLAGS) _In_        unsigned long               fContextReq,        // Context Requirements
+     _In_        unsigned long               Reserved1,          // Reserved, MBZ
+     _In_        unsigned long               TargetDataRep,      // Data rep of target
+     _In_opt_    PSecBufferDesc              pInput,             // Input Buffers
+@@ -2809,13 +2817,14 @@ SaslInitializeSecurityContextW(
      _Out_opt_   PTimeStamp                  ptsExpiry           // (out) Life span (OPT)
      );
  
-+_Windows_SupportedOS_Server2003_
++_Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslInitializeSecurityContextA(
-@@ -2833,6 +2842,7 @@ SaslInitializeSecurityContextA(
+     _In_opt_    PCredHandle                 phCredential,       // Cred to base context
+     _In_opt_    PCtxtHandle                 phContext,          // Existing context (OPT)
+     _In_opt_    LPSTR                       pszTargetName,      // Name of target
+-    _In_        unsigned long               fContextReq,        // Context Requirements
++    _Win32_AssociatedEnum_(ISC_REQ_FLAGS) _In_        unsigned long               fContextReq,        // Context Requirements
+     _In_        unsigned long               Reserved1,          // Reserved, MBZ
+     _In_        unsigned long               TargetDataRep,      // Data rep of target
+     _In_opt_    PSecBufferDesc              pInput,             // Input Buffers
+@@ -2833,13 +2842,14 @@ SaslInitializeSecurityContextA(
  #endif
  
  
-+_Windows_SupportedOS_Server2003_
++_Win32_PreserveResult_ _Windows_SupportedOS_Server2003_
  SECURITY_STATUS
  SEC_ENTRY
  SaslAcceptSecurityContext(
+     _In_opt_    PCredHandle                 phCredential,       // Cred to base context
+     _In_opt_    PCtxtHandle                 phContext,          // Existing context (OPT)
+     _In_opt_    PSecBufferDesc              pInput,             // Input buffer
+-    _In_        unsigned long               fContextReq,        // Context Requirements
++    _Win32_AssociatedEnum_(ASC_REQ_FLAGS) _In_        unsigned long               fContextReq,        // Context Requirements
+     _In_        unsigned long               TargetDataRep,      // Target Data Rep
+     _Inout_opt_ PCtxtHandle                 phNewContext,       // (out) New context handle
+     _Inout_opt_ PSecBufferDesc              pOutput,            // (inout) Output buffers
 @@ -2858,6 +2868,7 @@ typedef enum _SASL_AUTHZID_STATE {
      Sasl_AuthZIDProcessed             // AuthZID Strings processed by Application or SSP
  } SASL_AUTHZID_STATE ;
@@ -433,7 +811,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #define SEC_WINNT_AUTH_IDENTITY_VERSION_2 0x201
  
 -typedef struct _SEC_WINNT_AUTH_IDENTITY_EX2 {
-+typedef struct _Windows_SupportedOS_Windows7_ _SEC_WINNT_AUTH_IDENTITY_EX2 {
++typedef struct  _SEC_WINNT_AUTH_IDENTITY_EX2 {
     unsigned long Version; // contains SEC_WINNT_AUTH_IDENTITY_VERSION_2
     unsigned short cbHeaderLength;
     unsigned long cbStructureLength;
@@ -442,7 +820,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #define SEC_WINNT_AUTH_IDENTITY_VERSION 0x200
  
 -typedef struct _SEC_WINNT_AUTH_IDENTITY_EXW {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SEC_WINNT_AUTH_IDENTITY_EXW {
++typedef struct   _SEC_WINNT_AUTH_IDENTITY_EXW {
      unsigned long Version;
      unsigned long Length;
      unsigned short *User;           //  Non-NULL terminated string.
@@ -451,7 +829,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  // end_ntifs
  
 -typedef struct _SEC_WINNT_AUTH_IDENTITY_EXA {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SEC_WINNT_AUTH_IDENTITY_EXA {
++typedef struct   _SEC_WINNT_AUTH_IDENTITY_EXA {
      unsigned long Version;
      unsigned long Length;
      unsigned char *User;            //  Non-NULL terminated string.
@@ -482,7 +860,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
      _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
      );
  
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_  
  SECURITY_STATUS
  SEC_ENTRY
  SspiEncryptAuthIdentityEx(
@@ -497,7 +875,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
      _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE EncryptedAuthData
      );
  
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_  
  SECURITY_STATUS
  SEC_ENTRY
  SspiDecryptAuthIdentityEx(
@@ -611,20 +989,23 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  SECURITY_STATUS
  SEC_ENTRY
  SspiExcludePackage(
-@@ -3683,7 +3715,7 @@ SspiSetChannelBindingFlags(
+@@ -3683,9 +3715,9 @@ SspiSetChannelBindingFlags(
  // Routines for manipulating packages
  //
  
 -typedef struct _SECURITY_PACKAGE_OPTIONS {
-+typedef struct _Windows_SupportedOS_Windows7_ _SECURITY_PACKAGE_OPTIONS {
++typedef struct  _SECURITY_PACKAGE_OPTIONS {
      unsigned long   Size;
-     unsigned long   Type;
+-    unsigned long   Type;
++    _Win32_AssociatedEnum_(SECURITY_PACKAGE_OPTIONS_TYPE) unsigned long   Type;
      unsigned long   Flags;
+     unsigned long   SignatureSize;
+     void *  Signature;
 @@ -3697,6 +3729,7 @@ typedef struct _SECURITY_PACKAGE_OPTIONS {
  
  #define SECPKG_OPTIONS_PERMANENT    0x00000001
  
-+_Windows_SupportedOS_Windows7_
++_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  AddSecurityPackageA(
@@ -632,7 +1013,7 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
      _In_opt_ PSECURITY_PACKAGE_OPTIONS pOptions
      );
  
-+_Windows_SupportedOS_Windows7_
++_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  AddSecurityPackageW(
@@ -640,14 +1021,501 @@ index 06f5ed27e9a6563ffbfcd8c6c1782ad95a0164c9..8ea285cc7e8c4f6641daf4cef13b0dee
  #define AddSecurityPackage  AddSecurityPackageA
  #endif
  
-+_Windows_SupportedOS_Windows7_
++_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  DeleteSecurityPackageA(
      _In_ LPSTR pszPackageName
      );
  
-+_Windows_SupportedOS_Windows7_
++_Win32_ImportLibrary_("secur32.dll") _Windows_SupportedOS_Windows7_
  SECURITY_STATUS
  SEC_ENTRY
  DeleteSecurityPackageW(
+@@ -3743,5 +3779,486 @@ DeleteSecurityPackageW(
+ #endif
+ 
+ // begin_ntifs
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECPKG_ATTR_C_ACCESS_TOKEN")
++#undef SECPKG_ATTR_C_ACCESS_TOKEN
++#pragma push_macro("SECPKG_ATTR_C_FULL_ACCESS_TOKEN")
++#undef SECPKG_ATTR_C_FULL_ACCESS_TOKEN
++#pragma push_macro("SECPKG_ATTR_CERT_TRUST_STATUS")
++#undef SECPKG_ATTR_CERT_TRUST_STATUS
++#pragma push_macro("SECPKG_ATTR_CREDS")
++#undef SECPKG_ATTR_CREDS
++#pragma push_macro("SECPKG_ATTR_CREDS_2")
++#undef SECPKG_ATTR_CREDS_2
++#pragma push_macro("SECPKG_ATTR_NEGOTIATION_PACKAGE")
++#undef SECPKG_ATTR_NEGOTIATION_PACKAGE
++#pragma push_macro("SECPKG_ATTR_PACKAGE_INFO")
++#undef SECPKG_ATTR_PACKAGE_INFO
++#pragma push_macro("SECPKG_ATTR_SERVER_AUTH_FLAGS")
++#undef SECPKG_ATTR_SERVER_AUTH_FLAGS
++#pragma push_macro("SECPKG_ATTR_SIZES")
++#undef SECPKG_ATTR_SIZES
++#pragma push_macro("SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES")
++#undef SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES
++#pragma push_macro("SECPKG_ATTR_APP_DATA")
++#undef SECPKG_ATTR_APP_DATA
++#pragma push_macro("SECPKG_ATTR_EAP_PRF_INFO")
++#undef SECPKG_ATTR_EAP_PRF_INFO
++#pragma push_macro("SECPKG_ATTR_EARLY_START")
++#undef SECPKG_ATTR_EARLY_START
++#pragma push_macro("SECPKG_ATTR_DTLS_MTU")
++#undef SECPKG_ATTR_DTLS_MTU
++#pragma push_macro("SECPKG_ATTR_KEYING_MATERIAL_INFO")
++#undef SECPKG_ATTR_KEYING_MATERIAL_INFO
++#pragma push_macro("SECPKG_ATTR_ACCESS_TOKEN")
++#undef SECPKG_ATTR_ACCESS_TOKEN
++#pragma push_macro("SECPKG_ATTR_AUTHORITY")
++#undef SECPKG_ATTR_AUTHORITY
++#pragma push_macro("SECPKG_ATTR_CLIENT_SPECIFIED_TARGET")
++#undef SECPKG_ATTR_CLIENT_SPECIFIED_TARGET
++#pragma push_macro("SECPKG_ATTR_CONNECTION_INFO")
++#undef SECPKG_ATTR_CONNECTION_INFO
++#pragma push_macro("SECPKG_ATTR_DCE_INFO")
++#undef SECPKG_ATTR_DCE_INFO
++#pragma push_macro("SECPKG_ATTR_ENDPOINT_BINDINGS")
++#undef SECPKG_ATTR_ENDPOINT_BINDINGS
++#pragma push_macro("SECPKG_ATTR_EAP_KEY_BLOCK")
++#undef SECPKG_ATTR_EAP_KEY_BLOCK
++#pragma push_macro("SECPKG_ATTR_FLAGS")
++#undef SECPKG_ATTR_FLAGS
++#pragma push_macro("SECPKG_ATTR_ISSUER_LIST_EX")
++#undef SECPKG_ATTR_ISSUER_LIST_EX
++#pragma push_macro("SECPKG_ATTR_KEY_INFO")
++#undef SECPKG_ATTR_KEY_INFO
++#pragma push_macro("SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS")
++#undef SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS
++#pragma push_macro("SECPKG_ATTR_LIFESPAN")
++#undef SECPKG_ATTR_LIFESPAN
++#pragma push_macro("SECPKG_ATTR_LOCAL_CERT_CONTEXT")
++#undef SECPKG_ATTR_LOCAL_CERT_CONTEXT
++#pragma push_macro("SECPKG_ATTR_LOCAL_CRED")
++#undef SECPKG_ATTR_LOCAL_CRED
++#pragma push_macro("SECPKG_ATTR_NAMES")
++#undef SECPKG_ATTR_NAMES
++#pragma push_macro("SECPKG_ATTR_NATIVE_NAMES")
++#undef SECPKG_ATTR_NATIVE_NAMES
++#pragma push_macro("SECPKG_ATTR_NEGOTIATION_INFO")
++#undef SECPKG_ATTR_NEGOTIATION_INFO
++#pragma push_macro("SECPKG_ATTR_PASSWORD_EXPIRY")
++#undef SECPKG_ATTR_PASSWORD_EXPIRY
++#pragma push_macro("SECPKG_ATTR_REMOTE_CERT_CONTEXT")
++#undef SECPKG_ATTR_REMOTE_CERT_CONTEXT
++#pragma push_macro("SECPKG_ATTR_ROOT_STORE")
++#undef SECPKG_ATTR_ROOT_STORE
++#pragma push_macro("SECPKG_ATTR_SESSION_KEY")
++#undef SECPKG_ATTR_SESSION_KEY
++#pragma push_macro("SECPKG_ATTR_SESSION_INFO")
++#undef SECPKG_ATTR_SESSION_INFO
++#pragma push_macro("SECPKG_ATTR_STREAM_SIZES")
++#undef SECPKG_ATTR_STREAM_SIZES
++#pragma push_macro("SECPKG_ATTR_SUPPORTED_SIGNATURES")
++#undef SECPKG_ATTR_SUPPORTED_SIGNATURES
++#pragma push_macro("SECPKG_ATTR_TARGET_INFORMATION")
++#undef SECPKG_ATTR_TARGET_INFORMATION
++#pragma push_macro("SECPKG_ATTR_UNIQUE_BINDINGS")
++#undef SECPKG_ATTR_UNIQUE_BINDINGS
++enum SECPKG_ATTR : unsigned int
++{
++    SECPKG_ATTR_C_ACCESS_TOKEN = 2147483666U,
++    SECPKG_ATTR_C_FULL_ACCESS_TOKEN = 2147483778U,
++    SECPKG_ATTR_CERT_TRUST_STATUS = 2147483780U,
++    SECPKG_ATTR_CREDS = 2147483776U,
++    SECPKG_ATTR_CREDS_2 = 2147483782U,
++    SECPKG_ATTR_NEGOTIATION_PACKAGE = 2147483777U,
++    SECPKG_ATTR_PACKAGE_INFO = 10U,
++    SECPKG_ATTR_SERVER_AUTH_FLAGS = 2147483779U,
++    SECPKG_ATTR_SIZES = 0U,
++    SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES = 124U,
++    SECPKG_ATTR_APP_DATA = 94U,
++    SECPKG_ATTR_EAP_PRF_INFO = 101U,
++    SECPKG_ATTR_EARLY_START = 105U,
++    SECPKG_ATTR_DTLS_MTU = 34U,
++    SECPKG_ATTR_KEYING_MATERIAL_INFO = 106U,
++    SECPKG_ATTR_ACCESS_TOKEN = 18U,
++    SECPKG_ATTR_AUTHORITY = 6U,
++    SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 27U,
++    SECPKG_ATTR_CONNECTION_INFO = 90U,
++    SECPKG_ATTR_DCE_INFO = 3U,
++    SECPKG_ATTR_ENDPOINT_BINDINGS = 26U,
++    SECPKG_ATTR_EAP_KEY_BLOCK = 91U,
++    SECPKG_ATTR_FLAGS = 14U,
++    SECPKG_ATTR_ISSUER_LIST_EX = 89U,
++    SECPKG_ATTR_KEY_INFO = 5U,
++    SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS = 30U,
++    SECPKG_ATTR_LIFESPAN = 2U,
++    SECPKG_ATTR_LOCAL_CERT_CONTEXT = 84U,
++    SECPKG_ATTR_LOCAL_CRED = 82U,
++    SECPKG_ATTR_NAMES = 1U,
++    SECPKG_ATTR_NATIVE_NAMES = 13U,
++    SECPKG_ATTR_NEGOTIATION_INFO = 12U,
++    SECPKG_ATTR_PASSWORD_EXPIRY = 8U,
++    SECPKG_ATTR_REMOTE_CERT_CONTEXT = 83U,
++    SECPKG_ATTR_ROOT_STORE = 85U,
++    SECPKG_ATTR_SESSION_KEY = 9U,
++    SECPKG_ATTR_SESSION_INFO = 93U,
++    SECPKG_ATTR_STREAM_SIZES = 4U,
++    SECPKG_ATTR_SUPPORTED_SIGNATURES = 102U,
++    SECPKG_ATTR_TARGET_INFORMATION = 17U,
++    SECPKG_ATTR_UNIQUE_BINDINGS = 25U,
++};
++#pragma pop_macro("SECPKG_ATTR_UNIQUE_BINDINGS")
++#pragma pop_macro("SECPKG_ATTR_TARGET_INFORMATION")
++#pragma pop_macro("SECPKG_ATTR_SUPPORTED_SIGNATURES")
++#pragma pop_macro("SECPKG_ATTR_STREAM_SIZES")
++#pragma pop_macro("SECPKG_ATTR_SESSION_INFO")
++#pragma pop_macro("SECPKG_ATTR_SESSION_KEY")
++#pragma pop_macro("SECPKG_ATTR_ROOT_STORE")
++#pragma pop_macro("SECPKG_ATTR_REMOTE_CERT_CONTEXT")
++#pragma pop_macro("SECPKG_ATTR_PASSWORD_EXPIRY")
++#pragma pop_macro("SECPKG_ATTR_NEGOTIATION_INFO")
++#pragma pop_macro("SECPKG_ATTR_NATIVE_NAMES")
++#pragma pop_macro("SECPKG_ATTR_NAMES")
++#pragma pop_macro("SECPKG_ATTR_LOCAL_CRED")
++#pragma pop_macro("SECPKG_ATTR_LOCAL_CERT_CONTEXT")
++#pragma pop_macro("SECPKG_ATTR_LIFESPAN")
++#pragma pop_macro("SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS")
++#pragma pop_macro("SECPKG_ATTR_KEY_INFO")
++#pragma pop_macro("SECPKG_ATTR_ISSUER_LIST_EX")
++#pragma pop_macro("SECPKG_ATTR_FLAGS")
++#pragma pop_macro("SECPKG_ATTR_EAP_KEY_BLOCK")
++#pragma pop_macro("SECPKG_ATTR_ENDPOINT_BINDINGS")
++#pragma pop_macro("SECPKG_ATTR_DCE_INFO")
++#pragma pop_macro("SECPKG_ATTR_CONNECTION_INFO")
++#pragma pop_macro("SECPKG_ATTR_CLIENT_SPECIFIED_TARGET")
++#pragma pop_macro("SECPKG_ATTR_AUTHORITY")
++#pragma pop_macro("SECPKG_ATTR_ACCESS_TOKEN")
++#pragma pop_macro("SECPKG_ATTR_KEYING_MATERIAL_INFO")
++#pragma pop_macro("SECPKG_ATTR_DTLS_MTU")
++#pragma pop_macro("SECPKG_ATTR_EARLY_START")
++#pragma pop_macro("SECPKG_ATTR_EAP_PRF_INFO")
++#pragma pop_macro("SECPKG_ATTR_APP_DATA")
++#pragma pop_macro("SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES")
++#pragma pop_macro("SECPKG_ATTR_SIZES")
++#pragma pop_macro("SECPKG_ATTR_SERVER_AUTH_FLAGS")
++#pragma pop_macro("SECPKG_ATTR_PACKAGE_INFO")
++#pragma pop_macro("SECPKG_ATTR_NEGOTIATION_PACKAGE")
++#pragma pop_macro("SECPKG_ATTR_CREDS_2")
++#pragma pop_macro("SECPKG_ATTR_CREDS")
++#pragma pop_macro("SECPKG_ATTR_CERT_TRUST_STATUS")
++#pragma pop_macro("SECPKG_ATTR_C_FULL_ACCESS_TOKEN")
++#pragma pop_macro("SECPKG_ATTR_C_ACCESS_TOKEN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECPKG_CRED_INBOUND")
++#undef SECPKG_CRED_INBOUND
++#pragma push_macro("SECPKG_CRED_OUTBOUND")
++#undef SECPKG_CRED_OUTBOUND
++enum SECPKG_CRED : unsigned int
++{
++    SECPKG_CRED_INBOUND = 1U,
++    SECPKG_CRED_OUTBOUND = 2U,
++};
++#pragma pop_macro("SECPKG_CRED_OUTBOUND")
++#pragma pop_macro("SECPKG_CRED_INBOUND")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECPKG_CONTEXT_EXPORT_RESET_NEW")
++#undef SECPKG_CONTEXT_EXPORT_RESET_NEW
++#pragma push_macro("SECPKG_CONTEXT_EXPORT_DELETE_OLD")
++#undef SECPKG_CONTEXT_EXPORT_DELETE_OLD
++#pragma push_macro("SECPKG_CONTEXT_EXPORT_TO_KERNEL")
++#undef SECPKG_CONTEXT_EXPORT_TO_KERNEL
++enum [[clang::flag_enum]] EXPORT_SECURITY_CONTEXT_FLAGS : unsigned int
++{
++    SECPKG_CONTEXT_EXPORT_RESET_NEW = 1U,
++    SECPKG_CONTEXT_EXPORT_DELETE_OLD = 2U,
++    SECPKG_CONTEXT_EXPORT_TO_KERNEL = 4U,
++};
++#pragma pop_macro("SECPKG_CONTEXT_EXPORT_TO_KERNEL")
++#pragma pop_macro("SECPKG_CONTEXT_EXPORT_DELETE_OLD")
++#pragma pop_macro("SECPKG_CONTEXT_EXPORT_RESET_NEW")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECPKG_OPTIONS_TYPE_UNKNOWN")
++#undef SECPKG_OPTIONS_TYPE_UNKNOWN
++#pragma push_macro("SECPKG_OPTIONS_TYPE_LSA")
++#undef SECPKG_OPTIONS_TYPE_LSA
++#pragma push_macro("SECPKG_OPTIONS_TYPE_SSPI")
++#undef SECPKG_OPTIONS_TYPE_SSPI
++enum SECURITY_PACKAGE_OPTIONS_TYPE : unsigned int
++{
++    SECPKG_OPTIONS_TYPE_UNKNOWN = 0U,
++    SECPKG_OPTIONS_TYPE_LSA = 1U,
++    SECPKG_OPTIONS_TYPE_SSPI = 2U,
++};
++#pragma pop_macro("SECPKG_OPTIONS_TYPE_SSPI")
++#pragma pop_macro("SECPKG_OPTIONS_TYPE_LSA")
++#pragma pop_macro("SECPKG_OPTIONS_TYPE_UNKNOWN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ISC_REQ_MESSAGES")
++#undef ISC_REQ_MESSAGES
++#pragma push_macro("ISC_REQ_DEFERRED_CRED_VALIDATION")
++#undef ISC_REQ_DEFERRED_CRED_VALIDATION
++#pragma push_macro("ISC_REQ_NO_POST_HANDSHAKE_AUTH")
++#undef ISC_REQ_NO_POST_HANDSHAKE_AUTH
++#pragma push_macro("ISC_REQ_REUSE_SESSION_TICKETS")
++#undef ISC_REQ_REUSE_SESSION_TICKETS
++#pragma push_macro("ISC_REQ_EXPLICIT_SESSION")
++#undef ISC_REQ_EXPLICIT_SESSION
++enum [[clang::flag_enum]] ISC_REQ_HIGH_FLAGS : unsigned long long
++{
++    ISC_REQ_MESSAGES = 4294967296ULL,
++    ISC_REQ_DEFERRED_CRED_VALIDATION = 8589934592ULL,
++    ISC_REQ_NO_POST_HANDSHAKE_AUTH = 17179869184ULL,
++    ISC_REQ_REUSE_SESSION_TICKETS = 34359738368ULL,
++    ISC_REQ_EXPLICIT_SESSION = 68719476736ULL,
++};
++#pragma pop_macro("ISC_REQ_EXPLICIT_SESSION")
++#pragma pop_macro("ISC_REQ_REUSE_SESSION_TICKETS")
++#pragma pop_macro("ISC_REQ_NO_POST_HANDSHAKE_AUTH")
++#pragma pop_macro("ISC_REQ_DEFERRED_CRED_VALIDATION")
++#pragma pop_macro("ISC_REQ_MESSAGES")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ISC_REQ_DELEGATE")
++#undef ISC_REQ_DELEGATE
++#pragma push_macro("ISC_REQ_MUTUAL_AUTH")
++#undef ISC_REQ_MUTUAL_AUTH
++#pragma push_macro("ISC_REQ_REPLAY_DETECT")
++#undef ISC_REQ_REPLAY_DETECT
++#pragma push_macro("ISC_REQ_SEQUENCE_DETECT")
++#undef ISC_REQ_SEQUENCE_DETECT
++#pragma push_macro("ISC_REQ_CONFIDENTIALITY")
++#undef ISC_REQ_CONFIDENTIALITY
++#pragma push_macro("ISC_REQ_USE_SESSION_KEY")
++#undef ISC_REQ_USE_SESSION_KEY
++#pragma push_macro("ISC_REQ_PROMPT_FOR_CREDS")
++#undef ISC_REQ_PROMPT_FOR_CREDS
++#pragma push_macro("ISC_REQ_USE_SUPPLIED_CREDS")
++#undef ISC_REQ_USE_SUPPLIED_CREDS
++#pragma push_macro("ISC_REQ_ALLOCATE_MEMORY")
++#undef ISC_REQ_ALLOCATE_MEMORY
++#pragma push_macro("ISC_REQ_USE_DCE_STYLE")
++#undef ISC_REQ_USE_DCE_STYLE
++#pragma push_macro("ISC_REQ_DATAGRAM")
++#undef ISC_REQ_DATAGRAM
++#pragma push_macro("ISC_REQ_CONNECTION")
++#undef ISC_REQ_CONNECTION
++#pragma push_macro("ISC_REQ_CALL_LEVEL")
++#undef ISC_REQ_CALL_LEVEL
++#pragma push_macro("ISC_REQ_FRAGMENT_SUPPLIED")
++#undef ISC_REQ_FRAGMENT_SUPPLIED
++#pragma push_macro("ISC_REQ_EXTENDED_ERROR")
++#undef ISC_REQ_EXTENDED_ERROR
++#pragma push_macro("ISC_REQ_STREAM")
++#undef ISC_REQ_STREAM
++#pragma push_macro("ISC_REQ_INTEGRITY")
++#undef ISC_REQ_INTEGRITY
++#pragma push_macro("ISC_REQ_IDENTIFY")
++#undef ISC_REQ_IDENTIFY
++#pragma push_macro("ISC_REQ_NULL_SESSION")
++#undef ISC_REQ_NULL_SESSION
++#pragma push_macro("ISC_REQ_MANUAL_CRED_VALIDATION")
++#undef ISC_REQ_MANUAL_CRED_VALIDATION
++#pragma push_macro("ISC_REQ_RESERVED1")
++#undef ISC_REQ_RESERVED1
++#pragma push_macro("ISC_REQ_FRAGMENT_TO_FIT")
++#undef ISC_REQ_FRAGMENT_TO_FIT
++#pragma push_macro("ISC_REQ_FORWARD_CREDENTIALS")
++#undef ISC_REQ_FORWARD_CREDENTIALS
++#pragma push_macro("ISC_REQ_NO_INTEGRITY")
++#undef ISC_REQ_NO_INTEGRITY
++#pragma push_macro("ISC_REQ_USE_HTTP_STYLE")
++#undef ISC_REQ_USE_HTTP_STYLE
++#pragma push_macro("ISC_REQ_UNVERIFIED_TARGET_NAME")
++#undef ISC_REQ_UNVERIFIED_TARGET_NAME
++#pragma push_macro("ISC_REQ_CONFIDENTIALITY_ONLY")
++#undef ISC_REQ_CONFIDENTIALITY_ONLY
++enum [[clang::flag_enum]] ISC_REQ_FLAGS : unsigned int
++{
++    ISC_REQ_DELEGATE = 1U,
++    ISC_REQ_MUTUAL_AUTH = 2U,
++    ISC_REQ_REPLAY_DETECT = 4U,
++    ISC_REQ_SEQUENCE_DETECT = 8U,
++    ISC_REQ_CONFIDENTIALITY = 16U,
++    ISC_REQ_USE_SESSION_KEY = 32U,
++    ISC_REQ_PROMPT_FOR_CREDS = 64U,
++    ISC_REQ_USE_SUPPLIED_CREDS = 128U,
++    ISC_REQ_ALLOCATE_MEMORY = 256U,
++    ISC_REQ_USE_DCE_STYLE = 512U,
++    ISC_REQ_DATAGRAM = 1024U,
++    ISC_REQ_CONNECTION = 2048U,
++    ISC_REQ_CALL_LEVEL = 4096U,
++    ISC_REQ_FRAGMENT_SUPPLIED = 8192U,
++    ISC_REQ_EXTENDED_ERROR = 16384U,
++    ISC_REQ_STREAM = 32768U,
++    ISC_REQ_INTEGRITY = 65536U,
++    ISC_REQ_IDENTIFY = 131072U,
++    ISC_REQ_NULL_SESSION = 262144U,
++    ISC_REQ_MANUAL_CRED_VALIDATION = 524288U,
++    ISC_REQ_RESERVED1 = 1048576U,
++    ISC_REQ_FRAGMENT_TO_FIT = 2097152U,
++    ISC_REQ_FORWARD_CREDENTIALS = 4194304U,
++    ISC_REQ_NO_INTEGRITY = 8388608U,
++    ISC_REQ_USE_HTTP_STYLE = 16777216U,
++    ISC_REQ_UNVERIFIED_TARGET_NAME = 536870912U,
++    ISC_REQ_CONFIDENTIALITY_ONLY = 1073741824U,
++};
++#pragma pop_macro("ISC_REQ_CONFIDENTIALITY_ONLY")
++#pragma pop_macro("ISC_REQ_UNVERIFIED_TARGET_NAME")
++#pragma pop_macro("ISC_REQ_USE_HTTP_STYLE")
++#pragma pop_macro("ISC_REQ_NO_INTEGRITY")
++#pragma pop_macro("ISC_REQ_FORWARD_CREDENTIALS")
++#pragma pop_macro("ISC_REQ_FRAGMENT_TO_FIT")
++#pragma pop_macro("ISC_REQ_RESERVED1")
++#pragma pop_macro("ISC_REQ_MANUAL_CRED_VALIDATION")
++#pragma pop_macro("ISC_REQ_NULL_SESSION")
++#pragma pop_macro("ISC_REQ_IDENTIFY")
++#pragma pop_macro("ISC_REQ_INTEGRITY")
++#pragma pop_macro("ISC_REQ_STREAM")
++#pragma pop_macro("ISC_REQ_EXTENDED_ERROR")
++#pragma pop_macro("ISC_REQ_FRAGMENT_SUPPLIED")
++#pragma pop_macro("ISC_REQ_CALL_LEVEL")
++#pragma pop_macro("ISC_REQ_CONNECTION")
++#pragma pop_macro("ISC_REQ_DATAGRAM")
++#pragma pop_macro("ISC_REQ_USE_DCE_STYLE")
++#pragma pop_macro("ISC_REQ_ALLOCATE_MEMORY")
++#pragma pop_macro("ISC_REQ_USE_SUPPLIED_CREDS")
++#pragma pop_macro("ISC_REQ_PROMPT_FOR_CREDS")
++#pragma pop_macro("ISC_REQ_USE_SESSION_KEY")
++#pragma pop_macro("ISC_REQ_CONFIDENTIALITY")
++#pragma pop_macro("ISC_REQ_SEQUENCE_DETECT")
++#pragma pop_macro("ISC_REQ_REPLAY_DETECT")
++#pragma pop_macro("ISC_REQ_MUTUAL_AUTH")
++#pragma pop_macro("ISC_REQ_DELEGATE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ASC_REQ_MESSAGES")
++#undef ASC_REQ_MESSAGES
++#pragma push_macro("ASC_REQ_EXPLICIT_SESSION")
++#undef ASC_REQ_EXPLICIT_SESSION
++enum [[clang::flag_enum]] ASC_REQ_HIGH_FLAGS : unsigned long long
++{
++    ASC_REQ_MESSAGES = 4294967296ULL,
++    ASC_REQ_EXPLICIT_SESSION = 68719476736ULL,
++};
++#pragma pop_macro("ASC_REQ_EXPLICIT_SESSION")
++#pragma pop_macro("ASC_REQ_MESSAGES")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ASC_REQ_DELEGATE")
++#undef ASC_REQ_DELEGATE
++#pragma push_macro("ASC_REQ_MUTUAL_AUTH")
++#undef ASC_REQ_MUTUAL_AUTH
++#pragma push_macro("ASC_REQ_REPLAY_DETECT")
++#undef ASC_REQ_REPLAY_DETECT
++#pragma push_macro("ASC_REQ_SEQUENCE_DETECT")
++#undef ASC_REQ_SEQUENCE_DETECT
++#pragma push_macro("ASC_REQ_CONFIDENTIALITY")
++#undef ASC_REQ_CONFIDENTIALITY
++#pragma push_macro("ASC_REQ_USE_SESSION_KEY")
++#undef ASC_REQ_USE_SESSION_KEY
++#pragma push_macro("ASC_REQ_SESSION_TICKET")
++#undef ASC_REQ_SESSION_TICKET
++#pragma push_macro("ASC_REQ_ALLOCATE_MEMORY")
++#undef ASC_REQ_ALLOCATE_MEMORY
++#pragma push_macro("ASC_REQ_USE_DCE_STYLE")
++#undef ASC_REQ_USE_DCE_STYLE
++#pragma push_macro("ASC_REQ_DATAGRAM")
++#undef ASC_REQ_DATAGRAM
++#pragma push_macro("ASC_REQ_CONNECTION")
++#undef ASC_REQ_CONNECTION
++#pragma push_macro("ASC_REQ_CALL_LEVEL")
++#undef ASC_REQ_CALL_LEVEL
++#pragma push_macro("ASC_REQ_FRAGMENT_SUPPLIED")
++#undef ASC_REQ_FRAGMENT_SUPPLIED
++#pragma push_macro("ASC_REQ_EXTENDED_ERROR")
++#undef ASC_REQ_EXTENDED_ERROR
++#pragma push_macro("ASC_REQ_STREAM")
++#undef ASC_REQ_STREAM
++#pragma push_macro("ASC_REQ_INTEGRITY")
++#undef ASC_REQ_INTEGRITY
++#pragma push_macro("ASC_REQ_LICENSING")
++#undef ASC_REQ_LICENSING
++#pragma push_macro("ASC_REQ_IDENTIFY")
++#undef ASC_REQ_IDENTIFY
++#pragma push_macro("ASC_REQ_ALLOW_NULL_SESSION")
++#undef ASC_REQ_ALLOW_NULL_SESSION
++#pragma push_macro("ASC_REQ_ALLOW_NON_USER_LOGONS")
++#undef ASC_REQ_ALLOW_NON_USER_LOGONS
++#pragma push_macro("ASC_REQ_ALLOW_CONTEXT_REPLAY")
++#undef ASC_REQ_ALLOW_CONTEXT_REPLAY
++#pragma push_macro("ASC_REQ_FRAGMENT_TO_FIT")
++#undef ASC_REQ_FRAGMENT_TO_FIT
++#pragma push_macro("ASC_REQ_NO_TOKEN")
++#undef ASC_REQ_NO_TOKEN
++#pragma push_macro("ASC_REQ_PROXY_BINDINGS")
++#undef ASC_REQ_PROXY_BINDINGS
++#pragma push_macro("ASC_REQ_ALLOW_MISSING_BINDINGS")
++#undef ASC_REQ_ALLOW_MISSING_BINDINGS
++enum [[clang::flag_enum]] ASC_REQ_FLAGS : unsigned int
++{
++    ASC_REQ_DELEGATE = 1U,
++    ASC_REQ_MUTUAL_AUTH = 2U,
++    ASC_REQ_REPLAY_DETECT = 4U,
++    ASC_REQ_SEQUENCE_DETECT = 8U,
++    ASC_REQ_CONFIDENTIALITY = 16U,
++    ASC_REQ_USE_SESSION_KEY = 32U,
++    ASC_REQ_SESSION_TICKET = 64U,
++    ASC_REQ_ALLOCATE_MEMORY = 256U,
++    ASC_REQ_USE_DCE_STYLE = 512U,
++    ASC_REQ_DATAGRAM = 1024U,
++    ASC_REQ_CONNECTION = 2048U,
++    ASC_REQ_CALL_LEVEL = 4096U,
++    ASC_REQ_FRAGMENT_SUPPLIED = 8192U,
++    ASC_REQ_EXTENDED_ERROR = 32768U,
++    ASC_REQ_STREAM = 65536U,
++    ASC_REQ_INTEGRITY = 131072U,
++    ASC_REQ_LICENSING = 262144U,
++    ASC_REQ_IDENTIFY = 524288U,
++    ASC_REQ_ALLOW_NULL_SESSION = 1048576U,
++    ASC_REQ_ALLOW_NON_USER_LOGONS = 2097152U,
++    ASC_REQ_ALLOW_CONTEXT_REPLAY = 4194304U,
++    ASC_REQ_FRAGMENT_TO_FIT = 8388608U,
++    ASC_REQ_NO_TOKEN = 16777216U,
++    ASC_REQ_PROXY_BINDINGS = 67108864U,
++    ASC_REQ_ALLOW_MISSING_BINDINGS = 268435456U,
++};
++#pragma pop_macro("ASC_REQ_ALLOW_MISSING_BINDINGS")
++#pragma pop_macro("ASC_REQ_PROXY_BINDINGS")
++#pragma pop_macro("ASC_REQ_NO_TOKEN")
++#pragma pop_macro("ASC_REQ_FRAGMENT_TO_FIT")
++#pragma pop_macro("ASC_REQ_ALLOW_CONTEXT_REPLAY")
++#pragma pop_macro("ASC_REQ_ALLOW_NON_USER_LOGONS")
++#pragma pop_macro("ASC_REQ_ALLOW_NULL_SESSION")
++#pragma pop_macro("ASC_REQ_IDENTIFY")
++#pragma pop_macro("ASC_REQ_LICENSING")
++#pragma pop_macro("ASC_REQ_INTEGRITY")
++#pragma pop_macro("ASC_REQ_STREAM")
++#pragma pop_macro("ASC_REQ_EXTENDED_ERROR")
++#pragma pop_macro("ASC_REQ_FRAGMENT_SUPPLIED")
++#pragma pop_macro("ASC_REQ_CALL_LEVEL")
++#pragma pop_macro("ASC_REQ_CONNECTION")
++#pragma pop_macro("ASC_REQ_DATAGRAM")
++#pragma pop_macro("ASC_REQ_USE_DCE_STYLE")
++#pragma pop_macro("ASC_REQ_ALLOCATE_MEMORY")
++#pragma pop_macro("ASC_REQ_SESSION_TICKET")
++#pragma pop_macro("ASC_REQ_USE_SESSION_KEY")
++#pragma pop_macro("ASC_REQ_CONFIDENTIALITY")
++#pragma pop_macro("ASC_REQ_SEQUENCE_DETECT")
++#pragma pop_macro("ASC_REQ_REPLAY_DETECT")
++#pragma pop_macro("ASC_REQ_MUTUAL_AUTH")
++#pragma pop_macro("ASC_REQ_DELEGATE")
++#endif
++
+ #endif // __SSPI_H__
+ // end_ntifs

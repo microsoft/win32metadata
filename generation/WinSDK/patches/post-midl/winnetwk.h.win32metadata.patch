@@ -1,0 +1,812 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h
+index 1cd6d53cc6..0a8d4bb948 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnetwk.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++
+@@ -98,8 +99,8 @@ extern "C" {
+ #endif /* WINVER >= 0x0400 */
+ 
+ typedef struct  _NETRESOURCEA {
+-    DWORD    dwScope;
+-    DWORD    dwType;
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) DWORD    dwScope;
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) DWORD    dwType;
+     DWORD    dwDisplayType;
+     DWORD    dwUsage;
+     LPSTR    lpLocalName;
+@@ -108,8 +109,8 @@ typedef struct  _NETRESOURCEA {
+     LPSTR    lpProvider;
+ }NETRESOURCEA, *LPNETRESOURCEA;
+ typedef struct  _NETRESOURCEW {
+-    DWORD    dwScope;
+-    DWORD    dwType;
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) DWORD    dwScope;
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) DWORD    dwType;
+     DWORD    dwDisplayType;
+     DWORD    dwUsage;
+     LPWSTR   lpLocalName;
+@@ -162,14 +163,14 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
+ 
+ #endif
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnectionA(
+     _In_     LPCSTR   lpRemoteName,
+     _In_opt_ LPCSTR   lpPassword,
+     _In_opt_ LPCSTR   lpLocalName
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnectionW(
+     _In_     LPCWSTR   lpRemoteName,
+@@ -182,21 +183,21 @@ WNetAddConnectionW(
+ #define WNetAddConnection  WNetAddConnectionA
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection2A(
+     _In_     LPNETRESOURCEA lpNetResource,
+     _In_opt_ LPCSTR       lpPassword,
+     _In_opt_ LPCSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection2W(
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_opt_ LPCWSTR       lpPassword,
+     _In_opt_ LPCWSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
+ #ifdef UNICODE
+ #define WNetAddConnection2  WNetAddConnection2W
+@@ -204,23 +205,23 @@ WNetAddConnection2W(
+ #define WNetAddConnection2  WNetAddConnection2A
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection3A(
+     _In_opt_ HWND           hwndOwner,
+     _In_     LPNETRESOURCEA lpNetResource,
+     _In_opt_ LPCSTR       lpPassword,
+     _In_opt_ LPCSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection3W(
+     _In_opt_ HWND           hwndOwner,
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_opt_ LPCWSTR       lpPassword,
+     _In_opt_ LPCWSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
+ #ifdef UNICODE
+ #define WNetAddConnection3  WNetAddConnection3W
+@@ -229,25 +230,25 @@ WNetAddConnection3W(
+ #endif // !UNICODE
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+-_Check_return_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection4A(
+     _In_opt_ HWND           hwndOwner,
+     _In_     LPNETRESOURCEA lpNetResource,
+     _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
+     _In_     DWORD          cbAuthBuffer,
+-    _In_     DWORD          dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags,
+     _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
+     _In_     DWORD          cbUseOptions
+     );
+-_Check_return_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection4W(
+     _In_opt_ HWND           hwndOwner,
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
+     _In_     DWORD          cbAuthBuffer,
+-    _In_     DWORD          dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags,
+     _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
+     _In_     DWORD          cbUseOptions
+     );
+@@ -258,13 +259,13 @@ WNetAddConnection4W(
+ #endif // !UNICODE
+ #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnectionA(
+     _In_ LPCSTR lpName,
+     _In_ BOOL     fForce
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnectionW(
+     _In_ LPCWSTR lpName,
+@@ -276,18 +277,18 @@ WNetCancelConnectionW(
+ #define WNetCancelConnection  WNetCancelConnectionA
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnection2A(
+     _In_ LPCSTR lpName,
+-    _In_ DWORD    dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_ DWORD    dwFlags,
+     _In_ BOOL     fForce
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnection2W(
+     _In_ LPCWSTR lpName,
+-    _In_ DWORD    dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_ DWORD    dwFlags,
+     _In_ BOOL     fForce
+     );
+ #ifdef UNICODE
+@@ -296,14 +297,14 @@ WNetCancelConnection2W(
+ #define WNetCancelConnection2  WNetCancelConnection2A
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetConnectionA(
+     _In_ LPCSTR lpLocalName,
+     _Out_writes_opt_(*lpnLength) LPSTR  lpRemoteName,
+     _Inout_ LPDWORD lpnLength
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetConnectionW(
+     _In_ LPCWSTR lpLocalName,
+@@ -349,26 +350,26 @@ WNetRestoreConnectionW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if(WINVER >= 0x0400)
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetUseConnectionA(
+     _In_opt_ HWND            hwndOwner,
+     _In_     LPNETRESOURCEA  lpNetResource,
+     _In_opt_ LPCSTR        lpPassword,
+     _In_opt_ LPCSTR        lpUserId,
+-    _In_     DWORD           dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD           dwFlags,
+     _Out_writes_opt_(*lpBufferSize) LPSTR lpAccessName,
+     _Inout_opt_ LPDWORD lpBufferSize,
+     _Out_opt_ LPDWORD   lpResult
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetUseConnectionW(
+     _In_opt_ HWND            hwndOwner,
+     _In_     LPNETRESOURCEW  lpNetResource,
+     _In_opt_ LPCWSTR        lpPassword,
+     _In_opt_ LPCWSTR        lpUserId,
+-    _In_     DWORD           dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD           dwFlags,
+     _Out_writes_opt_(*lpBufferSize) LPWSTR lpAccessName,
+     _Inout_opt_ LPDWORD lpBufferSize,
+     _Out_opt_ LPDWORD   lpResult
+@@ -381,7 +382,7 @@ WNetUseConnectionW(
+ #endif /* WINVER >= 0x0400 */
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+-_Check_return_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetUseConnection4A(
+     _In_opt_ HWND            hwndOwner,
+@@ -395,7 +396,7 @@ WNetUseConnection4A(
+     _Inout_opt_ LPDWORD lpBufferSize,
+     _Out_opt_ LPDWORD   lpResult
+     );
+-_Check_return_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetUseConnection4W(
+     _In_opt_ HWND            hwndOwner,
+@@ -420,14 +421,14 @@ WNetUseConnection4W(
+ //
+ //  Network Connection Dialogs.
+ //
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetConnectionDialog(
+     _In_ HWND  hwnd,
+     _In_ DWORD dwType
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetDisconnectDialog(
+     _In_opt_ HWND hwnd,
+@@ -439,14 +440,14 @@ typedef struct _CONNECTDLGSTRUCTA{
+     DWORD cbStructure;       /* size of this structure in bytes */
+     HWND hwndOwner;          /* owner window for the dialog */
+     LPNETRESOURCEA lpConnRes;/* Requested Resource info    */
+-    DWORD dwFlags;           /* flags (see below) */
++    _Win32_AssociatedEnum_(CONNECTDLGSTRUCT_FLAGS) DWORD dwFlags;           /* flags (see below) */
+     DWORD dwDevNum;          /* number of devices connected to */
+ } CONNECTDLGSTRUCTA, FAR *LPCONNECTDLGSTRUCTA;
+ typedef struct _CONNECTDLGSTRUCTW{
+     DWORD cbStructure;       /* size of this structure in bytes */
+     HWND hwndOwner;          /* owner window for the dialog */
+     LPNETRESOURCEW lpConnRes;/* Requested Resource info    */
+-    DWORD dwFlags;           /* flags (see below) */
++    _Win32_AssociatedEnum_(CONNECTDLGSTRUCT_FLAGS) DWORD dwFlags;           /* flags (see below) */
+     DWORD dwDevNum;          /* number of devices connected to */
+ } CONNECTDLGSTRUCTW, FAR *LPCONNECTDLGSTRUCTW;
+ #ifdef UNICODE
+@@ -470,12 +471,12 @@ typedef LPCONNECTDLGSTRUCTA LPCONNECTDLGSTRUCT;
+ #define CONNDLG_PERSIST     0x00000010 /* Force persistent connection */
+ #define CONNDLG_NOT_PERSIST 0x00000020 /* Force connection NOT persistent */
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetConnectionDialog1A(
+     _Inout_ LPCONNECTDLGSTRUCTA lpConnDlgStruct
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetConnectionDialog1W(
+     _Inout_ LPCONNECTDLGSTRUCTW lpConnDlgStruct
+@@ -491,14 +492,14 @@ typedef struct _DISCDLGSTRUCTA{
+     HWND            hwndOwner;        /* owner window for the dialog */
+     LPSTR           lpLocalName;      /* local device name */
+     LPSTR           lpRemoteName;     /* network resource name */
+-    DWORD           dwFlags;          /* flags */
++    _Win32_AssociatedEnum_(DISCDLGSTRUCT_FLAGS) DWORD           dwFlags;          /* flags */
+ } DISCDLGSTRUCTA, FAR *LPDISCDLGSTRUCTA;
+ typedef struct _DISCDLGSTRUCTW{
+     DWORD           cbStructure;      /* size of this structure in bytes */
+     HWND            hwndOwner;        /* owner window for the dialog */
+     LPWSTR          lpLocalName;      /* local device name */
+     LPWSTR          lpRemoteName;     /* network resource name */
+-    DWORD           dwFlags;          /* flags */
++    _Win32_AssociatedEnum_(DISCDLGSTRUCT_FLAGS) DWORD           dwFlags;          /* flags */
+ } DISCDLGSTRUCTW, FAR *LPDISCDLGSTRUCTW;
+ #ifdef UNICODE
+ typedef DISCDLGSTRUCTW DISCDLGSTRUCT;
+@@ -511,12 +512,12 @@ typedef LPDISCDLGSTRUCTA LPDISCDLGSTRUCT;
+ #define DISC_UPDATE_PROFILE         0x00000001
+ #define DISC_NO_FORCE               0x00000040
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetDisconnectDialog1A(
+     _In_ LPDISCDLGSTRUCTA lpConnDlgStruct
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetDisconnectDialog1W(
+     _In_ LPDISCDLGSTRUCTW lpConnDlgStruct
+@@ -532,23 +533,23 @@ WNetDisconnectDialog1W(
+ //  Network Browsing.
+ //
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetOpenEnumA(
+-    _In_  DWORD          dwScope,
+-    _In_  DWORD          dwType,
+-    _In_  DWORD          dwUsage,
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) _In_  DWORD          dwScope,
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) _In_  DWORD          dwType,
++    _Win32_AssociatedEnum_(WNET_OPEN_ENUM_USAGE) _In_  DWORD          dwUsage,
+     _In_opt_ LPNETRESOURCEA lpNetResource,
+-    _Out_ LPHANDLE       lphEnum
++    _Win32_RAIIFree_(WNetCloseEnum) _Out_ LPHANDLE       lphEnum
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetOpenEnumW(
+-    _In_  DWORD          dwScope,
+-    _In_  DWORD          dwType,
+-    _In_  DWORD          dwUsage,
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) _In_  DWORD          dwScope,
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) _In_  DWORD          dwType,
++    _Win32_AssociatedEnum_(WNET_OPEN_ENUM_USAGE) _In_  DWORD          dwUsage,
+     _In_opt_ LPNETRESOURCEW lpNetResource,
+-    _Out_ LPHANDLE       lphEnum
++    _Win32_RAIIFree_(WNetCloseEnum) _Out_ LPHANDLE       lphEnum
+     );
+ #ifdef UNICODE
+ #define WNetOpenEnum  WNetOpenEnumW
+@@ -556,7 +557,7 @@ WNetOpenEnumW(
+ #define WNetOpenEnum  WNetOpenEnumA
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetEnumResourceA(
+     _In_    HANDLE  hEnum,
+@@ -564,7 +565,7 @@ WNetEnumResourceA(
+     _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetEnumResourceW(
+     _In_    HANDLE  hEnum,
+@@ -578,21 +579,21 @@ WNetEnumResourceW(
+ #define WNetEnumResource  WNetEnumResourceA
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetCloseEnum(
+     _In_ HANDLE   hEnum
+     );
+ 
+ #if(WINVER >= 0x0400)
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceParentA(
+     _In_ LPNETRESOURCEA lpNetResource,
+     _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpcbBuffer
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceParentW(
+     _In_ LPNETRESOURCEW lpNetResource,
+@@ -605,7 +606,7 @@ WNetGetResourceParentW(
+ #define WNetGetResourceParent  WNetGetResourceParentA
+ #endif // !UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceInformationA(
+     _In_ LPNETRESOURCEA  lpNetResource,
+@@ -613,7 +614,7 @@ WNetGetResourceInformationA(
+     _Inout_ LPDWORD lpcbBuffer,
+     _Outptr_ LPSTR *lplpSystem
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceInformationW(
+     _In_ LPNETRESOURCEW  lpNetResource,
+@@ -667,19 +668,19 @@ typedef REMOTE_NAME_INFOA REMOTE_NAME_INFO;
+ typedef LPREMOTE_NAME_INFOA LPREMOTE_NAME_INFO;
+ #endif // UNICODE
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetUniversalNameA(
+     _In_ LPCSTR lpLocalPath,
+-    _In_ DWORD    dwInfoLevel,
++    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD    dwInfoLevel,
+     _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetUniversalNameW(
+     _In_ LPCWSTR lpLocalPath,
+-    _In_ DWORD    dwInfoLevel,
++    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD    dwInfoLevel,
+     _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
+@@ -692,7 +693,7 @@ WNetGetUniversalNameW(
+ //
+ //  Authentication and Logon/Logoff.
+ //
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetUserA(
+     _In_opt_ LPCSTR  lpName,
+@@ -702,7 +703,7 @@ WNetGetUserA(
+ //
+ //  Authentication and Logon/Logoff.
+ //
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetUserW(
+     _In_opt_ LPCWSTR  lpName,
+@@ -730,14 +731,14 @@ WNetGetUserW(
+ 
+ 
+ #if(WINVER >= 0x0400)
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetProviderNameA(
+     _In_    DWORD   dwNetType,
+     _Out_writes_(*lpBufferSize) LPSTR lpProviderName,
+     _Inout_ LPDWORD lpBufferSize
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetProviderNameW(
+     _In_    DWORD   dwNetType,
+@@ -753,8 +754,8 @@ WNetGetProviderNameW(
+ typedef struct _NETINFOSTRUCT{
+     DWORD cbStructure;
+     DWORD dwProviderVersion;
+-    DWORD dwStatus;
+-    DWORD dwCharacteristics;
++    _Win32_AssociatedEnum_(WIN32_ERROR) DWORD dwStatus;
++    _Win32_AssociatedEnum_(NETINFOSTRUCT_CHARACTERISTICS) DWORD dwCharacteristics;
+     ULONG_PTR dwHandle;
+     WORD  wNetType;
+     DWORD dwPrinters;
+@@ -765,13 +766,13 @@ typedef struct _NETINFOSTRUCT{
+ #define NETINFO_DISKRED     0x00000004  /* Provider requires disk redirections to connect */
+ #define NETINFO_PRINTERRED  0x00000008  /* Provider requires printer redirections to connect */
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetNetworkInformationA(
+     _In_  LPCSTR        lpProvider,
+     _Out_ LPNETINFOSTRUCT lpNetInfoStruct
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetNetworkInformationW(
+     _In_  LPCWSTR        lpProvider,
+@@ -789,7 +790,7 @@ WNetGetNetworkInformationW(
+ //  Error handling.
+ //
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetLastErrorA(
+     _Out_ LPDWORD    lpError,
+@@ -798,7 +799,7 @@ WNetGetLastErrorA(
+     _Out_writes_(nNameBufSize) LPSTR  lpNameBuf,
+     _In_ DWORD      nNameBufSize
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_AssociatedEnum_(WIN32_ERROR) _Check_return_
+ DWORD APIENTRY
+ WNetGetLastErrorW(
+     _Out_ LPDWORD    lpError,
+@@ -895,13 +896,13 @@ typedef struct _NETCONNECTINFOSTRUCT{
+ #define WNCON_SLOWLINK          0x00000004
+ #define WNCON_DYNAMIC           0x00000008
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ DWORD APIENTRY
+ MultinetGetConnectionPerformanceA(
+     _In_  LPNETRESOURCEA lpNetResource,
+     _Out_ LPNETCONNECTINFOSTRUCT lpNetConnectInfoStruct
+     );
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ DWORD APIENTRY
+ MultinetGetConnectionPerformanceW(
+     _In_  LPNETRESOURCEW lpNetResource,
+@@ -928,5 +929,278 @@ MultinetGetConnectionPerformanceW(
+ #endif
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("RESOURCEDISPLAYTYPE_DOMAIN")
++#undef RESOURCEDISPLAYTYPE_DOMAIN
++#pragma push_macro("RESOURCEDISPLAYTYPE_FILE")
++#undef RESOURCEDISPLAYTYPE_FILE
++#pragma push_macro("RESOURCEDISPLAYTYPE_GENERIC")
++#undef RESOURCEDISPLAYTYPE_GENERIC
++#pragma push_macro("RESOURCEDISPLAYTYPE_GROUP")
++#undef RESOURCEDISPLAYTYPE_GROUP
++#pragma push_macro("RESOURCEDISPLAYTYPE_SERVER")
++#undef RESOURCEDISPLAYTYPE_SERVER
++#pragma push_macro("RESOURCEDISPLAYTYPE_SHARE")
++#undef RESOURCEDISPLAYTYPE_SHARE
++#pragma push_macro("RESOURCEDISPLAYTYPE_TREE")
++#undef RESOURCEDISPLAYTYPE_TREE
++enum RESOURCE_DISPLAY_TYPE : unsigned int
++{
++    RESOURCEDISPLAYTYPE_DOMAIN = 1U,
++    RESOURCEDISPLAYTYPE_FILE = 4U,
++    RESOURCEDISPLAYTYPE_GENERIC = 0U,
++    RESOURCEDISPLAYTYPE_GROUP = 5U,
++    RESOURCEDISPLAYTYPE_SERVER = 2U,
++    RESOURCEDISPLAYTYPE_SHARE = 3U,
++    RESOURCEDISPLAYTYPE_TREE = 10U,
++};
++#pragma pop_macro("RESOURCEDISPLAYTYPE_TREE")
++#pragma pop_macro("RESOURCEDISPLAYTYPE_SHARE")
++#pragma pop_macro("RESOURCEDISPLAYTYPE_SERVER")
++#pragma pop_macro("RESOURCEDISPLAYTYPE_GROUP")
++#pragma pop_macro("RESOURCEDISPLAYTYPE_GENERIC")
++#pragma pop_macro("RESOURCEDISPLAYTYPE_FILE")
++#pragma pop_macro("RESOURCEDISPLAYTYPE_DOMAIN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("UNIVERSAL_NAME_INFO_LEVEL")
++#undef UNIVERSAL_NAME_INFO_LEVEL
++#pragma push_macro("REMOTE_NAME_INFO_LEVEL")
++#undef REMOTE_NAME_INFO_LEVEL
++enum UNC_INFO_LEVEL : unsigned int
++{
++    UNIVERSAL_NAME_INFO_LEVEL = 1U,
++    REMOTE_NAME_INFO_LEVEL = 2U,
++};
++#pragma pop_macro("REMOTE_NAME_INFO_LEVEL")
++#pragma pop_macro("UNIVERSAL_NAME_INFO_LEVEL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RESOURCEUSAGE_NONE")
++#undef RESOURCEUSAGE_NONE
++#pragma push_macro("RESOURCEUSAGE_CONNECTABLE")
++#undef RESOURCEUSAGE_CONNECTABLE
++#pragma push_macro("RESOURCEUSAGE_CONTAINER")
++#undef RESOURCEUSAGE_CONTAINER
++#pragma push_macro("RESOURCEUSAGE_ATTACHED")
++#undef RESOURCEUSAGE_ATTACHED
++#pragma push_macro("RESOURCEUSAGE_ALL")
++#undef RESOURCEUSAGE_ALL
++enum [[clang::flag_enum]] WNET_OPEN_ENUM_USAGE : unsigned int
++{
++    RESOURCEUSAGE_NONE = 0U,
++    RESOURCEUSAGE_CONNECTABLE = 1U,
++    RESOURCEUSAGE_CONTAINER = 2U,
++    RESOURCEUSAGE_ATTACHED = 16U,
++    RESOURCEUSAGE_ALL = 19U,
++};
++#pragma pop_macro("RESOURCEUSAGE_ALL")
++#pragma pop_macro("RESOURCEUSAGE_ATTACHED")
++#pragma pop_macro("RESOURCEUSAGE_CONTAINER")
++#pragma pop_macro("RESOURCEUSAGE_CONNECTABLE")
++#pragma pop_macro("RESOURCEUSAGE_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CONNECT_UPDATE_PROFILE")
++#undef CONNECT_UPDATE_PROFILE
++#pragma push_macro("CONNECT_UPDATE_RECENT")
++#undef CONNECT_UPDATE_RECENT
++#pragma push_macro("CONNECT_TEMPORARY")
++#undef CONNECT_TEMPORARY
++#pragma push_macro("CONNECT_INTERACTIVE")
++#undef CONNECT_INTERACTIVE
++#pragma push_macro("CONNECT_PROMPT")
++#undef CONNECT_PROMPT
++#pragma push_macro("CONNECT_NEED_DRIVE")
++#undef CONNECT_NEED_DRIVE
++#pragma push_macro("CONNECT_REFCOUNT")
++#undef CONNECT_REFCOUNT
++#pragma push_macro("CONNECT_REDIRECT")
++#undef CONNECT_REDIRECT
++#pragma push_macro("CONNECT_LOCALDRIVE")
++#undef CONNECT_LOCALDRIVE
++#pragma push_macro("CONNECT_CURRENT_MEDIA")
++#undef CONNECT_CURRENT_MEDIA
++#pragma push_macro("CONNECT_DEFERRED")
++#undef CONNECT_DEFERRED
++#pragma push_macro("CONNECT_RESERVED")
++#undef CONNECT_RESERVED
++#pragma push_macro("CONNECT_COMMANDLINE")
++#undef CONNECT_COMMANDLINE
++#pragma push_macro("CONNECT_CMD_SAVECRED")
++#undef CONNECT_CMD_SAVECRED
++#pragma push_macro("CONNECT_CRED_RESET")
++#undef CONNECT_CRED_RESET
++#pragma push_macro("CONNECT_REQUIRE_INTEGRITY")
++#undef CONNECT_REQUIRE_INTEGRITY
++#pragma push_macro("CONNECT_REQUIRE_PRIVACY")
++#undef CONNECT_REQUIRE_PRIVACY
++#pragma push_macro("CONNECT_WRITE_THROUGH_SEMANTICS")
++#undef CONNECT_WRITE_THROUGH_SEMANTICS
++#pragma push_macro("CONNECT_GLOBAL_MAPPING")
++#undef CONNECT_GLOBAL_MAPPING
++enum [[clang::flag_enum]] NET_CONNECT_FLAGS : unsigned int
++{
++    CONNECT_UPDATE_PROFILE = 1U,
++    CONNECT_UPDATE_RECENT = 2U,
++    CONNECT_TEMPORARY = 4U,
++    CONNECT_INTERACTIVE = 8U,
++    CONNECT_PROMPT = 16U,
++    CONNECT_NEED_DRIVE = 32U,
++    CONNECT_REFCOUNT = 64U,
++    CONNECT_REDIRECT = 128U,
++    CONNECT_LOCALDRIVE = 256U,
++    CONNECT_CURRENT_MEDIA = 512U,
++    CONNECT_DEFERRED = 1024U,
++    CONNECT_RESERVED = 4278190080U,
++    CONNECT_COMMANDLINE = 2048U,
++    CONNECT_CMD_SAVECRED = 4096U,
++    CONNECT_CRED_RESET = 8192U,
++    CONNECT_REQUIRE_INTEGRITY = 16384U,
++    CONNECT_REQUIRE_PRIVACY = 32768U,
++    CONNECT_WRITE_THROUGH_SEMANTICS = 65536U,
++    CONNECT_GLOBAL_MAPPING = 262144U,
++};
++#pragma pop_macro("CONNECT_GLOBAL_MAPPING")
++#pragma pop_macro("CONNECT_WRITE_THROUGH_SEMANTICS")
++#pragma pop_macro("CONNECT_REQUIRE_PRIVACY")
++#pragma pop_macro("CONNECT_REQUIRE_INTEGRITY")
++#pragma pop_macro("CONNECT_CRED_RESET")
++#pragma pop_macro("CONNECT_CMD_SAVECRED")
++#pragma pop_macro("CONNECT_COMMANDLINE")
++#pragma pop_macro("CONNECT_RESERVED")
++#pragma pop_macro("CONNECT_DEFERRED")
++#pragma pop_macro("CONNECT_CURRENT_MEDIA")
++#pragma pop_macro("CONNECT_LOCALDRIVE")
++#pragma pop_macro("CONNECT_REDIRECT")
++#pragma pop_macro("CONNECT_REFCOUNT")
++#pragma pop_macro("CONNECT_NEED_DRIVE")
++#pragma pop_macro("CONNECT_PROMPT")
++#pragma pop_macro("CONNECT_INTERACTIVE")
++#pragma pop_macro("CONNECT_TEMPORARY")
++#pragma pop_macro("CONNECT_UPDATE_RECENT")
++#pragma pop_macro("CONNECT_UPDATE_PROFILE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RESOURCETYPE_ANY")
++#undef RESOURCETYPE_ANY
++#pragma push_macro("RESOURCETYPE_DISK")
++#undef RESOURCETYPE_DISK
++#pragma push_macro("RESOURCETYPE_PRINT")
++#undef RESOURCETYPE_PRINT
++enum [[clang::flag_enum]] NET_RESOURCE_TYPE : unsigned int
++{
++    RESOURCETYPE_ANY = 0U,
++    RESOURCETYPE_DISK = 1U,
++    RESOURCETYPE_PRINT = 2U,
++};
++#pragma pop_macro("RESOURCETYPE_PRINT")
++#pragma pop_macro("RESOURCETYPE_DISK")
++#pragma pop_macro("RESOURCETYPE_ANY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WNFMT_MULTILINE")
++#undef WNFMT_MULTILINE
++#pragma push_macro("WNFMT_ABBREVIATED")
++#undef WNFMT_ABBREVIATED
++enum NETWORK_NAME_FORMAT_FLAGS : unsigned int
++{
++    WNFMT_MULTILINE = 1U,
++    WNFMT_ABBREVIATED = 2U,
++};
++#pragma pop_macro("WNFMT_ABBREVIATED")
++#pragma pop_macro("WNFMT_MULTILINE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RESOURCE_CONNECTED")
++#undef RESOURCE_CONNECTED
++#pragma push_macro("RESOURCE_CONTEXT")
++#undef RESOURCE_CONTEXT
++#pragma push_macro("RESOURCE_GLOBALNET")
++#undef RESOURCE_GLOBALNET
++#pragma push_macro("RESOURCE_REMEMBERED")
++#undef RESOURCE_REMEMBERED
++enum NET_RESOURCE_SCOPE : unsigned int
++{
++    RESOURCE_CONNECTED = 1U,
++    RESOURCE_CONTEXT = 5U,
++    RESOURCE_GLOBALNET = 2U,
++    RESOURCE_REMEMBERED = 3U,
++};
++#pragma pop_macro("RESOURCE_REMEMBERED")
++#pragma pop_macro("RESOURCE_GLOBALNET")
++#pragma pop_macro("RESOURCE_CONTEXT")
++#pragma pop_macro("RESOURCE_CONNECTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NETINFO_DLL16")
++#undef NETINFO_DLL16
++#pragma push_macro("NETINFO_DISKRED")
++#undef NETINFO_DISKRED
++#pragma push_macro("NETINFO_PRINTERRED")
++#undef NETINFO_PRINTERRED
++enum [[clang::flag_enum]] NETINFOSTRUCT_CHARACTERISTICS : unsigned int
++{
++    NETINFO_DLL16 = 1U,
++    NETINFO_DISKRED = 4U,
++    NETINFO_PRINTERRED = 8U,
++};
++#pragma pop_macro("NETINFO_PRINTERRED")
++#pragma pop_macro("NETINFO_DISKRED")
++#pragma pop_macro("NETINFO_DLL16")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CONNDLG_RO_PATH")
++#undef CONNDLG_RO_PATH
++#pragma push_macro("CONNDLG_CONN_POINT")
++#undef CONNDLG_CONN_POINT
++#pragma push_macro("CONNDLG_USE_MRU")
++#undef CONNDLG_USE_MRU
++#pragma push_macro("CONNDLG_HIDE_BOX")
++#undef CONNDLG_HIDE_BOX
++#pragma push_macro("CONNDLG_PERSIST")
++#undef CONNDLG_PERSIST
++#pragma push_macro("CONNDLG_NOT_PERSIST")
++#undef CONNDLG_NOT_PERSIST
++enum [[clang::flag_enum]] CONNECTDLGSTRUCT_FLAGS : unsigned int
++{
++    CONNDLG_RO_PATH = 1U,
++    CONNDLG_CONN_POINT = 2U,
++    CONNDLG_USE_MRU = 4U,
++    CONNDLG_HIDE_BOX = 8U,
++    CONNDLG_PERSIST = 16U,
++    CONNDLG_NOT_PERSIST = 32U,
++};
++#pragma pop_macro("CONNDLG_NOT_PERSIST")
++#pragma pop_macro("CONNDLG_PERSIST")
++#pragma pop_macro("CONNDLG_HIDE_BOX")
++#pragma pop_macro("CONNDLG_USE_MRU")
++#pragma pop_macro("CONNDLG_CONN_POINT")
++#pragma pop_macro("CONNDLG_RO_PATH")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DISC_UPDATE_PROFILE")
++#undef DISC_UPDATE_PROFILE
++#pragma push_macro("DISC_NO_FORCE")
++#undef DISC_NO_FORCE
++enum [[clang::flag_enum]] DISCDLGSTRUCT_FLAGS : unsigned int
++{
++    DISC_UPDATE_PROFILE = 1U,
++    DISC_NO_FORCE = 64U,
++};
++#pragma pop_macro("DISC_NO_FORCE")
++#pragma pop_macro("DISC_UPDATE_PROFILE")
++#endif
++
+ #endif  // _WINNETWK_
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h b/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
-index 5ccb585fc241fb952390841e9726a4254a1f43d8..566937b9c5d487a188f3e33e2b839867bc2073de 100644
+index 5ccb585fc2..8f6a2b2864 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
 @@ -113,6 +113,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index 5ccb585fc241fb952390841e9726a4254a1f43d8..566937b9c5d487a188f3e33e2b839867
  #pragma region Desktop Family or WinMgmt Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT)
  
-@@ -193,7 +194,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
+@@ -192,8 +193,8 @@ EXTERN_C const IID IID_IWbemPathKeyList;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("9AE62877-7544-4bb0-AA26-A13824659ED6")
+-    MIDL_INTERFACE("9AE62877-7544-4bb0-AA26-A13824659ED6")
 -    IWbemPathKeyList : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemPathKeyList : public IUnknown
++    MIDL_INTERFACE("9AE62877-7544-4bb0-AA26-A13824659ED6") _Windows_SupportedOS_WindowsVista_ 
++      IWbemPathKeyList : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetCount( 
@@ -28,12 +30,14 @@ index 5ccb585fc241fb952390841e9726a4254a1f43d8..566937b9c5d487a188f3e33e2b839867
      {
          CONST_VTBL struct IWbemPathKeyListVtbl *lpVtbl;
      };
-@@ -481,7 +482,7 @@ EXTERN_C const IID IID_IWbemPath;
+@@ -480,8 +481,8 @@ EXTERN_C const IID IID_IWbemPath;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("3BC15AF2-736C-477e-9E51-238AF8667DCC")
+-    MIDL_INTERFACE("3BC15AF2-736C-477e-9E51-238AF8667DCC")
 -    IWbemPath : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemPath : public IUnknown
++    MIDL_INTERFACE("3BC15AF2-736C-477e-9E51-238AF8667DCC") _Windows_SupportedOS_WindowsVista_ 
++      IWbemPath : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetText( 
@@ -46,3 +50,12 @@ index 5ccb585fc241fb952390841e9726a4254a1f43d8..566937b9c5d487a188f3e33e2b839867
      {
          CONST_VTBL struct IWbemPathVtbl *lpVtbl;
      };
+@@ -972,7 +973,7 @@ EXTERN_C const IID IID_IWbemQuery;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81166f58-dd98-11d3-a120-00105a1f515a")
++    MIDL_INTERFACE("81166f58-dd98-11d3-a120-00105a1f515a") _Windows_SupportedOS_WindowsVista_ 
+     IWbemQuery : public IUnknown
+     {
+     public:

@@ -1,0 +1,69 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h
+index 08c3cf50e8..8378d04419 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+--------------------------------------------------------------------------
+ //
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -661,7 +662,7 @@ enum DWRITE_FACTORY_TYPE
+ /// </summary>
+ #define DWRITE_MAKE_FONT_FEATURE_TAG(a,b,c,d) (static_cast<DWRITE_FONT_FEATURE_TAG>(DWRITE_MAKE_OPENTYPE_TAG(a,b,c,d)))
+ 
+-interface IDWriteFontFileStream;
++interface _Windows_SupportedOS_Windows7_  IDWriteFontFileStream;
+ 
+ /// <summary>
+ /// Font file loader interface handles loading font file resources of a particular type from a key.
+@@ -1300,8 +1301,8 @@ interface DWRITE_DECLARE_INTERFACE("5f49804d-7024-4d43-bfa9-d25984f53849") IDWri
+ };
+ 
+ 
+-interface IDWriteFactory;
+-interface IDWriteFontFileEnumerator;
++interface _Windows_SupportedOS_Windows7_  IDWriteFactory;
++interface _Windows_SupportedOS_Windows7_  IDWriteFontFileEnumerator;
+ 
+ /// <summary>
+ /// The font collection loader interface is used to construct a collection of fonts given a particular type of key.
+@@ -1450,8 +1451,8 @@ interface DWRITE_DECLARE_INTERFACE("08256209-099a-4b34-b86d-c22b110e7771") IDWri
+         ) PURE;
+ };
+ 
+-interface IDWriteFontFamily;
+-interface IDWriteFont;
++interface _Windows_SupportedOS_Windows7_  IDWriteFontFamily;
++interface _Windows_SupportedOS_Windows7_  IDWriteFont;
+ 
+ /// <summary>
+ /// The IDWriteFontCollection encapsulates a collection of font families.
+@@ -2041,8 +2042,8 @@ struct DWRITE_TRIMMING
+ };
+ 
+ 
+-interface IDWriteTypography;
+-interface IDWriteInlineObject;
++interface _Windows_SupportedOS_Windows7_  IDWriteTypography;
++interface _Windows_SupportedOS_Windows7_  IDWriteInlineObject;
+ 
+ /// <summary>
+ /// The format of text used for text layout.
+@@ -3500,7 +3501,7 @@ struct DWRITE_HIT_TEST_METRICS
+ };
+ 
+ 
+-interface IDWriteTextRenderer;
++interface _Windows_SupportedOS_Windows7_  IDWriteTextRenderer;
+ 
+ 
+ /// <summary>
+@@ -5120,7 +5121,7 @@ interface DWRITE_DECLARE_INTERFACE("b859ee5a-d838-4b5b-a2e8-1adc7d93db48") IDWri
+ /// from the rest of the process components. In such cases, it is recommended to use an isolated factory for the sandboxed
+ /// component.
+ /// </remarks>
+-EXTERN_C HRESULT DWRITE_EXPORT DWriteCreateFactory(
++_Windows_SupportedOS_Windows7_ EXTERN_C HRESULT DWRITE_EXPORT DWriteCreateFactory(
+     _In_ DWRITE_FACTORY_TYPE factoryType,
+     _In_ REFIID iid,
+     _COM_Outptr_ IUnknown **factory

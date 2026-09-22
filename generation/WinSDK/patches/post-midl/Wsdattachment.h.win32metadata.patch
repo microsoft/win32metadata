@@ -1,8 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdattachment.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdattachment.h
-index 722759b5c69e5e3ffaf7b425d9310e63e3f6e9fc..7a327a85f6800548520e4c69291547c37266fc2a 100644
+index 722759b5c6..ba964e3a8e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdattachment.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdattachment.h
-@@ -80,6 +80,7 @@ extern "C"{
+@@ -80,12 +80,13 @@ extern "C"{
  /* [local] */ 
  
  #include <winapifamily.h>
@@ -10,12 +10,21 @@ index 722759b5c69e5e3ffaf7b425d9310e63e3f6e9fc..7a327a85f6800548520e4c69291547c3
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -105,7 +106,7 @@ EXTERN_C const IID IID_IWSDAttachment;
+ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateOutboundAttachment(
+     _Outptr_ IWSDOutboundAttachment** ppAttachment);
+ 
+@@ -104,8 +105,8 @@ EXTERN_C const IID IID_IWSDAttachment;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("5d55a616-9df8-4b09-b156-9ba351a48b76")
+-    MIDL_INTERFACE("5d55a616-9df8-4b09-b156-9ba351a48b76")
 -    IWSDAttachment : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAttachment : public IUnknown
++    MIDL_INTERFACE("5d55a616-9df8-4b09-b156-9ba351a48b76") _Windows_SupportedOS_WindowsVista_ 
++      IWSDAttachment : public IUnknown
      {
      public:
      };
@@ -28,12 +37,14 @@ index 722759b5c69e5e3ffaf7b425d9310e63e3f6e9fc..7a327a85f6800548520e4c69291547c3
      {
          CONST_VTBL struct IWSDAttachmentVtbl *lpVtbl;
      };
-@@ -179,7 +180,7 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
+@@ -178,8 +179,8 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("aa302f8d-5a22-4ba5-b392-aa8486f4c15d")
+-    MIDL_INTERFACE("aa302f8d-5a22-4ba5-b392-aa8486f4c15d")
 -    IWSDOutboundAttachment : public IWSDAttachment
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDOutboundAttachment : public IWSDAttachment
++    MIDL_INTERFACE("aa302f8d-5a22-4ba5-b392-aa8486f4c15d") _Windows_SupportedOS_WindowsVista_ 
++      IWSDOutboundAttachment : public IWSDAttachment
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Write( 
@@ -46,12 +57,14 @@ index 722759b5c69e5e3ffaf7b425d9310e63e3f6e9fc..7a327a85f6800548520e4c69291547c3
      {
          CONST_VTBL struct IWSDOutboundAttachmentVtbl *lpVtbl;
      };
-@@ -293,7 +294,7 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
+@@ -292,8 +293,8 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("5bd6ca65-233c-4fb8-9f7a-2641619655c9")
+-    MIDL_INTERFACE("5bd6ca65-233c-4fb8-9f7a-2641619655c9")
 -    IWSDInboundAttachment : public IWSDAttachment
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDInboundAttachment : public IWSDAttachment
++    MIDL_INTERFACE("5bd6ca65-233c-4fb8-9f7a-2641619655c9") _Windows_SupportedOS_WindowsVista_ 
++      IWSDInboundAttachment : public IWSDAttachment
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Read( 

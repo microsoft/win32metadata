@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
+index 3ac25a4f11..0810bfa0f6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
 @@ -612,12 +612,13 @@ extern "C"{
@@ -12,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/ge
  #ifndef _INC_UIAUTOMATIONCOREAPI
  
 -enum TreeScope
-+enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ TreeScope
++enum   TreeScope
      {
          TreeScope_None	= 0,
          TreeScope_Element	= 0x1,
@@ -21,7 +22,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/ge
      } ;
  
 -enum PropertyConditionFlags
-+enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ PropertyConditionFlags
++enum   PropertyConditionFlags
      {
          PropertyConditionFlags_None	= 0,
          PropertyConditionFlags_IgnoreCase	= 0x1,
@@ -29,14 +30,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/ge
      } ;
  
 -enum AutomationElementMode
-+enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ AutomationElementMode
++enum   AutomationElementMode
      {
          AutomationElementMode_None	= 0,
          AutomationElementMode_Full	= ( AutomationElementMode_None + 1 ) 
      } ;
  
 -enum TreeTraversalOptions
-+enum _Windows_SupportedOS_15063_ TreeTraversalOptions
++enum  TreeTraversalOptions
      {
          TreeTraversalOptions_Default	= 0,
          TreeTraversalOptions_PostOrder	= 0x1,
@@ -44,21 +45,1215 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/ge
      } ;
  
 -enum ConnectionRecoveryBehaviorOptions
-+enum _Windows_SupportedOS_14393_ _Windows_SupportedOS_Server2016_ ConnectionRecoveryBehaviorOptions
++enum   ConnectionRecoveryBehaviorOptions
      {
          ConnectionRecoveryBehaviorOptions_Disabled	= 0,
          ConnectionRecoveryBehaviorOptions_Enabled	= 0x1
      } ;
  
 -enum CoalesceEventsOptions
-+enum _Windows_SupportedOS_14393_ _Windows_SupportedOS_Server2016_ CoalesceEventsOptions
++enum   CoalesceEventsOptions
      {
          CoalesceEventsOptions_Disabled	= 0,
          CoalesceEventsOptions_Enabled	= 0x1
      } ;
  #endif
 -struct ExtendedProperty
-+struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ExtendedProperty
++struct   ExtendedProperty
      {
      BSTR PropertyName;
      BSTR PropertyValue;
+@@ -1587,7 +1588,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d22108aa-8ac5-49a5-837b-37bbb3d7591e")
++    MIDL_INTERFACE("d22108aa-8ac5-49a5-837b-37bbb3d7591e") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationElement : public IUnknown
+     {
+     public:
+@@ -1713,19 +1714,19 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLocalizedControlType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAcceleratorKey( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAccessKey( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHasKeyboardFocus( 
+             /* [annotation][retval][out] */ 
+@@ -1741,15 +1742,15 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAutomationId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentClassName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHelpText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCulture( 
+             /* [annotation][retval][out] */ 
+@@ -1773,7 +1774,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentItemType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsOffscreen( 
+             /* [annotation][retval][out] */ 
+@@ -1785,7 +1786,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFrameworkId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsRequiredForForm( 
+             /* [annotation][retval][out] */ 
+@@ -1793,7 +1794,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentItemStatus( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentBoundingRectangle( 
+             /* [annotation][retval][out] */ 
+@@ -1805,11 +1806,11 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAriaRole( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAriaProperties( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsDataValidForForm( 
+             /* [annotation][retval][out] */ 
+@@ -1829,7 +1830,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentProviderDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedProcessId( 
+             /* [annotation][retval][out] */ 
+@@ -1841,19 +1842,19 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLocalizedControlType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAcceleratorKey( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAccessKey( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHasKeyboardFocus( 
+             /* [annotation][retval][out] */ 
+@@ -1869,15 +1870,15 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAutomationId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedClassName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHelpText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCulture( 
+             /* [annotation][retval][out] */ 
+@@ -1901,7 +1902,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedItemType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsOffscreen( 
+             /* [annotation][retval][out] */ 
+@@ -1913,7 +1914,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFrameworkId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsRequiredForForm( 
+             /* [annotation][retval][out] */ 
+@@ -1921,7 +1922,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedItemStatus( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedBoundingRectangle( 
+             /* [annotation][retval][out] */ 
+@@ -1933,11 +1934,11 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAriaRole( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAriaProperties( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsDataValidForForm( 
+             /* [annotation][retval][out] */ 
+@@ -1957,7 +1958,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedProviderDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetClickablePoint( 
+             /* [annotation][out] */ 
+@@ -2819,7 +2820,7 @@ EXTERN_C const IID IID_IUIAutomationElementArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("14314595-b4bc-4055-95f2-58f2e42c9855")
++    MIDL_INTERFACE("14314595-b4bc-4055-95f2-58f2e42c9855") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationElementArray : public IUnknown
+     {
+     public:
+@@ -2923,7 +2924,7 @@ EXTERN_C const IID IID_IUIAutomationCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("352ffba8-0973-437c-a61f-f64cafd81df9")
++    MIDL_INTERFACE("352ffba8-0973-437c-a61f-f64cafd81df9") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationCondition : public IUnknown
+     {
+     public:
+@@ -2997,7 +2998,7 @@ EXTERN_C const IID IID_IUIAutomationBoolCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1b4e1f2e-75eb-4d0b-8952-5a69988e2307")
++    MIDL_INTERFACE("1b4e1f2e-75eb-4d0b-8952-5a69988e2307") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationBoolCondition : public IUIAutomationCondition
+     {
+     public:
+@@ -3085,7 +3086,7 @@ EXTERN_C const IID IID_IUIAutomationPropertyCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("99ebf2cb-5578-4267-9ad4-afd6ea77e94b")
++    MIDL_INTERFACE("99ebf2cb-5578-4267-9ad4-afd6ea77e94b") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationPropertyCondition : public IUIAutomationCondition
+     {
+     public:
+@@ -3199,7 +3200,7 @@ EXTERN_C const IID IID_IUIAutomationAndCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a7d0af36-b912-45fe-9855-091ddc174aec")
++    MIDL_INTERFACE("a7d0af36-b912-45fe-9855-091ddc174aec") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationAndCondition : public IUIAutomationCondition
+     {
+     public:
+@@ -3317,7 +3318,7 @@ EXTERN_C const IID IID_IUIAutomationOrCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8753f032-3db1-47b5-a1fc-6e34a266c712")
++    MIDL_INTERFACE("8753f032-3db1-47b5-a1fc-6e34a266c712") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationOrCondition : public IUIAutomationCondition
+     {
+     public:
+@@ -3435,7 +3436,7 @@ EXTERN_C const IID IID_IUIAutomationNotCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f528b657-847b-498c-8896-d52b565407a1")
++    MIDL_INTERFACE("f528b657-847b-498c-8896-d52b565407a1") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationNotCondition : public IUIAutomationCondition
+     {
+     public:
+@@ -3523,7 +3524,7 @@ EXTERN_C const IID IID_IUIAutomationCacheRequest;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b32a92b5-bc25-4078-9c08-d7ee95c48e03")
++    MIDL_INTERFACE("b32a92b5-bc25-4078-9c08-d7ee95c48e03") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationCacheRequest : public IUnknown
+     {
+     public:
+@@ -3714,7 +3715,7 @@ EXTERN_C const IID IID_IUIAutomationTreeWalker;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4042c624-389c-4afc-a630-9df854a541fc")
++    MIDL_INTERFACE("4042c624-389c-4afc-a630-9df854a541fc") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTreeWalker : public IUnknown
+     {
+     public:
+@@ -4029,7 +4030,7 @@ EXTERN_C const IID IID_IUIAutomationEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("146c3c17-f12e-4e22-8c27-f894b9b79c69")
++    MIDL_INTERFACE("146c3c17-f12e-4e22-8c27-f894b9b79c69") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationEventHandler : public IUnknown
+     {
+     public:
+@@ -4120,7 +4121,7 @@ EXTERN_C const IID IID_IUIAutomationPropertyChangedEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("40cd37d4-c756-4b0c-8c6f-bddfeeb13b50")
++    MIDL_INTERFACE("40cd37d4-c756-4b0c-8c6f-bddfeeb13b50") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationPropertyChangedEventHandler : public IUnknown
+     {
+     public:
+@@ -4215,7 +4216,7 @@ EXTERN_C const IID IID_IUIAutomationStructureChangedEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e81d1b4e-11c5-42f8-9754-e7036c79f054")
++    MIDL_INTERFACE("e81d1b4e-11c5-42f8-9754-e7036c79f054") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationStructureChangedEventHandler : public IUnknown
+     {
+     public:
+@@ -4310,7 +4311,7 @@ EXTERN_C const IID IID_IUIAutomationFocusChangedEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c270f6b5-5c69-4290-9745-7a7f97169468")
++    MIDL_INTERFACE("c270f6b5-5c69-4290-9745-7a7f97169468") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationFocusChangedEventHandler : public IUnknown
+     {
+     public:
+@@ -4397,7 +4398,7 @@ EXTERN_C const IID IID_IUIAutomationTextEditTextChangedEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("92FAA680-E704-4156-931A-E32D5BB38F3F")
++    MIDL_INTERFACE("92FAA680-E704-4156-931A-E32D5BB38F3F") _Windows_SupportedOS_Windows81_ 
+     IUIAutomationTextEditTextChangedEventHandler : public IUnknown
+     {
+     public:
+@@ -4492,7 +4493,7 @@ EXTERN_C const IID IID_IUIAutomationChangesEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("58EDCA55-2C3E-4980-B1B9-56C17F27A2A0")
++    MIDL_INTERFACE("58EDCA55-2C3E-4980-B1B9-56C17F27A2A0") _Windows_SupportedOS_15063_ 
+     IUIAutomationChangesEventHandler : public IUnknown
+     {
+     public:
+@@ -4587,7 +4588,7 @@ EXTERN_C const IID IID_IUIAutomationNotificationEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C7CB2637-E6C2-4D0C-85DE-4948C02175C7")
++    MIDL_INTERFACE("C7CB2637-E6C2-4D0C-85DE-4948C02175C7") _Windows_SupportedOS_16299_ 
+     IUIAutomationNotificationEventHandler : public IUnknown
+     {
+     public:
+@@ -4686,7 +4687,7 @@ EXTERN_C const IID IID_IUIAutomationInvokePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fb377fbe-8ea6-46d5-9c73-6499642d3059")
++    MIDL_INTERFACE("fb377fbe-8ea6-46d5-9c73-6499642d3059") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationInvokePattern : public IUnknown
+     {
+     public:
+@@ -4769,7 +4770,7 @@ EXTERN_C const IID IID_IUIAutomationDockPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fde5ef97-1464-48f6-90bf-43d0948e86ec")
++    MIDL_INTERFACE("fde5ef97-1464-48f6-90bf-43d0948e86ec") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationDockPattern : public IUnknown
+     {
+     public:
+@@ -4882,7 +4883,7 @@ EXTERN_C const IID IID_IUIAutomationExpandCollapsePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("619be086-1f4e-4ee4-bafa-210128738730")
++    MIDL_INTERFACE("619be086-1f4e-4ee4-bafa-210128738730") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationExpandCollapsePattern : public IUnknown
+     {
+     public:
+@@ -5000,7 +5001,7 @@ EXTERN_C const IID IID_IUIAutomationGridPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("414c3cdc-856b-4f5b-8538-3131c6302550")
++    MIDL_INTERFACE("414c3cdc-856b-4f5b-8538-3131c6302550") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationGridPattern : public IUnknown
+     {
+     public:
+@@ -5147,7 +5148,7 @@ EXTERN_C const IID IID_IUIAutomationGridItemPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("78f8ef57-66c3-4e09-bd7c-e79b2004894d")
++    MIDL_INTERFACE("78f8ef57-66c3-4e09-bd7c-e79b2004894d") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationGridItemPattern : public IUnknown
+     {
+     public:
+@@ -5351,7 +5352,7 @@ EXTERN_C const IID IID_IUIAutomationMultipleViewPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8d253c91-1dc5-4bb5-b18f-ade16fa495e8")
++    MIDL_INTERFACE("8d253c91-1dc5-4bb5-b18f-ade16fa495e8") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationMultipleViewPattern : public IUnknown
+     {
+     public:
+@@ -5359,7 +5360,7 @@ EXTERN_C const IID IID_IUIAutomationMultipleViewPattern;
+             /* [annotation][in] */ 
+             _In_  int view,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetCurrentView( 
+             /* [annotation][in] */ 
+@@ -5507,7 +5508,7 @@ EXTERN_C const IID IID_IUIAutomationObjectModelPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("71c284b3-c14d-4d14-981e-19751b0d756d")
++    MIDL_INTERFACE("71c284b3-c14d-4d14-981e-19751b0d756d") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationObjectModelPattern : public IUnknown
+     {
+     public:
+@@ -5594,7 +5595,7 @@ EXTERN_C const IID IID_IUIAutomationRangeValuePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("59213f4f-7346-49e5-b120-80555987a148")
++    MIDL_INTERFACE("59213f4f-7346-49e5-b120-80555987a148") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationRangeValuePattern : public IUnknown
+     {
+     public:
+@@ -5837,7 +5838,7 @@ EXTERN_C const IID IID_IUIAutomationScrollPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("88f4d42a-e881-459d-a77c-73bbbb7e02dc")
++    MIDL_INTERFACE("88f4d42a-e881-459d-a77c-73bbbb7e02dc") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationScrollPattern : public IUnknown
+     {
+     public:
+@@ -6101,7 +6102,7 @@ EXTERN_C const IID IID_IUIAutomationScrollItemPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b488300f-d015-4f19-9c29-bb595e3645ef")
++    MIDL_INTERFACE("b488300f-d015-4f19-9c29-bb595e3645ef") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationScrollItemPattern : public IUnknown
+     {
+     public:
+@@ -6184,7 +6185,7 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5ed5202e-b2ac-47a6-b638-4b0bf140d78e")
++    MIDL_INTERFACE("5ed5202e-b2ac-47a6-b638-4b0bf140d78e") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationSelectionPattern : public IUnknown
+     {
+     public:
+@@ -6336,7 +6337,7 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0532bfae-c011-4e32-a343-6d642d798555")
++    MIDL_INTERFACE("0532bfae-c011-4e32-a343-6d642d798555") _Windows_SupportedOS_16299_ 
+     IUIAutomationSelectionPattern2 : public IUIAutomationSelectionPattern
+     {
+     public:
+@@ -6569,7 +6570,7 @@ EXTERN_C const IID IID_IUIAutomationSelectionItemPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a8efa66a-0fda-421a-9194-38021f3578ea")
++    MIDL_INTERFACE("a8efa66a-0fda-421a-9194-38021f3578ea") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationSelectionItemPattern : public IUnknown
+     {
+     public:
+@@ -6722,7 +6723,7 @@ EXTERN_C const IID IID_IUIAutomationSynchronizedInputPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2233be0b-afb7-448b-9fda-3b378aa5eae1")
++    MIDL_INTERFACE("2233be0b-afb7-448b-9fda-3b378aa5eae1") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationSynchronizedInputPattern : public IUnknown
+     {
+     public:
+@@ -6818,7 +6819,7 @@ EXTERN_C const IID IID_IUIAutomationTablePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("620e691c-ea96-4710-a850-754b24ce2417")
++    MIDL_INTERFACE("620e691c-ea96-4710-a850-754b24ce2417") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTablePattern : public IUnknown
+     {
+     public:
+@@ -6970,7 +6971,7 @@ EXTERN_C const IID IID_IUIAutomationTableItemPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0b964eb3-ef2e-4464-9c79-61d61737a27e")
++    MIDL_INTERFACE("0b964eb3-ef2e-4464-9c79-61d61737a27e") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTableItemPattern : public IUnknown
+     {
+     public:
+@@ -7096,7 +7097,7 @@ EXTERN_C const IID IID_IUIAutomationTogglePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("94cf8058-9b8d-4ab9-8bfd-4cd0a33c8c70")
++    MIDL_INTERFACE("94cf8058-9b8d-4ab9-8bfd-4cd0a33c8c70") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTogglePattern : public IUnknown
+     {
+     public:
+@@ -7205,7 +7206,7 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a9b55844-a55d-4ef0-926d-569c16ff89bb")
++    MIDL_INTERFACE("a9b55844-a55d-4ef0-926d-569c16ff89bb") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTransformPattern : public IUnknown
+     {
+     public:
+@@ -7404,7 +7405,7 @@ EXTERN_C const IID IID_IUIAutomationValuePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a94cd8b1-0844-4cd6-9d2d-640537ab39e9")
++    MIDL_INTERFACE("a94cd8b1-0844-4cd6-9d2d-640537ab39e9") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationValuePattern : public IUnknown
+     {
+     public:
+@@ -7414,7 +7415,7 @@ EXTERN_C const IID IID_IUIAutomationValuePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsReadOnly( 
+             /* [annotation][retval][out] */ 
+@@ -7422,7 +7423,7 @@ EXTERN_C const IID IID_IUIAutomationValuePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsReadOnly( 
+             /* [annotation][retval][out] */ 
+@@ -7543,7 +7544,7 @@ EXTERN_C const IID IID_IUIAutomationWindowPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0faef453-9208-43ef-bbb2-3b485177864f")
++    MIDL_INTERFACE("0faef453-9208-43ef-bbb2-3b485177864f") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationWindowPattern : public IUnknown
+     {
+     public:
+@@ -7812,7 +7813,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a543cc6a-f4ae-494b-8239-c814481187a8")
++    MIDL_INTERFACE("a543cc6a-f4ae-494b-8239-c814481187a8") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTextRange : public IUnknown
+     {
+     public:
+@@ -7878,7 +7879,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
+             /* [annotation][in] */ 
+             _In_  int maxLength,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *text) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *text) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Move( 
+             /* [annotation][in] */ 
+@@ -8184,7 +8185,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BB9B40E0-5E04-46BD-9BE0-4B601B9AFAD4")
++    MIDL_INTERFACE("BB9B40E0-5E04-46BD-9BE0-4B601B9AFAD4") _Windows_SupportedOS_Windows81_ 
+     IUIAutomationTextRange2 : public IUIAutomationTextRange
+     {
+     public:
+@@ -8462,7 +8463,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6A315D69-5512-4C2E-85F0-53FCE6DD4BC2")
++    MIDL_INTERFACE("6A315D69-5512-4C2E-85F0-53FCE6DD4BC2") _Windows_SupportedOS_15063_ 
+     IUIAutomationTextRange3 : public IUIAutomationTextRange2
+     {
+     public:
+@@ -8794,7 +8795,7 @@ EXTERN_C const IID IID_IUIAutomationTextRangeArray;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ce4ae76a-e717-4c98-81ea-47371d028eb6")
++    MIDL_INTERFACE("ce4ae76a-e717-4c98-81ea-47371d028eb6") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTextRangeArray : public IUnknown
+     {
+     public:
+@@ -8898,7 +8899,7 @@ EXTERN_C const IID IID_IUIAutomationTextPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("32eba289-3583-42c9-9c59-3b6d9a1e9b6a")
++    MIDL_INTERFACE("32eba289-3583-42c9-9c59-3b6d9a1e9b6a") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationTextPattern : public IUnknown
+     {
+     public:
+@@ -9058,7 +9059,7 @@ EXTERN_C const IID IID_IUIAutomationTextPattern2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("506a921a-fcc9-409f-b23b-37eb74106872")
++    MIDL_INTERFACE("506a921a-fcc9-409f-b23b-37eb74106872") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationTextPattern2 : public IUIAutomationTextPattern
+     {
+     public:
+@@ -9225,7 +9226,7 @@ EXTERN_C const IID IID_IUIAutomationTextEditPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("17E21576-996C-4870-99D9-BFF323380C06")
++    MIDL_INTERFACE("17E21576-996C-4870-99D9-BFF323380C06") _Windows_SupportedOS_Windows81_ 
+     IUIAutomationTextEditPattern : public IUIAutomationTextPattern
+     {
+     public:
+@@ -9384,7 +9385,7 @@ EXTERN_C const IID IID_IUIAutomationCustomNavigationPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("01EA217A-1766-47ED-A6CC-ACF492854B1F")
++    MIDL_INTERFACE("01EA217A-1766-47ED-A6CC-ACF492854B1F") _Windows_SupportedOS_10240_ 
+     IUIAutomationCustomNavigationPattern : public IUnknown
+     {
+     public:
+@@ -9475,7 +9476,7 @@ EXTERN_C const IID IID_IUIAutomationActiveTextPositionChangedEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F97933B0-8DAE-4496-8997-5BA015FE0D82")
++    MIDL_INTERFACE("F97933B0-8DAE-4496-8997-5BA015FE0D82") _Windows_SupportedOS_17763_ 
+     IUIAutomationActiveTextPositionChangedEventHandler : public IUnknown
+     {
+     public:
+@@ -9566,7 +9567,7 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("828055ad-355b-4435-86d5-3b51c14a9b1b")
++    MIDL_INTERFACE("828055ad-355b-4435-86d5-3b51c14a9b1b") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationLegacyIAccessiblePattern : public IUnknown
+     {
+     public:
+@@ -9584,15 +9585,15 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDescription) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentRole( 
+             /* [annotation][retval][out] */ 
+@@ -9604,11 +9605,11 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHelp( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszHelp) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszHelp) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentKeyboardShortcut( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentSelection( 
+             /* [annotation][retval][out] */ 
+@@ -9616,7 +9617,7 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDefaultAction( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDefaultAction) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDefaultAction) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedChildId( 
+             /* [annotation][retval][out] */ 
+@@ -9624,15 +9625,15 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDescription) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedRole( 
+             /* [annotation][retval][out] */ 
+@@ -9644,11 +9645,11 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHelp( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszHelp) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszHelp) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedKeyboardShortcut( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedSelection( 
+             /* [annotation][retval][out] */ 
+@@ -9656,7 +9657,7 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDefaultAction( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDefaultAction) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDefaultAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIAccessible( 
+             /* [annotation][retval][out] */ 
+@@ -9944,7 +9945,7 @@ EXTERN_C const IID IID_IUIAutomationItemContainerPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c690fdb2-27a8-423c-812d-429773c9084e")
++    MIDL_INTERFACE("c690fdb2-27a8-423c-812d-429773c9084e") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationItemContainerPattern : public IUnknown
+     {
+     public:
+@@ -10043,7 +10044,7 @@ EXTERN_C const IID IID_IUIAutomationVirtualizedItemPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6ba3d7a6-04cf-4f11-8793-a8d1cde9969f")
++    MIDL_INTERFACE("6ba3d7a6-04cf-4f11-8793-a8d1cde9969f") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationVirtualizedItemPattern : public IUnknown
+     {
+     public:
+@@ -10126,7 +10127,7 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9a175b21-339e-41b1-8e8b-623f6b681098")
++    MIDL_INTERFACE("9a175b21-339e-41b1-8e8b-623f6b681098") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationAnnotationPattern : public IUnknown
+     {
+     public:
+@@ -10136,15 +10137,15 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationTypeName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAuthor( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDateTime( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentTarget( 
+             /* [annotation][retval][out] */ 
+@@ -10156,15 +10157,15 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationTypeName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAuthor( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDateTime( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedTarget( 
+             /* [annotation][retval][out] */ 
+@@ -10330,7 +10331,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85b5f0a2-bd79-484a-ad2b-388c9838d5fb")
++    MIDL_INTERFACE("85b5f0a2-bd79-484a-ad2b-388c9838d5fb") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationStylesPattern : public IUnknown
+     {
+     public:
+@@ -10340,7 +10341,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentStyleName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFillColor( 
+             /* [annotation][retval][out] */ 
+@@ -10348,11 +10349,11 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFillPatternStyle( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentShape( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFillPatternColor( 
+             /* [annotation][retval][out] */ 
+@@ -10360,7 +10361,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentExtendedProperties( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentExtendedPropertiesAsArray( 
+             /* [annotation][size_is][size_is][out] */ 
+@@ -10374,7 +10375,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedStyleName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFillColor( 
+             /* [annotation][retval][out] */ 
+@@ -10382,11 +10383,11 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFillPatternStyle( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedShape( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFillPatternColor( 
+             /* [annotation][retval][out] */ 
+@@ -10394,7 +10395,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedExtendedProperties( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedExtendedPropertiesAsArray( 
+             /* [annotation][size_is][size_is][out] */ 
+@@ -10620,7 +10621,7 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7517a7c8-faae-4de9-9f08-29b91e8595c1")
++    MIDL_INTERFACE("7517a7c8-faae-4de9-9f08-29b91e8595c1") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationSpreadsheetPattern : public IUnknown
+     {
+     public:
+@@ -10711,13 +10712,13 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetItemPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7d4fb86c-8d34-40e1-8e83-62c15204e335")
++    MIDL_INTERFACE("7d4fb86c-8d34-40e1-8e83-62c15204e335") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationSpreadsheetItemPattern : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFormula( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentAnnotationObjects( 
+             /* [annotation][retval][out] */ 
+@@ -10729,7 +10730,7 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetItemPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFormula( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedAnnotationObjects( 
+             /* [annotation][retval][out] */ 
+@@ -10863,7 +10864,7 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6d74d017-6ecb-4381-b38b-3c17a48ff1c2")
++    MIDL_INTERFACE("6d74d017-6ecb-4381-b38b-3c17a48ff1c2") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationTransformPattern2 : public IUIAutomationTransformPattern
+     {
+     public:
+@@ -11153,7 +11154,7 @@ EXTERN_C const IID IID_IUIAutomationTextChildPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6552b038-ae05-40c8-abfd-aa08352aab86")
++    MIDL_INTERFACE("6552b038-ae05-40c8-abfd-aa08352aab86") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationTextChildPattern : public IUnknown
+     {
+     public:
+@@ -11253,7 +11254,7 @@ EXTERN_C const IID IID_IUIAutomationDragPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1dc7b570-1f54-4bad-bcda-d36a722fb7bd")
++    MIDL_INTERFACE("1dc7b570-1f54-4bad-bcda-d36a722fb7bd") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationDragPattern : public IUnknown
+     {
+     public:
+@@ -11267,11 +11268,11 @@ EXTERN_C const IID IID_IUIAutomationDragPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropEffect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDropEffect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropEffects( 
+             /* [annotation][retval][out] */ 
+@@ -11431,17 +11432,17 @@ EXTERN_C const IID IID_IUIAutomationDropTargetPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("69a095f7-eee4-430e-a46b-fb73b1ae39a5")
++    MIDL_INTERFACE("69a095f7-eee4-430e-a46b-fb73b1ae39a5") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationDropTargetPattern : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropTargetEffect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDropTargetEffect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropTargetEffects( 
+             /* [annotation][retval][out] */ 
+@@ -11557,7 +11558,7 @@ EXTERN_C const IID IID_IUIAutomationElement2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6749c683-f70d-4487-a698-5f79d55290d6")
++    MIDL_INTERFACE("6749c683-f70d-4487-a698-5f79d55290d6") _Windows_SupportedOS_Windows8_ 
+     IUIAutomationElement2 : public IUIAutomationElement
+     {
+     public:
+@@ -12494,7 +12495,7 @@ EXTERN_C const IID IID_IUIAutomationElement3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8471DF34-AEE0-4A01-A7DE-7DB9AF12C296")
++    MIDL_INTERFACE("8471DF34-AEE0-4A01-A7DE-7DB9AF12C296") _Windows_SupportedOS_Windows81_ 
+     IUIAutomationElement3 : public IUIAutomationElement2
+     {
+     public:
+@@ -13443,7 +13444,7 @@ EXTERN_C const IID IID_IUIAutomationElement4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B6E233C-52FB-4063-A4C9-77C075C2A06B")
++    MIDL_INTERFACE("3B6E233C-52FB-4063-A4C9-77C075C2A06B") _Windows_SupportedOS_10240_ 
+     IUIAutomationElement4 : public IUIAutomationElement3
+     {
+     public:
+@@ -14513,7 +14514,7 @@ EXTERN_C const IID IID_IUIAutomationElement5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("98141C1D-0D0E-4175-BBE2-6BFF455842A7")
++    MIDL_INTERFACE("98141C1D-0D0E-4175-BBE2-6BFF455842A7") _Windows_SupportedOS_15063_ 
+     IUIAutomationElement5 : public IUIAutomationElement4
+     {
+     public:
+@@ -14523,7 +14524,7 @@ EXTERN_C const IID IID_IUIAutomationElement5;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLocalizedLandmarkType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLandmarkType( 
+             /* [annotation][retval][out] */ 
+@@ -14531,7 +14532,7 @@ EXTERN_C const IID IID_IUIAutomationElement5;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLocalizedLandmarkType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+     };
+     
+@@ -15596,17 +15597,17 @@ EXTERN_C const IID IID_IUIAutomationElement6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4780d450-8bca-4977-afa5-a4a517f555e3")
++    MIDL_INTERFACE("4780d450-8bca-4977-afa5-a4a517f555e3") _Windows_SupportedOS_15063_ 
+     IUIAutomationElement6 : public IUIAutomationElement5
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFullDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFullDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+     };
+     
+@@ -16690,7 +16691,7 @@ EXTERN_C const IID IID_IUIAutomationElement7;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204e8572-cfc3-4c11-b0c8-7da7420750b7")
++    MIDL_INTERFACE("204e8572-cfc3-4c11-b0c8-7da7420750b7") _Windows_SupportedOS_15063_ 
+     IUIAutomationElement7 : public IUIAutomationElement6
+     {
+     public:
+@@ -17922,7 +17923,7 @@ EXTERN_C const IID IID_IUIAutomationElement8;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8C60217D-5411-4CDE-BCC0-1CEDA223830C")
++    MIDL_INTERFACE("8C60217D-5411-4CDE-BCC0-1CEDA223830C") _Windows_SupportedOS_17134_ 
+     IUIAutomationElement8 : public IUIAutomationElement7
+     {
+     public:
+@@ -19121,7 +19122,7 @@ EXTERN_C const IID IID_IUIAutomationElement9;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("39325fac-039d-440e-a3a3-5eb81a5cecc3")
++    MIDL_INTERFACE("39325fac-039d-440e-a3a3-5eb81a5cecc3") _Windows_SupportedOS_17763_ 
+     IUIAutomationElement9 : public IUIAutomationElement8
+     {
+     public:
+@@ -20339,7 +20340,7 @@ EXTERN_C const IID IID_IUIAutomationProxyFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85b94ecd-849d-42b6-b94d-d6db23fdf5a4")
++    MIDL_INTERFACE("85b94ecd-849d-42b6-b94d-d6db23fdf5a4") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationProxyFactory : public IUnknown
+     {
+     public:
+@@ -20355,7 +20356,7 @@ EXTERN_C const IID IID_IUIAutomationProxyFactory;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProxyFactoryId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *factoryId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *factoryId) = 0;
+         
+     };
+     
+@@ -20451,7 +20452,7 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d50e472e-b64b-490c-bca1-d30696f9f289")
++    MIDL_INTERFACE("d50e472e-b64b-490c-bca1-d30696f9f289") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationProxyFactoryEntry : public IUnknown
+     {
+     public:
+@@ -20461,11 +20462,11 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryEntry;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ClassName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *className) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *className) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ImageName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *imageName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *imageName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AllowSubstringMatch( 
+             /* [annotation][retval][out] */ 
+@@ -20710,7 +20711,7 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryMapping;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09e31e18-872d-4873-93d1-1e541ec133fd")
++    MIDL_INTERFACE("09e31e18-872d-4873-93d1-1e541ec133fd") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationProxyFactoryMapping : public IUnknown
+     {
+     public:
+@@ -20905,7 +20906,7 @@ EXTERN_C const IID IID_IUIAutomationEventHandlerGroup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C9EE12F2-C13B-4408-997C-639914377F4E")
++    MIDL_INTERFACE("C9EE12F2-C13B-4408-997C-639914377F4E") _Windows_SupportedOS_17763_ 
+     IUIAutomationEventHandlerGroup : public IUnknown
+     {
+     public:
+@@ -21150,7 +21151,7 @@ EXTERN_C const IID IID_IUIAutomation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("30cbe57d-d9d0-452a-ab13-7ac5ac4825ee")
++    MIDL_INTERFACE("30cbe57d-d9d0-452a-ab13-7ac5ac4825ee") _Windows_SupportedOS_Windows7_ 
+     IUIAutomation : public IUnknown
+     {
+     public:
+@@ -21458,13 +21459,13 @@ EXTERN_C const IID IID_IUIAutomation;
+             /* [annotation][in] */ 
+             _In_  PROPERTYID property,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPatternProgrammaticName( 
+             /* [annotation][in] */ 
+             _In_  PATTERNID pattern,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE PollForPotentialSupportedPatterns( 
+             /* [annotation][in] */ 
+@@ -22219,7 +22220,7 @@ EXTERN_C const IID IID_IUIAutomation2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34723aff-0c9d-49d0-9896-7ab52df8cd8a")
++    MIDL_INTERFACE("34723aff-0c9d-49d0-9896-7ab52df8cd8a") _Windows_SupportedOS_Windows8_ 
+     IUIAutomation2 : public IUIAutomation
+     {
+     public:
+@@ -23007,7 +23008,7 @@ EXTERN_C const IID IID_IUIAutomation3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("73D768DA-9B51-4B89-936E-C209290973E7")
++    MIDL_INTERFACE("73D768DA-9B51-4B89-936E-C209290973E7") _Windows_SupportedOS_Windows81_ 
+     IUIAutomation3 : public IUIAutomation2
+     {
+     public:
+@@ -23818,7 +23819,7 @@ EXTERN_C const IID IID_IUIAutomation4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1189C02A-05F8-4319-8E21-E817E3DB2860")
++    MIDL_INTERFACE("1189C02A-05F8-4319-8E21-E817E3DB2860") _Windows_SupportedOS_14393_ 
+     IUIAutomation4 : public IUIAutomation3
+     {
+     public:
+@@ -24662,7 +24663,7 @@ EXTERN_C const IID IID_IUIAutomation5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("25F700C8-D816-4057-A9DC-3CBDEE77E256")
++    MIDL_INTERFACE("25F700C8-D816-4057-A9DC-3CBDEE77E256") _Windows_SupportedOS_14393_ 
+     IUIAutomation5 : public IUIAutomation4
+     {
+     public:
+@@ -25529,7 +25530,7 @@ EXTERN_C const IID IID_IUIAutomation6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AAE072DA-29E3-413D-87A7-192DBF81ED10")
++    MIDL_INTERFACE("AAE072DA-29E3-413D-87A7-192DBF81ED10") _Windows_SupportedOS_17763_ 
+     IUIAutomation6 : public IUIAutomation5
+     {
+     public:

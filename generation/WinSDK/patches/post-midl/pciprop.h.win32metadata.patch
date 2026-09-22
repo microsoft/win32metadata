@@ -1,0 +1,450 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h b/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h
+index 909fbc73aa..1db8ee0ead 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h
+@@ -615,4 +615,445 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_IsTunneledDevice, 47);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciRootBus_SecondaryInterface_PciConventional")
++#undef DevProp_PciRootBus_SecondaryInterface_PciConventional
++#pragma push_macro("DevProp_PciRootBus_SecondaryInterface_PciXMode1")
++#undef DevProp_PciRootBus_SecondaryInterface_PciXMode1
++#pragma push_macro("DevProp_PciRootBus_SecondaryInterface_PciXMode2")
++#undef DevProp_PciRootBus_SecondaryInterface_PciXMode2
++#pragma push_macro("DevProp_PciRootBus_SecondaryInterface_PciExpress")
++#undef DevProp_PciRootBus_SecondaryInterface_PciExpress
++enum DEVPROP_PCIROOTBUS_SECONDARYINTERFACE : unsigned int
++{
++    DevProp_PciRootBus_SecondaryInterface_PciConventional = 0U,
++    DevProp_PciRootBus_SecondaryInterface_PciXMode1 = 1U,
++    DevProp_PciRootBus_SecondaryInterface_PciXMode2 = 2U,
++    DevProp_PciRootBus_SecondaryInterface_PciExpress = 3U,
++};
++#pragma pop_macro("DevProp_PciRootBus_SecondaryInterface_PciExpress")
++#pragma pop_macro("DevProp_PciRootBus_SecondaryInterface_PciXMode2")
++#pragma pop_macro("DevProp_PciRootBus_SecondaryInterface_PciXMode1")
++#pragma pop_macro("DevProp_PciRootBus_SecondaryInterface_PciConventional")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz
++#pragma push_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz")
++#undef DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz
++enum DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE : unsigned int
++{
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz = 0U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz = 1U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz = 2U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz = 3U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz = 4U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz = 5U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz = 6U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz = 7U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz = 8U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz = 9U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz = 10U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz = 11U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz = 12U,
++    DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz = 13U,
++};
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz")
++#undef DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz
++#pragma push_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz")
++#undef DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz
++#pragma push_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz")
++#undef DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz
++#pragma push_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz")
++#undef DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz
++#pragma push_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz")
++#undef DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz
++#pragma push_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz")
++#undef DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz
++enum DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES : unsigned int
++{
++    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz = 1U,
++    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz = 2U,
++    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz = 4U,
++    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz = 8U,
++    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz = 16U,
++    DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz = 32U,
++};
++#pragma pop_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz")
++#pragma pop_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz")
++#pragma pop_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz")
++#pragma pop_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz")
++#pragma pop_macro("DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciRootBus_BusWidth_32Bits")
++#undef DevProp_PciRootBus_BusWidth_32Bits
++#pragma push_macro("DevProp_PciRootBus_BusWidth_64Bits")
++#undef DevProp_PciRootBus_BusWidth_64Bits
++enum DEVPROP_PCIROOTBUS_BUSWIDTH : unsigned int
++{
++    DevProp_PciRootBus_BusWidth_32Bits = 0U,
++    DevProp_PciRootBus_BusWidth_64Bits = 1U,
++};
++#pragma pop_macro("DevProp_PciRootBus_BusWidth_64Bits")
++#pragma pop_macro("DevProp_PciRootBus_BusWidth_32Bits")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciDevice_DeviceType_PciConventional")
++#undef DevProp_PciDevice_DeviceType_PciConventional
++#pragma push_macro("DevProp_PciDevice_DeviceType_PciX")
++#undef DevProp_PciDevice_DeviceType_PciX
++#pragma push_macro("DevProp_PciDevice_DeviceType_PciExpressEndpoint")
++#undef DevProp_PciDevice_DeviceType_PciExpressEndpoint
++#pragma push_macro("DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint")
++#undef DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint
++#pragma push_macro("DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint")
++#undef DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint
++#pragma push_macro("DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci")
++#undef DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciConventional")
++#undef DevProp_PciDevice_BridgeType_PciConventional
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciX")
++#undef DevProp_PciDevice_BridgeType_PciX
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciExpressRootPort")
++#undef DevProp_PciDevice_BridgeType_PciExpressRootPort
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort")
++#undef DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort")
++#undef DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciExpressToPciXBridge")
++#undef DevProp_PciDevice_BridgeType_PciExpressToPciXBridge
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciXToExpressBridge")
++#undef DevProp_PciDevice_BridgeType_PciXToExpressBridge
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci")
++#undef DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci
++#pragma push_macro("DevProp_PciDevice_BridgeType_PciExpressEventCollector")
++#undef DevProp_PciDevice_BridgeType_PciExpressEventCollector
++enum DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE : unsigned int
++{
++    DevProp_PciDevice_DeviceType_PciConventional = 0U,
++    DevProp_PciDevice_DeviceType_PciX = 1U,
++    DevProp_PciDevice_DeviceType_PciExpressEndpoint = 2U,
++    DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint = 3U,
++    DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint = 4U,
++    DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci = 5U,
++    DevProp_PciDevice_BridgeType_PciConventional = 6U,
++    DevProp_PciDevice_BridgeType_PciX = 7U,
++    DevProp_PciDevice_BridgeType_PciExpressRootPort = 8U,
++    DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort = 9U,
++    DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort = 10U,
++    DevProp_PciDevice_BridgeType_PciExpressToPciXBridge = 11U,
++    DevProp_PciDevice_BridgeType_PciXToExpressBridge = 12U,
++    DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci = 13U,
++    DevProp_PciDevice_BridgeType_PciExpressEventCollector = 14U,
++};
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciExpressEventCollector")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciXToExpressBridge")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciExpressToPciXBridge")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciExpressRootPort")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciX")
++#pragma pop_macro("DevProp_PciDevice_BridgeType_PciConventional")
++#pragma pop_macro("DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci")
++#pragma pop_macro("DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint")
++#pragma pop_macro("DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint")
++#pragma pop_macro("DevProp_PciDevice_DeviceType_PciExpressEndpoint")
++#pragma pop_macro("DevProp_PciDevice_DeviceType_PciX")
++#pragma pop_macro("DevProp_PciDevice_DeviceType_PciConventional")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode_Conventional_Pci")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode_Conventional_Pci
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_66Mhz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_66Mhz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz
++#pragma push_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz")
++#undef DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz
++enum DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE : unsigned int
++{
++    DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz = 0U,
++    DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz = 1U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode_Conventional_Pci = 0U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_66Mhz = 1U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz = 2U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ = 3U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz = 5U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz = 6U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz = 7U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz = 9U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz = 10U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz = 11U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz = 13U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz = 14U,
++    DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz = 15U,
++};
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_66Mhz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode_Conventional_Pci")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz")
++#pragma pop_macro("DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes")
++#undef DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes
++#pragma push_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes")
++#undef DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes
++#pragma push_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes")
++#undef DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes
++#pragma push_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes")
++#undef DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes
++#pragma push_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes")
++#undef DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes
++#pragma push_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes")
++#undef DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes
++enum DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE : unsigned int
++{
++    DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes = 0U,
++    DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes = 1U,
++    DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes = 2U,
++    DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes = 3U,
++    DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes = 4U,
++    DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes = 5U,
++};
++#pragma pop_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes")
++#pragma pop_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes")
++#pragma pop_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes")
++#pragma pop_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes")
++#pragma pop_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes")
++#pragma pop_macro("DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps")
++#undef DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps
++#pragma push_macro("DevProp_PciExpressDevice_LinkSpeed_Five_Gbps")
++#undef DevProp_PciExpressDevice_LinkSpeed_Five_Gbps
++enum DEVPROP_PCIEXPRESSDEVICE_LINKSPEED : unsigned int
++{
++    DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps = 1U,
++    DevProp_PciExpressDevice_LinkSpeed_Five_Gbps = 2U,
++};
++#pragma pop_macro("DevProp_PciExpressDevice_LinkSpeed_Five_Gbps")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_1")
++#undef DevProp_PciExpressDevice_LinkWidth_By_1
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_2")
++#undef DevProp_PciExpressDevice_LinkWidth_By_2
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_4")
++#undef DevProp_PciExpressDevice_LinkWidth_By_4
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_8")
++#undef DevProp_PciExpressDevice_LinkWidth_By_8
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_12")
++#undef DevProp_PciExpressDevice_LinkWidth_By_12
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_16")
++#undef DevProp_PciExpressDevice_LinkWidth_By_16
++#pragma push_macro("DevProp_PciExpressDevice_LinkWidth_By_32")
++#undef DevProp_PciExpressDevice_LinkWidth_By_32
++enum DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH : unsigned int
++{
++    DevProp_PciExpressDevice_LinkWidth_By_1 = 1U,
++    DevProp_PciExpressDevice_LinkWidth_By_2 = 2U,
++    DevProp_PciExpressDevice_LinkWidth_By_4 = 4U,
++    DevProp_PciExpressDevice_LinkWidth_By_8 = 8U,
++    DevProp_PciExpressDevice_LinkWidth_By_12 = 12U,
++    DevProp_PciExpressDevice_LinkWidth_By_16 = 16U,
++    DevProp_PciExpressDevice_LinkWidth_By_32 = 32U,
++};
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_32")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_16")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_12")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_8")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_4")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_2")
++#pragma pop_macro("DevProp_PciExpressDevice_LinkWidth_By_1")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciExpressDevice_Spec_Version_10")
++#undef DevProp_PciExpressDevice_Spec_Version_10
++#pragma push_macro("DevProp_PciExpressDevice_Spec_Version_11")
++#undef DevProp_PciExpressDevice_Spec_Version_11
++enum DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION : unsigned int
++{
++    DevProp_PciExpressDevice_Spec_Version_10 = 1U,
++    DevProp_PciExpressDevice_Spec_Version_11 = 2U,
++};
++#pragma pop_macro("DevProp_PciExpressDevice_Spec_Version_11")
++#pragma pop_macro("DevProp_PciExpressDevice_Spec_Version_10")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciDevice_InterruptType_LineBased")
++#undef DevProp_PciDevice_InterruptType_LineBased
++#pragma push_macro("DevProp_PciDevice_InterruptType_Msi")
++#undef DevProp_PciDevice_InterruptType_Msi
++#pragma push_macro("DevProp_PciDevice_InterruptType_MsiX")
++#undef DevProp_PciDevice_InterruptType_MsiX
++enum DEVPROP_PCIDEVICE_INTERRUPTTYPE : unsigned int
++{
++    DevProp_PciDevice_InterruptType_LineBased = 1U,
++    DevProp_PciDevice_InterruptType_Msi = 2U,
++    DevProp_PciDevice_InterruptType_MsiX = 4U,
++};
++#pragma pop_macro("DevProp_PciDevice_InterruptType_MsiX")
++#pragma pop_macro("DevProp_PciDevice_InterruptType_Msi")
++#pragma pop_macro("DevProp_PciDevice_InterruptType_LineBased")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciDevice_SriovSupport_Ok")
++#undef DevProp_PciDevice_SriovSupport_Ok
++#pragma push_macro("DevProp_PciDevice_SriovSupport_MissingAcs")
++#undef DevProp_PciDevice_SriovSupport_MissingAcs
++#pragma push_macro("DevProp_PciDevice_SriovSupport_MissingPfDriver")
++#undef DevProp_PciDevice_SriovSupport_MissingPfDriver
++#pragma push_macro("DevProp_PciDevice_SriovSupport_NoBusResource")
++#undef DevProp_PciDevice_SriovSupport_NoBusResource
++#pragma push_macro("DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace")
++#undef DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace
++enum DEVPROP_PCIDEVICE_SRIOVSUPPORT : unsigned int
++{
++    DevProp_PciDevice_SriovSupport_Ok = 0U,
++    DevProp_PciDevice_SriovSupport_MissingAcs = 1U,
++    DevProp_PciDevice_SriovSupport_MissingPfDriver = 2U,
++    DevProp_PciDevice_SriovSupport_NoBusResource = 3U,
++    DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace = 4U,
++};
++#pragma pop_macro("DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace")
++#pragma pop_macro("DevProp_PciDevice_SriovSupport_NoBusResource")
++#pragma pop_macro("DevProp_PciDevice_SriovSupport_MissingPfDriver")
++#pragma pop_macro("DevProp_PciDevice_SriovSupport_MissingAcs")
++#pragma pop_macro("DevProp_PciDevice_SriovSupport_Ok")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciDevice_AcsSupport_Present")
++#undef DevProp_PciDevice_AcsSupport_Present
++#pragma push_macro("DevProp_PciDevice_AcsSupport_NotNeeded")
++#undef DevProp_PciDevice_AcsSupport_NotNeeded
++#pragma push_macro("DevProp_PciDevice_AcsSupport_Missing")
++#undef DevProp_PciDevice_AcsSupport_Missing
++enum DEVPROP_PCIDEVICE_ACSSUPPORT : unsigned int
++{
++    DevProp_PciDevice_AcsSupport_Present = 0U,
++    DevProp_PciDevice_AcsSupport_NotNeeded = 1U,
++    DevProp_PciDevice_AcsSupport_Missing = 2U,
++};
++#pragma pop_macro("DevProp_PciDevice_AcsSupport_Missing")
++#pragma pop_macro("DevProp_PciDevice_AcsSupport_NotNeeded")
++#pragma pop_macro("DevProp_PciDevice_AcsSupport_Present")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported")
++#undef DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported
++#pragma push_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported")
++#undef DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported
++#pragma push_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported")
++#undef DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported
++#pragma push_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported")
++#undef DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported
++#pragma push_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced")
++#undef DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced
++enum DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY : unsigned int
++{
++    DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported = 0U,
++    DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported = 1U,
++    DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported = 2U,
++    DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported = 3U,
++    DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced = 4U,
++};
++#pragma pop_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced")
++#pragma pop_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported")
++#pragma pop_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported")
++#pragma pop_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported")
++#pragma pop_macro("DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported")
++#endif
++
+ #endif

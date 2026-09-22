@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
-index 62ce1ca9c1d1c91b83ae4997ca4d82e9970b4a30..494d79f5d2863bfadd51cbffc0baa7c5d58ce674 100644
+index 62ce1ca9c1..0102f29edc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
 @@ -577,6 +577,7 @@ extern "C"{
@@ -10,15 +10,26 @@ index 62ce1ca9c1d1c91b83ae4997ca4d82e9970b4a30..494d79f5d2863bfadd51cbffc0baa7c5
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -921,7 +922,7 @@ EXTERN_C const IID IID_IDiscMaster2;
+@@ -920,8 +921,8 @@ EXTERN_C const IID IID_IDiscMaster2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("27354130-7F64-5B0F-8F00-5D77AFBE261E")
+-    MIDL_INTERFACE("27354130-7F64-5B0F-8F00-5D77AFBE261E")
 -    IDiscMaster2 : public IDispatch
-+    _Windows_SupportedOS_Server2003_ IDiscMaster2 : public IDispatch
++    MIDL_INTERFACE("27354130-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
++     IDiscMaster2 : public IDispatch
      {
      public:
          virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+@@ -930,7 +931,7 @@ EXTERN_C const IID IID_IDiscMaster2;
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
+             /* [annotation][in] */ 
+             _In_  LONG index,
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+             /* [retval][ref][out] */ __RPC__out LONG *value) = 0;
 @@ -1037,7 +1038,7 @@ EXTERN_C const IID IID_IDiscMaster2;
          END_INTERFACE
      } IDiscMaster2Vtbl;
@@ -28,12 +39,14 @@ index 62ce1ca9c1d1c91b83ae4997ca4d82e9970b4a30..494d79f5d2863bfadd51cbffc0baa7c5
      {
          CONST_VTBL struct IDiscMaster2Vtbl *lpVtbl;
      };
-@@ -1115,7 +1116,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
+@@ -1114,8 +1115,8 @@ EXTERN_C const IID IID_DDiscMaster2Events;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("27354131-7F64-5B0F-8F00-5D77AFBE261E")
+-    MIDL_INTERFACE("27354131-7F64-5B0F-8F00-5D77AFBE261E")
 -    DDiscMaster2Events : public IDispatch
-+    _Windows_SupportedOS_Server2003_ DDiscMaster2Events : public IDispatch
++    MIDL_INTERFACE("27354131-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
++     DDiscMaster2Events : public IDispatch
      {
      public:
          virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyDeviceAdded( 
@@ -46,3 +59,361 @@ index 62ce1ca9c1d1c91b83ae4997ca4d82e9970b4a30..494d79f5d2863bfadd51cbffc0baa7c5
      {
          CONST_VTBL struct DDiscMaster2EventsVtbl *lpVtbl;
      };
+@@ -1316,7 +1317,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354132-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354132-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscRecorder2Ex : public IUnknown
+     {
+     public:
+@@ -1735,7 +1736,7 @@ EXTERN_C const IID IID_IDiscRecorder2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354133-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354133-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscRecorder2 : public IDispatch
+     {
+     public:
+@@ -1760,19 +1761,19 @@ EXTERN_C const IID IID_IDiscRecorder2;
+             _In_  BSTR recorderUniqueId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActiveDiscRecorder( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VendorId( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProductId( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProductRevision( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumePathNames( 
+             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value) = 0;
+@@ -1799,7 +1800,7 @@ EXTERN_C const IID IID_IDiscRecorder2;
+             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExclusiveAccessOwner( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+     };
+     
+@@ -2116,7 +2117,7 @@ EXTERN_C const IID IID_IWriteEngine2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354135-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354135-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IWriteEngine2 : public IDispatch
+     {
+     public:
+@@ -2430,7 +2431,7 @@ EXTERN_C const IID IID_IWriteEngine2EventArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354136-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354136-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IWriteEngine2EventArgs : public IDispatch
+     {
+     public:
+@@ -2652,7 +2653,7 @@ EXTERN_C const IID IID_DWriteEngine2Events;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354137-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354137-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     DWriteEngine2Events : public IDispatch
+     {
+     public:
+@@ -2818,7 +2819,7 @@ EXTERN_C const IID IID_IDiscFormat2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354152-8F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354152-8F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2 : public IDispatch
+     {
+     public:
+@@ -3030,7 +3031,7 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354156-8F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354156-8F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2Erase : public IDiscFormat2
+     {
+     public:
+@@ -3056,7 +3057,7 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
+             _In_  BSTR value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EraseMedia( void) = 0;
+         
+@@ -3312,7 +3313,7 @@ EXTERN_C const IID IID_DDiscFormat2EraseEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2735413A-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("2735413A-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     DDiscFormat2EraseEvents : public IDispatch
+     {
+     public:
+@@ -3502,7 +3503,7 @@ EXTERN_C const IID IID_IDiscFormat2Data;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354153-9F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354153-9F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2Data : public IDiscFormat2
+     {
+     public:
+@@ -3570,7 +3571,7 @@ EXTERN_C const IID IID_IDiscFormat2Data;
+             _In_  BSTR value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RequestedWriteSpeed( 
+             /* [retval][ref][out] */ __RPC__out LONG *value) = 0;
+@@ -4064,7 +4065,7 @@ EXTERN_C const IID IID_DDiscFormat2DataEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2735413C-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("2735413C-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     DDiscFormat2DataEvents : public IDispatch
+     {
+     public:
+@@ -4229,7 +4230,7 @@ EXTERN_C const IID IID_IDiscFormat2DataEventArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2735413D-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("2735413D-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2DataEventArgs : public IWriteEngine2EventArgs
+     {
+     public:
+@@ -4495,7 +4496,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354154-8F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354154-8F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2TrackAtOnce : public IDiscFormat2
+     {
+     public:
+@@ -4559,7 +4560,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
+             _In_  BSTR value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RequestedWriteSpeed( 
+             /* [retval][ref][out] */ __RPC__out LONG *value) = 0;
+@@ -4970,7 +4971,7 @@ EXTERN_C const IID IID_DDiscFormat2TrackAtOnceEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2735413F-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("2735413F-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     DDiscFormat2TrackAtOnceEvents : public IDispatch
+     {
+     public:
+@@ -5136,7 +5137,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnceEventArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354140-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354140-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2TrackAtOnceEventArgs : public IWriteEngine2EventArgs
+     {
+     public:
+@@ -5401,7 +5402,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354155-8F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354155-8F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2RawCD : public IDiscFormat2
+     {
+     public:
+@@ -5465,7 +5466,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
+             _In_  BSTR value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RequestedWriteSpeed( 
+             /* [retval][ref][out] */ __RPC__out LONG *value) = 0;
+@@ -5871,7 +5872,7 @@ EXTERN_C const IID IID_DDiscFormat2RawCDEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354142-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354142-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     DDiscFormat2RawCDEvents : public IDispatch
+     {
+     public:
+@@ -6037,7 +6038,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCDEventArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354143-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354143-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IDiscFormat2RawCDEventArgs : public IWriteEngine2EventArgs
+     {
+     public:
+@@ -6263,7 +6264,7 @@ EXTERN_C const IID IID_IBurnVerification;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D2FFD834-958B-426d-8470-2A13879C6A91")
++    MIDL_INTERFACE("D2FFD834-958B-426d-8470-2A13879C6A91") _Windows_SupportedOS_WindowsVista_ 
+     IBurnVerification : public IUnknown
+     {
+     public:
+@@ -6373,7 +6374,7 @@ EXTERN_C const IID IID_IWriteSpeedDescriptor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354144-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354144-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IWriteSpeedDescriptor : public IDispatch
+     {
+     public:
+@@ -6553,7 +6554,7 @@ EXTERN_C const IID IID_IMultisession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354150-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354150-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IMultisession : public IDispatch
+     {
+     public:
+@@ -6749,7 +6750,7 @@ EXTERN_C const IID IID_IMultisessionSequential;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354151-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354151-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IMultisessionSequential : public IMultisession
+     {
+     public:
+@@ -6974,7 +6975,7 @@ EXTERN_C const IID IID_IMultisessionSequential2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B507CA22-2204-11DD-966A-001AA01BBC58")
++    MIDL_INTERFACE("B507CA22-2204-11DD-966A-001AA01BBC58") _Windows_SupportedOS_Windows7_ 
+     IMultisessionSequential2 : public IMultisessionSequential
+     {
+     public:
+@@ -7206,7 +7207,7 @@ EXTERN_C const IID IID_IMultisessionRandomWrite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B507CA23-2204-11DD-966A-001AA01BBC58")
++    MIDL_INTERFACE("B507CA23-2204-11DD-966A-001AA01BBC58") _Windows_SupportedOS_Windows7_ 
+     IMultisessionRandomWrite : public IMultisession
+     {
+     public:
+@@ -7409,7 +7410,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354145-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354145-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IStreamPseudoRandomBased : public IStream
+     {
+     public:
+@@ -7670,7 +7671,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354146-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354146-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IStreamConcatenate : public IStream
+     {
+     public:
+@@ -7935,7 +7936,7 @@ EXTERN_C const IID IID_IStreamInterleave;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27354147-7F64-5B0F-8F00-5D77AFBE261E")
++    MIDL_INTERFACE("27354147-7F64-5B0F-8F00-5D77AFBE261E") _Windows_SupportedOS_WindowsVista_ 
+     IStreamInterleave : public IStream
+     {
+     public:
+@@ -8177,7 +8178,7 @@ EXTERN_C const IID IID_IRawCDImageCreator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("25983550-9D65-49CE-B335-40630D901227")
++    MIDL_INTERFACE("25983550-9D65-49CE-B335-40630D901227") _Windows_SupportedOS_WindowsVista_ 
+     IRawCDImageCreator : public IDispatch
+     {
+     public:
+@@ -8230,7 +8231,7 @@ EXTERN_C const IID IID_IRawCDImageCreator;
+             _In_  BSTR value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaCatalogNumber( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StartingTrackNumber( 
+             /* [range][in] */ __RPC__in_range(1,99) LONG value) = 0;
+@@ -8565,7 +8566,7 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("25983551-9D65-49CE-B335-40630D901227")
++    MIDL_INTERFACE("25983551-9D65-49CE-B335-40630D901227") _Windows_SupportedOS_WindowsVista_ 
+     IRawCDImageTrackInfo : public IDispatch
+     {
+     public:
+@@ -8582,7 +8583,7 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
+             /* [retval][ref][out] */ __RPC__out IMAPI_CD_SECTOR_TYPE *value) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ISRC( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ISRC( 
+             /* [annotation][in] */ 
+@@ -8860,7 +8861,7 @@ EXTERN_C const IID IID_IBlockRange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B507CA25-2204-11DD-966A-001AA01BBC58")
++    MIDL_INTERFACE("B507CA25-2204-11DD-966A-001AA01BBC58") _Windows_SupportedOS_Windows7_ 
+     IBlockRange : public IDispatch
+     {
+     public:
+@@ -9027,7 +9028,7 @@ EXTERN_C const IID IID_IBlockRangeList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B507CA26-2204-11DD-966A-001AA01BBC58")
++    MIDL_INTERFACE("B507CA26-2204-11DD-966A-001AA01BBC58") _Windows_SupportedOS_Windows7_ 
+     IBlockRangeList : public IDispatch
+     {
+     public:

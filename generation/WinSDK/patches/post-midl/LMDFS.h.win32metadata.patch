@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
+index 3b5b9a1095..168e1f5562 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
 @@ -28,6 +28,7 @@ Notes:
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  } DFS_TARGET_PRIORITY_CLASS;
  
 -typedef struct _DFS_TARGET_PRIORITY {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_TARGET_PRIORITY {
++typedef struct  _DFS_TARGET_PRIORITY {
      DFS_TARGET_PRIORITY_CLASS   TargetPriorityClass;    // Priority class of target.
      USHORT                      TargetPriorityRank;     // Priority rank of target.
      USHORT                      Reserved;               // Must be set to 0.
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 1:
  //
 -typedef struct _DFS_INFO_1 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_1 {
++typedef struct   _DFS_INFO_1 {
      LPWSTR  EntryPath;              // Dfs name for the top of this piece of storage
  } DFS_INFO_1, *PDFS_INFO_1, *LPDFS_INFO_1;
  
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 2:
  //
 -typedef struct _DFS_INFO_2 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_2 {
++typedef struct   _DFS_INFO_2 {
      LPWSTR  EntryPath;              // Dfs name for the top of this volume
      LPWSTR  Comment;                // Comment for this volume
      DWORD   State;                  // State of this volume, one of DFS_VOLUME_STATE_*
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  #endif  /* _WIN64   */
  
 -typedef struct _DFS_STORAGE_INFO {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_STORAGE_INFO {
++typedef struct   _DFS_STORAGE_INFO {
      ULONG   State;                  // State of this storage, one of DFS_STORAGE_STATE_*
                                      // possibly OR'd with DFS_STORAGE_STATE_ACTIVE
      LPWSTR  ServerName;             // Name of server hosting this storage
@@ -50,7 +51,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  //
  
 -typedef struct _DFS_STORAGE_INFO_1 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_STORAGE_INFO_1 {
++typedef struct  _DFS_STORAGE_INFO_1 {
      ULONG                   State;          // State of this target, one of DFS_TARGET_STATE_*
                                              // possibly OR'd with DFS_STORAGE_STATE_ACTIVE
      LPWSTR                  ServerName;     // Name of server hosting this target
@@ -59,7 +60,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 3:
  //
 -typedef struct _DFS_INFO_3 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_3 {
++typedef struct   _DFS_INFO_3 {
      LPWSTR  EntryPath;              // Dfs name for the top of this volume
      LPWSTR  Comment;                // Comment for this volume
      DWORD   State;                  // State of this volume, one of DFS_VOLUME_STATE_*
@@ -68,7 +69,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 4:
  //
 -typedef struct _DFS_INFO_4 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_4 {
++typedef struct   _DFS_INFO_4 {
      LPWSTR  EntryPath;              // Dfs name for the top of this volume
      LPWSTR  Comment;                // Comment for this volume
      DWORD   State;                  // State of this volume, one of DFS_VOLUME_STATE_*
@@ -77,7 +78,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 5:
  //
 -typedef struct _DFS_INFO_5 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_INFO_5 {
++typedef struct  _DFS_INFO_5 {
      LPWSTR  EntryPath;              // Name of DFS namespace, DFS root name.
      LPWSTR  Comment;                // Comment for root/link.
      DWORD   State;                  // State of the root/link, one of DFS_VOLUME_STATE_*
@@ -86,7 +87,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 6:
  //
 -typedef struct _DFS_INFO_6 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_INFO_6 {
++typedef struct  _DFS_INFO_6 {
      LPWSTR  EntryPath;              // Name of DFS namespace, DFS root name.
      LPWSTR  Comment;                // Comment for root/link.
      DWORD   State;                  // State of the root/link, one of DFS_VOLUME_STATE_*
@@ -95,7 +96,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 7:
  //
 -typedef struct _DFS_INFO_7 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_INFO_7 {
++typedef struct  _DFS_INFO_7 {
      GUID        GenerationGuid;     // Guid representation of the version/generation
                                      // number of the DFS root.
  } DFS_INFO_7, *PDFS_INFO_7, *LPDFS_INFO_7;
@@ -104,7 +105,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 8:
  //
 -typedef struct _DFS_INFO_8 {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _DFS_INFO_8 {
++typedef struct   _DFS_INFO_8 {
      LPWSTR  EntryPath;              // Name of DFS namespace, DFS root name.
      LPWSTR  Comment;                // Comment for root/link.
      DWORD   State;                  // State of the root/link, one of DFS_VOLUME_STATE_*
@@ -113,7 +114,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 9:
  //
 -typedef struct _DFS_INFO_9 {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _DFS_INFO_9 {
++typedef struct   _DFS_INFO_9 {
      LPWSTR  EntryPath;              // Name of DFS namespace, DFS root name.
      LPWSTR  Comment;                // Comment for root/link.
      DWORD   State;                  // State of the root/link, one of DFS_VOLUME_STATE_*
@@ -122,7 +123,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  //
  
 -typedef struct _DFS_INFO_50 {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _DFS_INFO_50 {
++typedef struct   _DFS_INFO_50 {
      ULONG       NamespaceMajorVersion;
      ULONG       NamespaceMinorVersion;
      ULONGLONG   NamespaceCapabilities;
@@ -131,7 +132,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 100:
  //
 -typedef struct _DFS_INFO_100 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_100 {
++typedef struct   _DFS_INFO_100 {
      LPWSTR  Comment;                // Comment for this volume or storage
  } DFS_INFO_100, *PDFS_INFO_100, *LPDFS_INFO_100;
  
@@ -139,7 +140,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 101:
  //
 -typedef struct _DFS_INFO_101 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_101 {
++typedef struct   _DFS_INFO_101 {
      DWORD   State;                  // State of this storage, one of DFS_STORAGE_STATE_*
                                      // possibly OR'd with DFS_STORAGE_STATE_ACTIVE
  } DFS_INFO_101, *PDFS_INFO_101, *LPDFS_INFO_101;
@@ -148,7 +149,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 102:
  //
 -typedef struct _DFS_INFO_102 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_102 {
++typedef struct   _DFS_INFO_102 {
      ULONG   Timeout;                // Timeout, in seconds, of the junction
  } DFS_INFO_102, *PDFS_INFO_102, *LPDFS_INFO_102;
  
@@ -156,7 +157,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 103:
  //
 -typedef struct _DFS_INFO_103 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_INFO_103 {
++typedef struct  _DFS_INFO_103 {
      ULONG       PropertyFlagMask;   // Indicates which flags in PropertyFlags are valid.
      ULONG       PropertyFlags;      // Flag meaningful only if corresponding bit set in
                                      // PropertyFlagMask above.
@@ -165,7 +166,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 104:
  //
 -typedef struct _DFS_INFO_104 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_INFO_104 {
++typedef struct  _DFS_INFO_104 {
      DFS_TARGET_PRIORITY     TargetPriority;     // Priority of target.
  } DFS_INFO_104, *PDFS_INFO_104, *LPDFS_INFO_104;
  
@@ -173,7 +174,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 105:
  //
 -typedef struct _DFS_INFO_105 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _DFS_INFO_105 {
++typedef struct  _DFS_INFO_105 {
      LPWSTR      Comment;            // Comment for this root/link.
      DWORD       State;              // State of this root/link. One of DFS_VOLUME_STATE_*
      ULONG       Timeout;            // Referral TTL, in seconds, of root/link.
@@ -182,7 +183,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 106:
  //
 -typedef struct _DFS_INFO_106 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_106 {
++typedef struct   _DFS_INFO_106 {
      DWORD               State;              // State of this root/link target.
                                              //      One of DFS_TARGET_STATE_*
      DFS_TARGET_PRIORITY TargetPriority;     // Priority of this target.
@@ -191,7 +192,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 107:
  //
 -typedef struct _DFS_INFO_107 {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _DFS_INFO_107 {
++typedef struct   _DFS_INFO_107 {
      LPWSTR      Comment;            // Comment for this root/link.
      DWORD       State;              // State of this root/link. One of DFS_VOLUME_STATE_*
      ULONG       Timeout;            // Referral TTL, in seconds, of root/link.
@@ -200,7 +201,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 150:
  //
 -typedef struct _DFS_INFO_150 {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _DFS_INFO_150 {
++typedef struct   _DFS_INFO_150 {
  
  #ifdef  MIDL_PASS
  
@@ -209,7 +210,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 200:
  //
 -typedef struct _DFS_INFO_200 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_200 {
++typedef struct   _DFS_INFO_200 {
      LPWSTR  FtDfsName;              // FtDfs name
  } DFS_INFO_200, *PDFS_INFO_200, *LPDFS_INFO_200;
  
@@ -218,114 +219,151 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  // Level 300:
  //
 -typedef struct _DFS_INFO_300 {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DFS_INFO_300 {
++typedef struct   _DFS_INFO_300 {
      DWORD   Flags;
      LPWSTR  DfsName;              // Dfs name
  } DFS_INFO_300, *PDFS_INFO_300, *LPDFS_INFO_300;
-@@ -641,7 +642,7 @@ typedef struct _DFS_INFO_300 {
+@@ -640,8 +641,8 @@ typedef struct _DFS_INFO_300 {
+ // Add a new volume or additional storage for an existing volume at
  // DfsEntryPath.
  //
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsAdd(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsAdd(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsAdd(
      _In_ LPWSTR     DfsEntryPath,   // DFS entry path for this added volume or storage
      _In_ LPWSTR     ServerName,     // Name of server hosting the storage
      _In_ LPWSTR     ShareName,      // Existing share name for the storage
-@@ -660,7 +661,7 @@ NetDfsAdd(
+@@ -659,23 +660,23 @@ NetDfsAdd(
+ // Setup/teardown API's for standard and FtDfs roots.
  //
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsAddStdRoot(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsAddStdRoot(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsAddStdRoot(
      _In_ LPWSTR     ServerName,     // Server to remote to
      _In_ LPWSTR     RootShare,      // Share to make Dfs root
      _In_opt_ LPWSTR Comment,        // Comment
-@@ -668,14 +669,14 @@ NetDfsAddStdRoot(
+     _In_  DWORD     Flags           // Flags for operation.  Zero for no flags.
  );
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsRemoveStdRoot(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsRemoveStdRoot(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsRemoveStdRoot(
      _In_  LPWSTR ServerName,        // Server to remote to
      _In_  LPWSTR RootShare,         // Share that host Dfs root
      _Reserved_  DWORD  Flags        // Flags for operation.  Zero for no flags.
  );
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsAddFtRoot(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsAddFtRoot(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsAddFtRoot(
      _In_ LPWSTR         ServerName,     // Server to remote to
      _In_ LPWSTR         RootShare,      // Share to make Dfs root
      _In_  LPWSTR        FtDfsName,      // Name of FtDfs to create/join
-@@ -685,7 +686,7 @@ NetDfsAddFtRoot(
+@@ -684,16 +685,16 @@ NetDfsAddFtRoot(
+ );
  
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsRemoveFtRoot(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsRemoveFtRoot(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsRemoveFtRoot(
      _In_ LPWSTR         ServerName,     // Server to remote to
      _In_ LPWSTR         RootShare,      // Share that host Dfs root
      _In_ LPWSTR         FtDfsName,      // Name of FtDfs to remove or unjoin from.
-@@ -693,7 +694,7 @@ NetDfsRemoveFtRoot(
+     _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
  );
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsRemoveFtRootForced(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsRemoveFtRootForced(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsRemoveFtRootForced(
      _In_  LPWSTR        DomainName,     // Name of domain the server is in
      _In_  LPWSTR        ServerName,     // Server to remote to
      _In_  LPWSTR        RootShare,      // Share that host Dfs root
-@@ -743,7 +744,7 @@ typedef struct {
+@@ -742,8 +743,8 @@ typedef struct {
+ // DfsEntryPath. When applied to the last storage in a volume, removes
  // the volume from the DFS.
  //
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsRemove(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsRemove(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsRemove(
      _In_ LPWSTR     DfsEntryPath,       // DFS entry path for this added volume or storage
      _In_opt_ LPWSTR ServerName,         // Name of server hosting the storage
      _In_opt_ LPWSTR ShareName           // Name of share hosting the storage
+@@ -755,7 +756,7 @@ NetDfsRemove(
+ //
+ // Valid levels are 1-5, 200, 300
+ //
+-_When_(Level == 1, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_1))))
++_Windows_SupportedOS_WindowsVista_ _When_(Level == 1, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_1))))
+ _When_(Level == 2, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_2))))
+ _When_(Level == 3, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_3))))
+ _When_(Level == 4, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_4))))
 @@ -766,7 +767,7 @@ _When_(Level == 9, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof
  _When_(Level == 200, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_200))))
  _When_(Level == 300, _At_(Buffer, _Outptr_result_bytebuffer_(*EntriesRead * sizeof(DFS_INFO_300))))
  NET_API_STATUS NET_API_FUNCTION
 -NetDfsEnum(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsEnum(
++  NetDfsEnum(
      _In_ LPWSTR         DfsName,        // Name of the Dfs for enumeration
      _In_ DWORD          Level,          // Level of information requested
      _In_ DWORD          PrefMaxLen,     // Advisory, but -1 means "get it all"
+@@ -783,7 +784,7 @@ NetDfsEnum(
+ //
+ // Valid levels are 1-5, 100
+ //
+-_When_(Level == 1, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_1))))
++_Windows_SupportedOS_WindowsVista_ _When_(Level == 1, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_1))))
+ _When_(Level == 2, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_2))))
+ _When_(Level == 3, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_3))))
+ _When_(Level == 4, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_4))))
 @@ -796,7 +797,7 @@ _When_(Level == 50, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_50))
  _When_(Level == 100, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_100))))
  _When_(Level == 150, _At_(Buffer, _Outptr_result_bytebuffer_(sizeof(DFS_INFO_150))))
  NET_API_STATUS NET_API_FUNCTION
 -NetDfsGetInfo(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsGetInfo(
++  NetDfsGetInfo(
      _In_ LPWSTR         DfsEntryPath,   // DFS entry path for the volume
      _In_opt_ LPWSTR     ServerName,     // Name of server hosting a storage
      _In_opt_ LPWSTR     ShareName,      // Name of share on server serving the volume
-@@ -815,7 +816,7 @@ NetDfsGetInfo(
+@@ -813,9 +814,9 @@ NetDfsGetInfo(
+ // Valid levels are 100, 101 and 102
+ //
  
- _When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
+-_When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
++_Windows_SupportedOS_WindowsVista_ _When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
  NET_API_STATUS NET_API_FUNCTION
 -NetDfsSetInfo(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsSetInfo(
++  NetDfsSetInfo(
      _In_ LPWSTR         DfsEntryPath,   // DFS entry path for the volume
      _In_opt_ LPWSTR     ServerName,     // Name of server hosting a storage
      _In_opt_ LPWSTR     ShareName,      // Name of share hosting a storage
-@@ -832,7 +833,7 @@ NetDfsSetInfo(
+@@ -831,8 +832,8 @@ NetDfsSetInfo(
+ //
  // Valid levels are 1-4
  //
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsGetClientInfo(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsGetClientInfo(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsGetClientInfo(
      _In_ LPWSTR         DfsEntryPath,   // DFS entry path for the volume
      _In_opt_ LPWSTR     ServerName,     // Name of server hosting a storage
      _In_opt_ LPWSTR     ShareName,      // Name of share on server serving the volume
-@@ -851,7 +852,7 @@ NetDfsGetClientInfo(
+@@ -849,9 +850,9 @@ NetDfsGetClientInfo(
+ // Valid levels are 101 and 102.
+ //
  
- _When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
+-_When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
++_Windows_SupportedOS_WindowsVista_ _When_(Level == 101, _At_(Buffer, _In_reads_bytes_(sizeof(DFS_INFO_101))))
  NET_API_STATUS NET_API_FUNCTION
 -NetDfsSetClientInfo(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsSetClientInfo(
++  NetDfsSetClientInfo(
      _In_ LPWSTR         DfsEntryPath,   // DFS entry path for the volume
      _In_opt_ LPWSTR     ServerName,     // Name of server hosting a storage
      _In_opt_ LPWSTR     ShareName,      // Name of share hosting a storage
@@ -338,21 +376,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
      _In_ LPWSTR     OldDfsEntryPath,    // Current DFS entry path for this volume
      _In_ LPWSTR     NewDfsEntryPath,    // New DFS entry path for this volume
      _In_ ULONG      Flags
-@@ -901,7 +902,7 @@ NetDfsRename(
+@@ -900,8 +901,8 @@ NetDfsRename(
+ #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsAddRootTarget(
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ NetDfsAddRootTarget(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsAddRootTarget(
      _In_        LPWSTR  pDfsPath,
      _In_opt_    LPWSTR  pTargetPath,
      _In_        ULONG   MajorVersion,
-@@ -918,14 +919,14 @@ NetDfsAddRootTarget(
+@@ -917,15 +918,15 @@ NetDfsAddRootTarget(
+ #define DFS_FORCE_REMOVE    0x80000000
  #endif
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsRemoveRootTarget(
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ NetDfsRemoveRootTarget(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsRemoveRootTarget(
      _In_        LPWSTR  pDfsPath,
      _In_opt_    LPWSTR  pTargetPath,
      _In_        ULONG   Flags
@@ -375,9 +417,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
      _In_ PSECURITY_DESCRIPTOR   pSecurityDescriptor
  );
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsGetStdContainerSecurity(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsGetStdContainerSecurity(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsGetStdContainerSecurity(
      _In_ LPWSTR                                                         MachineName,
      _In_ SECURITY_INFORMATION                                           SecurityInformation,
      _Outptr_result_bytebuffer_(*lpcbSecurityDescriptor) PSECURITY_DESCRIPTOR    *ppSecurityDescriptor,
@@ -392,9 +435,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
      _In_ PSECURITY_DESCRIPTOR   pSecurityDescriptor
  );
      
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsGetFtContainerSecurity(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ NetDfsGetFtContainerSecurity(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsGetFtContainerSecurity(
      _In_ LPWSTR                                                         DomainName,
      _In_ SECURITY_INFORMATION                                           SecurityInformation,
      _Outptr_result_bytebuffer_(*lpcbSecurityDescriptor) PSECURITY_DESCRIPTOR    *ppSecurityDescriptor,
@@ -412,16 +456,18 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinS
  
  
 -typedef struct _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
++typedef struct   _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
  
      //
      //  Domain-based DFS information.
-@@ -1016,7 +1017,7 @@ typedef struct _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
+@@ -1015,8 +1016,8 @@ typedef struct _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
+ } DFS_SUPPORTED_NAMESPACE_VERSION_INFO, *PDFS_SUPPORTED_NAMESPACE_VERSION_INFO;
  
  
- NET_API_STATUS NET_API_FUNCTION
+-NET_API_STATUS NET_API_FUNCTION
 -NetDfsGetSupportedNamespaceVersion(
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ NetDfsGetSupportedNamespaceVersion(
++_Windows_SupportedOS_WindowsVista_ NET_API_STATUS NET_API_FUNCTION
++  NetDfsGetSupportedNamespaceVersion(
      _In_        DFS_NAMESPACE_VERSION_ORIGIN            Origin,
      _In_opt_    PWSTR                                   pName,
      _Outptr_ PDFS_SUPPORTED_NAMESPACE_VERSION_INFO   *ppVersionInfo

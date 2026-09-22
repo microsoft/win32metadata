@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h
+index 4d747af33d..afc991aa9d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h
 @@ -17,6 +17,7 @@
@@ -74,7 +75,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h b/generation/W
  
  #if (_WIN32_WINNT >= 0x0501)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI

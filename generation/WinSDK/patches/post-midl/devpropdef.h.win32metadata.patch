@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/devpropdef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/devpropdef.h
+index d1db387bb7..1b6b3ec8fb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/devpropdef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/devpropdef.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++
+@@ -104,7 +105,7 @@ typedef CHAR DEVPROP_BOOLEAN, *PDEVPROP_BOOLEAN;
+ typedef GUID  DEVPROPGUID, *PDEVPROPGUID;
+ typedef ULONG DEVPROPID,   *PDEVPROPID;
+ 
+-typedef struct _DEVPROPKEY {
++typedef struct _Win32_AlsoUsableFor_(PROPERTYKEY)  _DEVPROPKEY {
+     DEVPROPGUID fmtid;
+     DEVPROPID   pid;
+ } DEVPROPKEY, *PDEVPROPKEY;

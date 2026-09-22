@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShellScalingApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShellScalingApi.h
-index a740c1df7e..3210c73446 100644
+index a740c1df7e..739f66706f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShellScalingApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShellScalingApi.h
 @@ -1,3 +1,4 @@
@@ -12,14 +12,14 @@ index a740c1df7e..3210c73446 100644
  // is not provided for displays other than those.
  // This enum matches #defines in IETouch.h.  Don't update this without keeping that in sync.
 -typedef enum
-+typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++typedef enum  
  {
      DEVICE_PRIMARY = 0,
      DEVICE_IMMERSIVE = 1,
  } DISPLAY_DEVICE_TYPE;
  
 -typedef enum
-+typedef enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++typedef enum  
  {
      SCF_VALUE_NONE = 0x00,
      SCF_SCALE = 0x01,
@@ -27,14 +27,14 @@ index a740c1df7e..3210c73446 100644
  
  // Given a display device, return the preferred DEVICE_SCALE_FACTOR to be used for scaling values.
  // Default is SCALE_100_PERCENT
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_  
  STDAPI_(DEVICE_SCALE_FACTOR) GetScaleFactorForDevice(_In_ DISPLAY_DEVICE_TYPE deviceType);
  
  // Register a window to receive callbacks when scaling information changes.  The uMsgNotify param specifies a message
  // that will be posted to the requesting window.  The wParam for this message is a combination of SCALE_CHANGE_FLAGS
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_  
  STDAPI RegisterScaleChangeNotifications(_In_ DISPLAY_DEVICE_TYPE displayDevice, _In_ HWND hwndNotify, _In_ UINT uMsgNotify, _Out_ DWORD *pdwCookie);
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_  
  STDAPI RevokeScaleChangeNotifications(_In_ DISPLAY_DEVICE_TYPE displayDevice, _In_ DWORD dwCookie);
  
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
@@ -45,7 +45,7 @@ index a740c1df7e..3210c73446 100644
  STDAPI GetScaleFactorForMonitor(_In_ HMONITOR hMon, _Out_ DEVICE_SCALE_FACTOR *pScale);
 -STDAPI RegisterScaleChangeEvent(_In_ HANDLE hEvent, _Out_ DWORD_PTR *pdwCookie);
 +_Windows_SupportedOS_Windows81_
-+STDAPI RegisterScaleChangeEvent(_In_ HANDLE hEvent, _Out_ _Win32_RAIIFree_(UnregisterScaleChangeEvent) DWORD_PTR *pdwCookie);
++STDAPI RegisterScaleChangeEvent(_In_ HANDLE hEvent, _Out_  DWORD_PTR *pdwCookie);
 +_Windows_SupportedOS_Windows81_
  STDAPI UnregisterScaleChangeEvent(_In_ DWORD_PTR dwCookie);
  
@@ -54,14 +54,14 @@ index a740c1df7e..3210c73446 100644
  #ifndef DPI_ENUMS_DECLARED
  
 -typedef enum PROCESS_DPI_AWARENESS {
-+typedef enum _Windows_SupportedOS_Windows81_ PROCESS_DPI_AWARENESS {
++typedef enum  PROCESS_DPI_AWARENESS {
      PROCESS_DPI_UNAWARE = 0,
      PROCESS_SYSTEM_DPI_AWARE = 1,
      PROCESS_PER_MONITOR_DPI_AWARE = 2
  } PROCESS_DPI_AWARENESS;
  
 -typedef enum MONITOR_DPI_TYPE {
-+typedef enum _Windows_SupportedOS_Windows81_ MONITOR_DPI_TYPE {
++typedef enum  MONITOR_DPI_TYPE {
      MDT_EFFECTIVE_DPI = 0,
      MDT_ANGULAR_DPI = 1,
      MDT_RAW_DPI = 2,
@@ -82,3 +82,12 @@ index a740c1df7e..3210c73446 100644
  STDAPI GetDpiForMonitor(
      _In_ HMONITOR hmonitor,
      _In_ MONITOR_DPI_TYPE dpiType,
+@@ -101,7 +111,7 @@ typedef enum
+ #define SHELL_UI_COMPONENT_ENUMS_DECLARED
+ #endif // (SHELL_UI_COMPONENT_ENUMS_DECLARED)
+ 
+-STDAPI_(UINT) GetDpiForShellUIComponent(
++_Windows_SupportedOS_Windows81_ STDAPI_(UINT) GetDpiForShellUIComponent(
+     _In_ SHELL_UI_COMPONENT);
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)

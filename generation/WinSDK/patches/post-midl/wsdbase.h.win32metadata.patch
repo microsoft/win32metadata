@@ -1,0 +1,151 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdbase.h
+index c9f41054ba..ae3a70f1ef 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdbase.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -245,7 +246,7 @@ EXTERN_C const IID IID_IWSDAddress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b9574c6c-12a6-4f74-93a1-3318ff605759")
++    MIDL_INTERFACE("b9574c6c-12a6-4f74-93a1-3318ff605759") _Windows_SupportedOS_WindowsVista_ 
+     IWSDAddress : public IUnknown
+     {
+     public:
+@@ -353,7 +354,7 @@ EXTERN_C const IID IID_IWSDTransportAddress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("70d23498-4ee6-4340-a3df-d845d2235467")
++    MIDL_INTERFACE("70d23498-4ee6-4340-a3df-d845d2235467") _Windows_SupportedOS_WindowsVista_ 
+     IWSDTransportAddress : public IWSDAddress
+     {
+     public:
+@@ -519,7 +520,7 @@ EXTERN_C const IID IID_IWSDMessageParameters;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c")
++    MIDL_INTERFACE("1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c") _Windows_SupportedOS_WindowsVista_ 
+     IWSDMessageParameters : public IUnknown
+     {
+     public:
+@@ -650,7 +651,7 @@ EXTERN_C const IID IID_IWSDMessageParameters;
+ /* interface __MIDL_itf_wsdbase_0000_0003 */
+ /* [local] */ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateUdpMessageParameters(
+     IWSDUdpMessageParameters** ppTxParams);
+ typedef struct _WSDUdpRetransmitParams
+@@ -678,7 +679,7 @@ EXTERN_C const IID IID_IWSDUdpMessageParameters;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9934149f-8f0c-447b-aa0b-73124b0ca7f0")
++    MIDL_INTERFACE("9934149f-8f0c-447b-aa0b-73124b0ca7f0") _Windows_SupportedOS_WindowsVista_ 
+     IWSDUdpMessageParameters : public IWSDMessageParameters
+     {
+     public:
+@@ -816,7 +817,7 @@ EXTERN_C const IID IID_IWSDUdpMessageParameters;
+ /* interface __MIDL_itf_wsdbase_0000_0004 */
+ /* [local] */ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateUdpAddress(
+     _Outptr_ IWSDUdpAddress** ppAddress);
+ #if 1
+@@ -851,7 +852,7 @@ EXTERN_C const IID IID_IWSDUdpAddress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("74d6124a-a441-4f78-a1eb-97a8d1996893")
++    MIDL_INTERFACE("74d6124a-a441-4f78-a1eb-97a8d1996893") _Windows_SupportedOS_WindowsVista_ 
+     IWSDUdpAddress : public IWSDTransportAddress
+     {
+     public:
+@@ -1114,7 +1115,7 @@ EXTERN_C const IID IID_IWSDUdpAddress;
+ /* interface __MIDL_itf_wsdbase_0000_0005 */
+ /* [local] */ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateHttpMessageParameters(
+     _Outptr_ IWSDHttpMessageParameters** ppTxParams);
+ 
+@@ -1133,7 +1134,7 @@ EXTERN_C const IID IID_IWSDHttpMessageParameters;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("540bd122-5c83-4dec-b396-ea62a2697fdf")
++    MIDL_INTERFACE("540bd122-5c83-4dec-b396-ea62a2697fdf") _Windows_SupportedOS_WindowsVista_ 
+     IWSDHttpMessageParameters : public IWSDMessageParameters
+     {
+     public:
+@@ -1358,7 +1359,7 @@ EXTERN_C const IID IID_IWSDHttpMessageParameters;
+ /* interface __MIDL_itf_wsdbase_0000_0006 */
+ /* [local] */ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateHttpAddress(
+     _Outptr_ IWSDHttpAddress** ppAddress);
+ 
+@@ -1377,7 +1378,7 @@ EXTERN_C const IID IID_IWSDHttpAddress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0")
++    MIDL_INTERFACE("d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0") _Windows_SupportedOS_WindowsVista_ 
+     IWSDHttpAddress : public IWSDTransportAddress
+     {
+     public:
+@@ -1579,7 +1580,7 @@ EXTERN_C const IID IID_IWSDSSLClientCertificate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("de105e87-a0da-418e-98ad-27b9eed87bdc")
++    MIDL_INTERFACE("de105e87-a0da-418e-98ad-27b9eed87bdc") _Windows_SupportedOS_Windows7_ 
+     IWSDSSLClientCertificate : public IUnknown
+     {
+     public:
+@@ -1589,7 +1590,7 @@ EXTERN_C const IID IID_IWSDSSLClientCertificate;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMappedAccessToken( 
+             /* [annotation][out][in] */ 
+-            _Out_  HANDLE *phToken) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phToken) = 0;
+         
+     };
+     
+@@ -1679,13 +1680,13 @@ EXTERN_C const IID IID_IWSDHttpAuthParameters;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0b476df0-8dac-480d-b05c-99781a5884aa")
++    MIDL_INTERFACE("0b476df0-8dac-480d-b05c-99781a5884aa") _Windows_SupportedOS_Windows8_ 
+     IWSDHttpAuthParameters : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetClientAccessToken( 
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phToken) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phToken) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAuthType( 
+             /* [annotation][out] */ 
+@@ -1779,7 +1780,7 @@ EXTERN_C const IID IID_IWSDSignatureProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("03ce20aa-71c4-45e2-b32e-3766c61c790f")
++    MIDL_INTERFACE("03ce20aa-71c4-45e2-b32e-3766c61c790f") _Windows_SupportedOS_Windows7_ 
+     IWSDSignatureProperty : public IUnknown
+     {
+     public:

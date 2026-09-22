@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
-index 811c3c7e7b..c734003533 100644
+index 811c3c7e7b..4b121f8e9c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
 @@ -20,6 +20,7 @@ Abstract:
@@ -15,7 +15,7 @@ index 811c3c7e7b..c734003533 100644
  // Domain information
  //
 -typedef enum _DSROLE_MACHINE_ROLE {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_MACHINE_ROLE {
++typedef enum   _DSROLE_MACHINE_ROLE {
  
      DsRole_RoleStandaloneWorkstation,
      DsRole_RoleMemberWorkstation,
@@ -24,7 +24,7 @@ index 811c3c7e7b..c734003533 100644
  // Previous server state
  //
 -typedef enum _DSROLE_SERVER_STATE {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_SERVER_STATE {
++typedef enum   _DSROLE_SERVER_STATE {
  
      DsRoleServerUnknown = 0,
      DsRoleServerPrimary,
@@ -33,7 +33,7 @@ index 811c3c7e7b..c734003533 100644
  } DSROLE_SERVER_STATE, *PDSROLE_SERVER_STATE;
  
 -typedef enum _DSROLE_PRIMARY_DOMAIN_INFO_LEVEL {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_PRIMARY_DOMAIN_INFO_LEVEL {
++typedef enum   _DSROLE_PRIMARY_DOMAIN_INFO_LEVEL {
  
      DsRolePrimaryDomainInfoBasic = 1,
      DsRoleUpgradeStatus,
@@ -42,7 +42,7 @@ index 811c3c7e7b..c734003533 100644
  // Structure that correspond to the DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
  //
 -typedef struct _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
++typedef struct   _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
  
      DSROLE_MACHINE_ROLE MachineRole;
      ULONG Flags;
@@ -51,7 +51,7 @@ index 811c3c7e7b..c734003533 100644
  } DSROLE_PRIMARY_DOMAIN_INFO_BASIC, *PDSROLE_PRIMARY_DOMAIN_INFO_BASIC;
  
 -typedef struct _DSROLE_UPGRADE_STATUS_INFO {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_UPGRADE_STATUS_INFO {
++typedef struct   _DSROLE_UPGRADE_STATUS_INFO {
  
      ULONG OperationState;
      DSROLE_SERVER_STATE PreviousServerState;
@@ -59,7 +59,7 @@ index 811c3c7e7b..c734003533 100644
  } DSROLE_UPGRADE_STATUS_INFO, *PDSROLE_UPGRADE_STATUS_INFO;
  
 -typedef enum _DSROLE_OPERATION_STATE {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_OPERATION_STATE {
++typedef enum   _DSROLE_OPERATION_STATE {
  
      DsRoleOperationIdle = 0,
      DsRoleOperationActive,
@@ -68,25 +68,25 @@ index 811c3c7e7b..c734003533 100644
  } DSROLE_OPERATION_STATE;
  
 -typedef struct _DSROLE_OPERATION_STATE_INFO {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DSROLE_OPERATION_STATE_INFO {
++typedef struct   _DSROLE_OPERATION_STATE_INFO {
  
      DSROLE_OPERATION_STATE OperationState;
  
  } DSROLE_OPERATION_STATE_INFO, *PDSROLE_OPERATION_STATE_INFO;
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  DWORD
  WINAPI
  DsRoleGetPrimaryDomainInformation(
      IN  LPCWSTR lpServer OPTIONAL,
      IN  DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
 -    OUT PBYTE *Buffer 
-+    OUT _Win32_RAIIFree_(DsRoleFreeMemory) PBYTE *Buffer 
++    OUT  PBYTE *Buffer 
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  VOID
  WINAPI
  DsRoleFreeMemory(

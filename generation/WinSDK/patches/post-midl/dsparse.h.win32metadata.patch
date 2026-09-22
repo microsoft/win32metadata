@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
-index 885f3d642d..1000d35384 100644
+index 885f3d642d..99a4fb12c0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 @@ -27,6 +27,7 @@ Notes:
@@ -15,7 +15,7 @@ index 885f3d642d..1000d35384 100644
  #endif
  
 -typedef enum _DS_MANGLE_FOR {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DS_MANGLE_FOR {
++typedef enum   _DS_MANGLE_FOR {
          DS_MANGLE_UNKNOWN = 0,
          DS_MANGLE_OBJECT_RDN_FOR_DELETION,
          DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT,
@@ -23,8 +23,8 @@ index 885f3d642d..1000d35384 100644
  //
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == ERROR_SUCCESS)
  DSPARSE
@@ -32,8 +32,8 @@ index 885f3d642d..1000d35384 100644
      _Out_writes_to_opt_(*pcSpnLength, *pcSpnLength) LPWSTR pszSpn
  );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == ERROR_SUCCESS)
  DSPARSE
@@ -41,8 +41,8 @@ index 885f3d642d..1000d35384 100644
  // All arguments except pszSpn are optional.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  DSPARSE
  DWORD
@@ -50,8 +50,8 @@ index 885f3d642d..1000d35384 100644
      _Out_opt_ USHORT *pInstancePort
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  DSPARSE
  DWORD
@@ -59,8 +59,8 @@ index 885f3d642d..1000d35384 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == 0)
  DSPARSE
@@ -68,8 +68,8 @@ index 885f3d642d..1000d35384 100644
      _Out_writes_to_(*pcQuotedRdnValueLength, *pcQuotedRdnValueLength) LPWCH    psQuotedRdnValue
  );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == 0)
  DSPARSE
@@ -77,8 +77,8 @@ index 885f3d642d..1000d35384 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == 0)
  DSPARSE
@@ -86,8 +86,8 @@ index 885f3d642d..1000d35384 100644
      _Out_writes_to_ (*pcUnquotedRdnValueLength, *pcUnquotedRdnValueLength) LPWCH    psUnquotedRdnValue
  );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == 0)
  DSPARSE
@@ -95,8 +95,8 @@ index 885f3d642d..1000d35384 100644
          All output parameters are undefined.
  
  --*/
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  _Check_return_
  _Success_(return == 0)
  DSPARSE
@@ -104,8 +104,8 @@ index 885f3d642d..1000d35384 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  DSPARSE
  BOOL
  WINAPI
@@ -113,8 +113,8 @@ index 885f3d642d..1000d35384 100644
       _Out_opt_ DS_MANGLE_FOR *peDsMangleFor
       );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  DSPARSE
  BOOL
  WINAPI
@@ -122,8 +122,8 @@ index 885f3d642d..1000d35384 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  DSPARSE
  BOOL
  WINAPI
@@ -131,8 +131,8 @@ index 885f3d642d..1000d35384 100644
      DS_MANGLE_FOR eDsMangleForDesired
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  DSPARSE
  BOOL
  WINAPI
@@ -140,8 +140,8 @@ index 885f3d642d..1000d35384 100644
  
  --*/
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  DSPARSE
  BOOL
  WINAPI
@@ -149,8 +149,44 @@ index 885f3d642d..1000d35384 100644
      DS_MANGLE_FOR eDsMangleFor
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("dsparse.dll") 
++
  DSPARSE
  BOOL
  WINAPI
+@@ -734,7 +765,7 @@ DsIsMangledDnW(
+ // All arguments except pszSpn are optional.
+ //
+ 
+-DSPARSE
++_Win32_ImportLibrary_("dsparse.dll") DSPARSE
+ DWORD
+ WINAPI
+ DsCrackSpn2A(
+@@ -749,7 +780,7 @@ DsCrackSpn2A(
+     _Out_opt_ USHORT *pInstancePort
+     );
+ 
+-DSPARSE
++_Win32_ImportLibrary_("dsparse.dll") DSPARSE
+ DWORD
+ WINAPI
+ DsCrackSpn2W(
+@@ -764,7 +795,7 @@ DsCrackSpn2W(
+     _Out_opt_ USHORT *pInstancePort
+     );
+ 
+-DSPARSE
++_Win32_ImportLibrary_("dsparse.dll") DSPARSE
+ DWORD
+ WINAPI
+ DsCrackSpn3W(
+@@ -781,7 +812,7 @@ DsCrackSpn3W(
+     _Out_writes_to_ (*pcRealmName, *pcRealmName) LPWSTR RealmName
+     );
+ 
+-DSPARSE
++_Win32_ImportLibrary_("dsparse.dll") DSPARSE
+ DWORD
+ WINAPI
+ DsCrackSpn4W(

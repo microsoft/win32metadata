@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h
-index 41d1df1286dc0293f8be06d941b64b3ab2b60db2..b2fcd687c8aa7775c2c975b1c366d9b4367955d6 100644
+index 41d1df1286..61a437e1d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h
 @@ -15,6 +15,7 @@
@@ -15,7 +15,7 @@ index 41d1df1286dc0293f8be06d941b64b3ab2b60db2..b2fcd687c8aa7775c2c975b1c366d9b4
  // Structures
  //
 -typedef struct _RM_SEND_WINDOW
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _RM_SEND_WINDOW
++typedef struct   _RM_SEND_WINDOW
  {
      ULONG   RateKbitsPerSec;            // Send rate
      ULONG   WindowSizeInMSecs;

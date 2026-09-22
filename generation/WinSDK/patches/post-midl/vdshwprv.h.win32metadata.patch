@@ -1,0 +1,72 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h b/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h
+index cc6c5b0c4a..aeac9d784e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1546,7 +1547,7 @@ EXTERN_C const IID IID_IVdsProviderPrivate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("11f3cd41-b7e8-48ff-9472-9dff018aa292")
++    MIDL_INTERFACE("11f3cd41-b7e8-48ff-9472-9dff018aa292") _Windows_SupportedOS_WindowsVista_ 
+     IVdsProviderPrivate : public IUnknown
+     {
+     public:
+@@ -1554,7 +1555,7 @@ EXTERN_C const IID IID_IVdsProviderPrivate;
+             /* [annotation][in] */ 
+             _In_  VDS_OBJECT_ID ObjectId,
+             /* [annotation][in] */ 
+-            _In_  VDS_OBJECT_TYPE type,
++            _Win32_AssociatedEnum_(VDS_OBJECT_TYPE) _In_  VDS_OBJECT_TYPE type,
+             /* [annotation][out] */ 
+             _Out_  IUnknown **ppObjectUnk) = 0;
+         
+@@ -6201,7 +6202,7 @@ EXTERN_C const IID IID_IVdsHwProviderPrivate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("98f17bf3-9f33-4f12-8714-8b4075092c2e")
++    MIDL_INTERFACE("98f17bf3-9f33-4f12-8714-8b4075092c2e") _Windows_SupportedOS_WindowsVista_ 
+     IVdsHwProviderPrivate : public IUnknown
+     {
+     public:
+@@ -6296,7 +6297,7 @@ EXTERN_C const IID IID_IVdsHwProviderPrivateMpio;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("310a7715-ac2b-4c6f-9827-3d742f351676")
++    MIDL_INTERFACE("310a7715-ac2b-4c6f-9827-3d742f351676") _Windows_SupportedOS_WindowsVista_ 
+     IVdsHwProviderPrivateMpio : public IUnknown
+     {
+     public:
+@@ -6304,7 +6305,7 @@ EXTERN_C const IID IID_IVdsHwProviderPrivateMpio;
+             /* [annotation][in] */ 
+             _In_  VDS_HBAPORT_PROP hbaPortProp,
+             /* [annotation][in] */ 
+-            _In_  VDS_PATH_STATUS status) = 0;
++            _Win32_AssociatedEnum_(VDS_PATH_STATUS) _In_  VDS_PATH_STATUS status) = 0;
+         
+     };
+     
+@@ -6401,7 +6402,7 @@ EXTERN_C const IID IID_IVdsAdmin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d188e97d-85aa-4d33-abc6-26299a10ffc1")
++    MIDL_INTERFACE("d188e97d-85aa-4d33-abc6-26299a10ffc1") _Windows_SupportedOS_WindowsVista_ 
+     IVdsAdmin : public IUnknown
+     {
+     public:
+@@ -6412,7 +6413,7 @@ EXTERN_C const IID IID_IVdsAdmin;
+             _In_  CLSID providerClsid,
+             /* [string][max_is][in] */ __RPC__in_ecount_full_string(( 200 + 1 ) ) LPWSTR pwszName,
+             /* [annotation][in] */ 
+-            _In_  VDS_PROVIDER_TYPE type,
++            _Win32_AssociatedEnum_(VDS_PROVIDER_TYPE) _In_  VDS_PROVIDER_TYPE type,
+             /* [disable_consistency_check][string][max_is][unique][in] */ __RPC__in_ecount_full_opt_string(( ( 15 - 1 )  + 1 ) ) LPWSTR pwszMachineName,
+             /* [string][max_is][in] */ __RPC__in_ecount_full_string(( 16 + 1 ) ) LPWSTR pwszVersion,
+             /* [annotation][in] */ 

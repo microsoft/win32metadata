@@ -1,0 +1,93 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ime_cmodes.h b/generation/WinSDK/RecompiledIdlHeaders/um/ime_cmodes.h
+index b75df3f218..157f1bd5c1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ime_cmodes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ime_cmodes.h
+@@ -20,5 +20,88 @@
+ #define IME_CMODE_HANJACONVERT          0x0040
+ #define IME_CMODE_NATIVESYMBOL          0x0080
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("IME_CMODE_ALPHANUMERIC")
++#undef IME_CMODE_ALPHANUMERIC
++#pragma push_macro("IME_CMODE_NATIVE")
++#undef IME_CMODE_NATIVE
++#pragma push_macro("IME_CMODE_CHINESE")
++#undef IME_CMODE_CHINESE
++#pragma push_macro("IME_CMODE_HANGUL")
++#undef IME_CMODE_HANGUL
++#pragma push_macro("IME_CMODE_JAPANESE")
++#undef IME_CMODE_JAPANESE
++#pragma push_macro("IME_CMODE_KATAKANA")
++#undef IME_CMODE_KATAKANA
++#pragma push_macro("IME_CMODE_LANGUAGE")
++#undef IME_CMODE_LANGUAGE
++#pragma push_macro("IME_CMODE_FULLSHAPE")
++#undef IME_CMODE_FULLSHAPE
++#pragma push_macro("IME_CMODE_ROMAN")
++#undef IME_CMODE_ROMAN
++#pragma push_macro("IME_CMODE_CHARCODE")
++#undef IME_CMODE_CHARCODE
++#pragma push_macro("IME_CMODE_HANJACONVERT")
++#undef IME_CMODE_HANJACONVERT
++#pragma push_macro("IME_CMODE_NATIVESYMBOL")
++#undef IME_CMODE_NATIVESYMBOL
++#pragma push_macro("IME_CMODE_HANGEUL")
++#undef IME_CMODE_HANGEUL
++#pragma push_macro("IME_CMODE_SOFTKBD")
++#undef IME_CMODE_SOFTKBD
++#pragma push_macro("IME_CMODE_NOCONVERSION")
++#undef IME_CMODE_NOCONVERSION
++#pragma push_macro("IME_CMODE_EUDC")
++#undef IME_CMODE_EUDC
++#pragma push_macro("IME_CMODE_SYMBOL")
++#undef IME_CMODE_SYMBOL
++#pragma push_macro("IME_CMODE_FIXED")
++#undef IME_CMODE_FIXED
++#pragma push_macro("IME_CMODE_RESERVED")
++#undef IME_CMODE_RESERVED
++enum [[clang::flag_enum]] IME_CONVERSION_MODE : unsigned int
++{
++    IME_CMODE_ALPHANUMERIC = 0U,
++    IME_CMODE_NATIVE = 1U,
++    IME_CMODE_CHINESE = 1U,
++    IME_CMODE_HANGUL = 1U,
++    IME_CMODE_JAPANESE = 1U,
++    IME_CMODE_KATAKANA = 2U,
++    IME_CMODE_LANGUAGE = 3U,
++    IME_CMODE_FULLSHAPE = 8U,
++    IME_CMODE_ROMAN = 16U,
++    IME_CMODE_CHARCODE = 32U,
++    IME_CMODE_HANJACONVERT = 64U,
++    IME_CMODE_NATIVESYMBOL = 128U,
++    IME_CMODE_HANGEUL = 1U,
++    IME_CMODE_SOFTKBD = 128U,
++    IME_CMODE_NOCONVERSION = 256U,
++    IME_CMODE_EUDC = 512U,
++    IME_CMODE_SYMBOL = 1024U,
++    IME_CMODE_FIXED = 2048U,
++    IME_CMODE_RESERVED = 4026531840U,
++};
++#pragma pop_macro("IME_CMODE_RESERVED")
++#pragma pop_macro("IME_CMODE_FIXED")
++#pragma pop_macro("IME_CMODE_SYMBOL")
++#pragma pop_macro("IME_CMODE_EUDC")
++#pragma pop_macro("IME_CMODE_NOCONVERSION")
++#pragma pop_macro("IME_CMODE_SOFTKBD")
++#pragma pop_macro("IME_CMODE_HANGEUL")
++#pragma pop_macro("IME_CMODE_NATIVESYMBOL")
++#pragma pop_macro("IME_CMODE_HANJACONVERT")
++#pragma pop_macro("IME_CMODE_CHARCODE")
++#pragma pop_macro("IME_CMODE_ROMAN")
++#pragma pop_macro("IME_CMODE_FULLSHAPE")
++#pragma pop_macro("IME_CMODE_LANGUAGE")
++#pragma pop_macro("IME_CMODE_KATAKANA")
++#pragma pop_macro("IME_CMODE_JAPANESE")
++#pragma pop_macro("IME_CMODE_HANGUL")
++#pragma pop_macro("IME_CMODE_CHINESE")
++#pragma pop_macro("IME_CMODE_NATIVE")
++#pragma pop_macro("IME_CMODE_ALPHANUMERIC")
++#endif
++
+ #endif /* _IME_CMODES_*/
+ 

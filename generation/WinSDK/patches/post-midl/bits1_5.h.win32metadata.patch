@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
-index 9dbcd847e169985ee788cc060f56f124e04266ec..5969c88fcf84f5124acec98ad7981e8afb585eff 100644
+index 9dbcd847e1..918db3446d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
 @@ -85,6 +85,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 9dbcd847e169985ee788cc060f56f124e04266ec..5969c88fcf84f5124acec98ad7981e8a
  /* [object][helpstring][uuid] */ 
  
 -typedef struct _BG_JOB_REPLY_PROGRESS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _BG_JOB_REPLY_PROGRESS
++typedef struct   _BG_JOB_REPLY_PROGRESS
      {
      UINT64 BytesTotal;
      UINT64 BytesTransferred;
@@ -23,7 +23,7 @@ index 9dbcd847e169985ee788cc060f56f124e04266ec..5969c88fcf84f5124acec98ad7981e8a
  
  typedef 
 -enum BG_AUTH_TARGET
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ BG_AUTH_TARGET
++enum   BG_AUTH_TARGET
      {
          BG_AUTH_TARGET_SERVER	= 1,
          BG_AUTH_TARGET_PROXY	= ( BG_AUTH_TARGET_SERVER + 1 ) 
@@ -31,16 +31,18 @@ index 9dbcd847e169985ee788cc060f56f124e04266ec..5969c88fcf84f5124acec98ad7981e8a
  
  typedef 
 -enum BG_AUTH_SCHEME
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ BG_AUTH_SCHEME
++enum   BG_AUTH_SCHEME
      {
          BG_AUTH_SCHEME_BASIC	= 1,
          BG_AUTH_SCHEME_DIGEST	= ( BG_AUTH_SCHEME_BASIC + 1 ) ,
-@@ -150,7 +151,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
+@@ -149,8 +150,8 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("54b50739-686f-45eb-9dff-d6a9a0faa9af")
+-    MIDL_INTERFACE("54b50739-686f-45eb-9dff-d6a9a0faa9af")
 -    IBackgroundCopyJob2 : public IBackgroundCopyJob
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBackgroundCopyJob2 : public IBackgroundCopyJob
++    MIDL_INTERFACE("54b50739-686f-45eb-9dff-d6a9a0faa9af") _Windows_SupportedOS_WindowsVista_ 
++      IBackgroundCopyJob2 : public IBackgroundCopyJob
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetNotifyCmdLine( 

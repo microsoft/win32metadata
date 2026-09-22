@@ -1,0 +1,80 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIcon.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIcon.h
+index 950fae5afb..1c0dd6c814 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIcon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIcon.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * alljoyn_abouticon is a container that holds information about an About icon.
+@@ -36,14 +37,14 @@ typedef struct _alljoyn_abouticon_handle* alljoyn_abouticon;
+  * Allocate a new empty alljoyn_abouticon object.
+  * @return The allocated alljoyn_abouticon.
+  */
+-extern AJ_API alljoyn_abouticon AJ_CALL alljoyn_abouticon_create();
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_abouticon AJ_CALL alljoyn_abouticon_create();
+ 
+ /**
+  * Free an alljoyn_abouticon object.
+  *
+  * @param icon the alljoyn_abouticon to be freed.
+  */
+-extern AJ_API void AJ_CALL alljoyn_abouticon_destroy(alljoyn_abouticon icon);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_abouticon_destroy(alljoyn_abouticon icon);
+ 
+ /**
+  * Returns a pointer to the icon's internal content data as well as the size of this data.
+@@ -52,7 +53,7 @@ extern AJ_API void AJ_CALL alljoyn_abouticon_destroy(alljoyn_abouticon icon);
+  * @param[out]  data  pointer to the icon content data
+  * @param[out]  size  size (in number of bytes) of the icon content data
+  */
+-extern AJ_API void AJ_CALL alljoyn_abouticon_getcontent(alljoyn_abouticon icon,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_abouticon_getcontent(alljoyn_abouticon icon,
+                                                         const uint8_t** data,
+                                                         size_t* size);
+ 
+@@ -79,7 +80,7 @@ extern AJ_API void AJ_CALL alljoyn_abouticon_getcontent(alljoyn_abouticon icon,
+  *  - ER_BUS_BAD_VALUE if the data is to large to be marshaled
+  *  - other status indicating failure
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_abouticon_setcontent(alljoyn_abouticon icon,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_abouticon_setcontent(alljoyn_abouticon icon,
+                                                            const char* type,
+                                                            uint8_t* data,
+                                                            size_t csize,
+@@ -92,7 +93,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_abouticon_setcontent(alljoyn_abouticon ico
+  * @param[out] type  the Media Type indicating the icon image type
+  * @param[out] url   the URL that contains the location of the icon
+  */
+-extern AJ_API void AJ_CALL alljoyn_abouticon_geturl(alljoyn_abouticon icon,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_abouticon_geturl(alljoyn_abouticon icon,
+                                                     const char** type,
+                                                     const char** url);
+ 
+@@ -111,7 +112,7 @@ extern AJ_API void AJ_CALL alljoyn_abouticon_geturl(alljoyn_abouticon icon,
+  *  - #ER_OK on success
+  *  - other status indicating failure
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_abouticon_seturl(alljoyn_abouticon icon,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_abouticon_seturl(alljoyn_abouticon icon,
+                                                        const char* type,
+                                                        const char* url);
+ 
+@@ -121,7 +122,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_abouticon_seturl(alljoyn_abouticon icon,
+  *
+  * @param[in] icon  the alljoyn_abouticon object this call is made for
+  */
+-extern AJ_API void AJ_CALL alljoyn_abouticon_clear(alljoyn_abouticon icon);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_abouticon_clear(alljoyn_abouticon icon);
+ 
+ /**
+  * Add the IconContent from an alljoyn_msgarg. This will make a local copy of the
+@@ -135,7 +136,7 @@ extern AJ_API void AJ_CALL alljoyn_abouticon_clear(alljoyn_abouticon icon);
+  *   - ER_OK on success
+  *   - status indicating failure otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_abouticon_setcontent_frommsgarg(alljoyn_abouticon icon,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_abouticon_setcontent_frommsgarg(alljoyn_abouticon icon,
+                                                                       const alljoyn_msgarg arg);
+ 
+ #ifdef __cplusplus

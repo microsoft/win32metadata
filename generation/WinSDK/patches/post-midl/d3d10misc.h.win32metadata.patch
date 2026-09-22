@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10misc.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10misc.h
+index c18a302d6b..eae721b317 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10misc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10misc.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //////////////////////////////////////////////////////////////////////////////
+ //
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -137,7 +138,7 @@ HRESULT WINAPI D3D10CreateDeviceAndSwapChain(
+ // Creates a Buffer of n Bytes
+ //////////////////////////////////////////////////////////////////////////
+ 
+-HRESULT WINAPI D3D10CreateBlob(SIZE_T NumBytes, _Out_ LPD3D10BLOB *ppBuffer);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10CreateBlob(SIZE_T NumBytes, _Out_ LPD3D10BLOB *ppBuffer);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

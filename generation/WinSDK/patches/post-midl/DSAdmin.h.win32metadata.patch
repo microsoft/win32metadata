@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h
-index c007ffbdc0..8b714cf790 100644
+index c007ffbdc0..9b0663bc3c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h
 @@ -49,6 +49,7 @@ DEFINE_GUID(IID_IDsAdminNotifyHandler,
@@ -14,14 +14,14 @@ index c007ffbdc0..8b714cf790 100644
    STDMETHOD_(ULONG,Release)(THIS) PURE;
  
    // *** IDsAdminCreateObj methods ***
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(Initialize)(THIS_ /*IN*/ IADsContainer* pADsContainerObj, 
                                /*IN*/ IADs* pADsCopySource,
                                /*IN*/ LPCWSTR lpszClassName) PURE;
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
-+  _Win32_PreserveResult_
++  
++  
++  
    STDMETHOD(CreateModal)(THIS_ /*IN*/ HWND hwndParent, 
                                 /*OUT*/ IADs** ppADsObj) PURE;
  };
@@ -29,11 +29,11 @@ index c007ffbdc0..8b714cf790 100644
    STDMETHOD_(ULONG,Release)(THIS) PURE;
  
    // *** IDsAdminNewObj methods ***
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(SetButtons)(THIS_ /*IN*/ ULONG nCurrIndex, /*IN*/ BOOL bValid) PURE; 
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(GetPageCounts)(THIS_ /*OUT*/ LONG* pnTotal,
                                   /*OUT*/ LONG* pnStartIndex) PURE; 
  };
@@ -41,11 +41,11 @@ index c007ffbdc0..8b714cf790 100644
  
  
    // *** IDsAdminNewObjPrimarySite methods ***
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(CreateNew)(THIS_ /*IN*/ LPCWSTR pszName) PURE;
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(Commit)(THIS ) PURE;
  };
  
@@ -54,7 +54,7 @@ index c007ffbdc0..8b714cf790 100644
  //
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD   dwSize;                     // size of struct, for versioning
      HICON   hObjClassIcon;              // class icon for the object to be created
@@ -62,38 +62,38 @@ index c007ffbdc0..8b714cf790 100644
  
  
    // *** IDsAdminNewObjExt methods ***
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(Initialize)(THIS_ /*IN*/ IADsContainer* pADsContainerObj, 
                                /*IN*/ IADs* pADsCopySource,
                                /*IN*/ LPCWSTR lpszClassName,
                                /*IN*/ IDsAdminNewObj* pDsAdminNewObj,
                                /*IN*/ LPDSA_NEWOBJ_DISPINFO pDispInfo) PURE;
  
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(AddPages)(THIS_ /*IN*/ LPFNADDPROPSHEETPAGE lpfnAddPage, 
                              /*IN*/ LPARAM lParam) PURE;
  
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(SetObject)(THIS_ /*IN*/ IADs* pADsObj) PURE;
  
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(WriteData)(THIS_ /*IN*/ HWND hWnd, 
                               /*IN*/ ULONG uContext) PURE;
    
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(OnError)(THIS_ /*IN*/ HWND hWnd, 
                             /*IN*/ HRESULT hr,
                                /*IN*/ ULONG uContext) PURE;
    
 -  STDMETHOD(GetSummaryInfo)(THIS_ /*OUT*/BSTR* pBstrText) PURE;
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
-+  STDMETHOD(GetSummaryInfo)(THIS_ /*OUT*/_Win32_RAIIFree_(SysFreeString) BSTR* pBstrText) PURE;
++  
++  
++  STDMETHOD(GetSummaryInfo)(THIS_ /*OUT*/ BSTR* pBstrText) PURE;
  };
  
  
@@ -101,25 +101,25 @@ index c007ffbdc0..8b714cf790 100644
    STDMETHOD_(ULONG,Release)(THIS) PURE;
  
    // IDsAdminNotifyHandler methods
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(Initialize)(THIS_ /*IN*/ IDataObject* pExtraInfo, 
                                /*OUT*/ ULONG* puEventFlags) PURE;
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(Begin)(THIS_ /*IN*/ ULONG uEvent,
                           /*IN*/ IDataObject* pArg1,
                           /*IN*/ IDataObject* pArg2,
                           /*OUT*/ ULONG* puFlags,
 -                         /*OUT*/ BSTR* pBstr) PURE;
-+                         /*OUT*/ _Win32_RAIIFree_(SysFreeString) BSTR* pBstr) PURE;
++                         /*OUT*/  BSTR* pBstr) PURE;
  
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(Notify)(THIS_ /*IN*/ ULONG nItem, /*IN*/ ULONG uFlags) PURE; 
  
-+  _Windows_SupportedOS_WindowsVista_
-+  _Windows_SupportedOS_Server2008_
++  
++  
    STDMETHOD(End)(THIS) PURE; 
  };
  

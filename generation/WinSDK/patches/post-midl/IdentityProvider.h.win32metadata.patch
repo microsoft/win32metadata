@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
-index 2d6f99ca6ff4ea7ca2455e1c30a9521cc78d7d2a..e89d2297bf3e3767d30cb99c8ba9330d885c51a2 100644
+index 2d6f99ca6f..4ae48917ae 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
 @@ -132,6 +132,7 @@ extern "C"{
@@ -46,3 +46,21 @@ index 2d6f99ca6ff4ea7ca2455e1c30a9521cc78d7d2a..e89d2297bf3e3767d30cb99c8ba9330d
      {
          CONST_VTBL struct IIdentityProviderVtbl *lpVtbl;
      };
+@@ -780,7 +781,7 @@ EXTERN_C const IID IID_IAssociatedIdentityProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2af066b3-4cbb-4cba-a798-204b6af68cc0")
++    MIDL_INTERFACE("2af066b3-4cbb-4cba-a798-204b6af68cc0") _Windows_SupportedOS_Windows7_ 
+     IAssociatedIdentityProvider : public IUnknown
+     {
+     public:
+@@ -1066,7 +1067,7 @@ EXTERN_C const IID IID_IConnectedIdentityProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B7417B54-E08C-429b-96C8-678D1369ECB1")
++    MIDL_INTERFACE("B7417B54-E08C-429b-96C8-678D1369ECB1") _Windows_SupportedOS_Windows8_ 
+     IConnectedIdentityProvider : public IUnknown
+     {
+     public:

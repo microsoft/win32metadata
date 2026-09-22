@@ -1,0 +1,47 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_types.h b/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_types.h
+index a4161169cc..51c9bc7f03 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_types.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_types.h
+@@ -2466,5 +2466,42 @@ typedef struct _WINBIO_CONNECTED_SENSOR
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WINBIO_SETTING_SOURCE_INVALID")
++#undef WINBIO_SETTING_SOURCE_INVALID
++#pragma push_macro("WINBIO_SETTING_SOURCE_DEFAULT")
++#undef WINBIO_SETTING_SOURCE_DEFAULT
++#pragma push_macro("WINBIO_SETTING_SOURCE_LOCAL")
++#undef WINBIO_SETTING_SOURCE_LOCAL
++#pragma push_macro("WINBIO_SETTING_SOURCE_POLICY")
++#undef WINBIO_SETTING_SOURCE_POLICY
++enum WINBIO_SETTING_SOURCE : unsigned int
++{
++    WINBIO_SETTING_SOURCE_INVALID = 0U,
++    WINBIO_SETTING_SOURCE_DEFAULT = 1U,
++    WINBIO_SETTING_SOURCE_LOCAL = 3U,
++    WINBIO_SETTING_SOURCE_POLICY = 2U,
++};
++#pragma pop_macro("WINBIO_SETTING_SOURCE_POLICY")
++#pragma pop_macro("WINBIO_SETTING_SOURCE_LOCAL")
++#pragma pop_macro("WINBIO_SETTING_SOURCE_DEFAULT")
++#pragma pop_macro("WINBIO_SETTING_SOURCE_INVALID")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WINBIO_POOL_SYSTEM")
++#undef WINBIO_POOL_SYSTEM
++#pragma push_macro("WINBIO_POOL_PRIVATE")
++#undef WINBIO_POOL_PRIVATE
++enum WINBIO_POOL : unsigned int
++{
++    WINBIO_POOL_SYSTEM = 1U,
++    WINBIO_POOL_PRIVATE = 2U,
++};
++#pragma pop_macro("WINBIO_POOL_PRIVATE")
++#pragma pop_macro("WINBIO_POOL_SYSTEM")
++#endif
++
+ #endif // _WINBIO_TYPES_H_712486DB_3EF5_41da_937A_55DCB7B66A53_
+ 

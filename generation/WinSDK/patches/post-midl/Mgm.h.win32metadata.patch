@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
-index 3174e2bbcf940027c02e56c10fe2da45d3863e88..895ce308c34e4aff980ebfc44b3b327a0556f15e 100644
+index 3174e2bbcf..5660127426 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
 @@ -17,6 +17,7 @@
@@ -15,7 +15,7 @@ index 3174e2bbcf940027c02e56c10fe2da45d3863e88..895ce308c34e4aff980ebfc44b3b327a
  //
  
 -typedef struct _MGM_IF_ENTRY {
-+typedef struct _Windows_SupportedOS_Server2000_ _MGM_IF_ENTRY {
++typedef struct  _MGM_IF_ENTRY {
  
      DWORD               dwIfIndex;
      DWORD               dwIfNextHopAddr;
@@ -43,3 +43,117 @@ index 3174e2bbcf940027c02e56c10fe2da45d3863e88..895ce308c34e4aff980ebfc44b3b327a
  DWORD
  MgmTakeInterfaceOwnership(
      IN          HANDLE                      hProtocol,
+@@ -341,14 +345,14 @@ MgmTakeInterfaceOwnership(
+ );
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmReleaseInterfaceOwnership(
+     IN          HANDLE                      hProtocol,
+     IN          DWORD                       dwIfIndex,
+     IN          DWORD                       dwIfNextHopAddr
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetProtocolOnInterface(
+     IN          DWORD                       dwIfIndex,
+     IN          DWORD                       dwIfNextHopAddr,
+@@ -364,7 +368,7 @@ MgmGetProtocolOnInterface(
+ #define         MGM_JOIN_STATE_FLAG         0x00000001
+ #define         MGM_FORWARD_STATE_FLAG      0x00000002
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmAddGroupMembershipEntry(
+     IN              HANDLE                  hProtocol,
+     IN              DWORD                   dwSourceAddr,
+@@ -376,7 +380,7 @@ MgmAddGroupMembershipEntry(
+     IN              DWORD                   dwFlags
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmDeleteGroupMembershipEntry(
+     IN              HANDLE                  hProtocol,
+     IN              DWORD                   dwSourceAddr,
+@@ -399,14 +403,14 @@ MgmDeleteGroupMembershipEntry(
+ // MFE enumeration API
+ //----------------------------------------------------------------------------
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetMfe(
+     IN              PMIB_IPMCAST_MFE        pimm,
+     IN  OUT         PDWORD                  pdwBufferSize,
+     IN  OUT         PBYTE                   pbBuffer
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetFirstMfe(
+     IN  OUT         PDWORD                  pdwBufferSize,
+     IN  OUT         PBYTE                   pbBuffer,
+@@ -414,7 +418,7 @@ MgmGetFirstMfe(
+ );
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetNextMfe(
+     IN              PMIB_IPMCAST_MFE        pimmStart,
+     IN  OUT         PDWORD                  pdwBufferSize,
+@@ -436,7 +440,7 @@ MgmGetNextMfe(
+ #define         MGM_MFE_STATS_1             0x00000002
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetMfeStats(
+     IN              PMIB_IPMCAST_MFE        pimm,
+     IN  OUT         PDWORD                  pdwBufferSize,
+@@ -444,7 +448,7 @@ MgmGetMfeStats(
+     IN              DWORD                   dwFlags
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetFirstMfeStats(
+     IN  OUT         PDWORD                  pdwBufferSize,
+     IN  OUT         PBYTE                   pbBuffer,
+@@ -453,7 +457,7 @@ MgmGetFirstMfeStats(
+ );
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGetNextMfeStats(
+     IN              PMIB_IPMCAST_MFE        pimmStart,
+     IN  OUT         PDWORD                  pdwBufferSize,
+@@ -466,14 +470,14 @@ MgmGetNextMfeStats(
+ // Group menbership entry enumeration API
+ //----------------------------------------------------------------------------
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGroupEnumerationStart(
+     IN              HANDLE                  hProtocol,
+     IN              MGM_ENUM_TYPES          metEnumType,
+     OUT             HANDLE *                phEnumHandle
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGroupEnumerationGetNext(
+     IN              HANDLE                  hEnum,
+     IN  OUT         PDWORD                  pdwBufferSize,
+@@ -481,7 +485,7 @@ MgmGroupEnumerationGetNext(
+     IN  OUT         PDWORD                  pdwNumEntries
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ MgmGroupEnumerationEnd(
+     IN              HANDLE                  hEnum
+ );

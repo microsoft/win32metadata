@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
-index 8a8d37b31097d23ea26f645581700db842b88951..cc18c48317e5682f0f7785f4edb94fdde5244aa8 100644
+index 8a8d37b310..f2b6ec7882 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
 @@ -18,6 +18,8 @@
@@ -11,12 +11,14 @@ index 8a8d37b31097d23ea26f645581700db842b88951..cc18c48317e5682f0f7785f4edb94fdd
  #include "rpc.h"
  #include "rpcndr.h"
  
-@@ -255,7 +257,7 @@ EXTERN_C const IID IID_IAmsiStream;
+@@ -254,8 +256,8 @@ EXTERN_C const IID IID_IAmsiStream;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("3e47f2e5-81d4-4d3b-897f-545096770373")
+-    MIDL_INTERFACE("3e47f2e5-81d4-4d3b-897f-545096770373")
 -    IAmsiStream : public IUnknown
-+    _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IAmsiStream : public IUnknown
++    MIDL_INTERFACE("3e47f2e5-81d4-4d3b-897f-545096770373") _Windows_SupportedOS_10240_ 
++      IAmsiStream : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetAttribute( 
@@ -29,12 +31,14 @@ index 8a8d37b31097d23ea26f645581700db842b88951..cc18c48317e5682f0f7785f4edb94fdd
      {
          CONST_VTBL struct IAmsiStreamVtbl *lpVtbl;
      };
-@@ -375,7 +377,7 @@ EXTERN_C const IID IID_IAntimalwareProvider;
+@@ -374,8 +376,8 @@ EXTERN_C const IID IID_IAntimalwareProvider;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("b2cabfe3-fe04-42b1-a5df-08d483d4d125")
+-    MIDL_INTERFACE("b2cabfe3-fe04-42b1-a5df-08d483d4d125")
 -    IAntimalwareProvider : public IUnknown
-+    _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IAntimalwareProvider : public IUnknown
++    MIDL_INTERFACE("b2cabfe3-fe04-42b1-a5df-08d483d4d125") _Windows_SupportedOS_10240_ 
++      IAntimalwareProvider : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Scan( 
@@ -47,12 +51,14 @@ index 8a8d37b31097d23ea26f645581700db842b88951..cc18c48317e5682f0f7785f4edb94fdd
      {
          CONST_VTBL struct IAntimalwareProviderVtbl *lpVtbl;
      };
-@@ -729,7 +731,7 @@ EXTERN_C const IID IID_IAntimalware;
+@@ -728,8 +730,8 @@ EXTERN_C const IID IID_IAntimalware;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("82d29c2e-f062-44e6-b5c9-3d9a2f24a2df")
+-    MIDL_INTERFACE("82d29c2e-f062-44e6-b5c9-3d9a2f24a2df")
 -    IAntimalware : public IUnknown
-+    _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IAntimalware : public IUnknown
++    MIDL_INTERFACE("82d29c2e-f062-44e6-b5c9-3d9a2f24a2df") _Windows_SupportedOS_10240_ 
++      IAntimalware : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Scan( 
@@ -69,32 +75,32 @@ index 8a8d37b31097d23ea26f645581700db842b88951..cc18c48317e5682f0f7785f4edb94fdd
  DECLARE_HANDLE(HAMSICONTEXT);
  DECLARE_HANDLE(HAMSISESSION);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI AmsiInitialize(
      _In_  LPCWSTR appName,
 -    _Outptr_ HAMSICONTEXT* amsiContext);
-+    _Outptr_ _Win32_RAIIFree_(AmsiUninitialize) HAMSICONTEXT* amsiContext);
++    _Outptr_  HAMSICONTEXT* amsiContext);
++
++_Windows_SupportedOS_10240_ 
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
  STDAPI_(VOID) AmsiUninitialize(
      _In_  HAMSICONTEXT amsiContext);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI AmsiOpenSession(
      _In_  HAMSICONTEXT amsiContext,
      _Out_ HAMSISESSION* amsiSession);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI_(VOID) AmsiCloseSession(
      _In_  HAMSICONTEXT amsiContext,
      _In_  HAMSISESSION amsiSession);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI AmsiScanBuffer(
      _In_  HAMSICONTEXT amsiContext,
      _In_reads_bytes_(length) PVOID buffer,
@@ -102,8 +108,8 @@ index 8a8d37b31097d23ea26f645581700db842b88951..cc18c48317e5682f0f7785f4edb94fdd
      _In_opt_  LPCWSTR contentName,
      _Out_ AMSI_RESULT* result);
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_10240_ 
++
  STDAPI AmsiScanString(
      _In_  HAMSICONTEXT amsiContext,
      _In_  LPCWSTR string,

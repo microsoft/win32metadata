@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/calendarapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/calendarapis.h
-index 0ff5496277..53610bbfb7 100644
+index 0ff5496277..9766ce2e4a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/calendarapis.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/calendarapis.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 0ff5496277..53610bbfb7 100644
  #endif
  
 -enum CALDATETIME_DATEUNIT {
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ CALDATETIME_DATEUNIT {
++enum   CALDATETIME_DATEUNIT {
    EraUnit, 
    YearUnit, 
    MonthUnit, 
@@ -21,7 +21,7 @@ index 0ff5496277..53610bbfb7 100644
  };
  
 -typedef struct _caldatetime {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _caldatetime {
++typedef struct   _caldatetime {
    CALID CalId;
    UINT Era;
    UINT Year;
@@ -29,14 +29,14 @@ index 0ff5496277..53610bbfb7 100644
    ULONG Tick;
  } CALDATETIME, *LPCALDATETIME;
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL GetCalendarSupportedDateRange(
    _In_ CALID Calendar,
    _Out_ LPCALDATETIME lpCalMinDateTime,
    _Out_ LPCALDATETIME lpCalMaxDateTime
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL GetCalendarDateFormatEx(
    _In_ LPCWSTR lpszLocale,
    _In_ DWORD dwFlags,
@@ -44,32 +44,32 @@ index 0ff5496277..53610bbfb7 100644
    _In_ int cchDate
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL ConvertSystemTimeToCalDateTime(
    _In_ const SYSTEMTIME *lpSysTime,
    _In_ CALID calId,
    _Out_ LPCALDATETIME lpCalDateTime
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL UpdateCalendarDayOfWeek(
    _Inout_ LPCALDATETIME lpCalDateTime
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL AdjustCalendarDate(
    _Inout_ LPCALDATETIME lpCalDateTime,
    _In_ CALDATETIME_DATEUNIT calUnit,
    _Out_ INT amount
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL ConvertCalDateTimeToSystemTime(
    _In_ const LPCALDATETIME lpCalDateTime,
    _Out_ SYSTEMTIME *lpSysTime
  );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_ImportLibrary_("Kernel32.dll")
++   _Win32_ImportLibrary_("Kernel32.dll")
  BOOL IsCalendarLeapYear(
    _In_ CALID calId,
    _In_ UINT year,

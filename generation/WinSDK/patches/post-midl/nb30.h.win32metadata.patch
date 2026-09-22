@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h
+index 89d51226de..4b4bdfde0f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h
 @@ -19,6 +19,7 @@
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
   */
  
 -typedef struct _ADAPTER_STATUS {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _ADAPTER_STATUS {
++typedef struct   _ADAPTER_STATUS {
      UCHAR   adapter_address[6];
      UCHAR   rev_major;
      UCHAR   reserved0;
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
  } ADAPTER_STATUS, *PADAPTER_STATUS;
  
 -typedef struct _NAME_BUFFER {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _NAME_BUFFER {
++typedef struct   _NAME_BUFFER {
      UCHAR   name[NCBNAMSZ];
      UCHAR   name_num;
      UCHAR   name_flags;
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
   */
  
 -typedef struct _SESSION_HEADER {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SESSION_HEADER {
++typedef struct   _SESSION_HEADER {
      UCHAR   sess_name;
      UCHAR   num_sess;
      UCHAR   rcv_dg_outstanding;
@@ -40,7 +41,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
  } SESSION_HEADER, *PSESSION_HEADER;
  
 -typedef struct _SESSION_BUFFER {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SESSION_BUFFER {
++typedef struct   _SESSION_BUFFER {
      UCHAR   lsn;
      UCHAR   state;
      UCHAR   local_name[NCBNAMSZ];
@@ -49,7 +50,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
   */
  
 -typedef struct _LANA_ENUM {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _LANA_ENUM {
++typedef struct   _LANA_ENUM {
      UCHAR   length;         //  Number of valid entries in lana[]
      UCHAR   lana[MAX_LANA+1];
  } LANA_ENUM, *PLANA_ENUM;
@@ -58,14 +59,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
   */
  
 -typedef struct _FIND_NAME_HEADER {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _FIND_NAME_HEADER {
++typedef struct   _FIND_NAME_HEADER {
      WORD    node_count;
      UCHAR   reserved;
      UCHAR   unique_group;
  } FIND_NAME_HEADER, *PFIND_NAME_HEADER;
  
 -typedef struct _FIND_NAME_BUFFER {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _FIND_NAME_BUFFER {
++typedef struct   _FIND_NAME_BUFFER {
      UCHAR   length;
      UCHAR   access_control;
      UCHAR   frame_control;
@@ -74,16 +75,19 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSD
   */
  
 -typedef struct _ACTION_HEADER {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _ACTION_HEADER {
++typedef struct   _ACTION_HEADER {
      ULONG   transport_id;
      USHORT  action_code;
      USHORT  reserved;
-@@ -304,7 +305,7 @@ typedef struct _ACTION_HEADER {
+@@ -302,9 +303,9 @@ typedef struct _ACTION_HEADER {
+  * Usage: result = Netbios( pncb );                             *
+  ****************************************************************/
  
- UCHAR
+-UCHAR
++_Windows_SupportedOS_Windows2000_ UCHAR
  APIENTRY
 -Netbios(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ Netbios(
++  Netbios(
      PNCB pncb
      );
  

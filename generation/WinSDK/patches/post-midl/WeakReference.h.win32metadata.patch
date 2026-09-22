@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
-index ea6c5c42ac..b649e02c0a 100644
+index ea6c5c42ac..02518d40fa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/WeakReference.h
 @@ -19,6 +19,7 @@
@@ -28,7 +28,12 @@ index ea6c5c42ac..b649e02c0a 100644
          virtual HRESULT STDMETHODCALLTYPE Resolve( 
              /* [in] */ __RPC__in REFIID riid,
              /* [iid_is][retval][out] */ __RPC__deref_out_opt IInspectable **objectReference) = 0;
-@@ -213,6 +218,8 @@ EXTERN_C const IID IID_IWeakReferenceSource;
+@@ -209,10 +214,12 @@ EXTERN_C const IID IID_IWeakReferenceSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000038-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000038-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows8_ 
      IWeakReferenceSource : public IUnknown
      {
      public:

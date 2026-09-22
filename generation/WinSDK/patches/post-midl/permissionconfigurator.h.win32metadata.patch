@@ -1,0 +1,296 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
+index a1c84290c0..32bddeabb8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines the alljoyn_permissionconfigurator and related functions.
+@@ -68,7 +69,7 @@ typedef enum {
+  *
+  * @return alljoyn_claimcapabilities containing the default capability set.
+  */
+-AJ_API alljoyn_claimcapabilities AJ_CALL alljoyn_permissionconfigurator_getdefaultclaimcapabilities();
++_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_claimcapabilities AJ_CALL alljoyn_permissionconfigurator_getdefaultclaimcapabilities();
+ 
+ /**
+  * Struct used to return identifying information about a certificate.
+@@ -107,7 +108,7 @@ typedef struct {
+  *          #ER_OK if successful.
+  *          Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getapplicationstate(const alljoyn_permissionconfigurator configurator, alljoyn_applicationstate* state);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getapplicationstate(const alljoyn_permissionconfigurator configurator, _Win32_AssociatedEnum_(alljoyn_applicationstate) alljoyn_applicationstate* state);
+ 
+ /**
+  * Set the application state.  The state cannot be changed from CLAIMED to CLAIMABLE.
+@@ -120,7 +121,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getapplicationstate(const
+  *          #ER_INVALID_APPLICATION_STATE if the state can't be changed.
+  *          Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setapplicationstate(alljoyn_permissionconfigurator configurator, alljoyn_applicationstate state);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setapplicationstate(alljoyn_permissionconfigurator configurator, _Win32_AssociatedEnum_(alljoyn_applicationstate) alljoyn_applicationstate state);
+ 
+ /**
+  * Get the application's public key.
+@@ -134,14 +135,14 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setapplicationstate(alljoy
+  *         #ER_OK if successful.
+  *         Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpublickey(alljoyn_permissionconfigurator configurator, AJ_PSTR* publicKey);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpublickey(alljoyn_permissionconfigurator configurator, AJ_PSTR* publicKey);
+ 
+ /**
+  * Destroy a string returned by a call to alljoyn_permissionconfigurator_getpublickey.
+  *
+  * @param[in]   publicKey           String received from the call to alljoyn_permissionconfigurator_getpublickey.
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_publickey_destroy(AJ_PSTR publicKey);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_publickey_destroy(AJ_PSTR publicKey);
+ 
+ /**
+  * Get the application's manifest template as XML.
+@@ -155,7 +156,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_publickey_destroy(AJ_PSTR pub
+  *          #ER_OK if successful.
+  *          Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifesttemplate(alljoyn_permissionconfigurator configurator, AJ_PSTR* manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifesttemplate(alljoyn_permissionconfigurator configurator, AJ_PSTR* manifestTemplateXml);
+ 
+ /**
+  * Destroy a string received from a call to alljoyn_permissionconfigurator_getmanifesttemplate.
+@@ -163,7 +164,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifesttemplate(alljoy
+  * @param[in]   manifestTemplateXml String received from the call.
+  *
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_manifesttemplate_destroy(AJ_PSTR manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_manifesttemplate_destroy(AJ_PSTR manifestTemplateXml);
+ 
+ /**
+  * Set the application's manifest template from an XML.
+@@ -189,7 +190,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setmanifesttemplatefromxml
+  *          #ER_OK if successful.
+  *          An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilities(const alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilities* claimCapabilities);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilities(const alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilities* claimCapabilities);
+ 
+ /**
+  * Set the authentication mechanisms the application supports for the
+@@ -203,7 +204,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilities(const
+  *          #ER_OK if successful.
+  *          An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilities(alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilities claimCapabilities);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilities(alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilities claimCapabilities);
+ 
+ /**
+  * Get the additional information on the claim capabilities.
+@@ -215,7 +216,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilities(alljo
+  *          #ER_OK if successful.
+  *          An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(const alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(const alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
+ 
+ /**
+  * Set the additional information on the claim capabilities.
+@@ -229,7 +230,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilitiesadditi
+  *          #ER_OK if successful.
+  *          An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilitiesadditionalinfo additionalInfo);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilitiesadditionalinfo additionalInfo);
+ 
+ /**
+  * Reset the permission settings by removing the manifest all the
+@@ -241,7 +242,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilitiesadditi
+  *          #ER_OK if successful.
+  *          An error code otherwise.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_reset(alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_reset(alljoyn_permissionconfigurator configurator);
+ 
+ /**
+  * Claims the application. The application is provided an identity certificate chain with
+@@ -280,7 +281,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_reset(alljoyn_permissionco
+  *          - #ER_OK If successful.
+  *          - Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_claim(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_claim(alljoyn_permissionconfigurator configurator,
+                                                             AJ_PCSTR caKey,
+                                                             AJ_PCSTR identityCertificateChain,
+                                                             const uint8_t* groupId,
+@@ -317,7 +318,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_claim(alljoyn_permissionco
+  *          - #ER_XML_MALFORMED             Error raised the manifest is not compliant with the required format.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updateidentity(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updateidentity(alljoyn_permissionconfigurator configurator,
+                                                                      AJ_PCSTR identityCertificateChain,
+                                                                      AJ_PCSTR* manifestsXmls, size_t manifestsCount);
+ 
+@@ -336,7 +337,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updateidentity(alljoyn_per
+  *          - #ER_CERTIFICATE_NOT_FOUND     Error raised when no identity certificate chain is installed.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentity(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentity(alljoyn_permissionconfigurator configurator,
+                                                                   AJ_PSTR* identityCertificateChain);
+ 
+ /**
+@@ -344,7 +345,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentity(alljoyn_permis
+  *
+  * @param[in]   certificateChain            String returned by a call to alljoyn_permissionconfigurator_getidentity.
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificatechain_destroy(AJ_PSTR certificateChain);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificatechain_destroy(AJ_PSTR certificateChain);
+ 
+ /**
+  * This method allows the application to retrieve its signed manifests.
+@@ -359,7 +360,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificatechain_destroy(AJ_P
+  *          - #ER_MANIFEST_NOT_FOUND        Error raised when no manifests are installed.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifests(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifests(alljoyn_permissionconfigurator configurator,
+                                                                    alljoyn_manifestarray* manifestArray);
+ 
+ /**
+@@ -368,7 +369,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifests(alljoyn_permi
+  * @param[in]    manifestArray              Pointer to alljoyn_manifestarray populated by a call to
+  *                                          alljoyn_permissionconfigurator_getmanifests.
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_manifestarray_cleanup(alljoyn_manifestarray* manifestArray);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_manifestarray_cleanup(alljoyn_manifestarray* manifestArray);
+ 
+ /**
+  * This method allows the application to install signed manifests to itself. This method only verifies that manifests
+@@ -386,7 +387,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_manifestarray_cleanup(alljoyn
+  *          - #ER_DIGEST_MISMATCH           Error raised if no manifests can be installed because none are signed.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmanifests(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmanifests(alljoyn_permissionconfigurator configurator,
+                                                                        AJ_PCSTR* manifestsXmls,
+                                                                        size_t manifestsCount,
+                                                                        QCC_BOOL append);
+@@ -405,7 +406,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmanifests(alljoyn_p
+  *          - #ER_CERTIFICATE_NOT_FOUND     Error raised when no identity certificate chain is installed.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentitycertificateid(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentitycertificateid(alljoyn_permissionconfigurator configurator,
+                                                                                alljoyn_certificateid* certificateId);
+ 
+ /**
+@@ -414,7 +415,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentitycertificateid(a
+  * @param[in]    certificateIdString        Pointer to alljoyn_certificateid struct returned by a call to
+  *                                          alljoyn_permissionconfigurator_getidentitycertificateid.
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificateid_cleanup(alljoyn_certificateid* certificateId);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificateid_cleanup(alljoyn_certificateid* certificateId);
+ 
+ /**
+  * This method allows the app to install the permission policy to itself.
+@@ -440,7 +441,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificateid_cleanup(alljoyn
+  *          - #ER_XML_MALFORMED     Error raised when the provided XML is not in supported policy format.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updatepolicy(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updatepolicy(alljoyn_permissionconfigurator configurator,
+                                                                    AJ_PCSTR policyXml);
+ 
+ /**
+@@ -453,7 +454,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updatepolicy(alljoyn_permi
+  *          - #ER_OK                If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpolicy(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpolicy(alljoyn_permissionconfigurator configurator,
+                                                                 AJ_PSTR* policyXml);
+ 
+ /**
+@@ -466,7 +467,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpolicy(alljoyn_permissi
+  *          - #ER_OK                If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getdefaultpolicy(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getdefaultpolicy(alljoyn_permissionconfigurator configurator,
+                                                                        AJ_PSTR* policyXml);
+ 
+ /**
+@@ -477,7 +478,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getdefaultpolicy(alljoyn_p
+  *                                          alljoyn_permissionconfigurator_getpolicy or
+  *                                          alljoyn_permissionconfigurator_getdefaultpolicy.
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_policy_destroy(AJ_PSTR policyXml);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_policy_destroy(AJ_PSTR policyXml);
+ 
+ /**
+  * This method allows an app to remove the currently installed policy. The
+@@ -490,7 +491,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_policy_destroy(AJ_PSTR policy
+  *          - #ER_OK                If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_resetpolicy(alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_resetpolicy(alljoyn_permissionconfigurator configurator);
+ 
+ /**
+  * This method allows an app to retrieve its membership certificate summaries.
+@@ -507,7 +508,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_resetpolicy(alljoyn_permis
+  *          - #ER_OK                If successful.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmembershipsummaries(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmembershipsummaries(alljoyn_permissionconfigurator configurator,
+                                                                              alljoyn_certificateidarray* certificateIds);
+ 
+ /**
+@@ -516,7 +517,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmembershipsummaries(all
+  * @param[in]    certificateIdArray   Pointer to an alljoyn_certificateidarray returned from a call to
+  *                                    alljoyn_permissionconfigurator_getmembershipsummaries.
+  */
+-AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificateidarray_cleanup(alljoyn_certificateidarray* certificateIdArray);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificateidarray_cleanup(alljoyn_certificateidarray* certificateIdArray);
+ 
+ /**
+  * This method allows the app to install a membership cert chain to itself.
+@@ -533,7 +534,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_certificateidarray_cleanup(al
+  *          - #ER_INVALID_CERTIFICATE   Error raised when the membership certificate is not valid.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmembership(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmembership(alljoyn_permissionconfigurator configurator,
+                                                                         AJ_PCSTR membershipCertificateChain);
+ 
+ /**
+@@ -551,7 +552,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmembership(alljoyn_
+  *          - #ER_CERTIFICATE_NOT_FOUND Error raised when the membership certificate is not found.
+  *          - An error status indicating failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_removemembership(alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_removemembership(alljoyn_permissionconfigurator configurator,
+                                                                        const uint8_t* serial,
+                                                                        size_t serialLen,
+                                                                        AJ_PCSTR issuerPublicKey,
+@@ -567,7 +568,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_removemembership(alljoyn_p
+  *          - #ER_OK                         If successful.
+  *          - #ER_MANAGEMENT_ALREADY_STARTED if the app is already in this state
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_startmanagement(alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_startmanagement(alljoyn_permissionconfigurator configurator);
+ 
+ /**
+  * This method allows the app to signal itself that management is ending.
+@@ -578,7 +579,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_startmanagement(alljoyn_pe
+  *          - #ER_OK                         If successful.
+  *          - #ER_MANAGEMENT_NOT_STARTED     if the app was not in the management state
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_endmanagement(alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_endmanagement(alljoyn_permissionconfigurator configurator);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

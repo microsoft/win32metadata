@@ -1,0 +1,135 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
+index cb297a639b..7628230ec2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /////////////////////////////////////////////////////////////////////////////
+ //
+ // olectl.h     OLE Control interfaces
+@@ -171,7 +172,7 @@ typedef struct tagFONTDESC
+ typedef struct tagPICTDESC
+ {
+     UINT cbSizeofstruct;
+-    UINT picType;
++    _Win32_AssociatedEnum_(PICTYPE) UINT picType;
+     union
+     {
+         struct
+@@ -419,33 +420,33 @@ STDAPI DllUnregisterServer(void);
+ /////////////////////////////////////////////////////////////////////////////
+ // Property frame APIs
+ 
+-WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
+     LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
+     LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
+ 
+-WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
+ 
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ // Standard type APIs
+ 
+-WINOLECTLAPI OleTranslateColor(OLE_COLOR clr, HPALETTE hpal,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleTranslateColor(OLE_COLOR clr, HPALETTE hpal,
+     COLORREF* lpcolorref);
+ 
+-WINOLECTLAPI OleCreateFontIndirect(LPFONTDESC lpFontDesc, REFIID riid,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreateFontIndirect(LPFONTDESC lpFontDesc, REFIID riid,
+     LPVOID FAR* lplpvObj);
+ 
+-WINOLECTLAPI OleCreatePictureIndirect(LPPICTDESC lpPictDesc, REFIID riid,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePictureIndirect(LPPICTDESC lpPictDesc, REFIID riid,
+     BOOL fOwn, LPVOID FAR* lplpvObj);
+ 
+-WINOLECTLAPI OleLoadPicture(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleLoadPicture(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
+     REFIID riid, LPVOID FAR* lplpvObj);
+ 
+-WINOLECTLAPI OleLoadPictureEx(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
+-    REFIID riid, DWORD xSizeDesired, DWORD ySizeDesired, DWORD dwFlags,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleLoadPictureEx(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
++    REFIID riid, DWORD xSizeDesired, DWORD ySizeDesired, _Win32_AssociatedEnum_(LOAD_PICTURE_FLAGS) DWORD dwFlags,
+     LPVOID FAR* lplpvObj);
+ 
+-WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
+ 				  LPUNKNOWN punkCaller,
+ 				  DWORD     dwReserved,
+ 				  OLE_COLOR clrReserved,
+@@ -456,12 +457,12 @@ WINOLECTLAPI OleLoadPictureFile(VARIANT varFileName,
+     LPDISPATCH* lplpdispPicture);
+ 
+ WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
+-    DWORD xSizeDesired, DWORD ySizeDesired, DWORD dwFlags, LPDISPATCH* lplpdispPicture);
++    DWORD xSizeDesired, DWORD ySizeDesired, _Win32_AssociatedEnum_(LOAD_PICTURE_FLAGS) DWORD dwFlags, LPDISPATCH* lplpdispPicture);
+ 
+ WINOLECTLAPI OleSavePictureFile(LPDISPATCH lpdispPicture,
+     BSTR bstrFileName);
+ 
+-WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DestroyCursor, -1, 0) WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
+ 
+ #define LP_DEFAULT      0x00
+ #define LP_MONOCHROME	0x01
+@@ -612,5 +613,58 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
+ 
+ #endif // defined(__MKTYPLIB__) || defined(__midl)
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("PICTYPE_UNINITIALIZED")
++#undef PICTYPE_UNINITIALIZED
++#pragma push_macro("PICTYPE_NONE")
++#undef PICTYPE_NONE
++#pragma push_macro("PICTYPE_BITMAP")
++#undef PICTYPE_BITMAP
++#pragma push_macro("PICTYPE_METAFILE")
++#undef PICTYPE_METAFILE
++#pragma push_macro("PICTYPE_ICON")
++#undef PICTYPE_ICON
++#pragma push_macro("PICTYPE_ENHMETAFILE")
++#undef PICTYPE_ENHMETAFILE
++enum PICTYPE : short
++{
++    PICTYPE_UNINITIALIZED = -1,
++    PICTYPE_NONE = 0,
++    PICTYPE_BITMAP = 1,
++    PICTYPE_METAFILE = 2,
++    PICTYPE_ICON = 3,
++    PICTYPE_ENHMETAFILE = 4,
++};
++#pragma pop_macro("PICTYPE_ENHMETAFILE")
++#pragma pop_macro("PICTYPE_ICON")
++#pragma pop_macro("PICTYPE_METAFILE")
++#pragma pop_macro("PICTYPE_BITMAP")
++#pragma pop_macro("PICTYPE_NONE")
++#pragma pop_macro("PICTYPE_UNINITIALIZED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LP_DEFAULT")
++#undef LP_DEFAULT
++#pragma push_macro("LP_MONOCHROME")
++#undef LP_MONOCHROME
++#pragma push_macro("LP_VGACOLOR")
++#undef LP_VGACOLOR
++#pragma push_macro("LP_COLOR")
++#undef LP_COLOR
++enum [[clang::flag_enum]] LOAD_PICTURE_FLAGS : unsigned int
++{
++    LP_DEFAULT = 0U,
++    LP_MONOCHROME = 1U,
++    LP_VGACOLOR = 2U,
++    LP_COLOR = 4U,
++};
++#pragma pop_macro("LP_COLOR")
++#pragma pop_macro("LP_VGACOLOR")
++#pragma pop_macro("LP_MONOCHROME")
++#pragma pop_macro("LP_DEFAULT")
++#endif
++
+ #endif // _OLECTL_H_
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
-index eebe909fa8e7bfa601b4cc930ee3b5c1d8ca98d7..593622c364e078b45ebd23be244e0b8b5ea50e82 100644
+index eebe909fa8..ff1ebe36fb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
 @@ -17,6 +17,7 @@
@@ -26,7 +26,7 @@ index eebe909fa8e7bfa601b4cc930ee3b5c1d8ca98d7..593622c364e078b45ebd23be244e0b8b
  HRESULT
  CERTBCLI_API
  CertSrvBackupGetDynamicFileListW(
-@@ -221,6 +224,7 @@ typedef HRESULT (CERTBCLI_CALL FNCERTSRVBACKUPPREPAREW)(
+@@ -221,12 +224,13 @@ typedef HRESULT (CERTBCLI_CALL FNCERTSRVBACKUPPREPAREW)(
      IN  ULONG dwBackupFlags,	// CSBACKUP_TYPE_*
      OUT HCSBC *phbc);
  
@@ -34,6 +34,13 @@ index eebe909fa8e7bfa601b4cc930ee3b5c1d8ca98d7..593622c364e078b45ebd23be244e0b8b
  HRESULT
  CERTBCLI_API
  CertSrvBackupPrepareW(
+     IN  WCHAR const *pwszServerName,
+     IN  ULONG grbitJet,
+-    IN  ULONG dwBackupFlags,	// CSBACKUP_TYPE_*
++    _Win32_AssociatedEnum_(CSBACKUP_TYPE) IN  ULONG dwBackupFlags,	// CSBACKUP_TYPE_*
+     OUT HCSBC *phbc);
+ 
+ #ifdef _CERTBCLI_TYPECHECK
 @@ -257,6 +261,7 @@ typedef HRESULT (CERTBCLI_CALL FNCERTSRVBACKUPGETDATABASENAMESW)(
      OUT WCHAR **ppwszzAttachmentInformation,
      OUT DWORD *pcbSize);
@@ -154,3 +161,23 @@ index eebe909fa8e7bfa601b4cc930ee3b5c1d8ca98d7..593622c364e078b45ebd23be244e0b8b
  HRESULT
  CERTBCLI_API
  CertSrvServerControlW(
+@@ -703,4 +722,19 @@ FNCERTSRVSERVERCONTROLW *pfnCertSrvServerControl = CertSrvServerControl;
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CSBACKUP_TYPE_FULL")
++#undef CSBACKUP_TYPE_FULL
++#pragma push_macro("CSBACKUP_TYPE_LOGS_ONLY")
++#undef CSBACKUP_TYPE_LOGS_ONLY
++enum CSBACKUP_TYPE : unsigned int
++{
++    CSBACKUP_TYPE_FULL = 1U,
++    CSBACKUP_TYPE_LOGS_ONLY = 2U,
++};
++#pragma pop_macro("CSBACKUP_TYPE_LOGS_ONLY")
++#pragma pop_macro("CSBACKUP_TYPE_FULL")
++#endif
++
+ #endif // __CERTBCLI_H__

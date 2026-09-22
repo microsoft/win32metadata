@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h
-index 71436dfec6ee4ba41ca7674b142f1c013ec356ab..fb4875ab471bc4ed25d35fe8bc40b67690b49646 100644
+index 71436dfec6..f05e37a80d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h
 @@ -28,6 +28,7 @@ Abstract:
@@ -14,16 +14,16 @@ index 71436dfec6ee4ba41ca7674b142f1c013ec356ab..fb4875ab471bc4ed25d35fe8bc40b676
  // Function Prototypes
  //
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetMessageNameAdd (
      _In_opt_  LPCWSTR  servername,
      _In_      LPCWSTR  msgname
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetMessageNameEnum (
      _In_opt_  LPCWSTR  servername,
@@ -31,8 +31,8 @@ index 71436dfec6ee4ba41ca7674b142f1c013ec356ab..fb4875ab471bc4ed25d35fe8bc40b676
      _Out_     LPDWORD  resume_handle
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetMessageNameGetInfo (
      _In_opt_  LPCWSTR  servername,
@@ -40,16 +40,16 @@ index 71436dfec6ee4ba41ca7674b142f1c013ec356ab..fb4875ab471bc4ed25d35fe8bc40b676
      _In_      LPBYTE  *bufptr
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetMessageNameDel (
      _In_opt_  LPCWSTR  servername,
      _In_      LPCWSTR  msgname
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetMessageBufferSend (
      _In_opt_  LPCWSTR servername,
@@ -58,12 +58,12 @@ index 71436dfec6ee4ba41ca7674b142f1c013ec356ab..fb4875ab471bc4ed25d35fe8bc40b676
  //
  
 -typedef struct _MSG_INFO_0 {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MSG_INFO_0 {
++typedef struct   _MSG_INFO_0 {
      LPWSTR  msgi0_name;
  }MSG_INFO_0, *PMSG_INFO_0, *LPMSG_INFO_0;
  
 -typedef struct _MSG_INFO_1 {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MSG_INFO_1 {
++typedef struct   _MSG_INFO_1 {
      LPWSTR  msgi1_name;
      DWORD   msgi1_forward_flag;
      LPWSTR  msgi1_forward;

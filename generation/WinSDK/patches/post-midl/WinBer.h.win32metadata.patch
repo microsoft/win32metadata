@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
-index 5169685038..5fc4ac3c59 100644
+index 5169685038..59ecbeae6b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
 @@ -25,6 +25,7 @@ Environments :
@@ -14,8 +14,8 @@ index 5169685038..5fc4ac3c59 100644
  // data in the supplied berval structure.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
  
  //
@@ -23,8 +23,8 @@ index 5169685038..5fc4ac3c59 100644
  //
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI VOID BERAPI ber_free( BerElement *pBerElement, INT fbuf );
  
  //
@@ -41,17 +41,17 @@ index 5169685038..5fc4ac3c59 100644
  // Frees an array of BERVAL structures.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI VOID BERAPI ber_bvecfree( PBERVAL *pBerVal );
  
  //
  // Returns a copy of a the supplied berval structure
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+_Win32_RAIIFree_(ber_bvfree)
++_Windows_SupportedOS_WindowsVista_ 
++
++
  WINBERAPI BERVAL * BERAPI ber_bvdup( BERVAL *pBerVal );
  
  
@@ -59,8 +59,8 @@ index 5169685038..5fc4ac3c59 100644
  // The LBER_USE_DER options should always be specified.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI BerElement * BERAPI ber_alloc_t( INT options );
  
  
@@ -68,8 +68,8 @@ index 5169685038..5fc4ac3c59 100644
  // the value part of the next element
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
  
  //
@@ -77,8 +77,8 @@ index 5169685038..5fc4ac3c59 100644
  // else the tag of the next element is returned.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
  
  //
@@ -86,8 +86,8 @@ index 5169685038..5fc4ac3c59 100644
  // subsequent invocations of ber_next_element().
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen, _Out_ CHAR **ppOpaque );
  
  //
@@ -95,8 +95,8 @@ index 5169685038..5fc4ac3c59 100644
  // is returned.
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI ULONG BERAPI ber_next_element( BerElement *pBerElement, ULONG *pLen, _In_ CHAR *opaque );
  
  //
@@ -105,9 +105,9 @@ index 5169685038..5fc4ac3c59 100644
  //
  
 -WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement, PBERVAL *pBerVal );
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
-+WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement, _Win32_RAIIFree_(ber_bvfree) PBERVAL *pBerVal );
++_Windows_SupportedOS_WindowsVista_ 
++
++WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement,  PBERVAL *pBerVal );
  
  
  /*

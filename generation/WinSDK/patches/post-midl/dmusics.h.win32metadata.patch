@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h
-index 7d0742189a..303b8f6569 100644
+index 7d0742189a..d5c1942b6c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h
 @@ -9,6 +9,7 @@
@@ -15,18 +15,18 @@ index 7d0742189a..303b8f6569 100644
  
      /* IDirectMusicSynth */
 -    STDMETHOD(Open)                 (THIS_ LPDMUS_PORTPARAMS pPortParams) PURE;
-+    _Win32_PreserveResult_ STDMETHOD(Open)                 (THIS_ LPDMUS_PORTPARAMS pPortParams) PURE;
++     STDMETHOD(Open)                 (THIS_ LPDMUS_PORTPARAMS pPortParams) PURE;
      STDMETHOD(Close)                (THIS) PURE;
      STDMETHOD(SetNumChannelGroups)  (THIS_ DWORD dwGroups) PURE;
      STDMETHOD(Download)             (THIS_ LPHANDLE phDownload,
 -                                           LPVOID pvData,
-+                                           _Win32_Retained_ LPVOID pvData,
++                                            LPVOID pvData,
                                             LPBOOL pbFree ) PURE;
      STDMETHOD(Unload)               (THIS_ HANDLE hDownload,
 -                                           HRESULT ( CALLBACK *lpFreeHandle)(HANDLE,HANDLE),
 -                                           HANDLE hUserData ) PURE;
-+                                           _Win32_Retained_ HRESULT ( CALLBACK *lpFreeHandle)(HANDLE,HANDLE),
-+                                           _Win32_Retained_ HANDLE hUserData ) PURE;
++                                            HRESULT ( CALLBACK *lpFreeHandle)(HANDLE,HANDLE),
++                                            HANDLE hUserData ) PURE;
      STDMETHOD(PlayBuffer)           (THIS_ REFERENCE_TIME rt,
                                             LPBYTE pbBuffer,
                                             DWORD cbBuffer) PURE;
@@ -35,7 +35,7 @@ index 7d0742189a..303b8f6569 100644
      STDMETHOD(SetMasterClock)       (THIS_ IReferenceClock *pClock) PURE;
      STDMETHOD(GetLatencyClock)      (THIS_ IReferenceClock **ppClock) PURE;
 -    STDMETHOD(Activate)             (THIS_ BOOL fEnable) PURE;
-+    _Win32_PreserveResult_ STDMETHOD(Activate)             (THIS_ BOOL fEnable) PURE;
++     STDMETHOD(Activate)             (THIS_ BOOL fEnable) PURE;
      STDMETHOD(SetSynthSink)         (THIS_ IDirectMusicSynthSink *pSynthSink) PURE;
      STDMETHOD(Render)               (THIS_ short *pBuffer,
                                             DWORD dwLength,

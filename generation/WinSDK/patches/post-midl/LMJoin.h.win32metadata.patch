@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h
-index 54ec2025de32a5a60076bd94d65133eae4621ffa..13c426e832b37b56ad55d7cf5bf36bf5c1e8c3ae 100644
+index 54ec2025de..c76646165a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMJoin.h
 @@ -27,6 +27,7 @@ Notes:
@@ -10,12 +10,25 @@ index 54ec2025de32a5a60076bd94d65133eae4621ffa..13c426e832b37b56ad55d7cf5bf36bf5
  #include <winapifamily.h>
  
  #ifdef __cplusplus
-@@ -184,6 +185,8 @@ NetJoinDomain(
-     _In_ DWORD   fJoinOptions
+@@ -173,7 +174,7 @@ typedef struct _DSREG_JOIN_INFO
+ //
+ // Joins a machine to the domain.
+ //
+-NET_API_STATUS
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetJoinDomain(
+     _In_opt_ LPCWSTR lpServer,
+@@ -181,9 +182,11 @@ NetJoinDomain(
+     _In_opt_ LPCWSTR lpMachineAccountOU,
+     _In_opt_ LPCWSTR lpAccount,
+     _In_opt_ LPCWSTR lpPassword,
+-    _In_ DWORD   fJoinOptions
++    _Win32_AssociatedEnum_(NET_JOIN_DOMAIN_JOIN_OPTIONS) _In_ DWORD   fJoinOptions
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS
  NET_API_FUNCTION
  NetUnjoinDomain(
@@ -23,17 +36,269 @@ index 54ec2025de32a5a60076bd94d65133eae4621ffa..13c426e832b37b56ad55d7cf5bf36bf5
      _In_ DWORD   fUnjoinOptions
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS
  NET_API_FUNCTION
  NetRenameMachineInDomain(
+@@ -206,7 +211,7 @@ NetRenameMachineInDomain(
+ //
+ // Determine the validity of a name
+ //
+-NET_API_STATUS
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetValidateName(
+     _In_opt_ LPCWSTR         lpServer,
+@@ -219,7 +224,7 @@ NetValidateName(
+ //
+ // Determines the list of OUs that the client can create a machine account in
+ //
+-NET_API_STATUS
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetGetJoinableOUs(
+     _In_ LPCWSTR lpServer,
 @@ -238,6 +243,8 @@ NetGetJoinableOUs(
  
  #define NET_IGNORE_UNSUPPORTED_FLAGS  0x01
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  NET_API_STATUS
  NET_API_FUNCTION
  NetAddAlternateComputerName(
+@@ -248,7 +255,7 @@ NetAddAlternateComputerName(
+     _In_ ULONG Reserved
+     );
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_WindowsXP_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRemoveAlternateComputerName(
+     _In_opt_ LPCWSTR Server,
+@@ -258,7 +265,7 @@ NetRemoveAlternateComputerName(
+     _In_ ULONG Reserved
+     );
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_WindowsXP_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetSetPrimaryComputerName(
+     _In_opt_ LPCWSTR Server,
+@@ -281,7 +288,7 @@ typedef enum _NET_COMPUTER_NAME_TYPE {
+     NetComputerNameTypeMax
+ } NET_COMPUTER_NAME_TYPE, *PNET_COMPUTER_NAME_TYPE;
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_WindowsXP_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetEnumerateComputerNames(
+     _In_opt_ LPCWSTR Server,
+@@ -344,14 +351,14 @@ NetEnumerateComputerNames(
+ //
+ #define NETSETUP_PROVISION_CHECK_PWD_ONLY         0x80000000
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_Windows7_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetProvisionComputerAccount(
+    _In_z_          LPCWSTR lpDomain,
+    _In_z_          LPCWSTR lpMachineName,
+    _In_opt_z_      LPCWSTR lpMachineAccountOU,
+    _In_opt_z_      LPCWSTR lpDcName,
+-   _In_            DWORD   dwOptions,
++   _Win32_AssociatedEnum_(NETSETUP_PROVISION) _In_            DWORD   dwOptions,
+    _Outptr_opt_result_bytebuffer_maybenull_(*pdwProvisionBinDataSize)
+                    PBYTE  *pProvisionBinData,
+    _Out_opt_       DWORD  *pdwProvisionBinDataSize,
+@@ -359,12 +366,12 @@ NetProvisionComputerAccount(
+                    LPWSTR *pProvisionTextData
+ );
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_Windows7_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRequestOfflineDomainJoin(
+     _In_reads_bytes_(cbProvisionBinDataSize) BYTE *pProvisionBinData,
+     _In_    DWORD   cbProvisionBinDataSize,
+-    _In_    DWORD   dwOptions,
++    _Win32_AssociatedEnum_(NET_REQUEST_PROVISION_OPTIONS) _In_    DWORD   dwOptions,
+     _In_z_  LPCWSTR lpWindowsPath
+ );
+ 
+@@ -384,7 +391,7 @@ typedef struct _NETSETUP_PROVISIONING_PARAMS
+     LPCWSTR lpHostName;             //  _In_z_
+     LPCWSTR lpMachineAccountOU;     //  _In_opt_z_
+     LPCWSTR lpDcName;               //  _In_opt_z_
+-    DWORD   dwProvisionOptions;     //  _In_
++    _Win32_AssociatedEnum_(NETSETUP_PROVISION) DWORD   dwProvisionOptions;     //  _In_
+     LPCWSTR *aCertTemplateNames;    //  _In_reads_opt_(cCertTemplateNames)
+     DWORD   cCertTemplateNames;     //  _In_
+     LPCWSTR *aMachinePolicyNames;   //  _In_reads_opt_(cMachinePolicyNames)
+@@ -398,7 +405,7 @@ typedef struct _NETSETUP_PROVISIONING_PARAMS
+     LPWSTR  lpPrimaryDNSDomain;     //  _In_
+ } NETSETUP_PROVISIONING_PARAMS, *PNETSETUP_PROVISIONING_PARAMS;
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_Windows8_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetCreateProvisioningPackage(
+     _In_    PNETSETUP_PROVISIONING_PARAMS   pProvisioningParams,
+@@ -408,12 +415,12 @@ NetCreateProvisioningPackage(
+     _Outptr_opt_result_maybenull_z_ LPWSTR *ppPackageTextData
+     );
+ 
+-NET_API_STATUS
++_Windows_SupportedOS_Windows8_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRequestProvisioningPackageInstall(
+     _In_reads_bytes_(dwPackageBinDataSize) BYTE *pPackageBinData,
+     _In_ DWORD dwPackageBinDataSize,
+-    _In_ DWORD dwProvisionOptions,
++    _Win32_AssociatedEnum_(NET_REQUEST_PROVISION_OPTIONS) _In_ DWORD dwProvisionOptions,
+     _In_z_ LPCWSTR lpWindowsPath,
+     _Reserved_ PVOID pvReserved
+     );
+@@ -428,14 +435,14 @@ NetRequestProvisioningPackageInstall(
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+ 
+-HRESULT
++_Windows_SupportedOS_10240_ HRESULT
+ NET_API_FUNCTION
+ NetGetAadJoinInformation(
+     _In_opt_ LPCWSTR pcszTenantId,
+     _Outptr_result_maybenull_ PDSREG_JOIN_INFO *ppJoinInfo
+     );
+ 
+-VOID
++_Windows_SupportedOS_10240_ VOID
+ NET_API_FUNCTION
+ NetFreeAadJoinInformation(
+     _In_opt_ PDSREG_JOIN_INFO pJoinInfo
+@@ -464,7 +471,7 @@ typedef enum _NETSETUP_JOIN_STATUS {
+ //
+ // Determines whether a workstation is joined to a domain or not
+ //
+-NET_API_STATUS
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS
+ NET_API_FUNCTION
+ NetGetJoinInformation(
+     _In_opt_ LPCWSTR             lpServer,
+@@ -479,4 +486,115 @@ NetGetJoinInformation(
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("NETSETUP_PROVISION_ONLINE_CALLER")
++#undef NETSETUP_PROVISION_ONLINE_CALLER
++enum [[clang::flag_enum]] NET_REQUEST_PROVISION_OPTIONS : unsigned int
++{
++    NETSETUP_PROVISION_ONLINE_CALLER = 1073741824U,
++};
++#pragma pop_macro("NETSETUP_PROVISION_ONLINE_CALLER")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NETSETUP_JOIN_DOMAIN")
++#undef NETSETUP_JOIN_DOMAIN
++#pragma push_macro("NETSETUP_ACCT_CREATE")
++#undef NETSETUP_ACCT_CREATE
++#pragma push_macro("NETSETUP_WIN9X_UPGRADE")
++#undef NETSETUP_WIN9X_UPGRADE
++#pragma push_macro("NETSETUP_DOMAIN_JOIN_IF_JOINED")
++#undef NETSETUP_DOMAIN_JOIN_IF_JOINED
++#pragma push_macro("NETSETUP_JOIN_UNSECURE")
++#undef NETSETUP_JOIN_UNSECURE
++#pragma push_macro("NETSETUP_MACHINE_PWD_PASSED")
++#undef NETSETUP_MACHINE_PWD_PASSED
++#pragma push_macro("NETSETUP_DEFER_SPN_SET")
++#undef NETSETUP_DEFER_SPN_SET
++#pragma push_macro("NETSETUP_JOIN_DC_ACCOUNT")
++#undef NETSETUP_JOIN_DC_ACCOUNT
++#pragma push_macro("NETSETUP_JOIN_WITH_NEW_NAME")
++#undef NETSETUP_JOIN_WITH_NEW_NAME
++#pragma push_macro("NETSETUP_JOIN_READONLY")
++#undef NETSETUP_JOIN_READONLY
++#pragma push_macro("NETSETUP_AMBIGUOUS_DC")
++#undef NETSETUP_AMBIGUOUS_DC
++#pragma push_macro("NETSETUP_NO_NETLOGON_CACHE")
++#undef NETSETUP_NO_NETLOGON_CACHE
++#pragma push_macro("NETSETUP_DONT_CONTROL_SERVICES")
++#undef NETSETUP_DONT_CONTROL_SERVICES
++#pragma push_macro("NETSETUP_SET_MACHINE_NAME")
++#undef NETSETUP_SET_MACHINE_NAME
++#pragma push_macro("NETSETUP_FORCE_SPN_SET")
++#undef NETSETUP_FORCE_SPN_SET
++#pragma push_macro("NETSETUP_NO_ACCT_REUSE")
++#undef NETSETUP_NO_ACCT_REUSE
++#pragma push_macro("NETSETUP_IGNORE_UNSUPPORTED_FLAGS")
++#undef NETSETUP_IGNORE_UNSUPPORTED_FLAGS
++enum [[clang::flag_enum]] NET_JOIN_DOMAIN_JOIN_OPTIONS : unsigned int
++{
++    NETSETUP_JOIN_DOMAIN = 1U,
++    NETSETUP_ACCT_CREATE = 2U,
++    NETSETUP_WIN9X_UPGRADE = 16U,
++    NETSETUP_DOMAIN_JOIN_IF_JOINED = 32U,
++    NETSETUP_JOIN_UNSECURE = 64U,
++    NETSETUP_MACHINE_PWD_PASSED = 128U,
++    NETSETUP_DEFER_SPN_SET = 256U,
++    NETSETUP_JOIN_DC_ACCOUNT = 512U,
++    NETSETUP_JOIN_WITH_NEW_NAME = 1024U,
++    NETSETUP_JOIN_READONLY = 2048U,
++    NETSETUP_AMBIGUOUS_DC = 4096U,
++    NETSETUP_NO_NETLOGON_CACHE = 8192U,
++    NETSETUP_DONT_CONTROL_SERVICES = 16384U,
++    NETSETUP_SET_MACHINE_NAME = 32768U,
++    NETSETUP_FORCE_SPN_SET = 65536U,
++    NETSETUP_NO_ACCT_REUSE = 131072U,
++    NETSETUP_IGNORE_UNSUPPORTED_FLAGS = 268435456U,
++};
++#pragma pop_macro("NETSETUP_IGNORE_UNSUPPORTED_FLAGS")
++#pragma pop_macro("NETSETUP_NO_ACCT_REUSE")
++#pragma pop_macro("NETSETUP_FORCE_SPN_SET")
++#pragma pop_macro("NETSETUP_SET_MACHINE_NAME")
++#pragma pop_macro("NETSETUP_DONT_CONTROL_SERVICES")
++#pragma pop_macro("NETSETUP_NO_NETLOGON_CACHE")
++#pragma pop_macro("NETSETUP_AMBIGUOUS_DC")
++#pragma pop_macro("NETSETUP_JOIN_READONLY")
++#pragma pop_macro("NETSETUP_JOIN_WITH_NEW_NAME")
++#pragma pop_macro("NETSETUP_JOIN_DC_ACCOUNT")
++#pragma pop_macro("NETSETUP_DEFER_SPN_SET")
++#pragma pop_macro("NETSETUP_MACHINE_PWD_PASSED")
++#pragma pop_macro("NETSETUP_JOIN_UNSECURE")
++#pragma pop_macro("NETSETUP_DOMAIN_JOIN_IF_JOINED")
++#pragma pop_macro("NETSETUP_WIN9X_UPGRADE")
++#pragma pop_macro("NETSETUP_ACCT_CREATE")
++#pragma pop_macro("NETSETUP_JOIN_DOMAIN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT")
++#undef NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT
++#pragma push_macro("NETSETUP_PROVISION_REUSE_ACCOUNT")
++#undef NETSETUP_PROVISION_REUSE_ACCOUNT
++#pragma push_macro("NETSETUP_PROVISION_USE_DEFAULT_PASSWORD")
++#undef NETSETUP_PROVISION_USE_DEFAULT_PASSWORD
++#pragma push_macro("NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH")
++#undef NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH
++#pragma push_macro("NETSETUP_PROVISION_ROOT_CA_CERTS")
++#undef NETSETUP_PROVISION_ROOT_CA_CERTS
++enum [[clang::flag_enum]] NETSETUP_PROVISION : unsigned int
++{
++    NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT = 1U,
++    NETSETUP_PROVISION_REUSE_ACCOUNT = 2U,
++    NETSETUP_PROVISION_USE_DEFAULT_PASSWORD = 4U,
++    NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH = 8U,
++    NETSETUP_PROVISION_ROOT_CA_CERTS = 16U,
++};
++#pragma pop_macro("NETSETUP_PROVISION_ROOT_CA_CERTS")
++#pragma pop_macro("NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH")
++#pragma pop_macro("NETSETUP_PROVISION_USE_DEFAULT_PASSWORD")
++#pragma pop_macro("NETSETUP_PROVISION_REUSE_ACCOUNT")
++#pragma pop_macro("NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT")
++#endif
++
+ #endif // __LMJOIN_H__

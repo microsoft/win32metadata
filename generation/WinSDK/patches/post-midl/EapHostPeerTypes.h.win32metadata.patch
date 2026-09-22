@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h
-index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203672fd0e7 100644
+index db59999f75..136c03c81c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h
 @@ -12,6 +12,7 @@
@@ -15,7 +15,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
  
  // Possible reasons for which EAP-method can call getResult from EAPhost 
 -enum tagEapHostPeerMethodResultReason
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapHostPeerMethodResultReason
++enum   tagEapHostPeerMethodResultReason
  {
     // if method has obtained success from some
     EapHostPeerMethodResultAltSuccessReceived = 1,
@@ -24,7 +24,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
     [v1_enum]
  #endif
 -enum tagEapHostPeerResponseAction
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapHostPeerResponseAction
++enum   tagEapHostPeerResponseAction
  {
          // Discard the request as EAP cannot use it.
          EapHostPeerResponseDiscard = 0,
@@ -33,7 +33,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
     [v1_enum]
  #endif
 -enum tagEapHostPeerAuthParams {
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapHostPeerAuthParams {
++enum   tagEapHostPeerAuthParams {
     EapHostPeerAuthStatus = 1,    // current auth status
     EapHostPeerIdentity,           // obtain the inner method id
     EapHostPeerIdentityExtendedInfo, // obtained from Identity packet
@@ -42,7 +42,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
  
  // possible values for EAP status during authentication process
 -enum _EAPHOST_AUTH_STATUS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EAPHOST_AUTH_STATUS
++enum   _EAPHOST_AUTH_STATUS
  {
     EapHostInvalidSession = 0,
     EapHostAuthNotStarted,
@@ -51,7 +51,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
  // describes the current authentication info through different stages
  // of EAP authentication process.
 -typedef struct _EAPHOST_AUTH_INFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _EAPHOST_AUTH_INFO
++typedef struct   _EAPHOST_AUTH_INFO
  {
     EAPHOST_AUTH_STATUS status;
     DWORD dwErrorCode;
@@ -60,7 +60,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
     [v1_enum]
  #endif
 -enum _ISOLATION_STATE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ISOLATION_STATE
++enum   _ISOLATION_STATE
  {
     ISOLATION_STATE_UNKNOWN = 0,
     ISOLATION_STATE_NOT_RESTRICTED = 1,
@@ -69,7 +69,7 @@ index db59999f75fc0b354a811c789ab94a47aab59416..5eccf77f39217ae47ecdeaab5098f203
  // This carries the result information passed from EAPHost to EAP-method,
  // when EAP-method calls GetResult
 -typedef struct tagEapHostPeerMethodResult
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagEapHostPeerMethodResult
++typedef struct   tagEapHostPeerMethodResult
  {
     BOOL fIsSuccess;
     UINT32 dwFailureReasonCode;

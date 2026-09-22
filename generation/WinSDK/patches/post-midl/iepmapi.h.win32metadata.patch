@@ -1,0 +1,256 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h
+index 08fc788f3f..335dbab403 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+-------------------------------------------------------------------------
+ //
+ //  iepmapi.h -- This module defines the IE Protected Mode APIs
+@@ -55,7 +56,7 @@ typedef struct _IELAUNCHURLINFO {
+ //              previous call to IEShowSaveFileDialog
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IESaveFile(                                   
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IESaveFile(                                   
+     _In_ HANDLE    hState,                           
+     _In_ LPCWSTR   lpwstrSourceFile                  
+     );                          
+@@ -69,7 +70,7 @@ STDAPI IESaveFile(
+ //              allocated for the previous call to IEShowSaveFileDialog
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IECancelSaveFile(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IECancelSaveFile(
+     _In_ HANDLE    hState
+     );
+ 
+@@ -85,7 +86,7 @@ STDAPI IECancelSaveFile(
+ //              lppwstrDestinationFilePath 
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEShowSaveFileDialog(                         
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEShowSaveFileDialog(                         
+     _In_        HWND     hwnd,                       
+     _In_        LPCWSTR  lpwstrInitialFileName,      
+     _In_opt_    LPCWSTR  lpwstrInitialDir,           
+@@ -94,7 +95,7 @@ STDAPI IEShowSaveFileDialog(
+     _In_        DWORD    dwFilterIndex,              
+     _In_        DWORD    dwFlags,                    
+     _Outptr_ LPWSTR   *lppwstrDestinationFilePath,
+-    _Out_       HANDLE   *phState                    
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_       HANDLE   *phState                    
+     );                                               
+ 
+ 
+@@ -107,7 +108,7 @@ STDAPI IEShowSaveFileDialog(
+ //              user context
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEShowOpenFileDialog(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEShowOpenFileDialog(
+     __in                            HWND     hwnd,
+     __inout_ecount(cchMaxFileName)  LPWSTR   lpwstrFileName,
+     __in                            DWORD    cchMaxFileName,
+@@ -116,7 +117,7 @@ STDAPI IEShowOpenFileDialog(
+     __in_opt                        LPCWSTR  lpwstrDefExt,
+     __in                            DWORD    dwFilterIndex,
+     __in                            DWORD    dwFlags,
+-    __out                           HANDLE   *phFile
++    _Win32_RAIIFree_(CloseHandle, -1, 0) __out                           HANDLE   *phFile
+     );
+ 
+ 
+@@ -131,8 +132,8 @@ STDAPI IEShowOpenFileDialog(
+ //              the HKEY
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEGetWriteableLowHKCU(                           
+-    _Out_ HKEY    *pHKey                             
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEGetWriteableLowHKCU(                           
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY    *pHKey                             
+     );                                               
+ 
+ 
+@@ -148,7 +149,7 @@ STDAPI IEGetWriteableLowHKCU(
+ //              lppwstrPath
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEGetWriteableFolderPath(                     
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEGetWriteableFolderPath(                     
+     _In_        REFGUID clsidFolderID,               
+     _Outptr_ LPWSTR   *lppwstrPath                
+     );                                               
+@@ -161,7 +162,7 @@ STDAPI IEGetWriteableFolderPath(
+ //  Synopsis:   Determines if Internet Explorer is running in protected mode
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEIsProtectedModeProcess(                     
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEIsProtectedModeProcess(                     
+     _Out_ BOOL     *pbResult                         
+     );                                               
+ 
+@@ -173,7 +174,7 @@ STDAPI IEIsProtectedModeProcess(
+ //  Synopsis:   Determines if the URL runs in Protected Mode or not
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEIsProtectedModeURL(                     
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEIsProtectedModeURL(                     
+     _In_ LPCWSTR lpwstrUrl
+     );
+ 
+@@ -185,7 +186,7 @@ STDAPI IEIsProtectedModeURL(
+ //              the URL
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IELaunchURL(                     
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IELaunchURL(                     
+     _In_        LPCWSTR lpwstrUrl,
+     _Inout_     PROCESS_INFORMATION *lpProcInfo,
+     _In_opt_    VOID *lpInfo
+@@ -199,7 +200,7 @@ STDAPI IELaunchURL(
+ //              the registry
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IERefreshElevationPolicy();
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IERefreshElevationPolicy();
+ 
+ //+-------------------------------------------------------------------------
+ //
+@@ -208,7 +209,7 @@ STDAPI IERefreshElevationPolicy();
+ //  Synopsis:   Retrieves the cookie data from the Protected Mode Cookie store
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEGetProtectedModeCookie(_In_ LPCWSTR lpszURL,
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEGetProtectedModeCookie(_In_ LPCWSTR lpszURL,
+                                 _In_ LPCWSTR lpszCookieName,
+                                 _Inout_updates_(*pcchCookieData) LPWSTR lpszCookieData,
+                                 _Inout_ DWORD *pcchCookieData,
+@@ -221,7 +222,7 @@ STDAPI IEGetProtectedModeCookie(_In_ LPCWSTR lpszURL,
+ //  Synopsis:   Set the cookie data in the Protected Mode Cookie store
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IESetProtectedModeCookie(_In_ LPCWSTR lpszURL,
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IESetProtectedModeCookie(_In_ LPCWSTR lpszURL,
+                                 _In_ LPCWSTR lpszCookieName,
+                                 _In_ LPCWSTR lpszCookieData,
+                                 _In_ DWORD dwFlags);
+@@ -234,7 +235,7 @@ STDAPI IESetProtectedModeCookie(_In_ LPCWSTR lpszURL,
+ //              low process can write into this location during run time.
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IERegisterWritableRegistryKey(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IERegisterWritableRegistryKey(
+     GUID guid,
+     _In_ LPCWSTR lpSubkey,
+     BOOL fSubkeyAllowed
+@@ -248,7 +249,7 @@ STDAPI IERegisterWritableRegistryKey(
+ //              low process can write into this location during run time.
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IERegisterWritableRegistryValue(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IERegisterWritableRegistryValue(
+     GUID guid,
+     _In_ LPCWSTR lpPath, 
+     _In_ LPCWSTR lpValueName, 
+@@ -265,7 +266,7 @@ STDAPI IERegisterWritableRegistryValue(
+ //              low process can not write into this location
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IEUnregisterWritableRegistry(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IEUnregisterWritableRegistry(
+     GUID guid
+ );
+ 
+@@ -276,14 +277,14 @@ STDAPI IEUnregisterWritableRegistry(
+ //  Synopsis:   Call Broker to do RegCreateKeyEx on pre-registered locations
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IERegCreateKeyEx(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IERegCreateKeyEx(
+   _In_      LPCWSTR lpSubKey,
+   _In_      DWORD Reserved,
+   _In_opt_  LPWSTR lpClass,
+   _In_      DWORD dwOptions,
+   _In_      REGSAM samDesired,
+   _In_opt_  LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-  _Out_     PHKEY phkResult,
++  _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_     PHKEY phkResult,
+   _Out_     LPDWORD lpdwDisposition);
+ 
+ //+-------------------------------------------------------------------------
+@@ -293,7 +294,7 @@ STDAPI IERegCreateKeyEx(
+ //  Synopsis:   Call Broker to do RegSetValueEx on pre-registered location
+ //
+ //--------------------------------------------------------------------------
+-STDAPI IERegSetValueEx(
++_Win32_ImportLibrary_("ieframe.dll") STDAPI IERegSetValueEx(
+   _In_ LPCWSTR lpSubKey,
+   _In_ LPCWSTR lpValueName,
+   _In_ DWORD Reserved,
+@@ -308,7 +309,7 @@ STDAPI IERegSetValueEx(
+ //  Synopsis:   wrapper to CreateFile
+ //
+ //--------------------------------------------------------------------------
+-HANDLE IECreateFile(
++_Win32_ImportLibrary_("ieframe.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE IECreateFile(
+   _In_ LPCWSTR lpFileName,
+   DWORD dwDesiredAccess,
+   DWORD dwShareMode,
+@@ -325,7 +326,7 @@ HANDLE IECreateFile(
+ //  Synopsis:   wrapper to DeleteFile
+ //
+ //--------------------------------------------------------------------------
+-BOOL IEDeleteFile(
++_Win32_ImportLibrary_("ieframe.dll") BOOL IEDeleteFile(
+   _In_ LPCWSTR lpFileName
+ );
+ 
+@@ -336,7 +337,7 @@ BOOL IEDeleteFile(
+ //  Synopsis:   wrapper to RemoveDirectory
+ //
+ //--------------------------------------------------------------------------
+-BOOL IERemoveDirectory(
++_Win32_ImportLibrary_("ieframe.dll") BOOL IERemoveDirectory(
+   _In_ LPCWSTR lpPathName
+ );
+ 
+@@ -347,7 +348,7 @@ BOOL IERemoveDirectory(
+ //  Synopsis:   wrapper to MoveFileEx
+ //
+ //--------------------------------------------------------------------------
+-BOOL IEMoveFileEx(
++_Win32_ImportLibrary_("ieframe.dll") BOOL IEMoveFileEx(
+   _In_ LPCWSTR lpExistingFileName,
+   _In_ LPCWSTR lpNewFileName,
+   DWORD dwFlags
+@@ -360,7 +361,7 @@ BOOL IEMoveFileEx(
+ //  Synopsis:   wrapper to CreateDirectory
+ //
+ //--------------------------------------------------------------------------
+-BOOL IECreateDirectory(
++_Win32_ImportLibrary_("ieframe.dll") BOOL IECreateDirectory(
+   _In_ LPCWSTR lpPathName,
+   _In_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
+ );
+@@ -372,9 +373,9 @@ BOOL IECreateDirectory(
+ //  Synopsis:   wrapper to GetFileAttributesEx
+ //
+ //--------------------------------------------------------------------------
+-BOOL IEGetFileAttributesEx(
++_Win32_ImportLibrary_("ieframe.dll") BOOL IEGetFileAttributesEx(
+   _In_ LPCWSTR lpFileName,
+-  GET_FILEEX_INFO_LEVELS fInfoLevelId,
++  _Win32_AssociatedEnum_(GET_FILEEX_INFO_LEVELS) GET_FILEEX_INFO_LEVELS fInfoLevelId,
+   _In_ LPVOID lpFileInformation
+ );
+ 
+@@ -385,7 +386,7 @@ BOOL IEGetFileAttributesEx(
+ //  Synopsis:   wrapper to FindFirstFile
+ //
+ //--------------------------------------------------------------------------
+-HANDLE IEFindFirstFile(
++_Win32_ImportLibrary_("ieframe.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE IEFindFirstFile(
+   _In_ LPCWSTR lpFileName,
+   _In_ LPWIN32_FIND_DATA lpFindFileData
+ );

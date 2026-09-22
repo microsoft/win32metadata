@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
-index 1f3aeba9cd..8b63b7e7b3 100644
+index 1f3aeba9cd..99f1fefa29 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
 @@ -22,6 +22,7 @@ Environment:
@@ -15,7 +15,7 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  // Credentials structure.
  //
 -typedef struct tagWDS_CLI_CRED
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWDS_CLI_CRED
++typedef struct   tagWDS_CLI_CRED
  {
      PCWSTR pwszUserName,
             pwszDomain,
@@ -23,8 +23,8 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  //
  // General functions
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliClose( 
@@ -39,12 +39,12 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  );
  
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliRegisterTrace(
 -    _In_opt_ PFN_WdsCliTraceFunction pfn );
-+    _Win32_Retained_ _In_opt_ PFN_WdsCliTraceFunction pfn );
++     _In_opt_ PFN_WdsCliTraceFunction pfn );
  
  
 +_Windows_SupportedOS_Windows7_
@@ -55,73 +55,72 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  //
  // Image enumeration functions
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliFindFirstImage(
      _In_ HANDLE hSession,
 -    _Out_ PHANDLE phFindHandle );
-+    _Win32_RAIIFree_(WdsCliClose) _Out_ PHANDLE phFindHandle );
++    _Win32_RAIIFree_(CloseHandle, -1, 0)  _Out_ PHANDLE phFindHandle );
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  HRESULT
  WDSCLIAPI
  WdsCliFindNextImage(
      _In_ HANDLE Handle );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetEnumerationFlags(
      _In_ HANDLE Handle,
      _Out_ PDWORD pdwFlags );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliGetImageHandleFromFindHandle(
      _In_ HANDLE FindHandle,
 -    _Out_ PHANDLE phImageHandle );
-+    _Win32_RAIIFree_(WdsCliClose) _Out_ PHANDLE phImageHandle );
++    _Win32_RAIIFree_(CloseHandle, -1, 0)  _Out_ PHANDLE phImageHandle );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliGetImageHandleFromTransferHandle(
      _In_ HANDLE hTransfer,
 -    _Out_ PHANDLE phImageHandle );
-+    _Win32_RAIIFree_(WdsCliClose) _Out_ PHANDLE phImageHandle );
++    _Win32_RAIIFree_(CloseHandle, -1, 0)  _Out_ PHANDLE phImageHandle );
  
  
  //
-@@ -160,13 +174,17 @@ typedef enum _WDS_CLI_IMAGE_PARAM_TYPE
+@@ -160,12 +174,16 @@ typedef enum _WDS_CLI_IMAGE_PARAM_TYPE
  //
  // Session functions
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliCreateSession(
      _In_ PWSTR pwszServer,
      _In_opt_ PWDS_CLI_CRED pCred,
 -    _Out_ PHANDLE phSession );
-+    _Win32_RAIIFree_(WdsCliClose) _Out_ PHANDLE phSession );
++    _Win32_RAIIFree_(CloseHandle, -1, 0)  _Out_ PHANDLE phSession );
++
++_Windows_SupportedOS_WindowsVista_ 
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
  HRESULT
  WDSCLIAPI
- WdsCliAuthorizeSession(
 @@ -176,6 +194,8 @@ WdsCliAuthorizeSession(
  //
  // Client -> Server Logging functions
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliInitializeLog(
@@ -138,16 +137,16 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  // Image information functions
  //
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageName(
      _In_ HANDLE hIfh, 
      _Out_ PWSTR *ppwszValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageDescription(
@@ -155,16 +154,16 @@ index 1f3aeba9cd..8b63b7e7b3 100644
      _Outptr_result_buffer_(*pdwCount) LPWSTR **pppwszFiles,
     _Out_ PDWORD pdwCount );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageLanguage(
      _In_ HANDLE hIfh, 
      _Out_ PWSTR *ppwszValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageLanguages(
@@ -172,76 +171,76 @@ index 1f3aeba9cd..8b63b7e7b3 100644
      _Outptr_result_buffer_(*pdwNumValues) PTSTR **pppszValues,
      _Out_ PDWORD pdwNumValues );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageVersion(
      _In_ HANDLE hIfh, 
      _Out_ PWSTR *ppwszValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImagePath(
      _In_ HANDLE hIfh,
      _Out_ PWSTR *ppwszValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageIndex(
      _In_ HANDLE hIfh,
      _Out_ PDWORD pdwValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageArchitecture(
      _In_ HANDLE hIfh,
      _Out_ PDWORD pdwValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageLastModifiedTime(
      _In_ HANDLE hIfh,
      _Out_ PSYSTEMTIME *ppSysTimeValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageSize(
      _In_ HANDLE hIfh,
      _Out_ PULONGLONG pullValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageHalName(
      _In_ HANDLE hIfh,
      _Out_ PWSTR *ppwszValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageGroup(
      _In_ HANDLE hIfh,
      _Out_ PWSTR *ppwszValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetImageNamespace(
-@@ -349,6 +397,7 @@ WdsCliGetImageParameter(
+@@ -349,10 +397,11 @@ WdsCliGetImageParameter(
  // Callback function
  //
  
@@ -249,12 +248,17 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  typedef
  VOID
  (WDSCLIAPI *PFN_WdsCliCallback)(
+-    DWORD dwMessageId,
++    _Win32_AssociatedEnum_(PFN_WDS_CLI_CALLBACK_MESSAGE_ID) DWORD dwMessageId,
+     _In_opt_ WPARAM wParam,
+     _In_opt_ LPARAM lParam,
+     _In_opt_ PVOID pvUserData );
 @@ -368,6 +417,8 @@ enum
  };
  
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetTransferSize(
@@ -262,7 +266,7 @@ index 1f3aeba9cd..8b63b7e7b3 100644
  WdsCliSetTransferBufferSize(
      _In_ ULONG ulSizeInBytes );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliTransferImage(
@@ -272,11 +276,12 @@ index 1f3aeba9cd..8b63b7e7b3 100644
      _In_ DWORD dwReserved,
 -    _In_opt_ PFN_WdsCliCallback pfnWdsCliCallback,
 -    _In_opt_ PVOID pvUserData,
-+    _Win32_Retained_ _In_opt_ PFN_WdsCliCallback pfnWdsCliCallback,
-+    _Win32_Retained_ _In_opt_ PVOID pvUserData,
-     _Out_ PHANDLE phTransfer );
+-    _Out_ PHANDLE phTransfer );
++     _In_opt_ PFN_WdsCliCallback pfnWdsCliCallback,
++     _In_opt_ PVOID pvUserData,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE phTransfer );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliTransferFile(
@@ -286,17 +291,18 @@ index 1f3aeba9cd..8b63b7e7b3 100644
      _In_ DWORD dwReserved,
 -    _In_opt_ PFN_WdsCliCallback pfnWdsCliCallback,
 -    _In_opt_ PVOID pvUserData,
-+    _Win32_Retained_ _In_opt_ PFN_WdsCliCallback pfnWdsCliCallback,
-+    _Win32_Retained_ _In_opt_ PVOID pvUserData,
-     _Out_ PHANDLE phTransfer );
+-    _Out_ PHANDLE phTransfer );
++     _In_opt_ PFN_WdsCliCallback pfnWdsCliCallback,
++     _In_opt_ PVOID pvUserData,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE phTransfer );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliCancelTransfer(
      _In_ HANDLE hTransfer );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  HRESULT
  WDSCLIAPI
  WdsCliWaitForTransfer(
@@ -312,8 +318,8 @@ index 1f3aeba9cd..8b63b7e7b3 100644
      _Out_ ULONG *pulCount    
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliObtainDriverPackagesEx (
@@ -321,8 +327,36 @@ index 1f3aeba9cd..8b63b7e7b3 100644
      _Out_ ULONG* pulCount
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  HRESULT
  WDSCLIAPI
  WdsCliGetDriverQueryXml (
+@@ -459,4 +519,27 @@ WdsCliGetDriverQueryXml (
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WDS_CLI_MSG_START")
++#undef WDS_CLI_MSG_START
++#pragma push_macro("WDS_CLI_MSG_COMPLETE")
++#undef WDS_CLI_MSG_COMPLETE
++#pragma push_macro("WDS_CLI_MSG_PROGRESS")
++#undef WDS_CLI_MSG_PROGRESS
++#pragma push_macro("WDS_CLI_MSG_TEXT")
++#undef WDS_CLI_MSG_TEXT
++enum PFN_WDS_CLI_CALLBACK_MESSAGE_ID : unsigned int
++{
++    WDS_CLI_MSG_START = 0U,
++    WDS_CLI_MSG_COMPLETE = 1U,
++    WDS_CLI_MSG_PROGRESS = 2U,
++    WDS_CLI_MSG_TEXT = 3U,
++};
++#pragma pop_macro("WDS_CLI_MSG_TEXT")
++#pragma pop_macro("WDS_CLI_MSG_PROGRESS")
++#pragma pop_macro("WDS_CLI_MSG_COMPLETE")
++#pragma pop_macro("WDS_CLI_MSG_START")
++#endif
++
+ #endif  // __WDSCLIENTAPI_H__

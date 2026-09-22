@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb28faf5a293c6c69f6b6ba4046639f2..f403e48d7a8e53bc66dee66ceabf348cc9b6f9ca 100644
+index 44285099cb..e48953984b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -10,34 +10,3116 @@ index 44285099cb28faf5a293c6c69f6b6ba4046639f2..f403e48d7a8e53bc66dee66ceabf348c
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -138,9 +139,11 @@ extern "C" {
+@@ -138,11 +139,13 @@ extern "C" {
  #endif // RC_INVOKED
  #endif //_MAC
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINCOMMCTRLAPI void WINAPI InitCommonControls(void);
  
 -typedef struct tagINITCOMMONCONTROLSEX {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ tagINITCOMMONCONTROLSEX {
++typedef struct   tagINITCOMMONCONTROLSEX {
      DWORD dwSize;             // size of this structure
-     DWORD dwICC;              // flags indicating which classes to be initialized
+-    DWORD dwICC;              // flags indicating which classes to be initialized
++    _Win32_AssociatedEnum_(INITCOMMONCONTROLSEX_ICC) DWORD dwICC;              // flags indicating which classes to be initialized
  } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
+ #define ICC_LISTVIEW_CLASSES   0x00000001 // listview, header
+ #define ICC_TREEVIEW_CLASSES   0x00000002 // treeview, tooltips
 @@ -165,6 +168,8 @@ typedef struct tagINITCOMMONCONTROLSEX {
  #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINCOMMCTRLAPI BOOL WINAPI InitCommonControlsEx(_In_ const INITCOMMONCONTROLSEX *picce);
  
  #define ODT_HEADER              100
-@@ -547,6 +552,8 @@ typedef struct _IMAGELISTDRAWPARAMS
+@@ -463,11 +468,11 @@ typedef struct tagNMCUSTOMTEXT
+ typedef struct tagNMCUSTOMDRAWINFO
+ {
+     NMHDR hdr;
+-    DWORD dwDrawStage;
++    _Win32_AssociatedEnum_(NMCUSTOMDRAW_DRAW_STAGE) DWORD dwDrawStage;
+     HDC hdc;
+     RECT rc;
+     DWORD_PTR dwItemSpec;  // this is control specific, but it's how to specify an item.  valid only with CDDS_ITEM bit set
+-    UINT  uItemState;
++    _Win32_AssociatedEnum_(NMCUSTOMDRAW_DRAW_STATE_FLAGS) UINT  uItemState;
+     LPARAM lItemlParam;
+ } NMCUSTOMDRAW, *LPNMCUSTOMDRAW;
+ 
+@@ -546,18 +551,20 @@ typedef struct _IMAGELISTDRAWPARAMS
+ #define ILC_ORIGINALSIZE        0x00010000      // Imagelist should accept smaller than set images and apply OriginalSize based on image added
  #define ILC_HIGHQUALITYSCALE    0x00020000      // Imagelist should enable use of the high quality scaler.
  #endif
- WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Create(int cx, int cy, UINT flags, int cInitial, int cGrow);
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Create(int cx, int cy, UINT flags, int cInitial, int cGrow);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Create(int cx, int cy, _Win32_AssociatedEnum_(IMAGELIST_CREATION_FLAGS) UINT flags, int cInitial, int cGrow);
++_Windows_SupportedOS_WindowsVista_ 
++
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_Destroy(_In_opt_ HIMAGELIST himl);
  
- WINCOMMCTRLAPI int         WINAPI ImageList_GetImageCount(_In_ HIMAGELIST himl);
+-WINCOMMCTRLAPI int         WINAPI ImageList_GetImageCount(_In_ HIMAGELIST himl);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetImageCount(_In_ HIMAGELIST himl, _In_ UINT uNewCount);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int         WINAPI ImageList_GetImageCount(_In_ HIMAGELIST himl);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetImageCount(_In_ HIMAGELIST himl, _In_ UINT uNewCount);
+ 
+-WINCOMMCTRLAPI int         WINAPI ImageList_Add(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int         WINAPI ImageList_Add(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
+ 
+-WINCOMMCTRLAPI int         WINAPI ImageList_ReplaceIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ HICON hicon);
+-WINCOMMCTRLAPI COLORREF    WINAPI ImageList_SetBkColor(_In_ HIMAGELIST himl, _In_ COLORREF clrBk);
+-WINCOMMCTRLAPI COLORREF    WINAPI ImageList_GetBkColor(_In_ HIMAGELIST himl);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl, _In_ int iImage, _In_ int iOverlay);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int         WINAPI ImageList_ReplaceIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ HICON hicon);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI COLORREF    WINAPI ImageList_SetBkColor(_In_ HIMAGELIST himl, _In_ COLORREF clrBk);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI COLORREF    WINAPI ImageList_GetBkColor(_In_ HIMAGELIST himl);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl, _In_ int iImage, _In_ int iOverlay);
+ 
+ #define     ImageList_AddIcon(himl, hicon) ImageList_ReplaceIcon(himl, -1, hicon)
+ 
+@@ -593,7 +600,7 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl
+ #define ILGT_ASYNC              0x00000001
+ #endif
+ 
+-WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ UINT fStyle);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT fStyle);
+ 
+ 
+ #ifdef _WIN32
+@@ -602,15 +609,15 @@ WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_
+ #define HBITMAP_CALLBACK               ((HBITMAP)-1)       // only for SparseImageList
+ #endif
+ 
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_Replace(_In_ HIMAGELIST himl, _In_ int i, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Replace(_In_ HIMAGELIST himl, _In_ int i, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
+ 
+-WINCOMMCTRLAPI int         WINAPI ImageList_AddMasked(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_ COLORREF crMask);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawEx(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ int dx, _In_ int dy, _In_ COLORREF rgbBk, _In_ COLORREF rgbFg, _In_ UINT fStyle);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
+-WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ UINT flags);
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int         WINAPI ImageList_AddMasked(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_ COLORREF crMask);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawEx(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ int dx, _In_ int dy, _In_ COLORREF rgbBk, _In_ COLORREF rgbFg, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT fStyle);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DestroyIcon, -1, 0) WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT flags);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
+ 
+ #ifdef UNICODE
+ #define ImageList_LoadImage     ImageList_LoadImageW
+@@ -620,17 +627,17 @@ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpb
+ 
+ #define ILCF_MOVE   (0x00000000)
+ #define ILCF_SWAP   (0x00000001)
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_Copy(_In_ HIMAGELIST himlDst, _In_ int iDst, _In_ HIMAGELIST himlSrc, _In_ int iSrc, _In_ UINT uFlags);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Copy(_In_ HIMAGELIST himlDst, _In_ int iDst, _In_ HIMAGELIST himlSrc, _In_ int iSrc, _Win32_AssociatedEnum_(IMAGE_LIST_COPY_FLAGS) _In_ UINT uFlags);
+ 
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_BeginDrag(_In_ HIMAGELIST himlTrack, _In_ int iTrack, _In_ int dxHotspot, _In_ int dyHotspot);
+-WINCOMMCTRLAPI void        WINAPI ImageList_EndDrag(void);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragEnter(HWND hwndLock, int x, int y);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragLeave(HWND hwndLock);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragMove(int x, int y);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetDragCursorImage(_In_ HIMAGELIST himlDrag, _In_ int iDrag, _In_ int dxHotspot, _In_ int dyHotspot);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_BeginDrag(_In_ HIMAGELIST himlTrack, _In_ int iTrack, _In_ int dxHotspot, _In_ int dyHotspot);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void        WINAPI ImageList_EndDrag(void);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragEnter(HWND hwndLock, int x, int y);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragLeave(HWND hwndLock);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragMove(int x, int y);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetDragCursorImage(_In_ HIMAGELIST himlDrag, _In_ int iDrag, _In_ int dxHotspot, _In_ int dyHotspot);
+ 
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragShowNolock(BOOL fShow);
+-_Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragImage(_Out_opt_ POINT *ppt, _Out_opt_ POINT *pptHotspot);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragShowNolock(BOOL fShow);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragImage(_Out_opt_ POINT *ppt, _Out_opt_ POINT *pptHotspot);
+ 
+ #define     ImageList_RemoveAll(himl) ImageList_Remove(himl, -1)
+ #define     ImageList_ExtractIcon(hi, himl, i) ImageList_GetIcon(himl, i, 0)
+@@ -638,16 +645,16 @@ _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragIma
+ 
+ struct IStream;
+ 
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Read(_In_ struct IStream *pstm);
+-WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ struct IStream *pstm);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Read(_In_ struct IStream *pstm);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ struct IStream *pstm);
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ #define ILP_NORMAL          0           // Writes or reads the stream using new sematics for this version of comctl32
+ #define ILP_DOWNLEVEL       1           // Write or reads the stream using downlevel sematics.
+ 
+ 
+-WINCOMMCTRLAPI HRESULT WINAPI ImageList_ReadEx(_In_ DWORD dwFlags, _In_ struct IStream *pstm, _In_ REFIID riid, _Outptr_ PVOID* ppv);
+-WINCOMMCTRLAPI HRESULT WINAPI ImageList_WriteEx(_In_ HIMAGELIST himl, _In_ DWORD dwFlags, _In_ struct IStream *pstm);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI ImageList_ReadEx(_In_ DWORD dwFlags, _In_ struct IStream *pstm, _In_ REFIID riid, _Outptr_ PVOID* ppv);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI ImageList_WriteEx(_In_ HIMAGELIST himl, _Win32_AssociatedEnum_(IMAGE_LIST_WRITE_STREAM_FLAGS) _In_ DWORD dwFlags, _In_ struct IStream *pstm);
+ #endif
+ 
+ 
+@@ -662,17 +669,17 @@ typedef struct _IMAGEINFO
+ } IMAGEINFO, *LPIMAGEINFO;
+ #endif
+ 
+-_Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_GetIconSize(_In_ HIMAGELIST himl, _Out_opt_ int *cx, _Out_opt_ int *cy);
+-_Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetIconSize(_In_ HIMAGELIST himl, _In_ int cx, _In_ int cy);
+-_Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_GetImageInfo(_In_ HIMAGELIST himl, _In_ int i, _Out_ IMAGEINFO *pImageInfo);
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Merge(_In_ HIMAGELIST himl1, _In_ int i1, _In_ HIMAGELIST himl2, _In_ int i2, _In_ int dx, _In_ int dy);
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Duplicate(_In_ HIMAGELIST himl);
++_Windows_SupportedOS_WindowsVista_ _Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_GetIconSize(_In_ HIMAGELIST himl, _Out_opt_ int *cx, _Out_opt_ int *cy);
++_Windows_SupportedOS_WindowsVista_ _Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetIconSize(_In_ HIMAGELIST himl, _In_ int cx, _In_ int cy);
++_Windows_SupportedOS_WindowsVista_ _Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_GetImageInfo(_In_ HIMAGELIST himl, _In_ int i, _Out_ IMAGEINFO *pImageInfo);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Merge(_In_ HIMAGELIST himl1, _In_ int i1, _In_ HIMAGELIST himl2, _In_ int i2, _In_ int dx, _In_ int dy);
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(ImageList_Destroy, -1, 0) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Duplicate(_In_ HIMAGELIST himl);
+ 
+ 
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-WINCOMMCTRLAPI HRESULT WINAPI HIMAGELIST_QueryInterface(_In_ HIMAGELIST himl, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI HIMAGELIST_QueryInterface(_In_ HIMAGELIST himl, _In_ REFIID riid, _Outptr_ void **ppv);
+ 
+ #ifdef __cplusplus
+ FORCEINLINE HIMAGELIST IImageListToHIMAGELIST(struct IImageList *himl)
+@@ -765,19 +772,19 @@ typedef struct _HD_TEXTFILTERW
+ 
+ typedef struct _HD_ITEMA
+ {
+-    UINT    mask;
++    _Win32_AssociatedEnum_(HDI_MASK) UINT    mask;
+     int     cxy;
+     LPSTR   pszText;
+     HBITMAP hbm;
+     int     cchTextMax;
+-    int     fmt;
++    _Win32_AssociatedEnum_(HEADER_CONTROL_FORMAT_FLAGS) int     fmt;
+     LPARAM  lParam;
+     int     iImage;        // index of bitmap in ImageList
+     int     iOrder;        // where to draw this item
+-    UINT    type;           // [in] filter type (defined what pvFilter is a pointer to)
++    _Win32_AssociatedEnum_(HEADER_CONTROL_FORMAT_TYPE) UINT    type;           // [in] filter type (defined what pvFilter is a pointer to)
+     void *  pvFilter;       // [in] filter data see above
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-    UINT   state;
++    _Win32_AssociatedEnum_(HEADER_CONTROL_FORMAT_STATE) UINT   state;
+ #endif
+ } HDITEMA, *LPHDITEMA;
+ 
+@@ -787,19 +794,19 @@ typedef struct _HD_ITEMA
+ 
+ typedef struct _HD_ITEMW
+ {
+-    UINT    mask;
++    _Win32_AssociatedEnum_(HDI_MASK) UINT    mask;
+     int     cxy;
+     LPWSTR  pszText;
+     HBITMAP hbm;
+     int     cchTextMax;
+-    int     fmt;
++    _Win32_AssociatedEnum_(HEADER_CONTROL_FORMAT_FLAGS) int     fmt;
+     LPARAM  lParam;
+     int     iImage;        // index of bitmap in ImageList
+     int     iOrder;
+-    UINT    type;           // [in] filter type (defined what pvFilter is a pointer to)
++    _Win32_AssociatedEnum_(HEADER_CONTROL_FORMAT_TYPE) UINT    type;           // [in] filter type (defined what pvFilter is a pointer to)
+     void *  pvFilter;       // [in] fillter data see above
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-    UINT   state;
++    _Win32_AssociatedEnum_(HEADER_CONTROL_FORMAT_STATE) UINT   state;
+ #endif
+ } HDITEMW, *LPHDITEMW;
+ 
+@@ -941,7 +948,7 @@ typedef struct _HD_LAYOUT
+ typedef struct _HD_HITTESTINFO
+ {
+     POINT pt;
+-    UINT flags;
++    _Win32_AssociatedEnum_(HEADER_HITTEST_INFO_FLAGS) UINT flags;
+     int iItem;
+ } HDHITTESTINFO, *LPHDHITTESTINFO;
+ 
+@@ -1145,7 +1152,7 @@ typedef struct tagNMHDDISPINFOW
+ {
+     NMHDR   hdr;
+     int     iItem;
+-    UINT    mask;
++    _Win32_AssociatedEnum_(HDI_MASK) UINT    mask;
+     LPWSTR  pszText;
+     int     cchTextMax;
+     int     iImage;
+@@ -1156,7 +1163,7 @@ typedef struct tagNMHDDISPINFOA
+ {
+     NMHDR   hdr;
+     int     iItem;
+-    UINT    mask;
++    _Win32_AssociatedEnum_(HDI_MASK) UINT    mask;
+     LPSTR   pszText;
+     int     cchTextMax;
+     int     iImage;
+@@ -1221,12 +1228,12 @@ typedef struct _COLORMAP {
+     COLORREF to;
+ } COLORMAP, *LPCOLORMAP;
+ 
+-WINCOMMCTRLAPI HWND WINAPI CreateToolbarEx(HWND hwnd, DWORD ws, UINT wID, int nBitmaps,
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateToolbarEx(HWND hwnd, DWORD ws, UINT wID, int nBitmaps,
+                         HINSTANCE hBMInst, UINT_PTR wBMID, LPCTBBUTTON lpButtons,
+                         int iNumButtons, int dxButton, int dyButton,
+                         int dxBitmap, int dyBitmap, UINT uStructSize);
+ 
+-WINCOMMCTRLAPI HBITMAP WINAPI CreateMappedBitmap(HINSTANCE hInstance, INT_PTR idBitmap,
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(DeleteObject, -1, 0) WINCOMMCTRLAPI HBITMAP WINAPI CreateMappedBitmap(HINSTANCE hInstance, INT_PTR idBitmap,
+                                   UINT wFlags, _In_opt_ LPCOLORMAP lpColorMap,
+                                   int iNumMaps);
+ 
+@@ -1492,7 +1499,7 @@ typedef struct tagTBSAVEPARAMSW {
+ 
+ typedef struct {
+     int   iButton;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(TBINSERTMARK_FLAGS) DWORD dwFlags;
+ } TBINSERTMARK, * LPTBINSERTMARK;
+ #define TBIMHT_AFTER      0x00000001 // TRUE = insert After iButton, otherwise before
+ #define TBIMHT_BACKGROUND 0x00000002 // TRUE iff missed buttons completely
+@@ -1548,7 +1555,7 @@ typedef struct {
+ 
+ typedef struct {
+     UINT cbSize;
+-    DWORD dwMask;
++    _Win32_AssociatedEnum_(TBBUTTONINFOW_MASK) DWORD dwMask;
+     int idCommand;
+     int iImage;
+     BYTE fsState;
+@@ -1561,7 +1568,7 @@ typedef struct {
+ 
+ typedef struct {
+     UINT cbSize;
+-    DWORD dwMask;
++    _Win32_AssociatedEnum_(TBBUTTONINFOW_MASK) DWORD dwMask;
+     int idCommand;
+     int iImage;
+     BYTE fsState;
+@@ -1680,7 +1687,7 @@ typedef struct tagNMTBHOTITEM
+     NMHDR   hdr;
+     int     idOld;
+     int     idNew;
+-    DWORD   dwFlags;           // HICF_*
++    _Win32_AssociatedEnum_(NMTBHOTITEM_FLAGS) DWORD   dwFlags;           // HICF_*
+ } NMTBHOTITEM, * LPNMTBHOTITEM;
+ 
+ // Hot item change flags
+@@ -1774,7 +1781,7 @@ typedef struct tagNMTBGETINFOTIPW
+ 
+ typedef struct {
+     NMHDR  hdr;
+-    DWORD dwMask;     // [in] Specifies the values requested .[out] Client ask the data to be set for future use
++    _Win32_AssociatedEnum_(NMTBDISPINFOW_MASK) DWORD dwMask;     // [in] Specifies the values requested .[out] Client ask the data to be set for future use
+     int idCommand;    // [in] id of button we're requesting info for
+     DWORD_PTR lParam;  // [in] lParam of button
+     int iImage;       // [out] image index
+@@ -1784,7 +1791,7 @@ typedef struct {
+ 
+ typedef struct {
+     NMHDR hdr;
+-    DWORD dwMask;      //[in] Specifies the values requested .[out] Client ask the data to be set for future use
++    _Win32_AssociatedEnum_(NMTBDISPINFOW_MASK) DWORD dwMask;      //[in] Specifies the values requested .[out] Client ask the data to be set for future use
+     int idCommand;    // [in] id of button we're requesting info for
+     DWORD_PTR lParam;  // [in] lParam of button
+     int iImage;       // [out] image index
+@@ -2132,7 +2139,7 @@ typedef struct tagNMREBARCHILDSIZE
+ typedef struct tagNMREBAR
+ {
+     NMHDR   hdr;
+-    DWORD   dwMask;           // RBNM_*
++    _Win32_AssociatedEnum_(NMREBAR_MASK_FLAGS) DWORD   dwMask;           // RBNM_*
+     UINT    uBand;
+     UINT    fStyle;
+     UINT    wID;
+@@ -2241,7 +2248,7 @@ typedef struct _RB_HITTESTINFO
+ 
+ typedef struct tagTOOLINFOA {
+     UINT cbSize;
+-    UINT uFlags;
++    _Win32_AssociatedEnum_(TOOLTIP_FLAGS) UINT uFlags;
+     HWND hwnd;
+     UINT_PTR uId;
+     RECT rect;
+@@ -2255,7 +2262,7 @@ typedef struct tagTOOLINFOA {
+ 
+ typedef struct tagTOOLINFOW {
+     UINT cbSize;
+-    UINT uFlags;
++    _Win32_AssociatedEnum_(TOOLTIP_FLAGS) UINT uFlags;
+     HWND hwnd;
+     UINT_PTR uId;
+     RECT rect;
+@@ -2476,7 +2483,7 @@ typedef struct tagNMTTDISPINFOA {
+     LPSTR lpszText;
+     char szText[80];
+     HINSTANCE hinst;
+-    UINT uFlags;
++    _Win32_AssociatedEnum_(TOOLTIP_FLAGS) UINT uFlags;
+     LPARAM lParam;
+ } NMTTDISPINFOA, *LPNMTTDISPINFOA;
+ 
+@@ -2485,7 +2492,7 @@ typedef struct tagNMTTDISPINFOW {
+     LPWSTR lpszText;
+     WCHAR szText[80];
+     HINSTANCE hinst;
+-    UINT uFlags;
++    _Win32_AssociatedEnum_(TOOLTIP_FLAGS) UINT uFlags;
+     LPARAM lParam;
+ } NMTTDISPINFOW, *LPNMTTDISPINFOW;
+ 
+@@ -2516,11 +2523,11 @@ typedef struct tagNMTTDISPINFOW {
+ 
+ // end_r_commctrl
+ 
+-WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
+-WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
+ 
+-WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
+-WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
+ 
+ #ifdef UNICODE
+ #define CreateStatusWindow      CreateStatusWindowW
+@@ -2602,9 +2609,9 @@ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWN
+ 
+ #ifndef NOMENUHELP
+ 
+-WINCOMMCTRLAPI void WINAPI MenuHelp(UINT uMsg, WPARAM wParam, LPARAM lParam, HMENU hMainMenu, HINSTANCE hInst, HWND hwndStatus, _In_reads_(_Inexpressible_(2 + 2n && n >= 1)) UINT *lpwIDs);
+-WINCOMMCTRLAPI BOOL WINAPI ShowHideMenuCtl(_In_ HWND hWnd, _In_ UINT_PTR uFlags, _In_z_ LPINT lpInfo);
+-WINCOMMCTRLAPI void WINAPI GetEffectiveClientRect(_In_ HWND hWnd, _Out_ LPRECT lprc,  _In_z_ const INT *lpInfo);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI MenuHelp(UINT uMsg, WPARAM wParam, LPARAM lParam, HMENU hMainMenu, HINSTANCE hInst, HWND hwndStatus, _In_reads_(_Inexpressible_(2 + 2n && n >= 1)) UINT *lpwIDs);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI ShowHideMenuCtl(_In_ HWND hWnd, _In_ UINT_PTR uFlags, _In_z_ LPINT lpInfo);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI GetEffectiveClientRect(_In_ HWND hWnd, _Out_ LPRECT lprc,  _In_z_ const INT *lpInfo);
+ 
+ #define MINSYSCOMMAND   SC_SIZE
+ 
+@@ -2739,7 +2746,7 @@ typedef struct tagTRBTHUMBPOSCHANGING
+ #ifndef NODRAGLIST
+ 
+ typedef struct tagDRAGLISTINFO {
+-    UINT uNotification;
++    _Win32_AssociatedEnum_(DRAGLISTINFO_NOTIFICATION_FLAGS) UINT uNotification;
+     HWND hWnd;
+     POINT ptCursor;
+ } DRAGLISTINFO, *LPDRAGLISTINFO;
+@@ -2756,10 +2763,10 @@ typedef struct tagDRAGLISTINFO {
+ 
+ #define DRAGLISTMSGSTRING       TEXT("commctrl_DragListMsg")
+ 
+-WINCOMMCTRLAPI BOOL WINAPI MakeDragList(HWND hLB);
+-WINCOMMCTRLAPI void WINAPI DrawInsert(HWND handParent, HWND hLB, int nItem);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI MakeDragList(HWND hLB);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawInsert(HWND handParent, HWND hLB, int nItem);
+ 
+-WINCOMMCTRLAPI int WINAPI LBItemFromPt(HWND hLB, POINT pt, BOOL bAutoScroll);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI LBItemFromPt(HWND hLB, POINT pt, BOOL bAutoScroll);
+ 
+ #endif
+ 
+@@ -2823,7 +2830,7 @@ typedef struct _UDACCEL {
+ #define UDM_SETPOS32            (WM_USER+113)
+ #define UDM_GETPOS32            (WM_USER+114)
+ 
+-WINCOMMCTRLAPI HWND WINAPI CreateUpDownControl(DWORD dwStyle, int x, int y, int cx, int cy,
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HWND WINAPI CreateUpDownControl(DWORD dwStyle, int x, int y, int cx, int cy,
+                                 HWND hParent, int nID, HINSTANCE hInst,
+                                 HWND hBuddy,
+                                 int nUpper, int nLower, int nPos);
+@@ -3023,10 +3030,10 @@ typedef struct
+ 
+ typedef struct tagLITEM
+ {
+-    UINT        mask ;
++    _Win32_AssociatedEnum_(LIST_ITEM_FLAGS) UINT        mask ;
+     int         iLink ;
+-    UINT        state ;
+-    UINT        stateMask ;
++    _Win32_AssociatedEnum_(LIST_ITEM_STATE_FLAGS) UINT        state ;
++    _Win32_AssociatedEnum_(LIST_ITEM_STATE_FLAGS) UINT        stateMask ;
+     WCHAR       szID[MAX_LINKID_TEXT] ;
+     WCHAR       szUrl[L_MAX_URL_LENGTH] ;
+ } LITEM, * PLITEM ;
+@@ -3195,11 +3202,11 @@ typedef struct tagNMLINK
+ 
+ typedef struct tagLVITEMA
+ {
+-    UINT mask;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_FLAGS) UINT mask;
+     int iItem;
+     int iSubItem;
+-    UINT state;
+-    UINT stateMask;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_STATE_FLAGS) UINT state;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_STATE_FLAGS) UINT stateMask;
+     LPSTR pszText;
+     int cchTextMax;
+     int iImage;
+@@ -3211,18 +3218,18 @@ typedef struct tagLVITEMA
+     PUINT puColumns;
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_VISTA) // Will be unused downlevel, but sizeof(LVITEMA) must be equal to sizeof(LVITEMW)
+-    int* piColFmt;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS) int* piColFmt;
+     int iGroup; // readonly. only valid for owner data.
+ #endif
+ } LVITEMA, *LPLVITEMA;
+ 
+ typedef struct tagLVITEMW
+ {
+-    UINT mask;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_FLAGS) UINT mask;
+     int iItem;
+     int iSubItem;
+-    UINT state;
+-    UINT stateMask;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_STATE_FLAGS) UINT state;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_STATE_FLAGS) UINT stateMask;
+     LPWSTR pszText;
+     int cchTextMax;
+     int iImage;
+@@ -3234,7 +3241,7 @@ typedef struct tagLVITEMW
+     PUINT puColumns;
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-    int* piColFmt;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS) int* piColFmt;
+     int iGroup; // readonly. only valid for owner data.
+ #endif
+ } LVITEMW, *LPLVITEMW;
+@@ -3358,7 +3365,7 @@ typedef struct tagLVITEMW
+ 
+ typedef struct tagLVFINDINFOA
+ {
+-    UINT flags;
++    _Win32_AssociatedEnum_(LVFINDINFOW_FLAGS) UINT flags;
+     LPCSTR psz;
+     LPARAM lParam;
+     POINT pt;
+@@ -3367,7 +3374,7 @@ typedef struct tagLVFINDINFOA
+ 
+ typedef struct tagLVFINDINFOW
+ {
+-    UINT flags;
++    _Win32_AssociatedEnum_(LVFINDINFOW_FLAGS) UINT flags;
+     LPCWSTR psz;
+     LPARAM lParam;
+     POINT pt;
+@@ -3454,7 +3461,7 @@ typedef struct tagLVFINDINFOW
+ typedef struct tagLVHITTESTINFO
+ {
+     POINT pt;
+-    UINT flags;
++    _Win32_AssociatedEnum_(LVHITTESTINFO_FLAGS) UINT flags;
+     int iItem;
+     int iSubItem;    // this is was NOT in win95.  valid only for LVM_SUBITEMHITTEST
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+@@ -3522,8 +3529,8 @@ typedef struct tagLVHITTESTINFO
+ 
+ typedef struct tagLVCOLUMNA
+ {
+-    UINT mask;
+-    int fmt;
++    _Win32_AssociatedEnum_(LVCOLUMNW_MASK) UINT mask;
++    _Win32_AssociatedEnum_(LVCOLUMNW_FORMAT) int fmt;
+     int cx;
+     LPSTR pszText;
+     int cchTextMax;
+@@ -3539,8 +3546,8 @@ typedef struct tagLVCOLUMNA
+ 
+ typedef struct tagLVCOLUMNW
+ {
+-    UINT mask;
+-    int fmt;
++    _Win32_AssociatedEnum_(LVCOLUMNW_MASK) UINT mask;
++    _Win32_AssociatedEnum_(LVCOLUMNW_FORMAT) int fmt;
+     int cx;
+     LPWSTR pszText;
+     int cchTextMax;
+@@ -3949,7 +3956,7 @@ typedef int (CALLBACK *PFNLVCOMPARE)(LPARAM, LPARAM, LPARAM);
+ 
+ typedef struct tagLVBKIMAGEA
+ {
+-    ULONG ulFlags;              // LVBKIF_*
++    _Win32_AssociatedEnum_(LIST_VIEW_BACKGROUND_IMAGE_FLAGS) ULONG ulFlags;              // LVBKIF_*
+     HBITMAP hbm;
+     LPSTR pszImage;
+     UINT cchImageMax;
+@@ -3958,7 +3965,7 @@ typedef struct tagLVBKIMAGEA
+ } LVBKIMAGEA, *LPLVBKIMAGEA;
+ typedef struct tagLVBKIMAGEW
+ {
+-    ULONG ulFlags;              // LVBKIF_*
++    _Win32_AssociatedEnum_(LIST_VIEW_BACKGROUND_IMAGE_FLAGS) ULONG ulFlags;              // LVBKIF_*
+     HBITMAP hbm;
+     LPWSTR pszImage;
+     UINT cchImageMax;
+@@ -4043,7 +4050,7 @@ typedef struct tagLVBKIMAGEW
+ typedef struct tagLVGROUP
+ {
+     UINT    cbSize;
+-    UINT    mask;
++    _Win32_AssociatedEnum_(LVGROUP_MASK) UINT    mask;
+     LPWSTR  pszHeader;
+     int     cchHeader;
+ 
+@@ -4052,9 +4059,9 @@ typedef struct tagLVGROUP
+ 
+     int     iGroupId;
+ 
+-    UINT    stateMask;
+-    UINT    state;
+-    UINT    uAlign;
++    _Win32_AssociatedEnum_(LIST_VIEW_GROUP_STATE_FLAGS) UINT    stateMask;
++    _Win32_AssociatedEnum_(LIST_VIEW_GROUP_STATE_FLAGS) UINT    state;
++    _Win32_AssociatedEnum_(LIST_VIEW_GROUP_ALIGN_FLAGS) UINT    uAlign;
+ #if (NTDDI_VERSION >= NTDDI_VISTA) 
+     LPWSTR  pszSubtitle;
+     UINT    cchSubtitle;
+@@ -4207,8 +4214,8 @@ typedef struct tagLVINSERTGROUPSORTED
+ typedef struct tagLVTILEVIEWINFO
+ {
+     UINT    cbSize;
+-    DWORD   dwMask;     //LVTVIM_*
+-    DWORD   dwFlags;    //LVTVIF_*
++    _Win32_AssociatedEnum_(LVTILEVIEWINFO_MASK) DWORD   dwMask;     //LVTVIM_*
++    _Win32_AssociatedEnum_(LVTILEVIEWINFO_FLAGS) DWORD   dwFlags;    //LVTVIF_*
+     SIZE    sizeTile;
+     int     cLines;
+     RECT    rcLabelMargin;
+@@ -4372,7 +4379,7 @@ typedef struct tagLVFOOTERINFO
+ 
+ typedef struct tagLVFOOTERITEM
+ {
+-    UINT mask;          // LVFIF_*
++    _Win32_AssociatedEnum_(LVFOOTERITEM_MASK) UINT mask;          // LVFIF_*
+     int iItem;
+     LPWSTR pszText;
+     int cchTextMax;
+@@ -4442,7 +4449,7 @@ typedef struct tagNMLISTVIEW
+     int     iSubItem;
+     UINT    uNewState;
+     UINT    uOldState;
+-    UINT    uChanged;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_FLAGS) UINT    uChanged;
+     POINT   ptAction;
+     LPARAM  lParam;
+ } NMLISTVIEW, *LPNMLISTVIEW;
+@@ -4481,7 +4488,7 @@ typedef struct tagNMLVCUSTOMDRAW
+     COLORREF clrTextBk;
+     int iSubItem;
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-    DWORD dwItemType;
++    _Win32_AssociatedEnum_(NMLVCUSTOMDRAW_ITEM_TYPE) DWORD dwItemType;
+ 
+     // Item custom draw
+     COLORREF clrFace;
+@@ -4492,7 +4499,7 @@ typedef struct tagNMLVCUSTOMDRAW
+ 
+     // Group Custom Draw
+     RECT rcText;
+-    UINT uAlign;      // Alignment. Use LVGA_HEADER_CENTER, LVGA_HEADER_RIGHT, LVGA_HEADER_LEFT
++    _Win32_AssociatedEnum_(LIST_VIEW_GROUP_ALIGN_FLAGS) UINT uAlign;      // Alignment. Use LVGA_HEADER_CENTER, LVGA_HEADER_RIGHT, LVGA_HEADER_LEFT
+ #endif
+ } NMLVCUSTOMDRAW, *LPNMLVCUSTOMDRAW;
+ 
+@@ -4558,8 +4565,8 @@ typedef struct tagNMLVODSTATECHANGE
+     NMHDR hdr;
+     int iFrom;
+     int iTo;
+-    UINT uNewState;
+-    UINT uOldState;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_STATE_FLAGS) UINT uNewState;
++    _Win32_AssociatedEnum_(LIST_VIEW_ITEM_STATE_FLAGS) UINT uOldState;
+ } NMLVODSTATECHANGE, *LPNMLVODSTATECHANGE;
+ 
+ #define PNM_ODSTATECHANGE   LPNMLVODSTATECHANGE
+@@ -4671,7 +4678,7 @@ typedef struct tagNMLVLINK
+ typedef struct tagNMLVGETINFOTIPA
+ {
+     NMHDR hdr;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(NMLVGETINFOTIP_FLAGS) DWORD dwFlags;
+     LPSTR pszText;
+     int cchTextMax;
+     int iItem;
+@@ -4682,7 +4689,7 @@ typedef struct tagNMLVGETINFOTIPA
+ typedef struct tagNMLVGETINFOTIPW
+ {
+     NMHDR hdr;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(NMLVGETINFOTIP_FLAGS) DWORD dwFlags;
+     LPWSTR pszText;
+     int cchTextMax;
+     int iItem;
+@@ -4765,7 +4772,7 @@ typedef struct tagNMLVEMPTYMARKUP
+ {
+     NMHDR hdr;
+     // out params from client back to listview
+-    DWORD dwFlags;                      // EMF_*
++    _Win32_AssociatedEnum_(NMLVEMPTYMARKUP_FLAGS) DWORD dwFlags;                      // EMF_*
+     WCHAR szMarkup[L_MAX_URL_LENGTH];   // markup displayed
+ } NMLVEMPTYMARKUP;
+ 
+@@ -4892,34 +4899,34 @@ typedef struct tagNMTVSTATEIMAGECHANGING
+ #define TV_ITEM                 TVITEM
+ 
+ typedef struct tagTVITEMA {
+-    UINT      mask;
++    _Win32_AssociatedEnum_(TVITEM_MASK) UINT      mask;
+     HTREEITEM hItem;
+-    UINT      state;
+-    UINT      stateMask;
++    _Win32_AssociatedEnum_(TREE_VIEW_ITEM_STATE_FLAGS) UINT      state;
++    _Win32_AssociatedEnum_(TREE_VIEW_ITEM_STATE_FLAGS) UINT      stateMask;
+     LPSTR     pszText;
+     int       cchTextMax;
+     int       iImage;
+     int       iSelectedImage;
+-    int       cChildren;
++    _Win32_AssociatedEnum_(TVITEMEXW_CHILDREN) int       cChildren;
+     LPARAM    lParam;
+ } TVITEMA, *LPTVITEMA;
+ 
+ typedef struct tagTVITEMW {
+-    UINT      mask;
++    _Win32_AssociatedEnum_(TVITEM_MASK) UINT      mask;
+     HTREEITEM hItem;
+-    UINT      state;
+-    UINT      stateMask;
++    _Win32_AssociatedEnum_(TREE_VIEW_ITEM_STATE_FLAGS) UINT      state;
++    _Win32_AssociatedEnum_(TREE_VIEW_ITEM_STATE_FLAGS) UINT      stateMask;
+     LPWSTR    pszText;
+     int       cchTextMax;
+     int       iImage;
+     int       iSelectedImage;
+-    int       cChildren;
++    _Win32_AssociatedEnum_(TVITEMEXW_CHILDREN) int       cChildren;
+     LPARAM    lParam;
+ } TVITEMW, *LPTVITEMW;
+ 
+ // only used for Get and Set messages.  no notifies
+ typedef struct tagTVITEMEXA {
+-    UINT      mask;
++    _Win32_AssociatedEnum_(TVITEM_MASK) UINT      mask;
+     HTREEITEM hItem;
+     UINT      state;
+     UINT      stateMask;
+@@ -4927,7 +4934,7 @@ typedef struct tagTVITEMEXA {
+     int       cchTextMax;
+     int       iImage;
+     int       iSelectedImage;
+-    int       cChildren;
++    _Win32_AssociatedEnum_(TVITEMEXW_CHILDREN) int       cChildren;
+     LPARAM    lParam;
+     int       iIntegral;
+ #if (_WIN32_IE >= 0x0600)
+@@ -4941,7 +4948,7 @@ typedef struct tagTVITEMEXA {
+ } TVITEMEXA, *LPTVITEMEXA;
+ // only used for Get and Set messages.  no notifies
+ typedef struct tagTVITEMEXW {
+-    UINT      mask;
++    _Win32_AssociatedEnum_(TVITEM_MASK) UINT      mask;
+     HTREEITEM hItem;
+     UINT      state;
+     UINT      stateMask;
+@@ -4949,7 +4956,7 @@ typedef struct tagTVITEMEXW {
+     int       cchTextMax;
+     int       iImage;
+     int       iSelectedImage;
+-    int       cChildren;
++    _Win32_AssociatedEnum_(TVITEMEXW_CHILDREN) int       cChildren;
+     LPARAM    lParam;
+     int       iIntegral;
+ #if (_WIN32_IE >= 0x0600)
+@@ -5198,7 +5205,7 @@ typedef struct tagTVINSERTSTRUCTW {
+ 
+ typedef struct tagTVHITTESTINFO {
+     POINT       pt;
+-    UINT        flags;
++    _Win32_AssociatedEnum_(TVHITTESTINFO_FLAGS) UINT        flags;
+     HTREEITEM   hItem;
+ } TVHITTESTINFO, *LPTVHITTESTINFO;
+ 
+@@ -5432,7 +5439,7 @@ typedef struct tagTVSORTCB
+ 
+ typedef struct tagNMTREEVIEWA {
+     NMHDR       hdr;
+-    UINT        action;
++    _Win32_AssociatedEnum_(NM_TREEVIEW_ACTION) UINT        action;
+     TVITEMA    itemOld;
+     TVITEMA    itemNew;
+     POINT       ptDrag;
+@@ -5441,7 +5448,7 @@ typedef struct tagNMTREEVIEWA {
+ 
+ typedef struct tagNMTREEVIEWW {
+     NMHDR       hdr;
+-    UINT        action;
++    _Win32_AssociatedEnum_(NM_TREEVIEW_ACTION) UINT        action;
+     TVITEMW    itemOld;
+     TVITEMW    itemNew;
+     POINT       ptDrag;
+@@ -5701,7 +5708,7 @@ typedef struct tagNMTVASYNCDRAW
+ 
+ typedef struct tagCOMBOBOXEXITEMA
+ {
+-    UINT mask;
++    _Win32_AssociatedEnum_(COMBOBOX_EX_ITEM_FLAGS) UINT mask;
+     INT_PTR iItem;
+     LPSTR pszText;
+     int cchTextMax;
+@@ -5716,7 +5723,7 @@ typedef COMBOBOXEXITEMA CONST *PCCOMBOEXITEMA;
+ 
+ typedef struct tagCOMBOBOXEXITEMW
+ {
+-    UINT mask;
++    _Win32_AssociatedEnum_(COMBOBOX_EX_ITEM_FLAGS) UINT mask;
+     INT_PTR iItem;
+     LPWSTR pszText;
+     int cchTextMax;
+@@ -5972,7 +5979,7 @@ typedef struct {
+ 
+ typedef struct tagTCITEMHEADERA
+ {
+-    UINT mask;
++    _Win32_AssociatedEnum_(TCITEMHEADERA_MASK) UINT mask;
+     UINT lpReserved1;
+     UINT lpReserved2;
+     LPSTR pszText;
+@@ -5982,7 +5989,7 @@ typedef struct tagTCITEMHEADERA
+ 
+ typedef struct tagTCITEMHEADERW
+ {
+-    UINT mask;
++    _Win32_AssociatedEnum_(TCITEMHEADERA_MASK) UINT mask;
+     UINT lpReserved1;
+     UINT lpReserved2;
+     LPWSTR pszText;
+@@ -6005,9 +6012,9 @@ typedef struct tagTCITEMHEADERW
+ 
+ typedef struct tagTCITEMA
+ {
+-    UINT mask;
+-    DWORD dwState;
+-    DWORD dwStateMask;
++    _Win32_AssociatedEnum_(TCITEMHEADERA_MASK) UINT mask;
++    _Win32_AssociatedEnum_(TAB_CONTROL_ITEM_STATE) DWORD dwState;
++    _Win32_AssociatedEnum_(TAB_CONTROL_ITEM_STATE) DWORD dwStateMask;
+     LPSTR pszText;
+     int cchTextMax;
+     int iImage;
+@@ -6017,9 +6024,9 @@ typedef struct tagTCITEMA
+ 
+ typedef struct tagTCITEMW
+ {
+-    UINT mask;
+-    DWORD dwState;
+-    DWORD dwStateMask;
++    _Win32_AssociatedEnum_(TCITEMHEADERA_MASK) UINT mask;
++    _Win32_AssociatedEnum_(TAB_CONTROL_ITEM_STATE) DWORD dwState;
++    _Win32_AssociatedEnum_(TAB_CONTROL_ITEM_STATE) DWORD dwStateMask;
+     LPWSTR pszText;
+     int cchTextMax;
+     int iImage;
+@@ -6111,7 +6118,7 @@ typedef struct tagTCITEMW
+ typedef struct tagTCHITTESTINFO
+ {
+     POINT pt;
+-    UINT flags;
++    _Win32_AssociatedEnum_(TCHITTESTINFO_FLAGS) UINT flags;
+ } TCHITTESTINFO, *LPTCHITTESTINFO;
+ 
+ #define TCM_HITTEST             (TCM_FIRST + 13)
+@@ -6396,7 +6403,7 @@ typedef struct {
+         UINT cbSize;
+         POINT pt;
+ 
+-        UINT uHit;   // out param
++        _Win32_AssociatedEnum_(MCHITTESTINFO_HIT_FLAGS) UINT uHit;   // out param
+         SYSTEMTIME st;
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+         RECT rc;
+@@ -6527,8 +6534,8 @@ typedef struct {
+ // Note: iRow of -1 refers to the row header and iCol of -1 refers to the col header.
+ typedef struct tagMCGRIDINFO {
+     UINT cbSize;
+-    DWORD dwPart;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(MCGRIDINFO_PART) DWORD dwPart;
++    _Win32_AssociatedEnum_(MCGRIDINFO_FLAGS) DWORD dwFlags;
+     int iCalendar;
+     int iRow;
+     int iCol;
+@@ -6613,8 +6620,8 @@ typedef NMSELCHANGE NMSELECT, *LPNMSELECT;
+ typedef struct tagNMVIEWCHANGE
+ {
+     NMHDR           nmhdr;  // this must be first, so we don't break WM_NOTIFY
+-    DWORD           dwOldView;
+-    DWORD           dwNewView;
++    _Win32_AssociatedEnum_(MONTH_CALDENDAR_MESSAGES_VIEW) DWORD           dwOldView;
++    _Win32_AssociatedEnum_(MONTH_CALDENDAR_MESSAGES_VIEW) DWORD           dwNewView;
+ } NMVIEWCHANGE, *LPNMVIEWCHANGE;
+ 
+ #define MCN_VIEWCHANGE      (MCN_FIRST - 4) // -750
+@@ -6780,7 +6787,7 @@ typedef struct tagDATETIMEPICKERINFO
+ typedef struct tagNMDATETIMECHANGE
+ {
+     NMHDR       nmhdr;
+-    DWORD       dwFlags;    // GDT_VALID or GDT_NONE
++    _Win32_AssociatedEnum_(NMDATETIMECHANGE_FLAGS) DWORD       dwFlags;    // GDT_VALID or GDT_NONE
+     SYSTEMTIME  st;         // valid iff dwFlags==GDT_VALID
+ } NMDATETIMECHANGE, *LPNMDATETIMECHANGE;
+ 
+@@ -7101,9 +7108,9 @@ typedef struct tagNMIPADDRESS
+ // This structure is sent along with PGN_SCROLL notifications
+ typedef struct {
+     NMHDR hdr;
+-    WORD fwKeys;            // Specifies which keys are down when this notification is send
++    _Win32_AssociatedEnum_(NMPGSCROLL_KEYS) WORD fwKeys;            // Specifies which keys are down when this notification is send
+     RECT rcParent;          // Contains Parent Window Rect
+-    int  iDir;              // Scrolling Direction
++    _Win32_AssociatedEnum_(NMPGSCROLL_DIR) int  iDir;              // Scrolling Direction
+     int  iXpos;             // Horizontal scroll position
+     int  iYpos;             // Vertical scroll position
+     int  iScroll;           // [in/out] Amount to scroll
+@@ -7122,7 +7129,7 @@ typedef struct {
+ 
+ typedef struct {
+     NMHDR   hdr;
+-    DWORD   dwFlag;
++    _Win32_AssociatedEnum_(NMPGCALCSIZE_FLAGS) DWORD   dwFlag;
+     int     iWidth;
+     int     iHeight;
+ }NMPGCALCSIZE, *LPNMPGCALCSIZE;
+@@ -7214,7 +7221,7 @@ typedef struct
+ {
+     HIMAGELIST  himl;   // Images: Normal, Hot, Pushed, Disabled. If count is less than 4, we use index 1
+     RECT        margin; // Margin around icon.
+-    UINT        uAlign;
++    _Win32_AssociatedEnum_(BUTTON_IMAGELIST_ALIGN) UINT        uAlign;
+ } BUTTON_IMAGELIST, *PBUTTON_IMAGELIST;
+ 
+ #define BCM_GETIDEALSIZE        (BCM_FIRST + 0x0001)
+@@ -7239,7 +7246,7 @@ typedef struct
+ typedef struct tagNMBCHOTITEM
+ {
+     NMHDR   hdr;
+-    DWORD   dwFlags;           // HICF_*
++    _Win32_AssociatedEnum_(NMTBHOTITEM_FLAGS) DWORD   dwFlags;           // HICF_*
+ } NMBCHOTITEM, * LPNMBCHOTITEM;
+ 
+ #define BCN_HOTITEMCHANGE       (BCN_FIRST + 0x0001)
+@@ -7407,7 +7414,7 @@ typedef struct _tagEDITBALLOONTIP
+     DWORD   cbStruct;
+     LPCWSTR pszTitle;
+     LPCWSTR pszText;
+-    INT     ttiIcon; // From TTI_*
++    _Win32_AssociatedEnum_(EDITBALLOONTIP_ICON) INT     ttiIcon; // From TTI_*
+ } EDITBALLOONTIP, *PEDITBALLOONTIP;
+ #define EM_SHOWBALLOONTIP   (ECM_FIRST + 3)     // Show a balloon tip associated to the edit control
+ #define Edit_ShowBalloonTip(hwnd, peditballoontip) \
+@@ -7624,9 +7631,13 @@ typedef struct NMSEARCHWEB
+ #include <pshpack1.h>
+ #endif
+ 
+-typedef HRESULT (CALLBACK *PFTASKDIALOGCALLBACK)(_In_ HWND hwnd, _In_ UINT msg, _In_ WPARAM wParam, _In_ LPARAM lParam, _In_ LONG_PTR lpRefData);
++typedef HRESULT (CALLBACK *PFTASKDIALOGCALLBACK)(_In_ HWND hwnd, _Win32_AssociatedEnum_(TASKDIALOG_NOTIFICATIONS) _In_ UINT msg, _In_ WPARAM wParam, _In_ LPARAM lParam, _In_ LONG_PTR lpRefData);
+ 
+-enum _TASKDIALOG_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ _TASKDIALOG_FLAGS
+ {
+     TDF_ENABLE_HYPERLINKS               = 0x0001,
+     TDF_USE_HICON_MAIN                  = 0x0002,
+@@ -7762,8 +7773,8 @@ typedef struct _TASKDIALOGCONFIG
+ } TASKDIALOGCONFIG;
+ 
+ 
+-WINCOMMCTRLAPI HRESULT WINAPI TaskDialogIndirect(_In_ const TASKDIALOGCONFIG *pTaskConfig, _Out_opt_ int *pnButton, _Out_opt_ int *pnRadioButton, _Out_opt_ BOOL *pfVerificationFlagChecked);
+-WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINSTANCE hInstance, _In_opt_ PCWSTR pszWindowTitle, _In_opt_ PCWSTR pszMainInstruction, _In_opt_ PCWSTR pszContent, TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons, _In_opt_ PCWSTR pszIcon, _Out_opt_ int *pnButton);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI TaskDialogIndirect(_In_ const TASKDIALOGCONFIG *pTaskConfig, _Out_opt_ int *pnButton, _Out_opt_ int *pnRadioButton, _Out_opt_ BOOL *pfVerificationFlagChecked);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINSTANCE hInstance, _In_opt_ PCWSTR pszWindowTitle, _In_opt_ PCWSTR pszMainInstruction, _In_opt_ PCWSTR pszContent, TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons, _In_opt_ PCWSTR pszIcon, _Out_opt_ int *pnButton);
+ 
+ 
+ #ifdef _WIN32
+@@ -7781,10 +7792,10 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
+ // === MUI APIs ===
+ //
+ #ifndef NOMUI
+-void WINAPI InitMUILanguage(LANGID uiLang);
++_Windows_SupportedOS_WindowsVista_ void WINAPI InitMUILanguage(LANGID uiLang);
+ 
+ 
+-LANGID WINAPI GetMUILanguage(void);
++_Windows_SupportedOS_WindowsVista_ LANGID WINAPI GetMUILanguage(void);
+ #endif  // NOMUI
+ 
+ #include <dpa_dsa.h>
+@@ -7835,7 +7846,7 @@ typedef struct tagTRACKMOUSEEVENT {
+ // Declare _TrackMouseEvent.  This API tries to use the window manager's
+ // implementation of TrackMouseEvent if it is present, otherwise it emulates.
+ //
+-WINCOMMCTRLAPI
++_Windows_SupportedOS_Windows2000_ WINCOMMCTRLAPI
+ BOOL
+ WINAPI
+ _TrackMouseEvent(
+@@ -7864,16 +7875,16 @@ _TrackMouseEvent(
+ #define FSB_ENCARTA_MODE        1
+ #define FSB_REGULAR_MODE        0
+ 
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_EnableScrollBar(HWND, int, UINT);
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_ShowScrollBar(HWND, int code, BOOL);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_EnableScrollBar(HWND, int, UINT);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_ShowScrollBar(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, BOOL);
+ 
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, int code, LPINT, LPINT);
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, int code, LPSCROLLINFO);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPINT, LPINT);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPSCROLLINFO);
+ 
+-WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, int code);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code);
+ 
+ 
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, int propIndex, LPINT);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, _Win32_AssociatedEnum_(WSB_PROP) int propIndex, LPINT);
+ #ifdef _WIN64
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR);
+ #else
+@@ -7881,17 +7892,17 @@ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR
+ #endif
+ 
+ 
+-WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, int code, int pos, BOOL fRedraw);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, int pos, BOOL fRedraw);
+ 
+-WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, int code, LPSCROLLINFO psi, BOOL fRedraw);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPSCROLLINFO psi, BOOL fRedraw);
+ 
+ 
+-WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, int code, int min, int max, BOOL fRedraw);
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_SetScrollProp(HWND, UINT index, INT_PTR newValue, BOOL);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, int min, int max, BOOL fRedraw);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_SetScrollProp(HWND, _Win32_AssociatedEnum_(WSB_PROP) UINT index, INT_PTR newValue, BOOL);
+ #define FlatSB_SetScrollPropPtr FlatSB_SetScrollProp
+ 
+-WINCOMMCTRLAPI BOOL WINAPI InitializeFlatSB(HWND);
+-WINCOMMCTRLAPI HRESULT WINAPI UninitializeFlatSB(HWND);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI InitializeFlatSB(HWND);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI UninitializeFlatSB(HWND);
+ 
+ #endif  //  NOFLATSBAPIS
+ 
+@@ -7907,14 +7918,14 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
+     LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
+ 
+ 
+-_Success_(return) BOOL WINAPI SetWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass, _In_ UINT_PTR uIdSubclass,
++_Windows_SupportedOS_WindowsXP_ _Success_(return) BOOL WINAPI SetWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass, _In_ UINT_PTR uIdSubclass,
+     _In_ DWORD_PTR dwRefData);
+-_Success_(return) BOOL WINAPI GetWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass, _In_ UINT_PTR uIdSubclass,
++_Windows_SupportedOS_WindowsXP_ _Success_(return) BOOL WINAPI GetWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass, _In_ UINT_PTR uIdSubclass,
+     _Out_opt_ DWORD_PTR *pdwRefData);
+-_Success_(return) BOOL WINAPI RemoveWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass,
++_Windows_SupportedOS_WindowsXP_ _Success_(return) BOOL WINAPI RemoveWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass,
+     _In_ UINT_PTR uIdSubclass);
+ 
+-LRESULT WINAPI DefSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
++_Windows_SupportedOS_WindowsXP_ LRESULT WINAPI DefSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+@@ -7925,14 +7936,14 @@ enum _LI_METRIC
+    LIM_LARGE, // corresponds to SM_CXICON/SM_CYICON
+ };
+ 
+-WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(HINSTANCE hinst, PCWSTR pszName, int lims, _Out_ HICON *phico);
+-WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Out_ HICON *phico);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(HINSTANCE hinst, PCWSTR pszName, _Win32_AssociatedEnum_(_LI_METRIC) int lims, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phico);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phico);
+ 
+ #endif // NTDDI_VISTA
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+-int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UINT cch, _In_ RECT* prc, _In_ DWORD dwFlags, _In_ COLORREF crText, _In_ COLORREF crShadow,
++_Windows_SupportedOS_WindowsVista_ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UINT cch, _In_ RECT* prc, _In_ DWORD dwFlags, _In_ COLORREF crText, _In_ COLORREF crShadow,
+     _In_ int ixOffset, _In_ int iyOffset);
+ #endif
+ 
+@@ -7960,5 +7971,2064 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DL_BEGINDRAG")
++#undef DL_BEGINDRAG
++#pragma push_macro("DL_CANCELDRAG")
++#undef DL_CANCELDRAG
++#pragma push_macro("DL_DRAGGING")
++#undef DL_DRAGGING
++#pragma push_macro("DL_DROPPED")
++#undef DL_DROPPED
++enum DRAGLISTINFO_NOTIFICATION_FLAGS : unsigned int
++{
++    DL_BEGINDRAG = 1157U,
++    DL_CANCELDRAG = 1160U,
++    DL_DRAGGING = 1158U,
++    DL_DROPPED = 1159U,
++};
++#pragma pop_macro("DL_DROPPED")
++#pragma pop_macro("DL_DRAGGING")
++#pragma pop_macro("DL_CANCELDRAG")
++#pragma pop_macro("DL_BEGINDRAG")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ILD_NORMAL")
++#undef ILD_NORMAL
++#pragma push_macro("ILD_TRANSPARENT")
++#undef ILD_TRANSPARENT
++#pragma push_macro("ILD_BLEND25")
++#undef ILD_BLEND25
++#pragma push_macro("ILD_FOCUS")
++#undef ILD_FOCUS
++#pragma push_macro("ILD_BLEND50")
++#undef ILD_BLEND50
++#pragma push_macro("ILD_SELECTED")
++#undef ILD_SELECTED
++#pragma push_macro("ILD_BLEND")
++#undef ILD_BLEND
++#pragma push_macro("ILD_MASK")
++#undef ILD_MASK
++#pragma push_macro("ILD_IMAGE")
++#undef ILD_IMAGE
++#pragma push_macro("ILD_ROP")
++#undef ILD_ROP
++#pragma push_macro("ILD_OVERLAYMASK")
++#undef ILD_OVERLAYMASK
++#pragma push_macro("ILD_PRESERVEALPHA")
++#undef ILD_PRESERVEALPHA
++#pragma push_macro("ILD_SCALE")
++#undef ILD_SCALE
++#pragma push_macro("ILD_DPISCALE")
++#undef ILD_DPISCALE
++#pragma push_macro("ILD_ASYNC")
++#undef ILD_ASYNC
++enum [[clang::flag_enum]] IMAGE_LIST_DRAW_STYLE : unsigned int
++{
++    ILD_NORMAL = 0U,
++    ILD_TRANSPARENT = 1U,
++    ILD_BLEND25 = 2U,
++    ILD_FOCUS = 2U,
++    ILD_BLEND50 = 4U,
++    ILD_SELECTED = 4U,
++    ILD_BLEND = 4U,
++    ILD_MASK = 16U,
++    ILD_IMAGE = 32U,
++    ILD_ROP = 64U,
++    ILD_OVERLAYMASK = 3840U,
++    ILD_PRESERVEALPHA = 4096U,
++    ILD_SCALE = 8192U,
++    ILD_DPISCALE = 16384U,
++    ILD_ASYNC = 32768U,
++};
++#pragma pop_macro("ILD_ASYNC")
++#pragma pop_macro("ILD_DPISCALE")
++#pragma pop_macro("ILD_SCALE")
++#pragma pop_macro("ILD_PRESERVEALPHA")
++#pragma pop_macro("ILD_OVERLAYMASK")
++#pragma pop_macro("ILD_ROP")
++#pragma pop_macro("ILD_IMAGE")
++#pragma pop_macro("ILD_MASK")
++#pragma pop_macro("ILD_BLEND")
++#pragma pop_macro("ILD_SELECTED")
++#pragma pop_macro("ILD_BLEND50")
++#pragma pop_macro("ILD_FOCUS")
++#pragma pop_macro("ILD_BLEND25")
++#pragma pop_macro("ILD_TRANSPARENT")
++#pragma pop_macro("ILD_NORMAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WSB_PROP_CXHSCROLL")
++#undef WSB_PROP_CXHSCROLL
++#pragma push_macro("WSB_PROP_CXHTHUMB")
++#undef WSB_PROP_CXHTHUMB
++#pragma push_macro("WSB_PROP_CXVSCROLL")
++#undef WSB_PROP_CXVSCROLL
++#pragma push_macro("WSB_PROP_CYHSCROLL")
++#undef WSB_PROP_CYHSCROLL
++#pragma push_macro("WSB_PROP_CYVSCROLL")
++#undef WSB_PROP_CYVSCROLL
++#pragma push_macro("WSB_PROP_CYVTHUMB")
++#undef WSB_PROP_CYVTHUMB
++#pragma push_macro("WSB_PROP_HBKGCOLOR")
++#undef WSB_PROP_HBKGCOLOR
++#pragma push_macro("WSB_PROP_HSTYLE")
++#undef WSB_PROP_HSTYLE
++#pragma push_macro("WSB_PROP_PALETTE")
++#undef WSB_PROP_PALETTE
++#pragma push_macro("WSB_PROP_VBKGCOLOR")
++#undef WSB_PROP_VBKGCOLOR
++#pragma push_macro("WSB_PROP_VSTYLE")
++#undef WSB_PROP_VSTYLE
++#pragma push_macro("WSB_PROP_WINSTYLE")
++#undef WSB_PROP_WINSTYLE
++enum WSB_PROP : int
++{
++    WSB_PROP_CXHSCROLL = 2,
++    WSB_PROP_CXHTHUMB = 16,
++    WSB_PROP_CXVSCROLL = 8,
++    WSB_PROP_CYHSCROLL = 4,
++    WSB_PROP_CYVSCROLL = 1,
++    WSB_PROP_CYVTHUMB = 32,
++    WSB_PROP_HBKGCOLOR = 128,
++    WSB_PROP_HSTYLE = 512,
++    WSB_PROP_PALETTE = 2048,
++    WSB_PROP_VBKGCOLOR = 64,
++    WSB_PROP_VSTYLE = 256,
++    WSB_PROP_WINSTYLE = 1024,
++};
++#pragma pop_macro("WSB_PROP_WINSTYLE")
++#pragma pop_macro("WSB_PROP_VSTYLE")
++#pragma pop_macro("WSB_PROP_VBKGCOLOR")
++#pragma pop_macro("WSB_PROP_PALETTE")
++#pragma pop_macro("WSB_PROP_HSTYLE")
++#pragma pop_macro("WSB_PROP_HBKGCOLOR")
++#pragma pop_macro("WSB_PROP_CYVTHUMB")
++#pragma pop_macro("WSB_PROP_CYVSCROLL")
++#pragma pop_macro("WSB_PROP_CYHSCROLL")
++#pragma pop_macro("WSB_PROP_CXVSCROLL")
++#pragma pop_macro("WSB_PROP_CXHTHUMB")
++#pragma pop_macro("WSB_PROP_CXHSCROLL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ILCF_MOVE")
++#undef ILCF_MOVE
++#pragma push_macro("ILCF_SWAP")
++#undef ILCF_SWAP
++enum IMAGE_LIST_COPY_FLAGS : unsigned int
++{
++    ILCF_MOVE = 0U,
++    ILCF_SWAP = 1U,
++};
++#pragma pop_macro("ILCF_SWAP")
++#pragma pop_macro("ILCF_MOVE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HDI_WIDTH")
++#undef HDI_WIDTH
++#pragma push_macro("HDI_HEIGHT")
++#undef HDI_HEIGHT
++#pragma push_macro("HDI_TEXT")
++#undef HDI_TEXT
++#pragma push_macro("HDI_FORMAT")
++#undef HDI_FORMAT
++#pragma push_macro("HDI_LPARAM")
++#undef HDI_LPARAM
++#pragma push_macro("HDI_BITMAP")
++#undef HDI_BITMAP
++#pragma push_macro("HDI_IMAGE")
++#undef HDI_IMAGE
++#pragma push_macro("HDI_DI_SETITEM")
++#undef HDI_DI_SETITEM
++#pragma push_macro("HDI_ORDER")
++#undef HDI_ORDER
++#pragma push_macro("HDI_FILTER")
++#undef HDI_FILTER
++#pragma push_macro("HDI_STATE")
++#undef HDI_STATE
++enum [[clang::flag_enum]] HDI_MASK : unsigned int
++{
++    HDI_WIDTH = 1U,
++    HDI_HEIGHT = 1U,
++    HDI_TEXT = 2U,
++    HDI_FORMAT = 4U,
++    HDI_LPARAM = 8U,
++    HDI_BITMAP = 16U,
++    HDI_IMAGE = 32U,
++    HDI_DI_SETITEM = 64U,
++    HDI_ORDER = 128U,
++    HDI_FILTER = 256U,
++    HDI_STATE = 512U,
++};
++#pragma pop_macro("HDI_STATE")
++#pragma pop_macro("HDI_FILTER")
++#pragma pop_macro("HDI_ORDER")
++#pragma pop_macro("HDI_DI_SETITEM")
++#pragma pop_macro("HDI_IMAGE")
++#pragma pop_macro("HDI_BITMAP")
++#pragma pop_macro("HDI_LPARAM")
++#pragma pop_macro("HDI_FORMAT")
++#pragma pop_macro("HDI_TEXT")
++#pragma pop_macro("HDI_HEIGHT")
++#pragma pop_macro("HDI_WIDTH")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RBNM_ID")
++#undef RBNM_ID
++#pragma push_macro("RBNM_LPARAM")
++#undef RBNM_LPARAM
++#pragma push_macro("RBNM_STYLE")
++#undef RBNM_STYLE
++enum [[clang::flag_enum]] NMREBAR_MASK_FLAGS : unsigned int
++{
++    RBNM_ID = 1U,
++    RBNM_LPARAM = 4U,
++    RBNM_STYLE = 2U,
++};
++#pragma pop_macro("RBNM_STYLE")
++#pragma pop_macro("RBNM_LPARAM")
++#pragma pop_macro("RBNM_ID")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTI_ERROR")
++#undef TTI_ERROR
++#pragma push_macro("TTI_INFO")
++#undef TTI_INFO
++#pragma push_macro("TTI_NONE")
++#undef TTI_NONE
++#pragma push_macro("TTI_WARNING")
++#undef TTI_WARNING
++#pragma push_macro("TTI_INFO_LARGE")
++#undef TTI_INFO_LARGE
++#pragma push_macro("TTI_WARNING_LARGE")
++#undef TTI_WARNING_LARGE
++#pragma push_macro("TTI_ERROR_LARGE")
++#undef TTI_ERROR_LARGE
++enum EDITBALLOONTIP_ICON : int
++{
++    TTI_ERROR = 3,
++    TTI_INFO = 1,
++    TTI_NONE = 0,
++    TTI_WARNING = 2,
++    TTI_INFO_LARGE = 4,
++    TTI_WARNING_LARGE = 5,
++    TTI_ERROR_LARGE = 6,
++};
++#pragma pop_macro("TTI_ERROR_LARGE")
++#pragma pop_macro("TTI_WARNING_LARGE")
++#pragma pop_macro("TTI_INFO_LARGE")
++#pragma pop_macro("TTI_WARNING")
++#pragma pop_macro("TTI_NONE")
++#pragma pop_macro("TTI_INFO")
++#pragma pop_macro("TTI_ERROR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVCFMT_LEFT")
++#undef LVCFMT_LEFT
++#pragma push_macro("LVCFMT_RIGHT")
++#undef LVCFMT_RIGHT
++#pragma push_macro("LVCFMT_CENTER")
++#undef LVCFMT_CENTER
++#pragma push_macro("LVCFMT_JUSTIFYMASK")
++#undef LVCFMT_JUSTIFYMASK
++#pragma push_macro("LVCFMT_IMAGE")
++#undef LVCFMT_IMAGE
++#pragma push_macro("LVCFMT_BITMAP_ON_RIGHT")
++#undef LVCFMT_BITMAP_ON_RIGHT
++#pragma push_macro("LVCFMT_COL_HAS_IMAGES")
++#undef LVCFMT_COL_HAS_IMAGES
++#pragma push_macro("LVCFMT_FIXED_WIDTH")
++#undef LVCFMT_FIXED_WIDTH
++#pragma push_macro("LVCFMT_NO_DPI_SCALE")
++#undef LVCFMT_NO_DPI_SCALE
++#pragma push_macro("LVCFMT_FIXED_RATIO")
++#undef LVCFMT_FIXED_RATIO
++#pragma push_macro("LVCFMT_SPLITBUTTON")
++#undef LVCFMT_SPLITBUTTON
++enum [[clang::flag_enum]] LVCOLUMNW_FORMAT : int
++{
++    LVCFMT_LEFT = 0,
++    LVCFMT_RIGHT = 1,
++    LVCFMT_CENTER = 2,
++    LVCFMT_JUSTIFYMASK = 3,
++    LVCFMT_IMAGE = 2048,
++    LVCFMT_BITMAP_ON_RIGHT = 4096,
++    LVCFMT_COL_HAS_IMAGES = 32768,
++    LVCFMT_FIXED_WIDTH = 256,
++    LVCFMT_NO_DPI_SCALE = 262144,
++    LVCFMT_FIXED_RATIO = 524288,
++    LVCFMT_SPLITBUTTON = 16777216,
++};
++#pragma pop_macro("LVCFMT_SPLITBUTTON")
++#pragma pop_macro("LVCFMT_FIXED_RATIO")
++#pragma pop_macro("LVCFMT_NO_DPI_SCALE")
++#pragma pop_macro("LVCFMT_FIXED_WIDTH")
++#pragma pop_macro("LVCFMT_COL_HAS_IMAGES")
++#pragma pop_macro("LVCFMT_BITMAP_ON_RIGHT")
++#pragma pop_macro("LVCFMT_IMAGE")
++#pragma pop_macro("LVCFMT_JUSTIFYMASK")
++#pragma pop_macro("LVCFMT_CENTER")
++#pragma pop_macro("LVCFMT_RIGHT")
++#pragma pop_macro("LVCFMT_LEFT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PGK_NONE")
++#undef PGK_NONE
++#pragma push_macro("PGK_SHIFT")
++#undef PGK_SHIFT
++#pragma push_macro("PGK_CONTROL")
++#undef PGK_CONTROL
++#pragma push_macro("PGK_MENU")
++#undef PGK_MENU
++enum [[clang::flag_enum]] NMPGSCROLL_KEYS : unsigned short
++{
++    PGK_NONE = 0,
++    PGK_SHIFT = 1,
++    PGK_CONTROL = 2,
++    PGK_MENU = 4,
++};
++#pragma pop_macro("PGK_MENU")
++#pragma pop_macro("PGK_CONTROL")
++#pragma pop_macro("PGK_SHIFT")
++#pragma pop_macro("PGK_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CBEIF_DI_SETITEM")
++#undef CBEIF_DI_SETITEM
++#pragma push_macro("CBEIF_IMAGE")
++#undef CBEIF_IMAGE
++#pragma push_macro("CBEIF_INDENT")
++#undef CBEIF_INDENT
++#pragma push_macro("CBEIF_LPARAM")
++#undef CBEIF_LPARAM
++#pragma push_macro("CBEIF_OVERLAY")
++#undef CBEIF_OVERLAY
++#pragma push_macro("CBEIF_SELECTEDIMAGE")
++#undef CBEIF_SELECTEDIMAGE
++#pragma push_macro("CBEIF_TEXT")
++#undef CBEIF_TEXT
++enum [[clang::flag_enum]] COMBOBOX_EX_ITEM_FLAGS : unsigned int
++{
++    CBEIF_DI_SETITEM = 268435456U,
++    CBEIF_IMAGE = 2U,
++    CBEIF_INDENT = 16U,
++    CBEIF_LPARAM = 32U,
++    CBEIF_OVERLAY = 8U,
++    CBEIF_SELECTEDIMAGE = 4U,
++    CBEIF_TEXT = 1U,
++};
++#pragma pop_macro("CBEIF_TEXT")
++#pragma pop_macro("CBEIF_SELECTEDIMAGE")
++#pragma pop_macro("CBEIF_OVERLAY")
++#pragma pop_macro("CBEIF_LPARAM")
++#pragma pop_macro("CBEIF_INDENT")
++#pragma pop_macro("CBEIF_IMAGE")
++#pragma pop_macro("CBEIF_DI_SETITEM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("I_ZERO")
++#undef I_ZERO
++#pragma push_macro("I_ONE_OR_MORE")
++#undef I_ONE_OR_MORE
++#pragma push_macro("I_CHILDRENCALLBACK")
++#undef I_CHILDRENCALLBACK
++#pragma push_macro("I_CHILDRENAUTO")
++#undef I_CHILDRENAUTO
++enum TVITEMEXW_CHILDREN : int
++{
++    I_ZERO = 0,
++    I_ONE_OR_MORE = 1,
++    I_CHILDRENCALLBACK = -1,
++    I_CHILDRENAUTO = -2,
++};
++#pragma pop_macro("I_CHILDRENAUTO")
++#pragma pop_macro("I_CHILDRENCALLBACK")
++#pragma pop_macro("I_ONE_OR_MORE")
++#pragma pop_macro("I_ZERO")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TVIF_CHILDREN")
++#undef TVIF_CHILDREN
++#pragma push_macro("TVIF_DI_SETITEM")
++#undef TVIF_DI_SETITEM
++#pragma push_macro("TVIF_HANDLE")
++#undef TVIF_HANDLE
++#pragma push_macro("TVIF_IMAGE")
++#undef TVIF_IMAGE
++#pragma push_macro("TVIF_PARAM")
++#undef TVIF_PARAM
++#pragma push_macro("TVIF_SELECTEDIMAGE")
++#undef TVIF_SELECTEDIMAGE
++#pragma push_macro("TVIF_STATE")
++#undef TVIF_STATE
++#pragma push_macro("TVIF_TEXT")
++#undef TVIF_TEXT
++#pragma push_macro("TVIF_EXPANDEDIMAGE")
++#undef TVIF_EXPANDEDIMAGE
++#pragma push_macro("TVIF_INTEGRAL")
++#undef TVIF_INTEGRAL
++#pragma push_macro("TVIF_STATEEX")
++#undef TVIF_STATEEX
++enum [[clang::flag_enum]] TVITEM_MASK : unsigned int
++{
++    TVIF_CHILDREN = 64U,
++    TVIF_DI_SETITEM = 4096U,
++    TVIF_HANDLE = 16U,
++    TVIF_IMAGE = 2U,
++    TVIF_PARAM = 4U,
++    TVIF_SELECTEDIMAGE = 32U,
++    TVIF_STATE = 8U,
++    TVIF_TEXT = 1U,
++    TVIF_EXPANDEDIMAGE = 512U,
++    TVIF_INTEGRAL = 128U,
++    TVIF_STATEEX = 256U,
++};
++#pragma pop_macro("TVIF_STATEEX")
++#pragma pop_macro("TVIF_INTEGRAL")
++#pragma pop_macro("TVIF_EXPANDEDIMAGE")
++#pragma pop_macro("TVIF_TEXT")
++#pragma pop_macro("TVIF_STATE")
++#pragma pop_macro("TVIF_SELECTEDIMAGE")
++#pragma pop_macro("TVIF_PARAM")
++#pragma pop_macro("TVIF_IMAGE")
++#pragma pop_macro("TVIF_HANDLE")
++#pragma pop_macro("TVIF_DI_SETITEM")
++#pragma pop_macro("TVIF_CHILDREN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TCIF_IMAGE")
++#undef TCIF_IMAGE
++#pragma push_macro("TCIF_RTLREADING")
++#undef TCIF_RTLREADING
++#pragma push_macro("TCIF_TEXT")
++#undef TCIF_TEXT
++#pragma push_macro("TCIF_PARAM")
++#undef TCIF_PARAM
++#pragma push_macro("TCIF_STATE")
++#undef TCIF_STATE
++enum [[clang::flag_enum]] TCITEMHEADERA_MASK : unsigned int
++{
++    TCIF_IMAGE = 2U,
++    TCIF_RTLREADING = 4U,
++    TCIF_TEXT = 1U,
++    TCIF_PARAM = 8U,
++    TCIF_STATE = 16U,
++};
++#pragma pop_macro("TCIF_STATE")
++#pragma pop_macro("TCIF_PARAM")
++#pragma pop_macro("TCIF_TEXT")
++#pragma pop_macro("TCIF_RTLREADING")
++#pragma pop_macro("TCIF_IMAGE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TCHT_NOWHERE")
++#undef TCHT_NOWHERE
++#pragma push_macro("TCHT_ONITEM")
++#undef TCHT_ONITEM
++#pragma push_macro("TCHT_ONITEMICON")
++#undef TCHT_ONITEMICON
++#pragma push_macro("TCHT_ONITEMLABEL")
++#undef TCHT_ONITEMLABEL
++enum TCHITTESTINFO_FLAGS : unsigned int
++{
++    TCHT_NOWHERE = 1U,
++    TCHT_ONITEM = 6U,
++    TCHT_ONITEMICON = 2U,
++    TCHT_ONITEMLABEL = 4U,
++};
++#pragma pop_macro("TCHT_ONITEMLABEL")
++#pragma pop_macro("TCHT_ONITEMICON")
++#pragma pop_macro("TCHT_ONITEM")
++#pragma pop_macro("TCHT_NOWHERE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CDDS_POSTPAINT")
++#undef CDDS_POSTPAINT
++#pragma push_macro("CDDS_PREERASE")
++#undef CDDS_PREERASE
++#pragma push_macro("CDDS_PREPAINT")
++#undef CDDS_PREPAINT
++#pragma push_macro("CDDS_ITEMPOSTERASE")
++#undef CDDS_ITEMPOSTERASE
++#pragma push_macro("CDDS_ITEMPOSTPAINT")
++#undef CDDS_ITEMPOSTPAINT
++#pragma push_macro("CDDS_ITEMPREERASE")
++#undef CDDS_ITEMPREERASE
++#pragma push_macro("CDDS_ITEMPREPAINT")
++#undef CDDS_ITEMPREPAINT
++#pragma push_macro("CDDS_SUBITEM")
++#undef CDDS_SUBITEM
++enum NMCUSTOMDRAW_DRAW_STAGE : unsigned int
++{
++    CDDS_POSTPAINT = 2U,
++    CDDS_PREERASE = 3U,
++    CDDS_PREPAINT = 1U,
++    CDDS_ITEMPOSTERASE = 65540U,
++    CDDS_ITEMPOSTPAINT = 65538U,
++    CDDS_ITEMPREERASE = 65539U,
++    CDDS_ITEMPREPAINT = 65537U,
++    CDDS_SUBITEM = 131072U,
++};
++#pragma pop_macro("CDDS_SUBITEM")
++#pragma pop_macro("CDDS_ITEMPREPAINT")
++#pragma pop_macro("CDDS_ITEMPREERASE")
++#pragma pop_macro("CDDS_ITEMPOSTPAINT")
++#pragma pop_macro("CDDS_ITEMPOSTERASE")
++#pragma pop_macro("CDDS_PREPAINT")
++#pragma pop_macro("CDDS_PREERASE")
++#pragma pop_macro("CDDS_POSTPAINT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("MCGIP_CALENDARCONTROL")
++#undef MCGIP_CALENDARCONTROL
++#pragma push_macro("MCGIP_NEXT")
++#undef MCGIP_NEXT
++#pragma push_macro("MCGIP_PREV")
++#undef MCGIP_PREV
++#pragma push_macro("MCGIP_FOOTER")
++#undef MCGIP_FOOTER
++#pragma push_macro("MCGIP_CALENDAR")
++#undef MCGIP_CALENDAR
++#pragma push_macro("MCGIP_CALENDARHEADER")
++#undef MCGIP_CALENDARHEADER
++#pragma push_macro("MCGIP_CALENDARBODY")
++#undef MCGIP_CALENDARBODY
++#pragma push_macro("MCGIP_CALENDARROW")
++#undef MCGIP_CALENDARROW
++#pragma push_macro("MCGIP_CALENDARCELL")
++#undef MCGIP_CALENDARCELL
++enum MCGRIDINFO_PART : unsigned int
++{
++    MCGIP_CALENDARCONTROL = 0U,
++    MCGIP_NEXT = 1U,
++    MCGIP_PREV = 2U,
++    MCGIP_FOOTER = 3U,
++    MCGIP_CALENDAR = 4U,
++    MCGIP_CALENDARHEADER = 5U,
++    MCGIP_CALENDARBODY = 6U,
++    MCGIP_CALENDARROW = 7U,
++    MCGIP_CALENDARCELL = 8U,
++};
++#pragma pop_macro("MCGIP_CALENDARCELL")
++#pragma pop_macro("MCGIP_CALENDARROW")
++#pragma pop_macro("MCGIP_CALENDARBODY")
++#pragma pop_macro("MCGIP_CALENDARHEADER")
++#pragma pop_macro("MCGIP_CALENDAR")
++#pragma pop_macro("MCGIP_FOOTER")
++#pragma pop_macro("MCGIP_PREV")
++#pragma pop_macro("MCGIP_NEXT")
++#pragma pop_macro("MCGIP_CALENDARCONTROL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("I_GROUPIDCALLBACK")
++#undef I_GROUPIDCALLBACK
++#pragma push_macro("I_GROUPIDNONE")
++#undef I_GROUPIDNONE
++enum LVITEMA_GROUP_ID : int
++{
++    I_GROUPIDCALLBACK = -1,
++    I_GROUPIDNONE = -2,
++};
++#pragma pop_macro("I_GROUPIDNONE")
++#pragma pop_macro("I_GROUPIDCALLBACK")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HICF_ACCELERATOR")
++#undef HICF_ACCELERATOR
++#pragma push_macro("HICF_ARROWKEYS")
++#undef HICF_ARROWKEYS
++#pragma push_macro("HICF_DUPACCEL")
++#undef HICF_DUPACCEL
++#pragma push_macro("HICF_ENTERING")
++#undef HICF_ENTERING
++#pragma push_macro("HICF_LEAVING")
++#undef HICF_LEAVING
++#pragma push_macro("HICF_LMOUSE")
++#undef HICF_LMOUSE
++#pragma push_macro("HICF_MOUSE")
++#undef HICF_MOUSE
++#pragma push_macro("HICF_OTHER")
++#undef HICF_OTHER
++#pragma push_macro("HICF_RESELECT")
++#undef HICF_RESELECT
++#pragma push_macro("HICF_TOGGLEDROPDOWN")
++#undef HICF_TOGGLEDROPDOWN
++enum [[clang::flag_enum]] NMTBHOTITEM_FLAGS : unsigned int
++{
++    HICF_ACCELERATOR = 4U,
++    HICF_ARROWKEYS = 2U,
++    HICF_DUPACCEL = 8U,
++    HICF_ENTERING = 16U,
++    HICF_LEAVING = 32U,
++    HICF_LMOUSE = 128U,
++    HICF_MOUSE = 1U,
++    HICF_OTHER = 0U,
++    HICF_RESELECT = 64U,
++    HICF_TOGGLEDROPDOWN = 256U,
++};
++#pragma pop_macro("HICF_TOGGLEDROPDOWN")
++#pragma pop_macro("HICF_RESELECT")
++#pragma pop_macro("HICF_OTHER")
++#pragma pop_macro("HICF_MOUSE")
++#pragma pop_macro("HICF_LMOUSE")
++#pragma pop_macro("HICF_LEAVING")
++#pragma pop_macro("HICF_ENTERING")
++#pragma pop_macro("HICF_DUPACCEL")
++#pragma pop_macro("HICF_ARROWKEYS")
++#pragma pop_macro("HICF_ACCELERATOR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTF_IDISHWND")
++#undef TTF_IDISHWND
++#pragma push_macro("TTF_CENTERTIP")
++#undef TTF_CENTERTIP
++#pragma push_macro("TTF_RTLREADING")
++#undef TTF_RTLREADING
++#pragma push_macro("TTF_SUBCLASS")
++#undef TTF_SUBCLASS
++#pragma push_macro("TTF_TRACK")
++#undef TTF_TRACK
++#pragma push_macro("TTF_ABSOLUTE")
++#undef TTF_ABSOLUTE
++#pragma push_macro("TTF_TRANSPARENT")
++#undef TTF_TRANSPARENT
++#pragma push_macro("TTF_PARSELINKS")
++#undef TTF_PARSELINKS
++#pragma push_macro("TTF_DI_SETITEM")
++#undef TTF_DI_SETITEM
++enum [[clang::flag_enum]] TOOLTIP_FLAGS : unsigned int
++{
++    TTF_IDISHWND = 1U,
++    TTF_CENTERTIP = 2U,
++    TTF_RTLREADING = 4U,
++    TTF_SUBCLASS = 16U,
++    TTF_TRACK = 32U,
++    TTF_ABSOLUTE = 128U,
++    TTF_TRANSPARENT = 256U,
++    TTF_PARSELINKS = 4096U,
++    TTF_DI_SETITEM = 32768U,
++};
++#pragma pop_macro("TTF_DI_SETITEM")
++#pragma pop_macro("TTF_PARSELINKS")
++#pragma pop_macro("TTF_TRANSPARENT")
++#pragma pop_macro("TTF_ABSOLUTE")
++#pragma pop_macro("TTF_TRACK")
++#pragma pop_macro("TTF_SUBCLASS")
++#pragma pop_macro("TTF_RTLREADING")
++#pragma pop_macro("TTF_CENTERTIP")
++#pragma pop_macro("TTF_IDISHWND")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVTVIF_AUTOSIZE")
++#undef LVTVIF_AUTOSIZE
++#pragma push_macro("LVTVIF_FIXEDWIDTH")
++#undef LVTVIF_FIXEDWIDTH
++#pragma push_macro("LVTVIF_FIXEDHEIGHT")
++#undef LVTVIF_FIXEDHEIGHT
++#pragma push_macro("LVTVIF_FIXEDSIZE")
++#undef LVTVIF_FIXEDSIZE
++enum [[clang::flag_enum]] LVTILEVIEWINFO_FLAGS : unsigned int
++{
++    LVTVIF_AUTOSIZE = 0U,
++    LVTVIF_FIXEDWIDTH = 1U,
++    LVTVIF_FIXEDHEIGHT = 2U,
++    LVTVIF_FIXEDSIZE = 3U,
++};
++#pragma pop_macro("LVTVIF_FIXEDSIZE")
++#pragma pop_macro("LVTVIF_FIXEDHEIGHT")
++#pragma pop_macro("LVTVIF_FIXEDWIDTH")
++#pragma pop_macro("LVTVIF_AUTOSIZE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVTVIM_TILESIZE")
++#undef LVTVIM_TILESIZE
++#pragma push_macro("LVTVIM_COLUMNS")
++#undef LVTVIM_COLUMNS
++#pragma push_macro("LVTVIM_LABELMARGIN")
++#undef LVTVIM_LABELMARGIN
++enum [[clang::flag_enum]] LVTILEVIEWINFO_MASK : unsigned int
++{
++    LVTVIM_TILESIZE = 1U,
++    LVTVIM_COLUMNS = 2U,
++    LVTVIM_LABELMARGIN = 4U,
++};
++#pragma pop_macro("LVTVIM_LABELMARGIN")
++#pragma pop_macro("LVTVIM_COLUMNS")
++#pragma pop_macro("LVTVIM_TILESIZE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PGF_SCROLLDOWN")
++#undef PGF_SCROLLDOWN
++#pragma push_macro("PGF_SCROLLLEFT")
++#undef PGF_SCROLLLEFT
++#pragma push_macro("PGF_SCROLLRIGHT")
++#undef PGF_SCROLLRIGHT
++#pragma push_macro("PGF_SCROLLUP")
++#undef PGF_SCROLLUP
++enum NMPGSCROLL_DIR : int
++{
++    PGF_SCROLLDOWN = 2,
++    PGF_SCROLLLEFT = 4,
++    PGF_SCROLLRIGHT = 8,
++    PGF_SCROLLUP = 1,
++};
++#pragma pop_macro("PGF_SCROLLUP")
++#pragma pop_macro("PGF_SCROLLRIGHT")
++#pragma pop_macro("PGF_SCROLLLEFT")
++#pragma pop_macro("PGF_SCROLLDOWN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVCF_FMT")
++#undef LVCF_FMT
++#pragma push_macro("LVCF_WIDTH")
++#undef LVCF_WIDTH
++#pragma push_macro("LVCF_TEXT")
++#undef LVCF_TEXT
++#pragma push_macro("LVCF_SUBITEM")
++#undef LVCF_SUBITEM
++#pragma push_macro("LVCF_IMAGE")
++#undef LVCF_IMAGE
++#pragma push_macro("LVCF_ORDER")
++#undef LVCF_ORDER
++#pragma push_macro("LVCF_MINWIDTH")
++#undef LVCF_MINWIDTH
++#pragma push_macro("LVCF_DEFAULTWIDTH")
++#undef LVCF_DEFAULTWIDTH
++#pragma push_macro("LVCF_IDEALWIDTH")
++#undef LVCF_IDEALWIDTH
++enum [[clang::flag_enum]] LVCOLUMNW_MASK : unsigned int
++{
++    LVCF_FMT = 1U,
++    LVCF_WIDTH = 2U,
++    LVCF_TEXT = 4U,
++    LVCF_SUBITEM = 8U,
++    LVCF_IMAGE = 16U,
++    LVCF_ORDER = 32U,
++    LVCF_MINWIDTH = 64U,
++    LVCF_DEFAULTWIDTH = 128U,
++    LVCF_IDEALWIDTH = 256U,
++};
++#pragma pop_macro("LVCF_IDEALWIDTH")
++#pragma pop_macro("LVCF_DEFAULTWIDTH")
++#pragma pop_macro("LVCF_MINWIDTH")
++#pragma pop_macro("LVCF_ORDER")
++#pragma pop_macro("LVCF_IMAGE")
++#pragma pop_macro("LVCF_SUBITEM")
++#pragma pop_macro("LVCF_TEXT")
++#pragma pop_macro("LVCF_WIDTH")
++#pragma pop_macro("LVCF_FMT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVFI_PARAM")
++#undef LVFI_PARAM
++#pragma push_macro("LVFI_PARTIAL")
++#undef LVFI_PARTIAL
++#pragma push_macro("LVFI_STRING")
++#undef LVFI_STRING
++#pragma push_macro("LVFI_SUBSTRING")
++#undef LVFI_SUBSTRING
++#pragma push_macro("LVFI_WRAP")
++#undef LVFI_WRAP
++#pragma push_macro("LVFI_NEARESTXY")
++#undef LVFI_NEARESTXY
++enum [[clang::flag_enum]] LVFINDINFOW_FLAGS : unsigned int
++{
++    LVFI_PARAM = 1U,
++    LVFI_PARTIAL = 8U,
++    LVFI_STRING = 2U,
++    LVFI_SUBSTRING = 4U,
++    LVFI_WRAP = 32U,
++    LVFI_NEARESTXY = 64U,
++};
++#pragma pop_macro("LVFI_NEARESTXY")
++#pragma pop_macro("LVFI_WRAP")
++#pragma pop_macro("LVFI_SUBSTRING")
++#pragma pop_macro("LVFI_STRING")
++#pragma pop_macro("LVFI_PARTIAL")
++#pragma pop_macro("LVFI_PARAM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("BUTTON_IMAGELIST_ALIGN_LEFT")
++#undef BUTTON_IMAGELIST_ALIGN_LEFT
++#pragma push_macro("BUTTON_IMAGELIST_ALIGN_RIGHT")
++#undef BUTTON_IMAGELIST_ALIGN_RIGHT
++#pragma push_macro("BUTTON_IMAGELIST_ALIGN_TOP")
++#undef BUTTON_IMAGELIST_ALIGN_TOP
++#pragma push_macro("BUTTON_IMAGELIST_ALIGN_BOTTOM")
++#undef BUTTON_IMAGELIST_ALIGN_BOTTOM
++#pragma push_macro("BUTTON_IMAGELIST_ALIGN_CENTER")
++#undef BUTTON_IMAGELIST_ALIGN_CENTER
++enum BUTTON_IMAGELIST_ALIGN : unsigned int
++{
++    BUTTON_IMAGELIST_ALIGN_LEFT = 0U,
++    BUTTON_IMAGELIST_ALIGN_RIGHT = 1U,
++    BUTTON_IMAGELIST_ALIGN_TOP = 2U,
++    BUTTON_IMAGELIST_ALIGN_BOTTOM = 3U,
++    BUTTON_IMAGELIST_ALIGN_CENTER = 4U,
++};
++#pragma pop_macro("BUTTON_IMAGELIST_ALIGN_CENTER")
++#pragma pop_macro("BUTTON_IMAGELIST_ALIGN_BOTTOM")
++#pragma pop_macro("BUTTON_IMAGELIST_ALIGN_TOP")
++#pragma pop_macro("BUTTON_IMAGELIST_ALIGN_RIGHT")
++#pragma pop_macro("BUTTON_IMAGELIST_ALIGN_LEFT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TBIF_BYINDEX")
++#undef TBIF_BYINDEX
++#pragma push_macro("TBIF_COMMAND")
++#undef TBIF_COMMAND
++#pragma push_macro("TBIF_IMAGE")
++#undef TBIF_IMAGE
++#pragma push_macro("TBIF_LPARAM")
++#undef TBIF_LPARAM
++#pragma push_macro("TBIF_SIZE")
++#undef TBIF_SIZE
++#pragma push_macro("TBIF_STATE")
++#undef TBIF_STATE
++#pragma push_macro("TBIF_STYLE")
++#undef TBIF_STYLE
++#pragma push_macro("TBIF_TEXT")
++#undef TBIF_TEXT
++enum [[clang::flag_enum]] TBBUTTONINFOW_MASK : unsigned int
++{
++    TBIF_BYINDEX = 2147483648U,
++    TBIF_COMMAND = 32U,
++    TBIF_IMAGE = 1U,
++    TBIF_LPARAM = 16U,
++    TBIF_SIZE = 64U,
++    TBIF_STATE = 4U,
++    TBIF_STYLE = 8U,
++    TBIF_TEXT = 2U,
++};
++#pragma pop_macro("TBIF_TEXT")
++#pragma pop_macro("TBIF_STYLE")
++#pragma pop_macro("TBIF_STATE")
++#pragma pop_macro("TBIF_SIZE")
++#pragma pop_macro("TBIF_LPARAM")
++#pragma pop_macro("TBIF_IMAGE")
++#pragma pop_macro("TBIF_COMMAND")
++#pragma pop_macro("TBIF_BYINDEX")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TBIMHT_NONE")
++#undef TBIMHT_NONE
++#pragma push_macro("TBIMHT_AFTER")
++#undef TBIMHT_AFTER
++#pragma push_macro("TBIMHT_BACKGROUND")
++#undef TBIMHT_BACKGROUND
++enum TBINSERTMARK_FLAGS : unsigned int
++{
++    TBIMHT_NONE = 0U,
++    TBIMHT_AFTER = 1U,
++    TBIMHT_BACKGROUND = 2U,
++};
++#pragma pop_macro("TBIMHT_BACKGROUND")
++#pragma pop_macro("TBIMHT_AFTER")
++#pragma pop_macro("TBIMHT_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVGF_NONE")
++#undef LVGF_NONE
++#pragma push_macro("LVGF_HEADER")
++#undef LVGF_HEADER
++#pragma push_macro("LVGF_FOOTER")
++#undef LVGF_FOOTER
++#pragma push_macro("LVGF_STATE")
++#undef LVGF_STATE
++#pragma push_macro("LVGF_ALIGN")
++#undef LVGF_ALIGN
++#pragma push_macro("LVGF_GROUPID")
++#undef LVGF_GROUPID
++#pragma push_macro("LVGF_SUBTITLE")
++#undef LVGF_SUBTITLE
++#pragma push_macro("LVGF_TASK")
++#undef LVGF_TASK
++#pragma push_macro("LVGF_DESCRIPTIONTOP")
++#undef LVGF_DESCRIPTIONTOP
++#pragma push_macro("LVGF_DESCRIPTIONBOTTOM")
++#undef LVGF_DESCRIPTIONBOTTOM
++#pragma push_macro("LVGF_TITLEIMAGE")
++#undef LVGF_TITLEIMAGE
++#pragma push_macro("LVGF_EXTENDEDIMAGE")
++#undef LVGF_EXTENDEDIMAGE
++#pragma push_macro("LVGF_ITEMS")
++#undef LVGF_ITEMS
++#pragma push_macro("LVGF_SUBSET")
++#undef LVGF_SUBSET
++#pragma push_macro("LVGF_SUBSETITEMS")
++#undef LVGF_SUBSETITEMS
++enum [[clang::flag_enum]] LVGROUP_MASK : unsigned int
++{
++    LVGF_NONE = 0U,
++    LVGF_HEADER = 1U,
++    LVGF_FOOTER = 2U,
++    LVGF_STATE = 4U,
++    LVGF_ALIGN = 8U,
++    LVGF_GROUPID = 16U,
++    LVGF_SUBTITLE = 256U,
++    LVGF_TASK = 512U,
++    LVGF_DESCRIPTIONTOP = 1024U,
++    LVGF_DESCRIPTIONBOTTOM = 2048U,
++    LVGF_TITLEIMAGE = 4096U,
++    LVGF_EXTENDEDIMAGE = 8192U,
++    LVGF_ITEMS = 16384U,
++    LVGF_SUBSET = 32768U,
++    LVGF_SUBSETITEMS = 65536U,
++};
++#pragma pop_macro("LVGF_SUBSETITEMS")
++#pragma pop_macro("LVGF_SUBSET")
++#pragma pop_macro("LVGF_ITEMS")
++#pragma pop_macro("LVGF_EXTENDEDIMAGE")
++#pragma pop_macro("LVGF_TITLEIMAGE")
++#pragma pop_macro("LVGF_DESCRIPTIONBOTTOM")
++#pragma pop_macro("LVGF_DESCRIPTIONTOP")
++#pragma pop_macro("LVGF_TASK")
++#pragma pop_macro("LVGF_SUBTITLE")
++#pragma pop_macro("LVGF_GROUPID")
++#pragma pop_macro("LVGF_ALIGN")
++#pragma pop_macro("LVGF_STATE")
++#pragma pop_macro("LVGF_FOOTER")
++#pragma pop_macro("LVGF_HEADER")
++#pragma pop_macro("LVGF_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TVHT_ABOVE")
++#undef TVHT_ABOVE
++#pragma push_macro("TVHT_BELOW")
++#undef TVHT_BELOW
++#pragma push_macro("TVHT_NOWHERE")
++#undef TVHT_NOWHERE
++#pragma push_macro("TVHT_ONITEM")
++#undef TVHT_ONITEM
++#pragma push_macro("TVHT_ONITEMBUTTON")
++#undef TVHT_ONITEMBUTTON
++#pragma push_macro("TVHT_ONITEMICON")
++#undef TVHT_ONITEMICON
++#pragma push_macro("TVHT_ONITEMINDENT")
++#undef TVHT_ONITEMINDENT
++#pragma push_macro("TVHT_ONITEMLABEL")
++#undef TVHT_ONITEMLABEL
++#pragma push_macro("TVHT_ONITEMRIGHT")
++#undef TVHT_ONITEMRIGHT
++#pragma push_macro("TVHT_ONITEMSTATEICON")
++#undef TVHT_ONITEMSTATEICON
++#pragma push_macro("TVHT_TOLEFT")
++#undef TVHT_TOLEFT
++#pragma push_macro("TVHT_TORIGHT")
++#undef TVHT_TORIGHT
++enum [[clang::flag_enum]] TVHITTESTINFO_FLAGS : unsigned int
++{
++    TVHT_ABOVE = 256U,
++    TVHT_BELOW = 512U,
++    TVHT_NOWHERE = 1U,
++    TVHT_ONITEM = 70U,
++    TVHT_ONITEMBUTTON = 16U,
++    TVHT_ONITEMICON = 2U,
++    TVHT_ONITEMINDENT = 8U,
++    TVHT_ONITEMLABEL = 4U,
++    TVHT_ONITEMRIGHT = 32U,
++    TVHT_ONITEMSTATEICON = 64U,
++    TVHT_TOLEFT = 2048U,
++    TVHT_TORIGHT = 1024U,
++};
++#pragma pop_macro("TVHT_TORIGHT")
++#pragma pop_macro("TVHT_TOLEFT")
++#pragma pop_macro("TVHT_ONITEMSTATEICON")
++#pragma pop_macro("TVHT_ONITEMRIGHT")
++#pragma pop_macro("TVHT_ONITEMLABEL")
++#pragma pop_macro("TVHT_ONITEMINDENT")
++#pragma pop_macro("TVHT_ONITEMICON")
++#pragma pop_macro("TVHT_ONITEMBUTTON")
++#pragma pop_macro("TVHT_ONITEM")
++#pragma pop_macro("TVHT_NOWHERE")
++#pragma pop_macro("TVHT_BELOW")
++#pragma pop_macro("TVHT_ABOVE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PGF_CALCHEIGHT")
++#undef PGF_CALCHEIGHT
++#pragma push_macro("PGF_CALCWIDTH")
++#undef PGF_CALCWIDTH
++enum NMPGCALCSIZE_FLAGS : unsigned int
++{
++    PGF_CALCHEIGHT = 2U,
++    PGF_CALCWIDTH = 1U,
++};
++#pragma pop_macro("PGF_CALCWIDTH")
++#pragma pop_macro("PGF_CALCHEIGHT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("MCGIF_DATE")
++#undef MCGIF_DATE
++#pragma push_macro("MCGIF_RECT")
++#undef MCGIF_RECT
++#pragma push_macro("MCGIF_NAME")
++#undef MCGIF_NAME
++enum [[clang::flag_enum]] MCGRIDINFO_FLAGS : unsigned int
++{
++    MCGIF_DATE = 1U,
++    MCGIF_RECT = 2U,
++    MCGIF_NAME = 4U,
++};
++#pragma pop_macro("MCGIF_NAME")
++#pragma pop_macro("MCGIF_RECT")
++#pragma pop_macro("MCGIF_DATE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVHT_ABOVE")
++#undef LVHT_ABOVE
++#pragma push_macro("LVHT_BELOW")
++#undef LVHT_BELOW
++#pragma push_macro("LVHT_NOWHERE")
++#undef LVHT_NOWHERE
++#pragma push_macro("LVHT_ONITEMICON")
++#undef LVHT_ONITEMICON
++#pragma push_macro("LVHT_ONITEMLABEL")
++#undef LVHT_ONITEMLABEL
++#pragma push_macro("LVHT_ONITEMSTATEICON")
++#undef LVHT_ONITEMSTATEICON
++#pragma push_macro("LVHT_TOLEFT")
++#undef LVHT_TOLEFT
++#pragma push_macro("LVHT_TORIGHT")
++#undef LVHT_TORIGHT
++#pragma push_macro("LVHT_EX_GROUP_HEADER")
++#undef LVHT_EX_GROUP_HEADER
++#pragma push_macro("LVHT_EX_GROUP_FOOTER")
++#undef LVHT_EX_GROUP_FOOTER
++#pragma push_macro("LVHT_EX_GROUP_COLLAPSE")
++#undef LVHT_EX_GROUP_COLLAPSE
++#pragma push_macro("LVHT_EX_GROUP_BACKGROUND")
++#undef LVHT_EX_GROUP_BACKGROUND
++#pragma push_macro("LVHT_EX_GROUP_STATEICON")
++#undef LVHT_EX_GROUP_STATEICON
++#pragma push_macro("LVHT_EX_GROUP_SUBSETLINK")
++#undef LVHT_EX_GROUP_SUBSETLINK
++#pragma push_macro("LVHT_EX_GROUP")
++#undef LVHT_EX_GROUP
++#pragma push_macro("LVHT_EX_ONCONTENTS")
++#undef LVHT_EX_ONCONTENTS
++#pragma push_macro("LVHT_EX_FOOTER")
++#undef LVHT_EX_FOOTER
++enum [[clang::flag_enum]] LVHITTESTINFO_FLAGS : unsigned int
++{
++    LVHT_ABOVE = 8U,
++    LVHT_BELOW = 16U,
++    LVHT_NOWHERE = 1U,
++    LVHT_ONITEMICON = 2U,
++    LVHT_ONITEMLABEL = 4U,
++    LVHT_ONITEMSTATEICON = 8U,
++    LVHT_TOLEFT = 64U,
++    LVHT_TORIGHT = 32U,
++    LVHT_EX_GROUP_HEADER = 268435456U,
++    LVHT_EX_GROUP_FOOTER = 536870912U,
++    LVHT_EX_GROUP_COLLAPSE = 1073741824U,
++    LVHT_EX_GROUP_BACKGROUND = 2147483648U,
++    LVHT_EX_GROUP_STATEICON = 16777216U,
++    LVHT_EX_GROUP_SUBSETLINK = 33554432U,
++    LVHT_EX_GROUP = 4076863488U,
++    LVHT_EX_ONCONTENTS = 67108864U,
++    LVHT_EX_FOOTER = 134217728U,
++};
++#pragma pop_macro("LVHT_EX_FOOTER")
++#pragma pop_macro("LVHT_EX_ONCONTENTS")
++#pragma pop_macro("LVHT_EX_GROUP")
++#pragma pop_macro("LVHT_EX_GROUP_SUBSETLINK")
++#pragma pop_macro("LVHT_EX_GROUP_STATEICON")
++#pragma pop_macro("LVHT_EX_GROUP_BACKGROUND")
++#pragma pop_macro("LVHT_EX_GROUP_COLLAPSE")
++#pragma pop_macro("LVHT_EX_GROUP_FOOTER")
++#pragma pop_macro("LVHT_EX_GROUP_HEADER")
++#pragma pop_macro("LVHT_TORIGHT")
++#pragma pop_macro("LVHT_TOLEFT")
++#pragma pop_macro("LVHT_ONITEMSTATEICON")
++#pragma pop_macro("LVHT_ONITEMLABEL")
++#pragma pop_macro("LVHT_ONITEMICON")
++#pragma pop_macro("LVHT_NOWHERE")
++#pragma pop_macro("LVHT_BELOW")
++#pragma pop_macro("LVHT_ABOVE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ICC_ANIMATE_CLASS")
++#undef ICC_ANIMATE_CLASS
++#pragma push_macro("ICC_BAR_CLASSES")
++#undef ICC_BAR_CLASSES
++#pragma push_macro("ICC_COOL_CLASSES")
++#undef ICC_COOL_CLASSES
++#pragma push_macro("ICC_DATE_CLASSES")
++#undef ICC_DATE_CLASSES
++#pragma push_macro("ICC_HOTKEY_CLASS")
++#undef ICC_HOTKEY_CLASS
++#pragma push_macro("ICC_INTERNET_CLASSES")
++#undef ICC_INTERNET_CLASSES
++#pragma push_macro("ICC_LINK_CLASS")
++#undef ICC_LINK_CLASS
++#pragma push_macro("ICC_LISTVIEW_CLASSES")
++#undef ICC_LISTVIEW_CLASSES
++#pragma push_macro("ICC_NATIVEFNTCTL_CLASS")
++#undef ICC_NATIVEFNTCTL_CLASS
++#pragma push_macro("ICC_PAGESCROLLER_CLASS")
++#undef ICC_PAGESCROLLER_CLASS
++#pragma push_macro("ICC_PROGRESS_CLASS")
++#undef ICC_PROGRESS_CLASS
++#pragma push_macro("ICC_STANDARD_CLASSES")
++#undef ICC_STANDARD_CLASSES
++#pragma push_macro("ICC_TAB_CLASSES")
++#undef ICC_TAB_CLASSES
++#pragma push_macro("ICC_TREEVIEW_CLASSES")
++#undef ICC_TREEVIEW_CLASSES
++#pragma push_macro("ICC_UPDOWN_CLASS")
++#undef ICC_UPDOWN_CLASS
++#pragma push_macro("ICC_USEREX_CLASSES")
++#undef ICC_USEREX_CLASSES
++#pragma push_macro("ICC_WIN95_CLASSES")
++#undef ICC_WIN95_CLASSES
++enum [[clang::flag_enum]] INITCOMMONCONTROLSEX_ICC : unsigned int
++{
++    ICC_ANIMATE_CLASS = 128U,
++    ICC_BAR_CLASSES = 4U,
++    ICC_COOL_CLASSES = 1024U,
++    ICC_DATE_CLASSES = 256U,
++    ICC_HOTKEY_CLASS = 64U,
++    ICC_INTERNET_CLASSES = 2048U,
++    ICC_LINK_CLASS = 32768U,
++    ICC_LISTVIEW_CLASSES = 1U,
++    ICC_NATIVEFNTCTL_CLASS = 8192U,
++    ICC_PAGESCROLLER_CLASS = 4096U,
++    ICC_PROGRESS_CLASS = 32U,
++    ICC_STANDARD_CLASSES = 16384U,
++    ICC_TAB_CLASSES = 8U,
++    ICC_TREEVIEW_CLASSES = 2U,
++    ICC_UPDOWN_CLASS = 16U,
++    ICC_USEREX_CLASSES = 512U,
++    ICC_WIN95_CLASSES = 255U,
++};
++#pragma pop_macro("ICC_WIN95_CLASSES")
++#pragma pop_macro("ICC_USEREX_CLASSES")
++#pragma pop_macro("ICC_UPDOWN_CLASS")
++#pragma pop_macro("ICC_TREEVIEW_CLASSES")
++#pragma pop_macro("ICC_TAB_CLASSES")
++#pragma pop_macro("ICC_STANDARD_CLASSES")
++#pragma pop_macro("ICC_PROGRESS_CLASS")
++#pragma pop_macro("ICC_PAGESCROLLER_CLASS")
++#pragma pop_macro("ICC_NATIVEFNTCTL_CLASS")
++#pragma pop_macro("ICC_LISTVIEW_CLASSES")
++#pragma pop_macro("ICC_LINK_CLASS")
++#pragma pop_macro("ICC_INTERNET_CLASSES")
++#pragma pop_macro("ICC_HOTKEY_CLASS")
++#pragma pop_macro("ICC_DATE_CLASSES")
++#pragma pop_macro("ICC_COOL_CLASSES")
++#pragma pop_macro("ICC_BAR_CLASSES")
++#pragma pop_macro("ICC_ANIMATE_CLASS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVCDI_ITEM")
++#undef LVCDI_ITEM
++#pragma push_macro("LVCDI_GROUP")
++#undef LVCDI_GROUP
++#pragma push_macro("LVCDI_ITEMSLIST")
++#undef LVCDI_ITEMSLIST
++enum NMLVCUSTOMDRAW_ITEM_TYPE : unsigned int
++{
++    LVCDI_ITEM = 0U,
++    LVCDI_GROUP = 1U,
++    LVCDI_ITEMSLIST = 2U,
++};
++#pragma pop_macro("LVCDI_ITEMSLIST")
++#pragma pop_macro("LVCDI_GROUP")
++#pragma pop_macro("LVCDI_ITEM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TBNF_IMAGE")
++#undef TBNF_IMAGE
++#pragma push_macro("TBNF_TEXT")
++#undef TBNF_TEXT
++#pragma push_macro("TBNF_DI_SETITEM")
++#undef TBNF_DI_SETITEM
++enum [[clang::flag_enum]] NMTBDISPINFOW_MASK : unsigned int
++{
++    TBNF_IMAGE = 1U,
++    TBNF_TEXT = 2U,
++    TBNF_DI_SETITEM = 268435456U,
++};
++#pragma pop_macro("TBNF_DI_SETITEM")
++#pragma pop_macro("TBNF_TEXT")
++#pragma pop_macro("TBNF_IMAGE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("EMF_CENTERED")
++#undef EMF_CENTERED
++enum NMLVEMPTYMARKUP_FLAGS : unsigned int
++{
++    EMF_CENTERED = 1U,
++};
++#pragma pop_macro("EMF_CENTERED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVFIF_TEXT")
++#undef LVFIF_TEXT
++#pragma push_macro("LVFIF_STATE")
++#undef LVFIF_STATE
++enum LVFOOTERITEM_MASK : unsigned int
++{
++    LVFIF_TEXT = 1U,
++    LVFIF_STATE = 2U,
++};
++#pragma pop_macro("LVFIF_STATE")
++#pragma pop_macro("LVFIF_TEXT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ILC_MASK")
++#undef ILC_MASK
++#pragma push_macro("ILC_COLOR")
++#undef ILC_COLOR
++#pragma push_macro("ILC_COLORDDB")
++#undef ILC_COLORDDB
++#pragma push_macro("ILC_COLOR4")
++#undef ILC_COLOR4
++#pragma push_macro("ILC_COLOR8")
++#undef ILC_COLOR8
++#pragma push_macro("ILC_COLOR16")
++#undef ILC_COLOR16
++#pragma push_macro("ILC_COLOR24")
++#undef ILC_COLOR24
++#pragma push_macro("ILC_COLOR32")
++#undef ILC_COLOR32
++#pragma push_macro("ILC_PALETTE")
++#undef ILC_PALETTE
++#pragma push_macro("ILC_MIRROR")
++#undef ILC_MIRROR
++#pragma push_macro("ILC_PERITEMMIRROR")
++#undef ILC_PERITEMMIRROR
++#pragma push_macro("ILC_ORIGINALSIZE")
++#undef ILC_ORIGINALSIZE
++#pragma push_macro("ILC_HIGHQUALITYSCALE")
++#undef ILC_HIGHQUALITYSCALE
++enum [[clang::flag_enum]] IMAGELIST_CREATION_FLAGS : unsigned int
++{
++    ILC_MASK = 1U,
++    ILC_COLOR = 0U,
++    ILC_COLORDDB = 254U,
++    ILC_COLOR4 = 4U,
++    ILC_COLOR8 = 8U,
++    ILC_COLOR16 = 16U,
++    ILC_COLOR24 = 24U,
++    ILC_COLOR32 = 32U,
++    ILC_PALETTE = 2048U,
++    ILC_MIRROR = 8192U,
++    ILC_PERITEMMIRROR = 32768U,
++    ILC_ORIGINALSIZE = 65536U,
++    ILC_HIGHQUALITYSCALE = 131072U,
++};
++#pragma pop_macro("ILC_HIGHQUALITYSCALE")
++#pragma pop_macro("ILC_ORIGINALSIZE")
++#pragma pop_macro("ILC_PERITEMMIRROR")
++#pragma pop_macro("ILC_MIRROR")
++#pragma pop_macro("ILC_PALETTE")
++#pragma pop_macro("ILC_COLOR32")
++#pragma pop_macro("ILC_COLOR24")
++#pragma pop_macro("ILC_COLOR16")
++#pragma pop_macro("ILC_COLOR8")
++#pragma pop_macro("ILC_COLOR4")
++#pragma pop_macro("ILC_COLORDDB")
++#pragma pop_macro("ILC_COLOR")
++#pragma pop_macro("ILC_MASK")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVGIT_UNFOLDED")
++#undef LVGIT_UNFOLDED
++#pragma push_macro("LVGIT_ZERO")
++#undef LVGIT_ZERO
++enum NMLVGETINFOTIP_FLAGS : unsigned int
++{
++    LVGIT_UNFOLDED = 1U,
++    LVGIT_ZERO = 0U,
++};
++#pragma pop_macro("LVGIT_ZERO")
++#pragma pop_macro("LVGIT_UNFOLDED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVIS_FOCUSED")
++#undef LVIS_FOCUSED
++#pragma push_macro("LVIS_SELECTED")
++#undef LVIS_SELECTED
++#pragma push_macro("LVIS_CUT")
++#undef LVIS_CUT
++#pragma push_macro("LVIS_DROPHILITED")
++#undef LVIS_DROPHILITED
++#pragma push_macro("LVIS_GLOW")
++#undef LVIS_GLOW
++#pragma push_macro("LVIS_ACTIVATING")
++#undef LVIS_ACTIVATING
++#pragma push_macro("LVIS_OVERLAYMASK")
++#undef LVIS_OVERLAYMASK
++#pragma push_macro("LVIS_STATEIMAGEMASK")
++#undef LVIS_STATEIMAGEMASK
++enum LIST_VIEW_ITEM_STATE_FLAGS : unsigned int
++{
++    LVIS_FOCUSED = 1U,
++    LVIS_SELECTED = 2U,
++    LVIS_CUT = 4U,
++    LVIS_DROPHILITED = 8U,
++    LVIS_GLOW = 16U,
++    LVIS_ACTIVATING = 32U,
++    LVIS_OVERLAYMASK = 3840U,
++    LVIS_STATEIMAGEMASK = 61440U,
++};
++#pragma pop_macro("LVIS_STATEIMAGEMASK")
++#pragma pop_macro("LVIS_OVERLAYMASK")
++#pragma pop_macro("LVIS_ACTIVATING")
++#pragma pop_macro("LVIS_GLOW")
++#pragma pop_macro("LVIS_DROPHILITED")
++#pragma pop_macro("LVIS_CUT")
++#pragma pop_macro("LVIS_SELECTED")
++#pragma pop_macro("LVIS_FOCUSED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TVE_COLLAPSE")
++#undef TVE_COLLAPSE
++#pragma push_macro("TVE_EXPAND")
++#undef TVE_EXPAND
++#pragma push_macro("TVE_TOGGLE")
++#undef TVE_TOGGLE
++#pragma push_macro("TVE_EXPANDPARTIAL")
++#undef TVE_EXPANDPARTIAL
++#pragma push_macro("TVE_COLLAPSERESET")
++#undef TVE_COLLAPSERESET
++#pragma push_macro("TVC_UNKNOWN")
++#undef TVC_UNKNOWN
++#pragma push_macro("TVC_BYMOUSE")
++#undef TVC_BYMOUSE
++#pragma push_macro("TVC_BYKEYBOARD")
++#undef TVC_BYKEYBOARD
++enum [[clang::flag_enum]] NM_TREEVIEW_ACTION : unsigned int
++{
++    TVE_COLLAPSE = 1U,
++    TVE_EXPAND = 2U,
++    TVE_TOGGLE = 3U,
++    TVE_EXPANDPARTIAL = 16384U,
++    TVE_COLLAPSERESET = 32768U,
++    TVC_UNKNOWN = 0U,
++    TVC_BYMOUSE = 1U,
++    TVC_BYKEYBOARD = 2U,
++};
++#pragma pop_macro("TVC_BYKEYBOARD")
++#pragma pop_macro("TVC_BYMOUSE")
++#pragma pop_macro("TVC_UNKNOWN")
++#pragma pop_macro("TVE_COLLAPSERESET")
++#pragma pop_macro("TVE_EXPANDPARTIAL")
++#pragma pop_macro("TVE_TOGGLE")
++#pragma pop_macro("TVE_EXPAND")
++#pragma pop_macro("TVE_COLLAPSE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("MCMV_MONTH")
++#undef MCMV_MONTH
++#pragma push_macro("MCMV_YEAR")
++#undef MCMV_YEAR
++#pragma push_macro("MCMV_DECADE")
++#undef MCMV_DECADE
++#pragma push_macro("MCMV_CENTURY")
++#undef MCMV_CENTURY
++#pragma push_macro("MCMV_MAX")
++#undef MCMV_MAX
++enum MONTH_CALDENDAR_MESSAGES_VIEW : unsigned int
++{
++    MCMV_MONTH = 0U,
++    MCMV_YEAR = 1U,
++    MCMV_DECADE = 2U,
++    MCMV_CENTURY = 3U,
++    MCMV_MAX = 3U,
++};
++#pragma pop_macro("MCMV_MAX")
++#pragma pop_macro("MCMV_CENTURY")
++#pragma pop_macro("MCMV_DECADE")
++#pragma pop_macro("MCMV_YEAR")
++#pragma pop_macro("MCMV_MONTH")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TCIS_BUTTONPRESSED")
++#undef TCIS_BUTTONPRESSED
++#pragma push_macro("TCIS_HIGHLIGHTED")
++#undef TCIS_HIGHLIGHTED
++enum TAB_CONTROL_ITEM_STATE : unsigned int
++{
++    TCIS_BUTTONPRESSED = 1U,
++    TCIS_HIGHLIGHTED = 2U,
++};
++#pragma pop_macro("TCIS_HIGHLIGHTED")
++#pragma pop_macro("TCIS_BUTTONPRESSED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TVIS_SELECTED")
++#undef TVIS_SELECTED
++#pragma push_macro("TVIS_CUT")
++#undef TVIS_CUT
++#pragma push_macro("TVIS_DROPHILITED")
++#undef TVIS_DROPHILITED
++#pragma push_macro("TVIS_BOLD")
++#undef TVIS_BOLD
++#pragma push_macro("TVIS_EXPANDED")
++#undef TVIS_EXPANDED
++#pragma push_macro("TVIS_EXPANDEDONCE")
++#undef TVIS_EXPANDEDONCE
++#pragma push_macro("TVIS_EXPANDPARTIAL")
++#undef TVIS_EXPANDPARTIAL
++#pragma push_macro("TVIS_OVERLAYMASK")
++#undef TVIS_OVERLAYMASK
++#pragma push_macro("TVIS_STATEIMAGEMASK")
++#undef TVIS_STATEIMAGEMASK
++#pragma push_macro("TVIS_USERMASK")
++#undef TVIS_USERMASK
++#pragma push_macro("TVIS_EX_FLAT")
++#undef TVIS_EX_FLAT
++#pragma push_macro("TVIS_EX_DISABLED")
++#undef TVIS_EX_DISABLED
++#pragma push_macro("TVIS_EX_ALL")
++#undef TVIS_EX_ALL
++enum TREE_VIEW_ITEM_STATE_FLAGS : unsigned int
++{
++    TVIS_SELECTED = 2U,
++    TVIS_CUT = 4U,
++    TVIS_DROPHILITED = 8U,
++    TVIS_BOLD = 16U,
++    TVIS_EXPANDED = 32U,
++    TVIS_EXPANDEDONCE = 64U,
++    TVIS_EXPANDPARTIAL = 128U,
++    TVIS_OVERLAYMASK = 3840U,
++    TVIS_STATEIMAGEMASK = 61440U,
++    TVIS_USERMASK = 61440U,
++    TVIS_EX_FLAT = 1U,
++    TVIS_EX_DISABLED = 2U,
++    TVIS_EX_ALL = 2U,
++};
++#pragma pop_macro("TVIS_EX_ALL")
++#pragma pop_macro("TVIS_EX_DISABLED")
++#pragma pop_macro("TVIS_EX_FLAT")
++#pragma pop_macro("TVIS_USERMASK")
++#pragma pop_macro("TVIS_STATEIMAGEMASK")
++#pragma pop_macro("TVIS_OVERLAYMASK")
++#pragma pop_macro("TVIS_EXPANDPARTIAL")
++#pragma pop_macro("TVIS_EXPANDEDONCE")
++#pragma pop_macro("TVIS_EXPANDED")
++#pragma pop_macro("TVIS_BOLD")
++#pragma pop_macro("TVIS_DROPHILITED")
++#pragma pop_macro("TVIS_CUT")
++#pragma pop_macro("TVIS_SELECTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HDF_LEFT")
++#undef HDF_LEFT
++#pragma push_macro("HDF_RIGHT")
++#undef HDF_RIGHT
++#pragma push_macro("HDF_CENTER")
++#undef HDF_CENTER
++#pragma push_macro("HDF_JUSTIFYMASK")
++#undef HDF_JUSTIFYMASK
++#pragma push_macro("HDF_RTLREADING")
++#undef HDF_RTLREADING
++#pragma push_macro("HDF_BITMAP")
++#undef HDF_BITMAP
++#pragma push_macro("HDF_STRING")
++#undef HDF_STRING
++#pragma push_macro("HDF_OWNERDRAW")
++#undef HDF_OWNERDRAW
++#pragma push_macro("HDF_IMAGE")
++#undef HDF_IMAGE
++#pragma push_macro("HDF_BITMAP_ON_RIGHT")
++#undef HDF_BITMAP_ON_RIGHT
++#pragma push_macro("HDF_SORTUP")
++#undef HDF_SORTUP
++#pragma push_macro("HDF_SORTDOWN")
++#undef HDF_SORTDOWN
++#pragma push_macro("HDF_CHECKBOX")
++#undef HDF_CHECKBOX
++#pragma push_macro("HDF_CHECKED")
++#undef HDF_CHECKED
++#pragma push_macro("HDF_FIXEDWIDTH")
++#undef HDF_FIXEDWIDTH
++#pragma push_macro("HDF_SPLITBUTTON")
++#undef HDF_SPLITBUTTON
++enum HEADER_CONTROL_FORMAT_FLAGS : int
++{
++    HDF_LEFT = 0,
++    HDF_RIGHT = 1,
++    HDF_CENTER = 2,
++    HDF_JUSTIFYMASK = 3,
++    HDF_RTLREADING = 4,
++    HDF_BITMAP = 8192,
++    HDF_STRING = 16384,
++    HDF_OWNERDRAW = 32768,
++    HDF_IMAGE = 2048,
++    HDF_BITMAP_ON_RIGHT = 4096,
++    HDF_SORTUP = 1024,
++    HDF_SORTDOWN = 512,
++    HDF_CHECKBOX = 64,
++    HDF_CHECKED = 128,
++    HDF_FIXEDWIDTH = 256,
++    HDF_SPLITBUTTON = 16777216,
++};
++#pragma pop_macro("HDF_SPLITBUTTON")
++#pragma pop_macro("HDF_FIXEDWIDTH")
++#pragma pop_macro("HDF_CHECKED")
++#pragma pop_macro("HDF_CHECKBOX")
++#pragma pop_macro("HDF_SORTDOWN")
++#pragma pop_macro("HDF_SORTUP")
++#pragma pop_macro("HDF_BITMAP_ON_RIGHT")
++#pragma pop_macro("HDF_IMAGE")
++#pragma pop_macro("HDF_OWNERDRAW")
++#pragma pop_macro("HDF_STRING")
++#pragma pop_macro("HDF_BITMAP")
++#pragma pop_macro("HDF_RTLREADING")
++#pragma pop_macro("HDF_JUSTIFYMASK")
++#pragma pop_macro("HDF_CENTER")
++#pragma pop_macro("HDF_RIGHT")
++#pragma pop_macro("HDF_LEFT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HDFT_ISSTRING")
++#undef HDFT_ISSTRING
++#pragma push_macro("HDFT_ISNUMBER")
++#undef HDFT_ISNUMBER
++#pragma push_macro("HDFT_ISDATE")
++#undef HDFT_ISDATE
++#pragma push_macro("HDFT_HASNOVALUE")
++#undef HDFT_HASNOVALUE
++enum HEADER_CONTROL_FORMAT_TYPE : unsigned int
++{
++    HDFT_ISSTRING = 0U,
++    HDFT_ISNUMBER = 1U,
++    HDFT_ISDATE = 2U,
++    HDFT_HASNOVALUE = 32768U,
++};
++#pragma pop_macro("HDFT_HASNOVALUE")
++#pragma pop_macro("HDFT_ISDATE")
++#pragma pop_macro("HDFT_ISNUMBER")
++#pragma pop_macro("HDFT_ISSTRING")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HDIS_FOCUSED")
++#undef HDIS_FOCUSED
++enum HEADER_CONTROL_FORMAT_STATE : unsigned int
++{
++    HDIS_FOCUSED = 1U,
++};
++#pragma pop_macro("HDIS_FOCUSED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HHT_NOWHERE")
++#undef HHT_NOWHERE
++#pragma push_macro("HHT_ONHEADER")
++#undef HHT_ONHEADER
++#pragma push_macro("HHT_ONDIVIDER")
++#undef HHT_ONDIVIDER
++#pragma push_macro("HHT_ONDIVOPEN")
++#undef HHT_ONDIVOPEN
++#pragma push_macro("HHT_ONFILTER")
++#undef HHT_ONFILTER
++#pragma push_macro("HHT_ONFILTERBUTTON")
++#undef HHT_ONFILTERBUTTON
++#pragma push_macro("HHT_ABOVE")
++#undef HHT_ABOVE
++#pragma push_macro("HHT_BELOW")
++#undef HHT_BELOW
++#pragma push_macro("HHT_TORIGHT")
++#undef HHT_TORIGHT
++#pragma push_macro("HHT_TOLEFT")
++#undef HHT_TOLEFT
++#pragma push_macro("HHT_ONITEMSTATEICON")
++#undef HHT_ONITEMSTATEICON
++#pragma push_macro("HHT_ONDROPDOWN")
++#undef HHT_ONDROPDOWN
++#pragma push_macro("HHT_ONOVERFLOW")
++#undef HHT_ONOVERFLOW
++enum [[clang::flag_enum]] HEADER_HITTEST_INFO_FLAGS : unsigned int
++{
++    HHT_NOWHERE = 1U,
++    HHT_ONHEADER = 2U,
++    HHT_ONDIVIDER = 4U,
++    HHT_ONDIVOPEN = 8U,
++    HHT_ONFILTER = 16U,
++    HHT_ONFILTERBUTTON = 32U,
++    HHT_ABOVE = 256U,
++    HHT_BELOW = 512U,
++    HHT_TORIGHT = 1024U,
++    HHT_TOLEFT = 2048U,
++    HHT_ONITEMSTATEICON = 4096U,
++    HHT_ONDROPDOWN = 8192U,
++    HHT_ONOVERFLOW = 16384U,
++};
++#pragma pop_macro("HHT_ONOVERFLOW")
++#pragma pop_macro("HHT_ONDROPDOWN")
++#pragma pop_macro("HHT_ONITEMSTATEICON")
++#pragma pop_macro("HHT_TOLEFT")
++#pragma pop_macro("HHT_TORIGHT")
++#pragma pop_macro("HHT_BELOW")
++#pragma pop_macro("HHT_ABOVE")
++#pragma pop_macro("HHT_ONFILTERBUTTON")
++#pragma pop_macro("HHT_ONFILTER")
++#pragma pop_macro("HHT_ONDIVOPEN")
++#pragma pop_macro("HHT_ONDIVIDER")
++#pragma pop_macro("HHT_ONHEADER")
++#pragma pop_macro("HHT_NOWHERE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ILP_NORMAL")
++#undef ILP_NORMAL
++#pragma push_macro("ILP_DOWNLEVEL")
++#undef ILP_DOWNLEVEL
++enum [[clang::flag_enum]] IMAGE_LIST_WRITE_STREAM_FLAGS : unsigned int
++{
++    ILP_NORMAL = 0U,
++    ILP_DOWNLEVEL = 1U,
++};
++#pragma pop_macro("ILP_DOWNLEVEL")
++#pragma pop_macro("ILP_NORMAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LIF_ITEMINDEX")
++#undef LIF_ITEMINDEX
++#pragma push_macro("LIF_STATE")
++#undef LIF_STATE
++#pragma push_macro("LIF_ITEMID")
++#undef LIF_ITEMID
++#pragma push_macro("LIF_URL")
++#undef LIF_URL
++enum [[clang::flag_enum]] LIST_ITEM_FLAGS : unsigned int
++{
++    LIF_ITEMINDEX = 1U,
++    LIF_STATE = 2U,
++    LIF_ITEMID = 4U,
++    LIF_URL = 8U,
++};
++#pragma pop_macro("LIF_URL")
++#pragma pop_macro("LIF_ITEMID")
++#pragma pop_macro("LIF_STATE")
++#pragma pop_macro("LIF_ITEMINDEX")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LIS_FOCUSED")
++#undef LIS_FOCUSED
++#pragma push_macro("LIS_ENABLED")
++#undef LIS_ENABLED
++#pragma push_macro("LIS_VISITED")
++#undef LIS_VISITED
++#pragma push_macro("LIS_HOTTRACK")
++#undef LIS_HOTTRACK
++#pragma push_macro("LIS_DEFAULTCOLORS")
++#undef LIS_DEFAULTCOLORS
++enum [[clang::flag_enum]] LIST_ITEM_STATE_FLAGS : unsigned int
++{
++    LIS_FOCUSED = 1U,
++    LIS_ENABLED = 2U,
++    LIS_VISITED = 4U,
++    LIS_HOTTRACK = 8U,
++    LIS_DEFAULTCOLORS = 16U,
++};
++#pragma pop_macro("LIS_DEFAULTCOLORS")
++#pragma pop_macro("LIS_HOTTRACK")
++#pragma pop_macro("LIS_VISITED")
++#pragma pop_macro("LIS_ENABLED")
++#pragma pop_macro("LIS_FOCUSED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVBKIF_SOURCE_NONE")
++#undef LVBKIF_SOURCE_NONE
++#pragma push_macro("LVBKIF_SOURCE_HBITMAP")
++#undef LVBKIF_SOURCE_HBITMAP
++#pragma push_macro("LVBKIF_SOURCE_URL")
++#undef LVBKIF_SOURCE_URL
++#pragma push_macro("LVBKIF_SOURCE_MASK")
++#undef LVBKIF_SOURCE_MASK
++#pragma push_macro("LVBKIF_STYLE_NORMAL")
++#undef LVBKIF_STYLE_NORMAL
++#pragma push_macro("LVBKIF_STYLE_TILE")
++#undef LVBKIF_STYLE_TILE
++#pragma push_macro("LVBKIF_STYLE_MASK")
++#undef LVBKIF_STYLE_MASK
++#pragma push_macro("LVBKIF_FLAG_TILEOFFSET")
++#undef LVBKIF_FLAG_TILEOFFSET
++#pragma push_macro("LVBKIF_TYPE_WATERMARK")
++#undef LVBKIF_TYPE_WATERMARK
++#pragma push_macro("LVBKIF_FLAG_ALPHABLEND")
++#undef LVBKIF_FLAG_ALPHABLEND
++enum [[clang::flag_enum]] LIST_VIEW_BACKGROUND_IMAGE_FLAGS : unsigned int
++{
++    LVBKIF_SOURCE_NONE = 0U,
++    LVBKIF_SOURCE_HBITMAP = 1U,
++    LVBKIF_SOURCE_URL = 2U,
++    LVBKIF_SOURCE_MASK = 3U,
++    LVBKIF_STYLE_NORMAL = 0U,
++    LVBKIF_STYLE_TILE = 16U,
++    LVBKIF_STYLE_MASK = 16U,
++    LVBKIF_FLAG_TILEOFFSET = 256U,
++    LVBKIF_TYPE_WATERMARK = 268435456U,
++    LVBKIF_FLAG_ALPHABLEND = 536870912U,
++};
++#pragma pop_macro("LVBKIF_FLAG_ALPHABLEND")
++#pragma pop_macro("LVBKIF_TYPE_WATERMARK")
++#pragma pop_macro("LVBKIF_FLAG_TILEOFFSET")
++#pragma pop_macro("LVBKIF_STYLE_MASK")
++#pragma pop_macro("LVBKIF_STYLE_TILE")
++#pragma pop_macro("LVBKIF_STYLE_NORMAL")
++#pragma pop_macro("LVBKIF_SOURCE_MASK")
++#pragma pop_macro("LVBKIF_SOURCE_URL")
++#pragma pop_macro("LVBKIF_SOURCE_HBITMAP")
++#pragma pop_macro("LVBKIF_SOURCE_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVGS_NORMAL")
++#undef LVGS_NORMAL
++#pragma push_macro("LVGS_COLLAPSED")
++#undef LVGS_COLLAPSED
++#pragma push_macro("LVGS_HIDDEN")
++#undef LVGS_HIDDEN
++#pragma push_macro("LVGS_NOHEADER")
++#undef LVGS_NOHEADER
++#pragma push_macro("LVGS_COLLAPSIBLE")
++#undef LVGS_COLLAPSIBLE
++#pragma push_macro("LVGS_FOCUSED")
++#undef LVGS_FOCUSED
++#pragma push_macro("LVGS_SELECTED")
++#undef LVGS_SELECTED
++#pragma push_macro("LVGS_SUBSETED")
++#undef LVGS_SUBSETED
++#pragma push_macro("LVGS_SUBSETLINKFOCUSED")
++#undef LVGS_SUBSETLINKFOCUSED
++enum [[clang::flag_enum]] LIST_VIEW_GROUP_STATE_FLAGS : unsigned int
++{
++    LVGS_NORMAL = 0U,
++    LVGS_COLLAPSED = 1U,
++    LVGS_HIDDEN = 2U,
++    LVGS_NOHEADER = 4U,
++    LVGS_COLLAPSIBLE = 8U,
++    LVGS_FOCUSED = 16U,
++    LVGS_SELECTED = 32U,
++    LVGS_SUBSETED = 64U,
++    LVGS_SUBSETLINKFOCUSED = 128U,
++};
++#pragma pop_macro("LVGS_SUBSETLINKFOCUSED")
++#pragma pop_macro("LVGS_SUBSETED")
++#pragma pop_macro("LVGS_SELECTED")
++#pragma pop_macro("LVGS_FOCUSED")
++#pragma pop_macro("LVGS_COLLAPSIBLE")
++#pragma pop_macro("LVGS_NOHEADER")
++#pragma pop_macro("LVGS_HIDDEN")
++#pragma pop_macro("LVGS_COLLAPSED")
++#pragma pop_macro("LVGS_NORMAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVGA_HEADER_LEFT")
++#undef LVGA_HEADER_LEFT
++#pragma push_macro("LVGA_HEADER_CENTER")
++#undef LVGA_HEADER_CENTER
++#pragma push_macro("LVGA_HEADER_RIGHT")
++#undef LVGA_HEADER_RIGHT
++#pragma push_macro("LVGA_FOOTER_LEFT")
++#undef LVGA_FOOTER_LEFT
++#pragma push_macro("LVGA_FOOTER_CENTER")
++#undef LVGA_FOOTER_CENTER
++#pragma push_macro("LVGA_FOOTER_RIGHT")
++#undef LVGA_FOOTER_RIGHT
++enum [[clang::flag_enum]] LIST_VIEW_GROUP_ALIGN_FLAGS : unsigned int
++{
++    LVGA_HEADER_LEFT = 1U,
++    LVGA_HEADER_CENTER = 2U,
++    LVGA_HEADER_RIGHT = 4U,
++    LVGA_FOOTER_LEFT = 8U,
++    LVGA_FOOTER_CENTER = 16U,
++    LVGA_FOOTER_RIGHT = 32U,
++};
++#pragma pop_macro("LVGA_FOOTER_RIGHT")
++#pragma pop_macro("LVGA_FOOTER_CENTER")
++#pragma pop_macro("LVGA_FOOTER_LEFT")
++#pragma pop_macro("LVGA_HEADER_RIGHT")
++#pragma pop_macro("LVGA_HEADER_CENTER")
++#pragma pop_macro("LVGA_HEADER_LEFT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVCFMT_LINE_BREAK")
++#undef LVCFMT_LINE_BREAK
++#pragma push_macro("LVCFMT_FILL")
++#undef LVCFMT_FILL
++#pragma push_macro("LVCFMT_WRAP")
++#undef LVCFMT_WRAP
++#pragma push_macro("LVCFMT_NO_TITLE")
++#undef LVCFMT_NO_TITLE
++#pragma push_macro("LVCFMT_TILE_PLACEMENTMASK")
++#undef LVCFMT_TILE_PLACEMENTMASK
++enum [[clang::flag_enum]] LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS : int
++{
++    LVCFMT_LINE_BREAK = 1048576,
++    LVCFMT_FILL = 2097152,
++    LVCFMT_WRAP = 4194304,
++    LVCFMT_NO_TITLE = 8388608,
++    LVCFMT_TILE_PLACEMENTMASK = 3145728,
++};
++#pragma pop_macro("LVCFMT_TILE_PLACEMENTMASK")
++#pragma pop_macro("LVCFMT_NO_TITLE")
++#pragma pop_macro("LVCFMT_WRAP")
++#pragma pop_macro("LVCFMT_FILL")
++#pragma pop_macro("LVCFMT_LINE_BREAK")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("MCHT_TITLE")
++#undef MCHT_TITLE
++#pragma push_macro("MCHT_CALENDAR")
++#undef MCHT_CALENDAR
++#pragma push_macro("MCHT_TODAYLINK")
++#undef MCHT_TODAYLINK
++#pragma push_macro("MCHT_CALENDARCONTROL")
++#undef MCHT_CALENDARCONTROL
++#pragma push_macro("MCHT_NEXT")
++#undef MCHT_NEXT
++#pragma push_macro("MCHT_PREV")
++#undef MCHT_PREV
++#pragma push_macro("MCHT_NOWHERE")
++#undef MCHT_NOWHERE
++#pragma push_macro("MCHT_TITLEBK")
++#undef MCHT_TITLEBK
++#pragma push_macro("MCHT_TITLEMONTH")
++#undef MCHT_TITLEMONTH
++#pragma push_macro("MCHT_TITLEYEAR")
++#undef MCHT_TITLEYEAR
++#pragma push_macro("MCHT_TITLEBTNNEXT")
++#undef MCHT_TITLEBTNNEXT
++#pragma push_macro("MCHT_TITLEBTNPREV")
++#undef MCHT_TITLEBTNPREV
++#pragma push_macro("MCHT_CALENDARBK")
++#undef MCHT_CALENDARBK
++#pragma push_macro("MCHT_CALENDARDATE")
++#undef MCHT_CALENDARDATE
++#pragma push_macro("MCHT_CALENDARDATENEXT")
++#undef MCHT_CALENDARDATENEXT
++#pragma push_macro("MCHT_CALENDARDATEPREV")
++#undef MCHT_CALENDARDATEPREV
++#pragma push_macro("MCHT_CALENDARDAY")
++#undef MCHT_CALENDARDAY
++#pragma push_macro("MCHT_CALENDARWEEKNUM")
++#undef MCHT_CALENDARWEEKNUM
++#pragma push_macro("MCHT_CALENDARDATEMIN")
++#undef MCHT_CALENDARDATEMIN
++#pragma push_macro("MCHT_CALENDARDATEMAX")
++#undef MCHT_CALENDARDATEMAX
++enum [[clang::flag_enum]] MCHITTESTINFO_HIT_FLAGS : unsigned int
++{
++    MCHT_TITLE = 65536U,
++    MCHT_CALENDAR = 131072U,
++    MCHT_TODAYLINK = 196608U,
++    MCHT_CALENDARCONTROL = 1048576U,
++    MCHT_NEXT = 16777216U,
++    MCHT_PREV = 33554432U,
++    MCHT_NOWHERE = 0U,
++    MCHT_TITLEBK = 65536U,
++    MCHT_TITLEMONTH = 65537U,
++    MCHT_TITLEYEAR = 65538U,
++    MCHT_TITLEBTNNEXT = 16842755U,
++    MCHT_TITLEBTNPREV = 33619971U,
++    MCHT_CALENDARBK = 131072U,
++    MCHT_CALENDARDATE = 131073U,
++    MCHT_CALENDARDATENEXT = 16908289U,
++    MCHT_CALENDARDATEPREV = 33685505U,
++    MCHT_CALENDARDAY = 131074U,
++    MCHT_CALENDARWEEKNUM = 131075U,
++    MCHT_CALENDARDATEMIN = 131076U,
++    MCHT_CALENDARDATEMAX = 131077U,
++};
++#pragma pop_macro("MCHT_CALENDARDATEMAX")
++#pragma pop_macro("MCHT_CALENDARDATEMIN")
++#pragma pop_macro("MCHT_CALENDARWEEKNUM")
++#pragma pop_macro("MCHT_CALENDARDAY")
++#pragma pop_macro("MCHT_CALENDARDATEPREV")
++#pragma pop_macro("MCHT_CALENDARDATENEXT")
++#pragma pop_macro("MCHT_CALENDARDATE")
++#pragma pop_macro("MCHT_CALENDARBK")
++#pragma pop_macro("MCHT_TITLEBTNPREV")
++#pragma pop_macro("MCHT_TITLEBTNNEXT")
++#pragma pop_macro("MCHT_TITLEYEAR")
++#pragma pop_macro("MCHT_TITLEMONTH")
++#pragma pop_macro("MCHT_TITLEBK")
++#pragma pop_macro("MCHT_NOWHERE")
++#pragma pop_macro("MCHT_PREV")
++#pragma pop_macro("MCHT_NEXT")
++#pragma pop_macro("MCHT_CALENDARCONTROL")
++#pragma pop_macro("MCHT_TODAYLINK")
++#pragma pop_macro("MCHT_CALENDAR")
++#pragma pop_macro("MCHT_TITLE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CDIS_SELECTED")
++#undef CDIS_SELECTED
++#pragma push_macro("CDIS_GRAYED")
++#undef CDIS_GRAYED
++#pragma push_macro("CDIS_DISABLED")
++#undef CDIS_DISABLED
++#pragma push_macro("CDIS_CHECKED")
++#undef CDIS_CHECKED
++#pragma push_macro("CDIS_FOCUS")
++#undef CDIS_FOCUS
++#pragma push_macro("CDIS_DEFAULT")
++#undef CDIS_DEFAULT
++#pragma push_macro("CDIS_HOT")
++#undef CDIS_HOT
++#pragma push_macro("CDIS_MARKED")
++#undef CDIS_MARKED
++#pragma push_macro("CDIS_INDETERMINATE")
++#undef CDIS_INDETERMINATE
++#pragma push_macro("CDIS_SHOWKEYBOARDCUES")
++#undef CDIS_SHOWKEYBOARDCUES
++#pragma push_macro("CDIS_NEARHOT")
++#undef CDIS_NEARHOT
++#pragma push_macro("CDIS_OTHERSIDEHOT")
++#undef CDIS_OTHERSIDEHOT
++#pragma push_macro("CDIS_DROPHILITED")
++#undef CDIS_DROPHILITED
++enum [[clang::flag_enum]] NMCUSTOMDRAW_DRAW_STATE_FLAGS : unsigned int
++{
++    CDIS_SELECTED = 1U,
++    CDIS_GRAYED = 2U,
++    CDIS_DISABLED = 4U,
++    CDIS_CHECKED = 8U,
++    CDIS_FOCUS = 16U,
++    CDIS_DEFAULT = 32U,
++    CDIS_HOT = 64U,
++    CDIS_MARKED = 128U,
++    CDIS_INDETERMINATE = 256U,
++    CDIS_SHOWKEYBOARDCUES = 512U,
++    CDIS_NEARHOT = 1024U,
++    CDIS_OTHERSIDEHOT = 2048U,
++    CDIS_DROPHILITED = 4096U,
++};
++#pragma pop_macro("CDIS_DROPHILITED")
++#pragma pop_macro("CDIS_OTHERSIDEHOT")
++#pragma pop_macro("CDIS_NEARHOT")
++#pragma pop_macro("CDIS_SHOWKEYBOARDCUES")
++#pragma pop_macro("CDIS_INDETERMINATE")
++#pragma pop_macro("CDIS_MARKED")
++#pragma pop_macro("CDIS_HOT")
++#pragma pop_macro("CDIS_DEFAULT")
++#pragma pop_macro("CDIS_FOCUS")
++#pragma pop_macro("CDIS_CHECKED")
++#pragma pop_macro("CDIS_DISABLED")
++#pragma pop_macro("CDIS_GRAYED")
++#pragma pop_macro("CDIS_SELECTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("GDT_NONE")
++#undef GDT_NONE
++#pragma push_macro("GDT_VALID")
++#undef GDT_VALID
++enum NMDATETIMECHANGE_FLAGS : unsigned int
++{
++    GDT_NONE = 1U,
++    GDT_VALID = 0U,
++};
++#pragma pop_macro("GDT_VALID")
++#pragma pop_macro("GDT_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LVIF_TEXT")
++#undef LVIF_TEXT
++#pragma push_macro("LVIF_IMAGE")
++#undef LVIF_IMAGE
++#pragma push_macro("LVIF_PARAM")
++#undef LVIF_PARAM
++#pragma push_macro("LVIF_STATE")
++#undef LVIF_STATE
++#pragma push_macro("LVIF_INDENT")
++#undef LVIF_INDENT
++#pragma push_macro("LVIF_NORECOMPUTE")
++#undef LVIF_NORECOMPUTE
++#pragma push_macro("LVIF_GROUPID")
++#undef LVIF_GROUPID
++#pragma push_macro("LVIF_COLUMNS")
++#undef LVIF_COLUMNS
++#pragma push_macro("LVIF_COLFMT")
++#undef LVIF_COLFMT
++#pragma push_macro("LVIF_DI_SETITEM")
++#undef LVIF_DI_SETITEM
++enum [[clang::flag_enum]] LIST_VIEW_ITEM_FLAGS : unsigned int
++{
++    LVIF_TEXT = 1U,
++    LVIF_IMAGE = 2U,
++    LVIF_PARAM = 4U,
++    LVIF_STATE = 8U,
++    LVIF_INDENT = 16U,
++    LVIF_NORECOMPUTE = 2048U,
++    LVIF_GROUPID = 256U,
++    LVIF_COLUMNS = 512U,
++    LVIF_COLFMT = 65536U,
++    LVIF_DI_SETITEM = 4096U,
++};
++#pragma pop_macro("LVIF_DI_SETITEM")
++#pragma pop_macro("LVIF_COLFMT")
++#pragma pop_macro("LVIF_COLUMNS")
++#pragma pop_macro("LVIF_GROUPID")
++#pragma pop_macro("LVIF_NORECOMPUTE")
++#pragma pop_macro("LVIF_INDENT")
++#pragma pop_macro("LVIF_STATE")
++#pragma pop_macro("LVIF_PARAM")
++#pragma pop_macro("LVIF_IMAGE")
++#pragma pop_macro("LVIF_TEXT")
++#endif
++
+ #endif  /* _INC_COMMCTRL */
+ 

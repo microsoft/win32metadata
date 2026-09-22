@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
+index 7f9b7f9e78..afb2cc736c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
 @@ -8,6 +8,7 @@
@@ -14,20 +15,24 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/genera
  #define RM_INVALID_PROCESS -1
  
 -typedef enum _RM_APP_TYPE {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_APP_TYPE {
++typedef enum   _RM_APP_TYPE {
      RmUnknownApp = 0,   // Application type cannot be classified in
                          // known categories
      RmMainWindow = 1,   // Application is a windows application that
-@@ -47,13 +48,21 @@ typedef enum _RM_APP_TYPE {
+@@ -47,13 +48,29 @@ typedef enum _RM_APP_TYPE {
                          // where a reboot is required to restart
  } RM_APP_TYPE;
  
 -typedef enum _RM_SHUTDOWN_TYPE {
 +typedef enum 
 +#if defined(WIN32METADATA) && defined(__clang__)
++
++#ifndef WIN32METADATA
 +[[clang::flag_enum]]
 +#endif
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_SHUTDOWN_TYPE {
++
++#endif
++  _RM_SHUTDOWN_TYPE {
      RmForceShutdown = 0x1,          // Force app shutdown
      RmShutdownOnlyRegistered = 0x10 // Only shudown apps if all apps
                                      // registered for restart
@@ -36,37 +41,45 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/genera
 -typedef enum _RM_APP_STATUS {
 +typedef enum 
 +#if defined(WIN32METADATA) && defined(__clang__)
++
++#ifndef WIN32METADATA
 +[[clang::flag_enum]]
 +#endif
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_APP_STATUS {
++
++#endif
++  _RM_APP_STATUS {
      RmStatusUnknown = 0x0,          // Application in unknown state 
                                      // or state not important
      RmStatusRunning = 0x1,          // Application is currently running
-@@ -69,7 +78,11 @@ typedef enum _RM_APP_STATUS {
+@@ -69,7 +86,15 @@ typedef enum _RM_APP_STATUS {
      RmStatusRestartMasked = 0x80    // Restart action masked by filter
  } RM_APP_STATUS;
  
 -typedef enum _RM_REBOOT_REASON {
 +typedef enum 
 +#if defined(WIN32METADATA) && defined(__clang__)
++
++#ifndef WIN32METADATA
 +[[clang::flag_enum]]
 +#endif
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_REBOOT_REASON {
++
++#endif
++  _RM_REBOOT_REASON {
      RmRebootReasonNone = 0x0,               // Reboot not required
      RmRebootReasonPermissionDenied = 0x1,   // Current user does not have
                                              // permission to shut down
-@@ -84,24 +97,24 @@ typedef enum _RM_REBOOT_REASON {
+@@ -84,24 +109,24 @@ typedef enum _RM_REBOOT_REASON {
                                              // detected
  } RM_REBOOT_REASON;
  
 -typedef struct _RM_UNIQUE_PROCESS {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_UNIQUE_PROCESS {
++typedef struct   _RM_UNIQUE_PROCESS {
      DWORD dwProcessId;              // PID
      FILETIME ProcessStartTime;      // Process creation time
  } RM_UNIQUE_PROCESS, *PRM_UNIQUE_PROCESS;
  
 -typedef struct _RM_PROCESS_INFO{
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_PROCESS_INFO{
++typedef struct   _RM_PROCESS_INFO{
      RM_UNIQUE_PROCESS Process;      // Unique process identification
      WCHAR strAppName[CCH_RM_MAX_APP_NAME+1];    // Application friendly name
      WCHAR strServiceShortName[CCH_RM_MAX_SVC_NAME+1];   // Service short name,
@@ -80,16 +93,16 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/genera
  } RM_PROCESS_INFO, *PRM_PROCESS_INFO;
  
 -typedef enum _RM_FILTER_TRIGGER
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_FILTER_TRIGGER
++typedef enum   _RM_FILTER_TRIGGER
  {
      RmFilterTriggerInvalid = 0,         // Invalid value
      RmFilterTriggerFile,                // Filter is triggered by EXE name
-@@ -109,14 +122,14 @@ typedef enum _RM_FILTER_TRIGGER
+@@ -109,14 +134,14 @@ typedef enum _RM_FILTER_TRIGGER
      RmFilterTriggerService              // Filter is triggered by service short name
  } RM_FILTER_TRIGGER;
  
 -typedef enum _RM_FILTER_ACTION {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_FILTER_ACTION {
++typedef enum   _RM_FILTER_ACTION {
      RmInvalidFilterAction = 0,          // Invalid value
      RmNoRestart = 1,                    // Prevent restart of application
      RmNoShutdown = 2                    // Prevent shutdown and restart of
@@ -97,11 +110,11 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/genera
  } RM_FILTER_ACTION;
  
 -typedef struct _RM_FILTER_INFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _RM_FILTER_INFO
++typedef struct   _RM_FILTER_INFO
  {
      RM_FILTER_ACTION FilterAction;      // Filter action
      RM_FILTER_TRIGGER FilterTrigger;    // Filter trigger
-@@ -132,6 +145,8 @@ typedef struct _RM_FILTER_INFO
+@@ -132,6 +157,8 @@ typedef struct _RM_FILTER_INFO
      };
  } RM_FILTER_INFO, *PRM_FILTER_INFO;
  
@@ -110,56 +123,56 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/genera
  typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
  
  // Functions
-@@ -147,9 +162,11 @@ typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
+@@ -147,9 +174,11 @@ typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
  //            Read/write operation failed.
  //        ERROR_OUTOFMEMORY
  //            Could not allocate memory or instantiate class object.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmStartSession(
 -    _Out_ DWORD *pSessionHandle,
-+    _Out_ _Win32_RAIIFree_(RmEndSession) DWORD *pSessionHandle,
++    _Out_  DWORD *pSessionHandle,
      _Reserved_ DWORD dwSessionFlags,
      _Out_writes_(CCH_RM_SESSION_KEY+1) WCHAR strSessionKey[]);
  
-@@ -164,9 +181,11 @@ RmStartSession(
+@@ -164,9 +193,11 @@ RmStartSession(
  //            Read/write operation failed.
  //        ERROR_OUTOFMEMORY
  //            Could not allocate memory or instantiate class object.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmJoinSession(
 -    _Out_ DWORD *pSessionHandle,
-+    _Out_ _Win32_RAIIFree_(RmEndSession) DWORD *pSessionHandle,
++    _Out_  DWORD *pSessionHandle,
      _In_reads_(CCH_RM_SESSION_KEY+1) const WCHAR strSessionKey[]);
  
  // Function: RmEndSession
-@@ -182,6 +201,8 @@ RmJoinSession(
+@@ -182,6 +213,8 @@ RmJoinSession(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmEndSession( _In_ DWORD dwSessionHandle );
  
-@@ -203,6 +224,8 @@ RmEndSession( _In_ DWORD dwSessionHandle );
+@@ -203,6 +236,8 @@ RmEndSession( _In_ DWORD dwSessionHandle );
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmRegisterResources(
      _In_ DWORD dwSessionHandle,
-@@ -236,13 +259,15 @@ RmRegisterResources(
+@@ -236,13 +271,15 @@ RmRegisterResources(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmGetList(
      _In_ DWORD dwSessionHandle,
@@ -167,66 +180,66 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/genera
      _Inout_ UINT *pnProcInfo,
      _Inout_updates_opt_(*pnProcInfo) RM_PROCESS_INFO rgAffectedApps[],
 -    _Out_ LPDWORD lpdwRebootReasons );
-+    _Out_ _Win32_AssociatedEnum_(RM_REBOOT_REASON) LPDWORD lpdwRebootReasons );
++    _Out_  LPDWORD lpdwRebootReasons );
  
  // Function: RmShutdown
  // Purpose: Initiates application shutdown sequence.
-@@ -264,10 +289,12 @@ RmGetList(
+@@ -264,10 +301,12 @@ RmGetList(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmShutdown(
      _In_ DWORD dwSessionHandle,
 -    _In_ ULONG lActionFlags,
-+    _In_ _Win32_AssociatedEnum_(RM_SHUTDOWN_TYPE) ULONG lActionFlags,
++    _In_  ULONG lActionFlags,
      _In_opt_ RM_WRITE_STATUS_CALLBACK fnStatus);
  
  // Function: RmRestart
-@@ -291,6 +318,8 @@ RmShutdown(
+@@ -291,6 +330,8 @@ RmShutdown(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmRestart(
          _In_ DWORD dwSessionHandle,
-@@ -307,6 +336,8 @@ RmRestart(
+@@ -307,6 +348,8 @@ RmRestart(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmCancelCurrentTask(
          _In_ DWORD dwSessionHandle);
-@@ -320,6 +351,8 @@ RmCancelCurrentTask(
+@@ -320,6 +363,8 @@ RmCancelCurrentTask(
  //            An invalid argument was supplied to the function.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmAddFilter(
          _In_ DWORD dwSessionHandle,
-@@ -338,6 +371,8 @@ RmAddFilter(
+@@ -338,6 +383,8 @@ RmAddFilter(
  //            An invalid argument was supplied to the function.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmRemoveFilter(
          _In_ DWORD dwSessionHandle,
-@@ -353,6 +388,8 @@ RmRemoveFilter(
+@@ -353,6 +400,8 @@ RmRemoveFilter(
  //            An invalid argument was supplied to the function.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) 
++
  DWORD WINAPI
  RmGetFilterList(
          _In_ DWORD dwSessionHandle,

@@ -1,0 +1,486 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel.h b/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel.h
+index 60335c3075..376ce5cc12 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -755,7 +756,7 @@ EXTERN_C const IID IID_IXpsOMShareable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7137398F-2FC1-454D-8C6A-2C3115A16ECE")
++    MIDL_INTERFACE("7137398F-2FC1-454D-8C6A-2C3115A16ECE") _Windows_SupportedOS_Windows7_ 
+     IXpsOMShareable : public IUnknown
+     {
+     public:
+@@ -855,7 +856,7 @@ EXTERN_C const IID IID_IXpsOMVisual;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BC3E7333-FB0B-4af3-A819-0B4EAAD0D2FD")
++    MIDL_INTERFACE("BC3E7333-FB0B-4af3-A819-0B4EAAD0D2FD") _Windows_SupportedOS_Windows7_ 
+     IXpsOMVisual : public IXpsOMShareable
+     {
+     public:
+@@ -1273,7 +1274,7 @@ EXTERN_C const IID IID_IXpsOMPart;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("74eb2f0b-a91e-4486-afac-0fabeca3dfc6")
++    MIDL_INTERFACE("74eb2f0b-a91e-4486-afac-0fabeca3dfc6") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPart : public IUnknown
+     {
+     public:
+@@ -1373,7 +1374,7 @@ EXTERN_C const IID IID_IXpsOMGlyphsEditor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A5AB8616-5B16-4B9F-9629-89B323ED7909")
++    MIDL_INTERFACE("A5AB8616-5B16-4B9F-9629-89B323ED7909") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGlyphsEditor : public IUnknown
+     {
+     public:
+@@ -1701,7 +1702,7 @@ EXTERN_C const IID IID_IXpsOMGlyphs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("819B3199-0A5A-4B64-BEC7-A9E17E780DE2")
++    MIDL_INTERFACE("819B3199-0A5A-4B64-BEC7-A9E17E780DE2") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGlyphs : public IXpsOMVisual
+     {
+     public:
+@@ -2383,7 +2384,7 @@ EXTERN_C const IID IID_IXpsOMDashCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("081613F4-74EB-48F2-83B3-37A9CE2D7DC6")
++    MIDL_INTERFACE("081613F4-74EB-48F2-83B3-37A9CE2D7DC6") _Windows_SupportedOS_Windows7_ 
+     IXpsOMDashCollection : public IUnknown
+     {
+     public:
+@@ -2547,7 +2548,7 @@ EXTERN_C const IID IID_IXpsOMMatrixTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B77330FF-BB37-4501-A93E-F1B1E50BFC46")
++    MIDL_INTERFACE("B77330FF-BB37-4501-A93E-F1B1E50BFC46") _Windows_SupportedOS_Windows7_ 
+     IXpsOMMatrixTransform : public IXpsOMShareable
+     {
+     public:
+@@ -2679,7 +2680,7 @@ EXTERN_C const IID IID_IXpsOMGeometry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("64FCF3D7-4D58-44BA-AD73-A13AF6492072")
++    MIDL_INTERFACE("64FCF3D7-4D58-44BA-AD73-A13AF6492072") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGeometry : public IXpsOMShareable
+     {
+     public:
+@@ -2889,7 +2890,7 @@ EXTERN_C const IID IID_IXpsOMGeometryFigure;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D410DC83-908C-443E-8947-B1795D3C165A")
++    MIDL_INTERFACE("D410DC83-908C-443E-8947-B1795D3C165A") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGeometryFigure : public IUnknown
+     {
+     public:
+@@ -3186,7 +3187,7 @@ EXTERN_C const IID IID_IXpsOMGeometryFigureCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FD48C3F3-A58E-4B5A-8826-1DE54ABE72B2")
++    MIDL_INTERFACE("FD48C3F3-A58E-4B5A-8826-1DE54ABE72B2") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGeometryFigureCollection : public IUnknown
+     {
+     public:
+@@ -3350,7 +3351,7 @@ EXTERN_C const IID IID_IXpsOMPath;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("37D38BB6-3EE9-4110-9312-14B194163337")
++    MIDL_INTERFACE("37D38BB6-3EE9-4110-9312-14B194163337") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPath : public IXpsOMVisual
+     {
+     public:
+@@ -4150,7 +4151,7 @@ EXTERN_C const IID IID_IXpsOMBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56A3F80C-EA4C-4187-A57B-A2A473B2B42B")
++    MIDL_INTERFACE("56A3F80C-EA4C-4187-A57B-A2A473B2B42B") _Windows_SupportedOS_Windows7_ 
+     IXpsOMBrush : public IXpsOMShareable
+     {
+     public:
+@@ -4269,7 +4270,7 @@ EXTERN_C const IID IID_IXpsOMGradientStopCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C9174C3A-3CD3-4319-BDA4-11A39392CEEF")
++    MIDL_INTERFACE("C9174C3A-3CD3-4319-BDA4-11A39392CEEF") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGradientStopCollection : public IUnknown
+     {
+     public:
+@@ -4433,7 +4434,7 @@ EXTERN_C const IID IID_IXpsOMSolidColorBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A06F9F05-3BE9-4763-98A8-094FC672E488")
++    MIDL_INTERFACE("A06F9F05-3BE9-4763-98A8-094FC672E488") _Windows_SupportedOS_Windows7_ 
+     IXpsOMSolidColorBrush : public IXpsOMBrush
+     {
+     public:
+@@ -4592,7 +4593,7 @@ EXTERN_C const IID IID_IXpsOMTileBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0FC2328D-D722-4A54-B2EC-BE90218A789E")
++    MIDL_INTERFACE("0FC2328D-D722-4A54-B2EC-BE90218A789E") _Windows_SupportedOS_Windows7_ 
+     IXpsOMTileBrush : public IXpsOMBrush
+     {
+     public:
+@@ -4847,7 +4848,7 @@ EXTERN_C const IID IID_IXpsOMVisualBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97E294AF-5B37-46B4-8057-874D2F64119B")
++    MIDL_INTERFACE("97E294AF-5B37-46B4-8057-874D2F64119B") _Windows_SupportedOS_Windows7_ 
+     IXpsOMVisualBrush : public IXpsOMTileBrush
+     {
+     public:
+@@ -5137,7 +5138,7 @@ EXTERN_C const IID IID_IXpsOMImageBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3DF0B466-D382-49EF-8550-DD94C80242E4")
++    MIDL_INTERFACE("3DF0B466-D382-49EF-8550-DD94C80242E4") _Windows_SupportedOS_Windows7_ 
+     IXpsOMImageBrush : public IXpsOMTileBrush
+     {
+     public:
+@@ -5414,7 +5415,7 @@ EXTERN_C const IID IID_IXpsOMGradientStop;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5CF4F5CC-3969-49B5-A70A-5550B618FE49")
++    MIDL_INTERFACE("5CF4F5CC-3969-49B5-A70A-5550B618FE49") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGradientStop : public IUnknown
+     {
+     public:
+@@ -5574,7 +5575,7 @@ EXTERN_C const IID IID_IXpsOMGradientBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EDB59622-61A2-42C3-BACE-ACF2286C06BF")
++    MIDL_INTERFACE("EDB59622-61A2-42C3-BACE-ACF2286C06BF") _Windows_SupportedOS_Windows7_ 
+     IXpsOMGradientBrush : public IXpsOMBrush
+     {
+     public:
+@@ -5816,7 +5817,7 @@ EXTERN_C const IID IID_IXpsOMLinearGradientBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("005E279F-C30D-40FF-93EC-1950D3C528DB")
++    MIDL_INTERFACE("005E279F-C30D-40FF-93EC-1950D3C528DB") _Windows_SupportedOS_Windows7_ 
+     IXpsOMLinearGradientBrush : public IXpsOMGradientBrush
+     {
+     public:
+@@ -6084,7 +6085,7 @@ EXTERN_C const IID IID_IXpsOMRadialGradientBrush;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75F207E5-08BF-413C-96B1-B82B4064176B")
++    MIDL_INTERFACE("75F207E5-08BF-413C-96B1-B82B4064176B") _Windows_SupportedOS_Windows7_ 
+     IXpsOMRadialGradientBrush : public IXpsOMGradientBrush
+     {
+     public:
+@@ -6378,7 +6379,7 @@ EXTERN_C const IID IID_IXpsOMResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("da2ac0a2-73a2-4975-ad14-74097c3ff3a5")
++    MIDL_INTERFACE("da2ac0a2-73a2-4975-ad14-74097c3ff3a5") _Windows_SupportedOS_Windows7_ 
+     IXpsOMResource : public IXpsOMPart
+     {
+     public:
+@@ -6471,7 +6472,7 @@ EXTERN_C const IID IID_IXpsOMPartResources;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f4cf7729-4864-4275-99b3-a8717163ecaf")
++    MIDL_INTERFACE("f4cf7729-4864-4275-99b3-a8717163ecaf") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPartResources : public IUnknown
+     {
+     public:
+@@ -6597,7 +6598,7 @@ EXTERN_C const IID IID_IXpsOMDictionary;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("897C86B8-8EAF-4AE3-BDDE-56419FCF4236")
++    MIDL_INTERFACE("897C86B8-8EAF-4AE3-BDDE-56419FCF4236") _Windows_SupportedOS_Windows7_ 
+     IXpsOMDictionary : public IUnknown
+     {
+     public:
+@@ -6841,7 +6842,7 @@ EXTERN_C const IID IID_IXpsOMFontResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a8c45708-47d9-4af4-8d20-33b48c9b8485")
++    MIDL_INTERFACE("a8c45708-47d9-4af4-8d20-33b48c9b8485") _Windows_SupportedOS_Windows7_ 
+     IXpsOMFontResource : public IXpsOMResource
+     {
+     public:
+@@ -6982,7 +6983,7 @@ EXTERN_C const IID IID_IXpsOMFontResourceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("70B4A6BB-88D4-4FA8-AAF9-6D9C596FDBAD")
++    MIDL_INTERFACE("70B4A6BB-88D4-4FA8-AAF9-6D9C596FDBAD") _Windows_SupportedOS_Windows7_ 
+     IXpsOMFontResourceCollection : public IUnknown
+     {
+     public:
+@@ -7163,7 +7164,7 @@ EXTERN_C const IID IID_IXpsOMImageResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3db8417d-ae50-485e-9a44-d7758f78a23f")
++    MIDL_INTERFACE("3db8417d-ae50-485e-9a44-d7758f78a23f") _Windows_SupportedOS_Windows7_ 
+     IXpsOMImageResource : public IXpsOMResource
+     {
+     public:
+@@ -7304,7 +7305,7 @@ EXTERN_C const IID IID_IXpsOMImageResourceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7A4A1A71-9CDE-4B71-B33F-62DE843EABFE")
++    MIDL_INTERFACE("7A4A1A71-9CDE-4B71-B33F-62DE843EABFE") _Windows_SupportedOS_Windows7_ 
+     IXpsOMImageResourceCollection : public IUnknown
+     {
+     public:
+@@ -7485,7 +7486,7 @@ EXTERN_C const IID IID_IXpsOMColorProfileResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe")
++    MIDL_INTERFACE("67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe") _Windows_SupportedOS_Windows7_ 
+     IXpsOMColorProfileResource : public IXpsOMResource
+     {
+     public:
+@@ -7609,7 +7610,7 @@ EXTERN_C const IID IID_IXpsOMColorProfileResourceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("12759630-5FBA-4283-8F7D-CCA849809EDB")
++    MIDL_INTERFACE("12759630-5FBA-4283-8F7D-CCA849809EDB") _Windows_SupportedOS_Windows7_ 
+     IXpsOMColorProfileResourceCollection : public IUnknown
+     {
+     public:
+@@ -7790,7 +7791,7 @@ EXTERN_C const IID IID_IXpsOMPrintTicketResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7")
++    MIDL_INTERFACE("e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPrintTicketResource : public IXpsOMResource
+     {
+     public:
+@@ -7914,7 +7915,7 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c9bd7cd4-e16a-4bf8-8c84-c950af7a3061")
++    MIDL_INTERFACE("c9bd7cd4-e16a-4bf8-8c84-c950af7a3061") _Windows_SupportedOS_Windows7_ 
+     IXpsOMRemoteDictionaryResource : public IXpsOMResource
+     {
+     public:
+@@ -8034,7 +8035,7 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResourceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5C38DB61-7FEC-464A-87BD-41E3BEF018BE")
++    MIDL_INTERFACE("5C38DB61-7FEC-464A-87BD-41E3BEF018BE") _Windows_SupportedOS_Windows7_ 
+     IXpsOMRemoteDictionaryResourceCollection : public IUnknown
+     {
+     public:
+@@ -8215,7 +8216,7 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResourceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB8F5D8E-351B-4D33-AAED-FA56F0022931")
++    MIDL_INTERFACE("AB8F5D8E-351B-4D33-AAED-FA56F0022931") _Windows_SupportedOS_Windows7_ 
+     IXpsOMSignatureBlockResourceCollection : public IUnknown
+     {
+     public:
+@@ -8396,7 +8397,7 @@ EXTERN_C const IID IID_IXpsOMDocumentStructureResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85febc8a-6b63-48a9-af07-7064e4ecff30")
++    MIDL_INTERFACE("85febc8a-6b63-48a9-af07-7064e4ecff30") _Windows_SupportedOS_Windows7_ 
+     IXpsOMDocumentStructureResource : public IXpsOMResource
+     {
+     public:
+@@ -8533,7 +8534,7 @@ EXTERN_C const IID IID_IXpsOMStoryFragmentsResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c2b3ca09-0473-4282-87ae-1780863223f0")
++    MIDL_INTERFACE("c2b3ca09-0473-4282-87ae-1780863223f0") _Windows_SupportedOS_Windows7_ 
+     IXpsOMStoryFragmentsResource : public IXpsOMResource
+     {
+     public:
+@@ -8670,7 +8671,7 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4776ad35-2e04-4357-8743-ebf6c171a905")
++    MIDL_INTERFACE("4776ad35-2e04-4357-8743-ebf6c171a905") _Windows_SupportedOS_Windows7_ 
+     IXpsOMSignatureBlockResource : public IXpsOMResource
+     {
+     public:
+@@ -8807,7 +8808,7 @@ EXTERN_C const IID IID_IXpsOMVisualCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("94D8ABDE-AB91-46A8-82B7-F5B05EF01A96")
++    MIDL_INTERFACE("94D8ABDE-AB91-46A8-82B7-F5B05EF01A96") _Windows_SupportedOS_Windows7_ 
+     IXpsOMVisualCollection : public IUnknown
+     {
+     public:
+@@ -8971,7 +8972,7 @@ EXTERN_C const IID IID_IXpsOMCanvas;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("221D1452-331E-47c6-87E9-6CCEFB9B5BA3")
++    MIDL_INTERFACE("221D1452-331E-47c6-87E9-6CCEFB9B5BA3") _Windows_SupportedOS_Windows7_ 
+     IXpsOMCanvas : public IXpsOMVisual
+     {
+     public:
+@@ -9459,7 +9460,7 @@ EXTERN_C const IID IID_IXpsOMPage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d3e18888-f120-4fee-8c68-35296eae91d4")
++    MIDL_INTERFACE("d3e18888-f120-4fee-8c68-35296eae91d4") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPage : public IXpsOMPart
+     {
+     public:
+@@ -9846,7 +9847,7 @@ EXTERN_C const IID IID_IXpsOMPageReference;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ED360180-6F92-4998-890D-2F208531A0A0")
++    MIDL_INTERFACE("ED360180-6F92-4998-890D-2F208531A0A0") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPageReference : public IUnknown
+     {
+     public:
+@@ -10137,7 +10138,7 @@ EXTERN_C const IID IID_IXpsOMPageReferenceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CA16BA4D-E7B9-45C5-958B-F98022473745")
++    MIDL_INTERFACE("CA16BA4D-E7B9-45C5-958B-F98022473745") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPageReferenceCollection : public IUnknown
+     {
+     public:
+@@ -10301,7 +10302,7 @@ EXTERN_C const IID IID_IXpsOMDocument;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C2C94CB-AC5F-4254-8EE9-23948309D9F0")
++    MIDL_INTERFACE("2C2C94CB-AC5F-4254-8EE9-23948309D9F0") _Windows_SupportedOS_Windows7_ 
+     IXpsOMDocument : public IXpsOMPart
+     {
+     public:
+@@ -10498,7 +10499,7 @@ EXTERN_C const IID IID_IXpsOMDocumentCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D1C87F0D-E947-4754-8A25-971478F7E83E")
++    MIDL_INTERFACE("D1C87F0D-E947-4754-8A25-971478F7E83E") _Windows_SupportedOS_Windows7_ 
+     IXpsOMDocumentCollection : public IUnknown
+     {
+     public:
+@@ -10662,7 +10663,7 @@ EXTERN_C const IID IID_IXpsOMDocumentSequence;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56492EB4-D8D5-425e-8256-4C2B64AD0264")
++    MIDL_INTERFACE("56492EB4-D8D5-425e-8256-4C2B64AD0264") _Windows_SupportedOS_Windows7_ 
+     IXpsOMDocumentSequence : public IXpsOMPart
+     {
+     public:
+@@ -10807,7 +10808,7 @@ EXTERN_C const IID IID_IXpsOMCoreProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3340FE8F-4027-4aa1-8F5F-D35AE45FE597")
++    MIDL_INTERFACE("3340FE8F-4027-4aa1-8F5F-D35AE45FE597") _Windows_SupportedOS_Windows7_ 
+     IXpsOMCoreProperties : public IXpsOMPart
+     {
+     public:
+@@ -11342,7 +11343,7 @@ EXTERN_C const IID IID_IXpsOMPackage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("18C3DF65-81E1-4674-91DC-FC452F5A416F")
++    MIDL_INTERFACE("18C3DF65-81E1-4674-91DC-FC452F5A416F") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPackage : public IUnknown
+     {
+     public:
+@@ -11562,7 +11563,7 @@ EXTERN_C const IID IID_IXpsOMObjectFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f9b2a685-a50d-4fc2-b764-b56e093ea0ca")
++    MIDL_INTERFACE("f9b2a685-a50d-4fc2-b764-b56e093ea0ca") _Windows_SupportedOS_Windows7_ 
+     IXpsOMObjectFactory : public IUnknown
+     {
+     public:
+@@ -12433,7 +12434,7 @@ EXTERN_C const IID IID_IXpsOMNameCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4BDDF8EC-C915-421B-A166-D173D25653D2")
++    MIDL_INTERFACE("4BDDF8EC-C915-421B-A166-D173D25653D2") _Windows_SupportedOS_Windows7_ 
+     IXpsOMNameCollection : public IUnknown
+     {
+     public:
+@@ -12537,7 +12538,7 @@ EXTERN_C const IID IID_IXpsOMPartUriCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("57C650D4-067C-4893-8C33-F62A0633730F")
++    MIDL_INTERFACE("57C650D4-067C-4893-8C33-F62A0633730F") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPartUriCollection : public IUnknown
+     {
+     public:
+@@ -12701,7 +12702,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4E2AA182-A443-42c6-B41B-4F8E9DE73FF9")
++    MIDL_INTERFACE("4E2AA182-A443-42c6-B41B-4F8E9DE73FF9") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPackageWriter : public IUnknown
+     {
+     public:
+@@ -12872,7 +12873,7 @@ EXTERN_C const IID IID_IXpsOMPackageTarget;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("219A9DB0-4959-47D0-8034-B1CE84F41A4D")
++    MIDL_INTERFACE("219A9DB0-4959-47D0-8034-B1CE84F41A4D") _Windows_SupportedOS_Windows7_ 
+     IXpsOMPackageTarget : public IUnknown
+     {
+     public:
+@@ -12983,7 +12984,7 @@ EXTERN_C const IID IID_IXpsOMThumbnailGenerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("15B873D5-1971-41E8-83A3-6578403064C7")
++    MIDL_INTERFACE("15B873D5-1971-41E8-83A3-6578403064C7") _Windows_SupportedOS_Windows7_ 
+     IXpsOMThumbnailGenerator : public IUnknown
+     {
+     public:

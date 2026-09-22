@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
-index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce993ba03c6 100644
+index a2208f5de6..0c82fd4ec5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
 @@ -22,6 +22,7 @@
@@ -15,7 +15,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  
 -typedef struct _SecPkgContext_IssuerListInfoEx
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_IssuerListInfoEx
++typedef struct   _SecPkgContext_IssuerListInfoEx
  {
      PCERT_NAME_BLOB   	aIssuers;
      DWORD           	cIssuers;
@@ -23,7 +23,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  
 -typedef struct _SecPkgContext_ConnectionInfo
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_ConnectionInfo
++typedef struct   _SecPkgContext_ConnectionInfo
  {
      DWORD   dwProtocol;
      ALG_ID  aiCipher;
@@ -32,7 +32,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  #define SECPKGCONTEXT_CIPHERINFO_V1 1
  
 -typedef struct _SecPkgContext_CipherInfo
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _SecPkgContext_CipherInfo
++typedef struct   _SecPkgContext_CipherInfo
  {
  
      DWORD dwVersion;
@@ -41,7 +41,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  
 -typedef struct _SecPkgContext_EapKeyBlock
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_EapKeyBlock
++typedef struct   _SecPkgContext_EapKeyBlock
  {
      BYTE    rgbKeys[128];
      BYTE    rgbIVs[64];
@@ -50,7 +50,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  #define SSL_SESSION_RECONNECT   1
  
 -typedef struct _SecPkgContext_SessionInfo
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_SessionInfo
++typedef struct  _SecPkgContext_SessionInfo
  {
      DWORD dwFlags;
      DWORD cbSessionId;
@@ -59,7 +59,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  
 -typedef struct _SecPkgContext_SessionAppData
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SecPkgContext_SessionAppData
++typedef struct   _SecPkgContext_SessionAppData
  {
      DWORD dwFlags;
      DWORD cbAppData;
@@ -67,7 +67,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  } SecPkgContext_SessionAppData, *PSecPkgContext_SessionAppData;
  
 -typedef struct _SecPkgContext_EapPrfInfo
-+typedef struct _Windows_SupportedOS_Server2008_ _SecPkgContext_EapPrfInfo
++typedef struct  _SecPkgContext_EapPrfInfo
  {
      DWORD dwVersion;
      DWORD cbPrfData;
@@ -76,7 +76,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  
 -typedef struct _SecPkgContext_SupportedSignatures
-+typedef struct _Windows_SupportedOS_Windows7_ _SecPkgContext_SupportedSignatures
++typedef struct  _SecPkgContext_SupportedSignatures
  {
      WORD cSignatureAndHashAlgorithms;
  
@@ -85,7 +85,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  } SecPkgContext_UiInfo, *PSecPkgContext_UiInfo;
  
 -typedef struct _SecPkgContext_EarlyStart
-+typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _SecPkgContext_EarlyStart
++typedef struct   _SecPkgContext_EarlyStart
  {
      DWORD dwEarlyStartFlags;
  } SecPkgContext_EarlyStart, *PSecPkgContext_EarlyStart;
@@ -94,7 +94,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  #define ENABLE_TLS_CLIENT_EARLY_START           0x00000001
  
 -typedef struct _SecPkgContext_KeyingMaterialInfo
-+typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _SecPkgContext_KeyingMaterialInfo
++typedef struct   _SecPkgContext_KeyingMaterialInfo
  {
      WORD cbLabel;           // Disambiguating ASCII label length, in bytes, greater than 0.
      LPSTR pszLabel;         // Disambiguating ASCII label, NUL terminator will be removed by schannel.
@@ -103,7 +103,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  } SecPkgContext_KeyingMaterialInfo, * PSecPkgContext_KeyingMaterialInfo;
  
 -typedef struct _SecPkgContext_KeyingMaterial
-+typedef struct _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ _SecPkgContext_KeyingMaterial
++typedef struct   _SecPkgContext_KeyingMaterial
  {
      DWORD cbKeyingMaterial; // Exported keying material length, in bytes.
      _Field_size_bytes_(cbKeyingMaterial) PBYTE pbKeyingMaterial; // Exported keying material.
@@ -112,16 +112,25 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  struct _HMAPPER;
  
 -typedef struct _SCHANNEL_CRED
-+typedef struct _Windows_SupportedOS_Windows81_ _SCHANNEL_CRED
++typedef struct  _SCHANNEL_CRED
  {
      DWORD           dwVersion;      // always SCHANNEL_CRED_VERSION
      DWORD           cCreds;
+@@ -401,7 +402,7 @@ typedef struct _SCHANNEL_CRED
+     DWORD           dwMinimumCipherStrength;
+     DWORD           dwMaximumCipherStrength;
+     DWORD           dwSessionLifespan;
+-    DWORD           dwFlags;
++    _Win32_AssociatedEnum_(SCHANNEL_CRED_FLAGS) DWORD           dwFlags;
+     DWORD           dwCredFormat;
+ } SCHANNEL_CRED, *PSCHANNEL_CRED;
+ 
 @@ -510,7 +511,7 @@ typedef struct _SUBSCRIBE_GENERIC_TLS_EXTENSION
  #define SCH_CRED_MAX_SUPPORTED_ALGS     256
  #define SCH_CRED_MAX_SUPPORTED_CERTS    100
  
 -typedef struct _SCHANNEL_CERT_HASH
-+typedef struct _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_ _SCHANNEL_CERT_HASH
++typedef struct   _SCHANNEL_CERT_HASH
  {
      DWORD           dwLength;
      DWORD           dwFlags;
@@ -130,33 +139,38 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  } SCHANNEL_CERT_HASH, *PSCHANNEL_CERT_HASH;
  
 -typedef struct _SCHANNEL_CERT_HASH_STORE
-+typedef struct _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_ _SCHANNEL_CERT_HASH_STORE
++typedef struct   _SCHANNEL_CERT_HASH_STORE
  {
      DWORD           dwLength;
      DWORD           dwFlags;
-@@ -692,7 +693,7 @@ typedef struct _SCHANNEL_CERT_HASH_STORE
+@@ -692,10 +693,10 @@ typedef struct _SCHANNEL_CERT_HASH_STORE
  
  
  // Alert token structure.
 -typedef struct _SCHANNEL_ALERT_TOKEN
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCHANNEL_ALERT_TOKEN
++typedef struct   _SCHANNEL_ALERT_TOKEN
  {
      DWORD   dwTokenType;            // SCHANNEL_ALERT
-     DWORD   dwAlertType;
+-    DWORD   dwAlertType;
++    _Win32_AssociatedEnum_(SCHANNEL_ALERT_TOKEN_ALERT_TYPE) DWORD   dwAlertType;
+     DWORD   dwAlertNumber;
+ } SCHANNEL_ALERT_TOKEN;
+ 
 @@ -736,14 +737,14 @@ typedef struct _SCHANNEL_ALERT_TOKEN
  #define SSL_SESSION_DISABLE_RECONNECTS  2
  
  // Session control token structure.
 -typedef struct _SCHANNEL_SESSION_TOKEN
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCHANNEL_SESSION_TOKEN
++typedef struct   _SCHANNEL_SESSION_TOKEN
  {
      DWORD   dwTokenType;        // SCHANNEL_SESSION
-     DWORD   dwFlags;
+-    DWORD   dwFlags;
++    _Win32_AssociatedEnum_(SCHANNEL_SESSION_TOKEN_FLAGS) DWORD   dwFlags;
  } SCHANNEL_SESSION_TOKEN;
  
  
 -typedef struct _SCHANNEL_CLIENT_SIGNATURE
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCHANNEL_CLIENT_SIGNATURE
++typedef struct   _SCHANNEL_CLIENT_SIGNATURE
  {
      DWORD       cbLength;
      ALG_ID      aiHash;
@@ -164,7 +178,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
      LPSTR  pszTargetName,
      DWORD  dwFlags);
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  BOOL
  WINAPI
  SslEmptyCacheA(_In_ LPSTR  pszTargetName,
@@ -172,7 +186,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
      LPWSTR pszTargetName,
      DWORD  dwFlags);
  
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  BOOL
  WINAPI
  SslEmptyCacheW(_In_ LPWSTR pszTargetName,
@@ -181,7 +195,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  // NT 4.0 SP3 Schannel interface,
  // do not use.
 -typedef struct _SCH_CRED_SECRET_PRIVKEY
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCH_CRED_SECRET_PRIVKEY
++typedef struct   _SCH_CRED_SECRET_PRIVKEY
  {
      DWORD           dwType;       // SCHANNEL_SECRET_PRIVKEY
      PBYTE           pPrivateKey;   // Der encoded private key
@@ -190,7 +204,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  // NT 4.0 SP3 Schannel interface,
  // do not use.
 -typedef struct _SCH_CRED_PUBLIC_CERTCHAIN
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SCH_CRED_PUBLIC_CERTCHAIN
++typedef struct   _SCH_CRED_PUBLIC_CERTCHAIN
  {
      DWORD       dwType;
      DWORD       cbCertChain;
@@ -199,7 +213,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  } PctPublicKey;
  
 -typedef struct _X509Certificate {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _X509Certificate {
++typedef struct   _X509Certificate {
      DWORD           Version;
      DWORD           SerialNumber[4];
      ALG_ID          SignatureAlgorithm;
@@ -207,7 +221,7 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
  // to get the same functionality instead.
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  BOOL
  WINAPI
  SslCrackCertificate(
@@ -215,15 +229,125 @@ index a2208f5de65a54c8f3c9d67e3f227e08a1911f49..7e39639e858c9ad75f38c0c6bd5afce9
  
  // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
  // to get the same functionality instead.
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_  
  VOID
  WINAPI
  SslFreeCertificate(
-@@ -1087,6 +1092,7 @@ typedef SECURITY_STATUS
+@@ -1086,7 +1091,8 @@ typedef SECURITY_STATUS
+     _In_                                    DWORD       Flags
  );
  
- EXTERN_C
-+_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+-EXTERN_C
++_Windows_SupportedOS_Windows8_ EXTERN_C
++ 
  SECURITY_STATUS
  WINAPI
  SslGetServerIdentity(
+@@ -1158,4 +1164,107 @@ SslDeserializeCertificateStore(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SCH_CRED_AUTO_CRED_VALIDATION")
++#undef SCH_CRED_AUTO_CRED_VALIDATION
++#pragma push_macro("SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE")
++#undef SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE
++#pragma push_macro("SCH_DISABLE_RECONNECTS")
++#undef SCH_DISABLE_RECONNECTS
++#pragma push_macro("SCH_CRED_IGNORE_NO_REVOCATION_CHECK")
++#undef SCH_CRED_IGNORE_NO_REVOCATION_CHECK
++#pragma push_macro("SCH_CRED_IGNORE_REVOCATION_OFFLINE")
++#undef SCH_CRED_IGNORE_REVOCATION_OFFLINE
++#pragma push_macro("SCH_CRED_MANUAL_CRED_VALIDATION")
++#undef SCH_CRED_MANUAL_CRED_VALIDATION
++#pragma push_macro("SCH_CRED_NO_DEFAULT_CREDS")
++#undef SCH_CRED_NO_DEFAULT_CREDS
++#pragma push_macro("SCH_CRED_NO_SERVERNAME_CHECK")
++#undef SCH_CRED_NO_SERVERNAME_CHECK
++#pragma push_macro("SCH_CRED_NO_SYSTEM_MAPPER")
++#undef SCH_CRED_NO_SYSTEM_MAPPER
++#pragma push_macro("SCH_CRED_REVOCATION_CHECK_CHAIN")
++#undef SCH_CRED_REVOCATION_CHECK_CHAIN
++#pragma push_macro("SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#undef SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT
++#pragma push_macro("SCH_CRED_REVOCATION_CHECK_END_CERT")
++#undef SCH_CRED_REVOCATION_CHECK_END_CERT
++#pragma push_macro("SCH_CRED_USE_DEFAULT_CREDS")
++#undef SCH_CRED_USE_DEFAULT_CREDS
++#pragma push_macro("SCH_SEND_AUX_RECORD")
++#undef SCH_SEND_AUX_RECORD
++#pragma push_macro("SCH_SEND_ROOT_CERT")
++#undef SCH_SEND_ROOT_CERT
++#pragma push_macro("SCH_USE_STRONG_CRYPTO")
++#undef SCH_USE_STRONG_CRYPTO
++#pragma push_macro("SCH_USE_PRESHAREDKEY_ONLY")
++#undef SCH_USE_PRESHAREDKEY_ONLY
++enum [[clang::flag_enum]] SCHANNEL_CRED_FLAGS : unsigned int
++{
++    SCH_CRED_AUTO_CRED_VALIDATION = 32U,
++    SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE = 131072U,
++    SCH_DISABLE_RECONNECTS = 128U,
++    SCH_CRED_IGNORE_NO_REVOCATION_CHECK = 2048U,
++    SCH_CRED_IGNORE_REVOCATION_OFFLINE = 4096U,
++    SCH_CRED_MANUAL_CRED_VALIDATION = 8U,
++    SCH_CRED_NO_DEFAULT_CREDS = 16U,
++    SCH_CRED_NO_SERVERNAME_CHECK = 4U,
++    SCH_CRED_NO_SYSTEM_MAPPER = 2U,
++    SCH_CRED_REVOCATION_CHECK_CHAIN = 512U,
++    SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 1024U,
++    SCH_CRED_REVOCATION_CHECK_END_CERT = 256U,
++    SCH_CRED_USE_DEFAULT_CREDS = 64U,
++    SCH_SEND_AUX_RECORD = 2097152U,
++    SCH_SEND_ROOT_CERT = 262144U,
++    SCH_USE_STRONG_CRYPTO = 4194304U,
++    SCH_USE_PRESHAREDKEY_ONLY = 8388608U,
++};
++#pragma pop_macro("SCH_USE_PRESHAREDKEY_ONLY")
++#pragma pop_macro("SCH_USE_STRONG_CRYPTO")
++#pragma pop_macro("SCH_SEND_ROOT_CERT")
++#pragma pop_macro("SCH_SEND_AUX_RECORD")
++#pragma pop_macro("SCH_CRED_USE_DEFAULT_CREDS")
++#pragma pop_macro("SCH_CRED_REVOCATION_CHECK_END_CERT")
++#pragma pop_macro("SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#pragma pop_macro("SCH_CRED_REVOCATION_CHECK_CHAIN")
++#pragma pop_macro("SCH_CRED_NO_SYSTEM_MAPPER")
++#pragma pop_macro("SCH_CRED_NO_SERVERNAME_CHECK")
++#pragma pop_macro("SCH_CRED_NO_DEFAULT_CREDS")
++#pragma pop_macro("SCH_CRED_MANUAL_CRED_VALIDATION")
++#pragma pop_macro("SCH_CRED_IGNORE_REVOCATION_OFFLINE")
++#pragma pop_macro("SCH_CRED_IGNORE_NO_REVOCATION_CHECK")
++#pragma pop_macro("SCH_DISABLE_RECONNECTS")
++#pragma pop_macro("SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE")
++#pragma pop_macro("SCH_CRED_AUTO_CRED_VALIDATION")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TLS1_ALERT_WARNING")
++#undef TLS1_ALERT_WARNING
++#pragma push_macro("TLS1_ALERT_FATAL")
++#undef TLS1_ALERT_FATAL
++enum SCHANNEL_ALERT_TOKEN_ALERT_TYPE : unsigned int
++{
++    TLS1_ALERT_WARNING = 1U,
++    TLS1_ALERT_FATAL = 2U,
++};
++#pragma pop_macro("TLS1_ALERT_FATAL")
++#pragma pop_macro("TLS1_ALERT_WARNING")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SSL_SESSION_ENABLE_RECONNECTS")
++#undef SSL_SESSION_ENABLE_RECONNECTS
++#pragma push_macro("SSL_SESSION_DISABLE_RECONNECTS")
++#undef SSL_SESSION_DISABLE_RECONNECTS
++enum SCHANNEL_SESSION_TOKEN_FLAGS : unsigned int
++{
++    SSL_SESSION_ENABLE_RECONNECTS = 1U,
++    SSL_SESSION_DISABLE_RECONNECTS = 2U,
++};
++#pragma pop_macro("SSL_SESSION_DISABLE_RECONNECTS")
++#pragma pop_macro("SSL_SESSION_ENABLE_RECONNECTS")
++#endif
++
+ #endif //__SCHANNEL_H__

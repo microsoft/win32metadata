@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
+index 0d0863017f..1d5ef46903 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
 @@ -15,6 +15,7 @@
@@ -9,19 +10,37 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #include <minwindef.h>
  #include <minwinbase.h>
  
+@@ -44,7 +45,7 @@ typedef struct _STARTUPINFOA {
+     DWORD   dwXCountChars;
+     DWORD   dwYCountChars;
+     DWORD   dwFillAttribute;
+-    DWORD   dwFlags;
++    _Win32_AssociatedEnum_(STARTUPINFOW_FLAGS) DWORD   dwFlags;
+     WORD    wShowWindow;
+     WORD    cbReserved2;
+     LPBYTE  lpReserved2;
+@@ -64,7 +65,7 @@ typedef struct _STARTUPINFOW {
+     DWORD   dwXCountChars;
+     DWORD   dwYCountChars;
+     DWORD   dwFillAttribute;
+-    DWORD   dwFlags;
++    _Win32_AssociatedEnum_(STARTUPINFOW_FLAGS) DWORD   dwFlags;
+     WORD    wShowWindow;
+     WORD    cbReserved2;
+     LPBYTE  lpReserved2;
 @@ -88,11 +89,14 @@ typedef LPSTARTUPINFOA LPSTARTUPINFO;
  
  #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
  QueueUserAPC(
 -    _In_ PAPCFUNC pfnAPC,
-+    _In_ _Win32_Retained_ PAPCFUNC pfnAPC,
++    _In_  PAPCFUNC pfnAPC,
      _In_ HANDLE hThread,
      _In_ ULONG_PTR dwData
      );
@@ -29,13 +48,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      ULONG_PTR Reserved1;
  } APC_CALLBACK_DATA, *PAPC_CALLBACK_DATA;
  
-+_Win32_SetLastError_
++
  WINBASEAPI
  BOOL
  WINAPI
  QueueUserAPC2(
 -    _In_ PAPCFUNC ApcRoutine,
-+    _In_ _Win32_Retained_ PAPCFUNC ApcRoutine,
++    _In_  PAPCFUNC ApcRoutine,
      _In_ HANDLE Thread,
      _In_ ULONG_PTR Data,
      _In_ QUEUE_USER_APC_FLAGS Flags
@@ -43,8 +62,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #endif /* NTDDI_VERSION >= NTDDI_WIN10_MN */
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -72,8 +91,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      VOID
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  WINBASEAPI
  DECLSPEC_NORETURN
  VOID
@@ -81,8 +100,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ UINT uExitCode
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
@@ -92,8 +111,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ UINT uExitCode
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -111,32 +130,34 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      VOID
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
++
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -194,8 +222,8 @@ WINAPI
+@@ -194,9 +222,9 @@ WINAPI
  CreateThread(
      _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
      _In_ SIZE_T dwStackSize,
 -    _In_ LPTHREAD_START_ROUTINE lpStartAddress,
 -    _In_opt_ __drv_aliasesMem LPVOID lpParameter,
-+    _In_ _Win32_Retained_ LPTHREAD_START_ROUTINE lpStartAddress,
-+    _In_opt_ __drv_aliasesMem _Win32_Retained_ LPVOID lpParameter,
-     _In_ DWORD dwCreationFlags,
+-    _In_ DWORD dwCreationFlags,
++    _In_  LPTHREAD_START_ROUTINE lpStartAddress,
++    _In_opt_ __drv_aliasesMem  LPVOID lpParameter,
++    _Win32_AssociatedEnum_(THREAD_CREATION_FLAGS) _In_ DWORD dwCreationFlags,
      _Out_opt_ LPDWORD lpThreadId
      );
+ 
 @@ -205,6 +233,10 @@ CreateThread(
  
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
++
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
@@ -146,8 +167,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ SIZE_T dwStackSize,
 -    _In_ LPTHREAD_START_ROUTINE lpStartAddress,
 -    _In_opt_ LPVOID lpParameter,
-+    _In_ _Win32_Retained_ LPTHREAD_START_ROUTINE lpStartAddress,
-+    _In_opt_ _Win32_Retained_ LPVOID lpParameter,
++    _In_  LPTHREAD_START_ROUTINE lpStartAddress,
++    _In_opt_  LPVOID lpParameter,
      _In_ DWORD dwCreationFlags,
      _Out_opt_ LPDWORD lpThreadId
      );
@@ -171,33 +192,39 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  WINBASEAPI
  DWORD
  WINAPI
-@@ -239,6 +277,10 @@ GetCurrentThreadId(
+@@ -239,24 +277,34 @@ GetCurrentThreadId(
      VOID
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
++
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -249,6 +291,9 @@ OpenThread(
+ WINAPI
+ OpenThread(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(THREAD_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
      _In_ DWORD dwThreadId
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
-@@ -257,6 +302,9 @@ SetThreadPriority(
-     _In_ int nPriority
+ SetThreadPriority(
+     _In_ HANDLE hThread,
+-    _In_ int nPriority
++    _Win32_AssociatedEnum_(THREAD_PRIORITY) _In_ int nPriority
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -206,8 +233,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ BOOL bDisablePriorityBoost
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -216,8 +243,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Out_ PBOOL pDisablePriorityBoost
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  int
@@ -226,8 +253,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ HANDLE hThread
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  WINBASEAPI
  DECLSPEC_NORETURN
  VOID
@@ -235,8 +262,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -245,8 +272,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != 0)
@@ -255,8 +282,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Out_ LPDWORD lpExitCode
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
@@ -265,8 +292,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ HANDLE hThread
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
@@ -286,8 +313,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      VOID
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
@@ -297,8 +324,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ DWORD dwTlsIndex
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
@@ -308,8 +335,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_opt_ LPVOID lpTlsValue
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
@@ -319,28 +346,45 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ DWORD dwTlsIndex
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
-@@ -380,6 +467,9 @@ CreateProcessA(
+@@ -373,13 +460,16 @@ CreateProcessA(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
+     _In_ BOOL bInheritHandles,
+-    _In_ DWORD dwCreationFlags,
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_ DWORD dwCreationFlags,
+     _In_opt_ LPVOID lpEnvironment,
+     _In_opt_ LPCSTR lpCurrentDirectory,
+     _In_ LPSTARTUPINFOA lpStartupInfo,
      _Out_ LPPROCESS_INFORMATION lpProcessInformation
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
+@@ -389,7 +479,7 @@ CreateProcessW(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
+     _In_ BOOL bInheritHandles,
+-    _In_ DWORD dwCreationFlags,
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_ DWORD dwCreationFlags,
+     _In_opt_ LPVOID lpEnvironment,
+     _In_opt_ LPCWSTR lpCurrentDirectory,
+     _In_ LPSTARTUPINFOW lpStartupInfo,
 @@ -408,6 +498,9 @@ CreateProcessW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -349,8 +393,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ DWORD dwFlags
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
@@ -359,8 +403,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
  WINBASEAPI
  VOID
  WINAPI
@@ -368,12 +412,21 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
  WINAPI
+@@ -456,7 +557,7 @@ CreateProcessAsUserW(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
+     _In_ BOOL bInheritHandles,
+-    _In_ DWORD dwCreationFlags,
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_ DWORD dwCreationFlags,
+     _In_opt_ LPVOID lpEnvironment,
+     _In_opt_ LPCWSTR lpCurrentDirectory,
+     _In_ LPSTARTUPINFOW lpStartupInfo,
 @@ -487,6 +588,8 @@ CreateProcessAsUserW(
  #if !defined(MIDL_PASS)
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
@@ -405,8 +458,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  #endif // !defined(MIDL_PASS)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINADVAPI
  _Must_inspect_result_
@@ -415,50 +468,54 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
  WINAPI
  OpenProcessToken(
      _In_ HANDLE ProcessHandle,
-     _In_ DWORD DesiredAccess,
+-    _In_ DWORD DesiredAccess,
 -    _Outptr_ PHANDLE TokenHandle
-+    _Outptr_ _Win32_RAIIFree_(CloseHandle) PHANDLE TokenHandle
++    _Win32_AssociatedEnum_(TOKEN_ACCESS_MASK) _In_ DWORD DesiredAccess,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_  PHANDLE TokenHandle
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-@@ -547,6 +660,9 @@ OpenProcessToken(
+@@ -547,24 +660,33 @@ OpenProcessToken(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
  WINAPI
-@@ -554,9 +670,12 @@ OpenThreadToken(
+ OpenThreadToken(
      _In_ HANDLE ThreadHandle,
-     _In_ DWORD DesiredAccess,
+-    _In_ DWORD DesiredAccess,
++    _Win32_AssociatedEnum_(TOKEN_ACCESS_MASK) _In_ DWORD DesiredAccess,
      _In_ BOOL OpenAsSelf,
 -    _Outptr_ PHANDLE TokenHandle
-+    _Outptr_ _Win32_RAIIFree_(CloseHandle) PHANDLE TokenHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_  PHANDLE TokenHandle
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
-@@ -565,6 +684,9 @@ SetPriorityClass(
-     _In_ DWORD dwPriorityClass
+ SetPriorityClass(
+     _In_ HANDLE hProcess,
+-    _In_ DWORD dwPriorityClass
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_ DWORD dwPriorityClass
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
@@ -467,7 +524,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
  BOOL
@@ -476,8 +533,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -486,7 +543,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= 0x0501)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
@@ -494,8 +551,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= 0x0502)
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
@@ -513,28 +570,33 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
-@@ -661,6 +797,9 @@ GetProcessIdOfThread(
+@@ -661,17 +797,22 @@ GetProcessIdOfThread(
      _In_ HANDLE Thread
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -672,6 +811,8 @@ InitializeProcThreadAttributeList(
+ WINAPI
+ InitializeProcThreadAttributeList(
+-    _Out_writes_bytes_to_opt_(*lpSize,*lpSize) LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
++    _Win32_RAIIFree_(DeleteProcThreadAttributeList) _Out_writes_bytes_to_opt_(*lpSize,*lpSize) LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+     _In_ DWORD dwAttributeCount,
+     _Reserved_ DWORD dwFlags,
      _When_(lpAttributeList == nullptr,_Out_) _When_(lpAttributeList != nullptr,_Inout_) PSIZE_T lpSize
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBASEAPI
  VOID
  WINAPI
@@ -542,8 +604,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #define PROC_THREAD_ATTRIBUTE_REPLACE_VALUE     0x00000001
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -553,7 +615,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ DWORD dwFlags,
      _In_ DWORD_PTR Attribute,
 -    _In_reads_bytes_opt_(cbSize) PVOID lpValue,
-+    _In_reads_bytes_opt_(cbSize) _Win32_Retained_ PVOID lpValue,
++    _In_reads_bytes_opt_(cbSize)  PVOID lpValue,
      _In_ SIZE_T cbSize,
      _Out_writes_bytes_opt_(cbSize) PVOID lpPreviousValue,
      _In_opt_ PSIZE_T lpReturnSize
@@ -569,8 +631,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
  
-+_Windows_SupportedOS_19041_662_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  BOOL
  WINAPI
@@ -587,7 +649,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
 +#pragma pop_macro("PROCESS_AFFINITY_ENABLE_AUTO_UPDATE")
 +#endif
 +
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -597,7 +659,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
 +    _In_ _Win32_AssociatedEnum_(PROCESS_AFFINITY_AUTO_UPDATE_FLAGS) DWORD dwFlags
      );
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -612,9 +674,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows7_
++_Win32_RAIIFree_(CloseHandle, -1, 0) _Windows_SupportedOS_Windows7_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
++
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
@@ -624,8 +686,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ SIZE_T dwStackSize,
 -    _In_ LPTHREAD_START_ROUTINE lpStartAddress,
 -    _In_opt_ LPVOID lpParameter,
-+    _In_ _Win32_Retained_ LPTHREAD_START_ROUTINE lpStartAddress,
-+    _In_opt_ _Win32_Retained_ LPVOID lpParameter,
++    _In_  LPTHREAD_START_ROUTINE lpStartAddress,
++    _In_opt_  LPVOID lpParameter,
      _In_ DWORD dwCreationFlags,
      _In_opt_ LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
      _Out_opt_ LPDWORD lpThreadId
@@ -633,8 +695,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= 0x0602)
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  WINBASEAPI
  VOID
  WINAPI
@@ -642,8 +704,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #endif
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -652,8 +714,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= 0x0602)
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -662,8 +724,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -672,8 +734,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= 0x0602)
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -682,8 +744,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -692,38 +754,47 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
-@@ -882,6 +1063,10 @@ GetThreadTimes(
+@@ -882,20 +1063,27 @@ GetThreadTimes(
      _Out_ LPFILETIME lpUserTime
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle)
++
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -891,6 +1076,9 @@ OpenProcess(
+ OpenProcess(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(PROCESS_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
      _In_ DWORD dwProcessId
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
 +_Win32_ImportLibrary_("kernel32.dll")
  WINBASEAPI
  BOOL
  WINAPI
+ IsProcessorFeaturePresent(
+-    _In_ DWORD ProcessorFeature
++    _Win32_AssociatedEnum_(PROCESSOR_FEATURE_ID) _In_ DWORD ProcessorFeature
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM  | WINAPI_PARTITION_GAMES) */
 @@ -906,6 +1094,7 @@ IsProcessorFeaturePresent(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -766,8 +837,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -776,8 +847,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Out_ PBOOL pDisablePriorityBoost
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -786,7 +857,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
@@ -794,16 +865,20 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1052,6 +1256,9 @@ typedef struct _MEMORY_PRIORITY_INFORMATION {
-     ULONG MemoryPriority;
+@@ -1049,9 +1253,12 @@ typedef enum _THREAD_INFORMATION_CLASS {
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
+ typedef struct _MEMORY_PRIORITY_INFORMATION {
+-    ULONG MemoryPriority;
++    _Win32_AssociatedEnum_(MEMORY_PRIORITY) ULONG MemoryPriority;
  } MEMORY_PRIORITY_INFORMATION, *PMEMORY_PRIORITY_INFORMATION;
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -812,8 +887,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ DWORD ThreadInformationSize
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -848,18 +923,36 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  DWORD
  WINAPI
+@@ -1183,7 +1401,7 @@ DEFINE_ENUM_FLAG_OPERATORS(MACHINE_ATTRIBUTES);
+ #endif
+ 
+ typedef struct _PROCESS_MACHINE_INFORMATION {
+-    USHORT ProcessMachine;
++    _Win32_AssociatedEnum_(IMAGE_FILE_MACHINE) USHORT ProcessMachine;
+     USHORT Res0;
+     MACHINE_ATTRIBUTES MachineAttributes;
+ } PROCESS_MACHINE_INFORMATION;
+@@ -1229,7 +1447,7 @@ typedef struct _PROCESS_POWER_THROTTLING_STATE {
+ } PROCESS_POWER_THROTTLING_STATE, *PPROCESS_POWER_THROTTLING_STATE;
+ 
+ typedef struct PROCESS_PROTECTION_LEVEL_INFORMATION {
+-    DWORD ProtectionLevel;
++    _Win32_AssociatedEnum_(PROCESS_PROTECTION_LEVEL) DWORD ProtectionLevel;
+ } PROCESS_PROTECTION_LEVEL_INFORMATION;
+ 
+ #define PROCESS_LEAP_SECOND_INFO_FLAG_ENABLE_SIXTY_SECOND   0x1
 @@ -1243,6 +1461,9 @@ typedef struct _PROCESS_LEAP_SECOND_INFO {
  
  #if (_WIN32_WINNT >= 0x0602)
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -868,8 +961,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ DWORD ProcessInformationSize
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -878,9 +971,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
-+_Win32_SetLastError_
++
++
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -888,9 +981,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Reserved_ ULONG Flags
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
-+_Win32_SetLastError_
++
++
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -898,8 +991,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Always_(_Out_) PULONG RequiredIdCount
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -907,9 +1000,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ ULONG CpuSetIdCount
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
-+_Win32_SetLastError_
++
++
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -917,8 +1010,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Always_(_Out_) PULONG RequiredIdCount
      );
  
-+_Windows_SupportedOS_10240_
-+_Windows_SupportedOS_Server2016_
++
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -926,18 +1019,27 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINADVAPI
  BOOL
  WINAPI
+@@ -1334,7 +1574,7 @@ CreateProcessAsUserA(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
+     _In_ BOOL bInheritHandles,
+-    _In_ DWORD dwCreationFlags,
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_ DWORD dwCreationFlags,
+     _In_opt_ LPVOID lpEnvironment,
+     _In_opt_ LPCSTR lpCurrentDirectory,
+     _In_ LPSTARTUPINFOA lpStartupInfo,
 @@ -1345,6 +1585,9 @@ CreateProcessAsUserA(
  #define CreateProcessAsUser  CreateProcessAsUserA
  #endif
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -946,7 +1048,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_FE)
  
-+_Win32_SetLastError_
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -954,7 +1056,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ USHORT CpuSetMaskCount
      );
  
-+_Win32_SetLastError_
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -962,7 +1064,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _Out_ PUSHORT RequiredMaskCount
      );
  
-+_Win32_SetLastError_
++
  _Success_(return != FALSE)
  BOOL
  WINAPI
@@ -970,8 +1072,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
-+_Windows_SupportedOS_14393_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_14393_ 
++
  WINBASEAPI
  HRESULT
  WINAPI
@@ -979,15 +1081,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/gen
      _In_ PCWSTR lpThreadDescription
      );
  
-+_Windows_SupportedOS_14393_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_14393_ 
++
  WINBASEAPI
  HRESULT
  WINAPI
  GetThreadDescription(
      _In_ HANDLE hThread,
 -    _Outptr_result_z_ PWSTR* ppszThreadDescription
-+    _Outptr_result_z_ _Win32_RAIIFree_(LocalFree) PWSTR* ppszThreadDescription
++    _Outptr_result_z_  PWSTR* ppszThreadDescription
      );
  
  #pragma region Application Family or OneCore Family or Games Family

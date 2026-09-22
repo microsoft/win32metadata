@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h b/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
+index d1db360332..b8298ee20f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+     Copyright (c) 2002  Microsoft Corporation
+@@ -196,7 +197,7 @@ FIOWriteFileEx(
+ //	pfIsStuffed - return FALSE
+ //	pfStoredWithDots - return FALSE
+ //
+-typedef	
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef	
+ HANDLE	
+ (__stdcall	*FCACHE_CREATE_CALLBACK) (
+ 		IN	LPSTR	lpstrName, 
+@@ -224,7 +225,7 @@ HANDLE
+ //		SMTP and POP3 protocols.  if this is FALSE then the message is stored without
+ //		DOT stuffing.
+ //
+-typedef	
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef	
+ HANDLE	
+ (__stdcall	*FCACHE_RICHCREATE_CALLBACK) (
+ 		IN	LPSTR	lpstrName, 

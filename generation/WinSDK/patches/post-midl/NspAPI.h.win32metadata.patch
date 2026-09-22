@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
-index ba21f468e222d7e4c217afe0a38a171d1a8ecb8c..a931cba0d7b57c8c853b23daf05cab4831be835f 100644
+index ba21f468e2..f6f2cb271e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NspAPI.h
 @@ -29,6 +29,7 @@ Notes:
@@ -10,12 +10,48 @@ index ba21f468e222d7e4c217afe0a38a171d1a8ecb8c..a931cba0d7b57c8c853b23daf05cab48
  
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -358,7 +359,7 @@ typedef struct _SERVICE_INFOA {
+     LPSTR   lpServiceName ;
+     LPSTR   lpComment ;
+     LPSTR   lpLocale ;
+-    DWORD dwDisplayHint ;
++    _Win32_AssociatedEnum_(RESOURCE_DISPLAY_TYPE) DWORD dwDisplayHint ;
+     DWORD dwVersion ;
+     DWORD dwTime ;
+     LPSTR   lpMachineName ;
+@@ -373,7 +374,7 @@ typedef struct _SERVICE_INFOW {
+     LPWSTR  lpServiceName ;
+     LPWSTR  lpComment ;
+     LPWSTR  lpLocale ;
+-    DWORD dwDisplayHint ;
++    _Win32_AssociatedEnum_(RESOURCE_DISPLAY_TYPE) DWORD dwDisplayHint ;
+     DWORD dwVersion ;
+     DWORD dwTime ;
+     LPWSTR  lpMachineName ;
+@@ -537,7 +538,7 @@ typedef struct _SERVICE_ASYNC_INFO {
+ //
+ // Public NSP API prototypes.
+ //
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ EnumProtocolsA (
+     _In_opt_ LPINT           lpiProtocols,
+@@ -547,7 +548,7 @@ EnumProtocolsA (
+ //
+ // Public NSP API prototypes.
+ //
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ EnumProtocolsW (
+     _In_opt_ LPINT           lpiProtocols,
 @@ -560,6 +561,8 @@ EnumProtocolsW (
  #define EnumProtocols  EnumProtocolsA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") 
++
  INT
  APIENTRY
  GetAddressByNameA (
@@ -23,17 +59,120 @@ index ba21f468e222d7e4c217afe0a38a171d1a8ecb8c..a931cba0d7b57c8c853b23daf05cab48
      _Inout_updates_opt_(*lpdwAliasBufferLength) LPSTR  lpAliasBuffer,
      _Inout_ LPDWORD               lpdwAliasBufferLength
      );
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") 
++
  INT
  APIENTRY
  GetAddressByNameW (
-@@ -594,6 +599,8 @@ GetAddressByNameW (
+@@ -594,13 +599,15 @@ GetAddressByNameW (
  #define GetAddressByName  GetAddressByNameA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") 
++
  INT
  APIENTRY
  GetTypeByNameA (
+     _In_    LPSTR         lpServiceName,
+     _Inout_ LPGUID        lpServiceType
+     );
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ GetTypeByNameW (
+     _In_    LPWSTR         lpServiceName,
+@@ -612,14 +619,14 @@ GetTypeByNameW (
+ #define GetTypeByName  GetTypeByNameA
+ #endif // !UNICODE
+ 
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ GetNameByTypeA (
+     _In_   LPGUID          lpServiceType,
+     _Out_writes_bytes_(dwNameLength) LPSTR         lpServiceName,
+     _In_   DWORD           dwNameLength
+     );
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ GetNameByTypeW (
+     _In_   LPGUID          lpServiceType,
+@@ -632,21 +639,21 @@ GetNameByTypeW (
+ #define GetNameByType  GetNameByTypeA
+ #endif // !UNICODE
+ 
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ SetServiceA (
+     _In_     DWORD                dwNameSpace,
+-    _In_     DWORD                dwOperation,
++    _Win32_AssociatedEnum_(SET_SERVICE_OPERATION) _In_     DWORD                dwOperation,
+     _In_     DWORD                dwFlags,
+     _In_     LPSERVICE_INFOA      lpServiceInfo,
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo,
+     _Out_    LPDWORD              lpdwStatusFlags
+     );
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ SetServiceW (
+     _In_     DWORD                dwNameSpace,
+-    _In_     DWORD                dwOperation,
++    _Win32_AssociatedEnum_(SET_SERVICE_OPERATION) _In_     DWORD                dwOperation,
+     _In_     DWORD                dwFlags,
+     _In_     LPSERVICE_INFOW      lpServiceInfo,
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo,
+@@ -658,7 +665,7 @@ SetServiceW (
+ #define SetService  SetServiceA
+ #endif // !UNICODE
+ 
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ GetServiceA (
+     _In_     DWORD                dwNameSpace,
+@@ -669,7 +676,7 @@ GetServiceA (
+     _Inout_  LPDWORD              lpdwBufferSize,
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo
+     );
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ APIENTRY
+ GetServiceW (
+     _In_     DWORD                dwNameSpace,
+@@ -693,6 +700,33 @@ GetServiceW (
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SERVICE_REGISTER")
++#undef SERVICE_REGISTER
++#pragma push_macro("SERVICE_DEREGISTER")
++#undef SERVICE_DEREGISTER
++#pragma push_macro("SERVICE_FLUSH")
++#undef SERVICE_FLUSH
++#pragma push_macro("SERVICE_ADD_TYPE")
++#undef SERVICE_ADD_TYPE
++#pragma push_macro("SERVICE_DELETE_TYPE")
++#undef SERVICE_DELETE_TYPE
++enum SET_SERVICE_OPERATION : unsigned int
++{
++    SERVICE_REGISTER = 1U,
++    SERVICE_DEREGISTER = 2U,
++    SERVICE_FLUSH = 3U,
++    SERVICE_ADD_TYPE = 4U,
++    SERVICE_DELETE_TYPE = 5U,
++};
++#pragma pop_macro("SERVICE_DELETE_TYPE")
++#pragma pop_macro("SERVICE_ADD_TYPE")
++#pragma pop_macro("SERVICE_FLUSH")
++#pragma pop_macro("SERVICE_DEREGISTER")
++#pragma pop_macro("SERVICE_REGISTER")
++#endif
++
+ #endif  // _NSPAPI_INCLUDED
+ 
+ 

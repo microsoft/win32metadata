@@ -1,0 +1,336 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
+index 10cd1740df..d96a83ef34 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1371,7 +1372,7 @@ EXTERN_C const IID IID_ISpNotifySource;
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE WaitForNotifyEvent( 
+             /* [in] */ DWORD dwMilliseconds) = 0;
+         
+-        virtual /* [local] */ HANDLE STDMETHODCALLTYPE GetNotifyEventHandle( void) = 0;
++        _Win32_RAIIFree_(CloseHandle, -1, 0) virtual /* [local] */ HANDLE STDMETHODCALLTYPE GetNotifyEventHandle( void) = 0;
+         
+     };
+     
+@@ -1612,7 +1613,7 @@ EXTERN_C const IID IID_ISpNotifyTranslator;
+         virtual HRESULT STDMETHODCALLTYPE Wait( 
+             /* [in] */ DWORD dwMilliseconds) = 0;
+         
+-        virtual HANDLE STDMETHODCALLTYPE GetEventHandle( void) = 0;
++        _Win32_RAIIFree_(CloseHandle, -1, 0) virtual HANDLE STDMETHODCALLTYPE GetEventHandle( void) = 0;
+         
+     };
+     
+@@ -4964,7 +4965,7 @@ EXTERN_C const IID IID_ISpAudio;
+             /* [out] */ GUID *pFormatId,
+             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx) = 0;
+         
+-        virtual HANDLE STDMETHODCALLTYPE EventHandle( void) = 0;
++        _Win32_RAIIFree_(CloseHandle, -1, 0) virtual HANDLE STDMETHODCALLTYPE EventHandle( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVolumeLevel( 
+             /* [out] */ ULONG *pLevel) = 0;
+@@ -7123,7 +7124,7 @@ EXTERN_C const IID IID_ISpVoice;
+         virtual HRESULT STDMETHODCALLTYPE GetSyncSpeakTimeout( 
+             /* [out] */ ULONG *pmsTimeout) = 0;
+         
+-        virtual /* [local] */ HANDLE STDMETHODCALLTYPE SpeakCompleteEvent( void) = 0;
++        _Win32_RAIIFree_(CloseHandle, -1, 0) virtual /* [local] */ HANDLE STDMETHODCALLTYPE SpeakCompleteEvent( void) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsUISupported( 
+             /* [in] */ LPCWSTR pszTypeOfUI,
+@@ -9687,18 +9688,18 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
+             /* [in] */ VARIANT_BOOL fAlwaysReload,
+             /* [out] */ IUnknown **pStream,
+             /* [out][annotation] */ 
+-            _Out_opt_  BSTR *pbstrMIMEType,
++            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrMIMEType,
+             /* [out] */ VARIANT_BOOL *pfModified,
+             /* [out][annotation] */ 
+-            _Out_opt_  BSTR *pbstrRedirectUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrRedirectUrl) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLocalCopy( 
+             /* [in] */ BSTR bstrResourceUri,
+             /* [out] */ BSTR *pbstrLocalPath,
+             /* [out][annotation] */ 
+-            _Out_opt_  BSTR *pbstrMIMEType,
++            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrMIMEType,
+             /* [out][annotation] */ 
+-            _Out_opt_  BSTR *pbstrRedirectUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrRedirectUrl) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ReleaseLocalCopy( 
+             /* [in] */ BSTR pbstrLocalPath) = 0;
+@@ -12498,7 +12499,7 @@ EXTERN_C const IID IID_ISpeechDataKey;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetStringValue( 
+             /* [in] */ __RPC__in const BSTR ValueName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Value) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Value) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE SetLongValue( 
+             /* [in] */ __RPC__in const BSTR ValueName,
+@@ -12524,11 +12525,11 @@ EXTERN_C const IID IID_ISpeechDataKey;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE EnumKeys( 
+             /* [in] */ long Index,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *SubKeyName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *SubKeyName) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE EnumValues( 
+             /* [in] */ long Index,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ValueName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ValueName) = 0;
+         
+     };
+     
+@@ -12764,7 +12765,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
+     {
+     public:
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ObjectId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ObjectId) = 0;
+         
+         virtual /* [hidden][id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_DataKey( 
+             /* [retval][out] */ __RPC__deref_out_opt ISpeechDataKey **DataKey) = 0;
+@@ -12774,7 +12775,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [defaultvalue][in] */ long Locale,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Description) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Description) = 0;
+         
+         virtual /* [id][hidden][helpstring] */ HRESULT STDMETHODCALLTYPE SetId( 
+             /* [in] */ __RPC__in BSTR Id,
+@@ -12783,7 +12784,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetAttribute( 
+             /* [in] */ __RPC__in BSTR AttributeName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *AttributeValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *AttributeValue) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE CreateInstance( 
+             /* [defaultvalue][in] */ __RPC__in_opt IUnknown *pUnkOuter,
+@@ -12798,7 +12799,7 @@ EXTERN_C const IID IID_ISpeechObjectToken;
+             /* [in] */ __RPC__in BSTR KeyName,
+             /* [in] */ __RPC__in BSTR FileName,
+             /* [in] */ SpeechTokenShellFolder Folder,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *FilePath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *FilePath) = 0;
+         
+         virtual /* [id][hidden][helpstring] */ HRESULT STDMETHODCALLTYPE RemoveStorageFileName( 
+             /* [in] */ __RPC__in BSTR ObjectStorageCLSID,
+@@ -13236,13 +13237,13 @@ EXTERN_C const IID IID_ISpeechObjectTokenCategory;
+     {
+     public:
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Id) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Id) = 0;
+         
+         virtual /* [id][helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Default( 
+             /* [in] */ __RPC__in const BSTR TokenId) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Default( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *TokenId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *TokenId) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE SetId( 
+             /* [in] */ __RPC__in const BSTR Id,
+@@ -13818,7 +13819,7 @@ EXTERN_C const IID IID_ISpeechAudioFormat;
+             /* [in] */ SpeechAudioFormatType AudioFormat) = 0;
+         
+         virtual /* [id][helpstring][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Guid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Guid) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Guid) = 0;
+         
+         virtual /* [id][helpstring][hidden][propput] */ HRESULT STDMETHODCALLTYPE put_Guid( 
+             /* [in] */ __RPC__in BSTR Guid) = 0;
+@@ -16169,7 +16170,7 @@ EXTERN_C const IID IID_ISpeechVoiceStatus;
+             /* [retval][out] */ __RPC__out long *Length) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_LastBookmark( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Bookmark) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Bookmark) = 0;
+         
+         virtual /* [hidden][id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_LastBookmarkId( 
+             /* [retval][out] */ __RPC__out long *BookmarkId) = 0;
+@@ -16995,7 +16996,7 @@ EXTERN_C const IID IID_ISpeechRecognizerStatus;
+             /* [retval][out] */ __RPC__out long *NumberOfActiveRules) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClsidEngine( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ClsidEngine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ClsidEngine) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SupportedLanguages( 
+             /* [retval][out] */ __RPC__out VARIANT *SupportedLanguages) = 0;
+@@ -17182,7 +17183,7 @@ EXTERN_C const IID IID_ISpeechRecoContext;
+             /* [retval][out] */ __RPC__out SpeechInterference *Interference) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_RequestedUIType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *UIType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *UIType) = 0;
+         
+         virtual /* [id][helpstring][propputref] */ HRESULT STDMETHODCALLTYPE putref_Voice( 
+             /* [in] */ __RPC__in_opt ISpeechVoice *Voice) = 0;
+@@ -18078,7 +18079,7 @@ EXTERN_C const IID IID_ISpeechGrammarRule;
+             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRuleState **State) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+             /* [retval][out] */ __RPC__out long *Id) = 0;
+@@ -18301,7 +18302,7 @@ EXTERN_C const IID IID_ISpeechGrammarRules;
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE Commit( void) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE CommitAndSave( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *ErrorText,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ErrorText,
+             /* [retval][out] */ __RPC__out VARIANT *SaveStream) = 0;
+         
+     };
+@@ -18720,7 +18721,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransition;
+             /* [retval][out] */ __RPC__out SpeechGrammarRuleStateTransitionType *Type) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Text( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Text) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Text) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Rule( 
+             /* [retval][out] */ __RPC__deref_out_opt ISpeechGrammarRule **Rule) = 0;
+@@ -18729,7 +18730,7 @@ EXTERN_C const IID IID_ISpeechGrammarRuleStateTransition;
+             /* [retval][out] */ __RPC__out VARIANT *Weight) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *PropertyName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *PropertyName) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyId( 
+             /* [retval][out] */ __RPC__out long *PropertyId) = 0;
+@@ -20337,7 +20338,7 @@ EXTERN_C const IID IID_ISpeechPhraseInfo;
+             /* [retval][out] */ __RPC__deref_out_opt ISpeechPhraseReplacements **Replacements) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_EngineId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *EngineIdGuid) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *EngineIdGuid) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_EnginePrivateData( 
+             /* [retval][out] */ __RPC__out VARIANT *PrivateData) = 0;
+@@ -20349,7 +20350,7 @@ EXTERN_C const IID IID_ISpeechPhraseInfo;
+             /* [defaultvalue][in] */ long StartElement,
+             /* [defaultvalue][in] */ long Elements,
+             /* [defaultvalue][in] */ VARIANT_BOOL UseReplacements,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Text) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Text) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetDisplayAttributes( 
+             /* [defaultvalue][in] */ long StartElement,
+@@ -20637,10 +20638,10 @@ EXTERN_C const IID IID_ISpeechPhraseElement;
+             /* [retval][out] */ __RPC__out long *RetainedSizeBytes) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *DisplayText) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *DisplayText) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_LexicalForm( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *LexicalForm) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *LexicalForm) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Pronunciation( 
+             /* [retval][out] */ __RPC__out VARIANT *Pronunciation) = 0;
+@@ -21054,7 +21055,7 @@ EXTERN_C const IID IID_ISpeechPhraseReplacement;
+             /* [retval][out] */ __RPC__out SpeechDisplayAttributes *DisplayAttributes) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Text( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Text) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Text) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_FirstElement( 
+             /* [retval][out] */ __RPC__out long *FirstElement) = 0;
+@@ -21384,7 +21385,7 @@ EXTERN_C const IID IID_ISpeechPhraseProperty;
+     {
+     public:
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+             /* [retval][out] */ __RPC__out long *Id) = 0;
+@@ -21772,7 +21773,7 @@ EXTERN_C const IID IID_ISpeechPhraseRule;
+     {
+     public:
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [id][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+             /* [retval][out] */ __RPC__out long *Id) = 0;
+@@ -22568,7 +22569,7 @@ EXTERN_C const IID IID_ISpeechLexiconWord;
+             /* [retval][out] */ __RPC__out SpeechWordType *WordType) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Word( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Word) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Word) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Pronunciations( 
+             /* [retval][out] */ __RPC__deref_out_opt ISpeechLexiconPronunciations **Pronunciations) = 0;
+@@ -22907,7 +22908,7 @@ EXTERN_C const IID IID_ISpeechLexiconPronunciation;
+             /* [retval][out] */ __RPC__out VARIANT *PhoneIds) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Symbolic( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Symbolic) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Symbolic) = 0;
+         
+     };
+     
+@@ -23182,13 +23183,13 @@ EXTERN_C const IID IID_ISpeechXMLRecoResult;
+     public:
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetXMLResult( 
+             /* [in] */ SPXMLRESULTOPTIONS Options,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pResult) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pResult) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetXMLErrorInfo( 
+             /* [out] */ __RPC__out long *LineNumber,
+-            /* [out] */ __RPC__deref_out_opt BSTR *ScriptLine,
+-            /* [out] */ __RPC__deref_out_opt BSTR *Source,
+-            /* [out] */ __RPC__deref_out_opt BSTR *Description,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ScriptLine,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Source,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Description,
+             /* [out] */ __RPC__out long *ResultCode,
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *IsError) = 0;
+         
+@@ -23470,13 +23471,13 @@ EXTERN_C const IID IID_ISpeechRecoResultDispatch;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetXMLResult( 
+             /* [in] */ SPXMLRESULTOPTIONS Options,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pResult) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pResult) = 0;
+         
+         virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetXMLErrorInfo( 
+             /* [out] */ __RPC__out long *LineNumber,
+-            /* [out] */ __RPC__deref_out_opt BSTR *ScriptLine,
+-            /* [out] */ __RPC__deref_out_opt BSTR *Source,
+-            /* [out] */ __RPC__deref_out_opt BSTR *Description,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ScriptLine,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Source,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Description,
+             /* [out] */ __RPC__out HRESULT *ResultCode,
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *IsError) = 0;
+         
+@@ -23882,7 +23883,7 @@ EXTERN_C const IID IID_ISpeechPhoneConverter;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IdToPhone( 
+             /* [in] */ const VARIANT IdArray,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Phonemes) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Phonemes) = 0;
+         
+     };
+     

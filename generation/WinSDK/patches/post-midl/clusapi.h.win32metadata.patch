@@ -1,0 +1,1952 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h
+index bac8998e54..9ca6e71741 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -645,7 +646,7 @@ typedef PCLUSAPI_REASON_HANDLER
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ GetNodeClusterState(
+     _In_opt_    LPCWSTR lpszNodeName,
+@@ -658,7 +659,7 @@ typedef DWORD
+     _Out_       LPDWORD pdwClusterState
+     );
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ OpenCluster(
+     _In_opt_ LPCWSTR lpszClusterName
+@@ -670,7 +671,7 @@ typedef HCLUSTER
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ OpenClusterEx(
+     _In_opt_ LPCWSTR lpszClusterName,
+@@ -686,7 +687,7 @@ typedef HCLUSTER
+     );
+ #endif
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ BOOL
+ WINAPI
+ CloseCluster(
+     _In_ HCLUSTER hCluster
+@@ -697,7 +698,7 @@ typedef BOOL
+     _In_ HCLUSTER hCluster
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterName(
+     _In_ HCLUSTER hCluster,
+@@ -730,7 +731,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterInformation(
+@@ -748,7 +749,7 @@ typedef DWORD
+     _Out_opt_ LPCLUSTERVERSIONINFO lpClusterInfo
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterQuorumResource(
+@@ -770,7 +771,7 @@ typedef DWORD
+     _Out_ LPDWORD lpdwMaxQuorumLogSize
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterQuorumResource(
+     _In_     HRESOURCE hResource,
+@@ -807,7 +808,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2003_ DWORD
+ WINAPI
+ BackupClusterDatabase(
+     _In_ HCLUSTER hCluster,
+@@ -820,7 +821,7 @@ typedef DWORD
+     _In_ LPCWSTR  lpszPathName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2003_ DWORD
+ WINAPI
+ RestoreClusterDatabase(
+     _In_ LPCWSTR  lpszPathName,
+@@ -835,7 +836,7 @@ typedef DWORD
+     _In_opt_ LPCWSTR  lpszQuorumDriveLetter
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2003_ DWORD
+ WINAPI
+ SetClusterNetworkPriorityOrder(
+     _In_ HCLUSTER hCluster,
+@@ -850,7 +851,7 @@ typedef DWORD
+     _In_reads_( NetworkCount ) HNETWORK NetworkList[]
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2003_ DWORD
+ WINAPI
+ SetClusterServiceAccountPassword(
+     _In_ LPCWSTR lpszClusterName,
+@@ -869,7 +870,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcbReturnStatusBufferSize
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterControl(
+     _In_ HCLUSTER hCluster,
+@@ -939,7 +940,7 @@ typedef BOOL
+     CLUSTER_UPGRADE_PHASE eUpgradePhase
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterUpgradeFunctionalLevel(
+     _In_ HCLUSTER hCluster,
+@@ -1304,7 +1305,7 @@ typedef struct _CLUSTER_MEMBERSHIP_INFO {
+ //
+ // V2 Notifications DLL Functions
+ //
+-HCHANGE
++_Windows_SupportedOS_Server2012_ _Win32_SetLastError_ HCHANGE
+ WINAPI
+ CreateClusterNotifyPortV2(
+     _In_  HCHANGE hChange,
+@@ -1323,7 +1324,7 @@ typedef HCHANGE
+     _In_  DWORD_PTR dwNotifyKey
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ RegisterClusterNotifyV2(
+     _In_  HCHANGE hChange,
+@@ -1340,20 +1341,20 @@ typedef DWORD
+     _In_  DWORD_PTR dwNotifyKey
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ GetNotifyEventHandle(
+     _In_  HCHANGE  hChange,
+-    _Out_ LPHANDLE lphTargetEvent
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ LPHANDLE lphTargetEvent
+     );
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2)(
+     _In_  HCHANGE  hChange,
+-    _Out_ LPHANDLE lphTargetEvent
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ LPHANDLE lphTargetEvent
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2012_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterNotifyV2(
+@@ -1397,7 +1398,7 @@ typedef DWORD
+ //
+ // Begin original notification DLL function defs
+ //
+-HCHANGE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCHANGE
+ WINAPI
+ CreateClusterNotifyPort(
+     _In_ HCHANGE hChange,
+@@ -1414,7 +1415,7 @@ typedef HCHANGE
+     _In_ DWORD_PTR dwNotifyKey
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ RegisterClusterNotify(
+     _In_ HCHANGE hChange,
+@@ -1431,7 +1432,7 @@ typedef DWORD
+     _In_ DWORD_PTR dwNotifyKey
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterNotify(
+@@ -1453,7 +1454,7 @@ typedef DWORD
+     _In_ DWORD dwMilliseconds
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ BOOL
+ WINAPI
+ CloseClusterNotifyPort(
+     _In_ HCHANGE hChange
+@@ -1500,7 +1501,7 @@ typedef enum CLUSTER_ENUM {
+ #endif // _CLUSTER_API_TYPES_
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HCLUSENUM
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSENUM
+ WINAPI
+ ClusterOpenEnum(
+     _In_ HCLUSTER hCluster,
+@@ -1513,7 +1514,7 @@ typedef HCLUSENUM
+     _In_ DWORD dwType
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterGetEnumCount(
+     _In_ HCLUSENUM hEnum
+@@ -1524,7 +1525,7 @@ typedef DWORD
+     _In_ HCLUSENUM hEnum
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterEnum(
+@@ -1544,7 +1545,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterCloseEnum(
+     _In_ HCLUSENUM hEnum
+@@ -1557,7 +1558,7 @@ typedef DWORD
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+ 
+-HCLUSENUMEX
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSENUMEX
+ WINAPI
+ ClusterOpenEnumEx(
+     _In_ HCLUSTER hCluster,
+@@ -1572,7 +1573,7 @@ typedef HCLUSENUMEX
+         _In_opt_ PVOID pOptions
+         );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterGetEnumCountEx(
+     _In_ HCLUSENUMEX hClusterEnum
+@@ -1583,7 +1584,7 @@ typedef DWORD
+     _In_ HCLUSENUMEX hClusterEnum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterEnumEx(
+     _In_ HCLUSENUMEX hClusterEnum,
+@@ -1600,7 +1601,7 @@ typedef DWORD
+     _Inout_ LPDWORD cbItem
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterCloseEnumEx(
+     _In_ HCLUSENUMEX hClusterEnum
+@@ -1622,7 +1623,7 @@ typedef DWORD
+ #define CLUSGROUPSET_STATUS_OS_HEARTBEAT                                            0x0000000000000004
+ #define CLUSGROUPSET_STATUS_APPLICATION_READY                                       0x0000000000000008
+ 
+-HGROUPSET
++_Windows_SupportedOS_Server2016_ _Win32_SetLastError_ HGROUPSET
+ WINAPI
+ CreateClusterGroupSet(
+     _In_ HCLUSTER hCluster,
+@@ -1635,7 +1636,7 @@ typedef HGROUPSET
+     _In_ LPCWSTR lpszGroupSetName
+     );
+ 
+-HGROUPSET
++_Windows_SupportedOS_Server2016_ _Win32_SetLastError_ HGROUPSET
+ WINAPI
+ OpenClusterGroupSet(
+     _In_ HCLUSTER hCluster,
+@@ -1648,7 +1649,7 @@ typedef HGROUPSET
+     _In_ LPCWSTR lpszGroupSetName
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Server2016_ _Win32_SetLastError_ BOOL
+ WINAPI
+ CloseClusterGroupSet(
+     _In_ HGROUPSET hGroupSet
+@@ -1659,7 +1660,7 @@ typedef BOOL
+     _In_ HGROUPSET hGroupSet
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ DeleteClusterGroupSet(
+     _In_ HGROUPSET hGroupSet
+@@ -1687,7 +1688,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterAddGroupToGroupSet(
+     _In_ HGROUPSET hGroupSet,
+@@ -1733,7 +1734,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterRemoveGroupFromGroupSet(
+     _In_ HGROUP hGroup
+@@ -1761,7 +1762,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterGroupSetControl(
+     _In_ HGROUPSET hGroupSet,
+@@ -1818,7 +1819,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ AddClusterGroupDependency(
+     _In_ HGROUP hDependentGroup,
+@@ -1850,7 +1851,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ SetGroupDependencyExpression(
+     _In_ HGROUP hGroup,
+@@ -1882,7 +1883,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ RemoveClusterGroupDependency(
+     _In_ HGROUP hGroup,
+@@ -1914,7 +1915,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ AddClusterGroupSetDependency(
+     _In_ HGROUPSET hDependentGroupSet,
+@@ -1946,7 +1947,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ SetClusterGroupSetDependencyExpression(
+     _In_ HGROUPSET hGroupSet,
+@@ -1978,7 +1979,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ RemoveClusterGroupSetDependency(
+     _In_ HGROUPSET hGroupSet,
+@@ -2010,7 +2011,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ AddClusterGroupToGroupSetDependency(
+     _In_ HGROUP hDependentGroup,
+@@ -2042,7 +2043,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ RemoveClusterGroupToGroupSetDependency(
+     _In_ HGROUP hGroup,
+@@ -2075,19 +2076,19 @@ typedef DWORD
+ 
+ #endif
+ 
+-HGROUPSETENUM
++_Windows_SupportedOS_Server2016_ _Win32_SetLastError_ HGROUPSETENUM
+ WINAPI
+     ClusterGroupSetOpenEnum(
+     IN HCLUSTER hCluster
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+     ClusterGroupSetGetEnumCount(
+     IN HGROUPSETENUM hGroupSetEnum
+     );
+ 
+-__success(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2016_ __success(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+     ClusterGroupSetEnum(
+@@ -2097,7 +2098,7 @@ WINAPI
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterGroupSetCloseEnum(
+     IN HGROUPSETENUM hGroupSetEnum
+@@ -2371,7 +2372,7 @@ typedef enum CLUSTER_NODE_FAILBACK_STATUS {
+ //
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HNODE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNODE
+ WINAPI
+ OpenClusterNode(
+     _In_ HCLUSTER hCluster,
+@@ -2385,7 +2386,7 @@ typedef HNODE
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-HNODE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNODE
+ WINAPI
+ OpenClusterNodeEx(
+     _In_      HCLUSTER hCluster,
+@@ -2418,7 +2419,7 @@ typedef HNODE
+     );
+ #endif
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ BOOL
+ WINAPI
+ CloseClusterNode(
+     _In_ HNODE hNode
+@@ -2429,7 +2430,7 @@ typedef BOOL
+     _In_ HNODE hNode
+     );
+ 
+-CLUSTER_NODE_STATE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ CLUSTER_NODE_STATE
+ WINAPI
+ GetClusterNodeState(
+     _In_ HNODE hNode
+@@ -2440,7 +2441,7 @@ typedef CLUSTER_NODE_STATE
+     _In_ HNODE hNode
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterNodeId(
+@@ -2459,7 +2460,7 @@ typedef DWORD
+ #define GetCurrentClusterNodeId(_lpszNodeId_, _lpcchName_) \
+     GetClusterNodeId(NULL, (_lpszNodeId_), (_lpcchName_))
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ GetClusterFromNode(
+     _In_ HNODE hNode
+@@ -2470,7 +2471,7 @@ typedef HCLUSTER
+     _In_ HNODE hNode
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ PauseClusterNode(
+     _In_ HNODE hNode
+@@ -2481,7 +2482,7 @@ typedef DWORD
+     _In_ HNODE hNode
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ResumeClusterNode(
+     _In_ HNODE hNode
+@@ -2492,7 +2493,7 @@ typedef DWORD
+     _In_ HNODE hNode
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ EvictClusterNode(
+     _In_ HNODE hNode
+@@ -2503,7 +2504,7 @@ typedef DWORD
+     _In_ HNODE hNode
+     );
+ 
+-HNETINTERFACEENUM
++_Windows_SupportedOS_Server2016_ _Win32_SetLastError_ HNETINTERFACEENUM
+ WINAPI
+ ClusterNetInterfaceOpenEnum(
+    _In_ HCLUSTER hCluster,
+@@ -2511,7 +2512,7 @@ ClusterNetInterfaceOpenEnum(
+    _In_opt_ LPCWSTR lpszNetworkName
+     );
+ 
+-__success(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2016_ __success(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterNetInterfaceEnum(
+@@ -2521,13 +2522,13 @@ ClusterNetInterfaceEnum(
+     _Inout_ LPDWORD lpcchName
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterNetInterfaceCloseEnum(
+   _In_ HNETINTERFACEENUM hNetInterfaceEnum
+ );
+ 
+-HNODEENUM
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNODEENUM
+ WINAPI
+ ClusterNodeOpenEnum(
+     _In_ HNODE hNode,
+@@ -2542,7 +2543,7 @@ typedef HNODEENUM
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+ 
+-HNODEENUMEX
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNODEENUMEX
+ WINAPI
+ ClusterNodeOpenEnumEx(
+     _In_ HNODE hNode,
+@@ -2557,7 +2558,7 @@ typedef HNODEENUMEX
+         _In_opt_ PVOID pOptions
+         );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNodeGetEnumCountEx(
+     _In_ HNODEENUMEX hNodeEnum
+@@ -2568,7 +2569,7 @@ typedef DWORD
+     _In_ HNODEENUMEX hNodeEnum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNodeEnumEx(
+     _In_ HNODEENUMEX hNodeEnum,
+@@ -2585,7 +2586,7 @@ typedef DWORD
+     _Inout_ LPDWORD cbItem
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNodeCloseEnumEx(
+     _In_ HNODEENUMEX hNodeEnum
+@@ -2598,7 +2599,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNodeGetEnumCount(
+     _In_ HNODEENUM hNodeEnum
+@@ -2609,7 +2610,7 @@ typedef DWORD
+     _In_ HNODEENUM hNodeEnum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNodeCloseEnum(
+     _In_ HNODEENUM hNodeEnum
+@@ -2620,7 +2621,7 @@ typedef DWORD
+     _In_ HNODEENUM hNodeEnum
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterNodeEnum(
+@@ -2640,7 +2641,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ EvictClusterNodeEx(
+     _In_ HNODE hNode,
+@@ -2684,7 +2685,7 @@ typedef DWORD
+ //
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterResourceTypeKey(
+     _In_ HCLUSTER hCluster,
+@@ -2692,7 +2693,7 @@ GetClusterResourceTypeKey(
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY)(
+     _In_ HCLUSTER hCluster,
+     _In_ LPCWSTR lpszTypeName,
+@@ -2786,7 +2787,7 @@ typedef struct _CLUSTER_RESOURCE_ENUM_ITEM {
+ #endif // _CLUSTER_API_TYPES_
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HGROUP
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HGROUP
+ WINAPI
+ CreateClusterGroup(
+     _In_ HCLUSTER hCluster,
+@@ -2799,7 +2800,7 @@ typedef HGROUP
+     _In_ LPCWSTR lpszGroupName
+     );
+ 
+-HGROUP
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HGROUP
+ WINAPI
+ OpenClusterGroup(
+     _In_ HCLUSTER hCluster,
+@@ -2813,7 +2814,7 @@ typedef HGROUP
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-HGROUP
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HGROUP
+ WINAPI
+ OpenClusterGroupEx(
+     _In_      HCLUSTER hCluster,
+@@ -2840,7 +2841,7 @@ typedef HGROUP
+ #define CLUSAPI_NODE_PAUSE_RETRY_DRAIN_ON_FAILURE               0x00000004
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ PauseClusterNodeEx(
+     _In_ HNODE hNode,
+@@ -2895,7 +2896,7 @@ typedef enum CLUSTER_NODE_RESUME_FAILBACK_TYPE
+ #define CLUSAPI_NODE_RESUME_FAILBACK_VMS_FORCEFULLY            0x00000008
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ResumeClusterNodeEx(
+     _In_ HNODE hNode,
+@@ -2946,7 +2947,7 @@ typedef DWORD
+ #define CLUSGRP_STATUS_OFFLINE_NOT_LOCAL_DISK_OWNER                            0x0000000000000800
+ #define CLUSGRP_STATUS_WAITING_FOR_DEPENDENCIES                                0x0000000000001000
+ 
+-HGROUP
++_Windows_SupportedOS_Server2012_ HGROUP
+ WINAPI
+ CreateClusterGroupEx(
+     _In_ HCLUSTER hCluster,
+@@ -2961,7 +2962,7 @@ typedef HGROUP
+     _In_opt_ PCLUSTER_CREATE_GROUP_INFO pGroupInfo
+     );
+ 
+-HGROUPENUMEX
++_Windows_SupportedOS_Server2012_ HGROUPENUMEX
+ WINAPI
+ ClusterGroupOpenEnumEx(
+     _In_ HCLUSTER hCluster,
+@@ -2982,7 +2983,7 @@ typedef HGROUPENUMEX
+     _In_ DWORD dwFlags
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ClusterGroupGetEnumCountEx(
+     _In_ HGROUPENUMEX hGroupEnumEx
+@@ -2993,7 +2994,7 @@ typedef DWORD
+     _In_ HGROUPENUMEX hGroupEnumEx
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ClusterGroupEnumEx(
+     _In_ HGROUPENUMEX hGroupEnumEx,
+@@ -3010,7 +3011,7 @@ typedef DWORD
+     _Inout_ LPDWORD cbItem
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ClusterGroupCloseEnumEx(
+     _In_ HGROUPENUMEX hGroupEnumEx
+@@ -3033,7 +3034,7 @@ typedef DWORD
+ #define CLUSRES_STATUS_APPLICATION_READY                                       0x0000000000000100
+ #define CLUSRES_STATUS_OFFLINE_NOT_LOCAL_DISK_OWNER                            0x0000000000000200
+ 
+-HRESENUMEX
++_Windows_SupportedOS_Server2012_ _Win32_SetLastError_ HRESENUMEX
+ WINAPI
+ ClusterResourceOpenEnumEx(
+     _In_ HCLUSTER hCluster,
+@@ -3054,7 +3055,7 @@ typedef HRESENUMEX
+     _In_ DWORD dwFlags
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ClusterResourceGetEnumCountEx(
+     _In_ HRESENUMEX hResourceEnumEx
+@@ -3065,7 +3066,7 @@ typedef DWORD
+     _In_ HRESENUMEX hResourceEnumEx
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ClusterResourceEnumEx(
+     _In_ HRESENUMEX hResourceEnumEx,
+@@ -3082,7 +3083,7 @@ typedef DWORD
+     _Inout_ LPDWORD cbItem
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ ClusterResourceCloseEnumEx(
+     _In_ HRESENUMEX hResourceEnumEx
+@@ -3098,7 +3099,7 @@ typedef DWORD
+ #define CLUSAPI_GROUP_ONLINE_BEST_POSSIBLE_NODE     0x00000004
+ #define CLUSAPI_GROUP_ONLINE_IGNORE_AFFINITY_RULE   0x00000008
+ 
+-DWORD WINAPI OnlineClusterGroupEx(
++_Windows_SupportedOS_Server2012_ DWORD WINAPI OnlineClusterGroupEx(
+     _In_       HGROUP hGroup,
+     _In_opt_   HNODE  hDestinationNode,
+     _In_       DWORD  dwOnlineFlags,
+@@ -3109,7 +3110,7 @@ DWORD WINAPI OnlineClusterGroupEx(
+ 
+ #define CLUSAPI_GROUP_OFFLINE_IGNORE_RESOURCE_STATUS 0x00000001
+ 
+-DWORD WINAPI OfflineClusterGroupEx(
++_Windows_SupportedOS_Server2012_ DWORD WINAPI OfflineClusterGroupEx(
+     _In_       HGROUP hGroup,
+     _In_       DWORD  dwOfflineFlags,
+     _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+@@ -3151,7 +3152,7 @@ OfflineClusterGroupEx2(
+ #define CLUSAPI_RESOURCE_ONLINE_IGNORE_AFFINITY_RULE            0x00000020
+ 
+ 
+-DWORD WINAPI OnlineClusterResourceEx(
++_Windows_SupportedOS_Server2012_ DWORD WINAPI OnlineClusterResourceEx(
+   _In_       HRESOURCE hResource,
+   _In_       DWORD     dwOnlineFlags,
+   _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+@@ -3186,7 +3187,7 @@ OnlineClusterResourceEx2(
+ #define CLUSAPI_RESOURCE_OFFLINE_REASON_PREEMPTED       0x00000020
+ #define CLUSAPI_RESOURCE_OFFLINE_REASON_SHUTTING_DOWN   0x00000040
+ 
+-DWORD WINAPI OfflineClusterResourceEx(
++_Windows_SupportedOS_Server2012_ DWORD WINAPI OfflineClusterResourceEx(
+   _In_       HRESOURCE hResource,
+   _In_       DWORD     dwOfflineFlags,
+   _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+@@ -3218,7 +3219,7 @@ OfflineClusterResourceEx2(
+ #define CLUSAPI_CHANGE_RESOURCE_GROUP_FORCE_MOVE_TO_CSV     0x0000000000000001
+ #define CLUSAPI_VALID_CHANGE_RESOURCE_GROUP_FLAGS           (CLUSAPI_CHANGE_RESOURCE_GROUP_FORCE_MOVE_TO_CSV)
+ 
+-DWORD
++_Windows_SupportedOS_Server2012_ DWORD
+ WINAPI
+ MoveClusterGroupEx(
+   _In_       HGROUP hGroup,
+@@ -3244,12 +3245,12 @@ MoveClusterGroupEx2(
+ #endif
+ 
+ 
+-DWORD WINAPI CancelClusterGroupOperation(
++_Windows_SupportedOS_Server2012_ DWORD WINAPI CancelClusterGroupOperation(
+   _In_       HGROUP hGroup,
+   _In_       DWORD  dwCancelFlags_RESERVED
+     );
+ 
+-DWORD WINAPI RestartClusterResource(
++_Windows_SupportedOS_Server2012_ DWORD WINAPI RestartClusterResource(
+     _In_ HRESOURCE hResource,
+     _In_ DWORD dwFlags
+     );
+@@ -3280,7 +3281,7 @@ typedef DWORD
+ 
+ #endif // (CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8)
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ BOOL
+ WINAPI
+ CloseClusterGroup(
+     _In_ HGROUP hGroup
+@@ -3291,7 +3292,7 @@ typedef BOOL
+     _In_ HGROUP hGroup
+     );
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ GetClusterFromGroup(
+     _In_ HGROUP hGroup
+@@ -3302,7 +3303,7 @@ typedef HCLUSTER
+     _In_ HGROUP hGroup
+     );
+ 
+-_Success_(return >= 0) //!= ClusterGroupStateUnknown
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Success_(return >= 0) //!= ClusterGroupStateUnknown
+ CLUSTER_GROUP_STATE
+ WINAPI
+ GetClusterGroupState(
+@@ -3318,7 +3319,7 @@ typedef CLUSTER_GROUP_STATE
+     _Inout_opt_ LPDWORD lpcchNodeName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterGroupName(
+     _In_ HGROUP hGroup,
+@@ -3331,7 +3332,7 @@ typedef DWORD
+     LPCWSTR lpszGroupName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterGroupNodeList(
+     _In_ HGROUP hGroup,
+@@ -3382,7 +3383,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ OnlineClusterGroup(
+     _In_ HGROUP hGroup,
+@@ -3395,7 +3396,7 @@ typedef DWORD
+     _In_opt_ HNODE hDestinationNode
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ MoveClusterGroup(
+     _In_ HGROUP hGroup,
+@@ -3408,7 +3409,7 @@ typedef DWORD
+     _In_opt_ HNODE hDestinationNode
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ OfflineClusterGroup(
+     _In_ HGROUP hGroup
+@@ -3419,7 +3420,7 @@ typedef DWORD
+     HGROUP hGroup
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ DeleteClusterGroup(
+     _In_ HGROUP hGroup
+@@ -3430,7 +3431,7 @@ typedef DWORD
+     HGROUP hGroup
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ DestroyClusterGroup(
+     _In_ HGROUP hGroup
+@@ -3471,7 +3472,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-HGROUPENUM
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HGROUPENUM
+ WINAPI
+ ClusterGroupOpenEnum(
+     _In_ HGROUP hGroup,
+@@ -3484,7 +3485,7 @@ typedef HGROUPENUM
+     DWORD dwType
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterGroupGetEnumCount(
+     _In_ HGROUPENUM hGroupEnum
+@@ -3495,7 +3496,7 @@ typedef DWORD
+     _In_ HGROUPENUM hGroupEnum
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterGroupEnum(
+@@ -3515,7 +3516,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterGroupCloseEnum(
+     _In_ HGROUPENUM hGroupEnum
+@@ -3585,7 +3586,7 @@ typedef enum CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE {
+ //
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HRESOURCE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HRESOURCE
+ WINAPI
+ CreateClusterResource(
+     _In_ HGROUP hGroup,
+@@ -3625,7 +3626,7 @@ typedef HRESOURCE
+ 
+ #endif
+ 
+-HRESOURCE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HRESOURCE
+ WINAPI
+ OpenClusterResource(
+     _In_ HCLUSTER hCluster,
+@@ -3639,7 +3640,7 @@ typedef HRESOURCE
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-HRESOURCE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HRESOURCE
+ WINAPI
+ OpenClusterResourceEx(
+     _In_      HCLUSTER hCluster,
+@@ -3657,7 +3658,7 @@ typedef HRESOURCE
+     );
+ #endif
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ BOOL
+ WINAPI
+ CloseClusterResource(
+     _In_ HRESOURCE hResource
+@@ -3668,7 +3669,7 @@ typedef BOOL
+     HRESOURCE hResource
+     );
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ GetClusterFromResource(
+     _In_ HRESOURCE hResource
+@@ -3679,7 +3680,7 @@ typedef HCLUSTER
+     _In_ HRESOURCE hResource
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ DeleteClusterResource(
+     _In_ HRESOURCE hResource
+@@ -3707,7 +3708,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-_Success_(return >= 0) // != ClusterResourceStateUnknown
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Success_(return >= 0) // != ClusterResourceStateUnknown
+ CLUSTER_RESOURCE_STATE
+ WINAPI
+ GetClusterResourceState(
+@@ -3727,7 +3728,7 @@ typedef CLUSTER_RESOURCE_STATE
+     _Inout_opt_ LPDWORD lpcchGroupName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterResourceName(
+     _In_ HRESOURCE hResource,
+@@ -3759,7 +3760,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ FailClusterResource(
+     _In_ HRESOURCE hResource
+@@ -3787,7 +3788,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ OnlineClusterResource(
+     _In_ HRESOURCE hResource
+@@ -3798,7 +3799,7 @@ typedef DWORD
+     HRESOURCE hResource
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ OfflineClusterResource(
+     _In_ HRESOURCE hResource
+@@ -3809,7 +3810,7 @@ typedef DWORD
+     HRESOURCE hResource
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ChangeClusterResourceGroup(
+     _In_ HRESOURCE hResource,
+@@ -3858,7 +3859,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ AddClusterResourceNode(
+     _In_ HRESOURCE hResource,
+@@ -3871,7 +3872,7 @@ typedef DWORD
+     HNODE hNode
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ RemoveClusterResourceNode(
+     _In_ HRESOURCE hResource,
+@@ -3918,7 +3919,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ AddClusterResourceDependency(
+     _In_ HRESOURCE hResource,
+@@ -3931,7 +3932,7 @@ typedef DWORD
+     HRESOURCE hDependsOn
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ RemoveClusterResourceDependency(
+     _In_ HRESOURCE hResource,
+@@ -3978,7 +3979,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterResourceDependencyExpression(
+     _In_ HRESOURCE hResource,
+@@ -3991,7 +3992,7 @@ typedef DWORD
+     _In_ LPCWSTR lpszDependencyExpression
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterResourceDependencyExpression(
+@@ -4010,7 +4011,7 @@ typedef DWORD
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ AddResourceToClusterSharedVolumes(
+     _In_ HRESOURCE hResource
+@@ -4024,7 +4025,7 @@ typedef DWORD
+ 
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ RemoveResourceFromClusterSharedVolumes(
+     _In_ HRESOURCE hResource
+@@ -4037,7 +4038,7 @@ typedef DWORD
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ IsFileOnClusterSharedVolume(
+     _In_ LPCWSTR lpszPathName,
+@@ -4052,7 +4053,7 @@ typedef DWORD
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-DWORD
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ DWORD
+ WINAPI
+ ClusterSharedVolumeSetSnapshotState(
+     _In_ GUID    guidSnapshotSet,
+@@ -4068,7 +4069,7 @@ typedef DWORD
+     _In_ CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE state
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ BOOL
+ WINAPI
+ CanResourceBeDependent(
+     _In_ HRESOURCE hResource,
+@@ -4081,7 +4082,7 @@ typedef BOOL
+     HRESOURCE hResourceDependent
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterResourceControl(
+@@ -4107,7 +4108,7 @@ typedef DWORD
+     _Out_opt_ LPDWORD lpBytesReturned
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2016_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterResourceControlAsUser(
+@@ -4121,7 +4122,7 @@ ClusterResourceControlAsUser(
+     _Out_opt_ LPDWORD lpBytesReturned
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterResourceTypeControl(
+@@ -4149,7 +4150,7 @@ typedef DWORD
+     _Out_opt_ LPDWORD lpBytesReturned
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2016_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterResourceTypeControlAsUser(
+@@ -4164,7 +4165,7 @@ ClusterResourceTypeControlAsUser(
+     _Out_opt_ LPDWORD lpBytesReturned
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterGroupControl(
+@@ -4338,7 +4339,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterNodeControl(
+@@ -4396,7 +4397,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ GetClusterResourceNetworkName(
+@@ -6234,7 +6235,7 @@ typedef struct CLUS_RESOURCE_CLASS_INFO {
+         struct {
+             union {
+                 DWORD                   dw;
+-                CLUSTER_RESOURCE_CLASS  rc;
++                _Win32_AssociatedEnum_(CLUSTER_RESOURCE_CLASS) CLUSTER_RESOURCE_CLASS  rc;
+                 } DUMMYUNIONNAME;
+             DWORD           SubClass;
+         } DUMMYSTRUCTNAME;
+@@ -6863,7 +6864,7 @@ typedef enum CLUSTER_RESOURCE_TYPE_ENUM {
+ #endif // _CLUSTER_API_TYPES_
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HRESENUM
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HRESENUM
+ WINAPI
+ ClusterResourceOpenEnum(
+     _In_ HRESOURCE hResource,
+@@ -6876,7 +6877,7 @@ typedef HRESENUM
+     DWORD dwType
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterResourceGetEnumCount(
+     _In_ HRESENUM hResEnum
+@@ -6887,7 +6888,7 @@ typedef DWORD
+     _In_ HRESENUM hResEnum
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterResourceEnum(
+@@ -6907,7 +6908,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterResourceCloseEnum(
+     _In_ HRESENUM hResEnum
+@@ -6918,7 +6919,7 @@ typedef DWORD
+     HRESENUM hResEnum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ CreateClusterResourceType(
+     _In_ HCLUSTER hCluster,
+@@ -6939,7 +6940,7 @@ typedef DWORD
+     _In_ DWORD dwIsAlivePollInterval
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ DeleteClusterResourceType(
+     _In_ HCLUSTER hCluster,
+@@ -6994,7 +6995,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-HRESTYPEENUM
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HRESTYPEENUM
+ WINAPI
+ ClusterResourceTypeOpenEnum(
+     _In_ HCLUSTER hCluster,
+@@ -7009,7 +7010,7 @@ typedef HRESTYPEENUM
+     _In_ DWORD dwType
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterResourceTypeGetEnumCount(
+     _In_ HRESTYPEENUM hResTypeEnum
+@@ -7020,7 +7021,7 @@ typedef DWORD
+     _In_ HRESTYPEENUM hResTypeEnum
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterResourceTypeEnum(
+@@ -7040,7 +7041,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterResourceTypeCloseEnum(
+     _In_ HRESTYPEENUM hResTypeEnum
+@@ -7092,7 +7093,7 @@ typedef enum CLUSTER_NETWORK_ROLE {
+ //
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HNETWORK
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNETWORK
+ WINAPI
+ OpenClusterNetwork(
+     _In_ HCLUSTER hCluster,
+@@ -7106,7 +7107,7 @@ typedef HNETWORK
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-HNETWORK
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNETWORK
+ WINAPI
+ OpenClusterNetworkEx(
+     _In_      HCLUSTER hCluster,
+@@ -7124,7 +7125,7 @@ typedef HNETWORK
+     );
+ #endif
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ BOOL
+ WINAPI
+ CloseClusterNetwork(
+     _In_ HNETWORK hNetwork
+@@ -7135,7 +7136,7 @@ typedef BOOL
+     _In_ HNETWORK hNetwork
+     );
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ GetClusterFromNetwork(
+     _In_ HNETWORK hNetwork
+@@ -7146,7 +7147,7 @@ typedef HCLUSTER
+     _In_ HNETWORK hNetwork
+     );
+ 
+-HNETWORKENUM
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNETWORKENUM
+ WINAPI
+ ClusterNetworkOpenEnum(
+     _In_ HNETWORK hNetwork,
+@@ -7159,7 +7160,7 @@ typedef HNETWORKENUM
+     _In_ DWORD dwType
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNetworkGetEnumCount(
+     _In_ HNETWORKENUM hNetworkEnum
+@@ -7170,7 +7171,7 @@ typedef DWORD
+     _In_ HNETWORKENUM hNetworkEnum
+     );
+ 
+-_Success_ (return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_ (return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterNetworkEnum(
+@@ -7190,7 +7191,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNetworkCloseEnum(
+     _In_ HNETWORKENUM hNetworkEnum
+@@ -7201,7 +7202,7 @@ typedef DWORD
+     _In_ HNETWORKENUM hNetworkEnum
+     );
+ 
+-CLUSTER_NETWORK_STATE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ CLUSTER_NETWORK_STATE
+ WINAPI
+ GetClusterNetworkState(
+     _In_ HNETWORK hNetwork
+@@ -7212,7 +7213,7 @@ typedef CLUSTER_NETWORK_STATE
+     _In_ HNETWORK hNetwork
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ SetClusterNetworkName(
+     _In_ HNETWORK hNetwork,
+@@ -7244,7 +7245,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterNetworkId(
+@@ -7260,7 +7261,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchName
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNetworkControl(
+     _In_ HNETWORK hNetwork,
+@@ -7338,7 +7339,7 @@ typedef enum CLUSTER_NETINTERFACE_STATE {
+ //
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HNETINTERFACE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNETINTERFACE
+ WINAPI
+ OpenClusterNetInterface(
+     _In_ HCLUSTER hCluster,
+@@ -7352,7 +7353,7 @@ typedef HNETINTERFACE
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+-HNETINTERFACE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNETINTERFACE
+ WINAPI
+ OpenClusterNetInterfaceEx(
+     _In_      HCLUSTER hCluster,
+@@ -7370,7 +7371,7 @@ typedef HNETINTERFACE
+     );
+ #endif
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ GetClusterNetInterface(
+@@ -7401,7 +7402,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchInterfaceName
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ BOOL
+ WINAPI
+ CloseClusterNetInterface(
+     _In_ HNETINTERFACE hNetInterface
+@@ -7412,7 +7413,7 @@ typedef BOOL
+     _In_ HNETINTERFACE hNetInterface
+     );
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ GetClusterFromNetInterface(
+     _In_ HNETINTERFACE hNetInterface
+@@ -7423,7 +7424,7 @@ typedef HCLUSTER
+     _In_ HNETINTERFACE hNetInterface
+     );
+ 
+-CLUSTER_NETINTERFACE_STATE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ CLUSTER_NETINTERFACE_STATE
+ WINAPI
+ GetClusterNetInterfaceState(
+     _In_ HNETINTERFACE hNetInterface
+@@ -7434,7 +7435,7 @@ typedef CLUSTER_NETINTERFACE_STATE
+     _In_ HNETINTERFACE hNetInterface
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterNetInterfaceControl(
+     _In_ HNETINTERFACE hNetInterface,
+@@ -7498,85 +7499,85 @@ typedef DWORD
+ //
+ 
+ #if ( !MIDL_PASS && !__midl )
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterKey(
+     _In_ HCLUSTER hCluster,
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_KEY)(
+      HCLUSTER hCluster,
+      REGSAM samDesired
+      );
+ 
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterGroupKey(
+     _In_ HGROUP hGroup,
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_GROUP_KEY)(
+     HGROUP hGroup,
+     REGSAM samDesired
+     );
+ 
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterResourceKey(
+     _In_ HRESOURCE hResource,
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_RESOURCE_KEY)(
+     HRESOURCE hResource,
+     REGSAM samDesired
+     );
+ 
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterNodeKey(
+     _In_ HNODE hNode,
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_NODE_KEY)(
+     HNODE hNode,
+     REGSAM samDesired
+     );
+ 
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterNetworkKey(
+     _In_ HNETWORK hNetwork,
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_NETWORK_KEY)(
+     _In_ HNETWORK hNetwork,
+     _In_ REGSAM samDesired
+     );
+ 
+-HKEY
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ _Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ GetClusterNetInterfaceKey(
+     _In_ HNETINTERFACE hNetInterface,
+     _In_ REGSAM samDesired
+     );
+ 
+-typedef HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
+ (WINAPI * PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY)(
+     _In_ HNETINTERFACE hNetInterface,
+     _In_ REGSAM samDesired
+     );
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegCreateKey(
+     _In_ HKEY hKey,
+@@ -7584,7 +7585,7 @@ ClusterRegCreateKey(
+     _In_ DWORD dwOptions,
+     _In_ REGSAM samDesired,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
+     _Out_opt_ LPDWORD lpdwDisposition
+     );
+ 
+@@ -7595,7 +7596,7 @@ typedef LONG
+     _In_ DWORD dwOptions,
+     _In_ REGSAM samDesired,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
+     _Out_opt_ LPDWORD lpdwDisposition
+     );
+ 
+@@ -7609,7 +7610,7 @@ ClusterRegCreateKeyEx(
+     __in DWORD dwOptions,
+     __in REGSAM samDesired,
+     __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    __out PHKEY phkResult,
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) __out PHKEY phkResult,
+     __out_opt LPDWORD lpdwDisposition,
+     _In_opt_ LPCWSTR lpszReason
+     );
+@@ -7621,20 +7622,20 @@ typedef LONG
+     _In_ DWORD dwOptions,
+     _In_ REGSAM samDesired,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
+     _Out_opt_ LPDWORD lpdwDisposition,
+     _In_opt_ LPCWSTR lpszReason
+     );
+ 
+ #endif
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegOpenKey(
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpszSubKey,
+     _In_ REGSAM samDesired,
+-    _Out_ PHKEY phkResult
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
+     );
+ 
+ typedef LONG
+@@ -7645,7 +7646,7 @@ typedef LONG
+     PHKEY phkResult
+     );
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegDeleteKey(
+     _In_ HKEY hKey,
+@@ -7677,7 +7678,7 @@ typedef LONG
+ 
+ #endif
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegCloseKey(
+     _In_ HKEY hKey
+@@ -7688,7 +7689,7 @@ typedef LONG
+     HKEY hKey
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ LONG
+ WINAPI
+ ClusterRegEnumKey(
+@@ -7708,7 +7709,7 @@ typedef LONG
+     _Out_ PFILETIME lpftLastWriteTime
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ DWORD
+ WINAPI
+ ClusterRegSetValue(
+     _In_ HKEY hKey,
+@@ -7727,7 +7728,7 @@ typedef DWORD
+     DWORD cbData
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ ClusterRegDeleteValue(
+     _In_ HKEY hKey,
+@@ -7780,7 +7781,7 @@ typedef DWORD
+ 
+ #endif
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegQueryValue(
+     _In_ HKEY hKey,
+@@ -7799,7 +7800,7 @@ typedef LONG
+     _Inout_opt_ LPDWORD lpcbData
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Server2008_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ ClusterRegEnumValue(
+@@ -7823,7 +7824,7 @@ typedef DWORD
+     _Inout_opt_ LPDWORD lpcbData
+     );
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegQueryInfoKey(
+     _In_ HKEY hKey,
+@@ -7848,7 +7849,7 @@ typedef LONG
+     PFILETIME lpftLastWriteTime
+     );
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegGetKeySecurity (
+     _In_ HKEY hKey,
+@@ -7865,7 +7866,7 @@ typedef LONG
+     _Inout_ LPDWORD lpcbSecurityDescriptor
+     );
+ 
+-LONG
++_Windows_SupportedOS_Server2008_ LONG
+ WINAPI
+ ClusterRegSetKeySecurity(
+     _In_ HKEY hKey,
+@@ -7886,7 +7887,7 @@ LONG
+ WINAPI
+ ClusterRegSetKeySecurityEx(
+     _In_ HKEY hKey,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor,
+     _In_opt_ LPCWSTR lpszReason
+     );
+@@ -7901,7 +7902,7 @@ typedef LONG
+ 
+ #endif
+ 
+-LONG
++_Windows_SupportedOS_Server2012_ LONG
+ WINAPI
+ ClusterRegSyncDatabase(
+     _In_ HCLUSTER hCluster,
+@@ -7914,7 +7915,7 @@ typedef LONG
+     DWORD flags
+     );
+ 
+-LONG WINAPI ClusterRegCreateBatch(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegCreateBatch(
+     _In_opt_ HKEY hKey,
+     _Out_ HREGBATCH* pHREGBATCH
+     );
+@@ -7925,7 +7926,7 @@ typedef LONG
+     _Out_ HREGBATCH* pHREGBATCH
+     );
+ 
+-LONG WINAPI ClusterRegBatchAddCommand(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegBatchAddCommand(
+     _In_ HREGBATCH hRegBatch,
+     _In_ CLUSTER_REG_COMMAND dwCommand,
+     _In_opt_ LPCWSTR wzName,
+@@ -7944,13 +7945,13 @@ typedef LONG
+     _In_ DWORD cbData
+     );
+ 
+-LONG WINAPI ClusterRegCloseBatch(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegCloseBatch(
+     _In_ HREGBATCH hRegBatch,
+     _In_ BOOL bCommit,
+     _Out_opt_ INT * failedCommandNumber
+     );
+ 
+-LONG WINAPI ClusterRegCloseBatchEx(
++_Windows_SupportedOS_Server2012_ LONG WINAPI ClusterRegCloseBatchEx(
+     _In_ HREGBATCH hRegBatch,
+     _In_ DWORD flags,
+     _Out_opt_ INT * failedCommandNumber
+@@ -7963,7 +7964,7 @@ typedef LONG
+     _Out_opt_ INT * failedCommandNumber
+     );
+ 
+-LONG WINAPI ClusterRegBatchReadCommand(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegBatchReadCommand(
+     _In_ HREGBATCHNOTIFICATION hBatchNotification,
+     _Out_ CLUSTER_BATCH_COMMAND * pBatchCommand);
+ 
+@@ -7972,14 +7973,14 @@ typedef LONG
+     _In_ HREGBATCHNOTIFICATION hBatchNotification,
+     _Out_ CLUSTER_BATCH_COMMAND * pBatchCommand);
+ 
+-LONG WINAPI ClusterRegBatchCloseNotification(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegBatchCloseNotification(
+     _In_ HREGBATCHNOTIFICATION hBatchNotification);
+ 
+ typedef LONG
+ (WINAPI *PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION)(
+     _In_ HREGBATCHNOTIFICATION hBatchNotification);
+ 
+-LONG WINAPI ClusterRegCreateBatchNotifyPort(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegCreateBatchNotifyPort(
+     _In_ HKEY hKey,
+     _Out_ HREGBATCHPORT * phBatchNotifyPort);
+ 
+@@ -7988,14 +7989,14 @@ typedef LONG
+     _In_ HKEY hKey,
+     _Out_ HREGBATCHPORT * phBatchNotifyPort);
+ 
+-LONG WINAPI ClusterRegCloseBatchNotifyPort(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegCloseBatchNotifyPort(
+     _In_ HREGBATCHPORT hBatchNotifyPort);
+ 
+ typedef LONG
+ (WINAPI *PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT)(
+     _In_ HREGBATCHPORT hBatchNotifyPort);
+ 
+-LONG WINAPI ClusterRegGetBatchNotification(
++_Windows_SupportedOS_Server2008_ LONG WINAPI ClusterRegGetBatchNotification(
+     _In_ HREGBATCHPORT hBatchNotify,
+     _Out_ HREGBATCHNOTIFICATION * phBatchNotification);
+ 
+@@ -8005,7 +8006,7 @@ typedef LONG
+     _Out_ HREGBATCHNOTIFICATION * phBatchNotification);
+ 
+ 
+-LONG WINAPI ClusterRegCreateReadBatch(
++_Windows_SupportedOS_Server2012_ LONG WINAPI ClusterRegCreateReadBatch(
+     _In_ HKEY hKey,
+     _Out_ HREGREADBATCH* phRegReadBatch);
+ 
+@@ -8014,7 +8015,7 @@ typedef LONG
+     _In_ HKEY hKey,
+     _Out_ HREGREADBATCH* phRegReadBatch);
+ 
+-LONG WINAPI ClusterRegReadBatchAddCommand(
++_Windows_SupportedOS_Server2012_ LONG WINAPI ClusterRegReadBatchAddCommand(
+     _In_ HREGREADBATCH hRegReadBatch,
+     _In_ LPCWSTR wzSubkeyName,
+     _In_ LPCWSTR wzValueName);
+@@ -8025,7 +8026,7 @@ typedef LONG
+     _In_ LPCWSTR wzSubkeyName,
+     _In_ LPCWSTR wzValueName);
+ 
+-LONG WINAPI ClusterRegCloseReadBatch(
++_Windows_SupportedOS_Server2012_ LONG WINAPI ClusterRegCloseReadBatch(
+     _In_ HREGREADBATCH hRegReadBatch,
+     _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
+ 
+@@ -8034,7 +8035,7 @@ typedef LONG
+     _In_ HREGREADBATCH hRegReadBatch,
+     _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
+ 
+-LONG WINAPI ClusterRegCloseReadBatchEx(
++_Windows_SupportedOS_Server2016_ LONG WINAPI ClusterRegCloseReadBatchEx(
+     _In_ HREGREADBATCH hRegReadBatch,
+         _In_ DWORD flags,
+     _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
+@@ -8045,7 +8046,7 @@ typedef LONG
+         _In_ DWORD flags,
+     _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
+ 
+-LONG WINAPI ClusterRegReadBatchReplyNextCommand(
++_Windows_SupportedOS_Server2012_ LONG WINAPI ClusterRegReadBatchReplyNextCommand(
+     _In_ HREGREADBATCHREPLY hRegReadBatchReply,
+     _Out_ CLUSTER_READ_BATCH_COMMAND * pBatchCommand);
+ 
+@@ -8054,14 +8055,14 @@ typedef LONG
+     _In_ HREGREADBATCHREPLY hRegReadBatchReply,
+     _Out_ CLUSTER_READ_BATCH_COMMAND * pBatchCommand);
+ 
+-LONG WINAPI ClusterRegCloseReadBatchReply(
++_Windows_SupportedOS_Server2012_ LONG WINAPI ClusterRegCloseReadBatchReply(
+     _In_ HREGREADBATCHREPLY hRegReadBatchReply);
+ 
+ typedef LONG
+ (WINAPI *PCLUSTER_REG_CLOSE_READ_BATCH_REPLY)(
+     _In_ HREGREADBATCHREPLY hRegReadBatchReply);
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ ClusterSetAccountAccess(
+     _In_ HCLUSTER hCluster,
+@@ -8161,7 +8162,7 @@ typedef BOOL
+     _In_opt_ PCWSTR                 lpszObjectName,
+     DWORD                           dwStatus );
+ 
+-HCLUSTER
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HCLUSTER
+ WINAPI
+ CreateCluster(
+     _In_ PCREATE_CLUSTER_CONFIG pConfig,
+@@ -8191,7 +8192,7 @@ typedef HCLUSTER
+     _In_opt_ PVOID              pvCallbackArg
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ CreateClusterNameAccount(
+     _In_ HCLUSTER    hCluster,
+@@ -8270,7 +8271,7 @@ typedef DWORD (WINAPI *PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT)(
+     _In_ HCLUSTER    hCluster
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Server2016_ DWORD
+ WINAPI
+ RegisterClusterResourceTypeNotifyV2 (
+     __in  HCHANGE hChange,
+@@ -8280,7 +8281,7 @@ RegisterClusterResourceTypeNotifyV2 (
+     __in  DWORD_PTR dwNotifyKey
+     );
+ 
+-HNODE
++_Windows_SupportedOS_Server2008_ _Win32_SetLastError_ HNODE
+ WINAPI
+ AddClusterNode(
+     _In_ HCLUSTER    hCluster,
+@@ -8336,7 +8337,7 @@ typedef HNODE
+     _In_opt_ PVOID   pvCallbackArg
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ WINAPI
+ DestroyCluster(
+     _In_ HCLUSTER    hCluster,

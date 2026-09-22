@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h
-index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72f12bd327 100644
+index 1564f3e750..96a1d93f9e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -15,7 +15,7 @@ index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72
  // 
  
 -typedef struct _QOS_FRIENDLY_NAME {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_FRIENDLY_NAME {
++typedef struct   _QOS_FRIENDLY_NAME {
      QOS_OBJECT_HDR ObjectHdr;
      WCHAR          FriendlyName[QOS_MAX_OBJECT_STRING_LENGTH];
  } QOS_FRIENDLY_NAME, *LPQOS_FRIENDLY_NAME;
@@ -24,7 +24,7 @@ index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72
  //
  
 -typedef struct _QOS_TRAFFIC_CLASS {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_TRAFFIC_CLASS {
++typedef struct   _QOS_TRAFFIC_CLASS {
  
      QOS_OBJECT_HDR   ObjectHdr;
      ULONG            TrafficClass;
@@ -33,7 +33,7 @@ index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72
  //
  
 -typedef struct _QOS_DS_CLASS {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_DS_CLASS {
++typedef struct   _QOS_DS_CLASS {
  
      QOS_OBJECT_HDR ObjectHdr;
      ULONG          DSField;
@@ -42,7 +42,7 @@ index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72
  // QOS_DIFFSERV_RULE
  //
 -typedef struct _QOS_DIFFSERV {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_DIFFSERV {
++typedef struct   _QOS_DIFFSERV {
  
      QOS_OBJECT_HDR ObjectHdr;
      ULONG          DSFieldCount;
@@ -51,7 +51,7 @@ index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72
  // The rule for a Diffserv DS codepoint. 
  //
 -typedef struct _QOS_DIFFSERV_RULE {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_DIFFSERV_RULE {
++typedef struct   _QOS_DIFFSERV_RULE {
      UCHAR InboundDSField;
      UCHAR ConformingOutboundDSField;
      UCHAR NonConformingOutboundDSField;
@@ -60,7 +60,7 @@ index 1564f3e75010d189965bff851d251b736860a8c8..8c1f250f976ce1aba7074f4537726b72
  //
  
 -typedef struct _QOS_TCP_TRAFFIC {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _QOS_TCP_TRAFFIC {
++typedef struct   _QOS_TCP_TRAFFIC {
      QOS_OBJECT_HDR ObjectHdr;
  } QOS_TCP_TRAFFIC, *LPQOS_TCP_TRAFFIC;
      

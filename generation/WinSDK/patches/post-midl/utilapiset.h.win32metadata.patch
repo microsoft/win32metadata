@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/utilapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/utilapiset.h
+index b83158526b..f1be5b566e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/utilapiset.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/utilapiset.h
 @@ -15,6 +15,7 @@
@@ -13,8 +14,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/utilapiset.h b/generation
  #pragma region PC Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL

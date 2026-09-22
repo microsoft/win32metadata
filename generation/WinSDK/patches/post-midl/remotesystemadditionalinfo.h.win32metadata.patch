@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/remotesystemadditionalinfo.h b/generation/WinSDK/RecompiledIdlHeaders/um/remotesystemadditionalinfo.h
+index 64e41ae4b7..e1cb9c6559 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/remotesystemadditionalinfo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/remotesystemadditionalinfo.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -92,7 +93,7 @@ EXTERN_C const IID IID_IRemoteSystemAdditionalInfoProvider;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAdditionalInfo( 
+             /* [annotation][out] */ 
+-            _Out_  HSTRING *deduplicationId,
++            _Win32_RAIIFree_(WindowsDeleteString) _Out_  HSTRING *deduplicationId,
+             /* [annotation][in] */ 
+             _In_  REFIID riid,
+             /* [annotation][iid_is][out] */ 
+@@ -183,15 +184,15 @@ extern RPC_IF_HANDLE __MIDL_itf_remotesystemadditionalinfo_0000_0001_v0_0_s_ifsp
+ 
+ /* Additional Prototypes for ALL interfaces */
+ 
+-unsigned long             __RPC_USER  HSTRING_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HSTRING * ); 
+-unsigned char * __RPC_USER  HSTRING_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HSTRING * ); 
+-unsigned char * __RPC_USER  HSTRING_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HSTRING * ); 
+-void                      __RPC_USER  HSTRING_UserFree(     __RPC__in unsigned long *, __RPC__in HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") unsigned long             __RPC_USER  HSTRING_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") unsigned char * __RPC_USER  HSTRING_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") unsigned char * __RPC_USER  HSTRING_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") void                      __RPC_USER  HSTRING_UserFree(     __RPC__in unsigned long *, __RPC__in HSTRING * ); 
+ 
+-unsigned long             __RPC_USER  HSTRING_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HSTRING * ); 
+-unsigned char * __RPC_USER  HSTRING_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HSTRING * ); 
+-unsigned char * __RPC_USER  HSTRING_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HSTRING * ); 
+-void                      __RPC_USER  HSTRING_UserFree64(     __RPC__in unsigned long *, __RPC__in HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") unsigned long             __RPC_USER  HSTRING_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") unsigned char * __RPC_USER  HSTRING_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") unsigned char * __RPC_USER  HSTRING_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HSTRING * ); 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") void                      __RPC_USER  HSTRING_UserFree64(     __RPC__in unsigned long *, __RPC__in HSTRING * ); 
+ 
+ /* end of Additional Prototypes */
+ 

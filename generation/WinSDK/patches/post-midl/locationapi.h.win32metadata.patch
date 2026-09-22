@@ -1,0 +1,127 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h
+index a9a5dfee54..c129999c85 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -290,7 +291,7 @@ EXTERN_C const IID IID_ILocationReport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C8B7F7EE-75D0-4db9-B62D-7A0F369CA456")
++    MIDL_INTERFACE("C8B7F7EE-75D0-4db9-B62D-7A0F369CA456") _Windows_SupportedOS_Windows7_ 
+     ILocationReport : public IUnknown
+     {
+     public:
+@@ -398,7 +399,7 @@ EXTERN_C const IID IID_ILatLongReport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7FED806D-0EF8-4f07-80AC-36A0BEAE3134")
++    MIDL_INTERFACE("7FED806D-0EF8-4f07-80AC-36A0BEAE3134") _Windows_SupportedOS_Windows7_ 
+     ILatLongReport : public ILocationReport
+     {
+     public:
+@@ -552,27 +553,27 @@ EXTERN_C const IID IID_ICivicAddressReport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C0B19F70-4ADF-445d-87F2-CAD8FD711792")
++    MIDL_INTERFACE("C0B19F70-4ADF-445d-87F2-CAD8FD711792") _Windows_SupportedOS_Windows7_ 
+     ICivicAddressReport : public ILocationReport
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAddressLine1( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress1) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrAddress1) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAddressLine2( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAddress2) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrAddress2) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCity( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCity) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCity) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStateProvince( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStateProvince) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrStateProvince) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPostalCode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostalCode) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPostalCode) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCountryRegion( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCountryRegion) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCountryRegion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDetailLevel( 
+             /* [retval][out] */ __RPC__out DWORD *pDetailLevel) = 0;
+@@ -729,7 +730,7 @@ EXTERN_C const IID IID_ILocation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AB2ECE69-56D9-4F28-B525-DE1B0EE44237")
++    MIDL_INTERFACE("AB2ECE69-56D9-4F28-B525-DE1B0EE44237") _Windows_SupportedOS_Windows7_ 
+     ILocation : public IUnknown
+     {
+     public:
+@@ -923,7 +924,7 @@ EXTERN_C const IID IID_ILocationPower;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("193E7729-AB6B-4b12-8617-7596E1BB191C")
++    MIDL_INTERFACE("193E7729-AB6B-4b12-8617-7596E1BB191C") _Windows_SupportedOS_Windows8_ 
+     ILocationPower : public IUnknown
+     {
+     public:
+@@ -1014,7 +1015,7 @@ EXTERN_C const IID IID_IDefaultLocation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A65AF77E-969A-4a2e-8ACA-33BB7CBB1235")
++    MIDL_INTERFACE("A65AF77E-969A-4a2e-8ACA-33BB7CBB1235") _Windows_SupportedOS_Windows7_ 
+     IDefaultLocation : public IUnknown
+     {
+     public:
+@@ -1113,7 +1114,7 @@ EXTERN_C const IID IID_ILocationEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CAE02BBF-798B-4508-A207-35A7906DC73D")
++    MIDL_INTERFACE("CAE02BBF-798B-4508-A207-35A7906DC73D") _Windows_SupportedOS_Windows7_ 
+     ILocationEvents : public IUnknown
+     {
+     public:
+@@ -1410,22 +1411,22 @@ EXTERN_C const IID IID_IDispCivicAddressReport;
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressLine1( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress1) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pAddress1) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressLine2( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pAddress2) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pAddress2) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_City( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCity) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pCity) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StateProvince( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pStateProvince) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pStateProvince) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PostalCode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPostalCode) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pPostalCode) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryRegion( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCountryRegion) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pCountryRegion) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DetailLevel( 
+             /* [retval][out] */ __RPC__out ULONG *pDetailLevel) = 0;

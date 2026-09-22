@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h b/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h
-index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a1ccb736e 100644
+index 4bac350106..0a03d4bdc3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h
 @@ -147,6 +147,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  EXTERN_C const CLSID CLSID_AdHocManager;
-@@ -212,7 +213,7 @@ EXTERN_C const IID IID_IDot11AdHocManager;
+@@ -211,8 +212,8 @@ EXTERN_C const IID IID_IDot11AdHocManager;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC26-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC26-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocManager : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocManager : public IUnknown
++    MIDL_INTERFACE("8F10CC26-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocManager : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateNetwork( 
@@ -28,12 +30,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IDot11AdHocManagerVtbl *lpVtbl;
      };
-@@ -391,7 +392,7 @@ EXTERN_C const IID IID_IDot11AdHocManagerNotificationSink;
+@@ -390,8 +391,8 @@ EXTERN_C const IID IID_IDot11AdHocManagerNotificationSink;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC27-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC27-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocManagerNotificationSink : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocManagerNotificationSink : public IUnknown
++    MIDL_INTERFACE("8F10CC27-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocManagerNotificationSink : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnNetworkAdd( 
@@ -46,12 +50,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IDot11AdHocManagerNotificationSinkVtbl *lpVtbl;
      };
-@@ -517,7 +518,7 @@ EXTERN_C const IID IID_IEnumDot11AdHocNetworks;
+@@ -516,8 +517,8 @@ EXTERN_C const IID IID_IEnumDot11AdHocNetworks;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC28-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC28-CF0D-42a0-ACBE-E2DE7007384D")
 -    IEnumDot11AdHocNetworks : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumDot11AdHocNetworks : public IUnknown
++    MIDL_INTERFACE("8F10CC28-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IEnumDot11AdHocNetworks : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -64,12 +70,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IEnumDot11AdHocNetworksVtbl *lpVtbl;
      };
-@@ -647,7 +648,7 @@ EXTERN_C const IID IID_IDot11AdHocNetwork;
+@@ -646,8 +647,8 @@ EXTERN_C const IID IID_IDot11AdHocNetwork;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC29-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC29-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocNetwork : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocNetwork : public IUnknown
++    MIDL_INTERFACE("8F10CC29-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocNetwork : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetStatus( 
@@ -82,12 +90,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IDot11AdHocNetworkVtbl *lpVtbl;
      };
-@@ -885,7 +886,7 @@ EXTERN_C const IID IID_IDot11AdHocNetworkNotificationSink;
+@@ -884,8 +885,8 @@ EXTERN_C const IID IID_IDot11AdHocNetworkNotificationSink;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC2A-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC2A-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocNetworkNotificationSink : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocNetworkNotificationSink : public IUnknown
++    MIDL_INTERFACE("8F10CC2A-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocNetworkNotificationSink : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
@@ -100,12 +110,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IDot11AdHocNetworkNotificationSinkVtbl *lpVtbl;
      };
-@@ -981,7 +982,7 @@ EXTERN_C const IID IID_IDot11AdHocInterface;
+@@ -980,8 +981,8 @@ EXTERN_C const IID IID_IDot11AdHocInterface;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC2B-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC2B-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocInterface : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocInterface : public IUnknown
++    MIDL_INTERFACE("8F10CC2B-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocInterface : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetDeviceSignature( 
@@ -118,12 +130,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IDot11AdHocInterfaceVtbl *lpVtbl;
      };
-@@ -1176,7 +1177,7 @@ EXTERN_C const IID IID_IEnumDot11AdHocInterfaces;
+@@ -1175,8 +1176,8 @@ EXTERN_C const IID IID_IEnumDot11AdHocInterfaces;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC2C-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC2C-CF0D-42a0-ACBE-E2DE7007384D")
 -    IEnumDot11AdHocInterfaces : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumDot11AdHocInterfaces : public IUnknown
++    MIDL_INTERFACE("8F10CC2C-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IEnumDot11AdHocInterfaces : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -136,12 +150,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IEnumDot11AdHocInterfacesVtbl *lpVtbl;
      };
-@@ -1306,7 +1307,7 @@ EXTERN_C const IID IID_IEnumDot11AdHocSecuritySettings;
+@@ -1305,8 +1306,8 @@ EXTERN_C const IID IID_IEnumDot11AdHocSecuritySettings;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC2D-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC2D-CF0D-42a0-ACBE-E2DE7007384D")
 -    IEnumDot11AdHocSecuritySettings : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumDot11AdHocSecuritySettings : public IUnknown
++    MIDL_INTERFACE("8F10CC2D-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IEnumDot11AdHocSecuritySettings : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -154,12 +170,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IEnumDot11AdHocSecuritySettingsVtbl *lpVtbl;
      };
-@@ -1436,7 +1437,7 @@ EXTERN_C const IID IID_IDot11AdHocSecuritySettings;
+@@ -1435,8 +1436,8 @@ EXTERN_C const IID IID_IDot11AdHocSecuritySettings;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC2E-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC2E-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocSecuritySettings : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocSecuritySettings : public IUnknown
++    MIDL_INTERFACE("8F10CC2E-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocSecuritySettings : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetDot11AuthAlgorithm( 
@@ -172,12 +190,14 @@ index 4bac350106ad6a953ec16f9334f423cd164613d5..ac1b28e685d512a587c978101f2db64a
      {
          CONST_VTBL struct IDot11AdHocSecuritySettingsVtbl *lpVtbl;
      };
-@@ -1536,7 +1537,7 @@ EXTERN_C const IID IID_IDot11AdHocInterfaceNotificationSink;
+@@ -1535,8 +1536,8 @@ EXTERN_C const IID IID_IDot11AdHocInterfaceNotificationSink;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("8F10CC2F-CF0D-42a0-ACBE-E2DE7007384D")
+-    MIDL_INTERFACE("8F10CC2F-CF0D-42a0-ACBE-E2DE7007384D")
 -    IDot11AdHocInterfaceNotificationSink : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocInterfaceNotificationSink : public IUnknown
++    MIDL_INTERFACE("8F10CC2F-CF0D-42a0-ACBE-E2DE7007384D") _Windows_SupportedOS_WindowsVista_ 
++      IDot11AdHocInterfaceNotificationSink : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnConnectionStatusChange( 

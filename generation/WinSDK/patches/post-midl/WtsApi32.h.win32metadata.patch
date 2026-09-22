@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
-index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f2e2501d0 100644
+index f907576fa1..75f27a4785 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 @@ -15,6 +15,7 @@
@@ -15,7 +15,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  =====================================================================*/
  
 -typedef enum _WTS_CONNECTSTATE_CLASS {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_CONNECTSTATE_CLASS {
++typedef enum   _WTS_CONNECTSTATE_CLASS {
      WTSActive,              // User logged on to WinStation
      WTSConnected,           // WinStation connected to client
      WTSConnectQuery,        // In the process of connecting to client
@@ -24,12 +24,12 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
   */
  
 -typedef struct _WTS_SERVER_INFOW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_SERVER_INFOW {
++typedef struct   _WTS_SERVER_INFOW {
      LPWSTR pServerName;    // server name
  } WTS_SERVER_INFOW, * PWTS_SERVER_INFOW;
  
 -typedef struct _WTS_SERVER_INFOA {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_SERVER_INFOA {
++typedef struct   _WTS_SERVER_INFOA {
      LPSTR pServerName;     // server name
  } WTS_SERVER_INFOA, * PWTS_SERVER_INFOA;
  
@@ -38,7 +38,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
   */
  
 -typedef struct _WTS_SESSION_INFOW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_SESSION_INFOW {
++typedef struct   _WTS_SESSION_INFOW {
      DWORD SessionId;             // session id
      LPWSTR pWinStationName;      // name of WinStation this session is
                                   // connected to
@@ -46,7 +46,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTS_SESSION_INFOW, * PWTS_SESSION_INFOW;
  
 -typedef struct _WTS_SESSION_INFOA {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_SESSION_INFOA {
++typedef struct   _WTS_SESSION_INFOA {
      DWORD SessionId;             // session id
      LPSTR pWinStationName;       // name of WinStation this session is
                                   // connected to
@@ -54,7 +54,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTS_SESSION_INFOA, * PWTS_SESSION_INFOA;
  
 -typedef struct _WTS_SESSION_INFO_1W {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTS_SESSION_INFO_1W {
++typedef struct  _WTS_SESSION_INFO_1W {
      DWORD ExecEnvId;
      WTS_CONNECTSTATE_CLASS State;
      DWORD SessionId;
@@ -63,7 +63,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTS_SESSION_INFO_1W, * PWTS_SESSION_INFO_1W;
  
 -typedef struct _WTS_SESSION_INFO_1A {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTS_SESSION_INFO_1A {
++typedef struct  _WTS_SESSION_INFO_1A {
      DWORD ExecEnvId;
      WTS_CONNECTSTATE_CLASS State;
      DWORD SessionId;
@@ -72,7 +72,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
   */
  
 -typedef struct _WTS_PROCESS_INFOW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_PROCESS_INFOW {
++typedef struct   _WTS_PROCESS_INFOW {
      DWORD SessionId;     // session id
      DWORD ProcessId;     // process id
      LPWSTR pProcessName; // name of process
@@ -80,7 +80,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTS_PROCESS_INFOW, * PWTS_PROCESS_INFOW;
  
 -typedef struct _WTS_PROCESS_INFOA {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_PROCESS_INFOA {
++typedef struct   _WTS_PROCESS_INFOA {
      DWORD SessionId;     // session id
      DWORD ProcessId;     // process id
      LPSTR pProcessName;  // name of process
@@ -89,7 +89,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  #define WTS_PROTOCOL_TYPE_RDP             2    // RDP Protocol
  
 -typedef enum _WTS_INFO_CLASS {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_INFO_CLASS {
++typedef enum   _WTS_INFO_CLASS {
      WTSInitialProgram,
      WTSApplicationName,
      WTSWorkingDirectory,
@@ -98,7 +98,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  =====================================================================*/
  
 -typedef struct  _WTSCONFIGINFOW {
-+typedef struct  _Windows_SupportedOS_Windows7_ _WTSCONFIGINFOW {
++typedef struct   _WTSCONFIGINFOW {
      ULONG version; 
      ULONG fConnectClientDrivesAtLogon;
      ULONG fConnectPrinterAtLogon;
@@ -107,7 +107,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTSCONFIGINFOW, *PWTSCONFIGINFOW;
  
 -typedef struct  _WTSCONFIGINFOA {
-+typedef struct  _Windows_SupportedOS_Windows7_ _WTSCONFIGINFOA {
++typedef struct   _WTSCONFIGINFOA {
      ULONG version; 
      ULONG fConnectClientDrivesAtLogon;
      ULONG fConnectPrinterAtLogon;
@@ -116,7 +116,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  ==   WTS Session Information
  =====================================================================*/
 -typedef struct _WTSINFOW {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _WTSINFOW {
++typedef struct   _WTSINFOW {
      WTS_CONNECTSTATE_CLASS State; // connection state (see enum)
      DWORD SessionId;             // session id
      DWORD IncomingBytes;
@@ -125,7 +125,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTSINFOW, * PWTSINFOW;
  
 -typedef struct _WTSINFOA {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _WTSINFOA {
++typedef struct   _WTSINFOA {
      WTS_CONNECTSTATE_CLASS State; // connection state (see enum)
      DWORD SessionId;             // session id
      DWORD IncomingBytes;
@@ -134,7 +134,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  ==   WTS Extended Session Information
  =====================================================================*/
 -typedef struct _WTSINFOEX_LEVEL1_W {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSINFOEX_LEVEL1_W {
++typedef struct  _WTSINFOEX_LEVEL1_W {
      ULONG SessionId;
      WTS_CONNECTSTATE_CLASS SessionState;
      LONG SessionFlags;
@@ -143,7 +143,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTSINFOEX_LEVEL1_W, *PWTSINFOEX_LEVEL1_W;
  
 -typedef struct _WTSINFOEX_LEVEL1_A {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSINFOEX_LEVEL1_A {
++typedef struct  _WTSINFOEX_LEVEL1_A {
      ULONG SessionId;
      WTS_CONNECTSTATE_CLASS SessionState;
      LONG SessionFlags;
@@ -152,13 +152,13 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTSINFOEX_LEVEL_A, *PWTSINFOEX_LEVEL_A;
  
 -typedef struct _WTSINFOEXW {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSINFOEXW {
++typedef struct  _WTSINFOEXW {
      DWORD Level;
      WTSINFOEX_LEVEL_W Data;
  } WTSINFOEXW, *PWTSINFOEXW;
  
 -typedef struct _WTSINFOEXA {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSINFOEXA {
++typedef struct  _WTSINFOEXA {
      DWORD Level;
      WTSINFOEX_LEVEL_A Data;
  } WTSINFOEXA, *PWTSINFOEXA;
@@ -167,7 +167,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  ==   WTS Client Information
  =====================================================================*/
 -typedef struct _WTSCLIENTW {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _WTSCLIENTW {
++typedef struct   _WTSCLIENTW {
      WCHAR ClientName[ CLIENTNAME_LENGTH + 1 ];
      WCHAR Domain[ DOMAIN_LENGTH + 1 ];
      WCHAR UserName[ USERNAME_LENGTH + 1 ];
@@ -176,7 +176,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  ==   WTS Client Information
  =====================================================================*/
 -typedef struct _WTSCLIENTA {
-+typedef struct _Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_ _WTSCLIENTA {
++typedef struct   _WTSCLIENTA {
      CHAR ClientName[ CLIENTNAME_LENGTH + 1 ];
      CHAR Domain[ DOMAIN_LENGTH + 1 ];
      CHAR UserName[ USERNAME_LENGTH + 1 ];
@@ -185,7 +185,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  =====================================================================*/
  
 -typedef struct _WTS_CLIENT_ADDRESS {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_CLIENT_ADDRESS {
++typedef struct   _WTS_CLIENT_ADDRESS {
      DWORD AddressFamily;  // AF_INET, AF_INET6, AF_IPX, AF_NETBIOS, AF_UNSPEC
      BYTE  Address[20];    // client network address
  } WTS_CLIENT_ADDRESS, * PWTS_CLIENT_ADDRESS;
@@ -194,7 +194,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  =====================================================================*/
  
 -typedef struct _WTS_CLIENT_DISPLAY {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_CLIENT_DISPLAY {
++typedef struct   _WTS_CLIENT_DISPLAY {
      DWORD HorizontalResolution; // horizontal dimensions, in pixels
      DWORD VerticalResolution;   // vertical dimensions, in pixels
      DWORD ColorDepth;           // 1=16, 2=256, 4=64K, 8=16M
@@ -203,7 +203,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  
 -typedef enum _WTS_CONFIG_CLASS {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_CONFIG_CLASS {
++typedef enum   _WTS_CONFIG_CLASS {
      //Initial program settings
      WTSUserConfigInitialProgram,            // string returned/expected
      WTSUserConfigWorkingDirectory,          // string returned/expected
@@ -212,12 +212,12 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTS_CONFIG_CLASS;
  
 -typedef enum _WTS_CONFIG_SOURCE {
-+typedef enum _Windows_SupportedOS_Windows7_ _WTS_CONFIG_SOURCE {
++typedef enum  _WTS_CONFIG_SOURCE {
      WTSUserConfigSourceSAM
  } WTS_CONFIG_SOURCE;
  
 -typedef struct _WTSUSERCONFIGA {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSUSERCONFIGA {
++typedef struct  _WTSUSERCONFIGA {
      DWORD Source;
      DWORD InheritInitialProgram;
      DWORD AllowLogonTerminalServer;
@@ -226,7 +226,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTSUSERCONFIGA, * PWTSUSERCONFIGA;
  
 -typedef struct _WTSUSERCONFIGW {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSUSERCONFIGW {
++typedef struct  _WTSUSERCONFIGW {
      DWORD Source;
      DWORD InheritInitialProgram;
      DWORD AllowLogonTerminalServer;
@@ -235,7 +235,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  ==   WTS_VIRTUAL_CLASS - WTSVirtualChannelQuery
  =====================================================================*/
 -typedef enum _WTS_VIRTUAL_CLASS {
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _WTS_VIRTUAL_CLASS {
++typedef enum   _WTS_VIRTUAL_CLASS {
      WTSVirtualClientData,  // Virtual channel client module data
                             //     (C2H data)
      WTSVirtualFileHandle
@@ -244,15 +244,39 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  =====================================================================*/
  
 -typedef struct _WTS_SESSION_ADDRESS {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTS_SESSION_ADDRESS {
++typedef struct  _WTS_SESSION_ADDRESS {
      DWORD AddressFamily;  // AF_INET only.
      BYTE  Address[20];    // client network address
  } WTS_SESSION_ADDRESS, * PWTS_SESSION_ADDRESS;
+@@ -800,12 +801,12 @@ typedef struct _WTS_SESSION_ADDRESS {
+ ==   Windows Terminal Server public APIs
+ =====================================================================*/
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ BOOL WINAPI
+ WTSStopRemoteControlSession(
+     IN ULONG   LogonId
+     );
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ BOOL WINAPI
+ WTSStartRemoteControlSessionW(
+     _In_ LPWSTR  pTargetServerName,
+     IN ULONG   TargetLogonId,
+@@ -813,7 +814,7 @@ WTSStartRemoteControlSessionW(
+     IN USHORT  HotkeyModifiers
+     );
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ BOOL WINAPI
+ WTSStartRemoteControlSessionA(
+     _In_ LPSTR  pTargetServerName,
+     IN ULONG   TargetLogonId,
 @@ -827,6 +828,7 @@ WTSStartRemoteControlSessionA(
  #define WTSStartRemoteControlSession WTSStartRemoteControlSessionA
  #endif /* UNICODE */
  
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSConnectSessionA(
@@ -260,7 +284,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      IN BOOL bWait
      );
  
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSConnectSessionW(
@@ -268,7 +292,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  #define WTSConnectSession WTSConnectSessionA
  #endif
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateServersW(
@@ -276,7 +300,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ DWORD * pCount
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateServersA(
@@ -284,28 +308,28 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0)  
  HANDLE
  WINAPI
  WTSOpenServerW(
      _In_ LPWSTR pServerName
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(CloseHandle, -1, 0)  
  HANDLE
  WINAPI
  WTSOpenServerA(
      _In_ LPSTR pServerName
      );
  
-+_Windows_SupportedOS_Windows7_
++_Win32_RAIIFree_(CloseHandle, -1, 0) _Windows_SupportedOS_Windows7_
  HANDLE
  WINAPI
  WTSOpenServerExW(
      _In_ LPWSTR pServerName
      );
  
-+_Windows_SupportedOS_Windows7_
++_Win32_RAIIFree_(CloseHandle, -1, 0) _Windows_SupportedOS_Windows7_
  HANDLE
  WINAPI
  WTSOpenServerExA(
@@ -313,7 +337,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  VOID
  WINAPI
  WTSCloseServer(
@@ -321,7 +345,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateSessionsW(
@@ -329,7 +353,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ DWORD * pCount
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateSessionsA(
@@ -337,7 +361,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ DWORD * pCount
      );
  
-+_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_ _Windows_SupportedOS_Windows7_
  BOOL
  WINAPI
  WTSEnumerateSessionsExW(
@@ -345,7 +369,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Outptr_result_buffer_(*pCount) PWTS_SESSION_INFO_1W * ppSessionInfo,
      _Out_ DWORD * pCount );
  
-+_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_ _Windows_SupportedOS_Windows7_
  BOOL
  WINAPI
  WTSEnumerateSessionsExA(
@@ -353,7 +377,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateProcessesW(
@@ -361,7 +385,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      OUT DWORD * pCount
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateProcessesA(
@@ -369,7 +393,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSTerminateProcess(
@@ -377,7 +401,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSQuerySessionInformationW(
@@ -385,7 +409,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ DWORD * pBytesReturned
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSQuerySessionInformationA(
@@ -393,7 +417,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSQueryUserConfigW(
@@ -401,7 +425,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ DWORD * pBytesReturned
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSQueryUserConfigA(
@@ -409,7 +433,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSSetUserConfigW(
@@ -417,7 +441,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      IN DWORD DataLength
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSSetUserConfigA(
@@ -425,23 +449,43 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSSendMessageW(
-@@ -1107,6 +1131,7 @@ WTSSendMessageW(
+@@ -1101,12 +1125,13 @@ WTSSendMessageW(
+     IN DWORD TitleLength,
+     _In_reads_bytes_(MessageLength) LPWSTR pMessage,
+     IN DWORD MessageLength,
+-    IN DWORD Style,
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) IN DWORD Style,
+     IN DWORD Timeout,
+-    _Out_ DWORD * pResponse,
++    _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) _Out_ DWORD * pResponse,
      IN BOOL bWait
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSSendMessageA(
+@@ -1116,9 +1141,9 @@ WTSSendMessageA(
+     IN DWORD TitleLength,
+     _In_reads_bytes_(MessageLength) LPSTR pMessage,
+     IN DWORD MessageLength,
+-    IN DWORD Style,
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) IN DWORD Style,
+     IN DWORD Timeout,
+-    _Out_ DWORD * pResponse,
++    _Win32_AssociatedEnum_(MESSAGEBOX_RESULT) _Out_ DWORD * pResponse,
+     IN BOOL bWait
+     );
+ 
 @@ -1130,6 +1155,7 @@ WTSSendMessageA(
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSDisconnectSession(
@@ -449,7 +493,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSLogoffSession(
@@ -457,7 +501,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSShutdownSystem(
@@ -465,7 +509,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSWaitSystemEvent(
@@ -473,7 +517,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  
  /*------------------------------------------------*/
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(WTSVirtualChannelClose)  
  HANDLE
  WINAPI
  WTSVirtualChannelOpen(
@@ -481,7 +525,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  #define WTS_CHANNEL_OPTION_DYNAMIC_PRI_REAL 0x00000006
  #define WTS_CHANNEL_OPTION_DYNAMIC_NO_COMPRESS 0x00000008
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(WTSVirtualChannelClose)  
  HANDLE
  WINAPI
  WTSVirtualChannelOpenEx(
@@ -489,14 +533,14 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
                       IN DWORD flags
                       );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSVirtualChannelClose(
      IN HANDLE hChannelHandle
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSVirtualChannelRead(
@@ -504,7 +548,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ PULONG pBytesRead
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSVirtualChannelWrite(
@@ -512,14 +556,14 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      _Out_ PULONG pBytesWritten
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSVirtualChannelPurgeInput(
      IN HANDLE hChannelHandle
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSVirtualChannelPurgeOutput(
@@ -527,7 +571,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      );
  
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSVirtualChannelQuery(
@@ -535,7 +579,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  /*------------------------------------------------*/
  
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_  
  VOID
  WINAPI
  WTSFreeMemory(
@@ -543,7 +587,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  #define NOTIFY_FOR_THIS_SESSION     0
  
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSRegisterSessionNotification(
@@ -551,7 +595,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      DWORD dwFlags
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSUnRegisterSessionNotification(
@@ -559,7 +603,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      );
  
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_ImportLibrary_("wtsapi32.dll")  
  BOOL
  WINAPI
  WTSRegisterSessionNotificationEx(
@@ -567,7 +611,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      IN DWORD dwFlags
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_ImportLibrary_("wtsapi32.dll")  
  BOOL
  WINAPI
  WTSUnRegisterSessionNotificationEx(
@@ -575,7 +619,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
      IN HWND hWnd
      );
  
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSQueryUserToken(
@@ -584,7 +628,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  */
  
 -typedef struct _WTS_PROCESS_INFO_EXW {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTS_PROCESS_INFO_EXW {
++typedef struct  _WTS_PROCESS_INFO_EXW {
      DWORD SessionId;
      DWORD ProcessId;
      LPWSTR pProcessName;
@@ -593,16 +637,69 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTS_PROCESS_INFO_EXW, * PWTS_PROCESS_INFO_EXW;
  
 -typedef struct _WTS_PROCESS_INFO_EXA {
-+typedef struct _Windows_SupportedOS_Windows7_ _WTS_PROCESS_INFO_EXA {
++typedef struct  _WTS_PROCESS_INFO_EXA {
      DWORD SessionId;
      DWORD ProcessId;
      LPSTR pProcessName;
+@@ -1347,14 +1390,14 @@ typedef enum _WTS_TYPE_CLASS {
+ #endif
+ } WTS_TYPE_CLASS;
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
+ WTSFreeMemoryExW(
+     _In_ WTS_TYPE_CLASS WTSTypeClass,
+     _In_ PVOID   pMemory,
+     _In_ ULONG   NumberOfEntries
+ );
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
+ WTSFreeMemoryExA(
+     _In_ WTS_TYPE_CLASS WTSTypeClass,
+     _In_ PVOID   pMemory,
+@@ -1369,7 +1412,7 @@ WTSFreeMemoryExA(
+ 
+ /*------------------------------------------------*/
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
+ WTSEnumerateProcessesExW
+ (
+     _In_ HANDLE    hServer,
+@@ -1379,7 +1422,7 @@ WTSEnumerateProcessesExW
+     _Out_ DWORD * pCount
+ );
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
+ WTSEnumerateProcessesExA
+ (
+     _In_ HANDLE    hServer,
+@@ -1412,7 +1455,7 @@ typedef WTSLISTENERNAMEA *PWTSLISTENERNAMEA;
+ #define PWTSLISTENERNAME PWTSLISTENERNAMEA
+ #endif
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
+ WTSEnumerateListenersW (
+   _In_                  HANDLE hServer,
+   _In_                  PVOID pReserved,
+@@ -1421,7 +1464,7 @@ WTSEnumerateListenersW (
+   _Inout_       DWORD*  pCount
+ );
+ 
+-BOOL WINAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
+ WTSEnumerateListenersA (
+   _In_                  HANDLE hServer,
+   _In_                  PVOID pReserved,
 @@ -1439,7 +1482,7 @@ WTSEnumerateListenersA (
  /*------------------------------------------------*/
  // Listener Config, used by WTSQueryListenerConfig and WTSCreateListener
  
 -typedef struct _WTSLISTENERCONFIGW{
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSLISTENERCONFIGW{
++typedef struct  _WTSLISTENERCONFIGW{
      ULONG version;
      ULONG fEnableListener;
      ULONG MaxConnectionCount;
@@ -611,7 +708,203 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..629818d788acfe667a85bc71c05f653f
  } WTSLISTENERCONFIGW, *PWTSLISTENERCONFIGW;
  
 -typedef struct _WTSLISTENERCONFIGA{
-+typedef struct _Windows_SupportedOS_Windows7_ _WTSLISTENERCONFIGA{
++typedef struct  _WTSLISTENERCONFIGA{
      ULONG version;
      ULONG fEnableListener;
      ULONG MaxConnectionCount;
+@@ -1521,7 +1564,7 @@ typedef struct _WTSLISTENERCONFIGA{
+     CHAR InitialProgram[ MAX_PATH + 1 ];
+ } WTSLISTENERCONFIGA, *PWTSLISTENERCONFIGA;
+ 
+-BOOL WINAPI WTSQueryListenerConfigW (
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSQueryListenerConfigW (
+   _In_          HANDLE hServer,
+   _In_          PVOID pReserved,
+   _In_          DWORD Reserved,
+@@ -1529,7 +1572,7 @@ BOOL WINAPI WTSQueryListenerConfigW (
+   _Out_         PWTSLISTENERCONFIGW pBuffer
+ );
+ 
+-BOOL WINAPI WTSQueryListenerConfigA (
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSQueryListenerConfigA (
+   _In_          HANDLE hServer,
+   _In_          PVOID pReserved,
+   _In_          DWORD Reserved,
+@@ -1537,7 +1580,7 @@ BOOL WINAPI WTSQueryListenerConfigA (
+   _Out_         PWTSLISTENERCONFIGA pBuffer
+ );
+ 
+-BOOL WINAPI WTSCreateListenerW (
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSCreateListenerW (
+   _In_          HANDLE hServer,
+   _In_          PVOID pReserved,
+   _In_          DWORD Reserved,
+@@ -1546,7 +1589,7 @@ BOOL WINAPI WTSCreateListenerW (
+   _In_          DWORD flag
+ );
+ 
+-BOOL WINAPI WTSCreateListenerA (
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSCreateListenerA (
+   _In_          HANDLE hServer,
+   _In_          PVOID pReserved,
+   _In_          DWORD Reserved,
+@@ -1555,39 +1598,39 @@ BOOL WINAPI WTSCreateListenerA (
+   _In_          DWORD flag
+ );
+ 
+-BOOL WINAPI WTSSetListenerSecurityW(
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSSetListenerSecurityW(
+   _In_          HANDLE hServer, 
+   _In_          PVOID pReserved,  
+   _In_          DWORD Reserved, 
+   _In_          LPWSTR pListenerName, 
+-  _In_          SECURITY_INFORMATION SecurityInformation,
++  _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_          SECURITY_INFORMATION SecurityInformation,
+   _In_          PSECURITY_DESCRIPTOR pSecurityDescriptor);
+ 
+-BOOL WINAPI WTSSetListenerSecurityA(
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSSetListenerSecurityA(
+   _In_          HANDLE hServer, 
+   _In_          PVOID pReserved,  
+   _In_          DWORD Reserved, 
+   _In_          LPSTR pListenerName, 
+-  _In_          SECURITY_INFORMATION SecurityInformation,
++  _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_          SECURITY_INFORMATION SecurityInformation,
+   _In_          PSECURITY_DESCRIPTOR pSecurityDescriptor);
+ 
+-BOOL WINAPI WTSGetListenerSecurityW(
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSGetListenerSecurityW(
+   _In_          HANDLE hServer,
+   _In_          PVOID pReserved,
+   _In_          DWORD Reserved,
+   _In_          LPWSTR pListenerName, 
+-  _In_          SECURITY_INFORMATION SecurityInformation,
++  _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_          SECURITY_INFORMATION SecurityInformation,
+   _Out_opt_     PSECURITY_DESCRIPTOR pSecurityDescriptor,
+   _In_          DWORD nLength,
+   _Out_         LPDWORD lpnLengthNeeded);
+ 
+ 
+-BOOL WINAPI WTSGetListenerSecurityA(
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSGetListenerSecurityA(
+   _In_          HANDLE hServer,
+   _In_          PVOID pReserved,
+   _In_          DWORD Reserved,
+   _In_          LPSTR pListenerName,
+-  _In_          SECURITY_INFORMATION SecurityInformation,
++  _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_          SECURITY_INFORMATION SecurityInformation,
+   _Out_opt_     PSECURITY_DESCRIPTOR pSecurityDescriptor,
+   _In_          DWORD nLength,
+   _Out_         LPDWORD lpnLengthNeeded);
+@@ -1597,7 +1640,7 @@ BOOL WINAPI WTSGetListenerSecurityA(
+ 
+ DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE);
+ 
+-WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
++_Win32_RAIIFree_(WTSCloudAuthClose, -1, 0) WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
+     _In_ const GUID* activityId);
+ 
+ void WINAPI WTSCloudAuthClose(
+@@ -1622,7 +1665,7 @@ BOOL WINAPI WTSCloudAuthConvertAssertionToSerializedUserCredential(
+ BOOL WINAPI WTSCloudAuthNetworkLogonWithSerializedCredential(
+     _In_ WTS_CLOUD_AUTH_HANDLE cloudAuthHandle,
+     _In_ WTS_SERIALIZED_USER_CREDENTIAL* userCredential,
+-    _Out_ HANDLE* token);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* token);
+ 
+ BOOL WINAPI WTSCloudAuthDuplicateSerializedUserCredential(
+     _In_ const WTS_SERIALIZED_USER_CREDENTIAL* userCredential,
+@@ -1646,17 +1689,17 @@ BOOL WINAPI WTSCloudAuthDuplicateSerializedUserCredential(
+ #define WTSGetListenerSecurity WTSGetListenerSecurityA
+ #endif
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WTSEnableChildSessions(
+     BOOL bEnable
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WTSIsChildSessionsEnabled(
+     _Out_ PBOOL pbEnabled
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WTSGetChildSessionId(
+     _Out_ PULONG pSessionId
+     );
+@@ -1675,5 +1718,72 @@ WTSActiveSessionExists(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTS_SECURITY_CURRENT_GUEST_ACCESS")
++#undef WTS_SECURITY_CURRENT_GUEST_ACCESS
++#pragma push_macro("WTS_SECURITY_USER_ACCESS")
++#undef WTS_SECURITY_USER_ACCESS
++#pragma push_macro("WTS_SECURITY_CURRENT_USER_ACCESS")
++#undef WTS_SECURITY_CURRENT_USER_ACCESS
++#pragma push_macro("WTS_SECURITY_ALL_ACCESS")
++#undef WTS_SECURITY_ALL_ACCESS
++#pragma push_macro("WTS_SECURITY_QUERY_INFORMATION")
++#undef WTS_SECURITY_QUERY_INFORMATION
++#pragma push_macro("WTS_SECURITY_SET_INFORMATION")
++#undef WTS_SECURITY_SET_INFORMATION
++#pragma push_macro("WTS_SECURITY_RESET")
++#undef WTS_SECURITY_RESET
++#pragma push_macro("WTS_SECURITY_VIRTUAL_CHANNELS")
++#undef WTS_SECURITY_VIRTUAL_CHANNELS
++#pragma push_macro("WTS_SECURITY_REMOTE_CONTROL")
++#undef WTS_SECURITY_REMOTE_CONTROL
++#pragma push_macro("WTS_SECURITY_LOGON")
++#undef WTS_SECURITY_LOGON
++#pragma push_macro("WTS_SECURITY_LOGOFF")
++#undef WTS_SECURITY_LOGOFF
++#pragma push_macro("WTS_SECURITY_MESSAGE")
++#undef WTS_SECURITY_MESSAGE
++#pragma push_macro("WTS_SECURITY_CONNECT")
++#undef WTS_SECURITY_CONNECT
++#pragma push_macro("WTS_SECURITY_DISCONNECT")
++#undef WTS_SECURITY_DISCONNECT
++#pragma push_macro("WTS_SECURITY_GUEST_ACCESS")
++#undef WTS_SECURITY_GUEST_ACCESS
++enum [[clang::flag_enum]] WTS_SECURITY_FLAGS : unsigned int
++{
++    WTS_SECURITY_CURRENT_GUEST_ACCESS = 72U,
++    WTS_SECURITY_USER_ACCESS = 329U,
++    WTS_SECURITY_CURRENT_USER_ACCESS = 590U,
++    WTS_SECURITY_ALL_ACCESS = 983999U,
++    WTS_SECURITY_QUERY_INFORMATION = 1U,
++    WTS_SECURITY_SET_INFORMATION = 2U,
++    WTS_SECURITY_RESET = 4U,
++    WTS_SECURITY_VIRTUAL_CHANNELS = 8U,
++    WTS_SECURITY_REMOTE_CONTROL = 16U,
++    WTS_SECURITY_LOGON = 32U,
++    WTS_SECURITY_LOGOFF = 64U,
++    WTS_SECURITY_MESSAGE = 128U,
++    WTS_SECURITY_CONNECT = 256U,
++    WTS_SECURITY_DISCONNECT = 512U,
++    WTS_SECURITY_GUEST_ACCESS = 32U,
++};
++#pragma pop_macro("WTS_SECURITY_GUEST_ACCESS")
++#pragma pop_macro("WTS_SECURITY_DISCONNECT")
++#pragma pop_macro("WTS_SECURITY_CONNECT")
++#pragma pop_macro("WTS_SECURITY_MESSAGE")
++#pragma pop_macro("WTS_SECURITY_LOGOFF")
++#pragma pop_macro("WTS_SECURITY_LOGON")
++#pragma pop_macro("WTS_SECURITY_REMOTE_CONTROL")
++#pragma pop_macro("WTS_SECURITY_VIRTUAL_CHANNELS")
++#pragma pop_macro("WTS_SECURITY_RESET")
++#pragma pop_macro("WTS_SECURITY_SET_INFORMATION")
++#pragma pop_macro("WTS_SECURITY_QUERY_INFORMATION")
++#pragma pop_macro("WTS_SECURITY_ALL_ACCESS")
++#pragma pop_macro("WTS_SECURITY_CURRENT_USER_ACCESS")
++#pragma pop_macro("WTS_SECURITY_USER_ACCESS")
++#pragma pop_macro("WTS_SECURITY_CURRENT_GUEST_ACCESS")
++#endif
++
+ #endif  /* !_INC_WTSAPI */
+ 

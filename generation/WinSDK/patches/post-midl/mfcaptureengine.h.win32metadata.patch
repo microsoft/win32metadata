@@ -1,0 +1,146 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h
+index 5cf30f27d2..e26601b4d7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -258,7 +259,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnEventCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aeda51c0-9025-4983-9012-de597b88b089")
++    MIDL_INTERFACE("aeda51c0-9025-4983-9012-de597b88b089") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureEngineOnEventCallback : public IUnknown
+     {
+     public:
+@@ -345,7 +346,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnSampleCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("52150b82-ab39-4467-980f-e48bf0822ecd")
++    MIDL_INTERFACE("52150b82-ab39-4467-980f-e48bf0822ecd") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureEngineOnSampleCallback : public IUnknown
+     {
+     public:
+@@ -432,7 +433,7 @@ EXTERN_C const IID IID_IMFCaptureSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("72d6135b-35e9-412c-b926-fd5265f2a885")
++    MIDL_INTERFACE("72d6135b-35e9-412c-b926-fd5265f2a885") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureSink : public IUnknown
+     {
+     public:
+@@ -591,7 +592,7 @@ EXTERN_C const IID IID_IMFCaptureRecordSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3323b55a-f92a-4fe2-8edc-e9bfc0634d77")
++    MIDL_INTERFACE("3323b55a-f92a-4fe2-8edc-e9bfc0634d77") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureRecordSink : public IMFCaptureSink
+     {
+     public:
+@@ -815,7 +816,7 @@ EXTERN_C const IID IID_IMFCapturePreviewSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77346cfd-5b49-4d73-ace0-5b52a859f2e0")
++    MIDL_INTERFACE("77346cfd-5b49-4d73-ace0-5b52a859f2e0") _Windows_SupportedOS_Windows8_ 
+     IMFCapturePreviewSink : public IMFCaptureSink
+     {
+     public:
+@@ -1082,7 +1083,7 @@ EXTERN_C const IID IID_IMFCapturePhotoSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d2d43cc8-48bb-4aa7-95db-10c06977e777")
++    MIDL_INTERFACE("d2d43cc8-48bb-4aa7-95db-10c06977e777") _Windows_SupportedOS_Windows8_ 
+     IMFCapturePhotoSink : public IMFCaptureSink
+     {
+     public:
+@@ -1251,7 +1252,7 @@ EXTERN_C const IID IID_IMFCaptureSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("439a42a8-0d2c-4505-be83-f79b2a05d5c4")
++    MIDL_INTERFACE("439a42a8-0d2c-4505-be83-f79b2a05d5c4") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureSource : public IUnknown
+     {
+     public:
+@@ -1572,7 +1573,7 @@ EXTERN_C const IID IID_IMFCaptureEngine;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a6bba433-176b-48b2-b375-53aa03473207")
++    MIDL_INTERFACE("a6bba433-176b-48b2-b375-53aa03473207") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureEngine : public IUnknown
+     {
+     public:
+@@ -1763,7 +1764,7 @@ EXTERN_C const IID IID_IMFCaptureEngineClassFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8f02d140-56fc-4302-a705-3a97c78be779")
++    MIDL_INTERFACE("8f02d140-56fc-4302-a705-3a97c78be779") _Windows_SupportedOS_Windows8_ 
+     IMFCaptureEngineClassFactory : public IUnknown
+     {
+     public:
+@@ -1867,7 +1868,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnSampleCallback2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e37ceed7-340f-4514-9f4d-9c2ae026100b")
++    MIDL_INTERFACE("e37ceed7-340f-4514-9f4d-9c2ae026100b") _Windows_SupportedOS_Windows81_ 
+     IMFCaptureEngineOnSampleCallback2 : public IMFCaptureEngineOnSampleCallback
+     {
+     public:
+@@ -1964,7 +1965,7 @@ EXTERN_C const IID IID_IMFCaptureSink2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f9e4219e-6197-4b5e-b888-bee310ab2c59")
++    MIDL_INTERFACE("f9e4219e-6197-4b5e-b888-bee310ab2c59") _Windows_SupportedOS_Windows81_ 
+     IMFCaptureSink2 : public IMFCaptureSink
+     {
+     public:
+@@ -2123,6 +2124,37 @@ extern RPC_IF_HANDLE __MIDL_itf_mfcaptureengine_0000_0011_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW")
++#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW
++#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD")
++#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD
++#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO")
++#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO
++#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO")
++#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO
++#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA")
++#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA
++#pragma push_macro("MF_CAPTURE_ENGINE_MEDIASOURCE")
++#undef MF_CAPTURE_ENGINE_MEDIASOURCE
++enum MF_CAPTURE_ENGINE_SOURCE : unsigned int
++{
++    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW = 4294967290U,
++    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD = 4294967289U,
++    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO = 4294967288U,
++    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO = 4294967287U,
++    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA = 4294967286U,
++    MF_CAPTURE_ENGINE_MEDIASOURCE = 4294967295U,
++};
++#pragma pop_macro("MF_CAPTURE_ENGINE_MEDIASOURCE")
++#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA")
++#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO")
++#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO")
++#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD")
++#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW")
++#endif
++
+ #endif
+ 
+ 

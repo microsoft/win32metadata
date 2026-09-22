@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/vmgenerationcounter.h b/generation/WinSDK/RecompiledIdlHeaders/shared/vmgenerationcounter.h
-index ff7c978170..731e508c7e 100644
+index ff7c978170..b7d864e533 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/vmgenerationcounter.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/vmgenerationcounter.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index ff7c978170..731e508c7e 100644
  #define IOCTL_VMGENCOUNTER_READ CTL_CODE(FILE_DEVICE_ACPI, 0x1, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
  
 -typedef struct _VM_GENCOUNTER
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ _VM_GENCOUNTER
++typedef struct   _VM_GENCOUNTER
  {
      ULONGLONG GenerationCount;
      ULONGLONG GenerationCountHigh;

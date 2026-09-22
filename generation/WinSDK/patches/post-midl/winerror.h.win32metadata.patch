@@ -1,8 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/winerror.h b/generation/WinSDK/RecompiledIdlHeaders/shared/winerror.h
-index 9356de0..25b8832 100644
+index 9356de0cbe..9c149d1383 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/winerror.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/winerror.h
-@@ -66990,4 +66990,13256 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
+@@ -66990,4 +66990,14297 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
  //
  #define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT _HRESULT_TYPEDEF_(0xC9280004L)
  
@@ -6587,96 +6587,96 @@ index 9356de0..25b8832 100644
 +#include <win32metadata_annotations.h>
 +
 +enum
-+    _Win32_AssociatedConstant_(ERROR_EXPECTED_SECTION_NAME)
-+    _Win32_AssociatedConstant_(ERROR_BAD_SECTION_NAME_LINE)
-+    _Win32_AssociatedConstant_(ERROR_SECTION_NAME_TOO_LONG)
-+    _Win32_AssociatedConstant_(ERROR_GENERAL_SYNTAX)
-+    _Win32_AssociatedConstant_(ERROR_WRONG_INF_STYLE)
-+    _Win32_AssociatedConstant_(ERROR_SECTION_NOT_FOUND)
-+    _Win32_AssociatedConstant_(ERROR_LINE_NOT_FOUND)
-+    _Win32_AssociatedConstant_(ERROR_NO_BACKUP)
-+    _Win32_AssociatedConstant_(ERROR_NO_ASSOCIATED_CLASS)
-+    _Win32_AssociatedConstant_(ERROR_CLASS_MISMATCH)
-+    _Win32_AssociatedConstant_(ERROR_DUPLICATE_FOUND)
-+    _Win32_AssociatedConstant_(ERROR_NO_DRIVER_SELECTED)
-+    _Win32_AssociatedConstant_(ERROR_KEY_DOES_NOT_EXIST)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_DEVINST_NAME)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_CLASS)
-+    _Win32_AssociatedConstant_(ERROR_DEVINST_ALREADY_EXISTS)
-+    _Win32_AssociatedConstant_(ERROR_DEVINFO_NOT_REGISTERED)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_REG_PROPERTY)
-+    _Win32_AssociatedConstant_(ERROR_NO_INF)
-+    _Win32_AssociatedConstant_(ERROR_NO_SUCH_DEVINST)
-+    _Win32_AssociatedConstant_(ERROR_CANT_LOAD_CLASS_ICON)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_CLASS_INSTALLER)
-+    _Win32_AssociatedConstant_(ERROR_DI_DO_DEFAULT)
-+    _Win32_AssociatedConstant_(ERROR_DI_NOFILECOPY)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_HWPROFILE)
-+    _Win32_AssociatedConstant_(ERROR_NO_DEVICE_SELECTED)
-+    _Win32_AssociatedConstant_(ERROR_DEVINFO_LIST_LOCKED)
-+    _Win32_AssociatedConstant_(ERROR_DEVINFO_DATA_LOCKED)
-+    _Win32_AssociatedConstant_(ERROR_DI_BAD_PATH)
-+    _Win32_AssociatedConstant_(ERROR_NO_CLASSINSTALL_PARAMS)
-+    _Win32_AssociatedConstant_(ERROR_FILEQUEUE_LOCKED)
-+    _Win32_AssociatedConstant_(ERROR_BAD_SERVICE_INSTALLSECT)
-+    _Win32_AssociatedConstant_(ERROR_NO_CLASS_DRIVER_LIST)
-+    _Win32_AssociatedConstant_(ERROR_NO_ASSOCIATED_SERVICE)
-+    _Win32_AssociatedConstant_(ERROR_NO_DEFAULT_DEVICE_INTERFACE)
-+    _Win32_AssociatedConstant_(ERROR_DEVICE_INTERFACE_ACTIVE)
-+    _Win32_AssociatedConstant_(ERROR_DEVICE_INTERFACE_REMOVED)
-+    _Win32_AssociatedConstant_(ERROR_BAD_INTERFACE_INSTALLSECT)
-+    _Win32_AssociatedConstant_(ERROR_NO_SUCH_INTERFACE_CLASS)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_REFERENCE_STRING)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_MACHINENAME)
-+    _Win32_AssociatedConstant_(ERROR_REMOTE_COMM_FAILURE)
-+    _Win32_AssociatedConstant_(ERROR_MACHINE_UNAVAILABLE)
-+    _Win32_AssociatedConstant_(ERROR_NO_CONFIGMGR_SERVICES)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_PROPPAGE_PROVIDER)
-+    _Win32_AssociatedConstant_(ERROR_NO_SUCH_DEVICE_INTERFACE)
-+    _Win32_AssociatedConstant_(ERROR_DI_POSTPROCESSING_REQUIRED)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_COINSTALLER)
-+    _Win32_AssociatedConstant_(ERROR_NO_COMPAT_DRIVERS)
-+    _Win32_AssociatedConstant_(ERROR_NO_DEVICE_ICON)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_INF_LOGCONFIG)
-+    _Win32_AssociatedConstant_(ERROR_DI_DONT_INSTALL)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_FILTER_DRIVER)
-+    _Win32_AssociatedConstant_(ERROR_NON_WINDOWS_NT_DRIVER)
-+    _Win32_AssociatedConstant_(ERROR_NON_WINDOWS_DRIVER)
-+    _Win32_AssociatedConstant_(ERROR_NO_CATALOG_FOR_OEM_INF)
-+    _Win32_AssociatedConstant_(ERROR_DEVINSTALL_QUEUE_NONNATIVE)
-+    _Win32_AssociatedConstant_(ERROR_NOT_DISABLEABLE)
-+    _Win32_AssociatedConstant_(ERROR_CANT_REMOVE_DEVINST)
-+    _Win32_AssociatedConstant_(ERROR_INVALID_TARGET)
-+    _Win32_AssociatedConstant_(ERROR_DRIVER_NONNATIVE)
-+    _Win32_AssociatedConstant_(ERROR_IN_WOW64)
-+    _Win32_AssociatedConstant_(ERROR_SET_SYSTEM_RESTORE_POINT)
-+    _Win32_AssociatedConstant_(ERROR_SCE_DISABLED)
-+    _Win32_AssociatedConstant_(ERROR_UNKNOWN_EXCEPTION)
-+    _Win32_AssociatedConstant_(ERROR_PNP_REGISTRY_ERROR)
-+    _Win32_AssociatedConstant_(ERROR_REMOTE_REQUEST_UNSUPPORTED)
-+    _Win32_AssociatedConstant_(ERROR_NOT_AN_INSTALLED_OEM_INF)
-+    _Win32_AssociatedConstant_(ERROR_INF_IN_USE_BY_DEVICES)
-+    _Win32_AssociatedConstant_(ERROR_DI_FUNCTION_OBSOLETE)
-+    _Win32_AssociatedConstant_(ERROR_NO_AUTHENTICODE_CATALOG)
-+    _Win32_AssociatedConstant_(ERROR_AUTHENTICODE_DISALLOWED)
-+    _Win32_AssociatedConstant_(ERROR_AUTHENTICODE_TRUSTED_PUBLISHER)
-+    _Win32_AssociatedConstant_(ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED)
-+    _Win32_AssociatedConstant_(ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED)
-+    _Win32_AssociatedConstant_(ERROR_SIGNATURE_OSATTRIBUTE_MISMATCH)
-+    _Win32_AssociatedConstant_(ERROR_ONLY_VALIDATE_VIA_AUTHENTICODE)
-+    _Win32_AssociatedConstant_(ERROR_DEVICE_INSTALLER_NOT_READY)
-+    _Win32_AssociatedConstant_(ERROR_DRIVER_STORE_ADD_FAILED)
-+    _Win32_AssociatedConstant_(ERROR_DEVICE_INSTALL_BLOCKED)
-+    _Win32_AssociatedConstant_(ERROR_DRIVER_INSTALL_BLOCKED)
-+    _Win32_AssociatedConstant_(ERROR_WRONG_INF_TYPE)
-+    _Win32_AssociatedConstant_(ERROR_FILE_HASH_NOT_IN_CATALOG)
-+    _Win32_AssociatedConstant_(ERROR_DRIVER_STORE_DELETE_FAILED)
-+    _Win32_AssociatedConstant_(ERROR_UNRECOVERABLE_STACK_OVERFLOW)
-+    _Win32_AssociatedConstant_(ERROR_NO_DEFAULT_INTERFACE_DEVICE)
-+    _Win32_AssociatedConstant_(ERROR_INTERFACE_DEVICE_ACTIVE)
-+    _Win32_AssociatedConstant_(ERROR_INTERFACE_DEVICE_REMOVED)
-+    _Win32_AssociatedConstant_(ERROR_NO_SUCH_INTERFACE_DEVICE)
-+    _Win32_AssociatedConstant_(ERROR_NOT_INSTALLED)
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
++    
 +WIN32_ERROR : unsigned long {
 +    ERROR_SUCCESS = 0L,
 +    NO_ERROR = 0L,
@@ -13256,6 +13256,1047 @@ index 9356de0..25b8832 100644
 +#pragma pop_macro("ERROR_INVALID_FUNCTION")
 +#pragma pop_macro("NO_ERROR")
 +#pragma pop_macro("ERROR_SUCCESS")
++#endif
++
++
++#ifdef WIN32METADATA
++#pragma push_macro("WSA_IO_PENDING")
++#undef WSA_IO_PENDING
++#pragma push_macro("WSA_IO_INCOMPLETE")
++#undef WSA_IO_INCOMPLETE
++#pragma push_macro("WSA_INVALID_HANDLE")
++#undef WSA_INVALID_HANDLE
++#pragma push_macro("WSA_INVALID_PARAMETER")
++#undef WSA_INVALID_PARAMETER
++#pragma push_macro("WSA_NOT_ENOUGH_MEMORY")
++#undef WSA_NOT_ENOUGH_MEMORY
++#pragma push_macro("WSA_OPERATION_ABORTED")
++#undef WSA_OPERATION_ABORTED
++#pragma push_macro("WSA_WAIT_EVENT_0")
++#undef WSA_WAIT_EVENT_0
++#pragma push_macro("WSA_WAIT_IO_COMPLETION")
++#undef WSA_WAIT_IO_COMPLETION
++#pragma push_macro("WSABASEERR")
++#undef WSABASEERR
++#pragma push_macro("WSAEINTR")
++#undef WSAEINTR
++#pragma push_macro("WSAEBADF")
++#undef WSAEBADF
++#pragma push_macro("WSAEACCES")
++#undef WSAEACCES
++#pragma push_macro("WSAEFAULT")
++#undef WSAEFAULT
++#pragma push_macro("WSAEINVAL")
++#undef WSAEINVAL
++#pragma push_macro("WSAEMFILE")
++#undef WSAEMFILE
++#pragma push_macro("WSAEWOULDBLOCK")
++#undef WSAEWOULDBLOCK
++#pragma push_macro("WSAEINPROGRESS")
++#undef WSAEINPROGRESS
++#pragma push_macro("WSAEALREADY")
++#undef WSAEALREADY
++#pragma push_macro("WSAENOTSOCK")
++#undef WSAENOTSOCK
++#pragma push_macro("WSAEDESTADDRREQ")
++#undef WSAEDESTADDRREQ
++#pragma push_macro("WSAEMSGSIZE")
++#undef WSAEMSGSIZE
++#pragma push_macro("WSAEPROTOTYPE")
++#undef WSAEPROTOTYPE
++#pragma push_macro("WSAENOPROTOOPT")
++#undef WSAENOPROTOOPT
++#pragma push_macro("WSAEPROTONOSUPPORT")
++#undef WSAEPROTONOSUPPORT
++#pragma push_macro("WSAESOCKTNOSUPPORT")
++#undef WSAESOCKTNOSUPPORT
++#pragma push_macro("WSAEOPNOTSUPP")
++#undef WSAEOPNOTSUPP
++#pragma push_macro("WSAEPFNOSUPPORT")
++#undef WSAEPFNOSUPPORT
++#pragma push_macro("WSAEAFNOSUPPORT")
++#undef WSAEAFNOSUPPORT
++#pragma push_macro("WSAEADDRINUSE")
++#undef WSAEADDRINUSE
++#pragma push_macro("WSAEADDRNOTAVAIL")
++#undef WSAEADDRNOTAVAIL
++#pragma push_macro("WSAENETDOWN")
++#undef WSAENETDOWN
++#pragma push_macro("WSAENETUNREACH")
++#undef WSAENETUNREACH
++#pragma push_macro("WSAENETRESET")
++#undef WSAENETRESET
++#pragma push_macro("WSAECONNABORTED")
++#undef WSAECONNABORTED
++#pragma push_macro("WSAECONNRESET")
++#undef WSAECONNRESET
++#pragma push_macro("WSAENOBUFS")
++#undef WSAENOBUFS
++#pragma push_macro("WSAEISCONN")
++#undef WSAEISCONN
++#pragma push_macro("WSAENOTCONN")
++#undef WSAENOTCONN
++#pragma push_macro("WSAESHUTDOWN")
++#undef WSAESHUTDOWN
++#pragma push_macro("WSAETOOMANYREFS")
++#undef WSAETOOMANYREFS
++#pragma push_macro("WSAETIMEDOUT")
++#undef WSAETIMEDOUT
++#pragma push_macro("WSAECONNREFUSED")
++#undef WSAECONNREFUSED
++#pragma push_macro("WSAELOOP")
++#undef WSAELOOP
++#pragma push_macro("WSAENAMETOOLONG")
++#undef WSAENAMETOOLONG
++#pragma push_macro("WSAEHOSTDOWN")
++#undef WSAEHOSTDOWN
++#pragma push_macro("WSAEHOSTUNREACH")
++#undef WSAEHOSTUNREACH
++#pragma push_macro("WSAENOTEMPTY")
++#undef WSAENOTEMPTY
++#pragma push_macro("WSAEPROCLIM")
++#undef WSAEPROCLIM
++#pragma push_macro("WSAEUSERS")
++#undef WSAEUSERS
++#pragma push_macro("WSAEDQUOT")
++#undef WSAEDQUOT
++#pragma push_macro("WSAESTALE")
++#undef WSAESTALE
++#pragma push_macro("WSAEREMOTE")
++#undef WSAEREMOTE
++#pragma push_macro("WSASYSNOTREADY")
++#undef WSASYSNOTREADY
++#pragma push_macro("WSAVERNOTSUPPORTED")
++#undef WSAVERNOTSUPPORTED
++#pragma push_macro("WSANOTINITIALISED")
++#undef WSANOTINITIALISED
++#pragma push_macro("WSAEDISCON")
++#undef WSAEDISCON
++#pragma push_macro("WSAENOMORE")
++#undef WSAENOMORE
++#pragma push_macro("WSAECANCELLED")
++#undef WSAECANCELLED
++#pragma push_macro("WSAEINVALIDPROCTABLE")
++#undef WSAEINVALIDPROCTABLE
++#pragma push_macro("WSAEINVALIDPROVIDER")
++#undef WSAEINVALIDPROVIDER
++#pragma push_macro("WSAEPROVIDERFAILEDINIT")
++#undef WSAEPROVIDERFAILEDINIT
++#pragma push_macro("WSASYSCALLFAILURE")
++#undef WSASYSCALLFAILURE
++#pragma push_macro("WSASERVICE_NOT_FOUND")
++#undef WSASERVICE_NOT_FOUND
++#pragma push_macro("WSATYPE_NOT_FOUND")
++#undef WSATYPE_NOT_FOUND
++#pragma push_macro("WSA_E_NO_MORE")
++#undef WSA_E_NO_MORE
++#pragma push_macro("WSA_E_CANCELLED")
++#undef WSA_E_CANCELLED
++#pragma push_macro("WSAEREFUSED")
++#undef WSAEREFUSED
++#pragma push_macro("WSAHOST_NOT_FOUND")
++#undef WSAHOST_NOT_FOUND
++#pragma push_macro("WSATRY_AGAIN")
++#undef WSATRY_AGAIN
++#pragma push_macro("WSANO_RECOVERY")
++#undef WSANO_RECOVERY
++#pragma push_macro("WSANO_DATA")
++#undef WSANO_DATA
++#pragma push_macro("WSA_QOS_RECEIVERS")
++#undef WSA_QOS_RECEIVERS
++#pragma push_macro("WSA_QOS_SENDERS")
++#undef WSA_QOS_SENDERS
++#pragma push_macro("WSA_QOS_NO_SENDERS")
++#undef WSA_QOS_NO_SENDERS
++#pragma push_macro("WSA_QOS_NO_RECEIVERS")
++#undef WSA_QOS_NO_RECEIVERS
++#pragma push_macro("WSA_QOS_REQUEST_CONFIRMED")
++#undef WSA_QOS_REQUEST_CONFIRMED
++#pragma push_macro("WSA_QOS_ADMISSION_FAILURE")
++#undef WSA_QOS_ADMISSION_FAILURE
++#pragma push_macro("WSA_QOS_POLICY_FAILURE")
++#undef WSA_QOS_POLICY_FAILURE
++#pragma push_macro("WSA_QOS_BAD_STYLE")
++#undef WSA_QOS_BAD_STYLE
++#pragma push_macro("WSA_QOS_BAD_OBJECT")
++#undef WSA_QOS_BAD_OBJECT
++#pragma push_macro("WSA_QOS_TRAFFIC_CTRL_ERROR")
++#undef WSA_QOS_TRAFFIC_CTRL_ERROR
++#pragma push_macro("WSA_QOS_GENERIC_ERROR")
++#undef WSA_QOS_GENERIC_ERROR
++#pragma push_macro("WSA_QOS_ESERVICETYPE")
++#undef WSA_QOS_ESERVICETYPE
++#pragma push_macro("WSA_QOS_EFLOWSPEC")
++#undef WSA_QOS_EFLOWSPEC
++#pragma push_macro("WSA_QOS_EPROVSPECBUF")
++#undef WSA_QOS_EPROVSPECBUF
++#pragma push_macro("WSA_QOS_EFILTERSTYLE")
++#undef WSA_QOS_EFILTERSTYLE
++#pragma push_macro("WSA_QOS_EFILTERTYPE")
++#undef WSA_QOS_EFILTERTYPE
++#pragma push_macro("WSA_QOS_EFILTERCOUNT")
++#undef WSA_QOS_EFILTERCOUNT
++#pragma push_macro("WSA_QOS_EOBJLENGTH")
++#undef WSA_QOS_EOBJLENGTH
++#pragma push_macro("WSA_QOS_EFLOWCOUNT")
++#undef WSA_QOS_EFLOWCOUNT
++#pragma push_macro("WSA_QOS_EUNKOWNPSOBJ")
++#undef WSA_QOS_EUNKOWNPSOBJ
++#pragma push_macro("WSA_QOS_EPOLICYOBJ")
++#undef WSA_QOS_EPOLICYOBJ
++#pragma push_macro("WSA_QOS_EFLOWDESC")
++#undef WSA_QOS_EFLOWDESC
++#pragma push_macro("WSA_QOS_EPSFLOWSPEC")
++#undef WSA_QOS_EPSFLOWSPEC
++#pragma push_macro("WSA_QOS_EPSFILTERSPEC")
++#undef WSA_QOS_EPSFILTERSPEC
++#pragma push_macro("WSA_QOS_ESDMODEOBJ")
++#undef WSA_QOS_ESDMODEOBJ
++#pragma push_macro("WSA_QOS_ESHAPERATEOBJ")
++#undef WSA_QOS_ESHAPERATEOBJ
++#pragma push_macro("WSA_QOS_RESERVED_PETYPE")
++#undef WSA_QOS_RESERVED_PETYPE
++#pragma push_macro("WSA_SECURE_HOST_NOT_FOUND")
++#undef WSA_SECURE_HOST_NOT_FOUND
++#pragma push_macro("WSA_IPSEC_NAME_POLICY_ERROR")
++#undef WSA_IPSEC_NAME_POLICY_ERROR
++enum WSA_ERROR : int
++{
++    WSA_IO_PENDING = 997,
++    WSA_IO_INCOMPLETE = 996,
++    WSA_INVALID_HANDLE = 6,
++    WSA_INVALID_PARAMETER = 87,
++    WSA_NOT_ENOUGH_MEMORY = 8,
++    WSA_OPERATION_ABORTED = 995,
++    WSA_WAIT_EVENT_0 = 0,
++    WSA_WAIT_IO_COMPLETION = 192,
++    WSABASEERR = 10000,
++    WSAEINTR = 10004,
++    WSAEBADF = 10009,
++    WSAEACCES = 10013,
++    WSAEFAULT = 10014,
++    WSAEINVAL = 10022,
++    WSAEMFILE = 10024,
++    WSAEWOULDBLOCK = 10035,
++    WSAEINPROGRESS = 10036,
++    WSAEALREADY = 10037,
++    WSAENOTSOCK = 10038,
++    WSAEDESTADDRREQ = 10039,
++    WSAEMSGSIZE = 10040,
++    WSAEPROTOTYPE = 10041,
++    WSAENOPROTOOPT = 10042,
++    WSAEPROTONOSUPPORT = 10043,
++    WSAESOCKTNOSUPPORT = 10044,
++    WSAEOPNOTSUPP = 10045,
++    WSAEPFNOSUPPORT = 10046,
++    WSAEAFNOSUPPORT = 10047,
++    WSAEADDRINUSE = 10048,
++    WSAEADDRNOTAVAIL = 10049,
++    WSAENETDOWN = 10050,
++    WSAENETUNREACH = 10051,
++    WSAENETRESET = 10052,
++    WSAECONNABORTED = 10053,
++    WSAECONNRESET = 10054,
++    WSAENOBUFS = 10055,
++    WSAEISCONN = 10056,
++    WSAENOTCONN = 10057,
++    WSAESHUTDOWN = 10058,
++    WSAETOOMANYREFS = 10059,
++    WSAETIMEDOUT = 10060,
++    WSAECONNREFUSED = 10061,
++    WSAELOOP = 10062,
++    WSAENAMETOOLONG = 10063,
++    WSAEHOSTDOWN = 10064,
++    WSAEHOSTUNREACH = 10065,
++    WSAENOTEMPTY = 10066,
++    WSAEPROCLIM = 10067,
++    WSAEUSERS = 10068,
++    WSAEDQUOT = 10069,
++    WSAESTALE = 10070,
++    WSAEREMOTE = 10071,
++    WSASYSNOTREADY = 10091,
++    WSAVERNOTSUPPORTED = 10092,
++    WSANOTINITIALISED = 10093,
++    WSAEDISCON = 10101,
++    WSAENOMORE = 10102,
++    WSAECANCELLED = 10103,
++    WSAEINVALIDPROCTABLE = 10104,
++    WSAEINVALIDPROVIDER = 10105,
++    WSAEPROVIDERFAILEDINIT = 10106,
++    WSASYSCALLFAILURE = 10107,
++    WSASERVICE_NOT_FOUND = 10108,
++    WSATYPE_NOT_FOUND = 10109,
++    WSA_E_NO_MORE = 10110,
++    WSA_E_CANCELLED = 10111,
++    WSAEREFUSED = 10112,
++    WSAHOST_NOT_FOUND = 11001,
++    WSATRY_AGAIN = 11002,
++    WSANO_RECOVERY = 11003,
++    WSANO_DATA = 11004,
++    WSA_QOS_RECEIVERS = 11005,
++    WSA_QOS_SENDERS = 11006,
++    WSA_QOS_NO_SENDERS = 11007,
++    WSA_QOS_NO_RECEIVERS = 11008,
++    WSA_QOS_REQUEST_CONFIRMED = 11009,
++    WSA_QOS_ADMISSION_FAILURE = 11010,
++    WSA_QOS_POLICY_FAILURE = 11011,
++    WSA_QOS_BAD_STYLE = 11012,
++    WSA_QOS_BAD_OBJECT = 11013,
++    WSA_QOS_TRAFFIC_CTRL_ERROR = 11014,
++    WSA_QOS_GENERIC_ERROR = 11015,
++    WSA_QOS_ESERVICETYPE = 11016,
++    WSA_QOS_EFLOWSPEC = 11017,
++    WSA_QOS_EPROVSPECBUF = 11018,
++    WSA_QOS_EFILTERSTYLE = 11019,
++    WSA_QOS_EFILTERTYPE = 11020,
++    WSA_QOS_EFILTERCOUNT = 11021,
++    WSA_QOS_EOBJLENGTH = 11022,
++    WSA_QOS_EFLOWCOUNT = 11023,
++    WSA_QOS_EUNKOWNPSOBJ = 11024,
++    WSA_QOS_EPOLICYOBJ = 11025,
++    WSA_QOS_EFLOWDESC = 11026,
++    WSA_QOS_EPSFLOWSPEC = 11027,
++    WSA_QOS_EPSFILTERSPEC = 11028,
++    WSA_QOS_ESDMODEOBJ = 11029,
++    WSA_QOS_ESHAPERATEOBJ = 11030,
++    WSA_QOS_RESERVED_PETYPE = 11031,
++    WSA_SECURE_HOST_NOT_FOUND = 11032,
++    WSA_IPSEC_NAME_POLICY_ERROR = 11033,
++};
++#pragma pop_macro("WSA_IPSEC_NAME_POLICY_ERROR")
++#pragma pop_macro("WSA_SECURE_HOST_NOT_FOUND")
++#pragma pop_macro("WSA_QOS_RESERVED_PETYPE")
++#pragma pop_macro("WSA_QOS_ESHAPERATEOBJ")
++#pragma pop_macro("WSA_QOS_ESDMODEOBJ")
++#pragma pop_macro("WSA_QOS_EPSFILTERSPEC")
++#pragma pop_macro("WSA_QOS_EPSFLOWSPEC")
++#pragma pop_macro("WSA_QOS_EFLOWDESC")
++#pragma pop_macro("WSA_QOS_EPOLICYOBJ")
++#pragma pop_macro("WSA_QOS_EUNKOWNPSOBJ")
++#pragma pop_macro("WSA_QOS_EFLOWCOUNT")
++#pragma pop_macro("WSA_QOS_EOBJLENGTH")
++#pragma pop_macro("WSA_QOS_EFILTERCOUNT")
++#pragma pop_macro("WSA_QOS_EFILTERTYPE")
++#pragma pop_macro("WSA_QOS_EFILTERSTYLE")
++#pragma pop_macro("WSA_QOS_EPROVSPECBUF")
++#pragma pop_macro("WSA_QOS_EFLOWSPEC")
++#pragma pop_macro("WSA_QOS_ESERVICETYPE")
++#pragma pop_macro("WSA_QOS_GENERIC_ERROR")
++#pragma pop_macro("WSA_QOS_TRAFFIC_CTRL_ERROR")
++#pragma pop_macro("WSA_QOS_BAD_OBJECT")
++#pragma pop_macro("WSA_QOS_BAD_STYLE")
++#pragma pop_macro("WSA_QOS_POLICY_FAILURE")
++#pragma pop_macro("WSA_QOS_ADMISSION_FAILURE")
++#pragma pop_macro("WSA_QOS_REQUEST_CONFIRMED")
++#pragma pop_macro("WSA_QOS_NO_RECEIVERS")
++#pragma pop_macro("WSA_QOS_NO_SENDERS")
++#pragma pop_macro("WSA_QOS_SENDERS")
++#pragma pop_macro("WSA_QOS_RECEIVERS")
++#pragma pop_macro("WSANO_DATA")
++#pragma pop_macro("WSANO_RECOVERY")
++#pragma pop_macro("WSATRY_AGAIN")
++#pragma pop_macro("WSAHOST_NOT_FOUND")
++#pragma pop_macro("WSAEREFUSED")
++#pragma pop_macro("WSA_E_CANCELLED")
++#pragma pop_macro("WSA_E_NO_MORE")
++#pragma pop_macro("WSATYPE_NOT_FOUND")
++#pragma pop_macro("WSASERVICE_NOT_FOUND")
++#pragma pop_macro("WSASYSCALLFAILURE")
++#pragma pop_macro("WSAEPROVIDERFAILEDINIT")
++#pragma pop_macro("WSAEINVALIDPROVIDER")
++#pragma pop_macro("WSAEINVALIDPROCTABLE")
++#pragma pop_macro("WSAECANCELLED")
++#pragma pop_macro("WSAENOMORE")
++#pragma pop_macro("WSAEDISCON")
++#pragma pop_macro("WSANOTINITIALISED")
++#pragma pop_macro("WSAVERNOTSUPPORTED")
++#pragma pop_macro("WSASYSNOTREADY")
++#pragma pop_macro("WSAEREMOTE")
++#pragma pop_macro("WSAESTALE")
++#pragma pop_macro("WSAEDQUOT")
++#pragma pop_macro("WSAEUSERS")
++#pragma pop_macro("WSAEPROCLIM")
++#pragma pop_macro("WSAENOTEMPTY")
++#pragma pop_macro("WSAEHOSTUNREACH")
++#pragma pop_macro("WSAEHOSTDOWN")
++#pragma pop_macro("WSAENAMETOOLONG")
++#pragma pop_macro("WSAELOOP")
++#pragma pop_macro("WSAECONNREFUSED")
++#pragma pop_macro("WSAETIMEDOUT")
++#pragma pop_macro("WSAETOOMANYREFS")
++#pragma pop_macro("WSAESHUTDOWN")
++#pragma pop_macro("WSAENOTCONN")
++#pragma pop_macro("WSAEISCONN")
++#pragma pop_macro("WSAENOBUFS")
++#pragma pop_macro("WSAECONNRESET")
++#pragma pop_macro("WSAECONNABORTED")
++#pragma pop_macro("WSAENETRESET")
++#pragma pop_macro("WSAENETUNREACH")
++#pragma pop_macro("WSAENETDOWN")
++#pragma pop_macro("WSAEADDRNOTAVAIL")
++#pragma pop_macro("WSAEADDRINUSE")
++#pragma pop_macro("WSAEAFNOSUPPORT")
++#pragma pop_macro("WSAEPFNOSUPPORT")
++#pragma pop_macro("WSAEOPNOTSUPP")
++#pragma pop_macro("WSAESOCKTNOSUPPORT")
++#pragma pop_macro("WSAEPROTONOSUPPORT")
++#pragma pop_macro("WSAENOPROTOOPT")
++#pragma pop_macro("WSAEPROTOTYPE")
++#pragma pop_macro("WSAEMSGSIZE")
++#pragma pop_macro("WSAEDESTADDRREQ")
++#pragma pop_macro("WSAENOTSOCK")
++#pragma pop_macro("WSAEALREADY")
++#pragma pop_macro("WSAEINPROGRESS")
++#pragma pop_macro("WSAEWOULDBLOCK")
++#pragma pop_macro("WSAEMFILE")
++#pragma pop_macro("WSAEINVAL")
++#pragma pop_macro("WSAEFAULT")
++#pragma pop_macro("WSAEACCES")
++#pragma pop_macro("WSAEBADF")
++#pragma pop_macro("WSAEINTR")
++#pragma pop_macro("WSABASEERR")
++#pragma pop_macro("WSA_WAIT_IO_COMPLETION")
++#pragma pop_macro("WSA_WAIT_EVENT_0")
++#pragma pop_macro("WSA_OPERATION_ABORTED")
++#pragma pop_macro("WSA_NOT_ENOUGH_MEMORY")
++#pragma pop_macro("WSA_INVALID_PARAMETER")
++#pragma pop_macro("WSA_INVALID_HANDLE")
++#pragma pop_macro("WSA_IO_INCOMPLETE")
++#pragma pop_macro("WSA_IO_PENDING")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("FACILITY_NULL")
++#undef FACILITY_NULL
++#pragma push_macro("FACILITY_RPC")
++#undef FACILITY_RPC
++#pragma push_macro("FACILITY_DISPATCH")
++#undef FACILITY_DISPATCH
++#pragma push_macro("FACILITY_STORAGE")
++#undef FACILITY_STORAGE
++#pragma push_macro("FACILITY_ITF")
++#undef FACILITY_ITF
++#pragma push_macro("FACILITY_WIN32")
++#undef FACILITY_WIN32
++#pragma push_macro("FACILITY_WINDOWS")
++#undef FACILITY_WINDOWS
++#pragma push_macro("FACILITY_SSPI")
++#undef FACILITY_SSPI
++#pragma push_macro("FACILITY_SECURITY")
++#undef FACILITY_SECURITY
++#pragma push_macro("FACILITY_CONTROL")
++#undef FACILITY_CONTROL
++#pragma push_macro("FACILITY_CERT")
++#undef FACILITY_CERT
++#pragma push_macro("FACILITY_INTERNET")
++#undef FACILITY_INTERNET
++#pragma push_macro("FACILITY_MEDIASERVER")
++#undef FACILITY_MEDIASERVER
++#pragma push_macro("FACILITY_MSMQ")
++#undef FACILITY_MSMQ
++#pragma push_macro("FACILITY_SETUPAPI")
++#undef FACILITY_SETUPAPI
++#pragma push_macro("FACILITY_SCARD")
++#undef FACILITY_SCARD
++#pragma push_macro("FACILITY_COMPLUS")
++#undef FACILITY_COMPLUS
++#pragma push_macro("FACILITY_AAF")
++#undef FACILITY_AAF
++#pragma push_macro("FACILITY_URT")
++#undef FACILITY_URT
++#pragma push_macro("FACILITY_ACS")
++#undef FACILITY_ACS
++#pragma push_macro("FACILITY_DPLAY")
++#undef FACILITY_DPLAY
++#pragma push_macro("FACILITY_UMI")
++#undef FACILITY_UMI
++#pragma push_macro("FACILITY_SXS")
++#undef FACILITY_SXS
++#pragma push_macro("FACILITY_WINDOWS_CE")
++#undef FACILITY_WINDOWS_CE
++#pragma push_macro("FACILITY_HTTP")
++#undef FACILITY_HTTP
++#pragma push_macro("FACILITY_USERMODE_COMMONLOG")
++#undef FACILITY_USERMODE_COMMONLOG
++#pragma push_macro("FACILITY_WER")
++#undef FACILITY_WER
++#pragma push_macro("FACILITY_USERMODE_FILTER_MANAGER")
++#undef FACILITY_USERMODE_FILTER_MANAGER
++#pragma push_macro("FACILITY_BACKGROUNDCOPY")
++#undef FACILITY_BACKGROUNDCOPY
++#pragma push_macro("FACILITY_CONFIGURATION")
++#undef FACILITY_CONFIGURATION
++#pragma push_macro("FACILITY_WIA")
++#undef FACILITY_WIA
++#pragma push_macro("FACILITY_STATE_MANAGEMENT")
++#undef FACILITY_STATE_MANAGEMENT
++#pragma push_macro("FACILITY_METADIRECTORY")
++#undef FACILITY_METADIRECTORY
++#pragma push_macro("FACILITY_WINDOWSUPDATE")
++#undef FACILITY_WINDOWSUPDATE
++#pragma push_macro("FACILITY_DIRECTORYSERVICE")
++#undef FACILITY_DIRECTORYSERVICE
++#pragma push_macro("FACILITY_GRAPHICS")
++#undef FACILITY_GRAPHICS
++#pragma push_macro("FACILITY_SHELL")
++#undef FACILITY_SHELL
++#pragma push_macro("FACILITY_NAP")
++#undef FACILITY_NAP
++#pragma push_macro("FACILITY_TPM_SERVICES")
++#undef FACILITY_TPM_SERVICES
++#pragma push_macro("FACILITY_TPM_SOFTWARE")
++#undef FACILITY_TPM_SOFTWARE
++#pragma push_macro("FACILITY_UI")
++#undef FACILITY_UI
++#pragma push_macro("FACILITY_XAML")
++#undef FACILITY_XAML
++#pragma push_macro("FACILITY_ACTION_QUEUE")
++#undef FACILITY_ACTION_QUEUE
++#pragma push_macro("FACILITY_PLA")
++#undef FACILITY_PLA
++#pragma push_macro("FACILITY_WINDOWS_SETUP")
++#undef FACILITY_WINDOWS_SETUP
++#pragma push_macro("FACILITY_FVE")
++#undef FACILITY_FVE
++#pragma push_macro("FACILITY_FWP")
++#undef FACILITY_FWP
++#pragma push_macro("FACILITY_WINRM")
++#undef FACILITY_WINRM
++#pragma push_macro("FACILITY_NDIS")
++#undef FACILITY_NDIS
++#pragma push_macro("FACILITY_USERMODE_HYPERVISOR")
++#undef FACILITY_USERMODE_HYPERVISOR
++#pragma push_macro("FACILITY_CMI")
++#undef FACILITY_CMI
++#pragma push_macro("FACILITY_USERMODE_VIRTUALIZATION")
++#undef FACILITY_USERMODE_VIRTUALIZATION
++#pragma push_macro("FACILITY_USERMODE_VOLMGR")
++#undef FACILITY_USERMODE_VOLMGR
++#pragma push_macro("FACILITY_BCD")
++#undef FACILITY_BCD
++#pragma push_macro("FACILITY_USERMODE_VHD")
++#undef FACILITY_USERMODE_VHD
++#pragma push_macro("FACILITY_USERMODE_HNS")
++#undef FACILITY_USERMODE_HNS
++#pragma push_macro("FACILITY_SDIAG")
++#undef FACILITY_SDIAG
++#pragma push_macro("FACILITY_WEBSERVICES")
++#undef FACILITY_WEBSERVICES
++#pragma push_macro("FACILITY_WINPE")
++#undef FACILITY_WINPE
++#pragma push_macro("FACILITY_WPN")
++#undef FACILITY_WPN
++#pragma push_macro("FACILITY_WINDOWS_STORE")
++#undef FACILITY_WINDOWS_STORE
++#pragma push_macro("FACILITY_INPUT")
++#undef FACILITY_INPUT
++#pragma push_macro("FACILITY_QUIC")
++#undef FACILITY_QUIC
++#pragma push_macro("FACILITY_EAP")
++#undef FACILITY_EAP
++#pragma push_macro("FACILITY_IORING")
++#undef FACILITY_IORING
++#pragma push_macro("FACILITY_WINDOWS_DEFENDER")
++#undef FACILITY_WINDOWS_DEFENDER
++#pragma push_macro("FACILITY_OPC")
++#undef FACILITY_OPC
++#pragma push_macro("FACILITY_XPS")
++#undef FACILITY_XPS
++#pragma push_macro("FACILITY_MBN")
++#undef FACILITY_MBN
++#pragma push_macro("FACILITY_POWERSHELL")
++#undef FACILITY_POWERSHELL
++#pragma push_macro("FACILITY_RAS")
++#undef FACILITY_RAS
++#pragma push_macro("FACILITY_P2P_INT")
++#undef FACILITY_P2P_INT
++#pragma push_macro("FACILITY_P2P")
++#undef FACILITY_P2P
++#pragma push_macro("FACILITY_DAF")
++#undef FACILITY_DAF
++#pragma push_macro("FACILITY_BLUETOOTH_ATT")
++#undef FACILITY_BLUETOOTH_ATT
++#pragma push_macro("FACILITY_AUDIO")
++#undef FACILITY_AUDIO
++#pragma push_macro("FACILITY_STATEREPOSITORY")
++#undef FACILITY_STATEREPOSITORY
++#pragma push_macro("FACILITY_VISUALCPP")
++#undef FACILITY_VISUALCPP
++#pragma push_macro("FACILITY_SCRIPT")
++#undef FACILITY_SCRIPT
++#pragma push_macro("FACILITY_PARSE")
++#undef FACILITY_PARSE
++#pragma push_macro("FACILITY_BLB")
++#undef FACILITY_BLB
++#pragma push_macro("FACILITY_BLB_CLI")
++#undef FACILITY_BLB_CLI
++#pragma push_macro("FACILITY_WSBAPP")
++#undef FACILITY_WSBAPP
++#pragma push_macro("FACILITY_BLBUI")
++#undef FACILITY_BLBUI
++#pragma push_macro("FACILITY_USN")
++#undef FACILITY_USN
++#pragma push_macro("FACILITY_USERMODE_VOLSNAP")
++#undef FACILITY_USERMODE_VOLSNAP
++#pragma push_macro("FACILITY_TIERING")
++#undef FACILITY_TIERING
++#pragma push_macro("FACILITY_WSB_ONLINE")
++#undef FACILITY_WSB_ONLINE
++#pragma push_macro("FACILITY_ONLINE_ID")
++#undef FACILITY_ONLINE_ID
++#pragma push_macro("FACILITY_DEVICE_UPDATE_AGENT")
++#undef FACILITY_DEVICE_UPDATE_AGENT
++#pragma push_macro("FACILITY_DRVSERVICING")
++#undef FACILITY_DRVSERVICING
++#pragma push_macro("FACILITY_DLS")
++#undef FACILITY_DLS
++#pragma push_macro("FACILITY_DELIVERY_OPTIMIZATION")
++#undef FACILITY_DELIVERY_OPTIMIZATION
++#pragma push_macro("FACILITY_USERMODE_SPACES")
++#undef FACILITY_USERMODE_SPACES
++#pragma push_macro("FACILITY_USER_MODE_SECURITY_CORE")
++#undef FACILITY_USER_MODE_SECURITY_CORE
++#pragma push_macro("FACILITY_USERMODE_LICENSING")
++#undef FACILITY_USERMODE_LICENSING
++#pragma push_macro("FACILITY_SOS")
++#undef FACILITY_SOS
++#pragma push_macro("FACILITY_OCP_UPDATE_AGENT")
++#undef FACILITY_OCP_UPDATE_AGENT
++#pragma push_macro("FACILITY_DEBUGGERS")
++#undef FACILITY_DEBUGGERS
++#pragma push_macro("FACILITY_SPP")
++#undef FACILITY_SPP
++#pragma push_macro("FACILITY_RESTORE")
++#undef FACILITY_RESTORE
++#pragma push_macro("FACILITY_DMSERVER")
++#undef FACILITY_DMSERVER
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_SERVER")
++#undef FACILITY_DEPLOYMENT_SERVICES_SERVER
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_IMAGING")
++#undef FACILITY_DEPLOYMENT_SERVICES_IMAGING
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_MANAGEMENT")
++#undef FACILITY_DEPLOYMENT_SERVICES_MANAGEMENT
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_UTIL")
++#undef FACILITY_DEPLOYMENT_SERVICES_UTIL
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_BINLSVC")
++#undef FACILITY_DEPLOYMENT_SERVICES_BINLSVC
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_PXE")
++#undef FACILITY_DEPLOYMENT_SERVICES_PXE
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_TFTP")
++#undef FACILITY_DEPLOYMENT_SERVICES_TFTP
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_TRANSPORT_MANAGEMENT")
++#undef FACILITY_DEPLOYMENT_SERVICES_TRANSPORT_MANAGEMENT
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_DRIVER_PROVISIONING")
++#undef FACILITY_DEPLOYMENT_SERVICES_DRIVER_PROVISIONING
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_MULTICAST_SERVER")
++#undef FACILITY_DEPLOYMENT_SERVICES_MULTICAST_SERVER
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_MULTICAST_CLIENT")
++#undef FACILITY_DEPLOYMENT_SERVICES_MULTICAST_CLIENT
++#pragma push_macro("FACILITY_DEPLOYMENT_SERVICES_CONTENT_PROVIDER")
++#undef FACILITY_DEPLOYMENT_SERVICES_CONTENT_PROVIDER
++#pragma push_macro("FACILITY_HSP_SERVICES")
++#undef FACILITY_HSP_SERVICES
++#pragma push_macro("FACILITY_HSP_SOFTWARE")
++#undef FACILITY_HSP_SOFTWARE
++#pragma push_macro("FACILITY_LINGUISTIC_SERVICES")
++#undef FACILITY_LINGUISTIC_SERVICES
++#pragma push_macro("FACILITY_AUDIOSTREAMING")
++#undef FACILITY_AUDIOSTREAMING
++#pragma push_macro("FACILITY_TTD")
++#undef FACILITY_TTD
++#pragma push_macro("FACILITY_ACCELERATOR")
++#undef FACILITY_ACCELERATOR
++#pragma push_macro("FACILITY_WMAAECMA")
++#undef FACILITY_WMAAECMA
++#pragma push_macro("FACILITY_DIRECTMUSIC")
++#undef FACILITY_DIRECTMUSIC
++#pragma push_macro("FACILITY_DIRECT3D10")
++#undef FACILITY_DIRECT3D10
++#pragma push_macro("FACILITY_DXGI")
++#undef FACILITY_DXGI
++#pragma push_macro("FACILITY_DXGI_DDI")
++#undef FACILITY_DXGI_DDI
++#pragma push_macro("FACILITY_DIRECT3D11")
++#undef FACILITY_DIRECT3D11
++#pragma push_macro("FACILITY_DIRECT3D11_DEBUG")
++#undef FACILITY_DIRECT3D11_DEBUG
++#pragma push_macro("FACILITY_DIRECT3D12")
++#undef FACILITY_DIRECT3D12
++#pragma push_macro("FACILITY_DIRECT3D12_DEBUG")
++#undef FACILITY_DIRECT3D12_DEBUG
++#pragma push_macro("FACILITY_DXCORE")
++#undef FACILITY_DXCORE
++#pragma push_macro("FACILITY_PRESENTATION")
++#undef FACILITY_PRESENTATION
++#pragma push_macro("FACILITY_LEAP")
++#undef FACILITY_LEAP
++#pragma push_macro("FACILITY_AUDCLNT")
++#undef FACILITY_AUDCLNT
++#pragma push_macro("FACILITY_WINCODEC_DWRITE_DWM")
++#undef FACILITY_WINCODEC_DWRITE_DWM
++#pragma push_macro("FACILITY_WINML")
++#undef FACILITY_WINML
++#pragma push_macro("FACILITY_DIRECT2D")
++#undef FACILITY_DIRECT2D
++#pragma push_macro("FACILITY_DEFRAG")
++#undef FACILITY_DEFRAG
++#pragma push_macro("FACILITY_USERMODE_SDBUS")
++#undef FACILITY_USERMODE_SDBUS
++#pragma push_macro("FACILITY_JSCRIPT")
++#undef FACILITY_JSCRIPT
++#pragma push_macro("FACILITY_PIDGENX")
++#undef FACILITY_PIDGENX
++#pragma push_macro("FACILITY_EAS")
++#undef FACILITY_EAS
++#pragma push_macro("FACILITY_WEB")
++#undef FACILITY_WEB
++#pragma push_macro("FACILITY_WEB_SOCKET")
++#undef FACILITY_WEB_SOCKET
++#pragma push_macro("FACILITY_MOBILE")
++#undef FACILITY_MOBILE
++#pragma push_macro("FACILITY_SQLITE")
++#undef FACILITY_SQLITE
++#pragma push_macro("FACILITY_SERVICE_FABRIC")
++#undef FACILITY_SERVICE_FABRIC
++#pragma push_macro("FACILITY_UTC")
++#undef FACILITY_UTC
++#pragma push_macro("FACILITY_WEP")
++#undef FACILITY_WEP
++#pragma push_macro("FACILITY_SYNCENGINE")
++#undef FACILITY_SYNCENGINE
++#pragma push_macro("FACILITY_XBOX")
++#undef FACILITY_XBOX
++#pragma push_macro("FACILITY_GAME")
++#undef FACILITY_GAME
++#pragma push_macro("FACILITY_USERMODE_UNIONFS")
++#undef FACILITY_USERMODE_UNIONFS
++#pragma push_macro("FACILITY_USERMODE_PRM")
++#undef FACILITY_USERMODE_PRM
++#pragma push_macro("FACILITY_USERMODE_WIN_ACCEL")
++#undef FACILITY_USERMODE_WIN_ACCEL
++#pragma push_macro("FACILITY_PPF")
++#undef FACILITY_PPF
++#pragma push_macro("FACILITY_PIX")
++#undef FACILITY_PIX
++#pragma push_macro("FACILITY_NT_BIT")
++#undef FACILITY_NT_BIT
++enum FACILITY_CODE : unsigned int
++{
++    FACILITY_NULL = 0U,
++    FACILITY_RPC = 1U,
++    FACILITY_DISPATCH = 2U,
++    FACILITY_STORAGE = 3U,
++    FACILITY_ITF = 4U,
++    FACILITY_WIN32 = 7U,
++    FACILITY_WINDOWS = 8U,
++    FACILITY_SSPI = 9U,
++    FACILITY_SECURITY = 9U,
++    FACILITY_CONTROL = 10U,
++    FACILITY_CERT = 11U,
++    FACILITY_INTERNET = 12U,
++    FACILITY_MEDIASERVER = 13U,
++    FACILITY_MSMQ = 14U,
++    FACILITY_SETUPAPI = 15U,
++    FACILITY_SCARD = 16U,
++    FACILITY_COMPLUS = 17U,
++    FACILITY_AAF = 18U,
++    FACILITY_URT = 19U,
++    FACILITY_ACS = 20U,
++    FACILITY_DPLAY = 21U,
++    FACILITY_UMI = 22U,
++    FACILITY_SXS = 23U,
++    FACILITY_WINDOWS_CE = 24U,
++    FACILITY_HTTP = 25U,
++    FACILITY_USERMODE_COMMONLOG = 26U,
++    FACILITY_WER = 27U,
++    FACILITY_USERMODE_FILTER_MANAGER = 31U,
++    FACILITY_BACKGROUNDCOPY = 32U,
++    FACILITY_CONFIGURATION = 33U,
++    FACILITY_WIA = 33U,
++    FACILITY_STATE_MANAGEMENT = 34U,
++    FACILITY_METADIRECTORY = 35U,
++    FACILITY_WINDOWSUPDATE = 36U,
++    FACILITY_DIRECTORYSERVICE = 37U,
++    FACILITY_GRAPHICS = 38U,
++    FACILITY_SHELL = 39U,
++    FACILITY_NAP = 39U,
++    FACILITY_TPM_SERVICES = 40U,
++    FACILITY_TPM_SOFTWARE = 41U,
++    FACILITY_UI = 42U,
++    FACILITY_XAML = 43U,
++    FACILITY_ACTION_QUEUE = 44U,
++    FACILITY_PLA = 48U,
++    FACILITY_WINDOWS_SETUP = 48U,
++    FACILITY_FVE = 49U,
++    FACILITY_FWP = 50U,
++    FACILITY_WINRM = 51U,
++    FACILITY_NDIS = 52U,
++    FACILITY_USERMODE_HYPERVISOR = 53U,
++    FACILITY_CMI = 54U,
++    FACILITY_USERMODE_VIRTUALIZATION = 55U,
++    FACILITY_USERMODE_VOLMGR = 56U,
++    FACILITY_BCD = 57U,
++    FACILITY_USERMODE_VHD = 58U,
++    FACILITY_USERMODE_HNS = 59U,
++    FACILITY_SDIAG = 60U,
++    FACILITY_WEBSERVICES = 61U,
++    FACILITY_WINPE = 61U,
++    FACILITY_WPN = 62U,
++    FACILITY_WINDOWS_STORE = 63U,
++    FACILITY_INPUT = 64U,
++    FACILITY_QUIC = 65U,
++    FACILITY_EAP = 66U,
++    FACILITY_IORING = 70U,
++    FACILITY_WINDOWS_DEFENDER = 80U,
++    FACILITY_OPC = 81U,
++    FACILITY_XPS = 82U,
++    FACILITY_MBN = 84U,
++    FACILITY_POWERSHELL = 84U,
++    FACILITY_RAS = 83U,
++    FACILITY_P2P_INT = 98U,
++    FACILITY_P2P = 99U,
++    FACILITY_DAF = 100U,
++    FACILITY_BLUETOOTH_ATT = 101U,
++    FACILITY_AUDIO = 102U,
++    FACILITY_STATEREPOSITORY = 103U,
++    FACILITY_VISUALCPP = 109U,
++    FACILITY_SCRIPT = 112U,
++    FACILITY_PARSE = 113U,
++    FACILITY_BLB = 120U,
++    FACILITY_BLB_CLI = 121U,
++    FACILITY_WSBAPP = 122U,
++    FACILITY_BLBUI = 128U,
++    FACILITY_USN = 129U,
++    FACILITY_USERMODE_VOLSNAP = 130U,
++    FACILITY_TIERING = 131U,
++    FACILITY_WSB_ONLINE = 133U,
++    FACILITY_ONLINE_ID = 134U,
++    FACILITY_DEVICE_UPDATE_AGENT = 135U,
++    FACILITY_DRVSERVICING = 136U,
++    FACILITY_DLS = 153U,
++    FACILITY_DELIVERY_OPTIMIZATION = 208U,
++    FACILITY_USERMODE_SPACES = 231U,
++    FACILITY_USER_MODE_SECURITY_CORE = 232U,
++    FACILITY_USERMODE_LICENSING = 234U,
++    FACILITY_SOS = 160U,
++    FACILITY_OCP_UPDATE_AGENT = 173U,
++    FACILITY_DEBUGGERS = 176U,
++    FACILITY_SPP = 256U,
++    FACILITY_RESTORE = 256U,
++    FACILITY_DMSERVER = 256U,
++    FACILITY_DEPLOYMENT_SERVICES_SERVER = 257U,
++    FACILITY_DEPLOYMENT_SERVICES_IMAGING = 258U,
++    FACILITY_DEPLOYMENT_SERVICES_MANAGEMENT = 259U,
++    FACILITY_DEPLOYMENT_SERVICES_UTIL = 260U,
++    FACILITY_DEPLOYMENT_SERVICES_BINLSVC = 261U,
++    FACILITY_DEPLOYMENT_SERVICES_PXE = 263U,
++    FACILITY_DEPLOYMENT_SERVICES_TFTP = 264U,
++    FACILITY_DEPLOYMENT_SERVICES_TRANSPORT_MANAGEMENT = 272U,
++    FACILITY_DEPLOYMENT_SERVICES_DRIVER_PROVISIONING = 278U,
++    FACILITY_DEPLOYMENT_SERVICES_MULTICAST_SERVER = 289U,
++    FACILITY_DEPLOYMENT_SERVICES_MULTICAST_CLIENT = 290U,
++    FACILITY_DEPLOYMENT_SERVICES_CONTENT_PROVIDER = 293U,
++    FACILITY_HSP_SERVICES = 296U,
++    FACILITY_HSP_SOFTWARE = 297U,
++    FACILITY_LINGUISTIC_SERVICES = 305U,
++    FACILITY_AUDIOSTREAMING = 1094U,
++    FACILITY_TTD = 1490U,
++    FACILITY_ACCELERATOR = 1536U,
++    FACILITY_WMAAECMA = 1996U,
++    FACILITY_DIRECTMUSIC = 2168U,
++    FACILITY_DIRECT3D10 = 2169U,
++    FACILITY_DXGI = 2170U,
++    FACILITY_DXGI_DDI = 2171U,
++    FACILITY_DIRECT3D11 = 2172U,
++    FACILITY_DIRECT3D11_DEBUG = 2173U,
++    FACILITY_DIRECT3D12 = 2174U,
++    FACILITY_DIRECT3D12_DEBUG = 2175U,
++    FACILITY_DXCORE = 2176U,
++    FACILITY_PRESENTATION = 2177U,
++    FACILITY_LEAP = 2184U,
++    FACILITY_AUDCLNT = 2185U,
++    FACILITY_WINCODEC_DWRITE_DWM = 2200U,
++    FACILITY_WINML = 2192U,
++    FACILITY_DIRECT2D = 2201U,
++    FACILITY_DEFRAG = 2304U,
++    FACILITY_USERMODE_SDBUS = 2305U,
++    FACILITY_JSCRIPT = 2306U,
++    FACILITY_PIDGENX = 2561U,
++    FACILITY_EAS = 85U,
++    FACILITY_WEB = 885U,
++    FACILITY_WEB_SOCKET = 886U,
++    FACILITY_MOBILE = 1793U,
++    FACILITY_SQLITE = 1967U,
++    FACILITY_SERVICE_FABRIC = 1968U,
++    FACILITY_UTC = 1989U,
++    FACILITY_WEP = 2049U,
++    FACILITY_SYNCENGINE = 2050U,
++    FACILITY_XBOX = 2339U,
++    FACILITY_GAME = 2340U,
++    FACILITY_USERMODE_UNIONFS = 2341U,
++    FACILITY_USERMODE_PRM = 2342U,
++    FACILITY_USERMODE_WIN_ACCEL = 2343U,
++    FACILITY_PPF = 2344U,
++    FACILITY_PIX = 2748U,
++    FACILITY_NT_BIT = 268435456U,
++};
++#pragma pop_macro("FACILITY_NT_BIT")
++#pragma pop_macro("FACILITY_PIX")
++#pragma pop_macro("FACILITY_PPF")
++#pragma pop_macro("FACILITY_USERMODE_WIN_ACCEL")
++#pragma pop_macro("FACILITY_USERMODE_PRM")
++#pragma pop_macro("FACILITY_USERMODE_UNIONFS")
++#pragma pop_macro("FACILITY_GAME")
++#pragma pop_macro("FACILITY_XBOX")
++#pragma pop_macro("FACILITY_SYNCENGINE")
++#pragma pop_macro("FACILITY_WEP")
++#pragma pop_macro("FACILITY_UTC")
++#pragma pop_macro("FACILITY_SERVICE_FABRIC")
++#pragma pop_macro("FACILITY_SQLITE")
++#pragma pop_macro("FACILITY_MOBILE")
++#pragma pop_macro("FACILITY_WEB_SOCKET")
++#pragma pop_macro("FACILITY_WEB")
++#pragma pop_macro("FACILITY_EAS")
++#pragma pop_macro("FACILITY_PIDGENX")
++#pragma pop_macro("FACILITY_JSCRIPT")
++#pragma pop_macro("FACILITY_USERMODE_SDBUS")
++#pragma pop_macro("FACILITY_DEFRAG")
++#pragma pop_macro("FACILITY_DIRECT2D")
++#pragma pop_macro("FACILITY_WINML")
++#pragma pop_macro("FACILITY_WINCODEC_DWRITE_DWM")
++#pragma pop_macro("FACILITY_AUDCLNT")
++#pragma pop_macro("FACILITY_LEAP")
++#pragma pop_macro("FACILITY_PRESENTATION")
++#pragma pop_macro("FACILITY_DXCORE")
++#pragma pop_macro("FACILITY_DIRECT3D12_DEBUG")
++#pragma pop_macro("FACILITY_DIRECT3D12")
++#pragma pop_macro("FACILITY_DIRECT3D11_DEBUG")
++#pragma pop_macro("FACILITY_DIRECT3D11")
++#pragma pop_macro("FACILITY_DXGI_DDI")
++#pragma pop_macro("FACILITY_DXGI")
++#pragma pop_macro("FACILITY_DIRECT3D10")
++#pragma pop_macro("FACILITY_DIRECTMUSIC")
++#pragma pop_macro("FACILITY_WMAAECMA")
++#pragma pop_macro("FACILITY_ACCELERATOR")
++#pragma pop_macro("FACILITY_TTD")
++#pragma pop_macro("FACILITY_AUDIOSTREAMING")
++#pragma pop_macro("FACILITY_LINGUISTIC_SERVICES")
++#pragma pop_macro("FACILITY_HSP_SOFTWARE")
++#pragma pop_macro("FACILITY_HSP_SERVICES")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_CONTENT_PROVIDER")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_MULTICAST_CLIENT")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_MULTICAST_SERVER")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_DRIVER_PROVISIONING")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_TRANSPORT_MANAGEMENT")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_TFTP")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_PXE")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_BINLSVC")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_UTIL")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_MANAGEMENT")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_IMAGING")
++#pragma pop_macro("FACILITY_DEPLOYMENT_SERVICES_SERVER")
++#pragma pop_macro("FACILITY_DMSERVER")
++#pragma pop_macro("FACILITY_RESTORE")
++#pragma pop_macro("FACILITY_SPP")
++#pragma pop_macro("FACILITY_DEBUGGERS")
++#pragma pop_macro("FACILITY_OCP_UPDATE_AGENT")
++#pragma pop_macro("FACILITY_SOS")
++#pragma pop_macro("FACILITY_USERMODE_LICENSING")
++#pragma pop_macro("FACILITY_USER_MODE_SECURITY_CORE")
++#pragma pop_macro("FACILITY_USERMODE_SPACES")
++#pragma pop_macro("FACILITY_DELIVERY_OPTIMIZATION")
++#pragma pop_macro("FACILITY_DLS")
++#pragma pop_macro("FACILITY_DRVSERVICING")
++#pragma pop_macro("FACILITY_DEVICE_UPDATE_AGENT")
++#pragma pop_macro("FACILITY_ONLINE_ID")
++#pragma pop_macro("FACILITY_WSB_ONLINE")
++#pragma pop_macro("FACILITY_TIERING")
++#pragma pop_macro("FACILITY_USERMODE_VOLSNAP")
++#pragma pop_macro("FACILITY_USN")
++#pragma pop_macro("FACILITY_BLBUI")
++#pragma pop_macro("FACILITY_WSBAPP")
++#pragma pop_macro("FACILITY_BLB_CLI")
++#pragma pop_macro("FACILITY_BLB")
++#pragma pop_macro("FACILITY_PARSE")
++#pragma pop_macro("FACILITY_SCRIPT")
++#pragma pop_macro("FACILITY_VISUALCPP")
++#pragma pop_macro("FACILITY_STATEREPOSITORY")
++#pragma pop_macro("FACILITY_AUDIO")
++#pragma pop_macro("FACILITY_BLUETOOTH_ATT")
++#pragma pop_macro("FACILITY_DAF")
++#pragma pop_macro("FACILITY_P2P")
++#pragma pop_macro("FACILITY_P2P_INT")
++#pragma pop_macro("FACILITY_RAS")
++#pragma pop_macro("FACILITY_POWERSHELL")
++#pragma pop_macro("FACILITY_MBN")
++#pragma pop_macro("FACILITY_XPS")
++#pragma pop_macro("FACILITY_OPC")
++#pragma pop_macro("FACILITY_WINDOWS_DEFENDER")
++#pragma pop_macro("FACILITY_IORING")
++#pragma pop_macro("FACILITY_EAP")
++#pragma pop_macro("FACILITY_QUIC")
++#pragma pop_macro("FACILITY_INPUT")
++#pragma pop_macro("FACILITY_WINDOWS_STORE")
++#pragma pop_macro("FACILITY_WPN")
++#pragma pop_macro("FACILITY_WINPE")
++#pragma pop_macro("FACILITY_WEBSERVICES")
++#pragma pop_macro("FACILITY_SDIAG")
++#pragma pop_macro("FACILITY_USERMODE_HNS")
++#pragma pop_macro("FACILITY_USERMODE_VHD")
++#pragma pop_macro("FACILITY_BCD")
++#pragma pop_macro("FACILITY_USERMODE_VOLMGR")
++#pragma pop_macro("FACILITY_USERMODE_VIRTUALIZATION")
++#pragma pop_macro("FACILITY_CMI")
++#pragma pop_macro("FACILITY_USERMODE_HYPERVISOR")
++#pragma pop_macro("FACILITY_NDIS")
++#pragma pop_macro("FACILITY_WINRM")
++#pragma pop_macro("FACILITY_FWP")
++#pragma pop_macro("FACILITY_FVE")
++#pragma pop_macro("FACILITY_WINDOWS_SETUP")
++#pragma pop_macro("FACILITY_PLA")
++#pragma pop_macro("FACILITY_ACTION_QUEUE")
++#pragma pop_macro("FACILITY_XAML")
++#pragma pop_macro("FACILITY_UI")
++#pragma pop_macro("FACILITY_TPM_SOFTWARE")
++#pragma pop_macro("FACILITY_TPM_SERVICES")
++#pragma pop_macro("FACILITY_NAP")
++#pragma pop_macro("FACILITY_SHELL")
++#pragma pop_macro("FACILITY_GRAPHICS")
++#pragma pop_macro("FACILITY_DIRECTORYSERVICE")
++#pragma pop_macro("FACILITY_WINDOWSUPDATE")
++#pragma pop_macro("FACILITY_METADIRECTORY")
++#pragma pop_macro("FACILITY_STATE_MANAGEMENT")
++#pragma pop_macro("FACILITY_WIA")
++#pragma pop_macro("FACILITY_CONFIGURATION")
++#pragma pop_macro("FACILITY_BACKGROUNDCOPY")
++#pragma pop_macro("FACILITY_USERMODE_FILTER_MANAGER")
++#pragma pop_macro("FACILITY_WER")
++#pragma pop_macro("FACILITY_USERMODE_COMMONLOG")
++#pragma pop_macro("FACILITY_HTTP")
++#pragma pop_macro("FACILITY_WINDOWS_CE")
++#pragma pop_macro("FACILITY_SXS")
++#pragma pop_macro("FACILITY_UMI")
++#pragma pop_macro("FACILITY_DPLAY")
++#pragma pop_macro("FACILITY_ACS")
++#pragma pop_macro("FACILITY_URT")
++#pragma pop_macro("FACILITY_AAF")
++#pragma pop_macro("FACILITY_COMPLUS")
++#pragma pop_macro("FACILITY_SCARD")
++#pragma pop_macro("FACILITY_SETUPAPI")
++#pragma pop_macro("FACILITY_MSMQ")
++#pragma pop_macro("FACILITY_MEDIASERVER")
++#pragma pop_macro("FACILITY_INTERNET")
++#pragma pop_macro("FACILITY_CERT")
++#pragma pop_macro("FACILITY_CONTROL")
++#pragma pop_macro("FACILITY_SECURITY")
++#pragma pop_macro("FACILITY_SSPI")
++#pragma pop_macro("FACILITY_WINDOWS")
++#pragma pop_macro("FACILITY_WIN32")
++#pragma pop_macro("FACILITY_ITF")
++#pragma pop_macro("FACILITY_STORAGE")
++#pragma pop_macro("FACILITY_DISPATCH")
++#pragma pop_macro("FACILITY_RPC")
++#pragma pop_macro("FACILITY_NULL")
 +#endif
 +
  #endif//_WINERROR_

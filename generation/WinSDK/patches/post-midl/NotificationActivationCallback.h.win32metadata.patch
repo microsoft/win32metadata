@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h b/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h
-index f1018eb11f..a60009480a 100644
+index f1018eb11f..31619f3e7c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h
 @@ -1,3 +1,4 @@
@@ -12,15 +12,20 @@ index f1018eb11f..a60009480a 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  #if (NTDDI_VERSION >= NTDDI_WIN10)
 -typedef struct NOTIFICATION_USER_INPUT_DATA
-+typedef struct _Windows_SupportedOS_10240_ NOTIFICATION_USER_INPUT_DATA
++typedef struct  NOTIFICATION_USER_INPUT_DATA
      {
      LPCWSTR Key;
      LPCWSTR Value;
-@@ -94,6 +95,7 @@ EXTERN_C const IID IID_INotificationActivationCallback;
+@@ -90,10 +91,11 @@ EXTERN_C const IID IID_INotificationActivationCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("53E31837-6600-4A81-9395-75CFFE746F94")
++    MIDL_INTERFACE("53E31837-6600-4A81-9395-75CFFE746F94") _Windows_SupportedOS_10240_ 
      INotificationActivationCallback : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_10240_
++        
          virtual HRESULT STDMETHODCALLTYPE Activate( 
              /* [annotation][string][in] */ 
              _In_  LPCWSTR appUserModelId,

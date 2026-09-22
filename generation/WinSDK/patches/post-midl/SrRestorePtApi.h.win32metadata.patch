@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
+index 531fcf46de..091f289dce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -67,7 +68,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h b/genera
 -typedef struct _RESTOREPTINFOA {
 -    DWORD   dwEventType;                // Type of Event - Begin or End
 -    DWORD   dwRestorePtType;            // Type of Restore Point - App install/uninstall
-+typedef struct _Windows_SupportedOS_WindowsXP_ _RESTOREPTINFOA {
++typedef struct  _RESTOREPTINFOA {
 +    _Win32_AssociatedEnum_(RESTOREPOINTINFO_EVENT_TYPE) DWORD   dwEventType;                // Type of Event - Begin or End
 +    _Win32_AssociatedEnum_(RESTOREPOINTINFO_TYPE) DWORD   dwRestorePtType;            // Type of Restore Point - App install/uninstall
      INT64   llSequenceNumber;           // Sequence Number - 0 for begin
@@ -77,21 +78,23 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SrRestorePtApi.h b/genera
 -typedef struct _RESTOREPTINFOW {
 -    DWORD   dwEventType;
 -    DWORD   dwRestorePtType;
-+typedef struct _Windows_SupportedOS_WindowsXP_ _RESTOREPTINFOW {
++typedef struct  _RESTOREPTINFOW {
 +    _Win32_AssociatedEnum_(RESTOREPOINTINFO_EVENT_TYPE) DWORD   dwEventType;
 +    _Win32_AssociatedEnum_(RESTOREPOINTINFO_TYPE) DWORD   dwRestorePtType;
      INT64   llSequenceNumber;
      WCHAR   szDescription[MAX_DESC_W];
  } RESTOREPOINTINFOW, *PRESTOREPOINTINFOW;
-@@ -99,7 +144,7 @@ typedef struct _RESTOREPTINFOEX {
+@@ -99,8 +144,8 @@ typedef struct _RESTOREPTINFOEX {
  // Status returned by System Restore
  //
  
 -typedef struct _SMGRSTATUS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _SMGRSTATUS {
-     DWORD   nStatus;            // Status returned by State Manager Process
+-    DWORD   nStatus;            // Status returned by State Manager Process
++typedef struct  _SMGRSTATUS {
++    _Win32_AssociatedEnum_(WIN32_ERROR) DWORD   nStatus;            // Status returned by State Manager Process
      INT64   llSequenceNumber;   // Sequence Number for the restore point
  } STATEMGRSTATUS, *PSTATEMGRSTATUS;
+ 
 @@ -137,6 +182,7 @@ extern "C" {
  //
  // ERROR_ALREADY_EXISTS       If this is a nested restore point

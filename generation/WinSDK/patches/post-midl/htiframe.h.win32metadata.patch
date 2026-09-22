@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
-index 059b2416cc6e5aadc25defad3fb3e897cac3aea6..77e4e4d03c9dad39c089002b2751ed8f9d8254eb 100644
+index 059b2416cc..db94de19a0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
 @@ -99,6 +99,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 059b2416cc6e5aadc25defad3fb3e897cac3aea6..77e4e4d03c9dad39c089002b2751ed8f
      
      MIDL_INTERFACE("863a99a0-21bc-11d0-82b4-00a0c90c29c5")
 -    ITargetNotify : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetNotify : public IUnknown
++      ITargetNotify : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnCreate( 
@@ -33,7 +33,7 @@ index 059b2416cc6e5aadc25defad3fb3e897cac3aea6..77e4e4d03c9dad39c089002b2751ed8f
      
      MIDL_INTERFACE("3050f6b1-98b5-11cf-bb82-00aa00bdce0b")
 -    ITargetNotify2 : public ITargetNotify
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetNotify2 : public ITargetNotify
++      ITargetNotify2 : public ITargetNotify
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetOptionString( 

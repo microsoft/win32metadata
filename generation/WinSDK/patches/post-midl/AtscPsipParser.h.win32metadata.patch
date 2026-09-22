@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h b/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
-index 14979717692f2531d439067df421aa602c77b88a..524d5c67d7f5d297dd0d2c7a38fd07a18b6fb8af 100644
+index 1497971769..5a0a04329d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
 @@ -133,6 +133,7 @@ extern "C"{
@@ -19,6 +19,24 @@ index 14979717692f2531d439067df421aa602c77b88a..524d5c67d7f5d297dd0d2c7a38fd07a1
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -1614,7 +1615,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetNatureOfActivationText( 
+             /* [in] */ __RPC__in BSTR bstrIS0639code,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrString) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTimeRemaining( 
+             /* [out] */ __RPC__out BYTE *pbVal) = 0;
+@@ -1642,7 +1643,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlertText( 
+             /* [in] */ __RPC__in BSTR bstrIS0639code,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrString) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRawAlertTextLen( 
+             /* [out] */ __RPC__out WORD *pwVal) = 0;
 @@ -1864,7 +1865,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
          END_INTERFACE
      } ISCTE_EASVtbl;

@@ -1,0 +1,585 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
+index 7b7e6ba75d..eae7c4bfd6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -481,10 +482,10 @@ EXTERN_C const IID IID_IEnumConnections;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B287-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B287-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IEnumConnections : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG cConnections,
+@@ -632,7 +633,7 @@ EXTERN_C const IID IID_IConnectionPoint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B286-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B286-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IConnectionPoint : public IUnknown
+     {
+     public:
+@@ -779,10 +780,10 @@ EXTERN_C const IID IID_IEnumConnectionPoints;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B285-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B285-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IEnumConnectionPoints : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG cConnections,
+@@ -930,7 +931,7 @@ EXTERN_C const IID IID_IConnectionPointContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B284-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B284-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IConnectionPointContainer : public IUnknown
+     {
+     public:
+@@ -1057,7 +1058,7 @@ EXTERN_C const IID IID_IClassFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B28F-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B28F-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IClassFactory2 : public IClassFactory
+     {
+     public:
+@@ -1069,7 +1070,7 @@ EXTERN_C const IID IID_IClassFactory2;
+             /* [annotation][in] */ 
+             _In_  DWORD dwReserved,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstrKey) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstrKey) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CreateInstanceLic( 
+             /* [annotation][in] */ 
+@@ -1232,7 +1233,7 @@ EXTERN_C const IID IID_IProvideClassInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B283-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B283-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IProvideClassInfo : public IUnknown
+     {
+     public:
+@@ -1327,7 +1328,7 @@ EXTERN_C const IID IID_IProvideClassInfo2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851")
++    MIDL_INTERFACE("A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851") _Windows_SupportedOS_Windows2000_ 
+     IProvideClassInfo2 : public IProvideClassInfo
+     {
+     public:
+@@ -1435,7 +1436,7 @@ EXTERN_C const IID IID_IProvideMultipleClassInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A7ABA9C1-8983-11cf-8F20-00805F2CD064")
++    MIDL_INTERFACE("A7ABA9C1-8983-11cf-8F20-00805F2CD064") _Windows_SupportedOS_Windows2000_ 
+     IProvideMultipleClassInfo : public IProvideClassInfo2
+     {
+     public:
+@@ -1447,7 +1448,7 @@ EXTERN_C const IID IID_IProvideMultipleClassInfo;
+             /* [annotation][in] */ 
+             _In_  ULONG iti,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _Win32_AssociatedEnum_(MULTICLASSINFO_FLAGS) _In_  DWORD dwFlags,
+             /* [annotation][out] */ 
+             _Out_  ITypeInfo **pptiCoClass,
+             /* [annotation][out] */ 
+@@ -1583,7 +1584,7 @@ typedef struct tagCONTROLINFO
+     ULONG cb;
+     HACCEL hAccel;
+     USHORT cAccel;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(CTRLINFO) DWORD dwFlags;
+     } 	CONTROLINFO;
+ 
+ typedef struct tagCONTROLINFO *LPCONTROLINFO;
+@@ -1600,7 +1601,7 @@ EXTERN_C const IID IID_IOleControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B288-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B288-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IOleControl : public IUnknown
+     {
+     public:
+@@ -1746,7 +1747,7 @@ EXTERN_C const IID IID_IOleControlSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B289-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B289-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IOleControlSite : public IUnknown
+     {
+     public:
+@@ -1766,7 +1767,7 @@ EXTERN_C const IID IID_IOleControlSite;
+             /* [annotation][out][in] */ 
+             _Inout_  POINTF *pPtfContainer,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags) = 0;
++            _Win32_AssociatedEnum_(XFORMCOORDS) _In_  DWORD dwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
+             /* [annotation][in] */ 
+@@ -1929,7 +1930,7 @@ EXTERN_C const IID IID_IPropertyPage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B28D-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B28D-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IPropertyPage : public IUnknown
+     {
+     public:
+@@ -2148,7 +2149,7 @@ EXTERN_C const IID IID_IPropertyPage2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("01E44665-24AC-101B-84ED-08002B2EC713")
++    MIDL_INTERFACE("01E44665-24AC-101B-84ED-08002B2EC713") _Windows_SupportedOS_Windows2000_ 
+     IPropertyPage2 : public IPropertyPage
+     {
+     public:
+@@ -2345,13 +2346,13 @@ EXTERN_C const IID IID_IPropertyPageSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B28C-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B28C-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IPropertyPageSite : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags) = 0;
++            _Win32_AssociatedEnum_(PROPPAGESTATUS) _In_  DWORD dwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLocaleID( 
+             /* [annotation][out] */ 
+@@ -2473,7 +2474,7 @@ EXTERN_C const IID IID_IPropertyNotifySink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9BFBBC02-EFF1-101A-84ED-00AA00341D07")
++    MIDL_INTERFACE("9BFBBC02-EFF1-101A-84ED-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     IPropertyNotifySink : public IUnknown
+     {
+     public:
+@@ -2583,7 +2584,7 @@ EXTERN_C const IID IID_ISpecifyPropertyPages;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B196B28B-BAB4-101A-B69C-00AA00341D07")
++    MIDL_INTERFACE("B196B28B-BAB4-101A-B69C-00AA00341D07") _Windows_SupportedOS_Windows2000_ 
+     ISpecifyPropertyPages : public IUnknown
+     {
+     public:
+@@ -2675,7 +2676,7 @@ EXTERN_C const IID IID_IPersistMemory;
+     MIDL_INTERFACE("BD1AE5E0-A6AE-11CE-BD37-504200C10000")
+     IPersistMemory : public IPersist
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Load( 
+@@ -2859,10 +2860,10 @@ EXTERN_C const IID IID_IPersistStreamInit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7FD52380-4E07-101B-AE2D-08002B2EC713")
++    MIDL_INTERFACE("7FD52380-4E07-101B-AE2D-08002B2EC713") _Windows_SupportedOS_Windows2000_ 
+     IPersistStreamInit : public IPersist
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Load( 
+@@ -3139,7 +3140,7 @@ EXTERN_C const IID IID_ISimpleFrameSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("742B0E01-14E6-101B-914E-00AA00300CAB")
++    MIDL_INTERFACE("742B0E01-14E6-101B-914E-00AA00300CAB") _Windows_SupportedOS_Windows2000_ 
+     ISimpleFrameSite : public IUnknown
+     {
+     public:
+@@ -3289,13 +3290,13 @@ EXTERN_C const IID IID_IFont;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BEF6E002-A874-101A-8BBA-00AA00300CAB")
++    MIDL_INTERFACE("BEF6E002-A874-101A-8BBA-00AA00300CAB") _Windows_SupportedOS_Windows2000_ 
+     IFont : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -3359,7 +3360,7 @@ EXTERN_C const IID IID_IFont;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_hFont( 
+             /* [annotation][out] */ 
+-            _Out_  HFONT *phFont) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HFONT *phFont) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Clone( 
+             /* [annotation][out] */ 
+@@ -3698,7 +3699,7 @@ EXTERN_C const IID IID_IPicture;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7BF80980-BF32-101A-8BBB-00AA00300CAB")
++    MIDL_INTERFACE("7BF80980-BF32-101A-8BBB-00AA00300CAB") _Windows_SupportedOS_Windows2000_ 
+     IPicture : public IUnknown
+     {
+     public:
+@@ -3712,7 +3713,7 @@ EXTERN_C const IID IID_IPicture;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [annotation][out] */ 
+-            _Out_  SHORT *pType) = 0;
++            _Win32_AssociatedEnum_(PICTYPE) _Out_  SHORT *pType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_Width( 
+             /* [annotation][out] */ 
+@@ -4450,7 +4451,7 @@ EXTERN_C const IID IID_IFontDisp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BEF6E003-A874-101A-8BBA-00AA00300CAB")
++    MIDL_INTERFACE("BEF6E003-A874-101A-8BBA-00AA00300CAB") _Windows_SupportedOS_Windows2000_ 
+     IFontDisp : public IDispatch
+     {
+     public:
+@@ -4588,7 +4589,7 @@ EXTERN_C const IID IID_IPictureDisp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7BF80981-BF32-101A-8BBB-00AA00300CAB")
++    MIDL_INTERFACE("7BF80981-BF32-101A-8BBB-00AA00300CAB") _Windows_SupportedOS_Windows2000_ 
+     IPictureDisp : public IDispatch
+     {
+     public:
+@@ -4726,7 +4727,7 @@ EXTERN_C const IID IID_IOleInPlaceObjectWindowless;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1C2056CC-5EF4-101B-8BC8-00AA003E3B29")
++    MIDL_INTERFACE("1C2056CC-5EF4-101B-8BC8-00AA003E3B29") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceObjectWindowless : public IOleInPlaceObject
+     {
+     public:
+@@ -4898,7 +4899,7 @@ EXTERN_C const IID IID_IOleInPlaceSiteEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9C2CAD80-3424-11CF-B670-00AA004CD6D8")
++    MIDL_INTERFACE("9C2CAD80-3424-11CF-B670-00AA004CD6D8") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceSiteEx : public IOleInPlaceSite
+     {
+     public:
+@@ -5129,7 +5130,7 @@ EXTERN_C const IID IID_IOleInPlaceSiteWindowless;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("922EADA0-3424-11CF-B670-00AA004CD6D8")
++    MIDL_INTERFACE("922EADA0-3424-11CF-B670-00AA004CD6D8") _Windows_SupportedOS_Windows2000_ 
+     IOleInPlaceSiteWindowless : public IOleInPlaceSiteEx
+     {
+     public:
+@@ -5576,7 +5577,7 @@ EXTERN_C const IID IID_IViewObjectEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3AF24292-0C96-11CE-A0CF-00AA00600AB8")
++    MIDL_INTERFACE("3AF24292-0C96-11CE-A0CF-00AA00600AB8") _Windows_SupportedOS_Windows2000_ 
+     IViewObjectEx : public IViewObject2
+     {
+     public:
+@@ -5616,7 +5617,7 @@ EXTERN_C const IID IID_IViewObjectEx;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetNaturalExtent( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwAspect,
++            _Win32_AssociatedEnum_(DVASPECT) _In_  DWORD dwAspect,
+             /* [annotation][in] */ 
+             _In_  LONG lindex,
+             /* [annotation][in] */ 
+@@ -5887,7 +5888,7 @@ EXTERN_C const IID IID_IOleUndoUnit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("894AD3B0-EF97-11CE-9BC9-00AA00608E01")
++    MIDL_INTERFACE("894AD3B0-EF97-11CE-9BC9-00AA00608E01") _Windows_SupportedOS_Windows2000_ 
+     IOleUndoUnit : public IUnknown
+     {
+     public:
+@@ -5897,7 +5898,7 @@ EXTERN_C const IID IID_IOleUndoUnit;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetUnitType( 
+             /* [annotation][out] */ 
+@@ -6015,7 +6016,7 @@ EXTERN_C const IID IID_IOleParentUndoUnit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A1FAF330-EF97-11CE-9BC9-00AA00608E01")
++    MIDL_INTERFACE("A1FAF330-EF97-11CE-9BC9-00AA00608E01") _Windows_SupportedOS_Windows2000_ 
+     IOleParentUndoUnit : public IOleUndoUnit
+     {
+     public:
+@@ -6197,10 +6198,10 @@ EXTERN_C const IID IID_IEnumOleUndoUnits;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B3E7C340-EF97-11CE-9BC9-00AA00608E01")
++    MIDL_INTERFACE("B3E7C340-EF97-11CE-9BC9-00AA00608E01") _Windows_SupportedOS_Windows2000_ 
+     IEnumOleUndoUnits : public IUnknown
+     {
+-    public:
++    _Win32_PreserveResult_ public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG cElt,
+@@ -6347,7 +6348,7 @@ EXTERN_C const IID IID_IOleUndoManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D001F200-EF97-11CE-9BC9-00AA00608E01")
++    MIDL_INTERFACE("D001F200-EF97-11CE-9BC9-00AA00608E01") _Windows_SupportedOS_Windows2000_ 
+     IOleUndoManager : public IUnknown
+     {
+     public:
+@@ -6355,7 +6356,7 @@ EXTERN_C const IID IID_IOleUndoManager;
+             /* [annotation][in] */ 
+             _In_  IOleParentUndoUnit *pPUU) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Close( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Close( 
+             /* [annotation][in] */ 
+             _In_  IOleParentUndoUnit *pPUU,
+             /* [annotation][in] */ 
+@@ -6391,11 +6392,11 @@ EXTERN_C const IID IID_IOleUndoManager;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLastUndoDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLastRedoDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Enable( 
+             /* [annotation][in] */ 
+@@ -6591,13 +6592,13 @@ EXTERN_C const IID IID_IPointerInactive;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("55980BA0-35AA-11CF-B671-00AA004CD6D8")
++    MIDL_INTERFACE("55980BA0-35AA-11CF-B671-00AA004CD6D8") _Windows_SupportedOS_Windows2000_ 
+     IPointerInactive : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetActivationPolicy( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwPolicy) = 0;
++            _Win32_AssociatedEnum_(POINTERINACTIVE) _Out_  DWORD *pdwPolicy) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnInactiveMouseMove( 
+             /* [annotation][in] */ 
+@@ -6734,7 +6735,7 @@ EXTERN_C const IID IID_IObjectWithSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FC4801A3-2BA9-11CF-A229-00AA003D7352")
++    MIDL_INTERFACE("FC4801A3-2BA9-11CF-A229-00AA003D7352") _Windows_SupportedOS_Windows2000_ 
+     IObjectWithSite : public IUnknown
+     {
+     public:
+@@ -6868,7 +6869,7 @@ EXTERN_C const IID IID_IPerPropertyBrowsing;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("376BD3AA-3845-101B-84ED-08002B2EC713")
++    MIDL_INTERFACE("376BD3AA-3845-101B-84ED-08002B2EC713") _Windows_SupportedOS_Windows2000_ 
+     IPerPropertyBrowsing : public IUnknown
+     {
+     public:
+@@ -6876,7 +6877,7 @@ EXTERN_C const IID IID_IPerPropertyBrowsing;
+             /* [annotation][in] */ 
+             _In_  DISPID dispID,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pBstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pBstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE MapPropertyToPage( 
+             /* [annotation][in] */ 
+@@ -7042,7 +7043,7 @@ enum tagPROPBAG2_TYPE
+ typedef struct tagPROPBAG2
+     {
+     DWORD dwType;
+-    VARTYPE vt;
++    _Win32_AssociatedEnum_(VARENUM) VARTYPE vt;
+     CLIPFORMAT cfType;
+     DWORD dwHint;
+     LPOLESTR pstrName;
+@@ -7275,7 +7276,7 @@ EXTERN_C const IID IID_IPersistPropertyBag2;
+             /* [annotation][in] */ 
+             _In_  BOOL fSaveAllProperties) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+         
+     };
+     
+@@ -7409,7 +7410,7 @@ EXTERN_C const IID IID_IAdviseSinkEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3AF24290-0C96-11CE-A0CF-00AA00600AB8")
++    MIDL_INTERFACE("3AF24290-0C96-11CE-A0CF-00AA00600AB8") _Windows_SupportedOS_Windows2000_ 
+     IAdviseSinkEx : public IAdviseSink
+     {
+     public:
+@@ -7586,7 +7587,7 @@ typedef struct tagQACONTAINER
+     IAdviseSinkEx *pAdviseSink;
+     IPropertyNotifySink *pPropertyNotifySink;
+     IUnknown *pUnkEventSink;
+-    DWORD dwAmbientFlags;
++    _Win32_AssociatedEnum_(QACONTAINERFLAGS) DWORD dwAmbientFlags;
+     OLE_COLOR colorFore;
+     OLE_COLOR colorBack;
+     IFont *pFont;
+@@ -7602,11 +7603,11 @@ typedef struct tagQACONTAINER
+ typedef struct tagQACONTROL
+     {
+     ULONG cbSize;
+-    DWORD dwMiscStatus;
+-    DWORD dwViewStatus;
++    _Win32_AssociatedEnum_(OLEMISC) DWORD dwMiscStatus;
++    _Win32_AssociatedEnum_(VIEWSTATUS) DWORD dwViewStatus;
+     DWORD dwEventCookie;
+     DWORD dwPropNotifyCookie;
+-    DWORD dwPointerActivationPolicy;
++    _Win32_AssociatedEnum_(POINTERINACTIVE) DWORD dwPointerActivationPolicy;
+     } 	QACONTROL;
+ 
+ 
+@@ -7614,7 +7615,7 @@ EXTERN_C const IID IID_IQuickActivate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CF51ED10-62FE-11CF-BF86-00A0C9034836")
++    MIDL_INTERFACE("CF51ED10-62FE-11CF-BF86-00A0C9034836") _Windows_SupportedOS_Windows2000_ 
+     IQuickActivate : public IUnknown
+     {
+     public:
+@@ -7775,15 +7776,15 @@ unsigned char * __RPC_USER  HFONT_UserMarshal(  __RPC__in unsigned long *, __RPC
+ unsigned char * __RPC_USER  HFONT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HFONT * ); 
+ void                      __RPC_USER  HFONT_UserFree(     __RPC__in unsigned long *, __RPC__in HFONT * ); 
+ 
+-unsigned long             __RPC_USER  HPALETTE_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
+-unsigned char * __RPC_USER  HPALETTE_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
+-unsigned char * __RPC_USER  HPALETTE_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HPALETTE * ); 
+-void                      __RPC_USER  HPALETTE_UserFree(     __RPC__in unsigned long *, __RPC__in HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HPALETTE_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HPALETTE_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HPALETTE_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HPALETTE_UserFree(     __RPC__in unsigned long *, __RPC__in HPALETTE * ); 
+ 
+-unsigned long             __RPC_USER  HRGN_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HRGN * ); 
+-unsigned char * __RPC_USER  HRGN_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HRGN * ); 
+-unsigned char * __RPC_USER  HRGN_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HRGN * ); 
+-void                      __RPC_USER  HRGN_UserFree(     __RPC__in unsigned long *, __RPC__in HRGN * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HRGN_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HRGN * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HRGN_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HRGN * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HRGN_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HRGN * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HRGN_UserFree(     __RPC__in unsigned long *, __RPC__in HRGN * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -7820,15 +7821,15 @@ unsigned char * __RPC_USER  HFONT_UserMarshal64(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  HFONT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HFONT * ); 
+ void                      __RPC_USER  HFONT_UserFree64(     __RPC__in unsigned long *, __RPC__in HFONT * ); 
+ 
+-unsigned long             __RPC_USER  HPALETTE_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
+-unsigned char * __RPC_USER  HPALETTE_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
+-unsigned char * __RPC_USER  HPALETTE_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HPALETTE * ); 
+-void                      __RPC_USER  HPALETTE_UserFree64(     __RPC__in unsigned long *, __RPC__in HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HPALETTE_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HPALETTE_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HPALETTE_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HPALETTE * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HPALETTE_UserFree64(     __RPC__in unsigned long *, __RPC__in HPALETTE * ); 
+ 
+-unsigned long             __RPC_USER  HRGN_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HRGN * ); 
+-unsigned char * __RPC_USER  HRGN_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HRGN * ); 
+-unsigned char * __RPC_USER  HRGN_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HRGN * ); 
+-void                      __RPC_USER  HRGN_UserFree64(     __RPC__in unsigned long *, __RPC__in HRGN * ); 
++_Win32_ImportLibrary_("api-ms-win-core-marshal-l1-1-0.dll") unsigned long             __RPC_USER  HRGN_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HRGN * ); 
++_Win32_ImportLibrary_("api-ms-win-core-marshal-l1-1-0.dll") unsigned char * __RPC_USER  HRGN_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HRGN * ); 
++_Win32_ImportLibrary_("api-ms-win-core-marshal-l1-1-0.dll") unsigned char * __RPC_USER  HRGN_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HRGN * ); 
++_Win32_ImportLibrary_("api-ms-win-core-marshal-l1-1-0.dll") void                      __RPC_USER  HRGN_UserFree64(     __RPC__in unsigned long *, __RPC__in HRGN * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -7988,6 +7989,29 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MULTICLASSINFO_GETTYPEINFO")
++#undef MULTICLASSINFO_GETTYPEINFO
++#pragma push_macro("MULTICLASSINFO_GETNUMRESERVEDDISPIDS")
++#undef MULTICLASSINFO_GETNUMRESERVEDDISPIDS
++#pragma push_macro("MULTICLASSINFO_GETIIDPRIMARY")
++#undef MULTICLASSINFO_GETIIDPRIMARY
++#pragma push_macro("MULTICLASSINFO_GETIIDSOURCE")
++#undef MULTICLASSINFO_GETIIDSOURCE
++enum MULTICLASSINFO_FLAGS : unsigned int
++{
++    MULTICLASSINFO_GETTYPEINFO = 1U,
++    MULTICLASSINFO_GETNUMRESERVEDDISPIDS = 2U,
++    MULTICLASSINFO_GETIIDPRIMARY = 4U,
++    MULTICLASSINFO_GETIIDSOURCE = 8U,
++};
++#pragma pop_macro("MULTICLASSINFO_GETIIDSOURCE")
++#pragma pop_macro("MULTICLASSINFO_GETIIDPRIMARY")
++#pragma pop_macro("MULTICLASSINFO_GETNUMRESERVEDDISPIDS")
++#pragma pop_macro("MULTICLASSINFO_GETTYPEINFO")
++#endif
++
+ #endif
+ 
+ 

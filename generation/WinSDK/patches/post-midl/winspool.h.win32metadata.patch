@@ -1,0 +1,937 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winspool.h b/generation/WinSDK/RecompiledIdlHeaders/um/winspool.h
+index a2a8b352f8..785af81d1a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winspool.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winspool.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -1208,12 +1209,12 @@ typedef LPDATATYPES_INFO_1A LPDATATYPES_INFO_1;
+ typedef struct _PRINTER_DEFAULTSA{
+     LPSTR         pDatatype;
+     LPDEVMODEA pDevMode;
+-    ACCESS_MASK DesiredAccess;
++    _Win32_AssociatedEnum_(PRINTER_ACCESS_RIGHTS) ACCESS_MASK DesiredAccess;
+ } PRINTER_DEFAULTSA, *PPRINTER_DEFAULTSA, *LPPRINTER_DEFAULTSA;
+ typedef struct _PRINTER_DEFAULTSW{
+     LPWSTR        pDatatype;
+     LPDEVMODEW pDevMode;
+-    ACCESS_MASK DesiredAccess;
++    _Win32_AssociatedEnum_(PRINTER_ACCESS_RIGHTS) ACCESS_MASK DesiredAccess;
+ } PRINTER_DEFAULTSW, *PPRINTER_DEFAULTSW, *LPPRINTER_DEFAULTSW;
+ #ifdef UNICODE
+ typedef PRINTER_DEFAULTSW PRINTER_DEFAULTS;
+@@ -1249,7 +1250,7 @@ typedef PPRINTER_ENUM_VALUESA PPRINTER_ENUM_VALUES;
+ typedef LPPRINTER_ENUM_VALUESA LPPRINTER_ENUM_VALUES;
+ #endif // UNICODE
+ 
+-_Success_(return != FALSE)
++_Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ EnumPrintersA(
+@@ -1262,7 +1263,7 @@ _Out_writes_bytes_to_opt_(cbBuf, *pcbNeeded)
+ _Out_         LPDWORD pcbNeeded,
+ _Out_         LPDWORD pcReturned
+ );
+-_Success_(return != FALSE)
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ EnumPrintersW(
+@@ -1313,13 +1314,13 @@ _Out_         LPDWORD pcReturned
+ #define SPOOL_FILE_PERSISTENT    0x00000001
+ #define SPOOL_FILE_TEMPORARY     0x00000002
+ 
+-HANDLE
++_Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ WINAPI
+ GetSpoolFileHandle(
+ _In_    HANDLE  hPrinter
+ );
+ 
+-HANDLE
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ WINAPI
+ CommitSpoolData(
+ _In_    HANDLE  hPrinter,
+@@ -1334,18 +1335,18 @@ _In_    HANDLE  hPrinter,
+ _In_    HANDLE  hSpoolFile
+ );
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ OpenPrinterA(
+ _In_opt_    LPSTR             pPrinterName,
+-_Out_       LPHANDLE            phPrinter,
++_Win32_RAIIFree_(ClosePrinter, -1, 0) _Out_       LPHANDLE            phPrinter,
+ _In_opt_    LPPRINTER_DEFAULTSA pDefault
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ OpenPrinterW(
+ _In_opt_    LPWSTR             pPrinterName,
+-_Out_       LPHANDLE            phPrinter,
++_Win32_RAIIFree_(ClosePrinter, -1, 0) _Out_       LPHANDLE            phPrinter,
+ _In_opt_    LPPRINTER_DEFAULTSW pDefault
+ );
+ #ifdef UNICODE
+@@ -1360,7 +1361,7 @@ ResetPrinterA(
+ _In_        HANDLE                hPrinter,
+ _In_opt_    LPPRINTER_DEFAULTSA   pDefault
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ ResetPrinterW(
+ _In_        HANDLE                hPrinter,
+@@ -1386,7 +1387,7 @@ _When_(Level == 3, _In_reads_bytes_opt_(sizeof(JOB_INFO_3)))
+                  LPBYTE pJob,
+                  DWORD  Command
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ SetJobW(
+ _In_             HANDLE hPrinter,
+@@ -1417,7 +1418,7 @@ _Out_writes_bytes_opt_(cbBuf)
+       DWORD    cbBuf,
+ _Out_ LPDWORD  pcbNeeded
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ GetJobW(
+ _In_  HANDLE   hPrinter,
+@@ -1434,7 +1435,7 @@ _Out_ LPDWORD  pcbNeeded
+ #define GetJob  GetJobA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ EnumJobsA(
+ _In_  HANDLE  hPrinter,
+@@ -1447,7 +1448,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_ LPDWORD pcbNeeded,
+ _Out_ LPDWORD pcReturned
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EnumJobsW(
+ _In_  HANDLE  hPrinter,
+@@ -1466,7 +1467,7 @@ _Out_ LPDWORD pcReturned
+ #define EnumJobs  EnumJobsA
+ #endif // !UNICODE
+ 
+-HANDLE
++_Win32_SetLastError_ _Win32_RAIIFree_(ClosePrinter, -1, 0) HANDLE
+ WINAPI
+ AddPrinterA(
+ _In_opt_    LPSTR    pName,
+@@ -1476,7 +1477,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(PRINTER_INFO_1)))
+ _When_(Level == 2, _In_reads_bytes_(sizeof(PRINTER_INFO_2)))
+             LPBYTE     pPrinter
+ );
+-HANDLE
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") _Win32_RAIIFree_(ClosePrinter, -1, 0) HANDLE
+ WINAPI
+ AddPrinterW(
+ _In_opt_    LPWSTR    pName,
+@@ -1492,13 +1493,13 @@ _When_(Level == 2, _In_reads_bytes_(sizeof(PRINTER_INFO_2)))
+ #define AddPrinter  AddPrinterA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePrinter(
+ _Inout_ HANDLE   hPrinter
+ );
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ SetPrinterA(
+     _In_             HANDLE  hPrinter,
+@@ -1517,7 +1518,7 @@ SetPrinterA(
+                      LPBYTE  pPrinter,
+     _In_             DWORD   Command
+     );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ SetPrinterW(
+     _In_             HANDLE  hPrinter,
+@@ -1542,7 +1543,7 @@ SetPrinterW(
+ #define SetPrinter  SetPrinterA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ GetPrinterA(
+ _In_  HANDLE  hPrinter,
+@@ -1552,7 +1553,7 @@ _Out_writes_bytes_opt_(cbBuf)
+       DWORD   cbBuf,
+ _Out_ LPDWORD pcbNeeded
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ GetPrinterW(
+ _In_  HANDLE  hPrinter,
+@@ -1568,14 +1569,14 @@ _Out_ LPDWORD pcbNeeded
+ #define GetPrinter  GetPrinterA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ AddPrinterDriverA(
+ _In_opt_    LPSTR   pName,
+             DWORD     Level,
+ _In_        LPBYTE    pDriverInfo
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddPrinterDriverW(
+ _In_opt_    LPWSTR   pName,
+@@ -1601,7 +1602,7 @@ _When_(Level == 8, _In_reads_bytes_(sizeof(DRIVER_INFO_8)))
+                  PBYTE    lpbDriverInfo,
+ _In_             DWORD    dwFileCopyFlags
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddPrinterDriverExW(
+ _In_opt_         LPWSTR  pName,
+@@ -1620,7 +1621,7 @@ _In_             DWORD    dwFileCopyFlags
+ #define AddPrinterDriverEx  AddPrinterDriverExA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ EnumPrinterDriversA(
+ _In_opt_    LPSTR        pName,
+@@ -1632,7 +1633,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_       LPDWORD        pcbNeeded,
+ _Out_       LPDWORD        pcReturned
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EnumPrinterDriversW(
+ _In_opt_    LPWSTR        pName,
+@@ -1661,7 +1662,7 @@ _Out_writes_bytes_opt_(cbBuf)
+             DWORD   cbBuf,
+ _Out_       LPDWORD pcbNeeded
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ GetPrinterDriverW(
+ _In_        HANDLE  hPrinter,
+@@ -1689,7 +1690,7 @@ _Out_writes_bytes_opt_(cbBuf)
+             DWORD     cbBuf,
+ _Out_       LPDWORD   pcbNeeded
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ GetPrinterDriverDirectoryW(
+ _In_opt_    LPWSTR   pName,
+@@ -1713,7 +1714,7 @@ _In_opt_    LPSTR    pName,
+ _In_opt_    LPSTR    pEnvironment,
+ _In_        LPSTR    pDriverName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePrinterDriverW(
+ _In_opt_    LPWSTR    pName,
+@@ -1735,7 +1736,7 @@ _In_        LPSTR    pDriverName,
+             DWORD      dwDeleteFlag,
+             DWORD      dwVersionFlag
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePrinterDriverExW(
+ _In_opt_    LPWSTR    pName,
+@@ -1760,7 +1761,7 @@ _In_opt_   LPSTR   pEnvironment,
+ _In_       LPSTR   pPathName,
+ _In_       LPSTR   pPrintProcessorName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddPrintProcessorW(
+ _In_opt_   LPWSTR   pName,
+@@ -1786,7 +1787,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_      LPDWORD   pcbNeeded,
+ _Out_      LPDWORD   pcReturned
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EnumPrintProcessorsW(
+ _In_opt_   LPWSTR   pName,
+@@ -1817,7 +1818,7 @@ _Out_writes_bytes_opt_(cbBuf)
+            DWORD      cbBuf,
+ _Out_      LPDWORD    pcbNeeded
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ GetPrintProcessorDirectoryW(
+ _In_opt_   LPWSTR    pName,
+@@ -1847,7 +1848,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_       LPDWORD   pcbNeeded,
+ _Out_       LPDWORD   pcReturned
+ );
+-_Success_(return != FALSE)
++_Win32_ImportLibrary_("winspool.drv") _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ EnumPrintProcessorDatatypesW(
+@@ -1873,7 +1874,7 @@ _In_opt_    LPSTR   pName,
+ _In_opt_    LPSTR   pEnvironment,
+ _In_        LPSTR   pPrintProcessorName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePrintProcessorW(
+ _In_opt_    LPWSTR   pName,
+@@ -1895,7 +1896,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(DOC_INFO_1)))
+ _When_(Level == 3, _In_reads_bytes_(sizeof(DOC_INFO_3)))
+                  LPBYTE  pDocInfo
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ StartDocPrinterW(
+ _In_             HANDLE  hPrinter,
+@@ -1910,13 +1911,13 @@ _When_(Level == 3, _In_reads_bytes_(sizeof(DOC_INFO_3)))
+ #define StartDocPrinter  StartDocPrinterA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ StartPagePrinter(
+ _In_    HANDLE  hPrinter
+ );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ WritePrinter(
+ _In_    HANDLE  hPrinter,
+@@ -1927,7 +1928,7 @@ _Out_   LPDWORD pcWritten
+ );
+ 
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ FlushPrinter(
+ _In_    HANDLE  hPrinter,
+@@ -1938,19 +1939,19 @@ _Out_   LPDWORD pcWritten,
+         DWORD   cSleep
+ );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EndPagePrinter(
+ _In_    HANDLE   hPrinter
+ );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AbortPrinter(
+ _In_    HANDLE   hPrinter
+ );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ ReadPrinter(
+ _In_    HANDLE  hPrinter,
+@@ -1960,7 +1961,7 @@ _Out_writes_bytes_(cbBuf)
+ _Out_   LPDWORD pNoBytesRead
+ );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EndDocPrinter(
+     _In_  HANDLE   hPrinter
+@@ -1976,7 +1977,7 @@ _Out_writes_bytes_opt_(cbBuf)
+         DWORD   cbBuf,
+ _Out_   LPDWORD pcbNeeded
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddJobW(
+ _In_    HANDLE  hPrinter,
+@@ -1992,7 +1993,7 @@ _Out_   LPDWORD pcbNeeded
+ #define AddJob  AddJobA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ ScheduleJob(
+ _In_    HANDLE  hPrinter,
+@@ -2084,7 +2085,7 @@ _Out_writes_bytes_opt_(nSize)
+              DWORD    nSize,
+ _Out_        LPDWORD  pcbNeeded
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ GetPrinterDataW(
+ _In_         HANDLE   hPrinter,
+@@ -2113,7 +2114,7 @@ _Out_writes_bytes_opt_(nSize)
+              DWORD    nSize,
+ _Out_        LPDWORD  pcbNeeded
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ GetPrinterDataExW(
+ _In_         HANDLE   hPrinter,
+@@ -2147,7 +2148,7 @@ _Out_writes_to_opt_(cbData, *pcbData)
+ _When_(pData != NULL, _Pre_notnull_)
+ _Out_opt_   LPDWORD  pcbData
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ EnumPrinterDataW(
+ _In_        HANDLE   hPrinter,
+@@ -2180,7 +2181,7 @@ _Out_writes_bytes_opt_(cbEnumValues)
+ _Out_   LPDWORD   pcbEnumValues,
+ _Out_   LPDWORD   pnEnumValues
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ EnumPrinterDataExW(
+ _In_    HANDLE    hPrinter,
+@@ -2207,7 +2208,7 @@ _Out_writes_bytes_opt_(cbSubkey)
+         DWORD    cbSubkey,
+ _Out_   LPDWORD  pcbSubkey
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ EnumPrinterKeyW(
+ _In_    HANDLE   hPrinter,
+@@ -2234,7 +2235,7 @@ _In_reads_bytes_(cbData)
+         LPBYTE  pData,
+         DWORD   cbData
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ SetPrinterDataW(
+ _In_    HANDLE  hPrinter,
+@@ -2262,7 +2263,7 @@ _In_reads_bytes_(cbData)
+         LPBYTE   pData,
+         DWORD    cbData
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ SetPrinterDataExW(
+ _In_    HANDLE   hPrinter,
+@@ -2287,7 +2288,7 @@ DeletePrinterDataA(
+ _In_    HANDLE  hPrinter,
+ _In_    LPSTR pValueName
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ DeletePrinterDataW(
+ _In_    HANDLE  hPrinter,
+@@ -2307,7 +2308,7 @@ _In_    HANDLE   hPrinter,
+ _In_    LPCSTR pKeyName,
+ _In_    LPCSTR pValueName
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ DeletePrinterDataExW(
+ _In_    HANDLE   hPrinter,
+@@ -2327,7 +2328,7 @@ DeletePrinterKeyA(
+ _In_    HANDLE   hPrinter,
+ _In_    LPCSTR pKeyName
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ DeletePrinterKeyW(
+ _In_    HANDLE   hPrinter,
+@@ -2555,14 +2556,14 @@ typedef struct _PRINTER_NOTIFY_INFO {
+     #define ERROR_BIDI_UNSUPPORTED_RESOURCE_FORMAT  (ERROR_BIDI_ERROR_BASE + 18)
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ WaitForPrinterChange(
+ _In_ HANDLE  hPrinter,
+      DWORD   Flags
+ );
+ 
+-HANDLE
++_Win32_RAIIFree_(FindClosePrinterChangeNotification, -1, 0) HANDLE
+ WINAPI
+ FindFirstPrinterChangeNotification(
+ _In_     HANDLE hPrinter,
+@@ -2587,7 +2588,7 @@ FreePrinterNotifyInfo(
+ _In_   PPRINTER_NOTIFY_INFO pPrinterNotifyInfo
+     );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ FindClosePrinterChangeNotification(
+ _In_   HANDLE hChange
+@@ -2639,7 +2640,7 @@ _In_   LPSTR   pText,
+ _In_   LPSTR   pCaption,
+        DWORD     dwType
+ );
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ PrinterMessageBoxW(
+ _In_   HANDLE    hPrinter,
+@@ -2665,7 +2666,7 @@ _In_   LPWSTR   pCaption,
+ #define PRINTER_ERROR_JAM           0x00000002
+ #define PRINTER_ERROR_OUTOFTONER    0x00000004
+ 
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ ClosePrinter(
+ _In_ HANDLE hPrinter
+@@ -2680,7 +2681,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(FORM_INFO_1A)))
+ _When_(Level == 2, _In_reads_bytes_(sizeof(FORM_INFO_2A)))
+                  LPBYTE pForm
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddFormW(
+ _In_             HANDLE hPrinter,
+@@ -2701,7 +2702,7 @@ DeleteFormA(
+ _In_    HANDLE    hPrinter,
+ _In_    LPSTR   pFormName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeleteFormW(
+ _In_    HANDLE    hPrinter,
+@@ -2726,7 +2727,7 @@ _Out_writes_bytes_opt_(cbBuf)
+         DWORD         cbBuf,
+ _Out_   LPDWORD       pcbNeeded
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ GetFormW(
+ _In_    HANDLE        hPrinter,
+@@ -2755,7 +2756,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(FORM_INFO_1A)))
+ _When_(Level == 2, _In_reads_bytes_(sizeof(FORM_INFO_2A)))
+                  LPBYTE  pForm
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ SetFormW(
+ _In_             HANDLE  hPrinter,
+@@ -2782,7 +2783,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_   LPDWORD pcbNeeded,
+ _Out_   LPDWORD pcReturned
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EnumFormsW(
+ _In_    HANDLE  hPrinter,
+@@ -2811,7 +2812,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_       LPDWORD    pcbNeeded,
+ _Out_       LPDWORD    pcReturned
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EnumMonitorsW(
+ _In_opt_    LPWSTR   pName,
+@@ -2830,7 +2831,7 @@ _Out_       LPDWORD    pcReturned
+ 
+ 
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ AddMonitorA(
+ _In_opt_    LPSTR pName,
+@@ -2838,7 +2839,7 @@ _In_opt_    LPSTR pName,
+ _In_reads_bytes_opt_(sizeof(MONITOR_INFO_2))
+             LPBYTE  pMonitors
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddMonitorW(
+ _In_opt_    LPWSTR pName,
+@@ -2854,14 +2855,14 @@ _In_reads_bytes_opt_(sizeof(MONITOR_INFO_2))
+ 
+ 
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ DeleteMonitorA(
+ _In_opt_    LPSTR     pName,
+ _In_opt_    LPSTR     pEnvironment,
+ _In_        LPSTR     pMonitorName
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeleteMonitorW(
+ _In_opt_    LPWSTR     pName,
+@@ -2887,7 +2888,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _Out_       LPDWORD pcbNeeded,
+ _Out_       LPDWORD pcReturned
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ EnumPortsW(
+ _In_opt_    LPWSTR pName,
+@@ -2905,14 +2906,14 @@ _Out_       LPDWORD pcReturned
+ #endif // !UNICODE
+ 
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ AddPortA(
+ _In_opt_    LPSTR   pName,
+ _In_        HWND      hWnd,
+ _In_        LPSTR   pMonitorName
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddPortW(
+ _In_opt_    LPWSTR   pName,
+@@ -2934,7 +2935,7 @@ _In_opt_    LPSTR   pName,
+ _In_        HWND      hWnd,
+ _In_        LPSTR   pPortName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ ConfigurePortW(
+ _In_opt_    LPWSTR   pName,
+@@ -2947,14 +2948,14 @@ _In_        LPWSTR   pPortName
+ #define ConfigurePort  ConfigurePortA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ DeletePortA(
+ _In_opt_    LPSTR pName,
+ _In_        HWND    hWnd,
+ _In_        LPSTR pPortName
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePortW(
+ _In_opt_    LPWSTR pName,
+@@ -2967,7 +2968,7 @@ _In_        LPWSTR pPortName
+ #define DeletePort  DeletePortA
+ #endif // !UNICODE
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ XcvDataW(
+ _In_        HANDLE  hXcv,
+@@ -3018,7 +3019,7 @@ _In_opt_    LPCWSTR pszPrinter
+ #endif // !UNICODE
+ 
+ 
+-BOOL
++_Win32_SetLastError_ BOOL
+ WINAPI
+ SetPortA(
+ _In_opt_    LPSTR     pName,
+@@ -3027,7 +3028,7 @@ _In_        LPSTR     pPortName,
+ _In_reads_bytes_(sizeof(PORT_INFO_3))
+             LPBYTE      pPortInfo
+ );
+-BOOL
++_Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ SetPortW(
+ _In_opt_    LPWSTR     pName,
+@@ -3049,7 +3050,7 @@ WINAPI
+ AddPrinterConnectionA(
+ _In_ LPSTR   pName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddPrinterConnectionW(
+ _In_ LPWSTR   pName
+@@ -3067,7 +3068,7 @@ WINAPI
+ DeletePrinterConnectionA(
+ _In_ LPSTR   pName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePrinterConnectionW(
+ _In_ LPWSTR   pName
+@@ -3080,7 +3081,7 @@ _In_ LPWSTR   pName
+ 
+ 
+ 
+-HANDLE
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ WINAPI
+ ConnectToPrinterDlg(
+ _In_    HWND    hwnd,
+@@ -3132,7 +3133,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(PROVIDOR_INFO_1)))
+ _When_(Level == 2, _In_reads_bytes_(sizeof(PROVIDOR_INFO_2)))
+ _In_             LPBYTE   pProvidorInfo
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ AddPrintProvidorW(
+ _In_opt_         LPWSTR  pName,
+@@ -3154,7 +3155,7 @@ _In_opt_    LPSTR   pName,
+ _In_opt_    LPSTR   pEnvironment,
+ _In_        LPSTR   pPrintProvidorName
+ );
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ WINAPI
+ DeletePrintProvidorW(
+ _In_opt_    LPWSTR   pName,
+@@ -3424,12 +3425,12 @@ _In_        LPWSTR   pPrintProvidorName
+     typedef struct _PRINTER_OPTIONSA
+     {
+         UINT            cbSize;
+-        DWORD           dwFlags;
++        _Win32_AssociatedEnum_(PRINTER_OPTION_FLAGS) DWORD           dwFlags;
+     } PRINTER_OPTIONSA, *PPRINTER_OPTIONSA, *LPPRINTER_OPTIONSA;
+     typedef struct _PRINTER_OPTIONSW
+     {
+         UINT            cbSize;
+-        DWORD           dwFlags;
++        _Win32_AssociatedEnum_(PRINTER_OPTION_FLAGS) DWORD           dwFlags;
+     } PRINTER_OPTIONSW, *PPRINTER_OPTIONSW, *LPPRINTER_OPTIONSW;
+ #ifdef UNICODE
+ typedef PRINTER_OPTIONSW PRINTER_OPTIONS;
+@@ -3441,19 +3442,19 @@ typedef PPRINTER_OPTIONSA PPRINTER_OPTIONS;
+ typedef LPPRINTER_OPTIONSA LPPRINTER_OPTIONS;
+ #endif // UNICODE
+ 
+-    BOOL
++    _Win32_SetLastError_ BOOL
+     WINAPI
+     OpenPrinter2A(
+     _In_opt_      LPCSTR                pPrinterName,
+-    _Out_         LPHANDLE                phPrinter,
++    _Win32_RAIIFree_(ClosePrinter, -1, 0) _Out_         LPHANDLE                phPrinter,
+     _In_opt_      PPRINTER_DEFAULTSA      pDefault,
+     _In_opt_      PPRINTER_OPTIONSA       pOptions
+     );
+-    BOOL
++    _Win32_SetLastError_ _Win32_ImportLibrary_("winspool.drv") BOOL
+     WINAPI
+     OpenPrinter2W(
+     _In_opt_      LPCWSTR                pPrinterName,
+-    _Out_         LPHANDLE                phPrinter,
++    _Win32_RAIIFree_(ClosePrinter, -1, 0) _Out_         LPHANDLE                phPrinter,
+     _In_opt_      PPRINTER_DEFAULTSW      pDefault,
+     _In_opt_      PPRINTER_OPTIONSW       pOptions
+     );
+@@ -3760,7 +3761,7 @@ typedef PCORE_PRINTER_DRIVERA PCORE_PRINTER_DRIVER;
+ 
+     }PrintPropertiesCollection;
+ 
+-    HRESULT
++    _Win32_ImportLibrary_("winspool.drv") HRESULT
+     WINAPI
+     ReportJobProcessingProgress(
+     _In_        HANDLE                         printerHandle,
+@@ -3832,7 +3833,7 @@ GetPrintExecutionData(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ GetJobNamedPropertyValue(
+     _In_  HANDLE             hPrinter,
+@@ -3841,7 +3842,7 @@ GetJobNamedPropertyValue(
+     _Out_ PrintPropertyValue *pValue
+     );
+ 
+-void
++_Win32_ImportLibrary_("winspool.drv") void
+ WINAPI
+ FreePrintPropertyValue(
+     _Inout_ PrintPropertyValue *pValue
+@@ -3856,7 +3857,7 @@ FreePrintNamedPropertyArray(
+                                       PrintNamedProperty **ppProperties
+     );
+ 
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ SetJobNamedProperty(
+     _In_  HANDLE                   hPrinter,
+@@ -3864,7 +3865,7 @@ SetJobNamedProperty(
+     _In_  const PrintNamedProperty *pProperty
+     );
+ 
+-DWORD
++_Win32_ImportLibrary_("winspool.drv") DWORD
+ WINAPI
+ DeleteJobNamedProperty(
+     _In_  HANDLE             hPrinter,
+@@ -3887,7 +3888,7 @@ WINAPI
+ GetPrintOutputInfo(
+     _In_        HWND   hWnd,
+     _In_        PCWSTR pszPrinter,
+-    _Outptr_ HANDLE *phFile,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_ HANDLE *phFile,
+     _Outptr_ PWSTR  *ppszOutputFile
+     );
+ 
+@@ -3914,5 +3915,100 @@ GetPrintOutputInfo(
+ #endif
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("PRINTER_ALL_ACCESS")
++#undef PRINTER_ALL_ACCESS
++#pragma push_macro("PRINTER_READ")
++#undef PRINTER_READ
++#pragma push_macro("PRINTER_WRITE")
++#undef PRINTER_WRITE
++#pragma push_macro("PRINTER_EXECUTE")
++#undef PRINTER_EXECUTE
++#pragma push_macro("SERVER_ALL_ACCESS")
++#undef SERVER_ALL_ACCESS
++#pragma push_macro("SERVER_READ")
++#undef SERVER_READ
++#pragma push_macro("SERVER_WRITE")
++#undef SERVER_WRITE
++#pragma push_macro("SERVER_EXECUTE")
++#undef SERVER_EXECUTE
++#pragma push_macro("PRINTER_DELETE")
++#undef PRINTER_DELETE
++#pragma push_macro("PRINTER_READ_CONTROL")
++#undef PRINTER_READ_CONTROL
++#pragma push_macro("PRINTER_WRITE_DAC")
++#undef PRINTER_WRITE_DAC
++#pragma push_macro("PRINTER_WRITE_OWNER")
++#undef PRINTER_WRITE_OWNER
++#pragma push_macro("PRINTER_SYNCHRONIZE")
++#undef PRINTER_SYNCHRONIZE
++#pragma push_macro("PRINTER_STANDARD_RIGHTS_REQUIRED")
++#undef PRINTER_STANDARD_RIGHTS_REQUIRED
++#pragma push_macro("PRINTER_STANDARD_RIGHTS_READ")
++#undef PRINTER_STANDARD_RIGHTS_READ
++#pragma push_macro("PRINTER_STANDARD_RIGHTS_WRITE")
++#undef PRINTER_STANDARD_RIGHTS_WRITE
++#pragma push_macro("PRINTER_STANDARD_RIGHTS_EXECUTE")
++#undef PRINTER_STANDARD_RIGHTS_EXECUTE
++#pragma push_macro("SERVER_ACCESS_ADMINISTER")
++#undef SERVER_ACCESS_ADMINISTER
++#pragma push_macro("SERVER_ACCESS_ENUMERATE")
++#undef SERVER_ACCESS_ENUMERATE
++#pragma push_macro("PRINTER_ACCESS_ADMINISTER")
++#undef PRINTER_ACCESS_ADMINISTER
++#pragma push_macro("PRINTER_ACCESS_USE")
++#undef PRINTER_ACCESS_USE
++#pragma push_macro("PRINTER_ACCESS_MANAGE_LIMITED")
++#undef PRINTER_ACCESS_MANAGE_LIMITED
++enum [[clang::flag_enum]] PRINTER_ACCESS_RIGHTS : unsigned int
++{
++    PRINTER_ALL_ACCESS = 983052U,
++    PRINTER_READ = 131080U,
++    PRINTER_WRITE = 131080U,
++    PRINTER_EXECUTE = 131080U,
++    SERVER_ALL_ACCESS = 983043U,
++    SERVER_READ = 131074U,
++    SERVER_WRITE = 131075U,
++    SERVER_EXECUTE = 131074U,
++    PRINTER_DELETE = 65536U,
++    PRINTER_READ_CONTROL = 131072U,
++    PRINTER_WRITE_DAC = 262144U,
++    PRINTER_WRITE_OWNER = 524288U,
++    PRINTER_SYNCHRONIZE = 1048576U,
++    PRINTER_STANDARD_RIGHTS_REQUIRED = 983040U,
++    PRINTER_STANDARD_RIGHTS_READ = 131072U,
++    PRINTER_STANDARD_RIGHTS_WRITE = 131072U,
++    PRINTER_STANDARD_RIGHTS_EXECUTE = 131072U,
++    SERVER_ACCESS_ADMINISTER = 1U,
++    SERVER_ACCESS_ENUMERATE = 2U,
++    PRINTER_ACCESS_ADMINISTER = 4U,
++    PRINTER_ACCESS_USE = 8U,
++    PRINTER_ACCESS_MANAGE_LIMITED = 64U,
++};
++#pragma pop_macro("PRINTER_ACCESS_MANAGE_LIMITED")
++#pragma pop_macro("PRINTER_ACCESS_USE")
++#pragma pop_macro("PRINTER_ACCESS_ADMINISTER")
++#pragma pop_macro("SERVER_ACCESS_ENUMERATE")
++#pragma pop_macro("SERVER_ACCESS_ADMINISTER")
++#pragma pop_macro("PRINTER_STANDARD_RIGHTS_EXECUTE")
++#pragma pop_macro("PRINTER_STANDARD_RIGHTS_WRITE")
++#pragma pop_macro("PRINTER_STANDARD_RIGHTS_READ")
++#pragma pop_macro("PRINTER_STANDARD_RIGHTS_REQUIRED")
++#pragma pop_macro("PRINTER_SYNCHRONIZE")
++#pragma pop_macro("PRINTER_WRITE_OWNER")
++#pragma pop_macro("PRINTER_WRITE_DAC")
++#pragma pop_macro("PRINTER_READ_CONTROL")
++#pragma pop_macro("PRINTER_DELETE")
++#pragma pop_macro("SERVER_EXECUTE")
++#pragma pop_macro("SERVER_WRITE")
++#pragma pop_macro("SERVER_READ")
++#pragma pop_macro("SERVER_ALL_ACCESS")
++#pragma pop_macro("PRINTER_EXECUTE")
++#pragma pop_macro("PRINTER_WRITE")
++#pragma pop_macro("PRINTER_READ")
++#pragma pop_macro("PRINTER_ALL_ACCESS")
++#endif
++
+ #endif // _WINSPOOL_
+ 

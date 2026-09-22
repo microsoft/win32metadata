@@ -1,0 +1,250 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h
+index e395c5312d..4645399437 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Npapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -43,7 +44,7 @@ extern "C" {
+ //  CONNECTIONS
+ //
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPAddConnection (
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_opt_ LPWSTR         lpPassword,
+@@ -57,13 +58,13 @@ typedef DWORD (APIENTRY *PF_NPAddConnection) (
+     );
+ 
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPAddConnection3 (
+     _In_opt_ HWND           hwndOwner,
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_opt_ LPWSTR         lpPassword,
+     _In_opt_ LPWSTR         lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
+ 
+ typedef DWORD (APIENTRY *PF_NPAddConnection3) (
+@@ -95,7 +96,7 @@ typedef DWORD (APIENTRY *PF_NPAddConnection4) (
+     _In_     DWORD          cbUseOptions
+     );
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPCancelConnection (
+     _In_ LPWSTR  lpName,
+     _In_ BOOL    fForce
+@@ -119,7 +120,7 @@ typedef DWORD (APIENTRY *PF_NPCancelConnection2) (
+     _In_ DWORD   dwFlags
+     );
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ DWORD APIENTRY
+ NPGetConnection (
+     _In_ LPWSTR     lpLocalName,
+     _Out_writes_opt_(*lpnBufferLen) LPWSTR lpRemoteName,
+@@ -136,7 +137,7 @@ typedef DWORD (APIENTRY *PF_NPGetConnection) (
+ #define WNGETCON_CONNECTED      0x00000000
+ #define WNGETCON_DISCONNECTED   0x00000001
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ DWORD APIENTRY
+ NPGetConnection3 (
+     _In_ LPCWSTR    lpLocalName,
+     _In_ DWORD      dwLevel,
+@@ -152,10 +153,10 @@ typedef DWORD (APIENTRY *PF_NPGetConnection3) (
+     );
+ 
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPGetUniversalName (
+     _In_ LPCWSTR    lpLocalPath,
+-    _In_ DWORD      dwInfoLevel,
++    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD      dwInfoLevel,
+     _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
+@@ -167,7 +168,7 @@ typedef DWORD (APIENTRY *PF_NPGetUniversalName) (
+     _Inout_ LPDWORD lpnBufferSize
+     );
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ DWORD APIENTRY
+ NPGetConnectionPerformance (
+     _In_  LPCWSTR                lpRemoteName,
+     _Out_ LPNETCONNECTINFOSTRUCT lpNetConnectInfo
+@@ -179,13 +180,13 @@ typedef DWORD (APIENTRY *PF_NPGetConnectionPerformance) (
+     );
+ 
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ DWORD APIENTRY
+ NPOpenEnum (
+     _In_     DWORD          dwScope,
+     _In_     DWORD          dwType,
+     _In_     DWORD          dwUsage,
+     _In_opt_ LPNETRESOURCEW lpNetResource,
+-    _Out_    LPHANDLE       lphEnum
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_    LPHANDLE       lphEnum
+     );
+ 
+ typedef DWORD (APIENTRY *PF_NPOpenEnum) (
+@@ -193,10 +194,10 @@ typedef DWORD (APIENTRY *PF_NPOpenEnum) (
+     _In_     DWORD          dwType,
+     _In_     DWORD          dwUsage,
+     _In_opt_ LPNETRESOURCEW lpNetResource,
+-    _Out_    LPHANDLE       lphEnum
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_    LPHANDLE       lphEnum
+     );
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ DWORD APIENTRY
+ NPEnumResource (
+     _In_    HANDLE  hEnum,
+     _Inout_ LPDWORD lpcCount,
+@@ -211,7 +212,7 @@ typedef DWORD (APIENTRY *PF_NPEnumResource) (
+     _Inout_ LPDWORD lpBufferSize
+     );
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPCloseEnum (
+     _In_ HANDLE   hEnum
+     );
+@@ -284,7 +285,7 @@ typedef DWORD (APIENTRY *PF_NPCloseEnum) (
+ 
+ 
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPGetCaps (
+     _In_ DWORD ndex
+     );
+@@ -297,7 +298,7 @@ typedef DWORD (APIENTRY *PF_NPGetCaps) (
+ //  OTHER
+ //
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPGetUser (
+     _In_    LPWSTR  lpName,
+     _Out_writes_(*lpnBufferLen) LPWSTR lpUserName,
+@@ -381,7 +382,7 @@ typedef DWORD (APIENTRY *PF_NPSearchDialog) (
+ #pragma region Desktop Family or RemoteFS Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_REMOTEFS)
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPGetResourceParent(
+     _In_ LPNETRESOURCEW lpNetResource,
+     _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+@@ -394,7 +395,7 @@ typedef DWORD (APIENTRY *PF_NPGetResourceParent) (
+     _Inout_ LPDWORD lpBufferSize
+     );
+ 
+-DWORD APIENTRY NPGetResourceInformation(
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY NPGetResourceInformation(
+     _In_ LPNETRESOURCEW lpNetResource,
+     _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpBufferSize,
+@@ -408,12 +409,12 @@ typedef DWORD (APIENTRY *PF_NPGetResourceInformation) (
+     _Outptr_ LPWSTR *lplpSystem
+     );
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("davclnt.dll") DWORD APIENTRY
+ NPFormatNetworkName(
+     _In_    LPWSTR   lpRemoteName,
+     _Out_writes_(*lpnLength) LPWSTR lpFormattedName,
+     _Inout_ LPDWORD  lpnLength,
+-    _In_    DWORD    dwFlags,
++    _Win32_AssociatedEnum_(NETWORK_NAME_FORMAT_FLAGS) _In_    DWORD    dwFlags,
+     _In_    DWORD    dwAveCharPerLine
+     );
+ 
+@@ -511,7 +512,7 @@ typedef DWORD (APIENTRY *PF_NPDirectoryNotify) (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-VOID
++_Windows_SupportedOS_WindowsXP_ VOID
+ WNetSetLastErrorA(
+     _In_ DWORD   err,
+     _In_ LPSTR   lpError,
+@@ -615,7 +616,7 @@ typedef struct _NOTIFYINFO {
+ typedef struct _NOTIFYADD {
+     HWND            hwndOwner;
+     NETRESOURCE     NetResource;
+-    DWORD           dwAddFlags;
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) DWORD           dwAddFlags;
+ } NOTIFYADD, *LPNOTIFYADD;
+ 
+ typedef struct _NOTIFYCANCEL {
+@@ -720,4 +721,59 @@ typedef DWORD (APIENTRY *PF_NPFMXGetPermHelp) (
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WNPERM_DLG_PERM")
++#undef WNPERM_DLG_PERM
++#pragma push_macro("WNPERM_DLG_AUDIT")
++#undef WNPERM_DLG_AUDIT
++#pragma push_macro("WNPERM_DLG_OWNER")
++#undef WNPERM_DLG_OWNER
++enum WNPERM_DLG : unsigned int
++{
++    WNPERM_DLG_PERM = 0U,
++    WNPERM_DLG_AUDIT = 1U,
++    WNPERM_DLG_OWNER = 2U,
++};
++#pragma pop_macro("WNPERM_DLG_OWNER")
++#pragma pop_macro("WNPERM_DLG_AUDIT")
++#pragma pop_macro("WNPERM_DLG_PERM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WNPS_FILE")
++#undef WNPS_FILE
++#pragma push_macro("WNPS_DIR")
++#undef WNPS_DIR
++#pragma push_macro("WNPS_MULT")
++#undef WNPS_MULT
++enum NP_PROPERTY_DIALOG_SELECTION : unsigned int
++{
++    WNPS_FILE = 0U,
++    WNPS_DIR = 1U,
++    WNPS_MULT = 2U,
++};
++#pragma pop_macro("WNPS_MULT")
++#pragma pop_macro("WNPS_DIR")
++#pragma pop_macro("WNPS_FILE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WNDN_MKDIR")
++#undef WNDN_MKDIR
++#pragma push_macro("WNDN_RMDIR")
++#undef WNDN_RMDIR
++#pragma push_macro("WNDN_MVDIR")
++#undef WNDN_MVDIR
++enum NPDIRECTORY_NOTIFY_OPERATION : unsigned int
++{
++    WNDN_MKDIR = 1U,
++    WNDN_RMDIR = 2U,
++    WNDN_MVDIR = 3U,
++};
++#pragma pop_macro("WNDN_MVDIR")
++#pragma pop_macro("WNDN_RMDIR")
++#pragma pop_macro("WNDN_MKDIR")
++#endif
++
+ #endif  // _NPAPI_INCLUDED

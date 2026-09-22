@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winenclaveapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/winenclaveapi.h
-index 27c3586661..a0254a4b11 100644
+index 52b9355bf2..b16d0e0624 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winenclaveapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winenclaveapi.h
 @@ -16,6 +16,8 @@ Abstract:
@@ -15,8 +15,8 @@ index 27c3586661..a0254a4b11 100644
  // Attestation APIs.
  //
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
  STDAPI
  EnclaveGetAttestationReport(
      _In_opt_ const UINT8 EnclaveData[ENCLAVE_REPORT_DATA_LENGTH],
@@ -24,8 +24,8 @@ index 27c3586661..a0254a4b11 100644
      _Out_ UINT32 *OutputSize
      );
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
  STDAPI
  EnclaveVerifyAttestationReport(
      _In_ UINT32 EnclaveType,
@@ -33,8 +33,8 @@ index 27c3586661..a0254a4b11 100644
  // Sealing/unsealing APIs.
  //
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
  STDAPI
  EnclaveSealData(
      _In_reads_bytes_(DataToEncryptSize) const VOID *DataToEncrypt,
@@ -42,8 +42,8 @@ index 27c3586661..a0254a4b11 100644
      _Out_ UINT32 *ProtectedBlobSize
      );
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
  STDAPI
  EnclaveUnsealData(
      _In_reads_bytes_(ProtectedBlobSize) const VOID *ProtectedBlob,
@@ -51,8 +51,8 @@ index 27c3586661..a0254a4b11 100644
  // Enclave properties.
  //
  
-+_Windows_SupportedOS_16299_
-+_Windows_SupportedOS_Server2016_
++_Windows_SupportedOS_16299_ 
++
  STDAPI
  EnclaveGetEnclaveInformation(
      _In_ UINT32 InformationSize,

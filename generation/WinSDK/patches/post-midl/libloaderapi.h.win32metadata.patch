@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
+index b40e7819c5..6048c829e2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
 @@ -15,6 +15,7 @@
@@ -23,8 +24,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
      _In_ HMODULE hLibModule
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  _Ret_maybenull_
  HRSRC
@@ -98,7 +99,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  WINBASEAPI
  _When_(lpModuleName == NULL,_Ret_notnull_)
  _When_(lpModuleName != NULL,_Ret_maybenull_)
-@@ -280,6 +300,8 @@ PGET_MODULE_HANDLE_EXW)(
+@@ -264,7 +284,7 @@ BOOL
+ PGET_MODULE_HANDLE_EXA)(
+     _In_        DWORD        dwFlags,
+     _In_opt_    LPCSTR     lpModuleName,
+-    _Outptr_ HMODULE*    phModule
++    _Win32_RAIIFree_(FreeLibrary, 0) _Outptr_ HMODULE*    phModule
+     );
+ typedef
+ BOOL
+@@ -272,7 +292,7 @@ BOOL
+ PGET_MODULE_HANDLE_EXW)(
+     _In_        DWORD        dwFlags,
+     _In_opt_    LPCWSTR     lpModuleName,
+-    _Outptr_ HMODULE*    phModule
++    _Win32_RAIIFree_(FreeLibrary, 0) _Outptr_ HMODULE*    phModule
+     );
+ #ifdef UNICODE
+ #define PGET_MODULE_HANDLE_EX  PGET_MODULE_HANDLE_EXW
+@@ -280,22 +300,27 @@ PGET_MODULE_HANDLE_EXW)(
  #define PGET_MODULE_HANDLE_EX  PGET_MODULE_HANDLE_EXA
  #endif // !UNICODE
  
@@ -107,8 +126,11 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -289,6 +311,9 @@ GetModuleHandleExA(
-     _Out_ HMODULE* phModule
+ GetModuleHandleExA(
+     _In_ DWORD dwFlags,
+     _In_opt_ LPCSTR lpModuleName,
+-    _Out_ HMODULE* phModule
++    _Win32_RAIIFree_(FreeLibrary, 0) _Out_ HMODULE* phModule
      );
  
 +_Windows_SupportedOS_WindowsXP_
@@ -117,6 +139,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
+ GetModuleHandleExW(
+     _In_ DWORD dwFlags,
+     _In_opt_ LPCWSTR lpModuleName,
+-    _Out_ HMODULE* phModule
++    _Win32_RAIIFree_(FreeLibrary, 0) _Out_ HMODULE* phModule
+     );
+ 
+ #ifdef UNICODE
 @@ -306,6 +331,9 @@ GetModuleHandleExW(
  
  #endif
@@ -131,9 +161,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  
  typedef const REDIRECTION_DESCRIPTOR *PCREDIRECTION_DESCRIPTOR;
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(FreeLibrary)
++
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
@@ -145,9 +175,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
 +    _In_ _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) DWORD dwFlags
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(FreeLibrary)
++
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
@@ -283,7 +313,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  
 +_Windows_SupportedOS_Windows8_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(RemoveDllDirectory)
++
  WINBASEAPI
  DLL_DIRECTORY_COOKIE
  WINAPI
@@ -369,8 +399,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  _Ret_maybenull_
  HRSRC
@@ -378,9 +408,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  #define FindResource  FindResourceW
  #endif
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(FreeLibrary)
++
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
@@ -388,9 +418,9 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
      _In_ LPCSTR lpLibFileName
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_RAIIFree_(FreeLibrary, 0) _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(FreeLibrary)
++
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
@@ -398,8 +428,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  BOOL
  WINAPI
@@ -407,7 +437,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generati
      _In_ LONG_PTR lParam
      );
  
-+_Win32_SetLastError_
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_
  WINBASEAPI
  BOOL
  WINAPI

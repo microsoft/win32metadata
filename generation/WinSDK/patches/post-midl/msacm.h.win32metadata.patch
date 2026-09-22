@@ -1,0 +1,376 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
+index 2f68eb6c5c..5bfcefe0b8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //==========================================================================;
+ //
+ //  msacm.h
+@@ -210,7 +211,7 @@ typedef UINT                MMRESULT;
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-DWORD ACMAPI acmGetVersion
++_Windows_SupportedOS_Windows2000_ DWORD ACMAPI acmGetVersion
+ (
+     void
+ );
+@@ -223,7 +224,7 @@ DWORD ACMAPI acmGetVersion
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmMetrics
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmMetrics
+ (
+     HACMOBJ                 hao,
+     UINT                    uMetric,
+@@ -272,7 +273,7 @@ typedef BOOL (CALLBACK *ACMDRIVERENUMCB)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmDriverEnum
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverEnum
+ (
+     ACMDRIVERENUMCB         fnCallback,
+     DWORD_PTR               dwInstance,
+@@ -289,7 +290,7 @@ MMRESULT ACMAPI acmDriverEnum
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmDriverID
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverID
+ (
+     HACMOBJ                 hao,
+     LPHACMDRIVERID          phadid,
+@@ -305,7 +306,7 @@ MMRESULT ACMAPI acmDriverID
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmDriverAddA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddA
+ (
+     LPHACMDRIVERID          phadid,
+     HINSTANCE               hinstModule,
+@@ -314,7 +315,7 @@ MMRESULT ACMAPI acmDriverAddA
+     DWORD                   fdwAdd
+ );
+ 
+-MMRESULT ACMAPI acmDriverAddW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddW
+ (
+     LPHACMDRIVERID          phadid,
+     HINSTANCE               hinstModule,
+@@ -360,7 +361,7 @@ typedef ACMDRIVERPROC FAR *LPACMDRIVERPROC;
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmDriverRemove
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverRemove
+ (
+     HACMDRIVERID            hadid,
+     DWORD                   fdwRemove
+@@ -374,7 +375,7 @@ MMRESULT ACMAPI acmDriverRemove
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmDriverOpen
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverOpen
+ (
+     LPHACMDRIVER            phad, 
+     HACMDRIVERID            hadid,
+@@ -389,7 +390,7 @@ MMRESULT ACMAPI acmDriverOpen
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmDriverClose
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverClose
+ (
+     HACMDRIVER              had,
+     DWORD                   fdwClose
+@@ -403,7 +404,7 @@ MMRESULT ACMAPI acmDriverClose
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-LRESULT ACMAPI acmDriverMessage
++_Windows_SupportedOS_Windows2000_ LRESULT ACMAPI acmDriverMessage
+ (
+     HACMDRIVER              had,
+     UINT                    uMsg, 
+@@ -432,7 +433,7 @@ LRESULT ACMAPI acmDriverMessage
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmDriverPriority
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverPriority
+ (
+     HACMDRIVERID            hadid,
+     DWORD                   dwPriority,
+@@ -625,14 +626,14 @@ typedef struct tACMDRIVERDETAILS
+ 
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmDriverDetailsA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsA
+ (
+     HACMDRIVERID            hadid,
+     LPACMDRIVERDETAILSA     padd,
+     DWORD                   fdwDetails
+ );
+ 
+-MMRESULT ACMAPI acmDriverDetailsW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsW
+ (
+     HACMDRIVERID            hadid,
+     LPACMDRIVERDETAILSW     padd,
+@@ -722,14 +723,14 @@ typedef struct tACMFORMATTAGDETAILS
+ #endif
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmFormatTagDetailsA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsA
+ (
+     HACMDRIVER              had,
+     LPACMFORMATTAGDETAILSA  paftd,
+     DWORD                   fdwDetails
+ );
+ 
+-MMRESULT ACMAPI acmFormatTagDetailsW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsW
+ (
+     HACMDRIVER              had,
+     LPACMFORMATTAGDETAILSW  paftd,
+@@ -773,7 +774,7 @@ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBA)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFormatTagEnumA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumA
+ (
+     HACMDRIVER              had,
+     LPACMFORMATTAGDETAILSA  paftd,
+@@ -789,7 +790,7 @@ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBW)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFormatTagEnumW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumW
+ (
+     HACMDRIVER              had,
+     LPACMFORMATTAGDETAILSW  paftd,
+@@ -893,14 +894,14 @@ typedef struct tACMFORMATDETAILS
+ 
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmFormatDetailsA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsA
+ (
+     HACMDRIVER              had,
+     LPACMFORMATDETAILSA     pafd,
+     DWORD                   fdwDetails
+ );
+ 
+-MMRESULT ACMAPI acmFormatDetailsW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsW
+ (
+     HACMDRIVER              had,
+     LPACMFORMATDETAILSW     pafd,
+@@ -942,7 +943,7 @@ typedef BOOL (CALLBACK *ACMFORMATENUMCBA)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFormatEnumA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumA
+ (
+     HACMDRIVER              had,
+     LPACMFORMATDETAILSA     pafd,
+@@ -959,7 +960,7 @@ typedef BOOL (CALLBACK *ACMFORMATENUMCBW)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFormatEnumW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumW
+ (
+     HACMDRIVER              had,
+     LPACMFORMATDETAILSW     pafd,
+@@ -1013,7 +1014,7 @@ MMRESULT ACMAPI acmFormatEnum
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmFormatSuggest
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatSuggest
+ (
+     HACMDRIVER          had,
+     LPWAVEFORMATEX      pwfxSrc,
+@@ -1212,12 +1213,12 @@ typedef struct tACMFORMATCHOOSE
+ #define ACMFORMATCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmFormatChooseA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseA
+ (
+     LPACMFORMATCHOOSEA      pafmtc
+ );
+ 
+-MMRESULT ACMAPI acmFormatChooseW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseW
+ (
+     LPACMFORMATCHOOSEW      pafmtc
+ );
+@@ -1302,14 +1303,14 @@ typedef struct tACMFILTERTAGDETAILS
+ #endif
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmFilterTagDetailsA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsA
+ (
+     HACMDRIVER              had,
+     LPACMFILTERTAGDETAILSA  paftd,
+     DWORD                   fdwDetails
+ );
+ 
+-MMRESULT ACMAPI acmFilterTagDetailsW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsW
+ (
+     HACMDRIVER              had,
+     LPACMFILTERTAGDETAILSW  paftd,
+@@ -1353,7 +1354,7 @@ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBA)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFilterTagEnumA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumA
+ (
+     HACMDRIVER              had,
+     LPACMFILTERTAGDETAILSA  paftd,
+@@ -1370,7 +1371,7 @@ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBW)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFilterTagEnumW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumW
+ (
+     HACMDRIVER              had,
+     LPACMFILTERTAGDETAILSW  paftd,
+@@ -1473,14 +1474,14 @@ typedef struct tACMFILTERDETAILS
+ #endif
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmFilterDetailsA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsA
+ (
+     HACMDRIVER              had,
+     LPACMFILTERDETAILSA     pafd,
+     DWORD                   fdwDetails
+ );
+ 
+-MMRESULT ACMAPI acmFilterDetailsW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsW
+ (
+     HACMDRIVER              had,
+     LPACMFILTERDETAILSW     pafd,
+@@ -1521,7 +1522,7 @@ typedef BOOL (CALLBACK *ACMFILTERENUMCBA)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFilterEnumA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumA
+ (
+     HACMDRIVER              had,
+     LPACMFILTERDETAILSA     pafd,
+@@ -1538,7 +1539,7 @@ typedef BOOL (CALLBACK *ACMFILTERENUMCBW)
+     DWORD                   fdwSupport
+ );
+ 
+-MMRESULT ACMAPI acmFilterEnumW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumW
+ (
+     HACMDRIVER              had,
+     LPACMFILTERDETAILSW     pafd,
+@@ -1736,12 +1737,12 @@ typedef struct tACMFILTERCHOOSE
+ #define ACMFILTERCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
+ 
+ #ifdef _WIN32
+-MMRESULT ACMAPI acmFilterChooseA
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseA
+ (
+     LPACMFILTERCHOOSEA      pafltrc
+ );
+ 
+-MMRESULT ACMAPI acmFilterChooseW
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseW
+ (
+     LPACMFILTERCHOOSEW      pafltrc
+ );
+@@ -1806,7 +1807,7 @@ typedef struct tACMSTREAMHEADER
+ #define ACMSTREAMHEADER_STATUSF_INQUEUE     0x00100000L
+ 
+ 
+-MMRESULT ACMAPI acmStreamOpen
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamOpen
+ (
+     LPHACMSTREAM            phas,       // pointer to stream handle
+     HACMDRIVER              had,        // optional driver handle
+@@ -1829,7 +1830,7 @@ MMRESULT ACMAPI acmStreamOpen
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamClose
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamClose
+ (
+     HACMSTREAM              has,
+     DWORD                   fdwClose
+@@ -1843,7 +1844,7 @@ MMRESULT ACMAPI acmStreamClose
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamSize
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamSize
+ (
+     HACMSTREAM              has,
+     DWORD                   cbInput,
+@@ -1863,7 +1864,7 @@ MMRESULT ACMAPI acmStreamSize
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamReset
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamReset
+ (
+     HACMSTREAM              has,
+     DWORD                   fdwReset
+@@ -1877,7 +1878,7 @@ MMRESULT ACMAPI acmStreamReset
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamMessage
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamMessage
+ (
+     HACMSTREAM              has,
+     UINT                    uMsg, 
+@@ -1894,7 +1895,7 @@ MMRESULT ACMAPI acmStreamMessage
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamConvert
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamConvert
+ (
+     HACMSTREAM              has, 
+     LPACMSTREAMHEADER       pash,
+@@ -1912,7 +1913,7 @@ MMRESULT ACMAPI acmStreamConvert
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamPrepareHeader
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamPrepareHeader
+ (
+     HACMSTREAM          has,
+     LPACMSTREAMHEADER   pash,
+@@ -1927,7 +1928,7 @@ MMRESULT ACMAPI acmStreamPrepareHeader
+ //
+ //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
+ 
+-MMRESULT ACMAPI acmStreamUnprepareHeader
++_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamUnprepareHeader
+ (
+     HACMSTREAM          has,
+     LPACMSTREAMHEADER   pash,

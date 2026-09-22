@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h b/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h
-index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1ddc80dc40 100644
+index 1d59ed67b5..96274c4fda 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -15,7 +15,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  //      the QOSSetFlow API again with the operation value QOSSetTrafficType.
  //
 -typedef enum _QOS_SET_FLOW
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_SET_FLOW
++typedef enum   _QOS_SET_FLOW
  {
      QOSSetTrafficType           = 0,
      QOSSetOutgoingRate          = 1,
@@ -24,7 +24,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  // values may change as the flow changes or policies get updated.
  //
 -typedef struct _QOS_PACKET_PRIORITY
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_PACKET_PRIORITY
++typedef struct   _QOS_PACKET_PRIORITY
  {
      ULONG   ConformantDSCPValue;    // the DSCP marking used for the flow's 
                                      // traffic that respects the flow rate 
@@ -33,7 +33,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  } QOS_PACKET_PRIORITY, *PQOS_PACKET_PRIORITY;
  
 -typedef struct _QOS_FLOW_FUNDAMENTALS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_FLOW_FUNDAMENTALS
++typedef struct   _QOS_FLOW_FUNDAMENTALS
  {
      BOOL    BottleneckBandwidthSet; // TRUE if the BottleneckBandwidth field
                                      // contains a value.
@@ -42,7 +42,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  } QOS_FLOW_FUNDAMENTALS, *PQOS_FLOW_FUNDAMENTALS;
  
 -typedef enum _QOS_FLOWRATE_REASON
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_FLOWRATE_REASON
++typedef enum   _QOS_FLOWRATE_REASON
  {
      QOSFlowRateNotApplicable            = 0,
      QOSFlowRateContentChange            = 1,
@@ -51,7 +51,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  // and/or re-ordered packets.
  //
 -typedef enum _QOS_SHAPING{
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_SHAPING{
++typedef enum   _QOS_SHAPING{
      QOSShapeOnly                        = 0,
      QOSShapeAndMark                     = 1,
      QOSUseNonConformantMarkings         = 2
@@ -60,7 +60,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  //
  // Reason: if a rate change has occured, this reason should indicate why.
 -typedef struct _QOS_FLOWRATE_OUTGOING
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_FLOWRATE_OUTGOING
++typedef struct   _QOS_FLOWRATE_OUTGOING
  {
      UINT64                  Bandwidth;      // In units of bits/s
      QOS_SHAPING             ShapingBehavior;// Shaping behavior
@@ -69,7 +69,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  // your application's characteristics, for the IP header and protocol header
  // overhead, you should review the QOS_SUBTRACT_OVERHEAD inlined function.
 -typedef enum _QOS_QUERY_FLOW
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_QUERY_FLOW
++typedef enum   _QOS_QUERY_FLOW
  {
      QOSQueryFlowFundamentals    = 0,
      QOSQueryPacketPriority      = 1,
@@ -77,7 +77,7 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  } QOS_QUERY_FLOW, *PQOS_QUERY_FLOW;
  
 -typedef enum _QOS_NOTIFY_FLOW
-+typedef enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_NOTIFY_FLOW
++typedef enum   _QOS_NOTIFY_FLOW
  {
      QOSNotifyCongested          = 0,
      QOSNotifyUncongested        = 1,       
@@ -86,95 +86,123 @@ index 1d59ed67b57a2613a197b810fdb128d88bf911db..1b2039b5d9f5cae3f110bfb62257aa1d
  // MinorVersion: 0
  
 -typedef struct _QOS_VERSION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _QOS_VERSION
++typedef struct   _QOS_VERSION
  {
      USHORT MajorVersion;
      USHORT MinorVersion;
-@@ -504,6 +505,7 @@ QOS_SUBTRACT_OVERHEAD(
+@@ -503,12 +504,13 @@ QOS_SUBTRACT_OVERHEAD(
+ //          exception for the qWave service. Please see the developer guidelines 
  //          and MSFT firewall documentation for more details.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSCreateHandle(
-@@ -539,6 +541,7 @@ QOSCreateHandle(
+     _In_    PQOS_VERSION    Version,
+-    _Out_   PHANDLE         QOSHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_   PHANDLE         QOSHandle
+ );
+ 
+ //
+@@ -538,7 +540,8 @@ QOSCreateHandle(
+ //  If the function fails, the return value is zero. To get extended error 
  //  information, call GetLastError.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSCloseHandle(
-@@ -596,6 +599,7 @@ QOSCloseHandle(
+@@ -595,7 +598,8 @@ QOSCloseHandle(
+ //          you've specified. It could be that the other host does does not 
  //          have the required components or that it is not on the same link.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSStartTrackingClient(
-@@ -630,6 +634,7 @@ QOSStartTrackingClient(
+@@ -629,7 +633,8 @@ QOSStartTrackingClient(
+ //  If the function fails, the return value is zero. To get extended error 
  //  information, call GetLastError.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSStopTrackingClient(
-@@ -675,6 +680,7 @@ QOSStopTrackingClient(
+@@ -674,7 +679,8 @@ QOSStopTrackingClient(
+ //          The caller does not have the administrator rights required 
  //          to perform this call.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSEnumerateFlows(
-@@ -818,6 +824,7 @@ QOSEnumerateFlows(
+@@ -817,7 +823,8 @@ QOSEnumerateFlows(
+ //          you've specified. It could be that the other host does does not 
  //          have the required components or that it is not on the same link.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSAddSocketToFlow(
-@@ -881,6 +888,7 @@ QOSAddSocketToFlow(
+@@ -880,7 +887,8 @@ QOSAddSocketToFlow(
+ //      ERROR_NOT_FOUND
  //          Invalid FlowId specified
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSRemoveSocketFromFlow(
-@@ -985,6 +993,7 @@ QOSRemoveSocketFromFlow(
+@@ -984,7 +992,8 @@ QOSRemoveSocketFromFlow(
+ //          The caller does not have the administrator rights required 
  //          to perform this call.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSSetFlow(
-@@ -1107,6 +1116,7 @@ QOSSetFlow(
+@@ -1106,7 +1115,8 @@ QOSSetFlow(
+ //          qWave has erred on the side of caution as it waits for more data
  //          before ascertaining the state of the network.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSQueryFlow(
-@@ -1228,6 +1238,7 @@ QOSQueryFlow(
+@@ -1227,7 +1237,8 @@ QOSQueryFlow(
+ //          network which the qWave subsystem does not have. Obtaining this
  //          information on your network is currently not supported.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSNotifyFlow(
-@@ -1274,6 +1285,7 @@ QOSNotifyFlow(
+@@ -1273,7 +1284,8 @@ QOSNotifyFlow(
+ //  If the function fails, the return value is zero. To get extended error 
  //  information, call GetLastError.
  //
- ExternC
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-ExternC
++_Windows_SupportedOS_WindowsVista_ ExternC
++ 
  BOOL
  WINAPI
  QOSCancel(

@@ -1,0 +1,531 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/InterfaceDescription.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/InterfaceDescription.h
+index bd2561820a..f2c83ef646 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/InterfaceDescription.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/InterfaceDescription.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines types for statically describing a message bus interface
+@@ -127,7 +128,7 @@ typedef const char* (AJ_CALL * alljoyn_interfacedescription_translation_callback
+  *                   annotations count from
+  * @return the number of annotations
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_member_getannotationscount(alljoyn_interfacedescription_member member);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_member_getannotationscount(alljoyn_interfacedescription_member member);
+ 
+ /**
+  * Obtain the name and value for the annotation at the specified index.
+@@ -142,7 +143,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_member_getannotationsc
+  * @param[out] value  the value of the annotation
+  * @param[in,out] value_size the size of the value string if value == NULL this will return the size of the value string plus nul character
+  */
+-extern AJ_API void AJ_CALL alljoyn_interfacedescription_member_getannotationatindex(alljoyn_interfacedescription_member member,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_interfacedescription_member_getannotationatindex(alljoyn_interfacedescription_member member,
+                                                                                     size_t index,
+                                                                                     char* name, size_t* name_size,
+                                                                                     char* value, size_t* value_size);
+@@ -157,7 +158,7 @@ extern AJ_API void AJ_CALL alljoyn_interfacedescription_member_getannotationatin
+  * @param[in,out] value_size size of the value string if value == NULL it will return the size of the value string plus nul character
+  * @return    true if annotations[name] == value
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_getannotation(alljoyn_interfacedescription_member member, const char* name, char* value, size_t* value_size);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_getannotation(alljoyn_interfacedescription_member member, const char* name, char* value, size_t* value_size);
+ 
+ /**
+  * Get the number of annotations that a member argument has.
+@@ -170,7 +171,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_getannotation
+  *
+  * @return the number of annotations.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_member_getargannotationscount(alljoyn_interfacedescription_member member, const char* argName);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_member_getargannotationscount(alljoyn_interfacedescription_member member, const char* argName);
+ 
+ /**
+  * Obtain the name and value for the argument annotation at the specified index.
+@@ -186,7 +187,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_member_getargannotatio
+  * @param[out] value The value of the annotation.
+  * @param[in,out] value_size The size of the value string. If value == NULL, this will return the size of the value string plus nul character.
+  */
+-extern AJ_API void AJ_CALL alljoyn_interfacedescription_member_getargannotationatindex(alljoyn_interfacedescription_member member,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_interfacedescription_member_getargannotationatindex(alljoyn_interfacedescription_member member,
+                                                                                        const char* argName,
+                                                                                        size_t index,
+                                                                                        char* name,
+@@ -205,7 +206,7 @@ extern AJ_API void AJ_CALL alljoyn_interfacedescription_member_getargannotationa
+  * @param[in,out] value_size The size of the value string. If value == NULL, it will return the size of the value string plus nul character.
+  * @return    true if annotations[name] == value.
+  */
+-extern QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_getargannotation(alljoyn_interfacedescription_member member, const char* argName, const char* name, char* value, size_t* value_size);
++_Win32_ImportLibrary_("msajapi.dll") extern QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_getargannotation(alljoyn_interfacedescription_member member, const char* argName, const char* name, char* value, size_t* value_size);
+ 
+ /**
+  * Structure representing properties of the Interface
+@@ -228,7 +229,7 @@ typedef struct {
+  *                   annotations count from
+  * @return the number of annotations
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_property_getannotationscount(alljoyn_interfacedescription_property property);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_property_getannotationscount(alljoyn_interfacedescription_property property);
+ 
+ /**
+  * Obtain the name and value for the annotation at the specified index.
+@@ -243,7 +244,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_property_getannotation
+  * @param[out] value  the value of the annotation
+  * @param[in,out] value_size the size of the value string if value == NULL this will return the size of the value string plus nul character
+  */
+-extern AJ_API void AJ_CALL alljoyn_interfacedescription_property_getannotationatindex(alljoyn_interfacedescription_property property,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_interfacedescription_property_getannotationatindex(alljoyn_interfacedescription_property property,
+                                                                                       size_t index,
+                                                                                       char* name, size_t* name_size,
+                                                                                       char* value, size_t* value_size);
+@@ -258,7 +259,7 @@ extern AJ_API void AJ_CALL alljoyn_interfacedescription_property_getannotationat
+  * @param[in,out] value_size size of the value string if value == NULL it will return the size of the value string plus nul character
+  * @return    true if annotations[name] == value
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_property_getannotation(alljoyn_interfacedescription_property property, const char* name, char* value, size_t* value_size);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_property_getannotation(alljoyn_interfacedescription_property property, const char* name, char* value, size_t* value_size);
+ 
+ /**
+  * Activate this interface. An interface must be activated before it can be used. Activating an
+@@ -266,7 +267,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_property_getannotati
+  *
+  * @param iface alljoyn_interfacedescription to activate.
+  */
+-extern AJ_API void AJ_CALL alljoyn_interfacedescription_activate(alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_interfacedescription_activate(alljoyn_interfacedescription iface);
+ 
+ /**
+  * Add an annotation to the interface.
+@@ -279,7 +280,7 @@ extern AJ_API void AJ_CALL alljoyn_interfacedescription_activate(alljoyn_interfa
+  *      - #ER_BUS_PROPERTY_ALREADY_EXISTS if the property can not be added
+  *                                        because it already exists.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addannotation(alljoyn_interfacedescription iface, const char* name, const char* value);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addannotation(alljoyn_interfacedescription iface, const char* name, const char* value);
+ 
+ /**
+  * Lookup an interface annotation
+@@ -292,7 +293,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addannotation(alljoyn
+  *
+  * @return QC_FALSE if annotation does not exist, QC_TRUE otherwise.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getannotation(alljoyn_interfacedescription iface, const char* name, char* value, size_t* value_size);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getannotation(alljoyn_interfacedescription iface, const char* name, char* value, size_t* value_size);
+ 
+ 
+ /**
+@@ -305,7 +306,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getannotation(alljoy
+  *
+  * @return the number of annotations
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getannotationscount(alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getannotationscount(alljoyn_interfacedescription iface);
+ 
+ /**
+  * Obtain the name and value for the annotation at the specified index.
+@@ -320,7 +321,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getannotationscount(al
+  * @param[out] value  the value of the annotation
+  * @param[in,out] value_size the size of the value string if value == NULL this will return the size of the value string plus nul character
+  */
+-extern AJ_API void AJ_CALL alljoyn_interfacedescription_getannotationatindex(alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_interfacedescription_getannotationatindex(alljoyn_interfacedescription iface,
+                                                                              size_t index,
+                                                                              char* name, size_t* name_size,
+                                                                              char* value, size_t* value_size);
+@@ -334,7 +335,7 @@ extern AJ_API void AJ_CALL alljoyn_interfacedescription_getannotationatindex(all
+  *
+  * @return QCC_FALSE if member does not exist, QCC_TRUE otherwise.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmember(const alljoyn_interfacedescription iface, const char* name,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmember(const alljoyn_interfacedescription iface, const char* name,
+                                                                       alljoyn_interfacedescription_member* member);
+ 
+ /**
+@@ -352,7 +353,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmember(const allj
+  *      - #ER_OK if successful
+  *      - #ER_BUS_MEMBER_ALREADY_EXISTS if member already exists
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmember(alljoyn_interfacedescription iface, alljoyn_messagetype type,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmember(alljoyn_interfacedescription iface, _Win32_AssociatedEnum_(alljoyn_messagetype) alljoyn_messagetype type,
+                                                                      const char* name, const char* inputSig, const char* outSig,
+                                                                      const char* argNames, uint8_t annotation);
+ 
+@@ -368,7 +369,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmember(alljoyn_int
+  *      - #ER_OK if successful
+  *      - #ER_BUS_MEMBER_ALREADY_EXISTS if member already exists
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmemberannotation(alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmemberannotation(alljoyn_interfacedescription iface,
+                                                                                const char* member,
+                                                                                const char* name,
+                                                                                const char* value);
+@@ -386,7 +387,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmemberannotation(a
+  *
+  * @return QC_FALSE if annotation does not exist, QC_TRUE otherwise.
+  */
+-AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmemberannotation(alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmemberannotation(alljoyn_interfacedescription iface,
+                                                                          const char* member,
+                                                                          const char* name,
+                                                                          char* value,
+@@ -404,7 +405,7 @@ AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmemberannotation(alljoyn
+  *
+  * @return  The number of members returned or the total number of members if members is NULL.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getmembers(const alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getmembers(const alljoyn_interfacedescription iface,
+                                                                      alljoyn_interfacedescription_member* members,
+                                                                      size_t numMembers);
+ 
+@@ -421,7 +422,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getmembers(const alljo
+  * @param outSig     Output parameter signature of the member to lookup (leave NULL for signals)
+  * @return QCC_TRUE if the member name exists.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasmember(alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasmember(alljoyn_interfacedescription iface,
+                                                                       const char* name, const char* inSig,
+                                                                       const char* outSig);
+ 
+@@ -440,7 +441,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasmember(alljoyn_in
+  *      - #ER_OK if successful
+  *      - #ER_BUS_MEMBER_ALREADY_EXISTS if member already exists
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmethod(alljoyn_interfacedescription iface, const char* name, const char* inputSig, const char* outSig, const char* argNames, uint8_t annotation, const char* accessPerms);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmethod(alljoyn_interfacedescription iface, const char* name, const char* inputSig, const char* outSig, const char* argNames, uint8_t annotation, const char* accessPerms);
+ 
+ /**
+  * Lookup a member method description by name
+@@ -452,7 +453,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addmethod(alljoyn_int
+  *      - Pointer to member.
+  *      - NULL if does not exist.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmethod(alljoyn_interfacedescription iface, const char* name, alljoyn_interfacedescription_member* member);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmethod(alljoyn_interfacedescription iface, const char* name, alljoyn_interfacedescription_member* member);
+ 
+ /**
+  * Add a signal member to the interface.
+@@ -468,7 +469,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmethod(alljoyn_in
+  *      - #ER_OK if successful
+  *      - #ER_BUS_MEMBER_ALREADY_EXISTS if member already exists
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addsignal(alljoyn_interfacedescription iface, const char* name, const char* sig, const char* argNames, uint8_t annotation, const char* accessPerms);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addsignal(alljoyn_interfacedescription iface, const char* name, const char* sig, const char* argNames, uint8_t annotation, const char* accessPerms);
+ 
+ /**
+  * Lookup a member signal description by name
+@@ -480,7 +481,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addsignal(alljoyn_int
+  *
+  * @return QCC_TRUE is the signal was found QCC_FALSE otherwise
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getsignal(alljoyn_interfacedescription iface, const char* name, alljoyn_interfacedescription_member* member);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getsignal(alljoyn_interfacedescription iface, const char* name, alljoyn_interfacedescription_member* member);
+ 
+ /**
+  * Lookup a property description by name
+@@ -490,7 +491,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getsignal(alljoyn_in
+  * @param property  The description of the property
+  * @return QCC_TRUE if the property was found, QCC_FALSE otherwise
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getproperty(const alljoyn_interfacedescription iface, const char* name,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getproperty(const alljoyn_interfacedescription iface, const char* name,
+                                                                         alljoyn_interfacedescription_property* property);
+ 
+ /**
+@@ -506,7 +507,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getproperty(const al
+  *
+  * @return  The number of properties returned or the total number of properties if props is NULL.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getproperties(const alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getproperties(const alljoyn_interfacedescription iface,
+                                                                         alljoyn_interfacedescription_property* props,
+                                                                         size_t numProps);
+ 
+@@ -522,7 +523,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getproperties(const al
+  *      - #ER_BUS_PROPERTY_ALREADY_EXISTS if the property can not be added
+  *                                        because it already exists.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addproperty(alljoyn_interfacedescription iface, const char* name,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addproperty(alljoyn_interfacedescription iface, const char* name,
+                                                                        const char* signature, uint8_t access);
+ 
+ /**
+@@ -536,7 +537,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addproperty(alljoyn_i
+  *      - #ER_OK if successful.
+  *      - #ER_BUS_PROPERTY_ALREADY_EXISTS if the annotation can not be added to the property because it already exists.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addpropertyannotation(alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addpropertyannotation(alljoyn_interfacedescription iface,
+                                                                                  const char* property,
+                                                                                  const char* name,
+                                                                                  const char* value);
+@@ -561,7 +562,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addpropertyannotation
+  *
+  * @return           QCC_TRUE if found, QCC_FALSE if not found
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getpropertyannotation(alljoyn_interfacedescription iface,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getpropertyannotation(alljoyn_interfacedescription iface,
+                                                                                   const char* property,
+                                                                                   const char* name,
+                                                                                   char* value,
+@@ -574,7 +575,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getpropertyannotatio
+  * @param name       Name of the property to lookup
+  * @return true if the property exists.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasproperty(const alljoyn_interfacedescription iface, const char* name);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasproperty(const alljoyn_interfacedescription iface, const char* name);
+ 
+ /**
+  * Check for existence of any properties
+@@ -582,7 +583,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasproperty(const al
+  * @param iface      Interface to query.
+  * @return  true if interface has any properties.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasproperties(const alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasproperties(const alljoyn_interfacedescription iface);
+ 
+ /**
+  * Returns the name of the interface
+@@ -590,7 +591,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasproperties(const
+  * @param iface      Interface to query.
+  * @return the interface name.
+  */
+-extern AJ_API const char* AJ_CALL alljoyn_interfacedescription_getname(const alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_interfacedescription_getname(const alljoyn_interfacedescription iface);
+ 
+ /**
+  * Returns a description of the interface in introspection XML format
+@@ -606,7 +607,7 @@ extern AJ_API const char* AJ_CALL alljoyn_interfacedescription_getname(const all
+  *          available.  Thus returning a value larger than buf means the output
+  *          was truncated.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_introspect(const alljoyn_interfacedescription iface, char* str, size_t buf, size_t indent);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_introspect(const alljoyn_interfacedescription iface, char* str, size_t buf, size_t indent);
+ 
+ /**
+  * Indicates if this interface is secure. Secure interfaces require end-to-end authentication.
+@@ -615,7 +616,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_introspect(const alljo
+  * @param iface      Interface to query.
+  * @return true if the interface is secure.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_issecure(const alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_issecure(const alljoyn_interfacedescription iface);
+ 
+ /**
+  * Get the security policy that applies to this interface.
+@@ -624,7 +625,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_issecure(const alljo
+  *
+  * @return Returns the security policy for this interface.
+  */
+-extern AJ_API alljoyn_interfacedescription_securitypolicy AJ_CALL alljoyn_interfacedescription_getsecuritypolicy(const alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(alljoyn_interfacedescription_securitypolicy) extern AJ_API alljoyn_interfacedescription_securitypolicy AJ_CALL alljoyn_interfacedescription_getsecuritypolicy(const alljoyn_interfacedescription iface);
+ 
+ /**
+  * Set the description language to this interface.
+@@ -635,7 +636,7 @@ extern AJ_API alljoyn_interfacedescription_securitypolicy AJ_CALL alljoyn_interf
+  * @param[in] iface Interface on which to set the description language.
+  * @param[in] language The language tag.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED_ON(
+     extern AJ_API void AJ_CALL alljoyn_interfacedescription_setdescriptionlanguage(alljoyn_interfacedescription iface, const char* language),
+     16.10);
+ 
+@@ -660,7 +661,7 @@ QCC_DEPRECATED_ON(
+  * @return The number of languages returned or the total number of
+  *         language tags if languages is NULL.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED_ON(
+     extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionlanguages(const alljoyn_interfacedescription iface, const char** languages, size_t size),
+     16.10);
+ 
+@@ -689,7 +690,7 @@ QCC_DEPRECATED_ON(
+  *
+  * @return The required size of the array or the number of bytes written (depending on the arguments, see above).
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionlanguages2(const alljoyn_interfacedescription iface, char* languages, size_t languagesSize);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionlanguages2(const alljoyn_interfacedescription iface, char* languages, size_t languagesSize);
+ 
+ /**
+  * Set the description to this interface.
+@@ -700,7 +701,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionlanguage
+  * @param[in] iface Interface on which to set the description.
+  * @param[in] description The interface description. Call alljoyn_interfacedescription_setdescriptionlanguage() to specify description language.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED_ON(
+     extern AJ_API void AJ_CALL alljoyn_interfacedescription_setdescription(alljoyn_interfacedescription iface, const char* description),
+     16.10);
+ 
+@@ -724,7 +725,7 @@ QCC_DEPRECATED_ON(
+  *      - #ER_BUS_INTERFACE_ACTIVATED If the interface has already been activated.
+  *      - #ER_BUS_DESCRIPTION_ALREADY_EXISTS If the interface already has a description.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setdescriptionforlanguage(alljoyn_interfacedescription iface, const char* description, const char* languageTag);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setdescriptionforlanguage(alljoyn_interfacedescription iface, const char* description, const char* languageTag);
+ 
+ /**
+  * Get the introspection description for the interface in the given language.
+@@ -749,7 +750,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setdescriptionforlang
+  * @param[in] languageTag The language of the description (language tag as defined in RFC 5646, e.g., "en-US").
+  * @return The number of characters written, not including the terminating null-character (0 if no description available).
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionforlanguage(alljoyn_interfacedescription iface, char* description, size_t maxLanguageLength, const char* languageTag);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionforlanguage(alljoyn_interfacedescription iface, char* description, size_t maxLanguageLength, const char* languageTag);
+ 
+ /**
+  * Set the description for member of this interface.
+@@ -766,7 +767,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getdescriptionforlangu
+  *      - #ER_BUS_INTERFACE_ACTIVATED If the interface has already been activated.
+  *      - #ER_BUS_INTERFACE_NO_SUCH_MEMBER If the member was not found.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) QCC_DEPRECATED_ON(
+     extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setmemberdescription(alljoyn_interfacedescription iface, const char* member, const char* description),
+     16.10);
+ 
+@@ -793,7 +794,7 @@ QCC_DEPRECATED_ON(
+  *      - #ER_BUS_INTERFACE_NO_SUCH_MEMBER If the member was not found.
+  *      - #ER_BUS_DESCRIPTION_ALREADY_EXISTS If the interface member already has a description.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setmemberdescriptionforlanguage(
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setmemberdescriptionforlanguage(
+     alljoyn_interfacedescription iface, const char* member, const char* description, const char* languageTag);
+ 
+ /**
+@@ -820,7 +821,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setmemberdescriptionf
+  * @param[in] languageTag The language of the description (language tag as defined in RFC 5646, e.g., "en-US").
+  * @return The number of characters written, not including the terminating null-character (0 if no description available).
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getmemberdescriptionforlanguage(
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getmemberdescriptionforlanguage(
+     alljoyn_interfacedescription iface, const char* member, char* description, size_t maxLanguageLength, const char* languageTag);
+ 
+ /**
+@@ -839,7 +840,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getmemberdescriptionfo
+  *      - #ER_BUS_INTERFACE_ACTIVATED If the interface has already been activated.
+  *      - #ER_BUS_INTERFACE_NO_SUCH_MEMBER If the member was not found.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) QCC_DEPRECATED_ON(
+     extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setargdescription(alljoyn_interfacedescription iface, const char* member, const char* argName, const char* description),
+     16.10);
+ 
+@@ -867,7 +868,7 @@ QCC_DEPRECATED_ON(
+  *      - #ER_BUS_INTERFACE_NO_SUCH_MEMBER If the member was not found.
+  *      - #ER_BUS_DESCRIPTION_ALREADY_EXISTS If the interface member argument already has a description.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setargdescriptionforlanguage(
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setargdescriptionforlanguage(
+     alljoyn_interfacedescription iface, const char* member, const char* arg, const char* description, const char* languageTag);
+ 
+ /**
+@@ -895,7 +896,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setargdescriptionforl
+  * @param[in] languageTag The language of the description (language tag as defined in RFC 5646, e.g., "en-US").
+  * @return The number of characters written, not including the terminating null-character (0 if no description available).
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getargdescriptionforlanguage(
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getargdescriptionforlanguage(
+     alljoyn_interfacedescription iface, const char* member, const char* arg, char* description, size_t maxLanguageLength, const char* languageTag);
+ 
+ /**
+@@ -913,7 +914,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getargdescriptionforla
+  *      - #ER_BUS_INTERFACE_ACTIVATED If the interface has already been activated.
+  *      - #ER_BUS_NO_SUCH_PROPERTY If the property was not found.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) QCC_DEPRECATED_ON(
+     extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setpropertydescription(alljoyn_interfacedescription iface, const char* name, const char* description),
+     16.10);
+ 
+@@ -939,7 +940,7 @@ QCC_DEPRECATED_ON(
+  *      - #ER_BUS_NO_SUCH_PROPERTY If the property was not found.
+  *      - #ER_BUS_DESCRIPTION_ALREADY_EXISTS If the interface property already has a description.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setpropertydescriptionforlanguage(
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setpropertydescriptionforlanguage(
+     alljoyn_interfacedescription iface, const char* name, const char* description, const char* languageTag);
+ 
+ /**
+@@ -966,7 +967,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_setpropertydescriptio
+  * @param[in] languageTag The language of the description (language tag as defined in RFC 5646, e.g., "en-US").
+  * @return The number of characters written, not including the terminating null-character (0 if no description available).
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getpropertydescriptionforlanguage(
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getpropertydescriptionforlanguage(
+     alljoyn_interfacedescription iface, const char* property, char* description, size_t maxLanguageLength, const char* languageTag);
+ 
+ /**
+@@ -979,7 +980,7 @@ extern AJ_API size_t AJ_CALL alljoyn_interfacedescription_getpropertydescription
+  * @param[in] iface Interface on which to set description translation callback.
+  * @param[in] translationCallback The translation callback instance.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED_ON(
+     extern AJ_API void AJ_CALL alljoyn_interfacedescription_setdescriptiontranslationcallback(alljoyn_interfacedescription iface, alljoyn_interfacedescription_translation_callback_ptr translationCallback),
+     16.10);
+ 
+@@ -994,7 +995,7 @@ QCC_DEPRECATED_ON(
+  *
+  * @return The translation callback instance.
+  */
+-QCC_DEPRECATED_ON(
++_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED_ON(
+     extern AJ_API alljoyn_interfacedescription_translation_callback_ptr AJ_CALL alljoyn_interfacedescription_getdescriptiontranslationcallback(const alljoyn_interfacedescription iface),
+     16.10);
+ 
+@@ -1005,7 +1006,7 @@ QCC_DEPRECATED_ON(
+  *
+  * @return True if this interface has at least one description.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasdescription(const alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasdescription(const alljoyn_interfacedescription iface);
+ 
+ /**
+  * Add an annotation to an existing argument.
+@@ -1020,7 +1021,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_hasdescription(const
+  *      - #ER_OK if successful.
+  *      - #ER_BUS_ANNOTATION_ALREADY_EXISTS if annotation already exists.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addargannotation(alljoyn_interfacedescription iface, const char* member, const char* argName, const char* name, const char* value);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addargannotation(alljoyn_interfacedescription iface, const char* member, const char* argName, const char* name, const char* value);
+ 
+ /**
+  * Get annotation from an existing member argument.
+@@ -1035,7 +1036,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_interfacedescription_addargannotation(allj
+  *      - QCC_TRUE if found.
+  *      - QCC_FALSE if annotation not found.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmemberargannotation(const alljoyn_interfacedescription iface, const char* member, const char* argName, const char* name, char* value, size_t* value_size);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmemberargannotation(const alljoyn_interfacedescription iface, const char* member, const char* argName, const char* name, char* value, size_t* value_size);
+ 
+ /**
+  * Equality operation.
+@@ -1045,7 +1046,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_getmemberargannotati
+  *
+  * @return QCC_TRUE if one == other
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_eql(const alljoyn_interfacedescription one,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_eql(const alljoyn_interfacedescription one,
+                                                                 const alljoyn_interfacedescription other);
+ 
+ /**
+@@ -1056,7 +1057,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_eql(const alljoyn_in
+  *
+  * @return QCC_TRUE if one == other
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_eql(const alljoyn_interfacedescription_member one,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_eql(const alljoyn_interfacedescription_member one,
+                                                                        const alljoyn_interfacedescription_member other);
+ 
+ /**
+@@ -1067,7 +1068,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_member_eql(const all
+  *
+  * @return QCC_TRUE if one == other
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_property_eql(const alljoyn_interfacedescription_property one,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_interfacedescription_property_eql(const alljoyn_interfacedescription_property one,
+                                                                          const alljoyn_interfacedescription_property other);
+ 
+ #ifdef __cplusplus

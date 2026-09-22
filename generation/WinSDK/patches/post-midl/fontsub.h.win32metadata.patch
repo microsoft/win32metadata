@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h b/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
-index a58d255cbe..3cc01cf997 100644
+index a58d255cbe..89675f78d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
 @@ -9,6 +9,7 @@
@@ -24,19 +24,68 @@ index a58d255cbe..3cc01cf997 100644
 +_Windows_SupportedOS_Server2003_
  typedef void (__cdecl *CFP_FREEPROC)(void *);
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_ImportLibrary_("fontsub.dll")
  unsigned long __cdecl CreateFontPackage(
  	CONST unsigned char * puchSrcBuffer, /* input TTF or TTC buffer */
  	CONST unsigned long ulSrcBufferSize, /* size of input TTF or TTC buffer data */
+@@ -36,8 +46,8 @@ unsigned long __cdecl CreateFontPackage(
+ 	CONST unsigned short usTTCIndex,	/* TTC Index, only used if TTC bit set */
+ 	CONST unsigned short usSubsetFormat, /* Old Subset, Subset or Delta */
+ 	CONST unsigned short usSubsetLanguage,	/* Language in Name table to keep */
+-	CONST unsigned short usSubsetPlatform,	/* if ListType is Character, Platform of cmap to use for glyph list */
+-	CONST unsigned short usSubsetEncoding,	/* if ListType is Character, Encoding of cmap to use for glyph list */
++	_Win32_AssociatedEnum_(CREATE_FONT_PACKAGE_SUBSET_PLATFORM) CONST unsigned short usSubsetPlatform,	/* if ListType is Character, Platform of cmap to use for glyph list */
++	_Win32_AssociatedEnum_(CREATE_FONT_PACKAGE_SUBSET_ENCODING) CONST unsigned short usSubsetEncoding,	/* if ListType is Character, Encoding of cmap to use for glyph list */
+ 	CONST unsigned short *pusSubsetKeepList, /* List of Characters or Glyphs to keep */
+ 	CONST unsigned short usSubsetListCount,	 /* number of elements in list */
+ 	CFP_ALLOCPROC lpfnAllocate,	  /* call back function to allocate temp buffers and output buffers */
 @@ -71,6 +81,9 @@ unsigned long __cdecl CreateFontPackage(
  #define TTFCFP_FLAGS_TTC 0x0004  /* if bit off, its a TTF */
  #define TTFCFP_FLAGS_GLYPHLIST 0x0008 /* if bit off, list is characters */
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_ImportLibrary_("fontsub.dll")
  unsigned long __cdecl MergeFontPackage(CONST unsigned char * puchMergeFontBuffer, /* buffer containing font to merge with */
  			CONST unsigned long ulMergeFontBufferSize,	/* size of buffer containing font to merge with */
  			CONST unsigned char * puchFontPackageBuffer, /* buffer containing a font package to merge with the MergeFontBuffer */
+@@ -183,4 +196,37 @@ unsigned long __cdecl MergeFontPackage(CONST unsigned char * puchMergeFontBuffer
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTFCFP_STD_MAC_CHAR_SET")
++#undef TTFCFP_STD_MAC_CHAR_SET
++#pragma push_macro("TTFCFP_SYMBOL_CHAR_SET")
++#undef TTFCFP_SYMBOL_CHAR_SET
++#pragma push_macro("TTFCFP_UNICODE_CHAR_SET")
++#undef TTFCFP_UNICODE_CHAR_SET
++enum CREATE_FONT_PACKAGE_SUBSET_ENCODING : short
++{
++    TTFCFP_STD_MAC_CHAR_SET = 0,
++    TTFCFP_SYMBOL_CHAR_SET = 0,
++    TTFCFP_UNICODE_CHAR_SET = 1,
++};
++#pragma pop_macro("TTFCFP_UNICODE_CHAR_SET")
++#pragma pop_macro("TTFCFP_SYMBOL_CHAR_SET")
++#pragma pop_macro("TTFCFP_STD_MAC_CHAR_SET")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTFCFP_UNICODE_PLATFORMID")
++#undef TTFCFP_UNICODE_PLATFORMID
++#pragma push_macro("TTFCFP_ISO_PLATFORMID")
++#undef TTFCFP_ISO_PLATFORMID
++enum CREATE_FONT_PACKAGE_SUBSET_PLATFORM : short
++{
++    TTFCFP_UNICODE_PLATFORMID = 0,
++    TTFCFP_ISO_PLATFORMID = 2,
++};
++#pragma pop_macro("TTFCFP_ISO_PLATFORMID")
++#pragma pop_macro("TTFCFP_UNICODE_PLATFORMID")
++#endif
++
+ #endif /* FONTSUB_DOT_H_DEFINED */

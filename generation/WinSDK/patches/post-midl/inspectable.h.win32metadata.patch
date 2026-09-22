@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/inspectable.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/inspectable.h
-index 9b79b49792..1a5eb0ad3a 100644
+index 9b79b49792..42d45d6499 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/inspectable.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/inspectable.h
 @@ -19,6 +19,7 @@
@@ -15,32 +15,36 @@ index 9b79b49792..1a5eb0ad3a 100644
  
  typedef /* [v1_enum] */ 
 -enum TrustLevel
-+enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ TrustLevel
++enum   TrustLevel
      {
          BaseTrust	= 0,
          PartialTrust	= ( BaseTrust + 1 ) ,
-@@ -106,13 +107,19 @@ EXTERN_C const IID IID_IInspectable;
+@@ -102,16 +103,22 @@ EXTERN_C const IID IID_IInspectable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90")
++    MIDL_INTERFACE("AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90") _Windows_SupportedOS_Windows8_ 
      IInspectable : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE GetIids( 
              /* [out] */ __RPC__out ULONG *iidCount,
 -            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) IID **iids) = 0;
-+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) _Win32_RAIIFree_(CoTaskMemFree) IID **iids) = 0;
++            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount)  IID **iids) = 0;
++        
++        
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
          virtual HRESULT STDMETHODCALLTYPE GetRuntimeClassName( 
 -            /* [out] */ __RPC__deref_out_opt HSTRING *className) = 0;
 +            /* [out] */ __RPC__deref_out_opt _Win32_RAIIFree_(WindowsDeleteString) HSTRING *className) = 0;
++        
++        
          
-+        _Windows_SupportedOS_Windows8_
-+        _Windows_SupportedOS_Server2012_
          virtual HRESULT STDMETHODCALLTYPE GetTrustLevel( 
              /* [out] */ __RPC__out TrustLevel *trustLevel) = 0;
-         
 @@ -144,12 +151,12 @@ EXTERN_C const IID IID_IInspectable;
          HRESULT ( STDMETHODCALLTYPE *GetIids )( 
              __RPC__in IInspectable * This,

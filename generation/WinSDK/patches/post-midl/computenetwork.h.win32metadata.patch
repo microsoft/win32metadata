@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/computenetwork.h b/generation/WinSDK/RecompiledIdlHeaders/um/computenetwork.h
+index a793ae371f..95e98ad24c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/computenetwork.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/computenetwork.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ // computenetwork.ext: ApiSet Contract for ext-ms-win-hyperv-computenetwork-l1
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+ 
+@@ -466,7 +467,7 @@ HcnReserveGuestNetworkServicePort(
+     _In_ HCN_PORT_PROTOCOL Protocol,
+     _In_ HCN_PORT_ACCESS Access,
+     _In_ USHORT Port,
+-    _Out_ HANDLE* PortReservationHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* PortReservationHandle
+     );
+ 
+ // range is always for exclusive access for both protocols
+@@ -476,7 +477,7 @@ HcnReserveGuestNetworkServicePortRange(
+     _In_ HCN_GUESTNETWORKSERVICE GuestNetworkService,
+     _In_ USHORT PortCount,
+     _Out_ HCN_PORT_RANGE_RESERVATION* PortRangeReservation,
+-    _Out_ HANDLE* PortReservationHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* PortReservationHandle
+     );
+ 
+ HRESULT

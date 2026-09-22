@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
-index e1d5d309c3..43c178afbe 100644
+index e1d5d309c3..d7d0089a95 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
 @@ -11,6 +11,7 @@
@@ -14,8 +14,8 @@ index e1d5d309c3..43c178afbe 100644
  DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
  {
  	// this function initializes the reconnection to the decoder. 
-+	_Windows_SupportedOS_Windows2000_
-+	_Windows_SupportedOS_Server2000_
++	
++	
  	STDMETHOD (RenegotiateVPParameters)(THIS
  					   ) PURE;
  
@@ -23,15 +23,15 @@ index e1d5d309c3..43c178afbe 100644
  DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
  {
      // function to set the mode (bob, weave etc)
-+    _Windows_SupportedOS_Windows2000_
-+    _Windows_SupportedOS_Server2000_
++    
++    
      STDMETHOD (SetDeinterlaceMode)(THIS_ 
  				   IN AMVP_MODE mode
  				  ) PURE;
  
      // function to get the mode (bob, weave etc)
-+    _Windows_SupportedOS_Windows2000_
-+    _Windows_SupportedOS_Server2000_
++    
++    
      STDMETHOD (GetDeinterlaceMode)(THIS_ 
  				   OUT AMVP_MODE *pMode
  				  ) PURE;
@@ -39,15 +39,15 @@ index e1d5d309c3..43c178afbe 100644
  DECLARE_INTERFACE_(IVPNotify2, IVPNotify)
  {
  // function to set the mode (bob, weave etc)
-+    _Windows_SupportedOS_Windows2000_
-+    _Windows_SupportedOS_Server2000_
++    
++    
      STDMETHOD (SetVPSyncMaster)(THIS_ 
  				   IN BOOL bVPSyncMaster
  				  ) PURE;
  
      // function to get the mode (bob, weave etc)
-+    _Windows_SupportedOS_Windows2000_
-+    _Windows_SupportedOS_Server2000_
++    
++    
      STDMETHOD (GetVPSyncMaster)(THIS_ 
  				   OUT BOOL *pbVPSyncMaster
  				  ) PURE;

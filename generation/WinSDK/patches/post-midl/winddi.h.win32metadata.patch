@@ -1,0 +1,659 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h b/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
+index 9580b3414f..90ac7ad8ab 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -1747,23 +1748,23 @@ typedef struct _XLATEOBJ
+  * BRUSHOBJ callbacks
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ PVOID APIENTRY BRUSHOBJ_pvAllocRbrush(
+     BRUSHOBJ *pbo,
+     ULONG     cj
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ PVOID APIENTRY BRUSHOBJ_pvGetRbrush(
+     BRUSHOBJ *pbo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY BRUSHOBJ_ulGetBrushColor(
+     BRUSHOBJ *pbo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) ENGAPI
+ HANDLE APIENTRY BRUSHOBJ_hGetColorTransform(
+     BRUSHOBJ *pbo
+     );
+@@ -1802,7 +1803,7 @@ typedef struct _ENUMRECTS
+     RECTL       arcl[1];
+ } ENUMRECTS;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY CLIPOBJ_cEnumStart(
+     CLIPOBJ *pco,
+     BOOL     bAll,
+@@ -1811,14 +1812,14 @@ ULONG APIENTRY CLIPOBJ_cEnumStart(
+     __in_data_source(USER_MODE) ULONG    cLimit
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY CLIPOBJ_bEnum(
+     CLIPOBJ *pco,
+     ULONG    cj,
+     ULONG   *pul
+     );
+ 
+-PATHOBJ* APIENTRY CLIPOBJ_ppoGetPath(
++_Windows_SupportedOS_Windows2000_ PATHOBJ* APIENTRY CLIPOBJ_ppoGetPath(
+     CLIPOBJ* pco
+     );
+ 
+@@ -1932,18 +1933,18 @@ typedef struct _FONTINFO /* fi */
+     ULONG   cjMaxGlyph32;
+ } FONTINFO, *PFONTINFO;
+ 
+-ULONG APIENTRY FONTOBJ_cGetAllGlyphHandles(
++_Windows_SupportedOS_Windows2000_ ULONG APIENTRY FONTOBJ_cGetAllGlyphHandles(
+     FONTOBJ *pfo,
+     HGLYPH  *phg
+     );
+ 
+-VOID APIENTRY FONTOBJ_vGetInfo(
++_Windows_SupportedOS_Windows2000_ VOID APIENTRY FONTOBJ_vGetInfo(
+     FONTOBJ  *pfo,
+     __in_data_source(USER_MODE) ULONG     cjSize,
+     FONTINFO *pfi
+     );
+ 
+-ULONG APIENTRY FONTOBJ_cGetGlyphs(
++_Windows_SupportedOS_Windows2000_ ULONG APIENTRY FONTOBJ_cGetGlyphs(
+     FONTOBJ *pfo,
+     __in_data_source(USER_MODE) ULONG    iMode,
+     ULONG    cGlyph,
+@@ -1956,19 +1957,19 @@ GAMMA_TABLES* APIENTRY FONTOBJ_pGetGammaTables(
+     FONTOBJ *pfo);
+ #endif // (NTDDI_VERSION <= NTDDI_WINXP)
+ 
+-XFORMOBJ * APIENTRY FONTOBJ_pxoGetXform(
++_Windows_SupportedOS_Windows2000_ XFORMOBJ * APIENTRY FONTOBJ_pxoGetXform(
+     _In_ FONTOBJ *pfo
+     );
+ 
+-IFIMETRICS * APIENTRY FONTOBJ_pifi(
++_Windows_SupportedOS_Windows2000_ IFIMETRICS * APIENTRY FONTOBJ_pifi(
+     _In_ FONTOBJ *pfo
+     );
+ 
+-FD_GLYPHSET * APIENTRY FONTOBJ_pfdg(
++_Windows_SupportedOS_Windows2000_ FD_GLYPHSET * APIENTRY FONTOBJ_pfdg(
+     FONTOBJ *pfo
+     );
+ 
+-PVOID APIENTRY FONTOBJ_pvTrueTypeFontFile(
++_Windows_SupportedOS_Windows2000_ PVOID APIENTRY FONTOBJ_pvTrueTypeFontFile(
+     FONTOBJ *pfo,
+     ULONG   *pcjFile
+     );
+@@ -1988,7 +1989,7 @@ LPWSTR APIENTRY FONTOBJ_pwszFontFilePaths (
+ 
+ #define FO_ATTR_MODE_ROTATE         1
+ 
+-PFD_GLYPHATTR APIENTRY FONTOBJ_pQueryGlyphAttrs(
++_Windows_SupportedOS_Windows2000_ PFD_GLYPHATTR APIENTRY FONTOBJ_pQueryGlyphAttrs(
+     FONTOBJ       *pfo,
+     __in_data_source(USER_MODE) ULONG          iMode
+     );
+@@ -2055,18 +2056,18 @@ typedef struct  _CLIPLINE
+     RUN     arun[1];
+ } CLIPLINE, *PCLIPLINE;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY PATHOBJ_vEnumStart(
+     PATHOBJ *ppo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY PATHOBJ_bEnum(
+     PATHOBJ  *ppo,
+     PATHDATA *ppd
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY PATHOBJ_vEnumStartClipLines(
+     PATHOBJ   *ppo,
+     CLIPOBJ   *pco,
+@@ -2074,7 +2075,7 @@ VOID APIENTRY PATHOBJ_vEnumStartClipLines(
+     LINEATTRS *pla
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY PATHOBJ_bEnumClipLines(
+     PATHOBJ  *ppo,
+     ULONG     cb,
+@@ -2106,7 +2107,7 @@ BOOL APIENTRY PATHOBJ_bCloseFigure(
+     _In_ PATHOBJ *ppo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY PATHOBJ_vGetBounds(
+     PATHOBJ *ppo,
+     PRECTFX prectfx
+@@ -2116,26 +2117,26 @@ VOID APIENTRY PATHOBJ_vGetBounds(
+  * STROBJ callbacks
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY STROBJ_vEnumStart(
+     STROBJ *pstro
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY STROBJ_bEnum(
+     STROBJ    *pstro,
+     ULONG     *pc,
+     PGLYPHPOS *ppgpos
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY STROBJ_bEnumPositionsOnly(
+     STROBJ    *pstro,
+     ULONG     *pc,
+     PGLYPHPOS *ppgpos
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ DWORD APIENTRY STROBJ_dwGetCodePage(
+     STROBJ  *pstro
+     );
+@@ -2150,7 +2151,7 @@ FIX APIENTRY STROBJ_fxBreakExtra(
+     STROBJ  *pstro
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY STROBJ_bGetAdvanceWidths(
+     STROBJ   *pso,
+     __in_data_source(USER_MODE) ULONG     iFirst,
+@@ -2227,13 +2228,13 @@ BOOL APIENTRY STROBJ_bGetAdvanceWidths(
+ #define XF_LTOFX        2L
+ #define XF_INV_FXTOL    3L
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY XFORMOBJ_iGetXform(
+     _In_      XFORMOBJ *pxo,
+     _Out_opt_ XFORML   *pxform
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY XFORMOBJ_bApplyXform(
+     XFORMOBJ *pxo,
+     __in_data_source(USER_MODE)  __out_validated(GRAPHIC) ULONG     iMode,
+@@ -2265,18 +2266,18 @@ HANDLE APIENTRY XFORMOBJ_cmGetTransform(
+ #define XO_SRCBITFIELDS  4
+ #define XO_DESTBITFIELDS 5
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY XLATEOBJ_iXlate(
+     XLATEOBJ *pxlo,
+     ULONG iColor
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG * APIENTRY XLATEOBJ_piVector(
+     XLATEOBJ *pxlo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY XLATEOBJ_cGetPalette(
+     XLATEOBJ *pxlo,
+     __in_data_source(USER_MODE) ULONG     iPal,
+@@ -2284,7 +2285,7 @@ ULONG APIENTRY XLATEOBJ_cGetPalette(
+     ULONG    *pPal
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) ENGAPI
+ HANDLE APIENTRY XLATEOBJ_hGetColorTransform(
+     XLATEOBJ *pxlo
+     );
+@@ -2335,7 +2336,7 @@ ULONG APIENTRY EngGetLastError();
+ #define HOOK_FLAGS                      0x0003b5ef
+ #endif
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) ENGAPI
+ HBITMAP APIENTRY EngCreateBitmap(
+     SIZEL sizl,
+     LONG  lWidth,
+@@ -2344,14 +2345,14 @@ HBITMAP APIENTRY EngCreateBitmap(
+     __in_data_source(USER_MODE) PVOID pvBits
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ HSURF APIENTRY EngCreateDeviceSurface(
+     __in_data_source(USER_MODE) DHSURF dhsurf,
+     __in_data_source(USER_MODE) SIZEL sizl,
+     ULONG iFormatCompat
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) ENGAPI
+ HBITMAP APIENTRY EngCreateDeviceBitmap(
+     __in_data_source(USER_MODE) DHSURF dhsurf,
+     __in_data_source(USER_MODE) SIZEL sizl,
+@@ -2367,29 +2368,29 @@ HBITMAP APIENTRY EngCreateRedirectionDeviceBitmap(
+     );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngDeleteSurface(
+     __in_data_source(USER_MODE) HSURF hsurf
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ SURFOBJ * APIENTRY EngLockSurface(
+     HSURF hsurf
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngUnlockSurface(
+     __in_data_source(USER_MODE) SURFOBJ *pso
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngEraseSurface(
+     SURFOBJ *pso,
+     RECTL   *prcl,
+     __in_data_source(USER_MODE) ULONG    iColor
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngAssociateSurface(
+     HSURF hsurf,
+     HDEV  hdev,
+@@ -2415,12 +2416,12 @@ BOOL APIENTRY EngModifySurface(
+     VOID*   pvReserved
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngMarkBandingSurface(
+     __in_data_source(USER_MODE) HSURF hsurf
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngCheckAbort(
+     SURFOBJ *pso
+     );
+@@ -2432,7 +2433,7 @@ BOOL APIENTRY EngCheckAbort(
+ ENGAPI
+ PATHOBJ * APIENTRY EngCreatePath();
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngDeletePath(
+     PATHOBJ *ppo
+     );
+@@ -2441,7 +2442,7 @@ VOID APIENTRY EngDeletePath(
+  * Engine callbacks - Palettes
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) ENGAPI
+ HPALETTE APIENTRY EngCreatePalette(
+     __in_data_source(USER_MODE) ULONG  iMode,
+     __in_data_source(USER_MODE) ULONG  cColors,
+@@ -2458,7 +2459,7 @@ ULONG APIENTRY EngQueryPalette(
+     ULONG       cColors,
+     ULONG      *pulColors);
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngDeletePalette(
+     __in_data_source(USER_MODE) HPALETTE hpal
+     );
+@@ -2467,10 +2468,10 @@ BOOL APIENTRY EngDeletePalette(
+  * Engine callbacks - Clipping
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ CLIPOBJ * APIENTRY EngCreateClip();
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngDeleteClip(
+     _In_opt_ CLIPOBJ *pco
+     );
+@@ -3536,7 +3537,7 @@ BOOL APIENTRY DrvSwapBuffers(
+  * Function prototypes - Engine Simulations
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngBitBlt(
+     _In_ SURFOBJ  *psoTrg,
+     _In_ SURFOBJ  *psoSrc,
+@@ -3551,7 +3552,7 @@ BOOL APIENTRY EngBitBlt(
+     __in_data_source(USER_MODE) ROP4      rop4
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngLineTo(
+     SURFOBJ   *pso,
+     CLIPOBJ   *pco,
+@@ -3564,7 +3565,7 @@ BOOL APIENTRY EngLineTo(
+     __in_data_source(USER_MODE) MIX        mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStretchBlt(
+     SURFOBJ         *psoDest,
+     SURFOBJ         *psoSrc,
+@@ -3579,7 +3580,7 @@ BOOL APIENTRY EngStretchBlt(
+     __in_data_source(USER_MODE) ULONG            iMode
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStretchBltROP(
+     SURFOBJ         *psoDest,
+     SURFOBJ         *psoSrc,
+@@ -3596,7 +3597,7 @@ BOOL APIENTRY EngStretchBltROP(
+     __in_data_source(USER_MODE) DWORD            rop4
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngAlphaBlend(
+     SURFOBJ       *psoDest,
+     SURFOBJ       *psoSrc,
+@@ -3607,7 +3608,7 @@ BOOL APIENTRY EngAlphaBlend(
+     BLENDOBJ      *pBlendObj
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngGradientFill(
+     SURFOBJ         *psoDest,
+     CLIPOBJ         *pco,
+@@ -3621,7 +3622,7 @@ BOOL APIENTRY EngGradientFill(
+     __in_data_source(USER_MODE) ULONG            ulMode
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngTransparentBlt(
+     _In_ SURFOBJ    *psoDst,
+     _In_ SURFOBJ    *psoSrc,
+@@ -3633,7 +3634,7 @@ BOOL APIENTRY EngTransparentBlt(
+     __in_data_source(USER_MODE) ULONG      bCalledFromBitBlt
+     ); 
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngTextOut(
+     SURFOBJ  *pso,
+     STROBJ   *pstro,
+@@ -3647,7 +3648,7 @@ BOOL APIENTRY EngTextOut(
+     __in_data_source(USER_MODE) MIX       mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStrokePath(
+     SURFOBJ   *pso,
+     PATHOBJ   *ppo,
+@@ -3659,7 +3660,7 @@ BOOL APIENTRY EngStrokePath(
+     __in_data_source(USER_MODE) MIX        mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngFillPath(
+     SURFOBJ  *pso,
+     PATHOBJ  *ppo,
+@@ -3670,7 +3671,7 @@ BOOL APIENTRY EngFillPath(
+     __in_data_source(USER_MODE) FLONG     flOptions
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStrokeAndFillPath(
+     SURFOBJ   *pso,
+     PATHOBJ   *ppo,
+@@ -3684,7 +3685,7 @@ BOOL APIENTRY EngStrokeAndFillPath(
+     __in_data_source(USER_MODE) FLONG      flOptions
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngPaint(
+     SURFOBJ  *pso,
+     CLIPOBJ  *pco,
+@@ -3693,7 +3694,7 @@ BOOL APIENTRY EngPaint(
+     __in_data_source(USER_MODE) MIX       mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngCopyBits(
+     SURFOBJ  *psoDest,
+     SURFOBJ  *psoSrc,
+@@ -3725,7 +3726,7 @@ VOID APIENTRY EngMovePointer(
+     RECTL    *prcl
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngPlgBlt(
+     SURFOBJ         *psoTrg,
+     SURFOBJ         *psoSrc,
+@@ -3795,14 +3796,14 @@ LONG APIENTRY HT_ComputeRGBGammaTable(
+     _Out_writes_bytes_(GammaTableEntries * 3)   LPBYTE  pGammaTable
+     );
+ 
+-LONG APIENTRY HT_Get8BPPFormatPalette(
++_Windows_SupportedOS_Windows2000_ LONG APIENTRY HT_Get8BPPFormatPalette(
+     _Out_opt_   LPPALETTEENTRY  pPaletteEntry,
+     _In_        USHORT          RedGamma,
+     _In_        USHORT          GreenGamma,
+     _In_        USHORT          BlueGamma
+     );
+ 
+-LONG APIENTRY HT_Get8BPPMaskPalette(
++_Windows_SupportedOS_Windows2000_ LONG APIENTRY HT_Get8BPPMaskPalette(
+     _Out_opt_   LPPALETTEENTRY  pPaletteEntry,
+     _In_        BOOL            Use8BPPMaskPal,
+     _In_        BYTE            CMYMask,
+@@ -4057,12 +4058,12 @@ PVOID APIENTRY EngMapModule(
+ // callback for extra PDEV information
+ //
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ LPWSTR APIENTRY EngGetPrinterDataFileName(
+     _In_                    HDEV hdev
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ LPWSTR APIENTRY EngGetDriverName(
+     _In_                    HDEV hdev
+     );
+@@ -4088,12 +4089,12 @@ BOOL APIENTRY EngGetType1FontList(
+ // Manipulating resource sections
+ //
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) ENGAPI
+ HANDLE APIENTRY EngLoadModule(
+     _In_                    LPWSTR pwsz
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ PVOID APIENTRY EngFindResource(
+     _In_                    HANDLE h,
+     _In_                    int    iName,
+@@ -4101,7 +4102,7 @@ PVOID APIENTRY EngFindResource(
+     _Out_                   PULONG pulSize
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngFreeModule(
+     _In_                    HANDLE h
+     );
+@@ -4175,17 +4176,17 @@ HSEMAPHORE APIENTRY EngCreateSemaphore(
+     VOID
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngAcquireSemaphore(
+     _In_                    HSEMAPHORE hsem
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngReleaseSemaphore(
+     _In_                    HSEMAPHORE hsem
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngDeleteSemaphore(
+     _In_                    HSEMAPHORE hsem
+     );
+@@ -4270,7 +4271,7 @@ VOID APIENTRY EngDeleteSafeSemaphore(
+     _Inout_                 ENGSAFESEMAPHORE *pssem
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngMultiByteToUnicodeN(
+     _Out_writes_bytes_to_(MaxBytesInUnicodeString, *BytesInUnicodeString)   LPWSTR UnicodeString,
+     _In_                                                                ULONG MaxBytesInUnicodeString,
+@@ -4279,7 +4280,7 @@ VOID APIENTRY EngMultiByteToUnicodeN(
+     _In_                                                                ULONG BytesInMultiByteString
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngUnicodeToMultiByteN(
+     _Out_writes_bytes_to_(MaxBytesInMultiByteString, *BytesInMultiByteString)   PCHAR MultiByteString,
+     _In_                                                                    ULONG MaxBytesInMultiByteString,
+@@ -4503,12 +4504,12 @@ typedef struct _ENG_TIME_FIELDS {
+     USHORT usWeekday;     // range [0..6] == [Sunday..Saturday]
+ } ENG_TIME_FIELDS, *PENG_TIME_FIELDS;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngQueryLocalTime(
+     _Out_                   PENG_TIME_FIELDS
+     );
+ 
+-_Success_(return != 0)
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ ENGAPI
+ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
+     _In_                    INT nCodePage,
+@@ -4516,7 +4517,7 @@ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
+     _In_                    INT cChars
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ INT APIENTRY EngMultiByteToWideChar(
+     _In_                                    UINT CodePage,
+     _Out_writes_bytes_opt_(BytesInWideCharString) _Null_terminated_ LPWSTR WideCharString,
+@@ -4525,7 +4526,7 @@ INT APIENTRY EngMultiByteToWideChar(
+     _In_                                    INT BytesInMultiByteString
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ INT APIENTRY EngWideCharToMultiByte(
+     _In_                                    UINT CodePage,
+     _In_reads_bytes_opt_(BytesInWideCharString) _Null_terminated_ LPWSTR WideCharString,
+@@ -4534,7 +4535,7 @@ INT APIENTRY EngWideCharToMultiByte(
+     _In_                                    INT BytesInMultiByteString
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngGetCurrentCodePage(
+     _Out_   PUSHORT OemCodePage,
+     _Out_   PUSHORT AnsiCodePage
+@@ -4846,7 +4847,7 @@ typedef BOOL   (APIENTRY *PFN_DrvBitBlt)(SURFOBJ *,SURFOBJ *,SURFOBJ *,CLIPOBJ *
+ typedef BOOL   (APIENTRY *PFN_DrvRealizeBrush)(BRUSHOBJ *,SURFOBJ *,SURFOBJ *,SURFOBJ *,XLATEOBJ *,ULONG);
+ typedef BOOL   (APIENTRY *PFN_DrvCopyBits)(SURFOBJ *,SURFOBJ *,CLIPOBJ *,XLATEOBJ *,RECTL *,POINTL *);
+ typedef ULONG  (APIENTRY *PFN_DrvDitherColor)(DHPDEV, ULONG, ULONG, ULONG *);
+-typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmap)(DHPDEV, SIZEL, ULONG);
++_Win32_RAIIFree_(DeleteObject, -1, 0) typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmap)(DHPDEV, SIZEL, ULONG);
+ typedef VOID   (APIENTRY *PFN_DrvDeleteDeviceBitmap)(DHSURF);
+ typedef BOOL   (APIENTRY *PFN_DrvSetPalette)(DHPDEV, PALOBJ *, FLONG, ULONG, ULONG);
+ typedef ULONG  (APIENTRY *PFN_DrvEscape)(SURFOBJ *, ULONG, ULONG, PVOID, ULONG, PVOID);
+@@ -4905,14 +4906,14 @@ typedef BOOL   (APIENTRY *PFN_DrvQueryPerBandInfo)(SURFOBJ *,PERBANDINFO *);
+ typedef BOOL   (APIENTRY *PFN_DrvEnableDirectDraw)(DHPDEV, DD_CALLBACKS *,DD_SURFACECALLBACKS *, DD_PALETTECALLBACKS *);
+ typedef VOID   (APIENTRY *PFN_DrvDisableDirectDraw)(DHPDEV);
+ typedef BOOL   (APIENTRY *PFN_DrvGetDirectDrawInfo)(DHPDEV, DD_HALINFO *, DWORD *, VIDEOMEMORY *, DWORD *, DWORD *);
+-typedef HANDLE (APIENTRY *PFN_DrvIcmCreateColorTransform)(DHPDEV,LPLOGCOLORSPACEW,LPVOID,ULONG,LPVOID,ULONG,LPVOID,ULONG,DWORD);
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef HANDLE (APIENTRY *PFN_DrvIcmCreateColorTransform)(DHPDEV,LPLOGCOLORSPACEW,LPVOID,ULONG,LPVOID,ULONG,LPVOID,ULONG,DWORD);
+ typedef BOOL   (APIENTRY *PFN_DrvIcmDeleteColorTransform)(DHPDEV,HANDLE);
+ typedef BOOL   (APIENTRY *PFN_DrvIcmCheckBitmapBits)(DHPDEV,HANDLE,SURFOBJ *,PBYTE);
+ typedef BOOL   (APIENTRY *PFN_DrvIcmSetDeviceGammaRamp)(DHPDEV,ULONG,LPVOID);
+ typedef BOOL   (APIENTRY *PFN_DrvAlphaBlend)(SURFOBJ*,SURFOBJ*,CLIPOBJ*,XLATEOBJ*,PRECTL,PRECTL,BLENDOBJ *);
+ typedef BOOL   (APIENTRY *PFN_DrvGradientFill)(SURFOBJ*,CLIPOBJ*,XLATEOBJ*,TRIVERTEX*,ULONG,PVOID,ULONG,RECTL *,POINTL *,ULONG);
+ typedef BOOL   (APIENTRY *PFN_DrvQueryDeviceSupport)(SURFOBJ*,XLATEOBJ*,XFORMOBJ*,ULONG,ULONG,PVOID,ULONG,PVOID);
+-typedef HBITMAP (APIENTRY *PFN_DrvDeriveSurface)(DD_DIRECTDRAW_GLOBAL*,DD_SURFACE_LOCAL*);
++_Win32_RAIIFree_(DeleteObject, -1, 0) typedef HBITMAP (APIENTRY *PFN_DrvDeriveSurface)(DD_DIRECTDRAW_GLOBAL*,DD_SURFACE_LOCAL*);
+ typedef VOID   (APIENTRY *PFN_DrvSynchronizeSurface)(SURFOBJ*, RECTL*, FLONG);
+ typedef VOID   (APIENTRY *PFN_DrvNotify)(SURFOBJ*, ULONG, PVOID);
+ 
+@@ -4940,7 +4941,7 @@ typedef struct _DRH_APIBITMAPDATA
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmapEx)(DHPDEV, SIZEL, ULONG, DWORD, DHSURF, DWORD, DWORD, HANDLE*);
++_Win32_RAIIFree_(DeleteObject, -1, 0) typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmapEx)(DHPDEV, SIZEL, ULONG, DWORD, DHSURF, DWORD, DWORD, HANDLE*);
+ #else
+ typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmapEx)(DHPDEV, SIZEL, ULONG, DWORD, DHSURF, DWORD, HANDLE*);
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)

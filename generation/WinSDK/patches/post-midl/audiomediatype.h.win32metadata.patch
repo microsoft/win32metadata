@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h b/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
-index cab0f940f6..f1845b8ae0 100644
+index cab0f940f6..8ddfb6a869 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
 @@ -19,6 +19,7 @@
@@ -15,7 +15,7 @@ index cab0f940f6..f1845b8ae0 100644
  #if !defined( _UNCOMPRESSEDAUDIOFORMAT_ )
  #define _UNCOMPRESSEDAUDIOFORMAT_
 -typedef struct _UNCOMPRESSEDAUDIOFORMAT
-+typedef struct _Windows_SupportedOS_WindowsVista_ _UNCOMPRESSEDAUDIOFORMAT
++typedef struct  _UNCOMPRESSEDAUDIOFORMAT
      {
      GUID guidFormatType;
      DWORD dwSamplesPerFrame;
@@ -23,23 +23,23 @@ index cab0f940f6..f1845b8ae0 100644
      IAudioMediaType : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_WindowsVista_
++        
          virtual HRESULT STDMETHODCALLTYPE IsCompressedFormat( 
              /* [annotation][out] */ 
              _Out_  BOOL *pfCompressed) = 0;
          
-+        _Windows_SupportedOS_WindowsVista_
-+        _Win32_PreserveResult_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE IsEqual( 
              /* [annotation][in] */ 
              _In_  IAudioMediaType *pIAudioType,
              /* [annotation][out] */ 
              _Out_  DWORD *pdwFlags) = 0;
          
-+        _Windows_SupportedOS_WindowsVista_
++        
          virtual const WAVEFORMATEX *STDMETHODCALLTYPE GetAudioFormat( void) = 0;
          
-+        _Windows_SupportedOS_WindowsVista_
++        
          virtual HRESULT STDMETHODCALLTYPE GetUncompressedAudioFormat( 
              /* [annotation][out] */ 
              _Out_  UNCOMPRESSEDAUDIOFORMAT *pUncompressedAudioFormat) = 0;

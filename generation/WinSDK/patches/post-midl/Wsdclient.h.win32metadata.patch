@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
-index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391a93549a9 100644
+index 70827a2c9f..bc518a899d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
 @@ -118,6 +118,7 @@ extern "C"{
@@ -10,12 +10,39 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -170,7 +171,7 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
+@@ -130,13 +131,13 @@ extern "C"{
+ 
+ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateDeviceProxy(
+     _In_ LPCWSTR pszDeviceId,
+     _In_ LPCWSTR pszLocalId,
+     IWSDXMLContext* pContext,
+     _Outptr_ IWSDDeviceProxy** ppDeviceProxy);
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateDeviceProxyAdvanced(
+     _In_ LPCWSTR pszDeviceId,
+     IWSDAddress* pDeviceAddress,
+@@ -144,7 +145,7 @@ WSDCreateDeviceProxyAdvanced(
+     IWSDXMLContext* pContext,
+     _Outptr_ IWSDDeviceProxy** ppDeviceProxy);
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-HRESULT WINAPI
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI
+ WSDCreateDeviceProxy2(
+     _In_ LPCWSTR pszDeviceId,
+     _In_ LPCWSTR pszLocalId,
+@@ -169,8 +170,8 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("1860d430-b24c-4975-9f90-dbb39baa24ec")
+-    MIDL_INTERFACE("1860d430-b24c-4975-9f90-dbb39baa24ec")
 -    IWSDEndpointProxy : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEndpointProxy : public IUnknown
++    MIDL_INTERFACE("1860d430-b24c-4975-9f90-dbb39baa24ec") _Windows_SupportedOS_WindowsVista_ 
++      IWSDEndpointProxy : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SendOneWayRequest( 
@@ -28,12 +55,14 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
      {
          CONST_VTBL struct IWSDEndpointProxyVtbl *lpVtbl;
      };
-@@ -363,7 +364,7 @@ EXTERN_C const IID IID_IWSDMetadataExchange;
+@@ -362,8 +363,8 @@ EXTERN_C const IID IID_IWSDMetadataExchange;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("06996d57-1d67-4928-9307-3d7833fdb846")
+-    MIDL_INTERFACE("06996d57-1d67-4928-9307-3d7833fdb846")
 -    IWSDMetadataExchange : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDMetadataExchange : public IUnknown
++    MIDL_INTERFACE("06996d57-1d67-4928-9307-3d7833fdb846") _Windows_SupportedOS_WindowsVista_ 
++      IWSDMetadataExchange : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
@@ -46,12 +75,14 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
      {
          CONST_VTBL struct IWSDMetadataExchangeVtbl *lpVtbl;
      };
-@@ -450,7 +451,7 @@ EXTERN_C const IID IID_IWSDServiceProxy;
+@@ -449,8 +450,8 @@ EXTERN_C const IID IID_IWSDServiceProxy;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("d4c7fb9c-03ab-4175-9d67-094fafebf487")
+-    MIDL_INTERFACE("d4c7fb9c-03ab-4175-9d67-094fafebf487")
 -    IWSDServiceProxy : public IWSDMetadataExchange
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDServiceProxy : public IWSDMetadataExchange
++    MIDL_INTERFACE("d4c7fb9c-03ab-4175-9d67-094fafebf487") _Windows_SupportedOS_WindowsVista_ 
++      IWSDServiceProxy : public IWSDMetadataExchange
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE BeginGetMetadata( 
@@ -82,12 +113,14 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
      {
          CONST_VTBL struct IWSDServiceProxyEventingVtbl *lpVtbl;
      };
-@@ -1187,7 +1188,7 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
+@@ -1186,8 +1187,8 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("eee0c031-c578-4c0e-9a3b-973c35f409db")
+-    MIDL_INTERFACE("eee0c031-c578-4c0e-9a3b-973c35f409db")
 -    IWSDDeviceProxy : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDDeviceProxy : public IUnknown
++    MIDL_INTERFACE("eee0c031-c578-4c0e-9a3b-973c35f409db") _Windows_SupportedOS_WindowsVista_ 
++      IWSDDeviceProxy : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Init( 
@@ -100,12 +133,14 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
      {
          CONST_VTBL struct IWSDDeviceProxyVtbl *lpVtbl;
      };
-@@ -1415,7 +1416,7 @@ EXTERN_C const IID IID_IWSDAsyncResult;
+@@ -1414,8 +1415,8 @@ EXTERN_C const IID IID_IWSDAsyncResult;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("11a9852a-8dd8-423e-b537-9356db4fbfb8")
+-    MIDL_INTERFACE("11a9852a-8dd8-423e-b537-9356db4fbfb8")
 -    IWSDAsyncResult : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncResult : public IUnknown
++    MIDL_INTERFACE("11a9852a-8dd8-423e-b537-9356db4fbfb8") _Windows_SupportedOS_WindowsVista_ 
++      IWSDAsyncResult : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetCallback( 
@@ -118,12 +153,14 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
      {
          CONST_VTBL struct IWSDAsyncResultVtbl *lpVtbl;
      };
-@@ -1576,7 +1577,7 @@ EXTERN_C const IID IID_IWSDAsyncCallback;
+@@ -1575,8 +1576,8 @@ EXTERN_C const IID IID_IWSDAsyncCallback;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("a63e109d-ce72-49e2-ba98-e845f5ee1666")
+-    MIDL_INTERFACE("a63e109d-ce72-49e2-ba98-e845f5ee1666")
 -    IWSDAsyncCallback : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncCallback : public IUnknown
++    MIDL_INTERFACE("a63e109d-ce72-49e2-ba98-e845f5ee1666") _Windows_SupportedOS_WindowsVista_ 
++      IWSDAsyncCallback : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE AsyncOperationComplete( 
@@ -136,12 +173,14 @@ index 70827a2c9fe8bcb76bec350e7dff367d697dab4c..f66232a359a6d8ffa8b32bca86873391
      {
          CONST_VTBL struct IWSDAsyncCallbackVtbl *lpVtbl;
      };
-@@ -1667,7 +1668,7 @@ EXTERN_C const IID IID_IWSDEventingStatus;
+@@ -1666,8 +1667,8 @@ EXTERN_C const IID IID_IWSDEventingStatus;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("49b17f52-637a-407a-ae99-fbe82a4d38c0")
+-    MIDL_INTERFACE("49b17f52-637a-407a-ae99-fbe82a4d38c0")
 -    IWSDEventingStatus : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEventingStatus : public IUnknown
++    MIDL_INTERFACE("49b17f52-637a-407a-ae99-fbe82a4d38c0") _Windows_SupportedOS_WindowsVista_ 
++      IWSDEventingStatus : public IUnknown
      {
      public:
          virtual void STDMETHODCALLTYPE SubscriptionRenewed( 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h b/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
-index 92d9778999179dd56231b2897ef2610febfa137a..8645533d399930a4318095dd2d5e94b893770f50 100644
+index 92d9778999..1a3a2d39be 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
 @@ -7,6 +7,7 @@
@@ -15,7 +15,7 @@ index 92d9778999179dd56231b2897ef2610febfa137a..8645533d399930a4318095dd2d5e94b8
  } MANIPULATION_RAILS_STATE;
  
 -typedef struct MANIPULATION_TRANSFORM
-+typedef struct _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ MANIPULATION_TRANSFORM
++typedef struct   MANIPULATION_TRANSFORM
  {
      float translationX;
      float translationY;
@@ -27,7 +27,8 @@ index 92d9778999179dd56231b2897ef2610febfa137a..8645533d399930a4318095dd2d5e94b8
  HRESULT
  WINAPI
  CreateInteractionContext(
-     _Out_writes_(1) HINTERACTIONCONTEXT *interactionContext);
+-    _Out_writes_(1) HINTERACTIONCONTEXT *interactionContext);
++    _Win32_RAIIFree_(DestroyInteractionContext, -1, 0) _Out_writes_(1) HINTERACTIONCONTEXT *interactionContext);
  
 +_Windows_SupportedOS_Windows8_
  HRESULT
@@ -39,3 +40,156 @@ index 92d9778999179dd56231b2897ef2610febfa137a..8645533d399930a4318095dd2d5e94b8
  HRESULT
  WINAPI
  RegisterOutputCallbackInteractionContext(
+@@ -334,56 +338,56 @@ RegisterOutputCallbackInteractionContext2(
+     _In_opt_ void *clientData);
+ #endif
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SetInteractionConfigurationInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ UINT32 configurationCount,
+     _In_reads_(configurationCount) const INTERACTION_CONTEXT_CONFIGURATION *configuration);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ GetInteractionConfigurationInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ UINT32 configurationCount,
+     _Inout_updates_(configurationCount) INTERACTION_CONTEXT_CONFIGURATION *configuration);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SetPropertyInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ INTERACTION_CONTEXT_PROPERTY contextProperty,
+     _In_ UINT32 value);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ GetPropertyInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ INTERACTION_CONTEXT_PROPERTY contextProperty,
+     _Out_writes_(1) UINT32 *value);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SetInertiaParameterInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ INERTIA_PARAMETER inertiaParameter,
+     _In_ float value);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ GetInertiaParameterInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ INERTIA_PARAMETER inertiaParameter,
+     _Out_writes_(1) float *value);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SetCrossSlideParametersInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ UINT32 parameterCount,
+     _In_reads_(parameterCount) CROSS_SLIDE_PARAMETER *crossSlideParameters);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+     GetCrossSlideParameterInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+@@ -434,45 +438,45 @@ GetTranslationParameterInteractionContext(
+     _Out_ float *value);
+ #endif
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SetMouseWheelParameterInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ MOUSE_WHEEL_PARAMETER parameter,
+     _In_ float value);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ GetMouseWheelParameterInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ MOUSE_WHEEL_PARAMETER parameter,
+     _Out_writes_(1) float *value);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ ResetInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ GetStateInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_opt_ const POINTER_INFO *pointerInfo,
+     _Out_writes_(1) INTERACTION_STATE *state);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ AddPointerInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ UINT32 pointerId);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ RemovePointerInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ UINT32 pointerId);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ ProcessPointerFramesInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+@@ -480,29 +484,29 @@ ProcessPointerFramesInteractionContext(
+     _In_ UINT32 pointerCount,
+     _In_reads_(entriesCount * pointerCount) const POINTER_INFO *pointerInfo);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ BufferPointerPacketsInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,
+     _In_ UINT32 entriesCount,
+     _In_reads_(entriesCount) const POINTER_INFO *pointerInfo);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ ProcessBufferedPacketsInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ ProcessInertiaInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ StopInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SetPivotInteractionContext(
+     _In_ HINTERACTIONCONTEXT interactionContext,

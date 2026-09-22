@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h b/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
-index 61e233670b..cd711edbd5 100644
+index 61e233670b..4879303d9e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
 @@ -20,6 +20,7 @@ Revision History:
@@ -15,7 +15,7 @@ index 61e233670b..cd711edbd5 100644
      STDMETHOD(RawReadCommand)(THIS_ _Out_writes_bytes_(*lpdwNumberOfBytes) LPVOID lpBuffer, _Inout_ LPDWORD lpdwNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
      STDMETHOD(RawWriteCommand)(THIS_ _In_reads_bytes_(nNumberOfBytes) LPVOID lpBuffer, DWORD nNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
 -    STDMETHOD(SetNotificationHandle)(THIS_ _In_opt_ HANDLE hEvent) PURE;
-+    STDMETHOD(SetNotificationHandle)(THIS_ _Win32_Retained_ _In_opt_ HANDLE hEvent) PURE;
++    STDMETHOD(SetNotificationHandle)(THIS_  _In_opt_ HANDLE hEvent) PURE;
      STDMETHOD(GetNotificationData)(THIS_ _Out_ LPSTINOTIFY lpNotify) PURE;
      STDMETHOD(GetLastErrorInfo) (THIS_ _Out_ STI_ERROR_INFO *pLastErrorInfo) PURE;
  } ;

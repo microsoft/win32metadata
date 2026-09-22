@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vss.h b/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
-index db02e892159e06eb5a18a080856ce78013125274..6f6ff590b5d0fc9355a76166d2479ac1b12c104f 100644
+index db02e89215..95a0aee165 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
 @@ -74,6 +74,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index db02e892159e06eb5a18a080856ce78013125274..6f6ff590b5d0fc9355a76166d2479ac1
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -422,7 +423,7 @@ EXTERN_C const IID IID_IVssEnumObject;
+@@ -421,8 +422,8 @@ EXTERN_C const IID IID_IVssEnumObject;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("AE1C7110-2F60-11d3-8A39-00C04F72D8E3")
+-    MIDL_INTERFACE("AE1C7110-2F60-11d3-8A39-00C04F72D8E3")
 -    IVssEnumObject : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssEnumObject : public IUnknown
++    MIDL_INTERFACE("AE1C7110-2F60-11d3-8A39-00C04F72D8E3") _Windows_SupportedOS_WindowsXP_ 
++      IVssEnumObject : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -28,12 +30,14 @@ index db02e892159e06eb5a18a080856ce78013125274..6f6ff590b5d0fc9355a76166d2479ac1
      {
          CONST_VTBL struct IVssEnumObjectVtbl *lpVtbl;
      };
-@@ -552,7 +553,7 @@ EXTERN_C const IID IID_IVssAsync;
+@@ -551,8 +552,8 @@ EXTERN_C const IID IID_IVssAsync;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("507C37B4-CF5B-4e95-B0AF-14EB9767467E")
+-    MIDL_INTERFACE("507C37B4-CF5B-4e95-B0AF-14EB9767467E")
 -    IVssAsync : public IUnknown
-+    _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssAsync : public IUnknown
++    MIDL_INTERFACE("507C37B4-CF5B-4e95-B0AF-14EB9767467E") _Windows_SupportedOS_WindowsXP_ 
++      IVssAsync : public IUnknown
      {
      public:
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
-index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610bc6dd8d6 100644
+index a93eb437f1..e2eedcd346 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
 @@ -27,6 +27,7 @@ Revision History:
@@ -15,7 +15,7 @@ index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610
  } BATTERY_QUERY_INFORMATION, *PBATTERY_QUERY_INFORMATION;
  
 -typedef struct _BATTERY_INFORMATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_INFORMATION {
++typedef struct   _BATTERY_INFORMATION {
      ULONG       Capabilities;
      UCHAR       Technology;
      UCHAR       Reserved[3];
@@ -24,7 +24,7 @@ index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610
  //
  
 -typedef struct _BATTERY_SET_INFORMATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_SET_INFORMATION {
++typedef struct   _BATTERY_SET_INFORMATION {
      ULONG                         BatteryTag;
      BATTERY_SET_INFORMATION_LEVEL InformationLevel;
      UCHAR                         Buffer[1];
@@ -33,7 +33,7 @@ index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610
  
  
 -typedef struct _BATTERY_WAIT_STATUS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_WAIT_STATUS {
++typedef struct   _BATTERY_WAIT_STATUS {
      ULONG       BatteryTag;
      ULONG       Timeout;
      ULONG       PowerState;
@@ -42,7 +42,7 @@ index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610
  } BATTERY_WAIT_STATUS, *PBATTERY_WAIT_STATUS;
  
 -typedef struct _BATTERY_STATUS {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_STATUS {
++typedef struct   _BATTERY_STATUS {
      ULONG       PowerState;
      ULONG       Capacity;
      ULONG       Voltage;
@@ -51,7 +51,7 @@ index a93eb437f10315a0a2eac8fe197023ca2c1e8848..f18b24ce1f5a85b0263e19c8ff4cd610
  
  // Struct for accessing the packed date format in BatteryManufactureDate.
 -typedef struct _BATTERY_MANUFACTURE_DATE
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _BATTERY_MANUFACTURE_DATE
++typedef struct   _BATTERY_MANUFACTURE_DATE
  {
      UCHAR   Day;
      UCHAR   Month;

@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
+index 814463bbaf..fbc45952eb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h
 @@ -17,6 +17,7 @@
@@ -21,8 +22,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  CreatePipe(
 -    _Out_ PHANDLE hReadPipe,
 -    _Out_ PHANDLE hWritePipe,
-+    _Out_ _Win32_RAIIFree_(CloseHandle) PHANDLE hReadPipe,
-+    _Out_ _Win32_RAIIFree_(CloseHandle) PHANDLE hWritePipe,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  PHANDLE hReadPipe,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  PHANDLE hWritePipe,
      _In_opt_ LPSECURITY_ATTRIBUTES lpPipeAttributes,
      _In_ DWORD nSize
      );
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -49,6 +56,8 @@ DisconnectNamedPipe(
+@@ -49,16 +56,20 @@ DisconnectNamedPipe(
      _In_ HANDLE hNamedPipe
      );
  
@@ -50,7 +51,11 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -59,6 +68,8 @@ SetNamedPipeHandleState(
+ SetNamedPipeHandleState(
+     _In_ HANDLE hNamedPipe,
+-    _In_opt_ LPDWORD lpMode,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _In_opt_ LPDWORD lpMode,
+     _In_opt_ LPDWORD lpMaxCollectionCount,
      _In_opt_ LPDWORD lpCollectDataTimeout
      );
  
@@ -68,22 +73,31 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -92,6 +105,9 @@ TransactNamedPipe(
+@@ -92,13 +105,16 @@ TransactNamedPipe(
  
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
-+_Win32_RAIIFree_(CloseHandle, INVALID_HANDLE_VALUE)
++_Win32_RAIIFree_(CloseHandle, -1, 0) 
++
++
  WINBASEAPI
  HANDLE
  WINAPI
+ CreateNamedPipeW(
+     _In_ LPCWSTR lpName,
+-    _In_ DWORD dwOpenMode,
+-    _In_ DWORD dwPipeMode,
++    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) _In_ DWORD dwOpenMode,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _In_ DWORD dwPipeMode,
+     _In_ DWORD nMaxInstances,
+     _In_ DWORD nOutBufferSize,
+     _In_ DWORD nInBufferSize,
 @@ -110,6 +126,8 @@ CreateNamedPipeW(
  #define CreateNamedPipe  CreateNamedPipeW
  #endif
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  BOOL
  WINAPI
@@ -91,8 +105,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  
  #if (_WIN32_WINNT >= 0x0600)
  
-+_Windows_SupportedOS_WindowsVista_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  BOOL
  WINAPI
@@ -105,7 +119,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINADVAPI
  _Must_inspect_result_
  BOOL
-@@ -156,6 +178,8 @@ ImpersonateNamedPipeClient(
+@@ -156,23 +178,27 @@ ImpersonateNamedPipeClient(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -114,21 +128,33 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namedpipeapi.h b/generati
  WINBASEAPI
  BOOL
  WINAPI
-@@ -167,6 +191,8 @@ GetNamedPipeInfo(
+ GetNamedPipeInfo(
+     _In_ HANDLE hNamedPipe,
+-    _Out_opt_ LPDWORD lpFlags,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _Out_opt_ LPDWORD lpFlags,
+     _Out_opt_ LPDWORD lpOutBufferSize,
+     _Out_opt_ LPDWORD lpInBufferSize,
      _Out_opt_ LPDWORD lpMaxInstances
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  BOOL
  WINAPI
+ GetNamedPipeHandleStateW(
+     _In_ HANDLE hNamedPipe,
+-    _Out_opt_ LPDWORD lpState,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _Out_opt_ LPDWORD lpState,
+     _Out_opt_ LPDWORD lpCurInstances,
+     _Out_opt_ LPDWORD lpMaxCollectionCount,
+     _Out_opt_ LPDWORD lpCollectDataTimeout,
 @@ -190,6 +216,8 @@ GetNamedPipeHandleStateW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows2000_
-+_Win32_SetLastError_
++
++
  WINBASEAPI
  BOOL
  WINAPI

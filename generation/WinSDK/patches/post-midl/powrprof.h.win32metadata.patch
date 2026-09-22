@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
-index 6a4a1b5661..d18cc85f4f 100644
+index 7d68d1419c..23bb18a3f2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
 @@ -18,6 +18,7 @@
@@ -14,7 +14,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  // GLOBAL_MACHINE_POWER_POLICY stores per machine data for which there is no UI.
  // GLOBAL_USER_POWER_POLICY stores the per user data.
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _GLOBAL_MACHINE_POWER_POLICY{
      ULONG                   Revision;
      SYSTEM_POWER_STATE      LidOpenWakeAc;
@@ -22,7 +22,7 @@ index 6a4a1b5661..d18cc85f4f 100644
      ULONG                   BroadcastCapacityResolution;
  } GLOBAL_MACHINE_POWER_POLICY, *PGLOBAL_MACHINE_POWER_POLICY;
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _GLOBAL_USER_POWER_POLICY{
      ULONG                   Revision;
      POWER_ACTION_POLICY     PowerButtonAc;
@@ -30,7 +30,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  // Structure to manage global power policies at the user level. This structure
  // contains data which is common across all power policy profiles.
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _GLOBAL_POWER_POLICY{
      GLOBAL_USER_POWER_POLICY    user;
      GLOBAL_MACHINE_POWER_POLICY mach;
@@ -38,7 +38,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  // USER_POWER_POLICY. the MACHINE_POWER_POLICY stores per machine data for
  // which there is no UI.  USER_POWER_POLICY stores the per user data.
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _MACHINE_POWER_POLICY{
      ULONG                   Revision;       // 1
  
@@ -46,7 +46,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  // deprecated
  //
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _MACHINE_PROCESSOR_POWER_POLICY {
      ULONG                   Revision;       // 1
  
@@ -54,7 +54,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  } MACHINE_PROCESSOR_POWER_POLICY, *PMACHINE_PROCESSOR_POWER_POLICY;
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _USER_POWER_POLICY {
      ULONG                   Revision;       // 1
  
@@ -62,7 +62,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  // Structure to manage power policies at the user level. This structure
  // contains data which is unique across power policy profiles.
  
-+_Windows_SupportedOS_WindowsXP_
++
  typedef struct _POWER_POLICY {
      USER_POWER_POLICY       user;
      MACHINE_POWER_POLICY    mach;
@@ -205,7 +205,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  // Enum which defines which field inside of a
  // power setting is being accessed.
  //
-+_Windows_SupportedOS_WindowsVista_
++
  typedef enum _POWER_DATA_ACCESSOR {
  
          //
@@ -222,7 +222,7 @@ index 6a4a1b5661..d18cc85f4f 100644
      );
  typedef DEVICE_NOTIFY_CALLBACK_ROUTINE* PDEVICE_NOTIFY_CALLBACK_ROUTINE;
  
-+_Windows_SupportedOS_Windows8_
++
  typedef struct _DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
      PDEVICE_NOTIFY_CALLBACK_ROUTINE Callback;
      PVOID Context;
@@ -260,25 +260,25 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
  
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerGetUserConfiguredACPowerMode(
      _Out_ GUID *PowerModeGuid
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerGetUserConfiguredDCPowerMode(
      _Out_ GUID *PowerModeGuid
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerSetUserConfiguredACPowerMode(
      _In_ const GUID *PowerModeGuid
      );
  
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerSetUserConfiguredDCPowerMode(
      _In_ const GUID *PowerModeGuid
@@ -296,7 +296,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Windows_SupportedOS_WindowsVista_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerReadDCValueIndex (
      _In_opt_ HKEY RootPowerKey,
@@ -386,7 +386,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Windows_SupportedOS_WindowsVista_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerReadACDefaultIndex (
      _In_opt_ HKEY RootPowerKey,
@@ -395,7 +395,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Windows_SupportedOS_WindowsVista_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerReadDCDefaultIndex (
      _In_opt_ HKEY RootPowerKey,
@@ -502,7 +502,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Windows_SupportedOS_WindowsVista_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerWriteACDefaultIndex (
      _In_opt_ HKEY RootSystemPowerKey,
@@ -511,7 +511,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Windows_SupportedOS_WindowsVista_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerWriteDCDefaultIndex (
      _In_opt_ HKEY RootSystemPowerKey,
@@ -596,7 +596,24 @@ index 6a4a1b5661..d18cc85f4f 100644
  STDAPI_(DWORD)
  PowerEnumerate (
      _In_opt_ HKEY RootPowerKey,
-@@ -868,6 +989,8 @@ PowerOpenSystemPowerKey (
+@@ -852,7 +973,7 @@ PowerEnumerate (
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ STDAPI_(DWORD)
+ PowerOpenUserPowerKey (
+-    _Out_ HKEY *phUserPowerKey,
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phUserPowerKey,
+     _In_ REGSAM Access,
+     _In_ BOOL OpenExisting
+     );
+@@ -861,13 +982,15 @@ PowerOpenUserPowerKey (
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ STDAPI_(DWORD)
+ PowerOpenSystemPowerKey (
+-    _Out_ HKEY *phSystemPowerKey,
++    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ HKEY *phSystemPowerKey,
+     _In_ REGSAM Access,
+     _In_ BOOL OpenExisting
+     );
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -677,7 +694,7 @@ index 6a4a1b5661..d18cc85f4f 100644
  
  #define THERMAL_EVENT_VERSION 1
  
-+_Windows_SupportedOS_Windows81_
++
  typedef struct _THERMAL_EVENT {
      ULONG Version;
      ULONG Size;
@@ -690,3 +707,91 @@ index 6a4a1b5661..d18cc85f4f 100644
  STDAPI_(DWORD)
  PowerReportThermalEvent (
      _In_ PTHERMAL_EVENT Event
+@@ -1108,4 +1246,87 @@ PowerReportThermalEvent (
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("PDCAP_D0_SUPPORTED")
++#undef PDCAP_D0_SUPPORTED
++#pragma push_macro("PDCAP_D1_SUPPORTED")
++#undef PDCAP_D1_SUPPORTED
++#pragma push_macro("PDCAP_D2_SUPPORTED")
++#undef PDCAP_D2_SUPPORTED
++#pragma push_macro("PDCAP_D3_SUPPORTED")
++#undef PDCAP_D3_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_D0_SUPPORTED")
++#undef PDCAP_WAKE_FROM_D0_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_D1_SUPPORTED")
++#undef PDCAP_WAKE_FROM_D1_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_D2_SUPPORTED")
++#undef PDCAP_WAKE_FROM_D2_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_D3_SUPPORTED")
++#undef PDCAP_WAKE_FROM_D3_SUPPORTED
++#pragma push_macro("PDCAP_WARM_EJECT_SUPPORTED")
++#undef PDCAP_WARM_EJECT_SUPPORTED
++#pragma push_macro("PDCAP_S0_SUPPORTED")
++#undef PDCAP_S0_SUPPORTED
++#pragma push_macro("PDCAP_S1_SUPPORTED")
++#undef PDCAP_S1_SUPPORTED
++#pragma push_macro("PDCAP_S2_SUPPORTED")
++#undef PDCAP_S2_SUPPORTED
++#pragma push_macro("PDCAP_S3_SUPPORTED")
++#undef PDCAP_S3_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_S0_SUPPORTED")
++#undef PDCAP_WAKE_FROM_S0_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_S1_SUPPORTED")
++#undef PDCAP_WAKE_FROM_S1_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_S2_SUPPORTED")
++#undef PDCAP_WAKE_FROM_S2_SUPPORTED
++#pragma push_macro("PDCAP_WAKE_FROM_S3_SUPPORTED")
++#undef PDCAP_WAKE_FROM_S3_SUPPORTED
++#pragma push_macro("PDCAP_S4_SUPPORTED")
++#undef PDCAP_S4_SUPPORTED
++#pragma push_macro("PDCAP_S5_SUPPORTED")
++#undef PDCAP_S5_SUPPORTED
++enum [[clang::flag_enum]] DEVICE_POWER_CAPABILITIES : unsigned int
++{
++    PDCAP_D0_SUPPORTED = 1U,
++    PDCAP_D1_SUPPORTED = 2U,
++    PDCAP_D2_SUPPORTED = 4U,
++    PDCAP_D3_SUPPORTED = 8U,
++    PDCAP_WAKE_FROM_D0_SUPPORTED = 16U,
++    PDCAP_WAKE_FROM_D1_SUPPORTED = 32U,
++    PDCAP_WAKE_FROM_D2_SUPPORTED = 64U,
++    PDCAP_WAKE_FROM_D3_SUPPORTED = 128U,
++    PDCAP_WARM_EJECT_SUPPORTED = 256U,
++    PDCAP_S0_SUPPORTED = 65536U,
++    PDCAP_S1_SUPPORTED = 131072U,
++    PDCAP_S2_SUPPORTED = 262144U,
++    PDCAP_S3_SUPPORTED = 524288U,
++    PDCAP_WAKE_FROM_S0_SUPPORTED = 1048576U,
++    PDCAP_WAKE_FROM_S1_SUPPORTED = 2097152U,
++    PDCAP_WAKE_FROM_S2_SUPPORTED = 4194304U,
++    PDCAP_WAKE_FROM_S3_SUPPORTED = 8388608U,
++    PDCAP_S4_SUPPORTED = 16777216U,
++    PDCAP_S5_SUPPORTED = 33554432U,
++};
++#pragma pop_macro("PDCAP_S5_SUPPORTED")
++#pragma pop_macro("PDCAP_S4_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_S3_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_S2_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_S1_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_S0_SUPPORTED")
++#pragma pop_macro("PDCAP_S3_SUPPORTED")
++#pragma pop_macro("PDCAP_S2_SUPPORTED")
++#pragma pop_macro("PDCAP_S1_SUPPORTED")
++#pragma pop_macro("PDCAP_S0_SUPPORTED")
++#pragma pop_macro("PDCAP_WARM_EJECT_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_D3_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_D2_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_D1_SUPPORTED")
++#pragma pop_macro("PDCAP_WAKE_FROM_D0_SUPPORTED")
++#pragma pop_macro("PDCAP_D3_SUPPORTED")
++#pragma pop_macro("PDCAP_D2_SUPPORTED")
++#pragma pop_macro("PDCAP_D1_SUPPORTED")
++#pragma pop_macro("PDCAP_D0_SUPPORTED")
++#endif
++
+ #endif // _POWRPROF_H_

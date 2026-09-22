@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
-index 30ba0c56086b84a34e405a8df1d264033adb5a21..ef09fd205858ac1bee46a1ff53211711c22d5a58 100644
+index 30ba0c5608..3e68ab4145 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
 @@ -103,6 +103,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 30ba0c56086b84a34e405a8df1d264033adb5a21..ef09fd205858ac1bee46a1ff53211711
      
      MIDL_INTERFACE("ACC84351-04FF-44F9-B23F-655ED168C6D5")
 -    IInternetExplorerManager : public IUnknown
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInternetExplorerManager : public IUnknown
++      IInternetExplorerManager : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateObject( 

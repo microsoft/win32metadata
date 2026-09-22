@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
-index 288a2d6f7656d2009aa98821224e3df54bbaf1e4..d13d1944632a0e0443b8c5a98b11be240f1b6b22 100644
+index 62271818d0..8413e4ab08 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
 @@ -133,6 +133,7 @@ extern "C"{
@@ -10,15 +10,26 @@ index 288a2d6f7656d2009aa98821224e3df54bbaf1e4..d13d1944632a0e0443b8c5a98b11be24
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  typedef /* [v1_enum] */ 
-@@ -170,7 +171,7 @@ EXTERN_C const IID IID_ISpellingError;
+@@ -169,8 +170,8 @@ EXTERN_C const IID IID_ISpellingError;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3")
+-    MIDL_INTERFACE("B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3")
 -    ISpellingError : public IUnknown
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ISpellingError : public IUnknown
++    MIDL_INTERFACE("B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3") _Windows_SupportedOS_Windows8_ 
++      ISpellingError : public IUnknown
      {
      public:
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StartIndex( 
+@@ -187,7 +188,7 @@ EXTERN_C const IID IID_ISpellingError;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Replacement( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  LPWSTR *value) = 0;
++            _Win32_RAIIFree_(CoTaskMemFree) _Out_retval_  LPWSTR *value) = 0;
+         
+     };
+     
 @@ -241,7 +242,7 @@ EXTERN_C const IID IID_ISpellingError;
          END_INTERFACE
      } ISpellingErrorVtbl;
@@ -28,15 +39,20 @@ index 288a2d6f7656d2009aa98821224e3df54bbaf1e4..d13d1944632a0e0443b8c5a98b11be24
      {
          CONST_VTBL struct ISpellingErrorVtbl *lpVtbl;
      };
-@@ -296,7 +297,7 @@ EXTERN_C const IID IID_IEnumSpellingError;
+@@ -295,10 +296,10 @@ EXTERN_C const IID IID_IEnumSpellingError;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("803E3BD4-2828-4410-8290-418D1D73C762")
+-    MIDL_INTERFACE("803E3BD4-2828-4410-8290-418D1D73C762")
 -    IEnumSpellingError : public IUnknown
-+    _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IEnumSpellingError : public IUnknown
++    MIDL_INTERFACE("803E3BD4-2828-4410-8290-418D1D73C762") _Windows_SupportedOS_Windows8_ 
++      IEnumSpellingError : public IUnknown
      {
-     public:
+-    public:
++    _Win32_PreserveResult_ public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][retval][out] */ 
+             _Out_retval_  ISpellingError **value) = 0;
 @@ -337,7 +338,7 @@ EXTERN_C const IID IID_IEnumSpellingError;
          END_INTERFACE
      } IEnumSpellingErrorVtbl;
@@ -46,3 +62,57 @@ index 288a2d6f7656d2009aa98821224e3df54bbaf1e4..d13d1944632a0e0443b8c5a98b11be24
      {
          CONST_VTBL struct IEnumSpellingErrorVtbl *lpVtbl;
      };
+@@ -382,7 +383,7 @@ EXTERN_C const IID IID_IOptionDescription;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("432E5F85-35CF-4606-A801-6F70277E1D7A")
++    MIDL_INTERFACE("432E5F85-35CF-4606-A801-6F70277E1D7A") _Windows_SupportedOS_Windows8_ 
+     IOptionDescription : public IUnknown
+     {
+     public:
+@@ -517,7 +518,7 @@ EXTERN_C const IID IID_ISpellCheckerChangedEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0B83A5B0-792F-4EAB-9799-ACF52C5ED08A")
++    MIDL_INTERFACE("0B83A5B0-792F-4EAB-9799-ACF52C5ED08A") _Windows_SupportedOS_Windows8_ 
+     ISpellCheckerChangedEventHandler : public IUnknown
+     {
+     public:
+@@ -604,7 +605,7 @@ EXTERN_C const IID IID_ISpellChecker;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B6FD0B71-E2BC-4653-8D05-F197E412770B")
++    MIDL_INTERFACE("B6FD0B71-E2BC-4653-8D05-F197E412770B") _Windows_SupportedOS_Windows8_ 
+     ISpellChecker : public IUnknown
+     {
+     public:
+@@ -888,7 +889,7 @@ EXTERN_C const IID IID_ISpellChecker2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E7ED1C71-87F7-4378-A840-C9200DACEE47")
++    MIDL_INTERFACE("E7ED1C71-87F7-4378-A840-C9200DACEE47") _Windows_SupportedOS_10240_ 
+     ISpellChecker2 : public ISpellChecker
+     {
+     public:
+@@ -1116,7 +1117,7 @@ EXTERN_C const IID IID_ISpellCheckerFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8E018A9D-2415-4677-BF08-794EA61F94BB")
++    MIDL_INTERFACE("8E018A9D-2415-4677-BF08-794EA61F94BB") _Windows_SupportedOS_Windows8_ 
+     ISpellCheckerFactory : public IUnknown
+     {
+     public:
+@@ -1249,7 +1250,7 @@ EXTERN_C const IID IID_IUserDictionariesRegistrar;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AA176B85-0E12-4844-8E1A-EEF1DA77F586")
++    MIDL_INTERFACE("AA176B85-0E12-4844-8E1A-EEF1DA77F586") _Windows_SupportedOS_Windows8_ 
+     IUserDictionariesRegistrar : public IUnknown
+     {
+     public:

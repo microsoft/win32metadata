@@ -1,0 +1,25 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RadioMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/RadioMgr.h
+index 1676dfc2ba..708b4806fc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RadioMgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RadioMgr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -351,13 +352,13 @@ EXTERN_C const IID IID_IRadioInstance;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInstanceSignature( 
+             /* [annotation][string][out] */ 
+-            _Out_  BSTR *pbstrId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFriendlyName( 
+             /* [annotation][in] */ 
+             _In_  LCID lcid,
+             /* [annotation][string][out] */ 
+-            _Out_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRadioState( 
+             /* [annotation][out] */ 

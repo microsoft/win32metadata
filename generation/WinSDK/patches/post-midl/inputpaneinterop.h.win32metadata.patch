@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/inputpaneinterop.h b/generation/WinSDK/RecompiledIdlHeaders/um/inputpaneinterop.h
-index d0e858b319..14f16bff77 100644
+index d0e858b319..0768bb211c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/inputpaneinterop.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/inputpaneinterop.h
 @@ -19,6 +19,7 @@
@@ -10,12 +10,17 @@ index d0e858b319..14f16bff77 100644
  #include "rpcndr.h"
  
  #ifndef __RPCNDR_H_VERSION__
-@@ -89,6 +90,8 @@ EXTERN_C const IID IID_IInputPaneInterop;
+@@ -85,10 +86,12 @@ EXTERN_C const IID IID_IInputPaneInterop;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75CF2C57-9195-4931-8332-F0B409E916AF")
++    MIDL_INTERFACE("75CF2C57-9195-4931-8332-F0B409E916AF") _Windows_SupportedOS_14393_ 
      IInputPaneInterop : public IInspectable
      {
      public:
-+        _Windows_SupportedOS_14393_
-+        _Windows_SupportedOS_Server2016_
++        
++        
          virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
              /* [annotation][in] */ 
              _In_  HWND appWindow,

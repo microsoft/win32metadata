@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sensorsutils.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sensorsutils.h
-index a27db07739..fe9007972e 100644
+index a27db07739..2d01afb897 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sensorsutils.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sensorsutils.h
 @@ -17,6 +17,7 @@ Abstract:
@@ -15,7 +15,7 @@ index a27db07739..fe9007972e 100644
  SerializationBufferAllocate(
      _In_ ULONG SizeInBytes,
 -    _Outptr_result_bytebuffer_(SizeInBytes) BYTE** pBuffer
-+    _Win32_RAIIFree_(SerializationBufferFree) _Outptr_result_bytebuffer_(SizeInBytes) BYTE** pBuffer
++     _Outptr_result_bytebuffer_(SizeInBytes) BYTE** pBuffer
      );
  
  VOID
@@ -24,7 +24,7 @@ index a27db07739..fe9007972e 100644
      _In_ const PSENSOR_COLLECTION_LIST SourceCollection,
      _Out_ ULONG* pTargetBufferSizeInBytes,
 -    _Outptr_result_bytebuffer_(*pTargetBufferSizeInBytes) BYTE** pTargetBuffer
-+    _Win32_RAIIFree_(SerializationBufferFree) _Outptr_result_bytebuffer_(*pTargetBufferSizeInBytes) BYTE** pTargetBuffer
++     _Outptr_result_bytebuffer_(*pTargetBufferSizeInBytes) BYTE** pTargetBuffer
      );
  
  NTSTATUS

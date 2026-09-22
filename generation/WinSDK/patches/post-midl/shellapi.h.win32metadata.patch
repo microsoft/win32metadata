@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
-index 8db637a14a7a524a85c93a599ddae49097efa031..6b131a046b21ef7852311fd7cd552e39dba680a8 100644
+index 8db637a14a..379105a66d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 @@ -1,4 +1,5 @@
@@ -8,16 +8,826 @@ index 8db637a14a7a524a85c93a599ddae49097efa031..6b131a046b21ef7852311fd7cd552e39
  
  /*****************************************************************************\
  *                                                                             *
+@@ -65,7 +66,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ #pragma region Desktop Family or Gaming Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+ 
+-SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumArgs);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumArgs);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
 @@ -78,8 +79,12 @@ SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumA
  
  DECLARE_HANDLE(HDROP);
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_WindowsXP_ 
++
  _Success_(return != 0)
  SHSTDAPI_(UINT) DragQueryFileA(_In_ HDROP hDrop, _In_ UINT iFile, _Out_writes_opt_(cch) LPSTR lpszFile, _In_ UINT cch);
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_WindowsXP_ 
++
  _Success_(return != 0)
  SHSTDAPI_(UINT) DragQueryFileW(_In_ HDROP hDrop, _In_ UINT iFile, _Out_writes_opt_(cch) LPWSTR lpszFile, _In_ UINT cch);
  #ifdef UNICODE
+@@ -87,22 +92,22 @@ SHSTDAPI_(UINT) DragQueryFileW(_In_ HDROP hDrop, _In_ UINT iFile, _Out_writes_op
+ #else
+ #define DragQueryFile  DragQueryFileA
+ #endif // !UNICODE
+-SHSTDAPI_(BOOL) DragQueryPoint(_In_ HDROP hDrop, _Out_ POINT *ppt);
+-SHSTDAPI_(void) DragFinish(_In_ HDROP hDrop);
+-SHSTDAPI_(void) DragAcceptFiles(_In_ HWND hWnd, _In_ BOOL fAccept);
+-
+-SHSTDAPI_(HINSTANCE) ShellExecuteA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR lpOperation, _In_ LPCSTR lpFile, _In_opt_ LPCSTR lpParameters,
+-    _In_opt_ LPCSTR lpDirectory, _In_ INT nShowCmd);
+-SHSTDAPI_(HINSTANCE) ShellExecuteW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR lpOperation, _In_ LPCWSTR lpFile, _In_opt_ LPCWSTR lpParameters,
+-    _In_opt_ LPCWSTR lpDirectory, _In_ INT nShowCmd);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) DragQueryPoint(_In_ HDROP hDrop, _Out_ POINT *ppt);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) DragFinish(_In_ HDROP hDrop);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) DragAcceptFiles(_In_ HWND hWnd, _In_ BOOL fAccept);
++
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(HINSTANCE) ShellExecuteA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR lpOperation, _In_ LPCSTR lpFile, _In_opt_ LPCSTR lpParameters,
++    _In_opt_ LPCSTR lpDirectory, _Win32_AssociatedEnum_(SHOW_WINDOW_CMD) _In_ INT nShowCmd);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(HINSTANCE) ShellExecuteW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR lpOperation, _In_ LPCWSTR lpFile, _In_opt_ LPCWSTR lpParameters,
++    _In_opt_ LPCWSTR lpDirectory, _Win32_AssociatedEnum_(SHOW_WINDOW_CMD) _In_ INT nShowCmd);
+ #ifdef UNICODE
+ #define ShellExecute  ShellExecuteW
+ #else
+ #define ShellExecute  ShellExecuteA
+ #endif // !UNICODE
+-_Success_(return > 32) // SE_ERR_DLLNOTFOUND
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(FreeLibrary, 0) _Success_(return > 32) // SE_ERR_DLLNOTFOUND
+ SHSTDAPI_(HINSTANCE) FindExecutableA(_In_ LPCSTR lpFile, _In_opt_ LPCSTR lpDirectory, _Out_writes_(MAX_PATH) LPSTR lpResult);
+-_Success_(return > 32) // SE_ERR_DLLNOTFOUND
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(FreeLibrary, 0) _Success_(return > 32) // SE_ERR_DLLNOTFOUND
+ SHSTDAPI_(HINSTANCE) FindExecutableW(_In_ LPCWSTR lpFile, _In_opt_ LPCWSTR lpDirectory, _Out_writes_(MAX_PATH) LPWSTR lpResult);
+ #ifdef UNICODE
+ #define FindExecutable  FindExecutableW
+@@ -110,30 +115,30 @@ SHSTDAPI_(HINSTANCE) FindExecutableW(_In_ LPCWSTR lpFile, _In_opt_ LPCWSTR lpDir
+ #define FindExecutable  FindExecutableA
+ #endif // !UNICODE
+ 
+-SHSTDAPI_(INT) ShellAboutA(_In_opt_ HWND hWnd, _In_ LPCSTR szApp, _In_opt_ LPCSTR szOtherStuff, _In_opt_ HICON hIcon);
+-SHSTDAPI_(INT) ShellAboutW(_In_opt_ HWND hWnd, _In_ LPCWSTR szApp, _In_opt_ LPCWSTR szOtherStuff, _In_opt_ HICON hIcon);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(INT) ShellAboutA(_In_opt_ HWND hWnd, _In_ LPCSTR szApp, _In_opt_ LPCSTR szOtherStuff, _In_opt_ HICON hIcon);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(INT) ShellAboutW(_In_opt_ HWND hWnd, _In_ LPCWSTR szApp, _In_opt_ LPCWSTR szOtherStuff, _In_opt_ HICON hIcon);
+ #ifdef UNICODE
+ #define ShellAbout  ShellAboutW
+ #else
+ #define ShellAbout  ShellAboutA
+ #endif // !UNICODE
+-SHSTDAPI_(HICON) DuplicateIcon(_Reserved_ HINSTANCE hInst, _In_ HICON hIcon);
+-SHSTDAPI_(HICON) ExtractAssociatedIconA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIcon);
+-SHSTDAPI_(HICON) ExtractAssociatedIconW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIcon);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) DuplicateIcon(_Reserved_ HINSTANCE hInst, _In_ HICON hIcon);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIcon);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIcon);
+ #ifdef UNICODE
+ #define ExtractAssociatedIcon  ExtractAssociatedIconW
+ #else
+ #define ExtractAssociatedIcon  ExtractAssociatedIconA
+ #endif // !UNICODE
+-SHSTDAPI_(HICON) ExtractAssociatedIconExA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
+-SHSTDAPI_(HICON) ExtractAssociatedIconExW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconExA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconExW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
+ #ifdef UNICODE
+ #define ExtractAssociatedIconEx  ExtractAssociatedIconExW
+ #else
+ #define ExtractAssociatedIconEx  ExtractAssociatedIconExA
+ #endif // !UNICODE
+-SHSTDAPI_(HICON) ExtractIconA(_Reserved_ HINSTANCE hInst, _In_ LPCSTR pszExeFileName, UINT nIconIndex);
+-SHSTDAPI_(HICON) ExtractIconW(_Reserved_ HINSTANCE hInst, _In_ LPCWSTR pszExeFileName, UINT nIconIndex);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractIconA(_Reserved_ HINSTANCE hInst, _In_ LPCSTR pszExeFileName, UINT nIconIndex);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractIconW(_Reserved_ HINSTANCE hInst, _In_ LPCWSTR pszExeFileName, UINT nIconIndex);
+ #ifdef UNICODE
+ #define ExtractIcon  ExtractIconW
+ #else
+@@ -216,14 +221,14 @@ typedef struct _AppBarData
+ } APPBARDATA, *PAPPBARDATA;
+ 
+ 
+-SHSTDAPI_(UINT_PTR) SHAppBarMessage(_In_ DWORD dwMessage, _Inout_ PAPPBARDATA pData);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(UINT_PTR) SHAppBarMessage(_In_ DWORD dwMessage, _Inout_ PAPPBARDATA pData);
+ 
+ ////
+ ////  EndAppBar
+ ////
+ 
+-SHSTDAPI_(DWORD)   DoEnvironmentSubstA(_Inout_updates_(cchSrc) LPSTR pszSrc, UINT cchSrc);
+-SHSTDAPI_(DWORD)   DoEnvironmentSubstW(_Inout_updates_(cchSrc) LPWSTR pszSrc, UINT cchSrc);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(DWORD)   DoEnvironmentSubstA(_Inout_updates_(cchSrc) LPSTR pszSrc, UINT cchSrc);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(DWORD)   DoEnvironmentSubstW(_Inout_updates_(cchSrc) LPWSTR pszSrc, UINT cchSrc);
+ #ifdef UNICODE
+ #define DoEnvironmentSubst  DoEnvironmentSubstW
+ #else
+@@ -231,8 +236,8 @@ SHSTDAPI_(DWORD)   DoEnvironmentSubstW(_Inout_updates_(cchSrc) LPWSTR pszSrc, UI
+ #endif // !UNICODE
+ 
+ #define EIRESID(x) (-1 * (int)(x))
+-SHSTDAPI_(UINT) ExtractIconExA(_In_ LPCSTR lpszFile, int nIconIndex, _Out_writes_opt_(nIcons) HICON *phiconLarge, _Out_writes_opt_(nIcons) HICON *phiconSmall, UINT nIcons);
+-SHSTDAPI_(UINT) ExtractIconExW(_In_ LPCWSTR lpszFile, int nIconIndex, _Out_writes_opt_(nIcons) HICON *phiconLarge, _Out_writes_opt_(nIcons) HICON *phiconSmall, UINT nIcons);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(UINT) ExtractIconExA(_In_ LPCSTR lpszFile, int nIconIndex, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_writes_opt_(nIcons) HICON *phiconLarge, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_writes_opt_(nIcons) HICON *phiconSmall, UINT nIcons);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(UINT) ExtractIconExW(_In_ LPCWSTR lpszFile, int nIconIndex, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_writes_opt_(nIcons) HICON *phiconLarge, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_writes_opt_(nIcons) HICON *phiconSmall, UINT nIcons);
+ #ifdef UNICODE
+ #define ExtractIconEx  ExtractIconExW
+ #else
+@@ -321,14 +326,14 @@ typedef SHFILEOPSTRUCTA SHFILEOPSTRUCT;
+ typedef LPSHFILEOPSTRUCTA LPSHFILEOPSTRUCT;
+ #endif
+ 
+-SHSTDAPI_(int) SHFileOperationA(_Inout_ LPSHFILEOPSTRUCTA lpFileOp);
+-SHSTDAPI_(int) SHFileOperationW(_Inout_ LPSHFILEOPSTRUCTW lpFileOp);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(int) SHFileOperationA(_Inout_ LPSHFILEOPSTRUCTA lpFileOp);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(int) SHFileOperationW(_Inout_ LPSHFILEOPSTRUCTW lpFileOp);
+ #ifdef UNICODE
+ #define SHFileOperation  SHFileOperationW
+ #else
+ #define SHFileOperation  SHFileOperationA
+ #endif // !UNICODE
+-SHSTDAPI_(void) SHFreeNameMappings(_In_opt_ HANDLE hNameMappings);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(void) SHFreeNameMappings(_In_opt_ HANDLE hNameMappings);
+ 
+ typedef struct _SHNAMEMAPPINGA
+ {
+@@ -499,8 +504,8 @@ typedef SHELLEXECUTEINFOA SHELLEXECUTEINFO;
+ typedef LPSHELLEXECUTEINFOA LPSHELLEXECUTEINFO;
+ #endif // UNICODE
+ 
+-SHSTDAPI_(BOOL) ShellExecuteExA(_Inout_ SHELLEXECUTEINFOA *pExecInfo);
+-SHSTDAPI_(BOOL) ShellExecuteExW(_Inout_ SHELLEXECUTEINFOW *pExecInfo);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(BOOL) ShellExecuteExA(_Inout_ SHELLEXECUTEINFOA *pExecInfo);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ SHSTDAPI_(BOOL) ShellExecuteExW(_Inout_ SHELLEXECUTEINFOW *pExecInfo);
+ #ifdef UNICODE
+ #define ShellExecuteEx  ShellExecuteExW
+ #else
+@@ -526,12 +531,12 @@ typedef struct _SHCREATEPROCESSINFOW
+     LPPROCESS_INFORMATION lpProcessInformation;
+ } SHCREATEPROCESSINFOW, *PSHCREATEPROCESSINFOW;
+ 
+-SHSTDAPI_(BOOL) SHCreateProcessAsUserW(_Inout_ PSHCREATEPROCESSINFOW pscpi);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ SHSTDAPI_(BOOL) SHCreateProcessAsUserW(_Inout_ PSHCREATEPROCESSINFOW pscpi);
+ #endif // (NTDDI_VERSION >= NTDDI_WIN2K)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+-SHSTDAPI SHEvaluateSystemCommandTemplate(_In_ PCWSTR pszCmdTemplate, _Outptr_ PWSTR *ppszApplication, _Outptr_opt_ PWSTR *ppszCommandLine, _Outptr_opt_ PWSTR *ppszParameters);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHEvaluateSystemCommandTemplate(_In_ PCWSTR pszCmdTemplate, _Outptr_ PWSTR *ppszApplication, _Outptr_opt_ PWSTR *ppszCommandLine, _Outptr_opt_ PWSTR *ppszParameters);
+ //
+ //  SHEvaluateSystemCommandTemplate()
+ //      *   enforces stricter validation before calling CreateProcess().  may also be
+@@ -894,7 +899,7 @@ typedef struct ASSOCIATIONELEMENT
+ 
+ // the object returned from this API implements IQueryAssociations
+ 
+-SHSTDAPI AssocCreateForClasses(_In_reads_(cClasses) const ASSOCIATIONELEMENT *rgClasses, ULONG cClasses, _In_ REFIID riid, _COM_Outptr_ void **ppv);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI AssocCreateForClasses(_In_reads_(cClasses) const ASSOCIATIONELEMENT *rgClasses, ULONG cClasses, _In_ REFIID riid, _COM_Outptr_ void **ppv);
+ 
+ /* #if 0 // SAMPLE CODE
+ HRESULT CCustomFolder::_AssocCreate(_In_ PCUITEMID_CHILD pidl, _In_ REFIID riid, _Outptr_ void **ppv)
+@@ -959,15 +964,15 @@ typedef struct _SHQUERYRBINFO {
+ #define SHERB_NOSOUND           0x00000004
+ 
+ 
+-SHSTDAPI SHQueryRecycleBinA(_In_opt_ LPCSTR pszRootPath, _Inout_ LPSHQUERYRBINFO pSHQueryRBInfo);
+-SHSTDAPI SHQueryRecycleBinW(_In_opt_ LPCWSTR pszRootPath, _Inout_ LPSHQUERYRBINFO pSHQueryRBInfo);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHQueryRecycleBinA(_In_opt_ LPCSTR pszRootPath, _Inout_ LPSHQUERYRBINFO pSHQueryRBInfo);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHQueryRecycleBinW(_In_opt_ LPCWSTR pszRootPath, _Inout_ LPSHQUERYRBINFO pSHQueryRBInfo);
+ #ifdef UNICODE
+ #define SHQueryRecycleBin  SHQueryRecycleBinW
+ #else
+ #define SHQueryRecycleBin  SHQueryRecycleBinA
+ #endif // !UNICODE
+-SHSTDAPI SHEmptyRecycleBinA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR pszRootPath, DWORD dwFlags);
+-SHSTDAPI SHEmptyRecycleBinW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRootPath, DWORD dwFlags);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHEmptyRecycleBinA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR pszRootPath, DWORD dwFlags);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHEmptyRecycleBinW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRootPath, DWORD dwFlags);
+ #ifdef UNICODE
+ #define SHEmptyRecycleBin  SHEmptyRecycleBinW
+ #else
+@@ -999,12 +1004,12 @@ typedef enum
+ #endif
+ } QUERY_USER_NOTIFICATION_STATE;
+ 
+-SHSTDAPI SHQueryUserNotificationState(_Out_ QUERY_USER_NOTIFICATION_STATE *pquns);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHQueryUserNotificationState(_Out_ QUERY_USER_NOTIFICATION_STATE *pquns);
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ // This api retrieves an IPropertyStore that stores the window's properties.
+-SHSTDAPI SHGetPropertyStoreForWindow(_In_ HWND hwnd, _In_ REFIID riid, _Outptr_ void** ppv);
++_Windows_SupportedOS_Windows7_ SHSTDAPI SHGetPropertyStoreForWindow(_In_ HWND hwnd, _In_ REFIID riid, _Outptr_ void** ppv);
+ #endif
+ 
+ 
+@@ -1012,7 +1017,7 @@ typedef struct _NOTIFYICONDATAA {
+     DWORD cbSize;
+     HWND hWnd;
+     UINT uID;
+-    UINT uFlags;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_DATA_FLAGS) UINT uFlags;
+     UINT uCallbackMessage;
+     HICON hIcon;
+ #if (NTDDI_VERSION < NTDDI_WIN2K)
+@@ -1020,8 +1025,8 @@ typedef struct _NOTIFYICONDATAA {
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+     CHAR   szTip[128];
+-    DWORD dwState;
+-    DWORD dwStateMask;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_STATE) DWORD dwState;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_STATE) DWORD dwStateMask;
+     CHAR   szInfo[256];
+ #ifndef _SHELL_EXPORTS_INTERNALAPI_H_
+     union {
+@@ -1030,7 +1035,7 @@ typedef struct _NOTIFYICONDATAA {
+     } DUMMYUNIONNAME;
+ #endif
+     CHAR   szInfoTitle[64];
+-    DWORD dwInfoFlags;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_INFOTIP_FLAGS) DWORD dwInfoFlags;
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+     GUID guidItem;
+@@ -1043,7 +1048,7 @@ typedef struct _NOTIFYICONDATAW {
+     DWORD cbSize;
+     HWND hWnd;
+     UINT uID;
+-    UINT uFlags;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_DATA_FLAGS) UINT uFlags;
+     UINT uCallbackMessage;
+     HICON hIcon;
+ #if (NTDDI_VERSION < NTDDI_WIN2K)
+@@ -1051,8 +1056,8 @@ typedef struct _NOTIFYICONDATAW {
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+     WCHAR  szTip[128];
+-    DWORD dwState;
+-    DWORD dwStateMask;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_STATE) DWORD dwState;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_STATE) DWORD dwStateMask;
+     WCHAR  szInfo[256];
+ #ifndef _SHELL_EXPORTS_INTERNALAPI_H_
+     union {
+@@ -1061,7 +1066,7 @@ typedef struct _NOTIFYICONDATAW {
+     } DUMMYUNIONNAME;
+ #endif
+     WCHAR  szInfoTitle[64];
+-    DWORD dwInfoFlags;
++    _Win32_AssociatedEnum_(NOTIFY_ICON_INFOTIP_FLAGS) DWORD dwInfoFlags;
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+     GUID guidItem;
+@@ -1182,8 +1187,8 @@ typedef struct _NOTIFYICONIDENTIFIER {
+ } NOTIFYICONIDENTIFIER, *PNOTIFYICONIDENTIFIER;
+ 
+ 
+-SHSTDAPI_(BOOL) Shell_NotifyIconA(DWORD dwMessage, _In_ PNOTIFYICONDATAA lpData);
+-SHSTDAPI_(BOOL) Shell_NotifyIconW(DWORD dwMessage, _In_ PNOTIFYICONDATAW lpData);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) Shell_NotifyIconA(_Win32_AssociatedEnum_(NOTIFY_ICON_MESSAGE) DWORD dwMessage, _In_ PNOTIFYICONDATAA lpData);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(BOOL) Shell_NotifyIconW(_Win32_AssociatedEnum_(NOTIFY_ICON_MESSAGE) DWORD dwMessage, _In_ PNOTIFYICONDATAW lpData);
+ #ifdef UNICODE
+ #define Shell_NotifyIcon  Shell_NotifyIconW
+ #else
+@@ -1191,7 +1196,7 @@ SHSTDAPI_(BOOL) Shell_NotifyIconW(DWORD dwMessage, _In_ PNOTIFYICONDATAW lpData)
+ #endif // !UNICODE
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-SHSTDAPI Shell_NotifyIconGetRect(_In_ const NOTIFYICONIDENTIFIER* identifier, _Out_ RECT* iconLocation);
++_Windows_SupportedOS_Windows7_ SHSTDAPI Shell_NotifyIconGetRect(_In_ const NOTIFYICONIDENTIFIER* identifier, _Out_ RECT* iconLocation);
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ ////
+@@ -1269,10 +1274,10 @@ typedef SHFILEINFOA SHFILEINFO;
+ #define SHGFI_OVERLAYINDEX      0x000000040     // Get the index of the overlay
+                                                 // in the upper 8 bits of the iIcon
+ 
+-SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(_In_ LPCSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOA *psfi,
+-    UINT cbFileInfo, UINT uFlags);
+-SHSTDAPI_(DWORD_PTR) SHGetFileInfoW(_In_ LPCWSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOW *psfi,
+-    UINT cbFileInfo, UINT uFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(_In_ LPCSTR pszPath, _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOA *psfi,
++    UINT cbFileInfo, _Win32_AssociatedEnum_(SHGFI_FLAGS) UINT uFlags);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(DWORD_PTR) SHGetFileInfoW(_In_ LPCWSTR pszPath, _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOW *psfi,
++    UINT cbFileInfo, _Win32_AssociatedEnum_(SHGFI_FLAGS) UINT uFlags);
+ #ifdef UNICODE
+ #define SHGetFileInfo  SHGetFileInfoW
+ #else
+@@ -1404,7 +1409,7 @@ typedef enum SHSTOCKICONID
+ 
+ #define SIID_INVALID ((SHSTOCKICONID)-1)
+ 
+-SHSTDAPI SHGetStockIconInfo(SHSTOCKICONID siid, UINT uFlags, _Inout_ SHSTOCKICONINFO *psii);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHGetStockIconInfo(SHSTOCKICONID siid, _Win32_AssociatedEnum_(SHGSI_FLAGS) UINT uFlags, _Inout_ SHSTOCKICONINFO *psii);
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+@@ -1412,18 +1417,18 @@ SHSTDAPI SHGetStockIconInfo(SHSTOCKICONID siid, UINT uFlags, _Inout_ SHSTOCKICON
+ #if (NTDDI_VERSION >= NTDDI_WIN2K)
+ #define SHGetDiskFreeSpace SHGetDiskFreeSpaceEx
+ 
+-SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExA(_In_ LPCSTR pszDirectoryName, _Out_opt_ ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExA(_In_ LPCSTR pszDirectoryName, _Out_opt_ ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
+     _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfBytes, _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfFreeBytes);
+-SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExW(_In_ LPCWSTR pszDirectoryName, _Out_opt_ ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExW(_In_ LPCWSTR pszDirectoryName, _Out_opt_ ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
+     _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfBytes, _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfFreeBytes);
+ #ifdef UNICODE
+ #define SHGetDiskFreeSpaceEx  SHGetDiskFreeSpaceExW
+ #else
+ #define SHGetDiskFreeSpaceEx  SHGetDiskFreeSpaceExA
+ #endif // !UNICODE
+-_Success_(return != 0)
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) SHGetNewLinkInfoA(_In_ LPCSTR pszLinkTo, _In_ LPCSTR pszDir, _Out_writes_(MAX_PATH) LPSTR pszName, _Out_ BOOL *pfMustCopy, _In_ UINT uFlags);
+-_Success_(return != 0)
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ SHSTDAPI_(BOOL) SHGetNewLinkInfoW(_In_ LPCWSTR pszLinkTo, _In_ LPCWSTR pszDir, _Out_writes_(MAX_PATH) LPWSTR pszName, _Out_ BOOL *pfMustCopy, _In_ UINT uFlags);
+ #ifdef UNICODE
+ #define SHGetNewLinkInfo  SHGetNewLinkInfoW
+@@ -1456,8 +1461,8 @@ SHSTDAPI_(BOOL) SHGetNewLinkInfoW(_In_ LPCWSTR pszLinkTo, _In_ LPCWSTR pszDir, _
+ 
+ // deprecated, instead invoke verbs on printers/netprinters using IContextMenu or ShellExecute()
+ 
+-SHSTDAPI_(BOOL) SHInvokePrinterCommandA(_In_opt_ HWND hwnd, UINT uAction, _In_ LPCSTR lpBuf1, _In_opt_ LPCSTR lpBuf2, BOOL fModal);
+-SHSTDAPI_(BOOL) SHInvokePrinterCommandW(_In_opt_ HWND hwnd, UINT uAction, _In_ LPCWSTR lpBuf1, _In_opt_ LPCWSTR lpBuf2, BOOL fModal);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) SHInvokePrinterCommandA(_In_opt_ HWND hwnd, UINT uAction, _In_ LPCSTR lpBuf1, _In_opt_ LPCSTR lpBuf2, BOOL fModal);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) SHInvokePrinterCommandW(_In_opt_ HWND hwnd, UINT uAction, _In_ LPCWSTR lpBuf1, _In_opt_ LPCWSTR lpBuf2, BOOL fModal);
+ #ifdef UNICODE
+ #define SHInvokePrinterCommand  SHInvokePrinterCommandW
+ #else
+@@ -1509,7 +1514,7 @@ typedef POPEN_PRINTER_PROPS_INFOA POPEN_PRINTER_PROPS_INFO;
+ // Returns:
+ //      S_OK
+ //
+-SHSTDAPI SHLoadNonloadedIconOverlayIdentifiers(void);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHLoadNonloadedIconOverlayIdentifiers(void);
+ 
+ //
+ // The SHIsFileAvailableOffline API determines whether a file
+@@ -1530,7 +1535,7 @@ SHSTDAPI SHLoadNonloadedIconOverlayIdentifiers(void);
+ //     Both OFFLINE_STATUS_LOCAL and OFFLINE_STATUS_REMOTE may be returned,
+ //     indicating "open in both places." This is common when the server is online.
+ //
+-SHSTDAPI SHIsFileAvailableOffline(_In_ PCWSTR pwszPath, _Out_opt_ DWORD *pdwStatus);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHIsFileAvailableOffline(_In_ PCWSTR pwszPath, _Out_opt_ DWORD *pdwStatus);
+ 
+ #define OFFLINE_STATUS_LOCAL        0x0001  // If open, it's open locally
+ #define OFFLINE_STATUS_REMOTE       0x0002  // If open, it's open remotely
+@@ -1543,14 +1548,14 @@ SHSTDAPI SHIsFileAvailableOffline(_In_ PCWSTR pwszPath, _Out_opt_ DWORD *pdwStat
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ //  sets the specified path to use the string resource
+ //  as the UI instead of the file system name
+-SHSTDAPI SHSetLocalizedName(_In_ PCWSTR pszPath, _In_ PCWSTR pszResModule, int idsRes);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHSetLocalizedName(_In_ PCWSTR pszPath, _In_ PCWSTR pszResModule, int idsRes);
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ //  sets the specified path to use the string resource
+ //  as the UI instead of the file system name
+-SHSTDAPI SHRemoveLocalizedName(_In_ PCWSTR pszPath);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHRemoveLocalizedName(_In_ PCWSTR pszPath);
+ //  gets the string resource for the specified path
+-SHSTDAPI SHGetLocalizedName(_In_ PCWSTR pszPath, _Out_writes_(cch) PWSTR pszResModule, UINT cch, _Out_ int *pidsRes);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHGetLocalizedName(_In_ PCWSTR pszPath, _Out_writes_(cch) PWSTR pszResModule, UINT cch, _Out_ int *pidsRes);
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ 
+@@ -1611,21 +1616,21 @@ SHSTDAPI_(BOOL) IsLFNDriveW(_In_opt_ LPCWSTR pszPath);
+ #if         _WIN32_IE >= 0x0600
+ 
+ STDAPI SHEnumerateUnreadMailAccountsA(_In_opt_ HKEY hKeyUser, DWORD dwIndex, _Out_writes_(cchMailAddress) LPSTR pszMailAddress, int cchMailAddress);
+-STDAPI SHEnumerateUnreadMailAccountsW(_In_opt_ HKEY hKeyUser, DWORD dwIndex, _Out_writes_(cchMailAddress) LPWSTR pszMailAddress, int cchMailAddress);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHEnumerateUnreadMailAccountsW(_In_opt_ HKEY hKeyUser, DWORD dwIndex, _Out_writes_(cchMailAddress) LPWSTR pszMailAddress, int cchMailAddress);
+ #ifdef UNICODE
+ #define SHEnumerateUnreadMailAccounts  SHEnumerateUnreadMailAccountsW
+ #else
+ #define SHEnumerateUnreadMailAccounts  SHEnumerateUnreadMailAccountsA
+ #endif // !UNICODE
+ STDAPI SHGetUnreadMailCountA(_In_opt_ HKEY hKeyUser, _In_opt_ LPCSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPSTR pszShellExecuteCommand, int cchShellExecuteCommand);
+-STDAPI SHGetUnreadMailCountW(_In_opt_ HKEY hKeyUser, _In_opt_ LPCWSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPWSTR pszShellExecuteCommand, int cchShellExecuteCommand);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHGetUnreadMailCountW(_In_opt_ HKEY hKeyUser, _In_opt_ LPCWSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPWSTR pszShellExecuteCommand, int cchShellExecuteCommand);
+ #ifdef UNICODE
+ #define SHGetUnreadMailCount  SHGetUnreadMailCountW
+ #else
+ #define SHGetUnreadMailCount  SHGetUnreadMailCountA
+ #endif // !UNICODE
+ STDAPI SHSetUnreadMailCountA(_In_ LPCSTR pszMailAddress, DWORD dwCount, _In_ LPCSTR pszShellExecuteCommand);
+-STDAPI SHSetUnreadMailCountW(_In_ LPCWSTR pszMailAddress, DWORD dwCount, _In_ LPCWSTR pszShellExecuteCommand);
++_Windows_SupportedOS_WindowsXP_ STDAPI SHSetUnreadMailCountW(_In_ LPCWSTR pszMailAddress, DWORD dwCount, _In_ LPCWSTR pszShellExecuteCommand);
+ #ifdef UNICODE
+ #define SHSetUnreadMailCount  SHSetUnreadMailCountW
+ #else
+@@ -1635,13 +1640,13 @@ STDAPI SHSetUnreadMailCountW(_In_ LPCWSTR pszMailAddress, DWORD dwCount, _In_ LP
+ #endif  /*  _WIN32_IE >= 0x0600     */
+ 
+ #if (_WIN32_IE >= 0x0601)
+-STDAPI_(BOOL)   SHTestTokenMembership(_In_opt_ HANDLE hToken, ULONG ulRID);
++_Windows_SupportedOS_WindowsXP_ STDAPI_(BOOL)   SHTestTokenMembership(_In_opt_ HANDLE hToken, ULONG ulRID);
+ #endif // (_WIN32_IE >= 0x0601)
+ 
+ #if         _WIN32_IE >= 0x0600
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-SHSTDAPI SHGetImageList(_In_ int iImageList, _In_ REFIID riid, _Outptr_ void **ppvObj);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI SHGetImageList(_In_ int iImageList, _In_ REFIID riid, _Outptr_ void **ppvObj);
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+ 
+@@ -1689,7 +1694,7 @@ typedef HRESULT (STDMETHODCALLTYPE *PFNSHOWSHAREFOLDERUIW)(_In_opt_ HWND hwndPar
+ 
+ // Instantiation
+ #define WC_NETADDRESS L"msctls_netaddress"
+-SHSTDAPI_(BOOL) InitNetworkAddressControl(void);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI_(BOOL) InitNetworkAddressControl(void);
+ 
+ // Address Control Messages
+ 
+@@ -1730,7 +1735,7 @@ typedef struct tagNC_ADDRESS
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ // Returns the type of media (CD, DVD, Blank, etc) that is in the drive.
+ // dwMediaContent is set to a combination of ARCONTENT flags.
+-STDAPI SHGetDriveMedia(_In_ PCWSTR pszDrive, _Out_ DWORD *pdwMediaContent);
++_Windows_SupportedOS_WindowsVista_ STDAPI SHGetDriveMedia(_In_ PCWSTR pszDrive, _Out_ DWORD *pdwMediaContent);
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ // Windows Parental Controls (WPC) query apis
+@@ -1745,4 +1750,379 @@ STDAPI SHGetDriveMedia(_In_ PCWSTR pszDrive, _Out_ DWORD *pdwMediaContent);
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma warning(pop)
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHGFI_ADDOVERLAYS")
++#undef SHGFI_ADDOVERLAYS
++#pragma push_macro("SHGFI_ATTR_SPECIFIED")
++#undef SHGFI_ATTR_SPECIFIED
++#pragma push_macro("SHGFI_ATTRIBUTES")
++#undef SHGFI_ATTRIBUTES
++#pragma push_macro("SHGFI_DISPLAYNAME")
++#undef SHGFI_DISPLAYNAME
++#pragma push_macro("SHGFI_EXETYPE")
++#undef SHGFI_EXETYPE
++#pragma push_macro("SHGFI_ICON")
++#undef SHGFI_ICON
++#pragma push_macro("SHGFI_ICONLOCATION")
++#undef SHGFI_ICONLOCATION
++#pragma push_macro("SHGFI_LARGEICON")
++#undef SHGFI_LARGEICON
++#pragma push_macro("SHGFI_LINKOVERLAY")
++#undef SHGFI_LINKOVERLAY
++#pragma push_macro("SHGFI_OPENICON")
++#undef SHGFI_OPENICON
++#pragma push_macro("SHGFI_OVERLAYINDEX")
++#undef SHGFI_OVERLAYINDEX
++#pragma push_macro("SHGFI_PIDL")
++#undef SHGFI_PIDL
++#pragma push_macro("SHGFI_SELECTED")
++#undef SHGFI_SELECTED
++#pragma push_macro("SHGFI_SHELLICONSIZE")
++#undef SHGFI_SHELLICONSIZE
++#pragma push_macro("SHGFI_SMALLICON")
++#undef SHGFI_SMALLICON
++#pragma push_macro("SHGFI_SYSICONINDEX")
++#undef SHGFI_SYSICONINDEX
++#pragma push_macro("SHGFI_TYPENAME")
++#undef SHGFI_TYPENAME
++#pragma push_macro("SHGFI_USEFILEATTRIBUTES")
++#undef SHGFI_USEFILEATTRIBUTES
++enum [[clang::flag_enum]] SHGFI_FLAGS : unsigned int
++{
++    SHGFI_ADDOVERLAYS = 32U,
++    SHGFI_ATTR_SPECIFIED = 131072U,
++    SHGFI_ATTRIBUTES = 2048U,
++    SHGFI_DISPLAYNAME = 512U,
++    SHGFI_EXETYPE = 8192U,
++    SHGFI_ICON = 256U,
++    SHGFI_ICONLOCATION = 4096U,
++    SHGFI_LARGEICON = 0U,
++    SHGFI_LINKOVERLAY = 32768U,
++    SHGFI_OPENICON = 2U,
++    SHGFI_OVERLAYINDEX = 64U,
++    SHGFI_PIDL = 8U,
++    SHGFI_SELECTED = 65536U,
++    SHGFI_SHELLICONSIZE = 4U,
++    SHGFI_SMALLICON = 1U,
++    SHGFI_SYSICONINDEX = 16384U,
++    SHGFI_TYPENAME = 1024U,
++    SHGFI_USEFILEATTRIBUTES = 16U,
++};
++#pragma pop_macro("SHGFI_USEFILEATTRIBUTES")
++#pragma pop_macro("SHGFI_TYPENAME")
++#pragma pop_macro("SHGFI_SYSICONINDEX")
++#pragma pop_macro("SHGFI_SMALLICON")
++#pragma pop_macro("SHGFI_SHELLICONSIZE")
++#pragma pop_macro("SHGFI_SELECTED")
++#pragma pop_macro("SHGFI_PIDL")
++#pragma pop_macro("SHGFI_OVERLAYINDEX")
++#pragma pop_macro("SHGFI_OPENICON")
++#pragma pop_macro("SHGFI_LINKOVERLAY")
++#pragma pop_macro("SHGFI_LARGEICON")
++#pragma pop_macro("SHGFI_ICONLOCATION")
++#pragma pop_macro("SHGFI_ICON")
++#pragma pop_macro("SHGFI_EXETYPE")
++#pragma pop_macro("SHGFI_DISPLAYNAME")
++#pragma pop_macro("SHGFI_ATTRIBUTES")
++#pragma pop_macro("SHGFI_ATTR_SPECIFIED")
++#pragma pop_macro("SHGFI_ADDOVERLAYS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NIM_ADD")
++#undef NIM_ADD
++#pragma push_macro("NIM_MODIFY")
++#undef NIM_MODIFY
++#pragma push_macro("NIM_DELETE")
++#undef NIM_DELETE
++#pragma push_macro("NIM_SETFOCUS")
++#undef NIM_SETFOCUS
++#pragma push_macro("NIM_SETVERSION")
++#undef NIM_SETVERSION
++enum NOTIFY_ICON_MESSAGE : unsigned int
++{
++    NIM_ADD = 0U,
++    NIM_MODIFY = 1U,
++    NIM_DELETE = 2U,
++    NIM_SETFOCUS = 3U,
++    NIM_SETVERSION = 4U,
++};
++#pragma pop_macro("NIM_SETVERSION")
++#pragma pop_macro("NIM_SETFOCUS")
++#pragma pop_macro("NIM_DELETE")
++#pragma pop_macro("NIM_MODIFY")
++#pragma pop_macro("NIM_ADD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NIF_MESSAGE")
++#undef NIF_MESSAGE
++#pragma push_macro("NIF_ICON")
++#undef NIF_ICON
++#pragma push_macro("NIF_TIP")
++#undef NIF_TIP
++#pragma push_macro("NIF_STATE")
++#undef NIF_STATE
++#pragma push_macro("NIF_INFO")
++#undef NIF_INFO
++#pragma push_macro("NIF_GUID")
++#undef NIF_GUID
++#pragma push_macro("NIF_REALTIME")
++#undef NIF_REALTIME
++#pragma push_macro("NIF_SHOWTIP")
++#undef NIF_SHOWTIP
++enum [[clang::flag_enum]] NOTIFY_ICON_DATA_FLAGS : unsigned int
++{
++    NIF_MESSAGE = 1U,
++    NIF_ICON = 2U,
++    NIF_TIP = 4U,
++    NIF_STATE = 8U,
++    NIF_INFO = 16U,
++    NIF_GUID = 32U,
++    NIF_REALTIME = 64U,
++    NIF_SHOWTIP = 128U,
++};
++#pragma pop_macro("NIF_SHOWTIP")
++#pragma pop_macro("NIF_REALTIME")
++#pragma pop_macro("NIF_GUID")
++#pragma pop_macro("NIF_INFO")
++#pragma pop_macro("NIF_STATE")
++#pragma pop_macro("NIF_TIP")
++#pragma pop_macro("NIF_ICON")
++#pragma pop_macro("NIF_MESSAGE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NIIF_NONE")
++#undef NIIF_NONE
++#pragma push_macro("NIIF_INFO")
++#undef NIIF_INFO
++#pragma push_macro("NIIF_WARNING")
++#undef NIIF_WARNING
++#pragma push_macro("NIIF_ERROR")
++#undef NIIF_ERROR
++#pragma push_macro("NIIF_USER")
++#undef NIIF_USER
++#pragma push_macro("NIIF_ICON_MASK")
++#undef NIIF_ICON_MASK
++#pragma push_macro("NIIF_NOSOUND")
++#undef NIIF_NOSOUND
++#pragma push_macro("NIIF_LARGE_ICON")
++#undef NIIF_LARGE_ICON
++#pragma push_macro("NIIF_RESPECT_QUIET_TIME")
++#undef NIIF_RESPECT_QUIET_TIME
++enum [[clang::flag_enum]] NOTIFY_ICON_INFOTIP_FLAGS : unsigned int
++{
++    NIIF_NONE = 0U,
++    NIIF_INFO = 1U,
++    NIIF_WARNING = 2U,
++    NIIF_ERROR = 3U,
++    NIIF_USER = 4U,
++    NIIF_ICON_MASK = 15U,
++    NIIF_NOSOUND = 16U,
++    NIIF_LARGE_ICON = 32U,
++    NIIF_RESPECT_QUIET_TIME = 128U,
++};
++#pragma pop_macro("NIIF_RESPECT_QUIET_TIME")
++#pragma pop_macro("NIIF_LARGE_ICON")
++#pragma pop_macro("NIIF_NOSOUND")
++#pragma pop_macro("NIIF_ICON_MASK")
++#pragma pop_macro("NIIF_USER")
++#pragma pop_macro("NIIF_ERROR")
++#pragma pop_macro("NIIF_WARNING")
++#pragma pop_macro("NIIF_INFO")
++#pragma pop_macro("NIIF_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NIS_HIDDEN")
++#undef NIS_HIDDEN
++#pragma push_macro("NIS_SHAREDICON")
++#undef NIS_SHAREDICON
++enum [[clang::flag_enum]] NOTIFY_ICON_STATE : unsigned int
++{
++    NIS_HIDDEN = 1U,
++    NIS_SHAREDICON = 2U,
++};
++#pragma pop_macro("NIS_SHAREDICON")
++#pragma pop_macro("NIS_HIDDEN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHGSI_ICONLOCATION")
++#undef SHGSI_ICONLOCATION
++#pragma push_macro("SHGSI_ICON")
++#undef SHGSI_ICON
++#pragma push_macro("SHGSI_SYSICONINDEX")
++#undef SHGSI_SYSICONINDEX
++#pragma push_macro("SHGSI_LINKOVERLAY")
++#undef SHGSI_LINKOVERLAY
++#pragma push_macro("SHGSI_SELECTED")
++#undef SHGSI_SELECTED
++#pragma push_macro("SHGSI_LARGEICON")
++#undef SHGSI_LARGEICON
++#pragma push_macro("SHGSI_SMALLICON")
++#undef SHGSI_SMALLICON
++#pragma push_macro("SHGSI_SHELLICONSIZE")
++#undef SHGSI_SHELLICONSIZE
++enum [[clang::flag_enum]] SHGSI_FLAGS : unsigned int
++{
++    SHGSI_ICONLOCATION = 0U,
++    SHGSI_ICON = 256U,
++    SHGSI_SYSICONINDEX = 16384U,
++    SHGSI_LINKOVERLAY = 32768U,
++    SHGSI_SELECTED = 65536U,
++    SHGSI_LARGEICON = 0U,
++    SHGSI_SMALLICON = 1U,
++    SHGSI_SHELLICONSIZE = 4U,
++};
++#pragma pop_macro("SHGSI_SHELLICONSIZE")
++#pragma pop_macro("SHGSI_SMALLICON")
++#pragma pop_macro("SHGSI_LARGEICON")
++#pragma pop_macro("SHGSI_SELECTED")
++#pragma pop_macro("SHGSI_LINKOVERLAY")
++#pragma pop_macro("SHGSI_SYSICONINDEX")
++#pragma pop_macro("SHGSI_ICON")
++#pragma pop_macro("SHGSI_ICONLOCATION")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("FOFX_NOSKIPJUNCTIONS")
++#undef FOFX_NOSKIPJUNCTIONS
++#pragma push_macro("FOFX_PREFERHARDLINK")
++#undef FOFX_PREFERHARDLINK
++#pragma push_macro("FOFX_SHOWELEVATIONPROMPT")
++#undef FOFX_SHOWELEVATIONPROMPT
++#pragma push_macro("FOFX_RECYCLEONDELETE")
++#undef FOFX_RECYCLEONDELETE
++#pragma push_macro("FOFX_EARLYFAILURE")
++#undef FOFX_EARLYFAILURE
++#pragma push_macro("FOFX_PRESERVEFILEEXTENSIONS")
++#undef FOFX_PRESERVEFILEEXTENSIONS
++#pragma push_macro("FOFX_KEEPNEWERFILE")
++#undef FOFX_KEEPNEWERFILE
++#pragma push_macro("FOFX_NOCOPYHOOKS")
++#undef FOFX_NOCOPYHOOKS
++#pragma push_macro("FOFX_NOMINIMIZEBOX")
++#undef FOFX_NOMINIMIZEBOX
++#pragma push_macro("FOFX_MOVEACLSACROSSVOLUMES")
++#undef FOFX_MOVEACLSACROSSVOLUMES
++#pragma push_macro("FOFX_DONTDISPLAYSOURCEPATH")
++#undef FOFX_DONTDISPLAYSOURCEPATH
++#pragma push_macro("FOFX_DONTDISPLAYDESTPATH")
++#undef FOFX_DONTDISPLAYDESTPATH
++#pragma push_macro("FOFX_REQUIREELEVATION")
++#undef FOFX_REQUIREELEVATION
++#pragma push_macro("FOFX_ADDUNDORECORD")
++#undef FOFX_ADDUNDORECORD
++#pragma push_macro("FOFX_COPYASDOWNLOAD")
++#undef FOFX_COPYASDOWNLOAD
++#pragma push_macro("FOFX_DONTDISPLAYLOCATIONS")
++#undef FOFX_DONTDISPLAYLOCATIONS
++#pragma push_macro("FOF_MULTIDESTFILES")
++#undef FOF_MULTIDESTFILES
++#pragma push_macro("FOF_CONFIRMMOUSE")
++#undef FOF_CONFIRMMOUSE
++#pragma push_macro("FOF_SILENT")
++#undef FOF_SILENT
++#pragma push_macro("FOF_RENAMEONCOLLISION")
++#undef FOF_RENAMEONCOLLISION
++#pragma push_macro("FOF_NOCONFIRMATION")
++#undef FOF_NOCONFIRMATION
++#pragma push_macro("FOF_WANTMAPPINGHANDLE")
++#undef FOF_WANTMAPPINGHANDLE
++#pragma push_macro("FOF_ALLOWUNDO")
++#undef FOF_ALLOWUNDO
++#pragma push_macro("FOF_FILESONLY")
++#undef FOF_FILESONLY
++#pragma push_macro("FOF_SIMPLEPROGRESS")
++#undef FOF_SIMPLEPROGRESS
++#pragma push_macro("FOF_NOCONFIRMMKDIR")
++#undef FOF_NOCONFIRMMKDIR
++#pragma push_macro("FOF_NOERRORUI")
++#undef FOF_NOERRORUI
++#pragma push_macro("FOF_NOCOPYSECURITYATTRIBS")
++#undef FOF_NOCOPYSECURITYATTRIBS
++#pragma push_macro("FOF_NORECURSION")
++#undef FOF_NORECURSION
++#pragma push_macro("FOF_NO_CONNECTED_ELEMENTS")
++#undef FOF_NO_CONNECTED_ELEMENTS
++#pragma push_macro("FOF_WANTNUKEWARNING")
++#undef FOF_WANTNUKEWARNING
++#pragma push_macro("FOF_NORECURSEREPARSE")
++#undef FOF_NORECURSEREPARSE
++#pragma push_macro("FOF_NO_UI")
++#undef FOF_NO_UI
++enum [[clang::flag_enum]] FILEOPERATION_FLAGS : unsigned int
++{
++    FOFX_NOSKIPJUNCTIONS = 65536U,
++    FOFX_PREFERHARDLINK = 131072U,
++    FOFX_SHOWELEVATIONPROMPT = 262144U,
++    FOFX_RECYCLEONDELETE = 524288U,
++    FOFX_EARLYFAILURE = 1048576U,
++    FOFX_PRESERVEFILEEXTENSIONS = 2097152U,
++    FOFX_KEEPNEWERFILE = 4194304U,
++    FOFX_NOCOPYHOOKS = 8388608U,
++    FOFX_NOMINIMIZEBOX = 16777216U,
++    FOFX_MOVEACLSACROSSVOLUMES = 33554432U,
++    FOFX_DONTDISPLAYSOURCEPATH = 67108864U,
++    FOFX_DONTDISPLAYDESTPATH = 134217728U,
++    FOFX_REQUIREELEVATION = 268435456U,
++    FOFX_ADDUNDORECORD = 536870912U,
++    FOFX_COPYASDOWNLOAD = 1073741824U,
++    FOFX_DONTDISPLAYLOCATIONS = 2147483648U,
++    FOF_MULTIDESTFILES = 1U,
++    FOF_CONFIRMMOUSE = 2U,
++    FOF_SILENT = 4U,
++    FOF_RENAMEONCOLLISION = 8U,
++    FOF_NOCONFIRMATION = 16U,
++    FOF_WANTMAPPINGHANDLE = 32U,
++    FOF_ALLOWUNDO = 64U,
++    FOF_FILESONLY = 128U,
++    FOF_SIMPLEPROGRESS = 256U,
++    FOF_NOCONFIRMMKDIR = 512U,
++    FOF_NOERRORUI = 1024U,
++    FOF_NOCOPYSECURITYATTRIBS = 2048U,
++    FOF_NORECURSION = 4096U,
++    FOF_NO_CONNECTED_ELEMENTS = 8192U,
++    FOF_WANTNUKEWARNING = 16384U,
++    FOF_NORECURSEREPARSE = 32768U,
++    FOF_NO_UI = 1556U,
++};
++#pragma pop_macro("FOF_NO_UI")
++#pragma pop_macro("FOF_NORECURSEREPARSE")
++#pragma pop_macro("FOF_WANTNUKEWARNING")
++#pragma pop_macro("FOF_NO_CONNECTED_ELEMENTS")
++#pragma pop_macro("FOF_NORECURSION")
++#pragma pop_macro("FOF_NOCOPYSECURITYATTRIBS")
++#pragma pop_macro("FOF_NOERRORUI")
++#pragma pop_macro("FOF_NOCONFIRMMKDIR")
++#pragma pop_macro("FOF_SIMPLEPROGRESS")
++#pragma pop_macro("FOF_FILESONLY")
++#pragma pop_macro("FOF_ALLOWUNDO")
++#pragma pop_macro("FOF_WANTMAPPINGHANDLE")
++#pragma pop_macro("FOF_NOCONFIRMATION")
++#pragma pop_macro("FOF_RENAMEONCOLLISION")
++#pragma pop_macro("FOF_SILENT")
++#pragma pop_macro("FOF_CONFIRMMOUSE")
++#pragma pop_macro("FOF_MULTIDESTFILES")
++#pragma pop_macro("FOFX_DONTDISPLAYLOCATIONS")
++#pragma pop_macro("FOFX_COPYASDOWNLOAD")
++#pragma pop_macro("FOFX_ADDUNDORECORD")
++#pragma pop_macro("FOFX_REQUIREELEVATION")
++#pragma pop_macro("FOFX_DONTDISPLAYDESTPATH")
++#pragma pop_macro("FOFX_DONTDISPLAYSOURCEPATH")
++#pragma pop_macro("FOFX_MOVEACLSACROSSVOLUMES")
++#pragma pop_macro("FOFX_NOMINIMIZEBOX")
++#pragma pop_macro("FOFX_NOCOPYHOOKS")
++#pragma pop_macro("FOFX_KEEPNEWERFILE")
++#pragma pop_macro("FOFX_PRESERVEFILEEXTENSIONS")
++#pragma pop_macro("FOFX_EARLYFAILURE")
++#pragma pop_macro("FOFX_RECYCLEONDELETE")
++#pragma pop_macro("FOFX_SHOWELEVATIONPROMPT")
++#pragma pop_macro("FOFX_PREFERHARDLINK")
++#pragma pop_macro("FOFX_NOSKIPJUNCTIONS")
++#endif
++
+ #endif

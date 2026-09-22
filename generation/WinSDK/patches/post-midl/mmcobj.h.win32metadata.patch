@@ -1,0 +1,234 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MMCObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/MMCObj.h
+index 60c15c940b..25fea06dc7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MMCObj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MMCObj.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -391,7 +392,7 @@ EXTERN_C const IID IID_ISnapinProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F7889DA9-4A02-4837-BF89-1A6F2A021010")
++    MIDL_INTERFACE("F7889DA9-4A02-4837-BF89-1A6F2A021010") _Windows_SupportedOS_WindowsVista_ 
+     ISnapinProperties : public IUnknown
+     {
+     public:
+@@ -516,7 +517,7 @@ EXTERN_C const IID IID_ISnapinPropertiesCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A50FA2E5-7E61-45EB-A8D4-9A07B3E851A8")
++    MIDL_INTERFACE("A50FA2E5-7E61-45EB-A8D4-9A07B3E851A8") _Windows_SupportedOS_WindowsVista_ 
+     ISnapinPropertiesCallback : public IUnknown
+     {
+     public:
+@@ -1837,17 +1838,17 @@ EXTERN_C const IID IID_Node;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Name) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Property( 
+             /* [annotation][in] */ 
+             _In_  BSTR PropertyName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR PropertyValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR PropertyValue) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Bookmark( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Bookmark) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Bookmark) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsScopeNode( 
+             /* [annotation][retval][out] */ 
+@@ -1855,7 +1856,7 @@ EXTERN_C const IID IID_Node;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Nodetype( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Nodetype) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Nodetype) = 0;
+         
+     };
+     
+@@ -2277,7 +2278,7 @@ EXTERN_C const IID IID_Document;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Name) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -2285,7 +2286,7 @@ EXTERN_C const IID IID_Document;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Location( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Location) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Location) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsSaved( 
+             /* [annotation][retval][out] */ 
+@@ -2297,7 +2298,7 @@ EXTERN_C const IID IID_Document;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Mode( 
+             /* [annotation][in] */ 
+-            _In_  DOCUMENTMODE Mode) = 0;
++            _Win32_AssociatedEnum_(_DocumentMode) _In_  DOCUMENTMODE Mode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RootNode( 
+             /* [annotation][retval][out] */ 
+@@ -2595,15 +2596,15 @@ EXTERN_C const IID IID_SnapIn;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Name) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Vendor( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Vendor) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Vendor) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Version( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Version) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Version) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Extensions( 
+             /* [annotation][retval][out] */ 
+@@ -2611,7 +2612,7 @@ EXTERN_C const IID IID_SnapIn;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SnapinCLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR SnapinCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR SnapinCLSID) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Properties( 
+             /* [annotation][retval][out] */ 
+@@ -3035,15 +3036,15 @@ EXTERN_C const IID IID_Extension;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Name) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Vendor( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Vendor) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Vendor) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Version( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Version) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Version) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Extensions( 
+             /* [annotation][retval][out] */ 
+@@ -3051,7 +3052,7 @@ EXTERN_C const IID IID_Extension;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SnapinCLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR SnapinCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR SnapinCLSID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnableAllExtensions( 
+             /* [annotation][in] */ 
+@@ -3629,7 +3630,7 @@ EXTERN_C const IID IID_Column;
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Name) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Width( 
+             /* [annotation][retval][out] */ 
+@@ -3657,7 +3658,7 @@ EXTERN_C const IID IID_Column;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAsSortColumn( 
+             /* [annotation][in] */ 
+-            _In_  COLUMNSORTORDER SortOrder) = 0;
++            _Win32_AssociatedEnum_(_ColumnSortOrder) _In_  COLUMNSORTORDER SortOrder) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsSortColumn( 
+             /* [annotation][retval][out] */ 
+@@ -3894,7 +3895,7 @@ EXTERN_C const IID IID_Views;
+             /* [annotation][in] */ 
+             _In_  PNODE Node,
+             /* [annotation][defaultvalue][in] */ 
+-            _In_  VIEWOPTIONS viewOptions = ViewOption_Default) = 0;
++            _Win32_AssociatedEnum_(_ViewOptions) _In_  VIEWOPTIONS viewOptions = ViewOption_Default) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+             /* [annotation][retval][out] */ 
+@@ -4208,7 +4209,7 @@ EXTERN_C const IID IID_View;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Memento( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Memento) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Memento) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ViewMemento( 
+             /* [annotation][in] */ 
+@@ -4224,13 +4225,13 @@ EXTERN_C const IID IID_View;
+             /* [annotation][in] */ 
+             _In_  long Column,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR CellContents) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR CellContents) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportList( 
+             /* [annotation][in] */ 
+             _In_  BSTR File,
+             /* [annotation][defaultvalue][in] */ 
+-            _In_  EXPORTLISTOPTIONS exportoptions = ExportListOptions_Default) = 0;
++            _Win32_AssociatedEnum_(_ExportListOptions) _In_  EXPORTLISTOPTIONS exportoptions = ExportListOptions_Default) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ListViewMode( 
+             /* [annotation][retval][out] */ 
+@@ -4238,7 +4239,7 @@ EXTERN_C const IID IID_View;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ListViewMode( 
+             /* [annotation][in] */ 
+-            _In_  LISTVIEWMODE mode) = 0;
++            _Win32_AssociatedEnum_(_ListViewMode) _In_  LISTVIEWMODE mode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ControlObject( 
+             /* [annotation][retval][out] */ 
+@@ -5118,19 +5119,19 @@ EXTERN_C const IID IID_MenuItem;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR DisplayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR DisplayName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_LanguageIndependentName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR LanguageIndependentName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR LanguageIndependentName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Path) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_LanguageIndependentPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR LanguageIndependentPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR LanguageIndependentPath) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Execute( void) = 0;
+         
+@@ -5528,7 +5529,7 @@ EXTERN_C const IID IID_Property;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PBSTR Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  PBSTR Name) = 0;
+         
+     };
+     

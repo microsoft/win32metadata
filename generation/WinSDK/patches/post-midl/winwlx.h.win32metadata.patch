@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h
+index f5be6127bf..2d99db7e8a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h
+@@ -1138,4 +1138,23 @@ typedef _Struct_size_bytes_(Size) struct _WLX_NOTIFICATION_INFO {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WLX_SAS_ACTION_SHUTDOWN")
++#undef WLX_SAS_ACTION_SHUTDOWN
++#pragma push_macro("WLX_SAS_ACTION_SHUTDOWN_REBOOT")
++#undef WLX_SAS_ACTION_SHUTDOWN_REBOOT
++#pragma push_macro("WLX_SAS_ACTION_SHUTDOWN_POWER_OFF")
++#undef WLX_SAS_ACTION_SHUTDOWN_POWER_OFF
++enum WLX_SHUTDOWN_TYPE : unsigned int
++{
++    WLX_SAS_ACTION_SHUTDOWN = 5U,
++    WLX_SAS_ACTION_SHUTDOWN_REBOOT = 11U,
++    WLX_SAS_ACTION_SHUTDOWN_POWER_OFF = 10U,
++};
++#pragma pop_macro("WLX_SAS_ACTION_SHUTDOWN_POWER_OFF")
++#pragma pop_macro("WLX_SAS_ACTION_SHUTDOWN_REBOOT")
++#pragma pop_macro("WLX_SAS_ACTION_SHUTDOWN")
++#endif
++
+ #endif /* _WINWLX_ */

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/verrsrc.h b/generation/WinSDK/RecompiledIdlHeaders/um/verrsrc.h
-index 85022af4d9..9b9444b136 100644
+index 0454424de7..d054cb5f9b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/verrsrc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/verrsrc.h
 @@ -1,4 +1,5 @@
@@ -355,7 +355,7 @@ index 85022af4d9..9b9444b136 100644
  /* ----- Types and structures ----- */
  
 -typedef struct tagVS_FIXEDFILEINFO
-+typedef struct _Windows_SupportedOS_Windows2000_ tagVS_FIXEDFILEINFO
++typedef struct  tagVS_FIXEDFILEINFO
  {
      DWORD   dwSignature;            /* e.g. 0xfeef04bd */
      DWORD   dwStrucVersion;         /* e.g. 0x00000042 = "0.42" */

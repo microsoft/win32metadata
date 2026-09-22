@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h
-index 38f5623b7911ca83ed780b6ccec436461610b1eb..863ebfcee5002692bb816edf98f381e7393602f0 100644
+index 38f5623b79..ca41e1cfcd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/lowlevelmonitorconfigurationapi.h
 @@ -5,6 +5,7 @@
@@ -15,24 +15,45 @@ index 38f5623b7911ca83ed780b6ccec436461610b1eb..863ebfcee5002692bb816edf98f381e7
  #pragma pack( push, 1  )
  
 -typedef struct _MC_TIMING_REPORT
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MC_TIMING_REPORT
++typedef struct   _MC_TIMING_REPORT
  {
      DWORD dwHorizontalFrequencyInHZ;
      DWORD dwVerticalFrequencyInHZ;
-@@ -41,10 +42,16 @@ _BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
+@@ -32,7 +33,7 @@ typedef enum _MC_VCP_CODE_TYPE
+ 
+ } MC_VCP_CODE_TYPE, *LPMC_VCP_CODE_TYPE;
+ 
+-_BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
+     (
+     HANDLE hMonitor,
+     BYTE bVCPCode,
+@@ -41,20 +42,26 @@ _BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
      _Out_opt_ LPDWORD pdwMaximumValue
      );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  _BOOL WINAPI SetVCPFeature( HANDLE hMonitor, BYTE bVCPCode, DWORD dwNewValue );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ 
++
  _BOOL WINAPI SaveCurrentSettings( HANDLE hMonitor );
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ 
++
  _BOOL WINAPI GetCapabilitiesStringLength( HANDLE hMonitor, _Out_ LPDWORD pdwCapabilitiesStringLengthInCharacters );
  
- _BOOL WINAPI CapabilitiesRequestAndCapabilitiesReply 
+-_BOOL WINAPI CapabilitiesRequestAndCapabilitiesReply 
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI CapabilitiesRequestAndCapabilitiesReply 
+     (
+     HANDLE hMonitor, 
+     _Out_writes_(dwCapabilitiesStringLengthInCharacters) LPSTR pszASCIICapabilitiesString, 
+     DWORD dwCapabilitiesStringLengthInCharacters
+     );
+ 
+-_BOOL WINAPI GetTimingReport( HANDLE hMonitor, _Out_ LPMC_TIMING_REPORT pmtrMonitorTimingReport );
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI GetTimingReport( HANDLE hMonitor, _Out_ LPMC_TIMING_REPORT pmtrMonitorTimingReport );
+ 
+ #pragma pack( pop )
+ 

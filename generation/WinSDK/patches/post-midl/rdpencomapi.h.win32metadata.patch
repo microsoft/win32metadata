@@ -1,0 +1,350 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rdpencomapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/rdpencomapi.h
+index fae26bdb17..72fcbc5c34 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/rdpencomapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/rdpencomapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -848,7 +849,7 @@ EXTERN_C const IID IID_IRDPSRAPIDebug;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CLXCmdLine( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pCLXCmdLine) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pCLXCmdLine) = 0;
+         
+     };
+     
+@@ -938,7 +939,7 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLogger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("071c2533-0fa4-4e8f-ae83-9c10b4305ab5")
++    MIDL_INTERFACE("071c2533-0fa4-4e8f-ae83-9c10b4305ab5") _Windows_SupportedOS_Windows81_ 
+     IRDPSRAPIPerfCounterLogger : public IUnknown
+     {
+     public:
+@@ -1025,7 +1026,7 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLoggingManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9a512c86-ac6e-4a8e-b1a4-fcef363f6e64")
++    MIDL_INTERFACE("9a512c86-ac6e-4a8e-b1a4-fcef363f6e64") _Windows_SupportedOS_Windows81_ 
+     IRDPSRAPIPerfCounterLoggingManager : public IUnknown
+     {
+     public:
+@@ -1116,7 +1117,7 @@ EXTERN_C const IID IID_IRDPSRAPIAudioStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e3e30ef9-89c6-4541-ba3b-19336ac6d31c")
++    MIDL_INTERFACE("e3e30ef9-89c6-4541-ba3b-19336ac6d31c") _Windows_SupportedOS_Windows81_ 
+     IRDPSRAPIAudioStream : public IUnknown
+     {
+     public:
+@@ -1251,7 +1252,7 @@ EXTERN_C const IID IID_IRDPSRAPIClipboardUseEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D559F59A-7A27-4138-8763-247CE5F659A8")
++    MIDL_INTERFACE("D559F59A-7A27-4138-8763-247CE5F659A8") _Windows_SupportedOS_10240_ 
+     IRDPSRAPIClipboardUseEvents : public IUnknown
+     {
+     public:
+@@ -1355,7 +1356,7 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("beafe0f9-c77b-4933-ba9f-a24cddcc27cf")
++    MIDL_INTERFACE("beafe0f9-c77b-4933-ba9f-a24cddcc27cf") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIWindow : public IDispatch
+     {
+     public:
+@@ -1377,7 +1378,7 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Show( void) = 0;
+         
+@@ -1578,7 +1579,7 @@ EXTERN_C const IID IID_IRDPSRAPIWindowList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8a05ce44-715a-4116-a189-a118f30a07bd")
++    MIDL_INTERFACE("8a05ce44-715a-4116-a189-a118f30a07bd") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIWindowList : public IDispatch
+     {
+     public:
+@@ -1744,7 +1745,7 @@ EXTERN_C const IID IID_IRDPSRAPIApplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("41e7a09d-eb7a-436e-935d-780ca2628324")
++    MIDL_INTERFACE("41e7a09d-eb7a-436e-935d-780ca2628324") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIApplication : public IDispatch
+     {
+     public:
+@@ -1766,7 +1767,7 @@ EXTERN_C const IID IID_IRDPSRAPIApplication;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
+             /* [annotation][retval][out] */ 
+@@ -1958,7 +1959,7 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d4b4aeb3-22dc-4837-b3b6-42ea2517849a")
++    MIDL_INTERFACE("d4b4aeb3-22dc-4837-b3b6-42ea2517849a") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIApplicationList : public IDispatch
+     {
+     public:
+@@ -2124,7 +2125,7 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationFilter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d20f10ca-6637-4f06-b1d5-277ea7e5160d")
++    MIDL_INTERFACE("d20f10ca-6637-4f06-b1d5-277ea7e5160d") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIApplicationFilter : public IDispatch
+     {
+     public:
+@@ -2312,7 +2313,7 @@ EXTERN_C const IID IID_IRDPSRAPISessionProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("339b24f2-9bc0-4f16-9aac-f165433d13d4")
++    MIDL_INTERFACE("339b24f2-9bc0-4f16-9aac-f165433d13d4") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPISessionProperties : public IDispatch
+     {
+     public:
+@@ -2482,21 +2483,21 @@ EXTERN_C const IID IID_IRDPSRAPIInvitation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4fac1d43-fc51-45bb-b1b4-2b53aa562fa3")
++    MIDL_INTERFACE("4fac1d43-fc51-45bb-b1b4-2b53aa562fa3") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIInvitation : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectionString( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_GroupName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Password( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AttendeeLimit( 
+             /* [annotation][retval][out] */ 
+@@ -2709,7 +2710,7 @@ EXTERN_C const IID IID_IRDPSRAPIInvitationManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4722b049-92c3-4c2d-8a65-f7348f644dcf")
++    MIDL_INTERFACE("4722b049-92c3-4c2d-8a65-f7348f644dcf") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIInvitationManager : public IDispatch
+     {
+     public:
+@@ -2917,7 +2918,7 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f74049a4-3d06-4028-8193-0a8c29bc2452")
++    MIDL_INTERFACE("f74049a4-3d06-4028-8193-0a8c29bc2452") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPITcpConnectionInfo : public IDispatch
+     {
+     public:
+@@ -2931,7 +2932,7 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalIP( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbsrLocalIP) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbsrLocalIP) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PeerPort( 
+             /* [annotation][retval][out] */ 
+@@ -2939,7 +2940,7 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PeerIP( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrIP) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrIP) = 0;
+         
+     };
+     
+@@ -3118,7 +3119,7 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ec0671b3-1b78-4b80-a464-9132247543e3")
++    MIDL_INTERFACE("ec0671b3-1b78-4b80-a464-9132247543e3") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIAttendee : public IDispatch
+     {
+     public:
+@@ -3128,7 +3129,7 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_RemoteName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ControlLevel( 
+             /* [annotation][retval][out] */ 
+@@ -3354,7 +3355,7 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ba3a37e8-33da-4749-8da0-07fa34da7944")
++    MIDL_INTERFACE("ba3a37e8-33da-4749-8da0-07fa34da7944") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIAttendeeManager : public IDispatch
+     {
+     public:
+@@ -3520,7 +3521,7 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeDisconnectInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c187689f-447c-44a1-9c14-fffbb3b7ec17")
++    MIDL_INTERFACE("c187689f-447c-44a1-9c14-fffbb3b7ec17") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIAttendeeDisconnectInfo : public IDispatch
+     {
+     public:
+@@ -3695,7 +3696,7 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("05e12f95-28b3-4c9a-8780-d0248574a1e0")
++    MIDL_INTERFACE("05e12f95-28b3-4c9a-8780-d0248574a1e0") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIVirtualChannel : public IDispatch
+     {
+     public:
+@@ -3715,7 +3716,7 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannel;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
+             /* [annotation][retval][out] */ 
+@@ -3908,7 +3909,7 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannelManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0d11c661-5d0d-4ee4-89df-2166ae1fdfed")
++    MIDL_INTERFACE("0d11c661-5d0d-4ee4-89df-2166ae1fdfed") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIVirtualChannelManager : public IDispatch
+     {
+     public:
+@@ -4099,7 +4100,7 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5")
++    MIDL_INTERFACE("c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPIViewer : public IDispatch
+     {
+     public:
+@@ -4147,7 +4148,7 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DisconnectedText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDisconnectedText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDisconnectedText) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RequestColorDepthChange( 
+             /* [annotation][in] */ 
+@@ -4165,7 +4166,7 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrPassword,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrReverseConnectString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrReverseConnectString) = 0;
+         
+     };
+     
+@@ -4433,7 +4434,7 @@ EXTERN_C const IID IID_IRDPViewerInputSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BB590853-A6C5-4A7B-8DD4-76B69EEA12D5")
++    MIDL_INTERFACE("BB590853-A6C5-4A7B-8DD4-76B69EEA12D5") _Windows_SupportedOS_Windows81_ 
+     IRDPViewerInputSink : public IUnknown
+     {
+     public:
+@@ -4647,7 +4648,7 @@ EXTERN_C const IID IID_IRDPSRAPIFrameBuffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3D67E7D2-B27B-448E-81B3-C6110ED8B4BE")
++    MIDL_INTERFACE("3D67E7D2-B27B-448E-81B3-C6110ED8B4BE") _Windows_SupportedOS_10240_ 
+     IRDPSRAPIFrameBuffer : public IDispatch
+     {
+     public:
+@@ -4851,7 +4852,7 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamBuffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81c80290-5085-44b0-b460-f865c39cb4a9")
++    MIDL_INTERFACE("81c80290-5085-44b0-b460-f865c39cb4a9") _Windows_SupportedOS_Windows7_ 
+     IRDPSRAPITransportStreamBuffer : public IUnknown
+     {
+     public:
+@@ -5055,7 +5056,7 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ea81c254-f5af-4e40-982e-3e63bb595276")
++    MIDL_INTERFACE("ea81c254-f5af-4e40-982e-3e63bb595276") _Windows_SupportedOS_Windows7_ 
+     IRDPSRAPITransportStreamEvents : public IUnknown
+     {
+     public:
+@@ -5168,7 +5169,7 @@ EXTERN_C const IID IID_IRDPSRAPITransportStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("36cfa065-43bb-4ef7-aed7-9b88a5053036")
++    MIDL_INTERFACE("36cfa065-43bb-4ef7-aed7-9b88a5053036") _Windows_SupportedOS_Windows7_ 
+     IRDPSRAPITransportStream : public IUnknown
+     {
+     public:
+@@ -5320,7 +5321,7 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eeb20886-e470-4cf6-842b-2739c0ec5cfb")
++    MIDL_INTERFACE("eeb20886-e470-4cf6-842b-2739c0ec5cfb") _Windows_SupportedOS_WindowsVista_ 
+     IRDPSRAPISharingSession : public IDispatch
+     {
+     public:
+@@ -5646,7 +5647,7 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fee4ee57-e3e8-4205-8fb0-8fd1d0675c21")
++    MIDL_INTERFACE("fee4ee57-e3e8-4205-8fb0-8fd1d0675c21") _Windows_SupportedOS_10240_ 
+     IRDPSRAPISharingSession2 : public IRDPSRAPISharingSession
+     {
+     public:
+@@ -6005,7 +6006,7 @@ EXTERN_C const IID DIID__IRDPSessionEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+ 
+-    MIDL_INTERFACE("98a97042-6698-40e9-8efd-b3200990004b")
++    MIDL_INTERFACE("98a97042-6698-40e9-8efd-b3200990004b") _Windows_SupportedOS_WindowsVista_ 
+     _IRDPSessionEvents : public IDispatch
+     {
+     };

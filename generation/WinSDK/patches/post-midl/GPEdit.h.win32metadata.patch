@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h b/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h
-index e1a069eab85e3d4798496f43e3299a23fddbfb0a..953d0e1c1250662524c6c9b2e2509b126aa62c75 100644
+index e1a069eab8..f0ad1f3f46 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/GPEdit.h
 @@ -162,6 +162,7 @@ DEFINE_GUID(IID_IRSOPInformation, 0x9a5a81b5, 0xd9c7, 0x49ef, 0x9d, 0x11, 0xdd,
@@ -10,27 +10,87 @@ index e1a069eab85e3d4798496f43e3299a23fddbfb0a..953d0e1c1250662524c6c9b2e2509b12
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -707,6 +708,7 @@ typedef IRSOPInformation *LPRSOPINFORMATION;
+@@ -422,7 +423,7 @@ DECLARE_INTERFACE_(IGroupPolicyObject, IUnknown)
+     // dwFlags is a bitmask of GPO open / creation flags listed above
+     //
+ 
+-    STDMETHOD(OpenDSGPO) (THIS_ _In_ LPOLESTR pszPath, DWORD dwFlags) PURE;
++    STDMETHOD(OpenDSGPO) (THIS_ _In_ LPOLESTR pszPath, _Win32_AssociatedEnum_(GPO_OPEN_FLAGS) DWORD dwFlags) PURE;
+ 
+ 
+     //
+@@ -433,7 +434,7 @@ DECLARE_INTERFACE_(IGroupPolicyObject, IUnknown)
+     // dwFlags is a bitmask of GPO open / creation flags listed above
+     //
+ 
+-    STDMETHOD(OpenLocalMachineGPO) (THIS_ DWORD dwFlags) PURE;
++    STDMETHOD(OpenLocalMachineGPO) (THIS_ _Win32_AssociatedEnum_(GPO_OPEN_FLAGS) DWORD dwFlags) PURE;
+ 
+ 
+     //
+@@ -445,7 +446,7 @@ DECLARE_INTERFACE_(IGroupPolicyObject, IUnknown)
+     // dwFlags is a bitmask of GPO open / creation flags listed above
+     //
+ 
+-    STDMETHOD(OpenRemoteMachineGPO) (THIS_ _In_ LPOLESTR pszComputerName, DWORD dwFlags) PURE;
++    STDMETHOD(OpenRemoteMachineGPO) (THIS_ _In_ LPOLESTR pszComputerName, _Win32_AssociatedEnum_(GPO_OPEN_FLAGS) DWORD dwFlags) PURE;
+ 
+ 
+     //
+@@ -558,7 +559,7 @@ DECLARE_INTERFACE_(IGroupPolicyObject, IUnknown)
+     // hKey contains the registry key on return
+     //
+ 
+-    STDMETHOD(GetRegistryKey) (THIS_ DWORD dwSection, HKEY *hKey) PURE;
++    STDMETHOD(GetRegistryKey) (THIS_ _Win32_AssociatedEnum_(GPO_SECTION) DWORD dwSection, HKEY *hKey) PURE;
+ 
+ 
+     //
+@@ -567,7 +568,7 @@ DECLARE_INTERFACE_(IGroupPolicyObject, IUnknown)
+     // dwOptions receives the GPO_OPTION_* flags
+     //
+ 
+-    STDMETHOD(GetOptions) (THIS_ DWORD *dwOptions) PURE;
++    STDMETHOD(GetOptions) (THIS_ _Win32_AssociatedEnum_(GPO_OPTIONS) DWORD *dwOptions) PURE;
+ 
+ 
+     //
+@@ -586,7 +587,7 @@ DECLARE_INTERFACE_(IGroupPolicyObject, IUnknown)
+     // dwMask specificies which of the dwOptions to change
+     //
+ 
+-    STDMETHOD(SetOptions) (THIS_ DWORD dwOptions, DWORD dwMask) PURE;
++    STDMETHOD(SetOptions) (THIS_ _Win32_AssociatedEnum_(GPO_OPTIONS) DWORD dwOptions, DWORD dwMask) PURE;
+ 
+ 
+     //
+@@ -706,7 +707,8 @@ typedef IRSOPInformation *LPRSOPINFORMATION;
+ //
  //=============================================================================
  
- GPEDITAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ GPEDITAPI
++ 
  HRESULT
  WINAPI
  CreateGPOLink(
-@@ -729,6 +731,7 @@ CreateGPOLink(
+@@ -728,7 +730,8 @@ CreateGPOLink(
+ //
  //=============================================================================
  
- GPEDITAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ GPEDITAPI
++ 
  HRESULT
  WINAPI
  DeleteGPOLink(
-@@ -749,6 +752,7 @@ DeleteGPOLink(
+@@ -748,7 +751,8 @@ DeleteGPOLink(
+ //
  //=============================================================================
  
- GPEDITAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ GPEDITAPI
++ 
  HRESULT
  WINAPI
  DeleteAllGPOLinks(
@@ -39,31 +99,89 @@ index e1a069eab85e3d4798496f43e3299a23fddbfb0a..953d0e1c1250662524c6c9b2e2509b12
  #define GPO_BROWSE_SENDAPPLYONEDIT      0x00000040   // Send the apply event if edit menu is selected
  
 -typedef struct tag_GPOBROWSEINFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tag_GPOBROWSEINFO
++typedef struct   tag_GPOBROWSEINFO
  {
      DWORD       dwSize;                   // [in] Initialized to the size of this structure
      DWORD       dwFlags;                  // [in] Flags defined above
-@@ -797,6 +801,7 @@ typedef struct tag_GPOBROWSEINFO
+@@ -796,7 +800,8 @@ typedef struct tag_GPOBROWSEINFO
+ } GPOBROWSEINFO, *LPGPOBROWSEINFO;
  
  
- GPEDITAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ GPEDITAPI
++ 
  HRESULT
  WINAPI
  BrowseForGPO(
-@@ -820,6 +825,7 @@ BrowseForGPO(
+@@ -819,7 +824,8 @@ BrowseForGPO(
+ //
  //=============================================================================
  
- GPEDITAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ GPEDITAPI
++ 
  HRESULT
  WINAPI
  ImportRSoPData(
-@@ -845,6 +851,7 @@ ImportRSoPData(
+@@ -844,7 +850,8 @@ ImportRSoPData(
+ //
  //=============================================================================
  
- GPEDITAPI
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
+-GPEDITAPI
++_Windows_SupportedOS_WindowsVista_ GPEDITAPI
++ 
  HRESULT
  WINAPI
  ExportRSoPData(
+@@ -860,4 +867,51 @@ ExportRSoPData(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("GPO_OPEN_LOAD_REGISTRY")
++#undef GPO_OPEN_LOAD_REGISTRY
++#pragma push_macro("GPO_OPEN_READ_ONLY")
++#undef GPO_OPEN_READ_ONLY
++enum GPO_OPEN_FLAGS : unsigned int
++{
++    GPO_OPEN_LOAD_REGISTRY = 1U,
++    GPO_OPEN_READ_ONLY = 2U,
++};
++#pragma pop_macro("GPO_OPEN_READ_ONLY")
++#pragma pop_macro("GPO_OPEN_LOAD_REGISTRY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("GPO_OPTION_DISABLE_USER")
++#undef GPO_OPTION_DISABLE_USER
++#pragma push_macro("GPO_OPTION_DISABLE_MACHINE")
++#undef GPO_OPTION_DISABLE_MACHINE
++enum [[clang::flag_enum]] GPO_OPTIONS : unsigned int
++{
++    GPO_OPTION_DISABLE_USER = 1U,
++    GPO_OPTION_DISABLE_MACHINE = 2U,
++};
++#pragma pop_macro("GPO_OPTION_DISABLE_MACHINE")
++#pragma pop_macro("GPO_OPTION_DISABLE_USER")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("GPO_SECTION_ROOT")
++#undef GPO_SECTION_ROOT
++#pragma push_macro("GPO_SECTION_USER")
++#undef GPO_SECTION_USER
++#pragma push_macro("GPO_SECTION_MACHINE")
++#undef GPO_SECTION_MACHINE
++enum GPO_SECTION : unsigned int
++{
++    GPO_SECTION_ROOT = 0U,
++    GPO_SECTION_USER = 1U,
++    GPO_SECTION_MACHINE = 2U,
++};
++#pragma pop_macro("GPO_SECTION_MACHINE")
++#pragma pop_macro("GPO_SECTION_USER")
++#pragma pop_macro("GPO_SECTION_ROOT")
++#endif
++
+ #endif  /* _GPEDIT_H_ */

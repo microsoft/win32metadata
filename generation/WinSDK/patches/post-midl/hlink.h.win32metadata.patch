@@ -1,0 +1,138 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h b/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h
+index 96140263c6..3d610e134f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/HLink.h
+@@ -405,7 +405,11 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0000_v0_0_s_ifspec;
+ typedef /* [unique] */  __RPC_unique_pointer IHlink *LPHLINK;
+ 
+ typedef /* [public] */ 
+-enum __MIDL_IHlink_0001
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL_IHlink_0001
+     {
+         HLNF_INTERNALJUMP	= 0x1,
+         HLNF_OPENINNEWWINDOW	= 0x2,
+@@ -424,7 +428,11 @@ enum __MIDL_IHlink_0002
+     } 	HLINKGETREF;
+ 
+ typedef /* [public] */ 
+-enum __MIDL_IHlink_0003
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL_IHlink_0003
+     {
+         HLFNAMEF_DEFAULT	= 0,
+         HLFNAMEF_TRYCACHE	= 0x1,
+@@ -2068,6 +2076,107 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0007_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("HLTB_DOCKEDLEFT")
++#undef HLTB_DOCKEDLEFT
++#pragma push_macro("HLTB_DOCKEDTOP")
++#undef HLTB_DOCKEDTOP
++#pragma push_macro("HLTB_DOCKEDRIGHT")
++#undef HLTB_DOCKEDRIGHT
++#pragma push_macro("HLTB_DOCKEDBOTTOM")
++#undef HLTB_DOCKEDBOTTOM
++#pragma push_macro("HLTB_FLOATING")
++#undef HLTB_FLOATING
++enum HLTB_INFO : int
++{
++    HLTB_DOCKEDLEFT = 0,
++    HLTB_DOCKEDTOP = 1,
++    HLTB_DOCKEDRIGHT = 2,
++    HLTB_DOCKEDBOTTOM = 3,
++    HLTB_FLOATING = 4,
++};
++#pragma pop_macro("HLTB_FLOATING")
++#pragma pop_macro("HLTB_DOCKEDBOTTOM")
++#pragma pop_macro("HLTB_DOCKEDRIGHT")
++#pragma pop_macro("HLTB_DOCKEDTOP")
++#pragma pop_macro("HLTB_DOCKEDLEFT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HLBWIF_HASFRAMEWNDINFO")
++#undef HLBWIF_HASFRAMEWNDINFO
++#pragma push_macro("HLBWIF_HASDOCWNDINFO")
++#undef HLBWIF_HASDOCWNDINFO
++#pragma push_macro("HLBWIF_FRAMEWNDMAXIMIZED")
++#undef HLBWIF_FRAMEWNDMAXIMIZED
++#pragma push_macro("HLBWIF_DOCWNDMAXIMIZED")
++#undef HLBWIF_DOCWNDMAXIMIZED
++#pragma push_macro("HLBWIF_HASWEBTOOLBARINFO")
++#undef HLBWIF_HASWEBTOOLBARINFO
++#pragma push_macro("HLBWIF_WEBTOOLBARHIDDEN")
++#undef HLBWIF_WEBTOOLBARHIDDEN
++enum [[clang::flag_enum]] HLBWIF_FLAGS : int
++{
++    HLBWIF_HASFRAMEWNDINFO = 1,
++    HLBWIF_HASDOCWNDINFO = 2,
++    HLBWIF_FRAMEWNDMAXIMIZED = 4,
++    HLBWIF_DOCWNDMAXIMIZED = 8,
++    HLBWIF_HASWEBTOOLBARINFO = 16,
++    HLBWIF_WEBTOOLBARHIDDEN = 32,
++};
++#pragma pop_macro("HLBWIF_WEBTOOLBARHIDDEN")
++#pragma pop_macro("HLBWIF_HASWEBTOOLBARINFO")
++#pragma pop_macro("HLBWIF_DOCWNDMAXIMIZED")
++#pragma pop_macro("HLBWIF_FRAMEWNDMAXIMIZED")
++#pragma pop_macro("HLBWIF_HASDOCWNDINFO")
++#pragma pop_macro("HLBWIF_HASFRAMEWNDINFO")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HLID_INVALID")
++#undef HLID_INVALID
++#pragma push_macro("HLID_PREVIOUS")
++#undef HLID_PREVIOUS
++#pragma push_macro("HLID_NEXT")
++#undef HLID_NEXT
++#pragma push_macro("HLID_CURRENT")
++#undef HLID_CURRENT
++#pragma push_macro("HLID_STACKBOTTOM")
++#undef HLID_STACKBOTTOM
++#pragma push_macro("HLID_STACKTOP")
++#undef HLID_STACKTOP
++enum HLID_INFO : unsigned int
++{
++    HLID_INVALID = 0U,
++    HLID_PREVIOUS = 4294967295U,
++    HLID_NEXT = 4294967294U,
++    HLID_CURRENT = 4294967293U,
++    HLID_STACKBOTTOM = 4294967292U,
++    HLID_STACKTOP = 4294967291U,
++};
++#pragma pop_macro("HLID_STACKTOP")
++#pragma pop_macro("HLID_STACKBOTTOM")
++#pragma pop_macro("HLID_CURRENT")
++#pragma pop_macro("HLID_NEXT")
++#pragma pop_macro("HLID_PREVIOUS")
++#pragma pop_macro("HLID_INVALID")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("HLQF_ISVALID")
++#undef HLQF_ISVALID
++#pragma push_macro("HLQF_ISCURRENT")
++#undef HLQF_ISCURRENT
++enum HLQF_INFO : int
++{
++    HLQF_ISVALID = 1,
++    HLQF_ISCURRENT = 2,
++};
++#pragma pop_macro("HLQF_ISCURRENT")
++#pragma pop_macro("HLQF_ISVALID")
++#endif
++
+ #endif
+ 
+ 

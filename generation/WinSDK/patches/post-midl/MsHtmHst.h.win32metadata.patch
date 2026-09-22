@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
+index 0e58a78962..f6beddd6a5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
 @@ -132,6 +132,7 @@ extern "C"{
@@ -9,12 +10,18 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h b/generation/W
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -429,7 +430,7 @@ extern RPC_IF_HANDLE __MIDL_itf_mshtmhst_0000_0002_v0_0_s_ifspec;
+@@ -429,11 +430,11 @@ extern RPC_IF_HANDLE __MIDL_itf_mshtmhst_0000_0002_v0_0_s_ifspec;
  /* interface IDocHostUIHandler */
  /* [local][unique][uuid][object] */ 
  
 -typedef struct _DOCHOSTUIINFO
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ _DOCHOSTUIINFO
++typedef struct   _DOCHOSTUIINFO
      {
      ULONG cbSize;
-     DWORD dwFlags;
+-    DWORD dwFlags;
+-    DWORD dwDoubleClick;
++    _Win32_AssociatedEnum_(DOCHOSTUIFLAG) DWORD dwFlags;
++    _Win32_AssociatedEnum_(DOCHOSTUIDBLCLK) DWORD dwDoubleClick;
+     OLECHAR *pchHostCss;
+     OLECHAR *pchHostNS;
+     } 	DOCHOSTUIINFO;

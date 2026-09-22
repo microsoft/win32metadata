@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h
+index 5082730963..871c2decc3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h
 @@ -26,6 +26,7 @@ Notes:
@@ -9,196 +10,250 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h b/generation/Wi
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -53,7 +54,7 @@ extern "C" {
+@@ -51,9 +52,9 @@ extern "C" {
+ // Function Prototypes - Share
+ //
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetShareAdd(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareAdd(
++  NetShareAdd(
      _In_opt_ LMSTR servername,
      _In_ DWORD level,
      _When_( level ==  2, _In_reads_bytes_(sizeof(SHARE_INFO_2)) )
-@@ -66,7 +67,7 @@ NetShareAdd(
- _Check_return_
+@@ -63,10 +64,10 @@ NetShareAdd(
+     _Out_opt_ LPDWORD parm_err
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
 -NetShareEnum(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareEnum(
++  NetShareEnum(
      _In_opt_ LMSTR servername,
      _In_ DWORD level,
      _When_( level == 0,_Outptr_result_bytebuffer_(*entriesread * sizeof(SHARE_INFO_0)) )
-@@ -102,7 +103,7 @@ NetShareEnumSticky(
- _Check_return_
+@@ -99,10 +100,10 @@ NetShareEnumSticky(
+     _Inout_opt_ LPDWORD resume_handle
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
 -NetShareGetInfo(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareGetInfo(
++  NetShareGetInfo(
      _In_opt_ LMSTR servername,
      _In_ LMSTR netname,
      _In_ DWORD level,
-@@ -118,7 +119,7 @@ NetShareGetInfo(
+@@ -116,9 +117,9 @@ NetShareGetInfo(
+     LPBYTE *bufptr
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetShareSetInfo(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareSetInfo(
++  NetShareSetInfo(
      _In_opt_ LMSTR servername,
      _In_ LMSTR netname,
      _In_ DWORD level,
-@@ -136,7 +137,7 @@ NetShareSetInfo(
+@@ -134,9 +135,9 @@ NetShareSetInfo(
+     _Out_opt_ LPDWORD parm_err
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetShareDel(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareDel(
++  NetShareDel(
      _In_opt_ LMSTR servername,
      _In_ LMSTR netname,
      _Reserved_ DWORD reserved
-@@ -152,7 +153,7 @@ NetShareDelSticky(
+@@ -150,17 +151,17 @@ NetShareDelSticky(
+     _Reserved_ DWORD reserved
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetShareCheck(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareCheck(
++  NetShareCheck(
      _In_opt_ LMSTR servername,
      _In_ LMSTR device,
      _Out_ LPDWORD type
-@@ -160,7 +161,7 @@ NetShareCheck(
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetShareDelEx(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetShareDelEx(
++  NetShareDelEx(
      _In_opt_ LMSTR servername,
      _In_ DWORD level,
      _When_( level == 0, _In_reads_bytes_(sizeof(SHARE_INFO_0)) )
-@@ -175,17 +176,17 @@ NetShareDelEx(
+@@ -175,39 +176,39 @@ NetShareDelEx(
  // Data Structures - Share
  //
  
 -typedef struct _SHARE_INFO_0 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_0 {
++typedef struct   _SHARE_INFO_0 {
      LMSTR   shi0_netname;
  } SHARE_INFO_0, *PSHARE_INFO_0, *LPSHARE_INFO_0;
  
 -typedef struct _SHARE_INFO_1 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_1 {
++typedef struct   _SHARE_INFO_1 {
      LMSTR   shi1_netname;
-     DWORD   shi1_type;
+-    DWORD   shi1_type;
++    _Win32_AssociatedEnum_(SHARE_TYPE) DWORD   shi1_type;
      LMSTR   shi1_remark;
  } SHARE_INFO_1, *PSHARE_INFO_1, *LPSHARE_INFO_1;
  
 -typedef struct _SHARE_INFO_2 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_2 {
++typedef struct   _SHARE_INFO_2 {
      LMSTR   shi2_netname;
-     DWORD   shi2_type;
+-    DWORD   shi2_type;
++    _Win32_AssociatedEnum_(SHARE_TYPE) DWORD   shi2_type;
      LMSTR   shi2_remark;
-@@ -196,14 +197,14 @@ typedef struct _SHARE_INFO_2 {
+-    DWORD   shi2_permissions;
++    _Win32_AssociatedEnum_(SHARE_INFO_PERMISSIONS) DWORD   shi2_permissions;
+     DWORD   shi2_max_uses;
+     DWORD   shi2_current_uses;
+     LMSTR   shi2_path;
      LMSTR   shi2_passwd;
  } SHARE_INFO_2, *PSHARE_INFO_2, *LPSHARE_INFO_2;
  
 -typedef struct _SHARE_INFO_501 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_501 {
++typedef struct   _SHARE_INFO_501 {
      LMSTR   shi501_netname;
-     DWORD   shi501_type;
+-    DWORD   shi501_type;
++    _Win32_AssociatedEnum_(SHARE_TYPE) DWORD   shi501_type;
      LMSTR   shi501_remark;
      DWORD   shi501_flags;
  } SHARE_INFO_501, *PSHARE_INFO_501, *LPSHARE_INFO_501;
  
 -typedef struct _SHARE_INFO_502 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_502 {
++typedef struct   _SHARE_INFO_502 {
      LMSTR     shi502_netname;
-     DWORD     shi502_type;
+-    DWORD     shi502_type;
++    _Win32_AssociatedEnum_(SHARE_TYPE) DWORD     shi502_type;
      LMSTR     shi502_remark;
-@@ -216,7 +217,7 @@ typedef struct _SHARE_INFO_502 {
+-    DWORD     shi502_permissions;
++    _Win32_AssociatedEnum_(SHARE_INFO_PERMISSIONS) DWORD     shi502_permissions;
+     DWORD     shi502_max_uses;
+     DWORD     shi502_current_uses;
+     LMSTR     shi502_path;
+@@ -216,11 +217,11 @@ typedef struct _SHARE_INFO_502 {
      PSECURITY_DESCRIPTOR  shi502_security_descriptor;
  } SHARE_INFO_502, *PSHARE_INFO_502, *LPSHARE_INFO_502;
  
 -typedef struct _SHARE_INFO_503 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_503 {
++typedef struct   _SHARE_INFO_503 {
      LMSTR     shi503_netname;
-     DWORD     shi503_type;
+-    DWORD     shi503_type;
++    _Win32_AssociatedEnum_(SHARE_TYPE) DWORD     shi503_type;
      LMSTR     shi503_remark;
+-    DWORD     shi503_permissions;
++    _Win32_AssociatedEnum_(SHARE_INFO_PERMISSIONS) DWORD     shi503_permissions;
+     DWORD     shi503_max_uses;
+     DWORD     shi503_current_uses;
+     LMSTR     shi503_path;
 @@ -230,19 +231,19 @@ typedef struct _SHARE_INFO_503 {
      PSECURITY_DESCRIPTOR  shi503_security_descriptor;
  } SHARE_INFO_503, *PSHARE_INFO_503, *LPSHARE_INFO_503;
  
 -typedef struct _SHARE_INFO_1004 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_1004 {
++typedef struct   _SHARE_INFO_1004 {
      LMSTR   shi1004_remark;
  } SHARE_INFO_1004, *PSHARE_INFO_1004, *LPSHARE_INFO_1004;
  
 -typedef struct _SHARE_INFO_1005 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_1005 {
++typedef struct   _SHARE_INFO_1005 {
      DWORD  shi1005_flags;
  } SHARE_INFO_1005, *PSHARE_INFO_1005, *LPSHARE_INFO_1005;
  
 -typedef struct _SHARE_INFO_1006 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_1006 {
++typedef struct   _SHARE_INFO_1006 {
      DWORD   shi1006_max_uses;
  } SHARE_INFO_1006, *PSHARE_INFO_1006, *LPSHARE_INFO_1006;
  
 -typedef struct _SHARE_INFO_1501 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SHARE_INFO_1501 {
++typedef struct   _SHARE_INFO_1501 {
      DWORD   shi1501_reserved;
      PSECURITY_DESCRIPTOR  shi1501_security_descriptor;
  } SHARE_INFO_1501, *PSHARE_INFO_1501, *LPSHARE_INFO_1501;
-@@ -415,7 +416,7 @@ typedef struct _SERVER_ALIAS_INFO_0 {
- _Check_return_
+@@ -412,10 +413,10 @@ typedef struct _SERVER_ALIAS_INFO_0 {
+ //
+ // Function Prototypes Session
+ //
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
 -NetSessionEnum(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetSessionEnum(
++  NetSessionEnum(
      _In_opt_ LMSTR servername,
      _In_opt_ LMSTR UncClientName,
      _In_opt_ LMSTR username,
-@@ -434,7 +435,7 @@ NetSessionEnum(
+@@ -432,18 +433,18 @@ NetSessionEnum(
+     _Inout_opt_ LPDWORD resume_handle
+     );
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetSessionDel(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetSessionDel(
++  NetSessionDel(
      _In_opt_ LMSTR servername,
      _In_opt_ LMSTR UncClientName,
      _In_opt_ LMSTR username
-@@ -443,7 +444,7 @@ NetSessionDel(
- _Check_return_
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0 )
  NET_API_STATUS NET_API_FUNCTION
 -NetSessionGetInfo(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetSessionGetInfo(
++  NetSessionGetInfo(
      _In_opt_ LMSTR servername,
      _In_ LMSTR UncClientName,
      _In_ LMSTR username,
-@@ -459,11 +460,11 @@ NetSessionGetInfo(
+@@ -459,43 +460,43 @@ NetSessionGetInfo(
  // Data Structures - Session
  //
  
 -typedef struct _SESSION_INFO_0 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SESSION_INFO_0 {
++typedef struct   _SESSION_INFO_0 {
      LMSTR     sesi0_cname;              // client name (no backslashes)
  } SESSION_INFO_0, *PSESSION_INFO_0, *LPSESSION_INFO_0;
  
 -typedef struct _SESSION_INFO_1 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SESSION_INFO_1 {
++typedef struct   _SESSION_INFO_1 {
      LMSTR     sesi1_cname;              // client name (no backslashes)
      LMSTR     sesi1_username;
      DWORD     sesi1_num_opens;
-@@ -472,7 +473,7 @@ typedef struct _SESSION_INFO_1 {
-     DWORD     sesi1_user_flags;
+     DWORD     sesi1_time;
+     DWORD     sesi1_idle_time;
+-    DWORD     sesi1_user_flags;
++    _Win32_AssociatedEnum_(SESSION_INFO_USER_FLAGS) DWORD     sesi1_user_flags;
  } SESSION_INFO_1, *PSESSION_INFO_1, *LPSESSION_INFO_1;
  
 -typedef struct _SESSION_INFO_2 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SESSION_INFO_2 {
++typedef struct   _SESSION_INFO_2 {
      LMSTR     sesi2_cname;              // client name (no backslashes)
      LMSTR     sesi2_username;
      DWORD     sesi2_num_opens;
-@@ -482,14 +483,14 @@ typedef struct _SESSION_INFO_2 {
+     DWORD     sesi2_time;
+     DWORD     sesi2_idle_time;
+-    DWORD     sesi2_user_flags;
++    _Win32_AssociatedEnum_(SESSION_INFO_USER_FLAGS) DWORD     sesi2_user_flags;
      LMSTR     sesi2_cltype_name;
  } SESSION_INFO_2, *PSESSION_INFO_2, *LPSESSION_INFO_2;
  
 -typedef struct _SESSION_INFO_10 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SESSION_INFO_10 {
++typedef struct   _SESSION_INFO_10 {
      LMSTR     sesi10_cname;             // client name (no backslashes)
      LMSTR     sesi10_username;
      DWORD     sesi10_time;
@@ -206,71 +261,170 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h b/generation/Wi
  } SESSION_INFO_10, *PSESSION_INFO_10, *LPSESSION_INFO_10;
  
 -typedef struct _SESSION_INFO_502 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SESSION_INFO_502 {
++typedef struct   _SESSION_INFO_502 {
      LMSTR     sesi502_cname;             // client name (no backslashes)
      LMSTR     sesi502_username;
      DWORD     sesi502_num_opens;
-@@ -531,7 +532,7 @@ typedef struct _SESSION_INFO_502 {
- _Check_return_
+     DWORD     sesi502_time;
+     DWORD     sesi502_idle_time;
+-    DWORD     sesi502_user_flags;
++    _Win32_AssociatedEnum_(SESSION_INFO_USER_FLAGS) DWORD     sesi502_user_flags;
+     LMSTR     sesi502_cltype_name;
+     LMSTR     sesi502_transport;
+ } SESSION_INFO_502, *PSESSION_INFO_502, *LPSESSION_INFO_502;
+@@ -528,10 +529,10 @@ typedef struct _SESSION_INFO_502 {
+ // Function Prototypes - CONNECTION
+ //
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0  || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
 -NetConnectionEnum(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetConnectionEnum(
++  NetConnectionEnum(
      _In_opt_ LMSTR servername,
      _In_ LMSTR qualifier,
      _In_ DWORD level,
-@@ -548,11 +549,11 @@ NetConnectionEnum(
+@@ -548,13 +549,13 @@ NetConnectionEnum(
  // Data Structures - CONNECTION
  //
  
 -typedef struct _CONNECTION_INFO_0 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CONNECTION_INFO_0 {
++typedef struct   _CONNECTION_INFO_0 {
      DWORD   coni0_id;
  } CONNECTION_INFO_0, *PCONNECTION_INFO_0, *LPCONNECTION_INFO_0;
  
 -typedef struct _CONNECTION_INFO_1 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CONNECTION_INFO_1 {
++typedef struct   _CONNECTION_INFO_1 {
      DWORD   coni1_id;
-     DWORD   coni1_type;
+-    DWORD   coni1_type;
++    _Win32_AssociatedEnum_(SHARE_TYPE) DWORD   coni1_type;
      DWORD   coni1_num_opens;
-@@ -577,7 +578,7 @@ typedef struct _CONNECTION_INFO_1 {
+     DWORD   coni1_num_users;
+     DWORD   coni1_time;
+@@ -575,17 +576,17 @@ typedef struct _CONNECTION_INFO_1 {
+ // Function Prototypes - FILE
+ //
  
- _Check_return_
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  NET_API_STATUS NET_API_FUNCTION
 -NetFileClose(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetFileClose(
++  NetFileClose(
      _In_opt_ LMSTR servername,
      _In_ DWORD fileid
      );
-@@ -585,7 +586,7 @@ NetFileClose(
- _Check_return_
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
 -NetFileEnum(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetFileEnum(
++  NetFileEnum(
      _In_opt_ LMSTR servername,
      _In_opt_ LMSTR basepath,
      _In_opt_ LMSTR username,
-@@ -602,7 +603,7 @@ NetFileEnum(
- _Check_return_
+@@ -599,10 +600,10 @@ NetFileEnum(
+     _Inout_opt_ PDWORD_PTR resume_handle
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsXP_ _Check_return_
  _Success_( return == 0)
  NET_API_STATUS NET_API_FUNCTION
 -NetFileGetInfo(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ NetFileGetInfo(
++  NetFileGetInfo(
      _In_opt_ LMSTR servername,
      _In_ DWORD fileid,
      _In_ DWORD level,
-@@ -619,11 +620,11 @@ NetFileGetInfo(
+@@ -619,13 +620,13 @@ NetFileGetInfo(
  //  1 are not supported.
  //
  
 -typedef struct _FILE_INFO_2 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _FILE_INFO_2 {
++typedef struct   _FILE_INFO_2 {
      DWORD     fi2_id;
  } FILE_INFO_2, *PFILE_INFO_2, *LPFILE_INFO_2;
  
 -typedef struct _FILE_INFO_3 {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _FILE_INFO_3 {
++typedef struct   _FILE_INFO_3 {
      DWORD     fi3_id;
-     DWORD     fi3_permissions;
+-    DWORD     fi3_permissions;
++    _Win32_AssociatedEnum_(FILE_INFO_FLAGS_PERMISSIONS) DWORD     fi3_permissions;
      DWORD     fi3_num_locks;
+     LMSTR     fi3_pathname;
+     LMSTR     fi3_username;
+@@ -649,6 +650,73 @@ typedef struct _FILE_INFO_3 {
+ 
+ #endif // _LMFILE_
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("STYPE_DISKTREE")
++#undef STYPE_DISKTREE
++#pragma push_macro("STYPE_PRINTQ")
++#undef STYPE_PRINTQ
++#pragma push_macro("STYPE_DEVICE")
++#undef STYPE_DEVICE
++#pragma push_macro("STYPE_IPC")
++#undef STYPE_IPC
++#pragma push_macro("STYPE_SPECIAL")
++#undef STYPE_SPECIAL
++#pragma push_macro("STYPE_TEMPORARY")
++#undef STYPE_TEMPORARY
++#pragma push_macro("STYPE_MASK")
++#undef STYPE_MASK
++enum [[clang::flag_enum]] SHARE_TYPE : unsigned int
++{
++    STYPE_DISKTREE = 0U,
++    STYPE_PRINTQ = 1U,
++    STYPE_DEVICE = 2U,
++    STYPE_IPC = 3U,
++    STYPE_SPECIAL = 2147483648U,
++    STYPE_TEMPORARY = 1073741824U,
++    STYPE_MASK = 255U,
++};
++#pragma pop_macro("STYPE_MASK")
++#pragma pop_macro("STYPE_TEMPORARY")
++#pragma pop_macro("STYPE_SPECIAL")
++#pragma pop_macro("STYPE_IPC")
++#pragma pop_macro("STYPE_DEVICE")
++#pragma pop_macro("STYPE_PRINTQ")
++#pragma pop_macro("STYPE_DISKTREE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SESS_GUEST")
++#undef SESS_GUEST
++#pragma push_macro("SESS_NOENCRYPTION")
++#undef SESS_NOENCRYPTION
++enum SESSION_INFO_USER_FLAGS : unsigned int
++{
++    SESS_GUEST = 1U,
++    SESS_NOENCRYPTION = 2U,
++};
++#pragma pop_macro("SESS_NOENCRYPTION")
++#pragma pop_macro("SESS_GUEST")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PERM_FILE_READ")
++#undef PERM_FILE_READ
++#pragma push_macro("PERM_FILE_WRITE")
++#undef PERM_FILE_WRITE
++#pragma push_macro("PERM_FILE_CREATE")
++#undef PERM_FILE_CREATE
++enum [[clang::flag_enum]] FILE_INFO_FLAGS_PERMISSIONS : unsigned int
++{
++    PERM_FILE_READ = 1U,
++    PERM_FILE_WRITE = 2U,
++    PERM_FILE_CREATE = 4U,
++};
++#pragma pop_macro("PERM_FILE_CREATE")
++#pragma pop_macro("PERM_FILE_WRITE")
++#pragma pop_macro("PERM_FILE_READ")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 

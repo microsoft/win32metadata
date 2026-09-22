@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h
+index 0036bec591..918a21857b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h
 @@ -16,6 +16,7 @@
@@ -57,8 +58,12 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h b/generation/
  WINBASEAPI
  BOOL
  WINAPI
-@@ -49,7 +78,7 @@ DuplicateHandle(
-     _Outptr_ LPHANDLE lpTargetHandle,
+@@ -46,10 +75,10 @@ DuplicateHandle(
+     _In_ HANDLE hSourceProcessHandle,
+     _In_ HANDLE hSourceHandle,
+     _In_ HANDLE hTargetProcessHandle,
+-    _Outptr_ LPHANDLE lpTargetHandle,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_ LPHANDLE lpTargetHandle,
      _In_ DWORD dwDesiredAccess,
      _In_ BOOL bInheritHandle,
 -    _In_ DWORD dwOptions
@@ -86,7 +91,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h b/generation/
  GetHandleInformation(
      _In_ HANDLE hObject,
 -    _Out_ LPDWORD lpdwFlags
-+    _Out_ _Win32_AssociatedEnum_(HANDLE_FLAGS) LPDWORD lpdwFlags
++    _Out_  LPDWORD lpdwFlags
      );
  
 +_Windows_SupportedOS_Windows2000_
@@ -98,7 +103,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/handleapi.h b/generation/
      _In_ HANDLE hObject,
 -    _In_ DWORD dwMask,
 -    _In_ DWORD dwFlags
-+    _In_ _Win32_AssociatedEnum_(HANDLE_FLAGS) DWORD dwMask,
++    _In_  DWORD dwMask,
 +    _In_ _Win32_AssociatedEnum_(HANDLE_FLAGS) DWORD dwFlags
      );
  

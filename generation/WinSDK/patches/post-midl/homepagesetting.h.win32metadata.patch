@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h b/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
-index 0f150b877a21152df01434c825716f2e5fa21997..6f8b918812c0092415d67788a0b51169eee4f0c9 100644
+index 0f150b877a..5660f7c698 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
 @@ -90,6 +90,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index 0f150b877a21152df01434c825716f2e5fa21997..6f8b918812c0092415d67788a0b51169
      
      MIDL_INTERFACE("FDFC244F-18FA-4FF2-B08E-1D618F3FFBE4")
 -    IHomePageSetting : public IUnknown
-+    _Windows_SupportedOS_Windows7_ IHomePageSetting : public IUnknown
++     IHomePageSetting : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetHomePage( 

@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RadialControllerInterop.h b/generation/WinSDK/RecompiledIdlHeaders/um/RadialControllerInterop.h
+index f3e328d453..63c19e014a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RadialControllerInterop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RadialControllerInterop.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -99,7 +100,7 @@ EXTERN_C const IID IID_IRadialControllerInterop;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1B0535C9-57AD-45C1-9D79-AD5C34360513")
++    MIDL_INTERFACE("1B0535C9-57AD-45C1-9D79-AD5C34360513") _Windows_SupportedOS_14393_ 
+     IRadialControllerInterop : public IInspectable
+     {
+     public:
+@@ -220,7 +221,7 @@ EXTERN_C const IID IID_IRadialControllerConfigurationInterop;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("787cdaac-3186-476d-87e4-b9374a7b9970")
++    MIDL_INTERFACE("787cdaac-3186-476d-87e4-b9374a7b9970") _Windows_SupportedOS_14393_ 
+     IRadialControllerConfigurationInterop : public IInspectable
+     {
+     public:

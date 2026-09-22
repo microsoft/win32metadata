@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h b/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h
-index b23833ed8e1c10ad4272b4590fb5d74a0c6f7e98..703201c21872f8e7b75bf8dc0ff637b672c8a280 100644
+index b23833ed8e..ce8483ab55 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h
 @@ -12,6 +12,7 @@
@@ -15,7 +15,7 @@ index b23833ed8e1c10ad4272b4590fb5d74a0c6f7e98..703201c21872f8e7b75bf8dc0ff637b6
  } NAPI_DOMAIN_DESCRIPTION_BLOB;
  
 -typedef struct napi_provider_installation_blob_tag
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ napi_provider_installation_blob_tag
++typedef struct   napi_provider_installation_blob_tag
  {
      DWORD   dwVersion;
      DWORD   dwProviderType;

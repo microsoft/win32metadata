@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h b/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
-index c3e0a26832..467bba5006 100644
+index c3e0a26832..6e79a8441d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
 @@ -28,6 +28,7 @@
@@ -21,7 +21,7 @@ index c3e0a26832..467bba5006 100644
  /* The data structure CPlApplet() must fill in. */
  
 -typedef struct tagCPLINFO
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ tagCPLINFO
++typedef struct   tagCPLINFO
  {
      int         idIcon;     /* icon resource id, provided by CPlApplet() */
      int         idName;     /* display name string resource id, provided by CPlApplet() */
@@ -30,7 +30,7 @@ index c3e0a26832..467bba5006 100644
  } CPLINFO, *LPCPLINFO;
  
 -typedef struct tagNEWCPLINFOA
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ tagNEWCPLINFOA
++typedef struct   tagNEWCPLINFOA
  {
      DWORD   dwSize;         /* size, in bytes, of the structure */
      DWORD   dwFlags;
@@ -39,7 +39,7 @@ index c3e0a26832..467bba5006 100644
      CHAR    szHelpFile[128];/* path to help file to use */
  } NEWCPLINFOA, *LPNEWCPLINFOA;
 -typedef struct tagNEWCPLINFOW
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ tagNEWCPLINFOW
++typedef struct   tagNEWCPLINFOW
  {
      DWORD   dwSize;         /* size, in bytes, of the structure */
      DWORD   dwFlags;

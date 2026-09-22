@@ -1,0 +1,463 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h b/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
+index 30193c9754..c6e734c6ce 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -859,7 +860,7 @@ EXTERN_C const IID IID_ITaskFolderCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("79184a66-8664-423f-97f1-637356a5d812")
++    MIDL_INTERFACE("79184a66-8664-423f-97f1-637356a5d812") _Windows_SupportedOS_WindowsVista_ 
+     ITaskFolderCollection : public IDispatch
+     {
+     public:
+@@ -1021,7 +1022,7 @@ EXTERN_C const IID IID_ITaskService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2faba4c7-4da9-4013-9697-20cc3fd40f85")
++    MIDL_INTERFACE("2faba4c7-4da9-4013-9697-20cc3fd40f85") _Windows_SupportedOS_WindowsVista_ 
+     ITaskService : public IDispatch
+     {
+     public:
+@@ -1047,13 +1048,13 @@ EXTERN_C const IID IID_ITaskService;
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pConnected) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetServer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pServer) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pServer) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectedUser( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pUser) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pUser) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectedDomain( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pDomain) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pDomain) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HighestVersion( 
+             /* [retval][out] */ __RPC__out DWORD *pVersion) = 0;
+@@ -1259,7 +1260,7 @@ EXTERN_C const IID IID_ITaskHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("839d7762-5121-4009-9234-4f0d19394f04")
++    MIDL_INTERFACE("839d7762-5121-4009-9234-4f0d19394f04") _Windows_SupportedOS_WindowsVista_ 
+     ITaskHandler : public IUnknown
+     {
+     public:
+@@ -1374,7 +1375,7 @@ EXTERN_C const IID IID_ITaskHandlerStatus;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eaec7a8f-27a0-4ddc-8675-14726a01a38a")
++    MIDL_INTERFACE("eaec7a8f-27a0-4ddc-8675-14726a01a38a") _Windows_SupportedOS_WindowsVista_ 
+     ITaskHandlerStatus : public IUnknown
+     {
+     public:
+@@ -1471,18 +1472,18 @@ EXTERN_C const IID IID_ITaskVariables;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3e4c9351-d966-4b8b-bb87-ceba68bb0107")
++    MIDL_INTERFACE("3e4c9351-d966-4b8b-bb87-ceba68bb0107") _Windows_SupportedOS_WindowsVista_ 
+     ITaskVariables : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetInput( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pInput) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pInput) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetOutput( 
+             /* [in] */ __RPC__in BSTR input) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetContext( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pContext) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pContext) = 0;
+         
+     };
+     
+@@ -1577,7 +1578,7 @@ EXTERN_C const IID IID_ITaskNamedValuePair;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("39038068-2B46-4afd-8662-7BB6F868D221")
++    MIDL_INTERFACE("39038068-2B46-4afd-8662-7BB6F868D221") _Windows_SupportedOS_WindowsVista_ 
+     ITaskNamedValuePair : public IDispatch
+     {
+     public:
+@@ -1748,7 +1749,7 @@ EXTERN_C const IID IID_ITaskNamedValueCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B4EF826B-63C3-46e4-A504-EF69E4F7EA4D")
++    MIDL_INTERFACE("B4EF826B-63C3-46e4-A504-EF69E4F7EA4D") _Windows_SupportedOS_WindowsVista_ 
+     ITaskNamedValueCollection : public IDispatch
+     {
+     public:
+@@ -1945,24 +1946,24 @@ EXTERN_C const IID IID_IRunningTask;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("653758fb-7b9a-4f1e-a471-beeb8e9b834e")
++    MIDL_INTERFACE("653758fb-7b9a-4f1e-a471-beeb8e9b834e") _Windows_SupportedOS_WindowsVista_ 
+     IRunningTask : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InstanceGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pGuid) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pGuid) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pPath) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+             /* [retval][out] */ __RPC__out TASK_STATE *pState) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAction( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Stop( void) = 0;
+         
+@@ -2156,7 +2157,7 @@ EXTERN_C const IID IID_IRunningTaskCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6a67614b-6828-4fec-aa54-6d52e8f1f2db")
++    MIDL_INTERFACE("6a67614b-6828-4fec-aa54-6d52e8f1f2db") _Windows_SupportedOS_WindowsVista_ 
+     IRunningTaskCollection : public IDispatch
+     {
+     public:
+@@ -2318,15 +2319,15 @@ EXTERN_C const IID IID_IRegisteredTask;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9c86f320-dee3-4dd1-b972-a303f26b061e")
++    MIDL_INTERFACE("9c86f320-dee3-4dd1-b972-a303f26b061e") _Windows_SupportedOS_WindowsVista_ 
+     IRegisteredTask : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pPath) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+             /* [retval][out] */ __RPC__out TASK_STATE *pState) = 0;
+@@ -2368,11 +2369,11 @@ EXTERN_C const IID IID_IRegisteredTask;
+             /* [retval][out] */ __RPC__deref_out_opt ITaskDefinition **ppDefinition) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Xml( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pXml) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pXml) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityDescriptor( 
+             /* [in] */ LONG securityInformation,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pSddl) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pSddl) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityDescriptor( 
+             /* [in] */ __RPC__in BSTR sddl,
+@@ -2665,7 +2666,7 @@ EXTERN_C const IID IID_ITrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09941815-ea89-4b5b-89e0-2a773801fac3")
++    MIDL_INTERFACE("09941815-ea89-4b5b-89e0-2a773801fac3") _Windows_SupportedOS_WindowsVista_ 
+     ITrigger : public IDispatch
+     {
+     public:
+@@ -2935,7 +2936,7 @@ EXTERN_C const IID IID_IIdleTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d537d2b0-9fb3-4d34-9739-1ff5ce7b1ef3")
++    MIDL_INTERFACE("d537d2b0-9fb3-4d34-9739-1ff5ce7b1ef3") _Windows_SupportedOS_WindowsVista_ 
+     IIdleTrigger : public ITrigger
+     {
+     public:
+@@ -3167,7 +3168,7 @@ EXTERN_C const IID IID_ILogonTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("72DADE38-FAE4-4b3e-BAF4-5D009AF02B1C")
++    MIDL_INTERFACE("72DADE38-FAE4-4b3e-BAF4-5D009AF02B1C") _Windows_SupportedOS_WindowsVista_ 
+     ILogonTrigger : public ITrigger
+     {
+     public:
+@@ -3443,7 +3444,7 @@ EXTERN_C const IID IID_ISessionStateChangeTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("754DA71B-4385-4475-9DD9-598294FA3641")
++    MIDL_INTERFACE("754DA71B-4385-4475-9DD9-598294FA3641") _Windows_SupportedOS_WindowsVista_ 
+     ISessionStateChangeTrigger : public ITrigger
+     {
+     public:
+@@ -3741,7 +3742,7 @@ EXTERN_C const IID IID_IEventTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d45b0167-9653-4eef-b94f-0732ca7af251")
++    MIDL_INTERFACE("d45b0167-9653-4eef-b94f-0732ca7af251") _Windows_SupportedOS_WindowsVista_ 
+     IEventTrigger : public ITrigger
+     {
+     public:
+@@ -4039,7 +4040,7 @@ EXTERN_C const IID IID_ITimeTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b45747e0-eba7-4276-9f29-85c5bb300006")
++    MIDL_INTERFACE("b45747e0-eba7-4276-9f29-85c5bb300006") _Windows_SupportedOS_WindowsVista_ 
+     ITimeTrigger : public ITrigger
+     {
+     public:
+@@ -4293,7 +4294,7 @@ EXTERN_C const IID IID_IDailyTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("126c5cd8-b288-41d5-8dbf-e491446adc5c")
++    MIDL_INTERFACE("126c5cd8-b288-41d5-8dbf-e491446adc5c") _Windows_SupportedOS_WindowsVista_ 
+     IDailyTrigger : public ITrigger
+     {
+     public:
+@@ -4569,7 +4570,7 @@ EXTERN_C const IID IID_IWeeklyTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5038fc98-82ff-436d-8728-a512a57c9dc1")
++    MIDL_INTERFACE("5038fc98-82ff-436d-8728-a512a57c9dc1") _Windows_SupportedOS_WindowsVista_ 
+     IWeeklyTrigger : public ITrigger
+     {
+     public:
+@@ -4867,7 +4868,7 @@ EXTERN_C const IID IID_IMonthlyTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97c45ef1-6b02-4a1a-9c0e-1ebfba1500ac")
++    MIDL_INTERFACE("97c45ef1-6b02-4a1a-9c0e-1ebfba1500ac") _Windows_SupportedOS_WindowsVista_ 
+     IMonthlyTrigger : public ITrigger
+     {
+     public:
+@@ -5187,7 +5188,7 @@ EXTERN_C const IID IID_IMonthlyDOWTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77d025a3-90fa-43aa-b52e-cda5499b946a")
++    MIDL_INTERFACE("77d025a3-90fa-43aa-b52e-cda5499b946a") _Windows_SupportedOS_WindowsVista_ 
+     IMonthlyDOWTrigger : public ITrigger
+     {
+     public:
+@@ -5529,7 +5530,7 @@ EXTERN_C const IID IID_IBootTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2A9C35DA-D357-41f4-BBC1-207AC1B1F3CB")
++    MIDL_INTERFACE("2A9C35DA-D357-41f4-BBC1-207AC1B1F3CB") _Windows_SupportedOS_WindowsVista_ 
+     IBootTrigger : public ITrigger
+     {
+     public:
+@@ -5783,7 +5784,7 @@ EXTERN_C const IID IID_IRegistrationTrigger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c8fec3a-c218-4e0c-b23d-629024db91a2")
++    MIDL_INTERFACE("4c8fec3a-c218-4e0c-b23d-629024db91a2") _Windows_SupportedOS_WindowsVista_ 
+     IRegistrationTrigger : public ITrigger
+     {
+     public:
+@@ -6037,7 +6038,7 @@ EXTERN_C const IID IID_IAction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BAE54997-48B1-4cbe-9965-D6BE263EBEA4")
++    MIDL_INTERFACE("BAE54997-48B1-4cbe-9965-D6BE263EBEA4") _Windows_SupportedOS_WindowsVista_ 
+     IAction : public IDispatch
+     {
+     public:
+@@ -6197,7 +6198,7 @@ EXTERN_C const IID IID_IExecAction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c3d624d-fd6b-49a3-b9b7-09cb3cd3f047")
++    MIDL_INTERFACE("4c3d624d-fd6b-49a3-b9b7-09cb3cd3f047") _Windows_SupportedOS_WindowsVista_ 
+     IExecAction : public IAction
+     {
+     public:
+@@ -6638,7 +6639,7 @@ EXTERN_C const IID IID_IShowMessageAction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("505E9E68-AF89-46b8-A30F-56162A83D537")
++    MIDL_INTERFACE("505E9E68-AF89-46b8-A30F-56162A83D537") _Windows_SupportedOS_WindowsVista_ 
+     IShowMessageAction : public IAction
+     {
+     public:
+@@ -6834,7 +6835,7 @@ EXTERN_C const IID IID_IComHandlerAction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6D2FD252-75C5-4f66-90BA-2A7D8CC3039F")
++    MIDL_INTERFACE("6D2FD252-75C5-4f66-90BA-2A7D8CC3039F") _Windows_SupportedOS_WindowsVista_ 
+     IComHandlerAction : public IAction
+     {
+     public:
+@@ -7030,7 +7031,7 @@ EXTERN_C const IID IID_IEmailAction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("10F62C64-7E16-4314-A0C2-0C3683F99D40")
++    MIDL_INTERFACE("10F62C64-7E16-4314-A0C2-0C3683F99D40") _Windows_SupportedOS_WindowsVista_ 
+     IEmailAction : public IAction
+     {
+     public:
+@@ -7402,7 +7403,7 @@ EXTERN_C const IID IID_ITriggerCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85df5081-1b24-4f32-878a-d9d14df4cb77")
++    MIDL_INTERFACE("85df5081-1b24-4f32-878a-d9d14df4cb77") _Windows_SupportedOS_WindowsVista_ 
+     ITriggerCollection : public IDispatch
+     {
+     public:
+@@ -7597,7 +7598,7 @@ EXTERN_C const IID IID_IActionCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("02820E19-7B98-4ed2-B2E8-FDCCCEFF619B")
++    MIDL_INTERFACE("02820E19-7B98-4ed2-B2E8-FDCCCEFF619B") _Windows_SupportedOS_WindowsVista_ 
+     IActionCollection : public IDispatch
+     {
+     public:
+@@ -7836,7 +7837,7 @@ EXTERN_C const IID IID_IPrincipal;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D98D51E5-C9B4-496a-A9C1-18980261CF0F")
++    MIDL_INTERFACE("D98D51E5-C9B4-496a-A9C1-18980261CF0F") _Windows_SupportedOS_WindowsVista_ 
+     IPrincipal : public IDispatch
+     {
+     public:
+@@ -8095,7 +8096,7 @@ EXTERN_C const IID IID_IPrincipal2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("248919AE-E345-4A6D-8AEB-E0D3165C904E")
++    MIDL_INTERFACE("248919AE-E345-4A6D-8AEB-E0D3165C904E") _Windows_SupportedOS_Windows7_ 
+     IPrincipal2 : public IDispatch
+     {
+     public:
+@@ -8279,7 +8280,7 @@ EXTERN_C const IID IID_IRegistrationInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("416D8B73-CB41-4ea1-805C-9BE9A5AC4A74")
++    MIDL_INTERFACE("416D8B73-CB41-4ea1-805C-9BE9A5AC4A74") _Windows_SupportedOS_WindowsVista_ 
+     IRegistrationInfo : public IDispatch
+     {
+     public:
+@@ -8604,7 +8605,7 @@ EXTERN_C const IID IID_ITaskDefinition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f5bc8fc5-536d-4f77-b852-fbc1356fdeb6")
++    MIDL_INTERFACE("f5bc8fc5-536d-4f77-b852-fbc1356fdeb6") _Windows_SupportedOS_WindowsVista_ 
+     ITaskDefinition : public IDispatch
+     {
+     public:
+@@ -8885,7 +8886,7 @@ EXTERN_C const IID IID_ITaskSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8FD4711D-2D02-4c8c-87E3-EFF699DE127E")
++    MIDL_INTERFACE("8FD4711D-2D02-4c8c-87E3-EFF699DE127E") _Windows_SupportedOS_WindowsVista_ 
+     ITaskSettings : public IDispatch
+     {
+     public:
+@@ -9452,7 +9453,7 @@ EXTERN_C const IID IID_ITaskSettings2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C05C3F0-6EED-4c05-A15F-ED7D7A98A369")
++    MIDL_INTERFACE("2C05C3F0-6EED-4c05-A15F-ED7D7A98A369") _Windows_SupportedOS_Windows7_ 
+     ITaskSettings2 : public IDispatch
+     {
+     public:
+@@ -10388,7 +10389,7 @@ EXTERN_C const IID IID_IRegisteredTaskCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("86627eb4-42a7-41e4-a4d9-ac33a72f2d52")
++    MIDL_INTERFACE("86627eb4-42a7-41e4-a4d9-ac33a72f2d52") _Windows_SupportedOS_WindowsVista_ 
+     IRegisteredTaskCollection : public IDispatch
+     {
+     public:
+@@ -10550,15 +10551,15 @@ EXTERN_C const IID IID_ITaskFolder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8cfac062-a080-4c15-9a88-aa7c2af80dfc")
++    MIDL_INTERFACE("8cfac062-a080-4c15-9a88-aa7c2af80dfc") _Windows_SupportedOS_WindowsVista_ 
+     ITaskFolder : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pPath) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFolder( 
+             __RPC__in BSTR path,
+@@ -10611,7 +10612,7 @@ EXTERN_C const IID IID_ITaskFolder;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityDescriptor( 
+             LONG securityInformation,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pSddl) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pSddl) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityDescriptor( 
+             /* [in] */ __RPC__in BSTR sddl,
+@@ -10868,7 +10869,7 @@ EXTERN_C const IID IID_IIdleSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("84594461-0053-4342-A8FD-088FABF11F32")
++    MIDL_INTERFACE("84594461-0053-4342-A8FD-088FABF11F32") _Windows_SupportedOS_WindowsVista_ 
+     IIdleSettings : public IDispatch
+     {
+     public:
+@@ -11083,7 +11084,7 @@ EXTERN_C const IID IID_INetworkSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7DEA84-C30B-4245-80B6-00E9F646F1B4")
++    MIDL_INTERFACE("9F7DEA84-C30B-4245-80B6-00E9F646F1B4") _Windows_SupportedOS_WindowsVista_ 
+     INetworkSettings : public IDispatch
+     {
+     public:
+@@ -11254,7 +11255,7 @@ EXTERN_C const IID IID_IRepetitionPattern;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7FB9ACF1-26BE-400e-85B5-294B9C75DFD6")
++    MIDL_INTERFACE("7FB9ACF1-26BE-400e-85B5-294B9C75DFD6") _Windows_SupportedOS_WindowsVista_ 
+     IRepetitionPattern : public IDispatch
+     {
+     public:

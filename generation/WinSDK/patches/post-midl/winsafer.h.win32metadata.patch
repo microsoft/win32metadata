@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
-index 17c21ea419..507eb848fb 100644
+index 17c21ea419..79fd772d38 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
 @@ -18,6 +18,7 @@ Abstract:
@@ -44,7 +44,7 @@ index 17c21ea419..507eb848fb 100644
  #include <pshpack8.h>
  
 -typedef struct _SAFER_CODE_PROPERTIES_V1
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_CODE_PROPERTIES_V1
++typedef struct   _SAFER_CODE_PROPERTIES_V1
  {
  
      //
@@ -53,7 +53,7 @@ index 17c21ea419..507eb848fb 100644
  //
  
 -typedef enum _SAFER_POLICY_INFO_CLASS
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_POLICY_INFO_CLASS
++typedef enum   _SAFER_POLICY_INFO_CLASS
  {
  
      //
@@ -62,7 +62,7 @@ index 17c21ea419..507eb848fb 100644
  //
  
 -typedef enum _SAFER_OBJECT_INFO_CLASS
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_OBJECT_INFO_CLASS
++typedef enum   _SAFER_OBJECT_INFO_CLASS
  {
  
      SaferObjectLevelId = 1,               // get: DWORD
@@ -71,7 +71,7 @@ index 17c21ea419..507eb848fb 100644
  #include <pshpack8.h>
  
 -typedef enum _SAFER_IDENTIFICATION_TYPES
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_IDENTIFICATION_TYPES
++typedef enum   _SAFER_IDENTIFICATION_TYPES
  {
  
      SaferIdentityDefault,
@@ -80,7 +80,7 @@ index 17c21ea419..507eb848fb 100644
  } SAFER_IDENTIFICATION_TYPES;
  
 -typedef struct _SAFER_IDENTIFICATION_HEADER
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_IDENTIFICATION_HEADER
++typedef struct   _SAFER_IDENTIFICATION_HEADER
  {
      //
      // indicates the type of the structure, one of SaferIdentityType*
@@ -89,7 +89,7 @@ index 17c21ea419..507eb848fb 100644
  } SAFER_IDENTIFICATION_HEADER, *PSAFER_IDENTIFICATION_HEADER;
  
 -typedef struct _SAFER_PATHNAME_IDENTIFICATION
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_PATHNAME_IDENTIFICATION
++typedef struct   _SAFER_PATHNAME_IDENTIFICATION
  {
      //
      // header.dwIdentificationType must be SaferIdentityTypeImageName
@@ -98,7 +98,7 @@ index 17c21ea419..507eb848fb 100644
  } SAFER_PATHNAME_IDENTIFICATION, *PSAFER_PATHNAME_IDENTIFICATION;
  
 -typedef struct _SAFER_HASH_IDENTIFICATION
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_HASH_IDENTIFICATION
++typedef struct   _SAFER_HASH_IDENTIFICATION
  {
      //
      // header.dwIdentificationType must be SaferIdentityTypeImageHash
@@ -107,36 +107,42 @@ index 17c21ea419..507eb848fb 100644
  } SAFER_HASH_IDENTIFICATION2, *PSAFER_HASH_IDENTIFICATION2;
  
 -typedef struct _SAFER_URLZONE_IDENTIFICATION
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _SAFER_URLZONE_IDENTIFICATION
++typedef struct   _SAFER_URLZONE_IDENTIFICATION
  {
      //
      // header.dwIdentificationType must be SaferIdentityTypeUrlZone
-@@ -620,6 +643,9 @@ typedef struct _SAFER_URLZONE_IDENTIFICATION
+@@ -619,7 +642,10 @@ typedef struct _SAFER_URLZONE_IDENTIFICATION
+ // enumeration operations.
  //
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferGetPolicyInformation(
      _In_ DWORD                   dwScopeId,
-@@ -631,6 +657,9 @@ SaferGetPolicyInformation(
+@@ -630,7 +656,10 @@ SaferGetPolicyInformation(
+     _Reserved_ LPVOID            lpReserved
      );
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferSetPolicyInformation(
      _In_ DWORD                          dwScopeId,
-@@ -645,41 +674,56 @@ SaferSetPolicyInformation(
+@@ -644,42 +673,57 @@ SaferSetPolicyInformation(
+ // Functions to open or close a handle to a Safer Level.
  //
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferCreateLevel(
@@ -144,79 +150,90 @@ index 17c21ea419..507eb848fb 100644
      _In_ DWORD                dwLevelId,
      _In_ DWORD                OpenFlags,
 -    _Outptr_ SAFER_LEVEL_HANDLE * pLevelHandle,
-+    _Outptr_ _Win32_RAIIFree_(SaferCloseLevel) SAFER_LEVEL_HANDLE * pLevelHandle,
++    _Outptr_  SAFER_LEVEL_HANDLE * pLevelHandle,
      _Reserved_ LPVOID               lpReserved
      );
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferCloseLevel(
      _In_ SAFER_LEVEL_HANDLE hLevelHandle
      );
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferIdentifyLevel(
      _In_ DWORD              dwNumProperties,
      _In_reads_opt_(dwNumProperties) PSAFER_CODE_PROPERTIES pCodeProperties,
 -    _Outptr_ SAFER_LEVEL_HANDLE  * pLevelHandle,
-+    _Outptr_ _Win32_RAIIFree_(SaferCloseLevel) SAFER_LEVEL_HANDLE  * pLevelHandle,
++    _Outptr_  SAFER_LEVEL_HANDLE  * pLevelHandle,
      _In_opt_ LPVOID         lpReserved
      );
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferComputeTokenFromLevel(
      _In_ SAFER_LEVEL_HANDLE LevelHandle,
      _In_opt_ HANDLE         InAccessToken,
-     _Out_ PHANDLE           OutAccessToken,
+-    _Out_ PHANDLE           OutAccessToken,
 -    _In_ DWORD              dwFlags,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE           OutAccessToken,
 +    _In_ _Win32_AssociatedEnum_(SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS) DWORD              dwFlags,
      _Inout_opt_ LPVOID      lpReserved
      );
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferGetLevelInformation(
          _In_ SAFER_LEVEL_HANDLE                 LevelHandle,
-@@ -690,6 +734,9 @@ SaferGetLevelInformation(
+@@ -689,7 +733,10 @@ SaferGetLevelInformation(
+         _Out_ LPDWORD                           lpdwOutBufferSize
          );
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferSetLevelInformation(
      _In_ SAFER_LEVEL_HANDLE             LevelHandle,
-@@ -705,6 +752,9 @@ SaferSetLevelInformation(
+@@ -704,7 +751,10 @@ SaferSetLevelInformation(
+ // ShellExecute and cmd when a lower trust evaluation result occurs.
  //
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
 +_Win32_SetLastError_
  BOOL WINAPI
  SaferRecordEventLogEntry(
      _In_ SAFER_LEVEL_HANDLE hLevel,
-@@ -714,6 +764,8 @@ SaferRecordEventLogEntry(
+@@ -713,7 +763,9 @@ SaferRecordEventLogEntry(
+     );
  
  
- WINADVAPI
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
  BOOL WINAPI
  SaferiIsExecutableFileType(
      _In_ LPCWSTR szFullPathname,

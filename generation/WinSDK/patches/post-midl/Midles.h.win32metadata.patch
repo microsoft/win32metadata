@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
-index 89b4c7034c..840fc606d0 100644
+index 89b4c7034c..e73cfc7251 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
 @@ -20,6 +20,7 @@ Abstract:
@@ -14,33 +14,33 @@ index 89b4c7034c..840fc606d0 100644
  } MIDL_TYPE_PICKLING_INFO,  * PMIDL_TYPE_PICKLING_INFO;
  
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesEncodeIncrementalHandleCreate(
 -    void          * UserState,
 -    MIDL_ES_ALLOC   AllocFn,
 -    MIDL_ES_WRITE   WriteFn,
 -    handle_t      * pHandle );
-+    _Win32_Retained_ void          * UserState,
-+    _Win32_Retained_ MIDL_ES_ALLOC   AllocFn,
-+    _Win32_Retained_ MIDL_ES_WRITE   WriteFn,
-+    _Win32_RAIIFree_(MesHandleFree) handle_t      * pHandle );
++     void          * UserState,
++     MIDL_ES_ALLOC   AllocFn,
++     MIDL_ES_WRITE   WriteFn,
++     handle_t      * pHandle );
++
++_Windows_SupportedOS_Windows2000_ 
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
  RPC_STATUS  RPC_ENTRY
  MesDecodeIncrementalHandleCreate(
 -    void         *  UserState,
 -    MIDL_ES_READ    ReadFn,
 -    handle_t     *  pHandle );
-+    _Win32_Retained_ void         *  UserState,
-+    _Win32_Retained_ MIDL_ES_READ    ReadFn,
-+    _Win32_RAIIFree_(MesHandleFree) handle_t     *  pHandle );
++     void         *  UserState,
++     MIDL_ES_READ    ReadFn,
++     handle_t     *  pHandle );
++
  
++_Windows_SupportedOS_Windows2000_ 
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
  RPC_STATUS  RPC_ENTRY
  MesIncrementalHandleReset(
      handle_t        Handle,
@@ -48,72 +48,72 @@ index 89b4c7034c..840fc606d0 100644
 -    MIDL_ES_ALLOC   AllocFn,
 -    MIDL_ES_WRITE   WriteFn,
 -    MIDL_ES_READ    ReadFn,
-+    _Win32_Retained_ void     *      UserState,
-+    _Win32_Retained_ MIDL_ES_ALLOC   AllocFn,
-+    _Win32_Retained_ MIDL_ES_WRITE   WriteFn,
-+    _Win32_Retained_ MIDL_ES_READ    ReadFn,
++     void     *      UserState,
++     MIDL_ES_ALLOC   AllocFn,
++     MIDL_ES_WRITE   WriteFn,
++     MIDL_ES_READ    ReadFn,
      MIDL_ES_CODE    Operation );
  
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesEncodeFixedBufferHandleCreate(
 -    _Out_writes_bytes_(BufferSize) char *pBuffer,
-+    _Win32_Retained_ _Out_writes_bytes_(BufferSize) char *pBuffer,
++     _Out_writes_bytes_(BufferSize) char *pBuffer,
      _In_ unsigned long BufferSize,
 -    _Out_ unsigned long *pEncodedSize,
 -    _Out_ handle_t *pHandle
-+    _Win32_Retained_ _Out_ unsigned long *pEncodedSize,
-+    _Out_ _Win32_RAIIFree_(MesHandleFree) handle_t *pHandle
++     _Out_ unsigned long *pEncodedSize,
++    _Out_  handle_t *pHandle
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesEncodeDynBufferHandleCreate(
 -    _Outptr_result_bytebuffer_(*pEncodedSize) char **pBuffer,
 -    _Out_ unsigned long *pEncodedSize,
 -    _Out_ handle_t *pHandle
-+    _Win32_Retained_ _Outptr_result_bytebuffer_(*pEncodedSize) char **pBuffer,
-+    _Win32_Retained_ _Out_ unsigned long *pEncodedSize,
-+    _Out_ _Win32_RAIIFree_(MesHandleFree) handle_t *pHandle
++     _Outptr_result_bytebuffer_(*pEncodedSize) char **pBuffer,
++     _Out_ unsigned long *pEncodedSize,
++    _Out_  handle_t *pHandle
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesDecodeBufferHandleCreate(
 -    _In_reads_bytes_(BufferSize ) char * Buffer,
-+    _Win32_Retained_ _In_reads_bytes_(BufferSize ) char * Buffer,
++     _In_reads_bytes_(BufferSize ) char * Buffer,
      _In_ unsigned long   BufferSize,
 -    _Out_ handle_t  * pHandle
-+    _Out_ _Win32_RAIIFree_(MesHandleFree) handle_t  * pHandle
++    _Out_  handle_t  * pHandle
      );
  
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesBufferHandleReset(
      _In_ handle_t Handle,
 -    _In_ unsigned long HandleStyle,
-+    _In_ _Win32_AssociatedEnum_(MIDL_ES_HANDLE_STYLE) unsigned long HandleStyle,
++    _In_  unsigned long HandleStyle,
      _In_ MIDL_ES_CODE Operation,
      _In_opt_ _At_(*pBuffer, _Pre_readable_byte_size_(BufferSize)) char **pBuffer,
      _In_ unsigned long BufferSize,
 -    _Out_opt_ unsigned long *pEncodedSize
-+    _Win32_Retained_ _Out_opt_ unsigned long *pEncodedSize
++     _Out_opt_ unsigned long *pEncodedSize
      );
  
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesHandleFree( handle_t  Handle );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  RPC_STATUS  RPC_ENTRY
  MesInqProcEncodingId(
      handle_t                    Handle,

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wpcevent.h b/generation/WinSDK/RecompiledIdlHeaders/um/wpcevent.h
-index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b71c030a2c 100644
+index 4b627b5c5b..f11a3cbd4d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wpcevent.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wpcevent.h
 @@ -12,6 +12,7 @@
@@ -15,7 +15,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  // Reasons
  //
 -typedef enum tagWPCFLAG_ISBLOCKED
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPCFLAG_ISBLOCKED
++typedef enum  tagWPCFLAG_ISBLOCKED
  {
      WPCFLAG_ISBLOCKED_NOTBLOCKED            = 0x00000000,
      WPCFLAG_ISBLOCKED_IMBLOCKED             = 0x00000001,
@@ -24,7 +24,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPCFLAG_ISBLOCKED;
  
 -typedef enum tagWPCFLAG_LOGOFF_TYPE
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPCFLAG_LOGOFF_TYPE
++typedef enum  tagWPCFLAG_LOGOFF_TYPE
  {
      WPCFLAG_LOGOFF_TYPE_LOGOUT              = 0x00000000,
      WPCFLAG_LOGOFF_TYPE_RESTART             = 0x00000001,
@@ -33,7 +33,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPCFLAG_LOGOFF_TYPE;
  
 -typedef enum tagWPCFLAG_IM_LEAVE_FLAG
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPCFLAG_IM_LEAVE_FLAG
++typedef enum  tagWPCFLAG_IM_LEAVE_FLAG
  {
      WPCFLAG_IM_LEAVE_NORMAL           = 0x00000000,
      WPCFLAG_IM_LEAVE_FORCED              = 0x00000001,
@@ -42,7 +42,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  #define ARRAY_SEP_CHAR 0x9
 -typedef enum tagWPC_ARGS_SETTINGSCHANGEEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_SETTINGSCHANGEEVENT
++typedef enum  tagWPC_ARGS_SETTINGSCHANGEEVENT
  {
      WPC_ARGS_SETTINGSCHANGEEVENT_CLASS = 0,
      WPC_ARGS_SETTINGSCHANGEEVENT_SETTING,
@@ -51,7 +51,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  
 -typedef enum tagWPC_ARGS_SAFERAPPBLOCKED
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_SAFERAPPBLOCKED
++typedef enum  tagWPC_ARGS_SAFERAPPBLOCKED
  {
      WPC_ARGS_SAFERAPPBLOCKED_TIMESTAMP = 0,
      WPC_ARGS_SAFERAPPBLOCKED_USERID,
@@ -60,7 +60,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  //Email
 -typedef enum tagWPC_ARGS_EMAILRECEIEVEDEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_EMAILRECEIEVEDEVENT
++typedef enum  tagWPC_ARGS_EMAILRECEIEVEDEVENT
  {
      WPC_ARGS_EMAILRECEIEVEDEVENT_SENDER = 0,
      WPC_ARGS_EMAILRECEIEVEDEVENT_APPNAME,
@@ -69,7 +69,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_EMAILRECEIEVEDEVENT;
  
 -typedef enum tagWPC_ARGS_EMAILSENTEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_EMAILSENTEVENT
++typedef enum  tagWPC_ARGS_EMAILSENTEVENT
  {
      WPC_ARGS_EMAILSENTEVENT_SENDER = 0,
      WPC_ARGS_EMAILSENTEVENT_APPNAME,
@@ -78,7 +78,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  
 -typedef enum tagWPC_ARGS_EMAILCONTACTEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_EMAILCONTACTEVENT
++typedef enum  tagWPC_ARGS_EMAILCONTACTEVENT
  {
      WPC_ARGS_EMAILCONTACTEVENT_APPNAME = 0,
      WPC_ARGS_EMAILCONTACTEVENT_APPVERSION,
@@ -87,7 +87,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  //Media
 -typedef enum tagWPC_MEDIA_TYPE
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_MEDIA_TYPE
++typedef enum  tagWPC_MEDIA_TYPE
  {   
      WPC_MEDIA_TYPE_OTHER    = 0,
      WPC_MEDIA_TYPE_DVD,
@@ -96,7 +96,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  
 -typedef enum tagWPC_MEDIA_EXPLICIT_TYPE
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_MEDIA_EXPLICIT_TYPE
++typedef enum  tagWPC_MEDIA_EXPLICIT_TYPE
  {   
      WPC_MEDIA_EXPLICIT_FALSE = 0,
      WPC_MEDIA_EXPLICIT_TRUE,
@@ -104,7 +104,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  }   WPC_MEDIA_EXPLICIT;
  
 -typedef enum tagWPC_ARGS_MEDIAPLAYBACKEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_MEDIAPLAYBACKEVENT
++typedef enum  tagWPC_ARGS_MEDIAPLAYBACKEVENT
  {
      WPC_ARGS_MEDIAPLAYBACKEVENT_APPNAME = 0,
      WPC_ARGS_MEDIAPLAYBACKEVENT_APPVERSION,
@@ -113,7 +113,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_MEDIAPLAYBACKEVENT;
  
 -typedef enum tagWPC_ARGS_MEDIADOWNLOADEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_MEDIADOWNLOADEVENT
++typedef enum  tagWPC_ARGS_MEDIADOWNLOADEVENT
  {
      WPC_ARGS_MEDIADOWNLOADEVENT_APPNAME = 0,
      WPC_ARGS_MEDIADOWNLOADEVENT_APPVERSION,
@@ -122,7 +122,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  
  //IM
 -typedef enum tagWPC_ARGS_CONVERSATIONINITEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_CONVERSATIONINITEVENT
++typedef enum  tagWPC_ARGS_CONVERSATIONINITEVENT
  {
      WPC_ARGS_CONVERSATIONINITEVENT_APPNAME = 0,
      WPC_ARGS_CONVERSATIONINITEVENT_APPVERSION,
@@ -131,7 +131,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_CONVERSATIONINITEVENT;
  
 -typedef enum tagWPC_ARGS_CONVERSATIONJOINEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_CONVERSATIONJOINEVENT
++typedef enum  tagWPC_ARGS_CONVERSATIONJOINEVENT
  {
      WPC_ARGS_CONVERSATIONJOINEVENT_APPNAME = 0,
      WPC_ARGS_CONVERSATIONJOINEVENT_APPVERSION,
@@ -140,7 +140,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_CONVERSATIONJOINEVENT;
  
 -typedef enum tagWPC_ARGS_CONVERSATIONLEAVEEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_CONVERSATIONLEAVEEVENT
++typedef enum  tagWPC_ARGS_CONVERSATIONLEAVEEVENT
  {
      WPC_ARGS_CONVERSATIONLEAVEEVENT_APPNAME = 0,
      WPC_ARGS_CONVERSATIONLEAVEEVENT_APPVERSION,
@@ -149,7 +149,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_CONVERSATIONLEAVEEVENT;
  
 -typedef enum tagWPCFLAG_IM_FEATURE
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPCFLAG_IM_FEATURE
++typedef enum  tagWPCFLAG_IM_FEATURE
  {
      WPCFLAG_IM_FEATURE_NONE =     0x00,
      WPCFLAG_IM_FEATURE_VIDEO =    0x01,
@@ -158,7 +158,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPCFLAG_IM_FEATURE;
  
 -typedef enum tagWPC_ARGS_IMFEATUREEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_IMFEATUREEVENT
++typedef enum  tagWPC_ARGS_IMFEATUREEVENT
  {
      WPC_ARGS_IMFEATUREEVENT_APPNAME = 0,
      WPC_ARGS_IMFEATUREEVENT_APPVERSION,
@@ -167,7 +167,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_IMFEATUREEVENT;
  
 -typedef enum tagWPC_ARGS_IMCONTACTEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_IMCONTACTEVENT
++typedef enum  tagWPC_ARGS_IMCONTACTEVENT
  {
      WPC_ARGS_IMCONTACTEVENT_APPNAME = 0,
      WPC_ARGS_IMCONTACTEVENT_APPVERSION,
@@ -176,7 +176,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_IMCONTACTEVENT;
  //Games
 -typedef enum tagWPC_ARGS_GAMESTARTEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_GAMESTARTEVENT
++typedef enum  tagWPC_ARGS_GAMESTARTEVENT
  {
      WPC_ARGS_GAMESTARTEVENT_APPID = 0,
      WPC_ARGS_GAMESTARTEVENT_INSTANCEID,
@@ -185,7 +185,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  //Web
  // Don't change anything in this--IE7 relies on it!!
 -typedef enum tagWPC_ARGS_FILEDOWNLOADEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_FILEDOWNLOADEVENT
++typedef enum  tagWPC_ARGS_FILEDOWNLOADEVENT
  {
      WPC_ARGS_FILEDOWNLOADEVENT_URL = 0,
      WPC_ARGS_FILEDOWNLOADEVENT_APPNAME,
@@ -194,7 +194,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_FILEDOWNLOADEVENT;
  
 -typedef enum tagWPC_ARGS_URLVISITEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_URLVISITEVENT
++typedef enum  tagWPC_ARGS_URLVISITEVENT
  {
      WPC_ARGS_URLVISITEVENT_URL = 0,
      WPC_ARGS_URLVISITEVENT_APPNAME,
@@ -203,7 +203,7 @@ index 4b627b5c5b5bcde200bb7d41f8001974a3fcae88..4b5df20f3ea06b2cc039cb6a3487c3b7
  } WPC_ARGS_CONTENTUSAGEEVENT;
  
 -typedef enum tagWPC_ARGS_CUSTOMEVENT
-+typedef enum _Windows_SupportedOS_WindowsVista_ tagWPC_ARGS_CUSTOMEVENT
++typedef enum  tagWPC_ARGS_CUSTOMEVENT
  {
      WPC_ARGS_CUSTOMEVENT_PUBLISHER = 0,
      WPC_ARGS_CUSTOMEVENT_APPNAME,

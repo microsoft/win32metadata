@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h b/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
-index 227870b8e9..e3e6ffcb4e 100644
+index 227870b8e9..a5cc5b6a08 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
 @@ -16,6 +16,7 @@ Revision History:
@@ -15,7 +15,7 @@ index 227870b8e9..e3e6ffcb4e 100644
  #ifndef _NTSAM_USER_ALL_INFO_
  #include "pshpack4.h"
 -typedef struct _USER_ALL_INFORMATION {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _USER_ALL_INFORMATION {
++typedef struct   _USER_ALL_INFORMATION {
      LARGE_INTEGER LastLogon;
      LARGE_INTEGER LastLogoff;
      LARGE_INTEGER PasswordLastSet;
@@ -24,7 +24,7 @@ index 227870b8e9..e3e6ffcb4e 100644
  } NETLOGON_LOGON_INFO_CLASS;
  
 -typedef struct _NETLOGON_LOGON_IDENTITY_INFO {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _NETLOGON_LOGON_IDENTITY_INFO {
++typedef struct   _NETLOGON_LOGON_IDENTITY_INFO {
      UNICODE_STRING LogonDomainName;
      ULONG ParameterControl;
      OLD_LARGE_INTEGER  LogonId;
@@ -64,3 +64,24 @@ index 227870b8e9..e3e6ffcb4e 100644
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationFilter(
      IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
+@@ -402,5 +411,20 @@ Msv1_0SubAuthenticationFilter(
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MSV1_0_PASSTHRU")
++#undef MSV1_0_PASSTHRU
++#pragma push_macro("MSV1_0_GUEST_LOGON")
++#undef MSV1_0_GUEST_LOGON
++enum MSV1_0 : unsigned int
++{
++    MSV1_0_PASSTHRU = 1U,
++    MSV1_0_GUEST_LOGON = 2U,
++};
++#pragma pop_macro("MSV1_0_GUEST_LOGON")
++#pragma pop_macro("MSV1_0_PASSTHRU")
++#endif
++
+ #endif /* _NTSUBAUTH_ */
+ 

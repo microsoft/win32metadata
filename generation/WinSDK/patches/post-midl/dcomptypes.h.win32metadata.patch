@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h
-index 6222321bf18282b9dd5af3a95b2b321e97989b6c..a623d9aa2eb6bcb13d019fdca9d3d36759b8db10 100644
+index 6222321bf1..04a0fb5e3a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h
 @@ -7,6 +7,7 @@
@@ -15,7 +15,7 @@ index 6222321bf18282b9dd5af3a95b2b321e97989b6c..a623d9aa2eb6bcb13d019fdca9d3d367
  //
  
 -enum DCOMPOSITION_BITMAP_INTERPOLATION_MODE
-+enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ DCOMPOSITION_BITMAP_INTERPOLATION_MODE
++enum   DCOMPOSITION_BITMAP_INTERPOLATION_MODE
  {
      DCOMPOSITION_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR = 0,
      DCOMPOSITION_BITMAP_INTERPOLATION_MODE_LINEAR           = 1,
@@ -24,7 +24,7 @@ index 6222321bf18282b9dd5af3a95b2b321e97989b6c..a623d9aa2eb6bcb13d019fdca9d3d367
  };
  
 -enum DCOMPOSITION_BORDER_MODE
-+enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ DCOMPOSITION_BORDER_MODE
++enum   DCOMPOSITION_BORDER_MODE
  {
      DCOMPOSITION_BORDER_MODE_SOFT       = 0,
      DCOMPOSITION_BORDER_MODE_HARD       = 1,
@@ -33,7 +33,7 @@ index 6222321bf18282b9dd5af3a95b2b321e97989b6c..a623d9aa2eb6bcb13d019fdca9d3d367
  };
  
 -enum DCOMPOSITION_COMPOSITE_MODE
-+enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ DCOMPOSITION_COMPOSITE_MODE
++enum   DCOMPOSITION_COMPOSITE_MODE
  {
      DCOMPOSITION_COMPOSITE_MODE_SOURCE_OVER        = 0,
      DCOMPOSITION_COMPOSITE_MODE_DESTINATION_INVERT = 1,
@@ -42,7 +42,7 @@ index 6222321bf18282b9dd5af3a95b2b321e97989b6c..a623d9aa2eb6bcb13d019fdca9d3d367
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
 -enum DCOMPOSITION_BACKFACE_VISIBILITY
-+enum _Windows_SupportedOS_Windows81_ DCOMPOSITION_BACKFACE_VISIBILITY
++enum  DCOMPOSITION_BACKFACE_VISIBILITY
  {
      DCOMPOSITION_BACKFACE_VISIBILITY_VISIBLE    = 0,
      DCOMPOSITION_BACKFACE_VISIBILITY_HIDDEN     = 1,

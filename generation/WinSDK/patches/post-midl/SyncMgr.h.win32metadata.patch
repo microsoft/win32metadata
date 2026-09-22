@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
-index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3b54ae426 100644
+index 8aa7a30938..a2cf6ac54c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 @@ -339,6 +339,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -388,7 +389,7 @@ EXTERN_C const IID IID_ISyncMgrHandlerCollection;
+@@ -387,8 +388,8 @@ EXTERN_C const IID IID_ISyncMgrHandlerCollection;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("a7f337a3-d20b-45cb-9ed7-87d094ca5045")
+-    MIDL_INTERFACE("a7f337a3-d20b-45cb-9ed7-87d094ca5045")
 -    ISyncMgrHandlerCollection : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrHandlerCollection : public IUnknown
++    MIDL_INTERFACE("a7f337a3-d20b-45cb-9ed7-87d094ca5045") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrHandlerCollection : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetHandlerEnumerator( 
@@ -33,7 +35,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_HANDLER_CAPABILITIES
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_HANDLER_CAPABILITIES
++enum   SYNCMGR_HANDLER_CAPABILITIES
      {
          SYNCMGR_HCM_NONE	= 0,
          SYNCMGR_HCM_PROVIDES_ICON	= 0x1,
@@ -42,16 +44,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_HANDLER_POLICIES
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_HANDLER_POLICIES
++enum   SYNCMGR_HANDLER_POLICIES
      {
          SYNCMGR_HPM_NONE	= 0,
          SYNCMGR_HPM_PREVENT_ACTIVATE	= 0x1,
-@@ -540,7 +541,7 @@ EXTERN_C const IID IID_ISyncMgrHandler;
+@@ -539,8 +540,8 @@ EXTERN_C const IID IID_ISyncMgrHandler;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("04ec2e43-ac77-49f9-9b98-0307ef7a72a2")
+-    MIDL_INTERFACE("04ec2e43-ac77-49f9-9b98-0307ef7a72a2")
 -    ISyncMgrHandler : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrHandler : public IUnknown
++    MIDL_INTERFACE("04ec2e43-ac77-49f9-9b98-0307ef7a72a2") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrHandler : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetName( 
@@ -69,16 +73,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_HANDLER_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_HANDLER_TYPE
++enum   SYNCMGR_HANDLER_TYPE
      {
          SYNCMGR_HT_UNSPECIFIED	= 0,
          SYNCMGR_HT_APPLICATION	= 1,
-@@ -761,7 +762,7 @@ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
+@@ -760,8 +761,8 @@ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("4ff1d798-ecf7-4524-aa81-1e362a0aef3a")
+-    MIDL_INTERFACE("4ff1d798-ecf7-4524-aa81-1e362a0aef3a")
 -    ISyncMgrHandlerInfo : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrHandlerInfo : public IUnknown
++    MIDL_INTERFACE("4ff1d798-ecf7-4524-aa81-1e362a0aef3a") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrHandlerInfo : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetType( 
@@ -91,12 +97,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrHandlerInfoVtbl *lpVtbl;
      };
-@@ -914,7 +915,7 @@ EXTERN_C const IID IID_ISyncMgrSyncItemContainer;
+@@ -913,8 +914,8 @@ EXTERN_C const IID IID_ISyncMgrSyncItemContainer;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("90701133-be32-4129-a65c-99e616cafff4")
+-    MIDL_INTERFACE("90701133-be32-4129-a65c-99e616cafff4")
 -    ISyncMgrSyncItemContainer : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrSyncItemContainer : public IUnknown
++    MIDL_INTERFACE("90701133-be32-4129-a65c-99e616cafff4") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrSyncItemContainer : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetSyncItem( 
@@ -114,7 +122,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_ITEM_CAPABILITIES
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_ITEM_CAPABILITIES
++enum   SYNCMGR_ITEM_CAPABILITIES
      {
          SYNCMGR_ICM_NONE	= 0,
          SYNCMGR_ICM_PROVIDES_ICON	= 0x1,
@@ -123,16 +131,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_ITEM_POLICIES
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_ITEM_POLICIES
++enum   SYNCMGR_ITEM_POLICIES
      {
          SYNCMGR_IPM_NONE	= 0,
          SYNCMGR_IPM_PREVENT_ENABLE	= 0x1,
-@@ -1070,7 +1071,7 @@ EXTERN_C const IID IID_ISyncMgrSyncItem;
+@@ -1069,8 +1070,8 @@ EXTERN_C const IID IID_ISyncMgrSyncItem;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("b20b24ce-2593-4f04-bd8b-7ad6c45051cd")
+-    MIDL_INTERFACE("b20b24ce-2593-4f04-bd8b-7ad6c45051cd")
 -    ISyncMgrSyncItem : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrSyncItem : public IUnknown
++    MIDL_INTERFACE("b20b24ce-2593-4f04-bd8b-7ad6c45051cd") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrSyncItem : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetItemID( 
@@ -145,15 +155,26 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrSyncItemVtbl *lpVtbl;
      };
-@@ -1252,7 +1253,7 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
+@@ -1251,8 +1252,8 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("e7fd9502-be0c-4464-90a1-2b5277031232")
+-    MIDL_INTERFACE("e7fd9502-be0c-4464-90a1-2b5277031232")
 -    ISyncMgrSyncItemInfo : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrSyncItemInfo : public IUnknown
++    MIDL_INTERFACE("e7fd9502-be0c-4464-90a1-2b5277031232") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrSyncItemInfo : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetTypeLabel( 
+@@ -1269,7 +1270,7 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsEnabled( void) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE IsConnected( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsConnected( void) = 0;
+         
+     };
+     
 @@ -1325,7 +1326,7 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
          END_INTERFACE
      } ISyncMgrSyncItemInfoVtbl;
@@ -163,12 +184,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrSyncItemInfoVtbl *lpVtbl;
      };
-@@ -1383,7 +1384,7 @@ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
+@@ -1382,8 +1383,8 @@ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("54b3abf3-f085-4181-b546-e29c403c726b")
+-    MIDL_INTERFACE("54b3abf3-f085-4181-b546-e29c403c726b")
 -    IEnumSyncMgrSyncItems : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumSyncMgrSyncItems : public IUnknown
++    MIDL_INTERFACE("54b3abf3-f085-4181-b546-e29c403c726b") _Windows_SupportedOS_WindowsVista_ 
++      IEnumSyncMgrSyncItems : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -186,7 +209,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_PROGRESS_STATUS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_PROGRESS_STATUS
++enum   SYNCMGR_PROGRESS_STATUS
      {
          SYNCMGR_PS_UPDATING	= 1,
          SYNCMGR_PS_UPDATING_INDETERMINATE	= 2,
@@ -195,7 +218,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_CANCEL_REQUEST
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_CANCEL_REQUEST
++enum   SYNCMGR_CANCEL_REQUEST
      {
          SYNCMGR_CR_NONE	= 0,
          SYNCMGR_CR_CANCEL_ITEM	= 1,
@@ -204,7 +227,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_EVENT_LEVEL
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_EVENT_LEVEL
++enum   SYNCMGR_EVENT_LEVEL
      {
          SYNCMGR_EL_INFORMATION	= 1,
          SYNCMGR_EL_WARNING	= 2,
@@ -213,16 +236,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_EVENT_FLAGS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_EVENT_FLAGS
++enum   SYNCMGR_EVENT_FLAGS
      {
          SYNCMGR_EF_NONE	= 0,
          SYNCMGR_EF_VALID	= 0
-@@ -1558,7 +1559,7 @@ EXTERN_C const IID IID_ISyncMgrSessionCreator;
+@@ -1557,8 +1558,8 @@ EXTERN_C const IID IID_ISyncMgrSessionCreator;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("17f48517-f305-4321-a08d-b25a834918fd")
+-    MIDL_INTERFACE("17f48517-f305-4321-a08d-b25a834918fd")
 -    ISyncMgrSessionCreator : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrSessionCreator : public IUnknown
++    MIDL_INTERFACE("17f48517-f305-4321-a08d-b25a834918fd") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrSessionCreator : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateSession( 
@@ -235,12 +260,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrSessionCreatorVtbl *lpVtbl;
      };
-@@ -1655,7 +1656,7 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
+@@ -1654,8 +1655,8 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("884ccd87-b139-4937-a4ba-4f8e19513fbe")
+-    MIDL_INTERFACE("884ccd87-b139-4937-a4ba-4f8e19513fbe")
 -    ISyncMgrSyncCallback : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrSyncCallback : public IUnknown
++    MIDL_INTERFACE("884ccd87-b139-4937-a4ba-4f8e19513fbe") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrSyncCallback : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE ReportProgress( 
@@ -253,15 +280,20 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrSyncCallbackVtbl *lpVtbl;
      };
-@@ -1901,7 +1902,7 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
+@@ -1900,10 +1901,10 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("fc7cfa47-dfe1-45b5-a049-8cfd82bec271")
+-    MIDL_INTERFACE("fc7cfa47-dfe1-45b5-a049-8cfd82bec271")
 -    ISyncMgrUIOperation : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrUIOperation : public IUnknown
++    MIDL_INTERFACE("fc7cfa47-dfe1-45b5-a049-8cfd82bec271") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrUIOperation : public IUnknown
      {
-     public:
+-    public:
++    _Win32_PreserveResult_ public:
          virtual HRESULT STDMETHODCALLTYPE Run( 
+             /* [annotation][unique][in] */ 
+             _In_  HWND hwndOwner) = 0;
 @@ -1942,7 +1943,7 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
          END_INTERFACE
      } ISyncMgrUIOperationVtbl;
@@ -271,12 +303,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrUIOperationVtbl *lpVtbl;
      };
-@@ -1988,7 +1989,7 @@ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
+@@ -1987,8 +1988,8 @@ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("64522e52-848b-4015-89ce-5a36f00b94ff")
+-    MIDL_INTERFACE("64522e52-848b-4015-89ce-5a36f00b94ff")
 -    ISyncMgrEventLinkUIOperation : public ISyncMgrUIOperation
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrEventLinkUIOperation : public ISyncMgrUIOperation
++    MIDL_INTERFACE("64522e52-848b-4015-89ce-5a36f00b94ff") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrEventLinkUIOperation : public ISyncMgrUIOperation
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Init( 
@@ -289,12 +323,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrEventLinkUIOperationVtbl *lpVtbl;
      };
-@@ -2089,7 +2090,7 @@ EXTERN_C const IID IID_ISyncMgrScheduleWizardUIOperation;
+@@ -2088,8 +2089,8 @@ EXTERN_C const IID IID_ISyncMgrScheduleWizardUIOperation;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("459a6c84-21d2-4ddc-8a53-f023a46066f2")
+-    MIDL_INTERFACE("459a6c84-21d2-4ddc-8a53-f023a46066f2")
 -    ISyncMgrScheduleWizardUIOperation : public ISyncMgrUIOperation
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrScheduleWizardUIOperation : public ISyncMgrUIOperation
++    MIDL_INTERFACE("459a6c84-21d2-4ddc-8a53-f023a46066f2") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrScheduleWizardUIOperation : public ISyncMgrUIOperation
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE InitWizard( 
@@ -307,12 +343,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrScheduleWizardUIOperationVtbl *lpVtbl;
      };
-@@ -2184,7 +2185,7 @@ EXTERN_C const IID IID_ISyncMgrSyncResult;
+@@ -2183,8 +2184,8 @@ EXTERN_C const IID IID_ISyncMgrSyncResult;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("2b90f17e-5a3e-4b33-bb7f-1bc48056b94d")
+-    MIDL_INTERFACE("2b90f17e-5a3e-4b33-bb7f-1bc48056b94d")
 -    ISyncMgrSyncResult : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrSyncResult : public IUnknown
++    MIDL_INTERFACE("2b90f17e-5a3e-4b33-bb7f-1bc48056b94d") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrSyncResult : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Result( 
@@ -330,7 +368,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_CONTROL_FLAGS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_CONTROL_FLAGS
++enum   SYNCMGR_CONTROL_FLAGS
      {
          SYNCMGR_CF_NONE	= 0,
          SYNCMGR_CF_NOWAIT	= 0,
@@ -339,16 +377,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_SYNC_CONTROL_FLAGS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_SYNC_CONTROL_FLAGS
++enum   SYNCMGR_SYNC_CONTROL_FLAGS
      {
          SYNCMGR_SCF_NONE	= 0,
          SYNCMGR_SCF_IGNORE_IF_ALREADY_SYNCING	= 0x1,
-@@ -2314,7 +2315,7 @@ EXTERN_C const IID IID_ISyncMgrControl;
+@@ -2313,8 +2314,8 @@ EXTERN_C const IID IID_ISyncMgrControl;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("9B63616C-36B2-46BC-959F-C1593952D19B")
+-    MIDL_INTERFACE("9B63616C-36B2-46BC-959F-C1593952D19B")
 -    ISyncMgrControl : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrControl : public IUnknown
++    MIDL_INTERFACE("9B63616C-36B2-46BC-959F-C1593952D19B") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrControl : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE StartHandlerSync( 
@@ -361,12 +401,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrControlVtbl *lpVtbl;
      };
-@@ -2679,7 +2680,7 @@ EXTERN_C const IID IID_ISyncMgrEventStore;
+@@ -2678,8 +2679,8 @@ EXTERN_C const IID IID_ISyncMgrEventStore;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("37e412f9-016e-44c2-81ff-db3add774266")
+-    MIDL_INTERFACE("37e412f9-016e-44c2-81ff-db3add774266")
 -    ISyncMgrEventStore : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrEventStore : public IUnknown
++    MIDL_INTERFACE("37e412f9-016e-44c2-81ff-db3add774266") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrEventStore : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetEventEnumerator( 
@@ -379,12 +421,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrEventStoreVtbl *lpVtbl;
      };
-@@ -2811,7 +2812,7 @@ EXTERN_C const IID IID_ISyncMgrEvent;
+@@ -2810,8 +2811,8 @@ EXTERN_C const IID IID_ISyncMgrEvent;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("fee0ef8b-46bd-4db4-b7e6-ff2c687313bc")
+-    MIDL_INTERFACE("fee0ef8b-46bd-4db4-b7e6-ff2c687313bc")
 -    ISyncMgrEvent : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrEvent : public IUnknown
++    MIDL_INTERFACE("fee0ef8b-46bd-4db4-b7e6-ff2c687313bc") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrEvent : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetEventID( 
@@ -397,12 +441,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrEventVtbl *lpVtbl;
      };
-@@ -3006,7 +3007,7 @@ EXTERN_C const IID IID_IEnumSyncMgrEvents;
+@@ -3005,8 +3006,8 @@ EXTERN_C const IID IID_IEnumSyncMgrEvents;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("c81a1d4e-8cf7-4683-80e0-bcae88d677b6")
+-    MIDL_INTERFACE("c81a1d4e-8cf7-4683-80e0-bcae88d677b6")
 -    IEnumSyncMgrEvents : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumSyncMgrEvents : public IUnknown
++    MIDL_INTERFACE("c81a1d4e-8cf7-4683-80e0-bcae88d677b6") _Windows_SupportedOS_WindowsVista_ 
++      IEnumSyncMgrEvents : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -420,16 +466,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  /* [local] */ 
  
 -typedef struct SYNCMGR_CONFLICT_ID_INFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_CONFLICT_ID_INFO
++typedef struct   SYNCMGR_CONFLICT_ID_INFO
      {
      /* [unique] */ BYTE_BLOB *pblobID;
      /* [unique] */ BYTE_BLOB *pblobExtra;
-@@ -3152,7 +3153,7 @@ EXTERN_C const IID IID_ISyncMgrConflictStore;
+@@ -3151,8 +3152,8 @@ EXTERN_C const IID IID_ISyncMgrConflictStore;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("cf8fc579-c396-4774-85f1-d908a831156e")
+-    MIDL_INTERFACE("cf8fc579-c396-4774-85f1-d908a831156e")
 -    ISyncMgrConflictStore : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflictStore : public IUnknown
++    MIDL_INTERFACE("cf8fc579-c396-4774-85f1-d908a831156e") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflictStore : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE EnumConflicts( 
@@ -442,12 +490,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrConflictStoreVtbl *lpVtbl;
      };
-@@ -3302,7 +3303,7 @@ EXTERN_C const IID IID_IEnumSyncMgrConflict;
+@@ -3301,8 +3302,8 @@ EXTERN_C const IID IID_IEnumSyncMgrConflict;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("82705914-dda3-4893-ba99-49de6c8c8036")
+-    MIDL_INTERFACE("82705914-dda3-4893-ba99-49de6c8c8036")
 -    IEnumSyncMgrConflict : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumSyncMgrConflict : public IUnknown
++    MIDL_INTERFACE("82705914-dda3-4893-ba99-49de6c8c8036") _Windows_SupportedOS_WindowsVista_ 
++      IEnumSyncMgrConflict : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
@@ -465,16 +515,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_CONFLICT_ITEM_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_CONFLICT_ITEM_TYPE
++enum   SYNCMGR_CONFLICT_ITEM_TYPE
      {
          SYNCMGR_CIT_UPDATED	= 0x1,
          SYNCMGR_CIT_DELETED	= 0x2
-@@ -3451,7 +3452,7 @@ EXTERN_C const IID IID_ISyncMgrConflict;
+@@ -3450,8 +3451,8 @@ EXTERN_C const IID IID_ISyncMgrConflict;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("9c204249-c443-4ba4-85ed-c972681db137")
+-    MIDL_INTERFACE("9c204249-c443-4ba4-85ed-c972681db137")
 -    ISyncMgrConflict : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflict : public IUnknown
++    MIDL_INTERFACE("9c204249-c443-4ba4-85ed-c972681db137") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflict : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetProperty( 
@@ -492,7 +544,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_RESOLUTION_ABILITIES
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_RESOLUTION_ABILITIES
++enum   SYNCMGR_RESOLUTION_ABILITIES
      {
          SYNCMGR_RA_KEEPOTHER	= 0x1,
          SYNCMGR_RA_KEEPRECENT	= 0x2,
@@ -501,16 +553,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_RESOLUTION_FEEDBACK
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_RESOLUTION_FEEDBACK
++enum   SYNCMGR_RESOLUTION_FEEDBACK
      {
          SYNCMGR_RF_CONTINUE	= 0,
          SYNCMGR_RF_REFRESH	= ( SYNCMGR_RF_CONTINUE + 1 ) ,
-@@ -3627,7 +3628,7 @@ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
+@@ -3626,8 +3627,8 @@ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("40A3D052-8BFF-4c4b-A338-D4A395700DE9")
+-    MIDL_INTERFACE("40A3D052-8BFF-4c4b-A338-D4A395700DE9")
 -    ISyncMgrResolutionHandler : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrResolutionHandler : public IUnknown
++    MIDL_INTERFACE("40A3D052-8BFF-4c4b-A338-D4A395700DE9") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrResolutionHandler : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE QueryAbilities( 
@@ -523,12 +577,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrResolutionHandlerVtbl *lpVtbl;
      };
-@@ -3774,7 +3775,7 @@ EXTERN_C const IID IID_ISyncMgrConflictPresenter;
+@@ -3773,8 +3774,8 @@ EXTERN_C const IID IID_ISyncMgrConflictPresenter;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("0b4f5353-fd2b-42cd-8763-4779f2d508a3")
+-    MIDL_INTERFACE("0b4f5353-fd2b-42cd-8763-4779f2d508a3")
 -    ISyncMgrConflictPresenter : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflictPresenter : public IUnknown
++    MIDL_INTERFACE("0b4f5353-fd2b-42cd-8763-4779f2d508a3") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflictPresenter : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE PresentConflict( 
@@ -546,7 +602,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_PRESENTER_NEXT_STEP
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_PRESENTER_NEXT_STEP
++enum   SYNCMGR_PRESENTER_NEXT_STEP
      {
          SYNCMGR_PNS_CONTINUE	= 0,
          SYNCMGR_PNS_DEFAULT	= ( SYNCMGR_PNS_CONTINUE + 1 ) ,
@@ -555,16 +611,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  
  typedef /* [v1_enum] */ 
 -enum SYNCMGR_PRESENTER_CHOICE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ SYNCMGR_PRESENTER_CHOICE
++enum   SYNCMGR_PRESENTER_CHOICE
      {
          SYNCMGR_PC_NO_CHOICE	= 0,
          SYNCMGR_PC_KEEP_ONE	= ( SYNCMGR_PC_NO_CHOICE + 1 ) ,
-@@ -3892,7 +3893,7 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
+@@ -3891,8 +3892,8 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("c405a219-25a2-442e-8743-b845a2cee93f")
+-    MIDL_INTERFACE("c405a219-25a2-442e-8743-b845a2cee93f")
 -    ISyncMgrConflictResolveInfo : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflictResolveInfo : public IUnknown
++    MIDL_INTERFACE("c405a219-25a2-442e-8743-b845a2cee93f") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflictResolveInfo : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetIterationInfo( 
@@ -577,12 +635,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrConflictResolveInfoVtbl *lpVtbl;
      };
-@@ -4092,7 +4093,7 @@ EXTERN_C const IID IID_ISyncMgrConflictFolder;
+@@ -4091,8 +4092,8 @@ EXTERN_C const IID IID_ISyncMgrConflictFolder;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69")
+-    MIDL_INTERFACE("59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69")
 -    ISyncMgrConflictFolder : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflictFolder : public IUnknown
++    MIDL_INTERFACE("59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflictFolder : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetConflictIDList( 
@@ -600,7 +660,7 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  /* [local] */ 
  
 -typedef struct CONFIRM_CONFLICT_ITEM
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ CONFIRM_CONFLICT_ITEM
++typedef struct   CONFIRM_CONFLICT_ITEM
      {
      IShellItem2 *pShellItem;
      LPWSTR pszOriginalName;
@@ -609,16 +669,18 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
  }
  #endif // defined(__cplusplus) && !defined(CINTERFACE)
 -typedef struct CONFIRM_CONFLICT_RESULT_INFO
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ CONFIRM_CONFLICT_RESULT_INFO
++typedef struct   CONFIRM_CONFLICT_RESULT_INFO
      {
      LPWSTR pszNewName;
      UINT iItemIndex;
-@@ -4221,7 +4222,7 @@ EXTERN_C const IID IID_ISyncMgrConflictItems;
+@@ -4220,8 +4221,8 @@ EXTERN_C const IID IID_ISyncMgrConflictItems;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("9C7EAD52-8023-4936-A4DB-D2A9A99E436A")
+-    MIDL_INTERFACE("9C7EAD52-8023-4936-A4DB-D2A9A99E436A")
 -    ISyncMgrConflictItems : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflictItems : public IUnknown
++    MIDL_INTERFACE("9C7EAD52-8023-4936-A4DB-D2A9A99E436A") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflictItems : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetCount( 
@@ -631,12 +693,14 @@ index 8aa7a3093811cf63f393e62ec3c4275830634e91..a9b44a71f1d692d1945ccb9d92a123b3
      {
          CONST_VTBL struct ISyncMgrConflictItemsVtbl *lpVtbl;
      };
-@@ -4325,7 +4326,7 @@ EXTERN_C const IID IID_ISyncMgrConflictResolutionItems;
+@@ -4324,8 +4325,8 @@ EXTERN_C const IID IID_ISyncMgrConflictResolutionItems;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("458725B9-129D-4135-A998-9CEAFEC27007")
+-    MIDL_INTERFACE("458725B9-129D-4135-A998-9CEAFEC27007")
 -    ISyncMgrConflictResolutionItems : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISyncMgrConflictResolutionItems : public IUnknown
++    MIDL_INTERFACE("458725B9-129D-4135-A998-9CEAFEC27007") _Windows_SupportedOS_WindowsVista_ 
++      ISyncMgrConflictResolutionItems : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetCount( 

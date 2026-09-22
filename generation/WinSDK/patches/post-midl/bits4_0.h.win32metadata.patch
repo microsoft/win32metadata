@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h
-index 7592bc21da434f6f0b8a69a38d5b701e10c7cfcd..f5c6094e989cbd700e412f8b1a8dd5fcedc39e69 100644
+index 7592bc21da..f85e79d712 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits4_0.h
 @@ -103,6 +103,7 @@ extern "C"{
@@ -10,7 +10,7 @@ index 7592bc21da434f6f0b8a69a38d5b701e10c7cfcd..f5c6094e989cbd700e412f8b1a8dd5fc
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -124,7 +125,7 @@ EXTERN_C const IID IID_IBitsTokenOptions;
+@@ -124,15 +125,15 @@ EXTERN_C const IID IID_IBitsTokenOptions;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("9a2584c3-f7d2-457a-9a5e-22b67bffc7d2")
@@ -19,6 +19,16 @@ index 7592bc21da434f6f0b8a69a38d5b701e10c7cfcd..f5c6094e989cbd700e412f8b1a8dd5fc
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetHelperTokenFlags( 
+-            DWORD UsageFlags) = 0;
++            _Win32_AssociatedEnum_(BG_TOKEN) DWORD UsageFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHelperTokenFlags( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pFlags) = 0;
++            _Win32_AssociatedEnum_(BG_TOKEN) _Out_  DWORD *pFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetHelperToken( void) = 0;
+         
 @@ -195,7 +196,7 @@ EXTERN_C const IID IID_IBitsTokenOptions;
          END_INTERFACE
      } IBitsTokenOptionsVtbl;
@@ -46,3 +56,25 @@ index 7592bc21da434f6f0b8a69a38d5b701e10c7cfcd..f5c6094e989cbd700e412f8b1a8dd5fc
      {
          CONST_VTBL struct IBackgroundCopyFile4Vtbl *lpVtbl;
      };
+@@ -465,6 +466,21 @@ extern RPC_IF_HANDLE __MIDL_itf_bits4_0_0000_0003_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("BG_TOKEN_LOCAL_FILE")
++#undef BG_TOKEN_LOCAL_FILE
++#pragma push_macro("BG_TOKEN_NETWORK")
++#undef BG_TOKEN_NETWORK
++enum BG_TOKEN : unsigned int
++{
++    BG_TOKEN_LOCAL_FILE = 1U,
++    BG_TOKEN_NETWORK = 2U,
++};
++#pragma pop_macro("BG_TOKEN_NETWORK")
++#pragma pop_macro("BG_TOKEN_LOCAL_FILE")
++#endif
++
+ #endif
+ 
+ 

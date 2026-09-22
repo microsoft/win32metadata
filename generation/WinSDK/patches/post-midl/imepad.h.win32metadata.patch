@@ -1,0 +1,106 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h b/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
+index 5d990dd627..7d111ac3da 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /******************************************************************************
+ *                                                                             *
+ * imepad.h - - Interface for the Windows IMEPAD, IMEPADAPPLET                 *
+@@ -624,7 +625,7 @@ DECLARE_INTERFACE_(IImePad, IUnknown)
+     /*** IImePad methods ***/
+     STDMETHOD(Request)(THIS_
+                        IImePadApplet *pIImePadApplet,
+-                       INT reqId,
++                       _Win32_AssociatedEnum_(IME_PAD_REQUEST_FLAGS) INT reqId,
+                        WPARAM wParam,
+                        LPARAM lParam) PURE;
+ };
+@@ -640,4 +641,87 @@ DECLARE_INTERFACE_(IImePad, IUnknown)
+ 
+ #endif //_IME_PAD_H_
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("IMEPADREQ_INSERTSTRING")
++#undef IMEPADREQ_INSERTSTRING
++#pragma push_macro("IMEPADREQ_SENDCONTROL")
++#undef IMEPADREQ_SENDCONTROL
++#pragma push_macro("IMEPADREQ_SETAPPLETSIZE")
++#undef IMEPADREQ_SETAPPLETSIZE
++#pragma push_macro("IMEPADREQ_GETCOMPOSITIONSTRING")
++#undef IMEPADREQ_GETCOMPOSITIONSTRING
++#pragma push_macro("IMEPADREQ_GETCOMPOSITIONSTRINGINFO")
++#undef IMEPADREQ_GETCOMPOSITIONSTRINGINFO
++#pragma push_macro("IMEPADREQ_DELETESTRING")
++#undef IMEPADREQ_DELETESTRING
++#pragma push_macro("IMEPADREQ_CHANGESTRING")
++#undef IMEPADREQ_CHANGESTRING
++#pragma push_macro("IMEPADREQ_GETAPPLHWND")
++#undef IMEPADREQ_GETAPPLHWND
++#pragma push_macro("IMEPADREQ_FORCEIMEPADWINDOWSHOW")
++#undef IMEPADREQ_FORCEIMEPADWINDOWSHOW
++#pragma push_macro("IMEPADREQ_POSTMODALNOTIFY")
++#undef IMEPADREQ_POSTMODALNOTIFY
++#pragma push_macro("IMEPADREQ_GETDEFAULTUILANGID")
++#undef IMEPADREQ_GETDEFAULTUILANGID
++#pragma push_macro("IMEPADREQ_GETAPPLETUISTYLE")
++#undef IMEPADREQ_GETAPPLETUISTYLE
++#pragma push_macro("IMEPADREQ_SETAPPLETUISTYLE")
++#undef IMEPADREQ_SETAPPLETUISTYLE
++#pragma push_macro("IMEPADREQ_ISAPPLETACTIVE")
++#undef IMEPADREQ_ISAPPLETACTIVE
++#pragma push_macro("IMEPADREQ_ISIMEPADWINDOWVISIBLE")
++#undef IMEPADREQ_ISIMEPADWINDOWVISIBLE
++#pragma push_macro("IMEPADREQ_SETAPPLETMINMAXSIZE")
++#undef IMEPADREQ_SETAPPLETMINMAXSIZE
++#pragma push_macro("IMEPADREQ_GETCONVERSIONSTATUS")
++#undef IMEPADREQ_GETCONVERSIONSTATUS
++#pragma push_macro("IMEPADREQ_GETVERSION")
++#undef IMEPADREQ_GETVERSION
++#pragma push_macro("IMEPADREQ_GETCURRENTIMEINFO")
++#undef IMEPADREQ_GETCURRENTIMEINFO
++enum IME_PAD_REQUEST_FLAGS : unsigned int
++{
++    IMEPADREQ_INSERTSTRING = 4097U,
++    IMEPADREQ_SENDCONTROL = 4100U,
++    IMEPADREQ_SETAPPLETSIZE = 4104U,
++    IMEPADREQ_GETCOMPOSITIONSTRING = 4102U,
++    IMEPADREQ_GETCOMPOSITIONSTRINGINFO = 4108U,
++    IMEPADREQ_DELETESTRING = 4112U,
++    IMEPADREQ_CHANGESTRING = 4113U,
++    IMEPADREQ_GETAPPLHWND = 4116U,
++    IMEPADREQ_FORCEIMEPADWINDOWSHOW = 4117U,
++    IMEPADREQ_POSTMODALNOTIFY = 4118U,
++    IMEPADREQ_GETDEFAULTUILANGID = 4119U,
++    IMEPADREQ_GETAPPLETUISTYLE = 4121U,
++    IMEPADREQ_SETAPPLETUISTYLE = 4122U,
++    IMEPADREQ_ISAPPLETACTIVE = 4123U,
++    IMEPADREQ_ISIMEPADWINDOWVISIBLE = 4124U,
++    IMEPADREQ_SETAPPLETMINMAXSIZE = 4125U,
++    IMEPADREQ_GETCONVERSIONSTATUS = 4126U,
++    IMEPADREQ_GETVERSION = 4127U,
++    IMEPADREQ_GETCURRENTIMEINFO = 4128U,
++};
++#pragma pop_macro("IMEPADREQ_GETCURRENTIMEINFO")
++#pragma pop_macro("IMEPADREQ_GETVERSION")
++#pragma pop_macro("IMEPADREQ_GETCONVERSIONSTATUS")
++#pragma pop_macro("IMEPADREQ_SETAPPLETMINMAXSIZE")
++#pragma pop_macro("IMEPADREQ_ISIMEPADWINDOWVISIBLE")
++#pragma pop_macro("IMEPADREQ_ISAPPLETACTIVE")
++#pragma pop_macro("IMEPADREQ_SETAPPLETUISTYLE")
++#pragma pop_macro("IMEPADREQ_GETAPPLETUISTYLE")
++#pragma pop_macro("IMEPADREQ_GETDEFAULTUILANGID")
++#pragma pop_macro("IMEPADREQ_POSTMODALNOTIFY")
++#pragma pop_macro("IMEPADREQ_FORCEIMEPADWINDOWSHOW")
++#pragma pop_macro("IMEPADREQ_GETAPPLHWND")
++#pragma pop_macro("IMEPADREQ_CHANGESTRING")
++#pragma pop_macro("IMEPADREQ_DELETESTRING")
++#pragma pop_macro("IMEPADREQ_GETCOMPOSITIONSTRINGINFO")
++#pragma pop_macro("IMEPADREQ_GETCOMPOSITIONSTRING")
++#pragma pop_macro("IMEPADREQ_SETAPPLETSIZE")
++#pragma pop_macro("IMEPADREQ_SENDCONTROL")
++#pragma pop_macro("IMEPADREQ_INSERTSTRING")
++#endif
++
+ #endif // (NTDDI >= NTDDI_WIN8)

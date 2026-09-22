@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h b/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h
-index 7191233a81d28860972a2c1dd458f2bd12677e2e..a7a0d7f79fbd23844d4499009797c19ca97c87dc 100644
+index 7191233a81..13a34691c3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/lmwksta.h
 @@ -30,6 +30,7 @@ Notes:
@@ -14,8 +14,8 @@ index 7191233a81d28860972a2c1dd458f2bd12677e2e..a7a0d7f79fbd23844d4499009797c19c
  // Function Prototypes
  //
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetWkstaGetInfo (
      _In_opt_ LMSTR   servername OPTIONAL,
@@ -23,8 +23,8 @@ index 7191233a81d28860972a2c1dd458f2bd12677e2e..a7a0d7f79fbd23844d4499009797c19c
      _Outptr_opt_result_buffer_(_Inexpressible_("size varies with level")) OUT LPBYTE  *bufptr
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetWkstaSetInfo (
      _In_opt_  LMSTR   servername OPTIONAL,
@@ -32,17 +32,48 @@ index 7191233a81d28860972a2c1dd458f2bd12677e2e..a7a0d7f79fbd23844d4499009797c19c
      _Out_opt_ OUT LPDWORD parm_err OPTIONAL
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetWkstaUserGetInfo (
      _In_opt_ LMSTR  reserved,
+@@ -74,7 +81,7 @@ NetWkstaUserGetInfo (
+     _Outptr_result_buffer_(_Inexpressible_("varies")) OUT LPBYTE  *bufptr
+     );
+ 
+-NET_API_STATUS NET_API_FUNCTION
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaUserSetInfo (
+     _In_opt_  LMSTR  reserved,
+     _In_      DWORD   level,
+@@ -82,7 +89,7 @@ NetWkstaUserSetInfo (
+     _Out_opt_ LPDWORD parm_err OPTIONAL
+     );
+ 
+-NET_API_STATUS NET_API_FUNCTION
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaUserEnum (
+     _In_opt_ LMSTR       servername OPTIONAL,
+     IN  DWORD       level,
+@@ -106,10 +113,10 @@ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaTransportDel (
+     _In_opt_ IN  LMSTR   servername OPTIONAL,
+     _In_opt_ IN  LMSTR   transportname,
+-    IN  DWORD   ucond
++    _Win32_AssociatedEnum_(FORCE_LEVEL_FLAGS) IN  DWORD   ucond
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ _Success_( return == NERR_Success || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaTransportEnum(
 @@ -134,7 +141,7 @@ NetWkstaTransportEnum(
  //
  // NetWkstaGetInfo only.  System information - guest access
  //
 -typedef struct _WKSTA_INFO_100 {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _WKSTA_INFO_100 {
++typedef struct   _WKSTA_INFO_100 {
      DWORD   wki100_platform_id;
      LMSTR   wki100_computername;
      LMSTR   wki100_langroup;
