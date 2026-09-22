@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h
-index a73e0f62aa..ab0608c2f1 100644
+index a73e0f62aa..c058eccf3b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h
 @@ -1,3 +1,4 @@
@@ -7,44 +7,10 @@ index a73e0f62aa..ab0608c2f1 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -441,7 +442,7 @@ EXTERN_C const IID IID_IOPMVideoOutput;
+@@ -90,6 +91,51 @@ DEFINE_GUID( OPM_SET_ACP_AND_CGMSA_SIGNALING,            0x09a631a5, 0xd684, 0x4
+ DEFINE_GUID( OPM_SET_HDCP_SRM,                           0x8b5ef5d1, 0xc30d, 0x44ff, 0x84, 0xa5, 0xea, 0x71, 0xdc, 0xe7, 0x8f, 0x13 );
+ DEFINE_GUID( OPM_SET_PROTECTION_LEVEL_ACCORDING_TO_CSS_DVD, 0x39ce333e, 0x4cc0, 0x44ae, 0xbf, 0xcc, 0xda, 0x50, 0xb5, 0xf8, 0x2e, 0x72);
  
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("0A15159D-41C7-4456-93E1-284CD61D4E8D")
-+    MIDL_INTERFACE("0A15159D-41C7-4456-93E1-284CD61D4E8D") _Windows_SupportedOS_WindowsVista_ 
-     IOPMVideoOutput : public IUnknown
-     {
-     public:
-@@ -618,20 +619,20 @@ typedef enum {
- #define GetBusType( ulBusTypeAndImplementation )                        ((ulBusTypeAndImplementation) & OPM_BUS_TYPE_MASK)
- #define GetBusImplementation( ulBusTypeAndImplementation )              (((ulBusTypeAndImplementation) & OPM_BUS_IMPLEMENTATION_MODIFIER_MASK) >> 16) 
- #define IsNonStandardBusImplementation( ulBusTypeAndImplementation )    ((ulBusTypeAndImplementation) & OPM_BUS_IMPLEMENTATION_MODIFIER_NON_STANDARD) 
--STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      
-+_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      
-     _In_ HMONITOR hMonitor,                                                                 
-     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
-     _Out_ ULONG* pulNumVideoOutputs,                                                        
-     _Outptr_result_buffer_(*pulNumVideoOutputs) IOPMVideoOutput*** pppOPMVideoOutputArray       
-     );                                                                                      
--STDAPI OPMGetVideoOutputForTarget(                                                          
-+_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputForTarget(                                                          
-     _In_ LUID* pAdapterLuid,                                                                
-     _In_ ULONG VidPnTarget,                                                                 
-     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
-     _COM_Outptr_ IOPMVideoOutput** ppOPMVideoOutput                                         
-     );                                                                                      
- #ifndef DO_NOT_USE_DIRECTX_OR_DXVA2
--STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        
-+_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        
-     _In_ IDirect3DDevice9* pDirect3DDevice9,                                                
-     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
-     _Out_ ULONG* pulNumVideoOutputs,                                                        
-@@ -655,6 +656,385 @@ extern RPC_IF_HANDLE __MIDL_itf_opmapi_0000_0001_v0_0_s_ifspec;
- }
- #endif
- 
-+
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_OMAC_SIZE")
 +#undef OPM_OMAC_SIZE
@@ -89,8 +55,22 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_ENCRYPTED_INITIALIZATION_PARAMETERS_SIZE")
 +#pragma pop_macro("OPM_128_BIT_RANDOM_NUMBER_SIZE")
 +#pragma pop_macro("OPM_OMAC_SIZE")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0001
+     {
+         OPM_OMAC_SIZE	= 16,
+@@ -103,6 +149,7 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0001
+         OPM_BUS_TYPE_MASK	= 0xffff,
+         OPM_BUS_IMPLEMENTATION_MODIFIER_MASK	= 0x7fff
+     } ;
 +#endif
-+
+ typedef 
+ enum _OPM_VIDEO_OUTPUT_SEMANTICS
+     {
+@@ -112,12 +159,51 @@ enum _OPM_VIDEO_OUTPUT_SEMANTICS
+     } 	OPM_VIDEO_OUTPUT_SEMANTICS;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_HDCP_FLAG_NONE")
 +#undef OPM_HDCP_FLAG_NONE
@@ -103,8 +83,14 @@ index a73e0f62aa..ab0608c2f1 100644
 +};
 +#pragma pop_macro("OPM_HDCP_FLAG_REPEATER")
 +#pragma pop_macro("OPM_HDCP_FLAG_NONE")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0002
+     {
+         OPM_HDCP_FLAG_NONE	= 0,
+         OPM_HDCP_FLAG_REPEATER	= 0x1
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_STATUS_NORMAL")
 +#undef OPM_STATUS_NORMAL
@@ -129,8 +115,16 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_STATUS_RENEGOTIATION_REQUIRED")
 +#pragma pop_macro("OPM_STATUS_LINK_LOST")
 +#pragma pop_macro("OPM_STATUS_NORMAL")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0003
+     {
+         OPM_STATUS_NORMAL	= 0,
+@@ -126,7 +212,89 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0003
+         OPM_STATUS_TAMPERING_DETECTED	= 0x4,
+         OPM_STATUS_REVOKED_HDCP_DEVICE_ATTACHED	= 0x8
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_CONNECTOR_TYPE_OTHER")
 +#undef OPM_CONNECTOR_TYPE_OTHER
@@ -211,8 +205,16 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_CONNECTOR_TYPE_SVIDEO")
 +#pragma pop_macro("OPM_CONNECTOR_TYPE_VGA")
 +#pragma pop_macro("OPM_CONNECTOR_TYPE_OTHER")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0004
+     {
+         OPM_CONNECTOR_TYPE_OTHER	= -1,
+@@ -149,12 +317,27 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0004
+         OPM_CONNECTOR_TYPE_TRANSPORT_AGNOSTIC_DIGITAL_MODE_B	= 17,
+         OPM_COPP_COMPATIBLE_CONNECTOR_TYPE_INTERNAL	= 0x80000000
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_DVI_CHARACTERISTIC_1_0")
 +#undef OPM_DVI_CHARACTERISTIC_1_0
@@ -225,8 +227,20 @@ index a73e0f62aa..ab0608c2f1 100644
 +};
 +#pragma pop_macro("OPM_DVI_CHARACTERISTIC_1_1_OR_ABOVE")
 +#pragma pop_macro("OPM_DVI_CHARACTERISTIC_1_0")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0005
+     {
+         OPM_DVI_CHARACTERISTIC_1_0	= 1,
+         OPM_DVI_CHARACTERISTIC_1_1_OR_ABOVE	= 2
+     } ;
 +#endif
-+
+ typedef 
+ enum _OPM_OUTPUT_HARDWARE_PROTECTION
+     {
+@@ -163,6 +346,59 @@ enum _OPM_OUTPUT_HARDWARE_PROTECTION
+     } 	OPM_OUTPUT_HARDWARE_PROTECTION;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_BUS_TYPE_OTHER")
 +#undef OPM_BUS_TYPE_OTHER
@@ -279,8 +293,22 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_BUS_TYPE_PCIX")
 +#pragma pop_macro("OPM_BUS_TYPE_PCI")
 +#pragma pop_macro("OPM_BUS_TYPE_OTHER")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0006
+     {
+         OPM_BUS_TYPE_OTHER	= 0,
+@@ -178,6 +414,7 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0006
+         OPM_BUS_IMPLEMENTATION_MODIFIER_NON_STANDARD	= 0x80000000,
+         OPM_COPP_COMPATIBLE_BUS_TYPE_INTEGRATED	= 0x80000000
+     } ;
 +#endif
-+
+ typedef 
+ enum _OPM_DPCP_PROTECTION_LEVEL
+     {
+@@ -204,6 +441,35 @@ enum _OPM_TYPE_ENFORCEMENT_HDCP_PROTECTION_LEVEL
+     } 	OPM_TYPE_ENFORCEMENT_HDCP_PROTECTION_LEVEL;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_CGMSA_OFF")
 +#undef OPM_CGMSA_OFF
@@ -309,8 +337,22 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_CGMSA_COPY_NO_MORE")
 +#pragma pop_macro("OPM_CGMSA_COPY_FREELY")
 +#pragma pop_macro("OPM_CGMSA_OFF")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0007
+     {
+         OPM_CGMSA_OFF	= 0,
+@@ -213,6 +479,7 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0007
+         OPM_CGMSA_COPY_NEVER	= 0x4,
+         OPM_CGMSA_REDISTRIBUTION_CONTROL_REQUIRED	= 0x8
+     } ;
 +#endif
-+
+ typedef 
+ enum _OPM_ACP_PROTECTION_LEVEL
+     {
+@@ -224,6 +491,43 @@ enum _OPM_ACP_PROTECTION_LEVEL
+     } 	OPM_ACP_PROTECTION_LEVEL;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_PROTECTION_TYPE_OTHER")
 +#undef OPM_PROTECTION_TYPE_OTHER
@@ -347,8 +389,16 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_PROTECTION_TYPE_COPP_COMPATIBLE_HDCP")
 +#pragma pop_macro("OPM_PROTECTION_TYPE_NONE")
 +#pragma pop_macro("OPM_PROTECTION_TYPE_OTHER")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0008
+     {
+         OPM_PROTECTION_TYPE_OTHER	= 0x80000000,
+@@ -235,7 +539,81 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0008
+         OPM_PROTECTION_TYPE_DPCP	= 0x10,
+         OPM_PROTECTION_TYPE_TYPE_ENFORCEMENT_HDCP	= 0x20
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("OPM_PROTECTION_STANDARD_OTHER")
 +#undef OPM_PROTECTION_STANDARD_OTHER
@@ -421,7 +471,64 @@ index a73e0f62aa..ab0608c2f1 100644
 +#pragma pop_macro("OPM_PROTECTION_STANDARD_IEC61880_525I")
 +#pragma pop_macro("OPM_PROTECTION_STANDARD_NONE")
 +#pragma pop_macro("OPM_PROTECTION_STANDARD_OTHER")
++#else
+ enum __MIDL___MIDL_itf_opmapi_0000_0000_0009
+     {
+         OPM_PROTECTION_STANDARD_OTHER	= 0x80000000,
+@@ -256,6 +634,7 @@ enum __MIDL___MIDL_itf_opmapi_0000_0000_0009
+         OPM_PROTECTION_STANDARD_ARIBTRB15_750P	= 0x2000,
+         OPM_PROTECTION_STANDARD_ARIBTRB15_1125I	= 0x4000
+     } ;
 +#endif
+ typedef 
+ enum _OPM_IMAGE_ASPECT_RATIO_EN300294
+     {
+@@ -441,7 +820,7 @@ EXTERN_C const IID IID_IOPMVideoOutput;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0A15159D-41C7-4456-93E1-284CD61D4E8D")
++    MIDL_INTERFACE("0A15159D-41C7-4456-93E1-284CD61D4E8D") _Windows_SupportedOS_WindowsVista_ 
+     IOPMVideoOutput : public IUnknown
+     {
+     public:
+@@ -618,20 +997,20 @@ typedef enum {
+ #define GetBusType( ulBusTypeAndImplementation )                        ((ulBusTypeAndImplementation) & OPM_BUS_TYPE_MASK)
+ #define GetBusImplementation( ulBusTypeAndImplementation )              (((ulBusTypeAndImplementation) & OPM_BUS_IMPLEMENTATION_MODIFIER_MASK) >> 16) 
+ #define IsNonStandardBusImplementation( ulBusTypeAndImplementation )    ((ulBusTypeAndImplementation) & OPM_BUS_IMPLEMENTATION_MODIFIER_NON_STANDARD) 
+-STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      
++_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      
+     _In_ HMONITOR hMonitor,                                                                 
+     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
+     _Out_ ULONG* pulNumVideoOutputs,                                                        
+     _Outptr_result_buffer_(*pulNumVideoOutputs) IOPMVideoOutput*** pppOPMVideoOutputArray       
+     );                                                                                      
+-STDAPI OPMGetVideoOutputForTarget(                                                          
++_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputForTarget(                                                          
+     _In_ LUID* pAdapterLuid,                                                                
+     _In_ ULONG VidPnTarget,                                                                 
+     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
+     _COM_Outptr_ IOPMVideoOutput** ppOPMVideoOutput                                         
+     );                                                                                      
+ #ifndef DO_NOT_USE_DIRECTX_OR_DXVA2
+-STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        
++_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        
+     _In_ IDirect3DDevice9* pDirect3DDevice9,                                                
+     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
+     _Out_ ULONG* pulNumVideoOutputs,                                                        
+@@ -655,6 +1034,16 @@ extern RPC_IF_HANDLE __MIDL_itf_opmapi_0000_0001_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
++
++
++
++
++
++
++
 +
  #endif
  

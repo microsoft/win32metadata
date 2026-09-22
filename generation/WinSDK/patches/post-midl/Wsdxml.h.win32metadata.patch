@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
-index b3e27f7c97..b17ed9ac66 100644
+index b3e27f7c97..44ffc48121 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
 @@ -67,6 +67,7 @@ extern "C"{
@@ -28,46 +28,10 @@ index b3e27f7c97..b17ed9ac66 100644
      {
      BOOL isPositive;
      ULONG year;
-@@ -210,12 +211,12 @@ enum __MIDL___MIDL_itf_wsdxml_0000_0000_0001
- #define WSDXML_TYPE_ENCODING(typeIndex,layerNumber) ((((DWORD)layerNumber) << 28) | typeIndex)
- #define WSDXML_NAMESPACE_ENCODING(namespaceIndex,layerNumber) ((((WORD)layerNumber) << 12) | namespaceIndex)
- #define WSDXML_NAME_ENCODING(nameIndex,nameSpaceEncoding) ((((DWORD)nameSpaceEncoding) << 16) | nameIndex)
--HRESULT WINAPI
-+_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
- WSDXMLGetNameFromBuiltinNamespace(
-     _In_ LPCWSTR pszNamespace,
-     _In_ LPCWSTR pszName,
-     _Outptr_ WSDXML_NAME** ppName);
--HRESULT WINAPI
-+_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
- WSDXMLCreateContext(
-     _Outptr_ IWSDXMLContext** ppContext);
+@@ -121,6 +122,199 @@ typedef struct _WSD_DURATION
+     } 	WSD_DURATION;
  
-@@ -234,8 +235,8 @@ EXTERN_C const IID IID_IWSDXMLContext;
  
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")
--    IWSDXMLContext : public IUnknown
-+    MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0") _Windows_SupportedOS_WindowsVista_ 
-+      IWSDXMLContext : public IUnknown
-     {
-     public:
-         virtual HRESULT STDMETHODCALLTYPE AddNamespace( 
-@@ -338,7 +339,7 @@ EXTERN_C const IID IID_IWSDXMLContext;
-         END_INTERFACE
-     } IWSDXMLContextVtbl;
- 
--    interface IWSDXMLContext
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDXMLContext
-     {
-         CONST_VTBL struct IWSDXMLContextVtbl *lpVtbl;
-     };
-@@ -399,6 +400,201 @@ extern RPC_IF_HANDLE __MIDL_itf_wsdxml_0000_0001_v0_0_s_ifspec;
- }
- #endif
- 
-+
 +#ifdef WIN32METADATA
 +#pragma push_macro("OpNone")
 +#undef OpNone
@@ -260,7 +224,58 @@ index b3e27f7c97..b17ed9ac66 100644
 +#pragma pop_macro("OpBeginElement_")
 +#pragma pop_macro("OpEndOfTable")
 +#pragma pop_macro("OpNone")
++#else
+ enum __MIDL___MIDL_itf_wsdxml_0000_0000_0001
+     {
+         OpNone	= 0,
+@@ -171,6 +365,7 @@ enum __MIDL___MIDL_itf_wsdxml_0000_0000_0001
+         OpFormatXMLDeclaration_	= ( OpQualifiedAttribute_ + 1 ) ,
+         OpFormatMax	= ( OpFormatXMLDeclaration_ + 1 ) 
+     } ;
 +#endif
+ #define OFFSET(type,field) ((DWORD_PTR)(&((type*)0)->field))
+ #define BYTE0(n) (BYTE)((((DWORD)n)>>0)&0xFF)
+ #define BYTE1(n) (BYTE)((((DWORD)n)>>8)&0xFF)
+@@ -210,12 +405,12 @@ enum __MIDL___MIDL_itf_wsdxml_0000_0000_0001
+ #define WSDXML_TYPE_ENCODING(typeIndex,layerNumber) ((((DWORD)layerNumber) << 28) | typeIndex)
+ #define WSDXML_NAMESPACE_ENCODING(namespaceIndex,layerNumber) ((((WORD)layerNumber) << 12) | namespaceIndex)
+ #define WSDXML_NAME_ENCODING(nameIndex,nameSpaceEncoding) ((((DWORD)nameSpaceEncoding) << 16) | nameIndex)
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDXMLGetNameFromBuiltinNamespace(
+     _In_ LPCWSTR pszNamespace,
+     _In_ LPCWSTR pszName,
+     _Outptr_ WSDXML_NAME** ppName);
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDXMLCreateContext(
+     _Outptr_ IWSDXMLContext** ppContext);
+ 
+@@ -234,8 +429,8 @@ EXTERN_C const IID IID_IWSDXMLContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")
+-    IWSDXMLContext : public IUnknown
++    MIDL_INTERFACE("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0") _Windows_SupportedOS_WindowsVista_ 
++      IWSDXMLContext : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddNamespace( 
+@@ -338,7 +533,7 @@ EXTERN_C const IID IID_IWSDXMLContext;
+         END_INTERFACE
+     } IWSDXMLContextVtbl;
+ 
+-    interface IWSDXMLContext
++    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDXMLContext
+     {
+         CONST_VTBL struct IWSDXMLContextVtbl *lpVtbl;
+     };
+@@ -399,6 +594,8 @@ extern RPC_IF_HANDLE __MIDL_itf_wsdxml_0000_0001_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
 +
  #endif
  

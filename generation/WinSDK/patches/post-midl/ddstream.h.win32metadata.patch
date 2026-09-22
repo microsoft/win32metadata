@@ -1,12 +1,11 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
-index 9feefe6cbf..2b1dcf2846 100644
+index 9feefe6cbf..b02fa6a032 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
-@@ -528,6 +528,17 @@ extern RPC_IF_HANDLE __MIDL_itf_ddstream_0000_0002_v0_0_s_ifspec;
- }
+@@ -88,10 +88,20 @@ typedef struct tDDSURFACEDESC DDSURFACEDESC;
  #endif
+ #include <ddraw.h>
  
-+
 +#ifdef WIN32METADATA
 +#pragma push_macro("DDSFF_PROGRESSIVERENDER")
 +#undef DDSFF_PROGRESSIVERENDER
@@ -15,7 +14,20 @@ index 9feefe6cbf..2b1dcf2846 100644
 +    DDSFF_PROGRESSIVERENDER = 1,
 +};
 +#pragma pop_macro("DDSFF_PROGRESSIVERENDER")
++#else
+ enum __MIDL___MIDL_itf_ddstream_0000_0000_0001
+     {
+         DDSFF_PROGRESSIVERENDER	= 0x1
+     } ;
 +#endif
+ 
+ 
+ 
+@@ -528,6 +538,8 @@ extern RPC_IF_HANDLE __MIDL_itf_ddstream_0000_0002_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
 +
  #endif
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h
-index 9124789a61..182e446165 100644
+index 9124789a61..19ea046153 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h
 @@ -1,3 +1,4 @@
@@ -7,206 +7,10 @@ index 9124789a61..182e446165 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -2193,17 +2194,17 @@ EXTERN_GUID( WMT_DMOCATEGORY_AUDIO_WATERMARK, 0x65221c5a, 0xfa75, 0x4b39, 0xb5,
- EXTERN_GUID( WMT_DMOCATEGORY_VIDEO_WATERMARK, 0x187cc922, 0x8efc, 0x4404, 0x9d, 0xaf, 0x63, 0xf4, 0x83, 0x0d, 0xf1, 0xbc );
- #define WM_MAX_VIDEO_STREAMS            0x3f
- #define WM_MAX_STREAMS                  0x3f
--HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );
--HRESULT STDMETHODCALLTYPE WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );
--HRESULT STDMETHODCALLTYPE WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );
--HRESULT STDMETHODCALLTYPE WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );
--HRESULT STDMETHODCALLTYPE WMCreateEditor( IWMMetadataEditor **ppEditor );
--HRESULT STDMETHODCALLTYPE WMCreateIndexer( IWMIndexer **ppIndexer );
--HRESULT STDMETHODCALLTYPE WMCreateBackupRestorer( IUnknown *pCallback, IWMLicenseBackup **ppBackup );
--HRESULT STDMETHODCALLTYPE WMCreateProfileManager( IWMProfileManager **ppProfileManager );
--HRESULT STDMETHODCALLTYPE WMCreateWriterFileSink( IWMWriterFileSink **ppSink );
--HRESULT STDMETHODCALLTYPE WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );
--HRESULT STDMETHODCALLTYPE WMCreateWriterPushSink( IWMWriterPushSink **ppSink );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateEditor( IWMMetadataEditor **ppEditor );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateIndexer( IWMIndexer **ppIndexer );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateBackupRestorer( IUnknown *pCallback, IWMLicenseBackup **ppBackup );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateProfileManager( IWMProfileManager **ppProfileManager );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriterFileSink( IWMWriterFileSink **ppSink );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriterPushSink( IWMWriterPushSink **ppSink );
- HRESULT STDMETHODCALLTYPE WMCreateDeviceRegistration( IWMDeviceRegistration **ppDevReg );
- HRESULT STDMETHODCALLTYPE WMCreateDRMTranscryptor( IWMDRMTranscryptor **ppTranscryptor );
- HRESULT STDMETHODCALLTYPE WMCreateDRMTranscryptionManager( IWMDRMTranscryptionManager **ppTranscryptionManager );
-@@ -2764,7 +2765,7 @@ EXTERN_C const IID IID_IWMDRMWriter;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("d6ea5dd0-12a0-43f4-90ab-a3fd451e6a07")
-+    MIDL_INTERFACE("d6ea5dd0-12a0-43f4-90ab-a3fd451e6a07") _Windows_SupportedOS_Windows2000_ 
-     IWMDRMWriter : public IUnknown
-     {
-     public:
-@@ -2946,7 +2947,7 @@ EXTERN_C const IID IID_IWMDRMWriter2;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("38ee7a94-40e2-4e10-aa3f-33fd3210ed5b")
-+    MIDL_INTERFACE("38ee7a94-40e2-4e10-aa3f-33fd3210ed5b") _Windows_SupportedOS_WindowsXP_ 
-     IWMDRMWriter2 : public IWMDRMWriter
-     {
-     public:
-@@ -3096,7 +3097,7 @@ EXTERN_C const IID IID_IWMDRMWriter3;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("a7184082-a4aa-4dde-ac9c-e75dbd1117ce")
-+    MIDL_INTERFACE("a7184082-a4aa-4dde-ac9c-e75dbd1117ce") _Windows_SupportedOS_WindowsXP_ 
-     IWMDRMWriter3 : public IWMDRMWriter2
-     {
-     public:
-@@ -5532,7 +5533,7 @@ EXTERN_C const IID IID_IWMDRMEditor;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("FF130EBC-A6C3-42A6-B401-C3382C3E08B3")
-+    MIDL_INTERFACE("FF130EBC-A6C3-42A6-B401-C3382C3E08B3") _Windows_SupportedOS_Windows2000_ 
-     IWMDRMEditor : public IUnknown
-     {
-     public:
-@@ -16372,7 +16373,7 @@ EXTERN_C const IID IID_IWMDRMReader;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("D2827540-3EE7-432c-B14C-DC17F085D3B3")
-+    MIDL_INTERFACE("D2827540-3EE7-432c-B14C-DC17F085D3B3") _Windows_SupportedOS_Windows2000_ 
-     IWMDRMReader : public IUnknown
-     {
-     public:
-@@ -16612,7 +16613,7 @@ EXTERN_C const IID IID_IWMDRMReader2;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("befe7a75-9f1d-4075-b9d9-a3c37bda49a0")
-+    MIDL_INTERFACE("befe7a75-9f1d-4075-b9d9-a3c37bda49a0") _Windows_SupportedOS_WindowsXP_ 
-     IWMDRMReader2 : public IWMDRMReader
-     {
-     public:
-@@ -16827,7 +16828,7 @@ EXTERN_C const IID IID_IWMDRMReader3;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("e08672de-f1e7-4ff4-a0a3-fc4b08e4caf8")
-+    MIDL_INTERFACE("e08672de-f1e7-4ff4-a0a3-fc4b08e4caf8") _Windows_SupportedOS_WindowsXP_ 
-     IWMDRMReader3 : public IWMDRMReader2
-     {
-     public:
-@@ -18661,7 +18662,7 @@ EXTERN_C const IID IID_IWMLicenseBackup;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("05E5AC9F-3FB6-4508-BB43-A4067BA1EBE8")
-+    MIDL_INTERFACE("05E5AC9F-3FB6-4508-BB43-A4067BA1EBE8") _Windows_SupportedOS_Windows2000_ 
-     IWMLicenseBackup : public IUnknown
-     {
-     public:
-@@ -18761,7 +18762,7 @@ EXTERN_C const IID IID_IWMLicenseRestore;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("C70B6334-A22E-4efb-A245-15E65A004A13")
-+    MIDL_INTERFACE("C70B6334-A22E-4efb-A245-15E65A004A13") _Windows_SupportedOS_Windows2000_ 
-     IWMLicenseRestore : public IUnknown
-     {
-     public:
-@@ -18861,7 +18862,7 @@ EXTERN_C const IID IID_IWMBackupRestoreProps;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("3C8E0DA6-996F-4ff3-A1AF-4838F9377E2E")
-+    MIDL_INTERFACE("3C8E0DA6-996F-4ff3-A1AF-4838F9377E2E") _Windows_SupportedOS_Windows2000_ 
-     IWMBackupRestoreProps : public IUnknown
-     {
-     public:
-@@ -19931,7 +19932,7 @@ EXTERN_C const IID IID_IWMDeviceRegistration;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("f6211f03-8d21-4e94-93e6-8510805f2d99")
-+    MIDL_INTERFACE("f6211f03-8d21-4e94-93e6-8510805f2d99") _Windows_SupportedOS_WindowsXP_ 
-     IWMDeviceRegistration : public IUnknown
-     {
-     public:
-@@ -20159,15 +20160,15 @@ EXTERN_C const IID IID_IWMRegisteredDevice;
-             /* [annotation][in] */ 
-             _In_  DWORD dwIndex,
-             /* [annotation][out] */ 
--            _Out_  BSTR *pbstrName,
-+            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName,
-             /* [annotation][out] */ 
--            _Out_  BSTR *pbstrValue) = 0;
-+            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
-         
-         virtual HRESULT STDMETHODCALLTYPE GetAttributeByName( 
-             /* [annotation][in] */ 
-             _In_  BSTR bstrName,
-             /* [annotation][out] */ 
--            _Out_  BSTR *pbstrValue) = 0;
-+            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
-         
-         virtual HRESULT STDMETHODCALLTYPE SetAttributeByName( 
-             /* [annotation][in] */ 
-@@ -20399,7 +20400,7 @@ EXTERN_C const IID IID_IWMProximityDetection;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("6A9FD8EE-B651-4bf0-B849-7D4ECE79A2B1")
-+    MIDL_INTERFACE("6A9FD8EE-B651-4bf0-B849-7D4ECE79A2B1") _Windows_SupportedOS_WindowsXP_ 
-     IWMProximityDetection : public IUnknown
-     {
-     public:
-@@ -20514,7 +20515,7 @@ EXTERN_C const IID IID_IWMDRMMessageParser;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("A73A0072-25A0-4c99-B4A5-EDE8101A6C39")
-+    MIDL_INTERFACE("A73A0072-25A0-4c99-B4A5-EDE8101A6C39") _Windows_SupportedOS_WindowsXP_ 
-     IWMDRMMessageParser : public IUnknown
-     {
-     public:
-@@ -20538,7 +20539,7 @@ EXTERN_C const IID IID_IWMDRMMessageParser;
-             /* [annotation][out] */ 
-             _Out_  DRM_VAL16 *pDeviceSerialNumber,
-             /* [annotation][out] */ 
--            _Out_  BSTR *pbstrAction) = 0;
-+            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAction) = 0;
-         
-     };
-     
-@@ -20642,7 +20643,7 @@ EXTERN_C const IID IID_IWMDRMTranscryptor;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("69059850-6E6F-4bb2-806F-71863DDFC471")
-+    MIDL_INTERFACE("69059850-6E6F-4bb2-806F-71863DDFC471") _Windows_SupportedOS_WindowsXP_ 
-     IWMDRMTranscryptor : public IUnknown
-     {
-     public:
-@@ -21553,9 +21554,9 @@ EXTERN_C const IID IID_IWMAddressAccess2;
-             /* [annotation][in] */ 
-             _In_  DWORD dwEntryNum,
-             /* [annotation][out] */ 
--            _Out_  BSTR *pbstrAddress,
-+            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAddress,
-             /* [annotation][out] */ 
--            _Out_  BSTR *pbstrMask) = 0;
-+            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrMask) = 0;
-         
-         virtual HRESULT STDMETHODCALLTYPE AddAccessEntryEx( 
-             /* [annotation][in] */ 
-@@ -21977,6 +21978,173 @@ extern RPC_IF_HANDLE __MIDL_itf_wmsdkidl_0000_0093_v0_0_s_ifspec;
- }
+@@ -1166,24 +1167,70 @@ typedef LPCWSTR LPCWSTR_WMSDK_TYPE_SAFE;
+ #define LPCWSTR_WMSDK_TYPE_SAFE LPWSTR
  #endif
  
-+
 +#ifdef WIN32METADATA
 +#pragma push_macro("WEBSTREAM_SAMPLE_TYPE_FILE")
 +#undef WEBSTREAM_SAMPLE_TYPE_FILE
@@ -219,8 +23,14 @@ index 9124789a61..182e446165 100644
 +};
 +#pragma pop_macro("WEBSTREAM_SAMPLE_TYPE_RENDER")
 +#pragma pop_macro("WEBSTREAM_SAMPLE_TYPE_FILE")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0001
+     {
+         WEBSTREAM_SAMPLE_TYPE_FILE	= 0x1,
+         WEBSTREAM_SAMPLE_TYPE_RENDER	= 0x2
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("WM_SF_CLEANPOINT")
 +#undef WM_SF_CLEANPOINT
@@ -237,8 +47,15 @@ index 9124789a61..182e446165 100644
 +#pragma pop_macro("WM_SF_DATALOSS")
 +#pragma pop_macro("WM_SF_DISCONTINUITY")
 +#pragma pop_macro("WM_SF_CLEANPOINT")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0002
+     {
+         WM_SF_CLEANPOINT	= 0x1,
+         WM_SF_DISCONTINUITY	= 0x2,
+         WM_SF_DATALOSS	= 0x4
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("WM_SFEX_NOTASYNCPOINT")
 +#undef WM_SFEX_NOTASYNCPOINT
@@ -251,8 +68,20 @@ index 9124789a61..182e446165 100644
 +};
 +#pragma pop_macro("WM_SFEX_DATALOSS")
 +#pragma pop_macro("WM_SFEX_NOTASYNCPOINT")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0003
+     {
+         WM_SFEX_NOTASYNCPOINT	= 0x2,
+         WM_SFEX_DATALOSS	= 0x4
+     } ;
 +#endif
-+
+ typedef 
+ enum WMT_STATUS
+     {
+@@ -1344,6 +1391,35 @@ enum WMT_CODEC_INFO_TYPE
+     } 	WMT_CODEC_INFO_TYPE;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("WM_DM_NOTINTERLACED")
 +#undef WM_DM_NOTINTERLACED
@@ -281,8 +110,16 @@ index 9124789a61..182e446165 100644
 +#pragma pop_macro("WM_DM_DEINTERLACE_HALFSIZE")
 +#pragma pop_macro("WM_DM_DEINTERLACE_NORMAL")
 +#pragma pop_macro("WM_DM_NOTINTERLACED")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0004
+     {
+         WM_DM_NOTINTERLACED	= 0,
+@@ -1353,7 +1429,57 @@ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0004
+         WM_DM_DEINTERLACE_INVERSETELECINE	= 4,
+         WM_DM_DEINTERLACE_VERTICALHALFSIZEDOUBLERATE	= 5
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("WM_DM_IT_DISABLE_COHERENT_MODE")
 +#undef WM_DM_IT_DISABLE_COHERENT_MODE
@@ -331,8 +168,22 @@ index 9124789a61..182e446165 100644
 +#pragma pop_macro("WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BB_TOP")
 +#pragma pop_macro("WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_AA_TOP")
 +#pragma pop_macro("WM_DM_IT_DISABLE_COHERENT_MODE")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0005
+     {
+         WM_DM_IT_DISABLE_COHERENT_MODE	= 0,
+@@ -1368,6 +1494,7 @@ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0005
+         WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_CD_BOTTOM	= 9,
+         WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_BOTTOM	= 10
+     } ;
 +#endif
-+
+ typedef 
+ enum tagWMT_OFFSET_FORMAT
+     {
+@@ -1418,13 +1545,52 @@ enum tagWMT_WATERMARK_ENTRY_TYPE
+     } 	WMT_WATERMARK_ENTRY_TYPE;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("WM_PLAYBACK_DRC_HIGH")
 +#undef WM_PLAYBACK_DRC_HIGH
@@ -349,8 +200,15 @@ index 9124789a61..182e446165 100644
 +#pragma pop_macro("WM_PLAYBACK_DRC_LOW")
 +#pragma pop_macro("WM_PLAYBACK_DRC_MEDIUM")
 +#pragma pop_macro("WM_PLAYBACK_DRC_HIGH")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0006
+     {
+         WM_PLAYBACK_DRC_HIGH	= 0,
+         WM_PLAYBACK_DRC_MEDIUM	= ( WM_PLAYBACK_DRC_HIGH + 1 ) ,
+         WM_PLAYBACK_DRC_LOW	= ( WM_PLAYBACK_DRC_MEDIUM + 1 ) 
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("WMT_TIMECODE_FRAMERATE_30")
 +#undef WMT_TIMECODE_FRAMERATE_30
@@ -371,7 +229,224 @@ index 9124789a61..182e446165 100644
 +#pragma pop_macro("WMT_TIMECODE_FRAMERATE_25")
 +#pragma pop_macro("WMT_TIMECODE_FRAMERATE_30DROP")
 +#pragma pop_macro("WMT_TIMECODE_FRAMERATE_30")
++#else
+ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0007
+     {
+         WMT_TIMECODE_FRAMERATE_30	= 0,
+@@ -1432,6 +1598,7 @@ enum __MIDL___MIDL_itf_wmsdkidl_0000_0000_0007
+         WMT_TIMECODE_FRAMERATE_25	= ( WMT_TIMECODE_FRAMERATE_30DROP + 1 ) ,
+         WMT_TIMECODE_FRAMERATE_24	= ( WMT_TIMECODE_FRAMERATE_25 + 1 ) 
+     } ;
 +#endif
+ typedef 
+ enum WMT_CREDENTIAL_FLAGS
+     {
+@@ -2193,17 +2360,17 @@ EXTERN_GUID( WMT_DMOCATEGORY_AUDIO_WATERMARK, 0x65221c5a, 0xfa75, 0x4b39, 0xb5,
+ EXTERN_GUID( WMT_DMOCATEGORY_VIDEO_WATERMARK, 0x187cc922, 0x8efc, 0x4404, 0x9d, 0xaf, 0x63, 0xf4, 0x83, 0x0d, 0xf1, 0xbc );
+ #define WM_MAX_VIDEO_STREAMS            0x3f
+ #define WM_MAX_STREAMS                  0x3f
+-HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );
+-HRESULT STDMETHODCALLTYPE WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );
+-HRESULT STDMETHODCALLTYPE WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );
+-HRESULT STDMETHODCALLTYPE WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );
+-HRESULT STDMETHODCALLTYPE WMCreateEditor( IWMMetadataEditor **ppEditor );
+-HRESULT STDMETHODCALLTYPE WMCreateIndexer( IWMIndexer **ppIndexer );
+-HRESULT STDMETHODCALLTYPE WMCreateBackupRestorer( IUnknown *pCallback, IWMLicenseBackup **ppBackup );
+-HRESULT STDMETHODCALLTYPE WMCreateProfileManager( IWMProfileManager **ppProfileManager );
+-HRESULT STDMETHODCALLTYPE WMCreateWriterFileSink( IWMWriterFileSink **ppSink );
+-HRESULT STDMETHODCALLTYPE WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );
+-HRESULT STDMETHODCALLTYPE WMCreateWriterPushSink( IWMWriterPushSink **ppSink );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateEditor( IWMMetadataEditor **ppEditor );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateIndexer( IWMIndexer **ppIndexer );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateBackupRestorer( IUnknown *pCallback, IWMLicenseBackup **ppBackup );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateProfileManager( IWMProfileManager **ppProfileManager );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriterFileSink( IWMWriterFileSink **ppSink );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriterPushSink( IWMWriterPushSink **ppSink );
+ HRESULT STDMETHODCALLTYPE WMCreateDeviceRegistration( IWMDeviceRegistration **ppDevReg );
+ HRESULT STDMETHODCALLTYPE WMCreateDRMTranscryptor( IWMDRMTranscryptor **ppTranscryptor );
+ HRESULT STDMETHODCALLTYPE WMCreateDRMTranscryptionManager( IWMDRMTranscryptionManager **ppTranscryptionManager );
+@@ -2764,7 +2931,7 @@ EXTERN_C const IID IID_IWMDRMWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d6ea5dd0-12a0-43f4-90ab-a3fd451e6a07")
++    MIDL_INTERFACE("d6ea5dd0-12a0-43f4-90ab-a3fd451e6a07") _Windows_SupportedOS_Windows2000_ 
+     IWMDRMWriter : public IUnknown
+     {
+     public:
+@@ -2946,7 +3113,7 @@ EXTERN_C const IID IID_IWMDRMWriter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("38ee7a94-40e2-4e10-aa3f-33fd3210ed5b")
++    MIDL_INTERFACE("38ee7a94-40e2-4e10-aa3f-33fd3210ed5b") _Windows_SupportedOS_WindowsXP_ 
+     IWMDRMWriter2 : public IWMDRMWriter
+     {
+     public:
+@@ -3096,7 +3263,7 @@ EXTERN_C const IID IID_IWMDRMWriter3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a7184082-a4aa-4dde-ac9c-e75dbd1117ce")
++    MIDL_INTERFACE("a7184082-a4aa-4dde-ac9c-e75dbd1117ce") _Windows_SupportedOS_WindowsXP_ 
+     IWMDRMWriter3 : public IWMDRMWriter2
+     {
+     public:
+@@ -5532,7 +5699,7 @@ EXTERN_C const IID IID_IWMDRMEditor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FF130EBC-A6C3-42A6-B401-C3382C3E08B3")
++    MIDL_INTERFACE("FF130EBC-A6C3-42A6-B401-C3382C3E08B3") _Windows_SupportedOS_Windows2000_ 
+     IWMDRMEditor : public IUnknown
+     {
+     public:
+@@ -16372,7 +16539,7 @@ EXTERN_C const IID IID_IWMDRMReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D2827540-3EE7-432c-B14C-DC17F085D3B3")
++    MIDL_INTERFACE("D2827540-3EE7-432c-B14C-DC17F085D3B3") _Windows_SupportedOS_Windows2000_ 
+     IWMDRMReader : public IUnknown
+     {
+     public:
+@@ -16612,7 +16779,7 @@ EXTERN_C const IID IID_IWMDRMReader2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("befe7a75-9f1d-4075-b9d9-a3c37bda49a0")
++    MIDL_INTERFACE("befe7a75-9f1d-4075-b9d9-a3c37bda49a0") _Windows_SupportedOS_WindowsXP_ 
+     IWMDRMReader2 : public IWMDRMReader
+     {
+     public:
+@@ -16827,7 +16994,7 @@ EXTERN_C const IID IID_IWMDRMReader3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e08672de-f1e7-4ff4-a0a3-fc4b08e4caf8")
++    MIDL_INTERFACE("e08672de-f1e7-4ff4-a0a3-fc4b08e4caf8") _Windows_SupportedOS_WindowsXP_ 
+     IWMDRMReader3 : public IWMDRMReader2
+     {
+     public:
+@@ -18661,7 +18828,7 @@ EXTERN_C const IID IID_IWMLicenseBackup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("05E5AC9F-3FB6-4508-BB43-A4067BA1EBE8")
++    MIDL_INTERFACE("05E5AC9F-3FB6-4508-BB43-A4067BA1EBE8") _Windows_SupportedOS_Windows2000_ 
+     IWMLicenseBackup : public IUnknown
+     {
+     public:
+@@ -18761,7 +18928,7 @@ EXTERN_C const IID IID_IWMLicenseRestore;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C70B6334-A22E-4efb-A245-15E65A004A13")
++    MIDL_INTERFACE("C70B6334-A22E-4efb-A245-15E65A004A13") _Windows_SupportedOS_Windows2000_ 
+     IWMLicenseRestore : public IUnknown
+     {
+     public:
+@@ -18861,7 +19028,7 @@ EXTERN_C const IID IID_IWMBackupRestoreProps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3C8E0DA6-996F-4ff3-A1AF-4838F9377E2E")
++    MIDL_INTERFACE("3C8E0DA6-996F-4ff3-A1AF-4838F9377E2E") _Windows_SupportedOS_Windows2000_ 
+     IWMBackupRestoreProps : public IUnknown
+     {
+     public:
+@@ -19931,7 +20098,7 @@ EXTERN_C const IID IID_IWMDeviceRegistration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f6211f03-8d21-4e94-93e6-8510805f2d99")
++    MIDL_INTERFACE("f6211f03-8d21-4e94-93e6-8510805f2d99") _Windows_SupportedOS_WindowsXP_ 
+     IWMDeviceRegistration : public IUnknown
+     {
+     public:
+@@ -20159,15 +20326,15 @@ EXTERN_C const IID IID_IWMRegisteredDevice;
+             /* [annotation][in] */ 
+             _In_  DWORD dwIndex,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAttributeByName( 
+             /* [annotation][in] */ 
+             _In_  BSTR bstrName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetAttributeByName( 
+             /* [annotation][in] */ 
+@@ -20399,7 +20566,7 @@ EXTERN_C const IID IID_IWMProximityDetection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6A9FD8EE-B651-4bf0-B849-7D4ECE79A2B1")
++    MIDL_INTERFACE("6A9FD8EE-B651-4bf0-B849-7D4ECE79A2B1") _Windows_SupportedOS_WindowsXP_ 
+     IWMProximityDetection : public IUnknown
+     {
+     public:
+@@ -20514,7 +20681,7 @@ EXTERN_C const IID IID_IWMDRMMessageParser;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A73A0072-25A0-4c99-B4A5-EDE8101A6C39")
++    MIDL_INTERFACE("A73A0072-25A0-4c99-B4A5-EDE8101A6C39") _Windows_SupportedOS_WindowsXP_ 
+     IWMDRMMessageParser : public IUnknown
+     {
+     public:
+@@ -20538,7 +20705,7 @@ EXTERN_C const IID IID_IWMDRMMessageParser;
+             /* [annotation][out] */ 
+             _Out_  DRM_VAL16 *pDeviceSerialNumber,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrAction) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAction) = 0;
+         
+     };
+     
+@@ -20642,7 +20809,7 @@ EXTERN_C const IID IID_IWMDRMTranscryptor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("69059850-6E6F-4bb2-806F-71863DDFC471")
++    MIDL_INTERFACE("69059850-6E6F-4bb2-806F-71863DDFC471") _Windows_SupportedOS_WindowsXP_ 
+     IWMDRMTranscryptor : public IUnknown
+     {
+     public:
+@@ -21553,9 +21720,9 @@ EXTERN_C const IID IID_IWMAddressAccess2;
+             /* [annotation][in] */ 
+             _In_  DWORD dwEntryNum,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrAddress,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAddress,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrMask) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrMask) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddAccessEntryEx( 
+             /* [annotation][in] */ 
+@@ -21977,6 +22144,14 @@ extern RPC_IF_HANDLE __MIDL_itf_wmsdkidl_0000_0093_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
++
++
++
++
++
 +
  #endif
  

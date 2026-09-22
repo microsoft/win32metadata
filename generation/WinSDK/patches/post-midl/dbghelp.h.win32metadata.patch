@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
-index 09bb15cbc7..e8c55fab05 100644
+index 09bb15cbc7..f6e42c98d2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 @@ -1,3 +1,4 @@
@@ -312,7 +312,43 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  GetTimestampForLoadedLibrary(
      _In_ HMODULE Module
-@@ -1623,14 +1624,14 @@ enum {
+@@ -1610,6 +1611,28 @@ typedef struct _IMAGEHLP_CBA_READ_MEMORY {
+     DWORD    *bytesread;                                // pointer to store amount of bytes read
+ } IMAGEHLP_CBA_READ_MEMORY, *PIMAGEHLP_CBA_READ_MEMORY;
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("sevInfo")
++#undef sevInfo
++#pragma push_macro("sevProblem")
++#undef sevProblem
++#pragma push_macro("sevAttn")
++#undef sevAttn
++#pragma push_macro("sevFatal")
++#undef sevFatal
++enum IMAGEHLP_CBA_EVENT_SEVERITY : unsigned int
++{
++    sevInfo = 0U,
++    sevProblem = 1U,
++    sevAttn = 2U,
++    sevFatal = 3U,
++};
++#pragma pop_macro("sevFatal")
++#pragma pop_macro("sevAttn")
++#pragma pop_macro("sevProblem")
++#pragma pop_macro("sevInfo")
++enum { sevMax = 4 };
++#else
+ enum {
+     sevInfo = 0,
+     sevProblem,
+@@ -1617,20 +1640,21 @@ enum {
+     sevFatal,
+     sevMax  // unused
+ };
++#endif
+ 
+ #define EVENT_SRCSPEW_START 100
+ #define EVENT_SRCSPEW       100
  #define EVENT_SRCSPEW_END   199
  
  typedef struct _IMAGEHLP_CBA_EVENT {
@@ -329,7 +365,7 @@ index 09bb15cbc7..e8c55fab05 100644
      DWORD  code;                                         // numerical code IDs the error
      PCWSTR desc;                                         // may contain a text description of the error
      PVOID  object;                                       // value dependant upon the error code
-@@ -1707,44 +1708,44 @@ typedef struct _IMAGEHLP_JIT_SYMBOL_MAP {
+@@ -1707,44 +1731,44 @@ typedef struct _IMAGEHLP_JIT_SYMBOL_MAP {
  
  // If dbghelp ever needs to display graphical UI, it will use this as the parent window.
  
@@ -382,7 +418,7 @@ index 09bb15cbc7..e8c55fab05 100644
      _Out_writes_(size) PWSTR dir,
      _In_ size_t size
      );
-@@ -1761,7 +1762,7 @@ typedef struct _OMAP {
+@@ -1761,7 +1785,7 @@ typedef struct _OMAP {
      ULONG  rvaTo;
  } OMAP, *POMAP;
  
@@ -391,7 +427,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetOmaps(
      _In_ HANDLE hProcess,
-@@ -1836,19 +1837,19 @@ typedef enum {
+@@ -1836,19 +1860,19 @@ typedef enum {
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -414,7 +450,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymCleanup(
      _In_ HANDLE hProcess
-@@ -1861,12 +1862,12 @@ SymCleanup(
+@@ -1861,12 +1885,12 @@ SymCleanup(
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
  // Returns the value of the extended option
@@ -429,7 +465,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
  
-@@ -1876,7 +1877,7 @@ SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
+@@ -1876,7 +1900,7 @@ SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -438,7 +474,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymMatchString(
      _In_ PCSTR string,
-@@ -1884,7 +1885,7 @@ SymMatchString(
+@@ -1884,7 +1908,7 @@ SymMatchString(
      _In_ BOOL fCase
      );
  
@@ -447,7 +483,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymMatchStringA(
      _In_ PCSTR string,
-@@ -1892,7 +1893,7 @@ SymMatchStringA(
+@@ -1892,7 +1916,7 @@ SymMatchStringA(
      _In_ BOOL fCase
      );
  
@@ -456,7 +492,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymMatchStringW(
      _In_ PCWSTR string,
-@@ -1909,7 +1910,7 @@ typedef BOOL
+@@ -1909,7 +1933,7 @@ typedef BOOL
  // for backwards compatibility - don't use this
  #define PSYM_ENUMSOURCFILES_CALLBACK PSYM_ENUMSOURCEFILES_CALLBACK
  
@@ -465,7 +501,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSourceFiles(
      _In_ HANDLE hProcess,
-@@ -1925,7 +1926,7 @@ typedef BOOL
+@@ -1925,7 +1949,7 @@ typedef BOOL
      _In_opt_ PVOID UserContext
      );
  
@@ -474,7 +510,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSourceFilesW(
      _In_ HANDLE hProcess,
-@@ -1935,7 +1936,7 @@ SymEnumSourceFilesW(
+@@ -1935,7 +1959,7 @@ SymEnumSourceFilesW(
      _In_opt_ PVOID UserContext
      );
  
@@ -483,7 +519,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumerateModules64(
      _In_ HANDLE hProcess,
-@@ -1943,7 +1944,7 @@ SymEnumerateModules64(
+@@ -1943,7 +1967,7 @@ SymEnumerateModules64(
      _In_opt_ PVOID UserContext
      );
  
@@ -492,7 +528,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumerateModulesW64(
      _In_ HANDLE hProcess,
-@@ -1954,7 +1955,7 @@ SymEnumerateModulesW64(
+@@ -1954,7 +1978,7 @@ SymEnumerateModulesW64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymEnumerateModules SymEnumerateModules64
  #else
@@ -501,7 +537,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumerateModules(
      _In_ HANDLE hProcess,
-@@ -1963,7 +1964,7 @@ SymEnumerateModules(
+@@ -1963,7 +1987,7 @@ SymEnumerateModules(
      );
  #endif
  
@@ -510,7 +546,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  EnumerateLoadedModulesEx(
      _In_ HANDLE hProcess,
-@@ -1971,7 +1972,7 @@ EnumerateLoadedModulesEx(
+@@ -1971,7 +1995,7 @@ EnumerateLoadedModulesEx(
      _In_opt_ PVOID UserContext
      );
  
@@ -519,7 +555,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  EnumerateLoadedModulesExW(
      _In_ HANDLE hProcess,
-@@ -1979,7 +1980,7 @@ EnumerateLoadedModulesExW(
+@@ -1979,7 +2003,7 @@ EnumerateLoadedModulesExW(
      _In_opt_ PVOID UserContext
      );
  
@@ -528,7 +564,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  EnumerateLoadedModules64(
      _In_ HANDLE hProcess,
-@@ -1987,7 +1988,7 @@ EnumerateLoadedModules64(
+@@ -1987,7 +2011,7 @@ EnumerateLoadedModules64(
      _In_opt_ PVOID UserContext
      );
  
@@ -537,7 +573,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  EnumerateLoadedModulesW64(
      _In_ HANDLE hProcess,
-@@ -1998,7 +1999,7 @@ EnumerateLoadedModulesW64(
+@@ -1998,7 +2022,7 @@ EnumerateLoadedModulesW64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define EnumerateLoadedModules EnumerateLoadedModules64
  #else
@@ -546,7 +582,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  EnumerateLoadedModules(
      _In_ HANDLE hProcess,
-@@ -2007,7 +2008,7 @@ EnumerateLoadedModules(
+@@ -2007,7 +2031,7 @@ EnumerateLoadedModules(
      );
  #endif
  
@@ -555,7 +591,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFunctionTableAccess64(
      _In_ HANDLE hProcess,
-@@ -2020,7 +2021,7 @@ SymFunctionTableAccess64(
+@@ -2020,7 +2044,7 @@ SymFunctionTableAccess64(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
@@ -564,7 +600,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFunctionTableAccess64AccessRoutines(
      _In_ HANDLE hProcess,
-@@ -2032,7 +2033,7 @@ SymFunctionTableAccess64AccessRoutines(
+@@ -2032,7 +2056,7 @@ SymFunctionTableAccess64AccessRoutines(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymFunctionTableAccess SymFunctionTableAccess64
  #else
@@ -573,7 +609,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFunctionTableAccess(
      _In_ HANDLE hProcess,
-@@ -2055,7 +2056,7 @@ SymGetUnwindInfo(
+@@ -2055,7 +2079,7 @@ SymGetUnwindInfo(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -582,7 +618,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetModuleInfo64(
      _In_ HANDLE hProcess,
-@@ -2063,7 +2064,7 @@ SymGetModuleInfo64(
+@@ -2063,7 +2087,7 @@ SymGetModuleInfo64(
      _Out_ PIMAGEHLP_MODULE64 ModuleInfo
      );
  
@@ -591,7 +627,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetModuleInfoW64(
      _In_ HANDLE hProcess,
-@@ -2075,7 +2076,7 @@ SymGetModuleInfoW64(
+@@ -2075,7 +2099,7 @@ SymGetModuleInfoW64(
  #define SymGetModuleInfo   SymGetModuleInfo64
  #define SymGetModuleInfoW  SymGetModuleInfoW64
  #else
@@ -600,7 +636,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetModuleInfo(
      _In_ HANDLE hProcess,
-@@ -2083,7 +2084,7 @@ SymGetModuleInfo(
+@@ -2083,7 +2107,7 @@ SymGetModuleInfo(
      _Out_ PIMAGEHLP_MODULE ModuleInfo
      );
  
@@ -609,7 +645,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetModuleInfoW(
      _In_ HANDLE hProcess,
-@@ -2092,7 +2093,7 @@ SymGetModuleInfoW(
+@@ -2092,7 +2116,7 @@ SymGetModuleInfoW(
      );
  #endif
  
@@ -618,7 +654,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetModuleBase64(
      _In_ HANDLE hProcess,
-@@ -2102,7 +2103,7 @@ SymGetModuleBase64(
+@@ -2102,7 +2126,7 @@ SymGetModuleBase64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymGetModuleBase SymGetModuleBase64
  #else
@@ -627,7 +663,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetModuleBase(
      _In_ HANDLE hProcess,
-@@ -2142,7 +2143,7 @@ typedef BOOL
+@@ -2142,7 +2166,7 @@ typedef BOOL
      _In_opt_ PVOID UserContext
      );
  
@@ -636,7 +672,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumLines(
      _In_ HANDLE hProcess,
-@@ -2159,7 +2160,7 @@ typedef BOOL
+@@ -2159,7 +2183,7 @@ typedef BOOL
      _In_opt_ PVOID UserContext
      );
  
@@ -645,7 +681,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumLinesW(
      _In_ HANDLE hProcess,
-@@ -2176,7 +2177,7 @@ SymEnumLinesW(
+@@ -2176,7 +2200,7 @@ SymEnumLinesW(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -654,7 +690,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromAddr64(
      _In_ HANDLE hProcess,
-@@ -2191,7 +2192,7 @@ SymGetLineFromAddr64(
+@@ -2191,7 +2215,7 @@ SymGetLineFromAddr64(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
@@ -663,7 +699,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromAddrW64(
      _In_ HANDLE hProcess,
-@@ -2200,7 +2201,7 @@ SymGetLineFromAddrW64(
+@@ -2200,7 +2224,7 @@ SymGetLineFromAddrW64(
      _Out_ PIMAGEHLP_LINEW64 Line
      );
  
@@ -672,7 +708,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromInlineContext(
      _In_ HANDLE hProcess,
-@@ -2211,7 +2212,7 @@ SymGetLineFromInlineContext(
+@@ -2211,7 +2235,7 @@ SymGetLineFromInlineContext(
      _Out_ PIMAGEHLP_LINE64 Line64
      );
  
@@ -681,7 +717,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromInlineContextW(
      _In_ HANDLE hProcess,
-@@ -2222,7 +2223,7 @@ SymGetLineFromInlineContextW(
+@@ -2222,7 +2246,7 @@ SymGetLineFromInlineContextW(
      _Out_ PIMAGEHLP_LINEW64 Line
      );
  
@@ -690,7 +726,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSourceLines(
      _In_ HANDLE hProcess,
-@@ -2235,7 +2236,7 @@ SymEnumSourceLines(
+@@ -2235,7 +2259,7 @@ SymEnumSourceLines(
      _In_opt_ PVOID UserContext
      );
  
@@ -699,7 +735,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSourceLinesW(
      _In_ HANDLE hProcess,
-@@ -2249,7 +2250,7 @@ SymEnumSourceLinesW(
+@@ -2249,7 +2273,7 @@ SymEnumSourceLinesW(
      );
  
  // Check whether input Address includes "inline stack".
@@ -708,7 +744,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymAddrIncludeInlineTrace(
      _In_ HANDLE hProcess,
-@@ -2265,7 +2266,7 @@ SymAddrIncludeInlineTrace(
+@@ -2265,7 +2289,7 @@ SymAddrIncludeInlineTrace(
  
  // Compare the "inline stack" from the 2 input addresses and determine whether the difference is possibly from
  // what execution control operation. The return value would be onr of the literals defined above.
@@ -717,7 +753,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymCompareInlineTrace(
      _In_ HANDLE hProcess,
-@@ -2276,7 +2277,7 @@ SymCompareInlineTrace(
+@@ -2276,7 +2300,7 @@ SymCompareInlineTrace(
      _In_ DWORD64 RetAddress2
      );
  
@@ -726,7 +762,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymQueryInlineTrace(
      _In_ HANDLE hProcess,
-@@ -2300,7 +2301,7 @@ SymQueryInlineTrace(
+@@ -2300,7 +2324,7 @@ SymQueryInlineTrace(
  #define SymGetLineFromAddr SymGetLineFromAddr64
  #define SymGetLineFromAddrW SymGetLineFromAddrW64
  #else
@@ -735,7 +771,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromAddr(
      _In_ HANDLE hProcess,
-@@ -2319,7 +2320,7 @@ SymGetLineFromAddrW(
+@@ -2319,7 +2343,7 @@ SymGetLineFromAddrW(
      );
  #endif
  
@@ -744,7 +780,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromName64(
      _In_ HANDLE hProcess,
-@@ -2330,7 +2331,7 @@ SymGetLineFromName64(
+@@ -2330,7 +2354,7 @@ SymGetLineFromName64(
      _Inout_ PIMAGEHLP_LINE64 Line
      );
  
@@ -753,7 +789,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromNameW64(
      _In_ HANDLE hProcess,
-@@ -2344,7 +2345,7 @@ SymGetLineFromNameW64(
+@@ -2344,7 +2368,7 @@ SymGetLineFromNameW64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymGetLineFromName SymGetLineFromName64
  #else
@@ -762,7 +798,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineFromName(
      _In_ HANDLE hProcess,
-@@ -2356,14 +2357,14 @@ SymGetLineFromName(
+@@ -2356,14 +2380,14 @@ SymGetLineFromName(
      );
  #endif
  
@@ -779,7 +815,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineNextW64(
      _In_ HANDLE hProcess,
-@@ -2373,7 +2374,7 @@ SymGetLineNextW64(
+@@ -2373,7 +2397,7 @@ SymGetLineNextW64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymGetLineNext SymGetLineNext64
  #else
@@ -788,7 +824,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLineNext(
      _In_ HANDLE hProcess,
-@@ -2388,14 +2389,14 @@ SymGetLineNextW(
+@@ -2388,14 +2412,14 @@ SymGetLineNextW(
      );
  #endif
  
@@ -805,7 +841,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLinePrevW64(
      _In_ HANDLE hProcess,
-@@ -2405,7 +2406,7 @@ SymGetLinePrevW64(
+@@ -2405,7 +2429,7 @@ SymGetLinePrevW64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymGetLinePrev SymGetLinePrev64
  #else
@@ -814,7 +850,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetLinePrev(
      _In_ HANDLE hProcess,
-@@ -2420,7 +2421,7 @@ SymGetLinePrevW(
+@@ -2420,7 +2444,7 @@ SymGetLinePrevW(
      );
  #endif
  
@@ -823,7 +859,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetFileLineOffsets64(
      _In_ HANDLE hProcess,
-@@ -2430,7 +2431,7 @@ SymGetFileLineOffsets64(
+@@ -2430,7 +2454,7 @@ SymGetFileLineOffsets64(
      _In_ ULONG BufferLines
      );
  
@@ -832,7 +868,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymMatchFileName(
      _In_ PCSTR FileName,
-@@ -2439,7 +2440,7 @@ SymMatchFileName(
+@@ -2439,7 +2463,7 @@ SymMatchFileName(
      _Outptr_opt_ PSTR *MatchStop
      );
  
@@ -841,7 +877,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymMatchFileNameW(
      _In_ PCWSTR FileName,
-@@ -2448,7 +2449,7 @@ SymMatchFileNameW(
+@@ -2448,7 +2472,7 @@ SymMatchFileNameW(
      _Outptr_opt_ PWSTR *MatchStop
      );
  
@@ -850,7 +886,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFile(
      _In_ HANDLE hProcess,
-@@ -2459,7 +2460,7 @@ SymGetSourceFile(
+@@ -2459,7 +2483,7 @@ SymGetSourceFile(
      _In_ DWORD Size
      );
  
@@ -859,7 +895,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileW(
      _In_ HANDLE hProcess,
-@@ -2470,7 +2471,7 @@ SymGetSourceFileW(
+@@ -2470,7 +2494,7 @@ SymGetSourceFileW(
      _In_ DWORD Size
      );
  
@@ -868,7 +904,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileToken(
      _In_ HANDLE hProcess,
-@@ -2480,7 +2481,7 @@ SymGetSourceFileToken(
+@@ -2480,7 +2504,7 @@ SymGetSourceFileToken(
      _Out_ DWORD *Size
      );
  
@@ -877,7 +913,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileTokenByTokenName(
      _In_ HANDLE hProcess,
-@@ -2492,7 +2493,7 @@ SymGetSourceFileTokenByTokenName(
+@@ -2492,7 +2516,7 @@ SymGetSourceFileTokenByTokenName(
      _Out_ DWORD *Size
      );
  
@@ -886,7 +922,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileChecksumW(
      _In_ HANDLE hProcess,
-@@ -2504,7 +2505,7 @@ SymGetSourceFileChecksumW(
+@@ -2504,7 +2528,7 @@ SymGetSourceFileChecksumW(
      _Out_ DWORD *pActualBytesWritten
      );
  
@@ -895,7 +931,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileChecksum(
      _In_ HANDLE hProcess,
-@@ -2516,7 +2517,7 @@ SymGetSourceFileChecksum(
+@@ -2516,7 +2540,7 @@ SymGetSourceFileChecksum(
      _Out_ DWORD *pActualBytesWritten
      );
  
@@ -904,7 +940,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileTokenW(
      _In_ HANDLE hProcess,
-@@ -2526,7 +2527,7 @@ SymGetSourceFileTokenW(
+@@ -2526,7 +2550,7 @@ SymGetSourceFileTokenW(
      _Out_ DWORD *Size
      );
  
@@ -913,7 +949,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileTokenByTokenNameW(
      _In_ HANDLE hProcess,
-@@ -2538,7 +2539,7 @@ SymGetSourceFileTokenByTokenNameW(
+@@ -2538,7 +2562,7 @@ SymGetSourceFileTokenByTokenNameW(
      _Out_ DWORD *Size
      );
  
@@ -922,7 +958,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileFromToken(
      _In_ HANDLE hProcess,
-@@ -2548,7 +2549,7 @@ SymGetSourceFileFromToken(
+@@ -2548,7 +2572,7 @@ SymGetSourceFileFromToken(
      _In_ DWORD Size
      );
  
@@ -931,7 +967,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileFromTokenByTokenName(
      _In_ HANDLE hProcess,
-@@ -2559,7 +2560,7 @@ SymGetSourceFileFromTokenByTokenName(
+@@ -2559,7 +2583,7 @@ SymGetSourceFileFromTokenByTokenName(
      _In_ DWORD Size
      );
  
@@ -940,7 +976,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileFromTokenW(
      _In_ HANDLE hProcess,
-@@ -2569,7 +2570,7 @@ SymGetSourceFileFromTokenW(
+@@ -2569,7 +2593,7 @@ SymGetSourceFileFromTokenW(
      _In_ DWORD Size
      );
  
@@ -949,7 +985,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceFileFromTokenByTokenNameW(
      _In_ HANDLE hProcess,
-@@ -2580,7 +2581,7 @@ SymGetSourceFileFromTokenByTokenNameW(
+@@ -2580,7 +2604,7 @@ SymGetSourceFileFromTokenByTokenNameW(
      _In_ DWORD Size
      );
  
@@ -958,7 +994,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceVarFromToken(
      _In_ HANDLE hProcess,
-@@ -2591,7 +2592,7 @@ SymGetSourceVarFromToken(
+@@ -2591,7 +2615,7 @@ SymGetSourceVarFromToken(
      _In_ DWORD Size
      );
  
@@ -967,7 +1003,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSourceVarFromTokenW(
      _In_ HANDLE hProcess,
-@@ -2604,7 +2605,7 @@ SymGetSourceVarFromTokenW(
+@@ -2604,7 +2628,7 @@ SymGetSourceVarFromTokenW(
  
  typedef BOOL (CALLBACK *PENUMSOURCEFILETOKENSCALLBACK)(_In_ PVOID token,  _In_ size_t size);
  
@@ -976,7 +1012,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSourceFileTokens(
      _In_ HANDLE hProcess,
-@@ -2618,7 +2619,7 @@ SymEnumSourceFileTokens(
+@@ -2618,7 +2642,7 @@ SymEnumSourceFileTokens(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -985,7 +1021,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymInitialize(
      _In_ HANDLE hProcess,
-@@ -2626,7 +2627,7 @@ SymInitialize(
+@@ -2626,7 +2650,7 @@ SymInitialize(
      _In_ BOOL fInvadeProcess
      );
  
@@ -994,7 +1030,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymInitializeW(
      _In_ HANDLE hProcess,
-@@ -2646,7 +2647,7 @@ SymInitializeW(
+@@ -2646,7 +2670,7 @@ SymInitializeW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
@@ -1003,7 +1039,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSearchPath(
      _In_ HANDLE hProcess,
-@@ -2654,7 +2655,7 @@ SymGetSearchPath(
+@@ -2654,7 +2678,7 @@ SymGetSearchPath(
      _In_ DWORD SearchPathLength
      );
  
@@ -1012,7 +1048,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSearchPathW(
      _In_ HANDLE hProcess,
-@@ -2662,7 +2663,7 @@ SymGetSearchPathW(
+@@ -2662,7 +2686,7 @@ SymGetSearchPathW(
      _In_ DWORD SearchPathLength
      );
  
@@ -1021,7 +1057,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSetSearchPath(
      _In_ HANDLE hProcess,
-@@ -2675,7 +2676,7 @@ SymSetSearchPath(
+@@ -2675,7 +2699,7 @@ SymSetSearchPath(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -1030,7 +1066,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSetSearchPathW(
      _In_ HANDLE hProcess,
-@@ -2692,7 +2693,7 @@ SymSetSearchPathW(
+@@ -2692,7 +2716,7 @@ SymSetSearchPathW(
  #define SLMFLAG_ALT_INDEX   0x2
  #define SLMFLAG_NO_SYMBOLS  0x4
  
@@ -1039,7 +1075,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymLoadModuleEx(
      _In_ HANDLE hProcess,
-@@ -2702,7 +2703,7 @@ SymLoadModuleEx(
+@@ -2702,7 +2726,7 @@ SymLoadModuleEx(
      _In_ DWORD64 BaseOfDll,
      _In_ DWORD DllSize,
      _In_opt_ PMODLOAD_DATA Data,
@@ -1048,7 +1084,7 @@ index 09bb15cbc7..e8c55fab05 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
-@@ -2711,7 +2712,7 @@ SymLoadModuleEx(
+@@ -2711,7 +2735,7 @@ SymLoadModuleEx(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -1057,7 +1093,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymLoadModuleExW(
      _In_ HANDLE hProcess,
-@@ -2721,7 +2722,7 @@ SymLoadModuleExW(
+@@ -2721,7 +2745,7 @@ SymLoadModuleExW(
      _In_ DWORD64 BaseOfDll,
      _In_ DWORD DllSize,
      _In_opt_ PMODLOAD_DATA Data,
@@ -1066,7 +1102,7 @@ index 09bb15cbc7..e8c55fab05 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
-@@ -2730,7 +2731,7 @@ SymLoadModuleExW(
+@@ -2730,7 +2754,7 @@ SymLoadModuleExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
@@ -1075,7 +1111,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymUnloadModule64(
      _In_ HANDLE hProcess,
-@@ -2740,7 +2741,7 @@ SymUnloadModule64(
+@@ -2740,7 +2764,7 @@ SymUnloadModule64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymUnloadModule SymUnloadModule64
  #else
@@ -1084,7 +1120,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymUnloadModule(
      _In_ HANDLE hProcess,
-@@ -2748,7 +2749,7 @@ SymUnloadModule(
+@@ -2748,7 +2772,7 @@ SymUnloadModule(
      );
  #endif
  
@@ -1093,7 +1129,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymUnDName64(
      _In_ PIMAGEHLP_SYMBOL64 sym,            // Symbol to undecorate
-@@ -2759,7 +2760,7 @@ SymUnDName64(
+@@ -2759,7 +2783,7 @@ SymUnDName64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymUnDName SymUnDName64
  #else
@@ -1102,7 +1138,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymUnDName(
      _In_ PIMAGEHLP_SYMBOL sym,              // Symbol to undecorate
-@@ -2768,7 +2769,7 @@ SymUnDName(
+@@ -2768,7 +2792,7 @@ SymUnDName(
      );
  #endif
  
@@ -1111,7 +1147,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymRegisterCallback64(
      _In_ HANDLE hProcess,
-@@ -2776,7 +2777,7 @@ SymRegisterCallback64(
+@@ -2776,7 +2800,7 @@ SymRegisterCallback64(
      _In_ ULONG64 UserContext
      );
  
@@ -1120,7 +1156,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymRegisterCallbackW64(
      _In_ HANDLE hProcess,
-@@ -2784,7 +2785,7 @@ SymRegisterCallbackW64(
+@@ -2784,7 +2808,7 @@ SymRegisterCallbackW64(
      _In_ ULONG64 UserContext
      );
  
@@ -1129,7 +1165,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymRegisterFunctionEntryCallback64(
      _In_ HANDLE hProcess,
-@@ -2796,7 +2797,7 @@ SymRegisterFunctionEntryCallback64(
+@@ -2796,7 +2820,7 @@ SymRegisterFunctionEntryCallback64(
  #define SymRegisterCallback SymRegisterCallback64
  #define SymRegisterFunctionEntryCallback SymRegisterFunctionEntryCallback64
  #else
@@ -1138,7 +1174,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymRegisterCallback(
      _In_ HANDLE hProcess,
-@@ -2804,7 +2805,7 @@ SymRegisterCallback(
+@@ -2804,7 +2828,7 @@ SymRegisterCallback(
      _In_opt_ PVOID UserContext
      );
  
@@ -1147,7 +1183,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymRegisterFunctionEntryCallback(
      _In_ HANDLE hProcess,
-@@ -2839,7 +2840,7 @@ typedef struct _SYMBOL_INFO {
+@@ -2839,7 +2863,7 @@ typedef struct _SYMBOL_INFO {
      ULONG       Index;
      ULONG       Size;
      ULONG64     ModBase;          // Base Address of module comtaining this symbol
@@ -1156,7 +1192,7 @@ index 09bb15cbc7..e8c55fab05 100644
      ULONG64     Value;            // Value of symbol, ValuePresent should be 1
      ULONG64     Address;          // Address of symbol including base address of module
      ULONG       Register;         // register holding value or pointer to value
-@@ -2862,7 +2863,7 @@ typedef struct _SYMBOL_INFOW {
+@@ -2862,7 +2886,7 @@ typedef struct _SYMBOL_INFOW {
      ULONG       Index;
      ULONG       Size;
      ULONG64     ModBase;          // Base Address of module comtaining this symbol
@@ -1165,7 +1201,7 @@ index 09bb15cbc7..e8c55fab05 100644
      ULONG64     Value;            // Value of symbol, ValuePresent should be 1
      ULONG64     Address;          // Address of symbol including base address of module
      ULONG       Register;         // register holding value or pointer to value
-@@ -2901,7 +2902,7 @@ typedef struct _IMAGEHLP_STACK_FRAME
+@@ -2901,7 +2925,7 @@ typedef struct _IMAGEHLP_STACK_FRAME
  typedef VOID IMAGEHLP_CONTEXT, *PIMAGEHLP_CONTEXT;
  
  
@@ -1174,7 +1210,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSetContext(
      _In_ HANDLE hProcess,
-@@ -2909,14 +2910,14 @@ SymSetContext(
+@@ -2909,14 +2933,14 @@ SymSetContext(
      _In_opt_ PIMAGEHLP_CONTEXT Context
      );
  
@@ -1191,7 +1227,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSetScopeFromInlineContext(
      _In_ HANDLE hProcess,
-@@ -2924,7 +2925,7 @@ SymSetScopeFromInlineContext(
+@@ -2924,7 +2948,7 @@ SymSetScopeFromInlineContext(
      _In_ ULONG InlineContext
      );
  
@@ -1200,7 +1236,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSetScopeFromIndex(
      _In_ HANDLE hProcess,
-@@ -2938,7 +2939,7 @@ typedef BOOL
+@@ -2938,7 +2962,7 @@ typedef BOOL
      _In_ PVOID UserContext
      );
  
@@ -1209,7 +1245,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumProcesses(
      _In_ PSYM_ENUMPROCESSES_CALLBACK EnumProcessesCallback,
-@@ -2951,7 +2952,7 @@ SymEnumProcesses(
+@@ -2951,7 +2975,7 @@ SymEnumProcesses(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -1218,7 +1254,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromAddr(
      _In_ HANDLE hProcess,
-@@ -2960,7 +2961,7 @@ SymFromAddr(
+@@ -2960,7 +2984,7 @@ SymFromAddr(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1227,7 +1263,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromAddrW(
      _In_ HANDLE hProcess,
-@@ -2975,7 +2976,7 @@ SymFromAddrW(
+@@ -2975,7 +2999,7 @@ SymFromAddrW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
@@ -1236,7 +1272,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromInlineContext(
      _In_ HANDLE hProcess,
-@@ -2985,7 +2986,7 @@ SymFromInlineContext(
+@@ -2985,7 +3009,7 @@ SymFromInlineContext(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1245,7 +1281,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromInlineContextW(
      _In_ HANDLE hProcess,
-@@ -2995,7 +2996,7 @@ SymFromInlineContextW(
+@@ -2995,7 +3019,7 @@ SymFromInlineContextW(
      _Inout_ PSYMBOL_INFOW Symbol
      );
  
@@ -1254,7 +1290,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromToken(
      _In_ HANDLE hProcess,
-@@ -3004,7 +3005,7 @@ SymFromToken(
+@@ -3004,7 +3028,7 @@ SymFromToken(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1263,7 +1299,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromTokenW(
      _In_ HANDLE hProcess,
-@@ -3013,28 +3014,28 @@ SymFromTokenW(
+@@ -3013,28 +3037,28 @@ SymFromTokenW(
      _Inout_ PSYMBOL_INFOW Symbol
      );
  
@@ -1296,7 +1332,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymPrevW(
      _In_ HANDLE hProcess,
-@@ -3047,7 +3048,7 @@ SymPrevW(
+@@ -3047,7 +3071,7 @@ SymPrevW(
  // expressions.  That way you can search across modules
  // and differentiate between identically named symbols.
  
@@ -1305,7 +1341,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromName(
      _In_ HANDLE hProcess,
-@@ -3055,7 +3056,7 @@ SymFromName(
+@@ -3055,7 +3079,7 @@ SymFromName(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1314,7 +1350,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromNameW(
      _In_ HANDLE hProcess,
-@@ -3073,7 +3074,7 @@ typedef BOOL
+@@ -3073,7 +3097,7 @@ typedef BOOL
      _In_opt_ PVOID UserContext
      );
  
@@ -1323,7 +1359,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSymbols(
      _In_ HANDLE hProcess,
-@@ -3083,7 +3084,7 @@ SymEnumSymbols(
+@@ -3083,7 +3107,7 @@ SymEnumSymbols(
      _In_opt_ PVOID UserContext
      );
  
@@ -1332,7 +1368,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSymbolsEx(
      _In_ HANDLE hProcess,
-@@ -3101,7 +3102,7 @@ typedef BOOL
+@@ -3101,7 +3125,7 @@ typedef BOOL
      _In_opt_ PVOID UserContext
      );
  
@@ -1341,7 +1377,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSymbolsW(
      _In_ HANDLE hProcess,
-@@ -3111,7 +3112,7 @@ SymEnumSymbolsW(
+@@ -3111,7 +3135,7 @@ SymEnumSymbolsW(
      _In_opt_ PVOID UserContext
      );
  
@@ -1350,7 +1386,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSymbolsExW(
      _In_ HANDLE hProcess,
-@@ -3122,7 +3123,7 @@ SymEnumSymbolsExW(
+@@ -3122,7 +3146,7 @@ SymEnumSymbolsExW(
      _In_ DWORD Options
      );
  
@@ -1359,7 +1395,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSymbolsForAddr(
      _In_ HANDLE hProcess,
-@@ -3131,7 +3132,7 @@ SymEnumSymbolsForAddr(
+@@ -3131,7 +3155,7 @@ SymEnumSymbolsForAddr(
      _In_opt_ PVOID UserContext
      );
  
@@ -1368,7 +1404,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumSymbolsForAddrW(
      _In_ HANDLE hProcess,
-@@ -3145,7 +3146,7 @@ SymEnumSymbolsForAddrW(
+@@ -3145,7 +3169,7 @@ SymEnumSymbolsForAddrW(
  #define SYMSEARCH_GLOBALSONLY   0X04    // search only for global symbols
  #define SYMSEARCH_ALLITEMS      0X08    // search for everything in the pdb, not just normal scoped symbols
  
@@ -1377,7 +1413,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSearch(
      _In_ HANDLE hProcess,
-@@ -3159,7 +3160,7 @@ SymSearch(
+@@ -3159,7 +3183,7 @@ SymSearch(
      _In_ DWORD Options
      );
  
@@ -1386,7 +1422,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSearchW(
      _In_ HANDLE hProcess,
-@@ -3173,7 +3174,7 @@ SymSearchW(
+@@ -3173,7 +3197,7 @@ SymSearchW(
      _In_ DWORD Options
      );
  
@@ -1395,7 +1431,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetScope(
      _In_ HANDLE hProcess,
-@@ -3182,7 +3183,7 @@ SymGetScope(
+@@ -3182,7 +3206,7 @@ SymGetScope(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1404,7 +1440,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetScopeW(
      _In_ HANDLE hProcess,
-@@ -3191,7 +3192,7 @@ SymGetScopeW(
+@@ -3191,7 +3215,7 @@ SymGetScopeW(
      _Inout_ PSYMBOL_INFOW Symbol
      );
  
@@ -1413,7 +1449,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromIndex(
      _In_ HANDLE hProcess,
-@@ -3200,7 +3201,7 @@ SymFromIndex(
+@@ -3200,7 +3224,7 @@ SymFromIndex(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1422,7 +1458,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymFromIndexW(
      _In_ HANDLE hProcess,
-@@ -3269,7 +3270,7 @@ typedef struct _TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
+@@ -3269,7 +3293,7 @@ typedef struct _TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
      DISCRIMINATEDUNION_TAG_VALUE Range[1];
  } TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS;
  
@@ -1431,7 +1467,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetTypeInfo(
      _In_ HANDLE hProcess,
-@@ -3284,7 +3285,7 @@ SymGetTypeInfo(
+@@ -3284,7 +3308,7 @@ SymGetTypeInfo(
  
  typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
      IN  ULONG    SizeOfStruct;
@@ -1440,7 +1476,7 @@ index 09bb15cbc7..e8c55fab05 100644
      IN  ULONG    NumIds;
      IN  PULONG   TypeIds;
      IN  ULONG64  TagFilter;
-@@ -3303,7 +3304,7 @@ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
+@@ -3303,7 +3327,7 @@ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
      OUT PULONG64 ReqsValid OPTIONAL;
  } IMAGEHLP_GET_TYPE_INFO_PARAMS, *PIMAGEHLP_GET_TYPE_INFO_PARAMS;
  
@@ -1449,7 +1485,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetTypeInfoEx(
      _In_ HANDLE hProcess,
-@@ -3311,7 +3312,7 @@ SymGetTypeInfoEx(
+@@ -3311,7 +3335,7 @@ SymGetTypeInfoEx(
      _Inout_ PIMAGEHLP_GET_TYPE_INFO_PARAMS Params
      );
  
@@ -1458,7 +1494,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumTypes(
      _In_ HANDLE hProcess,
-@@ -3320,7 +3321,7 @@ SymEnumTypes(
+@@ -3320,7 +3344,7 @@ SymEnumTypes(
      _In_opt_ PVOID UserContext
      );
  
@@ -1467,7 +1503,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumTypesW(
      _In_ HANDLE hProcess,
-@@ -3329,7 +3330,7 @@ SymEnumTypesW(
+@@ -3329,7 +3353,7 @@ SymEnumTypesW(
      _In_opt_ PVOID UserContext
      );
  
@@ -1476,7 +1512,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumTypesByName(
      _In_ HANDLE hProcess,
-@@ -3339,7 +3340,7 @@ SymEnumTypesByName(
+@@ -3339,7 +3363,7 @@ SymEnumTypesByName(
      _In_opt_ PVOID UserContext
      );
  
@@ -1485,7 +1521,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymEnumTypesByNameW(
      _In_ HANDLE hProcess,
-@@ -3349,7 +3350,7 @@ SymEnumTypesByNameW(
+@@ -3349,7 +3373,7 @@ SymEnumTypesByNameW(
      _In_opt_ PVOID UserContext
      );
  
@@ -1494,7 +1530,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetTypeFromName(
      _In_ HANDLE hProcess,
-@@ -3358,7 +3359,7 @@ SymGetTypeFromName(
+@@ -3358,7 +3382,7 @@ SymGetTypeFromName(
      _Inout_ PSYMBOL_INFO Symbol
      );
  
@@ -1503,7 +1539,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetTypeFromNameW(
      _In_ HANDLE hProcess,
-@@ -3367,7 +3368,7 @@ SymGetTypeFromNameW(
+@@ -3367,7 +3391,7 @@ SymGetTypeFromNameW(
      _Inout_ PSYMBOL_INFOW Symbol
      );
  
@@ -1512,7 +1548,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymAddSymbol(
      _In_ HANDLE hProcess,
-@@ -3378,7 +3379,7 @@ SymAddSymbol(
+@@ -3378,7 +3402,7 @@ SymAddSymbol(
      _In_ DWORD Flags
      );
  
@@ -1521,7 +1557,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymAddSymbolW(
      _In_ HANDLE hProcess,
-@@ -3389,7 +3390,7 @@ SymAddSymbolW(
+@@ -3389,7 +3413,7 @@ SymAddSymbolW(
      _In_ DWORD Flags
      );
  
@@ -1530,7 +1566,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymDeleteSymbol(
      _In_ HANDLE hProcess,
-@@ -3399,7 +3400,7 @@ SymDeleteSymbol(
+@@ -3399,7 +3423,7 @@ SymDeleteSymbol(
      _In_ DWORD Flags
      );
  
@@ -1539,7 +1575,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymDeleteSymbolW(
      _In_ HANDLE hProcess,
-@@ -3415,7 +3416,7 @@ SymDeleteSymbolW(
+@@ -3415,7 +3439,7 @@ SymDeleteSymbolW(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -1548,7 +1584,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymRefreshModuleList(
      _In_ HANDLE hProcess
-@@ -3427,7 +3428,7 @@ SymRefreshModuleList(
+@@ -3427,7 +3451,7 @@ SymRefreshModuleList(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  
@@ -1557,7 +1593,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymAddSourceStream(
      _In_ HANDLE hProcess,
-@@ -3451,7 +3452,7 @@ SymAddSourceStreamA(
+@@ -3451,7 +3475,7 @@ SymAddSourceStreamA(
  
  typedef BOOL (WINAPI *SYMADDSOURCESTREAMA)(HANDLE, ULONG64, PCSTR, PBYTE, size_t);
  
@@ -1566,7 +1602,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymAddSourceStreamW(
      _In_ HANDLE hProcess,
-@@ -3461,21 +3462,21 @@ SymAddSourceStreamW(
+@@ -3461,21 +3485,21 @@ SymAddSourceStreamW(
      _In_ size_t Size
      );
  
@@ -1591,7 +1627,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvDeltaName(
      _In_ HANDLE hProcess,
-@@ -3485,7 +3486,7 @@ SymSrvDeltaName(
+@@ -3485,7 +3509,7 @@ SymSrvDeltaName(
      _In_ PCSTR File2
      );
  
@@ -1600,7 +1636,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvDeltaNameW(
      _In_ HANDLE hProcess,
-@@ -3495,7 +3496,7 @@ SymSrvDeltaNameW(
+@@ -3495,7 +3519,7 @@ SymSrvDeltaNameW(
      _In_ PCWSTR File2
      );
  
@@ -1609,7 +1645,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetSupplement(
      _In_ HANDLE hProcess,
-@@ -3504,7 +3505,7 @@ SymSrvGetSupplement(
+@@ -3504,7 +3528,7 @@ SymSrvGetSupplement(
      _In_ PCSTR File
      );
  
@@ -1618,7 +1654,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetSupplementW(
      _In_ HANDLE hProcess,
-@@ -3513,7 +3514,7 @@ SymSrvGetSupplementW(
+@@ -3513,7 +3537,7 @@ SymSrvGetSupplementW(
      _In_ PCWSTR File
      );
  
@@ -1627,7 +1663,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetFileIndexes(
      _In_ PCSTR File,
-@@ -3523,7 +3524,7 @@ SymSrvGetFileIndexes(
+@@ -3523,7 +3547,7 @@ SymSrvGetFileIndexes(
      _In_ DWORD Flags
      );
  
@@ -1636,7 +1672,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetFileIndexesW(
      _In_ PCWSTR File,
-@@ -3533,7 +3534,7 @@ SymSrvGetFileIndexesW(
+@@ -3533,7 +3557,7 @@ SymSrvGetFileIndexesW(
      _In_ DWORD Flags
      );
  
@@ -1645,7 +1681,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetFileIndexStringW(
      _In_ HANDLE hProcess,
-@@ -3544,7 +3545,7 @@ SymSrvGetFileIndexStringW(
+@@ -3544,7 +3568,7 @@ SymSrvGetFileIndexStringW(
      _In_ DWORD Flags
      );
  
@@ -1654,7 +1690,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetFileIndexString(
      _In_ HANDLE hProcess,
-@@ -3581,7 +3582,7 @@ typedef struct {
+@@ -3581,7 +3605,7 @@ typedef struct {
      DWORD age;
  } SYMSRV_INDEX_INFOW, *PSYMSRV_INDEX_INFOW;
  
@@ -1663,7 +1699,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetFileIndexInfo(
      _In_ PCSTR File,
-@@ -3589,7 +3590,7 @@ SymSrvGetFileIndexInfo(
+@@ -3589,7 +3613,7 @@ SymSrvGetFileIndexInfo(
      _In_ DWORD Flags
      );
  
@@ -1672,7 +1708,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvGetFileIndexInfoW(
      _In_ PCWSTR File,
-@@ -3597,7 +3598,7 @@ SymSrvGetFileIndexInfoW(
+@@ -3597,7 +3621,7 @@ SymSrvGetFileIndexInfoW(
      _In_ DWORD Flags
      );
  
@@ -1681,7 +1717,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvStoreSupplement(
      _In_ HANDLE hProcess,
-@@ -3607,7 +3608,7 @@ SymSrvStoreSupplement(
+@@ -3607,7 +3631,7 @@ SymSrvStoreSupplement(
      _In_ DWORD Flags
      );
  
@@ -1690,7 +1726,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymSrvStoreSupplementW(
      _In_ HANDLE hProcess,
-@@ -3617,13 +3618,13 @@ SymSrvStoreSupplementW(
+@@ -3617,13 +3641,13 @@ SymSrvStoreSupplementW(
      _In_ DWORD Flags
      );
  
@@ -1706,7 +1742,7 @@ index 09bb15cbc7..e8c55fab05 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
-@@ -3632,13 +3633,13 @@ SymSrvStoreFile(
+@@ -3632,13 +3656,13 @@ SymSrvStoreFile(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -1722,7 +1758,7 @@ index 09bb15cbc7..e8c55fab05 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
-@@ -3657,26 +3658,26 @@ typedef enum {
+@@ -3657,26 +3681,26 @@ typedef enum {
      sfMax
  } IMAGEHLP_SF_TYPE;
  
@@ -1753,7 +1789,7 @@ index 09bb15cbc7..e8c55fab05 100644
      _Out_writes_(cSymbolFile) PWSTR SymbolFile,
      _In_ size_t cSymbolFile,
      _Out_writes_(cDbgFile) PWSTR DbgFile,
-@@ -3721,7 +3722,7 @@ DbgHelpCreateUserDumpW(
+@@ -3721,7 +3745,7 @@ DbgHelpCreateUserDumpW(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -1762,7 +1798,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymFromAddr64(
      _In_ HANDLE hProcess,
-@@ -3734,7 +3735,7 @@ SymGetSymFromAddr64(
+@@ -3734,7 +3758,7 @@ SymGetSymFromAddr64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymGetSymFromAddr SymGetSymFromAddr64
  #else
@@ -1771,7 +1807,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymFromAddr(
      _In_ HANDLE hProcess,
-@@ -3756,7 +3757,7 @@ SymGetSymFromAddr(
+@@ -3756,7 +3780,7 @@ SymGetSymFromAddr(
  // expressions.  That way you can search across modules
  // and differentiate between identically named symbols.
  
@@ -1780,7 +1816,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymFromName64(
      _In_ HANDLE hProcess,
-@@ -3767,7 +3768,7 @@ SymGetSymFromName64(
+@@ -3767,7 +3791,7 @@ SymGetSymFromName64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymGetSymFromName SymGetSymFromName64
  #else
@@ -1789,7 +1825,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymFromName(
      _In_ HANDLE hProcess,
-@@ -4021,7 +4022,7 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+@@ -4021,7 +4045,7 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
  // You should use SymFindFileInPath if you want to maintain
  // future compatibility.
  
@@ -1798,7 +1834,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  FindFileInPath(
-@@ -4038,7 +4039,7 @@ FindFileInPath(
+@@ -4038,7 +4062,7 @@ FindFileInPath(
  // You should use SymFindFileInPath if you want to maintain
  // future compatibility.
  
@@ -1807,7 +1843,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  FindFileInSearchPath(
-@@ -4051,7 +4052,7 @@ FindFileInSearchPath(
+@@ -4051,7 +4075,7 @@ FindFileInSearchPath(
      _Out_writes_(MAX_PATH + 1) PSTR FilePath
      );
  
@@ -1816,7 +1852,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  SymEnumSym(
-@@ -4061,7 +4062,7 @@ SymEnumSym(
+@@ -4061,7 +4085,7 @@ SymEnumSym(
      _In_opt_ PVOID UserContext
      );
  
@@ -1825,7 +1861,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  SymEnumerateSymbols64(
-@@ -4071,7 +4072,7 @@ SymEnumerateSymbols64(
+@@ -4071,7 +4095,7 @@ SymEnumerateSymbols64(
      _In_opt_ PVOID UserContext
      );
  
@@ -1834,7 +1870,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  SymEnumerateSymbolsW64(
-@@ -4086,7 +4087,7 @@ SymEnumerateSymbolsW64(
+@@ -4086,7 +4110,7 @@ SymEnumerateSymbolsW64(
  #define SymEnumerateSymbols SymEnumerateSymbols64
  #define SymEnumerateSymbolsW SymEnumerateSymbolsW64
  #else
@@ -1843,7 +1879,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  SymEnumerateSymbols(
-@@ -4096,7 +4097,7 @@ SymEnumerateSymbols(
+@@ -4096,7 +4120,7 @@ SymEnumerateSymbols(
      _In_opt_ PVOID UserContext
      );
  
@@ -1852,7 +1888,7 @@ index 09bb15cbc7..e8c55fab05 100644
  BOOL
  IMAGEAPI
  SymEnumerateSymbolsW(
-@@ -4109,7 +4110,7 @@ SymEnumerateSymbolsW(
+@@ -4109,7 +4133,7 @@ SymEnumerateSymbolsW(
  
  // use SymLoadModuleEx
  
@@ -1861,7 +1897,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymLoadModule64(
      _In_ HANDLE hProcess,
-@@ -4123,7 +4124,7 @@ SymLoadModule64(
+@@ -4123,7 +4147,7 @@ SymLoadModule64(
  #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
  #define SymLoadModule SymLoadModule64
  #else
@@ -1870,7 +1906,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymLoadModule(
      _In_ HANDLE hProcess,
-@@ -4135,7 +4136,7 @@ SymLoadModule(
+@@ -4135,7 +4159,7 @@ SymLoadModule(
      );
  #endif
  
@@ -1879,7 +1915,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymNext64(
      _In_ HANDLE hProcess,
-@@ -4153,7 +4154,7 @@ SymGetSymNextW64(
+@@ -4153,7 +4177,7 @@ SymGetSymNextW64(
  #define SymGetSymNext SymGetSymNext64
  #define SymGetSymNextW SymGetSymNextW64
  #else
@@ -1888,7 +1924,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymNext(
      _In_ HANDLE hProcess,
-@@ -4168,7 +4169,7 @@ SymGetSymNextW(
+@@ -4168,7 +4192,7 @@ SymGetSymNextW(
      );
  #endif
  
@@ -1897,7 +1933,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymPrev64(
      _In_ HANDLE hProcess,
-@@ -4186,7 +4187,7 @@ SymGetSymPrevW64(
+@@ -4186,7 +4210,7 @@ SymGetSymPrevW64(
  #define SymGetSymPrev SymGetSymPrev64
  #define SymGetSymPrevW SymGetSymPrevW64
  #else
@@ -1906,7 +1942,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SymGetSymPrev(
      _In_ HANDLE hProcess,
-@@ -4212,7 +4213,7 @@ typedef struct
+@@ -4212,7 +4236,7 @@ typedef struct
      PCWSTR pSymbolPathNonExist;
  }DBGHELP_DATA_REPORT_STRUCT, *PDBGHELP_DATA_REPORT_STRUCT;
  
@@ -1915,7 +1951,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  SetCheckUserInterruptShared(
      _In_ LPCALL_BACK_USER_INTERRUPT_ROUTINE lpStartAddress
-@@ -4224,19 +4225,19 @@ GetCheckUserInterruptShared(
+@@ -4224,19 +4248,19 @@ GetCheckUserInterruptShared(
      void
      );
  
@@ -1938,7 +1974,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  ReportSymbolLoadSummary(
      _In_ HANDLE hProcess,
-@@ -4244,7 +4245,7 @@ ReportSymbolLoadSummary(
+@@ -4244,7 +4268,7 @@ ReportSymbolLoadSummary(
      _In_ PDBGHELP_DATA_REPORT_STRUCT pSymbolData
      );
  
@@ -1947,7 +1983,7 @@ index 09bb15cbc7..e8c55fab05 100644
  IMAGEAPI
  RemoveInvalidModuleList(
      _In_ HANDLE hProcess
-@@ -4367,4 +4368,195 @@ RangeMapWrite(
+@@ -4367,4 +4391,174 @@ RangeMapWrite(
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
  #pragma endregion
  
@@ -2092,27 +2128,6 @@ index 09bb15cbc7..e8c55fab05 100644
 +#pragma pop_macro("SYMFLAG_CLR_TOKEN")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("sevInfo")
-+#undef sevInfo
-+#pragma push_macro("sevProblem")
-+#undef sevProblem
-+#pragma push_macro("sevAttn")
-+#undef sevAttn
-+#pragma push_macro("sevFatal")
-+#undef sevFatal
-+enum IMAGEHLP_CBA_EVENT_SEVERITY : unsigned int
-+{
-+    sevInfo = 0U,
-+    sevProblem = 1U,
-+    sevAttn = 2U,
-+    sevFatal = 3U,
-+};
-+#pragma pop_macro("sevFatal")
-+#pragma pop_macro("sevAttn")
-+#pragma pop_macro("sevProblem")
-+#pragma pop_macro("sevInfo")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("IMAGEHLP_GET_TYPE_INFO_CHILDREN")

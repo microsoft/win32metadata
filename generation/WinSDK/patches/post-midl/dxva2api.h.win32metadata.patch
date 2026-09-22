@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h
-index b89e8eefd8..75c8949888 100644
+index b89e8eefd8..125c2f2123 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxva2api.h
 @@ -1,3 +1,4 @@
@@ -7,124 +7,10 @@ index b89e8eefd8..75c8949888 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -589,7 +590,7 @@ typedef struct _DXVA2_ConfigPictureDecode
+@@ -335,6 +336,55 @@ typedef struct _DXVA2_VideoDesc
+     } 	DXVA2_VideoDesc;
  
- typedef struct _DXVA2_DecodeBufferDesc
-     {
--    DWORD CompressedBufferType;
-+    _Win32_AssociatedEnum_(DXVA2_BufferfType) DWORD CompressedBufferType;
-     UINT BufferIndex;
-     UINT DataOffset;
-     UINT DataSize;
-@@ -670,7 +671,7 @@ EXTERN_C const IID IID_IDirect3DDeviceManager9;
  
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75")
-+    MIDL_INTERFACE("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75") _Windows_SupportedOS_WindowsVista_ 
-     IDirect3DDeviceManager9 : public IUnknown
-     {
-     public:
-@@ -682,7 +683,7 @@ EXTERN_C const IID IID_IDirect3DDeviceManager9;
-         
-         virtual HRESULT STDMETHODCALLTYPE OpenDeviceHandle( 
-             /* [annotation][out] */ 
--            _Out_  HANDLE *phDevice) = 0;
-+            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phDevice) = 0;
-         
-         virtual HRESULT STDMETHODCALLTYPE CloseDeviceHandle( 
-             /* [annotation][in] */ 
-@@ -859,7 +860,7 @@ EXTERN_C const IID IID_IDirectXVideoAccelerationService;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("fc51a550-d5e7-11d9-af55-00054e43ff02")
-+    MIDL_INTERFACE("fc51a550-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
-     IDirectXVideoAccelerationService : public IUnknown
-     {
-     public:
-@@ -877,7 +878,7 @@ EXTERN_C const IID IID_IDirectXVideoAccelerationService;
-             /* [annotation][in] */ 
-             _In_  DWORD Usage,
-             /* [annotation][in] */ 
--            _In_  DWORD DxvaType,
-+            _Win32_AssociatedEnum_(DXVA2_VideoRenderTargetType) _In_  DWORD DxvaType,
-             /* [annotation][size_is][out] */ 
-             _Out_writes_(BackBuffers+1)  IDirect3DSurface9 **ppSurface,
-             /* [annotation][out][in] */ 
-@@ -978,7 +979,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoderService;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("fc51a551-d5e7-11d9-af55-00054e43ff02")
-+    MIDL_INTERFACE("fc51a551-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
-     IDirectXVideoDecoderService : public IDirectXVideoAccelerationService
-     {
-     public:
-@@ -1178,7 +1179,7 @@ EXTERN_C const IID IID_IDirectXVideoProcessorService;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("fc51a552-d5e7-11d9-af55-00054e43ff02")
-+    MIDL_INTERFACE("fc51a552-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
-     IDirectXVideoProcessorService : public IDirectXVideoAccelerationService
-     {
-     public:
-@@ -1478,7 +1479,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoder;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("f2b0810a-fd00-43c9-918c-df94e2d8ef7d")
-+    MIDL_INTERFACE("f2b0810a-fd00-43c9-918c-df94e2d8ef7d") _Windows_SupportedOS_WindowsVista_ 
-     IDirectXVideoDecoder : public IUnknown
-     {
-     public:
-@@ -1500,7 +1501,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoder;
-         
-         virtual HRESULT STDMETHODCALLTYPE GetBuffer( 
-             /* [annotation][in] */ 
--            _In_  UINT BufferType,
-+            _Win32_AssociatedEnum_(DXVA2_BufferfType) _In_  UINT BufferType,
-             /* [annotation][out] */ 
-             _Out_  void **ppBuffer,
-             /* [annotation][out] */ 
-@@ -1671,7 +1672,7 @@ EXTERN_C const IID IID_IDirectXVideoProcessor;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("8c3a39f0-916e-4690-804f-4c8001355d25")
-+    MIDL_INTERFACE("8c3a39f0-916e-4690-804f-4c8001355d25") _Windows_SupportedOS_WindowsVista_ 
-     IDirectXVideoProcessor : public IUnknown
-     {
-     public:
-@@ -1875,7 +1876,7 @@ EXTERN_C const IID IID_IDirectXVideoMemoryConfiguration;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("b7f916dd-db3b-49c1-84d7-e45ef99ec726")
-+    MIDL_INTERFACE("b7f916dd-db3b-49c1-84d7-e45ef99ec726") _Windows_SupportedOS_WindowsVista_ 
-     IDirectXVideoMemoryConfiguration : public IUnknown
-     {
-     public:
-@@ -1971,11 +1972,11 @@ EXTERN_C const IID IID_IDirectXVideoMemoryConfiguration;
- /* interface __MIDL_itf_dxva2api_0000_0007 */
- /* [local] */ 
- 
--STDAPI DXVA2CreateDirect3DDeviceManager9(
-+_Windows_SupportedOS_WindowsVista_ STDAPI DXVA2CreateDirect3DDeviceManager9(
-     _Out_ UINT* pResetToken,
-     _Outptr_ IDirect3DDeviceManager9** ppDeviceManager
-     );
--STDAPI DXVA2CreateVideoService(
-+_Windows_SupportedOS_WindowsVista_ STDAPI DXVA2CreateVideoService(
-     _In_ IDirect3DDevice9* pDD,
-     _In_ REFIID riid,
-     _Outptr_ void** ppService
-@@ -2018,6 +2019,405 @@ extern RPC_IF_HANDLE __MIDL_itf_dxva2api_0000_0007_v0_0_s_ifspec;
- }
- #endif
- 
-+
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_DeinterlaceTech_Unknown")
 +#undef DXVA2_DeinterlaceTech_Unknown
@@ -173,8 +59,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_DeinterlaceTech_BOBVerticalStretch")
 +#pragma pop_macro("DXVA2_DeinterlaceTech_BOBLineReplicate")
 +#pragma pop_macro("DXVA2_DeinterlaceTech_Unknown")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0003
+     {
+         DXVA2_DeinterlaceTech_Unknown	= 0,
+@@ -349,7 +399,61 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0003
+         DXVA2_DeinterlaceTech_InverseTelecine	= 0x100,
+         DXVA2_DeinterlaceTech_Mask	= 0x1ff
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_NoiseFilterLumaLevel")
 +#undef DXVA2_NoiseFilterLumaLevel
@@ -227,8 +121,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_NoiseFilterLumaRadius")
 +#pragma pop_macro("DXVA2_NoiseFilterLumaThreshold")
 +#pragma pop_macro("DXVA2_NoiseFilterLumaLevel")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0004
+     {
+         DXVA2_NoiseFilterLumaLevel	= 1,
+@@ -365,7 +469,41 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0004
+         DXVA2_DetailFilterChromaThreshold	= 11,
+         DXVA2_DetailFilterChromaRadius	= 12
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_NoiseFilterTech_Unsupported")
 +#undef DXVA2_NoiseFilterTech_Unsupported
@@ -261,8 +163,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_NoiseFilterTech_Median")
 +#pragma pop_macro("DXVA2_NoiseFilterTech_Unknown")
 +#pragma pop_macro("DXVA2_NoiseFilterTech_Unsupported")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0005
+     {
+         DXVA2_NoiseFilterTech_Unsupported	= 0,
+@@ -376,7 +514,33 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0005
+         DXVA2_NoiseFilterTech_MosquitoNoise	= 0x10,
+         DXVA2_NoiseFilterTech_Mask	= 0x1f
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_DetailFilterTech_Unsupported")
 +#undef DXVA2_DetailFilterTech_Unsupported
@@ -287,8 +197,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_DetailFilterTech_Edge")
 +#pragma pop_macro("DXVA2_DetailFilterTech_Unknown")
 +#pragma pop_macro("DXVA2_DetailFilterTech_Unsupported")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0006
+     {
+         DXVA2_DetailFilterTech_Unsupported	= 0,
+@@ -385,7 +549,37 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0006
+         DXVA2_DetailFilterTech_Sharpening	= 0x4,
+         DXVA2_DetailFilterTech_Mask	= 0x7
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_ProcAmp_None")
 +#undef DXVA2_ProcAmp_None
@@ -317,8 +235,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_ProcAmp_Contrast")
 +#pragma pop_macro("DXVA2_ProcAmp_Brightness")
 +#pragma pop_macro("DXVA2_ProcAmp_None")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0007
+     {
+         DXVA2_ProcAmp_None	= 0,
+@@ -395,7 +589,85 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0007
+         DXVA2_ProcAmp_Saturation	= 0x8,
+         DXVA2_ProcAmp_Mask	= 0xf
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_VideoProcess_None")
 +#undef DXVA2_VideoProcess_None
@@ -395,8 +321,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_VideoProcess_StretchX")
 +#pragma pop_macro("DXVA2_VideoProcess_YUV2RGB")
 +#pragma pop_macro("DXVA2_VideoProcess_None")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0008
+     {
+         DXVA2_VideoProcess_None	= 0,
+@@ -417,7 +689,29 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0008
+         DXVA2_VideoProcess_MaintainsOriginalFieldData	= 0x8000,
+         DXVA2_VideoProcess_Mask	= 0xffff
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_VPDev_HardwareDevice")
 +#undef DXVA2_VPDev_HardwareDevice
@@ -417,8 +351,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_VPDev_SoftwareDevice")
 +#pragma pop_macro("DXVA2_VPDev_EmulatedDXVA1")
 +#pragma pop_macro("DXVA2_VPDev_HardwareDevice")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0009
+     {
+         DXVA2_VPDev_HardwareDevice	= 0x1,
+@@ -425,7 +719,29 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0009
+         DXVA2_VPDev_SoftwareDevice	= 0x4,
+         DXVA2_VPDev_Mask	= 0x7
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_SampleData_RFF")
 +#undef DXVA2_SampleData_RFF
@@ -439,8 +381,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_SampleData_RFF_TFF_Present")
 +#pragma pop_macro("DXVA2_SampleData_TFF")
 +#pragma pop_macro("DXVA2_SampleData_RFF")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0010
+     {
+         DXVA2_SampleData_RFF	= 0x1,
+@@ -433,7 +749,29 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0010
+         DXVA2_SampleData_RFF_TFF_Present	= 0x4,
+         DXVA2_SampleData_Mask	= 0xffff
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_DestData_RFF")
 +#undef DXVA2_DestData_RFF
@@ -461,8 +411,22 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_DestData_RFF_TFF_Present")
 +#pragma pop_macro("DXVA2_DestData_TFF")
 +#pragma pop_macro("DXVA2_DestData_RFF")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0011
+     {
+         DXVA2_DestData_RFF	= 0x1,
+@@ -441,6 +779,7 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0011
+         DXVA2_DestData_RFF_TFF_Present	= 0x4,
+         DXVA2_DestData_Mask	= 0xffff
+     } ;
 +#endif
-+
+ typedef struct _DXVA2_VideoProcessorCaps
+     {
+     UINT DeviceCaps;
+@@ -547,6 +886,47 @@ typedef struct _DXVA2_VideoProcessBltParams
+     } 	DXVA2_VideoProcessBltParams;
+ 
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_PictureParametersBufferType")
 +#undef DXVA2_PictureParametersBufferType
@@ -503,8 +467,16 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_ResidualDifferenceBufferType")
 +#pragma pop_macro("DXVA2_MacroBlockControlBufferType")
 +#pragma pop_macro("DXVA2_PictureParametersBufferType")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0012
+     {
+         DXVA2_PictureParametersBufferType	= 0,
+@@ -559,13 +939,32 @@ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0012
+         DXVA2_MotionVectorBuffer	= 7,
+         DXVA2_FilmGrainBuffer	= 8
+     } ;
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("DXVA2_VideoDecoderRenderTarget")
 +#undef DXVA2_VideoDecoderRenderTarget
@@ -521,7 +493,145 @@ index b89e8eefd8..75c8949888 100644
 +#pragma pop_macro("DXVA2_VideoSoftwareRenderTarget")
 +#pragma pop_macro("DXVA2_VideoProcessorRenderTarget")
 +#pragma pop_macro("DXVA2_VideoDecoderRenderTarget")
++#else
+ enum __MIDL___MIDL_itf_dxva2api_0000_0000_0013
+     {
+         DXVA2_VideoDecoderRenderTarget	= 0,
+         DXVA2_VideoProcessorRenderTarget	= 1,
+         DXVA2_VideoSoftwareRenderTarget	= 2
+     } ;
 +#endif
+ typedef struct _DXVA2_ConfigPictureDecode
+     {
+     GUID guidConfigBitstreamEncryption;
+@@ -589,7 +988,7 @@ typedef struct _DXVA2_ConfigPictureDecode
+ 
+ typedef struct _DXVA2_DecodeBufferDesc
+     {
+-    DWORD CompressedBufferType;
++    _Win32_AssociatedEnum_(DXVA2_BufferfType) DWORD CompressedBufferType;
+     UINT BufferIndex;
+     UINT DataOffset;
+     UINT DataSize;
+@@ -670,7 +1069,7 @@ EXTERN_C const IID IID_IDirect3DDeviceManager9;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75")
++    MIDL_INTERFACE("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75") _Windows_SupportedOS_WindowsVista_ 
+     IDirect3DDeviceManager9 : public IUnknown
+     {
+     public:
+@@ -682,7 +1081,7 @@ EXTERN_C const IID IID_IDirect3DDeviceManager9;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenDeviceHandle( 
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phDevice) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phDevice) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CloseDeviceHandle( 
+             /* [annotation][in] */ 
+@@ -859,7 +1258,7 @@ EXTERN_C const IID IID_IDirectXVideoAccelerationService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc51a550-d5e7-11d9-af55-00054e43ff02")
++    MIDL_INTERFACE("fc51a550-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoAccelerationService : public IUnknown
+     {
+     public:
+@@ -877,7 +1276,7 @@ EXTERN_C const IID IID_IDirectXVideoAccelerationService;
+             /* [annotation][in] */ 
+             _In_  DWORD Usage,
+             /* [annotation][in] */ 
+-            _In_  DWORD DxvaType,
++            _Win32_AssociatedEnum_(DXVA2_VideoRenderTargetType) _In_  DWORD DxvaType,
+             /* [annotation][size_is][out] */ 
+             _Out_writes_(BackBuffers+1)  IDirect3DSurface9 **ppSurface,
+             /* [annotation][out][in] */ 
+@@ -978,7 +1377,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoderService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc51a551-d5e7-11d9-af55-00054e43ff02")
++    MIDL_INTERFACE("fc51a551-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoDecoderService : public IDirectXVideoAccelerationService
+     {
+     public:
+@@ -1178,7 +1577,7 @@ EXTERN_C const IID IID_IDirectXVideoProcessorService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fc51a552-d5e7-11d9-af55-00054e43ff02")
++    MIDL_INTERFACE("fc51a552-d5e7-11d9-af55-00054e43ff02") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoProcessorService : public IDirectXVideoAccelerationService
+     {
+     public:
+@@ -1478,7 +1877,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f2b0810a-fd00-43c9-918c-df94e2d8ef7d")
++    MIDL_INTERFACE("f2b0810a-fd00-43c9-918c-df94e2d8ef7d") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoDecoder : public IUnknown
+     {
+     public:
+@@ -1500,7 +1899,7 @@ EXTERN_C const IID IID_IDirectXVideoDecoder;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBuffer( 
+             /* [annotation][in] */ 
+-            _In_  UINT BufferType,
++            _Win32_AssociatedEnum_(DXVA2_BufferfType) _In_  UINT BufferType,
+             /* [annotation][out] */ 
+             _Out_  void **ppBuffer,
+             /* [annotation][out] */ 
+@@ -1671,7 +2070,7 @@ EXTERN_C const IID IID_IDirectXVideoProcessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8c3a39f0-916e-4690-804f-4c8001355d25")
++    MIDL_INTERFACE("8c3a39f0-916e-4690-804f-4c8001355d25") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoProcessor : public IUnknown
+     {
+     public:
+@@ -1875,7 +2274,7 @@ EXTERN_C const IID IID_IDirectXVideoMemoryConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b7f916dd-db3b-49c1-84d7-e45ef99ec726")
++    MIDL_INTERFACE("b7f916dd-db3b-49c1-84d7-e45ef99ec726") _Windows_SupportedOS_WindowsVista_ 
+     IDirectXVideoMemoryConfiguration : public IUnknown
+     {
+     public:
+@@ -1971,11 +2370,11 @@ EXTERN_C const IID IID_IDirectXVideoMemoryConfiguration;
+ /* interface __MIDL_itf_dxva2api_0000_0007 */
+ /* [local] */ 
+ 
+-STDAPI DXVA2CreateDirect3DDeviceManager9(
++_Windows_SupportedOS_WindowsVista_ STDAPI DXVA2CreateDirect3DDeviceManager9(
+     _Out_ UINT* pResetToken,
+     _Outptr_ IDirect3DDeviceManager9** ppDeviceManager
+     );
+-STDAPI DXVA2CreateVideoService(
++_Windows_SupportedOS_WindowsVista_ STDAPI DXVA2CreateVideoService(
+     _In_ IDirect3DDevice9* pDD,
+     _In_ REFIID riid,
+     _Outptr_ void** ppService
+@@ -2018,6 +2417,18 @@ extern RPC_IF_HANDLE __MIDL_itf_dxva2api_0000_0007_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
++
++
++
++
++
++
++
++
++
 +
  #endif
  
