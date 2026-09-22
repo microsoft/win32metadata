@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
-index d68f64596a..29fa26d320 100644
+index d68f64596a..ca75c084a9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -38,31 +38,33 @@ index d68f64596a..29fa26d320 100644
  //
  // Give teams a choice of using a downlevel version of psapi.h for an OS versions.
  // Teams can set C_DEFINES=$(C_DEFINES) -DPSAPI_VERSION=1 for downlevel psapi
-@@ -128,6 +150,13 @@ extern "C" {
+@@ -128,6 +150,14 @@ extern "C" {
  
  #endif
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  EnumProcesses(
-@@ -142,23 +171,37 @@ EnumProcesses(
+@@ -142,23 +172,43 @@ EnumProcesses(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  EnumProcessModules(
@@ -73,13 +75,14 @@ index d68f64596a..29fa26d320 100644
      _Out_ LPDWORD lpcbNeeded
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsVista_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsVista_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  EnumProcessModulesEx(
@@ -89,67 +92,75 @@ index d68f64596a..29fa26d320 100644
      _In_ DWORD cb,
      _Out_ LPDWORD lpcbNeeded,
 -    _In_ DWORD dwFilterFlag
-+    _In_ _Win32_AssociatedEnum_(ENUM_PROCESS_MODULES_EX_FLAGS) DWORD dwFilterFlag
++    _In_ 
++#if (PSAPI_VERSION <= 1)
++_Win32_AssociatedEnum_(ENUM_PROCESS_MODULES_EX_FLAGS)
++#endif
++ DWORD dwFilterFlag
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-@@ -167,6 +210,13 @@ EnumProcessModulesEx(
+@@ -167,6 +217,14 @@ EnumProcessModulesEx(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetModuleBaseNameA(
-@@ -176,6 +226,13 @@ GetModuleBaseNameA(
+@@ -176,6 +234,14 @@ GetModuleBaseNameA(
      _In_ DWORD nSize
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetModuleBaseNameW(
-@@ -191,6 +248,13 @@ GetModuleBaseNameW(
+@@ -191,6 +257,14 @@ GetModuleBaseNameW(
  #define GetModuleBaseName  GetModuleBaseNameA
  #endif // !UNICODE
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  _Success_(return != 0)
  _Ret_range_(1, nSize)
  DWORD
-@@ -204,6 +268,13 @@ GetModuleFileNameExA(
+@@ -204,6 +278,14 @@ GetModuleFileNameExA(
      _In_ DWORD nSize
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  _Success_(return != 0)
  _Ret_range_(1, nSize)
  DWORD
-@@ -223,12 +294,19 @@ GetModuleFileNameExW(
+@@ -223,12 +305,20 @@ GetModuleFileNameExW(
  #define GetModuleFileNameEx  GetModuleFileNameExA
  #endif // !UNICODE
  
@@ -160,41 +171,44 @@ index d68f64596a..29fa26d320 100644
      LPVOID EntryPoint;
  } MODULEINFO, *LPMODULEINFO;
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  GetModuleInformation(
-@@ -244,6 +322,13 @@ GetModuleInformation(
+@@ -244,6 +334,14 @@ GetModuleInformation(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  EmptyWorkingSet(
-@@ -256,23 +341,37 @@ EmptyWorkingSet(
+@@ -256,23 +354,39 @@ EmptyWorkingSet(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  InitializeProcessForWsWatch(
@@ -214,129 +228,138 @@ index d68f64596a..29fa26d320 100644
      ULONG_PTR Flags;    // Reserved
  } PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  GetWsChanges(
-@@ -281,6 +380,13 @@ GetWsChanges(
+@@ -281,6 +395,14 @@ GetWsChanges(
      _In_ DWORD cb
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsVista_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsVista_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  GetWsChangesEx(
-@@ -289,6 +395,13 @@ GetWsChangesEx(
+@@ -289,6 +411,14 @@ GetWsChangesEx(
      _Inout_ PDWORD cb
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetMappedFileNameW (
-@@ -298,6 +411,13 @@ GetMappedFileNameW (
+@@ -298,6 +428,14 @@ GetMappedFileNameW (
      _In_ DWORD nSize
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetMappedFileNameA (
-@@ -313,6 +433,13 @@ GetMappedFileNameA (
+@@ -313,6 +451,14 @@ GetMappedFileNameA (
  #define GetMappedFileName  GetMappedFileNameA
  #endif // !UNICODE
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  EnumDeviceDrivers (
-@@ -321,6 +448,13 @@ EnumDeviceDrivers (
+@@ -321,6 +467,14 @@ EnumDeviceDrivers (
      _Out_ LPDWORD lpcbNeeded
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetDeviceDriverBaseNameA (
-@@ -329,6 +463,13 @@ GetDeviceDriverBaseNameA (
+@@ -329,6 +483,14 @@ GetDeviceDriverBaseNameA (
      _In_ DWORD nSize
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetDeviceDriverBaseNameW (
-@@ -343,6 +484,13 @@ GetDeviceDriverBaseNameW (
+@@ -343,6 +505,14 @@ GetDeviceDriverBaseNameW (
  #define GetDeviceDriverBaseName  GetDeviceDriverBaseNameA
  #endif // !UNICODE
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetDeviceDriverFileNameA (
-@@ -351,6 +499,13 @@ GetDeviceDriverFileNameA (
+@@ -351,6 +521,14 @@ GetDeviceDriverFileNameA (
      _In_ DWORD nSize
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetDeviceDriverFileNameW (
-@@ -381,7 +536,7 @@ GetDeviceDriverFileNameW (
+@@ -381,7 +559,7 @@ GetDeviceDriverFileNameW (
  #pragma warning(disable:4201)   // unnamed struct
  #pragma warning(disable:4214)   // bit fields other than int
  
@@ -345,7 +368,7 @@ index d68f64596a..29fa26d320 100644
      ULONG_PTR Flags;
      struct {
          ULONG_PTR Protection : 5;
-@@ -396,7 +551,7 @@ typedef union _PSAPI_WORKING_SET_BLOCK {
+@@ -396,7 +574,7 @@ typedef union _PSAPI_WORKING_SET_BLOCK {
      };
  } PSAPI_WORKING_SET_BLOCK, *PPSAPI_WORKING_SET_BLOCK;
  
@@ -354,32 +377,37 @@ index d68f64596a..29fa26d320 100644
      ULONG_PTR NumberOfEntries;
      PSAPI_WORKING_SET_BLOCK WorkingSetInfo[1];
  } PSAPI_WORKING_SET_INFORMATION, *PPSAPI_WORKING_SET_INFORMATION;
-@@ -445,6 +600,13 @@ typedef struct _PSAPI_WORKING_SET_EX_INFORMATION {
+@@ -445,6 +623,14 @@ typedef struct _PSAPI_WORKING_SET_EX_INFORMATION {
  #pragma warning(default:4201)
  #endif
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  QueryWorkingSet(
-@@ -453,6 +615,10 @@ QueryWorkingSet(
+@@ -453,6 +639,14 @@ QueryWorkingSet(
      _In_ DWORD cb
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsVista_ 
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsVista_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  QueryWorkingSetEx(
-@@ -463,7 +629,7 @@ QueryWorkingSetEx(
+@@ -463,7 +657,7 @@ QueryWorkingSetEx(
  
  // Structure for GetProcessMemoryInfo()
  
@@ -388,21 +416,22 @@ index d68f64596a..29fa26d320 100644
      DWORD cb;
      DWORD PageFaultCount;
      SIZE_T PeakWorkingSetSize;
-@@ -517,6 +683,13 @@ typedef PROCESS_MEMORY_COUNTERS_EX2 *PPROCESS_MEMORY_COUNTERS_EX2;
+@@ -517,6 +711,14 @@ typedef PROCESS_MEMORY_COUNTERS_EX2 *PPROCESS_MEMORY_COUNTERS_EX2;
  
  #endif
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  GetProcessMemoryInfo (
-@@ -531,7 +704,7 @@ GetProcessMemoryInfo (
+@@ -531,7 +733,7 @@ GetProcessMemoryInfo (
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -411,21 +440,22 @@ index d68f64596a..29fa26d320 100644
      DWORD cb;
      SIZE_T CommitTotal;
      SIZE_T CommitLimit;
-@@ -548,6 +721,13 @@ typedef struct _PERFORMANCE_INFORMATION {
+@@ -548,6 +750,14 @@ typedef struct _PERFORMANCE_INFORMATION {
      DWORD ThreadCount;
  } PERFORMANCE_INFORMATION, *PPERFORMANCE_INFORMATION, PERFORMACE_INFORMATION, *PPERFORMACE_INFORMATION;
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  GetPerformanceInfo (
-@@ -561,7 +741,7 @@ GetPerformanceInfo (
+@@ -561,7 +771,7 @@ GetPerformanceInfo (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -434,7 +464,7 @@ index d68f64596a..29fa26d320 100644
      DWORD cb;
      DWORD Reserved;
      SIZE_T TotalSize;
-@@ -569,22 +749,40 @@ typedef struct _ENUM_PAGE_FILE_INFORMATION {
+@@ -569,22 +779,42 @@ typedef struct _ENUM_PAGE_FILE_INFORMATION {
      SIZE_T PeakUsage;
  } ENUM_PAGE_FILE_INFORMATION, *PENUM_PAGE_FILE_INFORMATION;
  
@@ -442,19 +472,20 @@ index d68f64596a..29fa26d320 100644
 +_Windows_SupportedOS_WindowsXP_
 +_Windows_SupportedOS_Server2003_
 +typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKW) (_In_ LPVOID pContext, _In_ PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCWSTR lpFilename);
-+
+ 
+-typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
 +_Windows_SupportedOS_WindowsXP_
 +_Windows_SupportedOS_Server2003_
 +typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (_In_ LPVOID pContext, _In_ PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
 +
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
- 
--typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
- 
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
+ 
  BOOL
  WINAPI
  EnumPageFilesW (
@@ -463,13 +494,14 @@ index d68f64596a..29fa26d320 100644
 +    _In_ LPVOID pContext
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  BOOL
  WINAPI
  EnumPageFilesA (
@@ -479,31 +511,33 @@ index d68f64596a..29fa26d320 100644
      );
  
  #ifdef UNICODE
-@@ -601,6 +799,13 @@ EnumPageFilesA (
+@@ -601,6 +831,14 @@ EnumPageFilesA (
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetProcessImageFileNameA (
-@@ -609,6 +814,13 @@ GetProcessImageFileNameA (
+@@ -609,6 +847,14 @@ GetProcessImageFileNameA (
      _In_ DWORD nSize
      );
  
-+#if (PSAPI_VERSION > 1)
-+_Windows_SupportedOS_WindowsXP_ 
-+#else
-+
-+
++#if (PSAPI_VERSION <= 1)
++_Windows_SupportedOS_WindowsXP_
 +#endif
++
++#if (PSAPI_VERSION <= 1)
 +_Win32_SetLastError_
++#endif
++
  DWORD
  WINAPI
  GetProcessImageFileNameW (
