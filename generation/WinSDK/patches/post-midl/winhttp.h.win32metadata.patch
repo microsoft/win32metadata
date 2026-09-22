@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
-index ddcdcb381a..f2eae3f2e2 100644
+index ddcdcb381a..c5728bea76 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -10,6 +10,15 @@ index ddcdcb381a..f2eae3f2e2 100644
  
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -168,7 +169,7 @@ typedef struct _WINHTTP_URL_COMPONENTS
+     DWORD   dwStructSize;       // size of this structure. Used in version check
+     LPWSTR  lpszScheme;         // pointer to scheme name
+     DWORD   dwSchemeLength;     // length of scheme name
+-    INTERNET_SCHEME nScheme;    // enumerated scheme type (if known)
++    _Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME nScheme;    // enumerated scheme type (if known)
+     LPWSTR  lpszHostName;       // pointer to host name
+     DWORD   dwHostNameLength;   // length of host name
+     INTERNET_PORT nPort;        // converted port number
 @@ -196,7 +197,7 @@ typedef LPURL_COMPONENTS LPURL_COMPONENTSW;
  
  typedef struct _WINHTTP_PROXY_INFO
@@ -19,7 +28,7 @@ index ddcdcb381a..f2eae3f2e2 100644
      LPWSTR lpszProxy;         // proxy server list
      LPWSTR lpszProxyBypass;   // proxy bypass list
  } WINHTTP_PROXY_INFO, *LPWINHTTP_PROXY_INFO, *PWINHTTP_PROXY_INFO;
-@@ -249,7 +250,7 @@ typedef struct _WINHTTP_AUTOPROXY_OPTIONS
+@@ -249,16 +250,16 @@ typedef struct _WINHTTP_AUTOPROXY_OPTIONS
  // see WinHttpGetProxyForUrlEx and WinHttpGetProxyResult, use WinHttpFreeProxyResult to free its members.
  //
  
@@ -28,7 +37,9 @@ index ddcdcb381a..f2eae3f2e2 100644
  {
      BOOL            fProxy;                // Is this a proxy or DIRECT?
      BOOL            fBypass;               // If DIRECT, is it bypassing a proxy (intranet) or is all traffic DIRECT (internet)
-@@ -258,7 +259,7 @@ typedef struct _WINHTTP_PROXY_RESULT_ENTRY
+-    INTERNET_SCHEME ProxyScheme;           // The scheme of the proxy, SOCKS, HTTP (CERN Proxy), HTTPS (SSL through Proxy)
++    _Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME ProxyScheme;           // The scheme of the proxy, SOCKS, HTTP (CERN Proxy), HTTPS (SSL through Proxy)
+     PWSTR           pwszProxy;             // Hostname of the proxy.
      INTERNET_PORT   ProxyPort;             // Port of the proxy.
  } WINHTTP_PROXY_RESULT_ENTRY;
  
@@ -532,7 +543,7 @@ index ddcdcb381a..f2eae3f2e2 100644
  (
      _In_ HINTERNET hWebSocket,
      _Out_ USHORT *pusStatus,
-@@ -2524,5 +2525,98 @@ typedef struct _WINHTTP_FAST_FORWARDING_STATUS
+@@ -2524,5 +2525,127 @@ typedef struct _WINHTTP_FAST_FORWARDING_STATUS
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
@@ -631,3 +642,32 @@ index ddcdcb381a..f2eae3f2e2 100644
 +
  #endif // !defined(_WINHTTPX_)
  
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_WINHTTP_INTERNET_SCHEME
++#define WIN32METADATA_ENUM_WINHTTP_INTERNET_SCHEME
++#pragma push_macro("WINHTTP_INTERNET_SCHEME_HTTP")
++#undef WINHTTP_INTERNET_SCHEME_HTTP
++#pragma push_macro("WINHTTP_INTERNET_SCHEME_HTTPS")
++#undef WINHTTP_INTERNET_SCHEME_HTTPS
++#pragma push_macro("WINHTTP_INTERNET_SCHEME_FTP")
++#undef WINHTTP_INTERNET_SCHEME_FTP
++#pragma push_macro("WINHTTP_INTERNET_SCHEME_SOCKS")
++#undef WINHTTP_INTERNET_SCHEME_SOCKS
++namespace Windows { namespace MetadataEnumValues {
++namespace WINHTTP_INTERNET_SCHEMEValues {
++enum WINHTTP_INTERNET_SCHEME : int
++{
++    WINHTTP_INTERNET_SCHEME_HTTP = 1,
++    WINHTTP_INTERNET_SCHEME_HTTPS = 2,
++    WINHTTP_INTERNET_SCHEME_FTP = 3,
++    WINHTTP_INTERNET_SCHEME_SOCKS = 4,
++};
++}
++} }
++#pragma pop_macro("WINHTTP_INTERNET_SCHEME_SOCKS")
++#pragma pop_macro("WINHTTP_INTERNET_SCHEME_FTP")
++#pragma pop_macro("WINHTTP_INTERNET_SCHEME_HTTPS")
++#pragma pop_macro("WINHTTP_INTERNET_SCHEME_HTTP")
++#endif
++#endif

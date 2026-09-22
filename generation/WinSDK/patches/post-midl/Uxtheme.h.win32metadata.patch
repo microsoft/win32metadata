@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
-index f4998fa422..f7844f13aa 100644
+index f4998fa422..27ea776608 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 @@ -10,6 +10,7 @@
@@ -597,19 +597,22 @@ index f4998fa422..f7844f13aa 100644
  //                      - returns the app property flags that control theming
  //---------------------------------------------------------------------------
 -THEMEAPI_(DWORD)
-+_Windows_SupportedOS_WindowsVista_ THEMEAPI_(DWORD)
++_Win32_AssociatedEnum_(SET_THEME_APP_PROPERTIES_FLAGS) _Windows_SupportedOS_WindowsVista_ THEMEAPI_(DWORD)
  GetThemeAppProperties(
      VOID
      );
-@@ -1428,7 +1430,7 @@ GetThemeAppProperties(
+@@ -1428,9 +1430,9 @@ GetThemeAppProperties(
  //
  //      dwFlags         - the flag values to be set
  //---------------------------------------------------------------------------
 -THEMEAPI_(void)
 +_Windows_SupportedOS_WindowsVista_ THEMEAPI_(void)
  SetThemeAppProperties(
-     _In_ DWORD dwFlags
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(SET_THEME_APP_PROPERTIES_FLAGS) _In_ DWORD dwFlags
      );
+ 
+ //---------------------------------------------------------------------------
 @@ -1450,7 +1452,7 @@ SetThemeAppProperties(
  //                        (not the display name)
  //  cchMaxSizeChars     - max chars allowed in pszSizeBuff
@@ -871,7 +874,7 @@ index f4998fa422..f7844f13aa 100644
  GetThemeTransitionDuration(
      _In_ HTHEME hTheme,
      _In_ int iPartId,
-@@ -1986,6 +1992,187 @@ GetThemeTransitionDuration(
+@@ -1986,6 +1992,216 @@ GetThemeTransitionDuration(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
@@ -1059,3 +1062,32 @@ index f4998fa422..f7844f13aa 100644
  #endif /* _UXTHEME_H_ */
  
  
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_SET_THEME_APP_PROPERTIES_FLAGS
++#define WIN32METADATA_ENUM_SET_THEME_APP_PROPERTIES_FLAGS
++#pragma push_macro("ALLOW_NONCLIENT")
++#undef ALLOW_NONCLIENT
++#pragma push_macro("ALLOW_CONTROLS")
++#undef ALLOW_CONTROLS
++#pragma push_macro("ALLOW_WEBCONTENT")
++#undef ALLOW_WEBCONTENT
++#pragma push_macro("VALIDBITS")
++#undef VALIDBITS
++namespace Windows { namespace MetadataEnumValues {
++namespace SET_THEME_APP_PROPERTIES_FLAGSValues {
++enum [[clang::flag_enum]] SET_THEME_APP_PROPERTIES_FLAGS : unsigned int
++{
++    ALLOW_NONCLIENT = 1U,
++    ALLOW_CONTROLS = 2U,
++    ALLOW_WEBCONTENT = 4U,
++    VALIDBITS = 7U,
++};
++}
++} }
++#pragma pop_macro("VALIDBITS")
++#pragma pop_macro("ALLOW_WEBCONTENT")
++#pragma pop_macro("ALLOW_CONTROLS")
++#pragma pop_macro("ALLOW_NONCLIENT")
++#endif
++#endif

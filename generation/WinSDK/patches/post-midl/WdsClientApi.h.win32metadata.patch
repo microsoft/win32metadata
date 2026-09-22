@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
-index 1f3aeba9cd..0a36438ed9 100644
+index 1f3aeba9cd..aa23e86101 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WdsClientApi.h
 @@ -22,6 +22,7 @@ Environment:
@@ -115,7 +115,7 @@ index 1f3aeba9cd..0a36438ed9 100644
  
  HRESULT
  WDSCLIAPI
-@@ -176,6 +194,8 @@ WdsCliAuthorizeSession(
+@@ -176,14 +194,18 @@ WdsCliAuthorizeSession(
  //
  // Client -> Server Logging functions
  //
@@ -124,7 +124,9 @@ index 1f3aeba9cd..0a36438ed9 100644
  HRESULT
  WDSCLIAPI
  WdsCliInitializeLog(
-@@ -184,6 +204,8 @@ WdsCliInitializeLog(
+     _In_ HANDLE hSession, 
+-    _In_ ULONG ulClientArchitecture,
++    _Win32_AssociatedEnum_(CPU_ARCHITECTURE) _In_ ULONG ulClientArchitecture,
      _In_ PWSTR pwszClientId,
      _In_ PWSTR pwszClientAddress );
  
@@ -167,7 +169,7 @@ index 1f3aeba9cd..0a36438ed9 100644
  HRESULT
  WDSCLIAPI
  WdsCliGetImageLanguages(
-@@ -280,54 +310,72 @@ WdsCliGetImageLanguages(
+@@ -280,29 +310,39 @@ WdsCliGetImageLanguages(
      _Outptr_result_buffer_(*pdwNumValues) PTSTR **pppszValues,
      _Out_ PDWORD pdwNumValues );
  
@@ -201,13 +203,14 @@ index 1f3aeba9cd..0a36438ed9 100644
  WDSCLIAPI
  WdsCliGetImageArchitecture(
      _In_ HANDLE hIfh,
-     _Out_ PDWORD pdwValue );
- 
-+_Windows_SupportedOS_WindowsVista_ 
+-    _Out_ PDWORD pdwValue );
++    _Win32_AssociatedEnum_(CPU_ARCHITECTURE) _Out_ PDWORD pdwValue );
 +
++_Windows_SupportedOS_WindowsVista_ 
+ 
  HRESULT
  WDSCLIAPI
- WdsCliGetImageLastModifiedTime(
+@@ -310,24 +350,32 @@ WdsCliGetImageLastModifiedTime(
      _In_ HANDLE hIfh,
      _Out_ PSYSTEMTIME *ppSysTimeValue );
  
@@ -362,10 +365,35 @@ index 1f3aeba9cd..0a36438ed9 100644
  HRESULT
  WDSCLIAPI
  WdsCliGetDriverQueryXml (
-@@ -459,4 +541,6 @@ WdsCliGetDriverQueryXml (
+@@ -459,4 +541,31 @@ WdsCliGetDriverQueryXml (
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
 +
 +
  #endif  // __WDSCLIENTAPI_H__
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_CPU_ARCHITECTURE
++#define WIN32METADATA_ENUM_CPU_ARCHITECTURE
++#pragma push_macro("CPU_ARCHITECTURE_AMD64")
++#undef CPU_ARCHITECTURE_AMD64
++#pragma push_macro("CPU_ARCHITECTURE_IA64")
++#undef CPU_ARCHITECTURE_IA64
++#pragma push_macro("CPU_ARCHITECTURE_INTEL")
++#undef CPU_ARCHITECTURE_INTEL
++namespace Windows { namespace MetadataEnumValues {
++namespace CPU_ARCHITECTUREValues {
++enum CPU_ARCHITECTURE : unsigned int
++{
++    CPU_ARCHITECTURE_AMD64 = 9U,
++    CPU_ARCHITECTURE_IA64 = 6U,
++    CPU_ARCHITECTURE_INTEL = 0U,
++};
++}
++} }
++#pragma pop_macro("CPU_ARCHITECTURE_INTEL")
++#pragma pop_macro("CPU_ARCHITECTURE_IA64")
++#pragma pop_macro("CPU_ARCHITECTURE_AMD64")
++#endif
++#endif

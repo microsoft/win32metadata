@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb..e48953984b 100644
+index 44285099cb..86007dccb6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -239,6 +239,24 @@ index 44285099cb..e48953984b 100644
 +    _Win32_AssociatedEnum_(HEADER_HITTEST_INFO_FLAGS) UINT flags;
      int iItem;
  } HDHITTESTINFO, *LPHDHITTESTINFO;
+ 
+@@ -1120,7 +1127,7 @@ typedef struct tagNMHEADERA
+ {
+     NMHDR   hdr;
+     int     iItem;
+-    int     iButton;
++    _Win32_AssociatedEnum_(HEADER_CONTROL_NOTIFICATION_BUTTON) int     iButton;
+     HDITEMA *pitem;
+ }  NMHEADERA, *LPNMHEADERA;
+ 
+@@ -1129,7 +1136,7 @@ typedef struct tagNMHEADERW
+ {
+     NMHDR   hdr;
+     int     iItem;
+-    int     iButton;
++    _Win32_AssociatedEnum_(HEADER_CONTROL_NOTIFICATION_BUTTON) int     iButton;
+     HDITEMW *pitem;
+ } NMHEADERW, *LPNMHEADERW;
  
 @@ -1145,7 +1152,7 @@ typedef struct tagNMHDDISPINFOW
  {
@@ -1058,7 +1076,7 @@ index 44285099cb..e48953984b 100644
      _In_ int ixOffset, _In_ int iyOffset);
  #endif
  
-@@ -7960,5 +7971,2064 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
+@@ -7960,5 +7971,2089 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
@@ -3123,3 +3141,28 @@ index 44285099cb..e48953984b 100644
 +
  #endif  /* _INC_COMMCTRL */
  
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_HEADER_CONTROL_NOTIFICATION_BUTTON
++#define WIN32METADATA_ENUM_HEADER_CONTROL_NOTIFICATION_BUTTON
++#pragma push_macro("HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT")
++#undef HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT
++#pragma push_macro("HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT")
++#undef HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT
++#pragma push_macro("HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE")
++#undef HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE
++namespace Windows { namespace MetadataEnumValues {
++namespace HEADER_CONTROL_NOTIFICATION_BUTTONValues {
++enum HEADER_CONTROL_NOTIFICATION_BUTTON : int
++{
++    HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT = 0,
++    HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT = 1,
++    HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE = 2,
++};
++}
++} }
++#pragma pop_macro("HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE")
++#pragma pop_macro("HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT")
++#pragma pop_macro("HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT")
++#endif
++#endif

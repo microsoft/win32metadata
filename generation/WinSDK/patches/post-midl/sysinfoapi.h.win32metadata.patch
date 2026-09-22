@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
-index f53062cac7..ca1c58e4a6 100644
+index f53062cac7..ff8595cf63 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sysinfoapi.h
 @@ -15,6 +15,7 @@
@@ -315,7 +315,7 @@ index f53062cac7..ca1c58e4a6 100644
  NTSYSAPI
  ULONGLONG
  NTAPI
-@@ -514,6 +585,7 @@ GetOsSafeBootMode(
+@@ -514,20 +585,22 @@ GetOsSafeBootMode(
  #pragma region OneCore Family or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -323,7 +323,10 @@ index f53062cac7..ca1c58e4a6 100644
  WINBASEAPI
  UINT
  WINAPI
-@@ -523,6 +595,7 @@ EnumSystemFirmwareTables(
+ EnumSystemFirmwareTables(
+-    _In_ DWORD FirmwareTableProviderSignature,
++    _Win32_AssociatedEnum_(FIRMWARE_TABLE_PROVIDER) _In_ DWORD FirmwareTableProviderSignature,
+     _Out_writes_bytes_to_opt_(BufferSize,return) PVOID pFirmwareTableEnumBuffer,
      _In_ DWORD BufferSize
      );
  
@@ -331,6 +334,12 @@ index f53062cac7..ca1c58e4a6 100644
  WINBASEAPI
  UINT
  WINAPI
+ GetSystemFirmwareTable(
+-    _In_ DWORD FirmwareTableProviderSignature,
++    _Win32_AssociatedEnum_(FIRMWARE_TABLE_PROVIDER) _In_ DWORD FirmwareTableProviderSignature,
+     _In_ DWORD FirmwareTableID,
+     _Out_writes_bytes_to_opt_(BufferSize,return) PVOID pFirmwareTableBuffer,
+     _In_ DWORD BufferSize
 @@ -549,6 +622,8 @@ DnsHostnameToComputerNameExW(
      _Inout_ LPDWORD nSize
      );
@@ -430,3 +439,32 @@ index f53062cac7..ca1c58e4a6 100644
  WINBASEAPI
  BOOL
  WINAPI
+@@ -747,3 +842,28 @@ GetRuntimeAttestationReport(
+ 
+ #endif // _SYSINFOAPI_H_
+ 
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_FIRMWARE_TABLE_PROVIDER
++#define WIN32METADATA_ENUM_FIRMWARE_TABLE_PROVIDER
++#pragma push_macro("ACPI")
++#undef ACPI
++#pragma push_macro("FIRM")
++#undef FIRM
++#pragma push_macro("RSMB")
++#undef RSMB
++namespace Windows { namespace MetadataEnumValues {
++namespace FIRMWARE_TABLE_PROVIDERValues {
++enum FIRMWARE_TABLE_PROVIDER : unsigned int
++{
++    ACPI = 1094930505U,
++    FIRM = 1179210317U,
++    RSMB = 1381190978U,
++};
++}
++} }
++#pragma pop_macro("RSMB")
++#pragma pop_macro("FIRM")
++#pragma pop_macro("ACPI")
++#endif
++#endif

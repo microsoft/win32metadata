@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
-index 5bebec4417..59977a4b52 100644
+index 5bebec4417..4b4d13ddc7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 @@ -11,6 +11,7 @@
@@ -83,6 +83,38 @@ index 5bebec4417..59977a4b52 100644
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
+@@ -1158,13 +1159,13 @@ struct PARAFORMAT2 : _paraformat
+ 	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)
+ 	BYTE	bOutlineLevel;			// Outline level
+ 	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
+-	WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
++	_Win32_AssociatedEnum_(PARAFORMAT_SHADING_STYLE) WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
+ 	WORD	wNumberingStart;		// Starting value for numbering
+ 	WORD	wNumberingStyle;		// Alignment, roman/arabic, (), ), ., etc.
+ 	WORD	wNumberingTab;			// Space bet FirstIndent & 1st-line text
+ 	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)
+ 	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half pts)
+-	WORD	wBorders;				// Border styles (nibble/border)
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)
+ };
+ 
+ #else	// Regular C-style	
+@@ -1192,13 +1193,13 @@ typedef struct _paraformat2
+ 	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)	
+ 	BYTE	bOutlineLevel;			// Outline Level						
+ 	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
+-	WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
++	_Win32_AssociatedEnum_(PARAFORMAT_SHADING_STYLE) WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
+ 	WORD	wNumberingStart;		// Starting value for numbering 			
+ 	WORD	wNumberingStyle;		// Alignment, Roman/Arabic, (), ), ., etc.
+ 	WORD	wNumberingTab;			// Space bet 1st indent and 1st-line text
+ 	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)	
+ 	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half twips)	
+-	WORD	wBorders;				// Border styles (nibble/border)		
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)		
+ } PARAFORMAT2;
+ 
+ #endif // C++	
 @@ -1330,7 +1331,7 @@ typedef struct _selchange
  {
  	NMHDR nmhdr;
@@ -128,7 +160,7 @@ index 5bebec4417..59977a4b52 100644
  	UINT	codepage;		// Code page for translation (CP_ACP for default,
  							//	1200 for Unicode)
  } GETTEXTLENGTHEX;
-@@ -1643,4 +1644,774 @@ typedef struct tagHyphenateInfo
+@@ -1643,4 +1644,880 @@ typedef struct tagHyphenateInfo
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
@@ -903,3 +935,109 @@ index 5bebec4417..59977a4b52 100644
 +#endif
 +
  #endif // !_RICHEDIT_ 
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_PARAFORMAT_BORDERS
++#define WIN32METADATA_ENUM_PARAFORMAT_BORDERS
++#pragma push_macro("PARAFORMAT_BORDERS_LEFT")
++#undef PARAFORMAT_BORDERS_LEFT
++#pragma push_macro("PARAFORMAT_BORDERS_RIGHT")
++#undef PARAFORMAT_BORDERS_RIGHT
++#pragma push_macro("PARAFORMAT_BORDERS_TOP")
++#undef PARAFORMAT_BORDERS_TOP
++#pragma push_macro("PARAFORMAT_BORDERS_BOTTOM")
++#undef PARAFORMAT_BORDERS_BOTTOM
++#pragma push_macro("PARAFORMAT_BORDERS_INSIDE")
++#undef PARAFORMAT_BORDERS_INSIDE
++#pragma push_macro("PARAFORMAT_BORDERS_OUTSIDE")
++#undef PARAFORMAT_BORDERS_OUTSIDE
++#pragma push_macro("PARAFORMAT_BORDERS_AUTOCOLOR")
++#undef PARAFORMAT_BORDERS_AUTOCOLOR
++namespace Windows { namespace MetadataEnumValues {
++namespace PARAFORMAT_BORDERSValues {
++enum [[clang::flag_enum]] PARAFORMAT_BORDERS : unsigned short
++{
++    PARAFORMAT_BORDERS_LEFT = 1,
++    PARAFORMAT_BORDERS_RIGHT = 2,
++    PARAFORMAT_BORDERS_TOP = 4,
++    PARAFORMAT_BORDERS_BOTTOM = 8,
++    PARAFORMAT_BORDERS_INSIDE = 16,
++    PARAFORMAT_BORDERS_OUTSIDE = 32,
++    PARAFORMAT_BORDERS_AUTOCOLOR = 64,
++};
++}
++} }
++#pragma pop_macro("PARAFORMAT_BORDERS_AUTOCOLOR")
++#pragma pop_macro("PARAFORMAT_BORDERS_OUTSIDE")
++#pragma pop_macro("PARAFORMAT_BORDERS_INSIDE")
++#pragma pop_macro("PARAFORMAT_BORDERS_BOTTOM")
++#pragma pop_macro("PARAFORMAT_BORDERS_TOP")
++#pragma pop_macro("PARAFORMAT_BORDERS_RIGHT")
++#pragma pop_macro("PARAFORMAT_BORDERS_LEFT")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_PARAFORMAT_SHADING_STYLE
++#define WIN32METADATA_ENUM_PARAFORMAT_SHADING_STYLE
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_NONE")
++#undef PARAFORMAT_SHADING_STYLE_NONE
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_HORIZ")
++#undef PARAFORMAT_SHADING_STYLE_DARK_HORIZ
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_VERT")
++#undef PARAFORMAT_SHADING_STYLE_DARK_VERT
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_GRID")
++#undef PARAFORMAT_SHADING_STYLE_DARK_GRID
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_TRELLIS")
++#undef PARAFORMAT_SHADING_STYLE_DARK_TRELLIS
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_HORZ")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_HORZ
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_VERT")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_VERT
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_GRID")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_GRID
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS
++namespace Windows { namespace MetadataEnumValues {
++namespace PARAFORMAT_SHADING_STYLEValues {
++enum PARAFORMAT_SHADING_STYLE : unsigned short
++{
++    PARAFORMAT_SHADING_STYLE_NONE = 0,
++    PARAFORMAT_SHADING_STYLE_DARK_HORIZ = 1,
++    PARAFORMAT_SHADING_STYLE_DARK_VERT = 2,
++    PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG = 3,
++    PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG = 4,
++    PARAFORMAT_SHADING_STYLE_DARK_GRID = 5,
++    PARAFORMAT_SHADING_STYLE_DARK_TRELLIS = 6,
++    PARAFORMAT_SHADING_STYLE_LIGHT_HORZ = 7,
++    PARAFORMAT_SHADING_STYLE_LIGHT_VERT = 8,
++    PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG = 9,
++    PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG = 10,
++    PARAFORMAT_SHADING_STYLE_LIGHT_GRID = 11,
++    PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS = 12,
++};
++}
++} }
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_GRID")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_VERT")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_HORZ")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_TRELLIS")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_GRID")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_VERT")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_HORIZ")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_NONE")
++#endif
++#endif
