@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfsharingengine.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfsharingengine.h
-index 46a8e9583f..48d46acc9f 100644
+index 46a8e9583f..e55edf23e4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfsharingengine.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfsharingengine.h
 @@ -1,3 +1,4 @@
@@ -52,6 +52,15 @@ index 46a8e9583f..48d46acc9f 100644
      IMFImageSharingEngineClassFactory : public IUnknown
      {
      public:
+@@ -934,7 +935,7 @@ EXTERN_C const IID IID_IMFImageSharingEngineClassFactory;
+             /* [annotation][in] */ 
+             _In_  BSTR pUniqueDeviceName,
+             /* [annotation][out] */ 
+-            _Outptr_  IMFImageSharingEngine **ppEngine) = 0;
++            _COM_Outptr_ _Outptr_  IMFImageSharingEngine **ppEngine) = 0;
+         
+     };
+     
 @@ -1037,7 +1038,7 @@ EXTERN_C const IID IID_IPlayToControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

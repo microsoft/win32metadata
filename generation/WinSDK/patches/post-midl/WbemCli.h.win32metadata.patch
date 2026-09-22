@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
-index d9f81143fb..bb0ae02883 100644
+index d9f81143fb..49ed798c85 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 @@ -430,6 +430,7 @@ extern "C"{
@@ -273,7 +273,7 @@ index d9f81143fb..bb0ae02883 100644
              /* [annotation][in] */ 
              _In_  IWbemContext *pCtx,
              /* [annotation][in] */ 
-@@ -2227,7 +2232,7 @@ EXTERN_C const IID IID_IWbemServices;
+@@ -2227,17 +2232,17 @@ EXTERN_C const IID IID_IWbemServices;
              /* [annotation][in] */ 
              _In_  const BSTR strFilter,
              /* [annotation][in] */ 
@@ -282,7 +282,10 @@ index d9f81143fb..bb0ae02883 100644
              /* [annotation][in] */ 
              _In_  IWbemContext *pCtx,
              /* [annotation][out] */ 
-@@ -2237,7 +2242,7 @@ EXTERN_C const IID IID_IWbemServices;
+-            _Out_  IEnumWbemClassObject **ppEnum) = 0;
++            _COM_Outptr_ _Out_  IEnumWbemClassObject **ppEnum) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateInstanceEnumAsync( 
              /* [annotation][in] */ 
              _In_  const BSTR strFilter,
              /* [annotation][in] */ 

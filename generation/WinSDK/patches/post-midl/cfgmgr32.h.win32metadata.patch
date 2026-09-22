@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
-index cfd6383749..46cf48d98d 100644
+index cfd6383749..0bb7b34e76 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 @@ -1,3 +1,4 @@
@@ -735,7 +735,7 @@ index cfd6383749..46cf48d98d 100644
  CONFIGRET
  WINAPI
  CM_Get_Log_Conf_Priority_Ex(
-@@ -3011,7 +3012,7 @@ CM_Get_Log_Conf_Priority_Ex(
+@@ -3011,22 +3012,22 @@ CM_Get_Log_Conf_Priority_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -744,8 +744,10 @@ index cfd6383749..46cf48d98d 100644
  CONFIGRET
  WINAPI
  CM_Get_Next_Log_Conf(
-@@ -3020,7 +3021,7 @@ CM_Get_Next_Log_Conf(
-     _In_  ULONG         ulFlags
+     _Out_opt_ PLOG_CONF plcLogConf,
+     _In_  LOG_CONF      lcLogConf,
+-    _In_  ULONG         ulFlags
++    _Reserved_ _In_  ULONG         ulFlags
      );
  
 -CMAPI
@@ -753,6 +755,13 @@ index cfd6383749..46cf48d98d 100644
  CONFIGRET
  WINAPI
  CM_Get_Next_Log_Conf_Ex(
+     _Out_opt_ PLOG_CONF plcLogConf,
+     _In_  LOG_CONF      lcLogConf,
+-    _In_  ULONG         ulFlags,
++    _Reserved_ _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
 @@ -3036,7 +3037,7 @@ CM_Get_Next_Log_Conf_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

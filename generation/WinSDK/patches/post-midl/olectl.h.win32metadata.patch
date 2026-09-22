@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
-index cb297a639b..7628230ec2 100644
+index cb297a639b..509623a318 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
 @@ -1,3 +1,4 @@
@@ -16,14 +16,15 @@ index cb297a639b..7628230ec2 100644
      union
      {
          struct
-@@ -419,33 +420,33 @@ STDAPI DllUnregisterServer(void);
+@@ -419,35 +420,35 @@ STDAPI DllUnregisterServer(void);
  /////////////////////////////////////////////////////////////////////////////
  // Property frame APIs
  
 -WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
 +_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
      LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
-     LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
+-    LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
++    LPCLSID pPageClsID, LCID lcid, _Reserved_ DWORD dwReserved, _Reserved_ LPVOID pvReserved);
  
 -WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
 +_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
@@ -57,8 +58,11 @@ index cb297a639b..7628230ec2 100644
 -WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
 +_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
  				  LPUNKNOWN punkCaller,
- 				  DWORD     dwReserved,
+-				  DWORD     dwReserved,
++				  _Reserved_ DWORD     dwReserved,
  				  OLE_COLOR clrReserved,
+ 				  REFIID    riid,
+ 				  LPVOID *  ppvRet );
 @@ -456,12 +457,12 @@ WINOLECTLAPI OleLoadPictureFile(VARIANT varFileName,
      LPDISPATCH* lplpdispPicture);
  

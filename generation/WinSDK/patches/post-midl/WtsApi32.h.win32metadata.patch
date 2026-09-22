@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
-index f907576fa1..75f27a4785 100644
+index f907576fa1..a27c3b46ce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 @@ -15,6 +15,7 @@
@@ -513,7 +513,7 @@ index f907576fa1..75f27a4785 100644
  BOOL
  WINAPI
  WTSWaitSystemEvent(
-@@ -1169,6 +1198,7 @@ WTSWaitSystemEvent(
+@@ -1169,10 +1198,11 @@ WTSWaitSystemEvent(
  
  /*------------------------------------------------*/
  
@@ -521,6 +521,11 @@ index f907576fa1..75f27a4785 100644
  HANDLE
  WINAPI
  WTSVirtualChannelOpen(
+-    IN HANDLE hServer,
++    _Reserved_ IN HANDLE hServer,
+     IN DWORD SessionId,
+     _In_ LPSTR pVirtualName   /* ascii name */
+     );
 @@ -1184,6 +1214,7 @@ WTSVirtualChannelOpen(
  #define WTS_CHANNEL_OPTION_DYNAMIC_PRI_REAL 0x00000006
  #define WTS_CHANNEL_OPTION_DYNAMIC_NO_COMPRESS 0x00000008
@@ -676,24 +681,29 @@ index f907576fa1..75f27a4785 100644
  WTSEnumerateProcessesExA
  (
      _In_ HANDLE    hServer,
-@@ -1412,7 +1455,7 @@ typedef WTSLISTENERNAMEA *PWTSLISTENERNAMEA;
+@@ -1412,18 +1455,18 @@ typedef WTSLISTENERNAMEA *PWTSLISTENERNAMEA;
  #define PWTSLISTENERNAME PWTSLISTENERNAMEA
  #endif
  
 -BOOL WINAPI
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
  WTSEnumerateListenersW (
-   _In_                  HANDLE hServer,
+-  _In_                  HANDLE hServer,
++  _Reserved_ _In_                  HANDLE hServer,
    _In_                  PVOID pReserved,
-@@ -1421,7 +1464,7 @@ WTSEnumerateListenersW (
+   _In_          DWORD   Reserved,
+   _Out_writes_opt_(*pCount) PWTSLISTENERNAMEW pListeners,
    _Inout_       DWORD*  pCount
  );
  
 -BOOL WINAPI
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
  WTSEnumerateListenersA (
-   _In_                  HANDLE hServer,
+-  _In_                  HANDLE hServer,
++  _Reserved_ _In_                  HANDLE hServer,
    _In_                  PVOID pReserved,
+   _In_                  DWORD Reserved,
+   _Out_writes_opt_(*pCount) PWTSLISTENERNAMEA pListeners,
 @@ -1439,7 +1482,7 @@ WTSEnumerateListenersA (
  /*------------------------------------------------*/
  // Listener Config, used by WTSQueryListenerConfig and WTSCreateListener
@@ -712,49 +722,56 @@ index f907576fa1..75f27a4785 100644
      ULONG version;
      ULONG fEnableListener;
      ULONG MaxConnectionCount;
-@@ -1521,7 +1564,7 @@ typedef struct _WTSLISTENERCONFIGA{
+@@ -1521,24 +1564,24 @@ typedef struct _WTSLISTENERCONFIGA{
      CHAR InitialProgram[ MAX_PATH + 1 ];
  } WTSLISTENERCONFIGA, *PWTSLISTENERCONFIGA;
  
 -BOOL WINAPI WTSQueryListenerConfigW (
+-  _In_          HANDLE hServer,
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSQueryListenerConfigW (
-   _In_          HANDLE hServer,
++  _Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
-@@ -1529,7 +1572,7 @@ BOOL WINAPI WTSQueryListenerConfigW (
+   _In_          LPWSTR pListenerName,
    _Out_         PWTSLISTENERCONFIGW pBuffer
  );
  
 -BOOL WINAPI WTSQueryListenerConfigA (
+-  _In_          HANDLE hServer,
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSQueryListenerConfigA (
-   _In_          HANDLE hServer,
++  _Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
-@@ -1537,7 +1580,7 @@ BOOL WINAPI WTSQueryListenerConfigA (
+   _In_          LPSTR pListenerName,
    _Out_         PWTSLISTENERCONFIGA pBuffer
  );
  
 -BOOL WINAPI WTSCreateListenerW (
+-  _In_          HANDLE hServer,
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSCreateListenerW (
-   _In_          HANDLE hServer,
++  _Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
-@@ -1546,7 +1589,7 @@ BOOL WINAPI WTSCreateListenerW (
+   _In_          LPWSTR pListenerName,
+@@ -1546,8 +1589,8 @@ BOOL WINAPI WTSCreateListenerW (
    _In_          DWORD flag
  );
  
 -BOOL WINAPI WTSCreateListenerA (
+-  _In_          HANDLE hServer,
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSCreateListenerA (
-   _In_          HANDLE hServer,
++  _Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
+   _In_          LPSTR pListenerName,
 @@ -1555,39 +1598,39 @@ BOOL WINAPI WTSCreateListenerA (
    _In_          DWORD flag
  );
  
 -BOOL WINAPI WTSSetListenerSecurityW(
+-  _In_          HANDLE hServer, 
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSSetListenerSecurityW(
-   _In_          HANDLE hServer, 
++  _Reserved_ _In_          HANDLE hServer, 
    _In_          PVOID pReserved,  
    _In_          DWORD Reserved, 
    _In_          LPWSTR pListenerName, 
@@ -763,8 +780,9 @@ index f907576fa1..75f27a4785 100644
    _In_          PSECURITY_DESCRIPTOR pSecurityDescriptor);
  
 -BOOL WINAPI WTSSetListenerSecurityA(
+-  _In_          HANDLE hServer, 
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSSetListenerSecurityA(
-   _In_          HANDLE hServer, 
++  _Reserved_ _In_          HANDLE hServer, 
    _In_          PVOID pReserved,  
    _In_          DWORD Reserved, 
    _In_          LPSTR pListenerName, 
@@ -773,8 +791,9 @@ index f907576fa1..75f27a4785 100644
    _In_          PSECURITY_DESCRIPTOR pSecurityDescriptor);
  
 -BOOL WINAPI WTSGetListenerSecurityW(
+-  _In_          HANDLE hServer,
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSGetListenerSecurityW(
-   _In_          HANDLE hServer,
++  _Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPWSTR pListenerName, 
@@ -786,8 +805,9 @@ index f907576fa1..75f27a4785 100644
  
  
 -BOOL WINAPI WTSGetListenerSecurityA(
+-  _In_          HANDLE hServer,
 +_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI WTSGetListenerSecurityA(
-   _In_          HANDLE hServer,
++  _Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPSTR pListenerName,

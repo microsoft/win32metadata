@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h
-index 8683cd3b5b..d61d80e8cb 100644
+index 8683cd3b5b..da4b9901ee 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h
 @@ -1,3 +1,4 @@
@@ -419,7 +419,8 @@ index 8683cd3b5b..d61d80e8cb 100644
 -STDAPI
 +_Windows_SupportedOS_WindowsVista_ STDAPI
  MFCreateAttributes(
-     _Out_   IMFAttributes** ppMFAttributes,
+-    _Out_   IMFAttributes** ppMFAttributes,
++    _COM_Outptr_ _Out_   IMFAttributes** ppMFAttributes,
      _In_    UINT32          cInitialSize
      );
  
