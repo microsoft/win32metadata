@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h
-index 6613c04969c43c59c692b186948a931848bf4da2..3c45197bda8a54fac8399c7496e6e993936190f3 100644
+index 6613c04969..edcd59d3a1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h
 @@ -73,6 +73,7 @@ extern "C"{
@@ -19,6 +19,15 @@ index 6613c04969c43c59c692b186948a931848bf4da2..3c45197bda8a54fac8399c7496e6e993
      {
      public:
          virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddResourceType( 
+@@ -111,7 +112,7 @@ EXTERN_C const IID IID_IWorkspaceResTypeRegistry;
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetResourceTypeInfo( 
+             /* [in] */ VARIANT_BOOL fMachineWide,
+             /* [in] */ __RPC__in BSTR bstrFileExtension,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLauncher) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLauncher) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyResourceType( 
+             /* [in] */ VARIANT_BOOL fMachineWide,
 @@ -219,7 +220,7 @@ EXTERN_C const IID IID_IWorkspaceResTypeRegistry;
          END_INTERFACE
      } IWorkspaceResTypeRegistryVtbl;

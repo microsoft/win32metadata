@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h
-index aa3bca83fc..306e5d8efc 100644
+index aa3bca83fc..31125ae0ce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index aa3bca83fc..306e5d8efc 100644
  // by calling MoDeleteMediaType().
  //
 -STDAPI MoCreateMediaType(DMO_MEDIA_TYPE **ppmt, DWORD cbFormat);
-+STDAPI MoCreateMediaType(_Win32_RAIIFree_(MoDeleteMediaType) DMO_MEDIA_TYPE **ppmt, DWORD cbFormat);
++STDAPI MoCreateMediaType( DMO_MEDIA_TYPE **ppmt, DWORD cbFormat);
  
  //
  // Frees any format block, releases any IUnknown, and deletes the
@@ -21,7 +21,7 @@ index aa3bca83fc..306e5d8efc 100644
  // must later be freed using MoDeleteMediaType().
  //
 -STDAPI MoDuplicateMediaType(DMO_MEDIA_TYPE **ppmtDest, const DMO_MEDIA_TYPE *pmtSrc);
-+STDAPI MoDuplicateMediaType(_Win32_RAIIFree_(MoDeleteMediaType) DMO_MEDIA_TYPE **ppmtDest, const DMO_MEDIA_TYPE *pmtSrc);
++STDAPI MoDuplicateMediaType( DMO_MEDIA_TYPE **ppmtDest, const DMO_MEDIA_TYPE *pmtSrc);
  
  
  

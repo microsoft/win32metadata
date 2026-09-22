@@ -1,0 +1,389 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WdsTptMgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/WdsTptMgmt.h
+index 7f2d489675..c5bf8d2c78 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WdsTptMgmt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WdsTptMgmt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -662,7 +663,7 @@ EXTERN_C const IID IID_IWdsTransportCacheable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("46AD894B-0BAB-47DC-84B2-7B553F1D8F80")
++    MIDL_INTERFACE("46AD894B-0BAB-47DC-84B2-7B553F1D8F80") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportCacheable : public IDispatch
+     {
+     public:
+@@ -838,7 +839,7 @@ EXTERN_C const IID IID_IWdsTransportCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B8BA4B1A-2FF4-43AB-996C-B2B10A91A6EB")
++    MIDL_INTERFACE("B8BA4B1A-2FF4-43AB-996C-B2B10A91A6EB") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportCollection : public IDispatch
+     {
+     public:
+@@ -1017,7 +1018,7 @@ EXTERN_C const IID IID_IWdsTransportManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5B0D35F5-1B13-4AFD-B878-6526DC340B5D")
++    MIDL_INTERFACE("5B0D35F5-1B13-4AFD-B878-6526DC340B5D") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportManager : public IDispatch
+     {
+     public:
+@@ -1170,13 +1171,13 @@ EXTERN_C const IID IID_IWdsTransportServer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09CCD093-830D-4344-A30A-73AE8E8FCA90")
++    MIDL_INTERFACE("09CCD093-830D-4344-A30A-73AE8E8FCA90") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportServer : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SetupManager( 
+             /* [annotation][retval][out] */ 
+@@ -1373,7 +1374,7 @@ EXTERN_C const IID IID_IWdsTransportServer2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("256e999f-6df4-4538-81b9-857b9ab8fb47")
++    MIDL_INTERFACE("256e999f-6df4-4538-81b9-857b9ab8fb47") _Windows_SupportedOS_Server2012_ 
+     IWdsTransportServer2 : public IWdsTransportServer
+     {
+     public:
+@@ -1569,7 +1570,7 @@ EXTERN_C const IID IID_IWdsTransportSetupManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F7238425-EFA8-40A4-AEF9-C98D969C0B75")
++    MIDL_INTERFACE("F7238425-EFA8-40A4-AEF9-C98D969C0B75") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportSetupManager : public IDispatch
+     {
+     public:
+@@ -1782,7 +1783,7 @@ EXTERN_C const IID IID_IWdsTransportSetupManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("02BE79DA-7E9E-4366-8B6E-2AA9A91BE47F")
++    MIDL_INTERFACE("02BE79DA-7E9E-4366-8B6E-2AA9A91BE47F") _Windows_SupportedOS_Server2012_ 
+     IWdsTransportSetupManager2 : public IWdsTransportSetupManager
+     {
+     public:
+@@ -1996,7 +1997,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("84CC4779-42DD-4792-891E-1321D6D74B44")
++    MIDL_INTERFACE("84CC4779-42DD-4792-891E-1321D6D74B44") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportConfigurationManager : public IDispatch
+     {
+     public:
+@@ -2233,7 +2234,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D0D85CAF-A153-4F1D-A9DD-96F431C50717")
++    MIDL_INTERFACE("D0D85CAF-A153-4F1D-A9DD-96F431C50717") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportConfigurationManager2 : public IWdsTransportConfigurationManager
+     {
+     public:
+@@ -2456,7 +2457,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3E22D9F6-3777-4D98-83E1-F98696717BA3")
++    MIDL_INTERFACE("3E22D9F6-3777-4D98-83E1-F98696717BA3") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportNamespaceManager : public IDispatch
+     {
+     public:
+@@ -2663,7 +2664,7 @@ EXTERN_C const IID IID_IWdsTransportTftpManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1327a7c8-ae8a-4fb3-8150-136227c37e9a")
++    MIDL_INTERFACE("1327a7c8-ae8a-4fb3-8150-136227c37e9a") _Windows_SupportedOS_Server2012_ 
+     IWdsTransportTftpManager : public IDispatch
+     {
+     public:
+@@ -2812,7 +2813,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B9468578-9F2B-48CC-B27A-A60799C2750C")
++    MIDL_INTERFACE("B9468578-9F2B-48CC-B27A-A60799C2750C") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportServicePolicy : public IWdsTransportCacheable
+     {
+     public:
+@@ -2832,7 +2833,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
+             /* [annotation][in] */ 
+             _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszStartIpAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszStartIpAddress) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StartIpAddress( 
+             /* [annotation][in] */ 
+@@ -2844,7 +2845,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
+             /* [annotation][in] */ 
+             _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszEndIpAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszEndIpAddress) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EndIpAddress( 
+             /* [annotation][in] */ 
+@@ -3159,7 +3160,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("65C19E5C-AA7E-4B91-8944-91E0E5572797")
++    MIDL_INTERFACE("65C19E5C-AA7E-4B91-8944-91E0E5572797") _Windows_SupportedOS_Server2012_ 
+     IWdsTransportServicePolicy2 : public IWdsTransportServicePolicy
+     {
+     public:
+@@ -3525,7 +3526,7 @@ EXTERN_C const IID IID_IWdsTransportDiagnosticsPolicy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("13B33EFC-7856-4F61-9A59-8DE67B6B87B6")
++    MIDL_INTERFACE("13B33EFC-7856-4F61-9A59-8DE67B6B87B6") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportDiagnosticsPolicy : public IWdsTransportCacheable
+     {
+     public:
+@@ -3744,7 +3745,7 @@ EXTERN_C const IID IID_IWdsTransportMulticastSessionPolicy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4E5753CF-68EC-4504-A951-4A003266606B")
++    MIDL_INTERFACE("4E5753CF-68EC-4504-A951-4A003266606B") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportMulticastSessionPolicy : public IWdsTransportCacheable
+     {
+     public:
+@@ -4015,7 +4016,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FA561F57-FBEF-4ED3-B056-127CB1B33B84")
++    MIDL_INTERFACE("FA561F57-FBEF-4ED3-B056-127CB1B33B84") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportNamespace : public IDispatch
+     {
+     public:
+@@ -4029,7 +4030,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -4037,7 +4038,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszFriendlyName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszFriendlyName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FriendlyName( 
+             /* [annotation][in] */ 
+@@ -4045,7 +4046,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszDescription) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -4053,7 +4054,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ContentProvider( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszContentProvider) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszContentProvider) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ContentProvider( 
+             /* [annotation][in] */ 
+@@ -4061,7 +4062,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Configuration( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszConfiguration) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszConfiguration) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Configuration( 
+             /* [annotation][in] */ 
+@@ -4416,7 +4417,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceAutoCast;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AD931A72-C4BD-4C41-8FBC-59C9C748DF9E")
++    MIDL_INTERFACE("AD931A72-C4BD-4C41-8FBC-59C9C748DF9E") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportNamespaceAutoCast : public IWdsTransportNamespace
+     {
+     public:
+@@ -4738,7 +4739,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCast;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3840CECF-D76C-416E-A4CC-31C741D2874B")
++    MIDL_INTERFACE("3840CECF-D76C-416E-A4CC-31C741D2874B") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportNamespaceScheduledCast : public IWdsTransportNamespace
+     {
+     public:
+@@ -5069,7 +5070,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastManualStart;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("013E6E4C-E6A7-4FB5-B7FF-D9F5DA805C31")
++    MIDL_INTERFACE("013E6E4C-E6A7-4FB5-B7FF-D9F5DA805C31") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportNamespaceScheduledCastManualStart : public IWdsTransportNamespaceScheduledCast
+     {
+     public:
+@@ -5399,7 +5400,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D606AF3D-EA9C-4219-961E-7491D618D9B9")
++    MIDL_INTERFACE("D606AF3D-EA9C-4219-961E-7491D618D9B9") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportNamespaceScheduledCastAutoStart : public IWdsTransportNamespaceScheduledCast
+     {
+     public:
+@@ -5781,7 +5782,7 @@ EXTERN_C const IID IID_IWdsTransportContent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D405D711-0296-4AB4-A860-AC7D32E65798")
++    MIDL_INTERFACE("D405D711-0296-4AB4-A860-AC7D32E65798") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportContent : public IDispatch
+     {
+     public:
+@@ -5795,7 +5796,7 @@ EXTERN_C const IID IID_IWdsTransportContent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveSessions( 
+             /* [annotation][retval][out] */ 
+@@ -5978,7 +5979,7 @@ EXTERN_C const IID IID_IWdsTransportSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F4EFEA88-65B1-4F30-A4B9-2793987796FB")
++    MIDL_INTERFACE("F4EFEA88-65B1-4F30-A4B9-2793987796FB") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportSession : public IDispatch
+     {
+     public:
+@@ -5992,11 +5993,11 @@ EXTERN_C const IID IID_IWdsTransportSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkInterfaceName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszNetworkInterfaceName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszNetworkInterfaceName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkInterfaceAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszNetworkInterfaceAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszNetworkInterfaceAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TransferRate( 
+             /* [annotation][retval][out] */ 
+@@ -6214,7 +6215,7 @@ EXTERN_C const IID IID_IWdsTransportClient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B5DBC93A-CABE-46CA-837F-3E44E93C6545")
++    MIDL_INTERFACE("B5DBC93A-CABE-46CA-837F-3E44E93C6545") _Windows_SupportedOS_Server2008_ 
+     IWdsTransportClient : public IDispatch
+     {
+     public:
+@@ -6228,15 +6229,15 @@ EXTERN_C const IID IID_IWdsTransportClient;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MacAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszMacAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszMacAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IpAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszIpAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszIpAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PercentCompletion( 
+             /* [annotation][retval][out] */ 
+@@ -6260,7 +6261,7 @@ EXTERN_C const IID IID_IWdsTransportClient;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserIdentity( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszUserIdentity) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszUserIdentity) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Disconnect( 
+             /* [annotation][in] */ 
+@@ -6506,17 +6507,17 @@ EXTERN_C const IID IID_IWdsTransportTftpClient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b022d3ae-884d-4d85-b146-53320e76ef62")
++    MIDL_INTERFACE("b022d3ae-884d-4d85-b146-53320e76ef62") _Windows_SupportedOS_Server2012_ 
+     IWdsTransportTftpClient : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszFileName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszFileName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IpAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszIpAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszIpAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timeout( 
+             /* [annotation][retval][out] */ 
+@@ -6733,25 +6734,25 @@ EXTERN_C const IID IID_IWdsTransportContentProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B9489F24-F219-4ACF-AAD7-265C7C08A6AE")
++    MIDL_INTERFACE("B9489F24-F219-4ACF-AAD7-265C7C08A6AE") _Windows_SupportedOS_Server2012_ 
+     IWdsTransportContentProvider : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszDescription) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FilePath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszFilePath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszFilePath) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitializationRoutine( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbszInitializationRoutine) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbszInitializationRoutine) = 0;
+         
+     };
+     

@@ -1,0 +1,1061 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wuapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wuapi.h
+index 64117563ff..5d65f194ef 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wuapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wuapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1429,7 +1430,7 @@ EXTERN_C const IID IID_IUpdateLockdown;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a976c28d-75a1-42aa-94ae-8af8b872089a")
++    MIDL_INTERFACE("a976c28d-75a1-42aa-94ae-8af8b872089a") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateLockdown : public IUnknown
+     {
+     public:
+@@ -1516,7 +1517,7 @@ EXTERN_C const IID IID_IStringCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eff90582-2ddc-480f-a06d-60f3fbc362c3")
++    MIDL_INTERFACE("eff90582-2ddc-480f-a06d-60f3fbc362c3") _Windows_SupportedOS_WindowsXP_ 
+     IStringCollection : public IDispatch
+     {
+     public:
+@@ -1524,7 +1525,7 @@ EXTERN_C const IID IID_IStringCollection;
+             /* [annotation][in] */ 
+             _In_  LONG index,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Item( 
+             /* [annotation][in] */ 
+@@ -1794,13 +1795,13 @@ EXTERN_C const IID IID_IWebProxy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("174c81fe-aecd-4dae-b8a0-2c6318dd86a8")
++    MIDL_INTERFACE("174c81fe-aecd-4dae-b8a0-2c6318dd86a8") _Windows_SupportedOS_WindowsXP_ 
+     IWebProxy : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Address( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Address( 
+             /* [annotation][in] */ 
+@@ -1828,7 +1829,7 @@ EXTERN_C const IID IID_IWebProxy;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UserName( 
+             /* [annotation][in] */ 
+@@ -2120,13 +2121,13 @@ EXTERN_C const IID IID_ISystemInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ade87bf7-7b56-4275-8fab-b9b0e591844b")
++    MIDL_INTERFACE("ade87bf7-7b56-4275-8fab-b9b0e591844b") _Windows_SupportedOS_WindowsXP_ 
+     ISystemInformation : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_OemHardwareSupportLink( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RebootRequired( 
+             /* [annotation][retval][out] */ 
+@@ -2282,7 +2283,7 @@ EXTERN_C const IID IID_IWindowsUpdateAgentInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85713fa1-7796-4fa2-be3b-e2d6124dd373")
++    MIDL_INTERFACE("85713fa1-7796-4fa2-be3b-e2d6124dd373") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsUpdateAgentInfo : public IDispatch
+     {
+     public:
+@@ -2435,7 +2436,7 @@ EXTERN_C const IID IID_IAutomaticUpdatesResults;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E7A4D634-7942-4DD9-A111-82228BA33901")
++    MIDL_INTERFACE("E7A4D634-7942-4DD9-A111-82228BA33901") _Windows_SupportedOS_WindowsXP_ 
+     IAutomaticUpdatesResults : public IDispatch
+     {
+     public:
+@@ -2597,7 +2598,7 @@ EXTERN_C const IID IID_IAutomaticUpdatesSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2ee48f22-af3c-405f-8970-f71be12ee9a2")
++    MIDL_INTERFACE("2ee48f22-af3c-405f-8970-f71be12ee9a2") _Windows_SupportedOS_WindowsXP_ 
+     IAutomaticUpdatesSettings : public IDispatch
+     {
+     public:
+@@ -2855,7 +2856,7 @@ EXTERN_C const IID IID_IAutomaticUpdatesSettings2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6abc136a-c3ca-4384-8171-cb2b1e59b8dc")
++    MIDL_INTERFACE("6abc136a-c3ca-4384-8171-cb2b1e59b8dc") _Windows_SupportedOS_WindowsXP_ 
+     IAutomaticUpdatesSettings2 : public IAutomaticUpdatesSettings
+     {
+     public:
+@@ -3125,7 +3126,7 @@ EXTERN_C const IID IID_IAutomaticUpdatesSettings3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b587f5c3-f57e-485f-bbf5-0d181c5cd0dc")
++    MIDL_INTERFACE("b587f5c3-f57e-485f-bbf5-0d181c5cd0dc") _Windows_SupportedOS_WindowsXP_ 
+     IAutomaticUpdatesSettings3 : public IAutomaticUpdatesSettings2
+     {
+     public:
+@@ -3432,7 +3433,7 @@ EXTERN_C const IID IID_IAutomaticUpdates;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("673425bf-c082-4c7c-bdfd-569464b8e0ce")
++    MIDL_INTERFACE("673425bf-c082-4c7c-bdfd-569464b8e0ce") _Windows_SupportedOS_WindowsXP_ 
+     IAutomaticUpdates : public IDispatch
+     {
+     public:
+@@ -3639,7 +3640,7 @@ EXTERN_C const IID IID_IAutomaticUpdates2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4A2F5C31-CFD9-410E-B7FB-29A653973A0F")
++    MIDL_INTERFACE("4A2F5C31-CFD9-410E-B7FB-29A653973A0F") _Windows_SupportedOS_WindowsXP_ 
+     IAutomaticUpdates2 : public IAutomaticUpdates
+     {
+     public:
+@@ -3842,7 +3843,7 @@ EXTERN_C const IID IID_IUpdateIdentity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("46297823-9940-4c09-aed9-cd3ea6d05968")
++    MIDL_INTERFACE("46297823-9940-4c09-aed9-cd3ea6d05968") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateIdentity : public IDispatch
+     {
+     public:
+@@ -3852,7 +3853,7 @@ EXTERN_C const IID IID_IUpdateIdentity;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UpdateID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+     };
+     
+@@ -4004,13 +4005,13 @@ EXTERN_C const IID IID_IImageInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7c907864-346c-4aeb-8f3f-57da289f969f")
++    MIDL_INTERFACE("7c907864-346c-4aeb-8f3f-57da289f969f") _Windows_SupportedOS_WindowsXP_ 
+     IImageInformation : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AltText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Height( 
+             /* [annotation][retval][out] */ 
+@@ -4018,7 +4019,7 @@ EXTERN_C const IID IID_IImageInformation;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Source( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Width( 
+             /* [annotation][retval][out] */ 
+@@ -4192,17 +4193,17 @@ EXTERN_C const IID IID_ICategory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81ddc1b8-9d35-47a6-b471-5b80f519223b")
++    MIDL_INTERFACE("81ddc1b8-9d35-47a6-b471-5b80f519223b") _Windows_SupportedOS_WindowsXP_ 
+     ICategory : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CategoryID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Children( 
+             /* [annotation][retval][out] */ 
+@@ -4210,7 +4211,7 @@ EXTERN_C const IID IID_ICategory;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Image( 
+             /* [annotation][retval][out] */ 
+@@ -4226,7 +4227,7 @@ EXTERN_C const IID IID_ICategory;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Updates( 
+             /* [annotation][retval][out] */ 
+@@ -4445,7 +4446,7 @@ EXTERN_C const IID IID_ICategoryCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3a56bfb8-576c-43f7-9335-fe4838fd7e37")
++    MIDL_INTERFACE("3a56bfb8-576c-43f7-9335-fe4838fd7e37") _Windows_SupportedOS_WindowsXP_ 
+     ICategoryCollection : public IDispatch
+     {
+     public:
+@@ -4624,7 +4625,7 @@ EXTERN_C const IID IID_IInstallationBehavior;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d9a59339-e245-4dbd-9686-4d5763e39624")
++    MIDL_INTERFACE("d9a59339-e245-4dbd-9686-4d5763e39624") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationBehavior : public IDispatch
+     {
+     public:
+@@ -4812,13 +4813,13 @@ EXTERN_C const IID IID_IUpdateDownloadContent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("54a2cb2d-9a0c-48b6-8a50-9abb69ee2d02")
++    MIDL_INTERFACE("54a2cb2d-9a0c-48b6-8a50-9abb69ee2d02") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateDownloadContent : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DownloadUrl( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+     };
+     
+@@ -4961,7 +4962,7 @@ EXTERN_C const IID IID_IUpdateDownloadContent2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c97ad11b-f257-420b-9d9f-377f733f6f68")
++    MIDL_INTERFACE("c97ad11b-f257-420b-9d9f-377f733f6f68") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateDownloadContent2 : public IUpdateDownloadContent
+     {
+     public:
+@@ -5120,7 +5121,7 @@ EXTERN_C const IID IID_IUpdateDownloadContentCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bc5513c8-b3b8-4bf7-a4d4-361c0d8c88ba")
++    MIDL_INTERFACE("bc5513c8-b3b8-4bf7-a4d4-361c0d8c88ba") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateDownloadContentCollection : public IDispatch
+     {
+     public:
+@@ -5299,13 +5300,13 @@ EXTERN_C const IID IID_IUpdate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6a92b07a-d821-4682-b423-5c805022cc4d")
++    MIDL_INTERFACE("6a92b07a-d821-4682-b423-5c805022cc4d") _Windows_SupportedOS_WindowsXP_ 
+     IUpdate : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Title( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AutoSelectOnWebSites( 
+             /* [annotation][retval][out] */ 
+@@ -5337,7 +5338,7 @@ EXTERN_C const IID IID_IUpdate;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_EulaAccepted( 
+             /* [annotation][retval][out] */ 
+@@ -5345,11 +5346,11 @@ EXTERN_C const IID IID_IUpdate;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_EulaText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_HandlerID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Identity( 
+             /* [annotation][retval][out] */ 
+@@ -5413,7 +5414,7 @@ EXTERN_C const IID IID_IUpdate;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MsrcSeverity( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RecommendedCpuSpeed( 
+             /* [annotation][retval][out] */ 
+@@ -5429,7 +5430,7 @@ EXTERN_C const IID IID_IUpdate;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ReleaseNotes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SecurityBulletinIDs( 
+             /* [annotation][retval][out] */ 
+@@ -5441,7 +5442,7 @@ EXTERN_C const IID IID_IUpdate;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SupportUrl( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [annotation][retval][out] */ 
+@@ -5449,7 +5450,7 @@ EXTERN_C const IID IID_IUpdate;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UninstallationNotes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UninstallationBehavior( 
+             /* [annotation][retval][out] */ 
+@@ -6018,29 +6019,29 @@ EXTERN_C const IID IID_IWindowsDriverUpdate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b383cd1a-5ce9-4504-9f63-764b1236f191")
++    MIDL_INTERFACE("b383cd1a-5ce9-4504-9f63-764b1236f191") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdate : public IUpdate
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverClass( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverHardwareID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverManufacturer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverModel( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverProvider( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverVerDate( 
+             /* [annotation][retval][out] */ 
+@@ -6663,7 +6664,7 @@ EXTERN_C const IID IID_IUpdate2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("144fe9b0-d23d-4a8b-8634-fb4457533b7a")
++    MIDL_INTERFACE("144fe9b0-d23d-4a8b-8634-fb4457533b7a") _Windows_SupportedOS_WindowsXP_ 
+     IUpdate2 : public IUpdate
+     {
+     public:
+@@ -7256,7 +7257,7 @@ EXTERN_C const IID IID_IUpdate3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("112EDA6B-95B3-476F-9D90-AEE82C6B8181")
++    MIDL_INTERFACE("112EDA6B-95B3-476F-9D90-AEE82C6B8181") _Windows_SupportedOS_WindowsXP_ 
+     IUpdate3 : public IUpdate2
+     {
+     public:
+@@ -7847,7 +7848,7 @@ EXTERN_C const IID IID_IUpdate4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27e94b0d-5139-49a2-9a61-93522dc54652")
++    MIDL_INTERFACE("27e94b0d-5139-49a2-9a61-93522dc54652") _Windows_SupportedOS_WindowsXP_ 
+     IUpdate4 : public IUpdate3
+     {
+     public:
+@@ -8448,7 +8449,7 @@ EXTERN_C const IID IID_IUpdate5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C1C2F21A-D2F4-4902-B5C6-8A081C19A890")
++    MIDL_INTERFACE("C1C2F21A-D2F4-4902-B5C6-8A081C19A890") _Windows_SupportedOS_WindowsXP_ 
+     IUpdate5 : public IUpdate4
+     {
+     public:
+@@ -9733,7 +9734,7 @@ EXTERN_C const IID IID_IWindowsDriverUpdate2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("615c4269-7a48-43bd-96b7-bf6ca27d6c3e")
++    MIDL_INTERFACE("615c4269-7a48-43bd-96b7-bf6ca27d6c3e") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdate2 : public IWindowsDriverUpdate
+     {
+     public:
+@@ -10399,7 +10400,7 @@ EXTERN_C const IID IID_IWindowsDriverUpdate3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("49EBD502-4A96-41BD-9E3E-4C5057F4250C")
++    MIDL_INTERFACE("49EBD502-4A96-41BD-9E3E-4C5057F4250C") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdate3 : public IWindowsDriverUpdate2
+     {
+     public:
+@@ -11063,29 +11064,29 @@ EXTERN_C const IID IID_IWindowsDriverUpdateEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ED8BFE40-A60B-42ea-9652-817DFCFA23EC")
++    MIDL_INTERFACE("ED8BFE40-A60B-42ea-9652-817DFCFA23EC") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdateEntry : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverClass( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverHardwareID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverManufacturer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverModel( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverProvider( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DriverVerDate( 
+             /* [annotation][retval][out] */ 
+@@ -11303,7 +11304,7 @@ EXTERN_C const IID IID_IWindowsDriverUpdateEntryCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0D521700-A372-4bef-828B-3D00C10ADEBD")
++    MIDL_INTERFACE("0D521700-A372-4bef-828B-3D00C10ADEBD") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdateEntryCollection : public IDispatch
+     {
+     public:
+@@ -11482,7 +11483,7 @@ EXTERN_C const IID IID_IWindowsDriverUpdate4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("004C6A2B-0C19-4c69-9F5C-A269B2560DB9")
++    MIDL_INTERFACE("004C6A2B-0C19-4c69-9F5C-A269B2560DB9") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdate4 : public IWindowsDriverUpdate3
+     {
+     public:
+@@ -12169,7 +12170,7 @@ EXTERN_C const IID IID_IWindowsDriverUpdate5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("70CF5C82-8642-42bb-9DBC-0CFD263C6C4F")
++    MIDL_INTERFACE("70CF5C82-8642-42bb-9DBC-0CFD263C6C4F") _Windows_SupportedOS_WindowsXP_ 
+     IWindowsDriverUpdate5 : public IWindowsDriverUpdate4
+     {
+     public:
+@@ -12875,7 +12876,7 @@ EXTERN_C const IID IID_IUpdateCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("07f7438c-7709-4ca5-b518-91279288134e")
++    MIDL_INTERFACE("07f7438c-7709-4ca5-b518-91279288134e") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateCollection : public IDispatch
+     {
+     public:
+@@ -13153,13 +13154,13 @@ EXTERN_C const IID IID_IUpdateException;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a376dd5e-09d4-427f-af7c-fed5b6e1c1d6")
++    MIDL_INTERFACE("a376dd5e-09d4-427f-af7c-fed5b6e1c1d6") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateException : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Message( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_HResult( 
+             /* [annotation][retval][out] */ 
+@@ -13328,13 +13329,13 @@ EXTERN_C const IID IID_IInvalidProductLicenseException;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a37d00f5-7bb0-4953-b414-f9e98326f2e8")
++    MIDL_INTERFACE("a37d00f5-7bb0-4953-b414-f9e98326f2e8") _Windows_SupportedOS_WindowsXP_ 
+     IInvalidProductLicenseException : public IUpdateException
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Product( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+     };
+     
+@@ -13505,7 +13506,7 @@ EXTERN_C const IID IID_IUpdateExceptionCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("503626a3-8e14-4729-9355-0fe664bd2321")
++    MIDL_INTERFACE("503626a3-8e14-4729-9355-0fe664bd2321") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateExceptionCollection : public IDispatch
+     {
+     public:
+@@ -13684,7 +13685,7 @@ EXTERN_C const IID IID_ISearchResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d40cff62-e08c-4498-941a-01e25f0fd33c")
++    MIDL_INTERFACE("d40cff62-e08c-4498-941a-01e25f0fd33c") _Windows_SupportedOS_WindowsXP_ 
+     ISearchResult : public IDispatch
+     {
+     public:
+@@ -13872,7 +13873,7 @@ EXTERN_C const IID IID_ISearchJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7366ea16-7a1a-4ea2-b042-973d3e9cd99b")
++    MIDL_INTERFACE("7366ea16-7a1a-4ea2-b042-973d3e9cd99b") _Windows_SupportedOS_WindowsXP_ 
+     ISearchJob : public IDispatch
+     {
+     public:
+@@ -14052,7 +14053,7 @@ EXTERN_C const IID IID_ISearchCompletedCallbackArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a700a634-2850-4c47-938a-9e4b6e5af9a6")
++    MIDL_INTERFACE("a700a634-2850-4c47-938a-9e4b6e5af9a6") _Windows_SupportedOS_WindowsXP_ 
+     ISearchCompletedCallbackArgs : public IDispatch
+     {
+     public:
+@@ -14188,7 +14189,7 @@ EXTERN_C const IID IID_ISearchCompletedCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("88aee058-d4b0-4725-a2f1-814a67ae964c")
++    MIDL_INTERFACE("88aee058-d4b0-4725-a2f1-814a67ae964c") _Windows_SupportedOS_WindowsXP_ 
+     ISearchCompletedCallback : public IUnknown
+     {
+     public:
+@@ -14279,7 +14280,7 @@ EXTERN_C const IID IID_IUpdateHistoryEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("be56a644-af0e-4e0e-a311-c1d8e695cbff")
++    MIDL_INTERFACE("be56a644-af0e-4e0e-a311-c1d8e695cbff") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateHistoryEntry : public IDispatch
+     {
+     public:
+@@ -14305,11 +14306,11 @@ EXTERN_C const IID IID_IUpdateHistoryEntry;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Title( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UnmappedResultCode( 
+             /* [annotation][retval][out] */ 
+@@ -14317,7 +14318,7 @@ EXTERN_C const IID IID_IUpdateHistoryEntry;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClientApplicationID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ServerSelection( 
+             /* [annotation][retval][out] */ 
+@@ -14325,7 +14326,7 @@ EXTERN_C const IID IID_IUpdateHistoryEntry;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UninstallationSteps( 
+             /* [annotation][retval][out] */ 
+@@ -14333,11 +14334,11 @@ EXTERN_C const IID IID_IUpdateHistoryEntry;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UninstallationNotes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SupportUrl( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+     };
+     
+@@ -14597,7 +14598,7 @@ EXTERN_C const IID IID_IUpdateHistoryEntry2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c2bfb780-4539-4132-ab8c-0a8772013ab6")
++    MIDL_INTERFACE("c2bfb780-4539-4132-ab8c-0a8772013ab6") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateHistoryEntry2 : public IUpdateHistoryEntry
+     {
+     public:
+@@ -14873,7 +14874,7 @@ EXTERN_C const IID IID_IUpdateHistoryEntryCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a7f04f3c-a290-435b-aadf-a116c3357a5c")
++    MIDL_INTERFACE("a7f04f3c-a290-435b-aadf-a116c3357a5c") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateHistoryEntryCollection : public IDispatch
+     {
+     public:
+@@ -15052,7 +15053,7 @@ EXTERN_C const IID IID_IUpdateSearcher;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8f45abf1-f9ae-4b95-a933-f0f66e5056ea")
++    MIDL_INTERFACE("8f45abf1-f9ae-4b95-a933-f0f66e5056ea") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateSearcher : public IDispatch
+     {
+     public:
+@@ -15066,7 +15067,7 @@ EXTERN_C const IID IID_IUpdateSearcher;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClientApplicationID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ClientApplicationID( 
+             /* [annotation][in] */ 
+@@ -15108,7 +15109,7 @@ EXTERN_C const IID IID_IUpdateSearcher;
+             /* [annotation][in] */ 
+             _In_  BSTR unescaped,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryHistory( 
+             /* [annotation][in] */ 
+@@ -15138,7 +15139,7 @@ EXTERN_C const IID IID_IUpdateSearcher;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ServiceID( 
+             /* [annotation][in] */ 
+@@ -15454,7 +15455,7 @@ EXTERN_C const IID IID_IUpdateSearcher2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4cbdcb2d-1589-4beb-bd1c-3e582ff0add0")
++    MIDL_INTERFACE("4cbdcb2d-1589-4beb-bd1c-3e582ff0add0") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateSearcher2 : public IUpdateSearcher
+     {
+     public:
+@@ -15795,7 +15796,7 @@ EXTERN_C const IID IID_IUpdateSearcher3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("04C6895D-EAF2-4034-97F3-311DE9BE413A")
++    MIDL_INTERFACE("04C6895D-EAF2-4034-97F3-311DE9BE413A") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateSearcher3 : public IUpdateSearcher2
+     {
+     public:
+@@ -16155,7 +16156,7 @@ EXTERN_C const IID IID_IUpdateDownloadResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bf99af76-b575-42ad-8aa4-33cbb5477af1")
++    MIDL_INTERFACE("bf99af76-b575-42ad-8aa4-33cbb5477af1") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateDownloadResult : public IDispatch
+     {
+     public:
+@@ -16317,7 +16318,7 @@ EXTERN_C const IID IID_IDownloadResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("daa4fdd0-4727-4dbe-a1e7-745dca317144")
++    MIDL_INTERFACE("daa4fdd0-4727-4dbe-a1e7-745dca317144") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadResult : public IDispatch
+     {
+     public:
+@@ -16496,7 +16497,7 @@ EXTERN_C const IID IID_IDownloadProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d31a5bac-f719-4178-9dbb-5e2cb47fd18a")
++    MIDL_INTERFACE("d31a5bac-f719-4178-9dbb-5e2cb47fd18a") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadProgress : public IDispatch
+     {
+     public:
+@@ -16753,7 +16754,7 @@ EXTERN_C const IID IID_IDownloadJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c574de85-7358-43f6-aae8-8697e62d8ba7")
++    MIDL_INTERFACE("c574de85-7358-43f6-aae8-8697e62d8ba7") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadJob : public IDispatch
+     {
+     public:
+@@ -16959,7 +16960,7 @@ EXTERN_C const IID IID_IDownloadCompletedCallbackArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fa565b23-498c-47a0-979d-e7d5b1813360")
++    MIDL_INTERFACE("fa565b23-498c-47a0-979d-e7d5b1813360") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadCompletedCallbackArgs : public IDispatch
+     {
+     public:
+@@ -17095,7 +17096,7 @@ EXTERN_C const IID IID_IDownloadCompletedCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77254866-9f5b-4c8e-b9e2-c77a8530d64b")
++    MIDL_INTERFACE("77254866-9f5b-4c8e-b9e2-c77a8530d64b") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadCompletedCallback : public IUnknown
+     {
+     public:
+@@ -17186,7 +17187,7 @@ EXTERN_C const IID IID_IDownloadProgressChangedCallbackArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("324ff2c6-4981-4b04-9412-57481745ab24")
++    MIDL_INTERFACE("324ff2c6-4981-4b04-9412-57481745ab24") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadProgressChangedCallbackArgs : public IDispatch
+     {
+     public:
+@@ -17335,7 +17336,7 @@ EXTERN_C const IID IID_IDownloadProgressChangedCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8c3f1cdd-6173-4591-aebd-a56a53ca77c1")
++    MIDL_INTERFACE("8c3f1cdd-6173-4591-aebd-a56a53ca77c1") _Windows_SupportedOS_WindowsXP_ 
+     IDownloadProgressChangedCallback : public IUnknown
+     {
+     public:
+@@ -17426,13 +17427,13 @@ EXTERN_C const IID IID_IUpdateDownloader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("68f1c6f9-7ecc-4666-a464-247fe12496c3")
++    MIDL_INTERFACE("68f1c6f9-7ecc-4666-a464-247fe12496c3") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateDownloader : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClientApplicationID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ClientApplicationID( 
+             /* [annotation][in] */ 
+@@ -18011,7 +18012,7 @@ EXTERN_C const IID IID_IUpdateInstallationResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d940f0f8-3cbb-4fd0-993f-471e7f2328ad")
++    MIDL_INTERFACE("d940f0f8-3cbb-4fd0-993f-471e7f2328ad") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateInstallationResult : public IDispatch
+     {
+     public:
+@@ -18186,7 +18187,7 @@ EXTERN_C const IID IID_IInstallationResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a43c56d6-7451-48d4-af96-b6cd2d0d9b7a")
++    MIDL_INTERFACE("a43c56d6-7451-48d4-af96-b6cd2d0d9b7a") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationResult : public IDispatch
+     {
+     public:
+@@ -18378,7 +18379,7 @@ EXTERN_C const IID IID_IInstallationProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("345c8244-43a3-4e32-a368-65f073b76f36")
++    MIDL_INTERFACE("345c8244-43a3-4e32-a368-65f073b76f36") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationProgress : public IDispatch
+     {
+     public:
+@@ -18570,7 +18571,7 @@ EXTERN_C const IID IID_IInstallationJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5c209f0b-bad5-432a-9556-4699bed2638a")
++    MIDL_INTERFACE("5c209f0b-bad5-432a-9556-4699bed2638a") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationJob : public IDispatch
+     {
+     public:
+@@ -18776,7 +18777,7 @@ EXTERN_C const IID IID_IInstallationCompletedCallbackArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("250e2106-8efb-4705-9653-ef13c581b6a1")
++    MIDL_INTERFACE("250e2106-8efb-4705-9653-ef13c581b6a1") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationCompletedCallbackArgs : public IDispatch
+     {
+     public:
+@@ -18912,7 +18913,7 @@ EXTERN_C const IID IID_IInstallationCompletedCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("45f4f6f3-d602-4f98-9a8a-3efa152ad2d3")
++    MIDL_INTERFACE("45f4f6f3-d602-4f98-9a8a-3efa152ad2d3") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationCompletedCallback : public IUnknown
+     {
+     public:
+@@ -19003,7 +19004,7 @@ EXTERN_C const IID IID_IInstallationProgressChangedCallbackArgs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e4f14e1e-689d-4218-a0b9-bc189c484a01")
++    MIDL_INTERFACE("e4f14e1e-689d-4218-a0b9-bc189c484a01") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationProgressChangedCallbackArgs : public IDispatch
+     {
+     public:
+@@ -19152,7 +19153,7 @@ EXTERN_C const IID IID_IInstallationProgressChangedCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e01402d5-f8da-43ba-a012-38894bd048f1")
++    MIDL_INTERFACE("e01402d5-f8da-43ba-a012-38894bd048f1") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationProgressChangedCallback : public IUnknown
+     {
+     public:
+@@ -19243,13 +19244,13 @@ EXTERN_C const IID IID_IUpdateInstaller;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b929c68-ccdc-4226-96b1-8724600b54c2")
++    MIDL_INTERFACE("7b929c68-ccdc-4226-96b1-8724600b54c2") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateInstaller : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClientApplicationID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ClientApplicationID( 
+             /* [annotation][in] */ 
+@@ -19688,7 +19689,7 @@ EXTERN_C const IID IID_IUpdateInstaller2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3442d4fe-224d-4cee-98cf-30e0c4d229e6")
++    MIDL_INTERFACE("3442d4fe-224d-4cee-98cf-30e0c4d229e6") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateInstaller2 : public IUpdateInstaller
+     {
+     public:
+@@ -20058,7 +20059,7 @@ EXTERN_C const IID IID_IUpdateInstaller3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("16d11c35-099a-48d0-8338-5fae64047f8e")
++    MIDL_INTERFACE("16d11c35-099a-48d0-8338-5fae64047f8e") _Windows_SupportedOS_17134_ 
+     IUpdateInstaller3 : public IUpdateInstaller2
+     {
+     public:
+@@ -20447,7 +20448,7 @@ EXTERN_C const IID IID_IUpdateInstaller4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EF8208EA-2304-492D-9109-23813B0958E1")
++    MIDL_INTERFACE("EF8208EA-2304-492D-9109-23813B0958E1") _Windows_SupportedOS_10240_ 
+     IUpdateInstaller4 : public IUpdateInstaller3
+     {
+     public:
+@@ -20842,13 +20843,13 @@ EXTERN_C const IID IID_IUpdateSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("816858a4-260d-4260-933a-2585f1abc76b")
++    MIDL_INTERFACE("816858a4-260d-4260-933a-2585f1abc76b") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateSession : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClientApplicationID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ClientApplicationID( 
+             /* [annotation][in] */ 
+@@ -21082,7 +21083,7 @@ EXTERN_C const IID IID_IUpdateSession2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("91caf7b0-eb23-49ed-9937-c52d817f46f7")
++    MIDL_INTERFACE("91caf7b0-eb23-49ed-9937-c52d817f46f7") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateSession2 : public IUpdateSession
+     {
+     public:
+@@ -21317,7 +21318,7 @@ EXTERN_C const IID IID_IUpdateSession3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("918EFD1E-B5D8-4c90-8540-AEB9BDC56F9D")
++    MIDL_INTERFACE("918EFD1E-B5D8-4c90-8540-AEB9BDC56F9D") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateSession3 : public IUpdateSession2
+     {
+     public:
+@@ -21583,13 +21584,13 @@ EXTERN_C const IID IID_IUpdateService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("76b3b17e-aed6-4da5-85f0-83587f81abe3")
++    MIDL_INTERFACE("76b3b17e-aed6-4da5-85f0-83587f81abe3") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateService : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ContentValidationCert( 
+             /* [annotation][retval][out] */ 
+@@ -21621,7 +21622,7 @@ EXTERN_C const IID IID_IUpdateService;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsScanPackageService( 
+             /* [annotation][retval][out] */ 
+@@ -21633,11 +21634,11 @@ EXTERN_C const IID IID_IUpdateService;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceUrl( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SetupPrefix( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+     };
+     
+@@ -21888,7 +21889,7 @@ EXTERN_C const IID IID_IUpdateService2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1518b460-6518-4172-940f-c75883b24ceb")
++    MIDL_INTERFACE("1518b460-6518-4172-940f-c75883b24ceb") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateService2 : public IUpdateService
+     {
+     public:
+@@ -22155,7 +22156,7 @@ EXTERN_C const IID IID_IUpdateServiceCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9b0353aa-0e52-44ff-b8b0-1f7fa0437f88")
++    MIDL_INTERFACE("9b0353aa-0e52-44ff-b8b0-1f7fa0437f88") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateServiceCollection : public IDispatch
+     {
+     public:
+@@ -22334,7 +22335,7 @@ EXTERN_C const IID IID_IUpdateServiceRegistration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dde02280-12b3-4e0b-937b-6747f6acb286")
++    MIDL_INTERFACE("dde02280-12b3-4e0b-937b-6747f6acb286") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateServiceRegistration : public IDispatch
+     {
+     public:
+@@ -22344,7 +22345,7 @@ EXTERN_C const IID IID_IUpdateServiceRegistration;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsPendingRegistrationWithAU( 
+             /* [annotation][retval][out] */ 
+@@ -22522,7 +22523,7 @@ EXTERN_C const IID IID_IUpdateServiceManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23857e3c-02ba-44a3-9423-b1c900805f37")
++    MIDL_INTERFACE("23857e3c-02ba-44a3-9423-b1c900805f37") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateServiceManager : public IDispatch
+     {
+     public:
+@@ -22773,13 +22774,13 @@ EXTERN_C const IID IID_IUpdateServiceManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0bb8531d-7e8d-424f-986c-a0b8f60a3e7b")
++    MIDL_INTERFACE("0bb8531d-7e8d-424f-986c-a0b8f60a3e7b") _Windows_SupportedOS_WindowsXP_ 
+     IUpdateServiceManager2 : public IUpdateServiceManager
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClientApplicationID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retval) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retval) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ClientApplicationID( 
+             /* [annotation][in] */ 
+@@ -23053,7 +23054,7 @@ EXTERN_C const IID IID_IInstallationAgent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("925cbc18-a2ea-4648-bf1c-ec8badcfe20a")
++    MIDL_INTERFACE("925cbc18-a2ea-4648-bf1c-ec8badcfe20a") _Windows_SupportedOS_WindowsXP_ 
+     IInstallationAgent : public IDispatch
+     {
+     public:

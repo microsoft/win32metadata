@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h b/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h
+index 79d118ca8c..f34ff4ebcd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h
 @@ -56,6 +56,7 @@ extern "C"{
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h b/generation/Win
      } 	VDS_STORAGE_BUS_TYPE;
  
 -typedef struct _VDS_STORAGE_IDENTIFIER
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_STORAGE_IDENTIFIER
++typedef struct   _VDS_STORAGE_IDENTIFIER
      {
      VDS_STORAGE_IDENTIFIER_CODE_SET m_CodeSet;
      VDS_STORAGE_IDENTIFIER_TYPE m_Type;
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h b/generation/Win
      } 	VDS_STORAGE_IDENTIFIER;
  
 -typedef struct _VDS_STORAGE_DEVICE_ID_DESCRIPTOR
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_STORAGE_DEVICE_ID_DESCRIPTOR
++typedef struct   _VDS_STORAGE_DEVICE_ID_DESCRIPTOR
      {
      ULONG m_version;
      ULONG m_cIdentifiers;
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h b/generation/Win
      } 	VDS_INTERCONNECT_ADDRESS_TYPE;
  
 -typedef struct _VDS_INTERCONNECT
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_INTERCONNECT
++typedef struct   _VDS_INTERCONNECT
      {
      VDS_INTERCONNECT_ADDRESS_TYPE m_addressType;
      ULONG m_cbPort;
@@ -41,7 +42,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h b/generation/Win
      } 	VDS_INTERCONNECT;
  
 -typedef struct _VDS_LUN_INFORMATION
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ _VDS_LUN_INFORMATION
++typedef struct   _VDS_LUN_INFORMATION
      {
      ULONG m_version;
      BYTE m_DeviceType;

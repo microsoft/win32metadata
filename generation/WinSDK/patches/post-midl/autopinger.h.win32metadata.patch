@@ -1,0 +1,108 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AutoPinger.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AutoPinger.h
+index 791dd36224..9fd2eb40af 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AutoPinger.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AutoPinger.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  *
+@@ -84,7 +85,7 @@ typedef struct {
+  * be deleted using alljoyn_pinglistener_destroy once the ping group(s) that it was
+  * used with is/are removed.
+  */
+-extern AJ_API alljoyn_pinglistener AJ_CALL alljoyn_pinglistener_create(const alljoyn_pinglistener_callback* callback,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_pinglistener AJ_CALL alljoyn_pinglistener_create(const alljoyn_pinglistener_callback* callback,
+                                                                        const void* context);
+ /**
+  * Free an alljoyn_pinglistener.
+@@ -92,7 +93,7 @@ extern AJ_API alljoyn_pinglistener AJ_CALL alljoyn_pinglistener_create(const all
+  * @param listener The pinglistener that was previously created by
+  *                 alljoyn_pinglistener_create that needs to be deleted.
+  */
+-extern AJ_API void AJ_CALL alljoyn_pinglistener_destroy(alljoyn_pinglistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_pinglistener_destroy(alljoyn_pinglistener listener);
+ 
+ /* The autopinger part */
+ 
+@@ -109,7 +110,7 @@ typedef struct _alljoyn_autopinger_handle* alljoyn_autopinger;
+  *                      autopinger.
+  *
+  */
+-extern AJ_API alljoyn_autopinger AJ_CALL alljoyn_autopinger_create(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_autopinger AJ_CALL alljoyn_autopinger_create(alljoyn_busattachment bus);
+ 
+ /**
+  * Destructor.
+@@ -119,7 +120,7 @@ extern AJ_API alljoyn_autopinger AJ_CALL alljoyn_autopinger_create(alljoyn_busat
+  * Do not destroy an autopinger instance from within a pinglistener
+  * callback. This will cause a deadlock.
+  */
+-extern AJ_API void AJ_CALL alljoyn_autopinger_destroy(alljoyn_autopinger autopinger);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_autopinger_destroy(alljoyn_autopinger autopinger);
+ 
+ /**
+  * Pause all ping actions.
+@@ -127,7 +128,7 @@ extern AJ_API void AJ_CALL alljoyn_autopinger_destroy(alljoyn_autopinger autopin
+  * @param autopinger   Reference to the autopinger.
+  *
+  */
+-extern AJ_API void AJ_CALL alljoyn_autopinger_pause(alljoyn_autopinger autopinger);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_autopinger_pause(alljoyn_autopinger autopinger);
+ 
+ /**
+  * Resume ping actions.
+@@ -135,7 +136,7 @@ extern AJ_API void AJ_CALL alljoyn_autopinger_pause(alljoyn_autopinger autopinge
+  * @param autopinger   Reference to the autopinger.
+  *
+  */
+-extern AJ_API void AJ_CALL alljoyn_autopinger_resume(alljoyn_autopinger autopinger);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_autopinger_resume(alljoyn_autopinger autopinger);
+ 
+ /**
+  * Define new ping group.
+@@ -146,7 +147,7 @@ extern AJ_API void AJ_CALL alljoyn_autopinger_resume(alljoyn_autopinger autoping
+  *                     destination.
+  * @param pingInterval Ping interval in seconds.
+  */
+-extern AJ_API void AJ_CALL alljoyn_autopinger_addpinggroup(alljoyn_autopinger autopinger,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_autopinger_addpinggroup(alljoyn_autopinger autopinger,
+                                                            const char* group,
+                                                            alljoyn_pinglistener listener,
+                                                            uint32_t pinginterval = 5);
+@@ -160,7 +161,7 @@ extern AJ_API void AJ_CALL alljoyn_autopinger_addpinggroup(alljoyn_autopinger au
+  * @param autopinger   Reference to the autopinger.
+  * @param group        Ping group name.
+  */
+-extern AJ_API void AJ_CALL alljoyn_autopinger_removepinggroup(alljoyn_autopinger autopinger,
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_autopinger_removepinggroup(alljoyn_autopinger autopinger,
+                                                               const char* group);
+ 
+ /**
+@@ -173,7 +174,7 @@ extern AJ_API void AJ_CALL alljoyn_autopinger_removepinggroup(alljoyn_autopinger
+  *  - #ER_OK: interval updated.
+  *  - #ER_BUS_PING_GROUP_NOT_FOUND: group did not exist.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_autopinger_setpinginterval(alljoyn_autopinger autopinger,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_autopinger_setpinginterval(alljoyn_autopinger autopinger,
+                                                                  const char* group,
+                                                                  uint32_t pinginterval);
+ 
+@@ -188,7 +189,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_autopinger_setpinginterval(alljoyn_autopin
+  *  - #ER_OK: destination added.
+  *  - #ER_BUS_PING_GROUP_NOT_FOUND: group did not exist.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_autopinger_adddestination(alljoyn_autopinger autopinger,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_autopinger_adddestination(alljoyn_autopinger autopinger,
+                                                                 const char* group,
+                                                                 const char* destination);
+ 
+@@ -206,7 +207,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_autopinger_adddestination(alljoyn_autoping
+  *  - #ER_OK: destination removed or was not present.
+  *  - #ER_BUS_PING_GROUP_NOT_FOUND: group did not exist.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_autopinger_removedestination(alljoyn_autopinger autopinger,
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_autopinger_removedestination(alljoyn_autopinger autopinger,
+                                                                    const char* group,
+                                                                    const char* destination,
+                                                                    QCC_BOOL removeall = false);

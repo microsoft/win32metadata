@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut15.h b/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut15.h
+index def83308a7..8519930b46 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut15.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut15.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -374,7 +375,7 @@ EXTERN_C const IID IID_IInkDivisionResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2DBEC0A7-74C7-4B38-81EB-AA8EF0C24900")
++    MIDL_INTERFACE("2DBEC0A7-74C7-4B38-81EB-AA8EF0C24900") _Windows_SupportedOS_WindowsXP_ 
+     IInkDivisionResult : public IDispatch
+     {
+     public:
+@@ -525,7 +526,7 @@ EXTERN_C const IID IID_IInkDivisionUnit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85AEE342-48B0-4244-9DD5-1ED435410FAB")
++    MIDL_INTERFACE("85AEE342-48B0-4244-9DD5-1ED435410FAB") _Windows_SupportedOS_WindowsXP_ 
+     IInkDivisionUnit : public IDispatch
+     {
+     public:
+@@ -536,7 +537,7 @@ EXTERN_C const IID IID_IInkDivisionUnit;
+             /* [retval][out] */ __RPC__out InkDivisionType *divisionType) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RecognizedString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *RecoString) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *RecoString) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RotationTransform( 
+             /* [retval][out] */ __RPC__deref_out_opt IInkTransform **RotationTransform) = 0;
+@@ -696,7 +697,7 @@ EXTERN_C const IID IID_IInkDivisionUnits;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1BB5DDC2-31CC-4135-AB82-2C66C9F00C41")
++    MIDL_INTERFACE("1BB5DDC2-31CC-4135-AB82-2C66C9F00C41") _Windows_SupportedOS_WindowsXP_ 
+     IInkDivisionUnits : public IDispatch
+     {
+     public:

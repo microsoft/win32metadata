@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h
-index 728afc6bb2..2513daa126 100644
+index 728afc6bb2..b9bda66ea8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioendpoints.h
 @@ -1,3 +1,4 @@
@@ -7,11 +7,16 @@ index 728afc6bb2..2513daa126 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -89,6 +90,7 @@ EXTERN_C const IID IID_IAudioEndpointFormatControl;
+@@ -85,10 +86,11 @@ EXTERN_C const IID IID_IAudioEndpointFormatControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("784CFD40-9F89-456E-A1A6-873B006A664E")
++    MIDL_INTERFACE("784CFD40-9F89-456E-A1A6-873B006A664E") _Windows_SupportedOS_Windows7_ 
      IAudioEndpointFormatControl : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2008_
++         
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ResetToDefault( 
              /* [annotation][in] */ 
              _In_  DWORD ResetFlags) = 0;

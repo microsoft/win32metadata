@@ -1,0 +1,1620 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
+index 6db741e19a..0e1abc9500 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1996-1999  Microsoft Corporation
+@@ -596,14 +597,14 @@ typedef struct ldapmodA {
+ //  multi-thread: ldap_open*, ldap_init*, and ldap_sslinit* calls are safe.
+ //
+ 
+-WINLDAPAPI LDAP * LDAPAPI ldap_openW( _In_ const PWSTR HostName, ULONG PortNumber );
+-WINLDAPAPI LDAP * LDAPAPI ldap_openA( _In_ const PSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_openW( _In_ const PWSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_openA( _In_ const PSTR HostName, ULONG PortNumber );
+ 
+-WINLDAPAPI LDAP * LDAPAPI ldap_initW( _In_ const PWSTR HostName, ULONG PortNumber );
+-WINLDAPAPI LDAP * LDAPAPI ldap_initA( _In_ const PSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_initW( _In_ const PWSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_initA( _In_ const PSTR HostName, ULONG PortNumber );
+ 
+-WINLDAPAPI LDAP * LDAPAPI ldap_sslinitW( _In_ PWSTR HostName, ULONG PortNumber, int secure );
+-WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, int secure );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitW( _In_ PWSTR HostName, ULONG PortNumber, int secure );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, int secure );
+ 
+ //
+ //  when calling ldap_init, you can call ldap_connect explicitly to have the
+@@ -612,7 +613,7 @@ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, i
+ //  will call it internally if it hasn't already been called.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_connect(  LDAP *ld,
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_connect(  LDAP *ld,
+                                         struct l_timeval  *timeout
+                                         );
+ 
+@@ -624,9 +625,9 @@ WINLDAPAPI ULONG LDAPAPI ldap_connect(  LDAP *ld,
+ 
+ #else
+ 
+-WINLDAPAPI LDAP * LDAPAPI ldap_open( _In_ PSTR HostName, ULONG PortNumber );
+-WINLDAPAPI LDAP * LDAPAPI ldap_init( _In_ PSTR HostName, ULONG PortNumber );
+-WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, int secure );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_open( _In_ PSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_init( _In_ PSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, int secure );
+ 
+ #endif
+ 
+@@ -640,8 +641,8 @@ WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, in
+ //  multi-thread: cldap_open* calls are safe.
+ //
+ 
+-WINLDAPAPI LDAP * LDAPAPI cldap_openW( _In_ PWSTR HostName, ULONG PortNumber );
+-WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_openW( _In_ PWSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
+ 
+ 
+ #if LDAP_UNICODE
+@@ -650,7 +651,7 @@ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
+ 
+ #else
+ 
+-WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
+ 
+ #endif
+ 
+@@ -667,8 +668,8 @@ WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
+ //                stucture after it's been freed.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_unbind( LDAP *ld );
+-WINLDAPAPI ULONG LDAPAPI ldap_unbind_s( LDAP *ld ); // calls ldap_unbind
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_unbind( LDAP *ld );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_unbind_s( LDAP *ld ); // calls ldap_unbind
+ 
+ //
+ //  Calls to get and set options on connection blocks... use them rather
+@@ -680,11 +681,11 @@ WINLDAPAPI ULONG LDAPAPI ldap_unbind_s( LDAP *ld ); // calls ldap_unbind
+ //                connection as a whole.  beware if threads share connections.
+ 
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_get_option( LDAP *ld, int option, void *outvalue );
+-WINLDAPAPI ULONG LDAPAPI ldap_get_optionW( LDAP *ld, int option, void *outvalue );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_option( LDAP *ld, int option, void *outvalue );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_optionW( LDAP *ld, int option, void *outvalue );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_set_option( LDAP *ld, int option, const void *invalue );
+-WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *invalue );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_set_option( LDAP *ld, int option, const void *invalue );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *invalue );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -904,15 +905,15 @@ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *inv
+ //                and try to mulithread binds with other operations.
+ 
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_simple_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
+-WINLDAPAPI ULONG LDAPAPI ldap_simple_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
+-WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
+-WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWSTR passwd );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PSTR passwd );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
+-WINLDAPAPI ULONG LDAPAPI ldap_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
+-WINLDAPAPI ULONG LDAPAPI ldap_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
+-WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bindW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bindA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_sW( LDAP *ld, _In_opt_ PWSTR dn, _In_opt_ PWCHAR cred, ULONG method );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
+ 
+ 
+ //
+@@ -921,7 +922,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+ // sent back from the server.
+ //
+ 
+- WINLDAPAPI INT LDAPAPI ldap_sasl_bindA(
++ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bindA(
+          LDAP  *ExternalHandle,
+          _In_ const  PSTR DistName,
+          _In_ const PSTR AuthMechanism,
+@@ -931,7 +932,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+          int *MessageNumber
+          );
+ 
+- WINLDAPAPI INT LDAPAPI ldap_sasl_bindW(
++ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bindW(
+          LDAP  *ExternalHandle,
+          _In_ const PWSTR DistName,
+          _In_ const PWSTR AuthMechanism,
+@@ -941,7 +942,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+          int *MessageNumber
+          );
+ 
+- WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sA(
++ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sA(
+          LDAP  *ExternalHandle,
+          _In_ const PSTR DistName,
+          _In_ const PSTR AuthMechanism,
+@@ -951,7 +952,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+          PBERVAL *ServerData
+          );
+ 
+- WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sW(
++ _Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sW(
+          LDAP  *ExternalHandle,
+          _In_ const PWSTR DistName,
+          _In_ const PWSTR AuthMechanism,
+@@ -975,11 +976,11 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_simple_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
+-WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_simple_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PSTR passwd );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
+-WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
+ 
+ #define ldap_sasl_bind ldap_sasl_bindA
+ #define ldap_sasl_bind_s ldap_sasl_bind_sA
+@@ -1009,7 +1010,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_
+ //                ldap_search_s and ldap_search_ext* calls are thread safe.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_searchW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_searchW(
+         LDAP                  *ld,
+         _In_opt_ const PWSTR  base,     // distinguished name or ""
+         ULONG                 scope,          // LDAP_SCOPE_xxxx
+@@ -1017,7 +1018,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_searchW(
+         _In_ PZPWSTR          attrs,        // pointer to an array of PCHAR attribute names
+         ULONG                 attrsonly       // boolean on whether to only return attr names
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_searchA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_searchA(
+         LDAP                  *ld,
+         _In_opt_ const PSTR   base,     // distinguished name or ""
+         ULONG                 scope,          // LDAP_SCOPE_xxxx
+@@ -1026,7 +1027,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_searchA(
+         ULONG                 attrsonly       // boolean on whether to only return attr names
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
+         LDAP                    *ld,
+         _In_opt_ const PWSTR    base,
+         ULONG                   scope,
+@@ -1035,7 +1036,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
+         ULONG                   attrsonly,
+         _Outptr_result_maybenull_ LDAPMessage     **res
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
+         LDAP                    *ld,
+         _In_opt_ const PSTR     base,
+         ULONG                   scope,
+@@ -1045,7 +1046,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
+         _Outptr_result_maybenull_ LDAPMessage     **res
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
+         LDAP                    *ld,
+         _In_opt_ const PWSTR    base,
+         ULONG                   scope,
+@@ -1055,7 +1056,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
+         struct l_timeval        *timeout,
+         _Outptr_result_maybenull_ PLDAPMessage     *res
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
+         LDAP                    *ld,
+         _In_opt_ const PSTR     base,
+         ULONG                   scope,
+@@ -1067,7 +1068,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
+     );
+ 
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
+         LDAP                    *ld,
+         _In_opt_ const PWSTR    base,
+         ULONG                   scope,
+@@ -1081,7 +1082,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
+         ULONG                   *MessageNumber
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
+         LDAP                    *ld,
+         _In_opt_ const PSTR     base,
+         ULONG                   scope,
+@@ -1095,7 +1096,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
+         ULONG                   *MessageNumber
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
+         LDAP                    *ld,
+         _In_opt_ const PWSTR    base,
+         ULONG                   scope,
+@@ -1109,7 +1110,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
+         _Outptr_result_maybenull_ PLDAPMessage    *res
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
+         LDAP                    *ld,
+         _In_opt_ const PSTR     base,
+         ULONG                   scope,
+@@ -1134,7 +1135,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search(
+         LDAP            *ld,
+         _In_opt_ PSTR   base,           // distinguished name or ""
+         ULONG           scope,          // LDAP_SCOPE_xxxx
+@@ -1143,7 +1144,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search(
+         ULONG           attrsonly       // boolean on whether to only return attr names
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_s(
+         LDAP            *ld,
+         _In_opt_ PSTR   base,
+         ULONG           scope,
+@@ -1153,7 +1154,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_s(
+         _Outptr_result_maybenull_ PLDAPMessage    *res
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_st(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_st(
+         LDAP            *ld,
+         _In_opt_ PSTR   base,
+         ULONG           scope,
+@@ -1164,7 +1165,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_st(
+         _Outptr_result_maybenull_ PLDAPMessage    *res
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
+         LDAP            *ld,
+         _In_opt_ PSTR   base,
+         ULONG           scope,
+@@ -1178,7 +1179,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
+         ULONG           *MessageNumber
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
+         LDAP            *ld,
+         _In_opt_ PSTR   base,
+         ULONG           scope,
+@@ -1199,13 +1200,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
+ //  is invalid or LDAP_SUCCESS if it's ok.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI
+ ldap_check_filterW(
+         LDAP    *ld,
+         _In_ PWSTR  SearchFilter
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI
+ ldap_check_filterA(
+         LDAP    *ld,
+         _In_ PSTR   SearchFilter
+@@ -1233,13 +1234,13 @@ ldap_check_filterA(
+ //                ldap_modify_s and ldap_modify_ext* calls are thread safe.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modifyW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
+-WINLDAPAPI ULONG LDAPAPI ldap_modifyA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modifyW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modifyA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *mods[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         LDAPModW *mods[],
+@@ -1248,7 +1249,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         LDAPModA *mods[],
+@@ -1257,7 +1258,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         LDAPModW *mods[],
+@@ -1265,7 +1266,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
+         PLDAPControlW   *ClientControls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         LDAPModA *mods[],
+@@ -1283,10 +1284,10 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_s( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_s( LDAP *ld, _In_ PSTR dn, LDAPModA *mods[] );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
+         LDAP *ld,
+         const PSTR dn,
+         LDAPModA *mods[],
+@@ -1295,7 +1296,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
+         LDAP *ld,
+         const PSTR dn,
+         LDAPModA *mods[],
+@@ -1340,13 +1341,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
+ //                Use ldap_rename_ext instead, as these are thread safe.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn2W (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2W (
+     LDAP    *ExternalHandle,
+     _In_ const PWSTR  DistinguishedName,
+     _In_ const PWSTR  NewDistinguishedName,
+     INT     DeleteOldRdn
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName,
+@@ -1357,36 +1358,36 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
+ //  ldap_modrdn simply calls ldap_modrdn2 with a value of 1 for DeleteOldRdn.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdnW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdnW (
+     LDAP    *ExternalHandle,
+     _In_ const PWSTR   DistinguishedName,
+     _In_ const PWSTR   NewDistinguishedName
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdnA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdnA (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sW (
+     LDAP    *ExternalHandle,
+     _In_ const PWSTR   DistinguishedName,
+     _In_ const PWSTR   NewDistinguishedName,
+     INT     DeleteOldRdn
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName,
+     INT     DeleteOldRdn
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sW (
+     LDAP    *ExternalHandle,
+     _In_ const PWSTR   DistinguishedName,
+     _In_ const PWSTR   NewDistinguishedName
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName
+@@ -1401,24 +1402,24 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn2 (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2 (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName,
+     INT     DeleteOldRdn
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_s (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_s (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName,
+     INT     DeleteOldRdn
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
+     LDAP    *ExternalHandle,
+     _In_ const PSTR   DistinguishedName,
+     _In_ const PSTR   NewDistinguishedName
+@@ -1431,7 +1432,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
+ //  parent from the RDN, for clarity.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         _In_ const PWSTR NewRDN,
+@@ -1442,7 +1443,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         _In_ const PSTR NewRDN,
+@@ -1453,7 +1454,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         _In_ const PWSTR NewRDN,
+@@ -1463,7 +1464,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
+         PLDAPControlW   *ClientControls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         _In_ const PSTR NewRDN,
+@@ -1492,7 +1493,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
+         LDAP *ld,
+         const PSTR dn,
+         const PSTR NewRDN,
+@@ -1503,7 +1504,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
+         LDAP *ld,
+         const PSTR dn,
+         const PSTR NewRDN,
+@@ -1529,13 +1530,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
+ //                ldap_add_s and ldap_add_ext* calls are thread safe.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_addW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
+-WINLDAPAPI ULONG LDAPAPI ldap_addA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_addW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_addA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
+-WINLDAPAPI ULONG LDAPAPI ldap_add_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_sW( LDAP *ld, _In_ PWSTR dn, LDAPModW *attrs[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_sA( LDAP *ld, _In_ PSTR dn, LDAPModA *attrs[] );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         LDAPModW *attrs[],
+@@ -1544,7 +1545,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         LDAPModA *attrs[],
+@@ -1553,7 +1554,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         LDAPModW *attrs[],
+@@ -1561,7 +1562,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
+         PLDAPControlW   *ClientControls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         LDAPModA *attrs[],
+@@ -1579,10 +1580,10 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
+-WINLDAPAPI ULONG LDAPAPI ldap_add_s( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_s( LDAP *ld, _In_ PSTR dn, LDAPMod *attrs[] );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
+         LDAP *ld,
+         const PSTR dn,
+         LDAPModA *attrs[],
+@@ -1591,7 +1592,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
+         LDAP *ld,
+         const PSTR dn,
+         LDAPModA *attrs[],
+@@ -1618,11 +1619,11 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
+ //
+ 
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compareW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
+-WINLDAPAPI ULONG LDAPAPI ldap_compareA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compareW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compareA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_sW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_sW( LDAP *ld, _In_ const PWSTR dn, _In_ const PWSTR attr, _In_ PWSTR value );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -1631,8 +1632,8 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ con
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
+ 
+ #endif
+ 
+@@ -1646,7 +1647,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ cons
+ //  berval Data will be used.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         _In_ const PWSTR Attr,
+@@ -1657,7 +1658,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         _In_ const PSTR Attr,
+@@ -1668,7 +1669,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         _In_ const PWSTR Attr,
+@@ -1678,7 +1679,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
+         PLDAPControlW   *ClientControls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         _In_ const PSTR Attr,
+@@ -1695,7 +1696,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
+         LDAP *ld,
+         const PSTR dn,
+         const PSTR Attr,
+@@ -1706,7 +1707,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
+         LDAP *ld,
+         const PSTR dn,
+         const PSTR Attr,
+@@ -1734,13 +1735,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
+ //
+ 
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_deleteW( LDAP *ld, _In_ const PWSTR dn );
+-WINLDAPAPI ULONG LDAPAPI ldap_deleteA( LDAP *ld, _In_ const PSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_deleteW( LDAP *ld, _In_ const PWSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_deleteA( LDAP *ld, _In_ const PSTR dn );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_sW( LDAP *ld, _In_ const PWSTR dn );
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_sA( LDAP *ld, _In_ const PSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_sW( LDAP *ld, _In_ const PWSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_sA( LDAP *ld, _In_ const PSTR dn );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         PLDAPControlW   *ServerControls,
+@@ -1748,7 +1749,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         PLDAPControlA   *ServerControls,
+@@ -1756,14 +1757,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
+         LDAP *ld,
+         _In_ const PWSTR dn,
+         PLDAPControlW   *ServerControls,
+         PLDAPControlW   *ClientControls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
+         LDAP *ld,
+         _In_ const PSTR dn,
+         PLDAPControlA   *ServerControls,
+@@ -1779,10 +1780,10 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete( LDAP *ld, _In_ PSTR dn );
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_s( LDAP *ld, _In_ PSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete( LDAP *ld, _In_ PSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_s( LDAP *ld, _In_ PSTR dn );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
+         LDAP *ld,
+         const PSTR dn,
+         PLDAPControlA   *ServerControls,
+@@ -1790,7 +1791,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
+         LDAP *ld,
+         const PSTR dn,
+         PLDAPControlA   *ServerControls,
+@@ -1807,7 +1808,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
+ 
+ //  multi-thread: ldap_abandon calls are thread safe
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_abandon( LDAP *ld, ULONG msgid );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_abandon( LDAP *ld, ULONG msgid );
+ 
+ 
+ 
+@@ -1834,7 +1835,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_abandon( LDAP *ld, ULONG msgid );
+ 
+ //  multi-thread: ldap_result calls are thread safe
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_result(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_result(
+         LDAP                    *ld,
+         ULONG                   msgid,
+         ULONG                   all,
+@@ -1842,7 +1843,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_result(
+         _Outptr_result_maybenull_ PLDAPMessage     *res
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_msgfree( LDAPMessage *res );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_msgfree( LDAPMessage *res );
+ 
+ //
+ //  This parses a message and returns the error code.  It optionally frees
+@@ -1851,7 +1852,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_msgfree( LDAPMessage *res );
+ 
+ //  multi-thread: ldap_result2error call is thread safe
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_result2error(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_result2error(
+         LDAP            *ld,
+         LDAPMessage     *res,
+         ULONG           freeit      // boolean.. free the message?
+@@ -1866,7 +1867,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_result2error(
+ 
+ //  multi-thread: ldap_parse_result call is thread safe
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
+         LDAP *Connection,
+         LDAPMessage *ResultMessage,
+         ULONG *ReturnCode,                             // returned by server
+@@ -1877,7 +1878,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
+         BOOLEAN Freeit
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
+         LDAP *Connection,
+         LDAPMessage *ResultMessage,
+         ULONG *ReturnCode,                            // returned by server
+@@ -1888,7 +1889,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
+         BOOLEAN Freeit
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
+         LDAP           *Connection,
+         LDAPMessage    *ResultMessage,      // returned by server
+         _Outptr_opt_result_maybenull_ PSTR          *ResultOID,          // free with ldap_memfree
+@@ -1896,7 +1897,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
+         BOOLEAN         Freeit              // Don't need the message anymore
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
+         LDAP           *Connection,
+         LDAPMessage    *ResultMessage,      // returned by server
+         _Outptr_opt_result_maybenull_ PWSTR          *ResultOID,         // free with ldap_memfree
+@@ -1904,19 +1905,19 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
+         BOOLEAN         Freeit              // Don't need the message anymore
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_controls_freeA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_freeA (
+         LDAPControlA **Controls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_control_freeA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_freeA (
+         LDAPControlA *Controls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_controls_freeW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_freeW (
+         LDAPControlW **Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
+         LDAPControlW *Control
+         );
+ 
+@@ -1924,11 +1925,11 @@ WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
+ // ldap_free_controls are old, use ldap_controls_free
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_free_controlsW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsW (
+         LDAPControlW **Controls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
+         LDAPControlA **Controls
+         );
+ 
+@@ -1944,7 +1945,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
+ 
+ #define ldap_parse_extended_result ldap_parse_extended_resultA
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
+         LDAP *Connection,
+         LDAPMessage *ResultMessage,
+         ULONG *ReturnCode OPTIONAL,         // returned by server
+@@ -1955,15 +1956,15 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
+         BOOLEAN Freeit
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_controls_free (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_controls_free (
+         LDAPControlA **Controls
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_control_free (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_control_free (
+         LDAPControlA *Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
+         LDAPControlA **Controls
+         );
+ 
+@@ -1974,8 +1975,8 @@ WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
+ //  string should not be freed.
+ //
+ 
+-WINLDAPAPI PWCHAR LDAPAPI ldap_err2stringW( ULONG err );
+-WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_err2stringW( ULONG err );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -1983,7 +1984,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
+ 
+ #else
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
+ 
+ #endif
+ 
+@@ -1991,28 +1992,28 @@ WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
+ //  ldap_perror does nothing and is here just for compatibility.
+ //
+ 
+-WINLDAPAPI void LDAPAPI ldap_perror( LDAP *ld, _In_ const PCHAR msg );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI void LDAPAPI ldap_perror( LDAP *ld, _In_ const PCHAR msg );
+ 
+ //
+ //  Return the first entry of a message.  It is freed when the message is
+ //  freed so should not be freed explicitly.
+ //
+ 
+-WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_entry( LDAP *ld, LDAPMessage *res );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_entry( LDAP *ld, LDAPMessage *res );
+ 
+ //
+ //  Return the next entry of a message.  It is freed when the message is
+ //  freed so should not be freed explicitly.
+ //
+ 
+-WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_entry( LDAP *ld, LDAPMessage *entry );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_entry( LDAP *ld, LDAPMessage *entry );
+ 
+ //
+ //  Count the number of search entries returned by the server in a response
+ //  to a server request.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_count_entries( LDAP *ld, LDAPMessage *res );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_entries( LDAP *ld, LDAPMessage *res );
+ 
+ //
+ //  A BerElement really maps out to a C++ class object that does BER encoding.
+@@ -2031,13 +2032,13 @@ typedef struct berelement {
+ //  multi-threaded apps) so it should not be freed.
+ //
+ 
+-WINLDAPAPI PWCHAR LDAPAPI ldap_first_attributeW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_first_attributeW(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         BerElement      **ptr
+         );
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         BerElement      **ptr
+@@ -2049,7 +2050,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
+ 
+ #else
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         BerElement      **ptr
+@@ -2061,13 +2062,13 @@ WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
+ //  freed.
+ //
+ 
+-WINLDAPAPI PWCHAR LDAPAPI ldap_next_attributeW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_next_attributeW(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         BerElement      *ptr
+         );
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         BerElement      *ptr
+@@ -2080,7 +2081,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
+ 
+ #else
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         BerElement      *ptr
+@@ -2099,12 +2100,12 @@ WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
+ //  ldap_value_free.
+ //
+ 
+-WINLDAPAPI _Ret_maybenull_ PWCHAR *LDAPAPI ldap_get_valuesW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PWCHAR *LDAPAPI ldap_get_valuesW(
+         LDAP              *ld,
+         LDAPMessage       *entry,
+         _In_ const PWSTR  attr
+         );
+-WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         _In_ const PSTR attr
+@@ -2116,7 +2117,7 @@ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
+ 
+ #else
+ 
+-WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
+         LDAP            *ld,
+         LDAPMessage     *entry,
+         _In_ const PSTR attr
+@@ -2138,12 +2139,12 @@ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
+ //  ldap_value_free_len.
+ //
+ 
+-WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenW (
+     LDAP            *ExternalHandle,
+     LDAPMessage     *Message,
+     _In_ const PWSTR          attr
+     );
+-WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
+     LDAP            *ExternalHandle,
+     LDAPMessage     *Message,
+     _In_ const PSTR           attr
+@@ -2155,7 +2156,7 @@ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
+ 
+ #else
+ 
+-WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
+     LDAP            *ExternalHandle,
+     LDAPMessage     *Message,
+     _In_ const PSTR           attr
+@@ -2168,8 +2169,8 @@ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
+ //  Return the number of values in a list returned by ldap_get_values.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_count_valuesW( _In_opt_z_ PWCHAR *vals );
+-WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesW( _In_opt_z_ PWCHAR *vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -2177,7 +2178,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
+ 
+ #endif
+ 
+@@ -2187,14 +2188,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
+ //  Return the number of values in a list returned by ldap_get_values_len.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_count_values_len( struct berval **vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_values_len( struct berval **vals );
+ 
+ //
+ //  Free structures returned by ldap_get_values.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_value_freeW( _In_opt_z_ PWCHAR *vals );
+-WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_freeW( _In_opt_z_ PWCHAR *vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -2202,7 +2203,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
+ 
+ #endif
+ 
+@@ -2212,15 +2213,15 @@ WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
+ //  Free structures returned by ldap_get_values_len.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_value_free_len( struct berval **vals );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_value_free_len( struct berval **vals );
+ 
+ //
+ //  Get the distinguished name for a given search entry.  It should be freed
+ //  by calling ldap_memfree.
+ //
+ 
+-WINLDAPAPI PWCHAR LDAPAPI ldap_get_dnW( LDAP *ld, LDAPMessage *entry );
+-WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_get_dnW( LDAP *ld, LDAPMessage *entry );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -2228,7 +2229,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
+ 
+ #else
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
+ 
+ #endif
+ 
+@@ -2238,8 +2239,8 @@ WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
+ //  calling ldap_value_free.
+ //
+ 
+-WINLDAPAPI PWCHAR *LDAPAPI ldap_explode_dnW( _In_ const PWSTR dn, ULONG notypes );
+-WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR *LDAPAPI ldap_explode_dnW( _In_ const PWSTR dn, ULONG notypes );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -2247,7 +2248,7 @@ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
+ 
+ #else
+ 
+-WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
+ 
+ #endif
+ 
+@@ -2257,8 +2258,8 @@ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
+ //  ldap_memfree.
+ //
+ 
+-WINLDAPAPI PWCHAR LDAPAPI ldap_dn2ufnW( _In_ const PWSTR dn );
+-WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PWCHAR LDAPAPI ldap_dn2ufnW( _In_ const PWSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -2266,7 +2267,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
+ 
+ #else
+ 
+-WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
+ 
+ #endif
+ 
+@@ -2277,10 +2278,10 @@ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
+ //  values that you've gotten from ldap_open, ldap_get_values, etc.
+ //
+ 
+-WINLDAPAPI VOID LDAPAPI ldap_memfreeW( _In_ PWCHAR Block );
+-WINLDAPAPI VOID LDAPAPI ldap_memfreeA( _In_ PCHAR Block );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfreeW( _In_ PWCHAR Block );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfreeA( _In_ PCHAR Block );
+ 
+-WINLDAPAPI VOID LDAPAPI ber_bvfree( struct berval *bv );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ber_bvfree( struct berval *bv );
+ 
+ #if LDAP_UNICODE
+ 
+@@ -2288,7 +2289,7 @@ WINLDAPAPI VOID LDAPAPI ber_bvfree( struct berval *bv );
+ 
+ #else
+ 
+-WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
+ 
+ #endif
+ 
+@@ -2304,11 +2305,11 @@ WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
+ //  to ldap_memfree.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnW (
+     _In_ const PWSTR ufn,
+     _Outptr_ PWSTR *pDn
+     );
+-WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
+     _In_ const PSTR ufn,
+     _Outptr_ PSTR *pDn
+     );
+@@ -2319,7 +2320,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_ufn2dn (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dn (
+     _In_ const PSTR ufn,
+     _Outptr_ PSTR *pDn
+     );
+@@ -2426,7 +2427,7 @@ typedef struct ldap_apifeature_infoW {
+ //  free all resources)
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
+     HANDLE hInstance
+     );
+ 
+@@ -2458,13 +2459,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
+ //  be used for attributes that really are raw binary.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementW (
+    _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
+    ULONG   sourceLength,
+    _Out_writes_bytes_opt_(destLength) PWCHAR   destFilterElement,
+    ULONG   destLength
+    );
+-WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
+    _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
+    ULONG   sourceLength,
+    _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
+@@ -2477,7 +2478,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
+    _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
+    ULONG   sourceLength,
+    _Out_writes_bytes_opt_(destLength) PCHAR   destFilterElement,
+@@ -2505,7 +2506,7 @@ WINLDAPAPI VOID LDAPAPI ldap_set_dbg_routine( DBGPRINT DebugPrintRoutine );
+ //
+ 
+ 
+-WINLDAPAPI int LDAPAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI int LDAPAPI
+ LdapUTF8ToUnicode(
+     _In_reads_(cchSrc) LPCSTR lpSrcStr,
+     int cchSrc,
+@@ -2513,7 +2514,7 @@ LdapUTF8ToUnicode(
+     int cchDest
+     );
+ 
+-WINLDAPAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI
+ int LDAPAPI
+ LdapUnicodeToUTF8(
+     _In_reads_(cchSrc) LPCWSTR lpSrcStr,
+@@ -2570,14 +2571,14 @@ typedef struct ldapsortkeyA {
+ //  Use this one rather than ldap_encode_sort_control as this is per RFC.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
+         PLDAP           ExternalHandle,
+         PLDAPSortKeyA  *SortKeys,
+         UCHAR           IsCritical,
+         PLDAPControlA  *Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
+         PLDAP           ExternalHandle,
+         PLDAPSortKeyW  *SortKeys,
+         UCHAR           IsCritical,
+@@ -2589,14 +2590,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
+ //  to free the attribute value, if it's returned.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
+         PLDAP           ExternalHandle,
+         PLDAPControlA  *Control,
+         ULONG          *Result,
+         _Outptr_opt_result_maybenull_ PCHAR          *Attribute
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
+         PLDAP           ExternalHandle,
+         PLDAPControlW  *Control,
+         ULONG          *Result,
+@@ -2610,14 +2611,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
+         PLDAP           ExternalHandle,
+         PLDAPSortKeyA  *SortKeys,
+         UCHAR           IsCritical,
+         PLDAPControlA  *Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
+         PLDAP           ExternalHandle,
+         PLDAPControlA  *Control,
+         ULONG          *Result,
+@@ -2634,14 +2635,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
+ //  ldap_create_sort_control defined above.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
+         PLDAP           ExternalHandle,
+         PLDAPSortKeyW  *SortKeys,
+         PLDAPControlW  Control,
+         BOOLEAN Criticality
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
+         PLDAP           ExternalHandle,
+         PLDAPSortKeyA  *SortKeys,
+         PLDAPControlA  Control,
+@@ -2668,7 +2669,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_control (
+ //  ldap_create_page_control.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
+         PLDAP           ExternalHandle,
+         ULONG           PageSize,
+         struct berval  *Cookie,
+@@ -2676,7 +2677,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
+         PLDAPControlW  *Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
+         PLDAP           ExternalHandle,
+         ULONG           PageSize,
+         struct berval  *Cookie,
+@@ -2684,14 +2685,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
+         PLDAPControlA  *Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
+         PLDAP           ExternalHandle,
+         PLDAPControlW  *ServerControls,
+         ULONG          *TotalCount,
+         struct berval  **Cookie     // Use ber_bvfree to free
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
+         PLDAP           ExternalHandle,
+         PLDAPControlA  *ServerControls,
+         ULONG          *TotalCount,
+@@ -2705,7 +2706,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
+         PLDAP           ExternalHandle,
+         ULONG           PageSize,
+         struct berval  *Cookie,
+@@ -2713,7 +2714,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
+         PLDAPControlA  *Control
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
+         PLDAP           ExternalHandle,
+         PLDAPControlA  *ServerControls,
+         ULONG          *TotalCount,
+@@ -2756,7 +2757,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
+ #define LDAP_PAGED_RESULT_OID_STRING "1.2.840.113556.1.4.319"
+ #define LDAP_PAGED_RESULT_OID_STRING_W L"1.2.840.113556.1.4.319"
+ 
+-WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
+         PLDAP           ExternalHandle,
+         _In_ const PWSTR    DistinguishedName,
+         ULONG           ScopeOfSearch,
+@@ -2770,7 +2771,7 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
+         PLDAPSortKeyW  *SortKeys
+     );
+ 
+-WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
+         PLDAP           ExternalHandle,
+         _In_ const PSTR     DistinguishedName,
+         ULONG           ScopeOfSearch,
+@@ -2790,7 +2791,7 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
+ 
+ #else
+ 
+-WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
+         PLDAP           ExternalHandle,
+         const PSTR      DistinguishedName,
+         ULONG           ScopeOfSearch,
+@@ -2806,14 +2807,14 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
+ 
+ #endif
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_get_next_page(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_next_page(
+         PLDAP           ExternalHandle,
+         PLDAPSearch     SearchHandle,
+         ULONG           PageSize,
+         ULONG          *MessageNumber
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_get_next_page_s(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_next_page_s(
+         PLDAP           ExternalHandle,
+         PLDAPSearch     SearchHandle,
+         struct l_timeval  *timeout,
+@@ -2822,14 +2823,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_get_next_page_s(
+         LDAPMessage     **Results
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_get_paged_count(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_get_paged_count(
+         PLDAP           ExternalHandle,
+         PLDAPSearch     SearchBlock,
+         ULONG          *TotalCount,
+         PLDAPMessage    Results
+     );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_search_abandon_page(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_search_abandon_page(
+         PLDAP           ExternalHandle,
+         PLDAPSearch     SearchBlock
+     );
+@@ -2872,21 +2873,21 @@ typedef struct ldapvlvinfo {
+ } LDAPVLVInfo, *PLDAPVLVInfo;
+ 
+ 
+-WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
+         PLDAP             ExternalHandle,
+         PLDAPVLVInfo      VlvInfo,
+         UCHAR             IsCritical,
+         PLDAPControlW    *Control
+     );
+ 
+-WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
+         PLDAP             ExternalHandle,
+         PLDAPVLVInfo      VlvInfo,
+         UCHAR             IsCritical,
+         PLDAPControlA    *Control
+     );
+ 
+-WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
+         PLDAP            ExternalHandle,
+         PLDAPControlW   *Control,
+         PULONG           TargetPos,
+@@ -2895,7 +2896,7 @@ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
+         PINT             ErrCode
+     );
+ 
+-WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
+         PLDAP             ExternalHandle,
+         PLDAPControlA    *Control,
+         PULONG            TargetPos,
+@@ -2940,7 +2941,7 @@ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
+ // The operation has a default timeout of about 30 seconds.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
+     IN   PLDAP          ExternalHandle,
+     OUT  PULONG         ServerReturnValue,
+     OUT  LDAPMessage    **result,
+@@ -2949,7 +2950,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
+ );
+ 
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
+     IN   PLDAP          ExternalHandle,
+     OUT  PULONG         ServerReturnValue,
+     OUT  LDAPMessage    **result,
+@@ -2970,7 +2971,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
+ // The operation has a default timeout of about 30 seconds.
+ //
+ 
+-WINLDAPAPI BOOLEAN LDAPAPI ldap_stop_tls_s (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI BOOLEAN LDAPAPI ldap_stop_tls_s (
+     IN  PLDAP ExternalHandle
+  );
+ 
+@@ -3009,33 +3010,33 @@ WINLDAPAPI BOOLEAN LDAPAPI ldap_stop_tls_s (
+ //  freed so should not be freed explicitly.
+ //
+ 
+-WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_reference( LDAP *ld, LDAPMessage *res );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_reference( LDAP *ld, LDAPMessage *res );
+ 
+ //
+ //  Return the next entry of a message.  It is freed when the message is
+ //  freed so should not be freed explicitly.
+ //
+ 
+-WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_reference( LDAP *ld, LDAPMessage *entry );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_reference( LDAP *ld, LDAPMessage *entry );
+ 
+ //
+ //  Count the number of subordinate references returned by the server in a
+ //  response to a search request.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_count_references( LDAP *ld, LDAPMessage *res );
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_count_references( LDAP *ld, LDAPMessage *res );
+ 
+ //
+ //  We return the list of subordinate referrals in a search response message.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceW (
+         LDAP *Connection,
+         LDAPMessage *ResultMessage,
+         _Outptr_ PWCHAR **Referrals                   // free with ldap_value_freeW
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
+         LDAP *Connection,
+         LDAPMessage *ResultMessage,
+         _Outptr_ PCHAR **Referrals                   // free with ldap_value_freeA
+@@ -3047,7 +3048,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
+         LDAP *Connection,
+         LDAPMessage *ResultMessage,
+         PCHAR **Referrals                   // free with ldap_value_free
+@@ -3066,7 +3067,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
+ //  These are thread safe.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
+         LDAP *ld,
+         _In_ const PWSTR Oid,
+         struct berval   *Data,
+@@ -3075,7 +3076,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
+         LDAP *ld,
+         _In_ const PSTR Oid,
+         struct berval   *Data,
+@@ -3084,7 +3085,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
+         ULONG           *MessageNumber
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
+         LDAP            *ExternalHandle,
+         _In_ PSTR           Oid,
+         struct berval   *Data,
+@@ -3094,7 +3095,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
+         struct berval   **ReturnedData
+         );
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
+         LDAP            *ExternalHandle,
+         _In_ PWSTR          Oid,
+         struct berval   *Data,
+@@ -3113,7 +3114,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
+ 
+ #else
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
+         LDAP *ld,
+         const PSTR Oid,
+         struct berval   *Data,
+@@ -3126,7 +3127,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
+ 
+ #endif
+ 
+-WINLDAPAPI ULONG LDAPAPI ldap_close_extended_op(
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI ULONG LDAPAPI ldap_close_extended_op(
+         LDAP    *ld,
+         ULONG   MessageNumber
+         );
+@@ -3231,7 +3232,7 @@ WINLDAPAPI ULONG LDAPAPI LdapGetLastError( VOID );
+ //  Translate from LdapError to closest Win32 error code.
+ //
+ 
+-WINLDAPAPI ULONG LDAPAPI LdapMapErrorToWin32( ULONG LdapError );
++_Windows_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) WINLDAPAPI ULONG LDAPAPI LdapMapErrorToWin32( _Win32_AssociatedEnum_(LDAP_RETCODE) ULONG LdapError );
+ 
+ //
+ // This is an arrangement for specifying client certificates while establishing
+@@ -3289,7 +3290,7 @@ typedef BOOLEAN (_cdecl VERIFYSERVERCERT) (
+ //  came from.  It can return NULL if the connection has already been freed.
+ //
+ 
+-WINLDAPAPI LDAP * LDAPAPI ldap_conn_from_msg (
++_Windows_SupportedOS_WindowsVista_ WINLDAPAPI LDAP * LDAPAPI ldap_conn_from_msg (
+     LDAP *PrimaryConn,
+     LDAPMessage *res
+     );

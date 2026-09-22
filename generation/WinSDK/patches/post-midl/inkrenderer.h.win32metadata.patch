@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h b/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h
-index 49dfcd5b4b..660cda5879 100644
+index 49dfcd5b4b..c278842107 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/inkrenderer.h
 @@ -19,6 +19,7 @@
@@ -10,11 +10,16 @@ index 49dfcd5b4b..660cda5879 100644
  #include "rpcndr.h"
  
  #ifndef __RPCNDR_H_VERSION__
-@@ -118,6 +119,7 @@ EXTERN_C const IID IID_IInkD2DRenderer;
+@@ -114,10 +115,11 @@ EXTERN_C const IID IID_IInkD2DRenderer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("407fb1de-f85a-4150-97cf-b7fb274fb4f8")
++    MIDL_INTERFACE("407fb1de-f85a-4150-97cf-b7fb274fb4f8") _Windows_SupportedOS_10240_ 
      IInkD2DRenderer : public IUnknown
      {
      public:
-+        _Windows_SupportedOS_10240_
++        
          virtual HRESULT STDMETHODCALLTYPE Draw( 
              /* [annotation][in] */ 
              _In_  IUnknown *pD2D1DeviceContext,

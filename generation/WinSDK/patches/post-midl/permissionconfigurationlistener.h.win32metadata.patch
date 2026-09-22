@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurationListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurationListener.h
+index 077a23fd57..a5bd6e32d3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurationListener.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurationListener.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines the alljoyn_permissionconfigurationlistener and related functions that provides
+@@ -122,14 +123,14 @@ typedef struct {
+  *
+  * @return Handle to newly allocated alljoyn_permissionconfigurationlistener.
+  */
+-extern AJ_API alljoyn_permissionconfigurationlistener AJ_CALL alljoyn_permissionconfigurationlistener_create(const alljoyn_permissionconfigurationlistener_callbacks* callbacks, const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_permissionconfigurationlistener AJ_CALL alljoyn_permissionconfigurationlistener_create(const alljoyn_permissionconfigurationlistener_callbacks* callbacks, const void* context);
+ 
+ /**
+  * Destroy an alljoyn_permissionconfigurationlistener.
+  *
+  * @param listener alljoyn_permissionconfigurationlistener to destroy.
+  */
+-extern AJ_API void AJ_CALL alljoyn_permissionconfigurationlistener_destroy(alljoyn_permissionconfigurationlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_permissionconfigurationlistener_destroy(alljoyn_permissionconfigurationlistener listener);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

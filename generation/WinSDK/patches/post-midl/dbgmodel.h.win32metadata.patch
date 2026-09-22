@@ -1,0 +1,274 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h
+index a9af8120a5..042172ac6e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //*******************************************************************************
+ //
+ // Debugger Data Model
+@@ -1304,7 +1305,7 @@ DECLARE_INTERFACE_(IModelObject, IUnknown)
+     //
+     STDMETHOD(GetIntrinsicValueAs)(
+         THIS_
+-        _In_ VARTYPE vt,
++        _Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt,
+         _Out_ VARIANT* intrinsicData
+         ) PURE;
+ 
+@@ -3007,7 +3008,7 @@ DECLARE_INTERFACE_(IModelKeyReference, IUnknown)
+     //
+     STDMETHOD(GetKeyName)(
+         THIS_
+-        _Out_ BSTR* keyName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* keyName
+         ) PURE;
+ 
+     // GetOriginalObject():
+@@ -3272,7 +3273,7 @@ DECLARE_INTERFACE_(IKeyEnumerator, IUnknown)
+     // When the enumerator hits the end of the sequence, E_BOUNDS will be returned.
+     //
+     STDMETHOD(GetNext)(
+-        _Out_ BSTR* key,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* key,
+         _COM_Errorptr_opt_ IModelObject** value,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+@@ -3334,7 +3335,7 @@ DECLARE_INTERFACE_(IRawEnumerator, IUnknown)
+     // When the enumerator hits the end of the sequence, E_BOUNDS will be returned.
+     //
+     STDMETHOD(GetNext)(
+-        _Out_opt_ BSTR* name,
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR* name,
+         _Out_opt_ SymbolKind *kind,
+         _COM_Errorptr_opt_ IModelObject** value
+         ) PURE;
+@@ -3384,7 +3385,7 @@ DECLARE_INTERFACE_(INamedModelsEnumerator, IUnknown)
+     //
+     STDMETHOD(GetNext)(
+         THIS_
+-        _Out_ BSTR* pModelName,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* pModelName,
+         _COM_Outptr_ IModelObject** ppModel
+         ) PURE;
+ };
+@@ -3458,7 +3459,7 @@ DECLARE_INTERFACE_(IDataModelConcept, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR* modelName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* modelName
+         ) PURE;
+ 
+ };
+@@ -3505,7 +3506,7 @@ DECLARE_INTERFACE_(IStringDisplayableConcept, IUnknown)
+         THIS_
+         _In_ IModelObject* contextObject,
+         _In_opt_ IKeyStore* metadata,
+-        _Out_ BSTR* displayString
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* displayString
+         ) PURE;
+ };
+ 
+@@ -4443,7 +4444,7 @@ DECLARE_INTERFACE_(IDebugHostSymbol, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR* symbolName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* symbolName
+         ) PURE;
+ 
+     // GetType():
+@@ -4590,7 +4591,7 @@ DECLARE_INTERFACE_(IDebugHostSymbolSubstitutionEnumerator, IDebugHostSymbolEnume
+     STDMETHOD(GetNextWithSubstitutionText)(
+         THIS_
+         _COM_Outptr_opt_result_maybenull_ IDebugHostSymbol** symbol,
+-        _Out_opt_ BSTR *symbolText
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR *symbolText
+         ) PURE;
+ };
+ 
+@@ -4667,7 +4668,7 @@ DECLARE_INTERFACE_(IDebugHostModule, IDebugHostSymbol)
+     STDMETHOD(GetImageName)(
+         THIS_
+         _In_ bool allowPath,
+-        _Out_ BSTR* imageName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* imageName
+         ) PURE;
+ 
+     // GetBaseLocation():
+@@ -5281,7 +5282,7 @@ DECLARE_INTERFACE_(IDebugHostModule5, IDebugHostModule4)
+     STDMETHOD(GetPrimaryCompilerInformation)(
+         THIS_
+         _Out_ KnownCompiler *pCompilerId,
+-        _Out_opt_ BSTR *pPrimaryCompilerString
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR *pPrimaryCompilerString
+         ) PURE;
+ };
+ 
+@@ -8297,7 +8298,7 @@ DECLARE_INTERFACE_(IDebugHostSymbols2, IDebugHostSymbols)
+         THIS_
+         _In_ IDebugHostSymbol *pSymbol,
+         _In_ ULONG flags,
+-        _Out_ BSTR *pDemangledSymbolName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pDemangledSymbolName
+         ) PURE;
+ };
+ 
+@@ -8403,7 +8404,7 @@ DECLARE_INTERFACE_(IDebugHostMemory, IUnknown)
+         _In_ IDebugHostContext* context,
+         _In_ Location location,
+         _In_ bool verbose,
+-        _Out_ BSTR* locationName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* locationName
+         ) PURE;
+ };
+ 
+@@ -9362,7 +9363,7 @@ DECLARE_INTERFACE_(IDebugHostSymbol3, IDebugHostSymbol2)
+     STDMETHOD(GetCompilerInformation)(
+         THIS_
+         _Out_ KnownCompiler *pCompilerId,
+-        _Out_opt_ BSTR *pCompilerString
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR *pCompilerString
+         ) PURE;
+ 
+ };
+@@ -9547,7 +9548,7 @@ DECLARE_INTERFACE_(IDataModelScriptTemplate, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR *templateName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *templateName
+         ) PURE;
+ 
+     // GetDescription():
+@@ -9557,7 +9558,7 @@ DECLARE_INTERFACE_(IDataModelScriptTemplate, IUnknown)
+     //
+     STDMETHOD(GetDescription)(
+         THIS_
+-        _Out_ BSTR *templateDescription
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *templateDescription
+         ) PURE;
+ 
+     // GetContent():
+@@ -9607,7 +9608,7 @@ DECLARE_INTERFACE_(IDataModelScript, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR *scriptName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *scriptName
+         ) PURE;
+ 
+     // Rename():
+@@ -9766,7 +9767,7 @@ DECLARE_INTERFACE_(IDataModelScript2, IDataModelScript)
+     //
+     STDMETHOD(GetScriptFullFilePathName)(
+         THIS_
+-        _Out_ BSTR *scriptFullPathName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *scriptFullPathName
+         ) PURE;
+ 
+     // SetScriptFullFilePathName():
+@@ -9864,7 +9865,7 @@ DECLARE_INTERFACE_(IDataModelScriptProvider, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR *name
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *name
+         ) PURE;
+ 
+     // GetExtension():
+@@ -9875,7 +9876,7 @@ DECLARE_INTERFACE_(IDataModelScriptProvider, IUnknown)
+     //
+     STDMETHOD(GetExtension)(
+         THIS_
+-        _Out_ BSTR *extension
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *extension
+         ) PURE;
+ 
+     // CreateScript():
+@@ -11078,7 +11079,7 @@ DECLARE_INTERFACE_(IDataModelScriptDebugVariableSetEnumerator, IUnknown)
+     //
+     STDMETHOD(GetNext)(
+         THIS_
+-        _Out_ BSTR *variableName,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *variableName,
+         _COM_Outptr_opt_ IModelObject **variableValue,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore **variableMetadata
+         ) PURE;
+@@ -11119,7 +11120,7 @@ DECLARE_INTERFACE_(IDataModelScriptDebugStackFrame, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR *name
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *name
+         ) PURE;
+ 
+     // GetPosition():
+@@ -11138,7 +11139,7 @@ DECLARE_INTERFACE_(IDataModelScriptDebugStackFrame, IUnknown)
+         THIS_
+         _Out_ ScriptDebugPosition *position,
+         _Out_opt_ ScriptDebugPosition *positionSpanEnd,
+-        _Out_opt_ BSTR *lineText
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR *lineText
+         ) PURE;
+ 
+     // IsTransitionPoint():
+@@ -11320,7 +11321,7 @@ DECLARE_INTERFACE_(IDataModelScriptDebugBreakpoint, IUnknown)
+     STDMETHOD(GetPosition)(
+         _Out_ ScriptDebugPosition *position,
+         _Out_opt_ ScriptDebugPosition *positionSpanEnd,
+-        _Out_opt_ BSTR *lineText
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR *lineText
+         ) PURE;
+ 
+ };
+@@ -11425,7 +11426,7 @@ DECLARE_INTERFACE_(IDataModelScriptDebug, IUnknown)
+         THIS_
+         _Out_ ScriptDebugPosition *currentPosition,
+         _Out_opt_ ScriptDebugPosition *positionSpanEnd,
+-        _Out_opt_ BSTR *lineText
++        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR *lineText
+         ) PURE;
+ 
+     // GetStack():
+@@ -11735,9 +11736,9 @@ DECLARE_INTERFACE_(IActionEnumerator, IUnknown)
+     //
+     STDMETHOD(GetNext)(
+         THIS_
+-        _Out_ BSTR *keyName,
+-        _Out_ BSTR *actionName,
+-        _Out_ BSTR *actionDescription,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *keyName,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *actionName,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *actionDescription,
+         _Out_ bool *actionIsDefault,
+         _COM_Outptr_opt_ IModelObject **actionMethod,
+         _COM_Outptr_opt_ IKeyStore **metadta
+@@ -11922,7 +11923,7 @@ DECLARE_INTERFACE_(IDeconstructableConcept, IUnknown)
+     STDMETHOD(GetConstructableModelName)(
+         THIS_
+         _In_ IModelObject* contextObject,
+-        _Out_ BSTR* constructableModelName
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* constructableModelName
+         ) PURE;
+ 
+     // GetConstructorArgumentCount():
+@@ -12165,7 +12166,7 @@ DECLARE_INTERFACE_(IDebugHostFunctionLocalDetails, IUnknown)
+     //
+     STDMETHOD(GetName)(
+         THIS_
+-        _Out_ BSTR* name
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* name
+         ) PURE;
+ 
+     // GetType():
+@@ -12426,7 +12427,7 @@ DECLARE_INTERFACE_(IDebugHostFunctionIntrospection, IUnknown)
+     STDMETHOD(FindSourceLocationByRVA)(
+         THIS_
+         _In_ ULONG64 rva,
+-        _Out_ BSTR* sourceFile,
++        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* sourceFile,
+         _Out_ ULONG64* sourceLine
+         ) PURE;
+ };

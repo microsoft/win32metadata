@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
-index 9179f744d9a56df716cc25a90f3835737bde6e00..1a274e6f3f0b42339709d0c0aee64a93c8d7ca41 100644
+index 9179f744d9..24b6154c04 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
 @@ -1,6 +1,7 @@
@@ -10,9 +10,15 @@ index 9179f744d9a56df716cc25a90f3835737bde6e00..1a274e6f3f0b42339709d0c0aee64a93
  
  #include <diagnosticdataquerytypes.h>
  
-@@ -20,13 +21,16 @@ STDAPI DdqCreateSession(
+@@ -16,21 +17,24 @@ extern "C" {
+ #endif // __cplusplus
+ 
+ // Caller is expected to destroy hSession with DdqCloseSession
+-STDAPI DdqCreateSession(
++_Windows_SupportedOS_19041_ STDAPI DdqCreateSession(
      _In_ DdqAccessLevel accessLevel,
-     _Out_ HDIAGNOSTIC_DATA_QUERY_SESSION* hSession);
+-    _Out_ HDIAGNOSTIC_DATA_QUERY_SESSION* hSession);
++    _Win32_RAIIFree_(DdqCloseSession, -1, 0) _Out_ HDIAGNOSTIC_DATA_QUERY_SESSION* hSession);
  
 +_Windows_SupportedOS_19041_
  STDAPI DdqCloseSession(
@@ -26,4 +32,197 @@ index 9179f744d9a56df716cc25a90f3835737bde6e00..1a274e6f3f0b42339709d0c0aee64a93
 +_Windows_SupportedOS_19041_
  STDAPI DdqGetDiagnosticDataAccessLevelAllowed(
      _Out_ DdqAccessLevel* accessLevel);
+ 
+-STDAPI DdqGetDiagnosticRecordStats(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordStats(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ DIAGNOSTIC_DATA_SEARCH_CRITERIA const* searchCriteria,
+     _Out_ UINT32* recordCount,
+@@ -38,65 +42,65 @@ STDAPI DdqGetDiagnosticRecordStats(
+     _Out_ INT64* maxRowId);
+ 
+ // Caller is expected to free payload with CoTaskMemFree()
+-STDAPI DdqGetDiagnosticRecordPayload(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordPayload(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ INT64 rowId,
+     _Out_ PCWSTR* payload);
+ 
+ // Invoke DdqFreeDiagnosticRecordLocaleTags() to free tagDescription
+-STDAPI DdqGetDiagnosticRecordLocaleTags(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordLocaleTags(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ PCWSTR locale,
+-    _Out_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION* hTagDescription);
++    _Win32_RAIIFree_(DdqFreeDiagnosticRecordLocaleTags, -1, 0) _Out_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION* hTagDescription);
+ 
+-STDAPI DdqFreeDiagnosticRecordLocaleTags(
++_Windows_SupportedOS_19041_ STDAPI DdqFreeDiagnosticRecordLocaleTags(
+     _In_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION hTagDescription);
+ 
+-STDAPI DdqGetDiagnosticRecordLocaleTagAtIndex(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordLocaleTagAtIndex(
+     _In_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION hTagDescription,
+     _In_ UINT32 index,
+     _Out_ DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION* tagDescription);
+ 
+-STDAPI DdqGetDiagnosticRecordLocaleTagCount(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordLocaleTagCount(
+     _In_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION hTagDescription,
+     _Out_ UINT32* tagDescriptionCount);
+ 
+ // Invoke DdqFreeDiagnosticRecordProducers() to free producerDescription
+-STDAPI DdqGetDiagnosticRecordProducers(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordProducers(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+-    _Out_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION* hProducerDescription);
++    _Win32_RAIIFree_(DdqFreeDiagnosticRecordProducers, -1, 0) _Out_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION* hProducerDescription);
+ 
+-STDAPI DdqFreeDiagnosticRecordProducers(
++_Windows_SupportedOS_19041_ STDAPI DdqFreeDiagnosticRecordProducers(
+     _In_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION hProducerDescription);
+ 
+-STDAPI DdqGetDiagnosticRecordProducerAtIndex(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordProducerAtIndex(
+     _In_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION hProducerDescription,
+     _In_ UINT32 index,
+     _Out_ DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION* producerDescription);
+ 
+-STDAPI DdqGetDiagnosticRecordProducerCount(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordProducerCount(
+     _In_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION hProducerDescription,
+     _Out_ UINT32* producerDescriptionCount);
+ 
+ // Invoke DdqFreeDiagnosticRecordProducerCategories() to free categoryDescription
+-STDAPI DdqGetDiagnosticRecordProducerCategories(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordProducerCategories(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ PCWSTR producerName,
+-    _Out_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION* hCategoryDescription);
++    _Win32_RAIIFree_(DdqFreeDiagnosticRecordProducerCategories, -1, 0) _Out_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION* hCategoryDescription);
+ 
+-STDAPI DdqFreeDiagnosticRecordProducerCategories(
++_Windows_SupportedOS_19041_ STDAPI DdqFreeDiagnosticRecordProducerCategories(
+     _In_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION hCategoryDescription);
+ 
+-STDAPI DdqGetDiagnosticRecordCategoryAtIndex(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordCategoryAtIndex(
+     _In_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION hCategoryDescription,
+     _In_ UINT32 index,
+     _Out_ DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION* categoryDescription);
+ 
+-STDAPI DdqGetDiagnosticRecordCategoryCount(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordCategoryCount(
+     _In_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION hCategoryDescription,
+     _Out_ UINT32* categoryDescriptionCount);
+ 
+-STDAPI DdqIsDiagnosticRecordSampledIn(
++_Windows_SupportedOS_19041_ STDAPI DdqIsDiagnosticRecordSampledIn(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ const GUID* providerGroup,
+     _In_opt_ const GUID* providerId,
+@@ -108,60 +112,60 @@ STDAPI DdqIsDiagnosticRecordSampledIn(
+     _Out_ BOOL* isSampledIn);
+ 
+ // Invoke DdqFreeDiagnosticRecordPage() to free record
+-STDAPI DdqGetDiagnosticRecordPage(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordPage(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ DIAGNOSTIC_DATA_SEARCH_CRITERIA* const searchCriteria,
+     _In_ UINT32 offset,
+     _In_ UINT32 pageRecordCount,
+     _In_ INT64 baseRowId,
+-    _Out_ HDIAGNOSTIC_RECORD* hRecord);
++    _Win32_RAIIFree_(DdqFreeDiagnosticRecordPage, -1, 0) _Out_ HDIAGNOSTIC_RECORD* hRecord);
+ 
+-STDAPI DdqFreeDiagnosticRecordPage(
++_Windows_SupportedOS_19041_ STDAPI DdqFreeDiagnosticRecordPage(
+     _In_ HDIAGNOSTIC_RECORD hRecord);
+ 
+-STDAPI DdqGetDiagnosticRecordAtIndex(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordAtIndex(
+     _In_ HDIAGNOSTIC_RECORD hRecord,
+     _In_ UINT32 index,
+     _Out_ DIAGNOSTIC_DATA_RECORD* record);
+ 
+-STDAPI DdqGetDiagnosticRecordCount(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordCount(
+     _In_ HDIAGNOSTIC_RECORD hRecord,
+     _Out_ UINT32* recordCount);
+ 
+-STDAPI DdqGetDiagnosticReportStoreReportCount(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticReportStoreReportCount(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ UINT32 reportStoreType,
+     _Out_ UINT32* reportCount);
+ 
+-STDAPI DdqCancelDiagnosticRecordOperation(
++_Windows_SupportedOS_19041_ STDAPI DdqCancelDiagnosticRecordOperation(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession);
+ 
+ // Invoke DdqFreeDiagnosticReport() to free report
+-STDAPI DdqGetDiagnosticReport(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticReport(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ UINT32 reportStoreType,
+-    _Out_ HDIAGNOSTIC_REPORT* hReport);
++    _Win32_RAIIFree_(DdqFreeDiagnosticReport, -1, 0) _Out_ HDIAGNOSTIC_REPORT* hReport);
+ 
+-STDAPI DdqFreeDiagnosticReport(
++_Windows_SupportedOS_19041_ STDAPI DdqFreeDiagnosticReport(
+     _In_ HDIAGNOSTIC_REPORT hReport);
+ 
+-STDAPI DdqGetDiagnosticReportAtIndex(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticReportAtIndex(
+     _In_ HDIAGNOSTIC_REPORT hReport,
+     _In_ UINT32 index,
+     _Out_ DIAGNOSTIC_REPORT_DATA* report);
+ 
+-STDAPI DdqGetDiagnosticReportCount(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticReportCount(
+     _In_ HDIAGNOSTIC_REPORT hReport,
+     _Out_ UINT32* reportCount);
+ 
+-STDAPI DdqExtractDiagnosticReport(
++_Windows_SupportedOS_19041_ STDAPI DdqExtractDiagnosticReport(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ UINT32 reportStoreType,
+     _In_ PCWSTR reportKey,
+     _In_ PCWSTR destinationPath);
+ 
+ // Caller is expected to free tagStats with CoTaskMemFree()
+-STDAPI DdqGetDiagnosticRecordTagDistribution(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordTagDistribution(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_reads_(producerNameCount) PCWSTR* producerNames,
+     _In_ UINT32 producerNameCount,
+@@ -169,7 +173,7 @@ STDAPI DdqGetDiagnosticRecordTagDistribution(
+     _Out_ UINT32* statCount);
+ 
+ // Caller is expected to free binaryStats with CoTaskMemFree()
+-STDAPI DdqGetDiagnosticRecordBinaryDistribution(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordBinaryDistribution(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_reads_(producerNameCount) PCWSTR* producerNames,
+     _In_ UINT32 producerNameCount,
+@@ -177,17 +181,17 @@ STDAPI DdqGetDiagnosticRecordBinaryDistribution(
+     _Outptr_result_buffer_all_(*statCount) DIAGNOSTIC_DATA_EVENT_BINARY_STATS** binaryStats,
+     _Out_ UINT32* statCount);
+ 
+-STDAPI DdqGetDiagnosticRecordSummary(
++_Windows_SupportedOS_19041_ STDAPI DdqGetDiagnosticRecordSummary(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_reads_(producerNameCount) const PCWSTR* producerNames,
+     _In_ UINT32 producerNameCount,
+     _Out_ DIAGNOSTIC_DATA_GENERAL_STATS* generalStats);
+ 
+-STDAPI DdqSetTranscriptConfiguration(
++_Windows_SupportedOS_19041_ STDAPI DdqSetTranscriptConfiguration(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _In_ const DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION* desiredConfig);
+ 
+-STDAPI DdqGetTranscriptConfiguration(
++_Windows_SupportedOS_19041_ STDAPI DdqGetTranscriptConfiguration(
+     _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
+     _Out_ DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION* currentConfig);
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h
-index 2df437fc5cd93396b447b71a7aee925b38b5e318..8dcfed6a0ae2dfd91095ba9b0dc2f7bf25d2c0df 100644
+index 2df437fc5c..585f454a5d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h
 @@ -32,6 +32,7 @@ Notes:
@@ -14,8 +14,8 @@ index 2df437fc5cd93396b447b71a7aee925b38b5e318..8dcfed6a0ae2dfd91095ba9b0dc2f7bf
  // Function Prototypes
  //
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetAlertRaise(
      _In_ LPCWSTR AlertType,
@@ -23,8 +23,8 @@ index 2df437fc5cd93396b447b71a7aee925b38b5e318..8dcfed6a0ae2dfd91095ba9b0dc2f7bf
      _In_ DWORD   BufferSize
      );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  NET_API_STATUS NET_API_FUNCTION
  NetAlertRaiseEx(
      _In_ LPCWSTR AlertType,
@@ -33,7 +33,7 @@ index 2df437fc5cd93396b447b71a7aee925b38b5e318..8dcfed6a0ae2dfd91095ba9b0dc2f7bf
  //
  
 -typedef struct _STD_ALERT {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _STD_ALERT {
++typedef struct   _STD_ALERT {
      DWORD  alrt_timestamp;
      WCHAR  alrt_eventname[EVLEN + 1];
      WCHAR  alrt_servicename[SNLEN + 1];

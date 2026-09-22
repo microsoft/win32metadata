@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
+index c3e03f435d..6237bb1644 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
 @@ -463,6 +463,7 @@ extern "C"{
@@ -9,12 +10,254 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h b/generation/Win
  #if _MSC_VER >= 1200
  #pragma warning(push)
  #ifndef _MSC_EXTENSIONS
+@@ -537,7 +538,7 @@ EXTERN_C const IID IID_IAsyncBindCtx;
+ STDAPI CreateURLMoniker(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk);             
+ STDAPI CreateURLMonikerEx(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             
+ STDAPI GetClassURL(_In_ LPCWSTR szURL, _Out_ CLSID *pClsID);                                           
+-STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       
++_Windows_SupportedOS_Windows2000_ STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       
+                                 _In_opt_ IEnumFORMATETC *pEFetc, _Outptr_ IBindCtx **ppBC);                   
+ #if (_WIN32_IE >= _WIN32_IE_IE70)
+ STDAPI CreateURLMonikerEx2(_In_opt_ LPMONIKER pMkCtx, _In_ IUri* pUri, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             
+@@ -554,7 +555,7 @@ STDAPI IsValidURL(_In_opt_ LPBC pBC, _In_ LPCWSTR szURL, DWORD dwReserved);
+ STDAPI CoGetClassObjectFromURL( _In_ REFCLSID rCLASSID,
+             _In_ LPCWSTR szCODE, DWORD dwFileVersionMS, 
+             DWORD dwFileVersionLS, _In_ LPCWSTR szTYPE,
+-            _In_ LPBINDCTX pBindCtx, DWORD dwClsContext,
++            _In_ LPBINDCTX pBindCtx, _Win32_AssociatedEnum_(CLSCTX) DWORD dwClsContext,
+             _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);
+ STDAPI IEInstallScope(_Out_ LPDWORD pdwScope);
+ STDAPI FaultInIEFeature( HWND hWnd,
+@@ -577,7 +578,7 @@ STDAPI CreateURLBinding(LPCWSTR lpszUrl, _In_ IBindCtx *pbc, _Inout_ IBinding **
+  
+ STDAPI RegisterMediaTypes(_In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _Out_writes_(ctypes) CLIPFORMAT* rgcfTypes);            
+ STDAPI FindMediaType(_In_ LPCSTR rgszTypes, _Out_ CLIPFORMAT* rgcfTypes);                                       
+-STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); 
++_Windows_SupportedOS_Windows2000_ STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); 
+ STDAPI RegisterFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc, DWORD reserved);          
+ STDAPI RevokeFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc);                            
+ STDAPI RegisterMediaTypeClass(_In_ LPBC pBC, _In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _In_reads_(ctypes)  CLSID *rgclsID, DWORD reserved);    
+@@ -809,7 +810,7 @@ EXTERN_C const IID IID_IPersistMoniker;
+             /* [annotation][out] */ 
+             _Out_  CLSID *pClassID) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Load( 
+             /* [annotation][in] */ 
+@@ -3244,7 +3245,7 @@ EXTERN_C const IID IID_IUri;
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPropertyBSTR( 
+             /* [range][in] */ Uri_PROPERTY uriProp,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrProperty,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrProperty,
+             /* [annotation][in] */ 
+             _In_  DWORD dwFlags) = 0;
+         
+@@ -3269,63 +3270,63 @@ EXTERN_C const IID IID_IUri;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAbsoluteUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrAbsoluteUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAbsoluteUri) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAuthority( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrAuthority) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAuthority) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDisplayUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDisplayString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDisplayString) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDomain( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDomain) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDomain) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetExtension( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrExtension) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrExtension) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFragment( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrFragment) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrFragment) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHost( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrHost) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrHost) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPassword( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrPassword) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrPassword) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPath( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrPath) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPathAndQuery( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrPathAndQuery) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrPathAndQuery) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetQuery( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrQuery) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrQuery) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRawUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrRawUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrRawUri) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSchemeName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSchemeName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSchemeName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserInfo( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrUserInfo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrUserInfo) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrUserName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrUserName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHostType( 
+             /* [annotation][out] */ 
+@@ -3653,7 +3654,7 @@ EXTERN_C const IID IID_IUri;
+ /* [local] */ 
+ 
+ STDAPI CreateUri(_In_ LPCWSTR pwzURI,
+-                 _In_ DWORD dwFlags,
++                 _Win32_AssociatedEnum_(URI_CREATE_FLAGS) _In_ DWORD dwFlags,
+                  _Reserved_ DWORD_PTR dwReserved,   // must be 0
+                  _Outptr_ IUri** ppURI);
+ 
 @@ -10876,7 +10877,7 @@ typedef struct _tagCODEBASEHOLD
  
  typedef struct _tagCODEBASEHOLD *LPCODEBASEHOLD;
  
 -typedef struct _tagSOFTDISTINFO
-+typedef struct _Windows_SupportedOS_Server2000_ _tagSOFTDISTINFO
++typedef struct  _tagSOFTDISTINFO
      {
      ULONG cbSize;
      DWORD dwFlags;
+@@ -11684,7 +11685,7 @@ EXTERN_C const IID IID_IGetBindHandle;
+             /* [annotation][in] */ 
+             _In_  BINDHANDLETYPES enumRequestedHandle,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *pRetHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pRetHandle) = 0;
+         
+     };
+     
+@@ -12199,6 +12200,99 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("Uri_CREATE_ALLOW_RELATIVE")
++#undef Uri_CREATE_ALLOW_RELATIVE
++#pragma push_macro("Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME")
++#undef Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME
++#pragma push_macro("Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME")
++#undef Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME
++#pragma push_macro("Uri_CREATE_NOFRAG")
++#undef Uri_CREATE_NOFRAG
++#pragma push_macro("Uri_CREATE_NO_CANONICALIZE")
++#undef Uri_CREATE_NO_CANONICALIZE
++#pragma push_macro("Uri_CREATE_CANONICALIZE")
++#undef Uri_CREATE_CANONICALIZE
++#pragma push_macro("Uri_CREATE_FILE_USE_DOS_PATH")
++#undef Uri_CREATE_FILE_USE_DOS_PATH
++#pragma push_macro("Uri_CREATE_DECODE_EXTRA_INFO")
++#undef Uri_CREATE_DECODE_EXTRA_INFO
++#pragma push_macro("Uri_CREATE_NO_DECODE_EXTRA_INFO")
++#undef Uri_CREATE_NO_DECODE_EXTRA_INFO
++#pragma push_macro("Uri_CREATE_CRACK_UNKNOWN_SCHEMES")
++#undef Uri_CREATE_CRACK_UNKNOWN_SCHEMES
++#pragma push_macro("Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES")
++#undef Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES
++#pragma push_macro("Uri_CREATE_PRE_PROCESS_HTML_URI")
++#undef Uri_CREATE_PRE_PROCESS_HTML_URI
++#pragma push_macro("Uri_CREATE_NO_PRE_PROCESS_HTML_URI")
++#undef Uri_CREATE_NO_PRE_PROCESS_HTML_URI
++#pragma push_macro("Uri_CREATE_IE_SETTINGS")
++#undef Uri_CREATE_IE_SETTINGS
++#pragma push_macro("Uri_CREATE_NO_IE_SETTINGS")
++#undef Uri_CREATE_NO_IE_SETTINGS
++#pragma push_macro("Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS")
++#undef Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS
++#pragma push_macro("Uri_CREATE_NORMALIZE_INTL_CHARACTERS")
++#undef Uri_CREATE_NORMALIZE_INTL_CHARACTERS
++#pragma push_macro("Uri_CREATE_CANONICALIZE_ABSOLUTE")
++#undef Uri_CREATE_CANONICALIZE_ABSOLUTE
++enum [[clang::flag_enum]] URI_CREATE_FLAGS : unsigned int
++{
++    Uri_CREATE_ALLOW_RELATIVE = 1U,
++    Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME = 2U,
++    Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME = 4U,
++    Uri_CREATE_NOFRAG = 8U,
++    Uri_CREATE_NO_CANONICALIZE = 16U,
++    Uri_CREATE_CANONICALIZE = 256U,
++    Uri_CREATE_FILE_USE_DOS_PATH = 32U,
++    Uri_CREATE_DECODE_EXTRA_INFO = 64U,
++    Uri_CREATE_NO_DECODE_EXTRA_INFO = 128U,
++    Uri_CREATE_CRACK_UNKNOWN_SCHEMES = 512U,
++    Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES = 1024U,
++    Uri_CREATE_PRE_PROCESS_HTML_URI = 2048U,
++    Uri_CREATE_NO_PRE_PROCESS_HTML_URI = 4096U,
++    Uri_CREATE_IE_SETTINGS = 8192U,
++    Uri_CREATE_NO_IE_SETTINGS = 16384U,
++    Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS = 32768U,
++    Uri_CREATE_NORMALIZE_INTL_CHARACTERS = 65536U,
++    Uri_CREATE_CANONICALIZE_ABSOLUTE = 131072U,
++};
++#pragma pop_macro("Uri_CREATE_CANONICALIZE_ABSOLUTE")
++#pragma pop_macro("Uri_CREATE_NORMALIZE_INTL_CHARACTERS")
++#pragma pop_macro("Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS")
++#pragma pop_macro("Uri_CREATE_NO_IE_SETTINGS")
++#pragma pop_macro("Uri_CREATE_IE_SETTINGS")
++#pragma pop_macro("Uri_CREATE_NO_PRE_PROCESS_HTML_URI")
++#pragma pop_macro("Uri_CREATE_PRE_PROCESS_HTML_URI")
++#pragma pop_macro("Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES")
++#pragma pop_macro("Uri_CREATE_CRACK_UNKNOWN_SCHEMES")
++#pragma pop_macro("Uri_CREATE_NO_DECODE_EXTRA_INFO")
++#pragma pop_macro("Uri_CREATE_DECODE_EXTRA_INFO")
++#pragma pop_macro("Uri_CREATE_FILE_USE_DOS_PATH")
++#pragma pop_macro("Uri_CREATE_CANONICALIZE")
++#pragma pop_macro("Uri_CREATE_NO_CANONICALIZE")
++#pragma pop_macro("Uri_CREATE_NOFRAG")
++#pragma pop_macro("Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME")
++#pragma pop_macro("Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME")
++#pragma pop_macro("Uri_CREATE_ALLOW_RELATIVE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("MAX_ZONE_PATH")
++#undef MAX_ZONE_PATH
++#pragma push_macro("MAX_ZONE_DESCRIPTION")
++#undef MAX_ZONE_DESCRIPTION
++enum INET_ZONE_MANAGER_CONSTANTS : int
++{
++    MAX_ZONE_PATH = 260,
++    MAX_ZONE_DESCRIPTION = 200,
++};
++#pragma pop_macro("MAX_ZONE_DESCRIPTION")
++#pragma pop_macro("MAX_ZONE_PATH")
++#endif
++
+ #endif
+ 
+ 

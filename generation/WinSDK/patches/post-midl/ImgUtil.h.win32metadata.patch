@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h
-index ef01b0b987f11fb1c1ada2726394e4505f0295f9..fd0314b915acb0d1a1604969da793e5be93152d0 100644
+index ef01b0b987..6f253f271e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h
 @@ -120,10 +120,13 @@ extern "C"{
@@ -11,8 +11,8 @@ index ef01b0b987f11fb1c1ada2726394e4505f0295f9..fd0314b915acb0d1a1604969da793e5b
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #include <ddraw.h>
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++
++
  STDAPI CreateMIMEMap( IMapMIMEToCLSID** ppMap );
  STDAPI DecodeImage( IStream* pStream, IMapMIMEToCLSID* pMap,
     IUnknown* pEventSink );
@@ -20,7 +20,7 @@ index ef01b0b987f11fb1c1ada2726394e4505f0295f9..fd0314b915acb0d1a1604969da793e5b
     REFGUID bfidSrc, RGBQUAD * prgbDestColors, RGBQUAD * prgbSrcColors, BYTE * pbDestInvMap,
     LONG x, LONG y, LONG cx, LONG cy, LONG lDestTrans, LONG lSrcTrans);
  STDAPI CreateDDrawSurfaceOnDIB(HBITMAP hbmDib, IDirectDrawSurface **ppSurface);
-+_Windows_SupportedOS_Server2003_
++
  STDAPI DecodeImageEx( IStream* pStream, IMapMIMEToCLSID* pMap,
     IUnknown* pEventSink, LPCWSTR pszMIMETypeParam );
  

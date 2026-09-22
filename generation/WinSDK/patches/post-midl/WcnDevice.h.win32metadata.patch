@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h b/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
-index e1218c7dc6bb950d2fbc3fc76306025ec6ad9cdb..5584e6d7a4349d06fbb671e3bfa5dd00ba9d8e8c 100644
+index e1218c7dc6..081dc87e80 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
 @@ -99,6 +99,7 @@ Abstract:
@@ -15,7 +15,25 @@ index e1218c7dc6bb950d2fbc3fc76306025ec6ad9cdb..5584e6d7a4349d06fbb671e3bfa5dd00
      } 	WCN_SESSION_STATUS;
  
 -typedef struct tagWCN_VENDOR_EXTENSION_SPEC
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VENDOR_EXTENSION_SPEC
++typedef struct   tagWCN_VENDOR_EXTENSION_SPEC
      {
      DWORD VendorId;
      DWORD SubType;
+@@ -158,7 +159,7 @@ EXTERN_C const IID IID_IWCNDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C100BE9C-D33A-4a4b-BF23-BBEF4663D017")
++    MIDL_INTERFACE("C100BE9C-D33A-4a4b-BF23-BBEF4663D017") _Windows_SupportedOS_Windows7_ 
+     IWCNDevice : public IUnknown
+     {
+     public:
+@@ -392,7 +393,7 @@ EXTERN_C const IID IID_IWCNConnectNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C100BE9F-D33A-4a4b-BF23-BBEF4663D017")
++    MIDL_INTERFACE("C100BE9F-D33A-4a4b-BF23-BBEF4663D017") _Windows_SupportedOS_Windows7_ 
+     IWCNConnectNotify : public IUnknown
+     {
+     public:

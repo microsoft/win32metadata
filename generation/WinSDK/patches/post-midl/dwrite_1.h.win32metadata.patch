@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_1.h
+index 727b009a38..5f1113518f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_1.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+--------------------------------------------------------------------------
+ //
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -1008,9 +1009,9 @@ struct DWRITE_JUSTIFICATION_OPPORTUNITY
+ };
+ 
+ 
+-interface IDWriteTextAnalysisSource1;
+-interface IDWriteTextAnalysisSink1;
+-interface IDWriteRenderingParams1;
++interface _Windows_SupportedOS_Windows8_  IDWriteTextAnalysisSource1;
++interface _Windows_SupportedOS_Windows8_  IDWriteTextAnalysisSink1;
++interface _Windows_SupportedOS_Windows8_  IDWriteRenderingParams1;
+ 
+ /// <summary>
+ /// The root factory interface for all DWrite objects.

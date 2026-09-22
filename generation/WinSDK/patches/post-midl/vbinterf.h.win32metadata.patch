@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vbinterf.h b/generation/WinSDK/RecompiledIdlHeaders/um/vbinterf.h
+index 8c284ce206..ddce9cc957 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vbinterf.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vbinterf.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //---------------------------------------------------------------------------
+ // IVBGetControl
+ //---------------------------------------------------------------------------
+@@ -27,7 +28,7 @@ DECLARE_INTERFACE_(IVBGetControl, IUnknown)
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // *** IVBGetControl methods ****
+-    STDMETHOD(EnumControls)(THIS_ DWORD dwOleContF, DWORD dwWhich, LPENUMUNKNOWN FAR *ppenumUnk) PURE;
++    STDMETHOD(EnumControls)(THIS_ _Win32_AssociatedEnum_(OLECONTF) DWORD dwOleContF, _Win32_AssociatedEnum_(ENUM_CONTROLS_WHICH_FLAGS) DWORD dwWhich, LPENUMUNKNOWN FAR *ppenumUnk) PURE;
+     };
+ 
+ //---------------------------------------------------------------------------
+@@ -78,5 +79,44 @@ DEFINE_GUID(IID_IGetVBAObject, 0x91733A60L, 0x3F4C, 0x101B, 0xA3, 0xF6, 0x00, 0x
+ DEFINE_GUID(IID_IVBFormat, 0x9849FD60L, 0x3768, 0x101B, 0x8D, 0x72, 0xAE, 0x61,0x64, 0xFF, 0xE3, 0xCF);
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("GCW_WCH_SIBLING")
++#undef GCW_WCH_SIBLING
++#pragma push_macro("GC_WCH_CONTAINER")
++#undef GC_WCH_CONTAINER
++#pragma push_macro("GC_WCH_CONTAINED")
++#undef GC_WCH_CONTAINED
++#pragma push_macro("GC_WCH_ALL")
++#undef GC_WCH_ALL
++#pragma push_macro("GC_WCH_FREVERSEDIR")
++#undef GC_WCH_FREVERSEDIR
++#pragma push_macro("GC_WCH_FONLYAFTER")
++#undef GC_WCH_FONLYAFTER
++#pragma push_macro("GC_WCH_FONLYBEFORE")
++#undef GC_WCH_FONLYBEFORE
++#pragma push_macro("GC_WCH_FSELECTED")
++#undef GC_WCH_FSELECTED
++enum ENUM_CONTROLS_WHICH_FLAGS : unsigned int
++{
++    GCW_WCH_SIBLING = 1U,
++    GC_WCH_CONTAINER = 2U,
++    GC_WCH_CONTAINED = 3U,
++    GC_WCH_ALL = 4U,
++    GC_WCH_FREVERSEDIR = 134217728U,
++    GC_WCH_FONLYAFTER = 268435456U,
++    GC_WCH_FONLYBEFORE = 536870912U,
++    GC_WCH_FSELECTED = 1073741824U,
++};
++#pragma pop_macro("GC_WCH_FSELECTED")
++#pragma pop_macro("GC_WCH_FONLYBEFORE")
++#pragma pop_macro("GC_WCH_FONLYAFTER")
++#pragma pop_macro("GC_WCH_FREVERSEDIR")
++#pragma pop_macro("GC_WCH_ALL")
++#pragma pop_macro("GC_WCH_CONTAINED")
++#pragma pop_macro("GC_WCH_CONTAINER")
++#pragma pop_macro("GCW_WCH_SIBLING")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

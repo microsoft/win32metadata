@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h
+index 0b0df75554..2fe7cd981a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h
 @@ -22,6 +22,7 @@ Environment:
@@ -14,13 +15,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h b/generation
  #define TCPIP_OWNING_MODULE_SIZE 16
  
 -typedef struct _MIB_UDPROW {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_UDPROW {
++typedef struct   _MIB_UDPROW {
      DWORD dwLocalAddr;
      DWORD dwLocalPort;
  } MIB_UDPROW, *PMIB_UDPROW;
  
 -typedef struct _MIB_UDPTABLE {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_UDPTABLE {
++typedef struct   _MIB_UDPTABLE {
      DWORD dwNumEntries;
      MIB_UDPROW table[ANY_SIZE];
  } MIB_UDPTABLE, *PMIB_UDPTABLE;
@@ -29,14 +30,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h b/generation
  //
  
 -typedef struct _MIB_UDP6ROW {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_UDP6ROW {
++typedef struct   _MIB_UDP6ROW {
      IN6_ADDR dwLocalAddr;
      DWORD dwLocalScopeId;
      DWORD dwLocalPort;
  } MIB_UDP6ROW, *PMIB_UDP6ROW;
  
 -typedef struct _MIB_UDP6TABLE {
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _MIB_UDP6TABLE {
++typedef struct   _MIB_UDP6TABLE {
      DWORD dwNumEntries;
      MIB_UDP6ROW table[ANY_SIZE];
  } MIB_UDP6TABLE, *PMIB_UDP6TABLE;
@@ -45,7 +46,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h b/generation
  #endif // _WS2IPDEF_
  
 -typedef struct _MIB_UDPSTATS {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _MIB_UDPSTATS {
++typedef struct   _MIB_UDPSTATS {
      DWORD dwInDatagrams;
      DWORD dwNoPorts;
      DWORD dwInErrors;
@@ -54,7 +55,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/udpmib.h b/generation
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 -typedef struct _MIB_UDPSTATS2 {
-+typedef struct _Windows_SupportedOS_16299_ _Windows_SupportedOS_Server2016_ _MIB_UDPSTATS2 {
++typedef struct   _MIB_UDPSTATS2 {
      DWORD64 dw64InDatagrams;
      DWORD dwNoPorts;
      DWORD dwInErrors;

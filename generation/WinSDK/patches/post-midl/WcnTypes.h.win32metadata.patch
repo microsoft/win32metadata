@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WcnTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/WcnTypes.h
-index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae14985a88d18 100644
+index 343e6b2fa1..b38094a57e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WcnTypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WcnTypes.h
 @@ -65,6 +65,7 @@ Abstract:
@@ -15,7 +15,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_ATTRIBUTE_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_ATTRIBUTE_TYPE
++enum   tagWCN_ATTRIBUTE_TYPE
      {
          WCN_TYPE_AP_CHANNEL	= 0,
          WCN_TYPE_ASSOCIATION_STATE	= ( WCN_TYPE_AP_CHANNEL + 1 ) ,
@@ -24,7 +24,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_VERSION
-+enum _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ tagWCN_VALUE_TYPE_VERSION
++enum   tagWCN_VALUE_TYPE_VERSION
      {
          WCN_VALUE_VERSION_1_0	= 0x10,
          WCN_VALUE_VERSION_2_0	= 0x20
@@ -33,7 +33,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_BOOLEAN
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_BOOLEAN
++enum   tagWCN_VALUE_TYPE_BOOLEAN
      {
          WCN_VALUE_FALSE	= 0,
          WCN_VALUE_TRUE	= 1
@@ -42,7 +42,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_ASSOCIATION_STATE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_ASSOCIATION_STATE
++enum   tagWCN_VALUE_TYPE_ASSOCIATION_STATE
      {
          WCN_VALUE_AS_NOT_ASSOCIATED	= 0,
          WCN_VALUE_AS_CONNECTION_SUCCESS	= 1,
@@ -51,7 +51,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_AUTHENTICATION_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_AUTHENTICATION_TYPE
++enum   tagWCN_VALUE_TYPE_AUTHENTICATION_TYPE
      {
          WCN_VALUE_AT_OPEN	= 0x1,
          WCN_VALUE_AT_WPAPSK	= 0x2,
@@ -60,7 +60,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_CONFIG_METHODS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_CONFIG_METHODS
++enum   tagWCN_VALUE_TYPE_CONFIG_METHODS
      {
          WCN_VALUE_CM_USBA	= 0x1,
          WCN_VALUE_CM_ETHERNET	= 0x2,
@@ -69,7 +69,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_CONFIGURATION_ERROR
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_CONFIGURATION_ERROR
++enum   tagWCN_VALUE_TYPE_CONFIGURATION_ERROR
      {
          WCN_VALUE_CE_NO_ERROR	= 0,
          WCN_VALUE_CE_OOB_INTERFACE_READ_ERROR	= 1,
@@ -78,7 +78,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_CONNECTION_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_CONNECTION_TYPE
++enum   tagWCN_VALUE_TYPE_CONNECTION_TYPE
      {
          WCN_VALUE_CT_ESS	= 1,
          WCN_VALUE_CT_IBSS	= 2
@@ -87,7 +87,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_DEVICE_PASSWORD_ID
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_DEVICE_PASSWORD_ID
++enum   tagWCN_VALUE_TYPE_DEVICE_PASSWORD_ID
      {
          WCN_VALUE_DP_DEFAULT	= 0,
          WCN_VALUE_DP_USER_SPECIFIED	= 0x1,
@@ -96,7 +96,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_ENCRYPTION_TYPE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_ENCRYPTION_TYPE
++enum   tagWCN_VALUE_TYPE_ENCRYPTION_TYPE
      {
          WCN_VALUE_ET_NONE	= 0x1,
          WCN_VALUE_ET_WEP	= 0x2,
@@ -105,7 +105,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_RF_BANDS
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_RF_BANDS
++enum   tagWCN_VALUE_TYPE_RF_BANDS
      {
          WCN_VALUE_RB_24GHZ	= 0x1,
          WCN_VALUE_RB_50GHZ	= 0x2
@@ -114,7 +114,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  //
  typedef /* [v1_enum] */ 
 -enum tagWCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE
-+enum _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE
++enum   tagWCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE
      {
          WCN_VALUE_SS_RESERVED00	= 0,
          WCN_VALUE_SS_NOT_CONFIGURED	= 0x1,
@@ -123,7 +123,7 @@ index 343e6b2fa142baa29310815b67a1816fbcc14263..6efe695ac221383025d4486f70bae149
  #ifdef  _MSC_VER
  #pragma pack(push, 1)
 -typedef struct tagWCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ tagWCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE
++typedef struct   tagWCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE
      {
      WCN_VALUE_TYPE_DEVICE_TYPE_CATEGORY Category;
      WCN_VALUE_TYPE_DEVICE_TYPE_SUBCATEGORY_OUI SubCategoryOUI;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h b/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h
-index 6e4b829981afa19a38ea3633eafd62984e35aebe..71ad01e540c7b6ea01d373ef727c4abd7dd8e8d7 100644
+index 6e4b829981..0ff4f5e74c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h
 @@ -35,6 +35,7 @@
@@ -15,7 +15,7 @@ index 6e4b829981afa19a38ea3633eafd62984e35aebe..71ad01e540c7b6ea01d373ef727c4abd
  #define IPX_ADDRESS             0x4007
  
 -typedef struct _IPX_ADDRESS_DATA {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _IPX_ADDRESS_DATA {
++typedef struct   _IPX_ADDRESS_DATA {
      INT   adapternum;  /* input: 0-based adapter number */
      UCHAR netnum[4];   /* output: IPX network number */
      UCHAR nodenum[6];  /* output: IPX node address */

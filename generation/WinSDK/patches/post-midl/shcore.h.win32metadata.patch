@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
-index 96384d6a8e..72192bf02c 100644
+index 96384d6a8e..1016f3247e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
 @@ -6,20 +6,27 @@
@@ -11,8 +11,8 @@ index 96384d6a8e..72192bf02c 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-shcore-stream-winrt-l1-1-0.dll") 
++
  STDAPI CreateRandomAccessStreamOnFile(_In_ PCWSTR filePath, _In_ DWORD accessMode, _In_ REFIID riid, _COM_Outptr_ void **ppv);
  
  
@@ -23,8 +23,8 @@ index 96384d6a8e..72192bf02c 100644
      BSOS_PREFERDESTINATIONSTREAM  // in addition, utilize IDestinationStreamFactory::GetDestinationStream.
  } BSOS_OPTIONS;
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-shcore-stream-winrt-l1-1-0.dll") 
++
  STDAPI CreateRandomAccessStreamOverStream(_In_ IStream *stream, _In_ BSOS_OPTIONS options, _In_ REFIID riid, _COM_Outptr_ void **ppv);
 +_Windows_SupportedOS_Windows8_
 +_Windows_SupportedOS_Server2012_

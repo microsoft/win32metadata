@@ -1,4 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h
+index 4c41ce8ce0..ad38f2f816 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h
 @@ -17,6 +17,7 @@
@@ -14,7 +15,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h b/generation/Win
  #define WIM_EXTERNAL_FILE_INFO_FLAG_SUSPENDED     WIM_ENTRY_FLAG_SUSPENDED
  
 -typedef struct _WIM_ENTRY_INFO {
-+typedef struct _Windows_SupportedOS_Server2016_ _WIM_ENTRY_INFO {
++typedef struct  _WIM_ENTRY_INFO {
      DWORD WimEntryInfoSize;
      DWORD WimType;
      LARGE_INTEGER DataSourceId;
@@ -23,7 +24,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h b/generation/Win
  } WIM_ENTRY_INFO, *PWIM_ENTRY_INFO;
  
 -typedef struct _WIM_EXTERNAL_FILE_INFO {
-+typedef struct _Windows_SupportedOS_Server2016_ _WIM_EXTERNAL_FILE_INFO {
++typedef struct  _WIM_EXTERNAL_FILE_INFO {
      LARGE_INTEGER DataSourceId;
      UCHAR ResourceHash[WIM_PROVIDER_HASH_SIZE];
      ULONG Flags;
@@ -32,7 +33,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wofapi.h b/generation/Win
  } WOF_FILE_COMPRESSION_INFO_V0, *PWOF_FILE_COMPRESSION_INFO_V0;
  
 -typedef struct _WOF_FILE_COMPRESSION_INFO_V1 {
-+typedef struct _Windows_SupportedOS_Server2016_ _WOF_FILE_COMPRESSION_INFO_V1 {
++typedef struct  _WOF_FILE_COMPRESSION_INFO_V1 {
      ULONG Algorithm;
      ULONG Flags;
  } WOF_FILE_COMPRESSION_INFO_V1, *PWOF_FILE_COMPRESSION_INFO_V1;

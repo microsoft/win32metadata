@@ -1,0 +1,1111 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h
+index a292250693..c722eba6d0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1213,7 +1214,7 @@ EXTERN_C const IID IID_IFaxJobStatus;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8B86F485-FD7F-4824-886B-40C5CAA617CC")
++    MIDL_INTERFACE("8B86F485-FD7F-4824-886B-40C5CAA617CC") _Windows_SupportedOS_WindowsXP_ 
+     IFaxJobStatus : public IDispatch
+     {
+     public:
+@@ -1233,16 +1234,16 @@ EXTERN_C const IID IID_IFaxJobStatus;
+             /* [retval][out] */ __RPC__out long *plDeviceId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtendedStatusCode( 
+             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtendedStatus( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrExtendedStatus) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AvailableOperations( 
+             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations) = 0;
+@@ -1263,10 +1264,10 @@ EXTERN_C const IID IID_IFaxJobStatus;
+             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallerId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCallerId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RoutingInformation( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrRoutingInformation) = 0;
+         
+     };
+     
+@@ -1552,7 +1553,7 @@ EXTERN_C const IID IID_IFaxServer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("475B6469-90A5-4878-A577-17A86E8E3462")
++    MIDL_INTERFACE("475B6469-90A5-4878-A577-17A86E8E3462") _Windows_SupportedOS_Windows2000_ 
+     IFaxServer : public IDispatch
+     {
+     public:
+@@ -1560,7 +1561,7 @@ EXTERN_C const IID IID_IFaxServer;
+             /* [in] */ __RPC__in BSTR bstrServerName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrServerName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrServerName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDeviceProviders( 
+             /* [retval][out] */ __RPC__deref_out_opt IFaxDeviceProviders **ppFaxDeviceProviders) = 0;
+@@ -1981,7 +1982,7 @@ EXTERN_C const IID IID_IFaxDeviceProviders;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9FB76F62-4C7E-43A5-B6FD-502893F7E13E")
++    MIDL_INTERFACE("9FB76F62-4C7E-43A5-B6FD-502893F7E13E") _Windows_SupportedOS_WindowsXP_ 
+     IFaxDeviceProviders : public IDispatch
+     {
+     public:
+@@ -2143,7 +2144,7 @@ EXTERN_C const IID IID_IFaxDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9E46783E-F34F-482E-A360-0416BECBBD96")
++    MIDL_INTERFACE("9E46783E-F34F-482E-A360-0416BECBBD96") _Windows_SupportedOS_WindowsXP_ 
+     IFaxDevices : public IDispatch
+     {
+     public:
+@@ -2318,7 +2319,7 @@ EXTERN_C const IID IID_IFaxInboundRouting;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8148C20F-9D52-45B1-BF96-38FC12713527")
++    MIDL_INTERFACE("8148C20F-9D52-45B1-BF96-38FC12713527") _Windows_SupportedOS_WindowsXP_ 
+     IFaxInboundRouting : public IDispatch
+     {
+     public:
+@@ -2467,7 +2468,7 @@ EXTERN_C const IID IID_IFaxFolders;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCE3B2A8-A7AB-42BC-9D0A-3149457261A0")
++    MIDL_INTERFACE("DCE3B2A8-A7AB-42BC-9D0A-3149457261A0") _Windows_SupportedOS_WindowsXP_ 
+     IFaxFolders : public IDispatch
+     {
+     public:
+@@ -2638,7 +2639,7 @@ EXTERN_C const IID IID_IFaxLoggingOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34E64FB9-6B31-4D32-8B27-D286C0C33606")
++    MIDL_INTERFACE("34E64FB9-6B31-4D32-8B27-D286C0C33606") _Windows_SupportedOS_WindowsXP_ 
+     IFaxLoggingOptions : public IDispatch
+     {
+     public:
+@@ -2787,7 +2788,7 @@ EXTERN_C const IID IID_IFaxActivity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4B106F97-3DF5-40F2-BC3C-44CB8115EBDF")
++    MIDL_INTERFACE("4B106F97-3DF5-40F2-BC3C-44CB8115EBDF") _Windows_SupportedOS_WindowsXP_ 
+     IFaxActivity : public IDispatch
+     {
+     public:
+@@ -2967,7 +2968,7 @@ EXTERN_C const IID IID_IFaxOutboundRouting;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("25DC05A4-9909-41BD-A95B-7E5D1DEC1D43")
++    MIDL_INTERFACE("25DC05A4-9909-41BD-A95B-7E5D1DEC1D43") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutboundRouting : public IDispatch
+     {
+     public:
+@@ -3132,7 +3133,7 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("378EFAEB-5FCB-4AFB-B2EE-E16E80614487")
++    MIDL_INTERFACE("378EFAEB-5FCB-4AFB-B2EE-E16E80614487") _Windows_SupportedOS_WindowsXP_ 
+     IFaxReceiptOptions : public IDispatch
+     {
+     public:
+@@ -3143,7 +3144,7 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
+             /* [in] */ FAX_SMTP_AUTHENTICATION_TYPE_ENUM Type) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SMTPServer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPServer) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSMTPServer) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SMTPServer( 
+             /* [in] */ __RPC__in BSTR bstrSMTPServer) = 0;
+@@ -3155,13 +3156,13 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
+             /* [in] */ long lSMTPPort) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SMTPSender( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPSender) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSMTPSender) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SMTPSender( 
+             /* [in] */ __RPC__in BSTR bstrSMTPSender) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SMTPUser( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPUser) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSMTPUser) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SMTPUser( 
+             /* [in] */ __RPC__in BSTR bstrSMTPUser) = 0;
+@@ -3173,7 +3174,7 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
+             /* [in] */ FAX_RECEIPT_TYPE_ENUM AllowedReceipts) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SMTPPassword( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPPassword) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSMTPPassword) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SMTPPassword( 
+             /* [in] */ __RPC__in BSTR bstrSMTPPassword) = 0;
+@@ -3469,7 +3470,7 @@ EXTERN_C const IID IID_IFaxSecurity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77B508C1-09C0-47A2-91EB-FCE7FDF2690E")
++    MIDL_INTERFACE("77B508C1-09C0-47A2-91EB-FCE7FDF2690E") _Windows_SupportedOS_WindowsXP_ 
+     IFaxSecurity : public IDispatch
+     {
+     public:
+@@ -3693,12 +3694,12 @@ EXTERN_C const IID IID_IFaxDocument;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B207A246-09E3-4A4E-A7DC-FEA31D29458F")
++    MIDL_INTERFACE("B207A246-09E3-4A4E-A7DC-FEA31D29458F") _Windows_SupportedOS_WindowsXP_ 
+     IFaxDocument : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Body( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrBody) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Body( 
+             /* [in] */ __RPC__in BSTR bstrBody) = 0;
+@@ -3710,19 +3711,19 @@ EXTERN_C const IID IID_IFaxDocument;
+             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipients **ppFaxRecipients) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CoverPage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCoverPage) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCoverPage) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CoverPage( 
+             /* [in] */ __RPC__in BSTR bstrCoverPage) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Subject( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Subject( 
+             /* [in] */ __RPC__in BSTR bstrSubject) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Note( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNote) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrNote) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Note( 
+             /* [in] */ __RPC__in BSTR bstrNote) = 0;
+@@ -3734,13 +3735,13 @@ EXTERN_C const IID IID_IFaxDocument;
+             /* [in] */ DATE dateScheduleTime) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReceiptAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrReceiptAddress) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ReceiptAddress( 
+             /* [in] */ __RPC__in BSTR bstrReceiptAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DocumentName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDocumentName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DocumentName( 
+             /* [in] */ __RPC__in BSTR bstrDocumentName) = 0;
+@@ -4198,102 +4199,102 @@ EXTERN_C const IID IID_IFaxSender;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0D879D7D-F57A-4CC6-A6F9-3EE5D527B46A")
++    MIDL_INTERFACE("0D879D7D-F57A-4CC6-A6F9-3EE5D527B46A") _Windows_SupportedOS_WindowsXP_ 
+     IFaxSender : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BillingCode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBillingCode) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrBillingCode) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BillingCode( 
+             /* [in] */ __RPC__in BSTR bstrBillingCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_City( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCity) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCity) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_City( 
+             /* [in] */ __RPC__in BSTR bstrCity) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Company( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCompany) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCompany) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Company( 
+             /* [in] */ __RPC__in BSTR bstrCompany) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Country( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCountry) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCountry) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Country( 
+             /* [in] */ __RPC__in BSTR bstrCountry) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Department( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDepartment) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDepartment) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Department( 
+             /* [in] */ __RPC__in BSTR bstrDepartment) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Email( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrEmail) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrEmail) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Email( 
+             /* [in] */ __RPC__in BSTR bstrEmail) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FaxNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFaxNumber) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFaxNumber) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FaxNumber( 
+             /* [in] */ __RPC__in BSTR bstrFaxNumber) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HomePhone( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrHomePhone) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrHomePhone) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_HomePhone( 
+             /* [in] */ __RPC__in BSTR bstrHomePhone) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TSID( 
+             /* [in] */ __RPC__in BSTR bstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OfficePhone( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOfficePhone) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrOfficePhone) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OfficePhone( 
+             /* [in] */ __RPC__in BSTR bstrOfficePhone) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OfficeLocation( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOfficeLocation) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrOfficeLocation) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OfficeLocation( 
+             /* [in] */ __RPC__in BSTR bstrOfficeLocation) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrState) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrState) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_State( 
+             /* [in] */ __RPC__in BSTR bstrState) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StreetAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStreetAddress) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrStreetAddress) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StreetAddress( 
+             /* [in] */ __RPC__in BSTR bstrStreetAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Title( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTitle) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTitle) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Title( 
+             /* [in] */ __RPC__in BSTR bstrTitle) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ZipCode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrZipCode) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrZipCode) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ZipCode( 
+             /* [in] */ __RPC__in BSTR bstrZipCode) = 0;
+@@ -4695,18 +4696,18 @@ EXTERN_C const IID IID_IFaxRecipient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9A3DA3A0-538D-42b6-9444-AAA57D0CE2BC")
++    MIDL_INTERFACE("9A3DA3A0-538D-42b6-9444-AAA57D0CE2BC") _Windows_SupportedOS_WindowsXP_ 
+     IFaxRecipient : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FaxNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFaxNumber) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFaxNumber) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FaxNumber( 
+             /* [in] */ __RPC__in BSTR bstrFaxNumber) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+@@ -4866,7 +4867,7 @@ EXTERN_C const IID IID_IFaxRecipients;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B9C9DE5A-894E-4492-9FA3-08C627C11D5D")
++    MIDL_INTERFACE("B9C9DE5A-894E-4492-9FA3-08C627C11D5D") _Windows_SupportedOS_WindowsXP_ 
+     IFaxRecipients : public IDispatch
+     {
+     public:
+@@ -5054,7 +5055,7 @@ EXTERN_C const IID IID_IFaxIncomingArchive;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("76062CC7-F714-4FBD-AA06-ED6E4A4B70F3")
++    MIDL_INTERFACE("76062CC7-F714-4FBD-AA06-ED6E4A4B70F3") _Windows_SupportedOS_WindowsXP_ 
+     IFaxIncomingArchive : public IDispatch
+     {
+     public:
+@@ -5065,7 +5066,7 @@ EXTERN_C const IID IID_IFaxIncomingArchive;
+             /* [in] */ VARIANT_BOOL bUseArchive) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ArchiveFolder( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrArchiveFolder) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrArchiveFolder) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ArchiveFolder( 
+             /* [in] */ __RPC__in BSTR bstrArchiveFolder) = 0;
+@@ -5379,7 +5380,7 @@ EXTERN_C const IID IID_IFaxIncomingQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("902E64EF-8FD8-4B75-9725-6014DF161545")
++    MIDL_INTERFACE("902E64EF-8FD8-4B75-9725-6014DF161545") _Windows_SupportedOS_WindowsXP_ 
+     IFaxIncomingQueue : public IDispatch
+     {
+     public:
+@@ -5570,7 +5571,7 @@ EXTERN_C const IID IID_IFaxOutgoingArchive;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C9C28F40-8D80-4E53-810F-9A79919B49FD")
++    MIDL_INTERFACE("C9C28F40-8D80-4E53-810F-9A79919B49FD") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutgoingArchive : public IDispatch
+     {
+     public:
+@@ -5581,7 +5582,7 @@ EXTERN_C const IID IID_IFaxOutgoingArchive;
+             /* [in] */ VARIANT_BOOL bUseArchive) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ArchiveFolder( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrArchiveFolder) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrArchiveFolder) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ArchiveFolder( 
+             /* [in] */ __RPC__in BSTR bstrArchiveFolder) = 0;
+@@ -5895,7 +5896,7 @@ EXTERN_C const IID IID_IFaxOutgoingQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("80B1DF24-D9AC-4333-B373-487CEDC80CE5")
++    MIDL_INTERFACE("80B1DF24-D9AC-4333-B373-487CEDC80CE5") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutgoingQueue : public IDispatch
+     {
+     public:
+@@ -6284,7 +6285,7 @@ EXTERN_C const IID IID_IFaxIncomingMessageIterator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FD73ECC4-6F06-4F52-82A8-F7BA06AE3108")
++    MIDL_INTERFACE("FD73ECC4-6F06-4F52-82A8-F7BA06AE3108") _Windows_SupportedOS_WindowsXP_ 
+     IFaxIncomingMessageIterator : public IDispatch
+     {
+     public:
+@@ -6473,12 +6474,12 @@ EXTERN_C const IID IID_IFaxIncomingMessage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7CAB88FA-2EF9-4851-B2F3-1D148FED8447")
++    MIDL_INTERFACE("7CAB88FA-2EF9-4851-B2F3-1D148FED8447") _Windows_SupportedOS_WindowsXP_ 
+     IFaxIncomingMessage : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Pages( 
+             /* [retval][out] */ __RPC__out long *plPages) = 0;
+@@ -6487,7 +6488,7 @@ EXTERN_C const IID IID_IFaxIncomingMessage;
+             /* [retval][out] */ __RPC__out long *plSize) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Retries( 
+             /* [retval][out] */ __RPC__out long *plRetries) = 0;
+@@ -6499,16 +6500,16 @@ EXTERN_C const IID IID_IFaxIncomingMessage;
+             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallerId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCallerId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RoutingInformation( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrRoutingInformation) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTiff( 
+             /* [in] */ __RPC__in BSTR bstrTiffPath) = 0;
+@@ -6741,7 +6742,7 @@ EXTERN_C const IID IID_IFaxOutgoingJobs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2C56D8E6-8C2F-4573-944C-E505F8F5AEED")
++    MIDL_INTERFACE("2C56D8E6-8C2F-4573-944C-E505F8F5AEED") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutgoingJobs : public IDispatch
+     {
+     public:
+@@ -6903,15 +6904,15 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6356DAAD-6614-4583-BF7A-3AD67BBFC71C")
++    MIDL_INTERFACE("6356DAAD-6614-4583-BF7A-3AD67BBFC71C") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutgoingJob : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Subject( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DocumentName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDocumentName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Pages( 
+             /* [retval][out] */ __RPC__out long *plPages) = 0;
+@@ -6920,10 +6921,10 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
+             /* [retval][out] */ __RPC__out long *plSize) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubmissionId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubmissionId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OriginalScheduledTime( 
+             /* [retval][out] */ __RPC__out DATE *pdateOriginalScheduledTime) = 0;
+@@ -6956,7 +6957,7 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
+             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtendedStatus( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrExtendedStatus) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AvailableOperations( 
+             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations) = 0;
+@@ -6974,10 +6975,10 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
+             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GroupBroadcastReceipts( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbGroupBroadcastReceipts) = 0;
+@@ -7361,7 +7362,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessageIterator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F5EC5D4F-B840-432F-9980-112FE42A9B7A")
++    MIDL_INTERFACE("F5EC5D4F-B840-432F-9980-112FE42A9B7A") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutgoingMessageIterator : public IDispatch
+     {
+     public:
+@@ -7550,21 +7551,21 @@ EXTERN_C const IID IID_IFaxOutgoingMessage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F0EA35DE-CAA5-4A7C-82C7-2B60BA5F2BE2")
++    MIDL_INTERFACE("F0EA35DE-CAA5-4A7C-82C7-2B60BA5F2BE2") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutgoingMessage : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubmissionId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubmissionId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Subject( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DocumentName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDocumentName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Retries( 
+             /* [retval][out] */ __RPC__out long *plRetries) = 0;
+@@ -7591,7 +7592,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessage;
+             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TransmissionStart( 
+             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart) = 0;
+@@ -7600,10 +7601,10 @@ EXTERN_C const IID IID_IFaxOutgoingMessage;
+             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTiff( 
+             /* [in] */ __RPC__in BSTR bstrTiffPath) = 0;
+@@ -7884,7 +7885,7 @@ EXTERN_C const IID IID_IFaxIncomingJobs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("011F04E9-4FD6-4C23-9513-B6B66BB26BE9")
++    MIDL_INTERFACE("011F04E9-4FD6-4C23-9513-B6B66BB26BE9") _Windows_SupportedOS_WindowsXP_ 
+     IFaxIncomingJobs : public IDispatch
+     {
+     public:
+@@ -8046,7 +8047,7 @@ EXTERN_C const IID IID_IFaxIncomingJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("207529E6-654A-4916-9F88-4D232EE8A107")
++    MIDL_INTERFACE("207529E6-654A-4916-9F88-4D232EE8A107") _Windows_SupportedOS_WindowsXP_ 
+     IFaxIncomingJob : public IDispatch
+     {
+     public:
+@@ -8054,7 +8055,7 @@ EXTERN_C const IID IID_IFaxIncomingJob;
+             /* [retval][out] */ __RPC__out long *plSize) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentPage( 
+             /* [retval][out] */ __RPC__out long *plCurrentPage) = 0;
+@@ -8069,7 +8070,7 @@ EXTERN_C const IID IID_IFaxIncomingJob;
+             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtendedStatus( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrExtendedStatus) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AvailableOperations( 
+             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations) = 0;
+@@ -8084,16 +8085,16 @@ EXTERN_C const IID IID_IFaxIncomingJob;
+             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallerId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCallerId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RoutingInformation( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrRoutingInformation) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_JobType( 
+             /* [retval][out] */ __RPC__out FAX_JOB_TYPE_ENUM *pJobType) = 0;
+@@ -8390,21 +8391,21 @@ EXTERN_C const IID IID_IFaxDeviceProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("290EAC63-83EC-449C-8417-F148DF8C682A")
++    MIDL_INTERFACE("290EAC63-83EC-449C-8417-F148DF8C682A") _Windows_SupportedOS_WindowsXP_ 
+     IFaxDeviceProvider : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFriendlyName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFriendlyName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ImageName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrImageName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrImageName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UniqueName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUniqueName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrUniqueName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TapiProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTapiProviderName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTapiProviderName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MajorVersion( 
+             /* [retval][out] */ __RPC__out long *plMajorVersion) = 0;
+@@ -8657,7 +8658,7 @@ EXTERN_C const IID IID_IFaxDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("49306C59-B52E-4867-9DF4-CA5841C956D0")
++    MIDL_INTERFACE("49306C59-B52E-4867-9DF4-CA5841C956D0") _Windows_SupportedOS_WindowsXP_ 
+     IFaxDevice : public IDispatch
+     {
+     public:
+@@ -8665,10 +8666,10 @@ EXTERN_C const IID IID_IFaxDevice;
+             /* [retval][out] */ __RPC__out long *plId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderUniqueName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProviderUniqueName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrProviderUniqueName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PoweredOff( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbPoweredOff) = 0;
+@@ -8683,7 +8684,7 @@ EXTERN_C const IID IID_IFaxDevice;
+             /* [retval][out] */ __RPC__out VARIANT *pvUsedRoutingMethods) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDescription) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+@@ -8707,13 +8708,13 @@ EXTERN_C const IID IID_IFaxDevice;
+             /* [in] */ long lRingsBeforeAnswer) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CSID( 
+             /* [in] */ __RPC__in BSTR bstrCSID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTSID) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TSID( 
+             /* [in] */ __RPC__in BSTR bstrTSID) = 0;
+@@ -9070,7 +9071,7 @@ EXTERN_C const IID IID_IFaxActivityLogging;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1E29078B-5A69-497B-9592-49B7E7FADDB5")
++    MIDL_INTERFACE("1E29078B-5A69-497B-9592-49B7E7FADDB5") _Windows_SupportedOS_WindowsXP_ 
+     IFaxActivityLogging : public IDispatch
+     {
+     public:
+@@ -9087,7 +9088,7 @@ EXTERN_C const IID IID_IFaxActivityLogging;
+             /* [in] */ VARIANT_BOOL bLogOutgoing) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DatabasePath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDatabasePath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDatabasePath) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DatabasePath( 
+             /* [in] */ __RPC__in BSTR bstrDatabasePath) = 0;
+@@ -9290,7 +9291,7 @@ EXTERN_C const IID IID_IFaxEventLogging;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0880D965-20E8-42E4-8E17-944F192CAAD4")
++    MIDL_INTERFACE("0880D965-20E8-42E4-8E17-944F192CAAD4") _Windows_SupportedOS_WindowsXP_ 
+     IFaxEventLogging : public IDispatch
+     {
+     public:
+@@ -9523,7 +9524,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroups;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("235CBEF7-C2DE-4BFD-B8DA-75097C82C87F")
++    MIDL_INTERFACE("235CBEF7-C2DE-4BFD-B8DA-75097C82C87F") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutboundRoutingGroups : public IDispatch
+     {
+     public:
+@@ -9718,12 +9719,12 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CA6289A1-7E25-4F87-9A0B-93365734962C")
++    MIDL_INTERFACE("CA6289A1-7E25-4F87-9A0B-93365734962C") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutboundRoutingGroup : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
+             /* [retval][out] */ __RPC__out FAX_GROUP_STATUS_ENUM *pStatus) = 0;
+@@ -9878,7 +9879,7 @@ EXTERN_C const IID IID_IFaxDeviceIds;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2F0F813F-4CE9-443E-8CA1-738CFAEEE149")
++    MIDL_INTERFACE("2F0F813F-4CE9-443E-8CA1-738CFAEEE149") _Windows_SupportedOS_WindowsXP_ 
+     IFaxDeviceIds : public IDispatch
+     {
+     public:
+@@ -10075,7 +10076,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRules;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCEFA1E7-AE7D-4ED6-8521-369EDCCA5120")
++    MIDL_INTERFACE("DCEFA1E7-AE7D-4ED6-8521-369EDCCA5120") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutboundRoutingRules : public IDispatch
+     {
+     public:
+@@ -10307,7 +10308,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E1F795D5-07C2-469F-B027-ACACC23219DA")
++    MIDL_INTERFACE("E1F795D5-07C2-469F-B027-ACACC23219DA") _Windows_SupportedOS_WindowsXP_ 
+     IFaxOutboundRoutingRule : public IDispatch
+     {
+     public:
+@@ -10333,7 +10334,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRule;
+             /* [in] */ long DeviceId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GroupName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGroupName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGroupName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_GroupName( 
+             /* [in] */ __RPC__in BSTR bstrGroupName) = 0;
+@@ -10551,7 +10552,7 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtensions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2F6C9673-7B26-42DE-8EB0-915DCD2A4F4C")
++    MIDL_INTERFACE("2F6C9673-7B26-42DE-8EB0-915DCD2A4F4C") _Windows_SupportedOS_WindowsXP_ 
+     IFaxInboundRoutingExtensions : public IDispatch
+     {
+     public:
+@@ -10713,18 +10714,18 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtension;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("885B5E08-C26C-4EF9-AF83-51580A750BE1")
++    MIDL_INTERFACE("885B5E08-C26C-4EF9-AF83-51580A750BE1") _Windows_SupportedOS_WindowsXP_ 
+     IFaxInboundRoutingExtension : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFriendlyName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFriendlyName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ImageName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrImageName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrImageName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UniqueName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUniqueName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrUniqueName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MajorVersion( 
+             /* [retval][out] */ __RPC__out long *plMajorVersion) = 0;
+@@ -10961,7 +10962,7 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethods;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("783FCA10-8908-4473-9D69-F67FBEA0C6B9")
++    MIDL_INTERFACE("783FCA10-8908-4473-9D69-F67FBEA0C6B9") _Windows_SupportedOS_WindowsXP_ 
+     IFaxInboundRoutingMethods : public IDispatch
+     {
+     public:
+@@ -11123,24 +11124,24 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethod;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("45700061-AD9D-4776-A8C4-64065492CF4B")
++    MIDL_INTERFACE("45700061-AD9D-4776-A8C4-64065492CF4B") _Windows_SupportedOS_WindowsXP_ 
+     IFaxInboundRoutingMethod : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GUID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGUID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGUID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FunctionName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFunctionName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFunctionName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtensionFriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtensionFriendlyName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrExtensionFriendlyName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtensionImageName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtensionImageName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrExtensionImageName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Priority( 
+             /* [retval][out] */ __RPC__out long *plPriority) = 0;
+@@ -11345,12 +11346,12 @@ EXTERN_C const IID IID_IFaxDocument2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e1347661-f9ef-4d6d-b4a5-c0a068b65cff")
++    MIDL_INTERFACE("e1347661-f9ef-4d6d-b4a5-c0a068b65cff") _Windows_SupportedOS_WindowsVista_ 
+     IFaxDocument2 : public IFaxDocument
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubmissionId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubmissionId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Bodies( 
+             /* [retval][out] */ __RPC__out VARIANT *pvBodies) = 0;
+@@ -11810,7 +11811,7 @@ EXTERN_C const IID IID_IFaxConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("10f4d0f7-0994-4543-ab6e-506949128c40")
++    MIDL_INTERFACE("10f4d0f7-0994-4543-ab6e-506949128c40") _Windows_SupportedOS_WindowsVista_ 
+     IFaxConfiguration : public IDispatch
+     {
+     public:
+@@ -11821,7 +11822,7 @@ EXTERN_C const IID IID_IFaxConfiguration;
+             /* [in] */ VARIANT_BOOL bUseArchive) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ArchiveLocation( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrArchiveLocation) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrArchiveLocation) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ArchiveLocation( 
+             /* [in] */ __RPC__in BSTR bstrArchiveLocation) = 0;
+@@ -12395,7 +12396,7 @@ EXTERN_C const IID IID_IFaxServer2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("571ced0f-5609-4f40-9176-547e3a72ca7c")
++    MIDL_INTERFACE("571ced0f-5609-4f40-9176-547e3a72ca7c") _Windows_SupportedOS_WindowsVista_ 
+     IFaxServer2 : public IFaxServer
+     {
+     public:
+@@ -12783,7 +12784,7 @@ EXTERN_C const IID IID_IFaxAccountSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7428fbae-841e-47b8-86f4-2288946dca1b")
++    MIDL_INTERFACE("7428fbae-841e-47b8-86f4-2288946dca1b") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountSet : public IDispatch
+     {
+     public:
+@@ -12958,7 +12959,7 @@ EXTERN_C const IID IID_IFaxAccounts;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("93ea8162-8be7-42d1-ae7b-ec74e2d989da")
++    MIDL_INTERFACE("93ea8162-8be7-42d1-ae7b-ec74e2d989da") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccounts : public IDispatch
+     {
+     public:
+@@ -13131,12 +13132,12 @@ EXTERN_C const IID IID_IFaxAccount;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("68535b33-5dc4-4086-be26-b76f9b711006")
++    MIDL_INTERFACE("68535b33-5dc4-4086-be26-b76f9b711006") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccount : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AccountName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAccountName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrAccountName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Folders( 
+             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountFolders **ppFolders) = 0;
+@@ -13302,7 +13303,7 @@ EXTERN_C const IID IID_IFaxOutgoingJob2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("418a8d96-59a0-4789-b176-edf3dc8fa8f7")
++    MIDL_INTERFACE("418a8d96-59a0-4789-b176-edf3dc8fa8f7") _Windows_SupportedOS_WindowsVista_ 
+     IFaxOutgoingJob2 : public IFaxOutgoingJob
+     {
+     public:
+@@ -13310,7 +13311,7 @@ EXTERN_C const IID IID_IFaxOutgoingJob2;
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbHasCoverPage) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReceiptAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrReceiptAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ScheduleType( 
+             /* [retval][out] */ __RPC__out FAX_SCHEDULE_TYPE_ENUM *pScheduleType) = 0;
+@@ -13706,7 +13707,7 @@ EXTERN_C const IID IID_IFaxAccountFolders;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6463f89d-23d8-46a9-8f86-c47b77ca7926")
++    MIDL_INTERFACE("6463f89d-23d8-46a9-8f86-c47b77ca7926") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountFolders : public IDispatch
+     {
+     public:
+@@ -13877,7 +13878,7 @@ EXTERN_C const IID IID_IFaxAccountIncomingQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dd142d92-0186-4a95-a090-cbc3eadba6b4")
++    MIDL_INTERFACE("dd142d92-0186-4a95-a090-cbc3eadba6b4") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountIncomingQueue : public IDispatch
+     {
+     public:
+@@ -14028,7 +14029,7 @@ EXTERN_C const IID IID_IFaxAccountOutgoingQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0f1424e9-f22d-4553-b7a5-0d24bd0d7e46")
++    MIDL_INTERFACE("0f1424e9-f22d-4553-b7a5-0d24bd0d7e46") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountOutgoingQueue : public IDispatch
+     {
+     public:
+@@ -14179,7 +14180,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessage2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b37df687-bc88-4b46-b3be-b458b3ea9e7f")
++    MIDL_INTERFACE("b37df687-bc88-4b46-b3be-b458b3ea9e7f") _Windows_SupportedOS_WindowsVista_ 
+     IFaxOutgoingMessage2 : public IFaxOutgoingMessage
+     {
+     public:
+@@ -14190,7 +14191,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessage2;
+             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pReceiptType) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReceiptAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrReceiptAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Read( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRead) = 0;
+@@ -14531,7 +14532,7 @@ EXTERN_C const IID IID_IFaxAccountIncomingArchive;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a8a5b6ef-e0d6-4aee-955c-91625bec9db4")
++    MIDL_INTERFACE("a8a5b6ef-e0d6-4aee-955c-91625bec9db4") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountIncomingArchive : public IDispatch
+     {
+     public:
+@@ -14715,7 +14716,7 @@ EXTERN_C const IID IID_IFaxAccountOutgoingArchive;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5463076d-ec14-491f-926e-b3ceda5e5662")
++    MIDL_INTERFACE("5463076d-ec14-491f-926e-b3ceda5e5662") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountOutgoingArchive : public IDispatch
+     {
+     public:
+@@ -14914,7 +14915,7 @@ EXTERN_C const IID IID_IFaxSecurity2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("17d851f4-d09b-48fc-99c9-8f24c4db9ab1")
++    MIDL_INTERFACE("17d851f4-d09b-48fc-99c9-8f24c4db9ab1") _Windows_SupportedOS_WindowsVista_ 
+     IFaxSecurity2 : public IDispatch
+     {
+     public:
+@@ -15114,24 +15115,24 @@ EXTERN_C const IID IID_IFaxIncomingMessage2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f9208503-e2bc-48f3-9ec0-e6236f9b509a")
++    MIDL_INTERFACE("f9208503-e2bc-48f3-9ec0-e6236f9b509a") _Windows_SupportedOS_WindowsVista_ 
+     IFaxIncomingMessage2 : public IFaxIncomingMessage
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Subject( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubject) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Subject( 
+             /* [in] */ __RPC__in BSTR bstrSubject) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SenderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSenderName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSenderName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SenderName( 
+             /* [in] */ __RPC__in BSTR bstrSenderName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SenderFaxNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSenderFaxNumber) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSenderFaxNumber) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SenderFaxNumber( 
+             /* [in] */ __RPC__in BSTR bstrSenderFaxNumber) = 0;
+@@ -15143,7 +15144,7 @@ EXTERN_C const IID IID_IFaxIncomingMessage2;
+             /* [in] */ VARIANT_BOOL bHasCoverPage) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Recipients( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRecipients) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrRecipients) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Recipients( 
+             /* [in] */ __RPC__in BSTR bstrRecipients) = 0;

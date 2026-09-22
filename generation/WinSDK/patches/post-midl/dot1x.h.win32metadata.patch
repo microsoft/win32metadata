@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h b/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h
-index 2121ec2c32fdf8771ea7b1da1c8e34f9da1c681d..adfb7fd72412049840b349e59082603cb775a928 100644
+index 2121ec2c32..590f61d37c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h
 @@ -6,6 +6,7 @@
@@ -15,7 +15,7 @@ index 2121ec2c32fdf8771ea7b1da1c8e34f9da1c681d..adfb7fd72412049840b349e59082603c
      The set of parameters that define the authentication context for 1X
      */
 -typedef struct _ONEX_AUTH_PARAMS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ONEX_AUTH_PARAMS
++typedef struct   _ONEX_AUTH_PARAMS
  {
      BOOL fUpdatePending;
      ONEX_VARIABLE_BLOB oneXConnProfile;    
@@ -24,7 +24,7 @@ index 2121ec2c32fdf8771ea7b1da1c8e34f9da1c681d..adfb7fd72412049840b349e59082603c
  } ONEX_AUTH_PARAMS, *PONEX_AUTH_PARAMS;
  
 -typedef struct _ONEX_EAP_ERROR
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ONEX_EAP_ERROR
++typedef struct   _ONEX_EAP_ERROR
  {
  	DWORD dwWinError;
  	EAP_METHOD_TYPE type;
@@ -33,7 +33,7 @@ index 2121ec2c32fdf8771ea7b1da1c8e34f9da1c681d..adfb7fd72412049840b349e59082603c
  } ONEX_EAP_ERROR, *PONEX_EAP_ERROR;
  
 -typedef struct _ONEX_STATUS
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ONEX_STATUS
++typedef struct   _ONEX_STATUS
  {
      ONEX_AUTH_STATUS authStatus;
      /*
@@ -42,7 +42,7 @@ index 2121ec2c32fdf8771ea7b1da1c8e34f9da1c681d..adfb7fd72412049840b349e59082603c
  }ONEX_EAP_METHOD_BACKEND_SUPPORT;
  
 -typedef struct _ONEX_RESULT_UPDATE_DATA
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _ONEX_RESULT_UPDATE_DATA
++typedef struct   _ONEX_RESULT_UPDATE_DATA
  {
      ONEX_STATUS oneXStatus;
      ONEX_EAP_METHOD_BACKEND_SUPPORT BackendSupport;

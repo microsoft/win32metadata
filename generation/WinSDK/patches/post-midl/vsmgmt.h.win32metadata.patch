@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h
-index 61cc91edb9142afff859c71f76d687b2dbcca66e..790c3b7829c2c24d951deeb65a3d85acdfecfc15 100644
+index 61cc91edb9..23205721c2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h
 @@ -115,6 +115,7 @@ extern "C"{
@@ -10,12 +10,14 @@ index 61cc91edb9142afff859c71f76d687b2dbcca66e..790c3b7829c2c24d951deeb65a3d85ac
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  typedef 
-@@ -244,7 +245,7 @@ EXTERN_C const IID IID_IVssSnapshotMgmt;
+@@ -243,8 +244,8 @@ EXTERN_C const IID IID_IVssSnapshotMgmt;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("FA7DF749-66E7-4986-A27F-E2F04AE53772")
+-    MIDL_INTERFACE("FA7DF749-66E7-4986-A27F-E2F04AE53772")
 -    IVssSnapshotMgmt : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssSnapshotMgmt : public IUnknown
++    MIDL_INTERFACE("FA7DF749-66E7-4986-A27F-E2F04AE53772") _Windows_SupportedOS_WindowsVista_ 
++      IVssSnapshotMgmt : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetProviderMgmtInterface( 
@@ -46,3 +48,39 @@ index 61cc91edb9142afff859c71f76d687b2dbcca66e..790c3b7829c2c24d951deeb65a3d85ac
      {
          CONST_VTBL struct IVssSnapshotMgmt2Vtbl *lpVtbl;
      };
+@@ -467,7 +468,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("214A0F28-B737-4026-B847-4F9E37D79529")
++    MIDL_INTERFACE("214A0F28-B737-4026-B847-4F9E37D79529") _Windows_SupportedOS_WindowsVista_ 
+     IVssDifferentialSoftwareSnapshotMgmt : public IUnknown
+     {
+     public:
+@@ -651,7 +652,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("949d7353-675f-4275-8969-f044c6277815")
++    MIDL_INTERFACE("949d7353-675f-4275-8969-f044c6277815") _Windows_SupportedOS_WindowsVista_ 
+     IVssDifferentialSoftwareSnapshotMgmt2 : public IVssDifferentialSoftwareSnapshotMgmt
+     {
+     public:
+@@ -880,7 +881,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("383f7e71-a4c5-401f-b27f-f826289f8458")
++    MIDL_INTERFACE("383f7e71-a4c5-401f-b27f-f826289f8458") _Windows_SupportedOS_WindowsVista_ 
+     IVssDifferentialSoftwareSnapshotMgmt3 : public IVssDifferentialSoftwareSnapshotMgmt2
+     {
+     public:
+@@ -1167,7 +1168,7 @@ EXTERN_C const IID IID_IVssEnumMgmtObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("01954E6B-9254-4e6e-808C-C9E05D007696")
++    MIDL_INTERFACE("01954E6B-9254-4e6e-808C-C9E05D007696") _Windows_SupportedOS_WindowsVista_ 
+     IVssEnumMgmtObject : public IUnknown
+     {
+     public:

@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/getprocesshandlefromhwnd.h b/generation/WinSDK/RecompiledIdlHeaders/um/getprocesshandlefromhwnd.h
+index e8f612f677..4e133854a5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/getprocesshandlefromhwnd.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/getprocesshandlefromhwnd.h
+@@ -1,10 +1,11 @@
++#include <win32metadata_annotations.h>
+ #include <windows.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+ 
+-HANDLE WINAPI GetProcessHandleFromHwnd(
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE WINAPI GetProcessHandleFromHwnd(
+   _In_ HWND hwnd
+ );
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_ioctl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_ioctl.h
-index ab046e2ffc..f02538f405 100644
+index ab046e2ffc..613f9d8c36 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_ioctl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/winbio_ioctl.h
 @@ -20,6 +20,7 @@ Revision History:
@@ -15,7 +15,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_BIOMETRIC_GET_ATTRIBUTES
  //
 -typedef struct _WINBIO_SENSOR_ATTRIBUTES {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_SENSOR_ATTRIBUTES {
++typedef struct  _WINBIO_SENSOR_ATTRIBUTES {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
      WINBIO_VERSION WinBioVersion;
@@ -24,7 +24,7 @@ index ab046e2ffc..f02538f405 100644
  // bytes, with an arbitrary block of contiguous memory.
  //
 -typedef struct _WINBIO_DATA{
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_DATA{
++typedef struct  _WINBIO_DATA{
      DWORD Size;
      BYTE Data[1]; // Defined as a length of 1 to avoid compiler warning.
  } WINBIO_DATA, *PWINBIO_DATA;
@@ -33,7 +33,7 @@ index ab046e2ffc..f02538f405 100644
  // IN payload for IOCTL_BIOMETRIC_UPDATE_FIRMWARE
  //
 -typedef struct _WINBIO_UPDATE_FIRMWARE {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_UPDATE_FIRMWARE {
++typedef struct  _WINBIO_UPDATE_FIRMWARE {
      DWORD PayloadSize;
      WINBIO_DATA FirmwareData;
  } WINBIO_UPDATE_FIRMWARE, *PWINBIO_UPDATE_FIRMWARE;
@@ -42,7 +42,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_BIOMETRIC_CALIBRATE
  //
 -typedef struct _WINBIO_CALIBRATION_INFO {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_CALIBRATION_INFO {
++typedef struct  _WINBIO_CALIBRATION_INFO {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
      WINBIO_DATA CalibrationData;
@@ -51,7 +51,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_BIOMETRIC_GET_SENSOR_STATUS
  //
 -typedef struct _WINBIO_DIAGNOSTICS {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_DIAGNOSTICS {
++typedef struct  _WINBIO_DIAGNOSTICS {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
      WINBIO_SENSOR_STATUS SensorStatus;
@@ -60,7 +60,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_BIOMETRIC_UPDATE_FIRMWARE
  //
 -typedef struct _WINBIO_BLANK_PAYLOAD {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_BLANK_PAYLOAD {
++typedef struct  _WINBIO_BLANK_PAYLOAD {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
  } WINBIO_BLANK_PAYLOAD, *PWINBIO_BLANK_PAYLOAD;
@@ -69,7 +69,7 @@ index ab046e2ffc..f02538f405 100644
  //
  
 -typedef struct _WINBIO_CAPTURE_PARAMETERS {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_CAPTURE_PARAMETERS {
++typedef struct  _WINBIO_CAPTURE_PARAMETERS {
      DWORD PayloadSize;
      WINBIO_BIR_PURPOSE Purpose;
      WINBIO_REGISTERED_FORMAT Format;
@@ -78,7 +78,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_BIOMETRIC_CAPTURE_DATA
  //
 -typedef struct _WINBIO_CAPTURE_DATA {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_CAPTURE_DATA {
++typedef struct  _WINBIO_CAPTURE_DATA {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
      WINBIO_SENSOR_STATUS SensorStatus;
@@ -87,7 +87,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_BIOMETRIC_GET_SUPPORTED_ALGORITHMS
  //
 -typedef struct _WINBIO_SUPPORTED_ALGORITHMS {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_SUPPORTED_ALGORITHMS {
++typedef struct  _WINBIO_SUPPORTED_ALGORITHMS {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
      DWORD NumberOfAlgorithms;
@@ -96,7 +96,7 @@ index ab046e2ffc..f02538f405 100644
  // OUT payload for IOCTL_GET_INDICATOR
  //
 -typedef struct _WINBIO_GET_INDICATOR {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_GET_INDICATOR {
++typedef struct  _WINBIO_GET_INDICATOR {
      DWORD PayloadSize;
      HRESULT WinBioHresult;
      WINBIO_INDICATOR_STATUS IndicatorStatus;
@@ -105,7 +105,7 @@ index ab046e2ffc..f02538f405 100644
  // IN payload for IOCTL_SET_INDICATOR
  //
 -typedef struct _WINBIO_SET_INDICATOR {
-+typedef struct _Windows_SupportedOS_Windows7_ _WINBIO_SET_INDICATOR {
++typedef struct  _WINBIO_SET_INDICATOR {
      DWORD PayloadSize;
      WINBIO_INDICATOR_STATUS IndicatorStatus;
  } WINBIO_SET_INDICATOR, *PWINBIO_SET_INDICATOR;

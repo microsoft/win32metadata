@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3dcommon.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3dcommon.h
+index 09861ee173..9e91cac320 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3dcommon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3dcommon.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -521,7 +522,7 @@ EXTERN_C const IID IID_ID3DDestructionNotifier;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a06eb39a-50da-425b-8c31-4eecd6c270f3")
++    MIDL_INTERFACE("a06eb39a-50da-425b-8c31-4eecd6c270f3") _Windows_SupportedOS_Windows7_ 
+     ID3DDestructionNotifier : public IUnknown
+     {
+     public:

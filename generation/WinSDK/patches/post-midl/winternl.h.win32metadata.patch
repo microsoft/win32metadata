@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
-index 5734a93b98ad22033b28fb4dcddef218db6a2c10..e4e39315b23b324dd4179efcf72b785fe868cafe 100644
+index 5734a93b98..46a4200acc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
 @@ -30,6 +30,7 @@
@@ -19,3 +19,97 @@ index 5734a93b98ad22033b28fb4dcddef218db6a2c10..e4e39315b23b324dd4179efcf72b785f
      USHORT Length;
      USHORT MaximumLength;
      PCHAR Buffer;
+@@ -629,7 +630,7 @@ RtlIsNameLegalDOS8Dot3 (
+ // This function might be needed for some of the internal Windows functions,
+ // defined in this header file.
+ //
+-_When_(Status < 0, _Out_range_(>, 0))
++_Windows_SupportedOS_WindowsXP_ _When_(Status < 0, _Out_range_(>, 0))
+ _When_(Status >= 0, _Out_range_(==, 0))
+ ULONG
+ NTAPI
+@@ -760,19 +761,19 @@ RtlTimeToSecondsSince1970 (
+ // These APIs might be need for some of the internal Windows functions,
+ // defined in this header file.
+ //
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlFreeAnsiString (
+     PANSI_STRING AnsiString
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlFreeUnicodeString (
+     PUNICODE_STRING UnicodeString
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlFreeOemString(
+     POEM_STRING OemString
+@@ -806,14 +807,14 @@ RtlInitAnsiStringEx (
+     PCSZ SourceString
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlInitUnicodeString (
+     PUNICODE_STRING DestinationString,
+     PCWSTR SourceString
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlAnsiStringToUnicodeString (
+     PUNICODE_STRING DestinationString,
+@@ -821,7 +822,7 @@ RtlAnsiStringToUnicodeString (
+     BOOLEAN AllocateDestinationString
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlUnicodeStringToAnsiString (
+     PANSI_STRING DestinationString,
+@@ -829,7 +830,7 @@ RtlUnicodeStringToAnsiString (
+     BOOLEAN AllocateDestinationString
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlUnicodeStringToOemString(
+     POEM_STRING DestinationString,
+@@ -843,7 +844,7 @@ RtlUnicodeStringToOemString(
+ //     set CodePage to CP_ACP
+ //     set cbMultiByte to 0
+ //
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlUnicodeToMultiByteSize(
+     _Out_ PULONG BytesInMultiByteString,
+@@ -855,7 +856,7 @@ RtlUnicodeToMultiByteSize(
+ // Use the C runtime function instead
+ //     strtol
+ //
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlCharToInteger (
+     PCSZ String,
+@@ -867,7 +868,7 @@ RtlCharToInteger (
+ // use the Win32 API instead
+ //     ConvertSidToStringSid
+ //
+-NTSTATUS
++_Windows_SupportedOS_WindowsXP_ NTSTATUS
+ NTAPI
+ RtlConvertSidToUnicodeString (
+     PUNICODE_STRING UnicodeString,

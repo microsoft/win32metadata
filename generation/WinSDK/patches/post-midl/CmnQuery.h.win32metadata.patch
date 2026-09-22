@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
-index 6693116ef1..e47e5e76d2 100644
+index 6693116ef1..af5cf9df4f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 @@ -2,6 +2,7 @@
@@ -15,7 +15,7 @@ index 6693116ef1..e47e5e76d2 100644
  #define CQFF_ISOPTIONAL     0x0000002       // = 1 => form is hidden, unless optional forms requested
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD   cbStruct;
      DWORD   dwFlags;
@@ -75,7 +75,7 @@ index 6693116ef1..e47e5e76d2 100644
  #define OQWF_PARAMISPROPERTYBAG     0x80000000 // = 1 => the form parameters ptr is an IPropertyBag (ppbFormParameters)
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD           cbStruct;                   // structure size
      DWORD           dwFlags;                    // flags (OQFW_*)

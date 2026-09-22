@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h
-index f667a19c44..d3aface9c8 100644
+index f667a19c44..a5e4dd7938 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h
 @@ -11,6 +11,7 @@
@@ -14,18 +14,18 @@ index f667a19c44..d3aface9c8 100644
  //  Parser interface - supported by MPEG-2 splitter filter
  //
  DECLARE_INTERFACE_(IAMParse, IUnknown) {
-+    _Windows_SupportedOS_WindowsXP_
-+    _Windows_SupportedOS_Server2003_
++    
++    
      STDMETHOD(GetParseTime) (THIS_
                               _Out_ REFERENCE_TIME *prtCurrent
                              ) PURE;
-+    _Windows_SupportedOS_WindowsXP_
-+    _Windows_SupportedOS_Server2003_
++    
++    
      STDMETHOD(SetParseTime) (THIS_
                               REFERENCE_TIME rtCurrent
                              ) PURE;
-+    _Windows_SupportedOS_WindowsXP_
-+    _Windows_SupportedOS_Server2003_
++    
++    
      STDMETHOD(Flush) (THIS) PURE;
  };
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
-index 49248cf30302f6b8ee116ab30ef153c1ae871e70..1ca65c38df8d2ca20e4906db95290ca7c8e8508b 100644
+index 49248cf303..eeb6df0fcd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
 @@ -86,6 +86,7 @@ extern "C"{
@@ -10,6 +10,15 @@ index 49248cf30302f6b8ee116ab30ef153c1ae871e70..1ca65c38df8d2ca20e4906db95290ca7
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #ifndef WINCOMMCTRLAPI
+@@ -137,7 +138,7 @@ typedef IMAGEINFO *LPIMAGEINFO;
+ 
+ #endif
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(
+          _In_  REFCLSID rclsid,
+      _In_opt_  const IUnknown *punkOuter,
+          _In_  REFIID riid,
 @@ -164,7 +165,7 @@ EXTERN_C const IID IID_IImageList;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -19,6 +28,24 @@ index 49248cf30302f6b8ee116ab30ef153c1ae871e70..1ca65c38df8d2ca20e4906db95290ca7
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Add( 
+@@ -211,7 +212,7 @@ EXTERN_C const IID IID_IImageList;
+             int i,
+             UINT flags,
+             /* [annotation][out] */ 
+-            _Out_  HICON *picon) = 0;
++            _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_  HICON *picon) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetImageInfo( 
+             int i,
+@@ -315,7 +316,7 @@ EXTERN_C const IID IID_IImageList;
+         virtual HRESULT STDMETHODCALLTYPE GetItemFlags( 
+             int i,
+             /* [annotation][out] */ 
+-            _Out_  DWORD *dwFlags) = 0;
++            _Win32_AssociatedEnum_(IMAGE_LIST_ITEM_FLAGS) _Out_  DWORD *dwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetOverlayImage( 
+             int iOverlay,
 @@ -563,7 +564,7 @@ EXTERN_C const IID IID_IImageList;
          END_INTERFACE
      } IImageListVtbl;
@@ -28,15 +55,26 @@ index 49248cf30302f6b8ee116ab30ef153c1ae871e70..1ca65c38df8d2ca20e4906db95290ca7
      {
          CONST_VTBL struct IImageListVtbl *lpVtbl;
      };
-@@ -726,7 +727,7 @@ EXTERN_C const IID IID_IImageList2;
+@@ -725,8 +726,8 @@ EXTERN_C const IID IID_IImageList2;
+ 
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
-     MIDL_INTERFACE("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
+-    MIDL_INTERFACE("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
 -    IImageList2 : public IImageList
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IImageList2 : public IImageList
++    MIDL_INTERFACE("192b9d83-50fc-457b-90a0-2b82a8b5dae1") _Windows_SupportedOS_WindowsVista_ 
++      IImageList2 : public IImageList
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Resize( 
+@@ -785,7 +786,7 @@ EXTERN_C const IID IID_IImageList2;
+             /* [annotation][in] */ 
+             _In_  int cy,
+             /* [annotation][in] */ 
+-            _In_  UINT flags,
++            _Win32_AssociatedEnum_(IMAGELIST_CREATION_FLAGS) _In_  UINT flags,
+             /* [annotation][in] */ 
+             _In_  int cInitial,
+             /* [annotation][in] */ 
 @@ -1156,7 +1157,7 @@ EXTERN_C const IID IID_IImageList2;
          END_INTERFACE
      } IImageList2Vtbl;
@@ -46,3 +84,25 @@ index 49248cf30302f6b8ee116ab30ef153c1ae871e70..1ca65c38df8d2ca20e4906db95290ca7
      {
          CONST_VTBL struct IImageList2Vtbl *lpVtbl;
      };
+@@ -1348,6 +1349,21 @@ extern RPC_IF_HANDLE __MIDL_itf_commoncontrols_0000_0003_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("ILIF_ALPHA")
++#undef ILIF_ALPHA
++#pragma push_macro("ILIF_LOWQUALITY")
++#undef ILIF_LOWQUALITY
++enum IMAGE_LIST_ITEM_FLAGS : unsigned int
++{
++    ILIF_ALPHA = 1U,
++    ILIF_LOWQUALITY = 2U,
++};
++#pragma pop_macro("ILIF_LOWQUALITY")
++#pragma pop_macro("ILIF_ALPHA")
++#endif
++
+ #endif
+ 
+ 

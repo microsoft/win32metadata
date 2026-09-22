@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
-index 539c7a02d5..1345ca2ab8 100644
+index 539c7a02d5..81025156fc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 539c7a02d5..1345ca2ab8 100644
  
  
 -typedef struct _FAX_ROUTE_CALLBACKROUTINES {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_ROUTE_CALLBACKROUTINES {
++typedef struct   _FAX_ROUTE_CALLBACKROUTINES {
      DWORD                       SizeOfStruct;                // size of the struct set by the fax service
      PFAXROUTEADDFILE            FaxRouteAddFile;
      PFAXROUTEDELETEFILE         FaxRouteDeleteFile;
@@ -21,7 +21,7 @@ index 539c7a02d5..1345ca2ab8 100644
  //
  
 -typedef struct _FAX_ROUTE {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_ROUTE {
++typedef struct   _FAX_ROUTE {
      DWORD           SizeOfStruct;       // size of the struct set by the fax service
      DWORD           JobId;              // Fax job identifier
      DWORDLONG       ElapsedTime;        // Elapsed time for whole fax job in Coordinated Universal Time (UTC)

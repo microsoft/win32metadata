@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pnrpns.h b/generation/WinSDK/RecompiledIdlHeaders/um/pnrpns.h
-index ff2dc8a3f00e6c0f701198c7ef129ca1a6cde4de..0628db19fa3945284da592879d242e632c60e687 100644
+index ff2dc8a3f0..a5ec836720 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/pnrpns.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/pnrpns.h
 @@ -17,6 +17,7 @@ Abstract:
@@ -15,7 +15,7 @@ index ff2dc8a3f00e6c0f701198c7ef129ca1a6cde4de..0628db19fa3945284da592879d242e63
  
  
 -typedef struct _PNRPINFO_V1
-+typedef struct _Windows_SupportedOS_Server2008_ _PNRPINFO_V1
++typedef struct  _PNRPINFO_V1
  {
      DWORD                       dwSize;                 // size of this struct
      LPWSTR                      lpwszIdentity;          // identity name string

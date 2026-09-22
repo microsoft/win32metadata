@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h b/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
-index 04310cdbb59293e8f3b4444b39701ee7b50dfee3..7c833e8c50437ea730578b298151157b421deac7 100644
+index 04310cdbb5..329b4a9f01 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
 @@ -20,6 +20,7 @@ Abstract:
@@ -10,12 +10,39 @@ index 04310cdbb59293e8f3b4444b39701ee7b50dfee3..7c833e8c50437ea730578b298151157b
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -29,7 +30,7 @@ Abstract:
+@@ -29,9 +30,9 @@ Abstract:
  
  typedef HANDLE  HPORT;
  
 -typedef struct _SECURITY_MESSAGE
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ _SECURITY_MESSAGE
++typedef struct   _SECURITY_MESSAGE
  {
-     DWORD dwMsgId;
+-    DWORD dwMsgId;
++    _Win32_AssociatedEnum_(SECURITY_MESSAGE_MSG_ID) DWORD dwMsgId;
  
+     HPORT hPort;
+ 
+@@ -163,4 +164,23 @@ RasSecurityDialogGetInfo(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECURITYMSG_SUCCESS")
++#undef SECURITYMSG_SUCCESS
++#pragma push_macro("SECURITYMSG_FAILURE")
++#undef SECURITYMSG_FAILURE
++#pragma push_macro("SECURITYMSG_ERROR")
++#undef SECURITYMSG_ERROR
++enum SECURITY_MESSAGE_MSG_ID : unsigned int
++{
++    SECURITYMSG_SUCCESS = 1U,
++    SECURITYMSG_FAILURE = 2U,
++    SECURITYMSG_ERROR = 3U,
++};
++#pragma pop_macro("SECURITYMSG_ERROR")
++#pragma pop_macro("SECURITYMSG_FAILURE")
++#pragma pop_macro("SECURITYMSG_SUCCESS")
++#endif
++
+ #endif

@@ -1,0 +1,493 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h b/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h
+index 17f5634717..90b6a7381f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ //===========================================================================
+ //
+@@ -41,7 +42,11 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS;
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-enum tagPSTIME_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ tagPSTIME_FLAGS
+ {
+     PSTF_UTC   = 0x00000000,
+     PSTF_LOCAL = 0x00000001,
+@@ -55,41 +60,41 @@ typedef int PSTIME_FLAGS;
+ //====================
+ 
+ // Initialize a propvariant
+-PSSTDAPI InitPropVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ PROPVARIANT *ppropvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI InitPropVariantFromCLSID(_In_ REFCLSID clsid, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromCLSID(_In_ REFCLSID clsid, _Out_ PROPVARIANT *ppropvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-PSSTDAPI InitPropVariantFromGUIDAsString(_In_ REFGUID guid, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromGUIDAsString(_In_ REFGUID guid, _Out_ PROPVARIANT *ppropvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI InitPropVariantFromFileTime(_In_ const FILETIME *pftIn, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromFileTime(_In_ const FILETIME *pftIn, _Out_ PROPVARIANT *ppropvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-PSSTDAPI InitPropVariantFromPropVariantVectorElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantVectorFromPropVariant(_In_ REFPROPVARIANT propvarSingle, _Out_ PROPVARIANT *ppropvarVector);
+-PSSTDAPI InitPropVariantFromStrRet(_Inout_ STRRET *pstrret, _In_opt_ PCUITEMID_CHILD pidl, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromBooleanVector(_In_reads_opt_(cElems) const BOOL *prgf, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromInt16Vector(_In_reads_opt_(cElems) const SHORT *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromUInt16Vector(_In_reads_opt_(cElems) const USHORT *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromInt32Vector(_In_reads_opt_(cElems) const LONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromUInt32Vector(_In_reads_opt_(cElems) const ULONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromInt64Vector(_In_reads_opt_(cElems) const LONGLONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromUInt64Vector(_In_reads_opt_(cElems) const ULONGLONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromDoubleVector(_In_reads_opt_(cElems) const DOUBLE *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromFileTimeVector(_In_reads_opt_(cElems) const FILETIME *prgft, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromStringVector(_In_reads_opt_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromStringAsVector(_In_opt_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromPropVariantVectorElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantVectorFromPropVariant(_In_ REFPROPVARIANT propvarSingle, _Out_ PROPVARIANT *ppropvarVector);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromStrRet(_Inout_ STRRET *pstrret, _In_opt_ PCUITEMID_CHILD pidl, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromBooleanVector(_In_reads_opt_(cElems) const BOOL *prgf, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromInt16Vector(_In_reads_opt_(cElems) const SHORT *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromUInt16Vector(_In_reads_opt_(cElems) const USHORT *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromInt32Vector(_In_reads_opt_(cElems) const LONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromUInt32Vector(_In_reads_opt_(cElems) const ULONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromInt64Vector(_In_reads_opt_(cElems) const LONGLONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromUInt64Vector(_In_reads_opt_(cElems) const ULONGLONG *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromDoubleVector(_In_reads_opt_(cElems) const DOUBLE *prgn, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromFileTimeVector(_In_reads_opt_(cElems) const FILETIME *prgft, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromStringVector(_In_reads_opt_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ PROPVARIANT *ppropvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitPropVariantFromStringAsVector(_In_opt_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar);
+ #ifdef __cplusplus
+ HRESULT  InitPropVariantFromBoolean(_In_ BOOL fVal, _Out_ PROPVARIANT *ppropvar);
+ HRESULT  InitPropVariantFromInt16(_In_ SHORT nVal, _Out_ PROPVARIANT *ppropvar);
+@@ -106,97 +111,97 @@ BOOL     IsPropVariantString(_In_ REFPROPVARIANT propvar);
+ #endif
+ 
+ // Extract data from a propvariant
+-PSSTDAPI_(BOOL)      PropVariantToBooleanWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ BOOL fDefault);
+-PSSTDAPI_(SHORT)     PropVariantToInt16WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ SHORT iDefault);
+-PSSTDAPI_(USHORT)    PropVariantToUInt16WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ USHORT uiDefault);
+-PSSTDAPI_(LONG)      PropVariantToInt32WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ LONG lDefault);
+-PSSTDAPI_(ULONG)     PropVariantToUInt32WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ ULONG ulDefault);
+-PSSTDAPI_(LONGLONG)  PropVariantToInt64WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ LONGLONG llDefault);
+-PSSTDAPI_(ULONGLONG) PropVariantToUInt64WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ ULONGLONG ullDefault);
+-PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ DOUBLE dblDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(BOOL)      PropVariantToBooleanWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ BOOL fDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(SHORT)     PropVariantToInt16WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ SHORT iDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(USHORT)    PropVariantToUInt16WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ USHORT uiDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(LONG)      PropVariantToInt32WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ LONG lDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(ULONG)     PropVariantToUInt32WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ ULONG ulDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(LONGLONG)  PropVariantToInt64WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ LONGLONG llDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(ULONGLONG) PropVariantToUInt64WithDefault(_In_ REFPROPVARIANT propvarIn, _In_ ULONGLONG ullDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ DOUBLE dblDefault);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI_(PCWSTR)    PropVariantToStringWithDefault(_In_ REFPROPVARIANT propvarIn, _In_opt_ LPCWSTR pszDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(PCWSTR)    PropVariantToStringWithDefault(_In_ REFPROPVARIANT propvarIn, _In_opt_ LPCWSTR pszDefault);
+ 
+-PSSTDAPI             PropVariantToBoolean(_In_ REFPROPVARIANT propvarIn, _Out_ BOOL *pfRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToBoolean(_In_ REFPROPVARIANT propvarIn, _Out_ BOOL *pfRet);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-PSSTDAPI             PropVariantToInt16(_In_ REFPROPVARIANT propvarIn, _Out_ SHORT *piRet);
+-PSSTDAPI             PropVariantToUInt16(_In_ REFPROPVARIANT propvarIn, _Out_ USHORT *puiRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToInt16(_In_ REFPROPVARIANT propvarIn, _Out_ SHORT *piRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToUInt16(_In_ REFPROPVARIANT propvarIn, _Out_ USHORT *puiRet);
+ PSSTDAPI             PropVariantToInt32(_In_ REFPROPVARIANT propvarIn, _Out_ LONG *plRet);
+ PSSTDAPI             PropVariantToUInt32(_In_ REFPROPVARIANT propvarIn, _Out_ ULONG *pulRet);
+-PSSTDAPI             PropVariantToInt64(_In_ REFPROPVARIANT propvarIn, _Out_ LONGLONG *pllRet);
+-PSSTDAPI             PropVariantToUInt64(_In_ REFPROPVARIANT propvarIn, _Out_ ULONGLONG *pullRet);
+-PSSTDAPI             PropVariantToDouble(_In_ REFPROPVARIANT propvarIn, _Out_ DOUBLE *pdblRet);
+-PSSTDAPI             PropVariantToBuffer(_In_ REFPROPVARIANT propvar, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
+-PSSTDAPI             PropVariantToString(_In_ REFPROPVARIANT propvar, _Out_writes_(cch) PWSTR psz, _In_ UINT cch);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToInt64(_In_ REFPROPVARIANT propvarIn, _Out_ LONGLONG *pllRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToUInt64(_In_ REFPROPVARIANT propvarIn, _Out_ ULONGLONG *pullRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToDouble(_In_ REFPROPVARIANT propvarIn, _Out_ DOUBLE *pdblRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToBuffer(_In_ REFPROPVARIANT propvar, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToString(_In_ REFPROPVARIANT propvar, _Out_writes_(cch) PWSTR psz, _In_ UINT cch);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI             PropVariantToGUID(_In_ REFPROPVARIANT propvar, _Out_ GUID *pguid);
+-_Check_return_ PSSTDAPI PropVariantToStringAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ PWSTR *ppszOut);
+-_Check_return_ PSSTDAPI PropVariantToBSTR(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ BSTR *pbstrOut);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToGUID(_In_ REFPROPVARIANT propvar, _Out_ GUID *pguid);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToStringAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ PWSTR *ppszOut);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToBSTR(_In_ REFPROPVARIANT propvar, _Win32_RAIIFree_(SysFreeString) _Outptr_result_nullonfailure_ BSTR *pbstrOut);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-_Check_return_ PSSTDAPI PropVariantToStrRet(_In_ REFPROPVARIANT propvar, _Out_ STRRET *pstrret);
+-PSSTDAPI             PropVariantToFileTime(_In_ REFPROPVARIANT propvar, _In_ PSTIME_FLAGS pstfOut, _Out_ FILETIME* pftOut);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToStrRet(_In_ REFPROPVARIANT propvar, _Out_ STRRET *pstrret);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToFileTime(_In_ REFPROPVARIANT propvar, _In_ PSTIME_FLAGS pstfOut, _Out_ FILETIME* pftOut);
+ #ifdef __cplusplus
+ HRESULT              PropVariantToCLSID(_In_ REFPROPVARIANT propvar, _Out_ CLSID *pclsid);
+ #endif
+ 
+ // Returns element count of a VT_VECTOR or VT_ARRAY value; or 1 otherwise
+-PSSTDAPI_(ULONG) PropVariantGetElementCount(_In_ REFPROPVARIANT propvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(ULONG) PropVariantGetElementCount(_In_ REFPROPVARIANT propvar);
+ 
+ // Extract data from a propvariant into a vector
+-PSSTDAPI PropVariantToBooleanVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgf, *pcElem) BOOL *prgf, _In_ ULONG crgf, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToInt16Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) SHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToUInt16Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) USHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToInt32Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) LONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToUInt32Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) ULONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToInt64Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) LONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToUInt64Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) ULONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToDoubleVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) DOUBLE *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI PropVariantToFileTimeVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgft, *pcElem) FILETIME *prgft, _In_ ULONG crgft, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToStringVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgsz, *pcElem) PWSTR *prgsz, _In_ ULONG crgsz, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToBooleanVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgf, *pcElem) BOOL *prgf, _In_ ULONG crgf, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToInt16Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) SHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToUInt16Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) USHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToInt32Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) LONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToUInt32Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) ULONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToInt64Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) LONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToUInt64Vector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) ULONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToDoubleVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgn, *pcElem) DOUBLE *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantToFileTimeVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgft, *pcElem) FILETIME *prgft, _In_ ULONG crgft, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToStringVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgsz, *pcElem) PWSTR *prgsz, _In_ ULONG crgsz, _Out_ ULONG *pcElem);
+ 
+ 
+ // Extract data from a propvariant and return an newly allocated vector (free with CoTaskMemFree)
+-_Check_return_ PSSTDAPI PropVariantToBooleanVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) BOOL **pprgf, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToInt16VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) SHORT **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToUInt16VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) USHORT **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToInt32VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) LONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToUInt32VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) ULONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToInt64VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) LONGLONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToUInt64VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) ULONGLONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToDoubleVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) DOUBLE **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToFileTimeVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) FILETIME **pprgft, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI PropVariantToStringVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) PWSTR **pprgsz, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToBooleanVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) BOOL **pprgf, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToInt16VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) SHORT **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToUInt16VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) USHORT **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToInt32VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) LONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToUInt32VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) ULONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToInt64VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) LONGLONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToUInt64VectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) ULONGLONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToDoubleVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) DOUBLE **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToFileTimeVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) FILETIME **pprgft, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantToStringVectorAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_buffer_(*pcElem) PWSTR **pprgsz, _Out_ ULONG *pcElem);
+ 
+ // Extract a single element from a propvariant.  If it is a VT_VECTOR or VT_ARRAY, returns the element you request.
+ // Otherwise iElem must equal 0 and the function will returns the value.
+-PSSTDAPI PropVariantGetBooleanElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ BOOL *pfVal);
+-PSSTDAPI PropVariantGetInt16Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ SHORT *pnVal);
+-PSSTDAPI PropVariantGetUInt16Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ USHORT *pnVal);
+-PSSTDAPI PropVariantGetInt32Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ LONG *pnVal);
+-PSSTDAPI PropVariantGetUInt32Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ ULONG *pnVal);
+-PSSTDAPI PropVariantGetInt64Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ LONGLONG *pnVal);
+-PSSTDAPI PropVariantGetUInt64Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ ULONGLONG *pnVal);
+-PSSTDAPI PropVariantGetDoubleElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ DOUBLE *pnVal);
+-PSSTDAPI PropVariantGetFileTimeElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ FILETIME *pftVal);
+-_Check_return_ PSSTDAPI PropVariantGetStringElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetBooleanElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ BOOL *pfVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetInt16Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ SHORT *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetUInt16Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ USHORT *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetInt32Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ LONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetUInt32Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ ULONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetInt64Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ LONGLONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetUInt64Elem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ ULONGLONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetDoubleElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ DOUBLE *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantGetFileTimeElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ FILETIME *pftVal);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI PropVariantGetStringElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
+ #ifdef __cplusplus
+ HRESULT  PropVariantGetElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
+ #endif
+ 
+ // Helpers
+-PSSTDAPI_(void) ClearPropVariantArray(_Inout_updates_(cVars) PROPVARIANT *rgPropVar, _In_ UINT cVars);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(void) ClearPropVariantArray(_Inout_updates_(cVars) PROPVARIANT *rgPropVar, _In_ UINT cVars);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+@@ -215,7 +220,11 @@ typedef enum
+     PVCU_YEAR    = 6
+ } PROPVAR_COMPARE_UNIT;
+ 
+-enum tagPROPVAR_COMPARE_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ tagPROPVAR_COMPARE_FLAGS
+ {
+     PVCF_DEFAULT                 = 0x00000000,   // When comparing strings, use StrCmpLogical
+     PVCF_TREATEMPTYASGREATERTHAN = 0x00000001,   // Empty/null values are greater-than non-empty values
+@@ -228,12 +237,16 @@ enum tagPROPVAR_COMPARE_FLAGS
+ typedef int PROPVAR_COMPARE_FLAGS;
+ 
+ // Comparisons
+-PSSTDAPI_(int) PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2, _In_ PROPVAR_COMPARE_UNIT unit, _In_ PROPVAR_COMPARE_FLAGS flags);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(int) PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2, _In_ PROPVAR_COMPARE_UNIT unit, _In_ PROPVAR_COMPARE_FLAGS flags);
+ #ifdef __cplusplus
+ int PropVariantCompare(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2);
+ #endif
+ 
+-enum tagPROPVAR_CHANGE_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ tagPROPVAR_CHANGE_FLAGS
+ {
+     PVCHF_DEFAULT           = 0x00000000,
+     PVCHF_NOVALUEPROP       = 0x00000001,       // Maps to VARIANT_NOVALUEPROP for VariantChangeType
+@@ -245,23 +258,23 @@ enum tagPROPVAR_CHANGE_FLAGS
+ typedef int PROPVAR_CHANGE_FLAGS;
+ 
+ // Coersions
+-PSSTDAPI PropVariantChangeType(_Out_ PROPVARIANT *ppropvarDest, _In_ REFPROPVARIANT propvarSrc, _In_ PROPVAR_CHANGE_FLAGS flags, _In_ VARTYPE vt);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI PropVariantChangeType(_Out_ PROPVARIANT *ppropvarDest, _In_ REFPROPVARIANT propvarSrc, _In_ PROPVAR_CHANGE_FLAGS flags, _Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt);
+ 
+ // Conversions
+-PSSTDAPI PropVariantToVariant(_In_ const PROPVARIANT *pPropVar, _Out_ VARIANT *pVar);
+-PSSTDAPI VariantToPropVariant(_In_ const VARIANT* pVar, _Out_ PROPVARIANT* pPropVar);
++_Windows_SupportedOS_WindowsVista_ PSSTDAPI PropVariantToVariant(_In_ const PROPVARIANT *pPropVar, _Out_ VARIANT *pVar);
++_Windows_SupportedOS_WindowsVista_ PSSTDAPI VariantToPropVariant(_In_ const VARIANT* pVar, _Out_ PROPVARIANT* pPropVar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ // Stg functions
+-_Check_return_ PSSTDAPI StgSerializePropVariant(
++_Windows_SupportedOS_Windows2000_ _Check_return_ PSSTDAPI StgSerializePropVariant(
+             _In_ const PROPVARIANT* ppropvar,
+             _Outptr_result_bytebuffer_(*pcb) SERIALIZEDPROPERTYVALUE** ppProp,
+             _Out_ ULONG* pcb);
+     
+-PSSTDAPI StgDeserializePropVariant(
++_Windows_SupportedOS_Windows2000_ PSSTDAPI StgDeserializePropVariant(
+             _In_ const SERIALIZEDPROPERTYVALUE* pprop,
+             _In_ ULONG cbMax,
+             _Out_ PROPVARIANT* ppropvar);
+@@ -283,30 +296,30 @@ BOOL IsVarTypeInteger(_In_ VARTYPE vt);
+ #endif
+ 
+ // Initialize a VARIANT
+-PSSTDAPI InitVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ VARIANT *pvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ VARIANT *pvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-PSSTDAPI InitVariantFromGUIDAsString(_In_ REFGUID guid, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromFileTime(_In_ const FILETIME *pft, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromFileTimeArray(_In_reads_opt_(cElems) const FILETIME *prgft, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromStrRet(_In_ STRRET *pstrret, _In_ PCUITEMID_CHILD pidl, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromVariantArrayElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromBooleanArray(_In_reads_(cElems) const BOOL *prgf, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromInt16Array(_In_reads_(cElems) const SHORT *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromUInt16Array(_In_reads_(cElems) const USHORT *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromInt32Array(_In_reads_(cElems) const LONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromUInt32Array(_In_reads_(cElems) const ULONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromInt64Array(_In_reads_(cElems) const LONGLONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromUInt64Array(_In_reads_(cElems) const ULONGLONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromDoubleArray(_In_reads_(cElems) const DOUBLE *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromStringArray(_In_reads_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromGUIDAsString(_In_ REFGUID guid, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromFileTime(_In_ const FILETIME *pft, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromFileTimeArray(_In_reads_opt_(cElems) const FILETIME *prgft, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromStrRet(_In_ STRRET *pstrret, _In_ PCUITEMID_CHILD pidl, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromVariantArrayElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromBooleanArray(_In_reads_(cElems) const BOOL *prgf, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromInt16Array(_In_reads_(cElems) const SHORT *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromUInt16Array(_In_reads_(cElems) const USHORT *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromInt32Array(_In_reads_(cElems) const LONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromUInt32Array(_In_reads_(cElems) const ULONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromInt64Array(_In_reads_(cElems) const LONGLONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromUInt64Array(_In_reads_(cElems) const ULONGLONG *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromDoubleArray(_In_reads_(cElems) const DOUBLE *prgn, _In_ ULONG cElems, _Out_ VARIANT *pvar);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI InitVariantFromStringArray(_In_reads_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ VARIANT *pvar);
+ #ifdef __cplusplus
+ HRESULT  InitVariantFromBoolean(_In_ BOOL fVal, _Out_ VARIANT *pvar);
+ HRESULT  InitVariantFromInt16(_In_ SHORT iVal, _Out_ VARIANT *pvar);
+@@ -324,83 +337,83 @@ HRESULT  InitVariantFromUnknown(_In_opt_ IUnknown *unknown, _Out_ VARIANT* varia
+ #endif
+ 
+ // Extract data from a VARIANT
+-PSSTDAPI_(BOOL)       VariantToBooleanWithDefault(_In_ REFVARIANT varIn, _In_ BOOL fDefault);
+-PSSTDAPI_(SHORT)      VariantToInt16WithDefault(_In_ REFVARIANT varIn, _In_ SHORT iDefault);
+-PSSTDAPI_(USHORT)     VariantToUInt16WithDefault(_In_ REFVARIANT varIn, _In_ USHORT uiDefault);
+-PSSTDAPI_(LONG)       VariantToInt32WithDefault(_In_ REFVARIANT varIn, _In_ LONG lDefault);
+-PSSTDAPI_(ULONG)      VariantToUInt32WithDefault(_In_ REFVARIANT varIn, _In_ ULONG ulDefault);
+-PSSTDAPI_(LONGLONG)   VariantToInt64WithDefault(_In_ REFVARIANT varIn, _In_ LONGLONG llDefault);
+-PSSTDAPI_(ULONGLONG)  VariantToUInt64WithDefault(_In_ REFVARIANT varIn, _In_ ULONGLONG ullDefault);
+-PSSTDAPI_(DOUBLE)     VariantToDoubleWithDefault(_In_ REFVARIANT varIn, _In_ DOUBLE dblDefault);
+-PSSTDAPI_(PCWSTR)     VariantToStringWithDefault(_In_ REFVARIANT varIn, _In_opt_ LPCWSTR pszDefault);
+-
+-PSSTDAPI              VariantToBoolean(_In_ REFVARIANT varIn, _Out_ BOOL *pfRet);
+-PSSTDAPI              VariantToInt16(_In_ REFVARIANT varIn, _Out_ SHORT *piRet);
+-PSSTDAPI              VariantToUInt16(_In_ REFVARIANT varIn, _Out_ USHORT *puiRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(BOOL)       VariantToBooleanWithDefault(_In_ REFVARIANT varIn, _In_ BOOL fDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(SHORT)      VariantToInt16WithDefault(_In_ REFVARIANT varIn, _In_ SHORT iDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(USHORT)     VariantToUInt16WithDefault(_In_ REFVARIANT varIn, _In_ USHORT uiDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(LONG)       VariantToInt32WithDefault(_In_ REFVARIANT varIn, _In_ LONG lDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(ULONG)      VariantToUInt32WithDefault(_In_ REFVARIANT varIn, _In_ ULONG ulDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(LONGLONG)   VariantToInt64WithDefault(_In_ REFVARIANT varIn, _In_ LONGLONG llDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(ULONGLONG)  VariantToUInt64WithDefault(_In_ REFVARIANT varIn, _In_ ULONGLONG ullDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(DOUBLE)     VariantToDoubleWithDefault(_In_ REFVARIANT varIn, _In_ DOUBLE dblDefault);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(PCWSTR)     VariantToStringWithDefault(_In_ REFVARIANT varIn, _In_opt_ LPCWSTR pszDefault);
++
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToBoolean(_In_ REFVARIANT varIn, _Out_ BOOL *pfRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToInt16(_In_ REFVARIANT varIn, _Out_ SHORT *piRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToUInt16(_In_ REFVARIANT varIn, _Out_ USHORT *puiRet);
+ PSSTDAPI              VariantToInt32(_In_ REFVARIANT varIn, _Out_ LONG *plRet);
+ PSSTDAPI              VariantToUInt32(_In_ REFVARIANT varIn, _Out_ ULONG *pulRet);
+-PSSTDAPI              VariantToInt64(_In_ REFVARIANT varIn, _Out_ LONGLONG *pllRet);
+-PSSTDAPI              VariantToUInt64(_In_ REFVARIANT varIn, _Out_ ULONGLONG *pullRet);
+-PSSTDAPI              VariantToDouble(_In_ REFVARIANT varIn, _Out_ DOUBLE *pdblRet);
+-PSSTDAPI              VariantToBuffer(_In_ REFVARIANT varIn, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToInt64(_In_ REFVARIANT varIn, _Out_ LONGLONG *pllRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToUInt64(_In_ REFVARIANT varIn, _Out_ ULONGLONG *pullRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToDouble(_In_ REFVARIANT varIn, _Out_ DOUBLE *pdblRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToBuffer(_In_ REFVARIANT varIn, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI              VariantToGUID(_In_ REFVARIANT varIn, _Out_ GUID *pguid);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToGUID(_In_ REFVARIANT varIn, _Out_ GUID *pguid);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-PSSTDAPI              VariantToString(_In_ REFVARIANT varIn, _Out_writes_(cchBuf) PWSTR pszBuf, _In_ UINT cchBuf);
+-_Check_return_ PSSTDAPI VariantToStringAlloc(_In_ REFVARIANT varIn, _Outptr_result_nullonfailure_ PWSTR *ppszBuf);
+-PSSTDAPI              VariantToDosDateTime(_In_ REFVARIANT varIn, _Out_ WORD *pwDate, _Out_ WORD *pwTime);
+-_Check_return_ PSSTDAPI VariantToStrRet(_In_ REFVARIANT varIn, _Out_ STRRET *pstrret);
+-PSSTDAPI              VariantToFileTime(_In_ REFVARIANT varIn, _In_ PSTIME_FLAGS stfOut, _Out_ FILETIME* pftOut);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToString(_In_ REFVARIANT varIn, _Out_writes_(cchBuf) PWSTR pszBuf, _In_ UINT cchBuf);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToStringAlloc(_In_ REFVARIANT varIn, _Outptr_result_nullonfailure_ PWSTR *ppszBuf);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToDosDateTime(_In_ REFVARIANT varIn, _Out_ WORD *pwDate, _Out_ WORD *pwTime);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToStrRet(_In_ REFVARIANT varIn, _Out_ STRRET *pstrret);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToFileTime(_In_ REFVARIANT varIn, _In_ PSTIME_FLAGS stfOut, _Out_ FILETIME* pftOut);
+ 
+ // Get the element count.  Returns number of elements for values of type VT_ARRAY; returns 1 otherwise.
+-PSSTDAPI_(ULONG) VariantGetElementCount(_In_ REFVARIANT varIn);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(ULONG) VariantGetElementCount(_In_ REFVARIANT varIn);
+ 
+ // Extract data from a VARIANT into a vector
+-PSSTDAPI VariantToBooleanArray(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) BOOL *prgf, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToInt16Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) SHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToUInt16Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) USHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToInt32Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) LONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToUInt32Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) ULONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToInt64Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) LONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToUInt64Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) ULONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-PSSTDAPI VariantToDoubleArray(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) DOUBLE *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToStringArray(_In_ REFVARIANT var, _Out_writes_to_(crgsz, *pcElem) PWSTR *prgsz, _In_ ULONG crgsz, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToBooleanArray(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) BOOL *prgf, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToInt16Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) SHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToUInt16Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) USHORT *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToInt32Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) LONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToUInt32Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) ULONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToInt64Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) LONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToUInt64Array(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) ULONGLONG *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantToDoubleArray(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) DOUBLE *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToStringArray(_In_ REFVARIANT var, _Out_writes_to_(crgsz, *pcElem) PWSTR *prgsz, _In_ ULONG crgsz, _Out_ ULONG *pcElem);
+ 
+ // Extract data from a VARIANT into a newly allocated vector (free with CoTaskMemFree)
+-_Check_return_ PSSTDAPI VariantToBooleanArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) BOOL **pprgf, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToInt16ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) SHORT **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToUInt16ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) USHORT **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToInt32ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) LONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToUInt32ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) ULONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToInt64ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) LONGLONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToUInt64ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) ULONGLONG **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToDoubleArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) DOUBLE **pprgn, _Out_ ULONG *pcElem);
+-_Check_return_ PSSTDAPI VariantToStringArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) PWSTR **pprgsz, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToBooleanArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) BOOL **pprgf, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToInt16ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) SHORT **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToUInt16ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) USHORT **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToInt32ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) LONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToUInt32ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) ULONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToInt64ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) LONGLONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToUInt64ArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) ULONGLONG **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToDoubleArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) DOUBLE **pprgn, _Out_ ULONG *pcElem);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantToStringArrayAlloc(_In_ REFVARIANT var, _Outptr_result_buffer_(*pcElem) PWSTR **pprgsz, _Out_ ULONG *pcElem);
+ 
+ // Get a single element of a VARIANT.  If it is type VT_ARRAY, returns a the requested element.  Otherwise
+ // iElem must equal 0 and the function returns the value.
+-PSSTDAPI VariantGetBooleanElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ BOOL *pfVal);
+-PSSTDAPI VariantGetInt16Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ SHORT *pnVal);
+-PSSTDAPI VariantGetUInt16Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ USHORT *pnVal);
+-PSSTDAPI VariantGetInt32Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ LONG *pnVal);
+-PSSTDAPI VariantGetUInt32Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ ULONG *pnVal);
+-PSSTDAPI VariantGetInt64Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ LONGLONG *pnVal);
+-PSSTDAPI VariantGetUInt64Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ ULONGLONG *pnVal);
+-PSSTDAPI VariantGetDoubleElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ DOUBLE *pnVal);
+-_Check_return_ PSSTDAPI VariantGetStringElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetBooleanElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ BOOL *pfVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetInt16Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ SHORT *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetUInt16Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ USHORT *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetInt32Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ LONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetUInt32Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ ULONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetInt64Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ LONGLONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetUInt64Elem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ ULONGLONG *pnVal);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI VariantGetDoubleElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ DOUBLE *pnVal);
++_Windows_SupportedOS_WindowsXP_ _Check_return_ PSSTDAPI VariantGetStringElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
+ #ifdef __cplusplus
+ HRESULT  VariantGetElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
+ #endif
+ 
+ // Helpers
+-PSSTDAPI_(void) ClearVariantArray(_Inout_updates_(cvars) VARIANT *pvars, _In_ UINT cvars);
+-PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(void) ClearVariantArray(_Inout_updates_(cvars) VARIANT *pvars, _In_ UINT cvars);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
+ 
+ //===========================
+ //
+@@ -414,7 +427,11 @@ PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
+ // propvar.caul.pElems[0] = current progress
+ // propvar.caul.pElems[1] = total progress
+ // propvar.caul.pElems[2] = DRAWPROGRESSFLAGS (see below);
+-typedef enum DRAWPROGRESSFLAGS
++typedef enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ DRAWPROGRESSFLAGS
+ {
+     DPF_NONE                = 0x0,  // No progress flags.
+     DPF_MARQUEE             = 0x1,  // The progress bar should draw in marquee mode.

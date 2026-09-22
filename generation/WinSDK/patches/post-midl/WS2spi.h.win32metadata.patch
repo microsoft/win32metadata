@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
-index e1d43ea98945da83ea1d8cc17a8e279c0a58fbca..6fe4c01243b643b0eecf49f258b06c7c24c61f78 100644
+index e1d43ea989..27ffb9c87d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2spi.h
 @@ -20,6 +20,7 @@
@@ -10,21 +10,333 @@ index e1d43ea98945da83ea1d8cc17a8e279c0a58fbca..6fe4c01243b643b0eecf49f258b06c7c
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -96,7 +97,7 @@ VOID
+  * Pointers to the individual entries in a service provider's proc table.
+  */
+ 
+-typedef
++_Win32_RAIIFree_(closesocket, -1) typedef
+ _Must_inspect_result_
+ SOCKET
+ (WSPAPI * LPWSPACCEPT)(
+@@ -262,7 +263,7 @@ int
+     _Out_ LPINT lpErrno
+     );
+ 
+-typedef
++_Win32_RAIIFree_(closesocket, -1) typedef
+ SOCKET
+ (WSPAPI * LPWSPJOINLEAF)(
+     _In_ SOCKET s,
+@@ -390,7 +391,7 @@ int
+     _Out_ LPINT lpErrno
+     );
+ 
+-typedef
++_Win32_RAIIFree_(closesocket, -1) typedef
+ _Must_inspect_result_
+ SOCKET
+ (WSPAPI * LPWSPSOCKET)(
+@@ -472,13 +473,13 @@ int
+     _Out_ LPINT lpErrno
+     );
+ 
+-typedef
++_Win32_RAIIFree_(WSACloseEvent, 0) typedef
+ WSAEVENT
+ (WSPAPI * LPWPUCREATEEVENT)(
+     _Out_ LPINT lpErrno
+     );
+ 
+-typedef
++_Win32_RAIIFree_(closesocket, -1) typedef
+ _Must_inspect_result_
+ SOCKET
+ (WSPAPI * LPWPUCREATESOCKETHANDLE)(
+@@ -503,7 +504,7 @@ int
+     _Out_ LPINT lpErrno
+     );
+ 
+-typedef
++_Win32_RAIIFree_(closesocket, -1) typedef
+ SOCKET
+ (WSPAPI * LPWPUMODIFYIFSHANDLE)(
+     _In_ DWORD dwCatalogEntryId,
 @@ -641,6 +642,8 @@ int
   * Installation and configuration entrypoints.
   */
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  int
  WSPAPI
  WSCEnumProtocols(
+@@ -666,7 +669,7 @@ int
+  * separate 64-bit and 32-bit catalogs.  API with '32' prefix
+  * allow 32 bit catalog manipulations by 64 bit process.
+  */
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCEnumProtocols32(
+     _In_opt_ LPINT   lpiProtocols,
 @@ -676,6 +679,8 @@ WSCEnumProtocols32(
      );
  #endif //(defined(_WIN64) && _WIN32_WINNT >= 0x0501)
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  int
  WSPAPI
  WSCDeinstallProvider(
+@@ -692,7 +697,7 @@ int
+ 
+ #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCDeinstallProvider32(
+     _In_   LPGUID lpProviderId,
+@@ -700,7 +705,7 @@ WSCDeinstallProvider32(
+     );
+ #endif //(defined(_WIN64) && _WIN32_WINNT >= 0x0501)
+ 
+-int
++_Windows_SupportedOS_Windows2000_ int
+ WSPAPI
+ WSCInstallProvider(
+     _In_ LPGUID lpProviderId,
+@@ -727,7 +732,7 @@ int
+  * It is needed to guarantee the same catalog IDs for provider catalog
+  * entries in both 64-bit and 32-bit catalogs.
+  */
+-int
++_Windows_SupportedOS_WindowsXP_ int
+ WSPAPI
+ WSCInstallProvider64_32(
+     _In_ LPGUID lpProviderId,
+@@ -738,7 +743,7 @@ WSCInstallProvider64_32(
+     );
+ #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+ 
+-int
++_Windows_SupportedOS_Windows2000_ int
+ WSPAPI
+ WSCGetProviderPath(
+     _In_ LPGUID lpProviderId,
+@@ -758,7 +763,7 @@ int
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+ #if defined(_WIN64)
+-_Success_(return == 0)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == 0)
+ int
+ WSPAPI
+ WSCGetProviderPath32(
+@@ -769,7 +774,7 @@ WSCGetProviderPath32(
+     );
+ #endif
+ 
+-int
++_Windows_SupportedOS_WindowsXP_ int
+ WSPAPI
+ WSCUpdateProvider(
+     _In_  LPGUID lpProviderId,
+@@ -790,7 +795,7 @@ int
+     );
+ 
+ #if defined(_WIN64)
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCUpdateProvider32(
+     _In_  LPGUID lpProviderId,
+@@ -870,7 +875,7 @@ typedef struct _WSC_PROVIDER_AUDIT_INFO {
+     // Full Path of EXE performing install
+ } WSC_PROVIDER_AUDIT_INFO;
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCSetProviderInfo( 
+     _In_ LPGUID lpProviderId,
+@@ -881,7 +886,7 @@ WSCSetProviderInfo(
+     _Out_ LPINT lpErrno
+     );
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCGetProviderInfo( 
+     _In_ LPGUID lpProviderId,
+@@ -894,7 +899,7 @@ WSCGetProviderInfo(
+ 
+ #if defined(_WIN64)
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCSetProviderInfo32( 
+     _In_ LPGUID lpProviderId,
+@@ -905,7 +910,7 @@ WSCSetProviderInfo32(
+     _Out_ LPINT lpErrno
+     );
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCGetProviderInfo32( 
+     _In_ LPGUID lpProviderId,
+@@ -922,7 +927,7 @@ WSCGetProviderInfo32(
+ // App Permitted LSP Categorization APIs
+ //
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCSetApplicationCategory(
+     _In_reads_(PathLength) LPCWSTR Path,
+@@ -934,7 +939,7 @@ WSCSetApplicationCategory(
+     _Out_ LPINT lpErrno
+     );
+ 
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCGetApplicationCategory(
+     _In_reads_(PathLength) LPCWSTR Path,
+@@ -1054,7 +1059,7 @@ WPUSetEvent(
+     _Out_ LPINT lpErrno
+     );
+ 
+-int
++_Windows_SupportedOS_Windows2000_ int
+ WSPAPI
+ WPUCompleteOverlappedRequest (
+     _In_ SOCKET s, 	
+@@ -1094,7 +1099,7 @@ WPUCloseThread(
+ #define LPFN_WSCENUMNAMESPACEPROVIDERS LPFN_WSAENUMNAMESPACEPROVIDERSW
+ 
+ #if defined(_WIN64)
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSAAPI
+ WSCEnumNameSpaceProviders32(
+     _Inout_ LPDWORD             lpdwBufferLength,
+@@ -1108,7 +1113,7 @@ WSCEnumNameSpaceProviders32(
+ #define LPFN_WSCENUMNAMESPACEPROVIDERSEX LPFN_WSAENUMNAMESPACEPROVIDERSEXW
+ 
+ #if defined(_WIN64)
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSAAPI
+ WSCEnumNameSpaceProvidersEx32(
+     _Inout_ LPDWORD     lpdwBufferLength,
+@@ -1117,7 +1122,7 @@ WSCEnumNameSpaceProvidersEx32(
+ #endif //(_WIN64)
+ #endif //(_WIN32_WINNT >= 0x0600)
+ 
+-INT
++_Windows_SupportedOS_Windows2000_ INT
+ WSPAPI
+ WSCInstallNameSpace (
+     _In_ LPWSTR lpszIdentifier,
+@@ -1138,7 +1143,7 @@ INT
+     );
+ 
+ #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSPAPI
+ WSCInstallNameSpace32 (
+     _In_ LPWSTR lpszIdentifier,
+@@ -1149,7 +1154,7 @@ WSCInstallNameSpace32 (
+     );
+ #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+ 
+-INT
++_Windows_SupportedOS_Windows2000_ INT
+ WSPAPI
+ WSCUnInstallNameSpace (
+     _In_ LPGUID lpProviderId
+@@ -1162,7 +1167,7 @@ INT
+     );
+ 
+ #if (_WIN32_WINNT >= 0x0600 )
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSPAPI
+ WSCInstallNameSpaceEx(
+     _In_ LPWSTR lpszIdentifier,
+@@ -1175,7 +1180,7 @@ WSCInstallNameSpaceEx(
+ #endif //(defined(_WIN32_WINNT >= 0x0600)
+ 
+ #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0600))
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSPAPI
+ WSCInstallNameSpaceEx32(
+     _In_ LPWSTR lpszIdentifier,
+@@ -1188,14 +1193,14 @@ WSCInstallNameSpaceEx32(
+ #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0600))
+ 
+ #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSPAPI
+ WSCUnInstallNameSpace32 (
+     _In_ LPGUID lpProviderId
+     );
+ #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+ 
+-INT
++_Windows_SupportedOS_Windows2000_ INT
+ WSPAPI
+ WSCEnableNSProvider (
+     _In_ LPGUID lpProviderId,
+@@ -1210,7 +1215,7 @@ INT
+     );
+ 
+ #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
+-INT
++_Windows_SupportedOS_WindowsVista_ INT
+ WSPAPI
+ WSCEnableNSProvider32 (
+     _In_ LPGUID lpProviderId,
+@@ -1257,7 +1262,7 @@ INT
+     _In_ LPWSAQUERYSETW lpqsRestrictions,
+     _In_ LPWSASERVICECLASSINFOW lpServiceClassInfo,
+     _In_ DWORD dwControlFlags,
+-    _Out_ LPHANDLE lphLookup
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ LPHANDLE lphLookup
+     );
+ 
+ typedef
+@@ -1397,7 +1402,7 @@ INT
+     _In_ LPWSAQUERYSET2W lpqsRestrictions,
+     _In_ DWORD dwControlFlags,
+     _In_ LPVOID lpvClientSessionArg,
+-    _Out_ LPHANDLE lphLookup
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ LPHANDLE lphLookup
+     );
+ 
+ typedef
+@@ -1450,14 +1455,14 @@ typedef const NSPV2_ROUTINE * PCNSPV2_ROUTINE, * LPCNSPV2_ROUTINE;
+ 
+ #if(_WIN32_WINNT >= 0x0600)
+ 
+-INT WSAAPI WSAAdvertiseProvider(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ INT WSAAPI WSAAdvertiseProvider(
+         _In_                const GUID *                    puuidProviderId,
+         _In_                const LPCNSPV2_ROUTINE          pNSPv2Routine);
+ 
+-INT WSAAPI WSAUnadvertiseProvider(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ INT WSAAPI WSAUnadvertiseProvider(
+         _In_                const GUID *                    puuidProviderId);
+ 
+-INT WSAAPI WSAProviderCompleteAsyncCall(
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ INT WSAAPI WSAProviderCompleteAsyncCall(
+         _In_                HANDLE                          hAsyncCall,
+         _In_                INT                             iRetCode);
+ 

@@ -1,0 +1,109 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PrinterExtension.h b/generation/WinSDK/RecompiledIdlHeaders/um/PrinterExtension.h
+index 096ccd44d1..dfe239da25 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PrinterExtension.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PrinterExtension.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -666,11 +667,11 @@ EXTERN_C const IID IID_IPrintSchemaElement;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_NamespaceUri( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrNamespaceUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrNamespaceUri) = 0;
+         
+     };
+     
+@@ -837,7 +838,7 @@ EXTERN_C const IID IID_IPrintSchemaDisplayableElement;
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDisplayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDisplayName) = 0;
+         
+     };
+     
+@@ -2407,7 +2408,7 @@ EXTERN_C const IID IID_IPrintSchemaParameterDefinition;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_UnitType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUnitType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUnitType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DataType( 
+             /* [annotation][retval][out] */ 
+@@ -4684,7 +4685,7 @@ EXTERN_C const IID IID_IPrinterPropertyBag;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrValue) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetString( 
+             /* [annotation][in] */ 
+@@ -5010,7 +5011,7 @@ EXTERN_C const IID IID_IPrinterScriptablePropertyBag;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrValue) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetString( 
+             /* [annotation][in] */ 
+@@ -5580,11 +5581,11 @@ EXTERN_C const IID IID_IPrinterQueue;
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *phPrinter) = 0;
++            _Win32_RAIIFree_(ClosePrinter, -1, 0) _Out_retval_  HANDLE *phPrinter) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendBidiQuery( 
+             /* [annotation][in] */ 
+@@ -5796,7 +5797,7 @@ EXTERN_C const IID IID_IPrintJob;
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+             /* [annotation][retval][out] */ 
+@@ -7381,7 +7382,7 @@ EXTERN_C const IID IID_IPrinterExtensionEventArgs;
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BidiNotification( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrBidiNotification) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrBidiNotification) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ReasonId( 
+             /* [annotation][retval][out] */ 
+@@ -7393,7 +7394,7 @@ EXTERN_C const IID IID_IPrinterExtensionEventArgs;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceApplication( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrApplication) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrApplication) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DetailedReasonId( 
+             /* [annotation][retval][out] */ 
+@@ -7405,7 +7406,7 @@ EXTERN_C const IID IID_IPrinterExtensionEventArgs;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_WindowParent( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *phwndParent) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_retval_  HANDLE *phwndParent) = 0;
+         
+     };
+     

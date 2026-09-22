@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h
-index 389157d1ec..cac769259e 100644
+index 389157d1ec..a14078a778 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSQuery.h
 @@ -5,6 +5,7 @@
@@ -15,7 +15,7 @@ index 389157d1ec..cac769259e 100644
  #define DSQPF_NOCHOOSECOLUMNS        0x00000040 // = 1 => remove choose columns from view
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD  cbStruct;
      DWORD  dwFlags;
@@ -24,7 +24,7 @@ index 389157d1ec..cac769259e 100644
  #define DSCOLUMNPROP_OBJECTCLASS    ((LONG)(-2))
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD dwFlags;                  // flags for this column
      INT   fmt;                      // list view form information
@@ -33,7 +33,7 @@ index 389157d1ec..cac769259e 100644
  } DSCOLUMN, * LPDSCOLUMN;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD     cbStruct;
      DWORD     dwFlags;
@@ -42,7 +42,7 @@ index 389157d1ec..cac769259e 100644
  //
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct  
  {
      DWORD   cbStruct;
      LONG    cClasses;               // number of classes in array

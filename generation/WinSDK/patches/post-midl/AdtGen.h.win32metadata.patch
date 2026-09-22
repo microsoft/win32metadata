@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h
-index 8a3b22766a..fe82059be5 100644
+index 8a3b22766a..999b467590 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdtGen.h
 @@ -29,6 +29,7 @@
@@ -15,7 +15,7 @@ index 8a3b22766a..fe82059be5 100644
  //
  
 -typedef enum _AUDIT_PARAM_TYPE
-+typedef enum _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _AUDIT_PARAM_TYPE
++typedef enum   _AUDIT_PARAM_TYPE
  {
      //
      // do we need this?

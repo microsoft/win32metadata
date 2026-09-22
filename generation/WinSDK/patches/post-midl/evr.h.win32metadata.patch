@@ -1,0 +1,126 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/evr.h b/generation/WinSDK/RecompiledIdlHeaders/um/evr.h
+index 3c113cfce7..f3aceb27c2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/evr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/evr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -254,7 +255,7 @@ EXTERN_C const IID IID_IMFVideoPositionMapper;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1F6A9F17-E70B-4e24-8AE4-0B2C3BA7A4AE")
++    MIDL_INTERFACE("1F6A9F17-E70B-4e24-8AE4-0B2C3BA7A4AE") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoPositionMapper : public IUnknown
+     {
+     public:
+@@ -361,7 +362,7 @@ EXTERN_C const IID IID_IMFVideoDeviceID;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A38D9567-5A9C-4f3c-B293-8EB415B279BA")
++    MIDL_INTERFACE("A38D9567-5A9C-4f3c-B293-8EB415B279BA") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoDeviceID : public IUnknown
+     {
+     public:
+@@ -492,7 +493,7 @@ EXTERN_C const IID IID_IMFVideoDisplayControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a490b1e4-ab84-4d31-a1b2-181e03b1077a")
++    MIDL_INTERFACE("a490b1e4-ab84-4d31-a1b2-181e03b1077a") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoDisplayControl : public IUnknown
+     {
+     public:
+@@ -819,7 +820,7 @@ EXTERN_C const IID IID_IMFVideoPresenter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("29AFF080-182A-4a5d-AF3B-448F3A6346CB")
++    MIDL_INTERFACE("29AFF080-182A-4a5d-AF3B-448F3A6346CB") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoPresenter : public IMFClockStateSink
+     {
+     public:
+@@ -969,7 +970,7 @@ EXTERN_C const IID IID_IMFDesiredSample;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56C294D0-753E-4260-8D61-A3D8820B1D54")
++    MIDL_INTERFACE("56C294D0-753E-4260-8D61-A3D8820B1D54") _Windows_SupportedOS_WindowsVista_ 
+     IMFDesiredSample : public IUnknown
+     {
+     public:
+@@ -1086,7 +1087,7 @@ EXTERN_C const IID IID_IMFVideoMixerControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A5C6C53F-C202-4aa5-9695-175BA8C508A5")
++    MIDL_INTERFACE("A5C6C53F-C202-4aa5-9695-175BA8C508A5") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoMixerControl : public IUnknown
+     {
+     public:
+@@ -1247,7 +1248,7 @@ EXTERN_C const IID IID_IMFVideoMixerControl2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8459616d-966e-4930-b658-54fa7e5a16d3")
++    MIDL_INTERFACE("8459616d-966e-4930-b658-54fa7e5a16d3") _Windows_SupportedOS_Windows7_ 
+     IMFVideoMixerControl2 : public IMFVideoMixerControl
+     {
+     public:
+@@ -1392,7 +1393,7 @@ EXTERN_C const IID IID_IMFVideoRenderer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DFDFD197-A9CA-43d8-B341-6AF3503792CD")
++    MIDL_INTERFACE("DFDFD197-A9CA-43d8-B341-6AF3503792CD") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoRenderer : public IUnknown
+     {
+     public:
+@@ -1483,7 +1484,7 @@ EXTERN_C const IID IID_IEVRFilterConfig;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("83E91E85-82C1-4ea7-801D-85DC50B75086")
++    MIDL_INTERFACE("83E91E85-82C1-4ea7-801D-85DC50B75086") _Windows_SupportedOS_WindowsVista_ 
+     IEVRFilterConfig : public IUnknown
+     {
+     public:
+@@ -1598,7 +1599,7 @@ EXTERN_C const IID IID_IEVRFilterConfigEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aea36028-796d-454f-beee-b48071e24304")
++    MIDL_INTERFACE("aea36028-796d-454f-beee-b48071e24304") _Windows_SupportedOS_Windows7_ 
+     IEVRFilterConfigEx : public IEVRFilterConfig
+     {
+     public:
+@@ -1736,7 +1737,7 @@ EXTERN_C const IID IID_IMFTopologyServiceLookup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fa993889-4383-415a-a930-dd472a8cf6f7")
++    MIDL_INTERFACE("fa993889-4383-415a-a930-dd472a8cf6f7") _Windows_SupportedOS_WindowsVista_ 
+     IMFTopologyServiceLookup : public IUnknown
+     {
+     public:
+@@ -1843,7 +1844,7 @@ EXTERN_C const IID IID_IMFTopologyServiceLookupClient;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fa99388a-4383-415a-a930-dd472a8cf6f7")
++    MIDL_INTERFACE("fa99388a-4383-415a-a930-dd472a8cf6f7") _Windows_SupportedOS_WindowsVista_ 
+     IMFTopologyServiceLookupClient : public IUnknown
+     {
+     public:
+@@ -1939,7 +1940,7 @@ EXTERN_C const IID IID_IEVRTrustedVideoPlugin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("83A4CE40-7710-494b-A893-A472049AF630")
++    MIDL_INTERFACE("83A4CE40-7710-494b-A893-A472049AF630") _Windows_SupportedOS_WindowsVista_ 
+     IEVRTrustedVideoPlugin : public IUnknown
+     {
+     public:

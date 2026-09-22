@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
-index af6ea4c7a5b021f22947d04286e3363037a42585..ca77ac9dd3a48259a157e2512b88e91a2b47b4ef 100644
+index af6ea4c7a5..acf91e6be0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
 @@ -107,6 +107,7 @@ extern "C"{
@@ -15,7 +15,7 @@ index af6ea4c7a5b021f22947d04286e3363037a42585..ca77ac9dd3a48259a157e2512b88e91a
      
      MIDL_INTERFACE("4CEC0D02-DEF7-4158-813A-C32A46945FF7")
 -    IBackgroundCopyServerCertificateValidationCallback : public IUnknown
-+    _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyServerCertificateValidationCallback : public IUnknown
++      IBackgroundCopyServerCertificateValidationCallback : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE ValidateServerCertificate( 
@@ -33,7 +33,7 @@ index af6ea4c7a5b021f22947d04286e3363037a42585..ca77ac9dd3a48259a157e2512b88e91a
      
      MIDL_INTERFACE("8A9263D3-FD4C-4EDA-9B28-30132A4D4E3C")
 -    IBackgroundCopyJobHttpOptions3 : public IBackgroundCopyJobHttpOptions2
-+    _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyJobHttpOptions3 : public IBackgroundCopyJobHttpOptions2
++      IBackgroundCopyJobHttpOptions3 : public IBackgroundCopyJobHttpOptions2
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetServerCertificateValidationInterface( 

@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Init.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Init.h
+index 5c14d5889b..59466f0273 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Init.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Init.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * Functions required to startup and cleanup AllJoyn.
+@@ -38,7 +39,7 @@ extern "C" {
+  *  - #ER_OK on success
+  *  - error code indicating failure otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_init(void);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_init(void);
+ 
+ /**
+  * Call this to release any resources acquired in alljoyn_init().  No AllJoyn
+@@ -51,7 +52,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_init(void);
+  *  - #ER_OK on success
+  *  - error code indicating failure otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_shutdown(void);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_shutdown(void);
+ 
+ /**
+  * This must be called before using any AllJoyn router functionality.
+@@ -69,7 +70,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_shutdown(void);
+  *  - #ER_OK on success
+  *  - error code indicating failure otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_routerinit(void);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_routerinit(void);
+ 
+ /**
+  * A variant of alljoyn_routerinit which allows providing a custom configuration.
+@@ -119,7 +120,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_routerinit(void);
+  *  - #ER_OK on success
+  *  - error code indicating failure otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_routerinitwithconfig(AJ_PCSTR configXml);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_routerinitwithconfig(AJ_PCSTR configXml);
+ 
+ /**
+  * Call this to release any resources acquired in alljoyn_routerinit()
+@@ -139,7 +140,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_routerinitwithconfig(AJ_PCSTR configXml);
+  *  - #ER_OK on success
+  *  - error code indicating failure otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_routershutdown(void);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_routershutdown(void);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

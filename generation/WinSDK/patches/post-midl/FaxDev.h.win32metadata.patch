@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h
-index fb60798806..142f9829a0 100644
+index fb60798806..0f1c439092 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index fb60798806..142f9829a0 100644
  //
  
 -typedef struct _FAX_SEND {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_SEND {
++typedef struct   _FAX_SEND {
      DWORD   SizeOfStruct;
      LPWSTR  FileName;
      LPWSTR  CallerName;
@@ -21,7 +21,7 @@ index fb60798806..142f9829a0 100644
  } FAX_SEND, *PFAX_SEND;
  
 -typedef struct _FAX_RECEIVE {
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_RECEIVE {
++typedef struct   _FAX_RECEIVE {
      DWORD   SizeOfStruct;
      LPWSTR  FileName;
      LPWSTR  ReceiverName;
@@ -30,7 +30,7 @@ index fb60798806..142f9829a0 100644
  } FAX_RECEIVE, *PFAX_RECEIVE;
  
 -typedef _Struct_size_bytes_(SizeOfStruct) struct _FAX_DEV_STATUS {
-+typedef _Struct_size_bytes_(SizeOfStruct) struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2003_ _FAX_DEV_STATUS {
++typedef _Struct_size_bytes_(SizeOfStruct) struct   _FAX_DEV_STATUS {
      DWORD   SizeOfStruct;
      DWORD   StatusId;
      DWORD   StringId;

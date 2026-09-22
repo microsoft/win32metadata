@@ -1,0 +1,72 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
+index 56a8a639db..3f83636059 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0000     Increment this if a change has global effects
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -3764,7 +3765,7 @@ JetInit3W(
+ 
+ JET_ERR JET_API
+ JetCreateInstanceA(
+-    _Out_ JET_INSTANCE *    pinstance,
++    _Win32_RAIIFree_(JetTerm, 0) _Out_ JET_INSTANCE *    pinstance,
+     _In_opt_ JET_PCSTR      szInstanceName );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
+@@ -3777,7 +3778,7 @@ JetCreateInstanceA(
+ 
+ JET_ERR JET_API
+ JetCreateInstanceW(
+-    _Out_ JET_INSTANCE *    pinstance,
++    _Win32_RAIIFree_(JetTerm, 0) _Out_ JET_INSTANCE *    pinstance,
+     _In_opt_ JET_PCWSTR     szInstanceName );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
+@@ -3799,7 +3800,7 @@ JetCreateInstanceW(
+ 
+ JET_ERR JET_API
+ JetCreateInstance2A(
+-    _Out_ JET_INSTANCE *    pinstance,
++    _Win32_RAIIFree_(JetTerm, 0) _Out_ JET_INSTANCE *    pinstance,
+     _In_opt_ JET_PCSTR      szInstanceName,
+     _In_opt_ JET_PCSTR      szDisplayName,
+     _In_ JET_GRBIT          grbit );
+@@ -3814,7 +3815,7 @@ JetCreateInstance2A(
+ 
+ JET_ERR JET_API
+ JetCreateInstance2W(
+-    _Out_ JET_INSTANCE *    pinstance,
++    _Win32_RAIIFree_(JetTerm, 0) _Out_ JET_INSTANCE *    pinstance,
+     _In_opt_ JET_PCWSTR     szInstanceName,
+     _In_opt_ JET_PCWSTR     szDisplayName,
+     _In_ JET_GRBIT          grbit );
+@@ -4081,7 +4082,7 @@ JetGetThreadStats(
+ 
+ JET_ERR JET_API JetBeginSessionA(
+     _In_ JET_INSTANCE   instance,
+-    _Out_ JET_SESID *   psesid,
++    _Win32_RAIIFree_(JetEndSession, 0) _Out_ JET_SESID *   psesid,
+     _In_opt_ JET_PCSTR  szUserName,
+     _In_opt_ JET_PCSTR  szPassword );
+ 
+@@ -4095,7 +4096,7 @@ JET_ERR JET_API JetBeginSessionA(
+ 
+ JET_ERR JET_API JetBeginSessionW(
+     _In_ JET_INSTANCE   instance,
+-    _Out_ JET_SESID *   psesid,
++    _Win32_RAIIFree_(JetEndSession, 0) _Out_ JET_SESID *   psesid,
+     _In_opt_ JET_PCWSTR szUserName,
+     _In_opt_ JET_PCWSTR szPassword );
+ 
+@@ -4115,7 +4116,7 @@ JET_ERR JET_API JetBeginSessionW(
+ JET_ERR JET_API
+ JetDupSession(
+     _In_ JET_SESID      sesid,
+-    _Out_ JET_SESID *   psesid );
++    _Win32_RAIIFree_(JetEndSession, 0) _Out_ JET_SESID *   psesid );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
+ #pragma endregion
