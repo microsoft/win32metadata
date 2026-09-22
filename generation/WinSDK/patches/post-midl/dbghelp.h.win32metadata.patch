@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
-index 09bb15cbc7..f6e42c98d2 100644
+index 09bb15cbc7..e792fba719 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index 09bb15cbc7..f6e42c98d2 100644
  /*++ BUILD Version: 0000     Increment this if a change has global effects
  
  Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -99,7 +100,7 @@ typedef struct _LOADED_IMAGE {
+     PIMAGE_SECTION_HEADER LastRvaSection;
+     ULONG                 NumberOfSections;
+     PIMAGE_SECTION_HEADER Sections;
+-    ULONG                 Characteristics;
++    _Win32_AssociatedEnum_(IMAGE_FILE_CHARACTERISTICS2) ULONG                 Characteristics;
+     BOOLEAN               fSystemImage;
+     BOOLEAN               fDOSImage;
+     BOOLEAN               fReadOnly;
 @@ -138,7 +139,7 @@ typedef BOOL
      _In_ PVOID CallerData
      );
@@ -1983,7 +1992,7 @@ index 09bb15cbc7..f6e42c98d2 100644
  IMAGEAPI
  RemoveInvalidModuleList(
      _In_ HANDLE hProcess
-@@ -4367,4 +4391,174 @@ RangeMapWrite(
+@@ -4367,4 +4391,247 @@ RangeMapWrite(
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
  #pragma endregion
  
@@ -2158,3 +2167,76 @@ index 09bb15cbc7..f6e42c98d2 100644
 +#endif
 +
  #endif // _DBGHELP_
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_IMAGE_FILE_CHARACTERISTICS2
++#define WIN32METADATA_ENUM_IMAGE_FILE_CHARACTERISTICS2
++#pragma push_macro("IMAGE_FILE_RELOCS_STRIPPED2")
++#undef IMAGE_FILE_RELOCS_STRIPPED2
++#pragma push_macro("IMAGE_FILE_EXECUTABLE_IMAGE2")
++#undef IMAGE_FILE_EXECUTABLE_IMAGE2
++#pragma push_macro("IMAGE_FILE_LINE_NUMS_STRIPPED2")
++#undef IMAGE_FILE_LINE_NUMS_STRIPPED2
++#pragma push_macro("IMAGE_FILE_LOCAL_SYMS_STRIPPED2")
++#undef IMAGE_FILE_LOCAL_SYMS_STRIPPED2
++#pragma push_macro("IMAGE_FILE_AGGRESIVE_WS_TRIM2")
++#undef IMAGE_FILE_AGGRESIVE_WS_TRIM2
++#pragma push_macro("IMAGE_FILE_LARGE_ADDRESS_AWARE2")
++#undef IMAGE_FILE_LARGE_ADDRESS_AWARE2
++#pragma push_macro("IMAGE_FILE_BYTES_REVERSED_LO2")
++#undef IMAGE_FILE_BYTES_REVERSED_LO2
++#pragma push_macro("IMAGE_FILE_32BIT_MACHINE2")
++#undef IMAGE_FILE_32BIT_MACHINE2
++#pragma push_macro("IMAGE_FILE_DEBUG_STRIPPED2")
++#undef IMAGE_FILE_DEBUG_STRIPPED2
++#pragma push_macro("IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP2")
++#undef IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP2
++#pragma push_macro("IMAGE_FILE_NET_RUN_FROM_SWAP2")
++#undef IMAGE_FILE_NET_RUN_FROM_SWAP2
++#pragma push_macro("IMAGE_FILE_SYSTEM_2")
++#undef IMAGE_FILE_SYSTEM_2
++#pragma push_macro("IMAGE_FILE_DLL_2")
++#undef IMAGE_FILE_DLL_2
++#pragma push_macro("IMAGE_FILE_UP_SYSTEM_ONLY_2")
++#undef IMAGE_FILE_UP_SYSTEM_ONLY_2
++#pragma push_macro("IMAGE_FILE_BYTES_REVERSED_HI_2")
++#undef IMAGE_FILE_BYTES_REVERSED_HI_2
++namespace Windows { namespace MetadataEnumValues {
++namespace IMAGE_FILE_CHARACTERISTICS2Values {
++enum [[clang::flag_enum]] IMAGE_FILE_CHARACTERISTICS2 : unsigned int
++{
++    IMAGE_FILE_RELOCS_STRIPPED2 = 1U,
++    IMAGE_FILE_EXECUTABLE_IMAGE2 = 2U,
++    IMAGE_FILE_LINE_NUMS_STRIPPED2 = 4U,
++    IMAGE_FILE_LOCAL_SYMS_STRIPPED2 = 8U,
++    IMAGE_FILE_AGGRESIVE_WS_TRIM2 = 16U,
++    IMAGE_FILE_LARGE_ADDRESS_AWARE2 = 32U,
++    IMAGE_FILE_BYTES_REVERSED_LO2 = 128U,
++    IMAGE_FILE_32BIT_MACHINE2 = 256U,
++    IMAGE_FILE_DEBUG_STRIPPED2 = 512U,
++    IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP2 = 1024U,
++    IMAGE_FILE_NET_RUN_FROM_SWAP2 = 2048U,
++    IMAGE_FILE_SYSTEM_2 = 4096U,
++    IMAGE_FILE_DLL_2 = 8192U,
++    IMAGE_FILE_UP_SYSTEM_ONLY_2 = 16384U,
++    IMAGE_FILE_BYTES_REVERSED_HI_2 = 32768U,
++};
++}
++} }
++#pragma pop_macro("IMAGE_FILE_BYTES_REVERSED_HI_2")
++#pragma pop_macro("IMAGE_FILE_UP_SYSTEM_ONLY_2")
++#pragma pop_macro("IMAGE_FILE_DLL_2")
++#pragma pop_macro("IMAGE_FILE_SYSTEM_2")
++#pragma pop_macro("IMAGE_FILE_NET_RUN_FROM_SWAP2")
++#pragma pop_macro("IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP2")
++#pragma pop_macro("IMAGE_FILE_DEBUG_STRIPPED2")
++#pragma pop_macro("IMAGE_FILE_32BIT_MACHINE2")
++#pragma pop_macro("IMAGE_FILE_BYTES_REVERSED_LO2")
++#pragma pop_macro("IMAGE_FILE_LARGE_ADDRESS_AWARE2")
++#pragma pop_macro("IMAGE_FILE_AGGRESIVE_WS_TRIM2")
++#pragma pop_macro("IMAGE_FILE_LOCAL_SYMS_STRIPPED2")
++#pragma pop_macro("IMAGE_FILE_LINE_NUMS_STRIPPED2")
++#pragma pop_macro("IMAGE_FILE_EXECUTABLE_IMAGE2")
++#pragma pop_macro("IMAGE_FILE_RELOCS_STRIPPED2")
++#endif
++#endif

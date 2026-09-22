@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..e4d59cb610 100644
+index f99e9294f5..fe659be298 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -5356,7 +5356,7 @@ index f99e9294f5..e4d59cb610 100644
  BOOL
  WINAPI
  DestroyCursor(
-@@ -10723,7 +10728,7 @@ CopyCursor(
+@@ -10723,12 +10728,12 @@ CopyCursor(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5365,6 +5365,12 @@ index f99e9294f5..e4d59cb610 100644
  BOOL
  WINAPI
  SetSystemCursor(
+     _In_ HCURSOR hcur,
+-    _In_ DWORD id);
++    _Win32_AssociatedEnum_(SYSTEM_CURSOR_ID) _In_ DWORD id);
+ 
+ typedef struct _ICONINFO {
+     BOOL    fIcon;
 @@ -10739,13 +10744,13 @@ typedef struct _ICONINFO {
  } ICONINFO;
  typedef ICONINFO *PICONINFO;
@@ -6992,11 +6998,12 @@ index f99e9294f5..e4d59cb610 100644
  BOOL
  WINAPI
  SetProcessRestrictionExemption(
-@@ -16485,6 +16490,7234 @@ EnterMoveSizeLoop(
+@@ -16485,7 +16490,7304 @@ EnterMoveSizeLoop(
  }
  #endif  /* __cplusplus */
  
-+
+-#endif /* !_WINUSER_ */
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("BDR_RAISEDOUTER")
 +#undef BDR_RAISEDOUTER
@@ -10557,7 +10564,7 @@ index f99e9294f5..e4d59cb610 100644
 +#pragma pop_macro("MAPVK_VSC_TO_VK")
 +#pragma pop_macro("MAPVK_VK_TO_VSC")
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("TOUCH_FEEDBACK_DEFAULT")
 +#undef TOUCH_FEEDBACK_DEFAULT
@@ -10575,7 +10582,7 @@ index f99e9294f5..e4d59cb610 100644
 +#pragma pop_macro("TOUCH_FEEDBACK_INDIRECT")
 +#pragma pop_macro("TOUCH_FEEDBACK_DEFAULT")
 +#endif
-+
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("GID_BEGIN")
 +#undef GID_BEGIN
@@ -14224,6 +14231,76 @@ index f99e9294f5..e4d59cb610 100644
 +#pragma pop_macro("DI_MASK")
 +#endif
 +
- #endif /* !_WINUSER_ */
- 
- 
++#endif /* !_WINUSER_ */
++
++
++
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_SYSTEM_CURSOR_ID
++#define WIN32METADATA_ENUM_SYSTEM_CURSOR_ID
++#pragma push_macro("OCR_APPSTARTING")
++#undef OCR_APPSTARTING
++#pragma push_macro("OCR_NORMAL")
++#undef OCR_NORMAL
++#pragma push_macro("OCR_CROSS")
++#undef OCR_CROSS
++#pragma push_macro("OCR_HAND")
++#undef OCR_HAND
++#pragma push_macro("OCR_HELP")
++#undef OCR_HELP
++#pragma push_macro("OCR_IBEAM")
++#undef OCR_IBEAM
++#pragma push_macro("OCR_NO")
++#undef OCR_NO
++#pragma push_macro("OCR_SIZEALL")
++#undef OCR_SIZEALL
++#pragma push_macro("OCR_SIZENESW")
++#undef OCR_SIZENESW
++#pragma push_macro("OCR_SIZENS")
++#undef OCR_SIZENS
++#pragma push_macro("OCR_SIZENWSE")
++#undef OCR_SIZENWSE
++#pragma push_macro("OCR_SIZEWE")
++#undef OCR_SIZEWE
++#pragma push_macro("OCR_UP")
++#undef OCR_UP
++#pragma push_macro("OCR_WAIT")
++#undef OCR_WAIT
++namespace Windows { namespace MetadataEnumValues {
++namespace SYSTEM_CURSOR_IDValues {
++enum SYSTEM_CURSOR_ID : unsigned int
++{
++    OCR_APPSTARTING = 32650U,
++    OCR_NORMAL = 32512U,
++    OCR_CROSS = 32515U,
++    OCR_HAND = 32649U,
++    OCR_HELP = 32651U,
++    OCR_IBEAM = 32513U,
++    OCR_NO = 32648U,
++    OCR_SIZEALL = 32646U,
++    OCR_SIZENESW = 32643U,
++    OCR_SIZENS = 32645U,
++    OCR_SIZENWSE = 32642U,
++    OCR_SIZEWE = 32644U,
++    OCR_UP = 32516U,
++    OCR_WAIT = 32514U,
++};
++}
++} }
++#pragma pop_macro("OCR_WAIT")
++#pragma pop_macro("OCR_UP")
++#pragma pop_macro("OCR_SIZEWE")
++#pragma pop_macro("OCR_SIZENWSE")
++#pragma pop_macro("OCR_SIZENS")
++#pragma pop_macro("OCR_SIZENESW")
++#pragma pop_macro("OCR_SIZEALL")
++#pragma pop_macro("OCR_NO")
++#pragma pop_macro("OCR_IBEAM")
++#pragma pop_macro("OCR_HELP")
++#pragma pop_macro("OCR_HAND")
++#pragma pop_macro("OCR_CROSS")
++#pragma pop_macro("OCR_NORMAL")
++#pragma pop_macro("OCR_APPSTARTING")
++#endif
++#endif

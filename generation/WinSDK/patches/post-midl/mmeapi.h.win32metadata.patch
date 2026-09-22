@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
-index 7c68a997c8..33098ffeaf 100644
+index 7c68a997c8..44bf2cd619 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 @@ -1,3 +1,4 @@
@@ -16,7 +16,7 @@ index 7c68a997c8..33098ffeaf 100644
  UINT
  WINAPI
  waveOutGetNumDevs(
-@@ -427,11 +428,11 @@ waveOutGetErrorTextW(
+@@ -427,26 +428,26 @@ waveOutGetErrorTextW(
  MMRESULT WINAPI waveOutGetErrorText(MMRESULT mmrError, LPSTR pszText, UINT cchText);
  #endif
  
@@ -30,8 +30,9 @@ index 7c68a997c8..33098ffeaf 100644
      _In_ UINT uDeviceID,
      _In_ LPCWAVEFORMATEX pwfx,
      _In_opt_ DWORD_PTR dwCallback,
-@@ -439,14 +440,14 @@ waveOutOpen(
-     _In_ DWORD fdwOpen
+     _In_opt_ DWORD_PTR dwInstance,
+-    _In_ DWORD fdwOpen
++    _Win32_AssociatedEnum_(MIDI_WAVE_OPEN_TYPE) _In_ DWORD fdwOpen
      );
  
 -WINMMAPI
@@ -160,7 +161,7 @@ index 7c68a997c8..33098ffeaf 100644
  UINT
  WINAPI
  waveInGetNumDevs(
-@@ -634,11 +635,11 @@ waveInGetErrorTextW(
+@@ -634,26 +635,26 @@ waveInGetErrorTextW(
  MMRESULT WINAPI waveInGetErrorText(MMRESULT mmrError, LPSTR pszText, UINT cchText);
  #endif
  
@@ -174,8 +175,9 @@ index 7c68a997c8..33098ffeaf 100644
      _In_ UINT uDeviceID,
      _In_ LPCWAVEFORMATEX pwfx,
      _In_opt_ DWORD_PTR dwCallback,
-@@ -646,14 +647,14 @@ waveInOpen(
-     _In_ DWORD fdwOpen
+     _In_opt_ DWORD_PTR dwInstance,
+-    _In_ DWORD fdwOpen
++    _Win32_AssociatedEnum_(MIDI_WAVE_OPEN_TYPE) _In_ DWORD fdwOpen
      );
  
 -WINMMAPI
@@ -402,7 +404,8 @@ index 7c68a997c8..33098ffeaf 100644
      _In_ UINT uDeviceID,
      _In_opt_ DWORD_PTR dwCallback,
      _In_opt_ DWORD_PTR dwInstance,
-     _In_ DWORD fdwOpen
+-    _In_ DWORD fdwOpen
++    _Win32_AssociatedEnum_(MIDI_WAVE_OPEN_TYPE) _In_ DWORD fdwOpen
      );
  
 -WINMMAPI
@@ -539,7 +542,8 @@ index 7c68a997c8..33098ffeaf 100644
      _In_ UINT uDeviceID,
      _In_opt_ DWORD_PTR dwCallback,
      _In_opt_ DWORD_PTR dwInstance,
-     _In_ DWORD fdwOpen
+-    _In_ DWORD fdwOpen
++    _Win32_AssociatedEnum_(MIDI_WAVE_OPEN_TYPE) _In_ DWORD fdwOpen
      );
  
 -WINMMAPI
@@ -798,7 +802,7 @@ index 7c68a997c8..33098ffeaf 100644
  MMRESULT
  WINAPI
  mixerSetControlDetails(
-@@ -2435,5 +2436,92 @@ mixerSetControlDetails(
+@@ -2435,5 +2436,161 @@ mixerSetControlDetails(
  }
  #endif
  
@@ -891,3 +895,72 @@ index 7c68a997c8..33098ffeaf 100644
 +
  #endif // _MMEAPI_H_
  
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_MIDI_WAVE_OPEN_TYPE
++#define WIN32METADATA_ENUM_MIDI_WAVE_OPEN_TYPE
++#pragma push_macro("CALLBACK_TYPEMASK")
++#undef CALLBACK_TYPEMASK
++#pragma push_macro("CALLBACK_NULL")
++#undef CALLBACK_NULL
++#pragma push_macro("CALLBACK_WINDOW")
++#undef CALLBACK_WINDOW
++#pragma push_macro("CALLBACK_TASK")
++#undef CALLBACK_TASK
++#pragma push_macro("CALLBACK_FUNCTION")
++#undef CALLBACK_FUNCTION
++#pragma push_macro("CALLBACK_THREAD")
++#undef CALLBACK_THREAD
++#pragma push_macro("CALLBACK_EVENT")
++#undef CALLBACK_EVENT
++#pragma push_macro("WAVE_FORMAT_QUERY")
++#undef WAVE_FORMAT_QUERY
++#pragma push_macro("WAVE_ALLOWSYNC")
++#undef WAVE_ALLOWSYNC
++#pragma push_macro("WAVE_MAPPED")
++#undef WAVE_MAPPED
++#pragma push_macro("WAVE_FORMAT_DIRECT")
++#undef WAVE_FORMAT_DIRECT
++#pragma push_macro("WAVE_FORMAT_DIRECT_QUERY")
++#undef WAVE_FORMAT_DIRECT_QUERY
++#pragma push_macro("WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE")
++#undef WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE
++#pragma push_macro("MIDI_IO_STATUS")
++#undef MIDI_IO_STATUS
++namespace Windows { namespace MetadataEnumValues {
++namespace MIDI_WAVE_OPEN_TYPEValues {
++enum [[clang::flag_enum]] MIDI_WAVE_OPEN_TYPE : unsigned int
++{
++    CALLBACK_TYPEMASK = 458752U,
++    CALLBACK_NULL = 0U,
++    CALLBACK_WINDOW = 65536U,
++    CALLBACK_TASK = 131072U,
++    CALLBACK_FUNCTION = 196608U,
++    CALLBACK_THREAD = 131072U,
++    CALLBACK_EVENT = 327680U,
++    WAVE_FORMAT_QUERY = 1U,
++    WAVE_ALLOWSYNC = 2U,
++    WAVE_MAPPED = 4U,
++    WAVE_FORMAT_DIRECT = 8U,
++    WAVE_FORMAT_DIRECT_QUERY = 9U,
++    WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 16U,
++    MIDI_IO_STATUS = 32U,
++};
++}
++} }
++#pragma pop_macro("MIDI_IO_STATUS")
++#pragma pop_macro("WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE")
++#pragma pop_macro("WAVE_FORMAT_DIRECT_QUERY")
++#pragma pop_macro("WAVE_FORMAT_DIRECT")
++#pragma pop_macro("WAVE_MAPPED")
++#pragma pop_macro("WAVE_ALLOWSYNC")
++#pragma pop_macro("WAVE_FORMAT_QUERY")
++#pragma pop_macro("CALLBACK_EVENT")
++#pragma pop_macro("CALLBACK_THREAD")
++#pragma pop_macro("CALLBACK_FUNCTION")
++#pragma pop_macro("CALLBACK_TASK")
++#pragma pop_macro("CALLBACK_WINDOW")
++#pragma pop_macro("CALLBACK_NULL")
++#pragma pop_macro("CALLBACK_TYPEMASK")
++#endif
++#endif

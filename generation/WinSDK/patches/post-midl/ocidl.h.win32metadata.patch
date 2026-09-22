@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
-index 7b7e6ba75d..c738343f67 100644
+index 7b7e6ba75d..e58ff907dc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
 @@ -1,3 +1,4 @@
@@ -134,7 +134,7 @@ index 7b7e6ba75d..c738343f67 100644
      IOleControlSite : public IUnknown
      {
      public:
-@@ -1766,7 +1767,7 @@ EXTERN_C const IID IID_IOleControlSite;
+@@ -1766,13 +1767,13 @@ EXTERN_C const IID IID_IOleControlSite;
              /* [annotation][out][in] */ 
              _Inout_  POINTF *pPtfContainer,
              /* [annotation][in] */ 
@@ -142,6 +142,13 @@ index 7b7e6ba75d..c738343f67 100644
 +            _Win32_AssociatedEnum_(XFORMCOORDS) _In_  DWORD dwFlags) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
+             /* [annotation][in] */ 
+             _In_  MSG *pMsg,
+             /* [annotation][in] */ 
+-            _In_  DWORD grfModifiers) = 0;
++            _Win32_AssociatedEnum_(KEYMODIFIERS) _In_  DWORD grfModifiers) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnFocus( 
              /* [annotation][in] */ 
 @@ -1929,7 +1930,7 @@ EXTERN_C const IID IID_IPropertyPage;
  
@@ -557,7 +564,7 @@ index 7b7e6ba75d..c738343f67 100644
  
  unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
  unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
-@@ -7988,6 +7989,29 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+@@ -7988,6 +7989,54 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
  }
  #endif
  
@@ -587,3 +594,28 @@ index 7b7e6ba75d..c738343f67 100644
  #endif
  
  
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_KEYMODIFIERS
++#define WIN32METADATA_ENUM_KEYMODIFIERS
++#pragma push_macro("KEYMOD_SHIFT")
++#undef KEYMOD_SHIFT
++#pragma push_macro("KEYMOD_CONTROL")
++#undef KEYMOD_CONTROL
++#pragma push_macro("KEYMOD_ALT")
++#undef KEYMOD_ALT
++namespace Windows { namespace MetadataEnumValues {
++namespace KEYMODIFIERSValues {
++enum [[clang::flag_enum]] KEYMODIFIERS : unsigned int
++{
++    KEYMOD_SHIFT = 1U,
++    KEYMOD_CONTROL = 2U,
++    KEYMOD_ALT = 4U,
++};
++}
++} }
++#pragma pop_macro("KEYMOD_ALT")
++#pragma pop_macro("KEYMOD_CONTROL")
++#pragma pop_macro("KEYMOD_SHIFT")
++#endif
++#endif
