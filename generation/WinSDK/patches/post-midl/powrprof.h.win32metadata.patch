@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
-index 7d68d1419c..23bb18a3f2 100644
+index 7d68d1419c..fa02425226 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
 @@ -18,6 +18,7 @@
@@ -645,7 +645,7 @@ index 7d68d1419c..23bb18a3f2 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Windows_SupportedOS_WindowsVista_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
++
  STDAPI_(DWORD)
  PowerReplaceDefaultPowerSchemes(
      VOID

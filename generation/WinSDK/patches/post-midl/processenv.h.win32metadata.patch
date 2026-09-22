@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h b/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
-index 8e24b64465..d976380d3b 100644
+index 8e24b64465..13ca20859e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
 @@ -17,6 +17,7 @@
@@ -81,7 +81,7 @@ index 8e24b64465..d976380d3b 100644
  #endif // !UNICODE
  
 +_Windows_SupportedOS_WindowsXP_
-+_Win32_RAIIFree_(FreeEnvironmentStringsA)
++
  WINBASEAPI
  _NullNull_terminated_
  LPCH
@@ -90,7 +90,7 @@ index 8e24b64465..d976380d3b 100644
      );
  
 +_Windows_SupportedOS_WindowsXP_
-+_Win32_RAIIFree_(FreeEnvironmentStringsW)
++
  WINBASEAPI
  _NullNull_terminated_
  LPWCH

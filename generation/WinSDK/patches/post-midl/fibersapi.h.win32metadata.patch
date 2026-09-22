@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h
-index 0383dfc960..71661f3089 100644
+index 0383dfc960..2a8f48f3d6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h
 @@ -16,6 +16,7 @@
@@ -58,8 +58,8 @@ index 0383dfc960..71661f3089 100644
  
  #if (_WIN32_WINNT >= 0x0600)
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBASEAPI
  BOOL
  WINAPI

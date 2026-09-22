@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
-index b7ebb2e69d..def8820c4b 100644
+index b7ebb2e69d..3d054cea68 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
 @@ -1,4 +1,5 @@
@@ -142,7 +142,7 @@ index b7ebb2e69d..def8820c4b 100644
 +_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmIsIME(IN HKL);
  
 -BOOL WINAPI ImmSimulateHotKey(IN HWND, IN DWORD);
-+_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmSimulateHotKey(IN HWND, IN DWORD);
++_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmSimulateHotKey(IN HWND, _Win32_AssociatedEnum_(IME_HOTKEY_IDENTIFIER) IN DWORD);
  
 -HIMC WINAPI ImmCreateContext(void);
 -BOOL WINAPI ImmDestroyContext(IN HIMC);
@@ -161,8 +161,8 @@ index b7ebb2e69d..def8820c4b 100644
  
 -LONG  WINAPI ImmGetCompositionStringA(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
 -LONG  WINAPI ImmGetCompositionStringW(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
-+_Windows_SupportedOS_WindowsXP_ LONG  WINAPI  ImmGetCompositionStringA(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
-+_Windows_SupportedOS_WindowsXP_ LONG  WINAPI  ImmGetCompositionStringW(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
++_Windows_SupportedOS_WindowsXP_ LONG  WINAPI  ImmGetCompositionStringA(IN HIMC, _Win32_AssociatedEnum_(IME_COMPOSITION_STRING) IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
++_Windows_SupportedOS_WindowsXP_ LONG  WINAPI  ImmGetCompositionStringW(IN HIMC, _Win32_AssociatedEnum_(IME_COMPOSITION_STRING) IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
  #ifdef UNICODE
  #define ImmGetCompositionString  ImmGetCompositionStringW
  #else
@@ -214,7 +214,7 @@ index b7ebb2e69d..def8820c4b 100644
 -BOOL WINAPI ImmGetOpenStatus(IN HIMC);
 -BOOL WINAPI ImmSetOpenStatus(IN HIMC, IN BOOL);
 +_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmGetConversionStatus(IN HIMC, _Win32_AssociatedEnum_(IME_CONVERSION_MODE) _Out_opt_ LPDWORD lpfdwConversion, _Win32_AssociatedEnum_(IME_SENTENCE_MODE) _Out_opt_ LPDWORD lpfdwSentence);
-+_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmSetConversionStatus(IN HIMC, IN DWORD, IN DWORD);
++_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmSetConversionStatus(IN HIMC, _Win32_AssociatedEnum_(IME_CONVERSION_MODE) IN DWORD, _Win32_AssociatedEnum_(IME_SENTENCE_MODE) IN DWORD);
 +_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmGetOpenStatus(IN HIMC);
 +_Windows_SupportedOS_WindowsXP_ BOOL WINAPI  ImmSetOpenStatus(IN HIMC, IN BOOL);
  
@@ -252,8 +252,8 @@ index b7ebb2e69d..def8820c4b 100644
  
 -LRESULT WINAPI ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
 -LRESULT WINAPI ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
-+_Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
-+_Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
++_Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeA(IN HKL, IN HIMC, _Win32_AssociatedEnum_(IME_ESCAPE) IN UINT, IN LPVOID);
++_Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeW(IN HKL, IN HIMC, _Win32_AssociatedEnum_(IME_ESCAPE) IN UINT, IN LPVOID);
  #ifdef UNICODE
  #define ImmEscape  ImmEscapeW
  #else

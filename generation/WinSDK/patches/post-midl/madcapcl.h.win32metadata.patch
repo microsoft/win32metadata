@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
-index 381c04598d..997ae7a0f7 100644
+index 381c04598d..2bf8b712c4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 @@ -7,6 +7,7 @@ extern "C" {
@@ -67,10 +67,11 @@ index 381c04598d..997ae7a0f7 100644
      IN  OUT  PDWORD   Version
      );
  
- VOID
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
  APIENTRY
 -McastApiCleanup(
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ McastApiCleanup(
++  McastApiCleanup(
      VOID
      );
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
-index d9c3d10330..4c08b6108d 100644
+index d9c3d10330..e0d9fa9295 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 @@ -1,3 +1,4 @@
@@ -798,7 +798,7 @@ index d9c3d10330..4c08b6108d 100644
  BOOL
  WINAPI
  PrivilegeCheck(
-@@ -1192,11 +1193,11 @@ PrivilegedServiceAuditAlarmW(
+@@ -1192,24 +1193,24 @@ PrivilegedServiceAuditAlarmW(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -812,7 +812,13 @@ index d9c3d10330..4c08b6108d 100644
      _Out_ LPDWORD DesiredAccess
      );
  
-@@ -1209,7 +1210,7 @@ RevertToSelf(
+ #endif // (_WIN32_WINNT >= 0x0600)
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
+ BOOL
+ WINAPI
+ RevertToSelf(
      VOID
      );
  

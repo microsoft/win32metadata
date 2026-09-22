@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
-index cfd6383749..89cf27569b 100644
+index cfd6383749..46cf48d98d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 @@ -1,3 +1,4 @@
@@ -825,7 +825,15 @@ index cfd6383749..89cf27569b 100644
  CONFIGRET
  WINAPI
  CM_Get_Sibling_Ex(
-@@ -3139,7 +3140,7 @@ CM_Get_Version(
+@@ -3132,14 +3133,14 @@ CM_Get_Sibling_Ex(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ CMAPI
+ WORD
+ WINAPI
+ CM_Get_Version(
      VOID
      );
  
@@ -1228,7 +1236,15 @@ index cfd6383749..89cf27569b 100644
  CONFIGRET
  WINAPI
  CM_Is_Dock_Station_Present_Ex(
-@@ -4161,7 +4162,7 @@ CM_Request_Eject_PC(
+@@ -4154,14 +4155,14 @@ CM_Is_Dock_Station_Present_Ex(
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+-CMAPI
++_Windows_SupportedOS_Windows2000_ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Request_Eject_PC(
      VOID
      );
  

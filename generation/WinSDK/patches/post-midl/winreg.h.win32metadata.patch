@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
-index 5a1415e34d..6231ab276f 100644
+index 5a1415e34d..5d29b8b4a2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 @@ -22,6 +22,7 @@ Abstract:
@@ -68,7 +68,7 @@ index 5a1415e34d..6231ab276f 100644
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
      );
  
-+_Windows_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
  WINADVAPI
  LSTATUS
  APIENTRY
@@ -76,7 +76,7 @@ index 5a1415e34d..6231ab276f 100644
      VOID
      );
  
-+_Windows_SupportedOS_WindowsVista_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY

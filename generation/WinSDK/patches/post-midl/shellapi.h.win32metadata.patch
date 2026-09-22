@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
-index 8db637a14a..379105a66d 100644
+index 8db637a14a..795ae8e142 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 @@ -1,4 +1,5 @@
@@ -392,6 +392,29 @@ index 8db637a14a..379105a66d 100644
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  
  
+@@ -1579,18 +1584,18 @@ SHSTDAPI SHGetLocalizedName(_In_ PCWSTR pszPath, _Out_writes_(cch) PWSTR pszResM
+ #define LWSTDAPIV_(type)  STDAPIV_(type)
+ #endif
+ 
+-LWSTDAPIV_(int) ShellMessageBoxA(
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ LWSTDAPIV_(int) ShellMessageBoxA(
+     _In_opt_ HINSTANCE hAppInst,
+     _In_opt_ HWND hWnd,
+     _In_ LPCSTR lpcText,
+     _In_opt_ LPCSTR lpcTitle,
+-    _In_ UINT fuStyle, ...);
+-LWSTDAPIV_(int) ShellMessageBoxW(
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT fuStyle, ...);
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ LWSTDAPIV_(int) ShellMessageBoxW(
+     _In_opt_ HINSTANCE hAppInst,
+     _In_opt_ HWND hWnd,
+     _In_ LPCWSTR lpcText,
+     _In_opt_ LPCWSTR lpcTitle,
+-    _In_ UINT fuStyle, ...);
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT fuStyle, ...);
+ #ifdef UNICODE
+ #define ShellMessageBox  ShellMessageBoxW
+ #else
 @@ -1611,21 +1616,21 @@ SHSTDAPI_(BOOL) IsLFNDriveW(_In_opt_ LPCWSTR pszPath);
  #if         _WIN32_IE >= 0x0600
  

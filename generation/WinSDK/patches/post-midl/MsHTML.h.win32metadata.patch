@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h
-index a8f62e19c2..24b882c626 100644
+index a8f62e19c2..7aa95a8c20 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHTML.h
 @@ -9677,6 +9677,7 @@ extern "C"{
@@ -7318,6 +7318,15 @@ index a8f62e19c2..24b882c626 100644
          
      };
      
+@@ -107728,7 +107729,7 @@ EXTERN_C const IID IID_IHTMLStorage;
+             /* [annotation][in] */ 
+             _In_  long lIndex,
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *__MIDL__IHTMLStorage0000) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *__MIDL__IHTMLStorage0000) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getItem( 
+             /* [annotation][in] */ 
 @@ -107961,7 +107962,7 @@ EXTERN_C const IID IID_IHTMLPerformance;
          
          virtual /* [id] */ HRESULT STDMETHODCALLTYPE toString( 
@@ -8858,6 +8867,22 @@ index a8f62e19c2..24b882c626 100644
 +            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
          
          virtual /* [bindable][displaybind][id][propput] */ HRESULT STDMETHODCALLTYPE put_onreadystatechange( 
+             /* [annotation][in] */ 
+@@ -152175,13 +152176,13 @@ EXTERN_C const IID IID_IHTMLXMLHttpRequest;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getAllResponseHeaders( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *__MIDL__IHTMLXMLHttpRequest0000) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *__MIDL__IHTMLXMLHttpRequest0000) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getResponseHeader( 
+             /* [annotation][in] */ 
+             _In_  BSTR bstrHeader,
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *__MIDL__IHTMLXMLHttpRequest0001) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *__MIDL__IHTMLXMLHttpRequest0001) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE setRequestHeader( 
              /* [annotation][in] */ 
 @@ -152972,7 +152973,7 @@ EXTERN_C const IID IID_ISVGAngle;
          

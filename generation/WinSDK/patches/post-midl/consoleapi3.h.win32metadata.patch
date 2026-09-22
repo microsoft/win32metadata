@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
-index 6d210ae055..8f817e4e9d 100644
+index 6d210ae055..a85b14d0c4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi3.h
 @@ -16,6 +16,7 @@
@@ -197,7 +197,7 @@ index 6d210ae055..8f817e4e9d 100644
      _Out_opt_ PCOORD lpNewScreenBufferDimensions
      );
  
-+_Windows_SupportedOS_Windows2000_
++
  WINBASEAPI
  HWND
  APIENTRY
@@ -257,7 +257,7 @@ index 6d210ae055..8f817e4e9d 100644
  #define GetConsoleAliasesLength  GetConsoleAliasesLengthA
  #endif // !UNICODE
  
-+_Windows_SupportedOS_Windows2000_
++
  WINBASEAPI
  DWORD
  APIENTRY
@@ -265,7 +265,7 @@ index 6d210ae055..8f817e4e9d 100644
      VOID
      );
  
-+_Windows_SupportedOS_Windows2000_
++
  WINBASEAPI
  DWORD
  APIENTRY

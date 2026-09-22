@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
-index f4998fa422..5db8ebe12a 100644
+index f4998fa422..f7844f13aa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 @@ -10,6 +10,7 @@
@@ -547,6 +547,24 @@ index f4998fa422..5db8ebe12a 100644
      _Out_ int *piValue
      );
  
+@@ -1325,7 +1327,7 @@ GetThemeSysInt(
+ //                        use the API "IsAppThemed()" to test if a theme is
+ //                        active for the calling process.
+ //---------------------------------------------------------------------------
+-THEMEAPI_(BOOL)
++_Windows_SupportedOS_WindowsVista_ THEMEAPI_(BOOL)
+ IsThemeActive(
+     VOID
+     );
+@@ -1334,7 +1336,7 @@ IsThemeActive(
+ //  IsAppThemed()       - returns TRUE if a theme is active and available to
+ //                        the current process
+ //---------------------------------------------------------------------------
+-THEMEAPI_(BOOL)
++_Windows_SupportedOS_WindowsVista_ THEMEAPI_(BOOL)
+ IsAppThemed(
+     VOID
+     );
 @@ -1346,7 +1348,7 @@ IsAppThemed(
  //
  //      hwnd            - the window to get the HTHEME of
@@ -573,6 +591,15 @@ index f4998fa422..5db8ebe12a 100644
 +_Windows_SupportedOS_WindowsVista_ THEMEAPI_(BOOL)
  IsThemeDialogTextureEnabled(
      _In_ HWND hwnd
+     );
+@@ -1417,7 +1419,7 @@ IsThemeDialogTextureEnabled(
+ //  GetThemeAppProperties()
+ //                      - returns the app property flags that control theming
+ //---------------------------------------------------------------------------
+-THEMEAPI_(DWORD)
++_Windows_SupportedOS_WindowsVista_ THEMEAPI_(DWORD)
+ GetThemeAppProperties(
+     VOID
      );
 @@ -1428,7 +1430,7 @@ GetThemeAppProperties(
  //
@@ -697,6 +724,24 @@ index f4998fa422..5db8ebe12a 100644
  GetThemeStream(
      _In_ HTHEME hTheme,
      _In_ int iPartId,
+@@ -1744,7 +1750,7 @@ GetThemeStream(
+ //                        Should be called prior to BeginBufferedPaint,
+ //                        and should have a matching BufferedPaintUnInit.
+ //------------------------------------------------------------------------
+-THEMEAPI
++_Windows_SupportedOS_WindowsVista_ THEMEAPI
+ BufferedPaintInit(
+     VOID
+     );
+@@ -1754,7 +1760,7 @@ BufferedPaintInit(
+ //                          Should be called once for each call to BufferedPaintInit,
+ //                          when calls to BeginBufferedPaint are no longer needed.
+ //------------------------------------------------------------------------
+-THEMEAPI
++_Windows_SupportedOS_WindowsVista_ THEMEAPI
+ BufferedPaintUnInit(
+     VOID
+     );
 @@ -1812,12 +1818,12 @@ typedef struct _BP_ANIMATIONPARAMS
  typedef struct _BP_PAINTPARAMS
  {

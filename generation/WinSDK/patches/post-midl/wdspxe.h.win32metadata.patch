@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
-index 662b0c9753..b48f1c1e13 100644
+index 662b0c9753..9bc174f5b1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -145,6 +145,15 @@ index 662b0c9753..b48f1c1e13 100644
  PXEAPI
  PxeAsyncRecvDone (
      _In_ HANDLE hClientRequest,
+@@ -337,7 +338,7 @@ PxeAsyncRecvDone (
+ // Trace
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2008_ DWORD
+ PXEAPI
+ PxeTrace (
+     _In_ HANDLE hProvider,
 @@ -358,6 +359,7 @@ PxeTraceV (
  //
  // Packet Allocation

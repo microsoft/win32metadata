@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
-index 6de24f3b0b..0465461dcc 100644
+index 6de24f3b0b..0c20c195e2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
 @@ -1,4 +1,5 @@
@@ -62,10 +62,11 @@ index 6de24f3b0b..0465461dcc 100644
      OUT     LPDWORD                Version
  );
  
- VOID
+-VOID
++_Windows_SupportedOS_WindowsVista_ VOID
  APIENTRY
 -Dhcpv6CApiCleanup(
-+_Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ Dhcpv6CApiCleanup(
++  Dhcpv6CApiCleanup(
      VOID
  );
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
-index 5169685038..59ecbeae6b 100644
+index 5169685038..26c95397f0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
 @@ -25,6 +25,7 @@ Environments :
@@ -115,8 +115,8 @@ index 5169685038..59ecbeae6b 100644
          be used with this format character.
  */
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI INT BERAPI ber_printf( BerElement *pBerElement, _In_ PSTR fmt, ... );
  
  /*
@@ -124,8 +124,8 @@ index 5169685038..59ecbeae6b 100644
  
  */
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBERAPI ULONG BERAPI ber_scanf( BerElement *pBerElement, _In_ PSTR fmt, ... );
  
  

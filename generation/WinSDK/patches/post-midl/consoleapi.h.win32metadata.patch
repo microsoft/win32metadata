@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
-index 7b3cad0d54..98e38ccdf6 100644
+index 7b3cad0d54..2e7a5d8e5b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 @@ -17,6 +17,7 @@
@@ -14,7 +14,7 @@ index 7b3cad0d54..98e38ccdf6 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -31,7 +31,7 @@ index 7b3cad0d54..98e38ccdf6 100644
  
  #endif
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  BOOL
@@ -49,7 +49,7 @@ index 7b3cad0d54..98e38ccdf6 100644
  
  #endif /* _WIN32_WINNT >= 0x0500 */
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  UINT
@@ -58,7 +58,7 @@ index 7b3cad0d54..98e38ccdf6 100644
      VOID
      );
  
-+_Windows_SupportedOS_Windows2000_
++
 +_Win32_SetLastError_
  WINBASEAPI
  UINT

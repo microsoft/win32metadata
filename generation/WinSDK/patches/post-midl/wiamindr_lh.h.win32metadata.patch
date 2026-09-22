@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wiamindr_lh.h b/generation/WinSDK/RecompiledIdlHeaders/um/wiamindr_lh.h
-index 73a81bc048..611c5db51e 100644
+index 73a81bc048..407d7eb009 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wiamindr_lh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wiamindr_lh.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,28 @@ index 73a81bc048..611c5db51e 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -733,10 +734,10 @@ EXTERN_C const IID IID_IWiaDrvItem;
+             /* [out] */ __RPC__deref_out_opt BYTE **__MIDL__IWiaDrvItem0001) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFullItemName( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0002) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0002) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetItemName( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0003) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0003) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddItemToFolder( 
+             /* [in] */ __RPC__in_opt IWiaDrvItem *__MIDL__IWiaDrvItem0004) = 0;
+@@ -766,7 +767,7 @@ EXTERN_C const IID IID_IWiaDrvItem;
+             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaDrvItem0014) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DumpItemData( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0015) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0015) = 0;
+         
+     };
+     
 @@ -939,7 +940,7 @@ EXTERN_C const IID IID_IWiaDrvItem;
  typedef struct _WIA_PROPERTY_INFO
      {

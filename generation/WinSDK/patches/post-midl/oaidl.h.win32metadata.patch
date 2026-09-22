@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
-index 2bd1b450dc..30d2fa4d4e 100644
+index 2bd1b450dc..9a0f694dfc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 @@ -1,3 +1,4 @@
@@ -282,7 +282,7 @@ index 2bd1b450dc..30d2fa4d4e 100644
 -void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
 +_Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
 +_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
-+_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(SysFreeString) __RPC__out BSTR * ); 
 +_Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
  
  unsigned long             __RPC_USER  CLEANLOCALSTORAGE_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLEANLOCALSTORAGE * ); 
@@ -305,7 +305,7 @@ index 2bd1b450dc..30d2fa4d4e 100644
 -void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(SysFreeString) __RPC__out BSTR * ); 
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
  
  unsigned long             __RPC_USER  CLEANLOCALSTORAGE_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in CLEANLOCALSTORAGE * ); 

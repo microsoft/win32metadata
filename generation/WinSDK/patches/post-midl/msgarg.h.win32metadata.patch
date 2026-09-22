@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h
-index d942f5855d..6fdea351a8 100644
+index d942f5855d..bdd64090ee 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h
 @@ -1,3 +1,4 @@
@@ -16,7 +16,15 @@ index d942f5855d..6fdea351a8 100644
  
  /**
   * Build a message argument that has its value already set. If the setting the
-@@ -115,7 +116,7 @@ extern AJ_API alljoyn_msgarg CDECL_CALL alljoyn_msgarg_create_and_set(const char
+@@ -108,14 +109,14 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_create();
+  *
+  * @return the created alljoyn_msgarg
+  */
+-extern AJ_API alljoyn_msgarg CDECL_CALL alljoyn_msgarg_create_and_set(const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg CDECL_CALL alljoyn_msgarg_create_and_set(const char* signature, ...);
+ 
+ /**
+  * Destroy a message argument.
   *
   * @param arg The message argument to destroy.
   */
@@ -43,6 +51,24 @@ index d942f5855d..6fdea351a8 100644
  
  /**
   * Set value of a message arg from a signature and a list of values. Note that any values or
+@@ -246,7 +247,7 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_element(alljoyn_msgarg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set(alljoyn_msgarg arg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set(alljoyn_msgarg arg, const char* signature, ...);
+ 
+ /**
+  * Matches a signature to the alljoyn_msgarg and if the signature matches unpacks the component
+@@ -345,7 +346,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set(alljoyn_msgarg arg, const ch
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_get(alljoyn_msgarg arg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_get(alljoyn_msgarg arg, const char* signature, ...);
+ 
+ /**
+  * create a copy of a message argument.  This will create a new alljoyn_msgarg and
 @@ -355,7 +356,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_get(alljoyn_msgarg arg, const ch
   *
   * @return copy of the source message argument is returned
@@ -70,6 +96,24 @@ index d942f5855d..6fdea351a8 100644
  
  
  
+@@ -394,7 +395,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_equal(alljoyn_msgarg lhv, alljoyn_
+  *       - #ER_BUS_TRUNCATED if the signature was longer than expected.
+  *       - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set(alljoyn_msgarg args, size_t* numArgs, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set(alljoyn_msgarg args, size_t* numArgs, const char* signature, ...);
+ 
+ /**
+  * Unpack an array of alljoyn_msgargs by applying the alljoyn_msgarg_get() function to each alljoyn_msgarg in turn.
+@@ -409,7 +410,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set(alljoyn_msgarg args, s
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_get(const alljoyn_msgarg args, size_t numArgs, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_get(const alljoyn_msgarg args, size_t numArgs, const char* signature, ...);
+ 
+ /**
+  * Returns an XML string representation of this type
 @@ -425,7 +426,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_get(const alljoyn_msgarg a
   *          available.  Thus returning a value of buf or larger means the output
   *          was truncated.
@@ -115,6 +159,15 @@ index d942f5855d..6fdea351a8 100644
  
  /**
   * Helper function for accessing dictionary elements. The alljoyn_msgarg must be an array of dictionary
+@@ -515,7 +516,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_hassignature(alljoyn_msgarg arg, c
+  *      - #ER_BUS_ELEMENT_NOT_FOUND if the key was not found in the dictionary.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_getdictelement(alljoyn_msgarg arg, const char* elemSig, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_getdictelement(alljoyn_msgarg arg, const char* elemSig, ...);
+ 
+ /**
+  * Get the alljoyn_typeid of the alljoyn_msgarg
 @@ -524,7 +525,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_getdictelement(alljoyn_msgarg ar
   *
   * @return the alljoyn_typeid of the alljoyn_msgarg
@@ -142,6 +195,24 @@ index d942f5855d..6fdea351a8 100644
  
  /// @cond ALLJOYN_DEV
  /*
+@@ -571,7 +572,7 @@ extern AJ_API void AJ_CALL alljoyn_msgarg_stabilize(alljoyn_msgarg arg);
+  *       - #ER_BUS_TRUNCATED if the signature was longer than expected.
+  *       - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set_offset(alljoyn_msgarg args, size_t argOffset, size_t* numArgs, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set_offset(alljoyn_msgarg args, size_t argOffset, size_t* numArgs, const char* signature, ...);
+ 
+ /**
+  * This function is identical to alljoyn_msgarg_set except after the values
+@@ -587,7 +588,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set_offset(alljoyn_msgarg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg arg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg arg, const char* signature, ...);
+ /*******************************************************************************
+  * MsgArg set functions for each of the basic data types
+  *******************************************************************************/
 @@ -605,7 +606,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg
   *      - #ER_OK if the alljoyn_msgarg walljoyn_msgargcessfully set
   *      - An error status otherwise

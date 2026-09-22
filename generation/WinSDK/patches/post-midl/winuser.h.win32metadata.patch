@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..2222b6bc79 100644
+index f99e9294f5..c047a49323 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -35,6 +35,23 @@ index f99e9294f5..2222b6bc79 100644
  int
  WINAPI
  wvsprintfW(
+@@ -320,14 +321,14 @@ wvsprintfW(
+ #define wvsprintf  wvsprintfA
+ #endif // !UNICODE
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ int
+ WINAPIV
+ wsprintfA(
+     _Out_ LPSTR,
+     _In_ _Printf_format_string_ LPCSTR,
+     ...);
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ int
+ WINAPIV
+ wsprintfW(
 @@ -1119,7 +1120,7 @@ typedef struct tagCWPRETSTRUCT {
  typedef struct tagKBDLLHOOKSTRUCT {
      DWORD   vkCode;
@@ -339,7 +356,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  EnumWindowStationsW(
-@@ -1638,13 +1639,13 @@ EnumWindowStationsW(
+@@ -1638,19 +1639,19 @@ EnumWindowStationsW(
  #define EnumWindowStations  EnumWindowStationsA
  #endif // !UNICODE
  
@@ -355,6 +372,13 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  SetProcessWindowStation(
+     _In_ HWINSTA hWinSta);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseWindowStation, -1, 0) WINUSERAPI
+ HWINSTA
+ WINAPI
+ GetProcessWindowStation(
 @@ -1666,15 +1667,15 @@ GetProcessWindowStation(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -463,6 +487,15 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  IsHungAppWindow(
+@@ -1856,7 +1857,7 @@ IsHungAppWindow(
+ 
+ 
+ #if(WINVER >= 0x0501)
+-WINUSERAPI
++_Windows_SupportedOS_WindowsXP_ WINUSERAPI
+ VOID
+ WINAPI
+ DisableProcessWindowsGhosting(
 @@ -2643,12 +2644,12 @@ typedef struct {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -723,7 +756,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  UnregisterHotKey(
-@@ -3631,17 +3632,17 @@ UnregisterHotKey(
+@@ -3631,42 +3632,42 @@ UnregisterHotKey(
  
  #define ExitWindows(dwReserved, Code) ExitWindowsEx(EWX_LOGOFF, 0xFFFFFFFF)
  
@@ -745,6 +778,44 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  SwapMouseButton(
+     _In_ BOOL fSwap);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ DWORD
+ WINAPI
+ GetMessagePos(
+     VOID);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ LONG
+ WINAPI
+ GetMessageTime(
+     VOID);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ LPARAM
+ WINAPI
+ GetMessageExtraInfo(
+     VOID);
+ 
+ #if(_WIN32_WINNT >= 0x0602)
+-WINUSERAPI
++_Windows_SupportedOS_Windows8_ WINUSERAPI
+ DWORD
+ WINAPI
+ GetUnpredictedMessagePos(
+@@ -3674,7 +3675,7 @@ GetUnpredictedMessagePos(
+ #endif /* _WIN32_WINNT >= 0x0602 */
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+-WINUSERAPI
++_Windows_SupportedOS_WindowsVista_ WINUSERAPI
+ BOOL
+ WINAPI
+ IsWow64Message(
 @@ -3682,7 +3683,7 @@ IsWow64Message(
  #endif /* _WIN32_WINNT >= 0x0501 */
  
@@ -1000,7 +1071,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  AttachThreadInput(
-@@ -4107,7 +4108,7 @@ AttachThreadInput(
+@@ -4107,13 +4108,13 @@ AttachThreadInput(
      _In_ BOOL fAttach);
  
  
@@ -1009,6 +1080,13 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  ReplyMessage(
+     _In_ LRESULT lResult);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
+ WaitMessage(
 @@ -4123,7 +4124,7 @@ WaitMessage(
  #endif
  
@@ -1045,6 +1123,15 @@ index f99e9294f5..2222b6bc79 100644
  VOID
  WINAPI
  PostQuitMessage(
+@@ -4234,7 +4235,7 @@ CallWindowProcW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ BOOL
+ WINAPI
+ InSendMessage(
 @@ -4248,7 +4249,7 @@ InSendMessage(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1054,7 +1141,14 @@ index f99e9294f5..2222b6bc79 100644
  DWORD
  WINAPI
  InSendMessageEx(
-@@ -4277,7 +4278,7 @@ WINAPI
+@@ -4271,13 +4272,13 @@ InSendMessageEx(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ UINT
+ WINAPI
  GetDoubleClickTime(
      VOID);
  
@@ -1483,7 +1577,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  IsWindowVisible(
-@@ -4853,7 +4854,7 @@ IsWindowVisible(
+@@ -4853,25 +4854,25 @@ IsWindowVisible(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1492,7 +1586,12 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  IsIconic(
-@@ -4865,13 +4866,13 @@ WINAPI
+     _In_ HWND hWnd);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ BOOL
+ WINAPI
  AnyPopup(
      VOID);
  
@@ -1712,7 +1811,7 @@ index f99e9294f5..2222b6bc79 100644
  HWND
  WINAPI
  GetNextDlgTabItem(
-@@ -5282,7 +5283,7 @@ GetNextDlgTabItem(
+@@ -5282,13 +5283,13 @@ GetNextDlgTabItem(
      _In_opt_ HWND hCtl,
      _In_ BOOL bPrevious);
  
@@ -1721,6 +1820,13 @@ index f99e9294f5..2222b6bc79 100644
  int
  WINAPI
  GetDlgCtrlID(
+     _In_ HWND hWnd);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ long
+ WINAPI
+ GetDialogBaseUnits(VOID);
 @@ -5307,7 +5308,7 @@ DefDlgProcA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
@@ -1780,7 +1886,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  CallMsgFilterW(
-@@ -5416,7 +5417,7 @@ CallMsgFilterW(
+@@ -5416,13 +5417,13 @@ CallMsgFilterW(
   * Clipboard Manager Functions
   */
  
@@ -1789,7 +1895,30 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  OpenClipboard(
-@@ -5445,7 +5446,7 @@ WINAPI
+     _In_opt_ HWND hWndNewOwner);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
+ CloseClipboard(
+@@ -5431,7 +5432,7 @@ CloseClipboard(
+ 
+ #if(WINVER >= 0x0500)
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ DWORD
+ WINAPI
+ GetClipboardSequenceNumber(
+@@ -5439,39 +5440,39 @@ GetClipboardSequenceNumber(
+ 
+ #endif /* WINVER >= 0x0500 */
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ HWND
+ WINAPI
  GetClipboardOwner(
      VOID);
  
@@ -1798,7 +1927,12 @@ index f99e9294f5..2222b6bc79 100644
  HWND
  WINAPI
  SetClipboardViewer(
-@@ -5457,21 +5458,21 @@ WINAPI
+     _In_ HWND hWndNewViewer);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ HWND
+ WINAPI
  GetClipboardViewer(
      VOID);
  
@@ -1838,7 +1972,14 @@ index f99e9294f5..2222b6bc79 100644
  UINT
  WINAPI
  RegisterClipboardFormatW(
-@@ -5514,20 +5515,20 @@ WINAPI
+@@ -5508,26 +5509,26 @@ RegisterClipboardFormatW(
+ #define RegisterClipboardFormat  RegisterClipboardFormatA
+ #endif // !UNICODE
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ int
+ WINAPI
  CountClipboardFormats(
      VOID);
  
@@ -1862,7 +2003,14 @@ index f99e9294f5..2222b6bc79 100644
  int
  WINAPI
  GetClipboardFormatNameW(
-@@ -5546,13 +5547,13 @@ WINAPI
+@@ -5540,45 +5541,45 @@ GetClipboardFormatNameW(
+ #define GetClipboardFormatName  GetClipboardFormatNameA
+ #endif // !UNICODE
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
  EmptyClipboard(
      VOID);
  
@@ -1878,7 +2026,14 @@ index f99e9294f5..2222b6bc79 100644
  int
  WINAPI
  GetPriorityClipboardFormat(
-@@ -5566,19 +5567,19 @@ GetOpenClipboardWindow(
+     _In_reads_(cFormats) UINT *paFormatPriorityList,
+     _In_ int cFormats);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ HWND
+ WINAPI
+ GetOpenClipboardWindow(
      VOID);
  
  #if(WINVER >= 0x0600)
@@ -2139,7 +2294,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  IsCharLowerW(
-@@ -5895,7 +5896,7 @@ IsCharLowerW(
+@@ -5895,50 +5896,50 @@ IsCharLowerW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2148,7 +2303,26 @@ index f99e9294f5..2222b6bc79 100644
  HWND
  WINAPI
  SetFocus(
-@@ -5919,26 +5920,26 @@ WINAPI
+     _In_opt_ HWND hWnd);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ HWND
+ WINAPI
+ GetActiveWindow(
+     VOID);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ HWND
+ WINAPI
+ GetFocus(
+     VOID);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ UINT
+ WINAPI
  GetKBCodePage(
      VOID);
  
@@ -2596,7 +2770,7 @@ index f99e9294f5..2222b6bc79 100644
  VOID
  WINAPI
  DestroySyntheticPointerDevice(
-@@ -6697,7 +6698,7 @@ DestroySyntheticPointerDevice(
+@@ -6697,13 +6698,13 @@ DestroySyntheticPointerDevice(
  
  // TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
  
@@ -2605,6 +2779,13 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  EnableMouseInPointer(
+     _In_ BOOL fEnable);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows8_ WINUSERAPI
+ BOOL
+ WINAPI
+ IsMouseInPointerEnabled(
 @@ -6721,7 +6722,7 @@ EnableMouseInPointerForThread(VOID);
  #define TOUCH_HIT_TESTING_CLIENT  0x1
  #define TOUCH_HIT_TESTING_NONE    0x2
@@ -2724,7 +2905,14 @@ index f99e9294f5..2222b6bc79 100644
      _In_opt_ HKL dwhkl);
  #ifdef UNICODE
  #define MapVirtualKeyEx  MapVirtualKeyExW
-@@ -6952,11 +6953,11 @@ WINAPI
+@@ -6946,38 +6947,38 @@ MapVirtualKeyExW(
+ #define MAPVK_VK_TO_VSC_EX  (4)
+ #endif /* WINVER >= 0x0600 */
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ BOOL
+ WINAPI
  GetInputState(
      VOID);
  
@@ -2737,8 +2925,10 @@ index f99e9294f5..2222b6bc79 100644
 +    _Win32_AssociatedEnum_(QUEUE_STATUS_FLAGS) _In_ UINT flags);
  
  
- WINUSERAPI
-@@ -6965,7 +6966,7 @@ WINAPI
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ HWND
+ WINAPI
  GetCapture(
      VOID);
  
@@ -2747,7 +2937,12 @@ index f99e9294f5..2222b6bc79 100644
  HWND
  WINAPI
  SetCapture(
-@@ -6977,7 +6978,7 @@ WINAPI
+     _In_ HWND hWnd);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
  ReleaseCapture(
      VOID);
  
@@ -3036,7 +3231,21 @@ index f99e9294f5..2222b6bc79 100644
  HMENU
  WINAPI
  GetSystemMenu(
-@@ -7611,13 +7612,13 @@ WINAPI
+@@ -7599,25 +7600,25 @@ GetSystemMenu(
+     _In_ BOOL bRevert);
+ 
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
+ HMENU
+ WINAPI
+ CreateMenu(
+     VOID);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroyMenu, -1, 0) WINUSERAPI
+ HMENU
+ WINAPI
  CreatePopupMenu(
      VOID);
  
@@ -3164,7 +3373,7 @@ index f99e9294f5..2222b6bc79 100644
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCWSTR lpNewItem);
  #ifdef UNICODE
-@@ -7723,28 +7724,28 @@ ModifyMenuW(
+@@ -7723,43 +7724,43 @@ ModifyMenuW(
  #define ModifyMenu  ModifyMenuA
  #endif // !UNICODE
  
@@ -3199,7 +3408,10 @@ index f99e9294f5..2222b6bc79 100644
      _In_opt_ HBITMAP hBitmapUnchecked,
      _In_opt_ HBITMAP hBitmapChecked);
  
-@@ -7754,12 +7755,12 @@ WINAPI
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ LONG
+ WINAPI
  GetMenuCheckMarkDimensions(
      VOID);
  
@@ -3243,7 +3455,7 @@ index f99e9294f5..2222b6bc79 100644
      UINT    cyMax;
      HBRUSH  hbrBack;
      DWORD   dwContextHelpID;
-@@ -7833,14 +7834,14 @@ typedef struct tagMENUINFO
+@@ -7833,21 +7834,21 @@ typedef struct tagMENUINFO
  }   MENUINFO, FAR *LPMENUINFO;
  typedef MENUINFO CONST FAR *LPCMENUINFO;
  
@@ -3260,6 +3472,14 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  SetMenuInfo(
+     _In_ HMENU,
+     _In_ LPCMENUINFO);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
+ EndMenu(
 @@ -7861,7 +7862,7 @@ EndMenu(
  
  typedef struct tagMENUGETOBJECTINFO
@@ -3546,7 +3766,7 @@ index f99e9294f5..2222b6bc79 100644
  DWORD
  WINAPI
  GetTabbedTextExtentW(
-@@ -8497,13 +8498,13 @@ GetTabbedTextExtentW(
+@@ -8497,33 +8498,33 @@ GetTabbedTextExtentW(
  #define GetTabbedTextExtent  GetTabbedTextExtentA
  #endif // !UNICODE
  
@@ -3562,7 +3782,14 @@ index f99e9294f5..2222b6bc79 100644
  HWND
  WINAPI
  SetActiveWindow(
-@@ -8517,13 +8518,13 @@ GetForegroundWindow(
+     _In_ HWND hWnd);
+ 
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ HWND
+ WINAPI
+ GetForegroundWindow(
      VOID);
  
  #if(WINVER >= 0x0400)
@@ -4275,7 +4502,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  GetPhysicalCursorPos(
-@@ -9442,7 +9443,7 @@ GetPhysicalCursorPos(
+@@ -9442,19 +9443,19 @@ GetPhysicalCursorPos(
  #endif /* WINVER >= 0x0600 */
  
  
@@ -4284,7 +4511,12 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  GetClipCursor(
-@@ -9454,7 +9455,7 @@ WINAPI
+     _Out_ LPRECT lpRect);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DestroyCursor, -1, 0) WINUSERAPI
+ HCURSOR
+ WINAPI
  GetCursor(
      VOID);
  
@@ -4293,7 +4525,14 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  CreateCaret(
-@@ -9469,7 +9470,7 @@ WINAPI
+@@ -9463,57 +9464,57 @@ CreateCaret(
+     _In_ int nWidth,
+     _In_ int nHeight);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ UINT
+ WINAPI
  GetCaretBlinkTime(
      VOID);
  
@@ -4302,7 +4541,12 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  SetCaretBlinkTime(
-@@ -9481,39 +9482,39 @@ WINAPI
+     _In_ UINT uMSeconds);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
  DestroyCaret(
      VOID);
  
@@ -4798,7 +5042,7 @@ index f99e9294f5..2222b6bc79 100644
      _In_ LONG_PTR dwNewLong);
  #ifdef UNICODE
  #define SetClassLongPtr  SetClassLongPtrW
-@@ -10081,13 +10082,13 @@ SetClassLongPtrW(
+@@ -10081,40 +10082,40 @@ SetClassLongPtrW(
  #endif /* !NOWINOFFSETS */
  
  #if(WINVER >= 0x0500)
@@ -4814,7 +5058,14 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  SetProcessDefaultLayout(
-@@ -10101,20 +10102,20 @@ GetDesktopWindow(
+     _In_ DWORD dwDefaultLayout);
+ #endif /* WINVER >= 0x0500 */
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ HWND
+ WINAPI
+ GetDesktopWindow(
      VOID);
  
  
@@ -4872,6 +5123,15 @@ index f99e9294f5..2222b6bc79 100644
  HWND
  WINAPI
  FindWindowExW(
+@@ -10164,7 +10165,7 @@ FindWindowExW(
+ #define FindWindowEx  FindWindowExA
+ #endif // !UNICODE
+ 
+-WINUSERAPI
++_Windows_SupportedOS_Windows2000_ WINUSERAPI
+ HWND
+ WINAPI
+ GetShellWindow(
 @@ -10173,26 +10174,26 @@ GetShellWindow(
  #endif /* WINVER >= 0x0400 */
  
@@ -5932,6 +6192,15 @@ index f99e9294f5..2222b6bc79 100644
      DWORD iWindowsEffectMSec;
      LPWSTR  lpszWindowsEffectDLL;
      DWORD iWindowsEffectOrdinal;
+@@ -13494,7 +13495,7 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
+ #pragma region Desktop or PC Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
+ #if(_WIN32_WINNT >= 0x0600)
+-WINUSERAPI
++_Windows_SupportedOS_WindowsVista_ WINUSERAPI
+ BOOL
+ WINAPI
+ SoundSentry(VOID);
 @@ -13559,14 +13560,14 @@ SetDebugErrorLevel(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -6070,7 +6339,23 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  BlockInput(
-@@ -14460,7 +14461,7 @@ IsProcessDPIAware(
+@@ -14445,13 +14446,13 @@ BlockInput(
+ 
+ #define USER_DEFAULT_SCREEN_DPI 96
+ 
+-WINUSERAPI
++_Windows_SupportedOS_WindowsVista_ WINUSERAPI
+ BOOL
+ WINAPI
+ SetProcessDPIAware(
+     VOID);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_WindowsVista_ WINUSERAPI
+ BOOL
+ WINAPI
+ IsProcessDPIAware(
+@@ -14460,68 +14461,68 @@ IsProcessDPIAware(
  #endif /* _WIN32_WINNT >= 0x0600 */
  
  #if(WINVER >= 0x0605)
@@ -6079,7 +6364,12 @@ index f99e9294f5..2222b6bc79 100644
  DPI_AWARENESS_CONTEXT
  WINAPI
  SetThreadDpiAwarenessContext(
-@@ -14472,38 +14473,38 @@ WINAPI
+     _In_ DPI_AWARENESS_CONTEXT dpiContext);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_14393_ WINUSERAPI
+ DPI_AWARENESS_CONTEXT
+ WINAPI
  GetThreadDpiAwarenessContext(
      VOID);
  
@@ -6124,7 +6414,12 @@ index f99e9294f5..2222b6bc79 100644
  UINT
  WINAPI
  GetDpiForWindow(
-@@ -14515,13 +14516,13 @@ WINAPI
+     _In_ HWND hwnd);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_14393_ WINUSERAPI
+ UINT
+ WINAPI
  GetDpiForSystem(
      VOID);
  
@@ -6149,7 +6444,7 @@ index f99e9294f5..2222b6bc79 100644
  BOOL
  WINAPI
  SetProcessDpiAwarenessContext(
-@@ -14558,7 +14559,7 @@ GetDpiAwarenessContextForProcess(
+@@ -14558,18 +14559,18 @@ GetDpiAwarenessContextForProcess(
  
  #if(WINVER >= 0x0606)
  
@@ -6158,7 +6453,11 @@ index f99e9294f5..2222b6bc79 100644
  DPI_HOSTING_BEHAVIOR
  WINAPI
  SetThreadDpiHostingBehavior(
-@@ -14569,7 +14570,7 @@ DPI_HOSTING_BEHAVIOR
+     _In_ DPI_HOSTING_BEHAVIOR value);
+ 
+-WINUSERAPI
++_Windows_SupportedOS_17134_ WINUSERAPI
+ DPI_HOSTING_BEHAVIOR
  WINAPI
  GetThreadDpiHostingBehavior(VOID);
  
@@ -6337,6 +6636,15 @@ index f99e9294f5..2222b6bc79 100644
  DWORD
  WINAPI
  GetListBoxInfo(
+@@ -14914,7 +14915,7 @@ GetListBoxInfo(
+ 
+ 
+ #if(_WIN32_WINNT >= 0x0500)
+-WINUSERAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINUSERAPI
+ BOOL
+ WINAPI
+ LockWorkStation(
 @@ -14923,7 +14924,7 @@ LockWorkStation(
  
  #if(_WIN32_WINNT >= 0x0500)

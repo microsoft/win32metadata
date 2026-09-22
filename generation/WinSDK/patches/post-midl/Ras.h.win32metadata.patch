@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
-index 5fed8633f1..572d8793c8 100644
+index 5fed8633f1..8164acbaa3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 @@ -31,6 +31,7 @@ Abstract:
@@ -43,6 +43,19 @@ index 5fed8633f1..572d8793c8 100644
      DWORD         dwEncryptionMethod;
  
      DWORD         numIPv4ServerAddresses;
+@@ -1032,9 +1033,9 @@ RAS_PROJECTION_INFO, *PRAS_PROJECTION_INFO;
+ ** For RASDIALFUNC2, subsequent callback notifications for all
+ ** subentries can be cancelled by returning FALSE.
+ */
+-typedef VOID (WINAPI *RASDIALFUNC)( UINT, RASCONNSTATE, DWORD );
+-typedef VOID (WINAPI *RASDIALFUNC1)( HRASCONN, UINT, RASCONNSTATE, DWORD, DWORD );
+-typedef DWORD (WINAPI *RASDIALFUNC2)( ULONG_PTR, DWORD, HRASCONN, UINT, RASCONNSTATE, DWORD, DWORD );
++typedef VOID (WINAPI *RASDIALFUNC)( UINT, _Win32_AssociatedEnum_(RASCONNSTATE) RASCONNSTATE, DWORD );
++typedef VOID (WINAPI *RASDIALFUNC1)( HRASCONN, UINT, _Win32_AssociatedEnum_(RASCONNSTATE) RASCONNSTATE, DWORD, DWORD );
++typedef DWORD (WINAPI *RASDIALFUNC2)( ULONG_PTR, DWORD, HRASCONN, UINT, _Win32_AssociatedEnum_(RASCONNSTATE) RASCONNSTATE, DWORD, DWORD );
+ 
+ 
+ /* Information describing a RAS-capable device.
 @@ -1910,148 +1911,154 @@ RASCUSTOMSCRIPTEXTENSIONS
  
  /* External RAS API function prototypes.
@@ -91,10 +104,10 @@ index 5fed8633f1..572d8793c8 100644
 +_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasHangUpW( _In_ HRASCONN );
  
 -DWORD APIENTRY RasGetProjectionInfoA( _In_ HRASCONN, _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
-+_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetProjectionInfoA( _In_ HRASCONN, _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetProjectionInfoA( _In_ HRASCONN, _Win32_AssociatedEnum_(RASPROJECTION) _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
  
 -DWORD APIENTRY RasGetProjectionInfoW( _In_ HRASCONN, _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
-+_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetProjectionInfoW( _In_ HRASCONN, _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetProjectionInfoW( _In_ HRASCONN, _Win32_AssociatedEnum_(RASPROJECTION) _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
  
 -DWORD APIENTRY RasCreatePhonebookEntryA( _In_ HWND, _In_opt_ LPCSTR );
 +_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasCreatePhonebookEntryA( _In_ HWND, _In_opt_ LPCSTR );
