@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
-index 88e197e4df..dd51d38b08 100644
+index 88e197e4df..7e330cde70 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
 @@ -21,6 +21,7 @@ Revision History:
@@ -10,7 +10,24 @@ index 88e197e4df..dd51d38b08 100644
  
  #ifdef __cplusplus
  extern "C" {
-@@ -62,7 +63,7 @@ LZDone(
+@@ -47,7 +48,7 @@ extern "C" {
+ ** Prototypes
+ */
+ 
+-_Success_(return >= 0)
++_Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+@@ -55,14 +56,14 @@ LZStart(
+     VOID
+     );
+ 
+-VOID
++_Win32_ImportLibrary_("kernel32.dll") VOID
+ APIENTRY
+ LZDone(
+     VOID
      );
  
  

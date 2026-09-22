@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
-index dded3769a1..4277db03af 100644
+index dded3769a1..b54c65d8db 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 @@ -1,3 +1,4 @@
@@ -1598,17 +1598,19 @@ index dded3769a1..4277db03af 100644
 -WINGDIAPI HGLRC WINAPI wglCreateContext(HDC);
 -WINGDIAPI HGLRC WINAPI wglCreateLayerContext(HDC, int);
 -WINGDIAPI BOOL  WINAPI wglDeleteContext(HGLRC);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglCopyContext(HGLRC, HGLRC, UINT);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(wglDeleteContext, -1, 0) WINGDIAPI HGLRC WINAPI wglCreateContext(HDC);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(wglDeleteContext, -1, 0) WINGDIAPI HGLRC WINAPI wglCreateLayerContext(HDC, int);
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglDeleteContext(HGLRC);
- WINGDIAPI HGLRC WINAPI wglGetCurrentContext(VOID);
- WINGDIAPI HDC   WINAPI wglGetCurrentDC(VOID);
+-WINGDIAPI HGLRC WINAPI wglGetCurrentContext(VOID);
+-WINGDIAPI HDC   WINAPI wglGetCurrentDC(VOID);
 -WINGDIAPI PROC  WINAPI wglGetProcAddress(LPCSTR);
 -WINGDIAPI BOOL  WINAPI wglMakeCurrent(HDC, HGLRC);
 -WINGDIAPI BOOL  WINAPI wglShareLists(HGLRC, HGLRC);
 -WINGDIAPI BOOL  WINAPI wglUseFontBitmapsA(HDC, DWORD, DWORD, DWORD);
 -WINGDIAPI BOOL  WINAPI wglUseFontBitmapsW(HDC, DWORD, DWORD, DWORD);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglCopyContext(HGLRC, HGLRC, UINT);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(wglDeleteContext, -1, 0) WINGDIAPI HGLRC WINAPI wglCreateContext(HDC);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(wglDeleteContext, -1, 0) WINGDIAPI HGLRC WINAPI wglCreateLayerContext(HDC, int);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglDeleteContext(HGLRC);
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(wglDeleteContext, -1, 0) WINGDIAPI HGLRC WINAPI wglGetCurrentContext(VOID);
++_Windows_SupportedOS_Windows2000_ WINGDIAPI HDC   WINAPI wglGetCurrentDC(VOID);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI PROC  WINAPI wglGetProcAddress(LPCSTR);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglMakeCurrent(HDC, HGLRC);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglShareLists(HGLRC, HGLRC);

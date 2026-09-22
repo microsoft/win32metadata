@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
-index d72e8f8ca0..cb3d2e1bd5 100644
+index d72e8f8ca0..27b4246c65 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/heapapi.h
 @@ -17,6 +17,7 @@
@@ -97,7 +97,7 @@ index d72e8f8ca0..cb3d2e1bd5 100644
      _In_ LPCVOID lpMem
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("kernel32.dll") _Windows_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINBASEAPI
  HANDLE

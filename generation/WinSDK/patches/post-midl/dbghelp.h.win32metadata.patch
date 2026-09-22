@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
-index 09bb15cbc7..e78468e1da 100644
+index 09bb15cbc7..e8c55fab05 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgHelp.h
 @@ -1,3 +1,4 @@
@@ -289,7 +289,14 @@ index 09bb15cbc7..e78468e1da 100644
  IMAGEAPI
  StackWalk(
      DWORD MachineType,
-@@ -1049,13 +1050,13 @@ ImagehlpApiVersion(
+@@ -1043,19 +1044,19 @@ typedef struct API_VERSION {
+     USHORT  Reserved;
+ } API_VERSION, *LPAPI_VERSION;
+ 
+-LPAPI_VERSION
++_Win32_ImportLibrary_("dbghelp.dll") LPAPI_VERSION
+ IMAGEAPI
+ ImagehlpApiVersion(
      VOID
      );
  
@@ -384,7 +391,7 @@ index 09bb15cbc7..e78468e1da 100644
  IMAGEAPI
  SymGetOmaps(
      _In_ HANDLE hProcess,
-@@ -1836,7 +1837,7 @@ typedef enum {
+@@ -1836,19 +1837,19 @@ typedef enum {
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES)
  
@@ -393,7 +400,12 @@ index 09bb15cbc7..e78468e1da 100644
  IMAGEAPI
  SymSetOptions(
      _In_ DWORD   SymOptions
-@@ -1848,7 +1849,7 @@ SymGetOptions(
+     );
+ 
+-DWORD
++_Win32_ImportLibrary_("dbghelp.dll") DWORD
+ IMAGEAPI
+ SymGetOptions(
      VOID
      );
  

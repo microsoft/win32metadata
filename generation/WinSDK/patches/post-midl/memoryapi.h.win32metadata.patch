@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
-index 6feb5f7d26..e1893a95d6 100644
+index 6feb5f7d26..b0efe9fb68 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
 @@ -17,6 +17,7 @@
@@ -270,8 +270,8 @@ index 6feb5f7d26..e1893a95d6 100644
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsVista_ 
++
  WINBASEAPI
  SIZE_T
  WINAPI

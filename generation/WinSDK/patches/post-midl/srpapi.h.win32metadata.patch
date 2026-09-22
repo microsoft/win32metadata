@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
-index 51bb393897..507a12472b 100644
+index 51bb393897..98e16b3a5f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
 @@ -1,3 +1,4 @@
@@ -51,8 +51,9 @@ index 51bb393897..507a12472b 100644
      _In_opt_ PCWSTR enterpriseId
      );
  
- STDAPI
-+_Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
  SrpDisablePermissiveModeFileEncryption(
      VOID
      );

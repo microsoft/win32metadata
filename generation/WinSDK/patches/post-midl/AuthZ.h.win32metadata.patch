@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
-index dad771d0a5..40ec030248 100644
+index dad771d0a5..f1d4ffc08e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -261,6 +261,42 @@ index dad771d0a5..40ec030248 100644
  BOOL
  WINAPI
  AuthzFreeContext(
+@@ -872,22 +879,22 @@ AuthzFreeContext(
+                                                   AUTHZ_NO_ALLOC_STRINGS | \
+                                                   AUTHZ_WPD_CATEGORY_FLAG)
+                              
+-AUTHZAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ AUTHZAPI
+ BOOL
+ WINAPI
+ AuthzInitializeObjectAccessAuditEvent(
+-    _In_    DWORD                         Flags,
++    _Win32_AssociatedEnum_(AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS) _In_    DWORD                         Flags,
+     _In_    AUTHZ_AUDIT_EVENT_TYPE_HANDLE hAuditEventType,
+     _In_    PWSTR                         szOperationType,
+     _In_    PWSTR                         szObjectType,
+     _In_    PWSTR                         szObjectName,
+     _In_    PWSTR                         szAdditionalInfo,
+-    _Out_   PAUTHZ_AUDIT_EVENT_HANDLE     phAuditEvent,
++    _Win32_RAIIFree_(AuthzFreeAuditEvent, -1, 0) _Out_   PAUTHZ_AUDIT_EVENT_HANDLE     phAuditEvent,
+     _In_    DWORD                         dwAdditionalParameterCount,
+     ...
+     );
+     
+-AUTHZAPI
++_Windows_SupportedOS_Server2003_ _Win32_SetLastError_ AUTHZAPI
+ BOOL
+ WINAPI
+ AuthzInitializeObjectAccessAuditEvent2(
+@@ -898,7 +905,7 @@ AuthzInitializeObjectAccessAuditEvent2(
+     _In_    PWSTR                         szObjectName,
+     _In_    PWSTR                         szAdditionalInfo,
+     _In_    PWSTR                         szAdditionalInfo2,
+-    _Out_   PAUTHZ_AUDIT_EVENT_HANDLE     phAuditEvent,
++    _Win32_RAIIFree_(AuthzFreeAuditEvent, -1, 0) _Out_   PAUTHZ_AUDIT_EVENT_HANDLE     phAuditEvent,
+     _In_    DWORD                         dwAdditionalParameterCount,
+     ...
+     );
 @@ -917,7 +924,7 @@ typedef enum _AUTHZ_AUDIT_EVENT_INFORMATION_CLASS
      AuthzAuditEventInfoAdditionalInfo,
  } AUTHZ_AUDIT_EVENT_INFORMATION_CLASS;
@@ -315,6 +351,15 @@ index dad771d0a5..40ec030248 100644
  BOOL
  WINAPI
  AuthzUnregisterSecurityEventSource(
+@@ -1035,7 +1042,7 @@ AuthzUnregisterSecurityEventSource(
+      _Inout_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
+     );
+ 
+-AUTHZAPI
++_Windows_SupportedOS_Server2003_ _Win32_SetLastError_ AUTHZAPI
+ BOOL
+ WINAPI
+ AuthzReportSecurityEvent(
 @@ -1047,7 +1054,7 @@ AuthzReportSecurityEvent(
      ...    
      );

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
-index 89b4c7034c..e73cfc7251 100644
+index 89b4c7034c..9901f15fae 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
 @@ -20,6 +20,7 @@ Abstract:
@@ -121,8 +121,8 @@ index 89b4c7034c..e73cfc7251 100644
      PFORMAT_STRING          pFormatString,
      ... );
  
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
++_Windows_SupportedOS_Windows2000_ 
++
  CLIENT_CALL_RETURN  RPC_VAR_ENTRY
  NdrMesProcEncodeDecode2(
      handle_t                Handle,

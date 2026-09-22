@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h
-index ca51682f69..012288e91c 100644
+index ca51682f69..f8d3f14e9c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/netioapi.h
 @@ -55,6 +55,7 @@ Notes:
@@ -789,6 +789,15 @@ index ca51682f69..012288e91c 100644
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
  NETIOAPI_API
+@@ -3021,7 +3022,7 @@ Return Value:
+ 
+ --*/
+ 
+-_IRQL_requires_max_(PASSIVE_LEVEL)
++_Windows_SupportedOS_10240_ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ NET_IF_COMPARTMENT_ID
+ NETIOAPI_API_
 @@ -3041,7 +3042,7 @@ Return Value:
  
  --*/

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
-index 62b1450287..3dd2dae496 100644
+index 62b1450287..8def65a2d9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
 @@ -1,3 +1,4 @@
@@ -286,6 +286,15 @@ index 62b1450287..3dd2dae496 100644
  VOID
  WINAPI
  DeleteFiber(
+@@ -1527,7 +1528,7 @@ DeleteFiber(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
+-WINBASEAPI
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINBASEAPI
+ BOOL
+ WINAPI
+ ConvertFiberToThread(
 @@ -1536,7 +1537,7 @@ ConvertFiberToThread(
  
  #endif
@@ -349,7 +358,7 @@ index 62b1450287..3dd2dae496 100644
  BOOL
  WINAPI
  GetUmsCompletionListEvent(
-@@ -1670,21 +1671,21 @@ GetUmsCompletionListEvent(
+@@ -1670,42 +1671,42 @@ GetUmsCompletionListEvent(
      _Inout_ PHANDLE UmsCompletionEvent
      );
  
@@ -374,7 +383,14 @@ index 62b1450287..3dd2dae496 100644
  BOOL
  WINAPI
  DeleteUmsCompletionList(
-@@ -1698,14 +1699,14 @@ GetCurrentUmsThread(
+     _In_ PUMS_COMPLETION_LIST UmsCompletionList
+     );
+ 
+-WINBASEAPI
++_Windows_SupportedOS_Windows7_ _Win32_SetLastError_ WINBASEAPI
+ PUMS_CONTEXT
+ WINAPI
+ GetCurrentUmsThread(
      VOID
      );
  
@@ -460,7 +476,7 @@ index 62b1450287..3dd2dae496 100644
  BOOL
  WINAPI
  GetProcessDEPPolicy(
-@@ -1806,7 +1807,7 @@ GetProcessDEPPolicy(
+@@ -1806,21 +1807,21 @@ GetProcessDEPPolicy(
  
  #endif // _WIN32_WINNT >= 0x0600
  
@@ -469,7 +485,14 @@ index 62b1450287..3dd2dae496 100644
  BOOL
  WINAPI
  RequestWakeupLatency(
-@@ -1820,7 +1821,7 @@ IsSystemResumeAutomatic(
+     _In_ LATENCY_TIME latency
+     );
+ 
+-WINBASEAPI
++_Windows_SupportedOS_WindowsXP_ WINBASEAPI
+ BOOL
+ WINAPI
+ IsSystemResumeAutomatic(
      VOID
      );
  
@@ -935,6 +958,15 @@ index 62b1450287..3dd2dae496 100644
  int
  WINAPI
  MulDiv(
+@@ -2431,7 +2432,7 @@ typedef enum _DEP_SYSTEM_POLICY_TYPE {
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXPSP3)
+ 
+-WINBASEAPI
++_Windows_SupportedOS_WindowsVista_ WINBASEAPI
+ DEP_SYSTEM_POLICY_TYPE
+ WINAPI
+ GetSystemDEPPolicy(
 @@ -2442,7 +2443,7 @@ GetSystemDEPPolicy(
  
  #if _WIN32_WINNT >= 0x0501
@@ -3950,7 +3982,32 @@ index 62b1450287..3dd2dae496 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8843,14 +8844,14 @@ GetMaximumProcessorGroupCount(
+@@ -8800,7 +8801,7 @@ typedef _Success_(return) BOOL (WINAPI * PQUERYACTCTXW_FUNC)(
+ 
+ #if _WIN32_WINNT >= 0x0501
+ 
+-WINBASEAPI
++_Windows_SupportedOS_WindowsVista_ WINBASEAPI
+ DWORD
+ WINAPI
+ WTSGetActiveConsoleSessionId(
+@@ -8829,28 +8830,28 @@ WTSIsServerContainer(
+ 
+ #if _WIN32_WINNT >= 0x0601
+ 
+-WINBASEAPI
++_Windows_SupportedOS_Windows7_ WINBASEAPI
+ WORD
+ WINAPI
+ GetActiveProcessorGroupCount(
+     VOID
+     );
+ 
+-WINBASEAPI
++_Windows_SupportedOS_Windows7_ WINBASEAPI
+ WORD
+ WINAPI
+ GetMaximumProcessorGroupCount(
      VOID
      );
  
@@ -4273,7 +4330,15 @@ index 62b1450287..3dd2dae496 100644
      _Out_ PCONTEXT* Context,
      _Inout_ PDWORD ContextLength,
      _In_ ULONG64 XStateCompactionMask
-@@ -9648,7 +9649,7 @@ GetEnabledXStateFeatures(
+@@ -9641,14 +9642,14 @@ InitializeContext2(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINBASEAPI
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("kernel32.dll") WINBASEAPI
+ DWORD64
+ WINAPI
+ GetEnabledXStateFeatures(
      VOID
      );
  

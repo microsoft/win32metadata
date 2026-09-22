@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h b/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
-index 86446dfbe4..d29dd07f2f 100644
+index 86446dfbe4..5ca6b41240 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
 @@ -13,6 +13,7 @@ Abstract:
@@ -200,24 +200,24 @@ index 86446dfbe4..d29dd07f2f 100644
      _Out_writes_opt_(dwArgCount-dwCurrentIndex)    DWORD    *pdwTagType
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netsh.dll") 
++
  DWORD PrintError(
      IN  HANDLE  hModule, OPTIONAL
      IN  DWORD   dwErrId,
      ...
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netsh.dll") 
++
  DWORD PrintMessageFromModule(
      IN  HANDLE  hModule,
      IN  DWORD   dwMsgId,
      ...
      );
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netsh.dll") 
++
  DWORD PrintMessage(
      IN  LPCWSTR  pwszFormat,
      ...

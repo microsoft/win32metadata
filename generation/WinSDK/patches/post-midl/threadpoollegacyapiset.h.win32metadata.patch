@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h
-index f0b98656cb..61c0e72045 100644
+index f0b98656cb..0da9d373e4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/threadpoollegacyapiset.h
 @@ -17,6 +17,7 @@
@@ -40,10 +40,10 @@ index f0b98656cb..61c0e72045 100644
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) 
++
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(DeleteTimerQueue, 0)
++
  WINBASEAPI
  _Ret_maybenull_
  HANDLE

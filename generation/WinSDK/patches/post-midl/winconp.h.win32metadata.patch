@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
-index bbb3a033d8..04d14644a8 100644
+index bbb3a033d8..046cc57bf2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
 @@ -1,3 +1,4 @@
@@ -22,7 +22,7 @@ index bbb3a033d8..04d14644a8 100644
  BOOL
  WINAPI
  GetConsoleKeyboardLayoutNameW(
-@@ -68,7 +69,7 @@ typedef struct _CONSOLE_GRAPHICS_BUFFER_INFO {
+@@ -68,13 +69,13 @@ typedef struct _CONSOLE_GRAPHICS_BUFFER_INFO {
  
  #endif
  
@@ -31,6 +31,13 @@ index bbb3a033d8..04d14644a8 100644
  WINAPI
  InvalidateConsoleDIBits(
      _In_ HANDLE hConsoleOutput,
+     _In_ PSMALL_RECT lpRect);
+ 
+-VOID
++_Win32_ImportLibrary_("kernel32.dll") VOID
+ WINAPI
+ SetLastConsoleEventActive(
+     VOID);
 @@ -88,27 +89,27 @@ SetLastConsoleEventActive(
  #define VDM_FULLSCREEN_NOPAINT  7
  #define VDM_SET_VIDEO_MODE      8
@@ -63,6 +70,15 @@ index bbb3a033d8..04d14644a8 100644
  WINAPI
  GetConsoleFontInfo(
      _In_ HANDLE hConsoleOutput,
+@@ -116,7 +117,7 @@ GetConsoleFontInfo(
+     _In_ DWORD nLength,
+     _Out_ PCONSOLE_FONT_INFO lpConsoleFontInfo);
+ 
+-DWORD
++_Win32_ImportLibrary_("kernel32.dll") DWORD
+ WINAPI
+ GetNumberOfConsoleFonts(
+     VOID);
 @@ -127,20 +128,20 @@ SetConsoleCursor(
      _In_ HANDLE hConsoleOutput,
      _In_ HCURSOR hCursor);
@@ -253,7 +269,7 @@ index bbb3a033d8..04d14644a8 100644
  APIENTRY
  SetConsoleOS2OemFormat(
      _In_ BOOL fOs2OemFormat);
-@@ -335,7 +336,7 @@ SetConsoleOS2OemFormat(
+@@ -335,13 +336,13 @@ SetConsoleOS2OemFormat(
  // ...
  
  #if defined(FE_IME)
@@ -262,6 +278,13 @@ index bbb3a033d8..04d14644a8 100644
  APIENTRY
  RegisterConsoleIME(
      _In_ HWND  hWndConsoleIME,
+     _Out_opt_ DWORD *lpdwConsoleThreadId);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ UnregisterConsoleIME(
+     VOID);
 @@ -373,7 +374,7 @@ UnregisterConsoleIME(
  // subsystems (i.e. OpenFile routes to OpenConsoleW).
  //
@@ -280,7 +303,7 @@ index bbb3a033d8..04d14644a8 100644
  APIENTRY
  DuplicateConsoleHandle(
      _In_ HANDLE hSourceHandle,
-@@ -391,12 +392,12 @@ DuplicateConsoleHandle(
+@@ -391,17 +392,17 @@ DuplicateConsoleHandle(
  
  // ...
  
@@ -295,3 +318,9 @@ index bbb3a033d8..04d14644a8 100644
  APIENTRY
  VerifyConsoleIoHandle(
      _In_ HANDLE hIoHandle);
+ 
+-HANDLE
++_Win32_ImportLibrary_("kernel32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ APIENTRY
+ GetConsoleInputWaitHandle(
+     VOID);

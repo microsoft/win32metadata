@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h
-index a055f544f2..c2dfc06a50 100644
+index a055f544f2..f3d1769d01 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h
 @@ -20,6 +20,7 @@ Environment:
@@ -50,7 +50,7 @@ index a055f544f2..c2dfc06a50 100644
  
  //----------------------------------------------------------------- Functions.
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  DWORD
  WDSTCIAPI
  WdsTransportClientInitialize (
@@ -138,7 +138,7 @@ index a055f544f2..c2dfc06a50 100644
      _In_ PVOID pvBuffer
      );
  
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
  DWORD
  WDSTCIAPI
  WdsTransportClientShutdown (
