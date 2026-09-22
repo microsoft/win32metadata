@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
-index 97a14455d2..74609378b2 100644
+index 97a14455d2..c96d2b94cb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 @@ -1,3 +1,4 @@
@@ -490,15 +490,15 @@ index 97a14455d2..74609378b2 100644
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  typedef /* [v1_enum] */ 
-@@ -9630,7 +9635,7 @@ enum DATAOBJ_GET_ITEM_FLAGS
-         DOGIF_ONLY_IF_ONE	= 0x8
+@@ -9631,7 +9636,7 @@ enum DATAOBJ_GET_ITEM_FLAGS
      } 	DATAOBJ_GET_ITEM_FLAGS;
  
--DEFINE_ENUM_FLAG_OPERATORS(DATAOBJ_GET_ITEM_FLAGS)
-+_Windows_SupportedOS_Windows7_ DEFINE_ENUM_FLAG_OPERATORS(DATAOBJ_GET_ITEM_FLAGS)
- STDAPI SHGetItemFromDataObject(_In_ IDataObject *pdtobj, _In_ DATAOBJ_GET_ITEM_FLAGS dwFlags, _In_ REFIID riid, _Outptr_ void **ppv);
+ DEFINE_ENUM_FLAG_OPERATORS(DATAOBJ_GET_ITEM_FLAGS)
+-STDAPI SHGetItemFromDataObject(_In_ IDataObject *pdtobj, _In_ DATAOBJ_GET_ITEM_FLAGS dwFlags, _In_ REFIID riid, _Outptr_ void **ppv);
++_Windows_SupportedOS_Windows7_ STDAPI SHGetItemFromDataObject(_In_ IDataObject *pdtobj, _In_ DATAOBJ_GET_ITEM_FLAGS dwFlags, _In_ REFIID riid, _Outptr_ void **ppv);
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  #define STR_GPS_HANDLERPROPERTIESONLY      L"GPS_HANDLERPROPERTIESONLY"
+ #define STR_GPS_FASTPROPERTIESONLY         L"GPS_FASTPROPERTIESONLY"
 @@ -9655,7 +9660,7 @@ EXTERN_C const IID IID_IShellItem2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1886,14 +1886,13 @@ index 97a14455d2..74609378b2 100644
  #endif  // NTDDI_VISTA
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  #if (_WIN32_IE >= _WIN32_IE_IE70)
-@@ -32225,9 +32258,9 @@ enum LIBRARYMANAGEDIALOGOPTIONS
-         LMD_ALLOWUNINDEXABLENETWORKLOCATIONS	= 0x1
+@@ -32226,8 +32259,8 @@ enum LIBRARYMANAGEDIALOGOPTIONS
      } 	LIBRARYMANAGEDIALOGOPTIONS;
  
--DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)
-+_Windows_SupportedOS_Windows7_ DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)
- STDAPI SHShowManageLibraryUI(_In_ IShellItem *psiLibrary, _In_ HWND hwndOwner, _In_opt_ LPCWSTR pszTitle, _In_opt_ LPCWSTR pszInstruction, _In_ LIBRARYMANAGEDIALOGOPTIONS lmdOptions);
+ DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)
+-STDAPI SHShowManageLibraryUI(_In_ IShellItem *psiLibrary, _In_ HWND hwndOwner, _In_opt_ LPCWSTR pszTitle, _In_opt_ LPCWSTR pszInstruction, _In_ LIBRARYMANAGEDIALOGOPTIONS lmdOptions);
 -STDAPI SHResolveLibrary(_In_ IShellItem *psiLibrary);
++_Windows_SupportedOS_Windows7_ STDAPI SHShowManageLibraryUI(_In_ IShellItem *psiLibrary, _In_ HWND hwndOwner, _In_opt_ LPCWSTR pszTitle, _In_opt_ LPCWSTR pszInstruction, _In_ LIBRARYMANAGEDIALOGOPTIONS lmdOptions);
 +_Windows_SupportedOS_Windows7_ STDAPI SHResolveLibrary(_In_ IShellItem *psiLibrary);
  #if defined(__cplusplus) && !defined(CINTERFACE)
  
@@ -1934,13 +1933,12 @@ index 97a14455d2..74609378b2 100644
      IEnumAssocHandlers : public IUnknown
      {
      public:
-@@ -32743,11 +32776,11 @@ enum ASSOC_FILTER
-         ASSOC_FILTER_RECOMMENDED	= 0x1
+@@ -32744,10 +32777,10 @@ enum ASSOC_FILTER
      } 	ASSOC_FILTER;
  
--DEFINE_ENUM_FLAG_OPERATORS(ASSOC_FILTER)
-+_Windows_SupportedOS_WindowsVista_ DEFINE_ENUM_FLAG_OPERATORS(ASSOC_FILTER)
- SHSTDAPI SHAssocEnumHandlers(_In_ PCWSTR pszExtra, _In_ ASSOC_FILTER afFilter, _Outptr_ IEnumAssocHandlers **ppEnumHandler);
+ DEFINE_ENUM_FLAG_OPERATORS(ASSOC_FILTER)
+-SHSTDAPI SHAssocEnumHandlers(_In_ PCWSTR pszExtra, _In_ ASSOC_FILTER afFilter, _Outptr_ IEnumAssocHandlers **ppEnumHandler);
++_Windows_SupportedOS_WindowsVista_ SHSTDAPI SHAssocEnumHandlers(_In_ PCWSTR pszExtra, _In_ ASSOC_FILTER afFilter, _Outptr_ IEnumAssocHandlers **ppEnumHandler);
  #endif  // NTDDI_VISTA
  #if (NTDDI_VERSION >= NTDDI_WIN7)
 -SHSTDAPI SHAssocEnumHandlersForProtocolByApplication(_In_ PCWSTR protocol, _In_ REFIID riid, _Outptr_ void **enumHandlers);

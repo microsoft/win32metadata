@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h b/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h
-index e4e74299a8..7d49933358 100644
+index e4e74299a8..79ff2cd55a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h
 @@ -1,3 +1,4 @@
@@ -7,12 +7,3 @@ index e4e74299a8..7d49933358 100644
  /*++
  
  Copyright (c) Microsoft Corporation
-@@ -107,7 +108,7 @@ typedef struct _DEV_QUERY_RESULT_ACTION_DATA
-     union _DEV_QUERY_RESULT_UPDATE_PAYLOAD
-     {
- #ifdef MIDL_PASS
--        [case (DevQueryResultStateChange)]
-+        _Win32_AssociatedEnum_(DEV_QUERY_STATE) [case (DevQueryResultStateChange)]
- #endif 
-         DEV_QUERY_STATE State;
- #ifdef MIDL_PASS
