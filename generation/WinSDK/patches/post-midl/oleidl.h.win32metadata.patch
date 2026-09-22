@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
-index 6faefa61fe..3ecd32b3fd 100644
+index 6faefa61fe..faca797456 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleidl.h
 @@ -236,6 +236,7 @@ extern "C"{
@@ -326,9 +326,9 @@ index 6faefa61fe..3ecd32b3fd 100644
 +    MIDL_INTERFACE("00000121-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IDropSource : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE QueryContinueDrag( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE QueryContinueDrag( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE QueryContinueDrag( 
              /* [annotation][in] */ 
              _In_  BOOL fEscapePressed,
              /* [annotation][in] */ 

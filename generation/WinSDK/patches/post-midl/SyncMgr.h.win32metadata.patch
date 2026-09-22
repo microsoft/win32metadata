@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
-index 8aa7a30938..a2cf6ac54c 100644
+index 8aa7a30938..d7e323c00b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 @@ -339,6 +339,7 @@ extern "C"{
@@ -280,7 +280,7 @@ index 8aa7a30938..a2cf6ac54c 100644
      {
          CONST_VTBL struct ISyncMgrSyncCallbackVtbl *lpVtbl;
      };
-@@ -1900,10 +1901,10 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
+@@ -1900,11 +1901,11 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -289,11 +289,12 @@ index 8aa7a30938..a2cf6ac54c 100644
 +    MIDL_INTERFACE("fc7cfa47-dfe1-45b5-a049-8cfd82bec271") _Windows_SupportedOS_WindowsVista_ 
 +      ISyncMgrUIOperation : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Run( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Run( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Run( 
              /* [annotation][unique][in] */ 
              _In_  HWND hwndOwner) = 0;
+         
 @@ -1942,7 +1943,7 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
          END_INTERFACE
      } ISyncMgrUIOperationVtbl;

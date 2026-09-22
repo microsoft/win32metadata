@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
-index 62271818d0..8413e4ab08 100644
+index 62271818d0..86e68b4859 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
 @@ -133,6 +133,7 @@ extern "C"{
@@ -39,7 +39,7 @@ index 62271818d0..8413e4ab08 100644
      {
          CONST_VTBL struct ISpellingErrorVtbl *lpVtbl;
      };
-@@ -295,10 +296,10 @@ EXTERN_C const IID IID_IEnumSpellingError;
+@@ -295,11 +296,11 @@ EXTERN_C const IID IID_IEnumSpellingError;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -48,11 +48,12 @@ index 62271818d0..8413e4ab08 100644
 +    MIDL_INTERFACE("803E3BD4-2828-4410-8290-418D1D73C762") _Windows_SupportedOS_Windows8_ 
 +      IEnumSpellingError : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][retval][out] */ 
              _Out_retval_  ISpellingError **value) = 0;
+         
 @@ -337,7 +338,7 @@ EXTERN_C const IID IID_IEnumSpellingError;
          END_INTERFACE
      } IEnumSpellingErrorVtbl;

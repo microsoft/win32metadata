@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
-index 0777b5b9b1..a5752d6c2b 100644
+index 0777b5b9b1..059955dc45 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
 @@ -274,6 +274,7 @@ extern "C"{
@@ -172,7 +172,7 @@ index 0777b5b9b1..a5752d6c2b 100644
      {
          CONST_VTBL struct IPropertyChangeArrayVtbl *lpVtbl;
      };
-@@ -1258,10 +1263,10 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
+@@ -1258,11 +1263,11 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -181,11 +181,12 @@ index 0777b5b9b1..a5752d6c2b 100644
 +    MIDL_INTERFACE("c8e2d566-186e-4d49-bf41-6909ead56acc") _Windows_SupportedOS_WindowsVista_ 
 +      IPropertyStoreCapabilities : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE IsPropertyWritable( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE IsPropertyWritable( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsPropertyWritable( 
              /* [annotation][in] */ 
              _In_  REFPROPERTYKEY key) = 0;
+         
 @@ -1300,7 +1305,7 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
          END_INTERFACE
      } IPropertyStoreCapabilitiesVtbl;

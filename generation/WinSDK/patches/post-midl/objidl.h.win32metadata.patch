@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
-index 31f65e72f3..5d0ae4bab9 100644
+index 31f65e72f3..4264c5570a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 @@ -801,6 +801,7 @@ extern "C"{
@@ -100,7 +100,7 @@ index 31f65e72f3..5d0ae4bab9 100644
      IInternalUnknown : public IUnknown
      {
      public:
-@@ -2271,10 +2272,10 @@ EXTERN_C const IID IID_IEnumUnknown;
+@@ -2271,11 +2272,11 @@ EXTERN_C const IID IID_IEnumUnknown;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -108,12 +108,13 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("00000100-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IEnumUnknown : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
-@@ -2420,10 +2421,10 @@ EXTERN_C const IID IID_IEnumString;
+             /* [annotation][out] */ 
+@@ -2420,11 +2421,11 @@ EXTERN_C const IID IID_IEnumString;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -121,11 +122,12 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("00000101-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IEnumString : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation] */ 
 @@ -2432,7 +2433,7 @@ EXTERN_C const IID IID_IEnumString;
              /* [annotation] */ 
              _Out_opt_  ULONG *pceltFetched) = 0;
@@ -135,7 +137,7 @@ index 31f65e72f3..5d0ae4bab9 100644
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          
-@@ -2567,10 +2568,10 @@ EXTERN_C const IID IID_ISequentialStream;
+@@ -2567,11 +2568,11 @@ EXTERN_C const IID IID_ISequentialStream;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -143,11 +145,12 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("0c733a30-2a1c-11ce-ade5-00aa0044773d") _Windows_SupportedOS_Windows2000_ 
      ISequentialStream : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
              /* [annotation] */ 
              _Out_writes_bytes_to_(cb, *pcbRead)  void *pv,
+             /* [annotation][in] */ 
 @@ -2579,7 +2580,7 @@ EXTERN_C const IID IID_ISequentialStream;
              /* [annotation] */ 
              _Out_opt_  ULONG *pcbRead) = 0;
@@ -560,7 +563,7 @@ index 31f65e72f3..5d0ae4bab9 100644
      IBindCtx : public IUnknown
      {
      public:
-@@ -10060,10 +10061,10 @@ EXTERN_C const IID IID_IEnumMoniker;
+@@ -10060,11 +10061,11 @@ EXTERN_C const IID IID_IEnumMoniker;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -568,11 +571,12 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("00000102-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IEnumMoniker : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation] */ 
 @@ -10072,7 +10073,7 @@ EXTERN_C const IID IID_IEnumMoniker;
              /* [annotation] */ 
              _Out_opt_  ULONG *pceltFetched) = 0;
@@ -616,7 +620,7 @@ index 31f65e72f3..5d0ae4bab9 100644
      IPersist : public IUnknown
      {
      public:
-@@ -10665,10 +10666,10 @@ EXTERN_C const IID IID_IPersistStream;
+@@ -10665,11 +10666,11 @@ EXTERN_C const IID IID_IPersistStream;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -624,11 +628,12 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("00000109-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IPersistStream : public IPersist
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Load( 
+             /* [annotation][unique][in] */ 
 @@ -10827,7 +10828,7 @@ EXTERN_C const IID IID_IMoniker;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -736,9 +741,9 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("0000010b-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IPersistFile : public IPersist
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Load( 
              /* [annotation][in] */ 
@@ -749,7 +754,7 @@ index 31f65e72f3..5d0ae4bab9 100644
          
          virtual HRESULT STDMETHODCALLTYPE Save( 
              /* [annotation][unique][in] */ 
-@@ -12184,10 +12185,10 @@ EXTERN_C const IID IID_IPersistStorage;
+@@ -12184,11 +12185,11 @@ EXTERN_C const IID IID_IPersistStorage;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -757,11 +762,12 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("0000010a-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IPersistStorage : public IPersist
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE InitNew( 
+             /* [annotation][unique][in] */ 
 @@ -12356,7 +12357,7 @@ EXTERN_C const IID IID_ILockBytes;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -789,7 +795,7 @@ index 31f65e72f3..5d0ae4bab9 100644
      {
      CLIPFORMAT cfFormat;
      /* [unique] */ DVTARGETDEVICE *ptd;
-@@ -12626,10 +12627,10 @@ EXTERN_C const IID IID_IEnumFORMATETC;
+@@ -12626,11 +12627,11 @@ EXTERN_C const IID IID_IEnumFORMATETC;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -797,11 +803,12 @@ index 31f65e72f3..5d0ae4bab9 100644
 +    MIDL_INTERFACE("00000103-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IEnumFORMATETC : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation] */ 
 @@ -12782,7 +12783,7 @@ enum tagADVF
          ADVFCACHE_ONSAVE	= 32
      } 	ADVF;

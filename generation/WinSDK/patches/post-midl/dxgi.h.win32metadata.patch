@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
-index bc9f6717c7..05f48592a7 100644
+index bc9f6717c7..6f6f3650f3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
 @@ -1,3 +1,4 @@
@@ -77,15 +77,15 @@ index bc9f6717c7..05f48592a7 100644
      IDXGISurface1 : public IDXGISurface
      {
      public:
-@@ -1353,7 +1358,7 @@ EXTERN_C const IID IID_IDXGIAdapter;
-     MIDL_INTERFACE("2411e7e1-12ac-4ccf-bd14-9798e8534dc0")
+@@ -1354,7 +1359,7 @@ EXTERN_C const IID IID_IDXGIAdapter;
      IDXGIAdapter : public IDXGIObject
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
              /* [annotation][in] */ 
              _In_  UINT Output,
+             /* [annotation][out][in] */ 
 @@ -1362,7 +1367,7 @@ EXTERN_C const IID IID_IDXGIAdapter;
          
          virtual HRESULT STDMETHODCALLTYPE GetDesc( 
@@ -104,13 +104,12 @@ index bc9f6717c7..05f48592a7 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetDisplayModeList( 
              /* [annotation][in] */ 
-@@ -1846,12 +1851,12 @@ EXTERN_C const IID IID_IDXGISwapChain;
-     MIDL_INTERFACE("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a")
+@@ -1847,11 +1852,11 @@ EXTERN_C const IID IID_IDXGISwapChain;
      IDXGISwapChain : public IDXGIDeviceSubObject
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE Present( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Present( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Present( 
              /* [annotation][in] */ 
              _In_  UINT SyncInterval,
              /* [annotation][in] */ 
@@ -184,7 +183,7 @@ index bc9f6717c7..05f48592a7 100644
      } 	DXGI_ADAPTER_DESC1;
  
  typedef struct DXGI_DISPLAY_COLOR_SPACE
-@@ -2624,10 +2633,10 @@ EXTERN_C const IID IID_IDXGIFactory1;
+@@ -2624,11 +2633,11 @@ EXTERN_C const IID IID_IDXGIFactory1;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -192,11 +191,12 @@ index bc9f6717c7..05f48592a7 100644
 +    MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387") _Windows_SupportedOS_Windows7_ 
      IDXGIFactory1 : public IDXGIFactory
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
              /* [annotation][in] */ 
              _In_  UINT Adapter,
+             /* [annotation][out] */ 
 @@ -2827,13 +2836,13 @@ EXTERN_C const IID IID_IDXGIAdapter1;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

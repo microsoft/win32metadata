@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mileffects.h b/generation/WinSDK/RecompiledIdlHeaders/um/mileffects.h
-index 292e3ef5ac..78544e9437 100644
+index 292e3ef5ac..1fd64bb19f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mileffects.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mileffects.h
 @@ -1,3 +1,4 @@
@@ -106,7 +106,7 @@ index 292e3ef5ac..78544e9437 100644
      IMILBitmapEffectPrimitive : public IUnknown
      {
      public:
-@@ -1898,10 +1899,10 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitiveImpl;
+@@ -1898,11 +1899,11 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitiveImpl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -114,11 +114,12 @@ index 292e3ef5ac..78544e9437 100644
 +    MIDL_INTERFACE("CE41E00B-EFA6-44e7-B007-DD042E3AE126") _Windows_SupportedOS_WindowsXP_ 
      IMILBitmapEffectPrimitiveImpl : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual HRESULT STDMETHODCALLTYPE IsDirty( 
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( 
++        _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( 
              /* [annotation][in] */ 
              _In_  ULONG uiOutputIndex,
+             /* [annotation][retval][out] */ 
 @@ -2006,7 +2007,7 @@ EXTERN_C const IID IID_IMILBitmapEffects;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

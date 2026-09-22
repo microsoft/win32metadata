@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
-index 2bd1b450dc..9a0f694dfc 100644
+index 2bd1b450dc..5277942d52 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 @@ -1,3 +1,4 @@
@@ -79,15 +79,15 @@ index 2bd1b450dc..9a0f694dfc 100644
          
          virtual HRESULT STDMETHODCALLTYPE SetAlignment( 
              /* [annotation][in] */ 
-@@ -2689,7 +2690,7 @@ EXTERN_C const IID IID_IEnumVARIANT;
-     MIDL_INTERFACE("00020404-0000-0000-C000-000000000046")
+@@ -2690,7 +2691,7 @@ EXTERN_C const IID IID_IEnumVARIANT;
      IEnumVARIANT : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
 @@ -2698,7 +2699,7 @@ EXTERN_C const IID IID_IEnumVARIANT;
              /* [annotation][out] */ 
              _Out_  ULONG *pCeltFetched) = 0;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
-index 48e9fc14c2..3218c16b19 100644
+index 48e9fc14c2..b2867b9bd3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
 @@ -88,6 +88,7 @@ extern "C"{
@@ -69,7 +69,7 @@ index 48e9fc14c2..3218c16b19 100644
      IPropertySetStorage : public IUnknown
      {
      public:
-@@ -928,10 +929,10 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
+@@ -928,11 +929,11 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -77,11 +77,12 @@ index 48e9fc14c2..3218c16b19 100644
 +    MIDL_INTERFACE("00000139-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IEnumSTATPROPSTG : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
 @@ -940,7 +941,7 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
              /* [annotation][out] */ 
              _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
@@ -91,7 +92,7 @@ index 48e9fc14c2..3218c16b19 100644
              /* [annotation][in] */ 
              _In_  ULONG celt) = 0;
          
-@@ -1077,10 +1078,10 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
+@@ -1077,11 +1078,11 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -99,11 +100,12 @@ index 48e9fc14c2..3218c16b19 100644
 +    MIDL_INTERFACE("0000013B-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
      IEnumSTATPROPSETSTG : public IUnknown
      {
--    public:
-+    _Win32_PreserveResult_ public:
-         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
              /* [annotation][in] */ 
              _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
 @@ -1089,7 +1090,7 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
              /* [annotation][out] */ 
              _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
