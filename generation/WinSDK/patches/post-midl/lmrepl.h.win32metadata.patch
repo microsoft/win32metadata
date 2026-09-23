@@ -1,0 +1,64 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMRepl.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMRepl.h
+index caedb05d7d..a5f37f7baf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMRepl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMRepl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0004    // Increment this if a change has global effects
+ 
+ Copyright (c) 1991-1999  Microsoft Corporation
+@@ -93,7 +94,7 @@ NET_API_STATUS NET_API_FUNCTION
+ NetReplGetInfo (
+     IN LPCWSTR servername OPTIONAL,
+     IN DWORD level,
+-    OUT LPBYTE * bufptr
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr
+     );
+ 
+ NET_API_STATUS NET_API_FUNCTION
+@@ -166,10 +167,10 @@ NET_API_STATUS NET_API_FUNCTION
+ NetReplExportDirEnum (
+     IN LPCWSTR servername OPTIONAL,
+     IN DWORD level,
+-    OUT LPBYTE * bufptr,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr,
+     IN DWORD prefmaxlen,
+-    OUT LPDWORD entriesread,
+-    OUT LPDWORD totalentries,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD entriesread,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD totalentries,
+     IN OUT LPDWORD resumehandle OPTIONAL
+     );
+ 
+@@ -178,7 +179,7 @@ NetReplExportDirGetInfo (
+     IN LPCWSTR servername OPTIONAL,
+     IN LPCWSTR dirname,
+     IN DWORD level,
+-    OUT LPBYTE * bufptr
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr
+     );
+ 
+ NET_API_STATUS NET_API_FUNCTION
+@@ -245,10 +246,10 @@ NET_API_STATUS NET_API_FUNCTION
+ NetReplImportDirEnum (
+     IN LPCWSTR servername OPTIONAL,
+     IN DWORD level,
+-    OUT LPBYTE * bufptr,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr,
+     IN DWORD prefmaxlen,
+-    OUT LPDWORD entriesread,
+-    OUT LPDWORD totalentries,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD entriesread,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD totalentries,
+     IN OUT LPDWORD resumehandle OPTIONAL
+     );
+ 
+@@ -257,7 +258,7 @@ NetReplImportDirGetInfo (
+     IN LPCWSTR servername OPTIONAL,
+     IN LPCWSTR dirname,
+     IN DWORD level,
+-    OUT LPBYTE * bufptr
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr
+     );
+ 
+ NET_API_STATUS NET_API_FUNCTION

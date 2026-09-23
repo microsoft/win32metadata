@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxcapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxcapi.h
-index 0b55302404..c666fe120d 100644
+index 0b55302404..1538bbe3c1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dxcapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxcapi.h
 @@ -1,3 +1,4 @@
@@ -89,6 +89,24 @@ index 0b55302404..c666fe120d 100644
             _COM_Outptr_ IDxcBlobEncoding **ppBlobEncoding) = 0;
  
    /// \brief Create a stream that reads data from a blob.
+@@ -685,7 +686,7 @@ struct IDxcUtils : public IUnknown {
+   ///
+   /// Use this with interfaces such as ID3D12ShaderReflection.
+   virtual HRESULT STDMETHODCALLTYPE CreateReflection(
+-      _In_ const DxcBuffer *pData, REFIID iid, void **ppvReflection) = 0;
++      _In_ const DxcBuffer *pData, REFIID iid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **ppvReflection) = 0;
+ 
+   /// \brief Build arguments that can be passed to the Compile method.
+   virtual HRESULT STDMETHODCALLTYPE BuildArguments(
+@@ -1021,7 +1022,7 @@ struct IDxcContainerReflection : public IUnknown {
+   /// loaded using Load(), E_BOUND if idx is out of bounds, or other standard
+   /// HRESULT error codes.
+   virtual HRESULT STDMETHODCALLTYPE GetPartReflection(UINT32 idx, REFIID iid,
+-                                                      void **ppvObject) = 0;
++                                                      _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **ppvObject) = 0;
+ };
+ 
+ CROSS_PLATFORM_UUIDOF(IDxcOptimizerPass, "AE2CD79F-CC22-453F-9B6B-B124E7A5204C")
 @@ -1110,36 +1111,36 @@ struct IDxcPdbUtils : public IUnknown {
    virtual HRESULT STDMETHODCALLTYPE
    GetSource(_In_ UINT32 uIndex, _COM_Outptr_ IDxcBlobEncoding **ppResult) = 0;
@@ -136,6 +154,15 @@ index 0b55302404..c666fe120d 100644
  
    virtual BOOL STDMETHODCALLTYPE IsFullPDB() = 0;
    virtual HRESULT STDMETHODCALLTYPE
+@@ -1171,7 +1172,7 @@ struct IDxcPdbUtils2 : public IUnknown {
+   virtual HRESULT STDMETHODCALLTYPE
+   GetSourceName(_In_ UINT32 uIndex, _COM_Outptr_ IDxcBlobWide **ppResult) = 0;
+ 
+-  virtual HRESULT STDMETHODCALLTYPE GetLibraryPDBCount(UINT32 *pCount) = 0;
++  virtual HRESULT STDMETHODCALLTYPE GetLibraryPDBCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT32 *pCount) = 0;
+   virtual HRESULT STDMETHODCALLTYPE GetLibraryPDB(
+       _In_ UINT32 uIndex, _COM_Outptr_ IDxcPdbUtils2 **ppOutPdbUtils,
+       _COM_Outptr_opt_result_maybenull_ IDxcBlobWide **ppLibraryName) = 0;
 @@ -1306,4 +1307,31 @@ CLSID_SCOPE const GUID CLSID_DxcPdbUtils = {
      0x457e,
      {0xae, 0x8c, 0xec, 0x35, 0x5f, 0xae, 0xec, 0x7c}};

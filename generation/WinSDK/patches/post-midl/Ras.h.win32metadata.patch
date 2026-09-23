@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
-index 5fed8633f1..9ba14431e3 100644
+index 5fed8633f1..76d7ea66ec 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 @@ -31,6 +31,7 @@ Abstract:
@@ -56,6 +56,88 @@ index 5fed8633f1..9ba14431e3 100644
  
  
  /* Information describing a RAS-capable device.
+@@ -1611,7 +1612,7 @@ RASENTRYW
+ ** PROTOTYPE IN NEW CODE.  SUPPORT FOR IT MAY BE REMOVED
+ ** IN FUTURE VERSIONS OF RAS.
+ */
+-typedef BOOL (WINAPI *ORASADFUNC)( HWND, LPSTR, DWORD, LPDWORD );
++typedef BOOL (WINAPI *ORASADFUNC)( HWND, LPSTR, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD );
+ 
+ #if (WINVER >= 0x400)
+ 
+@@ -1657,8 +1658,8 @@ RASADPARAMS
+ 
+ /* Prototype AutoDial DLL function.
+ */
+-typedef BOOL (WINAPI *RASADFUNCA)( LPSTR, LPSTR, LPRASADPARAMS, LPDWORD );
+-typedef BOOL (WINAPI *RASADFUNCW)( LPWSTR, LPWSTR, LPRASADPARAMS, LPDWORD );
++typedef BOOL (WINAPI *RASADFUNCA)( LPSTR, LPSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASADPARAMS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD );
++typedef BOOL (WINAPI *RASADFUNCW)( LPWSTR, LPWSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASADPARAMS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD );
+ 
+ #ifdef UNICODE
+ #define RASADFUNC RASADFUNCW
+@@ -1837,31 +1838,31 @@ RASEAPUSERIDENTITYW
+ #define LPRASEAPUSERIDENTITY  RASEAPUSERIDENTITY*
+ 
+ typedef DWORD (WINAPI *PFNRASGETBUFFER) (
+-                            PBYTE *ppBuffer,
+-                            PDWORD pdwSize
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE *ppBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSize
+                             );
+ 
+ typedef DWORD (WINAPI *PFNRASFREEBUFFER) (
+-                            PBYTE pBufer);
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pBufer);
+ 
+ typedef DWORD (WINAPI *PFNRASSENDBUFFER) (
+                             HANDLE hPort,
+-                            PBYTE  pBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE  pBuffer,
+                             DWORD  dwSize
+                             );
+ 
+ typedef DWORD (WINAPI *PFNRASRECEIVEBUFFER) (
+                             HANDLE hPort,
+-                            PBYTE pBuffer,
+-                            PDWORD pdwSize,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSize,
+                             DWORD  dwTimeOut,
+                             HANDLE hEvent
+                             );
+ 
+ typedef DWORD (WINAPI *PFNRASRETRIEVEBUFFER) (
+                             HANDLE hPort,
+-                            PBYTE pBuffer,
+-                            PDWORD pdwSize
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSize
+                             );
+ 
+ typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
+@@ -1874,8 +1875,8 @@ typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
+                             PFNRASRECEIVEBUFFER pfnRasReceiveBuffer,
+                             PFNRASRETRIEVEBUFFER pfnRasRetrieveBuffer,
+                             HWND hWnd,
+-                            RASDIALPARAMS *pRasDialParams,
+-                            PVOID pvReserved
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RASDIALPARAMS *pRasDialParams,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvReserved
+                             );
+ 
+ #endif // (WINVER >= 0x500)
+@@ -1894,8 +1895,8 @@ RASCOMMSETTINGS
+ 
+ typedef DWORD (WINAPI *PFNRASSETCOMMSETTINGS) (
+                             HANDLE hPort,
+-                            RASCOMMSETTINGS *pRasCommSettings,
+-                            PVOID  pvReserved
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RASCOMMSETTINGS *pRasCommSettings,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID  pvReserved
+                             );
+ 
+ #define RASCUSTOMSCRIPTEXTENSIONS struct tagRASCUSTOMSCRIPTEXTENSIONS
 @@ -1910,148 +1911,154 @@ RASCUSTOMSCRIPTEXTENSIONS
  
  /* External RAS API function prototypes.
@@ -271,6 +353,23 @@ index 5fed8633f1..9ba14431e3 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialParamW( _In_ DWORD, _In_ LPVOID, _In_ DWORD );
  
  DWORD APIENTRY RasGetPCscf(_Out_ LPWSTR lpszPCscf);
+ 
+@@ -2086,12 +2093,12 @@ typedef DWORD (WINAPI *RasCustomHangUpFn) (
+ 
+ typedef DWORD (WINAPI *RasCustomDialFn) (
+         HINSTANCE           hInstDll,
+-        LPRASDIALEXTENSIONS lpRasDialExtensions,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASDIALEXTENSIONS lpRasDialExtensions,
+         LPCWSTR             lpszPhonebook,
+-        LPRASDIALPARAMS     lpRasDialParams,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASDIALPARAMS     lpRasDialParams,
+         DWORD               dwNotifierType,
+-        LPVOID              lpvNotifier,
+-        LPHRASCONN          lphRasConn,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID              lpvNotifier,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHRASCONN          lphRasConn,
+         DWORD               dwFlags
+         );
  
 @@ -2106,22 +2113,22 @@ typedef DWORD (WINAPI *RasCustomDeleteEntryNotifyFn) (
  #define RCD_Eap         0x00000002

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amxmlgraphbuilder.h b/generation/WinSDK/RecompiledIdlHeaders/um/amxmlgraphbuilder.h
-index eaa7d8726c..e80d755c3a 100644
+index eaa7d8726c..eb725d9379 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amxmlgraphbuilder.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amxmlgraphbuilder.h
 @@ -1,6 +1,7 @@
@@ -23,7 +23,7 @@ index eaa7d8726c..e80d755c3a 100644
 -    STDMETHOD(SaveToXML) (IGraphBuilder *pGraph, BSTR *pbstrxml) = 0;
 +    
 +    
-+    STDMETHOD(SaveToXML) (IGraphBuilder *pGraph,  BSTR *pbstrxml) = 0;
++    STDMETHOD(SaveToXML) (IGraphBuilder *pGraph,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BSTR *pbstrxml) = 0;
 +    
 +    
      STDMETHOD(BuildFromXMLFile) (IGraphBuilder *pGraph, LPCWSTR wszFileName, LPCWSTR wszBaseURL) = 0;

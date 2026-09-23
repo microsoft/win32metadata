@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
-index b28b56862b..775a60b25f 100644
+index b28b56862b..43d3873c7d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index b28b56862b..775a60b25f 100644
  /*-------------------------------------------------------------------
  //
  //  Copyright (C) Microsoft, 2007
+@@ -405,7 +406,7 @@ HRESULT
+     _Out_writes_bytes_to_( cbData, *pcbRead )
+                     BYTE                *pbData,
+     _In_            ULONG               cbData,
+-    _Out_range_( 0, cbData )
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_( 0, cbData )
+                     ULONG               *pcbRead
+     );
+ 
 @@ -501,10 +502,10 @@ HRESULT
      Informational flags.
  
@@ -342,6 +351,24 @@ index b28b56862b..775a60b25f 100644
 -                    DWORD                           dwFlags,
 +                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD                           dwFlags,
      _Outptr_     CRYPT_XML_ALGORITHM_INFO        **ppAlgInfo
+     );
+ 
+@@ -2075,7 +2076,7 @@ _Success_( return == 0 )
+ HRESULT
+ (WINAPI *CryptXmlDllCreateDigest)(
+     _In_            const CRYPT_XML_ALGORITHM *pDigestMethod,
+-    _Out_range_( 0, CRYPT_XML_DIGEST_VALUE_MAX )
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_( 0, CRYPT_XML_DIGEST_VALUE_MAX )
+                     ULONG               *pcbSize,
+     _Out_           CRYPT_XML_DIGEST    *phDigest
+     );
+@@ -2215,7 +2216,7 @@ HRESULT
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) 
+                     BYTE                *pbOutput,
+     _In_            ULONG               cbOutput,
+-    _Out_range_( 0, cbOutput )
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_( 0, cbOutput )
+                     ULONG               *pcbResult
      );
  
 @@ -2319,7 +2320,7 @@ HRESULT

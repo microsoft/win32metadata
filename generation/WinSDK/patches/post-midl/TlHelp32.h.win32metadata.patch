@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
-index c712ccb473..c048ed6f30 100644
+index c712ccb473..d92aa96ebf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
 @@ -17,6 +17,7 @@
@@ -33,7 +33,7 @@ index c712ccb473..c048ed6f30 100644
  {
      SIZE_T dwSize;
      DWORD  th32ProcessID;   // owning process
-@@ -78,6 +81,8 @@ typedef HEAPLIST32 *  LPHEAPLIST32;
+@@ -78,18 +81,22 @@ typedef HEAPLIST32 *  LPHEAPLIST32;
  #define HF32_DEFAULT      1  // process's default heap
  #define HF32_SHARED       2  // is shared heap
  
@@ -42,8 +42,9 @@ index c712ccb473..c048ed6f30 100644
  BOOL
  WINAPI
  Heap32ListFirst(
-@@ -85,6 +90,8 @@ Heap32ListFirst(
-     LPHEAPLIST32 lphl
+     HANDLE hSnapshot,
+-    LPHEAPLIST32 lphl
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHEAPLIST32 lphl
      );
  
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
@@ -51,6 +52,12 @@ index c712ccb473..c048ed6f30 100644
  BOOL
  WINAPI
  Heap32ListNext(
+     HANDLE hSnapshot,
+-    LPHEAPLIST32 lphl
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHEAPLIST32 lphl
+     );
+ 
+ typedef struct tagHEAPENTRY32
 @@ -98,7 +105,7 @@ typedef struct tagHEAPENTRY32
      HANDLE hHandle;     // Handle of this heap block
      ULONG_PTR dwAddress;   // Linear address of start of block
@@ -60,7 +67,7 @@ index c712ccb473..c048ed6f30 100644
      DWORD  dwLockCount;
      DWORD  dwResvd;
      DWORD  th32ProcessID;   // owning process
-@@ -113,7 +120,7 @@ typedef HEAPENTRY32 *  LPHEAPENTRY32;
+@@ -113,28 +120,28 @@ typedef HEAPENTRY32 *  LPHEAPENTRY32;
  #define LF32_FREE     0x00000002
  #define LF32_MOVEABLE 0x00000004
  
@@ -68,8 +75,9 @@ index c712ccb473..c048ed6f30 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
  WINAPI
  Heap32First(
-     LPHEAPENTRY32 lphe,
-@@ -121,13 +128,13 @@ Heap32First(
+-    LPHEAPENTRY32 lphe,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHEAPENTRY32 lphe,
+     DWORD th32ProcessID,
      ULONG_PTR th32HeapID
      );
  
@@ -77,7 +85,8 @@ index c712ccb473..c048ed6f30 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL
  WINAPI
  Heap32Next(
-     LPHEAPENTRY32 lphe
+-    LPHEAPENTRY32 lphe
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHEAPENTRY32 lphe
      );
  
 -BOOL
@@ -85,7 +94,16 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Toolhelp32ReadProcessMemory(
      DWORD th32ProcessID,
-@@ -155,14 +162,14 @@ typedef struct tagPROCESSENTRY32W
+     LPCVOID lpBaseAddress,
+-    LPVOID lpBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpBuffer,
+     SIZE_T cbRead,
+-    SIZE_T* lpNumberOfBytesRead
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SIZE_T* lpNumberOfBytesRead
+     );
+ 
+ /***** Process walking *************************************************/
+@@ -155,18 +162,18 @@ typedef struct tagPROCESSENTRY32W
  typedef PROCESSENTRY32W *  PPROCESSENTRY32W;
  typedef PROCESSENTRY32W *  LPPROCESSENTRY32W;
  
@@ -94,7 +112,8 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Process32FirstW(
      HANDLE hSnapshot,
-     LPPROCESSENTRY32W lppe
+-    LPPROCESSENTRY32W lppe
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPROCESSENTRY32W lppe
      );
  
 -BOOL
@@ -102,7 +121,12 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Process32NextW(
      HANDLE hSnapshot,
-@@ -185,14 +192,14 @@ typedef struct tagPROCESSENTRY32
+-    LPPROCESSENTRY32W lppe
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPROCESSENTRY32W lppe
+     );
+ 
+ typedef struct tagPROCESSENTRY32
+@@ -185,18 +192,18 @@ typedef struct tagPROCESSENTRY32
  typedef PROCESSENTRY32 *  PPROCESSENTRY32;
  typedef PROCESSENTRY32 *  LPPROCESSENTRY32;
  
@@ -111,7 +135,8 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Process32First(
      HANDLE hSnapshot,
-     LPPROCESSENTRY32 lppe
+-    LPPROCESSENTRY32 lppe
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPROCESSENTRY32 lppe
      );
  
 -BOOL
@@ -119,7 +144,12 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Process32Next(
      HANDLE hSnapshot,
-@@ -222,14 +229,14 @@ typedef struct tagTHREADENTRY32
+-    LPPROCESSENTRY32 lppe
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPROCESSENTRY32 lppe
+     );
+ 
+ #ifdef UNICODE
+@@ -222,18 +229,18 @@ typedef struct tagTHREADENTRY32
  typedef THREADENTRY32 *  PTHREADENTRY32;
  typedef THREADENTRY32 *  LPTHREADENTRY32;
  
@@ -128,7 +158,8 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Thread32First(
      HANDLE hSnapshot,
-     LPTHREADENTRY32 lpte
+-    LPTHREADENTRY32 lpte
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTHREADENTRY32 lpte
      );
  
 -BOOL
@@ -136,7 +167,12 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Thread32Next(
      HANDLE hSnapshot,
-@@ -254,14 +261,14 @@ typedef struct tagMODULEENTRY32W
+-    LPTHREADENTRY32 lpte
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTHREADENTRY32 lpte
+     );
+ 
+ /***** Module walking *************************************************/
+@@ -254,18 +261,18 @@ typedef struct tagMODULEENTRY32W
  typedef MODULEENTRY32W *  PMODULEENTRY32W;
  typedef MODULEENTRY32W *  LPMODULEENTRY32W;
  
@@ -145,7 +181,8 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Module32FirstW(
      HANDLE hSnapshot,
-     LPMODULEENTRY32W lpme
+-    LPMODULEENTRY32W lpme
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMODULEENTRY32W lpme
      );
  
 -BOOL
@@ -153,7 +190,12 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Module32NextW(
      HANDLE hSnapshot,
-@@ -289,14 +296,14 @@ typedef MODULEENTRY32 *  LPMODULEENTRY32;
+-    LPMODULEENTRY32W lpme
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMODULEENTRY32W lpme
+     );
+ 
+ typedef struct tagMODULEENTRY32
+@@ -289,18 +296,18 @@ typedef MODULEENTRY32 *  LPMODULEENTRY32;
  // in th32ProcessID's process context.
  //
  
@@ -162,7 +204,8 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Module32First(
      HANDLE hSnapshot,
-     LPMODULEENTRY32 lpme
+-    LPMODULEENTRY32 lpme
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMODULEENTRY32 lpme
      );
  
 -BOOL
@@ -170,6 +213,11 @@ index c712ccb473..c048ed6f30 100644
  WINAPI
  Module32Next(
      HANDLE hSnapshot,
+-    LPMODULEENTRY32 lpme
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMODULEENTRY32 lpme
+     );
+ 
+ #ifdef UNICODE
 @@ -318,4 +325,57 @@ Module32Next(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

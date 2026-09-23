@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h b/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
-index 1fcca48d17..f056675c90 100644
+index 1fcca48d17..85ff747eb5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -10,7 +10,7 @@ index 1fcca48d17..f056675c90 100644
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -33,6 +34,8 @@ Revision History:
+@@ -33,51 +34,55 @@ Revision History:
  extern "C" {
  #endif
  
@@ -19,7 +19,18 @@ index 1fcca48d17..f056675c90 100644
  int
  WSPAPI
  WSCWriteProviderOrder (
-@@ -49,7 +52,7 @@ int
+-    IN LPDWORD lpwdCatalogEntryId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPDWORD lpwdCatalogEntryId,
+     IN DWORD dwNumberOfEntries
+     );
+ 
+ typedef
+ int
+ (WSPAPI * LPWSCWRITEPROVIDERORDER)(
+-    IN LPDWORD lpwdCatalogEntryId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPDWORD lpwdCatalogEntryId,
+     IN DWORD dwNumberOfEntries
+     );
  
  #if(_WIN32_WINNT >= 0x0501)
  #ifdef _WIN64
@@ -27,8 +38,10 @@ index 1fcca48d17..f056675c90 100644
 +_Windows_SupportedOS_WindowsVista_ int
  WSPAPI
  WSCWriteProviderOrder32 (
-     IN LPDWORD lpwdCatalogEntryId,
-@@ -58,6 +61,8 @@ WSCWriteProviderOrder32 (
+-    IN LPDWORD lpwdCatalogEntryId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPDWORD lpwdCatalogEntryId,
+     IN DWORD dwNumberOfEntries
+     );
  #endif //_WIN64
  #endif //_WIN32_WINNT >= 0x0501
  
@@ -37,7 +50,18 @@ index 1fcca48d17..f056675c90 100644
  int
  WSPAPI
  WSCWriteNameSpaceOrder (
-@@ -74,7 +79,7 @@ int
+-    IN LPGUID lpProviderId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID lpProviderId,
+     IN DWORD dwNumberOfEntries
+     );
+ 
+ typedef 
+ int
+ (WSPAPI * LPWSCWRITENAMESPACEORDER)(
+-    IN LPGUID lpProviderId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID lpProviderId,
+     IN DWORD dwNumberOfEntries
+     );
  
  #if(_WIN32_WINNT >= 0x0501)
  #ifdef _WIN64
@@ -45,4 +69,8 @@ index 1fcca48d17..f056675c90 100644
 +_Windows_SupportedOS_WindowsVista_ int
  WSPAPI
  WSCWriteNameSpaceOrder32 (
-     IN LPGUID lpProviderId,
+-    IN LPGUID lpProviderId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID lpProviderId,
+     IN DWORD dwNumberOfEntries
+     );
+ #endif //_WIN64

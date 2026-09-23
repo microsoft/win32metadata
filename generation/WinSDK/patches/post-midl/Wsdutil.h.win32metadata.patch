@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h
-index b305efdfb9..867966a7e5 100644
+index b305efdfb9..797b3a1109 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdutil.h
 @@ -1,3 +1,4 @@
@@ -25,7 +25,7 @@ index b305efdfb9..867966a7e5 100644
  WSDGetConfigurationOption(
      DWORD dwOption,
      _Out_writes_bytes_(cbOutBuffer) LPVOID pVoid,
-@@ -59,21 +62,25 @@ WSDGetConfigurationOption(
+@@ -59,23 +62,27 @@ WSDGetConfigurationOption(
  // Linked memory
  //
  
@@ -33,29 +33,35 @@ index b305efdfb9..867966a7e5 100644
 +_Windows_SupportedOS_WindowsVista_ void * WINAPI 
 + 
  WSDAllocateLinkedMemory(
-     void* pParent, 
+-    void* pParent, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pParent, 
      size_t cbSize);
  
 -void WINAPI
 +_Windows_SupportedOS_WindowsVista_ void WINAPI
 + 
  WSDFreeLinkedMemory(
-     void *pVoid);
+-    void *pVoid);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *pVoid);
  
 -void WINAPI
 +_Windows_SupportedOS_WindowsVista_ void WINAPI
 + 
  WSDAttachLinkedMemory(
-     void* pParent,
+-    void* pParent,
 -    void* pChild);
-+     void* pChild);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pParent,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pChild);
  
 -void WINAPI
 +_Windows_SupportedOS_WindowsVista_ void WINAPI
 + 
  WSDDetachLinkedMemory(
-     void* pVoid);
+-    void* pVoid);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pVoid);
  
+ //
+ // XML helpers 
 @@ -83,63 +90,72 @@ WSDDetachLinkedMemory(
  
  typedef struct _WSDXML_ELEMENT WSDXML_ELEMENT; 
@@ -64,7 +70,8 @@ index b305efdfb9..867966a7e5 100644
 +_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
 + 
  WSDXMLBuildAnyForSingleElement(
-     WSDXML_NAME* pElementName, 
+-    WSDXML_NAME* pElementName, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_NAME* pElementName, 
      _In_opt_ LPCWSTR pszText, 
 -    _Outptr_ WSDXML_ELEMENT** ppAny);
 +    _Outptr_  WSDXML_ELEMENT** ppAny);
@@ -75,30 +82,34 @@ index b305efdfb9..867966a7e5 100644
  WSDXMLGetValueFromAny(
      _In_ LPCWSTR pszNamespace,
      _In_ LPCWSTR pszName, 
-     WSDXML_ELEMENT* pAny, 
+-    WSDXML_ELEMENT* pAny, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_ELEMENT* pAny, 
      _Outptr_ LPCWSTR* ppszValue);
  
 -HRESULT WINAPI
 +_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
 + 
  WSDXMLAddSibling(
-     WSDXML_ELEMENT* pFirst,
+-    WSDXML_ELEMENT* pFirst,
 -    WSDXML_ELEMENT* pSecond);
-+     WSDXML_ELEMENT* pSecond);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_ELEMENT* pFirst,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_ELEMENT* pSecond);
  
 -HRESULT WINAPI
 +_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
 + 
  WSDXMLAddChild(
-     WSDXML_ELEMENT* pParent,
+-    WSDXML_ELEMENT* pParent,
 -    WSDXML_ELEMENT* pChild);
-+     WSDXML_ELEMENT* pChild);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_ELEMENT* pParent,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_ELEMENT* pChild);
  
 -HRESULT WINAPI
 +_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
 + 
  WSDXMLCleanupElement(
-     WSDXML_ELEMENT* pAny);    
+-    WSDXML_ELEMENT* pAny);    
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSDXML_ELEMENT* pAny);    
  
 -HRESULT WINAPI
 +_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI

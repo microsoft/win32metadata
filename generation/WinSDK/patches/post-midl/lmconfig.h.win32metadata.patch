@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h
+index 2150eb2e54..b7ec0e576c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0003    // Increment this if a change has global effects
+ 
+ Copyright (c) 1991-1999  Microsoft Corporation
+@@ -82,7 +83,7 @@ NetConfigSet (
+     IN  LPCWSTR  component,
+     IN  DWORD   level,
+     IN  DWORD   reserved2,
+-    IN  LPBYTE  buf,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  LPBYTE  buf,
+     IN  DWORD   reserved3
+     );
+ 

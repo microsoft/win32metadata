@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h b/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h
-index c7969d4d8e..5c4a00a1e2 100644
+index c7969d4d8e..ee744659ad 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winscard.h
 @@ -34,6 +34,7 @@ Notes:
@@ -621,22 +621,25 @@ index c7969d4d8e..5c4a00a1e2 100644
      DWORD           dwStructSize;           // REQUIRED
      SCARDCONTEXT    hSCardContext;          // REQUIRED
      HWND            hwndOwner;              // OPTIONAL
-@@ -1142,11 +1143,11 @@ typedef struct {
+@@ -1142,12 +1143,12 @@ typedef struct {
  // SCardUIDlgSelectCard replaces GetOpenCardName
  //
  
 -extern WINSCARDAPI LONG WINAPI
 -SCardUIDlgSelectCardA(
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
-+  SCardUIDlgSelectCardA(
-     LPOPENCARDNAMEA_EX);
+-    LPOPENCARDNAMEA_EX);
 -extern WINSCARDAPI LONG WINAPI
 -SCardUIDlgSelectCardW(
+-    LPOPENCARDNAMEW_EX);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++  SCardUIDlgSelectCardA(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENCARDNAMEA_EX);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  SCardUIDlgSelectCardW(
-     LPOPENCARDNAMEW_EX);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENCARDNAMEW_EX);
  #ifdef UNICODE
  #define SCardUIDlgSelectCard  SCardUIDlgSelectCardW
+ #else
 @@ -1160,7 +1161,7 @@ SCardUIDlgSelectCardW(
  //  with the Smart Card Base Services SDK version 1.0
  //
@@ -655,22 +658,25 @@ index c7969d4d8e..5c4a00a1e2 100644
      DWORD           dwStructSize;
      HWND            hwndOwner;
      SCARDCONTEXT    hSCardContext;
-@@ -1228,11 +1229,11 @@ typedef LPOPENCARDNAMEA LPOPENCARDNAME;
+@@ -1228,12 +1229,12 @@ typedef LPOPENCARDNAMEA LPOPENCARDNAME;
  #define LPOPENCARDNAME_A LPOPENCARDNAMEA
  #define LPOPENCARDNAME_W LPOPENCARDNAMEW
  
 -extern WINSCARDAPI LONG WINAPI
 -GetOpenCardNameA(
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
-+  GetOpenCardNameA(
-     LPOPENCARDNAMEA);
+-    LPOPENCARDNAMEA);
 -extern WINSCARDAPI LONG WINAPI
 -GetOpenCardNameW(
+-    LPOPENCARDNAMEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
++  GetOpenCardNameA(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENCARDNAMEA);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ extern WINSCARDAPI LONG WINAPI
 +  GetOpenCardNameW(
-     LPOPENCARDNAMEW);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENCARDNAMEW);
  #ifdef UNICODE
  #define GetOpenCardName  GetOpenCardNameW
+ #else
 @@ -1249,16 +1250,16 @@ SCardDlgExtendedError (void);
  // Smartcard Caching API
  //

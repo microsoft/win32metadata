@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
-index a2c5a1128b..37e9e2b30f 100644
+index a2c5a1128b..559e5a02d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
 @@ -24,6 +24,7 @@ Revision History:
@@ -37,6 +37,45 @@ index a2c5a1128b..37e9e2b30f 100644
      ULONG64 Handle;
      ULONG  ProcessId;
      ULONG  ThreadId;
+@@ -106,9 +107,9 @@ enum eAvrfResourceTypes {
+ 
+ typedef ULONG 
+ (NTAPI * AVRF_RESOURCE_ENUMERATE_CALLBACK)(
+-    PVOID ResourceDescription,
+-    PVOID EnumerationContext,
+-    PULONG EnumerationLevel
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID ResourceDescription,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID EnumerationContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG EnumerationLevel
+     );
+ 
+ //
+@@ -117,9 +118,9 @@ typedef ULONG
+ 
+ typedef ULONG 
+ (NTAPI * AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK)(
+-    PAVRF_HEAP_ALLOCATION HeapAllocation,
+-    PVOID EnumerationContext,
+-    PULONG EnumerationLevel
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PAVRF_HEAP_ALLOCATION HeapAllocation,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID EnumerationContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG EnumerationLevel
+     );
+ 
+ //
+@@ -128,9 +129,9 @@ typedef ULONG
+ 
+ typedef ULONG 
+ (NTAPI * AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK)(
+-    PAVRF_HANDLE_OPERATION HandleOperation,
+-    PVOID EnumerationContext,
+-    PULONG EnumerationLevel
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PAVRF_HANDLE_OPERATION HandleOperation,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID EnumerationContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG EnumerationLevel
+     );
+ 
+ //
 @@ -140,11 +141,11 @@ typedef ULONG
  #define AVRF_ENUM_RESOURCES_FLAGS_SUSPEND             0x00000001
  #define AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES 0x00000002

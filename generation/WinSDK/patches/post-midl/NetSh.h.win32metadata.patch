@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h b/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
-index 86446dfbe4..5ca6b41240 100644
+index 86446dfbe4..3c9703f260 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
 @@ -13,6 +13,7 @@ Abstract:
@@ -171,7 +171,7 @@ index 86446dfbe4..5ca6b41240 100644
  typedef
  DWORD
  (NS_DLL_INIT_FN)(
-@@ -310,6 +329,8 @@ DWORD
+@@ -310,19 +329,25 @@ DWORD
  
  typedef NS_DLL_INIT_FN *PNS_DLL_INIT_FN;
  
@@ -180,8 +180,10 @@ index 86446dfbe4..5ca6b41240 100644
  DWORD WINAPI MatchEnumTag(
      IN  HANDLE             hModule,
      IN  LPCWSTR            pwcArg,
-@@ -318,11 +339,15 @@ DWORD WINAPI MatchEnumTag(
-     OUT PDWORD             pdwValue
+     IN  DWORD              dwNumArg,
+     IN  CONST TOKEN_VALUE *pEnumTable,
+-    OUT PDWORD             pdwValue
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDWORD             pdwValue
      );
  
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netsh.dll") 

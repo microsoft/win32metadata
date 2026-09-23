@@ -1,0 +1,38 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xa.h b/generation/WinSDK/RecompiledIdlHeaders/um/xa.h
+index 9678598ed9..31d10ecf1e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xa.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xa.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //  Copyright (C) 1995-1999 Microsoft Corporation.  All rights reserved.
+ /* -----------------------------------------------------------------
+  * Microsoft Distributed Transaction Coordinator
+@@ -155,18 +156,18 @@ typedef struct xa_switch_t xa_switch_t;
+  * XA entry point type definitions:
+  */
+ 
+-typedef int (__cdecl *XA_OPEN_EPT)(char *, int, long);	/* xa_open entry point */
+-typedef int (__cdecl *XA_CLOSE_EPT)(char *, int, long);	/* xa_close entry point*/
+-typedef int (__cdecl *XA_START_EPT)(XID *, int, long);	/* xa_start entry point */
+-typedef int (__cdecl *XA_END_EPT)(XID *, int, long);	/* xa_end entry point */
+-typedef int (__cdecl *XA_ROLLBACK_EPT)(XID *, int, long);
++typedef int (__cdecl *XA_OPEN_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") char *, int, long);	/* xa_open entry point */
++typedef int (__cdecl *XA_CLOSE_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") char *, int, long);	/* xa_close entry point*/
++typedef int (__cdecl *XA_START_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, int, long);	/* xa_start entry point */
++typedef int (__cdecl *XA_END_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, int, long);	/* xa_end entry point */
++typedef int (__cdecl *XA_ROLLBACK_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, int, long);
+ 														/* xa_rollback entry point */
+-typedef int (__cdecl *XA_PREPARE_EPT)(XID *, int, long);/* xa_prepare entry point */
+-typedef int (__cdecl *XA_COMMIT_EPT)(XID *, int, long);	/* xa_commit entry point */
+-typedef int (__cdecl *XA_RECOVER_EPT)(XID *, long, int, long);
++typedef int (__cdecl *XA_PREPARE_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, int, long);/* xa_prepare entry point */
++typedef int (__cdecl *XA_COMMIT_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, int, long);	/* xa_commit entry point */
++typedef int (__cdecl *XA_RECOVER_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, long, int, long);
+ 														/* xa_recover entry point*/
+-typedef int (__cdecl *XA_FORGET_EPT)(XID *, int, long);	/* xa_forget entry point */
+-typedef int (__cdecl *XA_COMPLETE_EPT)(int *, int *, int, long);
++typedef int (__cdecl *XA_FORGET_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XID *, int, long);	/* xa_forget entry point */
++typedef int (__cdecl *XA_COMPLETE_EPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *, int, long);
+ 														/* xa_complete entry point */
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */

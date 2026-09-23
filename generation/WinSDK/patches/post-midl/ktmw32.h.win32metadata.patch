@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
-index c62087e6b5..a9a0f3e2f5 100644
+index c62087e6b5..8e96c0ce4a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -32,7 +32,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -OpenTransaction (
 +  _Win32_SetLastError_ OpenTransaction (
      IN DWORD dwDesiredAccess,
-     IN LPGUID TransactionId
+-    IN LPGUID TransactionId
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID TransactionId
      );
  
 -BOOL
@@ -73,7 +74,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -GetTransactionId (
 +  _Win32_SetLastError_ GetTransactionId (
      IN HANDLE TransactionHandle,
-     OUT LPGUID TransactionId
+-    OUT LPGUID TransactionId
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPGUID TransactionId
      );
  
  
@@ -97,7 +99,7 @@ index c62087e6b5..a9a0f3e2f5 100644
      IN HANDLE TransactionHandle,
      IN DWORD IsolationLevel OPTIONAL,
      IN DWORD IsolationFlags OPTIONAL,
-@@ -109,66 +110,66 @@ SetTransactionInformation (
+@@ -109,118 +110,118 @@ SetTransactionInformation (
      _In_opt_ LPWSTR Description
      );
  
@@ -138,7 +140,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -RenameTransactionManager (
 +  _Win32_SetLastError_ RenameTransactionManager (
      _In_ LPWSTR LogFileName,
-     IN LPGUID ExistingTransactionManagerGuid
+-    IN LPGUID ExistingTransactionManagerGuid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID ExistingTransactionManagerGuid
      );
  
 -BOOL
@@ -147,7 +150,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -RollforwardTransactionManager (
 +  _Win32_SetLastError_ RollforwardTransactionManager (
      IN HANDLE TransactionManagerHandle,
-     IN PLARGE_INTEGER TmVirtualClock
+-    IN PLARGE_INTEGER TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLARGE_INTEGER TmVirtualClock
      );
  
 -BOOL
@@ -163,7 +167,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 +_Windows_SupportedOS_WindowsVista_ BOOL
 +  _Win32_SetLastError_ GetCurrentClockTransactionManager(
      IN HANDLE TransactionManagerHandle,
-     OUT PLARGE_INTEGER TmVirtualClock
+-    OUT PLARGE_INTEGER TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PLARGE_INTEGER TmVirtualClock
      );
  
 -BOOL
@@ -171,7 +176,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 +_Windows_SupportedOS_WindowsVista_ BOOL
 +  _Win32_SetLastError_ GetTransactionManagerId(
      IN HANDLE TransactionManagerHandle,
-     OUT LPGUID TransactionManagerId
+-    OUT LPGUID TransactionManagerId
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPGUID TransactionManagerId
      );
  
 -HANDLE
@@ -180,9 +186,10 @@ index c62087e6b5..a9a0f3e2f5 100644
 -CreateResourceManager (
 +  _Win32_SetLastError_ CreateResourceManager (
      IN LPSECURITY_ATTRIBUTES lpResourceManagerAttributes OPTIONAL,
-     IN LPGUID ResourceManagerId,
+-    IN LPGUID ResourceManagerId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID ResourceManagerId,
      IN DWORD CreateOptions OPTIONAL,
-@@ -176,23 +177,23 @@ CreateResourceManager (
+     IN HANDLE TmHandle,
      _In_opt_ LPWSTR Description
      );
  
@@ -193,7 +200,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 +  _Win32_SetLastError_ OpenResourceManager (
      IN DWORD dwDesiredAccess,
      IN HANDLE TmHandle,
-     IN LPGUID ResourceManagerId
+-    IN LPGUID ResourceManagerId
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID ResourceManagerId
      );
  
 -BOOL
@@ -210,9 +218,10 @@ index c62087e6b5..a9a0f3e2f5 100644
 -GetNotificationResourceManager (
 +  _Win32_SetLastError_ GetNotificationResourceManager (
      IN  HANDLE                          ResourceManagerHandle,
-     OUT PTRANSACTION_NOTIFICATION       TransactionNotification,
+-    OUT PTRANSACTION_NOTIFICATION       TransactionNotification,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PTRANSACTION_NOTIFICATION       TransactionNotification,
      IN  ULONG                           NotificationLength,
-@@ -200,9 +201,9 @@ GetNotificationResourceManager (
+     IN  DWORD                           dwMilliseconds OPTIONAL,
      OUT PULONG                          ReturnLength OPTIONAL
      );
  
@@ -222,10 +231,13 @@ index c62087e6b5..a9a0f3e2f5 100644
 -GetNotificationResourceManagerAsync (
 +  _Win32_SetLastError_ GetNotificationResourceManagerAsync (
      IN  HANDLE                        ResourceManagerHandle,
-     OUT PTRANSACTION_NOTIFICATION     TransactionNotification,
+-    OUT PTRANSACTION_NOTIFICATION     TransactionNotification,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PTRANSACTION_NOTIFICATION     TransactionNotification,
      IN  ULONG                         TransactionNotificationLength,
-@@ -210,17 +211,17 @@ GetNotificationResourceManagerAsync (
-     IN  LPOVERLAPPED                  lpOverlapped
+-    OUT PULONG                        ReturnLength,
+-    IN  LPOVERLAPPED                  lpOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG                        ReturnLength,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  LPOVERLAPPED                  lpOverlapped
      );
      
 -BOOL
@@ -246,7 +258,7 @@ index c62087e6b5..a9a0f3e2f5 100644
      IN LPSECURITY_ATTRIBUTES lpEnlistmentAttributes OPTIONAL,
      IN HANDLE            ResourceManagerHandle,
      IN HANDLE            TransactionHandle,
-@@ -229,113 +230,113 @@ CreateEnlistment (
+@@ -229,115 +230,115 @@ CreateEnlistment (
      IN PVOID             EnlistmentKey OPTIONAL
      );
  
@@ -257,7 +269,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 +  _Win32_SetLastError_ OpenEnlistment (
      IN DWORD              dwDesiredAccess,
      IN HANDLE             ResourceManagerHandle,
-     IN LPGUID             EnlistmentId
+-    IN LPGUID             EnlistmentId
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID             EnlistmentId
      );
  
  
@@ -278,7 +291,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 +  _Win32_SetLastError_ GetEnlistmentRecoveryInformation (
      IN  HANDLE EnlistmentHandle,
      IN  ULONG  BufferSize,
-     OUT PVOID  Buffer,
+-    OUT PVOID  Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID  Buffer,
      OUT PULONG BufferUsed OPTIONAL
      );
  
@@ -288,7 +302,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -GetEnlistmentId (
 +  _Win32_SetLastError_ GetEnlistmentId (
      IN HANDLE EnlistmentHandle,
-     OUT LPGUID EnlistmentId
+-    OUT LPGUID EnlistmentId
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPGUID EnlistmentId
      );
  
 -BOOL
@@ -298,7 +313,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 +  _Win32_SetLastError_ SetEnlistmentRecoveryInformation (
      IN HANDLE EnlistmentHandle,
      IN ULONG  BufferSize,
-     IN PVOID  Buffer
+-    IN PVOID  Buffer
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID  Buffer
      );
  
 -BOOL
@@ -307,7 +323,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -PrepareEnlistment (
 +  _Win32_SetLastError_ PrepareEnlistment (
      IN HANDLE EnlistmentHandle,
-     IN PLARGE_INTEGER TmVirtualClock
+-    IN PLARGE_INTEGER TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLARGE_INTEGER TmVirtualClock
      );
  
 -BOOL
@@ -316,7 +333,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -PrePrepareEnlistment (
 +  _Win32_SetLastError_ PrePrepareEnlistment (
      IN HANDLE EnlistmentHandle,
-     IN PLARGE_INTEGER TmVirtualClock
+-    IN PLARGE_INTEGER TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLARGE_INTEGER TmVirtualClock
      );
  
 -BOOL
@@ -325,7 +343,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -CommitEnlistment (
 +  _Win32_SetLastError_ CommitEnlistment (
      IN HANDLE EnlistmentHandle,
-     IN PLARGE_INTEGER TmVirtualClock
+-    IN PLARGE_INTEGER TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLARGE_INTEGER TmVirtualClock
      );
  
 -BOOL
@@ -334,7 +353,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -RollbackEnlistment (
 +  _Win32_SetLastError_ RollbackEnlistment (
      IN HANDLE EnlistmentHandle,
-     IN PLARGE_INTEGER TmVirtualClock
+-    IN PLARGE_INTEGER TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLARGE_INTEGER TmVirtualClock
      );
  
 -BOOL
@@ -343,7 +363,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -PrePrepareComplete (
 +  _Win32_SetLastError_ PrePrepareComplete (
      IN  HANDLE            EnlistmentHandle,
-     IN  PLARGE_INTEGER    TmVirtualClock
+-    IN  PLARGE_INTEGER    TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PLARGE_INTEGER    TmVirtualClock
      );
  
 -BOOL
@@ -352,7 +373,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -PrepareComplete (
 +  _Win32_SetLastError_ PrepareComplete (
      IN  HANDLE            EnlistmentHandle,
-     IN  PLARGE_INTEGER    TmVirtualClock
+-    IN  PLARGE_INTEGER    TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PLARGE_INTEGER    TmVirtualClock
      );
  
 -BOOL
@@ -361,7 +383,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -ReadOnlyEnlistment (
 +  _Win32_SetLastError_ ReadOnlyEnlistment (
      IN  HANDLE            EnlistmentHandle,
-     IN  PLARGE_INTEGER    TmVirtualClock
+-    IN  PLARGE_INTEGER    TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PLARGE_INTEGER    TmVirtualClock
      );
  
 -BOOL
@@ -370,7 +393,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -CommitComplete (
 +  _Win32_SetLastError_ CommitComplete (
      IN  HANDLE            EnlistmentHandle,
-     IN  PLARGE_INTEGER    TmVirtualClock
+-    IN  PLARGE_INTEGER    TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PLARGE_INTEGER    TmVirtualClock
      );
  
 -BOOL
@@ -379,7 +403,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -RollbackComplete (
 +  _Win32_SetLastError_ RollbackComplete (
      IN  HANDLE            EnlistmentHandle,
-     IN  PLARGE_INTEGER    TmVirtualClock
+-    IN  PLARGE_INTEGER    TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PLARGE_INTEGER    TmVirtualClock
      );
  
 -BOOL
@@ -388,5 +413,8 @@ index c62087e6b5..a9a0f3e2f5 100644
 -SinglePhaseReject (
 +  _Win32_SetLastError_ SinglePhaseReject (
      IN  HANDLE            EnlistmentHandle,
-     IN  PLARGE_INTEGER    TmVirtualClock
+-    IN  PLARGE_INTEGER    TmVirtualClock
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PLARGE_INTEGER    TmVirtualClock
      );
+ 
+ #ifdef __cplusplus

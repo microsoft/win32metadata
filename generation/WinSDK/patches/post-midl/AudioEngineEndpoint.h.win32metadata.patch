@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
-index 2908b5869d..15f61f09dc 100644
+index 2908b5869d..c1e92ccf20 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AudioEngineEndpoint.h
 @@ -148,6 +148,7 @@ extern "C"{
@@ -109,6 +109,21 @@ index 2908b5869d..15f61f09dc 100644
      IHardwareAudioEngineBase : public IUnknown
      {
      public:
+@@ -1391,12 +1392,12 @@ EXTERN_C const IID IID_IHardwareAudioEngineBase;
+             _In_  IMMDevice *pDevice,
+             /* [annotation][in] */ 
+             _In_  BOOL _bRequestDeviceFormat,
+-            /* [out] */ WAVEFORMATEX **_ppwfxFormat) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WAVEFORMATEX **_ppwfxFormat) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetEngineDeviceFormat( 
+             /* [annotation][in] */ 
+             _In_  IMMDevice *pDevice,
+-            /* [in] */ WAVEFORMATEX *_pwfxFormat) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") WAVEFORMATEX *_pwfxFormat) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetGfxState( 
+             /* [annotation][in] */ 
 @@ -1537,7 +1538,7 @@ EXTERN_C const IID IID_IAudioEndpointControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h
-index 614a93fd7e..8c2d57d954 100644
+index 614a93fd7e..f8738464e8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,15 @@ index 614a93fd7e..8c2d57d954 100644
      _In_opt_ LPCWSTR pszProviderName,
      _In_    DWORD   dwFlags);
  
+@@ -64,7 +65,7 @@ typedef _Check_return_ SECURITY_STATUS
+ 
+ typedef SECURITY_STATUS
+ (WINAPI * NCryptFreeBufferFn)(
+-    _Pre_notnull_ PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_notnull_ PVOID   pvInput);
+ 
+ //
+ //
 @@ -72,7 +73,7 @@ typedef SECURITY_STATUS
  typedef _Check_return_ SECURITY_STATUS
  (WINAPI * NCryptOpenKeyFn)(

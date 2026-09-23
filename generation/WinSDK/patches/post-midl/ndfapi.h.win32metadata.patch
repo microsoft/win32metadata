@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h
-index 1f76cedb7d..81fd6abef1 100644
+index 1f76cedb7d..1a19603941 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ndfapi.h
 @@ -4,6 +4,7 @@
@@ -87,7 +87,7 @@ index 1f76cedb7d..81fd6abef1 100644
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI("NdfCreateGroupingIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
  HRESULT WINAPI NdfCreateGroupingIncident(
      _In_opt_ LPCWSTR CloudName,
-@@ -79,11 +99,15 @@ HRESULT WINAPI NdfCreateGroupingIncident(
+@@ -79,13 +99,17 @@ HRESULT WINAPI NdfCreateGroupingIncident(
      _In_opt_ LPCWSTR Invitation,
      _In_opt_ SOCKET_ADDRESS_LIST* Addresses,
      _In_opt_ LPCWSTR appId,
@@ -102,8 +102,11 @@ index 1f76cedb7d..81fd6abef1 100644
 +_Windows_SupportedOS_WindowsVista_ 
 +
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCloseIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
- NdfCloseIncident(NDFHANDLE handle);
+-NdfCloseIncident(NDFHANDLE handle);
++NdfCloseIncident(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") NDFHANDLE handle);
  
+ // Available flags for NdfDiagnoseIncident
+ #define NDF_ADD_CAPTURE_TRACE 0x0001
 @@ -93,6 +117,7 @@ NdfCloseIncident(NDFHANDLE handle);
  
  // UI-less diagnosis API

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
-index 574d8faaf8..4e28675610 100644
+index 574d8faaf8..95c64ab9f7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMRemUtl.h
 @@ -26,6 +26,7 @@ Environment:
@@ -10,7 +10,7 @@ index 574d8faaf8..4e28675610 100644
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -57,18 +58,22 @@ typedef LPWSTR LPDESC;
+@@ -57,19 +58,23 @@ typedef LPWSTR LPDESC;
  // Function Prototypes
  //
  
@@ -31,10 +31,12 @@ index 574d8faaf8..4e28675610 100644
  NetRemoteComputerSupports(
      IN LPCWSTR UncServerName OPTIONAL,   // Must start with "\\".
 -    IN DWORD OptionsWanted,             // Set SUPPORTS_ bits wanted.
+-    OUT LPDWORD OptionsSupported        // Supported features, masked.
 +    _Win32_AssociatedEnum_(NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS) IN DWORD OptionsWanted,             // Set SUPPORTS_ bits wanted.
-     OUT LPDWORD OptionsSupported        // Supported features, masked.
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD OptionsSupported        // Supported features, masked.
      );
  
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 @@ -104,7 +109,7 @@ RxRemoteApi(
  //  Data Structures
  //

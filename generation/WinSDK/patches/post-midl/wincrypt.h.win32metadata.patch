@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
-index 924c87c472..44846dfdf5 100644
+index 924c87c472..8b23701299 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
 @@ -1,3 +1,4 @@
@@ -390,6 +390,19 @@ index 924c87c472..44846dfdf5 100644
      CERT_RDN_VALUE_BLOB     Value;
  } CERT_RDN_ATTR, *PCERT_RDN_ATTR;
  
+@@ -2326,9 +2327,9 @@ typedef BOOL (CALLBACK *PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC)(
+ //                    CRYPT_PRIVATE_KEY_BLOB_AND_PARAMS struct
+ //+-------------------------------------------------------------------------
+ typedef BOOL (CALLBACK *PCRYPT_RESOLVE_HCRYPTPROV_FUNC)(
+-                                                       CRYPT_PRIVATE_KEY_INFO      *pPrivateKeyInfo,
+-                                                       HCRYPTPROV                  *phCryptProv,
+-                                                       LPVOID                      pVoidResolveFunc);
++                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PRIVATE_KEY_INFO      *pPrivateKeyInfo,
++                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HCRYPTPROV                  *phCryptProv,
++                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID                      pVoidResolveFunc);
+ 
+ //+-------------------------------------------------------------------------
+ // this struct contains a PKCS8 private key and two pointers to callback
 @@ -2383,7 +2384,7 @@ typedef struct _CERT_INFO {
      CRYPT_BIT_BLOB              IssuerUniqueId;
      CRYPT_BIT_BLOB              SubjectUniqueId;

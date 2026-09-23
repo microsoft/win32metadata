@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h
-index 81a842fde0..bca3aee86b 100644
+index 81a842fde0..ae01fda71f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/eaphostpeerconfigapis.h
 @@ -1,3 +1,4 @@
@@ -120,11 +120,11 @@ index 81a842fde0..bca3aee86b 100644
      // Supplicant calls this API to free memory returned by Config APIs. Supplicant should not use this API
      // for freeing EAP_ERROR structure.
 -    VOID WINAPI EapHostPeerFreeMemory(BYTE* pData);
-+    _Windows_SupportedOS_WindowsVista_ VOID WINAPI EapHostPeerFreeMemory(BYTE* pData);
++    _Windows_SupportedOS_WindowsVista_ VOID WINAPI EapHostPeerFreeMemory(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE* pData);
  
      // Supplicant calls this API to free EAP_ERROR memory, which will get filled when an API fails.
 -    VOID WINAPI EapHostPeerFreeErrorMemory(EAP_ERROR* pEapError);
-+    _Windows_SupportedOS_WindowsVista_ VOID WINAPI EapHostPeerFreeErrorMemory(EAP_ERROR* pEapError);
++    _Windows_SupportedOS_WindowsVista_ VOID WINAPI EapHostPeerFreeErrorMemory(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") EAP_ERROR* pEapError);
  
  #ifdef __cplusplus
  }

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h b/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
-index 0ac2f8f91c..8b40f692a2 100644
+index 0ac2f8f91c..04b6421deb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
 @@ -1,3 +1,4 @@
@@ -31,6 +31,261 @@ index 0ac2f8f91c..8b40f692a2 100644
          ) = 0;
  
      // backup type
+@@ -197,9 +198,9 @@ class IVssWMDependency
+     : public IUnknown
+ {
+ public:
+-    STDMETHOD(GetWriterId)(OUT VSS_ID *pWriterId) = 0;
+-    STDMETHOD(GetLogicalPath)(OUT BSTR *pbstrLogicalPath) = 0;
+-    STDMETHOD(GetComponentName)(OUT BSTR *pbstrComponentName) = 0;
++    STDMETHOD(GetWriterId)(_WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_ID *pWriterId) = 0;
++    STDMETHOD(GetLogicalPath)(_WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrLogicalPath) = 0;
++    STDMETHOD(GetComponentName)(_WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrComponentName) = 0;
+ };
+ 
+ // backup components interface
+@@ -208,21 +209,21 @@ class __declspec(uuid("d2c72c96-c121-4518-b627-e5a93d010ead")) IVssComponent
+ {
+ public:
+     // obtain logical path of component
+-    STDMETHOD(GetLogicalPath)(OUT BSTR *pbstrPath) = 0;
++    STDMETHOD(GetLogicalPath)(_WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrPath) = 0;
+ 
+     // obtain component type(VSS_CT_DATABASE or VSS_CT_FILEGROUP)
+-    STDMETHOD(GetComponentType)(VSS_COMPONENT_TYPE *pct) = 0;
++    STDMETHOD(GetComponentType)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VSS_COMPONENT_TYPE *pct) = 0;
+ 
+     // get component name
+-    STDMETHOD(GetComponentName)(OUT BSTR *pbstrName) = 0;
++    STDMETHOD(GetComponentName)(_WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrName) = 0;
+ 
+     // determine whether the component was successfully backed up.
+-    STDMETHOD(GetBackupSucceeded)(OUT bool *pbSucceeded) = 0;
++    STDMETHOD(GetBackupSucceeded)(_WIN32META_ANNOTATION_("win32metadata:in") OUT bool *pbSucceeded) = 0;
+ 
+     // get altermative location mapping count
+     STDMETHOD(GetAlternateLocationMappingCount)
+         (
+-        OUT UINT *pcMappings
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcMappings
+         ) = 0;
+ 
+     // get a paraticular alternative location mapping
+@@ -241,7 +242,7 @@ public:
+     // get the backup metadata for a component
+     STDMETHOD(GetBackupMetadata)
+         (
+-        OUT BSTR *pbstrData
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrData
+         ) = 0;
+ 
+     // indicate that only ranges in the file are to be backed up
+@@ -256,34 +257,34 @@ public:
+     // get count of partial file declarations
+     STDMETHOD(GetPartialFileCount)
+         (
+-        OUT UINT *pcPartialFiles
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcPartialFiles
+         ) = 0;
+ 
+     // get a partial file declaration
+     STDMETHOD(GetPartialFile)
+         (
+         IN UINT iPartialFile,
+-        OUT BSTR *pbstrPath,
+-        OUT BSTR *pbstrFilename,
+-        OUT BSTR *pbstrRange,
+-        OUT BSTR *pbstrMetadata
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrPath,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrFilename,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrRange,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrMetadata
+         ) = 0;
+ 
+     // determine if the component is selected to be restored
+     STDMETHOD(IsSelectedForRestore)
+         (
+-        OUT bool *pbSelectedForRestore
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT bool *pbSelectedForRestore
+         ) = 0;
+ 
+     STDMETHOD(GetAdditionalRestores)
+         (
+-        OUT bool *pbAdditionalRestores
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT bool *pbAdditionalRestores
+         ) = 0;
+ 
+     // get count of new target specifications
+     STDMETHOD(GetNewTargetCount)
+         (
+-        OUT UINT *pcNewTarget
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcNewTarget
+         ) = 0;
+ 
+     STDMETHOD(GetNewTarget)
+@@ -306,19 +307,19 @@ public:
+     // get count of directed target specifications
+     STDMETHOD(GetDirectedTargetCount)
+         (
+-        OUT UINT *pcDirectedTarget
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcDirectedTarget
+         ) = 0;
+ 
+     // obtain a particular directed target specification
+     STDMETHOD(GetDirectedTarget)
+         (
+         IN UINT iDirectedTarget,
+-        OUT BSTR *pbstrSourcePath,
+-        OUT BSTR *pbstrSourceFileName,
+-        OUT BSTR *pbstrSourceRangeList,
+-        OUT BSTR *pbstrDestinationPath,
+-        OUT BSTR *pbstrDestinationFilename,
+-        OUT BSTR *pbstrDestinationRangeList
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrSourcePath,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrSourceFileName,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrSourceRangeList,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrDestinationPath,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrDestinationFilename,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrDestinationRangeList
+         ) = 0;
+ 
+     // set restore metadata associated with the component
+@@ -330,7 +331,7 @@ public:
+     // obtain restore metadata associated with the component
+     STDMETHOD(GetRestoreMetadata)
+         (
+-        OUT BSTR *pbstrRestoreMetadata
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrRestoreMetadata
+         ) = 0;
+ 
+      // set the restore target
+@@ -342,7 +343,7 @@ public:
+     // obtain the restore target
+     STDMETHOD(GetRestoreTarget)
+         (
+-        OUT VSS_RESTORE_TARGET *pTarget
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_RESTORE_TARGET *pTarget
+         ) = 0;
+ 
+     // set failure message during pre restore event
+@@ -354,7 +355,7 @@ public:
+     // obtain failure message during pre restore event
+     STDMETHOD(GetPreRestoreFailureMsg)
+         (
+-        OUT BSTR *pbstrPreRestoreFailureMsg
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrPreRestoreFailureMsg
+         ) = 0;
+ 
+     // set the failure message during the post restore event
+@@ -366,7 +367,7 @@ public:
+     // obtain the failure message set during the post restore event
+     STDMETHOD(GetPostRestoreFailureMsg)
+         (
+-        OUT BSTR *pbstrPostRestoreFailureMsg
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrPostRestoreFailureMsg
+         ) = 0;
+ 
+     // set the backup stamp of the backup
+@@ -378,7 +379,7 @@ public:
+     // obtain the stamp of the backup
+     STDMETHOD(GetBackupStamp)
+         (
+-        OUT BSTR *pbstrBackupStamp
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrBackupStamp
+         ) = 0;
+ 
+ 
+@@ -386,41 +387,41 @@ public:
+     // backup is baed on
+     STDMETHOD(GetPreviousBackupStamp)
+         (
+-        OUT BSTR *pbstrBackupStamp
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrBackupStamp
+         ) = 0;
+ 
+     // obtain backup options for the writer
+     STDMETHOD(GetBackupOptions)
+         (
+-        OUT BSTR *pbstrBackupOptions
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrBackupOptions
+         ) = 0;
+ 
+     // obtain the restore options
+     STDMETHOD(GetRestoreOptions)
+         (
+-        OUT BSTR *pbstrRestoreOptions
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrRestoreOptions
+         ) = 0;
+ 
+     // obtain count of subcomponents to be restored
+     STDMETHOD(GetRestoreSubcomponentCount)
+         (
+-        OUT UINT *pcRestoreSubcomponent
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcRestoreSubcomponent
+         ) = 0;
+ 
+     // obtain a particular subcomponent to be restored
+     STDMETHOD(GetRestoreSubcomponent)
+         (
+         UINT iComponent,
+-        OUT BSTR *pbstrLogicalPath,
+-        OUT BSTR *pbstrComponentName,
+-        OUT bool *pbRepair
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrLogicalPath,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrComponentName,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT bool *pbRepair
+         ) = 0;
+ 
+ 
+     // obtain whether files were successfully restored
+     STDMETHOD(GetFileRestoreStatus)
+         (
+-        OUT VSS_FILE_RESTORE_STATUS *pStatus
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_FILE_RESTORE_STATUS *pStatus
+         ) = 0;
+ 
+     // add differenced files by last modify time
+@@ -442,17 +443,17 @@ public:
+ 
+     STDMETHOD(GetDifferencedFilesCount)
+         (
+-        OUT UINT *pcDifferencedFiles
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcDifferencedFiles
+         ) = 0;
+ 
+     STDMETHOD(GetDifferencedFile)
+         (
+         IN UINT iDifferencedFile,
+-        OUT BSTR *pbstrPath,
+-        OUT BSTR *pbstrFilespec,
+-        OUT BOOL *pbRecursive,
+-        OUT BSTR *pbstrLsnString,
+-        OUT FILETIME *pftLastModifyTime
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrPath,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrFilespec,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL *pbRecursive,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR *pbstrLsnString,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT FILETIME *pftLastModifyTime
+         ) = 0;
+ };
+ 
+@@ -463,13 +464,13 @@ class IVssWriterComponents
+ {
+ public:
+     // get count of components
+-    STDMETHOD(GetComponentCount)(OUT UINT *pcComponents) = 0;
++    STDMETHOD(GetComponentCount)(_WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcComponents) = 0;
+ 
+     // get information about the writer
+     STDMETHOD(GetWriterInfo)
+         (
+-        OUT VSS_ID *pidInstance,
+-        OUT VSS_ID *pidWriter
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_ID *pidInstance,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_ID *pidWriter
+         ) = 0;
+ 
+     // obtain a specific component
 @@ -500,13 +501,13 @@ public:
      // get the failure message set during prepareforbackup
      STDMETHOD(GetPrepareForBackupFailureMsg)
@@ -72,6 +327,15 @@ index 0ac2f8f91c..8b40f692a2 100644
          _Out_       DWORD   *pdwReserved
          ) = 0;
  };
+@@ -665,7 +666,7 @@ public:
+     STDMETHOD(GetDocument)(IXMLDOMDocument **pDoc) = 0;
+ 
+     // save document as an XML string
+-    STDMETHOD(SaveAsXML)(BSTR *pbstrXML) = 0;
++    STDMETHOD(SaveAsXML)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BSTR *pbstrXML) = 0;
+ };
+ 
+ class __declspec(uuid("9f21981d-d469-4349-b807-39e64e4674e1")) IVssCreateWriterMetadataEx : public IVssCreateWriterMetadata, public IUnknown
 @@ -841,7 +842,7 @@ public:
  
      // save document as an XML string

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
-index 10cd1740df..b6047d00d1 100644
+index 10cd1740df..f3c17928ed 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index 10cd1740df..b6047d00d1 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1357,7 +1358,7 @@ EXTERN_C const IID IID_ISpNotifySource;
+             /* [in] */ LPARAM lParam) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE SetNotifyCallbackFunction( 
+-            /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") SPNOTIFYCALLBACK *pfnCallback,
+             /* [in] */ WPARAM wParam,
+             /* [in] */ LPARAM lParam) = 0;
+         
 @@ -1371,7 +1372,7 @@ EXTERN_C const IID IID_ISpNotifySource;
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE WaitForNotifyEvent( 
              /* [in] */ DWORD dwMilliseconds) = 0;
@@ -16,6 +25,15 @@ index 10cd1740df..b6047d00d1 100644
          
      };
      
+@@ -1596,7 +1597,7 @@ EXTERN_C const IID IID_ISpNotifyTranslator;
+             /* [in] */ LPARAM lParam) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE InitCallback( 
+-            /* [in] */ SPNOTIFYCALLBACK *pfnCallback,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") SPNOTIFYCALLBACK *pfnCallback,
+             /* [in] */ WPARAM wParam,
+             /* [in] */ LPARAM lParam) = 0;
+         
 @@ -1612,7 +1613,7 @@ EXTERN_C const IID IID_ISpNotifyTranslator;
          virtual HRESULT STDMETHODCALLTYPE Wait( 
              /* [in] */ DWORD dwMilliseconds) = 0;
@@ -25,15 +43,162 @@ index 10cd1740df..b6047d00d1 100644
          
      };
      
-@@ -4964,7 +4965,7 @@ EXTERN_C const IID IID_ISpAudio;
-             /* [out] */ GUID *pFormatId,
-             /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx) = 0;
+@@ -1757,8 +1758,8 @@ EXTERN_C const IID IID_ISpDataKey;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetData( 
+             /* [in] */ LPCWSTR pszValueName,
+-            /* [in] */ ULONG *pcbData,
+-            /* [out] */ BYTE *pData) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcbData,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BYTE *pData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetStringValue( 
+             /* [in][annotation] */ 
+@@ -1777,7 +1778,7 @@ EXTERN_C const IID IID_ISpDataKey;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDWORD( 
+             /* [in] */ LPCWSTR pszValueName,
+-            /* [out] */ DWORD *pdwValue) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenKey( 
+             /* [in] */ LPCWSTR pszSubKeyName,
+@@ -2486,7 +2487,7 @@ EXTERN_C const IID IID_ISpObjectToken;
+             /* [in] */ IUnknown *pUnkOuter,
+             /* [in] */ DWORD dwClsContext,
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppvObject) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppvObject) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStorageFileName( 
+             /* [in] */ REFCLSID clsidCaller,
+@@ -2510,22 +2511,22 @@ EXTERN_C const IID IID_ISpObjectToken;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsUISupported( 
+             /* [in] */ LPCWSTR pszTypeOfUI,
+-            /* [in] */ void *pvExtraData,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pvExtraData,
+             /* [in] */ ULONG cbExtraData,
+             /* [in] */ IUnknown *punkObject,
+-            /* [out] */ BOOL *pfSupported) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfSupported) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE DisplayUI( 
+             /* [in] */ HWND hwndParent,
+             /* [in] */ LPCWSTR pszTitle,
+             /* [in] */ LPCWSTR pszTypeOfUI,
+-            /* [in] */ void *pvExtraData,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pvExtraData,
+             /* [in] */ ULONG cbExtraData,
+             /* [in] */ IUnknown *punkObject) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE MatchesAttributes( 
+             /* [in] */ LPCWSTR pszAttributes,
+-            /* [out] */ BOOL *pfMatches) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfMatches) = 0;
+         
+     };
+     
+@@ -3158,7 +3159,7 @@ EXTERN_C const IID IID_IEnumSpObjectTokens;
+             /* [out] */ ISpObjectToken **ppToken) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+-            /* [out] */ ULONG *pCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pCount) = 0;
+         
+     };
+     
+@@ -3720,11 +3721,11 @@ EXTERN_C const IID IID_ISpEventSource;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEvents( 
+             /* [in] */ ULONG ulCount,
+-            /* [size_is][out] */ SPEVENT *pEventArray,
+-            /* [out] */ ULONG *pulFetched) = 0;
++            /* [size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPEVENT *pEventArray,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
+-            /* [out] */ SPEVENTSOURCEINFO *pInfo) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPEVENTSOURCEINFO *pInfo) = 0;
+         
+     };
+     
+@@ -3890,8 +3891,8 @@ EXTERN_C const IID IID_ISpEventSource2;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetEventsEx( 
+             /* [in] */ ULONG ulCount,
+-            /* [size_is][out] */ SPEVENTEX *pEventArray,
+-            /* [out] */ ULONG *pulFetched) = 0;
++            /* [size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPEVENTEX *pEventArray,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulFetched) = 0;
+         
+     };
+     
+@@ -4071,7 +4072,7 @@ EXTERN_C const IID IID_ISpEventSink;
+             /* [in] */ ULONG ulCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEventInterest( 
+-            /* [out] */ ULONGLONG *pullEventInterest) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullEventInterest) = 0;
+         
+     };
+     
+@@ -4952,28 +4953,28 @@ EXTERN_C const IID IID_ISpAudio;
+             /* [in] */ const WAVEFORMATEX *pWaveFormatEx) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
+-            /* [out] */ SPAUDIOSTATUS *pStatus) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPAUDIOSTATUS *pStatus) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetBufferInfo( 
+             /* [in] */ const SPAUDIOBUFFERINFO *pBuffInfo) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBufferInfo( 
+-            /* [out] */ SPAUDIOBUFFERINFO *pBuffInfo) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPAUDIOBUFFERINFO *pBuffInfo) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDefaultFormat( 
+-            /* [out] */ GUID *pFormatId,
+-            /* [out] */ WAVEFORMATEX **ppCoMemWaveFormatEx) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pFormatId,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WAVEFORMATEX **ppCoMemWaveFormatEx) = 0;
          
 -        virtual HANDLE STDMETHODCALLTYPE EventHandle( void) = 0;
 +        _Win32_RAIIFree_(CloseHandle, -1, 0) virtual HANDLE STDMETHODCALLTYPE EventHandle( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetVolumeLevel( 
-             /* [out] */ ULONG *pLevel) = 0;
+-            /* [out] */ ULONG *pLevel) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pLevel) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetVolumeLevel( 
+             /* [in] */ ULONG Level) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBufferNotifySize( 
+-            /* [out] */ ULONG *pcbSize) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcbSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetBufferNotifySize( 
+             /* [in] */ ULONG cbSize) = 0;
+@@ -5265,16 +5266,16 @@ EXTERN_C const IID IID_ISpMMSysAudio;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDeviceId( 
+-            /* [out] */ UINT *puDeviceId) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") UINT *puDeviceId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetDeviceId( 
+             /* [in] */ UINT uDeviceId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMMHandle( 
+-            /* [out] */ void **pHandle) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **pHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLineId( 
+-            /* [out] */ UINT *puLineId) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") UINT *puLineId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetLineId( 
+             /* [in] */ UINT uLineId) = 0;
 @@ -5795,7 +5796,7 @@ enum SPSEMANTICFORMAT
          SPSMF_SRGS_SEMANTICINTERPRETATION_W3C	= 8
      } 	SPSEMANTICFORMAT;
@@ -43,29 +208,229 @@ index 10cd1740df..b6047d00d1 100644
      {
      ULONG cbSize;
      WORD LangID;
-@@ -7123,7 +7124,7 @@ EXTERN_C const IID IID_ISpVoice;
+@@ -6045,7 +6046,7 @@ EXTERN_C const IID IID_ISpLexicon;
+             _In_opt_  PCSPPHONEID pszPronunciation) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGeneration( 
+-            /* [out] */ DWORD *pdwGeneration) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwGeneration) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGenerationChange( 
+             /* [in] */ DWORD dwFlags,
+@@ -7081,38 +7082,38 @@ EXTERN_C const IID IID_ISpVoice;
+             _Out_opt_  ULONG *pulStreamNumber) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
+-            /* [out] */ SPVOICESTATUS *pStatus,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPVOICESTATUS *pStatus,
+             /* [out][annotation] */ 
+             _Outptr_  LPWSTR *ppszLastBookmark) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [string][in] */ LPCWSTR pItemType,
+             /* [in] */ long lNumItems,
+-            /* [out] */ ULONG *pulNumSkipped) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulNumSkipped) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetPriority( 
+             /* [in] */ SPVPRIORITY ePriority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
+-            /* [out] */ SPVPRIORITY *pePriority) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPVPRIORITY *pePriority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetAlertBoundary( 
+             /* [in] */ SPEVENTENUM eBoundary) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlertBoundary( 
+-            /* [out] */ SPEVENTENUM *peBoundary) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPEVENTENUM *peBoundary) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetRate( 
+             /* [in] */ long RateAdjust) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRate( 
+-            /* [out] */ long *pRateAdjust) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pRateAdjust) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetVolume( 
+             /* [in] */ USHORT usVolume) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVolume( 
+-            /* [out] */ USHORT *pusVolume) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") USHORT *pusVolume) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE WaitUntilDone( 
+             /* [in] */ ULONG msTimeout) = 0;
+@@ -7121,21 +7122,21 @@ EXTERN_C const IID IID_ISpVoice;
+             /* [in] */ ULONG msTimeout) = 0;
+         
          virtual HRESULT STDMETHODCALLTYPE GetSyncSpeakTimeout( 
-             /* [out] */ ULONG *pmsTimeout) = 0;
+-            /* [out] */ ULONG *pmsTimeout) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pmsTimeout) = 0;
          
 -        virtual /* [local] */ HANDLE STDMETHODCALLTYPE SpeakCompleteEvent( void) = 0;
 +        _Win32_RAIIFree_(CloseHandle, -1, 0) virtual /* [local] */ HANDLE STDMETHODCALLTYPE SpeakCompleteEvent( void) = 0;
          
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsUISupported( 
              /* [in] */ LPCWSTR pszTypeOfUI,
+-            /* [in] */ void *pvExtraData,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pvExtraData,
+             /* [in] */ ULONG cbExtraData,
+-            /* [out] */ BOOL *pfSupported) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfSupported) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE DisplayUI( 
+             /* [in] */ HWND hwndParent,
+             /* [in] */ LPCWSTR pszTitle,
+             /* [in] */ LPCWSTR pszTypeOfUI,
+-            /* [in] */ void *pvExtraData,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pvExtraData,
+             /* [in] */ ULONG cbExtraData) = 0;
+         
+     };
+@@ -7654,9 +7655,9 @@ EXTERN_C const IID IID_ISpPhraseAlt;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAltInfo( 
+             /* [out] */ ISpPhrase **ppParent,
+-            /* [out] */ ULONG *pulStartElementInParent,
+-            /* [out] */ ULONG *pcElementsInParent,
+-            /* [out] */ ULONG *pcElementsInAlt) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulStartElementInParent,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcElementsInParent,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcElementsInAlt) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Commit( void) = 0;
+         
+@@ -7813,7 +7814,7 @@ EXTERN_C const IID IID_ISpPhrase2;
+             /* [in] */ SPXMLRESULTOPTIONS Options) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetXMLErrorInfo( 
+-            /* [out] */ SPSEMANTICERRORINFO *pSemanticErrorInfo) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPSEMANTICERRORINFO *pSemanticErrorInfo) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAudio( 
+             /* [in] */ ULONG ulStartElement,
+@@ -7986,7 +7987,7 @@ EXTERN_C const IID IID_ISpRecoResult;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetResultTimes( 
+-            /* [out] */ SPRECORESULTTIMES *pTimes) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECORESULTTIMES *pTimes) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlternates( 
+             /* [in] */ ULONG ulStartElement,
+@@ -7994,7 +7995,7 @@ EXTERN_C const IID IID_ISpRecoResult;
+             /* [in] */ ULONG ulRequestCount,
+             /* [out][annotation] */ 
+             _Out_writes_to_(ulRequestCount,*pcPhrasesReturned)  ISpPhraseAlt **ppPhrases,
+-            /* [out] */ ULONG *pcPhrasesReturned) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcPhrasesReturned) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAudio( 
+             /* [in] */ ULONG ulStartElement,
+@@ -8005,10 +8006,10 @@ EXTERN_C const IID IID_ISpRecoResult;
+             /* [in] */ ULONG ulStartElement,
+             /* [in] */ ULONG cElements,
+             /* [in] */ DWORD dwFlags,
+-            /* [out] */ ULONG *pulStreamNumber) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulStreamNumber) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Serialize( 
+-            /* [out] */ SPSERIALIZEDRESULT **ppCoMemSerializedResult) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPSERIALIZEDRESULT **ppCoMemSerializedResult) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ScaleAudio( 
+             /* [in] */ const GUID *pAudioFormatId,
+@@ -8447,7 +8448,7 @@ EXTERN_C const IID IID_ISpXMLRecoResult;
+             /* [in] */ SPXMLRESULTOPTIONS Options) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetXMLErrorInfo( 
+-            /* [out] */ SPSEMANTICERRORINFO *pSemanticErrorInfo) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPSEMANTICERRORINFO *pSemanticErrorInfo) = 0;
+         
+     };
+     
+@@ -8743,14 +8744,14 @@ EXTERN_C const IID IID_ISpGrammarBuilder;
+             /* [in] */ DWORD dwRuleId,
+             /* [in] */ DWORD dwAttributes,
+             /* [in] */ BOOL fCreateIfNotExist,
+-            /* [out] */ SPSTATEHANDLE *phInitialState) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPSTATEHANDLE *phInitialState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ClearRule( 
+             /* [in] */ SPSTATEHANDLE hState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateNewState( 
+             /* [in] */ SPSTATEHANDLE hState,
+-            /* [out] */ SPSTATEHANDLE *phState) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPSTATEHANDLE *phState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddWordTransition( 
+             /* [in] */ SPSTATEHANDLE hFromState,
+@@ -8952,7 +8953,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetGrammarId( 
+-            /* [out] */ ULONGLONG *pullGrammarId) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullGrammarId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRecoContext( 
+             /* [out][annotation] */ 
+@@ -8988,7 +8989,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
+         virtual HRESULT STDMETHODCALLTYPE SetRuleState( 
+             /* [string][in][annotation] */ 
+             _In_opt_  LPCWSTR pszName,
+-            /* [in] */ void *pReserved,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pReserved,
+             /* [in] */ SPRULESTATE NewState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetRuleIdState( 
+@@ -9016,7 +9017,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsPronounceable( 
+             /* [string][in] */ LPCWSTR pszWord,
+-            /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetGrammarState( 
+             /* [in] */ SPGRAMMARSTATE eGrammarState) = 0;
+@@ -9027,7 +9028,7 @@ EXTERN_C const IID IID_ISpRecoGrammar;
+             _Outptr_opt_  LPWSTR *ppszCoMemErrorText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGrammarState( 
+-            /* [out] */ SPGRAMMARSTATE *peGrammarState) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPGRAMMARSTATE *peGrammarState) = 0;
+         
+     };
+     
+@@ -9492,8 +9493,8 @@ EXTERN_C const IID IID_ISpRecoGrammar2;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetRules( 
+-            /* [out] */ SPRULE **ppCoMemRules,
+-            /* [out] */ UINT *puNumRules) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRULE **ppCoMemRules,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") UINT *puNumRules) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE LoadCmdFromFile2( 
+             /* [string][in] */ LPCWSTR pszFileName,
 @@ -9687,18 +9688,18 @@ EXTERN_C const IID IID_ISpeechResourceLoader;
              /* [in] */ VARIANT_BOOL fAlwaysReload,
              /* [out] */ IUnknown **pStream,
              /* [out][annotation] */ 
 -            _Out_opt_  BSTR *pbstrMIMEType,
+-            /* [out] */ VARIANT_BOOL *pfModified,
 +            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrMIMEType,
-             /* [out] */ VARIANT_BOOL *pfModified,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfModified,
              /* [out][annotation] */ 
 -            _Out_opt_  BSTR *pbstrRedirectUrl) = 0;
 +            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrRedirectUrl) = 0;
          
          virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLocalCopy( 
              /* [in] */ BSTR bstrResourceUri,
-             /* [out] */ BSTR *pbstrLocalPath,
+-            /* [out] */ BSTR *pbstrLocalPath,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrLocalPath,
              /* [out][annotation] */ 
 -            _Out_opt_  BSTR *pbstrMIMEType,
 +            _Win32_RAIIFree_(SysFreeString) _Out_opt_  BSTR *pbstrMIMEType,
@@ -75,6 +440,125 @@ index 10cd1740df..b6047d00d1 100644
          
          virtual /* [id] */ HRESULT STDMETHODCALLTYPE ReleaseLocalCopy( 
              /* [in] */ BSTR pbstrLocalPath) = 0;
+@@ -9906,10 +9907,10 @@ EXTERN_C const IID IID_ISpRecoContext;
+             /* [out] */ ISpRecoGrammar **ppGrammar) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
+-            /* [out] */ SPRECOCONTEXTSTATUS *pStatus) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECOCONTEXTSTATUS *pStatus) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxAlternates( 
+-            /* [in] */ ULONG *pcAlternates) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcAlternates) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetMaxAlternates( 
+             /* [in] */ ULONG cAlternates) = 0;
+@@ -9920,9 +9921,9 @@ EXTERN_C const IID IID_ISpRecoContext;
+             /* [in] */ const WAVEFORMATEX *pWaveFormatEx) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAudioOptions( 
+-            /* [in] */ SPAUDIOOPTIONS *pOptions,
+-            /* [out] */ GUID *pAudioFormatId,
+-            /* [out] */ WAVEFORMATEX **ppCoMemWFEX) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") SPAUDIOOPTIONS *pOptions,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pAudioFormatId,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WAVEFORMATEX **ppCoMemWFEX) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DeserializeResult( 
+             /* [in] */ const SPSERIALIZEDRESULT *pSerializedResult,
+@@ -9954,13 +9955,13 @@ EXTERN_C const IID IID_ISpRecoContext;
+             /* [in] */ ULONGLONG ullEventInterest) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVoicePurgeEvent( 
+-            /* [out] */ ULONGLONG *pullEventInterest) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullEventInterest) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetContextState( 
+             /* [in] */ SPCONTEXTSTATE eContextState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContextState( 
+-            /* [out] */ SPCONTEXTSTATE *peContextState) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPCONTEXTSTATE *peContextState) = 0;
+         
+     };
+     
+@@ -10329,7 +10330,7 @@ EXTERN_C const IID IID_ISpRecoContext2;
+             /* [in] */ DWORD eGrammarOptions) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGrammarOptions( 
+-            /* [out] */ DWORD *peGrammarOptions) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *peGrammarOptions) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetAdaptationData2( 
+             /* [in] */ LPCWSTR pAdaptationData,
+@@ -10445,7 +10446,7 @@ EXTERN_C const IID IID_ISpProperties;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyNum( 
+             /* [in] */ LPCWSTR pName,
+-            /* [out] */ LONG *plValue) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetPropertyString( 
+             /* [in] */ LPCWSTR pName,
+@@ -10638,32 +10639,32 @@ EXTERN_C const IID IID_ISpRecognizer;
+         virtual HRESULT STDMETHODCALLTYPE IsSharedInstance( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRecoState( 
+-            /* [out] */ SPRECOSTATE *pState) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECOSTATE *pState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetRecoState( 
+             /* [in] */ SPRECOSTATE NewState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
+-            /* [out] */ SPRECOGNIZERSTATUS *pStatus) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECOGNIZERSTATUS *pStatus) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFormat( 
+             /* [in] */ SPSTREAMFORMATTYPE WaveFormatType,
+-            /* [out] */ GUID *pFormatId,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pFormatId,
+             /* [out][annotation] */ 
+             _Outptr_  WAVEFORMATEX **ppCoMemWFEX) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsUISupported( 
+             /* [in] */ LPCWSTR pszTypeOfUI,
+-            /* [in] */ void *pvExtraData,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pvExtraData,
+             /* [in] */ ULONG cbExtraData,
+-            /* [out] */ BOOL *pfSupported) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfSupported) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE DisplayUI( 
+             /* [in] */ HWND hwndParent,
+             /* [in][annotation] */ 
+             _In_opt_  LPCWSTR pszTitle,
+             /* [in] */ LPCWSTR pszTypeOfUI,
+-            /* [in] */ void *pvExtraData,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pvExtraData,
+             /* [in] */ ULONG cbExtraData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EmulateRecognition( 
+@@ -11154,7 +11155,7 @@ EXTERN_C const IID IID_ISpEnginePronunciation;
+             /* [string][in] */ LPCWSTR pszLeftContext,
+             /* [string][in] */ LPCWSTR pszRightContext,
+             /* [in] */ WORD LangID,
+-            /* [out] */ SPNORMALIZATIONLIST *pNormalizationList) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPNORMALIZATIONLIST *pNormalizationList) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPronunciations( 
+             /* [string][in] */ LPCWSTR pszWord,
+@@ -11284,8 +11285,8 @@ EXTERN_C const IID IID_ISpDisplayAlternates;
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayAlternates( 
+             /* [in] */ const SPDISPLAYPHRASE *pPhrase,
+             /* [in] */ ULONG cRequestCount,
+-            /* [out] */ SPDISPLAYPHRASE **ppCoMemPhrases,
+-            /* [out] */ ULONG *pcPhrasesReturned) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPDISPLAYPHRASE **ppCoMemPhrases,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcPhrasesReturned) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetFullStopTrailSpace( 
+             /* [in] */ ULONG ulTrailSpace) = 0;
 @@ -12498,7 +12499,7 @@ EXTERN_C const IID IID_ISpeechDataKey;
          
          virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE GetStringValue( 

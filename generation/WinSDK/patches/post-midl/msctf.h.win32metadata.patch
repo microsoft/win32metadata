@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
-index ecd48fa0da..168854eb27 100644
+index ecd48fa0da..69ac74864f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
 @@ -699,6 +699,7 @@ extern "C"{
@@ -954,7 +954,7 @@ index ecd48fa0da..168854eb27 100644
      ITfCandidateListUIElement : public ITfUIElement
      {
      public:
-@@ -13964,7 +13965,7 @@ EXTERN_C const IID IID_ITfCandidateListUIElement;
+@@ -13964,11 +13965,11 @@ EXTERN_C const IID IID_ITfCandidateListUIElement;
              /* [annotation][in] */ 
              _In_  UINT uIndex,
              /* [annotation][out] */ 
@@ -963,6 +963,11 @@ index ecd48fa0da..168854eb27 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetPageIndex( 
              /* [annotation][length_is][size_is][out] */ 
+-            _Out_writes_to_(uSize,*puPageCnt)  UINT *pIndex,
++            _WIN32META_ANNOTATION_("win32metadata:optional") _Out_writes_to_(uSize,*puPageCnt)  UINT *pIndex,
+             /* [annotation][in] */ 
+             _In_  UINT uSize,
+             /* [annotation][out] */ 
 @@ -14171,7 +14172,7 @@ EXTERN_C const IID IID_ITfCandidateListUIElementBehavior;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

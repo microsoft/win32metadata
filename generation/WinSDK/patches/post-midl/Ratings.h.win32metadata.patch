@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
-index c68c36d24b..d380acaa6e 100644
+index c68c36d24b..44cba6bd7e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
 @@ -8,6 +8,7 @@
@@ -41,16 +41,18 @@ index c68c36d24b..d380acaa6e 100644
  STDAPI RatingFreeDetails(_In_opt_ void *pRatingDetails);
  STDAPI RatingObtainCancel(HANDLE hRatingObtainQuery);
 -STDAPI RatingObtainQuery(LPCSTR pszTargetUrl, DWORD dwUserData,
-+_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingObtainQuery(LPCSTR pszTargetUrl, DWORD dwUserData,
-     void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCSTR pszRating, void *lpvRatingDetails),
+-    void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCSTR pszRating, void *lpvRatingDetails),
 -    _Out_opt_ HANDLE *phRatingObtainQuery);
 -STDAPI RatingObtainQueryW(LPCWSTR pszTargetUrl, DWORD dwUserData,
-+    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingObtainQueryW(LPCWSTR pszTargetUrl, DWORD dwUserData,
-     void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCWSTR pszRating, void *lpvRatingDetails),
+-    void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCWSTR pszRating, void *lpvRatingDetails),
 -    _Out_opt_ HANDLE *phRatingObtainQuery);
 -STDAPI RatingSetupUI(HWND hDlg, LPCSTR pszUsername);
 -STDAPI RatingSetupUIW(HWND hDlg, LPCWSTR pszUsername);
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingObtainQuery(LPCSTR pszTargetUrl, DWORD dwUserData,
++    _WIN32META_ANNOTATION_("win32metadata:in") void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCSTR pszRating, void *lpvRatingDetails),
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingObtainQueryW(LPCWSTR pszTargetUrl, DWORD dwUserData,
++    _WIN32META_ANNOTATION_("win32metadata:in") void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCWSTR pszRating, void *lpvRatingDetails),
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
 +_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingSetupUI(HWND hDlg, LPCSTR pszUsername);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingSetupUIW(HWND hDlg, LPCWSTR pszUsername);

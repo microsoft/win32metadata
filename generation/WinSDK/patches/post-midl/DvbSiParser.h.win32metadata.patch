@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h b/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h
-index 147108cf40..3e6c07f0c8 100644
+index 147108cf40..176023d696 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DvbSiParser.h
 @@ -553,6 +553,7 @@ extern "C"{
@@ -100,6 +100,24 @@ index 147108cf40..3e6c07f0c8 100644
      IISDB_EMM : public IUnknown
      {
      public:
+@@ -6115,13 +6116,13 @@ EXTERN_C const IID IID_IISDB_EMM;
+             _Out_  BYTE *pbBuffer) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSharedEmmMessage( 
+-            WORD *pwLength,
+-            BYTE **ppbMessage) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WORD *pwLength,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE **ppbMessage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIndividualEmmMessage( 
+             IUnknown *pUnknown,
+-            WORD *pwLength,
+-            BYTE **ppbMessage) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WORD *pwLength,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE **ppbMessage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
+             /* [annotation][out] */ 
 @@ -6446,7 +6447,7 @@ EXTERN_C const IID IID_IDvbContentIdentifierDescriptor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

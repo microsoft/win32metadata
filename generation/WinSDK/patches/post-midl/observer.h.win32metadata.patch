@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h
-index a7c470c2a6..50fab97d8f 100644
+index a7c470c2a6..16e102f267 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h
 @@ -1,3 +1,4 @@
@@ -42,6 +42,24 @@ index a7c470c2a6..50fab97d8f 100644
  
  /* The observerlistener part */
  
+@@ -100,7 +101,7 @@ typedef struct _alljoyn_observerlistener_handle* alljoyn_observerlistener;
+  *       have to manually increase the reference count.
+  */
+ typedef void (AJ_CALL * alljoyn_observer_object_discovered_ptr)(const void* context,
+-                                                                alljoyn_proxybusobject_ref proxyref);
++                                                                _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_ref proxyref);
+ /**
+  * Callback to be invoked when a previously discovered object has been lost.
+  *
+@@ -114,7 +115,7 @@ typedef void (AJ_CALL * alljoyn_observer_object_discovered_ptr)(const void* cont
+  *       have to manually increase the reference count.
+  */
+ typedef void (AJ_CALL * alljoyn_observer_object_lost_ptr)(const void* context,
+-                                                          alljoyn_proxybusobject_ref proxyref);
++                                                          _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_ref proxyref);
+ 
+ /**
+  * The callbacks used for creation of an alljoyn_observerlistener.
 @@ -134,13 +135,13 @@ typedef struct {
  /**
   * Allocate a new alljoyn_observerlistener.

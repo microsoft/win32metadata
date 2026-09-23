@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CustCntl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CustCntl.h
+index 009decdfc1..984760fdae 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CustCntl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CustCntl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*****************************************************************************\
+ *                                                                             *
+ * custcntl.h -  Custom Control Library header file                            *
+@@ -67,8 +68,8 @@ typedef struct tagCCSTYLEW {
+  * then return TRUE for success.  If an error occurs or the user
+  * cancels the dialog, FALSE should be returned.
+  */
+-typedef BOOL (CALLBACK* LPFNCCSTYLEA)(HWND hwndParent,  LPCCSTYLEA pccs);
+-typedef BOOL (CALLBACK* LPFNCCSTYLEW)(HWND hwndParent,  LPCCSTYLEW pccs);
++typedef BOOL (CALLBACK* LPFNCCSTYLEA)(HWND hwndParent,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCCSTYLEA pccs);
++typedef BOOL (CALLBACK* LPFNCCSTYLEW)(HWND hwndParent,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCCSTYLEW pccs);
+ 
+ #ifdef UNICODE
+ #define LPFNCCSTYLE LPFNCCSTYLEW
+@@ -199,8 +200,8 @@ typedef struct tagCCINFOW {
+  * If both functions are present, the CustomControlInfoW function
+  * will be used by the dialog editor.
+  */
+-typedef UINT (CALLBACK* LPFNCCINFOA)(LPCCINFOA acci);
+-typedef UINT (CALLBACK* LPFNCCINFOW)(LPCCINFOW acci);
++typedef UINT (CALLBACK* LPFNCCINFOA)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCCINFOA acci);
++typedef UINT (CALLBACK* LPFNCCINFOW)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCCINFOW acci);
+ 
+ #ifdef UNICODE
+ #define LPFNCCINFO  LPFNCCINFOW

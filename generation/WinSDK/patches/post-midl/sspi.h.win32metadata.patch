@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
-index 06f5ed27e9..6979834176 100644
+index 06f5ed27e9..d75e18253c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 @@ -15,6 +15,7 @@
@@ -322,6 +322,22 @@ index 06f5ed27e9..6979834176 100644
  {
      unsigned long ExtensionsCount;                               // Number of negotiated TLS extensions.
      _Field_size_(ExtensionsCount) unsigned short * Extensions;   // Pointer to array of 2-byte TLS extension IDs (allocated by IANA).
+@@ -1286,11 +1287,11 @@ typedef struct _SECPKG_APP_MODE_INFO {
+ 
+ typedef void
+ (SEC_ENTRY * SEC_GET_KEY_FN) (
+-    void * Arg,                 // Argument passed in
+-    void * Principal,           // Principal ID
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * Arg,                 // Argument passed in
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * Principal,           // Principal ID
+     unsigned long KeyVer,               // Key Version
+-    void * * Key,       // Returned ptr to key
+-    SECURITY_STATUS * Status    // returned status
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * * Key,       // Returned ptr to key
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SECURITY_STATUS * Status    // returned status
+     );
+ 
+ //
 @@ -1341,11 +1342,11 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -336,6 +352,29 @@ index 06f5ed27e9..6979834176 100644
      _In_opt_  void * pvLogonId,                   // Pointer to logon ID
      _In_opt_  void * pAuthData,                   // Package specific data
      _In_opt_  SEC_GET_KEY_FN pGetKeyFn,           // Pointer to GetKey() func
+@@ -1356,15 +1357,15 @@ AcquireCredentialsHandleA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ACQUIRE_CREDENTIALS_HANDLE_FN_A)(
+-    SEC_CHAR *,
+-    SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
+     unsigned long,
+-    void *,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     SEC_GET_KEY_FN,
+-    void *,
+-    PCredHandle,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
+ 
+ #ifdef UNICODE
+ #  define AcquireCredentialsHandle AcquireCredentialsHandleW                  // ntifs
 @@ -1376,7 +1377,7 @@ typedef SECURITY_STATUS
  
  // begin_ntifs
@@ -345,6 +384,15 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  FreeCredentialsHandle(
      _In_ PCredHandle phCredential            // Handle to free
+@@ -1384,7 +1385,7 @@ FreeCredentialsHandle(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * FREE_CREDENTIALS_HANDLE_FN)(
+-    PCredHandle );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle );
+ 
+ KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
 @@ -1420,7 +1421,7 @@ typedef SECURITY_STATUS
      void *,
      PTimeStamp);
@@ -354,6 +402,27 @@ index 06f5ed27e9..6979834176 100644
  AddCredentialsA(
      _In_ PCredHandle hCredentials,
      _In_opt_ LPSTR pszPrincipal,             // Name of principal
+@@ -1434,14 +1435,14 @@ AddCredentialsA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ADD_CREDENTIALS_FN_A)(
+-    PCredHandle,
+-    SEC_CHAR *,
+-    SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     SEC_GET_KEY_FN,
+-    void *,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
+ 
+ #ifdef UNICODE
+ #define AddCredentials  AddCredentialsW
 @@ -1636,7 +1637,7 @@ SECURITY_STATUS SspiDeleteSecurityContextAsync(
  
  #if ISSP_MODE != 0
@@ -363,7 +432,25 @@ index 06f5ed27e9..6979834176 100644
  ChangeAccountPasswordW(
      _In_    SEC_WCHAR *  pszPackageName,
      _In_    SEC_WCHAR *  pszDomainName,
-@@ -1662,7 +1663,7 @@ typedef SECURITY_STATUS
+@@ -1650,19 +1651,19 @@ ChangeAccountPasswordW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * CHANGE_PASSWORD_FN_W)(
+-    SEC_WCHAR *,
+-    SEC_WCHAR *,
+-    SEC_WCHAR *,
+-    SEC_WCHAR *,
+-    SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
+     BOOLEAN,
+     unsigned long,
+-    PSecBufferDesc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc
+     );
  
  
  
@@ -372,6 +459,27 @@ index 06f5ed27e9..6979834176 100644
  ChangeAccountPasswordA(
      _In_    SEC_CHAR *  pszPackageName,
      _In_    SEC_CHAR *  pszDomainName,
+@@ -1676,14 +1677,14 @@ ChangeAccountPasswordA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * CHANGE_PASSWORD_FN_A)(
+-    SEC_CHAR *,
+-    SEC_CHAR *,
+-    SEC_CHAR *,
+-    SEC_CHAR *,
+-    SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
+     BOOLEAN,
+     unsigned long,
+-    PSecBufferDesc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc
+     );
+ 
+ #ifdef UNICODE
 @@ -1745,12 +1746,12 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -387,6 +495,33 @@ index 06f5ed27e9..6979834176 100644
      _In_        unsigned long Reserved1,                // Reserved, MBZ
      _In_        unsigned long TargetDataRep,            // Data rep of target
      _In_opt_    PSecBufferDesc pInput,                  // Input Buffers
+@@ -1763,18 +1764,18 @@ InitializeSecurityContextA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * INITIALIZE_SECURITY_CONTEXT_FN_A)(
+-    PCredHandle,
+-    PCtxtHandle,
+-    SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
+     unsigned long,
+     unsigned long,
+     unsigned long,
+-    PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
+     unsigned long,
+-    PCtxtHandle,
+-    PSecBufferDesc,
+-    unsigned long *,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
+ 
+ #ifdef UNICODE
+ #  define InitializeSecurityContext InitializeSecurityContextW              // ntifs
 @@ -1786,13 +1787,13 @@ typedef SECURITY_STATUS
  
  // begin_ntifs
@@ -403,26 +538,52 @@ index 06f5ed27e9..6979834176 100644
      _In_        unsigned long TargetDataRep,            // Target Data Rep
      _Inout_opt_ PCtxtHandle phNewContext,               // (out) New context handle
      _Inout_opt_ PSecBufferDesc pOutput,                 // (inout) Output buffers
-@@ -1812,7 +1813,7 @@ typedef SECURITY_STATUS
-     unsigned long *,
-     PTimeStamp);
+@@ -1802,17 +1803,17 @@ AcceptSecurityContext(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ACCEPT_SECURITY_CONTEXT_FN)(
+-    PCredHandle,
+-    PCtxtHandle,
+-    PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
+     unsigned long,
+     unsigned long,
+-    PCtxtHandle,
+-    PSecBufferDesc,
+-    unsigned long *,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
  
 -SECURITY_STATUS SEC_ENTRY
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") SECURITY_STATUS SEC_ENTRY
  CompleteAuthToken(
      _In_ PCtxtHandle phContext,              // Context to complete
      _In_ PSecBufferDesc pToken               // Token to complete
-@@ -1823,7 +1824,7 @@ typedef SECURITY_STATUS
-     PCtxtHandle,
-     PSecBufferDesc);
+@@ -1820,10 +1821,10 @@ CompleteAuthToken(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * COMPLETE_AUTH_TOKEN_FN)(
+-    PCtxtHandle,
+-    PSecBufferDesc);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc);
  
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  _Check_return_
  SECURITY_STATUS SEC_ENTRY
  ImpersonateSecurityContext(
-@@ -1835,7 +1836,7 @@ typedef SECURITY_STATUS
-     PCtxtHandle);
+@@ -1832,10 +1833,10 @@ ImpersonateSecurityContext(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * IMPERSONATE_SECURITY_CONTEXT_FN)(
+-    PCtxtHandle);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle);
  
  
 -KSECDDDECLSPEC
@@ -430,8 +591,12 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  RevertSecurityContext(
      _In_ PCtxtHandle phContext               // Context from which to re
-@@ -1846,7 +1847,7 @@ typedef SECURITY_STATUS
-     PCtxtHandle);
+@@ -1843,10 +1844,10 @@ RevertSecurityContext(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * REVERT_SECURITY_CONTEXT_FN)(
+-    PCtxtHandle);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle);
  
  
 -KSECDDDECLSPEC
@@ -439,27 +604,36 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  QuerySecurityContextToken(
      _In_  PCtxtHandle phContext,
-@@ -1857,7 +1858,7 @@ typedef SECURITY_STATUS
+@@ -1855,9 +1856,9 @@ QuerySecurityContextToken(
+ 
+ typedef SECURITY_STATUS
  (SEC_ENTRY * QUERY_SECURITY_CONTEXT_TOKEN_FN)(
-     PCtxtHandle, void * *);
+-    PCtxtHandle, void * *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * *);
  
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  DeleteSecurityContext(
      _In_ PCtxtHandle phContext               // Context to delete
-@@ -1867,7 +1868,7 @@ typedef SECURITY_STATUS
+@@ -1865,9 +1866,9 @@ DeleteSecurityContext(
+ 
+ typedef SECURITY_STATUS
  (SEC_ENTRY * DELETE_SECURITY_CONTEXT_FN)(
-     PCtxtHandle);
+-    PCtxtHandle);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle);
  
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
  ApplyControlToken(
      _In_ PCtxtHandle phContext,              // Context to modify
-@@ -1878,11 +1879,11 @@ typedef SECURITY_STATUS
+@@ -1876,65 +1877,65 @@ ApplyControlToken(
+ 
+ typedef SECURITY_STATUS
  (SEC_ENTRY * APPLY_CONTROL_TOKEN_FN)(
-     PCtxtHandle, PSecBufferDesc);
+-    PCtxtHandle, PSecBufferDesc);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc);
  
 -KSECDDDECLSPEC
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
@@ -471,9 +645,13 @@ index 06f5ed27e9..6979834176 100644
      _Out_ void * pBuffer              // Buffer for attributes
      );
  
-@@ -1892,10 +1893,10 @@ typedef SECURITY_STATUS
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CONTEXT_ATTRIBUTES_FN_W)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
      unsigned long,
-     void *);
+-    void *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
  
 -SECURITY_STATUS SEC_ENTRY
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
@@ -484,7 +662,15 @@ index 06f5ed27e9..6979834176 100644
      _Out_writes_bytes_(cbBuffer) void * pBuffer,    // Buffer for attributes
      _In_  unsigned long cbBuffer              // Length of buffer
      );
-@@ -1909,10 +1910,10 @@ typedef SECURITY_STATUS
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CONTEXT_ATTRIBUTES_EX_FN_W)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long);
  
  // end_ntifs
  
@@ -497,9 +683,13 @@ index 06f5ed27e9..6979834176 100644
      _Out_ void * pBuffer              // Buffer for attributes
      );
  
-@@ -1922,10 +1923,10 @@ typedef SECURITY_STATUS
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CONTEXT_ATTRIBUTES_FN_A)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
      unsigned long,
-     void *);
+-    void *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
  
 -SECURITY_STATUS SEC_ENTRY
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ SECURITY_STATUS SEC_ENTRY
@@ -510,7 +700,18 @@ index 06f5ed27e9..6979834176 100644
      _Out_writes_bytes_(cbBuffer) void * pBuffer,    // Buffer for attributes
      _In_  unsigned long cbBuffer              // Length of buffer
      );
-@@ -1953,10 +1954,10 @@ typedef SECURITY_STATUS
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CONTEXT_ATTRIBUTES_EX_FN_A)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long);
+ 
+ #ifdef UNICODE
+@@ -1953,38 +1954,38 @@ typedef SECURITY_STATUS
  
  #if (OSVER(NTDDI_VERSION) > NTDDI_WIN2K)
  
@@ -523,7 +724,17 @@ index 06f5ed27e9..6979834176 100644
      _In_reads_bytes_(cbBuffer) void * pBuffer, // Buffer for attributes
      _In_ unsigned long cbBuffer                   // Size (in bytes) of Buffer
      );
-@@ -1972,10 +1973,10 @@ typedef SECURITY_STATUS
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * SET_CONTEXT_ATTRIBUTES_FN_W)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long );
+ 
+ #endif // Greater than w2k
  
  // end_ntifs
  
@@ -536,6 +747,17 @@ index 06f5ed27e9..6979834176 100644
      _In_reads_bytes_(cbBuffer) void * pBuffer, // Buffer for attributes
      _In_ unsigned long cbBuffer                   // Size (in bytes) of Buffer
      );
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * SET_CONTEXT_ATTRIBUTES_FN_A)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long );
+ 
+ #ifdef UNICODE
 @@ -1997,7 +1998,7 @@ typedef SECURITY_STATUS
  
  // begin_ntifs
@@ -545,16 +767,31 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  QueryCredentialsAttributesW(
      _In_    PCredHandle phCredential,           // Credential to query
-@@ -2011,7 +2012,7 @@ typedef SECURITY_STATUS
+@@ -2007,11 +2008,11 @@ QueryCredentialsAttributesW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CREDENTIALS_ATTRIBUTES_FN_W)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
      unsigned long,
-     void *);
+-    void *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
  
 -SECURITY_STATUS SEC_ENTRY
 +_WIN32META_ANNOTATION_("win32metadata:unicode") SECURITY_STATUS SEC_ENTRY
  QueryCredentialsAttributesExW(
      _In_    PCredHandle phCredential,           // Credential to query
      _In_    unsigned long ulAttribute,          // Attribute to query
-@@ -2028,7 +2029,7 @@ typedef SECURITY_STATUS
+@@ -2021,14 +2022,14 @@ QueryCredentialsAttributesExW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_W)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long);
  
  // end_ntifs
  
@@ -563,15 +800,33 @@ index 06f5ed27e9..6979834176 100644
  QueryCredentialsAttributesA(
      _In_    PCredHandle phCredential,           // Credential to query
      _In_    unsigned long ulAttribute,          // Attribute to query
-@@ -2041,7 +2042,7 @@ typedef SECURITY_STATUS
+@@ -2037,11 +2038,11 @@ QueryCredentialsAttributesA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CREDENTIALS_ATTRIBUTES_FN_A)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
      unsigned long,
-     void *);
+-    void *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
  
 -SECURITY_STATUS SEC_ENTRY
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SECURITY_STATUS SEC_ENTRY
  QueryCredentialsAttributesExA(
      _In_    PCredHandle phCredential,           // Credential to query
      _In_    unsigned long ulAttribute,          // Attribute to query
+@@ -2052,9 +2053,9 @@ QueryCredentialsAttributesExA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_A)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long);
+ 
+ #ifdef UNICODE
 @@ -2073,7 +2074,7 @@ typedef SECURITY_STATUS
  
  #if NTDDI_VERSION > NTDDI_WS03
@@ -581,7 +836,18 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  SetCredentialsAttributesW(
      _In_ PCredHandle phCredential,                // Credential to Set
-@@ -2093,7 +2094,7 @@ typedef SECURITY_STATUS
+@@ -2084,16 +2085,16 @@ SetCredentialsAttributesW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * SET_CREDENTIALS_ATTRIBUTES_FN_W)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long );
+ 
+ #endif // For W2k3SP1 and greater
  
  // end_ntifs
  
@@ -590,6 +856,18 @@ index 06f5ed27e9..6979834176 100644
  SetCredentialsAttributesA(
      _In_ PCredHandle phCredential,                // Credential to Set
      _In_ unsigned long ulAttribute,               // Attribute to Set
+@@ -2103,9 +2104,9 @@ SetCredentialsAttributesA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * SET_CREDENTIALS_ATTRIBUTES_FN_A)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     unsigned long );
+ 
+ #ifdef UNICODE
 @@ -2118,7 +2119,7 @@ typedef SECURITY_STATUS
  
  // begin_ntifs
@@ -608,7 +886,15 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  MakeSignature(
      _In_ PCtxtHandle phContext,              // Context to use
-@@ -2178,7 +2179,7 @@ typedef SECURITY_STATUS
+@@ -2172,13 +2173,13 @@ MakeSignature(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * MAKE_SIGNATURE_FN)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+     unsigned long,
+-    PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
      unsigned long);
  
  
@@ -617,7 +903,19 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  VerifySignature(
      _In_  PCtxtHandle phContext,              // Context to use
-@@ -2198,7 +2199,7 @@ typedef SECURITY_STATUS
+@@ -2189,16 +2190,16 @@ VerifySignature(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * VERIFY_SIGNATURE_FN)(
+-    PCtxtHandle,
+-    PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
+     unsigned long,
+-    unsigned long *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *);
+ 
+ // This only exists win Win2k3 and Greater
  #define SECQOP_WRAP_NO_ENCRYPT      0x80000001
  #define SECQOP_WRAP_OOB_DATA        0x40000000
  
@@ -626,8 +924,12 @@ index 06f5ed27e9..6979834176 100644
  EncryptMessage( _In_    PCtxtHandle         phContext,
                  _In_    unsigned long       fQOP,
                  _In_    PSecBufferDesc      pMessage,
-@@ -2209,7 +2210,7 @@ typedef SECURITY_STATUS
-     PCtxtHandle, unsigned long, PSecBufferDesc, unsigned long);
+@@ -2206,10 +2207,10 @@ EncryptMessage( _In_    PCtxtHandle         phContext,
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ENCRYPT_MESSAGE_FN)(
+-    PCtxtHandle, unsigned long, PSecBufferDesc, unsigned long);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle, unsigned long, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc, unsigned long);
  
  
 -SECURITY_STATUS SEC_ENTRY
@@ -635,6 +937,17 @@ index 06f5ed27e9..6979834176 100644
  DecryptMessage( _In_      PCtxtHandle         phContext,
                  _In_      PSecBufferDesc      pMessage,
                  _In_      unsigned long       MessageSeqNo,
+@@ -2218,8 +2219,8 @@ DecryptMessage( _In_      PCtxtHandle         phContext,
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * DECRYPT_MESSAGE_FN)(
+-    PCtxtHandle, PSecBufferDesc, unsigned long,
+-    unsigned long *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc, unsigned long,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *);
+ 
+ 
+ // end_ntifs
 @@ -2231,7 +2232,7 @@ typedef SECURITY_STATUS
  ////
  ///////////////////////////////////////////////////////////////////////////
@@ -644,7 +957,14 @@ index 06f5ed27e9..6979834176 100644
  SECURITY_STATUS SEC_ENTRY
  EnumerateSecurityPackagesW(
      _Out_       unsigned long * pcPackages,     // Receives num. packages
-@@ -2245,7 +2246,7 @@ typedef SECURITY_STATUS
+@@ -2240,12 +2241,12 @@ EnumerateSecurityPackagesW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ENUMERATE_SECURITY_PACKAGES_FN_W)(
+-    unsigned long *,
+-    PSecPkgInfoW *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecPkgInfoW *);
  
  // end_ntifs
  
@@ -653,6 +973,17 @@ index 06f5ed27e9..6979834176 100644
  EnumerateSecurityPackagesA(
      _Out_       unsigned long * pcPackages,     // Receives num. packages
      _Outptr_ PSecPkgInfoA  * ppPackageInfo    // Receives array of info
+@@ -2253,8 +2254,8 @@ EnumerateSecurityPackagesA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ENUMERATE_SECURITY_PACKAGES_FN_A)(
+-    unsigned long *,
+-    PSecPkgInfoA *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecPkgInfoA *);
+ 
+ #ifdef UNICODE
+ #  define EnumerateSecurityPackages EnumerateSecurityPackagesW              // ntifs
 @@ -2288,7 +2289,7 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -662,7 +993,18 @@ index 06f5ed27e9..6979834176 100644
  QuerySecurityPackageInfoA(
      _In_        LPSTR pszPackageName,           // Name of package
      _Outptr_ PSecPkgInfoA *ppPackageInfo     // Receives package info
-@@ -2362,11 +2363,11 @@ DelegateSecurityContext(
+@@ -2296,8 +2297,8 @@ QuerySecurityPackageInfoA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_SECURITY_PACKAGE_INFO_FN_A)(
+-    SEC_CHAR *,
+-    PSecPkgInfoA *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecPkgInfoA *);
+ 
+ #ifdef UNICODE
+ #  define QuerySecurityPackageInfo QuerySecurityPackageInfoW                // ntifs
+@@ -2362,21 +2363,21 @@ DelegateSecurityContext(
  ///////////////////////////////////////////////////////////////////////////
  
  
@@ -676,6 +1018,19 @@ index 06f5ed27e9..6979834176 100644
      _Out_ PSecBuffer           pPackedContext,        // (out) marshalled context
      _Out_ void * * pToken             // (out, optional) token handle for impersonation
      );
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * EXPORT_SECURITY_CONTEXT_FN)(
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+     ULONG,
+-    PSecBuffer,
+-    void * *
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * *
+     );
+ 
+ KSECDDDECLSPEC
 @@ -2405,7 +2406,7 @@ typedef SECURITY_STATUS
      );
  
@@ -685,6 +1040,21 @@ index 06f5ed27e9..6979834176 100644
  ImportSecurityContextA(
      _In_  LPSTR                pszPackage,
      _In_  PSecBuffer           pPackedContext,        // (in) marshalled context
+@@ -2415,10 +2416,10 @@ ImportSecurityContextA(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * IMPORT_SECURITY_CONTEXT_FN_A)(
+-    SEC_CHAR *,
+-    PSecBuffer,
+-    void *,
+-    PCtxtHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_CHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle
+     );
+ 
+ #ifdef UNICODE
 @@ -2569,7 +2570,7 @@ SecLookupWellKnownSid(
  
  #define FreeCredentialHandle FreeCredentialsHandle

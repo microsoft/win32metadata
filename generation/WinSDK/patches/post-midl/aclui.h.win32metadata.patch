@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
-index 09088fa285..aba815f340 100644
+index 09088fa285..c1ebf7b01e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
 @@ -1,3 +1,4 @@
@@ -25,31 +25,68 @@ index 09088fa285..aba815f340 100644
      LPCWSTR     pszName;            // may be resource ID
  } SI_INHERIT_TYPE, *PSI_INHERIT_TYPE;
  
-@@ -215,13 +216,13 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
+@@ -214,23 +215,23 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
  
      // *** ISecurityInformation methods ***
-     STDMETHOD(GetObjectInformation) (THIS_ PSI_OBJECT_INFO pObjectInfo ) PURE;
+-    STDMETHOD(GetObjectInformation) (THIS_ PSI_OBJECT_INFO pObjectInfo ) PURE;
 -    STDMETHOD(GetSecurity) (THIS_ SECURITY_INFORMATION RequestedInformation,
+-                            PSECURITY_DESCRIPTOR *ppSecurityDescriptor,
++    STDMETHOD(GetObjectInformation) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSI_OBJECT_INFO pObjectInfo ) PURE;
 +    STDMETHOD(GetSecurity) (THIS_ _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) SECURITY_INFORMATION RequestedInformation,
-                             PSECURITY_DESCRIPTOR *ppSecurityDescriptor,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_DESCRIPTOR *ppSecurityDescriptor,
                              BOOL fDefault ) PURE;
 -    STDMETHOD(SetSecurity) (THIS_ SECURITY_INFORMATION SecurityInformation,
 +    STDMETHOD(SetSecurity) (THIS_ _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) SECURITY_INFORMATION SecurityInformation,
                              PSECURITY_DESCRIPTOR pSecurityDescriptor ) PURE;
      STDMETHOD(GetAccessRights) (THIS_ const GUID* pguidObjectType,
 -                                DWORD dwFlags, // SI_EDIT_AUDITS, SI_EDIT_PROPERTIES
+-                                PSI_ACCESS *ppAccess,
+-                                ULONG *pcAccesses,
+-                                ULONG *piDefaultAccess ) PURE;
 +                                _Win32_AssociatedEnum_(SECURITY_INFO_PAGE_FLAGS) DWORD dwFlags, // SI_EDIT_AUDITS, SI_EDIT_PROPERTIES
-                                 PSI_ACCESS *ppAccess,
-                                 ULONG *pcAccesses,
-                                 ULONG *piDefaultAccess ) PURE;
-@@ -230,7 +231,7 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
-                            ACCESS_MASK *pMask) PURE;
-     STDMETHOD(GetInheritTypes) (THIS_ PSI_INHERIT_TYPE *ppInheritTypes,
-                                 ULONG *pcInheritTypes ) PURE;
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSI_ACCESS *ppAccess,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcAccesses,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *piDefaultAccess ) PURE;
+     STDMETHOD(MapGeneric) (THIS_ const GUID *pguidObjectType,
+-                           UCHAR *pAceFlags,
+-                           ACCESS_MASK *pMask) PURE;
+-    STDMETHOD(GetInheritTypes) (THIS_ PSI_INHERIT_TYPE *ppInheritTypes,
+-                                ULONG *pcInheritTypes ) PURE;
 -    STDMETHOD(PropertySheetPageCallback)(THIS_ HWND hwnd, UINT uMsg, SI_PAGE_TYPE uPage ) PURE;
++                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UCHAR *pAceFlags,
++                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ACCESS_MASK *pMask) PURE;
++    STDMETHOD(GetInheritTypes) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSI_INHERIT_TYPE *ppInheritTypes,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcInheritTypes ) PURE;
 +    STDMETHOD(PropertySheetPageCallback)(THIS_ HWND hwnd, _Win32_AssociatedEnum_(PSPCB_MESSAGE) UINT uMsg, SI_PAGE_TYPE uPage ) PURE;
  };
  typedef ISecurityInformation *LPSECURITYINFO;
+ 
+@@ -280,10 +281,10 @@ DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-
+                                          PSID pUserSid,
+                                          LPCWSTR pszServerName,
+                                          PSECURITY_DESCRIPTOR pSD,
+-                                         POBJECT_TYPE_LIST *ppObjectTypeList,
+-                                         ULONG *pcObjectTypeListLength,
+-                                         PACCESS_MASK *ppGrantedAccessList,
+-                                         ULONG *pcGrantedAccessListLength) PURE;
++                                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POBJECT_TYPE_LIST *ppObjectTypeList,
++                                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcObjectTypeListLength,
++                                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PACCESS_MASK *ppGrantedAccessList,
++                                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcGrantedAccessListLength) PURE;
+ };
+ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
+ 
+@@ -298,8 +299,8 @@ DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-91
+ 
+     // *** ISecurityInformation methods ***
+     STDMETHOD(GetInheritSource)(SECURITY_INFORMATION si,
+-                                PACL pACL,
+-                                PINHERITED_FROM *ppInheritArray) PURE;
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PACL pACL,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PINHERITED_FROM *ppInheritArray) PURE;
+ };
+ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
  
 @@ -384,16 +385,16 @@ DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB
          _Inout_updates_(dwSecurityObjectCount) PSECURITY_OBJECT pSecurityObjects,

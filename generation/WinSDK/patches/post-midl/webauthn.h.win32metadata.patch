@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/webauthn.h b/generation/WinSDK/RecompiledIdlHeaders/um/webauthn.h
+index 1807e86ea3..306cdf5ab6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/webauthn.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/webauthn.h
+@@ -1,4 +1,5 @@
+-﻿/*
++﻿#include <win32metadata_annotations.h>
++/*
+ 
+ MIT License
+ 
+@@ -1918,7 +1919,7 @@ EXPERIMENTAL_WebAuthNEncodeGetAssertionResponse(
+     _Outptr_result_buffer_maybenull_(*pcbResp) BYTE **ppbResp
+     );
+ 
+-typedef void (CALLBACK* EXPERIMENTAL_WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK )(void* context);
++typedef void (CALLBACK* EXPERIMENTAL_WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK )(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ HRESULT
+ WINAPI

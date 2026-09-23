@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
-index 3174e2bbcf..5660127426 100644
+index 3174e2bbcf..a6060ef6a2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mgm.h
 @@ -17,6 +17,7 @@
@@ -19,16 +19,37 @@ index 3174e2bbcf..5660127426 100644
  
      DWORD               dwIfIndex;
      DWORD               dwIfNextHopAddr;
-@@ -315,6 +316,7 @@ typedef struct _SOURCE_GROUP_ENTRY {
+@@ -71,7 +72,7 @@ typedef DWORD
+     IN  OUT         PDWORD          pdwInIfNextHopAddr,
+     IN  OUT         PDWORD          pdwUpStreamNbr,
+     IN              DWORD           dwHdrSize,
+-    IN              PBYTE           pbPacketHdr,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PBYTE           pbPacketHdr,
+     IN  OUT         PBYTE           pbRoute
+ );
+ 
+@@ -147,7 +148,7 @@ DWORD (*PMGM_WRONG_IF_CALLBACK)(
+     IN              DWORD           dwIfIndex,
+     IN              DWORD           dwIfNextHopAddr,
+     IN              DWORD           dwHdrSize,
+-    IN              PBYTE           pbPacketHdr
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PBYTE           pbPacketHdr
+ );
+ 
+ 
+@@ -315,14 +316,16 @@ typedef struct _SOURCE_GROUP_ENTRY {
  // Routing protocol registration / de-registration API
  //============================================================================
  
 +_Windows_SupportedOS_Server2000_
  DWORD
  MgmRegisterMProtocol(
-     IN          PROUTING_PROTOCOL_CONFIG    prpiInfo,
-@@ -323,6 +325,7 @@ MgmRegisterMProtocol(
-     OUT         HANDLE  *                   phProtocol
+-    IN          PROUTING_PROTOCOL_CONFIG    prpiInfo,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN          PROUTING_PROTOCOL_CONFIG    prpiInfo,
+     IN          DWORD                       dwProtocolId,
+     IN          DWORD                       dwComponentId,
+-    OUT         HANDLE  *                   phProtocol
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT         HANDLE  *                   phProtocol
  );
  
 +_Windows_SupportedOS_Server2000_
@@ -85,7 +106,8 @@ index 3174e2bbcf..5660127426 100644
 -DWORD
 +_Windows_SupportedOS_Server2000_ DWORD
  MgmGetMfe(
-     IN              PMIB_IPMCAST_MFE        pimm,
+-    IN              PMIB_IPMCAST_MFE        pimm,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PMIB_IPMCAST_MFE        pimm,
      IN  OUT         PDWORD                  pdwBufferSize,
      IN  OUT         PBYTE                   pbBuffer
  );
@@ -95,25 +117,29 @@ index 3174e2bbcf..5660127426 100644
  MgmGetFirstMfe(
      IN  OUT         PDWORD                  pdwBufferSize,
      IN  OUT         PBYTE                   pbBuffer,
-@@ -414,7 +418,7 @@ MgmGetFirstMfe(
+@@ -414,9 +418,9 @@ MgmGetFirstMfe(
  );
  
  
 -DWORD
 +_Windows_SupportedOS_Server2000_ DWORD
  MgmGetNextMfe(
-     IN              PMIB_IPMCAST_MFE        pimmStart,
+-    IN              PMIB_IPMCAST_MFE        pimmStart,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PMIB_IPMCAST_MFE        pimmStart,
      IN  OUT         PDWORD                  pdwBufferSize,
-@@ -436,7 +440,7 @@ MgmGetNextMfe(
+     IN  OUT         PBYTE                   pbBuffer,
+     IN  OUT         PDWORD                  pdwNumEntries
+@@ -436,15 +440,15 @@ MgmGetNextMfe(
  #define         MGM_MFE_STATS_1             0x00000002
  
  
 -DWORD
 +_Windows_SupportedOS_Server2000_ DWORD
  MgmGetMfeStats(
-     IN              PMIB_IPMCAST_MFE        pimm,
+-    IN              PMIB_IPMCAST_MFE        pimm,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PMIB_IPMCAST_MFE        pimm,
      IN  OUT         PDWORD                  pdwBufferSize,
-@@ -444,7 +448,7 @@ MgmGetMfeStats(
+     IN  OUT         PBYTE                   pbBuffer,
      IN              DWORD                   dwFlags
  );
  
@@ -122,15 +148,18 @@ index 3174e2bbcf..5660127426 100644
  MgmGetFirstMfeStats(
      IN  OUT         PDWORD                  pdwBufferSize,
      IN  OUT         PBYTE                   pbBuffer,
-@@ -453,7 +457,7 @@ MgmGetFirstMfeStats(
+@@ -453,9 +457,9 @@ MgmGetFirstMfeStats(
  );
  
  
 -DWORD
 +_Windows_SupportedOS_Server2000_ DWORD
  MgmGetNextMfeStats(
-     IN              PMIB_IPMCAST_MFE        pimmStart,
+-    IN              PMIB_IPMCAST_MFE        pimmStart,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PMIB_IPMCAST_MFE        pimmStart,
      IN  OUT         PDWORD                  pdwBufferSize,
+     IN  OUT         PBYTE                   pbBuffer,
+     IN  OUT         PDWORD                  pdwNumEntries,
 @@ -466,14 +470,14 @@ MgmGetNextMfeStats(
  // Group menbership entry enumeration API
  //----------------------------------------------------------------------------
@@ -140,7 +169,8 @@ index 3174e2bbcf..5660127426 100644
  MgmGroupEnumerationStart(
      IN              HANDLE                  hProtocol,
      IN              MGM_ENUM_TYPES          metEnumType,
-     OUT             HANDLE *                phEnumHandle
+-    OUT             HANDLE *                phEnumHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT             HANDLE *                phEnumHandle
  );
  
 -DWORD

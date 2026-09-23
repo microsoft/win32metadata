@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h b/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h
-index 4ba920f424..ec73c05c99 100644
+index 4ba920f424..c4562cd1b8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ncrypt.h
 @@ -1,3 +1,4 @@
@@ -111,7 +111,7 @@ index 4ba920f424..ec73c05c99 100644
  SECURITY_STATUS
  WINAPI
  NCryptEnumStorageProviders(
-@@ -793,7 +794,7 @@ NCryptEnumStorageProviders(
+@@ -793,10 +794,10 @@ NCryptEnumStorageProviders(
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  #pragma endregion
  
@@ -119,7 +119,11 @@ index 4ba920f424..ec73c05c99 100644
 +_Windows_SupportedOS_WindowsVista_ SECURITY_STATUS
  WINAPI
  NCryptFreeBuffer(
-     _Pre_notnull_ PVOID   pvInput);
+-    _Pre_notnull_ PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_notnull_ PVOID   pvInput);
+ 
+ 
+ 
 @@ -810,15 +811,15 @@ NCryptFreeBuffer(
  #define NCRYPT_EXTENDED_ERRORS_FLAG     0x10000000
  #endif

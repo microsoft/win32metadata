@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ole2.h b/generation/WinSDK/RecompiledIdlHeaders/um/ole2.h
-index 241acea2b9..90e1733b35 100644
+index 241acea2b9..a1c5f49c45 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ole2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ole2.h
 @@ -1,3 +1,4 @@
@@ -222,7 +222,7 @@ index 241acea2b9..90e1733b35 100644
 +_Windows_SupportedOS_Windows2000_ WINOLEAPI          OleLockRunning(IN LPUNKNOWN pUnknown, IN BOOL fLock, IN BOOL fLastUnlockCloses);
  
 -WINOLEAPI_(void)   ReleaseStgMedium(IN LPSTGMEDIUM);
-+_Windows_SupportedOS_Windows2000_ WINOLEAPI_(void)   ReleaseStgMedium(IN LPSTGMEDIUM);
++_Windows_SupportedOS_Windows2000_ WINOLEAPI_(void)   ReleaseStgMedium(_WIN32META_ANNOTATION_("win32metadata:out") IN LPSTGMEDIUM);
  
 -WINOLEAPI          CreateOleAdviseHolder(_Out_ LPOLEADVISEHOLDER FAR* ppOAHolder);
 +_Windows_SupportedOS_Windows2000_ WINOLEAPI          CreateOleAdviseHolder(_Out_ LPOLEADVISEHOLDER FAR* ppOAHolder);

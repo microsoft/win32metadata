@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
-index 0150fb5596..439330fca0 100644
+index 0150fb5596..4eaad77e32 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
 @@ -33,6 +33,7 @@ Revision History:
@@ -28,7 +28,7 @@ index 0150fb5596..439330fca0 100644
      DWORD   JobId;
      DWORD_PTR   JobTime;
      DWORD   DaysOfMonth;
-@@ -108,6 +109,7 @@ typedef struct _AT_ENUM {
+@@ -108,13 +109,15 @@ typedef struct _AT_ENUM {
      LPWSTR  Command;
  } AT_ENUM, *PAT_ENUM, *LPAT_ENUM;
  
@@ -36,8 +36,10 @@ index 0150fb5596..439330fca0 100644
  NET_API_STATUS NET_API_FUNCTION
  NetScheduleJobAdd(
      IN      LPCWSTR         Servername  OPTIONAL,
-@@ -115,6 +117,7 @@ NetScheduleJobAdd(
-     OUT     LPDWORD         JobId
+-    IN      LPBYTE          Buffer,
+-    OUT     LPDWORD         JobId
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPBYTE          Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD         JobId
      );
  
 +_Windows_SupportedOS_Windows2000_  
@@ -53,10 +55,12 @@ index 0150fb5596..439330fca0 100644
  NetScheduleJobEnum(
      IN      LPCWSTR         Servername              OPTIONAL,
 -    OUT     LPBYTE *        PointerToBuffer,
-+    OUT      LPBYTE *        PointerToBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT      LPBYTE *        PointerToBuffer,
      IN      DWORD           PrefferedMaximumLength,
-     OUT     LPDWORD         EntriesRead,
-     OUT     LPDWORD         TotalEntries,
+-    OUT     LPDWORD         EntriesRead,
+-    OUT     LPDWORD         TotalEntries,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD         EntriesRead,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD         TotalEntries,
      IN OUT  LPDWORD         ResumeHandle
      );
  
@@ -66,7 +70,7 @@ index 0150fb5596..439330fca0 100644
      IN      LPCWSTR         Servername              OPTIONAL,
      IN      DWORD           JobId,
 -    OUT     LPBYTE *        PointerToBuffer
-+    OUT      LPBYTE *        PointerToBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT      LPBYTE *        PointerToBuffer
      );
  
  #ifdef __cplusplus

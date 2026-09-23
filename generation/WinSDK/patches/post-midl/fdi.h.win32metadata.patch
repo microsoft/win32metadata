@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
-index 271b4b9622..d172c02ad2 100644
+index 271b4b9622..f81c9d0cd6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 271b4b9622..d172c02ad2 100644
  /***    fdi_int.h - Diamond File Decompression Interface definitions
   *                      
   *      Copyright (C) Microsoft Corporation 1993-1997
+@@ -573,7 +574,7 @@ typedef long (FAR DIAMONDAPI *PFNSEEK) (_In_ INT_PTR hf, long dist, int seektype
+  *                    start of the whole block, and cbData+cbPartial is its
+  *                    size.
+  */
+-typedef int (FAR DIAMONDAPI *PFNFDIDECRYPT)(PFDIDECRYPT pfdid); /* pfnfdid */
++typedef int (FAR DIAMONDAPI *PFNFDIDECRYPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFDIDECRYPT pfdid); /* pfnfdid */
+ #define FNFDIDECRYPT(fn) int FAR DIAMONDAPI fn(PFDIDECRYPT pfdid)
+ 
+ 
+@@ -819,7 +820,7 @@ typedef enum {
+ } FDINOTIFICATIONTYPE; /* fdint */
+ 
+ typedef INT_PTR (FAR DIAMONDAPI *PFNFDINOTIFY)(FDINOTIFICATIONTYPE fdint,
+-                                               PFDINOTIFICATION    pfdin); /* pfnfdin */
++                                               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFDINOTIFICATION    pfdin); /* pfnfdin */
+ 
+ #define FNFDINOTIFY(fn) INT_PTR FAR DIAMONDAPI fn(FDINOTIFICATIONTYPE fdint, \
+                                                   PFDINOTIFICATION    pfdin)
 @@ -957,14 +958,14 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
   *      FDICreate(), and then free it up afterwards (or do all your allocation
   *      before calling FDICreate().

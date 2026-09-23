@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
-index 04174f8702..45251ee26a 100644
+index 04174f8702..b7edefb1fc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 @@ -6,6 +6,7 @@ File: shlobj_core.h
@@ -470,13 +470,13 @@ index 04174f8702..45251ee26a 100644
 -SHSTDAPI_(BOOL) DAD_DragMove(POINT pt);
 -SHSTDAPI_(BOOL) DAD_DragLeave(void);
 -SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, AUTO_SCROLL_DATA *pad, const POINT *pptNow);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_SetDragImage(HIMAGELIST him, POINT * pptOffset);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_SetDragImage(_WIN32META_ANNOTATION_("win32metadata:in") HIMAGELIST him, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINT * pptOffset);
 +_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragEnterEx(HWND hwndTarget, const POINT ptStart);
 +_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragEnterEx2(_In_ HWND hwndTarget, const POINT ptStart, _In_opt_ IDataObject *pdtObject);
 +_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_ShowDragImage(BOOL fShow);
 +_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragMove(POINT pt);
 +_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_DragLeave(void);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, AUTO_SCROLL_DATA *pad, const POINT *pptNow);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AUTO_SCROLL_DATA *pad, const POINT *pptNow);
  typedef struct {
      WORD cLength;
      WORD nVersion;

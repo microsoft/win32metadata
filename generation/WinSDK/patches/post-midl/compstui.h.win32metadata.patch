@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h b/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h
-index cd5956dd0b..807e4d49ed 100644
+index cd5956dd0b..9a773c0132 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h
 @@ -1,3 +1,4 @@
@@ -79,6 +79,15 @@ index cd5956dd0b..807e4d49ed 100644
      WORD        cbSize;             // size of this structure
      WORD        Reason;             // CPSUICB_REASON_XXXXX callback reason
      HWND        hDlg;               // handle of the dialog box
+@@ -1773,7 +1774,7 @@ typedef struct _CPSUICBPARAM {
+     } CPSUICBPARAM, *PCPSUICBPARAM;
+ 
+ 
+-typedef LONG (APIENTRY *_CPSUICALLBACK)(PCPSUICBPARAM pCPSUICBParam);
++typedef LONG (APIENTRY *_CPSUICALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCPSUICBPARAM pCPSUICBParam);
+ #define CPSUICALLBACK   LONG APIENTRY
+ 
+ 
 @@ -1978,7 +1979,7 @@ typedef LONG (APIENTRY *_CPSUICALLBACK)(PCPSUICBPARAM pCPSUICBParam);
  #define DPF_ICONID_AS_HICON             0x0001
  #define DPF_USE_HDLGTEMPLATE            0x0002
@@ -142,6 +151,15 @@ index cd5956dd0b..807e4d49ed 100644
      WORD    cbSize;
      WORD    Flags;
      WORD    cxIcon;
+@@ -3286,7 +3287,7 @@ typedef struct _PROPSHEETUI_GETICON_INFO {
+     } PROPSHEETUI_GETICON_INFO, *PPROPSHEETUI_GETICON_INFO;
+ 
+ 
+-typedef LONG (FAR WINAPI *PFNPROPSHEETUI)(PPROPSHEETUI_INFO   pPSUIInfo,
++typedef LONG (FAR WINAPI *PFNPROPSHEETUI)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPROPSHEETUI_INFO   pPSUIInfo,
+                                    LPARAM              lParam);
+ 
+ 
 @@ -3610,7 +3611,7 @@ typedef LONG (FAR WINAPI *PFNPROPSHEETUI)(PPROPSHEETUI_INFO   pPSUIInfo,
  #define PSUIHDRF_DEFTITLE       0x0010
  #define PSUIHDRF_EXACT_PTITLE   0x0020

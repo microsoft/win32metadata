@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
-index f987975a89..58b9708a87 100644
+index f987975a89..b24b52df22 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 @@ -21,6 +21,7 @@
@@ -100,6 +100,24 @@ index f987975a89..58b9708a87 100644
  {
      ULONGLONG coffLow;
      ULONGLONG coffHigh;
+@@ -871,7 +872,7 @@ typedef CLFS_ARCHIVE_DESCRIPTOR *PCLFS_ARCHIVE_DESCRIPTOR, **PPCLFS_ARCHIVE_DESC
+ // Allocate a blocks for marshaled reads or writes
+ //
+ 
+-typedef PVOID (* CLFS_BLOCK_ALLOCATION) (ULONG cbBufferLength, PVOID pvUserContext);
++typedef PVOID (* CLFS_BLOCK_ALLOCATION) (ULONG cbBufferLength, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvUserContext);
+ 
+ //
+ // CLFS_DEALLOCATION_ROUTINE
+@@ -879,7 +880,7 @@ typedef PVOID (* CLFS_BLOCK_ALLOCATION) (ULONG cbBufferLength, PVOID pvUserConte
+ // Deallocate buffers allocated by the CLFS_ALLOCATION_ROUTINE.
+ //
+ 
+-typedef void (* CLFS_BLOCK_DEALLOCATION) (PVOID pvBuffer, PVOID pvUserContext);
++typedef void (* CLFS_BLOCK_DEALLOCATION) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvUserContext);
+ #endif /* NTDDI_VERSION || _WIN32_WINNT */
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)
 @@ -889,7 +890,7 @@ typedef void (* CLFS_BLOCK_DEALLOCATION) (PVOID pvBuffer, PVOID pvUserContext);
  // Describes the archive support behavior for the log.
  //

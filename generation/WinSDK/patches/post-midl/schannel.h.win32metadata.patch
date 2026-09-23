@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
-index a2208f5de6..2817effec5 100644
+index a2208f5de6..4641870f10 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/schannel.h
 @@ -22,6 +22,7 @@
@@ -217,7 +217,14 @@ index a2208f5de6..2817effec5 100644
      DWORD           Version;
      DWORD           SerialNumber[4];
      ALG_ID          SignatureAlgorithm;
-@@ -1024,6 +1027,7 @@ SslGenerateRandomBits(
+@@ -1018,27 +1021,29 @@ SslGenerateKeyPair(
+ VOID
+ WINAPI
+ SslGenerateRandomBits(
+-    PUCHAR      pRandomData,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUCHAR      pRandomData,
+     LONG        cRandomData
+     );
  
  // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
  // to get the same functionality instead.
@@ -225,7 +232,13 @@ index a2208f5de6..2817effec5 100644
  BOOL
  WINAPI
  SslCrackCertificate(
-@@ -1035,6 +1039,7 @@ SslCrackCertificate(
+-    PUCHAR              pbCertificate,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUCHAR              pbCertificate,
+     DWORD               cbCertificate,
+     DWORD               dwFlags,
+-    PX509Certificate *  ppCertificate
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PX509Certificate *  ppCertificate
+     );
  
  // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
  // to get the same functionality instead.
@@ -233,6 +246,33 @@ index a2208f5de6..2817effec5 100644
  VOID
  WINAPI
  SslFreeCertificate(
+-    PX509Certificate    pCertificate
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PX509Certificate    pCertificate
+     );
+ 
+ DWORD
+@@ -1060,10 +1065,10 @@ SslGetDefaultIssuers(
+ typedef BOOL
+ (WINAPI * SSL_CRACK_CERTIFICATE_FN)
+ (
+-    PUCHAR              pbCertificate,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUCHAR              pbCertificate,
+     DWORD               cbCertificate,
+     BOOL                VerifySignature,
+-    PX509Certificate *  ppCertificate
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PX509Certificate *  ppCertificate
+ );
+ 
+ 
+@@ -1072,7 +1077,7 @@ typedef BOOL
+ typedef VOID
+ (WINAPI * SSL_FREE_CERTIFICATE_FN)
+ (
+-    PX509Certificate    pCertificate
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PX509Certificate    pCertificate
+ );
+ 
+ 
 @@ -1086,7 +1091,8 @@ typedef SECURITY_STATUS
      _In_                                    DWORD       Flags
  );

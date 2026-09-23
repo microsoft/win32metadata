@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
-index 5025403f58..69bd008912 100644
+index 5025403f58..d1b78a8e79 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
 @@ -16,6 +16,7 @@
@@ -72,14 +72,15 @@ index 5025403f58..69bd008912 100644
  //    dwProvFlags, any signed code verification error.
  //
 -extern LONG WINAPI WinVerifyTrust(HWND hwnd, GUID *pgActionID,
-+_Windows_SupportedOS_WindowsXP_ extern LONG WINAPI WinVerifyTrust(HWND hwnd, GUID *pgActionID,
-                                   LPVOID pWVTData);
+-                                  LPVOID pWVTData);
++_Windows_SupportedOS_WindowsXP_ extern LONG WINAPI WinVerifyTrust(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgActionID,
++                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pWVTData);
  
  // This API returns a Win32 error code, previously it was declared to return HRESULT.
  // Do not test the result with SUCCEEDED() or FAILED(), any non-zero value represents
  // verification failure. To avoid this problem use WinVerifyTrust() instead.
 -extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *pWinTrustData);
-+_Windows_SupportedOS_WindowsXP_ extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *pWinTrustData);
++_Windows_SupportedOS_WindowsXP_ extern long WINAPI WinVerifyTrustEx(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgActionID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WINTRUST_DATA *pWinTrustData);
  
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
@@ -88,7 +89,7 @@ index 5025403f58..69bd008912 100644
  //  of retrieving the DWORD representing the Policy Flags.
  //
 -extern void WINAPI      WintrustGetRegPolicyFlags(DWORD *pdwPolicyFlags);
-+_Windows_SupportedOS_WindowsXP_ extern void WINAPI      WintrustGetRegPolicyFlags(_Win32_AssociatedEnum_(WINTRUST_POLICY_FLAGS) DWORD *pdwPolicyFlags);
++_Windows_SupportedOS_WindowsXP_ extern void WINAPI      WintrustGetRegPolicyFlags(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Win32_AssociatedEnum_(WINTRUST_POLICY_FLAGS) DWORD *pdwPolicyFlags);
  
  //////////////////////////////////////////////////////////////////////////////
  //
@@ -124,7 +125,7 @@ index 5025403f58..69bd008912 100644
  //      FALSE                           fail.
  //
 -extern BOOL WINAPI WintrustLoadFunctionPointers(GUID *pgActionID, CRYPT_PROVIDER_FUNCTIONS *pPfns);
-+_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI WintrustLoadFunctionPointers(GUID *pgActionID, CRYPT_PROVIDER_FUNCTIONS *pPfns);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI WintrustLoadFunctionPointers(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgActionID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_FUNCTIONS *pPfns);
  
  
  //////////////////////////////////////////////////////////////////////////////
@@ -146,15 +147,17 @@ index 5025403f58..69bd008912 100644
                                                             _In_ const char *pszUsageOID,
                                                             _Inout_ CRYPT_PROVIDER_DEFUSAGE *psUsage);
  
+-extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(CRYPT_PROVIDER_DATA *pProvData,
 +_Windows_SupportedOS_WindowsXP_ 
 +
- extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(CRYPT_PROVIDER_DATA *pProvData,
++extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_DATA *pProvData,
                                                                         DWORD idxSigner,
                                                                         BOOL fCounterSigner,
                                                                         DWORD idxCounterSigner);
+-extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(CRYPT_PROVIDER_SGNR *pSgnr,
 +_Windows_SupportedOS_WindowsXP_ 
 +
- extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(CRYPT_PROVIDER_SGNR *pSgnr,
++extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_SGNR *pSgnr,
                                                                       DWORD idxCert);
  
 +_Windows_SupportedOS_WindowsXP_ 
@@ -162,13 +165,14 @@ index 5025403f58..69bd008912 100644
  extern CRYPT_PROVIDER_DATA * WINAPI     WTHelperProvDataFromStateData(HANDLE hStateData);
  
 -extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(CRYPT_PROVIDER_DATA *pProvData,
-+_Windows_SupportedOS_WindowsXP_ extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(CRYPT_PROVIDER_DATA *pProvData,
-                                                                             GUID *pgProviderID);
+-                                                                            GUID *pgProviderID);
 -extern BOOL WINAPI                      WTHelperCertIsSelfSigned(DWORD dwEncoding, CERT_INFO *pCert);
-+_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI                      WTHelperCertIsSelfSigned(DWORD dwEncoding, CERT_INFO *pCert);
++_Windows_SupportedOS_WindowsXP_ extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_DATA *pProvData,
++                                                                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgProviderID);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI                      WTHelperCertIsSelfSigned(DWORD dwEncoding, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CERT_INFO *pCert);
  
 -extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(CRYPT_PROVIDER_DATA *pProvData);
-+_Windows_SupportedOS_WindowsVista_ extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(CRYPT_PROVIDER_DATA *pProvData);
++_Windows_SupportedOS_WindowsVista_ extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_DATA *pProvData);
  
  //////////////////////////////////////////////////////////////////////////////
  //

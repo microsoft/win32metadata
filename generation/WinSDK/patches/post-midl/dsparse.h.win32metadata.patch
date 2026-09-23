@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
-index 885f3d642d..bd97322a88 100644
+index 885f3d642d..f20c964b55 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsparse.h
 @@ -27,6 +27,7 @@ Notes:
@@ -213,7 +213,15 @@ index 885f3d642d..bd97322a88 100644
  DWORD
  WINAPI
  DsCrackSpn3W(
-@@ -781,7 +812,7 @@ DsCrackSpn3W(
+@@ -774,14 +805,14 @@ DsCrackSpn3W(
+     _Out_writes_to_ (*pcHostName, *pcHostName) LPWSTR HostName,
+     IN OUT DWORD *pcInstanceName,
+     _Out_writes_to_ (*pcInstanceName, *pcInstanceName) LPWSTR InstanceName,
+-    OUT USHORT *pPortNumber,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT USHORT *pPortNumber,
+     IN OUT DWORD *pcDomainName,
+     _Out_writes_to_ (*pcDomainName, *pcDomainName) LPWSTR DomainName,
+     IN OUT DWORD *pcRealmName,
      _Out_writes_to_ (*pcRealmName, *pcRealmName) LPWSTR RealmName
      );
  

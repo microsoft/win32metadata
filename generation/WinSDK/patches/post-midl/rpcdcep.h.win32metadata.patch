@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
-index 8b038177ce..305b47b542 100644
+index 8b038177ce..b2ccd03a2e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,108 @@ index 8b038177ce..305b47b542 100644
  #include <winapifamily.h>
  
  /*++
-@@ -549,7 +550,7 @@ I_RpcBindingInqMarshalledTargetInfo (
+@@ -71,11 +72,11 @@ typedef struct _RPC_MESSAGE
+ 
+ typedef RPC_STATUS
+ RPC_ENTRY RPC_FORWARD_FUNCTION(
+-                       IN UUID             __RPC_FAR * InterfaceId,
+-                       IN RPC_VERSION      __RPC_FAR * InterfaceVersion,
+-                       IN UUID             __RPC_FAR * ObjectId,
+-                       IN unsigned char         __RPC_FAR * Rpcpro,
+-                       IN void __RPC_FAR * __RPC_FAR * ppDestEndpoint);
++                       _WIN32META_ANNOTATION_("win32metadata:out") IN UUID             __RPC_FAR * InterfaceId,
++                       _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_VERSION      __RPC_FAR * InterfaceVersion,
++                       _WIN32META_ANNOTATION_("win32metadata:out") IN UUID             __RPC_FAR * ObjectId,
++                       _WIN32META_ANNOTATION_("win32metadata:out") IN unsigned char         __RPC_FAR * Rpcpro,
++                       _WIN32META_ANNOTATION_("win32metadata:out") IN void __RPC_FAR * __RPC_FAR * ppDestEndpoint);
+ 
+ enum RPC_ADDRESS_CHANGE_TYPE
+ {
+@@ -86,7 +87,7 @@ enum RPC_ADDRESS_CHANGE_TYPE
+ 
+ typedef void
+ RPC_ENTRY RPC_ADDRESS_CHANGE_FN(
+-                        IN void * arg
++                        _WIN32META_ANNOTATION_("win32metadata:out") IN void * arg
+                         );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+@@ -257,7 +258,7 @@ RPC_STATUS
+ RPC_ENTRY
+ I_RpcGetBufferWithObject (
+     IN OUT RPC_MESSAGE __RPC_FAR * Message,
+-    IN UUID * ObjectUuid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN UUID * ObjectUuid
+     );
+ 
+ RPCRTAPI
+@@ -323,14 +324,14 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ I_RpcClearMutex (
+-    IN I_RPC_MUTEX Mutex
++    _WIN32META_ANNOTATION_("win32metadata:out") IN I_RPC_MUTEX Mutex
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ I_RpcDeleteMutex (
+-    IN I_RPC_MUTEX Mutex
++    _WIN32META_ANNOTATION_("win32metadata:out") IN I_RPC_MUTEX Mutex
+     );
+ 
+ RPCRTAPI
+@@ -344,7 +345,7 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ I_RpcFree (
+-    IN void __RPC_FAR * Object
++    _WIN32META_ANNOTATION_("win32metadata:out") IN void __RPC_FAR * Object
+     );
+ 
+ #define RPC_SYSTEM_HANDLE_FREE_UNRETRIEVED 1
+@@ -424,7 +425,7 @@ I_RpcSystemHandleTypeSpecificWork (
+ typedef
+ void
+ (__RPC_USER __RPC_FAR * PRPC_RUNDOWN) (
+-    void __RPC_FAR * AssociationContext
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void __RPC_FAR * AssociationContext
+     );
+ 
+ RPCRTAPI
+@@ -490,24 +491,24 @@ RPC_STATUS
+ RPC_ENTRY
+ I_RpcNsInterfaceUnexported (
+     IN unsigned long EntryNameSyntax,
+-    IN unsigned short *EntryName,
+-    IN RPC_SERVER_INTERFACE * RpcInterfaceInformation
++    _WIN32META_ANNOTATION_("win32metadata:out") IN unsigned short *EntryName,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_SERVER_INTERFACE * RpcInterfaceInformation
+     );
+ 
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcBindingToStaticStringBindingW (
+-    IN RPC_BINDING_HANDLE Binding,
+-    OUT unsigned short **StringBinding
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned short **StringBinding
+     );
+ 
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcBindingInqSecurityContext (
+-    IN RPC_BINDING_HANDLE Binding,
+-    OUT void **SecurityContextHandle
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT void **SecurityContextHandle
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+@@ -549,26 +550,26 @@ I_RpcBindingInqMarshalledTargetInfo (
  #endif // (NTDDI_VERSION >= NTDDI_WS03)
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -16,7 +117,22 @@ index 8b038177ce..305b47b542 100644
  RPC_STATUS
  RPC_ENTRY
  I_RpcBindingInqLocalClientPID (
-@@ -568,7 +569,7 @@ I_RpcBindingHandleToAsyncHandle (
+-    IN RPC_BINDING_HANDLE Binding,
+-    OUT unsigned long *Pid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long *Pid
+     );
+ 
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcBindingHandleToAsyncHandle (
+-    IN RPC_BINDING_HANDLE Binding,
+-    OUT void **AsyncHandle
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT void **AsyncHandle
+     );
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  
  #ifdef RPC_UNICODE_SUPPORTED
  
@@ -88,3 +204,186 @@ index 8b038177ce..305b47b542 100644
  _Must_inspect_result_
  RPC_STATUS
  RPC_ENTRY
+@@ -733,7 +734,7 @@ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerCheckClientRestriction (
+-    IN RPC_BINDING_HANDLE Context
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Context
+     );
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+@@ -748,8 +749,8 @@ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcBindingInqTransportType (
+-    IN RPC_BINDING_HANDLE Binding,
+-    OUT unsigned int __RPC_FAR * Type
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned int __RPC_FAR * Type
+     );
+ 
+ typedef struct _RPC_TRANSFER_SYNTAX
+@@ -764,10 +765,10 @@ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcIfInqTransferSyntaxes (
+-    IN RPC_IF_HANDLE RpcIfHandle,
+-    OUT RPC_TRANSFER_SYNTAX __RPC_FAR * TransferSyntaxes,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_IF_HANDLE RpcIfHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_TRANSFER_SYNTAX __RPC_FAR * TransferSyntaxes,
+     IN unsigned int TransferSyntaxSize,
+-    OUT unsigned int __RPC_FAR * TransferSyntaxCount
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned int __RPC_FAR * TransferSyntaxCount
+     );
+ 
+ RPCRTAPI
+@@ -775,7 +776,7 @@ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+ I_UuidCreate (
+-    OUT UUID __RPC_FAR * Uuid
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT UUID __RPC_FAR * Uuid
+     );
+ 
+ RPCRTAPI
+@@ -790,8 +791,8 @@ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcBindingCopy (
+-    IN RPC_BINDING_HANDLE SourceBinding,
+-    OUT RPC_BINDING_HANDLE __RPC_FAR * DestinationBinding
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE SourceBinding,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE __RPC_FAR * DestinationBinding
+     );
+ 
+ RPCRTAPI
+@@ -799,7 +800,7 @@ RPC_STATUS
+ RPC_ENTRY
+ I_RpcBindingIsClientLocal (
+     IN OPTIONAL RPC_BINDING_HANDLE BindingHandle,
+-    OUT unsigned int __RPC_FAR * ClientLocalFlag
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned int __RPC_FAR * ClientLocalFlag
+     );
+ 
+ RPCRTAPI
+@@ -841,7 +842,7 @@ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerRegisterForwardFunction (
+-    IN RPC_FORWARD_FUNCTION  * pForwardFunction
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_FORWARD_FUNCTION  * pForwardFunction
+     );
+ 
+ RPC_ADDRESS_CHANGE_FN * RPC_ENTRY
+@@ -851,7 +852,7 @@ I_RpcServerInqAddressChangeFn(
+ 
+ RPC_STATUS RPC_ENTRY
+ I_RpcServerSetAddressChangeFn(
+-    IN RPC_ADDRESS_CHANGE_FN * pAddressChangeFn
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_ADDRESS_CHANGE_FN * pAddressChangeFn
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+@@ -865,20 +866,20 @@ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerInqLocalConnAddress (
+-    IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
+     IN OUT void *Buffer,
+     IN OUT unsigned long *BufferSize,
+-    OUT unsigned long *AddressFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long *AddressFormat
+     );
+ 
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerInqRemoteConnAddress (
+-    IN RPC_BINDING_HANDLE Binding,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_BINDING_HANDLE Binding,
+     IN OUT void *Buffer,
+     IN OUT unsigned long *BufferSize,
+-    OUT unsigned long *AddressFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long *AddressFormat
+     );
+ 
+ RPCRTAPI
+@@ -917,7 +918,7 @@ I_RpcConnectionSetSockBuffSize(
+ typedef
+ void
+ (*RPCLT_PDU_FILTER_FUNC) (
+-    IN void *Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN void *Buffer,
+     IN unsigned int BufferLength,
+     IN int fDatagram
+     );
+@@ -946,8 +947,8 @@ I_RpcServerStopListening(
+     );
+ 
+ typedef RPC_STATUS (*RPC_BLOCKING_FN) (
+-    IN void * hWnd,
+-    IN void * Context,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN void * hWnd,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN void * Context,
+     IN OPTIONAL void * hSyncEvent
+     );
+ 
+@@ -1010,7 +1011,7 @@ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcServerInqTransportType(
+-    OUT unsigned int __RPC_FAR * Type
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned int __RPC_FAR * Type
+     );
+ 
+ RPCRTAPI
+@@ -1069,30 +1070,30 @@ typedef RPC_STATUS
+ typedef RPC_STATUS
+ (RPC_ENTRY *I_RpcProxyGetClientAddressFn)
+         (
+-        IN void *Context,
++        _WIN32META_ANNOTATION_("win32metadata:out") IN void *Context,
+         OUT char *Buffer,
+-        OUT unsigned long *BufferLength
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long *BufferLength
+         );
+ 
+ typedef RPC_STATUS
+ (RPC_ENTRY *I_RpcProxyGetConnectionTimeoutFn)
+         (
+-        OUT unsigned long *ConnectionTimeout
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long *ConnectionTimeout
+         );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03)
+ typedef RPC_STATUS
+ (RPC_ENTRY *I_RpcPerformCalloutFn)
+     (
+-    IN void *Context,
+-    IN RDR_CALLOUT_STATE *CallOutState,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN void *Context,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RDR_CALLOUT_STATE *CallOutState,
+     IN RPC_HTTP_REDIRECTOR_STAGE Stage
+     );
+ 
+ typedef void
+ (RPC_ENTRY *I_RpcFreeCalloutStateFn)
+     (
+-    IN RDR_CALLOUT_STATE *CallOutState
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RDR_CALLOUT_STATE *CallOutState
+     );
+ 
+ typedef RPC_STATUS
+@@ -1219,8 +1220,8 @@ void
+ RPC_ENTRY
+ I_RpcRecordCalloutFailure (
+     IN RPC_STATUS RpcStatus,
+-    IN RDR_CALLOUT_STATE *CallOutState,
+-    IN unsigned short *DllName
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RDR_CALLOUT_STATE *CallOutState,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN unsigned short *DllName
+     );
+ #endif // (NTDDI_VERSION >= NTDDI_WS03)
+ 

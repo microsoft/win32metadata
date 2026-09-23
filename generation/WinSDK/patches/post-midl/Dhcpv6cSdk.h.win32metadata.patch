@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
-index 6de24f3b0b..0c20c195e2 100644
+index 6de24f3b0b..a6a14fc7c2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
 @@ -1,4 +1,5 @@
@@ -50,7 +50,7 @@ index 6de24f3b0b..0c20c195e2 100644
          DWORD nPrefixes;		// number of prefixes.
          _Field_size_(nPrefixes) LPDHCPV6Prefix prefixArray;  // Array of prefixes
  	DWORD iaid;                     //The 32 bit Identity Association identifier for the prefix option.
-@@ -150,21 +151,21 @@ typedef struct _DHCPV6PrefixLeaseInformation {
+@@ -150,27 +151,27 @@ typedef struct _DHCPV6PrefixLeaseInformation {
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -58,8 +58,9 @@ index 6de24f3b0b..0c20c195e2 100644
 +_Windows_SupportedOS_WindowsVista_ VOID
  APIENTRY
 -Dhcpv6CApiInitialize(
+-    OUT     LPDWORD                Version
 +  Dhcpv6CApiInitialize(
-     OUT     LPDWORD                Version
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                Version
  );
  
 -VOID
@@ -76,9 +77,18 @@ index 6de24f3b0b..0c20c195e2 100644
 -Dhcpv6RequestParams(                                // request parameters of client
 +  Dhcpv6RequestParams(                                // request parameters of client
  IN      BOOL		     		              forceNewInform,
- IN      LPVOID                 		reserved,
+-IN      LPVOID                 		reserved,
++_WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 		reserved,
  _In_ IN      LPWSTR                 		adapterName,
-@@ -180,18 +181,18 @@ IN OUT  LPDWORD                		pSize
+-IN      LPDHCPV6CAPI_CLASSID     	classId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCPV6CAPI_CLASSID     	classId,
+ IN OUT  DHCPV6CAPI_PARAMS_ARRAY 	recdParams,
+-IN      LPBYTE                 		buffer,
++_WIN32META_ANNOTATION_("win32metadata:out") IN      LPBYTE                 		buffer,
+ IN OUT  LPDWORD                		pSize
+ );
+ 
+@@ -180,31 +181,31 @@ IN OUT  LPDWORD                		pSize
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -88,7 +98,8 @@ index 6de24f3b0b..0c20c195e2 100644
 -Dhcpv6RequestPrefix(
 +  Dhcpv6RequestPrefix(
  IN _In_ LPWSTR		adapterName,
- IN LPDHCPV6CAPI_CLASSID 		pclassId,
+-IN LPDHCPV6CAPI_CLASSID 		pclassId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6CAPI_CLASSID 		pclassId,
  IN OUT LPDHCPV6PrefixLeaseInformation	prefixleaseInfo,
  _Out_ DWORD* 			pdwTimeToWait
  );
@@ -99,9 +110,10 @@ index 6de24f3b0b..0c20c195e2 100644
 -Dhcpv6RenewPrefix(
 +  Dhcpv6RenewPrefix(
  IN _In_ LPWSTR		adapterName,
- IN LPDHCPV6CAPI_CLASSID 		pclassId,
+-IN LPDHCPV6CAPI_CLASSID 		pclassId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6CAPI_CLASSID 		pclassId,
  IN OUT LPDHCPV6PrefixLeaseInformation	prefixleaseInfo,
-@@ -199,9 +200,9 @@ _Out_ DWORD* 			pdwTimeToWait,
+ _Out_ DWORD* 			pdwTimeToWait,
  IN DWORD 				bValidatePrefix
  );
  
@@ -111,5 +123,10 @@ index 6de24f3b0b..0c20c195e2 100644
 -Dhcpv6ReleasePrefix(
 +  Dhcpv6ReleasePrefix(
  _In_ IN LPWSTR				adapterName,
- IN LPDHCPV6CAPI_CLASSID     		classId,
- IN LPDHCPV6PrefixLeaseInformation	leaseInfo
+-IN LPDHCPV6CAPI_CLASSID     		classId,
+-IN LPDHCPV6PrefixLeaseInformation	leaseInfo
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6CAPI_CLASSID     		classId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6PrefixLeaseInformation	leaseInfo
+ );
+ 
+ 

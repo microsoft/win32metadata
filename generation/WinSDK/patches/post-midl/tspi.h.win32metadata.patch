@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TSPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/TSPI.h
+index 868efaf50e..8cde720a0e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TSPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TSPI.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0000    // Increment this if a change has global effects
+ 
+ The  Telephony  API  is jointly copyrighted by Intel and Microsoft.  You are
+@@ -117,7 +118,7 @@ typedef void (CALLBACK * PHONEEVENT)(
+ typedef LONG (CALLBACK * TUISPIDLLCALLBACK)(
+     DWORD_PTR           dwObjectID,
+     DWORD               dwObjectType,
+-    LPVOID              lpParams,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID              lpParams,
+     DWORD               dwSize
+     );
+ 

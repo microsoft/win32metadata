@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h b/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
-index cfe3e2f3f6..e3e6d2854a 100644
+index cfe3e2f3f6..580abfdbdd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
 @@ -1,3 +1,4 @@
@@ -13,8 +13,8 @@ index cfe3e2f3f6..e3e6d2854a 100644
  #if (_WIN32_IE >= 0x0605)
 -HRESULT WINAPI RunSetupCommandA(HWND hWnd, LPCSTR szCmdName, LPCSTR szInfSection, LPCSTR szDir, LPCSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
 -HRESULT WINAPI RunSetupCommandW(HWND hWnd, LPCWSTR szCmdName, LPCWSTR szInfSection, LPCWSTR szDir, LPCWSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RunSetupCommandA(HWND hWnd, LPCSTR szCmdName, LPCSTR szInfSection, LPCSTR szDir, LPCSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RunSetupCommandW(HWND hWnd, LPCWSTR szCmdName, LPCWSTR szInfSection, LPCWSTR szDir, LPCWSTR lpszTitle, HANDLE* phEXE, DWORD dwFlags, LPVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI RunSetupCommandA(HWND hWnd, LPCSTR szCmdName, LPCSTR szInfSection, LPCSTR szDir, LPCSTR lpszTitle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE* phEXE, DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI RunSetupCommandW(HWND hWnd, LPCWSTR szCmdName, LPCWSTR szInfSection, LPCWSTR szDir, LPCWSTR lpszTitle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE* phEXE, DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvReserved);
  #ifdef UNICODE
  #define RunSetupCommand  RunSetupCommandW
  #else
@@ -73,8 +73,8 @@ index cfe3e2f3f6..e3e6d2854a 100644
  
 -HRESULT WINAPI ExecuteCabA(HWND hwnd, CABINFOA* pCab, LPVOID pReserved);
 -HRESULT WINAPI ExecuteCabW(HWND hwnd, CABINFOW* pCab, LPVOID pReserved);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI ExecuteCabA(HWND hwnd, CABINFOA* pCab, LPVOID pReserved);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI ExecuteCabW(HWND hwnd, CABINFOW* pCab, LPVOID pReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI ExecuteCabA(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CABINFOA* pCab, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI ExecuteCabW(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CABINFOW* pCab, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pReserved);
  #ifdef UNICODE
  #define ExecuteCab  ExecuteCabW
  #else
@@ -193,6 +193,15 @@ index cfe3e2f3f6..e3e6d2854a 100644
  #ifdef UNICODE
  #define GetVersionFromFileEx  GetVersionFromFileExW
  #else
+@@ -732,7 +733,7 @@ HRESULT WINAPI GetVersionFromFileEx(LPCSTR lpszFilename, _Out_ LPDWORD pdwMSVer,
+ // RETURNS:     TURE  has admin right; FLSE  no admin right.
+ /////////////////////////////////////////////////////////////////////////////
+ 
+-BOOL WINAPI IsNTAdmin(DWORD dwReserved, DWORD *lpdwReserved);
++BOOL WINAPI IsNTAdmin(DWORD dwReserved, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *lpdwReserved);
+ 
+ 
+ /////////////////////////////////////////////////////////////////////////////
 @@ -746,8 +747,8 @@ BOOL WINAPI IsNTAdmin(DWORD dwReserved, DWORD *lpdwReserved);
  /////////////////////////////////////////////////////////////////////////////
  
@@ -219,8 +228,8 @@ index cfe3e2f3f6..e3e6d2854a 100644
  #if (_WIN32_IE >= 0x0605)
 -HRESULT WINAPI OpenINFEngineA(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
 -HRESULT WINAPI OpenINFEngineW(LPCWSTR pszInfFilename, LPCWSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI OpenINFEngineA(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI OpenINFEngineW(LPCWSTR pszInfFilename, LPCWSTR pszInstallSection, DWORD dwFlags, HINF* phInf, PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI OpenINFEngineA(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF* phInf, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI OpenINFEngineW(LPCWSTR pszInfFilename, LPCWSTR pszInstallSection, DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF* phInf, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvReserved);
  #ifdef UNICODE
  #define OpenINFEngine  OpenINFEngineW
  #else
@@ -230,19 +239,28 @@ index cfe3e2f3f6..e3e6d2854a 100644
  #if (_WIN32_IE >= 0x0605)
 -HRESULT WINAPI TranslateInfStringExA(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
 -HRESULT WINAPI TranslateInfStringExW(HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI TranslateInfStringExA(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringExW(HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI TranslateInfStringExA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringExW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
  #ifdef UNICODE
  #define TranslateInfStringEx  TranslateInfStringExW
  #else
+@@ -845,7 +846,7 @@ HRESULT WINAPI TranslateInfStringEx(HINF hInf, LPCSTR pszInfFilename, LPCSTR psz
+ //      E_FAIL  failure
+ /////////////////////////////////////////////////////////////////////////////
+ 
+-HRESULT WINAPI CloseINFEngine(HINF hInf);
++HRESULT WINAPI CloseINFEngine(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf);
+ 
+ 
+ /////////////////////////////////////////////////////////////////////////////
 @@ -859,8 +860,8 @@ HRESULT WINAPI CloseINFEngine(HINF hInf);
  /////////////////////////////////////////////////////////////////////////////
  
  #if (_WIN32_IE >= 0x0605)
 -HRESULT WINAPI ExtractFilesA(LPCSTR pszCabName, LPCSTR pszExpandDir, DWORD dwFlags, LPCSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
 -HRESULT WINAPI ExtractFilesW(LPCWSTR pszCabName, LPCWSTR pszExpandDir, DWORD dwFlags, LPCWSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI ExtractFilesA(LPCSTR pszCabName, LPCSTR pszExpandDir, DWORD dwFlags, LPCSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI ExtractFilesW(LPCWSTR pszCabName, LPCWSTR pszExpandDir, DWORD dwFlags, LPCWSTR pszFileList, LPVOID lpReserved, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI ExtractFilesA(LPCSTR pszCabName, LPCSTR pszExpandDir, DWORD dwFlags, LPCSTR pszFileList, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpReserved, DWORD dwReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI ExtractFilesW(LPCWSTR pszCabName, LPCWSTR pszExpandDir, DWORD dwFlags, LPCWSTR pszFileList, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpReserved, DWORD dwReserved);
  #ifdef UNICODE
  #define ExtractFiles  ExtractFilesW
  #else
@@ -283,8 +301,8 @@ index cfe3e2f3f6..e3e6d2854a 100644
  
 -HRESULT WINAPI SetPerUserSecValuesA(PERUSERSECTIONA* pPerUser);
 -HRESULT WINAPI SetPerUserSecValuesW(PERUSERSECTIONW* pPerUser);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI SetPerUserSecValuesA(PERUSERSECTIONA* pPerUser);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI SetPerUserSecValuesW(PERUSERSECTIONW* pPerUser);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI SetPerUserSecValuesA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PERUSERSECTIONA* pPerUser);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI SetPerUserSecValuesW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PERUSERSECTIONW* pPerUser);
  #ifdef UNICODE
  #define SetPerUserSecValues  SetPerUserSecValuesW
  #else

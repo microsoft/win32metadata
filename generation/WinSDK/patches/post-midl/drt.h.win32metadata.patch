@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
-index 8690977834..3b29b76a72 100644
+index 8690977834..1a7f04d46f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index 8690977834..3b29b76a72 100644
  //+---------------------------------------------------------------------------
  //
  // Microsoft Windows
+@@ -283,7 +284,7 @@ typedef const DRT_SECURITY_PROVIDER *PCDRT_SECURITY_PROVIDER;
+ 
+ typedef PVOID   DRT_BOOTSTRAP_RESOLVE_CONTEXT;
+ 
+-typedef void (CALLBACK* DRT_BOOTSTRAP_RESOLVE_CALLBACK)(HRESULT hr, PVOID pvContext, SOCKET_ADDRESS_LIST* pAddresses, BOOL fFatalError);
++typedef void (CALLBACK* DRT_BOOTSTRAP_RESOLVE_CALLBACK)(HRESULT hr, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvContext, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SOCKET_ADDRESS_LIST* pAddresses, BOOL fFatalError);
+ 
+ typedef struct drt_bootstrap_provider_tag
+ {
 @@ -397,20 +398,20 @@ typedef struct drt_event_data_tag
      {
          struct

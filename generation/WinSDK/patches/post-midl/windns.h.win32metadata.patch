@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
-index f213f55c62..d674fddb68 100644
+index f213f55c62..573477e95a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
 @@ -1,3 +1,4 @@
@@ -60,7 +60,7 @@ index f213f55c62..d674fddb68 100644
  DnsRecordSetDetach(
      _Inout_         PDNS_RECORD     pRecordList
      );
-@@ -626,7 +627,7 @@ typedef enum
+@@ -626,10 +627,10 @@ typedef enum
  }
  DNS_FREE_TYPE;
  
@@ -68,7 +68,11 @@ index f213f55c62..d674fddb68 100644
 +_Windows_SupportedOS_WindowsXP_ VOID
  WINAPI
  DnsFree(
-     _Pre_opt_valid_ _Frees_ptr_opt_    PVOID    pData,
+-    _Pre_opt_valid_ _Frees_ptr_opt_    PVOID    pData,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Pre_opt_valid_ _Frees_ptr_opt_    PVOID    pData,
+     _In_        DNS_FREE_TYPE   FreeType
+     );
+ 
 @@ -763,34 +764,34 @@ DnsIsFlatRecord(
  
  
@@ -128,6 +132,15 @@ index f213f55c62..d674fddb68 100644
  WINAPI
  DnsCancelQuery(
      _In_        PDNS_QUERY_CANCEL    pCancelHandle
+@@ -991,7 +992,7 @@ DNS_QUERY_RAW_RESULT;
+ VOID
+ WINAPI
+ DnsQueryRawResultFree(
+-    _Frees_ptr_opt_ DNS_QUERY_RAW_RESULT *queryResults
++    _WIN32META_ANNOTATION_("win32metadata:in") _Frees_ptr_opt_ DNS_QUERY_RAW_RESULT *queryResults
+ );
+ 
+ typedef
 @@ -1103,20 +1104,20 @@ DnsCancelQueryRaw(
  //  the future.
  //
@@ -301,7 +314,7 @@ index f213f55c62..d674fddb68 100644
  WINAPI
  DnsGetProxyInformation(
      _In_        PCWSTR                          hostName,
-@@ -1365,7 +1366,7 @@ DnsGetProxyInformation(
+@@ -1365,10 +1366,10 @@ DnsGetProxyInformation(
      _In_opt_    void *                          completionContext
      );
  
@@ -309,7 +322,11 @@ index f213f55c62..d674fddb68 100644
 +_Windows_SupportedOS_Windows7_ VOID
  WINAPI
  DnsFreeProxyName(
-     _Frees_ptr_opt_ PWSTR   proxyName
+-    _Frees_ptr_opt_ PWSTR   proxyName
++    _WIN32META_ANNOTATION_("win32metadata:in") _Frees_ptr_opt_ PWSTR   proxyName
+     );
+ 
+ //
 @@ -1675,7 +1676,7 @@ typedef struct _DNS_SERVICE_INSTANCE
  
  #ifndef __midl

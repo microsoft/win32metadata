@@ -1,0 +1,50 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
+index b981cef443..b730cd4739 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************
+ *                                                       *
+ *   Copyright (C) Microsoft. All rights reserved.       *
+@@ -332,7 +333,7 @@ struct SSVARIANT
+ interface IUMSInitialize : public IUnknown
+ {
+ public:
+-    virtual HRESULT STDMETHODCALLTYPE Initialize (VOID * pUMS) = 0;
++    virtual HRESULT STDMETHODCALLTYPE Initialize (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID * pUMS) = 0;
+ };
+ 
+ 
+@@ -454,7 +455,7 @@ EXTERN_C const IID IID_ISQLServerErrorInfo;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetErrorInfo( 
+-            /* [out] */ SSERRORINFO __RPC_FAR *__RPC_FAR *ppErrorInfo,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SSERRORINFO __RPC_FAR *__RPC_FAR *ppErrorInfo,
+             _Outptr_
+             /* [out] */ OLECHAR __RPC_FAR *__RPC_FAR *ppStringsBuffer) = 0;
+         
+@@ -573,7 +574,7 @@ EXTERN_C const IID IID_IRowsetFastLoad;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InsertRow( 
+             /* [in] */ HACCESSOR hAccessor,
+-            /* [in] */ void __RPC_FAR *pData) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void __RPC_FAR *pData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Commit( 
+             /* [in] */ BOOL fDone) = 0;
+@@ -710,10 +711,10 @@ EXTERN_C const IID IID_ISchemaLock;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSchemaLock( 
+-            /* [in] */ DBID __RPC_FAR *pTableID,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") DBID __RPC_FAR *pTableID,
+             /* [in] */ LOCKMODE lmMode,
+-            /* [out] */ HANDLE __RPC_FAR *phLockHandle,
+-            /* [out] */ ULONGLONG __RPC_FAR *pTableVersion) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HANDLE __RPC_FAR *phLockHandle,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG __RPC_FAR *pTableVersion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ReleaseSchemaLock( 
+             /* [in] */ HANDLE hLockHandle) = 0;

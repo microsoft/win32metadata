@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
-index 69cba58388..21bc31363c 100644
+index 69cba58388..6028e6e30c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
 @@ -1,3 +1,4 @@
@@ -25,6 +25,20 @@ index 69cba58388..21bc31363c 100644
      _In_    DWORD   dwProtocol,
      _In_    DWORD   dwCipherSuite,
      _In_    DWORD   dwKeyType,
+@@ -584,11 +585,11 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS
+ WINAPI
+ SslFreeBuffer(
+-    PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID   pvInput);
+ 
+ typedef SECURITY_STATUS
+ (WINAPI * SslFreeBufferFn)(
+-    PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID   pvInput);
+ 
+ 
+ //+-------------------------------------------------------------------------
 @@ -628,7 +629,7 @@ SslGenerateMasterKey(
      _In_    NCRYPT_PROV_HANDLE hSslProvider,
      _In_opt_ NCRYPT_KEY_HANDLE hPrivateKey,

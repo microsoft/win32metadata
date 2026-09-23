@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
-index e30ee02631..f8c3d1093c 100644
+index e30ee02631..6088498d4f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 @@ -15,6 +15,7 @@ Revision History:
@@ -459,6 +459,18 @@ index e30ee02631..f8c3d1093c 100644
  #if defined(MIDL_PASS)
      OLD_LARGE_INTEGER MaxPasswordAge;
      OLD_LARGE_INTEGER MinPasswordAge;
+@@ -3504,9 +3511,9 @@ typedef struct _DOMAIN_PASSWORD_INFORMATION {
+ #ifndef _PASSWORD_NOTIFICATION_DEFINED
+ #define _PASSWORD_NOTIFICATION_DEFINED
+ typedef NTSTATUS (*PSAM_PASSWORD_NOTIFICATION_ROUTINE) (
+-    PUNICODE_STRING UserName,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUNICODE_STRING UserName,
+     ULONG RelativeId,
+-    PUNICODE_STRING NewPassword
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUNICODE_STRING NewPassword
+ );
+ 
+ #define SAM_PASSWORD_CHANGE_NOTIFY_ROUTINE  "PasswordChangeNotify"
 @@ -3793,7 +3800,7 @@ typedef struct _MSV1_0_SUBAUTH_LOGON{
      UCHAR ChallengeToClient[MSV1_0_CHALLENGE_LENGTH];
      STRING AuthenticationInfo1;

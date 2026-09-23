@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h
-index 8194880aac..207eb16a89 100644
+index 8194880aac..bd4c3efd6a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsxs.h
 @@ -1,3 +1,4 @@
@@ -29,7 +29,7 @@ index 8194880aac..207eb16a89 100644
      {
          ASM_BINDF_FORCE_CACHE_INSTALL	= 0x1,
          ASM_BINDF_RFS_INTEGRITY_CHECK	= 0x2,
-@@ -235,7 +240,7 @@ EXTERN_C const IID IID_IAssemblyName;
+@@ -235,18 +240,18 @@ EXTERN_C const IID IID_IAssemblyName;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -38,6 +38,42 @@ index 8194880aac..207eb16a89 100644
      IAssemblyName : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
+             /* [in] */ DWORD PropertyId,
+-            /* [in] */ LPVOID pvProperty,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvProperty,
+             /* [in] */ DWORD cbProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [in] */ DWORD PropertyId,
+-            /* [out] */ LPVOID pvProperty,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPVOID pvProperty,
+             /* [out][in] */ LPDWORD pcbProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Finalize( void) = 0;
+@@ -264,9 +269,9 @@ EXTERN_C const IID IID_IAssemblyName;
+             /* [in] */ IUnknown *pUnkReserved2,
+             /* [in] */ LPCOLESTR szReserved,
+             /* [in] */ LONGLONG llReserved,
+-            /* [in] */ LPVOID pvReserved,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvReserved,
+             /* [in] */ DWORD cbReserved,
+-            /* [out] */ LPVOID *ppReserved) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPVOID *ppReserved) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][out][in] */ 
+@@ -275,8 +280,8 @@ EXTERN_C const IID IID_IAssemblyName;
+             _Out_writes_opt_(*lpcwBuffer)  LPWSTR pwzName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVersion( 
+-            /* [out] */ LPDWORD pdwVersionHi,
+-            /* [out] */ LPDWORD pdwVersionLow) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPDWORD pdwVersionHi,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPDWORD pdwVersionLow) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsEqual( 
+             /* [in] */ IAssemblyName *pName,
 @@ -445,7 +450,7 @@ EXTERN_C const IID IID_IAssemblyCacheItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -47,7 +83,7 @@ index 8194880aac..207eb16a89 100644
      IAssemblyCacheItem : public IUnknown
      {
      public:
-@@ -561,7 +566,7 @@ EXTERN_C const IID IID_IAssemblyCache;
+@@ -561,24 +566,24 @@ EXTERN_C const IID IID_IAssemblyCache;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -56,11 +92,12 @@ index 8194880aac..207eb16a89 100644
      IAssemblyCache : public IUnknown
      {
      public:
-@@ -569,10 +574,10 @@ EXTERN_C const IID IID_IAssemblyCache;
+         virtual HRESULT STDMETHODCALLTYPE UninstallAssembly( 
              /* [in] */ DWORD dwFlags,
              /* [in] */ LPCWSTR pszAssemblyName,
-             /* [in] */ LPCFUSION_INSTALL_REFERENCE pRefData,
+-            /* [in] */ LPCFUSION_INSTALL_REFERENCE pRefData,
 -            /* [optional][out] */ ULONG *pulDisposition) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPCFUSION_INSTALL_REFERENCE pRefData,
 +            /* [optional][out] */ _Win32_AssociatedEnum_(IASSEMBLYCACHE_UNINSTALL_DISPOSITION) ULONG *pulDisposition) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE QueryAssemblyInfo( 
@@ -69,6 +106,22 @@ index 8194880aac..207eb16a89 100644
              /* [in] */ LPCWSTR pszAssemblyName,
              /* [out][in] */ ASSEMBLY_INFO *pAsmInfo) = 0;
          
+         virtual HRESULT STDMETHODCALLTYPE CreateAssemblyCacheItem( 
+             /* [in] */ DWORD dwFlags,
+-            /* [in] */ PVOID pvReserved,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvReserved,
+             /* [out] */ IAssemblyCacheItem **ppAsmItem,
+             /* [optional][in] */ LPCWSTR pszAssemblyName) = 0;
+         
+@@ -588,7 +593,7 @@ EXTERN_C const IID IID_IAssemblyCache;
+         virtual HRESULT STDMETHODCALLTYPE InstallAssembly( 
+             /* [in] */ DWORD dwFlags,
+             /* [in] */ LPCWSTR pszManifestFilePath,
+-            /* [in] */ LPCFUSION_INSTALL_REFERENCE pRefData) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPCFUSION_INSTALL_REFERENCE pRefData) = 0;
+         
+     };
+     
 @@ -726,6 +731,39 @@ extern RPC_IF_HANDLE __MIDL_itf_winsxs_0000_0003_v0_0_s_ifspec;
  }
  #endif

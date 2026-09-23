@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h b/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
-index e7e196b86d..7e23f91320 100644
+index e7e196b86d..da0990257d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
 @@ -1,3 +1,4 @@
@@ -34,7 +34,7 @@ index e7e196b86d..7e23f91320 100644
  {
      DWORD            cbSize;           // Size of the structure in bytes
      HWND             hwndParent;       // Parent window
-@@ -92,8 +93,8 @@ DECLARE_INTERFACE_IID_(IWiaUIExtension, IUnknown, "da319113-50ee-4c80-b460-57d00
+@@ -92,14 +93,14 @@ DECLARE_INTERFACE_IID_(IWiaUIExtension, IUnknown, "da319113-50ee-4c80-b460-57d00
  
      // *** IWiaUIExtension methods ***
      STDMETHOD(DeviceDialog)(_In_ THIS_ PDEVICEDIALOGDATA pDeviceDialogData) PURE;
@@ -45,3 +45,10 @@ index e7e196b86d..7e23f91320 100644
  };
  
  // {da319113-50ee-4c80-b460-57d005d44a2c}
+ DEFINE_GUID(IID_IWiaUIExtension, 0xDA319113, 0x50EE, 0x4C80, 0xB4, 0x60, 0x57, 0xD0, 0x05, 0xD4, 0x4A, 0x2C);
+ 
+-typedef HRESULT (WINAPI *DeviceDialogFunction)(PDEVICEDIALOGDATA);
++typedef HRESULT (WINAPI *DeviceDialogFunction)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVICEDIALOGDATA);
+ 
+ #define SHELLEX_WIAUIEXTENSION_NAME TEXT("WiaDialogExtensionHandlers")
+ 

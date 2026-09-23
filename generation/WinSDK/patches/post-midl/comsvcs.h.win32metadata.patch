@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h b/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
-index 607bf2048d..17d8c0cb57 100644
+index 607bf2048d..3264f12824 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
 @@ -1,3 +1,4 @@
@@ -155,6 +155,15 @@ index 607bf2048d..17d8c0cb57 100644
      ICreateWithLocalTransaction : public IUnknown
      {
      public:
+@@ -3156,7 +3157,7 @@ EXTERN_C const IID IID_ICreateWithLocalTransaction;
+             /* [in] */ IUnknown *pTransaction,
+             /* [in] */ REFCLSID rclsid,
+             /* [in] */ REFIID riid,
+-            /* [iid_is][retval][out] */ void **pObject) = 0;
++            /* [iid_is][retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **pObject) = 0;
+         
+     };
+     
 @@ -3238,7 +3239,7 @@ EXTERN_C const IID IID_ICreateWithTipTransactionEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -542,7 +551,18 @@ index 607bf2048d..17d8c0cb57 100644
      IDispenserManager : public IUnknown
      {
      public:
-@@ -9077,7 +9078,7 @@ EXTERN_C const IID IID_IHolder;
+@@ -8974,8 +8975,8 @@ EXTERN_C const IID IID_IDispenserManager;
+             /* [out] */ IHolder **__MIDL__IDispenserManager0001) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContext( 
+-            /* [out] */ INSTID *__MIDL__IDispenserManager0002,
+-            /* [out] */ TRANSID *__MIDL__IDispenserManager0003) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") INSTID *__MIDL__IDispenserManager0002,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") TRANSID *__MIDL__IDispenserManager0003) = 0;
+         
+     };
+     
+@@ -9077,13 +9078,13 @@ EXTERN_C const IID IID_IHolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -551,7 +571,31 @@ index 607bf2048d..17d8c0cb57 100644
      IHolder : public IUnknown
      {
      public:
-@@ -9254,7 +9255,7 @@ EXTERN_C const IID IID_IDispenserDriver;
+         virtual HRESULT STDMETHODCALLTYPE AllocResource( 
+             /* [in] */ const RESTYPID __MIDL__IHolder0000,
+-            /* [out] */ RESID *__MIDL__IHolder0001) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RESID *__MIDL__IHolder0001) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE FreeResource( 
+             /* [in] */ const RESID __MIDL__IHolder0002) = 0;
+@@ -9092,14 +9093,14 @@ EXTERN_C const IID IID_IHolder;
+             /* [in] */ const RESID __MIDL__IHolder0003) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE TrackResourceS( 
+-            /* [in] */ constSRESID __MIDL__IHolder0004) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") constSRESID __MIDL__IHolder0004) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE UntrackResource( 
+             /* [in] */ const RESID __MIDL__IHolder0005,
+             /* [in] */ const BOOL __MIDL__IHolder0006) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE UntrackResourceS( 
+-            /* [in] */ constSRESID __MIDL__IHolder0007,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") constSRESID __MIDL__IHolder0007,
+             /* [in] */ const BOOL __MIDL__IHolder0008) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
+@@ -9254,20 +9255,20 @@ EXTERN_C const IID IID_IDispenserDriver;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -560,6 +604,31 @@ index 607bf2048d..17d8c0cb57 100644
      IDispenserDriver : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE CreateResource( 
+             /* [in] */ const RESTYPID ResTypId,
+-            /* [out] */ RESID *pResId,
+-            /* [out] */ TIMEINSECS *pSecsFreeBeforeDestroy) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RESID *pResId,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") TIMEINSECS *pSecsFreeBeforeDestroy) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RateResource( 
+             /* [in] */ const RESTYPID ResTypId,
+             /* [in] */ const RESID ResId,
+             /* [in] */ const BOOL fRequiresTransactionEnlistment,
+-            /* [out] */ RESOURCERATING *pRating) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RESOURCERATING *pRating) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnlistResource( 
+             /* [in] */ const RESID ResId,
+@@ -9280,7 +9281,7 @@ EXTERN_C const IID IID_IDispenserDriver;
+             /* [in] */ const RESID ResId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DestroyResourceS( 
+-            /* [in] */ constSRESID ResId) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") constSRESID ResId) = 0;
+         
+     };
+     
 @@ -9444,7 +9445,7 @@ EXTERN_C const IID IID_ITransactionProxy;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -569,7 +638,42 @@ index 607bf2048d..17d8c0cb57 100644
      ITransactionProxy : public IUnknown
      {
      public:
-@@ -9773,7 +9774,7 @@ EXTERN_C const IID IID_IObjectContext;
+@@ -9461,13 +9462,13 @@ EXTERN_C const IID IID_ITransactionProxy;
+             /* [out] */ ITransactionVoterBallotAsync2 **ppBallot) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIsolationLevel( 
+-            /* [retval][out] */ ISOLEVEL *__MIDL__ITransactionProxy0000) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") ISOLEVEL *__MIDL__ITransactionProxy0000) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIdentifier( 
+-            /* [retval][out] */ GUID *pbstrIdentifier) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pbstrIdentifier) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsReusable( 
+-            /* [out] */ BOOL *pfIsReusable) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsReusable) = 0;
+         
+     };
+     
+@@ -9599,7 +9600,7 @@ EXTERN_C const IID IID_IContextSecurityPerimeter;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPerimeterFlag( 
+-            /* [out] */ BOOL *pFlag) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pFlag) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetPerimeterFlag( 
+             /* [in] */ BOOL fFlag) = 0;
+@@ -9694,7 +9695,7 @@ EXTERN_C const IID IID_ITxProxyHolder;
+     {
+     public:
+         virtual void STDMETHODCALLTYPE GetIdentifier( 
+-            /* [out] */ GUID *pGuidLtx) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuidLtx) = 0;
+         
+     };
+     
+@@ -9773,14 +9774,14 @@ EXTERN_C const IID IID_IObjectContext;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -578,6 +682,23 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectContext : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
+             /* [in] */ REFCLSID rclsid,
+             /* [in] */ REFIID riid,
+-            /* [retval][iid_is][out] */ LPVOID *ppv) = 0;
++            /* [retval][iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPVOID *ppv) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetComplete( void) = 0;
+         
+@@ -9796,7 +9797,7 @@ EXTERN_C const IID IID_IObjectContext;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsCallerInRole( 
+             /* [in] */ BSTR bstrRole,
+-            /* [retval][out] */ BOOL *pfIsInRole) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsInRole) = 0;
+         
+     };
+     
 @@ -9928,7 +9929,7 @@ EXTERN_C const IID IID_IObjectControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -587,7 +708,7 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectControl : public IUnknown
      {
      public:
-@@ -10028,7 +10029,7 @@ EXTERN_C const IID IID_IEnumNames;
+@@ -10028,14 +10029,14 @@ EXTERN_C const IID IID_IEnumNames;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -596,7 +717,16 @@ index 607bf2048d..17d8c0cb57 100644
      IEnumNames : public IUnknown
      {
      public:
-@@ -10147,7 +10148,7 @@ EXTERN_C const IID IID_ISecurityProperty;
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [in] */ unsigned long celt,
+-            /* [size_is][out] */ BSTR *rgname,
+-            /* [retval][out] */ unsigned long *pceltFetched) = 0;
++            /* [size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *rgname,
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned long *pceltFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ unsigned long celt) = 0;
+@@ -10147,21 +10148,21 @@ EXTERN_C const IID IID_ISecurityProperty;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -605,6 +735,24 @@ index 607bf2048d..17d8c0cb57 100644
      ISecurityProperty : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetDirectCreatorSID( 
+-            PSID *pSID) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSID *pSID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetOriginalCreatorSID( 
+-            PSID *pSID) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSID *pSID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDirectCallerSID( 
+-            PSID *pSID) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSID *pSID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetOriginalCallerSID( 
+-            PSID *pSID) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSID *pSID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ReleaseSID( 
+             PSID pSID) = 0;
 @@ -10275,7 +10276,7 @@ EXTERN_C const IID IID_ObjectControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -614,6 +762,15 @@ index 607bf2048d..17d8c0cb57 100644
      ObjectControl : public IUnknown
      {
      public:
+@@ -10284,7 +10285,7 @@ EXTERN_C const IID IID_ObjectControl;
+         virtual /* [helpstring][helpcontext] */ HRESULT STDMETHODCALLTYPE Deactivate( void) = 0;
+         
+         virtual /* [helpstring][helpcontext] */ HRESULT STDMETHODCALLTYPE CanBePooled( 
+-            /* [retval][out] */ VARIANT_BOOL *pbPoolable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbPoolable) = 0;
+         
+     };
+     
 @@ -10377,7 +10378,7 @@ EXTERN_C const IID IID_ISharedProperty;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -650,7 +807,7 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectConstruct : public IUnknown
      {
      public:
-@@ -10963,7 +10964,7 @@ EXTERN_C const IID IID_IObjectConstructString;
+@@ -10963,12 +10964,12 @@ EXTERN_C const IID IID_IObjectConstructString;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -659,7 +816,13 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectConstructString : public IDispatch
      {
      public:
-@@ -11101,7 +11102,7 @@ EXTERN_C const IID IID_IObjectContextActivity;
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConstructString( 
+-            /* [retval][out] */ BSTR *pVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pVal) = 0;
+         
+     };
+     
+@@ -11101,12 +11102,12 @@ EXTERN_C const IID IID_IObjectContextActivity;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -668,6 +831,12 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectContextActivity : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetActivityId( 
+-            /* [out] */ GUID *pGUID) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGUID) = 0;
+         
+     };
+     
 @@ -11185,7 +11186,7 @@ EXTERN_C const IID IID_IObjectContextInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -677,7 +846,24 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectContextInfo : public IUnknown
      {
      public:
-@@ -11311,7 +11312,7 @@ EXTERN_C const IID IID_IObjectContextInfo2;
+@@ -11195,13 +11196,13 @@ EXTERN_C const IID IID_IObjectContextInfo;
+             IUnknown **pptrans) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTransactionId( 
+-            /* [out] */ GUID *pGuid) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuid) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetActivityId( 
+-            /* [out] */ GUID *pGUID) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGUID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContextId( 
+-            /* [out] */ GUID *pGuid) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuid) = 0;
+         
+     };
+     
+@@ -11311,18 +11312,18 @@ EXTERN_C const IID IID_IObjectContextInfo2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -686,6 +872,20 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectContextInfo2 : public IObjectContextInfo
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetPartitionId( 
+-            /* [out] */ GUID *pGuid) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuid) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetApplicationId( 
+-            /* [out] */ GUID *pGuid) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuid) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetApplicationInstanceId( 
+-            /* [out] */ GUID *pGuid) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuid) = 0;
+         
+     };
+     
 @@ -11457,7 +11458,7 @@ EXTERN_C const IID IID_ITransactionStatus;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -695,7 +895,16 @@ index 607bf2048d..17d8c0cb57 100644
      ITransactionStatus : public IUnknown
      {
      public:
-@@ -11552,7 +11553,7 @@ EXTERN_C const IID IID_IObjectContextTip;
+@@ -11465,7 +11466,7 @@ EXTERN_C const IID IID_ITransactionStatus;
+             HRESULT hrStatus) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTransactionStatus( 
+-            HRESULT *pHrStatus) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRESULT *pHrStatus) = 0;
+         
+     };
+     
+@@ -11552,12 +11553,12 @@ EXTERN_C const IID IID_IObjectContextTip;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -704,6 +913,12 @@ index 607bf2048d..17d8c0cb57 100644
      IObjectContextTip : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetTipUrl( 
+-            /* [retval][out] */ BSTR *pTipUrl) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pTipUrl) = 0;
+         
+     };
+     
 @@ -11636,7 +11637,7 @@ EXTERN_C const IID IID_IPlaybackControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -713,7 +928,7 @@ index 607bf2048d..17d8c0cb57 100644
      IPlaybackControl : public IUnknown
      {
      public:
-@@ -11727,7 +11728,7 @@ EXTERN_C const IID IID_IGetContextProperties;
+@@ -11727,16 +11728,16 @@ EXTERN_C const IID IID_IGetContextProperties;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -722,6 +937,17 @@ index 607bf2048d..17d8c0cb57 100644
      IGetContextProperties : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE Count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [in] */ BSTR name,
+-            /* [retval][out] */ VARIANT *pProperty) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumNames( 
+             /* [retval][out] */ IEnumNames **ppenum) = 0;
 @@ -11850,7 +11851,7 @@ EXTERN_C const IID IID_IContextState;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -731,6 +957,22 @@ index 607bf2048d..17d8c0cb57 100644
      IContextState : public IUnknown
      {
      public:
+@@ -11858,13 +11859,13 @@ EXTERN_C const IID IID_IContextState;
+             VARIANT_BOOL bDeactivate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDeactivateOnReturn( 
+-            /* [out] */ VARIANT_BOOL *pbDeactivate) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbDeactivate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetMyTransactionVote( 
+             TransactionVote txVote) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMyTransactionVote( 
+-            /* [out] */ TransactionVote *ptxVote) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") TransactionVote *ptxVote) = 0;
+         
+     };
+     
 @@ -11967,7 +11968,7 @@ EXTERN_C const IID IID_IPoolManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -749,7 +991,7 @@ index 607bf2048d..17d8c0cb57 100644
      ISelectCOMLBServer : public IUnknown
      {
      public:
-@@ -12198,7 +12199,7 @@ EXTERN_C const IID IID_ICOMLBArguments;
+@@ -12198,15 +12199,15 @@ EXTERN_C const IID IID_ICOMLBArguments;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -758,6 +1000,16 @@ index 607bf2048d..17d8c0cb57 100644
      ICOMLBArguments : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetCLSID( 
+-            /* [out] */ CLSID *pCLSID) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") CLSID *pCLSID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetCLSID( 
+-            /* [in] */ CLSID *pCLSID) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") CLSID *pCLSID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMachineName( 
+             /* [in] */ ULONG cchSvr,
 @@ -12320,12 +12321,12 @@ EXTERN_C const IID IID_ICOMLBArguments;
  #else
  extern HRESULT __cdecl GetObjectContext (IObjectContext** ppInstanceContext);
@@ -768,10 +1020,10 @@ index 607bf2048d..17d8c0cb57 100644
 -EXTERN_C HRESULT __stdcall GetManagedExtensions(DWORD* dwExts);
 -extern void* __cdecl SafeRef(REFIID rid, IUnknown* pUnk);
 -extern HRESULT __cdecl RecycleSurrogate(long lReasonCode);
-+_Windows_SupportedOS_WindowsXP_ EXTERN_C HRESULT __stdcall CoCreateActivity(IUnknown* pIUnknown, REFIID riid, void** ppObj );
++_Windows_SupportedOS_WindowsXP_ EXTERN_C HRESULT __stdcall CoCreateActivity(IUnknown* pIUnknown, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppObj );
 +_Windows_SupportedOS_WindowsXP_ EXTERN_C HRESULT __stdcall CoEnterServiceDomain(IUnknown* pConfigObject);
 +_Windows_SupportedOS_WindowsXP_ EXTERN_C void __stdcall CoLeaveServiceDomain(IUnknown *pUnkStatus);
-+_Windows_SupportedOS_WindowsXP_ EXTERN_C HRESULT __stdcall GetManagedExtensions(DWORD* dwExts);
++_Windows_SupportedOS_WindowsXP_ EXTERN_C HRESULT __stdcall GetManagedExtensions(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* dwExts);
 +_Windows_SupportedOS_Windows2000_ extern void* __cdecl SafeRef(REFIID rid, IUnknown* pUnk);
 +_Windows_SupportedOS_Windows2000_ extern HRESULT __cdecl RecycleSurrogate(long lReasonCode);
  
@@ -981,7 +1233,7 @@ index 607bf2048d..17d8c0cb57 100644
      IServiceActivity : public IUnknown
      {
      public:
-@@ -15021,7 +15022,7 @@ EXTERN_C const IID IID_IThreadPoolKnobs;
+@@ -15021,30 +15022,30 @@ EXTERN_C const IID IID_IThreadPoolKnobs;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -990,6 +1242,34 @@ index 607bf2048d..17d8c0cb57 100644
      IThreadPoolKnobs : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetMaxThreads( 
+-            long *plcMaxThreads) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") long *plcMaxThreads) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentThreads( 
+-            long *plcCurrentThreads) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") long *plcCurrentThreads) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetMaxThreads( 
+             long lcMaxThreads) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDeleteDelay( 
+-            long *pmsecDeleteDelay) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") long *pmsecDeleteDelay) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetDeleteDelay( 
+             long msecDeleteDelay) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxQueuedRequests( 
+-            long *plcMaxQueuedRequests) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") long *plcMaxQueuedRequests) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentQueuedRequests( 
+-            long *plcCurrentQueuedRequests) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") long *plcCurrentQueuedRequests) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetMaxQueuedRequests( 
+             long lcMaxQueuedRequests) = 0;
 @@ -15787,7 +15788,7 @@ EXTERN_C const IID IID_IProcessInitializer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1008,6 +1288,36 @@ index 607bf2048d..17d8c0cb57 100644
      IServicePoolConfig : public IUnknown
      {
      public:
+@@ -15888,25 +15889,25 @@ EXTERN_C const IID IID_IServicePoolConfig;
+             /* [in] */ DWORD dwMaxPool) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MaxPoolSize( 
+-            /* [retval][out] */ DWORD *pdwMaxPool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMaxPool) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MinPoolSize( 
+             /* [in] */ DWORD dwMinPool) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MinPoolSize( 
+-            /* [retval][out] */ DWORD *pdwMinPool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMinPool) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CreationTimeout( 
+             /* [in] */ DWORD dwCreationTimeout) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CreationTimeout( 
+-            /* [retval][out] */ DWORD *pdwCreationTimeout) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwCreationTimeout) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_TransactionAffinity( 
+             /* [in] */ BOOL fTxAffinity) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TransactionAffinity( 
+-            /* [retval][out] */ BOOL *pfTxAffinity) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfTxAffinity) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ClassFactory( 
+             /* [in] */ IClassFactory *pFactory) = 0;
 @@ -16063,7 +16064,7 @@ EXTERN_C const IID IID_IServicePool;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1017,6 +1327,15 @@ index 607bf2048d..17d8c0cb57 100644
      IServicePool : public IUnknown
      {
      public:
+@@ -16072,7 +16073,7 @@ EXTERN_C const IID IID_IServicePool;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetObject( 
+             REFIID riid,
+-            /* [iid_is][out] */ void **ppv) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppv) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Shutdown( void) = 0;
+         
 @@ -16169,7 +16170,7 @@ EXTERN_C const IID IID_IManagedPooledObj;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1053,6 +1372,22 @@ index 607bf2048d..17d8c0cb57 100644
      IAppDomainHelper : public IDispatch
      {
      public:
+@@ -16462,13 +16463,13 @@ EXTERN_C const IID IID_IAppDomainHelper;
+             /* [in] */ IUnknown *pUnkAD,
+             /* [in] */ HRESULT ( STDMETHODCALLTYPE __MIDL__IAppDomainHelper0000 )( 
+                 void *pv),
+-            /* [in] */ void *pPool) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pPool) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DoCallback( 
+             /* [in] */ IUnknown *pUnkAD,
+             /* [in] */ HRESULT ( STDMETHODCALLTYPE __MIDL__IAppDomainHelper0001 )( 
+                 void *pv),
+-            /* [in] */ void *pPool) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") void *pPool) = 0;
+         
+     };
+     
 @@ -16615,7 +16616,7 @@ EXTERN_C const IID IID_IAssemblyLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1094,7 +1429,7 @@ index 607bf2048d..17d8c0cb57 100644
  /* [local] */ 
  
 -EXTERN_C HRESULT __stdcall MTSCreateActivity ( REFIID riid, void** ppobj );
-+_Windows_SupportedOS_Windows2000_ EXTERN_C HRESULT __stdcall MTSCreateActivity ( REFIID riid, void** ppobj );
++_Windows_SupportedOS_Windows2000_ EXTERN_C HRESULT __stdcall MTSCreateActivity ( REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppobj );
  
  
  extern RPC_IF_HANDLE __MIDL_itf_autosvcs_0000_0114_v0_0_c_ifspec;
@@ -1107,7 +1442,7 @@ index 607bf2048d..17d8c0cb57 100644
      IMTSCall : public IUnknown
      {
      public:
-@@ -17162,7 +17163,7 @@ EXTERN_C const IID IID_IContextProperties;
+@@ -17162,16 +17163,16 @@ EXTERN_C const IID IID_IContextProperties;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1116,6 +1451,17 @@ index 607bf2048d..17d8c0cb57 100644
      IContextProperties : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE Count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [in] */ BSTR name,
+-            /* [retval][out] */ VARIANT *pProperty) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumNames( 
+             /* [retval][out] */ IEnumNames **ppenum) = 0;
 @@ -17294,7 +17295,7 @@ EXTERN_C const IID IID_IObjPool;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

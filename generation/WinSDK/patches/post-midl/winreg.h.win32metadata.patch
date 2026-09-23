@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
-index 5a1415e34d..f9fa4aea5b 100644
+index 5a1415e34d..dcee6a521d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 @@ -22,6 +22,7 @@ Abstract:
@@ -714,7 +714,7 @@ index 5a1415e34d..f9fa4aea5b 100644
 -    _In_ DWORD dwType,
 -    _In_reads_bytes_opt_(cbData) LPCSTR lpData,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwType,
-+    _WIN32META_ANNOTATION_("win32metadata:memory_size_param=4") _In_z_ LPCSTR lpData,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _WIN32META_ANNOTATION_("win32metadata:memory_size_param=4") _In_z_ LPCSTR lpData,
      _In_ DWORD cbData
      );
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_Windows2000_
@@ -727,7 +727,7 @@ index 5a1415e34d..f9fa4aea5b 100644
 -    _In_ DWORD dwType,
 -    _In_reads_bytes_opt_(cbData) LPCWSTR lpData,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwType,
-+    _WIN32META_ANNOTATION_("win32metadata:memory_size_param=4") _In_z_ LPCWSTR lpData,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _WIN32META_ANNOTATION_("win32metadata:memory_size_param=4") _In_z_ LPCWSTR lpData,
      _In_ DWORD cbData
      );
  #ifdef UNICODE

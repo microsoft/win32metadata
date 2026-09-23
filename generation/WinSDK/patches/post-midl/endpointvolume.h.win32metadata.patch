@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h b/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
-index 681b81a9a3..b6fc7a85d6 100644
+index 681b81a9a3..8eadb7a121 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,7 @@ index 681b81a9a3..b6fc7a85d6 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -120,7 +121,7 @@ EXTERN_C const IID IID_IAudioEndpointVolumeCallback;
+@@ -120,12 +121,12 @@ EXTERN_C const IID IID_IAudioEndpointVolumeCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -16,6 +16,12 @@ index 681b81a9a3..b6fc7a85d6 100644
      IAudioEndpointVolumeCallback : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE OnNotify( 
+-            PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) = 0;
+         
+     };
+     
 @@ -205,7 +206,7 @@ EXTERN_C const IID IID_IAudioEndpointVolume;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

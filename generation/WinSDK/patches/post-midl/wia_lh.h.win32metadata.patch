@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h b/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h
-index 3a6538a57a..b45132ef5d 100644
+index 3a6538a57a..399d480b64 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,15 @@ index 3a6538a57a..b45132ef5d 100644
      IWiaDevMgr : public IUnknown
      {
      public:
+@@ -353,7 +354,7 @@ EXTERN_C const IID IID_IWiaDevMgr;
+             /* [in] */ HWND hwndParent,
+             /* [in] */ LONG lDeviceType,
+             /* [in] */ LONG lFlags,
+-            /* [retval][out] */ BSTR *pbstrDeviceID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDeviceID) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetImageDlg( 
+             /* [in] */ HWND hwndParent,
 @@ -680,7 +681,7 @@ EXTERN_C const IID IID_IEnumWIA_DEV_INFO;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -43,6 +52,15 @@ index 3a6538a57a..b45132ef5d 100644
      IWiaDataCallback : public IUnknown
      {
      public:
+@@ -952,7 +953,7 @@ EXTERN_C const IID IID_IWiaDataCallback;
+             /* [in] */ LONG lLength,
+             /* [in] */ LONG lReserved,
+             /* [in] */ LONG lResLength,
+-            /* [size_is][in] */ BYTE *pbBuffer) = 0;
++            /* [size_is][in] */ _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pbBuffer) = 0;
+         
+     };
+     
 @@ -1089,7 +1090,7 @@ EXTERN_C const IID IID_IWiaDataTransfer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -61,6 +79,17 @@ index 3a6538a57a..b45132ef5d 100644
      IWiaItem : public IUnknown
      {
      public:
+@@ -1283,8 +1284,8 @@ EXTERN_C const IID IID_IWiaItem;
+             /* [in] */ HWND hwndParent,
+             /* [in] */ LONG lFlags,
+             /* [in] */ LONG lIntent,
+-            /* [out] */ LONG *plItemCount,
+-            /* [out] */ IWiaItem ***ppIWiaItem) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plItemCount,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") IWiaItem ***ppIWiaItem) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE DeviceCommand( 
+             /* [in] */ LONG lFlags,
 @@ -1299,13 +1300,13 @@ EXTERN_C const IID IID_IWiaItem;
              /* [out] */ __RPC__deref_out_opt IEnumWIA_DEV_CAPS **ppIEnumWIA_DEV_CAPS) = 0;
          
@@ -87,6 +116,15 @@ index 3a6538a57a..b45132ef5d 100644
      IWiaPropertyStorage : public IUnknown
      {
      public:
+@@ -1597,7 +1598,7 @@ EXTERN_C const IID IID_IWiaPropertyStorage;
+             /* [out] */ __RPC__deref_out_opt IStream **ppIStream) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE SetPropertyStream( 
+-            /* [in] */ GUID *pCompatibilityId,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") GUID *pCompatibilityId,
+             /* [unique][in] */ IStream *pIStream) = 0;
+         
+     };
 @@ -1842,7 +1843,7 @@ EXTERN_C const IID IID_IEnumWiaItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -96,7 +134,7 @@ index 3a6538a57a..b45132ef5d 100644
      IEnumWiaItem : public IUnknown
      {
      public:
-@@ -2010,7 +2011,7 @@ EXTERN_C const IID IID_IEnumWIA_DEV_CAPS;
+@@ -2010,13 +2011,13 @@ EXTERN_C const IID IID_IEnumWIA_DEV_CAPS;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -105,7 +143,14 @@ index 3a6538a57a..b45132ef5d 100644
      IEnumWIA_DEV_CAPS : public IUnknown
      {
      public:
-@@ -2154,7 +2155,7 @@ EXTERN_C const IID IID_IEnumWIA_FORMAT_INFO;
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [in] */ ULONG celt,
+-            /* [length_is][size_is][out] */ WIA_DEV_CAP *rgelt,
++            /* [length_is][size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WIA_DEV_CAP *rgelt,
+             /* [unique][out][in] */ ULONG *pceltFetched) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Skip( 
+@@ -2154,13 +2155,13 @@ EXTERN_C const IID IID_IEnumWIA_FORMAT_INFO;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -114,6 +159,13 @@ index 3a6538a57a..b45132ef5d 100644
      IEnumWIA_FORMAT_INFO : public IUnknown
      {
      public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [in] */ ULONG celt,
+-            /* [length_is][size_is][out] */ WIA_FORMAT_INFO *rgelt,
++            /* [length_is][size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WIA_FORMAT_INFO *rgelt,
+             /* [unique][out][in] */ ULONG *pceltFetched) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Skip( 
 @@ -2298,7 +2299,7 @@ EXTERN_C const IID IID_IWiaLog;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -174,3 +226,39 @@ index 3a6538a57a..b45132ef5d 100644
              /* [annotation][out][in] */ 
              _Out_opt_  IWiaItem2 **ppItem) = 0;
          
+@@ -3766,13 +3767,13 @@ EXTERN_C const IID IID_IWiaItem2;
+             /* [in] */ LONG lFlags,
+             /* [in] */ BSTR bstrName,
+             /* [in] */ REFIID riidExtensionInterface,
+-            /* [out] */ BOOL *pbExtensionExists) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pbExtensionExists) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetExtension( 
+             /* [in] */ LONG lFlags,
+             /* [in] */ BSTR bstrName,
+             /* [in] */ REFIID riidExtensionInterface,
+-            /* [iid_is][out] */ void **ppOut) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppOut) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetParentItem( 
+             /* [out] */ __RPC__deref_out_opt IWiaItem2 **ppIWiaItem2) = 0;
+@@ -4107,7 +4108,7 @@ EXTERN_C const IID IID_IWiaDevMgr2;
+             /* [in] */ HWND hwndParent,
+             /* [in] */ LONG lDeviceType,
+             /* [in] */ LONG lFlags,
+-            /* [retval][out] */ BSTR *pbstrDeviceID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDeviceID) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE RegisterEventCallbackInterface( 
+             /* [in] */ LONG lFlags,
+@@ -4141,8 +4142,8 @@ EXTERN_C const IID IID_IWiaDevMgr2;
+             /* [in] */ HWND hwndParent,
+             /* [in] */ BSTR bstrFolderName,
+             /* [in] */ BSTR bstrFilename,
+-            /* [out] */ LONG *plNumFiles,
+-            /* [size_is][size_is][out] */ BSTR **ppbstrFilePaths,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plNumFiles,
++            /* [size_is][size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR **ppbstrFilePaths,
+             /* [out][in] */ IWiaItem2 **ppItem) = 0;
+         
+     };

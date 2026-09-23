@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
-index eb8dfaeb32..4f0ff05467 100644
+index eb8dfaeb32..0454abf7f5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
 @@ -1,3 +1,4 @@
@@ -63,6 +63,15 @@ index eb8dfaeb32..4f0ff05467 100644
      BYTE                        Mask;           // Mask to indicate which components of the register
                                                  // are used (combination of D3D10_COMPONENT_MASK values)
      BYTE                        ReadWriteMask;  // Mask to indicate whether a given component is 
+@@ -287,7 +288,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionType,
+ 
+ DECLARE_INTERFACE(ID3D10ShaderReflectionType)
+ {
+-    STDMETHOD(GetDesc)(THIS_ D3D10_SHADER_TYPE_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_SHADER_TYPE_DESC *pDesc) PURE;
+     
+     STDMETHOD_(ID3D10ShaderReflectionType*, GetMemberTypeByIndex)(THIS_ UINT Index) PURE;
+     STDMETHOD_(ID3D10ShaderReflectionType*, GetMemberTypeByName)(THIS_ LPCSTR Name) PURE;
 @@ -407,7 +408,7 @@ extern "C" {
  //      these are the same messages you will see in your debug output.
  //----------------------------------------------------------------------------

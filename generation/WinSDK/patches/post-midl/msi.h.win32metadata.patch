@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
-index 77ea809b47..299fb6d37d 100644
+index 77ea809b47..dcb026afbc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
 @@ -1,3 +1,4 @@
@@ -24,6 +24,18 @@ index 77ea809b47..299fb6d37d 100644
  
  #ifdef __cplusplus
  }
+@@ -163,9 +164,9 @@ typedef enum tagINSTALLMESSAGE
+ } INSTALLMESSAGE;
+ 
+ // external error handler supplied to installation API functions
+-typedef int (WINAPI *INSTALLUI_HANDLERA)(LPVOID pvContext, UINT iMessageType, LPCSTR szMessage);
++typedef int (WINAPI *INSTALLUI_HANDLERA)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvContext, UINT iMessageType, LPCSTR szMessage);
+ // external error handler supplied to installation API functions
+-typedef int (WINAPI *INSTALLUI_HANDLERW)(LPVOID pvContext, UINT iMessageType, LPCWSTR szMessage);
++typedef int (WINAPI *INSTALLUI_HANDLERW)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvContext, UINT iMessageType, LPCWSTR szMessage);
+ #ifdef UNICODE
+ #define INSTALLUI_HANDLER  INSTALLUI_HANDLERW
+ #else
 @@ -528,18 +529,18 @@ extern "C" {
  
  // Enable internal UI

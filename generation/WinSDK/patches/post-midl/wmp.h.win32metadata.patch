@@ -1,0 +1,1149 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
+index 93d1dfd029..b7eecf5291 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -639,19 +640,19 @@ EXTERN_C const IID IID_IWMPErrorItem;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_errorCode( 
+-            /* [retval][out] */ long *phr) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *phr) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_errorDescription( 
+-            /* [retval][out] */ BSTR *pbstrDescription) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDescription) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_errorContext( 
+-            /* [retval][out] */ VARIANT *pvarContext) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarContext) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_remedy( 
+-            /* [retval][out] */ long *plRemedy) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plRemedy) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_customUrl( 
+-            /* [retval][out] */ BSTR *pbstrCustomUrl) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrCustomUrl) = 0;
+         
+     };
+     
+@@ -823,7 +824,7 @@ EXTERN_C const IID IID_IWMPError;
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE clearErrorQueue( void) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_errorCount( 
+-            /* [retval][out] */ long *plNumErrors) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plNumErrors) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_item( 
+             /* [in] */ long dwIndex,
+@@ -991,50 +992,50 @@ EXTERN_C const IID IID_IWMPMedia;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isIdentical( 
+             /* [in] */ IWMPMedia *pIWMPMedia,
+-            /* [retval][out] */ VARIANT_BOOL *pvbool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbool) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_sourceURL( 
+-            /* [retval][out] */ BSTR *pbstrSourceURL) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrSourceURL) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_name( 
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_name( 
+             /* [in] */ BSTR bstrName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_imageSourceWidth( 
+-            /* [retval][out] */ long *pWidth) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pWidth) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_imageSourceHeight( 
+-            /* [retval][out] */ long *pHeight) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pHeight) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_markerCount( 
+-            /* [retval][out] */ long *pMarkerCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pMarkerCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getMarkerTime( 
+             /* [in] */ long MarkerNum,
+-            /* [retval][out] */ double *pMarkerTime) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") double *pMarkerTime) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getMarkerName( 
+             /* [in] */ long MarkerNum,
+-            /* [retval][out] */ BSTR *pbstrMarkerName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrMarkerName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_duration( 
+-            /* [retval][out] */ double *pDuration) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") double *pDuration) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_durationString( 
+-            /* [retval][out] */ BSTR *pbstrDuration) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDuration) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_attributeCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAttributeName( 
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ BSTR *pbstrItemName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrItemName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getItemInfo( 
+             /* [in] */ BSTR bstrItemName,
+-            /* [retval][out] */ BSTR *pbstrVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setItemInfo( 
+             /* [in] */ BSTR bstrItemName,
+@@ -1042,15 +1043,15 @@ EXTERN_C const IID IID_IWMPMedia;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getItemInfoByAtom( 
+             /* [in] */ long lAtom,
+-            /* [retval][out] */ BSTR *pbstrVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE isMemberOf( 
+             /* [in] */ IWMPPlaylist *pPlaylist,
+-            /* [retval][out] */ VARIANT_BOOL *pvarfIsMemberOf) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvarfIsMemberOf) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE isReadOnlyItem( 
+             /* [in] */ BSTR bstrItemName,
+-            /* [retval][out] */ VARIANT_BOOL *pvarfIsReadOnly) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvarfIsReadOnly) = 0;
+         
+     };
+     
+@@ -1334,7 +1335,7 @@ EXTERN_C const IID IID_IWMPControls;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isAvailable( 
+             /* [in] */ BSTR bstrItem,
+-            /* [retval][out] */ VARIANT_BOOL *pIsAvailable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pIsAvailable) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE play( void) = 0;
+         
+@@ -1347,13 +1348,13 @@ EXTERN_C const IID IID_IWMPControls;
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE fastReverse( void) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentPosition( 
+-            /* [retval][out] */ double *pdCurrentPosition) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") double *pdCurrentPosition) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_currentPosition( 
+             /* [in] */ double dCurrentPosition) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentPositionString( 
+-            /* [retval][out] */ BSTR *pbstrCurrentPosition) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrCurrentPosition) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE next( void) = 0;
+         
+@@ -1366,7 +1367,7 @@ EXTERN_C const IID IID_IWMPControls;
+             /* [in] */ IWMPMedia *pIWMPMedia) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentMarker( 
+-            /* [retval][out] */ long *plMarker) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plMarker) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_currentMarker( 
+             /* [in] */ long lMarker) = 0;
+@@ -1625,72 +1626,72 @@ EXTERN_C const IID IID_IWMPSettings;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isAvailable( 
+             /* [in] */ BSTR bstrItem,
+-            /* [retval][out] */ VARIANT_BOOL *pIsAvailable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pIsAvailable) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_autoStart( 
+-            /* [retval][out] */ VARIANT_BOOL *pfAutoStart) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfAutoStart) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_autoStart( 
+             /* [in] */ VARIANT_BOOL fAutoStart) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_baseURL( 
+-            /* [retval][out] */ BSTR *pbstrBaseURL) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrBaseURL) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_baseURL( 
+             /* [in] */ BSTR bstrBaseURL) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_defaultFrame( 
+-            /* [retval][out] */ BSTR *pbstrDefaultFrame) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDefaultFrame) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_defaultFrame( 
+             /* [in] */ BSTR bstrDefaultFrame) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_invokeURLs( 
+-            /* [retval][out] */ VARIANT_BOOL *pfInvokeURLs) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfInvokeURLs) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_invokeURLs( 
+             /* [in] */ VARIANT_BOOL fInvokeURLs) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_mute( 
+-            /* [retval][out] */ VARIANT_BOOL *pfMute) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfMute) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_mute( 
+             /* [in] */ VARIANT_BOOL fMute) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_playCount( 
+             /* [in] */ long lCount) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_rate( 
+-            /* [retval][out] */ double *pdRate) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") double *pdRate) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_rate( 
+             /* [in] */ double dRate) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_balance( 
+-            /* [retval][out] */ long *plBalance) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBalance) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_balance( 
+             /* [in] */ long lBalance) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_volume( 
+-            /* [retval][out] */ long *plVolume) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plVolume) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_volume( 
+             /* [in] */ long lVolume) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getMode( 
+             /* [in] */ BSTR bstrMode,
+-            /* [retval][out] */ VARIANT_BOOL *pvarfMode) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvarfMode) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setMode( 
+             /* [in] */ BSTR bstrMode,
+             /* [in] */ VARIANT_BOOL varfMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enableErrorDialogs( 
+-            /* [retval][out] */ VARIANT_BOOL *pfEnableErrorDialogs) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfEnableErrorDialogs) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enableErrorDialogs( 
+             /* [in] */ VARIANT_BOOL fEnableErrorDialogs) = 0;
+@@ -2010,25 +2011,25 @@ EXTERN_C const IID IID_IWMPClosedCaption;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SAMIStyle( 
+-            /* [retval][out] */ BSTR *pbstrSAMIStyle) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrSAMIStyle) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_SAMIStyle( 
+             /* [in] */ BSTR bstrSAMIStyle) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SAMILang( 
+-            /* [retval][out] */ BSTR *pbstrSAMILang) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrSAMILang) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_SAMILang( 
+             /* [in] */ BSTR bstrSAMILang) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SAMIFileName( 
+-            /* [retval][out] */ BSTR *pbstrSAMIFileName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrSAMIFileName) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_SAMIFileName( 
+             /* [in] */ BSTR bstrSAMIFileName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_captioningId( 
+-            /* [retval][out] */ BSTR *pbstrCaptioningID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrCaptioningID) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_captioningId( 
+             /* [in] */ BSTR bstrCaptioningID) = 0;
+@@ -2225,20 +2226,20 @@ EXTERN_C const IID IID_IWMPPlaylist;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_name( 
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_name( 
+             /* [in] */ BSTR bstrName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_attributeCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_attributeName( 
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ BSTR *pbstrAttributeName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrAttributeName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_item( 
+             long lIndex,
+@@ -2246,7 +2247,7 @@ EXTERN_C const IID IID_IWMPPlaylist;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getItemInfo( 
+             /* [in] */ BSTR bstrName,
+-            /* [retval][out] */ BSTR *pbstrVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setItemInfo( 
+             /* [in] */ BSTR bstrName,
+@@ -2254,7 +2255,7 @@ EXTERN_C const IID IID_IWMPPlaylist;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isIdentical( 
+             /* [in] */ IWMPPlaylist *pIWMPPlaylist,
+-            /* [retval][out] */ VARIANT_BOOL *pvbool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbool) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE clear( void) = 0;
+         
+@@ -2518,7 +2519,7 @@ EXTERN_C const IID IID_IWMPCdrom;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_driveSpecifier( 
+-            /* [retval][out] */ BSTR *pbstrDrive) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDrive) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playlist( 
+             /* [retval][out] */ IWMPPlaylist **ppPlaylist) = 0;
+@@ -2676,7 +2677,7 @@ EXTERN_C const IID IID_IWMPCdromCollection;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE item( 
+             /* [in] */ long lIndex,
+@@ -2840,11 +2841,11 @@ EXTERN_C const IID IID_IWMPStringCollection;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE item( 
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ BSTR *pbstrString) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrString) = 0;
+         
+     };
+     
+@@ -3029,7 +3030,7 @@ EXTERN_C const IID IID_IWMPMediaCollection;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getMediaAtom( 
+             /* [in] */ BSTR bstrItemName,
+-            /* [retval][out] */ long *plAtom) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plAtom) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setDeleted( 
+             /* [in] */ IWMPMedia *pItem,
+@@ -3037,7 +3038,7 @@ EXTERN_C const IID IID_IWMPMediaCollection;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE isDeleted( 
+             /* [in] */ IWMPMedia *pItem,
+-            /* [retval][out] */ VARIANT_BOOL *pvarfIsDeleted) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvarfIsDeleted) = 0;
+         
+     };
+     
+@@ -3276,7 +3277,7 @@ EXTERN_C const IID IID_IWMPPlaylistArray;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE item( 
+             /* [in] */ long lIndex,
+@@ -3446,7 +3447,7 @@ EXTERN_C const IID IID_IWMPPlaylistCollection;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE isDeleted( 
+             /* [in] */ IWMPPlaylist *pItem,
+-            /* [retval][out] */ VARIANT_BOOL *pvarfIsDeleted) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvarfIsDeleted) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE importPlaylist( 
+             /* [in] */ IWMPPlaylist *pItem,
+@@ -3641,47 +3642,47 @@ EXTERN_C const IID IID_IWMPNetwork;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_bandWidth( 
+-            /* [retval][out] */ long *plBandwidth) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBandwidth) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_recoveredPackets( 
+-            /* [retval][out] */ long *plRecoveredPackets) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plRecoveredPackets) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_sourceProtocol( 
+-            /* [retval][out] */ BSTR *pbstrSourceProtocol) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrSourceProtocol) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_receivedPackets( 
+-            /* [retval][out] */ long *plReceivedPackets) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plReceivedPackets) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_lostPackets( 
+-            /* [retval][out] */ long *plLostPackets) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plLostPackets) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_receptionQuality( 
+-            /* [retval][out] */ long *plReceptionQuality) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plReceptionQuality) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_bufferingCount( 
+-            /* [retval][out] */ long *plBufferingCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBufferingCount) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_bufferingProgress( 
+-            /* [retval][out] */ long *plBufferingProgress) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBufferingProgress) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_bufferingTime( 
+-            /* [retval][out] */ long *plBufferingTime) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBufferingTime) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_bufferingTime( 
+             /* [in] */ long lBufferingTime) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_frameRate( 
+-            /* [retval][out] */ long *plFrameRate) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plFrameRate) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_maxBitRate( 
+-            /* [retval][out] */ long *plBitRate) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBitRate) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_bitRate( 
+-            /* [retval][out] */ long *plBitRate) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plBitRate) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProxySettings( 
+             /* [in] */ BSTR bstrProtocol,
+-            /* [retval][out] */ long *plProxySetting) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plProxySetting) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxySettings( 
+             /* [in] */ BSTR bstrProtocol,
+@@ -3689,7 +3690,7 @@ EXTERN_C const IID IID_IWMPNetwork;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProxyName( 
+             /* [in] */ BSTR bstrProtocol,
+-            /* [retval][out] */ BSTR *pbstrProxyName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrProxyName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxyName( 
+             /* [in] */ BSTR bstrProtocol,
+@@ -3697,7 +3698,7 @@ EXTERN_C const IID IID_IWMPNetwork;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProxyPort( 
+             /* [in] */ BSTR bstrProtocol,
+-            /* [retval][out] */ long *lProxyPort) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *lProxyPort) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxyPort( 
+             /* [in] */ BSTR bstrProtocol,
+@@ -3705,7 +3706,7 @@ EXTERN_C const IID IID_IWMPNetwork;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProxyExceptionList( 
+             /* [in] */ BSTR bstrProtocol,
+-            /* [retval][out] */ BSTR *pbstrExceptionList) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrExceptionList) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxyExceptionList( 
+             /* [in] */ BSTR bstrProtocol,
+@@ -3713,26 +3714,26 @@ EXTERN_C const IID IID_IWMPNetwork;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProxyBypassForLocal( 
+             /* [in] */ BSTR bstrProtocol,
+-            /* [retval][out] */ VARIANT_BOOL *pfBypassForLocal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfBypassForLocal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxyBypassForLocal( 
+             /* [in] */ BSTR bstrProtocol,
+             /* [in] */ VARIANT_BOOL fBypassForLocal) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_maxBandwidth( 
+-            /* [retval][out] */ long *lMaxBandwidth) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *lMaxBandwidth) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_maxBandwidth( 
+             /* [in] */ long lMaxBandwidth) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_downloadProgress( 
+-            /* [retval][out] */ long *plDownloadProgress) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plDownloadProgress) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_encodedFrameRate( 
+-            /* [retval][out] */ long *plFrameRate) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plFrameRate) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_framesSkipped( 
+-            /* [retval][out] */ long *plFrames) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plFrames) = 0;
+         
+     };
+     
+@@ -4098,16 +4099,16 @@ EXTERN_C const IID IID_IWMPCore;
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE close( void) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_URL( 
+-            /* [retval][out] */ BSTR *pbstrURL) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrURL) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_URL( 
+             /* [in] */ BSTR bstrURL) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_openState( 
+-            /* [retval][out] */ WMPOpenState *pwmpos) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPOpenState *pwmpos) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playState( 
+-            /* [retval][out] */ WMPPlayState *pwmpps) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPPlayState *pwmpps) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_controls( 
+             /* [retval][out] */ IWMPControls **ppControl) = 0;
+@@ -4128,7 +4129,7 @@ EXTERN_C const IID IID_IWMPCore;
+             /* [retval][out] */ IWMPPlaylistCollection **ppPlaylistCollection) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_versionInfo( 
+-            /* [retval][out] */ BSTR *pbstrVersionInfo) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVersionInfo) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE launchURL( 
+             /* [in] */ BSTR bstrURL) = 0;
+@@ -4149,13 +4150,13 @@ EXTERN_C const IID IID_IWMPCore;
+             /* [retval][out] */ IWMPClosedCaption **ppClosedCaption) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isOnline( 
+-            /* [retval][out] */ VARIANT_BOOL *pfOnline) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pfOnline) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_error( 
+             /* [retval][out] */ IWMPError **ppError) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_status( 
+-            /* [retval][out] */ BSTR *pbstrStatus) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrStatus) = 0;
+         
+     };
+     
+@@ -4452,19 +4453,19 @@ EXTERN_C const IID IID_IWMPPlayer;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enabled( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enabled( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_fullScreen( 
+-            /* [retval][out] */ VARIANT_BOOL *pbFullScreen) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbFullScreen) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_fullScreen( 
+             VARIANT_BOOL bFullScreen) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enableContextMenu( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnableContextMenu) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enableContextMenu( 
+             VARIANT_BOOL bEnableContextMenu) = 0;
+@@ -4473,7 +4474,7 @@ EXTERN_C const IID IID_IWMPPlayer;
+             /* [in] */ BSTR bstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_uiMode( 
+-            /* [retval][out] */ BSTR *pbstrMode) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrMode) = 0;
+         
+     };
+     
+@@ -4835,19 +4836,19 @@ EXTERN_C const IID IID_IWMPPlayer2;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enabled( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enabled( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_fullScreen( 
+-            /* [retval][out] */ VARIANT_BOOL *pbFullScreen) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbFullScreen) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_fullScreen( 
+             VARIANT_BOOL bFullScreen) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enableContextMenu( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnableContextMenu) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enableContextMenu( 
+             VARIANT_BOOL bEnableContextMenu) = 0;
+@@ -4856,16 +4857,16 @@ EXTERN_C const IID IID_IWMPPlayer2;
+             /* [in] */ BSTR bstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_uiMode( 
+-            /* [retval][out] */ BSTR *pbstrMode) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_stretchToFit( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_stretchToFit( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_windowlessVideo( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_windowlessVideo( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+@@ -5816,10 +5817,10 @@ EXTERN_C const IID IID_IWMPDVD;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isAvailable( 
+             /* [in] */ BSTR bstrItem,
+-            /* [retval][out] */ VARIANT_BOOL *pIsAvailable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pIsAvailable) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_domain( 
+-            /* [retval][out] */ BSTR *strDomain) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *strDomain) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE topMenu( void) = 0;
+         
+@@ -6308,19 +6309,19 @@ EXTERN_C const IID IID_IWMPPlayer3;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enabled( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enabled( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_fullScreen( 
+-            /* [retval][out] */ VARIANT_BOOL *pbFullScreen) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbFullScreen) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_fullScreen( 
+             VARIANT_BOOL bFullScreen) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enableContextMenu( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnableContextMenu) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enableContextMenu( 
+             VARIANT_BOOL bEnableContextMenu) = 0;
+@@ -6329,16 +6330,16 @@ EXTERN_C const IID IID_IWMPPlayer3;
+             /* [in] */ BSTR bstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_uiMode( 
+-            /* [retval][out] */ BSTR *pbstrMode) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_stretchToFit( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_stretchToFit( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_windowlessVideo( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_windowlessVideo( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+@@ -6744,7 +6745,7 @@ EXTERN_C const IID IID_IWMPErrorItem2;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_condition( 
+-            /* [retval][out] */ long *plCondition) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCondition) = 0;
+         
+     };
+     
+@@ -6923,17 +6924,17 @@ EXTERN_C const IID IID_IWMPRemoteMediaServices;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetServiceType( 
+-            /* [out] */ BSTR *pbstrType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetApplicationName( 
+-            /* [out] */ BSTR *pbstrName) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetScriptableObject( 
+-            /* [out] */ BSTR *pbstrName,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName,
+             /* [out] */ IDispatch **ppDispatch) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCustomUIMode( 
+-            /* [out] */ BSTR *pbstrFile) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrFile) = 0;
+         
+     };
+     
+@@ -7135,16 +7136,16 @@ EXTERN_C const IID IID_IWMPMetadataPicture;
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_mimeType( 
+-            /* [retval][out] */ BSTR *pbstrMimeType) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrMimeType) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_pictureType( 
+-            /* [retval][out] */ BSTR *pbstrPictureType) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrPictureType) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_description( 
+-            /* [retval][out] */ BSTR *pbstrDescription) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDescription) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_URL( 
+-            /* [retval][out] */ BSTR *pbstrURL) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrURL) = 0;
+         
+     };
+     
+@@ -7306,10 +7307,10 @@ EXTERN_C const IID IID_IWMPMetadataText;
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_description( 
+-            /* [retval][out] */ BSTR *pbstrDescription) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDescription) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_text( 
+-            /* [retval][out] */ BSTR *pbstrText) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrText) = 0;
+         
+     };
+     
+@@ -7457,13 +7458,13 @@ EXTERN_C const IID IID_IWMPMedia3;
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getAttributeCountByType( 
+             /* [in] */ BSTR bstrType,
+             /* [in] */ BSTR bstrLanguage,
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getItemInfoByType( 
+             /* [in] */ BSTR bstrType,
+             /* [in] */ BSTR bstrLanguage,
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
+         
+     };
+     
+@@ -7777,14 +7778,14 @@ EXTERN_C const IID IID_IWMPSettings2;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_defaultAudioLanguage( 
+-            /* [retval][out] */ long *plLangID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plLangID) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_mediaAccessRights( 
+-            /* [retval][out] */ BSTR *pbstrRights) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrRights) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE requestMediaAccessRights( 
+             /* [in] */ BSTR bstrDesiredAccess,
+-            /* [retval][out] */ VARIANT_BOOL *pvbAccepted) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbAccepted) = 0;
+         
+     };
+     
+@@ -8127,34 +8128,34 @@ EXTERN_C const IID IID_IWMPControls3;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_audioLanguageCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAudioLanguageID( 
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ long *plLangID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plLangID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAudioLanguageDescription( 
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ BSTR *pbstrLangDesc) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrLangDesc) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentAudioLanguage( 
+-            /* [retval][out] */ long *plLangID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plLangID) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_currentAudioLanguage( 
+             /* [in] */ long lLangID) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentAudioLanguageIndex( 
+-            /* [retval][out] */ long *plIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plIndex) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_currentAudioLanguageIndex( 
+             /* [in] */ long lIndex) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getLanguageName( 
+             /* [in] */ long lLangID,
+-            /* [retval][out] */ BSTR *pbstrLangName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrLangName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentPositionTimecode( 
+-            /* [retval][out] */ BSTR *bstrTimecode) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *bstrTimecode) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_currentPositionTimecode( 
+             /* [in] */ BSTR bstrTimecode) = 0;
+@@ -8502,22 +8503,22 @@ EXTERN_C const IID IID_IWMPClosedCaption2;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SAMILangCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getSAMILangName( 
+             /* [in] */ long nIndex,
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getSAMILangID( 
+             /* [in] */ long nIndex,
+-            /* [retval][out] */ long *plLangID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plLangID) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SAMIStyleCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getSAMIStyleName( 
+             /* [in] */ long nIndex,
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+     };
+     
+@@ -8759,10 +8760,10 @@ EXTERN_C const IID IID_IWMPPlayerApplication;
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE switchToControl( void) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playerDocked( 
+-            /* [retval][out] */ VARIANT_BOOL *pbPlayerDocked) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbPlayerDocked) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_hasDisplay( 
+-            /* [retval][out] */ VARIANT_BOOL *pbHasDisplay) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbHasDisplay) = 0;
+         
+     };
+     
+@@ -9254,19 +9255,19 @@ EXTERN_C const IID IID_IWMPPlayer4;
+     {
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enabled( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enabled( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_fullScreen( 
+-            /* [retval][out] */ VARIANT_BOOL *pbFullScreen) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbFullScreen) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_fullScreen( 
+             VARIANT_BOOL bFullScreen) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_enableContextMenu( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnableContextMenu) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnableContextMenu) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_enableContextMenu( 
+             VARIANT_BOOL bEnableContextMenu) = 0;
+@@ -9275,22 +9276,22 @@ EXTERN_C const IID IID_IWMPPlayer4;
+             /* [in] */ BSTR bstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_uiMode( 
+-            /* [retval][out] */ BSTR *pbstrMode) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrMode) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_stretchToFit( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_stretchToFit( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_windowlessVideo( 
+-            /* [retval][out] */ VARIANT_BOOL *pbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbEnabled) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_windowlessVideo( 
+             /* [in] */ VARIANT_BOOL bEnabled) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_isRemote( 
+-            /* [retval][out] */ VARIANT_BOOL *pvarfIsRemote) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvarfIsRemote) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playerApplication( 
+             /* [retval][out] */ IWMPPlayerApplication **ppIWMPPlayerApplication) = 0;
+@@ -9883,35 +9884,35 @@ EXTERN_C const IID IID_IWMPSyncDevice;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_friendlyName( 
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_friendlyName( 
+             /* [in] */ BSTR bstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_deviceName( 
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_deviceId( 
+-            /* [retval][out] */ BSTR *pbstrDeviceId) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrDeviceId) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_partnershipIndex( 
+-            /* [retval][out] */ long *plIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plIndex) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_connected( 
+-            /* [retval][out] */ VARIANT_BOOL *pvbConnected) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbConnected) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_status( 
+-            /* [retval][out] */ WMPDeviceStatus *pwmpds) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPDeviceStatus *pwmpds) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_syncState( 
+-            /* [retval][out] */ WMPSyncState *pwmpss) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPSyncState *pwmpss) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_progress( 
+-            /* [retval][out] */ long *plProgress) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plProgress) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getItemInfo( 
+             /* [in] */ BSTR bstrItemName,
+-            /* [retval][out] */ BSTR *pbstrVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createPartnership( 
+             /* [in] */ VARIANT_BOOL vbShowUI) = 0;
+@@ -9926,7 +9927,7 @@ EXTERN_C const IID IID_IWMPSyncDevice;
+         
+         virtual HRESULT STDMETHODCALLTYPE isIdentical( 
+             /* [in] */ IWMPSyncDevice *pDevice,
+-            /* [retval][out] */ VARIANT_BOOL *pvbool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbool) = 0;
+         
+     };
+     
+@@ -10128,7 +10129,7 @@ EXTERN_C const IID IID_IWMPSyncServices;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_deviceCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getDevice( 
+             /* [in] */ long lIndex,
+@@ -10386,10 +10387,10 @@ EXTERN_C const IID IID_IWMPCdromRip;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ripState( 
+-            /* [retval][out] */ WMPRipState *pwmprs) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPRipState *pwmprs) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ripProgress( 
+-            /* [retval][out] */ long *plProgress) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plProgress) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE startRip( void) = 0;
+         
+@@ -10500,20 +10501,20 @@ EXTERN_C const IID IID_IWMPCdromBurn;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE isAvailable( 
+             /* [in] */ BSTR bstrItem,
+-            /* [retval][out] */ VARIANT_BOOL *pIsAvailable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pIsAvailable) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getItemInfo( 
+             /* [in] */ BSTR bstrItem,
+-            /* [retval][out] */ BSTR *pbstrVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_label( 
+-            /* [retval][out] */ BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrLabel) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_label( 
+             /* [in] */ BSTR bstrLabel) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnFormat( 
+-            /* [retval][out] */ WMPBurnFormat *pwmpbf) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPBurnFormat *pwmpbf) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_burnFormat( 
+             /* [in] */ WMPBurnFormat wmpbf) = 0;
+@@ -10527,10 +10528,10 @@ EXTERN_C const IID IID_IWMPCdromBurn;
+         virtual HRESULT STDMETHODCALLTYPE refreshStatus( void) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnState( 
+-            /* [retval][out] */ WMPBurnState *pwmpbs) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPBurnState *pwmpbs) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnProgress( 
+-            /* [retval][out] */ long *plProgress) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plProgress) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE startBurn( void) = 0;
+         
+@@ -11188,25 +11189,25 @@ EXTERN_C const IID IID_IWMPStringCollection2;
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE isIdentical( 
+             /* [in] */ IWMPStringCollection2 *pIWMPStringCollection2,
+-            /* [retval][out] */ VARIANT_BOOL *pvbool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbool) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getItemInfo( 
+             /* [in] */ long lCollectionIndex,
+             /* [in] */ BSTR bstrItemName,
+-            /* [retval][out] */ BSTR *pbstrValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrValue) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAttributeCountByType( 
+             /* [in] */ long lCollectionIndex,
+             /* [in] */ BSTR bstrType,
+             /* [in] */ BSTR bstrLanguage,
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getItemInfoByType( 
+             /* [in] */ long lCollectionIndex,
+             /* [in] */ BSTR bstrType,
+             /* [in] */ BSTR bstrLanguage,
+             /* [in] */ long lAttributeIndex,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
+         
+     };
+     
+@@ -11415,17 +11416,17 @@ EXTERN_C const IID IID_IWMPLibrary;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_name( 
+-            /* [retval][out] */ BSTR *pbstrName) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_type( 
+-            /* [retval][out] */ WMPLibraryType *pwmplt) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPLibraryType *pwmplt) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_mediaCollection( 
+             /* [retval][out] */ IWMPMediaCollection **ppIWMPMediaCollection) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE isIdentical( 
+             /* [in] */ IWMPLibrary *pIWMPLibrary,
+-            /* [retval][out] */ VARIANT_BOOL *pvbool) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbool) = 0;
+         
+     };
+     
+@@ -11535,7 +11536,7 @@ EXTERN_C const IID IID_IWMPLibraryServices;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE getCountByType( 
+             /* [in] */ WMPLibraryType wmplt,
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getLibraryByType( 
+             /* [in] */ WMPLibraryType wmplt,
+@@ -11635,10 +11636,10 @@ EXTERN_C const IID IID_IWMPLibrarySharingServices;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE isLibraryShared( 
+-            /* [retval][out] */ VARIANT_BOOL *pvbShared) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbShared) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE isLibrarySharingEnabled( 
+-            /* [retval][out] */ VARIANT_BOOL *pvbEnabled) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pvbEnabled) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE showLibrarySharing( void) = 0;
+         
+@@ -11756,11 +11757,11 @@ EXTERN_C const IID IID_IWMPFolderMonitorServices;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_count( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE item( 
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ BSTR *pbstrFolder) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrFolder) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE add( 
+             /* [in] */ BSTR bstrFolder) = 0;
+@@ -11769,19 +11770,19 @@ EXTERN_C const IID IID_IWMPFolderMonitorServices;
+             /* [in] */ long lIndex) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_scanState( 
+-            /* [retval][out] */ WMPFolderScanState *pwmpfss) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPFolderScanState *pwmpfss) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_currentFolder( 
+-            /* [retval][out] */ BSTR *pbstrFolder) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrFolder) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_scannedFilesCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_addedFilesCount( 
+-            /* [retval][out] */ long *plCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_updateProgress( 
+-            /* [retval][out] */ long *plProgress) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plProgress) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE startScan( void) = 0;
+         
+@@ -12394,7 +12395,7 @@ EXTERN_C const IID IID_IWMPLibrary2;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE getItemInfo( 
+             /* [in] */ BSTR bstrItemName,
+-            /* [retval][out] */ BSTR *pbstrVal) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pbstrVal) = 0;
+         
+     };
+     

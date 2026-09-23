@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h
-index 0c6cddc590..8679df9a96 100644
+index 0c6cddc590..9173ff7daf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 0c6cddc590..8679df9a96 100644
  /*++
  
  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -282,7 +283,7 @@ typedef
+ DWORD
+ (_stdcall *PSET_RESOURCE_STATUS_ROUTINE_EX) (
+     IN RESOURCE_HANDLE ResourceHandle,
+-    IN PRESOURCE_STATUS_EX ResourceStatus
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PRESOURCE_STATUS_EX ResourceStatus
+     );
+ 
+ #define ResUtilInitializeResourceStatusEx( _resource_status_ ) \
+@@ -301,7 +302,7 @@ typedef
+ DWORD
+ (_stdcall *PSET_RESOURCE_STATUS_ROUTINE) (
+     IN RESOURCE_HANDLE ResourceHandle,
+-    IN PRESOURCE_STATUS ResourceStatus
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PRESOURCE_STATUS ResourceStatus
+     );
+ 
+ //
 @@ -328,7 +329,7 @@ typedef
  VOID
  (_stdcall *PLOG_EVENT_ROUTINE) (
@@ -16,6 +34,97 @@ index 0c6cddc590..8679df9a96 100644
      IN LPCWSTR FormatString,
      ...
      );
+@@ -344,63 +345,63 @@ RESID
+ typedef
+ VOID
+ (_stdcall *PCLOSE_ROUTINE) (
+-    IN RESID Resource
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource
+     );
+ 
+ typedef
+ DWORD
+ (_stdcall *PONLINE_ROUTINE) (
+-    IN RESID Resource,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource,
+     IN OUT LPHANDLE EventHandle
+     );
+ 
+ typedef
+ DWORD
+ (_stdcall *POFFLINE_ROUTINE) (
+-    IN RESID Resource
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource
+     );
+ 
+ typedef
+ VOID
+ (_stdcall *PTERMINATE_ROUTINE) (
+-    IN RESID Resource
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource
+     );
+ 
+ typedef
+ BOOL
+ (_stdcall *PIS_ALIVE_ROUTINE) (
+-    IN RESID Resource
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource
+     );
+ 
+ typedef
+ BOOL
+ (_stdcall *PLOOKS_ALIVE_ROUTINE) (
+-    IN RESID Resource
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource
+     );
+ 
+ typedef
+ DWORD
+ (_stdcall *PARBITRATE_ROUTINE) (
+-    IN RESID Resource,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource,
+     IN PQUORUM_RESOURCE_LOST LostQuorumResource
+     );
+ 
+ typedef
+ DWORD
+ (_stdcall *PRELEASE_ROUTINE) (
+-    IN RESID Resource
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource
+     );
+ 
+ typedef
+ DWORD
+ (_stdcall *PRESOURCE_CONTROL_ROUTINE) (
+-    IN RESID Resource,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource,
+     IN DWORD ControlCode,
+-    IN PVOID InBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID InBuffer,
+     IN DWORD InBufferSize,
+-    OUT PVOID OutBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID OutBuffer,
+     IN DWORD OutBufferSize,
+-    OUT LPDWORD BytesReturned
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD BytesReturned
+     );
+ 
+ typedef
+@@ -408,11 +409,11 @@ DWORD
+ (_stdcall *PRESOURCE_TYPE_CONTROL_ROUTINE) (
+     IN LPCWSTR ResourceTypeName,
+     IN DWORD ControlCode,
+-    IN PVOID InBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID InBuffer,
+     IN DWORD InBufferSize,
+-    OUT PVOID OutBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID OutBuffer,
+     IN DWORD OutBufferSize,
+-    OUT LPDWORD BytesReturned
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD BytesReturned
+     );
+ 
+ 
 @@ -439,7 +440,7 @@ typedef
  DWORD
  (_stdcall *PONLINE_V2_ROUTINE) (
@@ -25,6 +134,114 @@ index 0c6cddc590..8679df9a96 100644
      _In_ DWORD OnlineFlags,
      _In_reads_bytes_opt_(InBufferSize) PBYTE InBuffer,
      _In_ DWORD InBufferSize,
+@@ -470,7 +471,7 @@ DWORD
+ typedef
+ DWORD
+ (_stdcall *PCANCEL_ROUTINE) (
+-    IN RESID Resource,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource,
+     IN DWORD CancelFlags_RESERVED /*RESERVED*/
+     );
+ 
+@@ -480,15 +481,15 @@ typedef INT64 PRES_CTL_CTX;
+ typedef
+ DWORD
+ (_stdcall *PBEGIN_RESCALL_ROUTINE)(
+-    IN RESID Resource,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource,
+     IN DWORD ControlCode,
+-    IN PVOID InBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID InBuffer,
+     IN DWORD InBufferSize,
+-    OUT PVOID OutBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID OutBuffer,
+     IN DWORD OutBufferSize,
+-    OUT LPDWORD BytesReturned,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD BytesReturned,
+     IN PRES_CTL_CTX context,
+-    OUT PBOOL ReturnedAsynchronously
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PBOOL ReturnedAsynchronously
+     );
+ 
+ typedef
+@@ -496,13 +497,13 @@ DWORD
+ (_stdcall *PBEGIN_RESTYPECALL_ROUTINE)(
+     IN LPCWSTR ResourceTypeName,
+     IN DWORD ControlCode,
+-    IN PVOID InBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID InBuffer,
+     IN DWORD InBufferSize,
+-    OUT PVOID OutBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID OutBuffer,
+     IN DWORD OutBufferSize,
+-    OUT LPDWORD BytesReturned,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD BytesReturned,
+     IN PRESTYPE_CTL_CTX context,
+-    OUT PBOOL ReturnedAsynchronously
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PBOOL ReturnedAsynchronously
+     );
+ #endif
+ 
+@@ -517,16 +518,16 @@ typedef enum _RESOURCE_EXIT_STATE {
+ typedef
+ DWORD
+ (_stdcall *PBEGIN_RESCALL_AS_USER_ROUTINE)(
+-    IN RESID Resource,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RESID Resource,
+     IN HANDLE TokenHandle,
+     IN DWORD ControlCode,
+-    IN PVOID InBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID InBuffer,
+     IN DWORD InBufferSize,
+-    OUT PVOID OutBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID OutBuffer,
+     IN DWORD OutBufferSize,
+-    OUT LPDWORD BytesReturned,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD BytesReturned,
+     IN PRES_CTL_CTX context,
+-    OUT PBOOL ReturnedAsynchronously
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PBOOL ReturnedAsynchronously
+     );
+ 
+ typedef
+@@ -535,13 +536,13 @@ DWORD
+     IN LPCWSTR ResourceTypeName,
+     IN HANDLE TokenHandle,
+     IN DWORD ControlCode,
+-    IN PVOID InBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID InBuffer,
+     IN DWORD InBufferSize,
+-    OUT PVOID OutBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID OutBuffer,
+     IN DWORD OutBufferSize,
+-    OUT LPDWORD BytesReturned,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD BytesReturned,
+     IN PRESTYPE_CTL_CTX context,
+-    OUT PBOOL ReturnedAsynchronously
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PBOOL ReturnedAsynchronously
+     );
+ 
+ #define CLUS_RESDLL_OPEN_DONT_DELETE_TEMP_DISK 0x00000002
+@@ -739,7 +740,7 @@ DWORD
+     IN DWORD MaxVersionSupported,
+     IN PSET_RESOURCE_STATUS_ROUTINE SetResourceStatus,
+     IN PLOG_EVENT_ROUTINE LogEvent,
+-    OUT PCLRES_FUNCTION_TABLE *FunctionTable
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLRES_FUNCTION_TABLE *FunctionTable
+     );
+ 
+ #if CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8
+@@ -906,8 +907,8 @@ DWORD
+     IN LPCWSTR                            ResourceType,
+     IN DWORD                              MinVersionSupported,
+     IN DWORD                              MaxVersionSupported,
+-    IN PCLRES_CALLBACK_FUNCTION_TABLE     MonitorCallbackFunctions,
+-    OUT PCLRES_FUNCTION_TABLE *           ResourceDllInterfaceFunctions
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLRES_CALLBACK_FUNCTION_TABLE     MonitorCallbackFunctions,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLRES_FUNCTION_TABLE *           ResourceDllInterfaceFunctions
+     );
+ 
+ #endif
 @@ -990,34 +991,34 @@ typedef struct _CLUSTER_HEALTH_FAULT_ARRAY
  //
  //Health fault utility routines
@@ -75,7 +292,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ClusAddClusterHealthFault(
      _In_ HCLUSTER hCluster,
-@@ -1037,7 +1038,7 @@ ClusAddClusterHealthFault(
+@@ -1037,20 +1038,20 @@ ClusAddClusterHealthFault(
  // Resource Utility Routines
  //
  
@@ -84,8 +301,15 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilStartResourceService(
      IN LPCWSTR pszServiceName,
-@@ -1050,7 +1051,7 @@ typedef DWORD
-     OUT LPSC_HANDLE phServiceHandle
+-    OUT LPSC_HANDLE phServiceHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPSC_HANDLE phServiceHandle
+     );
+ 
+ typedef DWORD
+ (WINAPI * PRESUTIL_START_RESOURCE_SERVICE)(
+     IN LPCWSTR pszServiceName,
+-    OUT LPSC_HANDLE phServiceHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPSC_HANDLE phServiceHandle
      );
  
 -DWORD
@@ -219,7 +443,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilSetPropertyTable(
      _In_ HKEY hkeyClusterKey,
-@@ -1296,7 +1297,7 @@ typedef DWORD
+@@ -1296,12 +1297,12 @@ typedef DWORD
      _Out_opt_ LPBYTE pOutParams
      );
  
@@ -228,7 +452,22 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilSetPropertyTableEx(
      IN HKEY hkeyClusterKey,
-@@ -1321,7 +1322,7 @@ typedef DWORD
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    IN PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID Reserved,
+     IN BOOL bAllowUnknownProperties,
+     IN const PVOID pInPropertyList,
+     IN DWORD cbInPropertyListSize,
+@@ -1313,7 +1314,7 @@ typedef DWORD
+ (WINAPI * PRESUTIL_SET_PROPERTY_TABLE_EX)(
+     IN HKEY hkeyClusterKey,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    IN PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID Reserved,
+     IN BOOL bAllowUnknownProperties,
+     IN const PVOID pInPropertyList,
+     IN DWORD cbInPropertyListSize,
+@@ -1321,12 +1322,12 @@ typedef DWORD
      OUT OPTIONAL LPBYTE pOutParams
      );
  
@@ -237,7 +476,21 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilSetPropertyParameterBlock(
      IN HKEY hkeyClusterKey,
-@@ -1344,7 +1345,7 @@ typedef DWORD
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    IN PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID Reserved,
+     IN const LPBYTE pInParams,
+     IN const PVOID pInPropertyList,
+     IN DWORD cbInPropertyListSize,
+@@ -1337,19 +1338,19 @@ typedef DWORD
+ (WINAPI * PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK)(
+     IN HKEY hkeyClusterKey,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    IN PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID Reserved,
+     IN const LPBYTE pInParams,
+     IN const PVOID pInPropertyList,
+     IN DWORD cbInPropertyListSize,
      OUT OPTIONAL LPBYTE pOutParams
      );
  
@@ -246,6 +499,21 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilSetPropertyParameterBlockEx(
      IN HKEY hkeyClusterKey,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    IN PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID Reserved,
+     IN const LPBYTE pInParams,
+     IN const PVOID pInPropertyList,
+     IN DWORD cbInPropertyListSize,
+@@ -1361,7 +1362,7 @@ typedef DWORD
+ (WINAPI * PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK_EX)(
+     IN HKEY hkeyClusterKey,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    IN PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID Reserved,
+     IN const LPBYTE pInParams,
+     IN const PVOID pInPropertyList,
+     IN DWORD cbInPropertyListSize,
 @@ -1369,7 +1370,7 @@ typedef DWORD
      OUT OPTIONAL LPBYTE pOutParams
      );
@@ -273,7 +541,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilPropertyListFromParameterBlock(
      _In_ const PRESUTIL_PROPERTY_ITEM pPropertyTable,
-@@ -1435,7 +1436,7 @@ typedef DWORD
+@@ -1435,22 +1436,22 @@ typedef DWORD
      _Out_ LPDWORD pcbRequired
      );
  
@@ -281,8 +549,17 @@ index 0c6cddc590..8679df9a96 100644
 +_Windows_SupportedOS_Server2008_ DWORD
  WINAPI
  ResUtilDupParameterBlock(
-     OUT LPBYTE pOutParams,
-@@ -1450,7 +1451,7 @@ typedef DWORD
+-    OUT LPBYTE pOutParams,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE pOutParams,
+     IN const LPBYTE pInParams,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable
+     );
+ 
+ typedef DWORD
+ (WINAPI * PRESUTIL_DUP_PARAMETER_BLOCK)(
+-    OUT LPBYTE pOutParams,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE pOutParams,
+     IN const LPBYTE pInParams,
      IN const PRESUTIL_PROPERTY_ITEM pPropertyTable
      );
  
@@ -453,7 +730,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilGetMultiSzProperty(
      _Outptr_result_bytebuffer_(*pcbOutValueSize) LPWSTR *ppszOutValue,
-@@ -1805,7 +1806,7 @@ typedef DWORD
+@@ -1805,76 +1806,76 @@ typedef DWORD
      _Inout_ LPDWORD pcbPropertyListSize
      );
  
@@ -461,27 +738,90 @@ index 0c6cddc590..8679df9a96 100644
 +_Windows_SupportedOS_Server2008_ DWORD
  WINAPI
  ResUtilGetDwordProperty(
-     OUT LPDWORD pdwOutValue,
-@@ -1828,7 +1829,7 @@ typedef DWORD
-     OUT LPDWORD pcbPropertyListSize
+-    OUT LPDWORD pdwOutValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pdwOutValue,
+     IN const PCLUSPROP_DWORD pValueStruct,
+     IN DWORD dwOldValue,
+     IN DWORD dwMinimum,
+     IN DWORD dwMaximum,
+-    OUT LPBYTE * ppPropertyList,
+-    OUT LPDWORD pcbPropertyListSize
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * ppPropertyList,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pcbPropertyListSize
+     );
+ 
+ typedef DWORD
+ (WINAPI * PRESUTIL_GET_DWORD_PROPERTY)(
+-    OUT LPDWORD pdwOutValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pdwOutValue,
+     IN const PCLUSPROP_DWORD pValueStruct,
+     IN DWORD dwOldValue,
+     IN DWORD dwMinimum,
+     IN DWORD dwMaximum,
+-    OUT LPBYTE * ppPropertyList,
+-    OUT LPDWORD pcbPropertyListSize
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * ppPropertyList,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pcbPropertyListSize
      );
  
 -DWORD
 +_Windows_SupportedOS_Server2008_ DWORD
  WINAPI
  ResUtilGetLongProperty(
-     OUT LPLONG plOutValue,
-@@ -1851,7 +1852,7 @@ typedef DWORD
-     OUT LPDWORD pcbPropertyListSize
+-    OUT LPLONG plOutValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPLONG plOutValue,
+     IN const PCLUSPROP_LONG pValueStruct,
+     IN LONG lOldValue,
+     IN LONG lMinimum,
+     IN LONG lMaximum,
+-    OUT LPBYTE * ppPropertyList,
+-    OUT LPDWORD pcbPropertyListSize
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * ppPropertyList,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pcbPropertyListSize
+     );
+ 
+ typedef DWORD
+ (WINAPI * PRESUTIL_GET_LONG_PROPERTY)(
+-    OUT LPLONG plOutValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPLONG plOutValue,
+     IN const PCLUSPROP_LONG pValueStruct,
+     IN LONG lOldValue,
+     IN LONG lMinimum,
+     IN LONG lMaximum,
+-    OUT LPBYTE * ppPropertyList,
+-    OUT LPDWORD pcbPropertyListSize
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * ppPropertyList,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pcbPropertyListSize
      );
  
 -DWORD
 +_Windows_SupportedOS_Server2008_ DWORD
  WINAPI
  ResUtilGetFileTimeProperty(
-     OUT LPFILETIME pftOutValue,
-@@ -1874,7 +1875,7 @@ typedef DWORD
-     OUT LPDWORD pcbPropertyListSize
+-    OUT LPFILETIME pftOutValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPFILETIME pftOutValue,
+     IN const PCLUSPROP_FILETIME pValueStruct,
+     IN FILETIME ftOldValue,
+     IN FILETIME ftMinimum,
+     IN FILETIME ftMaximum,
+-    OUT LPBYTE * ppPropertyList,
+-    OUT LPDWORD pcbPropertyListSize
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * ppPropertyList,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pcbPropertyListSize
+     );
+ 
+ typedef DWORD
+ (WINAPI * PRESUTIL_GET_FILETIME_PROPERTY)(
+-    OUT LPFILETIME pftOutValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPFILETIME pftOutValue,
+     IN const PCLUSPROP_FILETIME pValueStruct,
+     IN FILETIME ftOldValue,
+     IN FILETIME ftMinimum,
+     IN FILETIME ftMaximum,
+-    OUT LPBYTE * ppPropertyList,
+-    OUT LPDWORD pcbPropertyListSize
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * ppPropertyList,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pcbPropertyListSize
      );
  
 -LPVOID
@@ -489,7 +829,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilGetEnvironmentWithNetName(
      _In_ HRESOURCE hResource
-@@ -1885,7 +1886,7 @@ typedef LPVOID
+@@ -1885,18 +1886,18 @@ typedef LPVOID
      _In_ HRESOURCE hResource
      );
  
@@ -497,9 +837,14 @@ index 0c6cddc590..8679df9a96 100644
 +_Windows_SupportedOS_Server2008_ DWORD
  WINAPI
  ResUtilFreeEnvironment(
-     IN LPVOID lpEnvironment
-@@ -1896,7 +1897,7 @@ typedef DWORD
-     IN LPVOID lpEnvironment
+-    IN LPVOID lpEnvironment
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID lpEnvironment
+     );
+ 
+ typedef DWORD
+ (WINAPI * PRESUTIL_FREE_ENVIRONMENT)(
+-    IN LPVOID lpEnvironment
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID lpEnvironment
      );
  
 -LPWSTR
@@ -615,24 +960,51 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilFindFileTimeProperty(
      _In_reads_bytes_(cbPropertyListSize) const PVOID pPropertyList,
-@@ -2130,7 +2131,7 @@ typedef DWORD (WINAPI *PWORKER_START_ROUTINE)(
-     LPVOID lpThreadParameter
+@@ -2126,34 +2127,34 @@ typedef struct CLUS_WORKER {
+ } CLUS_WORKER, *PCLUS_WORKER;
+ 
+ typedef DWORD (WINAPI *PWORKER_START_ROUTINE)(
+-    PCLUS_WORKER pWorker,
+-    LPVOID lpThreadParameter
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCLUS_WORKER pWorker,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpThreadParameter
      );
  
 -DWORD
 +_Windows_SupportedOS_Server2008_ DWORD
  WINAPI
  ClusWorkerCreate(
-     OUT PCLUS_WORKER lpWorker,
-@@ -2145,7 +2146,7 @@ typedef DWORD
-     IN PVOID lpParameter
+-    OUT PCLUS_WORKER lpWorker,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLUS_WORKER lpWorker,
+     IN PWORKER_START_ROUTINE lpStartAddress,
+-    IN PVOID lpParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID lpParameter
+     );
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_CLUS_WORKER_CREATE)(
+-    OUT PCLUS_WORKER lpWorker,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLUS_WORKER lpWorker,
+     IN PWORKER_START_ROUTINE lpStartAddress,
+-    IN PVOID lpParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID lpParameter
      );
  
 -BOOL
 +_Windows_SupportedOS_Server2008_ BOOL
  WINAPI
  ClusWorkerCheckTerminate(
-     IN PCLUS_WORKER lpWorker
+-    IN PCLUS_WORKER lpWorker
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_WORKER lpWorker
+     );
+ 
+ typedef BOOL
+ (WINAPI * PCLUSAPIClusWorkerCheckTerminate)(
+-    IN PCLUS_WORKER lpWorker
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_WORKER lpWorker
+     );
+ 
+ VOID
 @@ -2167,7 +2168,7 @@ typedef VOID
      _In_ PCLUS_WORKER lpWorker
      );
@@ -651,8 +1023,18 @@ index 0c6cddc590..8679df9a96 100644
  ClusWorkersTerminate(
      _Inout_updates_(ClusWorkersCount) PCLUS_WORKER * ClusWorkers,
      _In_ size_t const ClusWorkersCount,
-@@ -2191,7 +2192,7 @@ typedef   DWORD (*LPGROUP_CALLBACK_EX)( HCLUSTER, HGROUP, HGROUP , PVOID );
- typedef   DWORD (*LPNODE_CALLBACK)( HCLUSTER, HNODE, CLUSTER_NODE_STATE, PVOID );
+@@ -2185,13 +2186,13 @@ ClusWorkersTerminate(
+ 
+ //Define enumerate resource callback function. This gets called for each resource enumerated
+ //by ResUtilEnumResources
+-typedef   DWORD (*LPRESOURCE_CALLBACK)( HRESOURCE, HRESOURCE , PVOID );
+-typedef   DWORD (*LPRESOURCE_CALLBACK_EX)( HCLUSTER, HRESOURCE, HRESOURCE , PVOID );
+-typedef   DWORD (*LPGROUP_CALLBACK_EX)( HCLUSTER, HGROUP, HGROUP , PVOID );
+-typedef   DWORD (*LPNODE_CALLBACK)( HCLUSTER, HNODE, CLUSTER_NODE_STATE, PVOID );
++typedef   DWORD (*LPRESOURCE_CALLBACK)( _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE, _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE , _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID );
++typedef   DWORD (*LPRESOURCE_CALLBACK_EX)( _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER, _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE, _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE , _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID );
++typedef   DWORD (*LPGROUP_CALLBACK_EX)( _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER, _WIN32META_ANNOTATION_("win32metadata:in") HGROUP, _WIN32META_ANNOTATION_("win32metadata:in") HGROUP , _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID );
++typedef   DWORD (*LPNODE_CALLBACK)( _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER, _WIN32META_ANNOTATION_("win32metadata:in") HNODE, CLUSTER_NODE_STATE, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID );
  
  
 -BOOL
@@ -669,7 +1051,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilResourceTypesEqual(
      IN LPCWSTR      lpszResourceTypeName,
-@@ -2220,7 +2221,7 @@ typedef BOOL
+@@ -2220,26 +2221,26 @@ typedef BOOL
      IN HRESOURCE    hResource
      );
  
@@ -677,8 +1059,15 @@ index 0c6cddc590..8679df9a96 100644
 +_Windows_SupportedOS_Server2008_ BOOL
  WINAPI
  ResUtilIsResourceClassEqual(
-     IN PCLUS_RESOURCE_CLASS_INFO    prci,
-@@ -2233,7 +2234,7 @@ typedef BOOL
+-    IN PCLUS_RESOURCE_CLASS_INFO    prci,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_RESOURCE_CLASS_INFO    prci,
+     IN HRESOURCE                    hResource
+     );
+ 
+ typedef BOOL
+ (WINAPI * PRESUTIL_IS_RESOURCE_CLASS_EQUAL)(
+-    IN PCLUS_RESOURCE_CLASS_INFO    prci,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_RESOURCE_CLASS_INFO    prci,
      IN HRESOURCE                    hResource
      );
  
@@ -687,8 +1076,19 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilEnumResources(
      IN HRESOURCE            hSelf,
-@@ -2250,7 +2251,7 @@ typedef DWORD
-     IN PVOID                pParameter
+     IN LPCWSTR              lpszResTypeName,
+     IN LPRESOURCE_CALLBACK  pResCallBack,
+-    IN PVOID                pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                pParameter
+     );
+ 
+ typedef DWORD
+@@ -2247,17 +2248,17 @@ typedef DWORD
+     IN HRESOURCE            hSelf,
+     IN LPCWSTR              lpszResTypeName,
+     IN LPRESOURCE_CALLBACK  pResCallBack,
+-    IN PVOID                pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                pParameter
      );
  
 -DWORD
@@ -696,8 +1096,20 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilEnumResourcesEx(
      IN HCLUSTER                 hCluster,
-@@ -2269,7 +2270,7 @@ typedef DWORD
-     IN PVOID                    pParameter
+     IN HRESOURCE                hSelf,
+     IN LPCWSTR                  lpszResTypeName,
+     IN LPRESOURCE_CALLBACK_EX   pResCallBack,
+-    IN PVOID                    pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                    pParameter
+     );
+ 
+ typedef DWORD
+@@ -2266,10 +2267,10 @@ typedef DWORD
+     IN HRESOURCE                hSelf,
+     IN LPCWSTR                  lpszResTypeName,
+     IN LPRESOURCE_CALLBACK_EX   pResCallBack,
+-    IN PVOID                    pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                    pParameter
      );
  
 -HRESOURCE
@@ -714,7 +1126,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilGetResourceDependencyByName(
      IN HCLUSTER hCluster,
-@@ -2299,7 +2300,7 @@ typedef HRESOURCE
+@@ -2299,12 +2300,12 @@ typedef HRESOURCE
      IN BOOL     bRecurse
      );
  
@@ -723,7 +1135,18 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilGetResourceDependencyByClass(
      IN HCLUSTER                     hCluster,
-@@ -2316,7 +2317,7 @@ typedef HRESOURCE
+     IN HANDLE                       hSelf,
+-    IN PCLUS_RESOURCE_CLASS_INFO    prci,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_RESOURCE_CLASS_INFO    prci,
+     IN BOOL                         bRecurse
+     );
+ 
+@@ -2312,11 +2313,11 @@ typedef HRESOURCE
+ (WINAPI * PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS)(
+     IN HCLUSTER                     hCluster,
+     IN HANDLE                       hSelf,
+-    IN PCLUS_RESOURCE_CLASS_INFO    prci,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_RESOURCE_CLASS_INFO    prci,
      IN BOOL                         bRecurse
      );
  
@@ -849,7 +1272,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilSetResourceServiceStartParametersEx(
      IN      LPCWSTR             pszServiceName,
-@@ -2591,7 +2592,7 @@ typedef DWORD
+@@ -2591,14 +2592,14 @@ typedef DWORD
      IN      RESOURCE_HANDLE     hResourceHandle
      );
  
@@ -858,7 +1281,20 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilEnumResourcesEx2(
      IN HCLUSTER                 hCluster,
-@@ -2612,7 +2613,7 @@ typedef DWORD
+     IN HRESOURCE                hSelf,
+     IN LPCWSTR                  lpszResTypeName,
+     IN LPRESOURCE_CALLBACK_EX   pResCallBack,
+-    IN PVOID                    pParameter,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                    pParameter,
+     IN DWORD                    dwDesiredAccess
+     );
+ 
+@@ -2608,11 +2609,11 @@ typedef DWORD
+     IN HRESOURCE                hSelf,
+     IN LPCWSTR                  lpszResTypeName,
+     IN LPRESOURCE_CALLBACK_EX   pResCallBack,
+-    IN PVOID                    pParameter,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                    pParameter,
      IN DWORD                    dwDesiredAccess
      );
  
@@ -876,7 +1312,7 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilGetResourceDependencyByNameEx(
      IN HCLUSTER hCluster,
-@@ -2646,7 +2647,7 @@ typedef HRESOURCE
+@@ -2646,12 +2647,12 @@ typedef HRESOURCE
      IN DWORD    dwDesiredAccess
      );
  
@@ -885,7 +1321,19 @@ index 0c6cddc590..8679df9a96 100644
  WINAPI
  ResUtilGetResourceDependencyByClassEx(
      IN HCLUSTER                     hCluster,
-@@ -2665,7 +2666,7 @@ typedef HRESOURCE
+     IN HANDLE                       hSelf,
+-    IN PCLUS_RESOURCE_CLASS_INFO    prci,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_RESOURCE_CLASS_INFO    prci,
+     IN BOOL                         bRecurse,
+     IN DWORD                        dwDesiredAccess
+     );
+@@ -2660,12 +2661,12 @@ typedef HRESOURCE
+ (WINAPI * PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX)(
+     IN HCLUSTER                     hCluster,
+     IN HANDLE                       hSelf,
+-    IN PCLUS_RESOURCE_CLASS_INFO    prci,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLUS_RESOURCE_CLASS_INFO    prci,
+     IN BOOL                         bRecurse,
      IN DWORD                        dwDesiredAccess
      );
  
@@ -960,3 +1408,70 @@ index 0c6cddc590..8679df9a96 100644
  
  DWORD ResUtilsDeleteKeyTree(HKEY key, LPCWSTR keyName, BOOL treatNoKeyAsError);
  
+@@ -2859,7 +2860,7 @@ WINAPI
+ ResUtilGroupsEqual(
+     IN HGROUP    hSelf,
+     IN HGROUP    hGroup,
+-    OUT BOOL*    pEqual
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL*    pEqual
+     );
+ 
+ DWORD
+@@ -2868,7 +2869,7 @@ ResUtilEnumGroups(
+     IN HCLUSTER             hCluster,
+     IN HGROUP               hSelf,
+     IN LPGROUP_CALLBACK_EX  pResCallBack,
+-    IN PVOID                pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                pParameter
+     );
+ 
+ DWORD
+@@ -2878,17 +2879,17 @@ ResUtilEnumGroupsEx(
+     IN HGROUP               hSelf,
+     IN CLUSGROUP_TYPE           groupType,
+     IN LPGROUP_CALLBACK_EX      pResCallBack,
+-    IN PVOID                    pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                    pParameter
+     );
+ 
+ 
+ DWORD
+ WINAPI
+-ResUtilDupGroup(IN HGROUP group, OUT HGROUP *copy);
++ResUtilDupGroup(IN HGROUP group, _WIN32META_ANNOTATION_("win32metadata:in") OUT HGROUP *copy);
+ 
+ DWORD
+ WINAPI
+-ResUtilGetClusterGroupType(IN HGROUP hGroup, OUT CLUSGROUP_TYPE * groupType);
++ResUtilGetClusterGroupType(IN HGROUP hGroup, _WIN32META_ANNOTATION_("win32metadata:in") OUT CLUSGROUP_TYPE * groupType);
+ 
+ HGROUP
+ WINAPI
+@@ -2900,15 +2901,15 @@ ResUtilResourceDepEnum(
+     IN HRESOURCE                hSelf,
+     IN DWORD                    enumType,
+     IN LPRESOURCE_CALLBACK_EX   pResCallBack,
+-    IN PVOID                    pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                    pParameter
+     );
+ DWORD
+ WINAPI
+-ResUtilDupResource(IN HRESOURCE group, OUT HRESOURCE *copy);
++ResUtilDupResource(IN HRESOURCE group, _WIN32META_ANNOTATION_("win32metadata:in") OUT HRESOURCE *copy);
+ 
+ DWORD
+ WINAPI
+-ResUtilGetClusterId( IN HCLUSTER hCluster,OUT GUID *guid );
++ResUtilGetClusterId( IN HCLUSTER hCluster,_WIN32META_ANNOTATION_("win32metadata:in") OUT GUID *guid );
+ 
+ 
+ DWORD
+@@ -2916,7 +2917,7 @@ WINAPI
+ ResUtilNodeEnum(
+     IN HCLUSTER             hCluster,
+     IN LPNODE_CALLBACK      pNodeCallBack,
+-    IN PVOID                pParameter
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                pParameter
+     );
+ 
+ #ifdef __cplusplus

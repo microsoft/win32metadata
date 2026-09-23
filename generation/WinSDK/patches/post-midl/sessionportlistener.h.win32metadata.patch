@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h
-index ea09cd585a..abb1ca26af 100644
+index ea09cd585a..5e97396d04 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index ea09cd585a..abb1ca26af 100644
  /**
   * @file
   * alljoyn_sessionportlistener is a collection of functions implemented by users
+@@ -52,7 +53,7 @@ typedef struct _alljoyn_sessionportlistener_handle*         alljoyn_sessionportl
+  * @return   Return true if JoinSession request is accepted. false if rejected.
+  */
+ typedef QCC_BOOL (AJ_CALL * alljoyn_sessionportlistener_acceptsessionjoiner_ptr)(const void* context, alljoyn_sessionport sessionPort,
+-                                                                                 const char* joiner,  const alljoyn_sessionopts opts);
++                                                                                 const char* joiner,  _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts);
+ 
+ /**
+  * Type for the SessionJoined callback.
 @@ -94,7 +95,7 @@ typedef struct {
   *
   * @return Handle to newly allocated alljoyn_sessionportlistener.

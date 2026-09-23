@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h b/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h
-index 294f7aebb4..ad45d2e84a 100644
+index 294f7aebb4..2ca27bb7f8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winppi.h
 @@ -1,3 +1,4 @@
@@ -7,15 +7,19 @@ index 294f7aebb4..ad45d2e84a 100644
  /*++ 
  Copyright (c) 1985-1999, Microsoft Corporation
  All rights reserved
-@@ -25,6 +26,7 @@ typedef int (CALLBACK* EMFPLAYPROC)( HDC, INT, HANDLE );
+@@ -25,9 +26,10 @@ typedef int (CALLBACK* EMFPLAYPROC)( HDC, INT, HANDLE );
  
  #define  EMF_PP_COLOR_OPTIMIZATION  0x01
  
 +_Win32_RAIIFree_(CloseHandle, -1, 0) 
  HANDLE WINAPI GdiGetSpoolFileHandle(
      LPWSTR     pwszPrinterName,
-     LPDEVMODEW pDevmode,
-@@ -39,18 +41,21 @@ DWORD WINAPI GdiGetPageCount(
+-    LPDEVMODEW pDevmode,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDEVMODEW pDevmode,
+     LPWSTR     pwszDocName);
+ 
+ BOOL WINAPI GdiDeleteSpoolFileHandle(
+@@ -39,41 +41,46 @@ DWORD WINAPI GdiGetPageCount(
  HDC WINAPI GdiGetDC(
      HANDLE     SpoolFileHandle);
  
@@ -23,14 +27,16 @@ index 294f7aebb4..ad45d2e84a 100644
 +_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE WINAPI GdiGetPageHandle(
      HANDLE     SpoolFileHandle,
      DWORD      Page,
-     LPDWORD    pdwPageType);
- 
+-    LPDWORD    pdwPageType);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD    pdwPageType);
 +
+ 
  BOOL WINAPI GdiStartDocEMF(
      HANDLE     SpoolFileHandle,
-     DOCINFOW   *pDocInfo);
- 
+-    DOCINFOW   *pDocInfo);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DOCINFOW   *pDocInfo);
 +
+ 
  BOOL WINAPI GdiStartPageEMF(
      HANDLE     SpoolFileHandle);
  
@@ -38,11 +44,14 @@ index 294f7aebb4..ad45d2e84a 100644
  BOOL WINAPI GdiPlayPageEMF(
      HANDLE     SpoolFileHandle,
      HANDLE     hemf,
-@@ -58,10 +63,12 @@ BOOL WINAPI GdiPlayPageEMF(
-     RECT       *prectBorder,
-     RECT       *prectClip);
- 
+-    RECT       *prectDocument,
+-    RECT       *prectBorder,
+-    RECT       *prectClip);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECT       *prectDocument,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECT       *prectBorder,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECT       *prectClip);
 +
+ 
  BOOL WINAPI GdiEndPageEMF(
      HANDLE     SpoolFileHandle,
      DWORD      dwOptimization);
@@ -51,3 +60,18 @@ index 294f7aebb4..ad45d2e84a 100644
  BOOL WINAPI GdiEndDocEMF(
      HANDLE     SpoolFileHandle);
  
+ BOOL WINAPI GdiGetDevmodeForPage(
+     HANDLE     SpoolFileHandle,
+     DWORD      dwPageNumber,
+-    PDEVMODEW  *pCurrDM,
+-    PDEVMODEW  *pLastDM);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVMODEW  *pCurrDM,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVMODEW  *pLastDM);
+ 
+ BOOL WINAPI GdiResetDCEMF(
+     HANDLE     SpoolFileHandle,
+-    PDEVMODEW  pCurrDM);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVMODEW  pCurrDM);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

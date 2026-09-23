@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
-index 63c850c407..2eddd64fe8 100644
+index 63c850c407..ca3d58e3fe 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
 @@ -1,3 +1,4 @@
@@ -281,6 +281,15 @@ index 63c850c407..2eddd64fe8 100644
      _Out_opt_ PWSTR **pppwszGWMacs,
      _Out_opt_ DWORD *pcGatewayMacs,
      _Out_opt_ DWORD *pdwFlags
+@@ -2035,7 +2036,7 @@ BOOLAPI GetDiskInfoA(
+     _Out_opt_ PDWORDLONG pdlAvail,
+     _Out_opt_ PDWORDLONG pdlTotal);
+ 
+-typedef BOOL (*CACHE_OPERATOR)(INTERNET_CACHE_ENTRY_INFO* pcei, PDWORD pcbcei, PVOID pOpData);
++typedef BOOL (*CACHE_OPERATOR)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERNET_CACHE_ENTRY_INFO* pcei, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pcbcei, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pOpData);
+ 
+ BOOL PerformOperationOverUrlCacheA(
+     _In_opt_    PCSTR     pszUrlSearchPattern,
 @@ -2066,11 +2067,11 @@ INTERNETAPI_(DWORD) InternalInternetGetCookie(
  
  
@@ -323,6 +332,24 @@ index 63c850c407..2eddd64fe8 100644
      _In_ LPCWSTR pchDomain,
      _In_ LPCWSTR pchFullDomain
  );
+@@ -2221,7 +2222,7 @@ BOOLAPI HttpWebSocketReceive(
+     _In_ HINTERNET hWebSocket,
+     _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
+     _In_ DWORD dwBufferLength,
+-    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
+     _Out_ HTTP_WEB_SOCKET_BUFFER_TYPE *pBufferType);
+ 
+ BOOLAPI HttpWebSocketClose(
+@@ -2241,7 +2242,7 @@ BOOLAPI HttpWebSocketQueryCloseStatus(
+     _Out_ USHORT *pusStatus,
+     _Out_writes_bytes_to_opt_(dwReasonLength, *pdwReasonLengthConsumed) PVOID pvReason,
+     _In_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength,
+-    _Out_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed);
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed);
+ 
+ 
+ #ifdef _WS2DEF_
 @@ -2328,5 +2329,52 @@ typedef DWORD
  #endif
  

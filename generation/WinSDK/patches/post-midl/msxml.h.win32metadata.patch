@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/msxml.h
-index 1045ab1f58..1506e21c58 100644
+index 1045ab1f58..a5ffb3c847 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msxml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msxml.h
 @@ -1,3 +1,4 @@
@@ -366,6 +366,15 @@ index 1045ab1f58..1506e21c58 100644
              /* [annotation][out][retval] */ 
 -            _Out_retval_  BSTR *v) = 0;
 +            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *v) = 0;
+         
+     };
+     
+@@ -12498,7 +12499,7 @@ EXTERN_C const IID IID_IXMLError;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetErrorInfo( 
+-            XML_ERROR *pErrorReturn) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XML_ERROR *pErrorReturn) = 0;
          
      };
      

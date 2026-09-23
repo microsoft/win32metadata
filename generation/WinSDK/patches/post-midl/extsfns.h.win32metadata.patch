@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h b/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
-index 7a1aff61bd..0bac27f7f5 100644
+index 7a1aff61bd..fdaafc62a1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/extsfns.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,117 @@ index 7a1aff61bd..0bac27f7f5 100644
  /*++
  
  Copyright (c) Microsoft Corporation
+@@ -61,7 +62,7 @@ typedef HRESULT
+ (WINAPI *PGET_DEVICE_OBJECT_INFO)(
+     IN PDEBUG_CLIENT Client,
+     IN ULONG64 DeviceObject,
+-    OUT PDEBUG_DEVICE_OBJECT_INFO pDevObjInfo);
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_DEVICE_OBJECT_INFO pDevObjInfo);
+ 
+ 
+ //
+@@ -86,7 +87,7 @@ typedef HRESULT
+ (WINAPI *PGET_DRIVER_OBJECT_INFO)(
+     IN PDEBUG_CLIENT Client,
+     IN ULONG64 DriverObject,
+-    OUT PDEBUG_DRIVER_OBJECT_INFO pDrvObjInfo);
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_DRIVER_OBJECT_INFO pDrvObjInfo);
+ 
+ 
+ // GetProcessCommit
+@@ -104,16 +105,16 @@ typedef struct _PROCESS_COMMIT_USAGE {
+ typedef HRESULT
+ (WINAPI *PGET_PROCESS_COMMIT)(
+     PDEBUG_CLIENT Client,
+-    PULONG64 TotalCommitCharge,
+-    PULONG   NumberOfProcesses,
+-    PPROCESS_COMMIT_USAGE *CommitData
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG64 TotalCommitCharge,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG   NumberOfProcesses,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPROCESS_COMMIT_USAGE *CommitData
+     );
+ 
+ typedef HRESULT
+ (WINAPI *PGET_FULL_IMAGE_NAME)(
+     PDEBUG_CLIENT Client,
+     ULONG64 Process,
+-    LPSTR *FullImageName
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSTR *FullImageName
+     );
+ 
+ //
+@@ -129,7 +130,7 @@ typedef struct _DEBUG_CPU_SPEED_INFO {
+ typedef HRESULT
+ (WINAPI *PGET_CPU_PSPEED_INFO)(
+     IN  PDEBUG_CLIENT         Client,
+-    OUT PDEBUG_CPU_SPEED_INFO pCpuSpeedInfo);
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_CPU_SPEED_INFO pCpuSpeedInfo);
+ 
+ typedef struct _DEBUG_CPU_MICROCODE_VERSION {
+     ULONG         SizeOfStruct; // must be == sizeof(DEBUG_CPU_MICROCODE_VERSION)
+@@ -144,7 +145,7 @@ typedef struct _DEBUG_CPU_MICROCODE_VERSION {
+ typedef HRESULT
+ (WINAPI *PGET_CPU_MICROCODE_VERSION)(
+     IN  PDEBUG_CLIENT                Client,
+-    OUT PDEBUG_CPU_MICROCODE_VERSION pCpuMicrocodeVersion);
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_CPU_MICROCODE_VERSION pCpuMicrocodeVersion);
+ 
+ typedef struct _DEBUG_SMBIOS_INFO {
+     ULONG SizeOfStruct;
+@@ -175,7 +176,7 @@ typedef struct _DEBUG_SMBIOS_INFO {
+ typedef HRESULT
+ (WINAPI *PGET_SMBIOS_INFO)(
+     IN  PDEBUG_CLIENT       Client,
+-    OUT PDEBUG_SMBIOS_INFO  pSmbiosInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_SMBIOS_INFO  pSmbiosInfo
+     );
+ 
+ //
+@@ -208,7 +209,7 @@ typedef HRESULT
+ (WINAPI * PGET_IRP_INFO)(
+     IN PDEBUG_CLIENT Client,
+     IN ULONG64 Irp,
+-    OUT PDEBUG_IRP_INFO IrpInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_IRP_INFO IrpInfo
+     );
+ 
+ //
+@@ -235,7 +236,7 @@ typedef struct _DDEBUG_PNP_TRIAGE_INFO {
+ typedef HRESULT
+ (WINAPI *PGET_PNP_TRIAGE_INFO)(
+     IN PDEBUG_CLIENT Client,
+-    OUT PDEBUG_PNP_TRIAGE_INFO pPNPTriageInfo);
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_PNP_TRIAGE_INFO pPNPTriageInfo);
+ 
+ 
+ //
+@@ -284,7 +285,7 @@ typedef HRESULT
+ (WINAPI *PGET_POOL_DATA)(
+     PDEBUG_CLIENT Client,
+     ULONG64 Pool,
+-    PDEBUG_POOL_DATA PoolData
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEBUG_POOL_DATA PoolData
+     );
+ 
+ typedef enum _DEBUG_POOL_REGION {
+@@ -302,7 +303,7 @@ typedef HRESULT
+ (WINAPI  *PGET_POOL_REGION)(
+      PDEBUG_CLIENT Client,
+      ULONG64 Pool,
+-     DEBUG_POOL_REGION *PoolRegion
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DEBUG_POOL_REGION *PoolRegion
+      );
+ 
+ //
+@@ -318,7 +319,7 @@ typedef struct _KDEXT_THREAD_FIND_PARAMS {
+ typedef HRESULT
+ (WINAPI *PFIND_MATCHING_THREAD)(
+     PDEBUG_CLIENT Client,
+-    PKDEXT_THREAD_FIND_PARAMS ThreadInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PKDEXT_THREAD_FIND_PARAMS ThreadInfo
+     );
+ 
+ //
 @@ -328,7 +329,7 @@ typedef struct _KDEXT_PROCESS_FIND_PARAMS {
      ULONG    SizeofStruct;
      ULONG    Pid;
@@ -16,6 +127,44 @@ index 7a1aff61bd..0bac27f7f5 100644
  } KDEXT_PROCESS_FIND_PARAMS, *PKDEXT_PROCESS_FIND_PARAMS;
  
  typedef HRESULT
+@@ -430,7 +431,7 @@ typedef struct _KDEXT_FILELOCK_OWNER {
+ typedef HRESULT
+ (WINAPI *PFIND_FILELOCK_OWNERINFO)(
+     PDEBUG_CLIENT Client,
+-    PKDEXT_FILELOCK_OWNER pFileLockOwner
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PKDEXT_FILELOCK_OWNER pFileLockOwner
+     );
+ 
+ //
+@@ -452,8 +453,8 @@ typedef struct _KDEXTS_LOCK_INFO {
+ } KDEXTS_LOCK_INFO,*PKDEXTS_LOCK_INFO;
+ 
+ typedef HRESULT
+-(WINAPI *KDEXTS_LOCK_CALLBACKROUTINE)(PKDEXTS_LOCK_INFO pLock,
+-                                      PVOID Context);
++(WINAPI *KDEXTS_LOCK_CALLBACKROUTINE)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PKDEXTS_LOCK_INFO pLock,
++                                      _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Context);
+ 
+ #define KDEXTS_LOCK_CALLBACKROUTINE_DEFINED 2
+ 
+@@ -466,7 +467,7 @@ typedef HRESULT
+     PDEBUG_CLIENT Client,
+     ULONG Flags,
+     KDEXTS_LOCK_CALLBACKROUTINE Callback,
+-    PVOID Context
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Context
+     );
+ 
+ //
+@@ -528,7 +529,7 @@ typedef struct _DEBUG_POOLTAG_DESCRIPTION {
+ typedef HRESULT
+ (WINAPI *PGET_POOL_TAG_DESCRIPTION)(
+     ULONG PoolTag,
+-    PDEBUG_POOLTAG_DESCRIPTION pDescription
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEBUG_POOLTAG_DESCRIPTION pDescription
+     );
+ 
+ #endif // _KEXTFN_H
 @@ -1607,20 +1608,20 @@ DECLARE_INTERFACE(IDebugFAEntryTags)
      // Looksup Type associated for the failure tag
      STDMETHOD_(FA_ENTRY_TYPE, GetType)(
@@ -83,9 +232,10 @@ index 7a1aff61bd..0bac27f7f5 100644
          ) PURE;
      STDMETHOD_(PFA_ENTRY, GetNext)(
          THIS_
-         PFA_ENTRY Entry,
+-        PFA_ENTRY Entry,
 -        FA_TAG Tag,
 -        FA_TAG TagMask
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFA_ENTRY Entry,
 +        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG Tag,
 +        _Win32_AssociatedEnum_(DEBUG_FLR_PARAM_TYPE) FA_TAG TagMask
          ) PURE;
@@ -421,6 +571,35 @@ index 7a1aff61bd..0bac27f7f5 100644
          ) PURE;
  
      STDMETHOD(AttributeSet)(
+@@ -2441,8 +2442,8 @@ typedef HRESULT
+ typedef HRESULT
+ (WINAPI* EXT_GET_FA_ENTRIES_DATA)(
+     IN PDEBUG_CLIENT4 Client,
+-    IN PULONG Count,
+-    OUT PFA_ENTRY* Entries
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PULONG Count,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PFA_ENTRY* Entries
+     );
+ 
+ 
+@@ -2614,7 +2615,7 @@ typedef HRESULT
+     typedef HRESULT
+     (WINAPI* EXT_TARGET_INFO)(
+         PDEBUG_CLIENT4  Client,
+-        PTARGET_DEBUG_INFO pTargetInfo
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTARGET_DEBUG_INFO pTargetInfo
+         );
+ 
+ /*****************************************************************************
+@@ -2634,7 +2635,7 @@ typedef struct _DEBUG_DECODE_ERROR {
+ */
+ typedef VOID
+ (WINAPI *EXT_DECODE_ERROR)(
+-    PDEBUG_DECODE_ERROR pDecodeError
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEBUG_DECODE_ERROR pDecodeError
+     );
+ 
+ //
 @@ -2645,17 +2646,17 @@ typedef VOID
  typedef struct _DEBUG_TRIAGE_FOLLOWUP_INFO {
      ULONG SizeOfStruct;      // Must be == sizeof (DEBUG_TRIAGE_FOLLOWUP_INFO)
@@ -442,3 +621,32 @@ index 7a1aff61bd..0bac27f7f5 100644
  } DEBUG_TRIAGE_FOLLOWUP_INFO_2, *PDEBUG_TRIAGE_FOLLOWUP_INFO_2;
  
  #define TRIAGE_FOLLOWUP_FAIL    0
+@@ -2667,7 +2668,7 @@ typedef DWORD
+ (WINAPI *EXT_TRIAGE_FOLLOWUP)(
+     _In_ PDEBUG_CLIENT4 Client,
+     _In_ PCSTR SymbolName,
+-    OUT PDEBUG_TRIAGE_FOLLOWUP_INFO OwnerInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEBUG_TRIAGE_FOLLOWUP_INFO OwnerInfo
+     );
+ 
+ typedef HRESULT
+@@ -2698,7 +2699,7 @@ typedef struct _EXT_CAB_XML_DATA {
+ typedef HRESULT
+ (WINAPI *EXT_XML_DATA)(
+     PDEBUG_CLIENT4 Client,
+-    PEXT_CAB_XML_DATA pXmpData
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEXT_CAB_XML_DATA pXmpData
+     );
+ 
+ //
+@@ -2824,8 +2825,8 @@ typedef HRESULT
+     PDEBUG_CLIENT Client,
+     ULONG TraceType,
+     ULONG StartIndex,
+-    PULONG64 HandleValue,
+-    PULONG64 StackFunctions,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG64 HandleValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG64 StackFunctions,
+     ULONG StackTraceSize
+     );
+ 

@@ -1,8 +1,148 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h
-index f5be6127bf..2d99db7e8a 100644
+index f5be6127bf..fc186ed56d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinWlx.h
-@@ -1138,4 +1138,23 @@ typedef _Struct_size_bytes_(Size) struct _WLX_NOTIFICATION_INFO {
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0001    Increment this if a change has global effects
+ 
+ Copyright (c) 1985-1999, Microsoft Corporation
+@@ -796,7 +797,7 @@ typedef VOID
+ typedef VOID
+ (WINAPI * PWLX_SET_CONTEXT_POINTER)(
+     HANDLE                  hWlx,
+-    PVOID                   pWlxContext
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID                   pWlxContext
+     );
+ 
+ typedef VOID
+@@ -840,7 +841,7 @@ typedef int
+ (WINAPI * PWLX_DIALOG_BOX_INDIRECT)(
+     HANDLE                  hWlx,
+     HANDLE                  hInst,
+-    LPCDLGTEMPLATE          hDialogTemplate,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCDLGTEMPLATE          hDialogTemplate,
+     HWND                    hwndOwner,
+     DLGPROC                 dlgprc
+     );
+@@ -859,7 +860,7 @@ typedef int
+ (WINAPI * PWLX_DIALOG_BOX_INDIRECT_PARAM)(
+     HANDLE                  hWlx,
+     HANDLE                  hInst,
+-    LPCDLGTEMPLATE          hDialogTemplate,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCDLGTEMPLATE          hDialogTemplate,
+     HWND                    hwndOwner,
+     DLGPROC                 dlgprc,
+     LPARAM                  dwInitParam
+@@ -877,19 +878,19 @@ typedef int
+ typedef int
+ (WINAPI * PWLX_CHANGE_PASSWORD_NOTIFY)(
+     HANDLE                  hWlx,
+-    PWLX_MPR_NOTIFY_INFO    pMprInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_MPR_NOTIFY_INFO    pMprInfo,
+     DWORD                   dwChangeInfo
+     );
+ 
+ typedef BOOL
+ (WINAPI * PWLX_GET_SOURCE_DESKTOP)(
+     HANDLE                  hWlx,
+-    PWLX_DESKTOP *          ppDesktop);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_DESKTOP *          ppDesktop);
+ 
+ typedef BOOL
+ (WINAPI * PWLX_SET_RETURN_DESKTOP)(
+     HANDLE                  hWlx,
+-    PWLX_DESKTOP            pDesktop);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_DESKTOP            pDesktop);
+ 
+ typedef BOOL
+ (WINAPI * PWLX_CREATE_USER_DESKTOP)(
+@@ -897,7 +898,7 @@ typedef BOOL
+     HANDLE                  hToken,
+     DWORD                   Flags,
+     PWSTR                   pszDesktopName,
+-    PWLX_DESKTOP *          ppDesktop);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_DESKTOP *          ppDesktop);
+ 
+ #define WLX_CREATE_INSTANCE_ONLY    0x00000001
+ #define WLX_CREATE_USER             0x00000002
+@@ -905,15 +906,15 @@ typedef BOOL
+ typedef int
+ (WINAPI * PWLX_CHANGE_PASSWORD_NOTIFY_EX)(
+     HANDLE                  hWlx,
+-    PWLX_MPR_NOTIFY_INFO    pMprInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_MPR_NOTIFY_INFO    pMprInfo,
+     DWORD                   dwChangeInfo,
+     PWSTR                   ProviderName,
+-    PVOID                   Reserved);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID                   Reserved);
+ 
+ typedef BOOL
+ (WINAPI * PWLX_CLOSE_USER_DESKTOP)(
+     HANDLE          hWlx,
+-    PWLX_DESKTOP    pDesktop,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_DESKTOP    pDesktop,
+     HANDLE          hToken );
+ 
+ typedef BOOL
+@@ -921,14 +922,14 @@ typedef BOOL
+     HANDLE hWlx,
+     DWORD Option,
+     ULONG_PTR Value,
+-    ULONG_PTR * OldValue
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR * OldValue
+     );
+ 
+ typedef BOOL
+ (WINAPI * PWLX_GET_OPTION)(
+     HANDLE hWlx,
+     DWORD Option,
+-    ULONG_PTR * Value
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR * Value
+     );
+ 
+ 
+@@ -939,17 +940,17 @@ typedef VOID
+ 
+ typedef BOOL
+ (WINAPI * PWLX_QUERY_CLIENT_CREDENTIALS)(
+-    PWLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred
+     );
+ 
+ typedef BOOL
+ (WINAPI * PWLX_QUERY_IC_CREDENTIALS)(
+-    PWLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred
+     );
+ 
+ typedef BOOL
+ (WINAPI * PWLX_QUERY_TS_LOGON_CREDENTIALS)(
+-    PWLX_CLIENT_CREDENTIALS_INFO_V2_0 pCred
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_CLIENT_CREDENTIALS_INFO_V2_0 pCred
+     );
+ 
+ typedef BOOL
+@@ -959,14 +960,14 @@ typedef BOOL
+ typedef DWORD
+ (WINAPI * PWLX_QUERY_TERMINAL_SERVICES_DATA)(
+     HANDLE hWlx,
+-    PWLX_TERMINAL_SERVICES_DATA pTSData,
+-    WCHAR * UserName,
+-    WCHAR * Domain
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_TERMINAL_SERVICES_DATA pTSData,
++    _WIN32META_ANNOTATION_("win32metadata:in") WCHAR * UserName,
++    _WIN32META_ANNOTATION_("win32metadata:in") WCHAR * Domain
+     );
+ 
+ typedef DWORD
+ (WINAPI * PWLX_QUERY_CONSOLESWITCH_CREDENTIALS)(
+-      PWLX_CONSOLESWITCH_CREDENTIALS_INFO_V1_0 pCred
++      _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLX_CONSOLESWITCH_CREDENTIALS_INFO_V1_0 pCred
+      );
+ 
+ 
+@@ -1138,4 +1139,23 @@ typedef _Struct_size_bytes_(Size) struct _WLX_NOTIFICATION_INFO {
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  

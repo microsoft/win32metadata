@@ -1,0 +1,46 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsip.h b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsip.h
+index 75341a96b3..ab76db4443 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsip.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsip.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++
+@@ -44,15 +45,15 @@ RPCNSAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcNsGetBuffer(
+-    IN PRPC_MESSAGE Message
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PRPC_MESSAGE Message
+     );
+ 
+ RPCNSAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcNsSendReceive(
+-    IN PRPC_MESSAGE Message,
+-    OUT RPC_BINDING_HANDLE __RPC_FAR * Handle
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PRPC_MESSAGE Message,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE __RPC_FAR * Handle
+     );
+ 
+ RPCNSAPI
+@@ -60,7 +61,7 @@ _Analysis_noreturn_
+ void
+ RPC_ENTRY
+ I_RpcNsRaiseException(
+-    IN PRPC_MESSAGE Message,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PRPC_MESSAGE Message,
+     IN RPC_STATUS Status
+     );
+ 
+@@ -68,7 +69,7 @@ RPCNSAPI
+ RPC_STATUS
+ RPC_ENTRY
+ I_RpcReBindBuffer(
+-    IN PRPC_MESSAGE Message
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PRPC_MESSAGE Message
+     );
+ 
+ RPCNSAPI

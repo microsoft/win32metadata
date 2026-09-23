@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h b/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h
-index 1744722ad2..3cfe6916a6 100644
+index 1744722ad2..65e4d329e9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ctxtcall.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,15 @@ index 1744722ad2..3cfe6916a6 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -98,10 +99,11 @@ EXTERN_C const IID IID_IContextCallback;
+@@ -91,17 +92,18 @@ extern RPC_IF_HANDLE __MIDL_itf_ctxtcall_0000_0000_v0_0_s_ifspec;
+ /* [unique][uuid][object][local] */ 
+ 
+ typedef /* [ref] */ HRESULT ( __stdcall *PFNCONTEXTCALL )( 
+-    ComCallData *pParam);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ComCallData *pParam);
+ 
+ 
+ EXTERN_C const IID IID_IContextCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
-index 01a3b56cc5..d9bf86f799 100644
+index 01a3b56cc5..88c7201410 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 @@ -9,20 +9,21 @@
@@ -247,7 +247,13 @@ index 01a3b56cc5..d9bf86f799 100644
  {
      /// <summary>
      /// Gets all the glyph image formats supported by the entire font (SVG, PNG, JPEG, ...).
-@@ -1959,7 +1960,7 @@ interface DWRITE_DECLARE_INTERFACE("27F2A904-4EB8-441D-9678-0563F53E3E2F") IDWri
+@@ -1954,12 +1955,12 @@ interface DWRITE_DECLARE_INTERFACE("27F2A904-4EB8-441D-9678-0563F53E3E2F") IDWri
+     /// </summary>
+     /// <param name="glyphDataContext">Opaque context from ReadGlyphData.</param>
+     STDMETHOD_(void, ReleaseGlyphImageData)(
+-        void* glyphDataContext
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* glyphDataContext
+         ) PURE;
  };
  
  
@@ -291,6 +297,15 @@ index 01a3b56cc5..d9bf86f799 100644
  {
      /// <summary>
      /// GetLocalFileSize returns the number of bytes of the font file that are
+@@ -2140,7 +2141,7 @@ interface DWRITE_DECLARE_INTERFACE("4DB3757A-2C72-4ED9-B2B6-1ABABE1AFF9C") IDWri
+         UINT64 fileOffset,
+         UINT64 fragmentSize,
+         _Out_ BOOL* isLocal,
+-        _Out_range_(0, fragmentSize) UINT64* partialSize
++        _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, fragmentSize) UINT64* partialSize
+         ) PURE;
+ 
+     /// <summary>
 @@ -2199,7 +2200,7 @@ enum DWRITE_CONTAINER_TYPE
  /// DWRITE_E_REMOTEFONT. This error signifies to DWrite that it should add requests to the 
  /// font download queue.
@@ -426,6 +441,15 @@ index 01a3b56cc5..d9bf86f799 100644
  {
      /// <summary>
      /// Determines an appropriate font to use to render the range of text.
+@@ -3477,7 +3478,7 @@ interface DWRITE_DECLARE_INTERFACE("2397599D-DD0D-4681-BD6A-F4F31EAADE77") IDWri
+         _In_opt_z_ WCHAR const* baseFamilyName,
+         _In_reads_(fontAxisValueCount) DWRITE_FONT_AXIS_VALUE const* fontAxisValues,
+         UINT32 fontAxisValueCount,
+-        _Deref_out_range_(0, textLength) UINT32* mappedLength,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Deref_out_range_(0, textLength) UINT32* mappedLength,
+         _Out_ FLOAT* scale,
+         _COM_Outptr_ IDWriteFontFace5** mappedFontFace
+         ) PURE;
 @@ -3489,7 +3490,7 @@ interface DWRITE_DECLARE_INTERFACE("2397599D-DD0D-4681-BD6A-F4F31EAADE77") IDWri
  
  #if NTDDI_VERSION >= NTDDI_WIN10_RS4

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/http.h b/generation/WinSDK/RecompiledIdlHeaders/um/http.h
-index 4178ef13d1..46d541d11c 100644
+index 4178ef13d1..a0b46dcbde 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/http.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/http.h
 @@ -1,3 +1,4 @@
@@ -168,7 +168,7 @@ index 4178ef13d1..46d541d11c 100644
      IN ULONG SslClientCertInfoSize,
      _Out_opt_ PULONG BytesReceived,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
  #if _WIN32_WINNT >= 0x0600
@@ -304,7 +304,7 @@ index 4178ef13d1..46d541d11c 100644
      IN ULONG RequestBufferLength,
      _Out_opt_ PULONG BytesReturned,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
 -HTTPAPI_LINKAGE
@@ -317,7 +317,7 @@ index 4178ef13d1..46d541d11c 100644
      IN ULONG EntityBufferLength,
      _Out_opt_ PULONG BytesReturned,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
  #if _WIN32_WINNT >= 0x0600
@@ -342,7 +342,7 @@ index 4178ef13d1..46d541d11c 100644
      IN HANDLE RequestQueueHandle,
      IN HTTP_CONNECTION_ID ConnectionId,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
  #if _WIN32_WINNT >= 0x0600
@@ -351,7 +351,7 @@ index 4178ef13d1..46d541d11c 100644
      IN HTTP_CONNECTION_ID ConnectionId,
      _Reserved_ IN ULONG Reserved OPTIONAL,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
 -HTTPAPI_LINKAGE
@@ -362,7 +362,7 @@ index 4178ef13d1..46d541d11c 100644
      IN HANDLE RequestQueueHandle,
      IN HTTP_REQUEST_ID RequestId,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
 -HTTPAPI_LINKAGE
@@ -372,7 +372,7 @@ index 4178ef13d1..46d541d11c 100644
  HttpWaitForDemandStart(
      IN HANDLE RequestQueueHandle,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
  BOOL
@@ -389,7 +389,7 @@ index 4178ef13d1..46d541d11c 100644
      IN PCWSTR UrlPrefix,
      IN ULONG Flags,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
 -HTTPAPI_LINKAGE
@@ -402,7 +402,7 @@ index 4178ef13d1..46d541d11c 100644
      IN PHTTP_DATA_CHUNK DataChunk,
      IN PHTTP_CACHE_POLICY CachePolicy,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
 -HTTPAPI_LINKAGE
@@ -415,7 +415,7 @@ index 4178ef13d1..46d541d11c 100644
      IN ULONG BufferLength,
      _Out_opt_ PULONG BytesRead,
 -    IN LPOVERLAPPED Overlapped OPTIONAL
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
  //

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
-index f78b0cef08..de8bd1bdc8 100644
+index f78b0cef08..f937a52a93 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 @@ -1,3 +1,4 @@
@@ -1349,6 +1349,15 @@ index f78b0cef08..de8bd1bdc8 100644
  {
      DWORD cbSize;
      DWORD dwMajorVersion;                   // Major version
+@@ -2525,7 +2526,7 @@ typedef struct _DLLVERSIONINFO2
+ // implicitly link to it.
+ //
+ 
+-typedef HRESULT (CALLBACK* DLLGETVERSIONPROC)(DLLVERSIONINFO *);
++typedef HRESULT (CALLBACK* DLLGETVERSIONPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DLLVERSIONINFO *);
+ 
+ // DllInstall (to be implemented by self-installing DLLs)
+ STDAPI DllInstall(BOOL bInstall, _In_opt_ PCWSTR pszCmdLine);
 @@ -2533,7 +2534,7 @@ STDAPI DllInstall(BOOL bInstall, _In_opt_ PCWSTR pszCmdLine);
  
  #if (_WIN32_IE >= 0x0602)

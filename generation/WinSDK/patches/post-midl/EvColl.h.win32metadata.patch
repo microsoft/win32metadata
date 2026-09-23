@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h b/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
-index 75c4bc628b..6f32380492 100644
+index 75c4bc628b..18216f63e3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/EvColl.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -23,7 +23,7 @@ index 75c4bc628b..6f32380492 100644
  BOOL WINAPI EcEnumNextSubscription( 
      EC_HANDLE SubscriptionEnum,
      DWORD SubscriptionNameBufferSize,
-@@ -191,12 +193,13 @@ BOOL WINAPI EcEnumNextSubscription(
+@@ -191,87 +193,97 @@ BOOL WINAPI EcEnumNextSubscription(
      _Out_ PDWORD SubscriptionNameBufferUsed
      );
  
@@ -38,15 +38,19 @@ index 75c4bc628b..6f32380492 100644
  BOOL WINAPI EcSetSubscriptionProperty( 
      EC_HANDLE Subscription,
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
-@@ -204,6 +207,7 @@ BOOL WINAPI EcSetSubscriptionProperty(
-     PEC_VARIANT PropertyValue
+     DWORD Flags,
+-    PEC_VARIANT PropertyValue
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEC_VARIANT PropertyValue
      );
  
 +_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcGetSubscriptionProperty( 
      EC_HANDLE Subscription,
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
-@@ -213,21 +217,24 @@ BOOL WINAPI EcGetSubscriptionProperty(
+     DWORD Flags,
+     DWORD PropertyValueBufferSize,
+-    PEC_VARIANT PropertyValueBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEC_VARIANT PropertyValueBuffer,
      _Out_ PDWORD PropertyValueBufferUsed 
      );
  
@@ -72,15 +76,21 @@ index 75c4bc628b..6f32380492 100644
  BOOL WINAPI EcSetObjectArrayProperty( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
-@@ -236,6 +243,7 @@ BOOL WINAPI EcSetObjectArrayProperty(
-     PEC_VARIANT PropertyValue
+     DWORD ArrayIndex,
+     DWORD Flags,
+-    PEC_VARIANT PropertyValue
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEC_VARIANT PropertyValue
      );
   
 +_Windows_SupportedOS_WindowsVista_  
  BOOL WINAPI EcGetObjectArrayProperty( 
      EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
      EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
-@@ -246,16 +254,19 @@ BOOL WINAPI EcGetObjectArrayProperty(
+     DWORD ArrayIndex,
+     DWORD Flags,
+     DWORD PropertyValueBufferSize,
+-    PEC_VARIANT PropertyValueBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEC_VARIANT PropertyValueBuffer,
      _Out_ PDWORD PropertyValueBufferUsed 
      );
  
@@ -100,7 +110,11 @@ index 75c4bc628b..6f32380492 100644
  BOOL WINAPI EcGetSubscriptionRunTimeStatus( 
      LPCWSTR SubscriptionName,
      EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID StatusInfoId,
-@@ -266,12 +277,13 @@ BOOL WINAPI EcGetSubscriptionRunTimeStatus(
+     LPCWSTR EventSourceName,
+     DWORD Flags,
+     DWORD StatusValueBufferSize,
+-    PEC_VARIANT StatusValueBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEC_VARIANT StatusValueBuffer,
      _Out_ PDWORD StatusValueBufferUsed 
      );
  

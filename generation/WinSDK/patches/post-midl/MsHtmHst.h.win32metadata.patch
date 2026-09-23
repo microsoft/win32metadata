@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
-index 0e58a78962..dda2be641c 100644
+index 0e58a78962..9e4dc3177d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmHst.h
 @@ -132,6 +132,7 @@ extern "C"{
@@ -10,6 +10,32 @@ index 0e58a78962..dda2be641c 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -192,9 +193,9 @@ EXTERN_C const GUID CGID_MSHTML;
+ #define __IHTMLWindow2_FWD_DEFINED__
+ typedef interface IHTMLWindow2 IHTMLWindow2;
+ #endif
+-typedef HRESULT STDAPICALLTYPE SHOWHTMLDIALOGFN (HWND hwndParent, IMoniker *pmk, VARIANT *pvarArgIn, WCHAR* pchOptions, VARIANT *pvArgOut);
+-typedef HRESULT STDAPICALLTYPE SHOWHTMLDIALOGEXFN (HWND hwndParent, IMoniker *pmk, DWORD dwDialogFlags, VARIANT *pvarArgIn, WCHAR* pchOptions, VARIANT *pvArgOut);
+-typedef HRESULT STDAPICALLTYPE SHOWMODELESSHTMLDIALOGFN (HWND hwndParent, IMoniker *pmk, VARIANT *pvarArgIn, VARIANT* pvarOptions, IHTMLWindow2 ** ppWindow);
++typedef HRESULT STDAPICALLTYPE SHOWHTMLDIALOGFN (HWND hwndParent, IMoniker *pmk, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvarArgIn, _WIN32META_ANNOTATION_("win32metadata:in") WCHAR* pchOptions, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvArgOut);
++typedef HRESULT STDAPICALLTYPE SHOWHTMLDIALOGEXFN (HWND hwndParent, IMoniker *pmk, DWORD dwDialogFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvarArgIn, _WIN32META_ANNOTATION_("win32metadata:in") WCHAR* pchOptions, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvArgOut);
++typedef HRESULT STDAPICALLTYPE SHOWMODELESSHTMLDIALOGFN (HWND hwndParent, IMoniker *pmk, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvarArgIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT* pvarOptions, IHTMLWindow2 ** ppWindow);
+ typedef HRESULT STDAPICALLTYPE IEREGISTERXMLNSFN (_In_ LPCWSTR lpszURI, _In_ GUID clsid, _In_ BOOL fMachine);
+ typedef HRESULT STDAPICALLTYPE IEISXMLNSREGISTEREDFN (_In_ LPCWSTR lpszURI, _Out_ GUID *pCLSID);
+ //;begin_internal
+@@ -283,10 +284,10 @@ EXTERN_C const IID IID_IHostDialogHelper;
+         virtual HRESULT STDMETHODCALLTYPE ShowHTMLDialog( 
+             HWND hwndParent,
+             IMoniker *pMk,
+-            VARIANT *pvarArgIn,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvarArgIn,
+             /* [annotation][in] */ 
+             _In_z_  WCHAR *pchOptions,
+-            VARIANT *pvarArgOut,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pvarArgOut,
+             IUnknown *punkHost) = 0;
+         
+     };
 @@ -429,11 +430,11 @@ extern RPC_IF_HANDLE __MIDL_itf_mshtmhst_0000_0002_v0_0_s_ifspec;
  /* interface IDocHostUIHandler */
  /* [local][unique][uuid][object] */ 

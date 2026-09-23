@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
-index 13feace6a3..714f86e0bb 100644
+index 13feace6a3..5554feea2d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptdlg.h
 @@ -1,3 +1,4 @@
@@ -43,6 +43,15 @@ index 13feace6a3..714f86e0bb 100644
      LPCWSTR             szTitle;
      PCCERT_CONTEXT      pCertContext;
      LPSTR *             arrayPurposes;
+@@ -352,7 +353,7 @@ typedef HRESULT (WINAPI * PFNTRUSTHELPER)(
+         IN PCCERT_CONTEXT       pCertContext,
+         IN LPARAM               lCustData,
+         IN BOOL                 fLeafCertificate,
+-        IN LPBYTE               pbTrustBlob);
++        _WIN32META_ANNOTATION_("win32metadata:out") IN LPBYTE               pbTrustBlob);
+ //
+ //  Failure Reasons:
+ //
 @@ -402,7 +403,7 @@ typedef HRESULT (WINAPI * PFNTRUSTHELPER)(
  //  Notes:
  //      pfnTrustHelper is nyi

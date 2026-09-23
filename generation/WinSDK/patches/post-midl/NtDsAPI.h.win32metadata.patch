@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
-index b6471c2900..dc9f7e69dd 100644
+index b6471c2900..a07b05409d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
 @@ -27,6 +27,7 @@ Notes:
@@ -460,7 +460,13 @@ index b6471c2900..dc9f7e69dd 100644
  NTDSAPI
  DWORD
  WINAPI
-@@ -1968,7 +1975,7 @@ DsReplicaSyncAllA (
+@@ -1963,12 +1970,12 @@ DsReplicaSyncAllA (
+     _In_ HANDLE				hDS,
+     _In_ LPCSTR				pszNameContext,
+     ULONG				ulFlags,
+-    __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEA),
++    _WIN32META_ANNOTATION_("win32metadata:in") __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEA),
+     _In_opt_ LPVOID				pCallbackData,
      _Outptr_result_maybenull_z_ PDS_REPSYNCALL_ERRINFOA **		pErrors
      );
  
@@ -469,6 +475,15 @@ index b6471c2900..dc9f7e69dd 100644
  NTDSAPI
  DWORD
  WINAPI
+@@ -1976,7 +1983,7 @@ DsReplicaSyncAllW (
+     _In_ HANDLE				hDS,
+     _In_ LPCWSTR				pszNameContext,
+     ULONG				ulFlags,
+-    __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEW),
++    _WIN32META_ANNOTATION_("win32metadata:in") __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEW),
+     _In_opt_ LPVOID				pCallbackData,
+     _Outptr_result_maybenull_z_ PDS_REPSYNCALL_ERRINFOW **		pErrors
+     );
 @@ -1987,7 +1994,7 @@ DsReplicaSyncAllW (
  #define DsReplicaSyncAll DsReplicaSyncAllA
  #endif

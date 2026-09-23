@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h
-index 2fddf5400d..c1f52dbf4e 100644
+index 2fddf5400d..385792a7c6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfidl.h
 @@ -1,3 +1,4 @@
@@ -1039,15 +1039,18 @@ index 2fddf5400d..c1f52dbf4e 100644
      IMFNetSchemeHandlerConfig : public IUnknown
      {
      public:
-@@ -14451,7 +14522,7 @@ EXTERN_C const IID IID_IMFNetSchemeHandlerConfig;
+@@ -14451,9 +14522,9 @@ EXTERN_C const IID IID_IMFNetSchemeHandlerConfig;
  /* interface __MIDL_itf_mfidl_0000_0070 */
  /* [local] */ 
  
 -STDAPI MFCreateNetSchemePlugin(
 +_Windows_SupportedOS_WindowsVista_ STDAPI MFCreateNetSchemePlugin(
      REFIID riid, 
-     LPVOID *ppvHandler );
+-    LPVOID *ppvHandler );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID *ppvHandler );
  typedef 
+ enum _MFNETSOURCE_TRANSPORT_TYPE
+     {
 @@ -14597,7 +14668,7 @@ EXTERN_C const IID IID_IMFSchemeHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

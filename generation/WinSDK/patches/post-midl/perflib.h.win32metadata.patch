@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h b/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
-index 778da34755..a36db4babd 100644
+index 778da34755..63ba9ba8c0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
 @@ -15,6 +15,7 @@ Abstract:
@@ -19,7 +19,15 @@ index 778da34755..a36db4babd 100644
      GUID   CounterSetGuid;
      GUID   ProviderGuid;
      ULONG  NumCounters;
-@@ -202,6 +203,8 @@ WINAPI
+@@ -195,13 +196,15 @@ WINAPI
+ #endif
+ * PERFLIBREQUEST)(
+     IN ULONG  RequestCode,
+-    IN PVOID  Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID  Buffer,
+     IN ULONG  BufferSize
+ );
+ 
  // Usually PerfSetCounterSetInfo() calls is automatically generated PerfAutoStartUp() function (generated
  // by schema generation/parsing tool) to inform PERFLIB the layout of specific counterset.
  //
@@ -28,6 +36,17 @@ index 778da34755..a36db4babd 100644
  ULONG WINAPI
  PerfStartProvider(
      _In_     LPGUID          ProviderGuid,
+@@ -211,8 +214,8 @@ PerfStartProvider(
+ 
+ // Start PERFLIB V2 provider with customized memory allocation/free routines.
+ //
+-typedef LPVOID (CALLBACK * PERF_MEM_ALLOC)(IN SIZE_T AllocSize, IN LPVOID pContext);
+-typedef void (CALLBACK * PERF_MEM_FREE)(IN LPVOID pBuffer, IN LPVOID pContext);
++typedef LPVOID (CALLBACK * PERF_MEM_ALLOC)(IN SIZE_T AllocSize, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID pContext);
++typedef void (CALLBACK * PERF_MEM_FREE)(_WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID pBuffer, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID pContext);
+ 
+ typedef struct _PROVIDER_CONTEXT {
+     DWORD          ContextSize; // should be sizeof(PERF_PROVIDER_CONTEXT)
 @@ -223,11 +226,13 @@ typedef struct _PROVIDER_CONTEXT {
      LPVOID         pMemContext;
  } PERF_PROVIDER_CONTEXT, * PPERF_PROVIDER_CONTEXT;

@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/evalcom2.h b/generation/WinSDK/RecompiledIdlHeaders/um/evalcom2.h
+index 46e9064bd1..10fd119854 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/evalcom2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/evalcom2.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //--------------------------------------------------------------------------
+ //
+ //  Microsoft Windows - EvalCom2 MSI Validation Engine
+@@ -40,8 +41,8 @@ typedef enum STATUSTYPES
+ 	ieStatusCancel
+ }STATUSTYPES;
+ 
+-typedef BOOL (WINAPI* LPDISPLAYVAL)(LPVOID pContext, RESULTTYPES uiType, LPCWSTR szwVal, LPCWSTR szwDescription, LPCWSTR szwLocation);
+-typedef BOOL (WINAPI* LPEVALCOMCALLBACK)(STATUSTYPES iStatus, LPCWSTR szData, LPVOID pContext);
++typedef BOOL (WINAPI* LPDISPLAYVAL)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pContext, RESULTTYPES uiType, LPCWSTR szwVal, LPCWSTR szwDescription, LPCWSTR szwLocation);
++typedef BOOL (WINAPI* LPEVALCOMCALLBACK)(STATUSTYPES iStatus, LPCWSTR szData, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pContext);
+ 
+ ///////////////////////////////////////////////////////////
+ // IEval
+@@ -52,8 +53,8 @@ interface IValidate : IUnknown
+ 	virtual HRESULT __stdcall CloseDatabase() = 0;
+ 	virtual HRESULT __stdcall CloseCUB() = 0;
+ 
+-	virtual HRESULT __stdcall SetDisplay(LPDISPLAYVAL pDisplayFunction, LPVOID pContext) = 0;
+-	virtual HRESULT __stdcall SetStatus(LPEVALCOMCALLBACK pStatusFunction, LPVOID pContext) = 0;
++	virtual HRESULT __stdcall SetDisplay(LPDISPLAYVAL pDisplayFunction, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pContext) = 0;
++	virtual HRESULT __stdcall SetStatus(LPEVALCOMCALLBACK pStatusFunction, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pContext) = 0;
+ 	
+ 	virtual HRESULT __stdcall Validate(const WCHAR *wzICEs = NULL) = 0;
+ };

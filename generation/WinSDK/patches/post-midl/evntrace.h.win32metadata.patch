@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
-index 58677d492a..b65484bdae 100644
+index 58677d492a..3ec23252ac 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
 @@ -1,4 +1,5 @@
@@ -26,6 +26,25 @@ index 58677d492a..b65484bdae 100644
      union {
          LONG  AgeLimit;                  // unused
          LONG  FlushThreshold;            // Number of buffers to fill before flushing
+@@ -1519,14 +1520,14 @@ typedef struct _EVENT_TRACE_LOGFILEA
+                 EVENT_TRACE_LOGFILEA, *PEVENT_TRACE_LOGFILEA;
+ 
+ typedef ULONG (WINAPI * PEVENT_TRACE_BUFFER_CALLBACKW)
+-                (PEVENT_TRACE_LOGFILEW Logfile);
++                (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEVENT_TRACE_LOGFILEW Logfile);
+ 
+ typedef ULONG (WINAPI * PEVENT_TRACE_BUFFER_CALLBACKA)
+-                (PEVENT_TRACE_LOGFILEA Logfile);
++                (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEVENT_TRACE_LOGFILEA Logfile);
+ 
+-typedef VOID (WINAPI *PEVENT_CALLBACK)( PEVENT_TRACE pEvent );
++typedef VOID (WINAPI *PEVENT_CALLBACK)( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEVENT_TRACE pEvent );
+ 
+-typedef VOID (WINAPI *PEVENT_RECORD_CALLBACK) (PEVENT_RECORD EventRecord);
++typedef VOID (WINAPI *PEVENT_RECORD_CALLBACK) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEVENT_RECORD EventRecord);
+ 
+ typedef struct ETW_BUFFER_HEADER {
+     ULONG Reserved1[4];
 @@ -1725,6 +1726,8 @@ extern "C" {
  // Use the routine below to start an event trace session
  //

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
-index 4083a3eb7b..43bae1fee8 100644
+index 4083a3eb7b..dea627e99a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
 @@ -1,3 +1,4 @@
@@ -49,8 +49,8 @@ index 4083a3eb7b..43bae1fee8 100644
  
 -WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameA(LPOPENFILENAMEA);
 -WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameW(LPOPENFILENAMEW);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameA(LPOPENFILENAMEA);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameW(LPOPENFILENAMEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEW);
  #ifdef UNICODE
  #define GetOpenFileName  GetOpenFileNameW
  #else
@@ -58,8 +58,8 @@ index 4083a3eb7b..43bae1fee8 100644
  #endif // !UNICODE
 -WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameA(LPOPENFILENAMEA);
 -WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameA(LPOPENFILENAMEA);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEW);
  #ifdef UNICODE
  #define GetSaveFileName  GetSaveFileNameW
  #else
@@ -80,8 +80,8 @@ index 4083a3eb7b..43bae1fee8 100644
  
 -WINCOMMDLGAPI BOOL APIENTRY ChooseColorA(LPCHOOSECOLORA);
 -WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(LPCHOOSECOLORW);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY ChooseColorA(LPCHOOSECOLORA);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(LPCHOOSECOLORW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY ChooseColorA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSECOLORA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSECOLORW);
  #ifdef UNICODE
  #define ChooseColor  ChooseColorW
  #else
@@ -109,8 +109,8 @@ index 4083a3eb7b..43bae1fee8 100644
  
 -WINCOMMDLGAPI HWND APIENTRY FindTextA(LPFINDREPLACEA);
 -WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY FindTextA(LPFINDREPLACEA);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY FindTextA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY FindTextW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEW);
  #ifdef UNICODE
  #define FindText  FindTextW
  #else
@@ -119,8 +119,8 @@ index 4083a3eb7b..43bae1fee8 100644
  #ifndef _MAC
 -WINCOMMDLGAPI HWND APIENTRY ReplaceTextA(LPFINDREPLACEA);
 -WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(LPFINDREPLACEW);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY ReplaceTextA(LPFINDREPLACEA);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(LPFINDREPLACEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY ReplaceTextA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEW);
  #ifdef UNICODE
  #define ReplaceText  ReplaceTextW
  #else
@@ -166,8 +166,8 @@ index 4083a3eb7b..43bae1fee8 100644
  
 -WINCOMMDLGAPI BOOL APIENTRY ChooseFontA(LPCHOOSEFONTA);
 -WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY ChooseFontA(LPCHOOSEFONTA);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY ChooseFontA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSEFONTA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSEFONTW);
  #ifdef UNICODE
  #define ChooseFont  ChooseFontW
  #else
@@ -200,6 +200,15 @@ index 4083a3eb7b..43bae1fee8 100644
  #ifdef UNICODE
  #define PrintDlg  PrintDlgW
  #else
+@@ -961,7 +962,7 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
+     // *** IPrintDialogCallback methods ***
+     STDMETHOD(InitDone) (THIS) PURE;
+     STDMETHOD(SelectionChange) (THIS) PURE;
+-    STDMETHOD(HandleMessage) (THIS_ HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT *pResult) PURE;
++    STDMETHOD(HandleMessage) (THIS_ HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LRESULT *pResult) PURE;
+ };
+ 
+ 
 @@ -1017,7 +1018,7 @@ typedef struct tagPDEXA {
     HGLOBAL               hDevMode;             // handle to DevMode
     HGLOBAL               hDevNames;            // handle to DevNames
@@ -262,8 +271,8 @@ index 4083a3eb7b..43bae1fee8 100644
  
 -WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgA( LPPAGESETUPDLGA );
 -WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
-+_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgA( LPPAGESETUPDLGA );
-+_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgA( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPAGESETUPDLGA );
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPAGESETUPDLGW );
  #ifdef UNICODE
  #define PageSetupDlg  PageSetupDlgW
  #else

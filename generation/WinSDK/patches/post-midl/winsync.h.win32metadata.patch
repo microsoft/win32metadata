@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
-index 6bf90f1d64..456e0f08c9 100644
+index 6bf90f1d64..88ab3026d2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
 @@ -556,10 +556,11 @@ extern "C"{
@@ -15,7 +15,7 @@ index 6bf90f1d64..456e0f08c9 100644
      {
      BOOL fIsVariable;
      USHORT cbIdSize;
-@@ -713,7 +714,7 @@ EXTERN_C const IID IID_IClockVectorElement;
+@@ -713,15 +714,15 @@ EXTERN_C const IID IID_IClockVectorElement;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -24,7 +24,17 @@ index 6bf90f1d64..456e0f08c9 100644
      IClockVectorElement : public IUnknown
      {
      public:
-@@ -818,7 +819,7 @@ EXTERN_C const IID IID_IFeedClockVectorElement;
+         virtual HRESULT STDMETHODCALLTYPE GetReplicaKey( 
+-            /* [out] */ DWORD *pdwReplicaKey) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwReplicaKey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTickCount( 
+-            /* [out] */ ULONGLONG *pullTickCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullTickCount) = 0;
+         
+     };
+     
+@@ -818,15 +819,15 @@ EXTERN_C const IID IID_IFeedClockVectorElement;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -33,7 +43,17 @@ index 6bf90f1d64..456e0f08c9 100644
      IFeedClockVectorElement : public IClockVectorElement
      {
      public:
-@@ -930,7 +931,7 @@ EXTERN_C const IID IID_IClockVector;
+         virtual HRESULT STDMETHODCALLTYPE GetSyncTime( 
+-            /* [out] */ SYNC_TIME *pSyncTime) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_TIME *pSyncTime) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
+-            /* [out] */ BYTE *pbFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BYTE *pbFlags) = 0;
+         
+     };
+     
+@@ -930,16 +931,16 @@ EXTERN_C const IID IID_IClockVector;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -42,7 +62,18 @@ index 6bf90f1d64..456e0f08c9 100644
      IClockVector : public IUnknown
      {
      public:
-@@ -1027,7 +1028,7 @@ EXTERN_C const IID IID_IFeedClockVector;
+         virtual HRESULT STDMETHODCALLTYPE GetClockVectorElements( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppiEnumClockVector) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppiEnumClockVector) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetClockVectorElementCount( 
+-            /* [out] */ DWORD *pdwCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwCount) = 0;
+         
+     };
+     
+@@ -1027,15 +1028,15 @@ EXTERN_C const IID IID_IFeedClockVector;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -51,6 +82,16 @@ index 6bf90f1d64..456e0f08c9 100644
      IFeedClockVector : public IClockVector
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetUpdateCount( 
+-            /* [out] */ DWORD *pdwUpdateCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwUpdateCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsNoConflictsSpecified( 
+-            /* [out] */ BOOL *pfIsNoConflictsSpecified) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsNoConflictsSpecified) = 0;
+         
+     };
+     
 @@ -1140,7 +1141,7 @@ EXTERN_C const IID IID_IEnumClockVector;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -78,6 +119,19 @@ index 6bf90f1d64..456e0f08c9 100644
      ICoreFragment : public IUnknown
      {
      public:
+@@ -1394,10 +1395,10 @@ EXTERN_C const IID IID_ICoreFragment;
+         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetColumnCount( 
+-            /* [out] */ DWORD *pColumnCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pColumnCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRangeCount( 
+-            /* [out] */ DWORD *pRangeCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pRangeCount) = 0;
+         
+     };
+     
 @@ -1510,7 +1511,7 @@ EXTERN_C const IID IID_ICoreFragmentInspector;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -105,6 +159,15 @@ index 6bf90f1d64..456e0f08c9 100644
      ISingleItemException : public IUnknown
      {
      public:
+@@ -1848,7 +1849,7 @@ EXTERN_C const IID IID_ISingleItemException;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetClockVector( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+     };
+     
 @@ -1937,7 +1938,7 @@ EXTERN_C const IID IID_IEnumSingleItemExceptions;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -123,6 +186,15 @@ index 6bf90f1d64..456e0f08c9 100644
      IChangeUnitException : public IUnknown
      {
      public:
+@@ -2070,7 +2071,7 @@ EXTERN_C const IID IID_IChangeUnitException;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetClockVector( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+     };
+     
 @@ -2168,7 +2169,7 @@ EXTERN_C const IID IID_IEnumChangeUnitExceptions;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -132,7 +204,7 @@ index 6bf90f1d64..456e0f08c9 100644
      IEnumChangeUnitExceptions : public IUnknown
      {
      public:
-@@ -2287,7 +2288,7 @@ EXTERN_C const IID IID_IReplicaKeyMap;
+@@ -2287,13 +2288,13 @@ EXTERN_C const IID IID_IReplicaKeyMap;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -141,7 +213,14 @@ index 6bf90f1d64..456e0f08c9 100644
      IReplicaKeyMap : public IUnknown
      {
      public:
-@@ -2401,7 +2402,7 @@ EXTERN_C const IID IID_IConstructReplicaKeyMap;
+         virtual HRESULT STDMETHODCALLTYPE LookupReplicaKey( 
+             /* [in] */ const BYTE *pbReplicaId,
+-            /* [out] */ DWORD *pdwReplicaKey) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwReplicaKey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE LookupReplicaId( 
+             /* [in] */ DWORD dwReplicaKey,
+@@ -2401,13 +2402,13 @@ EXTERN_C const IID IID_IConstructReplicaKeyMap;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -150,6 +229,13 @@ index 6bf90f1d64..456e0f08c9 100644
      IConstructReplicaKeyMap : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE FindOrAddReplica( 
+             /* [in] */ const BYTE *pbReplicaId,
+-            /* [out] */ DWORD *pdwReplicaKey) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwReplicaKey) = 0;
+         
+     };
+     
 @@ -2487,7 +2488,7 @@ EXTERN_C const IID IID_ISyncKnowledge;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -159,6 +245,65 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncKnowledge : public IUnknown
      {
      public:
+@@ -2516,7 +2517,7 @@ EXTERN_C const IID IID_ISyncKnowledge;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetScopeVector( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetReplicaKeyMap( 
+             /* [out] */ IReplicaKeyMap **ppReplicaKeyMap) = 0;
+@@ -2530,7 +2531,7 @@ EXTERN_C const IID IID_ISyncKnowledge;
+             /* [in] */ const SYNC_VERSION *pVersionIn,
+             /* [unique][in] */ BYTE *pbNewOwnerId,
+             /* [out][in] */ DWORD *pcbIdSize,
+-            /* [out] */ SYNC_VERSION *pVersionOut) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersionOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE MapRemoteToLocal( 
+             /* [in] */ ISyncKnowledge *pRemoteKnowledge,
+@@ -2564,33 +2565,33 @@ EXTERN_C const IID IID_ISyncKnowledge;
+         
+         virtual HRESULT STDMETHODCALLTYPE FindMinTickCountForReplica( 
+             /* [in] */ const BYTE *pbReplicaId,
+-            /* [out] */ ULONGLONG *pullReplicaTickCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullReplicaTickCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRangeExceptions( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSingleItemExceptions( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeUnitExceptions( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE FindClockVectorForItem( 
+             /* [in] */ const BYTE *pbItemId,
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE FindClockVectorForChangeUnit( 
+             /* [in] */ const BYTE *pbItemId,
+             /* [in] */ const BYTE *pbChangeUnitId,
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppUnk) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppUnk) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetVersion( 
+-            /* [out] */ DWORD *pdwVersion) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwVersion) = 0;
+         
+     };
+     
 @@ -2882,7 +2883,7 @@ EXTERN_C const IID IID_IForgottenKnowledge;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -168,7 +313,7 @@ index 6bf90f1d64..456e0f08c9 100644
      IForgottenKnowledge : public ISyncKnowledge
      {
      public:
-@@ -3199,7 +3200,7 @@ EXTERN_C const IID IID_ISyncKnowledge2;
+@@ -3199,12 +3200,12 @@ EXTERN_C const IID IID_ISyncKnowledge2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -177,6 +322,39 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncKnowledge2 : public ISyncKnowledge
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetIdParameters( 
+-            /* [out] */ ID_PARAMETERS *pIdParameters) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ID_PARAMETERS *pIdParameters) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ProjectOntoColumnSet( 
+             /* [in] */ const BYTE **ppColumns,
+@@ -3224,14 +3225,14 @@ EXTERN_C const IID IID_ISyncKnowledge2;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInspector( 
+             /* [in] */ REFIID riid,
+-            /* [iid_is][out] */ void **ppiInspector) = 0;
++            /* [iid_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") void **ppiInspector) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMinimumSupportedVersion( 
+-            /* [out] */ SYNC_SERIALIZATION_VERSION *pVersion) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_SERIALIZATION_VERSION *pVersion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStatistics( 
+             /* [in] */ SYNC_STATISTICS which,
+-            /* [out] */ DWORD *pValue) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ContainsKnowledgeForItem( 
+             /* [in] */ ISyncKnowledge *pKnowledge,
+@@ -3259,7 +3260,7 @@ EXTERN_C const IID IID_ISyncKnowledge2;
+         
+         virtual HRESULT STDMETHODCALLTYPE CompareToKnowledgeCookie( 
+             /* [in] */ IUnknown *pKnowledgeCookie,
+-            /* [out] */ KNOWLEDGE_COOKIE_COMPARISON_RESULT *pResult) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") KNOWLEDGE_COOKIE_COMPARISON_RESULT *pResult) = 0;
+         
+     };
+     
 @@ -3680,7 +3681,7 @@ EXTERN_C const IID IID_IRecoverableErrorData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -186,7 +364,7 @@ index 6bf90f1d64..456e0f08c9 100644
      IRecoverableErrorData : public IUnknown
      {
      public:
-@@ -3802,7 +3803,7 @@ EXTERN_C const IID IID_IRecoverableError;
+@@ -3802,26 +3803,26 @@ EXTERN_C const IID IID_IRecoverableError;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -195,6 +373,29 @@ index 6bf90f1d64..456e0f08c9 100644
      IRecoverableError : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetStage( 
+-            /* [out] */ SYNC_PROGRESS_STAGE *pStage) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_PROGRESS_STAGE *pStage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProvider( 
+-            /* [out] */ SYNC_PROVIDER_ROLE *pProviderRole) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_PROVIDER_ROLE *pProviderRole) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeWithRecoverableError( 
+             /* [out] */ ISyncChange **ppChangeWithRecoverableError) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRecoverableErrorDataForChange( 
+-            /* [out] */ HRESULT *phrError,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HRESULT *phrError,
+             /* [out] */ IRecoverableErrorData **ppErrorData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRecoverableErrorDataForChangeUnit( 
+             /* [in] */ ISyncChangeUnit *pChangeUnit,
+-            /* [out] */ HRESULT *phrError,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HRESULT *phrError,
+             /* [out] */ IRecoverableErrorData **ppErrorData) = 0;
+         
+     };
 @@ -3936,7 +3937,7 @@ EXTERN_C const IID IID_IChangeConflict;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -204,6 +405,48 @@ index 6bf90f1d64..456e0f08c9 100644
      IChangeConflict : public IUnknown
      {
      public:
+@@ -3953,14 +3954,14 @@ EXTERN_C const IID IID_IChangeConflict;
+             /* [out] */ IUnknown **ppConflictingData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetResolveActionForChange( 
+-            /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_RESOLVE_ACTION *pResolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetResolveActionForChange( 
+             /* [in] */ SYNC_RESOLVE_ACTION resolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetResolveActionForChangeUnit( 
+             /* [in] */ ISyncChangeUnit *pChangeUnit,
+-            /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_RESOLVE_ACTION *pResolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetResolveActionForChangeUnit( 
+             /* [in] */ ISyncChangeUnit *pChangeUnit,
+@@ -4124,21 +4125,21 @@ EXTERN_C const IID IID_IConstraintConflict;
+             /* [out] */ IUnknown **ppOriginalData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConstraintResolveActionForChange( 
+-            /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetConstraintResolveActionForChange( 
+             /* [in] */ SYNC_CONSTRAINT_RESOLVE_ACTION constraintResolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConstraintResolveActionForChangeUnit( 
+             /* [in] */ ISyncChangeUnit *pChangeUnit,
+-            /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetConstraintResolveActionForChangeUnit( 
+             /* [in] */ ISyncChangeUnit *pChangeUnit,
+             /* [in] */ SYNC_CONSTRAINT_RESOLVE_ACTION constraintResolveAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConstraintConflictReason( 
+-            /* [out] */ CONSTRAINT_CONFLICT_REASON *pConstraintConflictReason) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") CONSTRAINT_CONFLICT_REASON *pConstraintConflictReason) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsTemporary( void) = 0;
+         
 @@ -4308,7 +4309,7 @@ EXTERN_C const IID IID_ISyncCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -213,6 +456,15 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncCallback : public IUnknown
      {
      public:
+@@ -4325,7 +4326,7 @@ EXTERN_C const IID IID_ISyncCallback;
+             /* [in] */ IChangeConflict *pConflict) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnFullEnumerationNeeded( 
+-            /* [out] */ SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnRecoverableError( 
+             /* [in] */ IRecoverableError *pRecoverableError) = 0;
 @@ -4442,7 +4443,7 @@ EXTERN_C const IID IID_ISyncCallback2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -222,7 +474,7 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncCallback2 : public ISyncCallback
      {
      public:
-@@ -4669,7 +4670,7 @@ EXTERN_C const IID IID_ISyncProvider;
+@@ -4669,12 +4670,12 @@ EXTERN_C const IID IID_ISyncProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -231,7 +483,13 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncProvider : public IUnknown
      {
      public:
-@@ -4753,7 +4754,7 @@ EXTERN_C const IID IID_ISyncSessionState;
+         virtual HRESULT STDMETHODCALLTYPE GetIdParameters( 
+-            /* [out] */ ID_PARAMETERS *pIdParameters) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ID_PARAMETERS *pIdParameters) = 0;
+         
+     };
+     
+@@ -4753,12 +4754,12 @@ EXTERN_C const IID IID_ISyncSessionState;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -240,6 +498,12 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncSessionState : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE IsCanceled( 
+-            /* [out] */ BOOL *pfIsCanceled) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsCanceled) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInfoForChangeApplication( 
+             /* [size_is][unique][out][in] */ BYTE *pbChangeApplierInfo,
 @@ -4917,7 +4918,7 @@ EXTERN_C const IID IID_ISyncSessionExtendedErrorInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -258,6 +522,15 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncSessionState2 : public ISyncSessionState
      {
      public:
+@@ -5009,7 +5010,7 @@ EXTERN_C const IID IID_ISyncSessionState2;
+             /* [in] */ BOOL fSelf) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSessionErrorStatus( 
+-            /* [retval][out] */ HRESULT *phrSessionError) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") HRESULT *phrSessionError) = 0;
+         
+     };
+     
 @@ -5160,7 +5161,7 @@ EXTERN_C const IID IID_ISyncFilterInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -267,7 +540,7 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncFilterInfo : public IUnknown
      {
      public:
-@@ -5258,7 +5259,7 @@ EXTERN_C const IID IID_ISyncFilterInfo2;
+@@ -5258,12 +5259,12 @@ EXTERN_C const IID IID_ISyncFilterInfo2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -276,6 +549,12 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncFilterInfo2 : public ISyncFilterInfo
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
+-            /* [out] */ DWORD *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFlags) = 0;
+         
+     };
+     
 @@ -5352,7 +5353,7 @@ EXTERN_C const IID IID_IChangeUnitListFilterInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -285,6 +564,32 @@ index 6bf90f1d64..456e0f08c9 100644
      IChangeUnitListFilterInfo : public ISyncFilterInfo
      {
      public:
+@@ -5361,7 +5362,7 @@ EXTERN_C const IID IID_IChangeUnitListFilterInfo;
+             /* [in] */ DWORD dwChangeUnitCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeUnitIdCount( 
+-            /* [retval][out] */ DWORD *pdwChangeUnitIdCount) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwChangeUnitIdCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeUnitId( 
+             /* [in] */ DWORD dwChangeUnitIdIndex,
+@@ -5772,14 +5773,14 @@ EXTERN_C const IID IID_ICombinedFilterInfo;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetFilterCount( 
+-            /* [out] */ DWORD *pdwFilterCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFilterCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFilterInfo( 
+             /* [in] */ DWORD dwFilterIndex,
+             /* [out] */ ISyncFilterInfo **ppIFilterInfo) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFilterCombinationType( 
+-            /* [out] */ FILTER_COMBINATION_TYPE *pFilterCombinationType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") FILTER_COMBINATION_TYPE *pFilterCombinationType) = 0;
+         
+     };
+     
 @@ -5885,7 +5886,7 @@ EXTERN_C const IID IID_IEnumSyncChanges;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -312,6 +617,23 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncChangeBatchBase : public IUnknown
      {
      public:
+@@ -6204,13 +6205,13 @@ EXTERN_C const IID IID_ISyncChangeBatchBase;
+             /* [out] */ IEnumSyncChanges **ppEnum) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIsLastBatch( 
+-            /* [out] */ BOOL *pfLastBatch) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfLastBatch) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetWorkEstimateForBatch( 
+-            /* [out] */ DWORD *pdwWorkForBatch) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwWorkForBatch) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRemainingWorkEstimateForSession( 
+-            /* [out] */ DWORD *pdwRemainingWorkForSession) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwRemainingWorkForSession) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE BeginOrderedGroup( 
+             /* [in] */ const BYTE *pbLowerBound) = 0;
 @@ -6437,7 +6438,7 @@ EXTERN_C const IID IID_ISyncChangeBatch;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -357,6 +679,15 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncChangeBatchAdvanced : public IUnknown
      {
      public:
+@@ -7360,7 +7361,7 @@ EXTERN_C const IID IID_ISyncChangeBatchAdvanced;
+             /* [out][in] */ DWORD *pcbIdSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBatchLevelKnowledgeShouldBeApplied( 
+-            /* [out] */ BOOL *pfBatchKnowledgeShouldBeApplied) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfBatchKnowledgeShouldBeApplied) = 0;
+         
+     };
+     
 @@ -7980,7 +7981,7 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -366,6 +697,15 @@ index 6bf90f1d64..456e0f08c9 100644
      IKnowledgeSyncProvider : public ISyncProvider
      {
      public:
+@@ -7990,7 +7991,7 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSyncBatchParameters( 
+             /* [out] */ ISyncKnowledge **ppSyncKnowledge,
+-            /* [out] */ DWORD *pdwRequestedBatchSize) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwRequestedBatchSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeBatch( 
+             /* [in] */ DWORD dwBatchSize,
 @@ -8173,7 +8174,7 @@ EXTERN_C const IID IID_ISyncChangeUnit;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -375,6 +715,15 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncChangeUnit : public IUnknown
      {
      public:
+@@ -8186,7 +8187,7 @@ EXTERN_C const IID IID_ISyncChangeUnit;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeUnitVersion( 
+             /* [in] */ const BYTE *pbCurrentReplicaId,
+-            /* [out] */ SYNC_VERSION *pVersion) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersion) = 0;
+         
+     };
+     
 @@ -8283,7 +8284,7 @@ EXTERN_C const IID IID_IEnumSyncChangeUnits;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -393,6 +742,28 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncChange : public IUnknown
      {
      public:
+@@ -8416,17 +8417,17 @@ EXTERN_C const IID IID_ISyncChange;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeVersion( 
+             /* [in] */ const BYTE *pbCurrentReplicaId,
+-            /* [out] */ SYNC_VERSION *pVersion) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCreationVersion( 
+             /* [in] */ const BYTE *pbCurrentReplicaId,
+-            /* [out] */ SYNC_VERSION *pVersion) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
+-            /* [out] */ DWORD *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetWorkEstimate( 
+-            /* [out] */ DWORD *pdwWork) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwWork) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeUnits( 
+             /* [out] */ IEnumSyncChangeUnits **ppEnum) = 0;
 @@ -8593,7 +8594,7 @@ EXTERN_C const IID IID_ISyncChangeWithPrerequisite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -411,6 +782,38 @@ index 6bf90f1d64..456e0f08c9 100644
      ISyncFullEnumerationChange : public IUnknown
      {
      public:
+@@ -8962,11 +8963,11 @@ EXTERN_C const IID IID_IFilterKeyMap;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+-            /* [out] */ DWORD *pdwCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddFilter( 
+             /* [in] */ ISyncFilter *pISyncFilter,
+-            /* [out] */ DWORD *pdwFilterKey) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFilterKey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFilter( 
+             /* [in] */ DWORD dwFilterKey,
+@@ -9085,14 +9086,14 @@ EXTERN_C const IID IID_ISyncChangeWithFilterKeyMap;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetFilterCount( 
+-            /* [out] */ DWORD *pdwFilterCount) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFilterCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFilterChange( 
+             /* [in] */ DWORD dwFilterKey,
+-            /* [out] */ SYNC_FILTER_CHANGE *pFilterChange) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_FILTER_CHANGE *pFilterChange) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAllChangeUnitsPresentFlag( 
+-            /* [out] */ BOOL *pfAllChangeUnitsPresent) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfAllChangeUnitsPresent) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFilterForgottenKnowledge( 
+             /* [in] */ DWORD dwFilterKey,
 @@ -9467,7 +9468,7 @@ EXTERN_C const IID IID_IDataRetrieverCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -429,7 +832,7 @@ index 6bf90f1d64..456e0f08c9 100644
      ILoadChangeContext : public IUnknown
      {
      public:
-@@ -9674,7 +9675,7 @@ EXTERN_C const IID IID_ISynchronousDataRetriever;
+@@ -9674,12 +9675,12 @@ EXTERN_C const IID IID_ISynchronousDataRetriever;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -438,7 +841,13 @@ index 6bf90f1d64..456e0f08c9 100644
      ISynchronousDataRetriever : public IUnknown
      {
      public:
-@@ -9771,7 +9772,7 @@ EXTERN_C const IID IID_IAsynchronousDataRetriever;
+         virtual HRESULT STDMETHODCALLTYPE GetIdParameters( 
+-            /* [out] */ ID_PARAMETERS *pIdParameters) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ID_PARAMETERS *pIdParameters) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE LoadChangeData( 
+             /* [in] */ ILoadChangeContext *pLoadChangeContext,
+@@ -9771,12 +9772,12 @@ EXTERN_C const IID IID_IAsynchronousDataRetriever;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -447,6 +856,12 @@ index 6bf90f1d64..456e0f08c9 100644
      IAsynchronousDataRetriever : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetIdParameters( 
+-            /* [out] */ ID_PARAMETERS *pIdParameters) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ID_PARAMETERS *pIdParameters) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RegisterCallback( 
+             /* [in] */ IDataRetrieverCallback *pDataRetrieverCallback) = 0;
 @@ -9888,7 +9889,7 @@ EXTERN_C const IID IID_IFilterRequestCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -474,7 +889,7 @@ index 6bf90f1d64..456e0f08c9 100644
      ISupportFilteredSync : public IUnknown
      {
      public:
-@@ -10323,7 +10324,7 @@ EXTERN_C const IID IID_ISupportLastWriteTime;
+@@ -10323,18 +10324,18 @@ EXTERN_C const IID IID_ISupportLastWriteTime;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -483,6 +898,19 @@ index 6bf90f1d64..456e0f08c9 100644
      ISupportLastWriteTime : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE GetItemChangeTime( 
+             /* [in] */ const BYTE *pbItemId,
+-            /* [out] */ ULONGLONG *pullTimestamp) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullTimestamp) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeUnitChangeTime( 
+             /* [in] */ const BYTE *pbItemId,
+             /* [in] */ const BYTE *pbChangeUnitId,
+-            /* [out] */ ULONGLONG *pullTimestamp) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullTimestamp) = 0;
+         
+     };
+     
 @@ -10424,7 +10425,7 @@ EXTERN_C const IID IID_IProviderConverter;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

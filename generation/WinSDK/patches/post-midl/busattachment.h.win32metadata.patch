@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h
-index 1b191f5672..40063de9de 100644
+index 1b191f5672..362e106359 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 1b191f5672..40063de9de 100644
  /**
   * @file BusAttachment.h is the top-level object responsible for connecting to a
   * message bus.
+@@ -53,7 +54,7 @@ typedef struct _alljoyn_busattachment_handle*               alljoyn_busattachmen
+ /**
+  * Type for the joinsession callback used with the asynchronous joinsession request.
+  */
+-typedef void (AJ_CALL * alljoyn_busattachment_joinsessioncb_ptr)(QStatus status, alljoyn_sessionid sessionId, const alljoyn_sessionopts opts, void* context);
++typedef void (AJ_CALL * alljoyn_busattachment_joinsessioncb_ptr)(QStatus status, alljoyn_sessionid sessionId, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Type for the setlinktimeout callback used with the asynchronous setlinktimeout request.
+@@ -65,7 +66,7 @@ typedef void (AJ_CALL * alljoyn_busattachment_joinsessioncb_ptr)(QStatus status,
+  * @param timeout      Timeout value (possibly adjusted from original request).
+  * @param context      User defined context which will be passed as-is to callback.
+  */
+-typedef void (AJ_CALL * alljoyn_busattachment_setlinktimeoutcb_ptr)(QStatus status, uint32_t timeout, void* context);
++typedef void (AJ_CALL * alljoyn_busattachment_setlinktimeoutcb_ptr)(QStatus status, uint32_t timeout, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Allocate an alljoyn_busattachment.
 @@ -84,7 +85,7 @@ typedef void (AJ_CALL * alljoyn_busattachment_setlinktimeoutcb_ptr)(QStatus stat
   *
   * @return the allocated alljoyn_busattachment
