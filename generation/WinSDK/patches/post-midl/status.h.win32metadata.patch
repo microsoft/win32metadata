@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Status.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Status.h
-index 7ae8359c1a..ca1d6c9c6b 100644
+index 7ae8359c1a..b68c12c7c7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Status.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Status.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 7ae8359c1a..ca1d6c9c6b 100644
   * @return  C string representation of the status code.
   */
 -extern AJ_API const char* AJ_CALL QCC_StatusText(QStatus status);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL QCC_StatusText(_Win32_AssociatedEnum_(QStatus) QStatus status);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL QCC_StatusText(_WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(QStatus) QStatus status);
  
  #ifdef __cplusplus
  }   /* extern "C" */

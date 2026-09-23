@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
-index af6fcb5bcc..bed84de99c 100644
+index af6fcb5bcc..2fb50214cb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 @@ -1,3 +1,4 @@
@@ -43,15 +43,18 @@ index af6fcb5bcc..bed84de99c 100644
  );
  
  #define SCE_LOG_LEVEL_ALWAYS      0
-@@ -148,7 +149,7 @@ SCESTATUS
+@@ -148,9 +149,9 @@ SCESTATUS
  typedef
  SCESTATUS
  (CALLBACK *PFSCE_LOG_INFO)(
 -    IN INT ErrLevel,
 +    _Win32_AssociatedEnum_(SCE_LOG_ERR_LEVEL) IN INT ErrLevel,
      IN DWORD  Win32rc,
-     IN LPTSTR pErrFmt,
+-    IN LPTSTR pErrFmt,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPTSTR pErrFmt,
      ...
+ );
+ 
 @@ -168,14 +169,14 @@ typedef struct _SCESVC_CALLBACK_INFO_ {
  typedef
  SCESTATUS

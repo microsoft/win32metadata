@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdipluseffects.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdipluseffects.h
-index e576a1a610..2585846a83 100644
+index e576a1a610..a458066213 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/gdipluseffects.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdipluseffects.h
 @@ -1,3 +1,4 @@
@@ -7,28 +7,34 @@ index e576a1a610..2585846a83 100644
  /**************************************************************************
  *
  * Copyright (c) 2001 Microsoft Corporation
-@@ -165,19 +166,19 @@ struct ColorCurveParams
+@@ -165,20 +166,20 @@ struct ColorCurveParams
  class CGpEffect;
  
  extern "C" {
 -Status __stdcall
+-GdipCreateEffect(const GUID guid, CGpEffect **effect);
 +_Win32_ImportLibrary_("gdiplus.dll") Status __stdcall
- GdipCreateEffect(const GUID guid, CGpEffect **effect);
++GdipCreateEffect(_WIN32META_ANNOTATION_("win32metadata:in") const GUID guid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CGpEffect **effect);
  
 -Status __stdcall
+-GdipDeleteEffect(CGpEffect *effect);
 +_Win32_ImportLibrary_("gdiplus.dll") Status __stdcall
- GdipDeleteEffect(CGpEffect *effect);
++GdipDeleteEffect(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CGpEffect *effect);
  
 -Status __stdcall
+-GdipGetEffectParameterSize(CGpEffect *effect, UINT *size);
 +_Win32_ImportLibrary_("gdiplus.dll") Status __stdcall
- GdipGetEffectParameterSize(CGpEffect *effect, UINT *size);
++GdipGetEffectParameterSize(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CGpEffect *effect, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT *size);
  
 -Status __stdcall
+-GdipSetEffectParameters(CGpEffect *effect, const VOID *params, const UINT size);
 +_Win32_ImportLibrary_("gdiplus.dll") Status __stdcall
- GdipSetEffectParameters(CGpEffect *effect, const VOID *params, const UINT size);
++GdipSetEffectParameters(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CGpEffect *effect, _WIN32META_ANNOTATION_("win32metadata:in") const VOID *params, _WIN32META_ANNOTATION_("win32metadata:in") const UINT size);
  
 -Status __stdcall
+-GdipGetEffectParameters(CGpEffect *effect, UINT *size, VOID *params);
 +_Win32_ImportLibrary_("gdiplus.dll") Status __stdcall
- GdipGetEffectParameters(CGpEffect *effect, UINT *size, VOID *params);
++GdipGetEffectParameters(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CGpEffect *effect, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT *size, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID *params);
  }
  
+ #ifndef _GDIPLUSEFFECTS_EXCLUDEOBJECTS

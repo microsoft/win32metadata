@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObj.h
-index 2430a6719a..f6c674e946 100644
+index 2430a6719a..246223f8bc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObj.h
 @@ -1,3 +1,4 @@
@@ -13,8 +13,8 @@ index 2430a6719a..f6c674e946 100644
   */
 -extern AJ_API alljoyn_aboutobj AJ_CALL alljoyn_aboutobj_create(alljoyn_busattachment bus,
 -                                                               alljoyn_about_announceflag isAnnounced);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutobj AJ_CALL alljoyn_aboutobj_create(alljoyn_busattachment bus,
-+                                                               _Win32_AssociatedEnum_(alljoyn_about_announceflag) alljoyn_about_announceflag isAnnounced);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutobj AJ_CALL alljoyn_aboutobj_create(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                               _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(alljoyn_about_announceflag) alljoyn_about_announceflag isAnnounced);
  
  /**
   * Free an alljoyn_aboutobj object.
@@ -22,34 +22,42 @@ index 2430a6719a..f6c674e946 100644
   * @param obj The alljoyn_aboutobj to be freed.
   */
 -extern AJ_API void AJ_CALL alljoyn_aboutobj_destroy(alljoyn_aboutobj obj);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutobj_destroy(alljoyn_aboutobj obj);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutobj_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobj obj);
  
  /**
   * This is used to send the Announce signal.  It announces the list of all
-@@ -93,7 +94,7 @@ extern AJ_API void AJ_CALL alljoyn_aboutobj_destroy(alljoyn_aboutobj obj);
+@@ -93,9 +94,9 @@ extern AJ_API void AJ_CALL alljoyn_aboutobj_destroy(alljoyn_aboutobj obj);
   *  - ER_OK on success
   *  - ER_ABOUT_SESSIONPORT_NOT_BOUND if the SessionPort given is not bound
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_announce(alljoyn_aboutobj obj,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_announce(alljoyn_aboutobj obj,
-                                                         alljoyn_sessionport sessionPort,
-                                                         alljoyn_aboutdata aboutData);
+-                                                        alljoyn_sessionport sessionPort,
+-                                                        alljoyn_aboutdata aboutData);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_announce(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobj obj,
++                                                        _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionport sessionPort,
++                                                        _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutdata aboutData);
  
-@@ -118,7 +119,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_announce(alljoyn_aboutobj obj,
+ 
+ /**
+@@ -118,9 +119,9 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_announce(alljoyn_aboutobj obj,
   *  - ER_OK on success
   *  - ER_ABOUT_SESSIONPORT_NOT_BOUND if the SessionPort given is not bound
   */
 -QStatus AJ_CALL alljoyn_aboutobj_announce_using_datalistener(alljoyn_aboutobj obj,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) QStatus AJ_CALL alljoyn_aboutobj_announce_using_datalistener(alljoyn_aboutobj obj,
-                                                              alljoyn_sessionport sessionPort,
-                                                              alljoyn_aboutdatalistener aboutListener);
+-                                                             alljoyn_sessionport sessionPort,
+-                                                             alljoyn_aboutdatalistener aboutListener);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) QStatus AJ_CALL alljoyn_aboutobj_announce_using_datalistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobj obj,
++                                                             _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionport sessionPort,
++                                                             _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutdatalistener aboutListener);
  
+ 
+ /**
 @@ -133,7 +134,7 @@ QStatus AJ_CALL alljoyn_aboutobj_announce_using_datalistener(alljoyn_aboutobj ob
   *     - ER_OK on success
   *     - annother status indicating failure.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_unannounce(alljoyn_aboutobj obj);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_unannounce(alljoyn_aboutobj obj);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobj_unannounce(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobj obj);
  
  #ifdef __cplusplus
  } /* extern "C" */

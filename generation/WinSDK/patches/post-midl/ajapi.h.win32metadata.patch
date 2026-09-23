@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h
-index 21066144c2..dcdc2b2513 100644
+index 21066144c2..7350639e13 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AjAPI.h
 @@ -1,3 +1,4 @@
@@ -18,7 +18,7 @@ index 21066144c2..dcdc2b2513 100644
   * Enable/disable main thread callback behavior.
   */
 -extern AJ_API void AJ_CALL alljoyn_unity_set_deferred_callback_mainthread_only(QCC_BOOL mainthread_only);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_unity_set_deferred_callback_mainthread_only(QCC_BOOL mainthread_only);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_unity_set_deferred_callback_mainthread_only(_WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL mainthread_only);
  
  #ifdef __cplusplus
  } /* extern "C" */

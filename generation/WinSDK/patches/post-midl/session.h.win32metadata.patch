@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Session.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Session.h
-index 7965cfa2d4..80c82feafa 100644
+index 7965cfa2d4..7ed63dbd94 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Session.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Session.h
 @@ -1,3 +1,4 @@
@@ -7,21 +7,22 @@ index 7965cfa2d4..80c82feafa 100644
  /**
   * @file
   * AllJoyn session related data types.
-@@ -78,7 +79,7 @@ typedef uint32_t alljoyn_sessionid;
+@@ -78,15 +79,15 @@ typedef uint32_t alljoyn_sessionid;
   *
   * @return the allocated alljoyn_sessionopts
   */
 -extern AJ_API alljoyn_sessionopts AJ_CALL alljoyn_sessionopts_create(uint8_t traffic, QCC_BOOL isMultipoint,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_sessionopts AJ_CALL alljoyn_sessionopts_create(uint8_t traffic, QCC_BOOL isMultipoint,
-                                                                      uint8_t proximity, alljoyn_transportmask transports);
+-                                                                     uint8_t proximity, alljoyn_transportmask transports);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_sessionopts AJ_CALL alljoyn_sessionopts_create(_WIN32META_ANNOTATION_("win32metadata:in") uint8_t traffic, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL isMultipoint,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") uint8_t proximity, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_transportmask transports);
  
  /**
-@@ -86,7 +87,7 @@ extern AJ_API alljoyn_sessionopts AJ_CALL alljoyn_sessionopts_create(uint8_t tra
+  * Destroy an alljoyn_sessionopts created with alljoyn_sessionopts_create.
   *
   * @param opts alljoyn_sessionopts to destroy
   */
 -extern AJ_API void AJ_CALL alljoyn_sessionopts_destroy(alljoyn_sessionopts opts);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_destroy(alljoyn_sessionopts opts);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionopts opts);
  
  /**
   * Get accessor for the traffic member of alljoyn_sessionopts.
@@ -30,7 +31,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @return Traffic type specified by the specified alljoyn_sessionopts.
   */
 -extern AJ_API uint8_t AJ_CALL alljoyn_sessionopts_get_traffic(const alljoyn_sessionopts opts);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint8_t AJ_CALL alljoyn_sessionopts_get_traffic(const alljoyn_sessionopts opts);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint8_t AJ_CALL alljoyn_sessionopts_get_traffic(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts);
  
  /**
   * Set accessor for the traffic member of alljoyn_sessionopts.
@@ -39,7 +40,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @param traffic Traffic type to set in the alljoyn_sessionopts.
   */
 -extern AJ_API void AJ_CALL alljoyn_sessionopts_set_traffic(alljoyn_sessionopts opts, uint8_t traffic);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_traffic(alljoyn_sessionopts opts, uint8_t traffic);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_traffic(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") uint8_t traffic);
  
  /**
   * Get accessor for the isMultipoint member of alljoyn_sessionopts.
@@ -48,7 +49,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @return Multipoint value specified by the specified alljoyn_sessionopts.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_sessionopts_get_multipoint(const alljoyn_sessionopts opts);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_sessionopts_get_multipoint(const alljoyn_sessionopts opts);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_sessionopts_get_multipoint(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts);
  
  /**
   * Set accessor for the isMultipoint member of alljoyn_sessionopts.
@@ -57,7 +58,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @param isMultipoint Multipoint value to set in the alljoyn_sessionopts.
   */
 -extern AJ_API void AJ_CALL alljoyn_sessionopts_set_multipoint(alljoyn_sessionopts opts, QCC_BOOL isMultipoint);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_multipoint(alljoyn_sessionopts opts, QCC_BOOL isMultipoint);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_multipoint(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL isMultipoint);
  
  /**
   * Get accessor for the proximity member of alljoyn_sessionopts.
@@ -66,7 +67,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @return Proximity specified by the specified alljoyn_sessionopts.
   */
 -extern AJ_API uint8_t AJ_CALL alljoyn_sessionopts_get_proximity(const alljoyn_sessionopts opts);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint8_t AJ_CALL alljoyn_sessionopts_get_proximity(const alljoyn_sessionopts opts);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint8_t AJ_CALL alljoyn_sessionopts_get_proximity(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts);
  
  /**
   * Set accessor for the proximity member of alljoyn_sessionopts.
@@ -75,7 +76,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @param proximity Proximity value to set in the alljoyn_sessionopts.
   */
 -extern AJ_API void AJ_CALL alljoyn_sessionopts_set_proximity(alljoyn_sessionopts opts, uint8_t proximity);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_proximity(alljoyn_sessionopts opts, uint8_t proximity);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_proximity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") uint8_t proximity);
  
  /**
   * Get accessor for the transports member of alljoyn_sessionopts.
@@ -84,7 +85,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @return Transports allowed by the specified alljoyn_sessionopts.
   */
 -extern AJ_API alljoyn_transportmask AJ_CALL alljoyn_sessionopts_get_transports(const alljoyn_sessionopts opts);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_transportmask AJ_CALL alljoyn_sessionopts_get_transports(const alljoyn_sessionopts opts);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_transportmask AJ_CALL alljoyn_sessionopts_get_transports(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts);
  
  /**
   * Set accessor for the transports member of alljoyn_sessionopts.
@@ -93,7 +94,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @param transports change the transports allowed by the specified alljoyn_sessionopts.
   */
 -extern AJ_API void AJ_CALL alljoyn_sessionopts_set_transports(alljoyn_sessionopts opts, alljoyn_transportmask transports);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_transports(alljoyn_sessionopts opts, alljoyn_transportmask transports);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionopts_set_transports(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_transportmask transports);
  
  /**
   * Determine whether one alljoyn_sessionopts is compatible with the alljoyn_sessionopts
@@ -102,7 +103,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @return QCC_TRUE iff this alljoyn_sessionopts can use the option set offered by other.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_sessionopts_iscompatible(const alljoyn_sessionopts one, const alljoyn_sessionopts other);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_sessionopts_iscompatible(const alljoyn_sessionopts one, const alljoyn_sessionopts other);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_sessionopts_iscompatible(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts one, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts other);
  
  /**
   * Compare two alljoyn_sessionopts.
@@ -111,7 +112,7 @@ index 7965cfa2d4..80c82feafa 100644
   * @return 0 if the alljoyn_sessionopts are equal, 1 if one > other, -1 if one < other.
   */
 -extern AJ_API int32_t AJ_CALL alljoyn_sessionopts_cmp(const alljoyn_sessionopts one, const alljoyn_sessionopts other);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API int32_t AJ_CALL alljoyn_sessionopts_cmp(const alljoyn_sessionopts one, const alljoyn_sessionopts other);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API int32_t AJ_CALL alljoyn_sessionopts_cmp(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts one, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts other);
  
  #ifdef __cplusplus
  } /* extern "C" */

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h b/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h
-index 1894dbe533..65428f99a2 100644
+index 1894dbe533..59723c0cda 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 1894dbe533..65428f99a2 100644
  #include <winapifamily.h>
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 -STDAPI CLRCreateInstance(REFCLSID clsid, REFIID riid, /*iid_is(riid)*/ LPVOID *ppInterface);
-+_Win32_ImportLibrary_("mscoree.dll") STDAPI CLRCreateInstance(REFCLSID clsid, REFIID riid, /*iid_is(riid)*/ LPVOID *ppInterface);
++_Win32_ImportLibrary_("mscoree.dll") STDAPI CLRCreateInstance(_WIN32META_ANNOTATION_("win32metadata:in") REFCLSID clsid, _WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, /*iid_is(riid)*/ _WIN32META_ANNOTATION_("win32metadata:out") LPVOID *ppInterface);
  EXTERN_GUID(CLSID_CLRStrongName, 0xB79B0ACD, 0xF5CD, 0x409b, 0xB5, 0xA5, 0xA1, 0x62, 0x44, 0x61, 0x0B, 0x92);
  EXTERN_GUID(IID_ICLRMetaHost, 0xD332DB9E, 0xB9B3, 0x4125, 0x82, 0x07, 0xA1, 0x48, 0x84, 0xF5, 0x32, 0x16);
  EXTERN_GUID(CLSID_CLRMetaHost, 0x9280188d, 0xe8e, 0x4867, 0xb3, 0xc, 0x7f, 0xa8, 0x38, 0x84, 0xe8, 0xde);

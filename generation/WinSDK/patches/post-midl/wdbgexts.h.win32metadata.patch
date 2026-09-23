@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H b/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
-index e57c8c5c7c..bd1416a5a9 100644
+index e57c8c5c7c..6cf88302b4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index e57c8c5c7c..bd1416a5a9 100644
  /*++
  
  Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -76,7 +77,7 @@ typedef ULONGLONG *PULONGLONG;
+ typedef
+ VOID
+ (WDBGAPIV*PWINDBG_OUTPUT_ROUTINE)(
+-    PCSTR lpFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") PCSTR lpFormat,
+     ...
+     );
+ 
 @@ -101,31 +102,31 @@ ULONG64
  typedef
  VOID

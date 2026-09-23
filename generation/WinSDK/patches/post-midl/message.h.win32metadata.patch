@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h
-index 8e6e80d07f..2f09b2506d 100644
+index 8e6e80d07f..2eebd7457e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return the allocated alljoyn_message
   */
 -extern AJ_API alljoyn_message AJ_CALL alljoyn_message_create(alljoyn_busattachment bus);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_message AJ_CALL alljoyn_message_create(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_message AJ_CALL alljoyn_message_create(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
  
  /**
   * Destroy an alljoyn_message object.
@@ -20,7 +20,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @param msg The alljoyn_message to destroy
   */
 -extern AJ_API void AJ_CALL alljoyn_message_destroy(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_message_destroy(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_message_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Determine if message is a broadcast signal.
@@ -29,7 +29,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  Return true if this is a broadcast signal.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isbroadcastsignal(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isbroadcastsignal(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isbroadcastsignal(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Messages broadcast to all devices are global broadcast messages.
@@ -38,7 +38,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  Return true if this is a global broadcast message.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isglobalbroadcast(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isglobalbroadcast(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isglobalbroadcast(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Messages sent without sessions are sessionless.
@@ -47,7 +47,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  Return true if this is a sessionless message.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_issessionless(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_issessionless(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_issessionless(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Returns the flags for the message.
@@ -56,7 +56,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @see flag types in Message.h file
   */
 -extern AJ_API uint8_t AJ_CALL alljoyn_message_getflags(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint8_t AJ_CALL alljoyn_message_getflags(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint8_t AJ_CALL alljoyn_message_getflags(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Return true if message's TTL header indicates that it is expired
@@ -65,7 +65,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return Returns true if the message's TTL header indicates that is has expired.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isexpired(alljoyn_message msg, uint32_t* tillExpireMS);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isexpired(alljoyn_message msg, uint32_t* tillExpireMS);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isexpired(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint32_t* tillExpireMS);
  
  /**
   * Determine if the message is marked as unreliable. Unreliable messages have a non-zero
@@ -74,7 +74,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  Returns true if the message is unreliable, that is, has a non-zero time-to-live.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isunreliable(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isunreliable(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isunreliable(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Determine if the message was encrypted.
@@ -83,7 +83,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  Returns true if the message was encrypted.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isencrypted(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isencrypted(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_isencrypted(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Get the name of the authentication mechanism that was used to generate the encryption key if
@@ -92,7 +92,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  the name of an authentication mechanism or an empty string.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getauthmechanism(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getauthmechanism(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getauthmechanism(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Return the type of the message
@@ -101,7 +101,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return message type
   */
 -extern AJ_API alljoyn_messagetype AJ_CALL alljoyn_message_gettype(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(alljoyn_messagetype) extern AJ_API alljoyn_messagetype AJ_CALL alljoyn_message_gettype(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(alljoyn_messagetype) extern AJ_API alljoyn_messagetype AJ_CALL alljoyn_message_gettype(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Return the arguments for this message.
@@ -110,7 +110,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @param[out] args    Returns the arguments
   */
 -extern AJ_API void AJ_CALL alljoyn_message_getargs(alljoyn_message msg, size_t* numArgs, alljoyn_msgarg* args);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_message_getargs(alljoyn_message msg, size_t* numArgs, alljoyn_msgarg* args);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_message_getargs(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* numArgs, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_msgarg* args);
  
  /**
   * Return a specific argument.
@@ -119,7 +119,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - NULL if unmarshal failed or there is not such argument.
   */
 -extern AJ_API const alljoyn_msgarg AJ_CALL alljoyn_message_getarg(alljoyn_message msg, size_t argN);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_msgarg AJ_CALL alljoyn_message_getarg(alljoyn_message msg, size_t argN);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_msgarg AJ_CALL alljoyn_message_getarg(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") size_t argN);
  
  /**
   * Unpack and return the arguments for this message. This function uses the
@@ -128,7 +128,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return  ER_OK if successful.
   */
 -extern AJ_API QStatus CDECL_CALL alljoyn_message_parseargs(alljoyn_message msg, const char* signature, ...);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_message_parseargs(alljoyn_message msg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus CDECL_CALL alljoyn_message_parseargs(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
  
  /**
   * Accessor function to get serial number for the message. Usually only important for
@@ -137,7 +137,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return the serial number of the %Message
   */
 -extern AJ_API uint32_t AJ_CALL alljoyn_message_getcallserial(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_message_getcallserial(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_message_getcallserial(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the signature for this message
@@ -146,7 +146,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - An empty string if unable to find the AllJoyn signature
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getsignature(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getsignature(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getsignature(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the object path for this message
@@ -155,7 +155,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - An empty string if unable to find the AllJoyn object path
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getobjectpath(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getobjectpath(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getobjectpath(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the interface for this message
@@ -164,7 +164,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - An empty string if unable to find the interface
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getinterface(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getinterface(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the member (method/signal) name for this message
@@ -173,7 +173,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - An empty string if unable to find the member name
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getmembername(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getmembername(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getmembername(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the reply serial number for the message. Only meaningful for #ALLJOYN_MESSAGE_METHOD_RET
@@ -182,7 +182,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - Zero if unable to find the serial number. Note that 0 is an invalid serial number.
   */
 -extern AJ_API uint32_t AJ_CALL alljoyn_message_getreplyserial(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_message_getreplyserial(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_message_getreplyserial(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the sender for this message.
@@ -191,7 +191,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - An empty string if the message did not specify a sender.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getsender(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getsender(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getsender(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Get the unique name of the endpoint that the message was received on.
@@ -200,7 +200,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *     - The unique name of the endpoint that the message was received on.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getreceiveendpointname(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getreceiveendpointname(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getreceiveendpointname(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the destination for this message
@@ -209,7 +209,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - An empty string if unable to find the message destination.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_getdestination(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getdestination(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_getdestination(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Accessor function to get the compression token for the message.
@@ -227,7 +227,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - 0 'zero' if sender did not specify a session
   */
 -extern AJ_API alljoyn_sessionid AJ_CALL alljoyn_message_getsessionid(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_sessionid AJ_CALL alljoyn_message_getsessionid(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_sessionid AJ_CALL alljoyn_message_getsessionid(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * If the message is an error message returns the error name and optionally the error message string
@@ -236,7 +236,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *      - NULL if error not detected
   */
 -extern AJ_API const char* AJ_CALL alljoyn_message_geterrorname(alljoyn_message msg, char* errorMessage, size_t* errorMessage_size);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_geterrorname(alljoyn_message msg, char* errorMessage, size_t* errorMessage_size);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_message_geterrorname(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") char* errorMessage, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* errorMessage_size);
  
  /**
   * Returns an XML string representation of the message
@@ -245,7 +245,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *
   */
 -extern AJ_API size_t AJ_CALL alljoyn_message_tostring(alljoyn_message msg, char* str, size_t buf);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_message_tostring(alljoyn_message msg, char* str, size_t buf);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_message_tostring(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") char* str, _WIN32META_ANNOTATION_("win32metadata:in") size_t buf);
  
  /**
   * Returns a string that provides a brief description of the message
@@ -254,7 +254,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *          was truncated.
   */
 -extern AJ_API size_t AJ_CALL alljoyn_message_description(alljoyn_message msg, char* str, size_t buf);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_message_description(alljoyn_message msg, char* str, size_t buf);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_message_description(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg, _WIN32META_ANNOTATION_("win32metadata:in") char* str, _WIN32META_ANNOTATION_("win32metadata:in") size_t buf);
  
  /**
   * Returns the timestamp (in milliseconds) for this message. If the message header contained a
@@ -263,7 +263,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return The timestamp for this message.
   */
 -extern AJ_API uint32_t AJ_CALL alljoyn_message_gettimestamp(alljoyn_message msg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_message_gettimestamp(alljoyn_message msg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_message_gettimestamp(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg);
  
  /**
   * Equality operation.
@@ -272,7 +272,7 @@ index 8e6e80d07f..2f09b2506d 100644
   * @return QCC_TRUE if one == other
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_eql(const alljoyn_message one, const alljoyn_message other);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_eql(const alljoyn_message one, const alljoyn_message other);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_message_eql(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_message one, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_message other);
  
  /**
   * Set the endianness for outgoing messages. This is mainly for testing purposes.
@@ -281,7 +281,7 @@ index 8e6e80d07f..2f09b2506d 100644
   *
   */
 -extern AJ_API void AJ_CALL alljoyn_message_setendianess(const char endian);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_message_setendianess(const char endian);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_message_setendianess(_WIN32META_ANNOTATION_("win32metadata:in") const char endian);
  
  #ifdef __cplusplus
  } /* extern "C" */

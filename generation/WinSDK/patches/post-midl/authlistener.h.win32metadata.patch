@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AuthListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AuthListener.h
-index 55925a68c9..1125680fdc 100644
+index 55925a68c9..1c42b2897a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AuthListener.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AuthListener.h
 @@ -1,3 +1,4 @@
@@ -33,7 +33,7 @@ index 55925a68c9..1125680fdc 100644
   *           the credentials verification response was not expected.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_authlistener_requestcredentialsresponse(alljoyn_authlistener listener, void* authContext, QCC_BOOL accept, alljoyn_credentials credentials);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_authlistener_requestcredentialsresponse(alljoyn_authlistener listener, void* authContext, QCC_BOOL accept, alljoyn_credentials credentials);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_authlistener_requestcredentialsresponse(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener listener, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* authContext, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL accept, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials credentials);
  
  /**
   * Type for the VerifyCredentials callback.
@@ -62,7 +62,7 @@ index 55925a68c9..1125680fdc 100644
   *           the credentials verification response was not expected.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_authlistener_verifycredentialsresponse(alljoyn_authlistener listener, void* authContext, QCC_BOOL accept);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_authlistener_verifycredentialsresponse(alljoyn_authlistener listener, void* authContext, QCC_BOOL accept);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_authlistener_verifycredentialsresponse(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener listener, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* authContext, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL accept);
  /**
   * Type for the SecurityViolation callback.
   *
@@ -80,7 +80,7 @@ index 55925a68c9..1125680fdc 100644
   * @return Handle to newly allocated alljoyn_authlistener.
   */
 -extern AJ_API alljoyn_authlistener AJ_CALL alljoyn_authlistener_create(const alljoyn_authlistener_callbacks* callbacks, const void* context);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_authlistener AJ_CALL alljoyn_authlistener_create(const alljoyn_authlistener_callbacks* callbacks, const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_authlistener AJ_CALL alljoyn_authlistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_authlistener_callbacks* callbacks, _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
  
  /**
   * Create an alljoyn_authlistener which will trigger the provided callbacks, passing along the provided context.
@@ -89,7 +89,7 @@ index 55925a68c9..1125680fdc 100644
   * @return Handle to newly allocated alljoyn_authlistener.
   */
 -extern AJ_API alljoyn_authlistener AJ_CALL alljoyn_authlistenerasync_create(const alljoyn_authlistenerasync_callbacks* callbacks, const void* context);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_authlistener AJ_CALL alljoyn_authlistenerasync_create(const alljoyn_authlistenerasync_callbacks* callbacks, const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_authlistener AJ_CALL alljoyn_authlistenerasync_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_authlistenerasync_callbacks* callbacks, _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
  
  /**
   * Destroy an alljoyn_authlistener.
@@ -97,7 +97,7 @@ index 55925a68c9..1125680fdc 100644
   * @param listener alljoyn_authlistener to destroy.
   */
 -extern AJ_API void AJ_CALL alljoyn_authlistener_destroy(alljoyn_authlistener listener);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_authlistener_destroy(alljoyn_authlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_authlistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener listener);
  
  /**
   * Destroy an alljoyn_authlistener.
@@ -105,7 +105,7 @@ index 55925a68c9..1125680fdc 100644
   * @param listener alljoyn_authlistener to destroy.
   */
 -extern AJ_API void AJ_CALL alljoyn_authlistenerasync_destroy(alljoyn_authlistener listener);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_authlistenerasync_destroy(alljoyn_authlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_authlistenerasync_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener listener);
  
  /**
   * Sets a shared secret to be returned by the listener during ECDHE_SPEKE authentication.
@@ -114,7 +114,7 @@ index 55925a68c9..1125680fdc 100644
   *          - #ER_BAD_ARG_2 If the secret is shorter than 4 bytes.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_authlistener_setsharedsecret(alljoyn_authlistener listener, const uint8_t* sharedSecret, size_t sharedSecretSize);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_authlistener_setsharedsecret(alljoyn_authlistener listener, const uint8_t* sharedSecret, size_t sharedSecretSize);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_authlistener_setsharedsecret(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener listener, _WIN32META_ANNOTATION_("win32metadata:in") const uint8_t* sharedSecret, _WIN32META_ANNOTATION_("win32metadata:in") size_t sharedSecretSize);
  
  /**
   * Create credentials
@@ -130,7 +130,7 @@ index 55925a68c9..1125680fdc 100644
   * @param cred Credentials to destroy.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_destroy(alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_destroy(alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred);
  
  /**
   * Tests if one or more credentials are set.
@@ -139,7 +139,7 @@ index 55925a68c9..1125680fdc 100644
   * @return true if the credentials are set.
   */
 -extern AJ_API QCC_BOOL AJ_CALL alljoyn_credentials_isset(const alljoyn_credentials cred, uint16_t creds);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_credentials_isset(const alljoyn_credentials cred, uint16_t creds);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_credentials_isset(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") uint16_t creds);
  
  /**
   * Sets a requested password.
@@ -148,7 +148,7 @@ index 55925a68c9..1125680fdc 100644
   * @param pwd  The password to set.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_setpassword(alljoyn_credentials cred, const char* pwd);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setpassword(alljoyn_credentials cred, const char* pwd);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setpassword(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") const char* pwd);
  
  /**
   * Sets a requested user name.
@@ -157,7 +157,7 @@ index 55925a68c9..1125680fdc 100644
   * @param userName  The user name to set.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_setusername(alljoyn_credentials cred, const char* userName);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setusername(alljoyn_credentials cred, const char* userName);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setusername(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") const char* userName);
  
  /**
   * Sets a requested public key certificate chain. The certificates must be PEM encoded.
@@ -166,7 +166,7 @@ index 55925a68c9..1125680fdc 100644
   * @param certChain  The certificate chain to set.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_setcertchain(alljoyn_credentials cred, const char* certChain);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setcertchain(alljoyn_credentials cred, const char* certChain);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setcertchain(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") const char* certChain);
  
  /**
   * Sets a requested private key. The private key must be PEM encoded and may be encrypted. If
@@ -175,7 +175,7 @@ index 55925a68c9..1125680fdc 100644
   * @param pk   The private key to set.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_setprivatekey(alljoyn_credentials cred, const char* pk);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setprivatekey(alljoyn_credentials cred, const char* pk);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setprivatekey(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") const char* pk);
  
  /**
   * Sets a logon entry. For example for the Secure Remote Password protocol in RFC 5054, a
@@ -184,7 +184,7 @@ index 55925a68c9..1125680fdc 100644
   * @param logonEntry  The logon entry to set.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_setlogonentry(alljoyn_credentials cred, const char* logonEntry);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setlogonentry(alljoyn_credentials cred, const char* logonEntry);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setlogonentry(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") const char* logonEntry);
  
  /**
   * Sets an expiration time in seconds relative to the current time for the credentials. This value is optional and
@@ -193,7 +193,7 @@ index 55925a68c9..1125680fdc 100644
   * @param expiration  The expiration time in seconds.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_setexpiration(alljoyn_credentials cred, uint32_t expiration);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setexpiration(alljoyn_credentials cred, uint32_t expiration);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_setexpiration(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t expiration);
  
  /**
   * Gets the password from this credentials instance.
@@ -202,7 +202,7 @@ index 55925a68c9..1125680fdc 100644
   * @return A password or an empty string.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_credentials_getpassword(const alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getpassword(const alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getpassword(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred);
  
  /**
   * Gets the user name from this credentials instance.
@@ -211,7 +211,7 @@ index 55925a68c9..1125680fdc 100644
   * @return A user name or an empty string.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_credentials_getusername(const alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getusername(const alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getusername(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred);
  
  /**
   * Gets the PEM encoded X509 certificate chain from this credentials instance.
@@ -220,7 +220,7 @@ index 55925a68c9..1125680fdc 100644
   * @return An X509 certificate chain or an empty string.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_credentials_getcertchain(const alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getcertchain(const alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getcertchain(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred);
  
  /**
   * Gets the PEM encoded private key from this credentials instance.
@@ -229,7 +229,7 @@ index 55925a68c9..1125680fdc 100644
   * @return An PEM encode private key or an empty string.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_credentials_getprivateKey(const alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getprivateKey(const alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getprivateKey(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred);
  
  /**
   * Gets a logon entry.
@@ -238,7 +238,7 @@ index 55925a68c9..1125680fdc 100644
   * @return An encoded logon entry or an empty string.
   */
 -extern AJ_API const char* AJ_CALL alljoyn_credentials_getlogonentry(const alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getlogonentry(const alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_credentials_getlogonentry(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred);
  
  /**
   * Get the expiration time in seconds if it is set.
@@ -247,7 +247,7 @@ index 55925a68c9..1125680fdc 100644
   * @return The expiration or the max 32 bit unsigned value if it was not set.
   */
 -extern AJ_API uint32_t AJ_CALL alljoyn_credentials_getexpiration(const alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_credentials_getexpiration(const alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_credentials_getexpiration(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_credentials cred);
  
  /**
   * Clear the credentials.
@@ -255,7 +255,7 @@ index 55925a68c9..1125680fdc 100644
   * @param cred The credentials to clear.
   */
 -extern AJ_API void AJ_CALL alljoyn_credentials_clear(alljoyn_credentials cred);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_clear(alljoyn_credentials cred);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_credentials_clear(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_credentials cred);
  
  #ifdef __cplusplus
  } /* extern "C" */

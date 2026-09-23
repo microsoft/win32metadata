@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
-index 6db741e19a..9799dd2bda 100644
+index 6db741e19a..bcfede711b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winldap.h
 @@ -1,3 +1,4 @@
@@ -1774,7 +1774,7 @@ index 6db741e19a..9799dd2bda 100644
  WINLDAPAPI ULONG LDAPAPI ldap_set_dbg_flags( ULONG NewFlags );
  
 -typedef ULONG (_cdecl *DBGPRINT)( PCCH Format, ... );
-+typedef ULONG (_cdecl *DBGPRINT)( _WIN32META_ANNOTATION_("win32metadata:const") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCCH Format, ... );
++typedef ULONG (_cdecl *DBGPRINT)( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:const") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCCH Format, ... );
  
  WINLDAPAPI VOID LDAPAPI ldap_set_dbg_routine( DBGPRINT DebugPrintRoutine );
  

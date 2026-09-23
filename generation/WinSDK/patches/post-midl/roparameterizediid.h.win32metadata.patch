@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
-index 4ca629766e..126fe6ba35 100644
+index 4ca629766e..52098a9b7d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
 @@ -6,6 +6,7 @@
@@ -18,7 +18,8 @@ index 4ca629766e..126fe6ba35 100644
 +
  STDAPI
  RoGetParameterizedTypeInstanceIID(
-     UINT32 nameElementCount,
+-    UINT32 nameElementCount,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 nameElementCount,
      _In_reads_(nameElementCount) PCWSTR* nameElements,
      _In_ const IRoMetaDataLocator& metaDataLocator,
      _Out_ GUID* iid,
