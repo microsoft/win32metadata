@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
-index e653a243c6..507267c1ac 100644
+index e653a243c6..df7b123bb7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
 @@ -1,3 +1,4 @@
@@ -721,7 +721,7 @@ index e653a243c6..507267c1ac 100644
  SubscribeServiceChangeNotifications (
      _In_      SC_HANDLE                      hService,
 -    _In_      SC_EVENT_TYPE                  eEventType,
-+    _Win32_AssociatedEnum_(SC_EVENT_TYPE) _In_      SC_EVENT_TYPE                  eEventType,
++     _In_      SC_EVENT_TYPE                  eEventType,
      _In_      PSC_NOTIFICATION_CALLBACK      pCallback,
      _In_opt_  PVOID                          pCallbackContext,
      _Out_     PSC_NOTIFICATION_REGISTRATION* pSubscription

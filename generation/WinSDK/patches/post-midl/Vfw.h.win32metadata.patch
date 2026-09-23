@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
-index eb2800ade3..2ddca66b96 100644
+index eb2800ade3..5466e3dd1b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
 @@ -41,6 +41,7 @@
@@ -787,7 +787,7 @@ index eb2800ade3..2ddca66b96 100644
  		_In_opt_ CLSID FAR *pclsidHandler);
  
 -EXTERN_C HRESULT CDECL AVISaveA (LPCSTR               szFile,
-+_WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT CDECL _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ AVISaveA (LPCSTR               szFile,
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT CDECL   AVISaveA (LPCSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
@@ -803,7 +803,7 @@ index eb2800ade3..2ddca66b96 100644
  		_In_reads_(nStreams) PAVISTREAM FAR *    ppavi,
  		_In_reads_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
 -EXTERN_C HRESULT CDECL AVISaveW (LPCWSTR               szFile,
-+_WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT CDECL _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ AVISaveW (LPCWSTR               szFile,
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT CDECL   AVISaveW (LPCWSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,

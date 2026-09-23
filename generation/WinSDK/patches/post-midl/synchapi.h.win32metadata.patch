@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h
-index 8721bd1db9..5ab7e73881 100644
+index 8721bd1db9..66de425ae5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h
 @@ -16,6 +16,7 @@
@@ -78,12 +78,14 @@ index 8721bd1db9..5ab7e73881 100644
  WINBASEAPI
  _When_(return!=0, _Acquires_shared_lock_(*SRWLock))
  _When_(return!=0, _Acquires_nonreentrant_lock_(*SRWLock))
-@@ -101,6 +121,9 @@ TryAcquireSRWLockShared(
+@@ -100,7 +120,10 @@ TryAcquireSRWLockShared(
+ 
  #if (_WIN32_WINNT < 0x0600)
  
- _Maybe_raises_SEH_exception_
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
+-_Maybe_raises_SEH_exception_
++_Windows_SupportedOS_WindowsXP_ _Maybe_raises_SEH_exception_
++
++
 +_Win32_ImportLibrary_("Kernel32.dll")
  WINBASEAPI
  VOID
@@ -92,8 +94,8 @@ index 8721bd1db9..5ab7e73881 100644
  
  #else
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++_Windows_SupportedOS_WindowsXP_ 
++
 +_Win32_ImportLibrary_("Kernel32.dll")
  WINBASEAPI
  VOID

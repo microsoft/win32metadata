@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h
-index dc625577c0..569a910ab9 100644
+index dc625577c0..92d7682bfa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h
 @@ -1,3 +1,4 @@
@@ -87,7 +87,7 @@ index dc625577c0..569a910ab9 100644
   *      - An error status otherwise
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addinterface(alljoyn_proxybusobject proxyObj, const alljoyn_interfacedescription iface);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription iface);
  
  /**
   * Add an existing interface to this object using the interface's name.
@@ -96,7 +96,7 @@ index dc625577c0..569a910ab9 100644
   *      - An error status otherwise.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addinterface_by_name(alljoyn_proxybusobject proxyObj, const char* name);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addinterface_by_name(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* name);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addinterface_by_name(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* name);
  
  
  /**
@@ -123,7 +123,7 @@ index dc625577c0..569a910ab9 100644
   *      - #ER_BUS_OBJ_ALREADY_EXISTS the object already exists on the alljoyn_proxybusobject
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addchild(alljoyn_proxybusobject proxyObj, const alljoyn_proxybusobject child);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addchild(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_proxybusobject child);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_addchild(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_proxybusobject child);
  
  /**
   * Remove a child object and any descendants it may have.
@@ -132,7 +132,7 @@ index dc625577c0..569a910ab9 100644
   *      - #ER_FAIL any other unexpected error.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_removechild(alljoyn_proxybusobject proxyObj, const char* path);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_removechild(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* path);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_removechild(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* path);
  
  /**
   * Query the remote object on the bus to determine the interfaces and
@@ -141,7 +141,7 @@ index dc625577c0..569a910ab9 100644
   *      - An error status otherwise
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_introspectremoteobject(alljoyn_proxybusobject proxyObj);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_introspectremoteobject(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_introspectremoteobject(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj);
  
  /**
   * Query the remote object on the bus to determine the interfaces and
@@ -150,7 +150,7 @@ index dc625577c0..569a910ab9 100644
   *      - An error status otherwise
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_introspectremoteobjectasync(alljoyn_proxybusobject proxyObj, alljoyn_proxybusobject_listener_introspectcb_ptr callback, void* context);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_introspectremoteobjectasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_listener_introspectcb_ptr callback, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_introspectremoteobjectasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_listener_introspectcb_ptr callback, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
  /**
   * Get a property from an interface on the remote object.
   *
@@ -159,7 +159,7 @@ index dc625577c0..569a910ab9 100644
   *      - #ER_BUS_NO_SUCH_PROPERTY if the property does not exist
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getproperty(alljoyn_proxybusobject proxyObj, const char* iface, const char* property, alljoyn_msgarg value);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getproperty(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* iface, _WIN32META_ANNOTATION_("win32metadata:in") const char* property, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg value);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getproperty(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* iface, _WIN32META_ANNOTATION_("win32metadata:in") const char* property, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg value);
  
  /**
   * Make an asynchronous request to get a property from an interface on the remote object.
@@ -173,7 +173,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                      alljoyn_proxybusobject_listener_getpropertycb_ptr callback,
 -                                                                      uint32_t timeout,
 -                                                                      void* context);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getpropertyasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getpropertyasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                      _WIN32META_ANNOTATION_("win32metadata:in") const char* iface,
 +                                                                      _WIN32META_ANNOTATION_("win32metadata:in") const char* property,
 +                                                                      _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_listener_getpropertycb_ptr callback,
@@ -187,7 +187,7 @@ index dc625577c0..569a910ab9 100644
   *      - #ER_BUS_NO_SUCH_PROPERTY if the property does not exist
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getallproperties(alljoyn_proxybusobject proxyObj, const char* iface, alljoyn_msgarg values);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getallproperties(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* iface, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg values);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_getallproperties(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* iface, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg values);
  
  /**
   * Make an asynchronous request to get all properties from an interface on the remote object.
@@ -200,7 +200,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                            alljoyn_proxybusobject_listener_getallpropertiescb_ptr callback,
 -                                                                            uint32_t timeout,
 -                                                                            void* context);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL  alljoyn_proxybusobject_getallpropertiesasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL  alljoyn_proxybusobject_getallpropertiesasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                            _WIN32META_ANNOTATION_("win32metadata:in") const char* iface,
 +                                                                            _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_listener_getallpropertiescb_ptr callback,
 +                                                                            _WIN32META_ANNOTATION_("win32metadata:in") uint32_t timeout,
@@ -213,7 +213,7 @@ index dc625577c0..569a910ab9 100644
   *      - #ER_BUS_NO_SUCH_PROPERTY if the property does not exist
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_setproperty(alljoyn_proxybusobject proxyObj, const char* iface, const char* property, alljoyn_msgarg value);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_setproperty(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* iface, _WIN32META_ANNOTATION_("win32metadata:in") const char* property, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg value);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_setproperty(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* iface, _WIN32META_ANNOTATION_("win32metadata:in") const char* property, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg value);
  
  
  
@@ -227,7 +227,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                                       size_t numProperties,
 -                                                                                       alljoyn_proxybusobject_listener_propertieschanged_ptr callback,
 -                                                                                       void* context);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_registerpropertieschangedlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_registerpropertieschangedlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                                       _WIN32META_ANNOTATION_("win32metadata:in") const char* iface,
 +                                                                                       _WIN32META_ANNOTATION_("win32metadata:in") const char** properties,
 +                                                                                       _WIN32META_ANNOTATION_("win32metadata:in") size_t numProperties,
@@ -243,7 +243,7 @@ index dc625577c0..569a910ab9 100644
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_unregisterpropertieschangedlistener(alljoyn_proxybusobject proxyObj,
 -                                                                                         const char* iface,
 -                                                                                         alljoyn_proxybusobject_listener_propertieschanged_ptr callback);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_unregisterpropertieschangedlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_unregisterpropertieschangedlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                                         _WIN32META_ANNOTATION_("win32metadata:in") const char* iface,
 +                                                                                         _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_listener_propertieschanged_ptr callback);
  
@@ -260,7 +260,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                      alljoyn_proxybusobject_listener_setpropertycb_ptr callback,
 -                                                                      uint32_t timeout,
 -                                                                      void* context);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_setpropertyasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_setpropertyasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                      _WIN32META_ANNOTATION_("win32metadata:in") const char* iface,
 +                                                                      _WIN32META_ANNOTATION_("win32metadata:in") const char* property,
 +                                                                      _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg value,
@@ -282,7 +282,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                alljoyn_message replyMsg,
 -                                                                uint32_t timeout,
 -                                                                uint8_t flags);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                _WIN32META_ANNOTATION_("win32metadata:in") const char* ifaceName,
 +                                                                _WIN32META_ANNOTATION_("win32metadata:in") const char* methodName,
 +                                                                _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args,
@@ -304,7 +304,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                       alljoyn_message replyMsg,
 -                                                                       uint32_t timeout,
 -                                                                       uint8_t flags);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall_member(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall_member(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member method,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") size_t numArgs,
@@ -324,7 +324,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                        const alljoyn_msgarg args,
 -                                                                        size_t numArgs,
 -                                                                        uint8_t flags);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall_noreply(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall_noreply(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                        _WIN32META_ANNOTATION_("win32metadata:in") const char* ifaceName,
 +                                                                        _WIN32META_ANNOTATION_("win32metadata:in") const char* methodName,
 +                                                                        _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args,
@@ -342,7 +342,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                               const alljoyn_msgarg args,
 -                                                                               size_t numArgs,
 -                                                                               uint8_t flags);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall_member_noreply(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcall_member_noreply(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                               _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member method,
 +                                                                               _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args,
 +                                                                               _WIN32META_ANNOTATION_("win32metadata:in") size_t numArgs,
@@ -363,7 +363,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                     void* context,
 -                                                                     uint32_t timeout,
 -                                                                     uint8_t flags);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcallasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcallasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") const char* ifaceName,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") const char* methodName,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_messagereceiver_replyhandler_ptr replyFunc,
@@ -387,7 +387,7 @@ index dc625577c0..569a910ab9 100644
 -                                                                            void* context,
 -                                                                            uint32_t timeout,
 -                                                                            uint8_t flags);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcallasync_member(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_methodcallasync_member(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj,
 +                                                                            _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member method,
 +                                                                            _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_messagereceiver_replyhandler_ptr replyFunc,
 +                                                                            _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args,
@@ -403,7 +403,7 @@ index dc625577c0..569a910ab9 100644
   *      - An error status otherwise.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_parsexml(alljoyn_proxybusobject proxyObj, const char* xml, const char* identifier);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_parsexml(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* xml, _WIN32META_ANNOTATION_("win32metadata:in") const char* identifier);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_parsexml(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") const char* xml, _WIN32META_ANNOTATION_("win32metadata:in") const char* identifier);
  
  /**
   * Explicitly secure the connection to the remote peer for this proxy object. Peer-to-peer
@@ -412,7 +412,7 @@ index dc625577c0..569a910ab9 100644
   *          - Other error status codes indicating a failure.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_secureconnection(alljoyn_proxybusobject proxyObj, QCC_BOOL forceAuth);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_secureconnection(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL forceAuth);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_secureconnection(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL forceAuth);
  
  /**
   * Asynchronously secure the connection to the remote peer for this proxy object.
@@ -421,7 +421,7 @@ index dc625577c0..569a910ab9 100644
   *          - Other error status codes indicating a failure.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_secureconnectionasync(alljoyn_proxybusobject proxyObj, QCC_BOOL forceAuth);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_secureconnectionasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL forceAuth);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_proxybusobject_secureconnectionasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxyObj, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL forceAuth);
  
  /**
   * Returns a pointer to an interface description. Returns NULL if the object does not implement

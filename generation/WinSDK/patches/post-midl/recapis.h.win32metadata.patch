@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
-index 3969ac6c39..753c4a6bbf 100644
+index 3969ac6c39..0ac4218315 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
 @@ -10,6 +10,7 @@
@@ -46,7 +46,7 @@ index 3969ac6c39..753c4a6bbf 100644
  HRESULT WINAPI SetGuide(HRECOCONTEXT hrc, const RECO_GUIDE* pGuide, ULONG iIndex);
 -HRESULT WINAPI GetGuide(HRECOCONTEXT hrc, RECO_GUIDE* pGuide, ULONG *piIndex);
 +_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_
++
 +HRESULT WINAPI GetGuide(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_GUIDE* pGuide, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *piIndex);
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI AdviseInkChange(HRECOCONTEXT hrc, BOOL bNewStroke);
@@ -61,8 +61,8 @@ index 3969ac6c39..753c4a6bbf 100644
 +HRESULT WINAPI CloneContext(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOCONTEXT* pCloneHrc);
 +_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
 +HRESULT WINAPI ResetContext(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc);
-+_Windows_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_
++
++
  HRESULT WINAPI Process(HRECOCONTEXT hrc, BOOL *pbPartialProcessing);
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI SetFactoid(HRECOCONTEXT hrc, ULONG cwcFactoid, const WCHAR *pwcFactoid);
@@ -85,10 +85,10 @@ index 3969ac6c39..753c4a6bbf 100644
 +_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
 +HRESULT WINAPI GetContextPropertyValue(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pGuid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcbSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pProperty);
 +_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_
++
 +HRESULT WINAPI SetContextPropertyValue(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pGuid, _WIN32META_ANNOTATION_("win32metadata:in") ULONG cbSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pProperty);
 +_Windows_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_
++
  HRESULT WINAPI IsStringSupported(HRECOCONTEXT hrc, ULONG wcString, const WCHAR *pwcString);
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI SetWordList(HRECOCONTEXT hrc, HRECOWORDLIST hwl);
@@ -143,8 +143,8 @@ index 3969ac6c39..753c4a6bbf 100644
  HRESULT WINAPI AdviseInkChange(HRECOCONTEXT hrc, BOOL bNewStroke);
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI EndInkInput(HRECOCONTEXT hrc);
-+_Windows_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_
++
++
  HRESULT WINAPI Process(HRECOCONTEXT hrc, BOOL *pbPartialProcessing);
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI SetFactoid(HRECOCONTEXT hrc, ULONG cwcFactoid, const WCHAR *pwcFactoid);
@@ -157,7 +157,7 @@ index 3969ac6c39..753c4a6bbf 100644
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI SetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG cRanges, CHARACTER_RANGE *pcr);
 +_Windows_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_
++
  HRESULT WINAPI IsStringSupported(HRECOCONTEXT hrc, ULONG wcString, const WCHAR *pwcString);
 +_Windows_SupportedOS_WindowsXP_
  HRESULT WINAPI SetWordList(HRECOCONTEXT hrc, HRECOWORDLIST hwl);

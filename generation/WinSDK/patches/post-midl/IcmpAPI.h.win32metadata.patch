@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
-index e7907cb5de..55848118dc 100644
+index e7907cb5de..7c24b678c2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
 @@ -28,6 +28,7 @@ Notes:
@@ -50,27 +50,33 @@ index e7907cb5de..55848118dc 100644
  DWORD
  WINAPI
  IcmpSendEcho(
-@@ -284,6 +289,7 @@ IcmpSendEcho(
+@@ -283,7 +288,8 @@ IcmpSendEcho(
+ #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  IcmpSendEcho2(
-@@ -313,6 +319,7 @@ IcmpSendEcho2(
+@@ -312,7 +318,8 @@ IcmpSendEcho2(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if (NTDDI_VERSION >= NTDDI_VISTASP1)
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsVistaSP1_ _Windows_SupportedOS_Server2008_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  IcmpSendEcho2Ex(
-@@ -344,6 +351,7 @@ IcmpSendEcho2Ex(
+@@ -343,7 +350,8 @@ IcmpSendEcho2Ex(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
- IPHLPAPI_DLL_LINKAGE
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
  DWORD
  WINAPI
  Icmp6SendEcho2(

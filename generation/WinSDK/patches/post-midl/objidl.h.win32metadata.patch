@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
-index 31f65e72f3..3ff22e7cd9 100644
+index 31f65e72f3..4d09496773 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 @@ -801,6 +801,7 @@ extern "C"{
@@ -545,6 +545,33 @@ index 31f65e72f3..3ff22e7cd9 100644
      IMarshalingStream : public IStream
      {
      public:
+@@ -8473,7 +8474,7 @@ extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0051_v0_0_s_ifspec;
+     EXTERN_C const IID IID_IAgileReference;
+     extern "C++"
+     {
+-        MIDL_INTERFACE("C03F6A43-65A4-9818-987E-E0B810D2A6F2")
++        MIDL_INTERFACE("C03F6A43-65A4-9818-987E-E0B810D2A6F2") _Windows_SupportedOS_Windows81_ 
+         IAgileReference : public IUnknown
+         {
+         public:
+@@ -8501,7 +8502,7 @@ EXTERN_C const IID IID_IAgileReference;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C03F6A43-65A4-9818-987E-E0B810D2A6F2")
++    MIDL_INTERFACE("C03F6A43-65A4-9818-987E-E0B810D2A6F2") _Windows_SupportedOS_Windows81_ 
+     IAgileReference : public IUnknown
+     {
+     public:
+@@ -8547,7 +8548,7 @@ EXTERN_C const IID IID_IAgileReference;
+         END_INTERFACE
+     } IAgileReferenceVtbl;
+ 
+-    interface IAgileReference
++    interface _Windows_SupportedOS_Windows81_  IAgileReference
+     {
+         CONST_VTBL struct IAgileReferenceVtbl *lpVtbl;
+     };
 @@ -9475,7 +9476,7 @@ EXTERN_C const IID IID_IMallocSpy;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -559,7 +586,7 @@ index 31f65e72f3..3ff22e7cd9 100644
  
  #if defined(__cplusplus)
 -    typedef _Struct_size_bytes_(cbStruct) struct tagBIND_OPTS {
-+    typedef _Struct_size_bytes_(cbStruct) struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagBIND_OPTS {
++    typedef _Struct_size_bytes_(cbStruct) struct   tagBIND_OPTS {
      DWORD           cbStruct;
      DWORD           grfFlags;
      DWORD           grfMode;

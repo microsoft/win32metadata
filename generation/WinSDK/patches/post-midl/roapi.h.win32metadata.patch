@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
-index d7429649bb..c58b00e7d0 100644
+index d7429649bb..ee154665c5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roapi.h
 @@ -13,6 +13,7 @@
@@ -29,7 +29,7 @@ index d7429649bb..c58b00e7d0 100644
  _Check_return_
  HRESULT
  WINAPI
-+_Win32_PreserveResult_
++
  RoInitialize(
      _In_ RO_INIT_TYPE initType
      );
@@ -61,7 +61,7 @@ index d7429649bb..c58b00e7d0 100644
      _In_reads_(count) PFNGETACTIVATIONFACTORY* activationFactoryCallbacks,
      _In_ UINT32 count,
 -    _Out_ RO_REGISTRATION_COOKIE* cookie
-+    _Out_ _Win32_RAIIFree_(RoRevokeActivationFactories) RO_REGISTRATION_COOKIE* cookie
++    _Out_  RO_REGISTRATION_COOKIE* cookie
      );
  
 +_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 
@@ -92,7 +92,7 @@ index d7429649bb..c58b00e7d0 100644
      _In_ IApartmentShutdown* callbackObject,
      _Out_ UINT64* apartmentIdentifier,
 -    _Out_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
-+    _Out_ _Win32_RAIIFree_(RoUnregisterForApartmentShutdown) APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
++    _Out_  APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
      );
  
 +_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-l1-1-0.dll") 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
-index f76840c470..01bb987f86 100644
+index f76840c470..a0d4babb71 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 @@ -1,3 +1,4 @@
@@ -440,6 +440,291 @@ index f76840c470..01bb987f86 100644
  VOID
  NTAPI
  RtlUnwind(
+@@ -22332,7 +22333,7 @@ RtlUnwind(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlAddFunctionTable(
+@@ -22341,14 +22342,14 @@ RtlAddFunctionTable(
+     _In_ DWORD64 BaseAddress
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlDeleteFunctionTable(
+     _In_ PRUNTIME_FUNCTION FunctionTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlInstallFunctionTableCallback(
+@@ -22368,7 +22369,7 @@ RtlInstallFunctionTableCallback(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ DWORD   
+ NTAPI
+ RtlAddGrowableFunctionTable(
+@@ -22380,7 +22381,7 @@ RtlAddGrowableFunctionTable(
+     _In_ ULONG_PTR RangeEnd
+     );
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ VOID
+ NTAPI
+ RtlGrowFunctionTable(
+@@ -22388,7 +22389,7 @@ RtlGrowFunctionTable(
+     _In_ DWORD NewEntryCount
+     );
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ VOID
+ NTAPI
+ RtlDeleteGrowableFunctionTable(
+@@ -22403,7 +22404,7 @@ RtlDeleteGrowableFunctionTable(
+ #pragma region Application or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ PRUNTIME_FUNCTION
+ NTAPI
+ RtlLookupFunctionEntry(
+@@ -22412,7 +22413,7 @@ RtlLookupFunctionEntry(
+     _Inout_opt_ PUNWIND_HISTORY_TABLE HistoryTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ __cdecl
+ RtlRestoreContext(
+@@ -22420,7 +22421,7 @@ RtlRestoreContext(
+     _In_opt_ struct _EXCEPTION_RECORD* ExceptionRecord
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ NTAPI
+ RtlUnwindEx(
+@@ -22432,7 +22433,7 @@ RtlUnwindEx(
+     _In_opt_ PUNWIND_HISTORY_TABLE HistoryTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ PEXCEPTION_ROUTINE
+ NTAPI
+ RtlVirtualUnwind(
+@@ -22469,7 +22470,7 @@ RtlIsEcCode(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlAddFunctionTable(
+@@ -22478,14 +22479,14 @@ RtlAddFunctionTable(
+     _In_ DWORD BaseAddress
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlDeleteFunctionTable(
+     _In_ PRUNTIME_FUNCTION FunctionTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlInstallFunctionTableCallback(
+@@ -22505,7 +22506,7 @@ RtlInstallFunctionTableCallback(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ DWORD   
+ NTAPI
+ RtlAddGrowableFunctionTable(
+@@ -22517,7 +22518,7 @@ RtlAddGrowableFunctionTable(
+     _In_ ULONG_PTR RangeEnd
+     );
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ VOID
+ NTAPI
+ RtlGrowFunctionTable(
+@@ -22525,7 +22526,7 @@ RtlGrowFunctionTable(
+     _In_ DWORD NewEntryCount
+     );
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ VOID
+ NTAPI
+ RtlDeleteGrowableFunctionTable(
+@@ -22540,7 +22541,7 @@ RtlDeleteGrowableFunctionTable(
+ #pragma region Application or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ PRUNTIME_FUNCTION
+ NTAPI
+ RtlLookupFunctionEntry(
+@@ -22549,7 +22550,7 @@ RtlLookupFunctionEntry(
+     _Inout_opt_ PUNWIND_HISTORY_TABLE HistoryTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ __cdecl
+ RtlRestoreContext(
+@@ -22557,7 +22558,7 @@ RtlRestoreContext(
+     _In_opt_ struct _EXCEPTION_RECORD* ExceptionRecord
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ NTAPI
+ RtlUnwindEx(
+@@ -22569,7 +22570,7 @@ RtlUnwindEx(
+     _In_opt_ PUNWIND_HISTORY_TABLE HistoryTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ PEXCEPTION_ROUTINE
+ NTAPI
+ RtlVirtualUnwind(
+@@ -22595,7 +22596,7 @@ RtlVirtualUnwind(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlAddFunctionTable(
+@@ -22604,14 +22605,14 @@ RtlAddFunctionTable(
+     _In_ ULONG_PTR BaseAddress
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlDeleteFunctionTable(
+     _In_ PRUNTIME_FUNCTION FunctionTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ BOOLEAN
+ __cdecl
+ RtlInstallFunctionTableCallback(
+@@ -22631,7 +22632,7 @@ RtlInstallFunctionTableCallback(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ DWORD   
+ NTAPI
+ RtlAddGrowableFunctionTable(
+@@ -22643,7 +22644,7 @@ RtlAddGrowableFunctionTable(
+     _In_ ULONG_PTR RangeEnd
+     );
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ VOID
+ NTAPI
+ RtlGrowFunctionTable(
+@@ -22651,7 +22652,7 @@ RtlGrowFunctionTable(
+     _In_ DWORD NewEntryCount
+     );
+ 
+-NTSYSAPI
++_Windows_SupportedOS_Windows8_ NTSYSAPI
+ VOID
+ NTAPI
+ RtlDeleteGrowableFunctionTable(
+@@ -22666,7 +22667,7 @@ RtlDeleteGrowableFunctionTable(
+ #pragma region Application or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ PRUNTIME_FUNCTION
+ NTAPI
+ RtlLookupFunctionEntry(
+@@ -22675,7 +22676,7 @@ RtlLookupFunctionEntry(
+     _Inout_opt_ PUNWIND_HISTORY_TABLE HistoryTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ __cdecl
+ RtlRestoreContext(
+@@ -22683,7 +22684,7 @@ RtlRestoreContext(
+     _In_opt_ struct _EXCEPTION_RECORD* ExceptionRecord
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ NTAPI
+ RtlUnwindEx(
+@@ -22695,7 +22696,7 @@ RtlUnwindEx(
+     _In_opt_ PUNWIND_HISTORY_TABLE HistoryTable
+     );
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ PEXCEPTION_ROUTINE
+ NTAPI
+ RtlVirtualUnwind(
+@@ -22723,7 +22724,7 @@ RtlVirtualUnwind(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ __cdecl
+ RtlRestoreContext(
+@@ -22744,7 +22745,7 @@ RtlRestoreContext(
+ #pragma region Application or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-NTSYSAPI
++_Win32_ImportLibrary_("kernel32.dll") NTSYSAPI
+ VOID
+ NTAPI
+ RtlUnwindEx(
 @@ -22773,14 +22774,14 @@ RtlLookupFunctionEntryCHPE(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -635,11 +920,12 @@ index f76840c470..01bb987f86 100644
      DWORD EOTWarningZoneSize;
  } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
  
-@@ -26606,5 +26607,4058 @@ NtReadCurrentTebPVOID (
+@@ -26606,5 +26607,4057 @@ NtReadCurrentTebPVOID (
  #pragma warning(default:4214) // bit field types other than int
  #endif
  
-+
+-#endif /* _WINNT_ */
+ 
 +#ifdef WIN32METADATA
 +#pragma push_macro("FILE_READ_DATA")
 +#undef FILE_READ_DATA
@@ -4692,5 +4978,4 @@ index f76840c470..01bb987f86 100644
 +#pragma pop_macro("PROCESS_TERMINATE")
 +#endif
 +
- #endif /* _WINNT_ */
- 
++#endif /* _WINNT_ */

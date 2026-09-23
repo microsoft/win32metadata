@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
-index 151673ada9..f3d2883751 100644
+index 151673ada9..d5a4334b2e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
 @@ -1,3 +1,4 @@
@@ -31,9 +31,9 @@ index 151673ada9..f3d2883751 100644
 -    UINT32 length,
 -    _Out_ HSTRING_HEADER* hstringHeader,
 -    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
-+    _In_reads_opt_(length+1) _Win32_Retained_ PCWSTR sourceString,
++    _In_reads_opt_(length+1)  PCWSTR sourceString,
 +    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
-+    _Out_ _Win32_Retained_ HSTRING_HEADER* hstringHeader,
++    _Out_  HSTRING_HEADER* hstringHeader,
 +    _Win32_RAIIFree_(WindowsDeleteString) _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
      );
  

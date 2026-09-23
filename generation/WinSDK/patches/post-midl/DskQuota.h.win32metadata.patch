@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
-index bb349ec0bb..14f258bf87 100644
+index bb349ec0bb..b59998b184 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DskQuota.h
 @@ -12,6 +12,7 @@
@@ -19,8 +19,12 @@ index bb349ec0bb..14f258bf87 100644
      LONGLONG QuotaUsed;
      LONGLONG QuotaThreshold;
      LONGLONG QuotaLimit;
-@@ -175,7 +176,7 @@ typedef struct DiskQuotaUserInformation {
- DECLARE_INTERFACE_IID_(IDiskQuotaUser, IUnknown, "7988B574-EC89-11cf-9C00-00AA00A14F56")
+@@ -172,10 +173,10 @@ typedef struct DiskQuotaUserInformation {
+ //
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaUser
+-DECLARE_INTERFACE_IID_(IDiskQuotaUser, IUnknown, "7988B574-EC89-11cf-9C00-00AA00A14F56")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IDiskQuotaUser, IUnknown, "7988B574-EC89-11cf-9C00-00AA00A14F56")
  {
      STDMETHOD(GetID)(THIS_
 -        ULONG *pulID) PURE;
@@ -79,7 +83,13 @@ index bb349ec0bb..14f258bf87 100644
  };
  
  typedef IDiskQuotaUser DISKQUOTA_USER, *PDISKQUOTA_USER;
-@@ -247,7 +248,7 @@ DECLARE_INTERFACE_IID_(IEnumDiskQuotaUsers, IUnknown, "7988B577-EC89-11cf-9C00-0
+@@ -242,12 +243,12 @@ typedef IDiskQuotaUser DISKQUOTA_USER, *PDISKQUOTA_USER;
+ //
+ #undef  INTERFACE
+ #define INTERFACE IEnumDiskQuotaUsers
+-DECLARE_INTERFACE_IID_(IEnumDiskQuotaUsers, IUnknown, "7988B577-EC89-11cf-9C00-00AA00A14F56")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IEnumDiskQuotaUsers, IUnknown, "7988B577-EC89-11cf-9C00-00AA00A14F56")
+ {
      STDMETHOD(Next)(THIS_
          DWORD cUsers,
          PDISKQUOTA_USER *rgUsers,
@@ -88,6 +98,24 @@ index bb349ec0bb..14f258bf87 100644
  
      STDMETHOD(Skip)(THIS_
          DWORD cUsers) PURE;
+@@ -267,7 +268,7 @@ typedef IEnumDiskQuotaUsers ENUM_DISKQUOTA_USERS, *PENUM_DISKQUOTA_USERS;
+ // 
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaUserBatch
+-DECLARE_INTERFACE_IID_(IDiskQuotaUserBatch, IUnknown, "7988B576-EC89-11cf-9C00-00AA00A14F56")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IDiskQuotaUserBatch, IUnknown, "7988B576-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Add)(THIS_
+         PDISKQUOTA_USER pUser) PURE;
+@@ -289,7 +290,7 @@ typedef IDiskQuotaUserBatch DISKQUOTA_USER_BATCH, *PDISKQUOTA_USER_BATCH;
+ //
+ #undef INTERFACE
+ #define INTERFACE IDiskQuotaControl
+-DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-EC89-11cf-9C00-00AA00A14F56")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IDiskQuotaControl, IConnectionPointContainer, "7988B572-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Initialize)(THIS_
+         LPCWSTR pszPath,
 @@ -299,19 +300,19 @@ DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-E
          DWORD dwState) PURE;
  
@@ -156,6 +184,15 @@ index bb349ec0bb..14f258bf87 100644
          PENUM_DISKQUOTA_USERS *ppEnum) PURE;
  
      STDMETHOD(CreateUserBatch)(THIS_
+@@ -372,7 +373,7 @@ typedef IDiskQuotaControl DISKQUOTA_CONTROL, *PDISKQUOTA_CONTROL;
+ 
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaEvents
+-DECLARE_INTERFACE_IID_(IDiskQuotaEvents, IUnknown, "7988B579-EC89-11cf-9C00-00AA00A14F56")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IDiskQuotaEvents, IUnknown, "7988B579-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(OnUserNameChanged)(THIS_
+         PDISKQUOTA_USER pUser) PURE;
 @@ -386,5 +387,24 @@ typedef IDiskQuotaEvents DISKQUOTA_EVENTS, *PDISKQUOTA_EVENTS;
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

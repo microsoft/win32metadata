@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
-index e668403065..7f0637229f 100644
+index e668403065..b842dcd721 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Audioclient.h
 @@ -181,6 +181,7 @@ extern "C"{
@@ -19,6 +19,15 @@ index e668403065..7f0637229f 100644
      {
          AUDCLNT_STREAMOPTIONS_NONE	= 0,
          AUDCLNT_STREAMOPTIONS_RAW	= 0x1,
+@@ -219,7 +220,7 @@ typedef struct AudioClientProperties
+     AUDIO_STREAM_CATEGORY   eCategory;
+ } AudioClientProperties;
+ #else
+-typedef struct AudioClientProperties
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  AudioClientProperties
+     {
+     UINT32 cbSize;
+     BOOL bIsOffload;
 @@ -244,7 +245,7 @@ EXTERN_C const IID IID_IAudioClient;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

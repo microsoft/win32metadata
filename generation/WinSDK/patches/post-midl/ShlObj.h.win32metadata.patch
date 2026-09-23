@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
-index 62644da172..b2e699db45 100644
+index 62644da172..b0005b5252 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 @@ -10,6 +10,7 @@ File: shlobj.h
@@ -10,7 +10,49 @@ index 62644da172..b2e699db45 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -456,7 +457,7 @@ DECLARE_INTERFACE_IID_(IThumbnailCapture, IUnknown, "4ea39266-7211-409f-b622-f63
+@@ -134,7 +135,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ #undef  INTERFACE
+ #define INTERFACE   INewShortcutHookA
+ 
+-DECLARE_INTERFACE_IID_(INewShortcutHookA, IUnknown, "000214e1-0000-0000-c000-000000000046")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ INewShortcutHookA, IUnknown, "000214e1-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
+     STDMETHOD_(ULONG,AddRef)  (THIS) PURE;
+@@ -150,7 +151,7 @@ DECLARE_INTERFACE_IID_(INewShortcutHookA, IUnknown, "000214e1-0000-0000-c000-000
+ #undef  INTERFACE
+ #define INTERFACE   INewShortcutHookW
+ 
+-DECLARE_INTERFACE_IID_(INewShortcutHookW, IUnknown, "000214f7-0000-0000-c000-000000000046")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ INewShortcutHookW, IUnknown, "000214f7-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
+     STDMETHOD_(ULONG,AddRef)  (THIS) PURE;
+@@ -386,7 +387,7 @@ typedef IFileViewerW * LPFILEVIEWERW;
+ #undef INTERFACE
+ #define INTERFACE ICurrentWorkingDirectory
+ 
+-DECLARE_INTERFACE_IID_(ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-921A-006097DF5BD4")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-921A-006097DF5BD4")
+ {
+     STDMETHOD(GetDirectory) (THIS_ _Out_writes_(cchSize) PWSTR pwzPath, DWORD cchSize) PURE;
+     STDMETHOD(SetDirectory) (THIS_ _In_ PCWSTR pwzPath) PURE;
+@@ -434,7 +435,7 @@ DECLARE_INTERFACE_IID_(ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-9
+ #undef  INTERFACE
+ #define INTERFACE   IDockingWindowFrame
+ 
+-DECLARE_INTERFACE_IID_(IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9-00a0c92dbfe8")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9-00a0c92dbfe8")
+ {
+     STDMETHOD(AddToolbar) (THIS_ _In_ IUnknown* punkSrc, _In_ PCWSTR pwszItem, DWORD dwAddFlags) PURE;
+     STDMETHOD(RemoveToolbar) (THIS_ _In_ IUnknown* punkSrc, DWORD dwRemoveFlags) PURE;
+@@ -451,12 +452,12 @@ DECLARE_INTERFACE_IID_(IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9
+ #undef  INTERFACE
+ #define INTERFACE   IThumbnailCapture
+ 
+-DECLARE_INTERFACE_IID_(IThumbnailCapture, IUnknown, "4ea39266-7211-409f-b622-f63dbd16c533")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IThumbnailCapture, IUnknown, "4ea39266-7211-409f-b622-f63dbd16c533")
+ {
      // *** IThumbnailCapture methods ***
      STDMETHOD (CaptureThumbnail)    ( THIS_ _In_ const SIZE * pMaxSize,
                                        _In_ IUnknown * pHTMLDoc2,
@@ -19,6 +61,33 @@ index 62644da172..b2e699db45 100644
  };
  typedef IThumbnailCapture * LPTHUMBNAILCAPTURE;
  
+@@ -579,7 +580,7 @@ typedef struct {
+ #undef INTERFACE
+ #define INTERFACE IShellFolderBand
+ 
+-DECLARE_INTERFACE_IID_(IShellFolderBand, IUnknown, "7FE80CC8-C247-11d0-B93A-00A0C90312E1")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IShellFolderBand, IUnknown, "7FE80CC8-C247-11d0-B93A-00A0C90312E1")
+ {
+     STDMETHOD(InitializeSFB)(THIS_ _In_opt_ IShellFolder *psf, _In_opt_ PCIDLIST_ABSOLUTE pidl) PURE;
+     STDMETHOD(SetBandInfoSFB)(THIS_ _In_ PBANDINFOSFB pbi) PURE;
+@@ -643,7 +644,7 @@ enum {
+ #undef INTERFACE
+ #define INTERFACE IActiveDesktopP
+ 
+-DECLARE_INTERFACE_IID_(IActiveDesktopP, IUnknown, "52502EE0-EC80-11D0-89AB-00C04FC2972D")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IActiveDesktopP, IUnknown, "52502EE0-EC80-11D0-89AB-00C04FC2972D")
+ {
+     // IUnknown methods
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
+@@ -665,7 +666,7 @@ typedef IActiveDesktopP * LPACTIVEDESKTOPP;
+ #undef INTERFACE
+ #define INTERFACE IADesktopP2
+ 
+-DECLARE_INTERFACE_IID_(IADesktopP2, IUnknown, "B22754E2-4574-11d1-9888-006097DEACF9")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IADesktopP2, IUnknown, "B22754E2-4574-11d1-9888-006097DEACF9")
+ {
+     // IUnknown methods
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
 @@ -686,7 +687,7 @@ typedef IADesktopP2 * LPADESKTOPP2;
  
  typedef struct {
@@ -28,6 +97,15 @@ index 62644da172..b2e699db45 100644
      DWORD       fmt;                            // OUT this listview format (LVCFMT_LEFT, usually)
      UINT        cChars;                         // OUT the default width of the column, in characters
      DWORD       csFlags;                        // OUT SHCOLSTATE flags
+@@ -724,7 +725,7 @@ typedef const SHCOLUMNDATA* LPCSHCOLUMNDATA;
+ 
+ // Note: these objects must be threadsafe!  GetItemData _will_ be called
+ // simultaneously from multiple threads.
+-DECLARE_INTERFACE_IID_(IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C9A83DA1")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C9A83DA1")
+ {
+     // IUnknown methods
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
 @@ -740,7 +741,7 @@ DECLARE_INTERFACE_IID_(IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -67,6 +145,15 @@ index 62644da172..b2e699db45 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)
  #undef  INTERFACE
+@@ -810,7 +815,7 @@ SHSTDAPI SHLoadOLE(LPARAM lParam);
+ //
+ #undef  INTERFACE
+ #define INTERFACE  IDocViewSite
+-DECLARE_INTERFACE_IID_(IDocViewSite, IUnknown, "87D605E0-C511-11CF-89A9-00A0C9054129")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IDocViewSite, IUnknown, "87D605E0-C511-11CF-89A9-00A0C9054129")
+ {
+     STDMETHOD(OnSetTitle) (THIS_ _In_ VARIANTARG *pvTitle) PURE;
+ };
 @@ -844,7 +849,7 @@ DECLARE_INTERFACE_IID_(IBanneredBar, IUnknown, "596A9A94-013E-11d1-8D34-00A0C90F
      STDMETHOD(SetIconSize)(THIS_ DWORD iIcon) PURE;
      STDMETHOD(GetIconSize)(THIS_ _Out_ DWORD* piIcon) PURE;

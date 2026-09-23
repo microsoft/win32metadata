@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h
-index 08fc788f3f..f657373fb9 100644
+index 08fc788f3f..69c470302c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IEPMapi.h
 @@ -1,3 +1,4 @@
@@ -280,7 +280,7 @@ index 08fc788f3f..f657373fb9 100644
 +_Win32_ImportLibrary_("ieframe.dll") BOOL IEGetFileAttributesEx(
    _In_ LPCWSTR lpFileName,
 -  GET_FILEEX_INFO_LEVELS fInfoLevelId,
-+  _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(GET_FILEEX_INFO_LEVELS) GET_FILEEX_INFO_LEVELS fInfoLevelId,
++  _WIN32META_ANNOTATION_("win32metadata:in")  GET_FILEEX_INFO_LEVELS fInfoLevelId,
    _In_ LPVOID lpFileInformation
  );
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
-index 8690977834..bc66c1722e 100644
+index 8690977834..d00db525d4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
 @@ -1,3 +1,4 @@
@@ -73,7 +73,7 @@ index 8690977834..bc66c1722e 100644
 -                ULONG dwScopeId,
 -                ULONG dwLocalityThreshold,
 +_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drttransport.dll") HRESULT WINAPI DrtCreateIpv6UdpTransport(
-+                _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(DRT_SCOPE) DRT_SCOPE scope,
++                _WIN32META_ANNOTATION_("win32metadata:in")  DRT_SCOPE scope,
 +                _WIN32META_ANNOTATION_("win32metadata:in") ULONG dwScopeId,
 +                _WIN32META_ANNOTATION_("win32metadata:in") ULONG dwLocalityThreshold,
      _Inout_     USHORT *pwPort,

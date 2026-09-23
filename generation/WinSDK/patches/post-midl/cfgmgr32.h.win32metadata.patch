@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
-index cfd6383749..be72d2434c 100644
+index cfd6383749..7d40a559f4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 @@ -1,3 +1,4 @@
@@ -2001,6 +2001,15 @@ index cfd6383749..be72d2434c 100644
  CONFIGRET
  WINAPI
  CM_Set_Class_Registry_PropertyW(
+@@ -4636,7 +4637,7 @@ CM_Set_Class_Registry_PropertyW(
+ #if (WINVER >= _WIN32_WINNT_WIN2K)
+ #define CM_WaitNoPendingInstallEvents CMP_WaitNoPendingInstallEvents
+ 
+-DWORD
++_Win32_ImportLibrary_("cfgmgr32.dll") DWORD
+ WINAPI
+ CM_WaitNoPendingInstallEvents(
+     _In_  DWORD dwTimeout
 @@ -4651,17 +4652,17 @@ CM_WaitNoPendingInstallEvents(
  
  #if (WINVER >= _WIN32_WINNT_WIN8)

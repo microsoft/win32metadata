@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
-index d9c3d10330..3fb45443d2 100644
+index d9c3d10330..778ea44bff 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 @@ -1,3 +1,4 @@
@@ -668,7 +668,7 @@ index d9c3d10330..3fb45443d2 100644
  BOOL
  WINAPI
  GetSecurityDescriptorSacl(
-@@ -893,7 +894,7 @@ GetSecurityDescriptorSacl(
+@@ -893,21 +894,21 @@ GetSecurityDescriptorSacl(
      _Out_ LPBOOL lpbSaclDefaulted
      );
  
@@ -677,7 +677,14 @@ index d9c3d10330..3fb45443d2 100644
  PSID_IDENTIFIER_AUTHORITY
  WINAPI
  GetSidIdentifierAuthority(
-@@ -907,7 +908,7 @@ GetSidLengthRequired(
+     _In_ PSID pSid
+     );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
+ DWORD
+ WINAPI
+ GetSidLengthRequired(
      _In_ UCHAR nSubAuthorityCount
      );
  

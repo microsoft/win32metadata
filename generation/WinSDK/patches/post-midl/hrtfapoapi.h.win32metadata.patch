@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
-index a1c2a9980d..2d76283e41 100644
+index a1c2a9980d..293049ac6e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/hrtfapoapi.h
 @@ -10,6 +10,7 @@
@@ -18,6 +18,15 @@ index a1c2a9980d..2d76283e41 100644
  STDAPI CreateHrtfApo(
      //! Pointer to an HrtfApoInit struct. Specifies parameters for XAPO interface initialization.
      _In_ const HrtfApoInit* init, 
+@@ -158,7 +160,7 @@ STDAPI CreateHrtfApo(
+ //
+ #undef INTERFACE
+ #define INTERFACE IXAPOHrtfParameters
+-DECLARE_INTERFACE_IID_(IXAPOHrtfParameters, IUnknown, "15B3CD66-E9DE-4464-B6E6-2BC3CF63D455")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_10240_ IXAPOHrtfParameters, IUnknown, "15B3CD66-E9DE-4464-B6E6-2BC3CF63D455")
+ {
+     // IUnknown
+     STDMETHOD(QueryInterface)(THIS_ REFIID riid, void **ppv) PURE;
 @@ -167,14 +169,22 @@ DECLARE_INTERFACE_IID_(IXAPOHrtfParameters, IUnknown, "15B3CD66-E9DE-4464-B6E6-2
  
      // HRTF params

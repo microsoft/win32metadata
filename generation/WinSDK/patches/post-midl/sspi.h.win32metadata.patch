@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
-index 06f5ed27e9..d75e18253c 100644
+index 06f5ed27e9..af2b050bd7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 @@ -15,6 +15,7 @@
@@ -338,6 +338,15 @@ index 06f5ed27e9..d75e18253c 100644
      );
  
  //
+@@ -1303,7 +1304,7 @@ typedef void
+ #define SECPKG_CONTEXT_EXPORT_TO_KERNEL         0x00000004      // Context is to be transferred to the kernel
+ 
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ AcquireCredentialsHandleW(
+ #if ISSP_MODE == 0     // For Kernel mode
 @@ -1341,11 +1342,11 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -480,6 +489,15 @@ index 06f5ed27e9..d75e18253c 100644
      );
  
  #ifdef UNICODE
+@@ -1703,7 +1704,7 @@ typedef SECURITY_STATUS
+ ///
+ ////////////////////////////////////////////////////////////////////////
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ InitializeSecurityContextW(
+     _In_opt_    PCredHandle phCredential,               // Cred to base context
 @@ -1745,12 +1746,12 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -984,6 +1002,15 @@ index 06f5ed27e9..d75e18253c 100644
  
  #ifdef UNICODE
  #  define EnumerateSecurityPackages EnumerateSecurityPackagesW              // ntifs
+@@ -2266,7 +2267,7 @@ typedef SECURITY_STATUS
+ 
+ // begin_ntifs
+ 
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ QuerySecurityPackageInfoW(
+ #if ISSP_MODE == 0
 @@ -2288,7 +2289,7 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -1004,7 +1031,7 @@ index 06f5ed27e9..d75e18253c 100644
  
  #ifdef UNICODE
  #  define QuerySecurityPackageInfo QuerySecurityPackageInfoW                // ntifs
-@@ -2362,21 +2363,21 @@ DelegateSecurityContext(
+@@ -2362,24 +2363,24 @@ DelegateSecurityContext(
  ///////////////////////////////////////////////////////////////////////////
  
  
@@ -1030,7 +1057,11 @@ index 06f5ed27e9..d75e18253c 100644
 +    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * *
      );
  
- KSECDDDECLSPEC
+-KSECDDDECLSPEC
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
+ SECURITY_STATUS SEC_ENTRY
+ ImportSecurityContextW(
+ #if ISSP_MODE == 0
 @@ -2405,7 +2406,7 @@ typedef SECURITY_STATUS
      );
  
@@ -1230,6 +1261,24 @@ index 06f5ed27e9..d75e18253c 100644
      unsigned long Version;
      unsigned long Length;
      unsigned char *User;            //  Non-NULL terminated string.
+@@ -3197,7 +3209,7 @@ typedef PSEC_WINNT_AUTH_IDENTITY_INFO PSEC_WINNT_AUTH_IDENTITY_OPAQUE;
+ // Use SspiFreeAuthIdentity() to free the buffer returned
+ // in ppAuthIdentity.
+ 
+-unsigned long
++_Windows_SupportedOS_Windows7_ unsigned long
+ SEC_ENTRY
+ SspiPromptForCredentialsW(
+     _In_ PCWSTR pszTargetName,
+@@ -3217,7 +3229,7 @@ SspiPromptForCredentialsW(
+ // Use SspiFreeAuthIdentity() to free the buffer returned
+ // in ppAuthIdentity.
+ 
+-unsigned long
++_Windows_SupportedOS_Windows7_ unsigned long
+ SEC_ENTRY
+ SspiPromptForCredentialsA(
+     _In_ PCSTR pszTargetName,
 @@ -3438,6 +3450,7 @@ SspiUnmarshalCredUIContext(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

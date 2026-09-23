@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h
-index d814c88e52..c56e5c44f1 100644
+index d814c88e52..aede92179c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h
 @@ -1,3 +1,4 @@
@@ -343,8 +343,8 @@ index d814c88e52..c56e5c44f1 100644
  
 -int __cdecl OleUIPromptUserW(int nTemplate, HWND hwndParent, ...);
 -int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") int __cdecl OleUIPromptUserW(int nTemplate, HWND hwndParent, ...);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:unicode") int __cdecl OleUIPromptUserW(int nTemplate, HWND hwndParent, ...);
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:ansi") int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
  
  #ifdef UNICODE
  #define OleUIPromptUser OleUIPromptUserW

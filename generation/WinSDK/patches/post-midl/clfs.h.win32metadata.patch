@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
-index f987975a89..b24b52df22 100644
+index f987975a89..7ecfbac63f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
 @@ -21,6 +21,7 @@
@@ -127,6 +127,60 @@ index f987975a89..b24b52df22 100644
  {
  
      ClfsLogArchiveEnabled = 0x01,
+@@ -929,7 +930,7 @@ extern "C"
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnEqual
+ (
+     _In_ const CLFS_LSN* plsn1,
+@@ -958,7 +959,7 @@ ClfsLsnEqual
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnLess
+ (
+     _In_ const CLFS_LSN* plsn1,
+@@ -987,7 +988,7 @@ ClfsLsnLess
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnGreater
+ (
+     _In_ const CLFS_LSN* plsn1,
+@@ -1016,7 +1017,7 @@ ClfsLsnGreater
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnNull
+ (
+     _In_ const CLFS_LSN* plsn
+@@ -1155,7 +1156,7 @@ ClfsLsnRecordSequence
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnInvalid
+ (
+     _In_ const CLFS_LSN* plsn
+@@ -1183,7 +1184,7 @@ ClfsLsnInvalid
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API CLFS_LSN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API CLFS_LSN NTAPI
+ ClfsLsnIncrement (_In_ PCLFS_LSN  plsn);
+ #endif /* NTDDI_VERSION || _WIN32_WINNT */
+ 
 @@ -1301,6 +1302,32 @@ operator>=
  // end_wdm
  
