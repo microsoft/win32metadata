@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h b/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
-index 86446dfbe4..3c9703f260 100644
+index 86446dfbe4..284597e5b1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NetSh.h
 @@ -13,6 +13,7 @@ Abstract:
@@ -32,8 +32,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef GET_RESOURCE_STRING_FN *PGET_RESOURCE_STRING_FN;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  DWORD
  (WINAPI NS_CONTEXT_COMMIT_FN)(
@@ -43,8 +43,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef NS_CONTEXT_COMMIT_FN *PNS_CONTEXT_COMMIT_FN;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  DWORD
  (WINAPI NS_CONTEXT_CONNECT_FN)(
@@ -52,8 +52,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef struct _NS_CONTEXT_ATTRIBUTES NS_CONTEXT_ATTRIBUTES;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  DWORD
  (WINAPI NS_CONTEXT_DUMP_FN)(
@@ -61,8 +61,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef NS_CONTEXT_DUMP_FN *PNS_CONTEXT_DUMP_FN;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  DWORD
  (WINAPI NS_DLL_STOP_FN)(
@@ -70,8 +70,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef NS_DLL_STOP_FN *PNS_DLL_STOP_FN;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  DWORD
  (WINAPI NS_HELPER_START_FN)(
@@ -79,8 +79,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef NS_HELPER_START_FN *PNS_HELPER_START_FN;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  DWORD
  (WINAPI NS_HELPER_STOP_FN)(
@@ -97,8 +97,8 @@ index 86446dfbe4..3c9703f260 100644
  
  typedef FN_HANDLE_CMD *PFN_HANDLE_CMD;
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2003_
++
++
  typedef
  BOOL
  (WINAPI NS_OSVERSIONCHECK)(

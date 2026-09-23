@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
-index 06f5ed27e9..af2b050bd7 100644
+index 06f5ed27e9..9cbc823f72 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 @@ -15,6 +15,7 @@
@@ -338,15 +338,18 @@ index 06f5ed27e9..af2b050bd7 100644
      );
  
  //
-@@ -1303,7 +1304,7 @@ typedef void
+@@ -1303,9 +1304,9 @@ typedef void
  #define SECPKG_CONTEXT_EXPORT_TO_KERNEL         0x00000004      // Context is to be transferred to the kernel
  
  
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
- AcquireCredentialsHandleW(
+-AcquireCredentialsHandleW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") AcquireCredentialsHandleW(
  #if ISSP_MODE == 0     // For Kernel mode
+     _In_opt_  PSECURITY_STRING pPrincipal,
+     _In_      PSECURITY_STRING pPackage,
 @@ -1341,11 +1342,11 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -393,7 +396,7 @@ index 06f5ed27e9..af2b050bd7 100644
  SECURITY_STATUS SEC_ENTRY
  FreeCredentialsHandle(
      _In_ PCredHandle phCredential            // Handle to free
-@@ -1384,7 +1385,7 @@ FreeCredentialsHandle(
+@@ -1384,11 +1385,11 @@ FreeCredentialsHandle(
  
  typedef SECURITY_STATUS
  (SEC_ENTRY * FREE_CREDENTIALS_HANDLE_FN)(
@@ -402,6 +405,11 @@ index 06f5ed27e9..af2b050bd7 100644
  
  KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
+-AddCredentialsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") AddCredentialsW(
+     _In_      PCredHandle hCredentials,
+ #if ISSP_MODE == 0      // For Kernel mode
+     _In_opt_  PSECURITY_STRING pPrincipal,
 @@ -1420,7 +1421,7 @@ typedef SECURITY_STATUS
      void *,
      PTimeStamp);
@@ -489,15 +497,18 @@ index 06f5ed27e9..af2b050bd7 100644
      );
  
  #ifdef UNICODE
-@@ -1703,7 +1704,7 @@ typedef SECURITY_STATUS
+@@ -1703,9 +1704,9 @@ typedef SECURITY_STATUS
  ///
  ////////////////////////////////////////////////////////////////////////
  
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") _Win32_PreserveResult_ KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
- InitializeSecurityContextW(
+-InitializeSecurityContextW(
++_WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _WIN32META_ANNOTATION_("win32metadata:unicode") InitializeSecurityContextW(
      _In_opt_    PCredHandle phCredential,               // Cred to base context
+     _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
+ #if ISSP_MODE == 0
 @@ -1745,12 +1746,12 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -1002,15 +1013,18 @@ index 06f5ed27e9..af2b050bd7 100644
  
  #ifdef UNICODE
  #  define EnumerateSecurityPackages EnumerateSecurityPackagesW              // ntifs
-@@ -2266,7 +2267,7 @@ typedef SECURITY_STATUS
+@@ -2266,9 +2267,9 @@ typedef SECURITY_STATUS
  
  // begin_ntifs
  
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
- QuerySecurityPackageInfoW(
+-QuerySecurityPackageInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") QuerySecurityPackageInfoW(
  #if ISSP_MODE == 0
+     _In_        PSECURITY_STRING pPackageName,
+ #else
 @@ -2288,7 +2289,7 @@ typedef SECURITY_STATUS
  
  // end_ntifs
@@ -1031,7 +1045,7 @@ index 06f5ed27e9..af2b050bd7 100644
  
  #ifdef UNICODE
  #  define QuerySecurityPackageInfo QuerySecurityPackageInfoW                // ntifs
-@@ -2362,24 +2363,24 @@ DelegateSecurityContext(
+@@ -2362,26 +2363,26 @@ DelegateSecurityContext(
  ///////////////////////////////////////////////////////////////////////////
  
  
@@ -1060,8 +1074,11 @@ index 06f5ed27e9..af2b050bd7 100644
 -KSECDDDECLSPEC
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("secur32.dll") KSECDDDECLSPEC
  SECURITY_STATUS SEC_ENTRY
- ImportSecurityContextW(
+-ImportSecurityContextW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") ImportSecurityContextW(
  #if ISSP_MODE == 0
+     _In_  PSECURITY_STRING     pszPackage,
+ #else
 @@ -2405,7 +2406,7 @@ typedef SECURITY_STATUS
      );
  
@@ -1261,24 +1278,30 @@ index 06f5ed27e9..af2b050bd7 100644
      unsigned long Version;
      unsigned long Length;
      unsigned char *User;            //  Non-NULL terminated string.
-@@ -3197,7 +3209,7 @@ typedef PSEC_WINNT_AUTH_IDENTITY_INFO PSEC_WINNT_AUTH_IDENTITY_OPAQUE;
+@@ -3197,9 +3209,9 @@ typedef PSEC_WINNT_AUTH_IDENTITY_INFO PSEC_WINNT_AUTH_IDENTITY_OPAQUE;
  // Use SspiFreeAuthIdentity() to free the buffer returned
  // in ppAuthIdentity.
  
 -unsigned long
 +_Windows_SupportedOS_Windows7_ unsigned long
  SEC_ENTRY
- SspiPromptForCredentialsW(
+-SspiPromptForCredentialsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") SspiPromptForCredentialsW(
      _In_ PCWSTR pszTargetName,
-@@ -3217,7 +3229,7 @@ SspiPromptForCredentialsW(
+ #ifdef _CREDUI_INFO_DEFINED
+     _In_opt_ PCREDUI_INFOW pUiInfo,
+@@ -3217,9 +3229,9 @@ SspiPromptForCredentialsW(
  // Use SspiFreeAuthIdentity() to free the buffer returned
  // in ppAuthIdentity.
  
 -unsigned long
 +_Windows_SupportedOS_Windows7_ unsigned long
  SEC_ENTRY
- SspiPromptForCredentialsA(
+-SspiPromptForCredentialsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SspiPromptForCredentialsA(
      _In_ PCSTR pszTargetName,
+ #ifdef _CREDUI_INFO_DEFINED
+     _In_opt_ PCREDUI_INFOA pUiInfo,
 @@ -3438,6 +3450,7 @@ SspiUnmarshalCredUIContext(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

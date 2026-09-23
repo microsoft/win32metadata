@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
-index 7f9b7f9e78..afb2cc736c 100644
+index 7f9b7f9e78..b188dd2013 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
 @@ -8,6 +8,7 @@
@@ -118,8 +118,8 @@ index 7f9b7f9e78..afb2cc736c 100644
      };
  } RM_FILTER_INFO, *PRM_FILTER_INFO;
  
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++
++
  typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
  
  // Functions

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
-index 6b6df02c52..78862c6975 100644
+index 6b6df02c52..acb1bbeb92 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_2.h
 @@ -20,6 +20,7 @@
@@ -24,7 +24,7 @@ index 6b6df02c52..78862c6975 100644
  /// stroked geometry.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("a16907d7-bc02-4801-99e8-8cf7f485f774") ID2D1GeometryRealization  : public ID2D1Resource
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a16907d7-bc02-4801-99e8-8cf7f485f774") ID2D1GeometryRealization  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows81_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a16907d7-bc02-4801-99e8-8cf7f485f774") ID2D1GeometryRealization  : public ID2D1Resource
  {
  }; // interface ID2D1GeometryRealization
  
@@ -33,7 +33,7 @@ index 6b6df02c52..78862c6975 100644
  /// Enables creation and drawing of geometry realization objects.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("d37f57e4-6908-459f-a199-e72f24f79987") ID2D1DeviceContext1  : public ID2D1DeviceContext
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("d37f57e4-6908-459f-a199-e72f24f79987") ID2D1DeviceContext1  : public ID2D1DeviceContext
++interface _Windows_SupportedOS_Windows81_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("d37f57e4-6908-459f-a199-e72f24f79987") ID2D1DeviceContext1  : public ID2D1DeviceContext
  {
      
      STDMETHOD(CreateFilledGeometryRealization)(
@@ -51,7 +51,7 @@ index 6b6df02c52..78862c6975 100644
  /// ID2D1Device1 objects.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("94f81a73-9212-4376-9c58-b16a3a0d3992") ID2D1Factory2  : public ID2D1Factory1
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("94f81a73-9212-4376-9c58-b16a3a0d3992") ID2D1Factory2  : public ID2D1Factory1
++interface _Windows_SupportedOS_Windows81_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("94f81a73-9212-4376-9c58-b16a3a0d3992") ID2D1Factory2  : public ID2D1Factory1
  {
      
      /// <summary>
@@ -60,7 +60,7 @@ index 6b6df02c52..78862c6975 100644
  /// through its SetPrimitiveBlend1 method.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("9eb767fd-4269-4467-b8c2-eb30cb305743") ID2D1CommandSink1  : public ID2D1CommandSink
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("9eb767fd-4269-4467-b8c2-eb30cb305743") ID2D1CommandSink1  : public ID2D1CommandSink
++interface _Windows_SupportedOS_Windows81_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("9eb767fd-4269-4467-b8c2-eb30cb305743") ID2D1CommandSink1  : public ID2D1CommandSink
  {
      
      /// <summary>
