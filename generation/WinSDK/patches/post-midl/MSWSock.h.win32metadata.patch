@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
-index e067444153..d5df2b2750 100644
+index e067444153..e1e2d8c08a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -10,6 +10,15 @@ index e067444153..d5df2b2750 100644
  
  #if !defined(_WINSOCK_DEPRECATED_BY)
  #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
+@@ -127,7 +128,7 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ _WINSOCK_DEPRECATED_BY("WSARecv()")
+ #if(_WIN32_WINNT < 0x0600)
+-int
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("MSWSOCK.dll") _Win32_SetLastError_ int
+ PASCAL FAR
+ WSARecvEx(
+     _In_ SOCKET s,
 @@ -136,7 +137,7 @@ WSARecvEx(
      _Inout_ int FAR *flags
      );

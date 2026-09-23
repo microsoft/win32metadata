@@ -1,19 +1,17 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/unknwn.h b/generation/WinSDK/RecompiledIdlHeaders/um/unknwn.h
-index ea30f79c09..52b11db733 100644
---- a/generation/WinSDK/RecompiledIdlHeaders/um/unknwn.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/unknwn.h
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/unknwnbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/unknwnbase.h
+index e2ae04de5c..07ac4fdb9a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/unknwnbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/unknwnbase.h
 @@ -1,3 +1,4 @@
 +#include <win32metadata_annotations.h>
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -117,8 +118,8 @@ typedef /* [unique] */ IUnknown *LPUNKNOWN;
-         IUnknown
+@@ -118,7 +119,7 @@ typedef /* [unique] */ IUnknown *LPUNKNOWN;
          {
          public:
--            BEGIN_INTERFACE
+             BEGIN_INTERFACE
 -            virtual HRESULT STDMETHODCALLTYPE QueryInterface( 
-+            _Win32_PreserveResult_ BEGIN_INTERFACE
 +            virtual HRESULT STDMETHODCALLTYPE _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") QueryInterface( 
                  /* [in] */ REFIID riid,
                  /* [iid_is][out] */ _COM_Outptr_ void __RPC_FAR *__RPC_FAR *ppvObject) = 0;
@@ -45,13 +43,11 @@ index ea30f79c09..52b11db733 100644
          IUnknown __RPC_FAR * This);
      
      void __RPC_STUB IUnknown_Release_Stub(
-@@ -179,8 +180,8 @@ EXTERN_C const IID IID_IUnknown;
-     IUnknown
+@@ -180,7 +181,7 @@ EXTERN_C const IID IID_IUnknown;
      {
      public:
--        BEGIN_INTERFACE
+         BEGIN_INTERFACE
 -        virtual HRESULT STDMETHODCALLTYPE QueryInterface( 
-+        _Win32_PreserveResult_ BEGIN_INTERFACE
 +        virtual HRESULT STDMETHODCALLTYPE _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") QueryInterface( 
              /* [annotation][in] */ 
              _In_  REFIID riid,
@@ -83,12 +79,3 @@ index ea30f79c09..52b11db733 100644
      IUnknown * This);
  
  
-@@ -460,7 +461,7 @@ EXTERN_C const IID IID_IClassFactory;
- 
- #if defined(__cplusplus) && !defined(CINTERFACE)
-     
--    MIDL_INTERFACE("00000001-0000-0000-C000-000000000046")
-+    MIDL_INTERFACE("00000001-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
-     IClassFactory : public IUnknown
-     {
-     public:

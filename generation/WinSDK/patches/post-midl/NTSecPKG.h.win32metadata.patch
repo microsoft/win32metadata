@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
-index 2571b34bb4..6af91f179c 100644
+index 2571b34bb4..d2e8633a86 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
 @@ -19,6 +19,7 @@ Revision History:
@@ -241,6 +241,15 @@ index 2571b34bb4..6af91f179c 100644
      SecNameSamCompatible,
      SecNameAlternateId,
      SecNameFlat,
+@@ -1555,7 +1556,7 @@ typedef NTSTATUS
+ 
+ typedef NTSTATUS
+ (NTAPI LSA_CLIENT_CALLBACK)(
+-    _In_  PCHAR      Callback,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_  PCHAR      Callback,
+     _In_  ULONG_PTR  Argument1,
+     _In_  ULONG_PTR  Argument2,
+     _In_  PSecBuffer Input,
 @@ -1591,8 +1592,8 @@ typedef NTSTATUS
  #define NOTIFY_CLASS_DOMAIN_CHANGE      3
  #define NOTIFY_CLASS_REGISTRY_CHANGE    4

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
-index 56a8a639db..87d71e35e5 100644
+index 56a8a639db..788e497067 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 @@ -1,3 +1,4 @@
@@ -1021,6 +1021,15 @@ index 56a8a639db..87d71e35e5 100644
  JetRestoreInstanceW(
      _In_ JET_INSTANCE   instance,
      _In_ JET_PCWSTR     sz,
+@@ -6756,7 +6757,7 @@ JET_ERR JET_API JetBeginExternalBackupInstance(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+ JET_ERR JET_API
+-JetGetAttachInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") JetGetAttachInfoA(
+ #if ( JET_VERSION < 0x0600 )
+     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
+ #else
 @@ -6773,7 +6774,7 @@ JetGetAttachInfoA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
@@ -1030,6 +1039,15 @@ index 56a8a639db..87d71e35e5 100644
  JetGetAttachInfoW(
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    wszzDatabases,
      _In_ JET_UINT32                                         cbMax,
+@@ -6799,7 +6800,7 @@ JetGetAttachInfoW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+ JET_ERR JET_API
+-JetGetAttachInfoInstanceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") JetGetAttachInfoInstanceA(
+     _In_ JET_INSTANCE                                        instance,
+ #if ( JET_VERSION < 0x0600 )
+     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 @@ -6817,7 +6818,7 @@ JetGetAttachInfoInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
@@ -1075,6 +1093,15 @@ index 56a8a639db..87d71e35e5 100644
  JetOpenFileInstanceW(
      _In_ JET_INSTANCE       instance,
      _In_ JET_PCWSTR         szFileName,
+@@ -6986,7 +6987,7 @@ JetCloseFileInstance(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+ JET_ERR JET_API
+-JetGetLogInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") JetGetLogInfoA(
+ #if ( JET_VERSION < 0x0600 )
+     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
+ #else
 @@ -7003,7 +7004,7 @@ JetGetLogInfoA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
@@ -1084,6 +1111,15 @@ index 56a8a639db..87d71e35e5 100644
  JetGetLogInfoW(
          _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    szzLogs,
          _In_ JET_UINT32                                         cbMax,
+@@ -7029,7 +7030,7 @@ JetGetLogInfoW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+ JET_ERR JET_API
+-JetGetLogInfoInstanceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") JetGetLogInfoInstanceA(
+     _In_ JET_INSTANCE                                        instance,
+ #if ( JET_VERSION < 0x0600 )
+     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 @@ -7047,7 +7048,7 @@ JetGetLogInfoInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
@@ -1111,6 +1147,15 @@ index 56a8a639db..87d71e35e5 100644
  {
      JET_UINT32      cbSize;
      JET_UINT32      ulGenLow;
+@@ -7096,7 +7097,7 @@ typedef struct
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+ JET_ERR JET_API
+-JetGetLogInfoInstance2A(
++_WIN32META_ANNOTATION_("win32metadata:ansi") JetGetLogInfoInstance2A(
+     _In_ JET_INSTANCE                                        instance,
+ #if ( JET_VERSION < 0x0600 )
+     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 @@ -7115,7 +7116,7 @@ JetGetLogInfoInstance2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
@@ -1120,6 +1165,15 @@ index 56a8a639db..87d71e35e5 100644
  JetGetLogInfoInstance2W(
      _In_ JET_INSTANCE                                         instance,
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
+@@ -7142,7 +7143,7 @@ JetGetLogInfoInstance2W(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+ JET_ERR JET_API
+-JetGetTruncateLogInfoInstanceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") JetGetTruncateLogInfoInstanceA(
+     _In_ JET_INSTANCE                                        instance,
+ #if ( JET_VERSION < 0x0600 )
+     _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
 @@ -7160,7 +7161,7 @@ JetGetTruncateLogInfoInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)

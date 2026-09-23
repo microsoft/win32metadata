@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor.h
-index 3f69243671..94920bf332 100644
+index 3f69243671..b0a658a4dd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index 3f69243671..94920bf332 100644
  /// A transform uses this interface to write new vertices to a vertex buffer.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("9b8b1336-00a5-4668-92b7-ced5d8bf9b7b") ID2D1VertexBuffer  : public IUnknown
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("9b8b1336-00a5-4668-92b7-ced5d8bf9b7b") ID2D1VertexBuffer  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("9b8b1336-00a5-4668-92b7-ced5d8bf9b7b") ID2D1VertexBuffer  : public IUnknown
  {
      
      STDMETHOD(Map)(
@@ -21,7 +21,7 @@ index 3f69243671..94920bf332 100644
  
  
 -interface DX_DECLARE_INTERFACE("688d15c3-02b0-438d-b13a-d1b44c32c39a") ID2D1ResourceTexture  : public IUnknown
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("688d15c3-02b0-438d-b13a-d1b44c32c39a") ID2D1ResourceTexture  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("688d15c3-02b0-438d-b13a-d1b44c32c39a") ID2D1ResourceTexture  : public IUnknown
  {
      
      /// <summary>
@@ -30,7 +30,7 @@ index 3f69243671..94920bf332 100644
  /// D2D.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("519ae1bd-d19a-420d-b849-364f594776b7") ID2D1RenderInfo  : public IUnknown
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("519ae1bd-d19a-420d-b849-364f594776b7") ID2D1RenderInfo  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("519ae1bd-d19a-420d-b849-364f594776b7") ID2D1RenderInfo  : public IUnknown
  {
      
      /// <summary>
@@ -39,7 +39,7 @@ index 3f69243671..94920bf332 100644
  /// pixel and vertex shaders.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("693ce632-7f2f-45de-93fe-18d88b37aa21") ID2D1DrawInfo  : public ID2D1RenderInfo
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("693ce632-7f2f-45de-93fe-18d88b37aa21") ID2D1DrawInfo  : public ID2D1RenderInfo
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("693ce632-7f2f-45de-93fe-18d88b37aa21") ID2D1DrawInfo  : public ID2D1RenderInfo
  {
      
      /// <summary>
@@ -48,7 +48,7 @@ index 3f69243671..94920bf332 100644
  /// compute shader.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("5598b14b-9fd7-48b7-9bdb-8f0964eb38bc") ID2D1ComputeInfo  : public ID2D1RenderInfo
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("5598b14b-9fd7-48b7-9bdb-8f0964eb38bc") ID2D1ComputeInfo  : public ID2D1RenderInfo
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("5598b14b-9fd7-48b7-9bdb-8f0964eb38bc") ID2D1ComputeInfo  : public ID2D1RenderInfo
  {
      
      /// <summary>
@@ -66,7 +66,7 @@ index 3f69243671..94920bf332 100644
  /// The implementation of the actual graph.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("13d29038-c3e6-4034-9081-13b53a417992") ID2D1TransformGraph  : public IUnknown
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("13d29038-c3e6-4034-9081-13b53a417992") ID2D1TransformGraph  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("13d29038-c3e6-4034-9081-13b53a417992") ID2D1TransformGraph  : public IUnknown
  {
      
      /// <summary>
@@ -75,7 +75,7 @@ index 3f69243671..94920bf332 100644
  /// The interface implemented by a transform author.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("ef1a287d-342a-4f76-8fdb-da0d6ea9f92b") ID2D1Transform  : public ID2D1TransformNode
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("ef1a287d-342a-4f76-8fdb-da0d6ea9f92b") ID2D1Transform  : public ID2D1TransformNode
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("ef1a287d-342a-4f76-8fdb-da0d6ea9f92b") ID2D1Transform  : public ID2D1TransformNode
  {
      
      STDMETHOD(MapOutputRectToInputRects)(
@@ -84,7 +84,7 @@ index 3f69243671..94920bf332 100644
  /// The interface implemented by a transform author to provide a GPU-based effect.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("36bfdcb6-9739-435d-a30d-a653beff6a6f") ID2D1DrawTransform  : public ID2D1Transform
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("36bfdcb6-9739-435d-a30d-a653beff6a6f") ID2D1DrawTransform  : public ID2D1Transform
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("36bfdcb6-9739-435d-a30d-a653beff6a6f") ID2D1DrawTransform  : public ID2D1Transform
  {
      
      STDMETHOD(SetDrawInfo)(
@@ -93,7 +93,7 @@ index 3f69243671..94920bf332 100644
  /// based effect.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("0d85573c-01e3-4f7d-bfd9-0d60608bf3c3") ID2D1ComputeTransform  : public ID2D1Transform
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("0d85573c-01e3-4f7d-bfd9-0d60608bf3c3") ID2D1ComputeTransform  : public ID2D1Transform
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("0d85573c-01e3-4f7d-bfd9-0d60608bf3c3") ID2D1ComputeTransform  : public ID2D1Transform
  {
      
      STDMETHOD(SetComputeInfo)(
@@ -102,7 +102,7 @@ index 3f69243671..94920bf332 100644
  /// receive an analysis result callback.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("0359dc30-95e6-4568-9055-27720d130e93") ID2D1AnalysisTransform  : public IUnknown
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("0359dc30-95e6-4568-9055-27720d130e93") ID2D1AnalysisTransform  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("0359dc30-95e6-4568-9055-27720d130e93") ID2D1AnalysisTransform  : public IUnknown
  {
      
      STDMETHOD(ProcessAnalysisResults)(
@@ -111,7 +111,7 @@ index 3f69243671..94920bf332 100644
  /// effect.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("db1800dd-0c34-4cf9-be90-31cc0a5653e1") ID2D1SourceTransform  : public ID2D1Transform
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("db1800dd-0c34-4cf9-be90-31cc0a5653e1") ID2D1SourceTransform  : public ID2D1Transform
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("db1800dd-0c34-4cf9-be90-31cc0a5653e1") ID2D1SourceTransform  : public ID2D1Transform
  {
      
      STDMETHOD(SetRenderInfo)(
@@ -120,7 +120,7 @@ index 3f69243671..94920bf332 100644
  /// controlled.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("1a799d8a-69f7-4e4c-9fed-437ccc6684cc") ID2D1ConcreteTransform  : public ID2D1TransformNode
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("1a799d8a-69f7-4e4c-9fed-437ccc6684cc") ID2D1ConcreteTransform  : public ID2D1TransformNode
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("1a799d8a-69f7-4e4c-9fed-437ccc6684cc") ID2D1ConcreteTransform  : public ID2D1TransformNode
  {
      
      /// <summary>
@@ -129,7 +129,7 @@ index 3f69243671..94920bf332 100644
  /// An effect uses this interface to configure a blending operation.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("63ac0b32-ba44-450f-8806-7f4ca1ff2f1b") ID2D1BlendTransform  : public ID2D1ConcreteTransform
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("63ac0b32-ba44-450f-8806-7f4ca1ff2f1b") ID2D1BlendTransform  : public ID2D1ConcreteTransform
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("63ac0b32-ba44-450f-8806-7f4ca1ff2f1b") ID2D1BlendTransform  : public ID2D1ConcreteTransform
  {
      
      STDMETHOD_(void, SetDescription)(
@@ -138,7 +138,7 @@ index 3f69243671..94920bf332 100644
  /// An effect uses this interface to configure border generation.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("4998735c-3a19-473c-9781-656847e3a347") ID2D1BorderTransform  : public ID2D1ConcreteTransform
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("4998735c-3a19-473c-9781-656847e3a347") ID2D1BorderTransform  : public ID2D1ConcreteTransform
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("4998735c-3a19-473c-9781-656847e3a347") ID2D1BorderTransform  : public ID2D1ConcreteTransform
  {
      
      STDMETHOD_(void, SetExtendModeX)(
@@ -147,7 +147,7 @@ index 3f69243671..94920bf332 100644
  /// pass.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("3fe6adea-7643-4f53-bd14-a0ce63f24042") ID2D1OffsetTransform  : public ID2D1TransformNode
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("3fe6adea-7643-4f53-bd14-a0ce63f24042") ID2D1OffsetTransform  : public ID2D1TransformNode
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("3fe6adea-7643-4f53-bd14-a0ce63f24042") ID2D1OffsetTransform  : public ID2D1TransformNode
  {
      
      STDMETHOD_(void, SetOffset)(
@@ -165,7 +165,7 @@ index 3f69243671..94920bf332 100644
  /// constructor and registration information.
  /// </summary>
 -interface DX_DECLARE_INTERFACE("a248fd3f-3e6c-4e63-9f03-7f68ecc91db9") ID2D1EffectImpl  : public IUnknown
-+interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a248fd3f-3e6c-4e63-9f03-7f68ecc91db9") ID2D1EffectImpl  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a248fd3f-3e6c-4e63-9f03-7f68ecc91db9") ID2D1EffectImpl  : public IUnknown
  {
      
      /// <summary>

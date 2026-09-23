@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..56a3b90253 100644
+index f99e9294f5..bd31d3b3b4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -1168,7 +1168,13 @@ index f99e9294f5..56a3b90253 100644
  #ifndef _MAC
  LRESULT
  WINAPI
-@@ -4149,7 +4150,7 @@ DefWindowProcA(
+@@ -4144,12 +4145,12 @@ WINAPI
+ LRESULT
+ CALLBACK
+ #endif
+-DefWindowProcA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") DefWindowProcA(
+     _In_ HWND hWnd,
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -1177,6 +1183,15 @@ index f99e9294f5..56a3b90253 100644
  #ifndef _MAC
  LRESULT
  WINAPI
+@@ -4157,7 +4158,7 @@ WINAPI
+ LRESULT
+ CALLBACK
+ #endif
+-DefWindowProcW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") DefWindowProcW(
+     _In_ HWND hWnd,
+     _In_ UINT Msg,
+     _In_ WPARAM wParam,
 @@ -4168,7 +4169,7 @@ DefWindowProcW(
  #define DefWindowProc  DefWindowProcA
  #endif // !UNICODE
@@ -1186,7 +1201,7 @@ index f99e9294f5..56a3b90253 100644
  VOID
  WINAPI
  PostQuitMessage(
-@@ -4176,7 +4177,7 @@ PostQuitMessage(
+@@ -4176,19 +4177,19 @@ PostQuitMessage(
  
  #ifdef STRICT
  
@@ -1194,8 +1209,10 @@ index f99e9294f5..56a3b90253 100644
 +_Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
- CallWindowProcA(
-@@ -4185,7 +4186,7 @@ CallWindowProcA(
+-CallWindowProcA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") CallWindowProcA(
+     _In_ WNDPROC lpPrevWndFunc,
+     _In_ HWND hWnd,
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -1203,8 +1220,12 @@ index f99e9294f5..56a3b90253 100644
 +_Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
- CallWindowProcW(
-@@ -4202,7 +4203,7 @@ CallWindowProcW(
+-CallWindowProcW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") CallWindowProcW(
+     _In_ WNDPROC lpPrevWndFunc,
+     _In_ HWND hWnd,
+     _In_ UINT Msg,
+@@ -4202,19 +4203,19 @@ CallWindowProcW(
  
  #else /* !STRICT */
  
@@ -1212,8 +1233,10 @@ index f99e9294f5..56a3b90253 100644
 +_Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
- CallWindowProcA(
-@@ -4211,7 +4212,7 @@ CallWindowProcA(
+-CallWindowProcA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") CallWindowProcA(
+     _In_ FARPROC lpPrevWndFunc,
+     _In_ HWND hWnd,
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -1221,7 +1244,11 @@ index f99e9294f5..56a3b90253 100644
 +_Windows_SupportedOS_Windows2000_ WINUSERAPI
  LRESULT
  WINAPI
- CallWindowProcW(
+-CallWindowProcW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") CallWindowProcW(
+     _In_ FARPROC lpPrevWndFunc,
+     _In_ HWND hWnd,
+     _In_ UINT Msg,
 @@ -4234,7 +4235,7 @@ CallWindowProcW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1936,7 +1963,13 @@ index f99e9294f5..56a3b90253 100644
  long
  WINAPI
  GetDialogBaseUnits(VOID);
-@@ -5307,7 +5308,7 @@ DefDlgProcA(
+@@ -5302,12 +5303,12 @@ WINAPI
+ LRESULT
+ CALLBACK
+ #endif
+-DefDlgProcA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") DefDlgProcA(
+     _In_ HWND hDlg,
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -1945,6 +1978,15 @@ index f99e9294f5..56a3b90253 100644
  #ifndef _MAC
  LRESULT
  WINAPI
+@@ -5315,7 +5316,7 @@ WINAPI
+ LRESULT
+ CALLBACK
+ #endif
+-DefDlgProcW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") DefDlgProcW(
+     _In_ HWND hDlg,
+     _In_ UINT Msg,
+     _In_ WPARAM wParam,
 @@ -5336,14 +5337,14 @@ typedef enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
  DEFINE_ENUM_FLAG_OPERATORS(DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS);
  #endif
@@ -5429,6 +5471,38 @@ index f99e9294f5..56a3b90253 100644
  
  
  #ifndef NOWH
+@@ -10327,13 +10332,13 @@ GetWindow(
+ WINUSERAPI
+ HHOOK
+ WINAPI
+-SetWindowsHookA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SetWindowsHookA(
+     _In_ int nFilterType,
+     _In_ HOOKPROC pfnFilterProc);
+ WINUSERAPI
+ HHOOK
+ WINAPI
+-SetWindowsHookW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") SetWindowsHookW(
+     _In_ int nFilterType,
+     _In_ HOOKPROC pfnFilterProc);
+ #ifdef UNICODE
+@@ -10347,13 +10352,13 @@ SetWindowsHookW(
+ WINUSERAPI
+ HOOKPROC
+ WINAPI
+-SetWindowsHookA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") SetWindowsHookA(
+     _In_ int nFilterType,
+     _In_ HOOKPROC pfnFilterProc);
+ WINUSERAPI
+ HOOKPROC
+ WINAPI
+-SetWindowsHookW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") SetWindowsHookW(
+     _In_ int nFilterType,
+     _In_ HOOKPROC pfnFilterProc);
+ #ifdef UNICODE
 @@ -10371,19 +10376,19 @@ UnhookWindowsHook(
      _In_ int nCode,
      _In_ HOOKPROC pfnFilterProc);
@@ -5998,7 +6072,13 @@ index f99e9294f5..56a3b90253 100644
  #ifndef _MAC
  LRESULT
  WINAPI
-@@ -12164,7 +12169,7 @@ DefMDIChildProcA(
+@@ -12159,12 +12164,12 @@ WINAPI
+ LRESULT
+ CALLBACK
+ #endif
+-DefMDIChildProcA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") DefMDIChildProcA(
+     _In_ HWND hWnd,
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -6007,6 +6087,15 @@ index f99e9294f5..56a3b90253 100644
  #ifndef _MAC
  LRESULT
  WINAPI
+@@ -12172,7 +12177,7 @@ WINAPI
+ LRESULT
+ CALLBACK
+ #endif
+-DefMDIChildProcW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") DefMDIChildProcW(
+     _In_ HWND hWnd,
+     _In_ UINT uMsg,
+     _In_ WPARAM wParam,
 @@ -12185,7 +12190,7 @@ DefMDIChildProcW(
  
  #ifndef NOMSG

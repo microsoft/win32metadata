@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h b/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
-index c3e0a26832..6e79a8441d 100644
+index c3e0a26832..c244059934 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Cpl.h
 @@ -28,6 +28,7 @@
@@ -14,8 +14,8 @@ index c3e0a26832..6e79a8441d 100644
  
  /* A function prototype for CPlApplet() */
  
-+_Windows_SupportedOS_WindowsXP_
-+_Windows_SupportedOS_Server2000_
++
++
  typedef LONG (APIENTRY *APPLET_PROC)(HWND hwndCpl, UINT msg, LPARAM lParam1, LPARAM lParam2);
  
  /* The data structure CPlApplet() must fill in. */

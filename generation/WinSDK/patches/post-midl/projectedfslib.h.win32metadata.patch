@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
-index 2f8b77ff0e..cf852a2135 100644
+index 2f8b77ff0e..914e6be689 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
 @@ -37,6 +37,7 @@ Abstract:
@@ -48,7 +48,7 @@ index 2f8b77ff0e..cf852a2135 100644
  //
  
 -typedef struct PRJ_CALLBACKS PRJ_CALLBACKS;
-+typedef struct _Windows_SupportedOS_17763_ PRJ_CALLBACKS PRJ_CALLBACKS;
++typedef struct  PRJ_CALLBACKS PRJ_CALLBACKS;
  
  #pragma endregion
  

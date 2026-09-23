@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
-index a7032a870e..ba8a0a18ed 100644
+index a7032a870e..6077b808b8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -10,6 +10,15 @@ index a7032a870e..ba8a0a18ed 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -240,7 +241,7 @@ typedef VIRTUALCHANNELINIT FAR * PVIRTUALCHANNELINIT;
+ typedef UINT VCAPITYPE VIRTUALCHANNELOPEN(
+                                 LPVOID                 pInitHandle,
+                                 LPDWORD                pOpenHandle,
+-                                PCHAR                  pChannelName,
++                                _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR                  pChannelName,
+                                 PCHANNEL_OPEN_EVENT_FN pChannelOpenEventProc);
+ 
+ typedef VIRTUALCHANNELOPEN FAR * PVIRTUALCHANNELOPEN;
 @@ -316,7 +317,7 @@ typedef VIRTUALCHANNELWRITE FAR * PVIRTUALCHANNELWRITE;
  /*                                                                          */
  /* Description: Virtual Channel entry points passed to VirtualChannelEntry  */
