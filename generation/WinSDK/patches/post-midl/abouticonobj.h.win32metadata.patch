@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIconObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIconObj.h
-index 612cefa483..1a0b12ba1b 100644
+index 612cefa483..99192b936f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIconObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutIconObj.h
 @@ -1,3 +1,4 @@
@@ -7,21 +7,22 @@ index 612cefa483..1a0b12ba1b 100644
  /**
   * @file
   * alljoyn_abouticonobj represents a bus object that implements the org.alljoyn.Icon interface.
-@@ -45,7 +46,7 @@ typedef struct _alljoyn_abouticonobj_handle* alljoyn_abouticonobj;
+@@ -45,15 +46,15 @@ typedef struct _alljoyn_abouticonobj_handle* alljoyn_abouticonobj;
   *
   * @return The allocated alljoyn_abouticonobj.
   */
 -extern AJ_API alljoyn_abouticonobj AJ_CALL alljoyn_abouticonobj_create(alljoyn_busattachment bus,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_abouticonobj AJ_CALL alljoyn_abouticonobj_create(alljoyn_busattachment bus,
-                                                                        alljoyn_abouticon icon);
+-                                                                       alljoyn_abouticon icon);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_abouticonobj AJ_CALL alljoyn_abouticonobj_create(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_abouticon icon);
  
  /**
-@@ -53,7 +54,7 @@ extern AJ_API alljoyn_abouticonobj AJ_CALL alljoyn_abouticonobj_create(alljoyn_b
+  * Free an alljoyn_abouticonobj object.
   *
   * @param icon the alljoyn_abouticonobj to be freed.
   */
 -extern AJ_API void AJ_CALL alljoyn_abouticonobj_destroy(alljoyn_abouticonobj icon);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_abouticonobj_destroy(alljoyn_abouticonobj icon);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_abouticonobj_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_abouticonobj icon);
  
  #ifdef __cplusplus
  } /* extern "C" */

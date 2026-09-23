@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
-index 151673ada9..6f62466cb8 100644
+index 151673ada9..f3d2883751 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
 @@ -1,3 +1,4 @@
@@ -16,9 +16,10 @@ index 151673ada9..6f62466cb8 100644
 + 
  WindowsCreateString(
 -    _In_reads_opt_(length) PCNZWCH sourceString,
-+    _WIN32META_ANNOTATION_("win32metadata:const") _In_reads_opt_(length) PCNZWCH sourceString,
-     UINT32 length,
+-    UINT32 length,
 -    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
++    _WIN32META_ANNOTATION_("win32metadata:const") _In_reads_opt_(length) PCNZWCH sourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
 +    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* string
      );
  
@@ -27,10 +28,11 @@ index 151673ada9..6f62466cb8 100644
 + 
  WindowsCreateStringReference(
 -    _In_reads_opt_(length+1) PCWSTR sourceString,
-+    _In_reads_opt_(length+1) _Win32_Retained_ PCWSTR sourceString,
-     UINT32 length,
+-    UINT32 length,
 -    _Out_ HSTRING_HEADER* hstringHeader,
 -    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
++    _In_reads_opt_(length+1) _Win32_Retained_ PCWSTR sourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
 +    _Out_ _Win32_Retained_ HSTRING_HEADER* hstringHeader,
 +    _Win32_RAIIFree_(WindowsDeleteString) _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
      );
@@ -95,8 +97,9 @@ index 151673ada9..6f62466cb8 100644
 + 
  WindowsSubstring(
      _In_opt_ HSTRING string,
-     UINT32 startIndex,
+-    UINT32 startIndex,
 -    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 startIndex,
 +    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
      );
  
@@ -105,9 +108,11 @@ index 151673ada9..6f62466cb8 100644
 + 
  WindowsSubstringWithSpecifiedLength(
      _In_opt_ HSTRING string,
-     UINT32 startIndex,
-     UINT32 length,
+-    UINT32 startIndex,
+-    UINT32 length,
 -    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 startIndex,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
 +    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
      );
  
@@ -157,7 +162,8 @@ index 151673ada9..6f62466cb8 100644
 +_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
 + 
  WindowsPreallocateStringBuffer(
-     UINT32 length,
+-    UINT32 length,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
      _Outptr_result_buffer_(length+1) WCHAR** charBuffer,
 -    _Outptr_ _Result_nullonfailure_ HSTRING_BUFFER* bufferHandle
 +    _Win32_RAIIFree_(WindowsDeleteStringBuffer, -1, 0) _Outptr_ _Result_nullonfailure_ HSTRING_BUFFER* bufferHandle
@@ -210,23 +216,35 @@ index 151673ada9..6f62466cb8 100644
  HSTRING_UserFree(
      __RPC__in ULONG* pFlags,
      __RPC__in HSTRING* ppidl
-@@ -198,7 +221,8 @@ HSTRING_UserFree(
+@@ -197,11 +220,12 @@ HSTRING_UserFree(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  // HSTRING Inspection
- typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK)(_In_ void* context, UINT_PTR readAddress, UINT32 length, _Out_writes_(length) BYTE* buffer);
+-typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK)(_In_ void* context, UINT_PTR readAddress, UINT32 length, _Out_writes_(length) BYTE* buffer);
 -STDAPI
++typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK)(_In_ void* context, _WIN32META_ANNOTATION_("win32metadata:in") UINT_PTR readAddress, _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length, _Out_writes_(length) BYTE* buffer);
 +_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
 + 
  WindowsInspectString(
      _In_ UINT_PTR targetHString,
-     USHORT machine,
-@@ -210,7 +234,8 @@ WindowsInspectString(
+-    USHORT machine,
++    _WIN32META_ANNOTATION_("win32metadata:in") USHORT machine,
+     _In_ PINSPECT_HSTRING_CALLBACK callback,
+     _In_opt_ void* context,
+     _Out_ UINT32* length,
+@@ -209,11 +233,12 @@ WindowsInspectString(
+     );
  
  // HSTRING Inspection 2
- typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK2)(_In_ void* context, UINT64 readAddress, UINT32 length, _Out_writes_(length) BYTE* buffer);
+-typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK2)(_In_ void* context, UINT64 readAddress, UINT32 length, _Out_writes_(length) BYTE* buffer);
 -STDAPI
++typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK2)(_In_ void* context, _WIN32META_ANNOTATION_("win32metadata:in") UINT64 readAddress, _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length, _Out_writes_(length) BYTE* buffer);
 +_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-1.dll") STDAPI
 + 
  WindowsInspectString2(
      _In_ UINT64 targetHString,
-     USHORT machine,
+-    USHORT machine,
++    _WIN32META_ANNOTATION_("win32metadata:in") USHORT machine,
+     _In_ PINSPECT_HSTRING_CALLBACK2 callback,
+     _In_opt_ void* context,
+     _Out_ UINT32* length,

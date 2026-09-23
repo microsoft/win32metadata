@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h b/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h
-index abc4b80aa0..091f4ecfea 100644
+index abc4b80aa0..4f1791753d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/p2p.h
 @@ -1,3 +1,4 @@
@@ -356,7 +356,8 @@ index abc4b80aa0..091f4ecfea 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("p2p.dll") NOT_BUILD_WINDOWS_DEPRECATE
  HRESULT WINAPI PeerGroupConnectByAddress(
                  _In_  HGROUP                            hGroup,
-                       ULONG                             cAddresses,
+-                      ULONG                             cAddresses,
++                      _WIN32META_ANNOTATION_("win32metadata:in") ULONG                             cAddresses,
                  _In_reads_(cAddresses) PPEER_ADDRESS   pAddresses);
  #endif
  

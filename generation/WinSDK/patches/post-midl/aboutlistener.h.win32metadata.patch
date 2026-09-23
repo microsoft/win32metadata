@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h
-index ac1c73d4f1..ad66f8420c 100644
+index ac1c73d4f1..2122ce07b9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h
 @@ -1,3 +1,4 @@
@@ -23,14 +23,15 @@ index ac1c73d4f1..ad66f8420c 100644
   * @return allocated alljoyn_aboutlistener
   */
 -extern AJ_API alljoyn_aboutlistener AJ_CALL alljoyn_aboutlistener_create(const alljoyn_aboutlistener_callback* callback,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutlistener AJ_CALL alljoyn_aboutlistener_create(const alljoyn_aboutlistener_callback* callback,
-                                                                          const void* context);
+-                                                                         const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutlistener AJ_CALL alljoyn_aboutlistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_aboutlistener_callback* callback,
++                                                                         _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
  
  /**
   * Free an alljoyn_aboutlistener.
   */
 -extern AJ_API void AJ_CALL alljoyn_aboutlistener_destroy(alljoyn_aboutlistener listener);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutlistener_destroy(alljoyn_aboutlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutlistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutlistener listener);
  
  #ifdef __cplusplus
  } /* extern "C" */

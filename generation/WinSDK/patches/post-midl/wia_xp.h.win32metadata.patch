@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wia_xp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wia_xp.h
-index 6ba167ec26..78748b19e2 100644
+index 6ba167ec26..97d7cf9a86 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wia_xp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wia_xp.h
 @@ -1,3 +1,4 @@
@@ -15,7 +15,7 @@ index 6ba167ec26..78748b19e2 100644
 -unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
 -unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
 -void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
-+_Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
++_Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     __RPC__in unsigned long *, _WIN32META_ANNOTATION_("win32metadata:in") unsigned long            , __RPC__in LPSAFEARRAY * ); 
 +_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
 +_Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
 +_Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
@@ -30,7 +30,7 @@ index 6ba167ec26..78748b19e2 100644
 -unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
 -unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
 -void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, _WIN32META_ANNOTATION_("win32metadata:in") unsigned long            , __RPC__in LPSAFEARRAY * ); 
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("oleaut32.dll") void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 

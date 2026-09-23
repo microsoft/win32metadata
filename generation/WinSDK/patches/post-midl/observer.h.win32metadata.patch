@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h
-index a7c470c2a6..16e102f267 100644
+index a7c470c2a6..a702da3755 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Observer.h
 @@ -1,3 +1,4 @@
@@ -12,7 +12,7 @@ index a7c470c2a6..16e102f267 100644
   * alljoyn_proxybusobject, and will destroy it when the refcount reaches zero.
   */
 -AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_proxybusobject_ref_create(alljoyn_proxybusobject proxy);
-+_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_proxybusobject_ref_create(alljoyn_proxybusobject proxy);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_proxybusobject_ref_create(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject proxy);
  
  /**
   * Get the alljoyn_proxybusobject managed by this reference.
@@ -21,7 +21,7 @@ index a7c470c2a6..16e102f267 100644
   * @note This does not increase the refcount of the reference.
   */
 -AJ_API alljoyn_proxybusobject AJ_CALL alljoyn_proxybusobject_ref_get(alljoyn_proxybusobject_ref ref);
-+_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_proxybusobject AJ_CALL alljoyn_proxybusobject_ref_get(alljoyn_proxybusobject_ref ref);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API alljoyn_proxybusobject AJ_CALL alljoyn_proxybusobject_ref_get(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_ref ref);
  
  /**
   * Increase the refcount of the alljoyn_proxybusobject reference.
@@ -29,7 +29,7 @@ index a7c470c2a6..16e102f267 100644
   * @param ref the alljoyn_proxybusobject_ref to dereference
   */
 -AJ_API void AJ_CALL alljoyn_proxybusobject_ref_incref(alljoyn_proxybusobject_ref ref);
-+_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_proxybusobject_ref_incref(alljoyn_proxybusobject_ref ref);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_proxybusobject_ref_incref(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_ref ref);
  
  /**
   * Decrease the refcount of the alljoyn_proxybusobject reference.
@@ -38,7 +38,7 @@ index a7c470c2a6..16e102f267 100644
   * @param ref the alljoyn_proxybusobject_ref to dereference
   */
 -AJ_API void AJ_CALL alljoyn_proxybusobject_ref_decref(alljoyn_proxybusobject_ref ref);
-+_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_proxybusobject_ref_decref(alljoyn_proxybusobject_ref ref);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API void AJ_CALL alljoyn_proxybusobject_ref_decref(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_ref ref);
  
  /* The observerlistener part */
  
@@ -65,86 +65,102 @@ index a7c470c2a6..16e102f267 100644
   * Allocate a new alljoyn_observerlistener.
   */
 -extern AJ_API alljoyn_observerlistener AJ_CALL alljoyn_observerlistener_create(const alljoyn_observerlistener_callback* callback,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_observerlistener AJ_CALL alljoyn_observerlistener_create(const alljoyn_observerlistener_callback* callback,
-                                                                                const void* context);
+-                                                                               const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_observerlistener AJ_CALL alljoyn_observerlistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_observerlistener_callback* callback,
++                                                                               _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
  
  /**
   * Free an alljoyn_observerlistener.
   */
 -extern AJ_API void AJ_CALL alljoyn_observerlistener_destroy(alljoyn_observerlistener listener);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observerlistener_destroy(alljoyn_observerlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observerlistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observerlistener listener);
  
  /* the observer part */
  
-@@ -180,7 +181,7 @@ typedef struct _alljoyn_observer_handle* alljoyn_observer;
+@@ -180,16 +181,16 @@ typedef struct _alljoyn_observer_handle* alljoyn_observer;
   *     before creation of the Observer.
   *   - mandatoryInterfaces must not be empty or NULL
   */
 -extern AJ_API alljoyn_observer AJ_CALL alljoyn_observer_create(alljoyn_busattachment bus,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_observer AJ_CALL alljoyn_observer_create(alljoyn_busattachment bus,
-                                                                const char* mandatoryInterfaces[],
-                                                                size_t numMandatoryInterfaces);
+-                                                               const char* mandatoryInterfaces[],
+-                                                               size_t numMandatoryInterfaces);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_observer AJ_CALL alljoyn_observer_create(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                               _WIN32META_ANNOTATION_("win32metadata:in") const char* mandatoryInterfaces[],
++                                                               _WIN32META_ANNOTATION_("win32metadata:in") size_t numMandatoryInterfaces);
  
-@@ -189,7 +190,7 @@ extern AJ_API alljoyn_observer AJ_CALL alljoyn_observer_create(alljoyn_busattach
+ /**
+  * Destroy an alljoyn_observer.
   *
   * @param observer the alljoyn_observer to destroy.
   */
 -extern AJ_API void AJ_CALL alljoyn_observer_destroy(alljoyn_observer observer);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_destroy(alljoyn_observer observer);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer);
  
  /**
   * Register a listener.
-@@ -199,7 +200,7 @@ extern AJ_API void AJ_CALL alljoyn_observer_destroy(alljoyn_observer observer);
+@@ -199,9 +200,9 @@ extern AJ_API void AJ_CALL alljoyn_observer_destroy(alljoyn_observer observer);
   * @param triggerOnExisting trigger object_discovered callbacks for
   *                          already-discovered objects
   */
 -extern AJ_API void AJ_CALL alljoyn_observer_registerlistener(alljoyn_observer observer,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_registerlistener(alljoyn_observer observer,
-                                                              alljoyn_observerlistener listener,
-                                                              QCC_BOOL triggerOnExisting);
+-                                                             alljoyn_observerlistener listener,
+-                                                             QCC_BOOL triggerOnExisting);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_registerlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer,
++                                                             _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observerlistener listener,
++                                                             _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL triggerOnExisting);
  
-@@ -209,7 +210,7 @@ extern AJ_API void AJ_CALL alljoyn_observer_registerlistener(alljoyn_observer ob
+ /**
+  * Unregister a listener.
+@@ -209,8 +210,8 @@ extern AJ_API void AJ_CALL alljoyn_observer_registerlistener(alljoyn_observer ob
   * @param observer the observer this call is made for
   * @param listener the listener to unregister
   */
 -extern AJ_API void AJ_CALL alljoyn_observer_unregisterlistener(alljoyn_observer observer,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_unregisterlistener(alljoyn_observer observer,
-                                                                alljoyn_observerlistener listener);
+-                                                               alljoyn_observerlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_unregisterlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer,
++                                                               _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observerlistener listener);
  
  /**
+  * Unregister all listeners.
 @@ -220,7 +221,7 @@ extern AJ_API void AJ_CALL alljoyn_observer_unregisterlistener(alljoyn_observer
   *
   * @param observer the observer this call is made for
   */
 -extern AJ_API void AJ_CALL alljoyn_observer_unregisteralllisteners(alljoyn_observer observer);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_unregisteralllisteners(alljoyn_observer observer);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_observer_unregisteralllisteners(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer);
  
  /**
   * Get a reference to a proxy object.
-@@ -235,7 +236,7 @@ extern AJ_API void AJ_CALL alljoyn_observer_unregisteralllisteners(alljoyn_obser
+@@ -235,9 +236,9 @@ extern AJ_API void AJ_CALL alljoyn_observer_unregisteralllisteners(alljoyn_obser
   * @param objectPath    The path of the object you want to retrieve.
   * @return an alljoyn_proxybusobject_ref or NULL
   */
 -extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_get(alljoyn_observer observer,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_get(alljoyn_observer observer,
-                                                                       const char* uniqueBusName,
-                                                                       const char* objectPath);
+-                                                                      const char* uniqueBusName,
+-                                                                      const char* objectPath);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_get(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer,
++                                                                      _WIN32META_ANNOTATION_("win32metadata:in") const char* uniqueBusName,
++                                                                      _WIN32META_ANNOTATION_("win32metadata:in") const char* objectPath);
  
+ /**
+  * Get a reference to the first proxy object.
 @@ -253,7 +254,7 @@ extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_get(alljoyn_ob
   * @param observer the observer this call is made for
   * @return an alljoyn_proxybusobject_ref or NULL
   */
 -extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getfirst(alljoyn_observer observer);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getfirst(alljoyn_observer observer);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getfirst(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer);
  
  /**
   * Get a reference to the next proxy object.
-@@ -270,7 +271,7 @@ extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getfirst(alljo
+@@ -270,8 +271,8 @@ extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getfirst(alljo
   * @param proxyref This method will return the proxy object immediately following this one
   * @return an alljoyn_proxybusobject or NULL
   */
 -extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getnext(alljoyn_observer observer,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getnext(alljoyn_observer observer,
-                                                                           alljoyn_proxybusobject_ref proxyref);
+-                                                                          alljoyn_proxybusobject_ref proxyref);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_proxybusobject_ref AJ_CALL alljoyn_observer_getnext(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_observer observer,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject_ref proxyref);
  
  #ifdef __cplusplus
+ } /* extern "C" */

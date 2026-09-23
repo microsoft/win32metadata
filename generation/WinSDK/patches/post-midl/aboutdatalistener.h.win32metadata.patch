@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutDataListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutDataListener.h
-index 6317086472..c1e2760afd 100644
+index 6317086472..99f7d37297 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutDataListener.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutDataListener.h
 @@ -1,3 +1,4 @@
@@ -25,21 +25,22 @@ index 6317086472..c1e2760afd 100644
  
  /**
   * Struct containing callbacks used for creation of an alljoyn_aboutdatalistener.
-@@ -126,7 +127,7 @@ typedef struct {
+@@ -126,15 +127,15 @@ typedef struct {
   * This object will invoke the provided callbacks passing in the provided context.
   * @return The allocated alljoyn_aboutdatalistener.
   */
 -extern AJ_API alljoyn_aboutdatalistener AJ_CALL alljoyn_aboutdatalistener_create(const alljoyn_aboutdatalistener_callbacks* callbacks,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutdatalistener AJ_CALL alljoyn_aboutdatalistener_create(const alljoyn_aboutdatalistener_callbacks* callbacks,
-                                                                                  const void* context);
+-                                                                                 const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutdatalistener AJ_CALL alljoyn_aboutdatalistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_aboutdatalistener_callbacks* callbacks,
++                                                                                 _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
  
  /**
-@@ -134,7 +135,7 @@ extern AJ_API alljoyn_aboutdatalistener AJ_CALL alljoyn_aboutdatalistener_create
+  * Free an alljoyn_aboutdatalistener object.
   *
   * @param listener The alljoyn_aboutdatalistener to be freed.
   */
 -extern AJ_API void AJ_CALL alljoyn_aboutdatalistener_destroy(alljoyn_aboutdatalistener listener);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutdatalistener_destroy(alljoyn_aboutdatalistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutdatalistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutdatalistener listener);
  
  
  #ifdef __cplusplus

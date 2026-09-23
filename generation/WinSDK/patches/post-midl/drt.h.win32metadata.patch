@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
-index 8690977834..1a7f04d46f 100644
+index 8690977834..bc66c1722e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
 @@ -1,3 +1,4 @@
@@ -70,10 +70,12 @@ index 8690977834..1a7f04d46f 100644
  
 -HRESULT WINAPI DrtCreateIpv6UdpTransport(
 -                DRT_SCOPE scope,
+-                ULONG dwScopeId,
+-                ULONG dwLocalityThreshold,
 +_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drttransport.dll") HRESULT WINAPI DrtCreateIpv6UdpTransport(
-+                _Win32_AssociatedEnum_(DRT_SCOPE) DRT_SCOPE scope,
-                 ULONG dwScopeId,
-                 ULONG dwLocalityThreshold,
++                _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(DRT_SCOPE) DRT_SCOPE scope,
++                _WIN32META_ANNOTATION_("win32metadata:in") ULONG dwScopeId,
++                _WIN32META_ANNOTATION_("win32metadata:in") ULONG dwLocalityThreshold,
      _Inout_     USHORT *pwPort,
      _Out_       HDRT_TRANSPORT *phTransport);
  
@@ -131,7 +133,7 @@ index 8690977834..1a7f04d46f 100644
      _In_        HDRT hDrt,
      _In_        ULONG          ulEventDataLen,
      _Out_writes_bytes_all_(ulEventDataLen) DRT_EVENT_DATA *pEventData);
-@@ -497,24 +498,24 @@ HRESULT WINAPI DrtGetEventData(
+@@ -497,65 +498,65 @@ HRESULT WINAPI DrtGetEventData(
  //////////////////////////////////////////////////////////////////////////////
  // DRT Key Registration APIs
  
@@ -160,7 +162,9 @@ index 8690977834..1a7f04d46f 100644
      _In_        HDRT hDrt,
      _In_        DRT_DATA *pKey,
      _In_opt_    const DRT_SEARCH_INFO *pInfo,
-@@ -523,39 +524,39 @@ HRESULT WINAPI DrtStartSearch(
+-                ULONG timeout,
++                _WIN32META_ANNOTATION_("win32metadata:in") ULONG timeout,
+     _In_        HANDLE hEvent,
      _In_opt_    const PVOID pvContext,
      _Out_       HDRT_SEARCH_CONTEXT* hSearchContext);
  

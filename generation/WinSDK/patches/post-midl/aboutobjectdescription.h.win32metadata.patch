@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObjectDescription.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObjectDescription.h
-index 32ded98c30..42af234ec0 100644
+index 32ded98c30..c4e60cbfb2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObjectDescription.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutObjectDescription.h
 @@ -1,3 +1,4 @@
@@ -21,97 +21,124 @@ index 32ded98c30..42af234ec0 100644
   * @return The allocated alljoyn_aboutobjectdescription.
   */
 -extern AJ_API alljoyn_aboutobjectdescription AJ_CALL alljoyn_aboutobjectdescription_create_full(const alljoyn_msgarg arg);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutobjectdescription AJ_CALL alljoyn_aboutobjectdescription_create_full(const alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutobjectdescription AJ_CALL alljoyn_aboutobjectdescription_create_full(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg);
  
  /**
   * Fill in the ObjectDescription fields using an alljoyn_msgarg
-@@ -85,7 +86,7 @@ extern AJ_API alljoyn_aboutobjectdescription AJ_CALL alljoyn_aboutobjectdescript
+@@ -85,15 +86,15 @@ extern AJ_API alljoyn_aboutobjectdescription AJ_CALL alljoyn_aboutobjectdescript
   *
   * @return ER_OK on success
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_createfrommsgarg(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_createfrommsgarg(alljoyn_aboutobjectdescription description,
-                                                                               const alljoyn_msgarg arg);
+-                                                                              const alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_createfrommsgarg(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                              _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg);
  
  /**
-@@ -93,7 +94,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_createfrommsgarg(al
+  * Free an alljoyn_aboutobjectdescription object.
   *
   * @param description The alljoyn_aboutobjectdescription to be freed.
   */
 -extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_destroy(alljoyn_aboutobjectdescription description);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_destroy(alljoyn_aboutobjectdescription description);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description);
  
  /**
   * Get a list of the paths that are added to this AboutObjectDescription.
-@@ -108,7 +109,7 @@ extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_destroy(alljoyn_abouto
+@@ -108,9 +109,9 @@ extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_destroy(alljoyn_abouto
   *    returned in the `paths` array.
   *
   */
 -extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getpaths(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getpaths(alljoyn_aboutobjectdescription description,
-                                                                      const char** paths,
-                                                                      size_t numPaths);
+-                                                                     const char** paths,
+-                                                                     size_t numPaths);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getpaths(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") const char** paths,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") size_t numPaths);
  
-@@ -127,7 +128,7 @@ extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getpaths(alljoyn_abo
+ /**
+  * Get a list of interfaces advertised at the given path that are part of
+@@ -127,10 +128,10 @@ extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getpaths(alljoyn_abo
   *    then only `numInterfaces` of interfaces will be returned in the
   *    `interfaces` array.
   */
 -extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfaces(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfaces(alljoyn_aboutobjectdescription description,
-                                                                           const char* path,
-                                                                           const char** interfaces,
-                                                                           size_t numInterfaces);
-@@ -148,7 +149,7 @@ extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfaces(alljoy
+-                                                                          const char* path,
+-                                                                          const char** interfaces,
+-                                                                          size_t numInterfaces);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfaces(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") const char* path,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") const char** interfaces,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") size_t numInterfaces);
+ 
+ /**
+  * Get a list of the paths for a given interface. Its possible to have the
+@@ -148,10 +149,10 @@ extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfaces(alljoy
   *    array
   *
   */
 -extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfacepaths(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfacepaths(alljoyn_aboutobjectdescription description,
-                                                                               const char* interfaceName,
-                                                                               const char** paths,
-                                                                               size_t numPaths);
+-                                                                              const char* interfaceName,
+-                                                                              const char** paths,
+-                                                                              size_t numPaths);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfacepaths(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                              _WIN32META_ANNOTATION_("win32metadata:in") const char* interfaceName,
++                                                                              _WIN32META_ANNOTATION_("win32metadata:in") const char** paths,
++                                                                              _WIN32META_ANNOTATION_("win32metadata:in") size_t numPaths);
+ 
+ /**
+  * Clear all the contents of this AboutObjectDescription
 @@ -160,7 +161,7 @@ extern AJ_API size_t AJ_CALL alljoyn_aboutobjectdescription_getinterfacepaths(al
   *
   * @return ER_OK
   */
 -extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_clear(alljoyn_aboutobjectdescription description);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_clear(alljoyn_aboutobjectdescription description);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_clear(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description);
  
  /**
   * Returns true if the given path is found
-@@ -170,7 +171,7 @@ extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_clear(alljoyn_aboutobj
+@@ -170,8 +171,8 @@ extern AJ_API void AJ_CALL alljoyn_aboutobjectdescription_clear(alljoyn_aboutobj
   *
   * @return true if the path is found
   */
 -extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_haspath(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_haspath(alljoyn_aboutobjectdescription description,
-                                                                   const char* path);
+-                                                                  const char* path);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_haspath(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                  _WIN32META_ANNOTATION_("win32metadata:in") const char* path);
  
  /**
-@@ -181,7 +182,7 @@ extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_haspath(alljoyn_abouto
+  * Returns true if the given interface name is found in any path
+@@ -181,8 +182,8 @@ extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_haspath(alljoyn_abouto
   *
   * @return true if the interface is found
   */
 -extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterface(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterface(alljoyn_aboutobjectdescription description,
-                                                                        const char* interfaceName);
+-                                                                       const char* interfaceName);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") const char* interfaceName);
  
  /**
-@@ -193,7 +194,7 @@ extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterface(alljoyn_a
+  * Returns true if the given interface name is found at the given path
+@@ -193,9 +194,9 @@ extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterface(alljoyn_a
   *
   * @return true if the interface is found at the given path
   */
 -extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterfaceatpath(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterfaceatpath(alljoyn_aboutobjectdescription description,
-                                                                              const char* path,
-                                                                              const char* interfaceName);
+-                                                                             const char* path,
+-                                                                             const char* interfaceName);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterfaceatpath(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                             _WIN32META_ANNOTATION_("win32metadata:in") const char* path,
++                                                                             _WIN32META_ANNOTATION_("win32metadata:in") const char* interfaceName);
  
-@@ -204,7 +205,7 @@ extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterfaceatpath(all
+ /**
+  * @param[in] description the alljoyn_aboutobjectdescription object this call is made for
+@@ -204,8 +205,8 @@ extern AJ_API bool AJ_CALL alljoyn_aboutobjectdescription_hasinterfaceatpath(all
   *
   * @return ER_OK if successful
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_getmsgarg(alljoyn_aboutobjectdescription description,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_getmsgarg(alljoyn_aboutobjectdescription description,
-                                                                        alljoyn_msgarg msgArg);
+-                                                                       alljoyn_msgarg msgArg);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutobjectdescription_getmsgarg(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutobjectdescription description,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg msgArg);
  
  #ifdef __cplusplus
+ } /* extern "C" */

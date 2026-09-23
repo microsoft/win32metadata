@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NetCon.h b/generation/WinSDK/RecompiledIdlHeaders/um/NetCon.h
-index bd008fba59..23175aac35 100644
+index bd008fba59..884ed6778e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NetCon.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NetCon.h
 @@ -1,3 +1,4 @@
@@ -21,11 +21,11 @@ index bd008fba59..23175aac35 100644
  
  
 -STDAPI_(VOID) NcFreeNetconProperties (NETCON_PROPERTIES* pProps);
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netshell.dll") STDAPI_(VOID) NcFreeNetconProperties (NETCON_PROPERTIES* pProps);
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netshell.dll") STDAPI_(VOID) NcFreeNetconProperties (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") NETCON_PROPERTIES* pProps);
  
  
 -STDAPI_(BOOL) NcIsValidConnectionName (PCWSTR pszwName);
-+_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netshell.dll") STDAPI_(BOOL) NcIsValidConnectionName (PCWSTR pszwName);
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("netshell.dll") STDAPI_(BOOL) NcIsValidConnectionName (_WIN32META_ANNOTATION_("win32metadata:in") PCWSTR pszwName);
  
  
  

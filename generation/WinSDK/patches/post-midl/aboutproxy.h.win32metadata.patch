@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutProxy.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutProxy.h
-index 0266c88554..16ecda2614 100644
+index 0266c88554..7069226265 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutProxy.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutProxy.h
 @@ -1,3 +1,4 @@
@@ -7,48 +7,59 @@ index 0266c88554..16ecda2614 100644
  /**
   * @file
   * alljoyn_aboutproxy gives proxy access to the org.alljoyn.About interface
-@@ -52,7 +53,7 @@ typedef struct _alljoyn_aboutproxy_handle* alljoyn_aboutproxy;
+@@ -52,16 +53,16 @@ typedef struct _alljoyn_aboutproxy_handle* alljoyn_aboutproxy;
   *
   * @return The allocated alljoyn_aboutproxy.
   */
 -extern AJ_API alljoyn_aboutproxy AJ_CALL alljoyn_aboutproxy_create(alljoyn_busattachment bus,
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutproxy AJ_CALL alljoyn_aboutproxy_create(alljoyn_busattachment bus,
-                                                                    const char* busName,
-                                                                    alljoyn_sessionid sessionId);
+-                                                                   const char* busName,
+-                                                                   alljoyn_sessionid sessionId);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_aboutproxy AJ_CALL alljoyn_aboutproxy_create(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                   _WIN32META_ANNOTATION_("win32metadata:in") const char* busName,
++                                                                   _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionid sessionId);
  
-@@ -61,7 +62,7 @@ extern AJ_API alljoyn_aboutproxy AJ_CALL alljoyn_aboutproxy_create(alljoyn_busat
+ /**
+  * Free an alljoyn_aboutproxy object.
   *
   * @param proxy The alljoyn_aboutproxy to be freed
   */
 -extern AJ_API void AJ_CALL alljoyn_aboutproxy_destroy(alljoyn_aboutproxy proxy);
-+_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutproxy_destroy(alljoyn_aboutproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_aboutproxy_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutproxy proxy);
  
  /**
   * Get the ObjectDescription array for specified bus name.
-@@ -73,7 +74,7 @@ extern AJ_API void AJ_CALL alljoyn_aboutproxy_destroy(alljoyn_aboutproxy proxy);
+@@ -73,8 +74,8 @@ extern AJ_API void AJ_CALL alljoyn_aboutproxy_destroy(alljoyn_aboutproxy proxy);
   *   - ER_OK if successful.
   *   - ER_BUS_REPLY_IS_ERROR_MESSAGE on unknown failure.
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getobjectdescription(alljoyn_aboutproxy proxy,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getobjectdescription(alljoyn_aboutproxy proxy,
-                                                                       alljoyn_msgarg objectDesc);
+-                                                                      alljoyn_msgarg objectDesc);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getobjectdescription(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutproxy proxy,
++                                                                      _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg objectDesc);
  
  /**
-@@ -88,7 +89,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getobjectdescription(alljoyn_ab
+  * Get the About data for specified bus name.
+@@ -88,9 +89,9 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getobjectdescription(alljoyn_ab
   *    - ER_LANGUAGE_NOT_SUPPORTED if the language specified is not supported
   *    - ER_BUS_REPLY_IS_ERROR_MESSAGE on unknown failure
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getaboutdata(alljoyn_aboutproxy proxy,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getaboutdata(alljoyn_aboutproxy proxy,
-                                                               const char* language,
-                                                               alljoyn_msgarg data);
+-                                                              const char* language,
+-                                                              alljoyn_msgarg data);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getaboutdata(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutproxy proxy,
++                                                              _WIN32META_ANNOTATION_("win32metadata:in") const char* language,
++                                                              _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg data);
  
-@@ -100,7 +101,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getaboutdata(alljoyn_aboutproxy
+ /**
+  * GetVersion get the About version
+@@ -100,8 +101,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getaboutdata(alljoyn_aboutproxy
   *
   * @return ER_OK on success
   */
 -extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getversion(alljoyn_aboutproxy proxy,
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getversion(alljoyn_aboutproxy proxy,
-                                                             uint16_t* version);
+-                                                            uint16_t* version);
++_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) extern AJ_API QStatus AJ_CALL alljoyn_aboutproxy_getversion(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutproxy proxy,
++                                                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint16_t* version);
  
  #ifdef __cplusplus
+ } /* extern "C" */

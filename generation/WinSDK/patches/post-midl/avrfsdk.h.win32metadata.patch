@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
-index a2c5a1128b..559e5a02d8 100644
+index a2c5a1128b..ace3c853ad 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/avrfsdk.h
 @@ -24,6 +24,7 @@ Revision History:
@@ -76,21 +76,26 @@ index a2c5a1128b..559e5a02d8 100644
      );
  
  //
-@@ -140,11 +141,11 @@ typedef ULONG
+@@ -140,13 +141,13 @@ typedef ULONG
  #define AVRF_ENUM_RESOURCES_FLAGS_SUSPEND             0x00000001
  #define AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES 0x00000002
  
 -ULONG NTAPI
 +_Win32_ImportLibrary_("verifier.dll") ULONG NTAPI
  VerifierEnumerateResource(
-     HANDLE Process,
+-    HANDLE Process,
 -    ULONG  Flags,    
 -    ULONG  ResourceType,
-+    _Win32_AssociatedEnum_(VERIFIER_ENUM_RESOURCE_FLAGS) ULONG  Flags,    
-+    _Win32_AssociatedEnum_(eAvrfResourceTypes) ULONG  ResourceType,
-     AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback,
-     PVOID  EnumerationContext
+-    AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback,
+-    PVOID  EnumerationContext
++    _WIN32META_ANNOTATION_("win32metadata:in") HANDLE Process,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(VERIFIER_ENUM_RESOURCE_FLAGS) ULONG  Flags,    
++    _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(eAvrfResourceTypes) ULONG  ResourceType,
++    _WIN32META_ANNOTATION_("win32metadata:in") AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID  EnumerationContext
      );
+     
+ //
 @@ -166,4 +167,19 @@ VerifierIsPerUserSettingsEnabled(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
