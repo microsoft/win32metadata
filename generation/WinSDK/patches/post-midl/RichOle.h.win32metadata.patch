@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
-index 13a6a61fe8..1b51d8c87d 100644
+index 13a6a61fe8..857768d4b4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
 @@ -1,5 +1,6 @@
@@ -27,34 +27,78 @@ index 13a6a61fe8..1b51d8c87d 100644
  	DWORD			dwUser;				// Dword for user's use
  } REOBJECT;
  
-@@ -102,7 +103,7 @@ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+@@ -90,7 +91,7 @@ typedef struct _reobject
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOle
+ 
+-DECLARE_INTERFACE_(IRichEditOle, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IRichEditOle, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, LPVOID FAR * lplpObj) PURE;
+@@ -101,9 +102,9 @@ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+     STDMETHOD(GetClientSite) (THIS_ LPOLECLIENTSITE FAR * lplpolesite) PURE;
  	STDMETHOD_(LONG,GetObjectCount) (THIS) PURE;
  	STDMETHOD_(LONG,GetLinkCount) (THIS) PURE;
- 	STDMETHOD(GetObject) (THIS_ LONG iob, REOBJECT FAR * lpreobject,
+-	STDMETHOD(GetObject) (THIS_ LONG iob, REOBJECT FAR * lpreobject,
 -						  DWORD dwFlags) PURE;
+-    STDMETHOD(InsertObject) (THIS_ REOBJECT FAR * lpreobject) PURE;
++	STDMETHOD(GetObject) (THIS_ LONG iob, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REOBJECT FAR * lpreobject,
 +						  _Win32_AssociatedEnum_(RICH_EDIT_GET_OBJECT_FLAGS) DWORD dwFlags) PURE;
-     STDMETHOD(InsertObject) (THIS_ REOBJECT FAR * lpreobject) PURE;
++    STDMETHOD(InsertObject) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REOBJECT FAR * lpreobject) PURE;
  	STDMETHOD(ConvertObject) (THIS_ LONG iob, REFCLSID rclsidNew,
  							  LPCSTR lpstrUserTypeNew) PURE;
-@@ -149,14 +150,14 @@ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ 	STDMETHOD(ActivateAs) (THIS_ REFCLSID rclsid, REFCLSID rclsidAs) PURE;
+@@ -115,7 +116,7 @@ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+ 	STDMETHOD(SaveCompleted) (THIS_ LONG iob, LPSTORAGE lpstg) PURE;
+ 	STDMETHOD(InPlaceDeactivate) (THIS) PURE;
+ 	STDMETHOD(ContextSensitiveHelp) (THIS_ BOOL fEnterMode) PURE;
+-	STDMETHOD(GetClipboardData) (THIS_ CHARRANGE FAR * lpchrg, DWORD reco,
++	STDMETHOD(GetClipboardData) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARRANGE FAR * lpchrg, DWORD reco,
+ 									LPDATAOBJECT FAR * lplpdataobj) PURE;
+ 	STDMETHOD(ImportDataObject) (THIS_ LPDATAOBJECT lpdataobj,
+ 									CLIPFORMAT cf, HGLOBAL hMetaPict) PURE;
+@@ -132,7 +133,7 @@ typedef         IRichEditOle FAR * LPRICHEDITOLE;
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOleCallback
+ 
+-DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IRichEditOleCallback, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, LPVOID FAR * lplpObj) PURE;
+@@ -143,22 +144,22 @@ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ 	STDMETHOD(GetNewStorage) (THIS_ LPSTORAGE FAR * lplpstg) PURE;
+     STDMETHOD(GetInPlaceContext) (THIS_ LPOLEINPLACEFRAME FAR * lplpFrame,
+ 								  LPOLEINPLACEUIWINDOW FAR * lplpDoc,
+-								  LPOLEINPLACEFRAMEINFO lpFrameInfo) PURE;
++								  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOLEINPLACEFRAMEINFO lpFrameInfo) PURE;
+ 	STDMETHOD(ShowContainerUI) (THIS_ BOOL fShow) PURE;
+-	STDMETHOD(QueryInsertObject) (THIS_ LPCLSID lpclsid, LPSTORAGE lpstg,
++	STDMETHOD(QueryInsertObject) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCLSID lpclsid, LPSTORAGE lpstg,
  									LONG cp) PURE;
  	STDMETHOD(DeleteObject) (THIS_ LPOLEOBJECT lpoleobj) PURE;
  	STDMETHOD(QueryAcceptData) (THIS_ LPDATAOBJECT lpdataobj,
 -								CLIPFORMAT FAR * lpcfFormat, DWORD reco,
-+								CLIPFORMAT FAR * lpcfFormat, _Win32_AssociatedEnum_(RECO_FLAGS) DWORD reco,
++								_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPFORMAT FAR * lpcfFormat, _Win32_AssociatedEnum_(RECO_FLAGS) DWORD reco,
  								BOOL fReally, HGLOBAL hMetaPict) PURE;
  	STDMETHOD(ContextSensitiveHelp) (THIS_ BOOL fEnterMode) PURE;
- 	STDMETHOD(GetClipboardData) (THIS_ CHARRANGE FAR * lpchrg, DWORD reco,
+-	STDMETHOD(GetClipboardData) (THIS_ CHARRANGE FAR * lpchrg, DWORD reco,
++	STDMETHOD(GetClipboardData) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARRANGE FAR * lpchrg, DWORD reco,
  									LPDATAOBJECT FAR * lplpdataobj) PURE;
 -	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, DWORD grfKeyState,
 -									LPDWORD pdwEffect) PURE;
 -	STDMETHOD(GetContextMenu) (THIS_ WORD seltype, LPOLEOBJECT lpoleobj,
+-									CHARRANGE FAR * lpchrg,
+-									HMENU FAR * lphmenu) PURE;
 +	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) DWORD grfKeyState,
-+									_Win32_AssociatedEnum_(DROPEFFECT) LPDWORD pdwEffect) PURE;
++									_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Win32_AssociatedEnum_(DROPEFFECT) LPDWORD pdwEffect) PURE;
 +	STDMETHOD(GetContextMenu) (THIS_ _Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltype, LPOLEOBJECT lpoleobj,
- 									CHARRANGE FAR * lpchrg,
- 									HMENU FAR * lphmenu) PURE;
++									_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARRANGE FAR * lpchrg,
++									_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HMENU FAR * lphmenu) PURE;
  };
+ typedef         IRichEditOleCallback FAR * LPRICHEDITOLECALLBACK;
+ 
 @@ -168,4 +169,139 @@ DEFINE_GUID(IID_IRichEditOle,         0x00020D00, 0, 0, 0xC0,0,0,0,0,0,0,0x46);
  DEFINE_GUID(IID_IRichEditOleCallback, 0x00020D03, 0, 0, 0xC0,0,0,0,0,0,0,0x46);
  #endif // !MAC

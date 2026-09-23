@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amvideo.h b/generation/WinSDK/RecompiledIdlHeaders/um/amvideo.h
-index 037a2499ab..1238d90005 100644
+index 037a2499ab..6ef3d7c36b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amvideo.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amvideo.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 037a2499ab..1238d90005 100644
  //------------------------------------------------------------------------------
  // File: AMVideo.h
  //
+@@ -56,7 +57,7 @@ typedef LONGLONG REFERENCE_TIME;
+ #undef INTERFACE
+ #define INTERFACE IDirectDrawVideo
+ 
+-DECLARE_INTERFACE_(IDirectDrawVideo, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IDirectDrawVideo, IUnknown)
+ {
+     // IUnknown methods
+ 
+@@ -89,7 +90,7 @@ DECLARE_INTERFACE_(IDirectDrawVideo, IUnknown)
+ #undef INTERFACE
+ #define INTERFACE IQualProp
+ 
+-DECLARE_INTERFACE_(IQualProp, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IQualProp, IUnknown)
+ {
+     // IUnknown methods
+ 
 @@ -154,7 +155,7 @@ DECLARE_INTERFACE_(IFullScreenVideo, IUnknown)
      STDMETHOD(HideOnDeactivate)(THIS_ long Hide) PURE;
      STDMETHOD(IsHideOnDeactivate)(THIS) PURE;
@@ -16,3 +34,21 @@ index 037a2499ab..1238d90005 100644
      STDMETHOD(SetDefault)(THIS) PURE;
  };
  
+@@ -169,7 +170,7 @@ DECLARE_INTERFACE_(IFullScreenVideo, IUnknown)
+ #undef INTERFACE
+ #define INTERFACE IFullScreenVideoEx
+ 
+-DECLARE_INTERFACE_(IFullScreenVideoEx, IFullScreenVideo)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IFullScreenVideoEx, IFullScreenVideo)
+ {
+     // IUnknown methods
+ 
+@@ -200,7 +201,7 @@ DECLARE_INTERFACE_(IFullScreenVideoEx, IFullScreenVideo)
+     // IFullScreenVideoEx
+ 
+     STDMETHOD(SetAcceleratorTable)(THIS_ HWND hwnd,HACCEL hAccel) PURE;
+-    STDMETHOD(GetAcceleratorTable)(THIS_ _Out_ HWND *phwnd,HACCEL *phAccel) PURE;
++    STDMETHOD(GetAcceleratorTable)(THIS_ _Out_ HWND *phwnd,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HACCEL *phAccel) PURE;
+     STDMETHOD(KeepPixelAspectRatio)(THIS_ long KeepAspect) PURE;
+     STDMETHOD(IsKeepPixelAspectRatio)(THIS_ _Out_ long *pKeepAspect) PURE;
+ };

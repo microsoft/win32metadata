@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vpconfig.h b/generation/WinSDK/RecompiledIdlHeaders/um/vpconfig.h
-index aa02d53e37..2cdc541437 100644
+index aa02d53e37..5478a5fb03 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vpconfig.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vpconfig.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,13 @@ index aa02d53e37..2cdc541437 100644
  //------------------------------------------------------------------------------
  // File: VPConfig.h
  //
-@@ -26,17 +27,20 @@ DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
+@@ -21,22 +22,25 @@ extern "C" {
+ #endif
+ 
+ // IVPBaseConfig
+-DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPBaseConfig, IUnknown)
+ {
      // gets the various connection information structures (guid, portwidth)
      // in an array of structures. If the pointer to the array is NULL, first 
      // parameter returns the total number of formats supported.
@@ -28,14 +34,15 @@ index aa02d53e37..2cdc541437 100644
      STDMETHOD (GetVPDataInfo)(THIS_
  			      IN OUT LPAMVPDATAINFO pamvpDataInfo
  			     ) PURE;
-@@ -45,12 +49,15 @@ DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
+@@ -45,54 +49,64 @@ DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
      // format and a given scaling factor. If decoder does not support 
      // those scaling factors, then it gives the rate and the nearest 
      // scaling factors.
 +     
      STDMETHOD (GetMaxPixelRate)(THIS_
  				IN OUT LPAMVPSIZE pamvpSize,
- 				OUT LPDWORD pdwMaxPixelsPerSecond
+-				OUT LPDWORD pdwMaxPixelsPerSecond
++				_WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD pdwMaxPixelsPerSecond
  			       ) PURE;
  
      // informs the callee of the videoformats supported by the videoport
@@ -43,8 +50,10 @@ index aa02d53e37..2cdc541437 100644
 +    
      STDMETHOD (InformVPInputFormats)(THIS_
  				     IN DWORD dwNumFormats,
- 				     IN LPDDPIXELFORMAT pDDPixelFormats
-@@ -59,37 +66,44 @@ DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
+-				     IN LPDDPIXELFORMAT pDDPixelFormats
++				     _WIN32META_ANNOTATION_("win32metadata:out") IN LPDDPIXELFORMAT pDDPixelFormats
+ 				    ) PURE;
+ 
      // gets the various formats supported by the decoder in an array
      // of structures. If the pointer to the array is NULL, first parameter
      // returns the total number of formats supported.
@@ -88,7 +97,11 @@ index aa02d53e37..2cdc541437 100644
 +     
      STDMETHOD (SetDDSurfaceKernelHandles)(THIS_
  					  IN DWORD cHandles,
- 					  IN ULONG_PTR *rgDDKernelHandles
+-					  IN ULONG_PTR *rgDDKernelHandles
++					  _WIN32META_ANNOTATION_("win32metadata:out") IN ULONG_PTR *rgDDKernelHandles
+ 					 ) PURE;
+ 
+     // Tells driver about surface created on its behalf by ovmixer/vbisurf and 
 @@ -100,6 +114,7 @@ DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
      // dwPitch is the pitch of the surface (distance in pixels between the start 
      // pixels of two consecutive lines of the surface). (dwXOrigin, dwYOrigin) 
@@ -97,18 +110,27 @@ index aa02d53e37..2cdc541437 100644
      STDMETHOD (SetSurfaceParameters)(THIS_
                      IN DWORD dwPitch,
                      IN DWORD dwXOrigin,
-@@ -112,12 +127,14 @@ DECLARE_INTERFACE_(IVPConfig, IVPBaseConfig)
+@@ -108,18 +123,20 @@ DECLARE_INTERFACE_(IVPBaseConfig, IUnknown)
+ };
+ 
+ // IVPConfig
+-DECLARE_INTERFACE_(IVPConfig, IVPBaseConfig)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPConfig, IVPBaseConfig)
  {
  	// the mixer uses this function to determine if the callee wants
  	// the mixer to decimate VIDEO data at its own descrition
 +	 
  	STDMETHOD (IsVPDecimationAllowed)(THIS_
- 					  OUT LPBOOL pbIsDecimationAllowed
+-					  OUT LPBOOL pbIsDecimationAllowed
++					  _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBOOL pbIsDecimationAllowed
  					 ) PURE;
  
  	// sets the scaling factors. If decoder does not support these,
  	// then it sets the values to the nearest factors it can support
 +	 
  	STDMETHOD (SetScalingFactors)(THIS_
- 				      IN LPAMVPSIZE pamvpSize
+-				      IN LPAMVPSIZE pamvpSize
++				      _WIN32META_ANNOTATION_("win32metadata:out") IN LPAMVPSIZE pamvpSize
  				     ) PURE;
+ };
+ 

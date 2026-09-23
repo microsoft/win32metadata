@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
-index eb2800ade3..0e0005c4ec 100644
+index eb2800ade3..2ddca66b96 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
 @@ -41,6 +41,7 @@
@@ -285,7 +285,7 @@ index eb2800ade3..0e0005c4ec 100644
  // Make sure this matches the autodoc in icm.c!
  //
 -typedef struct {
-+typedef struct   {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    {
      LONG		cbSize;		// set to sizeof(COMPVARS) before
  					// calling ICCompressorChoose
      DWORD		dwFlags;	// see below...
@@ -569,6 +569,51 @@ index eb2800ade3..0e0005c4ec 100644
      DWORD	fccType;		    /* stream type, for consistency */
      DWORD       fccHandler;                 /* compressor */
      DWORD       dwKeyFrameEvery;            /* keyframe rate */
+@@ -2061,7 +2062,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ #undef  INTERFACE
+ #define INTERFACE   IAVIStream
+ 
+-DECLARE_INTERFACE_(IAVIStream, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIStream, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2105,7 +2106,7 @@ typedef       IAVIStream FAR* PAVISTREAM;
+ #undef  INTERFACE
+ #define INTERFACE   IAVIStreaming
+ 
+-DECLARE_INTERFACE_(IAVIStreaming, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIStreaming, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2127,7 +2128,7 @@ typedef       IAVIStreaming FAR* PAVISTREAMING;
+ #undef  INTERFACE
+ #define INTERFACE   IAVIEditStream
+ 
+-DECLARE_INTERFACE_(IAVIEditStream, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIEditStream, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2170,7 +2171,7 @@ typedef IAVIPersistFile FAR* PAVIPERSISTFILE;
+ #define INTERFACE   IAVIFile
+ #define PAVIFILE IAVIFile FAR*
+ 
+-DECLARE_INTERFACE_(IAVIFile, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIFile, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2211,7 +2212,7 @@ typedef       IAVIFile FAR* PAVIFILE;
+ #define INTERFACE   IGetFrame
+ #define PGETFRAME   IGetFrame FAR*
+ 
+-DECLARE_INTERFACE_(IGetFrame, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IGetFrame, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
 @@ -2261,16 +2262,16 @@ DEFINE_AVIGUID(CLSID_AVIFile,           0x00020000, 0, 0);
  // functions
  //
@@ -585,10 +630,10 @@ index eb2800ade3..0e0005c4ec 100644
  
  #ifdef _WIN32
 -STDAPI AVIFileOpenA       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCSTR szFile,
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileOpenA       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileOpenA       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCSTR szFile,
  			  UINT uMode, _In_opt_ LPCLSID lpHandler);
 -STDAPI AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
  			  UINT uMode, _In_opt_ LPCLSID lpHandler);
  #ifdef UNICODE
  #define AVIFileOpen	  AVIFileOpenW	
@@ -598,8 +643,8 @@ index eb2800ade3..0e0005c4ec 100644
  #ifdef _WIN32
 -STDAPI AVIFileInfoW (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOW pfi, _In_ LONG lSize);
 -STDAPI AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileInfoW (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOW pfi, _In_ LONG lSize);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileInfoW (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOW pfi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
  #ifdef UNICODE
  #define AVIFileInfo	AVIFileInfoW
  #else
@@ -614,8 +659,8 @@ index eb2800ade3..0e0005c4ec 100644
  #ifdef _WIN32
 -STDAPI AVIFileCreateStreamW (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOW FAR * psi);
 -STDAPI AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileCreateStreamW (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOW FAR * psi);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileCreateStreamW (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOW FAR * psi);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
  #ifdef UNICODE
  #define AVIFileCreateStream	AVIFileCreateStreamW
  #else
@@ -643,8 +688,8 @@ index eb2800ade3..0e0005c4ec 100644
  
 -STDAPI AVIStreamInfoW (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOW psi, _In_ LONG lSize);
 -STDAPI AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamInfoW (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOW psi, _In_ LONG lSize);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamInfoW (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOW psi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
  #ifdef UNICODE
  #define AVIStreamInfo	AVIStreamInfoW
  #else
@@ -713,11 +758,11 @@ index eb2800ade3..0e0005c4ec 100644
  
  // Shortcut function
 -STDAPI AVIStreamOpenFromFileA(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LPCSTR szFile,
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamOpenFromFileA(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LPCSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamOpenFromFileA(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LPCSTR szFile,
  			     _In_ DWORD fccType, _In_ LONG lParam,
  			     _In_ UINT mode, _In_opt_ CLSID FAR *pclsidHandler);
 -STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
  			     _In_ DWORD fccType, _In_ LONG lParam,
  			     _In_ UINT mode, _In_opt_ CLSID FAR *pclsidHandler);
  #ifdef UNICODE
@@ -742,7 +787,7 @@ index eb2800ade3..0e0005c4ec 100644
  		_In_opt_ CLSID FAR *pclsidHandler);
  
 -EXTERN_C HRESULT CDECL AVISaveA (LPCSTR               szFile,
-+EXTERN_C HRESULT CDECL _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ AVISaveA (LPCSTR               szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT CDECL _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ AVISaveA (LPCSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
@@ -751,14 +796,14 @@ index eb2800ade3..0e0005c4ec 100644
  		...);
  
 -STDAPI AVISaveVA(LPCSTR               szFile,
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVISaveVA(LPCSTR               szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVISaveVA(LPCSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
  		_In_reads_(nStreams) PAVISTREAM FAR *    ppavi,
  		_In_reads_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
 -EXTERN_C HRESULT CDECL AVISaveW (LPCWSTR               szFile,
-+EXTERN_C HRESULT CDECL _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ AVISaveW (LPCWSTR               szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT CDECL _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ AVISaveW (LPCWSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
@@ -767,7 +812,7 @@ index eb2800ade3..0e0005c4ec 100644
  		...);
  
 -STDAPI AVISaveVW(LPCWSTR               szFile,
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVISaveVW(LPCWSTR               szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVISaveVW(LPCWSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
@@ -793,8 +838,8 @@ index eb2800ade3..0e0005c4ec 100644
  
 -STDAPI AVIBuildFilterW(_Out_writes_(cbFilter) LPWSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
 -STDAPI AVIBuildFilterA(_Out_writes_(cbFilter) LPSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIBuildFilterW(_Out_writes_(cbFilter) LPWSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
-+_Windows_SupportedOS_Windows2000_ STDAPI   AVIBuildFilterA(_Out_writes_(cbFilter) LPSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIBuildFilterW(_Out_writes_(cbFilter) LPWSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIBuildFilterA(_Out_writes_(cbFilter) LPSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
  #ifdef UNICODE
  #define AVIBuildFilter	AVIBuildFilterW
  #else
@@ -850,10 +895,10 @@ index eb2800ade3..0e0005c4ec 100644
 -STDAPI EditStreamSetNameW(_In_ PAVISTREAM pavi, _In_ LPCWSTR lpszName);
 -STDAPI EditStreamSetInfoW(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOW lpInfo, _In_ LONG cbInfo);
 -STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
-+_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetNameA(_In_ PAVISTREAM pavi, _In_ LPCSTR lpszName);
-+_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetNameW(_In_ PAVISTREAM pavi, _In_ LPCWSTR lpszName);
-+_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetInfoW(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOW lpInfo, _In_ LONG cbInfo);
-+_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetNameA(_In_ PAVISTREAM pavi, _In_ LPCSTR lpszName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetNameW(_In_ PAVISTREAM pavi, _In_ LPCWSTR lpszName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetInfoW(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOW lpInfo, _In_ LONG cbInfo);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
  #ifdef UNICODE
  #define EditStreamSetInfo	EditStreamSetInfoW
  #define EditStreamSetName	EditStreamSetNameW
@@ -862,7 +907,7 @@ index eb2800ade3..0e0005c4ec 100644
  #endif  /* __cplusplus */
  #define MCIWND_WINDOW_CLASS TEXT("MCIWndClass")
 -HWND
-+_Windows_SupportedOS_Windows2000_ HWND
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ HWND
  VFWAPIV
 -MCIWndCreateA(
 +  MCIWndCreateA(
@@ -873,7 +918,7 @@ index eb2800ade3..0e0005c4ec 100644
      );
  
 -HWND
-+_Windows_SupportedOS_Windows2000_ HWND
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ HWND
  VFWAPIV
 -MCIWndCreateW(
 +  MCIWndCreateW(
@@ -939,26 +984,26 @@ index eb2800ade3..0e0005c4ec 100644
  // ------------------------------------------------------------------
  
 -HWND VFWAPI capCreateCaptureWindowA (
-+_Windows_SupportedOS_Windows2000_ HWND VFWAPI   capCreateCaptureWindowA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ HWND VFWAPI   capCreateCaptureWindowA (
          LPCSTR lpszWindowName,
          _In_ DWORD dwStyle,
          _In_ int x, _In_ int y, _In_ int nWidth, _In_ int nHeight,
          _In_opt_ HWND hwndParent, _In_ int nID);
  
 -BOOL VFWAPI capGetDriverDescriptionA (UINT wDriverIndex,
-+_Windows_SupportedOS_Windows2000_ BOOL VFWAPI   capGetDriverDescriptionA (UINT wDriverIndex,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL VFWAPI   capGetDriverDescriptionA (UINT wDriverIndex,
          _Out_writes_(cbName) LPSTR lpszName, _In_ int cbName,
          _Out_writes_(cbVer) LPSTR lpszVer, _In_ int cbVer);
  
 -HWND VFWAPI capCreateCaptureWindowW (
-+_Windows_SupportedOS_Windows2000_ HWND VFWAPI   capCreateCaptureWindowW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ HWND VFWAPI   capCreateCaptureWindowW (
          LPCWSTR lpszWindowName,
          DWORD dwStyle,
          _In_ int x, _In_ int y, _In_ int nWidth, _In_ int nHeight,
          _In_opt_ HWND hwndParent, _In_ int nID);
  
 -BOOL VFWAPI capGetDriverDescriptionW (UINT wDriverIndex,
-+_Windows_SupportedOS_Windows2000_ BOOL VFWAPI   capGetDriverDescriptionW (UINT wDriverIndex,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL VFWAPI   capGetDriverDescriptionW (UINT wDriverIndex,
          _Out_writes_(cbName) LPWSTR lpszName, _In_ int cbName,
          _Out_writes_(cbVer) LPWSTR lpszVer, _In_ int cbVer);
  #ifdef UNICODE
@@ -967,7 +1012,7 @@ index eb2800ade3..0e0005c4ec 100644
  #ifdef OFN_READONLY
  
 -    BOOL
-+    _Windows_SupportedOS_Windows2000_ BOOL
++    _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL
      VFWAPI
 -    GetOpenFileNamePreviewA(
 +      GetOpenFileNamePreviewA(
@@ -975,7 +1020,7 @@ index eb2800ade3..0e0005c4ec 100644
          );
  
 -    BOOL
-+    _Windows_SupportedOS_Windows2000_ BOOL
++    _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL
      VFWAPI
 -    GetSaveFileNamePreviewA(
 +      GetSaveFileNamePreviewA(
@@ -983,7 +1028,7 @@ index eb2800ade3..0e0005c4ec 100644
          );
  
 -    BOOL
-+    _Windows_SupportedOS_Windows2000_ BOOL
++    _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL
      VFWAPI
 -    GetOpenFileNamePreviewW(
 +      GetOpenFileNamePreviewW(
@@ -991,7 +1036,7 @@ index eb2800ade3..0e0005c4ec 100644
          );
  
 -    BOOL
-+    _Windows_SupportedOS_Windows2000_ BOOL
++    _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL
      VFWAPI
 -    GetSaveFileNamePreviewW(
 +      GetSaveFileNamePreviewW(
