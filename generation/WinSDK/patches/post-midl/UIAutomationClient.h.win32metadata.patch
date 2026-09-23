@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
-index 3ac25a4f11..0810bfa0f6 100644
+index 3ac25a4f11..51c6935302 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
 @@ -612,12 +612,13 @@ extern "C"{
@@ -72,7 +72,78 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationElement : public IUnknown
      {
      public:
-@@ -1713,19 +1714,19 @@ EXTERN_C const IID IID_IUIAutomationElement;
+@@ -1641,13 +1642,13 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentPropertyValue( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentPropertyValueEx( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  BOOL ignoreDefaultValue,
+             /* [annotation][retval][out] */ 
+@@ -1655,13 +1656,13 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedPropertyValue( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *retVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedPropertyValueEx( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  BOOL ignoreDefaultValue,
+             /* [annotation][retval][out] */ 
+@@ -1669,7 +1670,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentPatternAs( 
+             /* [annotation][in] */ 
+-            _In_  PATTERNID patternId,
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID patternId,
+             /* [annotation][in] */ 
+             _In_  REFIID riid,
+             /* [annotation][retval][iid_is][out] */ 
+@@ -1677,7 +1678,7 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedPatternAs( 
+             /* [annotation][in] */ 
+-            _In_  PATTERNID patternId,
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID patternId,
+             /* [annotation][in] */ 
+             _In_  REFIID riid,
+             /* [annotation][retval][iid_is][out] */ 
+@@ -1685,13 +1686,13 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentPattern( 
+             /* [annotation][in] */ 
+-            _In_  PATTERNID patternId,
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID patternId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IUnknown **patternObject) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachedPattern( 
+             /* [annotation][in] */ 
+-            _In_  PATTERNID patternId,
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID patternId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IUnknown **patternObject) = 0;
+         
+@@ -1709,23 +1710,23 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentControlType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  CONTROLTYPEID *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_CONTROLTYPE_ID) _Out_retval_  CONTROLTYPEID *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLocalizedControlType( 
              /* [annotation][retval][out] */ 
@@ -165,7 +236,12 @@ index 3ac25a4f11..0810bfa0f6 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedProcessId( 
              /* [annotation][retval][out] */ 
-@@ -1841,19 +1842,19 @@ EXTERN_C const IID IID_IUIAutomationElement;
+@@ -1837,23 +1838,23 @@ EXTERN_C const IID IID_IUIAutomationElement;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedControlType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  CONTROLTYPEID *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_CONTROLTYPE_ID) _Out_retval_  CONTROLTYPEID *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLocalizedControlType( 
              /* [annotation][retval][out] */ 
@@ -285,7 +361,7 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationBoolCondition : public IUIAutomationCondition
      {
      public:
-@@ -3085,7 +3086,7 @@ EXTERN_C const IID IID_IUIAutomationPropertyCondition;
+@@ -3085,13 +3086,13 @@ EXTERN_C const IID IID_IUIAutomationPropertyCondition;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -294,6 +370,13 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationPropertyCondition : public IUIAutomationCondition
      {
      public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PropertyId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  PROPERTYID *propertyId) = 0;
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _Out_retval_  PROPERTYID *propertyId) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PropertyValue( 
+             /* [annotation][retval][out] */ 
 @@ -3199,7 +3200,7 @@ EXTERN_C const IID IID_IUIAutomationAndCondition;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -321,7 +404,7 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationNotCondition : public IUIAutomationCondition
      {
      public:
-@@ -3523,7 +3524,7 @@ EXTERN_C const IID IID_IUIAutomationCacheRequest;
+@@ -3523,17 +3524,17 @@ EXTERN_C const IID IID_IUIAutomationCacheRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -330,6 +413,18 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationCacheRequest : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE AddProperty( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId) = 0;
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddPattern( 
+             /* [annotation][in] */ 
+-            _In_  PATTERNID patternId) = 0;
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID patternId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Clone( 
+             /* [annotation][retval][out] */ 
 @@ -3714,7 +3715,7 @@ EXTERN_C const IID IID_IUIAutomationTreeWalker;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -348,6 +443,15 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationEventHandler : public IUnknown
      {
      public:
+@@ -4037,7 +4038,7 @@ EXTERN_C const IID IID_IUIAutomationEventHandler;
+             /* [annotation][in] */ 
+             _In_  IUIAutomationElement *sender,
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId) = 0;
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId) = 0;
+         
+     };
+     
 @@ -4120,7 +4121,7 @@ EXTERN_C const IID IID_IUIAutomationPropertyChangedEventHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -357,6 +461,15 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationPropertyChangedEventHandler : public IUnknown
      {
      public:
+@@ -4128,7 +4129,7 @@ EXTERN_C const IID IID_IUIAutomationPropertyChangedEventHandler;
+             /* [annotation][in] */ 
+             _In_  IUIAutomationElement *sender,
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  VARIANT newValue) = 0;
+         
 @@ -4215,7 +4216,7 @@ EXTERN_C const IID IID_IUIAutomationStructureChangedEventHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -618,6 +731,24 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationTextRange : public IUnknown
      {
      public:
+@@ -7842,7 +7843,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
+         
+         virtual HRESULT STDMETHODCALLTYPE FindAttribute( 
+             /* [annotation][in] */ 
+-            _In_  TEXTATTRIBUTEID attr,
++            _Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID) _In_  TEXTATTRIBUTEID attr,
+             /* [annotation][in] */ 
+             _In_  VARIANT val,
+             /* [annotation][in] */ 
+@@ -7862,7 +7863,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAttributeValue( 
+             /* [annotation][in] */ 
+-            _In_  TEXTATTRIBUTEID attr,
++            _Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID) _In_  TEXTATTRIBUTEID attr,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *value) = 0;
+         
 @@ -7878,7 +7879,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
              /* [annotation][in] */ 
              _In_  int maxLength,
@@ -645,6 +776,15 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationTextRange3 : public IUIAutomationTextRange2
      {
      public:
+@@ -8480,7 +8481,7 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAttributeValues( 
+             /* [annotation][size_is][in] */ 
+-            _In_reads_(attributeIdCount)  const TEXTATTRIBUTEID *attributeIds,
++            _Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID) _In_reads_(attributeIdCount)  const TEXTATTRIBUTEID *attributeIds,
+             /* [annotation][in] */ 
+             _In_  int attributeIdCount,
+             /* [annotation][retval][out] */ 
 @@ -8794,7 +8795,7 @@ EXTERN_C const IID IID_IUIAutomationTextRangeArray;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -801,6 +941,15 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationItemContainerPattern : public IUnknown
      {
      public:
+@@ -9952,7 +9953,7 @@ EXTERN_C const IID IID_IUIAutomationItemContainerPattern;
+             /* [annotation][in] */ 
+             _In_  IUIAutomationElement *pStartAfter,
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  VARIANT value,
+             /* [annotation][retval][out] */ 
 @@ -10043,7 +10044,7 @@ EXTERN_C const IID IID_IUIAutomationVirtualizedItemPattern;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -810,7 +959,7 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationVirtualizedItemPattern : public IUnknown
      {
      public:
-@@ -10126,7 +10127,7 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+@@ -10126,25 +10127,25 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -819,7 +968,10 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationAnnotationPattern : public IUnknown
      {
      public:
-@@ -10136,15 +10137,15 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationTypeId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  int *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_ANNOTATIONTYPE) _Out_retval_  int *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationTypeName( 
              /* [annotation][retval][out] */ 
@@ -838,7 +990,12 @@ index 3ac25a4f11..0810bfa0f6 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentTarget( 
              /* [annotation][retval][out] */ 
-@@ -10156,15 +10157,15 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+@@ -10152,19 +10153,19 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationTypeId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  int *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_ANNOTATIONTYPE) _Out_retval_  int *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationTypeName( 
              /* [annotation][retval][out] */ 
@@ -857,7 +1014,7 @@ index 3ac25a4f11..0810bfa0f6 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedTarget( 
              /* [annotation][retval][out] */ 
-@@ -10330,7 +10331,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+@@ -10330,17 +10331,17 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -866,7 +1023,10 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationStylesPattern : public IUnknown
      {
      public:
-@@ -10340,7 +10341,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentStyleId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  int *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_STYLE_ID) _Out_retval_  int *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentStyleName( 
              /* [annotation][retval][out] */ 
@@ -898,7 +1058,12 @@ index 3ac25a4f11..0810bfa0f6 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetCurrentExtendedPropertiesAsArray( 
              /* [annotation][size_is][size_is][out] */ 
-@@ -10374,7 +10375,7 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+@@ -10370,11 +10371,11 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedStyleId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  int *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_STYLE_ID) _Out_retval_  int *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedStyleName( 
              /* [annotation][retval][out] */ 
@@ -1053,7 +1218,7 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationElement4 : public IUIAutomationElement3
      {
      public:
-@@ -14513,7 +14514,7 @@ EXTERN_C const IID IID_IUIAutomationElement5;
+@@ -14513,25 +14514,25 @@ EXTERN_C const IID IID_IUIAutomationElement5;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1062,7 +1227,10 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationElement5 : public IUIAutomationElement4
      {
      public:
-@@ -14523,7 +14524,7 @@ EXTERN_C const IID IID_IUIAutomationElement5;
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLandmarkType( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  LANDMARKTYPEID *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_LANDMARKTYPE_ID) _Out_retval_  LANDMARKTYPEID *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLocalizedLandmarkType( 
              /* [annotation][retval][out] */ 
@@ -1071,7 +1239,8 @@ index 3ac25a4f11..0810bfa0f6 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLandmarkType( 
              /* [annotation][retval][out] */ 
-@@ -14531,7 +14532,7 @@ EXTERN_C const IID IID_IUIAutomationElement5;
+-            _Out_retval_  LANDMARKTYPEID *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_LANDMARKTYPE_ID) _Out_retval_  LANDMARKTYPEID *retVal) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLocalizedLandmarkType( 
              /* [annotation][retval][out] */ 
@@ -1110,7 +1279,16 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationElement7 : public IUIAutomationElement6
      {
      public:
-@@ -17922,7 +17923,7 @@ EXTERN_C const IID IID_IUIAutomationElement8;
+@@ -16750,7 +16751,7 @@ EXTERN_C const IID IID_IUIAutomationElement7;
+             /* [annotation][in] */ 
+             _In_  int targetId,
+             /* [annotation][in] */ 
+-            _In_  METADATAID metadataId,
++            _Win32_AssociatedEnum_(UIA_METADATA_ID) _In_  METADATAID metadataId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *returnVal) = 0;
+         
+@@ -17922,17 +17923,17 @@ EXTERN_C const IID IID_IUIAutomationElement8;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1119,6 +1297,18 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationElement8 : public IUIAutomationElement7
      {
      public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHeadingLevel( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HEADINGLEVELID *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_HEADINGLEVEL_ID) _Out_retval_  HEADINGLEVELID *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHeadingLevel( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HEADINGLEVELID *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_HEADINGLEVEL_ID) _Out_retval_  HEADINGLEVELID *retVal) = 0;
+         
+     };
+     
 @@ -19121,7 +19122,7 @@ EXTERN_C const IID IID_IUIAutomationElement9;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1169,6 +1359,28 @@ index 3ac25a4f11..0810bfa0f6 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AllowSubstringMatch( 
              /* [annotation][retval][out] */ 
+@@ -20501,17 +20502,17 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryEntry;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetWinEventsForAutomationEvent( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  SAFEARRAY * winEvents) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetWinEventsForAutomationEvent( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  SAFEARRAY * *winEvents) = 0;
+         
 @@ -20710,7 +20711,7 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryMapping;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1187,6 +1399,24 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomationEventHandlerGroup : public IUnknown
      {
      public:
+@@ -20919,7 +20920,7 @@ EXTERN_C const IID IID_IUIAutomationEventHandlerGroup;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddAutomationEventHandler( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+             _In_  enum TreeScope scope,
+             /* [annotation][in] */ 
+@@ -20955,7 +20956,7 @@ EXTERN_C const IID IID_IUIAutomationEventHandlerGroup;
+             /* [annotation][in] */ 
+             _In_  IUIAutomationPropertyChangedEventHandler *handler,
+             /* [annotation][size_is][in] */ 
+-            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+             /* [annotation][in] */ 
+             _In_  int propertyCount) = 0;
+         
 @@ -21150,7 +21151,7 @@ EXTERN_C const IID IID_IUIAutomation;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1196,16 +1426,65 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomation : public IUnknown
      {
      public:
-@@ -21458,13 +21459,13 @@ EXTERN_C const IID IID_IUIAutomation;
+@@ -21262,7 +21263,7 @@ EXTERN_C const IID IID_IUIAutomation;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreatePropertyCondition( 
              /* [annotation][in] */ 
-             _In_  PROPERTYID property,
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  VARIANT value,
+             /* [annotation][retval][out] */ 
+@@ -21270,7 +21271,7 @@ EXTERN_C const IID IID_IUIAutomation;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreatePropertyConditionEx( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  VARIANT value,
+             /* [annotation][in] */ 
+@@ -21330,7 +21331,7 @@ EXTERN_C const IID IID_IUIAutomation;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddAutomationEventHandler( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+             _In_  IUIAutomationElement *element,
+             /* [annotation][in] */ 
+@@ -21342,7 +21343,7 @@ EXTERN_C const IID IID_IUIAutomation;
+         
+         virtual HRESULT STDMETHODCALLTYPE RemoveAutomationEventHandler( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+             _In_  IUIAutomationElement *element,
+             /* [annotation][in] */ 
+@@ -21358,7 +21359,7 @@ EXTERN_C const IID IID_IUIAutomation;
+             /* [annotation][in] */ 
+             _In_  IUIAutomationPropertyChangedEventHandler *handler,
+             /* [annotation][size_is][in] */ 
+-            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+             /* [annotation][in] */ 
+             _In_  int propertyCount) = 0;
+         
+@@ -21456,15 +21457,15 @@ EXTERN_C const IID IID_IUIAutomation;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyProgrammaticName( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID property,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID property,
              /* [annotation][retval][out] */ 
 -            _Out_retval_  BSTR *name) = 0;
 +            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetPatternProgrammaticName( 
              /* [annotation][in] */ 
-             _In_  PATTERNID pattern,
+-            _In_  PATTERNID pattern,
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID pattern,
              /* [annotation][retval][out] */ 
 -            _Out_retval_  BSTR *name) = 0;
 +            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
@@ -1257,3 +1536,1714 @@ index 3ac25a4f11..0810bfa0f6 100644
      IUIAutomation6 : public IUIAutomation5
      {
      public:
+@@ -26549,3 +26550,1710 @@ extern RPC_IF_HANDLE __MIDL_itf_uiautomationclient_0000_0001_v0_0_s_ifspec;
+ #endif
+ 
+ 
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_PATTERN_ID
++#define WIN32METADATA_ENUM_UIA_PATTERN_ID
++#pragma push_macro("UIA_InvokePatternId")
++#undef UIA_InvokePatternId
++#pragma push_macro("UIA_SelectionPatternId")
++#undef UIA_SelectionPatternId
++#pragma push_macro("UIA_ValuePatternId")
++#undef UIA_ValuePatternId
++#pragma push_macro("UIA_RangeValuePatternId")
++#undef UIA_RangeValuePatternId
++#pragma push_macro("UIA_ScrollPatternId")
++#undef UIA_ScrollPatternId
++#pragma push_macro("UIA_ExpandCollapsePatternId")
++#undef UIA_ExpandCollapsePatternId
++#pragma push_macro("UIA_GridPatternId")
++#undef UIA_GridPatternId
++#pragma push_macro("UIA_GridItemPatternId")
++#undef UIA_GridItemPatternId
++#pragma push_macro("UIA_MultipleViewPatternId")
++#undef UIA_MultipleViewPatternId
++#pragma push_macro("UIA_WindowPatternId")
++#undef UIA_WindowPatternId
++#pragma push_macro("UIA_SelectionItemPatternId")
++#undef UIA_SelectionItemPatternId
++#pragma push_macro("UIA_DockPatternId")
++#undef UIA_DockPatternId
++#pragma push_macro("UIA_TablePatternId")
++#undef UIA_TablePatternId
++#pragma push_macro("UIA_TableItemPatternId")
++#undef UIA_TableItemPatternId
++#pragma push_macro("UIA_TextPatternId")
++#undef UIA_TextPatternId
++#pragma push_macro("UIA_TogglePatternId")
++#undef UIA_TogglePatternId
++#pragma push_macro("UIA_TransformPatternId")
++#undef UIA_TransformPatternId
++#pragma push_macro("UIA_ScrollItemPatternId")
++#undef UIA_ScrollItemPatternId
++#pragma push_macro("UIA_LegacyIAccessiblePatternId")
++#undef UIA_LegacyIAccessiblePatternId
++#pragma push_macro("UIA_ItemContainerPatternId")
++#undef UIA_ItemContainerPatternId
++#pragma push_macro("UIA_VirtualizedItemPatternId")
++#undef UIA_VirtualizedItemPatternId
++#pragma push_macro("UIA_SynchronizedInputPatternId")
++#undef UIA_SynchronizedInputPatternId
++#pragma push_macro("UIA_ObjectModelPatternId")
++#undef UIA_ObjectModelPatternId
++#pragma push_macro("UIA_AnnotationPatternId")
++#undef UIA_AnnotationPatternId
++#pragma push_macro("UIA_TextPattern2Id")
++#undef UIA_TextPattern2Id
++#pragma push_macro("UIA_StylesPatternId")
++#undef UIA_StylesPatternId
++#pragma push_macro("UIA_SpreadsheetPatternId")
++#undef UIA_SpreadsheetPatternId
++#pragma push_macro("UIA_SpreadsheetItemPatternId")
++#undef UIA_SpreadsheetItemPatternId
++#pragma push_macro("UIA_TransformPattern2Id")
++#undef UIA_TransformPattern2Id
++#pragma push_macro("UIA_TextChildPatternId")
++#undef UIA_TextChildPatternId
++#pragma push_macro("UIA_DragPatternId")
++#undef UIA_DragPatternId
++#pragma push_macro("UIA_DropTargetPatternId")
++#undef UIA_DropTargetPatternId
++#pragma push_macro("UIA_TextEditPatternId")
++#undef UIA_TextEditPatternId
++#pragma push_macro("UIA_CustomNavigationPatternId")
++#undef UIA_CustomNavigationPatternId
++#pragma push_macro("UIA_SelectionPattern2Id")
++#undef UIA_SelectionPattern2Id
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_PATTERN_IDValues {
++enum UIA_PATTERN_ID : int
++{
++    UIA_InvokePatternId = 10000,
++    UIA_SelectionPatternId = 10001,
++    UIA_ValuePatternId = 10002,
++    UIA_RangeValuePatternId = 10003,
++    UIA_ScrollPatternId = 10004,
++    UIA_ExpandCollapsePatternId = 10005,
++    UIA_GridPatternId = 10006,
++    UIA_GridItemPatternId = 10007,
++    UIA_MultipleViewPatternId = 10008,
++    UIA_WindowPatternId = 10009,
++    UIA_SelectionItemPatternId = 10010,
++    UIA_DockPatternId = 10011,
++    UIA_TablePatternId = 10012,
++    UIA_TableItemPatternId = 10013,
++    UIA_TextPatternId = 10014,
++    UIA_TogglePatternId = 10015,
++    UIA_TransformPatternId = 10016,
++    UIA_ScrollItemPatternId = 10017,
++    UIA_LegacyIAccessiblePatternId = 10018,
++    UIA_ItemContainerPatternId = 10019,
++    UIA_VirtualizedItemPatternId = 10020,
++    UIA_SynchronizedInputPatternId = 10021,
++    UIA_ObjectModelPatternId = 10022,
++    UIA_AnnotationPatternId = 10023,
++    UIA_TextPattern2Id = 10024,
++    UIA_StylesPatternId = 10025,
++    UIA_SpreadsheetPatternId = 10026,
++    UIA_SpreadsheetItemPatternId = 10027,
++    UIA_TransformPattern2Id = 10028,
++    UIA_TextChildPatternId = 10029,
++    UIA_DragPatternId = 10030,
++    UIA_DropTargetPatternId = 10031,
++    UIA_TextEditPatternId = 10032,
++    UIA_CustomNavigationPatternId = 10033,
++    UIA_SelectionPattern2Id = 10034,
++};
++}
++} }
++#pragma pop_macro("UIA_SelectionPattern2Id")
++#pragma pop_macro("UIA_CustomNavigationPatternId")
++#pragma pop_macro("UIA_TextEditPatternId")
++#pragma pop_macro("UIA_DropTargetPatternId")
++#pragma pop_macro("UIA_DragPatternId")
++#pragma pop_macro("UIA_TextChildPatternId")
++#pragma pop_macro("UIA_TransformPattern2Id")
++#pragma pop_macro("UIA_SpreadsheetItemPatternId")
++#pragma pop_macro("UIA_SpreadsheetPatternId")
++#pragma pop_macro("UIA_StylesPatternId")
++#pragma pop_macro("UIA_TextPattern2Id")
++#pragma pop_macro("UIA_AnnotationPatternId")
++#pragma pop_macro("UIA_ObjectModelPatternId")
++#pragma pop_macro("UIA_SynchronizedInputPatternId")
++#pragma pop_macro("UIA_VirtualizedItemPatternId")
++#pragma pop_macro("UIA_ItemContainerPatternId")
++#pragma pop_macro("UIA_LegacyIAccessiblePatternId")
++#pragma pop_macro("UIA_ScrollItemPatternId")
++#pragma pop_macro("UIA_TransformPatternId")
++#pragma pop_macro("UIA_TogglePatternId")
++#pragma pop_macro("UIA_TextPatternId")
++#pragma pop_macro("UIA_TableItemPatternId")
++#pragma pop_macro("UIA_TablePatternId")
++#pragma pop_macro("UIA_DockPatternId")
++#pragma pop_macro("UIA_SelectionItemPatternId")
++#pragma pop_macro("UIA_WindowPatternId")
++#pragma pop_macro("UIA_MultipleViewPatternId")
++#pragma pop_macro("UIA_GridItemPatternId")
++#pragma pop_macro("UIA_GridPatternId")
++#pragma pop_macro("UIA_ExpandCollapsePatternId")
++#pragma pop_macro("UIA_ScrollPatternId")
++#pragma pop_macro("UIA_RangeValuePatternId")
++#pragma pop_macro("UIA_ValuePatternId")
++#pragma pop_macro("UIA_SelectionPatternId")
++#pragma pop_macro("UIA_InvokePatternId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_EVENT_ID
++#define WIN32METADATA_ENUM_UIA_EVENT_ID
++#pragma push_macro("UIA_ToolTipOpenedEventId")
++#undef UIA_ToolTipOpenedEventId
++#pragma push_macro("UIA_ToolTipClosedEventId")
++#undef UIA_ToolTipClosedEventId
++#pragma push_macro("UIA_StructureChangedEventId")
++#undef UIA_StructureChangedEventId
++#pragma push_macro("UIA_MenuOpenedEventId")
++#undef UIA_MenuOpenedEventId
++#pragma push_macro("UIA_AutomationPropertyChangedEventId")
++#undef UIA_AutomationPropertyChangedEventId
++#pragma push_macro("UIA_AutomationFocusChangedEventId")
++#undef UIA_AutomationFocusChangedEventId
++#pragma push_macro("UIA_AsyncContentLoadedEventId")
++#undef UIA_AsyncContentLoadedEventId
++#pragma push_macro("UIA_MenuClosedEventId")
++#undef UIA_MenuClosedEventId
++#pragma push_macro("UIA_LayoutInvalidatedEventId")
++#undef UIA_LayoutInvalidatedEventId
++#pragma push_macro("UIA_Invoke_InvokedEventId")
++#undef UIA_Invoke_InvokedEventId
++#pragma push_macro("UIA_SelectionItem_ElementAddedToSelectionEventId")
++#undef UIA_SelectionItem_ElementAddedToSelectionEventId
++#pragma push_macro("UIA_SelectionItem_ElementRemovedFromSelectionEventId")
++#undef UIA_SelectionItem_ElementRemovedFromSelectionEventId
++#pragma push_macro("UIA_SelectionItem_ElementSelectedEventId")
++#undef UIA_SelectionItem_ElementSelectedEventId
++#pragma push_macro("UIA_Selection_InvalidatedEventId")
++#undef UIA_Selection_InvalidatedEventId
++#pragma push_macro("UIA_Text_TextSelectionChangedEventId")
++#undef UIA_Text_TextSelectionChangedEventId
++#pragma push_macro("UIA_Text_TextChangedEventId")
++#undef UIA_Text_TextChangedEventId
++#pragma push_macro("UIA_Window_WindowOpenedEventId")
++#undef UIA_Window_WindowOpenedEventId
++#pragma push_macro("UIA_Window_WindowClosedEventId")
++#undef UIA_Window_WindowClosedEventId
++#pragma push_macro("UIA_MenuModeStartEventId")
++#undef UIA_MenuModeStartEventId
++#pragma push_macro("UIA_MenuModeEndEventId")
++#undef UIA_MenuModeEndEventId
++#pragma push_macro("UIA_InputReachedTargetEventId")
++#undef UIA_InputReachedTargetEventId
++#pragma push_macro("UIA_InputReachedOtherElementEventId")
++#undef UIA_InputReachedOtherElementEventId
++#pragma push_macro("UIA_InputDiscardedEventId")
++#undef UIA_InputDiscardedEventId
++#pragma push_macro("UIA_SystemAlertEventId")
++#undef UIA_SystemAlertEventId
++#pragma push_macro("UIA_LiveRegionChangedEventId")
++#undef UIA_LiveRegionChangedEventId
++#pragma push_macro("UIA_HostedFragmentRootsInvalidatedEventId")
++#undef UIA_HostedFragmentRootsInvalidatedEventId
++#pragma push_macro("UIA_Drag_DragStartEventId")
++#undef UIA_Drag_DragStartEventId
++#pragma push_macro("UIA_Drag_DragCancelEventId")
++#undef UIA_Drag_DragCancelEventId
++#pragma push_macro("UIA_Drag_DragCompleteEventId")
++#undef UIA_Drag_DragCompleteEventId
++#pragma push_macro("UIA_DropTarget_DragEnterEventId")
++#undef UIA_DropTarget_DragEnterEventId
++#pragma push_macro("UIA_DropTarget_DragLeaveEventId")
++#undef UIA_DropTarget_DragLeaveEventId
++#pragma push_macro("UIA_DropTarget_DroppedEventId")
++#undef UIA_DropTarget_DroppedEventId
++#pragma push_macro("UIA_TextEdit_TextChangedEventId")
++#undef UIA_TextEdit_TextChangedEventId
++#pragma push_macro("UIA_TextEdit_ConversionTargetChangedEventId")
++#undef UIA_TextEdit_ConversionTargetChangedEventId
++#pragma push_macro("UIA_ChangesEventId")
++#undef UIA_ChangesEventId
++#pragma push_macro("UIA_NotificationEventId")
++#undef UIA_NotificationEventId
++#pragma push_macro("UIA_ActiveTextPositionChangedEventId")
++#undef UIA_ActiveTextPositionChangedEventId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_EVENT_IDValues {
++enum UIA_EVENT_ID : int
++{
++    UIA_ToolTipOpenedEventId = 20000,
++    UIA_ToolTipClosedEventId = 20001,
++    UIA_StructureChangedEventId = 20002,
++    UIA_MenuOpenedEventId = 20003,
++    UIA_AutomationPropertyChangedEventId = 20004,
++    UIA_AutomationFocusChangedEventId = 20005,
++    UIA_AsyncContentLoadedEventId = 20006,
++    UIA_MenuClosedEventId = 20007,
++    UIA_LayoutInvalidatedEventId = 20008,
++    UIA_Invoke_InvokedEventId = 20009,
++    UIA_SelectionItem_ElementAddedToSelectionEventId = 20010,
++    UIA_SelectionItem_ElementRemovedFromSelectionEventId = 20011,
++    UIA_SelectionItem_ElementSelectedEventId = 20012,
++    UIA_Selection_InvalidatedEventId = 20013,
++    UIA_Text_TextSelectionChangedEventId = 20014,
++    UIA_Text_TextChangedEventId = 20015,
++    UIA_Window_WindowOpenedEventId = 20016,
++    UIA_Window_WindowClosedEventId = 20017,
++    UIA_MenuModeStartEventId = 20018,
++    UIA_MenuModeEndEventId = 20019,
++    UIA_InputReachedTargetEventId = 20020,
++    UIA_InputReachedOtherElementEventId = 20021,
++    UIA_InputDiscardedEventId = 20022,
++    UIA_SystemAlertEventId = 20023,
++    UIA_LiveRegionChangedEventId = 20024,
++    UIA_HostedFragmentRootsInvalidatedEventId = 20025,
++    UIA_Drag_DragStartEventId = 20026,
++    UIA_Drag_DragCancelEventId = 20027,
++    UIA_Drag_DragCompleteEventId = 20028,
++    UIA_DropTarget_DragEnterEventId = 20029,
++    UIA_DropTarget_DragLeaveEventId = 20030,
++    UIA_DropTarget_DroppedEventId = 20031,
++    UIA_TextEdit_TextChangedEventId = 20032,
++    UIA_TextEdit_ConversionTargetChangedEventId = 20033,
++    UIA_ChangesEventId = 20034,
++    UIA_NotificationEventId = 20035,
++    UIA_ActiveTextPositionChangedEventId = 20036,
++};
++}
++} }
++#pragma pop_macro("UIA_ActiveTextPositionChangedEventId")
++#pragma pop_macro("UIA_NotificationEventId")
++#pragma pop_macro("UIA_ChangesEventId")
++#pragma pop_macro("UIA_TextEdit_ConversionTargetChangedEventId")
++#pragma pop_macro("UIA_TextEdit_TextChangedEventId")
++#pragma pop_macro("UIA_DropTarget_DroppedEventId")
++#pragma pop_macro("UIA_DropTarget_DragLeaveEventId")
++#pragma pop_macro("UIA_DropTarget_DragEnterEventId")
++#pragma pop_macro("UIA_Drag_DragCompleteEventId")
++#pragma pop_macro("UIA_Drag_DragCancelEventId")
++#pragma pop_macro("UIA_Drag_DragStartEventId")
++#pragma pop_macro("UIA_HostedFragmentRootsInvalidatedEventId")
++#pragma pop_macro("UIA_LiveRegionChangedEventId")
++#pragma pop_macro("UIA_SystemAlertEventId")
++#pragma pop_macro("UIA_InputDiscardedEventId")
++#pragma pop_macro("UIA_InputReachedOtherElementEventId")
++#pragma pop_macro("UIA_InputReachedTargetEventId")
++#pragma pop_macro("UIA_MenuModeEndEventId")
++#pragma pop_macro("UIA_MenuModeStartEventId")
++#pragma pop_macro("UIA_Window_WindowClosedEventId")
++#pragma pop_macro("UIA_Window_WindowOpenedEventId")
++#pragma pop_macro("UIA_Text_TextChangedEventId")
++#pragma pop_macro("UIA_Text_TextSelectionChangedEventId")
++#pragma pop_macro("UIA_Selection_InvalidatedEventId")
++#pragma pop_macro("UIA_SelectionItem_ElementSelectedEventId")
++#pragma pop_macro("UIA_SelectionItem_ElementRemovedFromSelectionEventId")
++#pragma pop_macro("UIA_SelectionItem_ElementAddedToSelectionEventId")
++#pragma pop_macro("UIA_Invoke_InvokedEventId")
++#pragma pop_macro("UIA_LayoutInvalidatedEventId")
++#pragma pop_macro("UIA_MenuClosedEventId")
++#pragma pop_macro("UIA_AsyncContentLoadedEventId")
++#pragma pop_macro("UIA_AutomationFocusChangedEventId")
++#pragma pop_macro("UIA_AutomationPropertyChangedEventId")
++#pragma pop_macro("UIA_MenuOpenedEventId")
++#pragma pop_macro("UIA_StructureChangedEventId")
++#pragma pop_macro("UIA_ToolTipClosedEventId")
++#pragma pop_macro("UIA_ToolTipOpenedEventId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_PROPERTY_ID
++#define WIN32METADATA_ENUM_UIA_PROPERTY_ID
++#pragma push_macro("UIA_RuntimeIdPropertyId")
++#undef UIA_RuntimeIdPropertyId
++#pragma push_macro("UIA_BoundingRectanglePropertyId")
++#undef UIA_BoundingRectanglePropertyId
++#pragma push_macro("UIA_ProcessIdPropertyId")
++#undef UIA_ProcessIdPropertyId
++#pragma push_macro("UIA_ControlTypePropertyId")
++#undef UIA_ControlTypePropertyId
++#pragma push_macro("UIA_LocalizedControlTypePropertyId")
++#undef UIA_LocalizedControlTypePropertyId
++#pragma push_macro("UIA_NamePropertyId")
++#undef UIA_NamePropertyId
++#pragma push_macro("UIA_AcceleratorKeyPropertyId")
++#undef UIA_AcceleratorKeyPropertyId
++#pragma push_macro("UIA_AccessKeyPropertyId")
++#undef UIA_AccessKeyPropertyId
++#pragma push_macro("UIA_HasKeyboardFocusPropertyId")
++#undef UIA_HasKeyboardFocusPropertyId
++#pragma push_macro("UIA_IsKeyboardFocusablePropertyId")
++#undef UIA_IsKeyboardFocusablePropertyId
++#pragma push_macro("UIA_IsEnabledPropertyId")
++#undef UIA_IsEnabledPropertyId
++#pragma push_macro("UIA_AutomationIdPropertyId")
++#undef UIA_AutomationIdPropertyId
++#pragma push_macro("UIA_ClassNamePropertyId")
++#undef UIA_ClassNamePropertyId
++#pragma push_macro("UIA_HelpTextPropertyId")
++#undef UIA_HelpTextPropertyId
++#pragma push_macro("UIA_ClickablePointPropertyId")
++#undef UIA_ClickablePointPropertyId
++#pragma push_macro("UIA_CulturePropertyId")
++#undef UIA_CulturePropertyId
++#pragma push_macro("UIA_IsControlElementPropertyId")
++#undef UIA_IsControlElementPropertyId
++#pragma push_macro("UIA_IsContentElementPropertyId")
++#undef UIA_IsContentElementPropertyId
++#pragma push_macro("UIA_LabeledByPropertyId")
++#undef UIA_LabeledByPropertyId
++#pragma push_macro("UIA_IsPasswordPropertyId")
++#undef UIA_IsPasswordPropertyId
++#pragma push_macro("UIA_NativeWindowHandlePropertyId")
++#undef UIA_NativeWindowHandlePropertyId
++#pragma push_macro("UIA_ItemTypePropertyId")
++#undef UIA_ItemTypePropertyId
++#pragma push_macro("UIA_IsOffscreenPropertyId")
++#undef UIA_IsOffscreenPropertyId
++#pragma push_macro("UIA_OrientationPropertyId")
++#undef UIA_OrientationPropertyId
++#pragma push_macro("UIA_FrameworkIdPropertyId")
++#undef UIA_FrameworkIdPropertyId
++#pragma push_macro("UIA_IsRequiredForFormPropertyId")
++#undef UIA_IsRequiredForFormPropertyId
++#pragma push_macro("UIA_ItemStatusPropertyId")
++#undef UIA_ItemStatusPropertyId
++#pragma push_macro("UIA_IsDockPatternAvailablePropertyId")
++#undef UIA_IsDockPatternAvailablePropertyId
++#pragma push_macro("UIA_IsExpandCollapsePatternAvailablePropertyId")
++#undef UIA_IsExpandCollapsePatternAvailablePropertyId
++#pragma push_macro("UIA_IsGridItemPatternAvailablePropertyId")
++#undef UIA_IsGridItemPatternAvailablePropertyId
++#pragma push_macro("UIA_IsGridPatternAvailablePropertyId")
++#undef UIA_IsGridPatternAvailablePropertyId
++#pragma push_macro("UIA_IsInvokePatternAvailablePropertyId")
++#undef UIA_IsInvokePatternAvailablePropertyId
++#pragma push_macro("UIA_IsMultipleViewPatternAvailablePropertyId")
++#undef UIA_IsMultipleViewPatternAvailablePropertyId
++#pragma push_macro("UIA_IsRangeValuePatternAvailablePropertyId")
++#undef UIA_IsRangeValuePatternAvailablePropertyId
++#pragma push_macro("UIA_IsScrollPatternAvailablePropertyId")
++#undef UIA_IsScrollPatternAvailablePropertyId
++#pragma push_macro("UIA_IsScrollItemPatternAvailablePropertyId")
++#undef UIA_IsScrollItemPatternAvailablePropertyId
++#pragma push_macro("UIA_IsSelectionItemPatternAvailablePropertyId")
++#undef UIA_IsSelectionItemPatternAvailablePropertyId
++#pragma push_macro("UIA_IsSelectionPatternAvailablePropertyId")
++#undef UIA_IsSelectionPatternAvailablePropertyId
++#pragma push_macro("UIA_IsTablePatternAvailablePropertyId")
++#undef UIA_IsTablePatternAvailablePropertyId
++#pragma push_macro("UIA_IsTableItemPatternAvailablePropertyId")
++#undef UIA_IsTableItemPatternAvailablePropertyId
++#pragma push_macro("UIA_IsTextPatternAvailablePropertyId")
++#undef UIA_IsTextPatternAvailablePropertyId
++#pragma push_macro("UIA_IsTogglePatternAvailablePropertyId")
++#undef UIA_IsTogglePatternAvailablePropertyId
++#pragma push_macro("UIA_IsTransformPatternAvailablePropertyId")
++#undef UIA_IsTransformPatternAvailablePropertyId
++#pragma push_macro("UIA_IsValuePatternAvailablePropertyId")
++#undef UIA_IsValuePatternAvailablePropertyId
++#pragma push_macro("UIA_IsWindowPatternAvailablePropertyId")
++#undef UIA_IsWindowPatternAvailablePropertyId
++#pragma push_macro("UIA_ValueValuePropertyId")
++#undef UIA_ValueValuePropertyId
++#pragma push_macro("UIA_ValueIsReadOnlyPropertyId")
++#undef UIA_ValueIsReadOnlyPropertyId
++#pragma push_macro("UIA_RangeValueValuePropertyId")
++#undef UIA_RangeValueValuePropertyId
++#pragma push_macro("UIA_RangeValueIsReadOnlyPropertyId")
++#undef UIA_RangeValueIsReadOnlyPropertyId
++#pragma push_macro("UIA_RangeValueMinimumPropertyId")
++#undef UIA_RangeValueMinimumPropertyId
++#pragma push_macro("UIA_RangeValueMaximumPropertyId")
++#undef UIA_RangeValueMaximumPropertyId
++#pragma push_macro("UIA_RangeValueLargeChangePropertyId")
++#undef UIA_RangeValueLargeChangePropertyId
++#pragma push_macro("UIA_RangeValueSmallChangePropertyId")
++#undef UIA_RangeValueSmallChangePropertyId
++#pragma push_macro("UIA_ScrollHorizontalScrollPercentPropertyId")
++#undef UIA_ScrollHorizontalScrollPercentPropertyId
++#pragma push_macro("UIA_ScrollHorizontalViewSizePropertyId")
++#undef UIA_ScrollHorizontalViewSizePropertyId
++#pragma push_macro("UIA_ScrollVerticalScrollPercentPropertyId")
++#undef UIA_ScrollVerticalScrollPercentPropertyId
++#pragma push_macro("UIA_ScrollVerticalViewSizePropertyId")
++#undef UIA_ScrollVerticalViewSizePropertyId
++#pragma push_macro("UIA_ScrollHorizontallyScrollablePropertyId")
++#undef UIA_ScrollHorizontallyScrollablePropertyId
++#pragma push_macro("UIA_ScrollVerticallyScrollablePropertyId")
++#undef UIA_ScrollVerticallyScrollablePropertyId
++#pragma push_macro("UIA_SelectionSelectionPropertyId")
++#undef UIA_SelectionSelectionPropertyId
++#pragma push_macro("UIA_SelectionCanSelectMultiplePropertyId")
++#undef UIA_SelectionCanSelectMultiplePropertyId
++#pragma push_macro("UIA_SelectionIsSelectionRequiredPropertyId")
++#undef UIA_SelectionIsSelectionRequiredPropertyId
++#pragma push_macro("UIA_GridRowCountPropertyId")
++#undef UIA_GridRowCountPropertyId
++#pragma push_macro("UIA_GridColumnCountPropertyId")
++#undef UIA_GridColumnCountPropertyId
++#pragma push_macro("UIA_GridItemRowPropertyId")
++#undef UIA_GridItemRowPropertyId
++#pragma push_macro("UIA_GridItemColumnPropertyId")
++#undef UIA_GridItemColumnPropertyId
++#pragma push_macro("UIA_GridItemRowSpanPropertyId")
++#undef UIA_GridItemRowSpanPropertyId
++#pragma push_macro("UIA_GridItemColumnSpanPropertyId")
++#undef UIA_GridItemColumnSpanPropertyId
++#pragma push_macro("UIA_GridItemContainingGridPropertyId")
++#undef UIA_GridItemContainingGridPropertyId
++#pragma push_macro("UIA_DockDockPositionPropertyId")
++#undef UIA_DockDockPositionPropertyId
++#pragma push_macro("UIA_ExpandCollapseExpandCollapseStatePropertyId")
++#undef UIA_ExpandCollapseExpandCollapseStatePropertyId
++#pragma push_macro("UIA_MultipleViewCurrentViewPropertyId")
++#undef UIA_MultipleViewCurrentViewPropertyId
++#pragma push_macro("UIA_MultipleViewSupportedViewsPropertyId")
++#undef UIA_MultipleViewSupportedViewsPropertyId
++#pragma push_macro("UIA_WindowCanMaximizePropertyId")
++#undef UIA_WindowCanMaximizePropertyId
++#pragma push_macro("UIA_WindowCanMinimizePropertyId")
++#undef UIA_WindowCanMinimizePropertyId
++#pragma push_macro("UIA_WindowWindowVisualStatePropertyId")
++#undef UIA_WindowWindowVisualStatePropertyId
++#pragma push_macro("UIA_WindowWindowInteractionStatePropertyId")
++#undef UIA_WindowWindowInteractionStatePropertyId
++#pragma push_macro("UIA_WindowIsModalPropertyId")
++#undef UIA_WindowIsModalPropertyId
++#pragma push_macro("UIA_WindowIsTopmostPropertyId")
++#undef UIA_WindowIsTopmostPropertyId
++#pragma push_macro("UIA_SelectionItemIsSelectedPropertyId")
++#undef UIA_SelectionItemIsSelectedPropertyId
++#pragma push_macro("UIA_SelectionItemSelectionContainerPropertyId")
++#undef UIA_SelectionItemSelectionContainerPropertyId
++#pragma push_macro("UIA_TableRowHeadersPropertyId")
++#undef UIA_TableRowHeadersPropertyId
++#pragma push_macro("UIA_TableColumnHeadersPropertyId")
++#undef UIA_TableColumnHeadersPropertyId
++#pragma push_macro("UIA_TableRowOrColumnMajorPropertyId")
++#undef UIA_TableRowOrColumnMajorPropertyId
++#pragma push_macro("UIA_TableItemRowHeaderItemsPropertyId")
++#undef UIA_TableItemRowHeaderItemsPropertyId
++#pragma push_macro("UIA_TableItemColumnHeaderItemsPropertyId")
++#undef UIA_TableItemColumnHeaderItemsPropertyId
++#pragma push_macro("UIA_ToggleToggleStatePropertyId")
++#undef UIA_ToggleToggleStatePropertyId
++#pragma push_macro("UIA_TransformCanMovePropertyId")
++#undef UIA_TransformCanMovePropertyId
++#pragma push_macro("UIA_TransformCanResizePropertyId")
++#undef UIA_TransformCanResizePropertyId
++#pragma push_macro("UIA_TransformCanRotatePropertyId")
++#undef UIA_TransformCanRotatePropertyId
++#pragma push_macro("UIA_IsLegacyIAccessiblePatternAvailablePropertyId")
++#undef UIA_IsLegacyIAccessiblePatternAvailablePropertyId
++#pragma push_macro("UIA_LegacyIAccessibleChildIdPropertyId")
++#undef UIA_LegacyIAccessibleChildIdPropertyId
++#pragma push_macro("UIA_LegacyIAccessibleNamePropertyId")
++#undef UIA_LegacyIAccessibleNamePropertyId
++#pragma push_macro("UIA_LegacyIAccessibleValuePropertyId")
++#undef UIA_LegacyIAccessibleValuePropertyId
++#pragma push_macro("UIA_LegacyIAccessibleDescriptionPropertyId")
++#undef UIA_LegacyIAccessibleDescriptionPropertyId
++#pragma push_macro("UIA_LegacyIAccessibleRolePropertyId")
++#undef UIA_LegacyIAccessibleRolePropertyId
++#pragma push_macro("UIA_LegacyIAccessibleStatePropertyId")
++#undef UIA_LegacyIAccessibleStatePropertyId
++#pragma push_macro("UIA_LegacyIAccessibleHelpPropertyId")
++#undef UIA_LegacyIAccessibleHelpPropertyId
++#pragma push_macro("UIA_LegacyIAccessibleKeyboardShortcutPropertyId")
++#undef UIA_LegacyIAccessibleKeyboardShortcutPropertyId
++#pragma push_macro("UIA_LegacyIAccessibleSelectionPropertyId")
++#undef UIA_LegacyIAccessibleSelectionPropertyId
++#pragma push_macro("UIA_LegacyIAccessibleDefaultActionPropertyId")
++#undef UIA_LegacyIAccessibleDefaultActionPropertyId
++#pragma push_macro("UIA_AriaRolePropertyId")
++#undef UIA_AriaRolePropertyId
++#pragma push_macro("UIA_AriaPropertiesPropertyId")
++#undef UIA_AriaPropertiesPropertyId
++#pragma push_macro("UIA_IsDataValidForFormPropertyId")
++#undef UIA_IsDataValidForFormPropertyId
++#pragma push_macro("UIA_ControllerForPropertyId")
++#undef UIA_ControllerForPropertyId
++#pragma push_macro("UIA_DescribedByPropertyId")
++#undef UIA_DescribedByPropertyId
++#pragma push_macro("UIA_FlowsToPropertyId")
++#undef UIA_FlowsToPropertyId
++#pragma push_macro("UIA_ProviderDescriptionPropertyId")
++#undef UIA_ProviderDescriptionPropertyId
++#pragma push_macro("UIA_IsItemContainerPatternAvailablePropertyId")
++#undef UIA_IsItemContainerPatternAvailablePropertyId
++#pragma push_macro("UIA_IsVirtualizedItemPatternAvailablePropertyId")
++#undef UIA_IsVirtualizedItemPatternAvailablePropertyId
++#pragma push_macro("UIA_IsSynchronizedInputPatternAvailablePropertyId")
++#undef UIA_IsSynchronizedInputPatternAvailablePropertyId
++#pragma push_macro("UIA_OptimizeForVisualContentPropertyId")
++#undef UIA_OptimizeForVisualContentPropertyId
++#pragma push_macro("UIA_IsObjectModelPatternAvailablePropertyId")
++#undef UIA_IsObjectModelPatternAvailablePropertyId
++#pragma push_macro("UIA_AnnotationAnnotationTypeIdPropertyId")
++#undef UIA_AnnotationAnnotationTypeIdPropertyId
++#pragma push_macro("UIA_AnnotationAnnotationTypeNamePropertyId")
++#undef UIA_AnnotationAnnotationTypeNamePropertyId
++#pragma push_macro("UIA_AnnotationAuthorPropertyId")
++#undef UIA_AnnotationAuthorPropertyId
++#pragma push_macro("UIA_AnnotationDateTimePropertyId")
++#undef UIA_AnnotationDateTimePropertyId
++#pragma push_macro("UIA_AnnotationTargetPropertyId")
++#undef UIA_AnnotationTargetPropertyId
++#pragma push_macro("UIA_IsAnnotationPatternAvailablePropertyId")
++#undef UIA_IsAnnotationPatternAvailablePropertyId
++#pragma push_macro("UIA_IsTextPattern2AvailablePropertyId")
++#undef UIA_IsTextPattern2AvailablePropertyId
++#pragma push_macro("UIA_StylesStyleIdPropertyId")
++#undef UIA_StylesStyleIdPropertyId
++#pragma push_macro("UIA_StylesStyleNamePropertyId")
++#undef UIA_StylesStyleNamePropertyId
++#pragma push_macro("UIA_StylesFillColorPropertyId")
++#undef UIA_StylesFillColorPropertyId
++#pragma push_macro("UIA_StylesFillPatternStylePropertyId")
++#undef UIA_StylesFillPatternStylePropertyId
++#pragma push_macro("UIA_StylesShapePropertyId")
++#undef UIA_StylesShapePropertyId
++#pragma push_macro("UIA_StylesFillPatternColorPropertyId")
++#undef UIA_StylesFillPatternColorPropertyId
++#pragma push_macro("UIA_StylesExtendedPropertiesPropertyId")
++#undef UIA_StylesExtendedPropertiesPropertyId
++#pragma push_macro("UIA_IsStylesPatternAvailablePropertyId")
++#undef UIA_IsStylesPatternAvailablePropertyId
++#pragma push_macro("UIA_IsSpreadsheetPatternAvailablePropertyId")
++#undef UIA_IsSpreadsheetPatternAvailablePropertyId
++#pragma push_macro("UIA_SpreadsheetItemFormulaPropertyId")
++#undef UIA_SpreadsheetItemFormulaPropertyId
++#pragma push_macro("UIA_SpreadsheetItemAnnotationObjectsPropertyId")
++#undef UIA_SpreadsheetItemAnnotationObjectsPropertyId
++#pragma push_macro("UIA_SpreadsheetItemAnnotationTypesPropertyId")
++#undef UIA_SpreadsheetItemAnnotationTypesPropertyId
++#pragma push_macro("UIA_IsSpreadsheetItemPatternAvailablePropertyId")
++#undef UIA_IsSpreadsheetItemPatternAvailablePropertyId
++#pragma push_macro("UIA_Transform2CanZoomPropertyId")
++#undef UIA_Transform2CanZoomPropertyId
++#pragma push_macro("UIA_IsTransformPattern2AvailablePropertyId")
++#undef UIA_IsTransformPattern2AvailablePropertyId
++#pragma push_macro("UIA_LiveSettingPropertyId")
++#undef UIA_LiveSettingPropertyId
++#pragma push_macro("UIA_IsTextChildPatternAvailablePropertyId")
++#undef UIA_IsTextChildPatternAvailablePropertyId
++#pragma push_macro("UIA_IsDragPatternAvailablePropertyId")
++#undef UIA_IsDragPatternAvailablePropertyId
++#pragma push_macro("UIA_DragIsGrabbedPropertyId")
++#undef UIA_DragIsGrabbedPropertyId
++#pragma push_macro("UIA_DragDropEffectPropertyId")
++#undef UIA_DragDropEffectPropertyId
++#pragma push_macro("UIA_DragDropEffectsPropertyId")
++#undef UIA_DragDropEffectsPropertyId
++#pragma push_macro("UIA_IsDropTargetPatternAvailablePropertyId")
++#undef UIA_IsDropTargetPatternAvailablePropertyId
++#pragma push_macro("UIA_DropTargetDropTargetEffectPropertyId")
++#undef UIA_DropTargetDropTargetEffectPropertyId
++#pragma push_macro("UIA_DropTargetDropTargetEffectsPropertyId")
++#undef UIA_DropTargetDropTargetEffectsPropertyId
++#pragma push_macro("UIA_DragGrabbedItemsPropertyId")
++#undef UIA_DragGrabbedItemsPropertyId
++#pragma push_macro("UIA_Transform2ZoomLevelPropertyId")
++#undef UIA_Transform2ZoomLevelPropertyId
++#pragma push_macro("UIA_Transform2ZoomMinimumPropertyId")
++#undef UIA_Transform2ZoomMinimumPropertyId
++#pragma push_macro("UIA_Transform2ZoomMaximumPropertyId")
++#undef UIA_Transform2ZoomMaximumPropertyId
++#pragma push_macro("UIA_FlowsFromPropertyId")
++#undef UIA_FlowsFromPropertyId
++#pragma push_macro("UIA_IsTextEditPatternAvailablePropertyId")
++#undef UIA_IsTextEditPatternAvailablePropertyId
++#pragma push_macro("UIA_IsPeripheralPropertyId")
++#undef UIA_IsPeripheralPropertyId
++#pragma push_macro("UIA_IsCustomNavigationPatternAvailablePropertyId")
++#undef UIA_IsCustomNavigationPatternAvailablePropertyId
++#pragma push_macro("UIA_PositionInSetPropertyId")
++#undef UIA_PositionInSetPropertyId
++#pragma push_macro("UIA_SizeOfSetPropertyId")
++#undef UIA_SizeOfSetPropertyId
++#pragma push_macro("UIA_LevelPropertyId")
++#undef UIA_LevelPropertyId
++#pragma push_macro("UIA_AnnotationTypesPropertyId")
++#undef UIA_AnnotationTypesPropertyId
++#pragma push_macro("UIA_AnnotationObjectsPropertyId")
++#undef UIA_AnnotationObjectsPropertyId
++#pragma push_macro("UIA_LandmarkTypePropertyId")
++#undef UIA_LandmarkTypePropertyId
++#pragma push_macro("UIA_LocalizedLandmarkTypePropertyId")
++#undef UIA_LocalizedLandmarkTypePropertyId
++#pragma push_macro("UIA_FullDescriptionPropertyId")
++#undef UIA_FullDescriptionPropertyId
++#pragma push_macro("UIA_FillColorPropertyId")
++#undef UIA_FillColorPropertyId
++#pragma push_macro("UIA_OutlineColorPropertyId")
++#undef UIA_OutlineColorPropertyId
++#pragma push_macro("UIA_FillTypePropertyId")
++#undef UIA_FillTypePropertyId
++#pragma push_macro("UIA_VisualEffectsPropertyId")
++#undef UIA_VisualEffectsPropertyId
++#pragma push_macro("UIA_OutlineThicknessPropertyId")
++#undef UIA_OutlineThicknessPropertyId
++#pragma push_macro("UIA_CenterPointPropertyId")
++#undef UIA_CenterPointPropertyId
++#pragma push_macro("UIA_RotationPropertyId")
++#undef UIA_RotationPropertyId
++#pragma push_macro("UIA_SizePropertyId")
++#undef UIA_SizePropertyId
++#pragma push_macro("UIA_IsSelectionPattern2AvailablePropertyId")
++#undef UIA_IsSelectionPattern2AvailablePropertyId
++#pragma push_macro("UIA_Selection2FirstSelectedItemPropertyId")
++#undef UIA_Selection2FirstSelectedItemPropertyId
++#pragma push_macro("UIA_Selection2LastSelectedItemPropertyId")
++#undef UIA_Selection2LastSelectedItemPropertyId
++#pragma push_macro("UIA_Selection2CurrentSelectedItemPropertyId")
++#undef UIA_Selection2CurrentSelectedItemPropertyId
++#pragma push_macro("UIA_Selection2ItemCountPropertyId")
++#undef UIA_Selection2ItemCountPropertyId
++#pragma push_macro("UIA_HeadingLevelPropertyId")
++#undef UIA_HeadingLevelPropertyId
++#pragma push_macro("UIA_IsDialogPropertyId")
++#undef UIA_IsDialogPropertyId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_PROPERTY_IDValues {
++enum UIA_PROPERTY_ID : int
++{
++    UIA_RuntimeIdPropertyId = 30000,
++    UIA_BoundingRectanglePropertyId = 30001,
++    UIA_ProcessIdPropertyId = 30002,
++    UIA_ControlTypePropertyId = 30003,
++    UIA_LocalizedControlTypePropertyId = 30004,
++    UIA_NamePropertyId = 30005,
++    UIA_AcceleratorKeyPropertyId = 30006,
++    UIA_AccessKeyPropertyId = 30007,
++    UIA_HasKeyboardFocusPropertyId = 30008,
++    UIA_IsKeyboardFocusablePropertyId = 30009,
++    UIA_IsEnabledPropertyId = 30010,
++    UIA_AutomationIdPropertyId = 30011,
++    UIA_ClassNamePropertyId = 30012,
++    UIA_HelpTextPropertyId = 30013,
++    UIA_ClickablePointPropertyId = 30014,
++    UIA_CulturePropertyId = 30015,
++    UIA_IsControlElementPropertyId = 30016,
++    UIA_IsContentElementPropertyId = 30017,
++    UIA_LabeledByPropertyId = 30018,
++    UIA_IsPasswordPropertyId = 30019,
++    UIA_NativeWindowHandlePropertyId = 30020,
++    UIA_ItemTypePropertyId = 30021,
++    UIA_IsOffscreenPropertyId = 30022,
++    UIA_OrientationPropertyId = 30023,
++    UIA_FrameworkIdPropertyId = 30024,
++    UIA_IsRequiredForFormPropertyId = 30025,
++    UIA_ItemStatusPropertyId = 30026,
++    UIA_IsDockPatternAvailablePropertyId = 30027,
++    UIA_IsExpandCollapsePatternAvailablePropertyId = 30028,
++    UIA_IsGridItemPatternAvailablePropertyId = 30029,
++    UIA_IsGridPatternAvailablePropertyId = 30030,
++    UIA_IsInvokePatternAvailablePropertyId = 30031,
++    UIA_IsMultipleViewPatternAvailablePropertyId = 30032,
++    UIA_IsRangeValuePatternAvailablePropertyId = 30033,
++    UIA_IsScrollPatternAvailablePropertyId = 30034,
++    UIA_IsScrollItemPatternAvailablePropertyId = 30035,
++    UIA_IsSelectionItemPatternAvailablePropertyId = 30036,
++    UIA_IsSelectionPatternAvailablePropertyId = 30037,
++    UIA_IsTablePatternAvailablePropertyId = 30038,
++    UIA_IsTableItemPatternAvailablePropertyId = 30039,
++    UIA_IsTextPatternAvailablePropertyId = 30040,
++    UIA_IsTogglePatternAvailablePropertyId = 30041,
++    UIA_IsTransformPatternAvailablePropertyId = 30042,
++    UIA_IsValuePatternAvailablePropertyId = 30043,
++    UIA_IsWindowPatternAvailablePropertyId = 30044,
++    UIA_ValueValuePropertyId = 30045,
++    UIA_ValueIsReadOnlyPropertyId = 30046,
++    UIA_RangeValueValuePropertyId = 30047,
++    UIA_RangeValueIsReadOnlyPropertyId = 30048,
++    UIA_RangeValueMinimumPropertyId = 30049,
++    UIA_RangeValueMaximumPropertyId = 30050,
++    UIA_RangeValueLargeChangePropertyId = 30051,
++    UIA_RangeValueSmallChangePropertyId = 30052,
++    UIA_ScrollHorizontalScrollPercentPropertyId = 30053,
++    UIA_ScrollHorizontalViewSizePropertyId = 30054,
++    UIA_ScrollVerticalScrollPercentPropertyId = 30055,
++    UIA_ScrollVerticalViewSizePropertyId = 30056,
++    UIA_ScrollHorizontallyScrollablePropertyId = 30057,
++    UIA_ScrollVerticallyScrollablePropertyId = 30058,
++    UIA_SelectionSelectionPropertyId = 30059,
++    UIA_SelectionCanSelectMultiplePropertyId = 30060,
++    UIA_SelectionIsSelectionRequiredPropertyId = 30061,
++    UIA_GridRowCountPropertyId = 30062,
++    UIA_GridColumnCountPropertyId = 30063,
++    UIA_GridItemRowPropertyId = 30064,
++    UIA_GridItemColumnPropertyId = 30065,
++    UIA_GridItemRowSpanPropertyId = 30066,
++    UIA_GridItemColumnSpanPropertyId = 30067,
++    UIA_GridItemContainingGridPropertyId = 30068,
++    UIA_DockDockPositionPropertyId = 30069,
++    UIA_ExpandCollapseExpandCollapseStatePropertyId = 30070,
++    UIA_MultipleViewCurrentViewPropertyId = 30071,
++    UIA_MultipleViewSupportedViewsPropertyId = 30072,
++    UIA_WindowCanMaximizePropertyId = 30073,
++    UIA_WindowCanMinimizePropertyId = 30074,
++    UIA_WindowWindowVisualStatePropertyId = 30075,
++    UIA_WindowWindowInteractionStatePropertyId = 30076,
++    UIA_WindowIsModalPropertyId = 30077,
++    UIA_WindowIsTopmostPropertyId = 30078,
++    UIA_SelectionItemIsSelectedPropertyId = 30079,
++    UIA_SelectionItemSelectionContainerPropertyId = 30080,
++    UIA_TableRowHeadersPropertyId = 30081,
++    UIA_TableColumnHeadersPropertyId = 30082,
++    UIA_TableRowOrColumnMajorPropertyId = 30083,
++    UIA_TableItemRowHeaderItemsPropertyId = 30084,
++    UIA_TableItemColumnHeaderItemsPropertyId = 30085,
++    UIA_ToggleToggleStatePropertyId = 30086,
++    UIA_TransformCanMovePropertyId = 30087,
++    UIA_TransformCanResizePropertyId = 30088,
++    UIA_TransformCanRotatePropertyId = 30089,
++    UIA_IsLegacyIAccessiblePatternAvailablePropertyId = 30090,
++    UIA_LegacyIAccessibleChildIdPropertyId = 30091,
++    UIA_LegacyIAccessibleNamePropertyId = 30092,
++    UIA_LegacyIAccessibleValuePropertyId = 30093,
++    UIA_LegacyIAccessibleDescriptionPropertyId = 30094,
++    UIA_LegacyIAccessibleRolePropertyId = 30095,
++    UIA_LegacyIAccessibleStatePropertyId = 30096,
++    UIA_LegacyIAccessibleHelpPropertyId = 30097,
++    UIA_LegacyIAccessibleKeyboardShortcutPropertyId = 30098,
++    UIA_LegacyIAccessibleSelectionPropertyId = 30099,
++    UIA_LegacyIAccessibleDefaultActionPropertyId = 30100,
++    UIA_AriaRolePropertyId = 30101,
++    UIA_AriaPropertiesPropertyId = 30102,
++    UIA_IsDataValidForFormPropertyId = 30103,
++    UIA_ControllerForPropertyId = 30104,
++    UIA_DescribedByPropertyId = 30105,
++    UIA_FlowsToPropertyId = 30106,
++    UIA_ProviderDescriptionPropertyId = 30107,
++    UIA_IsItemContainerPatternAvailablePropertyId = 30108,
++    UIA_IsVirtualizedItemPatternAvailablePropertyId = 30109,
++    UIA_IsSynchronizedInputPatternAvailablePropertyId = 30110,
++    UIA_OptimizeForVisualContentPropertyId = 30111,
++    UIA_IsObjectModelPatternAvailablePropertyId = 30112,
++    UIA_AnnotationAnnotationTypeIdPropertyId = 30113,
++    UIA_AnnotationAnnotationTypeNamePropertyId = 30114,
++    UIA_AnnotationAuthorPropertyId = 30115,
++    UIA_AnnotationDateTimePropertyId = 30116,
++    UIA_AnnotationTargetPropertyId = 30117,
++    UIA_IsAnnotationPatternAvailablePropertyId = 30118,
++    UIA_IsTextPattern2AvailablePropertyId = 30119,
++    UIA_StylesStyleIdPropertyId = 30120,
++    UIA_StylesStyleNamePropertyId = 30121,
++    UIA_StylesFillColorPropertyId = 30122,
++    UIA_StylesFillPatternStylePropertyId = 30123,
++    UIA_StylesShapePropertyId = 30124,
++    UIA_StylesFillPatternColorPropertyId = 30125,
++    UIA_StylesExtendedPropertiesPropertyId = 30126,
++    UIA_IsStylesPatternAvailablePropertyId = 30127,
++    UIA_IsSpreadsheetPatternAvailablePropertyId = 30128,
++    UIA_SpreadsheetItemFormulaPropertyId = 30129,
++    UIA_SpreadsheetItemAnnotationObjectsPropertyId = 30130,
++    UIA_SpreadsheetItemAnnotationTypesPropertyId = 30131,
++    UIA_IsSpreadsheetItemPatternAvailablePropertyId = 30132,
++    UIA_Transform2CanZoomPropertyId = 30133,
++    UIA_IsTransformPattern2AvailablePropertyId = 30134,
++    UIA_LiveSettingPropertyId = 30135,
++    UIA_IsTextChildPatternAvailablePropertyId = 30136,
++    UIA_IsDragPatternAvailablePropertyId = 30137,
++    UIA_DragIsGrabbedPropertyId = 30138,
++    UIA_DragDropEffectPropertyId = 30139,
++    UIA_DragDropEffectsPropertyId = 30140,
++    UIA_IsDropTargetPatternAvailablePropertyId = 30141,
++    UIA_DropTargetDropTargetEffectPropertyId = 30142,
++    UIA_DropTargetDropTargetEffectsPropertyId = 30143,
++    UIA_DragGrabbedItemsPropertyId = 30144,
++    UIA_Transform2ZoomLevelPropertyId = 30145,
++    UIA_Transform2ZoomMinimumPropertyId = 30146,
++    UIA_Transform2ZoomMaximumPropertyId = 30147,
++    UIA_FlowsFromPropertyId = 30148,
++    UIA_IsTextEditPatternAvailablePropertyId = 30149,
++    UIA_IsPeripheralPropertyId = 30150,
++    UIA_IsCustomNavigationPatternAvailablePropertyId = 30151,
++    UIA_PositionInSetPropertyId = 30152,
++    UIA_SizeOfSetPropertyId = 30153,
++    UIA_LevelPropertyId = 30154,
++    UIA_AnnotationTypesPropertyId = 30155,
++    UIA_AnnotationObjectsPropertyId = 30156,
++    UIA_LandmarkTypePropertyId = 30157,
++    UIA_LocalizedLandmarkTypePropertyId = 30158,
++    UIA_FullDescriptionPropertyId = 30159,
++    UIA_FillColorPropertyId = 30160,
++    UIA_OutlineColorPropertyId = 30161,
++    UIA_FillTypePropertyId = 30162,
++    UIA_VisualEffectsPropertyId = 30163,
++    UIA_OutlineThicknessPropertyId = 30164,
++    UIA_CenterPointPropertyId = 30165,
++    UIA_RotationPropertyId = 30166,
++    UIA_SizePropertyId = 30167,
++    UIA_IsSelectionPattern2AvailablePropertyId = 30168,
++    UIA_Selection2FirstSelectedItemPropertyId = 30169,
++    UIA_Selection2LastSelectedItemPropertyId = 30170,
++    UIA_Selection2CurrentSelectedItemPropertyId = 30171,
++    UIA_Selection2ItemCountPropertyId = 30172,
++    UIA_HeadingLevelPropertyId = 30173,
++    UIA_IsDialogPropertyId = 30174,
++};
++}
++} }
++#pragma pop_macro("UIA_IsDialogPropertyId")
++#pragma pop_macro("UIA_HeadingLevelPropertyId")
++#pragma pop_macro("UIA_Selection2ItemCountPropertyId")
++#pragma pop_macro("UIA_Selection2CurrentSelectedItemPropertyId")
++#pragma pop_macro("UIA_Selection2LastSelectedItemPropertyId")
++#pragma pop_macro("UIA_Selection2FirstSelectedItemPropertyId")
++#pragma pop_macro("UIA_IsSelectionPattern2AvailablePropertyId")
++#pragma pop_macro("UIA_SizePropertyId")
++#pragma pop_macro("UIA_RotationPropertyId")
++#pragma pop_macro("UIA_CenterPointPropertyId")
++#pragma pop_macro("UIA_OutlineThicknessPropertyId")
++#pragma pop_macro("UIA_VisualEffectsPropertyId")
++#pragma pop_macro("UIA_FillTypePropertyId")
++#pragma pop_macro("UIA_OutlineColorPropertyId")
++#pragma pop_macro("UIA_FillColorPropertyId")
++#pragma pop_macro("UIA_FullDescriptionPropertyId")
++#pragma pop_macro("UIA_LocalizedLandmarkTypePropertyId")
++#pragma pop_macro("UIA_LandmarkTypePropertyId")
++#pragma pop_macro("UIA_AnnotationObjectsPropertyId")
++#pragma pop_macro("UIA_AnnotationTypesPropertyId")
++#pragma pop_macro("UIA_LevelPropertyId")
++#pragma pop_macro("UIA_SizeOfSetPropertyId")
++#pragma pop_macro("UIA_PositionInSetPropertyId")
++#pragma pop_macro("UIA_IsCustomNavigationPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsPeripheralPropertyId")
++#pragma pop_macro("UIA_IsTextEditPatternAvailablePropertyId")
++#pragma pop_macro("UIA_FlowsFromPropertyId")
++#pragma pop_macro("UIA_Transform2ZoomMaximumPropertyId")
++#pragma pop_macro("UIA_Transform2ZoomMinimumPropertyId")
++#pragma pop_macro("UIA_Transform2ZoomLevelPropertyId")
++#pragma pop_macro("UIA_DragGrabbedItemsPropertyId")
++#pragma pop_macro("UIA_DropTargetDropTargetEffectsPropertyId")
++#pragma pop_macro("UIA_DropTargetDropTargetEffectPropertyId")
++#pragma pop_macro("UIA_IsDropTargetPatternAvailablePropertyId")
++#pragma pop_macro("UIA_DragDropEffectsPropertyId")
++#pragma pop_macro("UIA_DragDropEffectPropertyId")
++#pragma pop_macro("UIA_DragIsGrabbedPropertyId")
++#pragma pop_macro("UIA_IsDragPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsTextChildPatternAvailablePropertyId")
++#pragma pop_macro("UIA_LiveSettingPropertyId")
++#pragma pop_macro("UIA_IsTransformPattern2AvailablePropertyId")
++#pragma pop_macro("UIA_Transform2CanZoomPropertyId")
++#pragma pop_macro("UIA_IsSpreadsheetItemPatternAvailablePropertyId")
++#pragma pop_macro("UIA_SpreadsheetItemAnnotationTypesPropertyId")
++#pragma pop_macro("UIA_SpreadsheetItemAnnotationObjectsPropertyId")
++#pragma pop_macro("UIA_SpreadsheetItemFormulaPropertyId")
++#pragma pop_macro("UIA_IsSpreadsheetPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsStylesPatternAvailablePropertyId")
++#pragma pop_macro("UIA_StylesExtendedPropertiesPropertyId")
++#pragma pop_macro("UIA_StylesFillPatternColorPropertyId")
++#pragma pop_macro("UIA_StylesShapePropertyId")
++#pragma pop_macro("UIA_StylesFillPatternStylePropertyId")
++#pragma pop_macro("UIA_StylesFillColorPropertyId")
++#pragma pop_macro("UIA_StylesStyleNamePropertyId")
++#pragma pop_macro("UIA_StylesStyleIdPropertyId")
++#pragma pop_macro("UIA_IsTextPattern2AvailablePropertyId")
++#pragma pop_macro("UIA_IsAnnotationPatternAvailablePropertyId")
++#pragma pop_macro("UIA_AnnotationTargetPropertyId")
++#pragma pop_macro("UIA_AnnotationDateTimePropertyId")
++#pragma pop_macro("UIA_AnnotationAuthorPropertyId")
++#pragma pop_macro("UIA_AnnotationAnnotationTypeNamePropertyId")
++#pragma pop_macro("UIA_AnnotationAnnotationTypeIdPropertyId")
++#pragma pop_macro("UIA_IsObjectModelPatternAvailablePropertyId")
++#pragma pop_macro("UIA_OptimizeForVisualContentPropertyId")
++#pragma pop_macro("UIA_IsSynchronizedInputPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsVirtualizedItemPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsItemContainerPatternAvailablePropertyId")
++#pragma pop_macro("UIA_ProviderDescriptionPropertyId")
++#pragma pop_macro("UIA_FlowsToPropertyId")
++#pragma pop_macro("UIA_DescribedByPropertyId")
++#pragma pop_macro("UIA_ControllerForPropertyId")
++#pragma pop_macro("UIA_IsDataValidForFormPropertyId")
++#pragma pop_macro("UIA_AriaPropertiesPropertyId")
++#pragma pop_macro("UIA_AriaRolePropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleDefaultActionPropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleSelectionPropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleKeyboardShortcutPropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleHelpPropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleStatePropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleRolePropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleDescriptionPropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleValuePropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleNamePropertyId")
++#pragma pop_macro("UIA_LegacyIAccessibleChildIdPropertyId")
++#pragma pop_macro("UIA_IsLegacyIAccessiblePatternAvailablePropertyId")
++#pragma pop_macro("UIA_TransformCanRotatePropertyId")
++#pragma pop_macro("UIA_TransformCanResizePropertyId")
++#pragma pop_macro("UIA_TransformCanMovePropertyId")
++#pragma pop_macro("UIA_ToggleToggleStatePropertyId")
++#pragma pop_macro("UIA_TableItemColumnHeaderItemsPropertyId")
++#pragma pop_macro("UIA_TableItemRowHeaderItemsPropertyId")
++#pragma pop_macro("UIA_TableRowOrColumnMajorPropertyId")
++#pragma pop_macro("UIA_TableColumnHeadersPropertyId")
++#pragma pop_macro("UIA_TableRowHeadersPropertyId")
++#pragma pop_macro("UIA_SelectionItemSelectionContainerPropertyId")
++#pragma pop_macro("UIA_SelectionItemIsSelectedPropertyId")
++#pragma pop_macro("UIA_WindowIsTopmostPropertyId")
++#pragma pop_macro("UIA_WindowIsModalPropertyId")
++#pragma pop_macro("UIA_WindowWindowInteractionStatePropertyId")
++#pragma pop_macro("UIA_WindowWindowVisualStatePropertyId")
++#pragma pop_macro("UIA_WindowCanMinimizePropertyId")
++#pragma pop_macro("UIA_WindowCanMaximizePropertyId")
++#pragma pop_macro("UIA_MultipleViewSupportedViewsPropertyId")
++#pragma pop_macro("UIA_MultipleViewCurrentViewPropertyId")
++#pragma pop_macro("UIA_ExpandCollapseExpandCollapseStatePropertyId")
++#pragma pop_macro("UIA_DockDockPositionPropertyId")
++#pragma pop_macro("UIA_GridItemContainingGridPropertyId")
++#pragma pop_macro("UIA_GridItemColumnSpanPropertyId")
++#pragma pop_macro("UIA_GridItemRowSpanPropertyId")
++#pragma pop_macro("UIA_GridItemColumnPropertyId")
++#pragma pop_macro("UIA_GridItemRowPropertyId")
++#pragma pop_macro("UIA_GridColumnCountPropertyId")
++#pragma pop_macro("UIA_GridRowCountPropertyId")
++#pragma pop_macro("UIA_SelectionIsSelectionRequiredPropertyId")
++#pragma pop_macro("UIA_SelectionCanSelectMultiplePropertyId")
++#pragma pop_macro("UIA_SelectionSelectionPropertyId")
++#pragma pop_macro("UIA_ScrollVerticallyScrollablePropertyId")
++#pragma pop_macro("UIA_ScrollHorizontallyScrollablePropertyId")
++#pragma pop_macro("UIA_ScrollVerticalViewSizePropertyId")
++#pragma pop_macro("UIA_ScrollVerticalScrollPercentPropertyId")
++#pragma pop_macro("UIA_ScrollHorizontalViewSizePropertyId")
++#pragma pop_macro("UIA_ScrollHorizontalScrollPercentPropertyId")
++#pragma pop_macro("UIA_RangeValueSmallChangePropertyId")
++#pragma pop_macro("UIA_RangeValueLargeChangePropertyId")
++#pragma pop_macro("UIA_RangeValueMaximumPropertyId")
++#pragma pop_macro("UIA_RangeValueMinimumPropertyId")
++#pragma pop_macro("UIA_RangeValueIsReadOnlyPropertyId")
++#pragma pop_macro("UIA_RangeValueValuePropertyId")
++#pragma pop_macro("UIA_ValueIsReadOnlyPropertyId")
++#pragma pop_macro("UIA_ValueValuePropertyId")
++#pragma pop_macro("UIA_IsWindowPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsValuePatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsTransformPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsTogglePatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsTextPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsTableItemPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsTablePatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsSelectionPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsSelectionItemPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsScrollItemPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsScrollPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsRangeValuePatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsMultipleViewPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsInvokePatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsGridPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsGridItemPatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsExpandCollapsePatternAvailablePropertyId")
++#pragma pop_macro("UIA_IsDockPatternAvailablePropertyId")
++#pragma pop_macro("UIA_ItemStatusPropertyId")
++#pragma pop_macro("UIA_IsRequiredForFormPropertyId")
++#pragma pop_macro("UIA_FrameworkIdPropertyId")
++#pragma pop_macro("UIA_OrientationPropertyId")
++#pragma pop_macro("UIA_IsOffscreenPropertyId")
++#pragma pop_macro("UIA_ItemTypePropertyId")
++#pragma pop_macro("UIA_NativeWindowHandlePropertyId")
++#pragma pop_macro("UIA_IsPasswordPropertyId")
++#pragma pop_macro("UIA_LabeledByPropertyId")
++#pragma pop_macro("UIA_IsContentElementPropertyId")
++#pragma pop_macro("UIA_IsControlElementPropertyId")
++#pragma pop_macro("UIA_CulturePropertyId")
++#pragma pop_macro("UIA_ClickablePointPropertyId")
++#pragma pop_macro("UIA_HelpTextPropertyId")
++#pragma pop_macro("UIA_ClassNamePropertyId")
++#pragma pop_macro("UIA_AutomationIdPropertyId")
++#pragma pop_macro("UIA_IsEnabledPropertyId")
++#pragma pop_macro("UIA_IsKeyboardFocusablePropertyId")
++#pragma pop_macro("UIA_HasKeyboardFocusPropertyId")
++#pragma pop_macro("UIA_AccessKeyPropertyId")
++#pragma pop_macro("UIA_AcceleratorKeyPropertyId")
++#pragma pop_macro("UIA_NamePropertyId")
++#pragma pop_macro("UIA_LocalizedControlTypePropertyId")
++#pragma pop_macro("UIA_ControlTypePropertyId")
++#pragma pop_macro("UIA_ProcessIdPropertyId")
++#pragma pop_macro("UIA_BoundingRectanglePropertyId")
++#pragma pop_macro("UIA_RuntimeIdPropertyId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_TEXTATTRIBUTE_ID
++#define WIN32METADATA_ENUM_UIA_TEXTATTRIBUTE_ID
++#pragma push_macro("UIA_AnimationStyleAttributeId")
++#undef UIA_AnimationStyleAttributeId
++#pragma push_macro("UIA_BackgroundColorAttributeId")
++#undef UIA_BackgroundColorAttributeId
++#pragma push_macro("UIA_BulletStyleAttributeId")
++#undef UIA_BulletStyleAttributeId
++#pragma push_macro("UIA_CapStyleAttributeId")
++#undef UIA_CapStyleAttributeId
++#pragma push_macro("UIA_CultureAttributeId")
++#undef UIA_CultureAttributeId
++#pragma push_macro("UIA_FontNameAttributeId")
++#undef UIA_FontNameAttributeId
++#pragma push_macro("UIA_FontSizeAttributeId")
++#undef UIA_FontSizeAttributeId
++#pragma push_macro("UIA_FontWeightAttributeId")
++#undef UIA_FontWeightAttributeId
++#pragma push_macro("UIA_ForegroundColorAttributeId")
++#undef UIA_ForegroundColorAttributeId
++#pragma push_macro("UIA_HorizontalTextAlignmentAttributeId")
++#undef UIA_HorizontalTextAlignmentAttributeId
++#pragma push_macro("UIA_IndentationFirstLineAttributeId")
++#undef UIA_IndentationFirstLineAttributeId
++#pragma push_macro("UIA_IndentationLeadingAttributeId")
++#undef UIA_IndentationLeadingAttributeId
++#pragma push_macro("UIA_IndentationTrailingAttributeId")
++#undef UIA_IndentationTrailingAttributeId
++#pragma push_macro("UIA_IsHiddenAttributeId")
++#undef UIA_IsHiddenAttributeId
++#pragma push_macro("UIA_IsItalicAttributeId")
++#undef UIA_IsItalicAttributeId
++#pragma push_macro("UIA_IsReadOnlyAttributeId")
++#undef UIA_IsReadOnlyAttributeId
++#pragma push_macro("UIA_IsSubscriptAttributeId")
++#undef UIA_IsSubscriptAttributeId
++#pragma push_macro("UIA_IsSuperscriptAttributeId")
++#undef UIA_IsSuperscriptAttributeId
++#pragma push_macro("UIA_MarginBottomAttributeId")
++#undef UIA_MarginBottomAttributeId
++#pragma push_macro("UIA_MarginLeadingAttributeId")
++#undef UIA_MarginLeadingAttributeId
++#pragma push_macro("UIA_MarginTopAttributeId")
++#undef UIA_MarginTopAttributeId
++#pragma push_macro("UIA_MarginTrailingAttributeId")
++#undef UIA_MarginTrailingAttributeId
++#pragma push_macro("UIA_OutlineStylesAttributeId")
++#undef UIA_OutlineStylesAttributeId
++#pragma push_macro("UIA_OverlineColorAttributeId")
++#undef UIA_OverlineColorAttributeId
++#pragma push_macro("UIA_OverlineStyleAttributeId")
++#undef UIA_OverlineStyleAttributeId
++#pragma push_macro("UIA_StrikethroughColorAttributeId")
++#undef UIA_StrikethroughColorAttributeId
++#pragma push_macro("UIA_StrikethroughStyleAttributeId")
++#undef UIA_StrikethroughStyleAttributeId
++#pragma push_macro("UIA_TabsAttributeId")
++#undef UIA_TabsAttributeId
++#pragma push_macro("UIA_TextFlowDirectionsAttributeId")
++#undef UIA_TextFlowDirectionsAttributeId
++#pragma push_macro("UIA_UnderlineColorAttributeId")
++#undef UIA_UnderlineColorAttributeId
++#pragma push_macro("UIA_UnderlineStyleAttributeId")
++#undef UIA_UnderlineStyleAttributeId
++#pragma push_macro("UIA_AnnotationTypesAttributeId")
++#undef UIA_AnnotationTypesAttributeId
++#pragma push_macro("UIA_AnnotationObjectsAttributeId")
++#undef UIA_AnnotationObjectsAttributeId
++#pragma push_macro("UIA_StyleNameAttributeId")
++#undef UIA_StyleNameAttributeId
++#pragma push_macro("UIA_StyleIdAttributeId")
++#undef UIA_StyleIdAttributeId
++#pragma push_macro("UIA_LinkAttributeId")
++#undef UIA_LinkAttributeId
++#pragma push_macro("UIA_IsActiveAttributeId")
++#undef UIA_IsActiveAttributeId
++#pragma push_macro("UIA_SelectionActiveEndAttributeId")
++#undef UIA_SelectionActiveEndAttributeId
++#pragma push_macro("UIA_CaretPositionAttributeId")
++#undef UIA_CaretPositionAttributeId
++#pragma push_macro("UIA_CaretBidiModeAttributeId")
++#undef UIA_CaretBidiModeAttributeId
++#pragma push_macro("UIA_LineSpacingAttributeId")
++#undef UIA_LineSpacingAttributeId
++#pragma push_macro("UIA_BeforeParagraphSpacingAttributeId")
++#undef UIA_BeforeParagraphSpacingAttributeId
++#pragma push_macro("UIA_AfterParagraphSpacingAttributeId")
++#undef UIA_AfterParagraphSpacingAttributeId
++#pragma push_macro("UIA_SayAsInterpretAsAttributeId")
++#undef UIA_SayAsInterpretAsAttributeId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_TEXTATTRIBUTE_IDValues {
++enum UIA_TEXTATTRIBUTE_ID : int
++{
++    UIA_AnimationStyleAttributeId = 40000,
++    UIA_BackgroundColorAttributeId = 40001,
++    UIA_BulletStyleAttributeId = 40002,
++    UIA_CapStyleAttributeId = 40003,
++    UIA_CultureAttributeId = 40004,
++    UIA_FontNameAttributeId = 40005,
++    UIA_FontSizeAttributeId = 40006,
++    UIA_FontWeightAttributeId = 40007,
++    UIA_ForegroundColorAttributeId = 40008,
++    UIA_HorizontalTextAlignmentAttributeId = 40009,
++    UIA_IndentationFirstLineAttributeId = 40010,
++    UIA_IndentationLeadingAttributeId = 40011,
++    UIA_IndentationTrailingAttributeId = 40012,
++    UIA_IsHiddenAttributeId = 40013,
++    UIA_IsItalicAttributeId = 40014,
++    UIA_IsReadOnlyAttributeId = 40015,
++    UIA_IsSubscriptAttributeId = 40016,
++    UIA_IsSuperscriptAttributeId = 40017,
++    UIA_MarginBottomAttributeId = 40018,
++    UIA_MarginLeadingAttributeId = 40019,
++    UIA_MarginTopAttributeId = 40020,
++    UIA_MarginTrailingAttributeId = 40021,
++    UIA_OutlineStylesAttributeId = 40022,
++    UIA_OverlineColorAttributeId = 40023,
++    UIA_OverlineStyleAttributeId = 40024,
++    UIA_StrikethroughColorAttributeId = 40025,
++    UIA_StrikethroughStyleAttributeId = 40026,
++    UIA_TabsAttributeId = 40027,
++    UIA_TextFlowDirectionsAttributeId = 40028,
++    UIA_UnderlineColorAttributeId = 40029,
++    UIA_UnderlineStyleAttributeId = 40030,
++    UIA_AnnotationTypesAttributeId = 40031,
++    UIA_AnnotationObjectsAttributeId = 40032,
++    UIA_StyleNameAttributeId = 40033,
++    UIA_StyleIdAttributeId = 40034,
++    UIA_LinkAttributeId = 40035,
++    UIA_IsActiveAttributeId = 40036,
++    UIA_SelectionActiveEndAttributeId = 40037,
++    UIA_CaretPositionAttributeId = 40038,
++    UIA_CaretBidiModeAttributeId = 40039,
++    UIA_LineSpacingAttributeId = 40040,
++    UIA_BeforeParagraphSpacingAttributeId = 40041,
++    UIA_AfterParagraphSpacingAttributeId = 40042,
++    UIA_SayAsInterpretAsAttributeId = 40043,
++};
++}
++} }
++#pragma pop_macro("UIA_SayAsInterpretAsAttributeId")
++#pragma pop_macro("UIA_AfterParagraphSpacingAttributeId")
++#pragma pop_macro("UIA_BeforeParagraphSpacingAttributeId")
++#pragma pop_macro("UIA_LineSpacingAttributeId")
++#pragma pop_macro("UIA_CaretBidiModeAttributeId")
++#pragma pop_macro("UIA_CaretPositionAttributeId")
++#pragma pop_macro("UIA_SelectionActiveEndAttributeId")
++#pragma pop_macro("UIA_IsActiveAttributeId")
++#pragma pop_macro("UIA_LinkAttributeId")
++#pragma pop_macro("UIA_StyleIdAttributeId")
++#pragma pop_macro("UIA_StyleNameAttributeId")
++#pragma pop_macro("UIA_AnnotationObjectsAttributeId")
++#pragma pop_macro("UIA_AnnotationTypesAttributeId")
++#pragma pop_macro("UIA_UnderlineStyleAttributeId")
++#pragma pop_macro("UIA_UnderlineColorAttributeId")
++#pragma pop_macro("UIA_TextFlowDirectionsAttributeId")
++#pragma pop_macro("UIA_TabsAttributeId")
++#pragma pop_macro("UIA_StrikethroughStyleAttributeId")
++#pragma pop_macro("UIA_StrikethroughColorAttributeId")
++#pragma pop_macro("UIA_OverlineStyleAttributeId")
++#pragma pop_macro("UIA_OverlineColorAttributeId")
++#pragma pop_macro("UIA_OutlineStylesAttributeId")
++#pragma pop_macro("UIA_MarginTrailingAttributeId")
++#pragma pop_macro("UIA_MarginTopAttributeId")
++#pragma pop_macro("UIA_MarginLeadingAttributeId")
++#pragma pop_macro("UIA_MarginBottomAttributeId")
++#pragma pop_macro("UIA_IsSuperscriptAttributeId")
++#pragma pop_macro("UIA_IsSubscriptAttributeId")
++#pragma pop_macro("UIA_IsReadOnlyAttributeId")
++#pragma pop_macro("UIA_IsItalicAttributeId")
++#pragma pop_macro("UIA_IsHiddenAttributeId")
++#pragma pop_macro("UIA_IndentationTrailingAttributeId")
++#pragma pop_macro("UIA_IndentationLeadingAttributeId")
++#pragma pop_macro("UIA_IndentationFirstLineAttributeId")
++#pragma pop_macro("UIA_HorizontalTextAlignmentAttributeId")
++#pragma pop_macro("UIA_ForegroundColorAttributeId")
++#pragma pop_macro("UIA_FontWeightAttributeId")
++#pragma pop_macro("UIA_FontSizeAttributeId")
++#pragma pop_macro("UIA_FontNameAttributeId")
++#pragma pop_macro("UIA_CultureAttributeId")
++#pragma pop_macro("UIA_CapStyleAttributeId")
++#pragma pop_macro("UIA_BulletStyleAttributeId")
++#pragma pop_macro("UIA_BackgroundColorAttributeId")
++#pragma pop_macro("UIA_AnimationStyleAttributeId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_CONTROLTYPE_ID
++#define WIN32METADATA_ENUM_UIA_CONTROLTYPE_ID
++#pragma push_macro("UIA_ButtonControlTypeId")
++#undef UIA_ButtonControlTypeId
++#pragma push_macro("UIA_CalendarControlTypeId")
++#undef UIA_CalendarControlTypeId
++#pragma push_macro("UIA_CheckBoxControlTypeId")
++#undef UIA_CheckBoxControlTypeId
++#pragma push_macro("UIA_ComboBoxControlTypeId")
++#undef UIA_ComboBoxControlTypeId
++#pragma push_macro("UIA_EditControlTypeId")
++#undef UIA_EditControlTypeId
++#pragma push_macro("UIA_HyperlinkControlTypeId")
++#undef UIA_HyperlinkControlTypeId
++#pragma push_macro("UIA_ImageControlTypeId")
++#undef UIA_ImageControlTypeId
++#pragma push_macro("UIA_ListItemControlTypeId")
++#undef UIA_ListItemControlTypeId
++#pragma push_macro("UIA_ListControlTypeId")
++#undef UIA_ListControlTypeId
++#pragma push_macro("UIA_MenuControlTypeId")
++#undef UIA_MenuControlTypeId
++#pragma push_macro("UIA_MenuBarControlTypeId")
++#undef UIA_MenuBarControlTypeId
++#pragma push_macro("UIA_MenuItemControlTypeId")
++#undef UIA_MenuItemControlTypeId
++#pragma push_macro("UIA_ProgressBarControlTypeId")
++#undef UIA_ProgressBarControlTypeId
++#pragma push_macro("UIA_RadioButtonControlTypeId")
++#undef UIA_RadioButtonControlTypeId
++#pragma push_macro("UIA_ScrollBarControlTypeId")
++#undef UIA_ScrollBarControlTypeId
++#pragma push_macro("UIA_SliderControlTypeId")
++#undef UIA_SliderControlTypeId
++#pragma push_macro("UIA_SpinnerControlTypeId")
++#undef UIA_SpinnerControlTypeId
++#pragma push_macro("UIA_StatusBarControlTypeId")
++#undef UIA_StatusBarControlTypeId
++#pragma push_macro("UIA_TabControlTypeId")
++#undef UIA_TabControlTypeId
++#pragma push_macro("UIA_TabItemControlTypeId")
++#undef UIA_TabItemControlTypeId
++#pragma push_macro("UIA_TextControlTypeId")
++#undef UIA_TextControlTypeId
++#pragma push_macro("UIA_ToolBarControlTypeId")
++#undef UIA_ToolBarControlTypeId
++#pragma push_macro("UIA_ToolTipControlTypeId")
++#undef UIA_ToolTipControlTypeId
++#pragma push_macro("UIA_TreeControlTypeId")
++#undef UIA_TreeControlTypeId
++#pragma push_macro("UIA_TreeItemControlTypeId")
++#undef UIA_TreeItemControlTypeId
++#pragma push_macro("UIA_CustomControlTypeId")
++#undef UIA_CustomControlTypeId
++#pragma push_macro("UIA_GroupControlTypeId")
++#undef UIA_GroupControlTypeId
++#pragma push_macro("UIA_ThumbControlTypeId")
++#undef UIA_ThumbControlTypeId
++#pragma push_macro("UIA_DataGridControlTypeId")
++#undef UIA_DataGridControlTypeId
++#pragma push_macro("UIA_DataItemControlTypeId")
++#undef UIA_DataItemControlTypeId
++#pragma push_macro("UIA_DocumentControlTypeId")
++#undef UIA_DocumentControlTypeId
++#pragma push_macro("UIA_SplitButtonControlTypeId")
++#undef UIA_SplitButtonControlTypeId
++#pragma push_macro("UIA_WindowControlTypeId")
++#undef UIA_WindowControlTypeId
++#pragma push_macro("UIA_PaneControlTypeId")
++#undef UIA_PaneControlTypeId
++#pragma push_macro("UIA_HeaderControlTypeId")
++#undef UIA_HeaderControlTypeId
++#pragma push_macro("UIA_HeaderItemControlTypeId")
++#undef UIA_HeaderItemControlTypeId
++#pragma push_macro("UIA_TableControlTypeId")
++#undef UIA_TableControlTypeId
++#pragma push_macro("UIA_TitleBarControlTypeId")
++#undef UIA_TitleBarControlTypeId
++#pragma push_macro("UIA_SeparatorControlTypeId")
++#undef UIA_SeparatorControlTypeId
++#pragma push_macro("UIA_SemanticZoomControlTypeId")
++#undef UIA_SemanticZoomControlTypeId
++#pragma push_macro("UIA_AppBarControlTypeId")
++#undef UIA_AppBarControlTypeId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_CONTROLTYPE_IDValues {
++enum UIA_CONTROLTYPE_ID : int
++{
++    UIA_ButtonControlTypeId = 50000,
++    UIA_CalendarControlTypeId = 50001,
++    UIA_CheckBoxControlTypeId = 50002,
++    UIA_ComboBoxControlTypeId = 50003,
++    UIA_EditControlTypeId = 50004,
++    UIA_HyperlinkControlTypeId = 50005,
++    UIA_ImageControlTypeId = 50006,
++    UIA_ListItemControlTypeId = 50007,
++    UIA_ListControlTypeId = 50008,
++    UIA_MenuControlTypeId = 50009,
++    UIA_MenuBarControlTypeId = 50010,
++    UIA_MenuItemControlTypeId = 50011,
++    UIA_ProgressBarControlTypeId = 50012,
++    UIA_RadioButtonControlTypeId = 50013,
++    UIA_ScrollBarControlTypeId = 50014,
++    UIA_SliderControlTypeId = 50015,
++    UIA_SpinnerControlTypeId = 50016,
++    UIA_StatusBarControlTypeId = 50017,
++    UIA_TabControlTypeId = 50018,
++    UIA_TabItemControlTypeId = 50019,
++    UIA_TextControlTypeId = 50020,
++    UIA_ToolBarControlTypeId = 50021,
++    UIA_ToolTipControlTypeId = 50022,
++    UIA_TreeControlTypeId = 50023,
++    UIA_TreeItemControlTypeId = 50024,
++    UIA_CustomControlTypeId = 50025,
++    UIA_GroupControlTypeId = 50026,
++    UIA_ThumbControlTypeId = 50027,
++    UIA_DataGridControlTypeId = 50028,
++    UIA_DataItemControlTypeId = 50029,
++    UIA_DocumentControlTypeId = 50030,
++    UIA_SplitButtonControlTypeId = 50031,
++    UIA_WindowControlTypeId = 50032,
++    UIA_PaneControlTypeId = 50033,
++    UIA_HeaderControlTypeId = 50034,
++    UIA_HeaderItemControlTypeId = 50035,
++    UIA_TableControlTypeId = 50036,
++    UIA_TitleBarControlTypeId = 50037,
++    UIA_SeparatorControlTypeId = 50038,
++    UIA_SemanticZoomControlTypeId = 50039,
++    UIA_AppBarControlTypeId = 50040,
++};
++}
++} }
++#pragma pop_macro("UIA_AppBarControlTypeId")
++#pragma pop_macro("UIA_SemanticZoomControlTypeId")
++#pragma pop_macro("UIA_SeparatorControlTypeId")
++#pragma pop_macro("UIA_TitleBarControlTypeId")
++#pragma pop_macro("UIA_TableControlTypeId")
++#pragma pop_macro("UIA_HeaderItemControlTypeId")
++#pragma pop_macro("UIA_HeaderControlTypeId")
++#pragma pop_macro("UIA_PaneControlTypeId")
++#pragma pop_macro("UIA_WindowControlTypeId")
++#pragma pop_macro("UIA_SplitButtonControlTypeId")
++#pragma pop_macro("UIA_DocumentControlTypeId")
++#pragma pop_macro("UIA_DataItemControlTypeId")
++#pragma pop_macro("UIA_DataGridControlTypeId")
++#pragma pop_macro("UIA_ThumbControlTypeId")
++#pragma pop_macro("UIA_GroupControlTypeId")
++#pragma pop_macro("UIA_CustomControlTypeId")
++#pragma pop_macro("UIA_TreeItemControlTypeId")
++#pragma pop_macro("UIA_TreeControlTypeId")
++#pragma pop_macro("UIA_ToolTipControlTypeId")
++#pragma pop_macro("UIA_ToolBarControlTypeId")
++#pragma pop_macro("UIA_TextControlTypeId")
++#pragma pop_macro("UIA_TabItemControlTypeId")
++#pragma pop_macro("UIA_TabControlTypeId")
++#pragma pop_macro("UIA_StatusBarControlTypeId")
++#pragma pop_macro("UIA_SpinnerControlTypeId")
++#pragma pop_macro("UIA_SliderControlTypeId")
++#pragma pop_macro("UIA_ScrollBarControlTypeId")
++#pragma pop_macro("UIA_RadioButtonControlTypeId")
++#pragma pop_macro("UIA_ProgressBarControlTypeId")
++#pragma pop_macro("UIA_MenuItemControlTypeId")
++#pragma pop_macro("UIA_MenuBarControlTypeId")
++#pragma pop_macro("UIA_MenuControlTypeId")
++#pragma pop_macro("UIA_ListControlTypeId")
++#pragma pop_macro("UIA_ListItemControlTypeId")
++#pragma pop_macro("UIA_ImageControlTypeId")
++#pragma pop_macro("UIA_HyperlinkControlTypeId")
++#pragma pop_macro("UIA_EditControlTypeId")
++#pragma pop_macro("UIA_ComboBoxControlTypeId")
++#pragma pop_macro("UIA_CheckBoxControlTypeId")
++#pragma pop_macro("UIA_CalendarControlTypeId")
++#pragma pop_macro("UIA_ButtonControlTypeId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_ANNOTATIONTYPE
++#define WIN32METADATA_ENUM_UIA_ANNOTATIONTYPE
++#pragma push_macro("AnnotationType_Unknown")
++#undef AnnotationType_Unknown
++#pragma push_macro("AnnotationType_SpellingError")
++#undef AnnotationType_SpellingError
++#pragma push_macro("AnnotationType_GrammarError")
++#undef AnnotationType_GrammarError
++#pragma push_macro("AnnotationType_Comment")
++#undef AnnotationType_Comment
++#pragma push_macro("AnnotationType_FormulaError")
++#undef AnnotationType_FormulaError
++#pragma push_macro("AnnotationType_TrackChanges")
++#undef AnnotationType_TrackChanges
++#pragma push_macro("AnnotationType_Header")
++#undef AnnotationType_Header
++#pragma push_macro("AnnotationType_Footer")
++#undef AnnotationType_Footer
++#pragma push_macro("AnnotationType_Highlighted")
++#undef AnnotationType_Highlighted
++#pragma push_macro("AnnotationType_Endnote")
++#undef AnnotationType_Endnote
++#pragma push_macro("AnnotationType_Footnote")
++#undef AnnotationType_Footnote
++#pragma push_macro("AnnotationType_InsertionChange")
++#undef AnnotationType_InsertionChange
++#pragma push_macro("AnnotationType_DeletionChange")
++#undef AnnotationType_DeletionChange
++#pragma push_macro("AnnotationType_MoveChange")
++#undef AnnotationType_MoveChange
++#pragma push_macro("AnnotationType_FormatChange")
++#undef AnnotationType_FormatChange
++#pragma push_macro("AnnotationType_UnsyncedChange")
++#undef AnnotationType_UnsyncedChange
++#pragma push_macro("AnnotationType_EditingLockedChange")
++#undef AnnotationType_EditingLockedChange
++#pragma push_macro("AnnotationType_ExternalChange")
++#undef AnnotationType_ExternalChange
++#pragma push_macro("AnnotationType_ConflictingChange")
++#undef AnnotationType_ConflictingChange
++#pragma push_macro("AnnotationType_Author")
++#undef AnnotationType_Author
++#pragma push_macro("AnnotationType_AdvancedProofingIssue")
++#undef AnnotationType_AdvancedProofingIssue
++#pragma push_macro("AnnotationType_DataValidationError")
++#undef AnnotationType_DataValidationError
++#pragma push_macro("AnnotationType_CircularReferenceError")
++#undef AnnotationType_CircularReferenceError
++#pragma push_macro("AnnotationType_Mathematics")
++#undef AnnotationType_Mathematics
++#pragma push_macro("AnnotationType_Sensitive")
++#undef AnnotationType_Sensitive
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_ANNOTATIONTYPEValues {
++enum UIA_ANNOTATIONTYPE : int
++{
++    AnnotationType_Unknown = 60000,
++    AnnotationType_SpellingError = 60001,
++    AnnotationType_GrammarError = 60002,
++    AnnotationType_Comment = 60003,
++    AnnotationType_FormulaError = 60004,
++    AnnotationType_TrackChanges = 60005,
++    AnnotationType_Header = 60006,
++    AnnotationType_Footer = 60007,
++    AnnotationType_Highlighted = 60008,
++    AnnotationType_Endnote = 60009,
++    AnnotationType_Footnote = 60010,
++    AnnotationType_InsertionChange = 60011,
++    AnnotationType_DeletionChange = 60012,
++    AnnotationType_MoveChange = 60013,
++    AnnotationType_FormatChange = 60014,
++    AnnotationType_UnsyncedChange = 60015,
++    AnnotationType_EditingLockedChange = 60016,
++    AnnotationType_ExternalChange = 60017,
++    AnnotationType_ConflictingChange = 60018,
++    AnnotationType_Author = 60019,
++    AnnotationType_AdvancedProofingIssue = 60020,
++    AnnotationType_DataValidationError = 60021,
++    AnnotationType_CircularReferenceError = 60022,
++    AnnotationType_Mathematics = 60023,
++    AnnotationType_Sensitive = 60024,
++};
++}
++} }
++#pragma pop_macro("AnnotationType_Sensitive")
++#pragma pop_macro("AnnotationType_Mathematics")
++#pragma pop_macro("AnnotationType_CircularReferenceError")
++#pragma pop_macro("AnnotationType_DataValidationError")
++#pragma pop_macro("AnnotationType_AdvancedProofingIssue")
++#pragma pop_macro("AnnotationType_Author")
++#pragma pop_macro("AnnotationType_ConflictingChange")
++#pragma pop_macro("AnnotationType_ExternalChange")
++#pragma pop_macro("AnnotationType_EditingLockedChange")
++#pragma pop_macro("AnnotationType_UnsyncedChange")
++#pragma pop_macro("AnnotationType_FormatChange")
++#pragma pop_macro("AnnotationType_MoveChange")
++#pragma pop_macro("AnnotationType_DeletionChange")
++#pragma pop_macro("AnnotationType_InsertionChange")
++#pragma pop_macro("AnnotationType_Footnote")
++#pragma pop_macro("AnnotationType_Endnote")
++#pragma pop_macro("AnnotationType_Highlighted")
++#pragma pop_macro("AnnotationType_Footer")
++#pragma pop_macro("AnnotationType_Header")
++#pragma pop_macro("AnnotationType_TrackChanges")
++#pragma pop_macro("AnnotationType_FormulaError")
++#pragma pop_macro("AnnotationType_Comment")
++#pragma pop_macro("AnnotationType_GrammarError")
++#pragma pop_macro("AnnotationType_SpellingError")
++#pragma pop_macro("AnnotationType_Unknown")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_STYLE_ID
++#define WIN32METADATA_ENUM_UIA_STYLE_ID
++#pragma push_macro("StyleId_Custom")
++#undef StyleId_Custom
++#pragma push_macro("StyleId_Heading1")
++#undef StyleId_Heading1
++#pragma push_macro("StyleId_Heading2")
++#undef StyleId_Heading2
++#pragma push_macro("StyleId_Heading3")
++#undef StyleId_Heading3
++#pragma push_macro("StyleId_Heading4")
++#undef StyleId_Heading4
++#pragma push_macro("StyleId_Heading5")
++#undef StyleId_Heading5
++#pragma push_macro("StyleId_Heading6")
++#undef StyleId_Heading6
++#pragma push_macro("StyleId_Heading7")
++#undef StyleId_Heading7
++#pragma push_macro("StyleId_Heading8")
++#undef StyleId_Heading8
++#pragma push_macro("StyleId_Heading9")
++#undef StyleId_Heading9
++#pragma push_macro("StyleId_Title")
++#undef StyleId_Title
++#pragma push_macro("StyleId_Subtitle")
++#undef StyleId_Subtitle
++#pragma push_macro("StyleId_Normal")
++#undef StyleId_Normal
++#pragma push_macro("StyleId_Emphasis")
++#undef StyleId_Emphasis
++#pragma push_macro("StyleId_Quote")
++#undef StyleId_Quote
++#pragma push_macro("StyleId_BulletedList")
++#undef StyleId_BulletedList
++#pragma push_macro("StyleId_NumberedList")
++#undef StyleId_NumberedList
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_STYLE_IDValues {
++enum UIA_STYLE_ID : int
++{
++    StyleId_Custom = 70000,
++    StyleId_Heading1 = 70001,
++    StyleId_Heading2 = 70002,
++    StyleId_Heading3 = 70003,
++    StyleId_Heading4 = 70004,
++    StyleId_Heading5 = 70005,
++    StyleId_Heading6 = 70006,
++    StyleId_Heading7 = 70007,
++    StyleId_Heading8 = 70008,
++    StyleId_Heading9 = 70009,
++    StyleId_Title = 70010,
++    StyleId_Subtitle = 70011,
++    StyleId_Normal = 70012,
++    StyleId_Emphasis = 70013,
++    StyleId_Quote = 70014,
++    StyleId_BulletedList = 70015,
++    StyleId_NumberedList = 70016,
++};
++}
++} }
++#pragma pop_macro("StyleId_NumberedList")
++#pragma pop_macro("StyleId_BulletedList")
++#pragma pop_macro("StyleId_Quote")
++#pragma pop_macro("StyleId_Emphasis")
++#pragma pop_macro("StyleId_Normal")
++#pragma pop_macro("StyleId_Subtitle")
++#pragma pop_macro("StyleId_Title")
++#pragma pop_macro("StyleId_Heading9")
++#pragma pop_macro("StyleId_Heading8")
++#pragma pop_macro("StyleId_Heading7")
++#pragma pop_macro("StyleId_Heading6")
++#pragma pop_macro("StyleId_Heading5")
++#pragma pop_macro("StyleId_Heading4")
++#pragma pop_macro("StyleId_Heading3")
++#pragma pop_macro("StyleId_Heading2")
++#pragma pop_macro("StyleId_Heading1")
++#pragma pop_macro("StyleId_Custom")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_LANDMARKTYPE_ID
++#define WIN32METADATA_ENUM_UIA_LANDMARKTYPE_ID
++#pragma push_macro("UIA_CustomLandmarkTypeId")
++#undef UIA_CustomLandmarkTypeId
++#pragma push_macro("UIA_FormLandmarkTypeId")
++#undef UIA_FormLandmarkTypeId
++#pragma push_macro("UIA_MainLandmarkTypeId")
++#undef UIA_MainLandmarkTypeId
++#pragma push_macro("UIA_NavigationLandmarkTypeId")
++#undef UIA_NavigationLandmarkTypeId
++#pragma push_macro("UIA_SearchLandmarkTypeId")
++#undef UIA_SearchLandmarkTypeId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_LANDMARKTYPE_IDValues {
++enum UIA_LANDMARKTYPE_ID : int
++{
++    UIA_CustomLandmarkTypeId = 80000,
++    UIA_FormLandmarkTypeId = 80001,
++    UIA_MainLandmarkTypeId = 80002,
++    UIA_NavigationLandmarkTypeId = 80003,
++    UIA_SearchLandmarkTypeId = 80004,
++};
++}
++} }
++#pragma pop_macro("UIA_SearchLandmarkTypeId")
++#pragma pop_macro("UIA_NavigationLandmarkTypeId")
++#pragma pop_macro("UIA_MainLandmarkTypeId")
++#pragma pop_macro("UIA_FormLandmarkTypeId")
++#pragma pop_macro("UIA_CustomLandmarkTypeId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_HEADINGLEVEL_ID
++#define WIN32METADATA_ENUM_UIA_HEADINGLEVEL_ID
++#pragma push_macro("HeadingLevel_None")
++#undef HeadingLevel_None
++#pragma push_macro("HeadingLevel1")
++#undef HeadingLevel1
++#pragma push_macro("HeadingLevel2")
++#undef HeadingLevel2
++#pragma push_macro("HeadingLevel3")
++#undef HeadingLevel3
++#pragma push_macro("HeadingLevel4")
++#undef HeadingLevel4
++#pragma push_macro("HeadingLevel5")
++#undef HeadingLevel5
++#pragma push_macro("HeadingLevel6")
++#undef HeadingLevel6
++#pragma push_macro("HeadingLevel7")
++#undef HeadingLevel7
++#pragma push_macro("HeadingLevel8")
++#undef HeadingLevel8
++#pragma push_macro("HeadingLevel9")
++#undef HeadingLevel9
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_HEADINGLEVEL_IDValues {
++enum UIA_HEADINGLEVEL_ID : int
++{
++    HeadingLevel_None = 80050,
++    HeadingLevel1 = 80051,
++    HeadingLevel2 = 80052,
++    HeadingLevel3 = 80053,
++    HeadingLevel4 = 80054,
++    HeadingLevel5 = 80055,
++    HeadingLevel6 = 80056,
++    HeadingLevel7 = 80057,
++    HeadingLevel8 = 80058,
++    HeadingLevel9 = 80059,
++};
++}
++} }
++#pragma pop_macro("HeadingLevel9")
++#pragma pop_macro("HeadingLevel8")
++#pragma pop_macro("HeadingLevel7")
++#pragma pop_macro("HeadingLevel6")
++#pragma pop_macro("HeadingLevel5")
++#pragma pop_macro("HeadingLevel4")
++#pragma pop_macro("HeadingLevel3")
++#pragma pop_macro("HeadingLevel2")
++#pragma pop_macro("HeadingLevel1")
++#pragma pop_macro("HeadingLevel_None")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_CHANGE_ID
++#define WIN32METADATA_ENUM_UIA_CHANGE_ID
++#pragma push_macro("UIA_SummaryChangeId")
++#undef UIA_SummaryChangeId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_CHANGE_IDValues {
++enum UIA_CHANGE_ID : int
++{
++    UIA_SummaryChangeId = 90000,
++};
++}
++} }
++#pragma pop_macro("UIA_SummaryChangeId")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_UIA_METADATA_ID
++#define WIN32METADATA_ENUM_UIA_METADATA_ID
++#pragma push_macro("UIA_SayAsInterpretAsMetadataId")
++#undef UIA_SayAsInterpretAsMetadataId
++namespace Windows { namespace MetadataEnumValues {
++namespace UIA_METADATA_IDValues {
++enum UIA_METADATA_ID : int
++{
++    UIA_SayAsInterpretAsMetadataId = 100000,
++};
++}
++} }
++#pragma pop_macro("UIA_SayAsInterpretAsMetadataId")
++#endif
++#endif
