@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmem.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmem.h
+index bf873ca8ad..afefc36f58 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmem.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmem.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************\
+ *
+ * Copyright (c) 1998-2001, Microsoft Corp.  All Rights Reserved.
+@@ -30,10 +31,10 @@ extern "C" {
+ // Memory Allocation APIs
+ //----------------------------------------------------------------------------
+ 
+-void* WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") void* WINGDIPAPI
+ GdipAlloc(size_t size);
+ 
+-void WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") void WINGDIPAPI
+ GdipFree(void* ptr);
+ 
+ #ifdef __cplusplus

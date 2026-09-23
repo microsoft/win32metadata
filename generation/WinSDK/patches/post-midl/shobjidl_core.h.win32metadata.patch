@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
-index 97a14455d2..1f013e7348 100644
+index 97a14455d2..a45a6337f9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 @@ -1,3 +1,4 @@
@@ -2202,6 +2202,65 @@ index 97a14455d2..1f013e7348 100644
      IShellIconOverlayIdentifier : public IUnknown
      {
      public:
+@@ -36669,20 +36702,20 @@ unsigned char * __RPC_USER  HGLOBAL_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
+ void                      __RPC_USER  HGLOBAL_UserFree(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+-unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+ void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
+ 
+-unsigned long             __RPC_USER  HMONITOR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMONITOR * ); 
+-unsigned char * __RPC_USER  HMONITOR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMONITOR * ); 
+-unsigned char * __RPC_USER  HMONITOR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMONITOR * ); 
+-void                      __RPC_USER  HMONITOR_UserFree(     __RPC__in unsigned long *, __RPC__in HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMONITOR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMONITOR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMONITOR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HMONITOR_UserFree(     __RPC__in unsigned long *, __RPC__in HMONITOR * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -36749,20 +36782,20 @@ unsigned char * __RPC_USER  HGLOBAL_UserMarshal64(  __RPC__in unsigned long *, _
+ unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
+ void                      __RPC_USER  HGLOBAL_UserFree64(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HMENU_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+ void                      __RPC_USER  HMENU_UserFree64(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
+ 
+-unsigned long             __RPC_USER  HMONITOR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMONITOR * ); 
+-unsigned char * __RPC_USER  HMONITOR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMONITOR * ); 
+-unsigned char * __RPC_USER  HMONITOR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMONITOR * ); 
+-void                      __RPC_USER  HMONITOR_UserFree64(     __RPC__in unsigned long *, __RPC__in HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMONITOR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMONITOR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HMONITOR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMONITOR * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HMONITOR_UserFree64(     __RPC__in unsigned long *, __RPC__in HMONITOR * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
 @@ -37050,6 +37083,157 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
  }
  #endif

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
-index a1c84290c0..32bddeabb8 100644
+index a1c84290c0..6a1b99dc6b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
 @@ -1,3 +1,4 @@
@@ -69,6 +69,15 @@ index a1c84290c0..32bddeabb8 100644
  
  /**
   * Set the application's manifest template from an XML.
+@@ -176,7 +177,7 @@ AJ_API void AJ_CALL alljoyn_permissionconfigurator_manifesttemplate_destroy(AJ_P
+  *          #ER_XML_MALFORMED if the XML is not in a valid manifest template format.
+  *          Other error status codes indicating a failure.
+  */
+-AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setmanifesttemplatefromxml(alljoyn_permissionconfigurator configurator, AJ_PCSTR manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll") AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setmanifesttemplatefromxml(alljoyn_permissionconfigurator configurator, AJ_PCSTR manifestTemplateXml);
+ 
+ /**
+  * Get the authentication mechanisms the application supports for the
 @@ -189,7 +190,7 @@ AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setmanifesttemplatefromxml
   *          #ER_OK if successful.
   *          An error status indicating failure.

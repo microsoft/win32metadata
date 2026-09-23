@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h b/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
-index 394438f51b..2867f5d3e9 100644
+index 394438f51b..59a2ba2595 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
 @@ -23,6 +23,7 @@
@@ -131,11 +131,13 @@ index 394438f51b..2867f5d3e9 100644
  
  // Merge two DPAs.  This takes two (optionally) presorted arrays and merges
  // the source array into the dest.  DPA_Merge uses the provided callbacks
-@@ -224,7 +231,7 @@ WINCOMMCTRLAPI HRESULT WINAPI DPA_SaveStream(_In_ HDPA hdpa, _In_ PFNDPASTREAM p
+@@ -223,8 +230,8 @@ WINCOMMCTRLAPI HRESULT WINAPI DPA_SaveStream(_In_ HDPA hdpa, _In_ PFNDPASTREAM p
+ // the pointer of the merged item.  It's okay to simply use pvDest
  // as the returned pointer.
  //
- typedef void* (CALLBACK *PFNDPAMERGE)(_In_ UINT uMsg, _In_ void *pvDest, _In_ void *pvSrc, _In_ LPARAM lParam);
+-typedef void* (CALLBACK *PFNDPAMERGE)(_In_ UINT uMsg, _In_ void *pvDest, _In_ void *pvSrc, _In_ LPARAM lParam);
 -typedef const void* (CALLBACK *PFNDPAMERGECONST)(_In_ UINT uMsg, _In_ const void *pvDest, _In_ const void *pvSrc, _In_ LPARAM lParam);
++typedef void* (CALLBACK *PFNDPAMERGE)(_Win32_AssociatedEnum_(DPAMM_MESSAGE) _In_ UINT uMsg, _In_ void *pvDest, _In_ void *pvSrc, _In_ LPARAM lParam);
 +typedef const void* (CALLBACK *PFNDPAMERGECONST)(_Win32_AssociatedEnum_(DPAMM_MESSAGE) _In_ UINT uMsg, _In_ const void *pvDest, _In_ const void *pvSrc, _In_ LPARAM lParam);
  
  // Messages for merge callback

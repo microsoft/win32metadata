@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb..bbcf12bc57 100644
+index 44285099cb..7a6ec22f66 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -1085,7 +1085,20 @@ index 44285099cb..bbcf12bc57 100644
  {
      TDF_ENABLE_HYPERLINKS               = 0x0001,
      TDF_USE_HICON_MAIN                  = 0x0002,
-@@ -7725,7 +7736,7 @@ enum _TASKDIALOG_COMMON_BUTTON_FLAGS
+@@ -7714,7 +7725,11 @@ typedef enum _TASKDIALOG_ICON_ELEMENTS
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-enum _TASKDIALOG_COMMON_BUTTON_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ _TASKDIALOG_COMMON_BUTTON_FLAGS
+ {
+     TDCBF_OK_BUTTON            = 0x0001, // selected control return value IDOK
+     TDCBF_YES_BUTTON           = 0x0002, // selected control return value IDYES
+@@ -7725,7 +7740,7 @@ enum _TASKDIALOG_COMMON_BUTTON_FLAGS
  };
  typedef int TASKDIALOG_COMMON_BUTTON_FLAGS;           // Note: _TASKDIALOG_COMMON_BUTTON_FLAGS is an int
  
@@ -1094,7 +1107,7 @@ index 44285099cb..bbcf12bc57 100644
  {
      UINT        cbSize;
      HWND        hwndParent;                             // incorrectly named, this is the owner window, not a parent.
-@@ -7762,8 +7773,8 @@ typedef struct _TASKDIALOGCONFIG
+@@ -7762,8 +7777,8 @@ typedef struct _TASKDIALOGCONFIG
  } TASKDIALOGCONFIG;
  
  
@@ -1105,7 +1118,7 @@ index 44285099cb..bbcf12bc57 100644
  
  
  #ifdef _WIN32
-@@ -7781,10 +7792,10 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
+@@ -7781,10 +7796,10 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
  // === MUI APIs ===
  //
  #ifndef NOMUI
@@ -1118,7 +1131,7 @@ index 44285099cb..bbcf12bc57 100644
  #endif  // NOMUI
  
  #include <dpa_dsa.h>
-@@ -7835,7 +7846,7 @@ typedef struct tagTRACKMOUSEEVENT {
+@@ -7835,7 +7850,7 @@ typedef struct tagTRACKMOUSEEVENT {
  // Declare _TrackMouseEvent.  This API tries to use the window manager's
  // implementation of TrackMouseEvent if it is present, otherwise it emulates.
  //
@@ -1127,7 +1140,7 @@ index 44285099cb..bbcf12bc57 100644
  BOOL
  WINAPI
  _TrackMouseEvent(
-@@ -7864,16 +7875,16 @@ _TrackMouseEvent(
+@@ -7864,16 +7879,16 @@ _TrackMouseEvent(
  #define FSB_ENCARTA_MODE        1
  #define FSB_REGULAR_MODE        0
  
@@ -1150,7 +1163,7 @@ index 44285099cb..bbcf12bc57 100644
  #ifdef _WIN64
  WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR);
  #else
-@@ -7881,17 +7892,17 @@ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR
+@@ -7881,17 +7896,17 @@ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR
  #endif
  
  
@@ -1174,7 +1187,7 @@ index 44285099cb..bbcf12bc57 100644
  
  #endif  //  NOFLATSBAPIS
  
-@@ -7907,14 +7918,14 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
+@@ -7907,14 +7922,14 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
      LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
  
  
@@ -1193,7 +1206,7 @@ index 44285099cb..bbcf12bc57 100644
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-@@ -7925,14 +7936,14 @@ enum _LI_METRIC
+@@ -7925,14 +7940,14 @@ enum _LI_METRIC
     LIM_LARGE, // corresponds to SM_CXICON/SM_CYICON
  };
  
@@ -1211,7 +1224,7 @@ index 44285099cb..bbcf12bc57 100644
      _In_ int ixOffset, _In_ int iyOffset);
  #endif
  
-@@ -7960,5 +7971,2089 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
+@@ -7960,5 +7975,2089 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
