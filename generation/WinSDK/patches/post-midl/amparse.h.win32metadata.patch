@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h b/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h
-index f667a19c44..a5e4dd7938 100644
+index f667a19c44..fb4a4900e3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amparse.h
 @@ -11,6 +11,7 @@
@@ -10,10 +10,12 @@ index f667a19c44..a5e4dd7938 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -28,12 +29,18 @@ DEFINE_GUID(IID_IAMParse,
+@@ -27,13 +28,19 @@ DEFINE_GUID(IID_IAMParse,
+ //
  //  Parser interface - supported by MPEG-2 splitter filter
  //
- DECLARE_INTERFACE_(IAMParse, IUnknown) {
+-DECLARE_INTERFACE_(IAMParse, IUnknown) {
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsXP_ IAMParse, IUnknown) {
 +    
 +    
      STDMETHOD(GetParseTime) (THIS_

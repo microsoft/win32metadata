@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3dcsx.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3dcsx.h
-index 77e46aafcb..753d23fed2 100644
+index 77e46aafcb..69373e24df 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3dcsx.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3dcsx.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index 77e46aafcb..753d23fed2 100644
  
  //////////////////////////////////////////////////////////////////////////////
  //
+@@ -77,7 +78,7 @@ DEFINE_GUID(IID_ID3DX11Scan, 0x5089b68f, 0xe71d, 0x4d38, 0xbe, 0x8e, 0xf3, 0x63,
+ #undef INTERFACE
+ #define INTERFACE ID3DX11Scan
+ 
+-DECLARE_INTERFACE_(ID3DX11Scan, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3DX11Scan, IUnknown)
+ {
+     // IUnknown
+     STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
 @@ -135,7 +136,7 @@ DECLARE_INTERFACE_(ID3DX11Scan, IUnknown)
  //  MaxScanCount        maximum number of scans in multiscan
  //  ppScanContext       new scan context
@@ -16,6 +25,15 @@ index 77e46aafcb..753d23fed2 100644
      _In_ ID3D11DeviceContext* pDeviceContext,
      UINT MaxElementScanSize,
      UINT MaxScanCount,
+@@ -153,7 +154,7 @@ DEFINE_GUID(IID_ID3DX11SegmentedScan, 0xa915128c, 0xd954, 0x4c79, 0xbf, 0xe1, 0x
+ #undef INTERFACE
+ #define INTERFACE ID3DX11SegmentedScan
+ 
+-DECLARE_INTERFACE_(ID3DX11SegmentedScan, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3DX11SegmentedScan, IUnknown)
+ {
+     // IUnknown
+     STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
 @@ -192,7 +193,7 @@ DECLARE_INTERFACE_(ID3DX11SegmentedScan, IUnknown)
  //  MaxElementScanSize  maximum single scan size, in elements (FLOAT, UINT, or INT)
  //  ppScanContext       new scan context
@@ -25,6 +43,15 @@ index 77e46aafcb..753d23fed2 100644
      _In_ ID3D11DeviceContext* pDeviceContext,
      UINT MaxElementScanSize,
      _Out_ ID3DX11SegmentedScan** ppScan );
+@@ -217,7 +218,7 @@ DEFINE_GUID(IID_ID3DX11FFT, 0xb3f7a938, 0x4c93, 0x4310, 0xa6, 0x75, 0xb3, 0x0d,
+ #undef INTERFACE
+ #define INTERFACE ID3DX11FFT
+ 
+-DECLARE_INTERFACE_(ID3DX11FFT, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3DX11FFT, IUnknown)
+ {
+     // IUnknown
+     STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
 @@ -347,7 +348,7 @@ typedef enum D3DX11_FFT_CREATE_FLAG
  // ppFFT                      Pointer to returned context pointer               out
  //------------------------------------------------------------------------------

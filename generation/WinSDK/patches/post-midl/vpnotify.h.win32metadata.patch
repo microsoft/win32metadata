@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
-index e1d5d309c3..d7d0089a95 100644
+index e1d5d309c3..17ee7483ff 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
 @@ -11,6 +11,7 @@
@@ -10,8 +10,12 @@ index e1d5d309c3..d7d0089a95 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -23,6 +24,8 @@ extern "C" {
- DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
+@@ -20,39 +21,49 @@ extern "C" {
+ #endif
+ 
+ // interface IVPBaseNotify
+-DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPBaseNotify, IUnknown)
  {
  	// this function initializes the reconnection to the decoder. 
 +	
@@ -19,8 +23,11 @@ index e1d5d309c3..d7d0089a95 100644
  	STDMETHOD (RenegotiateVPParameters)(THIS
  					   ) PURE;
  
-@@ -32,11 +35,15 @@ DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
- DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
+ };
+ 
+ // interface IVPNotify
+-DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPNotify, IVPBaseNotify)
  {
      // function to set the mode (bob, weave etc)
 +    
@@ -33,10 +40,14 @@ index e1d5d309c3..d7d0089a95 100644
 +    
 +    
      STDMETHOD (GetDeinterlaceMode)(THIS_ 
- 				   OUT AMVP_MODE *pMode
+-				   OUT AMVP_MODE *pMode
++				   _WIN32META_ANNOTATION_("win32metadata:in") OUT AMVP_MODE *pMode
  				  ) PURE;
-@@ -46,11 +53,15 @@ DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
- DECLARE_INTERFACE_(IVPNotify2, IVPNotify)
+ };
+ 
+ // interface IVPNotify
+-DECLARE_INTERFACE_(IVPNotify2, IVPNotify)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPNotify2, IVPNotify)
  {
  // function to set the mode (bob, weave etc)
 +    
@@ -49,5 +60,8 @@ index e1d5d309c3..d7d0089a95 100644
 +    
 +    
      STDMETHOD (GetVPSyncMaster)(THIS_ 
- 				   OUT BOOL *pbVPSyncMaster
+-				   OUT BOOL *pbVPSyncMaster
++				   _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL *pbVPSyncMaster
  				  ) PURE;
+ 
+     /*

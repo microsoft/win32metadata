@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
-index 777e9002b1..8b55ccabff 100644
+index 777e9002b1..13db712576 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
 @@ -16,6 +16,7 @@
@@ -32,7 +32,7 @@ index 777e9002b1..8b55ccabff 100644
  */
  
 -typedef struct _DSOP_SCOPE_INIT_INFO
-+typedef struct   _DSOP_SCOPE_INIT_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _DSOP_SCOPE_INIT_INFO
  {
      ULONG               cbSize;
      ULONG               flType;
@@ -41,7 +41,7 @@ index 777e9002b1..8b55ccabff 100644
  */
  
 -typedef struct _DSOP_INIT_INFO
-+typedef struct   _DSOP_INIT_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _DSOP_INIT_INFO
  {
      ULONG                       cbSize;
      PCWSTR                      pwzTargetComputer;
@@ -63,7 +63,16 @@ index 777e9002b1..8b55ccabff 100644
  {
      ULONG           cItems;
      ULONG           cFetchedAttributes;
-@@ -601,11 +602,15 @@ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
+@@ -585,7 +586,7 @@ typedef struct _DS_SELECTION_LIST
+ #undef INTERFACE
+ #define INTERFACE IDsObjectPicker
+ 
+-DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsObjectPicker, IUnknown)
+ {
+     // *** IUnknown methods ***
+ 
+@@ -601,18 +602,22 @@ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
      // *** IDsObjectPicker methods ***
  
      // Sets scope, filter, etc. for use with next invocation of dialog
@@ -71,7 +80,8 @@ index 777e9002b1..8b55ccabff 100644
 +    
      STDMETHOD(Initialize)(
          THIS_
-         PDSOP_INIT_INFO pInitInfo) PURE;
+-        PDSOP_INIT_INFO pInitInfo) PURE;
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDSOP_INIT_INFO pInitInfo) PURE;
  
      // Creates the modal DS Object Picker dialog.
 +    
@@ -79,11 +89,25 @@ index 777e9002b1..8b55ccabff 100644
      STDMETHOD(InvokeDialog)(
           THIS_
           HWND               hwndParent,
-@@ -628,6 +633,7 @@ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
+          IDataObject      **ppdoSelections) PURE;
+ };
+ 
+-DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Server2008_ IDsObjectPickerCredentials, IDsObjectPicker)
+ {
+     // *** IUnknown methods ***
+ 
+@@ -628,10 +633,11 @@ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
      // *** IDsObjectPickerCredentials methods ***
      
      // Sets credentials for use with next invocation of dialog
-+    _Windows_SupportedOS_Server2008_
++    
      STDMETHOD(SetCredentials)(
          THIS_
-         LPCWSTR szUserName,
+-        LPCWSTR szUserName,
+-        LPCWSTR szPassword);
++        _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szUserName,
++        _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szPassword);
+ };
+ 
+ 

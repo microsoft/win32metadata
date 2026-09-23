@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
-index eb8dfaeb32..0454abf7f5 100644
+index eb8dfaeb32..c01ccf76b6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
 @@ -1,3 +1,4 @@
@@ -63,15 +63,45 @@ index eb8dfaeb32..0454abf7f5 100644
      BYTE                        Mask;           // Mask to indicate which components of the register
                                                  // are used (combination of D3D10_COMPONENT_MASK values)
      BYTE                        ReadWriteMask;  // Mask to indicate whether a given component is 
-@@ -287,7 +288,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionType,
+@@ -285,9 +286,9 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionType,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflectionType
  
- DECLARE_INTERFACE(ID3D10ShaderReflectionType)
+-DECLARE_INTERFACE(ID3D10ShaderReflectionType)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflectionType)
  {
 -    STDMETHOD(GetDesc)(THIS_ D3D10_SHADER_TYPE_DESC *pDesc) PURE;
 +    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_SHADER_TYPE_DESC *pDesc) PURE;
      
      STDMETHOD_(ID3D10ShaderReflectionType*, GetMemberTypeByIndex)(THIS_ UINT Index) PURE;
      STDMETHOD_(ID3D10ShaderReflectionType*, GetMemberTypeByName)(THIS_ LPCSTR Name) PURE;
+@@ -305,7 +306,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionVariable,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflectionVariable
+ 
+-DECLARE_INTERFACE(ID3D10ShaderReflectionVariable)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflectionVariable)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D10_SHADER_VARIABLE_DESC *pDesc) PURE;
+     
+@@ -323,7 +324,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionConstantBuffer,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflectionConstantBuffer
+ 
+-DECLARE_INTERFACE(ID3D10ShaderReflectionConstantBuffer)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflectionConstantBuffer)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D10_SHADER_BUFFER_DESC *pDesc) PURE;
+     
+@@ -342,7 +343,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflection
+ 
+-DECLARE_INTERFACE_(ID3D10ShaderReflection, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
 @@ -407,7 +408,7 @@ extern "C" {
  //      these are the same messages you will see in your debug output.
  //----------------------------------------------------------------------------

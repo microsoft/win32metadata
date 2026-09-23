@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h
-index c007ffbdc0..9b0663bc3c 100644
+index c007ffbdc0..d33e3feeb4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSAdmin.h
 @@ -49,6 +49,7 @@ DEFINE_GUID(IID_IDsAdminNotifyHandler,
@@ -10,6 +10,15 @@ index c007ffbdc0..9b0663bc3c 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -68,7 +69,7 @@ DEFINE_GUID(IID_IDsAdminNotifyHandler,
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminCreateObj
+ 
+-DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsAdminCreateObj, IUnknown)
+ {
+   // *** IUnknown methods ***
+   STDMETHOD(QueryInterface)(THIS_ REFIID riid, LPVOID * ppvObj) PURE;
 @@ -76,9 +77,14 @@ DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
    STDMETHOD_(ULONG,Release)(THIS) PURE;
  
@@ -25,18 +34,40 @@ index c007ffbdc0..9b0663bc3c 100644
    STDMETHOD(CreateModal)(THIS_ /*IN*/ HWND hwndParent, 
                                 /*OUT*/ IADs** ppADsObj) PURE;
  };
-@@ -108,7 +114,11 @@ DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
+@@ -100,7 +106,7 @@ DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminNewObj
+ 
+-DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsAdminNewObj, IUnknown)
+ {
+   // *** IUnknown methods ***
+   STDMETHOD(QueryInterface)(THIS_ REFIID riid, LPVOID * ppvObj) PURE;
+@@ -108,9 +114,13 @@ DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
    STDMETHOD_(ULONG,Release)(THIS) PURE;
  
    // *** IDsAdminNewObj methods ***
 +  
 +  
    STDMETHOD(SetButtons)(THIS_ /*IN*/ ULONG nCurrIndex, /*IN*/ BOOL bValid) PURE; 
+-  STDMETHOD(GetPageCounts)(THIS_ /*OUT*/ LONG* pnTotal,
+-                                 /*OUT*/ LONG* pnStartIndex) PURE; 
 +  
 +  
-   STDMETHOD(GetPageCounts)(THIS_ /*OUT*/ LONG* pnTotal,
-                                  /*OUT*/ LONG* pnStartIndex) PURE; 
++  STDMETHOD(GetPageCounts)(THIS_ /*OUT*/ _WIN32META_ANNOTATION_("win32metadata:in") LONG* pnTotal,
++                                 /*OUT*/ _WIN32META_ANNOTATION_("win32metadata:in") LONG* pnStartIndex) PURE; 
  };
+ 
+ 
+@@ -129,7 +139,7 @@ DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminNewObjPrimarySite
+ 
+-DECLARE_INTERFACE_(IDsAdminNewObjPrimarySite, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsAdminNewObjPrimarySite, IUnknown)
+ {
+   // *** IUnknown methods ***
+   STDMETHOD(QueryInterface)(THIS_ REFIID riid, LPVOID * ppvObj) PURE;
 @@ -138,7 +148,11 @@ DECLARE_INTERFACE_(IDsAdminNewObjPrimarySite, IUnknown)
  
  
@@ -58,6 +89,15 @@ index c007ffbdc0..9b0663bc3c 100644
  {
      DWORD   dwSize;                     // size of struct, for versioning
      HICON   hObjClassIcon;              // class icon for the object to be created
+@@ -184,7 +198,7 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminNewObjExt
+ 
+-DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsAdminNewObjExt, IUnknown)
+ {
+   // *** IUnknown methods ***
+   STDMETHOD(QueryInterface)(THIS_ REFIID riid, LPVOID * ppvObj) PURE;
 @@ -193,25 +207,37 @@ DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
  
  
@@ -68,7 +108,8 @@ index c007ffbdc0..9b0663bc3c 100644
                                /*IN*/ IADs* pADsCopySource,
                                /*IN*/ LPCWSTR lpszClassName,
                                /*IN*/ IDsAdminNewObj* pDsAdminNewObj,
-                               /*IN*/ LPDSA_NEWOBJ_DISPINFO pDispInfo) PURE;
+-                              /*IN*/ LPDSA_NEWOBJ_DISPINFO pDispInfo) PURE;
++                              /*IN*/ _WIN32META_ANNOTATION_("win32metadata:out") LPDSA_NEWOBJ_DISPINFO pDispInfo) PURE;
  
 +  
 +  
@@ -93,10 +134,19 @@ index c007ffbdc0..9b0663bc3c 100644
 -  STDMETHOD(GetSummaryInfo)(THIS_ /*OUT*/BSTR* pBstrText) PURE;
 +  
 +  
-+  STDMETHOD(GetSummaryInfo)(THIS_ /*OUT*/ BSTR* pBstrText) PURE;
++  STDMETHOD(GetSummaryInfo)(THIS_ /*OUT*/ _WIN32META_ANNOTATION_("win32metadata:in") BSTR* pBstrText) PURE;
  };
  
  
+@@ -250,7 +276,7 @@ DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
+ #define INTERFACE   IDsAdminNotifyHandler
+ 
+ 
+-DECLARE_INTERFACE_(IDsAdminNotifyHandler, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsAdminNotifyHandler, IUnknown)
+ {
+   // *** IUnknown methods ***
+   STDMETHOD(QueryInterface)(THIS_ REFIID riid, LPVOID * ppvObj) PURE;
 @@ -258,16 +284,24 @@ DECLARE_INTERFACE_(IDsAdminNotifyHandler, IUnknown)
    STDMETHOD_(ULONG,Release)(THIS) PURE;
  
@@ -104,15 +154,17 @@ index c007ffbdc0..9b0663bc3c 100644
 +  
 +  
    STDMETHOD(Initialize)(THIS_ /*IN*/ IDataObject* pExtraInfo, 
-                               /*OUT*/ ULONG* puEventFlags) PURE;
+-                              /*OUT*/ ULONG* puEventFlags) PURE;
++                              /*OUT*/ _WIN32META_ANNOTATION_("win32metadata:in") ULONG* puEventFlags) PURE;
 +  
 +  
    STDMETHOD(Begin)(THIS_ /*IN*/ ULONG uEvent,
                           /*IN*/ IDataObject* pArg1,
                           /*IN*/ IDataObject* pArg2,
-                          /*OUT*/ ULONG* puFlags,
+-                         /*OUT*/ ULONG* puFlags,
 -                         /*OUT*/ BSTR* pBstr) PURE;
-+                         /*OUT*/  BSTR* pBstr) PURE;
++                         /*OUT*/ _WIN32META_ANNOTATION_("win32metadata:in") ULONG* puFlags,
++                         /*OUT*/  _WIN32META_ANNOTATION_("win32metadata:in") BSTR* pBstr) PURE;
  
 +  
 +  
