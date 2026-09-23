@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h
-index 0737af6d9f..6186f83efa 100644
+index 0737af6d9f..e01ec89255 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsmandisp.h
 @@ -1,3 +1,4 @@
@@ -142,6 +142,15 @@ index 0737af6d9f..6186f83efa 100644
 +            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *newUri) = 0;
          
          virtual /* [id] */ HRESULT STDMETHODCALLTYPE Delete( 
+             /* [annotation][in] */ 
+@@ -2552,7 +2553,7 @@ EXTERN_C const IID IID_IWSManSession;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  long flags,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *result) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *result) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Enumerate( 
              /* [annotation][in] */ 
 @@ -2570,11 +2571,11 @@ EXTERN_C const IID IID_IWSManSession;
              /* [annotation][defaultvalue][in] */ 

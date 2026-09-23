@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
-index 2bd1b450dc..9858aade2f 100644
+index 2bd1b450dc..846681abb7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oaidl.h
 @@ -1,3 +1,4 @@
@@ -79,6 +79,15 @@ index 2bd1b450dc..9858aade2f 100644
          
          virtual HRESULT STDMETHODCALLTYPE SetAlignment( 
              /* [annotation][in] */ 
+@@ -2510,7 +2511,7 @@ EXTERN_C const IID IID_IDispatch;
+             /* [annotation][in] */ 
+             _In_  LCID lcid,
+             /* [annotation][in] */ 
+-            _In_  WORD wFlags,
++            _Win32_AssociatedEnum_(DISPATCH_FLAGS) _In_  WORD wFlags,
+             /* [annotation][out][in] */ 
+             _In_  DISPPARAMS *pDispParams,
+             /* [annotation][out] */ 
 @@ -2690,7 +2691,7 @@ EXTERN_C const IID IID_IEnumVARIANT;
      IEnumVARIANT : public IUnknown
      {
@@ -115,6 +124,15 @@ index 2bd1b450dc..9858aade2f 100644
          
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetIDsOfNames( 
              /* [annotation][size_is][in] */ 
+@@ -3107,7 +3108,7 @@ EXTERN_C const IID IID_ITypeInfo;
+             /* [annotation][in] */ 
+             _In_  MEMBERID memid,
+             /* [annotation][in] */ 
+-            _In_  WORD wFlags,
++            _Win32_AssociatedEnum_(DISPATCH_FLAGS) _In_  WORD wFlags,
+             /* [annotation][out][in] */ 
+             _Inout_  DISPPARAMS *pDispParams,
+             /* [annotation][out] */ 
 @@ -3121,13 +3122,13 @@ EXTERN_C const IID IID_ITypeInfo;
              /* [annotation][in] */ 
              _In_  MEMBERID memid,

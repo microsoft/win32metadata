@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8..92f6736f1d 100644
+index 71ad8398e8..030ec1c89e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -64,6 +64,15 @@ index 71ad8398e8..92f6736f1d 100644
  {
    DWORD dsSize;
    DWORD dwCount;
+@@ -188,7 +189,7 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE  IDsBrowseDomainTree
+ 
+-DECLARE_INTERFACE_IID_(IDsBrowseDomainTree, IUnknown, "7cabcf1e-78f5-11d2-960c-00c04fa31a86")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ IDsBrowseDomainTree, IUnknown, "7cabcf1e-78f5-11d2-960c-00c04fa31a86")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -196,10 +197,20 @@ DECLARE_INTERFACE_IID_(IDsBrowseDomainTree, IUnknown, "7cabcf1e-78f5-11d2-960c-0
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
@@ -97,6 +106,15 @@ index 71ad8398e8..92f6736f1d 100644
  {
      DWORD dwFlags;
      CLSID clsidWizardDialog;
+@@ -268,7 +279,7 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE IDsDisplaySpecifier
+ 
+-DECLARE_INTERFACE_IID_(IDsDisplaySpecifier, IUnknown, "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ IDsDisplaySpecifier, IUnknown, "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -276,16 +287,39 @@ DECLARE_INTERFACE_IID_(IDsDisplaySpecifier, IUnknown, "1ab4a8c0-6a0b-11d2-ad49-0
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  

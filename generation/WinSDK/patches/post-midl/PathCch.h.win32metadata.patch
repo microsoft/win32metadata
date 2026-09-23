@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
-index b205d258c8..0c00491267 100644
+index b205d258c8..f45c43e2c1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PathCch.h
 @@ -9,6 +9,7 @@
@@ -14,8 +14,8 @@ index b205d258c8..0c00491267 100644
  // (0x7FFF + 1 for NULL terminator)
  #define PATHCCH_MAX_CCH             0x8000
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  WINPATHCCHAPI
  BOOL
  APIENTRY
@@ -72,8 +72,8 @@ index b205d258c8..0c00491267 100644
      _In_ size_t cchPath
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  WINPATHCCHAPI
  HRESULT
  APIENTRY
@@ -101,8 +101,8 @@ index b205d258c8..0c00491267 100644
      _In_ size_t cchPath
      );
  
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ 
++
  WINPATHCCHAPI
  HRESULT
  APIENTRY

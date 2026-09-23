@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h
-index 1777c4b579..d713611d9f 100644
+index 1777c4b579..bf4f811a47 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SecurityApplicationProxy.h
 @@ -1,3 +1,4 @@
@@ -48,7 +48,7 @@ index 1777c4b579..d713611d9f 100644
 -                                                              size_t groupSize,
 -                                                              AJ_PCSTR groupAuthority,
 -                                                              AJ_PCSTR* manifestsXmls, size_t manifestsCount);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_claim(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_claim(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
 +                                                              _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR caKey,
 +                                                              _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificateChain,
 +                                                              _WIN32META_ANNOTATION_("win32metadata:in") const uint8_t* groupId,
@@ -63,7 +63,7 @@ index 1777c4b579..d713611d9f 100644
   *          - Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getmanifesttemplate(alljoyn_securityapplicationproxy proxy, AJ_PSTR* manifestTemplateXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getmanifesttemplate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getmanifesttemplate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* manifestTemplateXml);
  
  /**
   * Frees the memory allocated for the manifest template inside alljoyn_securityapplicationproxy_get_manifest_template.
@@ -80,7 +80,7 @@ index 1777c4b579..d713611d9f 100644
   *          - Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getapplicationstate(alljoyn_securityapplicationproxy proxy, alljoyn_applicationstate* applicationState);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getapplicationstate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Win32_AssociatedEnum_(alljoyn_applicationstate) alljoyn_applicationstate* applicationState);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getapplicationstate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out")  alljoyn_applicationstate* applicationState);
  
  /**
   * The authentication mechanisms the managed application supports for the claim process.
@@ -89,7 +89,7 @@ index 1777c4b579..d713611d9f 100644
   *          - Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilities(alljoyn_securityapplicationproxy proxy, alljoyn_claimcapabilities* capabilities);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilities(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilities* capabilities);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilities(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilities* capabilities);
  
  /**
   * The additional information on the claim capabilities supported by the managed application.
@@ -98,7 +98,7 @@ index 1777c4b579..d713611d9f 100644
   *          - Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(alljoyn_securityapplicationproxy proxy, alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
  
  /**
   * This method allows the admin to retrieve the active policy from an application.
@@ -108,7 +108,7 @@ index 1777c4b579..d713611d9f 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getpolicy(alljoyn_securityapplicationproxy proxy,
 -                                                                  AJ_PSTR* policyXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
 +                                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* policyXml);
  
  /**
@@ -119,7 +119,7 @@ index 1777c4b579..d713611d9f 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getdefaultpolicy(alljoyn_securityapplicationproxy proxy,
 -                                                                         AJ_PSTR* policyXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getdefaultpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_getdefaultpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
 +                                                                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* policyXml);
  
  /**
@@ -138,7 +138,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updatepolicy(alljoyn_securityapplicationproxy proxy, AJ_PCSTR policyXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updatepolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR policyXml);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updatepolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR policyXml);
  
  /**
   * This method allows an admin to update the application's identity certificate and manifests.
@@ -149,7 +149,7 @@ index 1777c4b579..d713611d9f 100644
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updateidentity(alljoyn_securityapplicationproxy proxy,
 -                                                                       AJ_PCSTR identityCertificateChain,
 -                                                                       AJ_PCSTR* manifestsXmls, size_t manifestsCount);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updateidentity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_updateidentity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificateChain,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR* manifestsXmls, _WIN32META_ANNOTATION_("win32metadata:in") size_t manifestsCount);
  
@@ -160,7 +160,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_installmembership(alljoyn_securityapplicationproxy proxy, AJ_PCSTR membershipCertificateChain);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_installmembership(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR membershipCertificateChain);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_installmembership(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR membershipCertificateChain);
  
  /**
   * This method allows an admin to reset the application to its original state
@@ -169,7 +169,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_reset(alljoyn_securityapplicationproxy proxy);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_reset(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_reset(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
  
  /**
   * This method allows an admin to remove the currently installed policy. The
@@ -178,7 +178,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_resetpolicy(alljoyn_securityapplicationproxy proxy);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_resetpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_resetpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
  
  /**
   * Informs the remote appllication that the Security Manager will start changing its
@@ -187,7 +187,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_startmanagement(alljoyn_securityapplicationproxy proxy);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_startmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_startmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
  
  /**
   * Informs the remote application that all of the Security 2.0 configuration started with
@@ -196,7 +196,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_endmanagement(alljoyn_securityapplicationproxy proxy);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_endmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_endmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy);
  
  /**
   * Retrieves (in PEM format) the public ECC key used by the managed application.
@@ -205,7 +205,7 @@ index 1777c4b579..d713611d9f 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_geteccpublickey(alljoyn_securityapplicationproxy proxy, AJ_PSTR* eccPublicKey);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_geteccpublickey(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* eccPublicKey);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_geteccpublickey(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_securityapplicationproxy proxy, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* eccPublicKey);
  
  /**
   * Frees the memory allocated while calling alljoyn_securityapplicationproxy_geteccpublickey.
@@ -225,7 +225,7 @@ index 1777c4b579..d713611d9f 100644
 -                                                                     AJ_PCSTR identityCertificatePem,
 -                                                                     AJ_PCSTR signingPrivateKeyPem,
 -                                                                     AJ_PSTR* signedManifestXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_signmanifest(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR unsignedManifestXml,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_signmanifest(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR unsignedManifestXml,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificatePem,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR signingPrivateKeyPem,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* signedManifestXml);
@@ -248,7 +248,7 @@ index 1777c4b579..d713611d9f 100644
 -                                                                              AJ_PCSTR identityCertificatePem,
 -                                                                              uint8_t** digest,
 -                                                                              size_t* digestSize);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_computemanifestdigest(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR unsignedManifestXml,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_computemanifestdigest(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR unsignedManifestXml,
 +                                                                              _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificatePem,
 +                                                                              _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint8_t** digest,
 +                                                                              _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* digestSize);
@@ -272,7 +272,7 @@ index 1777c4b579..d713611d9f 100644
 -                                                                             const uint8_t* signature,
 -                                                                             size_t signatureSize,
 -                                                                             AJ_PSTR* signedManifestXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_setmanifestsignature(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR unsignedManifestXml,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_securityapplicationproxy_setmanifestsignature(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR unsignedManifestXml,
 +                                                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificatePem,
 +                                                                             _WIN32META_ANNOTATION_("win32metadata:in") const uint8_t* signature,
 +                                                                             _WIN32META_ANNOTATION_("win32metadata:in") size_t signatureSize,

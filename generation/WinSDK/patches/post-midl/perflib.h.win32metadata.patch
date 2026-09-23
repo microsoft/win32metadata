@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h b/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
-index 778da34755..63ba9ba8c0 100644
+index 778da34755..f7674be8b2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/perflib.h
 @@ -15,6 +15,7 @@ Abstract:
@@ -19,7 +19,7 @@ index 778da34755..63ba9ba8c0 100644
      GUID   CounterSetGuid;
      GUID   ProviderGuid;
      ULONG  NumCounters;
-@@ -195,13 +196,15 @@ WINAPI
+@@ -195,24 +196,26 @@ WINAPI
  #endif
  * PERFLIBREQUEST)(
      IN ULONG  RequestCode,
@@ -31,12 +31,15 @@ index 778da34755..63ba9ba8c0 100644
  // Usually PerfSetCounterSetInfo() calls is automatically generated PerfAutoStartUp() function (generated
  // by schema generation/parsing tool) to inform PERFLIB the layout of specific counterset.
  //
-+_Windows_SupportedOS_WindowsVista_
-+_Windows_SupportedOS_Server2008_
++_Windows_SupportedOS_WindowsVista_ 
++
  ULONG WINAPI
  PerfStartProvider(
      _In_     LPGUID          ProviderGuid,
-@@ -211,8 +214,8 @@ PerfStartProvider(
+     _In_opt_ PERFLIBREQUEST  ControlCallback,
+-    _Out_    HANDLE        * phProvider
++    _Win32_RAIIFree_(PerfStopProvider) _Out_    HANDLE        * phProvider
+ );
  
  // Start PERFLIB V2 provider with customized memory allocation/free routines.
  //

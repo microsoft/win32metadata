@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
-index 09088fa285..c1ebf7b01e 100644
+index 09088fa285..f15ed288d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AclUI.h
 @@ -1,3 +1,4 @@
@@ -25,7 +25,16 @@ index 09088fa285..c1ebf7b01e 100644
      LPCWSTR     pszName;            // may be resource ID
  } SI_INHERIT_TYPE, *PSI_INHERIT_TYPE;
  
-@@ -214,23 +215,23 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
+@@ -206,7 +207,7 @@ typedef enum _SI_PAGE_ACTIVATED
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation
+-DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-00AA00BBB723")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-00AA00BBB723")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -214,29 +215,29 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
      // *** ISecurityInformation methods ***
@@ -62,7 +71,23 @@ index 09088fa285..c1ebf7b01e 100644
  };
  typedef ISecurityInformation *LPSECURITYINFO;
  
-@@ -280,10 +281,10 @@ DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation2
+-DECLARE_INTERFACE_IID_(ISecurityInformation2, IUnknown, "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ ISecurityInformation2, IUnknown, "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -268,7 +269,7 @@ typedef struct _SID_INFO_LIST
+ 
+ #undef INTERFACE
+ #define INTERFACE   IEffectivePermission
+-DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-D19344365FBC")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-D19344365FBC")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -280,16 +281,16 @@ DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-
                                           PSID pUserSid,
                                           LPCWSTR pszServerName,
                                           PSECURITY_DESCRIPTOR pSD,
@@ -77,6 +102,13 @@ index 09088fa285..c1ebf7b01e 100644
  };
  typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
  
+ #undef INTERFACE
+ #define INTERFACE   ISecurityObjectTypeInfo
+-DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-9111-D18A75EBF2FA")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsXP_ ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-9111-D18A75EBF2FA")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -298,8 +299,8 @@ DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-91
  
      // *** ISecurityInformation methods ***
@@ -88,6 +120,33 @@ index 09088fa285..c1ebf7b01e 100644
  };
  typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
  
+@@ -307,7 +308,7 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
+ // Support for separation or read-only ACL viewer and elevated ACL editor
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation3
+-DECLARE_INTERFACE_IID_(ISecurityInformation3, IUnknown, "E2CDC9CC-31BD-4f8f-8C8B-B641AF516A1A")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ ISecurityInformation3, IUnknown, "E2CDC9CC-31BD-4f8f-8C8B-B641AF516A1A")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -351,7 +352,7 @@ typedef struct _EFFPERM_RESULT_LIST
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation4
+-DECLARE_INTERFACE_IID_(ISecurityInformation4, IUnknown, "EA961070-CD14-4621-ACE4-F63C03E583E4")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows8_ ISecurityInformation4, IUnknown, "EA961070-CD14-4621-ACE4-F63C03E583E4")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -368,7 +369,7 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
+ 
+ #undef INTERFACE
+ #define INTERFACE   IEffectivePermission
+-DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows8_ IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -384,16 +385,16 @@ DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB
          _Inout_updates_(dwSecurityObjectCount) PSECURITY_OBJECT pSecurityObjects,
          _In_ DWORD dwSecurityObjectCount,

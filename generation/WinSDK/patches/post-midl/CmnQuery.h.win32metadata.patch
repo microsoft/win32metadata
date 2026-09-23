@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
-index 6693116ef1..aca28e3008 100644
+index 6693116ef1..62da1a36f4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 @@ -2,6 +2,7 @@
@@ -42,6 +42,15 @@ index 6693116ef1..aca28e3008 100644
  {
      DWORD        cbStruct;
      DWORD        dwFlags;
+@@ -104,7 +105,7 @@ struct _cqpage
+ #undef  INTERFACE
+ #define INTERFACE IQueryForm
+ 
+-DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -112,8 +113,14 @@ DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2d
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
@@ -57,6 +66,15 @@ index 6693116ef1..aca28e3008 100644
      STDMETHOD(AddPages)(THIS_ LPCQADDPAGESPROC pAddPagesProc, LPARAM lParam) PURE;
  };
  
+@@ -142,7 +149,7 @@ DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2d
+ #undef  INTERFACE
+ #define INTERFACE IPersistQuery
+ 
+-DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c906af45")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c906af45")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -153,12 +160,26 @@ DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c90
      STDMETHOD(GetClassID)(THIS_ CLSID* pClassID) PURE;
  
@@ -96,6 +114,15 @@ index 6693116ef1..aca28e3008 100644
  {
      DWORD           cbStruct;                   // structure size
      DWORD           dwFlags;                    // flags (OQFW_*)
+@@ -202,7 +223,7 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE ICommonQuery
+ 
+-DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -210,7 +231,9 @@ DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c1
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  

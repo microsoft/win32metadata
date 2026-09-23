@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
-index a1c84290c0..738accb4e8 100644
+index a1c84290c0..83694f2460 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/PermissionConfigurator.h
 @@ -1,3 +1,4 @@
@@ -21,7 +21,7 @@ index a1c84290c0..738accb4e8 100644
   *          Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getapplicationstate(const alljoyn_permissionconfigurator configurator, alljoyn_applicationstate* state);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getapplicationstate(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Win32_AssociatedEnum_(alljoyn_applicationstate) alljoyn_applicationstate* state);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getapplicationstate(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out")  alljoyn_applicationstate* state);
  
  /**
   * Set the application state.  The state cannot be changed from CLAIMED to CLAIMABLE.
@@ -30,7 +30,7 @@ index a1c84290c0..738accb4e8 100644
   *          Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setapplicationstate(alljoyn_permissionconfigurator configurator, alljoyn_applicationstate state);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setapplicationstate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(alljoyn_applicationstate) alljoyn_applicationstate state);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setapplicationstate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in")  alljoyn_applicationstate state);
  
  /**
   * Get the application's public key.
@@ -39,7 +39,7 @@ index a1c84290c0..738accb4e8 100644
   *         Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpublickey(alljoyn_permissionconfigurator configurator, AJ_PSTR* publicKey);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpublickey(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* publicKey);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpublickey(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* publicKey);
  
  /**
   * Destroy a string returned by a call to alljoyn_permissionconfigurator_getpublickey.
@@ -56,7 +56,7 @@ index a1c84290c0..738accb4e8 100644
   *          Other error status codes indicating a failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifesttemplate(alljoyn_permissionconfigurator configurator, AJ_PSTR* manifestTemplateXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifesttemplate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* manifestTemplateXml);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifesttemplate(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* manifestTemplateXml);
  
  /**
   * Destroy a string received from a call to alljoyn_permissionconfigurator_getmanifesttemplate.
@@ -83,7 +83,7 @@ index a1c84290c0..738accb4e8 100644
   *          An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilities(const alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilities* claimCapabilities);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilities(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilities* claimCapabilities);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilities(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilities* claimCapabilities);
  
  /**
   * Set the authentication mechanisms the application supports for the
@@ -92,7 +92,7 @@ index a1c84290c0..738accb4e8 100644
   *          An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilities(alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilities claimCapabilities);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilities(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_claimcapabilities claimCapabilities);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilities(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_claimcapabilities claimCapabilities);
  
  /**
   * Get the additional information on the claim capabilities.
@@ -101,7 +101,7 @@ index a1c84290c0..738accb4e8 100644
   *          An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(const alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_claimcapabilitiesadditionalinfo* additionalInfo);
  
  /**
   * Set the additional information on the claim capabilities.
@@ -110,7 +110,7 @@ index a1c84290c0..738accb4e8 100644
   *          An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(alljoyn_permissionconfigurator configurator, alljoyn_claimcapabilitiesadditionalinfo additionalInfo);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_claimcapabilitiesadditionalinfo additionalInfo);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_claimcapabilitiesadditionalinfo additionalInfo);
  
  /**
   * Reset the permission settings by removing the manifest all the
@@ -119,7 +119,7 @@ index a1c84290c0..738accb4e8 100644
   *          An error code otherwise.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_reset(alljoyn_permissionconfigurator configurator);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_reset(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_reset(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
  
  /**
   * Claims the application. The application is provided an identity certificate chain with
@@ -135,7 +135,7 @@ index a1c84290c0..738accb4e8 100644
 -                                                            AJ_PCSTR groupAuthority,
 -                                                            AJ_PCSTR* manifestsXmls,
 -                                                            size_t manifestsCount);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_claim(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_claim(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR caKey,
 +                                                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificateChain,
 +                                                            _WIN32META_ANNOTATION_("win32metadata:in") const uint8_t* groupId,
@@ -153,7 +153,7 @@ index a1c84290c0..738accb4e8 100644
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updateidentity(alljoyn_permissionconfigurator configurator,
 -                                                                     AJ_PCSTR identityCertificateChain,
 -                                                                     AJ_PCSTR* manifestsXmls, size_t manifestsCount);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updateidentity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updateidentity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR identityCertificateChain,
 +                                                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR* manifestsXmls, _WIN32META_ANNOTATION_("win32metadata:in") size_t manifestsCount);
  
@@ -165,7 +165,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentity(alljoyn_permissionconfigurator configurator,
 -                                                                  AJ_PSTR* identityCertificateChain);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* identityCertificateChain);
  
  /**
@@ -184,7 +184,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifests(alljoyn_permissionconfigurator configurator,
 -                                                                   alljoyn_manifestarray* manifestArray);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifests(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmanifests(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_manifestarray* manifestArray);
  
  /**
@@ -206,7 +206,7 @@ index a1c84290c0..738accb4e8 100644
 -                                                                       AJ_PCSTR* manifestsXmls,
 -                                                                       size_t manifestsCount,
 -                                                                       QCC_BOOL append);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmanifests(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmanifests(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR* manifestsXmls,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") size_t manifestsCount,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL append);
@@ -219,7 +219,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentitycertificateid(alljoyn_permissionconfigurator configurator,
 -                                                                               alljoyn_certificateid* certificateId);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentitycertificateid(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getidentitycertificateid(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_certificateid* certificateId);
  
  /**
@@ -239,7 +239,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updatepolicy(alljoyn_permissionconfigurator configurator,
 -                                                                   AJ_PCSTR policyXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updatepolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_updatepolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR policyXml);
  
  /**
@@ -250,7 +250,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpolicy(alljoyn_permissionconfigurator configurator,
 -                                                                AJ_PSTR* policyXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* policyXml);
  
  /**
@@ -261,7 +261,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getdefaultpolicy(alljoyn_permissionconfigurator configurator,
 -                                                                       AJ_PSTR* policyXml);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getdefaultpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getdefaultpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PSTR* policyXml);
  
  /**
@@ -280,7 +280,7 @@ index a1c84290c0..738accb4e8 100644
   *          - An error status indicating failure.
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_resetpolicy(alljoyn_permissionconfigurator configurator);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_resetpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_resetpolicy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
  
  /**
   * This method allows an app to retrieve its membership certificate summaries.
@@ -290,7 +290,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmembershipsummaries(alljoyn_permissionconfigurator configurator,
 -                                                                             alljoyn_certificateidarray* certificateIds);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmembershipsummaries(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_getmembershipsummaries(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_certificateidarray* certificateIds);
  
  /**
@@ -310,7 +310,7 @@ index a1c84290c0..738accb4e8 100644
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmembership(alljoyn_permissionconfigurator configurator,
 -                                                                        AJ_PCSTR membershipCertificateChain);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmembership(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_installmembership(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR membershipCertificateChain);
  
  /**
@@ -325,7 +325,7 @@ index a1c84290c0..738accb4e8 100644
 -                                                                       AJ_PCSTR issuerPublicKey,
 -                                                                       const uint8_t* issuerAki,
 -                                                                       size_t issuerAkiLen);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_removemembership(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_removemembership(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") const uint8_t* serial,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") size_t serialLen,
 +                                                                       _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AJ_PCSTR issuerPublicKey,
@@ -339,7 +339,7 @@ index a1c84290c0..738accb4e8 100644
   *          - #ER_MANAGEMENT_ALREADY_STARTED if the app is already in this state
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_startmanagement(alljoyn_permissionconfigurator configurator);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_startmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_startmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
  
  /**
   * This method allows the app to signal itself that management is ending.
@@ -348,7 +348,7 @@ index a1c84290c0..738accb4e8 100644
   *          - #ER_MANAGEMENT_NOT_STARTED     if the app was not in the management state
   */
 -AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_endmanagement(alljoyn_permissionconfigurator configurator);
-+_Win32_ImportLibrary_("msajapi.dll") _Win32_AssociatedEnum_(QStatus) AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_endmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
++_Win32_ImportLibrary_("msajapi.dll")  AJ_API QStatus AJ_CALL alljoyn_permissionconfigurator_endmanagement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurator configurator);
  
  #ifdef __cplusplus
  } /* extern "C" */

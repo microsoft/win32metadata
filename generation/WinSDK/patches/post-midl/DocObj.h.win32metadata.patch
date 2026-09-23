@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
-index 9ad194222f..18a39b766c 100644
+index 9ad194222f..6ced05d7e7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
 @@ -140,6 +140,7 @@ extern "C"{
@@ -80,7 +80,7 @@ index 9ad194222f..18a39b766c 100644
      } 	PAGERANGE;
  
 -typedef struct tagPAGESET
-+typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagPAGESET
++typedef struct   tagPAGESET
      {
      ULONG cbStruct;
      BOOL fOddPages;

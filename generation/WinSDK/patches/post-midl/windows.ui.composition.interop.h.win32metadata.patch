@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.ui.composition.interop.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.ui.composition.interop.h
-index dfc256ac31..7a6c5b2b8d 100644
+index dfc256ac31..6312e3ba10 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.ui.composition.interop.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.ui.composition.interop.h
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index dfc256ac31..7a6c5b2b8d 100644
  #define INTERFACE ICompositionDrawingSurfaceInterop2
  DECLARE_INTERFACE_IID_(ICompositionDrawingSurfaceInterop2, ICompositionDrawingSurfaceInterop, "41E64AAE-98C0-4239-8E95-A330DD6AA18B")
  {
-+    _Windows_SupportedOS_19041_
++    
      IFACEMETHOD(CopySurface)(
          _In_ IUnknown* destinationResource,
          _In_ int destinationOffsetX,

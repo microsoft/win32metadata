@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
-index 4083a3eb7b..dea627e99a 100644
+index 4083a3eb7b..4081313baa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
 @@ -1,3 +1,4 @@
@@ -200,6 +200,15 @@ index 4083a3eb7b..dea627e99a 100644
  #ifdef UNICODE
  #define PrintDlg  PrintDlgW
  #else
+@@ -951,7 +952,7 @@ WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgW(_Inout_ LPPRINT
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogCallback
+ 
+-DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-0000F8757BF9")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -961,7 +962,7 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
      // *** IPrintDialogCallback methods ***
      STDMETHOD(InitDone) (THIS) PURE;
@@ -209,6 +218,15 @@ index 4083a3eb7b..dea627e99a 100644
  };
  
  
+@@ -983,7 +984,7 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogServices
+ 
+-DECLARE_INTERFACE_IID_(IPrintDialogServices, IUnknown, "509AAEDA-5639-11D1-B6A1-0000F8757BF9")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IPrintDialogServices, IUnknown, "509AAEDA-5639-11D1-B6A1-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
 @@ -1017,7 +1018,7 @@ typedef struct tagPDEXA {
     HGLOBAL               hDevMode;             // handle to DevMode
     HGLOBAL               hDevNames;            // handle to DevNames

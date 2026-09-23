@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h b/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h
-index deb35ff187..cfaacebc92 100644
+index deb35ff187..ca0dfa011a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prnasntp.h
 @@ -18,6 +18,7 @@ Revision History:
@@ -58,8 +58,8 @@ index deb35ff187..cfaacebc92 100644
      _In_        PrintAsyncNotificationType          *pNotificationType,
 -    _In_        PrintAsyncNotifyUserFilter          eNotifyFilter,
 -    _In_        PrintAsyncNotifyConversationStyle   eConversationStyle,
-+    _Win32_AssociatedEnum_(PrintAsyncNotifyUserFilter) _In_        PrintAsyncNotifyUserFilter          eNotifyFilter,
-+    _Win32_AssociatedEnum_(PrintAsyncNotifyConversationStyle) _In_        PrintAsyncNotifyConversationStyle   eConversationStyle,
++     _In_        PrintAsyncNotifyUserFilter          eNotifyFilter,
++     _In_        PrintAsyncNotifyConversationStyle   eConversationStyle,
      _In_        IPrintAsyncNotifyCallback           *pCallback,
      _Outptr_ IPrintAsyncNotifyChannel            **ppIAsynchNotification
      );

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
-index 01a3b56cc5..88c7201410 100644
+index 01a3b56cc5..8319325ac8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 @@ -9,20 +9,21 @@
@@ -512,6 +512,15 @@ index 01a3b56cc5..88c7201410 100644
  {
      /// <summary>
      /// Computes derived font axis values from the specified font weight, stretch, style, and size.
+@@ -3748,7 +3749,7 @@ struct DWRITE_BITMAP_DATA_BGRA32
+ /// <summary>
+ /// Encapsulates a bitmap which can be used for rendering glyphs.
+ /// </summary>
+-DWRITE_BEGIN_INTERFACE(IDWriteBitmapRenderTarget2, "C553A742-FC01-44DA-A66E-B8B9ED6C3995") : IDWriteBitmapRenderTarget1
++DWRITE_BEGIN_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") IDWriteBitmapRenderTarget2, "C553A742-FC01-44DA-A66E-B8B9ED6C3995") : IDWriteBitmapRenderTarget1
+ {
+     /// <summary>
+     /// Gets the demensions and a pointer to the system memory bitmap encapsulated by this
 @@ -4216,7 +4217,7 @@ struct DWRITE_PAINT_ELEMENT
              /// <summary>
              /// Specifies the compositing or blending mode.
@@ -521,3 +530,39 @@ index 01a3b56cc5..88c7201410 100644
          } composite;
      } paint;
  };
+@@ -4227,7 +4228,7 @@ struct D2D1_GRADIENT_STOP;
+ /// Interface used to read color glyph data for a specific font. A color glyph is
+ /// represented as a visual tree of paint elements.
+ /// </summary>
+-DWRITE_BEGIN_INTERFACE(IDWritePaintReader, "8128E912-3B97-42A5-AB6C-24AAD3A86E54") : IUnknown
++DWRITE_BEGIN_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") IDWritePaintReader, "8128E912-3B97-42A5-AB6C-24AAD3A86E54") : IUnknown
+ {
+     /// <summary>
+     /// Sets the current glyph and positions the reader on the root paint element of the
+@@ -4395,7 +4396,7 @@ DWRITE_BEGIN_INTERFACE(IDWritePaintReader, "8128E912-3B97-42A5-AB6C-24AAD3A86E54
+         ) PURE;
+ };
+ 
+-DWRITE_BEGIN_INTERFACE(IDWriteFontFace7, "3945B85B-BC95-40F7-B72C-8B73BFC7E13B") : IDWriteFontFace6
++DWRITE_BEGIN_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") IDWriteFontFace7, "3945B85B-BC95-40F7-B72C-8B73BFC7E13B") : IDWriteFontFace6
+ {
+     /// <summary>
+     /// Returns the maximum paint feature level supported for the specified glyph image format.
+@@ -4427,7 +4428,7 @@ DWRITE_BEGIN_INTERFACE(IDWriteFontFace7, "3945B85B-BC95-40F7-B72C-8B73BFC7E13B")
+ };
+ 
+ 
+-DWRITE_BEGIN_INTERFACE(IDWriteFactory8, "EE0A7FB5-DEF4-4C23-A454-C9C7DC878398") : IDWriteFactory7
++DWRITE_BEGIN_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") IDWriteFactory8, "EE0A7FB5-DEF4-4C23-A454-C9C7DC878398") : IDWriteFactory7
+ {
+     /// <summary>
+     /// Translates a glyph run to a sequence of color glyph runs, which can be
+@@ -4480,7 +4481,7 @@ DWRITE_BEGIN_INTERFACE(IDWriteFactory8, "EE0A7FB5-DEF4-4C23-A454-C9C7DC878398")
+ /// <summary>
+ /// Encapsulates a bitmap which can be used for rendering glyphs.
+ /// </summary>
+-DWRITE_BEGIN_INTERFACE(IDWriteBitmapRenderTarget3, "AEEC37DB-C337-40F1-8E2A-9A41B167B238") : IDWriteBitmapRenderTarget2
++DWRITE_BEGIN_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") IDWriteBitmapRenderTarget3, "AEEC37DB-C337-40F1-8E2A-9A41B167B238") : IDWriteBitmapRenderTarget2
+ {
+     /// <summary>
+     /// Returns the paint feature level supported by this render target.

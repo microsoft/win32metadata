@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
-index f78b0cef08..f937a52a93 100644
+index f78b0cef08..ebb0c45424 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 @@ -1,3 +1,4 @@
@@ -7,8 +7,38 @@ index f78b0cef08..f937a52a93 100644
  
  /*****************************************************************************\
  *                                                                             *
-@@ -126,16 +127,16 @@ LWSTDAPI_(PWSTR)    StrChrNW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
- LWSTDAPI_(PWSTR)    StrChrNIW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
+@@ -108,34 +109,34 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #ifdef USE_STRICT_CONST
+-LWSTDAPI_(PCSTR)    StrChrA(_In_ PCSTR pszStart, WORD wMatch);
+-LWSTDAPI_(PCWSTR)   StrChrW(_In_ PCWSTR pszStart, WCHAR wMatch);
+-LWSTDAPI_(PCSTR)    StrChrIA(_In_ PCSTR pszStart, WORD wMatch);
+-LWSTDAPI_(PCWSTR)   StrChrIW(_In_ PCWSTR pszStart, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrChrA(_In_ PCSTR pszStart, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrChrW(_In_ PCWSTR pszStart, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrChrIA(_In_ PCSTR pszStart, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrChrIW(_In_ PCWSTR pszStart, WCHAR wMatch);
+ #if (_WIN32_IE >= _WIN32_IE_IE60)
+-LWSTDAPI_(PCWSTR)   StrChrNW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
+-LWSTDAPI_(PCWSTR)   StrChrNIW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
++_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(PCWSTR)   StrChrNW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
++_Windows_SupportedOS_WindowsVista_ LWSTDAPI_(PCWSTR)   StrChrNIW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
+ #endif // _WIN32_IE_IE60
+ #else
+-LWSTDAPI_(PSTR)     StrChrA(_In_ PCSTR pszStart, WORD wMatch);
+-LWSTDAPI_(PWSTR)    StrChrW(_In_ PCWSTR pszStart, WCHAR wMatch);
+-LWSTDAPI_(PSTR)     StrChrIA(_In_ PCSTR pszStart, WORD wMatch);
+-LWSTDAPI_(PWSTR)    StrChrIW(_In_ PCWSTR pszStart, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrChrA(_In_ PCSTR pszStart, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrChrW(_In_ PCWSTR pszStart, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrChrIA(_In_ PCSTR pszStart, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrChrIW(_In_ PCWSTR pszStart, WCHAR wMatch);
+ #if (_WIN32_IE >= _WIN32_IE_IE60)
+-LWSTDAPI_(PWSTR)    StrChrNW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
+-LWSTDAPI_(PWSTR)    StrChrNIW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
++_Windows_SupportedOS_WindowsXP_ LWSTDAPI_(PWSTR)    StrChrNW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
++_Windows_SupportedOS_WindowsVista_ LWSTDAPI_(PWSTR)    StrChrNIW(_In_ PCWSTR pszStart, WCHAR wMatch, UINT cchMax);
  #endif // _WIN32_IE_IE60
  #endif
 -LWSTDAPI_(int)      StrCmpNA(_In_ PCSTR psz1, _In_ PCSTR psz2, int nChar);
@@ -34,7 +64,7 @@ index f78b0cef08..f937a52a93 100644
  
  #if (NTDDI_VERSION >= NTDDI_VISTASP1)
  // StrFormatByteSizeEx takes a ULONGLONG as a byte count and formats a string
-@@ -162,20 +163,20 @@ enum tagSFBS_FLAGS
+@@ -162,107 +163,107 @@ enum tagSFBS_FLAGS
  };
  typedef int SFBS_FLAGS;
  
@@ -65,20 +95,77 @@ index f78b0cef08..f937a52a93 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrNCatA(_Inout_updates_(cchMax) PSTR psz1, PCSTR psz2, int cchMax);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrNCatW(_Inout_updates_(cchMax) PWSTR psz1, PCWSTR psz2, int cchMax);
  #ifdef USE_STRICT_CONST
- LWSTDAPI_(PCSTR)    StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
- LWSTDAPI_(PCWSTR)   StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
-@@ -195,8 +196,8 @@ LWSTDAPI_(PWSTR)    StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHA
- LWSTDAPI_(PSTR)     StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
- LWSTDAPI_(PWSTR)    StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
+-LWSTDAPI_(PCSTR)    StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
+-LWSTDAPI_(PCWSTR)   StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
+-LWSTDAPI_(PCSTR)    StrRChrA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
+-LWSTDAPI_(PCWSTR)   StrRChrW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
+-LWSTDAPI_(PCSTR)    StrRChrIA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
+-LWSTDAPI_(PCWSTR)   StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
+-LWSTDAPI_(PCSTR)    StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
+-LWSTDAPI_(PCWSTR)   StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
+-#else
+-LWSTDAPI_(PSTR)     StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
+-LWSTDAPI_(PWSTR)    StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
+-LWSTDAPI_(PSTR)     StrRChrA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
+-LWSTDAPI_(PWSTR)    StrRChrW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
+-LWSTDAPI_(PSTR)     StrRChrIA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
+-LWSTDAPI_(PWSTR)    StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
+-LWSTDAPI_(PSTR)     StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
+-LWSTDAPI_(PWSTR)    StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrRChrA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrRChrW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrRChrIA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
++#else
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrRChrA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrRChrW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrRChrIA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
  #endif
 -LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
 -LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
  #ifdef USE_STRICT_CONST
- LWSTDAPI_(PCSTR)    StrStrA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
- LWSTDAPI_(PCWSTR)   StrStrW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
-@@ -220,49 +221,49 @@ LWSTDAPI_(PWSTR)    StrStrNIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cc
+-LWSTDAPI_(PCSTR)    StrStrA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
+-LWSTDAPI_(PCWSTR)   StrStrW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
+-LWSTDAPI_(PCSTR)    StrStrIA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
+-LWSTDAPI_(PCWSTR)   StrStrIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrStrA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrStrW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    StrStrIA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   StrStrIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
+ #if (_WIN32_IE >= _WIN32_IE_IE6)
+-LWSTDAPI_(PCWSTR)   StrStrNW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
+-LWSTDAPI_(PCWSTR)   StrStrNIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
++_Windows_SupportedOS_WindowsVista_ LWSTDAPI_(PCWSTR)   StrStrNW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
++_Windows_SupportedOS_WindowsVista_ LWSTDAPI_(PCWSTR)   StrStrNIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
+ #endif // _WIN32_IE_IE6
+ #else
+-LWSTDAPI_(PSTR)     StrStrA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
+-LWSTDAPI_(PWSTR)    StrStrW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
+-LWSTDAPI_(PSTR)     StrStrIA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
+-LWSTDAPI_(PWSTR)    StrStrIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrStrA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrStrW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     StrStrIA(_In_ PCSTR pszFirst, _In_ PCSTR pszSrch);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    StrStrIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch);
+ #if (_WIN32_IE >= _WIN32_IE_IE60)
+-LWSTDAPI_(PWSTR)    StrStrNW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
+-LWSTDAPI_(PWSTR)    StrStrNIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
++_Windows_SupportedOS_WindowsVista_ LWSTDAPI_(PWSTR)    StrStrNW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
++_Windows_SupportedOS_WindowsVista_ LWSTDAPI_(PWSTR)    StrStrNIW(_In_ PCWSTR pszFirst, _In_ PCWSTR pszSrch, UINT cchMax);
+ #endif // _WIN32_IE_IE60
+ #endif
+ 
  #define STIF_DEFAULT        0x00000000L
  #define STIF_SUPPORT_HEX    0x00000001L
  typedef int STIF_FLAGS;
@@ -249,7 +336,7 @@ index f78b0cef08..f937a52a93 100644
  
  #define IntlStrEqNA( s1, s2, nChar) IntlStrEqWorkerA( TRUE, s1, s2, nChar)
  #define IntlStrEqNW( s1, s2, nChar) IntlStrEqWorkerW( TRUE, s1, s2, nChar)
-@@ -519,46 +520,46 @@ LWSTDAPI_(BOOL)     IntlStrEqWorkerW(BOOL fCaseSens, _In_reads_(nChar) LPCWSTR l
+@@ -519,131 +520,131 @@ LWSTDAPI_(BOOL)     IntlStrEqWorkerW(BOOL fCaseSens, _In_reads_(nChar) LPCWSTR l
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -316,7 +403,62 @@ index f78b0cef08..f937a52a93 100644
  #ifdef UNICODE
  #define PathFileExists  PathFileExistsW
  #else
-@@ -609,10 +610,10 @@ LWSTDAPI_(LPWSTR)  PathFindNextComponentW(_In_ LPCWSTR pszPath);
+ #define PathFileExists  PathFileExistsA
+ #endif // !UNICODE
+ #ifdef USE_STRICT_CONST
+-LWSTDAPI_(LPCSTR)  PathFindExtensionA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPCWSTR)  PathFindExtensionW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)  PathFindExtensionA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)  PathFindExtensionW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathFindExtension  PathFindExtensionW
+ #else
+ #define PathFindExtension  PathFindExtensionA
+ #endif // !UNICODE
+-LWSTDAPI_(LPCSTR)  PathFindFileNameA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPCWSTR)  PathFindFileNameW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)  PathFindFileNameA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)  PathFindFileNameW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathFindFileName  PathFindFileNameW
+ #else
+ #define PathFindFileName  PathFindFileNameA
+ #endif // !UNICODE
+-LWSTDAPI_(LPCSTR)  PathFindNextComponentA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPCWSTR)  PathFindNextComponentW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)  PathFindNextComponentA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)  PathFindNextComponentW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathFindNextComponent  PathFindNextComponentW
+ #else
+ #define PathFindNextComponent  PathFindNextComponentA
+ #endif // !UNICODE
+ #else
+-LWSTDAPI_(LPSTR)  PathFindExtensionA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPWSTR)  PathFindExtensionW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathFindExtensionA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathFindExtensionW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathFindExtension  PathFindExtensionW
+ #else
+ #define PathFindExtension  PathFindExtensionA
+ #endif // !UNICODE
+-LWSTDAPI_(LPSTR)  PathFindFileNameA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPWSTR)  PathFindFileNameW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathFindFileNameA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathFindFileNameW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathFindFileName  PathFindFileNameW
+ #else
+ #define PathFindFileName  PathFindFileNameA
+ #endif // !UNICODE
+-LWSTDAPI_(LPSTR)  PathFindNextComponentA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPWSTR)  PathFindNextComponentW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathFindNextComponentA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathFindNextComponentW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathFindNextComponent  PathFindNextComponentW
+ #else
  #define PathFindNextComponent  PathFindNextComponentA
  #endif // !UNICODE
  #endif
@@ -331,7 +473,26 @@ index f78b0cef08..f937a52a93 100644
  #ifdef UNICODE
  #define PathFindSuffixArray  PathFindSuffixArrayW
  #else
-@@ -635,15 +636,15 @@ LWSTDAPI_(LPWSTR)  PathGetArgsW(_In_ LPCWSTR pszPath);
+ #define PathFindSuffixArray  PathFindSuffixArrayA
+ #endif // !UNICODE
+ #ifdef USE_STRICT_CONST
+-LWSTDAPI_(LPCSTR)  PathGetArgsA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPCWSTR)  PathGetArgsW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)  PathGetArgsA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)  PathGetArgsW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathGetArgs  PathGetArgsW
+ #else
+ #define PathGetArgs  PathGetArgsA
+ #endif // !UNICODE
+ #else
+-LWSTDAPI_(LPSTR)  PathGetArgsA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPWSTR)  PathGetArgsW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathGetArgsA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathGetArgsW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathGetArgs  PathGetArgsW
+ #else
  #define PathGetArgs  PathGetArgsA
  #endif // !UNICODE
  #endif
@@ -487,7 +648,7 @@ index f78b0cef08..f937a52a93 100644
  
  #if (_WIN32_IE >= _WIN32_IE_IE70)
  // Flags for PathMatchSpecEx
-@@ -756,37 +757,37 @@ LWSTDAPI_(BOOL)     PathMatchSpecW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec);
+@@ -756,100 +757,100 @@ LWSTDAPI_(BOOL)     PathMatchSpecW(_In_ LPCWSTR pszFile, _In_ LPCWSTR pszSpec);
  #define PMSF_MULTIPLE          0x00000001
  #define PMSF_DONT_STRIP_SPACES 0x00010000  // modifies either of the above
  
@@ -547,9 +708,23 @@ index f78b0cef08..f937a52a93 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathSetDlgItemPathA(_In_ HWND hDlg, int id, LPCSTR pszPath);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(void)     PathSetDlgItemPathW(_In_ HWND hDlg, int id, LPCWSTR pszPath);
  #ifdef USE_STRICT_CONST
- LWSTDAPI_(LPCSTR)  PathSkipRootA(_In_ LPCSTR pszPath);
- LWSTDAPI_(LPCWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
-@@ -804,52 +805,52 @@ LWSTDAPI_(LPWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
+-LWSTDAPI_(LPCSTR)  PathSkipRootA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPCWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCSTR)  PathSkipRootA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPCWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathSkipRoot  PathSkipRootW
+ #else
+ #define PathSkipRoot  PathSkipRootA
+ #endif // !UNICODE
+ #else
+-LWSTDAPI_(LPSTR)  PathSkipRootA(_In_ LPCSTR pszPath);
+-LWSTDAPI_(LPWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPSTR)  PathSkipRootA(_In_ LPCSTR pszPath);
++_Windows_SupportedOS_Windows2000_ LWSTDAPI_(LPWSTR)  PathSkipRootW(_In_ LPCWSTR pszPath);
+ #ifdef UNICODE
+ #define PathSkipRoot  PathSkipRootW
+ #else
  #define PathSkipRoot  PathSkipRootA
  #endif // !UNICODE
  #endif
@@ -964,7 +1139,13 @@ index f78b0cef08..f937a52a93 100644
  #ifdef UNICODE
  #define SHRegGetBoolUSValue  SHRegGetBoolUSValueW
  #else
-@@ -1788,7 +1789,7 @@ DECLARE_INTERFACE_IID_( IQueryAssociations, IUnknown, "c46ca590-3c3f-11d2-bee6-0
+@@ -1783,12 +1784,12 @@ DEFINE_ENUM_FLAG_OPERATORS(FILETYPEATTRIBUTEFLAGS)
+ #undef INTERFACE
+ #define INTERFACE IQueryAssociations
+ 
+-DECLARE_INTERFACE_IID_( IQueryAssociations, IUnknown, "c46ca590-3c3f-11d2-bee6-0000f805ca57" )
++DECLARE_INTERFACE_IID_(  _Windows_SupportedOS_Windows2000_ IQueryAssociations, IUnknown, "c46ca590-3c3f-11d2-bee6-0000f805ca57" )
+ {
      // IQueryAssociations methods
      STDMETHOD (Init)(THIS_ _In_ ASSOCF flags, _In_opt_ LPCWSTR pszAssoc, _In_opt_ HKEY hkProgid, _In_opt_ HWND hwnd) PURE;
      STDMETHOD (GetString)(THIS_ _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut) PURE;

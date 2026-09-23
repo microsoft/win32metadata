@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
-index dded3769a1..df2ec535d6 100644
+index dded3769a1..7c36f57082 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 @@ -1,3 +1,4 @@
@@ -468,7 +468,15 @@ index dded3769a1..df2ec535d6 100644
  #ifdef UNICODE
  #define EnumFonts  EnumFontsW
  #else
-@@ -4110,41 +4111,41 @@ WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPR
+@@ -4104,47 +4105,47 @@ WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In
+ #endif // !UNICODE
+ 
+ #ifdef STRICT
+-WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPROC lpFunc, _In_ LPARAM lParam);
++_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPROC lpFunc, _In_ LPARAM lParam);
+ #else
+-WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPROC lpFunc, _In_ LPVOID lParam);
++_Windows_SupportedOS_Windows2000_ WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPROC lpFunc, _In_ LPVOID lParam);
  #endif
  
  

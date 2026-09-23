@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
-index d1bd0b9577..e9090dc02f 100644
+index d1bd0b9577..fa4457f1b6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
 @@ -1,4 +1,5 @@
@@ -98,15 +98,26 @@ index d1bd0b9577..e9090dc02f 100644
      _In_    LPCWSTR                         lpFileName,
      _In_    PENCRYPTION_CERTIFICATE_LIST    pEncryptionCertificates
      );
-@@ -361,7 +362,7 @@ AddUsersToEncryptedFile(
- WINADVAPI
+@@ -358,16 +359,16 @@ AddUsersToEncryptedFile(
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
 -SetUserFileEncryptionKey(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ SetUserFileEncryptionKey(
++  SetUserFileEncryptionKey(
      _In_opt_    PENCRYPTION_CERTIFICATE     pEncryptionCertificate
      );
  
+ #else
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
+ DWORD
+ WINAPI
+ SetUserFileEncryptionKey(
 @@ -391,17 +392,17 @@ SetUserFileEncryptionKeyEx(
  
  #endif // #if (NTDDI_VERSION >= NTDDI_VISTA) 
@@ -129,12 +140,25 @@ index d1bd0b9577..e9090dc02f 100644
      _In_ LPCWSTR DirPath,
           BOOL        Disable
      );
-@@ -415,7 +416,7 @@ EncryptionDisable(
- WINADVAPI
+@@ -412,10 +413,10 @@ EncryptionDisable(
+ // in WS03 to use a CONST SECURITY_ATTRIBUTES structure
+ #if (NTDDI_VERSION >= NTDDI_WS03)
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
  DWORD
  WINAPI
 -DuplicateEncryptionInfoFile(
-+_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ DuplicateEncryptionInfoFile(
++  DuplicateEncryptionInfoFile(
       _In_       LPCWSTR SrcFileName,
       _In_       LPCWSTR DstFileName, 
                  DWORD                           dwCreationDistribution, 
+@@ -427,7 +428,7 @@ DuplicateEncryptionInfoFile(
+ #elif (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
+ DWORD
+ WINAPI
+ DuplicateEncryptionInfoFile(

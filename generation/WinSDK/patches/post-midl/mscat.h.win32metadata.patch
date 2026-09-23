@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h b/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
-index 0210fd0c9c..1ed789ecf8 100644
+index 0210fd0c9c..9d276ebee1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
 @@ -22,6 +22,7 @@
@@ -361,12 +361,20 @@ index 0210fd0c9c..1ed789ecf8 100644
      _In_        HCATADMIN   hCatAdmin,
      _In_        HANDLE      hFile,
      _Inout_     DWORD       *pcbHash,
-@@ -879,7 +880,7 @@ extern HCATINFO WINAPI CryptCATAdminAddCatalog(
+@@ -872,14 +873,14 @@ extern BOOL WINAPI CryptCATAdminCalcHashFromFileHandle2(
+ //
+ 
+ #if (NTDDI_VERSION < NTDDI_WINBLUE)
+-extern HCATINFO WINAPI CryptCATAdminAddCatalog(
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern HCATINFO WINAPI CryptCATAdminAddCatalog(
+     _In_ HCATADMIN hCatAdmin,
+     _In_ PWSTR pwszCatalogFile,
+     _In_opt_ PWSTR pwszSelectBaseName,
      _Reserved_ DWORD dwFlags
      );
  #else
 -extern HCATINFO WINAPI CryptCATAdminAddCatalog(
-+extern HCATINFO WINAPI _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ CryptCATAdminAddCatalog(
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern HCATINFO WINAPI   CryptCATAdminAddCatalog(
      _In_ HCATADMIN hCatAdmin,
      _In_ PWSTR pwszCatalogFile,
      _In_opt_ PWSTR pwszSelectBaseName,

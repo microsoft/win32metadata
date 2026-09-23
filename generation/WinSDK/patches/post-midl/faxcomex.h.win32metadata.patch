@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h
-index a292250693..c722eba6d0 100644
+index a292250693..bcbfdb9e68 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxComEx.h
 @@ -1,3 +1,4 @@
@@ -1109,3 +1109,75 @@ index a292250693..c722eba6d0 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Recipients( 
              /* [in] */ __RPC__in BSTR bstrRecipients) = 0;
+@@ -15653,7 +15654,7 @@ EXTERN_C const IID IID__IFaxServerNotify2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ec9c69b9-5fe7-4805-9467-82fcd96af903")
++    MIDL_INTERFACE("ec9c69b9-5fe7-4805-9467-82fcd96af903") _Windows_SupportedOS_WindowsVista_ 
+     _IFaxServerNotify2 : public IDispatch
+     {
+     public:
+@@ -15987,7 +15988,7 @@ EXTERN_C const IID IID__IFaxServerNotify2;
+         END_INTERFACE
+     } _IFaxServerNotify2Vtbl;
+ 
+-    interface _IFaxServerNotify2
++    interface _Windows_SupportedOS_WindowsVista_  _IFaxServerNotify2
+     {
+         CONST_VTBL struct _IFaxServerNotify2Vtbl *lpVtbl;
+     };
+@@ -16120,7 +16121,7 @@ EXTERN_C const IID DIID_IFaxServerNotify2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+ 
+-    MIDL_INTERFACE("616ca8d6-a77a-4062-abfd-0e471241c7aa")
++    MIDL_INTERFACE("616ca8d6-a77a-4062-abfd-0e471241c7aa") _Windows_SupportedOS_WindowsVista_ 
+     IFaxServerNotify2 : public IDispatch
+     {
+     };
+@@ -16190,7 +16191,7 @@ EXTERN_C const IID DIID_IFaxServerNotify2;
+         END_INTERFACE
+     } IFaxServerNotify2Vtbl;
+ 
+-    interface IFaxServerNotify2
++    interface _Windows_SupportedOS_WindowsVista_  IFaxServerNotify2
+     {
+         CONST_VTBL struct IFaxServerNotify2Vtbl *lpVtbl;
+     };
+@@ -16242,7 +16243,7 @@ EXTERN_C const IID IID__IFaxAccountNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b9b3bc81-ac1b-46f3-b39d-0adc30e1b788")
++    MIDL_INTERFACE("b9b3bc81-ac1b-46f3-b39d-0adc30e1b788") _Windows_SupportedOS_WindowsVista_ 
+     _IFaxAccountNotify : public IDispatch
+     {
+     public:
+@@ -16430,7 +16431,7 @@ EXTERN_C const IID IID__IFaxAccountNotify;
+         END_INTERFACE
+     } _IFaxAccountNotifyVtbl;
+ 
+-    interface _IFaxAccountNotify
++    interface _Windows_SupportedOS_WindowsVista_  _IFaxAccountNotify
+     {
+         CONST_VTBL struct _IFaxAccountNotifyVtbl *lpVtbl;
+     };
+@@ -16518,7 +16519,7 @@ EXTERN_C const IID DIID_IFaxAccountNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+ 
+-    MIDL_INTERFACE("0b5e5bd1-b8a9-47a0-a323-ef4a293ba06a")
++    MIDL_INTERFACE("0b5e5bd1-b8a9-47a0-a323-ef4a293ba06a") _Windows_SupportedOS_WindowsVista_ 
+     IFaxAccountNotify : public IDispatch
+     {
+     };
+@@ -16588,7 +16589,7 @@ EXTERN_C const IID DIID_IFaxAccountNotify;
+         END_INTERFACE
+     } IFaxAccountNotifyVtbl;
+ 
+-    interface IFaxAccountNotify
++    interface _Windows_SupportedOS_WindowsVista_  IFaxAccountNotify
+     {
+         CONST_VTBL struct IFaxAccountNotifyVtbl *lpVtbl;
+     };

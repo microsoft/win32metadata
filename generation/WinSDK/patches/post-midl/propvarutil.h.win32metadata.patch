@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h b/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h
-index 17f5634717..90b6a7381f 100644
+index 17f5634717..66bee6644f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propvarutil.h
 @@ -1,3 +1,4 @@
@@ -116,15 +116,17 @@ index 17f5634717..90b6a7381f 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 -PSSTDAPI             PropVariantToInt16(_In_ REFPROPVARIANT propvarIn, _Out_ SHORT *piRet);
 -PSSTDAPI             PropVariantToUInt16(_In_ REFPROPVARIANT propvarIn, _Out_ USHORT *puiRet);
-+_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToInt16(_In_ REFPROPVARIANT propvarIn, _Out_ SHORT *piRet);
-+_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToUInt16(_In_ REFPROPVARIANT propvarIn, _Out_ USHORT *puiRet);
- PSSTDAPI             PropVariantToInt32(_In_ REFPROPVARIANT propvarIn, _Out_ LONG *plRet);
- PSSTDAPI             PropVariantToUInt32(_In_ REFPROPVARIANT propvarIn, _Out_ ULONG *pulRet);
+-PSSTDAPI             PropVariantToInt32(_In_ REFPROPVARIANT propvarIn, _Out_ LONG *plRet);
+-PSSTDAPI             PropVariantToUInt32(_In_ REFPROPVARIANT propvarIn, _Out_ ULONG *pulRet);
 -PSSTDAPI             PropVariantToInt64(_In_ REFPROPVARIANT propvarIn, _Out_ LONGLONG *pllRet);
 -PSSTDAPI             PropVariantToUInt64(_In_ REFPROPVARIANT propvarIn, _Out_ ULONGLONG *pullRet);
 -PSSTDAPI             PropVariantToDouble(_In_ REFPROPVARIANT propvarIn, _Out_ DOUBLE *pdblRet);
 -PSSTDAPI             PropVariantToBuffer(_In_ REFPROPVARIANT propvar, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
 -PSSTDAPI             PropVariantToString(_In_ REFPROPVARIANT propvar, _Out_writes_(cch) PWSTR psz, _In_ UINT cch);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToInt16(_In_ REFPROPVARIANT propvarIn, _Out_ SHORT *piRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToUInt16(_In_ REFPROPVARIANT propvarIn, _Out_ USHORT *puiRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToInt32(_In_ REFPROPVARIANT propvarIn, _Out_ LONG *plRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToUInt32(_In_ REFPROPVARIANT propvarIn, _Out_ ULONG *pulRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToInt64(_In_ REFPROPVARIANT propvarIn, _Out_ LONGLONG *pllRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToUInt64(_In_ REFPROPVARIANT propvarIn, _Out_ ULONGLONG *pullRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI             PropVariantToDouble(_In_ REFPROPVARIANT propvarIn, _Out_ DOUBLE *pdblRet);
@@ -358,6 +360,12 @@ index 17f5634717..90b6a7381f 100644
 -PSSTDAPI              VariantToBoolean(_In_ REFVARIANT varIn, _Out_ BOOL *pfRet);
 -PSSTDAPI              VariantToInt16(_In_ REFVARIANT varIn, _Out_ SHORT *piRet);
 -PSSTDAPI              VariantToUInt16(_In_ REFVARIANT varIn, _Out_ USHORT *puiRet);
+-PSSTDAPI              VariantToInt32(_In_ REFVARIANT varIn, _Out_ LONG *plRet);
+-PSSTDAPI              VariantToUInt32(_In_ REFVARIANT varIn, _Out_ ULONG *pulRet);
+-PSSTDAPI              VariantToInt64(_In_ REFVARIANT varIn, _Out_ LONGLONG *pllRet);
+-PSSTDAPI              VariantToUInt64(_In_ REFVARIANT varIn, _Out_ ULONGLONG *pullRet);
+-PSSTDAPI              VariantToDouble(_In_ REFVARIANT varIn, _Out_ DOUBLE *pdblRet);
+-PSSTDAPI              VariantToBuffer(_In_ REFVARIANT varIn, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(BOOL)       VariantToBooleanWithDefault(_In_ REFVARIANT varIn, _In_ BOOL fDefault);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(SHORT)      VariantToInt16WithDefault(_In_ REFVARIANT varIn, _In_ SHORT iDefault);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI_(USHORT)     VariantToUInt16WithDefault(_In_ REFVARIANT varIn, _In_ USHORT uiDefault);
@@ -371,12 +379,8 @@ index 17f5634717..90b6a7381f 100644
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToBoolean(_In_ REFVARIANT varIn, _Out_ BOOL *pfRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToInt16(_In_ REFVARIANT varIn, _Out_ SHORT *piRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToUInt16(_In_ REFVARIANT varIn, _Out_ USHORT *puiRet);
- PSSTDAPI              VariantToInt32(_In_ REFVARIANT varIn, _Out_ LONG *plRet);
- PSSTDAPI              VariantToUInt32(_In_ REFVARIANT varIn, _Out_ ULONG *pulRet);
--PSSTDAPI              VariantToInt64(_In_ REFVARIANT varIn, _Out_ LONGLONG *pllRet);
--PSSTDAPI              VariantToUInt64(_In_ REFVARIANT varIn, _Out_ ULONGLONG *pullRet);
--PSSTDAPI              VariantToDouble(_In_ REFVARIANT varIn, _Out_ DOUBLE *pdblRet);
--PSSTDAPI              VariantToBuffer(_In_ REFVARIANT varIn, _Out_writes_bytes_(cb) void *pv, _In_ UINT cb);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToInt32(_In_ REFVARIANT varIn, _Out_ LONG *plRet);
++_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToUInt32(_In_ REFVARIANT varIn, _Out_ ULONG *pulRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToInt64(_In_ REFVARIANT varIn, _Out_ LONGLONG *pllRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToUInt64(_In_ REFVARIANT varIn, _Out_ ULONGLONG *pullRet);
 +_Windows_SupportedOS_WindowsXP_ PSSTDAPI              VariantToDouble(_In_ REFVARIANT varIn, _Out_ DOUBLE *pdblRet);
