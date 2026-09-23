@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h b/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
-index 5d990dd627..d834cdd086 100644
+index 5d990dd627..682bd73fe0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,28 @@ index 5d990dd627..d834cdd086 100644
      INT     cbSize;
      INT     iType;
      LPVOID  lpItemData;
+@@ -591,7 +592,7 @@ DECLARE_INTERFACE_(IImeSpecifyApplets, IUnknown)
+     /*** IImeSpecifyApplet methods ***/
+     STDMETHOD(GetAppletIIDList)(THIS_
+                                 REFIID          refiid,
+-                                LPAPPLETIDLIST  lpIIDList) PURE;
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPAPPLETIDLIST  lpIIDList) PURE;
+ };
+ 
+ 
+@@ -604,10 +605,10 @@ DECLARE_INTERFACE_(IImePadApplet, IUnknown)
+     /*** IImePadApplet methods ***/
+     STDMETHOD(Initialize)(THIS_ IUnknown *lpIImePad)  PURE;
+     STDMETHOD(Terminate) (THIS)                     PURE;
+-    STDMETHOD(GetAppletConfig)(THIS_ LPIMEAPPLETCFG lpAppletCfg) PURE;
++    STDMETHOD(GetAppletConfig)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPIMEAPPLETCFG lpAppletCfg) PURE;
+     STDMETHOD(CreateUI)(THIS_ 
+                         HWND                hwndParent,
+-                        LPIMEAPPLETUI       lpImeAppletUI) PURE;
++                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPIMEAPPLETUI       lpImeAppletUI) PURE;
+     STDMETHOD(Notify)(THIS_ 
+                       IUnknown  *lpImePad,
+                       INT       notify,
 @@ -624,7 +625,7 @@ DECLARE_INTERFACE_(IImePad, IUnknown)
      /*** IImePad methods ***/
      STDMETHOD(Request)(THIS_

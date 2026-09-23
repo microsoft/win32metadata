@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
-index b7ebb2e69d..c09d0dc357 100644
+index b7ebb2e69d..960f43d3f6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
 @@ -1,4 +1,5 @@
@@ -236,14 +236,14 @@ index b7ebb2e69d..c09d0dc357 100644
  #ifdef UNICODE
  #define ImmSetCompositionFont  ImmSetCompositionFontW
  #else
-@@ -328,48 +329,48 @@ BOOL WINAPI ImmSetCompositionFontW(IN HIMC, _In_ LPLOGFONTW lplf);
+@@ -328,83 +329,83 @@ BOOL WINAPI ImmSetCompositionFontW(IN HIMC, _In_ LPLOGFONTW lplf);
  #endif // !UNICODE
  #endif  // defined(_WINGDI_) && !defined(NOGDI)
  
 -BOOL    WINAPI ImmConfigureIMEA(IN HKL, IN HWND, IN DWORD, IN LPVOID);
 -BOOL    WINAPI ImmConfigureIMEW(IN HKL, IN HWND, IN DWORD, IN LPVOID);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ BOOL    WINAPI  ImmConfigureIMEA(IN HKL, IN HWND, IN DWORD, IN LPVOID);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ BOOL    WINAPI  ImmConfigureIMEW(IN HKL, IN HWND, IN DWORD, IN LPVOID);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ BOOL    WINAPI  ImmConfigureIMEA(IN HKL, IN HWND, IN DWORD, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ BOOL    WINAPI  ImmConfigureIMEW(IN HKL, IN HWND, IN DWORD, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID);
  #ifdef UNICODE
  #define ImmConfigureIME  ImmConfigureIMEW
  #else
@@ -252,8 +252,8 @@ index b7ebb2e69d..c09d0dc357 100644
  
 -LRESULT WINAPI ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
 -LRESULT WINAPI ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeA(IN HKL, IN HIMC, _Win32_AssociatedEnum_(IME_ESCAPE) IN UINT, IN LPVOID);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeW(IN HKL, IN HIMC, _Win32_AssociatedEnum_(IME_ESCAPE) IN UINT, IN LPVOID);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeA(IN HKL, IN HIMC, _Win32_AssociatedEnum_(IME_ESCAPE) IN UINT, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ LRESULT WINAPI  ImmEscapeW(IN HKL, IN HIMC, _Win32_AssociatedEnum_(IME_ESCAPE) IN UINT, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID);
  #ifdef UNICODE
  #define ImmEscape  ImmEscapeW
  #else
@@ -299,9 +299,13 @@ index b7ebb2e69d..c09d0dc357 100644
 -UINT WINAPI ImmGetVirtualKey(IN HWND);
 +_Windows_SupportedOS_WindowsXP_ UINT WINAPI  ImmGetVirtualKey(IN HWND);
  
- typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, LPVOID);
- typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, LPVOID);
-@@ -379,32 +380,32 @@ typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _
+-typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, LPVOID);
+-typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, LPVOID);
++typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
++typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
+ #ifdef UNICODE
+ #define REGISTERWORDENUMPROC  REGISTERWORDENUMPROCW
+ #else
  #define REGISTERWORDENUMPROC  REGISTERWORDENUMPROCA
  #endif // !UNICODE
  
@@ -337,8 +341,8 @@ index b7ebb2e69d..c09d0dc357 100644
  
 -UINT WINAPI ImmEnumRegisterWordA(IN HKL, IN REGISTERWORDENUMPROCA, _In_opt_ LPCSTR lpszReading, IN DWORD, _In_opt_ LPCSTR lpszRegister, IN LPVOID);
 -UINT WINAPI ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCWSTR lpszReading, IN DWORD, _In_opt_ LPCWSTR lpszRegister, IN LPVOID);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ UINT WINAPI  ImmEnumRegisterWordA(IN HKL, IN REGISTERWORDENUMPROCA, _In_opt_ LPCSTR lpszReading, IN DWORD, _In_opt_ LPCSTR lpszRegister, IN LPVOID);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ UINT WINAPI  ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCWSTR lpszReading, IN DWORD, _In_opt_ LPCWSTR lpszRegister, IN LPVOID);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ UINT WINAPI  ImmEnumRegisterWordA(IN HKL, IN REGISTERWORDENUMPROCA, _In_opt_ LPCSTR lpszReading, IN DWORD, _In_opt_ LPCSTR lpszRegister, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ UINT WINAPI  ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCWSTR lpszReading, IN DWORD, _In_opt_ LPCWSTR lpszRegister, _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID);
  #ifdef UNICODE
  #define ImmEnumRegisterWord  ImmEnumRegisterWordW
  #else

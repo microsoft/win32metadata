@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinFax.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinFax.h
-index 94d0927a8a..e133d0b85f 100644
+index 94d0927a8a..2f82480752 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinFax.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinFax.h
 @@ -1,3 +1,4 @@
@@ -412,8 +412,18 @@ index 94d0927a8a..e133d0b85f 100644
  BOOL
  WINAPI
  FaxSetRoutingInfoW(
-@@ -1794,7 +1795,7 @@ typedef VOID
-     LPVOID Buffer
+@@ -1786,15 +1787,15 @@ WINFAXAPI
+ VOID
+ WINAPI
+ FaxFreeBuffer(
+-    LPVOID Buffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID Buffer
+     );
+ 
+ typedef VOID
+ (WINAPI *PFAXFREEBUFFER)(
+-    LPVOID Buffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID Buffer
      );
  
 -WINFAXAPI

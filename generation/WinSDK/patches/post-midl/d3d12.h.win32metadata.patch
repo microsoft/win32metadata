@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
-index c103a80d02..915d8437a6 100644
+index c103a80d02..d0fd003a23 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
 @@ -1,3 +1,4 @@
@@ -187,6 +187,24 @@ index c103a80d02..915d8437a6 100644
          
          virtual void STDMETHODCALLTYPE RSSetViewports( 
              /* [annotation] */ 
+@@ -7347,7 +7348,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+             /* [annotation] */ 
+             _In_  UINT NumRects,
+             /* [annotation] */ 
+-            _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:optional") _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
+         
+         virtual void STDMETHODCALLTYPE ClearRenderTargetView( 
+             /* [annotation] */ 
+@@ -7357,7 +7358,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+             /* [annotation] */ 
+             _In_  UINT NumRects,
+             /* [annotation] */ 
+-            _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:optional") _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
+         
+         virtual void STDMETHODCALLTYPE ClearUnorderedAccessViewUint( 
+             /* [annotation] */ 
 @@ -8233,7 +8234,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList1;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -223,6 +241,22 @@ index c103a80d02..915d8437a6 100644
      ID3D12CommandQueue1 : public ID3D12CommandQueue
      {
      public:
+@@ -10470,13 +10471,13 @@ EXTERN_C const IID IID_ID3D12CommandQueue1;
+             D3D12_COMMAND_QUEUE_PROCESS_PRIORITY Priority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProcessPriority( 
+-            D3D12_COMMAND_QUEUE_PROCESS_PRIORITY *pOutValue) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D12_COMMAND_QUEUE_PROCESS_PRIORITY *pOutValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetGlobalPriority( 
+             D3D12_COMMAND_QUEUE_GLOBAL_PRIORITY Priority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGlobalPriority( 
+-            D3D12_COMMAND_QUEUE_GLOBAL_PRIORITY *pOutValue) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D12_COMMAND_QUEUE_GLOBAL_PRIORITY *pOutValue) = 0;
+         
+     };
+     
 @@ -10768,7 +10769,7 @@ EXTERN_C const IID IID_ID3D12Device;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

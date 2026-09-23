@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h b/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h
-index f246eba7fe..fdfb035db4 100644
+index f246eba7fe..6f41c9acce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/devicetopology.h
 @@ -1,3 +1,4 @@
@@ -124,7 +124,7 @@ index f246eba7fe..fdfb035db4 100644
      IDeviceSpecificProperty : public IUnknown
      {
      public:
-@@ -2388,7 +2389,7 @@ EXTERN_C const IID IID_IKsFormatSupport;
+@@ -2388,12 +2389,12 @@ EXTERN_C const IID IID_IKsFormatSupport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -133,6 +133,12 @@ index f246eba7fe..fdfb035db4 100644
      IKsFormatSupport : public IUnknown
      {
      public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsFormatSupported( 
+-            /* [size_is][in] */ PKSDATAFORMAT pKsFormat,
++            /* [size_is][in] */ _WIN32META_ANNOTATION_("win32metadata:out") PKSDATAFORMAT pKsFormat,
+             /* [annotation][in] */ 
+             _In_  DWORD cbFormat,
+             /* [annotation][out] */ 
 @@ -2494,7 +2495,7 @@ EXTERN_C const IID IID_IKsJackDescription;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
-index f76840c470..758f2eed7a 100644
+index f76840c470..01bb987f86 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 @@ -1,3 +1,4 @@
@@ -383,6 +383,18 @@ index f76840c470..758f2eed7a 100644
  } IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;
  
  #define IMAGE_SIZEOF_SECTION_HEADER          40
+@@ -21019,9 +21020,9 @@ typedef IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;
+ 
+ typedef VOID
+ (NTAPI *PIMAGE_TLS_CALLBACK) (
+-    PVOID DllHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID DllHandle,
+     DWORD Reason,
+-    PVOID Reserved
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Reserved
+     );
+ 
+ typedef struct _IMAGE_TLS_DIRECTORY64 {
 @@ -21901,7 +21902,7 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
      DWORD   TimeDateStamp;
      WORD    MajorVersion;
@@ -529,6 +541,26 @@ index f76840c470..758f2eed7a 100644
  DWORD   
  NTAPI
  RtlGetSystemGlobalData (
+@@ -24396,7 +24397,7 @@ VOID
+     _In_ ULONG_PTR Parameter
+     );
+ typedef LONG (NTAPI *PVECTORED_EXCEPTION_HANDLER)(
+-    struct _EXCEPTION_POINTERS *ExceptionInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _EXCEPTION_POINTERS *ExceptionInfo
+     );
+ 
+ typedef enum _HEAP_INFORMATION_CLASS {
+@@ -24445,8 +24446,8 @@ typedef struct _HEAP_OPTIMIZE_RESOURCES_INFORMATION {
+ #define WT_TRANSFER_IMPERSONATION 0x00000100                         
+ #define WT_SET_MAX_THREADPOOL_THREADS(Flags, Limit)  ((Flags) |= (Limit)<<16) 
+ typedef VOID (NTAPI * WAITORTIMERCALLBACKFUNC) (PVOID, BOOLEAN );   
+-typedef VOID (NTAPI * WORKERCALLBACKFUNC) (PVOID );                 
+-typedef VOID (NTAPI * APC_CALLBACK_FUNCTION) (DWORD   , PVOID, PVOID); 
++typedef VOID (NTAPI * WORKERCALLBACKFUNC) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID );                 
++typedef VOID (NTAPI * APC_CALLBACK_FUNCTION) (DWORD   , _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID); 
+ typedef WAITORTIMERCALLBACKFUNC WAITORTIMERCALLBACK; 
+ typedef
+ VOID
 @@ -24739,8 +24740,8 @@ VOID
  NTAPI
  RtlGetDeviceFamilyInfoEnum(

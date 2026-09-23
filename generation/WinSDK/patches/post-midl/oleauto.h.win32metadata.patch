@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
-index 7860ea3c60..8c7ea06005 100644
+index 7860ea3c60..ab1702741e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
 @@ -1,3 +1,4 @@
@@ -19,9 +19,10 @@ index 7860ea3c60..8c7ea06005 100644
  _Check_return_ WINOLEAUTAPI_(INT)  SysReAllocStringLen(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(len+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz, _In_ unsigned int len);
 -WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
 -WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
+-WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
 +_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
 +_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
- WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
++WINOLEAUTAPI_(void) SysFreeString(_WIN32META_ANNOTATION_("win32metadata:in") _Frees_ptr_opt_ BSTR bstrString);
  WINOLEAUTAPI_(_Post_equal_to_(pbstr == NULL ? 0 : _String_length_(pbstr)) UINT) SysStringLen(_In_opt_ BSTR pbstr);
  
  #if (defined (_WIN32) || defined (_WIN64))
@@ -90,6 +91,39 @@ index 7860ea3c60..8c7ea06005 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
+@@ -309,7 +310,7 @@ WINOLEAUTAPI VarI2FromI4(LONG lIn, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromI8(LONG64 i64In, _Out_ SHORT FAR* psOut);
+ WINOLEAUTAPI VarI2FromR4(FLOAT fltIn, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromR8(DOUBLE dblIn, _Out_ SHORT * psOut);
+-WINOLEAUTAPI VarI2FromCy(CY cyIn, SHORT * psOut);
++WINOLEAUTAPI VarI2FromCy(CY cyIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SHORT * psOut);
+ WINOLEAUTAPI VarI2FromDate(DATE dateIn, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromStr(_In_ LPCOLESTR strIn, LCID lcid, ULONG dwFlags, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromDisp(IDispatch * pdispIn, LCID lcid, _Out_ SHORT * psOut);
+@@ -362,7 +363,7 @@ WINOLEAUTAPI VarR4FromI2(SHORT sIn, _Out_ FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromI4(LONG lIn, _Out_ FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromI8(LONG64 i64In, _Out_ FLOAT FAR* pfltOut);
+ WINOLEAUTAPI VarR4FromR8(DOUBLE dblIn, _Out_ FLOAT * pfltOut);
+-WINOLEAUTAPI VarR4FromCy(CY cyIn, FLOAT * pfltOut);
++WINOLEAUTAPI VarR4FromCy(CY cyIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromDate(DATE dateIn, _Out_ FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromStr(_In_ LPCOLESTR strIn, LCID lcid, ULONG dwFlags, _Out_ FLOAT *pfltOut);
+ WINOLEAUTAPI VarR4FromDisp(IDispatch * pdispIn, LCID lcid, _Out_ FLOAT * pfltOut);
+@@ -378,12 +379,12 @@ WINOLEAUTAPI VarR8FromI2(SHORT sIn, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromI4(LONG lIn, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromI8(LONG64 i64In, _Out_ DOUBLE FAR* pdblOut);
+ WINOLEAUTAPI VarR8FromR4(FLOAT fltIn, _Out_ DOUBLE * pdblOut);
+-WINOLEAUTAPI VarR8FromCy(CY cyIn, DOUBLE * pdblOut);
++WINOLEAUTAPI VarR8FromCy(CY cyIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromDate(DATE dateIn, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromStr(_In_ LPCOLESTR strIn, LCID lcid, ULONG dwFlags, _Out_ DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromDisp(IDispatch * pdispIn, LCID lcid, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromBool(VARIANT_BOOL boolIn, _Out_ DOUBLE * pdblOut);
+-WINOLEAUTAPI VarR8FromI1(CHAR cIn, DOUBLE *pdblOut);
++WINOLEAUTAPI VarR8FromI1(CHAR cIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromUI2(USHORT uiIn, _Out_ DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromUI4(ULONG ulIn, _Out_ DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromUI8(ULONG64 ui64In, _Out_ DOUBLE FAR* pdblOut);
 @@ -421,21 +422,21 @@ WINOLEAUTAPI VarCyFromUI4(ULONG ulIn, _Out_ CY *pcyOut);
  WINOLEAUTAPI VarCyFromUI8(ULONG64 ui64In, _Out_ CY FAR* pcyOut);
  WINOLEAUTAPI VarCyFromDec(_In_ const DECIMAL *pdecIn, _Out_ CY *pcyOut);
@@ -127,6 +161,15 @@ index 7860ea3c60..8c7ea06005 100644
  
  WINOLEAUTAPI VarBoolFromUI1(BYTE bIn, _Out_ VARIANT_BOOL * pboolOut);
  _Check_return_ WINOLEAUTAPI VarBoolFromI2(_In_ SHORT sIn, _Out_ VARIANT_BOOL * pboolOut);
+@@ -551,7 +552,7 @@ WINOLEAUTAPI VarUI2FromI2(SHORT uiIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromI4(LONG lIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromI8(LONG64 i64In, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromR4(FLOAT fltIn, _Out_ USHORT *puiOut);
+-WINOLEAUTAPI VarUI2FromR8(DOUBLE dblIn, USHORT *puiOut);
++WINOLEAUTAPI VarUI2FromR8(DOUBLE dblIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromDate(DATE dateIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromCy(CY cyIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromStr(_In_ LPCOLESTR strIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ USHORT *puiOut);
 @@ -734,8 +735,8 @@ WINOLEAUTAPI VarI4FromUI8(ULONG64 ui64In, _Out_ LONG *plOut);
  
  typedef struct {
@@ -312,7 +355,36 @@ index 7860ea3c60..8c7ea06005 100644
  	_Out_ VARIANT * pvarResult,
  	_Out_opt_ UINT * puArgErr
  	);
-@@ -1287,7 +1288,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
+@@ -1260,9 +1261,9 @@ _Check_return_
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINOLEAUTAPI DispInvoke(void * _this, ITypeInfo * ptinfo, DISPID dispidMember,
+-            WORD wFlags, DISPPARAMS * pparams, VARIANT * pvarResult,
+-            EXCEPINFO * pexcepinfo, UINT * puArgErr);
++WINOLEAUTAPI DispInvoke(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * _this, ITypeInfo * ptinfo, DISPID dispidMember,
++            WORD wFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DISPPARAMS * pparams, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT * pvarResult,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") EXCEPINFO * pexcepinfo, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT * puArgErr);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -1273,21 +1274,21 @@ WINOLEAUTAPI DispInvoke(void * _this, ITypeInfo * ptinfo, DISPID dispidMember,
+ /* Construct a TypeInfo from an interface data description
+  */
+ _Check_return_
+-WINOLEAUTAPI CreateDispTypeInfo(INTERFACEDATA * pidata, LCID lcid,
++WINOLEAUTAPI CreateDispTypeInfo(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACEDATA * pidata, LCID lcid,
+             ITypeInfo ** pptinfo);
+ 
+ /* Create an instance of the standard TypeInfo driven IDispatch
+  * implementation.
+  */
+ _Check_return_
+-WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
++WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pvThis,
+             ITypeInfo * ptinfo, IUnknown ** ppunkStdDisp);
+ 
+ /* Low-level helper for IDispatch::Invoke() provides machine independence
   * for customized Invoke().
   */
  WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV cc,
@@ -326,7 +398,7 @@ index 7860ea3c60..8c7ea06005 100644
  _Check_return_
  WINOLEAUTAPI RegisterActiveObject(IUnknown * punk, REFCLSID rclsid,
 -            DWORD dwFlags, DWORD * pdwRegister);
-+            _Win32_AssociatedEnum_(ACTIVEOBJECT_FLAGS) DWORD dwFlags, DWORD * pdwRegister);
++            _Win32_AssociatedEnum_(ACTIVEOBJECT_FLAGS) DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD * pdwRegister);
  
 -WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, void * pvReserved);
 +WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, _Reserved_ void * pvReserved);
@@ -336,6 +408,15 @@ index 7860ea3c60..8c7ea06005 100644
              IUnknown ** ppunk);
  
  /*---------------------------------------------------------------------*/
+@@ -1335,7 +1336,7 @@ WINOLEAUTAPI GetRecordInfoFromGuids(REFGUID rGuidTypeLib,
+ 
+ WINOLEAUTAPI_(ULONG) OaBuildVersion(void);
+ 
+-WINOLEAUTAPI_(void) ClearCustData(LPCUSTDATA pCustData);
++WINOLEAUTAPI_(void) ClearCustData(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCUSTDATA pCustData);
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
+ WINOLEAUTAPI_(void) OaEnablePerUserTLibRegistration(void);
 @@ -1433,4 +1434,353 @@ WINOLEAUTAPI_(void) OaEnablePerUserTLibRegistration(void);
  
  #if _MSC_VER >= 1200

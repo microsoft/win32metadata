@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h
-index 134c458f3b..1cbc19350d 100644
+index 134c458f3b..ce0fb78435 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertPol.h
 @@ -1,3 +1,4 @@
@@ -34,3 +34,23 @@ index 134c458f3b..1cbc19350d 100644
      ICertPolicy2 : public ICertPolicy
      {
      public:
+@@ -549,8 +550,8 @@ EXTERN_C const IID IID_INDESPolicy;
+             _Out_retval_  PWSTR *ppwszResponse) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE VerifyRequest( 
+-            /* [ref][in] */ CERTTRANSBLOB *pctbRequest,
+-            /* [ref][in] */ CERTTRANSBLOB *pctbSigningCertEncoded,
++            /* [ref][in] */ _WIN32META_ANNOTATION_("win32metadata:out") CERTTRANSBLOB *pctbRequest,
++            /* [ref][in] */ _WIN32META_ANNOTATION_("win32metadata:out") CERTTRANSBLOB *pctbSigningCertEncoded,
+             /* [ref][in] */ PCWSTR pwszTemplate,
+             /* [ref][in] */ PCWSTR pwszTransactionId,
+             /* [annotation][retval][out] */ 
+@@ -563,7 +564,7 @@ EXTERN_C const IID IID_INDESPolicy;
+             _In_  X509SCEPDisposition disposition,
+             /* [annotation][in] */ 
+             _In_  LONG lastHResult,
+-            /* [ref][in] */ CERTTRANSBLOB *pctbIssuedCertEncoded) = 0;
++            /* [ref][in] */ _WIN32META_ANNOTATION_("win32metadata:out") CERTTRANSBLOB *pctbIssuedCertEncoded) = 0;
+         
+     };
+     

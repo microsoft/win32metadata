@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h
-index dcbad6c780..b25242831f 100644
+index dcbad6c780..b2b29e4481 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSnmp.h
 @@ -17,6 +17,7 @@
@@ -10,15 +10,19 @@ index dcbad6c780..b25242831f 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -267,163 +268,169 @@ typedef SNMPAPI_STATUS (CALLBACK *SNMPAPI_CALLBACK)
-                          IN LPVOID lpClientData);
+@@ -264,166 +265,172 @@ typedef SNMPAPI_STATUS (CALLBACK *SNMPAPI_CALLBACK)
+                          IN UINT wMsg,
+                          IN WPARAM wParam,
+                          IN LPARAM lParam,
+-                         IN LPVOID lpClientData);
++                         _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID lpClientData);
  
  /* Local Database Functions */
 +_Windows_SupportedOS_Windows2000_ 
 +
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetTranslateMode
 -                              (OUT smiLPUINT32 nTranslateMode);
-+                              (_Win32_AssociatedEnum_(SNMP_API_TRANSLATE_MODE) OUT smiLPUINT32 nTranslateMode);
++                              (_WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_API_TRANSLATE_MODE) OUT smiLPUINT32 nTranslateMode);
 +
 +_Windows_SupportedOS_Windows2000_ 
  
@@ -30,7 +34,7 @@ index dcbad6c780..b25242831f 100644
  
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetRetransmitMode
 -                              (OUT smiLPUINT32 nRetransmitMode);
-+                              (_Win32_AssociatedEnum_(SNMP_STATUS) OUT smiLPUINT32 nRetransmitMode);
++                              (_WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_STATUS) OUT smiLPUINT32 nRetransmitMode);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetRetransmitMode
 -                              (IN smiUINT32 nRetransmitMode);
@@ -40,8 +44,10 @@ index dcbad6c780..b25242831f 100644
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetTimeout
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetTimeout
                                (IN HSNMP_ENTITY hEntity,
-                               OUT smiLPTIMETICKS nPolicyTimeout,
-                               OUT smiLPTIMETICKS nActualTimeout);
+-                              OUT smiLPTIMETICKS nPolicyTimeout,
+-                              OUT smiLPTIMETICKS nActualTimeout);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPTIMETICKS nPolicyTimeout,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPTIMETICKS nActualTimeout);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetTimeout
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetTimeout
@@ -51,8 +57,10 @@ index dcbad6c780..b25242831f 100644
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetRetry
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetRetry
                                (IN HSNMP_ENTITY hEntity,
-                               OUT smiLPUINT32 nPolicyRetry,
-                               OUT smiLPUINT32 nActualRetry);
+-                              OUT smiLPUINT32 nPolicyRetry,
+-                              OUT smiLPUINT32 nActualRetry);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nPolicyRetry,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nActualRetry);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetRetry
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetRetry
@@ -61,21 +69,26 @@ index dcbad6c780..b25242831f 100644
  
  /* Following Local Database Functions added in v2.0 */
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetVendorInfo
+-                              (OUT smiLPVENDORINFO vendorInfo);
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetVendorInfo
-                               (OUT smiLPVENDORINFO vendorInfo);
++                              (_WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPVENDORINFO vendorInfo);
  
  /* Communications Functions */
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpStartup
-+_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpStartup
-                               (OUT smiLPUINT32 nMajorVersion,
-                               OUT smiLPUINT32 nMinorVersion,
-                               OUT smiLPUINT32 nLevel,
+-                              (OUT smiLPUINT32 nMajorVersion,
+-                              OUT smiLPUINT32 nMinorVersion,
+-                              OUT smiLPUINT32 nLevel,
 -                              OUT smiLPUINT32 nTranslateMode,
 -                              OUT smiLPUINT32 nRetransmitMode);
-+                              _Win32_AssociatedEnum_(SNMP_API_TRANSLATE_MODE) OUT smiLPUINT32 nTranslateMode,
-+                              _Win32_AssociatedEnum_(SNMP_STATUS) OUT smiLPUINT32 nRetransmitMode);
- 
+-
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpCleanup
++_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpStartup
++                              (_WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nMajorVersion,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nMinorVersion,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nLevel,
++                              _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_API_TRANSLATE_MODE) OUT smiLPUINT32 nTranslateMode,
++                              _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_STATUS) OUT smiLPUINT32 nRetransmitMode);
++
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpCleanup
                                (void);
  
@@ -99,10 +112,14 @@ index dcbad6c780..b25242831f 100644
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
                                (IN HSNMP_SESSION session,
-                               OUT LPHSNMP_ENTITY srcEntity,
-                               OUT LPHSNMP_ENTITY dstEntity,
-                               OUT LPHSNMP_CONTEXT  context,
-                               OUT LPHSNMP_PDU PDU);
+-                              OUT LPHSNMP_ENTITY srcEntity,
+-                              OUT LPHSNMP_ENTITY dstEntity,
+-                              OUT LPHSNMP_CONTEXT  context,
+-                              OUT LPHSNMP_PDU PDU);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_ENTITY srcEntity,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_ENTITY dstEntity,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_CONTEXT  context,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_PDU PDU);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpRegister
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRegister
@@ -110,8 +127,9 @@ index dcbad6c780..b25242831f 100644
                                IN HSNMP_ENTITY srcEntity,
                                IN HSNMP_ENTITY dstEntity,
                                IN HSNMP_CONTEXT context,
-                               IN smiLPCOID notification,
+-                              IN smiLPCOID notification,
 -                              IN smiUINT32 state);
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOID notification,
 +                              _Win32_AssociatedEnum_(SNMP_STATUS) IN smiUINT32 state);
  
  /* Following Communications Functions added in v2.0 */
@@ -120,7 +138,8 @@ index dcbad6c780..b25242831f 100644
                                (IN HWND hWnd,
                                IN UINT wMsg,
                                IN SNMPAPI_CALLBACK fCallBack,
-                               IN LPVOID lpClientData);
+-                              IN LPVOID lpClientData);
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID lpClientData);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpListen
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpListen
@@ -140,20 +159,28 @@ index dcbad6c780..b25242831f 100644
  
  /* Extensions to Communications Functions */
 -SNMPAPI_STATUS SNMPAPI_CALL SnmpStartupEx 
-+_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL SnmpStartupEx 
-                             (OUT smiLPUINT32 nMajorVersion,
-                              OUT smiLPUINT32 nMinorVersion,
-                              OUT smiLPUINT32 nLevel,
+-                            (OUT smiLPUINT32 nMajorVersion,
+-                             OUT smiLPUINT32 nMinorVersion,
+-                             OUT smiLPUINT32 nLevel,
 -                             OUT smiLPUINT32 nTranslateMode,
 -                             OUT smiLPUINT32 nRetransmitMode);
-+                             _Win32_AssociatedEnum_(SNMP_API_TRANSLATE_MODE) OUT smiLPUINT32 nTranslateMode,
-+                             _Win32_AssociatedEnum_(SNMP_STATUS) OUT smiLPUINT32 nRetransmitMode);
- typedef SNMPAPI_STATUS (SNMPAPI_CALL * PFNSNMPSTARTUPEX)(  smiLPUINT32,
-                                                         smiLPUINT32,
-                                                         smiLPUINT32,
-                                                         smiLPUINT32,
-                                                         smiLPUINT32);
+-typedef SNMPAPI_STATUS (SNMPAPI_CALL * PFNSNMPSTARTUPEX)(  smiLPUINT32,
+-                                                        smiLPUINT32,
+-                                                        smiLPUINT32,
+-                                                        smiLPUINT32,
+-                                                        smiLPUINT32);
 -SNMPAPI_STATUS SNMPAPI_CALL SnmpCleanupEx 
++_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL SnmpStartupEx 
++                            (_WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nMajorVersion,
++                             _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nMinorVersion,
++                             _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPUINT32 nLevel,
++                             _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_API_TRANSLATE_MODE) OUT smiLPUINT32 nTranslateMode,
++                             _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_STATUS) OUT smiLPUINT32 nRetransmitMode);
++typedef SNMPAPI_STATUS (SNMPAPI_CALL * PFNSNMPSTARTUPEX)(  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") smiLPUINT32,
++                                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") smiLPUINT32,
++                                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") smiLPUINT32,
++                                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") smiLPUINT32,
++                                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") smiLPUINT32);
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL SnmpCleanupEx 
                              (void);
  typedef SNMPAPI_STATUS (SNMPAPI_CALL * PFNSNMPCLEANUPEX)(void);
@@ -177,12 +204,14 @@ index dcbad6c780..b25242831f 100644
 -HSNMP_CONTEXT  SNMPAPI_CALL   SnmpStrToContext
 +_Windows_SupportedOS_Windows2000_ HSNMP_CONTEXT  SNMPAPI_CALL   SnmpStrToContext
                                (IN HSNMP_SESSION session,
-                               IN smiLPCOCTETS string);
+-                              IN smiLPCOCTETS string);
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOCTETS string);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpContextToStr
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpContextToStr
                                (IN HSNMP_CONTEXT context,
-                               OUT smiLPOCTETS string);
+-                              OUT smiLPOCTETS string);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPOCTETS string);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeContext
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeContext
@@ -209,19 +238,22 @@ index dcbad6c780..b25242831f 100644
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetPduData
                                (IN HSNMP_PDU PDU,
 -                              OUT smiLPINT PDU_type,
-+                              _Win32_AssociatedEnum_(SNMP_PDU_TYPE) OUT smiLPINT PDU_type,
-                               OUT smiLPINT32 request_id,
+-                              OUT smiLPINT32 request_id,
 -                              OUT smiLPINT error_status,
-+                              _Win32_AssociatedEnum_(SNMP_ERROR) OUT smiLPINT error_status,
-                               OUT smiLPINT error_index,
-                               OUT LPHSNMP_VBL varbindlist);
+-                              OUT smiLPINT error_index,
+-                              OUT LPHSNMP_VBL varbindlist);
++                              _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_PDU_TYPE) OUT smiLPINT PDU_type,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPINT32 request_id,
++                              _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_ERROR) OUT smiLPINT error_status,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPINT error_index,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_VBL varbindlist);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
                                (IN HSNMP_PDU PDU,
                                IN const smiINT FAR *PDU_type,
                                IN const smiINT32 FAR *request_id,
-@@ -431,69 +438,69 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
+@@ -431,87 +438,87 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
                                IN const smiINT FAR *max_repetitions,
                                IN const HSNMP_VBL FAR *varbindlist);
  
@@ -238,8 +270,10 @@ index dcbad6c780..b25242831f 100644
 -HSNMP_VBL      SNMPAPI_CALL   SnmpCreateVbl
 +_Windows_SupportedOS_Windows2000_ HSNMP_VBL      SNMPAPI_CALL   SnmpCreateVbl
                                (IN HSNMP_SESSION session,
-                               IN smiLPCOID name,
-                               IN smiLPCVALUE value);
+-                              IN smiLPCOID name,
+-                              IN smiLPCVALUE value);
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOID name,
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCVALUE value);
  
 -HSNMP_VBL      SNMPAPI_CALL   SnmpDuplicateVbl
 +_Windows_SupportedOS_Windows2000_ HSNMP_VBL      SNMPAPI_CALL   SnmpDuplicateVbl
@@ -258,15 +292,19 @@ index dcbad6c780..b25242831f 100644
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetVb
                                (IN HSNMP_VBL vbl,
                                IN smiUINT32 index,
-                               OUT smiLPOID name,
-                               OUT smiLPVALUE value);
+-                              OUT smiLPOID name,
+-                              OUT smiLPVALUE value);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPOID name,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPVALUE value);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetVb
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetVb
                                (IN HSNMP_VBL vbl,
                                IN smiUINT32 index,
-                               IN smiLPCOID name,
-                               IN smiLPCVALUE value);
+-                              IN smiLPCOID name,
+-                              IN smiLPCVALUE value);
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOID name,
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCVALUE value);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpDeleteVb
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDeleteVb
@@ -281,7 +319,8 @@ index dcbad6c780..b25242831f 100644
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpStrToOid
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpStrToOid
                                (IN LPCSTR string,
-                               OUT smiLPOID dstOID);
+-                              OUT smiLPOID dstOID);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPOID dstOID);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidToStr
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidToStr
@@ -290,40 +329,54 @@ index dcbad6c780..b25242831f 100644
                                _Out_writes_(size) LPSTR string);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidCopy
+-                              (IN smiLPCOID srcOID,
+-                              OUT smiLPOID dstOID);
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidCopy
-                               (IN smiLPCOID srcOID,
-                               OUT smiLPOID dstOID);
++                              (_WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOID srcOID,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPOID dstOID);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidCompare
+-                              (IN smiLPCOID xOID,
+-                              IN smiLPCOID yOID,
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidCompare
-                               (IN smiLPCOID xOID,
-                               IN smiLPCOID yOID,
++                              (_WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOID xOID,
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOID yOID,
                                IN smiUINT32 maxlen,
-                               OUT smiLPINT result);
+-                              OUT smiLPINT result);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPINT result);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
                                (IN HSNMP_SESSION session,
                                IN HSNMP_ENTITY srcEntity,
                                IN HSNMP_ENTITY dstEntity,
-@@ -501,7 +508,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
+                               IN HSNMP_CONTEXT context,
                                IN HSNMP_PDU pdu,
-                               OUT smiLPOCTETS msgBufDesc);
+-                              OUT smiLPOCTETS msgBufDesc);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT smiLPOCTETS msgBufDesc);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
                                (IN HSNMP_SESSION session,
-                               OUT LPHSNMP_ENTITY srcEntity,
-                               OUT LPHSNMP_ENTITY dstEntity,
-@@ -509,7 +516,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
-                               OUT LPHSNMP_PDU pdu,
-                               IN smiLPCOCTETS msgBufDesc);
+-                              OUT LPHSNMP_ENTITY srcEntity,
+-                              OUT LPHSNMP_ENTITY dstEntity,
+-                              OUT LPHSNMP_CONTEXT context,
+-                              OUT LPHSNMP_PDU pdu,
+-                              IN smiLPCOCTETS msgBufDesc);
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_ENTITY srcEntity,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_ENTITY dstEntity,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_CONTEXT context,
++                              _WIN32META_ANNOTATION_("win32metadata:in") OUT LPHSNMP_PDU pdu,
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPCOCTETS msgBufDesc);
  
 -SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
 +_Windows_SupportedOS_Windows2000_ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
                                (IN smiUINT32 syntax,
-                               IN smiLPOPAQUE descriptor);
+-                              IN smiLPOPAQUE descriptor);
++                              _WIN32META_ANNOTATION_("win32metadata:out") IN smiLPOPAQUE descriptor);
  
+ #ifdef __cplusplus
+ }
 @@ -521,5 +528,120 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

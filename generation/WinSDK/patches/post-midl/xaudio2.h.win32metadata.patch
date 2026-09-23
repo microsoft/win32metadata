@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xaudio2.h b/generation/WinSDK/RecompiledIdlHeaders/um/xaudio2.h
+index d27490f997..1007c6fd57 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xaudio2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xaudio2.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************
+  *
+  * Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -1019,21 +1020,21 @@ DECLARE_INTERFACE(IXAudio2VoiceCallback)
+     STDMETHOD_(void, OnStreamEnd) (THIS) PURE;
+ 
+     // Called when this voice is about to start processing a new buffer.
+-    STDMETHOD_(void, OnBufferStart) (THIS_ void* pBufferContext) PURE;
++    STDMETHOD_(void, OnBufferStart) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pBufferContext) PURE;
+ 
+     // Called when this voice has just finished processing a buffer.
+     // The buffer can now be reused or destroyed.
+-    STDMETHOD_(void, OnBufferEnd) (THIS_ void* pBufferContext) PURE;
++    STDMETHOD_(void, OnBufferEnd) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pBufferContext) PURE;
+ 
+     // Called when this voice has just reached the end position of a loop.
+-    STDMETHOD_(void, OnLoopEnd) (THIS_ void* pBufferContext) PURE;
++    STDMETHOD_(void, OnLoopEnd) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pBufferContext) PURE;
+ 
+     // Called in the event of a critical error during voice processing,
+     // such as a failing xAPO or an error from the hardware XMA decoder.
+     // The voice may have to be destroyed and re-created to recover from
+     // the error.  The callback arguments report which buffer was being
+     // processed when the error occurred, and its HRESULT code.
+-    STDMETHOD_(void, OnVoiceError) (THIS_ void* pBufferContext, HRESULT Error) PURE;
++    STDMETHOD_(void, OnVoiceError) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* pBufferContext, HRESULT Error) PURE;
+ };
+ 
+ 

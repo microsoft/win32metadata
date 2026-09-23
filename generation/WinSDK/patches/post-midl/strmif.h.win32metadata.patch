@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
-index bf0a3c0f30..afc54a067f 100644
+index bf0a3c0f30..810df62104 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 @@ -1,3 +1,4 @@
@@ -1117,7 +1117,7 @@ index bf0a3c0f30..afc54a067f 100644
      IGraphConfig : public IUnknown
      {
      public:
-@@ -20417,7 +20518,7 @@ EXTERN_C const IID IID_IGraphConfigCallback;
+@@ -20417,12 +20518,12 @@ EXTERN_C const IID IID_IGraphConfigCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1126,6 +1126,12 @@ index bf0a3c0f30..afc54a067f 100644
      IGraphConfigCallback : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE Reconfigure( 
+-            PVOID pvContext,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvContext,
+             DWORD dwFlags) = 0;
+         
+     };
 @@ -20504,7 +20605,7 @@ EXTERN_C const IID IID_IFilterChain;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

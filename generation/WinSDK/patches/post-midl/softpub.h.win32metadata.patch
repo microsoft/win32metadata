@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SoftPub.h b/generation/WinSDK/RecompiledIdlHeaders/um/SoftPub.h
-index bfa1345bbb..8751170fc1 100644
+index bfa1345bbb..c2508b1ee9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SoftPub.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SoftPub.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,22 @@ index bfa1345bbb..8751170fc1 100644
  //+-------------------------------------------------------------------------
  //
  //  Microsoft Windows
+@@ -146,12 +147,12 @@ struct _WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO {
+ };
+ 
+ typedef HRESULT (WINAPI *PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK)(
+-    IN PCRYPT_PROVIDER_DATA pProvData,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCRYPT_PROVIDER_DATA pProvData,
+     IN DWORD dwStepError,
+     IN DWORD dwRegPolicySettings,
+     IN DWORD cSigner,
+-    IN PWTD_GENERIC_CHAIN_POLICY_SIGNER_INFO *rgpSigner,
+-    IN void *pvPolicyArg
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PWTD_GENERIC_CHAIN_POLICY_SIGNER_INFO *rgpSigner,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN void *pvPolicyArg
+     );
+ 
+ // The fields in the following data structure are passed to
 @@ -321,7 +322,7 @@ typedef struct CONFIG_CI_PROV_INFO_RESULT_
  
  typedef

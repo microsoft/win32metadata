@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h b/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
-index 0210fd0c9c..bd112ca3a7 100644
+index 0210fd0c9c..1ed789ecf8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
 @@ -22,6 +22,7 @@
@@ -104,7 +104,7 @@ index 0210fd0c9c..bd112ca3a7 100644
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern HANDLE WINAPI CryptCATHandleFromStore(IN CRYPTCATSTORE *pCatStore);
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) extern HANDLE WINAPI   CryptCATHandleFromStore(IN CRYPTCATSTORE *pCatStore);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(CloseHandle, -1, 0) extern HANDLE WINAPI   CryptCATHandleFromStore(_WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATSTORE *pCatStore);
  
  
  /////////////////////////////////////////////////////////////////////////////
@@ -117,7 +117,7 @@ index 0210fd0c9c..bd112ca3a7 100644
  
  
  /////////////////////////////////////////////////////////////////////////////
-@@ -336,7 +337,7 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATGetCatAttrInfo(IN HANDLE hCatalog,
+@@ -336,11 +337,11 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATGetCatAttrInfo(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
@@ -126,15 +126,22 @@ index 0210fd0c9c..bd112ca3a7 100644
                                                           _In_ LPWSTR pwszReferenceTag,
                                                           IN DWORD dwAttrTypeAndAction,
                                                           IN DWORD cbData,
-@@ -357,7 +358,7 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATPutCatAttrInfo(IN HANDLE hCatalog,
+-                                                         IN BYTE *pbData);
++                                                         _WIN32META_ANNOTATION_("win32metadata:out") IN BYTE *pbData);
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ //
+@@ -357,8 +358,8 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATPutCatAttrInfo(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern CRYPTCATATTRIBUTE * WINAPI CryptCATEnumerateCatAttr(IN HANDLE hCatalog,
+-                                                           IN CRYPTCATATTRIBUTE *pPrevAttr);
 +_Windows_SupportedOS_WindowsXP_ extern CRYPTCATATTRIBUTE * WINAPI   CryptCATEnumerateCatAttr(IN HANDLE hCatalog,
-                                                            IN CRYPTCATATTRIBUTE *pPrevAttr);
++                                                           _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATATTRIBUTE *pPrevAttr);
  
  /////////////////////////////////////////////////////////////////////////////
+ //
 @@ -374,7 +375,7 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATEnumerateCatAttr(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
@@ -144,16 +151,27 @@ index 0210fd0c9c..bd112ca3a7 100644
                                                       _In_ LPWSTR pwszReferenceTag);
  
  /////////////////////////////////////////////////////////////////////////////
-@@ -418,7 +419,7 @@ extern void WINAPI CryptCATFreeSortedMemberInfo(IN HANDLE hCatalog,
+@@ -406,7 +407,7 @@ extern CRYPTCATMEMBER * WINAPI CryptCATAllocSortedMemberInfo(IN HANDLE hCatalog,
+ //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
+ //
+ extern void WINAPI CryptCATFreeSortedMemberInfo(IN HANDLE hCatalog, 
+-                                                      IN CRYPTCATMEMBER *pCatMember);
++                                                      _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATMEMBER *pCatMember);
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ //
+@@ -418,8 +419,8 @@ extern void WINAPI CryptCATFreeSortedMemberInfo(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern CRYPTCATATTRIBUTE * WINAPI CryptCATGetAttrInfo(IN HANDLE hCatalog,
+-                                                      IN CRYPTCATMEMBER *pCatMember,
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern CRYPTCATATTRIBUTE * WINAPI   CryptCATGetAttrInfo(IN HANDLE hCatalog,
-                                                       IN CRYPTCATMEMBER *pCatMember,
++                                                      _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATMEMBER *pCatMember,
                                                        _In_ LPWSTR pwszReferenceTag);
  
-@@ -437,7 +438,7 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATGetAttrInfo(IN HANDLE hCatalog,
+ /////////////////////////////////////////////////////////////////////////////
+@@ -437,13 +438,13 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATGetAttrInfo(IN HANDLE hCatalog,
  //      CRYPT_E_EXISTS:                 the reference tag already exists
  //      CRYPT_E_NOT_FOUND:              the attr was not found
  //
@@ -161,34 +179,55 @@ index 0210fd0c9c..bd112ca3a7 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern CRYPTCATMEMBER * WINAPI   CryptCATPutMemberInfo(IN HANDLE hCatalog,
                                                       _In_opt_    LPWSTR pwszFileName,
                                                       _In_        LPWSTR pwszReferenceTag,
-                                                      IN          GUID *pgSubjectType,
-@@ -458,7 +459,7 @@ extern CRYPTCATMEMBER * WINAPI CryptCATPutMemberInfo(IN HANDLE hCatalog,
+-                                                     IN          GUID *pgSubjectType,
++                                                     _WIN32META_ANNOTATION_("win32metadata:out") IN          GUID *pgSubjectType,
+                                                      IN          DWORD dwCertVersion,
+                                                      IN          DWORD cbSIPIndirectData,
+-                                                     IN          BYTE *pbSIPIndirectData);
++                                                     _WIN32META_ANNOTATION_("win32metadata:out") IN          BYTE *pbSIPIndirectData);
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ //
+@@ -458,12 +459,12 @@ extern CRYPTCATMEMBER * WINAPI CryptCATPutMemberInfo(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern CRYPTCATATTRIBUTE * WINAPI CryptCATPutAttrInfo(IN HANDLE hCatalog,
+-                                                      IN CRYPTCATMEMBER *pCatMember,
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern CRYPTCATATTRIBUTE * WINAPI   CryptCATPutAttrInfo(IN HANDLE hCatalog,
-                                                       IN CRYPTCATMEMBER *pCatMember,
++                                                      _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATMEMBER *pCatMember,
                                                        _In_ LPWSTR pwszReferenceTag,
                                                        IN DWORD dwAttrTypeAndAction,
-@@ -480,7 +481,7 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATPutAttrInfo(IN HANDLE hCatalog,
+                                                       IN DWORD cbData,
+-                                                      IN BYTE *pbData);
++                                                      _WIN32META_ANNOTATION_("win32metadata:out") IN BYTE *pbData);
+ 
+ /////////////////////////////////////////////////////////////////////////////
+ //
+@@ -480,8 +481,8 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATPutAttrInfo(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern CRYPTCATMEMBER * WINAPI CryptCATEnumerateMember(IN HANDLE hCatalog,
+-                                                       IN CRYPTCATMEMBER *pPrevMember);
 +_Windows_SupportedOS_WindowsXP_ extern CRYPTCATMEMBER * WINAPI   CryptCATEnumerateMember(IN HANDLE hCatalog,
-                                                        IN CRYPTCATMEMBER *pPrevMember);
++                                                       _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATMEMBER *pPrevMember);
  
  /////////////////////////////////////////////////////////////////////////////
-@@ -498,7 +499,7 @@ extern CRYPTCATMEMBER * WINAPI CryptCATEnumerateMember(IN HANDLE hCatalog,
+ //
+@@ -498,9 +499,9 @@ extern CRYPTCATMEMBER * WINAPI CryptCATEnumerateMember(IN HANDLE hCatalog,
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern CRYPTCATATTRIBUTE * WINAPI CryptCATEnumerateAttr(IN HANDLE hCatalog,
+-                                                        IN CRYPTCATMEMBER *pCatMember,
+-                                                        IN CRYPTCATATTRIBUTE *pPrevAttr);
 +_Windows_SupportedOS_WindowsXP_ extern CRYPTCATATTRIBUTE * WINAPI   CryptCATEnumerateAttr(IN HANDLE hCatalog,
-                                                         IN CRYPTCATMEMBER *pCatMember,
-                                                         IN CRYPTCATATTRIBUTE *pPrevAttr);
++                                                        _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATMEMBER *pCatMember,
++                                                        _WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATATTRIBUTE *pPrevAttr);
  
+ /////////////////////////////////////////////////////////////////////////////
+ //
 @@ -513,7 +514,7 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATEnumerateAttr(IN HANDLE hCatalog,
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //      ERROR_FILE_NOT_FOUND:           the CDF file was not found
@@ -203,19 +242,45 @@ index 0210fd0c9c..bd112ca3a7 100644
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern BOOL WINAPI CryptCATCDFClose(IN CRYPTCATCDF *pCDF);
-+_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI   CryptCATCDFClose(IN CRYPTCATCDF *pCDF);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI   CryptCATCDFClose(_WIN32META_ANNOTATION_("win32metadata:out") IN CRYPTCATCDF *pCDF);
  
  /////////////////////////////////////////////////////////////////////////////
  //
-@@ -540,7 +541,7 @@ extern BOOL WINAPI CryptCATCDFClose(IN CRYPTCATCDF *pCDF);
+@@ -540,8 +541,8 @@ extern BOOL WINAPI CryptCATCDFClose(IN CRYPTCATCDF *pCDF);
  //  Errors:
  //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
  //
 -extern CRYPTCATATTRIBUTE * WINAPI CryptCATCDFEnumCatAttributes(CRYPTCATCDF *pCDF,
-+_Windows_SupportedOS_WindowsXP_ extern CRYPTCATATTRIBUTE * WINAPI   CryptCATCDFEnumCatAttributes(CRYPTCATCDF *pCDF,
-                                                                CRYPTCATATTRIBUTE *pPrevAttr,
+-                                                               CRYPTCATATTRIBUTE *pPrevAttr,
++_Windows_SupportedOS_WindowsXP_ extern CRYPTCATATTRIBUTE * WINAPI   CryptCATCDFEnumCatAttributes(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPTCATCDF *pCDF,
++                                                               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPTCATATTRIBUTE *pPrevAttr,
                                                                  PFN_CDF_PARSE_ERROR_CALLBACK pfnParseError);
  
+ /////////////////////////////////////////////////////////////////////////////
+@@ -554,8 +555,8 @@ extern CRYPTCATATTRIBUTE * WINAPI CryptCATCDFEnumCatAttributes(CRYPTCATCDF *pCDF
+ //  Errors:
+ //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
+ //
+-extern CRYPTCATMEMBER * WINAPI CryptCATCDFEnumMembers(IN          CRYPTCATCDF *pCDF,
+-                                                      IN          CRYPTCATMEMBER *pPrevMember,
++extern CRYPTCATMEMBER * WINAPI CryptCATCDFEnumMembers(_WIN32META_ANNOTATION_("win32metadata:out") IN          CRYPTCATCDF *pCDF,
++                                                      _WIN32META_ANNOTATION_("win32metadata:out") IN          CRYPTCATMEMBER *pPrevMember,
+                                                       IN OPTIONAL PFN_CDF_PARSE_ERROR_CALLBACK pfnParseError);
+ 
+ /////////////////////////////////////////////////////////////////////////////
+@@ -569,9 +570,9 @@ extern CRYPTCATMEMBER * WINAPI CryptCATCDFEnumMembers(IN          CRYPTCATCDF *p
+ //  Errors:
+ //      ERROR_INVALID_PARAMETER:        an input parameter is incorrect
+ //
+-extern CRYPTCATATTRIBUTE *WINAPI CryptCATCDFEnumAttributes(IN          CRYPTCATCDF *pCDF,
+-                                                           IN          CRYPTCATMEMBER *pMember,
+-                                                           IN          CRYPTCATATTRIBUTE *pPrevAttr,
++extern CRYPTCATATTRIBUTE *WINAPI CryptCATCDFEnumAttributes(_WIN32META_ANNOTATION_("win32metadata:out") IN          CRYPTCATCDF *pCDF,
++                                                           _WIN32META_ANNOTATION_("win32metadata:out") IN          CRYPTCATMEMBER *pMember,
++                                                           _WIN32META_ANNOTATION_("win32metadata:out") IN          CRYPTCATATTRIBUTE *pPrevAttr,
+                                                            IN OPTIONAL PFN_CDF_PARSE_ERROR_CALLBACK pfnParseError);
+ 
+ //////////////////////////////////////////////////////////////////////////
 @@ -592,7 +593,7 @@ extern CRYPTCATATTRIBUTE *WINAPI CryptCATCDFEnumAttributes(IN          CRYPTCATC
  //      ERROR_NOT_ENOUGH_MEMORY:        a memory allocation failed
  //      {file errors}                   a file error occured

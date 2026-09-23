@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/playlist.h b/generation/WinSDK/RecompiledIdlHeaders/um/playlist.h
-index eeac8755d7..460fbfdfd6 100644
+index eeac8755d7..9064da3291 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/playlist.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/playlist.h
 @@ -1,3 +1,4 @@
@@ -34,3 +34,12 @@ index eeac8755d7..460fbfdfd6 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetScanDuration( 
              /* [in] */ DWORD dwSourceIndex,
+@@ -665,7 +666,7 @@ EXTERN_C const IID IID_IBufferingTime;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetBufferingTime( 
+-            DWORD *pdwMilliseconds) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwMilliseconds) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetBufferingTime( 
+             DWORD dwMilliseconds) = 0;

@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/MAPI.h
+index 3f1f657762..8eec42753d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MAPI.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*
+  *	M A P I . H
+  *
+@@ -345,8 +346,8 @@ typedef ULONG (FAR PASCAL MAPIDELETEMAIL)(
+ typedef MAPIDELETEMAIL FAR *LPMAPIDELETEMAIL;
+ DECLSPEC_DEPRECATED MAPIDELETEMAIL MAPIDeleteMail;
+ 
+-typedef ULONG (EXPORT FAR PASCAL *LPMAPIFREEBUFFER)(LPVOID pv);
+-ULONG FAR PASCAL MAPIFreeBuffer(LPVOID pv);
++typedef ULONG (EXPORT FAR PASCAL *LPMAPIFREEBUFFER)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pv);
++ULONG FAR PASCAL MAPIFreeBuffer(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pv);
+ 
+ typedef ULONG (FAR PASCAL MAPIADDRESS)(
+ 	LHANDLE lhSession,

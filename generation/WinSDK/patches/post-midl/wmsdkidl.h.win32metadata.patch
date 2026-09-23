@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h
-index 9124789a61..e5b2e7fd94 100644
+index 9124789a61..1db92f0d85 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkidl.h
 @@ -1,3 +1,4 @@
@@ -292,7 +292,7 @@ index 9124789a61..e5b2e7fd94 100644
 -HRESULT STDMETHODCALLTYPE WMCreateWriterFileSink( IWMWriterFileSink **ppSink );
 -HRESULT STDMETHODCALLTYPE WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );
 -HRESULT STDMETHODCALLTYPE WMCreateWriterPushSink( IWMWriterPushSink **ppSink );
-+_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pfIsProtected );
 +_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );
 +_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );
 +_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );
@@ -342,6 +342,33 @@ index 9124789a61..e5b2e7fd94 100644
      IWMDRMEditor : public IUnknown
      {
      public:
+@@ -6906,7 +7073,7 @@ EXTERN_C const IID IID_IWMProfileManager2;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSystemProfileVersion( 
+-            WMT_VERSION *pdwVersion) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WMT_VERSION *pdwVersion) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetSystemProfileVersion( 
+             WMT_VERSION dwVersion) = 0;
+@@ -7069,7 +7236,7 @@ EXTERN_C const IID IID_IWMProfileManagerLanguage;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetUserLanguageID( 
+-            WORD *wLangID) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WORD *wLangID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetUserLanguageID( 
+             WORD wLangID) = 0;
+@@ -11039,7 +11206,7 @@ EXTERN_C const IID IID_IWMWriterPostView;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetPostViewCallback( 
+             IWMWriterPostViewCallback *pCallback,
+-            void *pvContext) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *pvContext) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetReceivePostViewSamples( 
+             /* [annotation][in] */ 
 @@ -16372,7 +16539,7 @@ EXTERN_C const IID IID_IWMDRMReader;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -451,7 +478,7 @@ index 9124789a61..e5b2e7fd94 100644
          
      };
      
-@@ -20642,7 +20809,7 @@ EXTERN_C const IID IID_IWMDRMTranscryptor;
+@@ -20642,14 +20809,14 @@ EXTERN_C const IID IID_IWMDRMTranscryptor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -460,6 +487,14 @@ index 9124789a61..e5b2e7fd94 100644
      IWMDRMTranscryptor : public IUnknown
      {
      public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [annotation][in] */ 
+             _In_  BSTR bstrFileName,
+-            /* [size_is][in] */ BYTE *pbLicenseRequestMsg,
++            /* [size_is][in] */ _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pbLicenseRequestMsg,
+             /* [annotation][in] */ 
+             _In_  DWORD cbLicenseRequestMsg,
+             /* [annotation][out] */ 
 @@ -21553,9 +21720,9 @@ EXTERN_C const IID IID_IWMAddressAccess2;
              /* [annotation][in] */ 
              _In_  DWORD dwEntryNum,

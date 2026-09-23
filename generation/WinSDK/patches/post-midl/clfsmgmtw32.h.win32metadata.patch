@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmtw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmtw32.h
-index de6fa8c07d..849c260a5c 100644
+index de6fa8c07d..058abd18b3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmtw32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmtw32.h
 @@ -26,6 +26,7 @@
@@ -10,7 +10,31 @@ index de6fa8c07d..849c260a5c 100644
  
  #pragma region Desktop Family or BootableSku Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
-@@ -74,7 +75,7 @@ VOID
+@@ -49,7 +50,7 @@ VOID
+ (*PLOG_TAIL_ADVANCE_CALLBACK) (
+     IN HANDLE           hLogFile,
+     IN CLFS_LSN         lsnTarget,
+-    IN PVOID            pvClientContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID            pvClientContext
+     );
+ #endif /* _WIN32_WINNT */
+ 
+@@ -60,7 +61,7 @@ VOID
+     IN HANDLE           hLogFile,
+     IN DWORD            dwError,
+     IN BOOL             fLogIsPinned,
+-    IN PVOID            pvClientContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID            pvClientContext
+     );
+ #endif /* _WIN32_WINNT */
+ 
+@@ -69,12 +70,12 @@ typedef
+ VOID
+ (*PLOG_UNPINNED_CALLBACK) (
+     IN HANDLE           hLogFile,
+-    IN PVOID            pvClientContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID            pvClientContext
+     );
  #endif /* _WIN32_WINNT */
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WS03)
@@ -19,15 +43,18 @@ index de6fa8c07d..849c260a5c 100644
  {
      PVOID   CallbackContext;
  
-@@ -93,7 +94,7 @@ typedef struct _LOG_MANAGEMENT_CALLBACKS
+@@ -93,9 +94,9 @@ typedef struct _LOG_MANAGEMENT_CALLBACKS
  // scheme.  The client can receive notifications such as "advance base lsn" if
  // pCallbacks is non-null.
  //------------------------------------------------------------------------------
 -CLFSUSER_API BOOL WINAPI RegisterManageableLogClient (
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ RegisterManageableLogClient (
      IN HANDLE                         hLog,
-     IN PLOG_MANAGEMENT_CALLBACKS      pCallbacks
+-    IN PLOG_MANAGEMENT_CALLBACKS      pCallbacks
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLOG_MANAGEMENT_CALLBACKS      pCallbacks
      );
+ #endif /* _WIN32_WINNT */
+ 
 @@ -108,7 +109,7 @@ CLFSUSER_API BOOL WINAPI RegisterManageableLogClient (
  // be invoked which will deregister the client explicitly.  The client will
  // no longer receive notifications related to management.
@@ -37,24 +64,32 @@ index de6fa8c07d..849c260a5c 100644
      IN HANDLE hLog
      );
  #endif /* _WIN32_WINNT */
-@@ -121,7 +122,7 @@ CLFSUSER_API BOOL WINAPI DeregisterManageableLogClient (
+@@ -121,10 +122,10 @@ CLFSUSER_API BOOL WINAPI DeregisterManageableLogClient (
  // Only possible if the client is not receiving callbacks.  Can function in
  // synchronous or asynchronous mode.
  //------------------------------------------------------------------------------
 -CLFSUSER_API BOOL WINAPI ReadLogNotification (
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadLogNotification (
      IN  HANDLE                   hLog,
-     OUT PCLFS_MGMT_NOTIFICATION  pNotification,
-     IN  LPOVERLAPPED             lpOverlapped
-@@ -135,7 +136,7 @@ CLFSUSER_API BOOL WINAPI ReadLogNotification (
+-    OUT PCLFS_MGMT_NOTIFICATION  pNotification,
+-    IN  LPOVERLAPPED             lpOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_MGMT_NOTIFICATION  pNotification,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  LPOVERLAPPED             lpOverlapped
+     );
+ #endif /* _WIN32_WINNT */
+ 
+@@ -135,9 +136,9 @@ CLFSUSER_API BOOL WINAPI ReadLogNotification (
  // Installs a policy on a log.  The possible policies are described by the 
  // enumerated type CLFS_MGMT_POLICY_TYPE.
  //------------------------------------------------------------------------------
 -CLFSUSER_API BOOL WINAPI InstallLogPolicy (
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ InstallLogPolicy (
      IN HANDLE            hLog,
-     IN PCLFS_MGMT_POLICY pPolicy
+-    IN PCLFS_MGMT_POLICY pPolicy
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PCLFS_MGMT_POLICY pPolicy
      );
+ #endif /* _WIN32_WINNT */
+ 
 @@ -149,7 +150,7 @@ CLFSUSER_API BOOL WINAPI InstallLogPolicy (
  // policy indicated.  The possible policies are described by the enumerated type 
  // CLFS_MGMT_POLICY_TYPE.
@@ -64,7 +99,7 @@ index de6fa8c07d..849c260a5c 100644
      IN HANDLE                hLog,
      IN CLFS_MGMT_POLICY_TYPE ePolicyType
      );
-@@ -161,7 +162,7 @@ CLFSUSER_API BOOL WINAPI RemoveLogPolicy (
+@@ -161,10 +162,10 @@ CLFSUSER_API BOOL WINAPI RemoveLogPolicy (
  // 
  // Given a policy type, returns the associated policy data.
  //------------------------------------------------------------------------------
@@ -72,7 +107,11 @@ index de6fa8c07d..849c260a5c 100644
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ QueryLogPolicy (
      IN     HANDLE                hLog,
      IN     CLFS_MGMT_POLICY_TYPE ePolicyType,
-     OUT    PCLFS_MGMT_POLICY     pPolicyBuffer,
+-    OUT    PCLFS_MGMT_POLICY     pPolicyBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT    PCLFS_MGMT_POLICY     pPolicyBuffer,
+     IN OUT PULONG                pcbPolicyBuffer
+     );
+ #endif /* _WIN32_WINNT */
 @@ -176,7 +177,7 @@ CLFSUSER_API BOOL WINAPI QueryLogPolicy (
  // Sets the size of a log file, obeying any policies present on the log file
  // at the time.

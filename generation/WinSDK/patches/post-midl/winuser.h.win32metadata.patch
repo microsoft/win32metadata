@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..c226a3107b 100644
+index f99e9294f5..3769cbe2f7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -854,7 +854,7 @@ index f99e9294f5..c226a3107b 100644
  LRESULT
  WINAPI
  SendMessageA(
-@@ -3703,7 +3704,7 @@ SendMessageA(
+@@ -3703,14 +3704,14 @@ SendMessageA(
      _In_ UINT Msg,
      _Pre_maybenull_ _Post_valid_ WPARAM wParam,
      _Pre_maybenull_ _Post_valid_ LPARAM lParam);
@@ -863,6 +863,15 @@ index f99e9294f5..c226a3107b 100644
  LRESULT
  WINAPI
  SendMessageW(
+     _In_ HWND hWnd,
+     _In_ UINT Msg,
+-    _Pre_maybenull_ _Post_valid_ WPARAM wParam,
+-    _Pre_maybenull_ _Post_valid_ LPARAM lParam);
++    _WIN32META_ANNOTATION_("win32metadata:in") _Pre_maybenull_ _Post_valid_ WPARAM wParam,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Pre_maybenull_ _Post_valid_ LPARAM lParam);
+ #ifdef UNICODE
+ #define SendMessage  SendMessageW
+ #else
 @@ -3747,7 +3748,7 @@ SendMessage(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -2896,7 +2905,7 @@ index f99e9294f5..c226a3107b 100644
  BOOL
  WINAPI
  GetPointerInputTransform(
-@@ -6874,12 +6875,12 @@ GetPointerInputTransform(
+@@ -6874,16 +6875,16 @@ GetPointerInputTransform(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  
  #if(_WIN32_WINNT >= 0x0500)
@@ -2911,6 +2920,11 @@ index f99e9294f5..c226a3107b 100644
  BOOL
  WINAPI
  GetLastInputInfo(
+-    _Out_ PLASTINPUTINFO plii);
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PLASTINPUTINFO plii);
+ #endif /* _WIN32_WINNT >= 0x0500 */
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP) */
 @@ -6892,18 +6893,18 @@ GetLastInputInfo(
  #pragma region Desktop or PC Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
@@ -4516,9 +4530,12 @@ index f99e9294f5..c226a3107b 100644
      _In_ WORD wLanguageId);
  #ifdef UNICODE
  #define MessageBoxEx  MessageBoxExW
-@@ -9299,27 +9304,27 @@ MessageBoxExW(
+@@ -9297,29 +9302,29 @@ MessageBoxExW(
  
- typedef VOID (CALLBACK *MSGBOXCALLBACK)(LPHELPINFO lpHelpInfo);
+ #if(WINVER >= 0x0400)
+ 
+-typedef VOID (CALLBACK *MSGBOXCALLBACK)(LPHELPINFO lpHelpInfo);
++typedef VOID (CALLBACK *MSGBOXCALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHELPINFO lpHelpInfo);
  
 -typedef struct tagMSGBOXPARAMSA
 +typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagMSGBOXPARAMSA
@@ -6295,7 +6312,7 @@ index f99e9294f5..c226a3107b 100644
  LONG
  WINAPI
  SetDisplayConfig(
-@@ -13217,13 +13222,13 @@ SetDisplayConfig(
+@@ -13217,28 +13222,28 @@ SetDisplayConfig(
      _In_reads_opt_(numPathArrayElements) DISPLAYCONFIG_PATH_INFO* pathArray,
      _In_ UINT32 numModeInfoArrayElements,
      _In_reads_opt_(numModeInfoArrayElements) DISPLAYCONFIG_MODE_INFO* modeInfoArray,
@@ -6312,7 +6329,9 @@ index f99e9294f5..c226a3107b 100644
      _Inout_ UINT32* numPathArrayElements,
      _Out_writes_to_(*numPathArrayElements, *numPathArrayElements) DISPLAYCONFIG_PATH_INFO* pathArray,
      _Inout_ UINT32* numModeInfoArrayElements,
-@@ -13232,13 +13237,13 @@ QueryDisplayConfig(
+     _Out_writes_to_(*numModeInfoArrayElements, *numModeInfoArrayElements) DISPLAYCONFIG_MODE_INFO* modeInfoArray,
+-    _When_(!(flags & QDC_DATABASE_CURRENT), _Pre_null_)
++    _WIN32META_ANNOTATION_("win32metadata:in") _When_(!(flags & QDC_DATABASE_CURRENT), _Pre_null_)
      _When_(flags & QDC_DATABASE_CURRENT, _Out_)
          DISPLAYCONFIG_TOPOLOGY_ID* currentTopologyId);
  
@@ -6341,9 +6360,10 @@ index f99e9294f5..c226a3107b 100644
 -    _In_ UINT uiAction,
 +    _Win32_AssociatedEnum_(SYSTEM_PARAMETERS_INFO_ACTION) _In_ UINT uiAction,
      _In_ UINT uiParam,
-     _Pre_maybenull_ _Post_valid_ PVOID pvParam,
+-    _Pre_maybenull_ _Post_valid_ PVOID pvParam,
 -    _In_ UINT fWinIni);
 -WINUSERAPI
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_maybenull_ _Post_valid_ PVOID pvParam,
 +    _Win32_AssociatedEnum_(SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) _In_ UINT fWinIni);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINUSERAPI
  _Success_(return != FALSE)
@@ -6353,13 +6373,14 @@ index f99e9294f5..c226a3107b 100644
 -    _In_ UINT uiAction,
 +    _Win32_AssociatedEnum_(SYSTEM_PARAMETERS_INFO_ACTION) _In_ UINT uiAction,
      _In_ UINT uiParam,
-     _Pre_maybenull_ _Post_valid_ PVOID pvParam,
+-    _Pre_maybenull_ _Post_valid_ PVOID pvParam,
 -    _In_ UINT fWinIni);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_maybenull_ _Post_valid_ PVOID pvParam,
 +    _Win32_AssociatedEnum_(SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) _In_ UINT fWinIni);
  #ifdef UNICODE
  #define SystemParametersInfo  SystemParametersInfoW
  #else
-@@ -13277,7 +13282,7 @@ SystemParametersInfoW(
+@@ -13277,14 +13282,14 @@ SystemParametersInfoW(
  
  
  #if(WINVER >= 0x0605)
@@ -6368,6 +6389,14 @@ index f99e9294f5..c226a3107b 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
+ SystemParametersInfoForDpi(
+     _In_ UINT uiAction,
+     _In_ UINT uiParam,
+-    _Pre_maybenull_ _Post_valid_ PVOID pvParam,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_maybenull_ _Post_valid_ PVOID pvParam,
+     _In_ UINT fWinIni,
+     _In_ UINT dpi);
+ 
 @@ -13301,7 +13306,7 @@ SystemParametersInfoForDpi(
  /*
   * Accessibility support
@@ -6554,9 +6583,12 @@ index f99e9294f5..c226a3107b 100644
  BOOL
  WINAPI
  GetMonitorInfoW(
-@@ -13705,7 +13710,7 @@ GetMonitorInfoW(
+@@ -13703,9 +13708,9 @@ GetMonitorInfoW(
+ #define GetMonitorInfo  GetMonitorInfoA
+ #endif // !UNICODE
  
- typedef BOOL (CALLBACK* MONITORENUMPROC)(HMONITOR, HDC, LPRECT, LPARAM);
+-typedef BOOL (CALLBACK* MONITORENUMPROC)(HMONITOR, HDC, LPRECT, LPARAM);
++typedef BOOL (CALLBACK* MONITORENUMPROC)(HMONITOR, HDC, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT, LPARAM);
  
 -WINUSERAPI
 +_Windows_SupportedOS_Windows2000_ WINUSERAPI
@@ -7362,6 +7394,15 @@ index f99e9294f5..c226a3107b 100644
  BOOL
  WINAPI
  SetProcessRestrictionExemption(
+@@ -16344,7 +16349,7 @@ BOOL
+ WINAPI
+ ApplyWindowAction(
+     HWND hwnd,
+-    WINDOW_ACTION *pAction);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WINDOW_ACTION *pAction);
+ 
+ #endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+ 
 @@ -16485,7 +16490,7304 @@ EnterMoveSizeLoop(
  }
  #endif  /* __cplusplus */

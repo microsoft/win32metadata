@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
-index 0d77f58e08..ed9cba017c 100644
+index 0d77f58e08..a2e01ce624 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -252,6 +252,15 @@ index 0d77f58e08..ed9cba017c 100644
      GUID DeviceService;
      DWORD dwOpCode;
      DWORD dwDataSize;
+@@ -998,7 +999,7 @@ typedef enum _WLAN_NOTIFICATION_SECURITY {
+ typedef L2_NOTIFICATION_DATA WLAN_NOTIFICATION_DATA, *PWLAN_NOTIFICATION_DATA;
+ 
+ // the callback function for notifications
+-typedef VOID (WINAPI *WLAN_NOTIFICATION_CALLBACK) (PWLAN_NOTIFICATION_DATA, PVOID);
++typedef VOID (WINAPI *WLAN_NOTIFICATION_CALLBACK) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWLAN_NOTIFICATION_DATA, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
+ 
+ #ifdef __midl
+ // use the 4-byte enum
 @@ -1081,7 +1082,7 @@ typedef enum _WLAN_IHV_CONTROL_TYPE {
      wlan_ihv_control_type_driver
  } WLAN_IHV_CONTROL_TYPE, *PWLAN_IHV_CONTROL_TYPE;

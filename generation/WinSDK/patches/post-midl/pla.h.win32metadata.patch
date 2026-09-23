@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pla.h b/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
-index 5eacdf357b..2a4d279ec1 100644
+index 5eacdf357b..9108509974 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
 @@ -374,6 +374,7 @@ extern "C"{
@@ -10,6 +10,15 @@ index 5eacdf357b..2a4d279ec1 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
+@@ -572,7 +573,7 @@ PlaGetLegacyAlertActionsFlagsFromString(
+     _Out_ LPDWORD pdwFlags
+     );
+ 
+-typedef VOID (*PLA_CABEXTRACT_CALLBACK)(PCWSTR FileName, PVOID Context);
++typedef VOID (*PLA_CABEXTRACT_CALLBACK)(PCWSTR FileName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Context);
+ 
+ HRESULT
+ PlaExtractCabinet(
 @@ -601,8 +602,8 @@ EXTERN_C const IID IID_IDataCollectorSet;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

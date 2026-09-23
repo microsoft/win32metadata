@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
-index 65686c67b9..be08dcb6be 100644
+index 65686c67b9..f007325c01 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AdsHlp.h
 @@ -1,4 +1,5 @@
@@ -8,7 +8,7 @@ index 65686c67b9..be08dcb6be 100644
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
-@@ -24,6 +25,8 @@ extern "C" {
+@@ -24,71 +25,89 @@ extern "C" {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -17,7 +17,9 @@ index 65686c67b9..be08dcb6be 100644
  HRESULT WINAPI
  ADsGetObject(
      LPCWSTR lpszPathName,
-@@ -32,17 +35,23 @@ ADsGetObject(
+     REFIID riid,
+-    VOID * * ppObject
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID * * ppObject
      );
  
  
@@ -41,8 +43,11 @@ index 65686c67b9..be08dcb6be 100644
  HRESULT WINAPI
  ADsEnumerateNext(
      IEnumVARIANT *pEnumVariant,
-@@ -51,6 +60,8 @@ ADsEnumerateNext(
-     ULONG FAR    *pcElementsFetched
+     ULONG         cElements,
+-    VARIANT FAR  *pvar,
+-    ULONG FAR    *pcElementsFetched
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT FAR  *pvar,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR    *pcElementsFetched
      );
  
 +_Windows_SupportedOS_WindowsVista_ 
@@ -50,16 +55,20 @@ index 65686c67b9..be08dcb6be 100644
  HRESULT WINAPI
  ADsBuildVarArrayStr(
      _In_reads_(dwPathNames) LPWSTR * lppPathNames,
-@@ -58,6 +69,8 @@ ADsBuildVarArrayStr(
-     VARIANT * pVar
+     DWORD  dwPathNames,
+-    VARIANT * pVar
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT * pVar
      );
  
 +_Windows_SupportedOS_WindowsVista_ 
 +
  HRESULT WINAPI
  ADsBuildVarArrayInt(
-     LPDWORD    lpdwObjectTypes,
-@@ -66,12 +79,14 @@ ADsBuildVarArrayInt(
+-    LPDWORD    lpdwObjectTypes,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD    lpdwObjectTypes,
+     DWORD      dwObjectTypes,
+-    VARIANT * pVar
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT * pVar
      );
  
  
@@ -73,9 +82,11 @@ index 65686c67b9..be08dcb6be 100644
 -    DWORD  dwReserved,
 +    _Win32_AssociatedEnum_(ADS_AUTHENTICATION_ENUM) DWORD  dwReserved,
      REFIID riid,
-     void FAR * FAR * ppObject
+-    void FAR * FAR * ppObject
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR * FAR * ppObject
      );
-@@ -80,6 +95,8 @@ ADsOpenObject(
+ 
+ //
  // Helper functions for extended error support
  //
  
@@ -83,8 +94,11 @@ index 65686c67b9..be08dcb6be 100644
 +
  HRESULT WINAPI
  ADsGetLastError(
-     OUT     LPDWORD lpError,
-@@ -89,6 +106,8 @@ ADsGetLastError(
+-    OUT     LPDWORD lpError,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD lpError,
+     _Out_writes_(dwErrorBufLen)    LPWSTR  lpErrorBuf,
+     IN      DWORD   dwErrorBufLen,
+     _Out_writes_(dwNameBufLen)     LPWSTR  lpNameBuf,
      IN      DWORD   dwNameBufLen
      );
  
@@ -93,7 +107,7 @@ index 65686c67b9..be08dcb6be 100644
  VOID WINAPI
  ADsSetLastError(
      IN  DWORD   dwErr,
-@@ -101,16 +120,24 @@ VOID WINAPI
+@@ -101,34 +120,49 @@ VOID WINAPI
  ADsFreeAllErrorRecords(
      VOID);
  
@@ -109,7 +123,8 @@ index 65686c67b9..be08dcb6be 100644
 +
  BOOL WINAPI
  FreeADsMem(
-    LPVOID pMem
+-   LPVOID pMem
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pMem
  );
  
 +_Windows_SupportedOS_WindowsVista_ 
@@ -117,8 +132,9 @@ index 65686c67b9..be08dcb6be 100644
 +
  LPVOID WINAPI
  ReallocADsMem(
-    LPVOID pOldMem,
-@@ -118,17 +145,24 @@ ReallocADsMem(
+-   LPVOID pOldMem,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pOldMem,
+    DWORD cbOld,
     DWORD cbNew
  );
  
@@ -143,7 +159,7 @@ index 65686c67b9..be08dcb6be 100644
  BOOL WINAPI
  ReallocADsStr(
     _Inout_ LPWSTR *ppStr,
-@@ -136,11 +170,13 @@ ReallocADsStr(
+@@ -136,38 +170,40 @@ ReallocADsStr(
  );
  
  
@@ -151,14 +167,50 @@ index 65686c67b9..be08dcb6be 100644
 +
  HRESULT WINAPI
  ADsEncodeBinaryData (
-    PBYTE   pbSrcData,
+-   PBYTE   pbSrcData,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE   pbSrcData,
     DWORD   dwSrcLen,
 -   _Outptr_ LPWSTR  * ppszDestData
 +   _Outptr_  LPWSTR  * ppszDestData
     );
  
  HRESULT WINAPI
-@@ -176,6 +212,8 @@ AdsFreeAdsValues(
+ ADsDecodeBinaryData (
+    LPCWSTR szSrcData,
+-   PBYTE  *ppbDestData,
+-   ULONG  *pdwDestLen
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE  *ppbDestData,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG  *pdwDestLen
+    );
+ 
+ HRESULT WINAPI
+ PropVariantToAdsType(
+-    VARIANT * pVariant,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT * pVariant,
+     DWORD dwNumVariant,
+-    PADSVALUE *ppAdsValues,
+-    PDWORD pdwNumValues
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PADSVALUE *ppAdsValues,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwNumValues
+     );
+ 
+ HRESULT WINAPI
+ AdsTypeToPropVariant(
+-    PADSVALUE pAdsValues,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PADSVALUE pAdsValues,
+     DWORD dwNumValues,
+-    VARIANT * pVariant
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT * pVariant
+     );
+ 
+ void WINAPI
+ AdsFreeAdsValues(
+-    PADSVALUE pAdsValues,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PADSVALUE pAdsValues,
+     DWORD dwNumValues
+     );
+     
+@@ -176,21 +212,25 @@ AdsFreeAdsValues(
  // security descriptor and also to convert a binary SD to 
  // IADsSecurityDescriptor.
  //
@@ -167,7 +219,11 @@ index 65686c67b9..be08dcb6be 100644
  HRESULT WINAPI
  BinarySDToSecurityDescriptor(
      PSECURITY_DESCRIPTOR  pSecurityDescriptor,
-@@ -186,10 +224,12 @@ BinarySDToSecurityDescriptor(
+-    VARIANT *pVarsec, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pVarsec, 
+     LPCWSTR pszServerName,
+     LPCWSTR userName,
+     LPCWSTR passWord,
      DWORD dwFlags
      );
  
@@ -177,7 +233,9 @@ index 65686c67b9..be08dcb6be 100644
  SecurityDescriptorToBinarySD(
      VARIANT vVarSecDes,
 -    PSECURITY_DESCRIPTOR * ppSecurityDescriptor,
-+     PSECURITY_DESCRIPTOR * ppSecurityDescriptor,
-     PDWORD pdwSDLength,
+-    PDWORD pdwSDLength,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_DESCRIPTOR * ppSecurityDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSDLength,
      LPCWSTR pszServerName,
      LPCWSTR userName,
+     LPCWSTR passWord,

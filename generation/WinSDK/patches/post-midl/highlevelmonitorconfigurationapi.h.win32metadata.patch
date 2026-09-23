@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
-index 9148a814e8..b93acc9485 100644
+index 9148a814e8..4eacd5d908 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
 @@ -5,6 +5,7 @@
@@ -30,7 +30,7 @@ index 9148a814e8..b93acc9485 100644
      Monitor meta-data functions
  ******************************************************************************/
 -_BOOL WINAPI GetMonitorTechnologyType( HANDLE hMonitor, LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType );
-+_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI GetMonitorTechnologyType( HANDLE hMonitor, LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType );
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _BOOL WINAPI GetMonitorTechnologyType( HANDLE hMonitor, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType );
  
  /******************************************************************************
      Monitor image calibration functions 

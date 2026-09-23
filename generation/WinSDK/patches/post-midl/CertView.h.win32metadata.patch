@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
-index f502afb650..d3ec40e358 100644
+index f502afb650..83cbff3a5b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
 @@ -102,6 +102,7 @@ extern "C"{
@@ -10,7 +10,7 @@ index f502afb650..d3ec40e358 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #define	CV_OUT_BASE64HEADER	( 0 )
-@@ -203,7 +204,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+@@ -203,30 +204,30 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("9c735be2-57a5-11d1-9bdb-00c04fb683fa")
@@ -19,15 +19,37 @@ index f502afb650..d3ec40e358 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
-@@ -225,7 +226,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
-             /* [retval][out] */ LONG *pMaxLength) = 0;
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetType( 
+-            /* [retval][out] */ LONG *pType) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsIndexed( 
+-            /* [retval][out] */ LONG *pIndexed) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndexed) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxLength( 
+-            /* [retval][out] */ LONG *pMaxLength) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pMaxLength) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetValue( 
 -            /* [in] */ LONG Flags,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
 +            /* [in] */ _Win32_AssociatedEnum_(ENUM_CERT_COLUMN_VALUE_FLAGS) LONG Flags,
-             /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ LONG celt) = 0;
 @@ -354,7 +355,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
          END_INTERFACE
      } IEnumCERTVIEWCOLUMNVtbl;
@@ -37,7 +59,7 @@ index f502afb650..d3ec40e358 100644
      {
          CONST_VTBL struct IEnumCERTVIEWCOLUMNVtbl *lpVtbl;
      };
-@@ -440,7 +441,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+@@ -440,17 +441,17 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("e77db656-7653-11d1-9bde-00c04fb683fa")
@@ -46,6 +68,19 @@ index f502afb650..d3ec40e358 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetValue( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ LONG celt) = 0;
 @@ -557,7 +558,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
          END_INTERFACE
      } IEnumCERTVIEWATTRIBUTEVtbl;
@@ -55,7 +90,7 @@ index f502afb650..d3ec40e358 100644
      {
          CONST_VTBL struct IEnumCERTVIEWATTRIBUTEVtbl *lpVtbl;
      };
-@@ -631,7 +632,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+@@ -631,22 +632,22 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("e7dd1466-7653-11d1-9bde-00c04fb683fa")
@@ -64,17 +99,27 @@ index f502afb650..d3ec40e358 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
-@@ -644,8 +645,8 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
-             /* [retval][out] */ LONG *pFlags) = 0;
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
+-            /* [retval][out] */ LONG *pFlags) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pFlags) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetValue( 
 -            /* [in] */ LONG Type,
 -            /* [in] */ LONG Flags,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
 +            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG Type,
 +            /* [in] */ _Win32_AssociatedEnum_(ENUM_CERT_COLUMN_VALUE_FLAGS) LONG Flags,
-             /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ LONG celt) = 0;
 @@ -760,7 +761,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
          END_INTERFACE
      } IEnumCERTVIEWEXTENSIONVtbl;
@@ -84,7 +129,7 @@ index f502afb650..d3ec40e358 100644
      {
          CONST_VTBL struct IEnumCERTVIEWEXTENSIONVtbl *lpVtbl;
      };
-@@ -837,7 +838,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+@@ -837,11 +838,11 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("d1157f4c-5af2-11d1-9bdc-00c04fb683fa")
@@ -93,6 +138,20 @@ index f502afb650..d3ec40e358 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumCertViewColumn( 
+             /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum) = 0;
+@@ -863,7 +864,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+             /* [retval][out] */ IEnumCERTVIEWROW **ppenum) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxIndex( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+     };
+     
 @@ -974,7 +975,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
          END_INTERFACE
      } IEnumCERTVIEWROWVtbl;
@@ -102,7 +161,7 @@ index f502afb650..d3ec40e358 100644
      {
          CONST_VTBL struct IEnumCERTVIEWROWVtbl *lpVtbl;
      };
-@@ -1054,22 +1055,22 @@ EXTERN_C const IID IID_ICertView;
+@@ -1054,24 +1055,24 @@ EXTERN_C const IID IID_ICertView;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("c3fac344-1e84-11d1-9bd6-00c04fb683fa")
@@ -120,15 +179,19 @@ index f502afb650..d3ec40e358 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetColumnCount( 
 -            /* [in] */ LONG fResultColumn,
+-            /* [retval][out] */ LONG *pcColumn) = 0;
 +            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
-             /* [retval][out] */ LONG *pcColumn) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pcColumn) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetColumnIndex( 
 -            /* [in] */ LONG fResultColumn,
 +            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
              /* [in] */ const BSTR strColumnName,
-             /* [retval][out] */ LONG *pColumnIndex) = 0;
+-            /* [retval][out] */ LONG *pColumnIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pColumnIndex) = 0;
          
+         virtual HRESULT STDMETHODCALLTYPE SetResultColumnCount( 
+             /* [in] */ LONG cResultColumn) = 0;
 @@ -1080,8 +1081,8 @@ EXTERN_C const IID IID_ICertView;
              /* [in] */ LONG ColumnIndex) = 0;
          

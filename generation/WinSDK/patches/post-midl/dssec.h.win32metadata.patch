@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h b/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
-index dcdbb3ad3a..3dc059a5c1 100644
+index dcdbb3ad3a..b8408a84ef 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dssec.h
 @@ -4,6 +4,7 @@
@@ -10,6 +10,15 @@ index dcdbb3ad3a..3dc059a5c1 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -39,7 +40,7 @@
+ //  Return:     HRESULT
+ //
+ //----------------------------------------------------------------------------
+-typedef HRESULT (WINAPI *PFNREADOBJECTSECURITY)(LPCWSTR, SECURITY_INFORMATION, PSECURITY_DESCRIPTOR*, LPARAM);
++typedef HRESULT (WINAPI *PFNREADOBJECTSECURITY)(LPCWSTR, SECURITY_INFORMATION, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_DESCRIPTOR*, LPARAM);
+ typedef HRESULT (WINAPI *PFNWRITEOBJECTSECURITY)(LPCWSTR, SECURITY_INFORMATION, PSECURITY_DESCRIPTOR, LPARAM);
+ 
+ //+---------------------------------------------------------------------------
 @@ -59,13 +60,14 @@ typedef HRESULT (WINAPI *PFNWRITEOBJECTSECURITY)(LPCWSTR, SECURITY_INFORMATION,
  //  Return:     HRESULT
  //
@@ -72,3 +81,12 @@ index dcdbb3ad3a..3dc059a5c1 100644
  STDAPI
  DSEditSecurity(HWND hwndOwner,
                 LPCWSTR pwszObjectPath,
+@@ -173,7 +178,7 @@ typedef HRESULT (WINAPI *PFNDSCREATEISECINFOEX)(LPCWSTR,
+ typedef HRESULT (WINAPI *PFNDSCREATESECPAGE)(LPCWSTR,
+                                              LPCWSTR,
+                                              DWORD,
+-                                             HPROPSHEETPAGE*,
++                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HPROPSHEETPAGE*,
+                                              PFNREADOBJECTSECURITY,
+                                              PFNWRITEOBJECTSECURITY,
+                                              LPARAM);

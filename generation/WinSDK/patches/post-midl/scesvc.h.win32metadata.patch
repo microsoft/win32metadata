@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
-index af6fcb5bcc..85f8eba8bb 100644
+index af6fcb5bcc..bed84de99c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,42 @@ index af6fcb5bcc..85f8eba8bb 100644
  /*++
  
  Copyright (c) 1996-1999 Microsoft Corporation
+@@ -115,29 +116,29 @@ typedef struct _SCESVC_ANALYSIS_INFO_ {
+ typedef
+ SCESTATUS
+ (CALLBACK *PFSCE_QUERY_INFO)(
+-    IN SCE_HANDLE           sceHandle,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN SCE_HANDLE           sceHandle,
+     IN SCESVC_INFO_TYPE     sceType,
+     IN LPTSTR               lpPrefix OPTIONAL,
+     IN BOOL                 bExact,
+-    OUT PVOID               *ppvInfo,
+-    OUT PSCE_ENUMERATION_CONTEXT psceEnumHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID               *ppvInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PSCE_ENUMERATION_CONTEXT psceEnumHandle
+ );
+ 
+ 
+ typedef
+ SCESTATUS
+ (CALLBACK *PFSCE_SET_INFO)(
+-    IN SCE_HANDLE           sceHandle,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN SCE_HANDLE           sceHandle,
+     IN SCESVC_INFO_TYPE     sceType,
+     IN LPTSTR               lpPrefix OPTIONAL,
+     IN BOOL                 bExact,
+-    IN PVOID                pvInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                pvInfo
+ );
+ 
+ typedef
+ SCESTATUS
+ (CALLBACK *PFSCE_FREE_INFO)(
+-    IN PVOID                pvServiceInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID                pvServiceInfo
+ );
+ 
+ #define SCE_LOG_LEVEL_ALWAYS      0
 @@ -148,7 +149,7 @@ SCESTATUS
  typedef
  SCESTATUS
@@ -16,7 +52,25 @@ index af6fcb5bcc..85f8eba8bb 100644
      IN DWORD  Win32rc,
      IN LPTSTR pErrFmt,
      ...
-@@ -248,7 +249,7 @@ typedef ISceSvcAttachmentPersistInfo __RPC_FAR *LPSCESVCATTACHMENTPERSISTINFO;
+@@ -168,14 +169,14 @@ typedef struct _SCESVC_CALLBACK_INFO_ {
+ typedef
+ SCESTATUS
+ (*PF_ConfigAnalyzeService)(
+-    IN PSCESVC_CALLBACK_INFO pSceCbInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PSCESVC_CALLBACK_INFO pSceCbInfo
+ );
+ 
+ typedef
+ SCESTATUS
+ (*PF_UpdateService)(
+-    IN PSCESVC_CALLBACK_INFO      pSceCbInfo,
+-    IN PSCESVC_CONFIGURATION_INFO ServiceInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PSCESVC_CALLBACK_INFO      pSceCbInfo,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PSCESVC_CONFIGURATION_INFO ServiceInfo
+ );
+ 
+ #ifdef __cplusplus
+@@ -248,22 +249,22 @@ typedef ISceSvcAttachmentPersistInfo __RPC_FAR *LPSCESVCATTACHMENTPERSISTINFO;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
  
@@ -25,16 +79,29 @@ index af6fcb5bcc..85f8eba8bb 100644
  
      ISceSvcAttachmentPersistInfo : public IUnknown
      {
-@@ -259,7 +260,7 @@ typedef ISceSvcAttachmentPersistInfo __RPC_FAR *LPSCESVCATTACHMENTPERSISTINFO;
-             /* [out] */ PVOID *ppvData,
-             /* [out] */ PBOOL pbOverwriteAll ) = 0;
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Save(
+-            /* [in] */  LPTSTR lpTemplateName,
+-            /* [out] */ SCESVC_HANDLE *scesvcHandle,
+-            /* [out] */ PVOID *ppvData,
+-            /* [out] */ PBOOL pbOverwriteAll ) = 0;
++            /* [in] */  _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR lpTemplateName,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SCESVC_HANDLE *scesvcHandle,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PVOID *ppvData,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PBOOL pbOverwriteAll ) = 0;
  
 -        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
+-            /* [in] */  LPTSTR lpTemplateName ) = 0;
 +        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
-             /* [in] */  LPTSTR lpTemplateName ) = 0;
++            /* [in] */  _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR lpTemplateName ) = 0;
  
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FreeBuffer(
-@@ -347,7 +348,7 @@ typedef ISceSvcAttachmentData __RPC_FAR *LPSCESVCATTACHMENTDATA;
+-            /* [in] */ PVOID pvData) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvData) = 0;
+ 
+     };
+ 
+@@ -347,29 +348,29 @@ typedef ISceSvcAttachmentData __RPC_FAR *LPSCESVCATTACHMENTDATA;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
  
@@ -43,6 +110,35 @@ index af6fcb5bcc..85f8eba8bb 100644
  
      ISceSvcAttachmentData  : public IUnknown
      {
+     public:
+ 
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetData(
+-            /* [in] */ SCESVC_HANDLE scesvcHandle,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") SCESVC_HANDLE scesvcHandle,
+             /* [in] */ SCESVC_INFO_TYPE sceType,
+-            /* [out] */ PVOID *ppvData,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PVOID *ppvData,
+             /* [in out] */ PSCE_ENUMERATION_CONTEXT psceEnumHandle ) = 0;
+ 
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Initialize(
+-            /* [in] */ LPCTSTR lpServiceName,
+-            /* [in] */ LPCTSTR lpTemplateName,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPCTSTR lpServiceName,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPCTSTR lpTemplateName,
+             /* [in] */ LPSCESVCATTACHMENTPERSISTINFO lpSceSvcPersistInfo,
+-            /* [out] */ SCESVC_HANDLE *pscesvcHandle) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SCESVC_HANDLE *pscesvcHandle) = 0;
+ 
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FreeBuffer(
+-            /* [in] */ PVOID pvData) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvData) = 0;
+ 
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CloseHandle(
+-            /* [in] */ SCESVC_HANDLE scesvcHandle) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") SCESVC_HANDLE scesvcHandle) = 0;
+ 
+     };
+ #else
 @@ -461,6 +462,29 @@ typedef ISceSvcAttachmentData __RPC_FAR *LPSCESVCATTACHMENTDATA;
  
  //#endif

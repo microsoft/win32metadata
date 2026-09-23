@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
-index 15570d3ced..5e1a96511a 100644
+index 15570d3ced..418b2f99fc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
 @@ -1,3 +1,4 @@
@@ -25,6 +25,17 @@ index 15570d3ced..5e1a96511a 100644
  WINAPI
  CryptUIDlgSelectCertificateFromStore(
      _In_     HCERTSTORE hCertStore,
+@@ -108,8 +109,8 @@ CryptUIDlgSelectCertificateFromStore(
+ //-----------------------------------------------------------------------------
+ typedef BOOL (WINAPI * PFNCFILTERPROC) (
+         PCCERT_CONTEXT  pCertContext,
+-        BOOL            *pfInitialSelectedCert,
+-        void            *pvCallbackData
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL            *pfInitialSelectedCert,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void            *pvCallbackData
+         );
+ 
+ typedef struct {
 @@ -126,7 +127,7 @@ typedef struct {
  //
  //

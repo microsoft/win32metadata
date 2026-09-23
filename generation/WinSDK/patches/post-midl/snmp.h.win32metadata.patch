@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
-index badd88df8d..bc0e0f5fe1 100644
+index badd88df8d..6d28477298 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,64 @@ index badd88df8d..bc0e0f5fe1 100644
  /*++
  
  Copyright (C) 1992-1999 Microsoft Corporation
-@@ -375,21 +376,21 @@ typedef VOID (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONCLOSE)(
+@@ -330,40 +331,40 @@ SnmpExtensionClose(
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONINIT)(
+     DWORD                 dwUpTimeReference,
+-    HANDLE *              phSubagentTrapEvent,
+-    AsnObjectIdentifier * pFirstSupportedRegion
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE *              phSubagentTrapEvent,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pFirstSupportedRegion
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONINITEX)(
+-    AsnObjectIdentifier * pNextSupportedRegion
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pNextSupportedRegion
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONMONITOR)(
+-    LPVOID            pAgentMgmtData
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID            pAgentMgmtData
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONQUERY)(
+     BYTE              bPduType,
+-    SnmpVarBindList * pVarBindList,
+-    AsnInteger32 *    pErrorStatus,
+-    AsnInteger32 *    pErrorIndex
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVarBindList,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorStatus,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorIndex
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONQUERYEX)(
+     UINT              nRequestType,
+     UINT              nTransactionId,
+-    SnmpVarBindList * pVarBindList,
+-    AsnOctetString *  pContextInfo,
+-    AsnInteger32 *    pErrorStatus,
+-    AsnInteger32 *    pErrorIndex
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVarBindList,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString *  pContextInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorStatus,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorIndex
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONTRAP)(
+-    AsnObjectIdentifier * pEnterpriseOid,
+-    AsnInteger32 *        pGenericTrapId,
+-    AsnInteger32 *        pSpecificTrapId,
+-    AsnTimeticks *        pTimeStamp,
+-    SnmpVarBindList *     pVarBindList
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pEnterpriseOid,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *        pGenericTrapId,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *        pSpecificTrapId,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnTimeticks *        pTimeStamp,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList *     pVarBindList
+     );
+ 
+ typedef VOID (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONCLOSE)(
+@@ -375,167 +376,167 @@ typedef VOID (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONCLOSE)(
  //                                                                           //
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -15,24 +72,30 @@ index badd88df8d..bc0e0f5fe1 100644
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOidCpy(
-     AsnObjectIdentifier * pOidDst,
-     AsnObjectIdentifier * pOidSrc
+-    AsnObjectIdentifier * pOidDst,
+-    AsnObjectIdentifier * pOidSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidSrc
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOidAppend(
-     AsnObjectIdentifier * pOidDst,
-     AsnObjectIdentifier * pOidSrc
+-    AsnObjectIdentifier * pOidDst,
+-    AsnObjectIdentifier * pOidSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidSrc
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOidNCmp(
-     AsnObjectIdentifier * pOid1,
-@@ -397,27 +398,27 @@ SnmpUtilOidNCmp(
+-    AsnObjectIdentifier * pOid1,
+-    AsnObjectIdentifier * pOid2,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid2,
      UINT                  nSubIds
      );
  
@@ -40,31 +103,38 @@ index badd88df8d..bc0e0f5fe1 100644
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOidCmp(
-     AsnObjectIdentifier * pOid1,
-     AsnObjectIdentifier * pOid2
+-    AsnObjectIdentifier * pOid1,
+-    AsnObjectIdentifier * pOid2
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid2
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilOidFree(
-     AsnObjectIdentifier * pOid
+-    AsnObjectIdentifier * pOid
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOctetsCmp(
-     AsnOctetString * pOctets1,
-     AsnOctetString * pOctets2
+-    AsnOctetString * pOctets1,
+-    AsnOctetString * pOctets2
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets2
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOctetsNCmp(
-     AsnOctetString * pOctets1,
-@@ -425,117 +426,117 @@ SnmpUtilOctetsNCmp(
+-    AsnOctetString * pOctets1,
+-    AsnOctetString * pOctets2,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets2,
      UINT             nChars
      );
  
@@ -72,67 +142,80 @@ index badd88df8d..bc0e0f5fe1 100644
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilOctetsCpy(
-     AsnOctetString * pOctetsDst,
-     AsnOctetString * pOctetsSrc
+-    AsnOctetString * pOctetsDst,
+-    AsnOctetString * pOctetsSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctetsDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctetsSrc
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilOctetsFree(
-     AsnOctetString * pOctets
+-    AsnOctetString * pOctets
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilAsnAnyCpy(
-     AsnAny * pAnyDst,
-     AsnAny * pAnySrc
+-    AsnAny * pAnyDst,
+-    AsnAny * pAnySrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAnyDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAnySrc
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilAsnAnyFree(
-     AsnAny * pAny
+-    AsnAny * pAny
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAny
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilVarBindCpy(
-     SnmpVarBind * pVbDst,
-     SnmpVarBind * pVbSrc
+-    SnmpVarBind * pVbDst,
+-    SnmpVarBind * pVbSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBind * pVbDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBind * pVbSrc
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilVarBindFree(
-     SnmpVarBind * pVb
+-    SnmpVarBind * pVb
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBind * pVb
      );
  
 -SNMPAPI
 +_Windows_SupportedOS_Windows2000_ SNMPAPI
  SNMP_FUNC_TYPE
  SnmpUtilVarBindListCpy(
-     SnmpVarBindList * pVblDst,
-     SnmpVarBindList * pVblSrc
+-    SnmpVarBindList * pVblDst,
+-    SnmpVarBindList * pVblSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVblDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVblSrc
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilVarBindListFree(
-     SnmpVarBindList * pVbl
+-    SnmpVarBindList * pVbl
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVbl
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilMemFree(
-     LPVOID pMem
+-    LPVOID pMem
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pMem
      );
  
 -LPVOID
@@ -146,7 +229,8 @@ index badd88df8d..bc0e0f5fe1 100644
 +_Windows_SupportedOS_Windows2000_ LPVOID
  SNMP_FUNC_TYPE
  SnmpUtilMemReAlloc(
-     LPVOID pMem,
+-    LPVOID pMem,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pMem,
      UINT   nBytes
      );
  
@@ -154,14 +238,16 @@ index badd88df8d..bc0e0f5fe1 100644
 +_Windows_SupportedOS_Windows2000_ LPSTR
  SNMP_FUNC_TYPE
  SnmpUtilOidToA(
-     IN AsnObjectIdentifier *Oid
+-    IN AsnObjectIdentifier *Oid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN AsnObjectIdentifier *Oid
      );
  
 -LPSTR
 +_Windows_SupportedOS_Windows2000_ LPSTR
  SNMP_FUNC_TYPE
  SnmpUtilIdsToA(
-     IN UINT *Ids,
+-    IN UINT *Ids,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN UINT *Ids,
      IN UINT IdLength
      );
  
@@ -169,14 +255,16 @@ index badd88df8d..bc0e0f5fe1 100644
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilPrintOid(
-     IN AsnObjectIdentifier *Oid
+-    IN AsnObjectIdentifier *Oid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN AsnObjectIdentifier *Oid
      );
  
 -VOID
 +_Windows_SupportedOS_Windows2000_ VOID
  SNMP_FUNC_TYPE
  SnmpUtilPrintAsnAny(
-     AsnAny * pAny
+-    AsnAny * pAny
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAny
      );
  
 -DWORD

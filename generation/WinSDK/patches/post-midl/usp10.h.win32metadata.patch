@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
-index bcb720b236..63c965e834 100644
+index bcb720b236..40e40bfac3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
 @@ -10,6 +10,7 @@
@@ -91,6 +91,15 @@ index bcb720b236..63c965e834 100644
      int                                         iCP,            // In   Logical character position in run
      BOOL                                        fTrailing,      // In   Which edge (default - leading)
      int                                         cChars,         // In   Count of logical codepoints in run
+@@ -907,7 +910,7 @@ _Check_return_ HRESULT WINAPI ScriptCPtoX(
+     _In_reads_(cGlyphs) const SCRIPT_VISATTR   *psva,          // In   Visual glyph attributes array
+     _In_reads_(cGlyphs) const int              *piAdvance,     // In   Advance widths
+     _In_reads_(1) const SCRIPT_ANALYSIS        *psa,           // In   Script analysis from item attributes
+-    int                                         *piX);          // Out  Resulting X position
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int                                         *piX);          // Out  Resulting X position
+ 
+ 
+ 
 @@ -940,7 +943,7 @@ _Check_return_ HRESULT WINAPI ScriptCPtoX(
  //      X positions following the item).
  
@@ -208,14 +217,17 @@ index bcb720b236..63c965e834 100644
      _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
  
  
-@@ -1628,7 +1635,7 @@ const SCRIPT_LOGATTR* WINAPI ScriptString_pLogAttr(
+@@ -1628,9 +1635,9 @@ const SCRIPT_LOGATTR* WINAPI ScriptString_pLogAttr(
  //      at least *ScriptString_pcOutChars(ssa) ints.
  
  
 -_Check_return_ HRESULT WINAPI ScriptStringGetOrder(
 +_Windows_SupportedOS_Windows2000_ _Check_return_ HRESULT WINAPI ScriptStringGetOrder(
      _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,
-     UINT                                    *puOrder); 
+-    UINT                                    *puOrder); 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT                                    *puOrder); 
+ 
+ 
  
 @@ -1642,7 +1649,7 @@ _Check_return_ HRESULT WINAPI ScriptStringGetOrder(
  //      Return x coordinate for leading or trailing edge of character icp.
@@ -235,14 +247,17 @@ index bcb720b236..63c965e834 100644
      _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,            // In
      int                                     iX,             // In
      _Out_writes_(1) int                     *piCh,          // Out
-@@ -1680,7 +1687,7 @@ _Check_return_ HRESULT WINAPI ScriptStringXtoCP(
+@@ -1680,9 +1687,9 @@ _Check_return_ HRESULT WINAPI ScriptStringXtoCP(
  //      at least *ScriptString_pcOutChars(ssa) ints.
  
  
 -_Check_return_ HRESULT WINAPI ScriptStringGetLogicalWidths(
 +_Windows_SupportedOS_Windows2000_ _Check_return_ HRESULT WINAPI ScriptStringGetLogicalWidths(
      _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,
-     int                                     *piDx); 
+-    int                                     *piDx); 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int                                     *piDx); 
+ 
+ 
  
 @@ -1700,7 +1707,7 @@ _Check_return_ HRESULT WINAPI ScriptStringGetLogicalWidths(
  //              S_FALSE - one or more invalid glyphs are present

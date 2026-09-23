@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wct.h b/generation/WinSDK/RecompiledIdlHeaders/um/wct.h
-index 84abdf2d78..e9d2afcf3f 100644
+index 84abdf2d78..99410586aa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wct.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wct.h
 @@ -21,6 +21,7 @@ History:
@@ -19,16 +19,25 @@ index 84abdf2d78..e9d2afcf3f 100644
  {
      WCT_OBJECT_TYPE ObjectType;
      WCT_OBJECT_STATUS ObjectStatus;
-@@ -93,6 +94,8 @@ typedef struct _WAITCHAIN_NODE_INFO
+@@ -93,26 +94,49 @@ typedef struct _WAITCHAIN_NODE_INFO
  
  typedef LPVOID HWCT;
  
 +_Windows_SupportedOS_WindowsVista_
 +_Windows_SupportedOS_Server2008_
  typedef VOID (CALLBACK *PWAITCHAINCALLBACK) (
-     HWCT WctHandle,
+-    HWCT WctHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HWCT WctHandle,
      DWORD_PTR Context,
-@@ -105,14 +108,35 @@ typedef VOID (CALLBACK *PWAITCHAINCALLBACK) (
+     DWORD CallbackStatus,
+-    LPDWORD NodeCount,
+-    PWAITCHAIN_NODE_INFO NodeInfoArray,
+-    LPBOOL IsCycle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD NodeCount,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWAITCHAIN_NODE_INFO NodeInfoArray,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBOOL IsCycle
+     );
+ 
  #define WCT_ASYNC_OPEN_FLAG 0x1
  #define WCTP_OPEN_ALL_FLAGS (WCT_ASYNC_OPEN_FLAG)
  
@@ -113,11 +122,13 @@ index 84abdf2d78..e9d2afcf3f 100644
 +    _Out_  LPBOOL IsCycle
      );
  
- typedef HRESULT (*PCOGETCALLSTATE)(int, PULONG);
- typedef HRESULT (*PCOGETACTIVATIONSTATE)(GUID, DWORD, DWORD*);
- 
-+_Windows_SupportedOS_WindowsVista_ 
+-typedef HRESULT (*PCOGETCALLSTATE)(int, PULONG);
+-typedef HRESULT (*PCOGETACTIVATIONSTATE)(GUID, DWORD, DWORD*);
++typedef HRESULT (*PCOGETCALLSTATE)(int, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG);
++typedef HRESULT (*PCOGETACTIVATIONSTATE)(GUID, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD*);
 +
++_Windows_SupportedOS_WindowsVista_ 
+ 
 +_Win32_ImportLibrary_("Advapi32.dll")
  WINADVAPI
  VOID WINAPI

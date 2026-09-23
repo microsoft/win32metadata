@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h
-index 6d1307a7e3..07480260f6 100644
+index 6d1307a7e3..41ffc8eb2b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusObject.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 6d1307a7e3..07480260f6 100644
  /**
   * @file
   *
+@@ -60,7 +61,7 @@ typedef struct _alljoyn_busobject_handle*                   alljoyn_busobject;
+  * @return #ER_BUS_NO_SUCH_PROPERTY (Should be changed to #ER_OK by user implementation of alljoyn_busobject_prop_get_ptr
+  *                                   if the request results in successfully reading a property from the object.)
+  */
+-typedef QStatus (AJ_CALL * alljoyn_busobject_prop_get_ptr)(const void* context, const char* ifcName, const char* propName, alljoyn_msgarg val);
++typedef QStatus (AJ_CALL * alljoyn_busobject_prop_get_ptr)(const void* context, const char* ifcName, const char* propName, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg val);
+ 
+ /**
+  * Callback for property set method.
+@@ -78,7 +79,7 @@ typedef QStatus (AJ_CALL * alljoyn_busobject_prop_get_ptr)(const void* context,
+  * @return #ER_BUS_NO_SUCH_PROPERTY (Should be changed to #ER_OK by user implementation of alljoyn_busobject_prop_set_ptr
+  *                                   is the set request results in successfully changing the property.)
+  */
+-typedef QStatus (AJ_CALL * alljoyn_busobject_prop_set_ptr)(const void* context, const char* ifcName, const char* propName, alljoyn_msgarg val);
++typedef QStatus (AJ_CALL * alljoyn_busobject_prop_set_ptr)(const void* context, const char* ifcName, const char* propName, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg val);
+ 
+ /**
+  * Callback for ObjectRegistered and ObjectUnregistered
 @@ -137,7 +138,7 @@ typedef struct {
   *
   * @return allocated alljoyn_busobject

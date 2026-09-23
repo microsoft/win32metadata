@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RasDlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/RasDlg.h
-index bd65a37388..209b525311 100644
+index bd65a37388..480b567ab9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RasDlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RasDlg.h
 @@ -24,6 +24,7 @@ Abstract:
@@ -10,30 +10,64 @@ index bd65a37388..209b525311 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -40,8 +41,8 @@ extern "C" {
+ 
+ /* RasPhonebookDlg API callback.
+ */
+-typedef VOID (WINAPI* RASPBDLGFUNCW)( ULONG_PTR, DWORD, LPWSTR, LPVOID );
+-typedef VOID (WINAPI* RASPBDLGFUNCA)( ULONG_PTR, DWORD, LPSTR, LPVOID );
++typedef VOID (WINAPI* RASPBDLGFUNCW)( ULONG_PTR, DWORD, LPWSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID );
++typedef VOID (WINAPI* RASPBDLGFUNCA)( ULONG_PTR, DWORD, LPSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID );
+ 
+ #define RASPBDEVENT_AddEntry    1
+ #define RASPBDEVENT_EditEntry   2
+@@ -231,15 +232,15 @@ typedef BOOL (WINAPI *RasCustomDialDlgFn) (
+                             LPWSTR lpszPhonebook,
+                             LPWSTR lpszEntry,
+                             LPWSTR lpszPhoneNumber,
+-                            LPRASDIALDLG lpInfo,
+-                            PVOID pvInfo
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASDIALDLG lpInfo,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvInfo
+                             );
+ 
+ typedef BOOL (WINAPI *RasCustomEntryDlgFn) (
+                             HINSTANCE hInstDll,
+                             LPWSTR lpszPhonebook,
+                             LPWSTR lpszEntry,
+-                            LPRASENTRYDLG lpInfo,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASENTRYDLG lpInfo,
+                             DWORD  dwFlags
+                             );
+ 
 @@ -249,23 +250,29 @@ typedef BOOL (WINAPI *RasCustomEntryDlgFn) (
  
  /* RAS common dialog API prototypes.
  */
 -BOOL APIENTRY RasPhonebookDlgA(
+-    _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, LPRASPBDLGA lpInfo );
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL APIENTRY RasPhonebookDlgA(
-     _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, LPRASPBDLGA lpInfo );
- 
++    _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASPBDLGA lpInfo );
++
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
-+
- BOOL APIENTRY RasPhonebookDlgW(
-     _In_opt_ LPWSTR lpszPhonebook, _In_opt_ LPWSTR lpszEntry, LPRASPBDLGW lpInfo );
  
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
+ BOOL APIENTRY RasPhonebookDlgW(
+-    _In_opt_ LPWSTR lpszPhonebook, _In_opt_ LPWSTR lpszEntry, LPRASPBDLGW lpInfo );
++    _In_opt_ LPWSTR lpszPhonebook, _In_opt_ LPWSTR lpszEntry, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASPBDLGW lpInfo );
 +
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
+ 
  BOOL APIENTRY RasEntryDlgA(
-     _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, LPRASENTRYDLGA lpInfo );
+-    _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, LPRASENTRYDLGA lpInfo );
++    _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASENTRYDLGA lpInfo );
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL APIENTRY RasEntryDlgW(
++    _In_opt_ LPWSTR lpszPhonebook, _In_opt_ LPWSTR lpszEntry, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASENTRYDLGW lpInfo );
  
 -BOOL APIENTRY RasEntryDlgW(
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL APIENTRY RasEntryDlgW(
-     _In_opt_ LPWSTR lpszPhonebook, _In_opt_ LPWSTR lpszEntry, LPRASENTRYDLGW lpInfo );
- 
+-    _In_opt_ LPWSTR lpszPhonebook, _In_opt_ LPWSTR lpszEntry, LPRASENTRYDLGW lpInfo );
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
-+
+ 
  BOOL APIENTRY RasDialDlgA(
      _In_opt_ LPSTR lpszPhonebook, _In_opt_ LPSTR lpszEntry, _In_opt_ LPSTR lpszPhoneNumber,
      _Inout_ LPRASDIALDLG lpInfo );

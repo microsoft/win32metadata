@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
-index f907576fa1..1fedb30e22 100644
+index f907576fa1..bc0cd0f004 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 @@ -15,6 +15,7 @@
@@ -357,7 +357,7 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSEnumerateSessionsA(
-@@ -941,6 +953,7 @@ WTSEnumerateSessionsA(
+@@ -941,19 +953,21 @@ WTSEnumerateSessionsA(
      _Out_ DWORD * pCount
      );
  
@@ -365,7 +365,10 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSEnumerateSessionsExW(
-@@ -950,6 +963,7 @@ WTSEnumerateSessionsExW(
+-    _In_ HANDLE hServer,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _In_ HANDLE hServer,
+     _Inout_ DWORD *pLevel,
+     _In_ DWORD Filter,
      _Outptr_result_buffer_(*pCount) PWTS_SESSION_INFO_1W * ppSessionInfo,
      _Out_ DWORD * pCount );
  
@@ -373,7 +376,12 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSEnumerateSessionsExA(
-@@ -969,6 +983,7 @@ WTSEnumerateSessionsExA(
+-    _In_ HANDLE hServer,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _In_ HANDLE hServer,
+     _Inout_ DWORD *pLevel,
+     _In_ DWORD Filter,
+     _Outptr_result_buffer_(*pCount) PWTS_SESSION_INFO_1A * ppSessionInfo,
+@@ -969,24 +983,26 @@ WTSEnumerateSessionsExA(
  
  /*------------------------------------------------*/
  
@@ -381,14 +389,29 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSEnumerateProcessesW(
-@@ -979,6 +994,7 @@ WTSEnumerateProcessesW(
-     OUT DWORD * pCount
+     IN HANDLE hServer,
+     IN DWORD Reserved,
+     IN DWORD Version,
+-    OUT PWTS_PROCESS_INFOW * ppProcessInfo,
+-    OUT DWORD * pCount
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PWTS_PROCESS_INFOW * ppProcessInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD * pCount
      );
  
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
  BOOL
  WINAPI
  WTSEnumerateProcessesA(
+     IN HANDLE hServer,
+     IN DWORD Reserved,
+     IN DWORD Version,
+-    OUT PWTS_PROCESS_INFOA * ppProcessInfo,
+-    OUT DWORD * pCount
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PWTS_PROCESS_INFOA * ppProcessInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD * pCount
+     );
+ 
+ #ifdef UNICODE
 @@ -997,6 +1013,7 @@ WTSEnumerateProcessesA(
  
  /*------------------------------------------------*/
@@ -505,7 +528,7 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSShutdownSystem(
-@@ -1159,6 +1187,7 @@ WTSShutdownSystem(
+@@ -1159,20 +1187,22 @@ WTSShutdownSystem(
  
  /*------------------------------------------------*/
  
@@ -513,7 +536,11 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSWaitSystemEvent(
-@@ -1169,10 +1198,11 @@ WTSWaitSystemEvent(
+     IN HANDLE hServer,
+     IN DWORD EventMask,
+-    OUT DWORD * pEventFlags
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD * pEventFlags
+     );
  
  /*------------------------------------------------*/
  
@@ -579,7 +606,7 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSVirtualChannelPurgeOutput(
-@@ -1230,6 +1266,7 @@ WTSVirtualChannelPurgeOutput(
+@@ -1230,22 +1266,24 @@ WTSVirtualChannelPurgeOutput(
      );
  
  
@@ -587,7 +614,14 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSVirtualChannelQuery(
-@@ -1242,6 +1279,7 @@ WTSVirtualChannelQuery(
+     IN HANDLE hChannelHandle,
+     IN WTS_VIRTUAL_CLASS,
+-    OUT PVOID *ppBuffer,
+-    OUT DWORD *pBytesReturned
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pBytesReturned
+     );
+ 
  /*------------------------------------------------*/
  
  
@@ -595,6 +629,11 @@ index f907576fa1..1fedb30e22 100644
  VOID
  WINAPI
  WTSFreeMemory(
+-    IN PVOID pMemory
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID pMemory
+     );
+ 
+ /* Flags for Console Notification */
 @@ -1254,6 +1292,7 @@ WTSFreeMemory(
  #define NOTIFY_FOR_THIS_SESSION     0
  
@@ -627,7 +666,7 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSUnRegisterSessionNotificationEx(
-@@ -1283,6 +1325,7 @@ WTSUnRegisterSessionNotificationEx(
+@@ -1283,11 +1325,12 @@ WTSUnRegisterSessionNotificationEx(
      IN HWND hWnd
      );
  
@@ -635,6 +674,12 @@ index f907576fa1..1fedb30e22 100644
  BOOL
  WINAPI
  WTSQueryUserToken(
+     ULONG SessionId,
+-    PHANDLE phToken
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PHANDLE phToken
+     );
+ 
+ #define WTS_PROCESS_INFO_LEVEL_0 0
 @@ -1297,7 +1340,7 @@ WTSQueryUserToken(
  ==   WTS_PROCESS_INFO_EX - returned by WTSEnumerateProcessesEX
  */
@@ -670,7 +715,7 @@ index f907576fa1..1fedb30e22 100644
  WTSFreeMemoryExA(
      _In_ WTS_TYPE_CLASS WTSTypeClass,
      _In_ PVOID   pMemory,
-@@ -1369,7 +1412,7 @@ WTSFreeMemoryExA(
+@@ -1369,20 +1412,20 @@ WTSFreeMemoryExA(
  
  /*------------------------------------------------*/
  
@@ -678,8 +723,11 @@ index f907576fa1..1fedb30e22 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
  WTSEnumerateProcessesExW
  (
-     _In_ HANDLE    hServer,
-@@ -1379,7 +1422,7 @@ WTSEnumerateProcessesExW
+-    _In_ HANDLE    hServer,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _In_ HANDLE    hServer,
+     _Inout_ DWORD *pLevel,
+     _In_ DWORD SessionId,
+     _Out_ LPWSTR *ppProcessInfo,
      _Out_ DWORD * pCount
  );
  
@@ -687,7 +735,11 @@ index f907576fa1..1fedb30e22 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows7_ _Win32_SetLastError_ BOOL WINAPI
  WTSEnumerateProcessesExA
  (
-     _In_ HANDLE    hServer,
+-    _In_ HANDLE    hServer,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _In_ HANDLE    hServer,
+     _Inout_ DWORD *pLevel,
+     _In_ DWORD SessionId,
+     _Out_ LPSTR *ppProcessInfo,
 @@ -1412,18 +1455,18 @@ typedef WTSLISTENERNAMEA *PWTSLISTENERNAMEA;
  #define PWTSLISTENERNAME PWTSLISTENERNAMEA
  #endif

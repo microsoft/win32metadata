@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h b/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
-index f3dd7607d1..4f32fe2898 100644
+index f3dd7607d1..711dfa606a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
 @@ -1,3 +1,4 @@
@@ -910,6 +910,15 @@ index f3dd7607d1..4f32fe2898 100644
  InternetCheckConnectionW(
      _In_ LPCWSTR lpszUrl,
      _In_ DWORD dwFlags,
+@@ -2890,7 +2891,7 @@ DWORD InternetAuthNotifyCallback
+     DWORD           dwReturn,     // error code: success, resend, or cancel
+     LPVOID          lpReserved    // reserved: will be set to null
+ );
+-typedef DWORD (CALLBACK * PFN_AUTH_NOTIFY) (DWORD_PTR, DWORD, LPVOID);
++typedef DWORD (CALLBACK * PFN_AUTH_NOTIFY) (DWORD_PTR, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
+ 
+ //
+ // ... and last parameter of InternetErrorDlg should point to...
 @@ -2906,12 +2907,12 @@ typedef struct
      INTERNET_AUTH_NOTIFY_DATA;
  
@@ -1404,6 +1413,28 @@ index f3dd7607d1..4f32fe2898 100644
      _Out_writes_opt_(cchNameLen) LPWSTR lpszConnectionName,
      _In_ DWORD cchNameLen,
      _Reserved_ DWORD dwReserved
+@@ -3904,8 +3905,8 @@ typedef struct AutoProxyHelperFunctions
+ typedef BOOL ( CALLBACK *pfnInternetInitializeAutoProxyDll)(DWORD dwVersion,
+                            LPSTR lpszDownloadedTempFile,
+                            LPSTR lpszMime,
+-                           AutoProxyHelperFunctions* lpAutoProxyCallbacks,
+-                           LPAUTO_PROXY_SCRIPT_BUFFER lpAutoProxyScriptBuffer );
++                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AutoProxyHelperFunctions* lpAutoProxyCallbacks,
++                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPAUTO_PROXY_SCRIPT_BUFFER lpAutoProxyScriptBuffer );
+ 
+ typedef BOOL (CALLBACK *pfnInternetDeInitializeAutoProxyDll)(LPSTR lpszMime,
+                            DWORD dwReserved);
+@@ -3914,8 +3915,8 @@ typedef BOOL (CALLBACK *pfnInternetGetProxyInfo)(LPCSTR lpszUrl,
+                            DWORD dwUrlLength,
+                            LPSTR lpszUrlHostName,
+                            DWORD dwUrlHostNameLength,
+-                           LPSTR* lplpszProxyHostName,
+-                           LPDWORD lpdwProxyHostNameLength);
++                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSTR* lplpszProxyHostName,
++                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpdwProxyHostNameLength);
+ 
+ typedef enum{
+     WPAD_CACHE_DELETE_CURRENT = 0x0,
 @@ -3928,17 +3929,17 @@ BOOLAPI DeleteWpadCacheForNetworks(
  
  
@@ -1437,6 +1468,15 @@ index f3dd7607d1..4f32fe2898 100644
      _Out_writes_opt_(dwNameLen) LPSTR lpszConnectionName,
      _In_ DWORD dwNameLen,
      _In_ DWORD dwReserved
+@@ -3974,7 +3975,7 @@ BOOLAPI InternetGetConnectedStateEx(
+ //
+ 
+ // Custom dial handler prototype
+-typedef DWORD (CALLBACK * PFN_DIAL_HANDLER) (HWND, LPCSTR, DWORD, LPDWORD);
++typedef DWORD (CALLBACK * PFN_DIAL_HANDLER) (HWND, LPCSTR, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD);
+ 
+ // Flags for custom dial handler
+ #define INTERNET_CUSTOMDIAL_CONNECT         0
 @@ -3987,13 +3988,13 @@ typedef DWORD (CALLBACK * PFN_DIAL_HANDLER) (HWND, LPCSTR, DWORD, LPDWORD);
  #define INTERNET_CUSTOMDIAL_WILL_SUPPLY_STATE   2
  #define INTERNET_CUSTOMDIAL_CAN_HANGUP          4

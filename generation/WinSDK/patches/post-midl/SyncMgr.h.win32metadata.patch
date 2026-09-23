@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
-index 8aa7a30938..26e483aba8 100644
+index 8aa7a30938..faf9978d85 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SyncMgr.h
 @@ -339,6 +339,7 @@ extern "C"{
@@ -627,6 +627,15 @@ index 8aa7a30938..26e483aba8 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetIterationInfo( 
+@@ -3934,7 +3935,7 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
+             _In_  BOOL fApplyToAll) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetItemChoices( 
+-            /* [size_is][ref][in] */ UINT *prgiConflictItemIndexes,
++            /* [size_is][ref][in] */ _WIN32META_ANNOTATION_("win32metadata:out") UINT *prgiConflictItemIndexes,
+             /* [annotation][in] */ 
+             _In_  UINT cChoices) = 0;
+         
 @@ -4025,7 +4026,7 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
          END_INTERFACE
      } ISyncMgrConflictResolveInfoVtbl;

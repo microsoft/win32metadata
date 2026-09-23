@@ -1,11 +1,22 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h
-index 6aa2b19df6..b8458b8835 100644
+index 6aa2b19df6..798481f1fc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mq.h
 @@ -1,3 +1,4 @@
 +#include <win32metadata_annotations.h>
   
  /*++
+ 
+@@ -2244,8 +2245,8 @@ VOID
+     QUEUEHANDLE hSource,
+     DWORD dwTimeout,
+     DWORD dwAction,
+-    MQMSGPROPS* pMessageProps,
+-    LPOVERLAPPED lpOverlapped,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MQMSGPROPS* pMessageProps,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOVERLAPPED lpOverlapped,
+     HANDLE hCursor
+     );
  
 @@ -2276,7 +2277,7 @@ MQLocateBegin(
      _In_opt_ MQRESTRICTION* pRestriction,

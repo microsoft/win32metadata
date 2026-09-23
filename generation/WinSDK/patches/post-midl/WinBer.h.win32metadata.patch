@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
-index 5169685038..26c95397f0 100644
+index 5169685038..b7a08fae7a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBer.h
 @@ -25,6 +25,7 @@ Environments :
@@ -10,24 +10,28 @@ index 5169685038..26c95397f0 100644
  
  #if _MSC_VER > 1000
  #pragma once
-@@ -64,6 +65,8 @@ typedef int ber_slen_t;           /* signed equivalent of ber_len_t */
+@@ -64,7 +65,9 @@ typedef int ber_slen_t;           /* signed equivalent of ber_len_t */
  // data in the supplied berval structure.
  //
  
+-WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
++WINBERAPI BerElement * BERAPI ber_init( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BERVAL *pBerVal );
  
  //
-@@ -73,6 +76,8 @@ WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
+ // This frees a BerElement which is returned from ber_alloc_t()
+@@ -73,7 +76,9 @@ WINBERAPI BerElement * BERAPI ber_init( BERVAL *pBerVal );
  //
  //
  
+-WINBERAPI VOID BERAPI ber_free( BerElement *pBerElement, INT fbuf );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI VOID BERAPI ber_free( BerElement *pBerElement, INT fbuf );
++WINBERAPI VOID BERAPI ber_free( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, INT fbuf );
  
  //
+ // Frees a BERVAL structure. Applications should not call
 @@ -81,6 +86,8 @@ WINBERAPI VOID BERAPI ber_free( BerElement *pBerElement, INT fbuf );
  // have allocated
  //
@@ -37,24 +41,27 @@ index 5169685038..26c95397f0 100644
  WINBERAPI VOID BERAPI ber_bvfree( BERVAL *pBerVal );
  
  
-@@ -88,12 +95,17 @@ WINBERAPI VOID BERAPI ber_bvfree( BERVAL *pBerVal );
+@@ -88,13 +95,18 @@ WINBERAPI VOID BERAPI ber_bvfree( BERVAL *pBerVal );
  // Frees an array of BERVAL structures.
  //
  
+-WINBERAPI VOID BERAPI ber_bvecfree( PBERVAL *pBerVal );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI VOID BERAPI ber_bvecfree( PBERVAL *pBerVal );
++WINBERAPI VOID BERAPI ber_bvecfree( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBERVAL *pBerVal );
  
  //
  // Returns a copy of a the supplied berval structure
  //
  
+-WINBERAPI BERVAL * BERAPI ber_bvdup( BERVAL *pBerVal );
 +_Windows_SupportedOS_WindowsVista_ 
 +
 +
- WINBERAPI BERVAL * BERAPI ber_bvdup( BERVAL *pBerVal );
++WINBERAPI BERVAL * BERAPI ber_bvdup( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BERVAL *pBerVal );
  
  
+ //
 @@ -105,6 +117,8 @@ WINBERAPI BERVAL * BERAPI ber_bvdup( BERVAL *pBerVal );
  // The LBER_USE_DER options should always be specified.
  //
@@ -64,42 +71,50 @@ index 5169685038..26c95397f0 100644
  WINBERAPI BerElement * BERAPI ber_alloc_t( INT options );
  
  
-@@ -121,6 +135,8 @@ WINBERAPI BerElement * BERAPI ber_alloc_t( INT options );
+@@ -121,7 +135,9 @@ WINBERAPI BerElement * BERAPI ber_alloc_t( INT options );
  // the value part of the next element
  //
  
+-WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
++WINBERAPI ULONG BERAPI ber_skip_tag( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pLen );
  
  //
-@@ -132,6 +148,8 @@ WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
+ // This returns the tag of the next element to be parsed in the
+@@ -132,7 +148,9 @@ WINBERAPI ULONG BERAPI ber_skip_tag( BerElement *pBerElement, ULONG *pLen );
  // else the tag of the next element is returned.
  //
  
+-WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
++WINBERAPI ULONG BERAPI ber_peek_tag( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pLen);
  
  //
-@@ -143,6 +161,8 @@ WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
+ // This returns the tag and length of the first element in a SET, SET OF
+@@ -143,7 +161,9 @@ WINBERAPI ULONG BERAPI ber_peek_tag( BerElement *pBerElement, ULONG *pLen);
  // subsequent invocations of ber_next_element().
  //
  
+-WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen, _Out_ CHAR **ppOpaque );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen, _Out_ CHAR **ppOpaque );
++WINBERAPI ULONG BERAPI ber_first_element( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pLen, _Out_ CHAR **ppOpaque );
  
  //
-@@ -153,6 +173,8 @@ WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen,
+ // This positions the state at the start of the next element in the
+@@ -153,7 +173,9 @@ WINBERAPI ULONG BERAPI ber_first_element( BerElement *pBerElement, ULONG *pLen,
  // is returned.
  //
  
+-WINBERAPI ULONG BERAPI ber_next_element( BerElement *pBerElement, ULONG *pLen, _In_ CHAR *opaque );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI ULONG BERAPI ber_next_element( BerElement *pBerElement, ULONG *pLen, _In_ CHAR *opaque );
++WINBERAPI ULONG BERAPI ber_next_element( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pLen, _In_ CHAR *opaque );
  
  //
+ // This allocates a BerVal structure whose contents are taken from the
 @@ -162,7 +184,9 @@ WINBERAPI ULONG BERAPI ber_next_element( BerElement *pBerElement, ULONG *pLen, _
  // The return values are 0 on success and -1 on error.
  //
@@ -107,25 +122,29 @@ index 5169685038..26c95397f0 100644
 -WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement, PBERVAL *pBerVal );
 +_Windows_SupportedOS_WindowsVista_ 
 +
-+WINBERAPI INT BERAPI ber_flatten( BerElement *pBerElement,  PBERVAL *pBerVal );
++WINBERAPI INT BERAPI ber_flatten( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBERVAL *pBerVal );
  
  
  /*
-@@ -245,6 +269,8 @@ The format string can contain the following format characters:
+@@ -245,7 +269,9 @@ The format string can contain the following format characters:
          be used with this format character.
  */
  
+-WINBERAPI INT BERAPI ber_printf( BerElement *pBerElement, _In_ PSTR fmt, ... );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI INT BERAPI ber_printf( BerElement *pBerElement, _In_ PSTR fmt, ... );
++WINBERAPI INT BERAPI ber_printf( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, _In_ PSTR fmt, ... );
  
  /*
-@@ -337,6 +363,8 @@ contain the following characters:
+ The ber_scanf() routine is used to decode a BER element in much the same
+@@ -337,7 +363,9 @@ contain the following characters:
  
  */
  
+-WINBERAPI ULONG BERAPI ber_scanf( BerElement *pBerElement, _In_ PSTR fmt, ... );
 +_Windows_SupportedOS_WindowsVista_ 
 +
- WINBERAPI ULONG BERAPI ber_scanf( BerElement *pBerElement, _In_ PSTR fmt, ... );
++WINBERAPI ULONG BERAPI ber_scanf( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BerElement *pBerElement, _In_ PSTR fmt, ... );
  
  
+ #ifdef __cplusplus

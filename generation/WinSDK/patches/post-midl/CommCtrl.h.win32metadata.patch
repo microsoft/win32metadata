@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb..6048a4e59e 100644
+index 44285099cb..bbcf12bc57 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -290,8 +290,9 @@ index 44285099cb..6048a4e59e 100644
  } COLORMAP, *LPCOLORMAP;
  
 -WINCOMMCTRLAPI HWND WINAPI CreateToolbarEx(HWND hwnd, DWORD ws, UINT wID, int nBitmaps,
+-                        HINSTANCE hBMInst, UINT_PTR wBMID, LPCTBBUTTON lpButtons,
 +_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINCOMMCTRLAPI HWND WINAPI CreateToolbarEx(HWND hwnd, DWORD ws, UINT wID, int nBitmaps,
-                         HINSTANCE hBMInst, UINT_PTR wBMID, LPCTBBUTTON lpButtons,
++                        HINSTANCE hBMInst, UINT_PTR wBMID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCTBBUTTON lpButtons,
                          int iNumButtons, int dxButton, int dyButton,
                          int dxBitmap, int dyBitmap, UINT uStructSize);
  
@@ -453,8 +454,8 @@ index 44285099cb..6048a4e59e 100644
  
 -WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
 -WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT lprc, LPCSTR pszText, UINT uFlags);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
  
 -WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
 -WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
@@ -671,6 +672,15 @@ index 44285099cb..6048a4e59e 100644
  {
      UINT cbSize;
      UINT mask;
+@@ -4151,7 +4158,7 @@ typedef struct tagLVGROUPMETRICS
+ #define ListView_EnableGroupView(hwnd, fEnable) \
+     SNDMSG((hwnd), LVM_ENABLEGROUPVIEW, (WPARAM)(fEnable), 0)
+ 
+-typedef int (CALLBACK *PFNLVGROUPCOMPARE)(int, int, void *);
++typedef int (CALLBACK *PFNLVGROUPCOMPARE)(int, int, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
+ 
+ #define LVM_SORTGROUPS         (LVM_FIRST + 158)
+ #define ListView_SortGroups(hwnd, _pfnGroupCompate, _plv) \
 @@ -4204,17 +4211,17 @@ typedef struct tagLVINSERTGROUPSORTED
  #define LVTVIM_COLUMNS        0x00000002
  #define LVTVIM_LABELMARGIN    0x00000004
@@ -1128,15 +1138,15 @@ index 44285099cb..6048a4e59e 100644
  
 -WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, int code, LPINT, LPINT);
 -WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, int code, LPSCROLLINFO);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPINT, LPINT);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPSCROLLINFO);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPINT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPINT);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSCROLLINFO);
  
 -WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, int code);
 +_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code);
  
  
 -WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, int propIndex, LPINT);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, _Win32_AssociatedEnum_(WSB_PROP) int propIndex, LPINT);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, _Win32_AssociatedEnum_(WSB_PROP) int propIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPINT);
  #ifdef _WIN64
  WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR);
  #else
@@ -1148,7 +1158,7 @@ index 44285099cb..6048a4e59e 100644
 +_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, int pos, BOOL fRedraw);
  
 -WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, int code, LPSCROLLINFO psi, BOOL fRedraw);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPSCROLLINFO psi, BOOL fRedraw);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSCROLLINFO psi, BOOL fRedraw);
  
  
 -WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, int code, int min, int max, BOOL fRedraw);
@@ -1189,8 +1199,8 @@ index 44285099cb..6048a4e59e 100644
  
 -WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(HINSTANCE hinst, PCWSTR pszName, int lims, _Out_ HICON *phico);
 -WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Out_ HICON *phico);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(HINSTANCE hinst, PCWSTR pszName, _Win32_AssociatedEnum_(_LI_METRIC) int lims, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phico);
-+_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phico);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:optional") HINSTANCE hinst, PCWSTR pszName, _Win32_AssociatedEnum_(_LI_METRIC) int lims, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phico);
++_Windows_SupportedOS_WindowsVista_ WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:optional") HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phico);
  
  #endif // NTDDI_VISTA
  

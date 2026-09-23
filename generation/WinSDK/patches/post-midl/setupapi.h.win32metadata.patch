@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
-index d30e1d6ba8..e7c6587cd5 100644
+index d30e1d6ba8..f372655b1d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
 @@ -1,3 +1,4 @@
@@ -2165,7 +2165,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDeviceInfoListClass(
-@@ -5126,7 +5127,7 @@ SetupDiGetDeviceInfoListClass(
+@@ -5126,20 +5127,20 @@ SetupDiGetDeviceInfoListClass(
      _Out_ LPGUID ClassGuid
      );
  
@@ -2174,8 +2174,9 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDeviceInfoListDetailA(
-@@ -5134,7 +5135,7 @@ SetupDiGetDeviceInfoListDetailA(
-     _Out_ PSP_DEVINFO_LIST_DETAIL_DATA_A DeviceInfoSetDetailData
+     _In_ HDEVINFO DeviceInfoSet,
+-    _Out_ PSP_DEVINFO_LIST_DETAIL_DATA_A DeviceInfoSetDetailData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVINFO_LIST_DETAIL_DATA_A DeviceInfoSetDetailData
      );
  
 -WINSETUPAPI
@@ -2183,6 +2184,12 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDeviceInfoListDetailW(
+     _In_ HDEVINFO DeviceInfoSet,
+-    _Out_ PSP_DEVINFO_LIST_DETAIL_DATA_W DeviceInfoSetDetailData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVINFO_LIST_DETAIL_DATA_W DeviceInfoSetDetailData
+     );
+ 
+ #ifdef UNICODE
 @@ -5155,7 +5156,7 @@ SetupDiGetDeviceInfoListDetailW(
  #define DICD_GENERATE_ID        0x00000001
  #define DICD_INHERIT_CLASSDRVS  0x00000002
@@ -2197,8 +2204,9 @@ index d30e1d6ba8..e7c6587cd5 100644
      _In_opt_ PCSTR DeviceDescription,
      _In_opt_ HWND hwndParent,
 -    _In_ DWORD CreationFlags,
+-    _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
 +    _Win32_AssociatedEnum_(SETUP_DI_DEVICE_CREATION_FLAGS) _In_ DWORD CreationFlags,
-     _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
 -WINSETUPAPI
@@ -2206,15 +2214,17 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiCreateDeviceInfoW(
-@@ -5177,7 +5178,7 @@ SetupDiCreateDeviceInfoW(
+@@ -5177,8 +5178,8 @@ SetupDiCreateDeviceInfoW(
      _In_ CONST GUID *ClassGuid,
      _In_opt_ PCWSTR DeviceDescription,
      _In_opt_ HWND hwndParent,
 -    _In_ DWORD CreationFlags,
+-    _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
 +    _Win32_AssociatedEnum_(SETUP_DI_DEVICE_CREATION_FLAGS) _In_ DWORD CreationFlags,
-     _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
+ #ifdef UNICODE
 @@ -5194,7 +5195,7 @@ SetupDiCreateDeviceInfoW(
  #define DIOD_INHERIT_CLASSDRVS  0x00000002
  #define DIOD_CANCEL_REMOVE      0x00000004
@@ -2224,8 +2234,12 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiOpenDeviceInfoA(
-@@ -5205,7 +5206,7 @@ SetupDiOpenDeviceInfoA(
-     _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
+@@ -5202,10 +5203,10 @@ SetupDiOpenDeviceInfoA(
+     _In_ PCSTR DeviceInstanceId,
+     _In_opt_ HWND hwndParent,
+     _In_ DWORD OpenFlags,
+-    _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
 -WINSETUPAPI
@@ -2233,6 +2247,15 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiOpenDeviceInfoW(
+@@ -5213,7 +5214,7 @@ SetupDiOpenDeviceInfoW(
+     _In_ PCWSTR DeviceInstanceId,
+     _In_opt_ HWND hwndParent,
+     _In_ DWORD OpenFlags,
+-    _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
+     );
+ 
+ #ifdef UNICODE
 @@ -5223,7 +5224,7 @@ SetupDiOpenDeviceInfoW(
  #endif
  
@@ -2260,7 +2283,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiDeleteDeviceInfo(
-@@ -5261,7 +5262,7 @@ SetupDiDeleteDeviceInfo(
+@@ -5261,17 +5262,17 @@ SetupDiDeleteDeviceInfo(
      );
  
  
@@ -2269,7 +2292,10 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiEnumDeviceInfo(
-@@ -5271,7 +5272,7 @@ SetupDiEnumDeviceInfo(
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_ DWORD MemberIndex,
+-    _Out_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
  
@@ -2287,6 +2313,15 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiEnumDeviceInterfaces(
+@@ -5287,7 +5288,7 @@ SetupDiEnumDeviceInterfaces(
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+     _In_ CONST GUID *InterfaceClassGuid,
+     _In_ DWORD MemberIndex,
+-    _Out_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
+     );
+ 
+ //
 @@ -5296,7 +5297,7 @@ SetupDiEnumDeviceInterfaces(
  #define SetupDiEnumInterfaceDevice SetupDiEnumDeviceInterfaces
  
@@ -2296,8 +2331,12 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiCreateDeviceInterfaceA(
-@@ -5308,7 +5309,7 @@ SetupDiCreateDeviceInterfaceA(
-     _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
+@@ -5305,10 +5306,10 @@ SetupDiCreateDeviceInterfaceA(
+     _In_ CONST GUID *InterfaceClassGuid,
+     _In_opt_ PCSTR ReferenceString,
+     _In_ DWORD CreationFlags,
+-    _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
      );
  
 -WINSETUPAPI
@@ -2305,7 +2344,16 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiCreateDeviceInterfaceW(
-@@ -5343,7 +5344,7 @@ SetupDiCreateDeviceInterfaceW(
+@@ -5317,7 +5318,7 @@ SetupDiCreateDeviceInterfaceW(
+     _In_ CONST GUID *InterfaceClassGuid,
+     _In_opt_ PCWSTR ReferenceString,
+     _In_ DWORD CreationFlags,
+-    _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
+     );
+ 
+ #ifdef UNICODE
+@@ -5343,24 +5344,24 @@ SetupDiCreateDeviceInterfaceW(
  //
  #define DIODI_NO_ADD    0x00000001
  
@@ -2314,8 +2362,11 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiOpenDeviceInterfaceA(
-@@ -5353,7 +5354,7 @@ SetupDiOpenDeviceInterfaceA(
-     _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_ PCSTR DevicePath,
+     _In_ DWORD OpenFlags,
+-    _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
      );
  
 -WINSETUPAPI
@@ -2323,7 +2374,15 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiOpenDeviceInterfaceW(
-@@ -5381,7 +5382,7 @@ SetupDiOpenDeviceInterfaceW(
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_ PCWSTR DevicePath,
+     _In_ DWORD OpenFlags,
+-    _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
+     );
+ 
+ #ifdef UNICODE
+@@ -5381,14 +5382,14 @@ SetupDiOpenDeviceInterfaceW(
  #endif
  
  
@@ -2332,6 +2391,14 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDeviceInterfaceAlias(
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData,
+     _In_ CONST GUID *AliasInterfaceClassGuid,
+-    _Out_ PSP_DEVICE_INTERFACE_DATA AliasDeviceInterfaceData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVICE_INTERFACE_DATA AliasDeviceInterfaceData
+     );
+ 
+ //
 @@ -5397,7 +5398,7 @@ SetupDiGetDeviceInterfaceAlias(
  #define SetupDiGetInterfaceDeviceAlias SetupDiGetDeviceInterfaceAlias
  
@@ -2359,8 +2426,12 @@ index d30e1d6ba8..e7c6587cd5 100644
  _At_((LPSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
  BOOL
-@@ -5438,7 +5439,7 @@ SetupDiGetDeviceInterfaceDetailA(
-     _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
+@@ -5435,10 +5436,10 @@ SetupDiGetDeviceInterfaceDetailA(
+     _Inout_updates_bytes_to_opt_(DeviceInterfaceDetailDataSize, *RequiredSize) PSP_DEVICE_INTERFACE_DETAIL_DATA_A DeviceInterfaceDetailData,
+     _In_ DWORD DeviceInterfaceDetailDataSize,
+     _Out_opt_ _Out_range_(>=, sizeof(SP_DEVICE_INTERFACE_DETAIL_DATA_A)) PDWORD RequiredSize,
+-    _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
 -_Success_(return != FALSE)
@@ -2368,6 +2439,15 @@ index d30e1d6ba8..e7c6587cd5 100644
  _At_((LPWSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
  BOOL
+@@ -5449,7 +5450,7 @@ SetupDiGetDeviceInterfaceDetailW(
+     _Out_writes_bytes_to_opt_(DeviceInterfaceDetailDataSize, *RequiredSize) PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,
+     _In_ DWORD DeviceInterfaceDetailDataSize,
+     _Out_opt_ _Out_range_(>=, sizeof(SP_DEVICE_INTERFACE_DETAIL_DATA_W)) PDWORD RequiredSize,
+-    _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DeviceInfoData
+     );
+ 
+ #ifdef UNICODE
 @@ -5473,7 +5474,7 @@ SetupDiGetDeviceInterfaceDetailW(
  //
  // Default install handler for DIF_INSTALLINTERFACES.
@@ -2395,6 +2475,15 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiRegisterDeviceInfo(
+@@ -5520,7 +5521,7 @@ SetupDiRegisterDeviceInfo(
+     _In_ DWORD Flags,
+     _In_opt_ PSP_DETSIG_CMPPROC CompareProc,
+     _In_opt_ PVOID CompareContext,
+-    _Out_opt_ PSP_DEVINFO_DATA DupDeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_opt_ PSP_DEVINFO_DATA DupDeviceInfoData
+     );
+ 
+ 
 @@ -5533,17 +5534,17 @@ SetupDiRegisterDeviceInfo(
  #define SPDIT_CLASSDRIVER        0x00000001
  #define SPDIT_COMPATDRIVER       0x00000002
@@ -2416,7 +2505,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiCancelDriverInfoSearch(
-@@ -5551,24 +5552,24 @@ SetupDiCancelDriverInfoSearch(
+@@ -5551,26 +5552,26 @@ SetupDiCancelDriverInfoSearch(
      );
  
  
@@ -2430,7 +2519,8 @@ index d30e1d6ba8..e7c6587cd5 100644
 -    _In_ DWORD DriverType,
 +    _Win32_AssociatedEnum_(SETUP_DI_DRIVER_TYPE) _In_ DWORD DriverType,
      _In_ DWORD MemberIndex,
-     _Out_ PSP_DRVINFO_DATA_A DriverInfoData
+-    _Out_ PSP_DRVINFO_DATA_A DriverInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DRVINFO_DATA_A DriverInfoData
      );
  
 -WINSETUPAPI
@@ -2443,9 +2533,12 @@ index d30e1d6ba8..e7c6587cd5 100644
 -    _In_ DWORD DriverType,
 +    _Win32_AssociatedEnum_(SETUP_DI_DRIVER_TYPE) _In_ DWORD DriverType,
      _In_ DWORD MemberIndex,
-     _Out_ PSP_DRVINFO_DATA_W DriverInfoData
+-    _Out_ PSP_DRVINFO_DATA_W DriverInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DRVINFO_DATA_W DriverInfoData
      );
-@@ -5580,7 +5581,7 @@ SetupDiEnumDriverInfoW(
+ 
+ #ifdef UNICODE
+@@ -5580,22 +5581,22 @@ SetupDiEnumDriverInfoW(
  #endif
  
  
@@ -2454,8 +2547,10 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetSelectedDriverA(
-@@ -5589,7 +5590,7 @@ SetupDiGetSelectedDriverA(
-     _Out_ PSP_DRVINFO_DATA_A DriverInfoData
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+-    _Out_ PSP_DRVINFO_DATA_A DriverInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DRVINFO_DATA_A DriverInfoData
      );
  
 -WINSETUPAPI
@@ -2463,6 +2558,13 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetSelectedDriverW(
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+-    _Out_ PSP_DRVINFO_DATA_W DriverInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DRVINFO_DATA_W DriverInfoData
+     );
+ 
+ #ifdef UNICODE
 @@ -5605,7 +5606,7 @@ SetupDiGetSelectedDriverW(
  #endif
  
@@ -3121,7 +3223,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiSetClassRegistryPropertyW(
-@@ -6728,7 +6729,7 @@ SetupDiSetClassRegistryPropertyW(
+@@ -6728,22 +6729,22 @@ SetupDiSetClassRegistryPropertyW(
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3130,8 +3232,10 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDeviceInstallParamsA(
-@@ -6737,7 +6738,7 @@ SetupDiGetDeviceInstallParamsA(
-     _Out_ PSP_DEVINSTALL_PARAMS_A DeviceInstallParams
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+-    _Out_ PSP_DEVINSTALL_PARAMS_A DeviceInstallParams
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVINSTALL_PARAMS_A DeviceInstallParams
      );
  
 -WINSETUPAPI
@@ -3139,6 +3243,13 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDeviceInstallParamsW(
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+-    _Out_ PSP_DEVINSTALL_PARAMS_W DeviceInstallParams
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVINSTALL_PARAMS_W DeviceInstallParams
+     );
+ 
+ #ifdef UNICODE
 @@ -6752,7 +6753,7 @@ SetupDiGetDeviceInstallParamsW(
  #define SetupDiGetDeviceInstallParams SetupDiGetDeviceInstallParamsA
  #endif
@@ -3193,7 +3304,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiSetClassInstallParamsW(
-@@ -6835,7 +6836,7 @@ SetupDiSetClassInstallParamsW(
+@@ -6835,24 +6836,24 @@ SetupDiSetClassInstallParamsW(
  #endif
  
  
@@ -3202,8 +3313,11 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDriverInstallParamsA(
-@@ -6845,7 +6846,7 @@ SetupDiGetDriverInstallParamsA(
-     _Out_ PSP_DRVINSTALL_PARAMS DriverInstallParams
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+     _In_ PSP_DRVINFO_DATA_A DriverInfoData,
+-    _Out_ PSP_DRVINSTALL_PARAMS DriverInstallParams
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DRVINSTALL_PARAMS DriverInstallParams
      );
  
 -WINSETUPAPI
@@ -3211,6 +3325,14 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetDriverInstallParamsW(
+     _In_ HDEVINFO DeviceInfoSet,
+     _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
+     _In_ PSP_DRVINFO_DATA_W DriverInfoData,
+-    _Out_ PSP_DRVINSTALL_PARAMS DriverInstallParams
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DRVINSTALL_PARAMS DriverInstallParams
+     );
+ 
+ #ifdef UNICODE
 @@ -6862,7 +6863,7 @@ SetupDiGetDriverInstallParamsW(
  #endif
  
@@ -3278,7 +3400,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetClassBitmapIndex(
-@@ -6942,7 +6943,7 @@ SetupDiGetClassBitmapIndex(
+@@ -6942,28 +6943,28 @@ SetupDiGetClassBitmapIndex(
      );
  
  
@@ -3287,7 +3409,8 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetClassImageList(
-@@ -6950,7 +6951,7 @@ SetupDiGetClassImageList(
+-    _Out_ PSP_CLASSIMAGELIST_DATA ClassImageListData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_CLASSIMAGELIST_DATA ClassImageListData
      );
  
  
@@ -3296,7 +3419,9 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetClassImageListExA(
-@@ -6959,7 +6960,7 @@ SetupDiGetClassImageListExA(
+-    _Out_ PSP_CLASSIMAGELIST_DATA ClassImageListData,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_CLASSIMAGELIST_DATA ClassImageListData,
+     _In_opt_ PCSTR MachineName,
      _Reserved_ PVOID Reserved
      );
  
@@ -3305,6 +3430,11 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetClassImageListExW(
+-    _Out_ PSP_CLASSIMAGELIST_DATA ClassImageListData,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_CLASSIMAGELIST_DATA ClassImageListData,
+     _In_opt_ PCWSTR MachineName,
+     _Reserved_ PVOID Reserved
+     );
 @@ -6975,7 +6976,7 @@ SetupDiGetClassImageListExW(
  #endif
  
@@ -3476,7 +3606,7 @@ index d30e1d6ba8..e7c6587cd5 100644
  HPROPSHEETPAGE
  WINAPI
  SetupDiGetWizardPage(
-@@ -7272,7 +7273,7 @@ SetupDiGetWizardPage(
+@@ -7272,16 +7273,16 @@ SetupDiGetWizardPage(
      );
  
  
@@ -3485,7 +3615,9 @@ index d30e1d6ba8..e7c6587cd5 100644
  BOOL
  WINAPI
  SetupDiGetSelectedDevice(
-@@ -7281,7 +7282,7 @@ SetupDiGetSelectedDevice(
+     _In_ HDEVINFO DeviceInfoSet,
+-    _Out_ PSP_DEVINFO_DATA DeviceInfoData
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
  

@@ -1,0 +1,55 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prdrvcom.h b/generation/WinSDK/RecompiledIdlHeaders/um/prdrvcom.h
+index 29dce8b6b0..ece69eaee4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/prdrvcom.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/prdrvcom.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2003-2004 Microsoft Corporation
+@@ -101,34 +102,34 @@ DECLARE_INTERFACE_IID_(IPrintTicketProvider, IUnknown, "BB5116DB-0A23-4c3a-A6B6-
+ 
+     STDMETHOD(GetSupportedVersions)( THIS_
+             IN HANDLE hPrinter,
+-            OUT INT *ppVersions[],
+-            OUT INT *cVersions
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT INT *ppVersions[],
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT INT *cVersions
+             ) PURE;
+ 
+     STDMETHOD(BindPrinter)( THIS_
+             IN HANDLE          hPrinter,
+             IN INT             version,
+-            OUT PSHIMOPTS      pOptions,
+-            OUT DWORD         *pDevModeFlags,
+-            OUT INT           *cNamespaces,
+-            OUT BSTR         **ppNamespaces
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT PSHIMOPTS      pOptions,
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD         *pDevModeFlags,
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT INT           *cNamespaces,
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR         **ppNamespaces
+             ) PURE;
+ 
+     STDMETHOD(QueryDeviceNamespace)( THIS_
+-            OUT BSTR          *pDefaultNamespace
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT BSTR          *pDefaultNamespace
+             ) PURE;
+ 
+     STDMETHOD(ConvertPrintTicketToDevMode)( THIS_
+             IN IXMLDOMDocument2 *pPrintTicket,
+             IN ULONG             cbDevmodeIn,
+-            IN PDEVMODE          pDevmodeIn,
+-            OUT ULONG           *pcbDevmodeOut,
+-            OUT PDEVMODE        *ppDevmodeOut
++            _WIN32META_ANNOTATION_("win32metadata:out") IN PDEVMODE          pDevmodeIn,
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT ULONG           *pcbDevmodeOut,
++            _WIN32META_ANNOTATION_("win32metadata:in") OUT PDEVMODE        *ppDevmodeOut
+             ) PURE;
+ 
+     STDMETHOD(ConvertDevModeToPrintTicket)( THIS_
+             IN ULONG             cbDevmode,
+-            IN PDEVMODE          pDevmode,
++            _WIN32META_ANNOTATION_("win32metadata:out") IN PDEVMODE          pDevmode,
+             IN IXMLDOMDocument2 *pPrintTicket
+             ) PURE;
+ 

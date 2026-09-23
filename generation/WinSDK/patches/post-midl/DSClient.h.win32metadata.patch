@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8..9ce2be6f4f 100644
+index 71ad8398e8..92f6736f1d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -69,15 +69,17 @@ index 71ad8398e8..9ce2be6f4f 100644
  
      // *** IDsBrowseDomainTree methods ***
 -    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_ LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
+-    STDMETHOD(GetDomains)(THIS_ PDOMAIN_TREE *ppDomainTree, DWORD dwFlags) PURE;
+-    STDMETHOD(FreeDomains)(THIS_ PDOMAIN_TREE *ppDomainTree) PURE;
 +    
 +    
 +    STDMETHOD(BrowseTo)(THIS_ HWND hwndParent, _Out_  LPWSTR *ppszTargetPath, _In_ DWORD dwFlags) PURE;
 +    
 +    
-     STDMETHOD(GetDomains)(THIS_ PDOMAIN_TREE *ppDomainTree, DWORD dwFlags) PURE;
++    STDMETHOD(GetDomains)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDOMAIN_TREE *ppDomainTree, DWORD dwFlags) PURE;
 +    
 +    
-     STDMETHOD(FreeDomains)(THIS_ PDOMAIN_TREE *ppDomainTree) PURE;
++    STDMETHOD(FreeDomains)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDOMAIN_TREE *ppDomainTree) PURE;
 +    
 +    
      STDMETHOD(FlushCachedDomains)(THIS) PURE;
@@ -105,9 +107,10 @@ index 71ad8398e8..9ce2be6f4f 100644
 +    
 +    
      STDMETHOD(SetLanguageID)(THIS_ LANGID langid) PURE;
+-    STDMETHOD(GetDisplaySpecifier)(THIS_ LPCWSTR pszObjectClass, REFIID riid, void **ppv) PURE;
 +    
 +    
-     STDMETHOD(GetDisplaySpecifier)(THIS_ LPCWSTR pszObjectClass, REFIID riid, void **ppv) PURE;
++    STDMETHOD(GetDisplaySpecifier)(THIS_ LPCWSTR pszObjectClass, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **ppv) PURE;
 +    
 +    
      STDMETHOD(GetIconLocation)(THIS_ LPCWSTR pszObjectClass, _In_ DWORD dwFlags, _Out_writes_(cchBuffer) LPWSTR pszBuffer, _In_ INT cchBuffer, _Out_ INT *presid) PURE;
@@ -127,7 +130,7 @@ index 71ad8398e8..9ce2be6f4f 100644
 -    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass, LPDSCLASSCREATIONINFO* ppdscci) PURE;
 +    
 +    
-+    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass,  LPDSCLASSCREATIONINFO* ppdscci) PURE;
++    STDMETHOD(GetClassCreationInfo)(THIS_ LPCWSTR pszObjectClass,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDSCLASSCREATIONINFO* ppdscci) PURE;
 +    
 +    
      STDMETHOD(EnumClassAttributes)(THIS_ LPCWSTR pszObjectClass, LPDSENUMATTRIBUTES pcbEnum, LPARAM lParam) PURE;

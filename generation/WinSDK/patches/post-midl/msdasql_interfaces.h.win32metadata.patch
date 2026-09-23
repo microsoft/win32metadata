@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msdasql_interfaces.h b/generation/WinSDK/RecompiledIdlHeaders/um/msdasql_interfaces.h
-index 84cd5cc7ec..6315a4bd3a 100644
+index 84cd5cc7ec..5b095c4c1e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msdasql_interfaces.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msdasql_interfaces.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,23 @@ index 84cd5cc7ec..6315a4bd3a 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -113,14 +114,14 @@ EXTERN_C const IID IID_IRowsetChangeExtInfo;
+         virtual HRESULT STDMETHODCALLTYPE GetOriginalRow( 
+             /* [in] */ HCHAPTER hReserved,
+             /* [in] */ HROW hRow,
+-            /* [out] */ HROW *phRowOriginal) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HROW *phRowOriginal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPendingColumns( 
+             /* [in] */ HCHAPTER hReserved,
+             /* [in] */ HROW hRow,
+             /* [in] */ ULONG cColumnOrdinals,
+             /* [size_is][in] */ const ULONG rgiOrdinals[  ],
+-            /* [size_is][out] */ DBPENDINGSTATUS rgColumnStatus[  ]) = 0;
++            /* [size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DBPENDINGSTATUS rgColumnStatus[  ]) = 0;
+         
+     };
+     
 @@ -209,7 +210,7 @@ EXTERN_C const IID IID_IRowsetChangeExtInfo;
  typedef struct tagKAGREQDIAG
      {

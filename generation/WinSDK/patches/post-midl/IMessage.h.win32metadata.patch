@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h b/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h
-index 849a899e1c..2b2f091928 100644
+index 849a899e1c..8aba343aab 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IMessage.h
 @@ -8,6 +8,7 @@
@@ -10,37 +10,69 @@ index 849a899e1c..2b2f091928 100644
  
  #if _MSC_VER > 1000
  #pragma once
-@@ -125,13 +126,13 @@ STDAPI_(void) CloseIMsgSession(
+@@ -62,10 +63,10 @@ typedef void (STDAPICALLTYPE MSGCALLRELEASE)(
+ STDAPI_(SCODE) OpenIMsgSession(
+ 	LPMALLOC		lpMalloc,			/* -> Co malloc object			*/
+ 	ULONG			ulFlags,			/* reserved. Must be zero.		*/
+-	LPMSGSESS FAR	*lppMsgSess );		/* <- message session object	*/
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMSGSESS FAR	*lppMsgSess );		/* <- message session object	*/
+ 
+ STDAPI_(void) CloseIMsgSession(
+-	LPMSGSESS		lpMsgSess );		/* -> message session object	*/
++	_WIN32META_ANNOTATION_("win32metadata:in") LPMSGSESS		lpMsgSess );		/* -> message session object	*/
+ 
+ /*	OpenIMsgOnIStg - Main entry point
+  *
+@@ -124,14 +125,14 @@ STDAPI_(void) CloseIMsgSession(
+  *
   */
  STDAPI_(SCODE) OpenIMsgOnIStg(
- 	LPMSGSESS		lpMsgSess,			/* -> message session obj (optional) */
+-	LPMSGSESS		lpMsgSess,			/* -> message session obj (optional) */
 -	LPALLOCATEBUFFER lpAllocateBuffer,	/* -> AllocateBuffer memory routine  */
 -	LPALLOCATEMORE 	lpAllocateMore, 	/* -> AllocateMore memory routine    */
 -	LPFREEBUFFER	lpFreeBuffer, 		/* -> FreeBuffer memory routine      */
++	_WIN32META_ANNOTATION_("win32metadata:in") LPMSGSESS		lpMsgSess,			/* -> message session obj (optional) */
 +	 LPALLOCATEBUFFER lpAllocateBuffer,	/* -> AllocateBuffer memory routine  */
 +	 LPALLOCATEMORE 	lpAllocateMore, 	/* -> AllocateMore memory routine    */
 +	 LPFREEBUFFER	lpFreeBuffer, 		/* -> FreeBuffer memory routine      */
  	LPMALLOC		lpMalloc,			/* -> Co malloc object				 */
- 	LPVOID			lpMapiSup,			/* -> MAPI Support Obj (optional)    */
+-	LPVOID			lpMapiSup,			/* -> MAPI Support Obj (optional)    */
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID			lpMapiSup,			/* -> MAPI Support Obj (optional)    */
  	LPSTORAGE 		lpStg, 				/* -> open IStorage containing msg   */
 -	MSGCALLRELEASE FAR *lpfMsgCallRelease,	/* -> release callback rtn (opt) */
-+	 MSGCALLRELEASE FAR *lpfMsgCallRelease,	/* -> release callback rtn (opt) */
++	 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MSGCALLRELEASE FAR *lpfMsgCallRelease,	/* -> release callback rtn (opt) */
  	ULONG			ulCallerData,		/* caller data returned in callback  */
  	ULONG			ulFlags,			/* -> flags (controls istg commit)   */
  	LPMESSAGE		FAR *lppMsg ) WIN_NOEXCEPT;	/* <- open message object			 */
-@@ -179,6 +180,7 @@ struct _SPropAttrArray_ ## _name \
+@@ -179,10 +180,11 @@ struct _SPropAttrArray_ ## _name \
   *	getting attributes.
   */
  _Check_return_
 +
  STDAPI GetAttribIMsgOnIStg(
- 	LPVOID					lpObject,
- 	LPSPropTagArray			lpPropTagArray,
-@@ -190,6 +192,7 @@ STDAPI GetAttribIMsgOnIStg(
+-	LPVOID					lpObject,
+-	LPSPropTagArray			lpPropTagArray,
+-	LPSPropAttrArray FAR 	*lppPropAttrArray ) WIN_NOEXCEPT;
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID					lpObject,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray			lpPropTagArray,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropAttrArray FAR 	*lppPropAttrArray ) WIN_NOEXCEPT;
+ 
+ /*	SetAttribIMsgOnIStg - To set attributes on properties
+  *
+@@ -190,11 +192,12 @@ STDAPI GetAttribIMsgOnIStg(
   *	setting of attributes.
   */
  _Check_return_
 +
  STDAPI SetAttribIMsgOnIStg(
- 	LPVOID					lpObject,
- 	LPSPropTagArray			lpPropTags,
+-	LPVOID					lpObject,
+-	LPSPropTagArray			lpPropTags,
+-	LPSPropAttrArray		lpPropAttrs,
+-	LPSPropProblemArray FAR	*lppPropProblems ) WIN_NOEXCEPT;
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID					lpObject,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray			lpPropTags,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropAttrArray		lpPropAttrs,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropProblemArray FAR	*lppPropProblems ) WIN_NOEXCEPT;
+ 
+ /*	MapStorageSCode - To map an IStorage hResult to a MAPI sCode value
+  *

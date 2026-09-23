@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h b/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
-index deb27eb916..c36321f4be 100644
+index deb27eb916..7bacf95e94 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
 @@ -222,6 +222,7 @@ extern "C"{
@@ -19,6 +19,15 @@ index deb27eb916..c36321f4be 100644
      IStreamBufferInitialize : public IUnknown
      {
      public:
+@@ -266,7 +267,7 @@ EXTERN_C const IID IID_IStreamBufferInitialize;
+         virtual HRESULT STDMETHODCALLTYPE SetSIDs( 
+             /* [annotation][in] */ 
+             _In_  DWORD cSIDs,
+-            /* [size_is][in] */ PSID *ppSID) = 0;
++            /* [size_is][in] */ _WIN32META_ANNOTATION_("win32metadata:out") PSID *ppSID) = 0;
+         
+     };
+     
 @@ -350,11 +351,25 @@ EXTERN_C const IID IID_IStreamBufferInitialize;
  /* [local] */ 
  

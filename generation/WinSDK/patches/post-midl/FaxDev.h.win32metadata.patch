@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h
-index fb60798806..0f1c439092 100644
+index fb60798806..3bfb471133 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxDev.h
 @@ -1,3 +1,4 @@
@@ -34,3 +34,31 @@ index fb60798806..0f1c439092 100644
      DWORD   SizeOfStruct;
      DWORD   StatusId;
      DWORD   StringId;
+@@ -195,19 +196,19 @@ FaxDevConfigure(
+     OUT HPROPSHEETPAGE *PropSheetPage
+     );
+ 
+-typedef BOOL (WINAPI *PFAXDEVINITIALIZE)                (HLINEAPP,HANDLE,PFAX_LINECALLBACK*,PFAX_SERVICE_CALLBACK);
+-typedef BOOL (WINAPI *PFAXDEVVIRTUALDEVICECREATION)     (LPDWORD DeviceCount,
++typedef BOOL (WINAPI *PFAXDEVINITIALIZE)                (HLINEAPP,HANDLE,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFAX_LINECALLBACK*,PFAX_SERVICE_CALLBACK);
++typedef BOOL (WINAPI *PFAXDEVVIRTUALDEVICECREATION)     (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD DeviceCount,
+                                                                                                             _Out_writes_(128) LPWSTR DeviceNamePrefix,
+-                                                                                                            LPDWORD DeviceIdPrefix,
++                                                                                                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD DeviceIdPrefix,
+                                                                                                             HANDLE CompletionPort,
+                                                                                                             ULONG_PTR CompletionKey);
+-typedef BOOL (WINAPI *PFAXDEVSTARTJOB)                  (HLINE,DWORD,PHANDLE,HANDLE,ULONG_PTR);
++typedef BOOL (WINAPI *PFAXDEVSTARTJOB)                  (HLINE,DWORD,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PHANDLE,HANDLE,ULONG_PTR);
+ typedef BOOL (WINAPI *PFAXDEVENDJOB)                    (HANDLE);
+-typedef BOOL (WINAPI *PFAXDEVSEND)                      (HANDLE,PFAX_SEND,PFAX_SEND_CALLBACK);
+-typedef BOOL (WINAPI *PFAXDEVRECEIVE)                   (HANDLE,HCALL,PFAX_RECEIVE);
+-typedef BOOL (WINAPI *PFAXDEVREPORTSTATUS)              (HANDLE,PFAX_DEV_STATUS,DWORD,LPDWORD);
++typedef BOOL (WINAPI *PFAXDEVSEND)                      (HANDLE,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFAX_SEND,PFAX_SEND_CALLBACK);
++typedef BOOL (WINAPI *PFAXDEVRECEIVE)                   (HANDLE,HCALL,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFAX_RECEIVE);
++typedef BOOL (WINAPI *PFAXDEVREPORTSTATUS)              (HANDLE,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFAX_DEV_STATUS,DWORD,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD);
+ typedef BOOL (WINAPI *PFAXDEVABORTOPERATION)            (HANDLE);
+-typedef BOOL (WINAPI *PFAXDEVCONFIGURE)                 (HPROPSHEETPAGE*);
++typedef BOOL (WINAPI *PFAXDEVCONFIGURE)                 (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HPROPSHEETPAGE*);
+ typedef HRESULT (WINAPI * PFAXDEVSHUTDOWN)              (void);
+ 
+ #ifdef __cplusplus

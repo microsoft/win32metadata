@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
-index 3cc4f24de6..26b5fac043 100644
+index 3cc4f24de6..0c9d0b6ba2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
 @@ -1,3 +1,4 @@
@@ -7,102 +7,212 @@ index 3cc4f24de6..26b5fac043 100644
  /********************************************************
  *                                                       *
  *   Copyright (C) Microsoft. All rights reserved.       *
-@@ -1785,7 +1786,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+@@ -1785,8 +1786,8 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
  
  #ifndef RC_INVOKED
  
 -SQLRETURN SQL_API SQLDriverConnect(
+-    SQLHDBC            hdbc,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLDriverConnect(
-     SQLHDBC            hdbc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHDBC            hdbc,
      SQLHWND            hwnd,
      _In_reads_(cchConnStrIn)
-@@ -1903,7 +1904,7 @@ SQLRETURN SQL_API SQLDriverConnect(
+     SQLCHAR           *szConnStrIn,
+@@ -1903,8 +1904,8 @@ SQLRETURN SQL_API SQLDriverConnect(
  "VALUE,VALUES,VARCHAR,VARYING,VIEW,WHEN,WHENEVER,WHERE,WITH,WORK,WRITE,"\
  "YEAR,ZONE"
  
 -SQLRETURN SQL_API SQLBrowseConnect(
+-    SQLHDBC            hdbc,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLBrowseConnect(
-     SQLHDBC            hdbc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHDBC            hdbc,
      _In_reads_(cchConnStrIn)
      SQLCHAR           *szConnStrIn,
-@@ -1920,7 +1921,7 @@ SQLRETURN   SQL_API SQLBulkOperations(
+     SQLSMALLINT        cchConnStrIn,
+@@ -1916,21 +1917,21 @@ SQLRETURN SQL_API SQLBrowseConnect(
+ 
+ #if (ODBCVER >= 0x0300)
+ SQLRETURN   SQL_API SQLBulkOperations(
+-    SQLHSTMT            StatementHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT            StatementHandle,
      SQLSMALLINT         Operation);
  #endif  /* ODBCVER >= 0x0300 */
  
 -SQLRETURN SQL_API SQLColAttributes(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLColAttributes(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      SQLUSMALLINT       icol,
      SQLUSMALLINT       fDescType,
-@@ -1929,7 +1930,7 @@ SQLRETURN SQL_API SQLColAttributes(
-     SQLSMALLINT       *pcbDesc,
-     SQLLEN            * pfDesc);
+-    SQLPOINTER         rgbDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLPOINTER         rgbDesc,
+     SQLSMALLINT        cbDescMax,
+-    SQLSMALLINT       *pcbDesc,
+-    SQLLEN            * pfDesc);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLSMALLINT       *pcbDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLLEN            * pfDesc);
  
 -SQLRETURN SQL_API SQLColumnPrivileges(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLColumnPrivileges(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      _In_reads_opt_(cchCatalogName)
      SQLCHAR           *szCatalogName,
-@@ -1965,7 +1966,7 @@ SQLRETURN SQL_API SQLExtendedFetch(
+     SQLSMALLINT        cchCatalogName,
+@@ -1945,7 +1946,7 @@ SQLRETURN SQL_API SQLColumnPrivileges(
+     SQLSMALLINT        cchColumnName);
+ 
+ SQLRETURN SQL_API SQLDescribeParam(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       ipar,
+     _Out_opt_
+     SQLSMALLINT       *pfSqlType,
+@@ -1957,7 +1958,7 @@ SQLRETURN SQL_API SQLDescribeParam(
+     SQLSMALLINT       *pfNullable);
+ 
+ SQLRETURN SQL_API SQLExtendedFetch(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       fFetchType,
+     SQLLEN             irow,
+     _Out_opt_
+@@ -1965,8 +1966,8 @@ SQLRETURN SQL_API SQLExtendedFetch(
      _Out_opt_
      SQLUSMALLINT      *rgfRowStatus);
  
 -SQLRETURN SQL_API SQLForeignKeys(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLForeignKeys(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      _In_reads_opt_(cchPkCatalogName)
      SQLCHAR           *szPkCatalogName,
-@@ -1989,7 +1990,7 @@ SQLRETURN SQL_API SQLForeignKeys(
+     SQLSMALLINT        cchPkCatalogName,
+@@ -1987,30 +1988,30 @@ SQLRETURN SQL_API SQLForeignKeys(
+     SQLSMALLINT        cchFkTableName);
+ 
  SQLRETURN SQL_API SQLMoreResults(
-     SQLHSTMT           hstmt);
+-    SQLHSTMT           hstmt);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt);
  
 -SQLRETURN SQL_API SQLNativeSql
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLNativeSql
  (
-     SQLHDBC            hdbc,
+-    SQLHDBC            hdbc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHDBC            hdbc,
      _In_reads_(cchSqlStrIn) SQLCHAR* szSqlStrIn,
-@@ -2009,7 +2010,7 @@ SQLRETURN SQL_API SQLParamOptions(
+     SQLINTEGER  cchSqlStrIn,
+     _Out_writes_opt_(cchSqlStrMax) SQLCHAR* szSqlStr,
+     SQLINTEGER         cchSqlStrMax,
+-    SQLINTEGER        *pcbSqlStr
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLINTEGER        *pcbSqlStr
+ );
+ 
+ SQLRETURN SQL_API SQLNumParams(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _Out_opt_
+     SQLSMALLINT       *pcpar);
+ 
+ SQLRETURN SQL_API SQLParamOptions(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      SQLULEN            crow,
-     SQLULEN            *pirow);
+-    SQLULEN            *pirow);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLULEN            *pirow);
  
 -SQLRETURN SQL_API SQLPrimaryKeys(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLPrimaryKeys(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      _In_reads_opt_(cchCatalogName)
      SQLCHAR           *szCatalogName,
-@@ -2021,7 +2022,7 @@ SQLRETURN SQL_API SQLPrimaryKeys(
+     SQLSMALLINT        cchCatalogName,
+@@ -2021,8 +2022,8 @@ SQLRETURN SQL_API SQLPrimaryKeys(
      SQLCHAR           *szTableName,
      SQLSMALLINT        cchTableName);
  
 -SQLRETURN SQL_API SQLProcedureColumns(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLProcedureColumns(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      _In_reads_opt_(cchCatalogName)
      SQLCHAR           *szCatalogName,
-@@ -2036,7 +2037,7 @@ SQLRETURN SQL_API SQLProcedureColumns(
+     SQLSMALLINT        cchCatalogName,
+@@ -2036,8 +2037,8 @@ SQLRETURN SQL_API SQLProcedureColumns(
      SQLCHAR           *szColumnName,
      SQLSMALLINT        cchColumnName);
  
 -SQLRETURN SQL_API SQLProcedures(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLProcedures(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      _In_reads_opt_(cchCatalogName)
      SQLCHAR           *szCatalogName,
-@@ -2056,7 +2057,7 @@ SQLRETURN SQL_API SQLSetPos(
+     SQLSMALLINT        cchCatalogName,
+@@ -2051,13 +2052,13 @@ SQLRETURN SQL_API SQLProcedures(
+ 
+ 
+ SQLRETURN SQL_API SQLSetPos(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLSETPOSIROW      irow,
      SQLUSMALLINT       fOption,
      SQLUSMALLINT       fLock);
  
 -SQLRETURN SQL_API SQLTablePrivileges(
+-    SQLHSTMT           hstmt,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLTablePrivileges(
-     SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
      _In_reads_opt_(cchCatalogName)
      SQLCHAR           *szCatalogName,
-@@ -2068,7 +2069,7 @@ SQLRETURN SQL_API SQLTablePrivileges(
+     SQLSMALLINT        cchCatalogName,
+@@ -2068,8 +2069,8 @@ SQLRETURN SQL_API SQLTablePrivileges(
      SQLCHAR           *szTableName,
      SQLSMALLINT        cchTableName);
  
 -SQLRETURN SQL_API SQLDrivers(
+-    SQLHENV            henv,
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLDrivers(
-     SQLHENV            henv,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHENV            henv,
      SQLUSMALLINT       fDirection,
      _Out_writes_opt_(cchDriverDescMax)
+     SQLCHAR           *szDriverDesc,
+@@ -2083,16 +2084,16 @@ SQLRETURN SQL_API SQLDrivers(
+     SQLSMALLINT       *pcchDrvrAttr);
+ 
+ SQLRETURN SQL_API SQLBindParameter(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       ipar,
+     SQLSMALLINT        fParamType,
+     SQLSMALLINT        fCType,
+     SQLSMALLINT        fSqlType,
+     SQLULEN            cbColDef,
+     SQLSMALLINT        ibScale,
+-    SQLPOINTER         rgbValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLPOINTER         rgbValue,
+     SQLLEN             cbValueMax,
+-    SQLLEN             *pcbValue);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLLEN             *pcbValue);
+ 
+ #endif /* RC_INVOKED */
+ 
+@@ -2125,7 +2126,7 @@ SQLRETURN SQL_API SQLBindParameter(
+ #ifndef RC_INVOKED
+ SQLRETURN SQL_API SQLAllocHandleStd(
+     SQLSMALLINT     fHandleType,
+-    SQLHANDLE       hInput,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHANDLE       hInput,
+     _Out_
+     SQLHANDLE      *phOutput);
+ #endif /* RC_INVOKED */
+@@ -2155,7 +2156,7 @@ SQLRETURN SQL_API SQLAllocHandleStd(
+ #ifndef RC_INVOKED
+ 
+ SQLRETURN SQL_API SQLSetScrollOptions(    /*      Use SQLSetStmtOptions */
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       fConcurrency,
+     SQLLEN             crowKeyset,
+     SQLUSMALLINT       crowRowset);

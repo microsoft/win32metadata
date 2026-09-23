@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msime.h b/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
-index 391a8813e9..b81dff3de8 100644
+index 391a8813e9..80dc0beafa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msime.h
 @@ -1,3 +1,4 @@
@@ -7,15 +7,150 @@ index 391a8813e9..b81dff3de8 100644
  /*----------------------------------------------------------------------------
      %%File: MSIME.H
  
-@@ -763,7 +764,7 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
+@@ -124,10 +125,10 @@ DECLARE_INTERFACE_(IFECommon, IUnknown)
+                             ) PURE;
+     STDMETHOD(SetDefaultIME)    (THIS) PURE;
+     STDMETHOD(InvokeWordRegDialog) (THIS_
+-                            IMEDLG *pimedlg             //(in) parameters
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEDLG *pimedlg             //(in) parameters
+                             ) PURE;
+     STDMETHOD(InvokeDictToolDialog) (THIS_
+-                            IMEDLG *pimedlg             //(in) parameters
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEDLG *pimedlg             //(in) parameters
+                             ) PURE;
+ };
+ 
+@@ -287,22 +288,22 @@ DECLARE_INTERFACE_(IFELanguage, IUnknown)
+                         DWORD   dwCMode,            // [in]
+                         INT     cwchInput,          // [in]
+                         const WCHAR   *pwchInput,         // [in, size_is(cwchInput)]
+-                        DWORD   *pfCInfo,           // [in, size_is(cwchInput)]
+-                        MORRSLT **ppResult ) PURE;  // [out]
++                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD   *pfCInfo,           // [in, size_is(cwchInput)]
++                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MORRSLT **ppResult ) PURE;  // [out]
+ 
+-    STDMETHOD(GetConversionModeCaps)(THIS_ DWORD *pdwCaps) PURE;
++    STDMETHOD(GetConversionModeCaps)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwCaps) PURE;
+ 
+     STDMETHOD(GetPhonetic)(THIS_
+                         BSTR    string,             // [in]
+                         LONG    start,              // [in]
+                         LONG    length,             // [in]
+-                        BSTR *  phonetic ) PURE;    // [out, retval]
++                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BSTR *  phonetic ) PURE;    // [out, retval]
+ 
+     STDMETHOD(GetConversion)(THIS_
+                         BSTR    string,             // [in]
+                         LONG    start,              // [in]
+                         LONG    length,             // [in]
+-                        BSTR *  result ) PURE;      // [out, retval]
++                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BSTR *  result ) PURE;      // [out, retval]
+ };
+ 
+ 
+@@ -704,7 +705,7 @@ typedef struct _IMEDP
+     IMEREL      relID;
+ } IMEDP, *PIMEDP;
+ 
+-typedef BOOL (WINAPI *PFNLOG)(IMEDP *, HRESULT);
++typedef BOOL (WINAPI *PFNLOG)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEDP *, HRESULT);
+ 
+ //////////////////////////////
+ // The IFEDictionary interface
+@@ -724,21 +725,21 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
+     // IFEDictionary members
+     STDMETHOD(Open)         (THIS_
+                             _Inout_updates_opt_(MAX_PATH) CHAR *pchDictPath,    //(in) dictionary path
+-                            IMESHF *pshf                //(out) dictionary header
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMESHF *pshf                //(out) dictionary header
+                             ) PURE;
+     STDMETHOD(Close)        (THIS) PURE;
+     STDMETHOD(GetHeader)    (THIS_
+                             _Inout_updates_opt_(MAX_PATH) CHAR *pchDictPath,    //(in) dictionary path
+-                            IMESHF *pshf,               //(out) dictionary header
+-                            IMEFMT *pjfmt,              //(out) dictionary format
+-                            ULONG *pulType              //(out) dictionary type
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMESHF *pshf,               //(out) dictionary header
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEFMT *pjfmt,              //(out) dictionary format
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pulType              //(out) dictionary type
+                             ) PURE;
+     STDMETHOD(DisplayProperty) (THIS_
+                             HWND hwnd                   //(in) parent window handle
+                             ) PURE;
+     STDMETHOD(GetPosTable)  (THIS_
+-                            POSTBL **prgPosTbl,         //(out) pos table pointer
+-                            int *pcPosTbl               //(out) pos table count pointer
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POSTBL **prgPosTbl,         //(out) pos table pointer
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *pcPosTbl               //(out) pos table count pointer
+                             ) PURE;
+     STDMETHOD(GetWords)     (THIS_
+                             const WCHAR *pwchFirst,     //(in) starting range of reading
+@@ -747,35 +748,35 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
+                             ULONG ulPos,                //(in) part of speech (IFED_POS_...)
+                             ULONG ulSelect,             //(in) output selection
+                             ULONG ulWordSrc,            //(in) user or auto registered word?
+-                            UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEWRD
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEWRD
+                             ULONG cbBuffer,             //(in) size of buffer in bytes
+-                            ULONG *pcWrd                //(out) count of IMEWRD's returned
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcWrd                //(out) count of IMEWRD's returned
+                             ) PURE;
+     STDMETHOD(NextWords)    (THIS_
+-                            UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEWRD
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEWRD
+                             ULONG cbBuffer,             //(in) size of buffer in bytes
+-                            ULONG *pcWrd                //(out) count of IMEWRD's returned
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcWrd                //(out) count of IMEWRD's returned
+                             ) PURE;
+     STDMETHOD(Create)       (THIS_
+                             const CHAR *pchDictPath,    //(in) path for the new dictionary
+-                            IMESHF *pshf                //(in) dictionary header
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMESHF *pshf                //(in) dictionary header
+                             ) PURE;
      STDMETHOD(SetHeader)    (THIS_
-                             IMESHF *pshf                //(in) dictionary header
+-                            IMESHF *pshf                //(in) dictionary header
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMESHF *pshf                //(in) dictionary header
                              ) PURE;
 -    STDMETHOD(ExistWord)    (THIS_
+-                            IMEWRD *pwrd                //(in) word to check
 +    _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ STDMETHOD(ExistWord)    (THIS_
-                             IMEWRD *pwrd                //(in) word to check
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEWRD *pwrd                //(in) word to check
                              ) PURE;
      STDMETHOD(ExistDependency) (THIS_
+-                            IMEDP *pdp                  //(in) see if dependency pair exist in dictionary
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEDP *pdp                  //(in) see if dependency pair exist in dictionary
+                             ) PURE;
+     STDMETHOD(RegisterWord) (THIS_
+                             IMEREG reg,                 //(in) type of operation to perform on IMEWRD
+-                            IMEWRD *pwrd                //(in) word to be registered or deleted
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEWRD *pwrd                //(in) word to be registered or deleted
+                             ) PURE;
+     STDMETHOD(RegisterDependency) (THIS_
+                             IMEREG reg,                 //(in) type of operation to perform on IMEDP
+-                            IMEDP *pdp                  //(in) dependency to be registered or deleted
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IMEDP *pdp                  //(in) dependency to be registered or deleted
+                             ) PURE;
+     STDMETHOD(GetDependencies) (THIS_
+                             const WCHAR *pwchKakariReading,   //(in) reading for kakarigo
+@@ -786,14 +787,14 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
+                             ULONG ulUkePos,             //(in) part of speech for ukego
+                             IMEREL  jrel,               //(in) relation type
+                             ULONG ulWordSrc,            //(in) registration type
+-                            UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEDP
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEDP
+                             ULONG cbBuffer,             //(in) size of buffer in bytes
+-                            ULONG *pcdp                 //(out) count of IMEDP's returned
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcdp                 //(out) count of IMEDP's returned
+                             ) PURE;
+     STDMETHOD(NextDependencies) (THIS_
+-                            UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEDP
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UCHAR *pchBuffer,           //(in/out) buffer for storing array of IMEDP
+                             ULONG cbBuffer,             //(in) size of buffer in bytes
+-                            ULONG *pcDp                 //(out) count of IMEDP's retrieved
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcDp                 //(out) count of IMEDP's retrieved
+                             ) PURE;
+     STDMETHOD(ConvertFromOldMSIME) (THIS_
+                             const CHAR *pchDic,         //(in) old ime user dictionary path
 @@ -1018,7 +1019,7 @@ DECLARE_INTERFACE_(IFEDictionary, IUnknown)
  #define IMEKMS_TYPECAND             7    //Reserved
  
@@ -65,3 +200,22 @@ index 391a8813e9..b81dff3de8 100644
      INT         cbSize;         //[in] size of this structure
      LANGID      idLang;         //[in] Language ID
      DWORD       dwControl;      //[in] IME Functionality ID
+@@ -1124,15 +1125,15 @@ extern "C" {
+ 
+ // The following API replaces CoCreateInstance(), when CLSID is not used.
+ HRESULT WINAPI CreateIFECommonInstance(VOID **ppvObj);
+-typedef HRESULT (WINAPI *fpCreateIFECommonInstanceType)(VOID **ppvObj);
++typedef HRESULT (WINAPI *fpCreateIFECommonInstanceType)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID **ppvObj);
+ 
+ // The IFELanguage global export function
+ HRESULT WINAPI CreateIFELanguageInstance(REFCLSID clsid, VOID **ppvObj);
+-typedef HRESULT (WINAPI *fpCreateIFELanguageInstanceType)(REFCLSID clsid, VOID **ppvObj);
++typedef HRESULT (WINAPI *fpCreateIFELanguageInstanceType)(REFCLSID clsid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID **ppvObj);
+ 
+ // The following API replaces CoCreateInstance(), when CLSID is not used.
+ HRESULT WINAPI CreateIFEDictionaryInstance(VOID **ppvObj);
+-typedef HRESULT (WINAPI *fpCreateIFEDictionaryInstanceType)(VOID **ppvObj);
++typedef HRESULT (WINAPI *fpCreateIFEDictionaryInstanceType)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID **ppvObj);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
-index 84f72a0add..cf8bce2b3d 100644
+index 84f72a0add..7048998941 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 @@ -1,3 +1,4 @@
@@ -104,8 +104,10 @@ index 84f72a0add..cf8bce2b3d 100644
 -RPCNSAPI RPC_STATUS RPC_ENTRY
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingLookupNext(
-     IN  RPC_NS_HANDLE LookupContext,
-     OUT RPC_BINDING_VECTOR __RPC_FAR * __RPC_FAR * BindingVec
+-    IN  RPC_NS_HANDLE LookupContext,
+-    OUT RPC_BINDING_VECTOR __RPC_FAR * __RPC_FAR * BindingVec
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  RPC_NS_HANDLE LookupContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_VECTOR __RPC_FAR * __RPC_FAR * BindingVec
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
@@ -327,8 +329,10 @@ index 84f72a0add..cf8bce2b3d 100644
 -RPCNSAPI RPC_STATUS RPC_ENTRY
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsEntryObjectInqNext(
-     IN  RPC_NS_HANDLE InquiryContext,
-     OUT UUID __RPC_FAR * ObjUuid
+-    IN  RPC_NS_HANDLE InquiryContext,
+-    OUT UUID __RPC_FAR * ObjUuid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  RPC_NS_HANDLE InquiryContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT UUID __RPC_FAR * ObjUuid
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
@@ -381,14 +385,16 @@ index 84f72a0add..cf8bce2b3d 100644
 -RPCNSAPI RPC_STATUS RPC_ENTRY
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtHandleSetExpAge(
-     IN RPC_NS_HANDLE NsHandle,
+-    IN RPC_NS_HANDLE NsHandle,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_NS_HANDLE NsHandle,
      IN unsigned long ExpirationAge
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtInqExpAge(
-     OUT unsigned long __RPC_FAR * ExpirationAge
+-    OUT unsigned long __RPC_FAR * ExpirationAge
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long __RPC_FAR * ExpirationAge
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
@@ -453,15 +459,17 @@ index 84f72a0add..cf8bce2b3d 100644
  RpcNsBindingImportBeginW(
      _In_ unsigned long EntryNameSyntax,
      _In_opt_ RPC_WSTR EntryName,
-@@ -489,18 +490,18 @@ RpcNsBindingImportBeginW(
+@@ -489,21 +490,21 @@ RpcNsBindingImportBeginW(
  
  #endif
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingImportNext(
-     IN RPC_NS_HANDLE ImportContext,
-     OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
+-    IN RPC_NS_HANDLE ImportContext,
+-    OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
++    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_NS_HANDLE ImportContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
@@ -474,7 +482,11 @@ index 84f72a0add..cf8bce2b3d 100644
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsBindingSelect(
      IN OUT RPC_BINDING_VECTOR __RPC_FAR * BindingVec,
-     OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
+-    OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
+     );
+ 
+ #ifdef UNICODE
 @@ -560,4 +561,19 @@ RpcNsBindingSelect(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

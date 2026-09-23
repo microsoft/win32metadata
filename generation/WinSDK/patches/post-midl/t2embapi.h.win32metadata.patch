@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h
-index d32deebe8e..d3c65e893f 100644
+index d32deebe8e..fd1c35b2c3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/t2embapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,17 @@ index d32deebe8e..d3c65e893f 100644
  /*************************************************************************
  *                                                                        *
  * t2embapi.h -- OpenType embedding services dll (T2EMBED.DLL)            *
+@@ -136,8 +137,8 @@ extern "C" {
+ // 1st argument - Stream identifier (file handle or other) (dwStream) */
+ // 2nd argument - Address of buffer with data to read or write */
+ // 3rd argument - Number of bytes to read or write */
+-typedef unsigned long( WINAPIV *READEMBEDPROC ) ( void*, void*, const unsigned long );
+-typedef unsigned long( WINAPIV *WRITEEMBEDPROC ) ( void*, const void*, const unsigned long );
++typedef unsigned long( WINAPIV *READEMBEDPROC ) ( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void*, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void*, const unsigned long );
++typedef unsigned long( WINAPIV *WRITEEMBEDPROC ) ( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void*, const void*, const unsigned long );
+ 
+ typedef struct
+ {
 @@ -178,12 +179,12 @@ typedef struct
  
  /* Font Embedding APIs ----------------------------------------------------*/

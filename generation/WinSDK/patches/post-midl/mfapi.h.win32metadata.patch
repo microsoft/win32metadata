@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h
-index 8683cd3b5b..3514ab77c5 100644
+index 8683cd3b5b..16b0df5981 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfapi.h
 @@ -1,3 +1,4 @@
@@ -926,7 +926,7 @@ index 8683cd3b5b..3514ab77c5 100644
                              int line,
                              EAllocationType eat);
 -EXTERN_C void WINAPI MFHeapFree( void * pv );
-+_Windows_SupportedOS_WindowsVista_ EXTERN_C void WINAPI MFHeapFree( void * pv );
++_Windows_SupportedOS_WindowsVista_ EXTERN_C void WINAPI MFHeapFree( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pv );
  
  //////////////////////////       SourceResolver     ////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////

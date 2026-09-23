@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
-index 56a8a639db..a5819fe77d 100644
+index 56a8a639db..87d71e35e5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 @@ -1,3 +1,4 @@
@@ -1183,6 +1183,15 @@ index 56a8a639db..a5819fe77d 100644
  JetGetInstanceInfoW(
      _Out_ JET_UINT32 *                                                pcInstanceInfo,
      _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **  paInstanceInfo );
+@@ -7421,7 +7422,7 @@ JetGetInstanceInfoW(
+ 
+ JET_ERR JET_API
+ JetFreeBuffer(
+-    _Pre_notnull_ JET_CHAR *  pbBuf );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_notnull_ JET_CHAR *  pbBuf );
+ 
+ JET_ERR JET_API
+ JetSetLS(
 @@ -7463,7 +7464,7 @@ JetOSSnapshotPrepareInstance(
  #define JetOSSnapshotFreezeA JetOSSnapshotFreeze
  #endif

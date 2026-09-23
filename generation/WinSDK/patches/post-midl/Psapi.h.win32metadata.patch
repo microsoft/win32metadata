@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
-index d68f64596a..ca75c084a9 100644
+index d68f64596a..3219a6d80f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -440,7 +440,7 @@ index d68f64596a..ca75c084a9 100644
      DWORD cb;
      SIZE_T CommitTotal;
      SIZE_T CommitLimit;
-@@ -548,6 +750,14 @@ typedef struct _PERFORMANCE_INFORMATION {
+@@ -548,10 +750,18 @@ typedef struct _PERFORMANCE_INFORMATION {
      DWORD ThreadCount;
  } PERFORMANCE_INFORMATION, *PPERFORMANCE_INFORMATION, PERFORMACE_INFORMATION, *PPERFORMACE_INFORMATION;
  
@@ -455,6 +455,11 @@ index d68f64596a..ca75c084a9 100644
  BOOL
  WINAPI
  GetPerformanceInfo (
+-    PPERFORMANCE_INFORMATION pPerformanceInformation,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPERFORMANCE_INFORMATION pPerformanceInformation,
+     DWORD cb
+     );
+ 
 @@ -561,7 +771,7 @@ GetPerformanceInfo (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -471,12 +476,12 @@ index d68f64596a..ca75c084a9 100644
 -typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKW) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCWSTR lpFilename);
 +_Windows_SupportedOS_WindowsXP_
 +_Windows_SupportedOS_Server2003_
-+typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKW) (_In_ LPVOID pContext, _In_ PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCWSTR lpFilename);
++typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKW) (_WIN32META_ANNOTATION_("win32metadata:out") _In_ LPVOID pContext, _WIN32META_ANNOTATION_("win32metadata:out") _In_ PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCWSTR lpFilename);
  
 -typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
 +_Windows_SupportedOS_WindowsXP_
 +_Windows_SupportedOS_Server2003_
-+typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (_In_ LPVOID pContext, _In_ PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
++typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (_WIN32META_ANNOTATION_("win32metadata:out") _In_ LPVOID pContext, _WIN32META_ANNOTATION_("win32metadata:out") _In_ PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
 +
 +#if (PSAPI_VERSION <= 1)
 +_Windows_SupportedOS_WindowsXP_
@@ -491,7 +496,7 @@ index d68f64596a..ca75c084a9 100644
  EnumPageFilesW (
      PENUM_PAGE_FILE_CALLBACKW pCallBackRoutine,
 -    LPVOID pContext
-+    _In_ LPVOID pContext
++    _WIN32META_ANNOTATION_("win32metadata:out") _In_ LPVOID pContext
      );
  
 +#if (PSAPI_VERSION <= 1)
@@ -507,7 +512,7 @@ index d68f64596a..ca75c084a9 100644
  EnumPageFilesA (
      PENUM_PAGE_FILE_CALLBACKA pCallBackRoutine,
 -    LPVOID pContext
-+    _In_ LPVOID pContext
++    _WIN32META_ANNOTATION_("win32metadata:out") _In_ LPVOID pContext
      );
  
  #ifdef UNICODE

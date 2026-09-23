@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
-index 13d6163d39..9265c7c7b7 100644
+index 13d6163d39..431e874067 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
 @@ -15,6 +15,7 @@ Abstract:
@@ -63,7 +63,12 @@ index 13d6163d39..9265c7c7b7 100644
  BOOL
  WINAPI
  EvtNext(
-@@ -245,7 +252,7 @@ EvtNext(
+@@ -241,11 +248,11 @@ EvtNext(
+     _Out_writes_to_(EventsSize, *Returned) PEVT_HANDLE Events,
+     DWORD Timeout,
+     DWORD Flags,
+-    _Out_range_(0, EventsSize) PDWORD Returned
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, EventsSize) PDWORD Returned
      );
  
  // Timeout must currently be 0
@@ -72,8 +77,12 @@ index 13d6163d39..9265c7c7b7 100644
  WINAPI
  EvtSeek(
      _In_ EVT_HANDLE ResultSet,
-@@ -286,7 +293,7 @@ typedef DWORD (WINAPI *EVT_SUBSCRIBE_CALLBACK)(
-     _Maybenull_ PVOID UserContext,
+@@ -283,10 +290,10 @@ typedef enum _EVT_SUBSCRIBE_NOTIFY_ACTION
+ 
+ typedef DWORD (WINAPI *EVT_SUBSCRIBE_CALLBACK)(
+     EVT_SUBSCRIBE_NOTIFY_ACTION Action,
+-    _Maybenull_ PVOID UserContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:optional") _Maybenull_ PVOID UserContext,
      _In_ EVT_HANDLE Event );
  
 -EVT_HANDLE
@@ -81,6 +90,17 @@ index 13d6163d39..9265c7c7b7 100644
  WINAPI
  EvtSubscribe(
      _In_opt_ EVT_HANDLE Session,
+@@ -294,8 +301,8 @@ EvtSubscribe(
+     _In_opt_z_ LPCWSTR ChannelPath,
+     _In_opt_z_ LPCWSTR Query,
+     _In_opt_ EVT_HANDLE Bookmark,
+-    _Maybenull_ PVOID Context,
+-    _Maybenull_ EVT_SUBSCRIBE_CALLBACK Callback,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:optional") _Maybenull_ PVOID Context,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:optional") _Maybenull_ EVT_SUBSCRIBE_CALLBACK Callback,
+     DWORD Flags
+     );
+ 
 @@ -345,7 +352,7 @@ typedef enum _EVT_RENDER_FLAGS
  
   } EVT_RENDER_FLAGS;

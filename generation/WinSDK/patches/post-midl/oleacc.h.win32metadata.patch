@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
-index f384c5147e..38a2af0050 100644
+index f384c5147e..16675bc54d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
 @@ -148,6 +148,7 @@ extern "C"{
@@ -10,6 +10,23 @@ index f384c5147e..38a2af0050 100644
  //=--------------------------------------------------------------------------=
  // OLEACC.H
  //=--------------------------------------------------------------------------=
+@@ -166,11 +167,11 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ typedef LRESULT (STDAPICALLTYPE *LPFNLRESULTFROMOBJECT)(REFIID riid, WPARAM wParam, LPUNKNOWN punk);
+-typedef HRESULT (STDAPICALLTYPE *LPFNOBJECTFROMLRESULT)(LRESULT lResult, REFIID riid, WPARAM wParam, void** ppvObject);
+-typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMWINDOW)(HWND hwnd, DWORD dwId, REFIID riid, void** ppvObject);
+-typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMPOINT)(POINT ptScreen, IAccessible** ppacc, VARIANT* pvarChild);
+-typedef HRESULT (STDAPICALLTYPE *LPFNCREATESTDACCESSIBLEOBJECT)(HWND hwnd, LONG idObject, REFIID riid, void** ppvObject);
+-typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLECHILDREN)(IAccessible* paccContainer, LONG iChildStart,LONG cChildren,VARIANT* rgvarChildren,LONG* pcObtained);
++typedef HRESULT (STDAPICALLTYPE *LPFNOBJECTFROMLRESULT)(LRESULT lResult, REFIID riid, WPARAM wParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject);
++typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMWINDOW)(HWND hwnd, DWORD dwId, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject);
++typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMPOINT)(POINT ptScreen, IAccessible** ppacc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT* pvarChild);
++typedef HRESULT (STDAPICALLTYPE *LPFNCREATESTDACCESSIBLEOBJECT)(HWND hwnd, LONG idObject, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject);
++typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLECHILDREN)(IAccessible* paccContainer, LONG iChildStart,LONG cChildren,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT* rgvarChildren,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG* pcObtained);
+ 
+ //=--------------------------------------------------------------------------=
+ // GUIDs
 @@ -191,16 +192,16 @@ DEFINE_GUID(IIS_ControlAccessible,   0x38c682a6, 0x9731, 0x43f2, 0x9f, 0xae, 0xe
  // MSAA API Prototypes
  //=--------------------------------------------------------------------------=

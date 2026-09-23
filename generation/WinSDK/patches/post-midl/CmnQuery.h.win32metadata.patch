@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
-index 6693116ef1..38eb040cbf 100644
+index 6693116ef1..aca28e3008 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
 @@ -2,6 +2,7 @@
@@ -19,9 +19,23 @@ index 6693116ef1..38eb040cbf 100644
  {
      DWORD   cbStruct;
      DWORD   dwFlags;
-@@ -84,7 +85,7 @@ typedef struct _cqpage CQPAGE, * LPCQPAGE;
- typedef HRESULT (CALLBACK *LPCQADDPAGESPROC)(LPARAM lParam, REFCLSID clsidForm, LPCQPAGE pPage);
- typedef HRESULT (CALLBACK *LPCQPAGEPROC)(LPCQPAGE pPage, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+@@ -68,7 +69,7 @@ typedef struct
+     LPCWSTR pszTitle;
+ } CQFORM, * LPCQFORM;
+ 
+-typedef HRESULT (CALLBACK *LPCQADDFORMSPROC)(LPARAM lParam, LPCQFORM pForm);
++typedef HRESULT (CALLBACK *LPCQADDFORMSPROC)(LPARAM lParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCQFORM pForm);
+ 
+ 
+ //
+@@ -81,10 +82,10 @@ typedef HRESULT (CALLBACK *LPCQADDFORMSPROC)(LPARAM lParam, LPCQFORM pForm);
+ 
+ struct _cqpage;
+ typedef struct _cqpage CQPAGE, * LPCQPAGE;
+-typedef HRESULT (CALLBACK *LPCQADDPAGESPROC)(LPARAM lParam, REFCLSID clsidForm, LPCQPAGE pPage);
+-typedef HRESULT (CALLBACK *LPCQPAGEPROC)(LPCQPAGE pPage, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
++typedef HRESULT (CALLBACK *LPCQADDPAGESPROC)(LPARAM lParam, REFCLSID clsidForm, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCQPAGE pPage);
++typedef HRESULT (CALLBACK *LPCQPAGEPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCQPAGE pPage, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
  
 -struct _cqpage
 +struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _cqpage
@@ -56,15 +70,18 @@ index 6693116ef1..38eb040cbf 100644
 +    
 +    
      STDMETHOD(WriteInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, INT value) PURE;
+-    STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPINT pValue) PURE;
+-    STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
+-    STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
 +    
 +    
-     STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPINT pValue) PURE;
++    STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPINT pValue) PURE;
 +    
 +    
-     STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
++    STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pStruct, DWORD cbStruct) PURE;
 +    
 +    
-     STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
++    STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pStruct, DWORD cbStruct) PURE;
 +    
 +    
      STDMETHOD(Clear)(THIS) PURE;
@@ -79,12 +96,14 @@ index 6693116ef1..38eb040cbf 100644
  {
      DWORD           cbStruct;                   // structure size
      DWORD           dwFlags;                    // flags (OQFW_*)
-@@ -210,6 +231,8 @@ DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c1
+@@ -210,7 +231,9 @@ DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c1
      STDMETHOD_(ULONG, Release)(THIS) PURE;
  
      // ICommonQuery methods
+-    STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
 +    
 +    
-     STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
++    STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
  };
+ 
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
-index 098cbbaad2..3cd933d5e9 100644
+index 098cbbaad2..a80c733fe1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
 @@ -14,6 +14,7 @@
@@ -10,6 +10,15 @@ index 098cbbaad2..3cd933d5e9 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -35,7 +36,7 @@ typedef struct _WSD_EVENT WSD_EVENT;
+ typedef HRESULT (*WSD_STUB_FUNCTION) (   
+     IUnknown* server,
+     struct IWSDServiceMessaging* session,
+-    WSD_EVENT* event
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSD_EVENT* event
+ );
+ 
+ typedef enum _DeviceDiscoveryMechanism
 @@ -45,7 +46,7 @@ typedef enum _DeviceDiscoveryMechanism
      SecureDirectedDiscovery
  } DeviceDiscoveryMechanism;
@@ -28,7 +37,13 @@ index 098cbbaad2..3cd933d5e9 100644
  {
      WSDXML_TYPE* RequestType;
      WSDXML_TYPE* ResponseType;
-@@ -72,7 +73,7 @@ HRESULT (*PWSD_SOAP_MESSAGE_HANDLER)(
+@@ -67,12 +68,12 @@ typedef struct _WSD_OPERATION
+ typedef 
+ HRESULT (*PWSD_SOAP_MESSAGE_HANDLER)(
+     IUnknown* thisUnknown,
+-    WSD_EVENT* event);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSD_EVENT* event);
+ 
  //
  // Context for handling incoming messages.
  //

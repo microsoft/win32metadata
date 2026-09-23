@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
-index 0ad95321b8..bd749300c2 100644
+index 0ad95321b8..515ca98274 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,18 @@ index 0ad95321b8..bd749300c2 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -526,9 +527,9 @@ class CIE4ConnectionPoint : public IConnectionPoint
+ {
+     // This is how you actually fire the events
+     // Those called by shell32 are virtual
+-    virtual HRESULT DoInvokeIE4(BOOL *pf, void **ppv, DISPID dispid, DISPPARAMS *pdispparams) PURE;
++    virtual HRESULT DoInvokeIE4(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pf, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **ppv, DISPID dispid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DISPPARAMS *pdispparams) PURE;
+     // This helper function does work that callers of DoInvoke often need done
+-    virtual HRESULT DoInvokePIDLIE4(DISPID dispid, PCIDLIST_ABSOLUTE pidl, BOOL fCanCancel) PURE;
++    virtual HRESULT DoInvokePIDLIE4(DISPID dispid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCIDLIST_ABSOLUTE pidl, BOOL fCanCancel) PURE;
+ };
+ #else // !__cplusplus
+ typedef void *CIE4ConnectionPoint;
 @@ -550,7 +551,7 @@ EXTERN_C const IID IID_IExpDispSupportXP;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -39,6 +51,42 @@ index 0ad95321b8..bd749300c2 100644
      IBrowserService2 : public IBrowserService
      {
      public:
+@@ -1811,7 +1812,7 @@ EXTERN_C const IID IID_IBrowserService2;
+             _In_  LPARAM lParam) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFolderSetData( 
+-            /* [out] */ struct tagFolderSetData *pfsd) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") struct tagFolderSetData *pfsd) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE _OnFocusChange( 
+             /* [annotation][in] */ 
+@@ -1832,7 +1833,7 @@ EXTERN_C const IID IID_IBrowserService2;
+             _In_  UINT uState) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE _GetViewBorderRect( 
+-            /* [out] */ RECT *prc) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RECT *prc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE _UpdateViewRectSize( void) = 0;
+         
+@@ -1849,7 +1850,7 @@ EXTERN_C const IID IID_IBrowserService2;
+             _In_  HMONITOR hmon) = 0;
+         
+         virtual IStream *STDMETHODCALLTYPE v_GetViewStream( 
+-            /* [in] */ PCIDLIST_ABSOLUTE pidl,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCIDLIST_ABSOLUTE pidl,
+             /* [annotation][in] */ 
+             _In_  DWORD grfMode,
+             /* [annotation][in] */ 
+@@ -1912,7 +1913,7 @@ EXTERN_C const IID IID_IBrowserService2;
+             _In_  LPMSG lpMsg) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE v_MayTranslateAccelerator( 
+-            /* [in] */ MSG *pmsg) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") MSG *pmsg) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE _GetBorderDWHelper( 
+             /* [annotation][in] */ 
 @@ -2880,7 +2881,7 @@ EXTERN_C const IID IID_IBrowserService3;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -66,3 +114,14 @@ index 0ad95321b8..bd749300c2 100644
      ITrackShellMenu : public IShellMenu
      {
      public:
+@@ -4914,8 +4915,8 @@ EXTERN_C const IID IID_ITrackShellMenu;
+         
+         virtual HRESULT STDMETHODCALLTYPE Popup( 
+             /* [in] */ HWND hwnd,
+-            /* [in] */ POINTL *ppt,
+-            /* [in] */ RECTL *prcExclude,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") POINTL *ppt,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") RECTL *prcExclude,
+             MP_POPUPFLAGS dwFlags) = 0;
+         
+     };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBio.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBio.h
-index 52e983ddff..4d38a6362a 100644
+index 52e983ddff..63977104a9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBio.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBio.h
 @@ -1,3 +1,4 @@
@@ -314,7 +314,12 @@ index 52e983ddff..4d38a6362a 100644
  WinBioControlUnit(
      _In_ WINBIO_SESSION_HANDLE SessionHandle,
      _In_ WINBIO_UNIT_ID UnitId,
-@@ -654,7 +655,7 @@ WinBioControlUnit(
+@@ -650,11 +651,11 @@ WinBioControlUnit(
+     _In_ SIZE_T SendBufferSize,
+     _Out_writes_bytes_to_(ReceiveBufferSize,*ReceiveDataSize) PUCHAR ReceiveBuffer,
+     _In_ SIZE_T ReceiveBufferSize,
+-    _Out_range_(<=,ReceiveBufferSize) SIZE_T *ReceiveDataSize,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(<=,ReceiveBufferSize) SIZE_T *ReceiveDataSize,
      _Out_opt_ ULONG *OperationStatus
      );
  
@@ -323,6 +328,15 @@ index 52e983ddff..4d38a6362a 100644
  WinBioControlUnitPrivileged(
      _In_ WINBIO_SESSION_HANDLE SessionHandle,
      _In_ WINBIO_UNIT_ID UnitId,
+@@ -664,7 +665,7 @@ WinBioControlUnitPrivileged(
+     _In_ SIZE_T SendBufferSize,
+     _Out_writes_bytes_to_(ReceiveBufferSize,*ReceiveDataSize) PUCHAR ReceiveBuffer,
+     _In_ SIZE_T ReceiveBufferSize,
+-    _Out_range_(<=,ReceiveBufferSize) SIZE_T *ReceiveDataSize,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(<=,ReceiveBufferSize) SIZE_T *ReceiveDataSize,
+     _Out_opt_ ULONG *OperationStatus
+     );
+ 
 @@ -674,7 +675,7 @@ WinBioControlUnitPrivileged(
  // Get/set property operations
  //

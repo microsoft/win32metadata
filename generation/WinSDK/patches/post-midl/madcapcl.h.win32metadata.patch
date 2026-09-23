@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
-index 381c04598d..2bf8b712c4 100644
+index 381c04598d..c5c4423357 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 @@ -7,6 +7,7 @@ extern "C" {
@@ -55,7 +55,7 @@ index 381c04598d..2bf8b712c4 100644
      LONG        LeaseStartTime;
      LONG        LeaseEndTime;
      IPNG_ADDRESS  ServerAddress;
-@@ -205,27 +206,27 @@ Members:
+@@ -205,59 +206,59 @@ Members:
  
  --*/
  
@@ -91,8 +91,9 @@ index 381c04598d..2bf8b712c4 100644
      IN     IP_ADDR_FAMILY       AddrFamily,
      IN     BOOL                 ReQuery,
      IN OUT PMCAST_SCOPE_ENTRY   pScopeList,
-@@ -233,9 +234,9 @@ McastEnumerateScopes(
-     OUT    PDWORD               pScopeCount
+     IN OUT PDWORD               pScopeLen,
+-    OUT    PDWORD               pScopeCount
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT    PDWORD               pScopeCount
      );
  
 -DWORD
@@ -101,9 +102,12 @@ index 381c04598d..2bf8b712c4 100644
 -McastRequestAddress(
 +  McastRequestAddress(
      IN     IP_ADDR_FAMILY           AddrFamily,
-     IN     LPMCAST_CLIENT_UID       pRequestID,
-     IN     PMCAST_SCOPE_CTX         pScopeCtx,
-@@ -243,18 +244,18 @@ McastRequestAddress(
+-    IN     LPMCAST_CLIENT_UID       pRequestID,
+-    IN     PMCAST_SCOPE_CTX         pScopeCtx,
+-    IN     PMCAST_LEASE_REQUEST     pAddrRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPMCAST_CLIENT_UID       pRequestID,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_SCOPE_CTX         pScopeCtx,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_LEASE_REQUEST     pAddrRequest,
      IN OUT PMCAST_LEASE_RESPONSE    pAddrResponse
      );
  
@@ -113,8 +117,10 @@ index 381c04598d..2bf8b712c4 100644
 -McastRenewAddress(
 +  McastRenewAddress(
      IN     IP_ADDR_FAMILY           AddrFamily,
-     IN     LPMCAST_CLIENT_UID       pRequestID,
-     IN     PMCAST_LEASE_REQUEST     pRenewRequest,
+-    IN     LPMCAST_CLIENT_UID       pRequestID,
+-    IN     PMCAST_LEASE_REQUEST     pRenewRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPMCAST_CLIENT_UID       pRequestID,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_LEASE_REQUEST     pRenewRequest,
      IN OUT PMCAST_LEASE_RESPONSE    pRenewResponse
      );
  
@@ -124,5 +130,10 @@ index 381c04598d..2bf8b712c4 100644
 -McastReleaseAddress(
 +  McastReleaseAddress(
      IN     IP_ADDR_FAMILY          AddrFamily,
-     IN     LPMCAST_CLIENT_UID      pRequestID,
-     IN     PMCAST_LEASE_REQUEST    pReleaseRequest
+-    IN     LPMCAST_CLIENT_UID      pRequestID,
+-    IN     PMCAST_LEASE_REQUEST    pReleaseRequest
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPMCAST_CLIENT_UID      pRequestID,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_LEASE_REQUEST    pReleaseRequest
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

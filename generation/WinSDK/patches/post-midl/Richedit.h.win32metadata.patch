@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
-index 5bebec4417..30435bb6a7 100644
+index 5bebec4417..e3a48ef1d1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 @@ -11,6 +11,7 @@
@@ -22,6 +22,15 @@ index 5bebec4417..30435bb6a7 100644
  						//	Currently only support ICT_RESULTREADSTR
  } IMECOMPTEXT;
  #define ICT_RESULTREADSTR		1
+@@ -458,7 +459,7 @@ typedef struct _tableCellParms
+ #define EM_CALLAUTOCORRECTPROC	(WM_USER + 255)
+ 
+ // AutoCorrect callback
+-typedef int (WINAPI *AutoCorrectProc)(LANGID langid, const WCHAR *pszBefore, WCHAR *pszAfter, LONG cchAfter, LONG *pcchReplaced);
++typedef int (WINAPI *AutoCorrectProc)(LANGID langid, const WCHAR *pszBefore, _WIN32META_ANNOTATION_("win32metadata:in") WCHAR *pszAfter, LONG cchAfter, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pcchReplaced);
+ 
+ #define ATP_NOCHANGE			0
+ #define ATP_CHANGE				1
 @@ -548,7 +549,7 @@ typedef struct tagRICHEDIT_IMAGE_PARAMETERS
  typedef struct _endcomposition
  {
@@ -31,7 +40,12 @@ index 5bebec4417..30435bb6a7 100644
  } ENDCOMPOSITIONNOTIFY;
  
  // Constants for ENDCOMPOSITIONNOTIFY dwCode
-@@ -671,28 +672,28 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
+@@ -667,32 +668,32 @@ typedef struct _endcomposition
+ 
+ #ifdef _WIN32
+ // Extended edit word break proc (character set aware) 
+-typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet, INT action);
++typedef LONG (*EDITWORDBREAKPROCEX)(_WIN32META_ANNOTATION_("win32metadata:in") char *pchText, LONG cchText, BYTE bCharSet, INT action);
  #endif
  
  // All character format measurements are in twips 
@@ -68,6 +82,15 @@ index 5bebec4417..30435bb6a7 100644
  	BYTE		bPitchAndFamily;
  	WCHAR		szFaceName[LF_FACESIZE];
  } CHARFORMATW;
+@@ -1023,7 +1024,7 @@ typedef struct _textrangew
+ #define TEXTRANGE	TEXTRANGEA
+ #endif // _RICHEDIT_VER >= 0x0200 
+ 
+-typedef DWORD (CALLBACK *EDITSTREAMCALLBACK)(DWORD_PTR dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb);
++typedef DWORD (CALLBACK *EDITSTREAMCALLBACK)(DWORD_PTR dwCookie, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE pbBuff, LONG cb, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pcb);
+ 
+ typedef struct _editstream
+ {
 @@ -1130,11 +1131,11 @@ typedef struct _formatrange
  #define lDefaultTab 720
  #define MAX_TABLE_CELLS 63

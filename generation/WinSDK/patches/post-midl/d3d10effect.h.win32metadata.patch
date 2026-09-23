@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h
-index 3f8a2fd8c5..6519b5163f 100644
+index 3f8a2fd8c5..1bc65dc83b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10effect.h
 @@ -1,3 +1,4 @@
@@ -50,6 +50,109 @@ index 3f8a2fd8c5..6519b5163f 100644
      
      UINT    Elements;               // Number of elements in this type
                                      // (0 if not an array) 
+@@ -306,7 +307,7 @@ DEFINE_GUID(IID_ID3D10EffectType,
+ DECLARE_INTERFACE(ID3D10EffectType)
+ {
+     STDMETHOD_(BOOL, IsValid)(THIS) PURE;
+-    STDMETHOD(GetDesc)(THIS_ D3D10_EFFECT_TYPE_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_EFFECT_TYPE_DESC *pDesc) PURE;
+     STDMETHOD_(ID3D10EffectType*, GetMemberTypeByIndex)(THIS_ UINT Index) PURE;
+     STDMETHOD_(ID3D10EffectType*, GetMemberTypeByName)(THIS_ LPCSTR Name) PURE;
+     STDMETHOD_(ID3D10EffectType*, GetMemberTypeBySemantic)(THIS_ LPCSTR Semantic) PURE;
+@@ -520,21 +521,21 @@ DECLARE_INTERFACE_(ID3D10EffectVectorVariable, ID3D10EffectVariable)
+     STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) void *pData, UINT ByteOffset, UINT ByteCount) PURE;
+     STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, UINT ByteOffset, UINT ByteCount) PURE;
+     
+-    STDMETHOD(SetBoolVector) (THIS_ BOOL *pData) PURE;
+-    STDMETHOD(SetIntVector)  (THIS_ int *pData) PURE;
+-    STDMETHOD(SetFloatVector)(THIS_ float *pData) PURE;
++    STDMETHOD(SetBoolVector) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pData) PURE;
++    STDMETHOD(SetIntVector)  (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *pData) PURE;
++    STDMETHOD(SetFloatVector)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData) PURE;
+ 
+-    STDMETHOD(GetBoolVector) (THIS_ BOOL *pData) PURE;
+-    STDMETHOD(GetIntVector)  (THIS_ int *pData) PURE;
+-    STDMETHOD(GetFloatVector)(THIS_ float *pData) PURE;
++    STDMETHOD(GetBoolVector) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pData) PURE;
++    STDMETHOD(GetIntVector)  (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *pData) PURE;
++    STDMETHOD(GetFloatVector)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData) PURE;
+ 
+-    STDMETHOD(SetBoolVectorArray) (THIS_ BOOL *pData, UINT Offset, UINT Count) PURE;
+-    STDMETHOD(SetIntVectorArray)  (THIS_ int *pData, UINT Offset, UINT Count) PURE;
+-    STDMETHOD(SetFloatVectorArray)(THIS_ float *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(SetBoolVectorArray) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(SetIntVectorArray)  (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(SetFloatVectorArray)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData, UINT Offset, UINT Count) PURE;
+ 
+-    STDMETHOD(GetBoolVectorArray) (THIS_ BOOL *pData, UINT Offset, UINT Count) PURE;
+-    STDMETHOD(GetIntVectorArray)  (THIS_ int *pData, UINT Offset, UINT Count) PURE;
+-    STDMETHOD(GetFloatVectorArray)(THIS_ float *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(GetBoolVectorArray) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(GetIntVectorArray)  (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(GetFloatVectorArray)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData, UINT Offset, UINT Count) PURE;
+ };
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -585,17 +586,17 @@ DECLARE_INTERFACE_(ID3D10EffectMatrixVariable, ID3D10EffectVariable)
+     STDMETHOD(SetRawValue)(THIS_ _In_reads_bytes_(ByteCount) void *pData, UINT ByteOffset, UINT ByteCount) PURE;
+     STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, UINT ByteOffset, UINT ByteCount) PURE;
+     
+-    STDMETHOD(SetMatrix)(THIS_ float *pData) PURE;
+-    STDMETHOD(GetMatrix)(THIS_ float *pData) PURE;
++    STDMETHOD(SetMatrix)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData) PURE;
++    STDMETHOD(GetMatrix)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData) PURE;
+     
+-    STDMETHOD(SetMatrixArray)(THIS_ float *pData, UINT Offset, UINT Count) PURE;
+-    STDMETHOD(GetMatrixArray)(THIS_ float *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(SetMatrixArray)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(GetMatrixArray)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData, UINT Offset, UINT Count) PURE;
+     
+-    STDMETHOD(SetMatrixTranspose)(THIS_ float *pData) PURE;
+-    STDMETHOD(GetMatrixTranspose)(THIS_ float *pData) PURE;
++    STDMETHOD(SetMatrixTranspose)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData) PURE;
++    STDMETHOD(GetMatrixTranspose)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData) PURE;
+     
+-    STDMETHOD(SetMatrixTransposeArray)(THIS_ float *pData, UINT Offset, UINT Count) PURE;
+-    STDMETHOD(GetMatrixTransposeArray)(THIS_ float *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(SetMatrixTransposeArray)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData, UINT Offset, UINT Count) PURE;
++    STDMETHOD(GetMatrixTransposeArray)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float *pData, UINT Offset, UINT Count) PURE;
+ };
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -1001,7 +1002,7 @@ DECLARE_INTERFACE_(ID3D10EffectBlendVariable, ID3D10EffectVariable)
+     STDMETHOD(GetRawValue)(THIS_ _Out_writes_bytes_(ByteCount) void *pData, UINT Offset, UINT ByteCount) PURE;
+     
+     STDMETHOD(GetBlendState)(THIS_ UINT Index, ID3D10BlendState **ppBlendState) PURE;
+-    STDMETHOD(GetBackingStore)(THIS_ UINT Index, D3D10_BLEND_DESC *pBlendDesc) PURE;
++    STDMETHOD(GetBackingStore)(THIS_ UINT Index, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_BLEND_DESC *pBlendDesc) PURE;
+ };
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -1217,11 +1218,11 @@ DEFINE_GUID(IID_ID3D10EffectPass,
+ DECLARE_INTERFACE(ID3D10EffectPass)
+ {
+     STDMETHOD_(BOOL, IsValid)(THIS) PURE;
+-    STDMETHOD(GetDesc)(THIS_ D3D10_PASS_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_PASS_DESC *pDesc) PURE;
+     
+-    STDMETHOD(GetVertexShaderDesc)(THIS_ D3D10_PASS_SHADER_DESC *pDesc) PURE;
+-    STDMETHOD(GetGeometryShaderDesc)(THIS_ D3D10_PASS_SHADER_DESC *pDesc) PURE;
+-    STDMETHOD(GetPixelShaderDesc)(THIS_ D3D10_PASS_SHADER_DESC *pDesc) PURE;
++    STDMETHOD(GetVertexShaderDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_PASS_SHADER_DESC *pDesc) PURE;
++    STDMETHOD(GetGeometryShaderDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_PASS_SHADER_DESC *pDesc) PURE;
++    STDMETHOD(GetPixelShaderDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_PASS_SHADER_DESC *pDesc) PURE;
+     
+     STDMETHOD_(ID3D10EffectVariable*, GetAnnotationByIndex)(THIS_ UINT Index) PURE;
+     STDMETHOD_(ID3D10EffectVariable*, GetAnnotationByName)(THIS_ LPCSTR Name) PURE;
+@@ -1261,7 +1262,7 @@ DEFINE_GUID(IID_ID3D10EffectTechnique,
+ DECLARE_INTERFACE(ID3D10EffectTechnique)
+ {
+     STDMETHOD_(BOOL, IsValid)(THIS) PURE;
+-    STDMETHOD(GetDesc)(THIS_ D3D10_TECHNIQUE_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_TECHNIQUE_DESC *pDesc) PURE;
+     
+     STDMETHOD_(ID3D10EffectVariable*, GetAnnotationByIndex)(THIS_ UINT Index) PURE;
+     STDMETHOD_(ID3D10EffectVariable*, GetAnnotationByName)(THIS_ LPCSTR Name) PURE;
 @@ -1424,14 +1425,14 @@ extern "C" {
  //
  //----------------------------------------------------------------------------

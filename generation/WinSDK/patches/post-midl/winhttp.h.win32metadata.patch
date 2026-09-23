@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
-index ddcdcb381a..1bbc0c93d3 100644
+index ddcdcb381a..f8e7ceb4fa 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -86,7 +86,16 @@ index ddcdcb381a..1bbc0c93d3 100644
      LPSTR lpszHostName;
      DWORD dwPort;
      LPSTR lpszUrl;
-@@ -1584,7 +1585,7 @@ typedef struct _WINHTTP_CURRENT_USER_IE_PROXY_CONFIG
+@@ -1027,7 +1028,7 @@ typedef struct tagWINHTTP_CREDS_EX
+ typedef
+ VOID
+ (CALLBACK * WINHTTP_STATUS_CALLBACK)(
+-    IN HINTERNET hInternet,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hInternet,
+     IN DWORD_PTR dwContext,
+     IN DWORD dwInternetStatus,
+     IN LPVOID lpvStatusInformation OPTIONAL,
+@@ -1584,39 +1585,39 @@ typedef struct _WINHTTP_CURRENT_USER_IE_PROXY_CONFIG
  // prototypes
  //
  
@@ -95,7 +104,11 @@ index ddcdcb381a..1bbc0c93d3 100644
  WINHTTP_STATUS_CALLBACK
  WINAPI
  WinHttpSetStatusCallback
-@@ -1595,28 +1596,28 @@ WinHttpSetStatusCallback
+ (
+-    IN HINTERNET hInternet,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hInternet,
+     IN WINHTTP_STATUS_CALLBACK lpfnInternetCallback,
+     IN DWORD dwNotificationFlags,
      IN DWORD_PTR dwReserved
  );
  
@@ -158,11 +171,11 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
 -WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
 +_Windows_SupportedOS_WindowsXP_ WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
-+_Windows_SupportedOS_WindowsXP_ WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
++_Windows_SupportedOS_WindowsXP_ WINHTTPAPI BOOL WINAPI _Win32_SetLastError_ WinHttpSetDefaultProxyConfiguration( _WIN32META_ANNOTATION_("win32metadata:out") IN WINHTTP_PROXY_INFO * pProxyInfo);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
-@@ -1653,27 +1654,27 @@ WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INF
+@@ -1653,46 +1654,46 @@ WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INF
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -187,7 +200,8 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpCloseHandle
 +_Win32_SetLastError_ WinHttpCloseHandle
  (
-     IN HINTERNET hInternet
+-    IN HINTERNET hInternet
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hInternet
  );
  
 -WINHTTPAPI
@@ -195,7 +209,11 @@ index ddcdcb381a..1bbc0c93d3 100644
  HINTERNET
  WINAPI
  WinHttpConnect
-@@ -1684,10 +1685,10 @@ WinHttpConnect
+ (
+-    IN HINTERNET hSession,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hSession,
+     IN LPCWSTR pswzServerName,
+     IN INTERNET_PORT nServerPort,
      IN DWORD dwReserved
  );
  
@@ -206,9 +224,27 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpReadData
 +_Win32_SetLastError_ WinHttpReadData
  (
-     IN HINTERNET hRequest,
+-    IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
      _Out_writes_bytes_to_(dwNumberOfBytesToRead, *lpdwNumberOfBytesRead) __out_data_source(NETWORK) LPVOID lpBuffer,
-@@ -1709,10 +1710,10 @@ WinHttpReadDataEx
+     IN DWORD dwNumberOfBytesToRead,
+-    OUT LPDWORD lpdwNumberOfBytesRead
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD lpdwNumberOfBytesRead
+ );
+ 
+ WINHTTPAPI
+@@ -1700,51 +1701,51 @@ DWORD
+ WINAPI
+ WinHttpReadDataEx
+ (
+-    IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
+     _Out_writes_bytes_to_(dwNumberOfBytesToRead, *lpdwNumberOfBytesRead) __out_data_source(NETWORK) LPVOID lpBuffer,
+     IN DWORD dwNumberOfBytesToRead,
+-    OUT LPDWORD lpdwNumberOfBytesRead,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD lpdwNumberOfBytesRead,
+     IN ULONGLONG ullFlags,
+     IN DWORD cbProperty,
      _In_reads_bytes_opt_(cbProperty) PVOID pvProperty
  );
  
@@ -219,10 +255,12 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpWriteData
 +_Win32_SetLastError_ WinHttpWriteData
  (
-     IN HINTERNET hRequest,
+-    IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
      _In_reads_bytes_opt_(dwNumberOfBytesToWrite) LPCVOID lpBuffer,
-@@ -1720,20 +1721,20 @@ WinHttpWriteData
-     OUT LPDWORD lpdwNumberOfBytesWritten
+     IN DWORD dwNumberOfBytesToWrite,
+-    OUT LPDWORD lpdwNumberOfBytesWritten
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD lpdwNumberOfBytesWritten
  );
  
 -WINHTTPAPI
@@ -232,8 +270,10 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpQueryDataAvailable
 +_Win32_SetLastError_ WinHttpQueryDataAvailable
  (
-     IN HINTERNET hRequest,
-     __out_data_source(NETWORK) LPDWORD lpdwNumberOfBytesAvailable
+-    IN HINTERNET hRequest,
+-    __out_data_source(NETWORK) LPDWORD lpdwNumberOfBytesAvailable
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:in") __out_data_source(NETWORK) LPDWORD lpdwNumberOfBytesAvailable
  );
  
 -_Success_(return != FALSE)
@@ -244,9 +284,10 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpQueryOption
 +_Win32_SetLastError_ WinHttpQueryOption
  (
-     IN HINTERNET hInternet,
+-    IN HINTERNET hInternet,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hInternet,
      IN DWORD dwOption,
-@@ -1741,10 +1742,10 @@ WinHttpQueryOption
+     _Out_writes_bytes_to_opt_(*lpdwBufferLength, *lpdwBufferLength) __out_data_source(NETWORK) LPVOID lpBuffer,
      IN OUT LPDWORD lpdwBufferLength
  );
  
@@ -259,7 +300,7 @@ index ddcdcb381a..1bbc0c93d3 100644
  (
      _In_opt_ HINTERNET hInternet,
      _In_ DWORD dwOption,
-@@ -1767,10 +1768,10 @@ WinHttpSetOption
+@@ -1767,12 +1768,12 @@ WinHttpSetOption
      _In_ DWORD dwBufferLength
  );
  
@@ -270,9 +311,12 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpSetTimeouts
 +_Win32_SetLastError_ WinHttpSetTimeouts
  (
-     IN HINTERNET    hInternet,           // Session/Request handle.
+-    IN HINTERNET    hInternet,           // Session/Request handle.
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET    hInternet,           // Session/Request handle.
      IN int          nResolveTimeout,
-@@ -1807,7 +1808,7 @@ WinHttpIsHostInProxyBypassList
+     IN int          nConnectTimeout,
+     IN int          nSendTimeout,
+@@ -1807,26 +1808,26 @@ WinHttpIsHostInProxyBypassList
  // prototypes
  //
  
@@ -281,7 +325,11 @@ index ddcdcb381a..1bbc0c93d3 100644
  HINTERNET
  WINAPI
  WinHttpOpenRequest
-@@ -1818,13 +1819,13 @@ WinHttpOpenRequest
+ (
+-    IN HINTERNET hConnect,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hConnect,
+     IN LPCWSTR pwszVerb,
+     IN LPCWSTR pwszObjectName,
      IN LPCWSTR pwszVersion,
      IN LPCWSTR pwszReferrer OPTIONAL,
      IN LPCWSTR FAR * ppwszAcceptTypes OPTIONAL,
@@ -296,9 +344,21 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpAddRequestHeaders
 +_Win32_SetLastError_ WinHttpAddRequestHeaders
  (
-     IN HINTERNET hRequest,
+-    IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
      _When_(dwHeadersLength == (DWORD)-1, _In_z_)
-@@ -1847,10 +1848,10 @@ WinHttpAddRequestHeadersEx
+     _When_(dwHeadersLength != (DWORD)-1, _In_reads_(dwHeadersLength))
+     LPCWSTR lpszHeaders,
+@@ -1839,7 +1840,7 @@ DWORD
+ WINAPI
+ WinHttpAddRequestHeadersEx
+ (
+-    IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
+     IN DWORD dwModifiers,
+     IN ULONGLONG ullFlags,
+     IN ULONGLONG ullExtra,
+@@ -1847,12 +1848,12 @@ WinHttpAddRequestHeadersEx
      _In_reads_(cHeaders) WINHTTP_EXTENDED_HEADER *pHeaders
  );
  
@@ -309,9 +369,12 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpSendRequest
 +_Win32_SetLastError_ WinHttpSendRequest
  (
-     IN HINTERNET hRequest,
+-    IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
      _In_reads_opt_(dwHeadersLength) LPCWSTR lpszHeaders,
-@@ -1861,10 +1862,10 @@ WinHttpSendRequest
+     IN DWORD dwHeadersLength,
+     _In_reads_bytes_opt_(dwOptionalLength) LPVOID lpOptional,
+@@ -1861,12 +1862,12 @@ WinHttpSendRequest
      IN DWORD_PTR dwContext
  );
  
@@ -322,10 +385,17 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpSetCredentials
 +_Win32_SetLastError_ WinHttpSetCredentials
  (
-     IN HINTERNET   hRequest,        // HINTERNET handle returned by WinHttpOpenRequest.
+-    IN HINTERNET   hRequest,        // HINTERNET handle returned by WinHttpOpenRequest.
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET   hRequest,        // HINTERNET handle returned by WinHttpOpenRequest.
      IN DWORD       AuthTargets,     // Only WINHTTP_AUTH_TARGET_SERVER and
-@@ -1881,10 +1882,10 @@ WinHttpSetCredentials
-     IN LPVOID      pAuthParams
+                                     // WINHTTP_AUTH_TARGET_PROXY are supported
+                                     // in this version and they are mutually
+@@ -1878,18 +1879,18 @@ WinHttpSetCredentials
+     IN LPCWSTR     pwszPassword,    // 1) "" == Blank Password; 2)Parameter ignored
+                                     // if pszUserName is NULL; 3) Invalid to pass in
+                                     // NULL if pszUserName is not NULL
+-    IN LPVOID      pAuthParams
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID      pAuthParams
  );
  
 -WINHTTPAPI
@@ -335,9 +405,18 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpQueryAuthSchemes
 +_Win32_SetLastError_ WinHttpQueryAuthSchemes
  (
-     IN  HINTERNET   hRequest,             // HINTERNET handle returned by WinHttpOpenRequest
-     OUT LPDWORD     lpdwSupportedSchemes, // a bitmap of available Authentication Schemes
-@@ -1914,20 +1915,20 @@ WinHttpQueryAuthParams
+-    IN  HINTERNET   hRequest,             // HINTERNET handle returned by WinHttpOpenRequest
+-    OUT LPDWORD     lpdwSupportedSchemes, // a bitmap of available Authentication Schemes
+-    OUT LPDWORD     lpdwFirstScheme,      // returns the first auth scheme returned by the server
+-    OUT LPDWORD     pdwAuthTarget
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  HINTERNET   hRequest,             // HINTERNET handle returned by WinHttpOpenRequest
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD     lpdwSupportedSchemes, // a bitmap of available Authentication Schemes
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD     lpdwFirstScheme,      // returns the first auth scheme returned by the server
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD     pdwAuthTarget
+ );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -1914,22 +1915,22 @@ WinHttpQueryAuthParams
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -348,8 +427,10 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpReceiveResponse
 +_Win32_SetLastError_ WinHttpReceiveResponse
  (
-     IN HINTERNET hRequest,
-     IN LPVOID lpReserved
+-    IN HINTERNET hRequest,
+-    IN LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:out") IN HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID lpReserved
  );
  
 -_Success_(return != FALSE)
@@ -360,9 +441,12 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpQueryHeaders
 +_Win32_SetLastError_ WinHttpQueryHeaders
  (
-     IN     HINTERNET hRequest,
+-    IN     HINTERNET hRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     HINTERNET hRequest,
      IN     DWORD     dwInfoLevel,
-@@ -1979,19 +1980,19 @@ WinHttpFreeQueryConnectionGroupResult
+     IN     LPCWSTR   pwszName OPTIONAL,
+     _Out_writes_bytes_to_opt_(*lpdwBufferLength, *lpdwBufferLength) __out_data_source(NETWORK) LPVOID lpBuffer,
+@@ -1979,39 +1980,39 @@ WinHttpFreeQueryConnectionGroupResult
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -384,10 +468,13 @@ index ddcdcb381a..1bbc0c93d3 100644
 -WinHttpGetProxyForUrl
 +_Win32_SetLastError_ WinHttpGetProxyForUrl
  (
-     IN  HINTERNET                   hSession,
+-    IN  HINTERNET                   hSession,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  HINTERNET                   hSession,
      IN  LPCWSTR                     lpcwszUrl,
-@@ -1999,19 +2000,19 @@ WinHttpGetProxyForUrl
-     OUT WINHTTP_PROXY_INFO *        pProxyInfo
+-    IN  WINHTTP_AUTOPROXY_OPTIONS * pAutoProxyOptions,
+-    OUT WINHTTP_PROXY_INFO *        pProxyInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  WINHTTP_AUTOPROXY_OPTIONS * pAutoProxyOptions,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT WINHTTP_PROXY_INFO *        pProxyInfo
  );
  
 -WINHTTPAPI
@@ -500,7 +587,7 @@ index ddcdcb381a..1bbc0c93d3 100644
  (
      _In_ HINTERNET hWebSocket,
      _In_ WINHTTP_WEB_SOCKET_BUFFER_TYPE eBufferType,
-@@ -2201,10 +2202,10 @@ WinHttpWebSocketSend
+@@ -2201,22 +2202,22 @@ WinHttpWebSocketSend
      _In_ DWORD dwBufferLength
  );
  
@@ -513,7 +600,9 @@ index ddcdcb381a..1bbc0c93d3 100644
  (
      _In_ HINTERNET hWebSocket,
      _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
-@@ -2213,10 +2214,10 @@ WinHttpWebSocketReceive
+     _In_ DWORD dwBufferLength,
+-    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
      _Out_ WINHTTP_WEB_SOCKET_BUFFER_TYPE *peBufferType
  );
  
@@ -539,7 +628,7 @@ index ddcdcb381a..1bbc0c93d3 100644
  (
      _In_ HINTERNET hWebSocket,
      _In_ USHORT usStatus,
-@@ -2235,10 +2236,10 @@ WinHttpWebSocketClose
+@@ -2235,16 +2236,16 @@ WinHttpWebSocketClose
      _In_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength
  );
  
@@ -552,6 +641,22 @@ index ddcdcb381a..1bbc0c93d3 100644
  (
      _In_ HINTERNET hWebSocket,
      _Out_ USHORT *pusStatus,
+     _Out_writes_bytes_to_opt_(dwReasonLength, *pdwReasonLengthConsumed) PVOID pvReason,
+     _In_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength,
+-    _Out_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed
+ );
+ 
+ typedef enum _WINHTTP_PROTOCOL_OPERATION
+@@ -2288,7 +2289,7 @@ WinHttpProtocolReceive
+     _In_ ULONGLONG Flags,
+     _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
+     _In_ DWORD dwBufferLength,
+-    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead
+ );
+ 
+ 
 @@ -2524,5 +2525,127 @@ typedef struct _WINHTTP_FAST_FORWARDING_STATUS
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion

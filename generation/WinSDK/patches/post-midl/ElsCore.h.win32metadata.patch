@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h b/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
-index 3df390971e..0e342fe665 100644
+index 3df390971e..6e09a9d403 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -10,6 +10,15 @@ index 3df390971e..0e342fe665 100644
  
  #ifdef __cplusplus
  extern "C" {
+@@ -26,7 +27,7 @@ extern "C" {
+ 
+ struct _MAPPING_PROPERTY_BAG;
+ 
+-typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(struct _MAPPING_PROPERTY_BAG *pBag, LPVOID data, DWORD dwDataSize, HRESULT Result);
++typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _MAPPING_PROPERTY_BAG *pBag, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID data, DWORD dwDataSize, HRESULT Result);
+ 
+ //
+ // Service types constants used in MAPPING_ENUM_OPTIONS (ServiceType field)
 @@ -47,7 +48,7 @@ typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(struct _MAPPING_PROPERTY_BAG *p
  // Public ELS structures
  //

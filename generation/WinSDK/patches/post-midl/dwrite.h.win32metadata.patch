@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h
-index 08c3cf50e8..f2291abfc3 100644
+index 08c3cf50e8..7416ad0167 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite.h
 @@ -1,3 +1,4 @@
@@ -43,6 +43,15 @@ index 08c3cf50e8..f2291abfc3 100644
  {
      /// <summary>
      /// Reads a fragment from a file.
+@@ -781,7 +782,7 @@ interface DWRITE_DECLARE_INTERFACE("6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0") IDWri
+     /// </summary>
+     /// <param name="fragmentContext">The client defined context of a font fragment returned from ReadFileFragment.</param>
+     STDMETHOD_(void, ReleaseFileFragment)(
+-        void* fragmentContext
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* fragmentContext
+         ) PURE;
+ 
+     /// <summary>
 @@ -819,7 +820,7 @@ interface DWRITE_DECLARE_INTERFACE("6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0") IDWri
  /// <summary>
  /// The interface that represents a reference to a font file.

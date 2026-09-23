@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dciman.h b/generation/WinSDK/RecompiledIdlHeaders/um/dciman.h
-index 1da64fa5f3..683a213e59 100644
+index 1da64fa5f3..97fa412e4d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dciman.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dciman.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,7 @@ index 1da64fa5f3..683a213e59 100644
  /****************************************************************************
  
   DCIMAN.H
-@@ -38,10 +39,14 @@ DECLARE_HANDLE(HWINWATCH);  // context handle for WinWatch instance
+@@ -38,30 +39,34 @@ DECLARE_HANDLE(HWINWATCH);  // context handle for WinWatch instance
  /****************************************************************************
   ***************************************************************************/
  
@@ -19,10 +19,41 @@ index 1da64fa5f3..683a213e59 100644
  
 -extern int WINAPI DCICreatePrimary(HDC hdc, LPDCISURFACEINFO FAR *lplpSurface);
 +_Windows_SupportedOS_Windows2000_  
-+extern int WINAPI DCICreatePrimary(HDC hdc,  LPDCISURFACEINFO FAR *lplpSurface);
++extern int WINAPI DCICreatePrimary(HDC hdc,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDCISURFACEINFO FAR *lplpSurface);
  extern int WINAPI DCICreateOffscreen(HDC hdc, DWORD dwCompression, DWORD dwRedMask,
      DWORD dwGreenMask, DWORD dwBlueMask, DWORD dwWidth, DWORD dwHeight,
-     DWORD dwDCICaps, DWORD dwBitCount, LPDCIOFFSCREEN FAR *lplpSurface);
+-    DWORD dwDCICaps, DWORD dwBitCount, LPDCIOFFSCREEN FAR *lplpSurface);
+-extern int WINAPI DCICreateOverlay(HDC hdc, LPVOID lpOffscreenSurf,
+-    LPDCIOVERLAY FAR *lplpSurface);
+-extern int WINAPI DCIEnum(HDC hdc, LPRECT lprDst, LPRECT lprSrc, LPVOID lpFnCallback,
+-    LPVOID lpContext);
+-extern DCIRVAL WINAPI DCISetSrcDestClip(LPDCIOFFSCREEN pdci, LPRECT srcrc,
+-			LPRECT destrc, LPRGNDATA prd );
++    DWORD dwDCICaps, DWORD dwBitCount, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDCIOFFSCREEN FAR *lplpSurface);
++extern int WINAPI DCICreateOverlay(HDC hdc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpOffscreenSurf,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDCIOVERLAY FAR *lplpSurface);
++extern int WINAPI DCIEnum(HDC hdc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT lprDst, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT lprSrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpFnCallback,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpContext);
++extern DCIRVAL WINAPI DCISetSrcDestClip(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDCIOFFSCREEN pdci, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT srcrc,
++			_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT destrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRGNDATA prd );
+ 
+ extern HWINWATCH WINAPI WinWatchOpen(HWND hwnd);
+ extern void      WINAPI WinWatchClose(HWINWATCH hWW);
+ 
+ // API changed to copy region data instead of return pointer to it
+-extern UINT	 WINAPI WinWatchGetClipList(HWINWATCH hWW, LPRECT prc,
+-				UINT size,  LPRGNDATA prd);
++extern UINT	 WINAPI WinWatchGetClipList(HWINWATCH hWW, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT prc,
++				UINT size,  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRGNDATA prd);
+ extern BOOL      WINAPI WinWatchDidStatusChange(HWINWATCH hWW);
+ 
+-extern DWORD     WINAPI GetWindowRegionData(HWND hwnd, DWORD size, LPRGNDATA prd);
+-extern DWORD     WINAPI GetDCRegionData(HDC hdc, DWORD size, LPRGNDATA prd);
++extern DWORD     WINAPI GetWindowRegionData(HWND hwnd, DWORD size, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRGNDATA prd);
++extern DWORD     WINAPI GetDCRegionData(HDC hdc, DWORD size, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRGNDATA prd);
+ 
+ 
+ #define WINWATCHNOTIFY_START        0
 @@ -78,8 +83,11 @@ extern BOOL WINAPI WinWatchNotify(HWINWATCH hWW, WINWATCHNOTIFYPROC NotifyCallba
  /****************************************************************************
   helper functions to call DCIMAN16.DLL

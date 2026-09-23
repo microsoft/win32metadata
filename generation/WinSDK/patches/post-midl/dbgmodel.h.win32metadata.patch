@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h b/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h
-index a9af8120a5..042172ac6e 100644
+index a9af8120a5..af8bc01bf9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DbgModel.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index a9af8120a5..042172ac6e 100644
  //*******************************************************************************
  //
  // Debugger Data Model
+@@ -1149,7 +1150,7 @@ DECLARE_INTERFACE_(IKeyStore, IUnknown)
+     STDMETHOD(GetKey)(
+         THIS_
+         _In_ PCWSTR key,
+-        _COM_Errorptr_opt_ IModelObject** object,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** object,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+ 
+@@ -1182,7 +1183,7 @@ DECLARE_INTERFACE_(IKeyStore, IUnknown)
+     STDMETHOD(GetKeyValue)(
+         THIS_
+         _In_ PCWSTR key,
+-        _COM_Errorptr_opt_ IModelObject** object,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** object,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+ 
 @@ -1304,7 +1305,7 @@ DECLARE_INTERFACE_(IModelObject, IUnknown)
      //
      STDMETHOD(GetIntrinsicValueAs)(
@@ -14,6 +32,33 @@ index a9af8120a5..042172ac6e 100644
 -        _In_ VARTYPE vt,
 +        _Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt,
          _Out_ VARIANT* intrinsicData
+         ) PURE;
+ 
+@@ -1319,7 +1320,7 @@ DECLARE_INTERFACE_(IModelObject, IUnknown)
+     STDMETHOD(GetKeyValue)(
+         THIS_
+         _In_ PCWSTR key,
+-        _COM_Errorptr_opt_ IModelObject** object,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** object,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+ 
+@@ -1529,7 +1530,7 @@ DECLARE_INTERFACE_(IModelObject, IUnknown)
+     STDMETHOD(GetKey)(
+         THIS_
+         _In_ PCWSTR key,
+-        _COM_Errorptr_opt_ IModelObject** object,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** object,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+ 
+@@ -1541,7 +1542,7 @@ DECLARE_INTERFACE_(IModelObject, IUnknown)
+     STDMETHOD(GetKeyReference)(
+         THIS_
+         _In_ PCWSTR key,
+-        _COM_Errorptr_opt_ IModelObject** objectReference,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** objectReference,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
          ) PURE;
  
 @@ -3007,7 +3008,7 @@ DECLARE_INTERFACE_(IModelKeyReference, IUnknown)
@@ -25,24 +70,47 @@ index a9af8120a5..042172ac6e 100644
          ) PURE;
  
      // GetOriginalObject():
-@@ -3272,7 +3273,7 @@ DECLARE_INTERFACE_(IKeyEnumerator, IUnknown)
+@@ -3060,7 +3061,7 @@ DECLARE_INTERFACE_(IModelKeyReference, IUnknown)
+     //
+     STDMETHOD(GetKey)(
+         THIS_
+-        _COM_Errorptr_opt_ IModelObject** object,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** object,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+ 
+@@ -3075,7 +3076,7 @@ DECLARE_INTERFACE_(IModelKeyReference, IUnknown)
+     //
+     STDMETHOD(GetKeyValue)(
+         THIS_
+-        _COM_Errorptr_opt_ IModelObject** object,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** object,
+         _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
+         ) PURE;
+ 
+@@ -3272,8 +3273,8 @@ DECLARE_INTERFACE_(IKeyEnumerator, IUnknown)
      // When the enumerator hits the end of the sequence, E_BOUNDS will be returned.
      //
      STDMETHOD(GetNext)(
 -        _Out_ BSTR* key,
+-        _COM_Errorptr_opt_ IModelObject** value,
 +        _Win32_RAIIFree_(SysFreeString) _Out_ BSTR* key,
-         _COM_Errorptr_opt_ IModelObject** value,
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** value,
          _COM_Outptr_opt_result_maybenull_ IKeyStore** metadata
          ) PURE;
-@@ -3334,7 +3335,7 @@ DECLARE_INTERFACE_(IRawEnumerator, IUnknown)
+ 
+@@ -3334,9 +3335,9 @@ DECLARE_INTERFACE_(IRawEnumerator, IUnknown)
      // When the enumerator hits the end of the sequence, E_BOUNDS will be returned.
      //
      STDMETHOD(GetNext)(
 -        _Out_opt_ BSTR* name,
 +        _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR* name,
          _Out_opt_ SymbolKind *kind,
-         _COM_Errorptr_opt_ IModelObject** value
+-        _COM_Errorptr_opt_ IModelObject** value
++        _WIN32META_ANNOTATION_("win32metadata:out") _COM_Errorptr_opt_ IModelObject** value
          ) PURE;
+ 
+ };
 @@ -3384,7 +3385,7 @@ DECLARE_INTERFACE_(INamedModelsEnumerator, IUnknown)
      //
      STDMETHOD(GetNext)(

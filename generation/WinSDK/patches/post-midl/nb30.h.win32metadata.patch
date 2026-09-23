@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h b/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h
-index 89d51226de..4b4bdfde0f 100644
+index 89d51226de..3eeabddec4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/nb30.h
 @@ -19,6 +19,7 @@
@@ -79,7 +79,7 @@ index 89d51226de..4b4bdfde0f 100644
      ULONG   transport_id;
      USHORT  action_code;
      USHORT  reserved;
-@@ -302,9 +303,9 @@ typedef struct _ACTION_HEADER {
+@@ -302,10 +303,10 @@ typedef struct _ACTION_HEADER {
   * Usage: result = Netbios( pncb );                             *
   ****************************************************************/
  
@@ -87,7 +87,9 @@ index 89d51226de..4b4bdfde0f 100644
 +_Windows_SupportedOS_Windows2000_ UCHAR
  APIENTRY
 -Netbios(
+-    PNCB pncb
 +  Netbios(
-     PNCB pncb
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PNCB pncb
      );
  
+ /****************************************************************

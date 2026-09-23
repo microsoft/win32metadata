@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
-index 2f68eb6c5c..6498527ee7 100644
+index 2f68eb6c5c..8f2d8a560a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
 @@ -1,3 +1,4 @@
@@ -16,7 +16,7 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      void
  );
-@@ -223,7 +224,7 @@ DWORD ACMAPI acmGetVersion
+@@ -223,11 +224,11 @@ DWORD ACMAPI acmGetVersion
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -25,6 +25,11 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      HACMOBJ                 hao,
      UINT                    uMetric,
+-    LPVOID                  pMetric
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID                  pMetric
+ );
+ 
+ #define ACM_METRIC_COUNT_DRIVERS            1
 @@ -272,7 +273,7 @@ typedef BOOL (CALLBACK *ACMDRIVERENUMCB)
      DWORD                   fdwSupport
  );
@@ -34,7 +39,7 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      ACMDRIVERENUMCB         fnCallback,
      DWORD_PTR               dwInstance,
-@@ -289,7 +290,7 @@ MMRESULT ACMAPI acmDriverEnum
+@@ -289,10 +290,10 @@ MMRESULT ACMAPI acmDriverEnum
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -42,25 +47,34 @@ index 2f68eb6c5c..6498527ee7 100644
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverID
  (
      HACMOBJ                 hao,
-     LPHACMDRIVERID          phadid,
-@@ -305,7 +306,7 @@ MMRESULT ACMAPI acmDriverID
+-    LPHACMDRIVERID          phadid,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHACMDRIVERID          phadid,
+     DWORD                   fdwDriverID
+ );
+ 
+@@ -305,18 +306,18 @@ MMRESULT ACMAPI acmDriverID
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmDriverAddA
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddA
  (
-     LPHACMDRIVERID          phadid,
+-    LPHACMDRIVERID          phadid,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHACMDRIVERID          phadid,
      HINSTANCE               hinstModule,
-@@ -314,7 +315,7 @@ MMRESULT ACMAPI acmDriverAddA
+     LPARAM                  lParam, 
+     DWORD                   dwPriority,
      DWORD                   fdwAdd
  );
  
 -MMRESULT ACMAPI acmDriverAddW
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverAddW
  (
-     LPHACMDRIVERID          phadid,
+-    LPHACMDRIVERID          phadid,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHACMDRIVERID          phadid,
      HINSTANCE               hinstModule,
+     LPARAM                  lParam, 
+     DWORD                   dwPriority,
 @@ -360,7 +361,7 @@ typedef ACMDRIVERPROC FAR *LPACMDRIVERPROC;
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
@@ -70,15 +84,18 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      HACMDRIVERID            hadid,
      DWORD                   fdwRemove
-@@ -374,7 +375,7 @@ MMRESULT ACMAPI acmDriverRemove
+@@ -374,9 +375,9 @@ MMRESULT ACMAPI acmDriverRemove
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
 -MMRESULT ACMAPI acmDriverOpen
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverOpen
  (
-     LPHACMDRIVER            phad, 
+-    LPHACMDRIVER            phad, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHACMDRIVER            phad, 
      HACMDRIVERID            hadid,
+     DWORD                   fdwOpen
+ );
 @@ -389,7 +390,7 @@ MMRESULT ACMAPI acmDriverOpen
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
@@ -106,7 +123,7 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      HACMDRIVERID            hadid,
      DWORD                   dwPriority,
-@@ -625,14 +626,14 @@ typedef struct tACMDRIVERDETAILS
+@@ -625,17 +626,17 @@ typedef struct tACMDRIVERDETAILS
  
  
  #ifdef _WIN32
@@ -114,7 +131,8 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsA
  (
      HACMDRIVERID            hadid,
-     LPACMDRIVERDETAILSA     padd,
+-    LPACMDRIVERDETAILSA     padd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMDRIVERDETAILSA     padd,
      DWORD                   fdwDetails
  );
  
@@ -122,8 +140,12 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmDriverDetailsW
  (
      HACMDRIVERID            hadid,
-     LPACMDRIVERDETAILSW     padd,
-@@ -722,14 +723,14 @@ typedef struct tACMFORMATTAGDETAILS
+-    LPACMDRIVERDETAILSW     padd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMDRIVERDETAILSW     padd,
+     DWORD                   fdwDetails
+ );
+ 
+@@ -722,17 +723,17 @@ typedef struct tACMFORMATTAGDETAILS
  #endif
  
  #ifdef _WIN32
@@ -131,7 +153,8 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsA
  (
      HACMDRIVER              had,
-     LPACMFORMATTAGDETAILSA  paftd,
+-    LPACMFORMATTAGDETAILSA  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATTAGDETAILSA  paftd,
      DWORD                   fdwDetails
  );
  
@@ -139,8 +162,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagDetailsW
  (
      HACMDRIVER              had,
-     LPACMFORMATTAGDETAILSW  paftd,
-@@ -773,7 +774,7 @@ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBA)
+-    LPACMFORMATTAGDETAILSW  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATTAGDETAILSW  paftd,
+     DWORD                   fdwDetails
+ );
+ 
+@@ -768,15 +769,15 @@ MMRESULT ACMAPI acmFormatTagDetails
+ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBA)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFORMATTAGDETAILSA  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATTAGDETAILSA  paftd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -148,8 +181,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumA
  (
      HACMDRIVER              had,
-     LPACMFORMATTAGDETAILSA  paftd,
-@@ -789,7 +790,7 @@ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBW)
+-    LPACMFORMATTAGDETAILSA  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATTAGDETAILSA  paftd,
+     ACMFORMATTAGENUMCBA     fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -784,15 +785,15 @@ MMRESULT ACMAPI acmFormatTagEnumA
+ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBW)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFORMATTAGDETAILSW  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATTAGDETAILSW  paftd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -157,8 +200,12 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatTagEnumW
  (
      HACMDRIVER              had,
-     LPACMFORMATTAGDETAILSW  paftd,
-@@ -893,14 +894,14 @@ typedef struct tACMFORMATDETAILS
+-    LPACMFORMATTAGDETAILSW  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATTAGDETAILSW  paftd,
+     ACMFORMATTAGENUMCBW     fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -893,17 +894,17 @@ typedef struct tACMFORMATDETAILS
  
  
  #ifdef _WIN32
@@ -166,7 +213,8 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsA
  (
      HACMDRIVER              had,
-     LPACMFORMATDETAILSA     pafd,
+-    LPACMFORMATDETAILSA     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATDETAILSA     pafd,
      DWORD                   fdwDetails
  );
  
@@ -174,8 +222,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatDetailsW
  (
      HACMDRIVER              had,
-     LPACMFORMATDETAILSW     pafd,
-@@ -942,7 +943,7 @@ typedef BOOL (CALLBACK *ACMFORMATENUMCBA)
+-    LPACMFORMATDETAILSW     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATDETAILSW     pafd,
+     DWORD                   fdwDetails
+ );
+ 
+@@ -937,15 +938,15 @@ MMRESULT ACMAPI acmFormatDetails
+ typedef BOOL (CALLBACK *ACMFORMATENUMCBA)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFORMATDETAILSA     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATDETAILSA     pafd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -183,8 +241,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumA
  (
      HACMDRIVER              had,
-     LPACMFORMATDETAILSA     pafd,
-@@ -959,7 +960,7 @@ typedef BOOL (CALLBACK *ACMFORMATENUMCBW)
+-    LPACMFORMATDETAILSA     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATDETAILSA     pafd,
+     ACMFORMATENUMCBA        fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -954,15 +955,15 @@ MMRESULT ACMAPI acmFormatEnumA
+ typedef BOOL (CALLBACK *ACMFORMATENUMCBW)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFORMATDETAILSW     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATDETAILSW     pafd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -192,8 +260,12 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatEnumW
  (
      HACMDRIVER              had,
-     LPACMFORMATDETAILSW     pafd,
-@@ -1013,7 +1014,7 @@ MMRESULT ACMAPI acmFormatEnum
+-    LPACMFORMATDETAILSW     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATDETAILSW     pafd,
+     ACMFORMATENUMCBW        fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -1013,11 +1014,11 @@ MMRESULT ACMAPI acmFormatEnum
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -201,23 +273,33 @@ index 2f68eb6c5c..6498527ee7 100644
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatSuggest
  (
      HACMDRIVER          had,
-     LPWAVEFORMATEX      pwfxSrc,
-@@ -1212,12 +1213,12 @@ typedef struct tACMFORMATCHOOSE
+-    LPWAVEFORMATEX      pwfxSrc,
+-    LPWAVEFORMATEX      pwfxDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAVEFORMATEX      pwfxSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAVEFORMATEX      pwfxDst,
+     DWORD               cbwfxDst,
+     DWORD               fdwSuggest
+ );
+@@ -1212,14 +1213,14 @@ typedef struct tACMFORMATCHOOSE
  #define ACMFORMATCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFormatChooseA
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseA
  (
-     LPACMFORMATCHOOSEA      pafmtc
+-    LPACMFORMATCHOOSEA      pafmtc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATCHOOSEA      pafmtc
  );
  
 -MMRESULT ACMAPI acmFormatChooseW
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFormatChooseW
  (
-     LPACMFORMATCHOOSEW      pafmtc
+-    LPACMFORMATCHOOSEW      pafmtc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFORMATCHOOSEW      pafmtc
  );
-@@ -1302,14 +1303,14 @@ typedef struct tACMFILTERTAGDETAILS
+ 
+ #ifdef _UNICODE
+@@ -1302,17 +1303,17 @@ typedef struct tACMFILTERTAGDETAILS
  #endif
  
  #ifdef _WIN32
@@ -225,7 +307,8 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsA
  (
      HACMDRIVER              had,
-     LPACMFILTERTAGDETAILSA  paftd,
+-    LPACMFILTERTAGDETAILSA  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERTAGDETAILSA  paftd,
      DWORD                   fdwDetails
  );
  
@@ -233,8 +316,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagDetailsW
  (
      HACMDRIVER              had,
-     LPACMFILTERTAGDETAILSW  paftd,
-@@ -1353,7 +1354,7 @@ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBA)
+-    LPACMFILTERTAGDETAILSW  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERTAGDETAILSW  paftd,
+     DWORD                   fdwDetails
+ );
+ 
+@@ -1348,15 +1349,15 @@ MMRESULT ACMAPI acmFilterTagDetails
+ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBA)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFILTERTAGDETAILSA  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERTAGDETAILSA  paftd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -242,8 +335,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumA
  (
      HACMDRIVER              had,
-     LPACMFILTERTAGDETAILSA  paftd,
-@@ -1370,7 +1371,7 @@ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBW)
+-    LPACMFILTERTAGDETAILSA  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERTAGDETAILSA  paftd,
+     ACMFILTERTAGENUMCBA     fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -1365,15 +1366,15 @@ MMRESULT ACMAPI acmFilterTagEnumA
+ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBW)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFILTERTAGDETAILSW  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERTAGDETAILSW  paftd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -251,8 +354,12 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterTagEnumW
  (
      HACMDRIVER              had,
-     LPACMFILTERTAGDETAILSW  paftd,
-@@ -1473,14 +1474,14 @@ typedef struct tACMFILTERDETAILS
+-    LPACMFILTERTAGDETAILSW  paftd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERTAGDETAILSW  paftd,
+     ACMFILTERTAGENUMCBW     fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -1473,17 +1474,17 @@ typedef struct tACMFILTERDETAILS
  #endif
  
  #ifdef _WIN32
@@ -260,7 +367,8 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsA
  (
      HACMDRIVER              had,
-     LPACMFILTERDETAILSA     pafd,
+-    LPACMFILTERDETAILSA     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERDETAILSA     pafd,
      DWORD                   fdwDetails
  );
  
@@ -268,8 +376,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterDetailsW
  (
      HACMDRIVER              had,
-     LPACMFILTERDETAILSW     pafd,
-@@ -1521,7 +1522,7 @@ typedef BOOL (CALLBACK *ACMFILTERENUMCBA)
+-    LPACMFILTERDETAILSW     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERDETAILSW     pafd,
+     DWORD                   fdwDetails
+ );
+ #ifdef _UNICODE
+@@ -1516,15 +1517,15 @@ MMRESULT ACMAPI acmFilterDetails
+ typedef BOOL (CALLBACK *ACMFILTERENUMCBA)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFILTERDETAILSA     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERDETAILSA     pafd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -277,8 +395,18 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumA
  (
      HACMDRIVER              had,
-     LPACMFILTERDETAILSA     pafd,
-@@ -1538,7 +1539,7 @@ typedef BOOL (CALLBACK *ACMFILTERENUMCBW)
+-    LPACMFILTERDETAILSA     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERDETAILSA     pafd,
+     ACMFILTERENUMCBA        fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -1533,15 +1534,15 @@ MMRESULT ACMAPI acmFilterEnumA
+ typedef BOOL (CALLBACK *ACMFILTERENUMCBW)
+ (
+     HACMDRIVERID            hadid,
+-    LPACMFILTERDETAILSW     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERDETAILSW     pafd,
+     DWORD_PTR               dwInstance,
      DWORD                   fdwSupport
  );
  
@@ -286,31 +414,49 @@ index 2f68eb6c5c..6498527ee7 100644
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterEnumW
  (
      HACMDRIVER              had,
-     LPACMFILTERDETAILSW     pafd,
-@@ -1736,12 +1737,12 @@ typedef struct tACMFILTERCHOOSE
+-    LPACMFILTERDETAILSW     pafd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERDETAILSW     pafd,
+     ACMFILTERENUMCBW        fnCallback,
+     DWORD_PTR               dwInstance, 
+     DWORD                   fdwEnum
+@@ -1736,14 +1737,14 @@ typedef struct tACMFILTERCHOOSE
  #define ACMFILTERCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
  
  #ifdef _WIN32
 -MMRESULT ACMAPI acmFilterChooseA
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseA
  (
-     LPACMFILTERCHOOSEA      pafltrc
+-    LPACMFILTERCHOOSEA      pafltrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERCHOOSEA      pafltrc
  );
  
 -MMRESULT ACMAPI acmFilterChooseW
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmFilterChooseW
  (
-     LPACMFILTERCHOOSEW      pafltrc
+-    LPACMFILTERCHOOSEW      pafltrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMFILTERCHOOSEW      pafltrc
  );
-@@ -1806,7 +1807,7 @@ typedef struct tACMSTREAMHEADER
+ 
+ #ifdef _UNICODE
+@@ -1806,13 +1807,13 @@ typedef struct tACMSTREAMHEADER
  #define ACMSTREAMHEADER_STATUSF_INQUEUE     0x00100000L
  
  
 -MMRESULT ACMAPI acmStreamOpen
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamOpen
  (
-     LPHACMSTREAM            phas,       // pointer to stream handle
+-    LPHACMSTREAM            phas,       // pointer to stream handle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHACMSTREAM            phas,       // pointer to stream handle
      HACMDRIVER              had,        // optional driver handle
+-    LPWAVEFORMATEX          pwfxSrc,    // source format to convert
+-    LPWAVEFORMATEX          pwfxDst,    // required destination format
+-    LPWAVEFILTER            pwfltr,     // optional filter
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAVEFORMATEX          pwfxSrc,    // source format to convert
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAVEFORMATEX          pwfxDst,    // required destination format
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAVEFILTER            pwfltr,     // optional filter
+     DWORD_PTR               dwCallback, // callback
+     DWORD_PTR               dwInstance, // callback instance data
+     DWORD                   fdwOpen     // ACM_STREAMOPENF_* and CALLBACK_*
 @@ -1829,7 +1830,7 @@ MMRESULT ACMAPI acmStreamOpen
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
@@ -320,7 +466,7 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      HACMSTREAM              has,
      DWORD                   fdwClose
-@@ -1843,7 +1844,7 @@ MMRESULT ACMAPI acmStreamClose
+@@ -1843,11 +1844,11 @@ MMRESULT ACMAPI acmStreamClose
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -329,6 +475,11 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      HACMSTREAM              has,
      DWORD                   cbInput,
+-    LPDWORD                 pdwOutputBytes,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD                 pdwOutputBytes,
+     DWORD                   fdwSize
+ );
+ 
 @@ -1863,7 +1864,7 @@ MMRESULT ACMAPI acmStreamSize
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
@@ -347,7 +498,7 @@ index 2f68eb6c5c..6498527ee7 100644
  (
      HACMSTREAM              has,
      UINT                    uMsg, 
-@@ -1894,7 +1895,7 @@ MMRESULT ACMAPI acmStreamMessage
+@@ -1894,10 +1895,10 @@ MMRESULT ACMAPI acmStreamMessage
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -355,8 +506,12 @@ index 2f68eb6c5c..6498527ee7 100644
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamConvert
  (
      HACMSTREAM              has, 
-     LPACMSTREAMHEADER       pash,
-@@ -1912,7 +1913,7 @@ MMRESULT ACMAPI acmStreamConvert
+-    LPACMSTREAMHEADER       pash,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMSTREAMHEADER       pash,
+     DWORD                   fdwConvert
+ );
+ 
+@@ -1912,10 +1913,10 @@ MMRESULT ACMAPI acmStreamConvert
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -364,8 +519,12 @@ index 2f68eb6c5c..6498527ee7 100644
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamPrepareHeader
  (
      HACMSTREAM          has,
-     LPACMSTREAMHEADER   pash,
-@@ -1927,7 +1928,7 @@ MMRESULT ACMAPI acmStreamPrepareHeader
+-    LPACMSTREAMHEADER   pash,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMSTREAMHEADER   pash,
+     DWORD               fdwPrepare
+ );
+ 
+@@ -1927,10 +1928,10 @@ MMRESULT ACMAPI acmStreamPrepareHeader
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -373,4 +532,8 @@ index 2f68eb6c5c..6498527ee7 100644
 +_Windows_SupportedOS_Windows2000_ MMRESULT ACMAPI acmStreamUnprepareHeader
  (
      HACMSTREAM          has,
-     LPACMSTREAMHEADER   pash,
+-    LPACMSTREAMHEADER   pash,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPACMSTREAMHEADER   pash,
+     DWORD               fdwUnprepare
+ );
+ 

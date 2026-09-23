@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
-index af745cafed..72f85b84ac 100644
+index af745cafed..b81b835192 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
 @@ -147,6 +147,7 @@ extern "C"{
@@ -60,6 +60,15 @@ index af745cafed..72f85b84ac 100644
      {
          CONST_VTBL struct IAudioDeviceModulesClientVtbl *lpVtbl;
      };
+@@ -889,7 +890,7 @@ EXTERN_C const IID IID_IAudioDeviceModulesClient;
+ //
+ // APO registration functions
+ //
+-typedef HRESULT (WINAPI FNAPONOTIFICATIONCALLBACK)(APO_REG_PROPERTIES* pProperties, VOID* pvRefData);
++typedef HRESULT (WINAPI FNAPONOTIFICATIONCALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") APO_REG_PROPERTIES* pProperties, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID* pvRefData);
+ extern HRESULT WINAPI RegisterAPO(APO_REG_PROPERTIES const* pProperties);
+ extern HRESULT WINAPI UnregisterAPO(REFCLSID clsid);
+ extern HRESULT WINAPI RegisterAPONotification(HANDLE hEvent);
 @@ -1204,7 +1205,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      

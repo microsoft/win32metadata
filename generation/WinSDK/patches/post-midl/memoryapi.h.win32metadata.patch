@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
-index 6feb5f7d26..1abf081ea3 100644
+index 6feb5f7d26..bf376e4c24 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/memoryapi.h
 @@ -17,6 +17,7 @@
@@ -71,9 +71,12 @@ index 6feb5f7d26..1abf081ea3 100644
  _When_(((dwFreeType&MEM_RELEASE))!=0 && dwSize!=0,
      __drv_reportError("Passing MEM_RELEASE and a non-zero dwSize parameter to VirtualFree is not allowed. This results in the failure of this call"))
  _Success_(return != FALSE)
-@@ -92,9 +120,13 @@ WINAPI
+@@ -90,11 +118,15 @@ WINBASEAPI
+ BOOL
+ WINAPI
  VirtualFree(
-     _Pre_notnull_ _When_(dwFreeType == MEM_DECOMMIT,_Post_invalid_) _When_(dwFreeType == MEM_RELEASE,_Post_ptr_invalid_) LPVOID lpAddress,
+-    _Pre_notnull_ _When_(dwFreeType == MEM_DECOMMIT,_Post_invalid_) _When_(dwFreeType == MEM_RELEASE,_Post_ptr_invalid_) LPVOID lpAddress,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_notnull_ _When_(dwFreeType == MEM_DECOMMIT,_Post_invalid_) _When_(dwFreeType == MEM_RELEASE,_Post_ptr_invalid_) LPVOID lpAddress,
      _In_ SIZE_T dwSize,
 -    _In_ DWORD dwFreeType
 +    _Win32_AssociatedEnum_(VIRTUAL_FREE_TYPE) _In_ DWORD dwFreeType
@@ -237,9 +240,12 @@ index 6feb5f7d26..1abf081ea3 100644
  _When_(((dwFreeType&MEM_DECOMMIT))!=0,
      __drv_reportError("Calling VirtualFreeEx without the MEM_RELEASE flag frees memory but not address descriptors (VADs); results in address space leaks"))
  _Success_(return != FALSE)
-@@ -250,7 +316,7 @@ VirtualFreeEx(
+@@ -248,9 +314,9 @@ BOOL
+ WINAPI
+ VirtualFreeEx(
      _In_ HANDLE hProcess,
-     _Pre_notnull_ _When_(dwFreeType == MEM_DECOMMIT,_Post_invalid_) _When_(dwFreeType == MEM_RELEASE,_Post_ptr_invalid_) LPVOID lpAddress,
+-    _Pre_notnull_ _When_(dwFreeType == MEM_DECOMMIT,_Post_invalid_) _When_(dwFreeType == MEM_RELEASE,_Post_ptr_invalid_) LPVOID lpAddress,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_notnull_ _When_(dwFreeType == MEM_DECOMMIT,_Post_invalid_) _When_(dwFreeType == MEM_RELEASE,_Post_ptr_invalid_) LPVOID lpAddress,
      _In_ SIZE_T dwSize,
 -    _In_ DWORD dwFreeType
 +    _Win32_AssociatedEnum_(VIRTUAL_FREE_TYPE) _In_ DWORD dwFreeType

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
-index dded3769a1..0c9bf486b3 100644
+index dded3769a1..df2ec535d6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 @@ -1,3 +1,4 @@
@@ -218,6 +218,15 @@ index dded3769a1..0c9bf486b3 100644
      BYTE  bReserved;
      DWORD dwLayerMask;
      DWORD dwVisibleMask;
+@@ -3828,7 +3829,7 @@ typedef FONTENUMPROCW FONTENUMPROC;
+ typedef FONTENUMPROCA FONTENUMPROC;
+ #endif // UNICODE
+ 
+-typedef int (CALLBACK* GOBJENUMPROC)(LPVOID, LPARAM);
++typedef int (CALLBACK* GOBJENUMPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID, LPARAM);
+ typedef VOID (CALLBACK* LINEDDAPROC)(int, int, LPARAM);
+ #else
+ typedef FARPROC OLDFONTENUMPROC;
 @@ -3851,105 +3852,105 @@ typedef FARPROC LINEDDAPROC;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -378,6 +387,18 @@ index dded3769a1..0c9bf486b3 100644
                                              _In_ int iPixelFormat,
                                              _In_ UINT nBytes,
                                              _Out_writes_bytes_opt_(nBytes) LPPIXELFORMATDESCRIPTOR ppfd);
+@@ -3958,9 +3959,9 @@ WINGDIAPI int  WINAPI DescribePixelFormat(  _In_ HDC hdc,
+  * functions for Win 3.1 compatibility
+  */
+ 
+-typedef UINT   (CALLBACK* LPFNDEVMODE)(HWND, HMODULE, LPDEVMODE, LPSTR, LPSTR, LPDEVMODE, LPSTR, UINT);
++typedef UINT   (CALLBACK* LPFNDEVMODE)(HWND, HMODULE, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDEVMODE, LPSTR, LPSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDEVMODE, LPSTR, UINT);
+ 
+-typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
++typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDEVMODE);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -4045,23 +4046,23 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1645,33 +1666,38 @@ index dded3769a1..0c9bf486b3 100644
  
  typedef struct _POINTFLOAT {
      FLOAT   x;
-@@ -6360,9 +6361,9 @@ typedef struct _GLYPHMETRICSFLOAT {
+@@ -6360,10 +6361,10 @@ typedef struct _GLYPHMETRICSFLOAT {
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
 -WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(HDC, DWORD, DWORD, DWORD, FLOAT,
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(HDC, DWORD, DWORD, DWORD, FLOAT,
-                                            FLOAT, int, LPGLYPHMETRICSFLOAT);
+-                                           FLOAT, int, LPGLYPHMETRICSFLOAT);
 -WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
+-                                           FLOAT, int, LPGLYPHMETRICSFLOAT);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesA(HDC, DWORD, DWORD, DWORD, FLOAT,
++                                           FLOAT, int, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGLYPHMETRICSFLOAT);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
-                                            FLOAT, int, LPGLYPHMETRICSFLOAT);
++                                           FLOAT, int, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
  #define wglUseFontOutlines  wglUseFontOutlinesW
+ #else
 @@ -6446,14 +6447,14 @@ typedef struct tagLAYERPLANEDESCRIPTOR { // lpd
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  
 -WINGDIAPI BOOL  WINAPI wglDescribeLayerPlane(HDC, int, int, UINT,
-+_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI wglDescribeLayerPlane(HDC, int, int, UINT,
-                                              LPLAYERPLANEDESCRIPTOR);
+-                                             LPLAYERPLANEDESCRIPTOR);
 -WINGDIAPI int   WINAPI wglSetLayerPaletteEntries(HDC, int, int, int,
++_Windows_SupportedOS_Windows2000_ WINGDIAPI BOOL  WINAPI wglDescribeLayerPlane(HDC, int, int, UINT,
++                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPLAYERPLANEDESCRIPTOR);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI int   WINAPI wglSetLayerPaletteEntries(HDC, int, int, int,
                                                   CONST COLORREF *);
 -WINGDIAPI int   WINAPI wglGetLayerPaletteEntries(HDC, int, int, int,
-+_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI int   WINAPI wglGetLayerPaletteEntries(HDC, int, int, int,
-                                                  COLORREF *);
+-                                                 COLORREF *);
 -WINGDIAPI BOOL  WINAPI wglRealizeLayerPalette(HDC, int, BOOL);
 -WINGDIAPI BOOL  WINAPI wglSwapLayerBuffers(HDC, UINT);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI int   WINAPI wglGetLayerPaletteEntries(HDC, int, int, int,
++                                                 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COLORREF *);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglRealizeLayerPalette(HDC, int, BOOL);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ WINGDIAPI BOOL  WINAPI wglSwapLayerBuffers(HDC, UINT);
  

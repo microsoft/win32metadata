@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h b/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
-index eda8c1dbb8..521acb2310 100644
+index eda8c1dbb8..d907749f62 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/xenroll.h
 @@ -134,6 +134,7 @@ extern "C"{
@@ -330,6 +330,246 @@ index eda8c1dbb8..521acb2310 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE createFilePKCS10WStr( 
+@@ -3552,13 +3553,13 @@ EXTERN_C const IID IID_IEnroll;
+         virtual HRESULT STDMETHODCALLTYPE createPKCS10WStr( 
+             /* [in] */ LPCWSTR DNName,
+             /* [in] */ LPCWSTR Usage,
+-            /* [out] */ PCRYPT_DATA_BLOB pPkcs10Blob) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCRYPT_DATA_BLOB pPkcs10Blob) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE acceptPKCS7Blob( 
+-            /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pBlobPKCS7) = 0;
+         
+         virtual PCCERT_CONTEXT STDMETHODCALLTYPE getCertContextFromPKCS7( 
+-            /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pBlobPKCS7) = 0;
+         
+         virtual HCERTSTORE STDMETHODCALLTYPE getMyStore( void) = 0;
+         
+@@ -3569,173 +3570,173 @@ EXTERN_C const IID IID_IEnroll;
+         virtual HRESULT STDMETHODCALLTYPE enumProvidersWStr( 
+             /* [in] */ LONG dwIndex,
+             /* [in] */ LONG dwFlags,
+-            /* [out] */ LPWSTR *pbstrProvName) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *pbstrProvName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE enumContainersWStr( 
+             /* [in] */ LONG dwIndex,
+-            /* [out] */ LPWSTR *pbstr) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE freeRequestInfoBlob( 
+             /* [in] */ CRYPT_DATA_BLOB pkcs7OrPkcs10) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreNameWStr( 
+-            /* [out] */ LPWSTR *szwName) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreNameWStr( 
+             /* [in] */ LPWSTR szwName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreTypeWStr( 
+-            /* [out] */ LPWSTR *szwType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreTypeWStr( 
+             /* [in] */ LPWSTR szwType) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreFlags( 
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreFlags( 
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreNameWStr( 
+-            /* [out] */ LPWSTR *szwName) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreNameWStr( 
+             /* [in] */ LPWSTR szwName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreTypeWStr( 
+-            /* [out] */ LPWSTR *szwType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreTypeWStr( 
+             /* [in] */ LPWSTR szwType) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreFlags( 
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreFlags( 
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreNameWStr( 
+-            /* [out] */ LPWSTR *szwName) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreNameWStr( 
+             /* [in] */ LPWSTR szwName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreTypeWStr( 
+-            /* [out] */ LPWSTR *szwType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreTypeWStr( 
+             /* [in] */ LPWSTR szwType) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreFlags( 
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreFlags( 
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreNameWStr( 
+-            /* [out] */ LPWSTR *szwName) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreNameWStr( 
+             /* [in] */ LPWSTR szwName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreTypeWStr( 
+-            /* [out] */ LPWSTR *szwType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreTypeWStr( 
+             /* [in] */ LPWSTR szwType) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreFlags( 
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreFlags( 
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContainerNameWStr( 
+-            /* [out] */ LPWSTR *szwContainer) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwContainer) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ContainerNameWStr( 
+             /* [in] */ LPWSTR szwContainer) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderNameWStr( 
+-            /* [out] */ LPWSTR *szwProvider) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwProvider) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ProviderNameWStr( 
+             /* [in] */ LPWSTR szwProvider) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderType( 
+-            /* [out] */ LONG *pdwType) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwType) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ProviderType( 
+             /* [in] */ LONG dwType) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_KeySpec( 
+-            /* [out] */ LONG *pdw) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdw) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_KeySpec( 
+             /* [in] */ LONG dw) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderFlags( 
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ProviderFlags( 
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_UseExistingKeySet( 
+-            /* [out] */ BOOL *fUseExistingKeys) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fUseExistingKeys) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_UseExistingKeySet( 
+             /* [in] */ BOOL fUseExistingKeys) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_GenKeyFlags( 
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_GenKeyFlags( 
+             /* [in] */ LONG dwFlags) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DeleteRequestCert( 
+-            /* [out] */ BOOL *fDelete) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fDelete) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_DeleteRequestCert( 
+             /* [in] */ BOOL fDelete) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WriteCertToUserDS( 
+-            /* [out] */ BOOL *fBool) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fBool) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_WriteCertToUserDS( 
+             /* [in] */ BOOL fBool) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EnableT61DNEncoding( 
+-            /* [out] */ BOOL *fBool) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fBool) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_EnableT61DNEncoding( 
+             /* [in] */ BOOL fBool) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WriteCertToCSP( 
+-            /* [out] */ BOOL *fBool) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fBool) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_WriteCertToCSP( 
+             /* [in] */ BOOL fBool) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SPCFileNameWStr( 
+-            /* [out] */ LPWSTR *szw) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szw) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_SPCFileNameWStr( 
+             /* [in] */ LPWSTR szw) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PVKFileNameWStr( 
+-            /* [out] */ LPWSTR *szw) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szw) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_PVKFileNameWStr( 
+             /* [in] */ LPWSTR szw) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgorithmWStr( 
+-            /* [out] */ LPWSTR *szw) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szw) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_HashAlgorithmWStr( 
+             /* [in] */ LPWSTR szw) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RenewalCertificate( 
+-            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCCERT_CONTEXT *ppCertContext) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RenewalCertificate( 
+             /* [in] */ PCCERT_CONTEXT pCertContext) = 0;
+@@ -3748,15 +3749,15 @@ EXTERN_C const IID IID_IEnroll;
+             /* [in] */ LPWSTR Value) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddExtensionsToRequest( 
+-            /* [in] */ PCERT_EXTENSIONS pCertExtensions) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCERT_EXTENSIONS pCertExtensions) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddAuthenticatedAttributesToPKCS7Request( 
+-            /* [in] */ PCRYPT_ATTRIBUTES pAttributes) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_ATTRIBUTES pAttributes) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreatePKCS7RequestFromRequest( 
+-            /* [in] */ PCRYPT_DATA_BLOB pRequest,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pRequest,
+             /* [in] */ PCCERT_CONTEXT pSigningCertContext,
+-            /* [out] */ PCRYPT_DATA_BLOB pPkcs7Blob) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCRYPT_DATA_BLOB pPkcs7Blob) = 0;
+         
+     };
+     
 @@ -4142,7 +4143,7 @@ EXTERN_C const IID IID_IEnroll;
          END_INTERFACE
      } IEnrollVtbl;
@@ -339,7 +579,7 @@ index eda8c1dbb8..521acb2310 100644
      {
          CONST_VTBL struct IEnrollVtbl *lpVtbl;
      };
-@@ -4394,8 +4395,8 @@ EXTERN_C const IID IID_IEnroll2;
+@@ -4394,43 +4395,43 @@ EXTERN_C const IID IID_IEnroll2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -350,6 +590,64 @@ index eda8c1dbb8..521acb2310 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE InstallPKCS7Blob( 
+-            /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pBlobPKCS7) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSupportedKeySpec( 
+-            /* [out] */ LONG *pdwKeySpec) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwKeySpec) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetKeyLen( 
+             /* [in] */ BOOL fMin,
+             /* [in] */ BOOL fExchange,
+-            /* [out] */ LONG *pdwKeySize) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwKeySize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumAlgs( 
+             /* [in] */ LONG dwIndex,
+             /* [in] */ LONG algClass,
+-            /* [out] */ LONG *pdwAlgID) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwAlgID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlgNameWStr( 
+             /* [in] */ LONG algID,
+-            /* [out] */ LPWSTR *ppwsz) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *ppwsz) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ReuseHardwareKeyIfUnableToGenNew( 
+             /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ReuseHardwareKeyIfUnableToGenNew( 
+-            /* [out] */ BOOL *fReuseHardwareKeyIfUnableToGenNew) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fReuseHardwareKeyIfUnableToGenNew) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_HashAlgID( 
+             /* [in] */ LONG hashAlgID) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgID( 
+-            /* [retval][out] */ LONG *hashAlgID) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *hashAlgID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetHStoreMy( 
+             /* [in] */ HCERTSTORE hStore) = 0;
+@@ -4448,13 +4449,13 @@ EXTERN_C const IID IID_IEnroll2;
+             /* [in] */ BOOL fLimitExchangeKeyToEncipherment) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LimitExchangeKeyToEncipherment( 
+-            /* [retval][out] */ BOOL *fLimitExchangeKeyToEncipherment) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fLimitExchangeKeyToEncipherment) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_EnableSMIMECapabilities( 
+             /* [in] */ BOOL fEnableSMIMECapabilities) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EnableSMIMECapabilities( 
+-            /* [retval][out] */ BOOL *fEnableSMIMECapabilities) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fEnableSMIMECapabilities) = 0;
+         
+     };
+     
 @@ -4934,7 +4935,7 @@ EXTERN_C const IID IID_IEnroll2;
          END_INTERFACE
      } IEnroll2Vtbl;
@@ -359,7 +657,7 @@ index eda8c1dbb8..521acb2310 100644
      {
          CONST_VTBL struct IEnroll2Vtbl *lpVtbl;
      };
-@@ -5241,8 +5242,8 @@ EXTERN_C const IID IID_IEnroll4;
+@@ -5241,15 +5242,15 @@ EXTERN_C const IID IID_IEnroll4;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -370,7 +668,48 @@ index eda8c1dbb8..521acb2310 100644
      {
      public:
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ThumbPrintWStr( 
-@@ -5288,13 +5289,13 @@ EXTERN_C const IID IID_IEnroll4;
+             /* [in] */ CRYPT_DATA_BLOB thumbPrintBlob) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ThumbPrintWStr( 
+-            /* [retval][out] */ PCRYPT_DATA_BLOB thumbPrintBlob) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCRYPT_DATA_BLOB thumbPrintBlob) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetPrivateKeyArchiveCertificate( 
+             /* [in] */ PCCERT_CONTEXT pPrivateKeyArchiveCert) = 0;
+@@ -5258,25 +5259,25 @@ EXTERN_C const IID IID_IEnroll4;
+         
+         virtual HRESULT STDMETHODCALLTYPE binaryBlobToString( 
+             /* [in] */ LONG Flags,
+-            /* [in] */ PCRYPT_DATA_BLOB pblobBinary,
+-            /* [out] */ LPWSTR *ppwszString) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobBinary,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *ppwszString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE stringToBinaryBlob( 
+             /* [in] */ LONG Flags,
+             /* [in] */ LPCWSTR pwszString,
+-            /* [out] */ PCRYPT_DATA_BLOB pblobBinary,
+-            /* [out] */ LONG *pdwSkip,
+-            /* [out] */ LONG *pdwFlags) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCRYPT_DATA_BLOB pblobBinary,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwSkip,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE addExtensionToRequestWStr( 
+             /* [in] */ LONG Flags,
+             /* [in] */ LPCWSTR pwszName,
+-            /* [in] */ PCRYPT_DATA_BLOB pblobValue) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE addAttributeToRequestWStr( 
+             /* [in] */ LONG Flags,
+             /* [in] */ LPCWSTR pwszName,
+-            /* [in] */ PCRYPT_DATA_BLOB pblobValue) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE addNameValuePairToRequestWStr( 
+             /* [in] */ LONG Flags,
+@@ -5288,34 +5289,34 @@ EXTERN_C const IID IID_IEnroll4;
          virtual HRESULT STDMETHODCALLTYPE resetAttributes( void) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE createRequestWStr( 
@@ -378,7 +717,8 @@ index eda8c1dbb8..521acb2310 100644
 +            /* [in] */ _Win32_AssociatedEnum_(CERT_CREATE_REQUEST_FLAGS) LONG Flags,
              /* [in] */ LPCWSTR pwszDNName,
              /* [in] */ LPCWSTR pwszUsage,
-             /* [out] */ PCRYPT_DATA_BLOB pblobRequest) = 0;
+-            /* [out] */ PCRYPT_DATA_BLOB pblobRequest) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCRYPT_DATA_BLOB pblobRequest) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE createFileRequestWStr( 
 -            /* [in] */ LONG Flags,
@@ -386,13 +726,40 @@ index eda8c1dbb8..521acb2310 100644
              /* [in] */ LPCWSTR pwszDNName,
              /* [in] */ LPCWSTR pwszUsage,
              /* [in] */ LPCWSTR pwszRequestFileName) = 0;
-@@ -5329,15 +5330,15 @@ EXTERN_C const IID IID_IEnroll4;
+         
+         virtual HRESULT STDMETHODCALLTYPE acceptResponseBlob( 
+-            /* [in] */ PCRYPT_DATA_BLOB pblobResponse) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobResponse) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE acceptFileResponseWStr( 
+             /* [in] */ LPCWSTR pwszResponseFileName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getCertContextFromResponseBlob( 
+-            /* [in] */ PCRYPT_DATA_BLOB pblobResponse,
+-            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobResponse,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCCERT_CONTEXT *ppCertContext) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE getCertContextFromFileResponseWStr( 
+             /* [in] */ LPCWSTR pwszResponseFileName,
+-            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCCERT_CONTEXT *ppCertContext) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createPFXWStr( 
+             /* [in] */ LPCWSTR pwszPassword,
+-            /* [out] */ PCRYPT_DATA_BLOB pblobPFX) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCRYPT_DATA_BLOB pblobPFX) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE createFilePFXWStr( 
+             /* [in] */ LPCWSTR pwszPassword,
+@@ -5329,23 +5330,23 @@ EXTERN_C const IID IID_IEnroll4;
          
          virtual HRESULT STDMETHODCALLTYPE enumPendingRequestWStr( 
              /* [in] */ LONG lIndex,
 -            /* [in] */ LONG lDesiredProperty,
+-            /* [out] */ LPVOID ppProperty) = 0;
 +            /* [in] */ _Win32_AssociatedEnum_(PENDING_REQUEST_DESIRED_PROPERTY) LONG lDesiredProperty,
-             /* [out] */ LPVOID ppProperty) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPVOID ppProperty) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE removePendingRequestWStr( 
              /* [in] */ CRYPT_DATA_BLOB thumbPrintBlob) = 0;
@@ -400,13 +767,16 @@ index eda8c1dbb8..521acb2310 100644
          virtual HRESULT STDMETHODCALLTYPE GetKeyLenEx( 
 -            /* [in] */ LONG lSizeSpec,
 -            /* [in] */ LONG lKeySpec,
+-            /* [retval][out] */ LONG *pdwKeySize) = 0;
 +            /* [in] */ _Win32_AssociatedEnum_(XEKL_KEYSIZE) LONG lSizeSpec,
 +            /* [in] */ _Win32_AssociatedEnum_(XEKL_KEYSPEC) LONG lKeySpec,
-             /* [retval][out] */ LONG *pdwKeySize) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pdwKeySize) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE InstallPKCS7BlobEx( 
-@@ -5345,7 +5346,7 @@ EXTERN_C const IID IID_IEnroll4;
-             /* [retval][out] */ LONG *plCertInstalled) = 0;
+-            /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7,
+-            /* [retval][out] */ LONG *plCertInstalled) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pBlobPKCS7,
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plCertInstalled) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE AddCertTypeToRequestWStrEx( 
 -            /* [in] */ LONG lType,
@@ -414,6 +784,37 @@ index eda8c1dbb8..521acb2310 100644
              /* [in] */ LPCWSTR pwszOIDOrName,
              /* [in] */ LONG lMajorVersion,
              /* [in] */ BOOL fMinorVersion,
+@@ -5353,12 +5354,12 @@ EXTERN_C const IID IID_IEnroll4;
+         
+         virtual HRESULT STDMETHODCALLTYPE getProviderTypeWStr( 
+             /* [in] */ LPCWSTR pwszProvName,
+-            /* [retval][out] */ LONG *plProvType) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plProvType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE addBlobPropertyToCertificateWStr( 
+             /* [in] */ LONG lPropertyId,
+             /* [in] */ LONG lReserved,
+-            /* [in] */ PCRYPT_DATA_BLOB pBlobProperty) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pBlobProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetSignerCertificate( 
+             /* [in] */ PCCERT_CONTEXT pSignerCert) = 0;
+@@ -5367,13 +5368,13 @@ EXTERN_C const IID IID_IEnroll4;
+             /* [in] */ LONG lClientId) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ClientId( 
+-            /* [retval][out] */ LONG *plClientId) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plClientId) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_IncludeSubjectKeyID( 
+             /* [in] */ BOOL fInclude) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IncludeSubjectKeyID( 
+-            /* [retval][out] */ BOOL *pfInclude) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfInclude) = 0;
+         
+     };
+     
 @@ -6047,7 +6048,7 @@ EXTERN_C const IID IID_IEnroll4;
          END_INTERFACE
      } IEnroll4Vtbl;

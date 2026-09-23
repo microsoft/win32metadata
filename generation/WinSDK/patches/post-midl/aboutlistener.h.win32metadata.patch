@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h
-index ac1c73d4f1..7ec86998fb 100644
+index ac1c73d4f1..ad66f8420c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/AboutListener.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,17 @@ index ac1c73d4f1..7ec86998fb 100644
  /**
   * @file
   * alljoyn_aboutlistener provides a callback for the org.alljoyn.About.Announce signal.
+@@ -70,8 +71,8 @@ typedef void (AJ_CALL * alljoyn_about_announced_ptr)(const void* context,
+                                                      const char* busName,
+                                                      uint16_t version,
+                                                      alljoyn_sessionport port,
+-                                                     const alljoyn_msgarg objectDescriptionArg,
+-                                                     const alljoyn_msgarg aboutDataArg);
++                                                     _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg objectDescriptionArg,
++                                                     _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg aboutDataArg);
+ 
+ /**
+  * The callback used for creation of an alljoyn_aboutlistener.
 @@ -90,13 +91,13 @@ typedef struct {
   * @param context  Context to pass along to callback functions.
   * @return allocated alljoyn_aboutlistener

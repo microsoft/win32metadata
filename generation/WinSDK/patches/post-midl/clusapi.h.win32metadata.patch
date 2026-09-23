@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h
-index bac8998e54..9ca6e71741 100644
+index bac8998e54..b74d9766df 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ClusApi.h
 @@ -1,3 +1,4 @@
@@ -124,7 +124,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterControl(
      _In_ HCLUSTER hCluster,
-@@ -939,7 +940,7 @@ typedef BOOL
+@@ -935,11 +936,11 @@ typedef enum _CLUSTER_UPGRADE_PHASE {
+ 
+ typedef BOOL
+ (WINAPI *PCLUSTER_UPGRADE_PROGRESS_CALLBACK)(
+-    PVOID pvCallbackArg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvCallbackArg,
      CLUSTER_UPGRADE_PHASE eUpgradePhase
      );
  
@@ -827,7 +832,7 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  MoveClusterGroupEx(
    _In_       HGROUP hGroup,
-@@ -3244,12 +3245,12 @@ MoveClusterGroupEx2(
+@@ -3244,19 +3245,19 @@ MoveClusterGroupEx2(
  #endif
  
  
@@ -842,6 +847,23 @@ index bac8998e54..9ca6e71741 100644
      _In_ HRESOURCE hResource,
      _In_ DWORD dwFlags
      );
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_RESTART_CLUSTER_RESOURCE)(
+-    HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
+     DWORD dwFlags
+     );
+ 
+@@ -3272,7 +3273,7 @@ RestartClusterResourceEx(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_RESTART_CLUSTER_RESOURCE_EX)(
+-    HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
+     DWORD dwFlags
+     );
+ 
 @@ -3280,7 +3281,7 @@ typedef DWORD
  
  #endif // (CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8)
@@ -878,7 +900,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  SetClusterGroupName(
      _In_ HGROUP hGroup,
-@@ -3331,7 +3332,7 @@ typedef DWORD
+@@ -3327,11 +3328,11 @@ SetClusterGroupName(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_SET_CLUSTER_GROUP_NAME)(
+-    HGROUP hGroup,
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup,
      LPCWSTR lpszGroupName
      );
  
@@ -914,8 +941,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  OfflineClusterGroup(
      _In_ HGROUP hGroup
-@@ -3419,7 +3420,7 @@ typedef DWORD
-     HGROUP hGroup
+@@ -3416,10 +3417,10 @@ OfflineClusterGroup(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_OFFLINE_CLUSTER_GROUP)(
+-    HGROUP hGroup
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup
      );
  
 -DWORD
@@ -923,8 +954,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  DeleteClusterGroup(
      _In_ HGROUP hGroup
-@@ -3430,7 +3431,7 @@ typedef DWORD
-     HGROUP hGroup
+@@ -3427,10 +3428,10 @@ DeleteClusterGroup(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_DELETE_CLUSTER_GROUP)(
+-    HGROUP hGroup
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup
      );
  
 -DWORD
@@ -932,6 +967,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  DestroyClusterGroup(
      _In_ HGROUP hGroup
+@@ -3438,7 +3439,7 @@ DestroyClusterGroup(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_DESTROY_CLUSTER_GROUP)(
+-    HGROUP hGroup
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
 @@ -3471,7 +3472,7 @@ typedef DWORD
  
  #endif
@@ -941,7 +985,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterGroupOpenEnum(
      _In_ HGROUP hGroup,
-@@ -3484,7 +3485,7 @@ typedef HGROUPENUM
+@@ -3480,11 +3481,11 @@ ClusterGroupOpenEnum(
+ 
+ typedef HGROUPENUM
+ (WINAPI * PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM)(
+-    HGROUP hGroup,
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup,
      DWORD dwType
      );
  
@@ -968,6 +1017,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterGroupCloseEnum(
      _In_ HGROUPENUM hGroupEnum
+@@ -3523,7 +3524,7 @@ ClusterGroupCloseEnum(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM)(
+-    HGROUPENUM hGroupEnum
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUPENUM hGroupEnum
+     );
+ 
+ #endif // MIDL_PASS
 @@ -3585,7 +3586,7 @@ typedef enum CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE {
  //
  
@@ -977,6 +1035,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  CreateClusterResource(
      _In_ HGROUP hGroup,
+@@ -3596,7 +3597,7 @@ CreateClusterResource(
+ 
+ typedef HRESOURCE
+ (WINAPI * PCLUSAPI_CREATE_CLUSTER_RESOURCE)(
+-    HGROUP hGroup,
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup,
+     LPCWSTR lpszResourceName,
+     LPCWSTR lpszResourceType,
+     DWORD dwFlags
 @@ -3625,7 +3626,7 @@ typedef HRESOURCE
  
  #endif
@@ -986,7 +1053,13 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  OpenClusterResource(
      _In_ HCLUSTER hCluster,
-@@ -3639,7 +3640,7 @@ typedef HRESOURCE
+@@ -3634,12 +3635,12 @@ OpenClusterResource(
+ 
+ typedef HRESOURCE
+ (WINAPI * PCLUSAPI_OPEN_CLUSTER_RESOURCE)(
+-    HCLUSTER hCluster,
++    _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER hCluster,
+     LPCWSTR lpszResourceName
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1004,8 +1077,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  CloseClusterResource(
      _In_ HRESOURCE hResource
-@@ -3668,7 +3669,7 @@ typedef BOOL
-     HRESOURCE hResource
+@@ -3665,10 +3666,10 @@ CloseClusterResource(
+ 
+ typedef BOOL
+ (WINAPI * PCLUSAPI_CLOSE_CLUSTER_RESOURCE)(
+-    HRESOURCE hResource
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource
      );
  
 -HCLUSTER
@@ -1022,6 +1099,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  DeleteClusterResource(
      _In_ HRESOURCE hResource
+@@ -3687,7 +3688,7 @@ DeleteClusterResource(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_DELETE_CLUSTER_RESOURCE)(
+-    HRESOURCE hResource
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
 @@ -3707,7 +3708,7 @@ typedef DWORD
  
  #endif
@@ -1040,6 +1126,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  SetClusterResourceName(
      _In_ HRESOURCE hResource,
+@@ -3736,7 +3737,7 @@ SetClusterResourceName(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_SET_CLUSTER_RESOURCE_NAME)(
+-    HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
+     LPCWSTR lpszResourceName
+     );
+ 
 @@ -3759,7 +3760,7 @@ typedef DWORD
  
  #endif
@@ -1049,6 +1144,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  FailClusterResource(
      _In_ HRESOURCE hResource
+@@ -3767,7 +3768,7 @@ FailClusterResource(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_FAIL_CLUSTER_RESOURCE)(
+-    HRESOURCE hResource
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
 @@ -3787,7 +3788,7 @@ typedef DWORD
  
  #endif
@@ -1058,8 +1162,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  OnlineClusterResource(
      _In_ HRESOURCE hResource
-@@ -3798,7 +3799,7 @@ typedef DWORD
-     HRESOURCE hResource
+@@ -3795,10 +3796,10 @@ OnlineClusterResource(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_ONLINE_CLUSTER_RESOURCE)(
+-    HRESOURCE hResource
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource
      );
  
 -DWORD
@@ -1067,8 +1175,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  OfflineClusterResource(
      _In_ HRESOURCE hResource
-@@ -3809,7 +3810,7 @@ typedef DWORD
-     HRESOURCE hResource
+@@ -3806,10 +3807,10 @@ OfflineClusterResource(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_OFFLINE_CLUSTER_RESOURCE)(
+-    HRESOURCE hResource
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource
      );
  
 -DWORD
@@ -1076,6 +1188,28 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ChangeClusterResourceGroup(
      _In_ HRESOURCE hResource,
+@@ -3818,8 +3819,8 @@ ChangeClusterResourceGroup(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP)(
+-    HRESOURCE hResource,
+-    HGROUP hGroup
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup
+     );
+ 
+ DWORD
+@@ -3832,8 +3833,8 @@ ChangeClusterResourceGroupEx(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX)(
+-    HRESOURCE hResource,
+-    HGROUP hGroup,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup,
+     _In_ ULONGLONG Flags
+     );
+ 
 @@ -3858,7 +3859,7 @@ typedef DWORD
  
  #endif
@@ -1085,8 +1219,14 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  AddClusterResourceNode(
      _In_ HRESOURCE hResource,
-@@ -3871,7 +3872,7 @@ typedef DWORD
-     HNODE hNode
+@@ -3867,11 +3868,11 @@ AddClusterResourceNode(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE)(
+-    HRESOURCE hResource,
+-    HNODE hNode
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HNODE hNode
      );
  
 -DWORD
@@ -1094,6 +1234,17 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  RemoveClusterResourceNode(
      _In_ HRESOURCE hResource,
+@@ -3880,8 +3881,8 @@ RemoveClusterResourceNode(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE)(
+-    HRESOURCE hResource,
+-    HNODE hNode
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HNODE hNode
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
 @@ -3918,7 +3919,7 @@ typedef DWORD
  
  #endif
@@ -1103,8 +1254,14 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  AddClusterResourceDependency(
      _In_ HRESOURCE hResource,
-@@ -3931,7 +3932,7 @@ typedef DWORD
-     HRESOURCE hDependsOn
+@@ -3927,11 +3928,11 @@ AddClusterResourceDependency(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY)(
+-    HRESOURCE hResource,
+-    HRESOURCE hDependsOn
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hDependsOn
      );
  
 -DWORD
@@ -1112,6 +1269,17 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  RemoveClusterResourceDependency(
      _In_ HRESOURCE hResource,
+@@ -3940,8 +3941,8 @@ RemoveClusterResourceDependency(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY)(
+-    HRESOURCE hResource,
+-    HRESOURCE hDependsOn
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hDependsOn
+     );
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
 @@ -3978,7 +3979,7 @@ typedef DWORD
  
  #endif
@@ -1175,8 +1343,14 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  CanResourceBeDependent(
      _In_ HRESOURCE hResource,
-@@ -4081,7 +4082,7 @@ typedef BOOL
-     HRESOURCE hResourceDependent
+@@ -4077,11 +4078,11 @@ CanResourceBeDependent(
+ 
+ typedef BOOL
+ (WINAPI * PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT)(
+-    HRESOURCE hResource,
+-    HRESOURCE hResourceDependent
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResourceDependent
      );
  
 -_Success_(return == ERROR_SUCCESS)
@@ -1256,7 +1430,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterResourceOpenEnum(
      _In_ HRESOURCE hResource,
-@@ -6876,7 +6877,7 @@ typedef HRESENUM
+@@ -6872,11 +6873,11 @@ ClusterResourceOpenEnum(
+ 
+ typedef HRESENUM
+ (WINAPI * PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM)(
+-    HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
      DWORD dwType
      );
  
@@ -1283,8 +1462,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterResourceCloseEnum(
      _In_ HRESENUM hResEnum
-@@ -6918,7 +6919,7 @@ typedef DWORD
-     HRESENUM hResEnum
+@@ -6915,10 +6916,10 @@ ClusterResourceCloseEnum(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM)(
+-    HRESENUM hResEnum
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESENUM hResEnum
      );
  
 -DWORD
@@ -1301,6 +1484,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  DeleteClusterResourceType(
      _In_ HCLUSTER hCluster,
+@@ -6948,7 +6949,7 @@ DeleteClusterResourceType(
+ 
+ typedef DWORD
+ (WINAPI * PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE)(
+-    HCLUSTER hCluster,
++    _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER hCluster,
+     LPCWSTR lpszResourceTypeName
+     );
+ 
 @@ -6994,7 +6995,7 @@ typedef DWORD
  
  #endif
@@ -1523,7 +1715,8 @@ index bac8998e54..9ca6e71741 100644
 -typedef HKEY
 +_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
  (WINAPI * PCLUSAPI_GET_CLUSTER_KEY)(
-      HCLUSTER hCluster,
+-     HCLUSTER hCluster,
++     _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER hCluster,
       REGSAM samDesired
       );
  
@@ -1538,7 +1731,8 @@ index bac8998e54..9ca6e71741 100644
 -typedef HKEY
 +_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
  (WINAPI * PCLUSAPI_GET_CLUSTER_GROUP_KEY)(
-     HGROUP hGroup,
+-    HGROUP hGroup,
++    _WIN32META_ANNOTATION_("win32metadata:in") HGROUP hGroup,
      REGSAM samDesired
      );
  
@@ -1553,7 +1747,8 @@ index bac8998e54..9ca6e71741 100644
 -typedef HKEY
 +_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
  (WINAPI * PCLUSAPI_GET_CLUSTER_RESOURCE_KEY)(
-     HRESOURCE hResource,
+-    HRESOURCE hResource,
++    _WIN32META_ANNOTATION_("win32metadata:in") HRESOURCE hResource,
      REGSAM samDesired
      );
  
@@ -1568,7 +1763,8 @@ index bac8998e54..9ca6e71741 100644
 -typedef HKEY
 +_Win32_RAIIFree_(RegCloseKey, -1, 0) typedef HKEY
  (WINAPI * PCLUSAPI_GET_CLUSTER_NODE_KEY)(
-     HNODE hNode,
+-    HNODE hNode,
++    _WIN32META_ANNOTATION_("win32metadata:in") HNODE hNode,
      REGSAM samDesired
      );
  
@@ -1658,8 +1854,12 @@ index bac8998e54..9ca6e71741 100644
      );
  
  typedef LONG
-@@ -7645,7 +7646,7 @@ typedef LONG
-     PHKEY phkResult
+@@ -7642,10 +7643,10 @@ typedef LONG
+     HKEY hKey,
+     LPCWSTR lpszSubKey,
+     REGSAM samDesired,
+-    PHKEY phkResult
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PHKEY phkResult
      );
  
 -LONG
@@ -1730,8 +1930,24 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterRegQueryInfoKey(
      _In_ HKEY hKey,
-@@ -7848,7 +7849,7 @@ typedef LONG
-     PFILETIME lpftLastWriteTime
+@@ -7839,16 +7840,16 @@ ClusterRegQueryInfoKey(
+ typedef LONG
+ (WINAPI * PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY)(
+     HKEY hKey,
+-    LPDWORD lpcSubKeys,
+-    LPDWORD lpcbMaxSubKeyLen,
+-    LPDWORD lpcValues,
+-    LPDWORD lpcbMaxValueNameLen,
+-    LPDWORD lpcbMaxValueLen,
+-    LPDWORD lpcbSecurityDescriptor,
+-    PFILETIME lpftLastWriteTime
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpcSubKeys,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpcbMaxSubKeyLen,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpcValues,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpcbMaxValueNameLen,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpcbMaxValueLen,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpcbSecurityDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFILETIME lpftLastWriteTime
      );
  
 -LONG
@@ -1766,7 +1982,12 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterRegSyncDatabase(
      _In_ HCLUSTER hCluster,
-@@ -7914,7 +7915,7 @@ typedef LONG
+@@ -7910,11 +7911,11 @@ ClusterRegSyncDatabase(
+ 
+ typedef LONG
+ (WINAPI * PCLUSAPI_CLUSTER_REG_SYNC_DATABASE)(
+-    HCLUSTER hCluster,
++    _WIN32META_ANNOTATION_("win32metadata:in") HCLUSTER hCluster,
      DWORD flags
      );
  
@@ -1905,6 +2126,15 @@ index bac8998e54..9ca6e71741 100644
  WINAPI
  ClusterSetAccountAccess(
      _In_ HCLUSTER hCluster,
+@@ -8153,7 +8154,7 @@ typedef enum _CLUSTER_SETUP_PHASE_SEVERITY {
+ 
+ typedef BOOL
+ (WINAPI *PCLUSTER_SETUP_PROGRESS_CALLBACK)(
+-    PVOID                           pvCallbackArg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID                           pvCallbackArg,
+     CLUSTER_SETUP_PHASE             eSetupPhase,
+     CLUSTER_SETUP_PHASE_TYPE        ePhaseType,
+     CLUSTER_SETUP_PHASE_SEVERITY    ePhaseSeverity,
 @@ -8161,7 +8162,7 @@ typedef BOOL
      _In_opt_ PCWSTR                 lpszObjectName,
      DWORD                           dwStatus );

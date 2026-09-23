@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
-index d9c3d10330..b57a8152f5 100644
+index d9c3d10330..3fb45443d2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/securitybaseapi.h
 @@ -1,3 +1,4 @@
@@ -458,7 +458,7 @@ index d9c3d10330..b57a8152f5 100644
  BOOL
  WINAPI
  DeleteAce(
-@@ -664,7 +665,7 @@ DeleteAce(
+@@ -664,11 +665,11 @@ DeleteAce(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -467,6 +467,11 @@ index d9c3d10330..b57a8152f5 100644
  BOOL
  WINAPI
  DestroyPrivateObjectSecurity(
+-    _Pre_valid_ _Post_invalid_ PSECURITY_DESCRIPTOR* ObjectDescriptor
++    _WIN32META_ANNOTATION_("win32metadata:in") _Pre_valid_ _Post_invalid_ PSECURITY_DESCRIPTOR* ObjectDescriptor
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 @@ -677,25 +678,25 @@ DestroyPrivateObjectSecurity(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -569,7 +574,7 @@ index d9c3d10330..b57a8152f5 100644
  BOOL
  WINAPI
  GetKernelObjectSecurity(
-@@ -798,7 +799,7 @@ GetKernelObjectSecurity(
+@@ -798,13 +799,13 @@ GetKernelObjectSecurity(
      _Out_ LPDWORD lpnLengthNeeded
      );
  
@@ -578,6 +583,13 @@ index d9c3d10330..b57a8152f5 100644
  _Post_satisfies_(return >= 8 && return <= SECURITY_MAX_SID_SIZE)
  _Success_(1)
  DWORD
+ WINAPI
+ GetLengthSid(
+-    _In_ _Post_readable_byte_size_(return) PSID pSid
++    _WIN32META_ANNOTATION_("win32metadata:out") _In_ _Post_readable_byte_size_(return) PSID pSid
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 @@ -813,13 +814,13 @@ GetLengthSid(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

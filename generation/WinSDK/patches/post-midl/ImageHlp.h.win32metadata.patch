@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
-index 1cdaaf102c..b8caf75d25 100644
+index 1cdaaf102c..ae6ba8e559 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -98,9 +98,12 @@ index 1cdaaf102c..b8caf75d25 100644
  IMAGEAPI
  SetImageConfigInformation(
      _Inout_ PLOADED_IMAGE LoadedImage,
-@@ -336,7 +343,7 @@ typedef PVOID DIGEST_HANDLE;
+@@ -334,9 +341,9 @@ SetImageConfigInformation(
  
- typedef BOOL (WINAPI *DIGEST_FUNCTION) (DIGEST_HANDLE refdata, PBYTE pData, DWORD dwLength);
+ typedef PVOID DIGEST_HANDLE;
+ 
+-typedef BOOL (WINAPI *DIGEST_FUNCTION) (DIGEST_HANDLE refdata, PBYTE pData, DWORD dwLength);
++typedef BOOL (WINAPI *DIGEST_FUNCTION) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DIGEST_HANDLE refdata, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pData, DWORD dwLength);
  
 -BOOL
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL

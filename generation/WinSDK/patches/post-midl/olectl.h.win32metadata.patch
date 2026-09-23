@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
-index cb297a639b..509623a318 100644
+index cb297a639b..5eb092a8f5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
 @@ -1,3 +1,4 @@
@@ -21,13 +21,14 @@ index cb297a639b..509623a318 100644
  // Property frame APIs
  
 -WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
-+_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
-     LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
+-    LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
 -    LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
-+    LPCLSID pPageClsID, LCID lcid, _Reserved_ DWORD dwReserved, _Reserved_ LPVOID pvReserved);
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
++    LPCOLESTR lpszCaption, ULONG cObjects, _WIN32META_ANNOTATION_("win32metadata:in") LPUNKNOWN FAR* ppUnk, ULONG cPages,
++    _WIN32META_ANNOTATION_("win32metadata:in") LPCLSID pPageClsID, LCID lcid, _Reserved_ DWORD dwReserved, _Reserved_ LPVOID pvReserved);
  
 -WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
-+_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePropertyFrameIndirect(_WIN32META_ANNOTATION_("win32metadata:in") LPOCPFIPARAMS lpParams);
  
  
  /////////////////////////////////////////////////////////////////////////////
@@ -38,11 +39,11 @@ index cb297a639b..509623a318 100644
      COLORREF* lpcolorref);
  
 -WINOLECTLAPI OleCreateFontIndirect(LPFONTDESC lpFontDesc, REFIID riid,
-+_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreateFontIndirect(LPFONTDESC lpFontDesc, REFIID riid,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreateFontIndirect(_WIN32META_ANNOTATION_("win32metadata:in") LPFONTDESC lpFontDesc, REFIID riid,
      LPVOID FAR* lplpvObj);
  
 -WINOLECTLAPI OleCreatePictureIndirect(LPPICTDESC lpPictDesc, REFIID riid,
-+_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePictureIndirect(LPPICTDESC lpPictDesc, REFIID riid,
++_Windows_SupportedOS_Windows2000_ WINOLECTLAPI OleCreatePictureIndirect(_WIN32META_ANNOTATION_("win32metadata:in") LPPICTDESC lpPictDesc, REFIID riid,
      BOOL fOwn, LPVOID FAR* lplpvObj);
  
 -WINOLECTLAPI OleLoadPicture(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,

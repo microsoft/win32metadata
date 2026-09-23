@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
-index 811c3c7e7b..4b121f8e9c 100644
+index 811c3c7e7b..d6ffd63842 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSRole.h
 @@ -20,6 +20,7 @@ Abstract:
@@ -63,7 +63,7 @@ index 811c3c7e7b..4b121f8e9c 100644
  
      DsRoleOperationIdle = 0,
      DsRoleOperationActive,
-@@ -101,20 +102,24 @@ typedef enum _DSROLE_OPERATION_STATE {
+@@ -101,24 +102,28 @@ typedef enum _DSROLE_OPERATION_STATE {
  
  } DSROLE_OPERATION_STATE;
  
@@ -82,7 +82,7 @@ index 811c3c7e7b..4b121f8e9c 100644
      IN  LPCWSTR lpServer OPTIONAL,
      IN  DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
 -    OUT PBYTE *Buffer 
-+    OUT  PBYTE *Buffer 
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT  PBYTE *Buffer 
      );
  
 +_Windows_SupportedOS_WindowsVista_ 
@@ -90,3 +90,8 @@ index 811c3c7e7b..4b121f8e9c 100644
  VOID
  WINAPI
  DsRoleFreeMemory(
+-    IN PVOID    Buffer
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID    Buffer
+     );
+ 
+ 

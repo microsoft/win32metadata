@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h b/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
-index 1433c2af44..594d49405f 100644
+index 1433c2af44..9c72febdbe 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/syncregistration.h
 @@ -177,6 +177,7 @@ extern "C"{
@@ -28,6 +28,15 @@ index 1433c2af44..594d49405f 100644
      ISyncProviderRegistration : public IUnknown
      {
      public:
+@@ -321,7 +322,7 @@ EXTERN_C const IID IID_ISyncProviderRegistration;
+             /* [in] */ DWORD dwStateFlags) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE RegisterForEvent( 
+-            /* [retval][out] */ HANDLE *phEvent) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") HANDLE *phEvent) = 0;
+         
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE RevokeEvent( 
+             /* [in] */ HANDLE hEvent) = 0;
 @@ -547,7 +548,7 @@ EXTERN_C const IID IID_IEnumSyncProviderConfigUIInfos;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

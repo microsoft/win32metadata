@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h
-index dc625577c0..03f7d2c5c0 100644
+index dc625577c0..4c65d5c1a4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/ProxyBusObject.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,51 @@ index dc625577c0..03f7d2c5c0 100644
  /**
   * @file
   * This file defines the alljoyn_proxybusobject and related functions.
+@@ -56,7 +57,7 @@ typedef struct _alljoyn_busattachment_handle*               alljoyn_busattachmen
+  * @param obj       Remote bus object that was introspected
+  * @param context   Context passed in IntrospectRemoteObjectAsync()
+  */
+-typedef void (AJ_CALL * alljoyn_proxybusobject_listener_introspectcb_ptr)(QStatus status, alljoyn_proxybusobject obj, void* context);
++typedef void (AJ_CALL * alljoyn_proxybusobject_listener_introspectcb_ptr)(QStatus status, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject obj, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Callback registered with alljoyn_proxybusobject_getpropertyasync()
+@@ -69,7 +70,7 @@ typedef void (AJ_CALL * alljoyn_proxybusobject_listener_introspectcb_ptr)(QStatu
+  * @param value     If status is ER_OK a MsgArg containing the returned property value
+  * @param context   Caller provided context passed in to alljoyn_proxybusobject_getpropertyasync()
+  */
+-typedef void (AJ_CALL * alljoyn_proxybusobject_listener_getpropertycb_ptr)(QStatus status, alljoyn_proxybusobject obj, const alljoyn_msgarg value, void* context);
++typedef void (AJ_CALL * alljoyn_proxybusobject_listener_getpropertycb_ptr)(QStatus status, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject obj, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg value, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Callback registered with alljoyn_proxybusobject_getallpropertiesasync()
+@@ -81,7 +82,7 @@ typedef void (AJ_CALL * alljoyn_proxybusobject_listener_getpropertycb_ptr)(QStat
+  * @param values      If status is ER_OK an array of dictionary entries, signature "a{sv}" listing the properties.
+  * @param context     Caller provided context passed in to alljoyn_proxybusobject_getallpropertiesasync()
+  */
+-typedef void (AJ_CALL * alljoyn_proxybusobject_listener_getallpropertiescb_ptr)(QStatus status, alljoyn_proxybusobject obj, const alljoyn_msgarg values, void* context);
++typedef void (AJ_CALL * alljoyn_proxybusobject_listener_getallpropertiescb_ptr)(QStatus status, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject obj, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg values, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Callback registered with alljoyn_proxybusobject_setpropertyasync()
+@@ -93,7 +94,7 @@ typedef void (AJ_CALL * alljoyn_proxybusobject_listener_getallpropertiescb_ptr)(
+  * @param obj       Remote bus object that was introspected
+  * @param context   Caller provided context passed in to alljoyn_proxybusobject_setpropertyasync()
+  */
+-typedef void (AJ_CALL * alljoyn_proxybusobject_listener_setpropertycb_ptr)(QStatus status, alljoyn_proxybusobject obj, void* context);
++typedef void (AJ_CALL * alljoyn_proxybusobject_listener_setpropertycb_ptr)(QStatus status, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject obj, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Callback to receive property changed events.
+@@ -104,7 +105,7 @@ typedef void (AJ_CALL * alljoyn_proxybusobject_listener_setpropertycb_ptr)(QStat
+  * @param invalidated   Properties whose values have been invalidated, signature "as".
+  * @param context       Caller provided context passed in to RegisterPropertiesChangedListener
+  */
+-typedef void (AJ_CALL * alljoyn_proxybusobject_listener_propertieschanged_ptr)(alljoyn_proxybusobject obj, const char* ifaceName, const alljoyn_msgarg changed, const alljoyn_msgarg invalidated, void* context);
++typedef void (AJ_CALL * alljoyn_proxybusobject_listener_propertieschanged_ptr)(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_proxybusobject obj, const char* ifaceName, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg changed, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg invalidated, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Create an empty proxy bus object that refers to an object at given remote service name. Note
 @@ -125,7 +126,7 @@ typedef void (AJ_CALL * alljoyn_proxybusobject_listener_propertieschanged_ptr)(a
   *
   * @return the allocated alljoyn_proxybusobject

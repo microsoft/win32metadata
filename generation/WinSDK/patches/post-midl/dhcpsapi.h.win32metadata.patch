@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
-index 5259993040..8381a0d6a3 100644
+index 5259993040..8db5b610f3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
 @@ -13,6 +13,7 @@ Module Name:   dhcpsapi.h
@@ -483,7 +483,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2000_ DhcpGetSubnetInfo(
      _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
                 DHCP_IP_ADDRESS    SubnetAddress,
-                LPDHCP_SUBNET_INFO * SubnetInfo
+-               LPDHCP_SUBNET_INFO * SubnetInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_INFO * SubnetInfo
      );
  
  DWORD DHCP_API_FUNCTION
@@ -501,7 +502,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpAddSubnetElement(
      _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
                 DHCP_IP_ADDRESS            SubnetAddress,
-@@ -1905,7 +1906,7 @@ DhcpAddSubnetElement(
+@@ -1905,18 +1906,18 @@ DhcpAddSubnetElement(
      );
  
  DWORD DHCP_API_FUNCTION
@@ -510,8 +511,15 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR                 *ServerIpAddress,
                 DHCP_IP_ADDRESS                  SubnetAddress,
                 DHCP_SUBNET_ELEMENT_TYPE         EnumElementType,
-@@ -1916,7 +1917,7 @@ DhcpEnumSubnetElements(
-                DWORD                            *ElementsTotal
+-               DHCP_RESUME_HANDLE               *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE               *ResumeHandle,
+                DWORD                            PreferredMaximum,
+-               LPDHCP_SUBNET_ELEMENT_INFO_ARRAY *EnumElementInfo,
+-               DWORD                            *ElementsRead,
+-               DWORD                            *ElementsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_ELEMENT_INFO_ARRAY *EnumElementInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                            *ElementsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                            *ElementsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -528,7 +536,7 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
                 DHCP_IP_ADDRESS   SubnetAddress,
                 DHCP_FORCE_FLAG   ForceFlag
-@@ -1935,28 +1936,28 @@ DhcpDeleteSubnet(
+@@ -1935,44 +1936,44 @@ DhcpDeleteSubnet(
  // Option APIs
  //
  
@@ -553,16 +561,23 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetOptionInfo(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
                 DHCP_OPTION_ID   OptionID,
-                LPDHCP_OPTION    *OptionInfo
+-               LPDHCP_OPTION    *OptionInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION    *OptionInfo
      );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpEnumOptions(
      _In_opt_z_ DHCP_CONST WCHAR    *ServerIpAddress,
-                DHCP_RESUME_HANDLE  *ResumeHandle,
-@@ -1966,13 +1967,13 @@ DhcpEnumOptions(
-                DWORD               *OptionsTotal
+-               DHCP_RESUME_HANDLE  *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE  *ResumeHandle,
+                DWORD               PreferredMaximum,
+-               LPDHCP_OPTION_ARRAY *Options,
+-               DWORD               *OptionsRead,
+-               DWORD               *OptionsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_ARRAY *Options,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD               *OptionsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD               *OptionsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -586,7 +601,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpSetOptionValues(
      _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
      DHCP_CONST DHCP_OPTION_SCOPE_INFO  *ScopeInfo,
-@@ -1988,14 +1989,14 @@ DhcpSetOptionValues(
+@@ -1988,25 +1989,25 @@ DhcpSetOptionValues(
      );
  
  DWORD DHCP_API_FUNCTION
@@ -595,7 +610,8 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
                 DHCP_OPTION_ID         OptionID,
      DHCP_CONST DHCP_OPTION_SCOPE_INFO *ScopeInfo,
-     LPDHCP_OPTION_VALUE *OptionValue
+-    LPDHCP_OPTION_VALUE *OptionValue
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_VALUE *OptionValue
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -603,8 +619,15 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumOptionValues(
      _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
      DHCP_CONST DHCP_OPTION_SCOPE_INFO    *ScopeInfo,
-@@ -2006,7 +2007,7 @@ DhcpEnumOptionValues(
-                DWORD                     *OptionsTotal
+-               DHCP_RESUME_HANDLE        *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE        *ResumeHandle,
+                DWORD                     PreferredMaximum,
+-               LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
+-               DWORD                     *OptionsRead,
+-               DWORD                     *OptionsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                     *OptionsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                     *OptionsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -612,7 +635,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpRemoveOptionValue(
      _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
                 DHCP_OPTION_ID          OptionID,
-@@ -2016,26 +2017,26 @@ DhcpRemoveOptionValue(
+@@ -2016,136 +2017,136 @@ DhcpRemoveOptionValue(
  //
  // Client APIs
  //
@@ -635,7 +658,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetClientInfoVQ(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
      DHCP_CONST DHCP_SEARCH_INFO *SearchInfo,
-     LPDHCP_CLIENT_INFO_VQ       *ClientInfo
+-    LPDHCP_CLIENT_INFO_VQ       *ClientInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_VQ       *ClientInfo
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -643,8 +667,15 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumSubnetClientsVQ(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IP_ADDRESS              SubnetAddress,
-@@ -2046,7 +2047,7 @@ DhcpEnumSubnetClientsVQ(
-                DWORD                       *ClientsTotal
+-               DHCP_RESUME_HANDLE           *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE           *ResumeHandle,
+                DWORD                        PreferredMaximum,
+-               LPDHCP_CLIENT_INFO_ARRAY_VQ *ClientInfo,
+-               DWORD                       *ClientsRead,
+-               DWORD                       *ClientsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_ARRAY_VQ *ClientInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -652,7 +683,15 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumSubnetClientsFilterStatusInfo(
      _In_opt_z_ DHCP_CONST WCHAR                       *ServerIpAddress,
                 DHCP_IP_ADDRESS                        SubnetAddress,
-@@ -2058,32 +2059,32 @@ DhcpEnumSubnetClientsFilterStatusInfo(
+-               DHCP_RESUME_HANDLE                     *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE                     *ResumeHandle,
+                DWORD                                  PreferredMaximum,
+-               LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY *ClientInfo,
+-               DWORD                                  *ClientsRead,
+-               DWORD                                  *ClientsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_FILTER_STATUS_INFO_ARRAY *ClientInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                                  *ClientsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                                  *ClientsTotal
      );
  
  DWORD DHCP_API_FUNCTION
@@ -674,7 +713,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2000_ DhcpGetClientInfo(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
      DHCP_CONST DHCP_SEARCH_INFO *SearchInfo,
-     LPDHCP_CLIENT_INFO *ClientInfo
+-    LPDHCP_CLIENT_INFO *ClientInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO *ClientInfo
      );
  
  DWORD DHCP_API_FUNCTION
@@ -689,9 +729,15 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2000_ DhcpEnumSubnetClients(
      _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
                 DHCP_IP_ADDRESS          SubnetAddress,
-                DHCP_RESUME_HANDLE       *ResumeHandle,
-@@ -2093,7 +2094,7 @@ DhcpEnumSubnetClients(
-                DWORD                    *ClientsTotal
+-               DHCP_RESUME_HANDLE       *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE       *ResumeHandle,
+                DWORD                    PreferredMaximum,
+-               LPDHCP_CLIENT_INFO_ARRAY *ClientInfo,
+-               DWORD                    *ClientsRead,
+-               DWORD                    *ClientsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_ARRAY *ClientInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                    *ClientsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                    *ClientsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -699,8 +745,16 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetClientOptions(
      _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
                 DHCP_IP_ADDRESS     ClientIpAddress,
-@@ -2107,7 +2108,7 @@ DhcpGetMibInfo(
-     LPDHCP_MIB_INFO *MibInfo
+                DHCP_IP_MASK        ClientSubnetMask,
+-               LPDHCP_OPTION_LIST *ClientOptions
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_LIST *ClientOptions
+     );
+ 
+ DWORD DHCP_API_FUNCTION
+ DhcpGetMibInfo(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+-    LPDHCP_MIB_INFO *MibInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_MIB_INFO *MibInfo
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -708,7 +762,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpServerSetConfig(
      _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
                 DWORD                     FieldsToSet,
-@@ -2115,14 +2116,14 @@ DhcpServerSetConfig(
+-               LPDHCP_SERVER_CONFIG_INFO ConfigInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO ConfigInfo
      );
  
  
@@ -716,7 +771,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpServerGetConfig(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
-     LPDHCP_SERVER_CONFIG_INFO *ConfigInfo
+-    LPDHCP_SERVER_CONFIG_INFO *ConfigInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO *ConfigInfo
      );
  
  
@@ -725,22 +781,28 @@ index 5259993040..8381a0d6a3 100644
  DhcpScanDatabase(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
                 DHCP_IP_ADDRESS   SubnetAddress,
-@@ -2131,12 +2132,12 @@ DhcpScanDatabase(
+                DWORD             FixFlag,
+-               LPDHCP_SCAN_LIST *ScanList
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SCAN_LIST *ScanList
      );
  
  VOID DHCP_API_FUNCTION
 -DhcpRpcFreeMemory(
+-    PVOID BufferPointer
 +_Windows_SupportedOS_Server2000_ DhcpRpcFreeMemory(
-     PVOID BufferPointer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID BufferPointer
      );
  
  DWORD DHCP_API_FUNCTION
 -DhcpGetVersion(
 +_Windows_SupportedOS_Server2000_ DhcpGetVersion(
      _In_opt_ LPWSTR  ServerIpAddress,
-              LPDWORD MajorVersion,
-              LPDWORD MinorVersion
-@@ -2145,7 +2146,7 @@ DhcpGetVersion(
+-             LPDWORD MajorVersion,
+-             LPDWORD MinorVersion
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD MajorVersion,
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD MinorVersion
+     );
+ 
  
  
  
@@ -749,7 +811,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpAddSubnetElementV4(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IP_ADDRESS             SubnetAddress,
-@@ -2153,7 +2154,7 @@ DhcpAddSubnetElementV4(
+@@ -2153,18 +2154,18 @@ DhcpAddSubnetElementV4(
      );
  
  DWORD DHCP_API_FUNCTION
@@ -758,8 +820,15 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR                    *ServerIpAddress,
                 DHCP_IP_ADDRESS                     SubnetAddress,
                 DHCP_SUBNET_ELEMENT_TYPE            EnumElementType,
-@@ -2164,7 +2165,7 @@ DhcpEnumSubnetElementsV4(
-                DWORD                               *ElementsTotal
+-               DHCP_RESUME_HANDLE                  *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE                  *ResumeHandle,
+                DWORD                               PreferredMaximum,
+-               LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4 *EnumElementInfo,
+-               DWORD                               *ElementsRead,
+-               DWORD                               *ElementsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4 *EnumElementInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                               *ElementsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                               *ElementsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -767,7 +836,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpRemoveSubnetElementV4(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IP_ADDRESS             SubnetAddress,
-@@ -2173,21 +2174,21 @@ DhcpRemoveSubnetElementV4(
+@@ -2173,72 +2174,72 @@ DhcpRemoveSubnetElementV4(
      );
  
  
@@ -792,7 +861,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetClientInfoV4(
      _In_opt_z_ DHCP_CONST WCHAR      *ServerIpAddress,
      DHCP_CONST DHCP_SEARCH_INFO      *SearchInfo,
-@@ -2195,7 +2196,7 @@ DhcpGetClientInfoV4(
+-               LPDHCP_CLIENT_INFO_V4 *ClientInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_V4 *ClientInfo
      );
  
  
@@ -801,7 +871,15 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumSubnetClientsV4(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IP_ADDRESS             SubnetAddress,
-@@ -2207,35 +2208,35 @@ DhcpEnumSubnetClientsV4(
+-               DHCP_RESUME_HANDLE          *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE          *ResumeHandle,
+                DWORD                       PreferredMaximum,
+-               LPDHCP_CLIENT_INFO_ARRAY_V4 *ClientInfo,
+-               DWORD                       *ClientsRead,
+-               DWORD                       *ClientsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_ARRAY_V4 *ClientInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsTotal
      );
  
  
@@ -810,14 +888,16 @@ index 5259993040..8381a0d6a3 100644
  DhcpServerSetConfigV4(
      _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
                 DWORD                        FieldsToSet,
-                LPDHCP_SERVER_CONFIG_INFO_V4 ConfigInfo
+-               LPDHCP_SERVER_CONFIG_INFO_V4 ConfigInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO_V4 ConfigInfo
      );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpServerGetConfigV4(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
-     LPDHCP_SERVER_CONFIG_INFO_V4 *ConfigInfo
+-    LPDHCP_SERVER_CONFIG_INFO_V4 *ConfigInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO_V4 *ConfigInfo
      );
  
  
@@ -845,8 +925,12 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DWORD
  DhcpGetSuperScopeInfoV4(
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
-     LPDHCP_SUPER_SCOPE_TABLE *SuperScopeTable
-@@ -2246,7 +2247,7 @@ DhcpGetSuperScopeInfoV4(
+-    LPDHCP_SUPER_SCOPE_TABLE *SuperScopeTable
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUPER_SCOPE_TABLE *SuperScopeTable
+     );
+ 
+ 
+@@ -2246,54 +2247,54 @@ DhcpGetSuperScopeInfoV4(
  
  
  
@@ -855,7 +939,17 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumSubnetClientsV5(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IP_ADDRESS             SubnetAddress,
-@@ -2260,7 +2261,7 @@ DhcpEnumSubnetClientsV5(
+-               DHCP_RESUME_HANDLE          *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE          *ResumeHandle,
+                DWORD                       PreferredMaximum,
+-               LPDHCP_CLIENT_INFO_ARRAY_V5 *ClientInfo,
+-               DWORD                       *ClientsRead,
+-               DWORD                       *ClientsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_ARRAY_V5 *ClientInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsTotal
+     );
+ 
  
  
  
@@ -864,7 +958,11 @@ index 5259993040..8381a0d6a3 100644
  DhcpCreateOptionV5(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2271,7 +2272,7 @@ DhcpCreateOptionV5(
+              IN      DHCP_OPTION_ID         OptionId,
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION          OptionInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION          OptionInfo
  ) ;
  
  
@@ -873,7 +971,11 @@ index 5259993040..8381a0d6a3 100644
  DhcpSetOptionInfoV5(                              // Modify existing option's fields
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2282,7 +2283,7 @@ DhcpSetOptionInfoV5(                              // Modify existing option's fi
+              IN      DHCP_OPTION_ID         OptionID,
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION          OptionInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION          OptionInfo
  ) ;
  
  
@@ -882,7 +984,11 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetOptionInfoV5(                              // retrieve the information from off the mem structures
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2293,7 +2294,7 @@ DhcpGetOptionInfoV5(                              // retrieve the information fr
+              IN      DHCP_OPTION_ID         OptionID,
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             OUT     LPDHCP_OPTION         *OptionInfo     // allocate memory using MIDL functions
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION         *OptionInfo     // allocate memory using MIDL functions
  ) ;
  
  
@@ -891,7 +997,16 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumOptionsV5(                                // enumerate the options defined
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2307,7 +2308,7 @@ DhcpEnumOptionsV5(                                // enumerate the options defin
+@@ -2301,13 +2302,13 @@ DhcpEnumOptionsV5(                                // enumerate the options defin
+     _In_opt_ IN      LPWSTR                 VendorName,
+              IN OUT  DHCP_RESUME_HANDLE    *ResumeHandle,
+              IN      DWORD                  PreferredMaximum,
+-             OUT     LPDHCP_OPTION_ARRAY   *Options,
+-             OUT     DWORD                 *OptionsRead,
+-             OUT     DWORD                 *OptionsTotal
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_ARRAY   *Options,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsRead,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsTotal
  ) ;
  
  
@@ -900,7 +1015,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpRemoveOptionV5(                               // remove the option definition from the registry
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2318,7 +2319,7 @@ DhcpRemoveOptionV5(                               // remove the option definitio
+@@ -2318,94 +2319,94 @@ DhcpRemoveOptionV5(                               // remove the option definitio
  
  
  DWORD                                             // OPTION_NOT_PRESENT if option is not defined
@@ -909,7 +1024,12 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               IN      DHCP_OPTION_ID         OptionId,
-@@ -2329,7 +2330,7 @@ DhcpSetOptionValueV5(                             // replace or add a new option
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
+-             IN      LPDHCP_OPTION_DATA     OptionValue
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_DATA     OptionValue
  ) ;
  
  
@@ -918,7 +1038,12 @@ index 5259993040..8381a0d6a3 100644
  DhcpSetOptionValuesV5(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2340,7 +2341,7 @@ DhcpSetOptionValuesV5(
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION_SCOPE_INFO  ScopeInfo,
+-             IN      LPDHCP_OPTION_VALUE_ARRAY OptionValues
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO  ScopeInfo,
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_VALUE_ARRAY OptionValues
  ) ;
  
  
@@ -927,8 +1052,13 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetOptionValueV5(                             // fetch the required option at required level
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2351,7 +2352,7 @@ DhcpGetOptionValueV5(                             // fetch the required option a
-              OUT     LPDHCP_OPTION_VALUE   *OptionValue
+              IN      DHCP_OPTION_ID         OptionID,
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
+-             OUT     LPDHCP_OPTION_VALUE   *OptionValue
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE   *OptionValue
  ) ;
  
 -DWORD
@@ -936,7 +1066,13 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetOptionValueV6(                             // fetch the required option at required level
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2363,7 +2364,7 @@ DhcpGetOptionValueV6(                             // fetch the required option a
+              IN      DHCP_OPTION_ID         OptionID,
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
+-             OUT     LPDHCP_OPTION_VALUE   *OptionValue
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE   *OptionValue
  ) ;
  
  
@@ -945,7 +1081,20 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumOptionValuesV5(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2379,7 +2380,7 @@ DhcpEnumOptionValuesV5(
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
+-             IN      DHCP_RESUME_HANDLE    *ResumeHandle,
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      DHCP_RESUME_HANDLE    *ResumeHandle,
+              IN      DWORD                  PreferredMaximum,
+-             OUT     LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
+-             OUT     DWORD                 *OptionsRead,
+-             OUT     DWORD                 *OptionsTotal
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsRead,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsTotal
+ ) ;
  
  
  DWORD
@@ -954,7 +1103,10 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               IN      DHCP_OPTION_ID         OptionID,
-@@ -2389,7 +2390,7 @@ DhcpRemoveOptionValueV5(
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo
  ) ;
  
  
@@ -963,7 +1115,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpCreateClass(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-@@ -2397,7 +2398,7 @@ DhcpCreateClass(
+-             IN      LPDHCP_CLASS_INFO      ClassInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_CLASS_INFO      ClassInfo
  ) ;
  
  
@@ -972,7 +1125,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpModifyClass(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-@@ -2405,7 +2406,7 @@ DhcpModifyClass(
+-             IN      LPDHCP_CLASS_INFO      ClassInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_CLASS_INFO      ClassInfo
  ) ;
  
  
@@ -981,7 +1135,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpDeleteClass(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-@@ -2413,7 +2414,7 @@ DhcpDeleteClass(
+@@ -2413,56 +2414,56 @@ DhcpDeleteClass(
  ) ;
  
  
@@ -990,7 +1144,10 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetClassInfo(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-@@ -2422,7 +2423,7 @@ DhcpGetClassInfo(
+-             IN      LPDHCP_CLASS_INFO      PartialClassInfo,
+-             OUT     LPDHCP_CLASS_INFO     *FilledClassInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_CLASS_INFO      PartialClassInfo,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO     *FilledClassInfo
  ) ;
  
  
@@ -999,7 +1156,15 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumClasses(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-@@ -2435,7 +2436,7 @@ DhcpEnumClasses(
+              IN OUT  DHCP_RESUME_HANDLE    *ResumeHandle,
+              IN      DWORD                  PreferredMaximum,
+-             OUT     LPDHCP_CLASS_INFO_ARRAY *ClassInfoArray,
+-             OUT     DWORD                 *nRead,
+-             OUT     DWORD                 *nTotal
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO_ARRAY *ClassInfoArray,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nRead,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nTotal
+ ) ;
  
  
  
@@ -1008,7 +1173,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetAllOptions(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2443,13 +2444,13 @@ DhcpGetAllOptions(
+-             OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
  ) ;
  
  DWORD DHCP_API_FUNCTION
@@ -1016,7 +1182,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpGetAllOptionsV6(
      _In_opt_ IN       LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-              OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
+-             OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
  );
  
 -DWORD
@@ -1024,7 +1191,10 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetAllOptionValues(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
-@@ -2458,7 +2459,7 @@ DhcpGetAllOptionValues(
+-             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
+-             OUT     LPDHCP_ALL_OPTION_VALUES *Values
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTION_VALUES *Values
  ) ;
  
  DWORD DHCP_API_FUNCTION
@@ -1032,35 +1202,67 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpGetAllOptionValuesV6(
      _In_opt_       LPWSTR                 ServerIpAddress,
             IN      DWORD                  Flags,
-            IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
-@@ -2474,7 +2475,7 @@ DhcpGetAllOptionValuesV6(
+-           IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
+-           OUT     LPDHCP_ALL_OPTION_VALUES *Values
++           _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
++           _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTION_VALUES *Values
+ );
+ 
+ 
+@@ -2474,12 +2475,12 @@ DhcpGetAllOptionValuesV6(
  //DOC is not accessible, it returns an error. The only currently used parameter
  //DOC is the out parameter Servers.  This is a SLOW call.
  DWORD
 -DhcpEnumServers(
 +_Windows_SupportedOS_Server2000_ DhcpEnumServers(
      IN      DWORD                  Flags,         // must be zero
-     IN      LPVOID                 IdInfo,        // must be NULL
-     OUT     LPDHCP_SERVER_INFO_ARRAY *Servers,    // output servers list
-@@ -2488,7 +2489,7 @@ DhcpEnumServers(
+-    IN      LPVOID                 IdInfo,        // must be NULL
+-    OUT     LPDHCP_SERVER_INFO_ARRAY *Servers,    // output servers list
+-    IN      LPVOID                 CallbackFn,    // must be NULL
+-    IN      LPVOID                 CallbackData   // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 IdInfo,        // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_SERVER_INFO_ARRAY *Servers,    // output servers list
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackFn,    // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackData   // must be NULL
+ );
+ 
+ //DOC DhcpAddServer tries to add a new server to the existing list of servers in
+@@ -2488,24 +2489,24 @@ DhcpEnumServers(
  //DOC This is a SLOW call.  Currently, the DsLocation and DsLocType are not valid
  //DOC fields in the NewServer and they'd be ignored. Version must be zero.
  DWORD
 -DhcpAddServer(
 +_Windows_SupportedOS_Server2000_ DhcpAddServer(
      IN      DWORD                  Flags,         // must be zero
-     IN      LPVOID                 IdInfo,        // must be NULL
-     IN      LPDHCP_SERVER_INFO     NewServer,     // input server information
-@@ -2500,7 +2501,7 @@ DhcpAddServer(
+-    IN      LPVOID                 IdInfo,        // must be NULL
+-    IN      LPDHCP_SERVER_INFO     NewServer,     // input server information
+-    IN      LPVOID                 CallbackFn,    // must be NULL
+-    IN      LPVOID                 CallbackData   // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 IdInfo,        // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_SERVER_INFO     NewServer,     // input server information
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackFn,    // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackData   // must be NULL
+ );
+ 
+ //DOC DhcpDeleteServer tries to delete the server from DS. It is an error if the
  //DOC server does not already exist.  This also deletes any objects related to
  //DOC this server in the DS (like subnet, reservations etc.).
  DWORD
 -DhcpDeleteServer(
 +_Windows_SupportedOS_Server2000_ DhcpDeleteServer(
      IN      DWORD                  Flags,         // must be zero
-     IN      LPVOID                 IdInfo,        // must be NULL
-     IN      LPDHCP_SERVER_INFO     NewServer,     // input server information
-@@ -2513,14 +2514,14 @@ DhcpDeleteServer(
+-    IN      LPVOID                 IdInfo,        // must be NULL
+-    IN      LPDHCP_SERVER_INFO     NewServer,     // input server information
+-    IN      LPVOID                 CallbackFn,    // must be NULL
+-    IN      LPVOID                 CallbackData   // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 IdInfo,        // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_SERVER_INFO     NewServer,     // input server information
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackFn,    // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackData   // must be NULL
+ );
+ 
+ 
+@@ -2513,43 +2514,43 @@ DhcpDeleteServer(
  
  
  DWORD DHCP_API_FUNCTION
@@ -1068,7 +1270,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2000_ DhcpGetServerBindingInfo(
      _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
                 ULONG                      Flags,
-                LPDHCP_BIND_ELEMENT_ARRAY *BindElementsInfo
+-               LPDHCP_BIND_ELEMENT_ARRAY *BindElementsInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_BIND_ELEMENT_ARRAY *BindElementsInfo
  );
  
  DWORD DHCP_API_FUNCTION
@@ -1076,8 +1279,11 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2000_ DhcpSetServerBindingInfo(
      _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
                 ULONG                     Flags,
-                LPDHCP_BIND_ELEMENT_ARRAY BindElementInfo
-@@ -2530,14 +2531,14 @@ DhcpSetServerBindingInfo(
+-               LPDHCP_BIND_ELEMENT_ARRAY BindElementInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_BIND_ELEMENT_ARRAY BindElementInfo
+ );
+ 
+ 
  
  
  DWORD DHCP_API_FUNCTION
@@ -1094,7 +1300,15 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR                    *ServerIpAddress,
                 DHCP_IP_ADDRESS                     SubnetAddress,
                 DHCP_SUBNET_ELEMENT_TYPE            EnumElementType,
-@@ -2549,7 +2550,7 @@ DhcpEnumSubnetElementsV5(
+-               DHCP_RESUME_HANDLE                  *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE                  *ResumeHandle,
+                DWORD                               PreferredMaximum,
+-               LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 *EnumElementInfo,
+-               DWORD                               *ElementsRead,
+-               DWORD                               *ElementsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 *EnumElementInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                               *ElementsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                               *ElementsTotal
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1112,7 +1326,7 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
      _In_      DHCP_IP_ADDRESS            SubnetAddress,
      _Inout_  DHCP_RESUME_HANDLE     *ResumeHandle,
-@@ -2573,7 +2574,7 @@ DhcpV4EnumSubnetReservations(
+@@ -2573,16 +2574,16 @@ DhcpV4EnumSubnetReservations(
  
  //V6 Api's
  DWORD DHCP_API_FUNCTION
@@ -1121,8 +1335,10 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               IN      DHCP_OPTION_ID         OptionId,
-@@ -2582,7 +2583,7 @@ DhcpCreateOptionV6(
-              IN      LPDHCP_OPTION          OptionInfo
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName,
+-             IN      LPDHCP_OPTION          OptionInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION          OptionInfo
  );
  DWORD DHCP_API_FUNCTION
 -DhcpRemoveOptionV6(
@@ -1130,7 +1346,7 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
               IN      DHCP_OPTION_ID         OptionID,
-@@ -2590,7 +2591,7 @@ DhcpRemoveOptionV6(
+@@ -2590,76 +2591,76 @@ DhcpRemoveOptionV6(
      _In_opt_ IN      LPWSTR                 VendorName
  );
  DWORD DHCP_API_FUNCTION             
@@ -1139,7 +1355,15 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
      _In_opt_ IN      LPWSTR                 ClassName,
-@@ -2603,7 +2604,7 @@ DhcpEnumOptionsV6(
+     _In_opt_ IN      LPWSTR                 VendorName,
+              IN OUT  DHCP_RESUME_HANDLE    *ResumeHandle,
+              IN      DWORD                  PreferredMaximum,
+-             OUT     LPDHCP_OPTION_ARRAY   *Options,
+-             OUT     DWORD                 *OptionsRead,
+-             OUT     DWORD                 *OptionsTotal
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_ARRAY   *Options,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsRead,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsTotal
  );
  
  DWORD DHCP_API_FUNCTION
@@ -1148,8 +1372,10 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_       LPWSTR                 ServerIpAddress,
             IN      DWORD                  Flags,
             IN      DHCP_OPTION_ID         OptionID,
-@@ -2612,7 +2613,7 @@ DhcpRemoveOptionValueV6(
-            IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo
+     _In_opt_       LPWSTR                 ClassName,
+     _In_opt_       LPWSTR                 VendorName,
+-           IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo
++           _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo
  );
  DWORD DHCP_API_FUNCTION
 -DhcpGetOptionInfoV6(
@@ -1157,7 +1383,10 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_       LPWSTR                 ServerIpAddress,
             IN      DWORD                  Flags,
             IN      DHCP_OPTION_ID         OptionID,
-@@ -2622,7 +2623,7 @@ DhcpGetOptionInfoV6(
+     _In_opt_       LPWSTR                 ClassName,
+     _In_opt_       LPWSTR                 VendorName,
+-           OUT     LPDHCP_OPTION         *OptionInfo
++           _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION         *OptionInfo
  );
  
  DWORD DHCP_API_FUNCTION
@@ -1166,7 +1395,10 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_    LPWSTR          ServerIpAddress,
            IN    DWORD           Flags,
            IN    DHCP_OPTION_ID  OptionID,
-@@ -2632,7 +2633,7 @@ DhcpSetOptionInfoV6(
+     _In_opt_    LPWSTR          ClassName,
+     _In_opt_    LPWSTR          VendorName,
+-          IN    LPDHCP_OPTION   OptionInfo
++          _WIN32META_ANNOTATION_("win32metadata:out") IN    LPDHCP_OPTION   OptionInfo
  );
  
  DWORD DHCP_API_FUNCTION
@@ -1175,7 +1407,14 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_      LPWSTR                 ServerIpAddress,
            IN      DWORD                  Flags,
            IN      DHCP_OPTION_ID         OptionId,
-@@ -2645,21 +2646,21 @@ DhcpSetOptionValueV6(
+     _In_opt_      LPWSTR                 ClassName,
+     _In_opt_      LPWSTR                 VendorName,
+-          IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
+-          IN      LPDHCP_OPTION_DATA     OptionValue
++          _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
++          _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_DATA     OptionValue
+ );
+ 
  
  
  
@@ -1200,7 +1439,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpSetSubnetInfoVQ(
      _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
                 DHCP_IP_ADDRESS          SubnetAddress,
-@@ -2667,7 +2668,7 @@ DhcpSetSubnetInfoVQ(
+@@ -2667,17 +2668,17 @@ DhcpSetSubnetInfoVQ(
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1209,6 +1448,21 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
                 DWORD                     Flags,
      _In_opt_   LPWSTR                    ClassName,
+     _In_opt_   LPWSTR                    VendorName,
+-               LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
+-               DHCP_RESUME_HANDLE        *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE        *ResumeHandle,
+                DWORD                     PreferredMaximum,
+-               LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
+-               DWORD                     *OptionsRead,
+-               DWORD                     *OptionsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                     *OptionsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                     *OptionsTotal
+     );
+ 
+ #endif
 @@ -2686,7 +2687,7 @@ DhcpEnumOptionValuesV6(
  //DOC memory and other structures for this process.  This initializes some DS
  //DOC object handles (memory), and hence is slow as this has to read from DS.
@@ -1218,7 +1472,7 @@ index 5259993040..8381a0d6a3 100644
      VOID
  );
  
-@@ -2694,12 +2695,12 @@ DhcpDsInit(
+@@ -2694,50 +2695,50 @@ DhcpDsInit(
  //DOC called exactly once for each process, and only at termination.  Note that
  //DOC it is safe to call this function even if DhcpDsInit does not succeed.
  VOID
@@ -1232,15 +1486,17 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DWORD
  DhcpSetThreadOptions(                             // set options for current thread
      IN      DWORD                  Flags,         // options, currently 0 or DHCP_FLAGS_DONT_ACCESS_DS
-     IN      LPVOID                 Reserved       // must be NULL, reserved for future
-@@ -2707,14 +2708,14 @@ DhcpSetThreadOptions(                             // set options for current thr
+-    IN      LPVOID                 Reserved       // must be NULL, reserved for future
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 Reserved       // must be NULL, reserved for future
+ );
  
  //DOC DhcpGetThreadOptions retrieves the current thread options as set by DhcpSetThreadOptions.
  //DOC If none were set, the return value is zero.
 -DWORD
 +_Windows_SupportedOS_Server2008_ DWORD
  DhcpGetThreadOptions(                             // get current thread options
-     OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
+-    OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
      IN OUT  LPVOID                 Reserved       // must be NULL, reserved for future
  );
  
@@ -1250,8 +1506,9 @@ index 5259993040..8381a0d6a3 100644
  DhcpServerQueryAttribute(                         // get a server status
      _In_opt_ IN      LPWSTR                 ServerIpAddr,  // String form of server IP
               IN      ULONG                  dwReserved,    // reserved for future
-@@ -2722,7 +2723,7 @@ DhcpServerQueryAttribute(                         // get a server status
-              OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
+              IN      DHCP_ATTRIB_ID         DhcpAttribId,  // the attrib being queried
+-             OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
  );
  
 -DWORD                                             // Status code
@@ -1259,7 +1516,11 @@ index 5259993040..8381a0d6a3 100644
  DhcpServerQueryAttributes(                        // query multiple attributes
      _In_opt_ IN      LPWSTR                 ServerIpAddr,  // String form of server IP
               IN      ULONG                  dwReserved,    // reserved for future
-@@ -2732,12 +2733,12 @@ DhcpServerQueryAttributes(                        // query multiple attributes
+              IN      ULONG                  dwAttribCount, // # of attribs being queried
+-             IN      DHCP_ATTRIB_ID         pDhcpAttribs[],// array of attribs
+-             OUT     LPDHCP_ATTRIB_ARRAY   *pDhcpAttribArr // Ptr is filled w/ array
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      DHCP_ATTRIB_ID         pDhcpAttribs[],// array of attribs
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ATTRIB_ARRAY   *pDhcpAttribArr // Ptr is filled w/ array
  );
  
  DWORD                                             // Status code
@@ -1274,7 +1535,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpAuditLogSetParams(                            // set some auditlogging params
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,         // currently must be zero
-@@ -2747,7 +2748,7 @@ DhcpAuditLogSetParams(                            // set some auditlogging param
+@@ -2747,20 +2748,20 @@ DhcpAuditLogSetParams(                            // set some auditlogging param
               IN      DWORD                  MinSpaceOnDisk     // mininum amt of free disk space
  );
  
@@ -1283,7 +1544,15 @@ index 5259993040..8381a0d6a3 100644
  DhcpAuditLogGetParams(
      _In_opt_        IN      LPWSTR                 ServerIpAddress,
                      IN      DWORD                  Flags,
-@@ -2760,7 +2761,7 @@ DhcpAuditLogGetParams(
+     _Outptr_result_maybenull_ OUT     LPWSTR                *AuditLogDir,
+-                    OUT     DWORD                 *DiskCheckInterval,
+-                    OUT     DWORD                 *MaxLogFilesSize,
+-                    OUT     DWORD                 *MinSpaceOnDisk
++                    _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *DiskCheckInterval,
++                    _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *MaxLogFilesSize,
++                    _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *MinSpaceOnDisk
+ );
+ 
  
  
  
@@ -1317,7 +1586,7 @@ index 5259993040..8381a0d6a3 100644
  DhcpServerRestoreDatabase(
      _In_opt_ IN LPWSTR ServerIpAddress,
      _In_ IN LPWSTR Path
-@@ -2801,20 +2802,20 @@ DhcpServerRestoreDatabase(
+@@ -2801,207 +2802,207 @@ DhcpServerRestoreDatabase(
  //  All Quarantine related APIs
  //
  
@@ -1326,22 +1595,30 @@ index 5259993040..8381a0d6a3 100644
  DhcpServerSetConfigVQ(
      _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
                 DWORD                        FieldsToSet,
-                LPDHCP_SERVER_CONFIG_INFO_VQ ConfigInfo
+-               LPDHCP_SERVER_CONFIG_INFO_VQ ConfigInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO_VQ ConfigInfo
      );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpServerGetConfigVQ(
      _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
-                LPDHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
+-               LPDHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
      );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpGetServerSpecificStrings(
      _In_opt_z_ DHCP_CONST WCHAR               *ServerIpAddress,
-                LPDHCP_SERVER_SPECIFIC_STRINGS *ServerSpecificStrings
-@@ -2826,21 +2827,21 @@ DhcpServerAuditlogParamsFree(
+-               LPDHCP_SERVER_SPECIFIC_STRINGS *ServerSpecificStrings
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_SPECIFIC_STRINGS *ServerSpecificStrings
+     );
+ 
+ void DHCP_API_FUNCTION
+ DhcpServerAuditlogParamsFree(
+-    DHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1349,7 +1626,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpCreateSubnetV6(
      _In_opt_ LPWSTR                ServerIpAddress,
               DHCP_IPV6_ADDRESS     SubnetAddress,
-              LPDHCP_SUBNET_INFO_V6 SubnetInfo
+-             LPDHCP_SUBNET_INFO_V6 SubnetInfo
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_INFO_V6 SubnetInfo
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1364,9 +1642,15 @@ index 5259993040..8381a0d6a3 100644
 -DhcpEnumSubnetsV6(
 +_Windows_SupportedOS_Server2008_ DhcpEnumSubnetsV6(
      _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
-                DHCP_RESUME_HANDLE *ResumeHandle,
+-               DHCP_RESUME_HANDLE *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE *ResumeHandle,
                 DWORD              PreferredMaximum,
-@@ -2850,14 +2851,14 @@ DhcpEnumSubnetsV6(
+-               LPDHCPV6_IP_ARRAY  *EnumInfo,
+-               DWORD              *ElementsRead,
+-               DWORD              *ElementsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCPV6_IP_ARRAY  *EnumInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD              *ElementsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD              *ElementsTotal
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1374,7 +1658,8 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpAddSubnetElementV6(
      _In_opt_ LPWSTR                        ServerIpAddress,
               DHCP_IPV6_ADDRESS             SubnetAddress,
-              LPDHCP_SUBNET_ELEMENT_DATA_V6 AddElementInfo
+-             LPDHCP_SUBNET_ELEMENT_DATA_V6 AddElementInfo
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_ELEMENT_DATA_V6 AddElementInfo
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1382,8 +1667,9 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpRemoveSubnetElementV6(
      _In_opt_ LPWSTR                        ServerIpAddress,
               DHCP_IPV6_ADDRESS             SubnetAddress,
-              LPDHCP_SUBNET_ELEMENT_DATA_V6 RemoveElementInfo,
-@@ -2865,7 +2866,7 @@ DhcpRemoveSubnetElementV6(
+-             LPDHCP_SUBNET_ELEMENT_DATA_V6 RemoveElementInfo,
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_ELEMENT_DATA_V6 RemoveElementInfo,
+              DHCP_FORCE_FLAG               ForceFlag
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1392,7 +1678,15 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_ LPWSTR                              ServerIpAddress,
               DHCP_IPV6_ADDRESS                   SubnetAddress,
               DHCP_SUBNET_ELEMENT_TYPE_V6         EnumElementType,
-@@ -2877,7 +2878,7 @@ DhcpEnumSubnetElementsV6(
+-             DHCP_RESUME_HANDLE                  *ResumeHandle,
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_HANDLE                  *ResumeHandle,
+              DWORD                               PreferredMaximum,
+-             LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6 *EnumElementInfo,
+-             DWORD                               *ElementsRead,
+-             DWORD                               *ElementsTotal
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6 *EnumElementInfo,
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                               *ElementsRead,
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                               *ElementsTotal
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1400,8 +1694,9 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpGetSubnetInfoV6(
      _In_opt_ LPWSTR                 ServerIpAddress,
               DHCP_IPV6_ADDRESS      SubnetAddress,
-              LPDHCP_SUBNET_INFO_V6 *SubnetInfo
-@@ -2885,7 +2886,7 @@ DhcpGetSubnetInfoV6(
+-             LPDHCP_SUBNET_INFO_V6 *SubnetInfo
++             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_INFO_V6 *SubnetInfo
+     );
  
  
  DWORD DHCP_API_FUNCTION
@@ -1409,26 +1704,36 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2008_ DhcpEnumSubnetClientsV6(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 DHCP_IPV6_ADDRESS           SubnetAddress,
-                DHCP_RESUME_IPV6_HANDLE     *ResumeHandle,
-@@ -2895,14 +2896,14 @@ DhcpEnumSubnetClientsV6(
-                DWORD                       *ClientsTotal
+-               DHCP_RESUME_IPV6_HANDLE     *ResumeHandle,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DHCP_RESUME_IPV6_HANDLE     *ResumeHandle,
+                DWORD                       PreferredMaximum,
+-               LPDHCP_CLIENT_INFO_ARRAY_V6 *ClientInfo,
+-               DWORD                       *ClientsRead,
+-               DWORD                       *ClientsTotal
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_ARRAY_V6 *ClientInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsRead,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD                       *ClientsTotal
      );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpServerGetConfigV6(
      _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
-                LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
-                LPDHCP_SERVER_CONFIG_INFO_V6 *ConfigInfo
+-               LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
+-               LPDHCP_SERVER_CONFIG_INFO_V6 *ConfigInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO_V6 *ConfigInfo
      );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpServerSetConfigV6(
      _In_opt_z_ DHCP_CONST WCHAR             *ServerIpAddress,
-                LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
-@@ -2910,70 +2911,70 @@ DhcpServerSetConfigV6(
-                LPDHCP_SERVER_CONFIG_INFO_V6 ConfigInfo
+-               LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_OPTION_SCOPE_INFO6    ScopeInfo,
+                DWORD                        FieldsToSet,
+-               LPDHCP_SERVER_CONFIG_INFO_V6 ConfigInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SERVER_CONFIG_INFO_V6 ConfigInfo
      );
  
 -DWORD
@@ -1436,27 +1741,31 @@ index 5259993040..8381a0d6a3 100644
  DhcpSetSubnetInfoV6(
      _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
                 DHCP_IPV6_ADDRESS      SubnetAddress,    
-                LPDHCP_SUBNET_INFO_V6  SubnetInfo
+-               LPDHCP_SUBNET_INFO_V6  SubnetInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_SUBNET_INFO_V6  SubnetInfo
  );
 -DWORD
 +_Windows_SupportedOS_Server2008_ DWORD
  DhcpGetMibInfoV6(
      _In_opt_z_ DHCP_CONST WCHAR *  ServerIpAddress,
-                LPDHCP_MIB_INFO_V6 *MibInfo
+-               LPDHCP_MIB_INFO_V6 *MibInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_MIB_INFO_V6 *MibInfo
  );
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpGetServerBindingInfoV6(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 ULONG                       Flags,
-                LPDHCPV6_BIND_ELEMENT_ARRAY *BindElementsInfo
+-               LPDHCPV6_BIND_ELEMENT_ARRAY *BindElementsInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCPV6_BIND_ELEMENT_ARRAY *BindElementsInfo
  );
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpSetServerBindingInfoV6(
      _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
                 ULONG                       Flags,
-                LPDHCPV6_BIND_ELEMENT_ARRAY BindElementInfo
+-               LPDHCPV6_BIND_ELEMENT_ARRAY BindElementInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCPV6_BIND_ELEMENT_ARRAY BindElementInfo
  );
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
@@ -1470,7 +1779,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetClientInfoV6(
      _In_opt_z_ DHCP_CONST WCHAR      *ServerIpAddress,
      DHCP_CONST DHCP_SEARCH_INFO_V6   *SearchInfo,
-                LPDHCP_CLIENT_INFO_V6 *ClientInfo
+-               LPDHCP_CLIENT_INFO_V6 *ClientInfo
++               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDHCP_CLIENT_INFO_V6 *ClientInfo
      );
  
 -DWORD DHCP_API_FUNCTION
@@ -1485,7 +1795,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpCreateClassV6(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-              IN      LPDHCP_CLASS_INFO_V6   ClassInfo
+-             IN      LPDHCP_CLASS_INFO_V6   ClassInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_CLASS_INFO_V6   ClassInfo
  );
  
 -DWORD DHCP_API_FUNCTION
@@ -1493,7 +1804,8 @@ index 5259993040..8381a0d6a3 100644
  DhcpModifyClassV6(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-              IN      LPDHCP_CLASS_INFO_V6      ClassInfo
+-             IN      LPDHCP_CLASS_INFO_V6      ClassInfo
++             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_CLASS_INFO_V6      ClassInfo
  );
  
 -DWORD DHCP_API_FUNCTION
@@ -1509,8 +1821,14 @@ index 5259993040..8381a0d6a3 100644
  DhcpEnumClassesV6(
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  ReservedMustBeZero,
-@@ -2984,21 +2985,21 @@ DhcpEnumClassesV6(
-              OUT     DWORD                 *nTotal
+              IN OUT  DHCP_RESUME_HANDLE    *ResumeHandle,
+              IN      DWORD                  PreferredMaximum,
+-             OUT     LPDHCP_CLASS_INFO_ARRAY_V6 *ClassInfoArray,
+-             OUT     DWORD                 *nRead,
+-             OUT     DWORD                 *nTotal
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO_ARRAY_V6 *ClassInfoArray,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nRead,
++             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nTotal
  );
  
 -DWORD DHCP_API_FUNCTION
@@ -1526,15 +1844,20 @@ index 5259993040..8381a0d6a3 100644
  DhcpGetSubnetDelayOffer (
      _In_opt_ IN          LPWSTR             ServerIpAddress,
               IN          DHCP_IP_ADDRESS    SubnetAddress,
-              IN          USHORT *           TimeDelayInMilliseconds
+-             IN          USHORT *           TimeDelayInMilliseconds
++             _WIN32META_ANNOTATION_("win32metadata:out") IN          USHORT *           TimeDelayInMilliseconds
  );
  
 -DWORD DHCP_API_FUNCTION
 +_Windows_SupportedOS_Server2008_ DWORD DHCP_API_FUNCTION
  DhcpGetMibInfoV5(
  _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
- OUT        LPDHCP_MIB_INFO_V5 *MibInfo
-@@ -3011,7 +3012,7 @@ _In_opt_ LPWSTR  pServer
+-OUT        LPDHCP_MIB_INFO_V5 *MibInfo
++_WIN32META_ANNOTATION_("win32metadata:in") OUT        LPDHCP_MIB_INFO_V5 *MibInfo
+     );
+ 
+ DWORD DHCP_API_FUNCTION
+@@ -3011,53 +3012,53 @@ _In_opt_ LPWSTR  pServer
  
  
  DWORD DHCP_API_FUNCTION
@@ -1543,7 +1866,12 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_    IN  LPWSTR                      ServerIpAddress,
                  IN  DWORD                       Flags,
                  IN  DHCP_OPTION_ID              OptionID,
-@@ -3022,7 +3023,7 @@ DhcpV4GetOptionValue (
+     _In_opt_    IN  LPWSTR                      PolicyName,
+     _In_opt_    IN  LPWSTR                      VendorName,
+-                IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
+-                OUT LPDHCP_OPTION_VALUE        *OptionValue
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
++                _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDHCP_OPTION_VALUE        *OptionValue
          );
  
  DWORD DHCP_API_FUNCTION
@@ -1552,7 +1880,12 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_    IN  LPWSTR                      ServerIpAddress,
                  IN  DWORD                       Flags,
                  IN  DHCP_OPTION_ID              OptionId,
-@@ -3033,7 +3034,7 @@ DhcpV4SetOptionValue (
+     _In_opt_    IN  LPWSTR                      PolicyName,
+     _In_opt_    IN  LPWSTR                      VendorName,
+-                IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
+-                IN  LPDHCP_OPTION_DATA          OptionValue
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_DATA          OptionValue
          );
  
  DWORD DHCP_API_FUNCTION
@@ -1561,7 +1894,11 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_    IN  LPWSTR                      ServerIpAddress,
                  IN  DWORD                       Flags,
      _In_opt_    IN  LPWSTR                      PolicyName,
-@@ -3043,7 +3044,7 @@ DhcpV4SetOptionValues(
+     _In_opt_    IN  LPWSTR                      VendorName,
+-                IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
+-                IN  LPDHCP_OPTION_VALUE_ARRAY   OptionValues
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_VALUE_ARRAY   OptionValues
          );
  
  DWORD DHCP_API_FUNCTION
@@ -1570,7 +1907,10 @@ index 5259993040..8381a0d6a3 100644
      _In_opt_    IN  LPWSTR                      ServerIpAddress,
                  IN  DWORD                       Flags,
                  IN  DHCP_OPTION_ID              OptionID,
-@@ -3053,7 +3054,7 @@ DhcpV4RemoveOptionValue (
+     _In_opt_    IN  LPWSTR                      PolicyName,
+     _In_opt_    IN  LPWSTR                      VendorName,
+-                IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo
          );
  
  DWORD DHCP_API_FUNCTION
@@ -1578,7 +1918,13 @@ index 5259993040..8381a0d6a3 100644
 +_Windows_SupportedOS_Server2012_ DhcpV4GetAllOptionValues (
      _In_opt_    IN  LPWSTR                          ServerIpAddress,
                  IN  DWORD                           Flags,
-                 IN  LPDHCP_OPTION_SCOPE_INFO        ScopeInfo,
+-                IN  LPDHCP_OPTION_SCOPE_INFO        ScopeInfo,
+-                OUT LPDHCP_ALL_OPTION_VALUES_PB    *Values
++                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO        ScopeInfo,
++                _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDHCP_ALL_OPTION_VALUES_PB    *Values
+         );
+ 
+ 
 @@ -3098,7 +3099,7 @@ typedef enum _FSM_STATE // enumeration defining all the states of the failover s
      SHUTDOWN
  } FSM_STATE;

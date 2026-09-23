@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
-index d044f5d159..36b694bda9 100644
+index d044f5d159..d41e3e5abe 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
 @@ -1,4 +1,5 @@
@@ -26,7 +26,7 @@ index d044f5d159..36b694bda9 100644
      ULONG                          Flags;         // must be zero currently.
      #ifdef __midl
          [size_is(nBytesData)] LPBYTE                         Data;          // classid binary data.
-@@ -215,21 +216,21 @@ typedef struct _DHCPCAPI_CLASSID {                // defines a client class id.
+@@ -215,25 +216,25 @@ typedef struct _DHCPCAPI_CLASSID {                // defines a client class id.
  #define     DHCPCAPI_REQUEST_CANCEL               0x08 // cancel request
  #define     DHCPCAPI_REQUEST_MASK                 0x0F // allowed flags..
  
@@ -34,8 +34,9 @@ index d044f5d159..36b694bda9 100644
 +_Windows_SupportedOS_Windows2000_ DWORD
  APIENTRY
 -DhcpCApiInitialize(
+-    OUT     LPDWORD                Version
 +  DhcpCApiInitialize(
-     OUT     LPDWORD                Version
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                Version
  );
  
 -VOID
@@ -52,8 +53,14 @@ index d044f5d159..36b694bda9 100644
 -DhcpRequestParams(                                // request parameters of client
 +  DhcpRequestParams(                                // request parameters of client
      IN      DWORD                  Flags,         // must be DHCPCAPI_REQUEST_SYNCHRONOUS
-     IN      LPVOID                 Reserved,      // this parameter is reserved
+-    IN      LPVOID                 Reserved,      // this parameter is reserved
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 Reserved,      // this parameter is reserved
      _In_    LPWSTR                 AdapterName,   // adapter name to request for
+-    IN      LPDHCPCAPI_CLASSID     ClassId,       // reserved must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCPCAPI_CLASSID     ClassId,       // reserved must be NULL
+     IN      DHCPCAPI_PARAMS_ARRAY  SendParams,    // parameters to send.
+     IN OUT  DHCPCAPI_PARAMS_ARRAY  RecdParams,    // parameters that are to be requested..
+     _Out_writes_bytes_to_(*pSize, *pSize) LPBYTE  Buffer,   // a buffer to hold data for RecdParams
 @@ -247,9 +248,9 @@ DhcpRequestParams(                                // request parameters of clien
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -66,7 +73,7 @@ index d044f5d159..36b694bda9 100644
      _Reserved_ DWORD                Flags,         // must be zero, reserved
      _Reserved_ LPVOID               Reserved,      // this parameter is reserved
      _In_       LPWSTR               AdapterName,   // the name of the adpater to delete for
-@@ -257,9 +258,9 @@ DhcpUndoRequestParams(                            // undo the effect of a persis
+@@ -257,29 +258,29 @@ DhcpUndoRequestParams(                            // undo the effect of a persis
  );
  
  #define     DHCPCAPI_REGISTER_HANDLE_EVENT        0x01 // handle returned is to an event
@@ -78,7 +85,10 @@ index d044f5d159..36b694bda9 100644
      IN      DWORD                  Flags,         // must be zero, reserved
      _Reserved_ LPVOID                 Reserved,      // this parameter is reserved
      _In_       LPWSTR                 AdapterName,   // adapter of interest
-@@ -269,17 +270,17 @@ DhcpRegisterParamChange(                          // notify if a parameter has c
+-    IN      LPDHCPCAPI_CLASSID     ClassId,       // reserved must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCPCAPI_CLASSID     ClassId,       // reserved must be NULL
+     IN      DHCPCAPI_PARAMS_ARRAY  Params,        // parameters of interest
+     IN OUT  LPVOID                 Handle         // handle to event that will be SetEvent'ed in case of param change
  );
  
  #define     DHCPCAPI_DEREGISTER_HANDLE_EVENT      0x01 // de-register handle that is an event
@@ -88,8 +98,10 @@ index d044f5d159..36b694bda9 100644
 -DhcpDeRegisterParamChange(                        // undo the registration
 +  DhcpDeRegisterParamChange(                        // undo the registration
      IN      DWORD                  Flags,         // MUST BE ZERO --> No flags yet.
-     IN      LPVOID                 Reserved,      // MUST BE NULL --> Reserved
-     IN      LPVOID                 Event          // handle to event returned by DhcpRegisterParamChange.
+-    IN      LPVOID                 Reserved,      // MUST BE NULL --> Reserved
+-    IN      LPVOID                 Event          // handle to event returned by DhcpRegisterParamChange.
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 Reserved,      // MUST BE NULL --> Reserved
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 Event          // handle to event returned by DhcpRegisterParamChange.
  );
  
 -DWORD
@@ -100,3 +112,12 @@ index d044f5d159..36b694bda9 100644
      VOID
      );
  
+@@ -287,7 +288,7 @@ DWORD
+ APIENTRY
+ DhcpGetOriginalSubnetMask(
+     IN LPCWSTR sAdapterName,
+-    OUT DWORD *dwSubnetMask
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *dwSubnetMask
+ );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

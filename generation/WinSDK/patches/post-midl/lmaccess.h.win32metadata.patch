@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
-index d6bf1c4c39..5d8d8c8646 100644
+index d6bf1c4c39..55452943b3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
 @@ -1,3 +1,4 @@
@@ -408,7 +408,7 @@ index d6bf1c4c39..5d8d8c8646 100644
  NetLocalGroupDelMembers (
      _In_opt_  LPCWSTR     servername OPTIONAL,
      _In_      LPCWSTR     groupname,
-@@ -1148,7 +1149,7 @@ typedef struct _LOCALGROUP_USERS_INFO_0 {
+@@ -1148,22 +1149,22 @@ typedef struct _LOCALGROUP_USERS_INFO_0 {
  // Display Information APIs
  //
  
@@ -417,15 +417,25 @@ index d6bf1c4c39..5d8d8c8646 100644
  NetQueryDisplayInformation(
      IN LPCWSTR ServerName OPTIONAL,
      IN DWORD Level,
-@@ -1158,7 +1159,7 @@ NetQueryDisplayInformation(
-     OUT LPDWORD ReturnedEntryCount,
-     OUT PVOID   *SortedBuffer );
+     IN DWORD Index,
+     IN DWORD EntriesRequested,
+     IN DWORD PreferredMaximumLength,
+-    OUT LPDWORD ReturnedEntryCount,
+-    OUT PVOID   *SortedBuffer );
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD ReturnedEntryCount,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID   *SortedBuffer );
  
 -NET_API_STATUS NET_API_FUNCTION
 +_Windows_SupportedOS_Windows2000_ NET_API_STATUS NET_API_FUNCTION
  NetGetDisplayInformationIndex(
      IN LPCWSTR ServerName OPTIONAL,
      IN DWORD Level,
+     IN LPCWSTR Prefix,
+-    OUT LPDWORD Index );
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD Index );
+ 
+ //
+ // QueryDisplayInformation levels
 @@ -1171,7 +1172,7 @@ NetGetDisplayInformationIndex(
  typedef struct _NET_DISPLAY_USER {
      LPWSTR   usri1_name;
@@ -480,7 +490,7 @@ index d6bf1c4c39..5d8d8c8646 100644
  NetAccessSetInfo (
      _In_opt_  LPCWSTR   servername OPTIONAL,
      _In_      LPCWSTR   resource,
-@@ -1251,13 +1252,13 @@ NetAccessSetInfo (
+@@ -1251,18 +1252,18 @@ NetAccessSetInfo (
      _Out_opt_ LPDWORD  parm_err OPTIONAL
      );
  
@@ -496,7 +506,13 @@ index d6bf1c4c39..5d8d8c8646 100644
  NetAccessGetUserPerms (
      IN  LPCWSTR   servername OPTIONAL,
      IN  LPCWSTR   UGname,
-@@ -1514,7 +1515,7 @@ typedef struct _NET_VALIDATE_PASSWORD_RESET_INPUT_ARG{
+     IN  LPCWSTR   resource,
+-    OUT LPDWORD  Perms
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD  Perms
+     );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -1514,18 +1515,18 @@ typedef struct _NET_VALIDATE_PASSWORD_RESET_INPUT_ARG{
  //    Password Checking API structures end here
  //
  
@@ -504,16 +520,23 @@ index d6bf1c4c39..5d8d8c8646 100644
 +_Windows_SupportedOS_Server2003_ NET_API_STATUS NET_API_FUNCTION
  NetValidatePasswordPolicy(
      IN LPCWSTR ServerName,
-     IN LPVOID Qualifier,
-@@ -1523,7 +1524,7 @@ NetValidatePasswordPolicy(
-     OUT LPVOID *OutputArg
+-    IN LPVOID Qualifier,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID Qualifier,
+     IN NET_VALIDATE_PASSWORD_TYPE ValidationType,
+-    IN LPVOID InputArg,
+-    OUT LPVOID *OutputArg
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID InputArg,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPVOID *OutputArg
      );
  
 -NET_API_STATUS NET_API_FUNCTION
 +_Windows_SupportedOS_Server2003_ NET_API_STATUS NET_API_FUNCTION
  NetValidatePasswordPolicyFree(
-     IN LPVOID *OutputArg
+-    IN LPVOID *OutputArg
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID *OutputArg
      );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 @@ -1547,7 +1548,7 @@ NetValidatePasswordPolicyFree(
  // Function Prototypes - Domain
  //

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H b/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
-index e57c8c5c7c..9253a73d1a 100644
+index e57c8c5c7c..bd1416a5a9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WDBGEXTS.H
 @@ -1,3 +1,4 @@
@@ -7,30 +7,253 @@ index e57c8c5c7c..9253a73d1a 100644
  /*++
  
  Copyright (c) Microsoft Corporation. All rights reserved.
-@@ -102,7 +103,7 @@ typedef
+@@ -101,31 +102,31 @@ ULONG64
+ typedef
  VOID
  (WDBGAPI*PWINDBG_GET_SYMBOL)(
-     PVOID      offset,
+-    PVOID      offset,
 -    PCHAR      pchBuffer,
-+    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
-     ULONG_PTR *pDisplacement
+-    ULONG_PTR *pDisplacement
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID      offset,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR *pDisplacement
      );
  
-@@ -110,7 +111,7 @@ typedef
+ typedef
  VOID
  (WDBGAPI*PWINDBG_GET_SYMBOL32)(
      ULONG      offset,
 -    PCHAR      pchBuffer,
-+    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
-     PULONG     pDisplacement
+-    PULONG     pDisplacement
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     pDisplacement
      );
  
-@@ -118,7 +119,7 @@ typedef
+ typedef
  VOID
  (WDBGAPI*PWINDBG_GET_SYMBOL64)(
      ULONG64    offset,
 -    PCHAR      pchBuffer,
-+    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
-     PULONG64   pDisplacement
+-    PULONG64   pDisplacement
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR      pchBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG64   pDisplacement
      );
  
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_DISASM)(
+-    ULONG_PTR *lpOffset,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR *lpOffset,
+     PCSTR      lpBuffer,
+     ULONG      fShowEffectiveAddress
+     );
+@@ -133,7 +134,7 @@ ULONG
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_DISASM32)(
+-    ULONG     *lpOffset,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG     *lpOffset,
+     PCSTR      lpBuffer,
+     ULONG      fShowEffectiveAddress
+     );
+@@ -141,7 +142,7 @@ ULONG
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_DISASM64)(
+-    ULONG64   *lpOffset,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG64   *lpOffset,
+     PCSTR      lpBuffer,
+     ULONG      fShowEffectiveAddress
+     );
+@@ -156,27 +157,27 @@ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_READ_PROCESS_MEMORY_ROUTINE)(
+     ULONG_PTR  offset,
+-    PVOID      lpBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID      lpBuffer,
+     ULONG      cb,
+-    PULONG     lpcbBytesRead
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     lpcbBytesRead
+     );
+ 
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_READ_PROCESS_MEMORY_ROUTINE32)(
+     ULONG      offset,
+-    PVOID      lpBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID      lpBuffer,
+     ULONG      cb,
+-    PULONG     lpcbBytesRead
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     lpcbBytesRead
+     );
+ 
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_READ_PROCESS_MEMORY_ROUTINE64)(
+     ULONG64    offset,
+-    PVOID      lpBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID      lpBuffer,
+     ULONG      cb,
+-    PULONG     lpcbBytesRead
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     lpcbBytesRead
+     );
+ 
+ typedef
+@@ -185,7 +186,7 @@ ULONG
+     ULONG_PTR  offset,
+     LPCVOID    lpBuffer,
+     ULONG      cb,
+-    PULONG     lpcbBytesWritten
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     lpcbBytesWritten
+     );
+ 
+ typedef
+@@ -194,7 +195,7 @@ ULONG
+     ULONG      offset,
+     LPCVOID    lpBuffer,
+     ULONG      cb,
+-    PULONG     lpcbBytesWritten
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     lpcbBytesWritten
+     );
+ 
+ typedef
+@@ -203,14 +204,14 @@ ULONG
+     ULONG64    offset,
+     LPCVOID    lpBuffer,
+     ULONG      cb,
+-    PULONG     lpcbBytesWritten
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG     lpcbBytesWritten
+     );
+ 
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_GET_THREAD_CONTEXT_ROUTINE)(
+     ULONG       Processor,
+-    PCONTEXT    lpContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCONTEXT    lpContext,
+     ULONG       cbSizeOfContext
+     );
+ 
+@@ -218,7 +219,7 @@ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_SET_THREAD_CONTEXT_ROUTINE)(
+     ULONG       Processor,
+-    PCONTEXT    lpContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCONTEXT    lpContext,
+     ULONG       cbSizeOfContext
+     );
+ 
+@@ -226,7 +227,7 @@ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_IOCTL_ROUTINE)(
+     USHORT   IoctlType,
+-    PVOID    lpvData,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID    lpvData,
+     ULONG    cbSize
+     );
+ 
+@@ -234,18 +235,18 @@ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_OLDKD_READ_PHYSICAL_MEMORY)(
+     ULONGLONG        address,
+-    PVOID            buffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID            buffer,
+     ULONG            count,
+-    PULONG           bytesread
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG           bytesread
+     );
+ 
+ typedef
+ ULONG
+ (WDBGAPI*PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY)(
+     ULONGLONG        address,
+-    PVOID            buffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID            buffer,
+     ULONG            length,
+-    PULONG           byteswritten
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG           byteswritten
+     );
+ 
+ 
+@@ -277,7 +278,7 @@ ULONG
+     ULONG             FramePointer,
+     ULONG             StackPointer,
+     ULONG             ProgramCounter,
+-    PEXTSTACKTRACE    StackFrames,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEXTSTACKTRACE    StackFrames,
+     ULONG             Frames
+     );
+ 
+@@ -287,7 +288,7 @@ ULONG
+     ULONG             FramePointer,
+     ULONG             StackPointer,
+     ULONG             ProgramCounter,
+-    PEXTSTACKTRACE32  StackFrames,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEXTSTACKTRACE32  StackFrames,
+     ULONG             Frames
+     );
+ 
+@@ -297,7 +298,7 @@ ULONG
+     ULONG64           FramePointer,
+     ULONG64           StackPointer,
+     ULONG64           ProgramCounter,
+-    PEXTSTACKTRACE64  StackFrames,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PEXTSTACKTRACE64  StackFrames,
+     ULONG             Frames
+     );
+ 
+@@ -373,7 +374,7 @@ typedef
+ VOID
+ (WDBGAPI*PWINDBG_OLD_EXTENSION_ROUTINE)(
+     ULONG                   dwCurrentPc,
+-    PWINDBG_EXTENSION_APIS  lpExtensionApis,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWINDBG_EXTENSION_APIS  lpExtensionApis,
+     PCSTR                   lpArgumentString
+     );
+ 
+@@ -411,14 +412,14 @@ typedef
+ VOID
+ (WDBGAPI*PWINDBG_OLDKD_EXTENSION_ROUTINE)(
+     ULONG                        dwCurrentPc,
+-    PWINDBG_OLDKD_EXTENSION_APIS lpExtensionApis,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWINDBG_OLDKD_EXTENSION_APIS lpExtensionApis,
+     PCSTR                        lpArgumentString
+     );
+ 
+ typedef
+ VOID
+ (WDBGAPI*PWINDBG_EXTENSION_DLL_INIT)(
+-    PWINDBG_EXTENSION_APIS lpExtensionApis,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWINDBG_EXTENSION_APIS lpExtensionApis,
+     USHORT                 MajorVersion,
+     USHORT                 MinorVersion
+     );
+@@ -426,7 +427,7 @@ VOID
+ typedef
+ VOID
+ (WDBGAPI*PWINDBG_EXTENSION_DLL_INIT32)(
+-    PWINDBG_EXTENSION_APIS32 lpExtensionApis,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWINDBG_EXTENSION_APIS32 lpExtensionApis,
+     USHORT                   MajorVersion,
+     USHORT                   MinorVersion
+     );
+@@ -434,7 +435,7 @@ VOID
+ typedef
+ VOID
+ (WDBGAPI*PWINDBG_EXTENSION_DLL_INIT64)(
+-    PWINDBG_EXTENSION_APIS64 lpExtensionApis,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PWINDBG_EXTENSION_APIS64 lpExtensionApis,
+     USHORT                   MajorVersion,
+     USHORT                   MinorVersion
+     );
+@@ -1675,8 +1676,8 @@ typedef struct _KDDEBUGGER_DATA64 {
+ typedef
+ ULONG
+ (WDBGAPI*PSYM_DUMP_FIELD_CALLBACK)(
+-    struct _FIELD_INFO *pField,
+-    PVOID UserContext
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _FIELD_INFO *pField,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID UserContext
+     );
+ 
+ typedef struct _FIELD_INFO {
