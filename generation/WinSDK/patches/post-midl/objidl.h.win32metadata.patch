@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
-index 31f65e72f3..e68d142e29 100644
+index 31f65e72f3..149ebd05f3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 @@ -801,6 +801,7 @@ extern "C"{
@@ -1039,7 +1039,7 @@ index 31f65e72f3..e68d142e29 100644
      IApartmentShutdown : public IUnknown
      {
      public:
-@@ -16693,10 +16694,10 @@ unsigned char * __RPC_USER  FLAG_STGMEDIUM_UserMarshal(  __RPC__in unsigned long
+@@ -16693,25 +16694,25 @@ unsigned char * __RPC_USER  FLAG_STGMEDIUM_UserMarshal(  __RPC__in unsigned long
  unsigned char * __RPC_USER  FLAG_STGMEDIUM_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out FLAG_STGMEDIUM * ); 
  void                      __RPC_USER  FLAG_STGMEDIUM_UserFree(     __RPC__in unsigned long *, __RPC__in FLAG_STGMEDIUM * ); 
  
@@ -1054,9 +1054,17 @@ index 31f65e72f3..e68d142e29 100644
  
  unsigned long             __RPC_USER  HDC_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HDC * ); 
  unsigned char * __RPC_USER  HDC_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HDC * ); 
-@@ -16708,10 +16709,10 @@ unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC
- unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
- void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ unsigned char * __RPC_USER  HDC_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HDC * ); 
+ void                      __RPC_USER  HDC_UserFree(     __RPC__in unsigned long *, __RPC__in HDC * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
  
 -unsigned long             __RPC_USER  SNB_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in SNB * ); 
 -unsigned char * __RPC_USER  SNB_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in SNB * ); 
@@ -1069,7 +1077,7 @@ index 31f65e72f3..e68d142e29 100644
  
  unsigned long             __RPC_USER  STGMEDIUM_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in STGMEDIUM * ); 
  unsigned char * __RPC_USER  STGMEDIUM_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in STGMEDIUM * ); 
-@@ -16733,10 +16734,10 @@ unsigned char * __RPC_USER  FLAG_STGMEDIUM_UserMarshal64(  __RPC__in unsigned lo
+@@ -16733,25 +16734,25 @@ unsigned char * __RPC_USER  FLAG_STGMEDIUM_UserMarshal64(  __RPC__in unsigned lo
  unsigned char * __RPC_USER  FLAG_STGMEDIUM_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out FLAG_STGMEDIUM * ); 
  void                      __RPC_USER  FLAG_STGMEDIUM_UserFree64(     __RPC__in unsigned long *, __RPC__in FLAG_STGMEDIUM * ); 
  
@@ -1084,9 +1092,17 @@ index 31f65e72f3..e68d142e29 100644
  
  unsigned long             __RPC_USER  HDC_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HDC * ); 
  unsigned char * __RPC_USER  HDC_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HDC * ); 
-@@ -16748,10 +16749,10 @@ unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __R
- unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
- void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ unsigned char * __RPC_USER  HDC_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HDC * ); 
+ void                      __RPC_USER  HDC_UserFree64(     __RPC__in unsigned long *, __RPC__in HDC * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
  
 -unsigned long             __RPC_USER  SNB_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in SNB * ); 
 -unsigned char * __RPC_USER  SNB_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in SNB * ); 

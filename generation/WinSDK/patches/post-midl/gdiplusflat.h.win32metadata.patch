@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
-index ba094eef74..b383c7489f 100644
+index ba094eef74..81a3f3fb0e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
 @@ -1,3 +1,4 @@
@@ -29,14 +29,16 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipClonePath(GpPath* path, GpPath **clonePath);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeletePath(GpPath* path);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipResetPath(GpPath* path);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPointCount(GpPath* path, INT* count);
  
 -GpStatus WINGDIPAPI
@@ -52,7 +54,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathPointsI(GpPath*, GpPoint* points, INT count);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathFillMode(GpPath *path, GpFillMode *fillmode);
  
 -GpStatus WINGDIPAPI
@@ -259,7 +262,7 @@ index ba094eef74..b383c7489f 100644
  GdipWidenPath(
      GpPath *nativePath,
      GpPen *pen,
-@@ -231,20 +232,20 @@ GdipWidenPath(
+@@ -231,36 +232,36 @@ GdipWidenPath(
      REAL flatness
  );
  
@@ -284,7 +287,27 @@ index ba094eef74..b383c7489f 100644
  GdipGetPathWorldBoundsI(GpPath* path, GpRect* bounds, 
                          GDIPCONST GpMatrix *matrix, GDIPCONST GpPen *pen);
  
-@@ -269,7 +270,7 @@ GdipIsOutlineVisiblePathPointI(GpPath* path, INT x, INT y, GpPen *pen,
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisiblePathPoint(GpPath* path, REAL x, REAL y,
+                        GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisiblePathPointI(GpPath* path, INT x, INT y,
+                         GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsOutlineVisiblePathPoint(GpPath* path, REAL x, REAL y, GpPen *pen,
+                               GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsOutlineVisiblePathPointI(GpPath* path, INT x, INT y, GpPen *pen,
+                                GpGraphics *graphics, BOOL *result);
+ 
+@@ -269,53 +270,53 @@ GdipIsOutlineVisiblePathPointI(GpPath* path, INT x, INT y, GpPen *pen,
  // PathIterator APIs
  //----------------------------------------------------------------------------
  
@@ -292,17 +315,67 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCreatePathIter(GpPathIterator **iterator, GpPath* path);
  
- GpStatus WINGDIPAPI
-@@ -301,7 +302,7 @@ GdipPathIterGetCount(GpPathIterator* iterator, INT* count);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipDeletePathIter(GpPathIterator *iterator);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterNextSubpath(GpPathIterator* iterator, INT *resultCount,
+         INT* startIndex, INT* endIndex, BOOL* isClosed);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterNextSubpathPath(GpPathIterator* iterator, INT* resultCount,
+         GpPath* path, BOOL* isClosed);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterNextPathType(GpPathIterator* iterator, _Out_ INT* resultCount,
+         _Out_ BYTE* pathType, _Out_ INT* startIndex, _Out_ INT* endIndex);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterNextMarker(GpPathIterator* iterator, INT *resultCount,
+         INT* startIndex, INT* endIndex);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterNextMarkerPath(GpPathIterator* iterator, INT* resultCount,
+         GpPath* path);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterGetCount(GpPathIterator* iterator, INT* count);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipPathIterGetSubpathCount(GpPathIterator* iterator, INT* count);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipPathIterIsValid(GpPathIterator* iterator, BOOL* valid);
  
- GpStatus WINGDIPAPI
-@@ -325,18 +326,18 @@ GdipPathIterCopyData(GpPathIterator* iterator, _Out_ INT* resultCount,
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterHasCurve(GpPathIterator* iterator, BOOL* hasCurve);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterRewind(GpPathIterator* iterator);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterEnumerate(GpPathIterator* iterator, _Out_ INT* resultCount,
+     _Out_writes_to_(count, *resultCount) GpPointF *points,
+     _Out_writes_to_(count, *resultCount) BYTE *types, INT count);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipPathIterCopyData(GpPathIterator* iterator, _Out_ INT* resultCount,
+     _Out_writes_to_(endIndex - startIndex + 1, *resultCount) GpPointF* points,
+     _Out_writes_to_(endIndex - startIndex + 1, *resultCount) BYTE* types,
+@@ -325,77 +326,77 @@ GdipPathIterCopyData(GpPathIterator* iterator, _Out_ INT* resultCount,
  // Matrix APIs
  //----------------------------------------------------------------------------
  
@@ -325,8 +398,12 @@ index ba094eef74..b383c7489f 100644
  GdipCreateMatrix3I(GDIPCONST GpRect *rect, GDIPCONST GpPoint *dstplg,
                                         GpMatrix **matrix);
  
-@@ -346,47 +347,47 @@ GdipCloneMatrix(GpMatrix *matrix, GpMatrix **cloneMatrix);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipCloneMatrix(GpMatrix *matrix, GpMatrix **cloneMatrix);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeleteMatrix(GpMatrix *matrix);
  
 -GpStatus WINGDIPAPI
@@ -384,8 +461,20 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetMatrixElements(GDIPCONST GpMatrix *matrix, REAL *matrixOut);
  
- GpStatus WINGDIPAPI
-@@ -403,66 +404,66 @@ GdipIsMatrixEqual(GDIPCONST GpMatrix *matrix, GDIPCONST GpMatrix *matrix2,
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsMatrixInvertible(GDIPCONST GpMatrix *matrix, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsMatrixIdentity(GDIPCONST GpMatrix *matrix, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsMatrixEqual(GDIPCONST GpMatrix *matrix, GDIPCONST GpMatrix *matrix2, 
+                   BOOL *result);
+ 
+@@ -403,116 +404,116 @@ GdipIsMatrixEqual(GDIPCONST GpMatrix *matrix, GDIPCONST GpMatrix *matrix2,
  // Region APIs
  //----------------------------------------------------------------------------
  
@@ -414,7 +503,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCreateRegionHrgn(HRGN hRgn, GpRegion **region);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCloneRegion(GpRegion *region, GpRegion **cloneRegion);
  
 -GpStatus WINGDIPAPI
@@ -470,8 +560,27 @@ index ba094eef74..b383c7489f 100644
  GdipGetRegionBoundsI(GpRegion *region, GpGraphics *graphics,
                               GpRect *rect);
  
-@@ -484,7 +485,7 @@ GdipIsEqualRegion(GpRegion *region, GpRegion *region2,
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetRegionHRgn(GpRegion *region, GpGraphics *graphics, HRGN *hRgn);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsEmptyRegion(GpRegion *region, GpGraphics *graphics,
+                            BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsInfiniteRegion(GpRegion *region, GpGraphics *graphics,
+                               BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsEqualRegion(GpRegion *region, GpRegion *region2,
+                            GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetRegionDataSize(GpRegion *region, UINT * bufferSize);
  
 -GpStatus WINGDIPAPI
@@ -479,8 +588,29 @@ index ba094eef74..b383c7489f 100644
  GdipGetRegionData(GpRegion *region,
                    _Out_writes_to_(bufferSize, *sizeFilled) BYTE * buffer,
                    UINT bufferSize, _Out_opt_ UINT * sizeFilled);
-@@ -508,11 +509,11 @@ GdipIsVisibleRegionRectI(GpRegion *region, INT x, INT y, INT width,
- GpStatus WINGDIPAPI
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleRegionPoint(GpRegion *region, REAL x, REAL y,
+                                   GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleRegionPointI(GpRegion *region, INT x, INT y,
+                                   GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleRegionRect(GpRegion *region, REAL x, REAL y, REAL width,
+                         REAL height, GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleRegionRectI(GpRegion *region, INT x, INT y, INT width,
+                          INT height, GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetRegionScansCount(GpRegion *region, UINT* count, GpMatrix* matrix);
  
 -GpStatus WINGDIPAPI
@@ -493,16 +623,23 @@ index ba094eef74..b383c7489f 100644
  GdipGetRegionScansI(GpRegion *region, GpRect* rects, INT* count, 
                      GpMatrix* matrix);
  
-@@ -523,7 +524,7 @@ GdipGetRegionScansI(GpRegion *region, GpRect* rects, INT* count,
- GpStatus WINGDIPAPI
+@@ -520,140 +521,140 @@ GdipGetRegionScansI(GpRegion *region, GpRect* rects, INT* count,
+ // Brush APIs
+ //----------------------------------------------------------------------------
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCloneBrush(GpBrush *brush, GpBrush **cloneBrush);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeleteBrush(GpBrush *brush);
  
- GpStatus WINGDIPAPI
-@@ -533,73 +534,73 @@ GdipGetBrushType(GpBrush *brush, GpBrushType *type);
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetBrushType(GpBrush *brush, GpBrushType *type);
+ 
+ //----------------------------------------------------------------------------
  // HatchBrush APIs
  //----------------------------------------------------------------------------
  
@@ -511,7 +648,8 @@ index ba094eef74..b383c7489f 100644
  GdipCreateHatchBrush(GpHatchStyle hatchstyle, ARGB forecol,
                                ARGB backcol, GpHatch **brush);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetHatchStyle(GpHatch *brush, GpHatchStyle *hatchstyle);
  
 -GpStatus WINGDIPAPI
@@ -591,8 +729,15 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetTextureWrapMode(GpTexture *brush, GpWrapMode wrapmode);
  
- GpStatus WINGDIPAPI
-@@ -612,10 +613,10 @@ GdipGetTextureImage(GpTexture *brush, GpImage **image);
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetTextureWrapMode(GpTexture *brush, GpWrapMode *wrapmode);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetTextureImage(GpTexture *brush, GpImage **image);
+ 
+ //----------------------------------------------------------------------------
  // SolidBrush APIs
  //----------------------------------------------------------------------------
  
@@ -604,8 +749,11 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetSolidFillColor(GpSolidFill *brush, ARGB color);
  
- GpStatus WINGDIPAPI
-@@ -625,35 +626,35 @@ GdipGetSolidFillColor(GpSolidFill *brush, ARGB *color);
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetSolidFillColor(GpSolidFill *brush, ARGB *color);
+ 
+ //----------------------------------------------------------------------------
  // LineBrush APIs
  //----------------------------------------------------------------------------
  
@@ -655,7 +803,7 @@ index ba094eef74..b383c7489f 100644
  GdipCreateLineBrushFromRectWithAngleI(GDIPCONST GpRect* rect,
                                       ARGB color1, ARGB color2,
                                       REAL angle,
-@@ -669,19 +670,19 @@ GdipCreateLineBrushFromRectWithAngleI(GDIPCONST GpRect* rect,
+@@ -669,80 +670,80 @@ GdipCreateLineBrushFromRectWithAngleI(GDIPCONST GpRect* rect,
                                       GpWrapMode wrapMode,
                                       GpLineGradient **lineGradient);
  
@@ -679,9 +827,12 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetLineGammaCorrection(GpLineGradient *brush, BOOL useGammaCorrection);
  
- GpStatus WINGDIPAPI
-@@ -690,59 +691,59 @@ GdipGetLineGammaCorrection(GpLineGradient *brush, BOOL *useGammaCorrection);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetLineGammaCorrection(GpLineGradient *brush, BOOL *useGammaCorrection);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetLineBlendCount(GpLineGradient *brush, INT *count);
  
 -GpStatus WINGDIPAPI
@@ -694,7 +845,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetLineBlend(GpLineGradient *brush, GDIPCONST REAL *blend,
                   GDIPCONST REAL* positions, INT count);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetLinePresetBlendCount(GpLineGradient *brush, INT *count);
  
 -GpStatus WINGDIPAPI
@@ -719,7 +871,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetLineWrapMode(GpLineGradient *brush, GpWrapMode wrapmode);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetLineWrapMode(GpLineGradient *brush, GpWrapMode *wrapmode);
  
 -GpStatus WINGDIPAPI
@@ -754,7 +907,7 @@ index ba094eef74..b383c7489f 100644
  GdipRotateLineTransform(GpLineGradient* brush, REAL angle, 
                          GpMatrixOrder order);
  
-@@ -750,19 +751,19 @@ GdipRotateLineTransform(GpLineGradient* brush, REAL angle,
+@@ -750,153 +751,153 @@ GdipRotateLineTransform(GpLineGradient* brush, REAL angle,
  // PathGradientBrush APIs
  //----------------------------------------------------------------------------
  
@@ -777,7 +930,26 @@ index ba094eef74..b383c7489f 100644
  GdipCreatePathGradientFromPath(GDIPCONST GpPath* path,
                                      GpPathGradient **polyGradient);
  
-@@ -785,41 +786,41 @@ GdipSetPathGradientSurroundColorsWithCount(
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPathGradientCenterColor(
+                         GpPathGradient *brush, ARGB* colors);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipSetPathGradientCenterColor(
+                         GpPathGradient *brush, ARGB colors);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPathGradientSurroundColorsWithCount(
+                         _In_ GpPathGradient *brush,
+                         _Out_writes_to_(*count, *count) ARGB* color,
+                         _Inout_ INT* count);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipSetPathGradientSurroundColorsWithCount(
                          GpPathGradient *brush,
                          GDIPCONST ARGB* color, INT* count);
  
@@ -817,7 +989,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathGradientRectI(GpPathGradient *brush, GpRect *rect);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathGradientPointCount(GpPathGradient *brush, INT* count);
  
 -GpStatus WINGDIPAPI
@@ -829,7 +1002,13 @@ index ba094eef74..b383c7489f 100644
  GdipSetPathGradientGammaCorrection(GpPathGradient *brush, 
                                     BOOL useGammaCorrection);
  
-@@ -831,72 +832,72 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPathGradientGammaCorrection(GpPathGradient *brush, 
+                                    BOOL *useGammaCorrection);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathGradientBlendCount(GpPathGradient *brush,
                                               INT *count);
  
@@ -843,7 +1022,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetPathGradientBlend(GpPathGradient *brush,
                  GDIPCONST REAL *blend, GDIPCONST REAL *positions, INT count);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathGradientPresetBlendCount(GpPathGradient *brush, INT *count);
  
 -GpStatus WINGDIPAPI
@@ -864,7 +1044,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPathGradientLinearBlend(GpPathGradient *brush, REAL focus, REAL scale);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPathGradientWrapMode(GpPathGradient *brush,
                                           GpWrapMode *wrapmode);
  
@@ -918,7 +1099,7 @@ index ba094eef74..b383c7489f 100644
  GdipSetPathGradientFocusScales(GpPathGradient *brush, REAL xScale, 
                                 REAL yScale);
  
-@@ -904,42 +905,42 @@ GdipSetPathGradientFocusScales(GpPathGradient *brush, REAL xScale,
+@@ -904,409 +905,409 @@ GdipSetPathGradientFocusScales(GpPathGradient *brush, REAL xScale,
  // Pen APIs
  //----------------------------------------------------------------------------
  
@@ -935,14 +1116,16 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipClonePen(GpPen *pen, GpPen **clonepen);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeletePen(GpPen *pen);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenWidth(GpPen *pen, REAL width);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenWidth(GpPen *pen, REAL *width);
  
 -GpStatus WINGDIPAPI
@@ -970,16 +1153,24 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenDashCap197819(GpPen *pen, GpDashCap dashCap);
  
- GpStatus WINGDIPAPI
-@@ -951,67 +952,67 @@ GdipGetPenEndCap(GpPen *pen, GpLineCap *endCap);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPenStartCap(GpPen *pen, GpLineCap *startCap);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPenEndCap(GpPen *pen, GpLineCap *endCap);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenDashCap197819(GpPen *pen, GpDashCap *dashCap);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenLineJoin(GpPen *pen, GpLineJoin lineJoin);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenLineJoin(GpPen *pen, GpLineJoin *lineJoin);
  
 -GpStatus WINGDIPAPI
@@ -1002,14 +1193,16 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenMiterLimit(GpPen *pen, REAL miterLimit);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenMiterLimit(GpPen *pen, REAL *miterLimit);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenMode(GpPen *pen, GpPenAlignment penMode);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenMode(GpPen *pen, GpPenAlignment *penMode);
  
 -GpStatus WINGDIPAPI
@@ -1047,30 +1240,40 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenColor(GpPen *pen, ARGB argb);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenColor(GpPen *pen, ARGB *argb);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenBrushFill(GpPen *pen, GpBrush *brush);
  
- GpStatus WINGDIPAPI
-@@ -1023,61 +1024,61 @@ GdipGetPenFillType(GpPen *pen, GpPenType* type);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPenBrushFill(GpPen *pen, GpBrush **brush);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPenFillType(GpPen *pen, GpPenType* type);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenDashStyle(GpPen *pen, GpDashStyle *dashstyle);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenDashStyle(GpPen *pen, GpDashStyle dashstyle);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenDashOffset(GpPen *pen, REAL *offset);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPenDashOffset(GpPen *pen, REAL offset);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenDashCount(GpPen *pen, INT *count);
  
 -GpStatus WINGDIPAPI
@@ -1081,7 +1284,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenDashArray(GpPen *pen, REAL *dash, INT count);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPenCompoundCount(GpPen *pen, INT *count);
  
 -GpStatus WINGDIPAPI
@@ -1105,7 +1309,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeleteCustomLineCap(GpCustomLineCap* customCap);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCloneCustomLineCap(GpCustomLineCap* customCap,
                         GpCustomLineCap** clonedCap);
  
@@ -1129,7 +1334,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetCustomLineCapStrokeJoin(GpCustomLineCap* customCap, 
                                 GpLineJoin lineJoin);
  
-@@ -1085,19 +1086,19 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetCustomLineCapStrokeJoin(GpCustomLineCap* customCap, 
                                 GpLineJoin* lineJoin);
  
@@ -1137,22 +1343,27 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetCustomLineCapBaseCap(GpCustomLineCap* customCap, GpLineCap baseCap);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetCustomLineCapBaseCap(GpCustomLineCap* customCap, GpLineCap* baseCap);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetCustomLineCapBaseInset(GpCustomLineCap* customCap, REAL inset);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetCustomLineCapBaseInset(GpCustomLineCap* customCap, REAL* inset);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetCustomLineCapWidthScale(GpCustomLineCap* customCap, REAL widthScale);
  
- GpStatus WINGDIPAPI
-@@ -1107,23 +1108,23 @@ GdipGetCustomLineCapWidthScale(GpCustomLineCap* customCap, REAL* widthScale);
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetCustomLineCapWidthScale(GpCustomLineCap* customCap, REAL* widthScale);
+ 
+ //----------------------------------------------------------------------------
  // AdjustableArrowCap APIs
  //----------------------------------------------------------------------------
  
@@ -1165,14 +1376,16 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetAdjustableArrowCapHeight(GpAdjustableArrowCap* cap, REAL height);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetAdjustableArrowCapHeight(GpAdjustableArrowCap* cap, REAL* height);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetAdjustableArrowCapWidth(GpAdjustableArrowCap* cap, REAL width);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetAdjustableArrowCapWidth(GpAdjustableArrowCap* cap, REAL* width);
  
 -GpStatus WINGDIPAPI
@@ -1180,7 +1393,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetAdjustableArrowCapMiddleInset(GpAdjustableArrowCap* cap, 
                                       REAL middleInset);
  
-@@ -1131,7 +1132,7 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetAdjustableArrowCapMiddleInset(GpAdjustableArrowCap* cap, 
                                       REAL* middleInset);
  
@@ -1188,8 +1402,11 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetAdjustableArrowCapFillState(GpAdjustableArrowCap* cap, BOOL fillState);
  
- GpStatus WINGDIPAPI
-@@ -1141,16 +1142,16 @@ GdipGetAdjustableArrowCapFillState(GpAdjustableArrowCap* cap, BOOL* fillState);
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetAdjustableArrowCapFillState(GpAdjustableArrowCap* cap, BOOL* fillState);
+ 
+ //----------------------------------------------------------------------------
  // Image APIs
  //----------------------------------------------------------------------------
  
@@ -1209,9 +1426,12 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipLoadImageFromFileICM(GDIPCONST WCHAR* filename, GpImage **image);
  
- GpStatus WINGDIPAPI
-@@ -1159,30 +1160,30 @@ GdipCloneImage(GpImage *image, GpImage **cloneImage);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipCloneImage(GpImage *image, GpImage **cloneImage);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDisposeImage(GpImage *image);
  
 -GpStatus WINGDIPAPI
@@ -1247,17 +1467,46 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetImageDimension(GpImage *image, REAL *width, REAL *height);
  
- GpStatus WINGDIPAPI
-@@ -1203,7 +1204,7 @@ GdipGetImageVerticalResolution(GpImage *image, REAL *resolution);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImageType(GpImage *image, ImageType *type);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImageWidth(GpImage *image, UINT *width);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImageHeight(GpImage *image, UINT *height);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImageHorizontalResolution(GpImage *image, REAL *resolution);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImageVerticalResolution(GpImage *image, REAL *resolution);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetImageFlags(GpImage *image, UINT *flags);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetImageRawFormat(GpImage *image, GUID *format);
  
- GpStatus WINGDIPAPI
-@@ -1218,14 +1219,14 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImagePixelFormat(GpImage *image, PixelFormat *format);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImageThumbnail(GpImage *image, UINT thumbWidth, UINT thumbHeight,
+                       GpImage **thumbImage,
+                       GetThumbnailImageAbort callback, VOID * callbackData);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetEncoderParameterListSize(GpImage *image, GDIPCONST CLSID* clsidEncoder,
                                  UINT* size);
  
@@ -1266,7 +1515,8 @@ index ba094eef74..b383c7489f 100644
  GdipGetEncoderParameterList(GpImage *image, GDIPCONST CLSID* clsidEncoder,
                              UINT size, EncoderParameters* buffer);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipImageGetFrameDimensionsCount(GpImage* image, UINT* count);
  
 -GpStatus WINGDIPAPI
@@ -1274,7 +1524,8 @@ index ba094eef74..b383c7489f 100644
  GdipImageGetFrameDimensionsList(GpImage* image, GUID* dimensionIDs, 
                                  UINT count);
  
-@@ -1233,17 +1234,17 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipImageGetFrameCount(GpImage *image, GDIPCONST GUID* dimensionID, 
                         UINT* count);
  
@@ -1295,16 +1546,20 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetImagePalette(GpImage *image, GDIPCONST ColorPalette *palette);
  
- GpStatus WINGDIPAPI
-@@ -1252,61 +1253,61 @@ GdipGetImagePaletteSize(GpImage *image, INT *size);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetImagePaletteSize(GpImage *image, INT *size);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPropertyCount(GpImage *image, UINT* numOfProperty);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPropertyIdList(GpImage *image, UINT numOfProperty, PROPID* list);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPropertyItemSize(GpImage *image, PROPID propId, UINT* size);
  
 -GpStatus WINGDIPAPI
@@ -1514,7 +1769,7 @@ index ba094eef74..b383c7489f 100644
  GdipBitmapGetHistogram(
      GpBitmap* bitmap, 
      IN HistogramFormat format,
-@@ -1449,21 +1450,21 @@ GdipBitmapGetHistogram(
+@@ -1449,38 +1450,38 @@ GdipBitmapGetHistogram(
      _Out_writes_bytes_(sizeof(UINT)*256) UINT *channel3
  );
  
@@ -1538,9 +1793,13 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCreateImageAttributes(GpImageAttributes **imageattr);
  
- GpStatus WINGDIPAPI
-@@ -1473,14 +1474,14 @@ GdipCloneImageAttributes(GDIPCONST GpImageAttributes *imageattr,
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipCloneImageAttributes(GDIPCONST GpImageAttributes *imageattr,
+                          GpImageAttributes **cloneImageattr);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDisposeImageAttributes(GpImageAttributes *imageattr);
  
 -GpStatus WINGDIPAPI
@@ -1625,8 +1884,12 @@ index ba094eef74..b383c7489f 100644
  GdipGetImageAttributesAdjustedPalette(
      GpImageAttributes *imageAttr,
      ColorPalette * colorPalette,
-@@ -1559,16 +1560,16 @@ GdipGetImageAttributesAdjustedPalette(
- GpStatus WINGDIPAPI
+@@ -1556,347 +1557,347 @@ GdipGetImageAttributesAdjustedPalette(
+ // Graphics APIs
+ //----------------------------------------------------------------------------
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipFlush(GpGraphics *graphics, GpFlushIntention intention);
  
 -GpStatus WINGDIPAPI
@@ -1645,16 +1908,24 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCreateFromHWNDICM(HWND hwnd, GpGraphics **graphics);
  
- GpStatus WINGDIPAPI
-@@ -1580,19 +1581,19 @@ GdipGetDC(GpGraphics* graphics, HDC * hdc);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipDeleteGraphics(GpGraphics *graphics);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetDC(GpGraphics* graphics, HDC * hdc);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipReleaseDC(GpGraphics* graphics, HDC hdc);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetCompositingMode(GpGraphics *graphics, CompositingMode compositingMode);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetCompositingMode(GpGraphics *graphics, CompositingMode *compositingMode);
  
 -GpStatus WINGDIPAPI
@@ -1670,7 +1941,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetCompositingQuality(GpGraphics *graphics, 
                            CompositingQuality compositingQuality);
  
-@@ -1600,31 +1601,31 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetCompositingQuality(GpGraphics *graphics, 
                            CompositingQuality *compositingQuality);
                            
@@ -1678,28 +1950,32 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetSmoothingMode(GpGraphics *graphics, SmoothingMode smoothingMode);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetSmoothingMode(GpGraphics *graphics, SmoothingMode *smoothingMode);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPixelOffsetMode(GpGraphics* graphics, PixelOffsetMode pixelOffsetMode);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPixelOffsetMode(GpGraphics *graphics, PixelOffsetMode *pixelOffsetMode);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetTextRenderingHint(GpGraphics *graphics, TextRenderingHint mode);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetTextRenderingHint(GpGraphics *graphics, TextRenderingHint *mode);
  
 -GpStatus  WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus  WINGDIPAPI
  GdipSetTextContrast(GpGraphics *graphics, UINT contrast);
  
- GpStatus  WINGDIPAPI
+-GpStatus  WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus  WINGDIPAPI
  GdipGetTextContrast(GpGraphics *graphics, UINT * contrast);
  
 -GpStatus WINGDIPAPI
@@ -1707,7 +1983,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetInterpolationMode(GpGraphics *graphics, 
                           InterpolationMode interpolationMode);
  
-@@ -1632,32 +1633,32 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetInterpolationMode(GpGraphics *graphics, 
                           InterpolationMode *interpolationMode);
  
@@ -1747,9 +2024,12 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipResetPageTransform(GpGraphics *graphics);
  
- GpStatus WINGDIPAPI
-@@ -1666,10 +1667,10 @@ GdipGetPageUnit(GpGraphics *graphics, GpUnit *unit);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetPageUnit(GpGraphics *graphics, GpUnit *unit);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetPageScale(GpGraphics *graphics, REAL *scale);
  
 -GpStatus WINGDIPAPI
@@ -1760,9 +2040,12 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetPageScale(GpGraphics *graphics, REAL scale);
  
- GpStatus WINGDIPAPI
-@@ -1678,225 +1679,225 @@ GdipGetDpiX(GpGraphics *graphics, REAL* dpi);
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetDpiX(GpGraphics *graphics, REAL* dpi);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetDpiY(GpGraphics *graphics, REAL* dpi);
  
 -GpStatus WINGDIPAPI
@@ -2235,7 +2518,7 @@ index ba094eef74..b383c7489f 100644
  GdipPlayMetafileRecord(
      GDIPCONST GpMetafile *  metafile,
      EmfPlusRecordType       recordType,
-@@ -2118,53 +2119,53 @@ GdipPlayMetafileRecord(
+@@ -2118,164 +2119,164 @@ GdipPlayMetafileRecord(
      GDIPCONST BYTE *        data
      );
  
@@ -2291,7 +2574,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetClipBoundsI(GpGraphics *graphics, GpRect *rect);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipIsClipEmpty(GpGraphics *graphics, BOOL *result);
  
 -GpStatus WINGDIPAPI
@@ -2302,18 +2586,52 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetVisibleClipBoundsI(GpGraphics *graphics, GpRect *rect);
  
- GpStatus WINGDIPAPI
-@@ -2189,7 +2190,7 @@ GdipIsVisibleRectI(GpGraphics *graphics, INT x, INT y,
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleClipEmpty(GpGraphics *graphics, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisiblePoint(GpGraphics *graphics, REAL x, REAL y,
+                            BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisiblePointI(GpGraphics *graphics, INT x, INT y,
+                            BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleRect(GpGraphics *graphics, REAL x, REAL y,
+                            REAL width, REAL height, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipIsVisibleRectI(GpGraphics *graphics, INT x, INT y,
+                            INT width, INT height, BOOL *result);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSaveGraphics(GpGraphics *graphics, GraphicsState *state);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipRestoreGraphics(GpGraphics *graphics, GraphicsState state);
  
- GpStatus WINGDIPAPI
-@@ -2205,38 +2206,38 @@ GdipBeginContainerI(GpGraphics *graphics, GDIPCONST GpRect* dstrect,
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipBeginContainer(GpGraphics *graphics, GDIPCONST GpRectF* dstrect,
+                    GDIPCONST GpRectF *srcrect, GpUnit unit, 
+                    GraphicsContainer *state);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipBeginContainerI(GpGraphics *graphics, GDIPCONST GpRect* dstrect,
+                     GDIPCONST GpRect *srcrect, GpUnit unit, 
+                     GraphicsContainer *state);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipBeginContainer2(GpGraphics *graphics, GraphicsContainer* state);
  
 -GpStatus WINGDIPAPI
@@ -2357,7 +2675,14 @@ index ba094eef74..b383c7489f 100644
  WINGDIPAPI
  GdipGetMetafileHeaderFromMetafile(
      GpMetafile *        metafile,
-@@ -2250,32 +2251,32 @@ GdipGetHemfFromMetafile(
+     MetafileHeader *    header
+     );
+ 
+-GpStatus
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus
+ WINGDIPAPI
+ GdipGetHemfFromMetafile(
+     GpMetafile *        metafile,
      HENHMETAFILE *      hEmf
      );
  
@@ -2442,7 +2767,7 @@ index ba094eef74..b383c7489f 100644
  GdipRecordMetafileStreamI(
      IStream *           stream,
      HDC                 referenceHdc,
-@@ -2339,7 +2340,7 @@ GdipRecordMetafileStreamI(
+@@ -2339,70 +2340,70 @@ GdipRecordMetafileStreamI(
      GpMetafile **       metafile
      );
  
@@ -2451,7 +2776,12 @@ index ba094eef74..b383c7489f 100644
  GdipSetMetafileDownLevelRasterizationLimit(
      GpMetafile *            metafile,
      UINT                    metafileRasterizationLimitDpi
-@@ -2351,30 +2352,30 @@ GdipGetMetafileDownLevelRasterizationLimit(
+     );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetMetafileDownLevelRasterizationLimit(
+     GDIPCONST GpMetafile *  metafile,
      UINT *                  metafileRasterizationLimitDpi
      );
  
@@ -2488,8 +2818,13 @@ index ba094eef74..b383c7489f 100644
  GdipCreateFontFamilyFromName(GDIPCONST WCHAR *name,
                               GpFontCollection *fontCollection,
                               GpFontFamily **fontFamily);
-@@ -2385,24 +2386,24 @@ GdipDeleteFontFamily(GpFontFamily *fontFamily);
- GpStatus WINGDIPAPI
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipDeleteFontFamily(GpFontFamily *fontFamily);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipCloneFontFamily(GpFontFamily *fontFamily, GpFontFamily **clonedFontFamily);
  
 -GpStatus WINGDIPAPI
@@ -2517,6 +2852,30 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus   WINGDIPAPI
  GdipIsStyleAvailable(GDIPCONST GpFontFamily *family, INT style, 
                       BOOL * IsStyleAvailable);
+ 
+@@ -2421,19 +2422,19 @@ GpStatus WINGDIPAPI GdipFontCollectionEnumerate(
+     GpGraphics*     graphics
+ );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetEmHeight(GDIPCONST GpFontFamily *family, INT style, 
+                 UINT16 * EmHeight);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetCellAscent(GDIPCONST GpFontFamily *family, INT style,
+                   UINT16 * CellAscent);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetCellDescent(GDIPCONST GpFontFamily *family, INT style, 
+                    UINT16 * CellDescent);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetLineSpacing(GDIPCONST GpFontFamily *family, INT style, 
+                    UINT16 * LineSpacing);
  
 @@ -2442,27 +2443,27 @@ GdipGetLineSpacing(GDIPCONST GpFontFamily *family, INT style,
  // Font APIs
@@ -2550,17 +2909,41 @@ index ba094eef74..b383c7489f 100644
  GdipCreateFont(
      GDIPCONST GpFontFamily  *fontFamily,
      REAL                 emSize,
-@@ -2477,7 +2478,7 @@ GdipCloneFont(GpFont* font, GpFont** cloneFont);
- GpStatus WINGDIPAPI
+@@ -2471,53 +2472,53 @@ GdipCreateFont(
+     GpFont             **font
+ );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipCloneFont(GpFont* font, GpFont** cloneFont);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeleteFont(GpFont* font);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetFamily(GpFont *font, GpFontFamily **family);
  
- GpStatus WINGDIPAPI
-@@ -2496,28 +2497,28 @@ GdipGetFontHeight(GDIPCONST GpFont *font, GDIPCONST GpGraphics *graphics,
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetFontStyle(GpFont *font, INT *style);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetFontSize(GpFont *font, REAL *size);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetFontUnit(GpFont *font, Unit *unit);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetFontHeight(GDIPCONST GpFont *font, GDIPCONST GpGraphics *graphics, 
+                   REAL *height);
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetFontHeightGivenDPI(GDIPCONST GpFont *font, REAL dpi, REAL *height);
  
 -GpStatus WINGDIPAPI
@@ -2579,7 +2962,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipNewPrivateFontCollection(GpFontCollection** fontCollection);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeletePrivateFontCollection(GpFontCollection** fontCollection);
  
 -GpStatus WINGDIPAPI
@@ -2655,7 +3039,7 @@ index ba094eef74..b383c7489f 100644
  GdipMeasureDriverString(
      GpGraphics *graphics,
      GDIPCONST UINT16 *text,
-@@ -2607,40 +2608,40 @@ GdipMeasureDriverString(
+@@ -2607,93 +2608,93 @@ GdipMeasureDriverString(
  // String format APIs
  //----------------------------------------------------------------------------
  
@@ -2688,14 +3072,16 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetStringFormatFlags(GpStringFormat *format, INT flags);
  
- GpStatus WINGDIPAPI GdipGetStringFormatFlags(GDIPCONST GpStringFormat *format, 
+-GpStatus WINGDIPAPI GdipGetStringFormatFlags(GDIPCONST GpStringFormat *format, 
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI GdipGetStringFormatFlags(GDIPCONST GpStringFormat *format, 
                                               INT *flags);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetStringFormatAlign(GpStringFormat *format, StringAlignment align);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetStringFormatAlign(GDIPCONST GpStringFormat *format, 
                           StringAlignment *align);
  
@@ -2704,7 +3090,8 @@ index ba094eef74..b383c7489f 100644
  GdipSetStringFormatLineAlign(GpStringFormat *format,
                               StringAlignment align);
  
-@@ -2648,7 +2649,7 @@ GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetStringFormatLineAlign(GDIPCONST GpStringFormat *format,
                               StringAlignment *align);
  
@@ -2713,7 +3100,12 @@ index ba094eef74..b383c7489f 100644
  GdipSetStringFormatTrimming(
      GpStringFormat  *format,
      StringTrimming   trimming
-@@ -2660,29 +2661,29 @@ GdipGetStringFormatTrimming(
+ );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetStringFormatTrimming(
+     GDIPCONST GpStringFormat *format,
      StringTrimming       *trimming
  );
  
@@ -2721,7 +3113,8 @@ index ba094eef74..b383c7489f 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipSetStringFormatHotkeyPrefix(GpStringFormat *format, INT hotkeyPrefix);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetStringFormatHotkeyPrefix(GDIPCONST GpStringFormat *format, 
                                  INT *hotkeyPrefix);
  
@@ -2735,7 +3128,8 @@ index ba094eef74..b383c7489f 100644
  GdipGetStringFormatTabStops(GDIPCONST GpStringFormat *format, INT count, 
                              REAL *firstTabOffset, REAL *tabStops);
  
- GpStatus WINGDIPAPI
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipGetStringFormatTabStopCount(GDIPCONST GpStringFormat *format, INT * count);
  
 -GpStatus WINGDIPAPI
@@ -2748,7 +3142,11 @@ index ba094eef74..b383c7489f 100644
  GdipGetStringFormatDigitSubstitution(GDIPCONST GpStringFormat *format, 
                                       LANGID *language,
                                       StringDigitSubstitute *substitute);
-@@ -2693,7 +2694,7 @@ GdipGetStringFormatMeasurableCharacterRangeCount(
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
+ GdipGetStringFormatMeasurableCharacterRangeCount(
+     GDIPCONST GpStringFormat    *format,
      INT                         *count
  );
  
@@ -2757,7 +3155,7 @@ index ba094eef74..b383c7489f 100644
  GdipSetStringFormatMeasurableCharacterRanges(
      GpStringFormat              *format,
      INT                         rangeCount,
-@@ -2704,7 +2705,7 @@ GdipSetStringFormatMeasurableCharacterRanges(
+@@ -2704,17 +2705,17 @@ GdipSetStringFormatMeasurableCharacterRanges(
  // Cached Bitmap APIs
  //----------------------------------------------------------------------------
  
@@ -2766,8 +3164,11 @@ index ba094eef74..b383c7489f 100644
  GdipCreateCachedBitmap(
      GpBitmap *bitmap,
      GpGraphics *graphics,
-@@ -2714,7 +2715,7 @@ GdipCreateCachedBitmap(
- GpStatus WINGDIPAPI
+     GpCachedBitmap **cachedBitmap
+ );
+ 
+-GpStatus WINGDIPAPI
++_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
  GdipDeleteCachedBitmap(GpCachedBitmap *cachedBitmap);
  
 -GpStatus WINGDIPAPI

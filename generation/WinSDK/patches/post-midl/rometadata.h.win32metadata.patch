@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadata.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadata.h
-index 82fdc8af6f7df389ae44157dde27eb99e2580de4..03da3020c47967d28442322361f1c18286f0d23d 100644
+index 82fdc8af6f..9106a87b26 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadata.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadata.h
 @@ -5,6 +5,7 @@
@@ -14,8 +14,8 @@ index 82fdc8af6f7df389ae44157dde27eb99e2580de4..03da3020c47967d28442322361f1c182
  // Arguments:
  //    rclsid - Only CLSID_CorMetaDataDispenser supported.
  //    riid   - Interfaces supported: IID_IMetaDataDispenser, IID_IMetaDataDispenserEx.
-+_Windows_SupportedOS_Windows8_
-+_Windows_SupportedOS_Server2012_
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("rometadata.dll") 
++
  STDAPI MetaDataGetDispenser(
          __in REFCLSID            rclsid, 
          __in REFIID              riid, 

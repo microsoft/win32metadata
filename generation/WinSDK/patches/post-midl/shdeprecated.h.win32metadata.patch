@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
-index 0ad95321b8..515ca98274 100644
+index 0ad95321b8..980ce2073c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
 @@ -1,3 +1,4 @@
@@ -125,3 +125,12 @@ index 0ad95321b8..515ca98274 100644
              MP_POPUPFLAGS dwFlags) = 0;
          
      };
+@@ -5154,7 +5155,7 @@ extern RPC_IF_HANDLE __MIDL_itf_shdeprecated_0000_0011_v0_0_s_ifspec;
+ 
+ /* Additional Prototypes for ALL interfaces */
+ 
+-unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+ void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
