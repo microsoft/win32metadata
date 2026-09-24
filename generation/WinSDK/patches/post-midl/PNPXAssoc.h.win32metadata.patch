@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h b/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h
-index ae2164814c..84c0cc8fd1 100644
+index ae2164814c..9af660272b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h
 @@ -99,6 +99,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index ae2164814c..84c0cc8fd1 100644
      } IPNPXAssociationVtbl;
  
 -    interface IPNPXAssociation
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPNPXAssociation
++    interface _Windows_SupportedOS_WindowsVista_ IPNPXAssociation
      {
          CONST_VTBL struct IPNPXAssociationVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index ae2164814c..84c0cc8fd1 100644
      } IPNPXDeviceAssociationVtbl;
  
 -    interface IPNPXDeviceAssociation
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPNPXDeviceAssociation
++    interface _Windows_SupportedOS_WindowsVista_ IPNPXDeviceAssociation
      {
          CONST_VTBL struct IPNPXDeviceAssociationVtbl *lpVtbl;
      };

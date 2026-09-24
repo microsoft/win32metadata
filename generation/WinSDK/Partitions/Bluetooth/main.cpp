@@ -13,3 +13,6 @@
 #include <bthsdpdef.h>
 //#include <bthioctl.h> -- won't compile due to: #pragma detect_mismatch("ODR_violation_bthioctl_mismatch", "1")
 
+
+#include <winioctl.h>
+#include <bthioctl.h>

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h
-index 61cc91edb9..23205721c2 100644
+index 61cc91edb9..0b9d4f6c31 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsmgmt.h
 @@ -115,6 +115,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 61cc91edb9..23205721c2 100644
      } IVssSnapshotMgmtVtbl;
  
 -    interface IVssSnapshotMgmt
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssSnapshotMgmt
++    interface _Windows_SupportedOS_WindowsVista_ IVssSnapshotMgmt
      {
          CONST_VTBL struct IVssSnapshotMgmtVtbl *lpVtbl;
      };

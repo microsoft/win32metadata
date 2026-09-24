@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
-index 0bf1a86aa1..69ce575b29 100644
+index 0bf1a86aa1..af0075eb2d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
 @@ -100,6 +100,7 @@ extern "C"{
@@ -19,12 +19,3 @@ index 0bf1a86aa1..69ce575b29 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetFrameName( 
-@@ -353,7 +354,7 @@ EXTERN_C const IID IID_ITargetFrame;
-         END_INTERFACE
-     } ITargetFrameVtbl;
- 
--    interface ITargetFrame
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetFrame
-     {
-         CONST_VTBL struct ITargetFrameVtbl *lpVtbl;
-     };

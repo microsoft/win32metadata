@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h b/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
-index 0f150b877a..5660f7c698 100644
+index 0f150b877a..8cb19100e6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
 @@ -90,6 +90,7 @@ extern "C"{
@@ -19,12 +19,3 @@ index 0f150b877a..5660f7c698 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetHomePage( 
-@@ -178,7 +179,7 @@ EXTERN_C const IID IID_IHomePageSetting;
-         END_INTERFACE
-     } IHomePageSettingVtbl;
- 
--    interface IHomePageSetting
-+    interface _Windows_SupportedOS_Windows7_ IHomePageSetting
-     {
-         CONST_VTBL struct IHomePageSettingVtbl *lpVtbl;
-     };

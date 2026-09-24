@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
-index 62271818d0..95c5fe814b 100644
+index 62271818d0..f58085f40f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheck.h
 @@ -133,6 +133,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index 62271818d0..95c5fe814b 100644
      } ISpellingErrorVtbl;
  
 -    interface ISpellingError
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ISpellingError
++    interface _Windows_SupportedOS_Windows8_ ISpellingError
      {
          CONST_VTBL struct ISpellingErrorVtbl *lpVtbl;
      };
@@ -59,7 +59,7 @@ index 62271818d0..95c5fe814b 100644
      } IEnumSpellingErrorVtbl;
  
 -    interface IEnumSpellingError
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IEnumSpellingError
++    interface _Windows_SupportedOS_Windows8_ IEnumSpellingError
      {
          CONST_VTBL struct IEnumSpellingErrorVtbl *lpVtbl;
      };

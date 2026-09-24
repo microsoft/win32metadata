@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..4a414783c5 100644
+index f99e9294f5..91af03e46d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -61,6 +61,15 @@ index f99e9294f5..4a414783c5 100644
  int
  WINAPIV
  wsprintfW(
+@@ -792,7 +793,7 @@ wsprintfW(
+ #define WH_CBT              5
+ #define WH_SYSMSGFILTER     6
+ #define WH_MOUSE            7
+-#if defined(_WIN32_WINDOWS)
++#if defined(WIN32METADATA) || (defined(_WIN32_WINDOWS))
+ #define WH_HARDWARE         8
+ #endif
+ #define WH_DEBUG            9
 @@ -892,7 +893,7 @@ typedef struct tagCBTACTIVATESTRUCT
  /*
   * WTSSESSION_NOTIFICATION struct pointed by lParam, for WM_WTSSESSION_CHANGE
@@ -5905,6 +5914,15 @@ index f99e9294f5..4a414783c5 100644
  BOOL
  WINAPI
  GetIconInfoExW(
+@@ -11042,7 +11047,7 @@ GetIconInfoExW(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
+-#ifdef OEMRESOURCE
++#if defined(WIN32METADATA) || (defined(OEMRESOURCE))
+ 
+ 
+ /*
 @@ -11548,13 +11553,13 @@ typedef enum {
  
  #ifndef NOMSG

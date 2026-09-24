@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
-index 49248cf303..c661b5ebf3 100644
+index 49248cf303..e87d3a0af0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/commoncontrols.h
 @@ -86,6 +86,7 @@ extern "C"{
@@ -24,7 +24,7 @@ index 49248cf303..c661b5ebf3 100644
      
      MIDL_INTERFACE("46EB5926-582E-4017-9FDF-E8998DAA0950")
 -    IImageList : public IUnknown
-+    _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IImageList : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ IImageList : public IUnknown
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Add( 
@@ -51,7 +51,7 @@ index 49248cf303..c661b5ebf3 100644
      } IImageListVtbl;
  
 -    interface IImageList
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IImageList
++    interface _Windows_SupportedOS_WindowsVista_ IImageList
      {
          CONST_VTBL struct IImageListVtbl *lpVtbl;
      };
@@ -89,7 +89,7 @@ index 49248cf303..c661b5ebf3 100644
      } IImageList2Vtbl;
  
 -    interface IImageList2
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IImageList2
++    interface _Windows_SupportedOS_WindowsVista_ IImageList2
      {
          CONST_VTBL struct IImageList2Vtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
-index 059b2416cc..db94de19a0 100644
+index 059b2416cc..644100e04c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
 @@ -99,6 +99,7 @@ extern "C"{
@@ -19,15 +19,6 @@ index 059b2416cc..db94de19a0 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE OnCreate( 
-@@ -188,7 +189,7 @@ EXTERN_C const IID IID_ITargetNotify;
-         END_INTERFACE
-     } ITargetNotifyVtbl;
- 
--    interface ITargetNotify
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetNotify
-     {
-         CONST_VTBL struct ITargetNotifyVtbl *lpVtbl;
-     };
 @@ -239,7 +240,7 @@ EXTERN_C const IID IID_ITargetNotify2;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -37,12 +28,3 @@ index 059b2416cc..db94de19a0 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetOptionString( 
-@@ -294,7 +295,7 @@ EXTERN_C const IID IID_ITargetNotify2;
-         END_INTERFACE
-     } ITargetNotify2Vtbl;
- 
--    interface ITargetNotify2
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ ITargetNotify2
-     {
-         CONST_VTBL struct ITargetNotify2Vtbl *lpVtbl;
-     };

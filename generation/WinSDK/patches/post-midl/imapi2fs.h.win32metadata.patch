@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
-index d366ad37a0..a4c66772aa 100644
+index d366ad37a0..f05a2caafc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2fs.h
 @@ -376,6 +376,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index d366ad37a0..a4c66772aa 100644
      } IBootOptionsVtbl;
  
 -    interface IBootOptions
-+    interface _Windows_SupportedOS_Server2003_ IBootOptions
++    interface _Windows_SupportedOS_WindowsVista_ IBootOptions
      {
          CONST_VTBL struct IBootOptionsVtbl *lpVtbl;
      };
@@ -61,7 +61,7 @@ index d366ad37a0..a4c66772aa 100644
      } IProgressItemVtbl;
  
 -    interface IProgressItem
-+    interface _Windows_SupportedOS_Server2003_ IProgressItem
++    interface _Windows_SupportedOS_WindowsVista_ IProgressItem
      {
          CONST_VTBL struct IProgressItemVtbl *lpVtbl;
      };

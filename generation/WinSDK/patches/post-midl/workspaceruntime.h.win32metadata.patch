@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h
-index ea6e42e01c..ea5db239da 100644
+index ea6e42e01c..8b34912985 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h
 @@ -141,6 +141,7 @@ extern "C"{
@@ -44,7 +44,7 @@ index ea6e42e01c..ea5db239da 100644
      } IWorkspace2Vtbl;
  
 -    interface IWorkspace2
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWorkspace2
++    interface _Windows_SupportedOS_Windows8_ IWorkspace2
      {
          CONST_VTBL struct IWorkspace2Vtbl *lpVtbl;
      };
@@ -73,7 +73,7 @@ index ea6e42e01c..ea5db239da 100644
      } IWorkspace3Vtbl;
  
 -    interface IWorkspace3
-+    interface _Windows_SupportedOS_10240_ _Windows_SupportedOS_Server2016_ IWorkspace3
++    interface _Windows_SupportedOS_10240_ IWorkspace3
      {
          CONST_VTBL struct IWorkspace3Vtbl *lpVtbl;
      };
@@ -147,7 +147,7 @@ index ea6e42e01c..ea5db239da 100644
      } IWorkspaceScriptable2Vtbl;
  
 -    interface IWorkspaceScriptable2
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWorkspaceScriptable2
++    interface _Windows_SupportedOS_Windows8_ IWorkspaceScriptable2
      {
          CONST_VTBL struct IWorkspaceScriptable2Vtbl *lpVtbl;
      };
@@ -185,7 +185,7 @@ index ea6e42e01c..ea5db239da 100644
      } IWorkspaceReportMessageVtbl;
  
 -    interface IWorkspaceReportMessage
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWorkspaceReportMessage
++    interface _Windows_SupportedOS_Windows8_ IWorkspaceReportMessage
      {
          CONST_VTBL struct IWorkspaceReportMessageVtbl *lpVtbl;
      };

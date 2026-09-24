@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vss.h b/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
-index db02e89215..95a0aee165 100644
+index db02e89215..8780b8671c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vss.h
 @@ -74,6 +74,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index db02e89215..95a0aee165 100644
      } IVssEnumObjectVtbl;
  
 -    interface IVssEnumObject
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssEnumObject
++    interface _Windows_SupportedOS_WindowsXP_ IVssEnumObject
      {
          CONST_VTBL struct IVssEnumObjectVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index db02e89215..95a0aee165 100644
      } IVssAsyncVtbl;
  
 -    interface IVssAsync
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IVssAsync
++    interface _Windows_SupportedOS_WindowsXP_ IVssAsync
      {
          CONST_VTBL struct IVssAsyncVtbl *lpVtbl;
      };

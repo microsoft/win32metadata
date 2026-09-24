@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h b/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
-index badab97e5d..34edf82662 100644
+index badab97e5d..e869e97d1a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
 @@ -344,6 +344,7 @@ extern "C"{
@@ -138,15 +138,6 @@ index badab97e5d..34edf82662 100644
          
      };
      
-@@ -2563,7 +2564,7 @@ EXTERN_C const IID IID_IHeaderFooter;
-         END_INTERFACE
-     } IHeaderFooterVtbl;
- 
--    interface IHeaderFooter
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IHeaderFooter
-     {
-         CONST_VTBL struct IHeaderFooterVtbl *lpVtbl;
-     };
 @@ -2685,7 +2686,7 @@ EXTERN_C const IID IID_IHeaderFooter2;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -165,12 +156,3 @@ index badab97e5d..34edf82662 100644
          
      };
      
-@@ -2917,7 +2918,7 @@ EXTERN_C const IID IID_IHeaderFooter2;
-         END_INTERFACE
-     } IHeaderFooter2Vtbl;
- 
--    interface IHeaderFooter2
-+    interface _Windows_SupportedOS_Server2008_ IHeaderFooter2
-     {
-         CONST_VTBL struct IHeaderFooter2Vtbl *lpVtbl;
-     };

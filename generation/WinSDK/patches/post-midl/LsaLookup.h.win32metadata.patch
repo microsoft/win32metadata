@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h b/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h
-index 86e45aa74e..aa48995f9c 100644
+index 86e45aa74e..28afa4b10c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LsaLookup.h
 @@ -21,6 +21,7 @@ Abstract:
@@ -10,32 +10,15 @@ index 86e45aa74e..aa48995f9c 100644
  
  #pragma region Desktop Family or OneCore Family 
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -37,7 +38,7 @@ typedef OBJECT_ATTRIBUTES LSA_OBJECT_ATTRIBUTES, *PLSA_OBJECT_ATTRIBUTES;
- 
- #else // _NTDEF_
- 
--typedef struct _LSA_UNICODE_STRING {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_UNICODE_STRING {
-     USHORT Length;
-     USHORT MaximumLength;
- #ifdef MIDL_PASS
-@@ -46,13 +47,13 @@ typedef struct _LSA_UNICODE_STRING {
-     PWSTR  Buffer;
- } LSA_UNICODE_STRING, *PLSA_UNICODE_STRING;
- 
--typedef struct _LSA_STRING {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_STRING {
+@@ -49,7 +50,7 @@ typedef struct _LSA_UNICODE_STRING {
+ typedef struct _LSA_STRING {
      USHORT Length;
      USHORT MaximumLength;
 -    PCHAR Buffer;
 +    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR Buffer;
  } LSA_STRING, *PLSA_STRING;
  
--typedef struct _LSA_OBJECT_ATTRIBUTES {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _LSA_OBJECT_ATTRIBUTES {
-     ULONG Length;
-     HANDLE RootDirectory;
-     PLSA_UNICODE_STRING ObjectName;
+ typedef struct _LSA_OBJECT_ATTRIBUTES {
 @@ -67,7 +68,7 @@ typedef struct _LSA_OBJECT_ATTRIBUTES {
  // The following data type is used to identify a domain
  //

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h
-index 6179c6865f..e71afc0004 100644
+index 6179c6865f..81d0be2b60 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h
 @@ -93,6 +93,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index 6179c6865f..e71afc0004 100644
      } IBackgroundCopyJobHttpOptions2Vtbl;
  
 -    interface IBackgroundCopyJobHttpOptions2
-+    interface _Windows_SupportedOS_17763_ _Windows_SupportedOS_Server2016_ IBackgroundCopyJobHttpOptions2
++    interface _Windows_SupportedOS_17763_ IBackgroundCopyJobHttpOptions2
      {
          CONST_VTBL struct IBackgroundCopyJobHttpOptions2Vtbl *lpVtbl;
      };

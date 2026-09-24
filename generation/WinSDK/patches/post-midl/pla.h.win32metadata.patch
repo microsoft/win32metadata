@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pla.h b/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
-index 5eacdf357b..9108509974 100644
+index 5eacdf357b..34b77ad53a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/pla.h
 @@ -374,6 +374,7 @@ extern "C"{
@@ -160,7 +160,7 @@ index 5eacdf357b..9108509974 100644
      } IDataCollectorSetVtbl;
  
 -    interface IDataCollectorSet
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDataCollectorSet
++    interface _Windows_SupportedOS_WindowsVista_ IDataCollectorSet
      {
          CONST_VTBL struct IDataCollectorSetVtbl *lpVtbl;
      };
@@ -217,7 +217,7 @@ index 5eacdf357b..9108509974 100644
      } IDataManagerVtbl;
  
 -    interface IDataManager
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDataManager
++    interface _Windows_SupportedOS_WindowsVista_ IDataManager
      {
          CONST_VTBL struct IDataManagerVtbl *lpVtbl;
      };

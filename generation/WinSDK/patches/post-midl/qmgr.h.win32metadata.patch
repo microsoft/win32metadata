@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
-index 3557734acd..cc72d97185 100644
+index 3557734acd..43325923f8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/qmgr.h
 @@ -115,6 +115,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index 3557734acd..cc72d97185 100644
      } IBackgroundCopyJob1Vtbl;
  
 -    interface IBackgroundCopyJob1
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyJob1
++    interface _Windows_SupportedOS_WindowsXP_ IBackgroundCopyJob1
      {
          CONST_VTBL struct IBackgroundCopyJob1Vtbl *lpVtbl;
      };
@@ -55,7 +55,7 @@ index 3557734acd..cc72d97185 100644
      } IEnumBackgroundCopyJobs1Vtbl;
  
 -    interface IEnumBackgroundCopyJobs1
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyJobs1
++    interface _Windows_SupportedOS_WindowsXP_ IEnumBackgroundCopyJobs1
      {
          CONST_VTBL struct IEnumBackgroundCopyJobs1Vtbl *lpVtbl;
      };
@@ -84,7 +84,7 @@ index 3557734acd..cc72d97185 100644
      } IBackgroundCopyGroupVtbl;
  
 -    interface IBackgroundCopyGroup
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyGroup
++    interface _Windows_SupportedOS_WindowsXP_ IBackgroundCopyGroup
      {
          CONST_VTBL struct IBackgroundCopyGroupVtbl *lpVtbl;
      };
@@ -104,7 +104,7 @@ index 3557734acd..cc72d97185 100644
      } IEnumBackgroundCopyGroupsVtbl;
  
 -    interface IEnumBackgroundCopyGroups
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IEnumBackgroundCopyGroups
++    interface _Windows_SupportedOS_WindowsXP_ IEnumBackgroundCopyGroups
      {
          CONST_VTBL struct IEnumBackgroundCopyGroupsVtbl *lpVtbl;
      };
@@ -124,7 +124,7 @@ index 3557734acd..cc72d97185 100644
      } IBackgroundCopyCallback1Vtbl;
  
 -    interface IBackgroundCopyCallback1
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyCallback1
++    interface _Windows_SupportedOS_WindowsXP_ IBackgroundCopyCallback1
      {
          CONST_VTBL struct IBackgroundCopyCallback1Vtbl *lpVtbl;
      };
@@ -144,7 +144,7 @@ index 3557734acd..cc72d97185 100644
      } IBackgroundCopyQMgrVtbl;
  
 -    interface IBackgroundCopyQMgr
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IBackgroundCopyQMgr
++    interface _Windows_SupportedOS_WindowsXP_ IBackgroundCopyQMgr
      {
          CONST_VTBL struct IBackgroundCopyQMgrVtbl *lpVtbl;
      };

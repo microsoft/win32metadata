@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
-index 62ce1ca9c1..0102f29edc 100644
+index 62ce1ca9c1..e1cc4c97ce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi2.h
 @@ -577,6 +577,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index 62ce1ca9c1..0102f29edc 100644
      } IDiscMaster2Vtbl;
  
 -    interface IDiscMaster2
-+    interface _Windows_SupportedOS_Server2003_ IDiscMaster2
++    interface _Windows_SupportedOS_WindowsVista_ IDiscMaster2
      {
          CONST_VTBL struct IDiscMaster2Vtbl *lpVtbl;
      };
@@ -55,7 +55,7 @@ index 62ce1ca9c1..0102f29edc 100644
      } DDiscMaster2EventsVtbl;
  
 -    interface DDiscMaster2Events
-+    interface _Windows_SupportedOS_Server2003_ DDiscMaster2Events
++    interface _Windows_SupportedOS_WindowsVista_ DDiscMaster2Events
      {
          CONST_VTBL struct DDiscMaster2EventsVtbl *lpVtbl;
      };

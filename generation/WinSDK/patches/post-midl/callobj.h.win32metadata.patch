@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h
-index 1aaef4223e..26c8749a3d 100644
+index 1aaef4223e..6082554bc4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/callobj.h
 @@ -108,6 +108,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 1aaef4223e..26c8749a3d 100644
      } ICallFrameVtbl;
  
 -    interface ICallFrame
-+    interface _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ICallFrame
++    interface _Windows_SupportedOS_Windows2000_ ICallFrame
      {
          CONST_VTBL struct ICallFrameVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 1aaef4223e..26c8749a3d 100644
      } ICallIndirectVtbl;
  
 -    interface ICallIndirect
-+    interface _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ ICallIndirect
++    interface _Windows_SupportedOS_Windows2000_ ICallIndirect
      {
          CONST_VTBL struct ICallIndirectVtbl *lpVtbl;
      };

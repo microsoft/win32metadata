@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
-index 30ba0c5608..3e68ab4145 100644
+index 30ba0c5608..dca07514f5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
 @@ -103,6 +103,7 @@ extern "C"{
@@ -19,12 +19,3 @@ index 30ba0c5608..3e68ab4145 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE CreateObject( 
-@@ -326,7 +327,7 @@ EXTERN_C const IID IID_IInternetExplorerManager;
-         END_INTERFACE
-     } IInternetExplorerManagerVtbl;
- 
--    interface IInternetExplorerManager
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IInternetExplorerManager
-     {
-         CONST_VTBL struct IInternetExplorerManagerVtbl *lpVtbl;
-     };

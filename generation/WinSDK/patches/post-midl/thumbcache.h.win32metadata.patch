@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h b/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
-index ab597d6598..93f807d7ad 100644
+index ab597d6598..6ff9f87a54 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/thumbcache.h
 @@ -120,10 +120,11 @@ extern "C"{
@@ -64,7 +64,7 @@ index ab597d6598..93f807d7ad 100644
      } ISharedBitmapVtbl;
  
 -    interface ISharedBitmap
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISharedBitmap
++    interface _Windows_SupportedOS_WindowsVista_ ISharedBitmap
      {
          CONST_VTBL struct ISharedBitmapVtbl *lpVtbl;
      };
@@ -84,7 +84,7 @@ index ab597d6598..93f807d7ad 100644
      } IThumbnailCacheVtbl;
  
 -    interface IThumbnailCache
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IThumbnailCache
++    interface _Windows_SupportedOS_WindowsVista_ IThumbnailCache
      {
          CONST_VTBL struct IThumbnailCacheVtbl *lpVtbl;
      };
@@ -112,7 +112,7 @@ index ab597d6598..93f807d7ad 100644
      } IThumbnailProviderVtbl;
  
 -    interface IThumbnailProvider
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IThumbnailProvider
++    interface _Windows_SupportedOS_WindowsVista_ IThumbnailProvider
      {
          CONST_VTBL struct IThumbnailProviderVtbl *lpVtbl;
      };
@@ -132,7 +132,7 @@ index ab597d6598..93f807d7ad 100644
      } IThumbnailSettingsVtbl;
  
 -    interface IThumbnailSettings
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IThumbnailSettings
++    interface _Windows_SupportedOS_Windows8_ IThumbnailSettings
      {
          CONST_VTBL struct IThumbnailSettingsVtbl *lpVtbl;
      };
@@ -152,7 +152,7 @@ index ab597d6598..93f807d7ad 100644
      } IThumbnailCachePrimerVtbl;
  
 -    interface IThumbnailCachePrimer
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IThumbnailCachePrimer
++    interface _Windows_SupportedOS_Windows8_ IThumbnailCachePrimer
      {
          CONST_VTBL struct IThumbnailCachePrimerVtbl *lpVtbl;
      };

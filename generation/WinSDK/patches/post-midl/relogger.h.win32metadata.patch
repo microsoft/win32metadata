@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h b/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h
-index 484b70392c..1f8d2ae028 100644
+index 484b70392c..95cd49b47c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/relogger.h
 @@ -116,6 +116,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 484b70392c..1f8d2ae028 100644
      } ITraceEventVtbl;
  
 -    interface ITraceEvent
-+    interface _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2012_ ITraceEvent
++    interface _Windows_SupportedOS_Windows7_ ITraceEvent
      {
          CONST_VTBL struct ITraceEventVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 484b70392c..1f8d2ae028 100644
      } ITraceEventCallbackVtbl;
  
 -    interface ITraceEventCallback
-+    interface _Windows_SupportedOS_Windows7_ _Windows_SupportedOS_Server2012_ ITraceEventCallback
++    interface _Windows_SupportedOS_Windows7_ ITraceEventCallback
      {
          CONST_VTBL struct ITraceEventCallbackVtbl *lpVtbl;
      };

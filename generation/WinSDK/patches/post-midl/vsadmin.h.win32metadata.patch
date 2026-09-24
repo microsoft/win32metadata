@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h
-index 882ba05d1f..65d1c7256f 100644
+index 882ba05d1f..4f2294077b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h
 @@ -87,6 +87,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 882ba05d1f..65d1c7256f 100644
      } IVssAdminVtbl;
  
 -    interface IVssAdmin
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssAdmin
++    interface _Windows_SupportedOS_WindowsVista_ IVssAdmin
      {
          CONST_VTBL struct IVssAdminVtbl *lpVtbl;
      };

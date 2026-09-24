@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h b/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h
-index d35645cb7d..5a2cc078ea 100644
+index d35645cb7d..c3c3a6e902 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/tsvirtualchannels.h
 @@ -130,6 +130,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSPluginVtbl;
  
 -    interface IWTSPlugin
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSPlugin
++    interface _Windows_SupportedOS_WindowsVista_ IWTSPlugin
      {
          CONST_VTBL struct IWTSPluginVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSListenerVtbl;
  
 -    interface IWTSListener
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSListener
++    interface _Windows_SupportedOS_WindowsVista_ IWTSListener
      {
          CONST_VTBL struct IWTSListenerVtbl *lpVtbl;
      };
@@ -66,7 +66,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSListenerCallbackVtbl;
  
 -    interface IWTSListenerCallback
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSListenerCallback
++    interface _Windows_SupportedOS_WindowsVista_ IWTSListenerCallback
      {
          CONST_VTBL struct IWTSListenerCallbackVtbl *lpVtbl;
      };
@@ -86,7 +86,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSVirtualChannelCallbackVtbl;
  
 -    interface IWTSVirtualChannelCallback
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannelCallback
++    interface _Windows_SupportedOS_WindowsVista_ IWTSVirtualChannelCallback
      {
          CONST_VTBL struct IWTSVirtualChannelCallbackVtbl *lpVtbl;
      };
@@ -106,7 +106,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSVirtualChannelManagerVtbl;
  
 -    interface IWTSVirtualChannelManager
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannelManager
++    interface _Windows_SupportedOS_WindowsVista_ IWTSVirtualChannelManager
      {
          CONST_VTBL struct IWTSVirtualChannelManagerVtbl *lpVtbl;
      };
@@ -126,7 +126,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSVirtualChannelVtbl;
  
 -    interface IWTSVirtualChannel
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWTSVirtualChannel
++    interface _Windows_SupportedOS_WindowsVista_ IWTSVirtualChannel
      {
          CONST_VTBL struct IWTSVirtualChannelVtbl *lpVtbl;
      };
@@ -146,7 +146,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSPluginServiceProviderVtbl;
  
 -    interface IWTSPluginServiceProvider
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSPluginServiceProvider
++    interface _Windows_SupportedOS_Windows8_ IWTSPluginServiceProvider
      {
          CONST_VTBL struct IWTSPluginServiceProviderVtbl *lpVtbl;
      };
@@ -175,7 +175,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSBitmapRendererVtbl;
  
 -    interface IWTSBitmapRenderer
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRenderer
++    interface _Windows_SupportedOS_Windows8_ IWTSBitmapRenderer
      {
          CONST_VTBL struct IWTSBitmapRendererVtbl *lpVtbl;
      };
@@ -195,7 +195,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSBitmapRendererCallbackVtbl;
  
 -    interface IWTSBitmapRendererCallback
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRendererCallback
++    interface _Windows_SupportedOS_Windows8_ IWTSBitmapRendererCallback
      {
          CONST_VTBL struct IWTSBitmapRendererCallbackVtbl *lpVtbl;
      };
@@ -215,7 +215,7 @@ index d35645cb7d..5a2cc078ea 100644
      } IWTSBitmapRenderServiceVtbl;
  
 -    interface IWTSBitmapRenderService
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWTSBitmapRenderService
++    interface _Windows_SupportedOS_Windows8_ IWTSBitmapRenderService
      {
          CONST_VTBL struct IWTSBitmapRenderServiceVtbl *lpVtbl;
      };

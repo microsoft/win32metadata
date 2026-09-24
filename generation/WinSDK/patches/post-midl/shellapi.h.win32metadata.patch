@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
-index 8db637a14a..4c70d51f92 100644
+index 8db637a14a..565438f1fc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 @@ -1,4 +1,5 @@
@@ -190,6 +190,15 @@ index 8db637a14a..4c70d51f92 100644
  
  typedef struct _SHNAMEMAPPINGA
  {
+@@ -388,7 +393,7 @@ typedef LPSHNAMEMAPPINGA LPSHNAMEMAPPING;
+ // Note SEE_MASK_INVOKEIDLIST(0xC) implies SEE_MASK_IDLIST(0x04)
+ #define SEE_MASK_IDLIST            0x00000004   // SHELLEXECUTEINFO.lpIDList is valid
+ #define SEE_MASK_INVOKEIDLIST      0x0000000c   // enable IContextMenu based verbs
+-#if (NTDDI_VERSION < NTDDI_VISTA)
++#if defined(WIN32METADATA) || ((NTDDI_VERSION < NTDDI_VISTA))
+ #define SEE_MASK_ICON              0x00000010   // not used
+ #endif // (NTDDI_VERSION < NTDDI_VISTA)
+ #define SEE_MASK_HOTKEY            0x00000020   // SHELLEXECUTEINFO.dwHotKey is valid
 @@ -443,7 +448,7 @@ typedef LPSHNAMEMAPPINGA LPSHNAMEMAPPING;
  #endif
  #endif // DUMMYUNIONNAME

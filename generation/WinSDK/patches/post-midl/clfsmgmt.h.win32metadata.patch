@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
-index 5dace4e7f5..1666ad79a5 100644
+index 5dace4e7f5..23a58582d3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsmgmt.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -37,3 +37,17 @@ index 5dace4e7f5..1666ad79a5 100644
  {
  
      //
+@@ -355,7 +356,13 @@ VOID
+ // in the 'Version' field of the structure.
+ //
+ 
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(CLFS_KERNEL_MODE)) && ((NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)))
+ #define CLFS_MGMT_CLIENT_REGISTRATION_VERSION (0x1)
++#endif
++#ifdef CLFS_KERNEL_MODE
++#if (NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+ 
+ typedef struct _CLFS_MGMT_CLIENT_REGISTRATION {
+ 

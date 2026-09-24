@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
-index 31f65e72f3..4d09496773 100644
+index 31f65e72f3..f090bbc0b5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objidl.h
 @@ -801,6 +801,7 @@ extern "C"{
@@ -881,6 +881,24 @@ index 31f65e72f3..4d09496773 100644
      DWORD dwHandleType;
      ULONG pData;
      ULONG pUnkForRelease;
+@@ -13068,7 +13069,7 @@ typedef struct tagRemSTGMEDIUM
+ #endif
+ #ifdef NONAMELESSUNION
+ typedef struct tagSTGMEDIUM {
+-    DWORD tymed;
++    _Win32_AssociatedEnum_(TYMED) DWORD tymed;
+     union {
+         HBITMAP hBitmap;
+         HMETAFILEPICT hMetaFilePict;
+@@ -13083,7 +13084,7 @@ typedef struct tagSTGMEDIUM {
+ #else
+ typedef struct tagSTGMEDIUM
+     {
+-    DWORD tymed;
++    _Win32_AssociatedEnum_(TYMED) DWORD tymed;
+     /* [switch_is][switch_type] */ union 
+         {
+         /* [case()] */ HBITMAP hBitmap;
 @@ -13161,7 +13162,7 @@ EXTERN_C const IID IID_IAdviseSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h b/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
-index 55920c8e3f..4b34b42737 100644
+index 55920c8e3f..b051360d1e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
 @@ -1,4 +1,5 @@
@@ -8,15 +8,6 @@ index 55920c8e3f..4b34b42737 100644
  
  //*@@@+++@@@@******************************************************************
  //
-@@ -2520,7 +2521,7 @@ DEFINE_GUIDSTRUCT("00000000-0000-0010-8000-00aa00389b71", KSDATAFORMAT_SUBTYPE_W
- //
- #ifndef _WAVEFORMATEXTENSIBLE_
- #define _WAVEFORMATEXTENSIBLE_
--typedef struct {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ {
-     WAVEFORMATEX    Format;
-     union {
-         WORD wValidBitsPerSample;       /* bits of precision  */
 @@ -3057,7 +3058,7 @@ typedef MPEG1WAVEFORMAT FAR            *LPMPEG1WAVEFORMAT;
  typedef struct mpeglayer3waveformat_tag {
    WAVEFORMATEX  wfx;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
-index 5fed8633f1..044727d206 100644
+index 5fed8633f1..dd744d2b21 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 @@ -31,6 +31,7 @@ Abstract:
@@ -65,6 +65,15 @@ index 5fed8633f1..044727d206 100644
  
  
  /* Information describing a RAS-capable device.
+@@ -1594,7 +1595,7 @@ RASENTRYW
+ #define RASET_Phone     1  // Phone lines: modem, ISDN, X.25, etc
+ #define RASET_Vpn       2  // Virtual private network
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ #define RASET_Direct    3  // Direct connect: serial, parallel
+ #endif // (WINVER < 0x600)
+ 
 @@ -1611,7 +1612,7 @@ RASENTRYW
  ** PROTOTYPE IN NEW CODE.  SUPPORT FOR IT MAY BE REMOVED
  ** IN FUTURE VERSIONS OF RAS.

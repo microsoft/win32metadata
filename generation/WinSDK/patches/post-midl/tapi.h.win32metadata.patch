@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h
-index 1e11ff1481..06b7beb950 100644
+index 1e11ff1481..9cb83e7757 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Tapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,96 @@ index 1e11ff1481..06b7beb950 100644
  /*++ BUILD Version: 0000    // Increment this if a change has global effects
  
  The  Telephony  API  is jointly copyrighted by Intel and Microsoft.  You are
+@@ -162,7 +163,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #define LINE_PROXYSTATUS                        31L             // TAPI v2.2
+ #endif
+ 
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINE_APPNEWCALLHUB                      32L             // TAPI v3.0
+ #define LINE_CALLHUBCLOSE                       33L             // TAPI v3.0
+ #define LINE_DEVSPECIFICEX                      34L             // TAPI v3.0
+@@ -205,7 +206,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #if (TAPI_CURRENT_VERSION >= 0x00020002)
+ #define LINEADDRCAPFLAGS_ACDGROUP               0x40000000      // TAPI v2.2
+ #endif
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINEADDRCAPFLAGS_NOPSTNADDRESSTRANSLATION 0x80000000    // TAPI v3.0
+ #endif
+ 
+@@ -397,7 +398,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #define LINECALLFEATURE2_PARKNONDIRECT          0x00000200      // TAPI v2.0
+ #endif
+ 
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINECALLHUBTRACKING_NONE                0x00000000      // TAPI v3.0
+ #define LINECALLHUBTRACKING_PROVIDERLEVEL       0x00000001      // TAPI v3.0
+ #define LINECALLHUBTRACKING_ALLCALLS            0x00000002      // TAPI v3.0
+@@ -493,7 +494,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #if (TAPI_CURRENT_VERSION >= 0x00020001)
+ #define LINECALLSELECT_DEVICEID                 0x00000008      // TAPI v2.1
+ #endif
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINECALLSELECT_CALLID                   0x00000010      // TAPI v3.0
+ #endif
+ 
+@@ -541,7 +542,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #define LINEDEVCAPFLAGS_DIALBILLING             0x00000040
+ #define LINEDEVCAPFLAGS_DIALQUIET               0x00000080
+ #define LINEDEVCAPFLAGS_DIALDIALTONE            0x00000100
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINEDEVCAPFLAGS_MSP                     0x00000200      // TAPI v3.0
+ #define LINEDEVCAPFLAGS_CALLHUB                 0x00000400      // TAPI v3.0
+ #define LINEDEVCAPFLAGS_CALLHUBTRACKING         0x00000800      // TAPI v3.0
+@@ -712,7 +713,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #if (TAPI_CURRENT_VERSION >= 0x00020002)
+ #define LINEERR_USERCANCELLED                   0x8000005D      // TAPI v2.2
+ #endif
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINEERR_INVALADDRESSTYPE                0x8000005E      // TAPI v3.0
+ #endif
+ #if (TAPI_CURRENT_VERSION >= 0x00020002)
+@@ -772,7 +773,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #define LINEINITIALIZEEXOPTION_USECOMPLETIONPORT    0x00000003  // TAPI v2.0
+ #endif
+ 
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINEINITIALIZEEXOPTION_CALLHUBTRACKING      0x80000000  // TAPI v3.0
+ #endif
+ 
+@@ -916,7 +917,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #if (TAPI_CURRENT_VERSION >= 0x00020000)
+ #define LINETRANSLATERESULT_VOICEDETECT         0x00000400      // TAPI v2.0
+ #endif
+-#if (TAPI_CURRENT_VERSION >= 0x00030000)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030000))
+ #define LINETRANSLATERESULT_NOTRANSLATION       0x00000800      // TAPI v3.0
+ #endif
+ 
+@@ -967,7 +968,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #define PHONEBUTTONFUNCTION_SAVEREPEAT          0x0000002C
+ #define PHONEBUTTONFUNCTION_QUEUECALL           0x0000002D
+ #define PHONEBUTTONFUNCTION_NONE                0x0000002E
+-#if (TAPI_CURRENT_VERSION >= 0x00030001)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030001))
+ #define PHONEBUTTONFUNCTION_SEND                0x0000002F      // TAPI v3.1
+ #endif
+ 
+@@ -1050,7 +1051,7 @@ typedef void (CALLBACK * PHONECALLBACK)(
+ #define PHONEFEATURE_SETVOLUMESPEAKER           0x04000000      // TAPI v2.0
+ #define PHONEFEATURE_SETVOLUMEHEADSET           0x08000000      // TAPI v2.0
+ #endif
+-#if (TAPI_CURRENT_VERSION >= 0x00030001)
++#if defined(WIN32METADATA) || ((TAPI_CURRENT_VERSION >= 0x00030001))
+ #define PHONEFEATURE_GENERICPHONE               0x10000000      // TAPI v3.1
+ #endif
+ 
 @@ -2454,29 +2455,29 @@ lineAccept(
      DWORD               dwSize
      );

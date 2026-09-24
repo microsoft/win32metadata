@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <timezoneapi.h>
+#include <timeprov.h>

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
-index 9aca15352b..28d255000b 100644
+index 9aca15352b..5ce20f97d7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
 @@ -104,6 +104,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 9aca15352b..28d255000b 100644
      } IVssSoftwareSnapshotProviderVtbl;
  
 -    interface IVssSoftwareSnapshotProvider
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssSoftwareSnapshotProvider
++    interface _Windows_SupportedOS_WindowsVista_ IVssSoftwareSnapshotProvider
      {
          CONST_VTBL struct IVssSoftwareSnapshotProviderVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 9aca15352b..28d255000b 100644
      } IVssProviderCreateSnapshotSetVtbl;
  
 -    interface IVssProviderCreateSnapshotSet
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IVssProviderCreateSnapshotSet
++    interface _Windows_SupportedOS_WindowsVista_ IVssProviderCreateSnapshotSet
      {
          CONST_VTBL struct IVssProviderCreateSnapshotSetVtbl *lpVtbl;
      };

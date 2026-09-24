@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
-index af6ea4c7a5..acf91e6be0 100644
+index af6ea4c7a5..c68ae3212a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_3.h
 @@ -107,6 +107,7 @@ extern "C"{
@@ -19,15 +19,6 @@ index af6ea4c7a5..acf91e6be0 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE ValidateServerCertificate( 
-@@ -191,7 +192,7 @@ EXTERN_C const IID IID_IBackgroundCopyServerCertificateValidationCallback;
-         END_INTERFACE
-     } IBackgroundCopyServerCertificateValidationCallbackVtbl;
- 
--    interface IBackgroundCopyServerCertificateValidationCallback
-+    interface _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyServerCertificateValidationCallback
-     {
-         CONST_VTBL struct IBackgroundCopyServerCertificateValidationCallbackVtbl *lpVtbl;
-     };
 @@ -237,7 +238,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions3;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -37,12 +28,3 @@ index af6ea4c7a5..acf91e6be0 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetServerCertificateValidationInterface( 
-@@ -349,7 +350,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions3;
-         END_INTERFACE
-     } IBackgroundCopyJobHttpOptions3Vtbl;
- 
--    interface IBackgroundCopyJobHttpOptions3
-+    interface _Windows_SupportedOS_20348_ _Windows_SupportedOS_20348_ IBackgroundCopyJobHttpOptions3
-     {
-         CONST_VTBL struct IBackgroundCopyJobHttpOptions3Vtbl *lpVtbl;
-     };

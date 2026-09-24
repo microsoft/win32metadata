@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntdef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntdef.h
-index 6c179890d1..433a8aeb47 100644
+index 6c179890d1..6c04756e2b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntdef.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntdef.h
 @@ -1,3 +1,4 @@
@@ -24,6 +24,15 @@ index 6c179890d1..433a8aeb47 100644
  #define DECLARE_HANDLE(name) typedef HANDLE name
  #endif
  typedef HANDLE *PHANDLE;
+@@ -1581,7 +1582,7 @@ typedef struct _STRING {
+ #ifdef MIDL_PASS
+     [size_is(MaximumLength), length_is(Length) ]
+ #endif // MIDL_PASS
+-    _Field_size_bytes_part_opt_(MaximumLength, Length) PCHAR Buffer;
++    _Field_size_bytes_part_opt_(MaximumLength, Length) _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR Buffer;
+ } STRING;
+ typedef STRING *PSTRING;
+ typedef STRING ANSI_STRING;
 @@ -3452,5 +3453,770 @@ C_ASSERT(TYPE_ALIGNMENT(LARGE_INTEGER) == 8);
  #endif
  

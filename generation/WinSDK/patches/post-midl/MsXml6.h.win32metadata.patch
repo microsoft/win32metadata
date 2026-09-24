@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
-index 2a4df9e14a..1e56b46ad6 100644
+index 2a4df9e14a..a3d00ae4d2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
 @@ -940,6 +940,7 @@ extern "C"{
@@ -359,7 +359,7 @@ index 2a4df9e14a..1e56b46ad6 100644
      } IXMLHTTPRequest2CallbackVtbl;
  
 -    interface IXMLHTTPRequest2Callback
-+    interface _Windows_SupportedOS_Server2012_ IXMLHTTPRequest2Callback
++    interface _Windows_SupportedOS_Windows8_ IXMLHTTPRequest2Callback
      {
          CONST_VTBL struct IXMLHTTPRequest2CallbackVtbl *lpVtbl;
      };
@@ -379,7 +379,7 @@ index 2a4df9e14a..1e56b46ad6 100644
      } IXMLHTTPRequest2Vtbl;
  
 -    interface IXMLHTTPRequest2
-+    interface _Windows_SupportedOS_Server2012_ IXMLHTTPRequest2
++    interface _Windows_SupportedOS_Windows8_ IXMLHTTPRequest2
      {
          CONST_VTBL struct IXMLHTTPRequest2Vtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
-index 71ad8398e8..030ec1c89e 100644
+index 71ad8398e8..bdbcdb0974 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DSClient.h
 @@ -3,6 +3,7 @@
@@ -46,21 +46,12 @@ index 71ad8398e8..030ec1c89e 100644
  {
      DWORD offsetString;                 // offset to UNICODE string
  } DSPROPERTYPAGEINFO, * LPDSPROPERTYPAGEINFO;
-@@ -165,7 +166,7 @@ typedef struct
- #define DBDTF_RETURNINBOUND       0x00000008  // set it if you want trusting domains
- #define DBDTF_RETURNINOUTBOUND    0x00000010  // set it if you want both trusted and trusting domains
- 
--typedef struct _DOMAINDESC
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ _DOMAINDESC
- {       
-   LPWSTR pszName;                       // domain name (if no dns, use netbios)
-   LPWSTR pszPath;                       // set to blank
 @@ -178,7 +179,7 @@ typedef struct _DOMAINDESC
    struct _DOMAINDESC *pdNextSibling;    // Siblings of this node            
  } DOMAIN_DESC, DOMAINDESC, * PDOMAIN_DESC, * LPDOMAINDESC;
  
 -typedef struct
-+typedef struct _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_
++typedef struct 
  {
    DWORD dsSize;
    DWORD dwCount;

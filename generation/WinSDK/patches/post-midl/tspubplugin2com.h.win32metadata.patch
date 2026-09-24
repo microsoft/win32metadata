@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h b/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h
-index 9774ea3b65..730eefc330 100644
+index 9774ea3b65..e329095634 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h
 @@ -68,6 +68,7 @@ extern "C"{
@@ -43,7 +43,7 @@ index 9774ea3b65..730eefc330 100644
      } ItsPubPlugin2Vtbl;
  
 -    interface ItsPubPlugin2
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ItsPubPlugin2
++    interface _Windows_SupportedOS_Windows8_ ItsPubPlugin2
      {
          CONST_VTBL struct ItsPubPlugin2Vtbl *lpVtbl;
      };

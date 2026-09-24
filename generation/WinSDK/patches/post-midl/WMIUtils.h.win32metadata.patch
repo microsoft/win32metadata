@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h b/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
-index 5ccb585fc2..8f6a2b2864 100644
+index 5ccb585fc2..f856906848 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
 @@ -113,6 +113,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 5ccb585fc2..8f6a2b2864 100644
      } IWbemPathKeyListVtbl;
  
 -    interface IWbemPathKeyList
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemPathKeyList
++    interface _Windows_SupportedOS_WindowsVista_ IWbemPathKeyList
      {
          CONST_VTBL struct IWbemPathKeyListVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 5ccb585fc2..8f6a2b2864 100644
      } IWbemPathVtbl;
  
 -    interface IWbemPath
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemPath
++    interface _Windows_SupportedOS_WindowsVista_ IWbemPath
      {
          CONST_VTBL struct IWbemPathVtbl *lpVtbl;
      };

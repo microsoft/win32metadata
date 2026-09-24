@@ -54,6 +54,18 @@ their declarations roots: the tool's default directory scopes are `shared` and
 interfaces. Keep the explicit header-name casing aligned with the include
 spellings; the current reader distinguishes casing after the first character.
 
+The repository's WinSDK project also supplies `AdditionalHeaders` as an include
+directory for `win32metadata_annotations.h`. The packaged SDK instead obtains
+that shim from its WinSDK assets. Both paths must be available without relying
+on a previously prepared local build.
+
+Some SDK headers cannot share a translation unit. The VDS provider declarations
+in `vdshwprv.h`, for example, use a separate `VirtualDiskService.Provider`
+partition from `vds.h`. Keep annotations on their shared native declarations
+consistent to avoid conflicting duplicate types in the combined metadata.
+Other partition inputs include prerequisite headers before SDK constant headers;
+for example, `olectl.h` must precede `msxml6did.h`.
+
 The SDK deliberately has no response-file, manual C#, enum JSON, auto-type JSON,
 or function-pointer-fixup inputs. Those metadata semantics must be expressed in
 the source headers and libraries.

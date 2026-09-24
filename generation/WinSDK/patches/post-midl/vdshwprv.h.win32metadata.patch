@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h b/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h
-index cc6c5b0c4a..be40f6db2e 100644
+index cc6c5b0c4a..428c1fb753 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vdshwprv.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,61 @@ index cc6c5b0c4a..be40f6db2e 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -514,13 +515,13 @@ enum _VDS_NOTIFICATION_TARGET_TYPE
+ 
+ typedef struct _VDS_PACK_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_PACK) ULONG ulEvent;
+     VDS_OBJECT_ID packId;
+     } 	VDS_PACK_NOTIFICATION;
+ 
+ typedef struct _VDS_DISK_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_DISK) ULONG ulEvent;
+     VDS_OBJECT_ID diskId;
+     } 	VDS_DISK_NOTIFICATION;
+ 
+@@ -554,7 +555,7 @@ typedef struct _VDS_DRIVE_LETTER_NOTIFICATION
+ 
+ typedef struct _VDS_FILE_SYSTEM_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_FILE_SYSTEM) ULONG ulEvent;
+     VDS_OBJECT_ID volumeId;
+     DWORD dwPercentCompleted;
+     } 	VDS_FILE_SYSTEM_NOTIFICATION;
+@@ -573,25 +574,25 @@ typedef struct _VDS_SUB_SYSTEM_NOTIFICATION
+ 
+ typedef struct _VDS_CONTROLLER_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_CONTROLLER) ULONG ulEvent;
+     VDS_OBJECT_ID controllerId;
+     } 	VDS_CONTROLLER_NOTIFICATION;
+ 
+ typedef struct _VDS_DRIVE_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_DRIVE) ULONG ulEvent;
+     VDS_OBJECT_ID driveId;
+     } 	VDS_DRIVE_NOTIFICATION;
+ 
+ typedef struct _VDS_LUN_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_LUN) ULONG ulEvent;
+     VDS_OBJECT_ID LunId;
+     } 	VDS_LUN_NOTIFICATION;
+ 
+ typedef struct _VDS_PORT_NOTIFICATION
+     {
+-    ULONG ulEvent;
++    _Win32_AssociatedEnum_(VDS_NF_PORT) ULONG ulEvent;
+     VDS_OBJECT_ID portId;
+     } 	VDS_PORT_NOTIFICATION;
+ 
 @@ -1546,7 +1547,7 @@ EXTERN_C const IID IID_IVdsProviderPrivate;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

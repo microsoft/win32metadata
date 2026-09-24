@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
-index cdc03d4897..1c912533cd 100644
+index cdc03d4897..f79ab9c566 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
 @@ -1,3 +1,4 @@
@@ -89,7 +89,7 @@ index cdc03d4897..1c912533cd 100644
  
  #ifndef _MAC
 -typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
-+_Win32_AlsoUsableFor_(HICON) typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyCursor") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") _Win32_AlsoUsableFor_(HICON) typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
  #else
 -DECLARE_HANDLE(HCURSOR);    /* HICONs & HCURSORs are not polymorphic */
 +DECLARE_HANDLE(HCURSOR) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyCursor")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;    /* HICONs & HCURSORs are not polymorphic */
