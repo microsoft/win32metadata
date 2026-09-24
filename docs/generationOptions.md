@@ -70,6 +70,9 @@ previously defined in manual C# so the existing native `CTL_CODE` expression can
 be evaluated. The native expression and non-metadata compilation are unchanged.
 Place metadata-only enum declarations in the header's active C++ branch, not
 its MIDL-only branch. Preserve the native macros when exposing those groupings.
+For a native alias such as `ID3DBlob`, attach interface annotations to its actual
+`ID3D10Blob` declaration, not the alias typedef. Annotation target support differs
+between declarations; keep alternate C and C++ declarations consistent.
 
 The WinSDK input currently omits `x3daudio.h`. Its `X3DAUDIO_VECTOR` alias
 depends on `DirectX::XMFLOAT3`, but the reader skips that native namespace and
