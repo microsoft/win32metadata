@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb..7a6ec22f66 100644
+index 44285099cb..6c8831e66f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -49,7 +49,12 @@ index 44285099cb..7a6ec22f66 100644
      LPARAM lItemlParam;
  } NMCUSTOMDRAW, *LPNMCUSTOMDRAW;
  
-@@ -502,7 +507,7 @@ typedef struct _IMAGELIST* HIMAGELIST;
+@@ -498,11 +503,11 @@ typedef struct tagNMCUSTOMSPLITRECTINFO
+ 
+ #ifndef HIMAGELIST
+ struct _IMAGELIST;
+-typedef struct _IMAGELIST* HIMAGELIST;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=ImageList_Destroy") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _IMAGELIST* HIMAGELIST;
  #endif
  
  #ifndef IMAGELISTDRAWPARAMS

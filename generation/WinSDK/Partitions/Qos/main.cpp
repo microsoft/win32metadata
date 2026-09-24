@@ -14,6 +14,7 @@
 #include <traffic.h>
 #include <qossp.h>
 #include <qospol.h>
+#include <LpmApi.h>
 #include <tcerror.h>
 #include <tcguid.h>
 //#include <tcpioctl.h> - won't compile and duplicated by iphlpapi as per tcpioctl.h

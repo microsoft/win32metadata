@@ -22,6 +22,7 @@
 #include <WebAuthenticationCoreManagerInterop.h>
 
 #include <hstring.h>
+#include <EventToken.h>
 #include <winstring.h>
 #include <restrictederrorinfo.h>
 #include <roapi.h>

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h
-index e3bee0acd0..4dd8bd9e1f 100644
+index e3bee0acd0..08aa832d7e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index e3bee0acd0..4dd8bd9e1f 100644
  #include <winapifamily.h>
  
  
+@@ -48,7 +49,7 @@ typedef unsigned long   u_long;
+  * instances which refer to sockets.
+  */
+ 
+-typedef UINT_PTR        SOCKET;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=closesocket") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") typedef UINT_PTR        SOCKET;
+ 
+ /*
+  * Select uses arrays of SOCKETs.  These macros manipulate such
 @@ -71,7 +72,7 @@ typedef struct fd_set {
  extern "C" {
  #endif

@@ -21,7 +21,7 @@
     <WinmdIncludeDir Include="AdditionalHeaders"/>
     <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
-    <WinmdScopeHeader Include="activation.h;CoreWindow.h;corewindow.h;DocumentSource.h;documentsource.h;hstring.h;inspectable.h"/>
+    <WinmdScopeHeader Include="activation.h;CoreWindow.h;corewindow.h;DocumentSource.h;documentsource.h;EventToken.h;eventtoken.h;hstring.h;inspectable.h"/>
     <WinmdScopeHeader Include="manual.h;MemoryBuffer.h;memorybuffer.h;midlbase.h;rdpappcontainerclient.h"/>
     <WinmdScopeHeader Include="roapi.h;robuffer.h;roerrorapi.h;rometadata.h;rometadataresolution.h;roparameterizediid.h;roregistrationapi.h"/>
     <WinmdScopeHeader Include="shcore.h;WeakReference.h;weakreference.h;webapplication.h"/>
