@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
-index f907576fa1..bc0cd0f004 100644
+index f907576fa1..eade79f74b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 @@ -15,6 +15,7 @@
@@ -875,9 +875,12 @@ index f907576fa1..bc0cd0f004 100644
    _Out_opt_     PSECURITY_DESCRIPTOR pSecurityDescriptor,
    _In_          DWORD nLength,
    _Out_         LPDWORD lpnLengthNeeded);
-@@ -1597,7 +1640,7 @@ BOOL WINAPI WTSGetListenerSecurityA(
+@@ -1595,9 +1638,9 @@ BOOL WINAPI WTSGetListenerSecurityA(
  
- DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE);
+ #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+ 
+-DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE);
++DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=WTSCloudAuthClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  
 -WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
 +_Win32_RAIIFree_(WTSCloudAuthClose, -1, 0) WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/hstring.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/hstring.h
-index 061ad0424d..c603edc996 100644
+index 061ad0424d..f156f62a11 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/hstring.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/hstring.h
 @@ -1,3 +1,4 @@
@@ -7,8 +7,21 @@ index 061ad0424d..c603edc996 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -83,7 +84,7 @@ typedef struct HSTRING__{
- typedef __RPC_unique_pointer HSTRING__* HSTRING;
+@@ -70,7 +71,7 @@ typedef struct HSTRING__
+     int unused;
+     } 	HSTRING__;
+ 
+-typedef /* [unique][wire_marshal] */  __RPC_unique_pointer HSTRING__ *HSTRING;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WindowsDeleteString") typedef /* [unique][wire_marshal] */  __RPC_unique_pointer HSTRING__ *HSTRING;
+ 
+ #endif
+ 
+@@ -80,10 +81,10 @@ typedef struct HSTRING__{
+ } HSTRING__;
+ 
+ // Declare the HSTRING handle for C/C++
+-typedef __RPC_unique_pointer HSTRING__* HSTRING;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WindowsDeleteString") typedef __RPC_unique_pointer HSTRING__* HSTRING;
  
  // Declare the HSTRING_HEADER
 -typedef struct HSTRING_HEADER
@@ -16,3 +29,12 @@ index 061ad0424d..c603edc996 100644
  {
      union{
          PVOID Reserved1;
+@@ -101,7 +102,7 @@ typedef struct HSTRING_HEADER
+ // the traditional WindowsCreateString().  The caller preallocates a string buffer,
+ // sets the wide character string values in that buffer, and finally promotes the
+ // buffer to an HSTRING.  If a buffer is never promoted, it can still be deleted.
+-DECLARE_HANDLE(HSTRING_BUFFER);
++DECLARE_HANDLE(HSTRING_BUFFER) _WIN32META_ANNOTATION_("win32metadata:raii_free=WindowsDeleteStringBuffer")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ 
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
-index 924c87c472..346927b933 100644
+index 924c87c472..fce0ca087a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincrypt.h
 @@ -1,3 +1,4 @@
@@ -381,6 +381,20 @@ index 924c87c472..346927b933 100644
  BOOL
  WINAPI
  CryptDuplicateHash(
+@@ -1580,11 +1581,11 @@ GetEncSChannel(
+ // This type is used when the API can take either the CAPI1 HCRYPTPROV or
+ // the CNG NCRYPT_KEY_HANDLE. Where appropriate, the HCRYPTPROV will be
+ // converted to a NCRYPT_KEY_HANDLE via the CNG NCryptTranslateHandle().
+-typedef ULONG_PTR HCRYPTPROV_OR_NCRYPT_KEY_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef ULONG_PTR HCRYPTPROV_OR_NCRYPT_KEY_HANDLE;
+ 
+ // This type is used where the HCRYPTPROV parameter is no longer used.
+ // The caller should always pass in NULL.
+-typedef ULONG_PTR HCRYPTPROV_LEGACY;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef ULONG_PTR HCRYPTPROV_LEGACY;
+ 
+ //+-------------------------------------------------------------------------
+ //  In a CRYPT_BIT_BLOB the last byte may contain 0-7 unused bits. Therefore, the
 @@ -2008,7 +2009,7 @@ typedef struct _CRYPT_ATTRIBUTES {
  //--------------------------------------------------------------------------
  typedef struct _CERT_RDN_ATTR {
@@ -1122,6 +1136,15 @@ index 924c87c472..346927b933 100644
      DWORD                       cbSize;
      CRYPT_ALGORITHM_IDENTIFIER  ContentEncryptionAlgorithm;
      PFN_CMSG_ALLOC              pfnAlloc;
+@@ -9170,7 +9171,7 @@ typedef BOOL (WINAPI *PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY) (
+ //
+ //--------------------------------------------------------------------------
+ 
+-typedef void *HCERTSTORE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HCERTSTORE;
+ 
+ //+-------------------------------------------------------------------------
+ //  Certificate context.
 @@ -9183,7 +9184,7 @@ typedef void *HCERTSTORE;
  //--------------------------------------------------------------------------
  // certenrolls_begin -- CERT_CONTEXT
@@ -1178,6 +1201,15 @@ index 924c87c472..346927b933 100644
      _In_opt_ const void *pvPara
      );
  
+@@ -10589,7 +10590,7 @@ CertOpenStore(
+ //--------------------------------------------------------------------------
+ 
+ // Handle returned by the store provider when opened.
+-typedef void *HCERTSTOREPROV;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HCERTSTOREPROV;
+ 
+ // Store Provider OID function's pszFuncName.
+ #define CRYPT_OID_OPEN_STORE_PROV_FUNC   "CertDllOpenStoreProv"
 @@ -10600,12 +10601,12 @@ typedef void *HCERTSTOREPROV;
  // zeroed with cbSize set before the provider is called. If the provider
  // doesn't need to be called again after the open it doesn't need to
@@ -3028,6 +3060,15 @@ index 924c87c472..346927b933 100644
  VOID
  WINAPI
  CryptMemFree (
+@@ -17267,7 +17268,7 @@ CryptMemFree (
+ // Following functions were never used. If called, will fail with LastError
+ // set to ERROR_CALL_NOT_IMPLEMENTED.
+ 
+-typedef HANDLE HCRYPTASYNC, *PHCRYPTASYNC;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CryptCloseAsyncHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HCRYPTASYNC, *PHCRYPTASYNC;
+ 
+ typedef VOID (WINAPI *PFN_CRYPT_ASYNC_PARAM_FREE_FUNC) (
+     _In_ LPSTR pszParamOid,
 @@ -17279,7 +17280,7 @@ BOOL
  WINAPI
  CryptCreateAsyncHandle (
@@ -3206,6 +3247,15 @@ index 924c87c472..346927b933 100644
      _In_opt_ LPCSTR pszPubKeyOID,
      _In_reads_bytes_(cbPubKeyStruc) const PUBLICKEYSTRUC *pPubKeyStruc,
      _In_ DWORD cbPubKeyStruc,
+@@ -19404,7 +19405,7 @@ CryptCreateKeyIdentifierFromCSP(
+ // of the application in order to get optimal caching behavior
+ //
+ 
+-typedef HANDLE HCERTCHAINENGINE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CertFreeCertificateChainEngine") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HCERTCHAINENGINE;
+ 
+ #define HCCE_CURRENT_USER           ((HCERTCHAINENGINE)NULL)
+ #define HCCE_LOCAL_MACHINE          ((HCERTCHAINENGINE)0x1)
 @@ -19491,7 +19492,7 @@ typedef HANDLE HCERTCHAINENGINE;
  // chain engine flags
  // #define CERT_CHAIN_DISABLE_AIA                      0x00002000

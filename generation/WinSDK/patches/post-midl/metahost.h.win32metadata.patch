@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h b/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h
-index 1894dbe533..59723c0cda 100644
+index 1894dbe533..325ea9c884 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/metahost.h
 @@ -1,3 +1,4 @@
@@ -40,3 +40,12 @@ index 1894dbe533..59723c0cda 100644
          
      };
      
+@@ -955,7 +956,7 @@ EXTERN_C const IID IID_ICLRRuntimeInfo;
+             _Inout_  DWORD *pcchBuffer,
+             /* [lcid][in] */ LONG iLocaleID) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE LoadLibrary( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE LoadLibrary( 
+             /* [annotation][in] */ 
+             _In_  LPCWSTR pwzDllName,
+             /* [annotation][retval][out] */ 

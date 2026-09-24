@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
-index a6276573b6..bfff644a70 100644
+index a6276573b6..20b2b5e0e9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
 @@ -1,6 +1,7 @@
@@ -10,7 +10,19 @@ index a6276573b6..bfff644a70 100644
  
  /*++ BUILD Version: 0001 // Increment this if a change has global effects --*/
  
-@@ -40,7 +41,7 @@ DECLARE_HANDLE(HDDEDATA);
+@@ -32,15 +33,15 @@ extern "C" {
+ 
+ /******** public types ********/
+ 
+-DECLARE_HANDLE(HCONVLIST);
+-DECLARE_HANDLE(HCONV);
+-DECLARE_HANDLE(HSZ);
+-DECLARE_HANDLE(HDDEDATA);
++DECLARE_HANDLE(HCONVLIST) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdeDisconnectList")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HCONV) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdeDisconnect")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HSZ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDDEDATA) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdeFreeDataHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #define EXPENTRY        CALLBACK
  
  /* the following structure is for use with XTYP_WILDCONNECT processing. */
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
-index a156d7da8a..01e8a5b0ac 100644
+index a156d7da8a..0ee2c41585 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/objbase.h
 @@ -18,6 +18,7 @@
@@ -123,35 +123,36 @@ index a156d7da8a..01e8a5b0ac 100644
  
  
  WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulReserved, _In_ HRESULT appsHR);
-@@ -148,15 +179,28 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
+@@ -148,14 +179,27 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
  #endif
  
  /* other helpers */
 +_Windows_SupportedOS_Windows2000_ 
 +
  WINOLEAPI_(BOOL) CoIsOle1Class(_In_ REFCLSID rclsid);
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
- _Check_return_ WINOLEAPI CLSIDFromProgIDEx (_In_ LPCOLESTR lpszProgID, _Out_ LPCLSID lpclsid);
- 
-+_Windows_SupportedOS_Windows2000_ 
+-_Check_return_ WINOLEAPI CLSIDFromProgIDEx (_In_ LPCOLESTR lpszProgID, _Out_ LPCLSID lpclsid);
 +
++
++_Check_return_ WINOLEAPI _Windows_SupportedOS_Windows2000_ CLSIDFromProgIDEx (_In_ LPCOLESTR lpszProgID, _Out_ LPCLSID lpclsid);
++
++_Windows_SupportedOS_Windows2000_ 
+ 
  WINOLEAPI_(BOOL) CoFileTimeToDosDateTime(
                   _In_ FILETIME FAR* lpFileTime, _Out_ LPWORD lpDosDate, _Out_ LPWORD lpDosTime);
 +_Windows_SupportedOS_Windows2000_ 
 +
  WINOLEAPI_(BOOL) CoDosDateTimeToFileTime(
                         _In_ WORD nDosDate, _In_ WORD nDosTime, _Out_ FILETIME FAR* lpFileTime);
-+_Windows_SupportedOS_Windows2000_
-+_Windows_SupportedOS_Server2000_
- WINOLEAPI  CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
- 
+-WINOLEAPI  CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
++
++
++WINOLEAPI  _Windows_SupportedOS_Windows2000_ CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
++
 +_Windows_SupportedOS_Windows2000_ 
 +
-+
+ 
  _Check_return_ WINOLEAPI CoRegisterMessageFilter( _In_opt_ LPMESSAGEFILTER lpMessageFilter,
                                  _Outptr_opt_result_maybenull_ LPMESSAGEFILTER FAR* lplpMessageFilter );
- 
 @@ -168,13 +212,19 @@ WINOLEAPI CoRegisterChannelHook( _In_ REFGUID ExtensionUuid, _In_ IChannelHook *
  
  /* TreatAs APIS */

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
-index 4ff6ae0d6e..2e11c45142 100644
+index 4ff6ae0d6e..b88ca20255 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
 @@ -105,6 +105,7 @@ extern "C"{
@@ -10,6 +10,23 @@ index 4ff6ae0d6e..2e11c45142 100644
  #ifndef _PROPIDLBASE_
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -1302,13 +1303,13 @@ enum PIDMSI_STATUS_VALUE
+ #pragma endregion
+ #pragma region Application Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+-_Check_return_ WINOLEAPI PropVariantCopy(
++_Check_return_ WINOLEAPI _Windows_SupportedOS_Windows2000_ PropVariantCopy(
+             _Out_ PROPVARIANT* pvarDest,
+             _In_ const PROPVARIANT * pvarSrc);
+ 
+-WINOLEAPI PropVariantClear(_Inout_ PROPVARIANT* pvar);
++WINOLEAPI _Windows_SupportedOS_Windows2000_ PropVariantClear(_Inout_ PROPVARIANT* pvar);
+ 
+-WINOLEAPI FreePropVariantArray(
++WINOLEAPI _Windows_SupportedOS_Windows2000_ FreePropVariantArray(
+             _In_ ULONG cVariants,
+             _Inout_updates_(cVariants) PROPVARIANT* rgvars);
+ 
 @@ -1342,17 +1343,17 @@ inline void PropVariantInit (_Out_ PROPVARIANT * pvar )
  
  #ifndef _SERIALIZEDPROPERTYVALUE_DEFINED_

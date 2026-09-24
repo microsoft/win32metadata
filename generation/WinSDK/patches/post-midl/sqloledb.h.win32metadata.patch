@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
-index b981cef443..b730cd4739 100644
+index b981cef443..5a67dc888c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
 @@ -1,3 +1,4 @@
@@ -25,6 +25,18 @@ index b981cef443..b730cd4739 100644
              _Outptr_
              /* [out] */ OLECHAR __RPC_FAR *__RPC_FAR *ppStringsBuffer) = 0;
          
+@@ -542,9 +543,9 @@ void __RPC_STUB ISQLServerErrorInfo_GetErrorInfo_Stub(
+ /* [local] */ 
+ 
+ #ifdef _WIN64
+-typedef ULONG_PTR HACCESSOR;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef ULONG_PTR HACCESSOR;
+ #else
+-typedef ULONG HACCESSOR;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef ULONG HACCESSOR;
+ #endif
+ 
+ 
 @@ -573,7 +574,7 @@ EXTERN_C const IID IID_IRowsetFastLoad;
      public:
          virtual HRESULT STDMETHODCALLTYPE InsertRow( 

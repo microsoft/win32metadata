@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
-index 9b253c6dca..1817b9d83b 100644
+index 9b253c6dca..98a355677a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prsht.h
 @@ -1,4 +1,5 @@
@@ -8,7 +8,15 @@ index 9b253c6dca..1817b9d83b 100644
  
  /*****************************************************************************\
  *                                                                             *
-@@ -101,8 +102,8 @@ struct _PROPSHEETPAGEA;
+@@ -94,15 +95,15 @@ extern "C" {
+ #define MAXPROPPAGES            100
+ 
+ struct _PSP;
+-typedef struct _PSP * HPROPSHEETPAGE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyPropertySheetPage") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _PSP * HPROPSHEETPAGE;
+ 
+ #ifndef MIDL_PASS
+ struct _PROPSHEETPAGEA;
  struct _PROPSHEETPAGEW;
  #endif
  
@@ -53,11 +61,13 @@ index 9b253c6dca..1817b9d83b 100644
  
  #ifdef UNICODE
  #define CreatePropertySheetPage  CreatePropertySheetPageW
-@@ -601,7 +608,7 @@ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
+@@ -600,8 +607,8 @@ WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
  
  
- typedef BOOL (CALLBACK *LPFNADDPROPSHEETPAGE)(HPROPSHEETPAGE, LPARAM);
+ 
+-typedef BOOL (CALLBACK *LPFNADDPROPSHEETPAGE)(HPROPSHEETPAGE, LPARAM);
 -typedef BOOL (CALLBACK *LPFNADDPROPSHEETPAGES)(LPVOID, LPFNADDPROPSHEETPAGE, LPARAM);
++typedef BOOL (CALLBACK *LPFNADDPROPSHEETPAGE)(_WIN32META_ANNOTATION_("win32metadata:in") HPROPSHEETPAGE, LPARAM);
 +typedef BOOL (CALLBACK *LPFNADDPROPSHEETPAGES)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID, LPFNADDPROPSHEETPAGE, LPARAM);
  
  

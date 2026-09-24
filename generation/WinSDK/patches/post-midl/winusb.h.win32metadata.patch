@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h b/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h
-index 8294a832b9..e7a514c6b3 100644
+index 8294a832b9..4b20973619 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winusb.h
 @@ -36,6 +36,7 @@ Authors:
@@ -10,6 +10,15 @@ index 8294a832b9..e7a514c6b3 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -48,7 +49,7 @@ extern "C" {
+ 
+ #include <winusbio.h>
+ 
+-typedef PVOID WINUSB_INTERFACE_HANDLE, *PWINUSB_INTERFACE_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WinUsb_Free") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID WINUSB_INTERFACE_HANDLE, *PWINUSB_INTERFACE_HANDLE;
+ 
+ typedef PVOID WINUSB_ISOCH_BUFFER_HANDLE, *PWINUSB_ISOCH_BUFFER_HANDLE;
+ 
 @@ -66,10 +67,11 @@ typedef struct _WINUSB_SETUP_PACKET {
  
  

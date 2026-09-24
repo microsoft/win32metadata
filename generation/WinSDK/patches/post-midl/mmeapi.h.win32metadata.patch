@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
-index 7c68a997c8..bce3d1390d 100644
+index 7c68a997c8..0649967a6e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmeapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,19 @@ index 7c68a997c8..bce3d1390d 100644
  /********************************************************************************
  *                                                                               *
  * mmeapi.h -- ApiSet Contract for api-ms-win-mm-mme-l1-1-0                      *
+@@ -47,9 +48,9 @@ extern "C" {
+ #define WAVERR_LASTERROR      (WAVERR_BASE + 3)    /* last error in range */
+ 
+ /* waveform audio data types */
+-DECLARE_HANDLE(HWAVE);
+-DECLARE_HANDLE(HWAVEIN);
+-DECLARE_HANDLE(HWAVEOUT);
++DECLARE_HANDLE(HWAVE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HWAVEIN) _WIN32META_ANNOTATION_("win32metadata:raii_free=waveInClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HWAVEOUT) _WIN32META_ANNOTATION_("win32metadata:raii_free=waveOutClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HWAVEIN FAR *LPHWAVEIN;
+ typedef HWAVEOUT FAR *LPHWAVEOUT;
+ typedef DRVCALLBACK WAVECALLBACK;
 @@ -78,7 +79,7 @@ typedef WAVECALLBACK FAR *LPWAVECALLBACK;
  
  /* wave data block header */
@@ -393,6 +406,21 @@ index 7c68a997c8..bce3d1390d 100644
  #endif
  #endif /* ifdef WINVER >= 0x030a */
  
+@@ -756,10 +757,10 @@ DWORD WINAPI waveInMessage(HWAVEIN hwi, UINT uMsg, DWORD dw1, DWORD dw2);
+ #define MIDIERR_LASTERROR     (MIDIERR_BASE + 7)   /* last error in range */
+ 
+ /* MIDI audio data types */
+-DECLARE_HANDLE(HMIDI);
+-DECLARE_HANDLE(HMIDIIN);
+-DECLARE_HANDLE(HMIDIOUT);
+-DECLARE_HANDLE(HMIDISTRM);
++DECLARE_HANDLE(HMIDI) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HMIDIIN) _WIN32META_ANNOTATION_("win32metadata:raii_free=midiInClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HMIDIOUT) _WIN32META_ANNOTATION_("win32metadata:raii_free=midiOutClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HMIDISTRM) _WIN32META_ANNOTATION_("win32metadata:raii_free=midiStreamClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HMIDI FAR *LPHMIDI;
+ typedef HMIDIIN FAR *LPHMIDIIN;
+ typedef HMIDIOUT FAR *LPHMIDIOUT;
 @@ -1087,7 +1088,7 @@ typedef struct midiproptempo_tag
  #endif /* WINVER >= 0x0400 */
  
@@ -863,6 +891,19 @@ index 7c68a997c8..bce3d1390d 100644
  #endif
  #endif /* ifdef WINVER >= 0x030a */
  
+@@ -1701,10 +1702,10 @@ DWORD WINAPI auxOutMessage(UINT uDeviceID, UINT uMsg, DWORD dw1, DWORD dw2);
+ 
+ ****************************************************************************/
+ 
+-DECLARE_HANDLE(HMIXEROBJ);
++DECLARE_HANDLE(HMIXEROBJ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HMIXEROBJ FAR *LPHMIXEROBJ;
+ 
+-DECLARE_HANDLE(HMIXER);
++DECLARE_HANDLE(HMIXER) _WIN32META_ANNOTATION_("win32metadata:raii_free=mixerClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HMIXER     FAR *LPHMIXER;
+ 
+ #define MIXER_SHORT_NAME_CHARS   16
 @@ -1732,7 +1733,7 @@ typedef HMIXER     FAR *LPHMIXER;
  #define MIXER_OBJECTF_HMIDIIN   (MIXER_OBJECTF_HANDLE|MIXER_OBJECTF_MIDIIN)
  #define MIXER_OBJECTF_AUX       0x50000000L

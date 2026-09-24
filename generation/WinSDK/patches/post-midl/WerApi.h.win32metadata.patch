@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
-index 28820adfc5..b315aa70df 100644
+index 28820adfc5..4e7957de1e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
 @@ -1,4 +1,5 @@
@@ -8,6 +8,15 @@ index 28820adfc5..b315aa70df 100644
  
  /*++
  
+@@ -29,7 +30,7 @@ extern "C" {
+ 
+ //////////////////////// Defines //////////////////////////////////////////////
+ 
+-typedef HANDLE HREPORT;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WerReportCloseHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HREPORT;
+ 
+ //
+ // Do not add heap dumps for reports for the process
 @@ -293,7 +294,7 @@ typedef enum _WER_REPORT_TYPE
  
  #define WER_SUBMIT_DISCARD_IF_QUEUED            WER_SUBMIT_NO_QUEUE
@@ -237,6 +246,15 @@ index 28820adfc5..b315aa70df 100644
  WINAPI
  WerUnregisterRuntimeExceptionModule(
      _In_ PCWSTR pwszOutOfProcessCallbackDll,
+@@ -816,7 +823,7 @@ typedef enum _REPORT_STORE_TYPES
+     E_STORE_INVALID=4
+ } REPORT_STORE_TYPES;
+ 
+-typedef PVOID HREPORTSTORE, *PHREPORTSTORE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WerStoreClose") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID HREPORTSTORE, *PHREPORTSTORE;
+ 
+ /*++
+ 
 @@ -952,34 +959,34 @@ typedef struct _WER_REPORT_METADATA_V3
      ULONGLONG LegacyBucketId;
  } WER_REPORT_METADATA_V3, *PWER_REPORT_METADATA_V3;

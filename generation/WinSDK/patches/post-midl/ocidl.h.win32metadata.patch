@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
-index 7b7e6ba75d..a508193520 100644
+index 7b7e6ba75d..d9385b665d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ocidl.h
 @@ -1,3 +1,4 @@
@@ -259,6 +259,15 @@ index 7b7e6ba75d..a508193520 100644
          
          virtual HRESULT STDMETHODCALLTYPE Clone( 
              /* [annotation][out] */ 
+@@ -3683,7 +3684,7 @@ enum tagPictureAttributes
+         PICTURE_TRANSPARENT	= 0x2
+     } 	PICTUREATTRIBUTES;
+ 
+-typedef /* [public][uuid] */  DECLSPEC_UUID("66504313-BE0F-101A-8BBB-00AA00300CAB") UINT OLE_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [public][uuid] */  DECLSPEC_UUID("66504313-BE0F-101A-8BBB-00AA00300CAB") UINT OLE_HANDLE;
+ 
+ typedef /* [hidden][uuid] */  DECLSPEC_UUID("66504306-BE0F-101A-8BBB-00AA00300CAB") LONG OLE_XPOS_HIMETRIC;
+ 
 @@ -3698,7 +3699,7 @@ EXTERN_C const IID IID_IPicture;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,8 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
-index 9179f744d9..24b6154c04 100644
+index 9179f744d9..7ff2d53ce6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQuery.h
-@@ -1,6 +1,7 @@
+@@ -1,36 +1,40 @@
  // Copyright (c) Microsoft Corporation
  
  #pragma once
@@ -10,7 +10,21 @@ index 9179f744d9..24b6154c04 100644
  
  #include <diagnosticdataquerytypes.h>
  
-@@ -16,21 +17,24 @@ extern "C" {
+-DECLARE_HANDLE(HDIAGNOSTIC_DATA_QUERY_SESSION);
+-DECLARE_HANDLE(HDIAGNOSTIC_REPORT);
+-DECLARE_HANDLE(HDIAGNOSTIC_EVENT_TAG_DESCRIPTION);
+-DECLARE_HANDLE(HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION);
+-DECLARE_HANDLE(HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION);
+-DECLARE_HANDLE(HDIAGNOSTIC_RECORD);
++DECLARE_HANDLE(HDIAGNOSTIC_DATA_QUERY_SESSION) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdqCloseSession")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDIAGNOSTIC_REPORT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdqFreeDiagnosticReport")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdqFreeDiagnosticRecordLocaleTags")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdqFreeDiagnosticRecordProducers")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdqFreeDiagnosticRecordProducerCategories")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDIAGNOSTIC_RECORD) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdqFreeDiagnosticRecordPage")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #ifdef __cplusplus
+ extern "C" {
  #endif // __cplusplus
  
  // Caller is expected to destroy hSession with DdqCloseSession

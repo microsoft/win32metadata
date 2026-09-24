@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
-index 13d6163d39..431e874067 100644
+index 13d6163d39..398976db59 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winevt.h
 @@ -15,6 +15,7 @@ Abstract:
@@ -10,6 +10,15 @@ index 13d6163d39..431e874067 100644
  
  #pragma region Desktop Family or EventLogService Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_EVENTLOGSERVICE)
+@@ -26,7 +27,7 @@ extern "C"
+ 
+ #if (WINVER >= _WIN32_WINNT_LONGHORN)
+ 
+-typedef HANDLE EVT_HANDLE, *PEVT_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=EvtClose") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE EVT_HANDLE, *PEVT_HANDLE;
+ 
+ typedef enum _EVT_VARIANT_TYPE
+ {
 @@ -154,7 +155,7 @@ typedef struct _EVT_RPC_LOGIN
  
  

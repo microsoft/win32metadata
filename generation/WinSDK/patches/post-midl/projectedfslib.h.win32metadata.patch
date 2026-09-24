@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
-index 2f8b77ff0e..914e6be689 100644
+index 2f8b77ff0e..b4731a4d46 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
 @@ -37,6 +37,7 @@ Abstract:
@@ -28,9 +28,15 @@ index 2f8b77ff0e..914e6be689 100644
  {
      PRJ_NOTIFICATION_FILE_OPENED                        = 0x00000002,
      PRJ_NOTIFICATION_NEW_FILE_CREATED                   = 0x00000004,
-@@ -88,12 +89,12 @@ DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT);
+@@ -84,16 +85,16 @@ typedef enum PRJ_NOTIFICATION
+     PRJ_NOTIFICATION_FILE_PRE_CONVERT_TO_FULL           = 0x00001000,
+ } PRJ_NOTIFICATION;
  
- DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE);
+-DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT);
++DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+-DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE);
++DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  
 -typedef enum PRJ_EXT_INFO_TYPE {
 +typedef enum  PRJ_EXT_INFO_TYPE {

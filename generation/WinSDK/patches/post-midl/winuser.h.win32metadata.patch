@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..bd31d3b3b4 100644
+index f99e9294f5..4a414783c5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index f99e9294f5..bd31d3b3b4 100644
  #include <winapifamily.h>
  
  /****************************************************************************
+@@ -66,7 +67,7 @@ extern "C" {
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-typedef HANDLE HDWP;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HDWP;
+ typedef VOID MENUTEMPLATEA;
+ typedef VOID MENUTEMPLATEW;
+ #ifdef UNICODE
 @@ -125,8 +126,8 @@ typedef BOOL (CALLBACK* PROPENUMPROCW)(HWND, LPCWSTR, HANDLE);
  typedef BOOL (CALLBACK* PROPENUMPROCEXA)(HWND, LPSTR, HANDLE, ULONG_PTR);
  typedef BOOL (CALLBACK* PROPENUMPROCEXW)(HWND, LPWSTR, HANDLE, ULONG_PTR);
@@ -1018,6 +1027,15 @@ index f99e9294f5..bd31d3b3b4 100644
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
+@@ -3941,7 +3942,7 @@ BroadcastSystemMessage(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #if(WINVER >= 0x0500)
+-typedef  PVOID           HDEVNOTIFY;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=UnregisterDeviceNotification") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef  PVOID           HDEVNOTIFY;
+ typedef  HDEVNOTIFY     *PHDEVNOTIFY;
+ 
+ #define DEVICE_NOTIFY_WINDOW_HANDLE          0x00000000
 @@ -3950,27 +3951,27 @@ typedef  HDEVNOTIFY     *PHDEVNOTIFY;
  #define DEVICE_NOTIFY_ALL_INTERFACE_CLASSES  0x00000004
  #endif /* _WIN32_WINNT >= 0x0501 */
@@ -1051,7 +1069,13 @@ index f99e9294f5..bd31d3b3b4 100644
  BOOL
  WINAPI
  UnregisterDeviceNotification(
-@@ -3988,31 +3989,31 @@ typedef  HPOWERNOTIFY   *PHPOWERNOTIFY;
+@@ -3983,36 +3984,36 @@ UnregisterDeviceNotification(
+ 
+ #define _HPOWERNOTIFY_DEF_
+ 
+-typedef  PVOID           HPOWERNOTIFY;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=UnregisterPowerSettingNotification") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef  PVOID           HPOWERNOTIFY;
+ typedef  HPOWERNOTIFY   *PHPOWERNOTIFY;
  
  #endif
  
@@ -2660,7 +2684,15 @@ index f99e9294f5..bd31d3b3b4 100644
  UINT
  WINAPI
  SendInput(
-@@ -6198,8 +6199,8 @@ typedef struct tagTOUCHINPUT {
+@@ -6191,15 +6192,15 @@ SendInput(
+ /*
+  * Touch input handle
+  */
+-DECLARE_HANDLE(HTOUCHINPUT);
++DECLARE_HANDLE(HTOUCHINPUT) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseTouchInputHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ typedef struct tagTOUCHINPUT {
+     LONG x;
      LONG y;
      HANDLE hSource;
      DWORD dwID;
@@ -2894,11 +2926,13 @@ index f99e9294f5..bd31d3b3b4 100644
  BOOL
  WINAPI
  UnregisterPointerInputTargetEx(
-@@ -6672,7 +6673,7 @@ UnregisterPointerInputTargetEx(
+@@ -6671,8 +6672,8 @@ UnregisterPointerInputTargetEx(
+     _In_ POINTER_INPUT_TYPE pointerType);
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
- DECLARE_HANDLE(HSYNTHETICPOINTERDEVICE);
+-DECLARE_HANDLE(HSYNTHETICPOINTERDEVICE);
 -WINUSERAPI
++DECLARE_HANDLE(HSYNTHETICPOINTERDEVICE) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroySyntheticPointerDevice")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
 +_Windows_SupportedOS_17763_ _Win32_SetLastError_ _Win32_RAIIFree_(DestroySyntheticPointerDevice, -1, 0) WINUSERAPI
  HSYNTHETICPOINTERDEVICE
  WINAPI
@@ -7184,6 +7218,15 @@ index f99e9294f5..bd31d3b3b4 100644
  BOOL
  WINAPI
  UserHandleGrantAccess(
+@@ -14945,7 +14950,7 @@ UserHandleGrantAccess(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-DECLARE_HANDLE(HRAWINPUT);
++DECLARE_HANDLE(HRAWINPUT) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -15012,7 +15017,7 @@ typedef struct tagRAWMOUSE {
      /*
       * Indicator flags.
@@ -7406,6 +7449,15 @@ index f99e9294f5..bd31d3b3b4 100644
      _Inout_opt_ PCHANGEFILTERSTRUCT pChangeFilterStruct);   // Optional
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+@@ -15697,7 +15702,7 @@ ChangeWindowMessageFilterEx(
+ /*
+  * Gesture information handle
+  */
+-DECLARE_HANDLE(HGESTUREINFO);
++DECLARE_HANDLE(HGESTUREINFO) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseGestureInfoHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -15732,7 +15737,7 @@ DECLARE_HANDLE(HGESTUREINFO);
   *     message lParam into the GetGestureExtraArgs function to retrieve extended
   *     argument information.

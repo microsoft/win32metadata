@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h b/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
-index 663a5f2e3f..1041ec4fe4 100644
+index 663a5f2e3f..2453489e37 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
 @@ -1,3 +1,4 @@
@@ -51,6 +51,15 @@ index 663a5f2e3f..1041ec4fe4 100644
                                    IN  DWORD      cbSize,
                                    IN  DWORD      dwFlags,
                                    OUT LPSTREAM  *ppSnapshotStream) PURE;
+@@ -987,7 +988,7 @@ DECLARE_INTERFACE_(IPrintOemUI, IPrintOemCommon)
+     // DeviceCapabilities
+     //
+ 
+-    STDMETHOD(DeviceCapabilities) (THIS_
++    _WIN32META_ANNOTATION_("win32metadata:ansi") STDMETHOD(DeviceCapabilities) (THIS_
+             _Inout_ POEMUIOBJ   poemuiobj,
+             _In_    HANDLE      hPrinter,
+             _In_    PWSTR       pDeviceName,
 @@ -1279,10 +1280,10 @@ DECLARE_INTERFACE_(IPrintOemUI2, IPrintOemUI)
              HDC         hdc,
              INT         iEsc,

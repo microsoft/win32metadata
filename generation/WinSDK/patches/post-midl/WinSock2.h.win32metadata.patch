@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
-index 824a3558c9..c5da36e282 100644
+index 824a3558c9..ce43cf454a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
 @@ -18,6 +18,7 @@
@@ -10,14 +10,16 @@ index 824a3558c9..c5da36e282 100644
  
  #if !defined(_WINSOCK_DEPRECATED_BY)
  #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
-@@ -138,6 +139,7 @@ typedef struct fd_set {
+@@ -138,7 +139,8 @@ typedef struct fd_set {
          SOCKET  fd_array[FD_SETSIZE];   /* an array of SOCKETs */
  } fd_set;
  
-+_Windows_SupportedOS_Server2003_
- extern int PASCAL FAR __WSAFDIsSet(SOCKET fd, fd_set FAR *);
+-extern int PASCAL FAR __WSAFDIsSet(SOCKET fd, fd_set FAR *);
++
++extern int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") __WSAFDIsSet(SOCKET fd, fd_set FAR *);
  
  #define FD_CLR(fd, set) do { \
+     u_int __i; \
 @@ -1058,13 +1060,13 @@ typedef LPWSAPROTOCOL_INFOA LPWSAPROTOCOL_INFO;
  typedef
  int
@@ -57,6 +59,240 @@ index 824a3558c9..c5da36e282 100644
  
  } WSAPOLLFD, *PWSAPOLLFD, FAR *LPWSAPOLLFD;
  
+@@ -1630,7 +1632,7 @@ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ SOCKET
+ WSAAPI
+-accept(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ accept(
+     _In_ SOCKET s,
+     _Out_writes_bytes_opt_(*addrlen) struct sockaddr FAR * addr,
+     _Inout_opt_ int FAR * addrlen
+@@ -1652,7 +1654,7 @@ SOCKET
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-bind(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ bind(
+     _In_ SOCKET s,
+     _In_reads_bytes_(namelen) const struct sockaddr FAR * name,
+     _In_ int namelen
+@@ -1673,7 +1675,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-closesocket(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ closesocket(
+     _In_ SOCKET s
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -1690,7 +1692,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-connect(
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ connect(
+     _In_ SOCKET s,
+     _In_reads_bytes_(namelen) const struct sockaddr FAR * name,
+     _In_ int namelen
+@@ -1711,7 +1713,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-ioctlsocket(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ ioctlsocket(
+     _In_ SOCKET s,
+     _In_ long cmd,
+     _When_(cmd != FIONREAD, _Inout_)
+@@ -1734,7 +1736,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-getpeername(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getpeername(
+     _In_ SOCKET s,
+     _Out_writes_bytes_to_(*namelen,*namelen) struct sockaddr FAR * name,
+     _Inout_ int FAR * namelen
+@@ -1755,7 +1757,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-getsockname(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getsockname(
+     _In_ SOCKET s,
+     _Out_writes_bytes_to_(*namelen,*namelen) struct sockaddr FAR * name,
+     _Inout_ int FAR * namelen
+@@ -1776,7 +1778,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-getsockopt(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getsockopt(
+     _In_ SOCKET s,
+     _In_ int level,
+     _In_ int optname,
+@@ -1801,7 +1803,7 @@ int
+ WINSOCK_API_LINKAGE
+ u_long
+ WSAAPI
+-htonl(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ htonl(
+     _In_ u_long hostlong
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -1818,7 +1820,7 @@ u_long
+ WINSOCK_API_LINKAGE
+ u_short
+ WSAAPI
+-htons(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ htons(
+     _In_ u_short hostshort
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -1836,7 +1838,7 @@ _WINSOCK_DEPRECATED_BY("inet_pton() or InetPton()")
+ WINSOCK_API_LINKAGE
+ unsigned long
+ WSAAPI
+-inet_addr(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ inet_addr(
+     _In_z_ const char FAR * cp
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -1854,7 +1856,7 @@ _WINSOCK_DEPRECATED_BY("inet_ntop() or InetNtop()")
+ WINSOCK_API_LINKAGE
+ char FAR *
+ WSAAPI
+-inet_ntoa(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ inet_ntoa(
+     _In_ struct in_addr in
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -1954,7 +1956,7 @@ __inline double ntohd ( unsigned __int64 Value )
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-listen(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ listen(
+     _In_ SOCKET s,
+     _In_ int backlog
+     );
+@@ -1973,7 +1975,7 @@ int
+ WINSOCK_API_LINKAGE
+ u_long
+ WSAAPI
+-ntohl(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ ntohl(
+     _In_ u_long netlong
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -1990,7 +1992,7 @@ u_long
+ WINSOCK_API_LINKAGE
+ u_short
+ WSAAPI
+-ntohs(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ ntohs(
+     _In_ u_short netshort
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2007,7 +2009,7 @@ u_short
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-recv(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ recv(
+     _In_ SOCKET s,
+     _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
+     _In_ int len,
+@@ -2030,7 +2032,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-recvfrom(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ recvfrom(
+     _In_ SOCKET s,
+     _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
+     _In_ int len,
+@@ -2057,7 +2059,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-select(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ select(
+     _In_ int nfds,
+     _Inout_opt_ fd_set FAR * readfds,
+     _Inout_opt_ fd_set FAR * writefds,
+@@ -2082,7 +2084,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-send(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ send(
+     _In_ SOCKET s,
+     _In_reads_bytes_(len) const char FAR * buf,
+     _In_ int len,
+@@ -2105,7 +2107,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-sendto(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ sendto(
+     _In_ SOCKET s,
+     _In_reads_bytes_(len) const char FAR * buf,
+     _In_ int len,
+@@ -2132,7 +2134,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-setsockopt(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ setsockopt(
+     _In_ SOCKET s,
+     _In_ int level,
+     _In_ int optname,
+@@ -2157,7 +2159,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-shutdown(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ shutdown(
+     _In_ SOCKET s,
+     _In_ int how
+     );
+@@ -2177,7 +2179,7 @@ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ SOCKET
+ WSAAPI
+-socket(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ socket(
+     _In_ int af,
+     _In_ int type,
+     _In_ int protocol
+@@ -2202,7 +2204,7 @@ _WINSOCK_DEPRECATED_BY("getnameinfo() or GetNameInfoW()")
+ WINSOCK_API_LINKAGE
+ struct hostent FAR *
+ WSAAPI
+-gethostbyaddr(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ gethostbyaddr(
+     _In_reads_bytes_(len) const char FAR * addr,
+     _In_ int len,
+     _In_ int type
+@@ -2224,7 +2226,7 @@ _WINSOCK_DEPRECATED_BY("getaddrinfo() or GetAddrInfoW()")
+ WINSOCK_API_LINKAGE
+ struct hostent FAR *
+ WSAAPI
+-gethostbyname(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ gethostbyname(
+     _In_z_ const char FAR * name
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2241,7 +2243,7 @@ struct hostent FAR *
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-gethostname(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ gethostname(
+     _Out_writes_bytes_(namelen) char FAR * name,
+     _In_ int namelen
+     );
 @@ -2258,7 +2260,7 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
@@ -66,6 +302,186 @@ index 824a3558c9..c5da36e282 100644
  int
  WSAAPI
  GetHostNameW(
+@@ -2281,7 +2283,7 @@ int
+ WINSOCK_API_LINKAGE
+ struct servent FAR *
+ WSAAPI
+-getservbyport(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getservbyport(
+     _In_ int port,
+     _In_opt_z_ const char FAR * proto
+     );
+@@ -2300,7 +2302,7 @@ struct servent FAR *
+ WINSOCK_API_LINKAGE
+ struct servent FAR *
+ WSAAPI
+-getservbyname(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getservbyname(
+     _In_z_ const char FAR * name,
+     _In_opt_z_ const char FAR * proto
+     );
+@@ -2319,7 +2321,7 @@ struct servent FAR *
+ WINSOCK_API_LINKAGE
+ struct protoent FAR *
+ WSAAPI
+-getprotobynumber(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getprotobynumber(
+     _In_ int number
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2336,7 +2338,7 @@ struct protoent FAR *
+ WINSOCK_API_LINKAGE
+ struct protoent FAR *
+ WSAAPI
+-getprotobyname(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getprotobyname(
+     _In_z_ const char FAR * name
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2356,7 +2358,7 @@ WINSOCK_API_LINKAGE
+ _Must_inspect_result_
+ int
+ WSAAPI
+-WSAStartup(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAStartup(
+     _In_ WORD wVersionRequested,
+     _Out_ LPWSADATA lpWSAData
+     );
+@@ -2376,7 +2378,7 @@ int
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-WSACleanup(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSACleanup(
+     void
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2393,7 +2395,7 @@ int
+ WINSOCK_API_LINKAGE
+ void
+ WSAAPI
+-WSASetLastError(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSASetLastError(
+     _In_ int iError
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2410,7 +2412,7 @@ void
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-WSAGetLastError(
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAGetLastError(
+     void
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2431,7 +2433,7 @@ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ BOOL
+ WSAAPI
+-WSAIsBlocking(
++_Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAIsBlocking(
+     void
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2449,7 +2451,7 @@ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-WSAUnhookBlockingHook(
++_Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAUnhookBlockingHook(
+     void
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2467,7 +2469,7 @@ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ FARPROC
+ WSAAPI
+-WSASetBlockingHook(
++_Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSASetBlockingHook(
+     _In_ FARPROC lpBlockFunc
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2485,7 +2487,7 @@ _WINSOCK_DEPRECATED_BY("Winsock 2")
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-WSACancelBlockingCall(
++_Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSACancelBlockingCall(
+     void
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2503,7 +2505,7 @@ _WINSOCK_DEPRECATED_BY("getservbyname()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+ WSAAPI
+-WSAAsyncGetServByName(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetServByName(
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
+     _In_z_ const char FAR * name,
+@@ -2531,7 +2533,7 @@ _WINSOCK_DEPRECATED_BY("getservbyport()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+ WSAAPI
+-WSAAsyncGetServByPort(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetServByPort(
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
+     _In_ int port,
+@@ -2559,7 +2561,7 @@ _WINSOCK_DEPRECATED_BY("getprotobyname()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+ WSAAPI
+-WSAAsyncGetProtoByName(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetProtoByName(
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
+     _In_z_ const char FAR * name,
+@@ -2585,7 +2587,7 @@ _WINSOCK_DEPRECATED_BY("getprotobynumber()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+ WSAAPI
+-WSAAsyncGetProtoByNumber(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetProtoByNumber(
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
+     _In_ int number,
+@@ -2611,7 +2613,7 @@ _WINSOCK_DEPRECATED_BY("GetAddrInfoExW()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+ WSAAPI
+-WSAAsyncGetHostByName(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetHostByName(
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
+     _In_z_ const char FAR * name,
+@@ -2637,7 +2639,7 @@ _WINSOCK_DEPRECATED_BY("getnameinfo() or GetNameInfoW()")
+ WINSOCK_API_LINKAGE
+ HANDLE
+ WSAAPI
+-WSAAsyncGetHostByAddr(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetHostByAddr(
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
+     _In_reads_bytes_(len) const char FAR * addr,
+@@ -2667,7 +2669,7 @@ _WINSOCK_DEPRECATED
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-WSACancelAsyncRequest(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSACancelAsyncRequest(
+     _In_ HANDLE hAsyncTaskHandle
+     );
+ #endif /* INCL_WINSOCK_API_PROTOTYPES */
+@@ -2685,7 +2687,7 @@ _WINSOCK_DEPRECATED_BY("WSAEventSelect()")
+ WINSOCK_API_LINKAGE
+ int
+ WSAAPI
+-WSAAsyncSelect(
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncSelect(
+     _In_ SOCKET s,
+     _In_ HWND hWnd,
+     _In_ u_int wMsg,
 @@ -2710,7 +2712,7 @@ int
  /* WinSock 2 API new function prototypes */
  

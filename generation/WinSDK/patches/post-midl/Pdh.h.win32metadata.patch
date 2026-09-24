@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h b/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h
-index e1ef840a27..056ce4048d 100644
+index e1ef840a27..5e7b233ff1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Pdh.h
 @@ -18,6 +18,7 @@ Abstract:
@@ -10,6 +10,17 @@ index e1ef840a27..056ce4048d 100644
  
  #pragma region Desktop Family and or PerfCounter Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_PERFCOUNTER)
+@@ -71,8 +72,8 @@ typedef LONG            PDH_STATUS;
+ // data type definitions
+ 
+ typedef HANDLE       PDH_HCOUNTER;
+-typedef HANDLE       PDH_HQUERY;
+-typedef HANDLE       PDH_HLOG;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=PdhCloseQuery") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE       PDH_HQUERY;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=PdhCloseLog") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE       PDH_HLOG;
+ 
+ typedef PDH_HCOUNTER HCOUNTER;
+ typedef PDH_HQUERY   HQUERY;
 @@ -88,7 +89,7 @@ typedef PDH_HLOG     HLOG;
  #define H_REALTIME_DATASOURCE NULL
  #define H_WBEM_DATASOURCE     INVALID_HANDLE_VALUE

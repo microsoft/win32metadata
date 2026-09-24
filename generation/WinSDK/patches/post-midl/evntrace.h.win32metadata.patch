@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
-index 58677d492a..3ec23252ac 100644
+index 58677d492a..e17ac019c8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/evntrace.h
 @@ -1,4 +1,5 @@
@@ -8,6 +8,15 @@ index 58677d492a..3ec23252ac 100644
  
  /*++
  
+@@ -297,7 +298,7 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
+ // INVALID_PROCESSTRACE_HANDLE. Obtain the handle by calling an OpenTrace
+ // function (e.g.  OpenTrace, OpenTraceFromFile, OpenTraceFromRealTimeLogger).
+ // Close the handle by calling CloseTrace.
+-typedef ULONG64 PROCESSTRACE_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseTrace") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") typedef ULONG64 PROCESSTRACE_HANDLE;
+ 
+ // Used to identify a trace collection session. The id is invalid if it
+ // contains the value (CONTROLTRACE_ID)0. Obtain the id from StartTrace or from
 @@ -1245,7 +1246,7 @@ typedef struct _EVENT_TRACE_PROPERTIES {
      ULONG MaximumFileSize;              // maximum logfile size (in MBytes)
      ULONG LogFileMode;                  // sequential, circular

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
-index 8842ce318f..05a94bc558 100644
+index 8842ce318f..326834cd67 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
 @@ -19,6 +19,7 @@ Abstract:
@@ -10,6 +10,15 @@ index 8842ce318f..05a94bc558 100644
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -42,7 +43,7 @@ extern "C" {
+ typedef _Return_type_success_(return == ERROR_SUCCESS) ULONG TDHSTATUS;
+ #define TDHAPI TDHSTATUS __stdcall
+ 
+-typedef HANDLE TDH_HANDLE, *PTDH_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=TdhCloseDecodingHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE TDH_HANDLE, *PTDH_HANDLE;
+ 
+ typedef struct _EVENT_MAP_ENTRY {
+     ULONG OutputOffset;
 @@ -73,7 +74,7 @@ typedef struct _EVENT_MAP_INFO {
      MAP_FLAGS Flag;
      ULONG EntryCount;

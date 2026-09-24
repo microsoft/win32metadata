@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h b/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
-index 394438f51b..850671c822 100644
+index 394438f51b..f3c4d76fef 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dpa_dsa.h
 @@ -23,6 +23,7 @@
@@ -10,8 +10,12 @@ index 394438f51b..850671c822 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -71,8 +72,14 @@ struct _DSA;
- typedef struct _DSA *HDSA;
+@@ -68,11 +69,17 @@ typedef int (CALLBACK *PFNDACOMPARECONST)(_In_opt_ const void *p1, _In_opt_ cons
+ 
+ // Dynamic structure array
+ struct _DSA;
+-typedef struct _DSA *HDSA;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DSA_Destroy") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _DSA *HDSA;
  
  
 +_Windows_SupportedOS_WindowsVista_ _Win32_RAIIFree_(DSA_Destroy, -1, 0) 
@@ -62,8 +66,12 @@ index 394438f51b..850671c822 100644
  #ifdef __cplusplus
  extern "C++" __inline BOOL DSA_Sort(_Inout_ HDSA hdsa, _In_ PFNDACOMPARECONST pfnCompare, _In_ LPARAM lParam)
  {
-@@ -121,31 +128,31 @@ struct _DPA;
- typedef struct _DPA *HDPA;
+@@ -118,34 +125,34 @@ extern "C++" __inline BOOL DSA_Sort(_Inout_ HDSA hdsa, _In_ PFNDACOMPARECONST pf
+ 
+ // Dynamic pointer array
+ struct _DPA;
+-typedef struct _DPA *HDPA;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DPA_Destroy") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _DPA *HDPA;
  
  
 -WINCOMMCTRLAPI HDPA   WINAPI DPA_Create(int cItemGrow);

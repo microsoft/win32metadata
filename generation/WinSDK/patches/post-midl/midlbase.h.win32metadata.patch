@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h
-index d21e508ddf..75c178e94b 100644
+index d21e508ddf..e36ffafdda 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h
 @@ -1,3 +1,4 @@
@@ -43,3 +43,12 @@ index d21e508ddf..75c178e94b 100644
      IUnknown * This);
  
  
+@@ -250,7 +251,7 @@ typedef struct _FLAGGED_WORD_BLOB
+ 
+ typedef /* [unique] */  __RPC_unique_pointer FLAGGED_WORD_BLOB *wireBSTR;
+ 
+-typedef /* [unique][wire_marshal] */  __RPC_unique_pointer HSTRING__ *HSTRING;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WindowsDeleteString") typedef /* [unique][wire_marshal] */  __RPC_unique_pointer HSTRING__ *HSTRING;
+ 
+ typedef struct EventRegistrationToken
+     {

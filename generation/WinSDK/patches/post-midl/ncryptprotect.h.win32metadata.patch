@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ncryptprotect.h b/generation/WinSDK/RecompiledIdlHeaders/um/ncryptprotect.h
-index a2df106326..5eeaf3a5e1 100644
+index a2df106326..a5eb64b164 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ncryptprotect.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ncryptprotect.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index a2df106326..5eeaf3a5e1 100644
  /*-------------------------------------------------------------------
  //
  //  Copyright (C) Microsoft, 2010
+@@ -129,7 +130,7 @@ extern "C" {
+ //
+ // NCRYPT_DESCRIPTOR_HANDLE
+ // 
+-DECLARE_HANDLE( NCRYPT_DESCRIPTOR_HANDLE );
++DECLARE_HANDLE( NCRYPT_DESCRIPTOR_HANDLE ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
 @@ -175,7 +176,7 @@ DECLARE_HANDLE( NCRYPT_DESCRIPTOR_HANDLE );
  
  
@@ -75,6 +84,15 @@ index a2df106326..5eeaf3a5e1 100644
      _In_reads_bytes_(cbProtectedBlob)
                      const BYTE                          *pbProtectedBlob,
                      ULONG                               cbProtectedBlob,
+@@ -521,7 +522,7 @@ NCryptUnprotectSecret(
+ //
+ ---------------------------------------------------------------------------*/
+ 
+-DECLARE_HANDLE( NCRYPT_STREAM_HANDLE );
++DECLARE_HANDLE( NCRYPT_STREAM_HANDLE ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ 
+ /****************************************************************************
 @@ -627,7 +628,7 @@ typedef struct NCRYPT_PROTECT_STREAM_INFO {
      NTE_BAD_TYPE
  

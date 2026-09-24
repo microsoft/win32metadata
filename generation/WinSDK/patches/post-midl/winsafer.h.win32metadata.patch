@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
-index 17c21ea419..c2d9c3a7d7 100644
+index 17c21ea419..ff8aad19d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
 @@ -18,6 +18,7 @@ Abstract:
@@ -10,6 +10,15 @@ index 17c21ea419..c2d9c3a7d7 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -34,7 +35,7 @@ extern "C" {
+ // Opaque datatype for representing handles to Safer objects.
+ //
+ 
+-DECLARE_HANDLE(SAFER_LEVEL_HANDLE);
++DECLARE_HANDLE(SAFER_LEVEL_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ 
+ //
 @@ -79,6 +80,28 @@ DECLARE_HANDLE(SAFER_LEVEL_HANDLE);
  #define SAFER_TOKEN_MAKE_INERT      0x00000004
  #define SAFER_TOKEN_WANT_FLAGS      0x00000008

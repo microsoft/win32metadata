@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
-index 8db637a14a..c82b1ddf95 100644
+index 8db637a14a..4c70d51f92 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 @@ -1,4 +1,5 @@
@@ -17,12 +17,15 @@ index 8db637a14a..c82b1ddf95 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
  #pragma endregion
-@@ -78,8 +79,12 @@ SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumA
+@@ -76,10 +77,14 @@ SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumA
  
- DECLARE_HANDLE(HDROP);
  
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ 
+ 
+-DECLARE_HANDLE(HDROP);
++DECLARE_HANDLE(HDROP) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
 +
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ 
+ 
  _Success_(return != 0)
  SHSTDAPI_(UINT) DragQueryFileA(_In_ HDROP hDrop, _In_ UINT iFile, _Out_writes_opt_(cch) LPSTR lpszFile, _In_ UINT cch);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ 

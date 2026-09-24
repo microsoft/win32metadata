@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
-index e067444153..e1e2d8c08a 100644
+index e067444153..3cfff82b37 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -37,30 +37,42 @@ index e067444153..e1e2d8c08a 100644
      LPVOID Head;
      DWORD HeadLength;
      LPVOID Tail;
-@@ -162,6 +163,7 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
+@@ -162,9 +163,10 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
  #define TF_USE_SYSTEM_THREAD  0x10
  #define TF_USE_KERNEL_APC     0x20
  
-+_Windows_SupportedOS_Server2003_
++
  BOOL
  PASCAL FAR
- TransmitFile (
-@@ -174,6 +176,7 @@ TransmitFile (
+-TransmitFile (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") TransmitFile (
+     _In_ SOCKET hSocket,
+     _In_ HANDLE hFile,
+     _In_ DWORD nNumberOfBytesToWrite,
+@@ -174,9 +176,10 @@ TransmitFile (
      _In_  DWORD dwReserved
      );
  
-+_Windows_SupportedOS_Server2003_
++
  BOOL
  PASCAL FAR
- AcceptEx (
-@@ -187,6 +190,7 @@ AcceptEx (
+-AcceptEx (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") AcceptEx (
+     _In_ SOCKET sListenSocket,
+     _In_ SOCKET sAcceptSocket,
+     _Out_writes_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
+@@ -187,9 +190,10 @@ AcceptEx (
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
-+_Windows_SupportedOS_Server2003_
++
  VOID
  PASCAL FAR
- GetAcceptExSockaddrs (
+-GetAcceptExSockaddrs (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") GetAcceptExSockaddrs (
+     _In_reads_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
+     _In_ DWORD dwReceiveDataLength,
+     _In_ DWORD dwLocalAddressLength,
 @@ -395,7 +399,7 @@ typedef struct _NLA_BLOB {
          // header.type -> NLA_CONNECTIVITY
          struct {

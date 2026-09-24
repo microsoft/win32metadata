@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
-index cfd6383749..7d40a559f4 100644
+index cfd6383749..069b8fc41d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 @@ -1,3 +1,4 @@
@@ -103,6 +103,15 @@ index cfd6383749..7d40a559f4 100644
      BYTE     PMF_ConfigOptions;
      BYTE     PMF_IoResourceIndex;
      BYTE     PMF_Reserved[2];
+@@ -1254,7 +1255,7 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ // Device notification registration handle
+ //
+ 
+-DECLARE_HANDLE(HCMNOTIFICATION);
++DECLARE_HANDLE(HCMNOTIFICATION) _WIN32META_ANNOTATION_("win32metadata:raii_free=CM_Unregister_Notification")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HCMNOTIFICATION *PHCMNOTIFICATION;
+ 
+ //
 @@ -1284,7 +1285,7 @@ typedef enum _CM_NOTIFY_FILTER_TYPE {
  // Device notification filter structure
  //

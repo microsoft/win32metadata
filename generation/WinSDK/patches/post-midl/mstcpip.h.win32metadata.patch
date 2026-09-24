@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h b/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h
-index 100f0dd5cf..2aa5ee90c3 100644
+index 100f0dd5cf..67dc174fa4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h
 @@ -64,6 +64,7 @@ DEFINE_GUID(
@@ -19,3 +19,147 @@ index 100f0dd5cf..2aa5ee90c3 100644
  {
      GUID Guid;
  } TRANSPORT_SETTING_ID, *PTRANSPORT_SETTING_ID;
+@@ -1910,7 +1911,7 @@ INET_UNCANONICALIZE_SCOPE_ID(
+ NTSYSAPI
+ PSTR
+ NTAPI
+-RtlIpv4AddressToStringA (
++_Windows_SupportedOS_WindowsVista_ RtlIpv4AddressToStringA (
+     _In_ const struct in_addr *Addr,
+     _Out_writes_(16) PSTR S
+     );
+@@ -1928,7 +1929,7 @@ RtlIpv4AddressToStringExA(
+ NTSYSAPI
+ PWSTR
+ NTAPI
+-RtlIpv4AddressToStringW (
++_Windows_SupportedOS_WindowsVista_ RtlIpv4AddressToStringW (
+     _In_ const struct in_addr *Addr,
+     _Out_writes_(16) PWSTR S
+     );
+@@ -1936,7 +1937,7 @@ RtlIpv4AddressToStringW (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv4AddressToStringExW(
++_Windows_SupportedOS_WindowsVista_ RtlIpv4AddressToStringExW(
+     _In_ const struct in_addr *Address,
+     _In_ USHORT Port,
+     _Out_writes_to_(*AddressStringLength, *AddressStringLength) PWSTR AddressString,
+@@ -1946,7 +1947,7 @@ RtlIpv4AddressToStringExW(
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv4StringToAddressA (
++_Windows_SupportedOS_WindowsVista_ RtlIpv4StringToAddressA (
+     _In_ PCSTR S,
+     _In_ BOOLEAN Strict,
+     _Out_ PCSTR *Terminator,
+@@ -1966,7 +1967,7 @@ RtlIpv4StringToAddressExA (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv4StringToAddressW (
++_Windows_SupportedOS_WindowsVista_ RtlIpv4StringToAddressW (
+     _In_ PCWSTR S,
+     _In_ BOOLEAN Strict,
+     _Out_ LPCWSTR *Terminator,
+@@ -1976,7 +1977,7 @@ RtlIpv4StringToAddressW (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv4StringToAddressExW (
++_Windows_SupportedOS_WindowsVista_ RtlIpv4StringToAddressExW (
+     _In_ PCWSTR AddressString,
+     _In_ BOOLEAN Strict,
+     _Out_ struct in_addr *Address,
+@@ -2007,7 +2008,7 @@ RtlIpv4StringToAddressExW (
+ NTSYSAPI
+ PSTR
+ NTAPI
+-RtlIpv6AddressToStringA (
++_Windows_SupportedOS_WindowsVista_ RtlIpv6AddressToStringA (
+     _In_ const struct in6_addr *Addr,
+     _Out_writes_(46) PSTR S
+     );
+@@ -2026,7 +2027,7 @@ RtlIpv6AddressToStringExA(
+ NTSYSAPI
+ PWSTR
+ NTAPI
+-RtlIpv6AddressToStringW (
++_Windows_SupportedOS_WindowsVista_ RtlIpv6AddressToStringW (
+     _In_ const struct in6_addr *Addr,
+     _Out_writes_(46) PWSTR S
+     );
+@@ -2034,7 +2035,7 @@ RtlIpv6AddressToStringW (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv6AddressToStringExW(
++_Windows_SupportedOS_WindowsVista_ RtlIpv6AddressToStringExW(
+     _In_ const struct in6_addr *Address,
+     _In_ ULONG ScopeId,
+     _In_ USHORT Port,
+@@ -2045,7 +2046,7 @@ RtlIpv6AddressToStringExW(
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv6StringToAddressA (
++_Windows_SupportedOS_WindowsVista_ RtlIpv6StringToAddressA (
+     _In_ PCSTR S,
+     _Out_ PCSTR *Terminator,
+     _Out_ struct in6_addr *Addr
+@@ -2064,7 +2065,7 @@ RtlIpv6StringToAddressExA (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv6StringToAddressW (
++_Windows_SupportedOS_WindowsVista_ RtlIpv6StringToAddressW (
+     _In_ PCWSTR S,
+     _Out_ PCWSTR *Terminator,
+     _Out_ struct in6_addr *Addr
+@@ -2073,7 +2074,7 @@ RtlIpv6StringToAddressW (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlIpv6StringToAddressExW (
++_Windows_SupportedOS_WindowsVista_ RtlIpv6StringToAddressExW (
+     _In_ PCWSTR AddressString,
+     _Out_ struct in6_addr *Address,
+     _Out_ PULONG ScopeId,
+@@ -2110,7 +2111,7 @@ typedef union _DL_EUI48 DL_EUI48, *PDL_EUI48;
+ NTSYSAPI
+ PSTR
+ NTAPI
+-RtlEthernetAddressToStringA (
++_Windows_SupportedOS_Windows7_ RtlEthernetAddressToStringA (
+     _In_ const DL_EUI48 *Addr,
+     _Out_writes_(18) PSTR S
+     );
+@@ -2118,7 +2119,7 @@ RtlEthernetAddressToStringA (
+ NTSYSAPI
+ PWSTR
+ NTAPI
+-RtlEthernetAddressToStringW (
++_Windows_SupportedOS_Windows7_ RtlEthernetAddressToStringW (
+     _In_ const DL_EUI48 *Addr,
+     _Out_writes_(18) PWSTR S
+     );
+@@ -2126,7 +2127,7 @@ RtlEthernetAddressToStringW (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlEthernetStringToAddressA (
++_Windows_SupportedOS_Windows7_ RtlEthernetStringToAddressA (
+     _In_ PCSTR S,
+     _Out_ PCSTR *Terminator,
+     _Out_ DL_EUI48 *Addr
+@@ -2135,7 +2136,7 @@ RtlEthernetStringToAddressA (
+ NTSYSAPI
+ LONG
+ NTAPI
+-RtlEthernetStringToAddressW (
++_Windows_SupportedOS_Windows7_ RtlEthernetStringToAddressW (
+     _In_ PCWSTR S,
+     _Out_ LPCWSTR *Terminator,
+     _Out_ DL_EUI48 *Addr

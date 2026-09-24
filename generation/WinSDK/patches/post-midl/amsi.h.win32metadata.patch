@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
-index 8a8d37b310..f2b6ec7882 100644
+index 8a8d37b310..87391f084a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
 @@ -18,6 +18,8 @@
@@ -71,12 +71,17 @@ index 8a8d37b310..f2b6ec7882 100644
      {
          CONST_VTBL struct IAntimalwareVtbl *lpVtbl;
      };
-@@ -962,21 +964,31 @@ EXTERN_C const CLSID CLSID_Antimalware;
- DECLARE_HANDLE(HAMSICONTEXT);
- DECLARE_HANDLE(HAMSISESSION);
+@@ -959,24 +961,34 @@ class DECLSPEC_UUID("fdb00e52-a214-4aa1-8fba-4357bb0072ec") CAntimalware;
+ #endif
+ EXTERN_C const CLSID CLSID_Antimalware;
  
-+_Windows_SupportedOS_10240_ 
+-DECLARE_HANDLE(HAMSICONTEXT);
+-DECLARE_HANDLE(HAMSISESSION);
++DECLARE_HANDLE(HAMSICONTEXT) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HAMSISESSION) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
 +
++_Windows_SupportedOS_10240_ 
+ 
  STDAPI AmsiInitialize(
      _In_  LPCWSTR appName,
 -    _Outptr_ HAMSICONTEXT* amsiContext);

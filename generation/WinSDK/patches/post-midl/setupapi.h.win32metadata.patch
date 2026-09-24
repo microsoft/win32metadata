@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
-index d30e1d6ba8..f372655b1d 100644
+index d30e1d6ba8..59a1e7ff09 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SetupAPI.h
 @@ -1,3 +1,4 @@
@@ -104,7 +104,14 @@ index d30e1d6ba8..f372655b1d 100644
      DWORD    cbSize;
      HSPFILEQ QueueHandle;
      PCWSTR   SourceRootPath;     OPTIONAL
-@@ -746,7 +747,7 @@ typedef PVOID HDEVINFO;
+@@ -740,13 +741,13 @@ typedef PVOID HDSKSPC;
+ //
+ // Define type for reference to device information set
+ //
+-typedef PVOID HDEVINFO;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=SetupDiDestroyDeviceInfoList") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID HDEVINFO;
+ 
+ //
  // Device information structure (references a device instance
  // that is a member of a device information set)
  //

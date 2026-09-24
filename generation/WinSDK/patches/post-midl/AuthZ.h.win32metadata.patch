@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
-index dad771d0a5..1cccf28c9a 100644
+index dad771d0a5..72590893c1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/AuthZ.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -10,6 +10,29 @@ index dad771d0a5..1cccf28c9a 100644
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -58,15 +59,15 @@ extern "C" {
+ #define AUTHZ_REQUIRE_S4U_LOGON  0x4
+ #define AUTHZ_COMPUTE_PRIVILEGES 0x8
+               
+-DECLARE_HANDLE(AUTHZ_ACCESS_CHECK_RESULTS_HANDLE);
+-DECLARE_HANDLE(AUTHZ_CLIENT_CONTEXT_HANDLE);
+-DECLARE_HANDLE(AUTHZ_RESOURCE_MANAGER_HANDLE);
+-DECLARE_HANDLE(AUTHZ_AUDIT_EVENT_HANDLE);
+-DECLARE_HANDLE(AUTHZ_AUDIT_EVENT_TYPE_HANDLE);
+-DECLARE_HANDLE(AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE);
++DECLARE_HANDLE(AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=AuthzFreeHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(AUTHZ_CLIENT_CONTEXT_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=AuthzFreeContext")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(AUTHZ_RESOURCE_MANAGER_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=AuthzFreeResourceManager")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(AUTHZ_AUDIT_EVENT_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=AuthzFreeAuditEvent")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(AUTHZ_AUDIT_EVENT_TYPE_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+-DECLARE_HANDLE(AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE);
++DECLARE_HANDLE(AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=AuthzUnregisterCapChangeNotification")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
+ typedef AUTHZ_ACCESS_CHECK_RESULTS_HANDLE    *PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE;
 @@ -84,7 +85,7 @@ typedef AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE *PAUTHZ_CAP_CHANGE_SUBSCRIPTION_HAN
  // Structure defining the access check request.
  //

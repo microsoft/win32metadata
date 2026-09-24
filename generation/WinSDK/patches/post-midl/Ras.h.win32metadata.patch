@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
-index 5fed8633f1..f2004ea3fb 100644
+index 5fed8633f1..044727d206 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 @@ -31,6 +31,7 @@ Abstract:
@@ -10,6 +10,15 @@ index 5fed8633f1..f2004ea3fb 100644
  
  #pragma region Desktop Family or CmdLineTools Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS)
+@@ -145,7 +146,7 @@ RASTUNNELENDPOINT
+ #define RAS_MaxReplyMessage   1024
+ #define RAS_MaxDnsSuffix      256
+ 
+-DECLARE_HANDLE( HRASCONN );
++DECLARE_HANDLE( HRASCONN ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #define LPHRASCONN HRASCONN*
+ 
+ #if (WINVER >= 0x501)
 @@ -903,7 +904,7 @@ RASPPPCCP
  */
  #if (WINVER >= 0x601)

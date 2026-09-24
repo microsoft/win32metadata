@@ -1,8 +1,8 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h b/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h
-index eaf1937156..67dff0fd49 100644
+index eaf1937156..b75b9a0dde 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/websocket.h
-@@ -25,6 +25,7 @@ extern "C"
+@@ -25,13 +25,14 @@ extern "C"
  #endif
  
  #include <winapifamily.h>
@@ -10,6 +10,14 @@ index eaf1937156..67dff0fd49 100644
  
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN8
+ 
+-DECLARE_HANDLE(WEB_SOCKET_HANDLE);
++DECLARE_HANDLE(WEB_SOCKET_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=WebSocketDeleteHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #define WEB_SOCKET_MAX_CLOSE_REASON_LENGTH 123
+ 
 @@ -89,7 +90,7 @@ typedef enum _WEB_SOCKET_ACTION
      WEB_SOCKET_INDICATE_RECEIVE_COMPLETE_ACTION     = 4,
  } WEB_SOCKET_ACTION, *PWEB_SOCKET_ACTION;

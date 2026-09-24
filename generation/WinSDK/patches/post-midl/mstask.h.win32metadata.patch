@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
-index 622f492e8e..123dc3d324 100644
+index 622f492e8e..05cf864a00 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSTask.h
 @@ -1,3 +1,4 @@
@@ -66,6 +66,15 @@ index 622f492e8e..123dc3d324 100644
      ITaskScheduler : public IUnknown
      {
      public:
+@@ -1733,7 +1734,7 @@ DEFINE_GUID(CLSID_CTask, 0x148BD520, 0xA2AB, 0x11CE, 0xB1, 0x1F, 0x00, 0xAA, 0x0
+ DEFINE_GUID(CLSID_CTaskScheduler, 0x148BD52A, 0xA2AB, 0x11CE, 0xB1, 0x1F, 0x00, 0xAA, 0x00, 0x53, 0x05, 0x03);
+  
+ 
+-typedef struct _PSP *HPROPSHEETPAGE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyPropertySheetPage") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _PSP *HPROPSHEETPAGE;
+ 
+ typedef 
+ enum _TASKPAGE
 @@ -1762,7 +1763,7 @@ EXTERN_C const IID IID_IProvideTaskPage;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
