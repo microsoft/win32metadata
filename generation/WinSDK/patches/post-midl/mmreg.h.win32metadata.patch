@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h b/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
-index 55920c8e3f..b051360d1e 100644
+index 55920c8e3f..a26ba315bd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/mmreg.h
 @@ -1,4 +1,5 @@
@@ -17,38 +17,10 @@ index 55920c8e3f..b051360d1e 100644
    WORD          nBlockSize;
    WORD          nFramesPerBlock;
    WORD          nCodecDelay;
-@@ -3153,7 +3154,7 @@ typedef MPEGLAYER3WAVEFORMAT FAR     *LPMPEGLAYER3WAVEFORMAT;
-  }
- */
+@@ -3077,6 +3078,24 @@ typedef MPEGLAYER3WAVEFORMAT FAR     *LPMPEGLAYER3WAVEFORMAT;
+ #define MPEGLAYER3_FLAG_PADDING_ON       0x00000001
+ #define MPEGLAYER3_FLAG_PADDING_OFF      0x00000002
  
--typedef struct heaacwaveinfo_tag {
-+typedef struct   heaacwaveinfo_tag {
- 
-     // Defines core AAC properties. See description above. WAVEFORMATEX is of size 18 bytes.
-     WAVEFORMATEX wfx;
-@@ -3203,7 +3204,7 @@ typedef HEAACWAVEINFO FAR  *LPHEAACWAVEINFO;
- //
- // This structure describes the format block for wStructType=0
- //
--typedef struct heaacwaveformat_tag {
-+typedef struct   heaacwaveformat_tag {
- 
-     HEAACWAVEINFO wfInfo; // This structure has a size of 30 bytes
-     BYTE          pbAudioSpecificConfig[1];  // First byte of AudioSpecificConfig()
-@@ -3446,7 +3447,7 @@ typedef CSIMAADPCMWAVEFORMAT  FAR  *LPCSIMAADPCMWAVEFORMAT;
- #define WAVE_FILTER_UNKNOWN         0x0000
- #define WAVE_FILTER_DEVELOPMENT    (0xFFFF)
- 
--typedef struct wavefilter_tag {
-+typedef struct   wavefilter_tag {
-     DWORD   cbStruct;           /* Size of the filter in bytes */
-     DWORD   dwFilterTag;        /* filter type */
-     DWORD   fdwFilter;          /* Flags for the filter (Universal Dfns) */
-@@ -3809,6 +3810,25 @@ typedef struct {
- #pragma pack(pop)  /* Assume byte packing throughout */
- cpp_quote("#endif /* 0 */")
- 
-+
 +#ifdef WIN32METADATA
 +#pragma push_macro("MPEGLAYER3_FLAG_PADDING_ISO")
 +#undef MPEGLAYER3_FLAG_PADDING_ISO
@@ -66,6 +38,43 @@ index 55920c8e3f..b051360d1e 100644
 +#pragma pop_macro("MPEGLAYER3_FLAG_PADDING_ON")
 +#pragma pop_macro("MPEGLAYER3_FLAG_PADDING_ISO")
 +#endif
++
+ /* ==========================================================================
+ 
+       For WAVE_FORMAT_MPEG_HEAAC (0x1610)
+@@ -3153,7 +3172,7 @@ typedef MPEGLAYER3WAVEFORMAT FAR     *LPMPEGLAYER3WAVEFORMAT;
+  }
+ */
+ 
+-typedef struct heaacwaveinfo_tag {
++typedef struct   heaacwaveinfo_tag {
+ 
+     // Defines core AAC properties. See description above. WAVEFORMATEX is of size 18 bytes.
+     WAVEFORMATEX wfx;
+@@ -3203,7 +3222,7 @@ typedef HEAACWAVEINFO FAR  *LPHEAACWAVEINFO;
+ //
+ // This structure describes the format block for wStructType=0
+ //
+-typedef struct heaacwaveformat_tag {
++typedef struct   heaacwaveformat_tag {
+ 
+     HEAACWAVEINFO wfInfo; // This structure has a size of 30 bytes
+     BYTE          pbAudioSpecificConfig[1];  // First byte of AudioSpecificConfig()
+@@ -3446,7 +3465,7 @@ typedef CSIMAADPCMWAVEFORMAT  FAR  *LPCSIMAADPCMWAVEFORMAT;
+ #define WAVE_FILTER_UNKNOWN         0x0000
+ #define WAVE_FILTER_DEVELOPMENT    (0xFFFF)
+ 
+-typedef struct wavefilter_tag {
++typedef struct   wavefilter_tag {
+     DWORD   cbStruct;           /* Size of the filter in bytes */
+     DWORD   dwFilterTag;        /* filter type */
+     DWORD   fdwFilter;          /* Flags for the filter (Universal Dfns) */
+@@ -3809,6 +3828,9 @@ typedef struct {
+ #pragma pack(pop)  /* Assume byte packing throughout */
+ cpp_quote("#endif /* 0 */")
+ 
++
++
 +
  #endif /* __midl */
  
