@@ -96,6 +96,37 @@ typedef struct _WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS {
 } WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS, *PWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS;
 typedef const WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS *PCWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS;
 
+typedef struct _WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2 {
+    // Authenticator Name
+    LPCWSTR pwszAuthenticatorName;
+
+    // Plugin COM ClsId
+    const CLSID* pClsid;
+
+    // Plugin RPID (Required for a nested WebAuthN call originating from a plugin)
+    LPCWSTR pwszPluginRpId;
+
+    // Plugin Authenticator Logo for the Light themes. base64 encoded SVG 1.1 (Optional)
+    LPCWSTR pwszLightThemeLogoSvg;
+
+    // Plugin Authenticator Logo for the Dark themes. base64 encoded SVG 1.1 (Optional)
+    LPCWSTR pwszDarkThemeLogoSvg;
+
+    // CTAP CBOR encoded authenticatorGetInfo
+    DWORD cbAuthenticatorInfo;
+    _Field_size_bytes_(cbAuthenticatorInfo)
+    const BYTE* pbAuthenticatorInfo;
+
+    // List of supported RP IDs (Relying Party IDs). Should be 0/nullptr if all RPs are supported.
+    DWORD cSupportedRpIds;
+    const LPCWSTR* ppwszSupportedRpIds;
+
+    // String name used in KeyCredentialManager.RequestCreateAsync called from the same App context (Optional)
+    LPCWSTR pwszUserVerificationKeyName;
+
+} WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2, *PWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2;
+typedef const WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2 *PCWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2;
+
 typedef struct _EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2 {
     // Authenticator Name
     LPCWSTR pwszAuthenticatorName;
@@ -140,6 +171,12 @@ HRESULT
 WINAPI
 WebAuthNPluginAddAuthenticator(
     _In_ PCWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS pPluginAddAuthenticatorOptions,
+    _Outptr_result_maybenull_ PWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE* ppPluginAddAuthenticatorResponse);
+
+HRESULT
+WINAPI
+WebAuthNPluginAddAuthenticator2(
+    _In_ PCWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS_2 pPluginAddAuthenticatorOptions,
     _Outptr_result_maybenull_ PWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE* ppPluginAddAuthenticatorResponse);
 
 HRESULT
@@ -194,6 +231,37 @@ typedef struct _WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS {
 } WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS, *PWEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS;
 typedef const WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS *PCWEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS;
 
+typedef struct _WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2 {
+    // Authenticator Name
+    LPCWSTR pwszAuthenticatorName;
+
+    // Plugin COM ClsId
+    const CLSID* pClsid;
+
+    // New Plugin COM ClsId
+    const CLSID* pClsidNew;
+
+    // Plugin Authenticator Logo for the Light themes. base64 encoded SVG 1.1 (Optional, NULL removes this)
+    LPCWSTR pwszLightThemeLogoSvg;
+
+    // Plugin Authenticator Logo for the Dark themes. base64 encoded SVG 1.1 (Optional, NULL removes this)
+    LPCWSTR pwszDarkThemeLogoSvg;
+
+    // CTAP CBOR encoded authenticatorGetInfo
+    DWORD cbAuthenticatorInfo;
+    _Field_size_bytes_(cbAuthenticatorInfo)
+    const BYTE* pbAuthenticatorInfo;
+
+    // List of supported RP IDs (Relying Party IDs). Should be 0/nullptr if all RPs are supported.
+    DWORD cSupportedRpIds;
+    const LPCWSTR* ppwszSupportedRpIds;
+
+    // String name used in KeyCredentialManager.RequestCreateAsync (Optional, NULL removes this)
+    LPCWSTR pwszUserVerificationKeyName;
+
+} WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2, *PWEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2;
+typedef const WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2 *PCWEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2;
+
 typedef struct _EXPERIMENTAL_WEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2 {
     // Authenticator Name
     LPCWSTR pwszAuthenticatorName;
@@ -229,6 +297,11 @@ HRESULT
 WINAPI
 WebAuthNPluginUpdateAuthenticatorDetails(
     _In_ PCWEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS pPluginUpdateAuthenticatorDetails);
+
+HRESULT
+WINAPI
+WebAuthNPluginUpdateAuthenticatorDetails2(
+    _In_ PCWEBAUTHN_PLUGIN_UPDATE_AUTHENTICATOR_DETAILS_2 pPluginUpdateAuthenticatorDetails);
 
 HRESULT
 WINAPI
@@ -345,6 +418,28 @@ typedef struct _WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST {
 } WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST, *PWEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST;
 typedef const WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST *PCWEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST;
 
+typedef struct _WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2 {
+
+    // Windows handle of the top-level window displayed by the plugin and currently is in foreground as part of the ongoing webauthn operation.
+    HWND hwnd;
+
+    // The webauthn transaction id from the WEBAUTHN_PLUGIN_OPERATION_REQUEST
+    const GUID* pGuidTransactionId;
+
+    // The username attached to the credential that is in use for this webauthn operation
+    LPCWSTR pwszUsername;
+
+    // A text hint displayed on the windows hello prompt
+    LPCWSTR pwszDisplayHint;
+
+    // The custom byte buffer to be signed by the UV key (Optional)
+    // Depending on the signing algorithm, this input may be expected to be a hash. This API will not do any hashing prior to signing.
+    DWORD cbBufferToSign;
+    _Field_size_bytes_(cbBufferToSign)
+    PBYTE pbBufferToSign;
+} WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2, *PWEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2;
+typedef const WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2 *PCWEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2;
+
 typedef struct _EXPERIMENTAL_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2 {
 
     // Windows handle of the top-level window displayed by the plugin and currently is in foreground as part of the ongoing webauthn operation.
@@ -371,6 +466,13 @@ HRESULT
 WINAPI
 WebAuthNPluginPerformUserVerification(
     _In_ PCWEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST pPluginUserVerification,
+    _Out_ DWORD* pcbResponse,
+    _Outptr_result_buffer_maybenull_(*pcbResponse) PBYTE* ppbResponse);
+
+HRESULT
+WINAPI
+WebAuthNPluginPerformUserVerification2(
+    _In_ PCWEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST_2 pPluginUserVerification,
     _Out_ DWORD* pcbResponse,
     _Outptr_result_buffer_maybenull_(*pcbResponse) PBYTE* ppbResponse);
 
