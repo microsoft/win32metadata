@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/http.h b/generation/WinSDK/RecompiledIdlHeaders/um/http.h
-index 4178ef13d1..cd950fa572 100644
+index 4178ef13d1..d2f0560187 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/http.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/http.h
 @@ -1,3 +1,4 @@
@@ -101,7 +101,7 @@ index 4178ef13d1..cd950fa572 100644
      _Reserved_ IN OUT PVOID pReserved
      );
  
-@@ -3027,11 +3028,11 @@ HttpTerminate(
+@@ -3027,12 +3028,12 @@ HttpTerminate(
  // HttpCreateHttpHandle() API.
  //
  
@@ -111,10 +111,12 @@ index 4178ef13d1..cd950fa572 100644
  WINAPI
  HttpCreateHttpHandle(
 -    OUT PHANDLE RequestQueueHandle,
+-    _Reserved_ ULONG Reserved
 +    _Win32_RAIIFree_(CloseHandle, -1, 0) OUT PHANDLE RequestQueueHandle,
-     _Reserved_ ULONG Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Reserved
      );
  
+ #if _WIN32_WINNT >= 0x0600
 @@ -3044,7 +3045,7 @@ HttpCreateHttpHandle(
  // created by the HttpCreateRequestQueue API.
  //
@@ -145,8 +147,14 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpSetRequestQueueProperty(
-@@ -3074,7 +3075,7 @@ HttpSetRequestQueueProperty(
-     _Reserved_ PVOID Reserved2
+@@ -3070,11 +3071,11 @@ HttpSetRequestQueueProperty(
+     _In_ HTTP_SERVER_PROPERTY Property,
+     _In_reads_bytes_(PropertyInformationLength) PVOID PropertyInformation,
+     _In_ ULONG PropertyInformationLength,
+-    _Reserved_ ULONG Reserved1,
+-    _Reserved_ PVOID Reserved2
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Reserved1,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved2
      );
  
 -HTTPAPI_LINKAGE
@@ -154,6 +162,18 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpQueryRequestQueueProperty(
+@@ -3082,9 +3083,9 @@ HttpQueryRequestQueueProperty(
+     _In_ HTTP_SERVER_PROPERTY Property,
+     _Out_writes_bytes_to_opt_(PropertyInformationLength, *ReturnLength) PVOID PropertyInformation,
+     _In_ ULONG PropertyInformationLength,
+-    _Reserved_ ULONG Reserved1,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Reserved1,
+     _Out_opt_ PULONG ReturnLength,
+-    _Reserved_ PVOID Reserved2
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved2
+     );
+ 
+ HTTPAPI_LINKAGE
 @@ -3114,7 +3115,7 @@ HttpQueryRequestProperty(
      _In_opt_ LPOVERLAPPED Overlapped
      );
@@ -216,7 +236,7 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpSetServerSessionProperty(
-@@ -3190,7 +3191,7 @@ HttpSetServerSessionProperty(
+@@ -3190,16 +3191,16 @@ HttpSetServerSessionProperty(
  // Url Configuration APIs. Can only be used for V1 request queues.
  //
  
@@ -225,8 +245,10 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpAddUrl(
-@@ -3199,7 +3200,7 @@ HttpAddUrl(
-     _Reserved_ PVOID Reserved
+     IN HANDLE RequestQueueHandle,
+     IN PCWSTR FullyQualifiedUrl,
+-    _Reserved_ PVOID Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved
      );
  
 -HTTPAPI_LINKAGE
@@ -287,7 +309,7 @@ index 4178ef13d1..cd950fa572 100644
  _Success_(return == NO_ERROR)
  ULONG
  WINAPI
-@@ -3274,7 +3275,7 @@ HttpQueryUrlGroupProperty(
+@@ -3274,12 +3275,12 @@ HttpQueryUrlGroupProperty(
  
  #if _WIN32_WINNT >= _WIN32_WINNT_WIN8
  
@@ -296,6 +318,13 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpPrepareUrl(
+-    _Reserved_ PVOID Reserved,
+-    _Reserved_ ULONG Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Flags,
+     _In_ PCWSTR Url,
+     _Outptr_ PWSTR *PreparedUrl
+     );
 @@ -3290,20 +3291,20 @@ HttpPrepareUrl(
  // HTTP Server I/O APIs.
  //
@@ -336,13 +365,30 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpSendHttpResponse(
-@@ -3330,7 +3331,7 @@ HttpSendHttpResponse(
+@@ -3328,9 +3329,9 @@ HttpSendHttpResponse(
+     IN PHTTP_RESPONSE HttpResponse,
+     IN PHTTP_CACHE_POLICY CachePolicy OPTIONAL,
      OUT PULONG BytesSent OPTIONAL,
-     _Reserved_ PVOID Reserved1,
-     _Reserved_ ULONG Reserved2,
+-    _Reserved_ PVOID Reserved1,
+-    _Reserved_ ULONG Reserved2,
 -    IN LPOVERLAPPED Overlapped OPTIONAL,
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved1,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Reserved2,
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL,
      IN PHTTP_LOG_DATA LogData OPTIONAL
+     );
+ 
+@@ -3346,9 +3347,9 @@ HttpSendHttpResponse(
+     IN PHTTP_RESPONSE pHttpResponse,
+     IN PVOID pReserved1 OPTIONAL, // must be NULL
+     OUT PULONG pBytesSent OPTIONAL,
+-    _Reserved_ PVOID pReserved2, // must be NULL
+-    _Reserved_ ULONG Reserved3, // must be 0
+-    IN LPOVERLAPPED pOverlapped OPTIONAL,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved2, // must be NULL
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Reserved3, // must be 0
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPOVERLAPPED pOverlapped OPTIONAL,
+     IN PVOID pReserved4 OPTIONAL  // must be NULL
      );
  
 @@ -3356,7 +3357,7 @@ HttpSendHttpResponse(
@@ -359,11 +405,18 @@ index 4178ef13d1..cd950fa572 100644
      _Reserved_ PVOID Reserved1 OPTIONAL,
      _Reserved_ ULONG Reserved2 OPTIONAL,
 -    IN LPOVERLAPPED Overlapped OPTIONAL,
-+    _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL,
++    _WIN32META_ANNOTATION_("win32metadata:out") _Win32_Retained_ IN LPOVERLAPPED Overlapped OPTIONAL,
      IN PHTTP_LOG_DATA LogData OPTIONAL
      );
  
-@@ -3393,7 +3394,7 @@ HttpSendResponseEntityBody(
+@@ -3387,13 +3388,13 @@ HttpSendResponseEntityBody(
+     OUT PULONG pBytesSent OPTIONAL,
+     _Reserved_ PVOID pReserved1 OPTIONAL, // must be NULL
+     _Reserved_ ULONG Reserved2 OPTIONAL, // must be 0
+-    IN LPOVERLAPPED pOverlapped OPTIONAL,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPOVERLAPPED pOverlapped OPTIONAL,
+     IN PVOID pReserved3 OPTIONAL  // must be NULL
+     );
  
  #endif // _WIN32_WINNT >= 0x0600
  
@@ -452,7 +505,7 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpReadFragmentFromCache(
-@@ -3508,14 +3509,14 @@ HttpReadFragmentFromCache(
+@@ -3508,58 +3509,58 @@ HttpReadFragmentFromCache(
      _Out_writes_bytes_to_(BufferLength, *BytesRead) PVOID Buffer,
      IN ULONG BufferLength,
      _Out_opt_ PULONG BytesRead,
@@ -469,8 +522,13 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpSetServiceConfiguration(
-@@ -3526,7 +3527,7 @@ HttpSetServiceConfiguration(
-     _Reserved_ LPOVERLAPPED pOverlapped
+-    _Reserved_ HANDLE ServiceHandle,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HANDLE ServiceHandle,
+     _In_ HTTP_SERVICE_CONFIG_ID ConfigId,
+     _In_reads_bytes_(ConfigInformationLength) PVOID pConfigInformation,
+     _In_ ULONG ConfigInformationLength,
+-    _Reserved_ LPOVERLAPPED pOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPOVERLAPPED pOverlapped
      );
  
 -HTTPAPI_LINKAGE
@@ -478,8 +536,13 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpUpdateServiceConfiguration(
-@@ -3537,7 +3538,7 @@ HttpUpdateServiceConfiguration(
-     _Reserved_ LPOVERLAPPED Overlapped
+-    _Reserved_ HANDLE Handle,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HANDLE Handle,
+     _In_ HTTP_SERVICE_CONFIG_ID ConfigId,
+     _In_reads_bytes_(ConfigInfoLength) PVOID ConfigInfo,
+     _In_ ULONG ConfigInfoLength,
+-    _Reserved_ LPOVERLAPPED Overlapped
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPOVERLAPPED Overlapped
      );
  
 -HTTPAPI_LINKAGE
@@ -487,8 +550,13 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpDeleteServiceConfiguration(
-@@ -3548,7 +3549,7 @@ HttpDeleteServiceConfiguration(
-     _Reserved_ LPOVERLAPPED pOverlapped
+-    _Reserved_ HANDLE ServiceHandle,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HANDLE ServiceHandle,
+     _In_ HTTP_SERVICE_CONFIG_ID ConfigId,
+     _In_reads_bytes_(ConfigInformationLength) PVOID pConfigInformation,
+     _In_ ULONG ConfigInformationLength,
+-    _Reserved_ LPOVERLAPPED pOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPOVERLAPPED pOverlapped
      );
  
 -HTTPAPI_LINKAGE
@@ -496,6 +564,19 @@ index 4178ef13d1..cd950fa572 100644
  ULONG
  WINAPI
  HttpQueryServiceConfiguration(
+-    _Reserved_ HANDLE ServiceHandle,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HANDLE ServiceHandle,
+     _In_ HTTP_SERVICE_CONFIG_ID ConfigId,
+     _In_reads_bytes_opt_(InputLength) PVOID pInput,
+     _In_ ULONG InputLength,
+     _Out_writes_bytes_to_opt_(OutputLength, *pReturnLength) PVOID pOutput,
+     _In_ ULONG OutputLength,
+     _Out_opt_ PULONG pReturnLength,
+-    _Reserved_ LPOVERLAPPED pOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPOVERLAPPED pOverlapped
+     );
+ 
+ ULONG
 @@ -3582,5 +3583,34 @@ HttpGetExtension(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion

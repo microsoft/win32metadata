@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
-index 7b3cad0d54..8e47dc516c 100644
+index 7b3cad0d54..08763a45f6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi.h
 @@ -17,6 +17,7 @@
@@ -222,8 +222,12 @@ index 7b3cad0d54..8e47dc516c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -258,6 +355,8 @@ WriteConsoleA(
-     _Reserved_ LPVOID lpReserved
+@@ -255,9 +352,11 @@ WriteConsoleA(
+     _In_reads_(nNumberOfCharsToWrite) CONST VOID* lpBuffer,
+     _In_ DWORD nNumberOfCharsToWrite,
+     _Out_opt_ LPDWORD lpNumberOfCharsWritten,
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
      );
  
 +
@@ -231,6 +235,15 @@ index 7b3cad0d54..8e47dc516c 100644
  WINBASEAPI
  BOOL
  WINAPI
+@@ -266,7 +365,7 @@ WriteConsoleW(
+     _In_reads_(nNumberOfCharsToWrite) CONST VOID* lpBuffer,
+     _In_ DWORD nNumberOfCharsToWrite,
+     _Out_opt_ LPDWORD lpNumberOfCharsWritten,
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
+     );
+ 
+ #ifdef UNICODE
 @@ -297,6 +396,8 @@ BOOL
      _In_ DWORD CtrlType
      );

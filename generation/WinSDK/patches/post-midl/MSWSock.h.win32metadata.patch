@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
-index e067444153..3cfff82b37 100644
+index e067444153..370a0e04a3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -10,7 +10,19 @@ index e067444153..3cfff82b37 100644
  
  #if !defined(_WINSOCK_DEPRECATED_BY)
  #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
-@@ -127,7 +128,7 @@ extern "C" {
+@@ -104,7 +105,11 @@ extern "C" {
+  *
+  * This Ioctl code is available only on WinXP SP2 and Win2k3 SP1.
+  */
++#endif
++#if (defined(WIN32METADATA) && !defined(SIO_SOCKET_CLOSE_NOTIFY)) || (((((_WIN32_WINNT < 0x0600) && (_WIN32_WINNT >= 0x0501)))))
+ #define SIO_SOCKET_CLOSE_NOTIFY     _WSAIOW(IOC_VENDOR,13)
++#endif
++#if((_WIN32_WINNT < 0x0600) && (_WIN32_WINNT >= 0x0501))
+ 
+ #endif //(_WIN32_WINNT < 0x0600 && _WIN32_WINNT >= 0x0501)
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -127,7 +132,7 @@ extern "C" {
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  _WINSOCK_DEPRECATED_BY("WSARecv()")
  #if(_WIN32_WINNT < 0x0600)
@@ -19,7 +31,7 @@ index e067444153..3cfff82b37 100644
  PASCAL FAR
  WSARecvEx(
      _In_ SOCKET s,
-@@ -136,7 +137,7 @@ WSARecvEx(
+@@ -136,7 +141,7 @@ WSARecvEx(
      _Inout_ int FAR *flags
      );
  #else //(_WIN32_WINNT < 0x0600)
@@ -28,7 +40,7 @@ index e067444153..3cfff82b37 100644
  PASCAL FAR
  WSARecvEx(
      _In_ SOCKET s,
-@@ -148,7 +149,7 @@ WSARecvEx(
+@@ -148,7 +153,7 @@ WSARecvEx(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
@@ -37,7 +49,7 @@ index e067444153..3cfff82b37 100644
      LPVOID Head;
      DWORD HeadLength;
      LPVOID Tail;
-@@ -162,9 +163,10 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
+@@ -162,9 +167,10 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
  #define TF_USE_SYSTEM_THREAD  0x10
  #define TF_USE_KERNEL_APC     0x20
  
@@ -49,7 +61,7 @@ index e067444153..3cfff82b37 100644
      _In_ SOCKET hSocket,
      _In_ HANDLE hFile,
      _In_ DWORD nNumberOfBytesToWrite,
-@@ -174,9 +176,10 @@ TransmitFile (
+@@ -174,9 +180,10 @@ TransmitFile (
      _In_  DWORD dwReserved
      );
  
@@ -61,7 +73,7 @@ index e067444153..3cfff82b37 100644
      _In_ SOCKET sListenSocket,
      _In_ SOCKET sAcceptSocket,
      _Out_writes_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
-@@ -187,9 +190,10 @@ AcceptEx (
+@@ -187,9 +194,10 @@ AcceptEx (
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -73,7 +85,7 @@ index e067444153..3cfff82b37 100644
      _In_reads_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
      _In_ DWORD dwReceiveDataLength,
      _In_ DWORD dwLocalAddressLength,
-@@ -395,7 +399,7 @@ typedef struct _NLA_BLOB {
+@@ -395,7 +403,7 @@ typedef struct _NLA_BLOB {
          // header.type -> NLA_CONNECTIVITY
          struct {
              NLA_CONNECTIVITY_TYPE type;
@@ -82,7 +94,7 @@ index e067444153..3cfff82b37 100644
          } connectivity;
  
          // header.type -> NLA_ICS
-@@ -635,7 +639,7 @@ typedef INT (PASCAL FAR * LPFN_RIONOTIFY)(
+@@ -635,7 +643,7 @@ typedef INT (PASCAL FAR * LPFN_RIONOTIFY)(
  );
  
  typedef RIO_BUFFERID (PASCAL FAR * LPFN_RIOREGISTERBUFFER)(
@@ -91,7 +103,7 @@ index e067444153..3cfff82b37 100644
      _In_ DWORD DataLength
  );
  
-@@ -650,7 +654,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIORESIZEREQUESTQUEUE) (
+@@ -650,7 +658,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIORESIZEREQUESTQUEUE) (
      _In_ DWORD MaxOutstandingSend
  );
  

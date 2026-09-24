@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
-index b40e7819c5..e9f5076b4b 100644
+index b40e7819c5..1f8207fa89 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/libloaderapi.h
 @@ -15,6 +15,7 @@
@@ -159,7 +159,7 @@ index b40e7819c5..e9f5076b4b 100644
  WINBASEAPI
  FARPROC
  WINAPI
-@@ -332,6 +360,9 @@ typedef struct _REDIRECTION_DESCRIPTOR {
+@@ -332,24 +360,30 @@ typedef struct _REDIRECTION_DESCRIPTOR {
  
  typedef const REDIRECTION_DESCRIPTOR *PCREDIRECTION_DESCRIPTOR;
  
@@ -169,11 +169,12 @@ index b40e7819c5..e9f5076b4b 100644
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
-@@ -339,9 +370,12 @@ WINAPI
+ WINAPI
  LoadLibraryExA(
      _In_ LPCSTR lpLibFileName,
-     _Reserved_ HANDLE hFile,
+-    _Reserved_ HANDLE hFile,
 -    _In_ DWORD dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HANDLE hFile,
 +    _In_ _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) DWORD dwFlags
      );
  
@@ -183,11 +184,12 @@ index b40e7819c5..e9f5076b4b 100644
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
-@@ -349,7 +383,7 @@ WINAPI
+ WINAPI
  LoadLibraryExW(
      _In_ LPCWSTR lpLibFileName,
-     _Reserved_ HANDLE hFile,
+-    _Reserved_ HANDLE hFile,
 -    _In_ DWORD dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HANDLE hFile,
 +    _In_ _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) DWORD dwFlags
      );
  

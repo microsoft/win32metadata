@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
-index 69cba58388..6028e6e30c 100644
+index 69cba58388..1430b9e6b8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
 @@ -1,3 +1,4 @@
@@ -350,3 +350,17 @@ index 69cba58388..6028e6e30c 100644
      _In_opt_ PNCryptBufferDesc pParameterList,
      _In_    DWORD dwFlags);
  #endif  //(NTDDI_VERSION >= NTDDI_WIN10_VB)
+@@ -1589,9 +1590,13 @@ typedef NTSTATUS
+     _In_    ULONG dwFlags);
+ 
+ #ifdef KERNEL_MODE_CNG
++#endif
++#if (defined(WIN32METADATA) && !defined(CRYPT_PROVIDER_IOCTL__GET_SCHANNEL_INTERFACE)) || (((defined(KERNEL_MODE_CNG))))
+ #define CRYPT_PROVIDER_IOCTL__GET_SCHANNEL_INTERFACE \
+     CTL_CODE(FILE_DEVICE_CRYPT_PROVIDER, 0x0007, METHOD_BUFFERED, FILE_READ_ACCESS)
+ #endif
++#ifdef KERNEL_MODE_CNG
++#endif
+ 
+ SECURITY_STATUS
+ WINAPI

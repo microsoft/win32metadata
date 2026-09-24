@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
-index 091f30b30d..4a0a26730b 100644
+index 091f30b30d..1331779c5b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincred.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -156,7 +156,7 @@ index 091f30b30d..4a0a26730b 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -881,22 +884,24 @@ CredWriteA (
+@@ -881,23 +884,25 @@ CredWriteA (
  #endif // UNICODE
  
  
@@ -167,8 +167,9 @@ index 091f30b30d..4a0a26730b 100644
  CredReadW (
      _In_ LPCWSTR TargetName,
 -    _In_ DWORD Type,
+-    _Reserved_ DWORD Flags,
 +    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
-     _Reserved_ DWORD Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Flags,
      _Out_ PCREDENTIALW *Credential
      );
  
@@ -179,10 +180,12 @@ index 091f30b30d..4a0a26730b 100644
  CredReadA (
      _In_ LPCSTR TargetName,
 -    _In_ DWORD Type,
+-    _Reserved_ DWORD Flags,
 +    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
-     _Reserved_ DWORD Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Flags,
      _Out_ PCREDENTIALA *Credential
      );
+ 
 @@ -914,22 +919,24 @@ CredReadA (
  
  #define CRED_ENUMERATE_ALL_CREDENTIALS 0x1
@@ -194,7 +197,7 @@ index 091f30b30d..4a0a26730b 100644
  CredEnumerateW (
      _In_opt_ LPCWSTR Filter,
 -    _Reserved_ DWORD Flags,
-+    _Win32_AssociatedEnum_(CRED_ENUMERATE_FLAGS) _Reserved_ DWORD Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Win32_AssociatedEnum_(CRED_ENUMERATE_FLAGS) _Reserved_ DWORD Flags,
      _Out_ DWORD *Count,
      _Outptr_result_buffer_(*Count) PCREDENTIALW **Credential
      );
@@ -206,7 +209,7 @@ index 091f30b30d..4a0a26730b 100644
  CredEnumerateA (
      _In_opt_ LPCSTR Filter,
 -    _Reserved_ DWORD Flags,
-+    _Win32_AssociatedEnum_(CRED_ENUMERATE_FLAGS) _Reserved_ DWORD Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Win32_AssociatedEnum_(CRED_ENUMERATE_FLAGS) _Reserved_ DWORD Flags,
      _Out_ DWORD *Count,
      _Outptr_result_buffer_(*Count) PCREDENTIALA **Credential
      );
@@ -242,7 +245,7 @@ index 091f30b30d..4a0a26730b 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1001,21 +1012,23 @@ CredReadDomainCredentialsA (
+@@ -1001,22 +1012,24 @@ CredReadDomainCredentialsA (
  #endif // UNICODE
  
  
@@ -253,8 +256,9 @@ index 091f30b30d..4a0a26730b 100644
  CredDeleteW (
      _In_ LPCWSTR TargetName,
 -    _In_ DWORD Type,
+-    _Reserved_ DWORD Flags
 +    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
-     _Reserved_ DWORD Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Flags
      );
  
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
@@ -264,11 +268,13 @@ index 091f30b30d..4a0a26730b 100644
  CredDeleteA (
      _In_ LPCSTR TargetName,
 -    _In_ DWORD Type,
+-    _Reserved_ DWORD Flags
 +    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
-     _Reserved_ DWORD Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Flags
      );
  
-@@ -1031,23 +1044,25 @@ CredDeleteA (
+ #ifdef UNICODE
+@@ -1031,24 +1044,26 @@ CredDeleteA (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -280,8 +286,9 @@ index 091f30b30d..4a0a26730b 100644
      _In_ LPCWSTR OldTargetName,
      _In_ LPCWSTR NewTargetName,
 -    _In_ DWORD Type,
+-    _Reserved_ DWORD Flags
 +    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
-     _Reserved_ DWORD Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Flags
      );
  
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_  
@@ -292,10 +299,12 @@ index 091f30b30d..4a0a26730b 100644
      _In_ LPCSTR OldTargetName,
      _In_ LPCSTR NewTargetName,
 -    _In_ DWORD Type,
+-    _Reserved_ DWORD Flags
 +    _Win32_AssociatedEnum_(CRED_TYPE) _In_ DWORD Type,
-     _Reserved_ DWORD Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Flags
      );
  
+ #ifdef UNICODE
 @@ -1070,6 +1085,7 @@ CredRenameA (
  #define CRED_ALLOW_NAME_RESOLUTION 0x1
  
@@ -503,7 +512,7 @@ index 091f30b30d..4a0a26730b 100644
  WINADVAPI
  VOID
  WINAPI
-@@ -1406,7 +1443,8 @@ CredFree (
+@@ -1406,36 +1443,38 @@ CredFree (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -513,7 +522,13 @@ index 091f30b30d..4a0a26730b 100644
  DWORD
  WINAPI
  CredUIPromptForCredentialsW(
-@@ -1419,10 +1457,11 @@ CredUIPromptForCredentialsW(
+     _In_opt_ PCREDUI_INFOW pUiInfo,
+     _In_opt_ PCWSTR pszTargetName,
+-    _Reserved_ PCtxtHandle pContext,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PCtxtHandle pContext,
+     _In_ DWORD dwAuthError,
+     _Inout_updates_(ulUserNameBufferSize) PWSTR pszUserName,
+     _In_ ULONG ulUserNameBufferSize,
      _Inout_updates_(ulPasswordBufferSize) PWSTR pszPassword,
      _In_ ULONG ulPasswordBufferSize,
      _Inout_opt_ BOOL *save,
@@ -527,7 +542,13 @@ index 091f30b30d..4a0a26730b 100644
  DWORD
  WINAPI
  CredUIPromptForCredentialsA(
-@@ -1435,7 +1474,7 @@ CredUIPromptForCredentialsA(
+     _In_opt_ PCREDUI_INFOA pUiInfo,
+     _In_opt_ PCSTR pszTargetName,
+-    _Reserved_ PCtxtHandle pContext,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PCtxtHandle pContext,
+     _In_ DWORD dwAuthError,
+     _Inout_updates_(ulUserNameBufferSize) PSTR  pszUserName,
+     _In_ ULONG ulUserNameBufferSize,
      _Inout_updates_(ulPasswordBufferSize) PSTR pszPassword,
      _In_ ULONG ulPasswordBufferSize,
      _Inout_opt_ BOOL *save,
@@ -589,7 +610,7 @@ index 091f30b30d..4a0a26730b 100644
  DWORD
  WINAPI
  CredUIParseUserNameA(
-@@ -1511,7 +1554,8 @@ CredUIParseUserNameA(
+@@ -1511,34 +1554,36 @@ CredUIParseUserNameA(
  
  
  
@@ -599,7 +620,12 @@ index 091f30b30d..4a0a26730b 100644
  DWORD
  WINAPI
  CredUICmdLinePromptForCredentialsW(
-@@ -1523,10 +1567,11 @@ CredUICmdLinePromptForCredentialsW(
+     _In_opt_ PCWSTR pszTargetName,
+-    _Reserved_ PCtxtHandle pContext,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PCtxtHandle pContext,
+     _In_ DWORD dwAuthError,
+     _Inout_updates_(ulUserBufferSize) PWSTR UserName,
+     _In_ ULONG ulUserBufferSize,
      _Inout_updates_(ulPasswordBufferSize) PWSTR pszPassword,
      _In_ ULONG ulPasswordBufferSize,
      _Inout_opt_ PBOOL pfSave,
@@ -613,7 +639,12 @@ index 091f30b30d..4a0a26730b 100644
  DWORD
  WINAPI
  CredUICmdLinePromptForCredentialsA(
-@@ -1538,7 +1583,7 @@ CredUICmdLinePromptForCredentialsA(
+     _In_opt_ PCSTR pszTargetName,
+-    _Reserved_ PCtxtHandle pContext,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PCtxtHandle pContext,
+     _In_ DWORD dwAuthError,
+     _Inout_updates_(ulUserBufferSize) PSTR UserName,
+     _In_ ULONG ulUserBufferSize,
      _Inout_updates_(ulPasswordBufferSize) PSTR pszPassword,
      _In_ ULONG ulPasswordBufferSize,
      _Inout_opt_ PBOOL pfSave,

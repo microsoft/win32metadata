@@ -1,0 +1,145 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WindowsSearchErrors.h b/generation/WinSDK/RecompiledIdlHeaders/um/WindowsSearchErrors.h
+index 0e262a16e8..5b10a9c804 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WindowsSearchErrors.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WindowsSearchErrors.h
+@@ -6313,7 +6313,11 @@
+ //
+ // The property store for upgrade is corrupted.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_E_CORRUPT_PROPERTY_STORE)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_E_CORRUPT_PROPERTY_STORE     0x8004363AL
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+   // NewLocStr 12/26
+   // not used for MSFTESQL
+@@ -6324,7 +6328,11 @@
+ //
+ // The workid is not valid for the property store.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_E_PROPERTY_STORE_WORKID_NOTVALID)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_E_PROPERTY_STORE_WORKID_NOTVALID 0x8004363BL
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+   // NewLocStr 12/26
+   // not used for MSFTESQL
+@@ -6335,7 +6343,11 @@
+ //
+ // The enumeration has finished for the property store.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_S_PROPERTY_STORE_END_OF_ENUMERATION)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_S_PROPERTY_STORE_END_OF_ENUMERATION 0x0004363CL
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+   // NewLocStr 12/26
+   // not used for MSFTESQL
+@@ -6346,7 +6358,11 @@
+ //
+ // The gatherer hash map for upgrade is corrupted.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_E_CORRUPT_GATHERER_HASH_MAP)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_E_CORRUPT_GATHERER_HASH_MAP  0x8004363DL
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+   // NewLocStr 12/26
+   // not used for MSFTESQL
+@@ -6357,7 +6373,11 @@
+ //
+ // The key is not cached in the property store.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_E_KEY_NOT_CACHED)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_E_KEY_NOT_CACHED             0x8004363EL
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+   // NewLocStr 12/27
+   // not used for MSFTESQL
+@@ -6368,7 +6388,11 @@
+ //
+ // The upgrade interface has already been shutdown.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_E_UPGRADE_INTERFACE_ALREADY_SHUTDOWN)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_E_UPGRADE_INTERFACE_ALREADY_SHUTDOWN 0x8004363FL
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+   // NewLocStr 12/28
+   // not used for MSFTESQL
+@@ -6379,7 +6403,11 @@
+ //
+ // The upgrade interface has already been instantiated. Only one instance of the upgrade interface is allowed.
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(FTE_E_UPGRADE_INTERFACE_ALREADY_INSTANTIATED)) || (((defined(UPGRADE_INTERFACE))))
+ #define FTE_E_UPGRADE_INTERFACE_ALREADY_INSTANTIATED 0x80043640L
++#endif
++#ifdef UPGRADE_INTERFACE
+ 
+ #endif
+   // NewLocStr 01/03/02
+@@ -6935,6 +6963,10 @@
+ 
+ #ifndef _CIERROR_H_
+ #define _CIERROR_H_
++#if (defined(WIN32METADATA) && !defined(NOT_AN_ERROR1)) || (((!defined(FACILITY_WINDOWS))))
++#define NOT_AN_ERROR1                    ((HRESULT)0x00081600L)
++#endif
++
+ #ifndef FACILITY_WINDOWS
+ //
+ // MessageId: NOT_AN_ERROR1
+@@ -6945,7 +6977,6 @@
+ //        the above defines inside the FACILITY_WINDOWS guard instead
+ //        of leaving it empty.
+ //
+-#define NOT_AN_ERROR1                    ((HRESULT)0x00081600L)
+ 
+ #endif // FACILITY_WINDOWS
+ //
+@@ -8104,6 +8135,10 @@
+ #endif // _CIERROR_H_
+ #ifndef _FILTERR_H_
+ #define _FILTERR_H_
++#if (defined(WIN32METADATA) && !defined(NOT_AN_ERROR)) || (((!defined(FACILITY_WINDOWS))))
++#define NOT_AN_ERROR                     ((HRESULT)0x00080000L)
++#endif
++
+ #ifndef FACILITY_WINDOWS
+ //
+ // MessageId: NOT_AN_ERROR
+@@ -8114,7 +8149,6 @@
+ //        the above defines inside the FACILITY_WINDOWS guard instead
+ //        of leaving it empty.
+ //
+-#define NOT_AN_ERROR                     ((HRESULT)0x00080000L)
+ 
+ #endif // FACILITY_WINDOWS
+ //
+@@ -8436,6 +8470,10 @@ Notes:     MessageIds in the range 0x0001 - 0x1000 are categories
+ //                  Changes need to be made in PARSERR.mc
+ // ****************************************************************************
+ 
++#if (defined(WIN32METADATA) && !defined(NOT_N_PARSE_ERROR)) || (((!defined(FACILITY_WINDOWS))))
++#define NOT_N_PARSE_ERROR                ((HRESULT)0x0008092EL)
++#endif
++
+ #ifndef FACILITY_WINDOWS
+ 
+ //
+@@ -8447,7 +8485,6 @@ Notes:     MessageIds in the range 0x0001 - 0x1000 are categories
+ //        the above defines inside the FACILITY_WINDOWS guard instead
+ //        of leaving it empty.
+ //
+-#define NOT_N_PARSE_ERROR                ((HRESULT)0x0008092EL)
+ 
+ 
+ #endif // FACILITY_WINDOWS

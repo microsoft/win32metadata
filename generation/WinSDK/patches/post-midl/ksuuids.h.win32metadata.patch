@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ksuuids.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ksuuids.h
+index f831bc7b7c..77e1e7c79d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ksuuids.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ksuuids.h
+@@ -26,8 +26,12 @@ OUR_GUID_ENTRY(MEDIATYPE_MPEG2_PES,
+ 
+ 
+ #if 0
++#endif
++#if defined(WIN32METADATA) || (((0)))
+ DEFINE_GUID(MEDIATYPE_CONTROL,
+ 0xe06d8021, 0xdb46, 0x11cf, 0xb4, 0xd1, 0x00, 0x80, 0x05f, 0x6c, 0xbb, 0xea);
++#endif
++#if 0
+ #endif // #if 0
+ 
+ #if ( (NTDDI_VERSION >= NTDDI_WINXPSP2) && (NTDDI_VERSION < NTDDI_WS03) ) || (NTDDI_VERSION >= NTDDI_WS03SP1)

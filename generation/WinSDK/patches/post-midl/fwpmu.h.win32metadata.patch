@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h b/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h
-index 7d953b3813..e6e3fa9429 100644
+index 7d953b3813..184b191657 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h
 @@ -1,3 +1,4 @@
@@ -1195,7 +1195,7 @@ index 7d953b3813..e6e3fa9429 100644
  WINAPI
  IPsecKeyManagersGet0(
     _In_ HANDLE engineHandle,
-@@ -4765,7 +4766,7 @@ IPsecKeyManagersGet0(
+@@ -4765,11 +4766,11 @@ IPsecKeyManagersGet0(
     _Out_ UINT32* numEntries
  );
  
@@ -1204,7 +1204,12 @@ index 7d953b3813..e6e3fa9429 100644
  WINAPI
  IPsecKeyManagerGetSecurityInfoByKey0(
     _In_ HANDLE engineHandle,
-@@ -4778,7 +4779,7 @@ IPsecKeyManagerGetSecurityInfoByKey0(
+-   _Reserved_ const void* reserved,
++   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const void* reserved,
+    _In_ SECURITY_INFORMATION securityInfo,
+    _Outptr_result_maybenull_ PSID* sidOwner,
+    _Outptr_result_maybenull_ PSID* sidGroup,
+@@ -4778,11 +4779,11 @@ IPsecKeyManagerGetSecurityInfoByKey0(
     _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
     );
  
@@ -1213,6 +1218,11 @@ index 7d953b3813..e6e3fa9429 100644
  WINAPI
  IPsecKeyManagerSetSecurityInfoByKey0(
     _In_ HANDLE engineHandle,
+-   _Reserved_ const void* reserved,
++   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const void* reserved,
+    _In_ SECURITY_INFORMATION securityInfo,
+    _In_opt_ const SID* sidOwner,
+    _In_opt_ const SID* sidGroup,
 @@ -4798,7 +4799,7 @@ IPsecKeyManagerSetSecurityInfoByKey0(
  //
  ///////////////////////////////////////////////////////////////////////////////
@@ -1509,7 +1519,8 @@ index 7d953b3813..e6e3fa9429 100644
  WINAPI
  FwpmSystemPortsSubscribe0(
     _In_opt_ HANDLE engineHandle,
-    _Reserved_ void* reserved,
+-   _Reserved_ void* reserved,
++   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ void* reserved,
     _In_ FWPM_SYSTEM_PORTS_CALLBACK0 callback,
     _In_opt_ void* context,
 -   _Out_ HANDLE* sysPortsHandle

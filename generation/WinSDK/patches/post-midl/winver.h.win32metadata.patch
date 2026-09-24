@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
-index 1b4c8c8a0d..35b6e6beec 100644
+index 1b4c8c8a0d..2e211e967f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winver.h
 @@ -17,6 +17,7 @@
@@ -84,7 +84,7 @@ index 1b4c8c8a0d..35b6e6beec 100644
  DWORD
  APIENTRY
  GetFileVersionInfoSizeW(
-@@ -132,6 +145,8 @@ GetFileVersionInfoSizeW(
+@@ -132,20 +145,24 @@ GetFileVersionInfoSizeW(
  #endif // !UNICODE
  
  /* Read version info into buffer */
@@ -93,7 +93,10 @@ index 1b4c8c8a0d..35b6e6beec 100644
  BOOL
  APIENTRY
  GetFileVersionInfoA(
-@@ -141,6 +156,8 @@ GetFileVersionInfoA(
+         _In_                LPCSTR lptstrFilename, /* Filename of version stamped file */
+-        _Reserved_          DWORD dwHandle,          /* Information from GetFileVersionSize */
++        _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_          DWORD dwHandle,          /* Information from GetFileVersionSize */
+         _In_                DWORD dwLen,             /* Length of buffer for info */
          _Out_writes_bytes_(dwLen) LPVOID lpData            /* Buffer to place the data structure */
          );
  /* Read version info into buffer */
@@ -102,7 +105,13 @@ index 1b4c8c8a0d..35b6e6beec 100644
  BOOL
  APIENTRY
  GetFileVersionInfoW(
-@@ -155,20 +172,44 @@ GetFileVersionInfoW(
+         _In_                LPCWSTR lptstrFilename, /* Filename of version stamped file */
+-        _Reserved_          DWORD dwHandle,          /* Information from GetFileVersionSize */
++        _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_          DWORD dwHandle,          /* Information from GetFileVersionSize */
+         _In_                DWORD dwLen,             /* Length of buffer for info */
+         _Out_writes_bytes_(dwLen) LPVOID lpData            /* Buffer to place the data structure */
+         );
+@@ -155,22 +172,46 @@ GetFileVersionInfoW(
  #define GetFileVersionInfo  GetFileVersionInfoA
  #endif // !UNICODE
  
@@ -137,7 +146,8 @@ index 1b4c8c8a0d..35b6e6beec 100644
 +#endif
 +    _In_ DWORD dwFlags,
                                      _In_ LPCSTR lpwstrFilename,
-                                     _Reserved_ DWORD dwHandle,
+-                                    _Reserved_ DWORD dwHandle,
++                                    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwHandle,
                                      _In_ DWORD dwLen,
                                      _Out_writes_bytes_(dwLen) LPVOID lpData);
 -BOOL APIENTRY GetFileVersionInfoExW(_In_ DWORD dwFlags,
@@ -149,8 +159,11 @@ index 1b4c8c8a0d..35b6e6beec 100644
 +#endif
 +    _In_ DWORD dwFlags,
                                      _In_ LPCWSTR lpwstrFilename,
-                                     _Reserved_ DWORD dwHandle,
+-                                    _Reserved_ DWORD dwHandle,
++                                    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwHandle,
                                      _In_ DWORD dwLen,
+                                     _Out_writes_bytes_(dwLen) LPVOID lpData);
+ #ifdef UNICODE
 @@ -200,6 +241,7 @@ BOOL APIENTRY GetFileVersionInfoExW(_In_ DWORD dwFlags,
  
  #ifndef RC_INVOKED

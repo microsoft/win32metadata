@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h b/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
-index a3746ee59d..5d81882ff1 100644
+index a3746ee59d..2bf3ad52e5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Reconcil.h
 @@ -1,3 +1,4 @@
@@ -53,7 +53,7 @@ index a3746ee59d..5d81882ff1 100644
  {
     // IUnknown
  
-@@ -130,9 +134,11 @@ DECLARE_INTERFACE_IID_(IReconcilableObject, IUnknown, "99180162-DA16-101A-935C-4
+@@ -130,17 +134,20 @@ DECLARE_INTERFACE_IID_(IReconcilableObject, IUnknown, "99180162-DA16-101A-935C-4
  
     // IReconcilableObject
  
@@ -66,9 +66,11 @@ index a3746ee59d..5d81882ff1 100644
                          HWND hwndOwner,
                          HWND hwndProgressFeedback,
                          ULONG ulcInput,
-@@ -141,6 +147,7 @@ DECLARE_INTERFACE_IID_(IReconcilableObject, IUnknown, "99180162-DA16-101A-935C-4
+                         _Inout_updates_(ulcInput) IMoniker **rgpmkOtherInput,
+                         _Out_ PLONG plOutIndex,
                          _Inout_ IStorage *pstgNewResidues,
-                         _Reserved_ PVOID pvReserved) PURE;
+-                        _Reserved_ PVOID pvReserved) PURE;
++                        _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pvReserved) PURE;
  
 +    
     STDMETHOD(GetProgressFeedbackMaxEstimate)(THIS_

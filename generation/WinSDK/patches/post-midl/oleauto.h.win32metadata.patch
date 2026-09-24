@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
-index 7860ea3c60..ab1702741e 100644
+index 7860ea3c60..02e8f46752 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
 @@ -1,3 +1,4 @@
@@ -401,10 +401,10 @@ index 7860ea3c60..ab1702741e 100644
 +            _Win32_AssociatedEnum_(ACTIVEOBJECT_FLAGS) DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD * pdwRegister);
  
 -WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, void * pvReserved);
-+WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, _Reserved_ void * pvReserved);
++WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Reserved_ void * pvReserved);
  
 -WINOLEAUTAPI GetActiveObject(REFCLSID rclsid, void * pvReserved,
-+WINOLEAUTAPI GetActiveObject(REFCLSID rclsid, _Reserved_ void * pvReserved,
++WINOLEAUTAPI GetActiveObject(REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Reserved_ void * pvReserved,
              IUnknown ** ppunk);
  
  /*---------------------------------------------------------------------*/

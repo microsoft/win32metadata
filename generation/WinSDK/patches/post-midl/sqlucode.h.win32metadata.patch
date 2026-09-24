@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqlucode.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqlucode.h
-index e964f4ec0d..6f0ebc1601 100644
+index e964f4ec0d..421b928069 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sqlucode.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqlucode.h
 @@ -1,3 +1,4 @@
@@ -7,24 +7,29 @@ index e964f4ec0d..6f0ebc1601 100644
  //-----------------------------------------------------------------------------
  // File:            sqlucode.h
  //
-@@ -41,7 +42,7 @@ extern "C" {            /* Assume C declarations for C++   */
+@@ -41,9 +42,9 @@ extern "C" {            /* Assume C declarations for C++   */
  
  // UNICODE versions
  #ifdef _WIN64
 -SQLRETURN SQL_API SQLColAttributeW
 +SQLRETURN SQL_API _WIN32META_ANNOTATION_("win32metadata:unicode") SQLColAttributeW
  (
-     SQLHSTMT        hstmt,
+-    SQLHSTMT        hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT        hstmt,
      SQLUSMALLINT    iCol,
-@@ -55,7 +56,7 @@ SQLRETURN SQL_API SQLColAttributeW
+     SQLUSMALLINT    iField,
+     _Out_writes_bytes_opt_(cbDescMax)
+@@ -55,8 +56,8 @@ SQLRETURN SQL_API SQLColAttributeW
      SQLLEN          *pNumAttr
  );
  #else
 -SQLRETURN SQL_API SQLColAttributeW(
+-    SQLHSTMT        hstmt,
 +SQLRETURN SQL_API _WIN32META_ANNOTATION_("win32metadata:unicode") SQLColAttributeW(
-     SQLHSTMT        hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT        hstmt,
      SQLUSMALLINT    iCol,
      SQLUSMALLINT    iField,
+     _Out_writes_bytes_opt_(cbDescMax)
 @@ -68,9 +69,9 @@ SQLRETURN SQL_API SQLColAttributeW(
      SQLPOINTER      pNumAttr);
  #endif
@@ -434,24 +439,28 @@ index e964f4ec0d..6f0ebc1601 100644
      SQLUSMALLINT    fDirection,
      _Out_writes_opt_(cchDriverDescMax) SQLWCHAR* szDriverDesc,
      SQLSMALLINT     cchDriverDescMax,
-@@ -467,7 +468,7 @@ SQLRETURN SQL_API SQLDriversW
+@@ -467,8 +468,8 @@ SQLRETURN SQL_API SQLDriversW
  
  // ANSI versions
  #ifdef _WIN64
 -SQLRETURN SQL_API SQLColAttributeA(
+-    SQLHSTMT        hstmt,
 +SQLRETURN SQL_API _WIN32META_ANNOTATION_("win32metadata:ansi") SQLColAttributeA(
-     SQLHSTMT        hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT        hstmt,
      SQLSMALLINT     iCol,
      SQLSMALLINT     iField,
-@@ -479,7 +480,7 @@ SQLRETURN SQL_API SQLColAttributeA(
+     _Out_writes_bytes_opt_(cbCharAttrMax)
+@@ -479,8 +480,8 @@ SQLRETURN SQL_API SQLColAttributeA(
      _Out_opt_
      SQLLEN          *pNumAttr);
  #else
 -SQLRETURN SQL_API SQLColAttributeA(
+-    SQLHSTMT        hstmt,
 +SQLRETURN SQL_API _WIN32META_ANNOTATION_("win32metadata:ansi") SQLColAttributeA(
-     SQLHSTMT        hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT        hstmt,
      SQLSMALLINT     iCol,
      SQLSMALLINT     iField,
+     _Out_writes_bytes_opt_(cbCharAttrMax)
 @@ -492,8 +493,8 @@ SQLRETURN SQL_API SQLColAttributeA(
      SQLPOINTER      pNumAttr);
  #endif

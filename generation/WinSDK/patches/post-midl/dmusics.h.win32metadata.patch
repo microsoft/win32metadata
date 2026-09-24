@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h
-index 7d0742189a..e0eedad842 100644
+index 7d0742189a..8f319776d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmusics.h
 @@ -9,6 +9,7 @@
@@ -125,3 +125,17 @@ index 7d0742189a..e0eedad842 100644
  };
  
  
+@@ -192,8 +193,13 @@ DEFINE_GUID(IID_IDirectMusicSynthSink,0x9823663, 0x5c85, 0x11d2, 0xaf, 0xa6, 0x0
+ #if (NTDDI_VERSION >= NTDDI_WINXP) /* Windows XP or greater */
+ DEFINE_GUID(IID_IDirectMusicSynth8,0x53cab625, 0x2711, 0x4c9f, 0x9d, 0xe7, 0x1b, 0x7f, 0x92, 0x5f, 0x6f, 0xc8);
+ #else
++#endif
++#if defined(WIN32METADATA) || ((!((NTDDI_VERSION >= NTDDI_WINXP))))
+ DEFINE_GUID(CLSID_DirectMusicSynthSink,0xaec17ce3, 0xa514, 0x11d1, 0xaf, 0xa6, 0x0, 0xaa, 0x0, 0x24, 0xd8, 0xb6);
+ #endif
++#if (NTDDI_VERSION >= NTDDI_WINXP) /* Windows XP or greater */
++#else
++#endif
+ 
+ /* Property Set GUID_DMUS_PROP_SetSynthSink
+  *

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h
-index 638fd924df..2c59ead43d 100644
+index 638fd924df..e83f62652b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PatchApi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,24 @@ index 638fd924df..2c59ead43d 100644
  // Copyright (c) Microsoft Corporation.  All rights reserved.
  //
  //  patchapi.h
+@@ -92,7 +93,7 @@ extern "C" {
+ #define ERROR_PATCH_NOT_AVAILABLE           0xC00E4106  // apply
+ 
+ typedef BOOL (CALLBACK PATCH_PROGRESS_CALLBACK)(
+-    PVOID CallbackContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID CallbackContext,
+     ULONG CurrentPosition,
+     ULONG MaximumPosition
+     );
+@@ -107,7 +108,7 @@ typedef BOOL (CALLBACK PATCH_SYMLOAD_CALLBACK)(
+     IN ULONG  SymbolFileTimeDate,
+     IN ULONG  ImageFileCheckSum,
+     IN ULONG  ImageFileTimeDate,
+-    IN PVOID  CallbackContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID  CallbackContext
+     );
+ 
+ typedef PATCH_SYMLOAD_CALLBACK *PPATCH_SYMLOAD_CALLBACK;
 @@ -211,7 +212,7 @@ typedef struct _PATCH_OPTION_DATA {
  //  The following prototypes are interface for creating patches from files.
  //

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddraw.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddraw.h
-index c0b7b1e1ca..8d67de711a 100644
+index c0b7b1e1ca..8a4b7fd36c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ddraw.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddraw.h
 @@ -1,3 +1,4 @@
@@ -631,3 +631,24 @@ index c0b7b1e1ca..8d67de711a 100644
  };
  
  #if !defined(__cplusplus) || defined(CINTERFACE)
+@@ -4776,12 +4777,20 @@ typedef struct _DDCOLORCONTROL
+ /*
+  * The default.  The GDI DC will be tore down.
+  */
++#endif
++#if (defined(WIN32METADATA) && !defined(DDSETSURFACEDESC_RECREATEDC)) || (((defined(DX_LONGHORN_PRESERVEDC))))
+ #define DDSETSURFACEDESC_RECREATEDC             0x00000000L     // default
++#endif
++#ifdef DX_LONGHORN_PRESERVEDC
+ 
+ /*
+  * The default.  The GDI DC will be kept.
+  */
++#endif
++#if (defined(WIN32METADATA) && !defined(DDSETSURFACEDESC_PRESERVEDC)) || (((defined(DX_LONGHORN_PRESERVEDC))))
+ #define DDSETSURFACEDESC_PRESERVEDC             0x00000001L
++#endif
++#ifdef DX_LONGHORN_PRESERVEDC
+ 
+ 
+ #endif // DX_LONGHORN_PRESERVEDC

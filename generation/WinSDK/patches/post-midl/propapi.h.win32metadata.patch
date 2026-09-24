@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
-index 858a29dbe1..399d4983db 100644
+index 858a29dbe1..d14230f632 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
 @@ -1,4 +1,5 @@
@@ -8,7 +8,7 @@ index 858a29dbe1..399d4983db 100644
  
  //+-------------------------------------------------------------------------
  //
-@@ -30,10 +31,10 @@ typedef VOID* NTPROP;
+@@ -30,14 +31,14 @@ typedef VOID* NTPROP;
  
  #include <propidl.h>
  
@@ -21,3 +21,8 @@ index 858a29dbe1..399d4983db 100644
              _In_reads_bytes_(cbProp) const SERIALIZEDPROPERTYVALUE* pProp,
              _In_ ULONG cbProp,
              _In_ USHORT CodePage,
+-            _Reserved_ BYTE bReserved);
++            _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ BYTE bReserved);
+ 
+ #ifdef __cplusplus
+ }

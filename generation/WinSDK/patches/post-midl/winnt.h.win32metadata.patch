@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
-index f76840c470..5ab744936d 100644
+index f76840c470..9cf8b46163 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 @@ -1,3 +1,4 @@
@@ -24,7 +24,77 @@ index f76840c470..5ab744936d 100644
  #define DECLARE_HANDLE(name) typedef HANDLE name
  #endif
  typedef HANDLE *PHANDLE;
-@@ -9971,7 +9972,7 @@ typedef struct _WOW64_CONTEXT {
+@@ -4520,15 +4521,15 @@ struct _EXCEPTION_POINTERS;
+ typedef
+ LONG
+ (*PEXCEPTION_FILTER) (
+-    struct _EXCEPTION_POINTERS *ExceptionPointers,
+-    PVOID EstablisherFrame
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _EXCEPTION_POINTERS *ExceptionPointers,
++    _WIN32META_ANNOTATION_("win32metadata:in") PVOID EstablisherFrame
+     );
+ 
+ typedef
+ VOID
+ (*PTERMINATION_HANDLER) (
+     BOOLEAN AbnormalTermination,
+-    PVOID EstablisherFrame
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID EstablisherFrame
+     );
+ 
+ //
+@@ -5245,8 +5246,16 @@ YieldProcessor (
+ // however, almost no one implements more than 4 of each.
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(ARM_MAX_BREAKPOINTS)) || (((defined(_ARM_))))
+ #define ARM_MAX_BREAKPOINTS     8
++#endif
++#ifdef _ARM_
++#endif
++#if (defined(WIN32METADATA) && !defined(ARM_MAX_WATCHPOINTS)) || (((defined(_ARM_))))
+ #define ARM_MAX_WATCHPOINTS     1
++#endif
++#ifdef _ARM_
+ 
+ //
+ // Context Frame
+@@ -7163,7 +7172,7 @@ struct _EXCEPTION_POINTERS;
+ typedef
+ LONG
+ (*PEXCEPTION_FILTER) (
+-    struct _EXCEPTION_POINTERS *ExceptionPointers,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _EXCEPTION_POINTERS *ExceptionPointers,
+     DWORD64 EstablisherFrame
+     );
+ 
+@@ -7349,8 +7358,24 @@ __break(
+ 
+ #pragma intrinsic (__break)
+ 
++#endif
++#endif
++#if (defined(WIN32METADATA) && !defined(BREAK_DEBUG_BASE)) || ((!(defined(_AMD64_) && !defined(_ARM64EC_)) && !(defined(_X86_) && !defined(_M_HYBRID_X86_ARM64)) && (defined(_IA64_))) && ((defined(_M_IA64))))
+ #define BREAK_DEBUG_BASE    0x080000
++#endif
++#if defined(_AMD64_) && !defined(_ARM64EC_)
++#elif defined(_X86_) && !defined(_M_HYBRID_X86_ARM64)
++#elif defined(_IA64_)
++#if defined(_M_IA64)
++#endif
++#endif
++#if (defined(WIN32METADATA) && !defined(ASSERT_BREAKPOINT)) || ((!(defined(_AMD64_) && !defined(_ARM64EC_)) && !(defined(_X86_) && !defined(_M_HYBRID_X86_ARM64)) && (defined(_IA64_))) && ((defined(_M_IA64))))
+ #define ASSERT_BREAKPOINT         (BREAK_DEBUG_BASE+3)  // Cause a STATUS_ASSERTION_FAILURE exception to be raised.
++#endif
++#if defined(_AMD64_) && !defined(_ARM64EC_)
++#elif defined(_X86_) && !defined(_M_HYBRID_X86_ARM64)
++#elif defined(_IA64_)
++#if defined(_M_IA64)
+ 
+ #if !defined(_PREFAST_)
+ 
+@@ -9971,7 +9996,7 @@ typedef struct _WOW64_CONTEXT {
      // The context record is never used as an OUT only parameter.
      //
  
@@ -33,7 +103,7 @@ index f76840c470..5ab744936d 100644
  
      //
      // This section is specified/returned if CONTEXT_DEBUG_REGISTERS is
-@@ -10157,7 +10158,7 @@ RtlUnwind2 (
+@@ -10157,7 +10182,7 @@ RtlUnwind2 (
  #endif
  
  typedef PVOID PACCESS_TOKEN;            
@@ -42,7 +112,7 @@ index f76840c470..5ab744936d 100644
  typedef PVOID PSID;     
  typedef PVOID PCLAIMS_BLOB;     
  ////////////////////////////////////////////////////////////////////////
-@@ -10282,7 +10283,7 @@ typedef GENERIC_MAPPING *PGENERIC_MAPPING;
+@@ -10282,7 +10307,7 @@ typedef GENERIC_MAPPING *PGENERIC_MAPPING;
  
  typedef struct _LUID_AND_ATTRIBUTES {
      LUID Luid;
@@ -51,7 +121,7 @@ index f76840c470..5ab744936d 100644
      } LUID_AND_ATTRIBUTES, * PLUID_AND_ATTRIBUTES;
  typedef LUID_AND_ATTRIBUTES LUID_AND_ATTRIBUTES_ARRAY[ANYSIZE_ARRAY];
  typedef LUID_AND_ATTRIBUTES_ARRAY *PLUID_AND_ATTRIBUTES_ARRAY;
-@@ -11306,7 +11307,7 @@ typedef struct _SYSTEM_ACCESS_FILTER_ACE {
+@@ -11306,7 +11331,7 @@ typedef struct _SYSTEM_ACCESS_FILTER_ACE {
  typedef struct _ACCESS_ALLOWED_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -60,7 +130,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11315,7 +11316,7 @@ typedef struct _ACCESS_ALLOWED_OBJECT_ACE {
+@@ -11315,7 +11340,7 @@ typedef struct _ACCESS_ALLOWED_OBJECT_ACE {
  typedef struct _ACCESS_DENIED_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -69,7 +139,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11324,7 +11325,7 @@ typedef struct _ACCESS_DENIED_OBJECT_ACE {
+@@ -11324,7 +11349,7 @@ typedef struct _ACCESS_DENIED_OBJECT_ACE {
  typedef struct _SYSTEM_AUDIT_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -78,7 +148,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11375,7 +11376,7 @@ typedef struct _SYSTEM_ALARM_CALLBACK_ACE {
+@@ -11375,7 +11400,7 @@ typedef struct _SYSTEM_ALARM_CALLBACK_ACE {
  typedef struct _ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -87,7 +157,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11385,7 +11386,7 @@ typedef struct _ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
+@@ -11385,7 +11410,7 @@ typedef struct _ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
  typedef struct _ACCESS_DENIED_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -96,7 +166,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11395,7 +11396,7 @@ typedef struct _ACCESS_DENIED_CALLBACK_OBJECT_ACE {
+@@ -11395,7 +11420,7 @@ typedef struct _ACCESS_DENIED_CALLBACK_OBJECT_ACE {
  typedef struct _SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -105,7 +175,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11405,7 +11406,7 @@ typedef struct _SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
+@@ -11405,7 +11430,7 @@ typedef struct _SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
  typedef struct _SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -114,7 +184,7 @@ index f76840c470..5ab744936d 100644
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -12207,7 +12208,7 @@ typedef struct _TOKEN_MANDATORY_LABEL {
+@@ -12207,7 +12232,7 @@ typedef struct _TOKEN_MANDATORY_LABEL {
  #endif
  
  typedef struct _TOKEN_MANDATORY_POLICY {
@@ -123,7 +193,7 @@ index f76840c470..5ab744936d 100644
  } TOKEN_MANDATORY_POLICY, *PTOKEN_MANDATORY_POLICY;
  
  typedef PVOID PSECURITY_ATTRIBUTES_OPAQUE;
-@@ -12442,7 +12443,7 @@ typedef struct _CLAIM_SECURITY_ATTRIBUTE_V1 {
+@@ -12442,7 +12467,7 @@ typedef struct _CLAIM_SECURITY_ATTRIBUTE_V1 {
      //  Data type of attribute.
      //
  
@@ -132,7 +202,7 @@ index f76840c470..5ab744936d 100644
  
      //
      //  Pass 0 in a set operation and check for 0 in
-@@ -12494,7 +12495,7 @@ typedef struct _CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
+@@ -12494,7 +12519,7 @@ typedef struct _CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
      //  Data type of attribute.
      //
  
@@ -141,7 +211,7 @@ index f76840c470..5ab744936d 100644
  
      //
      //  Pass 0 in a set operation and check for 0 in
-@@ -12507,7 +12508,7 @@ typedef struct _CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
+@@ -12507,7 +12532,7 @@ typedef struct _CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 {
      // Attribute Flags
      //
  
@@ -150,7 +220,7 @@ index f76840c470..5ab744936d 100644
  
      //
      //  Number of values.
-@@ -13342,7 +13343,7 @@ typedef struct _JOBOBJECT_BASIC_ACCOUNTING_INFORMATION {
+@@ -13342,7 +13367,7 @@ typedef struct _JOBOBJECT_BASIC_ACCOUNTING_INFORMATION {
  typedef struct _JOBOBJECT_BASIC_LIMIT_INFORMATION {
      LARGE_INTEGER PerProcessUserTimeLimit;
      LARGE_INTEGER PerJobUserTimeLimit;
@@ -159,7 +229,7 @@ index f76840c470..5ab744936d 100644
      SIZE_T MinimumWorkingSetSize;
      SIZE_T MaximumWorkingSetSize;
      DWORD ActiveProcessLimit;
-@@ -13372,7 +13373,7 @@ typedef struct _JOBOBJECT_BASIC_PROCESS_ID_LIST {
+@@ -13372,7 +13397,7 @@ typedef struct _JOBOBJECT_BASIC_PROCESS_ID_LIST {
  } JOBOBJECT_BASIC_PROCESS_ID_LIST, *PJOBOBJECT_BASIC_PROCESS_ID_LIST;
  
  typedef struct _JOBOBJECT_BASIC_UI_RESTRICTIONS {
@@ -168,7 +238,7 @@ index f76840c470..5ab744936d 100644
  } JOBOBJECT_BASIC_UI_RESTRICTIONS, *PJOBOBJECT_BASIC_UI_RESTRICTIONS;
  
  //
-@@ -13380,7 +13381,7 @@ typedef struct _JOBOBJECT_BASIC_UI_RESTRICTIONS {
+@@ -13380,7 +13405,7 @@ typedef struct _JOBOBJECT_BASIC_UI_RESTRICTIONS {
  //
  
  typedef struct _JOBOBJECT_SECURITY_LIMIT_INFORMATION {
@@ -177,7 +247,7 @@ index f76840c470..5ab744936d 100644
      HANDLE JobToken ;
      PTOKEN_GROUPS SidsToDisable ;
      PTOKEN_PRIVILEGES PrivilegesToDelete ;
-@@ -13388,7 +13389,7 @@ typedef struct _JOBOBJECT_SECURITY_LIMIT_INFORMATION {
+@@ -13388,7 +13413,7 @@ typedef struct _JOBOBJECT_SECURITY_LIMIT_INFORMATION {
  } JOBOBJECT_SECURITY_LIMIT_INFORMATION, *PJOBOBJECT_SECURITY_LIMIT_INFORMATION ;
  
  typedef struct _JOBOBJECT_END_OF_JOB_TIME_INFORMATION {
@@ -186,7 +256,7 @@ index f76840c470..5ab744936d 100644
  } JOBOBJECT_END_OF_JOB_TIME_INFORMATION, *PJOBOBJECT_END_OF_JOB_TIME_INFORMATION;
  
  typedef struct _JOBOBJECT_ASSOCIATE_COMPLETION_PORT {
-@@ -13430,7 +13431,7 @@ typedef struct _JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION {
+@@ -13430,7 +13455,7 @@ typedef struct _JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION {
      DWORD64 JobMemoryLimit;
      JOBOBJECT_RATE_CONTROL_TOLERANCE RateControlTolerance;
      JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL RateControlToleranceInterval;
@@ -195,7 +265,7 @@ index f76840c470..5ab744936d 100644
  } JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION, *PJOBOBJECT_NOTIFICATION_LIMIT_INFORMATION;
  
  typedef struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
-@@ -13443,17 +13444,17 @@ typedef struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
+@@ -13443,17 +13468,17 @@ typedef struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
      } DUMMYUNIONNAME;
  
      union {
@@ -218,7 +288,7 @@ index f76840c470..5ab744936d 100644
      JOBOBJECT_RATE_CONTROL_TOLERANCE IoRateControlTolerance;
      DWORD64 JobLowMemoryLimit;
      JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL IoRateControlToleranceInterval;
-@@ -13465,8 +13466,8 @@ typedef struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
+@@ -13465,8 +13490,8 @@ typedef struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
  //
  
  typedef struct _JOBOBJECT_LIMIT_VIOLATION_INFORMATION {
@@ -229,7 +299,7 @@ index f76840c470..5ab744936d 100644
      DWORD64 IoReadBytes;
      DWORD64 IoReadBytesLimit;
      DWORD64 IoWriteBytes;
-@@ -13480,8 +13481,8 @@ typedef struct _JOBOBJECT_LIMIT_VIOLATION_INFORMATION {
+@@ -13480,8 +13505,8 @@ typedef struct _JOBOBJECT_LIMIT_VIOLATION_INFORMATION {
  } JOBOBJECT_LIMIT_VIOLATION_INFORMATION, *PJOBOBJECT_LIMIT_VIOLATION_INFORMATION;
  
  typedef struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
@@ -240,7 +310,7 @@ index f76840c470..5ab744936d 100644
      DWORD64 IoReadBytes;
      DWORD64 IoReadBytesLimit;
      DWORD64 IoWriteBytes;
-@@ -13495,13 +13496,13 @@ typedef struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
+@@ -13495,13 +13520,13 @@ typedef struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
      } DUMMYUNIONNAME;
  
      union {
@@ -258,7 +328,7 @@ index f76840c470..5ab744936d 100644
      } DUMMYUNIONNAME3;
  
      DWORD64 JobLowMemoryLimit;
-@@ -13515,7 +13516,7 @@ typedef struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
+@@ -13515,7 +13540,7 @@ typedef struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
  //
  
  typedef struct _JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
@@ -267,7 +337,7 @@ index f76840c470..5ab744936d 100644
      union {
          DWORD CpuRate;
          DWORD Weight;
-@@ -14870,14 +14871,14 @@ typedef struct _DRIVER_RUNTIME_REPORT {
+@@ -14870,14 +14895,14 @@ typedef struct _DRIVER_RUNTIME_REPORT {
  typedef struct _MEMORY_BASIC_INFORMATION {
      PVOID BaseAddress;
      PVOID AllocationBase;
@@ -286,7 +356,7 @@ index f76840c470..5ab744936d 100644
  } MEMORY_BASIC_INFORMATION, *PMEMORY_BASIC_INFORMATION;
  
  // end_ntifs
-@@ -14885,22 +14886,22 @@ typedef struct _MEMORY_BASIC_INFORMATION {
+@@ -14885,22 +14910,22 @@ typedef struct _MEMORY_BASIC_INFORMATION {
  typedef struct _MEMORY_BASIC_INFORMATION32 {
      DWORD BaseAddress;
      DWORD AllocationBase;
@@ -317,7 +387,7 @@ index f76840c470..5ab744936d 100644
      DWORD     __alignment2;
  } MEMORY_BASIC_INFORMATION64, *PMEMORY_BASIC_INFORMATION64;
  
-@@ -15388,7 +15389,7 @@ typedef struct _FILE_ID_128 {
+@@ -15388,7 +15413,7 @@ typedef struct _FILE_ID_128 {
  
  typedef struct _FILE_NOTIFY_INFORMATION {
      DWORD NextEntryOffset;
@@ -326,7 +396,7 @@ index f76840c470..5ab744936d 100644
      DWORD FileNameLength;
      WCHAR FileName[1];
  } FILE_NOTIFY_INFORMATION, *PFILE_NOTIFY_INFORMATION;
-@@ -15396,7 +15397,7 @@ typedef struct _FILE_NOTIFY_INFORMATION {
+@@ -15396,7 +15421,7 @@ typedef struct _FILE_NOTIFY_INFORMATION {
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS3)
  typedef struct _FILE_NOTIFY_EXTENDED_INFORMATION {
      DWORD NextEntryOffset;
@@ -335,7 +405,7 @@ index f76840c470..5ab744936d 100644
      LARGE_INTEGER CreationTime;
      LARGE_INTEGER LastModificationTime;
      LARGE_INTEGER LastChangeTime;
-@@ -19269,7 +19270,7 @@ typedef struct {
+@@ -19269,7 +19294,7 @@ typedef struct {
  typedef struct {
      POWER_ACTION    Action;
      DWORD           Flags;
@@ -344,7 +414,7 @@ index f76840c470..5ab744936d 100644
  } POWER_ACTION_POLICY, *PPOWER_ACTION_POLICY;
  
  // POWER_ACTION_POLICY->Flags:
-@@ -19774,13 +19775,13 @@ typedef struct _IMAGE_VXD_HEADER {      // Windows VXD header
+@@ -19774,13 +19799,13 @@ typedef struct _IMAGE_VXD_HEADER {      // Windows VXD header
  //
  
  typedef struct _IMAGE_FILE_HEADER {
@@ -360,7 +430,7 @@ index f76840c470..5ab744936d 100644
  } IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
  
  #define IMAGE_SIZEOF_FILE_HEADER             20
-@@ -19855,7 +19856,7 @@ typedef struct _IMAGE_OPTIONAL_HEADER {
+@@ -19855,7 +19880,7 @@ typedef struct _IMAGE_OPTIONAL_HEADER {
      // Standard fields.
      //
  
@@ -369,7 +439,7 @@ index f76840c470..5ab744936d 100644
      BYTE    MajorLinkerVersion;
      BYTE    MinorLinkerVersion;
      DWORD   SizeOfCode;
-@@ -19882,8 +19883,8 @@ typedef struct _IMAGE_OPTIONAL_HEADER {
+@@ -19882,8 +19907,8 @@ typedef struct _IMAGE_OPTIONAL_HEADER {
      DWORD   SizeOfImage;
      DWORD   SizeOfHeaders;
      DWORD   CheckSum;
@@ -380,7 +450,7 @@ index f76840c470..5ab744936d 100644
      DWORD   SizeOfStackReserve;
      DWORD   SizeOfStackCommit;
      DWORD   SizeOfHeapReserve;
-@@ -19910,7 +19911,7 @@ typedef struct _IMAGE_ROM_OPTIONAL_HEADER {
+@@ -19910,7 +19935,7 @@ typedef struct _IMAGE_ROM_OPTIONAL_HEADER {
  } IMAGE_ROM_OPTIONAL_HEADER, *PIMAGE_ROM_OPTIONAL_HEADER;
  
  typedef struct _IMAGE_OPTIONAL_HEADER64 {
@@ -389,7 +459,7 @@ index f76840c470..5ab744936d 100644
      BYTE        MajorLinkerVersion;
      BYTE        MinorLinkerVersion;
      DWORD       SizeOfCode;
-@@ -19931,8 +19932,8 @@ typedef struct _IMAGE_OPTIONAL_HEADER64 {
+@@ -19931,8 +19956,8 @@ typedef struct _IMAGE_OPTIONAL_HEADER64 {
      DWORD       SizeOfImage;
      DWORD       SizeOfHeaders;
      DWORD       CheckSum;
@@ -400,7 +470,7 @@ index f76840c470..5ab744936d 100644
      ULONGLONG   SizeOfStackReserve;
      ULONGLONG   SizeOfStackCommit;
      ULONGLONG   SizeOfHeapReserve;
-@@ -20109,7 +20110,7 @@ typedef struct _IMAGE_SECTION_HEADER {
+@@ -20109,7 +20134,7 @@ typedef struct _IMAGE_SECTION_HEADER {
      DWORD   PointerToLinenumbers;
      WORD    NumberOfRelocations;
      WORD    NumberOfLinenumbers;
@@ -409,7 +479,7 @@ index f76840c470..5ab744936d 100644
  } IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;
  
  #define IMAGE_SIZEOF_SECTION_HEADER          40
-@@ -21019,9 +21020,9 @@ typedef IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;
+@@ -21019,9 +21044,9 @@ typedef IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;
  
  typedef VOID
  (NTAPI *PIMAGE_TLS_CALLBACK) (
@@ -421,7 +491,7 @@ index f76840c470..5ab744936d 100644
      );
  
  typedef struct _IMAGE_TLS_DIRECTORY64 {
-@@ -21901,7 +21902,7 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
+@@ -21901,7 +21926,7 @@ typedef struct _IMAGE_DEBUG_DIRECTORY {
      DWORD   TimeDateStamp;
      WORD    MajorVersion;
      WORD    MinorVersion;
@@ -430,7 +500,7 @@ index f76840c470..5ab744936d 100644
      DWORD   SizeOfData;
      DWORD   AddressOfRawData;
      DWORD   PointerToRawData;
-@@ -22235,7 +22236,7 @@ typedef struct IMAGE_COR20_HEADER
+@@ -22235,7 +22260,7 @@ typedef struct IMAGE_COR20_HEADER
  
  #if (NTDDI_VERSION > NTDDI_WINXP)
  
@@ -439,7 +509,7 @@ index f76840c470..5ab744936d 100644
  _Success_(return != 0)
  WORD  
  NTAPI
-@@ -22250,7 +22251,7 @@ RtlCaptureStackBackTrace(
+@@ -22250,7 +22275,7 @@ RtlCaptureStackBackTrace(
  
  #if (NTDDI_VERSION > NTDDI_WIN2K)
  
@@ -448,7 +518,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlCaptureContext(
-@@ -22269,7 +22270,7 @@ RtlCaptureContext(
+@@ -22269,7 +22294,7 @@ RtlCaptureContext(
  
  #if defined(_AMD64_)
  
@@ -457,7 +527,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlCaptureContext2(
-@@ -22314,7 +22315,7 @@ typedef struct _UNWIND_HISTORY_TABLE {
+@@ -22314,7 +22339,7 @@ typedef struct _UNWIND_HISTORY_TABLE {
  #pragma region Application or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -466,7 +536,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlUnwind(
-@@ -22332,7 +22333,7 @@ RtlUnwind(
+@@ -22332,7 +22357,7 @@ RtlUnwind(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -475,7 +545,7 @@ index f76840c470..5ab744936d 100644
  BOOLEAN
  __cdecl
  RtlAddFunctionTable(
-@@ -22341,14 +22342,14 @@ RtlAddFunctionTable(
+@@ -22341,14 +22366,14 @@ RtlAddFunctionTable(
      _In_ DWORD64 BaseAddress
      );
  
@@ -492,7 +562,7 @@ index f76840c470..5ab744936d 100644
  BOOLEAN
  __cdecl
  RtlInstallFunctionTableCallback(
-@@ -22368,7 +22369,7 @@ RtlInstallFunctionTableCallback(
+@@ -22368,7 +22393,7 @@ RtlInstallFunctionTableCallback(
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
@@ -501,7 +571,7 @@ index f76840c470..5ab744936d 100644
  DWORD   
  NTAPI
  RtlAddGrowableFunctionTable(
-@@ -22380,7 +22381,7 @@ RtlAddGrowableFunctionTable(
+@@ -22380,7 +22405,7 @@ RtlAddGrowableFunctionTable(
      _In_ ULONG_PTR RangeEnd
      );
  
@@ -510,7 +580,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlGrowFunctionTable(
-@@ -22388,7 +22389,7 @@ RtlGrowFunctionTable(
+@@ -22388,7 +22413,7 @@ RtlGrowFunctionTable(
      _In_ DWORD NewEntryCount
      );
  
@@ -519,7 +589,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlDeleteGrowableFunctionTable(
-@@ -22403,7 +22404,7 @@ RtlDeleteGrowableFunctionTable(
+@@ -22403,7 +22428,7 @@ RtlDeleteGrowableFunctionTable(
  #pragma region Application or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -528,7 +598,7 @@ index f76840c470..5ab744936d 100644
  PRUNTIME_FUNCTION
  NTAPI
  RtlLookupFunctionEntry(
-@@ -22412,7 +22413,7 @@ RtlLookupFunctionEntry(
+@@ -22412,7 +22437,7 @@ RtlLookupFunctionEntry(
      _Inout_opt_ PUNWIND_HISTORY_TABLE HistoryTable
      );
  
@@ -537,7 +607,7 @@ index f76840c470..5ab744936d 100644
  VOID
  __cdecl
  RtlRestoreContext(
-@@ -22420,7 +22421,7 @@ RtlRestoreContext(
+@@ -22420,7 +22445,7 @@ RtlRestoreContext(
      _In_opt_ struct _EXCEPTION_RECORD* ExceptionRecord
      );
  
@@ -546,7 +616,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlUnwindEx(
-@@ -22432,7 +22433,7 @@ RtlUnwindEx(
+@@ -22432,7 +22457,7 @@ RtlUnwindEx(
      _In_opt_ PUNWIND_HISTORY_TABLE HistoryTable
      );
  
@@ -555,7 +625,7 @@ index f76840c470..5ab744936d 100644
  PEXCEPTION_ROUTINE
  NTAPI
  RtlVirtualUnwind(
-@@ -22469,7 +22470,7 @@ RtlIsEcCode(
+@@ -22469,7 +22494,7 @@ RtlIsEcCode(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -564,7 +634,7 @@ index f76840c470..5ab744936d 100644
  BOOLEAN
  __cdecl
  RtlAddFunctionTable(
-@@ -22478,14 +22479,14 @@ RtlAddFunctionTable(
+@@ -22478,14 +22503,14 @@ RtlAddFunctionTable(
      _In_ DWORD BaseAddress
      );
  
@@ -581,7 +651,7 @@ index f76840c470..5ab744936d 100644
  BOOLEAN
  __cdecl
  RtlInstallFunctionTableCallback(
-@@ -22505,7 +22506,7 @@ RtlInstallFunctionTableCallback(
+@@ -22505,7 +22530,7 @@ RtlInstallFunctionTableCallback(
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
@@ -590,7 +660,7 @@ index f76840c470..5ab744936d 100644
  DWORD   
  NTAPI
  RtlAddGrowableFunctionTable(
-@@ -22517,7 +22518,7 @@ RtlAddGrowableFunctionTable(
+@@ -22517,7 +22542,7 @@ RtlAddGrowableFunctionTable(
      _In_ ULONG_PTR RangeEnd
      );
  
@@ -599,7 +669,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlGrowFunctionTable(
-@@ -22525,7 +22526,7 @@ RtlGrowFunctionTable(
+@@ -22525,7 +22550,7 @@ RtlGrowFunctionTable(
      _In_ DWORD NewEntryCount
      );
  
@@ -608,7 +678,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlDeleteGrowableFunctionTable(
-@@ -22540,7 +22541,7 @@ RtlDeleteGrowableFunctionTable(
+@@ -22540,7 +22565,7 @@ RtlDeleteGrowableFunctionTable(
  #pragma region Application or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -617,7 +687,7 @@ index f76840c470..5ab744936d 100644
  PRUNTIME_FUNCTION
  NTAPI
  RtlLookupFunctionEntry(
-@@ -22549,7 +22550,7 @@ RtlLookupFunctionEntry(
+@@ -22549,7 +22574,7 @@ RtlLookupFunctionEntry(
      _Inout_opt_ PUNWIND_HISTORY_TABLE HistoryTable
      );
  
@@ -626,7 +696,7 @@ index f76840c470..5ab744936d 100644
  VOID
  __cdecl
  RtlRestoreContext(
-@@ -22557,7 +22558,7 @@ RtlRestoreContext(
+@@ -22557,7 +22582,7 @@ RtlRestoreContext(
      _In_opt_ struct _EXCEPTION_RECORD* ExceptionRecord
      );
  
@@ -635,7 +705,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlUnwindEx(
-@@ -22569,7 +22570,7 @@ RtlUnwindEx(
+@@ -22569,7 +22594,7 @@ RtlUnwindEx(
      _In_opt_ PUNWIND_HISTORY_TABLE HistoryTable
      );
  
@@ -644,7 +714,7 @@ index f76840c470..5ab744936d 100644
  PEXCEPTION_ROUTINE
  NTAPI
  RtlVirtualUnwind(
-@@ -22595,7 +22596,7 @@ RtlVirtualUnwind(
+@@ -22595,7 +22620,7 @@ RtlVirtualUnwind(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -653,7 +723,7 @@ index f76840c470..5ab744936d 100644
  BOOLEAN
  __cdecl
  RtlAddFunctionTable(
-@@ -22604,14 +22605,14 @@ RtlAddFunctionTable(
+@@ -22604,14 +22629,14 @@ RtlAddFunctionTable(
      _In_ ULONG_PTR BaseAddress
      );
  
@@ -670,7 +740,7 @@ index f76840c470..5ab744936d 100644
  BOOLEAN
  __cdecl
  RtlInstallFunctionTableCallback(
-@@ -22631,7 +22632,7 @@ RtlInstallFunctionTableCallback(
+@@ -22631,7 +22656,7 @@ RtlInstallFunctionTableCallback(
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
@@ -679,7 +749,7 @@ index f76840c470..5ab744936d 100644
  DWORD   
  NTAPI
  RtlAddGrowableFunctionTable(
-@@ -22643,7 +22644,7 @@ RtlAddGrowableFunctionTable(
+@@ -22643,7 +22668,7 @@ RtlAddGrowableFunctionTable(
      _In_ ULONG_PTR RangeEnd
      );
  
@@ -688,7 +758,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlGrowFunctionTable(
-@@ -22651,7 +22652,7 @@ RtlGrowFunctionTable(
+@@ -22651,7 +22676,7 @@ RtlGrowFunctionTable(
      _In_ DWORD NewEntryCount
      );
  
@@ -697,7 +767,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlDeleteGrowableFunctionTable(
-@@ -22666,7 +22667,7 @@ RtlDeleteGrowableFunctionTable(
+@@ -22666,7 +22691,7 @@ RtlDeleteGrowableFunctionTable(
  #pragma region Application or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -706,7 +776,7 @@ index f76840c470..5ab744936d 100644
  PRUNTIME_FUNCTION
  NTAPI
  RtlLookupFunctionEntry(
-@@ -22675,7 +22676,7 @@ RtlLookupFunctionEntry(
+@@ -22675,7 +22700,7 @@ RtlLookupFunctionEntry(
      _Inout_opt_ PUNWIND_HISTORY_TABLE HistoryTable
      );
  
@@ -715,7 +785,7 @@ index f76840c470..5ab744936d 100644
  VOID
  __cdecl
  RtlRestoreContext(
-@@ -22683,7 +22684,7 @@ RtlRestoreContext(
+@@ -22683,7 +22708,7 @@ RtlRestoreContext(
      _In_opt_ struct _EXCEPTION_RECORD* ExceptionRecord
      );
  
@@ -724,7 +794,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlUnwindEx(
-@@ -22695,7 +22696,7 @@ RtlUnwindEx(
+@@ -22695,7 +22720,7 @@ RtlUnwindEx(
      _In_opt_ PUNWIND_HISTORY_TABLE HistoryTable
      );
  
@@ -733,7 +803,7 @@ index f76840c470..5ab744936d 100644
  PEXCEPTION_ROUTINE
  NTAPI
  RtlVirtualUnwind(
-@@ -22723,7 +22724,7 @@ RtlVirtualUnwind(
+@@ -22723,7 +22748,7 @@ RtlVirtualUnwind(
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
  
@@ -742,7 +812,7 @@ index f76840c470..5ab744936d 100644
  VOID
  __cdecl
  RtlRestoreContext(
-@@ -22744,7 +22745,7 @@ RtlRestoreContext(
+@@ -22744,7 +22769,7 @@ RtlRestoreContext(
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -751,7 +821,7 @@ index f76840c470..5ab744936d 100644
  VOID
  NTAPI
  RtlUnwindEx(
-@@ -22773,14 +22774,14 @@ RtlLookupFunctionEntryCHPE(
+@@ -22773,14 +22798,14 @@ RtlLookupFunctionEntryCHPE(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -768,7 +838,7 @@ index f76840c470..5ab744936d 100644
  PVOID
  NTAPI
  RtlPcToFileHeader(
-@@ -22797,7 +22798,7 @@ RtlPcToFileHeader(
+@@ -22797,7 +22822,7 @@ RtlPcToFileHeader(
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
  
@@ -777,7 +847,7 @@ index f76840c470..5ab744936d 100644
  NTSYSAPI
  SIZE_T
  NTAPI
-@@ -22915,14 +22916,14 @@ typedef union _SLIST_HEADER {
+@@ -22915,14 +22940,14 @@ typedef union _SLIST_HEADER {
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -794,7 +864,7 @@ index f76840c470..5ab744936d 100644
  NTSYSAPI
  PSLIST_ENTRY
  NTAPI
-@@ -22930,14 +22931,14 @@ RtlFirstEntrySList (
+@@ -22930,14 +22955,14 @@ RtlFirstEntrySList (
      _In_ const SLIST_HEADER *ListHead
      );
  
@@ -811,7 +881,7 @@ index f76840c470..5ab744936d 100644
  PSLIST_ENTRY
  NTAPI
  RtlInterlockedPushEntrySList (
-@@ -22955,14 +22956,14 @@ RtlInterlockedPushListSListEx (
+@@ -22955,14 +22980,14 @@ RtlInterlockedPushListSListEx (
      _In_ DWORD Count
      );
  
@@ -828,7 +898,7 @@ index f76840c470..5ab744936d 100644
  WORD  
  NTAPI
  RtlQueryDepthSList (
-@@ -23617,12 +23618,12 @@ typedef LPOSVERSIONINFOEXA LPOSVERSIONINFOEX;
+@@ -23617,12 +23642,12 @@ typedef LPOSVERSIONINFOEXA LPOSVERSIONINFOEX;
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
  
@@ -843,7 +913,7 @@ index f76840c470..5ab744936d 100644
      _In_ BYTE  Condition
      );
  
-@@ -24313,7 +24314,7 @@ typedef enum _RTL_SYSTEM_GLOBAL_DATA_ID {
+@@ -24313,7 +24338,7 @@ typedef enum _RTL_SYSTEM_GLOBAL_DATA_ID {
      GlobalDataIdQpcBias
  } RTL_SYSTEM_GLOBAL_DATA_ID, *PRTL_SYSTEM_GLOBAL_DATA_ID;
  
@@ -852,7 +922,7 @@ index f76840c470..5ab744936d 100644
  DWORD   
  NTAPI
  RtlGetSystemGlobalData (
-@@ -24396,7 +24397,7 @@ VOID
+@@ -24396,7 +24421,7 @@ VOID
      _In_ ULONG_PTR Parameter
      );
  typedef LONG (NTAPI *PVECTORED_EXCEPTION_HANDLER)(
@@ -861,7 +931,7 @@ index f76840c470..5ab744936d 100644
      );
  
  typedef enum _HEAP_INFORMATION_CLASS {
-@@ -24444,9 +24445,9 @@ typedef struct _HEAP_OPTIMIZE_RESOURCES_INFORMATION {
+@@ -24444,9 +24469,9 @@ typedef struct _HEAP_OPTIMIZE_RESOURCES_INFORMATION {
  #define WT_EXECUTEINPERSISTENTTHREAD 0x00000080                      
  #define WT_TRANSFER_IMPERSONATION 0x00000100                         
  #define WT_SET_MAX_THREADPOOL_THREADS(Flags, Limit)  ((Flags) |= (Limit)<<16) 
@@ -874,7 +944,7 @@ index f76840c470..5ab744936d 100644
  typedef WAITORTIMERCALLBACKFUNC WAITORTIMERCALLBACK; 
  typedef
  VOID
-@@ -24739,8 +24740,8 @@ VOID
+@@ -24739,8 +24764,8 @@ VOID
  NTAPI
  RtlGetDeviceFamilyInfoEnum(
      _Out_opt_ ULONGLONG *pullUAPInfo,
@@ -885,7 +955,7 @@ index f76840c470..5ab744936d 100644
  );
  
  DWORD   
-@@ -24816,7 +24817,7 @@ typedef struct _EVENTLOGRECORD {
+@@ -24816,7 +24841,7 @@ typedef struct _EVENTLOGRECORD {
      DWORD  TimeGenerated; // Seconds since 1-1-1970
      DWORD  TimeWritten;   // Seconds since 1-1-1970
      DWORD  EventID;
@@ -894,7 +964,7 @@ index f76840c470..5ab744936d 100644
      WORD   NumStrings;
      WORD   EventCategory;
      WORD   ReservedFlags;
-@@ -25205,7 +25206,7 @@ typedef enum _CM_ERROR_CONTROL_TYPE {
+@@ -25205,7 +25230,7 @@ typedef enum _CM_ERROR_CONTROL_TYPE {
  #define TAPE_ERASE_LONG             1L
  
  typedef struct _TAPE_ERASE {
@@ -903,7 +973,7 @@ index f76840c470..5ab744936d 100644
      BOOLEAN Immediate;
  } TAPE_ERASE, *PTAPE_ERASE;
  
-@@ -25221,7 +25222,7 @@ typedef struct _TAPE_ERASE {
+@@ -25221,7 +25246,7 @@ typedef struct _TAPE_ERASE {
  #define TAPE_FORMAT                 5L
  
  typedef struct _TAPE_PREPARE {
@@ -912,7 +982,7 @@ index f76840c470..5ab744936d 100644
      BOOLEAN Immediate;
  } TAPE_PREPARE, *PTAPE_PREPARE;
  
-@@ -25235,7 +25236,7 @@ typedef struct _TAPE_PREPARE {
+@@ -25235,7 +25260,7 @@ typedef struct _TAPE_PREPARE {
  #define TAPE_LONG_FILEMARKS         3L
  
  typedef struct _TAPE_WRITE_MARKS {
@@ -921,7 +991,7 @@ index f76840c470..5ab744936d 100644
      DWORD Count;
      BOOLEAN Immediate;
  } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
-@@ -25249,7 +25250,7 @@ typedef struct _TAPE_WRITE_MARKS {
+@@ -25249,7 +25274,7 @@ typedef struct _TAPE_WRITE_MARKS {
  #define TAPE_PSEUDO_LOGICAL_POSITION 2L
  
  typedef struct _TAPE_GET_POSITION {
@@ -930,7 +1000,7 @@ index f76840c470..5ab744936d 100644
      DWORD Partition;
      LARGE_INTEGER Offset;
  } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
-@@ -25270,7 +25271,7 @@ typedef struct _TAPE_GET_POSITION {
+@@ -25270,7 +25295,7 @@ typedef struct _TAPE_GET_POSITION {
  #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
  
  typedef struct _TAPE_SET_POSITION {
@@ -939,7 +1009,7 @@ index f76840c470..5ab744936d 100644
      DWORD Partition;
      LARGE_INTEGER Offset;
      BOOLEAN Immediate;
-@@ -25372,7 +25373,7 @@ typedef struct _TAPE_GET_DRIVE_PARAMETERS {
+@@ -25372,7 +25397,7 @@ typedef struct _TAPE_GET_DRIVE_PARAMETERS {
      DWORD MinimumBlockSize;
      DWORD MaximumPartitionCount;
      DWORD FeaturesLow;
@@ -948,7 +1018,7 @@ index f76840c470..5ab744936d 100644
      DWORD EOTWarningZoneSize;
  } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
  
-@@ -25858,7 +25859,7 @@ typedef struct _KTMOBJECT_CURSOR {
+@@ -25858,7 +25883,7 @@ typedef struct _KTMOBJECT_CURSOR {
  #endif // _NTTMAPI_
  typedef DWORD TP_VERSION, *PTP_VERSION; 
  
@@ -957,7 +1027,7 @@ index f76840c470..5ab744936d 100644
  
  typedef
  VOID
-@@ -25870,7 +25871,7 @@ TP_SIMPLE_CALLBACK (
+@@ -25870,7 +25895,7 @@ TP_SIMPLE_CALLBACK (
  
  typedef TP_SIMPLE_CALLBACK *PTP_SIMPLE_CALLBACK;
  
@@ -966,7 +1036,7 @@ index f76840c470..5ab744936d 100644
  
  typedef enum _TP_CALLBACK_PRIORITY {
      TP_CALLBACK_PRIORITY_HIGH,
-@@ -25885,7 +25886,7 @@ typedef struct _TP_POOL_STACK_INFORMATION {
+@@ -25885,7 +25910,7 @@ typedef struct _TP_POOL_STACK_INFORMATION {
      SIZE_T StackCommit;
  }TP_POOL_STACK_INFORMATION, *PTP_POOL_STACK_INFORMATION;
  
@@ -975,7 +1045,7 @@ index f76840c470..5ab744936d 100644
  
  typedef
  VOID
-@@ -26099,7 +26100,7 @@ TpDestroyCallbackEnviron(
+@@ -26099,7 +26124,7 @@ TpDestroyCallbackEnviron(
  #endif // !defined(MIDL_PASS)
  
  
@@ -984,7 +1054,7 @@ index f76840c470..5ab744936d 100644
  
  typedef
  VOID
-@@ -26113,7 +26114,7 @@ TP_WORK_CALLBACK (
+@@ -26113,7 +26138,7 @@ TP_WORK_CALLBACK (
  typedef TP_WORK_CALLBACK *PTP_WORK_CALLBACK;
  
  
@@ -993,7 +1063,7 @@ index f76840c470..5ab744936d 100644
  
  typedef
  VOID
-@@ -26129,7 +26130,7 @@ typedef TP_TIMER_CALLBACK *PTP_TIMER_CALLBACK;
+@@ -26129,7 +26154,7 @@ typedef TP_TIMER_CALLBACK *PTP_TIMER_CALLBACK;
  
  typedef DWORD    TP_WAIT_RESULT;
  
@@ -1002,7 +1072,7 @@ index f76840c470..5ab744936d 100644
  
  typedef
  VOID
-@@ -26144,7 +26145,7 @@ TP_WAIT_CALLBACK (
+@@ -26144,7 +26169,7 @@ TP_WAIT_CALLBACK (
  typedef TP_WAIT_CALLBACK *PTP_WAIT_CALLBACK;
  
  
@@ -1011,7 +1081,7 @@ index f76840c470..5ab744936d 100644
  
  #if defined(_M_AMD64) && !defined(_M_ARM64EC) && !defined(__midl)
  
-@@ -26606,5 +26607,4057 @@ NtReadCurrentTebPVOID (
+@@ -26606,5 +26631,4057 @@ NtReadCurrentTebPVOID (
  #pragma warning(default:4214) // bit field types other than int
  #endif
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
-index 5fed8633f1..dd744d2b21 100644
+index 5fed8633f1..4b4bcc279b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
 @@ -31,6 +31,7 @@ Abstract:
@@ -10,7 +10,19 @@ index 5fed8633f1..dd744d2b21 100644
  
  #pragma region Desktop Family or CmdLineTools Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS)
-@@ -145,7 +146,7 @@ RASTUNNELENDPOINT
+@@ -52,7 +53,11 @@ extern "C" {
+ #ifdef USES_RAS_QUARANTINE_APIS
+ #include <naptypes.h>
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(RASNAP_ProbationTime)) || (((defined(USES_RAS_QUARANTINE_APIS))))
+ #define RASNAP_ProbationTime            0x00000001
++#endif
++#ifdef USES_RAS_QUARANTINE_APIS
+ 
+ typedef struct _tagRasNapState
+ {
+@@ -145,7 +150,7 @@ RASTUNNELENDPOINT
  #define RAS_MaxReplyMessage   1024
  #define RAS_MaxDnsSuffix      256
  
@@ -19,7 +31,7 @@ index 5fed8633f1..dd744d2b21 100644
  #define LPHRASCONN HRASCONN*
  
  #if (WINVER >= 0x501)
-@@ -903,7 +904,7 @@ RASPPPCCP
+@@ -903,7 +908,7 @@ RASPPPCCP
  */
  #if (WINVER >= 0x601)
  
@@ -28,7 +40,7 @@ index 5fed8633f1..dd744d2b21 100644
  
      // IPv4 Projection Parameters
      DWORD        dwIPv4NegotiationError;
-@@ -920,10 +921,10 @@ typedef struct _RASPPP_PROJECTION_INFO {
+@@ -920,10 +925,10 @@ typedef struct _RASPPP_PROJECTION_INFO {
      // LCP Options
      BOOL         fBundled;
      BOOL         fMultilink;
@@ -43,7 +55,7 @@ index 5fed8633f1..dd744d2b21 100644
      DWORD        dwEapTypeId;
      DWORD        dwServerEapTypeId;
      DWORD        dwLcpOptions;
-@@ -967,7 +968,7 @@ typedef struct _RASIKEV2_PROJECTION_INFO {
+@@ -967,7 +972,7 @@ typedef struct _RASIKEV2_PROJECTION_INFO {
      DWORD         dwAuthenticationProtocol;
      DWORD         dwEapTypeId;
  
@@ -52,7 +64,7 @@ index 5fed8633f1..dd744d2b21 100644
      DWORD         dwEncryptionMethod;
  
      DWORD         numIPv4ServerAddresses;
-@@ -1032,9 +1033,9 @@ RAS_PROJECTION_INFO, *PRAS_PROJECTION_INFO;
+@@ -1032,9 +1037,9 @@ RAS_PROJECTION_INFO, *PRAS_PROJECTION_INFO;
  ** For RASDIALFUNC2, subsequent callback notifications for all
  ** subentries can be cancelled by returning FALSE.
  */
@@ -65,7 +77,7 @@ index 5fed8633f1..dd744d2b21 100644
  
  
  /* Information describing a RAS-capable device.
-@@ -1594,7 +1595,7 @@ RASENTRYW
+@@ -1594,7 +1599,7 @@ RASENTRYW
  #define RASET_Phone     1  // Phone lines: modem, ISDN, X.25, etc
  #define RASET_Vpn       2  // Virtual private network
  
@@ -74,7 +86,7 @@ index 5fed8633f1..dd744d2b21 100644
  #define RASET_Direct    3  // Direct connect: serial, parallel
  #endif // (WINVER < 0x600)
  
-@@ -1611,7 +1612,7 @@ RASENTRYW
+@@ -1611,7 +1616,7 @@ RASENTRYW
  ** PROTOTYPE IN NEW CODE.  SUPPORT FOR IT MAY BE REMOVED
  ** IN FUTURE VERSIONS OF RAS.
  */
@@ -83,7 +95,7 @@ index 5fed8633f1..dd744d2b21 100644
  
  #if (WINVER >= 0x400)
  
-@@ -1657,8 +1658,8 @@ RASADPARAMS
+@@ -1657,8 +1662,8 @@ RASADPARAMS
  
  /* Prototype AutoDial DLL function.
  */
@@ -94,7 +106,7 @@ index 5fed8633f1..dd744d2b21 100644
  
  #ifdef UNICODE
  #define RASADFUNC RASADFUNCW
-@@ -1837,31 +1838,31 @@ RASEAPUSERIDENTITYW
+@@ -1837,31 +1842,31 @@ RASEAPUSERIDENTITYW
  #define LPRASEAPUSERIDENTITY  RASEAPUSERIDENTITY*
  
  typedef DWORD (WINAPI *PFNRASGETBUFFER) (
@@ -134,7 +146,7 @@ index 5fed8633f1..dd744d2b21 100644
                              );
  
  typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
-@@ -1874,8 +1875,8 @@ typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
+@@ -1874,8 +1879,8 @@ typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
                              PFNRASRECEIVEBUFFER pfnRasReceiveBuffer,
                              PFNRASRETRIEVEBUFFER pfnRasRetrieveBuffer,
                              HWND hWnd,
@@ -145,7 +157,7 @@ index 5fed8633f1..dd744d2b21 100644
                              );
  
  #endif // (WINVER >= 0x500)
-@@ -1894,8 +1895,8 @@ RASCOMMSETTINGS
+@@ -1894,8 +1899,8 @@ RASCOMMSETTINGS
  
  typedef DWORD (WINAPI *PFNRASSETCOMMSETTINGS) (
                              HANDLE hPort,
@@ -156,7 +168,7 @@ index 5fed8633f1..dd744d2b21 100644
                              );
  
  #define RASCUSTOMSCRIPTEXTENSIONS struct tagRASCUSTOMSCRIPTEXTENSIONS
-@@ -1910,148 +1911,154 @@ RASCUSTOMSCRIPTEXTENSIONS
+@@ -1910,148 +1915,154 @@ RASCUSTOMSCRIPTEXTENSIONS
  
  /* External RAS API function prototypes.
  */
@@ -171,15 +183,15 @@ index 5fed8633f1..dd744d2b21 100644
  
 -DWORD APIENTRY RasEnumConnectionsA( _Inout_opt_ LPRASCONNA, _Inout_ LPDWORD, _Out_ LPDWORD );
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
-+
-+DWORD APIENTRY RasEnumConnectionsA( _WIN32META_ANNOTATION_("win32metadata:memory_size_param=1") _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _Inout_opt_ LPRASCONNA, _Inout_ LPDWORD, _Out_ LPDWORD );
-+
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
  
 -DWORD APIENTRY RasEnumConnectionsW( _Inout_opt_ LPRASCONNW, _Inout_ LPDWORD, _Out_ LPDWORD );
-+DWORD APIENTRY RasEnumConnectionsW( _WIN32META_ANNOTATION_("win32metadata:memory_size_param=1") _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _Inout_opt_ LPRASCONNW, _Inout_ LPDWORD, _Out_ LPDWORD );
++DWORD APIENTRY RasEnumConnectionsA( _WIN32META_ANNOTATION_("win32metadata:memory_size_param=1") _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _Inout_opt_ LPRASCONNA, _Inout_ LPDWORD, _Out_ LPDWORD );
  
 -DWORD APIENTRY RasEnumEntriesA( _In_opt_ LPCSTR, _In_opt_ LPCSTR, _Inout_opt_ LPRASENTRYNAMEA, _Inout_ LPDWORD,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
++
++DWORD APIENTRY RasEnumConnectionsW( _WIN32META_ANNOTATION_("win32metadata:memory_size_param=1") _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _Inout_opt_ LPRASCONNW, _Inout_ LPDWORD, _Out_ LPDWORD );
++
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumEntriesA( _In_opt_ LPCSTR, _In_opt_ LPCSTR, _Inout_opt_ LPRASENTRYNAMEA, _Inout_ LPDWORD,
                                  _Out_ LPDWORD );
  
@@ -372,7 +384,7 @@ index 5fed8633f1..dd744d2b21 100644
  
  DWORD APIENTRY RasGetPCscf(_Out_ LPWSTR lpszPCscf);
  
-@@ -2086,12 +2093,12 @@ typedef DWORD (WINAPI *RasCustomHangUpFn) (
+@@ -2086,12 +2097,12 @@ typedef DWORD (WINAPI *RasCustomHangUpFn) (
  
  typedef DWORD (WINAPI *RasCustomDialFn) (
          HINSTANCE           hInstDll,
@@ -389,7 +401,7 @@ index 5fed8633f1..dd744d2b21 100644
          DWORD               dwFlags
          );
  
-@@ -2106,22 +2113,22 @@ typedef DWORD (WINAPI *RasCustomDeleteEntryNotifyFn) (
+@@ -2106,22 +2117,22 @@ typedef DWORD (WINAPI *RasCustomDeleteEntryNotifyFn) (
  #define RCD_Eap         0x00000002
  #define RCD_Logon       0x00000004
  
@@ -418,7 +430,7 @@ index 5fed8633f1..dd744d2b21 100644
                     _In_opt_ HANDLE hToken,
                     _In_opt_ LPCSTR pszPhonebook,
                     _In_ LPCSTR pszEntry,
-@@ -2129,83 +2136,83 @@ DWORD APIENTRY RasGetEapUserDataA(
+@@ -2129,83 +2140,83 @@ DWORD APIENTRY RasGetEapUserDataA(
                     _Inout_ DWORD *pdwSizeofEapData );
  
  
@@ -515,7 +527,7 @@ index 5fed8633f1..dd744d2b21 100644
                  _In_opt_ LPCWSTR pszPhonebook,
                  _In_ LPCWSTR pszEntry,
                  _In_ DWORD   dwSubEntryId );
-@@ -2244,14 +2251,14 @@ RASUPDATECONN
+@@ -2244,14 +2255,14 @@ RASUPDATECONN
  
  #define LPRASUPDATECONN  RASUPDATECONN*
  
@@ -532,7 +544,7 @@ index 5fed8633f1..dd744d2b21 100644
  RasGetProjectionInfoEx(
          _In_ HRASCONN              hrasconn,
          _Inout_opt_ PRAS_PROJECTION_INFO  pRasProjection,
-@@ -2363,4 +2370,98 @@ RasGetProjectionInfoEx(
+@@ -2363,4 +2374,98 @@ RasGetProjectionInfoEx(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS) */
  #pragma endregion
  

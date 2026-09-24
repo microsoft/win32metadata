@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h b/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
-index 4ff6ae0d6e..b88ca20255 100644
+index 4ff6ae0d6e..b9228dcdef 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propidl.h
 @@ -105,6 +105,7 @@ extern "C"{
@@ -27,7 +27,7 @@ index 4ff6ae0d6e..b88ca20255 100644
              _In_ ULONG cVariants,
              _Inout_updates_(cVariants) PROPVARIANT* rgvars);
  
-@@ -1342,17 +1343,17 @@ inline void PropVariantInit (_Out_ PROPVARIANT * pvar )
+@@ -1342,32 +1343,32 @@ inline void PropVariantInit (_Out_ PROPVARIANT * pvar )
  
  #ifndef _SERIALIZEDPROPERTYVALUE_DEFINED_
  #define _SERIALIZEDPROPERTYVALUE_DEFINED_
@@ -48,7 +48,12 @@ index 4ff6ae0d6e..b88ca20255 100644
              _In_ const PROPVARIANT* pvar,
              _In_ USHORT CodePage,
              _Out_writes_bytes_opt_(*pcb) SERIALIZEDPROPERTYVALUE* pprop,
-@@ -1364,10 +1365,10 @@ StgConvertVariantToProperty(
+             _Inout_ ULONG* pcb,
+             _In_ PROPID pid,
+-            _Reserved_ BOOLEAN fReserved,
++            _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ BOOLEAN fReserved,
+             _Inout_opt_ ULONG* pcIndirect);
+ 
  #ifdef __cplusplus
  class PMemoryAllocator;
  

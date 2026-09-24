@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
-index 8597e21530..4a57c34519 100644
+index 8597e21530..c5f6203fbb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,17 @@ index 8597e21530..4a57c34519 100644
  #include <winapifamily.h>
  
  /*++
+@@ -93,8 +94,8 @@ struct _RPC_ASYNC_STATE;
+ 
+ typedef void RPC_ENTRY
+ RPCNOTIFICATION_ROUTINE (
+-                  struct _RPC_ASYNC_STATE *pAsync,
+-                  void *Context,
++                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _RPC_ASYNC_STATE *pAsync,
++                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *Context,
+                   RPC_ASYNC_EVENT Event);
+ typedef RPCNOTIFICATION_ROUTINE *PFN_RPCNOTIFICATION_ROUTINE;
+ 
 @@ -178,7 +179,7 @@ typedef struct _RPC_ASYNC_STATE {
  #define RpcAsyncGetCallHandle(pAsync) (((PRPC_ASYNC_STATE) pAsync)->RuntimeInfo)
  

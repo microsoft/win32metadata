@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h b/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
-index 663a5f2e3f..2453489e37 100644
+index 663a5f2e3f..6af4181692 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
 @@ -1,3 +1,4 @@
@@ -135,7 +135,12 @@ index 663a5f2e3f..2453489e37 100644
                          DWORD    dwPreviousSelection,
                          DWORD    dwMode
                          )PURE;
-@@ -1494,7 +1495,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+@@ -1490,11 +1491,11 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(GetOptions) (THIS_
+                            _In_        POEMUIOBJ  poemuiobj,
+-                           _Reserved_  DWORD      dwFlags,
++                           _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
                             _In_reads_bytes_opt_(cbIn)
                                         PCZZSTR      pmszFeaturesRequested,
                             _In_        DWORD      cbIn,
@@ -144,17 +149,24 @@ index 663a5f2e3f..2453489e37 100644
                                         PZZSTR       pmszFeatureOptionBuf,
                             _In_        DWORD      cbSize,
                             _Out_ _On_failure_(_When_(return == E_OUTOFMEMORY, _Post_valid_))
-@@ -1521,7 +1522,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+@@ -1519,9 +1520,9 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(EnumConstrainedOptions) (THIS_
                                         _In_        POEMUIOBJ  poemuiobj,
-                                        _Reserved_  DWORD      dwFlags,
+-                                       _Reserved_  DWORD      dwFlags,
++                                       _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
                                         _In_        PCSTR      pszFeatureKeyword,
 -                                       _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
 +                                       _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
                                                     PZZSTR       pmszConstrainedOptionList,
                                         _In_        DWORD      cbSize,
                                         _Out_ _On_failure_(_When_(return == E_OUTOFMEMORY, _Post_valid_))
-@@ -1537,7 +1538,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
-                                _Reserved_  DWORD      dwFlags,
+@@ -1534,10 +1535,10 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(WhyConstrained) (THIS_
+                                _In_        POEMUIOBJ  poemuiobj,
+-                               _Reserved_  DWORD      dwFlags,
++                               _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
                                 _In_        PCSTR      pszFeatureKeyword,
                                 _In_        PCSTR      pszOptionKeyword,
 -                               _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
@@ -162,18 +174,50 @@ index 663a5f2e3f..2453489e37 100644
                                             PZZSTR     pmszReasonList,
                                 _In_        DWORD      cbSize,
                                 _Out_ _On_failure_(_When_(return == E_OUTOFMEMORY, _Post_valid_))
-@@ -1601,7 +1602,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+@@ -1551,7 +1552,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(GetGlobalAttribute) (THIS_
+                                    _In_        POEMUIOBJ  poemuiobj,
+-                                   _Reserved_  DWORD      dwFlags,
++                                   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
+                                    _In_opt_    PCSTR      pszAttribute,
+                                    _Out_       PDWORD     pdwDataType,
+                                    _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
+@@ -1567,7 +1568,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(GetFeatureAttribute) (THIS_
+                                     _In_        POEMUIOBJ  poemuiobj,
+-                                    _Reserved_  DWORD      dwFlags,
++                                    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
+                                     _In_        PCSTR      pszFeatureKeyword,
+                                     _In_opt_    PCSTR      pszAttribute,
+                                     _Out_       PDWORD     pdwDataType,
+@@ -1583,7 +1584,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(GetOptionAttribute) (THIS_
+                                    _In_        POEMUIOBJ  poemuiobj,
+-                                   _Reserved_  DWORD      dwFlags,
++                                   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
+                                    _In_        PCSTR      pszFeatureKeyword,
+                                    _In_        PCSTR      pszOptionKeyword,
+                                    _In_opt_    PCSTR      pszAttribute,
+@@ -1600,8 +1601,8 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
      STDMETHOD(EnumFeatures) (THIS_
                               _In_        POEMUIOBJ  poemuiobj,
-                              _Reserved_  DWORD      dwFlags,
+-                             _Reserved_  DWORD      dwFlags,
 -                             _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
++                             _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
 +                             _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
                                           PZZSTR       pmszFeatureList,
                               _In_        DWORD      cbSize,
                               _Out_ _On_failure_(_When_(return == E_OUTOFMEMORY, _Post_valid_))
-@@ -1615,7 +1616,7 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+@@ -1613,9 +1614,9 @@ DECLARE_INTERFACE_(IPrintCoreUI2, IPrintOemDriverUI)
+ 
+     STDMETHOD(EnumOptions) (THIS_
                              _In_        POEMUIOBJ  poemuiobj,
-                             _Reserved_  DWORD      dwFlags,
+-                            _Reserved_  DWORD      dwFlags,
++                            _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD      dwFlags,
                              _In_        PCSTR      pszFeatureKeyword,
 -                            _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)
 +                            _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_to_opt_(cbSize, *pcbNeeded)

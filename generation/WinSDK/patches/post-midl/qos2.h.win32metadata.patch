@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h b/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h
-index 1d59ed67b5..96274c4fda 100644
+index 1d59ed67b5..a5f31a7ee2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/qos2.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -116,7 +116,7 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSCloseHandle(
-@@ -595,7 +598,8 @@ QOSCloseHandle(
+@@ -595,13 +598,14 @@ QOSCloseHandle(
  //          you've specified. It could be that the other host does does not 
  //          have the required components or that it is not on the same link.
  //
@@ -126,7 +126,14 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSStartTrackingClient(
-@@ -629,7 +633,8 @@ QOSStartTrackingClient(
+     _In_        HANDLE          QOSHandle,
+     _In_        PSOCKADDR       DestAddr,
+-    _Reserved_  DWORD           Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD           Flags
+ );
+ 
+ //
+@@ -629,13 +633,14 @@ QOSStartTrackingClient(
  //  If the function fails, the return value is zero. To get extended error 
  //  information, call GetLastError.
  //
@@ -136,6 +143,13 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSStopTrackingClient(
+     _In_        HANDLE          QOSHandle,
+     _In_        PSOCKADDR       DestAddr,
+-    _Reserved_  DWORD           Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD           Flags
+ );
+ 
+ //
 @@ -674,7 +679,8 @@ QOSStopTrackingClient(
  //          The caller does not have the administrator rights required 
  //          to perform this call.
@@ -156,7 +170,7 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSAddSocketToFlow(
-@@ -880,7 +887,8 @@ QOSAddSocketToFlow(
+@@ -880,14 +887,15 @@ QOSAddSocketToFlow(
  //      ERROR_NOT_FOUND
  //          Invalid FlowId specified
  //
@@ -166,6 +180,14 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSRemoveSocketFromFlow(
+     _In_        HANDLE              QOSHandle,
+     _In_opt_    SOCKET              Socket,
+     _In_        QOS_FLOWID          FlowId,
+-    _Reserved_  DWORD               Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD               Flags
+ );
+ 
+ //
 @@ -984,7 +992,8 @@ QOSRemoveSocketFromFlow(
  //          The caller does not have the administrator rights required 
  //          to perform this call.
@@ -176,6 +198,15 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSSetFlow(
+@@ -993,7 +1002,7 @@ QOSSetFlow(
+     _In_                QOS_SET_FLOW    Operation,
+     _In_                ULONG           Size,
+     _In_reads_bytes_(Size)   PVOID           Buffer,  
+-    _Reserved_          DWORD           Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_          DWORD           Flags,
+     _Out_opt_           LPOVERLAPPED    Overlapped
+ );
+ 
 @@ -1106,7 +1115,8 @@ QOSSetFlow(
  //          qWave has erred on the side of caution as it waits for more data
  //          before ascertaining the state of the network.
@@ -196,6 +227,15 @@ index 1d59ed67b5..96274c4fda 100644
  BOOL
  WINAPI
  QOSNotifyFlow(
+@@ -1236,7 +1247,7 @@ QOSNotifyFlow(
+     _In_                        QOS_NOTIFY_FLOW Operation,
+     _Inout_opt_                 PULONG          Size,
+     _Inout_updates_bytes_opt_(*Size)   PVOID           Buffer,
+-    _Reserved_                  DWORD           Flags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                  DWORD           Flags,
+     _Out_opt_                   LPOVERLAPPED    Overlapped
+ );
+ 
 @@ -1273,7 +1284,8 @@ QOSNotifyFlow(
  //  If the function fails, the return value is zero. To get extended error 
  //  information, call GetLastError.

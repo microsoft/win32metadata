@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h b/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h
-index 582aa5c818..4f32f7c4c9 100644
+index 582aa5c818..521b16f59e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h
 @@ -1,3 +1,4 @@
@@ -112,3 +112,16 @@ index 582aa5c818..4f32f7c4c9 100644
          
          virtual /* [hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
              /* [retval][out] */ IUnknown __RPC_FAR *__RPC_FAR *NewEnum) = 0;
+@@ -3649,8 +3650,12 @@ DEFINE_GUID(IID_IMsmConfigurableItem, 0x4D6E6284, 0xD21D, 0x401E, 0x84, 0xF6, 0x
+ DEFINE_GUID(IID_IEnumMsmConfigurableItem, 0x832C6969, 0x4826, 0x4C24, 0xA3, 0x97, 0xB7, 0x00, 0x2D, 0x81, 0x96, 0xE6);
+ DEFINE_GUID(IID_IMsmConfigurableItems, 0x55BF723C, 0x9A0D, 0x463E, 0xB4, 0x2B, 0xB4, 0xFB, 0xC7, 0xBE, 0x3C, 0x7C);
+ DEFINE_GUID(IID_IMsmConfigureModule, 0xAC013209, 0x18A7, 0x4851, 0x8A, 0x21, 0x23, 0x53, 0x44, 0x3D, 0x70, 0xA0);
++#endif
++#if defined(WIN32METADATA) || ((((_WIN32_MSM >= 150))))
+ DEFINE_GUID(CLSID_MsmMerge2, 0xF94985D5,0x29F9,0x4743, 0x98,0x05,0x99,0xBC,0x3F,0x35,0xB6,0x78);
+ #endif
++#if (_WIN32_MSM >= 150)
++#endif
+ 
+ #endif // __mergemod_h__
+ 

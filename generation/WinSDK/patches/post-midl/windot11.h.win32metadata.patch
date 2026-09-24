@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/windot11.h b/generation/WinSDK/RecompiledIdlHeaders/shared/windot11.h
-index 4e84058e51..b7a7afd6ac 100644
+index 4e84058e51..142c39fac7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/windot11.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/windot11.h
 @@ -1,3 +1,4 @@
@@ -16,3 +16,27 @@ index 4e84058e51..b7a7afd6ac 100644
              ULONG uPhyId;
          };
          ULONG uNumOfEntries;
+@@ -1946,7 +1947,11 @@ struct DOT11_EXTSTA_ATTRIBUTES {
+ #if (defined(_NDIS_) || defined(NDIS_WRAPPER)) // To avoid build break since NDIS_PACKET isn't defined for user mode app.
+         // Send path extension for NativeWiFi NDIS 6.0 miniport driver
+         typedef struct _DOT11_SEND_CONTEXT {
++#endif
++#if (defined(WIN32METADATA) && !defined(DOT11_SEND_CONTEXT_REVISION_1)) || ((((defined(_NDIS_) || defined(NDIS_WRAPPER)))))
+             #define DOT11_SEND_CONTEXT_REVISION_1  1
++#endif
++#if (defined(_NDIS_) || defined(NDIS_WRAPPER)) // To avoid build break since NDIS_PACKET isn't defined for user mode app.
+             NDIS_OBJECT_HEADER Header;
+             PVOID pvReserved;
+             ULONG uFlags;
+@@ -2019,7 +2024,11 @@ struct DOT11_EXTSTA_ATTRIBUTES {
+ 
+         // Recv path extension for NativeWiFi NDIS 6.0 miniport driver
+         typedef struct _DOT11_RECV_CONTEXT {
++#endif
++#if (defined(WIN32METADATA) && !defined(DOT11_RECV_CONTEXT_REVISION_1)) || ((((defined(_NDIS_) || defined(NDIS_WRAPPER)))))
+             #define DOT11_RECV_CONTEXT_REVISION_1  1
++#endif
++#if (defined(_NDIS_) || defined(NDIS_WRAPPER)) // To avoid build break since NDIS_PACKET isn't defined for user mode app.
+             NDIS_OBJECT_HEADER Header;
+             PVOID pvReserved;
+             DOT11_PHY_TYPE dot11PhyType;

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h b/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
-index 83ce06fff2..f662852676 100644
+index 83ce06fff2..6b51501834 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
 @@ -1,3 +1,4 @@
@@ -53,7 +53,20 @@ index 83ce06fff2..f662852676 100644
  
  };
  
-@@ -123,11 +124,11 @@ DECLARE_INTERFACE_(IITDatabase, IUnknown)
+@@ -98,8 +99,12 @@ DEFINE_GUID(IID_IITDatabase,
+ #ifdef ITPROXY
+ 
+ // {66673452-8C23-11d0-A84E-00AA006C7D01}
++#endif
++#if defined(WIN32METADATA) || (((defined(ITPROXY))))
+ DEFINE_GUID(CLSID_IITDatabase, 
+ 0x66673452, 0x8c23, 0x11d0, 0xa8, 0x4e, 0x0, 0xaa, 0x0, 0x6c, 0x7d, 0x1);
++#endif
++#ifdef ITPROXY
+ 
+ #else
+ 
+@@ -123,11 +128,11 @@ DECLARE_INTERFACE_(IITDatabase, IUnknown)
  	// by *pdwObjInstance.  Note that the value in *pdwObjInstance will be
  	// persisted by the database when it is asked to save
  
@@ -67,7 +80,7 @@ index 83ce06fff2..f662852676 100644
  
  	// To obtain a pointer to a named object's persistence the object's full
  	// name (including any object-specific type prefix) should be passed in
-@@ -140,7 +141,7 @@ DECLARE_INTERFACE_(IITDatabase, IUnknown)
+@@ -140,7 +145,7 @@ DECLARE_INTERFACE_(IITDatabase, IUnknown)
  	// If the specified object's persistence doesn't exist, or if it exists
  	// but is of the wrong type, then STG_E_FILENOTFOUND will be returned. 
  	STDMETHOD(GetObjectPersistence)(LPCWSTR lpwszObject, DWORD dwObjInstance,
@@ -76,7 +89,20 @@ index 83ce06fff2..f662852676 100644
  };
  
  typedef IITDatabase* LPITDB;
-@@ -325,7 +326,7 @@ DECLARE_INTERFACE_(IStemmerConfig, IUnknown)
+@@ -219,8 +224,12 @@ DEFINE_GUID(IID_IITWordWheel,
+ #ifdef ITPROXY
+ 
+ // {D73725C2-8C12-11d0-A84E-00AA006C7D01}
++#endif
++#if defined(WIN32METADATA) || (((defined(ITPROXY))))
+ DEFINE_GUID(CLSID_IITWordWheel, 
+ 0xd73725c2, 0x8c12, 0x11d0, 0xa8, 0x4e, 0x0, 0xaa, 0x0, 0x6c, 0x7d, 0x1);
++#endif
++#ifdef ITPROXY
+ 
+ #else
+ 
+@@ -325,7 +334,7 @@ DECLARE_INTERFACE_(IStemmerConfig, IUnknown)
  	// Returns S_OK if locale described by params is supported
  	// by the breaker object; E_INVALIDARG otherwise.
  	STDMETHOD(SetLocaleInfo)(DWORD dwCodePageID, LCID lcid) PURE;
@@ -85,7 +111,7 @@ index 83ce06fff2..f662852676 100644
  
  	// Sets/gets info that controls certain aspects of stemming.
  	// This method currently accepts only the following set of flags
-@@ -333,7 +334,7 @@ DECLARE_INTERFACE_(IStemmerConfig, IUnknown)
+@@ -333,7 +342,7 @@ DECLARE_INTERFACE_(IStemmerConfig, IUnknown)
  	// In the future, additional information may be passed in through
  	// dwReserved.
  	STDMETHOD(SetControlInfo)(DWORD grfStemFlags, DWORD dwReserved) PURE;
@@ -94,7 +120,7 @@ index 83ce06fff2..f662852676 100644
  
  	// Will load external stemmer data, such as word part lists, etc.
  	// The format of the data in the stream is entirely
-@@ -430,14 +431,14 @@ DECLARE_INTERFACE_(IWordBreakerConfig, IUnknown)
+@@ -430,14 +439,14 @@ DECLARE_INTERFACE_(IWordBreakerConfig, IUnknown)
  	// Returns S_OK if locale described by params is supported
  	// by the breaker object; E_INVALIDARG otherwise.
  	STDMETHOD(SetLocaleInfo)(DWORD dwCodePageID, LCID lcid) PURE;
@@ -111,7 +137,7 @@ index 83ce06fff2..f662852676 100644
  
  	// Sets/gets info that controls certain aspects of word breaking.
  	// This method currently accepts only the following set of flags
-@@ -447,7 +448,7 @@ DECLARE_INTERFACE_(IWordBreakerConfig, IUnknown)
+@@ -447,7 +456,7 @@ DECLARE_INTERFACE_(IWordBreakerConfig, IUnknown)
  	// In the future, additional information may be passed in through
  	// dwReserved.
  	STDMETHOD(SetControlInfo)(DWORD grfBreakFlags, DWORD dwReserved) PURE;
@@ -120,7 +146,7 @@ index 83ce06fff2..f662852676 100644
  
  	// Will load external breaker data, such as a table containing
  	// char-by-char break information or a list of stop words.
-@@ -585,42 +586,42 @@ typedef struct tagCOLUMNSTATUS
+@@ -585,42 +594,42 @@ typedef struct tagCOLUMNSTATUS
  
  
  // Used by IITResultSet::SetColumnHeap.
@@ -179,7 +205,7 @@ index 83ce06fff2..f662852676 100644
  
      // Clear result set
      STDMETHOD(Clear)() PURE;
-@@ -632,8 +633,8 @@ DECLARE_INTERFACE_(IITResultSet, IUnknown)
+@@ -632,8 +641,8 @@ DECLARE_INTERFACE_(IITResultSet, IUnknown)
      STDMETHOD(Cancel)() PURE;
      STDMETHOD(Pause)(BOOL fPause) PURE;
  
@@ -190,7 +216,7 @@ index 83ce06fff2..f662852676 100644
  };
  
  typedef IITResultSet* LPITRS;
-@@ -697,4 +698,15 @@ DEFINE_GUID(CLSID_ITEngStemmer,
+@@ -697,4 +706,15 @@ DEFINE_GUID(CLSID_ITEngStemmer,
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  

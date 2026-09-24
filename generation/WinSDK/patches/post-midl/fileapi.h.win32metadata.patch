@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fileapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fileapi.h
-index 8b41fa60ce..f00c82894c 100644
+index 8b41fa60ce..05f0253b97 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/fileapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/fileapi.h
 @@ -17,6 +17,7 @@
@@ -254,11 +254,13 @@ index 8b41fa60ce..f00c82894c 100644
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -271,9 +354,13 @@ FindFirstFileExA(
+@@ -270,10 +353,14 @@ FindFirstFileExA(
+     _In_ FINDEX_INFO_LEVELS fInfoLevelId,
      _Out_writes_bytes_(sizeof(WIN32_FIND_DATAA)) LPVOID lpFindFileData,
      _In_ FINDEX_SEARCH_OPS fSearchOp,
-     _Reserved_ LPVOID lpSearchFilter,
+-    _Reserved_ LPVOID lpSearchFilter,
 -    _In_ DWORD dwAdditionalFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpSearchFilter,
 +    _Win32_AssociatedEnum_(FIND_FIRST_EX_FLAGS) _In_ DWORD dwAdditionalFlags
      );
  
@@ -269,11 +271,13 @@ index 8b41fa60ce..f00c82894c 100644
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -283,7 +370,7 @@ FindFirstFileExW(
+@@ -282,8 +369,8 @@ FindFirstFileExW(
+     _In_ FINDEX_INFO_LEVELS fInfoLevelId,
      _Out_writes_bytes_(sizeof(WIN32_FIND_DATAW)) LPVOID lpFindFileData,
      _In_ FINDEX_SEARCH_OPS fSearchOp,
-     _Reserved_ LPVOID lpSearchFilter,
+-    _Reserved_ LPVOID lpSearchFilter,
 -    _In_ DWORD dwAdditionalFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpSearchFilter,
 +    _Win32_AssociatedEnum_(FIND_FIRST_EX_FLAGS) _In_ DWORD dwAdditionalFlags
      );
  
@@ -721,8 +725,9 @@ index 8b41fa60ce..f00c82894c 100644
  LockFileEx(
      _In_ HANDLE hFile,
 -    _In_ DWORD dwFlags,
+-    _Reserved_ DWORD dwReserved,
 +    _Win32_AssociatedEnum_(LOCK_FILE_FLAGS) _In_ DWORD dwFlags,
-     _Reserved_ DWORD dwReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,
      _In_ DWORD nNumberOfBytesToLockLow,
      _In_ DWORD nNumberOfBytesToLockHigh,
 -    _Inout_ LPOVERLAPPED lpOverlapped
@@ -785,11 +790,13 @@ index 8b41fa60ce..f00c82894c 100644
  WINBASEAPI
  _Must_inspect_result_
  BOOL
-@@ -1019,9 +1236,12 @@ ReadFileScatter(
+@@ -1018,10 +1235,13 @@ ReadFileScatter(
+     _In_ HANDLE hFile,
      _In_ FILE_SEGMENT_ELEMENT aSegmentArray[],
      _In_ DWORD nNumberOfBytesToRead,
-     _Reserved_ LPDWORD lpReserved,
+-    _Reserved_ LPDWORD lpReserved,
 -    _Inout_ LPOVERLAPPED lpOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
 +     _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -916,7 +923,7 @@ index 8b41fa60ce..f00c82894c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1138,6 +1388,9 @@ UnlockFile(
+@@ -1138,50 +1388,65 @@ UnlockFile(
      _In_ DWORD nNumberOfBytesToUnlockHigh
      );
  
@@ -926,7 +933,12 @@ index 8b41fa60ce..f00c82894c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1149,39 +1402,51 @@ UnlockFileEx(
+ UnlockFileEx(
+     _In_ HANDLE hFile,
+-    _Reserved_ DWORD dwReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,
+     _In_ DWORD nNumberOfBytesToUnlockLow,
+     _In_ DWORD nNumberOfBytesToUnlockHigh,
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -974,8 +986,9 @@ index 8b41fa60ce..f00c82894c 100644
 -    _In_ FILE_SEGMENT_ELEMENT aSegmentArray[],
 +     _In_ FILE_SEGMENT_ELEMENT aSegmentArray[],
      _In_ DWORD nNumberOfBytesToWrite,
-     _Reserved_ LPDWORD lpReserved,
+-    _Reserved_ LPDWORD lpReserved,
 -    _Inout_ LPOVERLAPPED lpOverlapped
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
 +     _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -1099,8 +1112,12 @@ index 8b41fa60ce..f00c82894c 100644
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -1338,6 +1626,9 @@ FindFirstStreamW(
-     _Reserved_ DWORD dwFlags
+@@ -1335,9 +1623,12 @@ FindFirstStreamW(
+     _In_ LPCWSTR lpFileName,
+     _In_ STREAM_INFO_LEVELS InfoLevel,
+     _Out_writes_bytes_(sizeof(WIN32_FIND_STREAM_DATA)) LPVOID lpFindStreamData,
+-    _Reserved_ DWORD dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwFlags
      );
  
 +_Windows_SupportedOS_WindowsVista_ 

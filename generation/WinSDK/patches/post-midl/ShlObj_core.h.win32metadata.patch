@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
-index 04174f8702..9c2626d0d4 100644
+index 04174f8702..fba4cb696f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 @@ -6,6 +6,7 @@ File: shlobj_core.h
@@ -269,24 +269,28 @@ index 04174f8702..9c2626d0d4 100644
  
  #endif
  
-@@ -890,13 +897,13 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
+@@ -890,14 +897,14 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
  #endif  // NTDDI_WINXP
  #define CSIDL_FLAG_MASK                 0xFF00        // mask for all possible flag values
  
 -_Check_return_
+-STDAPI SHGetSpecialFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
 +_Windows_SupportedOS_Windows2000_ _Check_return_
- STDAPI SHGetSpecialFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
++STDAPI SHGetSpecialFolderLocation(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
  
 -SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
 -_Success_(return != 0)
-+_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Success_(return != 0)
- SHSTDAPI_(BOOL) SHGetSpecialFolderPathA(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
+-SHSTDAPI_(BOOL) SHGetSpecialFolderPathA(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
 -_Success_(return != 0)
+-SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
++_Windows_SupportedOS_WindowsXP_ SHSTDAPI_(PIDLIST_ABSOLUTE) SHCloneSpecialIDList(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _In_ BOOL fCreate);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Success_(return != 0)
++SHSTDAPI_(BOOL) SHGetSpecialFolderPathA(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Success_(return != 0)
- SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
++SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
  #ifdef UNICODE
  #define SHGetSpecialFolderPath  SHGetSpecialFolderPathW
+ #else
 @@ -905,33 +912,33 @@ SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_P
  #endif // !UNICODE
  
@@ -301,15 +305,15 @@ index 04174f8702..9c2626d0d4 100644
  
 -SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
 -SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathA(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ SHFOLDERAPI SHGetFolderPathW(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetFolderPath  SHGetFolderPathW
  #else
  #define SHGetFolderPath  SHGetFolderPathA
  #endif // !UNICODE
 -SHSTDAPI SHGetFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
-+_Windows_SupportedOS_Windows2000_ SHSTDAPI SHGetFolderLocation(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
++_Windows_SupportedOS_Windows2000_ SHSTDAPI SHGetFolderLocation(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _Outptr_ PIDLIST_ABSOLUTE *ppidl);
  #endif  // NTDDI_WIN2K
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -324,8 +328,8 @@ index 04174f8702..9c2626d0d4 100644
  #endif // !UNICODE
 -STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
 -STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirA(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirA(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCSTR pszSubDir, _Out_writes_(MAX_PATH) LPSTR pszPath);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ STDAPI SHGetFolderPathAndSubDirW(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetFolderPathAndSubDir  SHGetFolderPathAndSubDirW
  #else
@@ -436,15 +440,30 @@ index 04174f8702..9c2626d0d4 100644
  {
      // *** IACList2 specific methods ***
      STDMETHOD(SetOptions)(THIS_ DWORD dwFlag) PURE;
-@@ -1434,7 +1441,7 @@ DECLARE_INTERFACE_IID_(IACList2, IACList, "470141a0-5186-11d2-bbb6-0060977b464c"
+@@ -1434,18 +1441,18 @@ DECLARE_INTERFACE_IID_(IACList2, IACList, "470141a0-5186-11d2-bbb6-0060977b464c"
  #undef  INTERFACE
  #define INTERFACE   IProgressDialog
  
 -DECLARE_INTERFACE_IID_(IProgressDialog, IUnknown, "EBBC7C04-315E-11d2-B62F-006097DF5BD4")
 +DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IProgressDialog, IUnknown, "EBBC7C04-315E-11d2-B62F-006097DF5BD4")
  {
-     STDMETHOD(StartProgressDialog)(THIS_ _In_opt_ HWND hwndParent, _In_opt_ IUnknown * punkEnableModless, DWORD dwFlags, _Reserved_ LPCVOID pvResevered) PURE;
+-    STDMETHOD(StartProgressDialog)(THIS_ _In_opt_ HWND hwndParent, _In_opt_ IUnknown * punkEnableModless, DWORD dwFlags, _Reserved_ LPCVOID pvResevered) PURE;
++    STDMETHOD(StartProgressDialog)(THIS_ _In_opt_ HWND hwndParent, _In_opt_ IUnknown * punkEnableModless, DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCVOID pvResevered) PURE;
      STDMETHOD(StopProgressDialog)(THIS) PURE;
+     STDMETHOD(SetTitle)(THIS_ _In_ PCWSTR pwzTitle) PURE;
+     STDMETHOD(SetAnimation)(THIS_ _In_opt_ HINSTANCE hInstAnimation, UINT idAnimation) PURE;
+     STDMETHOD_(BOOL,HasUserCancelled) (THIS) PURE;
+     STDMETHOD(SetProgress)(THIS_ DWORD dwCompleted, DWORD dwTotal) PURE;
+     STDMETHOD(SetProgress64)(THIS_ ULONGLONG ullCompleted, ULONGLONG ullTotal) PURE;
+-    STDMETHOD(SetLine)(THIS_ DWORD dwLineNum, _In_ PCWSTR pwzString, BOOL fCompactPath, _Reserved_ LPCVOID pvResevered) PURE;
+-    STDMETHOD(SetCancelMsg)(THIS_ _In_ PCWSTR pwzCancelMsg, _Reserved_ LPCVOID pvResevered) PURE;
+-    STDMETHOD(Timer)(THIS_ DWORD dwTimerAction, _Reserved_ LPCVOID pvResevered) PURE;
++    STDMETHOD(SetLine)(THIS_ DWORD dwLineNum, _In_ PCWSTR pwzString, BOOL fCompactPath, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCVOID pvResevered) PURE;
++    STDMETHOD(SetCancelMsg)(THIS_ _In_ PCWSTR pwzCancelMsg, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCVOID pvResevered) PURE;
++    STDMETHOD(Timer)(THIS_ DWORD dwTimerAction, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCVOID pvResevered) PURE;
+ };
+ 
+ 
 @@ -1487,7 +1494,7 @@ DECLARE_INTERFACE_IID_(IProgressDialog, IUnknown, "EBBC7C04-315E-11d2-B62F-00609
  #undef  INTERFACE
  #define INTERFACE   IDockingWindowSite

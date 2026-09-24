@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
-index cff7f002a6..7386b4bf21 100644
+index cff7f002a6..0108530eff 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
 @@ -21,6 +21,7 @@ Revision History:
@@ -39,6 +39,28 @@ index cff7f002a6..7386b4bf21 100644
      IN   IN6_ADDR                 Address,
      IN   DWORD                    dwLength,
      IN   DWORD                    dwAddressSize
+@@ -518,8 +519,8 @@ DWORD
+ (WINAPI * _EVENT_CALLBACK) (
+      IN  RTM_ENTITY_HANDLE    RtmRegHandle,  // Callee's Registration Handle
+      IN  RTM_EVENT_TYPE       EventType,
+-     IN  PVOID                Context1,
+-     IN  PVOID                Context2
++     _WIN32META_ANNOTATION_("win32metadata:out") IN  PVOID                Context1,
++     _WIN32META_ANNOTATION_("win32metadata:out") IN  PVOID                Context2
+      );
+ 
+ typedef _EVENT_CALLBACK RTM_EVENT_CALLBACK,
+@@ -577,8 +578,8 @@ VOID
+ (WINAPI * _ENTITY_METHOD) (
+     IN  RTM_ENTITY_HANDLE         CallerHandle,
+     IN  RTM_ENTITY_HANDLE         CalleeHandle,
+-    IN  RTM_ENTITY_METHOD_INPUT  *Input,
+-    OUT RTM_ENTITY_METHOD_OUTPUT *Output
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  RTM_ENTITY_METHOD_INPUT  *Input,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RTM_ENTITY_METHOD_OUTPUT *Output
+     );
+ 
+ typedef _ENTITY_METHOD RTM_ENTITY_EXPORT_METHOD,
 @@ -692,45 +693,48 @@ typedef DWORD          RTM_NOTIFY_FLAGS,
  // Registration API Prototypes
  //

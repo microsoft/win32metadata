@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
-index 0d77f58e08..a2e01ce624 100644
+index 0d77f58e08..91cf05f77a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wlanapi.h
 @@ -25,6 +25,7 @@ Revision History:
@@ -306,7 +306,7 @@ index 0d77f58e08..a2e01ce624 100644
      DWORD dwNumberOfItems;
      DWORD dwIndex;
  
-@@ -1224,28 +1225,28 @@ typedef struct _WFD_GROUP_ID
+@@ -1224,76 +1225,76 @@ typedef struct _WFD_GROUP_ID
  
  
  // public APIs
@@ -314,7 +314,8 @@ index 0d77f58e08..a2e01ce624 100644
 +_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
  WlanOpenHandle(
      _In_ DWORD dwClientVersion,
-     _Reserved_ PVOID pReserved,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Out_ PDWORD pdwNegotiatedVersion,
 -    _Out_ PHANDLE phClientHandle
 +    _Win32_RAIIFree_(WlanCloseHandle) _Out_ PHANDLE phClientHandle
@@ -324,14 +325,16 @@ index 0d77f58e08..a2e01ce624 100644
 +_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
  WlanCloseHandle(
      _In_ HANDLE hClientHandle,
-     _Reserved_ PVOID pReserved
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
 +_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
  WlanEnumInterfaces(
      _In_ HANDLE hClientHandle,
-     _Reserved_ PVOID pReserved,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Outptr_ PWLAN_INTERFACE_INFO_LIST *ppInterfaceList
  );
  
@@ -340,8 +343,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetAutoConfigParameter(
      _In_ HANDLE hClientHandle,
      _In_ WLAN_AUTOCONF_OPCODE OpCode,
-@@ -1254,7 +1255,7 @@ WlanSetAutoConfigParameter(
-     _Reserved_ PVOID pReserved
+     _In_ DWORD dwDataSize,
+     _In_reads_bytes_(dwDataSize) CONST PVOID pData,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -349,7 +354,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanQueryAutoConfigParameter(
      _In_ HANDLE hClientHandle,
      _In_ WLAN_AUTOCONF_OPCODE OpCode,
-@@ -1264,7 +1265,7 @@ WlanQueryAutoConfigParameter(
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Out_ PDWORD pdwDataSize,
+     _Outptr_result_bytebuffer_(*pdwDataSize) PVOID *ppData,
      _Out_opt_ PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType
  );
  
@@ -358,7 +366,8 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetInterfaceCapability(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1272,7 +1273,7 @@ WlanGetInterfaceCapability(
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Outptr_ PWLAN_INTERFACE_CAPABILITY *ppCapability
  );
  
@@ -367,8 +376,11 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetInterface(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1282,7 +1283,7 @@ WlanSetInterface(
-     _Reserved_ PVOID pReserved
+     _In_ WLAN_INTF_OPCODE OpCode,
+     _In_ DWORD dwDataSize,
+     _In_reads_bytes_(dwDataSize) CONST PVOID pData,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -376,7 +388,11 @@ index 0d77f58e08..a2e01ce624 100644
  WlanQueryInterface(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1293,7 +1294,7 @@ WlanQueryInterface(
+     _In_ WLAN_INTF_OPCODE OpCode,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Out_ PDWORD pdwDataSize,
+     _Outptr_result_bytebuffer_(*pdwDataSize) PVOID *ppData,
      _Out_opt_ PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType
  );
  
@@ -385,7 +401,7 @@ index 0d77f58e08..a2e01ce624 100644
  WlanIhvControl(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1305,7 +1306,7 @@ WlanIhvControl(
+@@ -1305,21 +1306,21 @@ WlanIhvControl(
      _Out_ PDWORD pdwBytesReturned
  );
  
@@ -394,8 +410,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanScan(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1314,7 +1315,7 @@ WlanScan(
-     _Reserved_ PVOID pReserved
+     _In_opt_ CONST PDOT11_SSID pDot11Ssid,
+     _In_opt_ CONST PWLAN_RAW_DATA pIeData,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -403,7 +421,18 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetAvailableNetworkList(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1332,7 +1333,7 @@ WlanGetAvailableNetworkList2(
+     _In_ DWORD dwFlags,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Outptr_ PWLAN_AVAILABLE_NETWORK_LIST *ppAvailableNetworkList
+ );
+ 
+@@ -1328,27 +1329,27 @@ WlanGetAvailableNetworkList2(
+     _In_ HANDLE hClientHandle,
+     _In_ CONST GUID *pInterfaceGuid,
+     _In_ DWORD dwFlags,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Outptr_ PWLAN_AVAILABLE_NETWORK_LIST_V2 *ppAvailableNetworkList
  );
  
@@ -412,7 +441,11 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetNetworkBssList(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1343,7 +1344,7 @@ WlanGetNetworkBssList(
+     _In_opt_ CONST PDOT11_SSID pDot11Ssid,
+     _In_ DOT11_BSS_TYPE dot11BssType,
+     _In_ BOOL bSecurityEnabled,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Outptr_ PWLAN_BSS_LIST *ppWlanBssList
  );
  
@@ -421,8 +454,18 @@ index 0d77f58e08..a2e01ce624 100644
  WlanConnect(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1359,17 +1360,17 @@ WlanConnect2(
-     _Reserved_  PVOID pReserved
+     _In_ CONST PWLAN_CONNECTION_PARAMETERS pConnectionParameters,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
+ );
+ 
+ DWORD WINAPI
+@@ -1356,62 +1357,62 @@ WlanConnect2(
+     _In_        HANDLE hClientHandle,
+     _In_        const GUID *pInterfaceGuid,
+     _In_        const PWLAN_CONNECTION_PARAMETERS_V2 pConnectionParameters,
+-    _Reserved_  PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -430,7 +473,8 @@ index 0d77f58e08..a2e01ce624 100644
  WlanDisconnect(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-     _Reserved_ PVOID pReserved
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -442,7 +486,9 @@ index 0d77f58e08..a2e01ce624 100644
      _In_ BOOL bIgnoreDuplicate,
      _In_opt_ WLAN_NOTIFICATION_CALLBACK funcCallback,
      _In_opt_ PVOID pCallbackContext,
-@@ -1378,7 +1379,7 @@ WlanRegisterNotification(
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Out_opt_ PDWORD pdwPrevNotifSource
  );
  
  
@@ -451,7 +497,11 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetProfile(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1389,29 +1390,29 @@ WlanGetProfile(
+     _In_ LPCWSTR strProfileName,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Outptr_ LPWSTR *pstrProfileXml,
+     _Inout_opt_ DWORD *pdwFlags,
      _Out_opt_ DWORD *pdwGrantedAccess
  );
  
@@ -466,7 +516,8 @@ index 0d77f58e08..a2e01ce624 100644
 +    _Win32_AssociatedEnum_(WLAN_SET_EAPHOST_FLAGS) _In_ DWORD dwFlags,
      _In_ DWORD dwEapUserDataSize,
      _In_reads_bytes_opt_(dwEapUserDataSize) const LPBYTE pbEapUserData,
-     _Reserved_ PVOID pReserved
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -478,7 +529,8 @@ index 0d77f58e08..a2e01ce624 100644
 -    _In_ DWORD dwFlags,
 +    _Win32_AssociatedEnum_(WLAN_SET_EAPHOST_FLAGS) _In_ DWORD dwFlags,
      _In_ LPCWSTR strEapXmlUserData,
-     _Reserved_ PVOID pReserved
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -486,7 +538,12 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetProfile(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1423,7 +1424,7 @@ WlanSetProfile(
+@@ -1419,98 +1420,98 @@ WlanSetProfile(
+     _In_ LPCWSTR strProfileXml,
+     _In_opt_ LPCWSTR strAllUserProfileSecurity,
+     _In_ BOOL bOverwrite,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Out_ DWORD *pdwReasonCode
  );
  
@@ -495,8 +552,9 @@ index 0d77f58e08..a2e01ce624 100644
  WlanDeleteProfile(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1431,7 +1432,7 @@ WlanDeleteProfile(
-     _Reserved_ PVOID pReserved
+     _In_ LPCWSTR strProfileName,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -504,8 +562,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanRenameProfile(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1440,7 +1441,7 @@ WlanRenameProfile(
-     _Reserved_ PVOID pReserved
+     _In_ LPCWSTR strOldProfileName,
+     _In_ LPCWSTR strNewProfileName,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -513,7 +573,8 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetProfileList(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1448,7 +1449,7 @@ WlanGetProfileList(
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Outptr_ PWLAN_PROFILE_INFO_LIST *ppProfileList
  );
  
@@ -522,8 +583,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetProfileList(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1457,7 +1458,7 @@ WlanSetProfileList(
-     _Reserved_ PVOID pReserved
+     _In_ DWORD dwItems,
+     _In_reads_(dwItems) LPCWSTR *strProfileNames,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -531,8 +594,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetProfilePosition(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1466,7 +1467,7 @@ WlanSetProfilePosition(
-     _Reserved_ PVOID pReserved
+     _In_ LPCWSTR strProfileName,
+     _In_ DWORD dwPosition,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -540,8 +605,11 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetProfileCustomUserData(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1476,7 +1477,7 @@ WlanSetProfileCustomUserData(
-     _Reserved_ PVOID pReserved
+     _In_ LPCWSTR strProfileName,
+     _In_ DWORD dwDataSize,
+     _In_reads_bytes_(dwDataSize) CONST PBYTE pData,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -549,7 +617,10 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetProfileCustomUserData(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID *pInterfaceGuid,
-@@ -1486,7 +1487,7 @@ WlanGetProfileCustomUserData(
+     _In_ LPCWSTR strProfileName,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Out_ DWORD *pdwDataSize,
      _Outptr_result_bytebuffer_(*pdwDataSize) PBYTE *ppData
  );
  
@@ -558,8 +629,9 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetFilterList(
      _In_ HANDLE hClientHandle,
      _In_ WLAN_FILTER_LIST_TYPE wlanFilterListType,
-@@ -1494,7 +1495,7 @@ WlanSetFilterList(
-     _Reserved_ PVOID pReserved
+     _In_opt_ CONST PDOT11_NETWORK_LIST pNetworkList,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -567,7 +639,8 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetFilterList(
      _In_ HANDLE hClientHandle,
      _In_ WLAN_FILTER_LIST_TYPE wlanFilterListType,
-@@ -1502,7 +1503,7 @@ WlanGetFilterList(
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
      _Outptr_ PDOT11_NETWORK_LIST *ppNetworkList
  );
  
@@ -576,8 +649,9 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSetPsdIEDataList(
      _In_ HANDLE hClientHandle,
      _In_opt_ LPCWSTR strFormat,
-@@ -1510,7 +1511,7 @@ WlanSetPsdIEDataList(
-     _Reserved_ PVOID pReserved
+     _In_opt_ CONST PWLAN_RAW_DATA_LIST pPsdIEDataList,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -DWORD WINAPI
@@ -585,7 +659,16 @@ index 0d77f58e08..a2e01ce624 100644
  WlanSaveTemporaryProfile(
      _In_ HANDLE hClientHandle,
      _In_ CONST GUID* pInterfaceGuid,
-@@ -1551,7 +1552,7 @@ WlanRegisterDeviceServiceNotification(
+@@ -1518,7 +1519,7 @@ WlanSaveTemporaryProfile(
+     _In_opt_ LPCWSTR strAllUserProfileSecurity,
+     _In_ DWORD dwFlags,
+     _In_ BOOL bOverWrite,
+-    _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
+ );
+ 
+ DWORD WINAPI
+@@ -1551,43 +1552,43 @@ WlanRegisterDeviceServiceNotification(
  #if !defined(__midl)
  
  // client side APIs
@@ -594,7 +677,11 @@ index 0d77f58e08..a2e01ce624 100644
  WlanExtractPsdIEDataList(
      _In_ HANDLE hClientHandle,
      _In_ DWORD dwIeDataSize,
-@@ -1562,32 +1563,32 @@ WlanExtractPsdIEDataList(
+     _In_reads_bytes_(dwIeDataSize) CONST PBYTE pRawIeData,
+     _In_ LPCWSTR strFormat,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Outptr_ PWLAN_RAW_DATA_LIST *ppPsdIEDataList
  );
  
  
@@ -604,8 +691,9 @@ index 0d77f58e08..a2e01ce624 100644
      _In_ DWORD dwReasonCode,
      _In_ DWORD dwBufferSize,
 -    _In_reads_(dwBufferSize) PWCHAR pStringBuffer,
+-    _Reserved_ PVOID pReserved
 +    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_(dwBufferSize) PWCHAR pStringBuffer,
-     _Reserved_ PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved
  );
  
 -PVOID WINAPI
@@ -633,7 +721,7 @@ index 0d77f58e08..a2e01ce624 100644
  WlanGetSecuritySettings(
      _In_ HANDLE hClientHandle,
      _In_ WLAN_SECURABLE_OBJECT SecurableObject,
-@@ -1608,14 +1609,14 @@ WlanGetSecuritySettings(
+@@ -1608,21 +1609,21 @@ WlanGetSecuritySettings(
  #define WLAN_UI_API_INITIAL_VERSION 1
  
  // The list of pages displayed by the wireless profile UI
@@ -650,7 +738,15 @@ index 0d77f58e08..a2e01ce624 100644
  WlanUIEditProfile(
      _In_ DWORD dwClientVersion,
      _In_ LPCWSTR wstrProfileName,
-@@ -1702,7 +1703,7 @@ WLAN_HOSTED_NETWORK_PEER_AUTH_STATE, *PWLAN_HOSTED_NETWORK_PEER_AUTH_STATE;
+     _In_ GUID *pInterfaceGuid,
+     _In_ HWND hWnd,
+     _In_ WL_DISPLAY_PAGES wlStartPage,
+-    _Reserved_ PVOID pReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pReserved,
+     _Out_opt_ PWLAN_REASON_CODE pWlanReasonCode
+     );
+ 
+@@ -1702,47 +1703,47 @@ WLAN_HOSTED_NETWORK_PEER_AUTH_STATE, *PWLAN_HOSTED_NETWORK_PEER_AUTH_STATE;
  
  
  
@@ -659,7 +755,11 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkStartUsing
  (
-@@ -1713,7 +1714,7 @@ WlanHostedNetworkStartUsing
+     _In_        HANDLE                          hClientHandle,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
  
  
  
@@ -668,7 +768,12 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkStopUsing
  (
-@@ -1725,7 +1726,7 @@ WlanHostedNetworkStopUsing
+     _In_        HANDLE                          hClientHandle,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
  
  
  
@@ -677,7 +782,11 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkForceStart
  (
-@@ -1736,7 +1737,7 @@ WlanHostedNetworkForceStart
+     _In_        HANDLE                          hClientHandle,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
  
  
  
@@ -686,6 +795,13 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkForceStop
  (
+     _In_        HANDLE                          hClientHandle,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
+ 
 @@ -1878,7 +1879,7 @@ WLAN_HOSTED_NETWORK_SECURITY_SETTINGS, *PWLAN_HOSTED_NETWORK_SECURITY_SETTINGS;
  //
  // This function queries the static properties of the hosted network
@@ -695,6 +811,15 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkQueryProperty
  (
+@@ -1887,7 +1888,7 @@ WlanHostedNetworkQueryProperty
+     _Out_                               PDWORD                      pdwDataSize,
+     _Outptr_result_bytebuffer_(*pdwDataSize)    PVOID*                      ppvData,
+     _Out_                               PWLAN_OPCODE_VALUE_TYPE     pWlanOpcodeValueType,
+-    _Reserved_  PVOID                                               pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                                               pvReserved
+ );
+ 
+ 
 @@ -1896,7 +1897,7 @@ WlanHostedNetworkQueryProperty
  //
  // This function sets the static properties of the hosted network
@@ -704,7 +829,16 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkSetProperty
  (
-@@ -1915,7 +1916,7 @@ WlanHostedNetworkSetProperty
+@@ -1905,7 +1906,7 @@ WlanHostedNetworkSetProperty
+     _In_                        DWORD                           dwDataSize,
+     _In_reads_bytes_(dwDataSize)     PVOID                           pvData,
+     _Out_opt_                   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_                  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                  PVOID                           pvReserved
+ );
+ 
+ 
+@@ -1915,25 +1916,25 @@ WlanHostedNetworkSetProperty
  // on a machine. There are no effects if an initial
  // configuration has already been created.
  //
@@ -713,7 +847,12 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkInitSettings
  (
-@@ -1927,7 +1928,7 @@ WlanHostedNetworkInitSettings
+     _In_        HANDLE                          hClientHandle,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
  
  
  
@@ -722,7 +861,14 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkRefreshSecuritySettings
  (
-@@ -1959,7 +1960,7 @@ WLAN_HOSTED_NETWORK_STATUS, *PWLAN_HOSTED_NETWORK_STATUS;
+     _In_        HANDLE                          hClientHandle,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
+ 
+@@ -1959,13 +1960,13 @@ WLAN_HOSTED_NETWORK_STATUS, *PWLAN_HOSTED_NETWORK_STATUS;
  //
  // This function queries the runtime status of the hosted network
  //
@@ -731,6 +877,13 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkQueryStatus
  (
+     _In_        HANDLE                          hClientHandle,
+     _Outptr_ PWLAN_HOSTED_NETWORK_STATUS*    ppWlanHostedNetworkStatus,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
+ 
 @@ -1977,7 +1978,7 @@ WlanHostedNetworkQueryStatus
  // if it is passphrase, key length includes the terminating '\0',
  // if not, key length is the number of bytes in the key data array.
@@ -740,6 +893,15 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkSetSecondaryKey
  (
+@@ -1987,7 +1988,7 @@ WlanHostedNetworkSetSecondaryKey
+     _In_        BOOL                            bIsPassPhrase,
+     _In_        BOOL                            bPersistent,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
+ 
 @@ -1997,7 +1998,7 @@ WlanHostedNetworkSetSecondaryKey
  // If it is passphrase, key length includes the terminating '\0',
  // if not, key length is the number of bytes in the key data array.
@@ -749,7 +911,14 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanHostedNetworkQuerySecondaryKey
  (
-@@ -2013,7 +2014,7 @@ WlanHostedNetworkQuerySecondaryKey
+@@ -2007,19 +2008,19 @@ WlanHostedNetworkQuerySecondaryKey
+     _Out_       PBOOL                           pbIsPassPhrase,
+     _Out_       PBOOL                           pbPersistent,
+     _Out_opt_   PWLAN_HOSTED_NETWORK_REASON     pFailReason,
+-    _Reserved_  PVOID                           pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID                           pvReserved
+ );
+ 
  //
  // This function is used to register and unregister notifications on virtual station.
  //
@@ -758,6 +927,13 @@ index 0d77f58e08..a2e01ce624 100644
  WINAPI
  WlanRegisterVirtualStationNotification
  (
+     _In_        HANDLE hClientHandle,
+     _In_        BOOL bRegister,
+-    _Reserved_  PVOID pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  PVOID pReserved
+ );
+ 
+ #ifdef WFD_API_SUPPORTED
 @@ -2564,14 +2565,16 @@ DEFINE_DEVPROPKEY(
      0x07
      );

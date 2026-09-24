@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/appmodel.h b/generation/WinSDK/RecompiledIdlHeaders/um/appmodel.h
-index b9e2d1e4e4..38d669e8cc 100644
+index b9e2d1e4e4..4fdc3c59c8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/appmodel.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/appmodel.h
 @@ -1,3 +1,4 @@
@@ -127,7 +127,8 @@ index b9e2d1e4e4..38d669e8cc 100644
 -GetPackagePath(
 +  GetPackagePath(
      _In_ const PACKAGE_ID* packageId,
-     _Reserved_ const UINT32 reserved,
+-    _Reserved_ const UINT32 reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const UINT32 reserved,
      _Inout_ UINT32* pathLength,
      _Out_writes_opt_(*pathLength) PWSTR path
      );
@@ -468,7 +469,8 @@ index b9e2d1e4e4..38d669e8cc 100644
 -OpenPackageInfoByFullName(
 +  OpenPackageInfoByFullName(
      _In_ PCWSTR packageFullName,
-     _Reserved_ const UINT32 reserved,
+-    _Reserved_ const UINT32 reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const UINT32 reserved,
      _Out_ PACKAGE_INFO_REFERENCE* packageInfoReference
      );
  
@@ -478,7 +480,12 @@ index b9e2d1e4e4..38d669e8cc 100644
  _Check_return_
  _Success_(return == ERROR_SUCCESS)
  LONG
-@@ -578,19 +579,19 @@ OpenPackageInfoByFullNameForUser(
+@@ -574,23 +575,23 @@ WINAPI
+ OpenPackageInfoByFullNameForUser(
+     _In_opt_ PSID userSid,
+     _In_ PCWSTR packageFullName,
+-    _Reserved_ const UINT32 reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const UINT32 reserved,
      _Out_ PACKAGE_INFO_REFERENCE* packageInfoReference
      );
  

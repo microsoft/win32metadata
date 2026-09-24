@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h b/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h
-index a818bd60b2..eec47f33c9 100644
+index a818bd60b2..526254b425 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/coml2api.h
 @@ -1,3 +1,4 @@
@@ -18,8 +18,9 @@ index a818bd60b2..eec47f33c9 100644
 +  StgCreateDocfile(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
 -    _In_ DWORD grfMode,
+-    _Reserved_ DWORD reserved,
 +    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
-     _Reserved_ DWORD reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD reserved,
      _Outptr_ IStorage** ppstgOpen
      );
  
@@ -59,7 +60,8 @@ index a818bd60b2..eec47f33c9 100644
 -    _In_ DWORD grfMode,
 +    _Win32_AssociatedEnum_(STGM) _In_ DWORD grfMode,
      _In_opt_z_ SNB snbExclude,
-     _Reserved_ DWORD reserved,
+-    _Reserved_ DWORD reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD reserved,
      _Outptr_ IStorage** ppstgOpen
      );
  
@@ -126,7 +128,7 @@ index a818bd60b2..eec47f33c9 100644
      _In_ DWORD stgfmt,
      _In_ DWORD grfAttrs,
      _Inout_opt_ STGOPTIONS* pStgOptions,
-@@ -189,9 +190,9 @@ StgOpenStorageEx(
+@@ -189,47 +190,47 @@ StgOpenStorageEx(
  
  #ifndef _STGCREATEPROPSTG_DEFINED_
  
@@ -138,7 +140,9 @@ index a818bd60b2..eec47f33c9 100644
      _In_ IUnknown* pUnk,
      _In_ REFFMTID fmtid,
      _In_ const CLSID* pclsid,
-@@ -200,9 +201,9 @@ StgCreatePropStg(
+     _In_ DWORD grfFlags,
+-    _Reserved_ DWORD dwReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,
      _Outptr_ IPropertyStorage** ppPropStg
      );
  
@@ -150,7 +154,8 @@ index a818bd60b2..eec47f33c9 100644
      _In_ IUnknown* pUnk,
      _In_ REFFMTID fmtid,
      _In_ DWORD grfFlags,
-@@ -210,9 +211,9 @@ StgOpenPropStg(
+-    _Reserved_ DWORD dwReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,
      _Outptr_ IPropertyStorage** ppPropStg
      );
  
@@ -160,9 +165,10 @@ index a818bd60b2..eec47f33c9 100644
 -StgCreatePropSetStg(
 +  StgCreatePropSetStg(
      _In_ IStorage* pStorage,
-     _Reserved_ DWORD dwReserved,
+-    _Reserved_ DWORD dwReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,
      _Outptr_ IPropertySetStorage** ppPropSetStg
-@@ -220,16 +221,16 @@ StgCreatePropSetStg(
+     );
  
  #define CCH_MAX_PROPSTG_NAME    31
  

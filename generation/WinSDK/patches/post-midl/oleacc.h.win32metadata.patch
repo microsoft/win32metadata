@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
-index f384c5147e..58cb661a7b 100644
+index f384c5147e..c4cd7d483d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
 @@ -148,6 +148,7 @@ extern "C"{
@@ -101,7 +101,19 @@ index f384c5147e..58cb661a7b 100644
      DWORD   dwMSAASignature; // Must be MSAA_MENU_SIG
      DWORD   cchWText;        // Length of text, in Unicode characters, excluding terminating NUL
      LPWSTR  pszWText;        // NUL-terminated text, in Unicode
-@@ -582,7 +583,7 @@ EXTERN_C const IID IID_IAccessible;
+@@ -378,7 +379,11 @@ typedef /* [unique] */  __RPC_unique_pointer IAccessible *LPACCESSIBLE;
+ #define	SELFLAG_VALID	( 0x1f )
+ 
+ #ifndef STATE_SYSTEM_UNAVAILABLE
++#endif
++#if (defined(WIN32METADATA) && !defined(STATE_SYSTEM_NORMAL)) || (((!defined(STATE_SYSTEM_UNAVAILABLE))))
+ #define	STATE_SYSTEM_NORMAL	( 0 )
++#endif
++#ifndef STATE_SYSTEM_UNAVAILABLE
+ 
+ #define	STATE_SYSTEM_UNAVAILABLE	( 0x1 )
+ 
+@@ -582,7 +587,7 @@ EXTERN_C const IID IID_IAccessible;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -110,7 +122,7 @@ index f384c5147e..58cb661a7b 100644
      IAccessible : public IDispatch
      {
      public:
-@@ -603,17 +604,17 @@ EXTERN_C const IID IID_IAccessible;
+@@ -603,17 +608,17 @@ EXTERN_C const IID IID_IAccessible;
          virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accName( 
              /* [optional][in] */ VARIANT varChild,
              /* [annotation][retval][out] */ 
@@ -131,7 +143,7 @@ index f384c5147e..58cb661a7b 100644
          
          virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accRole( 
              /* [optional][in] */ VARIANT varChild,
-@@ -628,11 +629,11 @@ EXTERN_C const IID IID_IAccessible;
+@@ -628,11 +633,11 @@ EXTERN_C const IID IID_IAccessible;
          virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accHelp( 
              /* [optional][in] */ VARIANT varChild,
              /* [annotation][retval][out] */ 
@@ -145,7 +157,7 @@ index f384c5147e..58cb661a7b 100644
              /* [optional][in] */ VARIANT varChild,
              /* [annotation][retval][out] */ 
              _Out_retval_  long *pidTopic) = 0;
-@@ -640,7 +641,7 @@ EXTERN_C const IID IID_IAccessible;
+@@ -640,7 +645,7 @@ EXTERN_C const IID IID_IAccessible;
          virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accKeyboardShortcut( 
              /* [optional][in] */ VARIANT varChild,
              /* [annotation][retval][out] */ 
@@ -154,7 +166,7 @@ index f384c5147e..58cb661a7b 100644
          
          virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accFocus( 
              /* [annotation][retval][out] */ 
-@@ -653,7 +654,7 @@ EXTERN_C const IID IID_IAccessible;
+@@ -653,7 +658,7 @@ EXTERN_C const IID IID_IAccessible;
          virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accDefaultAction( 
              /* [optional][in] */ VARIANT varChild,
              /* [annotation][retval][out] */ 
@@ -163,7 +175,7 @@ index f384c5147e..58cb661a7b 100644
          
          virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accSelect( 
              /* [annotation][in] */ 
-@@ -1051,7 +1052,7 @@ EXTERN_C const IID IID_IAccessibleHandler;
+@@ -1051,7 +1056,7 @@ EXTERN_C const IID IID_IAccessibleHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -172,7 +184,7 @@ index f384c5147e..58cb661a7b 100644
      IAccessibleHandler : public IUnknown
      {
      public:
-@@ -1148,7 +1149,7 @@ EXTERN_C const IID IID_IAccessibleWindowlessSite;
+@@ -1148,7 +1153,7 @@ EXTERN_C const IID IID_IAccessibleWindowlessSite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -181,7 +193,7 @@ index f384c5147e..58cb661a7b 100644
      IAccessibleWindowlessSite : public IUnknown
      {
      public:
-@@ -1307,7 +1308,7 @@ EXTERN_C const IID IID_IAccIdentity;
+@@ -1307,7 +1312,7 @@ EXTERN_C const IID IID_IAccIdentity;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -190,7 +202,7 @@ index f384c5147e..58cb661a7b 100644
      IAccIdentity : public IUnknown
      {
      public:
-@@ -1402,7 +1403,7 @@ EXTERN_C const IID IID_IAccPropServer;
+@@ -1402,7 +1407,7 @@ EXTERN_C const IID IID_IAccPropServer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -199,7 +211,7 @@ index f384c5147e..58cb661a7b 100644
      IAccPropServer : public IUnknown
      {
      public:
-@@ -1505,7 +1506,7 @@ EXTERN_C const IID IID_IAccPropServices;
+@@ -1505,7 +1510,7 @@ EXTERN_C const IID IID_IAccPropServices;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -208,7 +220,7 @@ index f384c5147e..58cb661a7b 100644
      IAccPropServices : public IUnknown
      {
      public:
-@@ -1679,7 +1680,7 @@ EXTERN_C const IID IID_IAccPropServices;
+@@ -1679,7 +1684,7 @@ EXTERN_C const IID IID_IAccPropServices;
              /* [annotation][in] */ 
              _In_  DWORD dwIDStringLen,
              /* [annotation][out] */ 
@@ -217,7 +229,7 @@ index f384c5147e..58cb661a7b 100644
              /* [annotation][out] */ 
              _Out_  DWORD *pidChild) = 0;
          
-@@ -2045,7 +2046,7 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
+@@ -2045,7 +2050,7 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
  unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
  void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
  
@@ -226,7 +238,7 @@ index f384c5147e..58cb661a7b 100644
  unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
  unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
  void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
-@@ -2096,6 +2097,29 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+@@ -2096,6 +2101,29 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
  }
  #endif
  

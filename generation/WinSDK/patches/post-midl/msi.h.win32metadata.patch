@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
-index 77ea809b47..269149d05a 100644
+index 77ea809b47..2fa43c379a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
 @@ -1,3 +1,4 @@
@@ -390,21 +390,25 @@ index 77ea809b47..269149d05a 100644
  	_In_ LPCWSTR szPatchList,         // semi-colon delimited list of patches to remove; patch can be referenced by patch package path or Patch GUID
  	_In_ LPCWSTR szProductCode,       // ProductCode GUID of product with patch to remove
  	_In_ INSTALLTYPE eUninstallType,   // type of patch uninstall to perform. Must be INSTALLTYPE_SINGLE_INSTANCE.
-@@ -960,12 +961,12 @@ UINT WINAPI MsiRemovePatchesW(
+@@ -960,14 +961,14 @@ UINT WINAPI MsiRemovePatchesW(
  
  // Extract XML data from the patch
  
 -UINT WINAPI MsiExtractPatchXMLDataA(
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ UINT WINAPI MsiExtractPatchXMLDataA(
  	_In_ LPCSTR szPatchPath,                         // Patch file to open
- 	_Reserved_ DWORD dwReserved,                       // Reserved
+-	_Reserved_ DWORD dwReserved,                       // Reserved
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,                       // Reserved
  	_Out_writes_opt_(*pcchXMLData) LPSTR szXMLData,  // Buffer that gets the XML data
  	_Inout_opt_ LPDWORD pcchXMLData);                  // in/out XML data buffer character count
 -UINT WINAPI MsiExtractPatchXMLDataW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ UINT WINAPI MsiExtractPatchXMLDataW(
  	_In_ LPCWSTR szPatchPath,                         // Patch file to open
- 	_Reserved_ DWORD dwReserved,                       // Reserved
+-	_Reserved_ DWORD dwReserved,                       // Reserved
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,                       // Reserved
  	_Out_writes_opt_(*pcchXMLData) LPWSTR szXMLData,  // Buffer that gets the XML data
+ 	_Inout_opt_ LPDWORD pcchXMLData);                  // in/out XML data buffer character count
+ #ifdef UNICODE
 @@ -979,7 +980,7 @@ UINT WINAPI MsiExtractPatchXMLDataW(
  // Retrieve extended patch info for a particular patch applied
  // to a particular product instance.
@@ -527,7 +531,7 @@ index 77ea809b47..269149d05a 100644
  	_In_ LPCWSTR  szProduct,
  	_In_ LPCWSTR  szFeature);
  #ifdef UNICODE
-@@ -1150,12 +1151,12 @@ INSTALLSTATE WINAPI MsiUseFeatureW(
+@@ -1150,16 +1151,16 @@ INSTALLSTATE WINAPI MsiUseFeatureW(
  // Prompts for CD if not loaded, does not install feature
  // Allows for bypassing component detection where performance is critical
  
@@ -536,12 +540,18 @@ index 77ea809b47..269149d05a 100644
  	_In_ LPCSTR  szProduct,          // product code
  	_In_ LPCSTR  szFeature,          // feature ID
  	_In_ DWORD     dwInstallMode,      // INSTALLMODE_NODETECTION, else 0
- 	_Reserved_ DWORD     dwReserved);  // reserved, must be 0
+-	_Reserved_ DWORD     dwReserved);  // reserved, must be 0
 -INSTALLSTATE WINAPI MsiUseFeatureExW(
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved);  // reserved, must be 0
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiUseFeatureExW(
  	_In_ LPCWSTR  szProduct,          // product code
  	_In_ LPCWSTR  szFeature,          // feature ID
  	_In_ DWORD     dwInstallMode,      // INSTALLMODE_NODETECTION, else 0
+-	_Reserved_ DWORD     dwReserved);  // reserved, must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved);  // reserved, must be 0
+ #ifdef UNICODE
+ #define MsiUseFeatureEx  MsiUseFeatureExW
+ #else
 @@ -1168,12 +1169,12 @@ INSTALLSTATE WINAPI MsiUseFeatureExW(
  
  // Return the usage metrics for a product feature
@@ -634,7 +644,7 @@ index 77ea809b47..269149d05a 100644
  	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,     // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
  #ifdef UNICODE
-@@ -1274,19 +1275,19 @@ UINT WINAPI MsiProvideQualifiedComponentW(
+@@ -1274,22 +1275,22 @@ UINT WINAPI MsiProvideQualifiedComponentW(
  // The szProduct parameter specifies the product to match that has published the qualified
  // component. If null, this API works the same as MsiProvideQualifiedComponent. 
  
@@ -645,8 +655,10 @@ index 77ea809b47..269149d05a 100644
 -	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
 +	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
  	_In_opt_ LPCSTR     szProduct,                        // the product code 
- 	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
- 	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
+-	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
+-	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused1,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused2,                      // not used, must be zero
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,     // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
 -UINT WINAPI MsiProvideQualifiedComponentExW(
@@ -656,8 +668,13 @@ index 77ea809b47..269149d05a 100644
 -	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
 +	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
  	_In_opt_ LPCWSTR     szProduct,                        // the product code 
- 	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
- 	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
+-	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
+-	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused1,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused2,                      // not used, must be zero
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,     // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
+ #ifdef UNICODE
 @@ -1300,12 +1301,12 @@ UINT WINAPI MsiProvideQualifiedComponentExW(
  
  // Return full path to an installed component
@@ -762,21 +779,25 @@ index 77ea809b47..269149d05a 100644
  		_In_opt_ LPCWSTR szProductCode,                                      // Enumerate instances of this product
  		_In_opt_ LPCWSTR szUserSid,                                          // Account for enumeration
  		_In_ DWORD dwContext,                                                 // Contexts for enumeration
-@@ -1450,12 +1451,12 @@ UINT WINAPI MsiEnumProductsExW(
+@@ -1450,14 +1451,14 @@ UINT WINAPI MsiEnumProductsExW(
  
  // Enumerate products with given upgrade code
  
 -UINT WINAPI MsiEnumRelatedProductsA(
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumRelatedProductsA(
  	_In_ LPCSTR  lpUpgradeCode,                               // upgrade code of products to enumerate
- 	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
+-	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved,                            // reserved, must be 0
  	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
  	_Out_writes_(MAX_GUID_CHARS+1)  LPSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
 -UINT WINAPI MsiEnumRelatedProductsW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumRelatedProductsW(
  	_In_ LPCWSTR  lpUpgradeCode,                               // upgrade code of products to enumerate
- 	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
+-	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved,                            // reserved, must be 0
  	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+ #ifdef UNICODE
 @@ -1471,12 +1472,12 @@ UINT WINAPI MsiEnumRelatedProductsW(
  // Enumerate the advertised features for a given product.
  // If parent is not required, supplying NULL will improve performance.
@@ -1038,7 +1059,7 @@ index 77ea809b47..269149d05a 100644
  	_In_ LPCWSTR szComponent,                         // component Id, string GUID
  	_Out_writes_opt_(*pcchBuf)  LPWSTR  lpPathBuf,    // returned path
  	_Inout_opt_                 LPDWORD  pcchBuf);     // in/out buffer character count
-@@ -1800,11 +1801,11 @@ INSTALLSTATE WINAPI MsiLocateComponentW(
+@@ -1800,14 +1801,14 @@ INSTALLSTATE WINAPI MsiLocateComponentW(
  // and removes all network sources from the list. A NULL or empty value for
  // the user name indicates the per-machine install.
  
@@ -1046,13 +1067,18 @@ index 77ea809b47..269149d05a 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearAllA(
  	_In_ LPCSTR szProduct,          // product code
  	_In_opt_ LPCSTR szUserName,     // user name or NULL/empty for per-machine
- 	_Reserved_  DWORD    dwReserved); // reserved - must be 0
+-	_Reserved_  DWORD    dwReserved); // reserved - must be 0
 -UINT WINAPI MsiSourceListClearAllW(
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD    dwReserved); // reserved - must be 0
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearAllW(
  	_In_ LPCWSTR szProduct,          // product code
  	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
- 	_Reserved_  DWORD    dwReserved); // reserved - must be 0
-@@ -1818,12 +1819,12 @@ UINT WINAPI MsiSourceListClearAllW(
+-	_Reserved_  DWORD    dwReserved); // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD    dwReserved); // reserved - must be 0
+ #ifdef UNICODE
+ #define MsiSourceListClearAll  MsiSourceListClearAllW
+ #else
+@@ -1818,15 +1819,15 @@ UINT WINAPI MsiSourceListClearAllW(
  // and adds the provided source as a new network source. A NULL or empty 
  // value for the user name indicates the per-machine install.
  
@@ -1060,14 +1086,19 @@ index 77ea809b47..269149d05a 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddSourceA(
  	_In_ LPCSTR szProduct,          // product code
  	_In_opt_ LPCSTR szUserName,     // user name or NULL/empty for per-machine
- 	_Reserved_ DWORD    dwReserved,   // reserved - must be 0
+-	_Reserved_ DWORD    dwReserved,   // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved,   // reserved - must be 0
  	_In_ LPCSTR szSource);          // new source
 -UINT WINAPI MsiSourceListAddSourceW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddSourceW(
  	_In_ LPCWSTR szProduct,          // product code
  	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
- 	_Reserved_ DWORD    dwReserved,   // reserved - must be 0
-@@ -1837,11 +1838,11 @@ UINT WINAPI MsiSourceListAddSourceW(
+-	_Reserved_ DWORD    dwReserved,   // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved,   // reserved - must be 0
+ 	_In_ LPCWSTR szSource);          // new source
+ #ifdef UNICODE
+ #define MsiSourceListAddSource  MsiSourceListAddSourceW
+@@ -1837,14 +1838,14 @@ UINT WINAPI MsiSourceListAddSourceW(
  // Forces the installer to reevaluate the list of sources the next time that
  // the specified product needs a source.
  
@@ -1075,12 +1106,17 @@ index 77ea809b47..269149d05a 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListForceResolutionA(
  	_In_ LPCSTR szProduct,          // product code
  	_In_opt_ LPCSTR szUserName,     // user name or NULL/empty for per-machine
- 	_Reserved_ DWORD    dwReserved);  // reserved - must be 0
+-	_Reserved_ DWORD    dwReserved);  // reserved - must be 0
 -UINT WINAPI MsiSourceListForceResolutionW(
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);  // reserved - must be 0
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListForceResolutionW(
  	_In_ LPCWSTR szProduct,          // product code
  	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
- 	_Reserved_ DWORD    dwReserved);  // reserved - must be 0
+-	_Reserved_ DWORD    dwReserved);  // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);  // reserved - must be 0
+ #ifdef UNICODE
+ #define MsiSourceListForceResolution  MsiSourceListForceResolutionW
+ #else
 @@ -1857,14 +1858,14 @@ UINT WINAPI MsiSourceListForceResolutionW(
  // Adds a source or moves a source within the list of sources for the 
  // specified product or patch instance. The source can be network/url type.

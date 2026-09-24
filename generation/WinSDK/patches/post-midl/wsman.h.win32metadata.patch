@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsman.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsman.h
-index 1e1826f941..5f80da0ed8 100644
+index 1e1826f941..dfad09626a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wsman.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsman.h
 @@ -1,3 +1,4 @@
@@ -25,15 +25,18 @@ index 1e1826f941..5f80da0ed8 100644
      _Inout_opt_ WSMAN_API_HANDLE apiHandle,
      DWORD flags
      );
-@@ -319,7 +320,7 @@ DWORD WINAPI WSManDeinitialize(
+@@ -319,9 +320,9 @@ DWORD WINAPI WSManDeinitialize(
  //  the messageLengthUsed parameter contains the requested size of the buffer.
  // -----------------------------------------------------------------------------
  //
 -DWORD WINAPI WSManGetErrorMessage(
 +_Windows_SupportedOS_Windows7_ DWORD WINAPI WSManGetErrorMessage(
      _In_ WSMAN_API_HANDLE apiHandle,
-     _Reserved_ DWORD flags,            // reserved for future use; must be 0
+-    _Reserved_ DWORD flags,            // reserved for future use; must be 0
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD flags,            // reserved for future use; must be 0
      _In_opt_ PCWSTR languageCode,    // the RFC 3066 language code; it can be NULL
+     DWORD errorCode,        // error code for the requested error message
+     DWORD messageLength,    // message length, including NULL terminator
 @@ -380,7 +381,7 @@ typedef struct WSMAN_SESSION *WSMAN_SESSION_HANDLE;
  // Returns a non zero error code upon failure
  // -----------------------------------------------------------------------------

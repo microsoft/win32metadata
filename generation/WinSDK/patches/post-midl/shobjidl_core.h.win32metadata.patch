@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
-index 97a14455d2..e4923e058f 100644
+index 97a14455d2..3e81e99d21 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,20 @@ index 97a14455d2..e4923e058f 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -2147,9 +2148,9 @@ extern "C"{
+@@ -2072,8 +2073,12 @@ extern "C"{
+ #define CMF_CANRENAME           0x00000010
+ #define CMF_NODEFAULT           0x00000020
+ #if (NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if (defined(WIN32METADATA) && !defined(CMF_INCLUDESTATIC)) || ((((NTDDI_VERSION < NTDDI_VISTA))))
+ #define CMF_INCLUDESTATIC       0x00000040
+ #endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
++#endif
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ #define CMF_ITEMMENU            0x00000080
+ #endif
+@@ -2147,9 +2152,9 @@ extern "C"{
  
  #if !defined(HMONITOR_DECLARED) && !defined(HMONITOR) && (WINVER < 0x0500)
  #define HMONITOR_DECLARED
@@ -19,7 +32,7 @@ index 97a14455d2..e4923e058f 100644
      {
      DWORD cbSize;
      DWORD fMask;
-@@ -2166,7 +2167,7 @@ typedef CMINVOKECOMMANDINFO *LPCMINVOKECOMMANDINFO;
+@@ -2166,7 +2171,7 @@ typedef CMINVOKECOMMANDINFO *LPCMINVOKECOMMANDINFO;
  
  typedef const CMINVOKECOMMANDINFO *PCCMINVOKECOMMANDINFO;
  
@@ -28,7 +41,7 @@ index 97a14455d2..e4923e058f 100644
      {
      DWORD cbSize;
      DWORD fMask;
-@@ -2189,7 +2190,7 @@ typedef CMINVOKECOMMANDINFOEX *LPCMINVOKECOMMANDINFOEX;
+@@ -2189,7 +2194,7 @@ typedef CMINVOKECOMMANDINFOEX *LPCMINVOKECOMMANDINFOEX;
  
  typedef const CMINVOKECOMMANDINFOEX *PCCMINVOKECOMMANDINFOEX;
  
@@ -37,7 +50,7 @@ index 97a14455d2..e4923e058f 100644
      {
      DWORD cbSize;
      DWORD fMask;
-@@ -2226,11 +2227,11 @@ EXTERN_C const IID IID_IContextMenu;
+@@ -2226,11 +2231,11 @@ EXTERN_C const IID IID_IContextMenu;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -51,7 +64,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  HMENU hmenu,
              /* [annotation][in] */ 
-@@ -2381,7 +2382,7 @@ EXTERN_C const IID IID_IContextMenu2;
+@@ -2381,7 +2386,7 @@ EXTERN_C const IID IID_IContextMenu2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -60,7 +73,7 @@ index 97a14455d2..e4923e058f 100644
      IContextMenu2 : public IContextMenu
      {
      public:
-@@ -2530,7 +2531,7 @@ EXTERN_C const IID IID_IContextMenu3;
+@@ -2530,7 +2535,7 @@ EXTERN_C const IID IID_IContextMenu3;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -69,7 +82,7 @@ index 97a14455d2..e4923e058f 100644
      IContextMenu3 : public IContextMenu2
      {
      public:
-@@ -2788,7 +2789,7 @@ EXTERN_C const IID IID_IExecuteCommand;
+@@ -2788,7 +2793,7 @@ EXTERN_C const IID IID_IExecuteCommand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -78,7 +91,7 @@ index 97a14455d2..e4923e058f 100644
      IExecuteCommand : public IUnknown
      {
      public:
-@@ -2949,7 +2950,7 @@ EXTERN_C const IID IID_IPersistFolder;
+@@ -2949,7 +2954,7 @@ EXTERN_C const IID IID_IPersistFolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -87,7 +100,7 @@ index 97a14455d2..e4923e058f 100644
      IPersistFolder : public IPersist
      {
      public:
-@@ -3061,7 +3062,7 @@ EXTERN_C const IID IID_IRunnableTask;
+@@ -3061,7 +3066,7 @@ EXTERN_C const IID IID_IRunnableTask;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -96,7 +109,7 @@ index 97a14455d2..e4923e058f 100644
      IRunnableTask : public IUnknown
      {
      public:
-@@ -3203,7 +3204,7 @@ EXTERN_C const IID IID_IShellTaskScheduler;
+@@ -3203,7 +3208,7 @@ EXTERN_C const IID IID_IShellTaskScheduler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -105,7 +118,7 @@ index 97a14455d2..e4923e058f 100644
      IShellTaskScheduler : public IUnknown
      {
      public:
-@@ -3362,7 +3363,7 @@ EXTERN_C const IID IID_IPersistFolder2;
+@@ -3362,7 +3367,7 @@ EXTERN_C const IID IID_IPersistFolder2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -114,7 +127,7 @@ index 97a14455d2..e4923e058f 100644
      IPersistFolder2 : public IPersistFolder
      {
      public:
-@@ -3489,7 +3490,7 @@ EXTERN_C const IID IID_IPersistFolder3;
+@@ -3489,7 +3494,7 @@ EXTERN_C const IID IID_IPersistFolder3;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -123,7 +136,7 @@ index 97a14455d2..e4923e058f 100644
      IPersistFolder3 : public IPersistFolder2
      {
      public:
-@@ -3636,7 +3637,7 @@ EXTERN_C const IID IID_IPersistIDList;
+@@ -3636,7 +3641,7 @@ EXTERN_C const IID IID_IPersistIDList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -132,7 +145,7 @@ index 97a14455d2..e4923e058f 100644
      IPersistIDList : public IPersist
      {
      public:
-@@ -3755,11 +3756,11 @@ EXTERN_C const IID IID_IEnumIDList;
+@@ -3755,11 +3760,11 @@ EXTERN_C const IID IID_IEnumIDList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -146,7 +159,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
-@@ -3767,13 +3768,13 @@ EXTERN_C const IID IID_IEnumIDList;
+@@ -3767,13 +3772,13 @@ EXTERN_C const IID IID_IEnumIDList;
              /* [annotation][out] */ 
              _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
          
@@ -163,7 +176,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][out] */ 
              _Out_  IEnumIDList **ppenum) = 0;
          
-@@ -3912,11 +3913,11 @@ EXTERN_C const IID IID_IEnumFullIDList;
+@@ -3912,11 +3917,11 @@ EXTERN_C const IID IID_IEnumFullIDList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -177,7 +190,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
-@@ -4188,7 +4189,7 @@ EXTERN_C const IID IID_IFileSyncMergeHandler;
+@@ -4188,7 +4193,7 @@ EXTERN_C const IID IID_IFileSyncMergeHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -186,7 +199,7 @@ index 97a14455d2..e4923e058f 100644
      IFileSyncMergeHandler : public IUnknown
      {
      public:
-@@ -4342,7 +4343,7 @@ EXTERN_C const IID IID_IObjectWithFolderEnumMode;
+@@ -4342,7 +4347,7 @@ EXTERN_C const IID IID_IObjectWithFolderEnumMode;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -195,7 +208,7 @@ index 97a14455d2..e4923e058f 100644
      IObjectWithFolderEnumMode : public IUnknown
      {
      public:
-@@ -4458,7 +4459,7 @@ EXTERN_C const IID IID_IParseAndCreateItem;
+@@ -4458,7 +4463,7 @@ EXTERN_C const IID IID_IParseAndCreateItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -204,7 +217,7 @@ index 97a14455d2..e4923e058f 100644
      IParseAndCreateItem : public IUnknown
      {
      public:
-@@ -4577,7 +4578,7 @@ EXTERN_C const IID IID_IShellFolder;
+@@ -4577,7 +4582,7 @@ EXTERN_C const IID IID_IShellFolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -213,7 +226,7 @@ index 97a14455d2..e4923e058f 100644
      IShellFolder : public IUnknown
      {
      public:
-@@ -4595,7 +4596,7 @@ EXTERN_C const IID IID_IShellFolder;
+@@ -4595,7 +4600,7 @@ EXTERN_C const IID IID_IShellFolder;
              /* [annotation][unique][out][in] */ 
              _Inout_  ULONG *pdwAttributes) = 0;
          
@@ -222,7 +235,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][unique][in] */ 
              _In_  HWND hwnd,
              /* [annotation][in] */ 
-@@ -4623,7 +4624,7 @@ EXTERN_C const IID IID_IShellFolder;
+@@ -4623,7 +4628,7 @@ EXTERN_C const IID IID_IShellFolder;
              /* [annotation][iid_is][out] */ 
              _COM_Outptr_  void **ppv) = 0;
          
@@ -231,7 +244,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  LPARAM lParam,
              /* [annotation][in] */ 
-@@ -4941,7 +4942,7 @@ EXTERN_C const IID IID_IEnumExtraSearch;
+@@ -4941,7 +4946,7 @@ EXTERN_C const IID IID_IEnumExtraSearch;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -240,7 +253,7 @@ index 97a14455d2..e4923e058f 100644
      IEnumExtraSearch : public IUnknown
      {
      public:
-@@ -5081,7 +5082,7 @@ EXTERN_C const IID IID_IShellFolder2;
+@@ -5081,7 +5086,7 @@ EXTERN_C const IID IID_IShellFolder2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -249,7 +262,7 @@ index 97a14455d2..e4923e058f 100644
      IShellFolder2 : public IShellFolder
      {
      public:
-@@ -5105,7 +5106,7 @@ EXTERN_C const IID IID_IShellFolder2;
+@@ -5105,7 +5110,7 @@ EXTERN_C const IID IID_IShellFolder2;
              /* [annotation][in] */ 
              _In_  UINT iColumn,
              /* [annotation][out] */ 
@@ -258,7 +271,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetDetailsEx( 
              /* [annotation][unique][in] */ 
-@@ -5525,7 +5526,11 @@ enum _SVSIF
+@@ -5525,7 +5530,11 @@ enum _SVSIF
  typedef UINT SVSIF;
  
  typedef /* [v1_enum] */ 
@@ -271,7 +284,7 @@ index 97a14455d2..e4923e058f 100644
      {
          SVGIO_BACKGROUND	= 0,
          SVGIO_SELECTION	= 0x1,
-@@ -5576,11 +5581,11 @@ EXTERN_C const IID IID_IShellView;
+@@ -5576,11 +5585,11 @@ EXTERN_C const IID IID_IShellView;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -285,7 +298,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  MSG *pmsg) = 0;
          
-@@ -5630,7 +5635,7 @@ EXTERN_C const IID IID_IShellView;
+@@ -5630,7 +5639,7 @@ EXTERN_C const IID IID_IShellView;
          
          virtual HRESULT STDMETHODCALLTYPE GetItemObject( 
              /* [annotation][in] */ 
@@ -294,7 +307,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  REFIID riid,
              /* [annotation][iid_is][out] */ 
-@@ -5836,7 +5841,7 @@ typedef GUID SHELLVIEWID;
+@@ -5836,7 +5845,7 @@ typedef GUID SHELLVIEWID;
  #define SV2GV_CURRENTVIEW ((UINT)-1)
  #define SV2GV_DEFAULTVIEW ((UINT)-2)
  #include <pshpack8.h>
@@ -303,7 +316,7 @@ index 97a14455d2..e4923e058f 100644
      {
      DWORD cbSize;
      IShellView *psvPrev;
-@@ -5855,7 +5860,7 @@ EXTERN_C const IID IID_IShellView2;
+@@ -5855,7 +5864,7 @@ EXTERN_C const IID IID_IShellView2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -312,7 +325,7 @@ index 97a14455d2..e4923e058f 100644
      IShellView2 : public IShellView
      {
      public:
-@@ -6135,7 +6140,7 @@ EXTERN_C const IID IID_IFolderView;
+@@ -6135,7 +6144,7 @@ EXTERN_C const IID IID_IFolderView;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -321,7 +334,7 @@ index 97a14455d2..e4923e058f 100644
      IFolderView : public IUnknown
      {
      public:
-@@ -6161,13 +6166,13 @@ EXTERN_C const IID IID_IFolderView;
+@@ -6161,13 +6170,13 @@ EXTERN_C const IID IID_IFolderView;
          
          virtual HRESULT STDMETHODCALLTYPE ItemCount( 
              /* [annotation][in] */ 
@@ -337,7 +350,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  REFIID riid,
              /* [annotation][iid_is][out] */ 
-@@ -6463,7 +6468,7 @@ EXTERN_C const IID IID_IFolderView2;
+@@ -6463,7 +6472,7 @@ EXTERN_C const IID IID_IFolderView2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -346,7 +359,7 @@ index 97a14455d2..e4923e058f 100644
      IFolderView2 : public IFolderView
      {
      public:
-@@ -7106,7 +7111,7 @@ EXTERN_C const IID IID_IFolderViewSettings;
+@@ -7106,7 +7115,7 @@ EXTERN_C const IID IID_IFolderViewSettings;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -355,7 +368,7 @@ index 97a14455d2..e4923e058f 100644
      IFolderViewSettings : public IUnknown
      {
      public:
-@@ -7291,7 +7296,7 @@ EXTERN_C const IID IID_IInitializeNetworkFolder;
+@@ -7291,7 +7300,7 @@ EXTERN_C const IID IID_IInitializeNetworkFolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -364,7 +377,7 @@ index 97a14455d2..e4923e058f 100644
      IInitializeNetworkFolder : public IUnknown
      {
      public:
-@@ -7530,7 +7535,7 @@ EXTERN_C const IID IID_IPreviewHandlerVisuals;
+@@ -7530,7 +7539,7 @@ EXTERN_C const IID IID_IPreviewHandlerVisuals;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -373,7 +386,7 @@ index 97a14455d2..e4923e058f 100644
      IPreviewHandlerVisuals : public IUnknown
      {
      public:
-@@ -7657,7 +7662,7 @@ EXTERN_C const IID IID_ICommDlgBrowser;
+@@ -7657,7 +7666,7 @@ EXTERN_C const IID IID_ICommDlgBrowser;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -382,7 +395,7 @@ index 97a14455d2..e4923e058f 100644
      ICommDlgBrowser : public IUnknown
      {
      public:
-@@ -7801,7 +7806,7 @@ EXTERN_C const IID IID_ICommDlgBrowser2;
+@@ -7801,7 +7810,7 @@ EXTERN_C const IID IID_ICommDlgBrowser2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -391,7 +404,7 @@ index 97a14455d2..e4923e058f 100644
      ICommDlgBrowser2 : public ICommDlgBrowser
      {
      public:
-@@ -7991,7 +7996,7 @@ enum CM_SET_WIDTH_VALUE
+@@ -7991,7 +8000,7 @@ enum CM_SET_WIDTH_VALUE
          CM_WIDTH_AUTOSIZE	= -2
      } 	CM_SET_WIDTH_VALUE;
  
@@ -400,7 +413,7 @@ index 97a14455d2..e4923e058f 100644
      {
      DWORD cbSize;
      DWORD dwMask;
-@@ -8018,7 +8023,7 @@ EXTERN_C const IID IID_IColumnManager;
+@@ -8018,7 +8027,7 @@ EXTERN_C const IID IID_IColumnManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -409,7 +422,7 @@ index 97a14455d2..e4923e058f 100644
      IColumnManager : public IUnknown
      {
      public:
-@@ -8190,7 +8195,7 @@ EXTERN_C const IID IID_IFolderFilterSite;
+@@ -8190,7 +8199,7 @@ EXTERN_C const IID IID_IFolderFilterSite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -418,7 +431,7 @@ index 97a14455d2..e4923e058f 100644
      IFolderFilterSite : public IUnknown
      {
      public:
-@@ -8277,7 +8282,7 @@ EXTERN_C const IID IID_IFolderFilter;
+@@ -8277,7 +8286,7 @@ EXTERN_C const IID IID_IFolderFilter;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -427,7 +440,7 @@ index 97a14455d2..e4923e058f 100644
      IFolderFilter : public IUnknown
      {
      public:
-@@ -8397,7 +8402,7 @@ EXTERN_C const IID IID_IInputObjectSite;
+@@ -8397,7 +8406,7 @@ EXTERN_C const IID IID_IInputObjectSite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -436,7 +449,7 @@ index 97a14455d2..e4923e058f 100644
      IInputObjectSite : public IUnknown
      {
      public:
-@@ -8488,7 +8493,7 @@ EXTERN_C const IID IID_IInputObject;
+@@ -8488,7 +8497,7 @@ EXTERN_C const IID IID_IInputObject;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -445,7 +458,7 @@ index 97a14455d2..e4923e058f 100644
      IInputObject : public IUnknown
      {
      public:
-@@ -8601,7 +8606,7 @@ EXTERN_C const IID IID_IInputObject2;
+@@ -8601,7 +8610,7 @@ EXTERN_C const IID IID_IInputObject2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -454,7 +467,7 @@ index 97a14455d2..e4923e058f 100644
      IInputObject2 : public IInputObject
      {
      public:
-@@ -8716,7 +8721,7 @@ EXTERN_C const IID IID_IShellIcon;
+@@ -8716,7 +8725,7 @@ EXTERN_C const IID IID_IShellIcon;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -463,7 +476,7 @@ index 97a14455d2..e4923e058f 100644
      IShellIcon : public IUnknown
      {
      public:
-@@ -8872,7 +8877,7 @@ EXTERN_C const IID IID_IShellBrowser;
+@@ -8872,7 +8881,7 @@ EXTERN_C const IID IID_IShellBrowser;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -472,7 +485,7 @@ index 97a14455d2..e4923e058f 100644
      IShellBrowser : public IOleWindow
      {
      public:
-@@ -9196,7 +9201,7 @@ EXTERN_C const IID IID_IProfferService;
+@@ -9196,7 +9205,7 @@ EXTERN_C const IID IID_IProfferService;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -481,7 +494,7 @@ index 97a14455d2..e4923e058f 100644
      IProfferService : public IUnknown
      {
      public:
-@@ -9441,7 +9446,7 @@ EXTERN_C const IID IID_IShellItem;
+@@ -9441,7 +9450,7 @@ EXTERN_C const IID IID_IShellItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -490,7 +503,7 @@ index 97a14455d2..e4923e058f 100644
      IShellItem : public IUnknown
      {
      public:
-@@ -9467,9 +9472,9 @@ EXTERN_C const IID IID_IShellItem;
+@@ -9467,9 +9476,9 @@ EXTERN_C const IID IID_IShellItem;
          
          virtual HRESULT STDMETHODCALLTYPE GetAttributes( 
              /* [annotation][in] */ 
@@ -502,7 +515,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE Compare( 
              /* [annotation][in] */ 
-@@ -9600,24 +9605,24 @@ EXTERN_C const IID IID_IShellItem;
+@@ -9600,24 +9609,24 @@ EXTERN_C const IID IID_IShellItem;
  /* interface __MIDL_itf_shobjidl_core_0000_0040 */
  /* [local] */ 
  
@@ -538,7 +551,7 @@ index 97a14455d2..e4923e058f 100644
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  typedef /* [v1_enum] */ 
-@@ -9631,7 +9636,7 @@ enum DATAOBJ_GET_ITEM_FLAGS
+@@ -9631,7 +9640,7 @@ enum DATAOBJ_GET_ITEM_FLAGS
      } 	DATAOBJ_GET_ITEM_FLAGS;
  
  DEFINE_ENUM_FLAG_OPERATORS(DATAOBJ_GET_ITEM_FLAGS)
@@ -547,7 +560,7 @@ index 97a14455d2..e4923e058f 100644
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  #define STR_GPS_HANDLERPROPERTIESONLY      L"GPS_HANDLERPROPERTIESONLY"
  #define STR_GPS_FASTPROPERTIESONLY         L"GPS_FASTPROPERTIESONLY"
-@@ -9655,7 +9660,7 @@ EXTERN_C const IID IID_IShellItem2;
+@@ -9655,7 +9664,7 @@ EXTERN_C const IID IID_IShellItem2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -556,7 +569,7 @@ index 97a14455d2..e4923e058f 100644
      IShellItem2 : public IShellItem
      {
      public:
-@@ -10027,7 +10032,11 @@ EXTERN_C const IID IID_IShellItem2;
+@@ -10027,7 +10036,11 @@ EXTERN_C const IID IID_IShellItem2;
  /* [local] */ 
  
  /* [v1_enum] */ 
@@ -569,7 +582,7 @@ index 97a14455d2..e4923e058f 100644
      {
          SIIGBF_RESIZETOFIT	= 0,
          SIIGBF_BIGGERSIZEOK	= 0x1,
-@@ -10058,7 +10067,7 @@ EXTERN_C const IID IID_IShellItemImageFactory;
+@@ -10058,7 +10071,7 @@ EXTERN_C const IID IID_IShellItemImageFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -578,7 +591,7 @@ index 97a14455d2..e4923e058f 100644
      IShellItemImageFactory : public IUnknown
      {
      public:
-@@ -10068,7 +10077,7 @@ EXTERN_C const IID IID_IShellItemImageFactory;
+@@ -10068,7 +10081,7 @@ EXTERN_C const IID IID_IShellItemImageFactory;
              /* [annotation][in] */ 
              _In_  SIIGBF flags,
              /* [annotation][out] */ 
@@ -587,7 +600,7 @@ index 97a14455d2..e4923e058f 100644
          
      };
      
-@@ -10162,7 +10171,7 @@ EXTERN_C const IID IID_IEnumShellItems;
+@@ -10162,7 +10175,7 @@ EXTERN_C const IID IID_IEnumShellItems;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -596,7 +609,7 @@ index 97a14455d2..e4923e058f 100644
      IEnumShellItems : public IUnknown
      {
      public:
-@@ -10365,7 +10374,7 @@ EXTERN_C const IID IID_ITransferAdviseSink;
+@@ -10365,7 +10378,7 @@ EXTERN_C const IID IID_ITransferAdviseSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -605,7 +618,7 @@ index 97a14455d2..e4923e058f 100644
      ITransferAdviseSink : public IUnknown
      {
      public:
-@@ -10600,7 +10609,7 @@ EXTERN_C const IID IID_ITransferSource;
+@@ -10600,7 +10613,7 @@ EXTERN_C const IID IID_ITransferSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -614,7 +627,7 @@ index 97a14455d2..e4923e058f 100644
      ITransferSource : public IUnknown
      {
      public:
-@@ -10946,7 +10955,7 @@ EXTERN_C const IID IID_IEnumResources;
+@@ -10946,7 +10959,7 @@ EXTERN_C const IID IID_IEnumResources;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -623,7 +636,7 @@ index 97a14455d2..e4923e058f 100644
      IEnumResources : public IUnknown
      {
      public:
-@@ -11076,7 +11085,7 @@ EXTERN_C const IID IID_IShellItemResources;
+@@ -11076,7 +11089,7 @@ EXTERN_C const IID IID_IShellItemResources;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -632,7 +645,7 @@ index 97a14455d2..e4923e058f 100644
      IShellItemResources : public IUnknown
      {
      public:
-@@ -11312,7 +11321,7 @@ EXTERN_C const IID IID_ITransferDestination;
+@@ -11312,7 +11325,7 @@ EXTERN_C const IID IID_ITransferDestination;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -641,7 +654,7 @@ index 97a14455d2..e4923e058f 100644
      ITransferDestination : public IUnknown
      {
      public:
-@@ -11466,7 +11475,7 @@ EXTERN_C const IID IID_IFileOperationProgressSink;
+@@ -11466,7 +11479,7 @@ EXTERN_C const IID IID_IFileOperationProgressSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -650,7 +663,7 @@ index 97a14455d2..e4923e058f 100644
      IFileOperationProgressSink : public IUnknown
      {
      public:
-@@ -11892,7 +11901,7 @@ EXTERN_C const IID IID_IShellItemArray;
+@@ -11892,7 +11905,7 @@ EXTERN_C const IID IID_IShellItemArray;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -659,7 +672,7 @@ index 97a14455d2..e4923e058f 100644
      IShellItemArray : public IUnknown
      {
      public:
-@@ -11926,9 +11935,9 @@ EXTERN_C const IID IID_IShellItemArray;
+@@ -11926,9 +11939,9 @@ EXTERN_C const IID IID_IShellItemArray;
              /* [annotation][in] */ 
              _In_  SIATTRIBFLAGS AttribFlags,
              /* [annotation][in] */ 
@@ -671,7 +684,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetCount( 
              /* [annotation][out] */ 
-@@ -12090,10 +12099,10 @@ EXTERN_C const IID IID_IShellItemArray;
+@@ -12090,10 +12103,10 @@ EXTERN_C const IID IID_IShellItemArray;
  /* [local] */ 
  
  #if (_WIN32_IE >= _WIN32_IE_IE70)
@@ -686,7 +699,7 @@ index 97a14455d2..e4923e058f 100644
  #endif  // (_WIN32_IE >= _WIN32_IE_IE70)
  
  
-@@ -12111,7 +12120,7 @@ EXTERN_C const IID IID_IInitializeWithItem;
+@@ -12111,7 +12124,7 @@ EXTERN_C const IID IID_IInitializeWithItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -695,7 +708,7 @@ index 97a14455d2..e4923e058f 100644
      IInitializeWithItem : public IUnknown
      {
      public:
-@@ -12202,7 +12211,7 @@ EXTERN_C const IID IID_IObjectWithSelection;
+@@ -12202,7 +12215,7 @@ EXTERN_C const IID IID_IObjectWithSelection;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -704,7 +717,7 @@ index 97a14455d2..e4923e058f 100644
      IObjectWithSelection : public IUnknown
      {
      public:
-@@ -12306,7 +12315,7 @@ EXTERN_C const IID IID_IObjectWithBackReferences;
+@@ -12306,7 +12319,7 @@ EXTERN_C const IID IID_IObjectWithBackReferences;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -713,7 +726,7 @@ index 97a14455d2..e4923e058f 100644
      IObjectWithBackReferences : public IUnknown
      {
      public:
-@@ -12382,7 +12391,11 @@ EXTERN_C const IID IID_IObjectWithBackReferences;
+@@ -12382,7 +12395,11 @@ EXTERN_C const IID IID_IObjectWithBackReferences;
  /* [local] */ 
  
  /* [v1_enum] */ 
@@ -726,7 +739,7 @@ index 97a14455d2..e4923e058f 100644
      {
          PUIFNF_DEFAULT	= 0,
          PUIFNF_MNEMONIC	= 0x1
-@@ -12390,7 +12403,11 @@ enum _PROPERTYUI_NAME_FLAGS
+@@ -12390,7 +12407,11 @@ enum _PROPERTYUI_NAME_FLAGS
  typedef DWORD PROPERTYUI_NAME_FLAGS;
  
  /* [v1_enum] */ 
@@ -739,7 +752,7 @@ index 97a14455d2..e4923e058f 100644
      {
          PUIF_DEFAULT	= 0,
          PUIF_RIGHTALIGN	= 0x1,
-@@ -12399,7 +12416,11 @@ enum _PROPERTYUI_FLAGS
+@@ -12399,7 +12420,11 @@ enum _PROPERTYUI_FLAGS
  typedef DWORD PROPERTYUI_FLAGS;
  
  /* [v1_enum] */ 
@@ -752,7 +765,7 @@ index 97a14455d2..e4923e058f 100644
      {
          PUIFFDF_DEFAULT	= 0,
          PUIFFDF_RIGHTTOLEFT	= 0x1,
-@@ -12425,7 +12446,7 @@ EXTERN_C const IID IID_IPropertyUI;
+@@ -12425,7 +12450,7 @@ EXTERN_C const IID IID_IPropertyUI;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -761,7 +774,7 @@ index 97a14455d2..e4923e058f 100644
      IPropertyUI : public IUnknown
      {
      public:
-@@ -12707,7 +12728,7 @@ EXTERN_C const IID IID_ICategoryProvider;
+@@ -12707,7 +12732,7 @@ EXTERN_C const IID IID_ICategoryProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -770,7 +783,7 @@ index 97a14455d2..e4923e058f 100644
      ICategoryProvider : public IUnknown
      {
      public:
-@@ -12921,7 +12942,7 @@ EXTERN_C const IID IID_ICategorizer;
+@@ -12921,7 +12946,7 @@ EXTERN_C const IID IID_ICategorizer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -779,7 +792,7 @@ index 97a14455d2..e4923e058f 100644
      ICategorizer : public IUnknown
      {
      public:
-@@ -13093,7 +13114,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
+@@ -13093,7 +13118,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -788,7 +801,7 @@ index 97a14455d2..e4923e058f 100644
      IDropTargetHelper : public IUnknown
      {
      public:
-@@ -13105,7 +13126,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
+@@ -13105,7 +13130,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
              /* [annotation][in] */ 
              _In_  POINT *ppt,
              /* [annotation][in] */ 
@@ -797,7 +810,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE DragLeave( void) = 0;
          
-@@ -13113,7 +13134,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
+@@ -13113,7 +13138,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
              /* [annotation][in] */ 
              _In_  POINT *ppt,
              /* [annotation][in] */ 
@@ -806,7 +819,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE Drop( 
              /* [annotation][in] */ 
-@@ -13121,7 +13142,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
+@@ -13121,7 +13146,7 @@ EXTERN_C const IID IID_IDropTargetHelper;
              /* [annotation][in] */ 
              _In_  POINT *ppt,
              /* [annotation][in] */ 
@@ -815,7 +828,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE Show( 
              /* [annotation][in] */ 
-@@ -13252,7 +13273,7 @@ EXTERN_C const IID IID_IDragSourceHelper;
+@@ -13252,7 +13277,7 @@ EXTERN_C const IID IID_IDragSourceHelper;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -824,7 +837,7 @@ index 97a14455d2..e4923e058f 100644
      IDragSourceHelper : public IUnknown
      {
      public:
-@@ -13409,11 +13430,11 @@ EXTERN_C const IID IID_IShellLinkA;
+@@ -13409,11 +13434,11 @@ EXTERN_C const IID IID_IShellLinkA;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -838,7 +851,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][size_is][string][out] */ 
              _Out_writes_(cch)  LPSTR pszFile,
              /* [annotation][in] */ 
-@@ -13423,7 +13444,7 @@ EXTERN_C const IID IID_IShellLinkA;
+@@ -13423,7 +13448,7 @@ EXTERN_C const IID IID_IShellLinkA;
              /* [annotation][in] */ 
              _In_  DWORD fFlags) = 0;
          
@@ -847,7 +860,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][out] */ 
              _Out_  PIDLIST_ABSOLUTE *ppidl) = 0;
          
-@@ -13471,11 +13492,11 @@ EXTERN_C const IID IID_IShellLinkA;
+@@ -13471,11 +13496,11 @@ EXTERN_C const IID IID_IShellLinkA;
          
          virtual HRESULT STDMETHODCALLTYPE GetShowCmd( 
              /* [annotation][out] */ 
@@ -861,7 +874,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetIconLocation( 
              /* [annotation][size_is][string][out] */ 
-@@ -13761,11 +13782,11 @@ EXTERN_C const IID IID_IShellLinkW;
+@@ -13761,11 +13786,11 @@ EXTERN_C const IID IID_IShellLinkW;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -875,7 +888,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][size_is][string][out] */ 
              _Out_writes_(cch)  LPWSTR pszFile,
              /* [annotation][in] */ 
-@@ -13775,7 +13796,7 @@ EXTERN_C const IID IID_IShellLinkW;
+@@ -13775,7 +13800,7 @@ EXTERN_C const IID IID_IShellLinkW;
              /* [annotation][in] */ 
              _In_  DWORD fFlags) = 0;
          
@@ -884,7 +897,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][out] */ 
              _Out_  PIDLIST_ABSOLUTE *ppidl) = 0;
          
-@@ -13821,11 +13842,11 @@ EXTERN_C const IID IID_IShellLinkW;
+@@ -13821,11 +13846,11 @@ EXTERN_C const IID IID_IShellLinkW;
          
          virtual HRESULT STDMETHODCALLTYPE GetShowCmd( 
              /* [annotation][out] */ 
@@ -898,7 +911,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetIconLocation( 
              /* [annotation][size_is][string][out] */ 
-@@ -14109,7 +14130,7 @@ EXTERN_C const IID IID_IShellLinkDataList;
+@@ -14109,7 +14134,7 @@ EXTERN_C const IID IID_IShellLinkDataList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -907,7 +920,7 @@ index 97a14455d2..e4923e058f 100644
      IShellLinkDataList : public IUnknown
      {
      public:
-@@ -14261,7 +14282,7 @@ EXTERN_C const IID IID_IResolveShellLink;
+@@ -14261,7 +14286,7 @@ EXTERN_C const IID IID_IResolveShellLink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -916,7 +929,7 @@ index 97a14455d2..e4923e058f 100644
      IResolveShellLink : public IUnknown
      {
      public:
-@@ -14374,7 +14395,7 @@ EXTERN_C const IID IID_IActionProgressDialog;
+@@ -14374,7 +14399,7 @@ EXTERN_C const IID IID_IActionProgressDialog;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -925,7 +938,7 @@ index 97a14455d2..e4923e058f 100644
      IActionProgressDialog : public IUnknown
      {
      public:
-@@ -14548,7 +14569,7 @@ EXTERN_C const IID IID_IActionProgress;
+@@ -14548,7 +14573,7 @@ EXTERN_C const IID IID_IActionProgress;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -934,7 +947,7 @@ index 97a14455d2..e4923e058f 100644
      IActionProgress : public IUnknown
      {
      public:
-@@ -14708,7 +14729,7 @@ EXTERN_C const IID IID_IShellExtInit;
+@@ -14708,7 +14733,7 @@ EXTERN_C const IID IID_IShellExtInit;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -943,7 +956,7 @@ index 97a14455d2..e4923e058f 100644
      IShellExtInit : public IUnknown
      {
      public:
-@@ -14820,7 +14841,7 @@ EXTERN_C const IID IID_IShellPropSheetExt;
+@@ -14820,7 +14845,7 @@ EXTERN_C const IID IID_IShellPropSheetExt;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -952,7 +965,7 @@ index 97a14455d2..e4923e058f 100644
      IShellPropSheetExt : public IUnknown
      {
      public:
-@@ -14942,7 +14963,7 @@ EXTERN_C const IID IID_IRemoteComputer;
+@@ -14942,7 +14967,7 @@ EXTERN_C const IID IID_IRemoteComputer;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -961,7 +974,7 @@ index 97a14455d2..e4923e058f 100644
      IRemoteComputer : public IUnknown
      {
      public:
-@@ -15033,7 +15054,7 @@ EXTERN_C const IID IID_IQueryContinue;
+@@ -15033,7 +15058,7 @@ EXTERN_C const IID IID_IQueryContinue;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -970,7 +983,7 @@ index 97a14455d2..e4923e058f 100644
      IQueryContinue : public IUnknown
      {
      public:
-@@ -15116,13 +15137,13 @@ EXTERN_C const IID IID_IObjectWithCancelEvent;
+@@ -15116,13 +15141,13 @@ EXTERN_C const IID IID_IObjectWithCancelEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -986,7 +999,7 @@ index 97a14455d2..e4923e058f 100644
          
      };
      
-@@ -15203,7 +15224,7 @@ EXTERN_C const IID IID_IUserNotification;
+@@ -15203,7 +15228,7 @@ EXTERN_C const IID IID_IUserNotification;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -995,7 +1008,7 @@ index 97a14455d2..e4923e058f 100644
      IUserNotification : public IUnknown
      {
      public:
-@@ -15366,7 +15387,7 @@ EXTERN_C const IID IID_IItemNameLimits;
+@@ -15366,7 +15391,7 @@ EXTERN_C const IID IID_IItemNameLimits;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1004,7 +1017,7 @@ index 97a14455d2..e4923e058f 100644
      IItemNameLimits : public IUnknown
      {
      public:
-@@ -15483,7 +15504,7 @@ EXTERN_C const IID IID_ISearchFolderItemFactory;
+@@ -15483,7 +15508,7 @@ EXTERN_C const IID IID_ISearchFolderItemFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1013,7 +1026,7 @@ index 97a14455d2..e4923e058f 100644
      ISearchFolderItemFactory : public IUnknown
      {
      public:
-@@ -15752,7 +15773,7 @@ EXTERN_C const IID IID_IExtractImage;
+@@ -15752,7 +15777,7 @@ EXTERN_C const IID IID_IExtractImage;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1022,7 +1035,7 @@ index 97a14455d2..e4923e058f 100644
      IExtractImage : public IUnknown
      {
      public:
-@@ -15772,7 +15793,7 @@ EXTERN_C const IID IID_IExtractImage;
+@@ -15772,7 +15797,7 @@ EXTERN_C const IID IID_IExtractImage;
          
          virtual HRESULT STDMETHODCALLTYPE Extract( 
              /* [annotation][out] */ 
@@ -1031,7 +1044,7 @@ index 97a14455d2..e4923e058f 100644
          
      };
      
-@@ -15882,7 +15903,7 @@ EXTERN_C const IID IID_IExtractImage2;
+@@ -15882,7 +15907,7 @@ EXTERN_C const IID IID_IExtractImage2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1040,7 +1053,7 @@ index 97a14455d2..e4923e058f 100644
      IExtractImage2 : public IExtractImage
      {
      public:
-@@ -16008,7 +16029,7 @@ EXTERN_C const IID IID_IThumbnailHandlerFactory;
+@@ -16008,7 +16033,7 @@ EXTERN_C const IID IID_IThumbnailHandlerFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1049,7 +1062,7 @@ index 97a14455d2..e4923e058f 100644
      IThumbnailHandlerFactory : public IUnknown
      {
      public:
-@@ -16107,7 +16128,7 @@ EXTERN_C const IID IID_IParentAndItem;
+@@ -16107,7 +16132,7 @@ EXTERN_C const IID IID_IParentAndItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1058,7 +1071,7 @@ index 97a14455d2..e4923e058f 100644
      IParentAndItem : public IUnknown
      {
      public:
-@@ -16240,7 +16261,7 @@ EXTERN_C const IID IID_IDockingWindow;
+@@ -16240,7 +16265,7 @@ EXTERN_C const IID IID_IDockingWindow;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1067,7 +1080,7 @@ index 97a14455d2..e4923e058f 100644
      IDockingWindow : public IOleWindow
      {
      public:
-@@ -16444,7 +16465,7 @@ EXTERN_C const IID IID_IDeskBand;
+@@ -16444,7 +16469,7 @@ EXTERN_C const IID IID_IDeskBand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1076,7 +1089,7 @@ index 97a14455d2..e4923e058f 100644
      IDeskBand : public IDockingWindow
      {
      public:
-@@ -16599,7 +16620,7 @@ EXTERN_C const IID IID_IDeskBandInfo;
+@@ -16599,7 +16624,7 @@ EXTERN_C const IID IID_IDeskBandInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1085,7 +1098,7 @@ index 97a14455d2..e4923e058f 100644
      IDeskBandInfo : public IUnknown
      {
      public:
-@@ -16703,7 +16724,7 @@ EXTERN_C const IID IID_ITaskbarList;
+@@ -16703,7 +16728,7 @@ EXTERN_C const IID IID_ITaskbarList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1094,7 +1107,7 @@ index 97a14455d2..e4923e058f 100644
      ITaskbarList : public IUnknown
      {
      public:
-@@ -16838,7 +16859,7 @@ EXTERN_C const IID IID_ITaskbarList2;
+@@ -16838,7 +16863,7 @@ EXTERN_C const IID IID_ITaskbarList2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1103,7 +1116,7 @@ index 97a14455d2..e4923e058f 100644
      ITaskbarList2 : public ITaskbarList
      {
      public:
-@@ -16966,7 +16987,7 @@ EXTERN_C const IID IID_ITaskbarList2;
+@@ -16966,7 +16991,7 @@ EXTERN_C const IID IID_ITaskbarList2;
  /* [local] */ 
  
  #ifdef MIDL_PASS
@@ -1112,7 +1125,7 @@ index 97a14455d2..e4923e058f 100644
  
  #endif
  typedef /* [v1_enum] */ 
-@@ -17033,7 +17054,7 @@ EXTERN_C const IID IID_ITaskbarList3;
+@@ -17033,7 +17058,7 @@ EXTERN_C const IID IID_ITaskbarList3;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1121,7 +1134,7 @@ index 97a14455d2..e4923e058f 100644
      ITaskbarList3 : public ITaskbarList2
      {
      public:
-@@ -17394,7 +17415,7 @@ EXTERN_C const IID IID_ITaskbarList4;
+@@ -17394,7 +17419,7 @@ EXTERN_C const IID IID_ITaskbarList4;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1130,7 +1143,7 @@ index 97a14455d2..e4923e058f 100644
      ITaskbarList4 : public ITaskbarList3
      {
      public:
-@@ -17692,7 +17713,7 @@ EXTERN_C const IID IID_IExplorerBrowserEvents;
+@@ -17692,7 +17717,7 @@ EXTERN_C const IID IID_IExplorerBrowserEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1139,7 +1152,7 @@ index 97a14455d2..e4923e058f 100644
      IExplorerBrowserEvents : public IUnknown
      {
      public:
-@@ -17850,7 +17871,7 @@ EXTERN_C const IID IID_IExplorerBrowser;
+@@ -17850,7 +17875,7 @@ EXTERN_C const IID IID_IExplorerBrowser;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1148,7 +1161,7 @@ index 97a14455d2..e4923e058f 100644
      IExplorerBrowser : public IUnknown
      {
      public:
-@@ -18153,7 +18174,7 @@ EXTERN_C const IID IID_IEnumObjects;
+@@ -18153,7 +18178,7 @@ EXTERN_C const IID IID_IEnumObjects;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1157,7 +1170,7 @@ index 97a14455d2..e4923e058f 100644
      IEnumObjects : public IUnknown
      {
      public:
-@@ -18349,7 +18370,7 @@ EXTERN_C const IID IID_IOperationsProgressDialog;
+@@ -18349,7 +18374,7 @@ EXTERN_C const IID IID_IOperationsProgressDialog;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1166,7 +1179,7 @@ index 97a14455d2..e4923e058f 100644
      IOperationsProgressDialog : public IUnknown
      {
      public:
-@@ -18586,7 +18607,7 @@ EXTERN_C const IID IID_IIOCancelInformation;
+@@ -18586,7 +18611,7 @@ EXTERN_C const IID IID_IIOCancelInformation;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1175,7 +1188,7 @@ index 97a14455d2..e4923e058f 100644
      IIOCancelInformation : public IUnknown
      {
      public:
-@@ -18718,7 +18739,7 @@ EXTERN_C const IID IID_IFileOperation;
+@@ -18718,7 +18743,7 @@ EXTERN_C const IID IID_IFileOperation;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1184,7 +1197,7 @@ index 97a14455d2..e4923e058f 100644
      IFileOperation : public IUnknown
      {
      public:
-@@ -18734,7 +18755,7 @@ EXTERN_C const IID IID_IFileOperation;
+@@ -18734,7 +18759,7 @@ EXTERN_C const IID IID_IFileOperation;
          
          virtual HRESULT STDMETHODCALLTYPE SetOperationFlags( 
              /* [annotation][in] */ 
@@ -1193,7 +1206,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE SetProgressMessage( 
              /* [annotation][string][in] */ 
-@@ -19442,7 +19463,7 @@ EXTERN_C const IID IID_IObjectProvider;
+@@ -19442,7 +19467,7 @@ EXTERN_C const IID IID_IObjectProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1202,7 +1215,7 @@ index 97a14455d2..e4923e058f 100644
      IObjectProvider : public IUnknown
      {
      public:
-@@ -19546,7 +19567,7 @@ EXTERN_C const IID IID_INamespaceWalkCB;
+@@ -19546,7 +19571,7 @@ EXTERN_C const IID IID_INamespaceWalkCB;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1211,7 +1224,7 @@ index 97a14455d2..e4923e058f 100644
      INamespaceWalkCB : public IUnknown
      {
      public:
-@@ -19697,7 +19718,7 @@ EXTERN_C const IID IID_INamespaceWalkCB2;
+@@ -19697,7 +19722,7 @@ EXTERN_C const IID IID_INamespaceWalkCB2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1220,7 +1233,7 @@ index 97a14455d2..e4923e058f 100644
      INamespaceWalkCB2 : public INamespaceWalkCB
      {
      public:
-@@ -19861,7 +19882,7 @@ EXTERN_C const IID IID_INamespaceWalk;
+@@ -19861,7 +19886,7 @@ EXTERN_C const IID IID_INamespaceWalk;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1229,7 +1242,7 @@ index 97a14455d2..e4923e058f 100644
      INamespaceWalk : public IUnknown
      {
      public:
-@@ -20052,7 +20073,7 @@ EXTERN_C const IID IID_IBandSite;
+@@ -20052,7 +20077,7 @@ EXTERN_C const IID IID_IBandSite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1238,7 +1251,7 @@ index 97a14455d2..e4923e058f 100644
      IBandSite : public IUnknown
      {
      public:
-@@ -20296,7 +20317,7 @@ EXTERN_C const IID IID_IModalWindow;
+@@ -20296,7 +20321,7 @@ EXTERN_C const IID IID_IModalWindow;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1247,7 +1260,7 @@ index 97a14455d2..e4923e058f 100644
      IModalWindow : public IUnknown
      {
      public:
-@@ -20405,7 +20426,7 @@ EXTERN_C const IID IID_IContextMenuSite;
+@@ -20405,7 +20430,7 @@ EXTERN_C const IID IID_IContextMenuSite;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1256,7 +1269,7 @@ index 97a14455d2..e4923e058f 100644
      IContextMenuSite : public IUnknown
      {
      public:
-@@ -20515,7 +20536,7 @@ EXTERN_C const IID IID_IMenuBand;
+@@ -20515,7 +20540,7 @@ EXTERN_C const IID IID_IMenuBand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1265,7 +1278,7 @@ index 97a14455d2..e4923e058f 100644
      IMenuBand : public IUnknown
      {
      public:
-@@ -20619,7 +20640,7 @@ EXTERN_C const IID IID_IRegTreeItem;
+@@ -20619,7 +20644,7 @@ EXTERN_C const IID IID_IRegTreeItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1274,7 +1287,7 @@ index 97a14455d2..e4923e058f 100644
      IRegTreeItem : public IUnknown
      {
      public:
-@@ -20730,7 +20751,7 @@ EXTERN_C const IID IID_IDeskBar;
+@@ -20730,7 +20755,7 @@ EXTERN_C const IID IID_IDeskBar;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1283,7 +1296,7 @@ index 97a14455d2..e4923e058f 100644
      IDeskBar : public IOleWindow
      {
      public:
-@@ -20892,7 +20913,7 @@ EXTERN_C const IID IID_IMenuPopup;
+@@ -20892,7 +20917,7 @@ EXTERN_C const IID IID_IMenuPopup;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1292,7 +1305,7 @@ index 97a14455d2..e4923e058f 100644
      IMenuPopup : public IDeskBar
      {
      public:
-@@ -21084,7 +21105,7 @@ EXTERN_C const IID IID_IFileIsInUse;
+@@ -21084,7 +21109,7 @@ EXTERN_C const IID IID_IFileIsInUse;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1301,7 +1314,7 @@ index 97a14455d2..e4923e058f 100644
      IFileIsInUse : public IUnknown
      {
      public:
-@@ -21251,7 +21272,7 @@ EXTERN_C const IID IID_IFileDialogEvents;
+@@ -21251,7 +21276,7 @@ EXTERN_C const IID IID_IFileDialogEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1310,7 +1323,7 @@ index 97a14455d2..e4923e058f 100644
      IFileDialogEvents : public IUnknown
      {
      public:
-@@ -21441,7 +21462,11 @@ extern RPC_IF_HANDLE __MIDL_itf_shobjidl_core_0000_0103_v0_0_s_ifspec;
+@@ -21441,7 +21466,11 @@ extern RPC_IF_HANDLE __MIDL_itf_shobjidl_core_0000_0103_v0_0_s_ifspec;
  /* [unique][object][uuid] */ 
  
  /* [v1_enum] */ 
@@ -1323,7 +1336,7 @@ index 97a14455d2..e4923e058f 100644
      {
          FOS_OVERWRITEPROMPT	= 0x2,
          FOS_STRICTFILETYPES	= 0x4,
-@@ -21474,7 +21499,7 @@ EXTERN_C const IID IID_IFileDialog;
+@@ -21474,7 +21503,7 @@ EXTERN_C const IID IID_IFileDialog;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1332,7 +1345,7 @@ index 97a14455d2..e4923e058f 100644
      IFileDialog : public IModalWindow
      {
      public:
-@@ -21865,7 +21890,7 @@ EXTERN_C const IID IID_IFileSaveDialog;
+@@ -21865,7 +21894,7 @@ EXTERN_C const IID IID_IFileSaveDialog;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1341,7 +1354,7 @@ index 97a14455d2..e4923e058f 100644
      IFileSaveDialog : public IFileDialog
      {
      public:
-@@ -22242,7 +22267,7 @@ EXTERN_C const IID IID_IFileOpenDialog;
+@@ -22242,7 +22271,7 @@ EXTERN_C const IID IID_IFileOpenDialog;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1350,7 +1363,7 @@ index 97a14455d2..e4923e058f 100644
      IFileOpenDialog : public IFileDialog
      {
      public:
-@@ -22582,7 +22607,7 @@ EXTERN_C const IID IID_IFileDialogCustomize;
+@@ -22582,7 +22611,7 @@ EXTERN_C const IID IID_IFileDialogCustomize;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1359,7 +1372,7 @@ index 97a14455d2..e4923e058f 100644
      IFileDialogCustomize : public IUnknown
      {
      public:
-@@ -23128,7 +23153,7 @@ EXTERN_C const IID IID_IApplicationAssociationRegistration;
+@@ -23128,7 +23157,7 @@ EXTERN_C const IID IID_IApplicationAssociationRegistration;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1368,7 +1381,7 @@ index 97a14455d2..e4923e058f 100644
      IApplicationAssociationRegistration : public IUnknown
      {
      public:
-@@ -23312,10 +23337,10 @@ EXTERN_C const IID IID_IApplicationAssociationRegistration;
+@@ -23312,10 +23341,10 @@ EXTERN_C const IID IID_IApplicationAssociationRegistration;
  /* interface __MIDL_itf_shobjidl_core_0000_0108 */
  /* [local] */ 
  
@@ -1381,7 +1394,7 @@ index 97a14455d2..e4923e058f 100644
      {
      WORD cbSize;
      WORD wOuter;
-@@ -23342,7 +23367,7 @@ EXTERN_C const IID IID_IDelegateFolder;
+@@ -23342,7 +23371,7 @@ EXTERN_C const IID IID_IDelegateFolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1390,7 +1403,7 @@ index 97a14455d2..e4923e058f 100644
      IDelegateFolder : public IUnknown
      {
      public:
-@@ -23477,7 +23502,7 @@ EXTERN_C const IID IID_IBrowserFrameOptions;
+@@ -23477,7 +23506,7 @@ EXTERN_C const IID IID_IBrowserFrameOptions;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1399,7 +1412,7 @@ index 97a14455d2..e4923e058f 100644
      IBrowserFrameOptions : public IUnknown
      {
      public:
-@@ -23599,7 +23624,7 @@ EXTERN_C const IID IID_INewWindowManager;
+@@ -23599,7 +23628,7 @@ EXTERN_C const IID IID_INewWindowManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1408,7 +1421,7 @@ index 97a14455d2..e4923e058f 100644
      INewWindowManager : public IUnknown
      {
      public:
-@@ -23727,7 +23752,7 @@ EXTERN_C const IID IID_IAttachmentExecute;
+@@ -23727,7 +23756,7 @@ EXTERN_C const IID IID_IAttachmentExecute;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1417,7 +1430,7 @@ index 97a14455d2..e4923e058f 100644
      IAttachmentExecute : public IUnknown
      {
      public:
-@@ -23773,7 +23798,7 @@ EXTERN_C const IID IID_IAttachmentExecute;
+@@ -23773,7 +23802,7 @@ EXTERN_C const IID IID_IAttachmentExecute;
              /* [annotation][string][in] */ 
              _In_opt_  LPCWSTR pszVerb,
              /* [annotation][out] */ 
@@ -1426,7 +1439,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE SaveWithUI( 
              /* [annotation][in] */ 
-@@ -24287,7 +24312,7 @@ EXTERN_C const IID IID_IShellMenuCallback;
+@@ -24287,7 +24316,7 @@ EXTERN_C const IID IID_IShellMenuCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1435,7 +1448,7 @@ index 97a14455d2..e4923e058f 100644
      IShellMenuCallback : public IUnknown
      {
      public:
-@@ -24411,7 +24436,7 @@ EXTERN_C const IID IID_IShellMenu;
+@@ -24411,7 +24440,7 @@ EXTERN_C const IID IID_IShellMenu;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1444,7 +1457,7 @@ index 97a14455d2..e4923e058f 100644
      IShellMenu : public IUnknown
      {
      public:
-@@ -24465,7 +24490,7 @@ EXTERN_C const IID IID_IShellMenu;
+@@ -24465,7 +24494,7 @@ EXTERN_C const IID IID_IShellMenu;
          
          virtual HRESULT STDMETHODCALLTYPE GetMenu( 
              /* [annotation][out] */ 
@@ -1453,7 +1466,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][out] */ 
              _Out_opt_  HWND *phwnd,
              /* [annotation][out] */ 
-@@ -24751,7 +24776,7 @@ EXTERN_C const IID IID_IKnownFolder;
+@@ -24751,7 +24780,7 @@ EXTERN_C const IID IID_IKnownFolder;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1462,7 +1475,7 @@ index 97a14455d2..e4923e058f 100644
      IKnownFolder : public IUnknown
      {
      public:
-@@ -24969,7 +24994,7 @@ EXTERN_C const IID IID_IKnownFolderManager;
+@@ -24969,7 +24998,7 @@ EXTERN_C const IID IID_IKnownFolderManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1471,7 +1484,7 @@ index 97a14455d2..e4923e058f 100644
      IKnownFolderManager : public IUnknown
      {
      public:
-@@ -25296,7 +25321,7 @@ EXTERN_C const IID IID_ISharingConfigurationManager;
+@@ -25296,7 +25325,7 @@ EXTERN_C const IID IID_ISharingConfigurationManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1480,7 +1493,7 @@ index 97a14455d2..e4923e058f 100644
      ISharingConfigurationManager : public IUnknown
      {
      public:
-@@ -25467,7 +25492,7 @@ EXTERN_C const IID IID_IRelatedItem;
+@@ -25467,7 +25496,7 @@ EXTERN_C const IID IID_IRelatedItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1489,7 +1502,7 @@ index 97a14455d2..e4923e058f 100644
      IRelatedItem : public IUnknown
      {
      public:
-@@ -25567,7 +25592,7 @@ EXTERN_C const IID IID_IIdentityName;
+@@ -25567,7 +25596,7 @@ EXTERN_C const IID IID_IIdentityName;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1498,7 +1511,7 @@ index 97a14455d2..e4923e058f 100644
      IIdentityName : public IRelatedItem
      {
      public:
-@@ -25660,7 +25685,7 @@ EXTERN_C const IID IID_IDelegateItem;
+@@ -25660,7 +25689,7 @@ EXTERN_C const IID IID_IDelegateItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1507,7 +1520,7 @@ index 97a14455d2..e4923e058f 100644
      IDelegateItem : public IRelatedItem
      {
      public:
-@@ -25753,7 +25778,7 @@ EXTERN_C const IID IID_ICurrentItem;
+@@ -25753,7 +25782,7 @@ EXTERN_C const IID IID_ICurrentItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1516,7 +1529,7 @@ index 97a14455d2..e4923e058f 100644
      ICurrentItem : public IRelatedItem
      {
      public:
-@@ -25846,7 +25871,7 @@ EXTERN_C const IID IID_ITransferMediumItem;
+@@ -25846,7 +25875,7 @@ EXTERN_C const IID IID_ITransferMediumItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1525,7 +1538,7 @@ index 97a14455d2..e4923e058f 100644
      ITransferMediumItem : public IRelatedItem
      {
      public:
-@@ -25939,7 +25964,7 @@ EXTERN_C const IID IID_IDisplayItem;
+@@ -25939,7 +25968,7 @@ EXTERN_C const IID IID_IDisplayItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1534,7 +1547,7 @@ index 97a14455d2..e4923e058f 100644
      IDisplayItem : public IRelatedItem
      {
      public:
-@@ -26032,7 +26057,7 @@ EXTERN_C const IID IID_IViewStateIdentityItem;
+@@ -26032,7 +26061,7 @@ EXTERN_C const IID IID_IViewStateIdentityItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1543,7 +1556,7 @@ index 97a14455d2..e4923e058f 100644
      IViewStateIdentityItem : public IRelatedItem
      {
      public:
-@@ -26125,7 +26150,7 @@ EXTERN_C const IID IID_IPreviewItem;
+@@ -26125,7 +26154,7 @@ EXTERN_C const IID IID_IPreviewItem;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1552,7 +1565,7 @@ index 97a14455d2..e4923e058f 100644
      IPreviewItem : public IRelatedItem
      {
      public:
-@@ -26227,7 +26252,7 @@ EXTERN_C const IID IID_IDestinationStreamFactory;
+@@ -26227,7 +26256,7 @@ EXTERN_C const IID IID_IDestinationStreamFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1561,7 +1574,7 @@ index 97a14455d2..e4923e058f 100644
      IDestinationStreamFactory : public IUnknown
      {
      public:
-@@ -26323,7 +26348,7 @@ EXTERN_C const IID IID_ICreateProcessInputs;
+@@ -26323,7 +26352,7 @@ EXTERN_C const IID IID_ICreateProcessInputs;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1570,7 +1583,7 @@ index 97a14455d2..e4923e058f 100644
      ICreateProcessInputs : public IUnknown
      {
      public:
-@@ -26492,7 +26517,7 @@ EXTERN_C const IID IID_ICreatingProcess;
+@@ -26492,7 +26521,7 @@ EXTERN_C const IID IID_ICreatingProcess;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1579,7 +1592,7 @@ index 97a14455d2..e4923e058f 100644
      ICreatingProcess : public IUnknown
      {
      public:
-@@ -26804,7 +26829,7 @@ EXTERN_C const IID IID_INewMenuClient;
+@@ -26804,7 +26833,7 @@ EXTERN_C const IID IID_INewMenuClient;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1588,7 +1601,7 @@ index 97a14455d2..e4923e058f 100644
      INewMenuClient : public IUnknown
      {
      public:
-@@ -26918,7 +26943,7 @@ EXTERN_C const IID IID_IInitializeWithBindCtx;
+@@ -26918,7 +26947,7 @@ EXTERN_C const IID IID_IInitializeWithBindCtx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1597,7 +1610,7 @@ index 97a14455d2..e4923e058f 100644
      IInitializeWithBindCtx : public IUnknown
      {
      public:
-@@ -27005,7 +27030,7 @@ EXTERN_C const IID IID_IShellItemFilter;
+@@ -27005,7 +27034,7 @@ EXTERN_C const IID IID_IShellItemFilter;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1606,7 +1619,7 @@ index 97a14455d2..e4923e058f 100644
      IShellItemFilter : public IUnknown
      {
      public:
-@@ -27188,7 +27213,7 @@ EXTERN_C const IID IID_INameSpaceTreeControl;
+@@ -27188,7 +27217,7 @@ EXTERN_C const IID IID_INameSpaceTreeControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1615,7 +1628,7 @@ index 97a14455d2..e4923e058f 100644
      INameSpaceTreeControl : public IUnknown
      {
      public:
-@@ -27600,7 +27625,7 @@ EXTERN_C const IID IID_INameSpaceTreeControlFolderCapabilities;
+@@ -27600,7 +27629,7 @@ EXTERN_C const IID IID_INameSpaceTreeControlFolderCapabilities;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1624,7 +1637,7 @@ index 97a14455d2..e4923e058f 100644
      INameSpaceTreeControlFolderCapabilities : public IUnknown
      {
      public:
-@@ -27704,7 +27729,7 @@ EXTERN_C const IID IID_IPreviewHandler;
+@@ -27704,7 +27733,7 @@ EXTERN_C const IID IID_IPreviewHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1633,7 +1646,7 @@ index 97a14455d2..e4923e058f 100644
      IPreviewHandler : public IUnknown
      {
      public:
-@@ -27867,7 +27892,7 @@ EXTERN_C const IID IID_IPreviewHandlerFrame;
+@@ -27867,7 +27896,7 @@ EXTERN_C const IID IID_IPreviewHandlerFrame;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1642,7 +1655,7 @@ index 97a14455d2..e4923e058f 100644
      IPreviewHandlerFrame : public IUnknown
      {
      public:
-@@ -27999,7 +28024,7 @@ EXTERN_C const IID IID_IExplorerPaneVisibility;
+@@ -27999,7 +28028,7 @@ EXTERN_C const IID IID_IExplorerPaneVisibility;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1651,7 +1664,7 @@ index 97a14455d2..e4923e058f 100644
      IExplorerPaneVisibility : public IUnknown
      {
      public:
-@@ -28099,7 +28124,7 @@ EXTERN_C const IID IID_IContextMenuCB;
+@@ -28099,7 +28128,7 @@ EXTERN_C const IID IID_IContextMenuCB;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1660,7 +1673,7 @@ index 97a14455d2..e4923e058f 100644
      IContextMenuCB : public IUnknown
      {
      public:
-@@ -28215,7 +28240,7 @@ EXTERN_C const IID IID_IDefaultExtractIconInit;
+@@ -28215,7 +28244,7 @@ EXTERN_C const IID IID_IDefaultExtractIconInit;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1669,7 +1682,7 @@ index 97a14455d2..e4923e058f 100644
      IDefaultExtractIconInit : public IUnknown
      {
      public:
-@@ -28375,7 +28400,7 @@ EXTERN_C const IID IID_IDefaultExtractIconInit;
+@@ -28375,7 +28404,7 @@ EXTERN_C const IID IID_IDefaultExtractIconInit;
  /* interface __MIDL_itf_shobjidl_core_0000_0141 */
  /* [local] */ 
  
@@ -1678,7 +1691,7 @@ index 97a14455d2..e4923e058f 100644
  
  
  
-@@ -28389,7 +28414,11 @@ extern RPC_IF_HANDLE __MIDL_itf_shobjidl_core_0000_0141_v0_0_s_ifspec;
+@@ -28389,7 +28418,11 @@ extern RPC_IF_HANDLE __MIDL_itf_shobjidl_core_0000_0141_v0_0_s_ifspec;
  /* [object][unique][uuid] */ 
  
  /* [v1_enum] */ 
@@ -1691,7 +1704,7 @@ index 97a14455d2..e4923e058f 100644
      {
          ECS_ENABLED	= 0,
          ECS_DISABLED	= 0x1,
-@@ -28401,7 +28430,11 @@ enum _EXPCMDSTATE
+@@ -28401,7 +28434,11 @@ enum _EXPCMDSTATE
  typedef DWORD EXPCMDSTATE;
  
  /* [v1_enum] */ 
@@ -1704,7 +1717,7 @@ index 97a14455d2..e4923e058f 100644
      {
          ECF_DEFAULT	= 0,
          ECF_HASSUBCOMMANDS	= 0x1,
-@@ -28422,7 +28455,7 @@ EXTERN_C const IID IID_IExplorerCommand;
+@@ -28422,7 +28459,7 @@ EXTERN_C const IID IID_IExplorerCommand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1713,7 +1726,7 @@ index 97a14455d2..e4923e058f 100644
      IExplorerCommand : public IUnknown
      {
      public:
-@@ -28454,7 +28487,7 @@ EXTERN_C const IID IID_IExplorerCommand;
+@@ -28454,7 +28491,7 @@ EXTERN_C const IID IID_IExplorerCommand;
              /* [annotation][in] */ 
              _In_  BOOL fOkToBeSlow,
              /* [annotation][out] */ 
@@ -1722,7 +1735,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE Invoke( 
              /* [annotation][unique][in] */ 
-@@ -28464,7 +28497,7 @@ EXTERN_C const IID IID_IExplorerCommand;
+@@ -28464,7 +28501,7 @@ EXTERN_C const IID IID_IExplorerCommand;
          
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
              /* [annotation][out] */ 
@@ -1731,7 +1744,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE EnumSubCommands( 
              /* [annotation][out] */ 
-@@ -28624,7 +28657,7 @@ EXTERN_C const IID IID_IExplorerCommandState;
+@@ -28624,7 +28661,7 @@ EXTERN_C const IID IID_IExplorerCommandState;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1740,7 +1753,7 @@ index 97a14455d2..e4923e058f 100644
      IExplorerCommandState : public IUnknown
      {
      public:
-@@ -28719,7 +28752,7 @@ EXTERN_C const IID IID_IInitializeCommand;
+@@ -28719,7 +28756,7 @@ EXTERN_C const IID IID_IInitializeCommand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1749,7 +1762,7 @@ index 97a14455d2..e4923e058f 100644
      IInitializeCommand : public IUnknown
      {
      public:
-@@ -28810,11 +28843,11 @@ EXTERN_C const IID IID_IEnumExplorerCommand;
+@@ -28810,11 +28847,11 @@ EXTERN_C const IID IID_IEnumExplorerCommand;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1763,7 +1776,7 @@ index 97a14455d2..e4923e058f 100644
              /* [annotation][in] */ 
              _In_  ULONG celt,
              /* [annotation][length_is][size_is][out] */ 
-@@ -28957,7 +28990,7 @@ EXTERN_C const IID IID_IExplorerCommandProvider;
+@@ -28957,7 +28994,7 @@ EXTERN_C const IID IID_IExplorerCommandProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1772,7 +1785,7 @@ index 97a14455d2..e4923e058f 100644
      IExplorerCommandProvider : public IUnknown
      {
      public:
-@@ -29065,7 +29098,7 @@ EXTERN_C const IID IID_IExplorerCommandProvider;
+@@ -29065,7 +29102,7 @@ EXTERN_C const IID IID_IExplorerCommandProvider;
  /* interface __MIDL_itf_shobjidl_core_0000_0146 */
  /* [local] */ 
  
@@ -1781,7 +1794,7 @@ index 97a14455d2..e4923e058f 100644
  
  typedef /* [v1_enum] */ 
  enum CPVIEW
-@@ -29092,7 +29125,7 @@ EXTERN_C const IID IID_IOpenControlPanel;
+@@ -29092,7 +29129,7 @@ EXTERN_C const IID IID_IOpenControlPanel;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1790,7 +1803,7 @@ index 97a14455d2..e4923e058f 100644
      IOpenControlPanel : public IUnknown
      {
      public:
-@@ -29231,7 +29264,7 @@ EXTERN_C const IID IID_IFileSystemBindData;
+@@ -29231,7 +29268,7 @@ EXTERN_C const IID IID_IFileSystemBindData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1799,7 +1812,7 @@ index 97a14455d2..e4923e058f 100644
      IFileSystemBindData : public IUnknown
      {
      public:
-@@ -29331,7 +29364,7 @@ EXTERN_C const IID IID_IFileSystemBindData2;
+@@ -29331,7 +29368,7 @@ EXTERN_C const IID IID_IFileSystemBindData2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1808,7 +1821,7 @@ index 97a14455d2..e4923e058f 100644
      IFileSystemBindData2 : public IFileSystemBindData
      {
      public:
-@@ -29492,7 +29525,7 @@ EXTERN_C const IID IID_ICustomDestinationList;
+@@ -29492,7 +29529,7 @@ EXTERN_C const IID IID_ICustomDestinationList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1817,7 +1830,7 @@ index 97a14455d2..e4923e058f 100644
      ICustomDestinationList : public IUnknown
      {
      public:
-@@ -29691,7 +29724,7 @@ EXTERN_C const IID IID_IApplicationDestinations;
+@@ -29691,7 +29728,7 @@ EXTERN_C const IID IID_IApplicationDestinations;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1826,7 +1839,7 @@ index 97a14455d2..e4923e058f 100644
      IApplicationDestinations : public IUnknown
      {
      public:
-@@ -29807,7 +29840,7 @@ EXTERN_C const IID IID_IApplicationDocumentLists;
+@@ -29807,7 +29844,7 @@ EXTERN_C const IID IID_IApplicationDocumentLists;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1835,7 +1848,7 @@ index 97a14455d2..e4923e058f 100644
      IApplicationDocumentLists : public IUnknown
      {
      public:
-@@ -29919,7 +29952,7 @@ EXTERN_C const IID IID_IObjectWithAppUserModelID;
+@@ -29919,7 +29956,7 @@ EXTERN_C const IID IID_IObjectWithAppUserModelID;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1844,7 +1857,7 @@ index 97a14455d2..e4923e058f 100644
      IObjectWithAppUserModelID : public IUnknown
      {
      public:
-@@ -30104,7 +30137,7 @@ EXTERN_C const IID IID_IObjectWithProgID;
+@@ -30104,7 +30141,7 @@ EXTERN_C const IID IID_IObjectWithProgID;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1853,7 +1866,7 @@ index 97a14455d2..e4923e058f 100644
      IObjectWithProgID : public IUnknown
      {
      public:
-@@ -30204,7 +30237,7 @@ EXTERN_C const IID IID_IUpdateIDList;
+@@ -30204,7 +30241,7 @@ EXTERN_C const IID IID_IUpdateIDList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1862,7 +1875,7 @@ index 97a14455d2..e4923e058f 100644
      IUpdateIDList : public IUnknown
      {
      public:
-@@ -30291,8 +30324,8 @@ EXTERN_C const IID IID_IUpdateIDList;
+@@ -30291,8 +30328,8 @@ EXTERN_C const IID IID_IUpdateIDList;
  /* interface __MIDL_itf_shobjidl_core_0000_0156 */
  /* [local] */ 
  
@@ -1873,7 +1886,7 @@ index 97a14455d2..e4923e058f 100644
  #endif // NTDDI_WIN7
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
-@@ -30345,7 +30378,7 @@ EXTERN_C const IID IID_IDesktopWallpaper;
+@@ -30345,7 +30382,7 @@ EXTERN_C const IID IID_IDesktopWallpaper;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1882,7 +1895,7 @@ index 97a14455d2..e4923e058f 100644
      IDesktopWallpaper : public IUnknown
      {
      public:
-@@ -30678,7 +30711,7 @@ EXTERN_C const IID IID_IHomeGroup;
+@@ -30678,7 +30715,7 @@ EXTERN_C const IID IID_IHomeGroup;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1891,7 +1904,7 @@ index 97a14455d2..e4923e058f 100644
      IHomeGroup : public IUnknown
      {
      public:
-@@ -30782,7 +30815,7 @@ EXTERN_C const IID IID_IInitializeWithPropertyStore;
+@@ -30782,7 +30819,7 @@ EXTERN_C const IID IID_IInitializeWithPropertyStore;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1900,7 +1913,7 @@ index 97a14455d2..e4923e058f 100644
      IInitializeWithPropertyStore : public IUnknown
      {
      public:
-@@ -30869,7 +30902,7 @@ EXTERN_C const IID IID_IOpenSearchSource;
+@@ -30869,7 +30906,7 @@ EXTERN_C const IID IID_IOpenSearchSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1909,7 +1922,7 @@ index 97a14455d2..e4923e058f 100644
      IOpenSearchSource : public IUnknown
      {
      public:
-@@ -31010,7 +31043,7 @@ EXTERN_C const IID IID_IShellLibrary;
+@@ -31010,7 +31047,7 @@ EXTERN_C const IID IID_IShellLibrary;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1918,7 +1931,7 @@ index 97a14455d2..e4923e058f 100644
      IShellLibrary : public IUnknown
      {
      public:
-@@ -31394,7 +31427,7 @@ EXTERN_C const IID IID_IDefaultFolderMenuInitialize;
+@@ -31394,7 +31431,7 @@ EXTERN_C const IID IID_IDefaultFolderMenuInitialize;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1927,7 +1940,7 @@ index 97a14455d2..e4923e058f 100644
      IDefaultFolderMenuInitialize : public IUnknown
      {
      public:
-@@ -31576,7 +31609,7 @@ EXTERN_C const IID IID_IApplicationActivationManager;
+@@ -31576,7 +31613,7 @@ EXTERN_C const IID IID_IApplicationActivationManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1936,7 +1949,7 @@ index 97a14455d2..e4923e058f 100644
      IApplicationActivationManager : public IUnknown
      {
      public:
-@@ -31731,7 +31764,7 @@ EXTERN_C const IID IID_IVirtualDesktopManager;
+@@ -31731,7 +31768,7 @@ EXTERN_C const IID IID_IVirtualDesktopManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1945,7 +1958,7 @@ index 97a14455d2..e4923e058f 100644
      IVirtualDesktopManager : public IUnknown
      {
      public:
-@@ -32213,8 +32246,8 @@ ApplicationDesignModeSettings;
+@@ -32213,8 +32250,8 @@ ApplicationDesignModeSettings;
  /* [local] */ 
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -1956,7 +1969,7 @@ index 97a14455d2..e4923e058f 100644
  #endif  // NTDDI_VISTA
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  #if (_WIN32_IE >= _WIN32_IE_IE70)
-@@ -32226,8 +32259,8 @@ enum LIBRARYMANAGEDIALOGOPTIONS
+@@ -32226,8 +32263,8 @@ enum LIBRARYMANAGEDIALOGOPTIONS
      } 	LIBRARYMANAGEDIALOGOPTIONS;
  
  DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)
@@ -1967,7 +1980,7 @@ index 97a14455d2..e4923e058f 100644
  #if defined(__cplusplus) && !defined(CINTERFACE)
  
  // These functions properly initialize their _Outptr_ parameters to NULL, and only return NULL
-@@ -32366,7 +32399,7 @@ EXTERN_C const IID IID_IAssocHandlerInvoker;
+@@ -32366,7 +32403,7 @@ EXTERN_C const IID IID_IAssocHandlerInvoker;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1976,7 +1989,7 @@ index 97a14455d2..e4923e058f 100644
      IAssocHandlerInvoker : public IUnknown
      {
      public:
-@@ -32480,7 +32513,7 @@ EXTERN_C const IID IID_IAssocHandler;
+@@ -32480,7 +32517,7 @@ EXTERN_C const IID IID_IAssocHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1985,7 +1998,7 @@ index 97a14455d2..e4923e058f 100644
      IAssocHandler : public IUnknown
      {
      public:
-@@ -32498,7 +32531,7 @@ EXTERN_C const IID IID_IAssocHandler;
+@@ -32498,7 +32535,7 @@ EXTERN_C const IID IID_IAssocHandler;
              /* [annotation][out] */ 
              _Out_  int *pIndex) = 0;
          
@@ -1994,7 +2007,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE MakeDefault( 
              /* [annotation][string][in] */ 
-@@ -32649,7 +32682,7 @@ EXTERN_C const IID IID_IEnumAssocHandlers;
+@@ -32649,7 +32686,7 @@ EXTERN_C const IID IID_IEnumAssocHandlers;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2003,7 +2016,7 @@ index 97a14455d2..e4923e058f 100644
      IEnumAssocHandlers : public IUnknown
      {
      public:
-@@ -32744,10 +32777,10 @@ enum ASSOC_FILTER
+@@ -32744,10 +32781,10 @@ enum ASSOC_FILTER
      } 	ASSOC_FILTER;
  
  DEFINE_ENUM_FLAG_OPERATORS(ASSOC_FILTER)
@@ -2016,7 +2029,7 @@ index 97a14455d2..e4923e058f 100644
  #endif  // NTDDI_WIN7
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
-@@ -32766,7 +32799,7 @@ EXTERN_C const IID IID_IDataObjectProvider;
+@@ -32766,7 +32803,7 @@ EXTERN_C const IID IID_IDataObjectProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2025,7 +2038,7 @@ index 97a14455d2..e4923e058f 100644
      IDataObjectProvider : public IUnknown
      {
      public:
-@@ -32866,7 +32899,7 @@ EXTERN_C const IID IID_IDataTransferManagerInterop;
+@@ -32866,7 +32903,7 @@ EXTERN_C const IID IID_IDataTransferManagerInterop;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2034,7 +2047,7 @@ index 97a14455d2..e4923e058f 100644
      IDataTransferManagerInterop : public IUnknown
      {
      public:
-@@ -32984,7 +33017,7 @@ EXTERN_C const IID IID_IFrameworkInputPaneHandler;
+@@ -32984,7 +33021,7 @@ EXTERN_C const IID IID_IFrameworkInputPaneHandler;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2043,7 +2056,7 @@ index 97a14455d2..e4923e058f 100644
      IFrameworkInputPaneHandler : public IUnknown
      {
      public:
-@@ -33088,7 +33121,7 @@ EXTERN_C const IID IID_IFrameworkInputPane;
+@@ -33088,7 +33125,7 @@ EXTERN_C const IID IID_IFrameworkInputPane;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2052,7 +2065,7 @@ index 97a14455d2..e4923e058f 100644
      IFrameworkInputPane : public IUnknown
      {
      public:
-@@ -33269,7 +33302,7 @@ EXTERN_C const IID IID_IAppVisibilityEvents;
+@@ -33269,7 +33306,7 @@ EXTERN_C const IID IID_IAppVisibilityEvents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2061,7 +2074,7 @@ index 97a14455d2..e4923e058f 100644
      IAppVisibilityEvents : public IUnknown
      {
      public:
-@@ -33377,7 +33410,7 @@ EXTERN_C const IID IID_IAppVisibility;
+@@ -33377,7 +33414,7 @@ EXTERN_C const IID IID_IAppVisibility;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2070,7 +2083,7 @@ index 97a14455d2..e4923e058f 100644
      IAppVisibility : public IUnknown
      {
      public:
-@@ -33533,7 +33566,7 @@ EXTERN_C const IID IID_IPackageExecutionStateChangeNotification;
+@@ -33533,7 +33570,7 @@ EXTERN_C const IID IID_IPackageExecutionStateChangeNotification;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2079,7 +2092,7 @@ index 97a14455d2..e4923e058f 100644
      IPackageExecutionStateChangeNotification : public IUnknown
      {
      public:
-@@ -33624,7 +33657,7 @@ EXTERN_C const IID IID_IPackageDebugSettings;
+@@ -33624,7 +33661,7 @@ EXTERN_C const IID IID_IPackageDebugSettings;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2088,7 +2101,7 @@ index 97a14455d2..e4923e058f 100644
      IPackageDebugSettings : public IUnknown
      {
      public:
-@@ -33634,7 +33667,7 @@ EXTERN_C const IID IID_IPackageDebugSettings;
+@@ -33634,7 +33671,7 @@ EXTERN_C const IID IID_IPackageDebugSettings;
              /* [annotation][in] */ 
              _In_opt_  LPCWSTR debuggerCommandLine,
              /* [annotation][in] */ 
@@ -2097,7 +2110,7 @@ index 97a14455d2..e4923e058f 100644
          
          virtual HRESULT STDMETHODCALLTYPE DisableDebugging( 
              /* [annotation][in] */ 
-@@ -34182,7 +34215,7 @@ EXTERN_C const IID IID_ISuspensionDependencyManager;
+@@ -34182,7 +34219,7 @@ EXTERN_C const IID IID_ISuspensionDependencyManager;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2106,7 +2119,7 @@ index 97a14455d2..e4923e058f 100644
      ISuspensionDependencyManager : public IUnknown
      {
      public:
-@@ -34310,7 +34343,7 @@ EXTERN_C const IID IID_IExecuteCommandApplicationHostEnvironment;
+@@ -34310,7 +34347,7 @@ EXTERN_C const IID IID_IExecuteCommandApplicationHostEnvironment;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2115,7 +2128,7 @@ index 97a14455d2..e4923e058f 100644
      IExecuteCommandApplicationHostEnvironment : public IUnknown
      {
      public:
-@@ -34413,7 +34446,7 @@ EXTERN_C const IID IID_IExecuteCommandHost;
+@@ -34413,7 +34450,7 @@ EXTERN_C const IID IID_IExecuteCommandHost;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2124,7 +2137,7 @@ index 97a14455d2..e4923e058f 100644
      IExecuteCommandHost : public IUnknown
      {
      public:
-@@ -34526,7 +34559,7 @@ EXTERN_C const IID IID_IApplicationDesignModeSettings;
+@@ -34526,7 +34563,7 @@ EXTERN_C const IID IID_IApplicationDesignModeSettings;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2133,7 +2146,7 @@ index 97a14455d2..e4923e058f 100644
      IApplicationDesignModeSettings : public IUnknown
      {
      public:
-@@ -34730,7 +34763,7 @@ EXTERN_C const IID IID_IApplicationDesignModeSettings2;
+@@ -34730,7 +34767,7 @@ EXTERN_C const IID IID_IApplicationDesignModeSettings2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2142,7 +2155,7 @@ index 97a14455d2..e4923e058f 100644
      IApplicationDesignModeSettings2 : public IApplicationDesignModeSettings
      {
      public:
-@@ -34975,7 +35008,7 @@ EXTERN_C const IID IID_ILaunchTargetMonitor;
+@@ -34975,7 +35012,7 @@ EXTERN_C const IID IID_ILaunchTargetMonitor;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2151,7 +2164,7 @@ index 97a14455d2..e4923e058f 100644
      ILaunchTargetMonitor : public IUnknown
      {
      public:
-@@ -35083,7 +35116,7 @@ EXTERN_C const IID IID_ILaunchSourceViewSizePreference;
+@@ -35083,7 +35120,7 @@ EXTERN_C const IID IID_ILaunchSourceViewSizePreference;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2160,7 +2173,7 @@ index 97a14455d2..e4923e058f 100644
      ILaunchSourceViewSizePreference : public IUnknown
      {
      public:
-@@ -35192,7 +35225,7 @@ EXTERN_C const IID IID_ILaunchTargetViewSizePreference;
+@@ -35192,7 +35229,7 @@ EXTERN_C const IID IID_ILaunchTargetViewSizePreference;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2169,7 +2182,7 @@ index 97a14455d2..e4923e058f 100644
      ILaunchTargetViewSizePreference : public IUnknown
      {
      public:
-@@ -35288,7 +35321,7 @@ EXTERN_C const IID IID_ILaunchSourceAppUserModelId;
+@@ -35288,7 +35325,7 @@ EXTERN_C const IID IID_ILaunchSourceAppUserModelId;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2178,7 +2191,7 @@ index 97a14455d2..e4923e058f 100644
      ILaunchSourceAppUserModelId : public IUnknown
      {
      public:
-@@ -35385,7 +35418,7 @@ EXTERN_C const IID IID_IInitializeWithWindow;
+@@ -35385,7 +35422,7 @@ EXTERN_C const IID IID_IInitializeWithWindow;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2187,7 +2200,7 @@ index 97a14455d2..e4923e058f 100644
      IInitializeWithWindow : public IUnknown
      {
      public:
-@@ -35472,7 +35505,7 @@ EXTERN_C const IID IID_IHandlerInfo;
+@@ -35472,7 +35509,7 @@ EXTERN_C const IID IID_IHandlerInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2196,7 +2209,7 @@ index 97a14455d2..e4923e058f 100644
      IHandlerInfo : public IUnknown
      {
      public:
-@@ -35709,7 +35742,7 @@ EXTERN_C const IID IID_IHandlerActivationHost;
+@@ -35709,7 +35746,7 @@ EXTERN_C const IID IID_IHandlerActivationHost;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2205,7 +2218,7 @@ index 97a14455d2..e4923e058f 100644
      IHandlerActivationHost : public IUnknown
      {
      public:
-@@ -35997,7 +36030,7 @@ EXTERN_C const IID IID_IContactManagerInterop;
+@@ -35997,7 +36034,7 @@ EXTERN_C const IID IID_IContactManagerInterop;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2214,7 +2227,7 @@ index 97a14455d2..e4923e058f 100644
      IContactManagerInterop : public IUnknown
      {
      public:
-@@ -36105,7 +36138,7 @@ EXTERN_C const IID IID_IShellIconOverlayIdentifier;
+@@ -36105,7 +36142,7 @@ EXTERN_C const IID IID_IShellIconOverlayIdentifier;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -2223,7 +2236,7 @@ index 97a14455d2..e4923e058f 100644
      IShellIconOverlayIdentifier : public IUnknown
      {
      public:
-@@ -36669,20 +36702,20 @@ unsigned char * __RPC_USER  HGLOBAL_UserMarshal(  __RPC__in unsigned long *, __R
+@@ -36669,20 +36706,20 @@ unsigned char * __RPC_USER  HGLOBAL_UserMarshal(  __RPC__in unsigned long *, __R
  unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
  void                      __RPC_USER  HGLOBAL_UserFree(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
  
@@ -2253,7 +2266,7 @@ index 97a14455d2..e4923e058f 100644
  
  unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
  unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
-@@ -36749,20 +36782,20 @@ unsigned char * __RPC_USER  HGLOBAL_UserMarshal64(  __RPC__in unsigned long *, _
+@@ -36749,20 +36786,20 @@ unsigned char * __RPC_USER  HGLOBAL_UserMarshal64(  __RPC__in unsigned long *, _
  unsigned char * __RPC_USER  HGLOBAL_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HGLOBAL * ); 
  void                      __RPC_USER  HGLOBAL_UserFree64(     __RPC__in unsigned long *, __RPC__in HGLOBAL * ); 
  
@@ -2282,7 +2295,7 @@ index 97a14455d2..e4923e058f 100644
  
  unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
  unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
-@@ -37050,6 +37083,157 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+@@ -37050,6 +37087,157 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
  }
  #endif
  

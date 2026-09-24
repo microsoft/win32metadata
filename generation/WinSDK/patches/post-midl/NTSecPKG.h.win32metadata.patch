@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
-index 2571b34bb4..d2e8633a86 100644
+index 2571b34bb4..76c19892a3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecPKG.h
 @@ -19,6 +19,7 @@ Revision History:
@@ -125,6 +125,17 @@ index 2571b34bb4..d2e8633a86 100644
      ULONG CredentialCount;
  #ifdef MIDL_PASS
      [size_is(CredentialCount)] SECPKG_SUPPLEMENTAL_CRED Credentials[*];
+@@ -848,8 +849,8 @@ typedef NTSTATUS
+ (NTAPI LSA_CALLBACK_FUNCTION)(
+     ULONG_PTR    Argument1,
+     ULONG_PTR    Argument2,
+-    PSecBuffer  InputBuffer,
+-    PSecBuffer  OutputBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBuffer  InputBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBuffer  OutputBuffer
+     );
+ 
+ typedef LSA_CALLBACK_FUNCTION * PLSA_CALLBACK_FUNCTION;
 @@ -897,7 +898,7 @@ typedef LSA_CALLBACK_FUNCTION * PLSA_CALLBACK_FUNCTION;
  // by shifting the flags to the right by the PRIMARY_CRED_LOGON_PACKAGE_SHIFT.
  //
@@ -223,6 +234,49 @@ index 2571b34bb4..d2e8633a86 100644
      SECURITY_STRING UserName;           // User name
      SECURITY_STRING LogonDomainName;    // Domain the user logged on to
      SECURITY_STRING LogonServer;        // Server that logged the user on
+@@ -1175,10 +1176,10 @@ typedef NTSTATUS
+ typedef NTSTATUS
+ (NTAPI LSA_REDIRECTED_LOGON_CALLBACK)(
+         HANDLE RedirectedLogonHandle,
+-        PVOID Buffer,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Buffer,
+         ULONG BufferLength,
+-        PVOID* ReturnBuffer,
+-        ULONG* ReturnBufferLength
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID* ReturnBuffer,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG* ReturnBufferLength
+         );
+ 
+ // Cleans up after a redirected logon is no longer needed. After this point,
+@@ -1193,8 +1194,8 @@ typedef VOID
+ typedef NTSTATUS
+ (NTAPI LSA_REDIRECTED_LOGON_GET_LOGON_CREDS)(
+         HANDLE RedirectedLogonHandle,
+-        PBYTE* LogonBuffer,
+-        PULONG LogonBufferLength
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE* LogonBuffer,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG LogonBufferLength
+         );
+ 
+ // The authentication package should use this to retrieve the supplemental
+@@ -1203,7 +1204,7 @@ typedef NTSTATUS
+ typedef NTSTATUS
+ (NTAPI LSA_REDIRECTED_LOGON_GET_SUPP_CREDS)(
+         HANDLE RedirectedLogonHandle,
+-        PSECPKG_SUPPLEMENTAL_CRED_ARRAY* SupplementalCredentials
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECPKG_SUPPLEMENTAL_CRED_ARRAY* SupplementalCredentials
+         );
+ 
+ // The authentication package should use this to retrieve the SID associated
+@@ -1211,7 +1212,7 @@ typedef NTSTATUS
+ typedef NTSTATUS
+ (NTAPI LSA_REDIRECTED_LOGON_GET_SID)(
+         HANDLE RedirectedLogonHandle,
+-        PSID* Sid
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSID* Sid
+         );
+ 
+ #ifdef __cplusplus
 @@ -1340,7 +1341,7 @@ typedef NTSTATUS
      _Out_ PNTSTATUS SubStatus
      );

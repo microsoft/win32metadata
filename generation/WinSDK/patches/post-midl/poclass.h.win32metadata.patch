@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
-index a93eb437f1..e2eedcd346 100644
+index a93eb437f1..2104c258bd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
 @@ -27,6 +27,7 @@ Revision History:
@@ -55,3 +55,38 @@ index a93eb437f1..e2eedcd346 100644
  {
      UCHAR   Day;
      UCHAR   Month;
+@@ -642,14 +643,22 @@ typedef struct _THERMAL_COOLING_INTERFACE {
+ } THERMAL_COOLING_INTERFACE, *PTHERMAL_COOLING_INTERFACE;
+ 
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(THERMAL_COOLING_INTERFACE_VERSION)) || (((!defined(_WINDOWS_))))
+ #define THERMAL_COOLING_INTERFACE_VERSION 1
++#endif
++#ifndef _WINDOWS_
+ 
+ //
+ // The following THERMAL_DEVICE_* definitions are deprecated and should not be
+ // used. Use THERMAL_COOLING_* instead.
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(THERMAL_DEVICE_INTERFACE_VERSION)) || (((!defined(_WINDOWS_))))
+ #define THERMAL_DEVICE_INTERFACE_VERSION 1
++#endif
++#ifndef _WINDOWS_
+ 
+ typedef THERMAL_COOLING_INTERFACE THERMAL_DEVICE_INTERFACE;
+ typedef THERMAL_COOLING_INTERFACE *PTHERMAL_DEVICE_INTERFACE;
+@@ -723,7 +732,11 @@ typedef struct _POWER_LIMIT_INTERFACE {
+     PQUERY_POWER_LIMIT            QueryPowerLimit;
+ } POWER_LIMIT_INTERFACE, *PPOWER_LIMIT_INTERFACE;
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(POWER_LIMIT_INTERFACE_VERSION)) || (((!defined(_WINDOWS_))))
+ #define POWER_LIMIT_INTERFACE_VERSION 1
++#endif
++#ifndef _WINDOWS_
+ 
+ #endif // _WINDOWS_
+ 

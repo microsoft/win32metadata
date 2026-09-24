@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
-index 3cc4f24de6..afad608c1e 100644
+index 3cc4f24de6..da40bcd6a1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
 @@ -1,3 +1,4 @@
@@ -257,7 +257,78 @@ index 3cc4f24de6..afad608c1e 100644
  
  #endif /* RC_INVOKED */
  
-@@ -2125,7 +2126,7 @@ SQLRETURN SQL_API SQLBindParameter(
+@@ -2106,26 +2107,78 @@ SQLRETURN SQL_API SQLBindParameter(
+ #define SQLAllocEnv(phenv)  SQLAllocHandleStd(SQL_HANDLE_ENV, SQL_NULL_HANDLE, phenv)
+ 
+ /* Internal type subcodes */
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_YEAR)) || (((defined(ODBC_STD))))
+ #define SQL_YEAR                        SQL_CODE_YEAR
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_MONTH)) || (((defined(ODBC_STD))))
+ #define SQL_MONTH                       SQL_CODE_MONTH
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY)) || (((defined(ODBC_STD))))
+ #define SQL_DAY                         SQL_CODE_DAY
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_HOUR)) || (((defined(ODBC_STD))))
+ #define SQL_HOUR                        SQL_CODE_HOUR
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_MINUTE)) || (((defined(ODBC_STD))))
+ #define SQL_MINUTE                      SQL_CODE_MINUTE
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_SECOND                      SQL_CODE_SECOND
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_YEAR_TO_MONTH)) || (((defined(ODBC_STD))))
+ #define SQL_YEAR_TO_MONTH               SQL_CODE_YEAR_TO_MONTH
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY_TO_HOUR)) || (((defined(ODBC_STD))))
+ #define SQL_DAY_TO_HOUR                 SQL_CODE_DAY_TO_HOUR
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY_TO_MINUTE)) || (((defined(ODBC_STD))))
+ #define SQL_DAY_TO_MINUTE               SQL_CODE_DAY_TO_MINUTE
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY_TO_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_DAY_TO_SECOND               SQL_CODE_DAY_TO_SECOND
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_HOUR_TO_MINUTE)) || (((defined(ODBC_STD))))
+ #define SQL_HOUR_TO_MINUTE              SQL_CODE_HOUR_TO_MINUTE
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_HOUR_TO_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_HOUR_TO_SECOND              SQL_CODE_HOUR_TO_SECOND
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_MINUTE_TO_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_MINUTE_TO_SECOND            SQL_CODE_MINUTE_TO_SECOND
++#endif
++#ifdef ODBC_STD
+ #endif /* ODBC_STD */
+ 
+ #if (ODBCVER >= 0x0300)
  #ifndef RC_INVOKED
  SQLRETURN SQL_API SQLAllocHandleStd(
      SQLSMALLINT     fHandleType,
@@ -266,7 +337,7 @@ index 3cc4f24de6..afad608c1e 100644
      _Out_
      SQLHANDLE      *phOutput);
  #endif /* RC_INVOKED */
-@@ -2155,7 +2156,7 @@ SQLRETURN SQL_API SQLAllocHandleStd(
+@@ -2155,7 +2208,7 @@ SQLRETURN SQL_API SQLAllocHandleStd(
  #ifndef RC_INVOKED
  
  SQLRETURN SQL_API SQLSetScrollOptions(    /*      Use SQLSetStmtOptions */
