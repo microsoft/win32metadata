@@ -68,6 +68,8 @@ for example, `olectl.h` must precede `msxml6did.h`.
 The metadata-only `LMDFS.h` patch supplies the released `FSCTL_DFS_BASE` alias
 previously defined in manual C# so the existing native `CTL_CODE` expression can
 be evaluated. The native expression and non-metadata compilation are unchanged.
+Place metadata-only enum declarations in the header's active C++ branch, not
+its MIDL-only branch. Preserve the native macros when exposing those groupings.
 
 The WinSDK input currently omits `x3daudio.h`. Its `X3DAUDIO_VECTOR` alias
 depends on `DirectX::XMFLOAT3`, but the reader skips that native namespace and
