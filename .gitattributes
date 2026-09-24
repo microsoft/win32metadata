@@ -1,2 +1,5 @@
 RecompiledIdlHeaders.zip filter=lfs diff=lfs merge=lfs -text
 Windows.Win32.winmd filter=lfs diff=lfs merge=lfs -text
+
+# Patch hunks preserve their target headers' line endings.
+generation/WinSDK/patches/**/*.patch -text
