@@ -1,0 +1,23 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oledberr.h b/generation/WinSDK/RecompiledIdlHeaders/um/oledberr.h
+index 1647d78d9b..1e38d3adb6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oledberr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oledberr.h
+@@ -14,6 +14,10 @@
+ //-----------------------------------------------------------------------------
+ #ifndef _MSADERR_H_
+ #define _MSADERR_H_
++#if (defined(WIN32METADATA) && !defined(DB_E_BOGUS)) || (((!defined(FACILITY_WINDOWS))))
++#define DB_E_BOGUS                       ((HRESULT)0x80040EFFL)
++#endif
++
+ #ifndef FACILITY_WINDOWS				  	
+ //
+ //  Values are 32 bit values laid out as follows:
+@@ -71,7 +75,6 @@
+ // Dummy error - need this error so that mc puts the above defines
+ // inside the FACILITY_WINDOWS guard, instead of leaving it empty
+ //
+-#define DB_E_BOGUS                       ((HRESULT)0x80040EFFL)
+ 
+ #endif // FACILITY_WINDOWS
+ 

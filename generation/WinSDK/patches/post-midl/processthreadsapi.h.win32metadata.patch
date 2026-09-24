@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
-index 0d0863017f..bbdd6e7884 100644
+index 0d0863017f..0ae487980e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h
 @@ -15,6 +15,7 @@
@@ -600,7 +600,8 @@ index 0d0863017f..bbdd6e7884 100644
 -    _Out_writes_bytes_to_opt_(*lpSize,*lpSize) LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
 +    _Win32_RAIIFree_(DeleteProcThreadAttributeList) _Out_writes_bytes_to_opt_(*lpSize,*lpSize) LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
      _In_ DWORD dwAttributeCount,
-     _Reserved_ DWORD dwFlags,
+-    _Reserved_ DWORD dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwFlags,
      _When_(lpAttributeList == nullptr,_Out_) _When_(lpAttributeList != nullptr,_Inout_) PSIZE_T lpSize
      );
  
@@ -986,8 +987,12 @@ index 0d0863017f..bbdd6e7884 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -1278,6 +1505,9 @@ GetSystemCpuSetInformation(
-     _Reserved_ ULONG Flags
+@@ -1275,9 +1502,12 @@ GetSystemCpuSetInformation(
+     _In_ ULONG BufferLength,
+     _Always_(_Out_) PULONG ReturnedLength,
+     _In_opt_ HANDLE Process,
+-    _Reserved_ ULONG Flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ ULONG Flags
      );
  
 +

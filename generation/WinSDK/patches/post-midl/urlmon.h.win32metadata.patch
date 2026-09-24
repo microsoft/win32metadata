@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
-index c3e03f435d..3dcd3265c8 100644
+index c3e03f435d..a4d39b967e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
 @@ -463,6 +463,7 @@ extern "C"{
@@ -19,15 +19,17 @@ index c3e03f435d..3dcd3265c8 100644
                                  _In_opt_ IEnumFORMATETC *pEFetc, _Outptr_ IBindCtx **ppBC);                   
  #if (_WIN32_IE >= _WIN32_IE_IE70)
  STDAPI CreateURLMonikerEx2(_In_opt_ LPMONIKER pMkCtx, _In_ IUri* pUri, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             
-@@ -554,7 +555,7 @@ STDAPI IsValidURL(_In_opt_ LPBC pBC, _In_ LPCWSTR szURL, DWORD dwReserved);
+@@ -554,8 +555,8 @@ STDAPI IsValidURL(_In_opt_ LPBC pBC, _In_ LPCWSTR szURL, DWORD dwReserved);
  STDAPI CoGetClassObjectFromURL( _In_ REFCLSID rCLASSID,
              _In_ LPCWSTR szCODE, DWORD dwFileVersionMS, 
              DWORD dwFileVersionLS, _In_ LPCWSTR szTYPE,
 -            _In_ LPBINDCTX pBindCtx, DWORD dwClsContext,
+-            _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);
 +            _In_ LPBINDCTX pBindCtx, _Win32_AssociatedEnum_(CLSCTX) DWORD dwClsContext,
-             _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);
++            _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);
  STDAPI IEInstallScope(_Out_ LPDWORD pdwScope);
  STDAPI FaultInIEFeature( HWND hWnd,
+             _In_ uCLSSPEC *pClassSpec,
 @@ -577,7 +578,7 @@ STDAPI CreateURLBinding(LPCWSTR lpszUrl, _In_ IBindCtx *pbc, _Inout_ IBinding **
   
  STDAPI RegisterMediaTypes(_In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _Out_writes_(ctypes) CLIPFORMAT* rgcfTypes);            
@@ -37,6 +39,26 @@ index c3e03f435d..3dcd3265c8 100644
  STDAPI RegisterFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc, DWORD reserved);          
  STDAPI RevokeFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc);                            
  STDAPI RegisterMediaTypeClass(_In_ LPBC pBC, _In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _In_reads_(ctypes)  CLSID *rgclsID, DWORD reserved);    
+@@ -586,8 +587,8 @@ STDAPI FindMediaTypeClass(_In_ LPBC pBC, _In_ LPCSTR szType, _Out_ CLSID *pclsID
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+-STDAPI UrlMkSetSessionOption(DWORD dwOption, _In_reads_bytes_opt_(dwBufferLength) LPVOID pBuffer, DWORD dwBufferLength, _Reserved_ DWORD dwReserved);       
+-STDAPI UrlMkGetSessionOption(DWORD dwOption, _Out_writes_bytes_to_opt_(dwBufferLength,*pdwBufferLengthOut) LPVOID pBuffer, DWORD dwBufferLength, _Out_ DWORD *pdwBufferLengthOut, _Reserved_ DWORD dwReserved);       
++STDAPI UrlMkSetSessionOption(DWORD dwOption, _In_reads_bytes_opt_(dwBufferLength) LPVOID pBuffer, DWORD dwBufferLength, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved);       
++STDAPI UrlMkGetSessionOption(DWORD dwOption, _Out_writes_bytes_to_opt_(dwBufferLength,*pdwBufferLengthOut) LPVOID pBuffer, DWORD dwBufferLength, _Out_ DWORD *pdwBufferLengthOut, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved);       
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ #pragma region Desktop Family
+@@ -600,7 +601,7 @@ STDAPI FindMimeFromData(
+     _In_opt_                     LPCWSTR pwzMimeProposed,       // proposed mime if - can be null                                             
+                                  DWORD   dwMimeFlags,           // will be defined                                                            
+     _Outptr_                     LPWSTR  *ppwzMimeOut,          // the suggested mime                                                         
+-    _Reserved_                   DWORD   dwReserved);           // must be 0                                                                  
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                   DWORD   dwReserved);           // must be 0                                                                  
+ #define     FMFD_DEFAULT             0x00000000 
+ #define     FMFD_URLASFILENAME       0x00000001 
+ #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
 @@ -809,7 +810,7 @@ EXTERN_C const IID IID_IPersistMoniker;
              /* [annotation][out] */ 
              _Out_  CLSID *pClassID) = 0;
@@ -152,15 +174,34 @@ index c3e03f435d..3dcd3265c8 100644
          
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHostType( 
              /* [annotation][out] */ 
-@@ -3653,7 +3654,7 @@ EXTERN_C const IID IID_IUri;
+@@ -3653,15 +3654,15 @@ EXTERN_C const IID IID_IUri;
  /* [local] */ 
  
  STDAPI CreateUri(_In_ LPCWSTR pwzURI,
 -                 _In_ DWORD dwFlags,
+-                 _Reserved_ DWORD_PTR dwReserved,   // must be 0
 +                 _Win32_AssociatedEnum_(URI_CREATE_FLAGS) _In_ DWORD dwFlags,
-                  _Reserved_ DWORD_PTR dwReserved,   // must be 0
++                 _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved,   // must be 0
                   _Outptr_ IUri** ppURI);
  
+ STDAPI CreateUriWithFragment(
+                  _In_ LPCWSTR pwzURI,
+                  _In_opt_ LPCWSTR pwzFragment,        // can be NULL
+                  _In_ DWORD dwFlags,
+-                 _Reserved_ DWORD_PTR dwReserved,   // must be 0
++                 _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved,   // must be 0
+                  _Outptr_ IUri** ppURI);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+@@ -3674,7 +3675,7 @@ STDAPI CreateUriFromMultiByteString(
+                DWORD     dwEncodingFlags, // ORed set of Uri_ENCODING_ flags
+                DWORD     dwCodePage,
+                DWORD     dwCreateFlags,
+-    _Reserved_ DWORD_PTR dwReserved,   // must be 0
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved,   // must be 0
+     _Outptr_   IUri**    ppUri);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 @@ -5412,16 +5413,16 @@ STDAPI HlinkSimpleNavigateToMoniker(
      /* [in] */ DWORD dwReserved          // for future use, must be NULL                                   
  );                                                                                                         
@@ -188,6 +229,42 @@ index c3e03f435d..3dcd3265c8 100644
                                                                                                             
  #ifdef UNICODE                                                                                             
  #define URLOpenStream            URLOpenStreamW                                                            
+@@ -7580,7 +7581,7 @@ STDAPI CoInternetParseIUri(
+     _Out_writes_to_(cchResult,*pcchResult+1) LPWSTR       pwzResult,     
+                                              DWORD        cchResult,     
+     _Out_                                    DWORD       *pcchResult,    
+-    _Reserved_                               DWORD_PTR    dwReserved     
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                               DWORD_PTR    dwReserved     
+     );                                                  
+ #endif //(_WIN32_IE >= _WIN32_IE_IE70)
+ STDAPI CoInternetCombineUrl(                                           
+@@ -7590,7 +7591,7 @@ STDAPI CoInternetCombineUrl(
+     _Out_writes_to_(cchResult,*pcchResult+1) LPWSTR    pszResult,      
+                                              DWORD     cchResult,      
+     _Out_opt_                                DWORD     *pcchResult,    
+-    _Reserved_                               DWORD     dwReserved      
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                               DWORD     dwReserved      
+     );                                                                 
+ #if (_WIN32_IE >= _WIN32_IE_IE70)
+ STDAPI CoInternetCombineUrlEx(               
+@@ -7636,7 +7637,7 @@ STDAPI CoInternetGetSecurityUrl(
+                  LPCWSTR pwszUrl,        
+     _Outptr_     LPWSTR *ppwszSecUrl,    
+     _In_         PSUACTION   psuAction,  
+-    _Reserved_   DWORD dwReserved        
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_   DWORD dwReserved        
+     );                                   
+ STDAPI AsyncInstallDistributionUnit(     
+     _In_ LPCWSTR szDistUnit,             
+@@ -7654,7 +7655,7 @@ STDAPI CoInternetGetSecurityUrlEx(
+     _In_         IUri           *pUri,       
+     _Outptr_     IUri          **ppSecUri,   
+                  PSUACTION       psuAction,  
+-    _Reserved_   DWORD_PTR       dwReserved  
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_   DWORD_PTR       dwReserved  
+     );                                       
+ #endif //(_WIN32_IE >= _WIN32_IE_IE70)
+ #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
 @@ -9693,11 +9694,25 @@ enum tagURLTEMPLATE
      } 	URLTEMPLATE;
  

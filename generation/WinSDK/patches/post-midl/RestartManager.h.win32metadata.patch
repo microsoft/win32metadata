@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h b/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
-index 7f9b7f9e78..b188dd2013 100644
+index 7f9b7f9e78..29c46050cb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RestartManager.h
 @@ -8,6 +8,7 @@
@@ -123,7 +123,7 @@ index 7f9b7f9e78..b188dd2013 100644
  typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
  
  // Functions
-@@ -147,9 +174,11 @@ typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
+@@ -147,10 +174,12 @@ typedef void (*RM_WRITE_STATUS_CALLBACK)( _In_ UINT nPercentComplete );
  //            Read/write operation failed.
  //        ERROR_OUTOFMEMORY
  //            Could not allocate memory or instantiate class object.
@@ -132,10 +132,12 @@ index 7f9b7f9e78..b188dd2013 100644
  DWORD WINAPI
  RmStartSession(
 -    _Out_ DWORD *pSessionHandle,
+-    _Reserved_ DWORD dwSessionFlags,
 +    _Out_  DWORD *pSessionHandle,
-     _Reserved_ DWORD dwSessionFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwSessionFlags,
      _Out_writes_(CCH_RM_SESSION_KEY+1) WCHAR strSessionKey[]);
  
+ // Function: RmJoinSession
 @@ -164,9 +193,11 @@ RmStartSession(
  //            Read/write operation failed.
  //        ERROR_OUTOFMEMORY
@@ -198,7 +200,7 @@ index 7f9b7f9e78..b188dd2013 100644
      _In_opt_ RM_WRITE_STATUS_CALLBACK fnStatus);
  
  // Function: RmRestart
-@@ -291,6 +330,8 @@ RmShutdown(
+@@ -291,10 +330,12 @@ RmShutdown(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE
  //            No session exists for the supplied handle.
@@ -207,6 +209,11 @@ index 7f9b7f9e78..b188dd2013 100644
  DWORD WINAPI
  RmRestart(
          _In_ DWORD dwSessionHandle,
+-        _Reserved_ DWORD dwRestartFlags,
++        _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwRestartFlags,
+         _In_opt_ RM_WRITE_STATUS_CALLBACK fnStatus);
+ 
+ // Function: RmCancelCurrentTask()
 @@ -307,6 +348,8 @@ RmRestart(
  //            Could not allocate memory or instantiate class object.
  //        ERROR_INVALID_HANDLE

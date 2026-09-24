@@ -19,3 +19,7 @@
 #include <tcguid.h>
 //#include <tcpioctl.h> - won't compile and duplicated by iphlpapi as per tcpioctl.h
 #include <wbcl.h>
+
+#include <devioctl.h>
+#include <tdiinfo.h>
+#include <tcpioctl.h>

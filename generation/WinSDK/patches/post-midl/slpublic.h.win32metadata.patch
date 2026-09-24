@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h b/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
-index cd708ed5df..73fa985595 100644
+index cd708ed5df..a4882a0464 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
 @@ -17,6 +17,7 @@ Abstract:
@@ -152,6 +152,15 @@ index cd708ed5df..73fa985595 100644
  HRESULT
  WINAPI
  SLConsumeRight(
+@@ -483,7 +484,7 @@ SLConsumeRight(
+     _In_                        CONST SLID*                 pAppId,
+     _In_opt_                    CONST SLID*                 pProductSkuId,
+     _In_opt_                    PCWSTR                      pwszRightName,
+-    _Reserved_                  PVOID                       pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                  PVOID                       pvReserved
+     );
+ /*++
+ Routine Description:
 @@ -518,7 +519,7 @@ Return Error:
      SL_E_PRODUCT_SKU_NOT_INSTALLED
  --*/

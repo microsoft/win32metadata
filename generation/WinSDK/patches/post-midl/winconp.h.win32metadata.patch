@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
-index bbb3a033d8..37b81e34c1 100644
+index bbb3a033d8..434baa1750 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
 @@ -1,3 +1,4 @@
@@ -103,7 +103,7 @@ index bbb3a033d8..37b81e34c1 100644
  SetConsolePalette(
      _In_ HANDLE hConsoleOutput,
      _In_ HPALETTE hPalette,
-@@ -150,7 +151,7 @@ SetConsolePalette(
+@@ -150,27 +151,27 @@ SetConsolePalette(
  #define CONSOLE_REGISTER_VDM   1
  #define CONSOLE_REGISTER_WOW   2
  
@@ -112,7 +112,13 @@ index bbb3a033d8..37b81e34c1 100644
  APIENTRY
  RegisterConsoleVDM(
      _In_ DWORD dwRegisterFlags,
-@@ -163,14 +164,14 @@ RegisterConsoleVDM(
+     _In_ HANDLE hStartHardwareEvent,
+     _In_ HANDLE hEndHardwareEvent,
+     _In_ HANDLE hErrorhardwareEvent,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
+     _Out_ LPDWORD lpStateLength,
+     _Outptr_ PVOID *lpState,
      _In_opt_ COORD VDMBufferSize,
      _Outptr_ PVOID *lpVDMBuffer);
  

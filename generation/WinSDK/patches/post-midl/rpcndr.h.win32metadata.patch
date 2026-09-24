@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
-index 7fa7fd00c3..7e5447a8ed 100644
+index 7fa7fd00c3..10e5f8a035 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
 @@ -1,3 +1,4 @@
@@ -34,6 +34,15 @@ index 7fa7fd00c3..7e5447a8ed 100644
  
  typedef const unsigned char  * PFORMAT_STRING;
  
+@@ -687,7 +688,7 @@ typedef struct _MIDL_STUB_MESSAGE
+ 
+     /* Allocation and Free routine to be used by the Ndr routines. */
+     void  *             ( __RPC_API * pfnAllocate)( size_t );
+-    void                    ( __RPC_API * pfnFree)(void  *);
++    void                    ( __RPC_API * pfnFree)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *);
+ 
+     /*
+      * Top of parameter stack.  Used for "single call" stubs during marshalling
 @@ -824,10 +825,10 @@ typedef  struct _MIDL_STUB_MESSAGE MIDL_STUB_MESSAGE,   *PMIDL_STUB_MESSAGE;
   */
  typedef void  *
@@ -167,6 +176,15 @@ index 7fa7fd00c3..7e5447a8ed 100644
  
  void __RPC_USER
  RpcCsGetTags(
+@@ -1033,7 +1034,7 @@ typedef struct _MIDL_STUB_DESC
+     void  *    RpcInterfaceInformation;
+ 
+     void  *    ( __RPC_API * pfnAllocate)(size_t);
+-    void       ( __RPC_API * pfnFree)(void  *);
++    void       ( __RPC_API * pfnFree)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *);
+ 
+     union
+         {
 @@ -1114,7 +1115,7 @@ typedef struct _MIDL_FORMAT_STRING
  /*
   * Stub thunk used for some interpreted server stubs.

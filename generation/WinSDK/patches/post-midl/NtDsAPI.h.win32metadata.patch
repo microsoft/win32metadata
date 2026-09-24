@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
-index b6471c2900..a07b05409d 100644
+index b6471c2900..934b00e23c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
 @@ -27,6 +27,7 @@ Notes:
@@ -424,7 +424,17 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI
  DWORD
  WINAPI
-@@ -1732,7 +1739,7 @@ DsReplicaModifyA(
+@@ -1724,15 +1731,15 @@ DsReplicaModifyA(
+     _In_ HANDLE hDS,
+     _In_ LPCSTR NameContext,
+     _In_opt_ const UUID *pUuidSourceDsa,
+-    _Reserved_ LPCSTR TransportDn,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCSTR TransportDn,
+     _In_ LPCSTR SourceDsaAddress,
+     _In_opt_ const PSCHEDULE pSchedule,
+-    _Reserved_ DWORD ReplicaFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD ReplicaFlags,
+     DWORD ModifyFields,
      DWORD Options
      );
  
@@ -433,6 +443,15 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI
  DWORD
  WINAPI
+@@ -1740,7 +1747,7 @@ DsReplicaModifyW(
+     _In_ HANDLE hDS,
+     _In_ LPCWSTR NameContext,
+     _In_opt_ const UUID *pUuidSourceDsa,
+-    _Reserved_ LPCWSTR TransportDn,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCWSTR TransportDn,
+     _In_ LPCWSTR SourceDsaAddress,
+     _In_opt_ const PSCHEDULE pSchedule,
+     DWORD ReplicaFlags,
 @@ -1785,7 +1792,7 @@ DsReplicaModifyW(
  //
  //   RETURNS: WIN32 STATUS
@@ -637,7 +656,12 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI_POSTXP
  DWORD
  WINAPI
-@@ -2229,7 +2236,7 @@ DsQuerySitesByCostW(
+@@ -2225,11 +2232,11 @@ DsQuerySitesByCostW(
+     _In_ LPWSTR          pwszFromSite,   // in
+     _In_reads_ (cToSites) LPWSTR          *rgwszToSites,   // in
+     _In_ DWORD               cToSites,       // in
+-    _Reserved_ DWORD               dwFlags,        // in
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD               dwFlags,        // in
      _Outptr_ PDS_SITE_COST_INFO *prgSiteInfo     // out
      );
  
@@ -646,6 +670,15 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI_POSTXP
  DWORD
  WINAPI
+@@ -2238,7 +2245,7 @@ DsQuerySitesByCostA(
+     _In_ LPSTR           pszFromSite,    // in
+     _In_reads_ (cToSites) LPSTR   *rgszToSites,    // in
+     DWORD               cToSites,       // in
+-    _Reserved_ DWORD               dwFlags,        // in
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD               dwFlags,        // in
+     _Outptr_ PDS_SITE_COST_INFO *prgSiteInfo     // out
+     );
+ 
 @@ -2252,7 +2259,7 @@ DsQuerySitesByCostA(
  // DsQuerySitesByCost will free the site info array returned
  // from DsQuerySitesByCost{A|W}.
@@ -788,7 +821,7 @@ index b6471c2900..a07b05409d 100644
  void
  WINAPI
  DsReplicaFreeInfo(
-@@ -3132,7 +3139,7 @@ DsReplicaFreeInfo(
+@@ -3132,13 +3139,13 @@ DsReplicaFreeInfo(
  // No ANSI equivalents currently supported.
  #endif
  
@@ -797,7 +830,14 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI
  DWORD
  WINAPI
-@@ -3146,7 +3153,7 @@ DsAddSidHistoryW(
+ DsAddSidHistoryW(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCWSTR                 SrcDomain,              // in - DNS or NetBIOS
+     _In_ LPCWSTR                 SrcPrincipal,           // in - SAM account name
+     _In_opt_ LPCWSTR                 SrcDomainController,    // in, optional
+@@ -3146,13 +3153,13 @@ DsAddSidHistoryW(
      _In_ LPCWSTR                 DstDomain,              // in - DNS or NetBIOS
      _In_ LPCWSTR                 DstPrincipal);          // in - SAM account name
  
@@ -806,7 +846,14 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI
  DWORD
  WINAPI
-@@ -3171,7 +3178,7 @@ DsAddSidHistoryA(
+ DsAddSidHistoryA(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCSTR                  SrcDomain,              // in - DNS or NetBIOS
+     _In_ LPCSTR                  SrcPrincipal,           // in - SAM account name
+     _In_opt_ LPCSTR                  SrcDomainController,    // in, optional
+@@ -3171,23 +3178,23 @@ DsAddSidHistoryA(
  // THE SOURCE PRINCIPAL.  Source and destination principal must be in the
  // same domain.
  
@@ -815,7 +862,10 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI
  DWORD
  WINAPI
-@@ -3181,7 +3188,7 @@ DsInheritSecurityIdentityW(
+ DsInheritSecurityIdentityW(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
      _In_ LPCWSTR                 SrcPrincipal,           // in - distinguished name
      _In_ LPCWSTR                 DstPrincipal);          // in - distinguished name
  
@@ -824,3 +874,10 @@ index b6471c2900..a07b05409d 100644
  NTDSAPI
  DWORD
  WINAPI
+ DsInheritSecurityIdentityA(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCSTR                  SrcPrincipal,           // in - distinguished name
+     _In_ LPCSTR                  DstPrincipal);          // in - distinguished name
+ 

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h b/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
-index 0210fd0c9c..9d276ebee1 100644
+index 0210fd0c9c..aa1553a25e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mscat.h
 @@ -22,6 +22,7 @@
@@ -290,7 +290,7 @@ index 0210fd0c9c..9d276ebee1 100644
                                        _In_opt_z_ WCHAR *pwszFileName);
  
  
-@@ -630,8 +631,8 @@ extern BOOL WINAPI      IsCatalogFile(IN OPTIONAL HANDLE hFile,
+@@ -630,11 +631,11 @@ extern BOOL WINAPI      IsCatalogFile(IN OPTIONAL HANDLE hFile,
  //          be set to zero.
  //
  //
@@ -300,8 +300,12 @@ index 0210fd0c9c..9d276ebee1 100644
 +extern BOOL WINAPI   _Win32_SetLastError_ CryptCATAdminAcquireContext(
      _Out_       HCATADMIN   *phCatAdmin,
      _In_opt_    const GUID  *pgSubsystem,
-     _Reserved_  DWORD       dwFlags
-@@ -683,8 +684,8 @@ extern BOOL WINAPI CryptCATAdminAcquireContext(
+-    _Reserved_  DWORD       dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD       dwFlags
+     );
+ 
+ //////////////////////////////////////////////////////////////////////////
+@@ -683,14 +684,14 @@ extern BOOL WINAPI CryptCATAdminAcquireContext(
  //
  //  
  #if (NTDDI_VERSION >= NTDDI_WIN8) 
@@ -312,6 +316,13 @@ index 0210fd0c9c..9d276ebee1 100644
      _Out_       HCATADMIN   *phCatAdmin,
      _In_opt_    const GUID  *pgSubsystem,
      _In_opt_    PCWSTR      pwszHashAlgorithm,
+     _In_opt_    PCCERT_STRONG_SIGN_PARA
+                             pStrongHashPolicy,
+-    _Reserved_  DWORD       dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD       dwFlags
+     );
+ #endif //#if (NTDDI_VERSION >= NTDDI_WIN8) 
+ 
 @@ -708,7 +709,7 @@ extern BOOL WINAPI CryptCATAdminAcquireContext2(
  //          The dwFlags parameter is reserved for future use.  Must
  //          be set to NULL.
@@ -330,7 +341,7 @@ index 0210fd0c9c..9d276ebee1 100644
                                                        IN HCATINFO hCatInfo,
                                                        IN DWORD dwFlags);
  
-@@ -759,7 +760,7 @@ extern BOOL WINAPI CryptCATAdminReleaseCatalogContext(IN HCATADMIN hCatAdmin,
+@@ -759,11 +760,11 @@ extern BOOL WINAPI CryptCATAdminReleaseCatalogContext(IN HCATADMIN hCatAdmin,
  //      ERROR_DATABASE_FAILURE:         an error occurred while processing
  //                                      the database.
  //
@@ -339,7 +350,12 @@ index 0210fd0c9c..9d276ebee1 100644
      _In_                HCATADMIN   hCatAdmin,
      _In_reads_bytes_(cbHash) BYTE        *pbHash,
      _In_                DWORD       cbHash,
-@@ -792,8 +793,8 @@ extern HCATINFO WINAPI CryptCATAdminEnumCatalogFromHash(
+-    _Reserved_          DWORD       dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_          DWORD       dwFlags,
+     _Inout_opt_         HCATINFO    *phPrevCatInfo);
+ 
+ //////////////////////////////////////////////////////////////////////////
+@@ -792,12 +793,12 @@ extern HCATINFO WINAPI CryptCATAdminEnumCatalogFromHash(
  //      the dwFlags parameter is reserved for future use and must be set to
  //      zero.
  //
@@ -350,7 +366,12 @@ index 0210fd0c9c..9d276ebee1 100644
      _In_        HANDLE hFile,
      _Inout_     DWORD *pcbHash,
      _Out_writes_bytes_to_opt_(*pcbHash, *pcbHash) BYTE *pbHash,
-@@ -828,8 +829,8 @@ extern BOOL WINAPI CryptCATAdminCalcHashFromFileHandle(
+-    _Reserved_  DWORD dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD dwFlags
+     );
+ 
+ //////////////////////////////////////////////////////////////////////////
+@@ -828,13 +829,13 @@ extern BOOL WINAPI CryptCATAdminCalcHashFromFileHandle(
  //      zero.
  //
  #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -361,6 +382,12 @@ index 0210fd0c9c..9d276ebee1 100644
      _In_        HCATADMIN   hCatAdmin,
      _In_        HANDLE      hFile,
      _Inout_     DWORD       *pcbHash,
+     _Out_writes_bytes_to_opt_(*pcbHash, *pcbHash) BYTE *pbHash,
+-    _Reserved_  DWORD       dwFlags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD       dwFlags
+     );
+ #endif //#if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
 @@ -872,14 +873,14 @@ extern BOOL WINAPI CryptCATAdminCalcHashFromFileHandle2(
  //
  

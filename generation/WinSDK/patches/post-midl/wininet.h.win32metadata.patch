@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h b/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
-index f3dd7607d1..711dfa606a 100644
+index f3dd7607d1..0dc2a598d8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
 @@ -1,3 +1,4 @@
@@ -69,7 +69,7 @@ index f3dd7607d1..711dfa606a 100644
      _In_ CONST SYSTEMTIME *pst,           // input GMT time
      _In_ DWORD dwRFC,                     // RFC format
      _Out_writes_bytes_(cbTime) LPSTR lpszTime,  // output string buffer
-@@ -766,13 +767,13 @@ BOOLAPI InternetTimeFromSystemTime(
+@@ -766,16 +767,16 @@ BOOLAPI InternetTimeFromSystemTime(
  #define INTERNET_RFC1123_FORMAT     0
  #define INTERNET_RFC1123_BUFSIZE   30
  
@@ -77,15 +77,20 @@ index f3dd7607d1..711dfa606a 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI InternetTimeToSystemTimeA(
      _In_ LPCSTR lpszTime,          // NULL terminated string
      _Out_ SYSTEMTIME *pst,         // output in GMT time
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
  
 -BOOLAPI InternetTimeToSystemTimeW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI InternetTimeToSystemTimeW(
      _In_ LPCWSTR lpszTime,         // NULL terminated string
      _Out_ SYSTEMTIME *pst,         // output in GMT time
-     _Reserved_ DWORD dwReserved
-@@ -784,7 +785,7 @@ BOOLAPI InternetTimeToSystemTimeW(
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
+     );
+ 
+ #ifdef UNICODE
+@@ -784,27 +785,27 @@ BOOLAPI InternetTimeToSystemTimeW(
  #ifdef _WINX32_
  #define InternetTimeToSystemTime  InternetTimeToSystemTimeA
  #else
@@ -93,8 +98,10 @@ index f3dd7607d1..711dfa606a 100644
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI InternetTimeToSystemTime(
      _In_ LPCSTR lpszTime,          // NULL terminated string
      _Out_ SYSTEMTIME *pst,         // output in GMT time
-     _Reserved_ DWORD dwReserved
-@@ -793,18 +794,18 @@ BOOLAPI InternetTimeToSystemTime(
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
+     );
+ #endif // _WINX32_
  #endif // !UNICODE
  
  
@@ -251,7 +258,7 @@ index f3dd7607d1..711dfa606a 100644
      _In_ HINTERNET hFile,
      _Out_ __out_data_source(NETWORK) LPINTERNET_BUFFERSW lpBuffersOut,
      _In_ DWORD dwFlags,
-@@ -1029,7 +1030,7 @@ BOOLAPI InternetReadFileExW(
+@@ -1029,15 +1030,15 @@ BOOLAPI InternetReadFileExW(
  #define IRF_USE_CONTEXT WININET_API_FLAG_USE_CONTEXT
  #define IRF_NO_WAIT     0x00000008
  
@@ -260,8 +267,9 @@ index f3dd7607d1..711dfa606a 100644
      _In_ HINTERNET hFile,
      _In_ LONG  lDistanceToMove,
      _Inout_opt_ PLONG lpDistanceToMoveHigh,
-@@ -1037,7 +1038,7 @@ INTERNETAPI_(DWORD) InternetSetFilePointer(
-     _Reserved_ DWORD_PTR dwContext
+     _In_ DWORD dwMoveMethod,
+-    _Reserved_ DWORD_PTR dwContext
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwContext
      );
  
 -BOOLAPI InternetWriteFile(
@@ -861,7 +869,7 @@ index f3dd7607d1..711dfa606a 100644
  InternetSetCookieExW(
      _In_ LPCWSTR lpszUrl,
      _In_opt_ LPCWSTR lpszCookieName,
-@@ -2788,22 +2789,22 @@ InternetSetCookieExW(
+@@ -2788,23 +2789,23 @@ InternetSetCookieExW(
  #define InternetSetCookieEx  InternetSetCookieExA
  #endif // !UNICODE
  
@@ -873,8 +881,9 @@ index f3dd7607d1..711dfa606a 100644
      _In_reads_opt_(*lpdwSize) LPSTR lpszCookieData,
      _Inout_ LPDWORD lpdwSize,
 -    _In_ DWORD dwFlags,
+-    _Reserved_ LPVOID lpReserved
 +    _Win32_AssociatedEnum_(INTERNET_COOKIE_FLAGS) _In_ DWORD dwFlags,
-     _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
      );
 -BOOLAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOLAPI
@@ -884,10 +893,12 @@ index f3dd7607d1..711dfa606a 100644
      _In_reads_opt_(*lpdwSize) LPWSTR lpszCookieData,
      _Inout_ LPDWORD lpdwSize,
 -    _In_ DWORD dwFlags,
+-    _Reserved_ LPVOID lpReserved
 +    _Win32_AssociatedEnum_(INTERNET_COOKIE_FLAGS) _In_ DWORD dwFlags,
-     _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
      );
  #ifdef UNICODE
+ #define InternetGetCookieEx  InternetGetCookieExW
 @@ -2840,18 +2841,18 @@ InternetSetCookieEx2(
  // offline browsing
  //
@@ -986,7 +997,12 @@ index f3dd7607d1..711dfa606a 100644
  CommitUrlCacheEntryA(
      _In_ LPCSTR lpszUrlName,
      _In_opt_ LPCSTR lpszLocalFileName,
-@@ -3310,7 +3311,7 @@ CommitUrlCacheEntryA(
+@@ -3306,11 +3307,11 @@ CommitUrlCacheEntryA(
+     _In_ DWORD CacheEntryType,
+     _In_reads_opt_(cchHeaderInfo) LPBYTE lpHeaderInfo,
+     _In_ DWORD cchHeaderInfo,
+-    _Reserved_ LPCSTR lpszFileExtension,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCSTR lpszFileExtension,
      _In_opt_ LPCSTR lpszOriginalUrl
      );
  
@@ -995,7 +1011,16 @@ index f3dd7607d1..711dfa606a 100644
  CommitUrlCacheEntryW(
      _In_ LPCWSTR lpszUrlName,
      _In_opt_ LPCWSTR lpszLocalFileName,
-@@ -3329,14 +3330,14 @@ CommitUrlCacheEntryW(
+@@ -3319,7 +3320,7 @@ CommitUrlCacheEntryW(
+     _In_ DWORD CacheEntryType,
+     _In_reads_opt_(cchHeaderInfo) LPWSTR lpszHeaderInfo,
+     _In_ DWORD cchHeaderInfo,
+-    _Reserved_ LPCWSTR lpszFileExtension,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCWSTR lpszFileExtension,
+     _In_opt_ LPCWSTR lpszOriginalUrl
+     );
+ 
+@@ -3329,19 +3330,19 @@ CommitUrlCacheEntryW(
  #define CommitUrlCacheEntry CommitUrlCacheEntryA
  #endif
  
@@ -1005,36 +1030,48 @@ index f3dd7607d1..711dfa606a 100644
      _In_ LPCSTR lpszUrlName,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpCacheEntryInfo,
      _Inout_ LPDWORD lpcbCacheEntryInfo,
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
 -BOOLAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI
  RetrieveUrlCacheEntryFileW(
      _In_ LPCWSTR lpszUrlName,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOW lpCacheEntryInfo,
-@@ -3349,12 +3350,12 @@ RetrieveUrlCacheEntryFileW(
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
+     );
+ #ifdef UNICODE
+ #define RetrieveUrlCacheEntryFile  RetrieveUrlCacheEntryFileW
+@@ -3349,14 +3350,14 @@ RetrieveUrlCacheEntryFileW(
  #define RetrieveUrlCacheEntryFile  RetrieveUrlCacheEntryFileA
  #endif // !UNICODE
  
 -BOOLAPI UnlockUrlCacheEntryFileA(
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI UnlockUrlCacheEntryFileA(
      _In_ LPCSTR lpszUrlName,
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
  
 -BOOLAPI UnlockUrlCacheEntryFileW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI UnlockUrlCacheEntryFileW(
      _In_ LPCWSTR lpszUrlName,
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
-@@ -3367,14 +3368,14 @@ BOOLAPI UnlockUrlCacheEntryFileW(
+ 
+ 
+@@ -3367,28 +3368,28 @@ BOOLAPI UnlockUrlCacheEntryFileW(
  #ifdef _WINX32_
  #define UnlockUrlCacheEntryFile  UnlockUrlCacheEntryFileA
  #else
 -BOOLAPI UnlockUrlCacheEntryFile(
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI UnlockUrlCacheEntryFile(
      _In_ LPCSTR lpszUrlName,
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
  #endif // _WINX32_
  #endif // !UNICODE
@@ -1044,16 +1081,24 @@ index f3dd7607d1..711dfa606a 100644
  RetrieveUrlCacheEntryStreamA(
      _In_ LPCSTR  lpszUrlName,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpCacheEntryInfo,
-@@ -3382,7 +3383,7 @@ RetrieveUrlCacheEntryStreamA(
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
      _In_ BOOL fRandomRead,
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
 -INTERNETAPI_(HANDLE)
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) INTERNETAPI_(HANDLE)
  RetrieveUrlCacheEntryStreamW(
      _In_ LPCWSTR  lpszUrlName,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOW lpCacheEntryInfo,
-@@ -3396,7 +3397,7 @@ RetrieveUrlCacheEntryStreamW(
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+     _In_ BOOL fRandomRead,
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
+     );
+ #ifdef UNICODE
+ #define RetrieveUrlCacheEntryStream  RetrieveUrlCacheEntryStreamW
+@@ -3396,13 +3397,13 @@ RetrieveUrlCacheEntryStreamW(
  #define RetrieveUrlCacheEntryStream  RetrieveUrlCacheEntryStreamA
  #endif // !UNICODE
  
@@ -1062,6 +1107,13 @@ index f3dd7607d1..711dfa606a 100644
  ReadUrlCacheEntryStream(
      _In_ HANDLE hUrlCacheStream,
      _In_ DWORD dwLocation,
+     _Out_writes_bytes_(*lpdwLen) __out_data_source(NETWORK) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpdwLen,
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
+     );
+ 
+ BOOLAPI
 @@ -3413,20 +3414,20 @@ ReadUrlCacheEntryStreamEx(
      _Inout_ LPDWORD lpdwLen
      );
@@ -1070,7 +1122,8 @@ index f3dd7607d1..711dfa606a 100644
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI
  UnlockUrlCacheEntryStream(
      _In_ HANDLE hUrlCacheStream,
-     _Reserved_ DWORD Reserved
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
      );
  
  
@@ -1086,7 +1139,7 @@ index f3dd7607d1..711dfa606a 100644
  GetUrlCacheEntryInfoW(
      _In_ LPCWSTR lpszUrlName,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOW lpCacheEntryInfo,
-@@ -3439,7 +3440,7 @@ GetUrlCacheEntryInfoW(
+@@ -3439,37 +3440,37 @@ GetUrlCacheEntryInfoW(
  #endif // !UNICODE
  
  
@@ -1094,51 +1147,75 @@ index f3dd7607d1..711dfa606a 100644
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) URLCACHEAPI_(HANDLE) FindFirstUrlCacheGroup(
      _In_        DWORD       dwFlags,
      _In_        DWORD       dwFilter,
-     _Reserved_  LPVOID      lpSearchCondition,
-@@ -3448,14 +3449,14 @@ URLCACHEAPI_(HANDLE) FindFirstUrlCacheGroup(
-     _Reserved_  LPVOID      lpReserved
+-    _Reserved_  LPVOID      lpSearchCondition,
+-    _Reserved_  DWORD       dwSearchCondition,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  LPVOID      lpSearchCondition,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD       dwSearchCondition,
+     _Out_       GROUPID*    lpGroupId,
+-    _Reserved_  LPVOID      lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  LPVOID      lpReserved
      );
  
 -BOOLAPI FindNextUrlCacheGroup(
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI FindNextUrlCacheGroup(
      _In_        HANDLE      hFind,
      _Out_       GROUPID*    lpGroupId,
-     _Reserved_  LPVOID      lpReserved
+-    _Reserved_  LPVOID      lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  LPVOID      lpReserved
      );
  
  
 -BOOLAPI GetUrlCacheGroupAttributeA(
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI GetUrlCacheGroupAttributeA(
      _In_                            GROUPID                         gid,
-     _Reserved_                      DWORD                           dwFlags,
+-    _Reserved_                      DWORD                           dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                      DWORD                           dwFlags,
      _In_                            DWORD                           dwAttributes,
-@@ -3463,7 +3464,7 @@ BOOLAPI GetUrlCacheGroupAttributeA(
+     _Out_writes_bytes_(*lpcbGroupInfo)    LPINTERNET_CACHE_GROUP_INFOA    lpGroupInfo,
      _Inout_                         LPDWORD                         lpcbGroupInfo,
-     _Reserved_                      LPVOID                          lpReserved
+-    _Reserved_                      LPVOID                          lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                      LPVOID                          lpReserved
      );
 -BOOLAPI GetUrlCacheGroupAttributeW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI GetUrlCacheGroupAttributeW(
      _In_                            GROUPID                         gid,
-     _Reserved_                      DWORD                           dwFlags,
+-    _Reserved_                      DWORD                           dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                      DWORD                           dwFlags,
      _In_                            DWORD                           dwAttributes,
-@@ -3477,14 +3478,14 @@ BOOLAPI GetUrlCacheGroupAttributeW(
+     _Out_writes_bytes_(*lpcbGroupInfo)    LPINTERNET_CACHE_GROUP_INFOW    lpGroupInfo,
+     _Inout_                         LPDWORD                         lpcbGroupInfo,
+-    _Reserved_                      LPVOID                          lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                      LPVOID                          lpReserved
+     );
+ #ifdef UNICODE
+ #define GetUrlCacheGroupAttribute  GetUrlCacheGroupAttributeW
+@@ -3477,19 +3478,19 @@ BOOLAPI GetUrlCacheGroupAttributeW(
  #define GetUrlCacheGroupAttribute  GetUrlCacheGroupAttributeA
  #endif // !UNICODE
  
 -BOOLAPI SetUrlCacheGroupAttributeA(
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI SetUrlCacheGroupAttributeA(
      _In_        GROUPID                         gid,
-     _Reserved_  DWORD                           dwFlags,
+-    _Reserved_  DWORD                           dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD                           dwFlags,
      _In_        DWORD                           dwAttributes,
      _In_        LPINTERNET_CACHE_GROUP_INFOA    lpGroupInfo,
-     _Reserved_  LPVOID                          lpReserved
+-    _Reserved_  LPVOID                          lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  LPVOID                          lpReserved
      );
 -BOOLAPI SetUrlCacheGroupAttributeW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI SetUrlCacheGroupAttributeW(
      _In_        GROUPID                         gid,
-     _Reserved_  DWORD                           dwFlags,
+-    _Reserved_  DWORD                           dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD                           dwFlags,
      _In_        DWORD                           dwAttributes,
-@@ -3498,7 +3499,7 @@ BOOLAPI SetUrlCacheGroupAttributeW(
+     _In_        LPINTERNET_CACHE_GROUP_INFOW    lpGroupInfo,
+-    _Reserved_  LPVOID                          lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  LPVOID                          lpReserved
+     );
+ #ifdef UNICODE
+ #define SetUrlCacheGroupAttribute  SetUrlCacheGroupAttributeW
+@@ -3498,24 +3499,24 @@ BOOLAPI SetUrlCacheGroupAttributeW(
  #endif // !UNICODE
  
  
@@ -1147,8 +1224,13 @@ index f3dd7607d1..711dfa606a 100644
  GetUrlCacheEntryInfoExA(
      _In_ LPCSTR lpszUrl,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpCacheEntryInfo,
-@@ -3508,7 +3509,7 @@ GetUrlCacheEntryInfoExA(
-     _Reserved_ LPVOID lpReserved,
+     _Inout_opt_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ LPSTR lpszRedirectUrl,
+-    _Reserved_ LPDWORD lpcbRedirectUrl,
+-    _Reserved_ LPVOID lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPSTR lpszRedirectUrl,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbRedirectUrl,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved,
      _In_ DWORD dwFlags
      );
 -BOOLAPI
@@ -1156,6 +1238,16 @@ index f3dd7607d1..711dfa606a 100644
  GetUrlCacheEntryInfoExW(
      _In_ LPCWSTR lpszUrl,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOW lpCacheEntryInfo,
+     _Inout_opt_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ LPWSTR lpszRedirectUrl,
+-    _Reserved_ LPDWORD lpcbRedirectUrl,
+-    _Reserved_ LPVOID lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPWSTR lpszRedirectUrl,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbRedirectUrl,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved,
+     _In_ DWORD dwFlags
+     );
+ #ifdef UNICODE
 @@ -3533,12 +3534,12 @@ GetUrlCacheEntryInfoExW(
  #define CACHE_ENTRY_HEADERINFO_FC   0x00000400
  #define CACHE_ENTRY_EXEMPT_DELTA_FC 0x00000800
@@ -1171,22 +1263,26 @@ index f3dd7607d1..711dfa606a 100644
      _In_ LPCWSTR lpszUrlName,
      _In_ LPINTERNET_CACHE_ENTRY_INFOW lpCacheEntryInfo,
      _In_ DWORD dwFieldControl
-@@ -3555,12 +3556,12 @@ BOOLAPI SetUrlCacheEntryInfoW(
+@@ -3555,37 +3556,37 @@ BOOLAPI SetUrlCacheEntryInfoW(
  //
  
  
 -INTERNETAPI_(GROUPID) CreateUrlCacheGroup(
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ INTERNETAPI_(GROUPID) CreateUrlCacheGroup(
      _In_   DWORD  dwFlags,
-     _Reserved_ LPVOID lpReserved
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
      );
  
 -BOOLAPI DeleteUrlCacheGroup(
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI DeleteUrlCacheGroup(
      _In_   GROUPID GroupId,
      _In_   DWORD   dwFlags,       // must pass 0
-     _Reserved_ LPVOID  lpReserved
-@@ -3570,7 +3571,7 @@ BOOLAPI DeleteUrlCacheGroup(
+-    _Reserved_ LPVOID  lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID  lpReserved
+     );
+ 
+ // Flags for SetUrlCacheEntryGroup
  #define INTERNET_CACHE_GROUP_ADD      0
  #define INTERNET_CACHE_GROUP_REMOVE   1
  
@@ -1195,8 +1291,12 @@ index f3dd7607d1..711dfa606a 100644
      _In_   LPCSTR   lpszUrlName,
      _In_   DWORD    dwFlags,
      _In_   GROUPID  GroupId,
-@@ -3579,7 +3580,7 @@ BOOLAPI SetUrlCacheEntryGroupA(
-     _Reserved_ LPVOID   lpReserved
+-    _Reserved_ LPBYTE   pbGroupAttributes,
+-    _Reserved_ DWORD    cbGroupAttributes,
+-    _Reserved_ LPVOID   lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPBYTE   pbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    cbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID   lpReserved
      );
  
 -BOOLAPI SetUrlCacheEntryGroupW(
@@ -1204,7 +1304,16 @@ index f3dd7607d1..711dfa606a 100644
      _In_   LPCWSTR  lpszUrlName,
      _In_   DWORD    dwFlags,
      _In_   GROUPID  GroupId,
-@@ -3594,7 +3595,7 @@ BOOLAPI SetUrlCacheEntryGroupW(
+-    _Reserved_ LPBYTE   pbGroupAttributes,
+-    _Reserved_ DWORD    cbGroupAttributes,
+-    _Reserved_ LPVOID   lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPBYTE   pbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    cbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID   lpReserved
+     );
+ 
+ #ifdef UNICODE
+@@ -3594,18 +3595,18 @@ BOOLAPI SetUrlCacheEntryGroupW(
  #ifdef _WINX32_
  #define SetUrlCacheEntryGroup  SetUrlCacheEntryGroupA
  #else
@@ -1213,7 +1322,13 @@ index f3dd7607d1..711dfa606a 100644
      _In_   LPCSTR   lpszUrlName,
      _In_   DWORD    dwFlags,
      _In_   GROUPID  GroupId,
-@@ -3605,7 +3606,7 @@ BOOLAPI SetUrlCacheEntryGroup(
+-    _Reserved_ LPBYTE   pbGroupAttributes,
+-    _Reserved_ DWORD    cbGroupAttributes,
+-    _Reserved_ LPVOID   lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPBYTE   pbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    cbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID   lpReserved
+     );
  #endif // _WINX32_
  #endif // !UNICODE
  
@@ -1222,16 +1337,36 @@ index f3dd7607d1..711dfa606a 100644
  FindFirstUrlCacheEntryExA(
      _In_opt_ LPCSTR  lpszUrlSearchPattern,
      _In_ DWORD dwFlags,
-@@ -3617,7 +3618,7 @@ FindFirstUrlCacheEntryExA(
-     _Reserved_ LPDWORD lpcbGroupAttributes,
-     _Reserved_ LPVOID lpReserved
+@@ -3613,11 +3614,11 @@ FindFirstUrlCacheEntryExA(
+     _In_ GROUPID  GroupId,
+     _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpFirstCacheEntryInfo,
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ LPVOID lpGroupAttributes,
+-    _Reserved_ LPDWORD lpcbGroupAttributes,
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
      );
 -INTERNETAPI_(HANDLE)
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) INTERNETAPI_(HANDLE)
  FindFirstUrlCacheEntryExW(
      _In_opt_ LPCWSTR  lpszUrlSearchPattern,
      _In_ DWORD dwFlags,
-@@ -3635,7 +3636,7 @@ FindFirstUrlCacheEntryExW(
+@@ -3625,9 +3626,9 @@ FindFirstUrlCacheEntryExW(
+     _In_ GROUPID  GroupId,
+     _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOW lpFirstCacheEntryInfo,
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ LPVOID lpGroupAttributes,
+-    _Reserved_ LPDWORD lpcbGroupAttributes,
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
+     );
+ #ifdef UNICODE
+ #define FindFirstUrlCacheEntryEx  FindFirstUrlCacheEntryExW
+@@ -3635,23 +3636,23 @@ FindFirstUrlCacheEntryExW(
  #define FindFirstUrlCacheEntryEx  FindFirstUrlCacheEntryExA
  #endif // !UNICODE
  
@@ -1240,15 +1375,29 @@ index f3dd7607d1..711dfa606a 100644
  FindNextUrlCacheEntryExA(
      _In_ HANDLE hEnumHandle,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOA lpNextCacheEntryInfo,
-@@ -3644,7 +3645,7 @@ FindNextUrlCacheEntryExA(
-     _Reserved_ LPDWORD lpcbGroupAttributes,
-     _Reserved_ LPVOID lpReserved
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ LPVOID lpGroupAttributes,
+-    _Reserved_ LPDWORD lpcbGroupAttributes,
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
      );
 -BOOLAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI
  FindNextUrlCacheEntryExW(
      _In_ HANDLE hEnumHandle,
      _Inout_updates_bytes_opt_(*lpcbCacheEntryInfo) LPINTERNET_CACHE_ENTRY_INFOW lpNextCacheEntryInfo,
+     _Inout_ LPDWORD lpcbCacheEntryInfo,
+-    _Reserved_ LPVOID lpGroupAttributes,
+-    _Reserved_ LPDWORD lpcbGroupAttributes,
+-    _Reserved_ LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbGroupAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved
+     );
+ #ifdef UNICODE
+ #define FindNextUrlCacheEntryEx  FindNextUrlCacheEntryExW
 @@ -3659,13 +3660,13 @@ FindNextUrlCacheEntryExW(
  #define FindNextUrlCacheEntryEx  FindNextUrlCacheEntryExA
  #endif // !UNICODE
@@ -1336,16 +1485,17 @@ index f3dd7607d1..711dfa606a 100644
      _In_ HWND     hwndParent,
      _In_opt_ LPSTR   lpszConnectoid,
      _In_ DWORD    dwFlags,
-@@ -3764,7 +3765,7 @@ INTERNETAPI_(DWORD) InternetDial(
+@@ -3764,21 +3765,21 @@ INTERNETAPI_(DWORD) InternetDial(
  #define INTERNET_DIAL_SHOW_OFFLINE     0x4000
  #define INTERNET_DIAL_UNATTENDED       0x8000
  
 -INTERNETAPI_(DWORD) InternetHangUp(
 +_Windows_SupportedOS_Windows2000_ INTERNETAPI_(DWORD) InternetHangUp(
      _In_   DWORD_PTR    dwConnection,
-     _Reserved_ DWORD        dwReserved);
+-    _Reserved_ DWORD        dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwReserved);
  
-@@ -3772,13 +3773,13 @@ INTERNETAPI_(DWORD) InternetHangUp(
+ #define INTERENT_GOONLINE_REFRESH  0x00000001
  #define INTERENT_GOONLINE_NOPROMPT 0x00000002
  #define INTERENT_GOONLINE_MASK     0x00000003
  
@@ -1386,14 +1536,16 @@ index f3dd7607d1..711dfa606a 100644
  
  #define INTERNET_AUTODIAL_FLAGS_MASK (INTERNET_AUTODIAL_FORCE_ONLINE | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT)
 -BOOLAPI InternetAutodialHangup(
+-    _Reserved_ DWORD    dwReserved);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI InternetAutodialHangup(
-     _Reserved_ DWORD    dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);
  
 -BOOLAPI InternetGetConnectedState(
 -    _Out_  LPDWORD  lpdwFlags,
+-    _Reserved_ DWORD    dwReserved);
 +_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI InternetGetConnectedState(
 +    _Win32_AssociatedEnum_(INTERNET_CONNECTION) _Out_  LPDWORD  lpdwFlags,
-     _Reserved_ DWORD    dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);
  
 -BOOLAPI
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI

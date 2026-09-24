@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
-index 5a1415e34d..dcee6a521d 100644
+index 5a1415e34d..0d56ce982c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winreg.h
 @@ -22,6 +22,7 @@ Abstract:
@@ -10,6 +10,17 @@ index 5a1415e34d..dcee6a521d 100644
  
  #ifdef _MAC
  #include <macwin32.h>
+@@ -158,8 +159,8 @@ typedef PPVALUEA PPVALUE;
+ 
+ typedef
+ DWORD __cdecl
+-QUERYHANDLER (LPVOID keycontext, PVALCONTEXT val_list, DWORD num_vals,
+-          LPVOID outputbuffer, DWORD FAR *total_outlen, DWORD input_blen);
++QUERYHANDLER (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID keycontext, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVALCONTEXT val_list, DWORD num_vals,
++          _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID outputbuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD FAR *total_outlen, DWORD input_blen);
+ 
+ typedef QUERYHANDLER FAR *PQUERYHANDLER;
+ 
 @@ -178,13 +179,13 @@ typedef struct value_entA {
      LPSTR   ve_valuename;
      DWORD ve_valuelen;
@@ -42,7 +53,7 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -259,6 +262,7 @@ RegOverridePredefKey (
+@@ -259,24 +262,27 @@ RegOverridePredefKey (
      _In_opt_ HKEY hNewHKey
      );
  
@@ -50,9 +61,10 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -266,17 +270,19 @@ RegOpenUserClassesRoot(
+ RegOpenUserClassesRoot(
      _In_ HANDLE hToken,
-     _Reserved_ DWORD dwOptions,
+-    _Reserved_ DWORD dwOptions,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwOptions,
      _In_ REGSAM samDesired,
 -    _Out_ PHKEY phkResult
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult
@@ -160,7 +172,7 @@ index 5a1415e34d..dcee6a521d 100644
      );
  #ifdef UNICODE
  #define RegCreateKey  RegCreateKeyW
-@@ -371,6 +382,7 @@ RegCreateKeyW (
+@@ -371,34 +382,36 @@ RegCreateKeyW (
  #define RegCreateKey  RegCreateKeyA
  #endif // !UNICODE
  
@@ -168,9 +180,11 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -379,13 +391,14 @@ RegCreateKeyExA(
+ RegCreateKeyExA(
+     _In_ HKEY hKey,
      _In_ LPCSTR lpSubKey,
-     _Reserved_ DWORD Reserved,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
      _In_opt_ LPSTR lpClass,
 -    _In_ DWORD dwOptions,
 -    _In_ REGSAM samDesired,
@@ -187,9 +201,11 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -394,11 +407,11 @@ RegCreateKeyExW(
+ RegCreateKeyExW(
+     _In_ HKEY hKey,
      _In_ LPCWSTR lpSubKey,
-     _Reserved_ DWORD Reserved,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
      _In_opt_ LPWSTR lpClass,
 -    _In_ DWORD dwOptions,
 -    _In_ REGSAM samDesired,
@@ -203,7 +219,7 @@ index 5a1415e34d..dcee6a521d 100644
      );
  
  #ifdef UNICODE
-@@ -413,6 +426,7 @@ RegCreateKeyExW(
+@@ -413,37 +426,39 @@ RegCreateKeyExW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -211,9 +227,11 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -421,14 +435,15 @@ RegCreateKeyTransactedA (
+ RegCreateKeyTransactedA (
+     _In_ HKEY hKey,
      _In_ LPCSTR lpSubKey,
-     _Reserved_ DWORD Reserved,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
      _In_opt_ LPSTR lpClass,
 -    _In_ DWORD dwOptions,
 -    _In_ REGSAM samDesired,
@@ -225,15 +243,18 @@ index 5a1415e34d..dcee6a521d 100644
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
 +    _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) _Out_opt_ LPDWORD lpdwDisposition,
      _In_        HANDLE hTransaction,
-     _Reserved_ PVOID  pExtendedParemeter
+-    _Reserved_ PVOID  pExtendedParemeter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  pExtendedParemeter
      );
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -437,11 +452,11 @@ RegCreateKeyTransactedW (
+ RegCreateKeyTransactedW (
+     _In_ HKEY hKey,
      _In_ LPCWSTR lpSubKey,
-     _Reserved_ DWORD Reserved,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
      _In_opt_ LPWSTR lpClass,
 -    _In_ DWORD dwOptions,
 -    _In_ REGSAM samDesired,
@@ -245,8 +266,11 @@ index 5a1415e34d..dcee6a521d 100644
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
 +    _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) _Out_opt_ LPDWORD lpdwDisposition,
      _In_        HANDLE hTransaction,
-     _Reserved_ PVOID  pExtendedParemeter
+-    _Reserved_ PVOID  pExtendedParemeter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  pExtendedParemeter
      );
+ #ifdef UNICODE
+ #define RegCreateKeyTransacted  RegCreateKeyTransactedW
 @@ -457,6 +472,7 @@ RegCreateKeyTransactedW (
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -263,7 +287,7 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -477,7 +494,7 @@ RegDeleteKeyW (
+@@ -477,24 +494,24 @@ RegDeleteKeyW (
  #define RegDeleteKey  RegDeleteKeyA
  #endif // !UNICODE
  
@@ -272,8 +296,11 @@ index 5a1415e34d..dcee6a521d 100644
  LSTATUS
  APIENTRY
  RegDeleteKeyExA(
-@@ -487,7 +504,7 @@ RegDeleteKeyExA(
-     _Reserved_ DWORD Reserved
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpSubKey,
+     _In_ REGSAM samDesired,
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
      );
  
 -WINADVAPI
@@ -281,6 +308,14 @@ index 5a1415e34d..dcee6a521d 100644
  LSTATUS
  APIENTRY
  RegDeleteKeyExW(
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpSubKey,
+     _In_ REGSAM samDesired,
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
+     );
+ 
+ #ifdef UNICODE
 @@ -509,6 +526,7 @@ RegDeleteKeyExW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -289,14 +324,32 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -520,6 +538,7 @@ RegDeleteKeyTransactedA (
+@@ -516,10 +534,11 @@ RegDeleteKeyTransactedA (
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpSubKey,
+     _In_ REGSAM samDesired,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
      _In_        HANDLE hTransaction,
-     _Reserved_ PVOID  pExtendedParameter
+-    _Reserved_ PVOID  pExtendedParameter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  pExtendedParameter
      );
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
+@@ -527,9 +546,9 @@ RegDeleteKeyTransactedW (
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpSubKey,
+     _In_ REGSAM samDesired,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
+     _In_        HANDLE hTransaction,
+-    _Reserved_ PVOID  pExtendedParameter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  pExtendedParameter
+     );
+ #ifdef UNICODE
+ #define RegDeleteKeyTransacted  RegDeleteKeyTransactedW
 @@ -543,21 +562,21 @@ RegDeleteKeyTransactedW (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -362,7 +415,14 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -631,6 +655,7 @@ RegEnumKeyExA(
+@@ -625,12 +649,13 @@ RegEnumKeyExA(
+     _In_ DWORD dwIndex,
+     _Out_writes_to_opt_(*lpcchName, *lpcchName + 1) LPSTR lpName,
+     _Inout_ LPDWORD lpcchName,
+-    _Reserved_ LPDWORD lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
+     _Out_writes_to_opt_(*lpcchClass,*lpcchClass + 1) LPSTR lpClass,
+     _Inout_opt_ LPDWORD lpcchClass,
      _Out_opt_ PFILETIME lpftLastWriteTime
      );
  
@@ -370,6 +430,15 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
+@@ -639,7 +664,7 @@ RegEnumKeyExW(
+     _In_ DWORD dwIndex,
+     _Out_writes_to_opt_(*lpcchName, *lpcchName + 1) LPWSTR lpName,
+     _Inout_ LPDWORD lpcchName,
+-    _Reserved_ LPDWORD lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
+     _Out_writes_to_opt_(*lpcchClass,*lpcchClass + 1) LPWSTR lpClass,
+     _Inout_opt_ LPDWORD lpcchClass,
+     _Out_opt_ PFILETIME lpftLastWriteTime
 @@ -651,6 +676,7 @@ RegEnumKeyExW(
  #define RegEnumKeyEx  RegEnumKeyExA
  #endif // !UNICODE
@@ -378,7 +447,14 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -665,6 +691,7 @@ RegEnumValueA(
+@@ -659,12 +685,13 @@ RegEnumValueA(
+     _In_ DWORD dwIndex,
+     _Out_writes_to_opt_(*lpcchValueName, *lpcchValueName + 1) LPSTR lpValueName,
+     _Inout_ LPDWORD lpcchValueName,
+-    _Reserved_ LPDWORD lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
+     _Out_opt_ LPDWORD lpType,
+     _Out_writes_bytes_to_opt_(*lpcbData, *lpcbData) __out_data_source(REGISTRY) LPBYTE lpData,
      _Inout_opt_ LPDWORD lpcbData
      );
  
@@ -386,6 +462,15 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
+@@ -673,7 +700,7 @@ RegEnumValueW(
+     _In_ DWORD dwIndex,
+     _Out_writes_to_opt_(*lpcchValueName, *lpcchValueName + 1) LPWSTR lpValueName,
+     _Inout_ LPDWORD lpcchValueName,
+-    _Reserved_ LPDWORD lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
+     _Out_opt_ LPDWORD lpType,
+     _Out_writes_bytes_to_opt_(*lpcbData, *lpcbData) __out_data_source(REGISTRY) LPBYTE lpData,
+     _Inout_opt_ LPDWORD lpcbData
 @@ -691,6 +718,7 @@ RegEnumValueW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -514,13 +599,14 @@ index 5a1415e34d..dcee6a521d 100644
 +    _Win32_AssociatedEnum_(REG_SAM_FLAGS) _In_ REGSAM samDesired,
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
      _In_        HANDLE hTransaction,
-     _Reserved_ PVOID  pExtendedParemeter
+-    _Reserved_ PVOID  pExtendedParemeter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  pExtendedParemeter
      );
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -824,8 +862,8 @@ RegOpenKeyTransactedW (
+@@ -824,10 +862,10 @@ RegOpenKeyTransactedW (
      _In_ HKEY hKey,
      _In_opt_ LPCWSTR lpSubKey,
      _In_opt_ DWORD ulOptions,
@@ -529,8 +615,11 @@ index 5a1415e34d..dcee6a521d 100644
 +    _Win32_AssociatedEnum_(REG_SAM_FLAGS) _In_ REGSAM samDesired,
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
      _In_        HANDLE hTransaction,
-     _Reserved_ PVOID  pExtendedParemeter
+-    _Reserved_ PVOID  pExtendedParemeter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  pExtendedParemeter
      );
+ #ifdef UNICODE
+ #define RegOpenKeyTransacted  RegOpenKeyTransactedW
 @@ -841,6 +879,7 @@ RegOpenKeyTransactedW (
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -539,6 +628,15 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
+@@ -848,7 +887,7 @@ RegQueryInfoKeyA(
+     _In_ HKEY hKey,
+     _Out_writes_to_opt_(*lpcchClass, *lpcchClass + 1) LPSTR lpClass,
+     _Inout_opt_ LPDWORD lpcchClass,
+-    _Reserved_ LPDWORD lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
+     _Out_opt_ LPDWORD lpcSubKeys,
+     _Out_opt_ LPDWORD lpcbMaxSubKeyLen,
+     _Out_opt_ LPDWORD lpcbMaxClassLen,
 @@ -859,6 +898,7 @@ RegQueryInfoKeyA(
      _Out_opt_ PFILETIME lpftLastWriteTime
      );
@@ -547,6 +645,15 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
+@@ -866,7 +906,7 @@ RegQueryInfoKeyW(
+     _In_ HKEY hKey,
+     _Out_writes_to_opt_(*lpcchClass, *lpcchClass + 1) LPWSTR lpClass,
+     _Inout_opt_ LPDWORD lpcchClass,
+-    _Reserved_ LPDWORD lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
+     _Out_opt_ LPDWORD lpcSubKeys,
+     _Out_opt_ LPDWORD lpcbMaxSubKeyLen,
+     _Out_opt_ LPDWORD lpcbMaxClassLen,
 @@ -889,6 +929,7 @@ RegQueryInfoKeyW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -591,7 +698,7 @@ index 5a1415e34d..dcee6a521d 100644
      _In_ DWORD num_vals,
      _Out_writes_bytes_to_opt_(*ldwTotsize, *ldwTotsize) __out_data_source(REGISTRY) LPWSTR lpValueBuf,
      _Inout_opt_ LPDWORD ldwTotsize
-@@ -951,6 +995,7 @@ RegQueryMultipleValuesW(
+@@ -951,26 +995,28 @@ RegQueryMultipleValuesW(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -599,11 +706,12 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -958,11 +1003,12 @@ RegQueryValueExA(
+ RegQueryValueExA(
      _In_ HKEY hKey,
      _In_opt_ LPCSTR lpValueName,
-     _Reserved_ LPDWORD lpReserved,
+-    _Reserved_ LPDWORD lpReserved,
 -    _Out_opt_ LPDWORD lpType,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _Out_opt_ LPDWORD lpType,
      _Out_writes_bytes_to_opt_(*lpcbData, *lpcbData) __out_data_source(REGISTRY) LPBYTE lpData,
      _When_(lpData == NULL, _Out_opt_) _When_(lpData != NULL, _Inout_opt_) LPDWORD lpcbData
@@ -613,11 +721,12 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -970,7 +1016,7 @@ RegQueryValueExW(
+ RegQueryValueExW(
      _In_ HKEY hKey,
      _In_opt_ LPCWSTR lpValueName,
-     _Reserved_ LPDWORD lpReserved,
+-    _Reserved_ LPDWORD lpReserved,
 -    _Out_opt_ LPDWORD lpType,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpReserved,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _Out_opt_ LPDWORD lpType,
      _Out_writes_bytes_to_opt_(*lpcbData, *lpcbData) __out_data_source(REGISTRY) LPBYTE lpData,
      _When_(lpData == NULL, _Out_opt_) _When_(lpData != NULL, _Inout_opt_) LPDWORD lpcbData
@@ -731,7 +840,7 @@ index 5a1415e34d..dcee6a521d 100644
      _In_ DWORD cbData
      );
  #ifdef UNICODE
-@@ -1123,6 +1179,7 @@ RegSetValueW (
+@@ -1123,26 +1179,28 @@ RegSetValueW (
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -739,11 +848,12 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -1130,11 +1187,12 @@ RegSetValueExA(
+ RegSetValueExA(
      _In_ HKEY hKey,
      _In_opt_ LPCSTR lpValueName,
-     _Reserved_ DWORD Reserved,
+-    _Reserved_ DWORD Reserved,
 -    _In_ DWORD dwType,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwType,
      _In_reads_bytes_opt_(cbData) CONST BYTE* lpData,
      _In_ DWORD cbData
@@ -753,11 +863,12 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -1142,7 +1200,7 @@ RegSetValueExW(
+ RegSetValueExW(
      _In_ HKEY hKey,
      _In_opt_ LPCWSTR lpValueName,
-     _Reserved_ DWORD Reserved,
+-    _Reserved_ DWORD Reserved,
 -    _In_ DWORD dwType,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
 +    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwType,
      _In_reads_bytes_opt_(cbData) CONST BYTE* lpData,
      _In_ DWORD cbData
@@ -896,7 +1007,7 @@ index 5a1415e34d..dcee6a521d 100644
  WINADVAPI
  LSTATUS
  APIENTRY
-@@ -1373,23 +1443,25 @@ RegLoadMUIStringW(
+@@ -1373,26 +1443,28 @@ RegLoadMUIStringW(
  #define RegLoadMUIString  RegLoadMUIStringA
  #endif // !UNICODE
  
@@ -910,7 +1021,8 @@ index 5a1415e34d..dcee6a521d 100644
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
      _In_ REGSAM samDesired,
      _In_ DWORD dwOptions,
-     _Reserved_ DWORD Reserved
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
      );
  
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(WIN32_ERROR) _Windows_SupportedOS_WindowsVista_
@@ -923,7 +1035,11 @@ index 5a1415e34d..dcee6a521d 100644
 +    _Win32_RAIIFree_(RegCloseKey, -1, 0) _Out_ PHKEY phkResult,
      _In_ REGSAM samDesired,
      _In_ DWORD dwOptions,
-     _Reserved_ DWORD Reserved
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
+     );
+ 
+ #ifdef UNICODE
 @@ -1413,7 +1485,9 @@ RegLoadAppKeyW(
  // Remoteable System Shutdown APIs
  //

@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmcid.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmcid.h
+index a0a130da41..db0a7f8637 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmcid.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsHtmcid.h
+@@ -331,9 +331,21 @@
+ #define IDM_RUNURLSCRIPT            2343
+ 
+ #ifdef IE5_ZOOM
++#endif
++#if (defined(WIN32METADATA) && !defined(IDM_ZOOMRATIO)) || (((defined(IE5_ZOOM))))
+ #define IDM_ZOOMRATIO               2344
++#endif
++#ifdef IE5_ZOOM
++#endif
++#if (defined(WIN32METADATA) && !defined(IDM_GETZOOMNUMERATOR)) || (((defined(IE5_ZOOM))))
+ #define IDM_GETZOOMNUMERATOR        2345
++#endif
++#ifdef IE5_ZOOM
++#endif
++#if (defined(WIN32METADATA) && !defined(IDM_GETZOOMDENOMINATOR)) || (((defined(IE5_ZOOM))))
+ #define IDM_GETZOOMDENOMINATOR      2346
++#endif
++#ifdef IE5_ZOOM
+ #endif  // IE5_ZOOM
+ 
+ // COMMANDS FOR COMPLEX TEXT

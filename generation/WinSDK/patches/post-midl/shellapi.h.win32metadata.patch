@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
-index 8db637a14a..565438f1fc 100644
+index 8db637a14a..e2bb1bc899 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shellapi.h
 @@ -1,4 +1,5 @@
@@ -82,9 +82,9 @@ index 8db637a14a..565438f1fc 100644
 -SHSTDAPI_(HICON) DuplicateIcon(_Reserved_ HINSTANCE hInst, _In_ HICON hIcon);
 -SHSTDAPI_(HICON) ExtractAssociatedIconA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIcon);
 -SHSTDAPI_(HICON) ExtractAssociatedIconW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIcon);
-+_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) DuplicateIcon(_Reserved_ HINSTANCE hInst, _In_ HICON hIcon);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIcon);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIcon);
++_Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) DuplicateIcon(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _In_ HICON hIcon);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconA(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIcon);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconW(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIcon);
  #ifdef UNICODE
  #define ExtractAssociatedIcon  ExtractAssociatedIconW
  #else
@@ -92,8 +92,8 @@ index 8db637a14a..565438f1fc 100644
  #endif // !UNICODE
 -SHSTDAPI_(HICON) ExtractAssociatedIconExA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
 -SHSTDAPI_(HICON) ExtractAssociatedIconExW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconExA(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconExW(_Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconExA(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractAssociatedIconExW(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _Inout_updates_(128) LPWSTR pszIconPath, _Inout_ WORD *piIconIndex, _Inout_ WORD *piIconId);
  #ifdef UNICODE
  #define ExtractAssociatedIconEx  ExtractAssociatedIconExW
  #else
@@ -101,8 +101,8 @@ index 8db637a14a..565438f1fc 100644
  #endif // !UNICODE
 -SHSTDAPI_(HICON) ExtractIconA(_Reserved_ HINSTANCE hInst, _In_ LPCSTR pszExeFileName, UINT nIconIndex);
 -SHSTDAPI_(HICON) ExtractIconW(_Reserved_ HINSTANCE hInst, _In_ LPCWSTR pszExeFileName, UINT nIconIndex);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractIconA(_Reserved_ HINSTANCE hInst, _In_ LPCSTR pszExeFileName, UINT nIconIndex);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractIconW(_Reserved_ HINSTANCE hInst, _In_ LPCWSTR pszExeFileName, UINT nIconIndex);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractIconA(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _In_ LPCSTR pszExeFileName, UINT nIconIndex);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_RAIIFree_(DestroyIcon, -1, 0) SHSTDAPI_(HICON) ExtractIconW(_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ HINSTANCE hInst, _In_ LPCWSTR pszExeFileName, UINT nIconIndex);
  #ifdef UNICODE
  #define ExtractIcon  ExtractIconW
  #else

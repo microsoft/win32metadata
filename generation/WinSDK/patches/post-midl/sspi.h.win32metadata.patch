@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
-index 06f5ed27e9..9cbc823f72 100644
+index 06f5ed27e9..fb33af151b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sspi.h
 @@ -15,6 +15,7 @@
@@ -350,7 +350,32 @@ index 06f5ed27e9..9cbc823f72 100644
  #if ISSP_MODE == 0     // For Kernel mode
      _In_opt_  PSECURITY_STRING pPrincipal,
      _In_      PSECURITY_STRING pPackage,
-@@ -1341,11 +1342,11 @@ typedef SECURITY_STATUS
+@@ -1325,27 +1326,27 @@ AcquireCredentialsHandleW(
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ACQUIRE_CREDENTIALS_HANDLE_FN_W)(
+ #if ISSP_MODE == 0
+-    PSECURITY_STRING,
+-    PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
+ #else
+-    SEC_WCHAR *,
+-    SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
+ #endif
+     unsigned long,
+-    void *,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     SEC_GET_KEY_FN,
+-    void *,
+-    PCredHandle,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
  
  // end_ntifs
  
@@ -410,9 +435,31 @@ index 06f5ed27e9..9cbc823f72 100644
      _In_      PCredHandle hCredentials,
  #if ISSP_MODE == 0      // For Kernel mode
      _In_opt_  PSECURITY_STRING pPrincipal,
-@@ -1420,7 +1421,7 @@ typedef SECURITY_STATUS
-     void *,
-     PTimeStamp);
+@@ -1406,21 +1407,21 @@ AddCredentialsW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * ADD_CREDENTIALS_FN_W)(
+-    PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
+ #if ISSP_MODE == 0
+-    PSECURITY_STRING,
+-    PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
+ #else
+-    SEC_WCHAR *,
+-    SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
+ #endif
+     unsigned long,
+-    void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
+     SEC_GET_KEY_FN,
+-    void *,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
  
 -SECURITY_STATUS SEC_ENTRY
 +_WIN32META_ANNOTATION_("win32metadata:ansi") SECURITY_STATUS SEC_ENTRY
@@ -509,7 +556,35 @@ index 06f5ed27e9..9cbc823f72 100644
      _In_opt_    PCredHandle phCredential,               // Cred to base context
      _In_opt_    PCtxtHandle phContext,                  // Existing context (OPT)
  #if ISSP_MODE == 0
-@@ -1745,12 +1746,12 @@ typedef SECURITY_STATUS
+@@ -1726,31 +1727,31 @@ InitializeSecurityContextW(
+ 
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * INITIALIZE_SECURITY_CONTEXT_FN_W)(
+-    PCredHandle,
+-    PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCredHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
+ #if ISSP_MODE == 0
+-    PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
+ #else
+-    SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
+ #endif
+     unsigned long,
+     unsigned long,
+     unsigned long,
+-    PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
+     unsigned long,
+-    PCtxtHandle,
+-    PSecBufferDesc,
+-    unsigned long *,
+-    PTimeStamp);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBufferDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTimeStamp);
  
  // end_ntifs
  
@@ -1025,7 +1100,18 @@ index 06f5ed27e9..9cbc823f72 100644
  #if ISSP_MODE == 0
      _In_        PSECURITY_STRING pPackageName,
  #else
-@@ -2288,7 +2289,7 @@ typedef SECURITY_STATUS
+@@ -2280,15 +2281,15 @@ QuerySecurityPackageInfoW(
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * QUERY_SECURITY_PACKAGE_INFO_FN_W)(
+ #if ISSP_MODE == 0
+-    PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
+ #else
+-    SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
+ #endif
+-    PSecPkgInfoW *);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecPkgInfoW *);
  
  // end_ntifs
  
@@ -1079,7 +1165,22 @@ index 06f5ed27e9..9cbc823f72 100644
  #if ISSP_MODE == 0
      _In_  PSECURITY_STRING     pszPackage,
  #else
-@@ -2405,7 +2406,7 @@ typedef SECURITY_STATUS
+@@ -2395,17 +2396,17 @@ ImportSecurityContextW(
+ typedef SECURITY_STATUS
+ (SEC_ENTRY * IMPORT_SECURITY_CONTEXT_FN_W)(
+ #if ISSP_MODE == 0
+-    PSECURITY_STRING,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_STRING,
+ #else
+-    SEC_WCHAR *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SEC_WCHAR *,
+ #endif
+-    PSecBuffer,
+-    VOID *,
+-    PCtxtHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSecBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID *,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCtxtHandle
      );
  
  // end_ntifs
@@ -1302,7 +1403,34 @@ index 06f5ed27e9..9cbc823f72 100644
      _In_ PCSTR pszTargetName,
  #ifdef _CREDUI_INFO_DEFINED
      _In_opt_ PCREDUI_INFOA pUiInfo,
-@@ -3438,6 +3450,7 @@ SspiUnmarshalCredUIContext(
+@@ -3319,10 +3331,26 @@ typedef struct _SEC_WINNT_AUTH_NGC_DATA {
+    SEC_WINNT_AUTH_BYTE_VECTOR DecryptionKeyAuthTicket;
+ } SEC_WINNT_AUTH_NGC_DATA, *PSEC_WINNT_AUTH_NGC_DATA;
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(NGC_DATA_FLAG_KERB_CERTIFICATE_LOGON_FLAG_CHECK_DUPLICATES)) || (((defined(_SEC_WINNT_AUTH_TYPES))))
+ #define NGC_DATA_FLAG_KERB_CERTIFICATE_LOGON_FLAG_CHECK_DUPLICATES     (0x1) //corresponds to KERB_CERTIFICATE_LOGON_FLAG_CHECK_DUPLICATES
++#endif
++#ifdef _SEC_WINNT_AUTH_TYPES
++#endif
++#if (defined(WIN32METADATA) && !defined(NGC_DATA_FLAG_KERB_CERTIFICATE_LOGON_FLAG_USE_CERTIFICATE_INFO)) || (((defined(_SEC_WINNT_AUTH_TYPES))))
+ #define NGC_DATA_FLAG_KERB_CERTIFICATE_LOGON_FLAG_USE_CERTIFICATE_INFO (0x2) //corresponds to  KERB_CERTIFICATE_LOGON_FLAG_USE_CERTIFICATE_INFO
++#endif
++#ifdef _SEC_WINNT_AUTH_TYPES
++#endif
++#if (defined(WIN32METADATA) && !defined(NGC_DATA_FLAG_IS_SMARTCARD_DATA)) || (((defined(_SEC_WINNT_AUTH_TYPES))))
+ #define NGC_DATA_FLAG_IS_SMARTCARD_DATA                                (0x4)
++#endif
++#ifdef _SEC_WINNT_AUTH_TYPES
++#endif
++#if (defined(WIN32METADATA) && !defined(NGC_DATA_FLAG_IS_CLOUD_TRUST_CRED)) || (((defined(_SEC_WINNT_AUTH_TYPES))))
+ #define NGC_DATA_FLAG_IS_CLOUD_TRUST_CRED                              (0x8) // credential should be treated as "cloud trust" - use Cloud TGTs instead of on-prem PKINIT
++#endif
++#ifdef _SEC_WINNT_AUTH_TYPES
+ 
+ typedef struct _SEC_WINNT_AUTH_DATA_TYPE_SMARTCARD_CONTEXTS_DATA
+ {
+@@ -3438,6 +3466,7 @@ SspiUnmarshalCredUIContext(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1310,7 +1438,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiPrepareForCredRead(
-@@ -3447,6 +3460,7 @@ SspiPrepareForCredRead(
+@@ -3447,6 +3476,7 @@ SspiPrepareForCredRead(
      _Outptr_ PCWSTR* ppszCredmanTargetName
      );
  
@@ -1318,7 +1446,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiPrepareForCredWrite(
-@@ -3469,12 +3483,14 @@ SspiPrepareForCredWrite(
+@@ -3469,12 +3499,14 @@ SspiPrepareForCredWrite(
  #define SEC_WINNT_AUTH_IDENTITY_ENCRYPT_SAME_PROCESS      0x2
  #define SEC_WINNT_AUTH_IDENTITY_ENCRYPT_FOR_SYSTEM        0x4
  
@@ -1333,7 +1461,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiEncryptAuthIdentityEx(
-@@ -3482,12 +3498,14 @@ SspiEncryptAuthIdentityEx(
+@@ -3482,12 +3514,14 @@ SspiEncryptAuthIdentityEx(
      _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
      );
  
@@ -1348,7 +1476,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiDecryptAuthIdentityEx(
-@@ -3495,6 +3513,7 @@ SspiDecryptAuthIdentityEx(
+@@ -3495,6 +3529,7 @@ SspiDecryptAuthIdentityEx(
      _Inout_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE EncryptedAuthData
      );
  
@@ -1356,7 +1484,7 @@ index 06f5ed27e9..9cbc823f72 100644
  BOOLEAN
  SEC_ENTRY
  SspiIsAuthIdentityEncrypted(
-@@ -3519,6 +3538,7 @@ SspiIsAuthIdentityEncrypted(
+@@ -3519,6 +3554,7 @@ SspiIsAuthIdentityEncrypted(
  // free the returned memory using SspiLocalFree()
  //
  
@@ -1364,7 +1492,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiEncodeAuthIdentityAsStrings(
-@@ -3528,6 +3548,7 @@ SspiEncodeAuthIdentityAsStrings(
+@@ -3528,6 +3564,7 @@ SspiEncodeAuthIdentityAsStrings(
      _Outptr_opt_result_maybenull_ PCWSTR* ppszPackedCredentialsString
      );
  
@@ -1372,7 +1500,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiValidateAuthIdentity(
-@@ -3538,6 +3559,7 @@ SspiValidateAuthIdentity(
+@@ -3538,6 +3575,7 @@ SspiValidateAuthIdentity(
  // free the returned memory using SspiFreeAuthIdentity()
  //
  
@@ -1380,7 +1508,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiCopyAuthIdentity(
-@@ -3550,18 +3572,21 @@ SspiCopyAuthIdentity(
+@@ -3550,18 +3588,21 @@ SspiCopyAuthIdentity(
  // Internally calls SspiZeroAuthIdentity().
  //
  
@@ -1402,7 +1530,7 @@ index 06f5ed27e9..9cbc823f72 100644
  VOID
  SEC_ENTRY
  SspiLocalFree(
-@@ -3573,6 +3598,7 @@ SspiLocalFree(
+@@ -3573,6 +3614,7 @@ SspiLocalFree(
  // which zeroes out the credentials blob before freeing it
  //
  
@@ -1410,7 +1538,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiEncodeStringsAsAuthIdentity(
-@@ -3582,6 +3608,7 @@ SspiEncodeStringsAsAuthIdentity(
+@@ -3582,6 +3624,7 @@ SspiEncodeStringsAsAuthIdentity(
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSEC_WINNT_AUTH_IDENTITY_OPAQUE* ppAuthIdentity
      );
  
@@ -1418,7 +1546,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiCompareAuthIdentities(
-@@ -3596,6 +3623,7 @@ SspiCompareAuthIdentities(
+@@ -3596,6 +3639,7 @@ SspiCompareAuthIdentities(
  // free the returned memory using SspiLocalFree()
  //
  
@@ -1426,7 +1554,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiMarshalAuthIdentity(
-@@ -3608,6 +3636,7 @@ SspiMarshalAuthIdentity(
+@@ -3608,6 +3652,7 @@ SspiMarshalAuthIdentity(
  // free the returned auth identity using SspiFreeAuthIdentity()
  //
  
@@ -1434,7 +1562,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiUnmarshalAuthIdentity(
-@@ -3626,6 +3655,7 @@ SspiUnmarshalAuthIdentity(
+@@ -3626,6 +3671,7 @@ SspiUnmarshalAuthIdentity(
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  
@@ -1442,7 +1570,7 @@ index 06f5ed27e9..9cbc823f72 100644
  BOOLEAN
  SEC_ENTRY
  SspiIsPromptingNeeded(
-@@ -3642,6 +3672,7 @@ SspiIsPromptingNeeded(
+@@ -3642,6 +3688,7 @@ SspiIsPromptingNeeded(
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  
@@ -1450,7 +1578,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiGetTargetHostName(
-@@ -3649,6 +3680,7 @@ SspiGetTargetHostName(
+@@ -3649,6 +3696,7 @@ SspiGetTargetHostName(
      _Outptr_ PWSTR* pszHostName
      );
  
@@ -1458,7 +1586,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  SspiExcludePackage(
-@@ -3683,9 +3715,9 @@ SspiSetChannelBindingFlags(
+@@ -3683,9 +3731,9 @@ SspiSetChannelBindingFlags(
  // Routines for manipulating packages
  //
  
@@ -1470,7 +1598,7 @@ index 06f5ed27e9..9cbc823f72 100644
      unsigned long   Flags;
      unsigned long   SignatureSize;
      void *  Signature;
-@@ -3697,6 +3729,7 @@ typedef struct _SECURITY_PACKAGE_OPTIONS {
+@@ -3697,6 +3745,7 @@ typedef struct _SECURITY_PACKAGE_OPTIONS {
  
  #define SECPKG_OPTIONS_PERMANENT    0x00000001
  
@@ -1478,7 +1606,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  AddSecurityPackageA(
-@@ -3704,6 +3737,7 @@ AddSecurityPackageA(
+@@ -3704,6 +3753,7 @@ AddSecurityPackageA(
      _In_opt_ PSECURITY_PACKAGE_OPTIONS pOptions
      );
  
@@ -1486,7 +1614,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  AddSecurityPackageW(
-@@ -3717,12 +3751,14 @@ AddSecurityPackageW(
+@@ -3717,12 +3767,14 @@ AddSecurityPackageW(
  #define AddSecurityPackage  AddSecurityPackageA
  #endif
  
@@ -1501,7 +1629,7 @@ index 06f5ed27e9..9cbc823f72 100644
  SECURITY_STATUS
  SEC_ENTRY
  DeleteSecurityPackageW(
-@@ -3743,5 +3779,486 @@ DeleteSecurityPackageW(
+@@ -3743,5 +3795,486 @@ DeleteSecurityPackageW(
  #endif
  
  // begin_ntifs

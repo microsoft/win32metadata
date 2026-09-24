@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h
-index 7582307420..69c516899f 100644
+index 7582307420..85d66508bc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h
 @@ -1,3 +1,4 @@
@@ -126,7 +126,7 @@ index 7582307420..69c516899f 100644
      );
  
  void WINAPI
-@@ -216,7 +221,8 @@ GetLocalManagedApplicationData(
+@@ -216,12 +221,13 @@ GetLocalManagedApplicationData(
  	LPWSTR *            SupportUrl
      );
  
@@ -135,4 +135,11 @@ index 7582307420..69c516899f 100644
 +  
  GetManagedApplicationCategories(
  #if !defined(__midl)
-     _Reserved_ 
+-    _Reserved_ 
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ 
+ #endif
+-	DWORD                dwReserved,
++	_WIN32META_ANNOTATION_("win32metadata:optional") DWORD                dwReserved,
+ #if !defined(__midl)
+     _Out_ 
+ #endif

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h
-index 8e6e80d07f..28c5956c27 100644
+index 8e6e80d07f..3b0721f69d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/Message.h
 @@ -1,3 +1,4 @@
@@ -218,7 +218,7 @@ index 8e6e80d07f..28c5956c27 100644
   * release
   */
 -QCC_DEPRECATED(extern AJ_API uint32_t AJ_CALL alljoyn_message_getcompressiontoken(alljoyn_message msg));
-+_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED(extern AJ_API uint32_t AJ_CALL alljoyn_message_getcompressiontoken(alljoyn_message msg));
++_Win32_ImportLibrary_("msajapi.dll") QCC_DEPRECATED(extern AJ_API uint32_t AJ_CALL alljoyn_message_getcompressiontoken(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message msg));
  
  /**
   * Accessor function to get the session id for the message.

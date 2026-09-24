@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
-index 15b1d4a0e7..c7bcd76118 100644
+index 15b1d4a0e7..62eee1f1c1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/iphlpapi.h
 @@ -19,6 +19,7 @@ Abstract:
@@ -573,7 +573,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  PIP_ADAPTER_ORDER_MAP
  WINAPI
  GetAdapterOrderMap(
-@@ -920,12 +950,12 @@ GetAdapterOrderMap(
+@@ -920,13 +950,13 @@ GetAdapterOrderMap(
  // The following functions require Winsock2.
  //
  
@@ -584,10 +584,12 @@ index 15b1d4a0e7..c7bcd76118 100644
  GetAdaptersAddresses(
      _In_ ULONG Family,
 -    _In_ ULONG Flags,
+-    _Reserved_ PVOID Reserved,
 +    _Win32_AssociatedEnum_(GET_ADAPTERS_ADDRESSES_FLAGS) _In_ ULONG Flags,
-     _Reserved_ PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved,
      _Out_writes_bytes_opt_(*SizePointer) PIP_ADAPTER_ADDRESSES AdapterAddresses,
      _Inout_ PULONG SizePointer
+     );
 @@ -934,7 +964,8 @@ GetAdaptersAddresses(
  #endif
  
@@ -655,7 +657,26 @@ index 15b1d4a0e7..c7bcd76118 100644
  VOID
  WINAPI
  UnregisterInterfaceTimestampConfigChange(
-@@ -1118,7 +1153,7 @@ typedef struct _INTERFACE_HARDWARE_CROSSTIMESTAMP
+@@ -1076,8 +1111,18 @@ CancelIfTimestampConfigChange(
+ 
+ #elif (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(INTERFACE_TIMESTAMP_CAPABILITIES_VERSION_1)) || ((!((NTDDI_VERSION >= NTDDI_WIN10_FE)) && ((NTDDI_VERSION >= NTDDI_WIN10_RS5))))
+ #define INTERFACE_TIMESTAMP_CAPABILITIES_VERSION_1 0x01
++#endif
++#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
++#elif (NTDDI_VERSION >= NTDDI_WIN10_RS5)
++#endif
++#if (defined(WIN32METADATA) && !defined(INTERFACE_HARDWARE_CROSSTIMESTAMP_VERSION_1)) || ((!((NTDDI_VERSION >= NTDDI_WIN10_FE)) && ((NTDDI_VERSION >= NTDDI_WIN10_RS5))))
+ #define INTERFACE_HARDWARE_CROSSTIMESTAMP_VERSION_1 0x01
++#endif
++#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
++#elif (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+ 
+ typedef struct _INTERFACE_TIMESTAMP_CAPABILITY_FLAGS
+ {
+@@ -1118,7 +1163,7 @@ typedef struct _INTERFACE_HARDWARE_CROSSTIMESTAMP
  
  } INTERFACE_HARDWARE_CROSSTIMESTAMP, *PINTERFACE_HARDWARE_CROSSTIMESTAMP;
  
@@ -664,7 +685,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  
  IPHLPAPI_DLL_LINKAGE
  DWORD
-@@ -1178,21 +1213,24 @@ CancelIfTimestampConfigChange(
+@@ -1178,21 +1223,24 @@ CancelIfTimestampConfigChange(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -692,7 +713,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  DWORD
  WINAPI
  SendARP(
-@@ -1202,7 +1240,8 @@ SendARP(
+@@ -1202,7 +1250,8 @@ SendARP(
      _Inout_ PULONG  PhyAddrLen
      );
  
@@ -702,7 +723,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  BOOL
  WINAPI
  GetRTTAndHopCount(
-@@ -1212,22 +1251,25 @@ GetRTTAndHopCount(
+@@ -1212,22 +1261,25 @@ GetRTTAndHopCount(
      _Out_ PULONG RTT
      );
  
@@ -732,7 +753,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  DWORD
  WINAPI
  UnenableRouter(
-@@ -1235,15 +1277,17 @@ UnenableRouter(
+@@ -1235,15 +1287,17 @@ UnenableRouter(
      _Out_opt_ LPDWORD lpdwEnableCount
      );
  
@@ -753,7 +774,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  DWORD
  WINAPI
  RestoreMediaSense(
-@@ -1253,7 +1297,8 @@ RestoreMediaSense(
+@@ -1253,7 +1307,8 @@ RestoreMediaSense(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -763,7 +784,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  DWORD
  WINAPI
  GetIpErrorString(
-@@ -1264,7 +1309,7 @@ GetIpErrorString(
+@@ -1264,7 +1319,7 @@ GetIpErrorString(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #ifdef _WS2DEF_
@@ -772,7 +793,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  ResolveNeighbor(
-@@ -1279,7 +1324,7 @@ ResolveNeighbor(
+@@ -1279,7 +1334,7 @@ ResolveNeighbor(
  // Port reservation API routines.
  //
  
@@ -781,7 +802,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  CreatePersistentTcpPortReservation(
-@@ -1288,7 +1333,7 @@ CreatePersistentTcpPortReservation(
+@@ -1288,7 +1343,7 @@ CreatePersistentTcpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -790,7 +811,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  CreatePersistentUdpPortReservation(
-@@ -1297,7 +1342,7 @@ CreatePersistentUdpPortReservation(
+@@ -1297,7 +1352,7 @@ CreatePersistentUdpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -799,7 +820,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  DeletePersistentTcpPortReservation(
-@@ -1305,7 +1350,7 @@ DeletePersistentTcpPortReservation(
+@@ -1305,7 +1360,7 @@ DeletePersistentTcpPortReservation(
      _In_ USHORT NumberOfPorts
      );
  
@@ -808,7 +829,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  DeletePersistentUdpPortReservation(
-@@ -1313,7 +1358,7 @@ DeletePersistentUdpPortReservation(
+@@ -1313,7 +1368,7 @@ DeletePersistentUdpPortReservation(
      _In_ USHORT NumberOfPorts
      );
  
@@ -817,7 +838,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  LookupPersistentTcpPortReservation(
-@@ -1322,7 +1367,7 @@ LookupPersistentTcpPortReservation(
+@@ -1322,7 +1377,7 @@ LookupPersistentTcpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -826,7 +847,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  ULONG
  WINAPI
  LookupPersistentUdpPortReservation(
-@@ -1396,7 +1441,7 @@ LookupPersistentUdpPortReservation(
+@@ -1396,7 +1451,7 @@ LookupPersistentUdpPortReservation(
  #define NET_STRING_ANY_SERVICE_NO_SCOPE   (NET_STRING_NAMED_SERVICE  | \
                                             NET_STRING_IP_SERVICE_NO_SCOPE)
  
@@ -835,7 +856,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  {
     NET_ADDRESS_FORMAT_UNSPECIFIED = 0,
  
-@@ -1409,7 +1454,7 @@ typedef enum NET_ADDRESS_FORMAT_
+@@ -1409,7 +1464,7 @@ typedef enum NET_ADDRESS_FORMAT_
  #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
  	// app must include winsock2.h, ws2ipdef.h, and windns.h to use this API
  
@@ -844,7 +865,7 @@ index 15b1d4a0e7..c7bcd76118 100644
  {
     NET_ADDRESS_FORMAT Format;
  
-@@ -1427,7 +1472,8 @@ typedef struct NET_ADDRESS_INFO_
+@@ -1427,7 +1482,8 @@ typedef struct NET_ADDRESS_INFO_
  
  } NET_ADDRESS_INFO, *PNET_ADDRESS_INFO;
  

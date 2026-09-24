@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h b/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
-index 1fcfeaee21..f1c64eec7f 100644
+index 1fcfeaee21..17b4254773 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
 @@ -1,3 +1,4 @@
@@ -159,7 +159,7 @@ index 1fcfeaee21..f1c64eec7f 100644
      _In_     SIGNER_SUBJECT_INFO   *pSubjectInfo,
      _In_     SIGNER_CERT           *pSignerCert,
      _In_     SIGNER_SIGNATURE_INFO *pSignatureInfo,
-@@ -208,13 +209,13 @@ HRESULT WINAPI SignerSignEx(
+@@ -208,29 +209,29 @@ HRESULT WINAPI SignerSignEx(
      _Out_    SIGNER_CONTEXT        **ppSignerContext
      );
  
@@ -176,8 +176,11 @@ index 1fcfeaee21..f1c64eec7f 100644
      _In_opt_   PCSTR                  pszTimestampAlgorithmOid,
      _In_opt_   PCWSTR                 pwszHttpTimeStamp,
      _In_opt_   PCRYPT_ATTRIBUTES      psRequest,
-@@ -224,13 +225,13 @@ HRESULT WINAPI SignerSignEx2(
-     _Reserved_ PVOID                  pReserved
+     _In_opt_   PVOID                  pSipData,
+     _Out_      SIGNER_CONTEXT         **ppSignerContext,
+     _In_opt_   PCERT_STRONG_SIGN_PARA pCryptoPolicy,
+-    _Reserved_ PVOID                  pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID                  pReserved
      );
  
 -HRESULT WINAPI SignerSignEx3(
@@ -193,8 +196,12 @@ index 1fcfeaee21..f1c64eec7f 100644
      _In_opt_   PCSTR                  pszTimestampAlgorithmOid,
      _In_opt_   PCWSTR                 pwszHttpTimeStamp,
      _In_opt_   PCRYPT_ATTRIBUTES      psRequest,
-@@ -241,14 +242,14 @@ HRESULT WINAPI SignerSignEx3(
-     _Reserved_ PVOID                  pReserved
+@@ -238,18 +239,18 @@ HRESULT WINAPI SignerSignEx3(
+     _Out_      SIGNER_CONTEXT         **ppSignerContext,
+     _In_opt_   PCERT_STRONG_SIGN_PARA pCryptoPolicy,
+     _In_opt_   SIGNER_DIGEST_SIGN_INFO  *pDigestSignInfo,
+-    _Reserved_ PVOID                  pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID                  pReserved
      );
  
 -HRESULT WINAPI SignerTimeStamp(
@@ -206,10 +213,12 @@ index 1fcfeaee21..f1c64eec7f 100644
      );
  
 -HRESULT WINAPI SignerTimeStampEx(
+-    _Reserved_ DWORD               dwFlags,
 +_Win32_ImportLibrary_("mssign32.dll") HRESULT WINAPI SignerTimeStampEx(
-     _Reserved_ DWORD               dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD               dwFlags,
      _In_       SIGNER_SUBJECT_INFO *pSubjectInfo,
      _In_       LPCWSTR             pwszHttpTimeStamp,
+     _In_       PCRYPT_ATTRIBUTES   psRequest,
 @@ -257,8 +258,8 @@ HRESULT WINAPI SignerTimeStampEx(
      _Out_      SIGNER_CONTEXT      **ppSignerContext 
      );
@@ -217,7 +226,7 @@ index 1fcfeaee21..f1c64eec7f 100644
 -HRESULT WINAPI SignerTimeStampEx2(
 -    _Reserved_ DWORD               dwFlags,
 +_Win32_ImportLibrary_("mssign32.dll") HRESULT WINAPI SignerTimeStampEx2(
-+    _Win32_AssociatedEnum_(SIGNER_TIMESTAMP_FLAGS) _Reserved_ DWORD               dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Win32_AssociatedEnum_(SIGNER_TIMESTAMP_FLAGS) _Reserved_ DWORD               dwFlags,
      _In_       SIGNER_SUBJECT_INFO *pSubjectInfo,
      _In_       LPCWSTR             pwszHttpTimeStamp,
      _In_       ALG_ID              dwAlgId,
@@ -232,7 +241,13 @@ index 1fcfeaee21..f1c64eec7f 100644
      _In_       DWORD                  dwIndex,
      _In_       SIGNER_SUBJECT_INFO    *pSubjectInfo,
      _In_       PCWSTR                 pwszHttpTimeStamp,
-@@ -282,4 +283,101 @@ HRESULT WINAPI SignerTimeStampEx3(
+@@ -277,9 +278,106 @@ HRESULT WINAPI SignerTimeStampEx3(
+     _In_opt_   PVOID                  pSipData,
+     _Out_      SIGNER_CONTEXT         **ppSignerContext,
+     _In_opt_   PCERT_STRONG_SIGN_PARA pCryptoPolicy,
+-    _Reserved_ PVOID                  pReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID                  pReserved
+     );
  
  #ifdef __cplusplus
  }

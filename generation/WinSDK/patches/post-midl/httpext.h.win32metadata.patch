@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h b/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h
-index f27876644b..6556f0666b 100644
+index f27876644b..7e58b0586a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/HttpExt.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,39 @@ index f27876644b..6556f0666b 100644
  
      DWORD     cbSize;                 // size of this struct.
      DWORD     dwVersion;              // version info of this spec
+@@ -180,23 +181,23 @@ typedef struct _EXTENSION_CONTROL_BLOCK {
+ 
+     BOOL (WINAPI * GetServerVariable) ( HCONN       hConn,
+                                         LPSTR       lpszVariableName,
+-                                        LPVOID      lpvBuffer,
+-                                        LPDWORD     lpdwSize );
++                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID      lpvBuffer,
++                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD     lpdwSize );
+ 
+     BOOL (WINAPI * WriteClient)  ( HCONN      ConnID,
+-                                   LPVOID     Buffer,
+-                                   LPDWORD    lpdwBytes,
++                                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID     Buffer,
++                                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD    lpdwBytes,
+                                    DWORD      dwReserved );
+ 
+     BOOL (WINAPI * ReadClient)  ( HCONN      ConnID,
+-                                  LPVOID     lpvBuffer,
+-                                  LPDWORD    lpdwSize );
++                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID     lpvBuffer,
++                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD    lpdwSize );
+ 
+     BOOL (WINAPI * ServerSupportFunction)( HCONN      hConn,
+                                            DWORD      dwHSERequest,
+-                                           LPVOID     lpvBuffer,
+-                                           LPDWORD    lpdwSize,
+-                                           LPDWORD    lpdwDataType );
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID     lpvBuffer,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD    lpdwSize,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD    lpdwDataType );
+ 
+ } EXTENSION_CONTROL_BLOCK, *LPEXTENSION_CONTROL_BLOCK;
+ 
 @@ -253,8 +254,8 @@ typedef struct _HSE_UNICODE_URL_MAPEX_INFO {
  
  typedef VOID

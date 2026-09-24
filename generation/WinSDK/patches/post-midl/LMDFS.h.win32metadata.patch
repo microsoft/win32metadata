@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
-index 3b5b9a1095..8dd5091a88 100644
+index 3b5b9a1095..4a989f7b30 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
 @@ -28,6 +28,7 @@ Notes:
@@ -254,7 +254,8 @@ index 3b5b9a1095..8dd5091a88 100644
 +  NetDfsRemoveStdRoot(
      _In_  LPWSTR ServerName,        // Server to remote to
      _In_  LPWSTR RootShare,         // Share that host Dfs root
-     _Reserved_  DWORD  Flags        // Flags for operation.  Zero for no flags.
+-    _Reserved_  DWORD  Flags        // Flags for operation.  Zero for no flags.
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD  Flags        // Flags for operation.  Zero for no flags.
  );
  
 -NET_API_STATUS NET_API_FUNCTION
@@ -264,7 +265,7 @@ index 3b5b9a1095..8dd5091a88 100644
      _In_ LPWSTR         ServerName,     // Server to remote to
      _In_ LPWSTR         RootShare,      // Share to make Dfs root
      _In_  LPWSTR        FtDfsName,      // Name of FtDfs to create/join
-@@ -684,16 +685,16 @@ NetDfsAddFtRoot(
+@@ -684,21 +685,21 @@ NetDfsAddFtRoot(
  );
  
  
@@ -275,7 +276,8 @@ index 3b5b9a1095..8dd5091a88 100644
      _In_ LPWSTR         ServerName,     // Server to remote to
      _In_ LPWSTR         RootShare,      // Share that host Dfs root
      _In_ LPWSTR         FtDfsName,      // Name of FtDfs to remove or unjoin from.
-     _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
+-    _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
  );
  
 -NET_API_STATUS NET_API_FUNCTION
@@ -285,6 +287,12 @@ index 3b5b9a1095..8dd5091a88 100644
      _In_  LPWSTR        DomainName,     // Name of domain the server is in
      _In_  LPWSTR        ServerName,     // Server to remote to
      _In_  LPWSTR        RootShare,      // Share that host Dfs root
+     _In_  LPWSTR        FtDfsName,      // Name of FtDfs to remove or unjoin from.
+-    _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    Flags           // Flags for operation.  Zero for no flags.
+ );
+ 
+ 
 @@ -742,8 +743,8 @@ typedef struct {
  // DfsEntryPath. When applied to the last storage in a volume, removes
  // the volume from the DFS.

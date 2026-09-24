@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
-index d1bd0b9577..fa4457f1b6 100644
+index d1bd0b9577..1aac7d30ed 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winefs.h
 @@ -1,4 +1,5 @@
@@ -118,7 +118,13 @@ index d1bd0b9577..fa4457f1b6 100644
  DWORD
  WINAPI
  SetUserFileEncryptionKey(
-@@ -391,17 +392,17 @@ SetUserFileEncryptionKeyEx(
+@@ -386,22 +387,22 @@ SetUserFileEncryptionKeyEx(
+     _In_opt_        PENCRYPTION_CERTIFICATE     pEncryptionCertificate,
+                     DWORD                       dwCapabilities, 
+                     DWORD                       dwFlags,
+-    _Reserved_      LPVOID                      pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_      LPVOID                      pvReserved
+     );
  
  #endif // #if (NTDDI_VERSION >= NTDDI_VISTA) 
  

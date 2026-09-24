@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h b/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h
-index 6b079b99a8..5a86a4d85b 100644
+index 6b079b99a8..71c04f77b4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h
 @@ -1,3 +1,4 @@
@@ -595,3 +595,22 @@ index 6b079b99a8..5a86a4d85b 100644
  
  #else
  extern HRESULT WINAPI DirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPDIRECTINPUTA *ppDI, LPUNKNOWN punkOuter);
+@@ -4428,6 +4545,10 @@ typedef void (WINAPI* LPFNSHOWJOYCPL)( HWND hWnd );
+ 
+ #ifndef DIJ_RINGZERO
+ 
++#if (defined(WIN32METADATA) && !defined(JOY_OEMPOLL_PASSDRIVERDATA)) || (((defined(_INC_MMDDK))) && ((!defined(MMNOJOYDEV))) && ((!defined(__VJOYDXD_INCLUDED__))))
++#define JOY_OEMPOLL_PASSDRIVERDATA  7
++#endif
++
+ #ifdef _INC_MMDDK
+ #ifndef MMNOJOYDEV
+ 
+@@ -4437,7 +4558,6 @@ typedef void (WINAPI* LPFNSHOWJOYCPL)( HWND hWnd );
+  * Poll type in which the do_other field of the JOYOEMPOLLDATA
+  * structure contains mini-driver specific data passed from an app.
+  */
+-#define JOY_OEMPOLL_PASSDRIVERDATA  7
+ 
+ #endif  /* __VJOYDXD_INCLUDED__ */
+ 

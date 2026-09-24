@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h
-index 0c6cddc590..9173ff7daf 100644
+index 0c6cddc590..4ca5206cba 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Resapi.h
 @@ -1,3 +1,4 @@
@@ -425,7 +425,7 @@ index 0c6cddc590..9173ff7daf 100644
  DWORD
  WINAPI
  ResUtilGetProperty(
-@@ -1252,7 +1253,7 @@ DWORD
+@@ -1252,11 +1253,11 @@ DWORD
      _Inout_ LPDWORD pcbOutPropertyItemSize
      );
  
@@ -434,7 +434,20 @@ index 0c6cddc590..9173ff7daf 100644
  WINAPI
  ResUtilVerifyPropertyTable(
      _In_ const PRESUTIL_PROPERTY_ITEM pPropertyTable,
-@@ -1273,7 +1274,7 @@ typedef DWORD
+-    _Reserved_ PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved,
+     _In_ BOOL bAllowUnknownProperties,
+     _In_reads_bytes_(cbInPropertyListSize) const PVOID pInPropertyList,
+     _In_ DWORD cbInPropertyListSize,
+@@ -1266,19 +1267,19 @@ ResUtilVerifyPropertyTable(
+ typedef DWORD
+ (WINAPI * PRESUTIL_VERIFY_PROPERTY_TABLE)(
+     _In_ const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    _Reserved_ PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved,
+     _In_ BOOL bAllowUnknownProperties,
+     _In_reads_bytes_(cbInPropertyListSize) const PVOID pInPropertyList,
+     _In_ DWORD cbInPropertyListSize,
      _Out_opt_ LPBYTE pOutParams
      );
  
@@ -443,7 +456,21 @@ index 0c6cddc590..9173ff7daf 100644
  WINAPI
  ResUtilSetPropertyTable(
      _In_ HKEY hkeyClusterKey,
-@@ -1296,12 +1297,12 @@ typedef DWORD
+     _In_ const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    _Reserved_ PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved,
+     _In_ BOOL bAllowUnknownProperties,
+     _In_reads_bytes_(cbInPropertyListSize) const PVOID pInPropertyList,
+     _In_ DWORD cbInPropertyListSize,
+@@ -1289,19 +1290,19 @@ typedef DWORD
+ (WINAPI * PRESUTIL_SET_PROPERTY_TABLE)(
+     _In_ HKEY hkeyClusterKey,
+     _In_ const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    _Reserved_ PVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID Reserved,
+     _In_ BOOL bAllowUnknownProperties,
+     _In_reads_bytes_(cbInPropertyListSize) const PVOID pInPropertyList,
+     _In_ DWORD cbInPropertyListSize,
      _Out_opt_ LPBYTE pOutParams
      );
  
@@ -532,7 +559,22 @@ index 0c6cddc590..9173ff7daf 100644
  WINAPI
  ResUtilGetPropertiesToParameterBlock(
      _In_ HKEY hkeyClusterKey,
-@@ -1414,7 +1415,7 @@ typedef DWORD
+@@ -1400,7 +1401,7 @@ typedef DWORD
+ (WINAPI * PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK)(
+     IN HKEY hkeyClusterKey,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    OUT LPBYTE pOutParams,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE pOutParams,
+     IN BOOL bCheckForRequiredProperties,
+     OUT OPTIONAL LPWSTR * pszNameOfPropInError
+     );
+@@ -1409,12 +1410,12 @@ typedef DWORD
+ (WINAPI * PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK)(
+     IN HKEY hkeyClusterKey,
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable,
+-    OUT LPBYTE pOutParams,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE pOutParams,
+     IN BOOL bCheckForRequiredProperties,
      OUT OPTIONAL LPWSTR * pszNameOfPropInError
      );
  

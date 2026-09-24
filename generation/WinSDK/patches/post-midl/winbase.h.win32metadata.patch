@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
-index 62b1450287..3deb8f7215 100644
+index 62b1450287..578b0cd9fd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinBase.h
 @@ -1,3 +1,4 @@
@@ -586,7 +586,28 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  PowerClearRequest (
-@@ -1930,7 +1931,7 @@ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
+@@ -1897,8 +1898,20 @@ RestoreLastError(
+     );
+ 
+ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
++#endif
++#endif
++#if (defined(WIN32METADATA) && !defined(RESTORE_LAST_ERROR_NAME_A)) || (((!defined(RC_INVOKED))) && ((defined(WINBASE_DECLARE_RESTORE_LAST_ERROR))))
+ #define RESTORE_LAST_ERROR_NAME_A      "RestoreLastError"
++#endif
++#if !defined(RC_INVOKED) // RC warns because "WINBASE_DECLARE_RESTORE_LAST_ERROR" is a bit long.
++#if defined(WINBASE_DECLARE_RESTORE_LAST_ERROR)
++#endif
++#endif
++#if (defined(WIN32METADATA) && !defined(RESTORE_LAST_ERROR_NAME_W)) || (((!defined(RC_INVOKED))) && ((defined(WINBASE_DECLARE_RESTORE_LAST_ERROR))))
+ #define RESTORE_LAST_ERROR_NAME_W     L"RestoreLastError"
++#endif
++#if !defined(RC_INVOKED) // RC warns because "WINBASE_DECLARE_RESTORE_LAST_ERROR" is a bit long.
++#if defined(WINBASE_DECLARE_RESTORE_LAST_ERROR)
+ #define RESTORE_LAST_ERROR_NAME   TEXT("RestoreLastError")
+ 
+ #endif
+@@ -1930,7 +1943,7 @@ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
  //
  #define FILE_SKIP_SET_EVENT_ON_HANDLE           0x2
  
@@ -595,7 +616,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFileCompletionNotificationModes(
-@@ -1955,7 +1956,7 @@ SetFileCompletionNotificationModes(
+@@ -1955,7 +1968,7 @@ SetFileCompletionNotificationModes(
  
  #if (_WIN32_WINNT >= 0x0601)
  
@@ -604,7 +625,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  Wow64GetThreadSelectorEntry(
-@@ -1968,14 +1969,14 @@ Wow64GetThreadSelectorEntry(
+@@ -1968,14 +1981,14 @@ Wow64GetThreadSelectorEntry(
  
  #endif // !defined(MIDL_PASS)
  
@@ -621,7 +642,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  DebugBreakProcess (
-@@ -1998,28 +1999,28 @@ DebugBreakProcess (
+@@ -1998,28 +2011,28 @@ DebugBreakProcess (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -654,7 +675,7 @@ index 62b1450287..3deb8f7215 100644
  ATOM
  WINAPI
  DeleteAtom(
-@@ -2047,7 +2048,7 @@ CancelDeviceWakeupRequest(
+@@ -2047,7 +2060,7 @@ CancelDeviceWakeupRequest(
      _In_ HANDLE hDevice
      );
  
@@ -663,7 +684,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetDevicePowerState(
-@@ -2064,14 +2065,14 @@ SetMessageWaitingIndicator(
+@@ -2064,14 +2077,14 @@ SetMessageWaitingIndicator(
      );
  
  
@@ -680,7 +701,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFileShortNameW(
-@@ -2101,7 +2102,7 @@ SetFileShortNameW(
+@@ -2101,7 +2114,7 @@ SetFileShortNameW(
  
  #define HINSTANCE_ERROR 32
  
@@ -689,7 +710,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  LoadModule(
-@@ -2110,7 +2111,7 @@ LoadModule(
+@@ -2110,7 +2123,7 @@ LoadModule(
      );
  
  
@@ -698,7 +719,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  UINT
  WINAPI
-@@ -2126,23 +2127,23 @@ WinExec(
+@@ -2126,23 +2139,23 @@ WinExec(
  #pragma region Desktop Family or OneCore or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -726,7 +747,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetupComm(
-@@ -2151,15 +2152,15 @@ SetupComm(
+@@ -2151,15 +2164,15 @@ SetupComm(
      _In_ DWORD dwOutQueue
      );
  
@@ -745,7 +766,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -2169,15 +2170,15 @@ GetCommConfig(
+@@ -2169,15 +2182,15 @@ GetCommConfig(
      _Inout_   LPDWORD lpdwSize
      );
  
@@ -764,7 +785,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetCommProperties(
-@@ -2185,15 +2186,15 @@ GetCommProperties(
+@@ -2185,15 +2198,15 @@ GetCommProperties(
      _Inout_ LPCOMMPROP lpCommProp
      );
  
@@ -783,7 +804,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetCommState(
-@@ -2201,7 +2202,7 @@ GetCommState(
+@@ -2201,7 +2214,7 @@ GetCommState(
      _Out_ LPDCB lpDCB
      );
  
@@ -792,7 +813,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetCommTimeouts(
-@@ -2209,22 +2210,22 @@ GetCommTimeouts(
+@@ -2209,22 +2222,22 @@ GetCommTimeouts(
      _Out_ LPCOMMTIMEOUTS lpCommTimeouts
      );
  
@@ -819,7 +840,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetCommConfig(
-@@ -2233,15 +2234,15 @@ SetCommConfig(
+@@ -2233,15 +2246,15 @@ SetCommConfig(
      _In_ DWORD dwSize
      );
  
@@ -838,7 +859,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetCommState(
-@@ -2249,7 +2250,7 @@ SetCommState(
+@@ -2249,7 +2262,7 @@ SetCommState(
      _In_ LPDCB lpDCB
      );
  
@@ -847,7 +868,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetCommTimeouts(
-@@ -2257,7 +2258,7 @@ SetCommTimeouts(
+@@ -2257,7 +2270,7 @@ SetCommTimeouts(
      _In_ LPCOMMTIMEOUTS lpCommTimeouts
      );
  
@@ -856,7 +877,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  TransmitCommChar(
-@@ -2265,19 +2266,19 @@ TransmitCommChar(
+@@ -2265,19 +2278,19 @@ TransmitCommChar(
      _In_ char cChar
      );
  
@@ -879,7 +900,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  OpenCommPort(
-@@ -2290,7 +2291,7 @@ OpenCommPort(
+@@ -2290,7 +2303,7 @@ OpenCommPort(
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3) // NTDDI_WIN10_RS4NTDDI_WIN10_RS4
  
@@ -888,7 +909,7 @@ index 62b1450287..3deb8f7215 100644
  ULONG
  WINAPI
  GetCommPorts(
-@@ -2307,80 +2308,80 @@ GetCommPorts(
+@@ -2307,80 +2320,80 @@ GetCommPorts(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -984,7 +1005,7 @@ index 62b1450287..3deb8f7215 100644
      _Inout_ LPDWORD lpdwSize,
      _Out_writes_bytes_(*lpdwSize) LPVOID lpTapeInformation
      );
-@@ -2388,12 +2389,12 @@ GetTapeParameters(
+@@ -2388,12 +2401,12 @@ GetTapeParameters(
  #define GET_TAPE_MEDIA_INFORMATION 0
  #define GET_TAPE_DRIVE_INFORMATION 1
  
@@ -999,7 +1020,7 @@ index 62b1450287..3deb8f7215 100644
      _In_ LPVOID lpTapeInformation
      );
  
-@@ -2406,7 +2407,7 @@ SetTapeParameters(
+@@ -2406,7 +2419,7 @@ SetTapeParameters(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1008,7 +1029,7 @@ index 62b1450287..3deb8f7215 100644
  int
  WINAPI
  MulDiv(
-@@ -2431,7 +2432,7 @@ typedef enum _DEP_SYSTEM_POLICY_TYPE {
+@@ -2431,7 +2444,7 @@ typedef enum _DEP_SYSTEM_POLICY_TYPE {
  
  #if (NTDDI_VERSION >= NTDDI_WINXPSP3)
  
@@ -1017,7 +1038,7 @@ index 62b1450287..3deb8f7215 100644
  DEP_SYSTEM_POLICY_TYPE
  WINAPI
  GetSystemDEPPolicy(
-@@ -2442,7 +2443,7 @@ GetSystemDEPPolicy(
+@@ -2442,7 +2455,7 @@ GetSystemDEPPolicy(
  
  #if _WIN32_WINNT >= 0x0501
  
@@ -1026,7 +1047,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetSystemRegistryQuota(
-@@ -2456,7 +2457,7 @@ GetSystemRegistryQuota(
+@@ -2456,7 +2469,7 @@ GetSystemRegistryQuota(
  // Routines to convert back and forth between system time and file time
  //
  
@@ -1035,7 +1056,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  FileTimeToDosDateTime(
-@@ -2465,7 +2466,7 @@ FileTimeToDosDateTime(
+@@ -2465,7 +2478,7 @@ FileTimeToDosDateTime(
      _Out_ LPWORD lpFatTime
      );
  
@@ -1044,7 +1065,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  DosDateTimeToFileTime(
-@@ -2483,12 +2484,12 @@ DosDateTimeToFileTime(
+@@ -2483,12 +2496,12 @@ DosDateTimeToFileTime(
  #define FORMAT_MESSAGE_ALLOCATE_BUFFER 0x00000100
  
  #if !defined(MIDL_PASS)
@@ -1059,7 +1080,7 @@ index 62b1450287..3deb8f7215 100644
      _In_opt_ LPCVOID lpSource,
      _In_     DWORD dwMessageId,
      _In_     DWORD dwLanguageId,
-@@ -2498,12 +2499,12 @@ FormatMessageA(
+@@ -2498,12 +2511,12 @@ FormatMessageA(
      _In_     DWORD nSize,
      _In_opt_ va_list *Arguments
      );
@@ -1074,7 +1095,7 @@ index 62b1450287..3deb8f7215 100644
      _In_opt_ LPCVOID lpSource,
      _In_     DWORD dwMessageId,
      _In_     DWORD dwLanguageId,
-@@ -2564,7 +2565,7 @@ FormatMessage(
+@@ -2564,7 +2577,7 @@ FormatMessage(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
@@ -1083,7 +1104,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  CreateMailslotA(
-@@ -2573,7 +2574,7 @@ CreateMailslotA(
+@@ -2573,7 +2586,7 @@ CreateMailslotA(
      _In_     DWORD lReadTimeout,
      _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
@@ -1092,7 +1113,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  CreateMailslotW(
-@@ -2588,7 +2589,7 @@ CreateMailslotW(
+@@ -2588,7 +2601,7 @@ CreateMailslotW(
  #define CreateMailslot  CreateMailslotA
  #endif // !UNICODE
  
@@ -1101,7 +1122,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetMailslotInfo(
-@@ -2599,7 +2600,7 @@ GetMailslotInfo(
+@@ -2599,7 +2612,7 @@ GetMailslotInfo(
      _Out_opt_ LPDWORD lpReadTimeout
      );
  
@@ -1110,7 +1131,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetMailslotInfo(
-@@ -2611,13 +2612,13 @@ SetMailslotInfo(
+@@ -2611,13 +2624,13 @@ SetMailslotInfo(
  // File Encryption API
  //
  
@@ -1126,7 +1147,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  EncryptFileW(
-@@ -2629,14 +2630,14 @@ EncryptFileW(
+@@ -2629,19 +2642,19 @@ EncryptFileW(
  #define EncryptFile  EncryptFileA
  #endif // !UNICODE
  
@@ -1136,14 +1157,21 @@ index 62b1450287..3deb8f7215 100644
  WINAPI
  DecryptFileA(
      _In_       LPCSTR lpFileName,
-     _Reserved_ DWORD dwReserved
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
      );
 -WINADVAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINADVAPI
  BOOL
  WINAPI
  DecryptFileW(
-@@ -2664,14 +2665,14 @@ DecryptFileW(
+     _In_       LPCWSTR lpFileName,
+-    _Reserved_ DWORD dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved
+     );
+ #ifdef UNICODE
+ #define DecryptFile  DecryptFileW
+@@ -2664,14 +2677,14 @@ DecryptFileW(
  #define FILE_READ_ONLY                  8
  #define FILE_DIR_DISALLOWED             9
  
@@ -1160,7 +1188,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  FileEncryptionStatusW(
-@@ -2718,7 +2719,7 @@ DWORD
+@@ -2718,7 +2731,7 @@ DWORD
  #define EFS_DROP_ALTERNATE_STREAMS      (0x10)
  
  
@@ -1169,7 +1197,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  OpenEncryptedFileRawA(
-@@ -2726,7 +2727,7 @@ OpenEncryptedFileRawA(
+@@ -2726,7 +2739,7 @@ OpenEncryptedFileRawA(
      _In_        ULONG    ulFlags,
      _Outptr_ PVOID   *pvContext
      );
@@ -1178,7 +1206,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  OpenEncryptedFileRawW(
-@@ -2740,7 +2741,7 @@ OpenEncryptedFileRawW(
+@@ -2740,7 +2753,7 @@ OpenEncryptedFileRawW(
  #define OpenEncryptedFileRaw  OpenEncryptedFileRawA
  #endif // !UNICODE
  
@@ -1187,7 +1215,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  ReadEncryptedFileRaw(
-@@ -2749,7 +2750,7 @@ ReadEncryptedFileRaw(
+@@ -2749,7 +2762,7 @@ ReadEncryptedFileRaw(
      _In_     PVOID           pvContext
      );
  
@@ -1196,7 +1224,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  WriteEncryptedFileRaw(
-@@ -2758,7 +2759,7 @@ WriteEncryptedFileRaw(
+@@ -2758,7 +2771,7 @@ WriteEncryptedFileRaw(
      _In_     PVOID           pvContext
      );
  
@@ -1205,7 +1233,7 @@ index 62b1450287..3deb8f7215 100644
  VOID
  WINAPI
  CloseEncryptedFileRaw(
-@@ -2775,14 +2776,14 @@ CloseEncryptedFileRaw(
+@@ -2775,14 +2788,14 @@ CloseEncryptedFileRaw(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1222,7 +1250,7 @@ index 62b1450287..3deb8f7215 100644
  int
  WINAPI
  lstrcmpW(
-@@ -2795,14 +2796,14 @@ lstrcmpW(
+@@ -2795,14 +2808,14 @@ lstrcmpW(
  #define lstrcmp  lstrcmpA
  #endif // !UNICODE
  
@@ -1239,7 +1267,7 @@ index 62b1450287..3deb8f7215 100644
  int
  WINAPI
  lstrcmpiW(
-@@ -2826,7 +2827,7 @@ lstrcmpiW(
+@@ -2826,7 +2839,7 @@ lstrcmpiW(
  #pragma warning(disable:4995)
  #endif
  
@@ -1248,7 +1276,7 @@ index 62b1450287..3deb8f7215 100644
  _Check_return_
  _Success_(return != NULL)
  _Post_satisfies_(return == lpString1)
-@@ -2838,7 +2839,7 @@ lstrcpynA(
+@@ -2838,7 +2851,7 @@ lstrcpynA(
      _In_ LPCSTR lpString2,
      _In_ int iMaxLength
      );
@@ -1257,7 +1285,7 @@ index 62b1450287..3deb8f7215 100644
  _Check_return_
  _Success_(return != NULL)
  _Post_satisfies_(return == lpString1)
-@@ -2856,14 +2857,14 @@ lstrcpynW(
+@@ -2856,14 +2869,14 @@ lstrcpynW(
  #define lstrcpyn  lstrcpynA
  #endif // !UNICODE
  
@@ -1274,7 +1302,7 @@ index 62b1450287..3deb8f7215 100644
  LPWSTR
  WINAPI
  lstrcpyW(
-@@ -2876,14 +2877,14 @@ lstrcpyW(
+@@ -2876,14 +2889,14 @@ lstrcpyW(
  #define lstrcpy  lstrcpyA
  #endif // !UNICODE
  
@@ -1291,7 +1319,7 @@ index 62b1450287..3deb8f7215 100644
  LPWSTR
  WINAPI
  lstrcatW(
-@@ -2906,13 +2907,13 @@ lstrcatW(
+@@ -2906,13 +2919,13 @@ lstrcatW(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1307,7 +1335,7 @@ index 62b1450287..3deb8f7215 100644
  int
  WINAPI
  lstrlenW(
-@@ -2930,7 +2931,7 @@ lstrlenW(
+@@ -2930,7 +2943,7 @@ lstrlenW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1316,7 +1344,7 @@ index 62b1450287..3deb8f7215 100644
  HFILE
  WINAPI
  OpenFile(
-@@ -2947,7 +2948,7 @@ _lopen(
+@@ -2947,7 +2960,7 @@ _lopen(
      _In_ int iReadWrite
      );
  
@@ -1325,7 +1353,7 @@ index 62b1450287..3deb8f7215 100644
  HFILE
  WINAPI
  _lcreat(
-@@ -2964,12 +2965,12 @@ _lread(
+@@ -2964,12 +2977,12 @@ _lread(
      _In_ UINT uBytes
      );
  
@@ -1340,7 +1368,7 @@ index 62b1450287..3deb8f7215 100644
      _In_ UINT uBytes
      );
  
-@@ -2987,7 +2988,7 @@ long
+@@ -2987,7 +3000,7 @@ long
  WINAPI
  _hwrite(
      _In_ HFILE hFile,
@@ -1349,7 +1377,7 @@ index 62b1450287..3deb8f7215 100644
      _In_ long lBytes
      );
  
-@@ -2998,7 +2999,7 @@ _lclose(
+@@ -2998,7 +3011,7 @@ _lclose(
      _In_ HFILE hFile
      );
  
@@ -1358,7 +1386,7 @@ index 62b1450287..3deb8f7215 100644
  LONG
  WINAPI
  _llseek(
-@@ -3007,13 +3008,13 @@ _llseek(
+@@ -3007,13 +3020,13 @@ _llseek(
      _In_ int iOrigin
      );
  
@@ -1374,7 +1402,7 @@ index 62b1450287..3deb8f7215 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
-@@ -3040,7 +3041,7 @@ SignalObjectAndWait(
+@@ -3040,7 +3053,7 @@ SignalObjectAndWait(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1383,7 +1411,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BackupRead(
-@@ -3053,7 +3054,7 @@ BackupRead(
+@@ -3053,7 +3066,7 @@ BackupRead(
      _Inout_ LPVOID *lpContext
      );
  
@@ -1392,7 +1420,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BackupSeek(
-@@ -3065,7 +3066,7 @@ BackupSeek(
+@@ -3065,7 +3078,7 @@ BackupSeek(
      _Inout_ LPVOID *lpContext
      );
  
@@ -1401,7 +1429,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BackupWrite(
-@@ -3083,7 +3084,7 @@ BackupWrite(
+@@ -3083,7 +3096,7 @@ BackupWrite(
  //  Stream id structure
  //
  typedef struct _WIN32_STREAM_ID {
@@ -1410,7 +1438,7 @@ index 62b1450287..3deb8f7215 100644
          DWORD          dwStreamAttributes ;
          LARGE_INTEGER  Size ;
          DWORD          dwStreamNameSize ;
-@@ -3195,7 +3196,7 @@ typedef LPSTARTUPINFOEXA LPSTARTUPINFOEX;
+@@ -3195,7 +3208,7 @@ typedef LPSTARTUPINFOEXA LPSTARTUPINFOEX;
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1419,7 +1447,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3208,7 +3209,7 @@ OpenMutexA(
+@@ -3208,7 +3221,7 @@ OpenMutexA(
  #define OpenMutex  OpenMutexA
  #endif
  
@@ -1428,7 +1456,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3228,7 +3229,7 @@ CreateSemaphoreA(
+@@ -3228,7 +3241,7 @@ CreateSemaphoreA(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1437,7 +1465,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3249,7 +3250,7 @@ OpenSemaphoreA(
+@@ -3249,7 +3262,7 @@ OpenSemaphoreA(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1446,7 +1474,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3262,7 +3263,7 @@ CreateWaitableTimerA(
+@@ -3262,7 +3275,7 @@ CreateWaitableTimerA(
  #define CreateWaitableTimer  CreateWaitableTimerA
  #endif
  
@@ -1455,7 +1483,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3277,7 +3278,7 @@ OpenWaitableTimerA(
+@@ -3277,7 +3290,7 @@ OpenWaitableTimerA(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -1464,7 +1492,15 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3293,7 +3294,7 @@ CreateSemaphoreExA(
+@@ -3286,14 +3299,14 @@ CreateSemaphoreExA(
+     _In_        LONG lInitialCount,
+     _In_        LONG lMaximumCount,
+     _In_opt_    LPCSTR lpName,
+-    _Reserved_  DWORD dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD dwFlags,
+     _In_        DWORD dwDesiredAccess
+     );
+ #ifndef UNICODE
  #define CreateSemaphoreEx  CreateSemaphoreExA
  #endif
  
@@ -1473,7 +1509,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -3318,14 +3319,14 @@ CreateWaitableTimerExA(
+@@ -3318,14 +3331,14 @@ CreateWaitableTimerExA(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -1490,7 +1526,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     DWORD dwMaximumSizeHigh,
      _In_     DWORD dwMaximumSizeLow,
      _In_opt_ LPCSTR lpName
-@@ -3342,14 +3343,14 @@ CreateFileMappingA(
+@@ -3342,14 +3355,14 @@ CreateFileMappingA(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -1507,7 +1543,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     DWORD dwMaximumSizeHigh,
      _In_     DWORD dwMaximumSizeLow,
      _In_opt_ LPCSTR lpName,
-@@ -3368,7 +3369,7 @@ CreateFileMappingNumaA(
+@@ -3368,7 +3381,7 @@ CreateFileMappingNumaA(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -1516,7 +1552,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  OpenFileMappingA(
-@@ -3386,7 +3387,7 @@ OpenFileMappingA(
+@@ -3386,7 +3399,7 @@ OpenFileMappingA(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1525,7 +1561,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0 && return <= nBufferLength)
  DWORD
  WINAPI
-@@ -3413,7 +3414,7 @@ GetLogicalDriveStringsA(
+@@ -3413,13 +3426,13 @@ GetLogicalDriveStringsA(
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -1534,7 +1570,14 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HMODULE
  WINAPI
-@@ -3466,21 +3467,21 @@ LoadPackagedLibrary (
+ LoadPackagedLibrary (
+     _In_       LPCWSTR lpwLibFileName,
+-    _Reserved_ DWORD Reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved
+     );
+ 
+ #endif // _WIN32_WINNT >= 0x0602
+@@ -3466,21 +3479,21 @@ LoadPackagedLibrary (
  
  #define PROCESS_NAME_NATIVE     0x00000001
  
@@ -1560,7 +1603,7 @@ index 62b1450287..3deb8f7215 100644
      _Out_writes_to_(*lpdwSize, *lpdwSize) LPWSTR lpExeName,
      _Inout_ PDWORD lpdwSize
      );
-@@ -4091,7 +4092,7 @@ typedef union _PROCESS_CREATION_SVE_VECTOR_LENGTH {
+@@ -4091,7 +4104,7 @@ typedef union _PROCESS_CREATION_SVE_VECTOR_LENGTH {
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -1569,7 +1612,7 @@ index 62b1450287..3deb8f7215 100644
  VOID
  WINAPI
  GetStartupInfoA(
-@@ -4167,7 +4168,7 @@ SetEnvironmentVariable(
+@@ -4167,7 +4180,7 @@ SetEnvironmentVariable(
  #pragma region OneCore Family or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -1578,7 +1621,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableA(
-@@ -4176,7 +4177,7 @@ GetFirmwareEnvironmentVariableA(
+@@ -4176,7 +4189,7 @@ GetFirmwareEnvironmentVariableA(
      _Out_writes_bytes_to_opt_(nSize, return) PVOID pBuffer,
      _In_ DWORD    nSize
      );
@@ -1587,7 +1630,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableW(
-@@ -4193,7 +4194,7 @@ GetFirmwareEnvironmentVariableW(
+@@ -4193,7 +4206,7 @@ GetFirmwareEnvironmentVariableW(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -1596,7 +1639,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableExA(
-@@ -4203,7 +4204,7 @@ GetFirmwareEnvironmentVariableExA(
+@@ -4203,7 +4216,7 @@ GetFirmwareEnvironmentVariableExA(
      _In_ DWORD    nSize,
      _Out_opt_ PDWORD pdwAttribubutes
      );
@@ -1605,7 +1648,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetFirmwareEnvironmentVariableExW(
-@@ -4221,7 +4222,7 @@ GetFirmwareEnvironmentVariableExW(
+@@ -4221,7 +4234,7 @@ GetFirmwareEnvironmentVariableExW(
  
  #endif
  
@@ -1614,7 +1657,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableA(
-@@ -4230,7 +4231,7 @@ SetFirmwareEnvironmentVariableA(
+@@ -4230,7 +4243,7 @@ SetFirmwareEnvironmentVariableA(
      _In_reads_bytes_opt_(nSize) PVOID pValue,
      _In_ DWORD    nSize
      );
@@ -1623,7 +1666,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableW(
-@@ -4247,7 +4248,7 @@ SetFirmwareEnvironmentVariableW(
+@@ -4247,7 +4260,7 @@ SetFirmwareEnvironmentVariableW(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -1632,7 +1675,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableExA(
-@@ -4257,7 +4258,7 @@ SetFirmwareEnvironmentVariableExA(
+@@ -4257,7 +4270,7 @@ SetFirmwareEnvironmentVariableExA(
      _In_ DWORD    nSize,
      _In_ DWORD    dwAttributes
      );
@@ -1641,7 +1684,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFirmwareEnvironmentVariableExW(
-@@ -4283,7 +4284,7 @@ SetFirmwareEnvironmentVariableExW(
+@@ -4283,7 +4296,7 @@ SetFirmwareEnvironmentVariableExW(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -1650,7 +1693,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetFirmwareType (
-@@ -4291,7 +4292,7 @@ GetFirmwareType (
+@@ -4291,7 +4304,7 @@ GetFirmwareType (
      );
  
  
@@ -1659,7 +1702,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  IsNativeVhdBoot (
-@@ -4300,7 +4301,7 @@ IsNativeVhdBoot (
+@@ -4300,7 +4313,7 @@ IsNativeVhdBoot (
  
  #endif // _WIN32_WINNT >= _WIN32_WINNT_WIN8
  
@@ -1668,7 +1711,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HRSRC
  WINAPI
-@@ -4313,7 +4314,7 @@ FindResourceA(
+@@ -4313,7 +4326,7 @@ FindResourceA(
  #define FindResource  FindResourceA
  #endif
  
@@ -1677,7 +1720,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HRSRC
  WINAPI
-@@ -4327,7 +4328,7 @@ FindResourceExA(
+@@ -4327,7 +4340,7 @@ FindResourceExA(
  #define FindResourceEx  FindResourceExA
  #endif
  
@@ -1686,7 +1729,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  EnumResourceTypesA(
-@@ -4335,7 +4336,7 @@ EnumResourceTypesA(
+@@ -4335,7 +4348,7 @@ EnumResourceTypesA(
      _In_     ENUMRESTYPEPROCA lpEnumFunc,
      _In_     LONG_PTR lParam
      );
@@ -1695,7 +1738,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  EnumResourceTypesW(
-@@ -4349,7 +4350,7 @@ EnumResourceTypesW(
+@@ -4349,7 +4362,7 @@ EnumResourceTypesW(
  #define EnumResourceTypes  EnumResourceTypesA
  #endif // !UNICODE
  
@@ -1704,7 +1747,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  EnumResourceLanguagesA(
-@@ -4359,7 +4360,7 @@ EnumResourceLanguagesA(
+@@ -4359,7 +4372,7 @@ EnumResourceLanguagesA(
      _In_     ENUMRESLANGPROCA lpEnumFunc,
      _In_     LONG_PTR lParam
      );
@@ -1713,7 +1756,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  EnumResourceLanguagesW(
-@@ -4375,14 +4376,14 @@ EnumResourceLanguagesW(
+@@ -4375,14 +4388,14 @@ EnumResourceLanguagesW(
  #define EnumResourceLanguages  EnumResourceLanguagesA
  #endif // !UNICODE
  
@@ -1730,7 +1773,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  BeginUpdateResourceW(
-@@ -4395,7 +4396,7 @@ BeginUpdateResourceW(
+@@ -4395,7 +4408,7 @@ BeginUpdateResourceW(
  #define BeginUpdateResource  BeginUpdateResourceA
  #endif // !UNICODE
  
@@ -1739,7 +1782,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  UpdateResourceA(
-@@ -4406,7 +4407,7 @@ UpdateResourceA(
+@@ -4406,7 +4419,7 @@ UpdateResourceA(
      _In_reads_bytes_opt_(cb) LPVOID lpData,
      _In_ DWORD cb
      );
@@ -1748,7 +1791,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  UpdateResourceW(
-@@ -4423,14 +4424,14 @@ UpdateResourceW(
+@@ -4423,14 +4436,14 @@ UpdateResourceW(
  #define UpdateResource  UpdateResourceA
  #endif // !UNICODE
  
@@ -1765,7 +1808,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  EndUpdateResourceW(
-@@ -4445,13 +4446,13 @@ EndUpdateResourceW(
+@@ -4445,13 +4458,13 @@ EndUpdateResourceW(
  
  #define ATOM_FLAG_GLOBAL 0x2
  
@@ -1781,7 +1824,7 @@ index 62b1450287..3deb8f7215 100644
  ATOM
  WINAPI
  GlobalAddAtomW(
-@@ -4463,14 +4464,14 @@ GlobalAddAtomW(
+@@ -4463,14 +4476,14 @@ GlobalAddAtomW(
  #define GlobalAddAtom  GlobalAddAtomA
  #endif // !UNICODE
  
@@ -1798,7 +1841,7 @@ index 62b1450287..3deb8f7215 100644
  ATOM
  WINAPI
  GlobalAddAtomExW(
-@@ -4483,13 +4484,13 @@ GlobalAddAtomExW(
+@@ -4483,13 +4496,13 @@ GlobalAddAtomExW(
  #define GlobalAddAtomEx  GlobalAddAtomExA
  #endif // !UNICODE
  
@@ -1814,7 +1857,7 @@ index 62b1450287..3deb8f7215 100644
  ATOM
  WINAPI
  GlobalFindAtomW(
-@@ -4501,7 +4502,7 @@ GlobalFindAtomW(
+@@ -4501,7 +4514,7 @@ GlobalFindAtomW(
  #define GlobalFindAtom  GlobalFindAtomA
  #endif // !UNICODE
  
@@ -1823,7 +1866,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GlobalGetAtomNameA(
-@@ -4509,7 +4510,7 @@ GlobalGetAtomNameA(
+@@ -4509,7 +4522,7 @@ GlobalGetAtomNameA(
      _Out_writes_to_(nSize, return + 1) LPSTR lpBuffer,
      _In_ int nSize
      );
@@ -1832,7 +1875,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GlobalGetAtomNameW(
-@@ -4523,13 +4524,13 @@ GlobalGetAtomNameW(
+@@ -4523,13 +4536,13 @@ GlobalGetAtomNameW(
  #define GlobalGetAtomName  GlobalGetAtomNameA
  #endif // !UNICODE
  
@@ -1848,7 +1891,7 @@ index 62b1450287..3deb8f7215 100644
  ATOM
  WINAPI
  AddAtomW(
-@@ -4541,13 +4542,13 @@ AddAtomW(
+@@ -4541,13 +4554,13 @@ AddAtomW(
  #define AddAtom  AddAtomA
  #endif // !UNICODE
  
@@ -1864,7 +1907,7 @@ index 62b1450287..3deb8f7215 100644
  ATOM
  WINAPI
  FindAtomW(
-@@ -4559,7 +4560,7 @@ FindAtomW(
+@@ -4559,7 +4572,7 @@ FindAtomW(
  #define FindAtom  FindAtomA
  #endif // !UNICODE
  
@@ -1873,7 +1916,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GetAtomNameA(
-@@ -4567,7 +4568,7 @@ GetAtomNameA(
+@@ -4567,7 +4580,7 @@ GetAtomNameA(
      _Out_writes_to_(nSize, return + 1) LPSTR lpBuffer,
      _In_ int nSize
      );
@@ -1882,7 +1925,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GetAtomNameW(
-@@ -4587,7 +4588,7 @@ GetAtomNameW(
+@@ -4587,7 +4600,7 @@ GetAtomNameW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1891,7 +1934,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GetProfileIntA(
-@@ -4595,7 +4596,7 @@ GetProfileIntA(
+@@ -4595,7 +4608,7 @@ GetProfileIntA(
      _In_ LPCSTR lpKeyName,
      _In_ INT nDefault
      );
@@ -1900,7 +1943,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GetProfileIntW(
-@@ -4609,7 +4610,7 @@ GetProfileIntW(
+@@ -4609,7 +4622,7 @@ GetProfileIntW(
  #define GetProfileInt  GetProfileIntA
  #endif // !UNICODE
  
@@ -1909,7 +1952,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetProfileStringA(
-@@ -4619,7 +4620,7 @@ GetProfileStringA(
+@@ -4619,7 +4632,7 @@ GetProfileStringA(
      _Out_writes_to_opt_(nSize, return + 1) LPSTR lpReturnedString,
      _In_     DWORD nSize
      );
@@ -1918,7 +1961,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetProfileStringW(
-@@ -4641,7 +4642,7 @@ GetProfileStringW(
+@@ -4641,7 +4654,7 @@ GetProfileStringW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1927,7 +1970,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WriteProfileStringA(
-@@ -4649,7 +4650,7 @@ WriteProfileStringA(
+@@ -4649,7 +4662,7 @@ WriteProfileStringA(
      _In_opt_ LPCSTR lpKeyName,
      _In_opt_ LPCSTR lpString
      );
@@ -1936,7 +1979,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WriteProfileStringW(
-@@ -4669,7 +4670,7 @@ WriteProfileStringW(
+@@ -4669,7 +4682,7 @@ WriteProfileStringW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1945,7 +1988,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetProfileSectionA(
-@@ -4677,7 +4678,7 @@ GetProfileSectionA(
+@@ -4677,7 +4690,7 @@ GetProfileSectionA(
      _Out_writes_to_opt_(nSize, return + 1) LPSTR lpReturnedString,
      _In_ DWORD nSize
      );
@@ -1954,7 +1997,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetProfileSectionW(
-@@ -4697,14 +4698,14 @@ GetProfileSectionW(
+@@ -4697,14 +4710,14 @@ GetProfileSectionW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1971,7 +2014,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WriteProfileSectionW(
-@@ -4723,7 +4724,7 @@ WriteProfileSectionW(
+@@ -4723,7 +4736,7 @@ WriteProfileSectionW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1980,7 +2023,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GetPrivateProfileIntA(
-@@ -4732,7 +4733,7 @@ GetPrivateProfileIntA(
+@@ -4732,7 +4745,7 @@ GetPrivateProfileIntA(
      _In_     INT nDefault,
      _In_opt_ LPCSTR lpFileName
      );
@@ -1989,7 +2032,7 @@ index 62b1450287..3deb8f7215 100644
  UINT
  WINAPI
  GetPrivateProfileIntW(
-@@ -4771,7 +4772,7 @@ GetPrivateProfileInt(
+@@ -4771,7 +4784,7 @@ GetPrivateProfileInt(
  }
  #endif  /* _M_CEE */
  
@@ -1998,7 +2041,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetPrivateProfileStringA(
-@@ -4782,7 +4783,7 @@ GetPrivateProfileStringA(
+@@ -4782,7 +4795,7 @@ GetPrivateProfileStringA(
      _In_     DWORD nSize,
      _In_opt_ LPCSTR lpFileName
      );
@@ -2007,7 +2050,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetPrivateProfileStringW(
-@@ -4827,7 +4828,7 @@ GetPrivateProfileString(
+@@ -4827,7 +4840,7 @@ GetPrivateProfileString(
  }
  #endif  /* _M_CEE */
  
@@ -2016,7 +2059,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WritePrivateProfileStringA(
-@@ -4836,7 +4837,7 @@ WritePrivateProfileStringA(
+@@ -4836,7 +4849,7 @@ WritePrivateProfileStringA(
      _In_opt_ LPCSTR lpString,
      _In_opt_ LPCSTR lpFileName
      );
@@ -2025,7 +2068,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WritePrivateProfileStringW(
-@@ -4851,7 +4852,7 @@ WritePrivateProfileStringW(
+@@ -4851,7 +4864,7 @@ WritePrivateProfileStringW(
  #define WritePrivateProfileString  WritePrivateProfileStringA
  #endif // !UNICODE
  
@@ -2034,7 +2077,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetPrivateProfileSectionA(
-@@ -4860,7 +4861,7 @@ GetPrivateProfileSectionA(
+@@ -4860,7 +4873,7 @@ GetPrivateProfileSectionA(
      _In_     DWORD nSize,
      _In_opt_ LPCSTR lpFileName
      );
@@ -2043,7 +2086,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetPrivateProfileSectionW(
-@@ -4899,7 +4900,7 @@ GetPrivateProfileSection(
+@@ -4899,7 +4912,7 @@ GetPrivateProfileSection(
  }
  #endif  /* _M_CEE */
  
@@ -2052,7 +2095,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WritePrivateProfileSectionA(
-@@ -4907,7 +4908,7 @@ WritePrivateProfileSectionA(
+@@ -4907,7 +4920,7 @@ WritePrivateProfileSectionA(
      _In_opt_ LPCSTR lpString,
      _In_opt_ LPCSTR lpFileName
      );
@@ -2061,7 +2104,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WritePrivateProfileSectionW(
-@@ -4927,7 +4928,7 @@ WritePrivateProfileSectionW(
+@@ -4927,7 +4940,7 @@ WritePrivateProfileSectionW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2070,7 +2113,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetPrivateProfileSectionNamesA(
-@@ -4935,7 +4936,7 @@ GetPrivateProfileSectionNamesA(
+@@ -4935,7 +4948,7 @@ GetPrivateProfileSectionNamesA(
      _In_     DWORD nSize,
      _In_opt_ LPCSTR lpFileName
      );
@@ -2079,7 +2122,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetPrivateProfileSectionNamesW(
-@@ -4971,7 +4972,7 @@ GetPrivateProfileSectionNames(
+@@ -4971,7 +4984,7 @@ GetPrivateProfileSectionNames(
  }
  #endif  /* _M_CEE */
  
@@ -2088,7 +2131,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetPrivateProfileStructA(
-@@ -4981,7 +4982,7 @@ GetPrivateProfileStructA(
+@@ -4981,7 +4994,7 @@ GetPrivateProfileStructA(
      _In_     UINT     uSizeStruct,
      _In_opt_ LPCSTR szFile
      );
@@ -2097,7 +2140,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetPrivateProfileStructW(
-@@ -5023,7 +5024,7 @@ GetPrivateProfileStruct(
+@@ -5023,7 +5036,7 @@ GetPrivateProfileStruct(
  }
  #endif  /* _M_CEE */
  
@@ -2106,7 +2149,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WritePrivateProfileStructA(
-@@ -5033,7 +5034,7 @@ WritePrivateProfileStructA(
+@@ -5033,7 +5046,7 @@ WritePrivateProfileStructA(
      _In_     UINT     uSizeStruct,
      _In_opt_ LPCSTR szFile
      );
@@ -2115,7 +2158,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WritePrivateProfileStructW(
-@@ -5153,13 +5154,13 @@ GetCurrentDirectory(
+@@ -5153,13 +5166,13 @@ GetCurrentDirectory(
  
  #if _WIN32_WINNT >= 0x0502
  
@@ -2131,7 +2174,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetDllDirectoryW(
-@@ -5173,7 +5174,7 @@ SetDllDirectoryW(
+@@ -5173,7 +5186,7 @@ SetDllDirectoryW(
  #endif // _WIN32_WINNT >= 0x0502
  
  #if _WIN32_WINNT >= 0x0502
@@ -2140,7 +2183,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
-@@ -5181,7 +5182,7 @@ GetDllDirectoryA(
+@@ -5181,7 +5194,7 @@ GetDllDirectoryA(
      _In_ DWORD nBufferLength,
      _Out_writes_to_opt_(nBufferLength, return + 1) LPSTR lpBuffer
      );
@@ -2149,7 +2192,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
-@@ -5208,7 +5209,7 @@ GetDllDirectoryW(
+@@ -5208,7 +5221,7 @@ GetDllDirectoryW(
  #define BASE_SEARCH_PATH_PERMANENT 0x8000
  #define BASE_SEARCH_PATH_INVALID_FLAGS ~0x18001
  
@@ -2158,7 +2201,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetSearchPathMode (
-@@ -5247,7 +5248,7 @@ CreateDirectory(
+@@ -5247,7 +5260,7 @@ CreateDirectory(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -2167,7 +2210,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateDirectoryExA(
-@@ -5255,7 +5256,7 @@ CreateDirectoryExA(
+@@ -5255,7 +5268,7 @@ CreateDirectoryExA(
      _In_     LPCSTR lpNewDirectory,
      _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
@@ -2176,7 +2219,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateDirectoryExW(
-@@ -5277,7 +5278,7 @@ CreateDirectoryExW(
+@@ -5277,7 +5290,7 @@ CreateDirectoryExW(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2185,7 +2228,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateDirectoryTransactedA(
-@@ -5286,7 +5287,7 @@ CreateDirectoryTransactedA(
+@@ -5286,7 +5299,7 @@ CreateDirectoryTransactedA(
      _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
      _In_     HANDLE hTransaction
      );
@@ -2194,7 +2237,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateDirectoryTransactedW(
-@@ -5301,14 +5302,14 @@ CreateDirectoryTransactedW(
+@@ -5301,14 +5314,14 @@ CreateDirectoryTransactedW(
  #define CreateDirectoryTransacted  CreateDirectoryTransactedA
  #endif // !UNICODE
  
@@ -2211,7 +2254,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  RemoveDirectoryTransactedW(
-@@ -5321,7 +5322,7 @@ RemoveDirectoryTransactedW(
+@@ -5321,7 +5334,7 @@ RemoveDirectoryTransactedW(
  #define RemoveDirectoryTransacted  RemoveDirectoryTransactedA
  #endif // !UNICODE
  
@@ -2220,7 +2263,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
-@@ -5332,7 +5333,7 @@ GetFullPathNameTransactedA(
+@@ -5332,7 +5345,7 @@ GetFullPathNameTransactedA(
      _Outptr_opt_ LPSTR *lpFilePart,
      _In_            HANDLE hTransaction
      );
@@ -2229,7 +2272,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0 && return < nBufferLength)
  DWORD
  WINAPI
-@@ -5363,11 +5364,11 @@ GetFullPathNameTransactedW(
+@@ -5363,11 +5376,11 @@ GetFullPathNameTransactedW(
  #define DDD_NO_BROADCAST_SYSTEM     0x00000008
  #define DDD_LUID_BROADCAST_DRIVE    0x00000010
  
@@ -2243,7 +2286,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     LPCSTR lpDeviceName,
      _In_opt_ LPCSTR lpTargetPath
      );
-@@ -5375,7 +5376,7 @@ DefineDosDeviceA(
+@@ -5375,7 +5388,7 @@ DefineDosDeviceA(
  #define DefineDosDevice  DefineDosDeviceA
  #endif
  
@@ -2252,7 +2295,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  QueryDosDeviceA(
-@@ -5397,34 +5398,34 @@ QueryDosDeviceA(
+@@ -5397,35 +5410,35 @@ QueryDosDeviceA(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2273,8 +2316,9 @@ index 62b1450287..3deb8f7215 100644
      _In_opt_   HANDLE hTemplateFile,
      _In_       HANDLE hTransaction,
 -    _In_opt_   PUSHORT pusMiniVersion,
+-    _Reserved_ PVOID  lpExtendedParameter
 +    _Win32_AssociatedEnum_(TXFS_MINIVERSION) _In_opt_   PUSHORT pusMiniVersion,
-     _Reserved_ PVOID  lpExtendedParameter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  lpExtendedParameter
      );
 -WINBASEAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_RAIIFree_(CloseHandle, -1, 0) WINBASEAPI
@@ -2293,11 +2337,13 @@ index 62b1450287..3deb8f7215 100644
      _In_opt_   HANDLE hTemplateFile,
      _In_       HANDLE hTransaction,
 -    _In_opt_   PUSHORT pusMiniVersion,
+-    _Reserved_ PVOID  lpExtendedParameter
 +    _Win32_AssociatedEnum_(TXFS_MINIVERSION) _In_opt_   PUSHORT pusMiniVersion,
-     _Reserved_ PVOID  lpExtendedParameter
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID  lpExtendedParameter
      );
  #ifdef UNICODE
-@@ -5443,14 +5444,14 @@ CreateFileTransactedW(
+ #define CreateFileTransacted  CreateFileTransactedW
+@@ -5443,14 +5456,14 @@ CreateFileTransactedW(
  
  #if _WIN32_WINNT >= 0x0502
  
@@ -2315,7 +2361,7 @@ index 62b1450287..3deb8f7215 100644
      );
  
  #endif // _WIN32_WINNT >= 0x0502
-@@ -5464,7 +5465,7 @@ ReOpenFile(
+@@ -5464,7 +5477,7 @@ ReOpenFile(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2324,7 +2370,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFileAttributesTransactedA(
-@@ -5472,7 +5473,7 @@ SetFileAttributesTransactedA(
+@@ -5472,7 +5485,7 @@ SetFileAttributesTransactedA(
      _In_     DWORD dwFileAttributes,
      _In_     HANDLE hTransaction
      );
@@ -2333,7 +2379,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFileAttributesTransactedW(
-@@ -5486,7 +5487,7 @@ SetFileAttributesTransactedW(
+@@ -5486,7 +5499,7 @@ SetFileAttributesTransactedW(
  #define SetFileAttributesTransacted  SetFileAttributesTransactedA
  #endif // !UNICODE
  
@@ -2342,7 +2388,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetFileAttributesTransactedA(
-@@ -5495,7 +5496,7 @@ GetFileAttributesTransactedA(
+@@ -5495,7 +5508,7 @@ GetFileAttributesTransactedA(
      _Out_writes_bytes_(sizeof(WIN32_FILE_ATTRIBUTE_DATA)) LPVOID lpFileInformation,
      _In_     HANDLE hTransaction
      );
@@ -2351,7 +2397,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetFileAttributesTransactedW(
-@@ -5510,7 +5511,7 @@ GetFileAttributesTransactedW(
+@@ -5510,7 +5523,7 @@ GetFileAttributesTransactedW(
  #define GetFileAttributesTransacted  GetFileAttributesTransactedA
  #endif // !UNICODE
  
@@ -2360,7 +2406,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetCompressedFileSizeTransactedA(
-@@ -5518,7 +5519,7 @@ GetCompressedFileSizeTransactedA(
+@@ -5518,7 +5531,7 @@ GetCompressedFileSizeTransactedA(
      _Out_opt_ LPDWORD  lpFileSizeHigh,
      _In_      HANDLE hTransaction
      );
@@ -2369,7 +2415,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetCompressedFileSizeTransactedW(
-@@ -5532,14 +5533,14 @@ GetCompressedFileSizeTransactedW(
+@@ -5532,14 +5545,14 @@ GetCompressedFileSizeTransactedW(
  #define GetCompressedFileSizeTransacted  GetCompressedFileSizeTransactedA
  #endif // !UNICODE
  
@@ -2386,7 +2432,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  DeleteFileTransactedW(
-@@ -5586,7 +5587,7 @@ DeleteFile(
+@@ -5586,7 +5599,7 @@ DeleteFile(
  
  #if _WIN32_WINNT >= 0x0501
  
@@ -2395,7 +2441,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CheckNameLegalDOS8Dot3A(
-@@ -5596,7 +5597,7 @@ CheckNameLegalDOS8Dot3A(
+@@ -5596,7 +5609,7 @@ CheckNameLegalDOS8Dot3A(
      _Out_opt_ PBOOL pbNameContainsSpaces OPTIONAL,
      _Out_     PBOOL pbNameLegal
      );
@@ -2404,7 +2450,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CheckNameLegalDOS8Dot3W(
-@@ -5624,7 +5625,7 @@ CheckNameLegalDOS8Dot3W(
+@@ -5624,7 +5637,7 @@ CheckNameLegalDOS8Dot3W(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2413,7 +2459,12 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstFileTransactedA(
-@@ -5636,7 +5637,7 @@ FindFirstFileTransactedA(
+@@ -5632,11 +5645,11 @@ FindFirstFileTransactedA(
+     _In_       FINDEX_INFO_LEVELS fInfoLevelId,
+     _Out_writes_bytes_(sizeof(WIN32_FIND_DATAA)) LPVOID lpFindFileData,
+     _In_       FINDEX_SEARCH_OPS fSearchOp,
+-    _Reserved_ LPVOID lpSearchFilter,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpSearchFilter,
      _In_       DWORD dwAdditionalFlags,
      _In_       HANDLE hTransaction
      );
@@ -2422,7 +2473,16 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstFileTransactedW(
-@@ -5665,7 +5666,7 @@ FindFirstFileTransactedW(
+@@ -5644,7 +5657,7 @@ FindFirstFileTransactedW(
+     _In_       FINDEX_INFO_LEVELS fInfoLevelId,
+     _Out_writes_bytes_(sizeof(WIN32_FIND_DATAW)) LPVOID lpFindFileData,
+     _In_       FINDEX_SEARCH_OPS fSearchOp,
+-    _Reserved_ LPVOID lpSearchFilter,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpSearchFilter,
+     _In_       DWORD dwAdditionalFlags,
+     _In_       HANDLE hTransaction
+     );
+@@ -5665,7 +5678,7 @@ FindFirstFileTransactedW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  
@@ -2431,7 +2491,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CopyFileA(
-@@ -5673,7 +5674,7 @@ CopyFileA(
+@@ -5673,7 +5686,7 @@ CopyFileA(
      _In_ LPCSTR lpNewFileName,
      _In_ BOOL bFailIfExists
      );
@@ -2440,7 +2500,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CopyFileW(
-@@ -5717,7 +5718,7 @@ CopyFile(
+@@ -5717,7 +5730,7 @@ CopyFile(
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -2449,7 +2509,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  (WINAPI *LPPROGRESS_ROUTINE)(
      _In_     LARGE_INTEGER TotalFileSize,
-@@ -5725,13 +5726,13 @@ DWORD
+@@ -5725,13 +5738,13 @@ DWORD
      _In_     LARGE_INTEGER StreamSize,
      _In_     LARGE_INTEGER StreamBytesTransferred,
      _In_     DWORD dwStreamNumber,
@@ -2465,7 +2525,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CopyFileExA(
-@@ -5741,9 +5742,9 @@ CopyFileExA(
+@@ -5741,9 +5754,9 @@ CopyFileExA(
      _In_opt_    LPVOID lpData,
      _When_(pbCancel != NULL, _Pre_satisfies_(*pbCancel == FALSE))
      _Inout_opt_ LPBOOL pbCancel,
@@ -2477,7 +2537,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CopyFileExW(
-@@ -5753,7 +5754,7 @@ CopyFileExW(
+@@ -5753,7 +5766,7 @@ CopyFileExW(
      _In_opt_    LPVOID lpData,
      _When_(pbCancel != NULL, _Pre_satisfies_(*pbCancel == FALSE))
      _Inout_opt_ LPBOOL pbCancel,
@@ -2486,7 +2546,7 @@ index 62b1450287..3deb8f7215 100644
      );
  #ifdef UNICODE
  #define CopyFileEx  CopyFileExW
-@@ -5769,7 +5770,7 @@ CopyFileExW(
+@@ -5769,7 +5782,7 @@ CopyFileExW(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2495,7 +2555,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CopyFileTransactedA(
-@@ -5781,7 +5782,7 @@ CopyFileTransactedA(
+@@ -5781,7 +5794,7 @@ CopyFileTransactedA(
      _In_     DWORD dwCopyFlags,
      _In_     HANDLE hTransaction
      );
@@ -2504,7 +2564,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CopyFileTransactedW(
-@@ -5902,7 +5903,7 @@ typedef struct COPYFILE2_MESSAGE {
+@@ -5902,7 +5915,7 @@ typedef struct COPYFILE2_MESSAGE {
          } PollContinue;
  
          struct {
@@ -2513,7 +2573,7 @@ index 62b1450287..3deb8f7215 100644
              DWORD                   dwStreamNumber;
              HRESULT                 hrFailure;
              DWORD                   dwReserved;
-@@ -5925,7 +5926,7 @@ COPYFILE2_MESSAGE_ACTION (CALLBACK *PCOPYFILE2_PROGRESS_ROUTINE)(
+@@ -5925,7 +5938,7 @@ COPYFILE2_MESSAGE_ACTION (CALLBACK *PCOPYFILE2_PROGRESS_ROUTINE)(
  
  typedef struct COPYFILE2_EXTENDED_PARAMETERS {
    DWORD                         dwSize;
@@ -2522,7 +2582,7 @@ index 62b1450287..3deb8f7215 100644
    BOOL                          *pfCancel;
    PCOPYFILE2_PROGRESS_ROUTINE   pProgressRoutine;
    PVOID                         pvCallbackContext;
-@@ -5970,14 +5971,14 @@ typedef struct _COPYFILE2_CREATE_OPLOCK_KEYS {
+@@ -5970,14 +5983,14 @@ typedef struct _COPYFILE2_CREATE_OPLOCK_KEYS {
  typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
  
    DWORD                         dwSize;
@@ -2539,7 +2599,7 @@ index 62b1450287..3deb8f7215 100644
  
    // size of the i/o for each {read, write} cycle, in bytes
    // (may be reduced, if insufficient memory is available)
-@@ -6054,7 +6055,7 @@ typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
+@@ -6054,7 +6067,7 @@ typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
  
  #endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
  
@@ -2548,7 +2608,7 @@ index 62b1450287..3deb8f7215 100644
  HRESULT
  WINAPI
  CopyFile2(
-@@ -6073,14 +6074,14 @@ CopyFile2(
+@@ -6073,14 +6086,14 @@ CopyFile2(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -2565,7 +2625,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  MoveFileW(
-@@ -6119,21 +6120,21 @@ MoveFile(
+@@ -6119,21 +6132,21 @@ MoveFile(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -2591,7 +2651,7 @@ index 62b1450287..3deb8f7215 100644
      );
  #ifdef UNICODE
  #define MoveFileEx  MoveFileExW
-@@ -6148,7 +6149,7 @@ MoveFileExW(
+@@ -6148,7 +6161,7 @@ MoveFileExW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  #if (_WIN32_WINNT >= 0x0500)
@@ -2600,7 +2660,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  MoveFileWithProgressA(
-@@ -6156,9 +6157,9 @@ MoveFileWithProgressA(
+@@ -6156,9 +6169,9 @@ MoveFileWithProgressA(
      _In_opt_ LPCSTR lpNewFileName,
      _In_opt_ LPPROGRESS_ROUTINE lpProgressRoutine,
      _In_opt_ LPVOID lpData,
@@ -2612,7 +2672,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  MoveFileWithProgressW(
-@@ -6166,7 +6167,7 @@ MoveFileWithProgressW(
+@@ -6166,7 +6179,7 @@ MoveFileWithProgressW(
      _In_opt_ LPCWSTR lpNewFileName,
      _In_opt_ LPPROGRESS_ROUTINE lpProgressRoutine,
      _In_opt_ LPVOID lpData,
@@ -2621,7 +2681,7 @@ index 62b1450287..3deb8f7215 100644
      );
  #ifdef UNICODE
  #define MoveFileWithProgress  MoveFileWithProgressW
-@@ -6182,7 +6183,7 @@ MoveFileWithProgressW(
+@@ -6182,7 +6195,7 @@ MoveFileWithProgressW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if (_WIN32_WINNT >= 0x0600)
@@ -2630,7 +2690,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  MoveFileTransactedA(
-@@ -6190,10 +6191,10 @@ MoveFileTransactedA(
+@@ -6190,10 +6203,10 @@ MoveFileTransactedA(
      _In_opt_ LPCSTR lpNewFileName,
      _In_opt_ LPPROGRESS_ROUTINE lpProgressRoutine,
      _In_opt_ LPVOID lpData,
@@ -2643,7 +2703,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  MoveFileTransactedW(
-@@ -6201,7 +6202,7 @@ MoveFileTransactedW(
+@@ -6201,7 +6214,7 @@ MoveFileTransactedW(
      _In_opt_ LPCWSTR lpNewFileName,
      _In_opt_ LPPROGRESS_ROUTINE lpProgressRoutine,
      _In_opt_ LPVOID lpData,
@@ -2652,7 +2712,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     HANDLE hTransaction
      );
  #ifdef UNICODE
-@@ -6241,25 +6242,25 @@ MoveFileTransactedW(
+@@ -6241,27 +6254,27 @@ MoveFileTransactedW(
  
  #if (_WIN32_WINNT >= 0x0500)
  
@@ -2665,9 +2725,11 @@ index 62b1450287..3deb8f7215 100644
      _In_       LPCSTR lpReplacementFileName,
      _In_opt_   LPCSTR lpBackupFileName,
 -    _In_       DWORD    dwReplaceFlags,
+-    _Reserved_ LPVOID   lpExclude,
+-    _Reserved_ LPVOID  lpReserved
 +    _Win32_AssociatedEnum_(REPLACE_FILE_FLAGS) _In_       DWORD    dwReplaceFlags,
-     _Reserved_ LPVOID   lpExclude,
-     _Reserved_ LPVOID  lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID   lpExclude,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID  lpReserved
      );
 -WINBASEAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
@@ -2678,11 +2740,15 @@ index 62b1450287..3deb8f7215 100644
      _In_       LPCWSTR lpReplacementFileName,
      _In_opt_   LPCWSTR lpBackupFileName,
 -    _In_       DWORD    dwReplaceFlags,
+-    _Reserved_ LPVOID   lpExclude,
+-    _Reserved_ LPVOID  lpReserved
 +    _Win32_AssociatedEnum_(REPLACE_FILE_FLAGS) _In_       DWORD    dwReplaceFlags,
-     _Reserved_ LPVOID   lpExclude,
-     _Reserved_ LPVOID  lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID   lpExclude,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID  lpReserved
      );
-@@ -6275,7 +6276,7 @@ ReplaceFileW(
+ #ifdef UNICODE
+ #define ReplaceFile  ReplaceFileW
+@@ -6275,21 +6288,21 @@ ReplaceFileW(
  // API call to create hard links.
  //
  
@@ -2691,16 +2757,24 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateHardLinkA(
-@@ -6283,7 +6284,7 @@ CreateHardLinkA(
+     _In_       LPCSTR lpFileName,
      _In_       LPCSTR lpExistingFileName,
-     _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
+-    _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
 -WINBASEAPI
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINBASEAPI
  BOOL
  WINAPI
  CreateHardLinkW(
-@@ -6310,7 +6311,7 @@ CreateHardLinkW(
+     _In_       LPCWSTR lpFileName,
+     _In_       LPCWSTR lpExistingFileName,
+-    _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
+     );
+ #ifdef UNICODE
+ #define CreateHardLink  CreateHardLinkW
+@@ -6310,22 +6323,22 @@ CreateHardLinkW(
  // API call to create hard links.
  //
  
@@ -2709,8 +2783,10 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateHardLinkTransactedA(
-@@ -6319,7 +6320,7 @@ CreateHardLinkTransactedA(
-     _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+     _In_       LPCSTR lpFileName,
+     _In_       LPCSTR lpExistingFileName,
+-    _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
      _In_       HANDLE hTransaction
      );
 -WINBASEAPI
@@ -2718,7 +2794,14 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CreateHardLinkTransactedW(
-@@ -6338,7 +6339,7 @@ CreateHardLinkTransactedW(
+     _In_       LPCWSTR lpFileName,
+     _In_       LPCWSTR lpExistingFileName,
+-    _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+     _In_       HANDLE hTransaction
+     );
+ #ifdef UNICODE
+@@ -6338,18 +6351,18 @@ CreateHardLinkTransactedW(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2727,7 +2810,11 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstStreamTransactedW (
-@@ -6349,7 +6350,7 @@ FindFirstStreamTransactedW (
+     _In_       LPCWSTR lpFileName,
+     _In_       STREAM_INFO_LEVELS InfoLevel,
+     _Out_writes_bytes_(sizeof(WIN32_FIND_STREAM_DATA)) LPVOID lpFindStreamData,
+-    _Reserved_ DWORD dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwFlags,
      _In_       HANDLE hTransaction
      );
  
@@ -2736,7 +2823,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstFileNameTransactedW (
-@@ -6368,13 +6369,13 @@ FindFirstFileNameTransactedW (
+@@ -6368,13 +6381,13 @@ FindFirstFileNameTransactedW (
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -2753,7 +2840,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     DWORD nMaxInstances,
      _In_     DWORD nOutBufferSize,
      _In_     DWORD nInBufferSize,
-@@ -6391,12 +6392,12 @@ CreateNamedPipeA(
+@@ -6391,12 +6404,12 @@ CreateNamedPipeA(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -2768,7 +2855,7 @@ index 62b1450287..3deb8f7215 100644
      _Out_opt_ LPDWORD lpCurInstances,
      _Out_opt_ LPDWORD lpMaxCollectionCount,
      _Out_opt_ LPDWORD lpCollectDataTimeout,
-@@ -6407,7 +6408,7 @@ GetNamedPipeHandleStateA(
+@@ -6407,7 +6420,7 @@ GetNamedPipeHandleStateA(
  #define GetNamedPipeHandleState  GetNamedPipeHandleStateA
  #endif
  
@@ -2777,7 +2864,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CallNamedPipeA(
-@@ -6430,7 +6431,7 @@ CallNamedPipeA(
+@@ -6430,7 +6443,7 @@ CallNamedPipeA(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -2786,7 +2873,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  WaitNamedPipeA(
-@@ -6456,7 +6457,7 @@ WaitNamedPipeA(
+@@ -6456,7 +6469,7 @@ WaitNamedPipeA(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -2795,7 +2882,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNamedPipeClientComputerNameA(
-@@ -6475,7 +6476,7 @@ GetNamedPipeClientComputerNameA(
+@@ -6475,7 +6488,7 @@ GetNamedPipeClientComputerNameA(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2804,7 +2891,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNamedPipeClientProcessId(
-@@ -6483,7 +6484,7 @@ GetNamedPipeClientProcessId(
+@@ -6483,7 +6496,7 @@ GetNamedPipeClientProcessId(
      _Out_ PULONG ClientProcessId
      );
  
@@ -2813,7 +2900,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNamedPipeClientSessionId(
-@@ -6491,7 +6492,7 @@ GetNamedPipeClientSessionId(
+@@ -6491,7 +6504,7 @@ GetNamedPipeClientSessionId(
      _Out_ PULONG ClientSessionId
      );
  
@@ -2822,7 +2909,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNamedPipeServerProcessId(
-@@ -6499,7 +6500,7 @@ GetNamedPipeServerProcessId(
+@@ -6499,7 +6512,7 @@ GetNamedPipeServerProcessId(
      _Out_ PULONG ServerProcessId
      );
  
@@ -2831,7 +2918,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNamedPipeServerSessionId(
-@@ -6515,14 +6516,14 @@ GetNamedPipeServerSessionId(
+@@ -6515,14 +6528,14 @@ GetNamedPipeServerSessionId(
  #pragma region Application Family or Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -2848,7 +2935,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetVolumeLabelW(
-@@ -6544,7 +6545,7 @@ SetVolumeLabelW(
+@@ -6544,7 +6557,7 @@ SetVolumeLabelW(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -2857,7 +2944,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetFileBandwidthReservation(
-@@ -6556,7 +6557,7 @@ SetFileBandwidthReservation(
+@@ -6556,7 +6569,7 @@ SetFileBandwidthReservation(
      _Out_ LPDWORD lpNumOutstandingRequests
      );
  
@@ -2866,7 +2953,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetFileBandwidthReservation(
-@@ -6574,7 +6575,7 @@ GetFileBandwidthReservation(
+@@ -6574,7 +6587,7 @@ GetFileBandwidthReservation(
  // Legacy Event logging APIs
  //
  
@@ -2875,7 +2962,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6582,7 +6583,7 @@ ClearEventLogA (
+@@ -6582,7 +6595,7 @@ ClearEventLogA (
      _In_     HANDLE hEventLog,
      _In_opt_ LPCSTR lpBackupFileName
      );
@@ -2884,7 +2971,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6596,7 +6597,7 @@ ClearEventLogW (
+@@ -6596,7 +6609,7 @@ ClearEventLogW (
  #define ClearEventLog  ClearEventLogA
  #endif // !UNICODE
  
@@ -2893,7 +2980,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6604,7 +6605,7 @@ BackupEventLogA (
+@@ -6604,7 +6617,7 @@ BackupEventLogA (
      _In_ HANDLE hEventLog,
      _In_ LPCSTR lpBackupFileName
      );
@@ -2902,7 +2989,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6618,7 +6619,7 @@ BackupEventLogW (
+@@ -6618,7 +6631,7 @@ BackupEventLogW (
  #define BackupEventLog  BackupEventLogA
  #endif // !UNICODE
  
@@ -2911,7 +2998,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6632,7 +6633,7 @@ CloseEventLog (
+@@ -6632,7 +6645,7 @@ CloseEventLog (
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -2920,7 +3007,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6646,7 +6647,7 @@ DeregisterEventSource (
+@@ -6646,7 +6659,7 @@ DeregisterEventSource (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2929,7 +3016,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6655,7 +6656,7 @@ NotifyChangeEventLog(
+@@ -6655,7 +6668,7 @@ NotifyChangeEventLog(
      _In_ HANDLE  hEvent
      );
  
@@ -2938,7 +3025,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6664,7 +6665,7 @@ GetNumberOfEventLogRecords (
+@@ -6664,7 +6677,7 @@ GetNumberOfEventLogRecords (
      _Out_ PDWORD NumberOfRecords
      );
  
@@ -2947,7 +3034,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6673,7 +6674,7 @@ GetOldestEventLogRecord (
+@@ -6673,7 +6686,7 @@ GetOldestEventLogRecord (
      _Out_ PDWORD OldestRecord
      );
  
@@ -2956,7 +3043,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  HANDLE
  WINAPI
-@@ -6681,7 +6682,7 @@ OpenEventLogA (
+@@ -6681,7 +6694,7 @@ OpenEventLogA (
      _In_opt_ LPCSTR lpUNCServerName,
      _In_     LPCSTR lpSourceName
      );
@@ -2965,7 +3052,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  HANDLE
  WINAPI
-@@ -6701,7 +6702,7 @@ OpenEventLogW (
+@@ -6701,7 +6714,7 @@ OpenEventLogW (
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -2974,7 +3061,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  HANDLE
  WINAPI
-@@ -6709,7 +6710,7 @@ RegisterEventSourceA (
+@@ -6709,7 +6722,7 @@ RegisterEventSourceA (
      _In_opt_ LPCSTR lpUNCServerName,
      _In_     LPCSTR lpSourceName
      );
@@ -2983,7 +3070,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  HANDLE
  WINAPI
-@@ -6729,7 +6730,7 @@ RegisterEventSourceW (
+@@ -6729,7 +6742,7 @@ RegisterEventSourceW (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2992,7 +3079,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  HANDLE
  WINAPI
-@@ -6737,7 +6738,7 @@ OpenBackupEventLogA (
+@@ -6737,7 +6750,7 @@ OpenBackupEventLogA (
      _In_opt_ LPCSTR lpUNCServerName,
      _In_     LPCSTR lpFileName
      );
@@ -3001,7 +3088,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  HANDLE
  WINAPI
-@@ -6751,26 +6752,26 @@ OpenBackupEventLogW (
+@@ -6751,26 +6764,26 @@ OpenBackupEventLogW (
  #define OpenBackupEventLog  OpenBackupEventLogA
  #endif // !UNICODE
  
@@ -3032,7 +3119,7 @@ index 62b1450287..3deb8f7215 100644
      _In_  DWORD      dwRecordOffset,
      _Out_writes_bytes_to_(nNumberOfBytesToRead, *pnBytesRead) LPVOID     lpBuffer,
      _In_  DWORD      nNumberOfBytesToRead,
-@@ -6789,13 +6790,13 @@ ReadEventLogW (
+@@ -6789,13 +6802,13 @@ ReadEventLogW (
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -3048,7 +3135,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     WORD       wCategory,
      _In_     DWORD      dwEventID,
      _In_opt_ PSID       lpUserSid,
-@@ -6804,13 +6805,13 @@ ReportEventA (
+@@ -6804,13 +6817,13 @@ ReportEventA (
      _In_reads_opt_(wNumStrings) LPCSTR *lpStrings,
      _In_reads_bytes_opt_(dwDataSize) LPVOID lpRawData
      );
@@ -3064,7 +3151,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     WORD       wCategory,
      _In_     DWORD      dwEventID,
      _In_opt_ PSID       lpUserSid,
-@@ -6839,7 +6840,7 @@ typedef struct _EVENTLOG_FULL_INFORMATION
+@@ -6839,7 +6852,7 @@ typedef struct _EVENTLOG_FULL_INFORMATION
  }
  EVENTLOG_FULL_INFORMATION, *LPEVENTLOG_FULL_INFORMATION;
  
@@ -3073,7 +3160,7 @@ index 62b1450287..3deb8f7215 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -6867,7 +6868,7 @@ typedef ULONG OPERATION_ID;
+@@ -6867,7 +6880,7 @@ typedef ULONG OPERATION_ID;
  typedef struct _OPERATION_START_PARAMETERS {
      ULONG Version;
      OPERATION_ID OperationId;
@@ -3082,7 +3169,7 @@ index 62b1450287..3deb8f7215 100644
  } OPERATION_START_PARAMETERS, *POPERATION_START_PARAMETERS;
  
  #define OPERATION_START_TRACE_CURRENT_THREAD    0x1
-@@ -6879,19 +6880,19 @@ typedef struct _OPERATION_START_PARAMETERS {
+@@ -6879,19 +6892,19 @@ typedef struct _OPERATION_START_PARAMETERS {
  typedef struct _OPERATION_END_PARAMETERS {
      ULONG Version;
      OPERATION_ID OperationId;
@@ -3105,7 +3192,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  OperationEnd (
-@@ -6906,7 +6907,7 @@ OperationEnd (
+@@ -6906,7 +6919,7 @@ OperationEnd (
  //
  
  
@@ -3114,7 +3201,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  AccessCheckAndAuditAlarmA (
-@@ -6928,7 +6929,7 @@ AccessCheckAndAuditAlarmA (
+@@ -6928,7 +6941,7 @@ AccessCheckAndAuditAlarmA (
  
  #if(_WIN32_WINNT >= 0x0500)
  
@@ -3123,7 +3210,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  AccessCheckByTypeAndAuditAlarmA (
-@@ -6953,7 +6954,7 @@ AccessCheckByTypeAndAuditAlarmA (
+@@ -6953,7 +6966,7 @@ AccessCheckByTypeAndAuditAlarmA (
  #define AccessCheckByTypeAndAuditAlarm  AccessCheckByTypeAndAuditAlarmA
  #endif
  
@@ -3132,7 +3219,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  AccessCheckByTypeResultListAndAuditAlarmA (
-@@ -6978,7 +6979,7 @@ AccessCheckByTypeResultListAndAuditAlarmA (
+@@ -6978,7 +6991,7 @@ AccessCheckByTypeResultListAndAuditAlarmA (
  #define AccessCheckByTypeResultListAndAuditAlarm  AccessCheckByTypeResultListAndAuditAlarmA
  #endif
  
@@ -3141,7 +3228,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  AccessCheckByTypeResultListAndAuditAlarmByHandleA (
-@@ -7005,7 +7006,7 @@ AccessCheckByTypeResultListAndAuditAlarmByHandleA (
+@@ -7005,7 +7018,7 @@ AccessCheckByTypeResultListAndAuditAlarmByHandleA (
  #endif
  #endif //(_WIN32_WINNT >= 0x0500)
  
@@ -3150,7 +3237,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ObjectOpenAuditAlarmA (
-@@ -7026,7 +7027,7 @@ ObjectOpenAuditAlarmA (
+@@ -7026,7 +7039,7 @@ ObjectOpenAuditAlarmA (
  #define ObjectOpenAuditAlarm  ObjectOpenAuditAlarmA
  #endif
  
@@ -3159,7 +3246,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ObjectPrivilegeAuditAlarmA (
-@@ -7041,7 +7042,7 @@ ObjectPrivilegeAuditAlarmA (
+@@ -7041,7 +7054,7 @@ ObjectPrivilegeAuditAlarmA (
  #define ObjectPrivilegeAuditAlarm  ObjectPrivilegeAuditAlarmA
  #endif
  
@@ -3168,7 +3255,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ObjectCloseAuditAlarmA (
-@@ -7053,7 +7054,7 @@ ObjectCloseAuditAlarmA (
+@@ -7053,7 +7066,7 @@ ObjectCloseAuditAlarmA (
  #define ObjectCloseAuditAlarm  ObjectCloseAuditAlarmA
  #endif
  
@@ -3177,7 +3264,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ObjectDeleteAuditAlarmA (
-@@ -7065,7 +7066,7 @@ ObjectDeleteAuditAlarmA (
+@@ -7065,7 +7078,7 @@ ObjectDeleteAuditAlarmA (
  #define ObjectDeleteAuditAlarm  ObjectDeleteAuditAlarmA
  #endif
  
@@ -3186,7 +3273,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  PrivilegedServiceAuditAlarmA (
-@@ -7080,17 +7081,17 @@ PrivilegedServiceAuditAlarmA (
+@@ -7080,17 +7093,17 @@ PrivilegedServiceAuditAlarmA (
  #endif
  
  #if(_WIN32_WINNT >= 0x0601)
@@ -3208,7 +3295,7 @@ index 62b1450287..3deb8f7215 100644
      _Out_ DWORD *ReturnLength
      );
  #endif /* _WIN32_WINNT >=  0x0601 */
-@@ -7101,19 +7102,19 @@ AddConditionalAce (
+@@ -7101,19 +7114,19 @@ AddConditionalAce (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -3231,7 +3318,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetFileSecurityA (
-@@ -7134,7 +7135,7 @@ GetFileSecurityA (
+@@ -7134,7 +7147,7 @@ GetFileSecurityA (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if(_WIN32_WINNT >= 0x0400)
@@ -3240,7 +3327,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ReadDirectoryChangesW(
-@@ -7142,14 +7143,14 @@ ReadDirectoryChangesW(
+@@ -7142,14 +7155,14 @@ ReadDirectoryChangesW(
      _Out_writes_bytes_to_(nBufferLength, *lpBytesReturned) LPVOID lpBuffer,
      _In_        DWORD nBufferLength,
      _In_        BOOL bWatchSubtree,
@@ -3257,7 +3344,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ReadDirectoryChangesExW(
-@@ -7157,7 +7158,7 @@ ReadDirectoryChangesExW(
+@@ -7157,7 +7170,7 @@ ReadDirectoryChangesExW(
      _Out_writes_bytes_to_(nBufferLength, *lpBytesReturned) LPVOID lpBuffer,
      _In_        DWORD nBufferLength,
      _In_        BOOL bWatchSubtree,
@@ -3266,7 +3353,7 @@ index 62b1450287..3deb8f7215 100644
      _Out_opt_   LPDWORD lpBytesReturned,
      _Inout_opt_ LPOVERLAPPED lpOverlapped,
      _In_opt_    LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine,
-@@ -7174,13 +7175,13 @@ ReadDirectoryChangesExW(
+@@ -7174,13 +7187,13 @@ ReadDirectoryChangesExW(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -3282,7 +3369,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     DWORD dwFileOffsetHigh,
      _In_     DWORD dwFileOffsetLow,
      _In_     SIZE_T dwNumberOfBytesToMap,
-@@ -7190,7 +7191,7 @@ MapViewOfFileExNuma(
+@@ -7190,7 +7203,7 @@ MapViewOfFileExNuma(
  
  #endif // _WIN32_WINNT >= 0x0600
  
@@ -3291,7 +3378,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  IsBadReadPtr(
-@@ -7198,7 +7199,7 @@ IsBadReadPtr(
+@@ -7198,7 +7211,7 @@ IsBadReadPtr(
      _In_     UINT_PTR ucb
      );
  
@@ -3300,7 +3387,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  IsBadWritePtr(
-@@ -7222,21 +7223,21 @@ IsBadHugeWritePtr(
+@@ -7222,21 +7235,21 @@ IsBadHugeWritePtr(
      _In_     UINT_PTR ucb
      );
  
@@ -3325,7 +3412,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  IsBadStringPtrW(
-@@ -7255,7 +7256,7 @@ IsBadStringPtrW(
+@@ -7255,7 +7268,7 @@ IsBadStringPtrW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -3334,7 +3421,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountSidA(
-@@ -7267,7 +7268,7 @@ LookupAccountSidA(
+@@ -7267,7 +7280,7 @@ LookupAccountSidA(
      _Inout_ LPDWORD cchReferencedDomainName,
      _Out_ PSID_NAME_USE peUse
      );
@@ -3343,7 +3430,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountSidW(
-@@ -7285,7 +7286,7 @@ LookupAccountSidW(
+@@ -7285,7 +7298,7 @@ LookupAccountSidW(
  #define LookupAccountSid  LookupAccountSidA
  #endif // !UNICODE
  
@@ -3352,7 +3439,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountNameA(
-@@ -7297,7 +7298,7 @@ LookupAccountNameA(
+@@ -7297,7 +7310,7 @@ LookupAccountNameA(
      _Inout_  LPDWORD cchReferencedDomainName,
      _Out_    PSID_NAME_USE peUse
      );
@@ -3361,7 +3448,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupAccountNameW(
-@@ -7409,7 +7410,7 @@ LookupAccountSidLocalW(
+@@ -7409,7 +7422,7 @@ LookupAccountSidLocalW(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -3370,7 +3457,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  LookupPrivilegeValueA(
-@@ -7417,7 +7418,7 @@ LookupPrivilegeValueA(
+@@ -7417,7 +7430,7 @@ LookupPrivilegeValueA(
      _In_     LPCSTR lpName,
      _Out_    PLUID   lpLuid
      );
@@ -3379,7 +3466,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  LookupPrivilegeValueW(
-@@ -7431,7 +7432,7 @@ LookupPrivilegeValueW(
+@@ -7431,7 +7444,7 @@ LookupPrivilegeValueW(
  #define LookupPrivilegeValue  LookupPrivilegeValueA
  #endif // !UNICODE
  
@@ -3388,7 +3475,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeNameA(
-@@ -7440,7 +7441,7 @@ LookupPrivilegeNameA(
+@@ -7440,7 +7453,7 @@ LookupPrivilegeNameA(
      _Out_writes_to_opt_(*cchName, *cchName + 1) LPSTR lpName,
      _Inout_  LPDWORD cchName
      );
@@ -3397,7 +3484,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeNameW(
-@@ -7455,7 +7456,7 @@ LookupPrivilegeNameW(
+@@ -7455,7 +7468,7 @@ LookupPrivilegeNameW(
  #define LookupPrivilegeName  LookupPrivilegeNameA
  #endif // !UNICODE
  
@@ -3406,7 +3493,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeDisplayNameA(
-@@ -7465,7 +7466,7 @@ LookupPrivilegeDisplayNameA(
+@@ -7465,7 +7478,7 @@ LookupPrivilegeDisplayNameA(
      _Inout_  LPDWORD cchDisplayName,
      _Out_    LPDWORD lpLanguageId
      );
@@ -3415,7 +3502,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE) BOOL
  WINAPI
  LookupPrivilegeDisplayNameW(
-@@ -7487,14 +7488,14 @@ LookupPrivilegeDisplayNameW(
+@@ -7487,14 +7500,14 @@ LookupPrivilegeDisplayNameW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3432,7 +3519,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BuildCommDCBW(
-@@ -7507,7 +7508,7 @@ BuildCommDCBW(
+@@ -7507,7 +7520,7 @@ BuildCommDCBW(
  #define BuildCommDCB  BuildCommDCBA
  #endif // !UNICODE
  
@@ -3441,7 +3528,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BuildCommDCBAndTimeoutsA(
-@@ -7515,7 +7516,7 @@ BuildCommDCBAndTimeoutsA(
+@@ -7515,7 +7528,7 @@ BuildCommDCBAndTimeoutsA(
      _Out_ LPDCB lpDCB,
      _Out_ LPCOMMTIMEOUTS lpCommTimeouts
      );
@@ -3450,7 +3537,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BuildCommDCBAndTimeoutsW(
-@@ -7529,7 +7530,7 @@ BuildCommDCBAndTimeoutsW(
+@@ -7529,7 +7542,7 @@ BuildCommDCBAndTimeoutsW(
  #define BuildCommDCBAndTimeouts  BuildCommDCBAndTimeoutsA
  #endif // !UNICODE
  
@@ -3459,7 +3546,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CommConfigDialogA(
-@@ -7537,7 +7538,7 @@ CommConfigDialogA(
+@@ -7537,7 +7550,7 @@ CommConfigDialogA(
      _In_opt_ HWND hWnd,
      _Inout_  LPCOMMCONFIG lpCC
      );
@@ -3468,7 +3555,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  CommConfigDialogW(
-@@ -7551,7 +7552,7 @@ CommConfigDialogW(
+@@ -7551,7 +7564,7 @@ CommConfigDialogW(
  #define CommConfigDialog  CommConfigDialogA
  #endif // !UNICODE
  
@@ -3477,7 +3564,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetDefaultCommConfigA(
-@@ -7559,7 +7560,7 @@ GetDefaultCommConfigA(
+@@ -7559,7 +7572,7 @@ GetDefaultCommConfigA(
      _Out_writes_bytes_to_(*lpdwSize, *lpdwSize) LPCOMMCONFIG lpCC,
      _Inout_ LPDWORD lpdwSize
      );
@@ -3486,7 +3573,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetDefaultCommConfigW(
-@@ -7573,7 +7574,7 @@ GetDefaultCommConfigW(
+@@ -7573,7 +7586,7 @@ GetDefaultCommConfigW(
  #define GetDefaultCommConfig  GetDefaultCommConfigA
  #endif // !UNICODE
  
@@ -3495,7 +3582,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetDefaultCommConfigA(
-@@ -7581,7 +7582,7 @@ SetDefaultCommConfigA(
+@@ -7581,7 +7594,7 @@ SetDefaultCommConfigA(
      _In_reads_bytes_(dwSize) LPCOMMCONFIG lpCC,
      _In_ DWORD dwSize
      );
@@ -3504,7 +3591,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetDefaultCommConfigW(
-@@ -7607,7 +7608,7 @@ SetDefaultCommConfigW(
+@@ -7607,7 +7620,7 @@ SetDefaultCommConfigW(
  #define MAX_COMPUTERNAME_LENGTH 31
  #endif
  
@@ -3513,7 +3600,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -7615,7 +7616,7 @@ GetComputerNameA (
+@@ -7615,7 +7628,7 @@ GetComputerNameA (
      _Out_writes_to_opt_(*nSize, *nSize + 1) LPSTR lpBuffer,
      _Inout_ LPDWORD nSize
      );
@@ -3522,7 +3609,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -7638,7 +7639,7 @@ GetComputerNameW (
+@@ -7638,7 +7651,7 @@ GetComputerNameW (
  #if (_WIN32_WINNT >= 0x0500)
  
  
@@ -3531,7 +3618,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -7647,7 +7648,7 @@ DnsHostnameToComputerNameA (
+@@ -7647,7 +7660,7 @@ DnsHostnameToComputerNameA (
      _Out_writes_to_opt_(*nSize, *nSize + 1) LPSTR ComputerName,
      _Inout_ LPDWORD nSize
      );
@@ -3540,7 +3627,7 @@ index 62b1450287..3deb8f7215 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -7664,14 +7665,14 @@ DnsHostnameToComputerNameW (
+@@ -7664,14 +7677,14 @@ DnsHostnameToComputerNameW (
  
  #endif // _WIN32_WINNT
  
@@ -3557,7 +3644,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetUserNameW (
-@@ -7712,27 +7713,27 @@ GetUserNameW (
+@@ -7712,27 +7725,27 @@ GetUserNameW (
  
  
  
@@ -3593,7 +3680,7 @@ index 62b1450287..3deb8f7215 100644
      );
  #ifdef UNICODE
  #define LogonUser  LogonUserW
-@@ -7740,31 +7741,31 @@ LogonUserW (
+@@ -7740,31 +7753,31 @@ LogonUserW (
  #define LogonUser  LogonUserA
  #endif // !UNICODE
  
@@ -3633,7 +3720,7 @@ index 62b1450287..3deb8f7215 100644
      _Outptr_opt_ PSID  *ppLogonSid,
      _Outptr_opt_result_bytebuffer_all_(*pdwProfileLength) PVOID *ppProfileBuffer,
      _Out_opt_       LPDWORD pdwProfileLength,
-@@ -7796,32 +7797,32 @@ LogonUserExW (
+@@ -7796,32 +7809,32 @@ LogonUserExW (
  #define LOGON_NETCREDENTIALS_ONLY       0x00000002
  #define LOGON_ZERO_PASSWORD_BUFFER      0x80000000
  
@@ -3672,7 +3759,7 @@ index 62b1450287..3deb8f7215 100644
      _In_opt_    LPVOID lpEnvironment,
      _In_opt_    LPCWSTR lpCurrentDirectory,
      _In_        LPSTARTUPINFOW lpStartupInfo,
-@@ -7848,19 +7849,19 @@ IsTokenUntrusted(
+@@ -7848,19 +7861,19 @@ IsTokenUntrusted(
  
  #if (_WIN32_WINNT >= 0x0500)
  
@@ -3696,7 +3783,7 @@ index 62b1450287..3deb8f7215 100644
  _Must_inspect_result_
  BOOL
  WINAPI
-@@ -7868,7 +7869,7 @@ UnregisterWait(
+@@ -7868,7 +7881,7 @@ UnregisterWait(
      _In_ HANDLE WaitHandle
      );
  
@@ -3705,7 +3792,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  BindIoCompletionCallback (
-@@ -7877,7 +7878,7 @@ BindIoCompletionCallback (
+@@ -7877,7 +7890,7 @@ BindIoCompletionCallback (
      _In_ ULONG Flags
      );
  
@@ -3714,7 +3801,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  SetTimerQueueTimer(
-@@ -8018,7 +8019,7 @@ SetThreadpoolCallbackPersistent(
+@@ -8018,7 +8031,7 @@ SetThreadpoolCallbackPersistent(
  //  Private Namespaces support
  //
  
@@ -3723,7 +3810,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -8034,7 +8035,7 @@ CreatePrivateNamespaceA(
+@@ -8034,7 +8047,7 @@ CreatePrivateNamespaceA(
  #define CreatePrivateNamespace CreatePrivateNamespaceW
  #endif
  
@@ -3732,7 +3819,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -8054,7 +8055,7 @@ OpenPrivateNamespaceA(
+@@ -8054,7 +8067,7 @@ OpenPrivateNamespaceA(
  //  Boundary descriptors support
  //
  
@@ -3741,7 +3828,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  APIENTRY
-@@ -8075,7 +8076,7 @@ CreateBoundaryDescriptorA(
+@@ -8075,7 +8088,7 @@ CreateBoundaryDescriptorA(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3750,7 +3837,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  AddIntegrityLabelToBoundaryDescriptor(
-@@ -8124,13 +8125,13 @@ typedef LPHW_PROFILE_INFOA LPHW_PROFILE_INFO;
+@@ -8124,13 +8137,13 @@ typedef LPHW_PROFILE_INFOA LPHW_PROFILE_INFO;
  #endif // UNICODE
  
  
@@ -3766,7 +3853,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetCurrentHwProfileW (
-@@ -8149,20 +8150,20 @@ GetCurrentHwProfileW (
+@@ -8149,20 +8162,20 @@ GetCurrentHwProfileW (
  #pragma region Desktop Family or Gaming Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -3791,7 +3878,7 @@ index 62b1450287..3deb8f7215 100644
      _In_    DWORDLONG dwlConditionMask
      );
  #ifdef UNICODE
-@@ -8196,7 +8197,7 @@ VerifyVersionInfoW(
+@@ -8196,7 +8209,7 @@ VerifyVersionInfoW(
  // Power Management APIs
  //
  
@@ -3800,7 +3887,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetSystemPowerState(
-@@ -8244,7 +8245,7 @@ typedef struct _SYSTEM_POWER_STATUS {
+@@ -8244,7 +8257,7 @@ typedef struct _SYSTEM_POWER_STATUS {
      DWORD BatteryFullLifeTime;
  }   SYSTEM_POWER_STATUS, *LPSYSTEM_POWER_STATUS;
  
@@ -3809,7 +3896,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetSystemPowerStatus(
-@@ -8264,7 +8265,7 @@ GetSystemPowerStatus(
+@@ -8264,7 +8277,7 @@ GetSystemPowerStatus(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3818,7 +3905,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  MapUserPhysicalPagesScatter(
-@@ -8279,7 +8280,7 @@ MapUserPhysicalPagesScatter(
+@@ -8279,7 +8292,7 @@ MapUserPhysicalPagesScatter(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3827,7 +3914,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -8294,7 +8295,7 @@ CreateJobObjectA(
+@@ -8294,7 +8307,7 @@ CreateJobObjectA(
  #define CreateJobObject  CreateJobObjectA
  #endif // !UNICODE
  
@@ -3836,7 +3923,7 @@ index 62b1450287..3deb8f7215 100644
  _Ret_maybenull_
  HANDLE
  WINAPI
-@@ -8330,7 +8331,7 @@ CreateJobSet (
+@@ -8330,7 +8343,7 @@ CreateJobSet (
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -3845,7 +3932,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstVolumeA(
-@@ -8341,7 +8342,7 @@ FindFirstVolumeA(
+@@ -8341,7 +8354,7 @@ FindFirstVolumeA(
  #define FindFirstVolume FindFirstVolumeA
  #endif
  
@@ -3854,7 +3941,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  FindNextVolumeA(
-@@ -8359,7 +8360,7 @@ FindNextVolumeA(
+@@ -8359,7 +8372,7 @@ FindNextVolumeA(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3863,7 +3950,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstVolumeMountPointA(
-@@ -8367,7 +8368,7 @@ FindFirstVolumeMountPointA(
+@@ -8367,7 +8380,7 @@ FindFirstVolumeMountPointA(
      _Out_writes_(cchBufferLength) LPSTR lpszVolumeMountPoint,
      _In_ DWORD cchBufferLength
      );
@@ -3872,7 +3959,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  FindFirstVolumeMountPointW(
-@@ -8381,7 +8382,7 @@ FindFirstVolumeMountPointW(
+@@ -8381,7 +8394,7 @@ FindFirstVolumeMountPointW(
  #define FindFirstVolumeMountPoint FindFirstVolumeMountPointA
  #endif // !UNICODE
  
@@ -3881,7 +3968,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  FindNextVolumeMountPointA(
-@@ -8389,7 +8390,7 @@ FindNextVolumeMountPointA(
+@@ -8389,7 +8402,7 @@ FindNextVolumeMountPointA(
      _Out_writes_(cchBufferLength) LPSTR lpszVolumeMountPoint,
      _In_ DWORD cchBufferLength
      );
@@ -3890,7 +3977,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  FindNextVolumeMountPointW(
-@@ -8403,21 +8404,21 @@ FindNextVolumeMountPointW(
+@@ -8403,21 +8416,21 @@ FindNextVolumeMountPointW(
  #define FindNextVolumeMountPoint FindNextVolumeMountPointA
  #endif // !UNICODE
  
@@ -3915,7 +4002,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  SetVolumeMountPointW(
-@@ -8436,7 +8437,7 @@ SetVolumeMountPointW(
+@@ -8436,7 +8449,7 @@ SetVolumeMountPointW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -3924,7 +4011,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  DeleteVolumeMountPointA(
-@@ -8456,7 +8457,7 @@ DeleteVolumeMountPointA(
+@@ -8456,7 +8469,7 @@ DeleteVolumeMountPointA(
  #define GetVolumeNameForVolumeMountPoint  GetVolumeNameForVolumeMountPointA
  #endif
  
@@ -3933,7 +4020,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetVolumeNameForVolumeMountPointA(
-@@ -8471,7 +8472,7 @@ GetVolumeNameForVolumeMountPointA(
+@@ -8471,7 +8484,7 @@ GetVolumeNameForVolumeMountPointA(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -3942,7 +4029,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetVolumePathNameA(
-@@ -8493,12 +8494,12 @@ GetVolumePathNameA(
+@@ -8493,12 +8506,12 @@ GetVolumePathNameA(
  
  #if(_WIN32_WINNT >= 0x0501)
  
@@ -3957,7 +4044,7 @@ index 62b1450287..3deb8f7215 100644
      _In_  DWORD cchBufferLength,
      _Out_ PDWORD lpcchReturnLength
      );
-@@ -8520,7 +8521,7 @@ GetVolumePathNamesForVolumeNameA(
+@@ -8520,7 +8533,7 @@ GetVolumePathNamesForVolumeNameA(
  #define ACTCTX_FLAG_SOURCE_IS_ASSEMBLYREF           (0x00000040)
  #define ACTCTX_FLAG_HMODULE_VALID                   (0x00000080)
  
@@ -3966,7 +4053,7 @@ index 62b1450287..3deb8f7215 100644
      ULONG       cbSize;
      DWORD       dwFlags;
      LPCSTR      lpSource;
-@@ -8531,7 +8532,7 @@ typedef struct tagACTCTXA {
+@@ -8531,7 +8544,7 @@ typedef struct tagACTCTXA {
      LPCSTR      lpApplicationName;
      HMODULE     hModule;
  } ACTCTXA, *PACTCTXA;
@@ -3975,7 +4062,7 @@ index 62b1450287..3deb8f7215 100644
      ULONG       cbSize;
      DWORD       dwFlags;
      LPCWSTR     lpSource;
-@@ -8560,13 +8561,13 @@ typedef PCACTCTXA PCACTCTX;
+@@ -8560,13 +8573,13 @@ typedef PCACTCTXA PCACTCTX;
  
  
  
@@ -3991,7 +4078,7 @@ index 62b1450287..3deb8f7215 100644
  HANDLE
  WINAPI
  CreateActCtxW(
-@@ -8578,7 +8579,7 @@ CreateActCtxW(
+@@ -8578,7 +8591,7 @@ CreateActCtxW(
  #define CreateActCtx  CreateActCtxA
  #endif // !UNICODE
  
@@ -4000,7 +4087,7 @@ index 62b1450287..3deb8f7215 100644
  VOID
  WINAPI
  AddRefActCtx(
-@@ -8586,14 +8587,14 @@ AddRefActCtx(
+@@ -8586,14 +8599,14 @@ AddRefActCtx(
      );
  
  
@@ -4017,7 +4104,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  ZombifyActCtx(
-@@ -8601,7 +8602,7 @@ ZombifyActCtx(
+@@ -8601,7 +8614,7 @@ ZombifyActCtx(
      );
  
  
@@ -4026,7 +4113,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8613,7 +8614,7 @@ ActivateActCtx(
+@@ -8613,7 +8626,7 @@ ActivateActCtx(
  
  #define DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION (0x00000001)
  
@@ -4035,7 +4122,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8622,14 +8623,14 @@ DeactivateActCtx(
+@@ -8622,14 +8635,14 @@ DeactivateActCtx(
      _In_ ULONG_PTR ulCookie
      );
  
@@ -4053,7 +4140,7 @@ index 62b1450287..3deb8f7215 100644
      ULONG cbSize;
      ULONG ulDataFormatVersion;
      PVOID lpData;
-@@ -8652,7 +8653,7 @@ typedef struct tagACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
+@@ -8652,7 +8665,7 @@ typedef struct tagACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
  } ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA, *PACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA;
  typedef const ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA *PCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA;
  
@@ -4062,7 +4149,7 @@ index 62b1450287..3deb8f7215 100644
      ULONG cbSize;
      ULONG ulDataFormatVersion;
      PVOID lpData;
-@@ -8675,7 +8676,7 @@ typedef const ACTCTX_SECTION_KEYED_DATA * PCACTCTX_SECTION_KEYED_DATA;
+@@ -8675,24 +8688,24 @@ typedef const ACTCTX_SECTION_KEYED_DATA * PCACTCTX_SECTION_KEYED_DATA;
  
  
  
@@ -4071,7 +4158,11 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8686,7 +8687,7 @@ FindActCtxSectionStringA(
+ FindActCtxSectionStringA(
+     _In_       DWORD dwFlags,
+-    _Reserved_ const GUID *lpExtensionGuid,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const GUID *lpExtensionGuid,
+     _In_       ULONG ulSectionId,
      _In_       LPCSTR lpStringToFind,
      _Out_      PACTCTX_SECTION_KEYED_DATA ReturnedData
      );
@@ -4080,7 +4171,14 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8703,7 +8704,7 @@ FindActCtxSectionStringW(
+ FindActCtxSectionStringW(
+     _In_       DWORD dwFlags,
+-    _Reserved_ const GUID *lpExtensionGuid,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const GUID *lpExtensionGuid,
+     _In_       ULONG ulSectionId,
+     _In_       LPCWSTR lpStringToFind,
+     _Out_      PACTCTX_SECTION_KEYED_DATA ReturnedData
+@@ -8703,12 +8716,12 @@ FindActCtxSectionStringW(
  #define FindActCtxSectionString  FindActCtxSectionStringA
  #endif // !UNICODE
  
@@ -4089,7 +4187,13 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  FindActCtxSectionGuid(
-@@ -8765,7 +8766,7 @@ typedef const struct _ACTIVATION_CONTEXT_BASIC_INFORMATION *PCACTIVATION_CONTEXT
+     _In_       DWORD dwFlags,
+-    _Reserved_ const GUID *lpExtensionGuid,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const GUID *lpExtensionGuid,
+     _In_       ULONG ulSectionId,
+     _In_opt_   const GUID *lpGuidToFind,
+     _Out_      PACTCTX_SECTION_KEYED_DATA ReturnedData
+@@ -8765,7 +8778,7 @@ typedef const struct _ACTIVATION_CONTEXT_BASIC_INFORMATION *PCACTIVATION_CONTEXT
  //
  // String are placed after the structs.
  //
@@ -4098,7 +4202,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8800,7 +8801,7 @@ typedef _Success_(return) BOOL (WINAPI * PQUERYACTCTXW_FUNC)(
+@@ -8800,7 +8813,7 @@ typedef _Success_(return) BOOL (WINAPI * PQUERYACTCTXW_FUNC)(
  
  #if _WIN32_WINNT >= 0x0501
  
@@ -4107,7 +4211,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  WTSGetActiveConsoleSessionId(
-@@ -8829,28 +8830,28 @@ WTSIsServerContainer(
+@@ -8829,28 +8842,28 @@ WTSIsServerContainer(
  
  #if _WIN32_WINNT >= 0x0601
  
@@ -4140,7 +4244,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  WINAPI
  GetMaximumProcessorCount(
-@@ -8863,7 +8864,7 @@ GetMaximumProcessorCount(
+@@ -8863,7 +8876,7 @@ GetMaximumProcessorCount(
  // NUMA Information routines.
  //
  
@@ -4149,7 +4253,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaProcessorNode(
-@@ -8873,7 +8874,7 @@ GetNumaProcessorNode(
+@@ -8873,7 +8886,7 @@ GetNumaProcessorNode(
  
  #if _WIN32_WINNT >= 0x0601
  
@@ -4158,7 +4262,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaNodeNumberFromHandle(
-@@ -8885,7 +8886,7 @@ GetNumaNodeNumberFromHandle(
+@@ -8885,7 +8898,7 @@ GetNumaNodeNumberFromHandle(
  
  #if _WIN32_WINNT >= 0x0601
  
@@ -4167,7 +4271,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaProcessorNodeEx(
-@@ -8895,7 +8896,7 @@ GetNumaProcessorNodeEx(
+@@ -8895,7 +8908,7 @@ GetNumaProcessorNodeEx(
  
  #endif // (_WIN32_WINNT >=0x0601)
  
@@ -4176,7 +4280,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaNodeProcessorMask(
-@@ -8903,7 +8904,7 @@ GetNumaNodeProcessorMask(
+@@ -8903,7 +8916,7 @@ GetNumaNodeProcessorMask(
      _Out_ PULONGLONG ProcessorMask
      );
  
@@ -4185,7 +4289,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaAvailableMemoryNode(
-@@ -8913,7 +8914,7 @@ GetNumaAvailableMemoryNode(
+@@ -8913,7 +8926,7 @@ GetNumaAvailableMemoryNode(
  
  #if _WIN32_WINNT >= 0x0601
  
@@ -4194,7 +4298,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaAvailableMemoryNodeEx(
-@@ -8925,7 +8926,7 @@ GetNumaAvailableMemoryNodeEx(
+@@ -8925,7 +8938,7 @@ GetNumaAvailableMemoryNodeEx(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4203,7 +4307,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetNumaProximityNode(
-@@ -8944,7 +8945,7 @@ GetNumaProximityNode(
+@@ -8944,7 +8957,7 @@ GetNumaProximityNode(
  //
  // Application restart and data recovery callback
  //
@@ -4212,7 +4316,7 @@ index 62b1450287..3deb8f7215 100644
  
  //
  // Max length of commandline in characters (including the NULL character that can be registered for restart)
-@@ -8982,7 +8983,7 @@ typedef DWORD (WINAPI *APPLICATION_RECOVERY_CALLBACK)(PVOID pvParameter);
+@@ -8982,7 +8995,7 @@ typedef DWORD (WINAPI *APPLICATION_RECOVERY_CALLBACK)(PVOID pvParameter);
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4221,7 +4325,7 @@ index 62b1450287..3deb8f7215 100644
  HRESULT
  WINAPI
  RegisterApplicationRecoveryCallback(
-@@ -8992,20 +8993,20 @@ RegisterApplicationRecoveryCallback(
+@@ -8992,20 +9005,20 @@ RegisterApplicationRecoveryCallback(
      _In_ DWORD dwFlags
      );
  
@@ -4246,7 +4350,7 @@ index 62b1450287..3deb8f7215 100644
  HRESULT
  WINAPI
  UnregisterApplicationRestart(void);
-@@ -9020,7 +9021,7 @@ UnregisterApplicationRestart(void);
+@@ -9020,7 +9033,7 @@ UnregisterApplicationRestart(void);
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4255,7 +4359,7 @@ index 62b1450287..3deb8f7215 100644
  HRESULT
  WINAPI
  GetApplicationRecoveryCallback(
-@@ -9031,7 +9032,7 @@ GetApplicationRecoveryCallback(
+@@ -9031,7 +9044,7 @@ GetApplicationRecoveryCallback(
      _Out_opt_ PDWORD pdwFlags
      );
  
@@ -4264,7 +4368,7 @@ index 62b1450287..3deb8f7215 100644
  HRESULT
  WINAPI
  GetApplicationRestartSettings(
-@@ -9051,14 +9052,14 @@ GetApplicationRestartSettings(
+@@ -9051,14 +9064,14 @@ GetApplicationRestartSettings(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4281,7 +4385,7 @@ index 62b1450287..3deb8f7215 100644
  VOID
  WINAPI
  ApplicationRecoveryFinished(
-@@ -9141,7 +9142,7 @@ typedef struct _FILE_STREAM_INFO {
+@@ -9141,7 +9154,7 @@ typedef struct _FILE_STREAM_INFO {
  
  typedef struct _FILE_COMPRESSION_INFO {
      LARGE_INTEGER CompressedFileSize;
@@ -4290,7 +4394,7 @@ index 62b1450287..3deb8f7215 100644
      UCHAR CompressionUnitShift;
      UCHAR ChunkShift;
      UCHAR ClusterShift;
-@@ -9168,7 +9169,7 @@ typedef struct _FILE_DISPOSITION_INFO {
+@@ -9168,7 +9181,7 @@ typedef struct _FILE_DISPOSITION_INFO {
  #endif
  
  typedef struct _FILE_DISPOSITION_INFO_EX {
@@ -4299,7 +4403,7 @@ index 62b1450287..3deb8f7215 100644
  } FILE_DISPOSITION_INFO_EX, *PFILE_DISPOSITION_INFO_EX;
  #endif
  
-@@ -9380,7 +9381,7 @@ typedef struct _FILE_REMOTE_PROTOCOL_INFO
+@@ -9380,7 +9393,7 @@ typedef struct _FILE_REMOTE_PROTOCOL_INFO
  
  } FILE_REMOTE_PROTOCOL_INFO, *PFILE_REMOTE_PROTOCOL_INFO;
  
@@ -4308,7 +4412,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  GetFileInformationByHandleEx(
-@@ -9428,16 +9429,16 @@ typedef struct FILE_ID_DESCRIPTOR {
+@@ -9428,16 +9441,16 @@ typedef struct FILE_ID_DESCRIPTOR {
      } DUMMYUNIONNAME;
  } FILE_ID_DESCRIPTOR, *LPFILE_ID_DESCRIPTOR;
  
@@ -4328,7 +4432,7 @@ index 62b1450287..3deb8f7215 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
-@@ -9469,21 +9470,21 @@ OpenFileById (
+@@ -9469,21 +9482,21 @@ OpenFileById (
  #define SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE    (0x2)
  
  
@@ -4354,7 +4458,7 @@ index 62b1450287..3deb8f7215 100644
      );
  #ifdef UNICODE
  #define CreateSymbolicLink  CreateSymbolicLinkW
-@@ -9495,7 +9496,7 @@ CreateSymbolicLinkW (
+@@ -9495,7 +9508,7 @@ CreateSymbolicLinkW (
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4363,7 +4467,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  QueryActCtxSettingsW(
-@@ -9518,22 +9519,22 @@ QueryActCtxSettingsW(
+@@ -9518,22 +9531,22 @@ QueryActCtxSettingsW(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4390,7 +4494,7 @@ index 62b1450287..3deb8f7215 100644
      _In_     HANDLE hTransaction
      );
  #ifdef UNICODE
-@@ -9560,14 +9561,14 @@ ReplacePartitionUnit (
+@@ -9560,14 +9573,14 @@ ReplacePartitionUnit (
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -4407,7 +4511,7 @@ index 62b1450287..3deb8f7215 100644
  BOOL
  WINAPI
  RemoveSecureMemoryCacheCallback(
-@@ -9584,13 +9585,13 @@ RemoveSecureMemoryCacheCallback(
+@@ -9584,13 +9597,13 @@ RemoveSecureMemoryCacheCallback(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -4423,7 +4527,7 @@ index 62b1450287..3deb8f7215 100644
      _In_ PCONTEXT Source
      );
  
-@@ -9600,13 +9601,13 @@ CopyContext(
+@@ -9600,13 +9613,13 @@ CopyContext(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -4439,7 +4543,7 @@ index 62b1450287..3deb8f7215 100644
      _Out_ PCONTEXT* Context,
      _Inout_ PDWORD ContextLength
      );
-@@ -9619,13 +9620,13 @@ InitializeContext(
+@@ -9619,13 +9632,13 @@ InitializeContext(
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
  
@@ -4455,7 +4559,7 @@ index 62b1450287..3deb8f7215 100644
      _Out_ PCONTEXT* Context,
      _Inout_ PDWORD ContextLength,
      _In_ ULONG64 XStateCompactionMask
-@@ -9641,14 +9642,14 @@ InitializeContext2(
+@@ -9641,14 +9654,14 @@ InitializeContext2(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -4472,7 +4576,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -9657,7 +9658,7 @@ GetXStateFeaturesMask(
+@@ -9657,7 +9670,7 @@ GetXStateFeaturesMask(
      _Out_ PDWORD64 FeatureMask
      );
  
@@ -4481,7 +4585,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  PVOID
  WINAPI
-@@ -9667,7 +9668,7 @@ LocateXStateFeature(
+@@ -9667,7 +9680,7 @@ LocateXStateFeature(
      _Out_opt_ PDWORD Length
      );
  
@@ -4490,7 +4594,7 @@ index 62b1450287..3deb8f7215 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -9707,24 +9708,24 @@ EnableProcessOptionalXStateFeatures(
+@@ -9707,24 +9720,24 @@ EnableProcessOptionalXStateFeatures(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4519,7 +4623,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  APIENTRY
  QueryThreadProfiling(
-@@ -9732,7 +9733,7 @@ QueryThreadProfiling(
+@@ -9732,7 +9745,7 @@ QueryThreadProfiling(
      _Out_ PBOOLEAN Enabled
      );
  
@@ -4528,7 +4632,7 @@ index 62b1450287..3deb8f7215 100644
  DWORD
  APIENTRY
  ReadThreadProfilingData(
-@@ -10095,4 +10096,1533 @@ InterlockedXor(
+@@ -10095,4 +10108,1533 @@ InterlockedXor(
  #endif /* } RC_INVOKED */
  #endif /* _NTOS_ */
  #endif /* NOWINBASEINTERLOCK */

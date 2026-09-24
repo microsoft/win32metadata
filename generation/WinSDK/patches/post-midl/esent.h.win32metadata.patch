@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
-index 56a8a639db..bc45341777 100644
+index 56a8a639db..0946b8e4ed 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 @@ -1,3 +1,4 @@
@@ -37,7 +37,66 @@ index 56a8a639db..bc45341777 100644
  #endif // JET_VERSION >= 0x0501
  
  typedef JET_UINT32 JET_COLUMNID;    // Column Identifier
-@@ -3720,7 +3721,7 @@ JetInit2(
+@@ -2172,14 +2173,34 @@ typedef enum
+ 
+ #define JET_paramEngineFormatVersion            194 //  Engine format version - specifies the maximum format version the engine should allow, ensuring no format features are used beyond this (allowing the DB / logs to be forward compatible).
+ #if ( JET_VERSION >= 0x0A01 )
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_paramUseFlushForWriteDurability)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_paramUseFlushForWriteDurability     214 //  This controls whether ESE uses Flush or FUA to make sure a write to disk is durable.
++#endif
++#if ( JET_VERSION >= 0x0A01 )
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_paramEnableRBS)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_paramEnableRBS                      215 //  Turns on revert snapshot. Not an ESE flight as we will let the variant be controlled outside ESE (like HA can enable this when lag is disabled)
++#endif
++#if ( JET_VERSION >= 0x0A01 )
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_paramRBSFilePath)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_paramRBSFilePath                    216 //  path to the revert snapshot directory
++#endif
++#if ( JET_VERSION >= 0x0A01 )
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_paramPerfmonRefreshInterval)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_paramPerfmonRefreshInterval         217 //  Interval, in units of msec, used by the Permormance Monitor to refresh values for collection.
++#endif
++#if ( JET_VERSION >= 0x0A01 )
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_paramEnableBlockCache)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_paramEnableBlockCache               218 //  Indicates that the ESE Block Cache is enabled.  This is sufficient to access files previously attached to the ESE Block Cache but not to attach new files.
++#endif
++#if ( JET_VERSION >= 0x0A01 )
+ 
+ #endif // JET_VERSION >= 0x0A01
+ 
+@@ -2545,7 +2566,11 @@ typedef struct
+ #define JET_bitTTDotNetGuid         0x00000100  //  sort all JET_coltypGUID columns according to .Net Guid sort order
+ #endif // JET_VERSION >= 0x0602
+ #if ( JET_VERSION >= 0x0A01 )
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_bitTTMaterializeBBT)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_bitTTMaterializeBBT     0x00000200  // The temp table uses the Buffered BTree format when it is materialized
++#endif
++#if ( JET_VERSION >= 0x0A01 )
+ #endif // JET_VERSION >= 0x0A01
+ // begin_PubEsent
+ 
+@@ -2567,7 +2592,11 @@ typedef struct
+ #define JET_bitSetUncompressed              0x00010000 /* don't attempt compression when storing the data */
+ #define JET_bitSetCompressed                0x00020000 /* attempt compression when storing the data */
+ #if ( JET_VERSION >= 0x0A01 )
++#endif
++#if (defined(WIN32METADATA) && !defined(JET_bitSetContiguousLV)) || (((( JET_VERSION >= 0x0A01 ))))
+ #define JET_bitSetContiguousLV              0x00040000 /* Allocates the long-value across contiguous pages (at potentialy space saving costs) for better IO behavior. Valid only with JET_bitSetSeparateLV. Invalid (or not implemented) with certain long-value operations such as replace, and certain column options such as compression. Use across many varying LVs sizes may cause space fragmentation / allocation issues. */
++#endif
++#if ( JET_VERSION >= 0x0A01 )
+ #endif // JET_VERSION >= 0x0A01
+ #endif // JET_VERSION >= 0x0601
+ 
+@@ -3720,7 +3749,7 @@ JetInit2(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -46,7 +105,7 @@ index 56a8a639db..bc45341777 100644
  JetInit3A(
      _Inout_opt_ JET_INSTANCE *  pinstance,
      _In_opt_ JET_RSTINFO_A *    prstInfo,
-@@ -3734,7 +3735,7 @@ JetInit3A(
+@@ -3734,7 +3763,7 @@ JetInit3A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -55,7 +114,7 @@ index 56a8a639db..bc45341777 100644
  JetInit3W(
      _Inout_opt_ JET_INSTANCE *  pinstance,
      _In_opt_ JET_RSTINFO_W *    prstInfo,
-@@ -3762,9 +3763,9 @@ JetInit3W(
+@@ -3762,9 +3791,9 @@ JetInit3W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -67,7 +126,7 @@ index 56a8a639db..bc45341777 100644
      _In_opt_ JET_PCSTR      szInstanceName );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
-@@ -3775,9 +3776,9 @@ JetCreateInstanceA(
+@@ -3775,9 +3804,9 @@ JetCreateInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -79,7 +138,7 @@ index 56a8a639db..bc45341777 100644
      _In_opt_ JET_PCWSTR     szInstanceName );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
-@@ -3797,9 +3798,9 @@ JetCreateInstanceW(
+@@ -3797,9 +3826,9 @@ JetCreateInstanceW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -91,7 +150,7 @@ index 56a8a639db..bc45341777 100644
      _In_opt_ JET_PCSTR      szInstanceName,
      _In_opt_ JET_PCSTR      szDisplayName,
      _In_ JET_GRBIT          grbit );
-@@ -3812,9 +3813,9 @@ JetCreateInstance2A(
+@@ -3812,9 +3841,9 @@ JetCreateInstance2A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -103,7 +162,7 @@ index 56a8a639db..bc45341777 100644
      _In_opt_ JET_PCWSTR     szInstanceName,
      _In_opt_ JET_PCWSTR     szDisplayName,
      _In_ JET_GRBIT          grbit );
-@@ -3937,7 +3938,7 @@ JetStopBackupInstance(
+@@ -3937,7 +3966,7 @@ JetStopBackupInstance(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -112,7 +171,7 @@ index 56a8a639db..bc45341777 100644
  JetSetSystemParameterA(
      _Inout_opt_ JET_INSTANCE *  pinstance,
      _In_opt_ JET_SESID          sesid,
-@@ -3953,7 +3954,7 @@ JetSetSystemParameterA(
+@@ -3953,7 +3982,7 @@ JetSetSystemParameterA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -121,7 +180,7 @@ index 56a8a639db..bc45341777 100644
  JetSetSystemParameterW(
      _Inout_opt_ JET_INSTANCE *  pinstance,
      _In_opt_ JET_SESID          sesid,
-@@ -3978,7 +3979,7 @@ JetSetSystemParameterW(
+@@ -3978,7 +4007,7 @@ JetSetSystemParameterW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -130,7 +189,7 @@ index 56a8a639db..bc45341777 100644
  JetGetSystemParameterA(
      _In_ JET_INSTANCE                   instance,
      _In_opt_ JET_SESID                  sesid,
-@@ -3995,7 +3996,7 @@ JetGetSystemParameterA(
+@@ -3995,7 +4024,7 @@ JetGetSystemParameterA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -139,7 +198,7 @@ index 56a8a639db..bc45341777 100644
  JetGetSystemParameterW(
      _In_ JET_INSTANCE                   instance,
      _In_opt_ JET_SESID                  sesid,
-@@ -4024,7 +4025,7 @@ JetGetSystemParameterW(
+@@ -4024,7 +4053,7 @@ JetGetSystemParameterW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -148,7 +207,7 @@ index 56a8a639db..bc45341777 100644
  JetEnableMultiInstanceA(
      _In_reads_opt_( csetsysparam ) JET_SETSYSPARAM_A *  psetsysparam,
      _In_ JET_UINT32                                     csetsysparam,
-@@ -4038,7 +4039,7 @@ JetEnableMultiInstanceA(
+@@ -4038,7 +4067,7 @@ JetEnableMultiInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -157,7 +216,7 @@ index 56a8a639db..bc45341777 100644
  JetEnableMultiInstanceW(
      _In_reads_opt_( csetsysparam ) JET_SETSYSPARAM_W *  psetsysparam,
      _In_ JET_UINT32                                     csetsysparam,
-@@ -4079,9 +4080,9 @@ JetGetThreadStats(
+@@ -4079,9 +4108,9 @@ JetGetThreadStats(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -169,7 +228,7 @@ index 56a8a639db..bc45341777 100644
      _In_opt_ JET_PCSTR  szUserName,
      _In_opt_ JET_PCSTR  szPassword );
  
-@@ -4093,9 +4094,9 @@ JET_ERR JET_API JetBeginSessionA(
+@@ -4093,9 +4122,9 @@ JET_ERR JET_API JetBeginSessionA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -181,7 +240,7 @@ index 56a8a639db..bc45341777 100644
      _In_opt_ JET_PCWSTR szUserName,
      _In_opt_ JET_PCWSTR szPassword );
  
-@@ -4115,7 +4116,7 @@ JET_ERR JET_API JetBeginSessionW(
+@@ -4115,7 +4144,7 @@ JET_ERR JET_API JetBeginSessionW(
  JET_ERR JET_API
  JetDupSession(
      _In_ JET_SESID      sesid,
@@ -190,7 +249,7 @@ index 56a8a639db..bc45341777 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT) */
  #pragma endregion
-@@ -4156,7 +4157,7 @@ JetIdle(
+@@ -4156,7 +4185,7 @@ JetIdle(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -199,7 +258,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateDatabaseA(
      _In_ JET_SESID      sesid,
      _In_ JET_PCSTR      szFilename,
-@@ -4172,7 +4173,7 @@ JetCreateDatabaseA(
+@@ -4172,7 +4201,7 @@ JetCreateDatabaseA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -208,7 +267,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateDatabaseW(
      _In_ JET_SESID      sesid,
      _In_ JET_PCWSTR     szFilename,
-@@ -4198,7 +4199,7 @@ JetCreateDatabaseW(
+@@ -4198,7 +4227,7 @@ JetCreateDatabaseW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -217,7 +276,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateDatabase2A(
      _In_ JET_SESID              sesid,
      _In_ JET_PCSTR              szFilename,
-@@ -4214,7 +4215,7 @@ JetCreateDatabase2A(
+@@ -4214,7 +4243,7 @@ JetCreateDatabase2A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -226,7 +285,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_SESID              sesid,
      _In_ JET_PCWSTR             szFilename,
      _In_ const JET_UINT32       cpgDatabaseSizeMax,
-@@ -4239,7 +4240,7 @@ JET_ERR JET_API JetCreateDatabase2W(
+@@ -4239,7 +4268,7 @@ JET_ERR JET_API JetCreateDatabase2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -235,7 +294,7 @@ index 56a8a639db..bc45341777 100644
  JetAttachDatabaseA(
      _In_ JET_SESID  sesid,
      _In_ JET_PCSTR  szFilename,
-@@ -4253,7 +4254,7 @@ JetAttachDatabaseA(
+@@ -4253,7 +4282,7 @@ JetAttachDatabaseA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -244,7 +303,7 @@ index 56a8a639db..bc45341777 100644
  JetAttachDatabaseW(
      _In_ JET_SESID  sesid,
      _In_ JET_PCWSTR szFilename,
-@@ -4276,7 +4277,7 @@ JetAttachDatabaseW(
+@@ -4276,7 +4305,7 @@ JetAttachDatabaseW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -253,7 +312,7 @@ index 56a8a639db..bc45341777 100644
  JetAttachDatabase2A(
      _In_ JET_SESID              sesid,
      _In_ JET_PCSTR              szFilename,
-@@ -4291,7 +4292,7 @@ JetAttachDatabase2A(
+@@ -4291,7 +4320,7 @@ JetAttachDatabase2A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -262,7 +321,7 @@ index 56a8a639db..bc45341777 100644
  JetAttachDatabase2W(
      _In_ JET_SESID              sesid,
      _In_ JET_PCWSTR             szFilename,
-@@ -4316,7 +4317,7 @@ JetAttachDatabase2W(
+@@ -4316,7 +4345,7 @@ JetAttachDatabase2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -271,7 +330,7 @@ index 56a8a639db..bc45341777 100644
  JetDetachDatabaseA(
      _In_ JET_SESID  sesid,
      _In_opt_ JET_PCSTR  szFilename );
-@@ -4329,7 +4330,7 @@ JetDetachDatabaseA(
+@@ -4329,7 +4358,7 @@ JetDetachDatabaseA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -280,7 +339,7 @@ index 56a8a639db..bc45341777 100644
  JetDetachDatabaseW(
      _In_ JET_SESID  sesid,
      _In_opt_ JET_PCWSTR szFilename );
-@@ -4352,7 +4353,7 @@ JetDetachDatabaseW(
+@@ -4352,7 +4381,7 @@ JetDetachDatabaseW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -289,7 +348,7 @@ index 56a8a639db..bc45341777 100644
  JetDetachDatabase2A(
      _In_ JET_SESID  sesid,
      _In_opt_ JET_PCSTR  szFilename,
-@@ -4366,7 +4367,7 @@ JetDetachDatabase2A(
+@@ -4366,7 +4395,7 @@ JetDetachDatabase2A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -298,7 +357,7 @@ index 56a8a639db..bc45341777 100644
  JetDetachDatabase2W(
      _In_ JET_SESID  sesid,
      _In_opt_ JET_PCWSTR szFilename,
-@@ -4392,7 +4393,7 @@ JetDetachDatabase2W(
+@@ -4392,7 +4421,7 @@ JetDetachDatabase2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -307,7 +366,7 @@ index 56a8a639db..bc45341777 100644
  JetGetObjectInfoA(
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
-@@ -4411,7 +4412,7 @@ JetGetObjectInfoA(
+@@ -4411,7 +4440,7 @@ JetGetObjectInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -316,7 +375,7 @@ index 56a8a639db..bc45341777 100644
  JetGetObjectInfoW(
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
-@@ -4440,7 +4441,7 @@ JetGetObjectInfoW(
+@@ -4440,7 +4469,7 @@ JetGetObjectInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -325,7 +384,7 @@ index 56a8a639db..bc45341777 100644
  JetGetTableInfoA(
      _In_ JET_SESID                        sesid,
      _In_ JET_TABLEID                      tableid,
-@@ -4456,7 +4457,7 @@ JetGetTableInfoA(
+@@ -4456,7 +4485,7 @@ JetGetTableInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -334,7 +393,7 @@ index 56a8a639db..bc45341777 100644
  JetGetTableInfoW(
      _In_ JET_SESID                        sesid,
      _In_ JET_TABLEID                      tableid,
-@@ -4482,7 +4483,7 @@ JetGetTableInfoW(
+@@ -4482,7 +4511,7 @@ JetGetTableInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -343,7 +402,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableA(
      _In_ JET_SESID       sesid,
      _In_ JET_DBID        dbid,
-@@ -4499,7 +4500,7 @@ JetCreateTableA(
+@@ -4499,7 +4528,7 @@ JetCreateTableA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -352,7 +411,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableW(
      _In_ JET_SESID       sesid,
      _In_ JET_DBID        dbid,
-@@ -4525,7 +4526,7 @@ JetCreateTableW(
+@@ -4525,7 +4554,7 @@ JetCreateTableW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -361,7 +420,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndexA(
      _In_ JET_SESID               sesid,
      _In_ JET_DBID                dbid,
-@@ -4539,7 +4540,7 @@ JetCreateTableColumnIndexA(
+@@ -4539,7 +4568,7 @@ JetCreateTableColumnIndexA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -370,7 +429,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndexW(
      _In_ JET_SESID               sesid,
      _In_ JET_DBID                dbid,
-@@ -4564,7 +4565,7 @@ JetCreateTableColumnIndexW(
+@@ -4564,7 +4593,7 @@ JetCreateTableColumnIndexW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -379,7 +438,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndex2A(
      _In_ JET_SESID                  sesid,
      _In_ JET_DBID                   dbid,
-@@ -4578,7 +4579,7 @@ JetCreateTableColumnIndex2A(
+@@ -4578,7 +4607,7 @@ JetCreateTableColumnIndex2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -388,7 +447,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndex2W(
      _In_ JET_SESID                  sesid,
      _In_ JET_DBID                   dbid,
-@@ -4600,13 +4601,13 @@ JetCreateTableColumnIndex2W(
+@@ -4600,13 +4629,13 @@ JetCreateTableColumnIndex2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -404,7 +463,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndex3W(
      _In_ JET_SESID                  sesid,
      _In_ JET_DBID                   dbid,
-@@ -4627,7 +4628,7 @@ JetCreateTableColumnIndex3W(
+@@ -4627,7 +4656,7 @@ JetCreateTableColumnIndex3W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -413,7 +472,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndex4A(
      _In_ JET_SESID                  sesid,
      _In_ JET_DBID                   dbid,
-@@ -4639,7 +4640,7 @@ JetCreateTableColumnIndex4A(
+@@ -4639,7 +4668,7 @@ JetCreateTableColumnIndex4A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -422,7 +481,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateTableColumnIndex4W(
      _In_ JET_SESID                  sesid,
      _In_ JET_DBID                   dbid,
-@@ -4663,7 +4664,7 @@ JetCreateTableColumnIndex4W(
+@@ -4663,7 +4692,7 @@ JetCreateTableColumnIndex4W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -431,7 +490,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteTableA(
      _In_ JET_SESID  sesid,
      _In_ JET_DBID   dbid,
-@@ -4677,7 +4678,7 @@ JetDeleteTableA(
+@@ -4677,7 +4706,7 @@ JetDeleteTableA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -440,7 +499,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteTableW(
      _In_ JET_SESID  sesid,
      _In_ JET_DBID   dbid,
-@@ -4699,7 +4700,7 @@ JetDeleteTableW(
+@@ -4699,7 +4728,7 @@ JetDeleteTableW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -449,7 +508,7 @@ index 56a8a639db..bc45341777 100644
  JetRenameTableA(
      _In_ JET_SESID  sesid,
      _In_ JET_DBID   dbid,
-@@ -4714,7 +4715,7 @@ JetRenameTableA(
+@@ -4714,7 +4743,7 @@ JetRenameTableA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -458,7 +517,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_SESID  sesid,
      _In_ JET_DBID   dbid,
      _In_ JET_PCWSTR szName,
-@@ -4738,7 +4739,7 @@ JET_ERR JET_API JetRenameTableW(
+@@ -4738,7 +4767,7 @@ JET_ERR JET_API JetRenameTableW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -467,7 +526,7 @@ index 56a8a639db..bc45341777 100644
  JetGetTableColumnInfoA(
      _In_ JET_SESID                        sesid,
      _In_ JET_TABLEID                      tableid,
-@@ -4755,7 +4756,7 @@ JetGetTableColumnInfoA(
+@@ -4755,7 +4784,7 @@ JetGetTableColumnInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -476,7 +535,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_SESID                        sesid,
      _In_ JET_TABLEID                      tableid,
      _In_opt_ JET_PCWSTR                   szColumnName,
-@@ -4781,7 +4782,7 @@ JET_ERR JET_API JetGetTableColumnInfoW(
+@@ -4781,7 +4810,7 @@ JET_ERR JET_API JetGetTableColumnInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -485,7 +544,7 @@ index 56a8a639db..bc45341777 100644
  JetGetColumnInfoA(
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
-@@ -4799,7 +4800,7 @@ JetGetColumnInfoA(
+@@ -4799,7 +4828,7 @@ JetGetColumnInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -494,7 +553,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
      _In_ JET_PCWSTR                       szTableName,
-@@ -4826,7 +4827,7 @@ JET_ERR JET_API JetGetColumnInfoW(
+@@ -4826,7 +4855,7 @@ JET_ERR JET_API JetGetColumnInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -503,7 +562,7 @@ index 56a8a639db..bc45341777 100644
  JetAddColumnA(
      _In_ JET_SESID                               sesid,
      _In_ JET_TABLEID                             tableid,
-@@ -4844,7 +4845,7 @@ JetAddColumnA(
+@@ -4844,7 +4873,7 @@ JetAddColumnA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -512,7 +571,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_SESID                               sesid,
      _In_ JET_TABLEID                             tableid,
      _In_ JET_PCWSTR                              szColumnName,
-@@ -4871,7 +4872,7 @@ JET_ERR JET_API JetAddColumnW(
+@@ -4871,7 +4900,7 @@ JET_ERR JET_API JetAddColumnW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -521,7 +580,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteColumnA(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -4885,7 +4886,7 @@ JetDeleteColumnA(
+@@ -4885,7 +4914,7 @@ JetDeleteColumnA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -530,7 +589,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteColumnW(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -4910,7 +4911,7 @@ JetDeleteColumnW(
+@@ -4910,7 +4939,7 @@ JetDeleteColumnW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -539,7 +598,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteColumn2A(
      _In_ JET_SESID          sesid,
      _In_ JET_TABLEID        tableid,
-@@ -4925,7 +4926,7 @@ JetDeleteColumn2A(
+@@ -4925,7 +4954,7 @@ JetDeleteColumn2A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -548,7 +607,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteColumn2W(
      _In_ JET_SESID          sesid,
      _In_ JET_TABLEID        tableid,
-@@ -4950,7 +4951,7 @@ JetDeleteColumn2W(
+@@ -4950,7 +4979,7 @@ JetDeleteColumn2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -557,7 +616,7 @@ index 56a8a639db..bc45341777 100644
  JetRenameColumnA(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -4966,7 +4967,7 @@ JetRenameColumnA(
+@@ -4966,7 +4995,7 @@ JetRenameColumnA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -566,7 +625,7 @@ index 56a8a639db..bc45341777 100644
  JetRenameColumnW(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -4996,7 +4997,7 @@ JetRenameColumnW(
+@@ -4996,7 +5025,7 @@ JetRenameColumnW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -575,7 +634,7 @@ index 56a8a639db..bc45341777 100644
  JetSetColumnDefaultValueA(
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
-@@ -5014,7 +5015,7 @@ JetSetColumnDefaultValueA(
+@@ -5014,7 +5043,7 @@ JetSetColumnDefaultValueA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -584,7 +643,7 @@ index 56a8a639db..bc45341777 100644
  JetSetColumnDefaultValueW(
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
-@@ -5042,7 +5043,7 @@ JetSetColumnDefaultValueW(
+@@ -5042,7 +5071,7 @@ JetSetColumnDefaultValueW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -593,7 +652,7 @@ index 56a8a639db..bc45341777 100644
  JetGetTableIndexInfoA(
      _In_ JET_SESID                           sesid,
      _In_ JET_TABLEID                         tableid,
-@@ -5059,7 +5060,7 @@ JetGetTableIndexInfoA(
+@@ -5059,7 +5088,7 @@ JetGetTableIndexInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -602,7 +661,7 @@ index 56a8a639db..bc45341777 100644
  JetGetTableIndexInfoW(
      _In_ JET_SESID                           sesid,
      _In_ JET_TABLEID                         tableid,
-@@ -5086,7 +5087,7 @@ JetGetTableIndexInfoW(
+@@ -5086,7 +5115,7 @@ JetGetTableIndexInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -611,7 +670,7 @@ index 56a8a639db..bc45341777 100644
  JetGetIndexInfoA(
      _In_ JET_SESID                           sesid,
      _In_ JET_DBID                            dbid,
-@@ -5104,7 +5105,7 @@ JetGetIndexInfoA(
+@@ -5104,7 +5133,7 @@ JetGetIndexInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -620,7 +679,7 @@ index 56a8a639db..bc45341777 100644
  JetGetIndexInfoW(
      _In_ JET_SESID                           sesid,
      _In_ JET_DBID                            dbid,
-@@ -5132,7 +5133,7 @@ JetGetIndexInfoW(
+@@ -5132,7 +5161,7 @@ JetGetIndexInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -629,7 +688,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndexA(
      _In_ JET_SESID                      sesid,
      _In_ JET_TABLEID                    tableid,
-@@ -5150,7 +5151,7 @@ JetCreateIndexA(
+@@ -5150,7 +5179,7 @@ JetCreateIndexA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -638,7 +697,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndexW(
      _In_ JET_SESID                       sesid,
      _In_ JET_TABLEID                     tableid,
-@@ -5178,7 +5179,7 @@ JetCreateIndexW(
+@@ -5178,7 +5207,7 @@ JetCreateIndexW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -647,7 +706,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndex2A(
      _In_ JET_SESID                                  sesid,
      _In_ JET_TABLEID                                tableid,
-@@ -5193,7 +5194,7 @@ JetCreateIndex2A(
+@@ -5193,7 +5222,7 @@ JetCreateIndex2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -656,7 +715,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndex2W(
      _In_ JET_SESID                                  sesid,
      _In_ JET_TABLEID                                tableid,
-@@ -5215,14 +5216,14 @@ JetCreateIndex2W(
+@@ -5215,14 +5244,14 @@ JetCreateIndex2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -673,7 +732,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndex3W(
      _In_ JET_SESID                                   sesid,
      _In_ JET_TABLEID                                 tableid,
-@@ -5245,7 +5246,7 @@ JetCreateIndex3W(
+@@ -5245,7 +5274,7 @@ JetCreateIndex3W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -682,7 +741,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndex4A(
      _In_ JET_SESID                                   sesid,
      _In_ JET_TABLEID                                 tableid,
-@@ -5258,7 +5259,7 @@ JetCreateIndex4A(
+@@ -5258,7 +5287,7 @@ JetCreateIndex4A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -691,7 +750,7 @@ index 56a8a639db..bc45341777 100644
  JetCreateIndex4W(
      _In_ JET_SESID                                   sesid,
      _In_ JET_TABLEID                                 tableid,
-@@ -5283,7 +5284,7 @@ JetCreateIndex4W(
+@@ -5283,7 +5312,7 @@ JetCreateIndex4W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -700,7 +759,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteIndexA(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5297,7 +5298,7 @@ JetDeleteIndexA(
+@@ -5297,7 +5326,7 @@ JetDeleteIndexA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -709,7 +768,7 @@ index 56a8a639db..bc45341777 100644
  JetDeleteIndexW(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5377,7 +5378,7 @@ JetRollback(
+@@ -5377,7 +5406,7 @@ JetRollback(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -718,7 +777,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
      _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
-@@ -5392,7 +5393,7 @@ JET_ERR JET_API JetGetDatabaseInfoA(
+@@ -5392,7 +5421,7 @@ JET_ERR JET_API JetGetDatabaseInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -727,7 +786,7 @@ index 56a8a639db..bc45341777 100644
  JetGetDatabaseInfoW(
      _In_ JET_SESID                        sesid,
      _In_ JET_DBID                         dbid,
-@@ -5418,7 +5419,7 @@ JetGetDatabaseInfoW(
+@@ -5418,7 +5447,7 @@ JetGetDatabaseInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -736,7 +795,7 @@ index 56a8a639db..bc45341777 100644
  JetGetDatabaseFileInfoA(
      _In_ JET_PCSTR                        szDatabaseName,
      _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
-@@ -5433,7 +5434,7 @@ JetGetDatabaseFileInfoA(
+@@ -5433,7 +5462,7 @@ JetGetDatabaseFileInfoA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -745,7 +804,7 @@ index 56a8a639db..bc45341777 100644
  JetGetDatabaseFileInfoW(
      _In_ JET_PCWSTR                       szDatabaseName,
      _Out_writes_bytes_( cbMax ) JET_PVOID pvResult,
-@@ -5458,7 +5459,7 @@ JetGetDatabaseFileInfoW(
+@@ -5458,7 +5487,7 @@ JetGetDatabaseFileInfoW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -754,7 +813,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenDatabaseA(
      _In_ JET_SESID      sesid,
      _In_ JET_PCSTR      szFilename,
-@@ -5474,7 +5475,7 @@ JetOpenDatabaseA(
+@@ -5474,7 +5503,7 @@ JetOpenDatabaseA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -763,7 +822,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenDatabaseW(
      _In_ JET_SESID      sesid,
      _In_ JET_PCWSTR     szFilename,
-@@ -5511,7 +5512,7 @@ JetCloseDatabase(
+@@ -5511,7 +5540,7 @@ JetCloseDatabase(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -772,7 +831,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenTableA(
      _In_ JET_SESID                                  sesid,
      _In_ JET_DBID                                   dbid,
-@@ -5529,7 +5530,7 @@ JetOpenTableA(
+@@ -5529,7 +5558,7 @@ JetOpenTableA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -781,7 +840,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenTableW(
      _In_ JET_SESID                                  sesid,
      _In_ JET_DBID                                   dbid,
-@@ -5779,7 +5780,7 @@ JetDupCursor(
+@@ -5779,7 +5808,7 @@ JetDupCursor(
  #define JetGetCurrentIndexA JetGetCurrentIndex
  #endif
  
@@ -790,7 +849,7 @@ index 56a8a639db..bc45341777 100644
  JetGetCurrentIndexA(
      _In_ JET_SESID                          sesid,
      _In_ JET_TABLEID                        tableid,
-@@ -5794,7 +5795,7 @@ JetGetCurrentIndexA(
+@@ -5794,7 +5823,7 @@ JetGetCurrentIndexA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -799,7 +858,7 @@ index 56a8a639db..bc45341777 100644
  JetGetCurrentIndexW(
      _In_ JET_SESID                          sesid,
      _In_ JET_TABLEID                        tableid,
-@@ -5819,7 +5820,7 @@ JetGetCurrentIndexW(
+@@ -5819,7 +5848,7 @@ JetGetCurrentIndexW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -808,7 +867,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndexA(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5833,7 +5834,7 @@ JetSetCurrentIndexA(
+@@ -5833,7 +5862,7 @@ JetSetCurrentIndexA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -817,7 +876,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndexW(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5856,7 +5857,7 @@ JetSetCurrentIndexW(
+@@ -5856,7 +5885,7 @@ JetSetCurrentIndexW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -826,7 +885,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndex2A(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5871,7 +5872,7 @@ JetSetCurrentIndex2A(
+@@ -5871,7 +5900,7 @@ JetSetCurrentIndex2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -835,7 +894,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndex2W(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5896,7 +5897,7 @@ JetSetCurrentIndex2W(
+@@ -5896,7 +5925,7 @@ JetSetCurrentIndex2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -844,7 +903,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndex3A(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5912,7 +5913,7 @@ JetSetCurrentIndex3A(
+@@ -5912,7 +5941,7 @@ JetSetCurrentIndex3A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -853,7 +912,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndex3W(
      _In_ JET_SESID      sesid,
      _In_ JET_TABLEID    tableid,
-@@ -5938,7 +5939,7 @@ JetSetCurrentIndex3W(
+@@ -5938,7 +5967,7 @@ JetSetCurrentIndex3W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -862,7 +921,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndex4A(
      _In_ JET_SESID          sesid,
      _In_ JET_TABLEID        tableid,
-@@ -5955,7 +5956,7 @@ JetSetCurrentIndex4A(
+@@ -5955,7 +5984,7 @@ JetSetCurrentIndex4A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -871,7 +930,7 @@ index 56a8a639db..bc45341777 100644
  JetSetCurrentIndex4W(
      _In_ JET_SESID          sesid,
      _In_ JET_TABLEID        tableid,
-@@ -6110,7 +6111,7 @@ JetGetSecondaryIndexBookmark(
+@@ -6110,7 +6139,7 @@ JetGetSecondaryIndexBookmark(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -880,7 +939,7 @@ index 56a8a639db..bc45341777 100644
  JetCompactA(
      _In_ JET_SESID              sesid,
      _In_ JET_PCSTR              szDatabaseSrc,
-@@ -6127,7 +6128,7 @@ JetCompactA(
+@@ -6127,7 +6156,7 @@ JetCompactA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -889,7 +948,7 @@ index 56a8a639db..bc45341777 100644
  JetCompactW(
      _In_ JET_SESID              sesid,
      _In_ JET_PCWSTR             szDatabaseSrc,
-@@ -6154,7 +6155,7 @@ JetCompactW(
+@@ -6154,7 +6183,7 @@ JetCompactW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -898,7 +957,7 @@ index 56a8a639db..bc45341777 100644
  JetDefragmentA(
      _In_ JET_SESID              sesid,
      _In_ JET_DBID               dbid,
-@@ -6171,7 +6172,7 @@ JetDefragmentA(
+@@ -6171,7 +6200,7 @@ JetDefragmentA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -907,7 +966,7 @@ index 56a8a639db..bc45341777 100644
  JetDefragmentW(
      _In_ JET_SESID              sesid,
      _In_ JET_DBID               dbid,
-@@ -6199,7 +6200,7 @@ JetDefragmentW(
+@@ -6199,7 +6228,7 @@ JetDefragmentW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -916,7 +975,7 @@ index 56a8a639db..bc45341777 100644
  JetDefragment2A(
      _In_ JET_SESID              sesid,
      _In_ JET_DBID               dbid,
-@@ -6217,7 +6218,7 @@ JetDefragment2A(
+@@ -6217,7 +6246,7 @@ JetDefragment2A(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -925,7 +984,7 @@ index 56a8a639db..bc45341777 100644
  JetDefragment2W(
      _In_ JET_SESID              sesid,
      _In_ JET_DBID               dbid,
-@@ -6245,7 +6246,7 @@ JetDefragment2W(
+@@ -6245,7 +6274,7 @@ JetDefragment2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -934,7 +993,7 @@ index 56a8a639db..bc45341777 100644
  JetDefragment3A(
      _In_ JET_SESID              sesid,
      _In_ JET_PCSTR              szDatabaseName,
-@@ -6264,7 +6265,7 @@ JetDefragment3A(
+@@ -6264,7 +6293,7 @@ JetDefragment3A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -943,7 +1002,7 @@ index 56a8a639db..bc45341777 100644
  JetDefragment3W(
      _In_ JET_SESID              sesid,
      _In_ JET_PCWSTR             szDatabaseName,
-@@ -6294,7 +6295,7 @@ JetDefragment3W(
+@@ -6294,7 +6323,7 @@ JetDefragment3W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -952,7 +1011,7 @@ index 56a8a639db..bc45341777 100644
  JetSetDatabaseSizeA(
      _In_ JET_SESID          sesid,
      _In_ JET_PCSTR          szDatabaseName,
-@@ -6309,7 +6310,7 @@ JetSetDatabaseSizeA(
+@@ -6309,7 +6338,7 @@ JetSetDatabaseSizeA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -961,7 +1020,7 @@ index 56a8a639db..bc45341777 100644
  JetSetDatabaseSizeW(
      _In_ JET_SESID          sesid,
      _In_ JET_PCWSTR         szDatabaseName,
-@@ -6497,7 +6498,7 @@ JetOpenTemporaryTable2(
+@@ -6497,7 +6526,7 @@ JetOpenTemporaryTable2(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -970,7 +1029,7 @@ index 56a8a639db..bc45341777 100644
  JetBackupA(
      _In_ JET_PCSTR      szBackupPath,
      _In_ JET_GRBIT      grbit,
-@@ -6511,7 +6512,7 @@ JetBackupA(
+@@ -6511,7 +6540,7 @@ JetBackupA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -979,7 +1038,7 @@ index 56a8a639db..bc45341777 100644
  JetBackupW(
      _In_ JET_PCWSTR     szBackupPath,
      _In_ JET_GRBIT      grbit,
-@@ -6535,7 +6536,7 @@ JetBackupW(
+@@ -6535,7 +6564,7 @@ JetBackupW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -988,7 +1047,7 @@ index 56a8a639db..bc45341777 100644
  JetBackupInstanceA(
      _In_ JET_INSTANCE   instance,
      _In_ JET_PCSTR      szBackupPath,
-@@ -6550,7 +6551,7 @@ JetBackupInstanceA(
+@@ -6550,7 +6579,7 @@ JetBackupInstanceA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -997,7 +1056,7 @@ index 56a8a639db..bc45341777 100644
  JetBackupInstanceW(
      _In_ JET_INSTANCE   instance,
      _In_ JET_PCWSTR     szBackupPath,
-@@ -6577,7 +6578,7 @@ JetBackupInstanceW(
+@@ -6577,7 +6606,7 @@ JetBackupInstanceW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1006,7 +1065,7 @@ index 56a8a639db..bc45341777 100644
  JetRestoreA(
      _In_ JET_PCSTR      szSource,
      _In_opt_ JET_PFNSTATUS  pfn );
-@@ -6590,7 +6591,7 @@ JetRestoreA(
+@@ -6590,7 +6619,7 @@ JetRestoreA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1015,7 +1074,7 @@ index 56a8a639db..bc45341777 100644
  JetRestoreW(
      _In_ JET_PCWSTR     szSource,
      _In_opt_ JET_PFNSTATUS  pfn );
-@@ -6613,7 +6614,7 @@ JetRestoreW(
+@@ -6613,7 +6642,7 @@ JetRestoreW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1024,7 +1083,7 @@ index 56a8a639db..bc45341777 100644
  JetRestore2A(
      _In_ JET_PCSTR      sz,
      _In_opt_ JET_PCSTR  szDest,
-@@ -6627,7 +6628,7 @@ JetRestore2A(
+@@ -6627,7 +6656,7 @@ JetRestore2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1033,7 +1092,7 @@ index 56a8a639db..bc45341777 100644
  JetRestore2W(
      _In_ JET_PCWSTR     sz,
      _In_opt_ JET_PCWSTR szDest,
-@@ -6652,7 +6653,7 @@ JetRestore2W(
+@@ -6652,7 +6681,7 @@ JetRestore2W(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1042,7 +1101,7 @@ index 56a8a639db..bc45341777 100644
  JetRestoreInstanceA(
      _In_ JET_INSTANCE   instance,
      _In_ JET_PCSTR      sz,
-@@ -6667,7 +6668,7 @@ JetRestoreInstanceA(
+@@ -6667,7 +6696,7 @@ JetRestoreInstanceA(
  #pragma region Application Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1051,7 +1110,7 @@ index 56a8a639db..bc45341777 100644
  JetRestoreInstanceW(
      _In_ JET_INSTANCE   instance,
      _In_ JET_PCWSTR     sz,
-@@ -6756,7 +6757,7 @@ JET_ERR JET_API JetBeginExternalBackupInstance(
+@@ -6756,7 +6785,7 @@ JET_ERR JET_API JetBeginExternalBackupInstance(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
  JET_ERR JET_API
@@ -1060,7 +1119,7 @@ index 56a8a639db..bc45341777 100644
  #if ( JET_VERSION < 0x0600 )
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
  #else
-@@ -6773,7 +6774,7 @@ JetGetAttachInfoA(
+@@ -6773,7 +6802,7 @@ JetGetAttachInfoA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1069,7 +1128,7 @@ index 56a8a639db..bc45341777 100644
  JetGetAttachInfoW(
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    wszzDatabases,
      _In_ JET_UINT32                                         cbMax,
-@@ -6799,7 +6800,7 @@ JetGetAttachInfoW(
+@@ -6799,7 +6828,7 @@ JetGetAttachInfoW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
  JET_ERR JET_API
@@ -1078,7 +1137,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_INSTANCE                                        instance,
  #if ( JET_VERSION < 0x0600 )
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
-@@ -6817,7 +6818,7 @@ JetGetAttachInfoInstanceA(
+@@ -6817,7 +6846,7 @@ JetGetAttachInfoInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1087,7 +1146,7 @@ index 56a8a639db..bc45341777 100644
  JetGetAttachInfoInstanceW(
      _In_ JET_INSTANCE                                       instance,
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    szzDatabases,
-@@ -6844,7 +6845,7 @@ JetGetAttachInfoInstanceW(
+@@ -6844,7 +6873,7 @@ JetGetAttachInfoInstanceW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1096,7 +1155,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenFileA(
      _In_ JET_PCSTR          szFileName,
      _Out_ JET_HANDLE *      phfFile,
-@@ -6859,7 +6860,7 @@ JetOpenFileA(
+@@ -6859,7 +6888,7 @@ JetOpenFileA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1105,7 +1164,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenFileW(
      _In_ JET_PCWSTR         szFileName,
      _Out_ JET_HANDLE *      phfFile,
-@@ -6885,7 +6886,7 @@ JetOpenFileW(
+@@ -6885,7 +6914,7 @@ JetOpenFileW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1114,7 +1173,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenFileInstanceA(
      _In_ JET_INSTANCE       instance,
      _In_ JET_PCSTR          szFileName,
-@@ -6901,7 +6902,7 @@ JetOpenFileInstanceA(
+@@ -6901,7 +6930,7 @@ JetOpenFileInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1123,7 +1182,7 @@ index 56a8a639db..bc45341777 100644
  JetOpenFileInstanceW(
      _In_ JET_INSTANCE       instance,
      _In_ JET_PCWSTR         szFileName,
-@@ -6986,7 +6987,7 @@ JetCloseFileInstance(
+@@ -6986,7 +7015,7 @@ JetCloseFileInstance(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
  JET_ERR JET_API
@@ -1132,7 +1191,7 @@ index 56a8a639db..bc45341777 100644
  #if ( JET_VERSION < 0x0600 )
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
  #else
-@@ -7003,7 +7004,7 @@ JetGetLogInfoA(
+@@ -7003,7 +7032,7 @@ JetGetLogInfoA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1141,7 +1200,7 @@ index 56a8a639db..bc45341777 100644
  JetGetLogInfoW(
          _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR    szzLogs,
          _In_ JET_UINT32                                         cbMax,
-@@ -7029,7 +7030,7 @@ JetGetLogInfoW(
+@@ -7029,7 +7058,7 @@ JetGetLogInfoW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
  JET_ERR JET_API
@@ -1150,7 +1209,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_INSTANCE                                        instance,
  #if ( JET_VERSION < 0x0600 )
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
-@@ -7047,7 +7048,7 @@ JetGetLogInfoInstanceA(
+@@ -7047,7 +7076,7 @@ JetGetLogInfoInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1159,7 +1218,7 @@ index 56a8a639db..bc45341777 100644
  JetGetLogInfoInstanceW(
      _In_ JET_INSTANCE                                         instance,
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
-@@ -7066,7 +7067,7 @@ JetGetLogInfoInstanceW(
+@@ -7066,7 +7095,7 @@ JetGetLogInfoInstanceW(
  
  
  #define JET_BASE_NAME_LENGTH    3
@@ -1168,7 +1227,7 @@ index 56a8a639db..bc45341777 100644
  {
      JET_UINT32      cbSize;
      JET_UINT32      ulGenLow;
-@@ -7074,7 +7075,7 @@ typedef struct
+@@ -7074,7 +7103,7 @@ typedef struct
      JET_CHAR        szBaseName[ JET_BASE_NAME_LENGTH + 1 ];
  } JET_LOGINFO_A;
  
@@ -1177,7 +1236,7 @@ index 56a8a639db..bc45341777 100644
  {
      JET_UINT32      cbSize;
      JET_UINT32      ulGenLow;
-@@ -7096,7 +7097,7 @@ typedef struct
+@@ -7096,7 +7125,7 @@ typedef struct
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
  JET_ERR JET_API
@@ -1186,7 +1245,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_INSTANCE                                        instance,
  #if ( JET_VERSION < 0x0600 )
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
-@@ -7115,7 +7116,7 @@ JetGetLogInfoInstance2A(
+@@ -7115,7 +7144,7 @@ JetGetLogInfoInstance2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1195,7 +1254,7 @@ index 56a8a639db..bc45341777 100644
  JetGetLogInfoInstance2W(
      _In_ JET_INSTANCE                                         instance,
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
-@@ -7142,7 +7143,7 @@ JetGetLogInfoInstance2W(
+@@ -7142,7 +7171,7 @@ JetGetLogInfoInstance2W(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
  JET_ERR JET_API
@@ -1204,7 +1263,7 @@ index 56a8a639db..bc45341777 100644
      _In_ JET_INSTANCE                                        instance,
  #if ( JET_VERSION < 0x0600 )
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PVOID pv,
-@@ -7160,7 +7161,7 @@ JetGetTruncateLogInfoInstanceA(
+@@ -7160,7 +7189,7 @@ JetGetTruncateLogInfoInstanceA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1213,7 +1272,7 @@ index 56a8a639db..bc45341777 100644
  JetGetTruncateLogInfoInstanceW(
      _In_ JET_INSTANCE                                         instance,
      _Out_writes_bytes_to_opt_( cbMax, *pcbActual ) JET_PWSTR  wszzLogs,
-@@ -7237,7 +7238,7 @@ JetEndExternalBackupInstance2(
+@@ -7237,7 +7266,7 @@ JetEndExternalBackupInstance2(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1222,7 +1281,7 @@ index 56a8a639db..bc45341777 100644
  JetExternalRestoreA(
      _In_ JET_PSTR                                   szCheckpointFilePath,
      _In_ JET_PSTR                                   szLogPath,
-@@ -7256,7 +7257,7 @@ JetExternalRestoreA(
+@@ -7256,7 +7285,7 @@ JetExternalRestoreA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1231,7 +1290,7 @@ index 56a8a639db..bc45341777 100644
  JetExternalRestoreW(
      _In_ JET_PWSTR                                  szCheckpointFilePath,
      _In_ JET_PWSTR                                  szLogPath,
-@@ -7286,7 +7287,7 @@ JetExternalRestoreW(
+@@ -7286,7 +7315,7 @@ JetExternalRestoreW(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1240,7 +1299,7 @@ index 56a8a639db..bc45341777 100644
  JetExternalRestore2A(
      _In_ JET_PSTR                                   szCheckpointFilePath,
      _In_ JET_PSTR                                   szLogPath,
-@@ -7307,7 +7308,7 @@ JetExternalRestore2A(
+@@ -7307,7 +7336,7 @@ JetExternalRestore2A(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1249,7 +1308,7 @@ index 56a8a639db..bc45341777 100644
  JetExternalRestore2W(
      _In_ JET_PWSTR                                  szCheckpointFilePath,
      _In_ JET_PWSTR                                  szLogPath,
-@@ -7388,7 +7389,7 @@ typedef struct _JET_INSTANCE_INFO_W
+@@ -7388,7 +7417,7 @@ typedef struct _JET_INSTANCE_INFO_W
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1258,7 +1317,7 @@ index 56a8a639db..bc45341777 100644
  JetGetInstanceInfoA(
      _Out_ JET_UINT32 *                                                pcInstanceInfo,
      _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_A **  paInstanceInfo );
-@@ -7401,7 +7402,7 @@ JetGetInstanceInfoA(
+@@ -7401,7 +7430,7 @@ JetGetInstanceInfoA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1267,7 +1326,7 @@ index 56a8a639db..bc45341777 100644
  JetGetInstanceInfoW(
      _Out_ JET_UINT32 *                                                pcInstanceInfo,
      _Outptr_result_buffer_( *pcInstanceInfo ) JET_INSTANCE_INFO_W **  paInstanceInfo );
-@@ -7421,7 +7422,7 @@ JetGetInstanceInfoW(
+@@ -7421,7 +7450,7 @@ JetGetInstanceInfoW(
  
  JET_ERR JET_API
  JetFreeBuffer(
@@ -1276,7 +1335,7 @@ index 56a8a639db..bc45341777 100644
  
  JET_ERR JET_API
  JetSetLS(
-@@ -7444,7 +7445,7 @@ JetGetLS(
+@@ -7444,7 +7473,7 @@ JetGetLS(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  
@@ -1285,7 +1344,7 @@ index 56a8a639db..bc45341777 100644
  
  JET_ERR JET_API
  JetOSSnapshotPrepare(
-@@ -7463,7 +7464,7 @@ JetOSSnapshotPrepareInstance(
+@@ -7463,7 +7492,7 @@ JetOSSnapshotPrepareInstance(
  #define JetOSSnapshotFreezeA JetOSSnapshotFreeze
  #endif
  
@@ -1294,7 +1353,7 @@ index 56a8a639db..bc45341777 100644
  JetOSSnapshotFreezeA(
      _In_ const JET_OSSNAPID                                           snapId,
      _Out_ JET_UINT32 *                                                pcInstanceInfo,
-@@ -7472,7 +7473,7 @@ JetOSSnapshotFreezeA(
+@@ -7472,7 +7501,7 @@ JetOSSnapshotFreezeA(
  
  #if ( JET_VERSION >= 0x0600 )
  
@@ -1303,7 +1362,7 @@ index 56a8a639db..bc45341777 100644
  JetOSSnapshotFreezeW(
      _In_ const JET_OSSNAPID                                           snapId,
      _Out_ JET_UINT32 *                                                pcInstanceInfo,
-@@ -7531,7 +7532,7 @@ JetOSSnapshotTruncateLogInstance(
+@@ -7531,7 +7560,7 @@ JetOSSnapshotTruncateLogInstance(
  #define JetOSSnapshotGetFreezeInfoA JetOSSnapshotGetFreezeInfo
  #endif
  
@@ -1312,7 +1371,7 @@ index 56a8a639db..bc45341777 100644
  JetOSSnapshotGetFreezeInfoA(
      _In_ const JET_OSSNAPID                                           snapId,
      _Out_ JET_UINT32 *                                                pcInstanceInfo,
-@@ -7544,7 +7545,7 @@ JetOSSnapshotGetFreezeInfoA(
+@@ -7544,7 +7573,7 @@ JetOSSnapshotGetFreezeInfoA(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
  

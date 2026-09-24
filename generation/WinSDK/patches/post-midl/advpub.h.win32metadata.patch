@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h b/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
-index cfe3e2f3f6..580abfdbdd 100644
+index cfe3e2f3f6..60aed78bf5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/advpub.h
 @@ -1,3 +1,4 @@
@@ -38,15 +38,36 @@ index cfe3e2f3f6..580abfdbdd 100644
      _In_ LPCSTR pszInfFilename,
      _In_ LPCSTR pszInstallSection,
      _In_ LPCSTR pszTranslateSection,
-@@ -158,7 +159,7 @@ HRESULT WINAPI TranslateInfStringA(
+@@ -156,9 +157,9 @@ HRESULT WINAPI TranslateInfStringA(
+     _Out_writes_opt_(cchBuffer) LPSTR pszBuffer,
+     _In_ DWORD cchBuffer,
      _Out_ PDWORD pdwRequiredSize,
-     _Reserved_ PVOID pvReserved
+-    _Reserved_ PVOID pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pvReserved
      );
 -HRESULT WINAPI TranslateInfStringW(
 +_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringW(
      _In_ LPCWSTR pszInfFilename,
      _In_ LPCWSTR pszInstallSection,
      _In_ LPCWSTR pszTranslateSection,
+@@ -166,7 +167,7 @@ HRESULT WINAPI TranslateInfStringW(
+     _Out_writes_opt_(cchBuffer) LPWSTR pszBuffer,
+     _In_ DWORD cchBuffer,
+     _Out_ PDWORD pdwRequiredSize,
+-    _Reserved_ PVOID pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pvReserved
+     );
+ #ifdef UNICODE
+ #define TranslateInfString  TranslateInfStringW
+@@ -182,7 +183,7 @@ HRESULT WINAPI TranslateInfString(
+     _Out_writes_opt_(cchBuffer) LPSTR pszBuffer,
+     _In_ DWORD cchBuffer,
+     _Out_ PDWORD pdwRequiredSize,
+-    _Reserved_ PVOID pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pvReserved
+     );
+ #endif  // (_WIN32_IE >= 0x0605)
+ 
 @@ -248,8 +249,8 @@ typedef STRTABLEA STRTABLE;
  typedef LPCSTRTABLEA LPCSTRTABLE;
  #endif // UNICODE
@@ -233,17 +254,25 @@ index cfe3e2f3f6..580abfdbdd 100644
  #ifdef UNICODE
  #define OpenINFEngine  OpenINFEngineW
  #else
-@@ -823,8 +824,8 @@ HRESULT WINAPI OpenINFEngine(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DW
+@@ -823,15 +824,15 @@ HRESULT WINAPI OpenINFEngine(LPCSTR pszInfFilename, LPCSTR pszInstallSection, DW
  /////////////////////////////////////////////////////////////////////////////
  
  #if (_WIN32_IE >= 0x0605)
 -HRESULT WINAPI TranslateInfStringExA(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
 -HRESULT WINAPI TranslateInfStringExW(HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI TranslateInfStringExA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
-+_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringExW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _Reserved_ PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:ansi") HRESULT WINAPI TranslateInfStringExA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pvReserved);
++_WIN32META_ANNOTATION_("win32metadata:unicode") HRESULT WINAPI TranslateInfStringExW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HINF hInf, LPCWSTR pszInfFilename, LPCWSTR pszTranslateSection, LPCWSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPWSTR pszBuffer, DWORD dwBufferSize, _Out_ PDWORD pdwRequiredSize, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PVOID pvReserved);
  #ifdef UNICODE
  #define TranslateInfStringEx  TranslateInfStringExW
  #else
+ #define TranslateInfStringEx  TranslateInfStringExA
+ #endif // !UNICODE
+ #else
+-HRESULT WINAPI TranslateInfStringEx(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, PDWORD pdwRequiredSize, PVOID pvReserved);
++HRESULT WINAPI TranslateInfStringEx(HINF hInf, LPCSTR pszInfFilename, LPCSTR pszTranslateSection, LPCSTR pszTranslateKey, _Inout_updates_to_(dwBufferSize, *pdwRequiredSize) LPSTR pszBuffer, DWORD dwBufferSize, PDWORD pdwRequiredSize, _WIN32META_ANNOTATION_("win32metadata:optional") PVOID pvReserved);
+ #endif  // (_WIN32_IE >= 0x0605)
+ 
+ 
 @@ -845,7 +846,7 @@ HRESULT WINAPI TranslateInfStringEx(HINF hInf, LPCSTR pszInfFilename, LPCSTR psz
  //      E_FAIL  failure
  /////////////////////////////////////////////////////////////////////////////

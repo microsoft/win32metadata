@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
-index bcb720b236..40e40bfac3 100644
+index bcb720b236..920ce1eccf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/usp10.h
 @@ -10,6 +10,7 @@
@@ -64,6 +64,17 @@ index bcb720b236..40e40bfac3 100644
      const HDC                               hdc,            // In     OS handle to device context (required)
      _Inout_updates_(1) SCRIPT_CACHE        *psc,           // InOut  Cache handle
      int                                     x,              // In     x,y position for first glyph
+@@ -706,8 +709,8 @@ _Check_return_ HRESULT WINAPI ScriptTextOut(
+     UINT                                    fuOptions,      // In     ExtTextOut options
+     _In_reads_opt_(1) const RECT           *lprc,          // In     optional clipping/opaquing rectangle
+     _In_reads_(1) const SCRIPT_ANALYSIS    *psa,           // In     Result of ScriptItemize
+-    _Reserved_ const WCHAR                  *pwcReserved,   // In     Reserved (requires NULL)
+-    _Reserved_ int                          iReserved,      // In     Reserved (requires 0)
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const WCHAR                  *pwcReserved,   // In     Reserved (requires NULL)
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ int                          iReserved,      // In     Reserved (requires 0)
+     _In_reads_(cGlyphs) const WORD         *pwGlyphs,      // In     Glyph buffer from prior ScriptShape call
+     int                                     cGlyphs,        // In     Number of glyphs
+     _In_reads_(cGlyphs) const int          *piAdvance,     // In     Advance widths from ScriptPlace
 @@ -781,7 +784,7 @@ _Check_return_ HRESULT WINAPI ScriptTextOut(
  //      is expected that the extra width will be rendered to the right of the
  //      glyph, with as white space or, for Arabic text, as kashida.

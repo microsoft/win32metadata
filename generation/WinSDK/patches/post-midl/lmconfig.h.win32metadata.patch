@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h
-index 2150eb2e54..b7ec0e576c 100644
+index 2150eb2e54..71cae3800d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMConfig.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,30 @@ index 2150eb2e54..b7ec0e576c 100644
  /*++ BUILD Version: 0003    // Increment this if a change has global effects
  
  Copyright (c) 1991-1999  Microsoft Corporation
+@@ -55,9 +56,9 @@ NetConfigGet (
+     IN  LPCWSTR  component,
+     IN  LPCWSTR  parameter,
+ #ifdef REVISED_CONFIG_APIS
+-    OUT LPBYTE  *bufptr
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE  *bufptr
+ #else
+-    OUT LPBYTE  *bufptr,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE  *bufptr,
+     OUT LPDWORD totalavailable
+ #endif
+     );
+@@ -67,9 +68,9 @@ NetConfigGetAll (
+     IN  LPCWSTR  server OPTIONAL,
+     IN  LPCWSTR  component,
+ #ifdef REVISED_CONFIG_APIS
+-    OUT LPBYTE  *bufptr
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE  *bufptr
+ #else
+-    OUT LPBYTE  *bufptr,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE  *bufptr,
+     OUT LPDWORD totalavailable
+ #endif
+     );
 @@ -82,7 +83,7 @@ NetConfigSet (
      IN  LPCWSTR  component,
      IN  DWORD   level,

@@ -1,0 +1,59 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winbio_adapter.h b/generation/WinSDK/RecompiledIdlHeaders/um/winbio_adapter.h
+index 3a32be12f7..c727808c18 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winbio_adapter.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winbio_adapter.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2008 Microsoft Corporation
+@@ -3229,16 +3230,16 @@ typedef HRESULT
+ //
+ typedef HRESULT
+ (WINAPI *PIBIO_STORAGE_RESERVED_1_FN)(
+-    _Reserved_ PWINBIO_PIPELINE Pipeline,
+-    _Reserved_ PWINBIO_IDENTITY Identity,
+-    _Reserved_ PULONGLONG Reserved1,
+-    _Reserved_ PULONGLONG Reserved2
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_PIPELINE Pipeline,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_IDENTITY Identity,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PULONGLONG Reserved1,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PULONGLONG Reserved2
+     );
+ 
+ typedef HRESULT
+ (WINAPI *PIBIO_STORAGE_RESERVED_2_FN)(
+-    _Reserved_ PWINBIO_PIPELINE Pipeline,
+-    _Reserved_ PWINBIO_IDENTITY Identity
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_PIPELINE Pipeline,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_IDENTITY Identity
+     );
+ 
+ typedef HRESULT
+@@ -4207,21 +4208,21 @@ typedef HRESULT
+ //
+ typedef HRESULT
+ (WINAPI *PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN)(
+-    _Reserved_ PWINBIO_PIPELINE Pipeline,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_PIPELINE Pipeline,
+     _In_ SIZE_T Reserved1,
+-    _Reserved_ PSIZE_T Reserved2
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PSIZE_T Reserved2
+     );
+ 
+ typedef HRESULT
+ (WINAPI *PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN)(
+-    _Reserved_ PWINBIO_PIPELINE Pipeline,
+-    _Reserved_ PUCHAR Reserved1,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_PIPELINE Pipeline,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PUCHAR Reserved1,
+     _In_ SIZE_T Reserved2
+     );
+ 
+ typedef HRESULT
+ (WINAPI *PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN)(
+-    _Reserved_ PWINBIO_PIPELINE Pipeline
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ PWINBIO_PIPELINE Pipeline
+     );
+ 
+ typedef HRESULT

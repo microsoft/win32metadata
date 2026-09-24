@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabUtil.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabUtil.h
-index 21f8533c6f..b109823ee5 100644
+index 21f8533c6f..f6c62a543d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WabUtil.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabUtil.h
 @@ -1,3 +1,4 @@
@@ -109,6 +109,15 @@ index 21f8533c6f..b109823ee5 100644
  			 LPPROPDATA FAR *		lppPropData );
  #endif
  
+@@ -388,7 +389,7 @@ WABCreateIProp( LPCIID					lpInterface,
+  *	parameter, an PV, and returns a BOOL value.
+  */
+ 
+-typedef BOOL (STDAPICALLTYPE FNIDLE) (LPVOID);
++typedef BOOL (STDAPICALLTYPE FNIDLE) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
+ typedef FNIDLE FAR *PFNIDLE;
+ 
+ /*
 @@ -414,7 +415,7 @@ typedef FTG  FAR *PFTG;
   */
  
@@ -373,3 +382,12 @@ index 21f8533c6f..b109823ee5 100644
  #endif
  
  
+@@ -838,7 +839,7 @@ typedef DISPATCHNOTIFICATIONS FAR * LPDISPATCHNOTIFICATIONS;
+ #endif
+ 
+ typedef SCODE (STDAPICALLTYPE CREATECONVERSATIONINDEX)(ULONG cbParent,
+-	LPBYTE lpbParent, ULONG FAR *lpcbConvIndex, LPBYTE FAR *lppbConvIndex);
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE lpbParent, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *lpcbConvIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE FAR *lppbConvIndex);
+ typedef CREATECONVERSATIONINDEX FAR *LPCREATECONVERSATIONINDEX;
+ 
+ #ifdef __cplusplus

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
-index cb297a639b..5eb092a8f5 100644
+index cb297a639b..591b04ed5b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/olectl.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,21 @@ index cb297a639b..5eb092a8f5 100644
  /////////////////////////////////////////////////////////////////////////////
  //
  // olectl.h     OLE Control interfaces
-@@ -171,7 +172,7 @@ typedef struct tagFONTDESC
+@@ -91,9 +92,13 @@ DEFINE_GUID(GUID_YSIZE,
+ 	0x66504309,0xBE0F,0x101A,0x8B,0xBB,0x00,0xAA,0x00,0x30,0x0C,0xAB);
+ 
+ #if !defined( __CGUID_H__ )
++#endif
++#if defined(WIN32METADATA) || (((!defined( __CGUID_H__ ))))
+ DEFINE_GUID(GUID_TRISTATE,
+ 	0x6650430A,0xBE0F,0x101A,0x8B,0xBB,0x00,0xAA,0x00,0x30,0x0C,0xAB);
+ #endif
++#if !defined( __CGUID_H__ )
++#endif
+ 
+ DEFINE_GUID(GUID_OPTIONVALUEEXCLUSIVE,
+ 	0x6650430B,0xBE0F,0x101A,0x8B,0xBB,0x00,0xAA,0x00,0x30,0x0C,0xAB);
+@@ -171,7 +176,7 @@ typedef struct tagFONTDESC
  typedef struct tagPICTDESC
  {
      UINT cbSizeofstruct;
@@ -16,7 +30,7 @@ index cb297a639b..5eb092a8f5 100644
      union
      {
          struct
-@@ -419,35 +420,35 @@ STDAPI DllUnregisterServer(void);
+@@ -419,35 +424,35 @@ STDAPI DllUnregisterServer(void);
  /////////////////////////////////////////////////////////////////////////////
  // Property frame APIs
  
@@ -64,7 +78,7 @@ index cb297a639b..5eb092a8f5 100644
  				  OLE_COLOR clrReserved,
  				  REFIID    riid,
  				  LPVOID *  ppvRet );
-@@ -456,12 +457,12 @@ WINOLECTLAPI OleLoadPictureFile(VARIANT varFileName,
+@@ -456,12 +461,12 @@ WINOLECTLAPI OleLoadPictureFile(VARIANT varFileName,
      LPDISPATCH* lplpdispPicture);
  
  WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
@@ -79,7 +93,19 @@ index cb297a639b..5eb092a8f5 100644
  
  #define LP_DEFAULT      0x00
  #define LP_MONOCHROME	0x01
-@@ -612,5 +613,58 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
+@@ -603,7 +608,11 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
+ /////////////////////////////////////////////////////////////////////////////
+ // Names of modules containing type libraries for standard types
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(STDOLE_TLB)) || (((defined(__MKTYPLIB__) || defined(__midl))))
+ #define STDOLE_TLB "stdole2.tlb"
++#endif
++#if defined(__MKTYPLIB__) || defined(__midl)
+ #ifdef _WIN64
+ #define STDTYPE_TLB "stdole2.tlb"
+ #else
+@@ -612,5 +621,58 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
  
  #endif // defined(__MKTYPLIB__) || defined(__midl)
  

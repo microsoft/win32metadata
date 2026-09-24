@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
-index 5bebec4417..e3a48ef1d1 100644
+index 5bebec4417..a73b368fb8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 @@ -11,6 +11,7 @@
@@ -199,7 +199,41 @@ index 5bebec4417..e3a48ef1d1 100644
  {
  	UINT	cbSize;
  	WORD	wMask;
-@@ -1601,7 +1602,7 @@ typedef struct hyphresult
+@@ -1543,8 +1544,16 @@ typedef struct _bidioptions
+ 
+ // BIDIOPTIONS masks 
+ #if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOM_DEFPARADIR)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOM_DEFPARADIR			0x0001	// Default paragraph direction (implies alignment) (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOM_PLAINTEXT)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOM_PLAINTEXT			0x0002	// Use plain text layout (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
+ #endif // _RICHEDIT_VER == 0x0100 
+ #define BOM_NEUTRALOVERRIDE 	0x0004	// Override neutral layout (obsolete) 
+ #define BOM_CONTEXTREADING		0x0008	// Context reading order 
+@@ -1556,8 +1565,16 @@ typedef struct _bidioptions
+ 
+ // BIDIOPTIONS effects 
+ #if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOE_RTLDIR)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOE_RTLDIR				0x0001	// Default paragraph direction (implies alignment) (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOE_PLAINTEXT)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOE_PLAINTEXT			0x0002	// Use plain text layout (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
+ #endif // _RICHEDIT_VER == 0x0100 
+ #define BOE_NEUTRALOVERRIDE 	0x0004	// Override neutral layout (obsolete) 
+ #define BOE_CONTEXTREADING		0x0008	// Context reading order 
+@@ -1601,7 +1618,7 @@ typedef struct hyphresult
  } HYPHRESULT;
  
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
@@ -208,7 +242,7 @@ index 5bebec4417..e3a48ef1d1 100644
  {
  	SHORT cbSize;			// Size of HYPHENATEINFO structure
  	SHORT dxHyphenateZone;	// If a space character is closer to the margin
-@@ -1643,4 +1644,880 @@ typedef struct tagHyphenateInfo
+@@ -1643,4 +1660,880 @@ typedef struct tagHyphenateInfo
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  

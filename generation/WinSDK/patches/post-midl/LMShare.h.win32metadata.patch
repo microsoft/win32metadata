@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h
-index 5082730963..871c2decc3 100644
+index 5082730963..dd49443b35 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMShare.h
 @@ -26,6 +26,7 @@ Notes:
@@ -60,7 +60,7 @@ index 5082730963..871c2decc3 100644
      _In_opt_ LMSTR servername,
      _In_ LMSTR netname,
      _In_ DWORD level,
-@@ -134,9 +135,9 @@ NetShareSetInfo(
+@@ -134,12 +135,12 @@ NetShareSetInfo(
      _Out_opt_ LPDWORD parm_err
      );
  
@@ -71,9 +71,17 @@ index 5082730963..871c2decc3 100644
 +  NetShareDel(
      _In_opt_ LMSTR servername,
      _In_ LMSTR netname,
-     _Reserved_ DWORD reserved
-@@ -150,17 +151,17 @@ NetShareDelSticky(
-     _Reserved_ DWORD reserved
+-    _Reserved_ DWORD reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD reserved
+     );
+ 
+ _Check_return_
+@@ -147,20 +148,20 @@ NET_API_STATUS NET_API_FUNCTION
+ NetShareDelSticky(
+     _In_opt_ LMSTR servername,
+     _In_ LMSTR netname,
+-    _Reserved_ DWORD reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD reserved
      );
  
 -_Check_return_

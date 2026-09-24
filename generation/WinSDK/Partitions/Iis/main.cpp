@@ -29,3 +29,6 @@
 
 #include <httpserv.h>
 #include <iiswebsocket.h>
+
+#include <iisrsta.h>
+#include <asptlb.h>

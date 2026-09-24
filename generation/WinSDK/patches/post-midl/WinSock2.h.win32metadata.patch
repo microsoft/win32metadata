@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
-index 824a3558c9..d37cdce1fe 100644
+index 824a3558c9..a736685bfd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinSock2.h
 @@ -18,6 +18,7 @@
@@ -527,22 +527,37 @@ index 824a3558c9..d37cdce1fe 100644
  PASCAL
  WSAConnectByNameW(
      _In_ SOCKET s,
-@@ -2789,6 +2791,7 @@ WSAConnectByNameW(
+@@ -2787,8 +2789,9 @@ WSAConnectByNameW(
+     _Inout_opt_ LPDWORD RemoteAddressLength,
+     _Out_writes_bytes_to_opt_(*RemoteAddressLength,*RemoteAddressLength) LPSOCKADDR RemoteAddress,
      _In_opt_ const struct timeval * timeout,
-     _Reserved_ LPWSAOVERLAPPED Reserved);
+-    _Reserved_ LPWSAOVERLAPPED Reserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPWSAOVERLAPPED Reserved);
  
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _Win32_SetLastError_ 
  _WINSOCK_DEPRECATED_BY("WSAConnectByNameW()")
  BOOL
  PASCAL
-@@ -2803,6 +2806,7 @@ WSAConnectByNameA(
+@@ -2801,8 +2804,9 @@ WSAConnectByNameA(
+     _Inout_opt_ LPDWORD RemoteAddressLength,
+     _Out_writes_bytes_to_opt_(*RemoteAddressLength,*RemoteAddressLength) LPSOCKADDR RemoteAddress,
      _In_opt_ const struct timeval * timeout,
-     _Reserved_ LPWSAOVERLAPPED Reserved);
+-    _Reserved_ LPWSAOVERLAPPED Reserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPWSAOVERLAPPED Reserved);
  
 +_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ 
  BOOL
  PASCAL
  WSAConnectByList(
+@@ -2813,7 +2817,7 @@ WSAConnectByList(
+     _Inout_opt_ LPDWORD RemoteAddressLength,
+     _Out_writes_bytes_to_opt_(*RemoteAddressLength,*RemoteAddressLength) LPSOCKADDR RemoteAddress,
+     _In_opt_ const struct timeval * timeout,
+-    _Reserved_ LPWSAOVERLAPPED Reserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPWSAOVERLAPPED Reserved);
+ #endif
+ 
+ #if INCL_WINSOCK_API_TYPEDEFS
 @@ -2831,7 +2835,7 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  

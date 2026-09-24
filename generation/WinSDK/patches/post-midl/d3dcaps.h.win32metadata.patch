@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3dcaps.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3dcaps.h
-index 15e419ffb2..117419badc 100644
+index 15e419ffb2..e13fc173f0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/d3dcaps.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3dcaps.h
 @@ -1,3 +1,4 @@
@@ -7,7 +7,27 @@ index 15e419ffb2..117419badc 100644
  /*==========================================================================;
   *
   *  Copyright (C) Microsoft Corporation.  All Rights Reserved. 
-@@ -438,10 +439,10 @@ typedef struct _D3DDeviceDesc7 {
+@@ -53,11 +54,19 @@ typedef struct _D3DLIGHTINGCAPS {
+ #define D3DLIGHTCAPS_SPOT               0x00000002L /* Spot lights supported */
+ #define D3DLIGHTCAPS_DIRECTIONAL        0x00000004L /* Directional lights supported */
+ #if(DIRECT3D_VERSION < 0x700)
++#endif
++#if (defined(WIN32METADATA) && !defined(D3DLIGHTCAPS_PARALLELPOINT)) || ((((DIRECT3D_VERSION < 0x700))))
+ #define D3DLIGHTCAPS_PARALLELPOINT      0x00000008L /* Parallel point lights supported */
+ #endif
++#if(DIRECT3D_VERSION < 0x700)
++#endif
+ #if(DIRECT3D_VERSION < 0x500)
++#endif
++#if (defined(WIN32METADATA) && !defined(D3DLIGHTCAPS_GLSPOT)) || ((((DIRECT3D_VERSION < 0x500))))
+ #define D3DLIGHTCAPS_GLSPOT             0x00000010L /* GL syle spot lights supported */
+ #endif
++#if(DIRECT3D_VERSION < 0x500)
++#endif
+ 
+ /* Description of capabilities for each primitive type */
+ 
+@@ -438,10 +447,10 @@ typedef struct _D3DDeviceDesc7 {
  #define D3DDEVICEDESCSIZE (sizeof(D3DDEVICEDESC))
  #define D3DDEVICEDESC7SIZE (sizeof(D3DDEVICEDESC7))
  

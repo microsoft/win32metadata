@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
-index d044f5d159..d41e3e5abe 100644
+index d044f5d159..eb149b0237 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
 @@ -1,4 +1,5 @@
@@ -61,7 +61,7 @@ index d044f5d159..d41e3e5abe 100644
      IN      DHCPCAPI_PARAMS_ARRAY  SendParams,    // parameters to send.
      IN OUT  DHCPCAPI_PARAMS_ARRAY  RecdParams,    // parameters that are to be requested..
      _Out_writes_bytes_to_(*pSize, *pSize) LPBYTE  Buffer,   // a buffer to hold data for RecdParams
-@@ -247,9 +248,9 @@ DhcpRequestParams(                                // request parameters of clien
+@@ -247,39 +248,39 @@ DhcpRequestParams(                                // request parameters of clien
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -69,11 +69,13 @@ index d044f5d159..d41e3e5abe 100644
 +_Windows_SupportedOS_Windows2000_ DWORD                                             // win32 status
  APIENTRY
 -DhcpUndoRequestParams(                            // undo the effect of a persistent request -- currently undo from registry
+-    _Reserved_ DWORD                Flags,         // must be zero, reserved
+-    _Reserved_ LPVOID               Reserved,      // this parameter is reserved
 +  DhcpUndoRequestParams(                            // undo the effect of a persistent request -- currently undo from registry
-     _Reserved_ DWORD                Flags,         // must be zero, reserved
-     _Reserved_ LPVOID               Reserved,      // this parameter is reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                Flags,         // must be zero, reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID               Reserved,      // this parameter is reserved
      _In_       LPWSTR               AdapterName,   // the name of the adpater to delete for
-@@ -257,29 +258,29 @@ DhcpUndoRequestParams(                            // undo the effect of a persis
+     _In_       LPWSTR               RequestIdStr   // needed for persistent requests..
  );
  
  #define     DHCPCAPI_REGISTER_HANDLE_EVENT        0x01 // handle returned is to an event
@@ -83,7 +85,8 @@ index d044f5d159..d41e3e5abe 100644
 -DhcpRegisterParamChange(                          // notify if a parameter has changed
 +  DhcpRegisterParamChange(                          // notify if a parameter has changed
      IN      DWORD                  Flags,         // must be zero, reserved
-     _Reserved_ LPVOID                 Reserved,      // this parameter is reserved
+-    _Reserved_ LPVOID                 Reserved,      // this parameter is reserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID                 Reserved,      // this parameter is reserved
      _In_       LPWSTR                 AdapterName,   // adapter of interest
 -    IN      LPDHCPCAPI_CLASSID     ClassId,       // reserved must be NULL
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCPCAPI_CLASSID     ClassId,       // reserved must be NULL

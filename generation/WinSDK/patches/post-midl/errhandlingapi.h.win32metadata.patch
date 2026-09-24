@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
-index 073a04f862..7aa276e7dc 100644
+index 073a04f862..1fd1374104 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/errhandlingapi.h
 @@ -15,6 +15,7 @@
@@ -127,7 +127,7 @@ index 073a04f862..7aa276e7dc 100644
  WINBASEAPI
  ULONG
  WINAPI
-@@ -166,11 +186,13 @@ RemoveVectoredContinueHandler(
+@@ -166,16 +186,26 @@ RemoveVectoredContinueHandler(
  //#if _WIN32_WINNT >= 0x0501 || defined(WINBASE_DECLARE_RESTORE_LAST_ERROR)
  #if defined(WINBASE_DECLARE_RESTORE_LAST_ERROR)
  
@@ -142,7 +142,20 @@ index 073a04f862..7aa276e7dc 100644
      );
  
  typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
-@@ -187,6 +209,7 @@ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
++#endif
++#if (defined(WIN32METADATA) && !defined(RESTORE_LAST_ERROR_NAME_A)) || (((defined(WINBASE_DECLARE_RESTORE_LAST_ERROR))))
+ #define RESTORE_LAST_ERROR_NAME_A      "RestoreLastError"
++#endif
++#if defined(WINBASE_DECLARE_RESTORE_LAST_ERROR)
++#endif
++#if (defined(WIN32METADATA) && !defined(RESTORE_LAST_ERROR_NAME_W)) || (((defined(WINBASE_DECLARE_RESTORE_LAST_ERROR))))
+ #define RESTORE_LAST_ERROR_NAME_W     L"RestoreLastError"
++#endif
++#if defined(WINBASE_DECLARE_RESTORE_LAST_ERROR)
+ #define RESTORE_LAST_ERROR_NAME   TEXT("RestoreLastError")
+ 
+ #endif
+@@ -187,6 +217,7 @@ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -150,7 +163,7 @@ index 073a04f862..7aa276e7dc 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -202,6 +225,7 @@ RaiseFailFastException(
+@@ -202,6 +233,7 @@ RaiseFailFastException(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -158,7 +171,7 @@ index 073a04f862..7aa276e7dc 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -210,6 +234,7 @@ FatalAppExitA(
+@@ -210,6 +242,7 @@ FatalAppExitA(
      _In_ LPCSTR lpMessageText
      );
  
@@ -166,7 +179,7 @@ index 073a04f862..7aa276e7dc 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -230,6 +255,7 @@ FatalAppExitW(
+@@ -230,6 +263,7 @@ FatalAppExitW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -174,7 +187,7 @@ index 073a04f862..7aa276e7dc 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -237,12 +263,14 @@ GetThreadErrorMode(
+@@ -237,12 +271,14 @@ GetThreadErrorMode(
      VOID
      );
  

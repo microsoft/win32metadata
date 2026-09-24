@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
-index a6276573b6..20b2b5e0e9 100644
+index a6276573b6..97e9297124 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
 @@ -1,6 +1,7 @@
@@ -44,7 +44,7 @@ index a6276573b6..20b2b5e0e9 100644
      UINT    wLastError;    /* last transaction error.  */
      HCONVLIST hConvList;   /* parent hConvList if this conversation is in a list */
      CONVCONTEXT ConvCtxt;  /* conversation context */
-@@ -211,26 +212,30 @@ typedef struct tagCONVINFO {
+@@ -211,27 +212,31 @@ typedef struct tagCONVINFO {
  
  typedef HDDEDATA CALLBACK FNCALLBACK(UINT wType, UINT wFmt, HCONV hConv,
          HSZ hsz1, HSZ hsz2, HDDEDATA hData, ULONG_PTR dwData1, ULONG_PTR dwData2);
@@ -64,8 +64,9 @@ index a6276573b6..20b2b5e0e9 100644
      _Inout_ LPDWORD pidInst,
      _In_ PFNCALLBACK pfnCallback,
 -    _In_ DWORD afCmd,
+-    _Reserved_ DWORD ulRes);
 +    _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) _In_ DWORD afCmd,
-     _Reserved_ DWORD ulRes);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD ulRes);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
 +
  UINT
@@ -74,10 +75,12 @@ index a6276573b6..20b2b5e0e9 100644
      _Inout_ LPDWORD pidInst,
      _In_ PFNCALLBACK pfnCallback,
 -    _In_ DWORD afCmd,
+-    _Reserved_ DWORD ulRes);
 +    _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) _In_ DWORD afCmd,
-     _Reserved_ DWORD ulRes);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD ulRes);
  #ifdef UNICODE
  #define DdeInitialize  DdeInitializeW
+ #else
 @@ -269,6 +274,8 @@ DdeInitializeW(
  #define     APPCLASS_STANDARD            0x00000000L
  #define     APPCLASS_MASK                0x0000000FL

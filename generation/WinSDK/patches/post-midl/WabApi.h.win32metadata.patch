@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h
-index 2f35e5fd4f..ea086ececc 100644
+index 2f35e5fd4f..fd82294a5b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabApi.h
 @@ -4,6 +4,7 @@
@@ -37,6 +37,24 @@ index 2f35e5fd4f..ea086ececc 100644
  {
      ULONG   cbSize;         // sizeof(WAB_PARAM).
      HWND    hwnd;           // hWnd of calling client Application. Can be NULL
+@@ -194,7 +195,7 @@ STDMETHODIMP WABOpen(
+ typedef HRESULT (STDMETHODCALLTYPE WABOPEN)(
+     LPADRBOOK FAR * lppAdrBook,
+     LPWABOBJECT FAR * lppWABObject,
+-    LPWAB_PARAM lpWP,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAB_PARAM lpWP,
+     DWORD Reserved2
+ );
+ typedef WABOPEN FAR * LPWABOPEN;
+@@ -212,7 +213,7 @@ STDMETHODIMP WABOpenEx(
+ typedef HRESULT (STDMETHODCALLTYPE WABOPENEX)(
+     LPADRBOOK FAR * lppAdrBook,
+     LPWABOBJECT FAR * lppWABObject,
+-    LPWAB_PARAM lpWP,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAB_PARAM lpWP,
+     DWORD Reserved,
+     ALLOCATEBUFFER * fnAllocateBuffer,
+     ALLOCATEMORE * fnAllocateMore,
 @@ -221,7 +222,7 @@ typedef HRESULT (STDMETHODCALLTYPE WABOPENEX)(
  typedef WABOPENEX FAR * LPWABOPENEX;
  

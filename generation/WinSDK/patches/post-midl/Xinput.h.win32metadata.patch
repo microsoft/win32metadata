@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
-index 4b51b443e0..6963b3ae9e 100644
+index 4b51b443e0..62d574f0c3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
 @@ -12,6 +12,7 @@
@@ -94,7 +94,7 @@ index 4b51b443e0..6963b3ae9e 100644
  DWORD WINAPI XInputGetAudioDeviceIds
  (
      _In_  DWORD                             dwUserIndex,        // Index of the gamer associated with the device
-@@ -294,13 +299,14 @@ DWORD WINAPI XInputGetAudioDeviceIds
+@@ -294,17 +299,18 @@ DWORD WINAPI XInputGetAudioDeviceIds
      _Inout_opt_ UINT*                       pCaptureCount       // Size of capture device ID string buffer (in wide-chars)
  ) WIN_NOEXCEPT;
  
@@ -111,6 +111,11 @@ index 4b51b443e0..6963b3ae9e 100644
  DWORD WINAPI XInputGetKeystroke
  (
      _In_       DWORD dwUserIndex,              // Index of the gamer associated with the device
+-    _Reserved_ DWORD dwReserved,               // Reserved for future use
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,               // Reserved for future use
+     _Out_      PXINPUT_KEYSTROKE pKeystroke    // Pointer to an XINPUT_KEYSTROKE structure that receives an input event.
+ ) WIN_NOEXCEPT;
+ 
 @@ -318,6 +324,7 @@ DWORD WINAPI XInputGetKeystroke
  
  #if(_WIN32_WINNT < _WIN32_WINNT_WIN8)
