@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h b/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
-index 8c44a207d4..19244c6d42 100644
+index 8c44a207d4..aff2f09cc2 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
 @@ -1,3 +1,4 @@
@@ -108,6 +108,15 @@ index 8c44a207d4..19244c6d42 100644
 +            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phPort) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE CloseIoCompletionPort( 
+             /* [annotation][in] */ 
+@@ -5105,7 +5106,7 @@ EXTERN_C const IID IID_IHostSyncManager;
+             /* [annotation][out] */ 
+             _Out_  IHostManualEvent **ppEvent) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE CreateSemaphore( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE CreateSemaphore( 
+             /* [annotation][in] */ 
+             _In_  DWORD dwInitial,
              /* [annotation][in] */ 
 @@ -7180,7 +7181,7 @@ EXTERN_C const IID IID_IHostAssemblyManager;
  /* interface __MIDL_itf_mscoree_0000_0042 */

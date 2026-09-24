@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
-index 4ca629766e..52098a9b7d 100644
+index 4ca629766e..50b4a8cf7b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
 @@ -6,6 +6,7 @@
@@ -10,6 +10,15 @@ index 4ca629766e..52098a9b7d 100644
  
  #ifdef _CONTRACT_GEN
  #include <nt.h>
+@@ -17,7 +18,7 @@
+ #include <rpc.h>
+ #include <basetyps.h>
+ 
+-DECLARE_HANDLE(ROPARAMIIDHANDLE);
++DECLARE_HANDLE(ROPARAMIIDHANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=RoFreeParameterizedTypeExtra")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ //struct ROPARAMIIDHANDLE__; typedef struct ROPARAMIIDHANDLE__ *ROPARAMIIDHANDLE;
+ 
+ struct IRoSimpleMetaDataBuilder
 @@ -65,20 +66,26 @@ struct IRoMetaDataLocator
      ) const = 0;
  };

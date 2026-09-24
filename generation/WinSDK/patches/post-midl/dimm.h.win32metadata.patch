@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
-index 43ec1ec4c9..bdd1457989 100644
+index 43ec1ec4c9..acab129233 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,18 @@ index 43ec1ec4c9..bdd1457989 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -213,9 +214,9 @@ typedef /* [public][public][public][public][public][public][public] */ struct __
+     WCHAR lfFaceName[ 32 ];
+     } 	LOGFONTW;
+ 
+-typedef DWORD HIMC;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=ImmDestroyContext") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef DWORD HIMC;
+ 
+-typedef DWORD HIMCC;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef DWORD HIMCC;
+ 
+ typedef /* [public][public][public][public][public][public][public] */ struct __MIDL___MIDL_itf_dimm_0000_0000_0005
+     {
 @@ -610,7 +611,7 @@ EXTERN_C const IID IID_IEnumInputContext;
              /* [annotation][in] */ 
              _In_  ULONG ulCount,

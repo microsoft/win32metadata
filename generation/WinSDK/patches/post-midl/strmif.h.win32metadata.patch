@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
-index bf0a3c0f30..810df62104 100644
+index bf0a3c0f30..5bd89402ff 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/strmif.h
 @@ -1,3 +1,4 @@
@@ -16,6 +16,15 @@ index bf0a3c0f30..810df62104 100644
      ICreateDevEnum : public IUnknown
      {
      public:
+@@ -1206,7 +1207,7 @@ typedef LONGLONG REFERENCE_TIME;
+ 
+ typedef double REFTIME;
+ 
+-typedef DWORD_PTR HSEMAPHORE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=EngDeleteSemaphore") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef DWORD_PTR HSEMAPHORE;
+ 
+ typedef DWORD_PTR HEVENT;
+ 
 @@ -1255,7 +1256,7 @@ EXTERN_C const IID IID_IPin;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -426,6 +435,15 @@ index bf0a3c0f30..810df62104 100644
      IOverlayNotify : public IUnknown
      {
      public:
+@@ -6282,7 +6383,7 @@ typedef IOverlayNotify *POVERLAYNOTIFY;
+ typedef HANDLE HMONITOR;
+ 
+ #endif
+-DECLARE_HANDLE(HMONITOR);
++DECLARE_HANDLE(HMONITOR) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ 
+ 
 @@ -6300,7 +6401,7 @@ EXTERN_C const IID IID_IOverlayNotify2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

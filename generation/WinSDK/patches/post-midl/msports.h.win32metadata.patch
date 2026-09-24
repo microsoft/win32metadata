@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
-index f42471fd62..4a0b66b6e1 100644
+index f42471fd62..c9f3c49cb8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
 @@ -17,6 +17,7 @@
@@ -18,6 +18,15 @@ index f42471fd62..4a0b66b6e1 100644
  SerialDisplayAdvancedSettings(_In_ HWND             ParentHwnd,
                                _In_ HDEVINFO         DeviceInfoSet,
                                _In_ PSP_DEVINFO_DATA DeviceInfoData
+@@ -90,7 +92,7 @@ BOOL
+ 
+ #endif
+ 
+-DECLARE_HANDLE(HCOMDB);
++DECLARE_HANDLE(HCOMDB) _WIN32META_ANNOTATION_("win32metadata:raii_free=ComDBClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HCOMDB *PHCOMDB;
+ #define HCOMDB_INVALID_HANDLE_VALUE ((HCOMDB) INVALID_HANDLE_VALUE)
+ 
 @@ -102,8 +104,10 @@ typedef HCOMDB *PHCOMDB;
  
  LONG

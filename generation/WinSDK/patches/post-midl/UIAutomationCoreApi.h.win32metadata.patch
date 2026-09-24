@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h
-index 9d1ef041ed..56bcaac8c8 100644
+index 9d1ef041ed..dfd427fdea 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCoreApi.h
 @@ -16,6 +16,7 @@ extern "C" {
@@ -10,6 +10,21 @@ index 9d1ef041ed..56bcaac8c8 100644
  
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+@@ -51,10 +52,10 @@ extern "C" {
+ #define UiaAppendRuntimeId     3
+ #define UiaRootObjectId        -25
+ 
+-DECLARE_HANDLE(HUIANODE);
+-DECLARE_HANDLE(HUIAPATTERNOBJECT);
+-DECLARE_HANDLE(HUIATEXTRANGE);
+-DECLARE_HANDLE(HUIAEVENT);
++DECLARE_HANDLE(HUIANODE) _WIN32META_ANNOTATION_("win32metadata:raii_free=UiaNodeRelease")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HUIAPATTERNOBJECT) _WIN32META_ANNOTATION_("win32metadata:raii_free=UiaPatternRelease")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HUIATEXTRANGE) _WIN32META_ANNOTATION_("win32metadata:raii_free=UiaTextRangeRelease")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HUIAEVENT) _WIN32META_ANNOTATION_("win32metadata:raii_free=UiaRemoveEvent")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #ifndef __uiautomationclient_h__
+ enum TreeScope
 @@ -476,7 +477,7 @@ DEFINE_GUID(IsDialog_Property_GUID,                                     0x9d0dfb
  //
  // --------------------------------------------------------------------------

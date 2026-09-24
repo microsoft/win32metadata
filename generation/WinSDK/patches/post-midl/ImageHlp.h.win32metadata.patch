@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
-index 1cdaaf102c..ae6ba8e559 100644
+index 1cdaaf102c..b49678f267 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImageHlp.h
 @@ -23,6 +23,7 @@ Revision History:
@@ -212,3 +212,1817 @@ index 1cdaaf102c..ae6ba8e559 100644
  IMAGEAPI
  UpdateDebugInfoFileEx(
      _In_ PCSTR ImageFileName,
+@@ -472,7 +479,7 @@ typedef BOOL
+ 
+ HANDLE
+ IMAGEAPI
+-SymFindDebugInfoFile(
++_Win32_SetLastError_ SymFindDebugInfoFile(
+     _In_ HANDLE hProcess,
+     _In_ PCSTR FileName,
+     _Out_writes_(MAX_PATH + 1) PSTR DebugFilePath,
+@@ -489,7 +496,7 @@ typedef BOOL
+ 
+ HANDLE
+ IMAGEAPI
+-SymFindDebugInfoFileW(
++_Win32_SetLastError_ SymFindDebugInfoFileW(
+     _In_ HANDLE hProcess,
+     _In_ PCWSTR FileName,
+     _Out_writes_(MAX_PATH + 1) PWSTR DebugFilePath,
+@@ -499,7 +506,7 @@ SymFindDebugInfoFileW(
+ 
+ HANDLE
+ IMAGEAPI
+-FindDebugInfoFile (
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ FindDebugInfoFile (
+     _In_ PCSTR FileName,
+     _In_ PCSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PSTR DebugFilePath
+@@ -507,7 +514,7 @@ FindDebugInfoFile (
+ 
+ HANDLE
+ IMAGEAPI
+-FindDebugInfoFileEx (
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ FindDebugInfoFileEx (
+     _In_ PCSTR FileName,
+     _In_ PCSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PSTR  DebugFilePath,
+@@ -517,7 +524,7 @@ FindDebugInfoFileEx (
+ 
+ HANDLE
+ IMAGEAPI
+-FindDebugInfoFileExW (
++_Win32_SetLastError_ FindDebugInfoFileExW (
+     _In_ PCWSTR FileName,
+     _In_ PCWSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PWSTR DebugFilePath,
+@@ -533,7 +540,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymFindFileInPath(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFindFileInPath(
+     _In_ HANDLE hprocess,
+     _In_opt_ PCSTR SearchPath,
+     _In_ PCSTR FileName,
+@@ -554,7 +561,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymFindFileInPathW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFindFileInPathW(
+     _In_ HANDLE hprocess,
+     _In_opt_ PCWSTR SearchPath,
+     _In_ PCWSTR FileName,
+@@ -576,7 +583,7 @@ typedef BOOL
+ 
+ HANDLE
+ IMAGEAPI
+-SymFindExecutableImage(
++_Win32_SetLastError_ SymFindExecutableImage(
+     _In_ HANDLE hProcess,
+     _In_ PCSTR FileName,
+     _Out_writes_(MAX_PATH + 1) PSTR ImageFilePath,
+@@ -593,7 +600,7 @@ typedef BOOL
+ 
+ HANDLE
+ IMAGEAPI
+-SymFindExecutableImageW(
++_Win32_SetLastError_ SymFindExecutableImageW(
+     _In_ HANDLE hProcess,
+     _In_ PCWSTR FileName,
+     _Out_writes_(MAX_PATH + 1) PWSTR ImageFilePath,
+@@ -603,7 +610,7 @@ SymFindExecutableImageW(
+ 
+ HANDLE
+ IMAGEAPI
+-FindExecutableImage(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ FindExecutableImage(
+     _In_ PCSTR FileName,
+     _In_ PCSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PSTR ImageFilePath
+@@ -611,7 +618,7 @@ FindExecutableImage(
+ 
+ HANDLE
+ IMAGEAPI
+-FindExecutableImageEx(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ FindExecutableImageEx(
+     _In_ PCSTR FileName,
+     _In_ PCSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PSTR ImageFilePath,
+@@ -621,7 +628,7 @@ FindExecutableImageEx(
+ 
+ HANDLE
+ IMAGEAPI
+-FindExecutableImageExW(
++_Win32_SetLastError_ FindExecutableImageExW(
+     _In_ PCWSTR FileName,
+     _In_ PCWSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PWSTR ImageFilePath,
+@@ -631,13 +638,13 @@ FindExecutableImageExW(
+ 
+ PIMAGE_NT_HEADERS
+ IMAGEAPI
+-ImageNtHeader (
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ ImageNtHeader (
+     _In_ PVOID Base
+     );
+ 
+ PVOID
+ IMAGEAPI
+-ImageDirectoryEntryToDataEx (
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ ImageDirectoryEntryToDataEx (
+     _In_ PVOID Base,
+     _In_ BOOLEAN MappedAsImage,
+     _In_ USHORT DirectoryEntry,
+@@ -647,7 +654,7 @@ ImageDirectoryEntryToDataEx (
+ 
+ PVOID
+ IMAGEAPI
+-ImageDirectoryEntryToData (
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ ImageDirectoryEntryToData (
+     _In_ PVOID Base,
+     _In_ BOOLEAN MappedAsImage,
+     _In_ USHORT DirectoryEntry,
+@@ -656,7 +663,7 @@ ImageDirectoryEntryToData (
+ 
+ PIMAGE_SECTION_HEADER
+ IMAGEAPI
+-ImageRvaToSection(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ ImageRvaToSection(
+     _In_ PIMAGE_NT_HEADERS NtHeaders,
+     _In_ PVOID Base,
+     _In_ ULONG Rva
+@@ -664,7 +671,7 @@ ImageRvaToSection(
+ 
+ PVOID
+ IMAGEAPI
+-ImageRvaToVa(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ ImageRvaToVa(
+     _In_ PIMAGE_NT_HEADERS NtHeaders,
+     _In_ PVOID Base,
+     _In_ ULONG Rva,
+@@ -740,7 +747,7 @@ UnmapDebugInformation(
+ 
+ BOOL
+ IMAGEAPI
+-SearchTreeForFile(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SearchTreeForFile(
+     _In_ PCSTR RootPath,
+     _In_ PCSTR InputPathName,
+     _Out_writes_(MAX_PATH + 1) PSTR OutputPathBuffer
+@@ -748,7 +755,7 @@ SearchTreeForFile(
+ 
+ BOOL
+ IMAGEAPI
+-SearchTreeForFileW(
++_Win32_SetLastError_ SearchTreeForFileW(
+     _In_ PCWSTR RootPath,
+     _In_ PCWSTR InputPathName,
+     _Out_writes_(MAX_PATH + 1) PWSTR OutputPathBuffer
+@@ -762,7 +769,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-EnumDirTree(
++_Win32_SetLastError_ EnumDirTree(
+     _In_opt_ HANDLE hProcess,
+     _In_ PCSTR RootPath,
+     _In_ PCSTR InputPathName,
+@@ -779,7 +786,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-EnumDirTreeW(
++_Win32_SetLastError_ EnumDirTreeW(
+     _In_opt_ HANDLE hProcess,
+     _In_ PCWSTR RootPath,
+     _In_ PCWSTR InputPathName,
+@@ -790,7 +797,7 @@ EnumDirTreeW(
+ 
+ BOOL
+ IMAGEAPI
+-MakeSureDirectoryPathExists(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ MakeSureDirectoryPathExists(
+     _In_ PCSTR DirPath
+     );
+ 
+@@ -820,7 +827,7 @@ MakeSureDirectoryPathExists(
+ DWORD
+ IMAGEAPI
+ WINAPI
+-UnDecorateSymbolName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ UnDecorateSymbolName(
+     _In_ PCSTR name,
+     _Out_writes_(maxStringLength) PSTR outputString,
+     _In_ DWORD maxStringLength,
+@@ -830,7 +837,7 @@ UnDecorateSymbolName(
+ DWORD
+ IMAGEAPI
+ WINAPI
+-UnDecorateSymbolNameW(
++_Win32_SetLastError_ UnDecorateSymbolNameW(
+     _In_ PCWSTR name,
+     _Out_writes_(maxStringLength) PWSTR outputString,
+     _In_ DWORD maxStringLength,
+@@ -1253,7 +1260,7 @@ BOOL
+ 
+ BOOL
+ IMAGEAPI
+-StackWalk64(
++_Win32_ImportLibrary_("dbghelp.dll") StackWalk64(
+     _In_ DWORD MachineType,
+     _In_ HANDLE hProcess,
+     _In_ HANDLE hThread,
+@@ -1276,7 +1283,7 @@ StackWalk64(
+ #define SYM_STKWALK_ZEROEXTEND_PTRS 0x00000002
+ BOOL
+ IMAGEAPI
+-StackWalkEx(
++_Win32_ImportLibrary_("dbghelp.dll") StackWalkEx(
+     _In_ DWORD MachineType,
+     _In_ HANDLE hProcess,
+     _In_ HANDLE hThread,
+@@ -1291,7 +1298,7 @@ StackWalkEx(
+ 
+ BOOL
+ IMAGEAPI
+-StackWalk2(
++_Win32_ImportLibrary_("dbghelp.dll") StackWalk2(
+     _In_ DWORD MachineType,
+     _In_ HANDLE hProcess,
+     _In_ HANDLE hThread,
+@@ -1351,7 +1358,7 @@ DWORD
+ 
+ BOOL
+ IMAGEAPI
+-StackWalk(
++_Win32_ImportLibrary_("dbghelp.dll") StackWalk(
+     DWORD MachineType,
+     _In_ HANDLE hProcess,
+     _In_ HANDLE hThread,
+@@ -1377,19 +1384,19 @@ typedef struct API_VERSION {
+ 
+ LPAPI_VERSION
+ IMAGEAPI
+-ImagehlpApiVersion(
++_Win32_ImportLibrary_("dbghelp.dll") ImagehlpApiVersion(
+     VOID
+     );
+ 
+ LPAPI_VERSION
+ IMAGEAPI
+-ImagehlpApiVersionEx(
++_Win32_ImportLibrary_("dbghelp.dll") ImagehlpApiVersionEx(
+     _In_ LPAPI_VERSION AppVersion
+     );
+ 
+ DWORD
+ IMAGEAPI
+-GetTimestampForLoadedLibrary(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ GetTimestampForLoadedLibrary(
+     _In_ HMODULE Module
+     );
+ 
+@@ -2041,33 +2048,33 @@ typedef struct _IMAGEHLP_JIT_SYMBOL_MAP {
+ 
+ BOOL
+ IMAGEAPI
+-SymSetParentWindow(
++_Win32_SetLastError_ SymSetParentWindow(
+     _In_ HWND hwnd
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymGetParentWindow(
++_Win32_ImportLibrary_("dbghelp.dll") SymGetParentWindow(
+     _Out_ HWND * pHwnd
+     );
+ 
+ PCHAR
+ IMAGEAPI
+-SymSetHomeDirectory(
++_Win32_SetLastError_ SymSetHomeDirectory(
+     _In_opt_ HANDLE hProcess,
+     _In_opt_ PCSTR dir
+     );
+ 
+ PWSTR
+ IMAGEAPI
+-SymSetHomeDirectoryW(
++_Win32_SetLastError_ SymSetHomeDirectoryW(
+     _In_opt_ HANDLE hProcess,
+     _In_opt_ PCWSTR dir
+     );
+ 
+ PCHAR
+ IMAGEAPI
+-SymGetHomeDirectory(
++_Win32_SetLastError_ SymGetHomeDirectory(
+     _In_ DWORD type,
+     _Out_writes_(size) PSTR dir,
+     _In_ size_t size
+@@ -2075,7 +2082,7 @@ SymGetHomeDirectory(
+ 
+ PWSTR
+ IMAGEAPI
+-SymGetHomeDirectoryW(
++_Win32_SetLastError_ SymGetHomeDirectoryW(
+     _In_ DWORD type,
+     _Out_writes_(size) PWSTR dir,
+     _In_ size_t size
+@@ -2095,7 +2102,7 @@ typedef struct _OMAP {
+ 
+ BOOL
+ IMAGEAPI
+-SymGetOmaps(
++_Win32_SetLastError_ SymGetOmaps(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 BaseOfDll,
+     _Out_ POMAP *OmapTo,
+@@ -2170,19 +2177,19 @@ typedef enum {
+ 
+ DWORD
+ IMAGEAPI
+-SymSetOptions(
++_Win32_ImportLibrary_("dbghelp.dll") SymSetOptions(
+     _In_ DWORD   SymOptions
+     );
+ 
+ DWORD
+ IMAGEAPI
+-SymGetOptions(
++_Win32_ImportLibrary_("dbghelp.dll") SymGetOptions(
+     VOID
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymCleanup(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymCleanup(
+     _In_ HANDLE hProcess
+     );
+ 
+@@ -2195,12 +2202,12 @@ SymCleanup(
+ // Returns the value of the extended option
+ BOOL
+ IMAGEAPI
+-SymGetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option);
++_Win32_ImportLibrary_("dbghelp.dll") SymGetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option);
+ 
+ // Returns the previous value of the option
+ BOOL
+ IMAGEAPI
+-SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
++_Win32_ImportLibrary_("dbghelp.dll") SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+ #pragma endregion
+@@ -2210,7 +2217,7 @@ SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
+ 
+ BOOL
+ IMAGEAPI
+-SymMatchString(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymMatchString(
+     _In_ PCSTR string,
+     _In_ PCSTR expression,
+     _In_ BOOL fCase
+@@ -2218,7 +2225,7 @@ SymMatchString(
+ 
+ BOOL
+ IMAGEAPI
+-SymMatchStringA(
++_Win32_ImportLibrary_("dbghelp.dll") SymMatchStringA(
+     _In_ PCSTR string,
+     _In_ PCSTR expression,
+     _In_ BOOL fCase
+@@ -2226,7 +2233,7 @@ SymMatchStringA(
+ 
+ BOOL
+ IMAGEAPI
+-SymMatchStringW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymMatchStringW(
+     _In_ PCWSTR string,
+     _In_ PCWSTR expression,
+     _In_ BOOL fCase
+@@ -2243,7 +2250,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSourceFiles(
++_Win32_SetLastError_ SymEnumSourceFiles(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 ModBase,
+     _In_opt_ PCSTR Mask,
+@@ -2259,7 +2266,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSourceFilesW(
++_Win32_SetLastError_ SymEnumSourceFilesW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 ModBase,
+     _In_opt_ PCWSTR Mask,
+@@ -2269,7 +2276,7 @@ SymEnumSourceFilesW(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumerateModules64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumerateModules64(
+     _In_ HANDLE hProcess,
+     _In_ PSYM_ENUMMODULES_CALLBACK64 EnumModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2277,7 +2284,7 @@ SymEnumerateModules64(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumerateModulesW64(
++_Win32_SetLastError_ SymEnumerateModulesW64(
+     _In_ HANDLE hProcess,
+     _In_ PSYM_ENUMMODULES_CALLBACKW64 EnumModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2288,7 +2295,7 @@ SymEnumerateModulesW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymEnumerateModules(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumerateModules(
+     _In_ HANDLE hProcess,
+     _In_ PSYM_ENUMMODULES_CALLBACK EnumModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2297,7 +2304,7 @@ SymEnumerateModules(
+ 
+ BOOL
+ IMAGEAPI
+-EnumerateLoadedModulesEx(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ EnumerateLoadedModulesEx(
+     _In_ HANDLE hProcess,
+     _In_ PENUMLOADED_MODULES_CALLBACK64 EnumLoadedModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2305,7 +2312,7 @@ EnumerateLoadedModulesEx(
+ 
+ BOOL
+ IMAGEAPI
+-EnumerateLoadedModulesExW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ EnumerateLoadedModulesExW(
+     _In_ HANDLE hProcess,
+     _In_ PENUMLOADED_MODULES_CALLBACKW64 EnumLoadedModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2313,7 +2320,7 @@ EnumerateLoadedModulesExW(
+ 
+ BOOL
+ IMAGEAPI
+-EnumerateLoadedModules64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ EnumerateLoadedModules64(
+     _In_ HANDLE hProcess,
+     _In_ PENUMLOADED_MODULES_CALLBACK64 EnumLoadedModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2321,7 +2328,7 @@ EnumerateLoadedModules64(
+ 
+ BOOL
+ IMAGEAPI
+-EnumerateLoadedModulesW64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ EnumerateLoadedModulesW64(
+     _In_ HANDLE hProcess,
+     _In_ PENUMLOADED_MODULES_CALLBACKW64 EnumLoadedModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2332,7 +2339,7 @@ EnumerateLoadedModulesW64(
+ #else
+ BOOL
+ IMAGEAPI
+-EnumerateLoadedModules(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ EnumerateLoadedModules(
+     _In_ HANDLE hProcess,
+     _In_ PENUMLOADED_MODULES_CALLBACK EnumLoadedModulesCallback,
+     _In_opt_ PVOID UserContext
+@@ -2341,7 +2348,7 @@ EnumerateLoadedModules(
+ 
+ PVOID
+ IMAGEAPI
+-SymFunctionTableAccess64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFunctionTableAccess64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 AddrBase
+     );
+@@ -2354,7 +2361,7 @@ SymFunctionTableAccess64(
+ 
+ PVOID
+ IMAGEAPI
+-SymFunctionTableAccess64AccessRoutines(
++_Win32_ImportLibrary_("dbghelp.dll") SymFunctionTableAccess64AccessRoutines(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 AddrBase,
+     _In_opt_ PREAD_PROCESS_MEMORY_ROUTINE64 ReadMemoryRoutine,
+@@ -2366,7 +2373,7 @@ SymFunctionTableAccess64AccessRoutines(
+ #else
+ PVOID
+ IMAGEAPI
+-SymFunctionTableAccess(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFunctionTableAccess(
+     _In_ HANDLE hProcess,
+     _In_ DWORD AddrBase
+     );
+@@ -2389,7 +2396,7 @@ SymGetUnwindInfo(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetModuleInfo64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetModuleInfo64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 qwAddr,
+     _Out_ PIMAGEHLP_MODULE64 ModuleInfo
+@@ -2397,7 +2404,7 @@ SymGetModuleInfo64(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetModuleInfoW64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetModuleInfoW64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 qwAddr,
+     _Out_ PIMAGEHLP_MODULEW64 ModuleInfo
+@@ -2409,7 +2416,7 @@ SymGetModuleInfoW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetModuleInfo(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetModuleInfo(
+     _In_ HANDLE hProcess,
+     _In_ DWORD dwAddr,
+     _Out_ PIMAGEHLP_MODULE ModuleInfo
+@@ -2417,7 +2424,7 @@ SymGetModuleInfo(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetModuleInfoW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetModuleInfoW(
+     _In_ HANDLE hProcess,
+     _In_ DWORD dwAddr,
+     _Out_ PIMAGEHLP_MODULEW ModuleInfo
+@@ -2426,7 +2433,7 @@ SymGetModuleInfoW(
+ 
+ DWORD64
+ IMAGEAPI
+-SymGetModuleBase64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetModuleBase64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 qwAddr
+     );
+@@ -2436,7 +2443,7 @@ SymGetModuleBase64(
+ #else
+ DWORD
+ IMAGEAPI
+-SymGetModuleBase(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetModuleBase(
+     _In_ HANDLE hProcess,
+     _In_ DWORD dwAddr
+     );
+@@ -2476,7 +2483,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumLines(
++_Win32_SetLastError_ SymEnumLines(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCSTR Obj,
+@@ -2493,7 +2500,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumLinesW(
++_Win32_SetLastError_ SymEnumLinesW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCWSTR Obj,
+@@ -2510,7 +2517,7 @@ SymEnumLinesW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineFromAddr64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineFromAddr64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 qwAddr,
+     _Out_ PDWORD pdwDisplacement,
+@@ -2525,7 +2532,7 @@ SymGetLineFromAddr64(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineFromAddrW64(
++_Win32_SetLastError_ SymGetLineFromAddrW64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 dwAddr,
+     _Out_ PDWORD pdwDisplacement,
+@@ -2534,7 +2541,7 @@ SymGetLineFromAddrW64(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineFromInlineContext(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineFromInlineContext(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 qwAddr,
+     _In_ ULONG InlineContext,
+@@ -2545,7 +2552,7 @@ SymGetLineFromInlineContext(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineFromInlineContextW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineFromInlineContextW(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 dwAddr,
+     _In_ ULONG InlineContext,
+@@ -2556,7 +2563,7 @@ SymGetLineFromInlineContextW(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSourceLines(
++_Win32_SetLastError_ SymEnumSourceLines(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCSTR Obj,
+@@ -2569,7 +2576,7 @@ SymEnumSourceLines(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSourceLinesW(
++_Win32_SetLastError_ SymEnumSourceLinesW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCWSTR Obj,
+@@ -2583,7 +2590,7 @@ SymEnumSourceLinesW(
+ // Check whether input Address includes "inline stack".
+ DWORD
+ IMAGEAPI
+-SymAddrIncludeInlineTrace(
++_Win32_ImportLibrary_("dbghelp.dll") SymAddrIncludeInlineTrace(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address
+     );
+@@ -2599,7 +2606,7 @@ SymAddrIncludeInlineTrace(
+ // what execution control operation. The return value would be onr of the literals defined above.
+ DWORD
+ IMAGEAPI
+-SymCompareInlineTrace(
++_Win32_ImportLibrary_("dbghelp.dll") SymCompareInlineTrace(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address1,
+     _In_ DWORD   InlineContext1,
+@@ -2610,7 +2617,7 @@ SymCompareInlineTrace(
+ 
+ BOOL
+ IMAGEAPI
+-SymQueryInlineTrace(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymQueryInlineTrace(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 StartAddress,
+     _In_ DWORD StartContext,
+@@ -2634,7 +2641,7 @@ SymQueryInlineTrace(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetLineFromAddr(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineFromAddr(
+     _In_ HANDLE hProcess,
+     _In_ DWORD dwAddr,
+     _Out_ PDWORD pdwDisplacement,
+@@ -2653,7 +2660,7 @@ SymGetLineFromAddrW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineFromName64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineFromName64(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR ModuleName,
+     _In_opt_ PCSTR FileName,
+@@ -2664,7 +2671,7 @@ SymGetLineFromName64(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineFromNameW64(
++_Win32_SetLastError_ SymGetLineFromNameW64(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR ModuleName,
+     _In_opt_ PCWSTR FileName,
+@@ -2678,7 +2685,7 @@ SymGetLineFromNameW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetLineFromName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineFromName(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR ModuleName,
+     _In_opt_ PCSTR FileName,
+@@ -2690,14 +2697,14 @@ SymGetLineFromName(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineNext64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineNext64(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_LINE64 Line
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLineNextW64(
++_Win32_SetLastError_ SymGetLineNextW64(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_LINEW64 Line
+     );
+@@ -2707,7 +2714,7 @@ SymGetLineNextW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetLineNext(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLineNext(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_LINE Line
+     );
+@@ -2722,14 +2729,14 @@ SymGetLineNextW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLinePrev64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLinePrev64(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_LINE64 Line
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymGetLinePrevW64(
++_Win32_SetLastError_ SymGetLinePrevW64(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_LINEW64 Line
+     );
+@@ -2739,7 +2746,7 @@ SymGetLinePrevW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetLinePrev(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetLinePrev(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_LINE Line
+     );
+@@ -2754,7 +2761,7 @@ SymGetLinePrevW(
+ 
+ ULONG
+ IMAGEAPI
+-SymGetFileLineOffsets64(
++_Win32_SetLastError_ SymGetFileLineOffsets64(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR ModuleName,
+     _In_ PCSTR FileName,
+@@ -2764,7 +2771,7 @@ SymGetFileLineOffsets64(
+ 
+ BOOL
+ IMAGEAPI
+-SymMatchFileName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymMatchFileName(
+     _In_ PCSTR FileName,
+     _In_ PCSTR Match,
+     _Outptr_opt_ PSTR *FileNameStop,
+@@ -2773,7 +2780,7 @@ SymMatchFileName(
+ 
+ BOOL
+ IMAGEAPI
+-SymMatchFileNameW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymMatchFileNameW(
+     _In_ PCWSTR FileName,
+     _In_ PCWSTR Match,
+     _Outptr_opt_ PWSTR *FileNameStop,
+@@ -2782,7 +2789,7 @@ SymMatchFileNameW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFile(
++_Win32_SetLastError_ SymGetSourceFile(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCSTR Params,
+@@ -2793,7 +2800,7 @@ SymGetSourceFile(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileW(
++_Win32_SetLastError_ SymGetSourceFileW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCWSTR Params,
+@@ -2804,7 +2811,7 @@ SymGetSourceFileW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileToken(
++_Win32_SetLastError_ SymGetSourceFileToken(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PCSTR FileSpec,
+@@ -2814,7 +2821,7 @@ SymGetSourceFileToken(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileTokenByTokenName(
++_Win32_ImportLibrary_("dbghelp.dll") SymGetSourceFileTokenByTokenName(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PCSTR FileSpec,
+@@ -2826,7 +2833,7 @@ SymGetSourceFileTokenByTokenName(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileChecksumW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSourceFileChecksumW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PCWSTR FileSpec,
+@@ -2838,7 +2845,7 @@ SymGetSourceFileChecksumW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileChecksum(
++_Win32_SetLastError_ SymGetSourceFileChecksum(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PCSTR FileSpec,
+@@ -2850,7 +2857,7 @@ SymGetSourceFileChecksum(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileTokenW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSourceFileTokenW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PCWSTR FileSpec,
+@@ -2860,7 +2867,7 @@ SymGetSourceFileTokenW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileTokenByTokenNameW(
++_Win32_ImportLibrary_("dbghelp.dll") SymGetSourceFileTokenByTokenNameW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PCWSTR FileSpec,
+@@ -2872,7 +2879,7 @@ SymGetSourceFileTokenByTokenNameW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileFromToken(
++_Win32_SetLastError_ SymGetSourceFileFromToken(
+     _In_ HANDLE hProcess,
+     _In_ PVOID Token,
+     _In_opt_ PCSTR Params,
+@@ -2882,7 +2889,7 @@ SymGetSourceFileFromToken(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileFromTokenByTokenName(
++_Win32_ImportLibrary_("dbghelp.dll") SymGetSourceFileFromTokenByTokenName(
+     _In_ HANDLE hProcess,
+     _In_ PVOID Token,
+     _In_opt_ PCSTR TokenName,
+@@ -2893,7 +2900,7 @@ SymGetSourceFileFromTokenByTokenName(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileFromTokenW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSourceFileFromTokenW(
+     _In_ HANDLE hProcess,
+     _In_ PVOID Token,
+     _In_opt_ PCWSTR Params,
+@@ -2903,7 +2910,7 @@ SymGetSourceFileFromTokenW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceFileFromTokenByTokenNameW(
++_Win32_ImportLibrary_("dbghelp.dll") SymGetSourceFileFromTokenByTokenNameW(
+     _In_ HANDLE hProcess,
+     _In_ PVOID Token,
+     _In_opt_ PCWSTR TokenName,
+@@ -2914,7 +2921,7 @@ SymGetSourceFileFromTokenByTokenNameW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceVarFromToken(
++_Win32_SetLastError_ SymGetSourceVarFromToken(
+     _In_ HANDLE hProcess,
+     _In_ PVOID Token,
+     _In_opt_ PCSTR Params,
+@@ -2925,7 +2932,7 @@ SymGetSourceVarFromToken(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSourceVarFromTokenW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSourceVarFromTokenW(
+     _In_ HANDLE hProcess,
+     _In_ PVOID Token,
+     _In_opt_ PCWSTR Params,
+@@ -2938,7 +2945,7 @@ typedef BOOL (CALLBACK *PENUMSOURCEFILETOKENSCALLBACK)(_In_ PVOID token,  _In_ s
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSourceFileTokens(
++_Win32_SetLastError_ SymEnumSourceFileTokens(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_ PENUMSOURCEFILETOKENSCALLBACK Callback
+@@ -2952,7 +2959,7 @@ SymEnumSourceFileTokens(
+ 
+ BOOL
+ IMAGEAPI
+-SymInitialize(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymInitialize(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR UserSearchPath,
+     _In_ BOOL fInvadeProcess
+@@ -2960,7 +2967,7 @@ SymInitialize(
+ 
+ BOOL
+ IMAGEAPI
+-SymInitializeW(
++_Win32_SetLastError_ SymInitializeW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR UserSearchPath,
+     _In_ BOOL fInvadeProcess
+@@ -2980,7 +2987,7 @@ SymInitializeW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSearchPath(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSearchPath(
+     _In_ HANDLE hProcess,
+     _Out_writes_(SearchPathLength) PSTR SearchPath,
+     _In_ DWORD SearchPathLength
+@@ -2988,7 +2995,7 @@ SymGetSearchPath(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSearchPathW(
++_Win32_SetLastError_ SymGetSearchPathW(
+     _In_ HANDLE hProcess,
+     _Out_writes_(SearchPathLength) PWSTR SearchPath,
+     _In_ DWORD SearchPathLength
+@@ -2996,7 +3003,7 @@ SymGetSearchPathW(
+ 
+ BOOL
+ IMAGEAPI
+-SymSetSearchPath(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSetSearchPath(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR SearchPath
+     );
+@@ -3009,7 +3016,7 @@ SymSetSearchPath(
+ 
+ BOOL
+ IMAGEAPI
+-SymSetSearchPathW(
++_Win32_SetLastError_ SymSetSearchPathW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR SearchPath
+     );
+@@ -3026,7 +3033,7 @@ SymSetSearchPathW(
+ 
+ DWORD64
+ IMAGEAPI
+-SymLoadModuleEx(
++_Win32_SetLastError_ SymLoadModuleEx(
+     _In_ HANDLE hProcess,
+     _In_opt_ HANDLE hFile,
+     _In_opt_ PCSTR ImageName,
+@@ -3045,7 +3052,7 @@ SymLoadModuleEx(
+ 
+ DWORD64
+ IMAGEAPI
+-SymLoadModuleExW(
++_Win32_SetLastError_ SymLoadModuleExW(
+     _In_ HANDLE hProcess,
+     _In_opt_ HANDLE hFile,
+     _In_opt_ PCWSTR ImageName,
+@@ -3064,7 +3071,7 @@ SymLoadModuleExW(
+ 
+ BOOL
+ IMAGEAPI
+-SymUnloadModule64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymUnloadModule64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 BaseOfDll
+     );
+@@ -3074,7 +3081,7 @@ SymUnloadModule64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymUnloadModule(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymUnloadModule(
+     _In_ HANDLE hProcess,
+     _In_ DWORD BaseOfDll
+     );
+@@ -3082,7 +3089,7 @@ SymUnloadModule(
+ 
+ BOOL
+ IMAGEAPI
+-SymUnDName64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymUnDName64(
+     _In_ PIMAGEHLP_SYMBOL64 sym,            // Symbol to undecorate
+     _Out_writes_(UnDecNameLength) PSTR UnDecName,   // Buffer to store undecorated name in
+     _In_ DWORD UnDecNameLength              // Size of the buffer
+@@ -3093,7 +3100,7 @@ SymUnDName64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymUnDName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymUnDName(
+     _In_ PIMAGEHLP_SYMBOL sym,              // Symbol to undecorate
+     _Out_writes_(UnDecNameLength) PSTR UnDecName,   // Buffer to store undecorated name in
+     _In_ DWORD UnDecNameLength              // Size of the buffer
+@@ -3102,7 +3109,7 @@ SymUnDName(
+ 
+ BOOL
+ IMAGEAPI
+-SymRegisterCallback64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymRegisterCallback64(
+     _In_ HANDLE hProcess,
+     _In_ PSYMBOL_REGISTERED_CALLBACK64 CallbackFunction,
+     _In_ ULONG64 UserContext
+@@ -3110,7 +3117,7 @@ SymRegisterCallback64(
+ 
+ BOOL
+ IMAGEAPI
+-SymRegisterCallbackW64(
++_Win32_SetLastError_ SymRegisterCallbackW64(
+     _In_ HANDLE hProcess,
+     _In_ PSYMBOL_REGISTERED_CALLBACK64 CallbackFunction,
+     _In_ ULONG64 UserContext
+@@ -3118,7 +3125,7 @@ SymRegisterCallbackW64(
+ 
+ BOOL
+ IMAGEAPI
+-SymRegisterFunctionEntryCallback64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymRegisterFunctionEntryCallback64(
+     _In_ HANDLE hProcess,
+     _In_ PSYMBOL_FUNCENTRY_CALLBACK64 CallbackFunction,
+     _In_ ULONG64 UserContext
+@@ -3130,7 +3137,7 @@ SymRegisterFunctionEntryCallback64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymRegisterCallback(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymRegisterCallback(
+     _In_ HANDLE hProcess,
+     _In_ PSYMBOL_REGISTERED_CALLBACK CallbackFunction,
+     _In_opt_ PVOID UserContext
+@@ -3138,7 +3145,7 @@ SymRegisterCallback(
+ 
+ BOOL
+ IMAGEAPI
+-SymRegisterFunctionEntryCallback(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymRegisterFunctionEntryCallback(
+     _In_ HANDLE hProcess,
+     _In_ PSYMBOL_FUNCENTRY_CALLBACK CallbackFunction,
+     _In_opt_ PVOID UserContext
+@@ -3235,7 +3242,7 @@ typedef VOID IMAGEHLP_CONTEXT, *PIMAGEHLP_CONTEXT;
+ 
+ BOOL
+ IMAGEAPI
+-SymSetContext(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSetContext(
+     _In_ HANDLE hProcess,
+     _In_ PIMAGEHLP_STACK_FRAME StackFrame,
+     _In_opt_ PIMAGEHLP_CONTEXT Context
+@@ -3243,14 +3250,14 @@ SymSetContext(
+ 
+ BOOL
+ IMAGEAPI
+-SymSetScopeFromAddr(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSetScopeFromAddr(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Address
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymSetScopeFromInlineContext(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSetScopeFromInlineContext(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Address,
+     _In_ ULONG InlineContext
+@@ -3258,7 +3265,7 @@ SymSetScopeFromInlineContext(
+ 
+ BOOL
+ IMAGEAPI
+-SymSetScopeFromIndex(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSetScopeFromIndex(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ DWORD Index
+@@ -3272,7 +3279,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumProcesses(
++_Win32_SetLastError_ SymEnumProcesses(
+     _In_ PSYM_ENUMPROCESSES_CALLBACK EnumProcessesCallback,
+     _In_ PVOID UserContext
+     );
+@@ -3285,7 +3292,7 @@ SymEnumProcesses(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromAddr(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFromAddr(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address,
+     _Out_opt_ PDWORD64 Displacement,
+@@ -3294,7 +3301,7 @@ SymFromAddr(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromAddrW(
++_Win32_SetLastError_ SymFromAddrW(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address,
+     _Out_opt_ PDWORD64 Displacement,
+@@ -3309,7 +3316,7 @@ SymFromAddrW(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromInlineContext(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFromInlineContext(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address,
+     _In_ ULONG InlineContext,
+@@ -3319,7 +3326,7 @@ SymFromInlineContext(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromInlineContextW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFromInlineContextW(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address,
+     _In_ ULONG InlineContext,
+@@ -3329,7 +3336,7 @@ SymFromInlineContextW(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromToken(
++_Win32_SetLastError_ SymFromToken(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Base,
+     _In_ DWORD Token,
+@@ -3338,7 +3345,7 @@ SymFromToken(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromTokenW(
++_Win32_SetLastError_ SymFromTokenW(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Base,
+     _In_ DWORD Token,
+@@ -3347,28 +3354,28 @@ SymFromTokenW(
+ 
+ BOOL
+ IMAGEAPI
+-SymNext(
++_Win32_SetLastError_ SymNext(
+     _In_ HANDLE hProcess,
+     _Inout_ PSYMBOL_INFO si
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymNextW(
++_Win32_SetLastError_ SymNextW(
+     _In_ HANDLE hProcess,
+     _Inout_ PSYMBOL_INFOW siw
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymPrev(
++_Win32_SetLastError_ SymPrev(
+     _In_ HANDLE hProcess,
+     _Inout_ PSYMBOL_INFO si
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymPrevW(
++_Win32_SetLastError_ SymPrevW(
+     _In_ HANDLE hProcess,
+     _Inout_ PSYMBOL_INFOW siw
+     );
+@@ -3381,7 +3388,7 @@ SymPrevW(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymFromName(
+     _In_ HANDLE hProcess,
+     _In_ PCSTR Name,
+     _Inout_ PSYMBOL_INFO Symbol
+@@ -3389,7 +3396,7 @@ SymFromName(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromNameW(
++_Win32_SetLastError_ SymFromNameW(
+     _In_ HANDLE hProcess,
+     _In_ PCWSTR Name,
+     _Inout_ PSYMBOL_INFOW Symbol
+@@ -3407,7 +3414,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSymbols(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumSymbols(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCSTR Mask,
+@@ -3417,7 +3424,7 @@ SymEnumSymbols(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSymbolsEx(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumSymbolsEx(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCSTR Mask,
+@@ -3435,7 +3442,7 @@ typedef BOOL
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSymbolsW(
++_Win32_SetLastError_ SymEnumSymbolsW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCWSTR Mask,
+@@ -3445,7 +3452,7 @@ SymEnumSymbolsW(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSymbolsExW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumSymbolsExW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCWSTR Mask,
+@@ -3456,7 +3463,7 @@ SymEnumSymbolsExW(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSymbolsForAddr(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumSymbolsForAddr(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address,
+     _In_ PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
+@@ -3465,7 +3472,7 @@ SymEnumSymbolsForAddr(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumSymbolsForAddrW(
++_Win32_SetLastError_ SymEnumSymbolsForAddrW(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 Address,
+     _In_ PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,
+@@ -3479,7 +3486,7 @@ SymEnumSymbolsForAddrW(
+ 
+ BOOL
+ IMAGEAPI
+-SymSearch(
++_Win32_SetLastError_ SymSearch(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ DWORD Index,
+@@ -3493,7 +3500,7 @@ SymSearch(
+ 
+ BOOL
+ IMAGEAPI
+-SymSearchW(
++_Win32_SetLastError_ SymSearchW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ DWORD Index,
+@@ -3507,7 +3514,7 @@ SymSearchW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetScope(
++_Win32_SetLastError_ SymGetScope(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ DWORD Index,
+@@ -3516,7 +3523,7 @@ SymGetScope(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetScopeW(
++_Win32_SetLastError_ SymGetScopeW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ DWORD Index,
+@@ -3525,7 +3532,7 @@ SymGetScopeW(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromIndex(
++_Win32_SetLastError_ SymFromIndex(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ DWORD Index,
+@@ -3534,7 +3541,7 @@ SymFromIndex(
+ 
+ BOOL
+ IMAGEAPI
+-SymFromIndexW(
++_Win32_SetLastError_ SymFromIndexW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ DWORD Index,
+@@ -3603,7 +3610,7 @@ typedef struct _TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
+ 
+ BOOL
+ IMAGEAPI
+-SymGetTypeInfo(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetTypeInfo(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 ModBase,
+     _In_ ULONG TypeId,
+@@ -3637,7 +3644,7 @@ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
+ 
+ BOOL
+ IMAGEAPI
+-SymGetTypeInfoEx(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetTypeInfoEx(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 ModBase,
+     _Inout_ PIMAGEHLP_GET_TYPE_INFO_PARAMS Params
+@@ -3645,7 +3652,7 @@ SymGetTypeInfoEx(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumTypes(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumTypes(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
+@@ -3654,7 +3661,7 @@ SymEnumTypes(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumTypesW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumTypesW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,
+@@ -3663,7 +3670,7 @@ SymEnumTypesW(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumTypesByName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumTypesByName(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCSTR mask,
+@@ -3673,7 +3680,7 @@ SymEnumTypesByName(
+ 
+ BOOL
+ IMAGEAPI
+-SymEnumTypesByNameW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumTypesByNameW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCWSTR mask,
+@@ -3683,7 +3690,7 @@ SymEnumTypesByNameW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetTypeFromName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetTypeFromName(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PCSTR Name,
+@@ -3692,7 +3699,7 @@ SymGetTypeFromName(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetTypeFromNameW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetTypeFromNameW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PCWSTR Name,
+@@ -3701,7 +3708,7 @@ SymGetTypeFromNameW(
+ 
+ BOOL
+ IMAGEAPI
+-SymAddSymbol(
++_Win32_SetLastError_ SymAddSymbol(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PCSTR Name,
+@@ -3712,7 +3719,7 @@ SymAddSymbol(
+ 
+ BOOL
+ IMAGEAPI
+-SymAddSymbolW(
++_Win32_SetLastError_ SymAddSymbolW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PCWSTR Name,
+@@ -3723,7 +3730,7 @@ SymAddSymbolW(
+ 
+ BOOL
+ IMAGEAPI
+-SymDeleteSymbol(
++_Win32_SetLastError_ SymDeleteSymbol(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCSTR Name,
+@@ -3733,7 +3740,7 @@ SymDeleteSymbol(
+ 
+ BOOL
+ IMAGEAPI
+-SymDeleteSymbolW(
++_Win32_SetLastError_ SymDeleteSymbolW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_opt_ PCWSTR Name,
+@@ -3749,7 +3756,7 @@ SymDeleteSymbolW(
+ 
+ BOOL
+ IMAGEAPI
+-SymRefreshModuleList(
++_Win32_SetLastError_ SymRefreshModuleList(
+     _In_ HANDLE hProcess
+     );
+ 
+@@ -3761,7 +3768,7 @@ SymRefreshModuleList(
+ 
+ BOOL
+ IMAGEAPI
+-SymAddSourceStream(
++_Win32_SetLastError_ SymAddSourceStream(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCSTR StreamFile,
+@@ -3785,7 +3792,7 @@ typedef BOOL (WINAPI *SYMADDSOURCESTREAMA)(HANDLE, ULONG64, PCSTR, PBYTE, size_t
+ 
+ BOOL
+ IMAGEAPI
+-SymAddSourceStreamW(
++_Win32_SetLastError_ SymAddSourceStreamW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 Base,
+     _In_opt_ PCWSTR FileSpec,
+@@ -3795,21 +3802,21 @@ SymAddSourceStreamW(
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvIsStoreW(
++_Win32_SetLastError_ SymSrvIsStoreW(
+     _In_opt_ HANDLE hProcess,
+     _In_ PCWSTR path
+     );
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvIsStore(
++_Win32_SetLastError_ SymSrvIsStore(
+     _In_opt_ HANDLE hProcess,
+     _In_ PCSTR path
+     );
+ 
+ PCSTR
+ IMAGEAPI
+-SymSrvDeltaName(
++_Win32_SetLastError_ SymSrvDeltaName(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR SymPath,
+     _In_ PCSTR Type,
+@@ -3819,7 +3826,7 @@ SymSrvDeltaName(
+ 
+ PCWSTR
+ IMAGEAPI
+-SymSrvDeltaNameW(
++_Win32_SetLastError_ SymSrvDeltaNameW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR SymPath,
+     _In_ PCWSTR Type,
+@@ -3829,7 +3836,7 @@ SymSrvDeltaNameW(
+ 
+ PCSTR
+ IMAGEAPI
+-SymSrvGetSupplement(
++_Win32_SetLastError_ SymSrvGetSupplement(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR SymPath,
+     _In_ PCSTR Node,
+@@ -3838,7 +3845,7 @@ SymSrvGetSupplement(
+ 
+ PCWSTR
+ IMAGEAPI
+-SymSrvGetSupplementW(
++_Win32_SetLastError_ SymSrvGetSupplementW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR SymPath,
+     _In_ PCWSTR Node,
+@@ -3847,7 +3854,7 @@ SymSrvGetSupplementW(
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvGetFileIndexes(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSrvGetFileIndexes(
+     _In_ PCSTR File,
+     _Out_ GUID *Id,
+     _Out_ PDWORD Val1,
+@@ -3857,7 +3864,7 @@ SymSrvGetFileIndexes(
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvGetFileIndexesW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSrvGetFileIndexesW(
+     _In_ PCWSTR File,
+     _Out_ GUID *Id,
+     _Out_ PDWORD Val1,
+@@ -3867,7 +3874,7 @@ SymSrvGetFileIndexesW(
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvGetFileIndexStringW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSrvGetFileIndexStringW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR SrvPath,
+     _In_ PCWSTR File,
+@@ -3878,7 +3885,7 @@ SymSrvGetFileIndexStringW(
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvGetFileIndexString(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymSrvGetFileIndexString(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR SrvPath,
+     _In_ PCSTR File,
+@@ -3915,7 +3922,7 @@ typedef struct {
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvGetFileIndexInfo(
++_Win32_SetLastError_ SymSrvGetFileIndexInfo(
+     _In_ PCSTR File,
+     _Out_ PSYMSRV_INDEX_INFO Info,
+     _In_ DWORD Flags
+@@ -3923,7 +3930,7 @@ SymSrvGetFileIndexInfo(
+ 
+ BOOL
+ IMAGEAPI
+-SymSrvGetFileIndexInfoW(
++_Win32_SetLastError_ SymSrvGetFileIndexInfoW(
+     _In_ PCWSTR File,
+     _Out_ PSYMSRV_INDEX_INFOW Info,
+     _In_ DWORD Flags
+@@ -3931,7 +3938,7 @@ SymSrvGetFileIndexInfoW(
+ 
+ PCSTR
+ IMAGEAPI
+-SymSrvStoreSupplement(
++_Win32_SetLastError_ SymSrvStoreSupplement(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR SrvPath,
+     _In_ PCSTR Node,
+@@ -3941,7 +3948,7 @@ SymSrvStoreSupplement(
+ 
+ PCWSTR
+ IMAGEAPI
+-SymSrvStoreSupplementW(
++_Win32_SetLastError_ SymSrvStoreSupplementW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR SymPath,
+     _In_ PCWSTR Node,
+@@ -3951,7 +3958,7 @@ SymSrvStoreSupplementW(
+ 
+ PCSTR
+ IMAGEAPI
+-SymSrvStoreFile(
++_Win32_SetLastError_ SymSrvStoreFile(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCSTR SrvPath,
+     _In_ PCSTR File,
+@@ -3966,7 +3973,7 @@ SymSrvStoreFile(
+ 
+ PCWSTR
+ IMAGEAPI
+-SymSrvStoreFileW(
++_Win32_SetLastError_ SymSrvStoreFileW(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR SrvPath,
+     _In_ PCWSTR File,
+@@ -3991,7 +3998,7 @@ typedef enum {
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSymbolFile(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymbolFile(
+     _In_opt_ HANDLE hProcess,
+     _In_opt_ PCSTR SymPath,
+     _In_ PCSTR ImageFile,
+@@ -4004,7 +4011,7 @@ SymGetSymbolFile(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSymbolFileW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymbolFileW(
+     _In_opt_ HANDLE hProcess,
+     _In_opt_ PCWSTR SymPath,
+     _In_ PCWSTR ImageFile,
+@@ -4055,7 +4062,7 @@ DbgHelpCreateUserDumpW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSymFromAddr64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymFromAddr64(
+     _In_ HANDLE hProcess,
+     _In_ DWORD64 qwAddr,
+     _Out_opt_ PDWORD64 pdwDisplacement,
+@@ -4068,7 +4075,7 @@ SymGetSymFromAddr64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetSymFromAddr(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymFromAddr(
+     _In_ HANDLE hProcess,
+     _In_ DWORD dwAddr,
+     _Out_opt_ PDWORD pdwDisplacement,
+@@ -4090,7 +4097,7 @@ SymGetSymFromAddr(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSymFromName64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymFromName64(
+     _In_ HANDLE hProcess,
+     _In_ PCSTR Name,
+     _Inout_ PIMAGEHLP_SYMBOL64 Symbol
+@@ -4101,7 +4108,7 @@ SymGetSymFromName64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetSymFromName(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymFromName(
+     _In_ HANDLE hProcess,
+     _In_ PCSTR Name,
+     _Inout_ PIMAGEHLP_SYMBOL Symbol
+@@ -4356,7 +4363,7 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-FindFileInPath(
++_Win32_ImportLibrary_("dbghelp.dll") FindFileInPath(
+     _In_ HANDLE hprocess,
+     _In_ PCSTR SearchPath,
+     _In_ PCSTR FileName,
+@@ -4373,7 +4380,7 @@ FindFileInPath(
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-FindFileInSearchPath(
++_Win32_ImportLibrary_("dbghelp.dll") FindFileInSearchPath(
+     _In_ HANDLE hprocess,
+     _In_ PCSTR SearchPath,
+     _In_ PCSTR FileName,
+@@ -4386,7 +4393,7 @@ FindFileInSearchPath(
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-SymEnumSym(
++_Win32_ImportLibrary_("dbghelp.dll") SymEnumSym(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
+@@ -4396,7 +4403,7 @@ SymEnumSym(
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-SymEnumerateSymbols64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumerateSymbols64(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PSYM_ENUMSYMBOLS_CALLBACK64 EnumSymbolsCallback,
+@@ -4406,7 +4413,7 @@ SymEnumerateSymbols64(
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-SymEnumerateSymbolsW64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumerateSymbolsW64(
+     _In_ HANDLE hProcess,
+     _In_ ULONG64 BaseOfDll,
+     _In_ PSYM_ENUMSYMBOLS_CALLBACK64W EnumSymbolsCallback,
+@@ -4421,7 +4428,7 @@ SymEnumerateSymbolsW64(
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-SymEnumerateSymbols(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumerateSymbols(
+     _In_ HANDLE hProcess,
+     _In_ ULONG BaseOfDll,
+     _In_ PSYM_ENUMSYMBOLS_CALLBACK EnumSymbolsCallback,
+@@ -4431,7 +4438,7 @@ SymEnumerateSymbols(
+ DBHLP_DEPRECIATED
+ BOOL
+ IMAGEAPI
+-SymEnumerateSymbolsW(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymEnumerateSymbolsW(
+     _In_ HANDLE hProcess,
+     _In_ ULONG BaseOfDll,
+     _In_ PSYM_ENUMSYMBOLS_CALLBACKW EnumSymbolsCallback,
+@@ -4443,7 +4450,7 @@ SymEnumerateSymbolsW(
+ 
+ DWORD64
+ IMAGEAPI
+-SymLoadModule64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymLoadModule64(
+     _In_ HANDLE hProcess,
+     _In_opt_ HANDLE hFile,
+     _In_opt_ PCSTR ImageName,
+@@ -4457,7 +4464,7 @@ SymLoadModule64(
+ #else
+ DWORD
+ IMAGEAPI
+-SymLoadModule(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymLoadModule(
+     _In_ HANDLE hProcess,
+     _In_opt_ HANDLE hFile,
+     _In_opt_ PCSTR ImageName,
+@@ -4469,7 +4476,7 @@ SymLoadModule(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSymNext64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymNext64(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_SYMBOL64 Symbol
+     );
+@@ -4487,7 +4494,7 @@ SymGetSymNextW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetSymNext(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymNext(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_SYMBOL Symbol
+     );
+@@ -4502,7 +4509,7 @@ SymGetSymNextW(
+ 
+ BOOL
+ IMAGEAPI
+-SymGetSymPrev64(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymPrev64(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_SYMBOL64 Symbol
+     );
+@@ -4520,7 +4527,7 @@ SymGetSymPrevW64(
+ #else
+ BOOL
+ IMAGEAPI
+-SymGetSymPrev(
++_Win32_ImportLibrary_("dbghelp.dll") _Win32_SetLastError_ SymGetSymPrev(
+     _In_ HANDLE hProcess,
+     _Inout_ PIMAGEHLP_SYMBOL Symbol
+     );
+@@ -4546,7 +4553,7 @@ typedef struct
+ 
+ void
+ IMAGEAPI
+-SetCheckUserInterruptShared(
++_Win32_ImportLibrary_("dbghelp.dll") SetCheckUserInterruptShared(
+     _In_ LPCALL_BACK_USER_INTERRUPT_ROUTINE lpStartAddress
+     );
+ 
+@@ -4558,19 +4565,19 @@ GetCheckUserInterruptShared(
+ 
+ DWORD
+ IMAGEAPI
+-GetSymLoadError(
++_Win32_ImportLibrary_("dbghelp.dll") GetSymLoadError(
+     void
+     );
+ 
+ void
+ IMAGEAPI
+-SetSymLoadError(
++_Win32_ImportLibrary_("dbghelp.dll") SetSymLoadError(
+     _In_ DWORD error
+     );
+ 
+ BOOL
+ IMAGEAPI
+-ReportSymbolLoadSummary(
++_Win32_ImportLibrary_("dbghelp.dll") ReportSymbolLoadSummary(
+     _In_ HANDLE hProcess,
+     _In_opt_ PCWSTR pLoadModule,
+     _In_ PDBGHELP_DATA_REPORT_STRUCT pSymbolData
+@@ -4578,7 +4585,7 @@ ReportSymbolLoadSummary(
+ 
+ void
+ IMAGEAPI
+-RemoveInvalidModuleList(
++_Win32_ImportLibrary_("dbghelp.dll") RemoveInvalidModuleList(
+     _In_ HANDLE hProcess
+     );
+ 

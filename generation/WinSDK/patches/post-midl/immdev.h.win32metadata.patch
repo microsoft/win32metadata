@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/immdev.h b/generation/WinSDK/RecompiledIdlHeaders/um/immdev.h
-index 5295f27001..59ef3492f1 100644
+index 5295f27001..ae7b582925 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/immdev.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/immdev.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,17 @@ index 5295f27001..59ef3492f1 100644
  /**********************************************************************/
  /*      immdev.h - Input Method Manager definitions                   */
  /*                 for IME developers                                 */
+@@ -27,8 +28,8 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+ #if (WINVER >= 0x040A)
+-DECLARE_HANDLE(HIMC);
+-DECLARE_HANDLE(HIMCC);
++DECLARE_HANDLE(HIMC) _WIN32META_ANNOTATION_("win32metadata:raii_free=ImmDestroyContext")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HIMCC) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #else
+ typedef DWORD   HIMC;
+ typedef DWORD   HIMCC;
 @@ -909,7 +910,7 @@ typedef struct tagSOFTKBDDATA {
      WORD        wCode[1][256];
  } SOFTKBDDATA, *PSOFTKBDDATA, NEAR *NPSOFTKBDDATA, FAR * LPSOFTKBDDATA;

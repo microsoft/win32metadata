@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
-index f76840c470..a0d4babb71 100644
+index f76840c470..5ab744936d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winnt.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,23 @@ index f76840c470..a0d4babb71 100644
  /*++ BUILD Version: 0072     Increment this if a change has global effects
  
  Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -709,14 +710,14 @@ typedef struct _GROUP_AFFINITY64 {
+ //
+ 
+ #ifdef STRICT
+-typedef void *HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HANDLE;
+ #if 0 && (_MSC_VER > 1000)
+ #define DECLARE_HANDLE(name) struct name##__; typedef struct name##__ *name
+ #else
+ #define DECLARE_HANDLE(name) struct name##__{int unused;}; typedef struct name##__ *name
+ #endif
+ #else
+-typedef PVOID HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID HANDLE;
+ #define DECLARE_HANDLE(name) typedef HANDLE name
+ #endif
+ typedef HANDLE *PHANDLE;
 @@ -9971,7 +9972,7 @@ typedef struct _WOW64_CONTEXT {
      // The context record is never used as an OUT only parameter.
      //
@@ -16,6 +33,15 @@ index f76840c470..a0d4babb71 100644
  
      //
      // This section is specified/returned if CONTEXT_DEBUG_REGISTERS is
+@@ -10157,7 +10158,7 @@ RtlUnwind2 (
+ #endif
+ 
+ typedef PVOID PACCESS_TOKEN;            
+-typedef PVOID PSECURITY_DESCRIPTOR;     
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID PSECURITY_DESCRIPTOR;     
+ typedef PVOID PSID;     
+ typedef PVOID PCLAIMS_BLOB;     
+ ////////////////////////////////////////////////////////////////////////
 @@ -10282,7 +10283,7 @@ typedef GENERIC_MAPPING *PGENERIC_MAPPING;
  
  typedef struct _LUID_AND_ATTRIBUTES {
@@ -835,12 +861,14 @@ index f76840c470..a0d4babb71 100644
      );
  
  typedef enum _HEAP_INFORMATION_CLASS {
-@@ -24445,8 +24446,8 @@ typedef struct _HEAP_OPTIMIZE_RESOURCES_INFORMATION {
+@@ -24444,9 +24445,9 @@ typedef struct _HEAP_OPTIMIZE_RESOURCES_INFORMATION {
+ #define WT_EXECUTEINPERSISTENTTHREAD 0x00000080                      
  #define WT_TRANSFER_IMPERSONATION 0x00000100                         
  #define WT_SET_MAX_THREADPOOL_THREADS(Flags, Limit)  ((Flags) |= (Limit)<<16) 
- typedef VOID (NTAPI * WAITORTIMERCALLBACKFUNC) (PVOID, BOOLEAN );   
+-typedef VOID (NTAPI * WAITORTIMERCALLBACKFUNC) (PVOID, BOOLEAN );   
 -typedef VOID (NTAPI * WORKERCALLBACKFUNC) (PVOID );                 
 -typedef VOID (NTAPI * APC_CALLBACK_FUNCTION) (DWORD   , PVOID, PVOID); 
++typedef VOID (NTAPI * WAITORTIMERCALLBACKFUNC) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, BOOLEAN );   
 +typedef VOID (NTAPI * WORKERCALLBACKFUNC) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID );                 
 +typedef VOID (NTAPI * APC_CALLBACK_FUNCTION) (DWORD   , _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID); 
  typedef WAITORTIMERCALLBACKFUNC WAITORTIMERCALLBACK; 
@@ -919,6 +947,69 @@ index f76840c470..a0d4babb71 100644
 +    _Win32_AssociatedEnum_(TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH) DWORD FeaturesHigh;
      DWORD EOTWarningZoneSize;
  } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
+ 
+@@ -25858,7 +25859,7 @@ typedef struct _KTMOBJECT_CURSOR {
+ #endif // _NTTMAPI_
+ typedef DWORD TP_VERSION, *PTP_VERSION; 
+ 
+-typedef struct _TP_CALLBACK_INSTANCE TP_CALLBACK_INSTANCE, *PTP_CALLBACK_INSTANCE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_CALLBACK_INSTANCE TP_CALLBACK_INSTANCE, *PTP_CALLBACK_INSTANCE;
+ 
+ typedef
+ VOID
+@@ -25870,7 +25871,7 @@ TP_SIMPLE_CALLBACK (
+ 
+ typedef TP_SIMPLE_CALLBACK *PTP_SIMPLE_CALLBACK;
+ 
+-typedef struct _TP_POOL TP_POOL, *PTP_POOL; 
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThreadpool") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_POOL TP_POOL, *PTP_POOL; 
+ 
+ typedef enum _TP_CALLBACK_PRIORITY {
+     TP_CALLBACK_PRIORITY_HIGH,
+@@ -25885,7 +25886,7 @@ typedef struct _TP_POOL_STACK_INFORMATION {
+     SIZE_T StackCommit;
+ }TP_POOL_STACK_INFORMATION, *PTP_POOL_STACK_INFORMATION;
+ 
+-typedef struct _TP_CLEANUP_GROUP TP_CLEANUP_GROUP, *PTP_CLEANUP_GROUP; 
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThreadpoolCleanupGroup") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_CLEANUP_GROUP TP_CLEANUP_GROUP, *PTP_CLEANUP_GROUP; 
+ 
+ typedef
+ VOID
+@@ -26099,7 +26100,7 @@ TpDestroyCallbackEnviron(
+ #endif // !defined(MIDL_PASS)
+ 
+ 
+-typedef struct _TP_WORK TP_WORK, *PTP_WORK;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThreadpoolWork") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_WORK TP_WORK, *PTP_WORK;
+ 
+ typedef
+ VOID
+@@ -26113,7 +26114,7 @@ TP_WORK_CALLBACK (
+ typedef TP_WORK_CALLBACK *PTP_WORK_CALLBACK;
+ 
+ 
+-typedef struct _TP_TIMER TP_TIMER, *PTP_TIMER;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThreadpoolTimer") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_TIMER TP_TIMER, *PTP_TIMER;
+ 
+ typedef
+ VOID
+@@ -26129,7 +26130,7 @@ typedef TP_TIMER_CALLBACK *PTP_TIMER_CALLBACK;
+ 
+ typedef DWORD    TP_WAIT_RESULT;
+ 
+-typedef struct _TP_WAIT TP_WAIT, *PTP_WAIT;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThreadpoolWait") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_WAIT TP_WAIT, *PTP_WAIT;
+ 
+ typedef
+ VOID
+@@ -26144,7 +26145,7 @@ TP_WAIT_CALLBACK (
+ typedef TP_WAIT_CALLBACK *PTP_WAIT_CALLBACK;
+ 
+ 
+-typedef struct _TP_IO TP_IO, *PTP_IO;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThreadpoolIo") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _TP_IO TP_IO, *PTP_IO;
+ 
+ #if defined(_M_AMD64) && !defined(_M_ARM64EC) && !defined(__midl)
  
 @@ -26606,5 +26607,4057 @@ NtReadCurrentTebPVOID (
  #pragma warning(default:4214) // bit field types other than int

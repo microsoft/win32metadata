@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
-index 42b34b6783..3cfa87238a 100644
+index 42b34b6783..01150a7288 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
 @@ -12,6 +12,7 @@
@@ -15,7 +15,7 @@ index 42b34b6783..3cfa87238a 100644
  #define NGC_TICKET_PROPERTY_STRING_LENGTH (NCRYPT_PIN_CACHE_PIN_BYTE_LENGTH / sizeof(WCHAR))
  
 -typedef ULONG_PTR NCRYPT_KEY_HANDLE;
-+_Win32_AlsoUsableFor_(NCRYPT_HANDLE) typedef ULONG_PTR NCRYPT_KEY_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=NCryptFreeObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") _Win32_AlsoUsableFor_(NCRYPT_HANDLE) typedef ULONG_PTR NCRYPT_KEY_HANDLE;
  
  typedef struct _NgcTicketContext
  {

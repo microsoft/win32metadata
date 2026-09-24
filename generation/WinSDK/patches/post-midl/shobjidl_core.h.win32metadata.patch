@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
-index 97a14455d2..a45a6337f9 100644
+index 97a14455d2..7bfb9f9f4f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShObjIdl_core.h
 @@ -1,3 +1,4 @@
@@ -7,9 +7,12 @@ index 97a14455d2..a45a6337f9 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -2149,7 +2150,7 @@ extern "C"{
+@@ -2147,9 +2148,9 @@ extern "C"{
+ 
+ #if !defined(HMONITOR_DECLARED) && !defined(HMONITOR) && (WINVER < 0x0500)
  #define HMONITOR_DECLARED
- DECLARE_HANDLE(HMONITOR);
+-DECLARE_HANDLE(HMONITOR);
++DECLARE_HANDLE(HMONITOR) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  #endif
 -typedef struct _CMINVOKECOMMANDINFO
 +typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CMINVOKECOMMANDINFO
@@ -1760,6 +1763,15 @@ index 97a14455d2..a45a6337f9 100644
      IExplorerCommandProvider : public IUnknown
      {
      public:
+@@ -29065,7 +29098,7 @@ EXTERN_C const IID IID_IExplorerCommandProvider;
+ /* interface __MIDL_itf_shobjidl_core_0000_0146 */
+ /* [local] */ 
+ 
+-typedef HANDLE HTHEME;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThemeData") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HTHEME;
+ 
+ typedef /* [v1_enum] */ 
+ enum CPVIEW
 @@ -29092,7 +29125,7 @@ EXTERN_C const IID IID_IOpenControlPanel;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

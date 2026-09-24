@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
-index f4998fa422..dbb174dbc0 100644
+index f4998fa422..a77696dde4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Uxtheme.h
 @@ -10,6 +10,7 @@
@@ -10,6 +10,15 @@ index f4998fa422..dbb174dbc0 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -27,7 +28,7 @@
+ #endif /* _UXTHEME_ */
+ #endif /* THEMEAPI */
+ 
+-typedef HANDLE HTHEME;          // handle to a section of theme data for class
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseThemeData") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HTHEME;          // handle to a section of theme data for class
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ #define MAX_THEMECOLOR  64
 @@ -43,7 +44,7 @@ typedef HANDLE HTHEME;          // handle to a section of theme data for class
  //  HWND hwnd - The handle to the Target window that will receive feedback
  //                                                                                                 

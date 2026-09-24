@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
-index ecd48fa0da..69ac74864f 100644
+index ecd48fa0da..efdfb1085f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msctf.h
 @@ -699,6 +699,7 @@ extern "C"{
@@ -9,6 +9,15 @@ index ecd48fa0da..69ac74864f 100644
 +#include <win32metadata_annotations.h>
  //=--------------------------------------------------------------------------=
  // msctf.h
+ 
+@@ -972,7 +973,7 @@ EXTERN_C const GUID GUID_TFCAT_DISPLAYATTRIBUTEPROPERTY;
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+ #if 0
+-typedef /* [uuid] */  DECLSPEC_UUID("4f5d560f-5ab5-4dde-8c4d-404592857ab0") UINT_PTR HKL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=UnloadKeyboardLayout") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [uuid] */  DECLSPEC_UUID("4f5d560f-5ab5-4dde-8c4d-404592857ab0") UINT_PTR HKL;
+ 
+ #endif
  
 @@ -1026,7 +1027,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("88a9c478-f3ec-4763-8345-cd9250443f8d") DWOR
  

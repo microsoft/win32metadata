@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/evntprov.h b/generation/WinSDK/RecompiledIdlHeaders/shared/evntprov.h
-index d668ae0d8d..b7048f645b 100644
+index d668ae0d8d..5af863b084 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/evntprov.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/evntprov.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index d668ae0d8d..b7048f645b 100644
  
  /*++
  
+@@ -168,7 +169,7 @@ EVENT_WRITE_FLAG values for the Flag parameter of EventWriteEx and EtwWriteEx.
+ A REGHANDLE represents an event provider session.
+ A REGHANDLE is opened with EventRegister and closed with EventUnregister.
+ */
+-typedef ULONGLONG REGHANDLE, *PREGHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=EventUnregister") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef ULONGLONG REGHANDLE, *PREGHANDLE;
+ 
+ #pragma warning(push)
+ #pragma warning(disable:4201) // Nonstandard extension: unnamed struct/union
 @@ -509,7 +510,7 @@ typedef
  VOID
  (NTAPI *PENABLECALLBACK) (

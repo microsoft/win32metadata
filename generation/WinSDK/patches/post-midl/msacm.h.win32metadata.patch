@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
-index 2f68eb6c5c..8f2d8a560a 100644
+index 2f68eb6c5c..b8946cb9b8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSAcm.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,30 @@ index 2f68eb6c5c..8f2d8a560a 100644
  //==========================================================================;
  //
  //  msacm.h
+@@ -135,19 +136,19 @@ extern "C" {            /* Assume C declarations for C++ */
+ //  HACMOBJ: used to identify ACM objects. this handle is used on functions
+ //  that can accept two or more ACM handle types.
+ //
+-DECLARE_HANDLE(HACMDRIVERID);
++DECLARE_HANDLE(HACMDRIVERID) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HACMDRIVERID       *PHACMDRIVERID;
+ typedef HACMDRIVERID   FAR *LPHACMDRIVERID;
+ 
+-DECLARE_HANDLE(HACMDRIVER);
++DECLARE_HANDLE(HACMDRIVER) _WIN32META_ANNOTATION_("win32metadata:raii_free=acmDriverClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HACMDRIVER         *PHACMDRIVER;
+ typedef HACMDRIVER     FAR *LPHACMDRIVER;
+ 
+-DECLARE_HANDLE(HACMSTREAM);
++DECLARE_HANDLE(HACMSTREAM) _WIN32META_ANNOTATION_("win32metadata:raii_free=acmStreamClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HACMSTREAM         *PHACMSTREAM;
+ typedef HACMSTREAM     FAR *LPHACMSTREAM;
+ 
+-DECLARE_HANDLE(HACMOBJ);
++DECLARE_HANDLE(HACMOBJ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HACMOBJ            *PHACMOBJ;
+ typedef HACMOBJ        FAR *LPHACMOBJ;
+ 
 @@ -210,7 +211,7 @@ typedef UINT                MMRESULT;
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;

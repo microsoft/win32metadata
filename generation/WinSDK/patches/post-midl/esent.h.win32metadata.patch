@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
-index 56a8a639db..788e497067 100644
+index 56a8a639db..bc45341777 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/esent.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,36 @@ index 56a8a639db..788e497067 100644
  /*++ BUILD Version: 0000     Increment this if a change has global effects
  
  Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -117,9 +118,9 @@ typedef wchar_t            JET_WCHAR;
+ 
+ 
+ #if defined(_WIN64)
+-    typedef JET_UINT64 JET_API_PTR;
++    _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_UINT64 JET_API_PTR;
+ #else
+-    typedef JET_UINT32 JET_API_PTR;
++    _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_UINT32 JET_API_PTR;
+ #endif
+ 
+ typedef _Return_type_success_( return >= 0 ) JET_INT32 JET_ERR;
+@@ -129,12 +130,12 @@ typedef JET_UINT16         JET_LANGID;
+ typedef JET_UINT16         JET_CP;
+ 
+ 
+-typedef JET_API_PTR JET_HANDLE;     // backup file handle
+-typedef JET_API_PTR JET_INSTANCE;   // Instance Identifier
+-typedef JET_API_PTR JET_SESID;      // Session Identifier
+-typedef JET_API_PTR JET_TABLEID;    // Table Identifier
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_API_PTR JET_HANDLE;     // backup file handle
++_WIN32META_ANNOTATION_("win32metadata:raii_free=JetTerm") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_API_PTR JET_INSTANCE;   // Instance Identifier
++_WIN32META_ANNOTATION_("win32metadata:raii_free=JetEndSession") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_API_PTR JET_SESID;      // Session Identifier
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_API_PTR JET_TABLEID;    // Table Identifier
+ #if ( JET_VERSION >= 0x0501 )
+-typedef JET_API_PTR JET_LS;         // Local Storage
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_API_PTR JET_LS;         // Local Storage
+ #endif // JET_VERSION >= 0x0501
+ 
+ typedef JET_UINT32 JET_COLUMNID;    // Column Identifier
 @@ -3720,7 +3721,7 @@ JetInit2(
  #pragma region Desktop Family or Esent Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
@@ -1246,6 +1276,15 @@ index 56a8a639db..788e497067 100644
  
  JET_ERR JET_API
  JetSetLS(
+@@ -7444,7 +7445,7 @@ JetGetLS(
+ #pragma region Desktop Family or Esent Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_ESENT)
+ 
+-typedef JET_API_PTR JET_OSSNAPID;   // Snapshot Session Identifier
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef JET_API_PTR JET_OSSNAPID;   // Snapshot Session Identifier
+ 
+ JET_ERR JET_API
+ JetOSSnapshotPrepare(
 @@ -7463,7 +7464,7 @@ JetOSSnapshotPrepareInstance(
  #define JetOSSnapshotFreezeA JetOSSnapshotFreeze
  #endif

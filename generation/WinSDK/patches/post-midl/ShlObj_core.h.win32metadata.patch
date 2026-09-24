@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
-index 04174f8702..d5dabebb0e 100644
+index 04174f8702..9c2626d0d4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj_core.h
 @@ -6,6 +6,7 @@ File: shlobj_core.h
@@ -666,9 +666,12 @@ index 04174f8702..d5dabebb0e 100644
  
  //
  // Special value of fmtID which means "use the default format"
-@@ -2471,9 +2478,9 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
+@@ -2469,11 +2476,11 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
+ 
+ #ifndef HPSXA_DEFINED
  #define HPSXA_DEFINED
- DECLARE_HANDLE( HPSXA );
+-DECLARE_HANDLE( HPSXA );
++DECLARE_HANDLE( HPSXA ) _WIN32META_ANNOTATION_("win32metadata:raii_free=SHDestroyPropSheetExtArray")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  #endif
 -WINSHELLAPI void WINAPI SHDestroyPropSheetExtArray(_In_ HPSXA hpsxa);
 -WINSHELLAPI UINT WINAPI SHAddFromPropSheetExtArray(_In_ HPSXA hpsxa, _In_ LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam);

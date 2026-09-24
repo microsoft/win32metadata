@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
-index eb2800ade3..5466e3dd1b 100644
+index eb2800ade3..128842db37 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
 @@ -41,6 +41,7 @@
@@ -10,6 +10,15 @@ index eb2800ade3..5466e3dd1b 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -127,7 +128,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ 
+ #define ICVERSION       0x0104
+ 
+-DECLARE_HANDLE(HIC);     /* Handle to a Installable Compressor */
++DECLARE_HANDLE(HIC) _WIN32META_ANNOTATION_("win32metadata:raii_free=ICClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;     /* Handle to a Installable Compressor */
+ 
+ //
+ // this code in biCompression means the DIB must be accesed via
 @@ -297,7 +298,7 @@ DECLARE_HANDLE(HIC);     /* Handle to a Installable Compressor */
  /************************************************************************
  ************************************************************************/
@@ -934,6 +943,15 @@ index eb2800ade3..5466e3dd1b 100644
  
  // Flags for the MCIWndOpen command
  #define MCIWNDOPENF_NEW	            0x0001  // open a new file
+@@ -3094,7 +3095,7 @@ BOOL VFWAPIV MCIWndRegisterClass(void);
+ 
+ 
+ /* video data types */
+-DECLARE_HANDLE(HVIDEO);                 // generic handle
++DECLARE_HANDLE(HVIDEO) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;                 // generic handle
+ typedef HVIDEO FAR * LPHVIDEO;
+ #endif                                  // ifndef RCINVOKED
+ 
 @@ -3183,7 +3184,7 @@ installable video codecs, and the audio compression manager).
  
  ****************************************************************************/

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
-index 10cd1740df..f3c17928ed 100644
+index 10cd1740df..042bce452c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 @@ -1,3 +1,4 @@
@@ -208,6 +208,19 @@ index 10cd1740df..f3c17928ed 100644
      {
      ULONG cbSize;
      WORD LangID;
+@@ -5888,10 +5889,10 @@ enum SPPHRASERNG
+ #define SP_GETWHOLEPHRASE SPPR_ALL_ELEMENTS
+ #define SPRR_ALL_ELEMENTS SPPR_ALL_ELEMENTS
+ #if 0
+-typedef void *SPSTATEHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPSTATEHANDLE;
+ 
+ #else
+-DECLARE_HANDLE(SPSTATEHANDLE);
++DECLARE_HANDLE(SPSTATEHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ typedef /* [hidden] */ 
+ enum SPRECOEVENTFLAGS
 @@ -6045,7 +6046,7 @@ EXTERN_C const IID IID_ISpLexicon;
              _In_opt_  PCSPPHONEID pszPronunciation) = 0;
          

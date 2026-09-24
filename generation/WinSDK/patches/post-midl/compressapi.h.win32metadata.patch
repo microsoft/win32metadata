@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
-index c6f8f5b1cc..a8f08d8d0d 100644
+index c6f8f5b1cc..e00af284ba 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,19 @@ index c6f8f5b1cc..a8f08d8d0d 100644
  /*++
  
  Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -29,10 +30,10 @@ extern "C" {
+ #pragma region Application or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-DECLARE_HANDLE(COMPRESSOR_HANDLE);
++DECLARE_HANDLE(COMPRESSOR_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseCompressor")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef COMPRESSOR_HANDLE *PCOMPRESSOR_HANDLE;
+ 
+-typedef COMPRESSOR_HANDLE DECOMPRESSOR_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseDecompressor") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef COMPRESSOR_HANDLE DECOMPRESSOR_HANDLE;
+ typedef COMPRESSOR_HANDLE *PDECOMPRESSOR_HANDLE;
+ 
+ #define COMPRESS_ALGORITHM_INVALID      0
 @@ -55,13 +56,13 @@ typedef VOID (__cdecl *PFN_COMPRESS_FREE) (
      _In_ PVOID Memory
      );

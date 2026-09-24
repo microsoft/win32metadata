@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
-index e653a243c6..df7b123bb7 100644
+index e653a243c6..86f6df7244 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsvc.h
 @@ -1,3 +1,4 @@
@@ -27,6 +27,19 @@ index e653a243c6..df7b123bb7 100644
      GUID    *                   pTriggerSubtype;            // Provider GUID if the trigger type is SERVICE_TRIGGER_TYPE_CUSTOM
                                                              // Device class interface GUID if the trigger type is
                                                              // SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL
+@@ -695,10 +696,10 @@ typedef struct _SERVICE_LAUNCH_PROTECTED_INFO {
+ // Handle Types
+ //
+ 
+-DECLARE_HANDLE(SC_HANDLE);
++DECLARE_HANDLE(SC_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseServiceHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef SC_HANDLE   *LPSC_HANDLE;
+ 
+-DECLARE_HANDLE(SERVICE_STATUS_HANDLE);
++DECLARE_HANDLE(SERVICE_STATUS_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ //
+ // Info levels for QueryServiceStatusEx
 @@ -721,8 +722,8 @@ typedef enum _SC_ENUM_TYPE {
  //
  

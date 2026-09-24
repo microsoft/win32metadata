@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
-index 8553834c8a..dc4bea8e2b 100644
+index 8553834c8a..6147a60759 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 @@ -1,3 +1,4 @@
@@ -269,6 +269,15 @@ index 8553834c8a..dc4bea8e2b 100644
      IConsoleNameSpace2 : public IConsoleNameSpace
      {
      public:
+@@ -3316,7 +3445,7 @@ EXTERN_C const IID IID_IConsoleNameSpace2;
+ /* [local] */ 
+ 
+ 
+-typedef struct _PSP *HPROPSHEETPAGE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyPropertySheetPage") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef struct _PSP *HPROPSHEETPAGE;
+ 
+ 
+ 
 @@ -3334,7 +3463,7 @@ EXTERN_C const IID IID_IPropertySheetCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h
-index 42696f7fbb..bee798f27f 100644
+index 42696f7fbb..00d0f62450 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h
 @@ -1,3 +1,4 @@
@@ -130,4 +130,13 @@ index 42696f7fbb..bee798f27f 100644
 +            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pThreshold) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE RequestReJITWithInliners( 
+             /* [annotation][in] */ 
+@@ -24025,7 +24026,7 @@ EXTERN_C const IID IID_ICorProfilerInfo11;
+     ICorProfilerInfo11 : public ICorProfilerInfo10
+     {
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE GetEnvironmentVariable( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE GetEnvironmentVariable( 
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *szName,
              /* [annotation][in] */ 

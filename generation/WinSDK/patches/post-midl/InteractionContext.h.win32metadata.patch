@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h b/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
-index 92d9778999..1a3a2d39be 100644
+index 92d9778999..4111810b44 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/InteractionContext.h
 @@ -7,6 +7,7 @@
@@ -19,6 +19,15 @@ index 92d9778999..1a3a2d39be 100644
  {
      float translationX;
      float translationY;
+@@ -281,7 +282,7 @@ typedef void (CALLBACK *INTERACTION_CONTEXT_OUTPUT_CALLBACK2) (
+     _In_reads_(1) const INTERACTION_CONTEXT_OUTPUT2 *output);
+ #endif
+ 
+-DECLARE_HANDLE(HINTERACTIONCONTEXT);
++DECLARE_HANDLE(HINTERACTIONCONTEXT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyInteractionContext")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #define INTERACTION_CONTEXT_CONFIGURATION_DEFAULT                         \
+ {                                                                         \
 @@ -308,16 +309,19 @@ DECLARE_HANDLE(HINTERACTIONCONTEXT);
  
  #define INERTIA_PARAMETER_INVALID_VALUE    FLT_MAX

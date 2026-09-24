@@ -44,7 +44,15 @@
 | `WinmdIncludeDir` | Header root. Repeatable and order-sensitive. |
 | `ImportLibs` | Import-library directory or file for symbol-to-DLL mapping. |
 | `WinmdScope` | Header directory segment emitted unconditionally. |
-| `WinmdScopeHeader` | Header stem emitted unconditionally. |
+| `WinmdScopeHeader` | Header name or stem emitted unconditionally. Include `.h` for names containing dots, such as `windows.graphics.interop.h`. |
+
+The WinSDK project explicitly includes its WinRT interop and partition-local
+headers as roots. Merely including these files in a partition does not make all
+their declarations roots: the tool's default directory scopes are `shared` and
+`um`. For example, `DocumentSource.h`, `MemoryBuffer.h`, and
+`windows.graphics.interop.h` must be selected to retain their standalone interop
+interfaces. Keep the explicit header-name casing aligned with the include
+spellings; the current reader distinguishes casing after the first character.
 
 The SDK deliberately has no response-file, manual C#, enum JSON, auto-type JSON,
 or function-pointer-fixup inputs. Those metadata semantics must be expressed in

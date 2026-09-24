@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
-index dee3a82100..8355b32bfd 100644
+index dee3a82100..8522bd3e81 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/combaseapi.h
 @@ -1,3 +1,4 @@
@@ -23,7 +23,8 @@ index dee3a82100..8355b32bfd 100644
 -_Check_return_ WINOLEAPI
 +_Windows_SupportedOS_Windows2000_ _Check_return_ WINOLEAPI
  CreateStreamOnHGlobal(
-     HGLOBAL hGlobal,
+-    HGLOBAL hGlobal,
++    _WIN32META_ANNOTATION_("win32metadata:optional") HGLOBAL hGlobal,
      _In_ BOOL fDeleteOnRelease,
      _Outptr_ LPSTREAM  FAR * ppstm
      );
@@ -111,7 +112,12 @@ index dee3a82100..8355b32bfd 100644
  CoGetApartmentType(
      _Out_ APTTYPE* pAptType,
      _Out_ APTTYPEQUALIFIER* pAptQualifier
-@@ -546,7 +547,7 @@ DECLARE_HANDLE(CO_MTA_USAGE_COOKIE);
+@@ -542,11 +543,11 @@ CoDecodeProxy(
+ #pragma region Application or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-DECLARE_HANDLE(CO_MTA_USAGE_COOKIE);
++DECLARE_HANDLE(CO_MTA_USAGE_COOKIE) _WIN32META_ANNOTATION_("win32metadata:raii_free=CoDecrementMTAUsage")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  
  _Check_return_ WINOLEAPI
  CoIncrementMTAUsage(
@@ -729,9 +735,27 @@ index dee3a82100..8355b32bfd 100644
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-@@ -1375,14 +1376,14 @@ CLSIDFromProgIDEx(
+@@ -1357,12 +1358,12 @@ CoTaskMemFree(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
- DECLARE_HANDLE(CO_DEVICE_CATALOG_COOKIE);
+ WINOLEAPI
+-CoFileTimeNow(
++_Windows_SupportedOS_Windows2000_ CoFileTimeNow(
+     _Out_ FILETIME  FAR * lpFileTime
+     );
+ 
+ _Check_return_ WINOLEAPI
+-CLSIDFromProgIDEx(
++_Windows_SupportedOS_Windows2000_ CLSIDFromProgIDEx(
+     _In_ LPCOLESTR lpszProgID,
+     _Out_ LPCLSID lpclsid
+     );
+@@ -1373,16 +1374,16 @@ CLSIDFromProgIDEx(
+ #define _CO_DEVICE_CATALOG_
+ #endif
+ 
+-DECLARE_HANDLE(CO_DEVICE_CATALOG_COOKIE);
++DECLARE_HANDLE(CO_DEVICE_CATALOG_COOKIE) _WIN32META_ANNOTATION_("win32metadata:raii_free=CoRevokeDeviceCatalog")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  
 -_Check_return_
 +_Win32_ImportLibrary_("ole32.dll") _Check_return_

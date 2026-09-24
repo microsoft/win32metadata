@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h
-index 9a23390bc3..6d6c959ee3 100644
+index 9a23390bc3..be8d16846f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapiddk.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,49 @@ index 9a23390bc3..6d6c959ee3 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -677,28 +678,28 @@ EXTERN_C const IID IID_ISpObjectTokenEnumBuilder;
+ /* [local] */ 
+ 
+ #if 0
+-typedef void *SPWORDHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPWORDHANDLE;
+ 
+-typedef void *SPRULEHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPRULEHANDLE;
+ 
+-typedef void *SPGRAMMARHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPGRAMMARHANDLE;
+ 
+-typedef void *SPRECOCONTEXTHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPRECOCONTEXTHANDLE;
+ 
+-typedef void *SPPHRASERULEHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPPHRASERULEHANDLE;
+ 
+-typedef void *SPPHRASEPROPERTYHANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPPHRASEPROPERTYHANDLE;
+ 
+-typedef void *SPTRANSITIONID;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *SPTRANSITIONID;
+ 
+ #else
+-DECLARE_HANDLE(SPWORDHANDLE);
+-DECLARE_HANDLE(SPRULEHANDLE);
+-DECLARE_HANDLE(SPGRAMMARHANDLE);
+-DECLARE_HANDLE(SPRECOCONTEXTHANDLE);
+-DECLARE_HANDLE(SPPHRASERULEHANDLE);
+-DECLARE_HANDLE(SPPHRASEPROPERTYHANDLE);
+-DECLARE_HANDLE(SPTRANSITIONID);
++DECLARE_HANDLE(SPWORDHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(SPRULEHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(SPGRAMMARHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(SPRECOCONTEXTHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(SPPHRASERULEHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(SPPHRASEPROPERTYHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(SPTRANSITIONID) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ 
+ 
 @@ -1454,7 +1455,7 @@ EXTERN_C const IID IID_ISpPhraseBuilder;
  interface ISpTask
  {

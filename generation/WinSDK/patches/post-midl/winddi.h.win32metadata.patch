@@ -1,11 +1,30 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h b/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
-index 9580b3414f..ddd288189c 100644
+index 9580b3414f..f87e5b4d0d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
 @@ -1,3 +1,4 @@
 +#include <win32metadata_annotations.h>
  
  /*++
+ 
+@@ -194,12 +195,12 @@ typedef struct _RECTFX
+ } RECTFX, *PRECTFX;
+ 
+ 
+-DECLARE_HANDLE(HBM);
+-DECLARE_HANDLE(HDEV);
+-DECLARE_HANDLE(HSURF);
+-DECLARE_HANDLE(DHSURF);
+-DECLARE_HANDLE(DHPDEV);
+-DECLARE_HANDLE(HDRVOBJ);
++DECLARE_HANDLE(HBM) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDEV) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HSURF) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(DHSURF) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(DHPDEV) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDRVOBJ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #define LTOFX(x)            ((x)<<4)
  
 @@ -1565,7 +1566,7 @@ typedef struct _CLIPOBJ
  
@@ -811,9 +830,12 @@ index 9580b3414f..ddd288189c 100644
  VOID APIENTRY EngFreeModule(
      _In_                    HANDLE h
      );
-@@ -4170,22 +4171,22 @@ BOOL APIENTRY EngLpkInstalled();
+@@ -4168,24 +4169,24 @@ BOOL APIENTRY EngLpkInstalled();
+ // Semaphores
+ //
  
- DECLARE_HANDLE(HSEMAPHORE);
+-DECLARE_HANDLE(HSEMAPHORE);
++DECLARE_HANDLE(HSEMAPHORE) _WIN32META_ANNOTATION_("win32metadata:raii_free=EngDeleteSemaphore")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
  
 -ENGAPI
 +_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(EngDeleteSemaphore, -1, 0) ENGAPI
@@ -838,6 +860,15 @@ index 9580b3414f..ddd288189c 100644
  VOID APIENTRY EngDeleteSemaphore(
      _In_                    HSEMAPHORE hsem
      );
+@@ -4228,7 +4229,7 @@ BOOL APIENTRY EngIsSemaphoreSharedByCurrentThread(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_LONGHORN)
+-DECLARE_HANDLE(HFASTMUTEX);
++DECLARE_HANDLE(HFASTMUTEX) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ ENGAPI
+ HFASTMUTEX APIENTRY EngCreateFastMutex();
 @@ -4270,18 +4271,18 @@ VOID APIENTRY EngDeleteSafeSemaphore(
      _Inout_                 ENGSAFESEMAPHORE *pssem
      );
