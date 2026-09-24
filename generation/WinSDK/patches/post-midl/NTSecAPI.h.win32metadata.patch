@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
-index e30ee02631..1280048e0e 100644
+index e30ee02631..9c7a615acc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 @@ -15,6 +15,7 @@ Revision History:
@@ -112,6 +112,15 @@ index e30ee02631..1280048e0e 100644
 +#if defined(WIN32METADATA) || ((_WIN32_WINNT < 0x0502))
  //
  // QualityOfService information.  Corresponds to PolicyDomainQualityOfServiceInformation
+ //
+@@ -2353,7 +2360,7 @@ typedef enum _POLICY_NOTIFICATION_INFORMATION_CLASS {
+ // always a pointer type unlike regular handles.
+ //
+ 
+-typedef PVOID LSA_HANDLE, *PLSA_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=LsaClose") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID LSA_HANDLE, *PLSA_HANDLE;
+ 
+ 
  //
 @@ -2493,7 +2500,7 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
  

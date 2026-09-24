@@ -65,6 +65,15 @@ partition from `vds.h`. Keep annotations on their shared native declarations
 consistent to avoid conflicting duplicate types in the combined metadata.
 Other partition inputs include prerequisite headers before SDK constant headers;
 for example, `olectl.h` must precede `msxml6did.h`.
+The metadata-only `LMDFS.h` patch supplies the released `FSCTL_DFS_BASE` alias
+previously defined in manual C# so the existing native `CTL_CODE` expression can
+be evaluated. The native expression and non-metadata compilation are unchanged.
+
+The WinSDK input currently omits `x3daudio.h`. Its `X3DAUDIO_VECTOR` alias
+depends on `DirectX::XMFLOAT3`, but the reader skips that native namespace and
+then cannot compile the generated RDL. This also blocks 14 constant names
+present in the released WinMD. Do not replace the native vector declaration
+or change its namespace to hide the reader limitation.
 
 The SDK deliberately has no response-file, manual C#, enum JSON, auto-type JSON,
 or function-pointer-fixup inputs. Those metadata semantics must be expressed in

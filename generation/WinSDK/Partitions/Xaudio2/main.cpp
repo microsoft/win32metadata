@@ -1,6 +1,3 @@
-#if defined(WIN32METADATA) && !defined(_XM_NO_INTRINSICS_)
-#define _XM_NO_INTRINSICS_
-#endif
 #define SECURITY_WIN32 // For sspi.h
 #define QCC_OS_GROUP_WINDOWS
 
@@ -17,4 +14,4 @@
 #include <hrtfapoapi.h>
 #include <xapo.h>
 
-#include <x3daudio.h>
+// x3daudio.h is blocked: the reader skips DirectX::XMFLOAT3.

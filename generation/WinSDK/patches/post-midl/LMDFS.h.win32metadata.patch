@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
-index 3b5b9a1095..168e1f5562 100644
+index 3b5b9a1095..8dd5091a88 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMDFS.h
 @@ -28,6 +28,7 @@ Notes:
@@ -460,7 +460,7 @@ index 3b5b9a1095..168e1f5562 100644
  
      //
      //  Domain-based DFS information.
-@@ -1015,8 +1016,8 @@ typedef struct _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
+@@ -1015,14 +1016,18 @@ typedef struct _DFS_SUPPORTED_NAMESPACE_VERSION_INFO {
  } DFS_SUPPORTED_NAMESPACE_VERSION_INFO, *PDFS_SUPPORTED_NAMESPACE_VERSION_INFO;
  
  
@@ -471,3 +471,13 @@ index 3b5b9a1095..168e1f5562 100644
      _In_        DFS_NAMESPACE_VERSION_ORIGIN            Origin,
      _In_opt_    PWSTR                                   pName,
      _Outptr_ PDFS_SUPPORTED_NAMESPACE_VERSION_INFO   *ppVersionInfo
+     );
+ 
+ #ifndef _DFSFSCTL_
++#if defined(WIN32METADATA) && !defined(FSCTL_DFS_BASE)
++// The released metadata supplied this prerequisite in manual/Scsi.cs.
++#define FSCTL_DFS_BASE FILE_DEVICE_DFS
++#endif
+ #define FSCTL_DFS_GET_PKT_ENTRY_STATE       CTL_CODE(FSCTL_DFS_BASE, 2031, METHOD_BUFFERED, FILE_ANY_ACCESS)
+ 
+ //  FSCTL_DFS_GET_PKT_ENTRY_STATE Input Buffer
