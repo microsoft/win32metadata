@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h b/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h
-index d3e08716f1..0efaa73c0a 100644
+index d3e08716f1..7c1c6c21b8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h
 @@ -17,6 +17,7 @@
@@ -111,3 +111,12 @@ index d3e08716f1..0efaa73c0a 100644
      ULONG64 InMcastOctets;
      ULONG64 OutMcastOctets;
      ULONG64 InMcastPkts;
+@@ -262,7 +263,7 @@ typedef struct _IP_MCAST_COUNTER_INFO {
+ 
+ #define MAX_OPT_SIZE    40         // Maximum length of IP options in bytes
+ 
+-#ifdef CHICAGO
++#if defined(WIN32METADATA) || (defined(CHICAGO))
+ 
+ // Ioctls code exposed by Memphis tcpip stack.
+ // For NT these ioctls are define in ntddip.h  (private\inc)

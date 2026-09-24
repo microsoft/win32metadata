@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
-index 3cc4f24de6..0c9d0b6ba2 100644
+index 3cc4f24de6..afad608c1e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,65 @@ index 3cc4f24de6..0c9d0b6ba2 100644
  /********************************************************
  *                                                       *
  *   Copyright (C) Microsoft. All rights reserved.       *
+@@ -157,11 +158,11 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ // Connection attribute 120 and 121 are defined in sqlspi.h
+ 
+ /* SQL_CONNECT_OPT_DRVR_START is not meaningful for 3.0 driver */
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_CONNECT_OPT_DRVR_START      1000
+ #endif  /* ODBCVER < 0x0300 */
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_CONN_OPT_MAX                SQL_PACKET_SIZE
+ #define SQL_CONN_OPT_MIN                SQL_ACCESS_MODE
+ #endif /* ODBCVER < 0x0300 */
+@@ -277,7 +278,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ #define SQL_ATTR_ASYNC_STMT_EVENT           29
+ #endif /* ODBCVER >= 0x0380 */
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_STMT_OPT_MAX                SQL_ROW_NUMBER
+ #define SQL_STMT_OPT_MIN    SQL_QUERY_TIMEOUT
+ #endif      /* ODBCVER < 0x0300 */
+@@ -560,7 +561,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ #endif  /* ODBCVER >= 0x0350 */
+ 
+ #define SQL_TYPE_NULL                   0
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_TYPE_MIN                    SQL_BIT
+ #define SQL_TYPE_MAX                    SQL_VARCHAR
+ #endif
+@@ -639,7 +640,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ #define SQL_COLUMN_QUALIFIER_NAME       17
+ #define SQL_COLUMN_LABEL                18
+ #define SQL_COLATT_OPT_MAX              SQL_COLUMN_LABEL
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_COLUMN_DRIVER_START         1000
+ #endif  /* ODBCVER < 0x0300 */
+ 
+@@ -699,7 +700,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ /* from X/Open are in the 10000 range.       */
+ /*-------------------------------------------*/
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_EXT_API_LAST            SQL_API_SQLBINDPARAMETER
+ #define SQL_NUM_FUNCTIONS           23
+ #define SQL_EXT_API_START           40
+@@ -854,7 +855,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ /* of numbers for driver-specific values.       */
+ /*----------------------------------------------*/
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_INFO_LAST                       SQL_QUALIFIER_LOCATION
+ #define SQL_INFO_DRIVER_START               1000
+ #endif /* ODBCVER < 0x0300 */
 @@ -1785,8 +1786,8 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
  
  #ifndef RC_INVOKED

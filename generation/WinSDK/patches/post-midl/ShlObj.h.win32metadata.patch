@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
-index 62644da172..b0005b5252 100644
+index 62644da172..6c885a16cb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlObj.h
 @@ -10,6 +10,7 @@ File: shlobj.h
@@ -28,7 +28,42 @@ index 62644da172..b0005b5252 100644
  {
      STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
      STDMETHOD_(ULONG,AddRef)  (THIS) PURE;
-@@ -386,7 +387,7 @@ typedef IFileViewerW * LPFILEVIEWERW;
+@@ -286,14 +287,34 @@ typedef struct
+ #include <poppack.h>        /* Return to byte packing */
+ 
+     // Define File View Show Info Flags.
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WIN2K)))
+ #define FVSIF_RECT      0x00000001      // The rect variable has valid data.
++#endif
++#if (NTDDI_VERSION < NTDDI_WIN2K)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WIN2K)))
+ #define FVSIF_PINNED    0x00000002      // We should Initialize pinned
++#endif
++#if (NTDDI_VERSION < NTDDI_WIN2K)
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WIN2K)))
+ #define FVSIF_NEWFAILED 0x08000000      // The new file passed back failed
++#endif
++#if (NTDDI_VERSION < NTDDI_WIN2K)
+                                         // to be viewed.
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WIN2K)))
+ #define FVSIF_NEWFILE   0x80000000      // A new file to view has been returned
++#endif
++#if (NTDDI_VERSION < NTDDI_WIN2K)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WIN2K)))
+ #define FVSIF_CANVIEWIT 0x40000000      // The viewer can view it.
++#endif
++#if (NTDDI_VERSION < NTDDI_WIN2K)
+ 
+ #undef  INTERFACE
+ #define INTERFACE   IFileViewerA
+@@ -386,7 +407,7 @@ typedef IFileViewerW * LPFILEVIEWERW;
  #undef INTERFACE
  #define INTERFACE ICurrentWorkingDirectory
  
@@ -37,7 +72,7 @@ index 62644da172..b0005b5252 100644
  {
      STDMETHOD(GetDirectory) (THIS_ _Out_writes_(cchSize) PWSTR pwzPath, DWORD cchSize) PURE;
      STDMETHOD(SetDirectory) (THIS_ _In_ PCWSTR pwzPath) PURE;
-@@ -434,7 +435,7 @@ DECLARE_INTERFACE_IID_(ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-9
+@@ -434,7 +455,7 @@ DECLARE_INTERFACE_IID_(ICurrentWorkingDirectory, IUnknown, "91956D21-9276-11d1-9
  #undef  INTERFACE
  #define INTERFACE   IDockingWindowFrame
  
@@ -46,7 +81,7 @@ index 62644da172..b0005b5252 100644
  {
      STDMETHOD(AddToolbar) (THIS_ _In_ IUnknown* punkSrc, _In_ PCWSTR pwszItem, DWORD dwAddFlags) PURE;
      STDMETHOD(RemoveToolbar) (THIS_ _In_ IUnknown* punkSrc, DWORD dwRemoveFlags) PURE;
-@@ -451,12 +452,12 @@ DECLARE_INTERFACE_IID_(IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9
+@@ -451,12 +472,12 @@ DECLARE_INTERFACE_IID_(IDockingWindowFrame, IOleWindow, "47d2657a-7b27-11d0-8ca9
  #undef  INTERFACE
  #define INTERFACE   IThumbnailCapture
  
@@ -61,7 +96,33 @@ index 62644da172..b0005b5252 100644
  };
  typedef IThumbnailCapture * LPTHUMBNAILCAPTURE;
  
-@@ -579,7 +580,7 @@ typedef struct {
+@@ -492,8 +513,16 @@ typedef IEnumShellImageStore * LPENUMSHELLIMAGESTORE;
+ 
+ 
+ // flags used to determine the capabilities of the storage for the images
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)))
+ #define SHIMSTCAPFLAG_LOCKABLE    0x0001       // does the store require/support locking
++#endif
++#if (NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)))
+ #define SHIMSTCAPFLAG_PURGEABLE   0x0002       // does the store require dead items purging externally ?
++#endif
++#if (NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)
+ 
+ #undef  INTERFACE
+ #define INTERFACE   IShellImageStore
+@@ -555,7 +584,7 @@ typedef IShellImageStore * LPSHELLIMAGESTORE;
+ 
+ #define ISFBVIEWMODE_SMALLICONS   0x0001
+ #define ISFBVIEWMODE_LARGEICONS   0x0002
+-#if (_WIN32_IE < _WIN32_IE_IE70)
++#if defined(WIN32METADATA) || ((_WIN32_IE < _WIN32_IE_IE70))
+ #define ISFBVIEWMODE_LOGOS        0x0003
+ #endif
+ 
+@@ -579,7 +608,7 @@ typedef struct {
  #undef INTERFACE
  #define INTERFACE IShellFolderBand
  
@@ -70,7 +131,7 @@ index 62644da172..b0005b5252 100644
  {
      STDMETHOD(InitializeSFB)(THIS_ _In_opt_ IShellFolder *psf, _In_opt_ PCIDLIST_ABSOLUTE pidl) PURE;
      STDMETHOD(SetBandInfoSFB)(THIS_ _In_ PBANDINFOSFB pbi) PURE;
-@@ -643,7 +644,7 @@ enum {
+@@ -643,7 +672,7 @@ enum {
  #undef INTERFACE
  #define INTERFACE IActiveDesktopP
  
@@ -79,7 +140,7 @@ index 62644da172..b0005b5252 100644
  {
      // IUnknown methods
      STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
-@@ -665,7 +666,7 @@ typedef IActiveDesktopP * LPACTIVEDESKTOPP;
+@@ -665,7 +694,7 @@ typedef IActiveDesktopP * LPACTIVEDESKTOPP;
  #undef INTERFACE
  #define INTERFACE IADesktopP2
  
@@ -88,7 +149,7 @@ index 62644da172..b0005b5252 100644
  {
      // IUnknown methods
      STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
-@@ -686,7 +687,7 @@ typedef IADesktopP2 * LPADESKTOPP2;
+@@ -686,7 +715,7 @@ typedef IADesktopP2 * LPADESKTOPP2;
  
  typedef struct {
      SHCOLUMNID  scid;                           // OUT the unique identifier of this column
@@ -97,7 +158,7 @@ index 62644da172..b0005b5252 100644
      DWORD       fmt;                            // OUT this listview format (LVCFMT_LEFT, usually)
      UINT        cChars;                         // OUT the default width of the column, in characters
      DWORD       csFlags;                        // OUT SHCOLSTATE flags
-@@ -724,7 +725,7 @@ typedef const SHCOLUMNDATA* LPCSHCOLUMNDATA;
+@@ -724,7 +753,7 @@ typedef const SHCOLUMNDATA* LPCSHCOLUMNDATA;
  
  // Note: these objects must be threadsafe!  GetItemData _will_ be called
  // simultaneously from multiple threads.
@@ -106,7 +167,7 @@ index 62644da172..b0005b5252 100644
  {
      // IUnknown methods
      STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppv) PURE;
-@@ -740,7 +741,7 @@ DECLARE_INTERFACE_IID_(IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C
+@@ -740,7 +769,7 @@ DECLARE_INTERFACE_IID_(IColumnProvider, IUnknown, "E8025004-1C42-11d2-BE2C-00A0C
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
  
@@ -115,7 +176,7 @@ index 62644da172..b0005b5252 100644
      USHORT cb;
      WCHAR wszProductKey[39];
      USHORT cbZero;
-@@ -753,7 +754,7 @@ typedef struct _SHChangeProductKeyAsIDList {
+@@ -753,7 +782,7 @@ typedef struct _SHChangeProductKeyAsIDList {
  //  use SHChangeNotifyRegisterThread() to enable Async Register and Deregister.
  //  call with SCNRT_ENABLE at the thread proc begining and SCNRT_DISABLE at the end
  //  the call with SCNRT_DISABLE can block while it synchronizes with the main ChangeNotify thread
@@ -124,7 +185,7 @@ index 62644da172..b0005b5252 100644
  #endif
  
  
-@@ -762,7 +763,11 @@ STDAPI_(void) SHChangeNotifyRegisterThread(SCNRT_STATUS status);
+@@ -762,7 +791,11 @@ STDAPI_(void) SHChangeNotifyRegisterThread(SCNRT_STATUS status);
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  #endif
  SHSTDAPI_(void) PathQualify(_Inout_ PWSTR psz);
@@ -136,7 +197,7 @@ index 62644da172..b0005b5252 100644
  SHSTDAPI_(BOOL) PathIsSlowW(_In_ LPCWSTR pszFile, DWORD dwAttr);
  #ifdef UNICODE
  #define PathIsSlow  PathIsSlowW
-@@ -774,7 +779,7 @@ SHSTDAPI_(BOOL) GetFileNameFromBrowse(_In_opt_ HWND hwnd, _Inout_updates_(cchFil
+@@ -774,7 +807,7 @@ SHSTDAPI_(BOOL) GetFileNameFromBrowse(_In_opt_ HWND hwnd, _Inout_updates_(cchFil
                                        _In_opt_ PCWSTR pszWorkingDir, _In_ PCWSTR pszDefExt, _In_opt_ PCWSTR pszFilters, _In_opt_ PCWSTR pszTitle);
  SHSTDAPI_(int) DriveType(int iDrive);
  
@@ -145,7 +206,39 @@ index 62644da172..b0005b5252 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K && NTDDI_VERSION < NTDDI_VISTA)
  #undef  INTERFACE
-@@ -810,7 +815,7 @@ SHSTDAPI SHLoadOLE(LPARAM lParam);
+@@ -791,11 +824,31 @@ DECLARE_INTERFACE_IID_(IDefViewFrame, IUnknown, "710EB7A0-45ED-11D0-924A-0020AFC
+ //
+ // Path processing function
+ //
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_VISTA)))
+ #define PPCF_ADDQUOTES               0x00000001        // return a quoted name if required
++#endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_VISTA)))
+ #define PPCF_ADDARGUMENTS            0x00000003        // appends arguments (and wraps in quotes if required)
++#endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_VISTA)))
+ #define PPCF_NODIRECTORIES           0x00000010        // don't match to directories
++#endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_VISTA)))
+ #define PPCF_FORCEQUALIFY            0x00000040        // qualify even non-relative names
++#endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_VISTA)))
+ #define PPCF_LONGESTPOSSIBLE         0x00000080        // always find the longest possible name
++#endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
+ 
+ SHSTDAPI_(LONG) PathProcessCommand(_In_ PCWSTR pszSrc, _Out_writes_(cchDest) PWSTR pszDest, int cchDest, DWORD dwFlags);
+ #endif
+@@ -810,7 +863,7 @@ SHSTDAPI SHLoadOLE(LPARAM lParam);
  //
  #undef  INTERFACE
  #define INTERFACE  IDocViewSite
@@ -154,7 +247,7 @@ index 62644da172..b0005b5252 100644
  {
      STDMETHOD(OnSetTitle) (THIS_ _In_ VARIANTARG *pvTitle) PURE;
  };
-@@ -844,7 +849,7 @@ DECLARE_INTERFACE_IID_(IBanneredBar, IUnknown, "596A9A94-013E-11d1-8D34-00A0C90F
+@@ -844,7 +897,7 @@ DECLARE_INTERFACE_IID_(IBanneredBar, IUnknown, "596A9A94-013E-11d1-8D34-00A0C90F
      STDMETHOD(SetIconSize)(THIS_ DWORD iIcon) PURE;
      STDMETHOD(GetIconSize)(THIS_ _Out_ DWORD* piIcon) PURE;
      STDMETHOD(SetBitmap)(THIS_ _In_ HBITMAP hBitmap) PURE;
@@ -163,7 +256,7 @@ index 62644da172..b0005b5252 100644
  };
  
  
-@@ -869,7 +874,7 @@ typedef TBINFO * LPTBINFO;
+@@ -869,7 +922,7 @@ typedef TBINFO * LPTBINFO;
  SHSTDAPI_(BOOL) SHOpenPropSheetA(_In_opt_ LPCSTR pszCaption, _In_reads_opt_(ckeys) HKEY ahkeys[], UINT ckeys,
                                   _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
                                   _In_opt_ IShellBrowser *psb, _In_opt_ LPCSTR pStartPage);
@@ -172,7 +265,7 @@ index 62644da172..b0005b5252 100644
                                   _In_opt_ const CLSID * pclsidDefault, _In_ IDataObject *pdtobj,
                                   _In_opt_ IShellBrowser *psb, _In_opt_ LPCWSTR pStartPage);
  #ifdef UNICODE
-@@ -981,7 +986,7 @@ typedef const SFV_SETITEMPOS *PCSFV_SETITEMPOS;
+@@ -981,7 +1034,7 @@ typedef const SFV_SETITEMPOS *PCSFV_SETITEMPOS;
  //               Note: There is no Abort button in the standard UI.
  
  
@@ -181,7 +274,7 @@ index 62644da172..b0005b5252 100644
                                             _In_ PCWSTR pszDistUnit,
                                             DWORD dwFlags,
                                             _Out_opt_ LPSOFTDISTINFO psdi );
-@@ -1012,11 +1017,11 @@ SHDOCAPI_(DWORD) SoftwareUpdateMessageBox( _In_opt_ HWND hWnd,
+@@ -1012,11 +1065,11 @@ SHDOCAPI_(DWORD) SoftwareUpdateMessageBox( _In_opt_ HWND hWnd,
  // Returns:
  //      S_OK
  //

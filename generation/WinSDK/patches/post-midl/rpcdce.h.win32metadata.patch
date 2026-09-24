@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h
-index e3f1c4421b..622ab1786c 100644
+index e3f1c4421b..2049516b2e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdce.h
 @@ -1,3 +1,4 @@
@@ -7,6 +7,15 @@ index e3f1c4421b..622ab1786c 100644
  #include <winapifamily.h>
  
  /*++
+@@ -152,7 +153,7 @@ typedef struct _RPC_IF_ID
+ #define RPC_C_RPCHTTP_USE_LOAD_BALANCE  0x8
+ #define RPC_C_TRY_ENFORCE_MAX_CALLS     0x10
+ 
+-#if (NTDDI_VERSION < NTDDI_VISTA)
++#if defined(WIN32METADATA) || ((NTDDI_VERSION < NTDDI_VISTA))
+ // RPC_POLICY EndpointFlags specific to the Falcon/RPC transport (deprecated for Vista)
+ #define RPC_C_MQ_TEMPORARY                  0x0000
+ #define RPC_C_MQ_PERMANENT                  0x0001
 @@ -290,7 +291,7 @@ typedef struct
  } RPC_IF_ID_VECTOR;
  

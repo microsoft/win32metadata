@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
-index 0777b5b9b1..9cea01a38d 100644
+index 0777b5b9b1..ee73da951a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/propsys.h
 @@ -274,6 +274,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IInitializeWithFileVtbl;
  
 -    interface IInitializeWithFile
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IInitializeWithFile
++    interface _Windows_SupportedOS_WindowsVista_ IInitializeWithFile
      {
          CONST_VTBL struct IInitializeWithFileVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IInitializeWithStreamVtbl;
  
 -    interface IInitializeWithStream
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IInitializeWithStream
++    interface _Windows_SupportedOS_WindowsVista_ IInitializeWithStream
      {
          CONST_VTBL struct IInitializeWithStreamVtbl *lpVtbl;
      };
@@ -86,7 +86,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } INamedPropertyStoreVtbl;
  
 -    interface INamedPropertyStore
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ INamedPropertyStore
++    interface _Windows_SupportedOS_WindowsVista_ INamedPropertyStore
      {
          CONST_VTBL struct INamedPropertyStoreVtbl *lpVtbl;
      };
@@ -115,7 +115,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IObjectWithPropertyKeyVtbl;
  
 -    interface IObjectWithPropertyKey
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IObjectWithPropertyKey
++    interface _Windows_SupportedOS_WindowsVista_ IObjectWithPropertyKey
      {
          CONST_VTBL struct IObjectWithPropertyKeyVtbl *lpVtbl;
      };
@@ -148,7 +148,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyChangeVtbl;
  
 -    interface IPropertyChange
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyChange
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyChange
      {
          CONST_VTBL struct IPropertyChangeVtbl *lpVtbl;
      };
@@ -168,7 +168,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyChangeArrayVtbl;
  
 -    interface IPropertyChangeArray
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyChangeArray
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyChangeArray
      {
          CONST_VTBL struct IPropertyChangeArrayVtbl *lpVtbl;
      };
@@ -192,7 +192,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyStoreCapabilitiesVtbl;
  
 -    interface IPropertyStoreCapabilities
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreCapabilities
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyStoreCapabilities
      {
          CONST_VTBL struct IPropertyStoreCapabilitiesVtbl *lpVtbl;
      };
@@ -221,7 +221,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyStoreCacheVtbl;
  
 -    interface IPropertyStoreCache
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreCache
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyStoreCache
      {
          CONST_VTBL struct IPropertyStoreCacheVtbl *lpVtbl;
      };
@@ -241,7 +241,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyEnumTypeVtbl;
  
 -    interface IPropertyEnumType
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyEnumType
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyEnumType
      {
          CONST_VTBL struct IPropertyEnumTypeVtbl *lpVtbl;
      };
@@ -279,7 +279,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyEnumTypeListVtbl;
  
 -    interface IPropertyEnumTypeList
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyEnumTypeList
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyEnumTypeList
      {
          CONST_VTBL struct IPropertyEnumTypeListVtbl *lpVtbl;
      };
@@ -353,7 +353,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyDescriptionVtbl;
  
 -    interface IPropertyDescription
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescription
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyDescription
      {
          CONST_VTBL struct IPropertyDescriptionVtbl *lpVtbl;
      };
@@ -391,7 +391,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyDescriptionAliasInfoVtbl;
  
 -    interface IPropertyDescriptionAliasInfo
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionAliasInfo
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyDescriptionAliasInfo
      {
          CONST_VTBL struct IPropertyDescriptionAliasInfoVtbl *lpVtbl;
      };
@@ -429,7 +429,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyDescriptionSearchInfoVtbl;
  
 -    interface IPropertyDescriptionSearchInfo
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionSearchInfo
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyDescriptionSearchInfo
      {
          CONST_VTBL struct IPropertyDescriptionSearchInfoVtbl *lpVtbl;
      };
@@ -485,7 +485,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyDescriptionListVtbl;
  
 -    interface IPropertyDescriptionList
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyDescriptionList
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyDescriptionList
      {
          CONST_VTBL struct IPropertyDescriptionListVtbl *lpVtbl;
      };
@@ -505,7 +505,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPropertyStoreFactoryVtbl;
  
 -    interface IPropertyStoreFactory
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPropertyStoreFactory
++    interface _Windows_SupportedOS_WindowsVista_ IPropertyStoreFactory
      {
          CONST_VTBL struct IPropertyStoreFactoryVtbl *lpVtbl;
      };
@@ -525,7 +525,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IDelayedPropertyStoreFactoryVtbl;
  
 -    interface IDelayedPropertyStoreFactory
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDelayedPropertyStoreFactory
++    interface _Windows_SupportedOS_WindowsVista_ IDelayedPropertyStoreFactory
      {
          CONST_VTBL struct IDelayedPropertyStoreFactoryVtbl *lpVtbl;
      };
@@ -545,7 +545,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } IPersistSerializedPropStorageVtbl;
  
 -    interface IPersistSerializedPropStorage
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPersistSerializedPropStorage
++    interface _Windows_SupportedOS_WindowsVista_ IPersistSerializedPropStorage
      {
          CONST_VTBL struct IPersistSerializedPropStorageVtbl *lpVtbl;
      };
@@ -583,7 +583,7 @@ index 0777b5b9b1..9cea01a38d 100644
      } ICreateObjectVtbl;
  
 -    interface ICreateObject
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICreateObject
++    interface _Windows_SupportedOS_WindowsVista_ ICreateObject
      {
          CONST_VTBL struct ICreateObjectVtbl *lpVtbl;
      };

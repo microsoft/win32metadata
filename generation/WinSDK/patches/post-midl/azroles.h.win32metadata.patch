@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h b/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h
-index 93f682634e..3570449466 100644
+index 93f682634e..f304cb17be 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/azroles.h
 @@ -572,6 +572,7 @@ extern "C"{
@@ -65,7 +65,7 @@ index 93f682634e..3570449466 100644
      } IAzAuthorizationStoreVtbl;
  
 -    interface IAzAuthorizationStore
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IAzAuthorizationStore
++    interface _Windows_SupportedOS_WindowsVista_ IAzAuthorizationStore
      {
          CONST_VTBL struct IAzAuthorizationStoreVtbl *lpVtbl;
      };

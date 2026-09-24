@@ -38,3 +38,5 @@ extern "C"
 #include <webevnts.h>
 #include <ocmm.h>
 #include <imgutil.h>
+
+#include <IEProcess.h>

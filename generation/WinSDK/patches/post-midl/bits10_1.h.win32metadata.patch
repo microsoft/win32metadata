@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
-index 7d01556725..24b571505b 100644
+index 7d01556725..9adaccfa96 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
 @@ -105,6 +105,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 7d01556725..24b571505b 100644
      } IBackgroundCopyCallback3Vtbl;
  
 -    interface IBackgroundCopyCallback3
-+    interface _Windows_SupportedOS_Server2016_ IBackgroundCopyCallback3
++    interface _Windows_SupportedOS_15063_ IBackgroundCopyCallback3
      {
          CONST_VTBL struct IBackgroundCopyCallback3Vtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 7d01556725..24b571505b 100644
      } IBackgroundCopyFile6Vtbl;
  
 -    interface IBackgroundCopyFile6
-+    interface _Windows_SupportedOS_Server2016_ IBackgroundCopyFile6
++    interface _Windows_SupportedOS_15063_ IBackgroundCopyFile6
      {
          CONST_VTBL struct IBackgroundCopyFile6Vtbl *lpVtbl;
      };

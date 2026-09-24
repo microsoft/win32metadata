@@ -18,6 +18,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.26100.7705" GeneratePathProperty="true"/>
     <Partition Include="Partitions\**\main.cpp"/>
+    <WinmdIncludeDir Include="AdditionalHeaders"/>
     <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
     <WinmdScopeHeader Include="activation.h;CoreWindow.h;corewindow.h;DocumentSource.h;documentsource.h;hstring.h;inspectable.h"/>

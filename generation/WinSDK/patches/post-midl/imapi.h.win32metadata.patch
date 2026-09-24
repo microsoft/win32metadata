@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
-index 1c968ff809..6f96566043 100644
+index 1c968ff809..32cc8cc9a9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imapi.h
 @@ -146,6 +146,7 @@ extern "C"{
@@ -65,7 +65,7 @@ index 1c968ff809..6f96566043 100644
      } IDiscRecorderVtbl;
  
 -    interface IDiscRecorder
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IDiscRecorder
++    interface _Windows_SupportedOS_WindowsXP_ IDiscRecorder
      {
          CONST_VTBL struct IDiscRecorderVtbl *lpVtbl;
      };
@@ -85,7 +85,7 @@ index 1c968ff809..6f96566043 100644
      } IRedbookDiscMasterVtbl;
  
 -    interface IRedbookDiscMaster
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IRedbookDiscMaster
++    interface _Windows_SupportedOS_WindowsXP_ IRedbookDiscMaster
      {
          CONST_VTBL struct IRedbookDiscMasterVtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
-index 31cf48fdf9..a2eff64e9c 100644
+index 31cf48fdf9..d7b1a7989e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cscobj.h
 @@ -337,6 +337,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 31cf48fdf9..a2eff64e9c 100644
      } IOfflineFilesEventsVtbl;
  
 -    interface IOfflineFilesEvents
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents
++    interface _Windows_SupportedOS_WindowsVista_ IOfflineFilesEvents
      {
          CONST_VTBL struct IOfflineFilesEventsVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 31cf48fdf9..a2eff64e9c 100644
      } IOfflineFilesEvents2Vtbl;
  
 -    interface IOfflineFilesEvents2
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IOfflineFilesEvents2
++    interface _Windows_SupportedOS_WindowsVista_ IOfflineFilesEvents2
      {
          CONST_VTBL struct IOfflineFilesEvents2Vtbl *lpVtbl;
      };

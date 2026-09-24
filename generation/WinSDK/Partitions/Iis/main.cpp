@@ -13,6 +13,7 @@
 #include <ftpext.h>
 #include <iadmext.h>
 #include <iadmw.h>
+#include <iiscnfg.h>
 
 //#include <httpserv.h>
 #include <httpext.h>
@@ -22,3 +23,9 @@
 #include <hwebcore.h>
 
 //#include <httpcompression.h> -- Can't figure out the lib for this
+
+#include <iimgctx.h>
+#include <iwamreg.h>
+
+#include <httpserv.h>
+#include <iiswebsocket.h>

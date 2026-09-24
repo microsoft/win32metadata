@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
-index 9dbcd847e1..918db3446d 100644
+index 9dbcd847e1..9c6ffdf283 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
 @@ -85,6 +85,7 @@ extern "C"{
@@ -51,7 +51,7 @@ index 9dbcd847e1..918db3446d 100644
      } IBackgroundCopyJob2Vtbl;
  
 -    interface IBackgroundCopyJob2
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBackgroundCopyJob2
++    interface _Windows_SupportedOS_WindowsVista_ IBackgroundCopyJob2
      {
          CONST_VTBL struct IBackgroundCopyJob2Vtbl *lpVtbl;
      };

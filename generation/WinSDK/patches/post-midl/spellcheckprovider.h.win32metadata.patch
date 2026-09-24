@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h
-index 0ac38aa555..5adc1e4d14 100644
+index 0ac38aa555..f063c69587 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h
 @@ -81,6 +81,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 0ac38aa555..5adc1e4d14 100644
      } ISpellCheckProviderVtbl;
  
 -    interface ISpellCheckProvider
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ ISpellCheckProvider
++    interface _Windows_SupportedOS_Windows8_ ISpellCheckProvider
      {
          CONST_VTBL struct ISpellCheckProviderVtbl *lpVtbl;
      };

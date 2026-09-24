@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
-index 46e8d9b99e..1c97752de7 100644
+index 46e8d9b99e..48d23ceff6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
 @@ -28,6 +28,7 @@
@@ -72,7 +72,7 @@ index 46e8d9b99e..1c97752de7 100644
      } IADsVtbl;
  
 -    interface IADs
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADs
++    interface _Windows_SupportedOS_WindowsVista_ IADs
      {
          CONST_VTBL struct IADsVtbl *lpVtbl;
      };
@@ -92,7 +92,7 @@ index 46e8d9b99e..1c97752de7 100644
      } IADsContainerVtbl;
  
 -    interface IADsContainer
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADsContainer
++    interface _Windows_SupportedOS_WindowsVista_ IADsContainer
      {
          CONST_VTBL struct IADsContainerVtbl *lpVtbl;
      };

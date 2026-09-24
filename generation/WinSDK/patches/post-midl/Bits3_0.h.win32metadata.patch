@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
-index f397dc1bff..83920e7aca 100644
+index f397dc1bff..9c4a9b3cbf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Bits3_0.h
 @@ -186,6 +186,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index f397dc1bff..83920e7aca 100644
      } IBitsPeerCacheRecordVtbl;
  
 -    interface IBitsPeerCacheRecord
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBitsPeerCacheRecord
++    interface _Windows_SupportedOS_WindowsVista_ IBitsPeerCacheRecord
      {
          CONST_VTBL struct IBitsPeerCacheRecordVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index f397dc1bff..83920e7aca 100644
      } IEnumBitsPeerCacheRecordsVtbl;
  
 -    interface IEnumBitsPeerCacheRecords
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumBitsPeerCacheRecords
++    interface _Windows_SupportedOS_WindowsVista_ IEnumBitsPeerCacheRecords
      {
          CONST_VTBL struct IEnumBitsPeerCacheRecordsVtbl *lpVtbl;
      };
@@ -66,7 +66,7 @@ index f397dc1bff..83920e7aca 100644
      } IBitsPeerVtbl;
  
 -    interface IBitsPeer
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBitsPeer
++    interface _Windows_SupportedOS_WindowsVista_ IBitsPeer
      {
          CONST_VTBL struct IBitsPeerVtbl *lpVtbl;
      };
@@ -86,7 +86,7 @@ index f397dc1bff..83920e7aca 100644
      } IEnumBitsPeersVtbl;
  
 -    interface IEnumBitsPeers
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumBitsPeers
++    interface _Windows_SupportedOS_WindowsVista_ IEnumBitsPeers
      {
          CONST_VTBL struct IEnumBitsPeersVtbl *lpVtbl;
      };
@@ -115,7 +115,7 @@ index f397dc1bff..83920e7aca 100644
      } IBitsPeerCacheAdministrationVtbl;
  
 -    interface IBitsPeerCacheAdministration
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBitsPeerCacheAdministration
++    interface _Windows_SupportedOS_WindowsVista_ IBitsPeerCacheAdministration
      {
          CONST_VTBL struct IBitsPeerCacheAdministrationVtbl *lpVtbl;
      };
@@ -135,7 +135,7 @@ index f397dc1bff..83920e7aca 100644
      } IBackgroundCopyJob4Vtbl;
  
 -    interface IBackgroundCopyJob4
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyJob4
++    interface _Windows_SupportedOS_WindowsVista_ IBackgroundCopyJob4
      {
          CONST_VTBL struct IBackgroundCopyJob4Vtbl *lpVtbl;
      };
@@ -161,7 +161,7 @@ index f397dc1bff..83920e7aca 100644
      } IBackgroundCopyFile3Vtbl;
  
 -    interface IBackgroundCopyFile3
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyFile3
++    interface _Windows_SupportedOS_WindowsVista_ IBackgroundCopyFile3
      {
          CONST_VTBL struct IBackgroundCopyFile3Vtbl *lpVtbl;
      };
@@ -181,7 +181,7 @@ index f397dc1bff..83920e7aca 100644
      } IBackgroundCopyCallback2Vtbl;
  
 -    interface IBackgroundCopyCallback2
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBackgroundCopyCallback2
++    interface _Windows_SupportedOS_WindowsVista_ IBackgroundCopyCallback2
      {
          CONST_VTBL struct IBackgroundCopyCallback2Vtbl *lpVtbl;
      };

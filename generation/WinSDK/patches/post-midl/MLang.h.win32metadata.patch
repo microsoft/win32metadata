@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h b/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
-index 76ae304d67..15798c6d28 100644
+index 76ae304d67..f7dd9f09b4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MLang.h
 @@ -207,6 +207,7 @@ extern "C"{
@@ -19,15 +19,6 @@ index 76ae304d67..15798c6d28 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Clone( 
-@@ -1690,7 +1691,7 @@ EXTERN_C const IID IID_IEnumCodePage;
-         END_INTERFACE
-     } IEnumCodePageVtbl;
- 
--    interface IEnumCodePage
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumCodePage
-     {
-         CONST_VTBL struct IEnumCodePageVtbl *lpVtbl;
-     };
 @@ -1760,7 +1761,7 @@ EXTERN_C const IID IID_IEnumRfc1766;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -37,15 +28,6 @@ index 76ae304d67..15798c6d28 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Clone( 
-@@ -1835,7 +1836,7 @@ EXTERN_C const IID IID_IEnumRfc1766;
-         END_INTERFACE
-     } IEnumRfc1766Vtbl;
- 
--    interface IEnumRfc1766
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IEnumRfc1766
-     {
-         CONST_VTBL struct IEnumRfc1766Vtbl *lpVtbl;
-     };
 @@ -2413,7 +2414,7 @@ EXTERN_C const IID IID_IMultiLanguage;
              /* [annotation][in] */ 
              _In_  LCID Locale,

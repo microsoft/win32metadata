@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h b/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
-index b3d36e4871..e2d3aa4026 100644
+index b3d36e4871..91c8bac964 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
 @@ -78,6 +78,7 @@ extern "C"{
@@ -35,12 +35,3 @@ index b3d36e4871..e2d3aa4026 100644
          
          virtual HRESULT STDMETHODCALLTYPE IsErrorUrl( 
              /* [in] */ __RPC__in LPCWSTR lpszUrl,
-@@ -225,7 +226,7 @@ EXTERN_C const IID IID_IDocObjectService;
-         END_INTERFACE
-     } IDocObjectServiceVtbl;
- 
--    interface IDocObjectService
-+    interface _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ IDocObjectService
-     {
-         CONST_VTBL struct IDocObjectServiceVtbl *lpVtbl;
-     };

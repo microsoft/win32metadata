@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h
-index d472ea14d3..64debaae82 100644
+index d472ea14d3..4d2ee66e2e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsddisco.h
 @@ -103,6 +103,7 @@ extern "C"{
@@ -41,7 +41,7 @@ index d472ea14d3..64debaae82 100644
      } IWSDiscoveryProviderVtbl;
  
 -    interface IWSDiscoveryProvider
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryProvider
++    interface _Windows_SupportedOS_WindowsVista_ IWSDiscoveryProvider
      {
          CONST_VTBL struct IWSDiscoveryProviderVtbl *lpVtbl;
      };
@@ -61,7 +61,7 @@ index d472ea14d3..64debaae82 100644
      } IWSDiscoveryProviderNotifyVtbl;
  
 -    interface IWSDiscoveryProviderNotify
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryProviderNotify
++    interface _Windows_SupportedOS_WindowsVista_ IWSDiscoveryProviderNotify
      {
          CONST_VTBL struct IWSDiscoveryProviderNotifyVtbl *lpVtbl;
      };
@@ -81,7 +81,7 @@ index d472ea14d3..64debaae82 100644
      } IWSDiscoveredServiceVtbl;
  
 -    interface IWSDiscoveredService
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveredService
++    interface _Windows_SupportedOS_WindowsVista_ IWSDiscoveredService
      {
          CONST_VTBL struct IWSDiscoveredServiceVtbl *lpVtbl;
      };
@@ -116,7 +116,7 @@ index d472ea14d3..64debaae82 100644
      } IWSDiscoveryPublisherVtbl;
  
 -    interface IWSDiscoveryPublisher
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryPublisher
++    interface _Windows_SupportedOS_WindowsVista_ IWSDiscoveryPublisher
      {
          CONST_VTBL struct IWSDiscoveryPublisherVtbl *lpVtbl;
      };
@@ -136,7 +136,7 @@ index d472ea14d3..64debaae82 100644
      } IWSDiscoveryPublisherNotifyVtbl;
  
 -    interface IWSDiscoveryPublisherNotify
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDiscoveryPublisherNotify
++    interface _Windows_SupportedOS_WindowsVista_ IWSDiscoveryPublisherNotify
      {
          CONST_VTBL struct IWSDiscoveryPublisherNotifyVtbl *lpVtbl;
      };
@@ -156,7 +156,7 @@ index d472ea14d3..64debaae82 100644
      } IWSDScopeMatchingRuleVtbl;
  
 -    interface IWSDScopeMatchingRule
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDScopeMatchingRule
++    interface _Windows_SupportedOS_WindowsVista_ IWSDScopeMatchingRule
      {
          CONST_VTBL struct IWSDScopeMatchingRuleVtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
-index f78b0cef08..7afac67b47 100644
+index f78b0cef08..13cb55cb07 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Shlwapi.h
 @@ -1,3 +1,4 @@
@@ -112,6 +112,9 @@ index f78b0cef08..7afac67b47 100644
 -LWSTDAPI_(PWSTR)    StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
 -LWSTDAPI_(PSTR)     StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
 -LWSTDAPI_(PWSTR)    StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
+-#endif
+-LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
+-LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    _WIN32META_ANNOTATION_("win32metadata:ansi") StrPBrkA(_In_ PCSTR psz, _In_ PCSTR pszSet);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCWSTR)   _WIN32META_ANNOTATION_("win32metadata:unicode") StrPBrkW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PCSTR)    _WIN32META_ANNOTATION_("win32metadata:ansi") StrRChrA(_In_ PCSTR pszStart, _In_opt_ PCSTR pszEnd, WORD wMatch);
@@ -129,9 +132,7 @@ index f78b0cef08..7afac67b47 100644
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    _WIN32META_ANNOTATION_("win32metadata:unicode") StrRChrIW(_In_ PCWSTR pszStart, _In_opt_ PCWSTR pszEnd, WCHAR wMatch);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PSTR)     _WIN32META_ANNOTATION_("win32metadata:ansi") StrRStrIA(_In_ PCSTR pszSource, _In_opt_ PCSTR pszLast, _In_ PCSTR pszSrch);
 +_Windows_SupportedOS_Windows2000_ LWSTDAPI_(PWSTR)    _WIN32META_ANNOTATION_("win32metadata:unicode") StrRStrIW(_In_ PCWSTR pszSource, _In_opt_ PCWSTR pszLast, _In_ PCWSTR pszSrch);
- #endif
--LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
--LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
++#endif
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnA(_In_ PCSTR psz, _In_ PCSTR pszSet);
 +_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ LWSTDAPI_(int)      StrSpnW(_In_ PCWSTR psz, _In_ PCWSTR pszSet);
  #ifdef USE_STRICT_CONST
@@ -1264,7 +1265,98 @@ index f78b0cef08..7afac67b47 100644
  #ifdef UNICODE
  #define GetAcceptLanguages  GetAcceptLanguagesW
  #else
-@@ -1978,12 +1979,12 @@ DWORD WINAPI StopWatchFlush(void);
+@@ -1953,24 +1954,90 @@ LWSTDAPI GetAcceptLanguagesW(_Out_writes_to_(*pcchLanguages, *pcchLanguages) LPW
+ 
+ #if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
+ 
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_SHELL      0x00000001
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_DEBUGOUT   0x00000002
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_TEST       0x00000004
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_BROWSER    0x00000008
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_FLUSH      0x00000010
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_EVENT      0x00000020
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_MSVM       0x00000040
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_FORMATTEXT 0x00000080
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_PROFILE    0x00000100
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_DEBUGBREAK 0x00000200
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_MSGTRACE   0x00000400
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_PERFTAGS   0x00000800
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_MEMWATCH   0x00001000
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_DBMON      0x00002000
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)))
+ #define SPMODE_MULTISTOP  0x00004000
++#endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
+ #ifndef NO_ETW_TRACING
++#endif
++#endif
++#if defined(WIN32METADATA) || (((_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)) && (!defined(NO_ETW_TRACING)))
+ #define SPMODE_EVENTTRACE 0x00008000 // Event Tracing for Windows Enabled
+ #endif
++#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
++#ifndef NO_ETW_TRACING
++#endif
+ 
+ DWORD WINAPI StopWatchMode(void);
+ DWORD WINAPI StopWatchFlush(void);
+@@ -1978,12 +2045,12 @@ DWORD WINAPI StopWatchFlush(void);
  #endif // (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH)
  
  
@@ -1283,7 +1375,7 @@ index f78b0cef08..7afac67b47 100644
  
  
  #if !defined(__cplusplus) && defined(COBJMACROS)
-@@ -1991,10 +1992,10 @@ DWORD WINAPI StopWatchFlush(void);
+@@ -1991,10 +2058,10 @@ DWORD WINAPI StopWatchFlush(void);
  #undef IStream_Write
  #endif
  
@@ -1298,7 +1390,7 @@ index f78b0cef08..7afac67b47 100644
  
  // ocidl.h
  #ifndef __IConnectionPoint_FWD_DEFINED__
-@@ -2002,21 +2003,21 @@ LWSTDAPI IStream_Size(_In_ IStream *pstm, _Out_ ULARGE_INTEGER *pui);
+@@ -2002,21 +2069,21 @@ LWSTDAPI IStream_Size(_In_ IStream *pstm, _Out_ ULARGE_INTEGER *pui);
  typedef interface IConnectionPoint IConnectionPoint;
  #endif  /* __IConnectionPoint_FWD_DEFINED__ */
  
@@ -1326,7 +1418,7 @@ index f78b0cef08..7afac67b47 100644
  
  #endif // (_WIN32_IE >= _WIN32_IE_IE70)
  
-@@ -2035,7 +2036,7 @@ LWSTDAPI IStream_Copy(_In_ IStream *pstmFrom, _In_ IStream *pstmTo, DWORD cb);
+@@ -2035,7 +2102,7 @@ LWSTDAPI IStream_Copy(_In_ IStream *pstmFrom, _In_ IStream *pstmTo, DWORD cb);
  #define SHGVSPB_USERDEFAULTS        (SHGVSPB_PERUSER | SHGVSPB_ALLFOLDERS)
  #define SHGVSPB_GLOBALDEFAULTS      (SHGVSPB_ALLUSERS | SHGVSPB_ALLFOLDERS)
  
@@ -1335,7 +1427,7 @@ index f78b0cef08..7afac67b47 100644
  #endif  // (_WIN32_IE >= 0x0600)
  
  // SHFormatDateTime flags
-@@ -2052,8 +2053,8 @@ LWSTDAPI SHGetViewStatePropertyBag(_In_opt_ PCIDLIST_ABSOLUTE pidl, _In_opt_ PCW
+@@ -2052,8 +2119,8 @@ LWSTDAPI SHGetViewStatePropertyBag(_In_opt_ PCIDLIST_ABSOLUTE pidl, _In_opt_ PCW
  #define FDTF_RTLDATE            0x00000200      // Right To Left reading order
  #define FDTF_NOAUTOREADINGORDER 0x00000400      // Don't detect reading order automatically. Useful if you will be converting to Ansi and don't want Unicode reading order characters
  
@@ -1346,7 +1438,7 @@ index f78b0cef08..7afac67b47 100644
  #ifdef UNICODE
  #define SHFormatDateTime  SHFormatDateTimeW
  #else
-@@ -2066,13 +2067,13 @@ LWSTDAPI_(int)  SHFormatDateTimeW(_In_ const FILETIME UNALIGNED * pft, _Inout_op
+@@ -2066,13 +2133,13 @@ LWSTDAPI_(int)  SHFormatDateTimeW(_In_ const FILETIME UNALIGNED * pft, _Inout_op
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1364,7 +1456,7 @@ index f78b0cef08..7afac67b47 100644
  LWSTDAPI_(int)  SHUnicodeToUnicode(_In_ PCWSTR pwzSrc, _Out_writes_(cwchBuf) PWSTR pwzDst, _In_ int cwchBuf);
  
  // The return value from all SH<Type>To<Type> is the size of szDest including the terminater.
-@@ -2095,8 +2096,8 @@ LWSTDAPI_(int)  SHUnicodeToUnicode(_In_ PCWSTR pwzSrc, _Out_writes_(cwchBuf) PWS
+@@ -2095,8 +2162,8 @@ LWSTDAPI_(int)  SHUnicodeToUnicode(_In_ PCWSTR pwzSrc, _Out_writes_(cwchBuf) PWS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
@@ -1375,7 +1467,7 @@ index f78b0cef08..7afac67b47 100644
  #ifdef UNICODE
  #define SHMessageBoxCheck  SHMessageBoxCheckW
  #else
-@@ -2105,17 +2106,17 @@ LWSTDAPI_(int) SHMessageBoxCheckW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszText, _In_
+@@ -2105,17 +2172,17 @@ LWSTDAPI_(int) SHMessageBoxCheckW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszText, _In_
  
  
  // Prevents hang do to hung window on broadcast
@@ -1397,7 +1489,7 @@ index f78b0cef08..7afac67b47 100644
  #ifdef UNICODE
  #define SHStripMneumonic  SHStripMneumonicW
  #else
-@@ -2165,7 +2166,7 @@ LWSTDAPI_(WCHAR) SHStripMneumonicW(_Inout_ LPWSTR pszMenu);
+@@ -2165,7 +2232,7 @@ LWSTDAPI_(WCHAR) SHStripMneumonicW(_Inout_ LPWSTR pszMenu);
  #define OS_MEDIACENTER              35          // eHome Freestyle Project
  #define OS_APPLIANCE                36          // Windows .NET Appliance Server
  
@@ -1406,7 +1498,7 @@ index f78b0cef08..7afac67b47 100644
  
  #endif // NO_SHLWAPI_ISOS
  
-@@ -2241,9 +2242,9 @@ typedef enum
+@@ -2241,9 +2308,9 @@ typedef enum
  } SHGLOBALCOUNTER;
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -1419,7 +1511,7 @@ index f78b0cef08..7afac67b47 100644
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
  
-@@ -2251,14 +2252,14 @@ LWSTDAPI_(long) SHGlobalCounterDecrement(const SHGLOBALCOUNTER id);
+@@ -2251,14 +2318,14 @@ LWSTDAPI_(long) SHGlobalCounterDecrement(const SHGLOBALCOUNTER id);
  
  
  #if (_WIN32_IE >= 0x0603)
@@ -1439,7 +1531,7 @@ index f78b0cef08..7afac67b47 100644
  
  // Return values of WhichPlatform
  #define PLATFORM_UNKNOWN     0
-@@ -2344,7 +2345,7 @@ typedef const QITAB *LPCQITAB;
+@@ -2344,7 +2411,7 @@ typedef const QITAB *LPCQITAB;
  
  #define QITABENT(Cthis, Ifoo) QITABENTMULTI(Cthis, Ifoo, Ifoo)
  
@@ -1448,7 +1540,7 @@ index f78b0cef08..7afac67b47 100644
  
  #ifndef STATIC_CAST
  //***   STATIC_CAST -- 'portable' static_cast<>
-@@ -2375,12 +2376,12 @@ STDAPI QISearch(_Inout_ void* that, _In_ LPCQITAB pqit, _In_ REFIID riid, _COM_O
+@@ -2375,12 +2442,12 @@ STDAPI QISearch(_Inout_ void* that, _In_ LPCQITAB pqit, _In_ REFIID riid, _COM_O
  
  // Types for SHIsLowMemoryMachine
  #define ILMM_IE4    0       // 1997-era machine
@@ -1464,7 +1556,7 @@ index f78b0cef08..7afac67b47 100644
  
  
  // SHAutoComplete
-@@ -2411,15 +2412,15 @@ LWSTDAPI        SHGetInverseCMAP(_Out_writes_bytes_(cbMap) BYTE *pbMap, ULONG cb
+@@ -2411,15 +2478,15 @@ LWSTDAPI        SHGetInverseCMAP(_Out_writes_bytes_(cbMap) BYTE *pbMap, ULONG cb
  #define SHACF_AUTOAPPEND_FORCE_ON       0x40000000  // Ignore the registry default and force the feature on. (Also know as AutoComplete)
  #define SHACF_AUTOAPPEND_FORCE_OFF      0x80000000  // Ignore the registry default and force the feature off. (Also know as AutoComplete)
  
@@ -1485,7 +1577,7 @@ index f78b0cef08..7afac67b47 100644
  
  enum
  {
-@@ -2455,8 +2456,8 @@ enum
+@@ -2455,8 +2522,8 @@ enum
  
  typedef DWORD SHCT_FLAGS;   // SHCreateThread flags values
  
@@ -1496,7 +1588,7 @@ index f78b0cef08..7afac67b47 100644
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  LWSTDAPI_(void) SetProcessReference(_In_opt_ IUnknown *punk);
-@@ -2464,7 +2465,7 @@ LWSTDAPI GetProcessReference(_COM_Outptr_ IUnknown **punk);
+@@ -2464,7 +2531,7 @@ LWSTDAPI GetProcessReference(_COM_Outptr_ IUnknown **punk);
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  
  #if (_WIN32_IE >= _WIN32_IE_IE60)
@@ -1505,7 +1597,7 @@ index f78b0cef08..7afac67b47 100644
  #endif // _WIN32_IE_IE60
  
  #ifndef NO_SHLWAPI_GDI
-@@ -2472,11 +2473,11 @@ LWSTDAPI SHReleaseThreadRef(void); // release a CTF_THREAD_REF reference earlier
+@@ -2472,11 +2539,11 @@ LWSTDAPI SHReleaseThreadRef(void); // release a CTF_THREAD_REF reference earlier
  //====== GDI helper functions  ================================================
  //
  
@@ -1521,7 +1613,7 @@ index f78b0cef08..7afac67b47 100644
  
  
  #endif // NO_SHLWAPI_GDI
-@@ -2485,7 +2486,7 @@ LWSTDAPI_(COLORREF) ColorAdjustLuma(COLORREF clrRGB, int n, BOOL fScale);
+@@ -2485,7 +2552,7 @@ LWSTDAPI_(COLORREF) ColorAdjustLuma(COLORREF clrRGB, int n, BOOL fScale);
  //====== DllGetVersion  =======================================================
  //
  
@@ -1530,7 +1622,7 @@ index f78b0cef08..7afac67b47 100644
  {
      DWORD cbSize;
      DWORD dwMajorVersion;                   // Major version
-@@ -2525,7 +2526,7 @@ typedef struct _DLLVERSIONINFO2
+@@ -2525,7 +2592,7 @@ typedef struct _DLLVERSIONINFO2
  // implicitly link to it.
  //
  
@@ -1539,7 +1631,7 @@ index f78b0cef08..7afac67b47 100644
  
  // DllInstall (to be implemented by self-installing DLLs)
  STDAPI DllInstall(BOOL bInstall, _In_opt_ PCWSTR pszCmdLine);
-@@ -2533,7 +2534,7 @@ STDAPI DllInstall(BOOL bInstall, _In_opt_ PCWSTR pszCmdLine);
+@@ -2533,7 +2600,7 @@ STDAPI DllInstall(BOOL bInstall, _In_opt_ PCWSTR pszCmdLine);
  
  #if (_WIN32_IE >= 0x0602)
  // Function to see if Internet Explorer Enhanced Security Configuration is active for the current user
@@ -1548,7 +1640,7 @@ index f78b0cef08..7afac67b47 100644
  #endif // (_WIN32_IE >= 0x0602)
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -2721,5 +2722,214 @@ __inline PWSTR PathSkipRootW(_In_ PWSTR pszPath)
+@@ -2721,5 +2788,214 @@ __inline PWSTR PathSkipRootW(_In_ PWSTR pszPath)
  
  
  

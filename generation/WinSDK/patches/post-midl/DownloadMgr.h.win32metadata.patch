@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
-index a1640c9cac..c68e8ba6ef 100644
+index a1640c9cac..6c4b0d99b6 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
 @@ -78,6 +78,7 @@ extern "C"{
@@ -19,12 +19,3 @@ index a1640c9cac..c68e8ba6ef 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE Download( 
-@@ -178,7 +179,7 @@ EXTERN_C const IID IID_IDownloadManager;
-         END_INTERFACE
-     } IDownloadManagerVtbl;
- 
--    interface IDownloadManager
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IDownloadManager
-     {
-         CONST_VTBL struct IDownloadManagerVtbl *lpVtbl;
-     };

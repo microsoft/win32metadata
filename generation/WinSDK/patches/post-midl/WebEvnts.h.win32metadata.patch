@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h b/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
-index aac33dbfd3..1b1ec89be1 100644
+index aac33dbfd3..a07dbdde2d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
 @@ -85,6 +85,7 @@ extern "C"{
@@ -19,15 +19,6 @@ index aac33dbfd3..1b1ec89be1 100644
      {
      public:
          virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FireBeforeNavigate2Event( 
-@@ -178,7 +179,7 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
-         END_INTERFACE
-     } IWebBrowserEventsServiceVtbl;
- 
--    interface IWebBrowserEventsService
-+    interface _Windows_SupportedOS_Server2003_ IWebBrowserEventsService
-     {
-         CONST_VTBL struct IWebBrowserEventsServiceVtbl *lpVtbl;
-     };
 @@ -236,12 +237,12 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -43,12 +34,3 @@ index aac33dbfd3..1b1ec89be1 100644
          
      };
      
-@@ -277,7 +278,7 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
-         END_INTERFACE
-     } IWebBrowserEventsUrlServiceVtbl;
- 
--    interface IWebBrowserEventsUrlService
-+    interface _Windows_SupportedOS_Server2003_ IWebBrowserEventsUrlService
-     {
-         CONST_VTBL struct IWebBrowserEventsUrlServiceVtbl *lpVtbl;
-     };

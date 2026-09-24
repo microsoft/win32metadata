@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h b/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
-index 71dad35999..2a6eba56a7 100644
+index 71dad35999..2d95d516bb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
 @@ -88,6 +88,7 @@ extern "C"{
@@ -61,7 +61,7 @@ index 71dad35999..2a6eba56a7 100644
      } IADsTSUserExVtbl;
  
 -    interface IADsTSUserEx
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IADsTSUserEx
++    interface _Windows_SupportedOS_WindowsVista_ IADsTSUserEx
      {
          CONST_VTBL struct IADsTSUserExVtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h b/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
-index 8e78d8f770..220407350a 100644
+index 8e78d8f770..9d60100f65 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/PerHist.h
 @@ -78,6 +78,7 @@ extern "C"{
@@ -19,12 +19,3 @@ index 8e78d8f770..220407350a 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE LoadHistory( 
-@@ -189,7 +190,7 @@ EXTERN_C const IID IID_IPersistHistory;
-         END_INTERFACE
-     } IPersistHistoryVtbl;
- 
--    interface IPersistHistory
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2000_ IPersistHistory
-     {
-         CONST_VTBL struct IPersistHistoryVtbl *lpVtbl;
-     };

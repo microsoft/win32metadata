@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
-index 70827a2c9f..bc518a899d 100644
+index 70827a2c9f..77cbb908a4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdclient.h
 @@ -118,6 +118,7 @@ extern "C"{
@@ -51,7 +51,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDEndpointProxyVtbl;
  
 -    interface IWSDEndpointProxy
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEndpointProxy
++    interface _Windows_SupportedOS_WindowsVista_ IWSDEndpointProxy
      {
          CONST_VTBL struct IWSDEndpointProxyVtbl *lpVtbl;
      };
@@ -71,7 +71,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDMetadataExchangeVtbl;
  
 -    interface IWSDMetadataExchange
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDMetadataExchange
++    interface _Windows_SupportedOS_WindowsVista_ IWSDMetadataExchange
      {
          CONST_VTBL struct IWSDMetadataExchangeVtbl *lpVtbl;
      };
@@ -91,7 +91,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDServiceProxyVtbl;
  
 -    interface IWSDServiceProxy
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDServiceProxy
++    interface _Windows_SupportedOS_WindowsVista_ IWSDServiceProxy
      {
          CONST_VTBL struct IWSDServiceProxyVtbl *lpVtbl;
      };
@@ -129,7 +129,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDDeviceProxyVtbl;
  
 -    interface IWSDDeviceProxy
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDDeviceProxy
++    interface _Windows_SupportedOS_WindowsVista_ IWSDDeviceProxy
      {
          CONST_VTBL struct IWSDDeviceProxyVtbl *lpVtbl;
      };
@@ -149,7 +149,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDAsyncResultVtbl;
  
 -    interface IWSDAsyncResult
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncResult
++    interface _Windows_SupportedOS_WindowsVista_ IWSDAsyncResult
      {
          CONST_VTBL struct IWSDAsyncResultVtbl *lpVtbl;
      };
@@ -169,7 +169,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDAsyncCallbackVtbl;
  
 -    interface IWSDAsyncCallback
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDAsyncCallback
++    interface _Windows_SupportedOS_WindowsVista_ IWSDAsyncCallback
      {
          CONST_VTBL struct IWSDAsyncCallbackVtbl *lpVtbl;
      };
@@ -189,7 +189,7 @@ index 70827a2c9f..bc518a899d 100644
      } IWSDEventingStatusVtbl;
  
 -    interface IWSDEventingStatus
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDEventingStatus
++    interface _Windows_SupportedOS_WindowsVista_ IWSDEventingStatus
      {
          CONST_VTBL struct IWSDEventingStatusVtbl *lpVtbl;
      };

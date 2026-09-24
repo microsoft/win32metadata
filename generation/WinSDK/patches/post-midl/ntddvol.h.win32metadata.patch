@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvol.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvol.h
+index 16b67bcbe7..b5472d4406 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvol.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvol.h
+@@ -952,8 +952,16 @@ void (*CSV_FILECACHE_COMPLETE_CACHE_IO) (_Inout_ PCSV_FILECACHE_CONTEXT CSVConte
+ //     Structure of type CSV_FILECACHE_CALLBACKS
+ //
+ // Output Buffer:
++#endif
++#if defined(WIN32METADATA) || ((defined(_KERNEL_MODE)))
+ #define CSV_BLOCK_CACHE_CALLBACK_VERSION 01
++#endif
++#ifdef _KERNEL_MODE
++#endif
++#if defined(WIN32METADATA) || ((defined(_KERNEL_MODE)))
+ #define CSV_BLOCK_AND_FILE_CACHE_CALLBACK_VERSION 02
++#endif
++#ifdef _KERNEL_MODE
+ 
+ typedef struct _CSV_BLOCKCACHE_CALLBACK {
+     ULONG                       Version;

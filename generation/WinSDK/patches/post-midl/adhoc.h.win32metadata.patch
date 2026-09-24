@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h b/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h
-index 4bac350106..0a03d4bdc3 100644
+index 4bac350106..20af0c50c1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/adhoc.h
 @@ -147,6 +147,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocManagerVtbl;
  
 -    interface IDot11AdHocManager
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocManager
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocManager
      {
          CONST_VTBL struct IDot11AdHocManagerVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocManagerNotificationSinkVtbl;
  
 -    interface IDot11AdHocManagerNotificationSink
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocManagerNotificationSink
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocManagerNotificationSink
      {
          CONST_VTBL struct IDot11AdHocManagerNotificationSinkVtbl *lpVtbl;
      };
@@ -66,7 +66,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IEnumDot11AdHocNetworksVtbl;
  
 -    interface IEnumDot11AdHocNetworks
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumDot11AdHocNetworks
++    interface _Windows_SupportedOS_WindowsVista_ IEnumDot11AdHocNetworks
      {
          CONST_VTBL struct IEnumDot11AdHocNetworksVtbl *lpVtbl;
      };
@@ -86,7 +86,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocNetworkVtbl;
  
 -    interface IDot11AdHocNetwork
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocNetwork
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocNetwork
      {
          CONST_VTBL struct IDot11AdHocNetworkVtbl *lpVtbl;
      };
@@ -106,7 +106,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocNetworkNotificationSinkVtbl;
  
 -    interface IDot11AdHocNetworkNotificationSink
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocNetworkNotificationSink
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocNetworkNotificationSink
      {
          CONST_VTBL struct IDot11AdHocNetworkNotificationSinkVtbl *lpVtbl;
      };
@@ -126,7 +126,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocInterfaceVtbl;
  
 -    interface IDot11AdHocInterface
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocInterface
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocInterface
      {
          CONST_VTBL struct IDot11AdHocInterfaceVtbl *lpVtbl;
      };
@@ -146,7 +146,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IEnumDot11AdHocInterfacesVtbl;
  
 -    interface IEnumDot11AdHocInterfaces
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumDot11AdHocInterfaces
++    interface _Windows_SupportedOS_WindowsVista_ IEnumDot11AdHocInterfaces
      {
          CONST_VTBL struct IEnumDot11AdHocInterfacesVtbl *lpVtbl;
      };
@@ -166,7 +166,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IEnumDot11AdHocSecuritySettingsVtbl;
  
 -    interface IEnumDot11AdHocSecuritySettings
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumDot11AdHocSecuritySettings
++    interface _Windows_SupportedOS_WindowsVista_ IEnumDot11AdHocSecuritySettings
      {
          CONST_VTBL struct IEnumDot11AdHocSecuritySettingsVtbl *lpVtbl;
      };
@@ -186,7 +186,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocSecuritySettingsVtbl;
  
 -    interface IDot11AdHocSecuritySettings
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocSecuritySettings
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocSecuritySettings
      {
          CONST_VTBL struct IDot11AdHocSecuritySettingsVtbl *lpVtbl;
      };
@@ -206,7 +206,7 @@ index 4bac350106..0a03d4bdc3 100644
      } IDot11AdHocInterfaceNotificationSinkVtbl;
  
 -    interface IDot11AdHocInterfaceNotificationSink
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IDot11AdHocInterfaceNotificationSink
++    interface _Windows_SupportedOS_WindowsVista_ IDot11AdHocInterfaceNotificationSink
      {
          CONST_VTBL struct IDot11AdHocInterfaceNotificationSinkVtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h b/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
-index fd4af30f67..2555e6c017 100644
+index fd4af30f67..235be1c647 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
 @@ -87,6 +87,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index fd4af30f67..2555e6c017 100644
      } IBITSExtensionSetupVtbl;
  
 -    interface IBITSExtensionSetup
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBITSExtensionSetup
++    interface _Windows_SupportedOS_WindowsVista_ IBITSExtensionSetup
      {
          CONST_VTBL struct IBITSExtensionSetupVtbl *lpVtbl;
      };
@@ -55,7 +55,7 @@ index fd4af30f67..2555e6c017 100644
      } IBITSExtensionSetupFactoryVtbl;
  
 -    interface IBITSExtensionSetupFactory
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ IBITSExtensionSetupFactory
++    interface _Windows_SupportedOS_WindowsVista_ IBITSExtensionSetupFactory
      {
          CONST_VTBL struct IBITSExtensionSetupFactoryVtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h
-index f87043d528..5203cfbc18 100644
+index f87043d528..578a64b497 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryapi.h
 @@ -110,6 +110,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index f87043d528..5203cfbc18 100644
      } IFunctionDiscoveryNotificationVtbl;
  
 -    interface IFunctionDiscoveryNotification
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionDiscoveryNotification
++    interface _Windows_SupportedOS_WindowsVista_ IFunctionDiscoveryNotification
      {
          CONST_VTBL struct IFunctionDiscoveryNotificationVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index f87043d528..5203cfbc18 100644
      } IFunctionDiscoveryVtbl;
  
 -    interface IFunctionDiscovery
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionDiscovery
++    interface _Windows_SupportedOS_WindowsVista_ IFunctionDiscovery
      {
          CONST_VTBL struct IFunctionDiscoveryVtbl *lpVtbl;
      };
@@ -75,7 +75,7 @@ index f87043d528..5203cfbc18 100644
      } IFunctionInstanceVtbl;
  
 -    interface IFunctionInstance
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstance
++    interface _Windows_SupportedOS_WindowsVista_ IFunctionInstance
      {
          CONST_VTBL struct IFunctionInstanceVtbl *lpVtbl;
      };
@@ -95,7 +95,7 @@ index f87043d528..5203cfbc18 100644
      } IFunctionInstanceCollectionVtbl;
  
 -    interface IFunctionInstanceCollection
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceCollection
++    interface _Windows_SupportedOS_WindowsVista_ IFunctionInstanceCollection
      {
          CONST_VTBL struct IFunctionInstanceCollectionVtbl *lpVtbl;
      };
@@ -115,7 +115,7 @@ index f87043d528..5203cfbc18 100644
      } IFunctionInstanceQueryVtbl;
  
 -    interface IFunctionInstanceQuery
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceQuery
++    interface _Windows_SupportedOS_WindowsVista_ IFunctionInstanceQuery
      {
          CONST_VTBL struct IFunctionInstanceQueryVtbl *lpVtbl;
      };
@@ -135,7 +135,7 @@ index f87043d528..5203cfbc18 100644
      } IFunctionInstanceCollectionQueryVtbl;
  
 -    interface IFunctionInstanceCollectionQuery
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IFunctionInstanceCollectionQuery
++    interface _Windows_SupportedOS_WindowsVista_ IFunctionInstanceCollectionQuery
      {
          CONST_VTBL struct IFunctionInstanceCollectionQueryVtbl *lpVtbl;
      };

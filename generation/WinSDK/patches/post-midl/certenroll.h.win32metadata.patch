@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h b/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h
-index 6d1b04c233..53b736462c 100644
+index 6d1b04c233..ff59de16f8 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h
 @@ -1679,6 +1679,7 @@ extern "C"{
@@ -111,7 +111,7 @@ index 6d1b04c233..53b736462c 100644
      } IObjectIdVtbl;
  
 -    interface IObjectId
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IObjectId
++    interface _Windows_SupportedOS_WindowsVista_ IObjectId
      {
          CONST_VTBL struct IObjectIdVtbl *lpVtbl;
      };
@@ -131,7 +131,7 @@ index 6d1b04c233..53b736462c 100644
      } IObjectIdsVtbl;
  
 -    interface IObjectIds
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IObjectIds
++    interface _Windows_SupportedOS_WindowsVista_ IObjectIds
      {
          CONST_VTBL struct IObjectIdsVtbl *lpVtbl;
      };
@@ -165,7 +165,7 @@ index 6d1b04c233..53b736462c 100644
      } IBinaryConverterVtbl;
  
 -    interface IBinaryConverter
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IBinaryConverter
++    interface _Windows_SupportedOS_WindowsVista_ IBinaryConverter
      {
          CONST_VTBL struct IBinaryConverterVtbl *lpVtbl;
      };
@@ -208,7 +208,7 @@ index 6d1b04c233..53b736462c 100644
      } IX500DistinguishedNameVtbl;
  
 -    interface IX500DistinguishedName
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX500DistinguishedName
++    interface _Windows_SupportedOS_WindowsVista_ IX500DistinguishedName
      {
          CONST_VTBL struct IX500DistinguishedNameVtbl *lpVtbl;
      };
@@ -280,7 +280,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509EnrollmentStatusVtbl;
  
 -    interface IX509EnrollmentStatus
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509EnrollmentStatus
++    interface _Windows_SupportedOS_WindowsVista_ IX509EnrollmentStatus
      {
          CONST_VTBL struct IX509EnrollmentStatusVtbl *lpVtbl;
      };
@@ -345,7 +345,7 @@ index 6d1b04c233..53b736462c 100644
      } ICspAlgorithmVtbl;
  
 -    interface ICspAlgorithm
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICspAlgorithm
++    interface _Windows_SupportedOS_WindowsVista_ ICspAlgorithm
      {
          CONST_VTBL struct ICspAlgorithmVtbl *lpVtbl;
      };
@@ -365,7 +365,7 @@ index 6d1b04c233..53b736462c 100644
      } ICspAlgorithmsVtbl;
  
 -    interface ICspAlgorithms
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICspAlgorithms
++    interface _Windows_SupportedOS_WindowsVista_ ICspAlgorithms
      {
          CONST_VTBL struct ICspAlgorithmsVtbl *lpVtbl;
      };
@@ -412,7 +412,7 @@ index 6d1b04c233..53b736462c 100644
      } ICspInformationVtbl;
  
 -    interface ICspInformation
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICspInformation
++    interface _Windows_SupportedOS_WindowsVista_ ICspInformation
      {
          CONST_VTBL struct ICspInformationVtbl *lpVtbl;
      };
@@ -432,7 +432,7 @@ index 6d1b04c233..53b736462c 100644
      } ICspInformationsVtbl;
  
 -    interface ICspInformations
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICspInformations
++    interface _Windows_SupportedOS_WindowsVista_ ICspInformations
      {
          CONST_VTBL struct ICspInformationsVtbl *lpVtbl;
      };
@@ -461,7 +461,7 @@ index 6d1b04c233..53b736462c 100644
      } ICspStatusVtbl;
  
 -    interface ICspStatus
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICspStatus
++    interface _Windows_SupportedOS_WindowsVista_ ICspStatus
      {
          CONST_VTBL struct ICspStatusVtbl *lpVtbl;
      };
@@ -481,7 +481,7 @@ index 6d1b04c233..53b736462c 100644
      } ICspStatusesVtbl;
  
 -    interface ICspStatuses
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICspStatuses
++    interface _Windows_SupportedOS_WindowsVista_ ICspStatuses
      {
          CONST_VTBL struct ICspStatusesVtbl *lpVtbl;
      };
@@ -530,7 +530,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509PublicKeyVtbl;
  
 -    interface IX509PublicKey
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509PublicKey
++    interface _Windows_SupportedOS_WindowsVista_ IX509PublicKey
      {
          CONST_VTBL struct IX509PublicKeyVtbl *lpVtbl;
      };
@@ -675,7 +675,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509PrivateKeyVtbl;
  
 -    interface IX509PrivateKey
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509PrivateKey
++    interface _Windows_SupportedOS_WindowsVista_ IX509PrivateKey
      {
          CONST_VTBL struct IX509PrivateKeyVtbl *lpVtbl;
      };
@@ -746,7 +746,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionVtbl;
  
 -    interface IX509Extension
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509Extension
++    interface _Windows_SupportedOS_WindowsVista_ IX509Extension
      {
          CONST_VTBL struct IX509ExtensionVtbl *lpVtbl;
      };
@@ -766,7 +766,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionsVtbl;
  
 -    interface IX509Extensions
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509Extensions
++    interface _Windows_SupportedOS_WindowsVista_ IX509Extensions
      {
          CONST_VTBL struct IX509ExtensionsVtbl *lpVtbl;
      };
@@ -795,7 +795,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionKeyUsageVtbl;
  
 -    interface IX509ExtensionKeyUsage
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionKeyUsage
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionKeyUsage
      {
          CONST_VTBL struct IX509ExtensionKeyUsageVtbl *lpVtbl;
      };
@@ -815,7 +815,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionEnhancedKeyUsageVtbl;
  
 -    interface IX509ExtensionEnhancedKeyUsage
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionEnhancedKeyUsage
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionEnhancedKeyUsage
      {
          CONST_VTBL struct IX509ExtensionEnhancedKeyUsageVtbl *lpVtbl;
      };
@@ -844,7 +844,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionTemplateNameVtbl;
  
 -    interface IX509ExtensionTemplateName
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionTemplateName
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionTemplateName
      {
          CONST_VTBL struct IX509ExtensionTemplateNameVtbl *lpVtbl;
      };
@@ -864,7 +864,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionTemplateVtbl;
  
 -    interface IX509ExtensionTemplate
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionTemplate
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionTemplate
      {
          CONST_VTBL struct IX509ExtensionTemplateVtbl *lpVtbl;
      };
@@ -910,7 +910,7 @@ index 6d1b04c233..53b736462c 100644
      } IAlternativeNameVtbl;
  
 -    interface IAlternativeName
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IAlternativeName
++    interface _Windows_SupportedOS_WindowsVista_ IAlternativeName
      {
          CONST_VTBL struct IAlternativeNameVtbl *lpVtbl;
      };
@@ -930,7 +930,7 @@ index 6d1b04c233..53b736462c 100644
      } IAlternativeNamesVtbl;
  
 -    interface IAlternativeNames
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IAlternativeNames
++    interface _Windows_SupportedOS_WindowsVista_ IAlternativeNames
      {
          CONST_VTBL struct IAlternativeNamesVtbl *lpVtbl;
      };
@@ -950,7 +950,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionAlternativeNamesVtbl;
  
 -    interface IX509ExtensionAlternativeNames
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionAlternativeNames
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionAlternativeNames
      {
          CONST_VTBL struct IX509ExtensionAlternativeNamesVtbl *lpVtbl;
      };
@@ -970,7 +970,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionBasicConstraintsVtbl;
  
 -    interface IX509ExtensionBasicConstraints
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionBasicConstraints
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionBasicConstraints
      {
          CONST_VTBL struct IX509ExtensionBasicConstraintsVtbl *lpVtbl;
      };
@@ -999,7 +999,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionSubjectKeyIdentifierVtbl;
  
 -    interface IX509ExtensionSubjectKeyIdentifier
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionSubjectKeyIdentifier
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionSubjectKeyIdentifier
      {
          CONST_VTBL struct IX509ExtensionSubjectKeyIdentifierVtbl *lpVtbl;
      };
@@ -1028,7 +1028,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionAuthorityKeyIdentifierVtbl;
  
 -    interface IX509ExtensionAuthorityKeyIdentifier
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionAuthorityKeyIdentifier
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionAuthorityKeyIdentifier
      {
          CONST_VTBL struct IX509ExtensionAuthorityKeyIdentifierVtbl *lpVtbl;
      };
@@ -1048,7 +1048,7 @@ index 6d1b04c233..53b736462c 100644
      } ISmimeCapabilityVtbl;
  
 -    interface ISmimeCapability
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISmimeCapability
++    interface _Windows_SupportedOS_WindowsVista_ ISmimeCapability
      {
          CONST_VTBL struct ISmimeCapabilityVtbl *lpVtbl;
      };
@@ -1068,7 +1068,7 @@ index 6d1b04c233..53b736462c 100644
      } ISmimeCapabilitiesVtbl;
  
 -    interface ISmimeCapabilities
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISmimeCapabilities
++    interface _Windows_SupportedOS_WindowsVista_ ISmimeCapabilities
      {
          CONST_VTBL struct ISmimeCapabilitiesVtbl *lpVtbl;
      };
@@ -1088,7 +1088,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionSmimeCapabilitiesVtbl;
  
 -    interface IX509ExtensionSmimeCapabilities
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionSmimeCapabilities
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionSmimeCapabilities
      {
          CONST_VTBL struct IX509ExtensionSmimeCapabilitiesVtbl *lpVtbl;
      };
@@ -1134,7 +1134,7 @@ index 6d1b04c233..53b736462c 100644
      } IPolicyQualifierVtbl;
  
 -    interface IPolicyQualifier
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPolicyQualifier
++    interface _Windows_SupportedOS_WindowsVista_ IPolicyQualifier
      {
          CONST_VTBL struct IPolicyQualifierVtbl *lpVtbl;
      };
@@ -1154,7 +1154,7 @@ index 6d1b04c233..53b736462c 100644
      } IPolicyQualifiersVtbl;
  
 -    interface IPolicyQualifiers
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPolicyQualifiers
++    interface _Windows_SupportedOS_WindowsVista_ IPolicyQualifiers
      {
          CONST_VTBL struct IPolicyQualifiersVtbl *lpVtbl;
      };
@@ -1174,7 +1174,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertificatePolicyVtbl;
  
 -    interface ICertificatePolicy
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertificatePolicy
++    interface _Windows_SupportedOS_WindowsVista_ ICertificatePolicy
      {
          CONST_VTBL struct ICertificatePolicyVtbl *lpVtbl;
      };
@@ -1194,7 +1194,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertificatePoliciesVtbl;
  
 -    interface ICertificatePolicies
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertificatePolicies
++    interface _Windows_SupportedOS_WindowsVista_ ICertificatePolicies
      {
          CONST_VTBL struct ICertificatePoliciesVtbl *lpVtbl;
      };
@@ -1214,7 +1214,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionCertificatePoliciesVtbl;
  
 -    interface IX509ExtensionCertificatePolicies
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionCertificatePolicies
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionCertificatePolicies
      {
          CONST_VTBL struct IX509ExtensionCertificatePoliciesVtbl *lpVtbl;
      };
@@ -1234,7 +1234,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509ExtensionMSApplicationPoliciesVtbl;
  
 -    interface IX509ExtensionMSApplicationPolicies
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509ExtensionMSApplicationPolicies
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionMSApplicationPolicies
      {
          CONST_VTBL struct IX509ExtensionMSApplicationPoliciesVtbl *lpVtbl;
      };
@@ -1263,7 +1263,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeVtbl;
  
 -    interface IX509Attribute
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509Attribute
++    interface _Windows_SupportedOS_WindowsVista_ IX509Attribute
      {
          CONST_VTBL struct IX509AttributeVtbl *lpVtbl;
      };
@@ -1283,7 +1283,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributesVtbl;
  
 -    interface IX509Attributes
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509Attributes
++    interface _Windows_SupportedOS_WindowsVista_ IX509Attributes
      {
          CONST_VTBL struct IX509AttributesVtbl *lpVtbl;
      };
@@ -1303,7 +1303,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeExtensionsVtbl;
  
 -    interface IX509AttributeExtensions
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeExtensions
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeExtensions
      {
          CONST_VTBL struct IX509AttributeExtensionsVtbl *lpVtbl;
      };
@@ -1349,7 +1349,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeClientIdVtbl;
  
 -    interface IX509AttributeClientId
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeClientId
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeClientId
      {
          CONST_VTBL struct IX509AttributeClientIdVtbl *lpVtbl;
      };
@@ -1378,7 +1378,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeRenewalCertificateVtbl;
  
 -    interface IX509AttributeRenewalCertificate
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeRenewalCertificate
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeRenewalCertificate
      {
          CONST_VTBL struct IX509AttributeRenewalCertificateVtbl *lpVtbl;
      };
@@ -1407,7 +1407,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeArchiveKeyVtbl;
  
 -    interface IX509AttributeArchiveKey
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeArchiveKey
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeArchiveKey
      {
          CONST_VTBL struct IX509AttributeArchiveKeyVtbl *lpVtbl;
      };
@@ -1436,7 +1436,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeArchiveKeyHashVtbl;
  
 -    interface IX509AttributeArchiveKeyHash
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeArchiveKeyHash
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeArchiveKeyHash
      {
          CONST_VTBL struct IX509AttributeArchiveKeyHashVtbl *lpVtbl;
      };
@@ -1465,7 +1465,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeOSVersionVtbl;
  
 -    interface IX509AttributeOSVersion
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeOSVersion
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeOSVersion
      {
          CONST_VTBL struct IX509AttributeOSVersionVtbl *lpVtbl;
      };
@@ -1499,7 +1499,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509AttributeCspProviderVtbl;
  
 -    interface IX509AttributeCspProvider
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509AttributeCspProvider
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeCspProvider
      {
          CONST_VTBL struct IX509AttributeCspProviderVtbl *lpVtbl;
      };
@@ -1519,7 +1519,7 @@ index 6d1b04c233..53b736462c 100644
      } ICryptAttributeVtbl;
  
 -    interface ICryptAttribute
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICryptAttribute
++    interface _Windows_SupportedOS_WindowsVista_ ICryptAttribute
      {
          CONST_VTBL struct ICryptAttributeVtbl *lpVtbl;
      };
@@ -1539,7 +1539,7 @@ index 6d1b04c233..53b736462c 100644
      } ICryptAttributesVtbl;
  
 -    interface ICryptAttributes
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICryptAttributes
++    interface _Windows_SupportedOS_WindowsVista_ ICryptAttributes
      {
          CONST_VTBL struct ICryptAttributesVtbl *lpVtbl;
      };
@@ -1577,7 +1577,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyVtbl;
  
 -    interface ICertProperty
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertProperty
++    interface _Windows_SupportedOS_WindowsVista_ ICertProperty
      {
          CONST_VTBL struct ICertPropertyVtbl *lpVtbl;
      };
@@ -1597,7 +1597,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertiesVtbl;
  
 -    interface ICertProperties
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertProperties
++    interface _Windows_SupportedOS_WindowsVista_ ICertProperties
      {
          CONST_VTBL struct ICertPropertiesVtbl *lpVtbl;
      };
@@ -1625,7 +1625,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyFriendlyNameVtbl;
  
 -    interface ICertPropertyFriendlyName
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyFriendlyName
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyFriendlyName
      {
          CONST_VTBL struct ICertPropertyFriendlyNameVtbl *lpVtbl;
      };
@@ -1653,7 +1653,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyDescriptionVtbl;
  
 -    interface ICertPropertyDescription
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyDescription
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyDescription
      {
          CONST_VTBL struct ICertPropertyDescriptionVtbl *lpVtbl;
      };
@@ -1681,7 +1681,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyAutoEnrollVtbl;
  
 -    interface ICertPropertyAutoEnroll
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyAutoEnroll
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyAutoEnroll
      {
          CONST_VTBL struct ICertPropertyAutoEnrollVtbl *lpVtbl;
      };
@@ -1710,7 +1710,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyRequestOriginatorVtbl;
  
 -    interface ICertPropertyRequestOriginator
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyRequestOriginator
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyRequestOriginator
      {
          CONST_VTBL struct ICertPropertyRequestOriginatorVtbl *lpVtbl;
      };
@@ -1739,7 +1739,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertySHA1HashVtbl;
  
 -    interface ICertPropertySHA1Hash
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertySHA1Hash
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertySHA1Hash
      {
          CONST_VTBL struct ICertPropertySHA1HashVtbl *lpVtbl;
      };
@@ -1759,7 +1759,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyKeyProvInfoVtbl;
  
 -    interface ICertPropertyKeyProvInfo
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyKeyProvInfo
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyKeyProvInfo
      {
          CONST_VTBL struct ICertPropertyKeyProvInfoVtbl *lpVtbl;
      };
@@ -1779,7 +1779,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyArchivedVtbl;
  
 -    interface ICertPropertyArchived
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyArchived
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyArchived
      {
          CONST_VTBL struct ICertPropertyArchivedVtbl *lpVtbl;
      };
@@ -1799,7 +1799,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyBackedUpVtbl;
  
 -    interface ICertPropertyBackedUp
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyBackedUp
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyBackedUp
      {
          CONST_VTBL struct ICertPropertyBackedUpVtbl *lpVtbl;
      };
@@ -1836,7 +1836,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyEnrollmentVtbl;
  
 -    interface ICertPropertyEnrollment
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyEnrollment
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyEnrollment
      {
          CONST_VTBL struct ICertPropertyEnrollmentVtbl *lpVtbl;
      };
@@ -1865,7 +1865,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyRenewalVtbl;
  
 -    interface ICertPropertyRenewal
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyRenewal
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyRenewal
      {
          CONST_VTBL struct ICertPropertyRenewalVtbl *lpVtbl;
      };
@@ -1894,7 +1894,7 @@ index 6d1b04c233..53b736462c 100644
      } ICertPropertyArchivedKeyHashVtbl;
  
 -    interface ICertPropertyArchivedKeyHash
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ICertPropertyArchivedKeyHash
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyArchivedKeyHash
      {
          CONST_VTBL struct ICertPropertyArchivedKeyHashVtbl *lpVtbl;
      };
@@ -1979,7 +1979,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509SignatureInformationVtbl;
  
 -    interface IX509SignatureInformation
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509SignatureInformation
++    interface _Windows_SupportedOS_WindowsVista_ IX509SignatureInformation
      {
          CONST_VTBL struct IX509SignatureInformationVtbl *lpVtbl;
      };
@@ -2017,7 +2017,7 @@ index 6d1b04c233..53b736462c 100644
      } ISignerCertificateVtbl;
  
 -    interface ISignerCertificate
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISignerCertificate
++    interface _Windows_SupportedOS_WindowsVista_ ISignerCertificate
      {
          CONST_VTBL struct ISignerCertificateVtbl *lpVtbl;
      };
@@ -2037,7 +2037,7 @@ index 6d1b04c233..53b736462c 100644
      } ISignerCertificatesVtbl;
  
 -    interface ISignerCertificates
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ ISignerCertificates
++    interface _Windows_SupportedOS_WindowsVista_ ISignerCertificates
      {
          CONST_VTBL struct ISignerCertificatesVtbl *lpVtbl;
      };
@@ -2070,7 +2070,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509NameValuePairVtbl;
  
 -    interface IX509NameValuePair
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509NameValuePair
++    interface _Windows_SupportedOS_WindowsVista_ IX509NameValuePair
      {
          CONST_VTBL struct IX509NameValuePairVtbl *lpVtbl;
      };
@@ -2090,7 +2090,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509NameValuePairsVtbl;
  
 -    interface IX509NameValuePairs
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509NameValuePairs
++    interface _Windows_SupportedOS_WindowsVista_ IX509NameValuePairs
      {
          CONST_VTBL struct IX509NameValuePairsVtbl *lpVtbl;
      };
@@ -2343,7 +2343,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509PolicyServerListManagerVtbl;
  
 -    interface IX509PolicyServerListManager
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509PolicyServerListManager
++    interface _Windows_SupportedOS_WindowsVista_ IX509PolicyServerListManager
      {
          CONST_VTBL struct IX509PolicyServerListManagerVtbl *lpVtbl;
      };
@@ -2417,7 +2417,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509CertificateRequestVtbl;
  
 -    interface IX509CertificateRequest
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509CertificateRequest
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequest
      {
          CONST_VTBL struct IX509CertificateRequestVtbl *lpVtbl;
      };
@@ -2478,7 +2478,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509CertificateRequestPkcs10Vtbl;
  
 -    interface IX509CertificateRequestPkcs10
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509CertificateRequestPkcs10
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestPkcs10
      {
          CONST_VTBL struct IX509CertificateRequestPkcs10Vtbl *lpVtbl;
      };
@@ -2543,7 +2543,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509CertificateRequestCertificateVtbl;
  
 -    interface IX509CertificateRequestCertificate
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509CertificateRequestCertificate
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestCertificate
      {
          CONST_VTBL struct IX509CertificateRequestCertificateVtbl *lpVtbl;
      };
@@ -2590,7 +2590,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509CertificateRequestPkcs7Vtbl;
  
 -    interface IX509CertificateRequestPkcs7
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509CertificateRequestPkcs7
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestPkcs7
      {
          CONST_VTBL struct IX509CertificateRequestPkcs7Vtbl *lpVtbl;
      };
@@ -2655,7 +2655,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509CertificateRequestCmcVtbl;
  
 -    interface IX509CertificateRequestCmc
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509CertificateRequestCmc
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestCmc
      {
          CONST_VTBL struct IX509CertificateRequestCmcVtbl *lpVtbl;
      };
@@ -2754,7 +2754,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509EnrollmentVtbl;
  
 -    interface IX509Enrollment
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509Enrollment
++    interface _Windows_SupportedOS_WindowsVista_ IX509Enrollment
      {
          CONST_VTBL struct IX509EnrollmentVtbl *lpVtbl;
      };
@@ -2837,7 +2837,7 @@ index 6d1b04c233..53b736462c 100644
      } IX509EnrollmentWebClassFactoryVtbl;
  
 -    interface IX509EnrollmentWebClassFactory
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IX509EnrollmentWebClassFactory
++    interface _Windows_SupportedOS_WindowsVista_ IX509EnrollmentWebClassFactory
      {
          CONST_VTBL struct IX509EnrollmentWebClassFactoryVtbl *lpVtbl;
      };

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h b/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
-index 86923ee816..4be8d8af34 100644
+index 86923ee816..8feecc0b0d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
 @@ -81,6 +81,7 @@ extern "C"{
@@ -26,7 +26,7 @@ index 86923ee816..4be8d8af34 100644
      } IWRdsGraphicsChannelEventsVtbl;
  
 -    interface IWRdsGraphicsChannelEvents
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWRdsGraphicsChannelEvents
++    interface _Windows_SupportedOS_Windows8_ IWRdsGraphicsChannelEvents
      {
          CONST_VTBL struct IWRdsGraphicsChannelEventsVtbl *lpVtbl;
      };
@@ -46,7 +46,7 @@ index 86923ee816..4be8d8af34 100644
      } IWRdsGraphicsChannelVtbl;
  
 -    interface IWRdsGraphicsChannel
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWRdsGraphicsChannel
++    interface _Windows_SupportedOS_Windows8_ IWRdsGraphicsChannel
      {
          CONST_VTBL struct IWRdsGraphicsChannelVtbl *lpVtbl;
      };
@@ -75,7 +75,7 @@ index 86923ee816..4be8d8af34 100644
      } IWRdsGraphicsChannelManagerVtbl;
  
 -    interface IWRdsGraphicsChannelManager
-+    interface _Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_ IWRdsGraphicsChannelManager
++    interface _Windows_SupportedOS_Windows8_ IWRdsGraphicsChannelManager
      {
          CONST_VTBL struct IWRdsGraphicsChannelManagerVtbl *lpVtbl;
      };

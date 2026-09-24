@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
-index 29320701fe..b90fe7d626 100644
+index 29320701fe..3548e72100 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
 @@ -11,6 +11,7 @@
@@ -10,15 +10,6 @@ index 29320701fe..b90fe7d626 100644
  
  #if (_MSC_VER > 1020)
  #pragma once
-@@ -41,7 +42,7 @@ extern "C" {
- 
- #ifndef CRYPTO_BLOBS_DEFINED
- #define CRYPTO_BLOBS_DEFINED
--typedef struct _CRYPTOAPI_BLOB {
-+typedef struct _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _CRYPTOAPI_BLOB {
-                             DWORD   cbData;
-     _Field_size_bytes_(cbData)  BYTE    *pbData;
- } CRYPT_INTEGER_BLOB, *PCRYPT_INTEGER_BLOB,
 @@ -88,7 +89,7 @@ CRYPT_ATTR_BLOB, *PCRYPT_ATTR_BLOB;
  //
  // Prompt struct -- what to tell users about the access

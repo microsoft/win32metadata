@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
-index 9cd25d9dc8..20fa280d8f 100644
+index 9cd25d9dc8..b2a3f62b27 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
 @@ -33,6 +33,7 @@
@@ -55,7 +55,7 @@ index 9cd25d9dc8..20fa280d8f 100644
      } ITextDocumentVtbl;
  
 -    interface ITextDocument
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ ITextDocument
++    interface _Windows_SupportedOS_WindowsVista_ ITextDocument
      {
          CONST_VTBL struct ITextDocumentVtbl *lpVtbl;
      };
@@ -124,7 +124,7 @@ index 9cd25d9dc8..20fa280d8f 100644
      } ITextRangeVtbl;
  
 -    interface ITextRange
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2003_ ITextRange
++    interface _Windows_SupportedOS_WindowsVista_ ITextRange
      {
          CONST_VTBL struct ITextRangeVtbl *lpVtbl;
      };

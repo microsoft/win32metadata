@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
-index d9f81143fb..702bff1fdc 100644
+index d9f81143fb..b7a8c11494 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WbemCli.h
 @@ -430,6 +430,7 @@ extern "C"{
@@ -84,7 +84,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemClassObjectVtbl;
  
 -    interface IWbemClassObject
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemClassObject
++    interface _Windows_SupportedOS_WindowsVista_ IWbemClassObject
      {
          CONST_VTBL struct IWbemClassObjectVtbl *lpVtbl;
      };
@@ -113,7 +113,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemObjectAccessVtbl;
  
 -    interface IWbemObjectAccess
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectAccess
++    interface _Windows_SupportedOS_WindowsVista_ IWbemObjectAccess
      {
          CONST_VTBL struct IWbemObjectAccessVtbl *lpVtbl;
      };
@@ -133,7 +133,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemQualifierSetVtbl;
  
 -    interface IWbemQualifierSet
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemQualifierSet
++    interface _Windows_SupportedOS_WindowsVista_ IWbemQualifierSet
      {
          CONST_VTBL struct IWbemQualifierSetVtbl *lpVtbl;
      };
@@ -353,7 +353,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemServicesVtbl;
  
 -    interface IWbemServices
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemServices
++    interface _Windows_SupportedOS_WindowsVista_ IWbemServices
      {
          CONST_VTBL struct IWbemServicesVtbl *lpVtbl;
      };
@@ -373,7 +373,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemLocatorVtbl;
  
 -    interface IWbemLocator
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemLocator
++    interface _Windows_SupportedOS_WindowsVista_ IWbemLocator
      {
          CONST_VTBL struct IWbemLocatorVtbl *lpVtbl;
      };
@@ -393,7 +393,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemObjectSinkVtbl;
  
 -    interface IWbemObjectSink
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSink
++    interface _Windows_SupportedOS_WindowsVista_ IWbemObjectSink
      {
          CONST_VTBL struct IWbemObjectSinkVtbl *lpVtbl;
      };
@@ -437,7 +437,7 @@ index d9f81143fb..702bff1fdc 100644
      } IEnumWbemClassObjectVtbl;
  
 -    interface IEnumWbemClassObject
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IEnumWbemClassObject
++    interface _Windows_SupportedOS_WindowsVista_ IEnumWbemClassObject
      {
          CONST_VTBL struct IEnumWbemClassObjectVtbl *lpVtbl;
      };
@@ -466,7 +466,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemCallResultVtbl;
  
 -    interface IWbemCallResult
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemCallResult
++    interface _Windows_SupportedOS_WindowsVista_ IWbemCallResult
      {
          CONST_VTBL struct IWbemCallResultVtbl *lpVtbl;
      };
@@ -495,7 +495,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemContextVtbl;
  
 -    interface IWbemContext
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemContext
++    interface _Windows_SupportedOS_WindowsVista_ IWbemContext
      {
          CONST_VTBL struct IWbemContextVtbl *lpVtbl;
      };
@@ -515,7 +515,7 @@ index d9f81143fb..702bff1fdc 100644
      } IUnsecuredApartmentVtbl;
  
 -    interface IUnsecuredApartment
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IUnsecuredApartment
++    interface _Windows_SupportedOS_WindowsVista_ IUnsecuredApartment
      {
          CONST_VTBL struct IUnsecuredApartmentVtbl *lpVtbl;
      };
@@ -571,7 +571,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemStatusCodeTextVtbl;
  
 -    interface IWbemStatusCodeText
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemStatusCodeText
++    interface _Windows_SupportedOS_WindowsVista_ IWbemStatusCodeText
      {
          CONST_VTBL struct IWbemStatusCodeTextVtbl *lpVtbl;
      };
@@ -591,7 +591,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemBackupRestoreVtbl;
  
 -    interface IWbemBackupRestore
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestore
++    interface _Windows_SupportedOS_WindowsVista_ IWbemBackupRestore
      {
          CONST_VTBL struct IWbemBackupRestoreVtbl *lpVtbl;
      };
@@ -611,7 +611,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemBackupRestoreExVtbl;
  
 -    interface IWbemBackupRestoreEx
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemBackupRestoreEx
++    interface _Windows_SupportedOS_WindowsVista_ IWbemBackupRestoreEx
      {
          CONST_VTBL struct IWbemBackupRestoreExVtbl *lpVtbl;
      };
@@ -631,7 +631,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemRefresherVtbl;
  
 -    interface IWbemRefresher
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemRefresher
++    interface _Windows_SupportedOS_WindowsVista_ IWbemRefresher
      {
          CONST_VTBL struct IWbemRefresherVtbl *lpVtbl;
      };
@@ -651,7 +651,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemHiPerfEnumVtbl;
  
 -    interface IWbemHiPerfEnum
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemHiPerfEnum
++    interface _Windows_SupportedOS_WindowsVista_ IWbemHiPerfEnum
      {
          CONST_VTBL struct IWbemHiPerfEnumVtbl *lpVtbl;
      };
@@ -671,7 +671,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemConfigureRefresherVtbl;
  
 -    interface IWbemConfigureRefresher
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemConfigureRefresher
++    interface _Windows_SupportedOS_WindowsVista_ IWbemConfigureRefresher
      {
          CONST_VTBL struct IWbemConfigureRefresherVtbl *lpVtbl;
      };
@@ -691,7 +691,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemObjectSinkExVtbl;
  
 -    interface IWbemObjectSinkEx
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectSinkEx
++    interface _Windows_SupportedOS_WindowsVista_ IWbemObjectSinkEx
      {
          CONST_VTBL struct IWbemObjectSinkExVtbl *lpVtbl;
      };
@@ -711,7 +711,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemShutdownVtbl;
  
 -    interface IWbemShutdown
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemShutdown
++    interface _Windows_SupportedOS_WindowsVista_ IWbemShutdown
      {
          CONST_VTBL struct IWbemShutdownVtbl *lpVtbl;
      };
@@ -740,7 +740,7 @@ index d9f81143fb..702bff1fdc 100644
      } IWbemObjectTextSrcVtbl;
  
 -    interface IWbemObjectTextSrc
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWbemObjectTextSrc
++    interface _Windows_SupportedOS_WindowsVista_ IWbemObjectTextSrc
      {
          CONST_VTBL struct IWbemObjectTextSrcVtbl *lpVtbl;
      };
@@ -760,7 +760,7 @@ index d9f81143fb..702bff1fdc 100644
      } IMofCompilerVtbl;
  
 -    interface IMofCompiler
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IMofCompiler
++    interface _Windows_SupportedOS_WindowsVista_ IMofCompiler
      {
          CONST_VTBL struct IMofCompilerVtbl *lpVtbl;
      };

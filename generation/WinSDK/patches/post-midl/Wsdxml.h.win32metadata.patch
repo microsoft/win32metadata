@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
-index b3e27f7c97..44ffc48121 100644
+index b3e27f7c97..cc15e5b31e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxml.h
 @@ -67,6 +67,7 @@ extern "C"{
@@ -267,7 +267,7 @@ index b3e27f7c97..44ffc48121 100644
      } IWSDXMLContextVtbl;
  
 -    interface IWSDXMLContext
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IWSDXMLContext
++    interface _Windows_SupportedOS_WindowsVista_ IWSDXMLContext
      {
          CONST_VTBL struct IWSDXMLContextVtbl *lpVtbl;
      };

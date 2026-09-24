@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
-index 11b4942409..2e55b12b94 100644
+index 11b4942409..05381b1fb5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
 @@ -367,6 +367,7 @@ extern "C"{
@@ -143,7 +143,7 @@ index 11b4942409..2e55b12b94 100644
      } IShellFolderViewDualVtbl;
  
 -    interface IShellFolderViewDual
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IShellFolderViewDual
++    interface _Windows_SupportedOS_WindowsXP_ IShellFolderViewDual
      {
          CONST_VTBL struct IShellFolderViewDualVtbl *lpVtbl;
      };
@@ -163,7 +163,7 @@ index 11b4942409..2e55b12b94 100644
      } IShellFolderViewDual2Vtbl;
  
 -    interface IShellFolderViewDual2
-+    interface _Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ IShellFolderViewDual2
++    interface _Windows_SupportedOS_WindowsXP_ IShellFolderViewDual2
      {
          CONST_VTBL struct IShellFolderViewDual2Vtbl *lpVtbl;
      };

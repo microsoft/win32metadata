@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h b/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h
-index 6b079b99a8..2fbaccfef4 100644
+index 6b079b99a8..5a86a4d85b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dinput.h
 @@ -1,3 +1,4 @@
@@ -37,7 +37,168 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputEffect *LPDIRECTINPUTEFFECT;
-@@ -1014,8 +1015,8 @@ typedef const DIDEVICEOBJECTINSTANCEA *LPCDIDEVICEOBJECTINSTANCEA;
+@@ -390,10 +391,26 @@ typedef struct IDirectInputEffect *LPDIRECTINPUTEFFECT;
+  ****************************************************************************/
+ 
+ #if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPE_DEVICE        1
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPE_MOUSE         2
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPE_KEYBOARD      3
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPE_JOYSTICK      4
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
+ 
+ #else
+ #define DI8DEVCLASS_ALL             0
+@@ -419,33 +436,133 @@ typedef struct IDirectInputEffect *LPDIRECTINPUTEFFECT;
+ #define DIDEVTYPE_HID           0x00010000
+ 
+ #if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEMOUSE_UNKNOWN          1
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEMOUSE_TRADITIONAL      2
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEMOUSE_FINGERSTICK      3
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEMOUSE_TOUCHPAD         4
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEMOUSE_TRACKBALL        5
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
+ 
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_UNKNOWN       0
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_PCXT          1
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_OLIVETTI      2
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_PCAT          3
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_PCENH         4
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_NOKIA1050     5
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_NOKIA9140     6
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_NEC98         7
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_NEC98LAPTOP   8
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_NEC98106      9
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_JAPAN106     10
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_JAPANAX      11
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEKEYBOARD_J3100        12
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
+ 
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_UNKNOWN       1
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_TRADITIONAL   2
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_FLIGHTSTICK   3
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_GAMEPAD       4
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_RUDDER        5
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_WHEEL         6
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
++#endif
++#if defined(WIN32METADATA) || ((DIRECTINPUT_VERSION <= 0x700))
+ #define DIDEVTYPEJOYSTICK_HEADTRACKER   7
++#endif
++#if DIRECTINPUT_VERSION <= 0x700
+ 
+ #else
+ #define DI8DEVTYPEMOUSE_UNKNOWN                     1
+@@ -1014,8 +1131,8 @@ typedef const DIDEVICEOBJECTINSTANCEA *LPCDIDEVICEOBJECTINSTANCEA;
  typedef const DIDEVICEOBJECTINSTANCEW *LPCDIDEVICEOBJECTINSTANCEW;
  typedef const DIDEVICEOBJECTINSTANCE  *LPCDIDEVICEOBJECTINSTANCE;
  
@@ -48,7 +209,7 @@ index 6b079b99a8..2fbaccfef4 100644
  #ifdef UNICODE
  #define LPDIENUMDEVICEOBJECTSCALLBACK  LPDIENUMDEVICEOBJECTSCALLBACKW
  #else
-@@ -1320,19 +1321,19 @@ DECLARE_INTERFACE_(IDirectInputDeviceW, IUnknown)
+@@ -1320,19 +1437,19 @@ DECLARE_INTERFACE_(IDirectInputDeviceW, IUnknown)
      STDMETHOD_(ULONG,Release)(THIS) PURE;
  
      /*** IDirectInputDeviceW methods ***/
@@ -77,7 +238,7 @@ index 6b079b99a8..2fbaccfef4 100644
      STDMETHOD(RunControlPanel)(THIS_ HWND,DWORD) PURE;
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD,REFGUID) PURE;
  };
-@@ -1350,19 +1351,19 @@ DECLARE_INTERFACE_(IDirectInputDeviceA, IUnknown)
+@@ -1350,19 +1467,19 @@ DECLARE_INTERFACE_(IDirectInputDeviceA, IUnknown)
      STDMETHOD_(ULONG,Release)(THIS) PURE;
  
      /*** IDirectInputDeviceA methods ***/
@@ -106,7 +267,7 @@ index 6b079b99a8..2fbaccfef4 100644
      STDMETHOD(RunControlPanel)(THIS_ HWND,DWORD) PURE;
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD,REFGUID) PURE;
  };
-@@ -1476,14 +1477,14 @@ typedef const DIEFFECTINFO  *LPCDIEFFECTINFO;
+@@ -1476,14 +1593,14 @@ typedef const DIEFFECTINFO  *LPCDIEFFECTINFO;
  
  #define DISDD_CONTINUE          0x00000001
  
@@ -124,7 +285,7 @@ index 6b079b99a8..2fbaccfef4 100644
  
  #undef INTERFACE
  #define INTERFACE IDirectInputDevice2W
-@@ -1513,15 +1514,15 @@ DECLARE_INTERFACE_(IDirectInputDevice2W, IDirectInputDeviceW)
+@@ -1513,15 +1630,15 @@ DECLARE_INTERFACE_(IDirectInputDevice2W, IDirectInputDeviceW)
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD,REFGUID) PURE;
  
      /*** IDirectInputDevice2W methods ***/
@@ -147,7 +308,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputDevice2W *LPDIRECTINPUTDEVICE2W;
-@@ -1554,15 +1555,15 @@ DECLARE_INTERFACE_(IDirectInputDevice2A, IDirectInputDeviceA)
+@@ -1554,15 +1671,15 @@ DECLARE_INTERFACE_(IDirectInputDevice2A, IDirectInputDeviceA)
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD,REFGUID) PURE;
  
      /*** IDirectInputDevice2A methods ***/
@@ -170,7 +331,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputDevice2A *LPDIRECTINPUTDEVICE2A;
-@@ -1684,8 +1685,8 @@ DECLARE_INTERFACE_(IDirectInputDevice7W, IDirectInputDevice2W)
+@@ -1684,8 +1801,8 @@ DECLARE_INTERFACE_(IDirectInputDevice7W, IDirectInputDevice2W)
      STDMETHOD(SendDeviceData)(THIS_ DWORD,LPCDIDEVICEOBJECTDATA,LPDWORD,DWORD) PURE;
  
      /*** IDirectInputDevice7W methods ***/
@@ -181,7 +342,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputDevice7W *LPDIRECTINPUTDEVICE7W;
-@@ -1727,8 +1728,8 @@ DECLARE_INTERFACE_(IDirectInputDevice7A, IDirectInputDevice2A)
+@@ -1727,8 +1844,8 @@ DECLARE_INTERFACE_(IDirectInputDevice7A, IDirectInputDevice2A)
      STDMETHOD(SendDeviceData)(THIS_ DWORD,LPCDIDEVICEOBJECTDATA,LPDWORD,DWORD) PURE;
  
      /*** IDirectInputDevice7A methods ***/
@@ -192,7 +353,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputDevice7A *LPDIRECTINPUTDEVICE7A;
-@@ -1825,35 +1826,35 @@ DECLARE_INTERFACE_(IDirectInputDevice8W, IUnknown)
+@@ -1825,35 +1942,35 @@ DECLARE_INTERFACE_(IDirectInputDevice8W, IUnknown)
      STDMETHOD_(ULONG,Release)(THIS) PURE;
  
      /*** IDirectInputDevice8W methods ***/
@@ -249,7 +410,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputDevice8W *LPDIRECTINPUTDEVICE8W;
-@@ -1869,35 +1870,35 @@ DECLARE_INTERFACE_(IDirectInputDevice8A, IUnknown)
+@@ -1869,35 +1986,35 @@ DECLARE_INTERFACE_(IDirectInputDevice8A, IUnknown)
      STDMETHOD_(ULONG,Release)(THIS) PURE;
  
      /*** IDirectInputDevice8A methods ***/
@@ -306,7 +467,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInputDevice8A *LPDIRECTINPUTDEVICE8A;
-@@ -2323,14 +2324,14 @@ typedef struct DIJOYSTATE2 {
+@@ -2323,14 +2440,14 @@ typedef struct DIJOYSTATE2 {
  #define DIENUM_STOP             0
  #define DIENUM_CONTINUE         1
  
@@ -324,7 +485,7 @@ index 6b079b99a8..2fbaccfef4 100644
  
  #define DIEDFL_ALLDEVICES       0x00000000
  #define DIEDFL_ATTACHEDONLY     0x00000001
-@@ -2347,8 +2348,8 @@ typedef BOOL (FAR PASCAL * LPDICONFIGUREDEVICESCALLBACK)(IUnknown FAR *, LPVOID)
+@@ -2347,8 +2464,8 @@ typedef BOOL (FAR PASCAL * LPDICONFIGUREDEVICESCALLBACK)(IUnknown FAR *, LPVOID)
  
  
  #if(DIRECTINPUT_VERSION >= 0x0800)
@@ -335,7 +496,7 @@ index 6b079b99a8..2fbaccfef4 100644
  #ifdef UNICODE
  #define LPDIENUMDEVICESBYSEMANTICSCB  LPDIENUMDEVICESBYSEMANTICSCBW
  #else
-@@ -2385,7 +2386,7 @@ DECLARE_INTERFACE_(IDirectInputW, IUnknown)
+@@ -2385,7 +2502,7 @@ DECLARE_INTERFACE_(IDirectInputW, IUnknown)
  
      /*** IDirectInputW methods ***/
      STDMETHOD(CreateDevice)(THIS_ REFGUID,LPDIRECTINPUTDEVICEW *,LPUNKNOWN) PURE;
@@ -344,7 +505,7 @@ index 6b079b99a8..2fbaccfef4 100644
      STDMETHOD(GetDeviceStatus)(THIS_ REFGUID) PURE;
      STDMETHOD(RunControlPanel)(THIS_ HWND,DWORD) PURE;
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD) PURE;
-@@ -2405,7 +2406,7 @@ DECLARE_INTERFACE_(IDirectInputA, IUnknown)
+@@ -2405,7 +2522,7 @@ DECLARE_INTERFACE_(IDirectInputA, IUnknown)
  
      /*** IDirectInputA methods ***/
      STDMETHOD(CreateDevice)(THIS_ REFGUID,LPDIRECTINPUTDEVICEA *,LPUNKNOWN) PURE;
@@ -353,7 +514,7 @@ index 6b079b99a8..2fbaccfef4 100644
      STDMETHOD(GetDeviceStatus)(THIS_ REFGUID) PURE;
      STDMETHOD(RunControlPanel)(THIS_ HWND,DWORD) PURE;
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD) PURE;
-@@ -2462,7 +2463,7 @@ DECLARE_INTERFACE_(IDirectInput2W, IDirectInputW)
+@@ -2462,7 +2579,7 @@ DECLARE_INTERFACE_(IDirectInput2W, IDirectInputW)
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD) PURE;
  
      /*** IDirectInput2W methods ***/
@@ -362,7 +523,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInput2W *LPDIRECTINPUT2W;
-@@ -2485,7 +2486,7 @@ DECLARE_INTERFACE_(IDirectInput2A, IDirectInputA)
+@@ -2485,7 +2602,7 @@ DECLARE_INTERFACE_(IDirectInput2A, IDirectInputA)
      STDMETHOD(Initialize)(THIS_ HINSTANCE,DWORD) PURE;
  
      /*** IDirectInput2A methods ***/
@@ -371,7 +532,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInput2A *LPDIRECTINPUT2A;
-@@ -2543,7 +2544,7 @@ DECLARE_INTERFACE_(IDirectInput7W, IDirectInput2W)
+@@ -2543,7 +2660,7 @@ DECLARE_INTERFACE_(IDirectInput7W, IDirectInput2W)
      STDMETHOD(FindDevice)(THIS_ REFGUID,LPCWSTR,LPGUID) PURE;
  
      /*** IDirectInput7W methods ***/
@@ -380,7 +541,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInput7W *LPDIRECTINPUT7W;
-@@ -2567,7 +2568,7 @@ DECLARE_INTERFACE_(IDirectInput7A, IDirectInput2A)
+@@ -2567,7 +2684,7 @@ DECLARE_INTERFACE_(IDirectInput7A, IDirectInput2A)
      STDMETHOD(FindDevice)(THIS_ REFGUID,LPCSTR,LPGUID) PURE;
  
      /*** IDirectInput7A methods ***/
@@ -389,7 +550,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInput7A *LPDIRECTINPUT7A;
-@@ -2620,13 +2621,13 @@ DECLARE_INTERFACE_(IDirectInput8W, IUnknown)
+@@ -2620,13 +2737,13 @@ DECLARE_INTERFACE_(IDirectInput8W, IUnknown)
  
      /*** IDirectInput8W methods ***/
      STDMETHOD(CreateDevice)(THIS_ REFGUID,LPDIRECTINPUTDEVICE8W *,LPUNKNOWN) PURE;
@@ -407,7 +568,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInput8W *LPDIRECTINPUT8W;
-@@ -2643,13 +2644,13 @@ DECLARE_INTERFACE_(IDirectInput8A, IUnknown)
+@@ -2643,13 +2760,13 @@ DECLARE_INTERFACE_(IDirectInput8A, IUnknown)
  
      /*** IDirectInput8A methods ***/
      STDMETHOD(CreateDevice)(THIS_ REFGUID,LPDIRECTINPUTDEVICE8A *,LPUNKNOWN) PURE;
@@ -425,7 +586,7 @@ index 6b079b99a8..2fbaccfef4 100644
  };
  
  typedef struct IDirectInput8A *LPDIRECTINPUT8A;
-@@ -2694,7 +2695,7 @@ typedef struct IDirectInput8 *LPDIRECTINPUT8;
+@@ -2694,7 +2811,7 @@ typedef struct IDirectInput8 *LPDIRECTINPUT8;
  
  #if DIRECTINPUT_VERSION > 0x0700
  

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
-index 17c6b95748..edbe1391d2 100644
+index 17c6b95748..1fce40d63c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
 @@ -98,6 +98,7 @@ extern "C"{
@@ -35,7 +35,7 @@ index 17c6b95748..edbe1391d2 100644
      } IShellAppVtbl;
  
 -    interface IShellApp
-+    interface _Windows_SupportedOS_Server2003_ IShellApp
++    interface _Windows_SupportedOS_WindowsXP_ IShellApp
      {
          CONST_VTBL struct IShellAppVtbl *lpVtbl;
      };
@@ -64,7 +64,7 @@ index 17c6b95748..edbe1391d2 100644
      } IPublishedAppVtbl;
  
 -    interface IPublishedApp
-+    interface _Windows_SupportedOS_Server2003_ IPublishedApp
++    interface _Windows_SupportedOS_WindowsXP_ IPublishedApp
      {
          CONST_VTBL struct IPublishedAppVtbl *lpVtbl;
      };
@@ -84,7 +84,7 @@ index 17c6b95748..edbe1391d2 100644
      } IPublishedApp2Vtbl;
  
 -    interface IPublishedApp2
-+    interface _Windows_SupportedOS_WindowsVista_ _Windows_SupportedOS_Server2008_ IPublishedApp2
++    interface _Windows_SupportedOS_WindowsVista_ IPublishedApp2
      {
          CONST_VTBL struct IPublishedApp2Vtbl *lpVtbl;
      };
@@ -104,7 +104,7 @@ index 17c6b95748..edbe1391d2 100644
      } IEnumPublishedAppsVtbl;
  
 -    interface IEnumPublishedApps
-+    interface _Windows_SupportedOS_Server2003_ IEnumPublishedApps
++    interface _Windows_SupportedOS_WindowsXP_ IEnumPublishedApps
      {
          CONST_VTBL struct IEnumPublishedAppsVtbl *lpVtbl;
      };
@@ -124,7 +124,7 @@ index 17c6b95748..edbe1391d2 100644
      } IAppPublisherVtbl;
  
 -    interface IAppPublisher
-+    interface _Windows_SupportedOS_Server2003_ IAppPublisher
++    interface _Windows_SupportedOS_WindowsXP_ IAppPublisher
      {
          CONST_VTBL struct IAppPublisherVtbl *lpVtbl;
      };
