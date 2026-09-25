@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
-index 8553834c8a..6147a60759 100644
+index 8553834c8a..7d538f248e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 @@ -1,3 +1,4 @@
@@ -242,6 +242,24 @@ index 8553834c8a..6147a60759 100644
      IExtendContextMenu : public IUnknown
      {
      public:
+@@ -2531,7 +2660,7 @@ EXTERN_C const IID IID_IImageList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("43136EB8-D36C-11CF-ADBC-00AA00A80033")
++    MIDL_INTERFACE("43136EB8-D36C-11CF-ADBC-00AA00A80033") _Windows_SupportedOS_WindowsVista_
+     IImageList : public IUnknown
+     {
+     public:
+@@ -2599,7 +2728,7 @@ EXTERN_C const IID IID_IImageList;
+         END_INTERFACE
+     } IImageListVtbl;
+ 
+-    interface IImageList
++    interface _Windows_SupportedOS_WindowsVista_ IImageList
+     {
+         CONST_VTBL struct IImageListVtbl *lpVtbl;
+     };
 @@ -2647,7 +2776,7 @@ EXTERN_C const IID IID_IResultData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
