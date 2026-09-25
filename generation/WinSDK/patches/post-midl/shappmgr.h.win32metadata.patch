@@ -1,0 +1,130 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
+index 17c6b95748..1fce40d63c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shappmgr.h
+@@ -98,6 +98,7 @@ extern "C"{
+ #ifndef _SHAPPMGR_H_
+ #define _SHAPPMGR_H_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -134,7 +135,7 @@ enum _tagAppInfoFlags
+         AIM_UPDATEINFOURL	= 0x80000
+     } 	APPINFODATAFLAGS;
+ 
+-typedef struct _AppInfoData
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _AppInfoData
+     {
+     DWORD cbSize;
+     DWORD dwMask;
+@@ -189,8 +190,8 @@ EXTERN_C const IID IID_IShellApp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A3E14960-935F-11D1-B8B8-006008059382")
+-    IShellApp : public IUnknown
++    MIDL_INTERFACE("A3E14960-935F-11D1-B8B8-006008059382") _Windows_SupportedOS_WindowsXP_ 
++     IShellApp : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAppInfo( 
+@@ -267,7 +268,7 @@ EXTERN_C const IID IID_IShellApp;
+         END_INTERFACE
+     } IShellAppVtbl;
+ 
+-    interface IShellApp
++    interface _Windows_SupportedOS_WindowsXP_ IShellApp
+     {
+         CONST_VTBL struct IShellAppVtbl *lpVtbl;
+     };
+@@ -329,7 +330,7 @@ enum _tagPublishedAppInfoFlags
+         PAI_EXPIRETIME	= 0x10
+     } 	PUBAPPINFOFLAGS;
+ 
+-typedef struct _PubAppInfo
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PubAppInfo
+     {
+     DWORD cbSize;
+     DWORD dwMask;
+@@ -347,8 +348,8 @@ EXTERN_C const IID IID_IPublishedApp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1BC752E0-9046-11D1-B8B3-006008059382")
+-    IPublishedApp : public IShellApp
++    MIDL_INTERFACE("1BC752E0-9046-11D1-B8B3-006008059382") _Windows_SupportedOS_WindowsXP_ 
++     IPublishedApp : public IShellApp
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Install( 
+@@ -433,7 +434,7 @@ EXTERN_C const IID IID_IPublishedApp;
+         END_INTERFACE
+     } IPublishedAppVtbl;
+ 
+-    interface IPublishedApp
++    interface _Windows_SupportedOS_WindowsXP_ IPublishedApp
+     {
+         CONST_VTBL struct IPublishedAppVtbl *lpVtbl;
+     };
+@@ -500,8 +501,8 @@ EXTERN_C const IID IID_IPublishedApp2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("12B81347-1B3A-4A04-AA61-3F768B67FD7E")
+-    IPublishedApp2 : public IPublishedApp
++    MIDL_INTERFACE("12B81347-1B3A-4A04-AA61-3F768B67FD7E") _Windows_SupportedOS_WindowsVista_ 
++      IPublishedApp2 : public IPublishedApp
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Install2( 
+@@ -590,7 +591,7 @@ EXTERN_C const IID IID_IPublishedApp2;
+         END_INTERFACE
+     } IPublishedApp2Vtbl;
+ 
+-    interface IPublishedApp2
++    interface _Windows_SupportedOS_WindowsVista_ IPublishedApp2
+     {
+         CONST_VTBL struct IPublishedApp2Vtbl *lpVtbl;
+     };
+@@ -661,8 +662,8 @@ EXTERN_C const IID IID_IEnumPublishedApps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0B124F8C-91F0-11D1-B8B5-006008059382")
+-    IEnumPublishedApps : public IUnknown
++    MIDL_INTERFACE("0B124F8C-91F0-11D1-B8B5-006008059382") _Windows_SupportedOS_WindowsXP_ 
++     IEnumPublishedApps : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -709,7 +710,7 @@ EXTERN_C const IID IID_IEnumPublishedApps;
+         END_INTERFACE
+     } IEnumPublishedAppsVtbl;
+ 
+-    interface IEnumPublishedApps
++    interface _Windows_SupportedOS_WindowsXP_ IEnumPublishedApps
+     {
+         CONST_VTBL struct IEnumPublishedAppsVtbl *lpVtbl;
+     };
+@@ -757,8 +758,8 @@ EXTERN_C const IID IID_IAppPublisher;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("07250A10-9CF9-11D1-9076-006008059382")
+-    IAppPublisher : public IUnknown
++    MIDL_INTERFACE("07250A10-9CF9-11D1-9076-006008059382") _Windows_SupportedOS_WindowsXP_ 
++     IAppPublisher : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetNumberOfCategories( 
+@@ -833,7 +834,7 @@ EXTERN_C const IID IID_IAppPublisher;
+         END_INTERFACE
+     } IAppPublisherVtbl;
+ 
+-    interface IAppPublisher
++    interface _Windows_SupportedOS_WindowsXP_ IAppPublisher
+     {
+         CONST_VTBL struct IAppPublisherVtbl *lpVtbl;
+     };

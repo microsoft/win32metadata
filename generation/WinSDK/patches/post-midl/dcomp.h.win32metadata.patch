@@ -1,0 +1,154 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h b/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
+index 6a7d19dbbd..89692d4031 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dcomp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //---------------------------------------------------------------------------
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+ //---------------------------------------------------------------------------
+@@ -23,36 +24,36 @@ typedef interface IDCompositionAnimation                 IDCompositionAnimation;
+ typedef interface IDCompositionArithmeticCompositeEffect IDCompositionArithmeticCompositeEffect;
+ typedef interface IDCompositionBlendEffect               IDCompositionBlendEffect;
+ typedef interface IDCompositionBrightnessEffect          IDCompositionBrightnessEffect;
+-typedef interface IDCompositionClip                      IDCompositionClip;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionClip                      IDCompositionClip;
+ typedef interface IDCompositionColorMatrixEffect         IDCompositionColorMatrixEffect;
+ typedef interface IDCompositionCompositeEffect           IDCompositionCompositeEffect;
+-typedef interface IDCompositionDevice                    IDCompositionDevice;
+-typedef interface IDCompositionEffect                    IDCompositionEffect;
+-typedef interface IDCompositionEffectGroup               IDCompositionEffectGroup;
+-typedef interface IDCompositionFilterEffect              IDCompositionFilterEffect;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionDevice                    IDCompositionDevice;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionEffect                    IDCompositionEffect;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionEffectGroup               IDCompositionEffectGroup;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionFilterEffect              IDCompositionFilterEffect;
+ typedef interface IDCompositionGaussianBlurEffect        IDCompositionGaussianBlurEffect;
+ typedef interface IDCompositionHueRotationEffect         IDCompositionHueRotationEffect;
+ typedef interface IDCompositionLinearTransferEffect      IDCompositionLinearTransferEffect;
+-typedef interface IDCompositionMatrixTransform           IDCompositionMatrixTransform;
+-typedef interface IDCompositionMatrixTransform3D         IDCompositionMatrixTransform3D;
+-typedef interface IDCompositionRectangleClip             IDCompositionRectangleClip;
+-typedef interface IDCompositionRotateTransform           IDCompositionRotateTransform;
+-typedef interface IDCompositionRotateTransform3D         IDCompositionRotateTransform3D;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionMatrixTransform           IDCompositionMatrixTransform;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionMatrixTransform3D         IDCompositionMatrixTransform3D;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionRectangleClip             IDCompositionRectangleClip;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionRotateTransform           IDCompositionRotateTransform;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionRotateTransform3D         IDCompositionRotateTransform3D;
+ typedef interface IDCompositionSaturationEffect          IDCompositionSaturationEffect;
+-typedef interface IDCompositionScaleTransform            IDCompositionScaleTransform;
+-typedef interface IDCompositionScaleTransform3D          IDCompositionScaleTransform3D;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionScaleTransform            IDCompositionScaleTransform;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionScaleTransform3D          IDCompositionScaleTransform3D;
+ typedef interface IDCompositionShadowEffect              IDCompositionShadowEffect;
+-typedef interface IDCompositionSkewTransform             IDCompositionSkewTransform;
+-typedef interface IDCompositionSurface                   IDCompositionSurface;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionSkewTransform             IDCompositionSkewTransform;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionSurface                   IDCompositionSurface;
+ typedef interface IDCompositionTableTransferEffect       IDCompositionTableTransferEffect;
+-typedef interface IDCompositionTarget                    IDCompositionTarget;
+-typedef interface IDCompositionTransform                 IDCompositionTransform;
+-typedef interface IDCompositionTransform3D               IDCompositionTransform3D;
+-typedef interface IDCompositionTranslateTransform        IDCompositionTranslateTransform;
+-typedef interface IDCompositionTranslateTransform3D      IDCompositionTranslateTransform3D;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionTarget                    IDCompositionTarget;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionTransform                 IDCompositionTransform;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionTransform3D               IDCompositionTransform3D;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionTranslateTransform        IDCompositionTranslateTransform;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionTranslateTransform3D      IDCompositionTranslateTransform3D;
+ typedef interface IDCompositionTurbulenceEffect          IDCompositionTurbulenceEffect;
+-typedef interface IDCompositionVirtualSurface            IDCompositionVirtualSurface;
+-typedef interface IDCompositionVisual                    IDCompositionVisual;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionVirtualSurface            IDCompositionVirtualSurface;
++_Windows_SupportedOS_Windows8_ typedef interface IDCompositionVisual                    IDCompositionVisual;
+ 
+ //+-----------------------------------------------------------------------------
+ //
+@@ -64,7 +65,7 @@ typedef interface IDCompositionVisual                    IDCompositionVisual;
+ //      other DirectComposition objects.
+ //
+ //------------------------------------------------------------------------------
+-STDAPI DCompositionCreateDevice(
++_Windows_SupportedOS_Windows8_ STDAPI DCompositionCreateDevice(
+     _In_opt_ IDXGIDevice *dxgiDevice,
+     _In_ REFIID iid,
+     _Outptr_ void **dcompositionDevice
+@@ -81,7 +82,7 @@ STDAPI DCompositionCreateDevice(
+ //      other DirectComposition objects.
+ //
+ //------------------------------------------------------------------------------
+-STDAPI DCompositionCreateDevice2(
++_Windows_SupportedOS_Windows81_ STDAPI DCompositionCreateDevice2(
+     _In_opt_ IUnknown *renderingDevice,
+     _In_ REFIID iid,
+     _Outptr_ void **dcompositionDevice
+@@ -118,10 +119,10 @@ STDAPI DCompositionCreateDevice3(
+ //      with a visual.
+ //
+ //------------------------------------------------------------------------------
+-STDAPI DCompositionCreateSurfaceHandle(
++_Windows_SupportedOS_Windows8_ STDAPI DCompositionCreateSurfaceHandle(
+     _In_ DWORD desiredAccess,
+     _In_opt_ SECURITY_ATTRIBUTES *securityAttributes,
+-    _Out_ HANDLE *surfaceHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE *surfaceHandle
+     );
+ 
+ //+-----------------------------------------------------------------------------
+@@ -205,7 +206,7 @@ STDAPI DCompositionGetStatistics(
+ STDAPI DCompositionGetTargetStatistics(
+     _In_ COMPOSITION_FRAME_ID frameId,
+     _In_ const COMPOSITION_TARGET_ID* targetId,
+-    _Out_ COMPOSITION_TARGET_STATS* targetStats);
++    _Win32_Retval_ _Out_ COMPOSITION_TARGET_STATS* targetStats);
+ 
+ //+-----------------------------------------------------------------------------
+ //
+@@ -259,7 +260,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9
+ 
+     // Gets timing information about the composition engine.
+     STDMETHOD(GetFrameStatistics)(THIS_
+-        _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
++        _Win32_Retval_ _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
+         ) PURE;
+ 
+     // Creates a composition target bound to a window represented by an HWND.
+@@ -1287,12 +1288,12 @@ DECLARE_INTERFACE_IID_(IDCompositionVirtualSurface, IDCompositionSurface, "AE471
+ };
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+-typedef interface IDCompositionDesktopDevice        IDCompositionDesktopDevice;
+-typedef interface IDCompositionDevice2              IDCompositionDevice2;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionDesktopDevice        IDCompositionDesktopDevice;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionDevice2              IDCompositionDevice2;
+ typedef interface IDCompositionDeviceDebug          IDCompositionDeviceDebug;
+-typedef interface IDCompositionSurfaceFactory       IDCompositionSurfaceFactory;
+-typedef interface IDCompositionVisual2              IDCompositionVisual2;
+-typedef interface IDCompositionVisualDebug          IDCompositionVisualDebug;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionSurfaceFactory       IDCompositionSurfaceFactory;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionVisual2              IDCompositionVisual2;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionVisualDebug          IDCompositionVisualDebug;
+ 
+ //+-----------------------------------------------------------------------------
+ //
+@@ -1318,7 +1319,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-
+ 
+     // Gets timing information about the composition engine.
+     STDMETHOD(GetFrameStatistics)(THIS_
+-        _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
++        _Win32_Retval_ _Out_ DCOMPOSITION_FRAME_STATISTICS *statistics
+         ) PURE;
+ 
+     // Creates a new visual object.
+@@ -1572,8 +1573,8 @@ DECLARE_INTERFACE_IID_(IDCompositionVisualDebug, IDCompositionVisual2, "FED2B808
+ #endif  // (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
+-typedef interface IDCompositionDevice3                      IDCompositionDevice3;
+-typedef interface IDCompositionVisual3                      IDCompositionVisual3;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionDevice3                      IDCompositionDevice3;
++_Windows_SupportedOS_Windows81_ typedef interface IDCompositionVisual3                      IDCompositionVisual3;
+ 
+ //+-----------------------------------------------------------------------------
+ //

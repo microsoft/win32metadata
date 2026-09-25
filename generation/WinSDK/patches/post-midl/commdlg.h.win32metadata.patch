@@ -1,0 +1,923 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
+index 4083a3eb7b..4081313baa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /************************************************************************
+@@ -183,7 +184,7 @@ typedef struct tagOFNA {
+    DWORD        nMaxFileTitle;
+    LPCSTR       lpstrInitialDir;
+    LPCSTR       lpstrTitle;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS) DWORD        Flags;
+    WORD         nFileOffset;
+    WORD         nFileExtension;
+    LPCSTR       lpstrDefExt;
+@@ -197,7 +198,7 @@ typedef struct tagOFNA {
+ #if (_WIN32_WINNT >= 0x0500)
+    void *        pvReserved;
+    DWORD        dwReserved;
+-   DWORD        FlagsEx;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS_EX) DWORD        FlagsEx;
+ #endif // (_WIN32_WINNT >= 0x0500)
+ } OPENFILENAMEA, *LPOPENFILENAMEA;
+ typedef struct tagOFNW {
+@@ -214,7 +215,7 @@ typedef struct tagOFNW {
+    DWORD        nMaxFileTitle;
+    LPCWSTR      lpstrInitialDir;
+    LPCWSTR      lpstrTitle;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS) DWORD        Flags;
+    WORD         nFileOffset;
+    WORD         nFileExtension;
+    LPCWSTR      lpstrDefExt;
+@@ -228,7 +229,7 @@ typedef struct tagOFNW {
+ #if (_WIN32_WINNT >= 0x0500)
+    void *        pvReserved;
+    DWORD        dwReserved;
+-   DWORD        FlagsEx;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS_EX) DWORD        FlagsEx;
+ #endif // (_WIN32_WINNT >= 0x0500)
+ } OPENFILENAMEW, *LPOPENFILENAMEW;
+ #ifdef UNICODE
+@@ -250,15 +251,15 @@ typedef LPOPENFILENAMEA LPOPENFILENAME;
+ #endif // (_WIN32_WINNT >= 0x0500)
+ 
+ 
+-WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameA(LPOPENFILENAMEA);
+-WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameW(LPOPENFILENAMEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetOpenFileNameW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEW);
+ #ifdef UNICODE
+ #define GetOpenFileName  GetOpenFileNameW
+ #else
+ #define GetOpenFileName  GetOpenFileNameA
+ #endif // !UNICODE
+-WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameA(LPOPENFILENAMEA);
+-WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENFILENAMEW);
+ #ifdef UNICODE
+ #define GetSaveFileName  GetSaveFileNameW
+ #else
+@@ -266,8 +267,8 @@ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
+ #endif // !UNICODE
+ 
+ 
+-WINCOMMDLGAPI short APIENTRY GetFileTitleA(LPCSTR, _Out_writes_(cchSize) LPSTR Buf, _In_ WORD cchSize);
+-WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR Buf, _In_ WORD cchSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI short APIENTRY GetFileTitleA(LPCSTR, _Out_writes_(cchSize) LPSTR Buf, _In_ WORD cchSize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR Buf, _In_ WORD cchSize);
+ #ifdef UNICODE
+ #define GetFileTitle  GetFileTitleW
+ #else
+@@ -533,8 +534,8 @@ typedef LPCHOOSECOLORA LPCHOOSECOLOR;
+ #endif // UNICODE
+ #endif //_MAC
+ 
+-WINCOMMDLGAPI BOOL APIENTRY ChooseColorA(LPCHOOSECOLORA);
+-WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(LPCHOOSECOLORW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY ChooseColorA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSECOLORA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSECOLORW);
+ #ifdef UNICODE
+ #define ChooseColor  ChooseColorW
+ #else
+@@ -560,7 +561,7 @@ typedef struct tagFINDREPLACEA {
+    HWND         hwndOwner;          // handle to owner's window
+    HINSTANCE    hInstance;          // instance handle of.EXE that
+                                     //   contains cust. dlg. template
+-   DWORD        Flags;              // one or more of the FR_??
++   _Win32_AssociatedEnum_(FINDREPLACE_FLAGS) DWORD        Flags;              // one or more of the FR_??
+    LPSTR        lpstrFindWhat;      // ptr. to search string
+    LPSTR        lpstrReplaceWith;   // ptr. to replace string
+    WORD         wFindWhatLen;       // size of find buffer
+@@ -574,7 +575,7 @@ typedef struct tagFINDREPLACEW {
+    HWND         hwndOwner;          // handle to owner's window
+    HINSTANCE    hInstance;          // instance handle of.EXE that
+                                     //   contains cust. dlg. template
+-   DWORD        Flags;              // one or more of the FR_??
++   _Win32_AssociatedEnum_(FINDREPLACE_FLAGS) DWORD        Flags;              // one or more of the FR_??
+    LPWSTR       lpstrFindWhat;      // ptr. to search string
+    LPWSTR       lpstrReplaceWith;   // ptr. to replace string
+    WORD         wFindWhatLen;       // size of find buffer
+@@ -620,16 +621,16 @@ typedef LPFINDREPLACEA LPFINDREPLACE;
+ #define FR_MATCHALEFHAMZA               0x80000000
+ #endif // (NTDDI_VERSION >= NTDDI_WIN2K)
+ 
+-WINCOMMDLGAPI HWND APIENTRY FindTextA(LPFINDREPLACEA);
+-WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY FindTextA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY FindTextW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEW);
+ #ifdef UNICODE
+ #define FindText  FindTextW
+ #else
+ #define FindText  FindTextA
+ #endif // !UNICODE
+ #ifndef _MAC
+-WINCOMMDLGAPI HWND APIENTRY ReplaceTextA(LPFINDREPLACEA);
+-WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(LPFINDREPLACEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY ReplaceTextA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPFINDREPLACEW);
+ #ifdef UNICODE
+ #define ReplaceText  ReplaceTextW
+ #else
+@@ -673,7 +674,7 @@ typedef struct tagCHOOSEFONTA {
+    HDC             hDC;                // printer DC/IC or NULL
+    LPLOGFONTA      lpLogFont;          // ptr. to a LOGFONT struct
+    INT             iPointSize;         // 10 * size in points of selected font
+-   DWORD           Flags;              // enum. type flags
++   _Win32_AssociatedEnum_(CHOOSEFONT_FLAGS) DWORD           Flags;              // enum. type flags
+    COLORREF        rgbColors;          // returned text color
+    LPARAM          lCustData;          // data passed to hook fn.
+    LPCFHOOKPROC    lpfnHook;           // ptr. to hook function
+@@ -682,7 +683,7 @@ typedef struct tagCHOOSEFONTA {
+                                        //   contains cust. dlg. template
+    LPSTR           lpszStyle;          // return the style field here
+                                        // must be LF_FACESIZE or bigger
+-   WORD            nFontType;          // same value reported to the EnumFonts
++   _Win32_AssociatedEnum_(CHOOSEFONT_FONT_TYPE) WORD            nFontType;          // same value reported to the EnumFonts
+                                        //   call back with the extra FONTTYPE_
+                                        //   bits added
+    WORD            ___MISSING_ALIGNMENT__;
+@@ -696,7 +697,7 @@ typedef struct tagCHOOSEFONTW {
+    HDC             hDC;                // printer DC/IC or NULL
+    LPLOGFONTW      lpLogFont;          // ptr. to a LOGFONT struct
+    INT             iPointSize;         // 10 * size in points of selected font
+-   DWORD           Flags;              // enum. type flags
++   _Win32_AssociatedEnum_(CHOOSEFONT_FLAGS) DWORD           Flags;              // enum. type flags
+    COLORREF        rgbColors;          // returned text color
+    LPARAM          lCustData;          // data passed to hook fn.
+    LPCFHOOKPROC    lpfnHook;           // ptr. to hook function
+@@ -705,7 +706,7 @@ typedef struct tagCHOOSEFONTW {
+                                        //   contains cust. dlg. template
+    LPWSTR          lpszStyle;          // return the style field here
+                                        // must be LF_FACESIZE or bigger
+-   WORD            nFontType;          // same value reported to the EnumFonts
++   _Win32_AssociatedEnum_(CHOOSEFONT_FONT_TYPE) WORD            nFontType;          // same value reported to the EnumFonts
+                                        //   call back with the extra FONTTYPE_
+                                        //   bits added
+    WORD            ___MISSING_ALIGNMENT__;
+@@ -735,8 +736,8 @@ typedef CHOOSEFONTA CHOOSEFONT;
+ typedef PCCHOOSEFONTA PCCHOOSEFONT;
+ #endif // UNICODE
+ 
+-WINCOMMDLGAPI BOOL APIENTRY ChooseFontA(LPCHOOSEFONTA);
+-WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY ChooseFontA(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSEFONTA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCHOOSEFONTW);
+ #ifdef UNICODE
+ #define ChooseFont  ChooseFontW
+ #else
+@@ -862,7 +863,7 @@ typedef struct tagPDA {
+    HGLOBAL          hDevMode;
+    HGLOBAL          hDevNames;
+    HDC              hDC;
+-   DWORD            Flags;
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD            Flags;
+    WORD             nFromPage;
+    WORD             nToPage;
+    WORD             nMinPage;
+@@ -883,7 +884,7 @@ typedef struct tagPDW {
+    HGLOBAL          hDevMode;
+    HGLOBAL          hDevNames;
+    HDC              hDC;
+-   DWORD            Flags;
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD            Flags;
+    WORD             nFromPage;
+    WORD             nToPage;
+    WORD             nMinPage;
+@@ -906,8 +907,8 @@ typedef PRINTDLGA PRINTDLG;
+ typedef LPPRINTDLGA LPPRINTDLG;
+ #endif // UNICODE
+ 
+-WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgA(_Inout_ LPPRINTDLGA pPD);
+-WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgW(_Inout_ LPPRINTDLGW pPD);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgA(_Inout_ LPPRINTDLGA pPD);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgW(_Inout_ LPPRINTDLGW pPD);
+ #ifdef UNICODE
+ #define PrintDlg  PrintDlgW
+ #else
+@@ -951,7 +952,7 @@ WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgW(_Inout_ LPPRINT
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogCallback
+ 
+-DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-0000F8757BF9")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -961,7 +962,7 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
+     // *** IPrintDialogCallback methods ***
+     STDMETHOD(InitDone) (THIS) PURE;
+     STDMETHOD(SelectionChange) (THIS) PURE;
+-    STDMETHOD(HandleMessage) (THIS_ HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT *pResult) PURE;
++    STDMETHOD(HandleMessage) (THIS_ HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LRESULT *pResult) PURE;
+ };
+ 
+ 
+@@ -983,7 +984,7 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogServices
+ 
+-DECLARE_INTERFACE_IID_(IPrintDialogServices, IUnknown, "509AAEDA-5639-11D1-B6A1-0000F8757BF9")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_Windows2000_ IPrintDialogServices, IUnknown, "509AAEDA-5639-11D1-B6A1-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -1017,7 +1018,7 @@ typedef struct tagPDEXA {
+    HGLOBAL               hDevMode;             // handle to DevMode
+    HGLOBAL               hDevNames;            // handle to DevNames
+    HDC                   hDC;                  // printer DC/IC or NULL
+-   DWORD                 Flags;                // PD_ flags
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD                 Flags;                // PD_ flags
+    DWORD                 Flags2;               // reserved
+    DWORD                 ExclusionFlags;       // items to exclude from driver pages
+    DWORD                 nPageRanges;          // number of page ranges
+@@ -1043,7 +1044,7 @@ typedef struct tagPDEXW {
+    HGLOBAL               hDevMode;             // handle to DevMode
+    HGLOBAL               hDevNames;            // handle to DevNames
+    HDC                   hDC;                  // printer DC/IC or NULL
+-   DWORD                 Flags;                // PD_ flags
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD                 Flags;                // PD_ flags
+    DWORD                 Flags2;               // reserved
+    DWORD                 ExclusionFlags;       // items to exclude from driver pages
+    DWORD                 nPageRanges;          // number of page ranges
+@@ -1070,8 +1071,8 @@ typedef LPPRINTDLGEXA LPPRINTDLGEX;
+ 
+ 
+ 
+-WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExA(_Inout_ LPPRINTDLGEXA pPD);
+-WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExW(_Inout_ LPPRINTDLGEXW pPD);
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExA(_Inout_ LPPRINTDLGEXA pPD);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExW(_Inout_ LPPRINTDLGEXW pPD);
+ #ifdef UNICODE
+ #define PrintDlgEx  PrintDlgExW
+ #else
+@@ -1155,7 +1156,7 @@ typedef const DEVNAMES *PCDEVNAMES;
+ #define DN_DEFAULTPRN      0x0001
+ 
+ 
+-WINCOMMDLGAPI DWORD APIENTRY CommDlgExtendedError(VOID);
++_Windows_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(COMMON_DLG_ERRORS) WINCOMMDLGAPI DWORD APIENTRY CommDlgExtendedError(VOID);
+ 
+ #if(WINVER >= 0x0400)
+ #define WM_PSD_PAGESETUPDLG     (WM_USER  )
+@@ -1175,7 +1176,7 @@ typedef struct tagPSDA
+     HWND            hwndOwner;
+     HGLOBAL         hDevMode;
+     HGLOBAL         hDevNames;
+-    DWORD           Flags;
++    _Win32_AssociatedEnum_(PAGESETUPDLG_FLAGS) DWORD           Flags;
+     POINT           ptPaperSize;
+     RECT            rtMinMargin;
+     RECT            rtMargin;
+@@ -1192,7 +1193,7 @@ typedef struct tagPSDW
+     HWND            hwndOwner;
+     HGLOBAL         hDevMode;
+     HGLOBAL         hDevNames;
+-    DWORD           Flags;
++    _Win32_AssociatedEnum_(PAGESETUPDLG_FLAGS) DWORD           Flags;
+     POINT           ptPaperSize;
+     RECT            rtMinMargin;
+     RECT            rtMargin;
+@@ -1211,8 +1212,8 @@ typedef PAGESETUPDLGA PAGESETUPDLG;
+ typedef LPPAGESETUPDLGA LPPAGESETUPDLG;
+ #endif // UNICODE
+ 
+-WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgA( LPPAGESETUPDLGA );
+-WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgA( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPAGESETUPDLGA );
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPAGESETUPDLGW );
+ #ifdef UNICODE
+ #define PageSetupDlg  PageSetupDlgW
+ #else
+@@ -1264,5 +1265,626 @@ WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
+ #endif  /* !_INC_COMMDLG */
+ #if _MSC_VER >= 1200
+ #pragma warning(pop)
++
++#ifdef WIN32METADATA
++#pragma push_macro("CC_RGBINIT")
++#undef CC_RGBINIT
++#pragma push_macro("CC_FULLOPEN")
++#undef CC_FULLOPEN
++#pragma push_macro("CC_PREVENTFULLOPEN")
++#undef CC_PREVENTFULLOPEN
++#pragma push_macro("CC_SHOWHELP")
++#undef CC_SHOWHELP
++#pragma push_macro("CC_ENABLEHOOK")
++#undef CC_ENABLEHOOK
++#pragma push_macro("CC_ENABLETEMPLATE")
++#undef CC_ENABLETEMPLATE
++#pragma push_macro("CC_ENABLETEMPLATEHANDLE")
++#undef CC_ENABLETEMPLATEHANDLE
++#pragma push_macro("CC_SOLIDCOLOR")
++#undef CC_SOLIDCOLOR
++#pragma push_macro("CC_ANYCOLOR")
++#undef CC_ANYCOLOR
++enum [[clang::flag_enum]] CHOOSECOLOR_FLAGS : unsigned int
++{
++    CC_RGBINIT = 1U,
++    CC_FULLOPEN = 2U,
++    CC_PREVENTFULLOPEN = 4U,
++    CC_SHOWHELP = 8U,
++    CC_ENABLEHOOK = 16U,
++    CC_ENABLETEMPLATE = 32U,
++    CC_ENABLETEMPLATEHANDLE = 64U,
++    CC_SOLIDCOLOR = 128U,
++    CC_ANYCOLOR = 256U,
++};
++#pragma pop_macro("CC_ANYCOLOR")
++#pragma pop_macro("CC_SOLIDCOLOR")
++#pragma pop_macro("CC_ENABLETEMPLATEHANDLE")
++#pragma pop_macro("CC_ENABLETEMPLATE")
++#pragma pop_macro("CC_ENABLEHOOK")
++#pragma pop_macro("CC_SHOWHELP")
++#pragma pop_macro("CC_PREVENTFULLOPEN")
++#pragma pop_macro("CC_FULLOPEN")
++#pragma pop_macro("CC_RGBINIT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("OFN_READONLY")
++#undef OFN_READONLY
++#pragma push_macro("OFN_OVERWRITEPROMPT")
++#undef OFN_OVERWRITEPROMPT
++#pragma push_macro("OFN_HIDEREADONLY")
++#undef OFN_HIDEREADONLY
++#pragma push_macro("OFN_NOCHANGEDIR")
++#undef OFN_NOCHANGEDIR
++#pragma push_macro("OFN_SHOWHELP")
++#undef OFN_SHOWHELP
++#pragma push_macro("OFN_ENABLEHOOK")
++#undef OFN_ENABLEHOOK
++#pragma push_macro("OFN_ENABLETEMPLATE")
++#undef OFN_ENABLETEMPLATE
++#pragma push_macro("OFN_ENABLETEMPLATEHANDLE")
++#undef OFN_ENABLETEMPLATEHANDLE
++#pragma push_macro("OFN_NOVALIDATE")
++#undef OFN_NOVALIDATE
++#pragma push_macro("OFN_ALLOWMULTISELECT")
++#undef OFN_ALLOWMULTISELECT
++#pragma push_macro("OFN_EXTENSIONDIFFERENT")
++#undef OFN_EXTENSIONDIFFERENT
++#pragma push_macro("OFN_PATHMUSTEXIST")
++#undef OFN_PATHMUSTEXIST
++#pragma push_macro("OFN_FILEMUSTEXIST")
++#undef OFN_FILEMUSTEXIST
++#pragma push_macro("OFN_CREATEPROMPT")
++#undef OFN_CREATEPROMPT
++#pragma push_macro("OFN_SHAREAWARE")
++#undef OFN_SHAREAWARE
++#pragma push_macro("OFN_NOREADONLYRETURN")
++#undef OFN_NOREADONLYRETURN
++#pragma push_macro("OFN_NOTESTFILECREATE")
++#undef OFN_NOTESTFILECREATE
++#pragma push_macro("OFN_NONETWORKBUTTON")
++#undef OFN_NONETWORKBUTTON
++#pragma push_macro("OFN_NOLONGNAMES")
++#undef OFN_NOLONGNAMES
++#pragma push_macro("OFN_EXPLORER")
++#undef OFN_EXPLORER
++#pragma push_macro("OFN_NODEREFERENCELINKS")
++#undef OFN_NODEREFERENCELINKS
++#pragma push_macro("OFN_LONGNAMES")
++#undef OFN_LONGNAMES
++#pragma push_macro("OFN_ENABLEINCLUDENOTIFY")
++#undef OFN_ENABLEINCLUDENOTIFY
++#pragma push_macro("OFN_ENABLESIZING")
++#undef OFN_ENABLESIZING
++#pragma push_macro("OFN_DONTADDTORECENT")
++#undef OFN_DONTADDTORECENT
++#pragma push_macro("OFN_FORCESHOWHIDDEN")
++#undef OFN_FORCESHOWHIDDEN
++enum [[clang::flag_enum]] OPEN_FILENAME_FLAGS : unsigned int
++{
++    OFN_READONLY = 1U,
++    OFN_OVERWRITEPROMPT = 2U,
++    OFN_HIDEREADONLY = 4U,
++    OFN_NOCHANGEDIR = 8U,
++    OFN_SHOWHELP = 16U,
++    OFN_ENABLEHOOK = 32U,
++    OFN_ENABLETEMPLATE = 64U,
++    OFN_ENABLETEMPLATEHANDLE = 128U,
++    OFN_NOVALIDATE = 256U,
++    OFN_ALLOWMULTISELECT = 512U,
++    OFN_EXTENSIONDIFFERENT = 1024U,
++    OFN_PATHMUSTEXIST = 2048U,
++    OFN_FILEMUSTEXIST = 4096U,
++    OFN_CREATEPROMPT = 8192U,
++    OFN_SHAREAWARE = 16384U,
++    OFN_NOREADONLYRETURN = 32768U,
++    OFN_NOTESTFILECREATE = 65536U,
++    OFN_NONETWORKBUTTON = 131072U,
++    OFN_NOLONGNAMES = 262144U,
++    OFN_EXPLORER = 524288U,
++    OFN_NODEREFERENCELINKS = 1048576U,
++    OFN_LONGNAMES = 2097152U,
++    OFN_ENABLEINCLUDENOTIFY = 4194304U,
++    OFN_ENABLESIZING = 8388608U,
++    OFN_DONTADDTORECENT = 33554432U,
++    OFN_FORCESHOWHIDDEN = 268435456U,
++};
++#pragma pop_macro("OFN_FORCESHOWHIDDEN")
++#pragma pop_macro("OFN_DONTADDTORECENT")
++#pragma pop_macro("OFN_ENABLESIZING")
++#pragma pop_macro("OFN_ENABLEINCLUDENOTIFY")
++#pragma pop_macro("OFN_LONGNAMES")
++#pragma pop_macro("OFN_NODEREFERENCELINKS")
++#pragma pop_macro("OFN_EXPLORER")
++#pragma pop_macro("OFN_NOLONGNAMES")
++#pragma pop_macro("OFN_NONETWORKBUTTON")
++#pragma pop_macro("OFN_NOTESTFILECREATE")
++#pragma pop_macro("OFN_NOREADONLYRETURN")
++#pragma pop_macro("OFN_SHAREAWARE")
++#pragma pop_macro("OFN_CREATEPROMPT")
++#pragma pop_macro("OFN_FILEMUSTEXIST")
++#pragma pop_macro("OFN_PATHMUSTEXIST")
++#pragma pop_macro("OFN_EXTENSIONDIFFERENT")
++#pragma pop_macro("OFN_ALLOWMULTISELECT")
++#pragma pop_macro("OFN_NOVALIDATE")
++#pragma pop_macro("OFN_ENABLETEMPLATEHANDLE")
++#pragma pop_macro("OFN_ENABLETEMPLATE")
++#pragma pop_macro("OFN_ENABLEHOOK")
++#pragma pop_macro("OFN_SHOWHELP")
++#pragma pop_macro("OFN_NOCHANGEDIR")
++#pragma pop_macro("OFN_HIDEREADONLY")
++#pragma pop_macro("OFN_OVERWRITEPROMPT")
++#pragma pop_macro("OFN_READONLY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("OFN_EX_NONE")
++#undef OFN_EX_NONE
++#pragma push_macro("OFN_EX_NOPLACESBAR")
++#undef OFN_EX_NOPLACESBAR
++enum [[clang::flag_enum]] OPEN_FILENAME_FLAGS_EX : unsigned int
++{
++    OFN_EX_NONE = 0U,
++    OFN_EX_NOPLACESBAR = 1U,
++};
++#pragma pop_macro("OFN_EX_NOPLACESBAR")
++#pragma pop_macro("OFN_EX_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PSD_DEFAULTMINMARGINS")
++#undef PSD_DEFAULTMINMARGINS
++#pragma push_macro("PSD_DISABLEMARGINS")
++#undef PSD_DISABLEMARGINS
++#pragma push_macro("PSD_DISABLEORIENTATION")
++#undef PSD_DISABLEORIENTATION
++#pragma push_macro("PSD_DISABLEPAGEPAINTING")
++#undef PSD_DISABLEPAGEPAINTING
++#pragma push_macro("PSD_DISABLEPAPER")
++#undef PSD_DISABLEPAPER
++#pragma push_macro("PSD_DISABLEPRINTER")
++#undef PSD_DISABLEPRINTER
++#pragma push_macro("PSD_ENABLEPAGEPAINTHOOK")
++#undef PSD_ENABLEPAGEPAINTHOOK
++#pragma push_macro("PSD_ENABLEPAGESETUPHOOK")
++#undef PSD_ENABLEPAGESETUPHOOK
++#pragma push_macro("PSD_ENABLEPAGESETUPTEMPLATE")
++#undef PSD_ENABLEPAGESETUPTEMPLATE
++#pragma push_macro("PSD_ENABLEPAGESETUPTEMPLATEHANDLE")
++#undef PSD_ENABLEPAGESETUPTEMPLATEHANDLE
++#pragma push_macro("PSD_INHUNDREDTHSOFMILLIMETERS")
++#undef PSD_INHUNDREDTHSOFMILLIMETERS
++#pragma push_macro("PSD_INTHOUSANDTHSOFINCHES")
++#undef PSD_INTHOUSANDTHSOFINCHES
++#pragma push_macro("PSD_INWININIINTLMEASURE")
++#undef PSD_INWININIINTLMEASURE
++#pragma push_macro("PSD_MARGINS")
++#undef PSD_MARGINS
++#pragma push_macro("PSD_MINMARGINS")
++#undef PSD_MINMARGINS
++#pragma push_macro("PSD_NONETWORKBUTTON")
++#undef PSD_NONETWORKBUTTON
++#pragma push_macro("PSD_NOWARNING")
++#undef PSD_NOWARNING
++#pragma push_macro("PSD_RETURNDEFAULT")
++#undef PSD_RETURNDEFAULT
++#pragma push_macro("PSD_SHOWHELP")
++#undef PSD_SHOWHELP
++enum [[clang::flag_enum]] PAGESETUPDLG_FLAGS : unsigned int
++{
++    PSD_DEFAULTMINMARGINS = 0U,
++    PSD_DISABLEMARGINS = 16U,
++    PSD_DISABLEORIENTATION = 256U,
++    PSD_DISABLEPAGEPAINTING = 524288U,
++    PSD_DISABLEPAPER = 512U,
++    PSD_DISABLEPRINTER = 32U,
++    PSD_ENABLEPAGEPAINTHOOK = 262144U,
++    PSD_ENABLEPAGESETUPHOOK = 8192U,
++    PSD_ENABLEPAGESETUPTEMPLATE = 32768U,
++    PSD_ENABLEPAGESETUPTEMPLATEHANDLE = 131072U,
++    PSD_INHUNDREDTHSOFMILLIMETERS = 8U,
++    PSD_INTHOUSANDTHSOFINCHES = 4U,
++    PSD_INWININIINTLMEASURE = 0U,
++    PSD_MARGINS = 2U,
++    PSD_MINMARGINS = 1U,
++    PSD_NONETWORKBUTTON = 2097152U,
++    PSD_NOWARNING = 128U,
++    PSD_RETURNDEFAULT = 1024U,
++    PSD_SHOWHELP = 2048U,
++};
++#pragma pop_macro("PSD_SHOWHELP")
++#pragma pop_macro("PSD_RETURNDEFAULT")
++#pragma pop_macro("PSD_NOWARNING")
++#pragma pop_macro("PSD_NONETWORKBUTTON")
++#pragma pop_macro("PSD_MINMARGINS")
++#pragma pop_macro("PSD_MARGINS")
++#pragma pop_macro("PSD_INWININIINTLMEASURE")
++#pragma pop_macro("PSD_INTHOUSANDTHSOFINCHES")
++#pragma pop_macro("PSD_INHUNDREDTHSOFMILLIMETERS")
++#pragma pop_macro("PSD_ENABLEPAGESETUPTEMPLATEHANDLE")
++#pragma pop_macro("PSD_ENABLEPAGESETUPTEMPLATE")
++#pragma pop_macro("PSD_ENABLEPAGESETUPHOOK")
++#pragma pop_macro("PSD_ENABLEPAGEPAINTHOOK")
++#pragma pop_macro("PSD_DISABLEPRINTER")
++#pragma pop_macro("PSD_DISABLEPAPER")
++#pragma pop_macro("PSD_DISABLEPAGEPAINTING")
++#pragma pop_macro("PSD_DISABLEORIENTATION")
++#pragma pop_macro("PSD_DISABLEMARGINS")
++#pragma pop_macro("PSD_DEFAULTMINMARGINS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CF_APPLY")
++#undef CF_APPLY
++#pragma push_macro("CF_ANSIONLY")
++#undef CF_ANSIONLY
++#pragma push_macro("CF_BOTH")
++#undef CF_BOTH
++#pragma push_macro("CF_EFFECTS")
++#undef CF_EFFECTS
++#pragma push_macro("CF_ENABLEHOOK")
++#undef CF_ENABLEHOOK
++#pragma push_macro("CF_ENABLETEMPLATE")
++#undef CF_ENABLETEMPLATE
++#pragma push_macro("CF_ENABLETEMPLATEHANDLE")
++#undef CF_ENABLETEMPLATEHANDLE
++#pragma push_macro("CF_FIXEDPITCHONLY")
++#undef CF_FIXEDPITCHONLY
++#pragma push_macro("CF_FORCEFONTEXIST")
++#undef CF_FORCEFONTEXIST
++#pragma push_macro("CF_INACTIVEFONTS")
++#undef CF_INACTIVEFONTS
++#pragma push_macro("CF_INITTOLOGFONTSTRUCT")
++#undef CF_INITTOLOGFONTSTRUCT
++#pragma push_macro("CF_LIMITSIZE")
++#undef CF_LIMITSIZE
++#pragma push_macro("CF_NOOEMFONTS")
++#undef CF_NOOEMFONTS
++#pragma push_macro("CF_NOFACESEL")
++#undef CF_NOFACESEL
++#pragma push_macro("CF_NOSCRIPTSEL")
++#undef CF_NOSCRIPTSEL
++#pragma push_macro("CF_NOSIMULATIONS")
++#undef CF_NOSIMULATIONS
++#pragma push_macro("CF_NOSIZESEL")
++#undef CF_NOSIZESEL
++#pragma push_macro("CF_NOSTYLESEL")
++#undef CF_NOSTYLESEL
++#pragma push_macro("CF_NOVECTORFONTS")
++#undef CF_NOVECTORFONTS
++#pragma push_macro("CF_NOVERTFONTS")
++#undef CF_NOVERTFONTS
++#pragma push_macro("CF_PRINTERFONTS")
++#undef CF_PRINTERFONTS
++#pragma push_macro("CF_SCALABLEONLY")
++#undef CF_SCALABLEONLY
++#pragma push_macro("CF_SCREENFONTS")
++#undef CF_SCREENFONTS
++#pragma push_macro("CF_SCRIPTSONLY")
++#undef CF_SCRIPTSONLY
++#pragma push_macro("CF_SELECTSCRIPT")
++#undef CF_SELECTSCRIPT
++#pragma push_macro("CF_SHOWHELP")
++#undef CF_SHOWHELP
++#pragma push_macro("CF_TTONLY")
++#undef CF_TTONLY
++#pragma push_macro("CF_USESTYLE")
++#undef CF_USESTYLE
++#pragma push_macro("CF_WYSIWYG")
++#undef CF_WYSIWYG
++enum [[clang::flag_enum]] CHOOSEFONT_FLAGS : unsigned int
++{
++    CF_APPLY = 512U,
++    CF_ANSIONLY = 1024U,
++    CF_BOTH = 3U,
++    CF_EFFECTS = 256U,
++    CF_ENABLEHOOK = 8U,
++    CF_ENABLETEMPLATE = 16U,
++    CF_ENABLETEMPLATEHANDLE = 32U,
++    CF_FIXEDPITCHONLY = 16384U,
++    CF_FORCEFONTEXIST = 65536U,
++    CF_INACTIVEFONTS = 33554432U,
++    CF_INITTOLOGFONTSTRUCT = 64U,
++    CF_LIMITSIZE = 8192U,
++    CF_NOOEMFONTS = 2048U,
++    CF_NOFACESEL = 524288U,
++    CF_NOSCRIPTSEL = 8388608U,
++    CF_NOSIMULATIONS = 4096U,
++    CF_NOSIZESEL = 2097152U,
++    CF_NOSTYLESEL = 1048576U,
++    CF_NOVECTORFONTS = 2048U,
++    CF_NOVERTFONTS = 16777216U,
++    CF_PRINTERFONTS = 2U,
++    CF_SCALABLEONLY = 131072U,
++    CF_SCREENFONTS = 1U,
++    CF_SCRIPTSONLY = 1024U,
++    CF_SELECTSCRIPT = 4194304U,
++    CF_SHOWHELP = 4U,
++    CF_TTONLY = 262144U,
++    CF_USESTYLE = 128U,
++    CF_WYSIWYG = 32768U,
++};
++#pragma pop_macro("CF_WYSIWYG")
++#pragma pop_macro("CF_USESTYLE")
++#pragma pop_macro("CF_TTONLY")
++#pragma pop_macro("CF_SHOWHELP")
++#pragma pop_macro("CF_SELECTSCRIPT")
++#pragma pop_macro("CF_SCRIPTSONLY")
++#pragma pop_macro("CF_SCREENFONTS")
++#pragma pop_macro("CF_SCALABLEONLY")
++#pragma pop_macro("CF_PRINTERFONTS")
++#pragma pop_macro("CF_NOVERTFONTS")
++#pragma pop_macro("CF_NOVECTORFONTS")
++#pragma pop_macro("CF_NOSTYLESEL")
++#pragma pop_macro("CF_NOSIZESEL")
++#pragma pop_macro("CF_NOSIMULATIONS")
++#pragma pop_macro("CF_NOSCRIPTSEL")
++#pragma pop_macro("CF_NOFACESEL")
++#pragma pop_macro("CF_NOOEMFONTS")
++#pragma pop_macro("CF_LIMITSIZE")
++#pragma pop_macro("CF_INITTOLOGFONTSTRUCT")
++#pragma pop_macro("CF_INACTIVEFONTS")
++#pragma pop_macro("CF_FORCEFONTEXIST")
++#pragma pop_macro("CF_FIXEDPITCHONLY")
++#pragma pop_macro("CF_ENABLETEMPLATEHANDLE")
++#pragma pop_macro("CF_ENABLETEMPLATE")
++#pragma pop_macro("CF_ENABLEHOOK")
++#pragma pop_macro("CF_EFFECTS")
++#pragma pop_macro("CF_BOTH")
++#pragma pop_macro("CF_ANSIONLY")
++#pragma pop_macro("CF_APPLY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("FR_DOWN")
++#undef FR_DOWN
++#pragma push_macro("FR_WHOLEWORD")
++#undef FR_WHOLEWORD
++#pragma push_macro("FR_MATCHCASE")
++#undef FR_MATCHCASE
++#pragma push_macro("FR_FINDNEXT")
++#undef FR_FINDNEXT
++#pragma push_macro("FR_REPLACE")
++#undef FR_REPLACE
++#pragma push_macro("FR_REPLACEALL")
++#undef FR_REPLACEALL
++#pragma push_macro("FR_DIALOGTERM")
++#undef FR_DIALOGTERM
++#pragma push_macro("FR_SHOWHELP")
++#undef FR_SHOWHELP
++#pragma push_macro("FR_ENABLEHOOK")
++#undef FR_ENABLEHOOK
++#pragma push_macro("FR_ENABLETEMPLATE")
++#undef FR_ENABLETEMPLATE
++#pragma push_macro("FR_NOUPDOWN")
++#undef FR_NOUPDOWN
++#pragma push_macro("FR_NOMATCHCASE")
++#undef FR_NOMATCHCASE
++#pragma push_macro("FR_NOWHOLEWORD")
++#undef FR_NOWHOLEWORD
++#pragma push_macro("FR_ENABLETEMPLATEHANDLE")
++#undef FR_ENABLETEMPLATEHANDLE
++#pragma push_macro("FR_HIDEUPDOWN")
++#undef FR_HIDEUPDOWN
++#pragma push_macro("FR_HIDEMATCHCASE")
++#undef FR_HIDEMATCHCASE
++#pragma push_macro("FR_HIDEWHOLEWORD")
++#undef FR_HIDEWHOLEWORD
++#pragma push_macro("FR_RAW")
++#undef FR_RAW
++#pragma push_macro("FR_SHOWWRAPAROUND")
++#undef FR_SHOWWRAPAROUND
++#pragma push_macro("FR_NOWRAPAROUND")
++#undef FR_NOWRAPAROUND
++#pragma push_macro("FR_WRAPAROUND")
++#undef FR_WRAPAROUND
++#pragma push_macro("FR_MATCHDIAC")
++#undef FR_MATCHDIAC
++#pragma push_macro("FR_MATCHKASHIDA")
++#undef FR_MATCHKASHIDA
++#pragma push_macro("FR_MATCHALEFHAMZA")
++#undef FR_MATCHALEFHAMZA
++enum [[clang::flag_enum]] FINDREPLACE_FLAGS : unsigned int
++{
++    FR_DOWN = 1U,
++    FR_WHOLEWORD = 2U,
++    FR_MATCHCASE = 4U,
++    FR_FINDNEXT = 8U,
++    FR_REPLACE = 16U,
++    FR_REPLACEALL = 32U,
++    FR_DIALOGTERM = 64U,
++    FR_SHOWHELP = 128U,
++    FR_ENABLEHOOK = 256U,
++    FR_ENABLETEMPLATE = 512U,
++    FR_NOUPDOWN = 1024U,
++    FR_NOMATCHCASE = 2048U,
++    FR_NOWHOLEWORD = 4096U,
++    FR_ENABLETEMPLATEHANDLE = 8192U,
++    FR_HIDEUPDOWN = 16384U,
++    FR_HIDEMATCHCASE = 32768U,
++    FR_HIDEWHOLEWORD = 65536U,
++    FR_RAW = 131072U,
++    FR_SHOWWRAPAROUND = 262144U,
++    FR_NOWRAPAROUND = 524288U,
++    FR_WRAPAROUND = 1048576U,
++    FR_MATCHDIAC = 536870912U,
++    FR_MATCHKASHIDA = 1073741824U,
++    FR_MATCHALEFHAMZA = 2147483648U,
++};
++#pragma pop_macro("FR_MATCHALEFHAMZA")
++#pragma pop_macro("FR_MATCHKASHIDA")
++#pragma pop_macro("FR_MATCHDIAC")
++#pragma pop_macro("FR_WRAPAROUND")
++#pragma pop_macro("FR_NOWRAPAROUND")
++#pragma pop_macro("FR_SHOWWRAPAROUND")
++#pragma pop_macro("FR_RAW")
++#pragma pop_macro("FR_HIDEWHOLEWORD")
++#pragma pop_macro("FR_HIDEMATCHCASE")
++#pragma pop_macro("FR_HIDEUPDOWN")
++#pragma pop_macro("FR_ENABLETEMPLATEHANDLE")
++#pragma pop_macro("FR_NOWHOLEWORD")
++#pragma pop_macro("FR_NOMATCHCASE")
++#pragma pop_macro("FR_NOUPDOWN")
++#pragma pop_macro("FR_ENABLETEMPLATE")
++#pragma pop_macro("FR_ENABLEHOOK")
++#pragma pop_macro("FR_SHOWHELP")
++#pragma pop_macro("FR_DIALOGTERM")
++#pragma pop_macro("FR_REPLACEALL")
++#pragma pop_macro("FR_REPLACE")
++#pragma pop_macro("FR_FINDNEXT")
++#pragma pop_macro("FR_MATCHCASE")
++#pragma pop_macro("FR_WHOLEWORD")
++#pragma pop_macro("FR_DOWN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PD_ALLPAGES")
++#undef PD_ALLPAGES
++#pragma push_macro("PD_COLLATE")
++#undef PD_COLLATE
++#pragma push_macro("PD_CURRENTPAGE")
++#undef PD_CURRENTPAGE
++#pragma push_macro("PD_DISABLEPRINTTOFILE")
++#undef PD_DISABLEPRINTTOFILE
++#pragma push_macro("PD_ENABLEPRINTTEMPLATE")
++#undef PD_ENABLEPRINTTEMPLATE
++#pragma push_macro("PD_ENABLEPRINTTEMPLATEHANDLE")
++#undef PD_ENABLEPRINTTEMPLATEHANDLE
++#pragma push_macro("PD_EXCLUSIONFLAGS")
++#undef PD_EXCLUSIONFLAGS
++#pragma push_macro("PD_HIDEPRINTTOFILE")
++#undef PD_HIDEPRINTTOFILE
++#pragma push_macro("PD_NOCURRENTPAGE")
++#undef PD_NOCURRENTPAGE
++#pragma push_macro("PD_NOPAGENUMS")
++#undef PD_NOPAGENUMS
++#pragma push_macro("PD_NOSELECTION")
++#undef PD_NOSELECTION
++#pragma push_macro("PD_NOWARNING")
++#undef PD_NOWARNING
++#pragma push_macro("PD_PAGENUMS")
++#undef PD_PAGENUMS
++#pragma push_macro("PD_PRINTTOFILE")
++#undef PD_PRINTTOFILE
++#pragma push_macro("PD_RETURNDC")
++#undef PD_RETURNDC
++#pragma push_macro("PD_RETURNDEFAULT")
++#undef PD_RETURNDEFAULT
++#pragma push_macro("PD_RETURNIC")
++#undef PD_RETURNIC
++#pragma push_macro("PD_SELECTION")
++#undef PD_SELECTION
++#pragma push_macro("PD_USEDEVMODECOPIES")
++#undef PD_USEDEVMODECOPIES
++#pragma push_macro("PD_USEDEVMODECOPIESANDCOLLATE")
++#undef PD_USEDEVMODECOPIESANDCOLLATE
++#pragma push_macro("PD_USELARGETEMPLATE")
++#undef PD_USELARGETEMPLATE
++#pragma push_macro("PD_ENABLEPRINTHOOK")
++#undef PD_ENABLEPRINTHOOK
++#pragma push_macro("PD_ENABLESETUPHOOK")
++#undef PD_ENABLESETUPHOOK
++#pragma push_macro("PD_ENABLESETUPTEMPLATE")
++#undef PD_ENABLESETUPTEMPLATE
++#pragma push_macro("PD_ENABLESETUPTEMPLATEHANDLE")
++#undef PD_ENABLESETUPTEMPLATEHANDLE
++#pragma push_macro("PD_NONETWORKBUTTON")
++#undef PD_NONETWORKBUTTON
++#pragma push_macro("PD_PRINTSETUP")
++#undef PD_PRINTSETUP
++#pragma push_macro("PD_SHOWHELP")
++#undef PD_SHOWHELP
++enum [[clang::flag_enum]] PRINTDLGEX_FLAGS : unsigned int
++{
++    PD_ALLPAGES = 0U,
++    PD_COLLATE = 16U,
++    PD_CURRENTPAGE = 4194304U,
++    PD_DISABLEPRINTTOFILE = 524288U,
++    PD_ENABLEPRINTTEMPLATE = 16384U,
++    PD_ENABLEPRINTTEMPLATEHANDLE = 65536U,
++    PD_EXCLUSIONFLAGS = 16777216U,
++    PD_HIDEPRINTTOFILE = 1048576U,
++    PD_NOCURRENTPAGE = 8388608U,
++    PD_NOPAGENUMS = 8U,
++    PD_NOSELECTION = 4U,
++    PD_NOWARNING = 128U,
++    PD_PAGENUMS = 2U,
++    PD_PRINTTOFILE = 32U,
++    PD_RETURNDC = 256U,
++    PD_RETURNDEFAULT = 1024U,
++    PD_RETURNIC = 512U,
++    PD_SELECTION = 1U,
++    PD_USEDEVMODECOPIES = 262144U,
++    PD_USEDEVMODECOPIESANDCOLLATE = 262144U,
++    PD_USELARGETEMPLATE = 268435456U,
++    PD_ENABLEPRINTHOOK = 4096U,
++    PD_ENABLESETUPHOOK = 8192U,
++    PD_ENABLESETUPTEMPLATE = 32768U,
++    PD_ENABLESETUPTEMPLATEHANDLE = 131072U,
++    PD_NONETWORKBUTTON = 2097152U,
++    PD_PRINTSETUP = 64U,
++    PD_SHOWHELP = 2048U,
++};
++#pragma pop_macro("PD_SHOWHELP")
++#pragma pop_macro("PD_PRINTSETUP")
++#pragma pop_macro("PD_NONETWORKBUTTON")
++#pragma pop_macro("PD_ENABLESETUPTEMPLATEHANDLE")
++#pragma pop_macro("PD_ENABLESETUPTEMPLATE")
++#pragma pop_macro("PD_ENABLESETUPHOOK")
++#pragma pop_macro("PD_ENABLEPRINTHOOK")
++#pragma pop_macro("PD_USELARGETEMPLATE")
++#pragma pop_macro("PD_USEDEVMODECOPIESANDCOLLATE")
++#pragma pop_macro("PD_USEDEVMODECOPIES")
++#pragma pop_macro("PD_SELECTION")
++#pragma pop_macro("PD_RETURNIC")
++#pragma pop_macro("PD_RETURNDEFAULT")
++#pragma pop_macro("PD_RETURNDC")
++#pragma pop_macro("PD_PRINTTOFILE")
++#pragma pop_macro("PD_PAGENUMS")
++#pragma pop_macro("PD_NOWARNING")
++#pragma pop_macro("PD_NOSELECTION")
++#pragma pop_macro("PD_NOPAGENUMS")
++#pragma pop_macro("PD_NOCURRENTPAGE")
++#pragma pop_macro("PD_HIDEPRINTTOFILE")
++#pragma pop_macro("PD_EXCLUSIONFLAGS")
++#pragma pop_macro("PD_ENABLEPRINTTEMPLATEHANDLE")
++#pragma pop_macro("PD_ENABLEPRINTTEMPLATE")
++#pragma pop_macro("PD_DISABLEPRINTTOFILE")
++#pragma pop_macro("PD_CURRENTPAGE")
++#pragma pop_macro("PD_COLLATE")
++#pragma pop_macro("PD_ALLPAGES")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("BOLD_FONTTYPE")
++#undef BOLD_FONTTYPE
++#pragma push_macro("ITALIC_FONTTYPE")
++#undef ITALIC_FONTTYPE
++#pragma push_macro("PRINTER_FONTTYPE")
++#undef PRINTER_FONTTYPE
++#pragma push_macro("REGULAR_FONTTYPE")
++#undef REGULAR_FONTTYPE
++#pragma push_macro("SCREEN_FONTTYPE")
++#undef SCREEN_FONTTYPE
++#pragma push_macro("SIMULATED_FONTTYPE")
++#undef SIMULATED_FONTTYPE
++enum [[clang::flag_enum]] CHOOSEFONT_FONT_TYPE : unsigned short
++{
++    BOLD_FONTTYPE = 256,
++    ITALIC_FONTTYPE = 512,
++    PRINTER_FONTTYPE = 16384,
++    REGULAR_FONTTYPE = 1024,
++    SCREEN_FONTTYPE = 8192,
++    SIMULATED_FONTTYPE = 32768,
++};
++#pragma pop_macro("SIMULATED_FONTTYPE")
++#pragma pop_macro("SCREEN_FONTTYPE")
++#pragma pop_macro("REGULAR_FONTTYPE")
++#pragma pop_macro("PRINTER_FONTTYPE")
++#pragma pop_macro("ITALIC_FONTTYPE")
++#pragma pop_macro("BOLD_FONTTYPE")
++#endif
++
+ #endif
+ 

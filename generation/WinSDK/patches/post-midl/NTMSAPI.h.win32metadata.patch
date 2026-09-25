@@ -1,0 +1,272 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
+index 9b3376d2b1..392a6c5256 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
+@@ -25,6 +25,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -92,7 +93,7 @@ typedef GUID* LPNTMS_GUID;
+ // database objects.  Do NOT modify without also modifying the object
+ // metadata table in dbobmeta.cpp
+ 
+-enum NtmsObjectsTypes {
++enum   NtmsObjectsTypes {
+     NTMS_UNKNOWN                    = 0,
+     NTMS_OBJECT,
+     NTMS_CHANGER,
+@@ -466,7 +467,7 @@ enum NtmsDriveState {
+ 
+ typedef struct _NTMS_DRIVEINFORMATIONA {
+     DWORD       Number;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsDriveState) DWORD       State;
+     NTMS_GUID   DriveType;
+     CHAR        szDeviceName[NTMS_DEVICENAME_LENGTH];
+     CHAR        szSerialNumber[NTMS_SERIALNUMBER_LENGTH];
+@@ -485,7 +486,7 @@ typedef struct _NTMS_DRIVEINFORMATIONA {
+ 
+ typedef struct _NTMS_DRIVEINFORMATIONW {
+     DWORD       Number;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsDriveState) DWORD       State;
+     NTMS_GUID   DriveType;
+     WCHAR       szDeviceName[NTMS_DEVICENAME_LENGTH];
+     WCHAR       szSerialNumber[NTMS_SERIALNUMBER_LENGTH];
+@@ -529,12 +530,12 @@ enum NtmsInventoryMethod {
+ };
+ 
+ typedef struct _NTMS_LIBRARYINFORMATION {
+-    DWORD       LibraryType;
++    _Win32_AssociatedEnum_(NtmsLibraryType) DWORD       LibraryType;
+     NTMS_GUID   CleanerSlot;
+     NTMS_GUID   CleanerSlotDefault;
+     BOOL        LibrarySupportsDriveCleaning;
+     BOOL        BarCodeReaderInstalled;
+-    DWORD       InventoryMethod;
++    _Win32_AssociatedEnum_(NtmsInventoryMethod) DWORD       InventoryMethod;
+     DWORD       dwCleanerUsesRemaining;
+     DWORD       FirstDriveNumber;
+     DWORD       dwNumberOfDrives;
+@@ -551,7 +552,7 @@ typedef struct _NTMS_LIBRARYINFORMATION {
+     DWORD       dwNumberOfLibRequests;
+     GUID        Reserved;
+     BOOL        AutoRecovery;
+-    DWORD       dwFlags;
++    _Win32_AssociatedEnum_(NtmsLibraryFlags) DWORD       dwFlags;
+ } NTMS_LIBRARYINFORMATION;
+ 
+ #ifdef UNICODE
+@@ -610,7 +611,7 @@ enum NtmsDoorState {
+ 
+ typedef struct _NTMS_IEDOORINFORMATION {
+     DWORD       Number;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsDoorState) DWORD       State;
+     WORD        MaxOpenSecs;
+     NTMS_GUID   Library;
+ } NTMS_IEDOORINFORMATION;
+@@ -629,8 +630,8 @@ enum NtmsPortContent {
+ 
+ typedef struct _NTMS_IEPORTINFORMATION {
+     DWORD       Number;
+-    DWORD       Content;
+-    DWORD       Position;
++    _Win32_AssociatedEnum_(NtmsPortContent) DWORD       Content;
++    _Win32_AssociatedEnum_(NtmsPortPosition) DWORD       Position;
+     WORD        MaxExtendSecs;
+     NTMS_GUID   Library;
+ } NTMS_IEPORTINFORMATION;
+@@ -667,9 +668,9 @@ typedef struct _NTMS_PMIDINFORMATIONA {
+     NTMS_GUID   MediaType;
+     NTMS_GUID   HomeSlot;                       // home slot for online media
+     CHAR        szBarCode[NTMS_BARCODE_LENGTH]; // bar code string
+-    DWORD       BarCodeState;                   // current state of the bar code
++    _Win32_AssociatedEnum_(NtmsBarCodeState) DWORD       BarCodeState;                   // current state of the bar code
+     CHAR        szSequenceNumber[NTMS_SEQUENCE_LENGTH];
+-    DWORD       MediaState;                     // current media state
++    _Win32_AssociatedEnum_(NtmsMediaState) DWORD       MediaState;                     // current media state
+     DWORD       dwNumberOfPartitions;
+     DWORD       dwMediaTypeCode;
+     DWORD       dwDensityCode;
+@@ -684,9 +685,9 @@ typedef struct _NTMS_PMIDINFORMATIONW {
+     NTMS_GUID   MediaType;
+     NTMS_GUID   HomeSlot;                       // home slot for online media
+     WCHAR       szBarCode[NTMS_BARCODE_LENGTH]; // bar code string
+-    DWORD       BarCodeState;                   // current state of the bar code
++    _Win32_AssociatedEnum_(NtmsBarCodeState) DWORD       BarCodeState;                   // current state of the bar code
+     WCHAR       szSequenceNumber[NTMS_SEQUENCE_LENGTH];
+-    DWORD       MediaState;                     // current media state
++    _Win32_AssociatedEnum_(NtmsMediaState) DWORD       MediaState;                     // current media state
+     DWORD       dwNumberOfPartitions;
+     DWORD       dwMediaTypeCode;
+     DWORD       dwDensityCode;
+@@ -725,7 +726,7 @@ enum NtmsPartitionState {
+ typedef struct _NTMS_PARTITIONINFORMATIONA {
+     NTMS_GUID   PhysicalMedia;
+     NTMS_GUID   LogicalMedia;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsPartitionState) DWORD       State;
+     WORD        Side;
+     DWORD       dwOmidLabelIdLength;    // binary id
+     BYTE        OmidLabelId[NTMS_OMIDLABELID_LENGTH];
+@@ -739,7 +740,7 @@ typedef struct _NTMS_PARTITIONINFORMATIONA {
+ typedef struct _NTMS_PARTITIONINFORMATIONW {
+     NTMS_GUID   PhysicalMedia;
+     NTMS_GUID   LogicalMedia;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsPartitionState) DWORD       State;
+     WORD        Side;
+     DWORD       dwOmidLabelIdLength;    // binary id
+     BYTE        OmidLabelId[NTMS_OMIDLABELID_LENGTH];
+@@ -788,8 +789,8 @@ enum NtmsReadWriteCharacteristics {
+ typedef struct _NTMS_MEDIATYPEINFORMATION {
+     DWORD       MediaType;      // MediaTypeCodes
+     DWORD       NumberOfSides;
+-    DWORD       ReadWriteCharacteristics;
+-    DWORD       DeviceType;
++    _Win32_AssociatedEnum_(NtmsReadWriteCharacteristics) DWORD       ReadWriteCharacteristics;
++    _Win32_AssociatedEnum_(FILE_DEVICE_TYPE) DWORD       DeviceType;
+ } NTMS_MEDIATYPEINFORMATION;
+ 
+ #ifdef UNICODE
+@@ -804,14 +805,14 @@ typedef struct _NTMS_DRIVETYPEINFORMATIONA {
+     CHAR        szVendor[NTMS_VENDORNAME_LENGTH];
+     CHAR        szProduct[NTMS_PRODUCTNAME_LENGTH];
+     DWORD       NumberOfHeads;
+-    DWORD       DeviceType;
++    _Win32_AssociatedEnum_(FILE_DEVICE_TYPE) DWORD       DeviceType;
+ } NTMS_DRIVETYPEINFORMATIONA;
+ 
+ typedef struct _NTMS_DRIVETYPEINFORMATIONW {
+     WCHAR       szVendor[NTMS_VENDORNAME_LENGTH];
+     WCHAR       szProduct[NTMS_PRODUCTNAME_LENGTH];
+     DWORD       NumberOfHeads;
+-    DWORD       DeviceType;
++    _Win32_AssociatedEnum_(FILE_DEVICE_TYPE) DWORD       DeviceType;
+ } NTMS_DRIVETYPEINFORMATIONW;
+ 
+ #ifdef UNICODE
+@@ -887,9 +888,9 @@ enum NtmsLmState {
+ #endif
+ 
+ typedef struct _NTMS_LIBREQUESTINFORMATIONA {
+-    DWORD       OperationCode;
++    _Win32_AssociatedEnum_(NtmsLmOperation) DWORD       OperationCode;
+     DWORD       OperationOption;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsLmState) DWORD       State;
+     NTMS_GUID   PartitionId;
+     NTMS_GUID   DriveId;
+     NTMS_GUID   PhysMediaId;
+@@ -906,9 +907,9 @@ typedef struct _NTMS_LIBREQUESTINFORMATIONA {
+ } NTMS_LIBREQUESTINFORMATIONA;
+ 
+ typedef struct _NTMS_LIBREQUESTINFORMATIONW {
+-    DWORD       OperationCode;
++    _Win32_AssociatedEnum_(NtmsLmOperation) DWORD       OperationCode;
+     DWORD       OperationOption;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsLmState) DWORD       State;
+     NTMS_GUID   PartitionId;
+     NTMS_GUID   DriveId;
+     NTMS_GUID   PhysMediaId;
+@@ -951,13 +952,13 @@ enum NtmsOpreqState {
+ #endif
+ 
+ typedef struct _NTMS_OPREQUESTINFORMATIONA {
+-    DWORD       Request;
++    _Win32_AssociatedEnum_(NtmsOpreqCommand) DWORD       Request;
+     SYSTEMTIME  Submitted;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsOpreqState) DWORD       State;
+     CHAR        szMessage[NTMS_MESSAGE_LENGTH];
+-    DWORD       Arg1Type;
++    _Win32_AssociatedEnum_(NtmsObjectsTypes) DWORD       Arg1Type;
+     NTMS_GUID   Arg1;
+-    DWORD       Arg2Type;
++    _Win32_AssociatedEnum_(NtmsObjectsTypes) DWORD       Arg2Type;
+     NTMS_GUID   Arg2;
+     CHAR        szApplication[NTMS_APPLICATIONNAME_LENGTH];
+     CHAR        szUser[NTMS_USERNAME_LENGTH];
+@@ -965,13 +966,13 @@ typedef struct _NTMS_OPREQUESTINFORMATIONA {
+ } NTMS_OPREQUESTINFORMATIONA;
+ 
+ typedef struct _NTMS_OPREQUESTINFORMATIONW {
+-    DWORD       Request;
++    _Win32_AssociatedEnum_(NtmsOpreqCommand) DWORD       Request;
+     SYSTEMTIME  Submitted;
+-    DWORD       State;
++    _Win32_AssociatedEnum_(NtmsOpreqState) DWORD       State;
+     WCHAR       szMessage[NTMS_MESSAGE_LENGTH];
+-    DWORD       Arg1Type;
++    _Win32_AssociatedEnum_(NtmsObjectsTypes) DWORD       Arg1Type;
+     NTMS_GUID   Arg1;
+-    DWORD       Arg2Type;
++    _Win32_AssociatedEnum_(NtmsObjectsTypes) DWORD       Arg2Type;
+     NTMS_GUID   Arg2;
+     WCHAR       szApplication[NTMS_APPLICATIONNAME_LENGTH];
+     WCHAR       szUser[NTMS_USERNAME_LENGTH];
+@@ -1027,12 +1028,12 @@ enum NtmsOperationalState {
+ 
+ typedef struct _NTMS_OBJECTINFORMATIONA {
+     DWORD       dwSize;
+-    DWORD       dwType;
++    _Win32_AssociatedEnum_(NtmsObjectsTypes) DWORD       dwType;
+     SYSTEMTIME  Created;
+     SYSTEMTIME  Modified;
+     NTMS_GUID   ObjectGuid;
+     BOOL        Enabled;
+-    DWORD       dwOperationalState;
++    _Win32_AssociatedEnum_(NtmsOperationalState) DWORD       dwOperationalState;
+     CHAR        szName[NTMS_OBJECTNAME_LENGTH];
+     CHAR        szDescription[NTMS_DESCRIPTION_LENGTH];
+ #ifdef MIDL_PASS
+@@ -1079,12 +1080,12 @@ typedef struct _NTMS_OBJECTINFORMATIONA {
+ 
+ typedef struct _NTMS_OBJECTINFORMATIONW {
+     DWORD       dwSize;
+-    DWORD       dwType;
++    _Win32_AssociatedEnum_(NtmsObjectsTypes) DWORD       dwType;
+     SYSTEMTIME  Created;
+     SYSTEMTIME  Modified;
+     NTMS_GUID   ObjectGuid;
+     BOOL        Enabled;
+-    DWORD       dwOperationalState;
++    _Win32_AssociatedEnum_(NtmsOperationalState) DWORD       dwOperationalState;
+     WCHAR       szName[NTMS_OBJECTNAME_LENGTH];
+     WCHAR       szDescription[NTMS_DESCRIPTION_LENGTH];
+ #ifdef MIDL_PASS
+@@ -1835,7 +1836,7 @@ enum NtmsNotificationOperations {
+ 
+ // object notification
+ typedef struct _NTMS_NOTIFICATIONINFORMATION {
+-    DWORD dwOperation;
++    _Win32_AssociatedEnum_(NtmsNotificationOperations) DWORD dwOperation;
+     NTMS_GUID ObjectId;
+ } NTMS_NOTIFICATIONINFORMATION, *LPNTMS_NOTIFICATIONINFORMATION;
+ 
+@@ -1941,4 +1942,19 @@ GetVolumesFromDriveA(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("NTMS_OMID_TYPE_FILESYSTEM_INFO")
++#undef NTMS_OMID_TYPE_FILESYSTEM_INFO
++#pragma push_macro("NTMS_OMID_TYPE_RAW_LABEL")
++#undef NTMS_OMID_TYPE_RAW_LABEL
++enum NTMS_OMID_TYPE : unsigned int
++{
++    NTMS_OMID_TYPE_FILESYSTEM_INFO = 2U,
++    NTMS_OMID_TYPE_RAW_LABEL = 1U,
++};
++#pragma pop_macro("NTMS_OMID_TYPE_RAW_LABEL")
++#pragma pop_macro("NTMS_OMID_TYPE_FILESYSTEM_INFO")
++#endif
++
+ #endif // _INCL_NTMSAPI_H_

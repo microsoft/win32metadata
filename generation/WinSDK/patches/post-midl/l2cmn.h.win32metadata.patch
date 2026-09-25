@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/l2cmn.h b/generation/WinSDK/RecompiledIdlHeaders/um/l2cmn.h
+index e66b6aeda6..4027c72c9d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/l2cmn.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/l2cmn.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2004 Microsoft Corporation
+@@ -89,7 +90,7 @@ extern "C" {
+ // The NotificationSource signifies the type above 
+ // and NotificationCode is one of the enum values 
+ typedef struct _L2_NOTIFICATION_DATA {
+-    DWORD NotificationSource;
++    _Win32_AssociatedEnum_(WLAN_NOTIFICATION_SOURCES) DWORD NotificationSource;
+     DWORD NotificationCode;
+     GUID InterfaceGuid;
+     DWORD dwDataSize;

@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xprtdefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/xprtdefs.h
+index e25a9252db..8bbe87dc65 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xprtdefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xprtdefs.h
+@@ -746,6 +746,25 @@ OUR_GUID_ENTRY(MSTapeDeviceGUID,
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("ED_DEVCAP_TIMECODE_READ")
++#undef ED_DEVCAP_TIMECODE_READ
++#pragma push_macro("ED_DEVCAP_ATN_READ")
++#undef ED_DEVCAP_ATN_READ
++#pragma push_macro("ED_DEVCAP_RTC_READ")
++#undef ED_DEVCAP_RTC_READ
++enum [[clang::flag_enum]] TIMECODE_SAMPLE_FLAGS : unsigned int
++{
++    ED_DEVCAP_TIMECODE_READ = 4121U,
++    ED_DEVCAP_ATN_READ = 5047U,
++    ED_DEVCAP_RTC_READ = 5050U,
++};
++#pragma pop_macro("ED_DEVCAP_RTC_READ")
++#pragma pop_macro("ED_DEVCAP_ATN_READ")
++#pragma pop_macro("ED_DEVCAP_TIMECODE_READ")
++#endif
++
+ #endif // __XPRTDEFS__
+ 
+ // eof XPrtDefs.h

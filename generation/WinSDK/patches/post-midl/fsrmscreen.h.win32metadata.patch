@@ -1,0 +1,164 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmscreen.h b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmscreen.h
+index e9f882a297..4ef02cd236 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmscreen.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmscreen.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -179,13 +180,13 @@ EXTERN_C const IID IID_IFsrmFileGroup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8dd04909-0e34-4d55-afaa-89e1f1a1bbb9")
++    MIDL_INTERFACE("8dd04909-0e34-4d55-afaa-89e1f1a1bbb9") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileGroup : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -435,7 +436,7 @@ EXTERN_C const IID IID_IFsrmFileGroupImported;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ad55f10b-5f11-4be7-94ef-d9ee2e470ded")
++    MIDL_INTERFACE("ad55f10b-5f11-4be7-94ef-d9ee2e470ded") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileGroupImported : public IFsrmFileGroup
+     {
+     public:
+@@ -694,7 +695,7 @@ EXTERN_C const IID IID_IFsrmFileGroupManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("426677d5-018c-485c-8a51-20b86d00bdc4")
++    MIDL_INTERFACE("426677d5-018c-485c-8a51-20b86d00bdc4") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileGroupManager : public IDispatch
+     {
+     public:
+@@ -718,7 +719,7 @@ EXTERN_C const IID IID_IFsrmFileGroupManager;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  VARIANT *fileGroupNamesArray,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *serializedFileGroups) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *serializedFileGroups) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportFileGroups( 
+             /* [annotation][in] */ 
+@@ -915,7 +916,7 @@ EXTERN_C const IID IID_IFsrmFileScreenBase;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f3637e80-5b22-4a2b-a637-bbb642b41cfc")
++    MIDL_INTERFACE("f3637e80-5b22-4a2b-a637-bbb642b41cfc") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreenBase : public IFsrmObject
+     {
+     public:
+@@ -1175,17 +1176,17 @@ EXTERN_C const IID IID_IFsrmFileScreen;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5f6325d3-ce88-4733-84c1-2d6aefc5ea07")
++    MIDL_INTERFACE("5f6325d3-ce88-4733-84c1-2d6aefc5ea07") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreen : public IFsrmFileScreenBase
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceTemplateName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *fileScreenTemplateName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *fileScreenTemplateName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MatchesSourceTemplate( 
+             /* [annotation][retval][out] */ 
+@@ -1193,11 +1194,11 @@ EXTERN_C const IID IID_IFsrmFileScreen;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSid( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userSid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userSid) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserAccount( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userAccount) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userAccount) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ApplyTemplate( 
+             /* [annotation][in] */ 
+@@ -1488,13 +1489,13 @@ EXTERN_C const IID IID_IFsrmFileScreenException;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bee7ce02-df77-4515-9389-78f01c5afc1a")
++    MIDL_INTERFACE("bee7ce02-df77-4515-9389-78f01c5afc1a") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreenException : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AllowedFileGroups( 
+             /* [annotation][retval][out] */ 
+@@ -1705,7 +1706,7 @@ EXTERN_C const IID IID_IFsrmFileScreenManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ff4fa04e-5a94-4bda-a3a0-d5b4d3c52eba")
++    MIDL_INTERFACE("ff4fa04e-5a94-4bda-a3a0-d5b4d3c52eba") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreenManager : public IDispatch
+     {
+     public:
+@@ -1990,13 +1991,13 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("205bebf8-dd93-452a-95a6-32b566b35828")
++    MIDL_INTERFACE("205bebf8-dd93-452a-95a6-32b566b35828") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreenTemplate : public IFsrmFileScreenBase
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -2285,7 +2286,7 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateImported;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e1010359-3e5d-4ecd-9fe4-ef48622fdf30")
++    MIDL_INTERFACE("e1010359-3e5d-4ecd-9fe4-ef48622fdf30") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreenTemplateImported : public IFsrmFileScreenTemplate
+     {
+     public:
+@@ -2587,7 +2588,7 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cfe36cba-1949-4e74-a14f-f1d580ceaf13")
++    MIDL_INTERFACE("cfe36cba-1949-4e74-a14f-f1d580ceaf13") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileScreenTemplateManager : public IDispatch
+     {
+     public:
+@@ -2611,7 +2612,7 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateManager;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  VARIANT *fileScreenTemplateNamesArray,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *serializedFileScreenTemplates) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *serializedFileScreenTemplates) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportTemplates( 
+             /* [annotation][in] */ 

@@ -1,0 +1,61 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h b/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
+index 5ccb585fc2..f856906848 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WMIUtils.h
+@@ -113,6 +113,7 @@ extern "C"{
+ /*                                                                             */
+ /*******************************************************************************/
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family or WinMgmt Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT)
+ 
+@@ -192,8 +193,8 @@ EXTERN_C const IID IID_IWbemPathKeyList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9AE62877-7544-4bb0-AA26-A13824659ED6")
+-    IWbemPathKeyList : public IUnknown
++    MIDL_INTERFACE("9AE62877-7544-4bb0-AA26-A13824659ED6") _Windows_SupportedOS_WindowsVista_ 
++      IWbemPathKeyList : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -408,7 +409,7 @@ EXTERN_C const IID IID_IWbemPathKeyList;
+         END_INTERFACE
+     } IWbemPathKeyListVtbl;
+ 
+-    interface IWbemPathKeyList
++    interface _Windows_SupportedOS_WindowsVista_ IWbemPathKeyList
+     {
+         CONST_VTBL struct IWbemPathKeyListVtbl *lpVtbl;
+     };
+@@ -480,8 +481,8 @@ EXTERN_C const IID IID_IWbemPath;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3BC15AF2-736C-477e-9E51-238AF8667DCC")
+-    IWbemPath : public IUnknown
++    MIDL_INTERFACE("3BC15AF2-736C-477e-9E51-238AF8667DCC") _Windows_SupportedOS_WindowsVista_ 
++      IWbemPath : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetText( 
+@@ -844,7 +845,7 @@ EXTERN_C const IID IID_IWbemPath;
+         END_INTERFACE
+     } IWbemPathVtbl;
+ 
+-    interface IWbemPath
++    interface _Windows_SupportedOS_WindowsVista_ IWbemPath
+     {
+         CONST_VTBL struct IWbemPathVtbl *lpVtbl;
+     };
+@@ -972,7 +973,7 @@ EXTERN_C const IID IID_IWbemQuery;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81166f58-dd98-11d3-a120-00105a1f515a")
++    MIDL_INTERFACE("81166f58-dd98-11d3-a120-00105a1f515a") _Windows_SupportedOS_WindowsVista_ 
+     IWbemQuery : public IUnknown
+     {
+     public:

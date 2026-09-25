@@ -1,0 +1,122 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h b/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
+index c6ad9cf7d8..3ea1d7a972 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/stringapiset.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <winnls.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -27,21 +28,25 @@ extern "C" {
+ 
+ #if (WINVER >= 0x0600)
+ 
++_Win32_AssociatedEnum_(COMPARESTRING_RESULT) _Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+ CompareStringEx(
+     _In_opt_ LPCWSTR lpLocaleName,
+-    _In_ DWORD dwCmpFlags,
++    _Win32_AssociatedEnum_(COMPARE_STRING_FLAGS) _In_ DWORD dwCmpFlags,
+     _In_NLS_string_(cchCount1) LPCWCH lpString1,
+     _In_ int cchCount1,
+     _In_NLS_string_(cchCount2) LPCWCH lpString2,
+     _In_ int cchCount2,
+-    _Reserved_ LPNLSVERSIONINFO lpVersionInformation,
+-    _Reserved_ LPVOID lpReserved,
+-    _Reserved_ LPARAM lParam
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPNLSVERSIONINFO lpVersionInformation,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPARAM lParam
+     );
+ 
++_Win32_AssociatedEnum_(COMPARESTRING_RESULT) _Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -55,6 +60,8 @@ CompareStringOrdinal(
+ 
+ #endif //(WINVER >= 0x0600)
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_AssociatedEnum_(COMPARESTRING_RESULT) _Windows_SupportedOS_Windows2000_
++
+ WINBASEAPI
+ int
+ WINAPI
+@@ -71,11 +78,13 @@ CompareStringW(
+ #define CompareString  CompareStringW
+ #endif
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+ FoldStringW(
+-    _In_ DWORD dwMapFlags,
++    _Win32_AssociatedEnum_(FOLD_STRING_MAP_FLAGS) _In_ DWORD dwMapFlags,
+     _In_NLS_string_(cchSrc) LPCWCH lpSrcStr,
+     _In_ int cchSrc,
+     _Out_writes_opt_(cchDest) LPWSTR lpDestStr,
+@@ -86,6 +95,8 @@ FoldStringW(
+ #define FoldString  FoldStringW
+ #endif
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -101,6 +112,8 @@ GetStringTypeExW(
+ #define GetStringTypeEx  GetStringTypeExW
+ #endif
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -115,6 +128,9 @@ GetStringTypeW(
+ //  NLS Code Page Dependent APIs.
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("KERNEL32.dll")
+ WINBASEAPI
+ _Success_(return != 0)
+          _When_((cbMultiByte == -1) && (cchWideChar != 0), _Post_equal_to_(_String_length_(lpWideCharStr)+1))
+@@ -122,13 +138,16 @@ int
+ WINAPI
+ MultiByteToWideChar(
+     _In_ UINT CodePage,
+-    _In_ DWORD dwFlags,
+-    _In_NLS_string_(cbMultiByte) LPCCH lpMultiByteStr,
++    _Win32_AssociatedEnum_(MULTI_BYTE_TO_WIDE_CHAR_FLAGS) _In_ DWORD dwFlags,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_NLS_string_(cbMultiByte) LPCCH lpMultiByteStr,
+     _In_ int cbMultiByte,
+     _Out_writes_to_opt_(cchWideChar,return) LPWSTR lpWideCharStr,
+     _In_ int cchWideChar
+     );
+ 
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("KERNEL32.dll")
+ WINBASEAPI
+ _Success_(return != 0)
+          _When_((cchWideChar == -1) && (cbMultiByte != 0), _Post_equal_to_(_String_length_(lpMultiByteStr)+1))
+@@ -141,7 +160,7 @@ WideCharToMultiByte(
+     _In_ int cchWideChar,
+     _Out_writes_bytes_to_opt_(cbMultiByte,return) LPSTR lpMultiByteStr,
+     _In_ int cbMultiByte,
+-    _In_opt_ LPCCH lpDefaultChar,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_opt_ LPCCH lpDefaultChar,
+     _Out_opt_ LPBOOL lpUsedDefaultChar
+     );
+ 

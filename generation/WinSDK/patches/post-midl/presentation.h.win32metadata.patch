@@ -1,0 +1,32 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Presentation.h b/generation/WinSDK/RecompiledIdlHeaders/um/Presentation.h
+index b3737ddc26..ebc6fc3e29 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Presentation.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Presentation.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -149,7 +150,7 @@ EXTERN_C const IID IID_IPresentationBuffer;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAvailableEvent( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *availableEventHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_retval_  HANDLE *availableEventHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsAvailable( 
+             /* [annotation][retval][out] */ 
+@@ -844,11 +845,11 @@ EXTERN_C const IID IID_IPresentationManager;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLostEvent( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *lostEventHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_retval_  HANDLE *lostEventHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPresentStatisticsAvailableEvent( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *presentStatisticsAvailableEventHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_retval_  HANDLE *presentStatisticsAvailableEventHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnablePresentStatisticsKind( 
+             /* [annotation][in] */ 

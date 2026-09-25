@@ -1,0 +1,69 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h
+index 71436dfec6..f05e37a80d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMMsg.h
+@@ -28,6 +28,7 @@ Abstract:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include "win32metadata_annotations.h"
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -42,12 +43,16 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetMessageNameAdd (
+     _In_opt_  LPCWSTR  servername,
+     _In_      LPCWSTR  msgname
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetMessageNameEnum (
+     _In_opt_  LPCWSTR  servername,
+@@ -59,6 +64,8 @@ NetMessageNameEnum (
+     _Out_     LPDWORD  resume_handle
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetMessageNameGetInfo (
+     _In_opt_  LPCWSTR  servername,
+@@ -67,12 +74,16 @@ NetMessageNameGetInfo (
+     _In_      LPBYTE  *bufptr
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetMessageNameDel (
+     _In_opt_  LPCWSTR  servername,
+     _In_      LPCWSTR  msgname
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetMessageBufferSend (
+     _In_opt_  LPCWSTR servername,
+@@ -86,11 +97,11 @@ NetMessageBufferSend (
+ //  Data Structures
+ //
+ 
+-typedef struct _MSG_INFO_0 {
++typedef struct   _MSG_INFO_0 {
+     LPWSTR  msgi0_name;
+ }MSG_INFO_0, *PMSG_INFO_0, *LPMSG_INFO_0;
+ 
+-typedef struct _MSG_INFO_1 {
++typedef struct   _MSG_INFO_1 {
+     LPWSTR  msgi1_name;
+     DWORD   msgi1_forward_flag;
+     LPWSTR  msgi1_forward;

@@ -1,0 +1,372 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h
+index 5b7a5d86ec..607c1bf821 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabDefs.h
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -314,7 +315,7 @@ typedef struct _MAPIUID
+ 
+ /* Property Tag Array */
+ 
+-typedef struct _SPropTagArray
++typedef struct   _SPropTagArray
+ {
+     ULONG   cValues;
+     _Field_size_(cValues) 
+@@ -631,17 +632,17 @@ struct _SRowSet_ ## _name \
+ 
+ typedef SCODE (STDMETHODCALLTYPE ALLOCATEBUFFER)(
+     ULONG           cbSize,
+-    LPVOID* lppBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID* lppBuffer
+ );
+ 
+ typedef SCODE (STDMETHODCALLTYPE ALLOCATEMORE)(
+     ULONG    cbSize,
+-    LPVOID   lpObject,
+-    LPVOID * lppBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID   lpObject,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID * lppBuffer
+ );
+ 
+ typedef ULONG (STDAPICALLTYPE FREEBUFFER)(
+-    LPVOID          lpBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID          lpBuffer
+ );
+ 
+ typedef ALLOCATEBUFFER *LPALLOCATEBUFFER;
+@@ -848,7 +849,7 @@ typedef struct _NOTIFICATION
+ #define MAPI_IMAPIADVISESINK_METHODS(IPURE)                             \
+     MAPIMETHOD_(ULONG, OnNotify)                                        \
+         (THIS_  ULONG                       cNotif,                     \
+-                LPNOTIFICATION              lpNotifications) IPURE;     \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPNOTIFICATION              lpNotifications) IPURE;     \
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IMAPIAdviseSink
+@@ -862,9 +863,9 @@ DECLARE_MAPI_INTERFACE_(IMAPIAdviseSink, IUnknown)
+ /* Callback function type for MAPIAllocAdviseSink */
+ 
+ typedef long (STDAPICALLTYPE NOTIFCALLBACK) (
+-    LPVOID          lpvContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID          lpvContext,
+     ULONG           cNotification,
+-    LPNOTIFICATION  lpNotifications);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPNOTIFICATION  lpNotifications);
+ typedef NOTIFCALLBACK FAR * LPNOTIFCALLBACK;
+ 
+ /*
+@@ -888,15 +889,15 @@ typedef NOTIFCALLBACK FAR * LPNOTIFCALLBACK;
+                 ULONG                       ulCount,                    \
+                 ULONG                       ulTotal) IPURE;             \
+     MAPIMETHOD(GetFlags)                                                \
+-        (THIS_  ULONG FAR *                 lpulFlags) IPURE;           \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulFlags) IPURE;           \
+     MAPIMETHOD(GetMax)                                                  \
+-        (THIS_  ULONG FAR *                 lpulMax) IPURE;             \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulMax) IPURE;             \
+     MAPIMETHOD(GetMin)                                                  \
+-        (THIS_  ULONG FAR *                 lpulMin) IPURE;             \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulMin) IPURE;             \
+     MAPIMETHOD(SetLimits)                                               \
+-        (THIS_  LPULONG                     lpulMin,                    \
+-                LPULONG                     lpulMax,                    \
+-                LPULONG                     lpulFlags) IPURE;           \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPULONG                     lpulMin,                    \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPULONG                     lpulMax,                    \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPULONG                     lpulFlags) IPURE;           \
+ 
+ #undef      INTERFACE
+ #define     INTERFACE   IMAPIProgress
+@@ -982,59 +983,59 @@ typedef struct _MAPINAMEID
+     MAPIMETHOD(GetLastError)                                            \
+         (THIS_  HRESULT                     hResult,                    \
+                 ULONG                       ulFlags,                    \
+-                LPMAPIERROR FAR *           lppMAPIError) IPURE;        \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMAPIERROR FAR *           lppMAPIError) IPURE;        \
+     MAPIMETHOD(SaveChanges)                                             \
+         (THIS_ ULONG                        ulFlags) IPURE;             \
+     MAPIMETHOD(GetProps)                                                \
+-        (THIS_  LPSPropTagArray             lpPropTagArray,             \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray             lpPropTagArray,             \
+                 ULONG                       ulFlags,                    \
+-                ULONG FAR *                 lpcValues,                  \
+-                LPSPropValue FAR *          lppPropArray) IPURE;        \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpcValues,                  \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropValue FAR *          lppPropArray) IPURE;        \
+     MAPIMETHOD(GetPropList)                                             \
+         (THIS_  ULONG                       ulFlags,                    \
+-                LPSPropTagArray FAR *       lppPropTagArray) IPURE;     \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray FAR *       lppPropTagArray) IPURE;     \
+     MAPIMETHOD(OpenProperty)                                            \
+         (THIS_  ULONG                       ulPropTag,                  \
+-                LPCIID                      lpiid,                      \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID                      lpiid,                      \
+                 ULONG                       ulInterfaceOptions,         \
+                 ULONG                       ulFlags,                    \
+                 LPUNKNOWN FAR *             lppUnk) IPURE;              \
+     MAPIMETHOD(SetProps)                                                \
+         (THIS_  ULONG                       cValues,                    \
+-                LPSPropValue                lpPropArray,                \
+-                LPSPropProblemArray FAR *   lppProblems) IPURE;         \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropValue                lpPropArray,                \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropProblemArray FAR *   lppProblems) IPURE;         \
+     MAPIMETHOD(DeleteProps)                                             \
+-        (THIS_  LPSPropTagArray             lpPropTagArray,             \
+-                LPSPropProblemArray FAR *   lppProblems) IPURE;         \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray             lpPropTagArray,             \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropProblemArray FAR *   lppProblems) IPURE;         \
+     MAPIMETHOD(CopyTo)                                                  \
+         (THIS_  ULONG                       ciidExclude,                \
+-                LPCIID                      rgiidExclude,               \
+-                LPSPropTagArray             lpExcludeProps,             \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID                      rgiidExclude,               \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray             lpExcludeProps,             \
+                 ULONG_PTR                   ulUIParam,                  \
+                 LPMAPIPROGRESS              lpProgress,                 \
+-                LPCIID                      lpInterface,                \
+-                LPVOID                      lpDestObj,                  \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID                      lpInterface,                \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID                      lpDestObj,                  \
+                 ULONG                       ulFlags,                    \
+-                LPSPropProblemArray FAR *   lppProblems) IPURE;         \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropProblemArray FAR *   lppProblems) IPURE;         \
+     MAPIMETHOD(CopyProps)                                               \
+-        (THIS_  LPSPropTagArray             lpIncludeProps,             \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray             lpIncludeProps,             \
+                 ULONG_PTR                   ulUIParam,                  \
+                 LPMAPIPROGRESS              lpProgress,                 \
+-                LPCIID                      lpInterface,                \
+-                LPVOID                      lpDestObj,                  \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID                      lpInterface,                \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID                      lpDestObj,                  \
+                 ULONG                       ulFlags,                    \
+-                LPSPropProblemArray FAR *   lppProblems) IPURE;         \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropProblemArray FAR *   lppProblems) IPURE;         \
+     MAPIMETHOD(GetNamesFromIDs)                                         \
+-        (THIS_  LPSPropTagArray FAR *       lppPropTags,                \
+-                LPGUID                      lpPropSetGuid,              \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray FAR *       lppPropTags,                \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGUID                      lpPropSetGuid,              \
+                 ULONG                       ulFlags,                    \
+-                ULONG FAR *                 lpcPropNames,               \
+-                LPMAPINAMEID FAR * FAR *    lpppPropNames) IPURE;       \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpcPropNames,               \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMAPINAMEID FAR * FAR *    lpppPropNames) IPURE;       \
+     MAPIMETHOD(GetIDsFromNames)                                         \
+         (THIS_  ULONG                       cPropNames,                 \
+-                LPMAPINAMEID FAR *          lppPropNames,               \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMAPINAMEID FAR *          lppPropNames,               \
+                 ULONG                       ulFlags,                    \
+-                LPSPropTagArray FAR *       lppPropTags) IPURE;         \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray FAR *       lppPropTags) IPURE;         \
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IMAPIProp
+@@ -1288,88 +1289,88 @@ typedef struct _SRestriction
+     MAPIMETHOD(GetLastError)                                            \
+         (THIS_  HRESULT                     hResult,                    \
+                 ULONG                       ulFlags,                    \
+-                LPMAPIERROR FAR *           lppMAPIError) IPURE;        \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPMAPIERROR FAR *           lppMAPIError) IPURE;        \
+     MAPIMETHOD(Advise)                                                  \
+         (THIS_  ULONG                       ulEventMask,                \
+                 LPMAPIADVISESINK            lpAdviseSink,               \
+-                ULONG FAR *                 lpulConnection) IPURE;      \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulConnection) IPURE;      \
+     MAPIMETHOD(Unadvise)                                                \
+         (THIS_  ULONG                       ulConnection) IPURE;        \
+     MAPIMETHOD(GetStatus)                                               \
+-        (THIS_  ULONG FAR *                 lpulTableStatus,            \
+-                ULONG FAR *                 lpulTableType) IPURE;       \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulTableStatus,            \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulTableType) IPURE;       \
+     MAPIMETHOD(SetColumns)                                              \
+-        (THIS_  LPSPropTagArray             lpPropTagArray,             \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray             lpPropTagArray,             \
+                 ULONG                       ulFlags) IPURE;             \
+     MAPIMETHOD(QueryColumns)                                            \
+         (THIS_  ULONG                       ulFlags,                    \
+-                LPSPropTagArray FAR *       lpPropTagArray) IPURE;      \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray FAR *       lpPropTagArray) IPURE;      \
+     MAPIMETHOD(GetRowCount)                                             \
+         (THIS_  ULONG                       ulFlags,                    \
+-                ULONG FAR *                 lpulCount) IPURE;           \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulCount) IPURE;           \
+     MAPIMETHOD(SeekRow)                                                 \
+         (THIS_  BOOKMARK                    bkOrigin,                   \
+                 LONG                        lRowCount,                  \
+-                LONG FAR *                  lplRowsSought) IPURE;       \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG FAR *                  lplRowsSought) IPURE;       \
+     MAPIMETHOD(SeekRowApprox)                                           \
+         (THIS_  ULONG                       ulNumerator,                \
+                 ULONG                       ulDenominator) IPURE;       \
+     MAPIMETHOD(QueryPosition)                                           \
+-        (THIS_  ULONG FAR *                 lpulRow,                    \
+-                ULONG FAR *                 lpulNumerator,              \
+-                ULONG FAR *                 lpulDenominator) IPURE;     \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulRow,                    \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulNumerator,              \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulDenominator) IPURE;     \
+     MAPIMETHOD(FindRow)                                                 \
+-        (THIS_  LPSRestriction              lpRestriction,              \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSRestriction              lpRestriction,              \
+                 BOOKMARK                    bkOrigin,                   \
+                 ULONG                       ulFlags) IPURE;             \
+     MAPIMETHOD(Restrict)                                                \
+-        (THIS_  LPSRestriction              lpRestriction,              \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSRestriction              lpRestriction,              \
+                 ULONG                       ulFlags) IPURE;             \
+     MAPIMETHOD(CreateBookmark)                                          \
+-        (THIS_  BOOKMARK FAR *              lpbkPosition) IPURE;        \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOKMARK FAR *              lpbkPosition) IPURE;        \
+     MAPIMETHOD(FreeBookmark)                                            \
+         (THIS_  BOOKMARK                    bkPosition) IPURE;          \
+     MAPIMETHOD(SortTable)                                               \
+-        (THIS_  LPSSortOrderSet             lpSortCriteria,             \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSSortOrderSet             lpSortCriteria,             \
+                 ULONG                       ulFlags) IPURE;             \
+     MAPIMETHOD(QuerySortOrder)                                          \
+-        (THIS_  LPSSortOrderSet FAR *       lppSortCriteria) IPURE;     \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSSortOrderSet FAR *       lppSortCriteria) IPURE;     \
+     MAPIMETHOD(QueryRows)                                               \
+         (THIS_  LONG                        lRowCount,                  \
+                 ULONG                       ulFlags,                    \
+-                LPSRowSet FAR *             lppRows) IPURE;             \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSRowSet FAR *             lppRows) IPURE;             \
+     MAPIMETHOD(Abort) (THIS) IPURE;                                     \
+     MAPIMETHOD(ExpandRow)                                               \
+         (THIS_  ULONG                       cbInstanceKey,              \
+-                LPBYTE                      pbInstanceKey,              \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE                      pbInstanceKey,              \
+                 ULONG                       ulRowCount,                 \
+                 ULONG                       ulFlags,                    \
+-                LPSRowSet FAR *             lppRows,                    \
+-                ULONG FAR *                 lpulMoreRows) IPURE;        \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSRowSet FAR *             lppRows,                    \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulMoreRows) IPURE;        \
+     MAPIMETHOD(CollapseRow)                                             \
+         (THIS_  ULONG                       cbInstanceKey,              \
+-                LPBYTE                      pbInstanceKey,              \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE                      pbInstanceKey,              \
+                 ULONG                       ulFlags,                    \
+-                ULONG FAR *                 lpulRowCount) IPURE;        \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulRowCount) IPURE;        \
+     MAPIMETHOD(WaitForCompletion)                                       \
+         (THIS_  ULONG                       ulFlags,                    \
+                 ULONG                       ulTimeout,                  \
+-                ULONG FAR *                 lpulTableStatus) IPURE;     \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulTableStatus) IPURE;     \
+     MAPIMETHOD(GetCollapseState)                                        \
+         (THIS_  ULONG                       ulFlags,                    \
+                 ULONG                       cbInstanceKey,              \
+-                LPBYTE                      lpbInstanceKey,             \
+-                ULONG FAR *                 lpcbCollapseState,          \
+-                LPBYTE FAR *                lppbCollapseState) IPURE;   \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE                      lpbInstanceKey,             \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpcbCollapseState,          \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE FAR *                lppbCollapseState) IPURE;   \
+     MAPIMETHOD(SetCollapseState)                                        \
+         (THIS_  ULONG                       ulFlags,                    \
+                 ULONG                       cbCollapseState,            \
+-                LPBYTE                      pbCollapseState,            \
+-                BOOKMARK FAR *              lpbkLocation) IPURE;        \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE                      pbCollapseState,            \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOKMARK FAR *              lpbkLocation) IPURE;        \
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IMAPITable
+-DECLARE_MAPI_INTERFACE_(IMAPITable, IUnknown)
++DECLARE_MAPI_INTERFACE_( _Windows_SupportedOS_Windows2000_ IMAPITable, IUnknown)
+ {
+     BEGIN_INTERFACE
+     MAPI_IUNKNOWN_METHODS(PURE)
+@@ -1545,7 +1546,7 @@ DECLARE_MAPI_INTERFACE_(IMAPIStatus, IMAPIProp)
+     MAPIMETHOD(OpenEntry)                                                              \
+         (THIS_              ULONG                       cbEntryID,                     \
+                 _In_reads_bytes_(cbEntryID) LPENTRYID   lpEntryID,                     \
+-                            LPCIID                      lpInterface,                   \
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID                      lpInterface,                   \
+                             ULONG                       ulFlags,                       \
+                 _Out_       ULONG FAR *                 lpulObjType,                   \
+                 _Outptr_ LPUNKNOWN FAR *                lppUnk) IPURE;                 \
+@@ -1637,7 +1638,7 @@ typedef struct _flaglist
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IABContainer
+-DECLARE_MAPI_INTERFACE_(IABContainer, IMAPIContainer)
++DECLARE_MAPI_INTERFACE_( _Windows_SupportedOS_Windows2000_ IABContainer, IMAPIContainer)
+ {
+     BEGIN_INTERFACE
+     MAPI_IUNKNOWN_METHODS(PURE)
+@@ -1717,7 +1718,7 @@ DECLARE_MAPI_INTERFACE_(IABContainer, IMAPIContainer)
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IMailUser
+-DECLARE_MAPI_INTERFACE_(IMailUser, IMAPIProp)
++DECLARE_MAPI_INTERFACE_( _Windows_SupportedOS_Windows2000_ IMailUser, IMAPIProp)
+ {
+     BEGIN_INTERFACE
+     MAPI_IUNKNOWN_METHODS(PURE)
+@@ -1749,7 +1750,7 @@ DECLARE_MAPI_INTERFACE_(IMailUser, IMAPIProp)
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IDistList
+-DECLARE_MAPI_INTERFACE_(IDistList, IMAPIContainer)
++DECLARE_MAPI_INTERFACE_( _Windows_SupportedOS_Windows2000_ IDistList, IMAPIContainer)
+ {
+     BEGIN_INTERFACE
+     MAPI_IUNKNOWN_METHODS(PURE)
+@@ -1834,7 +1835,7 @@ DECLARE_MAPI_INTERFACE_(IDistList, IMAPIContainer)
+ 
+ #define MAPI_IMAPIFOLDER_METHODS(IPURE)                                     \
+     MAPIMETHOD(CreateMessage)                                               \
+-        (THIS_  LPCIID                      lpInterface,                    \
++        (THIS_  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID                      lpInterface,                    \
+                 ULONG                       ulFlags,                        \
+                 _Outptr_ LPMESSAGE FAR *    lppMessage) IPURE;              \
+     MAPIMETHOD(CopyMessages)                                                \
+@@ -2228,14 +2229,14 @@ DECLARE_MAPI_INTERFACE_(IAttach, IMAPIProp)
+ 
+ /*  Accelerator callback for DIALOG_SDI form of AB UI */
+ typedef BOOL (STDMETHODCALLTYPE ACCELERATEABSDI)(ULONG_PTR ulUIParam,
+-                                                LPVOID lpvmsg);
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvmsg);
+ typedef ACCELERATEABSDI FAR * LPFNABSDI;
+ 
+ /*  Callback to application telling it that the DIALOG_SDI form of the */
+ /*  AB UI has been dismissed.  This is so that the above LPFNABSDI     */
+ /*  function doesn't keep being called.                                */
+ typedef void (STDMETHODCALLTYPE DISMISSMODELESS)(ULONG_PTR ulUIParam,
+-                                                LPVOID lpvContext);
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvContext);
+ typedef DISMISSMODELESS FAR * LPFNDISMISS;
+ 
+ /*
+@@ -2245,9 +2246,9 @@ typedef DISMISSMODELESS FAR * LPFNDISMISS;
+ 
+ typedef SCODE (STDMETHODCALLTYPE FAR * LPFNBUTTON)(
+     ULONG_PTR           ulUIParam,
+-    LPVOID              lpvContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID              lpvContext,
+     ULONG               cbEntryID,
+-    LPENTRYID           lpSelection,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID           lpSelection,
+     ULONG               ulFlags
+ );
+ 
+@@ -2323,7 +2324,7 @@ typedef struct _ADRPARM
+                 _In_opt_ ULONG_PTR          ulUIParam) IPURE;       \
+     MAPIMETHOD(GetState)                                            \
+         (THIS_  ULONG                       ulFlags,                \
+-                ULONG FAR *                 lpulState) IPURE;       \
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *                 lpulState) IPURE;       \
+ 
+ #undef       INTERFACE
+ #define      INTERFACE  IMAPIControl

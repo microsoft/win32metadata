@@ -1,0 +1,81 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MpegType.h b/generation/WinSDK/RecompiledIdlHeaders/um/MpegType.h
+index 68a85d0e1a..cf0ffb4be4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MpegType.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MpegType.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //------------------------------------------------------------------------------
+ // File: MPEGType.h
+ //
+@@ -63,56 +64,69 @@ typedef struct tagAM_MPEGSYSTEMTYPE
+ #define AM_MPEG_AUDIO_DUAL_LEFT  1
+ #define AM_MPEG_AUDIO_DUAL_RIGHT 2
+ 
+-DECLARE_INTERFACE_(IMpegAudioDecoder, IUnknown) {
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IMpegAudioDecoder, IUnknown) {
+ 
++     
+     STDMETHOD(get_FrequencyDivider) (THIS_
+                            _Out_ unsigned long *pDivider   /* [out] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(put_FrequencyDivider) (THIS_
+                            unsigned long Divider     /* [in] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(get_DecoderAccuracy) (THIS_
+                            _Out_ unsigned long *pAccuracy  /* [out] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(put_DecoderAccuracy) (THIS_
+                            unsigned long Accuracy    /* [in] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(get_Stereo) (THIS_
+                            _Out_ unsigned long *pStereo    /* [out] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(put_Stereo) (THIS_
+                            unsigned long Stereo      /* [in] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(get_DecoderWordSize) (THIS_
+                            _Out_ unsigned long *pWordSize  /* [out] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(put_DecoderWordSize) (THIS_
+                            unsigned long WordSize    /* [in] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(get_IntegerDecode) (THIS_
+                            _Out_ unsigned long *pIntDecode /* [out] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(put_IntegerDecode) (THIS_
+                            unsigned long IntDecode   /* [in] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(get_DualMode) (THIS_
+-                           unsigned long *pIntDecode /* [out] */
++                           _WIN32META_ANNOTATION_("win32metadata:in") unsigned long *pIntDecode /* [out] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(put_DualMode) (THIS_
+                            unsigned long IntDecode   /* [in] */
+                            ) PURE;
+ 
++     
+     STDMETHOD(get_AudioFormat) (THIS_
+                            _Out_ MPEG1WAVEFORMAT *lpFmt    /* [out] */
+                            ) PURE;

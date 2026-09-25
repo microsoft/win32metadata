@@ -1,0 +1,87 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h
+index faca69e7b0..e1a4ea37a4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdxmldom.h
+@@ -17,6 +17,7 @@
+ #define __WSDXMLDOM_H__
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -32,7 +33,7 @@ typedef struct _WSDXML_ELEMENT WSDXML_ELEMENT;
+ typedef struct _WSDXML_TEXT WSDXML_TEXT;
+ typedef struct _WSDXML_ELEMENT_LIST WSDXML_ELEMENT_LIST;
+ 
+-struct _WSDXML_NAMESPACE
++struct   _WSDXML_NAMESPACE
+ {
+     const WCHAR* Uri;
+     const WCHAR* PreferredPrefix;
+@@ -41,19 +42,19 @@ struct _WSDXML_NAMESPACE
+     WORD Encoding;
+ };
+ 
+-struct _WSDXML_NAME
++struct   _WSDXML_NAME
+ {
+     WSDXML_NAMESPACE* Space;
+     WCHAR* LocalName;
+ };
+ 
+-struct _WSDXML_TYPE
++struct   _WSDXML_TYPE
+ {
+     const WCHAR* Uri;
+     const BYTE* Table;
+ };
+ 
+-struct _WSDXML_PREFIX_MAPPING
++struct   _WSDXML_PREFIX_MAPPING
+ {
+     DWORD Refs;
+     WSDXML_PREFIX_MAPPING* Next;
+@@ -61,7 +62,7 @@ struct _WSDXML_PREFIX_MAPPING
+     WCHAR* Prefix;
+ };
+ 
+-struct _WSDXML_ATTRIBUTE
++struct   _WSDXML_ATTRIBUTE
+ {
+     WSDXML_ELEMENT* Element;
+     WSDXML_ATTRIBUTE* Next;
+@@ -69,7 +70,7 @@ struct _WSDXML_ATTRIBUTE
+     WCHAR* Value;
+ };
+ 
+-struct _WSDXML_NODE
++struct   _WSDXML_NODE
+ {
+     enum
+     {   
+@@ -80,7 +81,7 @@ struct _WSDXML_NODE
+     WSDXML_NODE* Next;
+ };
+ 
+-struct _WSDXML_ELEMENT
++struct   _WSDXML_ELEMENT
+ {
+     WSDXML_NODE Node;
+     WSDXML_NAME* Name;
+@@ -89,13 +90,13 @@ struct _WSDXML_ELEMENT
+     WSDXML_PREFIX_MAPPING* PrefixMappings;
+ };
+ 
+-struct _WSDXML_TEXT
++struct   _WSDXML_TEXT
+ {
+ 	WSDXML_NODE Node;
+     WCHAR* Text;
+ };
+ 
+-struct _WSDXML_ELEMENT_LIST
++struct   _WSDXML_ELEMENT_LIST
+ {
+     WSDXML_ELEMENT_LIST* Next;
+     WSDXML_ELEMENT* Element;

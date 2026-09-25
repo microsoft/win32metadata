@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h b/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h
+index 4d02d13095..4a7ceaa7c4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Sfc.h
+@@ -24,6 +24,7 @@ Revision History:
+ #ifndef _SFC_
+ #define _SFC_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -57,13 +58,18 @@ typedef struct _PROTECTED_FILE_DATA {
+ } PROTECTED_FILE_DATA, *PPROTECTED_FILE_DATA;
+ 
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SfcGetNextProtectedFile(
+     IN HANDLE RpcHandle, // must be NULL
+-    IN PPROTECTED_FILE_DATA ProtFileData
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PPROTECTED_FILE_DATA ProtFileData
+     );
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
+ BOOL
+ WINAPI
+ SfcIsFileProtected(
+@@ -71,6 +77,8 @@ SfcIsFileProtected(
+     IN LPCWSTR ProtFileName
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ BOOL
+ WINAPI
+ SfcIsKeyProtected(

@@ -1,0 +1,83 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h
+index db2e6ddba6..e454a905e8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/pacmanclientapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -536,10 +537,10 @@ typedef struct _PM_ENUM_FILTER
+     /* [switch_is][switch_type] */ union 
+         {
+         /* [default] */ int Dummy;
+-        /* [case()] */ PM_APP_GENRE Genre;
+-        /* [case()] */ PM_APPLICATION_HUBTYPE AppHubType;
+-        /* [case()] */ PM_TILE_HUBTYPE HubType;
+-        /* [case()] */ PM_TASK_TYPE Tasktype;
++        /* [case()] */ _Win32_AssociatedEnum_(PM_APP_GENRE) PM_APP_GENRE Genre;
++        /* [case()] */ _Win32_AssociatedEnum_(PM_APPLICATION_HUBTYPE) PM_APPLICATION_HUBTYPE AppHubType;
++        /* [case()] */ _Win32_AssociatedEnum_(PM_TILE_HUBTYPE) PM_TILE_HUBTYPE HubType;
++        /* [case()] */ _Win32_AssociatedEnum_(PM_TASK_TYPE) PM_TASK_TYPE Tasktype;
+         /* [case()] */ PRODUCTID TaskProductID;
+         /* [case()] */ PRODUCTID TileProductID;
+         /* [case()] */ PM_APPTASKTYPE AppTaskType;
+@@ -584,7 +585,7 @@ enum _tagPM_LOGO_SIZE
+         PM_LOGO_SIZE_INVALID	= ( PM_LOGO_SIZE_LARGE + 1 ) 
+     } 	PM_LOGO_SIZE;
+ 
+-typedef struct _tagPM_STARTAPPBLOB
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagPM_STARTAPPBLOB
+     {
+     ULONG cbSize;
+     GUID ProductID;
+@@ -605,7 +606,7 @@ typedef struct _tagPM_INVOCATIONINFO
+     /* [string] */ BSTR URIFragmentOrArgs;
+     } 	PM_INVOCATIONINFO;
+ 
+-typedef struct _tagPM_STARTTILEBLOB
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagPM_STARTTILEBLOB
+     {
+     ULONG cbSize;
+     PRODUCTID ProductID;
+@@ -3922,7 +3923,7 @@ EXTERN_C const IID IID_IPMExtensionFileExtensionInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_AllFileTypes( 
+             /* [out] */ __RPC__out DWORD *pcbTypes,
+-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbTypes) BSTR **ppTypes) = 0;
++            /* [size_is][size_is][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_ecount_full_opt(*pcbTypes) BSTR **ppTypes) = 0;
+         
+     };
+     
+@@ -4157,11 +4158,11 @@ EXTERN_C const IID IID_IPMExtensionShareTargetInfo;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE get_AllFileTypes( 
+             /* [out] */ __RPC__out DWORD *pcTypes,
+-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes) = 0;
++            /* [size_is][size_is][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_AllDataFormats( 
+             /* [out] */ __RPC__out DWORD *pcDataFormats,
+-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcDataFormats) BSTR **ppDataFormats) = 0;
++            /* [size_is][size_is][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_ecount_full_opt(*pcDataFormats) BSTR **ppDataFormats) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_SupportsAllFileTypes( 
+             /* [out] */ __RPC__out BOOL *pSupportsAllTypes) = 0;
+@@ -4353,7 +4354,7 @@ EXTERN_C const IID IID_IPMExtensionFileOpenPickerInfo;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE get_AllFileTypes( 
+             /* [out] */ __RPC__out DWORD *pcTypes,
+-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes) = 0;
++            /* [size_is][size_is][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_SupportsAllFileTypes( 
+             /* [out] */ __RPC__out BOOL *pSupportsAllTypes) = 0;
+@@ -4450,7 +4451,7 @@ EXTERN_C const IID IID_IPMExtensionFileSavePickerInfo;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE get_AllFileTypes( 
+             /* [out] */ __RPC__out DWORD *pcTypes,
+-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes) = 0;
++            /* [size_is][size_is][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_ecount_full_opt(*pcTypes) BSTR **ppTypes) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE get_SupportsAllFileTypes( 
+             /* [out] */ __RPC__out BOOL *pSupportsAllTypes) = 0;

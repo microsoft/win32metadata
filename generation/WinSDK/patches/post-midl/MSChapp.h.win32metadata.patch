@@ -1,0 +1,61 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSChapp.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSChapp.h
+index 8b45479a9e..576c023a44 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSChapp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSChapp.h
+@@ -23,6 +23,7 @@ Abstract:
+ #ifndef _MSCHAPP_H_
+ #define _MSCHAPP_H_
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -31,22 +32,22 @@ Abstract:
+ #ifndef _NTCRYPT_
+ #define CYPHER_BLOCK_LENGTH         8
+ 
+-typedef struct _CYPHER_BLOCK {
++typedef struct   _CYPHER_BLOCK {
+     CHAR    data[CYPHER_BLOCK_LENGTH];
+ }CYPHER_BLOCK;
+     
+-typedef struct _LM_OWF_PASSWORD {
++typedef struct   _LM_OWF_PASSWORD {
+     CYPHER_BLOCK data[2];
+ }                                   LM_OWF_PASSWORD;
+ typedef LM_OWF_PASSWORD *           PLM_OWF_PASSWORD;
+ typedef LM_OWF_PASSWORD             NT_OWF_PASSWORD;
+ typedef NT_OWF_PASSWORD *           PNT_OWF_PASSWORD;
+ 
+-typedef struct _SAMPR_ENCRYPTED_USER_PASSWORD {
++typedef struct   _SAMPR_ENCRYPTED_USER_PASSWORD {
+     UCHAR Buffer[ (256 * 2) + 4 ];
+ } SAMPR_ENCRYPTED_USER_PASSWORD, *PSAMPR_ENCRYPTED_USER_PASSWORD;
+ 
+-typedef struct _ENCRYPTED_LM_OWF_PASSWORD {
++typedef struct   _ENCRYPTED_LM_OWF_PASSWORD {
+     CYPHER_BLOCK data[2];
+ } ENCRYPTED_LM_OWF_PASSWORD, *PENCRYPTED_LM_OWF_PASSWORD;
+ 
+@@ -59,8 +60,8 @@ typedef ENCRYPTED_NT_OWF_PASSWORD * PENCRYPTED_NT_OWF_PASSWORD;
+ // Change a password.
+ //
+     
+-extern WINADVAPI DWORD WINAPI
+-MSChapSrvChangePassword(
++_Windows_SupportedOS_WindowsXP_ extern WINADVAPI DWORD WINAPI
++  MSChapSrvChangePassword(
+    _In_ PWSTR ServerName,
+    _In_ PWSTR UserName,
+    _In_ BOOLEAN LmOldPresent,
+@@ -75,8 +76,8 @@ MSChapSrvChangePassword(
+ // Change a password using mutual encryption.
+ //
+ 
+-extern WINADVAPI DWORD WINAPI
+-MSChapSrvChangePassword2(
++_Windows_SupportedOS_WindowsXP_ extern WINADVAPI DWORD WINAPI
++  MSChapSrvChangePassword2(
+     _In_ PWSTR ServerName,
+     _In_ PWSTR UserName,
+     _In_ PSAMPR_ENCRYPTED_USER_PASSWORD NewPasswordEncryptedWithOldNt,

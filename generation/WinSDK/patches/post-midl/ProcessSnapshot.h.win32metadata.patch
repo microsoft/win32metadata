@@ -1,0 +1,288 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ProcessSnapshot.h b/generation/WinSDK/RecompiledIdlHeaders/um/ProcessSnapshot.h
+index ea1e95f7be..e3d4553cc2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ProcessSnapshot.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ProcessSnapshot.h
+@@ -13,9 +13,10 @@ Abstract:
+ #pragma once
+ #endif
+ 
++#include <win32metadata_annotations.h>
+ 
+ // Handle descriptor flags.
+-typedef enum
++typedef enum 
+ {
+     PSS_HANDLE_NONE                           = 0x00,
+     PSS_HANDLE_HAVE_TYPE                      = 0x01,
+@@ -26,7 +27,7 @@ typedef enum
+ DEFINE_ENUM_FLAG_OPERATORS(PSS_HANDLE_FLAGS);
+ 
+ // Object types. (As recognized by this facility.)
+-typedef enum
++typedef enum 
+ {
+     PSS_OBJECT_TYPE_UNKNOWN   = 0,
+     PSS_OBJECT_TYPE_PROCESS   = 1,
+@@ -40,7 +41,7 @@ typedef enum
+ } PSS_OBJECT_TYPE;
+ 
+ // Capture/creation flags.
+-typedef enum
++typedef enum 
+ {
+     PSS_CAPTURE_NONE                                = 0x00000000,
+     PSS_CAPTURE_VA_CLONE                            = 0x00000001,
+@@ -74,7 +75,7 @@ DEFINE_ENUM_FLAG_OPERATORS(PSS_CAPTURE_FLAGS);
+ #define PSS_PERF_RESOLUTION     1000000
+ 
+ // PSS_QUERY_SNAPSHOT information classes.
+-typedef enum
++typedef enum 
+ {
+     PSS_QUERY_PROCESS_INFORMATION = 0,
+     PSS_QUERY_VA_CLONE_INFORMATION = 1,
+@@ -87,7 +88,7 @@ typedef enum
+ } PSS_QUERY_INFORMATION_CLASS;
+ 
+ // PSS_WALK_SNAPSHOT information classes.
+-typedef enum
++typedef enum 
+ {
+     PSS_WALK_AUXILIARY_PAGES = 0,
+     PSS_WALK_VA_SPACE = 1,
+@@ -97,7 +98,7 @@ typedef enum
+ } PSS_WALK_INFORMATION_CLASS;
+ 
+ // PssDuplicateSnapshot flags.
+-typedef enum
++typedef enum 
+ {
+     PSS_DUPLICATE_NONE         = 0x00,
+     PSS_DUPLICATE_CLOSE_SOURCE = 0x01
+@@ -105,13 +106,13 @@ typedef enum
+ DEFINE_ENUM_FLAG_OPERATORS(PSS_DUPLICATE_FLAGS);
+ 
+ 
+-DECLARE_HANDLE(HPSS);
+-DECLARE_HANDLE(HPSSWALK);
++DECLARE_HANDLE(HPSS) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HPSSWALK) _WIN32META_ANNOTATION_("win32metadata:raii_free=PssWalkMarkerFree")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ // PssQuerySnapshot/PssWalkSnapshot information structures.
+ 
+ // Information class: PSS_QUERY_PROCESS_INFORMATION.
+-typedef enum
++typedef enum 
+ {
+     PSS_PROCESS_FLAGS_NONE        = 0x00000000,
+     PSS_PROCESS_FLAGS_PROTECTED   = 0x00000001,
+@@ -122,7 +123,7 @@ typedef enum
+ } PSS_PROCESS_FLAGS;
+ DEFINE_ENUM_FLAG_OPERATORS(PSS_PROCESS_FLAGS);
+ 
+-typedef struct
++typedef struct 
+ {
+     DWORD ExitStatus;
+     void* PebBaseAddress;
+@@ -153,45 +154,45 @@ typedef struct
+ } PSS_PROCESS_INFORMATION;
+ 
+ // Information class: PSS_QUERY_VA_CLONE_INFORMATION.
+-typedef struct
++typedef struct 
+ {
+     HANDLE VaCloneHandle;
+ } PSS_VA_CLONE_INFORMATION;
+ 
+ // Information class: PSS_QUERY_AUXILIARY_PAGES_INFORMATION.
+-typedef struct
++typedef struct 
+ {
+     DWORD AuxPagesCaptured;
+ } PSS_AUXILIARY_PAGES_INFORMATION;
+ 
+ // Information class: PSS_QUERY_VA_SPACE_INFORMATION.
+-typedef struct
++typedef struct 
+ {
+     DWORD RegionCount;
+ } PSS_VA_SPACE_INFORMATION;
+ 
+ // Information class: PSS_QUERY_HANDLE_INFORMATION.
+-typedef struct 
++typedef struct  
+ {
+     DWORD HandlesCaptured;
+ } PSS_HANDLE_INFORMATION;
+ 
+ // Information class: PSS_QUERY_THREAD_INFORMATION.
+-typedef struct
++typedef struct 
+ {
+     DWORD ThreadsCaptured;
+     DWORD ContextLength;
+ } PSS_THREAD_INFORMATION;
+ 
+ // Information class: PSS_QUERY_HANDLE_TRACE_INFORMATION.
+-typedef struct
++typedef struct 
+ {
+     HANDLE SectionHandle;
+     DWORD Size;
+ } PSS_HANDLE_TRACE_INFORMATION;
+ 
+ // Information class: PSS_QUERY_PERFORMANCE_COUNTERS.
+-typedef struct
++typedef struct 
+ {
+     UINT64 TotalCycleCount;
+     UINT64 TotalWallClockPeriod;
+@@ -208,7 +209,7 @@ typedef struct
+ } PSS_PERFORMANCE_COUNTERS;
+ 
+ // Information class: PSS_WALK_AUXILIARY_PAGES.
+-typedef struct
++typedef struct 
+ {
+     void* Address;
+     MEMORY_BASIC_INFORMATION BasicInformation;
+@@ -219,7 +220,7 @@ typedef struct
+ } PSS_AUXILIARY_PAGE_ENTRY;
+ 
+ // Information class: PSS_WALK_VA_SPACE.
+-typedef struct
++typedef struct 
+ {
+     void* BaseAddress;
+     void* AllocationBase;
+@@ -237,7 +238,7 @@ typedef struct
+ } PSS_VA_SPACE_ENTRY;
+ 
+ // Information class: PSS_WALK_HANDLES.
+-typedef struct
++typedef struct 
+ {
+     HANDLE Handle;
+     PSS_HANDLE_FLAGS Flags;
+@@ -267,7 +268,7 @@ typedef struct
+             LONG BasePriority;
+             DWORD ProcessId;
+             DWORD ParentProcessId;
+-            DWORD Flags;
++            _Win32_AssociatedEnum_(PSS_PROCESS_FLAGS) DWORD Flags;
+         } Process;
+         // Valid for ObjectType = PSS_OBJECT_TYPE_THREAD.
+         struct
+@@ -313,14 +314,14 @@ typedef struct
+ } PSS_HANDLE_ENTRY;
+ 
+ // Information class: PSS_WALK_THREADS.
+-typedef enum
++typedef enum 
+ {
+     PSS_THREAD_FLAGS_NONE       = 0x0000,
+     PSS_THREAD_FLAGS_TERMINATED = 0x0001
+ } PSS_THREAD_FLAGS;
+ DEFINE_ENUM_FLAG_OPERATORS(PSS_THREAD_FLAGS);
+ 
+-typedef struct
++typedef struct 
+ {
+     DWORD ExitStatus;
+     void* TebBaseAddress;
+@@ -355,7 +356,7 @@ typedef struct
+ } PSS_THREAD_NAME;
+ 
+ // Allocator API structure for walk marker allocations.
+-typedef struct
++typedef struct 
+ {
+     void* Context;
+     void* (WINAPI *AllocRoutine) (_In_ void* Context, _In_ DWORD Size);
+@@ -370,6 +371,7 @@ typedef struct
+ #if (NTDDI_VERSION >= NTDDI_WINBLUE)
+ 
+ // Win32 APIs.
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssCaptureSnapshot(
+@@ -379,6 +381,7 @@ PssCaptureSnapshot(
+     _Out_ HPSS* SnapshotHandle
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssFreeSnapshot(
+@@ -386,6 +389,7 @@ PssFreeSnapshot(
+     _In_ HPSS SnapshotHandle
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssQuerySnapshot(
+@@ -395,6 +399,7 @@ PssQuerySnapshot(
+     _In_ DWORD BufferLength
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkSnapshot(
+@@ -405,6 +410,7 @@ PssWalkSnapshot(
+     _In_ DWORD BufferLength
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssDuplicateSnapshot(
+@@ -416,19 +422,22 @@ PssDuplicateSnapshot(
+     );
+ 
+ // Win32 walk marker management.
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerCreate(
+-    _In_opt_ PSS_ALLOCATOR const *Allocator,
+-    _Out_ HPSSWALK* WalkMarkerHandle
++    _In_opt_  PSS_ALLOCATOR const *Allocator,
++    _Win32_RAIIFree_(PssWalkMarkerFree, -1, 0) _Out_  HPSSWALK* WalkMarkerHandle
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerFree(
+     _In_ HPSSWALK WalkMarkerHandle
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerGetPosition(
+@@ -436,6 +445,7 @@ PssWalkMarkerGetPosition(
+     _Out_ ULONG_PTR *Position
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerSetPosition(
+@@ -443,6 +453,7 @@ PssWalkMarkerSetPosition(
+     _In_ ULONG_PTR Position
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerSeekToBeginning(
+@@ -453,4 +464,3 @@ PssWalkMarkerSeekToBeginning(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
+-

@@ -1,0 +1,75 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h
+index db59999f75..136c03c81c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/EapHostPeerTypes.h
+@@ -12,6 +12,7 @@
+ #define EAPHOSTPEERTYPES_H
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -27,7 +28,7 @@ typedef
+ 
+ 
+ // Possible reasons for which EAP-method can call getResult from EAPhost 
+-enum tagEapHostPeerMethodResultReason
++enum   tagEapHostPeerMethodResultReason
+ {
+    // if method has obtained success from some
+    EapHostPeerMethodResultAltSuccessReceived = 1,
+@@ -44,7 +45,7 @@ typedef
+ #ifdef __midl
+    [v1_enum]
+ #endif
+-enum tagEapHostPeerResponseAction
++enum   tagEapHostPeerResponseAction
+ {
+         // Discard the request as EAP cannot use it.
+         EapHostPeerResponseDiscard = 0,
+@@ -73,7 +74,7 @@ typedef
+ #ifdef __midl
+    [v1_enum]
+ #endif
+-enum tagEapHostPeerAuthParams {
++enum   tagEapHostPeerAuthParams {
+    EapHostPeerAuthStatus = 1,    // current auth status
+    EapHostPeerIdentity,           // obtain the inner method id
+    EapHostPeerIdentityExtendedInfo, // obtained from Identity packet
+@@ -88,7 +89,7 @@ typedef
+ #endif
+ 
+ // possible values for EAP status during authentication process
+-enum _EAPHOST_AUTH_STATUS
++enum   _EAPHOST_AUTH_STATUS
+ {
+    EapHostInvalidSession = 0,
+    EapHostAuthNotStarted,
+@@ -102,7 +103,7 @@ enum _EAPHOST_AUTH_STATUS
+ 
+ // describes the current authentication info through different stages
+ // of EAP authentication process.
+-typedef struct _EAPHOST_AUTH_INFO
++typedef struct   _EAPHOST_AUTH_INFO
+ {
+    EAPHOST_AUTH_STATUS status;
+    DWORD dwErrorCode;
+@@ -116,7 +117,7 @@ typedef
+ #ifdef __midl
+    [v1_enum]
+ #endif
+-enum _ISOLATION_STATE
++enum   _ISOLATION_STATE
+ {
+    ISOLATION_STATE_UNKNOWN = 0,
+    ISOLATION_STATE_NOT_RESTRICTED = 1,
+@@ -126,7 +127,7 @@ enum _ISOLATION_STATE
+ 
+ // This carries the result information passed from EAPHost to EAP-method,
+ // when EAP-method calls GetResult
+-typedef struct tagEapHostPeerMethodResult
++typedef struct   tagEapHostPeerMethodResult
+ {
+    BOOL fIsSuccess;
+    UINT32 dwFailureReasonCode;

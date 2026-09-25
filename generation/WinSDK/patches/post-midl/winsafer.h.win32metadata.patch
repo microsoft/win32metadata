@@ -1,0 +1,280 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
+index 17c21ea419..962f2e332a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsafer.h
+@@ -18,6 +18,7 @@ Abstract:
+ #define _WINSAFER_H
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -34,7 +35,7 @@ extern "C" {
+ // Opaque datatype for representing handles to Safer objects.
+ //
+ 
+-DECLARE_HANDLE(SAFER_LEVEL_HANDLE);
++DECLARE_HANDLE(SAFER_LEVEL_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ 
+ //
+@@ -79,6 +80,28 @@ DECLARE_HANDLE(SAFER_LEVEL_HANDLE);
+ #define SAFER_TOKEN_MAKE_INERT      0x00000004
+ #define SAFER_TOKEN_WANT_FLAGS      0x00000008
+ 
++#if defined(WIN32METADATA) && !defined(RC_INVOKED)
++#pragma push_macro("SAFER_TOKEN_NULL_IF_EQUAL")
++#pragma push_macro("SAFER_TOKEN_COMPARE_ONLY")
++#pragma push_macro("SAFER_TOKEN_MAKE_INERT")
++#pragma push_macro("SAFER_TOKEN_WANT_FLAGS")
++#undef SAFER_TOKEN_NULL_IF_EQUAL
++#undef SAFER_TOKEN_COMPARE_ONLY
++#undef SAFER_TOKEN_MAKE_INERT
++#undef SAFER_TOKEN_WANT_FLAGS
++enum [[clang::flag_enum]] SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS : unsigned long
++{
++    SAFER_TOKEN_NULL_IF_EQUAL = 0x00000001,
++    SAFER_TOKEN_COMPARE_ONLY = 0x00000002,
++    SAFER_TOKEN_MAKE_INERT = 0x00000004,
++    SAFER_TOKEN_WANT_FLAGS = 0x00000008,
++};
++#pragma pop_macro("SAFER_TOKEN_WANT_FLAGS")
++#pragma pop_macro("SAFER_TOKEN_MAKE_INERT")
++#pragma pop_macro("SAFER_TOKEN_COMPARE_ONLY")
++#pragma pop_macro("SAFER_TOKEN_NULL_IF_EQUAL")
++#endif
++
+ //
+ // Flags for specifying what criteria within SAFER_CODE_PROPERTIES to evaluate
+ // when finding code identity with SaferIdentifyLevel.
+@@ -98,7 +121,7 @@ DECLARE_HANDLE(SAFER_LEVEL_HANDLE);
+ 
+ #include <pshpack8.h>
+ 
+-typedef struct _SAFER_CODE_PROPERTIES_V1
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _SAFER_CODE_PROPERTIES_V1
+ {
+ 
+     //
+@@ -186,7 +209,7 @@ typedef struct _SAFER_CODE_PROPERTIES_V1
+ 
+ } SAFER_CODE_PROPERTIES_V1, *PSAFER_CODE_PROPERTIES_V1;
+ 
+-typedef struct _SAFER_CODE_PROPERTIES_V2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SAFER_CODE_PROPERTIES_V2
+ {
+ 
+     //
+@@ -321,7 +344,7 @@ typedef SAFER_CODE_PROPERTIES_V2 SAFER_CODE_PROPERTIES, *PSAFER_CODE_PROPERTIES;
+ // policy scopes based on access of the caller.
+ //
+ 
+-typedef enum _SAFER_POLICY_INFO_CLASS
++typedef enum   _SAFER_POLICY_INFO_CLASS
+ {
+ 
+     //
+@@ -387,7 +410,7 @@ typedef enum _SAFER_POLICY_INFO_CLASS
+ // single authorization Level via SaferGet/SetInformationFromLevel.
+ //
+ 
+-typedef enum _SAFER_OBJECT_INFO_CLASS
++typedef enum   _SAFER_OBJECT_INFO_CLASS
+ {
+ 
+     SaferObjectLevelId = 1,               // get: DWORD
+@@ -438,7 +461,7 @@ typedef enum _SAFER_OBJECT_INFO_CLASS
+ 
+ #include <pshpack8.h>
+ 
+-typedef enum _SAFER_IDENTIFICATION_TYPES
++typedef enum   _SAFER_IDENTIFICATION_TYPES
+ {
+ 
+     SaferIdentityDefault,
+@@ -449,7 +472,7 @@ typedef enum _SAFER_IDENTIFICATION_TYPES
+ 
+ } SAFER_IDENTIFICATION_TYPES;
+ 
+-typedef struct _SAFER_IDENTIFICATION_HEADER
++typedef struct   _SAFER_IDENTIFICATION_HEADER
+ {
+     //
+     // indicates the type of the structure, one of SaferIdentityType*
+@@ -477,7 +500,7 @@ typedef struct _SAFER_IDENTIFICATION_HEADER
+ 
+ } SAFER_IDENTIFICATION_HEADER, *PSAFER_IDENTIFICATION_HEADER;
+ 
+-typedef struct _SAFER_PATHNAME_IDENTIFICATION
++typedef struct   _SAFER_PATHNAME_IDENTIFICATION
+ {
+     //
+     // header.dwIdentificationType must be SaferIdentityTypeImageName
+@@ -496,7 +519,7 @@ typedef struct _SAFER_PATHNAME_IDENTIFICATION
+     // filepath or name, possibly with vars
+     //
+ 
+-    PWCHAR ImageName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR ImageName;
+ 
+     //
+     // any combo of SAFER_POLICY_* flags
+@@ -506,7 +529,7 @@ typedef struct _SAFER_PATHNAME_IDENTIFICATION
+ 
+ } SAFER_PATHNAME_IDENTIFICATION, *PSAFER_PATHNAME_IDENTIFICATION;
+ 
+-typedef struct _SAFER_HASH_IDENTIFICATION
++typedef struct   _SAFER_HASH_IDENTIFICATION
+ {
+     //
+     // header.dwIdentificationType must be SaferIdentityTypeImageHash
+@@ -587,7 +610,7 @@ typedef struct _SAFER_HASH_IDENTIFICATION2
+ 
+ } SAFER_HASH_IDENTIFICATION2, *PSAFER_HASH_IDENTIFICATION2;
+ 
+-typedef struct _SAFER_URLZONE_IDENTIFICATION
++typedef struct   _SAFER_URLZONE_IDENTIFICATION
+ {
+     //
+     // header.dwIdentificationType must be SaferIdentityTypeUrlZone
+@@ -619,7 +642,10 @@ typedef struct _SAFER_URLZONE_IDENTIFICATION
+ // enumeration operations.
+ //
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferGetPolicyInformation(
+     _In_ DWORD                   dwScopeId,
+@@ -627,59 +653,77 @@ SaferGetPolicyInformation(
+     _In_ DWORD                   InfoBufferSize,
+     _Out_writes_bytes_(InfoBufferSize) PVOID InfoBuffer,
+     _Out_ PDWORD                 InfoBufferRetSize,
+-    _Reserved_ LPVOID            lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID            lpReserved
+     );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferSetPolicyInformation(
+     _In_ DWORD                          dwScopeId,
+     _In_ SAFER_POLICY_INFO_CLASS        SaferPolicyInfoClass,
+     _In_ DWORD                          InfoBufferSize,
+     _In_reads_bytes_(InfoBufferSize) PVOID   InfoBuffer,
+-    _Reserved_ LPVOID                   lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID                   lpReserved
+     );
+ 
+ //
+ // Functions to open or close a handle to a Safer Level.
+ //
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferCreateLevel(
+     _In_ DWORD                dwScopeId,
+     _In_ DWORD                dwLevelId,
+     _In_ DWORD                OpenFlags,
+-    _Outptr_ SAFER_LEVEL_HANDLE * pLevelHandle,
+-    _Reserved_ LPVOID               lpReserved
++    _Outptr_  SAFER_LEVEL_HANDLE * pLevelHandle,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID               lpReserved
+     );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferCloseLevel(
+     _In_ SAFER_LEVEL_HANDLE hLevelHandle
+     );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferIdentifyLevel(
+     _In_ DWORD              dwNumProperties,
+     _In_reads_opt_(dwNumProperties) PSAFER_CODE_PROPERTIES pCodeProperties,
+-    _Outptr_ SAFER_LEVEL_HANDLE  * pLevelHandle,
++    _Outptr_  SAFER_LEVEL_HANDLE  * pLevelHandle,
+     _In_opt_ LPVOID         lpReserved
+     );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferComputeTokenFromLevel(
+     _In_ SAFER_LEVEL_HANDLE LevelHandle,
+     _In_opt_ HANDLE         InAccessToken,
+-    _Out_ PHANDLE           OutAccessToken,
+-    _In_ DWORD              dwFlags,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE           OutAccessToken,
++    _In_ _Win32_AssociatedEnum_(SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS) DWORD              dwFlags,
+     _Inout_opt_ LPVOID      lpReserved
+     );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferGetLevelInformation(
+         _In_ SAFER_LEVEL_HANDLE                 LevelHandle,
+@@ -689,7 +733,10 @@ SaferGetLevelInformation(
+         _Out_ LPDWORD                           lpdwOutBufferSize
+         );
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferSetLevelInformation(
+     _In_ SAFER_LEVEL_HANDLE             LevelHandle,
+@@ -704,16 +751,21 @@ SaferSetLevelInformation(
+ // ShellExecute and cmd when a lower trust evaluation result occurs.
+ //
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
++_Win32_SetLastError_
+ BOOL WINAPI
+ SaferRecordEventLogEntry(
+     _In_ SAFER_LEVEL_HANDLE hLevel,
+     _In_ LPCWSTR            szTargetPath,
+-    _Reserved_ LPVOID       lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID       lpReserved
+     );
+ 
+ 
+-WINADVAPI
++_Windows_SupportedOS_WindowsXP_ WINADVAPI
++
++
+ BOOL WINAPI
+ SaferiIsExecutableFileType(
+     _In_ LPCWSTR szFullPathname,

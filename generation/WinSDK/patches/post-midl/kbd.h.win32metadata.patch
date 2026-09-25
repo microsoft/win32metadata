@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/kbd.h b/generation/WinSDK/RecompiledIdlHeaders/um/kbd.h
+index d1495e2d19..85edea474a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/kbd.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/kbd.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /****************************** Module Header ******************************\
+ * Module Name: kbd.h
+ *
+@@ -419,7 +420,7 @@ TYPEDEF_VK_TO_WCHARS(10) // VK_TO_WCHARS10, *PVK_TO_WCHARS10;
+ *
+ \***************************************************************************/
+ 
+-typedef struct _VK_TO_WCHAR_TABLE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _VK_TO_WCHAR_TABLE {
+     PVK_TO_WCHARS1 pVkToWchars;
+     BYTE           nModifications;
+     BYTE           cbSize;

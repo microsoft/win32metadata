@@ -1,0 +1,905 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
+index c103a80d02..d0fd003a23 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1918,7 +1919,7 @@ EXTERN_C const IID IID_ID3D12Object;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c4fec28f-7966-4e95-9f94-f431cb56c3b8")
++    MIDL_INTERFACE("c4fec28f-7966-4e95-9f94-f431cb56c3b8") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Object : public IUnknown
+     {
+     public:
+@@ -2064,7 +2065,7 @@ EXTERN_C const IID IID_ID3D12DeviceChild;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("905db94b-a00c-4140-9df5-2b64ca9ea357")
++    MIDL_INTERFACE("905db94b-a00c-4140-9df5-2b64ca9ea357") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceChild : public ID3D12Object
+     {
+     public:
+@@ -2202,7 +2203,7 @@ EXTERN_C const IID IID_ID3D12RootSignature;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c54a6b66-72df-4ee8-8be5-a946a1429214")
++    MIDL_INTERFACE("c54a6b66-72df-4ee8-8be5-a946a1429214") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12RootSignature : public ID3D12DeviceChild
+     {
+     public:
+@@ -2335,7 +2336,7 @@ EXTERN_C const IID IID_ID3D12RootSignature1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c390bd7d-9142-4a95-b072-6d3439ade5c4")
++    MIDL_INTERFACE("c390bd7d-9142-4a95-b072-6d3439ade5c4") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12RootSignature1 : public ID3D12RootSignature
+     {
+     public:
+@@ -4734,7 +4735,7 @@ EXTERN_C const IID IID_ID3D12RootSignatureDeserializer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34AB647B-3CC8-46AC-841B-C0965645C046")
++    MIDL_INTERFACE("34AB647B-3CC8-46AC-841B-C0965645C046") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12RootSignatureDeserializer : public IUnknown
+     {
+     public:
+@@ -4817,7 +4818,7 @@ EXTERN_C const IID IID_ID3D12VersionedRootSignatureDeserializer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7F91CE67-090C-4BB7-B78E-ED8FF2E31DA0")
++    MIDL_INTERFACE("7F91CE67-090C-4BB7-B78E-ED8FF2E31DA0") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VersionedRootSignatureDeserializer : public IUnknown
+     {
+     public:
+@@ -5191,7 +5192,7 @@ EXTERN_C const IID IID_ID3D12Pageable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("63ee58fb-1268-4835-86da-f008ce62f0d6")
++    MIDL_INTERFACE("63ee58fb-1268-4835-86da-f008ce62f0d6") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Pageable : public ID3D12DeviceChild
+     {
+     public:
+@@ -5324,7 +5325,7 @@ EXTERN_C const IID IID_ID3D12Heap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6b3b2502-6e51-45b3-90ee-9884265e8df3")
++    MIDL_INTERFACE("6b3b2502-6e51-45b3-90ee-9884265e8df3") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Heap : public ID3D12Pageable
+     {
+     public:
+@@ -5467,7 +5468,7 @@ EXTERN_C const IID IID_ID3D12Resource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("696442be-a72e-4059-bc79-5b5c98040fad")
++    MIDL_INTERFACE("696442be-a72e-4059-bc79-5b5c98040fad") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Resource : public ID3D12Pageable
+     {
+     public:
+@@ -5716,7 +5717,7 @@ EXTERN_C const IID IID_ID3D12CommandAllocator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6102dee4-af59-4b09-b999-b44d73f09b24")
++    MIDL_INTERFACE("6102dee4-af59-4b09-b999-b44d73f09b24") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CommandAllocator : public ID3D12Pageable
+     {
+     public:
+@@ -5859,7 +5860,7 @@ EXTERN_C const IID IID_ID3D12Fence;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0a753dcf-c4d8-4b91-adf6-be5a60d95a76")
++    MIDL_INTERFACE("0a753dcf-c4d8-4b91-adf6-be5a60d95a76") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Fence : public ID3D12Pageable
+     {
+     public:
+@@ -6026,7 +6027,7 @@ EXTERN_C const IID IID_ID3D12Fence1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("433685fe-e22b-4ca0-a8db-b5b4f4dd0e4a")
++    MIDL_INTERFACE("433685fe-e22b-4ca0-a8db-b5b4f4dd0e4a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Fence1 : public ID3D12Fence
+     {
+     public:
+@@ -6194,7 +6195,7 @@ EXTERN_C const IID IID_ID3D12PipelineState;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("765a30f3-f624-4c6f-a828-ace948622445")
++    MIDL_INTERFACE("765a30f3-f624-4c6f-a828-ace948622445") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12PipelineState : public ID3D12Pageable
+     {
+     public:
+@@ -6341,7 +6342,7 @@ EXTERN_C const IID IID_ID3D12PipelineState1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5646804c-9638-48f7-9182-b3ee5a6b60fb")
++    MIDL_INTERFACE("5646804c-9638-48f7-9182-b3ee5a6b60fb") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12PipelineState1 : public ID3D12PipelineState
+     {
+     public:
+@@ -6502,7 +6503,7 @@ EXTERN_C const IID IID_ID3D12DescriptorHeap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8efb471d-616c-4f49-90f7-127bb763fa51")
++    MIDL_INTERFACE("8efb471d-616c-4f49-90f7-127bb763fa51") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DescriptorHeap : public ID3D12Pageable
+     {
+     public:
+@@ -6663,7 +6664,7 @@ EXTERN_C const IID IID_ID3D12QueryHeap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0d9658ae-ed45-469e-a61d-970ec583cab4")
++    MIDL_INTERFACE("0d9658ae-ed45-469e-a61d-970ec583cab4") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12QueryHeap : public ID3D12Pageable
+     {
+     public:
+@@ -6797,7 +6798,7 @@ EXTERN_C const IID IID_ID3D12CommandSignature;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c36a797c-ec80-4f0a-8985-a7b2475082d1")
++    MIDL_INTERFACE("c36a797c-ec80-4f0a-8985-a7b2475082d1") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CommandSignature : public ID3D12Pageable
+     {
+     public:
+@@ -6931,7 +6932,7 @@ EXTERN_C const IID IID_ID3D12CommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7116d91c-e7e4-47ce-b8c6-ec8168f437e5")
++    MIDL_INTERFACE("7116d91c-e7e4-47ce-b8c6-ec8168f437e5") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CommandList : public ID3D12DeviceChild
+     {
+     public:
+@@ -7073,7 +7074,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5b160d0f-ac1b-4185-8ba8-b3ae42a5a455")
++    MIDL_INTERFACE("5b160d0f-ac1b-4185-8ba8-b3ae42a5a455") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList : public ID3D12CommandList
+     {
+     public:
+@@ -7171,7 +7172,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+         
+         virtual void STDMETHODCALLTYPE IASetPrimitiveTopology( 
+             /* [annotation] */ 
+-            _In_  D3D12_PRIMITIVE_TOPOLOGY PrimitiveTopology) = 0;
++            _Win32_AssociatedEnum_(D3D_PRIMITIVE_TOPOLOGY) _In_  D3D12_PRIMITIVE_TOPOLOGY PrimitiveTopology) = 0;
+         
+         virtual void STDMETHODCALLTYPE RSSetViewports( 
+             /* [annotation] */ 
+@@ -7347,7 +7348,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+             /* [annotation] */ 
+             _In_  UINT NumRects,
+             /* [annotation] */ 
+-            _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:optional") _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
+         
+         virtual void STDMETHODCALLTYPE ClearRenderTargetView( 
+             /* [annotation] */ 
+@@ -7357,7 +7358,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList;
+             /* [annotation] */ 
+             _In_  UINT NumRects,
+             /* [annotation] */ 
+-            _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:optional") _In_reads_(NumRects)  const D3D12_RECT *pRects) = 0;
+         
+         virtual void STDMETHODCALLTYPE ClearUnorderedAccessViewUint( 
+             /* [annotation] */ 
+@@ -8233,7 +8234,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("553103fb-1fe7-4557-bb38-946d7d0e7ca7")
++    MIDL_INTERFACE("553103fb-1fe7-4557-bb38-946d7d0e7ca7") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList1 : public ID3D12GraphicsCommandList
+     {
+     public:
+@@ -9192,7 +9193,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("38C3E585-FF17-412C-9150-4FC6F9D72A28")
++    MIDL_INTERFACE("38C3E585-FF17-412C-9150-4FC6F9D72A28") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList2 : public ID3D12GraphicsCommandList1
+     {
+     public:
+@@ -10085,7 +10086,7 @@ EXTERN_C const IID IID_ID3D12CommandQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0ec870a6-5d7e-4c22-8cfc-5baae07616ed")
++    MIDL_INTERFACE("0ec870a6-5d7e-4c22-8cfc-5baae07616ed") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CommandQueue : public ID3D12Pageable
+     {
+     public:
+@@ -10462,7 +10463,7 @@ EXTERN_C const IID IID_ID3D12CommandQueue1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3a3c3165-0ee7-4b8e-a0af-6356b4c3bbb9")
++    MIDL_INTERFACE("3a3c3165-0ee7-4b8e-a0af-6356b4c3bbb9") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12CommandQueue1 : public ID3D12CommandQueue
+     {
+     public:
+@@ -10470,13 +10471,13 @@ EXTERN_C const IID IID_ID3D12CommandQueue1;
+             D3D12_COMMAND_QUEUE_PROCESS_PRIORITY Priority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProcessPriority( 
+-            D3D12_COMMAND_QUEUE_PROCESS_PRIORITY *pOutValue) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D12_COMMAND_QUEUE_PROCESS_PRIORITY *pOutValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetGlobalPriority( 
+             D3D12_COMMAND_QUEUE_GLOBAL_PRIORITY Priority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGlobalPriority( 
+-            D3D12_COMMAND_QUEUE_GLOBAL_PRIORITY *pOutValue) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D12_COMMAND_QUEUE_GLOBAL_PRIORITY *pOutValue) = 0;
+         
+     };
+     
+@@ -10768,7 +10769,7 @@ EXTERN_C const IID IID_ID3D12Device;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("189819f1-1db6-4b57-be54-1821339b85f7")
++    MIDL_INTERFACE("189819f1-1db6-4b57-be54-1821339b85f7") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device : public ID3D12Object
+     {
+     public:
+@@ -10991,7 +10992,7 @@ EXTERN_C const IID IID_ID3D12Device;
+             /* [annotation] */ 
+             _In_opt_  LPCWSTR Name,
+             /* [annotation] */ 
+-            _Out_  HANDLE *pHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenSharedHandle( 
+             /* [annotation] */ 
+@@ -11006,7 +11007,7 @@ EXTERN_C const IID IID_ID3D12Device;
+             _In_  LPCWSTR Name,
+             DWORD Access,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *pNTHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pNTHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE MakeResident( 
+             UINT NumObjects,
+@@ -11698,7 +11699,7 @@ EXTERN_C const IID IID_ID3D12PipelineLibrary;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c64226a8-9201-46af-b4cc-53fb9ff7414f")
++    MIDL_INTERFACE("c64226a8-9201-46af-b4cc-53fb9ff7414f") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12PipelineLibrary : public ID3D12DeviceChild
+     {
+     public:
+@@ -11922,7 +11923,7 @@ EXTERN_C const IID IID_ID3D12PipelineLibrary1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("80eabf42-2568-4e5e-bd82-c37f86961dc3")
++    MIDL_INTERFACE("80eabf42-2568-4e5e-bd82-c37f86961dc3") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12PipelineLibrary1 : public ID3D12PipelineLibrary
+     {
+     public:
+@@ -12166,7 +12167,7 @@ EXTERN_C const IID IID_ID3D12Device1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77acce80-638e-4e65-8895-c1f23386863e")
++    MIDL_INTERFACE("77acce80-638e-4e65-8895-c1f23386863e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device1 : public ID3D12Device
+     {
+     public:
+@@ -12850,7 +12851,7 @@ EXTERN_C const IID IID_ID3D12Device2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("30baa41e-b15b-475c-a0bb-1af5c5b64328")
++    MIDL_INTERFACE("30baa41e-b15b-475c-a0bb-1af5c5b64328") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device2 : public ID3D12Device1
+     {
+     public:
+@@ -13547,7 +13548,7 @@ EXTERN_C const IID IID_ID3D12Device3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81dadc15-2bad-4392-93c5-101345c4aa98")
++    MIDL_INTERFACE("81dadc15-2bad-4392-93c5-101345c4aa98") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device3 : public ID3D12Device2
+     {
+     public:
+@@ -14322,7 +14323,7 @@ EXTERN_C const IID IID_ID3D12ProtectedSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A1533D18-0AC1-4084-85B9-89A96116806B")
++    MIDL_INTERFACE("A1533D18-0AC1-4084-85B9-89A96116806B") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12ProtectedSession : public ID3D12DeviceChild
+     {
+     public:
+@@ -14516,7 +14517,7 @@ EXTERN_C const IID IID_ID3D12ProtectedResourceSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6CD696F4-F289-40CC-8091-5A6C0A099C3D")
++    MIDL_INTERFACE("6CD696F4-F289-40CC-8091-5A6C0A099C3D") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12ProtectedResourceSession : public ID3D12ProtectedSession
+     {
+     public:
+@@ -14677,7 +14678,7 @@ EXTERN_C const IID IID_ID3D12Device4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e865df17-a9ee-46f9-a463-3098315aa2e5")
++    MIDL_INTERFACE("e865df17-a9ee-46f9-a463-3098315aa2e5") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device4 : public ID3D12Device3
+     {
+     public:
+@@ -15572,7 +15573,7 @@ EXTERN_C const IID IID_ID3D12LifetimeOwner;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e667af9f-cd56-4f46-83ce-032e595d70a8")
++    MIDL_INTERFACE("e667af9f-cd56-4f46-83ce-032e595d70a8") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12LifetimeOwner : public IUnknown
+     {
+     public:
+@@ -15657,7 +15658,7 @@ EXTERN_C const IID IID_ID3D12SwapChainAssistant;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f1df64b6-57fd-49cd-8807-c0eb88b45c8f")
++    MIDL_INTERFACE("f1df64b6-57fd-49cd-8807-c0eb88b45c8f") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12SwapChainAssistant : public IUnknown
+     {
+     public:
+@@ -15785,7 +15786,7 @@ EXTERN_C const IID IID_ID3D12LifetimeTracker;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3fd03d36-4eb1-424a-a582-494ecb8ba813")
++    MIDL_INTERFACE("3fd03d36-4eb1-424a-a582-494ecb8ba813") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12LifetimeTracker : public ID3D12DeviceChild
+     {
+     public:
+@@ -16006,7 +16007,7 @@ EXTERN_C const IID IID_ID3D12StateObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("47016943-fca8-4594-93ea-af258b55346d")
++    MIDL_INTERFACE("47016943-fca8-4594-93ea-af258b55346d") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12StateObject : public ID3D12Pageable
+     {
+     public:
+@@ -16140,7 +16141,7 @@ EXTERN_C const IID IID_ID3D12StateObjectProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("de5fa827-9bf9-4f26-89ff-d7f56fde3860")
++    MIDL_INTERFACE("de5fa827-9bf9-4f26-89ff-d7f56fde3860") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12StateObjectProperties : public IUnknown
+     {
+     public:
+@@ -16273,7 +16274,7 @@ EXTERN_C const IID IID_ID3D12StateObjectProperties1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("460caac7-1d24-446a-a184-ca67db494138")
++    MIDL_INTERFACE("460caac7-1d24-446a-a184-ca67db494138") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12StateObjectProperties1 : public ID3D12StateObjectProperties
+     {
+     public:
+@@ -16392,7 +16393,7 @@ EXTERN_C const IID IID_ID3D12StateObjectProperties2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d5e82917-f0f1-44cf-ae5e-ce222dd0b884")
++    MIDL_INTERFACE("d5e82917-f0f1-44cf-ae5e-ce222dd0b884") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12StateObjectProperties2 : public ID3D12StateObjectProperties1
+     {
+     public:
+@@ -16572,7 +16573,7 @@ EXTERN_C const IID IID_ID3D12WorkGraphProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("065acf71-f863-4b89-82f4-02e4d5886757")
++    MIDL_INTERFACE("065acf71-f863-4b89-82f4-02e4d5886757") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12WorkGraphProperties : public IUnknown
+     {
+     public:
+@@ -17419,7 +17420,7 @@ enum D3D12_SERIALIZED_BLOCK_TYPE
+ 
+ typedef struct D3D12_RAYTRACING_SERIALIZED_BLOCK
+     {
+-    D3D12_RAYTRACING_SERIALIZED_BLOCK_TYPE Type;
++    _Win32_AssociatedEnum_(D3D12_SERIALIZED_BLOCK_TYPE) D3D12_RAYTRACING_SERIALIZED_BLOCK_TYPE Type;
+     UINT64 NumBlockPointersAfterHeader;
+     } 	D3D12_RAYTRACING_SERIALIZED_BLOCK;
+ 
+@@ -17560,7 +17561,7 @@ EXTERN_C const IID IID_ID3D12Device5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8b4f173b-2fea-4b80-8f58-4307191ab95d")
++    MIDL_INTERFACE("8b4f173b-2fea-4b80-8f58-4307191ab95d") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_17763_ 
+     ID3D12Device5 : public ID3D12Device4
+     {
+     public:
+@@ -18874,7 +18875,7 @@ EXTERN_C const IID IID_ID3D12DeviceRemovedExtendedDataSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("82BC481C-6B9B-4030-AEDB-7EE3D1DF1E63")
++    MIDL_INTERFACE("82BC481C-6B9B-4030-AEDB-7EE3D1DF1E63") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceRemovedExtendedDataSettings : public IUnknown
+     {
+     public:
+@@ -18981,7 +18982,7 @@ EXTERN_C const IID IID_ID3D12DeviceRemovedExtendedDataSettings1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DBD5AE51-3317-4F0A-ADF9-1D7CEDCAAE0B")
++    MIDL_INTERFACE("DBD5AE51-3317-4F0A-ADF9-1D7CEDCAAE0B") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceRemovedExtendedDataSettings1 : public ID3D12DeviceRemovedExtendedDataSettings
+     {
+     public:
+@@ -19091,7 +19092,7 @@ EXTERN_C const IID IID_ID3D12DeviceRemovedExtendedDataSettings2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("61552388-01ab-4008-a436-83db189566ea")
++    MIDL_INTERFACE("61552388-01ab-4008-a436-83db189566ea") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceRemovedExtendedDataSettings2 : public ID3D12DeviceRemovedExtendedDataSettings1
+     {
+     public:
+@@ -19210,7 +19211,7 @@ EXTERN_C const IID IID_ID3D12DeviceRemovedExtendedData;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("98931D33-5AE8-4791-AA3C-1A73A2934E71")
++    MIDL_INTERFACE("98931D33-5AE8-4791-AA3C-1A73A2934E71") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceRemovedExtendedData : public IUnknown
+     {
+     public:
+@@ -19310,7 +19311,7 @@ EXTERN_C const IID IID_ID3D12DeviceRemovedExtendedData1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9727A022-CF1D-4DDA-9EBA-EFFA653FC506")
++    MIDL_INTERFACE("9727A022-CF1D-4DDA-9EBA-EFFA653FC506") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceRemovedExtendedData1 : public ID3D12DeviceRemovedExtendedData
+     {
+     public:
+@@ -19429,7 +19430,7 @@ EXTERN_C const IID IID_ID3D12DeviceRemovedExtendedData2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("67FC5816-E4CA-4915-BF18-42541272DA54")
++    MIDL_INTERFACE("67FC5816-E4CA-4915-BF18-42541272DA54") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceRemovedExtendedData2 : public ID3D12DeviceRemovedExtendedData1
+     {
+     public:
+@@ -19589,7 +19590,7 @@ EXTERN_C const IID IID_ID3D12Device6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c70b221b-40e4-4a17-89af-025a0727a6dc")
++    MIDL_INTERFACE("c70b221b-40e4-4a17-89af-025a0727a6dc") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device6 : public ID3D12Device5
+     {
+     public:
+@@ -20555,7 +20556,7 @@ EXTERN_C const IID IID_ID3D12ProtectedResourceSession1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D6F12DD6-76FB-406E-8961-4296EEFC0409")
++    MIDL_INTERFACE("D6F12DD6-76FB-406E-8961-4296EEFC0409") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12ProtectedResourceSession1 : public ID3D12ProtectedResourceSession
+     {
+     public:
+@@ -20724,7 +20725,7 @@ EXTERN_C const IID IID_ID3D12Device7;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5c014b53-68a1-4b9b-8bd1-dd6046b9358b")
++    MIDL_INTERFACE("5c014b53-68a1-4b9b-8bd1-dd6046b9358b") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device7 : public ID3D12Device6
+     {
+     public:
+@@ -21700,7 +21701,7 @@ EXTERN_C const IID IID_ID3D12Device8;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9218E6BB-F944-4F7E-A75C-B1B2C7B701F3")
++    MIDL_INTERFACE("9218E6BB-F944-4F7E-A75C-B1B2C7B701F3") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device8 : public ID3D12Device7
+     {
+     public:
+@@ -22810,7 +22811,7 @@ EXTERN_C const IID IID_ID3D12Resource1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9D5E227A-4430-4161-88B3-3ECA6BB16E19")
++    MIDL_INTERFACE("9D5E227A-4430-4161-88B3-3ECA6BB16E19") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Resource1 : public ID3D12Resource
+     {
+     public:
+@@ -23037,7 +23038,7 @@ EXTERN_C const IID IID_ID3D12Resource2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BE36EC3B-EA85-4AEB-A45A-E9D76404A495")
++    MIDL_INTERFACE("BE36EC3B-EA85-4AEB-A45A-E9D76404A495") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Resource2 : public ID3D12Resource1
+     {
+     public:
+@@ -23268,7 +23269,7 @@ EXTERN_C const IID IID_ID3D12Heap1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("572F7389-2168-49E3-9693-D6DF5871BF6D")
++    MIDL_INTERFACE("572F7389-2168-49E3-9693-D6DF5871BF6D") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Heap1 : public ID3D12Heap
+     {
+     public:
+@@ -23427,7 +23428,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6FDA83A7-B84C-4E38-9AC8-C7BD22016B3D")
++    MIDL_INTERFACE("6FDA83A7-B84C-4E38-9AC8-C7BD22016B3D") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList3 : public ID3D12GraphicsCommandList2
+     {
+     public:
+@@ -24445,7 +24446,7 @@ EXTERN_C const IID IID_ID3D12MetaCommand;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DBB84C27-36CE-4FC9-B801-F048C46AC570")
++    MIDL_INTERFACE("DBB84C27-36CE-4FC9-B801-F048C46AC570") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12MetaCommand : public ID3D12Pageable
+     {
+     public:
+@@ -24709,7 +24710,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8754318e-d3a9-4541-98cf-645b50dc4874")
++    MIDL_INTERFACE("8754318e-d3a9-4541-98cf-645b50dc4874") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList4 : public ID3D12GraphicsCommandList3
+     {
+     public:
+@@ -25989,7 +25990,7 @@ EXTERN_C const IID IID_ID3D12ShaderCacheSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28e2495d-0f64-4ae4-a6ec-129255dc49a8")
++    MIDL_INTERFACE("28e2495d-0f64-4ae4-a6ec-129255dc49a8") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12ShaderCacheSession : public ID3D12DeviceChild
+     {
+     public:
+@@ -26211,7 +26212,7 @@ EXTERN_C const IID IID_ID3D12Device9;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c80e962-f032-4f60-bc9e-ebc2cfa1d83c")
++    MIDL_INTERFACE("4c80e962-f032-4f60-bc9e-ebc2cfa1d83c") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device9 : public ID3D12Device8
+     {
+     public:
+@@ -27314,7 +27315,7 @@ EXTERN_C const IID IID_ID3D12Device10;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("517f8718-aa66-49f9-b02b-a7ab89c06031")
++    MIDL_INTERFACE("517f8718-aa66-49f9-b02b-a7ab89c06031") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device10 : public ID3D12Device9
+     {
+     public:
+@@ -28517,7 +28518,7 @@ EXTERN_C const IID IID_ID3D12Device11;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5405c344-d457-444e-b4dd-2366e45aee39")
++    MIDL_INTERFACE("5405c344-d457-444e-b4dd-2366e45aee39") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device11 : public ID3D12Device10
+     {
+     public:
+@@ -29686,7 +29687,7 @@ EXTERN_C const IID IID_ID3D12Device12;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5af5c532-4c91-4cd0-b541-15a405395fc5")
++    MIDL_INTERFACE("5af5c532-4c91-4cd0-b541-15a405395fc5") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device12 : public ID3D12Device11
+     {
+     public:
+@@ -30879,7 +30880,7 @@ EXTERN_C const IID IID_ID3D12Device13;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("14eecffc-4df8-40f7-a118-5c816f45695e")
++    MIDL_INTERFACE("14eecffc-4df8-40f7-a118-5c816f45695e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device13 : public ID3D12Device12
+     {
+     public:
+@@ -32084,7 +32085,7 @@ EXTERN_C const IID IID_ID3D12Device14;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5f6e592d-d895-44c2-8e4a-88ad4926d323")
++    MIDL_INTERFACE("5f6e592d-d895-44c2-8e4a-88ad4926d323") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device14 : public ID3D12Device13
+     {
+     public:
+@@ -33357,7 +33358,7 @@ EXTERN_C const IID IID_ID3D12Device15;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("76cff76f-1e9b-4450-8cdc-34f1af788e5b")
++    MIDL_INTERFACE("76cff76f-1e9b-4450-8cdc-34f1af788e5b") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Device15 : public ID3D12Device14
+     {
+     public:
+@@ -34864,7 +34865,7 @@ EXTERN_C const IID IID_ID3D12StateObjectDatabase;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c56060b7-b5fc-4135-98e0-a1e9997eace0")
++    MIDL_INTERFACE("c56060b7-b5fc-4135-98e0-a1e9997eace0") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12StateObjectDatabase : public IUnknown
+     {
+     public:
+@@ -35079,7 +35080,7 @@ EXTERN_C const IID IID_ID3D12VirtualizationGuestDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bc66d368-7373-4943-8757-fc87dc79e476")
++    MIDL_INTERFACE("bc66d368-7373-4943-8757-fc87dc79e476") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VirtualizationGuestDevice : public IUnknown
+     {
+     public:
+@@ -35087,7 +35088,7 @@ EXTERN_C const IID IID_ID3D12VirtualizationGuestDevice;
+             /* [annotation] */ 
+             _In_  ID3D12DeviceChild *pObject,
+             /* [annotation] */ 
+-            _Out_  HANDLE *pHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateFenceFd( 
+             /* [annotation] */ 
+@@ -35189,7 +35190,7 @@ EXTERN_C const IID IID_ID3D12Tools;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7071e1f0-e84b-4b33-974f-12fa49de65c5")
++    MIDL_INTERFACE("7071e1f0-e84b-4b33-974f-12fa49de65c5") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Tools : public IUnknown
+     {
+     public:
+@@ -35283,7 +35284,7 @@ EXTERN_C const IID IID_ID3D12Tools1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e4fbc019-dd3c-43e1-8f32-7f649575f0a0")
++    MIDL_INTERFACE("e4fbc019-dd3c-43e1-8f32-7f649575f0a0") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Tools1 : public ID3D12Tools
+     {
+     public:
+@@ -35399,7 +35400,7 @@ EXTERN_C const IID IID_ID3D12Tools2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("01d393c5-c9b0-42a1-958c-c26b02d4d097")
++    MIDL_INTERFACE("01d393c5-c9b0-42a1-958c-c26b02d4d097") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Tools2 : public ID3D12Tools1
+     {
+     public:
+@@ -35525,7 +35526,7 @@ EXTERN_C const IID IID_ID3D12RuntimeValidationControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c706c811-3663-4bf1-91b9-1e8a7c114ab9")
++    MIDL_INTERFACE("c706c811-3663-4bf1-91b9-1e8a7c114ab9") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12RuntimeValidationControl : public IUnknown
+     {
+     public:
+@@ -35619,13 +35620,13 @@ EXTERN_C const IID IID_ID3D12PageableTools;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8f1359db-d8d1-42f9-b5cf-79f4cbad0d3d")
++    MIDL_INTERFACE("8f1359db-d8d1-42f9-b5cf-79f4cbad0d3d") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12PageableTools : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAllocation( 
+             /* [annotation] */ 
+-            _Inout_  D3D12_GPU_VIRTUAL_ADDRESS_RANGE *pAllocation) = 0;
++            _Win32_Retval_ _Inout_  D3D12_GPU_VIRTUAL_ADDRESS_RANGE *pAllocation) = 0;
+         
+     };
+     
+@@ -35706,7 +35707,7 @@ EXTERN_C const IID IID_ID3D12DeviceTools;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2ea68e9c-19c3-4e47-a109-6cdadff0aca9")
++    MIDL_INTERFACE("2ea68e9c-19c3-4e47-a109-6cdadff0aca9") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceTools : public IUnknown
+     {
+     public:
+@@ -35810,7 +35811,7 @@ EXTERN_C const IID IID_ID3D12DeviceTools1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e30e9fc7-e641-4d6e-8a81-9dd9206ec47a")
++    MIDL_INTERFACE("e30e9fc7-e641-4d6e-8a81-9dd9206ec47a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceTools1 : public ID3D12DeviceTools
+     {
+     public:
+@@ -36058,7 +36059,7 @@ EXTERN_C const IID IID_ID3D12SDKConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e9eb5314-33aa-42b2-a718-d77f58b1f1c7")
++    MIDL_INTERFACE("e9eb5314-33aa-42b2-a718-d77f58b1f1c7") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12SDKConfiguration : public IUnknown
+     {
+     public:
+@@ -36147,7 +36148,7 @@ EXTERN_C const IID IID_ID3D12SDKConfiguration1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8aaf9303-ad25-48b9-9a57-d9c37e009d9f")
++    MIDL_INTERFACE("8aaf9303-ad25-48b9-9a57-d9c37e009d9f") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12SDKConfiguration1 : public ID3D12SDKConfiguration
+     {
+     public:
+@@ -36280,7 +36281,7 @@ EXTERN_C const IID IID_ID3D12DeviceFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("61f307d3-d34e-4e7c-8374-3ba4de23cccb")
++    MIDL_INTERFACE("61f307d3-d34e-4e7c-8374-3ba4de23cccb") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceFactory : public IUnknown
+     {
+     public:
+@@ -36487,7 +36488,7 @@ EXTERN_C const IID IID_ID3D12DeviceConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("78dbf87b-f766-422b-a61c-c8c446bdb9ad")
++    MIDL_INTERFACE("78dbf87b-f766-422b-a61c-c8c446bdb9ad") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceConfiguration : public IUnknown
+     {
+     public:
+@@ -36627,7 +36628,7 @@ EXTERN_C const IID IID_ID3D12DeviceConfiguration1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ed342442-6343-4e16-bb82-a3a577874e56")
++    MIDL_INTERFACE("ed342442-6343-4e16-bb82-a3a577874e56") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceConfiguration1 : public ID3D12DeviceConfiguration
+     {
+     public:
+@@ -36784,7 +36785,7 @@ EXTERN_C const IID IID_ID3D12StateObjectDatabaseFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f5b066f0-648a-4611-bd41-27fd0948b9eb")
++    MIDL_INTERFACE("f5b066f0-648a-4611-bd41-27fd0948b9eb") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12StateObjectDatabaseFactory : public IUnknown
+     {
+     public:
+@@ -36877,7 +36878,7 @@ EXTERN_C const IID IID_ID3D12ApplicationIdentity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("82dc6c85-727b-4a8d-9169-db6ce3e975a0")
++    MIDL_INTERFACE("82dc6c85-727b-4a8d-9169-db6ce3e975a0") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12ApplicationIdentity : public IUnknown
+     {
+     public:
+@@ -37007,7 +37008,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("55050859-4024-474c-87f5-6472eaee44ea")
++    MIDL_INTERFACE("55050859-4024-474c-87f5-6472eaee44ea") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList5 : public ID3D12GraphicsCommandList4
+     {
+     public:
+@@ -38054,7 +38055,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c3827890-e548-4cfa-96cf-5689a9370f80")
++    MIDL_INTERFACE("c3827890-e548-4cfa-96cf-5689a9370f80") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList6 : public ID3D12GraphicsCommandList5
+     {
+     public:
+@@ -39098,7 +39099,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList7;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dd171223-8b61-4769-90e3-160ccde4e2c1")
++    MIDL_INTERFACE("dd171223-8b61-4769-90e3-160ccde4e2c1") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList7 : public ID3D12GraphicsCommandList6
+     {
+     public:
+@@ -40150,7 +40151,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList8;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ee936ef9-599d-4d28-938e-23c4ad05ce51")
++    MIDL_INTERFACE("ee936ef9-599d-4d28-938e-23c4ad05ce51") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList8 : public ID3D12GraphicsCommandList7
+     {
+     public:
+@@ -41215,7 +41216,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList9;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34ed2808-ffe6-4c2b-b11a-cabd2b0c59e1")
++    MIDL_INTERFACE("34ed2808-ffe6-4c2b-b11a-cabd2b0c59e1") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList9 : public ID3D12GraphicsCommandList8
+     {
+     public:
+@@ -42309,7 +42310,7 @@ EXTERN_C const IID IID_ID3D12GraphicsCommandList10;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7013c015-d161-4b63-a08c-238552dd8acc")
++    MIDL_INTERFACE("7013c015-d161-4b63-a08c-238552dd8acc") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GraphicsCommandList10 : public ID3D12GraphicsCommandList9
+     {
+     public:
+@@ -43418,7 +43419,7 @@ EXTERN_C const IID IID_ID3D12DSRDeviceFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f343d1a0-afe3-439f-b13d-cd87a43b70ca")
++    MIDL_INTERFACE("f343d1a0-afe3-439f-b13d-cd87a43b70ca") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DSRDeviceFactory : public IUnknown
+     {
+     public:
+@@ -43517,7 +43518,7 @@ EXTERN_C const IID IID_ID3D12GBVDiagnostics;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("597985ab-9b75-4dbb-be23-0761195bebee")
++    MIDL_INTERFACE("597985ab-9b75-4dbb-be23-0761195bebee") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12GBVDiagnostics : public IUnknown
+     {
+     public:
+@@ -43712,7 +43713,7 @@ EXTERN_C const IID IID_ID3D12DeviceStatistics;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3d5ca1a8-a39e-4619-95e0-f9b0a40340f5")
++    MIDL_INTERFACE("3d5ca1a8-a39e-4619-95e0-f9b0a40340f5") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DeviceStatistics : public IUnknown
+     {
+     public:

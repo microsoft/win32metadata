@@ -1,0 +1,259 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h b/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
+index 8e24b64465..2baf34ede4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/processenv.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ 
+ #include <minwindef.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -25,11 +26,13 @@ extern "C" {
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINBASEAPI
++
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ BOOL
+ WINAPI
+ SetEnvironmentStringsW(
+-    _In_ _Pre_ _NullNull_terminated_ LPWCH NewEnvironment
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ _Pre_ _NullNull_terminated_ LPWCH NewEnvironment
+     );
+ 
+ #ifdef UNICODE
+@@ -42,30 +45,36 @@ SetEnvironmentStringsW(
+ #pragma region PC Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:do_not_release") _Win32_SetLastError_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+ GetStdHandle(
+-    _In_ DWORD nStdHandle
++    _Win32_AssociatedEnum_(STD_HANDLE) _In_ DWORD nStdHandle
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ SetStdHandle(
+-    _In_ DWORD nStdHandle,
++    _Win32_AssociatedEnum_(STD_HANDLE) _In_ DWORD nStdHandle,
+     _In_ HANDLE hHandle
+     );
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++
++
+ WINBASEAPI
+ BOOL
+ WINAPI
+ SetStdHandleEx(
+-    _In_ DWORD nStdHandle,
++    _Win32_AssociatedEnum_(STD_HANDLE) _In_ DWORD nStdHandle,
+     _In_ HANDLE hHandle,
+-    _Out_opt_ PHANDLE phPrevValue
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ PHANDLE phPrevValue
+     );
+ 
+ #endif // _WIN32_WINNT >= 0x0600
+@@ -76,6 +85,7 @@ SetStdHandleEx(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ LPSTR
+ WINAPI
+@@ -83,6 +93,7 @@ GetCommandLineA(
+     VOID
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ LPWSTR
+ WINAPI
+@@ -96,6 +107,8 @@ GetCommandLineW(
+ #define GetCommandLine  GetCommandLineA
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsXP_
++
+ WINBASEAPI
+ _NullNull_terminated_
+ LPCH
+@@ -104,6 +117,8 @@ GetEnvironmentStrings(
+     VOID
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Windows_SupportedOS_WindowsXP_
++
+ WINBASEAPI
+ _NullNull_terminated_
+ LPWCH
+@@ -118,18 +133,22 @@ GetEnvironmentStringsW(
+ #define GetEnvironmentStringsA  GetEnvironmentStrings
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ FreeEnvironmentStringsA(
+-    _In_ _Pre_ _NullNull_terminated_ LPCH penv
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ _Pre_ _NullNull_terminated_ LPCH penv
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ FreeEnvironmentStringsW(
+-    _In_ _Pre_ _NullNull_terminated_ LPWCH penv
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ _Pre_ _NullNull_terminated_ LPWCH penv
+     );
+ 
+ #ifdef UNICODE
+@@ -138,6 +157,8 @@ FreeEnvironmentStringsW(
+ #define FreeEnvironmentStrings  FreeEnvironmentStringsA
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < nSize)
+ DWORD
+@@ -148,6 +169,8 @@ GetEnvironmentVariableA(
+     _In_ DWORD nSize
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return < nSize)
+ DWORD
+@@ -164,6 +187,8 @@ GetEnvironmentVariableW(
+ #define GetEnvironmentVariable  GetEnvironmentVariableA
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -172,6 +197,8 @@ SetEnvironmentVariableA(
+     _In_opt_ LPCSTR lpValue
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -186,6 +213,8 @@ SetEnvironmentVariableW(
+ #define SetEnvironmentVariable  SetEnvironmentVariableA
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return <= nSize)
+ DWORD
+@@ -196,6 +225,8 @@ ExpandEnvironmentStringsA(
+     _In_ DWORD nSize
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ _Success_(return != 0 && return <= nSize)
+ DWORD
+@@ -212,14 +243,18 @@ ExpandEnvironmentStringsW(
+ #define ExpandEnvironmentStrings  ExpandEnvironmentStringsA
+ #endif // !UNICODE
+ 
+-WINBASEAPI
++
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ BOOL
+ WINAPI
+ SetCurrentDirectoryA(
+     _In_ LPCSTR lpPathName
+     );
+ 
+-WINBASEAPI
++
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ BOOL
+ WINAPI
+ SetCurrentDirectoryW(
+@@ -232,7 +267,9 @@ SetCurrentDirectoryW(
+ #define SetCurrentDirectory  SetCurrentDirectoryA
+ #endif // !UNICODE
+ 
+-WINBASEAPI
++
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINBASEAPI
+ _Success_(return != 0 && return < nBufferLength)
+ DWORD
+ WINAPI
+@@ -241,7 +278,9 @@ GetCurrentDirectoryA(
+     _Out_writes_to_opt_(nBufferLength,return + 1) LPSTR lpBuffer
+     );
+ 
+-WINBASEAPI
++
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINBASEAPI
+ _Success_(return != 0 && return < nBufferLength)
+ DWORD
+ WINAPI
+@@ -262,6 +301,8 @@ GetCurrentDirectoryW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -280,6 +321,8 @@ SearchPathW(
+ #define SearchPath  SearchPathA
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ APIENTRY
+@@ -299,6 +342,7 @@ SearchPathA(
+ 
+ #if _WIN32_WINNT >= 0x0502
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -306,6 +350,7 @@ NeedCurrentDirectoryForExePathA(
+     _In_ LPCSTR ExeName
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI

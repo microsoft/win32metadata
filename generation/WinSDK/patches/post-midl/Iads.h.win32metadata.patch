@@ -1,0 +1,1544 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
+index 46e8d9b99e..48d23ceff6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Iads.h
+@@ -28,6 +28,7 @@
+ 
+ #ifndef __iads_h__
+ #define __iads_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -1237,9 +1238,9 @@ typedef ADS_SEARCHPREF_ENUM ADS_SEARCHPREF;
+ 
+ typedef struct ads_searchpref_info
+     {
+-    ADS_SEARCHPREF dwSearchPref;
++    _Win32_AssociatedEnum_(ADS_SEARCHPREF_ENUM) ADS_SEARCHPREF dwSearchPref;
+     ADSVALUE vValue;
+-    ADS_STATUS dwStatus;
++    _Win32_AssociatedEnum_(ADS_STATUSENUM) ADS_STATUS dwStatus;
+     } 	ADS_SEARCHPREF_INFO;
+ 
+ typedef struct ads_searchpref_info *PADS_SEARCHPREF_INFO;
+@@ -1250,7 +1251,7 @@ typedef struct ads_searchpref_info *LPADS_SEARCHPREF_INFO;
+ 
+ #define	ADS_VLV_RESPONSE	( L"fc8cb04d-311d-406c-8cb9-1ae8b843b419" )
+ 
+-typedef HANDLE ADS_SEARCH_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE ADS_SEARCH_HANDLE;
+ 
+ typedef HANDLE *PADS_SEARCH_HANDLE;
+ 
+@@ -1589,27 +1590,27 @@ EXTERN_C const IID IID_IADs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fd8256d0-fd15-11ce-abc4-02608c9e7553")
+-    IADs : public IDispatch
++    MIDL_INTERFACE("fd8256d0-fd15-11ce-abc4-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
++      IADs : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Class( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_GUID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ADsPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Parent( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Schema( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetInfo( void) = 0;
+         
+@@ -1773,7 +1774,7 @@ EXTERN_C const IID IID_IADs;
+         END_INTERFACE
+     } IADsVtbl;
+ 
+-    interface IADs
++    interface _Windows_SupportedOS_WindowsVista_ IADs
+     {
+         CONST_VTBL struct IADsVtbl *lpVtbl;
+     };
+@@ -1867,8 +1868,8 @@ EXTERN_C const IID IID_IADsContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("001677d0-fd16-11ce-abc4-02608c9e7553")
+-    IADsContainer : public IDispatch
++    MIDL_INTERFACE("001677d0-fd16-11ce-abc4-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
++      IADsContainer : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+@@ -2045,7 +2046,7 @@ EXTERN_C const IID IID_IADsContainer;
+         END_INTERFACE
+     } IADsContainerVtbl;
+ 
+-    interface IADsContainer
++    interface _Windows_SupportedOS_WindowsVista_ IADsContainer
+     {
+         CONST_VTBL struct IADsContainerVtbl *lpVtbl;
+     };
+@@ -2133,7 +2134,7 @@ EXTERN_C const IID IID_IADsCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("72b945e0-253b-11cf-a988-00aa006bc149")
++    MIDL_INTERFACE("72b945e0-253b-11cf-a988-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsCollection : public IDispatch
+     {
+     public:
+@@ -2308,7 +2309,7 @@ EXTERN_C const IID IID_IADsMembers;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("451a0030-72ec-11cf-b03b-00aa006e0975")
++    MIDL_INTERFACE("451a0030-72ec-11cf-b03b-00aa006e0975") _Windows_SupportedOS_WindowsVista_ 
+     IADsMembers : public IDispatch
+     {
+     public:
+@@ -2479,17 +2480,17 @@ EXTERN_C const IID IID_IADsPropertyList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c6f602b6-8f69-11d0-8528-00c04fd8d503")
++    MIDL_INTERFACE("c6f602b6-8f69-11d0-8528-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsPropertyList : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_PropertyCount( 
+             /* [retval][out] */ __RPC__out long *plCount) = 0;
+         
+-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+         
+-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [id] */ HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ long cElements) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+@@ -2707,14 +2708,14 @@ EXTERN_C const IID IID_IADsPropertyEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("05792c8e-941f-11d0-8529-00c04fd8d503")
++    MIDL_INTERFACE("05792c8e-941f-11d0-8529-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsPropertyEntry : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Clear( void) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [in] */ __RPC__in BSTR bstrName) = 0;
+@@ -2939,7 +2940,7 @@ EXTERN_C const IID IID_IADsPropertyValue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("79fa9ad0-a97c-11d0-8534-00c04fd8d503")
++    MIDL_INTERFACE("79fa9ad0-a97c-11d0-8534-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsPropertyValue : public IDispatch
+     {
+     public:
+@@ -2952,31 +2953,31 @@ EXTERN_C const IID IID_IADsPropertyValue;
+             /* [in] */ long lnADsType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DNString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DNString( 
+             /* [in] */ __RPC__in BSTR bstrDNString) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CaseExactString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CaseExactString( 
+             /* [in] */ __RPC__in BSTR bstrCaseExactString) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CaseIgnoreString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CaseIgnoreString( 
+             /* [in] */ __RPC__in BSTR bstrCaseIgnoreString) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PrintableString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PrintableString( 
+             /* [in] */ __RPC__in BSTR bstrPrintableString) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_NumericString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_NumericString( 
+             /* [in] */ __RPC__in BSTR bstrNumericString) = 0;
+@@ -3339,7 +3340,7 @@ EXTERN_C const IID IID_IADsPropertyValue2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("306e831c-5bc7-11d1-a3b8-00c04fb950dc")
++    MIDL_INTERFACE("306e831c-5bc7-11d1-a3b8-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsPropertyValue2 : public IDispatch
+     {
+     public:
+@@ -3751,7 +3752,7 @@ EXTERN_C const IID IID_IADsExtension;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3d35553c-d2b0-11d1-b17b-0000f87593a0")
++    MIDL_INTERFACE("3d35553c-d2b0-11d1-b17b-0000f87593a0") _Windows_SupportedOS_WindowsVista_ 
+     IADsExtension : public IUnknown
+     {
+     public:
+@@ -3885,7 +3886,7 @@ EXTERN_C const IID IID_IADsDeleteOps;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b2bd0902-8878-11d1-8c21-00c04fd8d503")
++    MIDL_INTERFACE("b2bd0902-8878-11d1-8c21-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsDeleteOps : public IDispatch
+     {
+     public:
+@@ -4023,12 +4024,12 @@ EXTERN_C const IID IID_IADsNamespaces;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28b96ba0-b330-11cf-a9ad-00aa006bc149")
++    MIDL_INTERFACE("28b96ba0-b330-11cf-a9ad-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsNamespaces : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultContainer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DefaultContainer( 
+             /* [in] */ __RPC__in BSTR bstrDefaultContainer) = 0;
+@@ -4281,21 +4282,21 @@ EXTERN_C const IID IID_IADsClass;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c8f93dd0-4ae0-11cf-9e73-00aa004a5691")
++    MIDL_INTERFACE("c8f93dd0-4ae0-11cf-9e73-00aa004a5691") _Windows_SupportedOS_WindowsVista_ 
+     IADsClass : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PrimaryInterface( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CLSID( 
+             /* [in] */ __RPC__in BSTR bstrCLSID) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_OID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_OID( 
+             /* [in] */ __RPC__in BSTR bstrOID) = 0;
+@@ -4361,7 +4362,7 @@ EXTERN_C const IID IID_IADsClass;
+             /* [in] */ VARIANT_BOOL fContainer) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HelpFileName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_HelpFileName( 
+             /* [in] */ __RPC__in BSTR bstrHelpFileName) = 0;
+@@ -4847,18 +4848,18 @@ EXTERN_C const IID IID_IADsProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c8f93dd3-4ae0-11cf-9e73-00aa004a5691")
++    MIDL_INTERFACE("c8f93dd3-4ae0-11cf-9e73-00aa004a5691") _Windows_SupportedOS_WindowsVista_ 
+     IADsProperty : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_OID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_OID( 
+             /* [in] */ __RPC__in BSTR bstrOID) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Syntax( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Syntax( 
+             /* [in] */ __RPC__in BSTR bstrSyntax) = 0;
+@@ -5204,7 +5205,7 @@ EXTERN_C const IID IID_IADsSyntax;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c8f93dd2-4ae0-11cf-9e73-00aa004a5691")
++    MIDL_INTERFACE("c8f93dd2-4ae0-11cf-9e73-00aa004a5691") _Windows_SupportedOS_WindowsVista_ 
+     IADsSyntax : public IADs
+     {
+     public:
+@@ -5462,24 +5463,24 @@ EXTERN_C const IID IID_IADsLocality;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a05e03a2-effe-11cf-8abc-00c04fd8d503")
++    MIDL_INTERFACE("a05e03a2-effe-11cf-8abc-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsLocality : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalityName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalityName( 
+             /* [in] */ __RPC__in BSTR bstrLocalityName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PostalAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PostalAddress( 
+             /* [in] */ __RPC__in BSTR bstrPostalAddress) = 0;
+@@ -5786,36 +5787,36 @@ EXTERN_C const IID IID_IADsO;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a1cd2dc6-effe-11cf-8abc-00c04fd8d503")
++    MIDL_INTERFACE("a1cd2dc6-effe-11cf-8abc-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsO : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalityName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalityName( 
+             /* [in] */ __RPC__in BSTR bstrLocalityName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PostalAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PostalAddress( 
+             /* [in] */ __RPC__in BSTR bstrPostalAddress) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TelephoneNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TelephoneNumber( 
+             /* [in] */ __RPC__in BSTR bstrTelephoneNumber) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FaxNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FaxNumber( 
+             /* [in] */ __RPC__in BSTR bstrFaxNumber) = 0;
+@@ -6154,36 +6155,36 @@ EXTERN_C const IID IID_IADsOU;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a2f733b8-effe-11cf-8abc-00c04fd8d503")
++    MIDL_INTERFACE("a2f733b8-effe-11cf-8abc-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsOU : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalityName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalityName( 
+             /* [in] */ __RPC__in BSTR bstrLocalityName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PostalAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PostalAddress( 
+             /* [in] */ __RPC__in BSTR bstrPostalAddress) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TelephoneNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TelephoneNumber( 
+             /* [in] */ __RPC__in BSTR bstrTelephoneNumber) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FaxNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FaxNumber( 
+             /* [in] */ __RPC__in BSTR bstrFaxNumber) = 0;
+@@ -6195,7 +6196,7 @@ EXTERN_C const IID IID_IADsOU;
+             /* [in] */ VARIANT vSeeAlso) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BusinessCategory( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_BusinessCategory( 
+             /* [in] */ __RPC__in BSTR bstrBusinessCategory) = 0;
+@@ -6544,7 +6545,7 @@ EXTERN_C const IID IID_IADsDomain;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00e4c220-fd16-11ce-abc4-02608c9e7553")
++    MIDL_INTERFACE("00e4c220-fd16-11ce-abc4-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
+     IADsDomain : public IADs
+     {
+     public:
+@@ -6967,96 +6968,96 @@ EXTERN_C const IID IID_IADsComputer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("efe3cc70-1d9f-11cf-b1f3-02608c9e7553")
++    MIDL_INTERFACE("efe3cc70-1d9f-11cf-b1f3-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
+     IADsComputer : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Site( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Location( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Location( 
+             /* [in] */ __RPC__in BSTR bstrLocation) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PrimaryUser( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PrimaryUser( 
+             /* [in] */ __RPC__in BSTR bstrPrimaryUser) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Owner( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Owner( 
+             /* [in] */ __RPC__in BSTR bstrOwner) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Division( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Division( 
+             /* [in] */ __RPC__in BSTR bstrDivision) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Department( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Department( 
+             /* [in] */ __RPC__in BSTR bstrDepartment) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Role( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Role( 
+             /* [in] */ __RPC__in BSTR bstrRole) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_OperatingSystem( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_OperatingSystem( 
+             /* [in] */ __RPC__in BSTR bstrOperatingSystem) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_OperatingSystemVersion( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_OperatingSystemVersion( 
+             /* [in] */ __RPC__in BSTR bstrOperatingSystemVersion) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Model( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Model( 
+             /* [in] */ __RPC__in BSTR bstrModel) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Processor( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Processor( 
+             /* [in] */ __RPC__in BSTR bstrProcessor) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ProcessorCount( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ProcessorCount( 
+             /* [in] */ __RPC__in BSTR bstrProcessorCount) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_MemorySize( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_MemorySize( 
+             /* [in] */ __RPC__in BSTR bstrMemorySize) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StorageCapacity( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StorageCapacity( 
+             /* [in] */ __RPC__in BSTR bstrStorageCapacity) = 0;
+@@ -7555,7 +7556,7 @@ EXTERN_C const IID IID_IADsComputerOperations;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ef497680-1d9f-11cf-b1f3-02608c9e7553")
++    MIDL_INTERFACE("ef497680-1d9f-11cf-b1f3-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
+     IADsComputerOperations : public IADs
+     {
+     public:
+@@ -7813,12 +7814,12 @@ EXTERN_C const IID IID_IADsGroup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27636b00-410f-11cf-b1ff-02608c9e7553")
++    MIDL_INTERFACE("27636b00-410f-11cf-b1ff-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
+     IADsGroup : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+@@ -8117,12 +8118,12 @@ EXTERN_C const IID IID_IADsUser;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3e37e320-17e2-11cf-abc4-02608c9e7553")
++    MIDL_INTERFACE("3e37e320-17e2-11cf-abc4-02608c9e7553") _Windows_SupportedOS_WindowsVista_ 
+     IADsUser : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BadLoginAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BadLoginCount( 
+             /* [retval][out] */ __RPC__out long *retval) = 0;
+@@ -8140,73 +8141,73 @@ EXTERN_C const IID IID_IADsUser;
+             /* [retval][out] */ __RPC__out DATE *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Division( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Division( 
+             /* [in] */ __RPC__in BSTR bstrDivision) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Department( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Department( 
+             /* [in] */ __RPC__in BSTR bstrDepartment) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_EmployeeID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_EmployeeID( 
+             /* [in] */ __RPC__in BSTR bstrEmployeeID) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FullName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FullName( 
+             /* [in] */ __RPC__in BSTR bstrFullName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FirstName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FirstName( 
+             /* [in] */ __RPC__in BSTR bstrFirstName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LastName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LastName( 
+             /* [in] */ __RPC__in BSTR bstrLastName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_OtherName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_OtherName( 
+             /* [in] */ __RPC__in BSTR bstrOtherName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_NamePrefix( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_NamePrefix( 
+             /* [in] */ __RPC__in BSTR bstrNamePrefix) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_NameSuffix( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_NameSuffix( 
+             /* [in] */ __RPC__in BSTR bstrNameSuffix) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Title( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Title( 
+             /* [in] */ __RPC__in BSTR bstrTitle) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Manager( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Manager( 
+             /* [in] */ __RPC__in BSTR bstrManager) = 0;
+@@ -8344,13 +8345,13 @@ EXTERN_C const IID IID_IADsUser;
+             /* [in] */ VARIANT_BOOL fRequireUniquePassword) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_EmailAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_EmailAddress( 
+             /* [in] */ __RPC__in BSTR bstrEmailAddress) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HomeDirectory( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_HomeDirectory( 
+             /* [in] */ __RPC__in BSTR bstrHomeDirectory) = 0;
+@@ -8362,13 +8363,13 @@ EXTERN_C const IID IID_IADsUser;
+             /* [in] */ VARIANT vLanguages) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Profile( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Profile( 
+             /* [in] */ __RPC__in BSTR bstrProfile) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LoginScript( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LoginScript( 
+             /* [in] */ __RPC__in BSTR bstrLoginScript) = 0;
+@@ -8380,7 +8381,7 @@ EXTERN_C const IID IID_IADsUser;
+             /* [in] */ VARIANT vPicture) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HomePage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_HomePage( 
+             /* [in] */ __RPC__in BSTR bstrHomePage) = 0;
+@@ -9356,42 +9357,42 @@ EXTERN_C const IID IID_IADsPrintQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b15160d0-1226-11cf-a985-00aa006bc149")
++    MIDL_INTERFACE("b15160d0-1226-11cf-a985-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsPrintQueue : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PrinterPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PrinterPath( 
+             /* [in] */ __RPC__in BSTR bstrPrinterPath) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Model( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Model( 
+             /* [in] */ __RPC__in BSTR bstrModel) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Datatype( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Datatype( 
+             /* [in] */ __RPC__in BSTR bstrDatatype) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PrintProcessor( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PrintProcessor( 
+             /* [in] */ __RPC__in BSTR bstrPrintProcessor) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Location( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Location( 
+             /* [in] */ __RPC__in BSTR bstrLocation) = 0;
+@@ -9421,7 +9422,7 @@ EXTERN_C const IID IID_IADsPrintQueue;
+             /* [in] */ long lnPriority) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_BannerPage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_BannerPage( 
+             /* [in] */ __RPC__in BSTR bstrBannerPage) = 0;
+@@ -9878,7 +9879,7 @@ EXTERN_C const IID IID_IADsPrintQueueOperations;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("124be5c0-156e-11cf-a986-00aa006bc149")
++    MIDL_INTERFACE("124be5c0-156e-11cf-a986-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsPrintQueueOperations : public IADs
+     {
+     public:
+@@ -10163,18 +10164,18 @@ EXTERN_C const IID IID_IADsPrintJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("32fb6780-1ed0-11cf-a988-00aa006bc149")
++    MIDL_INTERFACE("32fb6780-1ed0-11cf-a988-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsPrintJob : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HostPrintQueue( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_User( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_UserPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TimeSubmitted( 
+             /* [retval][out] */ __RPC__out DATE *retval) = 0;
+@@ -10186,7 +10187,7 @@ EXTERN_C const IID IID_IADsPrintJob;
+             /* [retval][out] */ __RPC__out long *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+@@ -10210,13 +10211,13 @@ EXTERN_C const IID IID_IADsPrintJob;
+             /* [in] */ DATE daUntilTime) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Notify( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Notify( 
+             /* [in] */ __RPC__in BSTR bstrNotify) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_NotifyPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_NotifyPath( 
+             /* [in] */ __RPC__in BSTR bstrNotifyPath) = 0;
+@@ -10597,7 +10598,7 @@ EXTERN_C const IID IID_IADsPrintJobOperations;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9a52db30-1ecf-11cf-a988-00aa006bc149")
++    MIDL_INTERFACE("9a52db30-1ecf-11cf-a988-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsPrintJobOperations : public IADs
+     {
+     public:
+@@ -10906,24 +10907,24 @@ EXTERN_C const IID IID_IADsService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("68af66e0-31ca-11cf-a98a-00aa006bc149")
++    MIDL_INTERFACE("68af66e0-31ca-11cf-a98a-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsService : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HostComputer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_HostComputer( 
+             /* [in] */ __RPC__in BSTR bstrHostComputer) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
+             /* [in] */ __RPC__in BSTR bstrDisplayName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Version( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Version( 
+             /* [in] */ __RPC__in BSTR bstrVersion) = 0;
+@@ -10941,13 +10942,13 @@ EXTERN_C const IID IID_IADsService;
+             /* [in] */ long lnStartType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Path( 
+             /* [in] */ __RPC__in BSTR bstrPath) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StartupParameters( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StartupParameters( 
+             /* [in] */ __RPC__in BSTR bstrStartupParameters) = 0;
+@@ -10959,19 +10960,19 @@ EXTERN_C const IID IID_IADsService;
+             /* [in] */ long lnErrorControl) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LoadOrderGroup( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_LoadOrderGroup( 
+             /* [in] */ __RPC__in BSTR bstrLoadOrderGroup) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceAccountName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ServiceAccountName( 
+             /* [in] */ __RPC__in BSTR bstrServiceAccountName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceAccountPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ServiceAccountPath( 
+             /* [in] */ __RPC__in BSTR bstrServiceAccountPath) = 0;
+@@ -11406,7 +11407,7 @@ EXTERN_C const IID IID_IADsServiceOperations;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5d7b33f0-31ca-11cf-a98a-00aa006bc149")
++    MIDL_INTERFACE("5d7b33f0-31ca-11cf-a98a-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsServiceOperations : public IADs
+     {
+     public:
+@@ -11700,12 +11701,12 @@ EXTERN_C const IID IID_IADsFileService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a89d1900-31ca-11cf-a98a-00aa006bc149")
++    MIDL_INTERFACE("a89d1900-31ca-11cf-a98a-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsFileService : public IADsService
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+@@ -12173,7 +12174,7 @@ EXTERN_C const IID IID_IADsFileServiceOperations;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a02ded10-31ca-11cf-a98a-00aa006bc149")
++    MIDL_INTERFACE("a02ded10-31ca-11cf-a98a-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsFileServiceOperations : public IADsServiceOperations
+     {
+     public:
+@@ -12476,7 +12477,7 @@ EXTERN_C const IID IID_IADsFileShare;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eb6dcaf0-4b83-11cf-a995-00aa006bc149")
++    MIDL_INTERFACE("eb6dcaf0-4b83-11cf-a995-00aa006bc149") _Windows_SupportedOS_WindowsVista_ 
+     IADsFileShare : public IADs
+     {
+     public:
+@@ -12484,19 +12485,19 @@ EXTERN_C const IID IID_IADsFileShare;
+             /* [retval][out] */ __RPC__out long *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR bstrDescription) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_HostComputer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_HostComputer( 
+             /* [in] */ __RPC__in BSTR bstrHostComputer) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Path( 
+             /* [in] */ __RPC__in BSTR bstrPath) = 0;
+@@ -12811,21 +12812,21 @@ EXTERN_C const IID IID_IADsSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("398b7da0-4aab-11cf-ae2c-00aa006ebfb9")
++    MIDL_INTERFACE("398b7da0-4aab-11cf-ae2c-00aa006ebfb9") _Windows_SupportedOS_WindowsVista_ 
+     IADsSession : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_User( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_UserPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Computer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectTime( 
+             /* [retval][out] */ __RPC__out long *retval) = 0;
+@@ -13113,18 +13114,18 @@ EXTERN_C const IID IID_IADsResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34a05b20-4aab-11cf-ae2c-00aa006ebfb9")
++    MIDL_INTERFACE("34a05b20-4aab-11cf-ae2c-00aa006ebfb9") _Windows_SupportedOS_WindowsVista_ 
+     IADsResource : public IADs
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_User( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_UserPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LockCount( 
+             /* [retval][out] */ __RPC__out long *retval) = 0;
+@@ -13393,7 +13394,7 @@ EXTERN_C const IID IID_IADsOpenDSObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ddf2891e-0f9c-11d0-8ad4-00c04fd8d503")
++    MIDL_INTERFACE("ddf2891e-0f9c-11d0-8ad4-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsOpenDSObject : public IDispatch
+     {
+     public:
+@@ -13539,7 +13540,7 @@ EXTERN_C const IID IID_IDirectoryObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e798de2c-22e4-11d0-84fe-00c04fd8d503")
++    MIDL_INTERFACE("e798de2c-22e4-11d0-84fe-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IDirectoryObject : public IUnknown
+     {
+     public:
+@@ -13683,7 +13684,7 @@ EXTERN_C const IID IID_IDirectorySearch;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("109ba8ec-92f0-11d0-a790-00c04fd8d5a8")
++    MIDL_INTERFACE("109ba8ec-92f0-11d0-a790-00c04fd8d5a8") _Windows_SupportedOS_WindowsVista_ 
+     IDirectorySearch : public IUnknown
+     {
+     public:
+@@ -13700,16 +13701,16 @@ EXTERN_C const IID IID_IDirectorySearch;
+         virtual HRESULT STDMETHODCALLTYPE AbandonSearch( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE phSearchResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GetFirstRow( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetFirstRow( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GetNextRow( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetNextRow( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GetPreviousRow( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetPreviousRow( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE GetNextColumnName( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE GetNextColumnName( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchHandle,
+             /* [out] */ __RPC__deref_out_opt LPWSTR *ppszColumnName) = 0;
+         
+@@ -13880,7 +13881,7 @@ EXTERN_C const IID IID_IDirectorySchemaMgmt;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8")
++    MIDL_INTERFACE("75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8") _Windows_SupportedOS_WindowsVista_ 
+     IDirectorySchemaMgmt : public IUnknown
+     {
+     public:
+@@ -14269,7 +14270,7 @@ EXTERN_C const IID IID_IADsAccessControlEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b4f3a14c-9bdd-11d0-852c-00c04fd8d503")
++    MIDL_INTERFACE("b4f3a14c-9bdd-11d0-852c-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsAccessControlEntry : public IDispatch
+     {
+     public:
+@@ -14298,19 +14299,19 @@ EXTERN_C const IID IID_IADsAccessControlEntry;
+             /* [in] */ long lnFlags) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ObjectType( 
+             /* [in] */ __RPC__in BSTR bstrObjectType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_InheritedObjectType( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_InheritedObjectType( 
+             /* [in] */ __RPC__in BSTR bstrInheritedObjectType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Trustee( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Trustee( 
+             /* [in] */ __RPC__in BSTR bstrTrustee) = 0;
+@@ -14558,7 +14559,7 @@ EXTERN_C const IID IID_IADsAccessControlList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b7ee91cc-9bdd-11d0-852c-00c04fd8d503")
++    MIDL_INTERFACE("b7ee91cc-9bdd-11d0-852c-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsAccessControlList : public IDispatch
+     {
+     public:
+@@ -14781,7 +14782,7 @@ EXTERN_C const IID IID_IADsSecurityDescriptor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b8c787ca-9bdd-11d0-852c-00c04fd8d503")
++    MIDL_INTERFACE("b8c787ca-9bdd-11d0-852c-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsSecurityDescriptor : public IDispatch
+     {
+     public:
+@@ -14798,7 +14799,7 @@ EXTERN_C const IID IID_IADsSecurityDescriptor;
+             /* [in] */ long lnControl) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Owner( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Owner( 
+             /* [in] */ __RPC__in BSTR bstrOwner) = 0;
+@@ -14810,7 +14811,7 @@ EXTERN_C const IID IID_IADsSecurityDescriptor;
+             /* [in] */ VARIANT_BOOL fOwnerDefaulted) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Group( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Group( 
+             /* [in] */ __RPC__in BSTR bstrGroup) = 0;
+@@ -15147,7 +15148,7 @@ EXTERN_C const IID IID_IADsLargeInteger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9068270b-0939-11d1-8be1-00c04fd8d503")
++    MIDL_INTERFACE("9068270b-0939-11d1-8be1-00c04fd8d503") _Windows_SupportedOS_WindowsVista_ 
+     IADsLargeInteger : public IDispatch
+     {
+     public:
+@@ -15326,7 +15327,7 @@ EXTERN_C const IID IID_IADsNameTranslate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b1b272a3-3625-11d1-a3a4-00c04fb950dc")
++    MIDL_INTERFACE("b1b272a3-3625-11d1-a3a4-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsNameTranslate : public IDispatch
+     {
+     public:
+@@ -15350,7 +15351,7 @@ EXTERN_C const IID IID_IADsNameTranslate;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Get( 
+             /* [in] */ long lnFormatType,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetEx( 
+             /* [in] */ long lnFormatType,
+@@ -15556,7 +15557,7 @@ EXTERN_C const IID IID_IADsCaseIgnoreList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b66b533-4680-11d1-a3b4-00c04fb950dc")
++    MIDL_INTERFACE("7b66b533-4680-11d1-a3b4-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsCaseIgnoreList : public IDispatch
+     {
+     public:
+@@ -15713,12 +15714,12 @@ EXTERN_C const IID IID_IADsFaxNumber;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a910dea9-4680-11d1-a3b4-00c04fb950dc")
++    MIDL_INTERFACE("a910dea9-4680-11d1-a3b4-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsFaxNumber : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TelephoneNumber( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TelephoneNumber( 
+             /* [in] */ __RPC__in BSTR bstrTelephoneNumber) = 0;
+@@ -15892,7 +15893,7 @@ EXTERN_C const IID IID_IADsNetAddress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b21a50a9-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("b21a50a9-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsNetAddress : public IDispatch
+     {
+     public:
+@@ -16071,7 +16072,7 @@ EXTERN_C const IID IID_IADsOctetList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b28b80f-4680-11d1-a3b4-00c04fb950dc")
++    MIDL_INTERFACE("7b28b80f-4680-11d1-a3b4-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsOctetList : public IDispatch
+     {
+     public:
+@@ -16228,7 +16229,7 @@ EXTERN_C const IID IID_IADsEmail;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97af011a-478e-11d1-a3b4-00c04fb950dc")
++    MIDL_INTERFACE("97af011a-478e-11d1-a3b4-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsEmail : public IDispatch
+     {
+     public:
+@@ -16239,7 +16240,7 @@ EXTERN_C const IID IID_IADsEmail;
+             /* [in] */ long lnType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Address( 
+             /* [in] */ __RPC__in BSTR bstrAddress) = 0;
+@@ -16407,7 +16408,7 @@ EXTERN_C const IID IID_IADsPath;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b287fcd5-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("b287fcd5-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsPath : public IDispatch
+     {
+     public:
+@@ -16418,13 +16419,13 @@ EXTERN_C const IID IID_IADsPath;
+             /* [in] */ long lnType) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_VolumeName( 
+             /* [in] */ __RPC__in BSTR bstrVolumeName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Path( 
+             /* [in] */ __RPC__in BSTR bstrPath) = 0;
+@@ -16608,12 +16609,12 @@ EXTERN_C const IID IID_IADsReplicaPointer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f60fb803-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("f60fb803-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsReplicaPointer : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ServerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ServerName( 
+             /* [in] */ __RPC__in BSTR bstrServerName) = 0;
+@@ -16853,18 +16854,18 @@ EXTERN_C const IID IID_IADsAcl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8452d3ab-0869-11d1-a377-00c04fb950dc")
++    MIDL_INTERFACE("8452d3ab-0869-11d1-a377-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsAcl : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ProtectedAttrName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ProtectedAttrName( 
+             /* [in] */ __RPC__in BSTR bstrProtectedAttrName) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SubjectName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_SubjectName( 
+             /* [in] */ __RPC__in BSTR bstrSubjectName) = 0;
+@@ -17057,7 +17058,7 @@ EXTERN_C const IID IID_IADsTimestamp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b2f5a901-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("b2f5a901-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsTimestamp : public IDispatch
+     {
+     public:
+@@ -17236,7 +17237,7 @@ EXTERN_C const IID IID_IADsPostalAddress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7adecf29-4680-11d1-a3b4-00c04fb950dc")
++    MIDL_INTERFACE("7adecf29-4680-11d1-a3b4-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsPostalAddress : public IDispatch
+     {
+     public:
+@@ -17393,7 +17394,7 @@ EXTERN_C const IID IID_IADsBackLink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fd1302bd-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("fd1302bd-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsBackLink : public IDispatch
+     {
+     public:
+@@ -17404,7 +17405,7 @@ EXTERN_C const IID IID_IADsBackLink;
+             /* [in] */ long lnRemoteID) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ObjectName( 
+             /* [in] */ __RPC__in BSTR bstrObjectName) = 0;
+@@ -17572,12 +17573,12 @@ EXTERN_C const IID IID_IADsTypedName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b371a349-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("b371a349-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsTypedName : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ObjectName( 
+             /* [in] */ __RPC__in BSTR bstrObjectName) = 0;
+@@ -17773,12 +17774,12 @@ EXTERN_C const IID IID_IADsHold;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b3eb3b37-4080-11d1-a3ac-00c04fb950dc")
++    MIDL_INTERFACE("b3eb3b37-4080-11d1-a3ac-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsHold : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ObjectName( 
+             /* [in] */ __RPC__in BSTR bstrObjectName) = 0;
+@@ -17952,7 +17953,7 @@ EXTERN_C const IID IID_IADsObjectOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("46f14fda-232b-11d1-a808-00c04fd8d5a8")
++    MIDL_INTERFACE("46f14fda-232b-11d1-a808-00c04fd8d5a8") _Windows_SupportedOS_WindowsVista_ 
+     IADsObjectOptions : public IDispatch
+     {
+     public:
+@@ -18105,7 +18106,7 @@ EXTERN_C const IID IID_IADsPathname;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d592aed4-f420-11d0-a36e-00c04fb950dc")
++    MIDL_INTERFACE("d592aed4-f420-11d0-a36e-00c04fb950dc") _Windows_SupportedOS_WindowsVista_ 
+     IADsPathname : public IDispatch
+     {
+     public:
+@@ -18118,14 +18119,14 @@ EXTERN_C const IID IID_IADsPathname;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Retrieve( 
+             /* [in] */ long lnFormatType,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetNumElements( 
+             /* [retval][out] */ __RPC__out long *plnNumPathElements) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetElement( 
+             /* [in] */ long lnElementIndex,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrElement) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrElement) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddLeafElement( 
+             /* [in] */ __RPC__in BSTR bstrLeafElement) = 0;
+@@ -18138,7 +18139,7 @@ EXTERN_C const IID IID_IADsPathname;
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetEscapedElement( 
+             /* [in] */ long lnReserved,
+             /* [in] */ __RPC__in BSTR bstrInStr,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOutStr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrOutStr) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_EscapedMode( 
+             /* [retval][out] */ __RPC__out long *retval) = 0;
+@@ -18369,43 +18370,43 @@ EXTERN_C const IID IID_IADsADSystemInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5BB11929-AFD1-11d2-9CB9-0000F87A369E")
++    MIDL_INTERFACE("5BB11929-AFD1-11d2-9CB9-0000F87A369E") _Windows_SupportedOS_WindowsVista_ 
+     IADsADSystemInfo : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SiteName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainShortName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainDNSName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ForestDNSName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PDCRoleOwner( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SchemaRoleOwner( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_IsNativeMode( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *retval) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetAnyDCName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDCName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pszDCName) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDCSiteName( 
+             /* [in] */ __RPC__in BSTR szServer,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszSiteName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pszSiteName) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RefreshSchemaCache( void) = 0;
+         
+@@ -18647,21 +18648,21 @@ EXTERN_C const IID IID_IADsWinNTSystemInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6C6D65DC-AFD1-11d2-9CB9-0000F87A369E")
++    MIDL_INTERFACE("6C6D65DC-AFD1-11d2-9CB9-0000F87A369E") _Windows_SupportedOS_WindowsVista_ 
+     IADsWinNTSystemInfo : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PDC( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+     };
+     
+@@ -18826,7 +18827,7 @@ EXTERN_C const IID IID_IADsDNWithBinary;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7e99c0a2-f935-11d2-ba96-00c04fb6d0d1")
++    MIDL_INTERFACE("7e99c0a2-f935-11d2-ba96-00c04fb6d0d1") _Windows_SupportedOS_WindowsVista_ 
+     IADsDNWithBinary : public IDispatch
+     {
+     public:
+@@ -18837,7 +18838,7 @@ EXTERN_C const IID IID_IADsDNWithBinary;
+             /* [in] */ VARIANT vBinaryValue) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DNString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DNString( 
+             /* [in] */ __RPC__in BSTR bstrDNString) = 0;
+@@ -19005,18 +19006,18 @@ EXTERN_C const IID IID_IADsDNWithString;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("370df02e-f934-11d2-ba96-00c04fb6d0d1")
++    MIDL_INTERFACE("370df02e-f934-11d2-ba96-00c04fb6d0d1") _Windows_SupportedOS_WindowsVista_ 
+     IADsDNWithString : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StringValue( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_StringValue( 
+             /* [in] */ __RPC__in BSTR bstrStringValue) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DNString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retval) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *retval) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DNString( 
+             /* [in] */ __RPC__in BSTR bstrDNString) = 0;
+@@ -19184,7 +19185,7 @@ EXTERN_C const IID IID_IADsSecurityUtility;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a63251b2-5f21-474b-ab52-4a8efad10895")
++    MIDL_INTERFACE("a63251b2-5f21-474b-ab52-4a8efad10895") _Windows_SupportedOS_WindowsVista_ 
+     IADsSecurityUtility : public IDispatch
+     {
+     public:

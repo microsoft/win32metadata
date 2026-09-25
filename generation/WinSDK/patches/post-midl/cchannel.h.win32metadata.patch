@@ -1,0 +1,87 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h b/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
+index a7032a870e..15b22b9b7a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cchannel.h
+@@ -23,6 +23,7 @@ Revision History:
+ #include <pchannel.h>
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -57,9 +58,9 @@ Revision History:
+ /* - dataLength - length of the data.                                       */
+ /*                                                                          */
+ /****************************************************************************/
+-typedef VOID VCAPITYPE CHANNEL_INIT_EVENT_FN(LPVOID pInitHandle,
++typedef VOID VCAPITYPE CHANNEL_INIT_EVENT_FN(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pInitHandle,
+                                              UINT   event,
+-                                             LPVOID pData,
++                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pData,
+                                              UINT   dataLength);
+ 
+ typedef CHANNEL_INIT_EVENT_FN FAR * PCHANNEL_INIT_EVENT_FN;
+@@ -108,7 +109,7 @@ typedef CHANNEL_INIT_EVENT_FN FAR * PCHANNEL_INIT_EVENT_FN;
+ /****************************************************************************/
+ typedef VOID VCAPITYPE CHANNEL_OPEN_EVENT_FN(DWORD  openHandle,
+                                              UINT   event,
+-                                             LPVOID pData,
++                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pData,
+                                              UINT32 dataLength,
+                                              UINT32 totalLength,
+                                              UINT32 dataFlags);
+@@ -202,8 +203,8 @@ extern "C" {
+ /*                                                                          */
+ /****************************************************************************/
+ typedef UINT VCAPITYPE VIRTUALCHANNELINIT(
+-                LPVOID FAR *           ppInitHandle,
+-                PCHANNEL_DEF           pChannel,
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *           ppInitHandle,
++                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCHANNEL_DEF           pChannel,
+                 INT                    channelCount,
+                 ULONG                  versionRequested,
+                 PCHANNEL_INIT_EVENT_FN pChannelInitEventProc);
+@@ -238,9 +239,9 @@ typedef VIRTUALCHANNELINIT FAR * PVIRTUALCHANNELINIT;
+ /*                                                                          */
+ /****************************************************************************/
+ typedef UINT VCAPITYPE VIRTUALCHANNELOPEN(
+-                                LPVOID                 pInitHandle,
+-                                LPDWORD                pOpenHandle,
+-                                PCHAR                  pChannelName,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID                 pInitHandle,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD                pOpenHandle,
++                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR                  pChannelName,
+                                 PCHANNEL_OPEN_EVENT_FN pChannelOpenEventProc);
+ 
+ typedef VIRTUALCHANNELOPEN FAR * PVIRTUALCHANNELOPEN;
+@@ -304,9 +305,9 @@ typedef VIRTUALCHANNELCLOSE FAR * PVIRTUALCHANNELCLOSE;
+ /*                                                                          */
+ /****************************************************************************/
+ typedef UINT VCAPITYPE VIRTUALCHANNELWRITE(DWORD  openHandle,
+-                                           LPVOID pData,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pData,
+                                            ULONG  dataLength,
+-                                           LPVOID pUserData);
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pUserData);
+ 
+ typedef VIRTUALCHANNELWRITE FAR * PVIRTUALCHANNELWRITE;
+ 
+@@ -316,7 +317,7 @@ typedef VIRTUALCHANNELWRITE FAR * PVIRTUALCHANNELWRITE;
+ /*                                                                          */
+ /* Description: Virtual Channel entry points passed to VirtualChannelEntry  */
+ /****************************************************************************/
+-typedef struct tagCHANNEL_ENTRY_POINTS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    tagCHANNEL_ENTRY_POINTS
+ {
+     DWORD cbSize;
+     DWORD protocolVersion;
+@@ -350,7 +351,7 @@ typedef struct tagCHANNEL_ENTRY_POINTS
+ /*                                                                          */
+ /****************************************************************************/
+ typedef BOOL VCAPITYPE VIRTUALCHANNELENTRY(
+-                                          PCHANNEL_ENTRY_POINTS pEntryPoints);
++                                          _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCHANNEL_ENTRY_POINTS pEntryPoints);
+ 
+ typedef VIRTUALCHANNELENTRY FAR * PVIRTUALCHANNELENTRY;
+ 

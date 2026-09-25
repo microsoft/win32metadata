@@ -1,0 +1,133 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
+index b581486345..4a6b03dbac 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MgmtAPI.h
+@@ -19,6 +19,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -74,6 +75,8 @@ typedef PVOID LPSNMP_MGR_SESSION;
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
+ LPSNMP_MGR_SESSION
+ SNMP_FUNC_TYPE
+ SnmpMgrOpen(
+@@ -83,76 +86,80 @@ SnmpMgrOpen(
+     IN INT   nRetries                       // Comm time-out/retry count
+     );
+ 
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrCtl(
+-    LPSNMP_MGR_SESSION session,             // pointer to the MGMTAPI session
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSNMP_MGR_SESSION session,             // pointer to the MGMTAPI session
+     DWORD              dwCtlCode,           // control code for the command requested
+-    LPVOID             lpvInBuffer,         // buffer with the input parameters for the operation
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID             lpvInBuffer,         // buffer with the input parameters for the operation
+     DWORD              cbInBuffer,          // size of lpvInBuffer in bytes
+-    LPVOID             lpvOUTBuffer,        // buffer for all the output parameters of the command
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID             lpvOUTBuffer,        // buffer for all the output parameters of the command
+     DWORD              cbOUTBuffer,         // size of lpvOUTBuffer
+-    LPDWORD            lpcbBytesReturned    // space used from lpvOutBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD            lpcbBytesReturned    // space used from lpvOutBuffer
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrClose(
+-    IN LPSNMP_MGR_SESSION session           // SNMP session pointer
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPSNMP_MGR_SESSION session           // SNMP session pointer
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpMgrRequest(
+-    IN     LPSNMP_MGR_SESSION session,           // SNMP session pointer
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPSNMP_MGR_SESSION session,           // SNMP session pointer
+     IN     BYTE               requestType,       // Get, GetNext, or Set
+     IN OUT RFC1157VarBindList *variableBindings, // Varible bindings
+-       OUT AsnInteger         *errorStatus,      // Result error status
+-       OUT AsnInteger         *errorIndex        // Result error index
++       _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_ERROR_STATUS) OUT AsnInteger         *errorStatus,      // Result error status
++       _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnInteger         *errorIndex        // Result error index
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrStrToOid(
+     _In_opt_  LPSTR         string,         // OID string to be converted
+-    OUT AsnObjectIdentifier *oid            // OID internal representation
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnObjectIdentifier *oid            // OID internal representation
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrOidToStr(
+-    IN  AsnObjectIdentifier *oid,           // OID to be converted
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  AsnObjectIdentifier *oid,           // OID to be converted
+     _Outptr_opt_ LPSTR   *string         // OID string representation
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrTrapListen(
+-    OUT HANDLE *phTrapAvailable             // Event indicating trap available
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT HANDLE *phTrapAvailable             // Event indicating trap available
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrGetTrap(
+-    OUT AsnObjectIdentifier *enterprise,         // Generating enterprise
+-    OUT AsnNetworkAddress   *IPAddress,          // Generating IP address
+-    OUT AsnInteger          *genericTrap,        // Generic trap type
+-    OUT AsnInteger          *specificTrap,       // Enterprise specific type
+-    OUT AsnTimeticks        *timeStamp,          // Time stamp
+-    OUT RFC1157VarBindList  *variableBindings    // Variable bindings
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnObjectIdentifier *enterprise,         // Generating enterprise
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnNetworkAddress   *IPAddress,          // Generating IP address
++    _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_GENERICTRAP) OUT AsnInteger          *genericTrap,        // Generic trap type
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnInteger          *specificTrap,       // Enterprise specific type
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnTimeticks        *timeStamp,          // Time stamp
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RFC1157VarBindList  *variableBindings    // Variable bindings
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrGetTrapEx(
+-    OUT AsnObjectIdentifier *enterprise,       // Generating enterprise
+-    OUT AsnNetworkAddress   *agentAddress,     // Generating agent addr
+-    OUT AsnNetworkAddress   *sourceAddress,    // Generating network addr
+-    OUT AsnInteger          *genericTrap,      // Generic trap type
+-    OUT AsnInteger          *specificTrap,     // Enterprise specific type
+-    OUT AsnOctetString      *community,        // Generating community
+-    OUT AsnTimeticks        *timeStamp,        // Time stamp
+-    OUT RFC1157VarBindList  *variableBindings  // Variable bindings
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnObjectIdentifier *enterprise,       // Generating enterprise
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnNetworkAddress   *agentAddress,     // Generating agent addr
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnNetworkAddress   *sourceAddress,    // Generating network addr
++    _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(SNMP_GENERICTRAP) OUT AsnInteger          *genericTrap,      // Generic trap type
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnInteger          *specificTrap,     // Enterprise specific type
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnOctetString      *community,        // Generating community
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT AsnTimeticks        *timeStamp,        // Time stamp
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RFC1157VarBindList  *variableBindings  // Variable bindings
+     );
+ 
+ #ifdef __cplusplus

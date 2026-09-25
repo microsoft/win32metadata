@@ -1,0 +1,126 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h
+index 1a53f1695f..faf9e6ab7d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++
+@@ -2484,7 +2485,7 @@ DEFINE_GUIDSTRUCT("57E24340-FC5B-4612-A562-72B11A29DFAE", KSAUDFNAME_PEAKMETER);
+ #define KSNODEPIN_DEMUX_IN          0
+ #define KSNODEPIN_DEMUX_OUT         1   // can be >= 1
+ 
+-#if (NTDDI_VERSION < NTDDI_VISTA)
++#if defined(WIN32METADATA) || ((NTDDI_VERSION < NTDDI_VISTA))
+ 
+ #define KSNODEPIN_AEC_RENDER_IN     1
+ #define KSNODEPIN_AEC_RENDER_OUT    0
+@@ -2540,14 +2541,42 @@ typedef enum {
+     KSPROPERTY_AEC_MODE
+ } KSPROPERTY_AEC;
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_STATUS_FD_HISTORY_UNINITIALIZED             0x0
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_STATUS_FD_HISTORY_CONTINUOUSLY_CONVERGED    0x1
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_STATUS_FD_HISTORY_PREVIOUSLY_DIVERGED       0x2
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_STATUS_FD_CURRENTLY_CONVERGED               0x8
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_MODE_PASS_THROUGH           0x0
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_MODE_HALF_DUPLEX            0x1
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)))
+ #define AEC_MODE_FULL_DUPLEX            0x2
++#endif
++#if (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP && NTDDI_VERSION < NTDDI_VISTA)
+ 
+@@ -2560,14 +2589,22 @@ typedef enum {
+ DEFINE_GUIDSTRUCT("16a15b10-16f0-11d0-a195-0020afd156e4", KSPROPSETID_Wave_Queued);
+ #define KSPROPSETID_Wave_Queued DEFINE_GUIDNAMED(KSPROPSETID_Wave_Queued)
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WS03)))
+ #define KSPROPERTY_WAVE_QUEUED_POSITION                 0x00000001
++#endif
++#if (NTDDI_VERSION < NTDDI_WS03)
+ 
+ #define STATIC_KSMETHODSETID_Wave_Queued\
+     0x7432c160L, 0x8827, 0x11cf, 0xa1, 0x02, 0x00, 0x20, 0xaf, 0xd1, 0x56, 0xe4
+ DEFINE_GUIDSTRUCT("7432c160-8827-11cf-a102-0020afd156e4", KSMETHODSETID_Wave_Queued);
+ #define KSMETHODSETID_Wave_Queued DEFINE_GUIDNAMED(KSMETHODSETID_Wave_Queued)
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WS03)))
+ #define KSMETHOD_WAVE_QUEUED_BREAKLOOP                  0x00000001
++#endif
++#if (NTDDI_VERSION < NTDDI_WS03)
+ 
+ #endif // (NTDDI_VERSION < NTDDI_WS03)
+ 
+@@ -2839,7 +2876,11 @@ typedef struct {
+     ULONG DeviceNumber;
+ } SYSAUDIO_INSTANCE_INFO, *PSYSAUDIO_INSTANCE_INFO;
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_VISTA)))
+ #define SYSAUDIO_FLAGS_DONT_COMBINE_PINS        0x00000001
++#endif
++#if (NTDDI_VERSION < NTDDI_VISTA)
+ 
+ #endif // (NTDDI_VERSION < NTDDI_VISTA)
+ 
+@@ -2850,7 +2891,11 @@ typedef struct {
+     ULONG Index;            // KSPROPERTY_SYSAUDIO_DEFAULT_TYPE
+ } SYSAUDIO_PREFERRED_DEVICE, *PSYSAUDIO_PREFERRED_DEVICE;
+ 
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WINXP)))
+ #define SYSAUDIO_FLAGS_CLEAR_PREFERRED          0x00000002
++#endif
++#if (NTDDI_VERSION < NTDDI_WINXP)
+ #endif // (NTDDI_VERSION < NTDDI_WINXP)
+ 
+ #if (NTDDI_VERSION < NTDDI_VISTA)
+@@ -5218,7 +5263,7 @@ typedef struct tagKS_FRAME_INFO {
+ // KSSTREAM_HEADER extensions for VBI
+ //===========================================================================
+ 
+-#if (NTDDI_VERSION < NTDDI_WINXP)
++#if defined(WIN32METADATA) || ((NTDDI_VERSION < NTDDI_WINXP))
+ #define KS_VBI_FLAG_FRAME                0x0000L // Frame or Field (default is frame)
+ #endif
+ #define KS_VBI_FLAG_FIELD1               0x0001L
+@@ -7301,7 +7346,7 @@ typedef struct tagTIMECODE_SAMPLE {
+     LONGLONG qwTick;
+     TIMECODE timecode;
+     DWORD dwUser;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(TIMECODE_SAMPLE_FLAGS) DWORD dwFlags;
+ } TIMECODE_SAMPLE;
+ 
+ typedef TIMECODE_SAMPLE *PTIMECODE_SAMPLE;

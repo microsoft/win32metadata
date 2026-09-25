@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h
+index 5bad92868a..5df2a78bd0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DiagnosticDataQueryTypes.h
+@@ -28,6 +28,7 @@
+ 
+ #ifndef __diagnosticdataquerytypes_h__
+ #define __diagnosticdataquerytypes_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -85,7 +86,7 @@ enum tagDdqAccessLevel
+         AllUserData	= 2
+     } 	DdqAccessLevel;
+ 
+-typedef struct tagDIAGNOSTIC_DATA_RECORD
++typedef struct  tagDIAGNOSTIC_DATA_RECORD
+     {
+     INT64 rowId;
+     UINT64 timestamp;

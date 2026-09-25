@@ -1,0 +1,67 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h b/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
+index 71dad35999..2d95d516bb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tsuserex.h
+@@ -88,6 +88,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -124,24 +125,24 @@ EXTERN_C const IID IID_IADsTSUserEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C4930E79-2989-4462-8A60-2FCF2F2955EF")
+-    IADsTSUserEx : public IDispatch
++    MIDL_INTERFACE("C4930E79-2989-4462-8A60-2FCF2F2955EF") _Windows_SupportedOS_WindowsVista_ 
++      IADsTSUserEx : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalServicesProfilePath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TerminalServicesProfilePath( 
+             /* [in] */ __RPC__in BSTR pNewVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalServicesHomeDirectory( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TerminalServicesHomeDirectory( 
+             /* [in] */ __RPC__in BSTR pNewVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalServicesHomeDrive( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TerminalServicesHomeDrive( 
+             /* [in] */ __RPC__in BSTR pNewVal) = 0;
+@@ -207,13 +208,13 @@ EXTERN_C const IID IID_IADsTSUserEx;
+             /* [in] */ LONG NewVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalServicesWorkDirectory( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TerminalServicesWorkDirectory( 
+             /* [in] */ __RPC__in BSTR pNewVal) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalServicesInitialProgram( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pVal) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_TerminalServicesInitialProgram( 
+             /* [in] */ __RPC__in BSTR pNewVal) = 0;
+@@ -436,7 +437,7 @@ EXTERN_C const IID IID_IADsTSUserEx;
+         END_INTERFACE
+     } IADsTSUserExVtbl;
+ 
+-    interface IADsTSUserEx
++    interface _Windows_SupportedOS_WindowsVista_ IADsTSUserEx
+     {
+         CONST_VTBL struct IADsTSUserExVtbl *lpVtbl;
+     };

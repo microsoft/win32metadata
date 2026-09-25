@@ -1,0 +1,145 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h
+index 7582307420..85d66508bc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/appmgmt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //*************************************************************
+ //
+ // appmgmt.h
+@@ -26,7 +27,7 @@
+ extern "C" {
+ #endif
+ 
+-typedef enum _INSTALLSPECTYPE
++typedef enum   _INSTALLSPECTYPE
+ {
+     APPNAME = 1,
+     FILEEXT,
+@@ -34,7 +35,7 @@ typedef enum _INSTALLSPECTYPE
+     COMCLASS
+ } INSTALLSPECTYPE;
+ 
+-typedef union _INSTALLSPEC
++typedef union   _INSTALLSPEC
+ {
+     struct
+     {
+@@ -50,7 +51,7 @@ typedef union _INSTALLSPEC
+     } COMClass;
+ } INSTALLSPEC;
+ 
+-typedef struct _INSTALLDATA
++typedef struct   _INSTALLDATA
+ {
+     INSTALLSPECTYPE Type;
+     INSTALLSPEC     Spec;
+@@ -71,7 +72,7 @@ typedef enum
+ #define LOCALSTATE_ORPHANED                 0x20    // app is orphaned after being applied
+ #define LOCALSTATE_UNINSTALLED              0x40    // app is uninstalled after being applied
+ 
+-typedef struct _LOCALMANAGEDAPPLICATION
++typedef struct   _LOCALMANAGEDAPPLICATION
+ {
+     LPWSTR      pszDeploymentName;
+     LPWSTR      pszPolicyName;
+@@ -87,7 +88,7 @@ typedef struct _LOCALMANAGEDAPPLICATION
+ #define MANAGED_APPTYPE_SETUPEXE         0x2
+ #define MANAGED_APPTYPE_UNSUPPORTED      0x3
+ 
+-typedef struct _MANAGEDAPPLICATION
++typedef struct   _MANAGEDAPPLICATION
+ {
+     LPWSTR      pszPackageName;
+     LPWSTR      pszPublisher;
+@@ -107,14 +108,14 @@ typedef struct _MANAGEDAPPLICATION
+     BOOL        bInstalled;
+ } MANAGEDAPPLICATION, *PMANAGEDAPPLICATION;
+ 
+-typedef struct _APPCATEGORYINFO
++typedef struct   _APPCATEGORYINFO
+ {
+     LCID        Locale;
+     LPWSTR      pszDescription;
+     GUID        AppCategoryId;
+ } APPCATEGORYINFO;
+ 
+-typedef struct _APPCATEGORYINFOLIST
++typedef struct   _APPCATEGORYINFOLIST
+ {
+     DWORD               cCategory;
+ #ifdef MIDL_PASS
+@@ -127,7 +128,8 @@ typedef struct _APPCATEGORYINFOLIST
+ #define WINAPI
+ #endif
+ 
+-DWORD WINAPI
++_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
++  
+ InstallApplication(
+ #if !defined(__midl)
+     _In_ 
+@@ -135,7 +137,8 @@ InstallApplication(
+ 	PINSTALLDATA pInstallInfo
+     );
+ 
+-DWORD WINAPI
++_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
++  
+ UninstallApplication(
+ #if !defined(__midl)
+     _In_ 
+@@ -157,10 +160,11 @@ CommandLineFromMsiDescriptor(
+     _Out_writes_( *CommandLineLength )
+ #endif
+     LPWSTR      CommandLine,
+-    DWORD *     CommandLineLength
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *     CommandLineLength
+     );
+ 
+-DWORD WINAPI
++_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
++  
+ GetManagedApplications(
+ #if !defined(__midl)
+     _In_ 
+@@ -181,10 +185,11 @@ GetManagedApplications(
+ #if !defined(__midl)
+     _Out_ 
+ #endif
+-	PMANAGEDAPPLICATION* prgManagedApps
++	 PMANAGEDAPPLICATION* prgManagedApps
+     );
+ 
+-DWORD WINAPI
++_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
++  
+ GetLocalManagedApplications(
+ #if !defined(__midl)
+     _In_ 
+@@ -197,7 +202,7 @@ GetLocalManagedApplications(
+ #if !defined(__midl)
+     _Out_ 
+ #endif
+-	PLOCALMANAGEDAPPLICATION*   prgLocalApps
++	 PLOCALMANAGEDAPPLICATION*   prgLocalApps
+     );
+ 
+ void WINAPI
+@@ -216,12 +221,13 @@ GetLocalManagedApplicationData(
+ 	LPWSTR *            SupportUrl
+     );
+ 
+-DWORD WINAPI
++_Windows_SupportedOS_WindowsVista_ DWORD WINAPI
++  
+ GetManagedApplicationCategories(
+ #if !defined(__midl)
+-    _Reserved_ 
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ 
+ #endif
+-	DWORD                dwReserved,
++	_WIN32META_ANNOTATION_("win32metadata:optional") DWORD                dwReserved,
+ #if !defined(__midl)
+     _Out_ 
+ #endif

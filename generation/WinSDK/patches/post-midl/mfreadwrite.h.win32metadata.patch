@@ -1,0 +1,217 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfreadwrite.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfreadwrite.h
+index b1eab5e433..d6954f6b38 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfreadwrite.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfreadwrite.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -150,7 +151,7 @@ EXTERN_C const IID IID_IMFReadWriteClassFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E7FE2E12-661C-40DA-92F9-4F002AB67627")
++    MIDL_INTERFACE("E7FE2E12-661C-40DA-92F9-4F002AB67627") _Windows_SupportedOS_Windows7_ 
+     IMFReadWriteClassFactory : public IUnknown
+     {
+     public:
+@@ -275,15 +276,15 @@ EXTERN_C const IID IID_IMFReadWriteClassFactory;
+ /* [local] */ 
+ 
+ EXTERN_GUID(CLSID_MFSourceReader, 0x1777133c, 0x0881, 0x411b, 0xa5, 0x77, 0xad, 0x54, 0x5f, 0x07, 0x14, 0xc4);
+-STDAPI MFCreateSourceReaderFromURL(
++_Windows_SupportedOS_Windows7_ STDAPI MFCreateSourceReaderFromURL(
+     _In_ LPCWSTR pwszURL,
+     _In_opt_ IMFAttributes *pAttributes,
+     _Out_ IMFSourceReader **ppSourceReader );
+-STDAPI MFCreateSourceReaderFromByteStream(
++_Windows_SupportedOS_Windows7_ STDAPI MFCreateSourceReaderFromByteStream(
+     _In_ IMFByteStream *pByteStream,
+     _In_opt_ IMFAttributes *pAttributes,
+     _Out_ IMFSourceReader **ppSourceReader );
+-STDAPI MFCreateSourceReaderFromMediaSource(
++_Windows_SupportedOS_Windows7_ STDAPI MFCreateSourceReaderFromMediaSource(
+     _In_ IMFMediaSource *pMediaSource,
+     _In_opt_ IMFAttributes *pAttributes,
+     _Out_ IMFSourceReader **ppSourceReader );
+@@ -322,6 +323,35 @@ enum MF_SOURCE_READER_CONTROL_FLAG
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(MF_SOURCE_READER_CONTROL_FLAG)
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_SOURCE_READER_INVALID_STREAM_INDEX")
++#undef MF_SOURCE_READER_INVALID_STREAM_INDEX
++#pragma push_macro("MF_SOURCE_READER_ALL_STREAMS")
++#undef MF_SOURCE_READER_ALL_STREAMS
++#pragma push_macro("MF_SOURCE_READER_ANY_STREAM")
++#undef MF_SOURCE_READER_ANY_STREAM
++#pragma push_macro("MF_SOURCE_READER_FIRST_AUDIO_STREAM")
++#undef MF_SOURCE_READER_FIRST_AUDIO_STREAM
++#pragma push_macro("MF_SOURCE_READER_FIRST_VIDEO_STREAM")
++#undef MF_SOURCE_READER_FIRST_VIDEO_STREAM
++#pragma push_macro("MF_SOURCE_READER_MEDIASOURCE")
++#undef MF_SOURCE_READER_MEDIASOURCE
++enum MF_SOURCE_READER_CONSTANTS : int
++{
++    MF_SOURCE_READER_INVALID_STREAM_INDEX = -1,
++    MF_SOURCE_READER_ALL_STREAMS = -2,
++    MF_SOURCE_READER_ANY_STREAM = -2,
++    MF_SOURCE_READER_FIRST_AUDIO_STREAM = -3,
++    MF_SOURCE_READER_FIRST_VIDEO_STREAM = -4,
++    MF_SOURCE_READER_MEDIASOURCE = -1,
++};
++#pragma pop_macro("MF_SOURCE_READER_MEDIASOURCE")
++#pragma pop_macro("MF_SOURCE_READER_FIRST_VIDEO_STREAM")
++#pragma pop_macro("MF_SOURCE_READER_FIRST_AUDIO_STREAM")
++#pragma pop_macro("MF_SOURCE_READER_ANY_STREAM")
++#pragma pop_macro("MF_SOURCE_READER_ALL_STREAMS")
++#pragma pop_macro("MF_SOURCE_READER_INVALID_STREAM_INDEX")
++#else
+ enum __MIDL___MIDL_itf_mfreadwrite_0000_0001_0001
+     {
+         MF_SOURCE_READER_INVALID_STREAM_INDEX	= 0xffffffff,
+@@ -331,12 +361,23 @@ enum __MIDL___MIDL_itf_mfreadwrite_0000_0001_0001
+         MF_SOURCE_READER_FIRST_VIDEO_STREAM	= 0xfffffffc,
+         MF_SOURCE_READER_MEDIASOURCE	= 0xffffffff
+     } ;
++#endif
+ #if (WINVER >= _WIN32_WINNT_WIN8) 
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_SOURCE_READER_CURRENT_TYPE_INDEX")
++#undef MF_SOURCE_READER_CURRENT_TYPE_INDEX
++enum MF_SOURCE_READER_CURRENT_TYPE_CONSTANTS : int
++{
++    MF_SOURCE_READER_CURRENT_TYPE_INDEX = -1,
++};
++#pragma pop_macro("MF_SOURCE_READER_CURRENT_TYPE_INDEX")
++#else
+ enum __MIDL___MIDL_itf_mfreadwrite_0000_0001_0002
+     {
+         MF_SOURCE_READER_CURRENT_TYPE_INDEX	= 0xffffffff
+     } ;
++#endif
+ #endif // (WINVER >= _WIN32_WINNT_WIN8) 
+ 
+ 
+@@ -354,7 +395,7 @@ EXTERN_C const IID IID_IMFSourceReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("70ae66f2-c809-4e4f-8915-bdcb406b7993")
++    MIDL_INTERFACE("70ae66f2-c809-4e4f-8915-bdcb406b7993") _Windows_SupportedOS_Windows7_ 
+     IMFSourceReader : public IUnknown
+     {
+     public:
+@@ -643,7 +684,7 @@ EXTERN_C const IID IID_IMFSourceReaderEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b981cf0-560e-4116-9875-b099895f23d7")
++    MIDL_INTERFACE("7b981cf0-560e-4116-9875-b099895f23d7") _Windows_SupportedOS_Windows8_ 
+     IMFSourceReaderEx : public IMFSourceReader
+     {
+     public:
+@@ -933,7 +974,7 @@ EXTERN_C const IID IID_IMFSourceReaderCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("deec8d99-fa1d-4d82-84c2-2c8969944867")
++    MIDL_INTERFACE("deec8d99-fa1d-4d82-84c2-2c8969944867") _Windows_SupportedOS_Windows7_ 
+     IMFSourceReaderCallback : public IUnknown
+     {
+     public:
+@@ -1197,12 +1238,12 @@ EXTERN_C const IID IID_IMFSourceReaderCallback2;
+ /* [local] */ 
+ 
+ EXTERN_GUID(CLSID_MFSinkWriter, 0xa3bbfb17, 0x8273, 0x4e52, 0x9e, 0x0e, 0x97, 0x39, 0xdc, 0x88, 0x79, 0x90);
+-STDAPI MFCreateSinkWriterFromURL(
++_Windows_SupportedOS_Windows7_ STDAPI MFCreateSinkWriterFromURL(
+     _In_opt_ LPCWSTR pwszOutputURL,
+     _In_opt_ IMFByteStream *pByteStream,
+     _In_opt_ IMFAttributes *pAttributes,
+     _Out_ IMFSinkWriter **ppSinkWriter );
+-STDAPI MFCreateSinkWriterFromMediaSink(
++_Windows_SupportedOS_Windows7_ STDAPI MFCreateSinkWriterFromMediaSink(
+     _In_ IMFMediaSink *pMediaSink,
+     _In_opt_ IMFAttributes *pAttributes,
+     _Out_ IMFSinkWriter **ppSinkWriter );
+@@ -1213,12 +1254,30 @@ EXTERN_GUID( MF_SINK_WRITER_D3D_MANAGER, 0xec822da2, 0xe1e9, 0x4b29, 0xa0, 0xd8,
+ EXTERN_GUID( MF_SINK_WRITER_ENCODER_CONFIG, 0xad91cd04, 0xa7cc, 0x4ac7, 0x99, 0xb6, 0xa5, 0x7b, 0x9a, 0x4a, 0x7c, 0x70);
+ #endif
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MF_SINK_WRITER_INVALID_STREAM_INDEX")
++#undef MF_SINK_WRITER_INVALID_STREAM_INDEX
++#pragma push_macro("MF_SINK_WRITER_ALL_STREAMS")
++#undef MF_SINK_WRITER_ALL_STREAMS
++#pragma push_macro("MF_SINK_WRITER_MEDIASINK")
++#undef MF_SINK_WRITER_MEDIASINK
++enum MF_SINK_WRITER_CONSTANTS : unsigned int
++{
++    MF_SINK_WRITER_INVALID_STREAM_INDEX = 4294967295U,
++    MF_SINK_WRITER_ALL_STREAMS = 4294967294U,
++    MF_SINK_WRITER_MEDIASINK = 4294967295U,
++};
++#pragma pop_macro("MF_SINK_WRITER_MEDIASINK")
++#pragma pop_macro("MF_SINK_WRITER_ALL_STREAMS")
++#pragma pop_macro("MF_SINK_WRITER_INVALID_STREAM_INDEX")
++#else
+ enum __MIDL___MIDL_itf_mfreadwrite_0000_0005_0001
+     {
+         MF_SINK_WRITER_INVALID_STREAM_INDEX	= 0xffffffff,
+         MF_SINK_WRITER_ALL_STREAMS	= 0xfffffffe,
+         MF_SINK_WRITER_MEDIASINK	= 0xffffffff
+     } ;
++#endif
+ #if defined(_MSC_VER) && (_MSC_VER >= 1600)
+ #pragma warning(push)
+ #pragma warning(disable:4820) // Disable C4820: padding after data member
+@@ -1266,7 +1325,7 @@ EXTERN_C const IID IID_IMFSinkWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3137f1cd-fe5e-4805-a5d8-fb477448cb3d")
++    MIDL_INTERFACE("3137f1cd-fe5e-4805-a5d8-fb477448cb3d") _Windows_SupportedOS_Windows7_ 
+     IMFSinkWriter : public IUnknown
+     {
+     public:
+@@ -1524,7 +1583,7 @@ EXTERN_C const IID IID_IMFSinkWriterEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("588d72ab-5Bc1-496a-8714-b70617141b25")
++    MIDL_INTERFACE("588d72ab-5Bc1-496a-8714-b70617141b25") _Windows_SupportedOS_Windows8_ 
+     IMFSinkWriterEx : public IMFSinkWriter
+     {
+     public:
+@@ -1739,7 +1798,7 @@ EXTERN_C const IID IID_IMFSinkWriterEncoderConfig;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("17C3779E-3CDE-4EDE-8C60-3899F5F53AD6")
++    MIDL_INTERFACE("17C3779E-3CDE-4EDE-8C60-3899F5F53AD6") _Windows_SupportedOS_Windows81_ 
+     IMFSinkWriterEncoderConfig : public IUnknown
+     {
+     public:
+@@ -1860,7 +1919,7 @@ EXTERN_C const IID IID_IMFSinkWriterCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("666f76de-33d2-41b9-a458-29ed0a972c58")
++    MIDL_INTERFACE("666f76de-33d2-41b9-a458-29ed0a972c58") _Windows_SupportedOS_Windows7_ 
+     IMFSinkWriterCallback : public IUnknown
+     {
+     public:
+@@ -2109,6 +2168,10 @@ extern RPC_IF_HANDLE __MIDL_itf_mfreadwrite_0000_0010_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
++
++
+ #endif
+ 
+ 

@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h
+index b47ee1ff02..fb7d505273 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/bthsdpdef.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ // Copyright (C) Microsoft Corporation.  All rights reserved.
+ 
+ #ifndef __BTHSDPDEF_H__
+@@ -105,7 +106,7 @@ typedef struct _SdpQueryUuid {
+ #endif
+        SdpQueryUuidUnion u;
+ 
+-    USHORT uuidType;
++     USHORT uuidType;
+ } SdpQueryUuid;
+ 
+ 

@@ -1,0 +1,84 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/filterpipeline.h b/generation/WinSDK/RecompiledIdlHeaders/um/filterpipeline.h
+index 884cf3a372..348e06017a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/filterpipeline.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/filterpipeline.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1629,7 +1630,7 @@ EXTERN_C const IID IID_IFixedDocumentSequence;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *uri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *uri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPrintTicket( 
+             /* [annotation][out] */ 
+@@ -1741,7 +1742,7 @@ EXTERN_C const IID IID_IFixedDocument;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *uri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *uri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPrintTicket( 
+             /* [annotation][out] */ 
+@@ -1853,7 +1854,7 @@ EXTERN_C const IID IID_IPartBase;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *uri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *uri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStream( 
+             /* [annotation][out] */ 
+@@ -2183,7 +2184,7 @@ EXTERN_C const IID IID_IPartImage;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetImageProperties( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pContentType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pContentType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetImageContent( 
+             /* [annotation][string][in] */ 
+@@ -2319,7 +2320,7 @@ EXTERN_C const IID IID_IPartFont;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetFontProperties( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pContentType,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pContentType,
+             /* [annotation][out] */ 
+             _Out_  EXpsFontOptions *pFontOptions) = 0;
+         
+@@ -2625,7 +2626,7 @@ EXTERN_C const IID IID_IPartThumbnail;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetThumbnailProperties( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pContentType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pContentType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetThumbnailContent( 
+             /* [annotation][string][in] */ 
+@@ -3093,7 +3094,7 @@ EXTERN_C const IID IID_IXpsPartIterator;
+         
+         virtual HRESULT STDMETHODCALLTYPE Current( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pUri,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pUri,
+             /* [annotation][out] */ 
+             _Outptr_  IUnknown **ppXpsPart) = 0;
+         
+@@ -3294,9 +3295,9 @@ EXTERN_C const IID IID_IPartDiscardControl;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDiscardProperties( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *uriSentinelPage,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *uriSentinelPage,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *uriPartToDiscard) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *uriPartToDiscard) = 0;
+         
+     };
+     

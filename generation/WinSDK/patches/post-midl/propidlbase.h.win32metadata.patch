@@ -1,0 +1,139 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
+index 48e9fc14c2..4b9c874a33 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propidlbase.h
+@@ -88,6 +88,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //+-------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -304,7 +305,7 @@ struct tagPROPVARIANT {
+ #endif
+ struct tag_inner_PROPVARIANT
+     {
+-    VARTYPE vt;
++    _Win32_AssociatedEnum_(VARENUM) VARTYPE vt;
+     PROPVAR_PAD1 wReserved1;
+     PROPVAR_PAD2 wReserved2;
+     PROPVAR_PAD3 wReserved3;
+@@ -448,7 +449,7 @@ typedef struct tagPROPVARIANT * LPPROPVARIANT;
+ 
+ typedef struct tagPROPSPEC
+     {
+-    ULONG ulKind;
++    _Win32_AssociatedEnum_(PROPSPEC_KIND) ULONG ulKind;
+     /* [switch_is] */ /* [switch_type] */ union 
+         {
+         /* [case()] */ PROPID propid;
+@@ -457,11 +458,11 @@ typedef struct tagPROPSPEC
+         } 	DUMMYUNIONNAME;
+     } 	PROPSPEC;
+ 
+-typedef struct tagSTATPROPSTG
++typedef struct   tagSTATPROPSTG
+     {
+     LPOLESTR lpwstrName;
+     PROPID propid;
+-    VARTYPE vt;
++    _Win32_AssociatedEnum_(VARENUM) VARTYPE vt;
+     } 	STATPROPSTG;
+ 
+ // Macros for parsing the OS Version of the Property Set Header
+@@ -469,7 +470,7 @@ typedef struct tagSTATPROPSTG
+ #define PROPSETHDR_OSVER_MAJOR(dwOSVer)     LOBYTE(LOWORD( (dwOSVer) ))
+ #define PROPSETHDR_OSVER_MINOR(dwOSVer)     HIBYTE(LOWORD( (dwOSVer) ))
+ #define PROPSETHDR_OSVERSION_UNKNOWN        0xFFFFFFFF
+-typedef struct tagSTATPROPSETSTG
++typedef struct   tagSTATPROPSETSTG
+     {
+     FMTID fmtid;
+     CLSID clsid;
+@@ -496,7 +497,7 @@ EXTERN_C const IID IID_IPropertyStorage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000138-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000138-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IPropertyStorage : public IUnknown
+     {
+     public:
+@@ -776,7 +777,7 @@ EXTERN_C const IID IID_IPropertySetStorage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000013A-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000013A-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IPropertySetStorage : public IUnknown
+     {
+     public:
+@@ -928,11 +929,11 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000139-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("00000139-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IEnumSTATPROPSTG : public IUnknown
+     {
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
+@@ -940,7 +941,7 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
+             /* [annotation][out] */ 
+             _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt) = 0;
+         
+@@ -1077,11 +1078,11 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0000013B-0000-0000-C000-000000000046")
++    MIDL_INTERFACE("0000013B-0000-0000-C000-000000000046") _Windows_SupportedOS_Windows2000_ 
+     IEnumSTATPROPSETSTG : public IUnknown
+     {
+     public:
+-        virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+             /* [annotation][length_is][size_is][out] */ 
+@@ -1089,7 +1090,7 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
+             /* [annotation][out] */ 
+             _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Skip( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [annotation][in] */ 
+             _In_  ULONG celt) = 0;
+         
+@@ -1302,6 +1303,21 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("PRSPEC_LPWSTR")
++#undef PRSPEC_LPWSTR
++#pragma push_macro("PRSPEC_PROPID")
++#undef PRSPEC_PROPID
++enum PROPSPEC_KIND : unsigned int
++{
++    PRSPEC_LPWSTR = 0U,
++    PRSPEC_PROPID = 1U,
++};
++#pragma pop_macro("PRSPEC_PROPID")
++#pragma pop_macro("PRSPEC_LPWSTR")
++#endif
++
+ #endif
+ 
+ 

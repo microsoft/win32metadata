@@ -1,0 +1,436 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
+index c3e03f435d..a4d39b967e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/urlmon.h
+@@ -463,6 +463,7 @@ extern "C"{
+ // URL Moniker Interfaces.
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+ #ifndef _MSC_EXTENSIONS
+@@ -537,7 +538,7 @@ EXTERN_C const IID IID_IAsyncBindCtx;
+ STDAPI CreateURLMoniker(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk);             
+ STDAPI CreateURLMonikerEx(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             
+ STDAPI GetClassURL(_In_ LPCWSTR szURL, _Out_ CLSID *pClsID);                                           
+-STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       
++_Windows_SupportedOS_Windows2000_ STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       
+                                 _In_opt_ IEnumFORMATETC *pEFetc, _Outptr_ IBindCtx **ppBC);                   
+ #if (_WIN32_IE >= _WIN32_IE_IE70)
+ STDAPI CreateURLMonikerEx2(_In_opt_ LPMONIKER pMkCtx, _In_ IUri* pUri, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             
+@@ -554,8 +555,8 @@ STDAPI IsValidURL(_In_opt_ LPBC pBC, _In_ LPCWSTR szURL, DWORD dwReserved);
+ STDAPI CoGetClassObjectFromURL( _In_ REFCLSID rCLASSID,
+             _In_ LPCWSTR szCODE, DWORD dwFileVersionMS, 
+             DWORD dwFileVersionLS, _In_ LPCWSTR szTYPE,
+-            _In_ LPBINDCTX pBindCtx, DWORD dwClsContext,
+-            _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);
++            _In_ LPBINDCTX pBindCtx, _Win32_AssociatedEnum_(CLSCTX) DWORD dwClsContext,
++            _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);
+ STDAPI IEInstallScope(_Out_ LPDWORD pdwScope);
+ STDAPI FaultInIEFeature( HWND hWnd,
+             _In_ uCLSSPEC *pClassSpec,
+@@ -577,7 +578,7 @@ STDAPI CreateURLBinding(LPCWSTR lpszUrl, _In_ IBindCtx *pbc, _Inout_ IBinding **
+  
+ STDAPI RegisterMediaTypes(_In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _Out_writes_(ctypes) CLIPFORMAT* rgcfTypes);            
+ STDAPI FindMediaType(_In_ LPCSTR rgszTypes, _Out_ CLIPFORMAT* rgcfTypes);                                       
+-STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); 
++_Windows_SupportedOS_Windows2000_ STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); 
+ STDAPI RegisterFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc, DWORD reserved);          
+ STDAPI RevokeFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc);                            
+ STDAPI RegisterMediaTypeClass(_In_ LPBC pBC, _In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _In_reads_(ctypes)  CLSID *rgclsID, DWORD reserved);    
+@@ -586,8 +587,8 @@ STDAPI FindMediaTypeClass(_In_ LPBC pBC, _In_ LPCSTR szType, _Out_ CLSID *pclsID
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+-STDAPI UrlMkSetSessionOption(DWORD dwOption, _In_reads_bytes_opt_(dwBufferLength) LPVOID pBuffer, DWORD dwBufferLength, _Reserved_ DWORD dwReserved);       
+-STDAPI UrlMkGetSessionOption(DWORD dwOption, _Out_writes_bytes_to_opt_(dwBufferLength,*pdwBufferLengthOut) LPVOID pBuffer, DWORD dwBufferLength, _Out_ DWORD *pdwBufferLengthOut, _Reserved_ DWORD dwReserved);       
++STDAPI UrlMkSetSessionOption(DWORD dwOption, _In_reads_bytes_opt_(dwBufferLength) LPVOID pBuffer, DWORD dwBufferLength, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved);       
++STDAPI UrlMkGetSessionOption(DWORD dwOption, _Out_writes_bytes_to_opt_(dwBufferLength,*pdwBufferLengthOut) LPVOID pBuffer, DWORD dwBufferLength, _Out_ DWORD *pdwBufferLengthOut, _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved);       
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ #pragma region Desktop Family
+@@ -600,7 +601,7 @@ STDAPI FindMimeFromData(
+     _In_opt_                     LPCWSTR pwzMimeProposed,       // proposed mime if - can be null                                             
+                                  DWORD   dwMimeFlags,           // will be defined                                                            
+     _Outptr_                     LPWSTR  *ppwzMimeOut,          // the suggested mime                                                         
+-    _Reserved_                   DWORD   dwReserved);           // must be 0                                                                  
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                   DWORD   dwReserved);           // must be 0                                                                  
+ #define     FMFD_DEFAULT             0x00000000 
+ #define     FMFD_URLASFILENAME       0x00000001 
+ #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
+@@ -809,7 +810,7 @@ EXTERN_C const IID IID_IPersistMoniker;
+             /* [annotation][out] */ 
+             _Out_  CLSID *pClassID) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Load( 
+             /* [annotation][in] */ 
+@@ -1452,7 +1453,7 @@ enum __MIDL_IBindStatusCallback_0004
+         URL_ENCODING_DISABLE_UTF8	= 0x20000000
+     } 	URL_ENCODING;
+ 
+-typedef struct _tagBINDINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagBINDINFO
+     {
+     ULONG cbSize;
+     LPWSTR szExtraInfo;
+@@ -1481,7 +1482,7 @@ typedef struct _REMSECURITY_ATTRIBUTES *PREMSECURITY_ATTRIBUTES;
+ 
+ typedef struct _REMSECURITY_ATTRIBUTES *LPREMSECURITY_ATTRIBUTES;
+ 
+-typedef struct _tagRemBINDINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagRemBINDINFO
+     {
+     ULONG cbSize;
+     LPWSTR szExtraInfo;
+@@ -3244,7 +3245,7 @@ EXTERN_C const IID IID_IUri;
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPropertyBSTR( 
+             /* [range][in] */ Uri_PROPERTY uriProp,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrProperty,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrProperty,
+             /* [annotation][in] */ 
+             _In_  DWORD dwFlags) = 0;
+         
+@@ -3269,63 +3270,63 @@ EXTERN_C const IID IID_IUri;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAbsoluteUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrAbsoluteUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAbsoluteUri) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAuthority( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrAuthority) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrAuthority) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDisplayUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDisplayString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDisplayString) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDomain( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDomain) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDomain) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetExtension( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrExtension) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrExtension) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFragment( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrFragment) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrFragment) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHost( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrHost) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrHost) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPassword( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrPassword) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrPassword) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPath( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrPath) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPathAndQuery( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrPathAndQuery) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrPathAndQuery) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetQuery( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrQuery) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrQuery) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRawUri( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrRawUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrRawUri) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSchemeName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSchemeName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSchemeName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserInfo( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrUserInfo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrUserInfo) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrUserName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrUserName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHostType( 
+             /* [annotation][out] */ 
+@@ -3653,15 +3654,15 @@ EXTERN_C const IID IID_IUri;
+ /* [local] */ 
+ 
+ STDAPI CreateUri(_In_ LPCWSTR pwzURI,
+-                 _In_ DWORD dwFlags,
+-                 _Reserved_ DWORD_PTR dwReserved,   // must be 0
++                 _Win32_AssociatedEnum_(URI_CREATE_FLAGS) _In_ DWORD dwFlags,
++                 _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved,   // must be 0
+                  _Outptr_ IUri** ppURI);
+ 
+ STDAPI CreateUriWithFragment(
+                  _In_ LPCWSTR pwzURI,
+                  _In_opt_ LPCWSTR pwzFragment,        // can be NULL
+                  _In_ DWORD dwFlags,
+-                 _Reserved_ DWORD_PTR dwReserved,   // must be 0
++                 _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved,   // must be 0
+                  _Outptr_ IUri** ppURI);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+@@ -3674,7 +3675,7 @@ STDAPI CreateUriFromMultiByteString(
+                DWORD     dwEncodingFlags, // ORed set of Uri_ENCODING_ flags
+                DWORD     dwCodePage,
+                DWORD     dwCreateFlags,
+-    _Reserved_ DWORD_PTR dwReserved,   // must be 0
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved,   // must be 0
+     _Outptr_   IUri**    ppUri);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+@@ -5412,16 +5413,16 @@ STDAPI HlinkSimpleNavigateToMoniker(
+     /* [in] */ DWORD dwReserved          // for future use, must be NULL                                   
+ );                                                                                                         
+                                                                                                            
+-STDAPI URLOpenStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                        
+-STDAPI URLOpenStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,DWORD,_In_opt_ LPBINDSTATUSCALLBACK);                                       
+-STDAPI URLOpenPullStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                    
+-STDAPI URLOpenPullStreamW(_In_opt_ LPUNKNOWN,_In_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                   
+-STDAPI URLDownloadToFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _In_opt_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                             
+-STDAPI URLDownloadToFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,_In_opt_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                           
+-STDAPI URLDownloadToCacheFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,  _Out_writes_(cchFileName) LPSTR,  DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
+-STDAPI URLDownloadToCacheFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Out_writes_(cchFileName) LPWSTR, DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
+-STDAPI URLOpenBlockingStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                      
+-STDAPI URLOpenBlockingStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                     
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLOpenStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                        
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLOpenStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,DWORD,_In_opt_ LPBINDSTATUSCALLBACK);                                       
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLOpenPullStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                    
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLOpenPullStreamW(_In_opt_ LPUNKNOWN,_In_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                                   
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLDownloadToFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _In_opt_ LPCSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                             
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLDownloadToFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR,_In_opt_ LPCWSTR,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                           
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLDownloadToCacheFileA(_In_opt_ LPUNKNOWN, _In_ LPCSTR,  _Out_writes_(cchFileName) LPSTR,  DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLDownloadToCacheFileW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Out_writes_(cchFileName) LPWSTR, DWORD cchFileName, DWORD, _In_opt_ LPBINDSTATUSCALLBACK);
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI URLOpenBlockingStreamA(_In_opt_ LPUNKNOWN, _In_ LPCSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                      
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI URLOpenBlockingStreamW(_In_opt_ LPUNKNOWN, _In_ LPCWSTR, _Outptr_ LPSTREAM*,DWORD, _In_opt_ LPBINDSTATUSCALLBACK);                     
+                                                                                                            
+ #ifdef UNICODE                                                                                             
+ #define URLOpenStream            URLOpenStreamW                                                            
+@@ -7580,7 +7581,7 @@ STDAPI CoInternetParseIUri(
+     _Out_writes_to_(cchResult,*pcchResult+1) LPWSTR       pwzResult,     
+                                              DWORD        cchResult,     
+     _Out_                                    DWORD       *pcchResult,    
+-    _Reserved_                               DWORD_PTR    dwReserved     
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                               DWORD_PTR    dwReserved     
+     );                                                  
+ #endif //(_WIN32_IE >= _WIN32_IE_IE70)
+ STDAPI CoInternetCombineUrl(                                           
+@@ -7590,7 +7591,7 @@ STDAPI CoInternetCombineUrl(
+     _Out_writes_to_(cchResult,*pcchResult+1) LPWSTR    pszResult,      
+                                              DWORD     cchResult,      
+     _Out_opt_                                DWORD     *pcchResult,    
+-    _Reserved_                               DWORD     dwReserved      
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                               DWORD     dwReserved      
+     );                                                                 
+ #if (_WIN32_IE >= _WIN32_IE_IE70)
+ STDAPI CoInternetCombineUrlEx(               
+@@ -7636,7 +7637,7 @@ STDAPI CoInternetGetSecurityUrl(
+                  LPCWSTR pwszUrl,        
+     _Outptr_     LPWSTR *ppwszSecUrl,    
+     _In_         PSUACTION   psuAction,  
+-    _Reserved_   DWORD dwReserved        
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_   DWORD dwReserved        
+     );                                   
+ STDAPI AsyncInstallDistributionUnit(     
+     _In_ LPCWSTR szDistUnit,             
+@@ -7654,7 +7655,7 @@ STDAPI CoInternetGetSecurityUrlEx(
+     _In_         IUri           *pUri,       
+     _Outptr_     IUri          **ppSecUri,   
+                  PSUACTION       psuAction,  
+-    _Reserved_   DWORD_PTR       dwReserved  
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_   DWORD_PTR       dwReserved  
+     );                                       
+ #endif //(_WIN32_IE >= _WIN32_IE_IE70)
+ #if (_WIN32_IE >= _WIN32_IE_IE60SP2)
+@@ -9693,11 +9694,25 @@ enum tagURLTEMPLATE
+     } 	URLTEMPLATE;
+ 
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("MAX_ZONE_PATH")
++#undef MAX_ZONE_PATH
++#pragma push_macro("MAX_ZONE_DESCRIPTION")
++#undef MAX_ZONE_DESCRIPTION
++enum INET_ZONE_MANAGER_CONSTANTS : int
++{
++    MAX_ZONE_PATH = 260,
++    MAX_ZONE_DESCRIPTION = 200,
++};
++#pragma pop_macro("MAX_ZONE_DESCRIPTION")
++#pragma pop_macro("MAX_ZONE_PATH")
++#else
+ enum __MIDL_IInternetZoneManager_0001
+     {
+         MAX_ZONE_PATH	= 260,
+         MAX_ZONE_DESCRIPTION	= 200
+     } ;
++#endif
+ typedef /* [public] */ 
+ enum __MIDL_IInternetZoneManager_0002
+     {
+@@ -9715,7 +9730,7 @@ enum __MIDL_IInternetZoneManager_0002
+         ZAFLAGS_NO_CACHE	= 0x40000
+     } 	ZAFLAGS;
+ 
+-typedef struct _ZONEATTRIBUTES
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _ZONEATTRIBUTES
+     {
+     ULONG cbSize;
+     WCHAR szDisplayName[ 260 ];
+@@ -10864,7 +10879,7 @@ EXTERN_C const IID CLSID_SoftDistExt;
+ #define SOFTDIST_ADSTATE_DOWNLOADED      0x00000002
+ #define SOFTDIST_ADSTATE_INSTALLED           0x00000003
+ 
+-typedef struct _tagCODEBASEHOLD
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagCODEBASEHOLD
+     {
+     ULONG cbSize;
+     LPWSTR szDistUnit;
+@@ -10876,7 +10891,7 @@ typedef struct _tagCODEBASEHOLD
+ 
+ typedef struct _tagCODEBASEHOLD *LPCODEBASEHOLD;
+ 
+-typedef struct _tagSOFTDISTINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   _tagSOFTDISTINFO
+     {
+     ULONG cbSize;
+     DWORD dwFlags;
+@@ -11365,7 +11380,7 @@ EXTERN_C const IID IID_IDataFilter;
+ #endif
+ #ifndef _LPENCODINGFILTERFACTORY_DEFINED
+ #define _LPENCODINGFILTERFACTORY_DEFINED
+-typedef struct _tagPROTOCOLFILTERDATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagPROTOCOLFILTERDATA
+     {
+     DWORD cbSize;
+     IInternetProtocolSink *pProtocolSink;
+@@ -11516,8 +11531,8 @@ EXTERN_C const IID IID_IEncodingFilterFactory;
+ #ifndef _HITLOGGING_DEFINED
+ #define _HITLOGGING_DEFINED
+ // Logging-specific apis
+-BOOL WINAPI IsLoggingEnabledA(_In_ LPCSTR  pszUrl);                    
+-BOOL WINAPI IsLoggingEnabledW(_In_ LPCWSTR  pwszUrl);                  
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL WINAPI IsLoggingEnabledA(_In_ LPCSTR  pszUrl);                    
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL WINAPI IsLoggingEnabledW(_In_ LPCWSTR  pwszUrl);                  
+ #ifdef UNICODE                                                       
+ #define IsLoggingEnabled         IsLoggingEnabledW                   
+ #else                                                                
+@@ -11684,7 +11699,7 @@ EXTERN_C const IID IID_IGetBindHandle;
+             /* [annotation][in] */ 
+             _In_  BINDHANDLETYPES enumRequestedHandle,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *pRetHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pRetHandle) = 0;
+         
+     };
+     
+@@ -12199,6 +12214,86 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("Uri_CREATE_ALLOW_RELATIVE")
++#undef Uri_CREATE_ALLOW_RELATIVE
++#pragma push_macro("Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME")
++#undef Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME
++#pragma push_macro("Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME")
++#undef Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME
++#pragma push_macro("Uri_CREATE_NOFRAG")
++#undef Uri_CREATE_NOFRAG
++#pragma push_macro("Uri_CREATE_NO_CANONICALIZE")
++#undef Uri_CREATE_NO_CANONICALIZE
++#pragma push_macro("Uri_CREATE_CANONICALIZE")
++#undef Uri_CREATE_CANONICALIZE
++#pragma push_macro("Uri_CREATE_FILE_USE_DOS_PATH")
++#undef Uri_CREATE_FILE_USE_DOS_PATH
++#pragma push_macro("Uri_CREATE_DECODE_EXTRA_INFO")
++#undef Uri_CREATE_DECODE_EXTRA_INFO
++#pragma push_macro("Uri_CREATE_NO_DECODE_EXTRA_INFO")
++#undef Uri_CREATE_NO_DECODE_EXTRA_INFO
++#pragma push_macro("Uri_CREATE_CRACK_UNKNOWN_SCHEMES")
++#undef Uri_CREATE_CRACK_UNKNOWN_SCHEMES
++#pragma push_macro("Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES")
++#undef Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES
++#pragma push_macro("Uri_CREATE_PRE_PROCESS_HTML_URI")
++#undef Uri_CREATE_PRE_PROCESS_HTML_URI
++#pragma push_macro("Uri_CREATE_NO_PRE_PROCESS_HTML_URI")
++#undef Uri_CREATE_NO_PRE_PROCESS_HTML_URI
++#pragma push_macro("Uri_CREATE_IE_SETTINGS")
++#undef Uri_CREATE_IE_SETTINGS
++#pragma push_macro("Uri_CREATE_NO_IE_SETTINGS")
++#undef Uri_CREATE_NO_IE_SETTINGS
++#pragma push_macro("Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS")
++#undef Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS
++#pragma push_macro("Uri_CREATE_NORMALIZE_INTL_CHARACTERS")
++#undef Uri_CREATE_NORMALIZE_INTL_CHARACTERS
++#pragma push_macro("Uri_CREATE_CANONICALIZE_ABSOLUTE")
++#undef Uri_CREATE_CANONICALIZE_ABSOLUTE
++enum [[clang::flag_enum]] URI_CREATE_FLAGS : unsigned int
++{
++    Uri_CREATE_ALLOW_RELATIVE = 1U,
++    Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME = 2U,
++    Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME = 4U,
++    Uri_CREATE_NOFRAG = 8U,
++    Uri_CREATE_NO_CANONICALIZE = 16U,
++    Uri_CREATE_CANONICALIZE = 256U,
++    Uri_CREATE_FILE_USE_DOS_PATH = 32U,
++    Uri_CREATE_DECODE_EXTRA_INFO = 64U,
++    Uri_CREATE_NO_DECODE_EXTRA_INFO = 128U,
++    Uri_CREATE_CRACK_UNKNOWN_SCHEMES = 512U,
++    Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES = 1024U,
++    Uri_CREATE_PRE_PROCESS_HTML_URI = 2048U,
++    Uri_CREATE_NO_PRE_PROCESS_HTML_URI = 4096U,
++    Uri_CREATE_IE_SETTINGS = 8192U,
++    Uri_CREATE_NO_IE_SETTINGS = 16384U,
++    Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS = 32768U,
++    Uri_CREATE_NORMALIZE_INTL_CHARACTERS = 65536U,
++    Uri_CREATE_CANONICALIZE_ABSOLUTE = 131072U,
++};
++#pragma pop_macro("Uri_CREATE_CANONICALIZE_ABSOLUTE")
++#pragma pop_macro("Uri_CREATE_NORMALIZE_INTL_CHARACTERS")
++#pragma pop_macro("Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS")
++#pragma pop_macro("Uri_CREATE_NO_IE_SETTINGS")
++#pragma pop_macro("Uri_CREATE_IE_SETTINGS")
++#pragma pop_macro("Uri_CREATE_NO_PRE_PROCESS_HTML_URI")
++#pragma pop_macro("Uri_CREATE_PRE_PROCESS_HTML_URI")
++#pragma pop_macro("Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES")
++#pragma pop_macro("Uri_CREATE_CRACK_UNKNOWN_SCHEMES")
++#pragma pop_macro("Uri_CREATE_NO_DECODE_EXTRA_INFO")
++#pragma pop_macro("Uri_CREATE_DECODE_EXTRA_INFO")
++#pragma pop_macro("Uri_CREATE_FILE_USE_DOS_PATH")
++#pragma pop_macro("Uri_CREATE_CANONICALIZE")
++#pragma pop_macro("Uri_CREATE_NO_CANONICALIZE")
++#pragma pop_macro("Uri_CREATE_NOFRAG")
++#pragma pop_macro("Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME")
++#pragma pop_macro("Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME")
++#pragma pop_macro("Uri_CREATE_ALLOW_RELATIVE")
++#endif
++
++
+ #endif
+ 
+ 

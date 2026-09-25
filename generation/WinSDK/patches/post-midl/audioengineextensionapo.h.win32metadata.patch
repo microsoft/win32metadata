@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h
+index 63fef52df4..26235ee184 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioengineextensionapo.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #ifdef DEFINE_PROPERTYKEY
+@@ -273,7 +274,7 @@ typedef struct APOInitSystemEffects3
+     BOOL InitializeForDiscoveryOnly;
+     } 	APOInitSystemEffects3;
+ 
+-typedef struct AcousticEchoCanceller_Reference_Input
++typedef struct  AcousticEchoCanceller_Reference_Input
+     {
+     APOInitSystemEffects3 apoInitSystemEffects;
+     APO_REFERENCE_STREAM_PROPERTIES streamProperties;
+@@ -579,7 +580,7 @@ typedef struct APO_NOTIFICATION
+         AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION audioEndpointPropertyChange;
+         AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION audioSystemEffectsPropertyChange;
+         AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 audioEndpointVolumeChange2;
+-        DEVICE_ORIENTATION_TYPE deviceOrientation;
++        _Win32_AssociatedEnum_(DEVICE_ORIENTATION_TYPE) DEVICE_ORIENTATION_TYPE deviceOrientation;
+         AUDIO_MICROPHONE_BOOST_NOTIFICATION audioMicrophoneBoostChange;
+         AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION audioEnvironmentChange;
+         } 	DUMMYUNIONNAME;

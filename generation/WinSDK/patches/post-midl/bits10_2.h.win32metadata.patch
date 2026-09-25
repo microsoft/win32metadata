@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h
+index 6179c6865f..81d0be2b60 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_2.h
+@@ -93,6 +93,7 @@ extern "C"{
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -111,8 +112,8 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B591A192-A405-4FC3-8323-4C5C542578FC")
+-    IBackgroundCopyJobHttpOptions2 : public IBackgroundCopyJobHttpOptions
++    MIDL_INTERFACE("B591A192-A405-4FC3-8323-4C5C542578FC") _Windows_SupportedOS_17763_ 
++      IBackgroundCopyJobHttpOptions2 : public IBackgroundCopyJobHttpOptions
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetHttpMethod( 
+@@ -121,7 +122,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHttpMethod( 
+             /* [annotation][out] */ 
+-            _Out_  LPWSTR *method) = 0;
++            _Win32_RAIIFree_(CoTaskMemFree) _Out_  LPWSTR *method) = 0;
+         
+     };
+     
+@@ -216,7 +217,7 @@ EXTERN_C const IID IID_IBackgroundCopyJobHttpOptions2;
+         END_INTERFACE
+     } IBackgroundCopyJobHttpOptions2Vtbl;
+ 
+-    interface IBackgroundCopyJobHttpOptions2
++    interface _Windows_SupportedOS_17763_ IBackgroundCopyJobHttpOptions2
+     {
+         CONST_VTBL struct IBackgroundCopyJobHttpOptions2Vtbl *lpVtbl;
+     };

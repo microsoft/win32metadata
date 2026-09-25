@@ -1,0 +1,148 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabIab.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabIab.h
+index 941e1dcecd..410eb15822 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WabIab.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabIab.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+@@ -42,96 +43,96 @@
+ #define MAPI_IADDRBOOK_METHODS(IPURE)									\
+ 	MAPIMETHOD(OpenEntry)												\
+ 		(THIS_	ULONG						cbEntryID,					\
+-				LPENTRYID					lpEntryID,					\
+-				LPCIID						lpInterface,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCIID						lpInterface,				\
+ 				ULONG						ulFlags,					\
+-				ULONG FAR *					lpulObjType,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpulObjType,				\
+ 				LPUNKNOWN FAR *				lppUnk) IPURE;          	\
+ 	MAPIMETHOD(CompareEntryIDs)											\
+ 		(THIS_	ULONG						cbEntryID1,					\
+-				LPENTRYID					lpEntryID1,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID1,					\
+ 				ULONG						cbEntryID2,					\
+-				LPENTRYID					lpEntryID2,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID2,					\
+ 				ULONG						ulFlags,					\
+-				ULONG FAR *					lpulResult) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpulResult) IPURE;			\
+ 	MAPIMETHOD(Advise)													\
+ 		(THIS_	ULONG						cbEntryID,					\
+-				LPENTRYID					lpEntryID,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID,					\
+ 				ULONG						ulEventMask,				\
+ 				LPMAPIADVISESINK			lpAdviseSink,				\
+-				ULONG FAR *					lpulConnection) IPURE;		\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpulConnection) IPURE;		\
+ 	MAPIMETHOD(Unadvise)												\
+ 		(THIS_	ULONG						ulConnection) IPURE;		\
+ 	MAPIMETHOD(CreateOneOff)											\
+-		(THIS_	LPTSTR						lpszName,					\
+-				LPTSTR						lpszAdrType,				\
+-				LPTSTR						lpszAddress,				\
++		(THIS_	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR						lpszName,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR						lpszAdrType,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR						lpszAddress,				\
+ 				ULONG						ulFlags,					\
+-				ULONG FAR *					lpcbEntryID,				\
+-				LPENTRYID FAR *				lppEntryID) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpcbEntryID,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID FAR *				lppEntryID) IPURE;			\
+ 	MAPIMETHOD(NewEntry)												\
+ 		(THIS_	ULONG						ulUIParam,					\
+ 				ULONG						ulFlags,					\
+ 				ULONG						cbEIDContainer,				\
+-				LPENTRYID					lpEIDContainer,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEIDContainer,				\
+ 				ULONG						cbEIDNewEntryTpl,			\
+-				LPENTRYID					lpEIDNewEntryTpl,			\
+-				ULONG FAR *					lpcbEIDNewEntry,			\
+-				LPENTRYID FAR *				lppEIDNewEntry) IPURE;		\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEIDNewEntryTpl,			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpcbEIDNewEntry,			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID FAR *				lppEIDNewEntry) IPURE;		\
+ 	MAPIMETHOD(ResolveName)												\
+ 		(THIS_	ULONG_PTR					ulUIParam,					\
+ 				ULONG						ulFlags,					\
+-				LPTSTR						lpszNewEntryTitle,			\
+-				LPADRLIST					lpAdrList) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR						lpszNewEntryTitle,			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPADRLIST					lpAdrList) IPURE;			\
+ 	MAPIMETHOD(Address)													\
+-		(THIS_	ULONG FAR *					lpulUIParam,				\
+-				LPADRPARM					lpAdrParms,					\
+-				LPADRLIST FAR *				lppAdrList) IPURE;			\
++		(THIS_	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpulUIParam,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPADRPARM					lpAdrParms,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPADRLIST FAR *				lppAdrList) IPURE;			\
+ 	MAPIMETHOD(Details)													\
+-		(THIS_	ULONG_PTR FAR *				lpulUIParam,				\
++		(THIS_	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR FAR *				lpulUIParam,				\
+ 				LPFNDISMISS					lpfnDismiss,				\
+-				LPVOID						lpvDismissContext,			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID						lpvDismissContext,			\
+ 				ULONG						cbEntryID,					\
+-				LPENTRYID					lpEntryID,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID,					\
+ 				LPFNBUTTON					lpfButtonCallback,			\
+-				LPVOID						lpvButtonContext,			\
+-				LPTSTR						lpszButtonText,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID						lpvButtonContext,			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR						lpszButtonText,				\
+ 				ULONG						ulFlags) IPURE;				\
+ 	MAPIMETHOD(RecipOptions)											\
+ 		(THIS_	ULONG						ulUIParam,					\
+ 				ULONG						ulFlags,					\
+-				LPADRENTRY					lpRecip) IPURE;				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPADRENTRY					lpRecip) IPURE;				\
+ 	MAPIMETHOD(QueryDefaultRecipOpt)									\
+-		(THIS_	LPTSTR						lpszAdrType,				\
++		(THIS_	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR						lpszAdrType,				\
+ 				ULONG						ulFlags,					\
+-				ULONG FAR *					lpcValues,					\
+-				LPSPropValue FAR *			lppOptions) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpcValues,					\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropValue FAR *			lppOptions) IPURE;			\
+ 	MAPIMETHOD(GetPAB)													\
+-		(THIS_	ULONG FAR *					lpcbEntryID,				\
+-				LPENTRYID FAR *				lppEntryID) IPURE;			\
++		(THIS_	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpcbEntryID,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID FAR *				lppEntryID) IPURE;			\
+ 	MAPIMETHOD(SetPAB)													\
+ 		(THIS_	ULONG						cbEntryID,					\
+-				LPENTRYID					lpEntryID) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID) IPURE;			\
+ 	MAPIMETHOD(GetDefaultDir)											\
+-		(THIS_	ULONG FAR *					lpcbEntryID,				\
+-				LPENTRYID FAR *				lppEntryID) IPURE;			\
++		(THIS_	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *					lpcbEntryID,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID FAR *				lppEntryID) IPURE;			\
+ 	MAPIMETHOD(SetDefaultDir)											\
+ 		(THIS_	ULONG						cbEntryID,					\
+-				LPENTRYID					lpEntryID) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPENTRYID					lpEntryID) IPURE;			\
+ 	MAPIMETHOD(GetSearchPath)											\
+ 		(THIS_	ULONG						ulFlags,					\
+-				LPSRowSet FAR *				lppSearchPath) IPURE;		\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSRowSet FAR *				lppSearchPath) IPURE;		\
+ 	MAPIMETHOD(SetSearchPath)											\
+ 		(THIS_	ULONG						ulFlags,					\
+-				LPSRowSet					lpSearchPath) IPURE;		\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSRowSet					lpSearchPath) IPURE;		\
+ 	MAPIMETHOD(PrepareRecips)											\
+ 		(THIS_	ULONG						ulFlags,					\
+-				LPSPropTagArray				lpPropTagArray,				\
+-				LPADRLIST					lpRecipList) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray				lpPropTagArray,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPADRLIST					lpRecipList) IPURE;			\
+ 
+ #undef		 INTERFACE
+ #define		 INTERFACE  IAddrBook
+-DECLARE_MAPI_INTERFACE_(IAddrBook, IMAPIProp)
++DECLARE_MAPI_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAddrBook, IMAPIProp)
+ {
+ 	BEGIN_INTERFACE	
+ 	MAPI_IUNKNOWN_METHODS(PURE)

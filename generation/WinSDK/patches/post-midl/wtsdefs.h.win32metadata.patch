@@ -1,0 +1,88 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h
+index abee1ac6a1..bba54cc44e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wtsdefs.h
+@@ -15,6 +15,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -170,7 +171,7 @@ typedef struct _WTS_TIME_ZONE_INFORMATION {
+     LONG DaylightBias;
+ } _WTS_TIME_ZONE_INFORMATION, WTS_TIME_ZONE_INFORMATION, *PWTS_TIME_ZONE_INFORMATION;
+ 
+-typedef struct _WRDS_DYNAMIC_TIME_ZONE_INFORMATION {
++typedef struct  _WRDS_DYNAMIC_TIME_ZONE_INFORMATION {
+     LONG Bias;
+     WCHAR StandardName[ 32 ];
+     WTS_SYSTEMTIME StandardDate;
+@@ -1062,42 +1063,42 @@ typedef struct _WTS_LICENSE_CAPABILITIES _WRDS_LICENSE_CAPABILITIES;
+ typedef WTS_LICENSE_CAPABILITIES WRDS_LICENSE_CAPABILITIES;
+ typedef PWTS_LICENSE_CAPABILITIES PWRDS_LICENSE_CAPABILITIES;
+ 
+-typedef enum _WRDS_CONNECTION_SETTING_LEVEL {
++typedef enum  _WRDS_CONNECTION_SETTING_LEVEL {
+     WRDS_CONNECTION_SETTING_LEVEL_INVALID,
+     WRDS_CONNECTION_SETTING_LEVEL_1,
+ } WRDS_CONNECTION_SETTING_LEVEL, *PWRDS_CONNECTION_SETTING_LEVEL;
+ 
+ #define WRDS_CONNECTION_SETTING_CURRENT_LEVEL WRDS_CONNECTION_SETTING_LEVEL_1
+ 
+-typedef enum _WRDS_LISTENER_SETTING_LEVEL {
++typedef enum  _WRDS_LISTENER_SETTING_LEVEL {
+     WRDS_LISTENER_SETTING_LEVEL_INVALID,
+     WRDS_LISTENER_SETTING_LEVEL_1,
+ } WRDS_LISTENER_SETTING_LEVEL, *PWRDS_LISTENER_SETTING_LEVEL;
+ 
+ #define WRDS_LISTENER_SETTING_CURRENT_LEVEL WRDS_LISTENER_SETTING_LEVEL_1
+ 
+-typedef enum _WRDS_SETTING_TYPE {
++typedef enum  _WRDS_SETTING_TYPE {
+     WRDS_SETTING_TYPE_INVALID,
+     WRDS_SETTING_TYPE_MACHINE,                  // Machine GP
+     WRDS_SETTING_TYPE_USER,                     // User GP
+     WRDS_SETTING_TYPE_SAM,                      // User SAM
+ } WRDS_SETTING_TYPE, *PWRDS_SETTING_TYPE;
+ 
+-typedef enum _WRDS_SETTING_STATUS {
++typedef enum  _WRDS_SETTING_STATUS {
+     WRDS_SETTING_STATUS_NOTAPPLICABLE = -1,
+     WRDS_SETTING_STATUS_DISABLED,
+     WRDS_SETTING_STATUS_ENABLED,
+     WRDS_SETTING_STATUS_NOTCONFIGURED,          // not configured for policy
+ } WRDS_SETTING_STATUS, *PWRDS_SETTING_STATUS;
+ 
+-typedef enum _WRDS_SETTING_LEVEL {
++typedef enum  _WRDS_SETTING_LEVEL {
+     WRDS_SETTING_LEVEL_INVALID,
+     WRDS_SETTING_LEVEL_1,
+ } WRDS_SETTING_LEVEL, *PWRDS_SETTING_LEVEL;
+ 
+ #define WRDS_SETTING_CURRENT_LEVEL WRDS_SETTING_LEVEL_1
+ 
+-typedef struct _WRDS_LISTENER_SETTINGS_1 {
++typedef struct  _WRDS_LISTENER_SETTINGS_1 {
+ 
+     ULONG                       MaxProtocolListenerConnectionCount; // ULONG_MAX means maximum allowed
+ 
+@@ -1139,7 +1140,7 @@ typedef struct _WRDS_LISTENER_SETTINGS {
+ 
+ #endif
+ 
+-typedef struct _WRDS_CONNECTION_SETTINGS_1 {
++typedef struct  _WRDS_CONNECTION_SETTINGS_1 {
+ 
+     BOOLEAN                     fInheritInitialProgram;
+     BOOLEAN                     fInheritColorDepth;
+@@ -1227,7 +1228,7 @@ typedef struct _WRDS_CONNECTION_SETTINGS_1 {
+ // This is a subset of WRDS_CONNECTION_SETTING_1.
+ // It will only contain the fields which have a policy. 
+ //
+-typedef struct _WRDS_SETTINGS_1 {
++typedef struct  _WRDS_SETTINGS_1 {
+ 
+     WRDS_SETTING_STATUS     WRdsDisableClipStatus;
+     ULONG                   WRdsDisableClipValue;

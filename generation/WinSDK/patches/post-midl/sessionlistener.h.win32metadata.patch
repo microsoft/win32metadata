@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionListener.h
+index 349e8474c4..404ccd45b0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionListener.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionListener.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * alljoyn_sessionlistener is an collection of callback functions implemented by
+@@ -107,15 +108,15 @@ typedef struct {
+  *
+  * @return Handle to newly allocated alljoyn_sessionlistener.
+  */
+-extern AJ_API alljoyn_sessionlistener AJ_CALL alljoyn_sessionlistener_create(const alljoyn_sessionlistener_callbacks* callbacks,
+-                                                                             const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_sessionlistener AJ_CALL alljoyn_sessionlistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionlistener_callbacks* callbacks,
++                                                                             _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
+ 
+ /**
+  * Destroy an alljoyn_sessionlistener.
+  *
+  * @param listener alljoyn_sessionlistener to destroy.
+  */
+-extern AJ_API void AJ_CALL alljoyn_sessionlistener_destroy(alljoyn_sessionlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionlistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionlistener listener);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

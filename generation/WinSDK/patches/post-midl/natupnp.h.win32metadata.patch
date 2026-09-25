@@ -1,0 +1,134 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/natupnp.h b/generation/WinSDK/RecompiledIdlHeaders/um/natupnp.h
+index f27382c761..eab8d24da8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/natupnp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/natupnp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -160,7 +161,7 @@ EXTERN_C const IID IID_IUPnPNAT;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B171C812-CC76-485A-94D8-B6B3A2794E99")
++    MIDL_INTERFACE("B171C812-CC76-485A-94D8-B6B3A2794E99") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPNAT : public IDispatch
+     {
+     public:
+@@ -335,7 +336,7 @@ EXTERN_C const IID IID_INATEventManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("624BD588-9060-4109-B0B0-1ADBBCAC32DF")
++    MIDL_INTERFACE("624BD588-9060-4109-B0B0-1ADBBCAC32DF") _Windows_SupportedOS_WindowsXP_ 
+     INATEventManager : public IDispatch
+     {
+     public:
+@@ -497,7 +498,7 @@ EXTERN_C const IID IID_INATExternalIPAddressCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9C416740-A34E-446F-BA06-ABD04C3149AE")
++    MIDL_INTERFACE("9C416740-A34E-446F-BA06-ABD04C3149AE") _Windows_SupportedOS_WindowsXP_ 
+     INATExternalIPAddressCallback : public IUnknown
+     {
+     public:
+@@ -584,7 +585,7 @@ EXTERN_C const IID IID_INATNumberOfEntriesCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C83A0A74-91EE-41B6-B67A-67E0F00BBD78")
++    MIDL_INTERFACE("C83A0A74-91EE-41B6-B67A-67E0F00BBD78") _Windows_SupportedOS_WindowsXP_ 
+     INATNumberOfEntriesCallback : public IUnknown
+     {
+     public:
+@@ -930,11 +931,11 @@ EXTERN_C const IID IID_IDynamicPortMapping;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExternalIPAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RemoteHost( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExternalPort( 
+             /* [annotation][retval][out] */ 
+@@ -942,7 +943,7 @@ EXTERN_C const IID IID_IDynamicPortMapping;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InternalPort( 
+             /* [annotation][retval][out] */ 
+@@ -950,7 +951,7 @@ EXTERN_C const IID IID_IDynamicPortMapping;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InternalClient( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
+             /* [annotation][retval][out] */ 
+@@ -958,7 +959,7 @@ EXTERN_C const IID IID_IDynamicPortMapping;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LeaseDuration( 
+             /* [annotation][retval][out] */ 
+@@ -1246,7 +1247,7 @@ EXTERN_C const IID IID_IStaticPortMappingCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CD1F3E77-66D6-4664-82C7-36DBB641D0F1")
++    MIDL_INTERFACE("CD1F3E77-66D6-4664-82C7-36DBB641D0F1") _Windows_SupportedOS_WindowsXP_ 
+     IStaticPortMappingCollection : public IDispatch
+     {
+     public:
+@@ -1483,13 +1484,13 @@ EXTERN_C const IID IID_IStaticPortMapping;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6F10711F-729B-41E5-93B8-F21D0F818DF1")
++    MIDL_INTERFACE("6F10711F-729B-41E5-93B8-F21D0F818DF1") _Windows_SupportedOS_WindowsXP_ 
+     IStaticPortMapping : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExternalIPAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExternalPort( 
+             /* [annotation][retval][out] */ 
+@@ -1501,11 +1502,11 @@ EXTERN_C const IID IID_IStaticPortMapping;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InternalClient( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
+             /* [annotation][retval][out] */ 
+@@ -1513,7 +1514,7 @@ EXTERN_C const IID IID_IStaticPortMapping;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EditInternalClient( 
+             /* [annotation][in] */ 

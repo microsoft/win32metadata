@@ -1,0 +1,855 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h
+index 1b191f5672..ac44f0705d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusAttachment.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file BusAttachment.h is the top-level object responsible for connecting to a
+  * message bus.
+@@ -53,7 +54,7 @@ typedef struct _alljoyn_busattachment_handle*               alljoyn_busattachmen
+ /**
+  * Type for the joinsession callback used with the asynchronous joinsession request.
+  */
+-typedef void (AJ_CALL * alljoyn_busattachment_joinsessioncb_ptr)(QStatus status, alljoyn_sessionid sessionId, const alljoyn_sessionopts opts, void* context);
++typedef void (AJ_CALL * alljoyn_busattachment_joinsessioncb_ptr)(QStatus status, alljoyn_sessionid sessionId, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Type for the setlinktimeout callback used with the asynchronous setlinktimeout request.
+@@ -65,7 +66,7 @@ typedef void (AJ_CALL * alljoyn_busattachment_joinsessioncb_ptr)(QStatus status,
+  * @param timeout      Timeout value (possibly adjusted from original request).
+  * @param context      User defined context which will be passed as-is to callback.
+  */
+-typedef void (AJ_CALL * alljoyn_busattachment_setlinktimeoutcb_ptr)(QStatus status, uint32_t timeout, void* context);
++typedef void (AJ_CALL * alljoyn_busattachment_setlinktimeoutcb_ptr)(QStatus status, uint32_t timeout, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Allocate an alljoyn_busattachment.
+@@ -84,7 +85,7 @@ typedef void (AJ_CALL * alljoyn_busattachment_setlinktimeoutcb_ptr)(QStatus stat
+  *
+  * @return the allocated alljoyn_busattachment
+  */
+-extern AJ_API alljoyn_busattachment AJ_CALL alljoyn_busattachment_create(const char* applicationName, QCC_BOOL allowRemoteMessages);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_busattachment AJ_CALL alljoyn_busattachment_create(_WIN32META_ANNOTATION_("win32metadata:in") const char* applicationName, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL allowRemoteMessages);
+ 
+ /**
+  * Allocate an alljoyn_busattachment.
+@@ -103,14 +104,14 @@ extern AJ_API alljoyn_busattachment AJ_CALL alljoyn_busattachment_create(const c
+  *
+  * @return the allocated alljoyn_busattachment
+  */
+-extern AJ_API alljoyn_busattachment AJ_CALL alljoyn_busattachment_create_concurrency(const char* applicationName, QCC_BOOL allowRemoteMessages, uint32_t concurrency);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_busattachment AJ_CALL alljoyn_busattachment_create_concurrency(_WIN32META_ANNOTATION_("win32metadata:in") const char* applicationName, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL allowRemoteMessages, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t concurrency);
+ 
+ /**
+  * Free an allocated alljoyn_busattachment.
+  *
+  * @param bus alljoyn_busattachment to free.
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_destroy(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * @brief Start the process of spinning up the independent threads used in
+@@ -210,7 +211,7 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_destroy(alljoyn_busattachment b
+  *      - #ER_BUS_BUS_ALREADY_STARTED if already started
+  *      - Other error status codes indicating a failure
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_start(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_start(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * @brief Ask the threading subsystem in the bus attachment to begin the
+@@ -237,7 +238,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_start(alljoyn_busattachment
+  *      - #ER_OK if successful.
+  *      - An error status if unable to stop the message bus
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_stop(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_stop(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * @brief Wait for all of the threads spawned by the bus attachment to be
+@@ -271,7 +272,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_stop(alljoyn_busattachment b
+  *      - #ER_BUS_BUS_ALREADY_STARTED if already started
+  *      - Other error status codes indicating a failure
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_join(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_join(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Get the concurrent method and signal handler limit.
+@@ -281,7 +282,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_join(alljoyn_busattachment b
+  *
+  * @return The maximum number of concurrent method and signal handlers.
+  */
+-extern AJ_API uint32_t AJ_CALL alljoyn_busattachment_getconcurrency(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_busattachment_getconcurrency(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Get the connect spec used by the alljoyn_busattachment
+@@ -290,7 +291,7 @@ extern AJ_API uint32_t AJ_CALL alljoyn_busattachment_getconcurrency(alljoyn_busa
+  *
+  * @return The string representing the connect spec used by the alljoyn_busattachment
+  */
+-extern AJ_API const char* AJ_CALL alljoyn_busattachment_getconnectspec(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_busattachment_getconnectspec(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Allow the currently executing method/signal handler to enable concurrent callbacks
+@@ -330,7 +331,7 @@ extern AJ_API const char* AJ_CALL alljoyn_busattachment_getconnectspec(alljoyn_b
+  *
+  * @param bus    The alljoyn_busattachment to enable concurrent callbacks on
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_enableconcurrentcallbacks(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_enableconcurrentcallbacks(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Create an interface description with a given name.
+@@ -349,8 +350,8 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_enableconcurrentcallbacks(alljo
+  *      - #ER_OK if creation was successful.
+  *      - #ER_BUS_IFACE_ALREADY_EXISTS if requested interface already exists
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterface(alljoyn_busattachment bus, const char* name,
+-                                                                    alljoyn_interfacedescription* iface);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name,
++                                                                    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_interfacedescription* iface);
+ 
+ /**
+  * Create an interface description with a given name.
+@@ -369,9 +370,9 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterface(alljoyn_busa
+  *      - #ER_OK if creation was successful.
+  *      - #ER_BUS_IFACE_ALREADY_EXISTS if requested interface already exists
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterface_secure(alljoyn_busattachment bus, const char* name,
+-                                                                           alljoyn_interfacedescription* iface,
+-                                                                           alljoyn_interfacedescription_securitypolicy secPolicy);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterface_secure(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name,
++                                                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_interfacedescription* iface,
++                                                                           _WIN32META_ANNOTATION_("win32metadata:in")  alljoyn_interfacedescription_securitypolicy secPolicy);
+ 
+ /**
+  * Connect to a remote bus address.
+@@ -386,7 +387,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterface_secure(alljo
+  *      - #ER_OK if successful.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_connect(alljoyn_busattachment bus, const char* connectSpec);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_connect(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* connectSpec);
+ 
+ /**
+  * Register an object that will receive bus event notifications.
+@@ -394,7 +395,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_connect(alljoyn_busattachmen
+  * @param bus       The alljoyn_busattachment on which to attach an alljoyn_buslistener.
+  * @param listener  Object instance that will receive bus event notifications.
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_registerbuslistener(alljoyn_busattachment bus, alljoyn_buslistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_registerbuslistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_buslistener listener);
+ 
+ /**
+  * Unregister an object that was previously registered with
+@@ -403,7 +404,7 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_registerbuslistener(alljoyn_bus
+  * @param bus       The alljoyn_busattachment from which to detach an alljoyn_buslistener.
+  * @param listener  Object instance to un-register as a listener.
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterbuslistener(alljoyn_busattachment bus, alljoyn_buslistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterbuslistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_buslistener listener);
+ 
+ /**
+  * Register interest in a well-known name prefix for the purpose of discovery over transports included in TRANSPORT_ANY.
+@@ -419,7 +420,7 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterbuslistener(alljoyn_b
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_findadvertisedname(alljoyn_busattachment bus, const char* namePrefix);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_findadvertisedname(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* namePrefix);
+ 
+ /**
+  * Register interest in a well-known name prefix for the purpose of discovery over specified transports.
+@@ -436,7 +437,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_findadvertisedname(alljoyn_b
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_findadvertisednamebytransport(alljoyn_busattachment bus, const char* namePrefix, alljoyn_transportmask transports);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_findadvertisednamebytransport(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* namePrefix, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_transportmask transports);
+ 
+ /**
+  * Cancel interest in a well-known name prefix that was previously registered
+@@ -454,7 +455,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_findadvertisednamebytranspor
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelfindadvertisedname(alljoyn_busattachment bus, const char* namePrefix);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelfindadvertisedname(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* namePrefix);
+ 
+ /**
+  * Cancel interest in a well-known name prefix that was previously registered
+@@ -472,7 +473,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelfindadvertisedname(all
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelfindadvertisednamebytransport(alljoyn_busattachment bus, const char* namePrefix, alljoyn_transportmask transports);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelfindadvertisednamebytransport(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* namePrefix, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_transportmask transports);
+ 
+ /**
+  * Advertise the existence of a well-known name to other (possibly disconnected) AllJoyn routers.
+@@ -489,7 +490,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelfindadvertisednamebytr
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_advertisename(alljoyn_busattachment bus, const char* name, alljoyn_transportmask transports);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_advertisename(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_transportmask transports);
+ 
+ /**
+  * Stop advertising the existence of a well-known name to other AllJoyn routers.
+@@ -505,7 +506,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_advertisename(alljoyn_busatt
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_canceladvertisename(alljoyn_busattachment bus, const char* name, alljoyn_transportmask transports);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_canceladvertisename(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_transportmask transports);
+ 
+ /**
+  * Retrieve an existing activated alljoyn_interfacedescription.
+@@ -517,7 +518,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_canceladvertisename(alljoyn_
+  *      - A pointer to the registered interface
+  *      - NULL if interface doesn't exist
+  */
+-extern AJ_API const alljoyn_interfacedescription AJ_CALL alljoyn_busattachment_getinterface(alljoyn_busattachment bus, const char* name);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_interfacedescription AJ_CALL alljoyn_busattachment_getinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name);
+ 
+ /**
+  * Join a session.
+@@ -536,9 +537,9 @@ extern AJ_API const alljoyn_interfacedescription AJ_CALL alljoyn_busattachment_g
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_joinsession(alljoyn_busattachment bus, const char* sessionHost,
+-                                                                alljoyn_sessionport sessionPort, alljoyn_sessionlistener listener,
+-                                                                alljoyn_sessionid* sessionId, alljoyn_sessionopts opts);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_joinsession(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* sessionHost,
++                                                                _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionport sessionPort, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionlistener listener,
++                                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_sessionid* sessionId, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionopts opts);
+ 
+ 
+ /**
+@@ -561,13 +562,13 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_joinsession(alljoyn_busattac
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_joinsessionasync(alljoyn_busattachment bus,
+-                                                                     const char* sessionHost,
+-                                                                     alljoyn_sessionport sessionPort,
+-                                                                     alljoyn_sessionlistener listener,
+-                                                                     const alljoyn_sessionopts opts,
+-                                                                     alljoyn_busattachment_joinsessioncb_ptr callback,
+-                                                                     void* context);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_joinsessionasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") const char* sessionHost,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionport sessionPort,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionlistener listener,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment_joinsessioncb_ptr callback,
++                                                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * Register a BusObject
+@@ -580,7 +581,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_joinsessionasync(alljoyn_bus
+  *      - #ER_BUS_BAD_OBJ_PATH for a bad object path
+  *      - #ER_BUS_OBJ_ALREADY_EXISTS if an object is already registered at this path
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerbusobject(alljoyn_busattachment bus, alljoyn_busobject obj);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerbusobject(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busobject obj);
+ 
+ /**
+  * Register a BusObject. Bus objects registered using this function will require
+@@ -597,7 +598,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerbusobject(alljoyn_bu
+  *
+  * @see alljoyn_busattachment_registerbusobject
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerbusobject_secure(alljoyn_busattachment bus, alljoyn_busobject obj);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerbusobject_secure(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busobject obj);
+ 
+ /**
+  * Unregister a BusObject
+@@ -605,7 +606,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerbusobject_secure(all
+  * @param bus     The bus from which to unregister the object.
+  * @param object  Object to be unregistered.
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterbusobject(alljoyn_busattachment bus, alljoyn_busobject object);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterbusobject(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busobject object);
+ 
+ /**
+  * Request a well-known name.
+@@ -621,7 +622,7 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterbusobject(alljoyn_bus
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_requestname(alljoyn_busattachment bus, const char* requestedName, uint32_t flags);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_requestname(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* requestedName, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t flags);
+ 
+ /**
+  * Release a previously requeted well-known name.
+@@ -636,7 +637,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_requestname(alljoyn_busattac
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_releasename(alljoyn_busattachment bus, const char* name);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_releasename(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name);
+ 
+ /**
+  * Make an alljoyn_sessionport available for external alljoyn_busattachments to join.
+@@ -672,8 +673,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_releasename(alljoyn_busattac
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_bindsessionport(alljoyn_busattachment bus, alljoyn_sessionport* sessionPort,
+-                                                                    const alljoyn_sessionopts opts, alljoyn_sessionportlistener listener);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_bindsessionport(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_sessionport* sessionPort,
++                                                                    _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionportlistener listener);
+ 
+ /**
+  * Cancel an existing port binding.
+@@ -686,7 +687,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_bindsessionport(alljoyn_busa
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unbindsessionport(alljoyn_busattachment bus, alljoyn_sessionport sessionPort);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unbindsessionport(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionport sessionPort);
+ 
+ /**
+  * Enable peer-to-peer security. This function must be called by applications that
+@@ -737,9 +738,9 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unbindsessionport(alljoyn_bu
+  *      - #ER_OK if peer security was enabled.
+  *      - #ER_BUS_BUS_NOT_STARTED alljoyn_busattachment_start has not been called
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_enablepeersecurity(alljoyn_busattachment bus, const char* authMechanisms,
+-                                                                       alljoyn_authlistener listener, const char* keyStoreFileName,
+-                                                                       QCC_BOOL isShared);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_enablepeersecurity(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* authMechanisms,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener listener, _WIN32META_ANNOTATION_("win32metadata:in") const char* keyStoreFileName,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL isShared);
+ 
+ /**
+  * Enable peer-to-peer security. This function must be called by applications that
+@@ -779,12 +780,12 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_enablepeersecurity(alljoyn_b
+  *      - #ER_OK if peer security was enabled.
+  *      - #ER_BUS_BUS_NOT_STARTED alljoyn_busattachment_start has not been called
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(alljoyn_busattachment bus,
+-                                                                                                          const char* authMechanisms,
+-                                                                                                          alljoyn_authlistener authListener,
+-                                                                                                          const char* keyStoreFileName,
+-                                                                                                          QCC_BOOL isShared,
+-                                                                                                          alljoyn_permissionconfigurationlistener permissionConfigurationListener);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                                          _WIN32META_ANNOTATION_("win32metadata:in") const char* authMechanisms,
++                                                                                                          _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_authlistener authListener,
++                                                                                                          _WIN32META_ANNOTATION_("win32metadata:in") const char* keyStoreFileName,
++                                                                                                          _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL isShared,
++                                                                                                          _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_permissionconfigurationlistener permissionConfigurationListener);
+ 
+ /**
+  * Check is peer security has been enabled for this bus attachment.
+@@ -793,7 +794,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_enablepeersecuritywithpermis
+  *
+  * @return   Returns QCC_TRUE if peer security has been enabled, QCC_FALSE otherwise.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_ispeersecurityenabled(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_ispeersecurityenabled(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Initialize one more interface descriptions from an XML string in DBus introspection format.
+@@ -811,7 +812,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_ispeersecurityenabled(alljo
+  *      - #ER_OK if parsing is completely successful.
+  *      - An error status otherwise.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterfacesfromxml(alljoyn_busattachment bus, const char* xml);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterfacesfromxml(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* xml);
+ 
+ /**
+  * Returns the existing activated InterfaceDescriptions.
+@@ -825,8 +826,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_createinterfacesfromxml(allj
+  *
+  * @return  The number of interfaces returned or the total number of interfaces if ifaces is NULL.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_busattachment_getinterfaces(const alljoyn_busattachment bus,
+-                                                                 const alljoyn_interfacedescription* ifaces, size_t numIfaces);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_busattachment_getinterfaces(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_busattachment bus,
++                                                                 _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription* ifaces, _WIN32META_ANNOTATION_("win32metadata:in") size_t numIfaces);
+ 
+ /**
+  * Delete an interface description with a given name.
+@@ -840,7 +841,7 @@ extern AJ_API size_t AJ_CALL alljoyn_busattachment_getinterfaces(const alljoyn_b
+  *      - #ER_OK if deletion was successful
+  *      - #ER_BUS_NO_SUCH_INTERFACE if interface was not found
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_deleteinterface(alljoyn_busattachment bus, alljoyn_interfacedescription iface);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_deleteinterface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_interfacedescription iface);
+ /**
+  * Returns QCC_TRUE if the mesage bus has been started.
+  *
+@@ -848,7 +849,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_deleteinterface(alljoyn_busa
+  *
+  * @return true if the message bus has been started i.e. alljoyn_busattachment_start() has been called.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isstarted(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isstarted(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Indicates #alljoyn_busattachment_stop() has been called
+@@ -857,7 +858,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isstarted(alljoyn_busattach
+  *
+  * @return QCC_TRUE if the mesage bus has been requested to stop.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isstopping(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isstopping(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Indicate whether bus is currently connected.
+@@ -867,7 +868,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isstopping(alljoyn_busattac
+  * @param bus The bus to query.
+  * @return true if the bus is connected.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isconnected(const alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isconnected(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_busattachment bus);
+ 
+ /**
+  * Disconnect a remote bus address connection.
+@@ -881,7 +882,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_busattachment_isconnected(const alljoyn_b
+  *          - #ER_BUS_NOT_CONNECTED if the %alljoyn_busattachment is not connected to the bus
+  *          - Other error status codes indicating a failure
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_disconnect(alljoyn_busattachment bus, const char* unused);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_disconnect(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* unused);
+ 
+ /**
+  * Get the org.freedesktop.DBus proxy object.
+@@ -890,7 +891,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_disconnect(alljoyn_busattach
+  *
+  * @return org.freedesktop.DBus proxy object
+  */
+-extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getdbusproxyobj(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getdbusproxyobj(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Get the org.alljoyn.Bus proxy object.
+@@ -899,7 +900,7 @@ extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getdbus
+  *
+  * @return org.alljoyn.Bus proxy object
+  */
+-extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getalljoynproxyobj(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getalljoynproxyobj(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Get the org.alljoyn.Debug proxy object.
+@@ -908,7 +909,7 @@ extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getallj
+  *
+  * @return org.alljoyn.Debug proxy object
+  */
+-extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getalljoyndebugobj(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getalljoyndebugobj(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Get the unique name of this alljoyn_busattachment.
+@@ -917,7 +918,7 @@ extern AJ_API const alljoyn_proxybusobject AJ_CALL alljoyn_busattachment_getallj
+  *
+  * @return The unique name of this alljoyn_busattachment.
+  */
+-extern AJ_API const char* AJ_CALL alljoyn_busattachment_getuniquename(const alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_busattachment_getuniquename(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_busattachment bus);
+ 
+ /**
+  * Get the guid of the local router as a string
+@@ -926,7 +927,7 @@ extern AJ_API const char* AJ_CALL alljoyn_busattachment_getuniquename(const allj
+  *
+  * @return GUID of local AllJoyn router as a string.
+  */
+-extern AJ_API const char* AJ_CALL alljoyn_busattachment_getglobalguidstring(const alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_busattachment_getglobalguidstring(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_busattachment bus);
+ 
+ 
+ /**
+@@ -945,10 +946,10 @@ extern AJ_API const char* AJ_CALL alljoyn_busattachment_getglobalguidstring(cons
+  * may need to create another registersignalhandler that takes a MessageReceiver
+  * type.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registersignalhandler(alljoyn_busattachment bus,
+-                                                                          alljoyn_messagereceiver_signalhandler_ptr signal_handler,
+-                                                                          const alljoyn_interfacedescription_member member,
+-                                                                          const char* srcPath);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registersignalhandler(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_messagereceiver_signalhandler_ptr signal_handler,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member member,
++                                                                          _WIN32META_ANNOTATION_("win32metadata:in") const char* srcPath);
+ 
+ /**
+  * Register a signal handler with a filter rule.
+@@ -966,10 +967,10 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registersignalhandler(alljoy
+  * may need to create another registersignalhandler that takes a MessageReceiver
+  * type.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registersignalhandlerwithrule(alljoyn_busattachment bus,
+-                                                                                  alljoyn_messagereceiver_signalhandler_ptr signal_handler,
+-                                                                                  const alljoyn_interfacedescription_member member,
+-                                                                                  const char* matchRule);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registersignalhandlerwithrule(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                  _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_messagereceiver_signalhandler_ptr signal_handler,
++                                                                                  _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member member,
++                                                                                  _WIN32META_ANNOTATION_("win32metadata:in") const char* matchRule);
+ 
+ /**
+  * Unregister a signal handler.
+@@ -982,10 +983,10 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registersignalhandlerwithrul
+  * @param srcPath         The object path of the emitter of the signal or NULL for all paths.
+  * @return #ER_OK
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregistersignalhandler(alljoyn_busattachment bus,
+-                                                                            alljoyn_messagereceiver_signalhandler_ptr signal_handler,
+-                                                                            const alljoyn_interfacedescription_member member,
+-                                                                            const char* srcPath);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregistersignalhandler(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                            _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_messagereceiver_signalhandler_ptr signal_handler,
++                                                                            _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member member,
++                                                                            _WIN32META_ANNOTATION_("win32metadata:in") const char* srcPath);
+ /**
+  * Unregister a signal handler with a filter rule.
+  *
+@@ -997,10 +998,10 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregistersignalhandler(allj
+  * @param matchRule       The filter rule.
+  * @return #ER_OK
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregistersignalhandlerwithrule(alljoyn_busattachment bus,
+-                                                                                    alljoyn_messagereceiver_signalhandler_ptr signal_handler,
+-                                                                                    const alljoyn_interfacedescription_member member,
+-                                                                                    const char* matchRule);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregistersignalhandlerwithrule(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                    _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_messagereceiver_signalhandler_ptr signal_handler,
++                                                                                    _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_interfacedescription_member member,
++                                                                                    _WIN32META_ANNOTATION_("win32metadata:in") const char* matchRule);
+ 
+ /**
+  * Unregister all signal and reply handlers for the specified alljoyn_busattachment.
+@@ -1008,7 +1009,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregistersignalhandlerwithr
+  * @param bus  The alljoyn_busattachment to unregister the signal handler with
+  * @return ER_OK if successful.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregisterallhandlers(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregisterallhandlers(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ /**
+  * Set a key store listener to listen for key store load and store requests.
+  * This overrides the internal key store listener.
+@@ -1021,7 +1022,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregisterallhandlers(alljoy
+  *      - #ER_BUS_LISTENER_ALREADY_SET if a listener has been set by this function or because
+  *         alljoyn_busattachment_enablepeersecurity has been called.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerkeystorelistener(alljoyn_busattachment bus, alljoyn_keystorelistener listener);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerkeystorelistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_keystorelistener listener);
+ 
+ /**
+  * Reloads the key store for this bus attachment. This function would normally only be called in
+@@ -1034,7 +1035,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerkeystorelistener(all
+  * @return - ER_OK if the key store was succesfully reloaded
+  *         - An error status indicating that the key store reload failed.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_reloadkeystore(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_reloadkeystore(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Clears all stored keys from the key store. All store keys and authentication information is
+@@ -1043,7 +1044,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_reloadkeystore(alljoyn_busat
+  *
+  * @param bus The bus on which to clear the key store.
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_clearkeystore(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_clearkeystore(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Clear the keys associated with aa specific remote peer as identified by its peer GUID. The
+@@ -1056,7 +1057,7 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_clearkeystore(alljoyn_busattach
+  *          - ER_UNKNOWN_GUID if there is no peer with the specified GUID
+  *          - Other errors
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_clearkeys(alljoyn_busattachment bus, const char* guid);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_clearkeys(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* guid);
+ 
+ /**
+  * Set the expiration time on keys associated with a specific remote peer as identified by its
+@@ -1071,7 +1072,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_clearkeys(alljoyn_busattachm
+  *          - ER_UNKNOWN_GUID if there is no authenticated peer with the specified GUID
+  *          - Other errors
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setkeyexpiration(alljoyn_busattachment bus, const char* guid, uint32_t timeout);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setkeyexpiration(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* guid, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t timeout);
+ 
+ /**
+  * Get the expiration time on keys associated with a specific authenticated remote peer as
+@@ -1086,7 +1087,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setkeyexpiration(alljoyn_bus
+  *          - ER_UNKNOWN_GUID if there is no authenticated peer with the specified GUID
+  *          - Other errors
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_getkeyexpiration(alljoyn_busattachment bus, const char* guid, uint32_t* timeout);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_getkeyexpiration(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* guid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint32_t* timeout);
+ 
+ /**
+  * Adds a logon entry string for the requested authentication mechanism to the key store. This
+@@ -1108,8 +1109,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_getkeyexpiration(alljoyn_bus
+  *      - #ER_BAD_ARG_3 indicates a null string was used as the password.
+  *      - Other error status codes indicating a failure
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_addlogonentry(alljoyn_busattachment bus, const char* authMechanism,
+-                                                                  const char* userName, const char* password);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_addlogonentry(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* authMechanism,
++                                                                  _WIN32META_ANNOTATION_("win32metadata:in") const char* userName, _WIN32META_ANNOTATION_("win32metadata:in") const char* password);
+ 
+ /**
+  * Add a DBus match rule.
+@@ -1123,7 +1124,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_addlogonentry(alljoyn_busatt
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_addmatch(alljoyn_busattachment bus, const char* rule);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_addmatch(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* rule);
+ 
+ /**
+  * Remove a DBus match rule.
+@@ -1137,7 +1138,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_addmatch(alljoyn_busattachme
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_removematch(alljoyn_busattachment bus, const char* rule);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_removematch(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* rule);
+ 
+ /**
+  * Set the SessionListener for an existing sessionId.
+@@ -1149,8 +1150,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_removematch(alljoyn_busattac
+  * @param listener     The SessionListener to associate with the session. May be NULL to clear previous listener.
+  * @return  ER_OK if successful.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setsessionlistener(alljoyn_busattachment bus, alljoyn_sessionid sessionId,
+-                                                                       alljoyn_sessionlistener listener);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setsessionlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionid sessionId,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionlistener listener);
+ 
+ /**
+  * Leave an existing session.
+@@ -1165,7 +1166,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setsessionlistener(alljoyn_b
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_leavesession(alljoyn_busattachment bus, alljoyn_sessionid sessionId);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_leavesession(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionid sessionId);
+ 
+ /**
+  * Explicitly secure the connection to the remote peer. Peer-to-peer
+@@ -1190,7 +1191,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_leavesession(alljoyn_busatta
+  *          - #ER_AUTH_FAIL if the attempt(s) to authenticate the peer failed.
+  *          - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_secureconnection(alljoyn_busattachment bus, const char* name, QCC_BOOL forceAuth);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_secureconnection(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL forceAuth);
+ 
+ /**
+  * Asynchronously secure the connection to the remote peer. Peer-to-peer connections can only
+@@ -1211,7 +1212,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_secureconnection(alljoyn_bus
+  *          - #ER_BUS_NO_AUTHENTICATION_MECHANISM if alljoyn_busattachment_enablepeersecurity() has not been called.
+  *          - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_secureconnectionasync(alljoyn_busattachment bus, const char* name, QCC_BOOL forceAuth);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_secureconnectionasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL forceAuth);
+ 
+ /**
+  * Remove a member from an existing multipoint session.
+@@ -1229,7 +1230,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_secureconnectionasync(alljoy
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_removesessionmember(alljoyn_busattachment bus, alljoyn_sessionid sessionId, const char* memberName);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_removesessionmember(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionid sessionId, _WIN32META_ANNOTATION_("win32metadata:in") const char* memberName);
+ 
+ /**
+  * Set the link timeout for a session.
+@@ -1256,7 +1257,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_removesessionmember(alljoyn_
+  *      - #ER_ALLJOYN_SETLINKTIMEOUT_REPLY_FAILED if SetLinkTimeout failed
+  *      - #ER_BUS_NOT_CONNECTED if the alljoyn_busattachment is not connected to the router
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setlinktimeout(alljoyn_busattachment bus, alljoyn_sessionid sessionid, uint32_t* linkTimeout);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setlinktimeout(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionid sessionid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint32_t* linkTimeout);
+ 
+ /**
+  * Set the link timeout for a session.
+@@ -1288,9 +1289,9 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setlinktimeout(alljoyn_busat
+  *      - #ER_BUS_NOT_CONNECTED if a connection has not been made with a local bus.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setlinktimeoutasync(alljoyn_busattachment bus, alljoyn_sessionid sessionid,
+-                                                                        uint32_t linkTimeout, alljoyn_busattachment_setlinktimeoutcb_ptr callback,
+-                                                                        void* context);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setlinktimeoutasync(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionid sessionid,
++                                                                        _WIN32META_ANNOTATION_("win32metadata:in") uint32_t linkTimeout, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment_setlinktimeoutcb_ptr callback,
++                                                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ /**
+  * Determine whether a given well-known name exists on the bus.
+  * This method is a shortcut/helper that issues an org.freedesktop.DBus.NameHasOwner method call to the router
+@@ -1304,7 +1305,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setlinktimeoutasync(alljoyn_
+  *      - #ER_OK if name ownership was able to be determined.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_namehasowner(alljoyn_busattachment bus, const char* name, QCC_BOOL* hasOwner);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_namehasowner(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") QCC_BOOL* hasOwner);
+ 
+ /**
+  * Get the peer GUID for this peer of the local peer or an authenticated remote peer. The bus
+@@ -1323,7 +1324,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_namehasowner(alljoyn_busatta
+  *      - #ER_OK if the requested GUID was obtained.
+  *      - An error status otherwise.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_getpeerguid(alljoyn_busattachment bus, const char* name, char* guid, size_t* guidSz);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_getpeerguid(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") char* guid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* guidSz);
+ 
+ /**
+  * This sets the debug level of the local AllJoyn router if that router
+@@ -1363,7 +1364,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_getpeerguid(alljoyn_busattac
+  *       router.
+  *     - #ER_BUS_NO_SUCH_OBJECT if router was not built in debug mode.
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setdaemondebug(alljoyn_busattachment bus, const char* module, uint32_t level);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setdaemondebug(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* module, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t level);
+ 
+ /**
+  * Returns the current non-absolute real-time clock used internally by AllJoyn. This value can be
+@@ -1372,7 +1373,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_setdaemondebug(alljoyn_busat
+  *
+  * @return  The current timestamp in milliseconds.
+  */
+-extern AJ_API uint32_t AJ_CALL alljoyn_busattachment_gettimestamp();
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_busattachment_gettimestamp();
+ 
+ /**
+  * Determine if you are able to find a remote connection based on its BusName.
+@@ -1398,7 +1399,7 @@ extern AJ_API uint32_t AJ_CALL alljoyn_busattachment_gettimestamp();
+  *   - #ER_BUS_BAD_BUS_NAME the name parameter is not a valid bus name
+  *   - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_ping(alljoyn_busattachment bus, const char* name, uint32_t timeout);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_ping(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus, _WIN32META_ANNOTATION_("win32metadata:in") const char* name, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t timeout);
+ 
+ /**
+  * Registers a handler to receive the org.alljoyn.about Announce signal.
+@@ -1412,8 +1413,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_ping(alljoyn_busattachment b
+  * @param[in] bus           alljoyn_busattachment this call is made for
+  * @param[in] aboutListener alljoyn_aboutlistener to be registered
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_registeraboutlistener(alljoyn_busattachment bus,
+-                                                                       alljoyn_aboutlistener aboutListener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_registeraboutlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                       _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutlistener aboutListener);
+ 
+ /**
+  * Unregisters the AnnounceHandler from receiving the org.alljoyn.about Announce signal.
+@@ -1421,15 +1422,15 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_registeraboutlistener(alljoyn_b
+  * @param[in] bus           alljoyn_busattachment this call is made for
+  * @param[in] aboutListener alljoyn_aboutlistener to be unregistered
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_unregisteraboutlistener(alljoyn_busattachment bus,
+-                                                                         alljoyn_aboutlistener aboutListener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_unregisteraboutlistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                         _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_aboutlistener aboutListener);
+ 
+ /**
+  * Unregisters all AboutListeners from receiving any org.alljoyn.about Announce signal
+  *
+  * @param[in] bus alljoyn_busattachment this call is made for
+  */
+-extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterallaboutlisteners(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterallaboutlisteners(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * List the interfaces the application is interested in.  If a remote device
+@@ -1456,9 +1457,9 @@ extern AJ_API void AJ_CALL alljoyn_busattachment_unregisterallaboutlisteners(all
+  *                                 implementsInterfaces list
+  * @return status
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_whoimplements_interfaces(alljoyn_busattachment bus,
+-                                                                             const char** implementsInterfaces,
+-                                                                             size_t numberInterfaces);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_whoimplements_interfaces(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                             _WIN32META_ANNOTATION_("win32metadata:in") const char** implementsInterfaces,
++                                                                             _WIN32META_ANNOTATION_("win32metadata:in") size_t numberInterfaces);
+ 
+ /**
+  * List an interface the application is interested in.  If a remote device
+@@ -1480,8 +1481,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_whoimplements_interfaces(all
+  *    - #ER_OK on success
+  *    - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_whoimplements_interface(alljoyn_busattachment bus,
+-                                                                            const char* implementsInterface);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_whoimplements_interface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                            _WIN32META_ANNOTATION_("win32metadata:in") const char* implementsInterface);
+ 
+ /**
+  * Stop showing interest in the listed interfaces. Stop receiving announce
+@@ -1502,9 +1503,9 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_whoimplements_interface(allj
+  *                                   member function were not found.
+  *    - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelwhoimplements_interfaces(alljoyn_busattachment bus,
+-                                                                                   const char** implementsInterfaces,
+-                                                                                   size_t numberInterfaces);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelwhoimplements_interfaces(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                   _WIN32META_ANNOTATION_("win32metadata:in") const char** implementsInterfaces,
++                                                                                   _WIN32META_ANNOTATION_("win32metadata:in") size_t numberInterfaces);
+ 
+ /**
+  * Stop showing interest in the listed interfaces. Stop receiving announce
+@@ -1524,8 +1525,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelwhoimplements_interfac
+  *                                   member function were not found.
+  *    - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelwhoimplements_interface(alljoyn_busattachment bus,
+-                                                                                  const char* implementsInterface);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelwhoimplements_interface(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                  _WIN32META_ANNOTATION_("win32metadata:in") const char* implementsInterface);
+ 
+ /**
+  * Retrieves the alljoyn_permissionconfigurator associated with this alljoyn_busattachment.
+@@ -1535,7 +1536,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_cancelwhoimplements_interfac
+  * @return
+  *      - The alljoyn_permissionconfigurator
+  */
+-extern AJ_API const alljoyn_permissionconfigurator AJ_CALL alljoyn_busattachment_getpermissionconfigurator(alljoyn_busattachment bus);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const alljoyn_permissionconfigurator AJ_CALL alljoyn_busattachment_getpermissionconfigurator(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Registers a handler to receive the org.alljoyn.Bus.Application State signal.
+@@ -1548,8 +1549,8 @@ extern AJ_API const alljoyn_permissionconfigurator AJ_CALL alljoyn_busattachment
+  *    - #ER_APPLICATION_STATE_LISTENER_ALREADY_EXISTS when the same listener has already been registered.
+  *    - Different error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerapplicationstatelistener(alljoyn_busattachment bus,
+-                                                                                     alljoyn_applicationstatelistener listener);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerapplicationstatelistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                     _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_applicationstatelistener listener);
+ 
+ /**
+  * Unregisters the listener that was registered with alljoyn_busattachment_registerapplicationstatelistener
+@@ -1562,8 +1563,8 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_registerapplicationstatelist
+  *    - #ER_APPLICATION_STATE_LISTENER_NO_SUCH_LISTENER when this listener has not been registered.
+  *    - Different error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregisterapplicationstatelistener(alljoyn_busattachment bus,
+-                                                                                       alljoyn_applicationstatelistener listener);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregisterapplicationstatelistener(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus,
++                                                                                       _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_applicationstatelistener listener);
+ 
+ /*
+  * Deletes the key store of the specified application.
+@@ -1577,7 +1578,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_busattachment_unregisterapplicationstateli
+  *      - #ER_OS_ERROR if the OS fails to delete the key store.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_busattachment_deletedefaultkeystore(const char* applicationName);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_busattachment_deletedefaultkeystore(_WIN32META_ANNOTATION_("win32metadata:in") const char* applicationName);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

@@ -1,0 +1,95 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
+index 51bb393897..98e16b3a5f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/srpapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * srpapi.h -- ApiSet Contract for ext-ms-win-security-srp-l1                    *
+@@ -49,24 +50,28 @@ typedef struct HTHREAD_NETWORK_CONTEXT
+     HANDLE ThreadContext;
+ } HTHREAD_NETWORK_CONTEXT;
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpCreateThreadNetworkContext(
+     _In_ PCWSTR enterpriseId,
+     _Out_ HTHREAD_NETWORK_CONTEXT* threadNetworkContext
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpCloseThreadNetworkContext(
+     _Inout_ HTHREAD_NETWORK_CONTEXT* threadNetworkContext
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpSetTokenEnterpriseId(
+     _In_ HANDLE tokenHandle,
+     _In_opt_ PCWSTR enterpriseId
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpGetEnterpriseIds(
+     _In_ HANDLE tokenHandle,
+     _Inout_opt_ PULONG numberOfBytes,
+@@ -74,19 +79,21 @@ SrpGetEnterpriseIds(
+     _Out_ PULONG enterpriseIdCount
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpEnablePermissiveModeFileEncryption(
+     _In_opt_ PCWSTR enterpriseId
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpDisablePermissiveModeFileEncryption(
+     VOID
+     );
+ 
+ #endif /* _WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD */
+ 
+-typedef enum
++typedef enum  
+ {
+     ENTERPRISE_POLICY_NONE        = 0x0,
+     ENTERPRISE_POLICY_ALLOWED     = 0x1,
+@@ -96,13 +103,15 @@ typedef enum
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(ENTERPRISE_DATA_POLICIES);
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpGetEnterprisePolicy(
+     _In_ HANDLE tokenHandle,
+     _Out_ ENTERPRISE_DATA_POLICIES* policyFlags
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_10240_ NTSTATUS
++ 
+ SrpIsTokenService(
+     _In_ HANDLE TokenHandle,
+     _Out_ BOOLEAN* IsTokenService
+@@ -118,7 +127,8 @@ SrpIsTokenService(
+ 
+ #include <appmodel.h>
+ 
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
++ 
+ SrpDoesPolicyAllowAppExecution(
+     _In_ const PACKAGE_ID* packageId,
+     _Out_ BOOL* isAllowed

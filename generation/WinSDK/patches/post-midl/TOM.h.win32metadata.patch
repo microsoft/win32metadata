@@ -1,0 +1,384 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
+index 9cd25d9dc8..b2a3f62b27 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TOM.h
+@@ -33,6 +33,7 @@
+ 
+ #ifndef __tom_h__
+ #define __tom_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -963,12 +964,12 @@ EXTERN_C const IID IID_ITextDocument;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CC497C0-A1DF-11ce-8098-00AA0047BE5D")
+-    ITextDocument : public IDispatch
++    MIDL_INTERFACE("8CC497C0-A1DF-11ce-8098-00AA0047BE5D") _Windows_SupportedOS_WindowsVista_ 
++      ITextDocument : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pName) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetSelection( 
+             /* [retval][out] */ __RPC__deref_out_opt ITextSelection **ppSel) = 0;
+@@ -983,7 +984,7 @@ EXTERN_C const IID IID_ITextDocument;
+             /* [retval][out] */ __RPC__out long *pValue) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetSaved( 
+-            /* [in] */ long Value) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetDefaultTabStop( 
+             /* [retval][out] */ __RPC__out float *pValue) = 0;
+@@ -995,12 +996,12 @@ EXTERN_C const IID IID_ITextDocument;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
+             /* [in] */ __RPC__in VARIANT *pVar,
+-            /* [in] */ long Flags,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Flags,
+             /* [in] */ long CodePage) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Save( 
+             /* [in] */ __RPC__in VARIANT *pVar,
+-            /* [in] */ long Flags,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Flags,
+             /* [in] */ long CodePage) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Freeze( 
+@@ -1175,7 +1176,7 @@ EXTERN_C const IID IID_ITextDocument;
+         END_INTERFACE
+     } ITextDocumentVtbl;
+ 
+-    interface ITextDocument
++    interface _Windows_SupportedOS_WindowsVista_ ITextDocument
+     {
+         CONST_VTBL struct ITextDocumentVtbl *lpVtbl;
+     };
+@@ -1287,12 +1288,12 @@ EXTERN_C const IID IID_ITextRange;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CC497C2-A1DF-11ce-8098-00AA0047BE5D")
+-    ITextRange : public IDispatch
++    MIDL_INTERFACE("8CC497C2-A1DF-11ce-8098-00AA0047BE5D") _Windows_SupportedOS_WindowsVista_ 
++      ITextRange : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetText( 
+             /* [in] */ __RPC__in BSTR bstr) = 0;
+@@ -1434,19 +1435,19 @@ EXTERN_C const IID IID_ITextRange;
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindText( 
+             /* [in] */ __RPC__in BSTR bstr,
+             /* [in] */ long Count,
+-            /* [in] */ long Flags,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Flags,
+             /* [retval][out] */ __RPC__out long *pLength) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindTextStart( 
+             /* [in] */ __RPC__in BSTR bstr,
+             /* [in] */ long Count,
+-            /* [in] */ long Flags,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Flags,
+             /* [retval][out] */ __RPC__out long *pLength) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE FindTextEnd( 
+             /* [in] */ __RPC__in BSTR bstr,
+             /* [in] */ long Count,
+-            /* [in] */ long Flags,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Flags,
+             /* [retval][out] */ __RPC__out long *pLength) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Delete( 
+@@ -1473,17 +1474,17 @@ EXTERN_C const IID IID_ITextRange;
+             /* [retval][out] */ __RPC__out long *pValue) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ChangeCase( 
+-            /* [in] */ long Type) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Type) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPoint( 
+-            /* [in] */ long Type,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Type,
+             /* [out] */ __RPC__out long *px,
+             /* [out] */ __RPC__out long *py) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetPoint( 
+             /* [in] */ long x,
+             /* [in] */ long y,
+-            /* [in] */ long Type,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Type,
+             /* [in] */ long Extend) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ScrollIntoView( 
+@@ -1805,7 +1806,7 @@ EXTERN_C const IID IID_ITextRange;
+         END_INTERFACE
+     } ITextRangeVtbl;
+ 
+-    interface ITextRange
++    interface _Windows_SupportedOS_WindowsVista_ ITextRange
+     {
+         CONST_VTBL struct ITextRangeVtbl *lpVtbl;
+     };
+@@ -2013,7 +2014,7 @@ EXTERN_C const IID IID_ITextSelection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CC497C1-A1DF-11ce-8098-00AA0047BE5D")
++    MIDL_INTERFACE("8CC497C1-A1DF-11ce-8098-00AA0047BE5D") _Windows_SupportedOS_WindowsVista_ 
+     ITextSelection : public ITextRange
+     {
+     public:
+@@ -2051,7 +2052,7 @@ EXTERN_C const IID IID_ITextSelection;
+             /* [retval][out] */ __RPC__out long *pDelta) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE HomeKey( 
+-            /* [in] */ long Unit,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Unit,
+             /* [in] */ long Extend,
+             /* [retval][out] */ __RPC__out long *pDelta) = 0;
+         
+@@ -2671,7 +2672,7 @@ EXTERN_C const IID IID_ITextFont;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CC497C3-A1DF-11ce-8098-00AA0047BE5D")
++    MIDL_INTERFACE("8CC497C3-A1DF-11ce-8098-00AA0047BE5D") _Windows_SupportedOS_WindowsVista_ 
+     ITextFont : public IDispatch
+     {
+     public:
+@@ -2689,7 +2690,7 @@ EXTERN_C const IID IID_ITextFont;
+             /* [retval][out] */ __RPC__out long *pValue) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Reset( 
+-            /* [in] */ long Value) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetStyle( 
+             /* [retval][out] */ __RPC__out long *pValue) = 0;
+@@ -2764,7 +2765,7 @@ EXTERN_C const IID IID_ITextFont;
+             /* [in] */ long Value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetName( 
+             /* [in] */ __RPC__in BSTR bstr) = 0;
+@@ -3343,7 +3344,7 @@ EXTERN_C const IID IID_ITextPara;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CC497C4-A1DF-11ce-8098-00AA0047BE5D")
++    MIDL_INTERFACE("8CC497C4-A1DF-11ce-8098-00AA0047BE5D") _Windows_SupportedOS_WindowsVista_ 
+     ITextPara : public IDispatch
+     {
+     public:
+@@ -3376,7 +3377,7 @@ EXTERN_C const IID IID_ITextPara;
+             /* [in] */ long Value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetHyphenation( 
+-            /* [retval][out] */ __RPC__out long *pValue) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(tomConstants) __RPC__out long *pValue) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetHyphenation( 
+             /* [in] */ long Value) = 0;
+@@ -3385,13 +3386,13 @@ EXTERN_C const IID IID_ITextPara;
+             /* [retval][out] */ __RPC__out float *pValue) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetKeepTogether( 
+-            /* [retval][out] */ __RPC__out long *pValue) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(tomConstants) __RPC__out long *pValue) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetKeepTogether( 
+             /* [in] */ long Value) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetKeepWithNext( 
+-            /* [retval][out] */ __RPC__out long *pValue) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(tomConstants) __RPC__out long *pValue) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetKeepWithNext( 
+             /* [in] */ long Value) = 0;
+@@ -3959,7 +3960,7 @@ EXTERN_C const IID IID_ITextStoryRanges;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8CC497C5-A1DF-11ce-8098-00AA0047BE5D")
++    MIDL_INTERFACE("8CC497C5-A1DF-11ce-8098-00AA0047BE5D") _Windows_SupportedOS_WindowsVista_ 
+     ITextStoryRanges : public IDispatch
+     {
+     public:
+@@ -4111,7 +4112,7 @@ EXTERN_C const IID IID_ITextDocument2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E0-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E0-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextDocument2 : public ITextDocument
+     {
+     public:
+@@ -4137,10 +4138,10 @@ EXTERN_C const IID IID_ITextDocument2;
+             /* [in] */ __RPC__in_opt ITextPara2 *pPara) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE GetEastAsianFlags( 
+-            /* [retval][out] */ __RPC__out long *pFlags) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(tomConstants) __RPC__out long *pFlags) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE GetGenerator( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE SetIMEInProgress( 
+             /* [in] */ long Value) = 0;
+@@ -4177,7 +4178,7 @@ EXTERN_C const IID IID_ITextDocument2;
+             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVoid) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetClientRect( 
+-            /* [in] */ long Type,
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Type,
+             /* [out] */ __RPC__out long *pLeft,
+             /* [out] */ __RPC__out long *pTop,
+             /* [out] */ __RPC__out long *pRight,
+@@ -4196,7 +4197,7 @@ EXTERN_C const IID IID_ITextDocument2;
+             /* [in] */ long Options,
+             /* [in] */ long curCharRep,
+             /* [in] */ long curFontSize,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstr,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr,
+             /* [out] */ __RPC__out long *pPitchAndFamily,
+             /* [out] */ __RPC__out long *pNewFontSize) = 0;
+         
+@@ -4856,7 +4857,7 @@ EXTERN_C const IID IID_ITextRange2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E2-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E2-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextRange2 : public ITextSelection
+     {
+     public:
+@@ -4909,7 +4910,7 @@ EXTERN_C const IID IID_ITextRange2;
+             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppTable) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE GetURL( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE SetURL( 
+             /* [in] */ __RPC__in BSTR bstr) = 0;
+@@ -4970,7 +4971,7 @@ EXTERN_C const IID IID_ITextRange2;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetText2( 
+             /* [in] */ long Flags,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE HexToUnicode( void) = 0;
+         
+@@ -5953,7 +5954,7 @@ EXTERN_C const IID IID_ITextSelection2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E1-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E1-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextSelection2 : public ITextRange2
+     {
+     public:
+@@ -6889,7 +6890,7 @@ EXTERN_C const IID IID_ITextFont2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E3-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E3-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextFont2 : public ITextFont
+     {
+     public:
+@@ -7874,7 +7875,7 @@ EXTERN_C const IID IID_ITextPara2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E4-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E4-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextPara2 : public ITextPara
+     {
+     public:
+@@ -8509,7 +8510,7 @@ EXTERN_C const IID IID_ITextStoryRanges2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E5-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E5-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextStoryRanges2 : public ITextStoryRanges
+     {
+     public:
+@@ -8664,7 +8665,7 @@ EXTERN_C const IID IID_ITextStory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5F3-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5F3-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextStory : public IUnknown
+     {
+     public:
+@@ -8697,7 +8698,7 @@ EXTERN_C const IID IID_ITextStory;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetText( 
+             /* [in] */ long Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetFormattedText( 
+             /* [in] */ __RPC__in_opt IUnknown *pUnk) = 0;
+@@ -8866,7 +8867,7 @@ EXTERN_C const IID IID_ITextStrings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5E7-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5E7-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextStrings : public IDispatch
+     {
+     public:
+@@ -9186,7 +9187,7 @@ EXTERN_C const IID IID_ITextRow;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5EF-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5EF-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextRow : public IDispatch
+     {
+     public:
+@@ -9321,7 +9322,7 @@ EXTERN_C const IID IID_ITextRow;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Apply( 
+             /* [in] */ long cRow,
+-            /* [in] */ long Flags) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(tomConstants) long Flags) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanChange( 
+             /* [retval][out] */ __RPC__out long *pValue) = 0;
+@@ -9798,7 +9799,7 @@ EXTERN_C const IID IID_ITextDisplays;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C241F5F2-7206-11D8-A2C7-00A0D1D6C6B3")
++    MIDL_INTERFACE("C241F5F2-7206-11D8-A2C7-00A0D1D6C6B3") _Windows_SupportedOS_Windows8_ 
+     ITextDisplays : public IDispatch
+     {
+     public:
+@@ -9952,7 +9953,7 @@ EXTERN_C const IID IID_ITextDocument2Old;
+             /* [in] */ long Option,
+             /* [in] */ long CharRepCur,
+             /* [in] */ long curFontSize,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstr,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstr,
+             /* [out] */ __RPC__out long *pPitchAndFamily,
+             /* [out] */ __RPC__out long *pNewFontSize) = 0;
+         

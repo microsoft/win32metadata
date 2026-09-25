@@ -1,0 +1,76 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h b/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h
+index 10f4523c7c..331f383f9a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xpsprint.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -95,7 +96,7 @@ extern RPC_IF_HANDLE __MIDL_itf_xpsprint_0000_0000_v0_0_s_ifspec;
+ 
+ 
+ typedef /* [public][public][public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_xpsprint_0000_0000_0001
++enum  __MIDL___MIDL_itf_xpsprint_0000_0000_0001
+     {
+         XPS_JOB_IN_PROGRESS	= 0,
+         XPS_JOB_COMPLETED	= ( XPS_JOB_IN_PROGRESS + 1 ) ,
+@@ -103,7 +104,7 @@ enum __MIDL___MIDL_itf_xpsprint_0000_0000_0001
+         XPS_JOB_FAILED	= ( XPS_JOB_CANCELLED + 1 ) 
+     } 	XPS_JOB_COMPLETION;
+ 
+-typedef /* [public][public] */ struct __MIDL___MIDL_itf_xpsprint_0000_0000_0002
++typedef /* [public][public] */ struct  __MIDL___MIDL_itf_xpsprint_0000_0000_0002
+     {
+     UINT32 jobId;
+     INT32 currentDocument;
+@@ -127,10 +128,11 @@ EXTERN_C const IID IID_IXpsPrintJobStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7a77dc5f-45d6-4dff-9307-d8cb846347ca")
++    MIDL_INTERFACE("7a77dc5f-45d6-4dff-9307-d8cb846347ca") _Windows_SupportedOS_Windows7_ 
+     IXpsPrintJobStream : public ISequentialStream
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
+         
+     };
+@@ -236,12 +238,14 @@ EXTERN_C const IID IID_IXpsPrintJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5ab89b06-8194-425f-ab3b-d7a96e350161")
++    MIDL_INTERFACE("5ab89b06-8194-425f-ab3b-d7a96e350161") _Windows_SupportedOS_Windows7_ 
+     IXpsPrintJob : public IUnknown
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
+         
++        
+         virtual HRESULT STDMETHODCALLTYPE GetJobStatus( 
+             /* [retval][out] */ __RPC__out XPS_JOB_STATUS *jobStatus) = 0;
+         
+@@ -326,6 +330,7 @@ EXTERN_C const IID IID_IXpsPrintJob;
+ /* module XpsPrint */
+ /* [dllname][uuid] */ 
+ 
++_Windows_SupportedOS_Windows7_
+ /* [entry][helpstring] */ HRESULT __stdcall StartXpsPrintJob( 
+     /* [string][in] */ __RPC__in_string LPCWSTR printerName,
+     /* [string][in] */ __RPC__in_string LPCWSTR jobName,
+@@ -338,7 +343,7 @@ EXTERN_C const IID IID_IXpsPrintJob;
+     /* [out] */ __RPC__deref_out_opt IXpsPrintJobStream **documentStream,
+     /* [out] */ __RPC__deref_out_opt IXpsPrintJobStream **printTicketStream);
+ 
+-/* [entry][helpstring] */ HRESULT __stdcall StartXpsPrintJob1( 
++/* [entry][helpstring] */ _Windows_SupportedOS_Windows7_ HRESULT __stdcall StartXpsPrintJob1( 
+     /* [string][in] */ __RPC__in_string LPCWSTR printerName,
+     /* [string][in] */ __RPC__in_string LPCWSTR jobName,
+     /* [string][in] */ __RPC__in_string LPCWSTR outputFileName,

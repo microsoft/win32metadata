@@ -1,0 +1,139 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
+index 381c04598d..c5c4423357 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
+@@ -7,6 +7,7 @@ extern "C" {
+ #endif
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #include <time.h>
+ 
+ #if _MSC_VER > 1000
+@@ -46,7 +47,7 @@ Members:
+ 
+ --*/
+ 
+-typedef struct _MCAST_CLIENT_UID {
++typedef struct   _MCAST_CLIENT_UID {
+     LPBYTE ClientUID;
+     DWORD ClientUIDLength;
+ } MCAST_CLIENT_UID, *LPMCAST_CLIENT_UID;
+@@ -65,7 +66,7 @@ Members:
+ --*/
+ 
+ 
+-typedef struct _MCAST_SCOPE_CTX {
++typedef struct   _MCAST_SCOPE_CTX {
+     IPNG_ADDRESS      ScopeID;
+     IPNG_ADDRESS      Interface;
+     IPNG_ADDRESS      ServerID;
+@@ -88,7 +89,7 @@ Members:
+ --*/
+ 
+ 
+-typedef struct _MCAST_SCOPE_ENTRY {
++typedef struct   _MCAST_SCOPE_ENTRY {
+     MCAST_SCOPE_CTX ScopeCtx;
+     IPNG_ADDRESS      LastAddr;
+     DWORD       TTL;
+@@ -115,7 +116,7 @@ Members:
+ 
+ 
+ 
+-typedef struct _MCAST_LEASE_REQUEST {
++typedef struct   _MCAST_LEASE_REQUEST {
+     LONG        LeaseStartTime;
+     LONG        MaxLeaseStartTime;
+     DWORD       LeaseDuration;
+@@ -172,7 +173,7 @@ Remarks:
+ --*/
+ 
+ 
+-typedef struct _MCAST_LEASE_RESPONSE {
++typedef struct   _MCAST_LEASE_RESPONSE {
+     LONG        LeaseStartTime;
+     LONG        LeaseEndTime;
+     IPNG_ADDRESS  ServerAddress;
+@@ -205,59 +206,59 @@ Members:
+ 
+ --*/
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ APIENTRY
+-McastApiStartup(
++  McastApiStartup(
+     IN  OUT  PDWORD   Version
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ APIENTRY
+-McastApiCleanup(
++  McastApiCleanup(
+     VOID
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ APIENTRY
+-McastGenUID(
++  McastGenUID(
+     IN OUT LPMCAST_CLIENT_UID    pRequestID
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ APIENTRY
+-McastEnumerateScopes(
++  McastEnumerateScopes(
+     IN     IP_ADDR_FAMILY       AddrFamily,
+     IN     BOOL                 ReQuery,
+     IN OUT PMCAST_SCOPE_ENTRY   pScopeList,
+     IN OUT PDWORD               pScopeLen,
+-    OUT    PDWORD               pScopeCount
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT    PDWORD               pScopeCount
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ APIENTRY
+-McastRequestAddress(
++  McastRequestAddress(
+     IN     IP_ADDR_FAMILY           AddrFamily,
+-    IN     LPMCAST_CLIENT_UID       pRequestID,
+-    IN     PMCAST_SCOPE_CTX         pScopeCtx,
+-    IN     PMCAST_LEASE_REQUEST     pAddrRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPMCAST_CLIENT_UID       pRequestID,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_SCOPE_CTX         pScopeCtx,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_LEASE_REQUEST     pAddrRequest,
+     IN OUT PMCAST_LEASE_RESPONSE    pAddrResponse
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ APIENTRY
+-McastRenewAddress(
++  McastRenewAddress(
+     IN     IP_ADDR_FAMILY           AddrFamily,
+-    IN     LPMCAST_CLIENT_UID       pRequestID,
+-    IN     PMCAST_LEASE_REQUEST     pRenewRequest,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPMCAST_CLIENT_UID       pRequestID,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_LEASE_REQUEST     pRenewRequest,
+     IN OUT PMCAST_LEASE_RESPONSE    pRenewResponse
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ APIENTRY
+-McastReleaseAddress(
++  McastReleaseAddress(
+     IN     IP_ADDR_FAMILY          AddrFamily,
+-    IN     LPMCAST_CLIENT_UID      pRequestID,
+-    IN     PMCAST_LEASE_REQUEST    pReleaseRequest
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     LPMCAST_CLIENT_UID      pRequestID,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN     PMCAST_LEASE_REQUEST    pReleaseRequest
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

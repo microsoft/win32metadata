@@ -1,0 +1,353 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
+index 2f8b77ff0e..b4731a4d46 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/projectedfslib.h
+@@ -37,6 +37,7 @@ Abstract:
+ #pragma warning(disable:4201) // nameless struct/union
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -45,7 +46,7 @@ Abstract:
+ 
+ #pragma region Common structures
+ 
+-typedef enum PRJ_NOTIFY_TYPES
++typedef enum  PRJ_NOTIFY_TYPES
+ {
+     PRJ_NOTIFY_NONE                                 = 0x00000000,
+     PRJ_NOTIFY_SUPPRESS_NOTIFICATIONS               = 0x00000001,
+@@ -68,7 +69,7 @@ DEFINE_ENUM_FLAG_OPERATORS(PRJ_NOTIFY_TYPES);
+ 
+ // This enum shares the same value space as PRJ_NOTIFY_TYPES, but
+ // these values are not bit flags.
+-typedef enum PRJ_NOTIFICATION
++typedef enum  PRJ_NOTIFICATION
+ {
+     PRJ_NOTIFICATION_FILE_OPENED                        = 0x00000002,
+     PRJ_NOTIFICATION_NEW_FILE_CREATED                   = 0x00000004,
+@@ -84,16 +85,16 @@ typedef enum PRJ_NOTIFICATION
+     PRJ_NOTIFICATION_FILE_PRE_CONVERT_TO_FULL           = 0x00001000,
+ } PRJ_NOTIFICATION;
+ 
+-DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT);
++DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+-DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE);
++DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+-typedef enum PRJ_EXT_INFO_TYPE {
++typedef enum  PRJ_EXT_INFO_TYPE {
+     PRJ_EXT_INFO_TYPE_SYMLINK = 1
+ } PRJ_EXT_INFO_TYPE;
+ 
+ 
+-typedef struct PRJ_EXTENDED_INFO {
++typedef struct  PRJ_EXTENDED_INFO {
+ 
+     PRJ_EXT_INFO_TYPE InfoType;
+ 
+@@ -111,19 +112,19 @@ typedef struct PRJ_EXTENDED_INFO {
+ //  Forward declaration.
+ //
+ 
+-typedef struct PRJ_CALLBACKS PRJ_CALLBACKS;
++typedef struct  PRJ_CALLBACKS PRJ_CALLBACKS;
+ 
+ #pragma endregion
+ 
+ #pragma region Virtualization instance APIs
+ 
+-typedef struct PRJ_NOTIFICATION_MAPPING
++typedef struct  PRJ_NOTIFICATION_MAPPING
+ {
+     PRJ_NOTIFY_TYPES NotificationBitMask;
+     PCWSTR NotificationRoot;
+ } PRJ_NOTIFICATION_MAPPING;
+ 
+-typedef enum PRJ_STARTVIRTUALIZING_FLAGS
++typedef enum  PRJ_STARTVIRTUALIZING_FLAGS
+ {
+     PRJ_FLAG_NONE                       = 0x00000000,
+     PRJ_FLAG_USE_NEGATIVE_PATH_CACHE    = 0x00000001
+@@ -131,7 +132,7 @@ typedef enum PRJ_STARTVIRTUALIZING_FLAGS
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(PRJ_STARTVIRTUALIZING_FLAGS);
+ 
+-typedef struct PRJ_STARTVIRTUALIZING_OPTIONS
++typedef struct  PRJ_STARTVIRTUALIZING_OPTIONS
+ {
+     PRJ_STARTVIRTUALIZING_FLAGS Flags;
+     UINT32 PoolThreadCount;
+@@ -141,7 +142,7 @@ typedef struct PRJ_STARTVIRTUALIZING_OPTIONS
+ } PRJ_STARTVIRTUALIZING_OPTIONS;
+ 
+ STDAPI
+-PrjStartVirtualizing(
++_Windows_SupportedOS_17763_ PrjStartVirtualizing(
+     _In_ PCWSTR virtualizationRootPath,
+     _In_ const PRJ_CALLBACKS* callbacks,
+     _In_opt_ const void* instanceContext,
+@@ -150,24 +151,24 @@ PrjStartVirtualizing(
+     );
+ 
+ STDAPI_(void)
+-PrjStopVirtualizing(
++_Windows_SupportedOS_17763_ PrjStopVirtualizing(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext
+     );
+ 
+ STDAPI
+-PrjClearNegativePathCache(
++_Windows_SupportedOS_17763_ PrjClearNegativePathCache(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _Out_opt_ UINT32* totalEntryNumber
+     );
+ 
+-typedef struct PRJ_VIRTUALIZATION_INSTANCE_INFO
++typedef struct  PRJ_VIRTUALIZATION_INSTANCE_INFO
+ {
+     GUID InstanceID;
+     UINT32 WriteAlignment;
+ } PRJ_VIRTUALIZATION_INSTANCE_INFO;
+ 
+ STDAPI
+-PrjGetVirtualizationInstanceInfo(
++_Windows_SupportedOS_17763_ PrjGetVirtualizationInstanceInfo(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _Out_ PRJ_VIRTUALIZATION_INSTANCE_INFO* virtualizationInstanceInfo
+     );
+@@ -176,26 +177,26 @@ PrjGetVirtualizationInstanceInfo(
+ 
+ #pragma region Placeholder and File APIs
+ 
+-typedef enum PRJ_PLACEHOLDER_ID
++typedef enum  PRJ_PLACEHOLDER_ID
+ {
+     PRJ_PLACEHOLDER_ID_LENGTH = 128
+ } PRJ_PLACEHOLDER_ID;
+ 
+-typedef struct PRJ_PLACEHOLDER_VERSION_INFO
++typedef struct  PRJ_PLACEHOLDER_VERSION_INFO
+ {
+     UINT8 ProviderID[PRJ_PLACEHOLDER_ID_LENGTH];
+     UINT8 ContentID[PRJ_PLACEHOLDER_ID_LENGTH];
+ } PRJ_PLACEHOLDER_VERSION_INFO;
+ 
+ STDAPI
+-PrjMarkDirectoryAsPlaceholder(
++_Windows_SupportedOS_17763_ PrjMarkDirectoryAsPlaceholder(
+     _In_ PCWSTR rootPathName,
+     _In_opt_ PCWSTR targetPathName,
+     _In_opt_ const PRJ_PLACEHOLDER_VERSION_INFO* versionInfo,
+     _In_ const GUID* virtualizationInstanceID
+     );
+ 
+-typedef struct PRJ_FILE_BASIC_INFO {
++typedef struct  PRJ_FILE_BASIC_INFO {
+     BOOLEAN IsDirectory;
+     INT64 FileSize;
+     LARGE_INTEGER CreationTime;
+@@ -205,7 +206,7 @@ typedef struct PRJ_FILE_BASIC_INFO {
+     UINT32 FileAttributes;
+ } PRJ_FILE_BASIC_INFO;
+ 
+-typedef struct PRJ_PLACEHOLDER_INFO
++typedef struct  PRJ_PLACEHOLDER_INFO
+ {
+     PRJ_FILE_BASIC_INFO FileBasicInfo;
+ 
+@@ -232,7 +233,7 @@ typedef struct PRJ_PLACEHOLDER_INFO
+ } PRJ_PLACEHOLDER_INFO;
+ 
+ STDAPI
+-PrjWritePlaceholderInfo(
++_Windows_SupportedOS_17763_ PrjWritePlaceholderInfo(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ PCWSTR destinationFileName,
+     _In_reads_bytes_(placeholderInfoSize) const PRJ_PLACEHOLDER_INFO* placeholderInfo,
+@@ -240,7 +241,7 @@ PrjWritePlaceholderInfo(
+     );
+ 
+ STDAPI
+-PrjWritePlaceholderInfo2(
++_Windows_SupportedOS_19041_ PrjWritePlaceholderInfo2(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ PCWSTR destinationFileName,
+     _In_reads_bytes_(placeholderInfoSize) const PRJ_PLACEHOLDER_INFO* placeholderInfo,
+@@ -248,7 +249,7 @@ PrjWritePlaceholderInfo2(
+     _In_opt_ const PRJ_EXTENDED_INFO* ExtendedInfo
+     );
+ 
+-typedef enum PRJ_UPDATE_TYPES
++typedef enum  PRJ_UPDATE_TYPES
+ {
+     PRJ_UPDATE_NONE                 = 0x00000000,
+     PRJ_UPDATE_ALLOW_DIRTY_METADATA = 0x00000001,
+@@ -262,7 +263,7 @@ typedef enum PRJ_UPDATE_TYPES
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(PRJ_UPDATE_TYPES);
+ 
+-typedef enum PRJ_UPDATE_FAILURE_CAUSES
++typedef enum  PRJ_UPDATE_FAILURE_CAUSES
+ {
+     PRJ_UPDATE_FAILURE_CAUSE_NONE           = 0x00000000,
+     PRJ_UPDATE_FAILURE_CAUSE_DIRTY_METADATA = 0x00000001,
+@@ -274,7 +275,7 @@ typedef enum PRJ_UPDATE_FAILURE_CAUSES
+ DEFINE_ENUM_FLAG_OPERATORS(PRJ_UPDATE_FAILURE_CAUSES);
+ 
+ STDAPI
+-PrjUpdateFileIfNeeded(
++_Windows_SupportedOS_17763_ PrjUpdateFileIfNeeded(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ PCWSTR destinationFileName,
+     _In_reads_bytes_(placeholderInfoSize) const PRJ_PLACEHOLDER_INFO* placeholderInfo,
+@@ -284,7 +285,7 @@ PrjUpdateFileIfNeeded(
+     );
+ 
+ STDAPI
+-PrjDeleteFile(
++_Windows_SupportedOS_17763_ PrjDeleteFile(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ PCWSTR destinationFileName,
+     _In_opt_ PRJ_UPDATE_TYPES updateFlags,
+@@ -292,7 +293,7 @@ PrjDeleteFile(
+    );
+ 
+ STDAPI
+-PrjWriteFileData(
++_Windows_SupportedOS_17763_ PrjWriteFileData(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ const GUID* dataStreamId,
+     _In_reads_bytes_(length) void* buffer,
+@@ -300,7 +301,7 @@ PrjWriteFileData(
+     _In_ UINT32 length
+     );
+ 
+-typedef enum PRJ_FILE_STATE
++typedef enum  PRJ_FILE_STATE
+ {
+     PRJ_FILE_STATE_PLACEHOLDER          = 0x00000001,
+     PRJ_FILE_STATE_HYDRATED_PLACEHOLDER = 0x00000002,
+@@ -312,19 +313,19 @@ typedef enum PRJ_FILE_STATE
+ DEFINE_ENUM_FLAG_OPERATORS(PRJ_FILE_STATE);
+ 
+ STDAPI
+-PrjGetOnDiskFileState(
++_Windows_SupportedOS_17763_ PrjGetOnDiskFileState(
+     _In_ PCWSTR destinationFileName,
+     _Out_ PRJ_FILE_STATE* fileState
+     );
+ 
+ STDAPI_(void*)
+-PrjAllocateAlignedBuffer (
++_Windows_SupportedOS_17763_ PrjAllocateAlignedBuffer (
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ size_t size
+     );
+ 
+ STDAPI_(void)
+-PrjFreeAlignedBuffer (
++_Windows_SupportedOS_17763_ PrjFreeAlignedBuffer (
+     _In_ void* buffer
+     );
+ 
+@@ -332,13 +333,13 @@ PrjFreeAlignedBuffer (
+ 
+ #pragma region Callback support
+ 
+-typedef enum PRJ_CALLBACK_DATA_FLAGS
++typedef enum  PRJ_CALLBACK_DATA_FLAGS
+ {
+     PRJ_CB_DATA_FLAG_ENUM_RESTART_SCAN          = 0x00000001,
+     PRJ_CB_DATA_FLAG_ENUM_RETURN_SINGLE_ENTRY   = 0x00000002
+ } PRJ_CALLBACK_DATA_FLAGS;
+ 
+-typedef struct PRJ_CALLBACK_DATA
++typedef struct  PRJ_CALLBACK_DATA
+ {
+     UINT32 Size;
+     PRJ_CALLBACK_DATA_FLAGS Flags;
+@@ -435,7 +436,7 @@ VOID
+     _In_ const PRJ_CALLBACK_DATA* callbackData
+     );
+ 
+-typedef struct PRJ_CALLBACKS {
++typedef struct  PRJ_CALLBACKS {
+     PRJ_START_DIRECTORY_ENUMERATION_CB* StartDirectoryEnumerationCallback;
+     PRJ_END_DIRECTORY_ENUMERATION_CB* EndDirectoryEnumerationCallback;
+     PRJ_GET_DIRECTORY_ENUMERATION_CB* GetDirectoryEnumerationCallback;
+@@ -447,19 +448,19 @@ typedef struct PRJ_CALLBACKS {
+     PRJ_CANCEL_COMMAND_CB* CancelCommandCallback;
+ } PRJ_CALLBACKS;
+ 
+-typedef enum PRJ_COMPLETE_COMMAND_TYPE
++typedef enum  PRJ_COMPLETE_COMMAND_TYPE
+ {
+     PRJ_COMPLETE_COMMAND_TYPE_NOTIFICATION = 1,
+     PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION = 2
+ } PRJ_COMPLETE_COMMAND_TYPE;
+ 
+-typedef struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
++typedef struct   PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
+ 
+     PRJ_COMPLETE_COMMAND_TYPE CommandType;
+ 
+     union {
+         struct {
+-            PRJ_NOTIFY_TYPES NotificationMask;
++            _Win32_AssociatedEnum_(PRJ_NOTIFY_TYPES) PRJ_NOTIFY_TYPES NotificationMask;
+         } Notification;
+ 
+         struct {
+@@ -470,7 +471,7 @@ typedef struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
+ } PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS;
+ 
+ STDAPI
+-PrjCompleteCommand(
++_Windows_SupportedOS_17763_ PrjCompleteCommand(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ INT32 commandId,
+     _In_ HRESULT completionResult,
+@@ -482,14 +483,14 @@ PrjCompleteCommand(
+ #pragma region Enumeration APIs
+ 
+ STDAPI
+-PrjFillDirEntryBuffer(
++_Windows_SupportedOS_17763_ PrjFillDirEntryBuffer(
+     _In_ PCWSTR fileName,
+     _In_opt_ PRJ_FILE_BASIC_INFO* fileBasicInfo,
+     _In_ PRJ_DIR_ENTRY_BUFFER_HANDLE dirEntryBufferHandle
+     );
+ 
+ STDAPI
+-PrjFillDirEntryBuffer2(
++_Windows_SupportedOS_19041_ PrjFillDirEntryBuffer2(
+     _In_ PRJ_DIR_ENTRY_BUFFER_HANDLE dirEntryBufferHandle,
+     _In_ PCWSTR fileName,
+     _In_opt_ PRJ_FILE_BASIC_INFO* fileBasicInfo,
+@@ -497,19 +498,19 @@ PrjFillDirEntryBuffer2(
+     );
+ 
+ STDAPI_(BOOLEAN)
+-PrjFileNameMatch (
++_Windows_SupportedOS_17763_ PrjFileNameMatch (
+     _In_ PCWSTR fileNameToCheck,
+     _In_ PCWSTR pattern
+     );
+ 
+ STDAPI_(int)
+-PrjFileNameCompare (
++_Windows_SupportedOS_17763_ PrjFileNameCompare (
+     _In_ PCWSTR fileName1,
+     _In_ PCWSTR fileName2
+     );
+ 
+ STDAPI_(BOOLEAN)
+-PrjDoesNameContainWildCards (
++_Windows_SupportedOS_17763_ PrjDoesNameContainWildCards (
+     _In_ LPCWSTR fileName
+     );
+ 

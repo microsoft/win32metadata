@@ -1,0 +1,116 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h b/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h
+index 8de2f13ffb..8732618383 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Certif.h
+@@ -74,6 +74,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	ENUMEXT_OBJECTID	( 0x1 )
+@@ -95,7 +96,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("aa000922-ffbe-11cf-8800-00a0c903b83c")
+-    ICertServerPolicy : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertServerPolicy : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetContext( 
+@@ -108,11 +109,11 @@ EXTERN_C const IID IID_ICertServerPolicy;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRequestAttribute( 
+             /* [in] */ __RPC__in const BSTR strAttributeName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrAttributeValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrAttributeValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCertificateProperty( 
+             /* [in] */ __RPC__in const BSTR strPropertyName,
+-            /* [in] */ LONG PropertyType,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG PropertyType,
+             /* [retval][out] */ __RPC__out VARIANT *pvarPropertyValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetCertificateProperty( 
+@@ -122,7 +123,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCertificateExtension( 
+             /* [in] */ __RPC__in const BSTR strExtensionName,
+-            /* [in] */ LONG Type,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG Type,
+             /* [retval][out] */ __RPC__out VARIANT *pvarValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCertificateExtensionFlags( 
+@@ -138,7 +139,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+             /* [in] */ LONG Flags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateExtensions( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrExtensionName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrExtensionName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateExtensionsClose( void) = 0;
+         
+@@ -146,7 +147,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+             /* [in] */ LONG Flags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateAttributes( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrAttributeName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrAttributeName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateAttributesClose( void) = 0;
+         
+@@ -298,7 +299,7 @@ EXTERN_C const IID IID_ICertServerPolicy;
+         END_INTERFACE
+     } ICertServerPolicyVtbl;
+ 
+-    interface ICertServerPolicy
++    interface _Windows_SupportedOS_Server2003_ ICertServerPolicy
+     {
+         CONST_VTBL struct ICertServerPolicyVtbl *lpVtbl;
+     };
+@@ -396,7 +397,7 @@ EXTERN_C const IID IID_ICertServerExit;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4ba9eb90-732c-11d0-8816-00a0c903b83c")
+-    ICertServerExit : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertServerExit : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetContext( 
+@@ -409,7 +410,7 @@ EXTERN_C const IID IID_ICertServerExit;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRequestAttribute( 
+             /* [in] */ __RPC__in const BSTR strAttributeName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrAttributeValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrAttributeValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCertificateProperty( 
+             /* [in] */ __RPC__in const BSTR strPropertyName,
+@@ -428,7 +429,7 @@ EXTERN_C const IID IID_ICertServerExit;
+             /* [in] */ LONG Flags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateExtensions( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrExtensionName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrExtensionName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateExtensionsClose( void) = 0;
+         
+@@ -436,7 +437,7 @@ EXTERN_C const IID IID_ICertServerExit;
+             /* [in] */ LONG Flags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateAttributes( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrAttributeName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrAttributeName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumerateAttributesClose( void) = 0;
+         
+@@ -573,7 +574,7 @@ EXTERN_C const IID IID_ICertServerExit;
+         END_INTERFACE
+     } ICertServerExitVtbl;
+ 
+-    interface ICertServerExit
++    interface _Windows_SupportedOS_Server2003_ ICertServerExit
+     {
+         CONST_VTBL struct ICertServerExitVtbl *lpVtbl;
+     };

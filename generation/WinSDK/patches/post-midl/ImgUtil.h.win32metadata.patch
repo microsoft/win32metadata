@@ -1,0 +1,51 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h b/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h
+index ef01b0b987..9c2dfe3c99 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ImgUtil.h
+@@ -120,24 +120,28 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #include <ddraw.h>
+ 
++
++
+ STDAPI CreateMIMEMap( IMapMIMEToCLSID** ppMap );
+ STDAPI DecodeImage( IStream* pStream, IMapMIMEToCLSID* pMap,
+    IUnknown* pEventSink );
+-STDAPI SniffStream( IStream* pInStream, UINT* pnFormat,
++STDAPI SniffStream( IStream* pInStream, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT* pnFormat,
+    IStream** ppOutStream );
+-STDAPI GetMaxMIMEIDBytes( ULONG* pnMaxBytes );
++STDAPI GetMaxMIMEIDBytes( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG* pnMaxBytes );
+ STDAPI IdentifyMIMEType( const BYTE* pbBytes, ULONG nBytes,
+-   UINT* pnFormat );
+-STDAPI ComputeInvCMAP(const RGBQUAD *pRGBColors, ULONG nColors, BYTE *pInvTable,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT* pnFormat );
++STDAPI ComputeInvCMAP(const RGBQUAD *pRGBColors, ULONG nColors, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pInvTable,
+    ULONG cbTable);
+-STDAPI DitherTo8( BYTE * pDestBits, LONG nDestPitch, BYTE * pSrcBits, LONG nSrcPitch,
+-   REFGUID bfidSrc, RGBQUAD * prgbDestColors, RGBQUAD * prgbSrcColors, BYTE * pbDestInvMap,
++STDAPI DitherTo8( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE * pDestBits, LONG nDestPitch, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE * pSrcBits, LONG nSrcPitch,
++   REFGUID bfidSrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RGBQUAD * prgbDestColors, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RGBQUAD * prgbSrcColors, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE * pbDestInvMap,
+    LONG x, LONG y, LONG cx, LONG cy, LONG lDestTrans, LONG lSrcTrans);
+ STDAPI CreateDDrawSurfaceOnDIB(HBITMAP hbmDib, IDirectDrawSurface **ppSurface);
++
+ STDAPI DecodeImageEx( IStream* pStream, IMapMIMEToCLSID* pMap,
+    IUnknown* pEventSink, LPCWSTR pszMIMETypeParam );
+ 
+@@ -164,9 +168,9 @@ EXTERN_C const IID IID_ISniffStream;
+             IStream *pStream) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Peek( 
+-            void *pBuffer,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *pBuffer,
+             ULONG nBytes,
+-            ULONG *pnBytesRead) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pnBytesRead) = 0;
+         
+     };
+     

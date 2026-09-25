@@ -1,0 +1,128 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PhotoAcquire.h b/generation/WinSDK/RecompiledIdlHeaders/um/PhotoAcquire.h
+index 5a860d39b7..e9948f8ec5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PhotoAcquire.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PhotoAcquire.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -236,11 +237,11 @@ EXTERN_C const IID IID_IPhotoAcquireItem;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetItemName( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrItemName) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrItemName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetThumbnail( 
+             /* [in] */ SIZE sizeThumbnail,
+-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmpThumbnail) = 0;
++            /* [out] */ _Win32_RAIIFree_(DeleteObject, -1, 0) __RPC__deref_out_opt HBITMAP *phbmpThumbnail) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [in] */ __RPC__in REFPROPERTYKEY key,
+@@ -421,32 +422,32 @@ EXTERN_C const IID IID_IUserInputString;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSubmitButtonText( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSubmitButtonText) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSubmitButtonText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPrompt( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPromptTitle) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPromptTitle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStringId( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrStringId) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrStringId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStringType( 
+             /* [out] */ __RPC__out USER_INPUT_STRING_TYPE *pnStringType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTooltipText( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrTooltipText) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTooltipText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxLength( 
+             /* [out] */ __RPC__out UINT *pcchMaxLength) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDefault( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDefault) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDefault) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMruCount( 
+             /* [out] */ __RPC__out UINT *pnMruCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMruEntryAt( 
+             /* [in] */ UINT nIndex,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrMruEntry) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrMruEntry) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetImage( 
+             /* [in] */ UINT nSize,
+@@ -1336,7 +1337,7 @@ EXTERN_C const IID IID_IPhotoAcquireSource;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetFriendlyName( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrFriendlyName) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFriendlyName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDeviceIcons( 
+             /* [in] */ UINT nSize,
+@@ -1359,7 +1360,7 @@ EXTERN_C const IID IID_IPhotoAcquireSource;
+             /* [out] */ __RPC__deref_out_opt IPhotoAcquireSettings **ppPhotoAcquireSettings) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDeviceId( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDeviceId) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDeviceId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE BindToObject( 
+             /* [in] */ __RPC__in REFIID riid,
+@@ -1680,7 +1681,7 @@ EXTERN_C const IID IID_IPhotoAcquireSettings;
+             /* [out] */ __RPC__out DWORD *pdwPhotoAcquireFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetOutputFilenameTemplate( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrTemplate) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTemplate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSequencePaddingWidth( 
+             /* [out] */ __RPC__out DWORD *pdwWidth) = 0;
+@@ -1689,7 +1690,7 @@ EXTERN_C const IID IID_IPhotoAcquireSettings;
+             /* [out] */ __RPC__out BOOL *pfZeroPad) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGroupTag( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrGroupTag) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGroupTag) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAcquisitionTime( 
+             /* [out] */ __RPC__out FILETIME *pftAcquisitionTime) = 0;
+@@ -2345,10 +2346,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  HBITMAP_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
+ void                      __RPC_USER  HBITMAP_UserFree(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -2370,10 +2371,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal64(  __RPC__in unsigned long *, _
+ unsigned char * __RPC_USER  HBITMAP_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
+ void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 

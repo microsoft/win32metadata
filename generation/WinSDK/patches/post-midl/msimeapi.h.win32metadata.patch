@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msimeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/msimeapi.h
+index 2e90877342..34aa8db2ed 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msimeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msimeapi.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -88,10 +89,12 @@ EXTERN_C const IID IID_IImePlugInDictDictionaryList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("98752974-b0a6-489b-8f6f-bff3769c8eeb")
++    MIDL_INTERFACE("98752974-b0a6-489b-8f6f-bff3769c8eeb") _Windows_SupportedOS_Windows8_ 
+     IImePlugInDictDictionaryList : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetDictionariesInUse( 
+             /* [annotation][out] */ 
+             _Out_  SAFEARRAY * *prgDictionaryGUID,
+@@ -100,6 +103,9 @@ EXTERN_C const IID IID_IImePlugInDictDictionaryList;
+             /* [annotation][out][in] */ 
+             _Inout_  SAFEARRAY * *prgfEncrypted) = 0;
+         
++        
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE DeleteDictionary( 
+             /* [annotation][in] */ 
+             _In_  BSTR bstrDictionaryGUID) = 0;

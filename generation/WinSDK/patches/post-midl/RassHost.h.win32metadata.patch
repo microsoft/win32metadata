@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h b/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
+index 04310cdbb5..329b4a9f01 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RassHost.h
+@@ -20,6 +20,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -29,9 +30,9 @@ Abstract:
+ 
+ typedef HANDLE  HPORT;
+ 
+-typedef struct _SECURITY_MESSAGE
++typedef struct   _SECURITY_MESSAGE
+ {
+-    DWORD dwMsgId;
++    _Win32_AssociatedEnum_(SECURITY_MESSAGE_MSG_ID) DWORD dwMsgId;
+ 
+     HPORT hPort;
+ 
+@@ -163,4 +164,23 @@ RasSecurityDialogGetInfo(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SECURITYMSG_SUCCESS")
++#undef SECURITYMSG_SUCCESS
++#pragma push_macro("SECURITYMSG_FAILURE")
++#undef SECURITYMSG_FAILURE
++#pragma push_macro("SECURITYMSG_ERROR")
++#undef SECURITYMSG_ERROR
++enum SECURITY_MESSAGE_MSG_ID : unsigned int
++{
++    SECURITYMSG_SUCCESS = 1U,
++    SECURITYMSG_FAILURE = 2U,
++    SECURITYMSG_ERROR = 3U,
++};
++#pragma pop_macro("SECURITYMSG_ERROR")
++#pragma pop_macro("SECURITYMSG_FAILURE")
++#pragma pop_macro("SECURITYMSG_SUCCESS")
++#endif
++
+ #endif

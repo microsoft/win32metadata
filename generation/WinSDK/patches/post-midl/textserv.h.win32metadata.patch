@@ -1,0 +1,384 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h b/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
+index b1c7fe0b7a..225c0133b4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TextServ.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*	@doc EXTERNAL
+  *
+  *	@module TEXTSRV.H  Text Service Interface |
+@@ -113,7 +114,7 @@ enum CHANGETYPE
+  *	what actually happened for a change.
+  */
+ struct CHANGENOTIFY {
+-	DWORD	dwChangeType;				//@field TEXT changed, etc
++	_Win32_AssociatedEnum_(CHANGETYPE) DWORD	dwChangeType;				//@field TEXT changed, etc
+ 	void *	pvCookieData; 				//@field cookie for the undo action 
+ 										// associated with the change.
+ };
+@@ -181,66 +182,66 @@ public:
+ 							UINT msg, 
+ 							WPARAM wparam, 
+ 							LPARAM lparam,
+-							LRESULT *plresult) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LRESULT *plresult) = 0;
+ 	
+ 	//@cmember Rendering
+ 	virtual HRESULT		TxDraw(	
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,		
+ 							LONG  lindex,			
+-							void * pvAspect,		 
+-							DVTARGETDEVICE * ptd,									
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pvAspect,		 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DVTARGETDEVICE * ptd,									
+ 							HDC hdcDraw,			
+ 							HDC hicTargetDev,		 
+-							LPCRECTL lprcBounds,	
+-							LPCRECTL lprcWBounds,	
+-							LPRECT lprcUpdate,		
+-							BOOL (CALLBACK * pfnContinue) (DWORD), 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECTL lprcBounds,	
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECTL lprcWBounds,	
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT lprcUpdate,		
++							_WIN32META_ANNOTATION_("win32metadata:in") BOOL (CALLBACK * pfnContinue) (DWORD), 
+ 							DWORD dwContinue,
+ 							LONG lViewId) = 0;	
+ 
+ 	//@cmember Horizontal scrollbar support
+ 	virtual HRESULT		TxGetHScroll(
+-							LONG *plMin, 
+-							LONG *plMax, 
+-							LONG *plPos, 
+-							LONG *plPage,
+-							BOOL * pfEnabled ) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plMin, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plMax, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plPos, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plPage,
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL * pfEnabled ) = 0;
+ 
+ 	//@cmember Horizontal scrollbar support
+ 	virtual HRESULT		TxGetVScroll(
+-							LONG *plMin, 
+-							LONG *plMax, 
+-							LONG *plPos, 
+-							LONG *plPage, 
+-							BOOL * pfEnabled ) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plMin, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plMax, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plPos, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plPage, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL * pfEnabled ) = 0;
+ 
+ 	//@cmember Setcursor
+ 	virtual HRESULT 	OnTxSetCursor(
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,		
+ 							LONG  lindex,			
+-							void * pvAspect,		 
+-							DVTARGETDEVICE * ptd,									
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pvAspect,		 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DVTARGETDEVICE * ptd,									
+ 							HDC hdcDraw,			
+ 							HDC hicTargetDev,		 
+-							LPCRECT lprcClient, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT lprcClient, 
+ 							INT x, 
+ 							INT y) = 0;
+ 
+ 	//@cmember Hit-test
+ 	virtual HRESULT 	TxQueryHitPoint(
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,		
+ 							LONG  lindex,			
+-							void * pvAspect,		 
+-							DVTARGETDEVICE * ptd,									
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pvAspect,		 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DVTARGETDEVICE * ptd,									
+ 							HDC hdcDraw,			
+ 							HDC hicTargetDev,		 
+-							LPCRECT lprcClient, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT lprcClient, 
+ 							INT x, 
+ 							INT y, 
+-							DWORD * pHitResult) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD * pHitResult) = 0;
+ 
+ 	//@cmember Inplace activate notification
+-	virtual HRESULT		OnTxInPlaceActivate(LPCRECT prcClient) = 0;
++	virtual HRESULT		OnTxInPlaceActivate(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT prcClient) = 0;
+ 
+ 	//@cmember Inplace deactivate notification
+ 	virtual HRESULT		OnTxInPlaceDeactivate() = 0;
+@@ -252,26 +253,26 @@ public:
+ 	virtual HRESULT		OnTxUIDeactivate() = 0;
+ 
+ 	//@cmember Get text in control
+-	virtual HRESULT		TxGetText(BSTR *pbstrText) = 0;
++	virtual HRESULT		TxGetText(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BSTR *pbstrText) = 0;
+ 
+ 	//@cmember Set text in control
+ 	virtual HRESULT		TxSetText(LPCWSTR pszText) = 0;
+ 	
+ 	//@cmember Get x position of 
+-	virtual HRESULT		TxGetCurTargetX(LONG *) = 0;
++	virtual HRESULT		TxGetCurTargetX(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *) = 0;
+ 	//@cmember Get baseline position
+-	virtual HRESULT		TxGetBaseLinePos(LONG *) = 0;
++	virtual HRESULT		TxGetBaseLinePos(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *) = 0;
+ 
+ 	//@cmember Get Size to fit / Natural size
+ 	virtual HRESULT		TxGetNaturalSize(
+ 							DWORD dwAspect,
+ 							HDC hdcDraw,
+ 							HDC hicTargetDev,
+-							DVTARGETDEVICE *ptd,
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DVTARGETDEVICE *ptd,
+ 							DWORD dwMode, 	
+ 							const SIZEL *psizelExtent,
+-							LONG *pwidth, 
+-							LONG *pheight) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pwidth, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pheight) = 0;
+ 
+ 	//@cmember Drag & drop
+ 	virtual HRESULT		TxGetDropTarget( IDropTarget **ppDropTarget ) = 0;
+@@ -280,7 +281,7 @@ public:
+ 	virtual HRESULT		OnTxPropertyBitsChange(DWORD dwMask, DWORD dwBits) = 0;
+ 
+ 	//@cmember Fetch the cached drawing size (logical not physical)
+-	virtual	HRESULT		TxGetCachedSize(DWORD *pdwWidth, DWORD *pdwHeight)=0;
++	virtual	HRESULT		TxGetCachedSize(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwWidth, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwHeight)=0;
+ };
+ 
+ // These definition are used with SES_LOGOCALCARET to delegate caret creation to a host through TxCreateCaret
+@@ -328,7 +329,7 @@ public:
+ 	virtual BOOL		TxShowScrollBar(INT fnBar, BOOL fShow) = 0;
+ 
+ 	//@cmember Enable the scroll bar
+-	virtual BOOL		TxEnableScrollBar (INT fuSBFlags, INT fuArrowflags) = 0;
++	virtual BOOL		TxEnableScrollBar (_Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) INT fuSBFlags, INT fuArrowflags) = 0;
+ 
+ 	//@cmember Set the scroll range
+ 	virtual BOOL		TxSetScrollRange(
+@@ -341,7 +342,7 @@ public:
+ 	virtual BOOL		TxSetScrollPos (INT fnBar, INT nPos, BOOL fRedraw) = 0;
+ 
+ 	//@cmember InvalidateRect
+-	virtual void		TxInvalidateRect(LPCRECT prc, BOOL fMode) = 0;
++	virtual void		TxInvalidateRect(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT prc, BOOL fMode) = 0;
+ 
+ 	//@cmember Send a WM_PAINT to the window
+ 	virtual void		TxViewChange(BOOL fUpdate) = 0;
+@@ -365,11 +366,11 @@ public:
+ 	virtual void		TxScrollWindowEx (
+ 							INT dx, 
+ 							INT dy, 
+-							LPCRECT lprcScroll, 
+-							LPCRECT lprcClip,
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT lprcScroll, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT lprcClip,
+ 							HRGN hrgnUpdate, 
+-							LPRECT lprcUpdate, 
+-							UINT fuScroll) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT lprcUpdate, 
++							_Win32_AssociatedEnum_(SCROLL_WINDOW_FLAGS) UINT fuScroll) = 0;
+ 	
+ 	//@cmember Get mouse capture
+ 	virtual void		TxSetCapture(BOOL fCapture) = 0;
+@@ -381,49 +382,49 @@ public:
+ 	virtual void		TxSetCursor(HCURSOR hcur, BOOL fText) = 0;
+ 
+ 	//@cmember Converts screen coordinates of a specified point to the client coordinates 
+-	virtual BOOL		TxScreenToClient (LPPOINT lppt) = 0;
++	virtual BOOL		TxScreenToClient (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPOINT lppt) = 0;
+ 
+ 	//@cmember Converts the client coordinates of a specified point to screen coordinates
+-	virtual BOOL		TxClientToScreen (LPPOINT lppt) = 0;
++	virtual BOOL		TxClientToScreen (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPOINT lppt) = 0;
+ 
+ 	//@cmember Request host to activate text services
+-	virtual HRESULT		TxActivate( LONG * plOldState ) = 0;
++	virtual HRESULT		TxActivate( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG * plOldState ) = 0;
+ 
+ 	//@cmember Request host to deactivate text services
+ 	virtual HRESULT		TxDeactivate( LONG lNewState ) = 0;
+ 
+ 	//@cmember Retrieves the coordinates of a window's client area
+-	virtual HRESULT		TxGetClientRect(LPRECT prc) = 0;
++	virtual HRESULT		TxGetClientRect(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT prc) = 0;
+ 
+ 	//@cmember Get the view rectangle relative to the inset
+-	virtual HRESULT		TxGetViewInset(LPRECT prc) = 0;
++	virtual HRESULT		TxGetViewInset(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT prc) = 0;
+ 
+ 	//@cmember Get the default character format for the text
+-	virtual HRESULT		TxGetCharFormat(const CHARFORMATW **ppCF ) = 0;
++	virtual HRESULT		TxGetCharFormat(_WIN32META_ANNOTATION_("win32metadata:in") const CHARFORMATW **ppCF ) = 0;
+ 
+ 	//@cmember Get the default paragraph format for the text
+-	virtual HRESULT		TxGetParaFormat(const PARAFORMAT **ppPF) = 0;
++	virtual HRESULT		TxGetParaFormat(_WIN32META_ANNOTATION_("win32metadata:in") const PARAFORMAT **ppPF) = 0;
+ 
+ 	//@cmember Get the background color for the window
+-	virtual COLORREF	TxGetSysColor(int nIndex) = 0;
++	virtual COLORREF	TxGetSysColor(_Win32_AssociatedEnum_(SYS_COLOR_INDEX) int nIndex) = 0;
+ 
+ 	//@cmember Get the background (either opaque or transparent)
+-	virtual HRESULT		TxGetBackStyle(TXTBACKSTYLE *pstyle) = 0;
++	virtual HRESULT		TxGetBackStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") TXTBACKSTYLE *pstyle) = 0;
+ 
+ 	//@cmember Get the maximum length for the text
+-	virtual HRESULT		TxGetMaxLength(DWORD *plength) = 0;
++	virtual HRESULT		TxGetMaxLength(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *plength) = 0;
+ 
+ 	//@cmember Get the bits representing requested scroll bars for the window
+-	virtual HRESULT		TxGetScrollBars(DWORD *pdwScrollBar) = 0;
++	virtual HRESULT		TxGetScrollBars(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwScrollBar) = 0;
+ 
+ 	//@cmember Get the character to display for password input
+ 	virtual HRESULT		TxGetPasswordChar(_Out_ TCHAR *pch) = 0;
+ 
+ 	//@cmember Get the accelerator character
+-	virtual HRESULT		TxGetAcceleratorPos(LONG *pcp) = 0;
++	virtual HRESULT		TxGetAcceleratorPos(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pcp) = 0;
+ 
+ 	//@cmember Get the native size
+-	virtual HRESULT		TxGetExtent(LPSIZEL lpExtent) = 0;
++	virtual HRESULT		TxGetExtent(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSIZEL lpExtent) = 0;
+ 
+ 	//@cmember Notify host that default character format has changed
+ 	virtual HRESULT		OnTxCharFormatChange (const CHARFORMATW * pCF) = 0;
+@@ -432,17 +433,17 @@ public:
+ 	virtual HRESULT		OnTxParaFormatChange (const PARAFORMAT * pPF) = 0;
+ 
+ 	//@cmember Bulk access to bit properties
+-	virtual HRESULT		TxGetPropertyBits(DWORD dwMask, DWORD *pdwBits) = 0;
++	virtual HRESULT		TxGetPropertyBits(DWORD dwMask, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwBits) = 0;
+ 
+ 	//@cmember Notify host of events
+-	virtual HRESULT		TxNotify(DWORD iNotify, void *pv) = 0;
++	virtual HRESULT		TxNotify(DWORD iNotify, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *pv) = 0;
+ 
+ 	// East Asia Methods for getting the Input Context
+-	virtual HIMC		TxImmGetContext() = 0;
++	_Win32_RAIIFree_(ImmDestroyContext, -1, 0) virtual HIMC		TxImmGetContext() = 0;
+ 	virtual void		TxImmReleaseContext( HIMC himc ) = 0;
+ 
+ 	//@cmember Returns HIMETRIC size of the control bar.
+-	virtual HRESULT		TxGetSelectionBarWidth (LONG *lSelBarWidth) = 0;
++	virtual HRESULT		TxGetSelectionBarWidth (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *lSelBarWidth) = 0;
+ };
+ 
+ 
+@@ -457,10 +458,10 @@ interface IRawElementProviderSimple;
+  *
+  *	@base	public | IUnknown 
+  */
+-interface DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
++interface _Windows_SupportedOS_Windows8_  DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE CreateProvider(
+-		IRawElementProviderWindowlessSite *pSite, 
++		_WIN32META_ANNOTATION_("win32metadata:in") IRawElementProviderWindowlessSite *pSite, 
+ 		IRawElementProviderSimple **ppProvider) = 0;
+ };
+ 
+@@ -473,9 +474,9 @@ struct UiaRect;
+  *
+  *	@base	public | IUnknown 
+  */
+-interface DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
++interface _Windows_SupportedOS_Windows8_  DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
+ {
+-	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(UiaRect *pUiaRect) = 0;
++	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UiaRect *pUiaRect) = 0;
+ 
+ 	virtual HRESULT STDMETHODCALLTYPE IsVisible() = 0;
+ };
+@@ -490,11 +491,11 @@ typedef int PROPERTYID;
+  *
+  *	@base	public | IUnknown 
+  */
+-interface IRicheditUiaOverrides : public IUnknown
++interface _Windows_SupportedOS_Windows8_  IRicheditUiaOverrides : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetPropertyOverrideValue(
+ 		PROPERTYID propertyId,
+-		VARIANT *pRetValue) = 0;
++		_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT *pRetValue) = 0;
+ };
+ 
+ //+-----------------------------------------------------------------------
+@@ -540,37 +541,37 @@ public:					//@cmember Is a double click in the message queue?
+ 	virtual BOOL		TxIsDoubleClickPending() = 0; 
+ 
+ 						//@cmember Get the overall window for this control	 
+-	virtual HRESULT		TxGetWindow(HWND *phwnd) = 0;
++	virtual HRESULT		TxGetWindow(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HWND *phwnd) = 0;
+ 
+ 						//@cmember Set control window to foreground
+ 	virtual HRESULT		TxSetForegroundWindow() = 0;
+ 
+ 						//@cmember Set control window to foreground
+-	virtual HPALETTE	TxGetPalette() = 0;
++	_Win32_RAIIFree_(DeleteObject, -1, 0) virtual HPALETTE	TxGetPalette() = 0;
+ 
+ 						//@cmember Get East Asian flags
+-	virtual HRESULT		TxGetEastAsianFlags(LONG *pFlags) = 0;
++	virtual HRESULT		TxGetEastAsianFlags(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pFlags) = 0;
+ 
+ 						//@cmember Routes the cursor change to the winhost
+-	virtual HCURSOR		TxSetCursor2(HCURSOR hcur, BOOL bText) = 0;
++	_Win32_RAIIFree_(DestroyCursor, -1, 0) virtual HCURSOR		TxSetCursor2(HCURSOR hcur, BOOL bText) = 0;
+ 
+ 						//@cmember Notification that text services is freed
+ 	virtual void		TxFreeTextServicesNotification() = 0;
+ 
+ 						//@cmember Get Edit Style flags
+-	virtual HRESULT		TxGetEditStyle(DWORD dwItem, DWORD *pdwData) = 0;
++	virtual HRESULT		TxGetEditStyle(DWORD dwItem, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwData) = 0;
+ 
+ 						//@cmember Get Window Style bits
+-	virtual HRESULT		TxGetWindowStyles(DWORD *pdwStyle, DWORD *pdwExStyle) = 0;
++	virtual HRESULT		TxGetWindowStyles(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwStyle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwExStyle) = 0;
+ 
+ 						//@cmember Show / hide drop caret (D2D-only)
+-	virtual HRESULT		TxShowDropCaret(BOOL fShow, HDC hdc, LPCRECT prc) = 0;
++	virtual HRESULT		TxShowDropCaret(BOOL fShow, HDC hdc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECT prc) = 0;
+ 
+ 						//@cmember Destroy caret (D2D-only)
+ 	virtual HRESULT 	TxDestroyCaret() = 0;
+ 
+ 						//@cmember Get Horizontal scroll extent
+-	virtual HRESULT		TxGetHorzExtent(LONG *plHorzExtent) = 0;
++	virtual HRESULT		TxGetHorzExtent(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *plHorzExtent) = 0;
+ };
+ 
+ // Various flags for TxGetEditStyle data
+@@ -591,17 +592,17 @@ public:
+ 							DWORD dwAspect,
+ 							HDC hdcDraw,
+ 							HDC hicTargetDev,
+-							DVTARGETDEVICE *ptd,
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DVTARGETDEVICE *ptd,
+ 							DWORD dwMode, 	
+ 							const SIZEL *psizelExtent,
+-							LONG *pwidth, 
+-							LONG *pheight, 
+-							LONG *pascent) = 0;
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pwidth, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pheight, 
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pascent) = 0;
+ 
+ 	virtual HRESULT		TxDrawD2D(
+-							ID2D1RenderTarget* pRenderTarget,
+-							LPCRECTL lprcBounds,
+-							LPRECT lprcUpdate,
++							_WIN32META_ANNOTATION_("win32metadata:in") ID2D1RenderTarget* pRenderTarget,
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCRECTL lprcBounds,
++							_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRECT lprcUpdate,
+ 							LONG lViewId) = 0;
+ };
+ 

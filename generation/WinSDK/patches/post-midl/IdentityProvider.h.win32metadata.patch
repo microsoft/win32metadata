@@ -1,0 +1,102 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
+index 2d6f99ca6f..10c91b1a69 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityProvider.h
+@@ -132,12 +132,17 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if 0
+ #endif // 0
+ 
+-enum tag_IdentityUpdateEvent
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++tag_IdentityUpdateEvent
+     {
+         IDENTITY_ASSOCIATED	= 0x1,
+         IDENTITY_DISASSOCIATED	= 0x2,
+@@ -170,7 +175,7 @@ EXTERN_C const IID IID_IIdentityAdvise;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4e982fed-d14b-440c-b8d6-bb386453d386")
+-    IIdentityAdvise : public IUnknown
++    _Windows_SupportedOS_Windows7_ IIdentityAdvise : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE IdentityUpdated( 
+@@ -210,7 +215,7 @@ EXTERN_C const IID IID_IIdentityAdvise;
+         END_INTERFACE
+     } IIdentityAdviseVtbl;
+ 
+-    interface IIdentityAdvise
++    interface _Windows_SupportedOS_Windows7_ IIdentityAdvise
+     {
+         CONST_VTBL struct IIdentityAdviseVtbl *lpVtbl;
+     };
+@@ -351,7 +356,7 @@ EXTERN_C const IID IID_IIdentityProvider;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0d1b9e0c-e8ba-4f55-a81b-bce934b948f5")
+-    IIdentityProvider : public IUnknown
++    _Windows_SupportedOS_Windows7_ IIdentityProvider : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetIdentityEnum( 
+@@ -463,7 +468,7 @@ EXTERN_C const IID IID_IIdentityProvider;
+         END_INTERFACE
+     } IIdentityProviderVtbl;
+ 
+-    interface IIdentityProvider
++    interface _Windows_SupportedOS_Windows7_ IIdentityProvider
+     {
+         CONST_VTBL struct IIdentityProviderVtbl *lpVtbl;
+     };
+@@ -780,7 +785,7 @@ EXTERN_C const IID IID_IAssociatedIdentityProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2af066b3-4cbb-4cba-a798-204b6af68cc0")
++    MIDL_INTERFACE("2af066b3-4cbb-4cba-a798-204b6af68cc0") _Windows_SupportedOS_Windows7_ 
+     IAssociatedIdentityProvider : public IUnknown
+     {
+     public:
+@@ -1066,7 +1071,7 @@ EXTERN_C const IID IID_IConnectedIdentityProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B7417B54-E08C-429b-96C8-678D1369ECB1")
++    MIDL_INTERFACE("B7417B54-E08C-429b-96C8-678D1369ECB1") _Windows_SupportedOS_Windows8_ 
+     IConnectedIdentityProvider : public IUnknown
+     {
+     public:
+@@ -1205,7 +1210,7 @@ EXTERN_C const IID IID_AsyncIConnectedIdentityProvider;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Begin_ConnectIdentity( 
+-            /* [ref][size_is][in] */ __RPC__in_xcount_full(AuthBufferSize) BYTE *AuthBuffer,
++            /* [ref][size_is][in] */  __RPC__in_xcount_full(AuthBufferSize) BYTE *AuthBuffer,
+             /* [in] */ ULONG AuthBufferSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Finish_ConnectIdentity( void) = 0;
+@@ -1485,13 +1490,13 @@ EXTERN_C const IID IID_AsyncIIdentityAuthentication;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Begin_SetIdentityCredential( 
+-            /* [unique][size_is][in] */ __RPC__in_xcount_full_opt(CredBufferLength) BYTE *CredBuffer,
++            /* [unique][size_is][in] */  __RPC__in_xcount_full_opt(CredBufferLength) BYTE *CredBuffer,
+             /* [in] */ ULONG CredBufferLength) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Finish_SetIdentityCredential( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Begin_ValidateIdentityCredential( 
+-            /* [ref][size_is][in] */ __RPC__in_xcount_full(CredBufferLength) BYTE *CredBuffer,
++            /* [ref][size_is][in] */  __RPC__in_xcount_full(CredBufferLength) BYTE *CredBuffer,
+             /* [in] */ ULONG CredBufferLength,
+             /* [unique][out][in] */ __RPC__deref_opt_inout_opt IPropertyStore **ppIdentityProperties) = 0;
+         

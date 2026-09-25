@@ -1,0 +1,77 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/REND.h b/generation/WinSDK/RecompiledIdlHeaders/um/REND.h
+index 1cc891e08d..6f9fd21dd1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/REND.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/REND.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -235,11 +236,11 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppProtocol) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppProtocol) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Originator( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppOriginator) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppOriginator) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Originator( 
+             /* [annotation][in] */ 
+@@ -255,7 +256,7 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Url( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppUrl) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Url( 
+             /* [annotation][in] */ 
+@@ -263,7 +264,7 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppDescription) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -566,7 +567,7 @@ EXTERN_C const IID IID_ITDirectoryObjectUser;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IPPhonePrimary( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IPPhonePrimary( 
+             /* [annotation][in] */ 
+@@ -730,7 +731,7 @@ EXTERN_C const IID IID_IEnumDialableAddrs;
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+             /* [annotation][size_is][out] */ 
+-            _Out_writes_(celt)  BSTR *ppElements,
++            _Win32_RAIIFree_(SysFreeString) _Out_writes_(celt)  BSTR *ppElements,
+             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+@@ -860,7 +861,7 @@ EXTERN_C const IID IID_ITDirectoryObject;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -1385,7 +1386,7 @@ EXTERN_C const IID IID_ITDirectory;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsDynamic( 
+             /* [annotation][retval][out] */ 

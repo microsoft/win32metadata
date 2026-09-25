@@ -1,0 +1,375 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
+index f502afb650..83cbff3a5b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	CV_OUT_BASE64HEADER	( 0 )
+@@ -203,30 +204,30 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9c735be2-57a5-11d1-9bdb-00c04fb683fa")
+-    IEnumCERTVIEWCOLUMN : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWCOLUMN : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetType( 
+-            /* [retval][out] */ LONG *pType) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsIndexed( 
+-            /* [retval][out] */ LONG *pIndexed) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndexed) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxLength( 
+-            /* [retval][out] */ LONG *pMaxLength) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pMaxLength) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetValue( 
+-            /* [in] */ LONG Flags,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(ENUM_CERT_COLUMN_VALUE_FLAGS) LONG Flags,
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ LONG celt) = 0;
+@@ -354,7 +355,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
+         END_INTERFACE
+     } IEnumCERTVIEWCOLUMNVtbl;
+ 
+-    interface IEnumCERTVIEWCOLUMN
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWCOLUMN
+     {
+         CONST_VTBL struct IEnumCERTVIEWCOLUMNVtbl *lpVtbl;
+     };
+@@ -440,17 +441,17 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e77db656-7653-11d1-9bde-00c04fb683fa")
+-    IEnumCERTVIEWATTRIBUTE : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWATTRIBUTE : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetValue( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ LONG celt) = 0;
+@@ -557,7 +558,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
+         END_INTERFACE
+     } IEnumCERTVIEWATTRIBUTEVtbl;
+ 
+-    interface IEnumCERTVIEWATTRIBUTE
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWATTRIBUTE
+     {
+         CONST_VTBL struct IEnumCERTVIEWATTRIBUTEVtbl *lpVtbl;
+     };
+@@ -631,22 +632,22 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e7dd1466-7653-11d1-9bde-00c04fb683fa")
+-    IEnumCERTVIEWEXTENSION : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWEXTENSION : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+-            /* [retval][out] */ BSTR *pstrOut) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
+-            /* [retval][out] */ LONG *pFlags) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetValue( 
+-            /* [in] */ LONG Type,
+-            /* [in] */ LONG Flags,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG Type,
++            /* [in] */ _Win32_AssociatedEnum_(ENUM_CERT_COLUMN_VALUE_FLAGS) LONG Flags,
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ LONG celt) = 0;
+@@ -760,7 +761,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
+         END_INTERFACE
+     } IEnumCERTVIEWEXTENSIONVtbl;
+ 
+-    interface IEnumCERTVIEWEXTENSION
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWEXTENSION
+     {
+         CONST_VTBL struct IEnumCERTVIEWEXTENSIONVtbl *lpVtbl;
+     };
+@@ -837,11 +838,11 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d1157f4c-5af2-11d1-9bdc-00c04fb683fa")
+-    IEnumCERTVIEWROW : public IDispatch
++    _Windows_SupportedOS_Server2003_ IEnumCERTVIEWROW : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumCertViewColumn( 
+             /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum) = 0;
+@@ -863,7 +864,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+             /* [retval][out] */ IEnumCERTVIEWROW **ppenum) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetMaxIndex( 
+-            /* [retval][out] */ LONG *pIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
+         
+     };
+     
+@@ -974,7 +975,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
+         END_INTERFACE
+     } IEnumCERTVIEWROWVtbl;
+ 
+-    interface IEnumCERTVIEWROW
++    interface _Windows_SupportedOS_Server2003_ IEnumCERTVIEWROW
+     {
+         CONST_VTBL struct IEnumCERTVIEWROWVtbl *lpVtbl;
+     };
+@@ -1054,24 +1055,24 @@ EXTERN_C const IID IID_ICertView;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c3fac344-1e84-11d1-9bd6-00c04fb683fa")
+-    ICertView : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertView : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OpenConnection( 
+             /* [in] */ const BSTR strConfig) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE EnumCertViewColumn( 
+-            /* [in] */ LONG fResultColumn,
++            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
+             /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetColumnCount( 
+-            /* [in] */ LONG fResultColumn,
+-            /* [retval][out] */ LONG *pcColumn) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pcColumn) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetColumnIndex( 
+-            /* [in] */ LONG fResultColumn,
++            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
+             /* [in] */ const BSTR strColumnName,
+-            /* [retval][out] */ LONG *pColumnIndex) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pColumnIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetResultColumnCount( 
+             /* [in] */ LONG cResultColumn) = 0;
+@@ -1080,8 +1081,8 @@ EXTERN_C const IID IID_ICertView;
+             /* [in] */ LONG ColumnIndex) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetRestriction( 
+-            /* [in] */ LONG ColumnIndex,
+-            /* [in] */ LONG SeekOperator,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_VIEW_COLUMN_INDEX) LONG ColumnIndex,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_VIEW_SEEK_OPERATOR_FLAGS) LONG SeekOperator,
+             /* [in] */ LONG SortOrder,
+             /* [in] */ const VARIANT *pvarValue) = 0;
+         
+@@ -1203,7 +1204,7 @@ EXTERN_C const IID IID_ICertView;
+         END_INTERFACE
+     } ICertViewVtbl;
+ 
+-    interface ICertView
++    interface _Windows_SupportedOS_Server2003_ ICertView
+     {
+         CONST_VTBL struct ICertViewVtbl *lpVtbl;
+     };
+@@ -1283,11 +1284,11 @@ EXTERN_C const IID IID_ICertView2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d594b282-8851-4b61-9c66-3edadf848863")
+-    ICertView2 : public ICertView
++    _Windows_SupportedOS_Server2003_ ICertView2 : public ICertView
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetTable( 
+-            /* [in] */ LONG Table) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(CVRC_TABLE) LONG Table) = 0;
+         
+     };
+     
+@@ -1409,7 +1410,7 @@ EXTERN_C const IID IID_ICertView2;
+         END_INTERFACE
+     } ICertView2Vtbl;
+ 
+-    interface ICertView2
++    interface _Windows_SupportedOS_Server2003_ ICertView2
+     {
+         CONST_VTBL struct ICertView2Vtbl *lpVtbl;
+     };
+@@ -1499,6 +1500,137 @@ extern RPC_IF_HANDLE __MIDL_itf_certview_0000_0006_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CV_COLUMN_LOG_DEFAULT")
++#undef CV_COLUMN_LOG_DEFAULT
++#pragma push_macro("CV_COLUMN_LOG_FAILED_DEFAULT")
++#undef CV_COLUMN_LOG_FAILED_DEFAULT
++#pragma push_macro("CV_COLUMN_QUEUE_DEFAULT")
++#undef CV_COLUMN_QUEUE_DEFAULT
++enum CERT_VIEW_COLUMN_INDEX : int
++{
++    CV_COLUMN_LOG_DEFAULT = -2,
++    CV_COLUMN_LOG_FAILED_DEFAULT = -3,
++    CV_COLUMN_QUEUE_DEFAULT = -1,
++};
++#pragma pop_macro("CV_COLUMN_QUEUE_DEFAULT")
++#pragma pop_macro("CV_COLUMN_LOG_FAILED_DEFAULT")
++#pragma pop_macro("CV_COLUMN_LOG_DEFAULT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CVRC_COLUMN_SCHEMA")
++#undef CVRC_COLUMN_SCHEMA
++#pragma push_macro("CVRC_COLUMN_RESULT")
++#undef CVRC_COLUMN_RESULT
++#pragma push_macro("CVRC_COLUMN_VALUE")
++#undef CVRC_COLUMN_VALUE
++#pragma push_macro("CVRC_COLUMN_MASK")
++#undef CVRC_COLUMN_MASK
++enum CVRC_COLUMN : int
++{
++    CVRC_COLUMN_SCHEMA = 0,
++    CVRC_COLUMN_RESULT = 1,
++    CVRC_COLUMN_VALUE = 2,
++    CVRC_COLUMN_MASK = 4095,
++};
++#pragma pop_macro("CVRC_COLUMN_MASK")
++#pragma pop_macro("CVRC_COLUMN_VALUE")
++#pragma pop_macro("CVRC_COLUMN_RESULT")
++#pragma pop_macro("CVRC_COLUMN_SCHEMA")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CV_OUT_BASE64")
++#undef CV_OUT_BASE64
++#pragma push_macro("CV_OUT_BASE64HEADER")
++#undef CV_OUT_BASE64HEADER
++#pragma push_macro("CV_OUT_BASE64REQUESTHEADER")
++#undef CV_OUT_BASE64REQUESTHEADER
++#pragma push_macro("CV_OUT_BASE64X509CRLHEADER")
++#undef CV_OUT_BASE64X509CRLHEADER
++#pragma push_macro("CV_OUT_BINARY")
++#undef CV_OUT_BINARY
++#pragma push_macro("CV_OUT_HEX")
++#undef CV_OUT_HEX
++#pragma push_macro("CV_OUT_HEXADDR")
++#undef CV_OUT_HEXADDR
++#pragma push_macro("CV_OUT_HEXASCII")
++#undef CV_OUT_HEXASCII
++#pragma push_macro("CV_OUT_HEXASCIIADDR")
++#undef CV_OUT_HEXASCIIADDR
++enum ENUM_CERT_COLUMN_VALUE_FLAGS : int
++{
++    CV_OUT_BASE64 = 1,
++    CV_OUT_BASE64HEADER = 0,
++    CV_OUT_BASE64REQUESTHEADER = 3,
++    CV_OUT_BASE64X509CRLHEADER = 9,
++    CV_OUT_BINARY = 2,
++    CV_OUT_HEX = 4,
++    CV_OUT_HEXADDR = 10,
++    CV_OUT_HEXASCII = 5,
++    CV_OUT_HEXASCIIADDR = 11,
++};
++#pragma pop_macro("CV_OUT_HEXASCIIADDR")
++#pragma pop_macro("CV_OUT_HEXASCII")
++#pragma pop_macro("CV_OUT_HEXADDR")
++#pragma pop_macro("CV_OUT_HEX")
++#pragma pop_macro("CV_OUT_BINARY")
++#pragma pop_macro("CV_OUT_BASE64X509CRLHEADER")
++#pragma pop_macro("CV_OUT_BASE64REQUESTHEADER")
++#pragma pop_macro("CV_OUT_BASE64HEADER")
++#pragma pop_macro("CV_OUT_BASE64")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CVRC_TABLE_ATTRIBUTES")
++#undef CVRC_TABLE_ATTRIBUTES
++#pragma push_macro("CVRC_TABLE_CRL")
++#undef CVRC_TABLE_CRL
++#pragma push_macro("CVRC_TABLE_EXTENSIONS")
++#undef CVRC_TABLE_EXTENSIONS
++#pragma push_macro("CVRC_TABLE_REQCERT")
++#undef CVRC_TABLE_REQCERT
++enum CVRC_TABLE : int
++{
++    CVRC_TABLE_ATTRIBUTES = 16384,
++    CVRC_TABLE_CRL = 20480,
++    CVRC_TABLE_EXTENSIONS = 12288,
++    CVRC_TABLE_REQCERT = 0,
++};
++#pragma pop_macro("CVRC_TABLE_REQCERT")
++#pragma pop_macro("CVRC_TABLE_EXTENSIONS")
++#pragma pop_macro("CVRC_TABLE_CRL")
++#pragma pop_macro("CVRC_TABLE_ATTRIBUTES")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CVR_SEEK_EQ")
++#undef CVR_SEEK_EQ
++#pragma push_macro("CVR_SEEK_LE")
++#undef CVR_SEEK_LE
++#pragma push_macro("CVR_SEEK_LT")
++#undef CVR_SEEK_LT
++#pragma push_macro("CVR_SEEK_GE")
++#undef CVR_SEEK_GE
++#pragma push_macro("CVR_SEEK_GT")
++#undef CVR_SEEK_GT
++enum CERT_VIEW_SEEK_OPERATOR_FLAGS : int
++{
++    CVR_SEEK_EQ = 1,
++    CVR_SEEK_LE = 4,
++    CVR_SEEK_LT = 2,
++    CVR_SEEK_GE = 8,
++    CVR_SEEK_GT = 16,
++};
++#pragma pop_macro("CVR_SEEK_GT")
++#pragma pop_macro("CVR_SEEK_GE")
++#pragma pop_macro("CVR_SEEK_LT")
++#pragma pop_macro("CVR_SEEK_LE")
++#pragma pop_macro("CVR_SEEK_EQ")
++#endif
++
+ #endif
+ 
+ 

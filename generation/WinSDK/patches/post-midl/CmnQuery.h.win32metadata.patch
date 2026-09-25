@@ -1,0 +1,136 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
+index 6693116ef1..8af2c647b5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CmnQuery.h
+@@ -2,6 +2,7 @@
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifndef __cmnquery_h
+ #define __cmnquery_h
+@@ -59,7 +60,7 @@ DEFINE_GUID(IID_ICommonQuery, 0xab50dec0, 0x6f1d, 0x11d0, 0xa1, 0xc4, 0x0, 0xaa,
+ #define CQFF_NOGLOBALPAGES  0x0000001       // = 1 => doesn't have global pages added
+ #define CQFF_ISOPTIONAL     0x0000002       // = 1 => form is hidden, unless optional forms requested
+ 
+-typedef struct
++typedef struct  
+ {
+     DWORD   cbStruct;
+     DWORD   dwFlags;
+@@ -68,7 +69,7 @@ typedef struct
+     LPCWSTR pszTitle;
+ } CQFORM, * LPCQFORM;
+ 
+-typedef HRESULT (CALLBACK *LPCQADDFORMSPROC)(LPARAM lParam, LPCQFORM pForm);
++typedef HRESULT (CALLBACK *LPCQADDFORMSPROC)(LPARAM lParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCQFORM pForm);
+ 
+ 
+ //
+@@ -81,10 +82,10 @@ typedef HRESULT (CALLBACK *LPCQADDFORMSPROC)(LPARAM lParam, LPCQFORM pForm);
+ 
+ struct _cqpage;
+ typedef struct _cqpage CQPAGE, * LPCQPAGE;
+-typedef HRESULT (CALLBACK *LPCQADDPAGESPROC)(LPARAM lParam, REFCLSID clsidForm, LPCQPAGE pPage);
+-typedef HRESULT (CALLBACK *LPCQPAGEPROC)(LPCQPAGE pPage, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
++typedef HRESULT (CALLBACK *LPCQADDPAGESPROC)(LPARAM lParam, REFCLSID clsidForm, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCQPAGE pPage);
++typedef HRESULT (CALLBACK *LPCQPAGEPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCQPAGE pPage, HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+ 
+-struct _cqpage
++struct   _cqpage
+ {
+     DWORD        cbStruct;
+     DWORD        dwFlags;
+@@ -104,7 +105,7 @@ struct _cqpage
+ #undef  INTERFACE
+ #define INTERFACE IQueryForm
+ 
+-DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -112,8 +113,14 @@ DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2d
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // IQueryForm methods
++    
++    
+     STDMETHOD(Initialize)(THIS_ HKEY hkForm) PURE;
++    
++    
+     STDMETHOD(AddForms)(THIS_ LPCQADDFORMSPROC pAddFormsProc, LPARAM lParam) PURE;
++    
++    
+     STDMETHOD(AddPages)(THIS_ LPCQADDPAGESPROC pAddPagesProc, LPARAM lParam) PURE;
+ };
+ 
+@@ -142,7 +149,7 @@ DECLARE_INTERFACE_IID_(IQueryForm, IUnknown, "8cfcee30-39bd-11d0-b8d1-00a024ab2d
+ #undef  INTERFACE
+ #define INTERFACE IPersistQuery
+ 
+-DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c906af45")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c906af45")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -153,12 +160,26 @@ DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c90
+     STDMETHOD(GetClassID)(THIS_ CLSID* pClassID) PURE;
+ 
+     // IPersistQuery
++    
++    
+     STDMETHOD(WriteString)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPCWSTR pValue) PURE;
++    
++    
+     STDMETHOD(ReadString)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _Out_ LPWSTR pBuffer, INT cchBuffer) PURE;
++    
++    
+     STDMETHOD(WriteInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, INT value) PURE;
+-    STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPINT pValue) PURE;
+-    STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
+-    STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, LPVOID pStruct, DWORD cbStruct) PURE;
++    
++    
++    STDMETHOD(ReadInt)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPINT pValue) PURE;
++    
++    
++    STDMETHOD(WriteStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pStruct, DWORD cbStruct) PURE;
++    
++    
++    STDMETHOD(ReadStruct)(THIS_ LPCWSTR pSection, LPCWSTR pValueName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pStruct, DWORD cbStruct) PURE;
++    
++    
+     STDMETHOD(Clear)(THIS) PURE;
+ };
+ 
+@@ -181,7 +202,7 @@ DECLARE_INTERFACE_IID_(IPersistQuery, IPersist, "1a3114b8-a62e-11d0-a6c5-00a0c90
+ 
+ #define OQWF_PARAMISPROPERTYBAG     0x80000000 // = 1 => the form parameters ptr is an IPropertyBag (ppbFormParameters)
+ 
+-typedef struct
++typedef struct  
+ {
+     DWORD           cbStruct;                   // structure size
+     DWORD           dwFlags;                    // flags (OQFW_*)
+@@ -202,7 +223,7 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE ICommonQuery
+ 
+-DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
++DECLARE_INTERFACE_IID_( _Windows_SupportedOS_WindowsVista_ ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ void **ppvObj) PURE;
+@@ -210,7 +231,9 @@ DECLARE_INTERFACE_IID_(ICommonQuery, IUnknown, "ab50dec0-6f1d-11d0-a1c4-00aa00c1
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     // ICommonQuery methods
+-    STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
++    
++    
++    STDMETHOD(OpenQueryWindow)(THIS_ HWND hwndParent, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOPENQUERYWINDOW pQueryWnd, IDataObject** ppDataObject) PURE;
+ };
+ 
+ 

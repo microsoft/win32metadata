@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h b/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h
+index 9d3c313bfb..f69bf53f4e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -141,7 +142,7 @@ EXTERN_C const IID IID_IContactManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ad553d98-deb1-474a-8e17-fc0c2075b738")
++    MIDL_INTERFACE("ad553d98-deb1-474a-8e17-fc0c2075b738") _Windows_SupportedOS_WindowsVista_ 
+     IContactManager : public IUnknown
+     {
+     public:
+@@ -305,7 +306,7 @@ EXTERN_C const IID IID_IContactCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b6afa338-d779-11d9-8bde-f66bad1e3f3a")
++    MIDL_INTERFACE("b6afa338-d779-11d9-8bde-f66bad1e3f3a") _Windows_SupportedOS_WindowsVista_ 
+     IContactCollection : public IUnknown
+     {
+     public:
+@@ -411,7 +412,7 @@ EXTERN_C const IID IID_IContactProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("70dd27dd-5cbd-46e8-bef0-23b6b346288f")
++    MIDL_INTERFACE("70dd27dd-5cbd-46e8-bef0-23b6b346288f") _Windows_SupportedOS_WindowsVista_ 
+     IContactProperties : public IUnknown
+     {
+     public:
+@@ -774,7 +775,7 @@ EXTERN_C const IID IID_IContact;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F941B671-BDA7-4f77-884A-F46462F226A7")
++    MIDL_INTERFACE("F941B671-BDA7-4f77-884A-F46462F226A7") _Windows_SupportedOS_WindowsVista_ 
+     IContact : public IUnknown
+     {
+     public:
+@@ -908,7 +909,7 @@ EXTERN_C const IID IID_IContactPropertyCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ffd3adf8-fa64-4328-b1b6-2e0db509cb3c")
++    MIDL_INTERFACE("ffd3adf8-fa64-4328-b1b6-2e0db509cb3c") _Windows_SupportedOS_WindowsVista_ 
+     IContactPropertyCollection : public IUnknown
+     {
+     public:

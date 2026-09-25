@@ -1,0 +1,115 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSAAText.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSAAText.h
+index 009b018991..fe4bf390b4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSAAText.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSAAText.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -278,7 +279,7 @@ EXTERN_C const IID IID_ITfMSAAControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b5f8fb3b-393f-4f7c-84cb-504924c2705a")
++    MIDL_INTERFACE("b5f8fb3b-393f-4f7c-84cb-504924c2705a") _Windows_SupportedOS_Windows2000_ 
+     ITfMSAAControl : public IUnknown
+     {
+     public:
+@@ -987,7 +988,7 @@ EXTERN_C const IID IID_IAccDictionary;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1DC4CB5F-D737-474d-ADE9-5CCFC9BC1CC9")
++    MIDL_INTERFACE("1DC4CB5F-D737-474d-ADE9-5CCFC9BC1CC9") _Windows_SupportedOS_WindowsXP_ 
+     IAccDictionary : public IUnknown
+     {
+     public:
+@@ -997,7 +998,7 @@ EXTERN_C const IID IID_IAccDictionary;
+             /* [annotation][in] */ 
+             _In_  LCID lcid,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pResult,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pResult,
+             /* [annotation][out] */ 
+             _Out_  LCID *plcid) = 0;
+         
+@@ -1011,7 +1012,7 @@ EXTERN_C const IID IID_IAccDictionary;
+             /* [annotation][in] */ 
+             _In_  REFGUID Term,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pResult) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pResult) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE LookupMnemonicTerm( 
+             /* [annotation][in] */ 
+@@ -1027,7 +1028,7 @@ EXTERN_C const IID IID_IAccDictionary;
+             /* [annotation][in] */ 
+             _In_  VARIANT varValue,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrResult,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrResult,
+             /* [annotation][out] */ 
+             _Out_  LCID *plcid) = 0;
+         
+@@ -1166,7 +1167,7 @@ EXTERN_C const IID IID_IVersionInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("401518EC-DB00-4611-9B29-2A0E4B9AFA85")
++    MIDL_INTERFACE("401518EC-DB00-4611-9B29-2A0E4B9AFA85") _Windows_SupportedOS_WindowsXP_ 
+     IVersionInfo : public IUnknown
+     {
+     public:
+@@ -1194,13 +1195,13 @@ EXTERN_C const IID IID_IVersionInfo;
+             /* [annotation][in] */ 
+             _In_  ULONG ulSub,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pImplStr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pImplStr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInstanceDescription( 
+             /* [annotation][in] */ 
+             _In_  ULONG ulSub,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pImplStr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pImplStr) = 0;
+         
+     };
+     
+@@ -1329,7 +1330,7 @@ EXTERN_C const IID IID_ICoCreateLocally;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("03DE00AA-F272-41e3-99CB-03C5E8114EA0")
++    MIDL_INTERFACE("03DE00AA-F272-41e3-99CB-03C5E8114EA0") _Windows_SupportedOS_WindowsXP_ 
+     ICoCreateLocally : public IUnknown
+     {
+     public:
+@@ -1440,7 +1441,7 @@ EXTERN_C const IID IID_ICoCreatedLocally;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0A53EB6C-1908-4742-8CFF-2CEE2E93F94C")
++    MIDL_INTERFACE("0A53EB6C-1908-4742-8CFF-2CEE2E93F94C") _Windows_SupportedOS_WindowsXP_ 
+     ICoCreatedLocally : public IUnknown
+     {
+     public:
+@@ -1728,7 +1729,7 @@ EXTERN_C const IID IID_IAccServerDocMgr;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AD7C73CF-6DD5-4855-ABC2-B04BAD5B9153")
++    MIDL_INTERFACE("AD7C73CF-6DD5-4855-ABC2-B04BAD5B9153") _Windows_SupportedOS_WindowsXP_ 
+     IAccServerDocMgr : public IUnknown
+     {
+     public:
+@@ -1845,7 +1846,7 @@ EXTERN_C const IID IID_IAccClientDocMgr;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4C896039-7B6D-49e6-A8C1-45116A98292B")
++    MIDL_INTERFACE("4C896039-7B6D-49e6-A8C1-45116A98292B") _Windows_SupportedOS_WindowsXP_ 
+     IAccClientDocMgr : public IUnknown
+     {
+     public:

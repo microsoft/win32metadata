@@ -1,0 +1,1004 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h
+index 55ae161366..caaa2e6d9d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationCore.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -492,7 +493,7 @@ extern "C"{
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+ // -------------------------------------------------------------
+ 
+-enum NavigateDirection
++enum   NavigateDirection
+     {
+         NavigateDirection_Parent	= 0,
+         NavigateDirection_NextSibling	= 1,
+@@ -501,7 +502,7 @@ enum NavigateDirection
+         NavigateDirection_LastChild	= 4
+     } ;
+ 
+-enum ProviderOptions
++enum   ProviderOptions
+     {
+         ProviderOptions_ClientSideProvider	= 0x1,
+         ProviderOptions_ServerSideProvider	= 0x2,
+@@ -515,7 +516,7 @@ enum ProviderOptions
+     } ;
+ DEFINE_ENUM_FLAG_OPERATORS(ProviderOptions)
+ 
+-enum StructureChangeType
++enum   StructureChangeType
+     {
+         StructureChangeType_ChildAdded	= 0,
+         StructureChangeType_ChildRemoved	= ( StructureChangeType_ChildAdded + 1 ) ,
+@@ -525,7 +526,7 @@ enum StructureChangeType
+         StructureChangeType_ChildrenReordered	= ( StructureChangeType_ChildrenBulkRemoved + 1 ) 
+     } ;
+ 
+-enum TextEditChangeType
++enum  TextEditChangeType
+     {
+         TextEditChangeType_None	= 0,
+         TextEditChangeType_AutoCorrect	= 1,
+@@ -534,14 +535,14 @@ enum TextEditChangeType
+         TextEditChangeType_AutoComplete	= 4
+     } ;
+ 
+-enum OrientationType
++enum   OrientationType
+     {
+         OrientationType_None	= 0,
+         OrientationType_Horizontal	= 1,
+         OrientationType_Vertical	= 2
+     } ;
+ 
+-enum DockPosition
++enum   DockPosition
+     {
+         DockPosition_Top	= 0,
+         DockPosition_Left	= 1,
+@@ -551,7 +552,7 @@ enum DockPosition
+         DockPosition_None	= 5
+     } ;
+ 
+-enum ExpandCollapseState
++enum   ExpandCollapseState
+     {
+         ExpandCollapseState_Collapsed	= 0,
+         ExpandCollapseState_Expanded	= 1,
+@@ -559,7 +560,7 @@ enum ExpandCollapseState
+         ExpandCollapseState_LeafNode	= 3
+     } ;
+ 
+-enum ScrollAmount
++enum   ScrollAmount
+     {
+         ScrollAmount_LargeDecrement	= 0,
+         ScrollAmount_SmallDecrement	= 1,
+@@ -568,21 +569,21 @@ enum ScrollAmount
+         ScrollAmount_SmallIncrement	= 4
+     } ;
+ 
+-enum RowOrColumnMajor
++enum   RowOrColumnMajor
+     {
+         RowOrColumnMajor_RowMajor	= 0,
+         RowOrColumnMajor_ColumnMajor	= 1,
+         RowOrColumnMajor_Indeterminate	= 2
+     } ;
+ 
+-enum ToggleState
++enum   ToggleState
+     {
+         ToggleState_Off	= 0,
+         ToggleState_On	= 1,
+         ToggleState_Indeterminate	= 2
+     } ;
+ 
+-enum WindowVisualState
++enum   WindowVisualState
+     {
+         WindowVisualState_Normal	= 0,
+         WindowVisualState_Maximized	= 1,
+@@ -600,7 +601,7 @@ enum SynchronizedInputType
+     } ;
+ DEFINE_ENUM_FLAG_OPERATORS(SynchronizedInputType)
+ 
+-enum WindowInteractionState
++enum   WindowInteractionState
+     {
+         WindowInteractionState_Running	= 0,
+         WindowInteractionState_Closing	= 1,
+@@ -609,7 +610,7 @@ enum WindowInteractionState
+         WindowInteractionState_NotResponding	= 4
+     } ;
+ 
+-enum SayAsInterpretAs
++enum   SayAsInterpretAs
+     {
+         SayAsInterpretAs_None	= 0,
+         SayAsInterpretAs_Spell	= 1,
+@@ -640,7 +641,7 @@ enum SayAsInterpretAs
+         SayAsInterpretAs_Time_HoursMinutes24	= 26
+     } ;
+ 
+-enum TextUnit
++enum   TextUnit
+     {
+         TextUnit_Character	= 0,
+         TextUnit_Format	= 1,
+@@ -651,47 +652,47 @@ enum TextUnit
+         TextUnit_Document	= 6
+     } ;
+ 
+-enum TextPatternRangeEndpoint
++enum   TextPatternRangeEndpoint
+     {
+         TextPatternRangeEndpoint_Start	= 0,
+         TextPatternRangeEndpoint_End	= 1
+     } ;
+ 
+-enum SupportedTextSelection
++enum   SupportedTextSelection
+     {
+         SupportedTextSelection_None	= 0,
+         SupportedTextSelection_Single	= 1,
+         SupportedTextSelection_Multiple	= 2
+     } ;
+ 
+-enum LiveSetting
++enum   LiveSetting
+     {
+         Off	= 0,
+         Polite	= 1,
+         Assertive	= 2
+     } ;
+ 
+-enum ActiveEnd
++enum   ActiveEnd
+     {
+         ActiveEnd_None	= 0,
+         ActiveEnd_Start	= 1,
+         ActiveEnd_End	= 2
+     } ;
+ 
+-enum CaretPosition
++enum   CaretPosition
+     {
+         CaretPosition_Unknown	= 0,
+         CaretPosition_EndOfLine	= 1,
+         CaretPosition_BeginningOfLine	= 2
+     } ;
+ 
+-enum CaretBidiMode
++enum   CaretBidiMode
+     {
+         CaretBidiMode_LTR	= 0,
+         CaretBidiMode_RTL	= 1
+     } ;
+ 
+-enum ZoomUnit
++enum   ZoomUnit
+     {
+         ZoomUnit_NoAmount	= 0,
+         ZoomUnit_LargeDecrement	= 1,
+@@ -700,7 +701,7 @@ enum ZoomUnit
+         ZoomUnit_SmallIncrement	= 4
+     } ;
+ 
+-enum AnimationStyle
++enum   AnimationStyle
+     {
+         AnimationStyle_None	= 0,
+         AnimationStyle_LasVegasLights	= 1,
+@@ -712,7 +713,7 @@ enum AnimationStyle
+         AnimationStyle_Other	= -1
+     } ;
+ 
+-enum BulletStyle
++enum   BulletStyle
+     {
+         BulletStyle_None	= 0,
+         BulletStyle_HollowRoundBullet	= 1,
+@@ -723,7 +724,7 @@ enum BulletStyle
+         BulletStyle_Other	= -1
+     } ;
+ 
+-enum CapStyle
++enum   CapStyle
+     {
+         CapStyle_None	= 0,
+         CapStyle_SmallCap	= 1,
+@@ -735,7 +736,7 @@ enum CapStyle
+         CapStyle_Other	= -1
+     } ;
+ 
+-enum FillType
++enum   FillType
+     {
+         FillType_None	= 0,
+         FillType_Color	= 1,
+@@ -744,7 +745,7 @@ enum FillType
+         FillType_Pattern	= 4
+     } ;
+ 
+-enum FlowDirections
++enum   FlowDirections
+     {
+         FlowDirections_Default	= 0,
+         FlowDirections_RightToLeft	= 0x1,
+@@ -760,7 +761,7 @@ enum HorizontalTextAlignment
+         HorizontalTextAlignment_Justified	= 3
+     } ;
+ 
+-enum OutlineStyles
++enum   OutlineStyles
+     {
+         OutlineStyles_None	= 0,
+         OutlineStyles_Outline	= 1,
+@@ -769,7 +770,7 @@ enum OutlineStyles
+         OutlineStyles_Embossed	= 8
+     } ;
+ 
+-enum TextDecorationLineStyle
++enum   TextDecorationLineStyle
+     {
+         TextDecorationLineStyle_None	= 0,
+         TextDecorationLineStyle_Single	= 1,
+@@ -792,7 +793,7 @@ enum TextDecorationLineStyle
+         TextDecorationLineStyle_Other	= -1
+     } ;
+ 
+-enum VisualEffects
++enum   VisualEffects
+     {
+         VisualEffects_None	= 0,
+         VisualEffects_Shadow	= ( 1 << 0 ) ,
+@@ -802,7 +803,7 @@ enum VisualEffects
+         VisualEffects_Bevel	= ( 1 << 4 ) 
+     } ;
+ 
+-enum NotificationProcessing
++enum   NotificationProcessing
+     {
+         NotificationProcessing_ImportantAll	= 0,
+         NotificationProcessing_ImportantMostRecent	= 1,
+@@ -812,7 +813,7 @@ enum NotificationProcessing
+         NotificationProcessing_ImportantCurrentThenMostRecent	= 5
+     } ;
+ 
+-enum NotificationKind
++enum   NotificationKind
+     {
+         NotificationKind_ItemAdded	= 0,
+         NotificationKind_ItemRemoved	= 1,
+@@ -836,14 +837,14 @@ typedef int METADATAID;
+ 
+ typedef int HEADINGLEVELID;
+ 
+-struct UiaRect
++struct   UiaRect
+     {
+     double left;
+     double top;
+     double width;
+     double height;
+     } ;
+-struct UiaPoint
++struct   UiaPoint
+     {
+     double x;
+     double y;
+@@ -968,7 +969,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d6dd68d1-86fd-4332-8666-9abedea2d24c")
++    MIDL_INTERFACE("d6dd68d1-86fd-4332-8666-9abedea2d24c") _Windows_SupportedOS_WindowsXP_ 
+     IRawElementProviderSimple : public IUnknown
+     {
+     public:
+@@ -978,13 +979,13 @@ EXTERN_C const IID IID_IRawElementProviderSimple;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPatternProvider( 
+             /* [annotation][in] */ 
+-            _In_  PATTERNID patternId,
++            _Win32_AssociatedEnum_(UIA_PATTERN_ID) _In_  PATTERNID patternId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IUnknown **pRetVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyValue( 
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *pRetVal) = 0;
+         
+@@ -1102,7 +1103,7 @@ EXTERN_C const IID IID_IAccessibleEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f8b80ada-2c44-48d0-89be-5ff23c9cd875")
++    MIDL_INTERFACE("f8b80ada-2c44-48d0-89be-5ff23c9cd875") _Windows_SupportedOS_Windows7_ 
+     IAccessibleEx : public IUnknown
+     {
+     public:
+@@ -1240,7 +1241,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A0A839A9-8DA1-4A82-806A-8E0D44E79F56")
++    MIDL_INTERFACE("A0A839A9-8DA1-4A82-806A-8E0D44E79F56") _Windows_SupportedOS_Windows81_ 
+     IRawElementProviderSimple2 : public IRawElementProviderSimple
+     {
+     public:
+@@ -1364,7 +1365,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fcf5d820-d7ec-4613-bdf6-42a84ce7daaf")
++    MIDL_INTERFACE("fcf5d820-d7ec-4613-bdf6-42a84ce7daaf") _Windows_SupportedOS_15063_ 
+     IRawElementProviderSimple3 : public IRawElementProviderSimple2
+     {
+     public:
+@@ -1372,7 +1373,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple3;
+             /* [annotation][in] */ 
+             _In_  int targetId,
+             /* [annotation][in] */ 
+-            _In_  METADATAID metadataId,
++            _Win32_AssociatedEnum_(UIA_METADATA_ID) _In_  METADATAID metadataId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *returnVal) = 0;
+         
+@@ -1508,7 +1509,7 @@ EXTERN_C const IID IID_IRawElementProviderFragmentRoot;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("620ce2a5-ab8f-40a9-86cb-de3c75599b58")
++    MIDL_INTERFACE("620ce2a5-ab8f-40a9-86cb-de3c75599b58") _Windows_SupportedOS_WindowsXP_ 
+     IRawElementProviderFragmentRoot : public IUnknown
+     {
+     public:
+@@ -1616,7 +1617,7 @@ EXTERN_C const IID IID_IRawElementProviderFragment;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f7063da8-8359-439c-9297-bbc5299a7d87")
++    MIDL_INTERFACE("f7063da8-8359-439c-9297-bbc5299a7d87") _Windows_SupportedOS_WindowsXP_ 
+     IRawElementProviderFragment : public IUnknown
+     {
+     public:
+@@ -1768,19 +1769,19 @@ EXTERN_C const IID IID_IRawElementProviderAdviseEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a407b27b-0f6d-4427-9292-473c7bf93258")
++    MIDL_INTERFACE("a407b27b-0f6d-4427-9292-473c7bf93258") _Windows_SupportedOS_WindowsXP_ 
+     IRawElementProviderAdviseEvents : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AdviseEventAdded( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+             _In_  SAFEARRAY * propertyIDs) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AdviseEventRemoved( 
+             /* [annotation][in] */ 
+-            _In_  EVENTID eventId,
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID eventId,
+             /* [annotation][in] */ 
+             _In_  SAFEARRAY * propertyIDs) = 0;
+         
+@@ -1876,7 +1877,7 @@ EXTERN_C const IID IID_IRawElementProviderHwndOverride;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1d5df27c-8947-4425-b8d9-79787bb460b8")
++    MIDL_INTERFACE("1d5df27c-8947-4425-b8d9-79787bb460b8") _Windows_SupportedOS_WindowsXP_ 
+     IRawElementProviderHwndOverride : public IUnknown
+     {
+     public:
+@@ -1967,7 +1968,7 @@ EXTERN_C const IID IID_IProxyProviderWinEventSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4fd82b78-a43e-46ac-9803-0a6969c7c183")
++    MIDL_INTERFACE("4fd82b78-a43e-46ac-9803-0a6969c7c183") _Windows_SupportedOS_Windows7_ 
+     IProxyProviderWinEventSink : public IUnknown
+     {
+     public:
+@@ -1975,7 +1976,7 @@ EXTERN_C const IID IID_IProxyProviderWinEventSink;
+             /* [annotation][in] */ 
+             _In_  IRawElementProviderSimple *pProvider,
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID id,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID id,
+             /* [annotation][in] */ 
+             _In_  VARIANT newValue) = 0;
+         
+@@ -1983,7 +1984,7 @@ EXTERN_C const IID IID_IProxyProviderWinEventSink;
+             /* [annotation][in] */ 
+             _In_  IRawElementProviderSimple *pProvider,
+             /* [annotation][in] */ 
+-            _In_  EVENTID id) = 0;
++            _Win32_AssociatedEnum_(UIA_EVENT_ID) _In_  EVENTID id) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AddStructureChangedEvent( 
+             /* [annotation][in] */ 
+@@ -2100,7 +2101,7 @@ EXTERN_C const IID IID_IProxyProviderWinEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("89592ad4-f4e0-43d5-a3b6-bad7e111b435")
++    MIDL_INTERFACE("89592ad4-f4e0-43d5-a3b6-bad7e111b435") _Windows_SupportedOS_Windows7_ 
+     IProxyProviderWinEventHandler : public IUnknown
+     {
+     public:
+@@ -2203,7 +2204,7 @@ EXTERN_C const IID IID_IRawElementProviderWindowlessSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0a2a93cc-bfad-42ac-9b2e-0991fb0d3ea0")
++    MIDL_INTERFACE("0a2a93cc-bfad-42ac-9b2e-0991fb0d3ea0") _Windows_SupportedOS_Windows8_ 
+     IRawElementProviderWindowlessSite : public IUnknown
+     {
+     public:
+@@ -2307,7 +2308,7 @@ EXTERN_C const IID IID_IAccessibleHostingElementProviders;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("33AC331B-943E-4020-B295-DB37784974A3")
++    MIDL_INTERFACE("33AC331B-943E-4020-B295-DB37784974A3") _Windows_SupportedOS_Windows8_ 
+     IAccessibleHostingElementProviders : public IUnknown
+     {
+     public:
+@@ -2411,7 +2412,7 @@ EXTERN_C const IID IID_IRawElementProviderHostingAccessibles;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("24BE0B07-D37D-487A-98CF-A13ED465E9B3")
++    MIDL_INTERFACE("24BE0B07-D37D-487A-98CF-A13ED465E9B3") _Windows_SupportedOS_Windows8_ 
+     IRawElementProviderHostingAccessibles : public IUnknown
+     {
+     public:
+@@ -2498,7 +2499,7 @@ EXTERN_C const IID IID_IDockProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("159bc72c-4ad3-485e-9637-d7052edf0146")
++    MIDL_INTERFACE("159bc72c-4ad3-485e-9637-d7052edf0146") _Windows_SupportedOS_WindowsXP_ 
+     IDockProvider : public IUnknown
+     {
+     public:
+@@ -2598,7 +2599,7 @@ EXTERN_C const IID IID_IExpandCollapseProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d847d3a5-cab0-4a98-8c32-ecb45c59ad24")
++    MIDL_INTERFACE("d847d3a5-cab0-4a98-8c32-ecb45c59ad24") _Windows_SupportedOS_WindowsXP_ 
+     IExpandCollapseProvider : public IUnknown
+     {
+     public:
+@@ -2703,7 +2704,7 @@ EXTERN_C const IID IID_IGridProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b17d6187-0907-464b-a168-0ef17a1572b1")
++    MIDL_INTERFACE("b17d6187-0907-464b-a168-0ef17a1572b1") _Windows_SupportedOS_WindowsXP_ 
+     IGridProvider : public IUnknown
+     {
+     public:
+@@ -2824,7 +2825,7 @@ EXTERN_C const IID IID_IGridItemProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d02541f1-fb81-4d64-ae32-f520f8a6dbd1")
++    MIDL_INTERFACE("d02541f1-fb81-4d64-ae32-f520f8a6dbd1") _Windows_SupportedOS_WindowsXP_ 
+     IGridItemProvider : public IUnknown
+     {
+     public:
+@@ -2963,7 +2964,7 @@ EXTERN_C const IID IID_IInvokeProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("54fcb24b-e18e-47a2-b4d3-eccbe77599a2")
++    MIDL_INTERFACE("54fcb24b-e18e-47a2-b4d3-eccbe77599a2") _Windows_SupportedOS_WindowsXP_ 
+     IInvokeProvider : public IUnknown
+     {
+     public:
+@@ -3046,7 +3047,7 @@ EXTERN_C const IID IID_IMultipleViewProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6278cab1-b556-4a1a-b4e0-418acc523201")
++    MIDL_INTERFACE("6278cab1-b556-4a1a-b4e0-418acc523201") _Windows_SupportedOS_WindowsXP_ 
+     IMultipleViewProvider : public IUnknown
+     {
+     public:
+@@ -3054,7 +3055,7 @@ EXTERN_C const IID IID_IMultipleViewProvider;
+             /* [annotation][in] */ 
+             _In_  int viewId,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetCurrentView( 
+             /* [annotation][in] */ 
+@@ -3176,7 +3177,7 @@ EXTERN_C const IID IID_IRangeValueProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("36dc7aef-33e6-4691-afe1-2be7274b3d33")
++    MIDL_INTERFACE("36dc7aef-33e6-4691-afe1-2be7274b3d33") _Windows_SupportedOS_WindowsXP_ 
+     IRangeValueProvider : public IUnknown
+     {
+     public:
+@@ -3341,7 +3342,7 @@ EXTERN_C const IID IID_IScrollItemProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2360c714-4bf1-4b26-ba65-9b21316127eb")
++    MIDL_INTERFACE("2360c714-4bf1-4b26-ba65-9b21316127eb") _Windows_SupportedOS_WindowsXP_ 
+     IScrollItemProvider : public IUnknown
+     {
+     public:
+@@ -3424,7 +3425,7 @@ EXTERN_C const IID IID_ISelectionProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fb8b03af-3bdf-48d4-bd36-1a65793be168")
++    MIDL_INTERFACE("fb8b03af-3bdf-48d4-bd36-1a65793be168") _Windows_SupportedOS_WindowsXP_ 
+     ISelectionProvider : public IUnknown
+     {
+     public:
+@@ -3537,7 +3538,7 @@ EXTERN_C const IID IID_ISelectionProvider2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("14f68475-ee1c-44f6-a869-d239381f0fe7")
++    MIDL_INTERFACE("14f68475-ee1c-44f6-a869-d239381f0fe7") _Windows_SupportedOS_16299_ 
+     ISelectionProvider2 : public ISelectionProvider
+     {
+     public:
+@@ -3691,7 +3692,7 @@ EXTERN_C const IID IID_IScrollProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b38b8077-1fc3-42a5-8cae-d40c2215055a")
++    MIDL_INTERFACE("b38b8077-1fc3-42a5-8cae-d40c2215055a") _Windows_SupportedOS_WindowsXP_ 
+     IScrollProvider : public IUnknown
+     {
+     public:
+@@ -3877,7 +3878,7 @@ EXTERN_C const IID IID_ISelectionItemProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2acad808-b2d4-452d-a407-91ff1ad167b2")
++    MIDL_INTERFACE("2acad808-b2d4-452d-a407-91ff1ad167b2") _Windows_SupportedOS_WindowsXP_ 
+     ISelectionItemProvider : public IUnknown
+     {
+     public:
+@@ -4004,7 +4005,7 @@ EXTERN_C const IID IID_ISynchronizedInputProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("29db1a06-02ce-4cf7-9b42-565d4fab20ee")
++    MIDL_INTERFACE("29db1a06-02ce-4cf7-9b42-565d4fab20ee") _Windows_SupportedOS_Windows7_ 
+     ISynchronizedInputProvider : public IUnknown
+     {
+     public:
+@@ -4100,7 +4101,7 @@ EXTERN_C const IID IID_ITableProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9c860395-97b3-490a-b52a-858cc22af166")
++    MIDL_INTERFACE("9c860395-97b3-490a-b52a-858cc22af166") _Windows_SupportedOS_WindowsXP_ 
+     ITableProvider : public IUnknown
+     {
+     public:
+@@ -4213,7 +4214,7 @@ EXTERN_C const IID IID_ITableItemProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b9734fa6-771f-4d78-9c90-2517999349cd")
++    MIDL_INTERFACE("b9734fa6-771f-4d78-9c90-2517999349cd") _Windows_SupportedOS_WindowsXP_ 
+     ITableItemProvider : public IUnknown
+     {
+     public:
+@@ -4313,7 +4314,7 @@ EXTERN_C const IID IID_IToggleProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56d00bd0-c4f4-433c-a836-1a52a57e0892")
++    MIDL_INTERFACE("56d00bd0-c4f4-433c-a836-1a52a57e0892") _Windows_SupportedOS_WindowsXP_ 
+     IToggleProvider : public IUnknown
+     {
+     public:
+@@ -4409,7 +4410,7 @@ EXTERN_C const IID IID_ITransformProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6829ddc4-4f91-4ffa-b86f-bd3e2987cb4c")
++    MIDL_INTERFACE("6829ddc4-4f91-4ffa-b86f-bd3e2987cb4c") _Windows_SupportedOS_WindowsXP_ 
+     ITransformProvider : public IUnknown
+     {
+     public:
+@@ -4569,7 +4570,7 @@ EXTERN_C const IID IID_IValueProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c7935180-6fb3-4201-b174-7df73adbf64a")
++    MIDL_INTERFACE("c7935180-6fb3-4201-b174-7df73adbf64a") _Windows_SupportedOS_WindowsXP_ 
+     IValueProvider : public IUnknown
+     {
+     public:
+@@ -4579,7 +4580,7 @@ EXTERN_C const IID IID_IValueProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsReadOnly( 
+             /* [annotation][retval][out] */ 
+@@ -4682,7 +4683,7 @@ EXTERN_C const IID IID_IWindowProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("987df77b-db06-4d77-8f8a-86a9c3bb90b9")
++    MIDL_INTERFACE("987df77b-db06-4d77-8f8a-86a9c3bb90b9") _Windows_SupportedOS_WindowsXP_ 
+     IWindowProvider : public IUnknown
+     {
+     public:
+@@ -4873,7 +4874,7 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e44c3566-915d-4070-99c6-047bff5a08f5")
++    MIDL_INTERFACE("e44c3566-915d-4070-99c6-047bff5a08f5") _Windows_SupportedOS_Windows7_ 
+     ILegacyIAccessibleProvider : public IUnknown
+     {
+     public:
+@@ -4895,15 +4896,15 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDescription) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Role( 
+             /* [annotation][retval][out] */ 
+@@ -4915,11 +4916,11 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Help( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszHelp) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszHelp) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_KeyboardShortcut( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
+             /* [annotation][retval][out] */ 
+@@ -4927,7 +4928,7 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DefaultAction( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDefaultAction) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDefaultAction) = 0;
+         
+     };
+     
+@@ -5121,7 +5122,7 @@ EXTERN_C const IID IID_IItemContainerProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e747770b-39ce-4382-ab30-d8fb3f336f24")
++    MIDL_INTERFACE("e747770b-39ce-4382-ab30-d8fb3f336f24") _Windows_SupportedOS_Windows7_ 
+     IItemContainerProvider : public IUnknown
+     {
+     public:
+@@ -5129,7 +5130,7 @@ EXTERN_C const IID IID_IItemContainerProvider;
+             /* [annotation][in] */ 
+             _In_  IRawElementProviderSimple *pStartAfter,
+             /* [annotation][in] */ 
+-            _In_  PROPERTYID propertyId,
++            _Win32_AssociatedEnum_(UIA_PROPERTY_ID) _In_  PROPERTYID propertyId,
+             /* [annotation][in] */ 
+             _In_  VARIANT value,
+             /* [annotation][retval][out] */ 
+@@ -5220,7 +5221,7 @@ EXTERN_C const IID IID_IVirtualizedItemProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cb98b665-2d35-4fac-ad35-f3c60d0c0b8b")
++    MIDL_INTERFACE("cb98b665-2d35-4fac-ad35-f3c60d0c0b8b") _Windows_SupportedOS_Windows7_ 
+     IVirtualizedItemProvider : public IUnknown
+     {
+     public:
+@@ -5303,7 +5304,7 @@ EXTERN_C const IID IID_IObjectModelProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3ad86ebd-f5ef-483d-bb18-b1042a475d64")
++    MIDL_INTERFACE("3ad86ebd-f5ef-483d-bb18-b1042a475d64") _Windows_SupportedOS_Windows8_ 
+     IObjectModelProvider : public IUnknown
+     {
+     public:
+@@ -5390,25 +5391,25 @@ EXTERN_C const IID IID_IAnnotationProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f95c7e80-bd63-4601-9782-445ebff011fc")
++    MIDL_INTERFACE("f95c7e80-bd63-4601-9782-445ebff011fc") _Windows_SupportedOS_Windows8_ 
+     IAnnotationProvider : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AnnotationTypeId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  int *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_ANNOTATIONTYPE) _Out_retval_  int *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AnnotationTypeName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Author( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DateTime( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
+             /* [annotation][retval][out] */ 
+@@ -5529,17 +5530,17 @@ EXTERN_C const IID IID_IStylesProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("19b6b649-f5d7-4a6d-bdcb-129252be588a")
++    MIDL_INTERFACE("19b6b649-f5d7-4a6d-bdcb-129252be588a") _Windows_SupportedOS_Windows8_ 
+     IStylesProvider : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StyleId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  int *retVal) = 0;
++            _Win32_AssociatedEnum_(UIA_STYLE_ID) _Out_retval_  int *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StyleName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FillColor( 
+             /* [annotation][retval][out] */ 
+@@ -5547,11 +5548,11 @@ EXTERN_C const IID IID_IStylesProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FillPatternStyle( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Shape( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FillPatternColor( 
+             /* [annotation][retval][out] */ 
+@@ -5559,7 +5560,7 @@ EXTERN_C const IID IID_IStylesProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ExtendedProperties( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *retVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *retVal) = 0;
+         
+     };
+     
+@@ -5694,7 +5695,7 @@ EXTERN_C const IID IID_ISpreadsheetProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6f6b5d35-5525-4f80-b758-85473832ffc7")
++    MIDL_INTERFACE("6f6b5d35-5525-4f80-b758-85473832ffc7") _Windows_SupportedOS_Windows8_ 
+     ISpreadsheetProvider : public IUnknown
+     {
+     public:
+@@ -5785,13 +5786,13 @@ EXTERN_C const IID IID_ISpreadsheetItemProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eaed4660-7b3d-4879-a2e6-365ce603f3d0")
++    MIDL_INTERFACE("eaed4660-7b3d-4879-a2e6-365ce603f3d0") _Windows_SupportedOS_Windows8_ 
+     ISpreadsheetItemProvider : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Formula( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAnnotationObjects( 
+             /* [annotation][retval][out] */ 
+@@ -5898,7 +5899,7 @@ EXTERN_C const IID IID_ITransformProvider2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4758742f-7ac2-460c-bc48-09fc09308a93")
++    MIDL_INTERFACE("4758742f-7ac2-460c-bc48-09fc09308a93") _Windows_SupportedOS_Windows8_ 
+     ITransformProvider2 : public ITransformProvider
+     {
+     public:
+@@ -6109,7 +6110,7 @@ EXTERN_C const IID IID_IDragProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6aa7bbbb-7ff9-497d-904f-d20b897929d8")
++    MIDL_INTERFACE("6aa7bbbb-7ff9-497d-904f-d20b897929d8") _Windows_SupportedOS_Windows8_ 
+     IDragProvider : public IUnknown
+     {
+     public:
+@@ -6119,7 +6120,7 @@ EXTERN_C const IID IID_IDragProvider;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropEffect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropEffects( 
+             /* [annotation][retval][out] */ 
+@@ -6235,13 +6236,13 @@ EXTERN_C const IID IID_IDropTargetProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bae82bfd-358a-481c-85a0-d8b4d90a5d61")
++    MIDL_INTERFACE("bae82bfd-358a-481c-85a0-d8b4d90a5d61") _Windows_SupportedOS_Windows8_ 
+     IDropTargetProvider : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropTargetEffect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropTargetEffects( 
+             /* [annotation][retval][out] */ 
+@@ -6335,7 +6336,7 @@ EXTERN_C const IID IID_ITextRangeProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5347ad7b-c355-46f8-aff5-909033582f63")
++    MIDL_INTERFACE("5347ad7b-c355-46f8-aff5-909033582f63") _Windows_SupportedOS_WindowsXP_ 
+     ITextRangeProvider : public IUnknown
+     {
+     public:
+@@ -6365,7 +6366,7 @@ EXTERN_C const IID IID_ITextRangeProvider;
+         
+         virtual HRESULT STDMETHODCALLTYPE FindAttribute( 
+             /* [annotation][in] */ 
+-            _In_  TEXTATTRIBUTEID attributeId,
++            _Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID) _In_  TEXTATTRIBUTEID attributeId,
+             /* [annotation][in] */ 
+             _In_  VARIANT val,
+             /* [annotation][in] */ 
+@@ -6385,7 +6386,7 @@ EXTERN_C const IID IID_ITextRangeProvider;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAttributeValue( 
+             /* [annotation][in] */ 
+-            _In_  TEXTATTRIBUTEID attributeId,
++            _Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID) _In_  TEXTATTRIBUTEID attributeId,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  VARIANT *pRetVal) = 0;
+         
+@@ -6401,7 +6402,7 @@ EXTERN_C const IID IID_ITextRangeProvider;
+             /* [annotation][in] */ 
+             _In_  int maxLength,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pRetVal) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Move( 
+             /* [annotation][in] */ 
+@@ -6707,7 +6708,7 @@ EXTERN_C const IID IID_ITextProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3589c92c-63f3-4367-99bb-ada653b77cf2")
++    MIDL_INTERFACE("3589c92c-63f3-4367-99bb-ada653b77cf2") _Windows_SupportedOS_WindowsXP_ 
+     ITextProvider : public IUnknown
+     {
+     public:
+@@ -6867,7 +6868,7 @@ EXTERN_C const IID IID_ITextProvider2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0dc5e6ed-3e16-4bf1-8f9a-a979878bc195")
++    MIDL_INTERFACE("0dc5e6ed-3e16-4bf1-8f9a-a979878bc195") _Windows_SupportedOS_Windows8_ 
+     ITextProvider2 : public ITextProvider
+     {
+     public:
+@@ -7034,7 +7035,7 @@ EXTERN_C const IID IID_ITextEditProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EA3605B4-3A05-400E-B5F9-4E91B40F6176")
++    MIDL_INTERFACE("EA3605B4-3A05-400E-B5F9-4E91B40F6176") _Windows_SupportedOS_Windows81_ 
+     ITextEditProvider : public ITextProvider
+     {
+     public:
+@@ -7193,7 +7194,7 @@ EXTERN_C const IID IID_ITextRangeProvider2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9BBCE42C-1921-4F18-89CA-DBA1910A0386")
++    MIDL_INTERFACE("9BBCE42C-1921-4F18-89CA-DBA1910A0386") _Windows_SupportedOS_Windows81_ 
+     ITextRangeProvider2 : public ITextRangeProvider
+     {
+     public:
+@@ -7471,7 +7472,7 @@ EXTERN_C const IID IID_ITextChildProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c2de2b9-c88f-4f88-a111-f1d336b7d1a9")
++    MIDL_INTERFACE("4c2de2b9-c88f-4f88-a111-f1d336b7d1a9") _Windows_SupportedOS_Windows8_ 
+     ITextChildProvider : public IUnknown
+     {
+     public:
+@@ -7662,7 +7663,7 @@ EXTERN_C const IID IID_IUIAutomationPatternInstance;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c03a7fe4-9431-409f-bed8-ae7c2299bc8d")
++    MIDL_INTERFACE("c03a7fe4-9431-409f-bed8-ae7c2299bc8d") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationPatternInstance : public IUnknown
+     {
+     public:
+@@ -7782,7 +7783,7 @@ EXTERN_C const IID IID_IUIAutomationPatternHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d97022f3-a947-465e-8b2a-ac4315fa54e8")
++    MIDL_INTERFACE("d97022f3-a947-465e-8b2a-ac4315fa54e8") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationPatternHandler : public IUnknown
+     {
+     public:
+@@ -7898,7 +7899,7 @@ EXTERN_C const IID IID_IUIAutomationRegistrar;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8609c4ec-4a1a-4d88-a357-5a66e060e1cf")
++    MIDL_INTERFACE("8609c4ec-4a1a-4d88-a357-5a66e060e1cf") _Windows_SupportedOS_Windows7_ 
+     IUIAutomationRegistrar : public IUnknown
+     {
+     public:
+@@ -8059,7 +8060,7 @@ EXTERN_C const IID IID_IUIAutomationClientInfo;
+             /* [retval][out] */ __RPC__out DWORD *processId) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProcessName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *processName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *processName) = 0;
+         
+     };
+     

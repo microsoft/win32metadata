@@ -1,0 +1,34 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CiError.h b/generation/WinSDK/RecompiledIdlHeaders/um/CiError.h
+index 9c6114e401..d3ff1f8dad 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CiError.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CiError.h
+@@ -1,5 +1,13 @@
+ #ifndef _CIERROR_H_
+ #define _CIERROR_H_
++#if (defined(WIN32METADATA) && !defined(NOT_AN_ERROR1)) || (((!defined(FACILITY_WINDOWS))))
++#define NOT_AN_ERROR1                    ((HRESULT)0x00081600L)
++#endif
++
++#if (defined(WIN32METADATA) && !defined(STATUS_SEVERITY_COFAIL)) || (((!defined(FACILITY_WINDOWS))))
++#define STATUS_SEVERITY_COFAIL           0x3
++#endif
++
+ #ifndef FACILITY_WINDOWS
+ //
+ //  Values are 32 bit values laid out as follows:
+@@ -40,7 +48,6 @@
+ //
+ #define STATUS_SEVERITY_SUCCESS          0x0
+ #define STATUS_SEVERITY_COERROR          0x2
+-#define STATUS_SEVERITY_COFAIL           0x3
+ 
+ 
+ //
+@@ -52,7 +59,6 @@
+ //        the above defines inside the FACILITY_WINDOWS guard instead
+ //        of leaving it empty.
+ //
+-#define NOT_AN_ERROR1                    ((HRESULT)0x00081600L)
+ 
+ #endif // FACILITY_WINDOWS
+ //

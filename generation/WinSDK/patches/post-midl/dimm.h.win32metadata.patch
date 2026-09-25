@@ -1,0 +1,147 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
+index 43ec1ec4c9..acab129233 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dimm.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -213,9 +214,9 @@ typedef /* [public][public][public][public][public][public][public] */ struct __
+     WCHAR lfFaceName[ 32 ];
+     } 	LOGFONTW;
+ 
+-typedef DWORD HIMC;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=ImmDestroyContext") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef DWORD HIMC;
+ 
+-typedef DWORD HIMCC;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef DWORD HIMCC;
+ 
+ typedef /* [public][public][public][public][public][public][public] */ struct __MIDL___MIDL_itf_dimm_0000_0000_0005
+     {
+@@ -610,7 +611,7 @@ EXTERN_C const IID IID_IEnumInputContext;
+             /* [annotation][in] */ 
+             _In_  ULONG ulCount,
+             /* [annotation][out] */ 
+-            _Out_  HIMC *rgInputContext,
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *rgInputContext,
+             /* [annotation][out] */ 
+             _Out_  ULONG *pcFetched) = 0;
+         
+@@ -981,7 +982,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+             /* [annotation][in] */ 
+             _In_  HIMC hIME,
+             /* [annotation][out] */ 
+-            _Out_  HIMC *phPrev) = 0;
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phPrev) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ConfigureIMEA( 
+             /* [annotation][in] */ 
+@@ -1005,7 +1006,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateContext( 
+             /* [annotation][out] */ 
+-            _Out_  HIMC *phIMC) = 0;
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phIMC) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DestroyContext( 
+             /* [annotation][in] */ 
+@@ -1051,7 +1052,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+             /* [annotation][out] */ 
+             _Out_  LRESULT *plResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE EscapeW( 
++        _WIN32META_ANNOTATION_("win32metadata:unicode") virtual HRESULT STDMETHODCALLTYPE EscapeW( 
+             /* [annotation][in] */ 
+             _In_  HKL hKL,
+             /* [annotation][in] */ 
+@@ -1157,7 +1158,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+             /* [annotation][in] */ 
+             _In_  HWND hWnd,
+             /* [annotation][out] */ 
+-            _Out_  HIMC *phIMC) = 0;
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phIMC) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConversionListA( 
+             /* [annotation][in] */ 
+@@ -1319,7 +1320,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+             /* [annotation][in] */ 
+             _In_  LPSTR szLayoutText,
+             /* [annotation][out] */ 
+-            _Out_  HKL *phKL) = 0;
++            _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) _Out_  HKL *phKL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE InstallIMEW( 
+             /* [annotation][in] */ 
+@@ -1327,7 +1328,7 @@ EXTERN_C const IID IID_IActiveIMMApp;
+             /* [annotation][in] */ 
+             _In_  LPWSTR szLayoutText,
+             /* [annotation][out] */ 
+-            _Out_  HKL *phKL) = 0;
++            _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) _Out_  HKL *phKL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsIME( 
+             /* [annotation][in] */ 
+@@ -2591,7 +2592,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][in] */ 
+             _In_  HIMC hIME,
+             /* [annotation][out] */ 
+-            _Out_  HIMC *phPrev) = 0;
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phPrev) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ConfigureIMEA( 
+             /* [annotation][in] */ 
+@@ -2615,7 +2616,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateContext( 
+             /* [annotation][out] */ 
+-            _Out_  HIMC *phIMC) = 0;
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phIMC) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE DestroyContext( 
+             /* [annotation][in] */ 
+@@ -2661,7 +2662,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][out] */ 
+             _Out_  LRESULT *plResult) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE EscapeW( 
++        _WIN32META_ANNOTATION_("win32metadata:unicode") virtual HRESULT STDMETHODCALLTYPE EscapeW( 
+             /* [annotation][in] */ 
+             _In_  HKL hKL,
+             /* [annotation][in] */ 
+@@ -2767,7 +2768,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][in] */ 
+             _In_  HWND hWnd,
+             /* [annotation][out] */ 
+-            _Out_  HIMC *phIMC) = 0;
++            _Win32_RAIIFree_(ImmDestroyContext, -1, 0) _Out_  HIMC *phIMC) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConversionListA( 
+             /* [annotation][in] */ 
+@@ -2929,7 +2930,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][in] */ 
+             _In_  LPSTR szLayoutText,
+             /* [annotation][out] */ 
+-            _Out_  HKL *phKL) = 0;
++            _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) _Out_  HKL *phKL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE InstallIMEW( 
+             /* [annotation][in] */ 
+@@ -2937,7 +2938,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][in] */ 
+             _In_  LPWSTR szLayoutText,
+             /* [annotation][out] */ 
+-            _Out_  HKL *phKL) = 0;
++            _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) _Out_  HKL *phKL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsIME( 
+             /* [annotation][in] */ 
+@@ -3165,7 +3166,7 @@ EXTERN_C const IID IID_IActiveIMMIME;
+             /* [annotation][out] */ 
+             _Out_  UINT *puVKey,
+             /* [annotation][out] */ 
+-            _Out_  HKL *phKL) = 0;
++            _Win32_RAIIFree_(UnloadKeyboardLayout, -1, 0) _Out_  HKL *phKL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetHotKey( 
+             /* [annotation][in] */ 

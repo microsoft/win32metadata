@@ -1,0 +1,206 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsplp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsplp.h
+index dd927b0dea..25b943b1dc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsplp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsplp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1990  Microsoft Corporation
+@@ -313,7 +314,7 @@ typedef struct _DOC_INFO_INTERNAL{
+     // splclient_info_1 and splclient_info2 it also contains additional
+     // information needed by the provider.
+     //
+-    typedef struct _SPLCLIENT_INFO_3_VISTA
++    typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SPLCLIENT_INFO_3_VISTA
+     {
+         UINT            cbSize;                 // Size in bytes of this structure
+         DWORD           dwFlags;                // Open printer additional flags to the provider
+@@ -338,7 +339,7 @@ typedef struct _DOC_INFO_INTERNAL{
+     // splclient_info_1, splclient_info2 and splclient_info3 and it also contains additional
+     // information needed by the Device Control Defender code.
+     //
+-    typedef struct _SPLCLIENT_INFO_INTERNAL
++    typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SPLCLIENT_INFO_INTERNAL
+     {
+         UINT            cbSize;                 // Size in bytes of this structure
+         DWORD           dwFlags;                // Open printer additional flags to the provider
+@@ -1341,7 +1342,7 @@ SplDeleteSpoolerPortEnd(
+     #define HKEYMONITOR HANDLE
+ #endif
+ 
+-typedef struct _MONITORREG {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MONITORREG {
+ 
+     DWORD cbSize;
+ 
+@@ -1449,7 +1450,7 @@ typedef struct _MONITORREG {
+ } MONITORREG, *PMONITORREG;
+ 
+ 
+-typedef struct _MONITORINIT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MONITORINIT {
+     DWORD cbSize;
+     HANDLE hSpooler;
+     HKEYMONITOR hckRegistryRoot;
+@@ -1475,7 +1476,7 @@ typedef struct _MONITOR
+     BOOL (WINAPI *pfnOpenPort)
+     (
+     _In_    LPWSTR  pName,
+-    _Out_   PHANDLE pHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_   PHANDLE pHandle
+     );
+ 
+     BOOL (WINAPI *pfnOpenPortEx)
+@@ -1508,7 +1509,7 @@ typedef struct _MONITOR
+     BOOL (WINAPI *pfnReadPort)
+     (
+     _In_    HANDLE hPort,
+-    _Out_writes_bytes_to_(cbBuffer, *pcbRead)
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Out_writes_bytes_to_(cbBuffer, *pcbRead)
+             LPBYTE pBuffer,
+     _In_    DWORD  cbBuffer,
+     _Out_   LPDWORD pcbRead
+@@ -1572,14 +1573,14 @@ typedef struct _MONITOR
+     (
+     _In_ HANDLE  hPort,
+     _In_ LPCOMMTIMEOUTS lpCTO,
+-    _In_ DWORD   reserved    // must be set to 0
++    _WIN32META_ANNOTATION_("_Reserved_") _In_ DWORD   reserved    // must be set to 0
+     );
+ 
+     BOOL (WINAPI *pfnXcvOpenPort)
+     (
+     _In_  LPCWSTR pszObject,
+     _In_  ACCESS_MASK GrantedAccess,
+-    _Out_ PHANDLE phXcv
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PHANDLE phXcv
+     );
+ 
+     DWORD (WINAPI *pfnXcvDataPort)
+@@ -1610,7 +1611,7 @@ typedef struct _MONITOREX
+ } MONITOREX, FAR *LPMONITOREX;
+ 
+ 
+-typedef struct _MONITOR2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MONITOR2
+ {
+     DWORD cbSize;
+     BOOL (WINAPI *pfnEnumPorts)
+@@ -1629,7 +1630,7 @@ typedef struct _MONITOR2
+     (
+     _In_    HANDLE  hMonitor,
+     _In_    LPWSTR  pName,
+-    _Out_   PHANDLE pHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_   PHANDLE pHandle
+     );
+ 
+     BOOL (WINAPI *pfnOpenPortEx)
+@@ -1638,7 +1639,7 @@ typedef struct _MONITOR2
+     _In_    HANDLE  hMonitorPort,
+     _In_    LPWSTR  pPortName,
+     _In_    LPWSTR  pPrinterName,
+-    _Out_   PHANDLE pHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_   PHANDLE pHandle,
+     _In_    struct _MONITOR2 FAR *pMonitor2
+     );
+ 
+@@ -1733,7 +1734,7 @@ typedef struct _MONITOR2
+     (
+     _In_ HANDLE  hPort,
+     _In_ LPCOMMTIMEOUTS lpCTO,
+-    _In_ DWORD   reserved    // must be set to 0
++    _WIN32META_ANNOTATION_("_Reserved_") _In_ DWORD   reserved    // must be set to 0
+     );
+ 
+     BOOL (WINAPI *pfnXcvOpenPort)
+@@ -1741,7 +1742,7 @@ typedef struct _MONITOR2
+     _In_  HANDLE  hMonitor,
+     _In_  LPCWSTR pszObject,
+     _In_  ACCESS_MASK GrantedAccess,
+-    _Out_ PHANDLE phXcv
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_ PHANDLE phXcv
+     );
+ 
+     DWORD (WINAPI *pfnXcvDataPort)
+@@ -1839,13 +1840,13 @@ typedef struct _MONITORUI
+ } MONITORUI, FAR *PMONITORUI;
+ 
+ 
+-HANDLE
++_Win32_ImportLibrary_("winspool.drv") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ CreatePrinterIC(
+     _In_        HANDLE      hPrinter,
+     _In_opt_    LPDEVMODEW  pDevMode
+     );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ PlayGdiScriptOnPrinterIC(
+     _In_                HANDLE  hPrinterIC,
+     _In_reads_bytes_(cIn)    LPBYTE  pIn,
+@@ -1855,7 +1856,7 @@ PlayGdiScriptOnPrinterIC(
+     _In_                DWORD   ul
+     );
+ 
+-BOOL
++_Win32_ImportLibrary_("winspool.drv") BOOL
+ DeletePrinterIC(
+     _In_    HANDLE  hPrinterIC
+     );
+@@ -1867,7 +1868,7 @@ DevQueryPrint(
+     _Out_   DWORD*      pResID
+     );
+ 
+-HANDLE
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ RevertToPrinterSelf(
+     VOID
+     );
+@@ -1921,7 +1922,7 @@ RouterFreePrinterNotifyInfo(
+         _In_ size_t NumBytes
+         );
+ 
+-    DWORD
++    _Win32_ImportLibrary_("winspool.drv") DWORD
+     RouterFreeBidiResponseContainer(
+         _In_ PBIDI_RESPONSE_CONTAINER pData
+         );
+@@ -1958,7 +1959,7 @@ _In_opt_        PPRINTER_NOTIFY_INFO_DATA pDataSrc,
+         NOTIFICATION_COMMAND_CONTEXT_RELEASE
+     } NOTIFICATION_CALLBACK_COMMANDS;
+ 
+-    typedef struct _NOTIFICATION_CONFIG_1
++    typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _NOTIFICATION_CONFIG_1
+     {
+         UINT                    cbSize;
+         DWORD                   fdwFlags;
+@@ -2007,8 +2008,8 @@ SpoolerFindFirstPrinterChangeNotification(
+     _In_        PVOID                   pPrinterNotifyOptions,
+     _In_opt_    PVOID                   pvReserved,
+     _In_        PVOID                   pNotificationConfig,
+-    _Out_opt_   PHANDLE                 phNotify,
+-    _Out_opt_   PHANDLE                 phEvent
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   PHANDLE                 phNotify,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   PHANDLE                 phEvent
+     );
+ 
+ BOOL
+@@ -2110,7 +2111,7 @@ GenerateCopyFilePaths(
+         kMessageBox = 0
+     } UI_TYPE;
+ 
+-    typedef struct {
++    typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  {
+         DWORD       cbSize;     // sizeof(MESSAGEBOX_PARAMS)
+         LPWSTR      pTitle;     // Pointer to a null-terminated string for the title bar of the message box.
+         LPWSTR      pMessage;   // Pointer to a null-terminated string containing the message to display.
+@@ -2148,7 +2149,7 @@ GenerateCopyFilePaths(
+     WINAPI
+     AddPrintDeviceObject(
+         _In_    HANDLE  hPrinter,
+-        _Out_   HANDLE *phDeviceObject
++        _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_   HANDLE *phDeviceObject
+         );
+ 
+     HRESULT

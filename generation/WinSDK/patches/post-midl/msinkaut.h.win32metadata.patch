@@ -1,0 +1,283 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut.h b/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut.h
+index bde551be1d..eaeda25dd3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msinkaut.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1912,12 +1913,12 @@ EXTERN_C const IID IID_IInkExtendedProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DB489209-B7C3-411D-90F6-1548CFFF271E")
++    MIDL_INTERFACE("DB489209-B7C3-411D-90F6-1548CFFF271E") _Windows_SupportedOS_WindowsXP_ 
+     IInkExtendedProperty : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Guid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Guid) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Guid) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
+             /* [retval][out] */ __RPC__out VARIANT *Data) = 0;
+@@ -2072,7 +2073,7 @@ EXTERN_C const IID IID_IInkExtendedProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("89F2A8BE-95A9-4530-8B8F-88E971E3E25F")
++    MIDL_INTERFACE("89F2A8BE-95A9-4530-8B8F-88E971E3E25F") _Windows_SupportedOS_WindowsXP_ 
+     IInkExtendedProperties : public IDispatch
+     {
+     public:
+@@ -3028,7 +3029,7 @@ EXTERN_C const IID IID_IInkGesture;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3BDC0A97-04E5-4e26-B813-18F052D41DEF")
++    MIDL_INTERFACE("3BDC0A97-04E5-4e26-B813-18F052D41DEF") _Windows_SupportedOS_WindowsXP_ 
+     IInkGesture : public IDispatch
+     {
+     public:
+@@ -3190,12 +3191,12 @@ EXTERN_C const IID IID_IInkCursor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AD30C630-40C5-4350-8405-9C71012FC558")
++    MIDL_INTERFACE("AD30C630-40C5-4350-8405-9C71012FC558") _Windows_SupportedOS_WindowsXP_ 
+     IInkCursor : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+             /* [retval][out] */ __RPC__out long *Id) = 0;
+@@ -3394,7 +3395,7 @@ EXTERN_C const IID IID_IInkCursors;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A248C1AC-C698-4e06-9E5C-D57F77C7E647")
++    MIDL_INTERFACE("A248C1AC-C698-4e06-9E5C-D57F77C7E647") _Windows_SupportedOS_WindowsXP_ 
+     IInkCursors : public IDispatch
+     {
+     public:
+@@ -3556,15 +3557,15 @@ EXTERN_C const IID IID_IInkCursorButton;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85EF9417-1D59-49b2-A13C-702C85430894")
++    MIDL_INTERFACE("85EF9417-1D59-49b2-A13C-702C85430894") _Windows_SupportedOS_WindowsXP_ 
+     IInkCursorButton : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Id) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Id) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+             /* [retval][out] */ __RPC__out InkCursorButtonState *CurrentState) = 0;
+@@ -3716,7 +3717,7 @@ EXTERN_C const IID IID_IInkCursorButtons;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3671CC40-B624-4671-9FA0-DB119D952D54")
++    MIDL_INTERFACE("3671CC40-B624-4671-9FA0-DB119D952D54") _Windows_SupportedOS_WindowsXP_ 
+     IInkCursorButtons : public IDispatch
+     {
+     public:
+@@ -3878,15 +3879,15 @@ EXTERN_C const IID IID_IInkTablet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2DE25EAA-6EF8-42d5-AEE9-185BC81B912D")
++    MIDL_INTERFACE("2DE25EAA-6EF8-42d5-AEE9-185BC81B912D") _Windows_SupportedOS_WindowsXP_ 
+     IInkTablet : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlugAndPlayId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Id) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Id) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaximumInputRectangle( 
+             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle) = 0;
+@@ -4081,7 +4082,7 @@ EXTERN_C const IID IID_IInkTablet2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("90c91ad2-fa36-49d6-9516-ce8d570f6f85")
++    MIDL_INTERFACE("90c91ad2-fa36-49d6-9516-ce8d570f6f85") _Windows_SupportedOS_WindowsXP_ 
+     IInkTablet2 : public IDispatch
+     {
+     public:
+@@ -4219,7 +4220,7 @@ EXTERN_C const IID IID_IInkTablet3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7e313997-1327-41dd-8ca9-79f24be17250")
++    MIDL_INTERFACE("7e313997-1327-41dd-8ca9-79f24be17250") _Windows_SupportedOS_Windows7_ 
+     IInkTablet3 : public IDispatch
+     {
+     public:
+@@ -4554,7 +4555,7 @@ EXTERN_C const IID IID_IInkStrokeDisp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("43242FEA-91D1-4a72-963E-FBB91829CFA2")
++    MIDL_INTERFACE("43242FEA-91D1-4a72-963E-FBB91829CFA2") _Windows_SupportedOS_WindowsXP_ 
+     IInkStrokeDisp : public IDispatch
+     {
+     public:
+@@ -5131,7 +5132,7 @@ EXTERN_C const IID IID_IInkStrokes;
+             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionResult **RecognitionResult) = 0;
+         
+         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE ToString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ToString) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ToString) = 0;
+         
+         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
+             /* [in] */ long Index,
+@@ -5475,7 +5476,7 @@ EXTERN_C const IID IID_IInkCustomStrokes;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7E23A88F-C30E-420f-9BDB-28902543F0C1")
++    MIDL_INTERFACE("7E23A88F-C30E-420f-9BDB-28902543F0C1") _Windows_SupportedOS_WindowsXP_ 
+     IInkCustomStrokes : public IDispatch
+     {
+     public:
+@@ -9170,15 +9171,15 @@ EXTERN_C const IID IID_IInkRecognizer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("782BF7CF-034B-4396-8A32-3A1833CF6B56")
++    MIDL_INTERFACE("782BF7CF-034B-4396-8A32-3A1833CF6B56") _Windows_SupportedOS_WindowsXP_ 
+     IInkRecognizer : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Name) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Vendor( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Vendor) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Vendor) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Capabilities( 
+             /* [retval][out] */ __RPC__out InkRecognizerCapabilities *CapabilitiesFlags) = 0;
+@@ -9374,12 +9375,12 @@ EXTERN_C const IID IID_IInkRecognizer2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6110118A-3A75-4ad6-B2AA-04B2B72BBE65")
++    MIDL_INTERFACE("6110118A-3A75-4ad6-B2AA-04B2B72BBE65") _Windows_SupportedOS_WindowsXP_ 
+     IInkRecognizer2 : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrId) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UnicodeRanges( 
+             /* [retval][out] */ __RPC__out VARIANT *UnicodeRanges) = 0;
+@@ -9837,7 +9838,7 @@ EXTERN_C const IID IID_IInkRecognizerContext;
+             /* [in] */ InkRecognizerCharacterAutoCompletionMode Mode) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Factoid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Factoid) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Factoid) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Factoid( 
+             /* [in] */ __RPC__in BSTR factoid) = 0;
+@@ -9849,13 +9850,13 @@ EXTERN_C const IID IID_IInkRecognizerContext;
+             /* [in] */ __RPC__in_opt IInkRecognizerGuide *RecognizerGuide) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrefixText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Prefix) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Prefix) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PrefixText( 
+             /* [in] */ __RPC__in BSTR Prefix) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SuffixText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *Suffix) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Suffix) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SuffixText( 
+             /* [in] */ __RPC__in BSTR Suffix) = 0;
+@@ -10211,7 +10212,7 @@ EXTERN_C const IID IID_IInkRecognizerContext2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D6F0E32F-73D8-408e-8E9F-5FEA592C363F")
++    MIDL_INTERFACE("D6F0E32F-73D8-408e-8E9F-5FEA592C363F") _Windows_SupportedOS_WindowsXP_ 
+     IInkRecognizerContext2 : public IDispatch
+     {
+     public:
+@@ -10360,12 +10361,12 @@ EXTERN_C const IID IID_IInkRecognitionResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3BC129A8-86CD-45ad-BDE8-E0D32D61C16D")
++    MIDL_INTERFACE("3BC129A8-86CD-45ad-BDE8-E0D32D61C16D") _Windows_SupportedOS_WindowsXP_ 
+     IInkRecognitionResult : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TopString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *TopString) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *TopString) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TopAlternate( 
+             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionAlternate **TopAlternate) = 0;
+@@ -10568,12 +10569,12 @@ EXTERN_C const IID IID_IInkRecognitionAlternate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B7E660AD-77E4-429b-ADDA-873780D1FC4A")
++    MIDL_INTERFACE("B7E660AD-77E4-429b-ADDA-873780D1FC4A") _Windows_SupportedOS_WindowsXP_ 
+     IInkRecognitionAlternate : public IDispatch
+     {
+     public:
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_String( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *RecoString) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *RecoString) = 0;
+         
+         virtual /* [helpcontext][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Confidence( 
+             /* [retval][out] */ __RPC__out InkRecognitionConfidence *Confidence) = 0;
+@@ -10874,7 +10875,7 @@ EXTERN_C const IID IID_IInkRecognitionAlternates;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("286A167F-9F19-4c61-9D53-4F07BE622B84")
++    MIDL_INTERFACE("286A167F-9F19-4c61-9D53-4F07BE622B84") _Windows_SupportedOS_WindowsXP_ 
+     IInkRecognitionAlternates : public IDispatch
+     {
+     public:
+@@ -11466,7 +11467,7 @@ EXTERN_C const IID IID_IInkWordList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("14542586-11BF-4f5f-B6E7-49D0744AAB6E")
++    MIDL_INTERFACE("14542586-11BF-4f5f-B6E7-49D0744AAB6E") _Windows_SupportedOS_WindowsXP_ 
+     IInkWordList2 : public IDispatch
+     {
+     public:
+@@ -11843,7 +11844,7 @@ EXTERN_C const IID IID_IInkLineInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9C1C5AD6-F22F-4DE4-B453-A2CC482E7C33")
++    MIDL_INTERFACE("9C1C5AD6-F22F-4DE4-B453-A2CC482E7C33") _Windows_SupportedOS_WindowsXP_ 
+     IInkLineInfo : public IUnknown
+     {
+     public:

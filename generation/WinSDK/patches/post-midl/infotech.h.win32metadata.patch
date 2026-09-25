@@ -1,0 +1,234 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h b/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
+index 83ce06fff2..6b51501834 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/infotech.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+@@ -59,11 +60,11 @@ DECLARE_INTERFACE_(IITPropList, IPersistStreamInit)
+ 
+     // dwOperation = operation (add, delete, update, etc.) to perform on property list
+     STDMETHOD(Set)(PROPID PropID, DWORD dwData, DWORD dwOperation) PURE;
+-    STDMETHOD(Set)(PROPID PropID, LPVOID lpvData, DWORD cbData, DWORD dwOperation) PURE;
++    STDMETHOD(Set)(PROPID PropID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData, DWORD cbData, DWORD dwOperation) PURE;
+     STDMETHOD(Set)(PROPID PropID, LPCWSTR lpszwString, DWORD dwOperation) PURE;
+-    STDMETHOD(Add)(CProperty& Prop) PURE;
++    STDMETHOD(Add)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CProperty& Prop) PURE;
+ 
+-    STDMETHOD(Get)(PROPID PropID, CProperty& Property) PURE;
++    STDMETHOD(Get)(PROPID PropID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CProperty& Property) PURE;
+     STDMETHOD(Clear)() PURE;
+ 
+     // set persistence state on property
+@@ -71,20 +72,20 @@ DECLARE_INTERFACE_(IITPropList, IPersistStreamInit)
+     STDMETHOD(SetPersist)(BOOL fPersist) PURE;          // all properties in list
+ 
+     // for enumerating properties
+-    STDMETHOD(GetFirst)(CProperty& Property) PURE;
+-    STDMETHOD(GetNext)(CProperty& Property) PURE;
+-    STDMETHOD(GetPropCount)(LONG &cProp) PURE;
++    STDMETHOD(GetFirst)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CProperty& Property) PURE;
++    STDMETHOD(GetNext)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CProperty& Property) PURE;
++    STDMETHOD(GetPropCount)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG &cProp) PURE;
+ 
+     // persist header and data separately
+-    STDMETHOD(SaveHeader)(LPVOID lpvData, DWORD dwHdrSize) PURE;
+-    STDMETHOD(SaveData)(LPVOID lpvHeader, DWORD dwHdrSize, LPVOID lpvData, DWORD dwBufSize) PURE;
+-    STDMETHOD(GetHeaderSize)(DWORD& dwHdrSize) PURE;
+-    STDMETHOD(GetDataSize)(LPVOID lpvHeader, DWORD dwHdrSize, DWORD& dwDataSize) PURE;
+-    STDMETHOD(SaveDataToStream)(LPVOID lpvHeader, DWORD dwHdrSize, IStream* pStream) PURE;
++    STDMETHOD(SaveHeader)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData, DWORD dwHdrSize) PURE;
++    STDMETHOD(SaveData)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvHeader, DWORD dwHdrSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData, DWORD dwBufSize) PURE;
++    STDMETHOD(GetHeaderSize)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD& dwHdrSize) PURE;
++    STDMETHOD(GetDataSize)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvHeader, DWORD dwHdrSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD& dwDataSize) PURE;
++    STDMETHOD(SaveDataToStream)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvHeader, DWORD dwHdrSize, IStream* pStream) PURE;
+ 
+     // persist to a memory buffer
+-    STDMETHOD(LoadFromMem)(LPVOID lpvData, DWORD dwBufSize) PURE;
+-    STDMETHOD(SaveToMem)(LPVOID lpvData, DWORD dwBufSize) PURE;
++    STDMETHOD(LoadFromMem)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData, DWORD dwBufSize) PURE;
++    STDMETHOD(SaveToMem)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData, DWORD dwBufSize) PURE;
+ 
+ };
+ 
+@@ -98,8 +99,12 @@ DEFINE_GUID(IID_IITDatabase,
+ #ifdef ITPROXY
+ 
+ // {66673452-8C23-11d0-A84E-00AA006C7D01}
++#endif
++#if defined(WIN32METADATA) || (((defined(ITPROXY))))
+ DEFINE_GUID(CLSID_IITDatabase, 
+ 0x66673452, 0x8c23, 0x11d0, 0xa8, 0x4e, 0x0, 0xaa, 0x0, 0x6c, 0x7d, 0x1);
++#endif
++#ifdef ITPROXY
+ 
+ #else
+ 
+@@ -123,11 +128,11 @@ DECLARE_INTERFACE_(IITDatabase, IUnknown)
+ 	// by *pdwObjInstance.  Note that the value in *pdwObjInstance will be
+ 	// persisted by the database when it is asked to save
+ 
+-	STDMETHOD(CreateObject)(REFCLSID rclsid, DWORD *pdwObjInstance) PURE;
++	STDMETHOD(CreateObject)(REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwObjInstance) PURE;
+ 
+ 	// Retrieves a specified IUnknown-based interface on the object identified
+ 	// by dwObjInstance.
+-	STDMETHOD(GetObject)(DWORD dwObjInstance, REFIID riid, LPVOID *ppvObj) PURE;
++	STDMETHOD(GetObject)(DWORD dwObjInstance, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID *ppvObj) PURE;
+ 
+ 	// To obtain a pointer to a named object's persistence the object's full
+ 	// name (including any object-specific type prefix) should be passed in
+@@ -140,7 +145,7 @@ DECLARE_INTERFACE_(IITDatabase, IUnknown)
+ 	// If the specified object's persistence doesn't exist, or if it exists
+ 	// but is of the wrong type, then STG_E_FILENOTFOUND will be returned. 
+ 	STDMETHOD(GetObjectPersistence)(LPCWSTR lpwszObject, DWORD dwObjInstance,
+-                                        LPVOID *ppvPersistence, BOOL fStream) PURE;
++                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID *ppvPersistence, BOOL fStream) PURE;
+ };
+ 
+ typedef IITDatabase* LPITDB;
+@@ -219,8 +224,12 @@ DEFINE_GUID(IID_IITWordWheel,
+ #ifdef ITPROXY
+ 
+ // {D73725C2-8C12-11d0-A84E-00AA006C7D01}
++#endif
++#if defined(WIN32METADATA) || (((defined(ITPROXY))))
+ DEFINE_GUID(CLSID_IITWordWheel, 
+ 0xd73725c2, 0x8c12, 0x11d0, 0xa8, 0x4e, 0x0, 0xaa, 0x0, 0x6c, 0x7d, 0x1);
++#endif
++#ifdef ITPROXY
+ 
+ #else
+ 
+@@ -325,7 +334,7 @@ DECLARE_INTERFACE_(IStemmerConfig, IUnknown)
+ 	// Returns S_OK if locale described by params is supported
+ 	// by the breaker object; E_INVALIDARG otherwise.
+ 	STDMETHOD(SetLocaleInfo)(DWORD dwCodePageID, LCID lcid) PURE;
+-	STDMETHOD(GetLocaleInfo)(DWORD *pdwCodePageID, LCID *plcid) PURE;
++	STDMETHOD(GetLocaleInfo)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwCodePageID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LCID *plcid) PURE;
+ 
+ 	// Sets/gets info that controls certain aspects of stemming.
+ 	// This method currently accepts only the following set of flags
+@@ -333,7 +342,7 @@ DECLARE_INTERFACE_(IStemmerConfig, IUnknown)
+ 	// In the future, additional information may be passed in through
+ 	// dwReserved.
+ 	STDMETHOD(SetControlInfo)(DWORD grfStemFlags, DWORD dwReserved) PURE;
+-	STDMETHOD(GetControlInfo)(DWORD *pgrfStemFlags, DWORD *pdwReserved) PURE;
++	STDMETHOD(GetControlInfo)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pgrfStemFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwReserved) PURE;
+ 
+ 	// Will load external stemmer data, such as word part lists, etc.
+ 	// The format of the data in the stream is entirely
+@@ -430,14 +439,14 @@ DECLARE_INTERFACE_(IWordBreakerConfig, IUnknown)
+ 	// Returns S_OK if locale described by params is supported
+ 	// by the breaker object; E_INVALIDARG otherwise.
+ 	STDMETHOD(SetLocaleInfo)(DWORD dwCodePageID, LCID lcid) PURE;
+-	STDMETHOD(GetLocaleInfo)(DWORD *pdwCodePageID, LCID *plcid) PURE;
++	STDMETHOD(GetLocaleInfo)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwCodePageID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LCID *plcid) PURE;
+ 
+ 	// Sets/gets the type of words the breaker should expect
+ 	// to see in all subsequent calls to IWordBreaker::BreakText.
+ 	// Returns S_OK if the type is understood by the breaker
+ 	//  object; E_INVALIDARG otherwise.
+ 	STDMETHOD(SetBreakWordType)(DWORD dwBreakWordType) PURE;
+-	STDMETHOD(GetBreakWordType)(DWORD *pdwBreakWordType) PURE;
++	STDMETHOD(GetBreakWordType)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwBreakWordType) PURE;
+ 
+ 	// Sets/gets info that controls certain aspects of word breaking.
+ 	// This method currently accepts only the following set of flags
+@@ -447,7 +456,7 @@ DECLARE_INTERFACE_(IWordBreakerConfig, IUnknown)
+ 	// In the future, additional information may be passed in through
+ 	// dwReserved.
+ 	STDMETHOD(SetControlInfo)(DWORD grfBreakFlags, DWORD dwReserved) PURE;
+-	STDMETHOD(GetControlInfo)(DWORD *pgrfBreakFlags, DWORD *pdwReserved) PURE;
++	STDMETHOD(GetControlInfo)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pgrfBreakFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwReserved) PURE;
+ 
+ 	// Will load external breaker data, such as a table containing
+ 	// char-by-char break information or a list of stop words.
+@@ -585,42 +594,42 @@ typedef struct tagCOLUMNSTATUS
+ 
+ 
+ // Used by IITResultSet::SetColumnHeap.
+-typedef SCODE (__stdcall *PFNCOLHEAPFREE)(LPVOID);
++typedef SCODE (__stdcall *PFNCOLHEAPFREE)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
+ 
+ 
+ DECLARE_INTERFACE_(IITResultSet, IUnknown)
+ {
+     // Initialization
+     STDMETHOD(SetColumnPriority)(LONG lColumnIndex, PRIORITY ColumnPriority) PURE;
+-    STDMETHOD(SetColumnHeap)(LONG lColumnIndex, LPVOID lpvHeap,
++    STDMETHOD(SetColumnHeap)(LONG lColumnIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvHeap,
+                              PFNCOLHEAPFREE pfnColHeapFree) PURE;
+     STDMETHOD(SetKeyProp)(PROPID PropID) PURE;
+-    STDMETHOD(Add)(LPVOID lpvHdr) PURE;
+-    STDMETHOD(Add)(PROPID PropID, LPVOID lpvDefaultData, DWORD cbData, PRIORITY Priority) PURE;
++    STDMETHOD(Add)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvHdr) PURE;
++    STDMETHOD(Add)(PROPID PropID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvDefaultData, DWORD cbData, PRIORITY Priority) PURE;
+     STDMETHOD(Add)(PROPID PropID, LPCWSTR lpszwDefault, PRIORITY Priority) PURE;
+     STDMETHOD(Add)(PROPID PropID, DWORD dwDefaultData, PRIORITY Priority) PURE;
+ 
+     // Build result set
+-    STDMETHOD(Append)(LPVOID lpvHdr, LPVOID lpvData) PURE;
++    STDMETHOD(Append)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvHdr, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData) PURE;
+     STDMETHOD(Set)(LONG lRowIndex, LPVOID lpvHdr, LPVOID lpvData) PURE;
+     STDMETHOD(Set)(LONG lRowIndex, LONG lColumnIndex, DWORD_PTR dwData) PURE;
+     STDMETHOD(Set)(LONG lRowIndex, LONG lColumnIndex, LPCWSTR lpwStr) PURE;
+-    STDMETHOD(Set)(LONG lRowIndex, LONG lColumnIndex, LPVOID lpvData, DWORD cbData) PURE;
++    STDMETHOD(Set)(LONG lRowIndex, LONG lColumnIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvData, DWORD cbData) PURE;
+     STDMETHOD(Copy)(IITResultSet* pRSCopy) PURE;
+     STDMETHOD(AppendRows)(IITResultSet* pResSrc, LONG lRowSrcFirst, LONG cSrcRows, 
+-                          LONG& lRowFirstDest) PURE;
++                          _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG& lRowFirstDest) PURE;
+ 
+     // Obtain info about result set
+-    STDMETHOD(Get)(LONG lRowIndex, LONG lColumnIndex, CProperty& Prop) PURE;
+-    STDMETHOD(GetKeyProp)(PROPID& KeyPropID) PURE;
+-    STDMETHOD(GetColumnPriority)(LONG lColumnIndex, PRIORITY& ColumnPriority) PURE;
+-    STDMETHOD(GetRowCount)(LONG& lNumberOfRows) PURE;
+-    STDMETHOD(GetColumnCount)(LONG& lNumberOfColumns) PURE;
+-    STDMETHOD(GetColumn)(LONG lColumnIndex, PROPID& PropID) PURE;
+-    STDMETHOD(GetColumn)(LONG lColumnIndex, PROPID& PropID, DWORD& dwType, LPVOID& lpvDefaultValue,
+-                         DWORD& cbSize, PRIORITY& ColumnPriority) PURE;
++    STDMETHOD(Get)(LONG lRowIndex, LONG lColumnIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CProperty& Prop) PURE;
++    STDMETHOD(GetKeyProp)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PROPID& KeyPropID) PURE;
++    STDMETHOD(GetColumnPriority)(LONG lColumnIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRIORITY& ColumnPriority) PURE;
++    STDMETHOD(GetRowCount)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG& lNumberOfRows) PURE;
++    STDMETHOD(GetColumnCount)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG& lNumberOfColumns) PURE;
++    STDMETHOD(GetColumn)(LONG lColumnIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PROPID& PropID) PURE;
++    STDMETHOD(GetColumn)(LONG lColumnIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PROPID& PropID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD& dwType, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID& lpvDefaultValue,
++                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD& cbSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRIORITY& ColumnPriority) PURE;
+ 
+-    STDMETHOD(GetColumnFromPropID)(PROPID PropID, LONG& lColumnIndex) PURE;
++    STDMETHOD(GetColumnFromPropID)(PROPID PropID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG& lColumnIndex) PURE;
+ 
+     // Clear result set
+     STDMETHOD(Clear)() PURE;
+@@ -632,8 +641,8 @@ DECLARE_INTERFACE_(IITResultSet, IUnknown)
+     STDMETHOD(Cancel)() PURE;
+     STDMETHOD(Pause)(BOOL fPause) PURE;
+ 
+-    STDMETHOD(GetRowStatus)(LONG lRowFirst, LONG cRows, LPROWSTATUS lpRowStatus) PURE;
+-    STDMETHOD(GetColumnStatus)(LPCOLUMNSTATUS lpColStatus) PURE;
++    STDMETHOD(GetRowStatus)(LONG lRowFirst, LONG cRows, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPROWSTATUS lpRowStatus) PURE;
++    STDMETHOD(GetColumnStatus)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCOLUMNSTATUS lpColStatus) PURE;
+ };
+ 
+ typedef IITResultSet* LPITRS;
+@@ -697,4 +706,15 @@ DEFINE_GUID(CLSID_ITEngStemmer,
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("ITWW_OPEN_CONNECT")
++#undef ITWW_OPEN_CONNECT
++enum [[clang::flag_enum]] WORD_WHEEL_OPEN_FLAGS : unsigned int
++{
++    ITWW_OPEN_CONNECT = 0U,
++};
++#pragma pop_macro("ITWW_OPEN_CONNECT")
++#endif
++
+ #endif  // __INFOTECH_H__

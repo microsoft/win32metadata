@@ -1,0 +1,126 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIRibbon.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIRibbon.h
+index ea180dcfb1..71ca80ca0b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UIRibbon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIRibbon.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -351,7 +352,7 @@ EXTERN_C const IID IID_IUISimplePropertySet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c205bb48-5b1c-4219-a106-15bd0a5f24e2")
++    MIDL_INTERFACE("c205bb48-5b1c-4219-a106-15bd0a5f24e2") _Windows_SupportedOS_Windows7_ 
+     IUISimplePropertySet : public IUnknown
+     {
+     public:
+@@ -446,7 +447,7 @@ EXTERN_C const IID IID_IUIRibbon;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("803982ab-370a-4f7e-a9e7-8784036a6e26")
++    MIDL_INTERFACE("803982ab-370a-4f7e-a9e7-8784036a6e26") _Windows_SupportedOS_Windows7_ 
+     IUIRibbon : public IUnknown
+     {
+     public:
+@@ -592,7 +593,7 @@ EXTERN_C const IID IID_IUIFramework;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F4F0385D-6872-43a8-AD09-4C339CB3F5C5")
++    MIDL_INTERFACE("F4F0385D-6872-43a8-AD09-4C339CB3F5C5") _Windows_SupportedOS_Windows7_ 
+     IUIFramework : public IUnknown
+     {
+     public:
+@@ -858,7 +859,7 @@ EXTERN_C const IID IID_IUIEventLogger;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ec3e1034-dbf4-41a1-95d5-03e0f1026e05")
++    MIDL_INTERFACE("ec3e1034-dbf4-41a1-95d5-03e0f1026e05") _Windows_SupportedOS_Windows8_ 
+     IUIEventLogger : public IUnknown
+     {
+     public:
+@@ -945,7 +946,7 @@ EXTERN_C const IID IID_IUIEventingManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3BE6EA7F-9A9B-4198-9368-9B0F923BD534")
++    MIDL_INTERFACE("3BE6EA7F-9A9B-4198-9368-9B0F923BD534") _Windows_SupportedOS_Windows8_ 
+     IUIEventingManager : public IUnknown
+     {
+     public:
+@@ -1036,7 +1037,7 @@ EXTERN_C const IID IID_IUIContextualUI;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EEA11F37-7C46-437c-8E55-B52122B29293")
++    MIDL_INTERFACE("EEA11F37-7C46-437c-8E55-B52122B29293") _Windows_SupportedOS_Windows7_ 
+     IUIContextualUI : public IUnknown
+     {
+     public:
+@@ -1127,7 +1128,7 @@ EXTERN_C const IID IID_IUICollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DF4F45BF-6F9D-4dd7-9D68-D8F9CD18C4DB")
++    MIDL_INTERFACE("DF4F45BF-6F9D-4dd7-9D68-D8F9CD18C4DB") _Windows_SupportedOS_Windows7_ 
+     IUICollection : public IUnknown
+     {
+     public:
+@@ -1339,7 +1340,7 @@ EXTERN_C const IID IID_IUICollectionChangedEvent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6502AE91-A14D-44b5-BBD0-62AACC581D52")
++    MIDL_INTERFACE("6502AE91-A14D-44b5-BBD0-62AACC581D52") _Windows_SupportedOS_Windows7_ 
+     IUICollectionChangedEvent : public IUnknown
+     {
+     public:
+@@ -1448,7 +1449,7 @@ EXTERN_C const IID IID_IUICommandHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75ae0a2d-dc03-4c9f-8883-069660d0beb6")
++    MIDL_INTERFACE("75ae0a2d-dc03-4c9f-8883-069660d0beb6") _Windows_SupportedOS_Windows7_ 
+     IUICommandHandler : public IUnknown
+     {
+     public:
+@@ -1619,7 +1620,7 @@ EXTERN_C const IID IID_IUIApplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D428903C-729A-491d-910D-682A08FF2522")
++    MIDL_INTERFACE("D428903C-729A-491d-910D-682A08FF2522") _Windows_SupportedOS_Windows7_ 
+     IUIApplication : public IUnknown
+     {
+     public:
+@@ -1760,7 +1761,7 @@ EXTERN_C const IID IID_IUIImage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23c8c838-4de6-436b-ab01-5554bb7c30dd")
++    MIDL_INTERFACE("23c8c838-4de6-436b-ab01-5554bb7c30dd") _Windows_SupportedOS_Windows7_ 
+     IUIImage : public IUnknown
+     {
+     public:
+@@ -1768,7 +1769,7 @@ EXTERN_C const IID IID_IUIImage;
+         _Check_return_
+         HRESULT STDMETHODCALLTYPE GetBitmap( 
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *bitmap) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *bitmap) = 0;
+         
+     };
+     
+@@ -1858,7 +1859,7 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816")
++    MIDL_INTERFACE("18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816") _Windows_SupportedOS_Windows7_ 
+     IUIImageFromBitmap : public IUnknown
+     {
+     public:

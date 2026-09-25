@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/Wsdevlicensing.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/Wsdevlicensing.h
+index fa9a369af0..ccf9acfa9f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/Wsdevlicensing.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/Wsdevlicensing.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*
+  * Developer licensing API
+  *
+@@ -20,18 +21,18 @@
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-STDAPI
++_Win32_ImportLibrary_("wsclient.dll") STDAPI
+ CheckDeveloperLicense(
+     _Out_    FILETIME                                               *pExpiration
+     );
+ 
+-STDAPI
++_Win32_ImportLibrary_("wsclient.dll") STDAPI
+ AcquireDeveloperLicense(
+     _In_opt_    HWND                                                hwndParent,
+     _Out_       FILETIME                                            *pExpiration
+     );
+ 
+-STDAPI
++_Win32_ImportLibrary_("wsclient.dll") STDAPI
+ RemoveDeveloperLicense(
+     _In_opt_ HWND                                                   hwndParent
+     );

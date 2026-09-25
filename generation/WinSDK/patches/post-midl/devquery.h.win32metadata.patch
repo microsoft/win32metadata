@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/devquery.h b/generation/WinSDK/RecompiledIdlHeaders/um/devquery.h
+index fccea79280..09be767309 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/devquery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/devquery.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -100,7 +101,7 @@ DevCreateObjectQueryFromIdEx(
+ _Check_return_ HRESULT WINAPI
+ DevCreateObjectQueryFromIds(
+     _In_ DEV_OBJECT_TYPE ObjectType,
+-    _In_ PCZZWSTR pszzObjectIds,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCZZWSTR pszzObjectIds,
+     _In_ ULONG QueryFlags,
+     _In_ ULONG cRequestedProperties,
+     _In_reads_opt_(cRequestedProperties) const DEVPROPCOMPKEY *pRequestedProperties,
+@@ -115,7 +116,7 @@ DevCreateObjectQueryFromIds(
+ _Check_return_ HRESULT WINAPI
+ DevCreateObjectQueryFromIdsEx(
+     _In_ DEV_OBJECT_TYPE ObjectType,
+-    _In_ PCZZWSTR pszzObjectIds,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCZZWSTR pszzObjectIds,
+     _In_ ULONG QueryFlags,
+     _In_ ULONG cRequestedProperties,
+     _In_reads_opt_(cRequestedProperties) const DEVPROPCOMPKEY *pRequestedProperties,

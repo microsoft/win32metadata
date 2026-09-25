@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h b/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
+index 7893d8d2cd..67a09672ec 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mmddk.h
+@@ -13,6 +13,7 @@
+ #define _INC_MMDDK
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -165,7 +166,7 @@ typedef struct {
+ #define VADMAD_Device_ID    0X0444
+ 
+ /* PnP version of media device caps */
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   {
+     DWORD	cbSize;
+     LPVOID	pCaps;
+ } MDEVICECAPSEX;
+@@ -269,7 +270,7 @@ typedef struct midiopenstrmid_tag {
+     UINT           uDeviceID;
+ } MIDIOPENSTRMID;
+ // MIDI input and output device open information structure
+-typedef struct midiopendesc_tag {
++typedef struct  midiopendesc_tag {
+     HMIDI          hMidi;             // handle
+     DWORD_PTR      dwCallback;        // callback
+     DWORD_PTR      dwInstance;        // app's private instance information
+@@ -674,7 +675,7 @@ typedef VOID (TASKCALLBACK) (DWORD_PTR dwInst);
+ 
+ typedef TASKCALLBACK FAR *LPTASKCALLBACK;
+ 
+-UINT    APIENTRY mmTaskCreate(LPTASKCALLBACK lpfn, HANDLE FAR * lph, DWORD_PTR dwInst);
++UINT    APIENTRY mmTaskCreate(LPTASKCALLBACK lpfn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE FAR * lph, DWORD_PTR dwInst);
+ VOID    APIENTRY mmTaskBlock(DWORD h);
+ BOOL    APIENTRY mmTaskSignal(DWORD h);
+ VOID    APIENTRY mmTaskYield(VOID);

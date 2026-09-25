@@ -1,0 +1,177 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
+index eb8dfaeb32..c01ccf76b6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10shader.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //////////////////////////////////////////////////////////////////////////////
+ //
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -204,14 +205,14 @@ typedef struct _D3D10_SHADER_DESC
+     UINT                    ArrayInstructionCount;       // Number of array instructions used
+     UINT                    CutInstructionCount;         // Number of cut instructions used
+     UINT                    EmitInstructionCount;        // Number of emit instructions used
+-    D3D10_PRIMITIVE_TOPOLOGY GSOutputTopology;           // Geometry shader output topology
++    _Win32_AssociatedEnum_(D3D_PRIMITIVE_TOPOLOGY) D3D10_PRIMITIVE_TOPOLOGY GSOutputTopology;           // Geometry shader output topology
+     UINT                    GSMaxOutputVertexCount;      // Geometry shader maximum output vertex count
+ } D3D10_SHADER_DESC;
+ 
+ typedef struct _D3D10_SHADER_BUFFER_DESC
+ {
+     LPCSTR                  Name;           // Name of the constant buffer
+-    D3D10_CBUFFER_TYPE      Type;           // Indicates that this is a CBuffer or TBuffer
++    _Win32_AssociatedEnum_(D3D_CBUFFER_TYPE) D3D10_CBUFFER_TYPE      Type;           // Indicates that this is a CBuffer or TBuffer
+     UINT                    Variables;      // Number of member variables
+     UINT                    Size;           // Size of CB (in bytes)
+     UINT                    uFlags;         // Buffer description flags
+@@ -228,8 +229,8 @@ typedef struct _D3D10_SHADER_VARIABLE_DESC
+ 
+ typedef struct _D3D10_SHADER_TYPE_DESC
+ {
+-    D3D10_SHADER_VARIABLE_CLASS Class;          // Variable class (e.g. object, matrix, etc.)
+-    D3D10_SHADER_VARIABLE_TYPE  Type;           // Variable type (e.g. float, sampler, etc.)
++    _Win32_AssociatedEnum_(D3D_SHADER_VARIABLE_CLASS) D3D10_SHADER_VARIABLE_CLASS Class;          // Variable class (e.g. object, matrix, etc.)
++    _Win32_AssociatedEnum_(D3D_SHADER_VARIABLE_TYPE) D3D10_SHADER_VARIABLE_TYPE  Type;           // Variable type (e.g. float, sampler, etc.)
+     UINT                        Rows;           // Number of rows (for matrices, 1 for other numeric, 0 if not applicable)
+     UINT                        Columns;        // Number of columns (for vectors & matrices, 1 for other numeric, 0 if not applicable)
+     UINT                        Elements;       // Number of elements (0 if not an array)
+@@ -240,13 +241,13 @@ typedef struct _D3D10_SHADER_TYPE_DESC
+ typedef struct _D3D10_SHADER_INPUT_BIND_DESC
+ {
+     LPCSTR                      Name;           // Name of the resource
+-    D3D10_SHADER_INPUT_TYPE     Type;           // Type of resource (e.g. texture, cbuffer, etc.)
++    _Win32_AssociatedEnum_(D3D_SHADER_INPUT_TYPE) D3D10_SHADER_INPUT_TYPE     Type;           // Type of resource (e.g. texture, cbuffer, etc.)
+     UINT                        BindPoint;      // Starting bind point
+     UINT                        BindCount;      // Number of contiguous bind points (for arrays)
+     
+     UINT                        uFlags;         // Input binding flags
+-    D3D10_RESOURCE_RETURN_TYPE  ReturnType;     // Return type (if texture)
+-    D3D10_SRV_DIMENSION         Dimension;      // Dimension (if texture)
++    _Win32_AssociatedEnum_(D3D_RESOURCE_RETURN_TYPE) D3D10_RESOURCE_RETURN_TYPE  ReturnType;     // Return type (if texture)
++    _Win32_AssociatedEnum_(D3D_SRV_DIMENSION) D3D10_SRV_DIMENSION         Dimension;      // Dimension (if texture)
+     UINT                        NumSamples;     // Number of samples (0 if not MS texture)
+ } D3D10_SHADER_INPUT_BIND_DESC;
+ 
+@@ -255,8 +256,8 @@ typedef struct _D3D10_SIGNATURE_PARAMETER_DESC
+     LPCSTR                      SemanticName;   // Name of the semantic
+     UINT                        SemanticIndex;  // Index of the semantic
+     UINT                        Register;       // Number of member variables
+-    D3D10_NAME                  SystemValueType;// A predefined system value, or D3D10_NAME_UNDEFINED if not applicable
+-    D3D10_REGISTER_COMPONENT_TYPE ComponentType;// Scalar type (e.g. uint, float, etc.)
++    _Win32_AssociatedEnum_(D3D_NAME) D3D10_NAME                  SystemValueType;// A predefined system value, or D3D10_NAME_UNDEFINED if not applicable
++    _Win32_AssociatedEnum_(D3D_REGISTER_COMPONENT_TYPE) D3D10_REGISTER_COMPONENT_TYPE ComponentType;// Scalar type (e.g. uint, float, etc.)
+     BYTE                        Mask;           // Mask to indicate which components of the register
+                                                 // are used (combination of D3D10_COMPONENT_MASK values)
+     BYTE                        ReadWriteMask;  // Mask to indicate whether a given component is 
+@@ -285,9 +286,9 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionType,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflectionType
+ 
+-DECLARE_INTERFACE(ID3D10ShaderReflectionType)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflectionType)
+ {
+-    STDMETHOD(GetDesc)(THIS_ D3D10_SHADER_TYPE_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D10_SHADER_TYPE_DESC *pDesc) PURE;
+     
+     STDMETHOD_(ID3D10ShaderReflectionType*, GetMemberTypeByIndex)(THIS_ UINT Index) PURE;
+     STDMETHOD_(ID3D10ShaderReflectionType*, GetMemberTypeByName)(THIS_ LPCSTR Name) PURE;
+@@ -305,7 +306,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionVariable,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflectionVariable
+ 
+-DECLARE_INTERFACE(ID3D10ShaderReflectionVariable)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflectionVariable)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D10_SHADER_VARIABLE_DESC *pDesc) PURE;
+     
+@@ -323,7 +324,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflectionConstantBuffer,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflectionConstantBuffer
+ 
+-DECLARE_INTERFACE(ID3D10ShaderReflectionConstantBuffer)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflectionConstantBuffer)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D10_SHADER_BUFFER_DESC *pDesc) PURE;
+     
+@@ -342,7 +343,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflection
+ 
+-DECLARE_INTERFACE_(ID3D10ShaderReflection, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -407,7 +408,7 @@ extern "C" {
+ //      these are the same messages you will see in your debug output.
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10CompileShader(_In_reads_bytes_(SrcDataSize) LPCSTR pSrcData, SIZE_T SrcDataSize, _In_opt_ LPCSTR pFileName, _In_opt_ CONST D3D10_SHADER_MACRO* pDefines, _In_opt_ LPD3D10INCLUDE pInclude, 
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10CompileShader(_In_reads_bytes_(SrcDataSize) LPCSTR pSrcData, SIZE_T SrcDataSize, _In_opt_ LPCSTR pFileName, _In_opt_ CONST D3D10_SHADER_MACRO* pDefines, _In_opt_ LPD3D10INCLUDE pInclude, 
+     LPCSTR pFunctionName, LPCSTR pProfile, UINT Flags, _Out_ ID3D10Blob** ppShader, _Out_opt_ ID3D10Blob** ppErrorMsgs);
+ 
+ //----------------------------------------------------------------------------
+@@ -428,7 +429,7 @@ HRESULT WINAPI D3D10CompileShader(_In_reads_bytes_(SrcDataSize) LPCSTR pSrcData,
+ //      Returns a buffer containing the disassembled shader.
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10DisassembleShader(_In_reads_bytes_(BytecodeLength) CONST void *pShader, SIZE_T BytecodeLength, BOOL EnableColorCode, _In_opt_ LPCSTR pComments, _Out_ ID3D10Blob** ppDisassembly);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10DisassembleShader(_In_reads_bytes_(BytecodeLength) CONST void *pShader, SIZE_T BytecodeLength, BOOL EnableColorCode, _In_opt_ LPCSTR pComments, _Out_ ID3D10Blob** ppDisassembly);
+ 
+ 
+ //----------------------------------------------------------------------------
+@@ -441,11 +442,11 @@ HRESULT WINAPI D3D10DisassembleShader(_In_reads_bytes_(BytecodeLength) CONST voi
+ //      Pointer to the device in question
+ //----------------------------------------------------------------------------
+ 
+-LPCSTR WINAPI D3D10GetPixelShaderProfile(_In_ ID3D10Device *pDevice);
++_Win32_ImportLibrary_("d3d10.dll") LPCSTR WINAPI D3D10GetPixelShaderProfile(_In_ ID3D10Device *pDevice);
+ 
+-LPCSTR WINAPI D3D10GetVertexShaderProfile(_In_ ID3D10Device *pDevice);
++_Win32_ImportLibrary_("d3d10.dll") LPCSTR WINAPI D3D10GetVertexShaderProfile(_In_ ID3D10Device *pDevice);
+ 
+-LPCSTR WINAPI D3D10GetGeometryShaderProfile(_In_ ID3D10Device *pDevice);
++_Win32_ImportLibrary_("d3d10.dll") LPCSTR WINAPI D3D10GetGeometryShaderProfile(_In_ ID3D10Device *pDevice);
+ 
+ //----------------------------------------------------------------------------
+ // D3D10ReflectShader:
+@@ -465,7 +466,7 @@ LPCSTR WINAPI D3D10GetGeometryShaderProfile(_In_ ID3D10Device *pDevice);
+ //
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10ReflectShader(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10ShaderReflection **ppReflector);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10ReflectShader(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10ShaderReflection **ppReflector);
+ 
+ //----------------------------------------------------------------------------
+ // D3D10PreprocessShader
+@@ -495,7 +496,7 @@ HRESULT WINAPI D3D10ReflectShader(_In_reads_bytes_(BytecodeLength) CONST void *p
+ //      these are the same messages you will see in your debug output.
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10PreprocessShader(_In_reads_bytes_(SrcDataSize) LPCSTR pSrcData, SIZE_T SrcDataSize, _In_opt_ LPCSTR pFileName, _In_opt_ CONST D3D10_SHADER_MACRO* pDefines, 
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10PreprocessShader(_In_reads_bytes_(SrcDataSize) LPCSTR pSrcData, SIZE_T SrcDataSize, _In_opt_ LPCSTR pFileName, _In_opt_ CONST D3D10_SHADER_MACRO* pDefines, 
+     _In_opt_ LPD3D10INCLUDE pInclude, _Out_ ID3D10Blob** ppShaderText, _Out_opt_ ID3D10Blob** ppErrorMsgs);
+ 
+ //////////////////////////////////////////////////////////////////////////
+@@ -527,9 +528,9 @@ HRESULT WINAPI D3D10PreprocessShader(_In_reads_bytes_(SrcDataSize) LPCSTR pSrcDa
+ //
+ //////////////////////////////////////////////////////////////////////////
+ 
+-HRESULT WINAPI D3D10GetInputSignatureBlob(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob **ppSignatureBlob);
+-HRESULT WINAPI D3D10GetOutputSignatureBlob(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob **ppSignatureBlob);
+-HRESULT WINAPI D3D10GetInputAndOutputSignatureBlob(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob **ppSignatureBlob);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10GetInputSignatureBlob(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob **ppSignatureBlob);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10GetOutputSignatureBlob(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob **ppSignatureBlob);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10GetInputAndOutputSignatureBlob(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob **ppSignatureBlob);
+ 
+ //----------------------------------------------------------------------------
+ // D3D10GetShaderDebugInfo:
+@@ -547,7 +548,7 @@ HRESULT WINAPI D3D10GetInputAndOutputSignatureBlob(_In_reads_bytes_(BytecodeLeng
+ //      of this buffer, see definition of D3D10_SHADER_DEBUG_INFO above.
+ //----------------------------------------------------------------------------
+ 
+-HRESULT WINAPI D3D10GetShaderDebugInfo(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob** ppDebugInfo);
++_Win32_ImportLibrary_("d3d10.dll") HRESULT WINAPI D3D10GetShaderDebugInfo(_In_reads_bytes_(BytecodeLength) CONST void *pShaderBytecode, SIZE_T BytecodeLength, _Out_ ID3D10Blob** ppDebugInfo);
+ 
+ #ifdef __cplusplus
+ }

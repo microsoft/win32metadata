@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TSGAuthenticationEngine.h b/generation/WinSDK/RecompiledIdlHeaders/um/TSGAuthenticationEngine.h
+index 7746ee8f8c093cc316f5062610eb2c24d6637ea9..42047f9e49d4518e5f6f544b0739c1d607f76a43 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TSGAuthenticationEngine.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TSGAuthenticationEngine.h
+@@ -74,6 +74,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -93,7 +94,7 @@ EXTERN_C const IID IID_ITSGAuthenticateUserSink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2c3e2e73-a782-47f9-8dfb-77ee1ed27a03")
+-    ITSGAuthenticateUserSink : public IUnknown
++    _Windows_SupportedOS_Windows7_ ITSGAuthenticateUserSink : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnUserAuthenticated( 
+@@ -182,7 +183,7 @@ EXTERN_C const IID IID_ITSGAuthenticateUserSink;
+         END_INTERFACE
+     } ITSGAuthenticateUserSinkVtbl;
+ 
+-    interface ITSGAuthenticateUserSink
++    interface _Windows_SupportedOS_Windows7_ ITSGAuthenticateUserSink
+     {
+         CONST_VTBL struct ITSGAuthenticateUserSinkVtbl *lpVtbl;
+     };
+@@ -237,7 +238,7 @@ EXTERN_C const IID IID_ITSGAuthenticationEngine;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9ee3e5bf-04ab-4691-998c-d7f622321a56")
+-    ITSGAuthenticationEngine : public IUnknown
++    _Windows_SupportedOS_Windows7_ ITSGAuthenticationEngine : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AuthenticateUser( 
+@@ -308,7 +309,7 @@ EXTERN_C const IID IID_ITSGAuthenticationEngine;
+         END_INTERFACE
+     } ITSGAuthenticationEngineVtbl;
+ 
+-    interface ITSGAuthenticationEngine
++    interface _Windows_SupportedOS_Windows7_ ITSGAuthenticationEngine
+     {
+         CONST_VTBL struct ITSGAuthenticationEngineVtbl *lpVtbl;
+     };

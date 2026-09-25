@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UrlHist.h b/generation/WinSDK/RecompiledIdlHeaders/um/UrlHist.h
+index 807a7d56a6..3f12d2b239 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UrlHist.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UrlHist.h
+@@ -106,6 +106,7 @@ extern "C"{
+ // Url History Interfaces.
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -143,7 +144,7 @@ extern RPC_IF_HANDLE __MIDL_itf_urlhist_0000_0000_v0_0_s_ifspec;
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IEnumSTATURL *LPENUMSTATURL;
+ 
+-typedef struct _STATURL
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _STATURL
+     {
+     DWORD cbSize;
+     LPWSTR pwcsUrl;
+@@ -162,7 +163,7 @@ EXTERN_C const IID IID_IEnumSTATURL;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3C374A42-BAE4-11CF-BF7D-00AA006946EE")
+-    IEnumSTATURL : public IUnknown
++     IEnumSTATURL : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -322,7 +323,7 @@ EXTERN_C const IID IID_IUrlHistoryStg;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3C374A41-BAE4-11CF-BF7D-00AA006946EE")
+-    IUrlHistoryStg : public IUnknown
++     IUrlHistoryStg : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddUrl( 

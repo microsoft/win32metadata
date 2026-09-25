@@ -1,0 +1,56 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddndis.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddndis.h
+index 33845b763b..7c1b717c72 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddndis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddndis.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0001        // Increment this if a change has global effects
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -1662,7 +1663,7 @@ typedef struct _NDIS_802_11_PMKID
+ typedef struct _NDIS_802_11_AUTHENTICATION_ENCRYPTION
+ {
+     NDIS_802_11_AUTHENTICATION_MODE AuthModeSupported;
+-    NDIS_802_11_ENCRYPTION_STATUS EncryptStatusSupported;
++    _Win32_AssociatedEnum_(NDIS_802_11_WEP_STATUS) NDIS_802_11_ENCRYPTION_STATUS EncryptStatusSupported;
+ } NDIS_802_11_AUTHENTICATION_ENCRYPTION, *PNDIS_802_11_AUTHENTICATION_ENCRYPTION;
+ 
+ typedef struct _NDIS_802_11_CAPABILITY
+@@ -2861,8 +2862,8 @@ typedef enum _NDIS_SUPPORTED_PAUSE_FUNCTIONS
+ typedef struct _NDIS_LINK_STATE
+ {
+     NDIS_OBJECT_HEADER              Header;
+-    NDIS_MEDIA_CONNECT_STATE        MediaConnectState;
+-    NDIS_MEDIA_DUPLEX_STATE         MediaDuplexState;
++    _Win32_AssociatedEnum_(NET_IF_MEDIA_CONNECT_STATE) NDIS_MEDIA_CONNECT_STATE        MediaConnectState;
++    _Win32_AssociatedEnum_(NET_IF_MEDIA_DUPLEX_STATE) NDIS_MEDIA_DUPLEX_STATE         MediaDuplexState;
+     ULONG64                         XmitLinkSpeed;
+     ULONG64                         RcvLinkSpeed;
+     NDIS_SUPPORTED_PAUSE_FUNCTIONS  PauseFunctions;
+@@ -2881,7 +2882,7 @@ typedef struct _NDIS_LINK_STATE
+ typedef struct _NDIS_LINK_PARAMETERS
+ {
+     NDIS_OBJECT_HEADER              Header;
+-    NDIS_MEDIA_DUPLEX_STATE         MediaDuplexState;
++    _Win32_AssociatedEnum_(NET_IF_MEDIA_DUPLEX_STATE) NDIS_MEDIA_DUPLEX_STATE         MediaDuplexState;
+     ULONG64                         XmitLinkSpeed;
+     ULONG64                         RcvLinkSpeed;
+     NDIS_SUPPORTED_PAUSE_FUNCTIONS  PauseFunctions;
+@@ -8506,7 +8507,7 @@ typedef struct _NDIS_SWITCH_NIC_SAVE_STATE
+ typedef struct _NDIS_PORT_STATE
+ {
+     NDIS_OBJECT_HEADER              Header;
+-    NDIS_MEDIA_CONNECT_STATE        MediaConnectState;
++    _Win32_AssociatedEnum_(NET_IF_MEDIA_CONNECT_STATE) NDIS_MEDIA_CONNECT_STATE        MediaConnectState;
+     ULONG64                         XmitLinkSpeed;
+     ULONG64                         RcvLinkSpeed;
+     NET_IF_DIRECTION_TYPE           Direction;
+@@ -8537,7 +8538,7 @@ typedef struct _NDIS_PORT_CHARACTERISTICS
+     NDIS_PORT_NUMBER                    PortNumber;
+     ULONG                               Flags;
+     NDIS_PORT_TYPE                      Type;
+-    NDIS_MEDIA_CONNECT_STATE            MediaConnectState;
++    _Win32_AssociatedEnum_(NET_IF_MEDIA_CONNECT_STATE) NDIS_MEDIA_CONNECT_STATE            MediaConnectState;
+     ULONG64                             XmitLinkSpeed;
+     ULONG64                             RcvLinkSpeed;
+     NET_IF_DIRECTION_TYPE               Direction;

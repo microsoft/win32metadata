@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h
+index 0a7c989bc0..af46792e8f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ifmib.h
+@@ -18,6 +18,7 @@ Abstract:
+ #define _IFMIB_
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -29,7 +30,7 @@ Abstract:
+ #define ANY_SIZE 1
+ #endif
+ 
+-typedef struct _MIB_IFNUMBER
++typedef struct   _MIB_IFNUMBER
+ {
+     DWORD    dwValue;
+ } MIB_IFNUMBER, *PMIB_IFNUMBER;
+@@ -45,7 +46,7 @@ typedef struct _MIB_IFNUMBER
+ 
+ #define MAX_INTERFACE_NAME_LEN 256
+ 
+-typedef struct _MIB_IFROW {
++typedef struct   _MIB_IFROW {
+     WCHAR wszName[MAX_INTERFACE_NAME_LEN];
+     IF_INDEX dwIndex;
+     IFTYPE dwType;
+@@ -72,7 +73,7 @@ typedef struct _MIB_IFROW {
+     UCHAR bDescr[MAXLEN_IFDESCR];
+ } MIB_IFROW, *PMIB_IFROW;
+ 
+-typedef struct _MIB_IFTABLE {
++typedef struct   _MIB_IFTABLE {
+     DWORD dwNumEntries;
+     MIB_IFROW table[ANY_SIZE];
+ } MIB_IFTABLE, *PMIB_IFTABLE;

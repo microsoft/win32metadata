@@ -1,0 +1,285 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h b/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h
+index f3d4707ab4..aeaf754d2b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ctfutb.h
+@@ -165,6 +165,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //=--------------------------------------------------------------------------=
+ // ctfutb.h
+ 
+@@ -263,7 +264,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("87955690-e627-11d2-8ddb-00105a2799b5")
++    MIDL_INTERFACE("87955690-e627-11d2-8ddb-00105a2799b5") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarMgr : public IUnknown
+     {
+     public:
+@@ -506,7 +507,7 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("18a4e900-e0ae-11d2-afdd-00105a2799b5")
++    MIDL_INTERFACE("18a4e900-e0ae-11d2-afdd-00105a2799b5") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarEventSink : public IUnknown
+     {
+     public:
+@@ -678,7 +679,7 @@ EXTERN_C const IID IID_ITfLangBarItemSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("57dbe1a0-de25-11d2-afdd-00105a2799b5")
++    MIDL_INTERFACE("57dbe1a0-de25-11d2-afdd-00105a2799b5") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItemSink : public IUnknown
+     {
+     public:
+@@ -765,7 +766,7 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("583f34d0-de25-11d2-afdd-00105a2799b5")
++    MIDL_INTERFACE("583f34d0-de25-11d2-afdd-00105a2799b5") _Windows_SupportedOS_Windows2000_ 
+     IEnumTfLangBarItems : public IUnknown
+     {
+     public:
+@@ -893,7 +894,7 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ #define	TF_LBI_DESC_MAXLEN	( 32 )
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("12a1d29f-a065-440c-9746-eb2002c8bd19") struct TF_LANGBARITEMINFO
++typedef /* [uuid] */  DECLSPEC_UUID("12a1d29f-a065-440c-9746-eb2002c8bd19") struct   TF_LANGBARITEMINFO
+     {
+     CLSID clsidService;
+     GUID guidItem;
+@@ -922,7 +923,7 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ba468c55-9956-4fb1-a59d-52a7dd7cc6aa")
++    MIDL_INTERFACE("ba468c55-9956-4fb1-a59d-52a7dd7cc6aa") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItemMgr : public IUnknown
+     {
+     public:
+@@ -1224,7 +1225,7 @@ EXTERN_C const IID IID_ITfLangBarItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("73540d69-edeb-4ee9-96c9-23aa30b25916")
++    MIDL_INTERFACE("73540d69-edeb-4ee9-96c9-23aa30b25916") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItem : public IUnknown
+     {
+     public:
+@@ -1242,7 +1243,7 @@ EXTERN_C const IID IID_ITfLangBarItem;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTooltipString( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrToolTip) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrToolTip) = 0;
+         
+     };
+     
+@@ -1362,7 +1363,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1449d9ab-13cf-4687-aa3e-8d8b18574396")
++    MIDL_INTERFACE("1449d9ab-13cf-4687-aa3e-8d8b18574396") _Windows_SupportedOS_Windows2000_ 
+     ITfSystemLangBarItemSink : public IUnknown
+     {
+     public:
+@@ -1462,7 +1463,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1e13e9ec-6b33-4d4a-b5eb-8a92f029f356")
++    MIDL_INTERFACE("1e13e9ec-6b33-4d4a-b5eb-8a92f029f356") _Windows_SupportedOS_Windows2000_ 
+     ITfSystemLangBarItem : public IUnknown
+     {
+     public:
+@@ -1566,7 +1567,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f")
++    MIDL_INTERFACE("5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f") _Windows_SupportedOS_Windows2000_ 
+     ITfSystemLangBarItemText : public IUnknown
+     {
+     public:
+@@ -1578,7 +1579,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetItemText( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrText) = 0;
+         
+     };
+     
+@@ -1670,13 +1671,13 @@ EXTERN_C const IID IID_ITfSystemDeviceTypeLangBarItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("45672eb9-9059-46a2-838d-4530355f6a77")
++    MIDL_INTERFACE("45672eb9-9059-46a2-838d-4530355f6a77") _Windows_SupportedOS_Windows2000_ 
+     ITfSystemDeviceTypeLangBarItem : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetIconMode( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags) = 0;
++            _Win32_AssociatedEnum_(LANG_BAR_ITEM_ICON_MODE_FLAGS) _In_  DWORD dwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIconMode( 
+             /* [annotation][out] */ 
+@@ -1793,7 +1794,7 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28c7f1d0-de25-11d2-afdd-00105a2799b5")
++    MIDL_INTERFACE("28c7f1d0-de25-11d2-afdd-00105a2799b5") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItemButton : public ITfLangBarItem
+     {
+     public:
+@@ -1815,11 +1816,11 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIcon( 
+             /* [annotation][out] */ 
+-            _Out_  HICON *phIcon) = 0;
++            _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_  HICON *phIcon) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetText( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrText) = 0;
+         
+     };
+     
+@@ -1977,7 +1978,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a26a0525-3fae-4fa0-89ee-88a964f9f1b5")
++    MIDL_INTERFACE("a26a0525-3fae-4fa0-89ee-88a964f9f1b5") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItemBitmapButton : public ITfLangBarItem
+     {
+     public:
+@@ -2011,13 +2012,13 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
+             /* [annotation][in] */ 
+             _In_  DWORD dwFlags,
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbmp,
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbmp,
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbmpMask) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbmpMask) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetText( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrText) = 0;
+         
+     };
+     
+@@ -2194,7 +2195,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("73830352-d722-4179-ada5-f045c98df355")
++    MIDL_INTERFACE("73830352-d722-4179-ada5-f045c98df355") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItemBitmap : public ITfLangBarItem
+     {
+     public:
+@@ -2220,9 +2221,9 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
+             /* [annotation][in] */ 
+             _In_  DWORD dwFlags,
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbmp,
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbmp,
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phbmpMask) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phbmpMask) = 0;
+         
+     };
+     
+@@ -2387,7 +2388,7 @@ enum __MIDL_ITfLangBarItemBalloon_0001
+         TF_LB_BALLOON_MISS	= 2
+     } 	TfLBBalloonStyle;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("37574483-5c50-4092-a55c-922e3a67e5b8") struct TF_LBBALLOONINFO
++typedef /* [uuid] */  DECLSPEC_UUID("37574483-5c50-4092-a55c-922e3a67e5b8") struct   TF_LBBALLOONINFO
+     {
+     TfLBBalloonStyle style;
+     BSTR bstrText;
+@@ -2398,7 +2399,7 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("01C2D285-D3C7-4B7B-B5B5-D97411D0C283")
++    MIDL_INTERFACE("01C2D285-D3C7-4B7B-B5B5-D97411D0C283") _Windows_SupportedOS_Windows2000_ 
+     ITfLangBarItemBalloon : public ITfLangBarItem
+     {
+     public:
+@@ -2582,7 +2583,7 @@ EXTERN_C const IID IID_ITfMenu;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6F8A98E4-AAA0-4F15-8C5B-07E0DF0A3DD8")
++    MIDL_INTERFACE("6F8A98E4-AAA0-4F15-8C5B-07E0DF0A3DD8") _Windows_SupportedOS_Windows2000_ 
+     ITfMenu : public IUnknown
+     {
+     public:
+@@ -2705,10 +2706,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  HBITMAP_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
+ void                      __RPC_USER  HBITMAP_UserFree(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -2725,10 +2726,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal64(  __RPC__in unsigned long *, _
+ unsigned char * __RPC_USER  HBITMAP_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
+ void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -2741,6 +2742,21 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TF_DTLBI_NONE")
++#undef TF_DTLBI_NONE
++#pragma push_macro("TF_DTLBI_USEPROFILEICON")
++#undef TF_DTLBI_USEPROFILEICON
++enum LANG_BAR_ITEM_ICON_MODE_FLAGS : unsigned int
++{
++    TF_DTLBI_NONE = 0U,
++    TF_DTLBI_USEPROFILEICON = 1U,
++};
++#pragma pop_macro("TF_DTLBI_USEPROFILEICON")
++#pragma pop_macro("TF_DTLBI_NONE")
++#endif
++
+ #endif
+ 
+ 

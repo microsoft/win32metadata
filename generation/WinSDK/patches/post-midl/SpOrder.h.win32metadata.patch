@@ -1,0 +1,76 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h b/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
+index 1fcca48d17..85ff747eb5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SpOrder.h
+@@ -23,6 +23,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -33,51 +34,55 @@ Revision History:
+ extern "C" {
+ #endif
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ int
+ WSPAPI
+ WSCWriteProviderOrder (
+-    IN LPDWORD lpwdCatalogEntryId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPDWORD lpwdCatalogEntryId,
+     IN DWORD dwNumberOfEntries
+     );
+ 
+ typedef
+ int
+ (WSPAPI * LPWSCWRITEPROVIDERORDER)(
+-    IN LPDWORD lpwdCatalogEntryId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPDWORD lpwdCatalogEntryId,
+     IN DWORD dwNumberOfEntries
+     );
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+ #ifdef _WIN64
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCWriteProviderOrder32 (
+-    IN LPDWORD lpwdCatalogEntryId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPDWORD lpwdCatalogEntryId,
+     IN DWORD dwNumberOfEntries
+     );
+ #endif //_WIN64
+ #endif //_WIN32_WINNT >= 0x0501
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ int
+ WSPAPI
+ WSCWriteNameSpaceOrder (
+-    IN LPGUID lpProviderId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID lpProviderId,
+     IN DWORD dwNumberOfEntries
+     );
+ 
+ typedef 
+ int
+ (WSPAPI * LPWSCWRITENAMESPACEORDER)(
+-    IN LPGUID lpProviderId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID lpProviderId,
+     IN DWORD dwNumberOfEntries
+     );
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+ #ifdef _WIN64
+-int
++_Windows_SupportedOS_WindowsVista_ int
+ WSPAPI
+ WSCWriteNameSpaceOrder32 (
+-    IN LPGUID lpProviderId,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPGUID lpProviderId,
+     IN DWORD dwNumberOfEntries
+     );
+ #endif //_WIN64

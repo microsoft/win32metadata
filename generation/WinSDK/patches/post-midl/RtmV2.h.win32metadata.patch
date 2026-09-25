@@ -1,0 +1,700 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
+index cff7f002a6..0108530eff 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
+@@ -21,6 +21,7 @@ Revision History:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -68,7 +69,7 @@ typedef DWORD RTM_VIEW_SET, *PRTM_VIEW_SET;
+ //
+ // Profile returned during registration
+ //
+-typedef struct _RTM_REGN_PROFILE
++typedef struct  _RTM_REGN_PROFILE
+ {
+     UINT            MaxNextHopsInRoute; // Max. number of equal cost nexthops
+                                         // in a route, & Max. number of local
+@@ -178,15 +179,15 @@ RTM_NET_ADDRESS, *PRTM_NET_ADDRESS;
+ 
+ DWORD
+ RtmConvertNetAddressToIpv6AddressAndLength(
+-    IN  PRTM_NET_ADDRESS         pNetAddress,
+-    OUT PIN6_ADDR                pAddress,
+-    OUT PDWORD                   pLength,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  PRTM_NET_ADDRESS         pNetAddress,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PIN6_ADDR                pAddress,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PDWORD                   pLength,
+     IN  DWORD                    dwAddressSize
+     );
+ 
+ DWORD
+ RtmConvertIpv6AddressAndLengthToNetAddress(
+-    OUT  PRTM_NET_ADDRESS         pNetAddress,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT  PRTM_NET_ADDRESS         pNetAddress,
+     IN   IN6_ADDR                 Address,
+     IN   DWORD                    dwLength,
+     IN   DWORD                    dwAddressSize
+@@ -518,8 +519,8 @@ DWORD
+ (WINAPI * _EVENT_CALLBACK) (
+      IN  RTM_ENTITY_HANDLE    RtmRegHandle,  // Callee's Registration Handle
+      IN  RTM_EVENT_TYPE       EventType,
+-     IN  PVOID                Context1,
+-     IN  PVOID                Context2
++     _WIN32META_ANNOTATION_("win32metadata:out") IN  PVOID                Context1,
++     _WIN32META_ANNOTATION_("win32metadata:out") IN  PVOID                Context2
+      );
+ 
+ typedef _EVENT_CALLBACK RTM_EVENT_CALLBACK,
+@@ -577,8 +578,8 @@ VOID
+ (WINAPI * _ENTITY_METHOD) (
+     IN  RTM_ENTITY_HANDLE         CallerHandle,
+     IN  RTM_ENTITY_HANDLE         CalleeHandle,
+-    IN  RTM_ENTITY_METHOD_INPUT  *Input,
+-    OUT RTM_ENTITY_METHOD_OUTPUT *Output
++    _WIN32META_ANNOTATION_("win32metadata:out") IN  RTM_ENTITY_METHOD_INPUT  *Input,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT RTM_ENTITY_METHOD_OUTPUT *Output
+     );
+ 
+ typedef _ENTITY_METHOD RTM_ENTITY_EXPORT_METHOD,
+@@ -692,45 +693,48 @@ typedef DWORD          RTM_NOTIFY_FLAGS,
+ // Registration API Prototypes
+ //
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ RtmRegisterEntity (
+-    IN      PRTM_ENTITY_INFO                RtmEntityInfo,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ENTITY_INFO                RtmEntityInfo,
+     IN      PRTM_ENTITY_EXPORT_METHODS      ExportMethods OPTIONAL,
+     IN      RTM_EVENT_CALLBACK              EventCallback,
+     IN      BOOL                            ReserveOpaquePointer,
+-    OUT     PRTM_REGN_PROFILE               RtmRegProfile,
+-    OUT     PRTM_ENTITY_HANDLE              RtmRegHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_REGN_PROFILE               RtmRegProfile,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENTITY_HANDLE              RtmRegHandle
+     );
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ RtmDeregisterEntity (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle
+     );
+ 
++_Windows_SupportedOS_Server2000_
+ DWORD
+ WINAPI
+ RtmGetRegisteredEntities (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN OUT  PUINT                           NumEntities,
+-    OUT     PRTM_ENTITY_HANDLE              EntityHandles,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENTITY_HANDLE              EntityHandles,
+     OUT     PRTM_ENTITY_INFO                EntityInfos OPTIONAL
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseEntities (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      UINT                            NumEntities,
+-    IN      PRTM_ENTITY_HANDLE              EntityHandles
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ENTITY_HANDLE              EntityHandles
+     );
+ 
+ //
+ // Opaque Ptr APIs
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmLockDestination(
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -739,38 +743,38 @@ RtmLockDestination(
+     IN      BOOL                            LockDest
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetOpaqueInformationPointer (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_DEST_HANDLE                 DestHandle,
+-    OUT     PVOID                          *OpaqueInfoPointer
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PVOID                          *OpaqueInfoPointer
+     );
+ 
+ //
+ // Export Method API Prototypes
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetEntityMethods (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENTITY_HANDLE               EntityHandle,
+     IN OUT  PUINT                           NumMethods,
+-    OUT     PRTM_ENTITY_EXPORT_METHOD       ExptMethods
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENTITY_EXPORT_METHOD       ExptMethods
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmInvokeMethod (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENTITY_HANDLE               EntityHandle,
+-    IN      PRTM_ENTITY_METHOD_INPUT        Input,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ENTITY_METHOD_INPUT        Input,
+     IN OUT  PUINT                           OutputSize,
+-    OUT     PRTM_ENTITY_METHOD_OUTPUT       Output
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENTITY_METHOD_OUTPUT       Output
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmBlockMethods (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -783,25 +787,25 @@ RtmBlockMethods (
+ // Handle to Info Structures
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetEntityInfo (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENTITY_HANDLE               EntityHandle,
+-    OUT     PRTM_ENTITY_INFO                EntityInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENTITY_INFO                EntityInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetDestInfo (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_DEST_HANDLE                 DestHandle,
+     IN      ULONG                           ProtocolId,
+     IN      RTM_VIEW_SET                    TargetViews,
+-    OUT     PRTM_DEST_INFO                  DestInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_DEST_INFO                  DestInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetRouteInfo (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -810,40 +814,40 @@ RtmGetRouteInfo (
+     OUT     PRTM_NET_ADDRESS                DestAddress OPTIONAL
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetNextHopInfo (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NEXTHOP_HANDLE              NextHopHandle,
+-    OUT     PRTM_NEXTHOP_INFO               NextHopInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_NEXTHOP_INFO               NextHopInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseEntityInfo (
+     IN      RTM_ENTITY_HANDLE              RtmRegHandle,
+-    IN      PRTM_ENTITY_INFO               EntityInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ENTITY_INFO               EntityInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseDestInfo (
+     IN      RTM_ENTITY_HANDLE              RtmRegHandle,
+-    IN      PRTM_DEST_INFO                 DestInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_DEST_INFO                 DestInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseRouteInfo (
+     IN      RTM_ENTITY_HANDLE              RtmRegHandle,
+-    IN      PRTM_ROUTE_INFO                RouteInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ROUTE_INFO                RouteInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseNextHopInfo (
+     IN      RTM_ENTITY_HANDLE              RtmRegHandle,
+-    IN      PRTM_NEXTHOP_INFO              NextHopInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NEXTHOP_INFO              NextHopInfo
+     );
+ 
+ 
+@@ -851,13 +855,13 @@ RtmReleaseNextHopInfo (
+ // RIB Insert/Delete API Prototypes
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmAddRouteToDest (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN OUT  PRTM_ROUTE_HANDLE               RouteHandle     OPTIONAL,
+-    IN      PRTM_NET_ADDRESS                DestAddress,
+-    IN      PRTM_ROUTE_INFO                 RouteInfo,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NET_ADDRESS                DestAddress,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ROUTE_INFO                 RouteInfo,
+     IN      ULONG                           TimeToLive,
+     IN      RTM_ROUTE_LIST_HANDLE           RouteListHandle OPTIONAL,
+     IN      RTM_NOTIFY_FLAGS                NotifyType,
+@@ -865,15 +869,15 @@ RtmAddRouteToDest (
+     IN OUT  PRTM_ROUTE_CHANGE_FLAGS         ChangeFlags
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmDeleteRouteToDest (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ROUTE_HANDLE                RouteHandle,
+-    OUT     PRTM_ROUTE_CHANGE_FLAGS         ChangeFlags
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ROUTE_CHANGE_FLAGS         ChangeFlags
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmHoldDestination (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -882,15 +886,15 @@ RtmHoldDestination (
+     IN      ULONG                           HoldTime
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetRoutePointer (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ROUTE_HANDLE                RouteHandle,
+-    OUT     PRTM_ROUTE_INFO                *RoutePointer
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ROUTE_INFO                *RoutePointer
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmLockRoute(
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -900,7 +904,7 @@ RtmLockRoute(
+     OUT     PRTM_ROUTE_INFO                *RoutePointer OPTIONAL
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmUpdateAndUnlockRoute(
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -909,102 +913,102 @@ RtmUpdateAndUnlockRoute(
+     IN      RTM_ROUTE_LIST_HANDLE           RouteListHandle OPTIONAL,
+     IN      RTM_NOTIFY_FLAGS                NotifyType,
+     IN      RTM_NOTIFY_HANDLE               NotifyHandle    OPTIONAL,
+-    OUT     PRTM_ROUTE_CHANGE_FLAGS         ChangeFlags
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ROUTE_CHANGE_FLAGS         ChangeFlags
+     );
+ 
+ //
+ // RIB Query API Prototypes
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetExactMatchDestination (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+-    IN      PRTM_NET_ADDRESS                DestAddress,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NET_ADDRESS                DestAddress,
+     IN      ULONG                           ProtocolId,
+     IN      RTM_VIEW_SET                    TargetViews,
+-    OUT     PRTM_DEST_INFO                  DestInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_DEST_INFO                  DestInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetMostSpecificDestination (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+-    IN      PRTM_NET_ADDRESS                DestAddress,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NET_ADDRESS                DestAddress,
+     IN      ULONG                           ProtocolId,
+     IN      RTM_VIEW_SET                    TargetViews,
+-    OUT     PRTM_DEST_INFO                  DestInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_DEST_INFO                  DestInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetLessSpecificDestination (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_DEST_HANDLE                 DestHandle,
+     IN      ULONG                           ProtocolId,
+     IN      RTM_VIEW_SET                    TargetViews,
+-    OUT     PRTM_DEST_INFO                  DestInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_DEST_INFO                  DestInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetExactMatchRoute (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+-    IN      PRTM_NET_ADDRESS                DestAddress,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NET_ADDRESS                DestAddress,
+     IN      RTM_MATCH_FLAGS                 MatchingFlags,
+     IN OUT  PRTM_ROUTE_INFO                 RouteInfo,
+     IN      ULONG                           InterfaceIndex,
+     IN      RTM_VIEW_SET                    TargetViews,
+-    OUT     PRTM_ROUTE_HANDLE               RouteHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ROUTE_HANDLE               RouteHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmIsBestRoute (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ROUTE_HANDLE                RouteHandle,
+-    OUT     PRTM_VIEW_SET                   BestInViews
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_VIEW_SET                   BestInViews
+     );
+ 
+ //
+ // NextHop Object API Prototypes
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmAddNextHop (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+-    IN      PRTM_NEXTHOP_INFO               NextHopInfo,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NEXTHOP_INFO               NextHopInfo,
+     IN OUT  PRTM_NEXTHOP_HANDLE             NextHopHandle OPTIONAL,
+-    OUT     PRTM_NEXTHOP_CHANGE_FLAGS       ChangeFlags
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_NEXTHOP_CHANGE_FLAGS       ChangeFlags
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmFindNextHop (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+-    IN      PRTM_NEXTHOP_INFO               NextHopInfo,
+-    OUT     PRTM_NEXTHOP_HANDLE             NextHopHandle,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NEXTHOP_INFO               NextHopInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_NEXTHOP_HANDLE             NextHopHandle,
+     OUT     PRTM_NEXTHOP_INFO              *NextHopPointer OPTIONAL
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmDeleteNextHop (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NEXTHOP_HANDLE              NextHopHandle  OPTIONAL,
+-    IN      PRTM_NEXTHOP_INFO               NextHopInfo
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NEXTHOP_INFO               NextHopInfo
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetNextHopPointer (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NEXTHOP_HANDLE              NextHopHandle,
+-    OUT     PRTM_NEXTHOP_INFO              *NextHopPointer
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_NEXTHOP_INFO              *NextHopPointer
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmLockNextHop(
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1019,35 +1023,35 @@ RtmLockNextHop(
+ // Enumeration API Prototypes
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmCreateDestEnum (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_VIEW_SET                    TargetViews,
+     IN      RTM_ENUM_FLAGS                  EnumFlags,
+-    IN      PRTM_NET_ADDRESS                NetAddress,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NET_ADDRESS                NetAddress,
+     IN      ULONG                           ProtocolId,
+-    OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetEnumDests (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENUM_HANDLE                 EnumHandle,
+     IN OUT  PUINT                           NumDests,
+-    OUT     PRTM_DEST_INFO                  DestInfos
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_DEST_INFO                  DestInfos
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseDests (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      UINT                            NumDests,
+-    IN      PRTM_DEST_INFO                  DestInfos
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_DEST_INFO                  DestInfos
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmCreateRouteEnum (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1058,53 +1062,53 @@ RtmCreateRouteEnum (
+     IN      RTM_MATCH_FLAGS                 MatchingFlags,
+     IN      PRTM_ROUTE_INFO                 CriteriaRoute     OPTIONAL,
+     IN      ULONG                           CriteriaInterface OPTIONAL,
+-    OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetEnumRoutes (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENUM_HANDLE                 EnumHandle,
+     IN OUT  PUINT                           NumRoutes,
+-    OUT     PRTM_ROUTE_HANDLE               RouteHandles
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ROUTE_HANDLE               RouteHandles
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseRoutes (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      UINT                            NumRoutes,
+-    IN      PRTM_ROUTE_HANDLE               RouteHandles
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ROUTE_HANDLE               RouteHandles
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmCreateNextHopEnum (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENUM_FLAGS                  EnumFlags,
+-    IN      PRTM_NET_ADDRESS                NetAddress,
+-    OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NET_ADDRESS                NetAddress,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetEnumNextHops (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ENUM_HANDLE                 EnumHandle,
+     IN OUT  PUINT                           NumNextHops,
+-    OUT     PRTM_NEXTHOP_HANDLE             NextHopHandles
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_NEXTHOP_HANDLE             NextHopHandles
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseNextHops (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      UINT                            NumNextHops,
+-    IN      PRTM_NEXTHOP_HANDLE             NextHopHandles
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_NEXTHOP_HANDLE             NextHopHandles
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmDeleteEnumHandle (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1116,53 +1120,53 @@ RtmDeleteEnumHandle (
+ // Change Notification APIs
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmRegisterForChangeNotification (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_VIEW_SET                    TargetViews,
+     IN      RTM_NOTIFY_FLAGS                NotifyFlags,
+-    IN      PVOID                           NotifyContext,
+-    OUT     PRTM_NOTIFY_HANDLE              NotifyHandle
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PVOID                           NotifyContext,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_NOTIFY_HANDLE              NotifyHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetChangedDests (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NOTIFY_HANDLE               NotifyHandle,
+     IN OUT  PUINT                           NumDests,
+-    OUT     PRTM_DEST_INFO                  ChangedDests
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_DEST_INFO                  ChangedDests
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReleaseChangedDests (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NOTIFY_HANDLE               NotifyHandle,
+     IN      UINT                            NumDests,
+-    IN      PRTM_DEST_INFO                  ChangedDests
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_DEST_INFO                  ChangedDests
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmIgnoreChangedDests (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NOTIFY_HANDLE               NotifyHandle,
+     IN      UINT                            NumDests,
+-    IN      PRTM_DEST_HANDLE                ChangedDests
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_DEST_HANDLE                ChangedDests
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetChangeStatus (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NOTIFY_HANDLE               NotifyHandle,
+     IN      RTM_DEST_HANDLE                 DestHandle,
+-    OUT     PBOOL                           ChangeStatus
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PBOOL                           ChangeStatus
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmMarkDestForChangeNotification (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1171,16 +1175,16 @@ RtmMarkDestForChangeNotification (
+     IN      BOOL                            MarkDest
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmIsMarkedForChangeNotification (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_NOTIFY_HANDLE               NotifyHandle,
+     IN      RTM_DEST_HANDLE                 DestHandle,
+-    OUT     PBOOL                           DestMarked
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PBOOL                           DestMarked
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmDeregisterFromChangeNotification (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1192,31 +1196,31 @@ RtmDeregisterFromChangeNotification (
+ // Entity Specific List APIs
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmCreateRouteList (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+-    OUT     PRTM_ROUTE_LIST_HANDLE          RouteListHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ROUTE_LIST_HANDLE          RouteListHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmInsertInRouteList (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ROUTE_LIST_HANDLE           RouteListHandle OPTIONAL,
+     IN      UINT                            NumRoutes,
+-    IN      PRTM_ROUTE_HANDLE               RouteHandles
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      PRTM_ROUTE_HANDLE               RouteHandles
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmCreateRouteListEnum (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      RTM_ROUTE_LIST_HANDLE           RouteListHandle,
+-    OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENUM_HANDLE                RtmEnumHandle
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmGetListEnumRoutes (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1225,7 +1229,7 @@ RtmGetListEnumRoutes (
+     _Out_writes_(*NumRoutes) OUT     PRTM_ROUTE_HANDLE               RouteHandles
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmDeleteRouteList (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+@@ -1236,12 +1240,12 @@ RtmDeleteRouteList (
+ // Handle Management APIs
+ //
+ 
+-DWORD
++_Windows_SupportedOS_Server2000_ DWORD
+ WINAPI
+ RtmReferenceHandles (
+     IN      RTM_ENTITY_HANDLE               RtmRegHandle,
+     IN      UINT                            NumHandles,
+-    IN      HANDLE                         *RtmHandles
++    _WIN32META_ANNOTATION_("win32metadata:out") IN      HANDLE                         *RtmHandles
+     );
+ 
+ #ifdef __cplusplus

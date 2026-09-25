@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h b/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h
+index 2121ec2c32..590f61d37c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dot1x.h
+@@ -6,6 +6,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -138,7 +139,7 @@ typedef struct _ONEX_VARIABLE_BLOB
+ /*
+     The set of parameters that define the authentication context for 1X
+     */
+-typedef struct _ONEX_AUTH_PARAMS
++typedef struct   _ONEX_AUTH_PARAMS
+ {
+     BOOL fUpdatePending;
+     ONEX_VARIABLE_BLOB oneXConnProfile;    
+@@ -162,7 +163,7 @@ typedef struct _ONEX_AUTH_PARAMS
+     ONEX_VARIABLE_BLOB Domain;
+ } ONEX_AUTH_PARAMS, *PONEX_AUTH_PARAMS;
+ 
+-typedef struct _ONEX_EAP_ERROR
++typedef struct   _ONEX_EAP_ERROR
+ {
+ 	DWORD dwWinError;
+ 	EAP_METHOD_TYPE type;
+@@ -179,7 +180,7 @@ typedef struct _ONEX_EAP_ERROR
+ 	ONEX_VARIABLE_BLOB RepairString;
+ } ONEX_EAP_ERROR, *PONEX_EAP_ERROR;
+ 
+-typedef struct _ONEX_STATUS
++typedef struct   _ONEX_STATUS
+ {
+     ONEX_AUTH_STATUS authStatus;
+     /*
+@@ -197,7 +198,7 @@ typedef V1_ENUM enum _ONEX_EAP_METHOD_BACKEND_SUPPORT
+     OneXEapMethodBackendUnsupported
+ }ONEX_EAP_METHOD_BACKEND_SUPPORT;
+ 
+-typedef struct _ONEX_RESULT_UPDATE_DATA
++typedef struct   _ONEX_RESULT_UPDATE_DATA
+ {
+     ONEX_STATUS oneXStatus;
+     ONEX_EAP_METHOD_BACKEND_SUPPORT BackendSupport;

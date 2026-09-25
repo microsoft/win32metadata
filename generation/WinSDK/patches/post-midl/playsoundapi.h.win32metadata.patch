@@ -1,0 +1,127 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
+index 3ee73f72b5..cbf1ef907d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/playsoundapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * playsoundapi.h -- ApiSet Contract for api-ms-win-mm-playsound-l1-1-0          *
+@@ -34,7 +35,7 @@ extern "C" {
+ 
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ BOOL
+ WINAPI
+ sndPlaySoundA(
+@@ -42,7 +43,7 @@ sndPlaySoundA(
+     _In_ UINT fuSound
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ BOOL
+ WINAPI
+ sndPlaySoundW(
+@@ -98,22 +99,22 @@ BOOL WINAPI sndPlaySound(LPCSTR pszSound, UINT fuSound);
+ #define SND_ALIAS_SYSTEMEXCLAMATION     sndAlias('S', '!')
+ #define SND_ALIAS_SYSTEMDEFAULT         sndAlias('S', 'D')
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ BOOL
+ WINAPI
+ PlaySoundA(
+     _In_opt_ LPCSTR pszSound,
+     _In_opt_ HMODULE hmod,
+-    _In_ DWORD fdwSound
++    _Win32_AssociatedEnum_(SND_FLAGS) _In_ DWORD fdwSound
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ BOOL
+ WINAPI
+ PlaySoundW(
+     _In_opt_ LPCWSTR pszSound,
+     _In_opt_ HMODULE hmod,
+-    _In_ DWORD fdwSound
++    _Win32_AssociatedEnum_(SND_FLAGS) _In_ DWORD fdwSound
+     );
+ 
+ #ifdef UNICODE
+@@ -136,5 +137,72 @@ BOOL WINAPI PlaySound(LPCSTR pszSound, HMODULE hmod, DWORD fdwSound);
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SND_APPLICATION")
++#undef SND_APPLICATION
++#pragma push_macro("SND_ALIAS")
++#undef SND_ALIAS
++#pragma push_macro("SND_ALIAS_ID")
++#undef SND_ALIAS_ID
++#pragma push_macro("SND_FILENAME")
++#undef SND_FILENAME
++#pragma push_macro("SND_RESOURCE")
++#undef SND_RESOURCE
++#pragma push_macro("SND_ASYNC")
++#undef SND_ASYNC
++#pragma push_macro("SND_NODEFAULT")
++#undef SND_NODEFAULT
++#pragma push_macro("SND_LOOP")
++#undef SND_LOOP
++#pragma push_macro("SND_MEMORY")
++#undef SND_MEMORY
++#pragma push_macro("SND_NOSTOP")
++#undef SND_NOSTOP
++#pragma push_macro("SND_NOWAIT")
++#undef SND_NOWAIT
++#pragma push_macro("SND_PURGE")
++#undef SND_PURGE
++#pragma push_macro("SND_SENTRY")
++#undef SND_SENTRY
++#pragma push_macro("SND_SYNC")
++#undef SND_SYNC
++#pragma push_macro("SND_SYSTEM")
++#undef SND_SYSTEM
++enum [[clang::flag_enum]] SND_FLAGS : unsigned int
++{
++    SND_APPLICATION = 128U,
++    SND_ALIAS = 65536U,
++    SND_ALIAS_ID = 1114112U,
++    SND_FILENAME = 131072U,
++    SND_RESOURCE = 262148U,
++    SND_ASYNC = 1U,
++    SND_NODEFAULT = 2U,
++    SND_LOOP = 8U,
++    SND_MEMORY = 4U,
++    SND_NOSTOP = 16U,
++    SND_NOWAIT = 8192U,
++    SND_PURGE = 64U,
++    SND_SENTRY = 524288U,
++    SND_SYNC = 0U,
++    SND_SYSTEM = 2097152U,
++};
++#pragma pop_macro("SND_SYSTEM")
++#pragma pop_macro("SND_SYNC")
++#pragma pop_macro("SND_SENTRY")
++#pragma pop_macro("SND_PURGE")
++#pragma pop_macro("SND_NOWAIT")
++#pragma pop_macro("SND_NOSTOP")
++#pragma pop_macro("SND_MEMORY")
++#pragma pop_macro("SND_LOOP")
++#pragma pop_macro("SND_NODEFAULT")
++#pragma pop_macro("SND_ASYNC")
++#pragma pop_macro("SND_RESOURCE")
++#pragma pop_macro("SND_FILENAME")
++#pragma pop_macro("SND_ALIAS_ID")
++#pragma pop_macro("SND_ALIAS")
++#pragma pop_macro("SND_APPLICATION")
++#endif
++
+ #endif // _PLAYSOUNDAPI_H_
+ 

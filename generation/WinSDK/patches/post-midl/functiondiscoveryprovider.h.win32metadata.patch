@@ -1,0 +1,81 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryprovider.h b/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryprovider.h
+index bda01d9dc1..58e483ed39 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryprovider.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/functiondiscoveryprovider.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -140,7 +141,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dcde394f-1478-4813-a402-f6fb10657222")
++    MIDL_INTERFACE("dcde394f-1478-4813-a402-f6fb10657222") _Windows_SupportedOS_WindowsVista_ 
+     IFunctionDiscoveryProvider : public IUnknown
+     {
+     public:
+@@ -374,7 +375,7 @@ EXTERN_C const IID IID_IProviderProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17")
++    MIDL_INTERFACE("cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17") _Windows_SupportedOS_WindowsVista_ 
+     IProviderProperties : public IUnknown
+     {
+     public:
+@@ -544,7 +545,7 @@ EXTERN_C const IID IID_IProviderPublishing;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CD1B9A04-206C-4a05-A0C8-1635A21A2B7C")
++    MIDL_INTERFACE("CD1B9A04-206C-4a05-A0C8-1635A21A2B7C") _Windows_SupportedOS_WindowsVista_ 
+     IProviderPublishing : public IUnknown
+     {
+     public:
+@@ -664,7 +665,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("86443ff0-1ad5-4e68-a45a-40c2c329de3b")
++    MIDL_INTERFACE("86443ff0-1ad5-4e68-a45a-40c2c329de3b") _Windows_SupportedOS_WindowsVista_ 
+     IFunctionDiscoveryProviderFactory : public IUnknown
+     {
+     public:
+@@ -797,7 +798,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6876ea98-baec-46db-bc20-75a76e267a3a")
++    MIDL_INTERFACE("6876ea98-baec-46db-bc20-75a76e267a3a") _Windows_SupportedOS_WindowsVista_ 
+     IFunctionDiscoveryProviderQuery : public IUnknown
+     {
+     public:
+@@ -931,7 +932,7 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9c243e11-3261-4bcd-b922-84a873d460ae")
++    MIDL_INTERFACE("9c243e11-3261-4bcd-b922-84a873d460ae") _Windows_SupportedOS_WindowsVista_ 
+     IProviderQueryConstraintCollection : public IUnknown
+     {
+     public:
+@@ -1091,7 +1092,7 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f4fae42f-5778-4a13-8540-b5fd8c1398dd")
++    MIDL_INTERFACE("f4fae42f-5778-4a13-8540-b5fd8c1398dd") _Windows_SupportedOS_WindowsVista_ 
+     IProviderPropertyConstraintCollection : public IUnknown
+     {
+     public:
+@@ -1263,7 +1264,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryServiceProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4c81ed02-1b04-43f2-a451-69966cbcd1c2")
++    MIDL_INTERFACE("4c81ed02-1b04-43f2-a451-69966cbcd1c2") _Windows_SupportedOS_WindowsVista_ 
+     IFunctionDiscoveryServiceProvider : public IUnknown
+     {
+     public:

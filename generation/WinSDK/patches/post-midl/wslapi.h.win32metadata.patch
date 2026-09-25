@@ -1,0 +1,82 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wslapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wslapi.h
+index 2531a6f84c..6bd85398fe 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wslapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wslapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * wslapi.h -- ApiSet Contract for api-ms-win-wsl-api-l1-1-0                     *
+@@ -31,20 +32,20 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SERVER)
+ 
+ /* Determines if a distribution is already registered */
+-BOOL
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") BOOL
+ WslIsDistributionRegistered(
+     _In_ PCWSTR distributionName
+     );
+ 
+ /* Registers a new distribution given the information provided. */
+-HRESULT
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") HRESULT
+ WslRegisterDistribution(
+     _In_ PCWSTR distributionName,
+     _In_ PCWSTR tarGzFilename
+     );
+ 
+ /* Unregisters the specified distribution */
+-HRESULT
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") HRESULT
+ WslUnregisterDistribution(
+     _In_ PCWSTR distributionName
+     );
+@@ -63,25 +64,25 @@ DEFINE_ENUM_FLAG_OPERATORS(WSL_DISTRIBUTION_FLAGS);
+ #define WSL_DISTRIBUTION_FLAGS_DEFAULT (WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP | WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH | WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING)
+ 
+ /* Configure the given distribution */
+-HRESULT
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") HRESULT
+ WslConfigureDistribution(
+     _In_ PCWSTR distributionName,
+     _In_ ULONG defaultUID,
+-    _In_ WSL_DISTRIBUTION_FLAGS wslDistributionFlags
++     _In_ WSL_DISTRIBUTION_FLAGS wslDistributionFlags
+     );
+ 
+ /* Get the given distribution's configuration info */
+-HRESULT
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") HRESULT
+ WslGetDistributionConfiguration(
+     _In_ PCWSTR distributionName,
+     _Out_ ULONG* distributionVersion,
+     _Out_ ULONG* defaultUID,
+-    _Out_ WSL_DISTRIBUTION_FLAGS* wslDistributionFlags,
++     _Out_ WSL_DISTRIBUTION_FLAGS* wslDistributionFlags,
+     _Outptr_result_buffer_(*defaultEnvironmentVariableCount) PSTR** defaultEnvironmentVariables,
+     _Out_ ULONG* defaultEnvironmentVariableCount
+     );
+ 
+-HRESULT
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") HRESULT
+ WslLaunchInteractive(
+     _In_ PCWSTR distributionName,
+     _In_opt_ PCWSTR command,
+@@ -89,7 +90,7 @@ WslLaunchInteractive(
+     _Out_ DWORD* exitCode
+     );
+ 
+-HRESULT
++_Win32_ImportLibrary_("api-ms-win-wsl-api-l1-1-0.dll") HRESULT
+ WslLaunch(
+     _In_ PCWSTR distributionName,
+     _In_opt_ PCWSTR command,
+@@ -97,7 +98,7 @@ WslLaunch(
+     _In_ HANDLE stdIn,
+     _In_ HANDLE stdOut,
+     _In_ HANDLE stdErr,
+-    _Out_ HANDLE* process
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* process
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SERVER) */

@@ -1,0 +1,513 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
+index 63c850c407..5ab059cbd2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ #include <winapifamily.h>
+ 
+@@ -156,17 +157,17 @@ typedef struct {
+ } INTERNET_SECURITY_CONNECTION_INFO , * LPINTERNET_SECURITY_CONNECTION_INFO;
+ 
+ 
+-BOOLAPI InternetAlgIdToStringA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI InternetAlgIdToStringA(
+     _In_                            ALG_ID  ai,
+     _Out_writes_(*lpdwstrLength)    LPSTR lpstr,
+     _Inout_                         LPDWORD lpdwstrLength,
+-    _Reserved_                      DWORD   dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                      DWORD   dwReserved
+     );
+-BOOLAPI InternetAlgIdToStringW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI InternetAlgIdToStringW(
+     _In_                            ALG_ID  ai,
+     _Out_writes_(*lpdwstrLength)    LPWSTR lpstr,
+     _Inout_                         LPDWORD lpdwstrLength,
+-    _Reserved_                      DWORD   dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                      DWORD   dwReserved
+     );
+ #ifdef UNICODE
+ #define InternetAlgIdToString  InternetAlgIdToStringW
+@@ -174,19 +175,19 @@ BOOLAPI InternetAlgIdToStringW(
+ #define InternetAlgIdToString  InternetAlgIdToStringA
+ #endif // !UNICODE
+ 
+-BOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI
+ InternetSecurityProtocolToStringA(
+     _In_                                    DWORD   dwProtocol,
+     _Out_writes_to_opt_(*lpdwstrLength, *lpdwstrLength)    LPSTR lpstr,
+     _Inout_                                 LPDWORD lpdwstrLength,
+-    _Reserved_                              DWORD   dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                              DWORD   dwReserved
+     );
+-BOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI
+ InternetSecurityProtocolToStringW(
+     _In_                                    DWORD   dwProtocol,
+     _Out_writes_to_opt_(*lpdwstrLength, *lpdwstrLength)    LPWSTR lpstr,
+     _Inout_                                 LPDWORD lpdwstrLength,
+-    _Reserved_                              DWORD   dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                              DWORD   dwReserved
+     );
+ #ifdef UNICODE
+ #define InternetSecurityProtocolToString  InternetSecurityProtocolToStringW
+@@ -201,13 +202,13 @@ InternetSecurityProtocolToStringW(
+ // security info based on a URL
+ //
+ 
+-BOOLAPI InternetGetSecurityInfoByURLA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI InternetGetSecurityInfoByURLA(
+     _In_       LPSTR    lpszURL,
+     _Out_      PCCERT_CHAIN_CONTEXT * ppCertChain,
+     _Out_      DWORD  *pdwSecureFlags
+     );
+ 
+-BOOLAPI InternetGetSecurityInfoByURLW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI InternetGetSecurityInfoByURLW(
+     _In_       LPCWSTR  lpszURL,
+     _Out_      PCCERT_CHAIN_CONTEXT * ppCertChain,
+     _Out_      DWORD  *pdwSecureFlags
+@@ -219,7 +220,7 @@ BOOLAPI InternetGetSecurityInfoByURLW(
+ #ifdef _WINX32_
+ #define InternetGetSecurityInfoByURL  InternetGetSecurityInfoByURLA
+ #else
+-BOOLAPI InternetGetSecurityInfoByURL(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI InternetGetSecurityInfoByURL(
+     _In_       LPSTR    lpszURL,
+     _Out_      PCCERT_CHAIN_CONTEXT * ppCertChain,
+     _Out_      DWORD  *pdwSecureFlags
+@@ -264,12 +265,12 @@ INTERNETAPI_(DWORD) ParseX509EncodedCertificateForListBoxEntry(
+ // security info based on a URL
+ //
+ 
+-BOOLAPI InternetShowSecurityInfoByURLA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI InternetShowSecurityInfoByURLA(
+     _In_       LPSTR    lpszURL,
+     _In_       HWND     hwndParent
+     );
+ 
+-BOOLAPI InternetShowSecurityInfoByURLW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI InternetShowSecurityInfoByURLW(
+     _In_       LPCWSTR  lpszURL,
+     _In_       HWND     hwndParent
+     );
+@@ -293,7 +294,7 @@ BOOLAPI InternetShowSecurityInfoByURLW(
+ #ifdef _WINX32_
+ #define InternetShowSecurityInfoByURL  InternetShowSecurityInfoByURLA
+ #else
+-BOOLAPI InternetShowSecurityInfoByURL(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI InternetShowSecurityInfoByURL(
+     _In_       LPSTR    lpszURL,
+     _In_       HWND     hwndParent
+     );
+@@ -314,7 +315,7 @@ typedef enum {
+ BOOLAPI InternetFortezzaCommand(
+     _In_ DWORD dwCommand,
+     _In_ HWND hwnd,
+-    _Reserved_ DWORD_PTR dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved);
+ 
+ 
+ typedef enum {
+@@ -324,7 +325,7 @@ typedef enum {
+ 
+ BOOLAPI InternetQueryFortezzaStatus(
+     _Out_ DWORD *pdwStatus,
+-    _Reserved_ DWORD_PTR dwReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD_PTR dwReserved
+ );
+ 
+ 
+@@ -357,13 +358,13 @@ BOOLAPI InternetDebugGetLocalTime(
+                     dwContext                       \
+                     )
+ 
+-BOOLAPI InternetWriteFileExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI InternetWriteFileExA(
+     _In_ HINTERNET hFile,
+     _In_ LPINTERNET_BUFFERSA lpBuffersIn,
+     _In_ DWORD dwFlags,
+     _In_opt_ DWORD_PTR dwContext
+     );
+-BOOLAPI InternetWriteFileExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI InternetWriteFileExW(
+     _In_ HINTERNET hFile,
+     _In_ LPINTERNET_BUFFERSW lpBuffersIn,
+     _In_ DWORD dwFlags,
+@@ -669,7 +670,7 @@ HttpGetServerCredentials(
+ // HTTP push notifications
+ //
+ 
+-DECLARE_HANDLE(HTTP_PUSH_WAIT_HANDLE);
++DECLARE_HANDLE(HTTP_PUSH_WAIT_HANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ typedef struct _HTTP_PUSH_TRANSPORT_SETTING
+ {
+@@ -709,7 +710,7 @@ HttpPushClose(
+     _In_ HTTP_PUSH_WAIT_HANDLE hWait
+ );
+ 
+-typedef struct _INTERNET_COOKIE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _INTERNET_COOKIE {
+     DWORD cbSize;
+     LPSTR pszName;
+     LPSTR pszData;
+@@ -791,7 +792,7 @@ typedef struct _COOKIE_DLG_INFO {
+ //
+ // DAV Detection
+ //
+-BOOLAPI HttpCheckDavComplianceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI HttpCheckDavComplianceA(
+     _In_ LPCSTR lpszUrl,
+     _In_ LPCSTR lpszComplianceToken,
+     _Inout_ LPBOOL lpfFound,
+@@ -801,7 +802,7 @@ BOOLAPI HttpCheckDavComplianceA(
+ //
+ // DAV Detection
+ //
+-BOOLAPI HttpCheckDavComplianceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI HttpCheckDavComplianceW(
+     _In_ LPCWSTR lpszUrl,
+     _In_ LPCWSTR lpszComplianceToken,
+     _Inout_ LPBOOL lpfFound,
+@@ -974,12 +975,12 @@ typedef LPINTERNET_CACHE_CONFIG_INFOA LPINTERNET_CACHE_CONFIG_INFO;
+ #endif
+ 
+ 
+-BOOLAPI IsUrlCacheEntryExpiredA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI IsUrlCacheEntryExpiredA(
+     _In_      LPCSTR        lpszUrlName,
+     _In_      DWORD           dwFlags,
+     _Inout_   FILETIME*       pftLastModified
+     );
+-BOOLAPI IsUrlCacheEntryExpiredW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI IsUrlCacheEntryExpiredW(
+     _In_      LPCWSTR        lpszUrlName,
+     _In_      DWORD           dwFlags,
+     _Inout_   FILETIME*       pftLastModified
+@@ -1042,25 +1043,25 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ (0x100)
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ_WRITE (0x300)
+ 
+-BOOLAPI CreateUrlCacheContainerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI CreateUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ LPCSTR lpCachePrefix,
+     _In_opt_ LPCSTR lpszCachePath,
+     _In_ DWORD KBCacheLimit,
+     _In_ DWORD dwContainerType,
+     _In_ DWORD dwOptions,
+-    _Reserved_ LPVOID pvBuffer,
+-    _Reserved_ LPDWORD cbBuffer
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID pvBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD cbBuffer
+     );
+-BOOLAPI CreateUrlCacheContainerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI CreateUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ LPCWSTR lpCachePrefix,
+     _In_opt_ LPCWSTR lpszCachePath,
+     _In_ DWORD KBCacheLimit,
+     _In_ DWORD dwContainerType,
+     _In_ DWORD dwOptions,
+-    _Reserved_ LPVOID pvBuffer,
+-    _Reserved_ LPDWORD cbBuffer
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID pvBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD cbBuffer
+     );
+ #ifdef UNICODE
+ #define CreateUrlCacheContainer  CreateUrlCacheContainerW
+@@ -1068,11 +1069,11 @@ BOOLAPI CreateUrlCacheContainerW(
+ #define CreateUrlCacheContainer  CreateUrlCacheContainerA
+ #endif // !UNICODE
+ 
+-BOOLAPI DeleteUrlCacheContainerA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI DeleteUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ DWORD dwOptions
+     );
+-BOOLAPI DeleteUrlCacheContainerW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI DeleteUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ DWORD dwOptions
+     );
+@@ -1112,14 +1113,14 @@ typedef LPINTERNET_CACHE_CONTAINER_INFOA LPINTERNET_CACHE_CONTAINER_INFO;
+ //  FindFirstContainer options
+ #define CACHE_FIND_CONTAINER_RETURN_NOCHANGE (0x1)
+ 
+-INTERNETAPI_(HANDLE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_RAIIFree_(CloseHandle, -1, 0) INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheContainerA(
+     _Inout_ LPDWORD pdwModified,
+     _Out_writes_bytes_(*lpcbContainerInfo) LPINTERNET_CACHE_CONTAINER_INFOA lpContainerInfo,
+     _Inout_ LPDWORD lpcbContainerInfo,
+     _In_ DWORD dwOptions
+     );
+-INTERNETAPI_(HANDLE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(CloseHandle, -1, 0) INTERNETAPI_(HANDLE)
+ FindFirstUrlCacheContainerW(
+     _Inout_ LPDWORD pdwModified,
+     _Out_writes_bytes_(*lpcbContainerInfo) LPINTERNET_CACHE_CONTAINER_INFOW lpContainerInfo,
+@@ -1132,13 +1133,13 @@ FindFirstUrlCacheContainerW(
+ #define FindFirstUrlCacheContainer  FindFirstUrlCacheContainerA
+ #endif // !UNICODE
+ 
+-BOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI
+ FindNextUrlCacheContainerA(
+     _In_ HANDLE hEnumHandle,
+     _Out_writes_bytes_(*lpcbContainerInfo) LPINTERNET_CACHE_CONTAINER_INFOA lpContainerInfo,
+     _Inout_ LPDWORD lpcbContainerInfo
+     );
+-BOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI
+ FindNextUrlCacheContainerW(
+     _In_ HANDLE hEnumHandle,
+     _Out_writes_bytes_(*lpcbContainerInfo) LPINTERNET_CACHE_CONTAINER_INFOW lpContainerInfo,
+@@ -1161,12 +1162,12 @@ typedef enum {
+ } WININET_SYNC_MODE;
+ 
+ 
+-BOOLAPI FreeUrlCacheSpaceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI FreeUrlCacheSpaceA(
+     _In_opt_ LPCSTR lpszCachePath,
+     _In_ DWORD dwSize,
+     _In_ DWORD dwFilter
+     );
+-BOOLAPI FreeUrlCacheSpaceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLAPI FreeUrlCacheSpaceW(
+     _In_opt_ LPCWSTR lpszCachePath,
+     _In_ DWORD dwSize,
+     _In_ DWORD dwFilter
+@@ -1229,17 +1230,17 @@ DWORD UrlCacheGetGlobalCacheSize(
+ #define CACHE_CONFIG_CONTENT_USAGE_FC                                0x00002000
+ #define CACHE_CONFIG_STICKY_CONTENT_USAGE_FC                         0x00004000
+ 
+-BOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOLAPI
+ GetUrlCacheConfigInfoA(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOA lpCacheConfigInfo,
+-    _Reserved_ LPDWORD lpcbCacheConfigInfo,
+-    _In_ DWORD dwFieldControl
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbCacheConfigInfo,
++    _Win32_AssociatedEnum_(CACHE_CONFIG) _In_ DWORD dwFieldControl
+     );
+-BOOLAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOLAPI
+ GetUrlCacheConfigInfoW(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOW lpCacheConfigInfo,
+-    _Reserved_ LPDWORD lpcbCacheConfigInfo,
+-    _In_ DWORD dwFieldControl
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPDWORD lpcbCacheConfigInfo,
++    _Win32_AssociatedEnum_(CACHE_CONFIG) _In_ DWORD dwFieldControl
+     );
+ #ifdef UNICODE
+ #define GetUrlCacheConfigInfo  GetUrlCacheConfigInfoW
+@@ -1247,11 +1248,11 @@ GetUrlCacheConfigInfoW(
+ #define GetUrlCacheConfigInfo  GetUrlCacheConfigInfoA
+ #endif // !UNICODE
+ 
+-BOOLAPI SetUrlCacheConfigInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI SetUrlCacheConfigInfoA(
+     _In_ LPINTERNET_CACHE_CONFIG_INFOA lpCacheConfigInfo,
+     _In_ DWORD dwFieldControl
+     );
+-BOOLAPI SetUrlCacheConfigInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI SetUrlCacheConfigInfoW(
+     _In_ LPINTERNET_CACHE_CONFIG_INFOW lpCacheConfigInfo,
+     _In_ DWORD dwFieldControl
+     );
+@@ -1715,7 +1716,7 @@ UrlCacheFindFirstEntry(
+     _In_ DWORD dwFilter,
+     _In_ GROUPID GroupId,
+     _Out_ PURLCACHE_ENTRY_INFO pCacheEntryInfo,
+-    _Out_ HANDLE *phFind
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE *phFind
+ );
+ 
+ URLCACHEAPI
+@@ -1777,7 +1778,7 @@ INTERNETAPI_(DWORD) InternetDial(
+ 
+ INTERNETAPI_(DWORD) InternetHangUp(
+     _In_   DWORD_PTR    dwConnection,
+-    _Reserved_ DWORD        dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwReserved);
+ 
+ #define INTERENT_GOONLINE_REFRESH  0x00000001
+ #define INTERENT_GOONLINE_NOPROMPT 0x00000002
+@@ -1822,11 +1823,11 @@ BOOLAPI InternetAutodial(
+ 
+ #define INTERNET_AUTODIAL_FLAGS_MASK (INTERNET_AUTODIAL_FORCE_ONLINE | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT)
+ BOOLAPI InternetAutodialHangup(
+-    _Reserved_ DWORD    dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);
+ 
+ BOOLAPI InternetGetConnectedState(
+     _Out_  LPDWORD  lpdwFlags,
+-    _Reserved_ DWORD    dwReserved);
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);
+ 
+ BOOLAPI
+ InternetGetConnectedStateExA(
+@@ -1863,7 +1864,7 @@ BOOLAPI
+ ReadGuidsForConnectedNetworks(
+     _Out_opt_ DWORD *pcNetworks,
+     _Out_opt_ PWSTR **pppwszNetworkGuids,
+-    _Out_opt_ BSTR  **pppbstrNetworkNames,
++    _Win32_RAIIFree_(SysFreeString) _Out_opt_ BSTR  **pppbstrNetworkNames,
+     _Out_opt_ PWSTR **pppwszGWMacs,
+     _Out_opt_ DWORD *pcGatewayMacs,
+     _Out_opt_ DWORD *pdwFlags
+@@ -2035,16 +2036,16 @@ BOOLAPI GetDiskInfoA(
+     _Out_opt_ PDWORDLONG pdlAvail,
+     _Out_opt_ PDWORDLONG pdlTotal);
+ 
+-typedef BOOL (*CACHE_OPERATOR)(INTERNET_CACHE_ENTRY_INFO* pcei, PDWORD pcbcei, PVOID pOpData);
++typedef BOOL (*CACHE_OPERATOR)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERNET_CACHE_ENTRY_INFO* pcei, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pcbcei, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pOpData);
+ 
+ BOOL PerformOperationOverUrlCacheA(
+     _In_opt_    PCSTR     pszUrlSearchPattern,
+     _In_          DWORD     dwFlags,
+     _In_          DWORD     dwFilter,
+     _In_          GROUPID   GroupId,
+-    _Reserved_    PVOID     pReserved1,
+-    _Reserved_    PDWORD    pdwReserved2,
+-    _Reserved_    PVOID     pReserved3,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_    PVOID     pReserved1,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_    PDWORD    pdwReserved2,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_    PVOID     pReserved3,
+     _In_          CACHE_OPERATOR op,
+     _Inout_       PVOID     pOperatorData
+     );
+@@ -2066,11 +2067,11 @@ INTERNETAPI_(DWORD) InternalInternetGetCookie(
+ 
+ 
+ //  in cookimp.cxx and cookexp.cxx
+-BOOLAPI ImportCookieFileA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI ImportCookieFileA(
+     _In_ LPCSTR szFilename
+ );
+ //  in cookimp.cxx and cookexp.cxx
+-BOOLAPI ImportCookieFileW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI ImportCookieFileW(
+     _In_ LPCWSTR szFilename
+ );
+ #ifdef UNICODE
+@@ -2078,11 +2079,11 @@ BOOLAPI ImportCookieFileW(
+ #else
+ #define ImportCookieFile  ImportCookieFileA
+ #endif // !UNICODE
+-BOOLAPI ExportCookieFileA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI ExportCookieFileA(
+     _In_ LPCSTR szFilename,
+     _In_ BOOL fAppend
+ );
+-BOOLAPI ExportCookieFileW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI ExportCookieFileW(
+     _In_ LPCWSTR szFilename,
+     _In_ BOOL fAppend
+ );
+@@ -2092,11 +2093,11 @@ BOOLAPI ExportCookieFileW(
+ #define ExportCookieFile  ExportCookieFileA
+ #endif // !UNICODE
+ 
+-BOOLAPI IsDomainLegalCookieDomainA(    // in "wininet\http\cookie.cxx"
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOLAPI IsDomainLegalCookieDomainA(    // in "wininet\http\cookie.cxx"
+     _In_ LPCSTR pchDomain,
+     _In_ LPCSTR pchFullDomain
+ );
+-BOOLAPI IsDomainLegalCookieDomainW(    // in "wininet\http\cookie.cxx"
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOLAPI IsDomainLegalCookieDomainW(    // in "wininet\http\cookie.cxx"
+     _In_ LPCWSTR pchDomain,
+     _In_ LPCWSTR pchFullDomain
+ );
+@@ -2221,7 +2222,7 @@ BOOLAPI HttpWebSocketReceive(
+     _In_ HINTERNET hWebSocket,
+     _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
+     _In_ DWORD dwBufferLength,
+-    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
+     _Out_ HTTP_WEB_SOCKET_BUFFER_TYPE *pBufferType);
+ 
+ BOOLAPI HttpWebSocketClose(
+@@ -2241,7 +2242,7 @@ BOOLAPI HttpWebSocketQueryCloseStatus(
+     _Out_ USHORT *pusStatus,
+     _Out_writes_bytes_to_opt_(dwReasonLength, *pdwReasonLengthConsumed) PVOID pvReason,
+     _In_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength,
+-    _Out_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed);
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed);
+ 
+ 
+ #ifdef _WS2DEF_
+@@ -2250,8 +2251,16 @@ BOOLAPI HttpWebSocketQueryCloseStatus(
+ // callback function for INTERNET_OPTION_GLOBAL_CALLBACK option
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(INTERNET_GLOBAL_CALLBACK_SENDING_HTTP_HEADERS)) || (((defined(_WS2DEF_))))
+ #define INTERNET_GLOBAL_CALLBACK_SENDING_HTTP_HEADERS          0x00000001
++#endif
++#ifdef _WS2DEF_
++#endif
++#if (defined(WIN32METADATA) && !defined(INTERNET_GLOBAL_CALLBACK_DETECTING_PROXY)) || (((defined(_WS2DEF_))))
+ #define INTERNET_GLOBAL_CALLBACK_DETECTING_PROXY               0x00000002
++#endif
++#ifdef _WS2DEF_
+ 
+ typedef
+ DWORD
+@@ -2328,5 +2337,52 @@ typedef DWORD
+ #endif
+ 
+ #endif // !define(_WININETEX_)
++
++#ifdef WIN32METADATA
++#pragma push_macro("CACHE_CONFIG_FORCE_CLEANUP_FC")
++#undef CACHE_CONFIG_FORCE_CLEANUP_FC
++#pragma push_macro("CACHE_CONFIG_DISK_CACHE_PATHS_FC")
++#undef CACHE_CONFIG_DISK_CACHE_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_SYNC_MODE_FC")
++#undef CACHE_CONFIG_SYNC_MODE_FC
++#pragma push_macro("CACHE_CONFIG_CONTENT_PATHS_FC")
++#undef CACHE_CONFIG_CONTENT_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_HISTORY_PATHS_FC")
++#undef CACHE_CONFIG_HISTORY_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_COOKIES_PATHS_FC")
++#undef CACHE_CONFIG_COOKIES_PATHS_FC
++#pragma push_macro("CACHE_CONFIG_QUOTA_FC")
++#undef CACHE_CONFIG_QUOTA_FC
++#pragma push_macro("CACHE_CONFIG_USER_MODE_FC")
++#undef CACHE_CONFIG_USER_MODE_FC
++#pragma push_macro("CACHE_CONFIG_CONTENT_USAGE_FC")
++#undef CACHE_CONFIG_CONTENT_USAGE_FC
++#pragma push_macro("CACHE_CONFIG_STICKY_CONTENT_USAGE_FC")
++#undef CACHE_CONFIG_STICKY_CONTENT_USAGE_FC
++enum CACHE_CONFIG : unsigned int
++{
++    CACHE_CONFIG_FORCE_CLEANUP_FC = 32U,
++    CACHE_CONFIG_DISK_CACHE_PATHS_FC = 64U,
++    CACHE_CONFIG_SYNC_MODE_FC = 128U,
++    CACHE_CONFIG_CONTENT_PATHS_FC = 256U,
++    CACHE_CONFIG_HISTORY_PATHS_FC = 1024U,
++    CACHE_CONFIG_COOKIES_PATHS_FC = 512U,
++    CACHE_CONFIG_QUOTA_FC = 2048U,
++    CACHE_CONFIG_USER_MODE_FC = 4096U,
++    CACHE_CONFIG_CONTENT_USAGE_FC = 8192U,
++    CACHE_CONFIG_STICKY_CONTENT_USAGE_FC = 16384U,
++};
++#pragma pop_macro("CACHE_CONFIG_STICKY_CONTENT_USAGE_FC")
++#pragma pop_macro("CACHE_CONFIG_CONTENT_USAGE_FC")
++#pragma pop_macro("CACHE_CONFIG_USER_MODE_FC")
++#pragma pop_macro("CACHE_CONFIG_QUOTA_FC")
++#pragma pop_macro("CACHE_CONFIG_COOKIES_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_HISTORY_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_CONTENT_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_SYNC_MODE_FC")
++#pragma pop_macro("CACHE_CONFIG_DISK_CACHE_PATHS_FC")
++#pragma pop_macro("CACHE_CONFIG_FORCE_CLEANUP_FC")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

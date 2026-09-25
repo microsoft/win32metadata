@@ -1,0 +1,95 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
+index 271b4b9622..f81c9d0cd6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /***    fdi_int.h - Diamond File Decompression Interface definitions
+  *                      
+  *      Copyright (C) Microsoft Corporation 1993-1997
+@@ -573,7 +574,7 @@ typedef long (FAR DIAMONDAPI *PFNSEEK) (_In_ INT_PTR hf, long dist, int seektype
+  *                    start of the whole block, and cbData+cbPartial is its
+  *                    size.
+  */
+-typedef int (FAR DIAMONDAPI *PFNFDIDECRYPT)(PFDIDECRYPT pfdid); /* pfnfdid */
++typedef int (FAR DIAMONDAPI *PFNFDIDECRYPT)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFDIDECRYPT pfdid); /* pfnfdid */
+ #define FNFDIDECRYPT(fn) int FAR DIAMONDAPI fn(PFDIDECRYPT pfdid)
+ 
+ 
+@@ -819,7 +820,7 @@ typedef enum {
+ } FDINOTIFICATIONTYPE; /* fdint */
+ 
+ typedef INT_PTR (FAR DIAMONDAPI *PFNFDINOTIFY)(FDINOTIFICATIONTYPE fdint,
+-                                               PFDINOTIFICATION    pfdin); /* pfnfdin */
++                                               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFDINOTIFICATION    pfdin); /* pfnfdin */
+ 
+ #define FNFDINOTIFY(fn) INT_PTR FAR DIAMONDAPI fn(FDINOTIFICATIONTYPE fdint, \
+                                                   PFDINOTIFICATION    pfdin)
+@@ -957,14 +958,14 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
+  *      FDICreate(), and then free it up afterwards (or do all your allocation
+  *      before calling FDICreate().
+  */
+-HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
++_Windows_SupportedOS_Windows2000_ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+                               __callback PFNFREE  pfnfree,
+                               __callback PFNOPEN  pfnopen,
+                               __callback PFNREAD  pfnread,
+                               __callback PFNWRITE pfnwrite,
+                               __callback PFNCLOSE pfnclose,
+                               __callback PFNSEEK  pfnseek,
+-                              int                 cpuType,
++                              _Win32_AssociatedEnum_(FDICREATE_CPU_TYPE) int                 cpuType,
+                               _Inout_    PERF     perf);
+ 
+ 
+@@ -983,7 +984,7 @@ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+  *      Returns FALSE, file is not a cabinet;  If an error occurred,
+  *          perf (passed on FDICreate call!) filled in with error.
+  */
+-BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
++_Windows_SupportedOS_Windows2000_ BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
+                                  _In_  INT_PTR          hf,
+                                  _Out_opt_ PFDICABINETINFO  pfdici);
+ 
+@@ -1014,7 +1015,7 @@ BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
+  *      it will not be in a valid state (since there was an error while
+  *      writing it out).
+  */
+-BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
++_Windows_SupportedOS_Windows2000_ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+                             _In_ LPSTR                  pszCabinet,
+                             _In_ LPSTR                  pszCabPath,
+                             int                         flags,
+@@ -1034,7 +1035,7 @@ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+  *  Exit-Failure:
+  *      Returns FALSE;
+  */
+-BOOL FAR DIAMONDAPI FDIDestroy(_In_ HFDI hfdi);
++_Windows_SupportedOS_Windows2000_ BOOL FAR DIAMONDAPI FDIDestroy(_In_ HFDI hfdi);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -1079,4 +1080,23 @@ BOOL FAR DIAMONDAPI FDITruncateCabinet(_In_ HFDI    hfdi,
+ #endif  /* __cplusplus */
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("cpuUNKNOWN")
++#undef cpuUNKNOWN
++#pragma push_macro("cpu80286")
++#undef cpu80286
++#pragma push_macro("cpu80386")
++#undef cpu80386
++enum FDICREATE_CPU_TYPE : int
++{
++    cpuUNKNOWN = -1,
++    cpu80286 = 0,
++    cpu80386 = 1,
++};
++#pragma pop_macro("cpu80386")
++#pragma pop_macro("cpu80286")
++#pragma pop_macro("cpuUNKNOWN")
++#endif
++
+ #endif //!INCLUDED_FDI

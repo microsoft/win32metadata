@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h b/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
+index 86923ee816..8feecc0b0d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WRdsGraphicsChannels.h
+@@ -81,6 +81,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -107,8 +108,8 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("67f2368c-d674-4fae-66a5-d20628a640d2")
+-    IWRdsGraphicsChannelEvents : public IUnknown
++    MIDL_INTERFACE("67f2368c-d674-4fae-66a5-d20628a640d2") _Windows_SupportedOS_Windows8_ 
++      IWRdsGraphicsChannelEvents : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnDataReceived( 
+@@ -213,7 +214,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelEvents;
+         END_INTERFACE
+     } IWRdsGraphicsChannelEventsVtbl;
+ 
+-    interface IWRdsGraphicsChannelEvents
++    interface _Windows_SupportedOS_Windows8_ IWRdsGraphicsChannelEvents
+     {
+         CONST_VTBL struct IWRdsGraphicsChannelEventsVtbl *lpVtbl;
+     };
+@@ -279,8 +280,8 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("684b7a0b-edff-43ad-d5a2-4a8d5388f401")
+-    IWRdsGraphicsChannel : public IUnknown
++    MIDL_INTERFACE("684b7a0b-edff-43ad-d5a2-4a8d5388f401") _Windows_SupportedOS_Windows8_ 
++      IWRdsGraphicsChannel : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Write( 
+@@ -349,7 +350,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
+         END_INTERFACE
+     } IWRdsGraphicsChannelVtbl;
+ 
+-    interface IWRdsGraphicsChannel
++    interface _Windows_SupportedOS_Windows8_ IWRdsGraphicsChannel
+     {
+         CONST_VTBL struct IWRdsGraphicsChannelVtbl *lpVtbl;
+     };
+@@ -393,7 +394,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
+ /* [local] */ 
+ 
+ typedef /* [public][public] */ 
+-enum __MIDL___MIDL_itf_wrdsgraphicschannels_0000_0002_0001
++enum   __MIDL___MIDL_itf_wrdsgraphicschannels_0000_0002_0001
+     {
+         WRdsGraphicsChannelType_GuaranteedDelivery	= 0,
+         WRdsGraphicsChannelType_BestEffortDelivery	= 1
+@@ -416,8 +417,8 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0fd57159-e83e-476a-a8b9-4a7976e71e18")
+-    IWRdsGraphicsChannelManager : public IUnknown
++    MIDL_INTERFACE("0fd57159-e83e-476a-a8b9-4a7976e71e18") _Windows_SupportedOS_Windows8_ 
++      IWRdsGraphicsChannelManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateChannel( 
+@@ -466,7 +467,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelManager;
+         END_INTERFACE
+     } IWRdsGraphicsChannelManagerVtbl;
+ 
+-    interface IWRdsGraphicsChannelManager
++    interface _Windows_SupportedOS_Windows8_ IWRdsGraphicsChannelManager
+     {
+         CONST_VTBL struct IWRdsGraphicsChannelManagerVtbl *lpVtbl;
+     };
+@@ -535,7 +536,7 @@ typedef struct tagRFX_GFX_RECT
+     } 	RFX_GFX_RECT;
+ 
+ typedef RFX_GFX_RECT RFX_GFX_UNALIGNED *PRFX_GFX_RECT;
+-typedef struct tagRFX_GFX_MSG_HEADER
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagRFX_GFX_MSG_HEADER
+     {
+     UINT16 uMSGType;
+     UINT16 cbSize;

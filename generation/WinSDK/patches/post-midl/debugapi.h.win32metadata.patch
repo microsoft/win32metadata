@@ -1,0 +1,99 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h
+index 4d747af33d..2c119eab44 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/debugapi.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -26,7 +27,7 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
+-WINBASEAPI
++_Windows_SupportedOS_WindowsXP_ WINBASEAPI
+ BOOL
+ WINAPI
+ IsDebuggerPresent(
+@@ -41,6 +42,7 @@ IsDebuggerPresent(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -48,6 +50,7 @@ DebugBreak(
+     VOID
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -55,6 +58,8 @@ OutputDebugStringA(
+     _In_opt_ LPCSTR lpOutputString
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_
++_Win32_ImportLibrary_("KERNEL32.dll")
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -74,6 +79,8 @@ OutputDebugStringW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -83,6 +90,8 @@ ContinueDebugEvent(
+     _In_ DWORD dwContinueStatus
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -91,6 +100,8 @@ WaitForDebugEvent(
+     _In_ DWORD dwMilliseconds
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -98,6 +109,8 @@ DebugActiveProcess(
+     _In_ DWORD dwProcessId
+     );
+ 
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -113,6 +126,7 @@ DebugActiveProcessStop(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -129,6 +143,8 @@ CheckRemoteDebuggerPresent(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_10240_
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ APIENTRY

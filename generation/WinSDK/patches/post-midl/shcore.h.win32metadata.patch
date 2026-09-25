@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
+index 96384d6a8e..f01e6f021e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/shcore.h
+@@ -6,20 +6,27 @@
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ #include <objidl.h> // for IStream
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-shcore-stream-winrt-l1-1-0.dll") 
++
+ STDAPI CreateRandomAccessStreamOnFile(_In_ PCWSTR filePath, _In_ DWORD accessMode, _In_ REFIID riid, _COM_Outptr_ void **ppv);
+ 
+ 
+-typedef enum
++typedef enum  
+ {
+     BSOS_DEFAULT = 0,             // when creating a byte seeker over a stream, base randomaccessstream behavior on the STGM mode from IStream::Stat.
+     BSOS_PREFERDESTINATIONSTREAM  // in addition, utilize IDestinationStreamFactory::GetDestinationStream.
+ } BSOS_OPTIONS;
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-shcore-stream-winrt-l1-1-0.dll") 
++
+ STDAPI CreateRandomAccessStreamOverStream(_In_ IStream *stream, _In_ BSOS_OPTIONS options, _In_ REFIID riid, _COM_Outptr_ void **ppv);
++_Windows_SupportedOS_Windows8_ 
++
+ STDAPI CreateStreamOverRandomAccessStream(_In_ IUnknown *randomAccessStream, _In_ REFIID riid, _COM_Outptr_ void **ppv);
+ 
+ #ifdef __cplusplus_winrt

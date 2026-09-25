@@ -1,0 +1,241 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
+index 13a6a61fe8..857768d4b4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RichOle.h
+@@ -1,5 +1,6 @@
+ #ifndef _RICHOLE_
+ #define _RICHOLE_
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER > 1000
+ #pragma once
+@@ -15,7 +16,7 @@
+  */
+ 
+ // Structure passed to GetObject and InsertObject
+-typedef struct _reobject
++typedef struct   _reobject
+ {
+ 	DWORD			cbStruct;			// Size of structure
+ 	LONG			cp;					// Character position of object
+@@ -25,7 +26,7 @@ typedef struct _reobject
+ 	LPOLECLIENTSITE	polesite;			// Associated client site interface
+ 	SIZEL			sizel;				// Size of object (may be 0,0)
+ 	DWORD			dvaspect;			// Display aspect to use
+-	DWORD			dwFlags;			// Object status flags
++	_Win32_AssociatedEnum_(REOBJECT_FLAGS) DWORD			dwFlags;			// Object status flags
+ 	DWORD			dwUser;				// Dword for user's use
+ } REOBJECT;
+ 
+@@ -90,7 +91,7 @@ typedef struct _reobject
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOle
+ 
+-DECLARE_INTERFACE_(IRichEditOle, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IRichEditOle, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, LPVOID FAR * lplpObj) PURE;
+@@ -101,9 +102,9 @@ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+     STDMETHOD(GetClientSite) (THIS_ LPOLECLIENTSITE FAR * lplpolesite) PURE;
+ 	STDMETHOD_(LONG,GetObjectCount) (THIS) PURE;
+ 	STDMETHOD_(LONG,GetLinkCount) (THIS) PURE;
+-	STDMETHOD(GetObject) (THIS_ LONG iob, REOBJECT FAR * lpreobject,
+-						  DWORD dwFlags) PURE;
+-    STDMETHOD(InsertObject) (THIS_ REOBJECT FAR * lpreobject) PURE;
++	STDMETHOD(GetObject) (THIS_ LONG iob, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REOBJECT FAR * lpreobject,
++						  _Win32_AssociatedEnum_(RICH_EDIT_GET_OBJECT_FLAGS) DWORD dwFlags) PURE;
++    STDMETHOD(InsertObject) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REOBJECT FAR * lpreobject) PURE;
+ 	STDMETHOD(ConvertObject) (THIS_ LONG iob, REFCLSID rclsidNew,
+ 							  LPCSTR lpstrUserTypeNew) PURE;
+ 	STDMETHOD(ActivateAs) (THIS_ REFCLSID rclsid, REFCLSID rclsidAs) PURE;
+@@ -115,7 +116,7 @@ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+ 	STDMETHOD(SaveCompleted) (THIS_ LONG iob, LPSTORAGE lpstg) PURE;
+ 	STDMETHOD(InPlaceDeactivate) (THIS) PURE;
+ 	STDMETHOD(ContextSensitiveHelp) (THIS_ BOOL fEnterMode) PURE;
+-	STDMETHOD(GetClipboardData) (THIS_ CHARRANGE FAR * lpchrg, DWORD reco,
++	STDMETHOD(GetClipboardData) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARRANGE FAR * lpchrg, DWORD reco,
+ 									LPDATAOBJECT FAR * lplpdataobj) PURE;
+ 	STDMETHOD(ImportDataObject) (THIS_ LPDATAOBJECT lpdataobj,
+ 									CLIPFORMAT cf, HGLOBAL hMetaPict) PURE;
+@@ -132,7 +133,7 @@ typedef         IRichEditOle FAR * LPRICHEDITOLE;
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOleCallback
+ 
+-DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IRichEditOleCallback, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, LPVOID FAR * lplpObj) PURE;
+@@ -143,22 +144,22 @@ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ 	STDMETHOD(GetNewStorage) (THIS_ LPSTORAGE FAR * lplpstg) PURE;
+     STDMETHOD(GetInPlaceContext) (THIS_ LPOLEINPLACEFRAME FAR * lplpFrame,
+ 								  LPOLEINPLACEUIWINDOW FAR * lplpDoc,
+-								  LPOLEINPLACEFRAMEINFO lpFrameInfo) PURE;
++								  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOLEINPLACEFRAMEINFO lpFrameInfo) PURE;
+ 	STDMETHOD(ShowContainerUI) (THIS_ BOOL fShow) PURE;
+-	STDMETHOD(QueryInsertObject) (THIS_ LPCLSID lpclsid, LPSTORAGE lpstg,
++	STDMETHOD(QueryInsertObject) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCLSID lpclsid, LPSTORAGE lpstg,
+ 									LONG cp) PURE;
+ 	STDMETHOD(DeleteObject) (THIS_ LPOLEOBJECT lpoleobj) PURE;
+ 	STDMETHOD(QueryAcceptData) (THIS_ LPDATAOBJECT lpdataobj,
+-								CLIPFORMAT FAR * lpcfFormat, DWORD reco,
++								_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPFORMAT FAR * lpcfFormat, _Win32_AssociatedEnum_(RECO_FLAGS) DWORD reco,
+ 								BOOL fReally, HGLOBAL hMetaPict) PURE;
+ 	STDMETHOD(ContextSensitiveHelp) (THIS_ BOOL fEnterMode) PURE;
+-	STDMETHOD(GetClipboardData) (THIS_ CHARRANGE FAR * lpchrg, DWORD reco,
++	STDMETHOD(GetClipboardData) (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARRANGE FAR * lpchrg, DWORD reco,
+ 									LPDATAOBJECT FAR * lplpdataobj) PURE;
+-	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, DWORD grfKeyState,
+-									LPDWORD pdwEffect) PURE;
+-	STDMETHOD(GetContextMenu) (THIS_ WORD seltype, LPOLEOBJECT lpoleobj,
+-									CHARRANGE FAR * lpchrg,
+-									HMENU FAR * lphmenu) PURE;
++	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) DWORD grfKeyState,
++									_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Win32_AssociatedEnum_(DROPEFFECT) LPDWORD pdwEffect) PURE;
++	STDMETHOD(GetContextMenu) (THIS_ _Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltype, LPOLEOBJECT lpoleobj,
++									_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARRANGE FAR * lpchrg,
++									_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HMENU FAR * lphmenu) PURE;
+ };
+ typedef         IRichEditOleCallback FAR * LPRICHEDITOLECALLBACK;
+ 
+@@ -168,4 +169,139 @@ DEFINE_GUID(IID_IRichEditOle,         0x00020D00, 0, 0, 0xC0,0,0,0,0,0,0,0x46);
+ DEFINE_GUID(IID_IRichEditOleCallback, 0x00020D03, 0, 0, 0xC0,0,0,0,0,0,0,0x46);
+ #endif // !MAC
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("RECO_PASTE")
++#undef RECO_PASTE
++#pragma push_macro("RECO_DROP")
++#undef RECO_DROP
++#pragma push_macro("RECO_COPY")
++#undef RECO_COPY
++#pragma push_macro("RECO_CUT")
++#undef RECO_CUT
++#pragma push_macro("RECO_DRAG")
++#undef RECO_DRAG
++enum [[clang::flag_enum]] RECO_FLAGS : unsigned int
++{
++    RECO_PASTE = 0U,
++    RECO_DROP = 1U,
++    RECO_COPY = 2U,
++    RECO_CUT = 3U,
++    RECO_DRAG = 4U,
++};
++#pragma pop_macro("RECO_DRAG")
++#pragma pop_macro("RECO_CUT")
++#pragma pop_macro("RECO_COPY")
++#pragma pop_macro("RECO_DROP")
++#pragma pop_macro("RECO_PASTE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("REO_GETOBJ_POLEOBJ")
++#undef REO_GETOBJ_POLEOBJ
++#pragma push_macro("REO_GETOBJ_PSTG")
++#undef REO_GETOBJ_PSTG
++#pragma push_macro("REO_GETOBJ_POLESITE")
++#undef REO_GETOBJ_POLESITE
++#pragma push_macro("REO_GETOBJ_NO_INTERFACES")
++#undef REO_GETOBJ_NO_INTERFACES
++#pragma push_macro("REO_GETOBJ_ALL_INTERFACES")
++#undef REO_GETOBJ_ALL_INTERFACES
++enum [[clang::flag_enum]] RICH_EDIT_GET_OBJECT_FLAGS : unsigned int
++{
++    REO_GETOBJ_POLEOBJ = 1U,
++    REO_GETOBJ_PSTG = 2U,
++    REO_GETOBJ_POLESITE = 4U,
++    REO_GETOBJ_NO_INTERFACES = 0U,
++    REO_GETOBJ_ALL_INTERFACES = 7U,
++};
++#pragma pop_macro("REO_GETOBJ_ALL_INTERFACES")
++#pragma pop_macro("REO_GETOBJ_NO_INTERFACES")
++#pragma pop_macro("REO_GETOBJ_POLESITE")
++#pragma pop_macro("REO_GETOBJ_PSTG")
++#pragma pop_macro("REO_GETOBJ_POLEOBJ")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("REO_ALIGNTORIGHT")
++#undef REO_ALIGNTORIGHT
++#pragma push_macro("REO_BELOWBASELINE")
++#undef REO_BELOWBASELINE
++#pragma push_macro("REO_BLANK")
++#undef REO_BLANK
++#pragma push_macro("REO_CANROTATE")
++#undef REO_CANROTATE
++#pragma push_macro("REO_DONTNEEDPALETTE")
++#undef REO_DONTNEEDPALETTE
++#pragma push_macro("REO_DYNAMICSIZE")
++#undef REO_DYNAMICSIZE
++#pragma push_macro("REO_GETMETAFILE")
++#undef REO_GETMETAFILE
++#pragma push_macro("REO_HILITED")
++#undef REO_HILITED
++#pragma push_macro("REO_INPLACEACTIVE")
++#undef REO_INPLACEACTIVE
++#pragma push_macro("REO_INVERTEDSELECT")
++#undef REO_INVERTEDSELECT
++#pragma push_macro("REO_LINK")
++#undef REO_LINK
++#pragma push_macro("REO_LINKAVAILABLE")
++#undef REO_LINKAVAILABLE
++#pragma push_macro("REO_OPEN")
++#undef REO_OPEN
++#pragma push_macro("REO_OWNERDRAWSELECT")
++#undef REO_OWNERDRAWSELECT
++#pragma push_macro("REO_RESIZABLE")
++#undef REO_RESIZABLE
++#pragma push_macro("REO_SELECTED")
++#undef REO_SELECTED
++#pragma push_macro("REO_STATIC")
++#undef REO_STATIC
++#pragma push_macro("REO_USEASBACKGROUND")
++#undef REO_USEASBACKGROUND
++#pragma push_macro("REO_WRAPTEXTAROUND")
++#undef REO_WRAPTEXTAROUND
++enum [[clang::flag_enum]] REOBJECT_FLAGS : unsigned int
++{
++    REO_ALIGNTORIGHT = 256U,
++    REO_BELOWBASELINE = 2U,
++    REO_BLANK = 16U,
++    REO_CANROTATE = 128U,
++    REO_DONTNEEDPALETTE = 32U,
++    REO_DYNAMICSIZE = 8U,
++    REO_GETMETAFILE = 4194304U,
++    REO_HILITED = 16777216U,
++    REO_INPLACEACTIVE = 33554432U,
++    REO_INVERTEDSELECT = 4U,
++    REO_LINK = 2147483648U,
++    REO_LINKAVAILABLE = 8388608U,
++    REO_OPEN = 67108864U,
++    REO_OWNERDRAWSELECT = 64U,
++    REO_RESIZABLE = 1U,
++    REO_SELECTED = 134217728U,
++    REO_STATIC = 1073741824U,
++    REO_USEASBACKGROUND = 1024U,
++    REO_WRAPTEXTAROUND = 512U,
++};
++#pragma pop_macro("REO_WRAPTEXTAROUND")
++#pragma pop_macro("REO_USEASBACKGROUND")
++#pragma pop_macro("REO_STATIC")
++#pragma pop_macro("REO_SELECTED")
++#pragma pop_macro("REO_RESIZABLE")
++#pragma pop_macro("REO_OWNERDRAWSELECT")
++#pragma pop_macro("REO_OPEN")
++#pragma pop_macro("REO_LINKAVAILABLE")
++#pragma pop_macro("REO_LINK")
++#pragma pop_macro("REO_INVERTEDSELECT")
++#pragma pop_macro("REO_INPLACEACTIVE")
++#pragma pop_macro("REO_HILITED")
++#pragma pop_macro("REO_GETMETAFILE")
++#pragma pop_macro("REO_DYNAMICSIZE")
++#pragma pop_macro("REO_DONTNEEDPALETTE")
++#pragma pop_macro("REO_CANROTATE")
++#pragma pop_macro("REO_BLANK")
++#pragma pop_macro("REO_BELOWBASELINE")
++#pragma pop_macro("REO_ALIGNTORIGHT")
++#endif
++
+ #endif // _RICHOLE_

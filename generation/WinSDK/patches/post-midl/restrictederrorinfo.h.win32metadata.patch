@@ -1,0 +1,74 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RestrictedErrorInfo.h b/generation/WinSDK/RecompiledIdlHeaders/um/RestrictedErrorInfo.h
+index 5bd0ec0b11..3f2fde700b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RestrictedErrorInfo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RestrictedErrorInfo.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -116,23 +117,23 @@ EXTERN_C const IID IID_IRestrictedErrorInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("82BA7092-4C88-427D-A7BC-16DD93FEB67E")
++    MIDL_INTERFACE("82BA7092-4C88-427D-A7BC-16DD93FEB67E") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IRestrictedErrorInfo : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetErrorDetails( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *description,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *description,
+             /* [annotation][out] */ 
+             _Out_  HRESULT *error,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *restrictedDescription,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *restrictedDescription,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *capabilitySid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *capabilitySid) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetReference( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *reference) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *reference) = 0;
+         
+     };
+     
+@@ -228,7 +229,7 @@ EXTERN_C const IID IID_ILanguageExceptionErrorInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("04a2dbf3-df83-116c-0946-0812abf6e07d")
++    MIDL_INTERFACE("04a2dbf3-df83-116c-0946-0812abf6e07d") _Windows_SupportedOS_Windows81_ 
+     ILanguageExceptionErrorInfo : public IUnknown
+     {
+     public:
+@@ -315,7 +316,7 @@ EXTERN_C const IID IID_ILanguageExceptionTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FEB5A271-A6CD-45CE-880A-696706BADC65")
++    MIDL_INTERFACE("FEB5A271-A6CD-45CE-880A-696706BADC65") _Windows_SupportedOS_15063_ 
+     ILanguageExceptionTransform : public IUnknown
+     {
+     public:
+@@ -402,7 +403,7 @@ EXTERN_C const IID IID_ILanguageExceptionStackBackTrace;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CBE53FB5-F967-4258-8D34-42F5E25833DE")
++    MIDL_INTERFACE("CBE53FB5-F967-4258-8D34-42F5E25833DE") _Windows_SupportedOS_15063_ 
+     ILanguageExceptionStackBackTrace : public IUnknown
+     {
+     public:
+@@ -495,7 +496,7 @@ EXTERN_C const IID IID_ILanguageExceptionErrorInfo2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5746E5C4-5B97-424C-B620-2822915734DD")
++    MIDL_INTERFACE("5746E5C4-5B97-424C-B620-2822915734DD") _Windows_SupportedOS_15063_ 
+     ILanguageExceptionErrorInfo2 : public ILanguageExceptionErrorInfo
+     {
+     public:

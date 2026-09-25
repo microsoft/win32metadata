@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
+index 8a8d37b310..e79c8f7137 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/amsi.h
+@@ -18,6 +18,8 @@
+ #define __REQUIRED_RPCSAL_H_VERSION__ 100
+ #endif
+ 
++#include <win32metadata_annotations.h>
++
+ #include "rpc.h"
+ #include "rpcndr.h"
+ 
+@@ -254,8 +256,8 @@ EXTERN_C const IID IID_IAmsiStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3e47f2e5-81d4-4d3b-897f-545096770373")
+-    IAmsiStream : public IUnknown
++    MIDL_INTERFACE("3e47f2e5-81d4-4d3b-897f-545096770373") _Windows_SupportedOS_10240_ 
++      IAmsiStream : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAttribute( 
+@@ -326,7 +328,7 @@ EXTERN_C const IID IID_IAmsiStream;
+         END_INTERFACE
+     } IAmsiStreamVtbl;
+ 
+-    interface IAmsiStream
++    interface _Windows_SupportedOS_10240_ IAmsiStream
+     {
+         CONST_VTBL struct IAmsiStreamVtbl *lpVtbl;
+     };
+@@ -374,8 +376,8 @@ EXTERN_C const IID IID_IAntimalwareProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b2cabfe3-fe04-42b1-a5df-08d483d4d125")
+-    IAntimalwareProvider : public IUnknown
++    MIDL_INTERFACE("b2cabfe3-fe04-42b1-a5df-08d483d4d125") _Windows_SupportedOS_10240_ 
++      IAntimalwareProvider : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Scan( 
+@@ -440,7 +442,7 @@ EXTERN_C const IID IID_IAntimalwareProvider;
+         END_INTERFACE
+     } IAntimalwareProviderVtbl;
+ 
+-    interface IAntimalwareProvider
++    interface _Windows_SupportedOS_10240_ IAntimalwareProvider
+     {
+         CONST_VTBL struct IAntimalwareProviderVtbl *lpVtbl;
+     };
+@@ -728,8 +730,8 @@ EXTERN_C const IID IID_IAntimalware;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("82d29c2e-f062-44e6-b5c9-3d9a2f24a2df")
+-    IAntimalware : public IUnknown
++    MIDL_INTERFACE("82d29c2e-f062-44e6-b5c9-3d9a2f24a2df") _Windows_SupportedOS_10240_ 
++      IAntimalware : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Scan( 
+@@ -788,7 +790,7 @@ EXTERN_C const IID IID_IAntimalware;
+         END_INTERFACE
+     } IAntimalwareVtbl;
+ 
+-    interface IAntimalware
++    interface _Windows_SupportedOS_10240_ IAntimalware
+     {
+         CONST_VTBL struct IAntimalwareVtbl *lpVtbl;
+     };
+@@ -959,24 +961,34 @@ class DECLSPEC_UUID("fdb00e52-a214-4aa1-8fba-4357bb0072ec") CAntimalware;
+ #endif
+ EXTERN_C const CLSID CLSID_Antimalware;
+ 
+-DECLARE_HANDLE(HAMSICONTEXT);
+-DECLARE_HANDLE(HAMSISESSION);
++DECLARE_HANDLE(HAMSICONTEXT) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HAMSISESSION) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++
++_Windows_SupportedOS_10240_ 
+ 
+ STDAPI AmsiInitialize(
+     _In_  LPCWSTR appName,
+-    _Outptr_ HAMSICONTEXT* amsiContext);
++    _Outptr_  HAMSICONTEXT* amsiContext);
++
++_Windows_SupportedOS_10240_ 
+ 
+ STDAPI_(VOID) AmsiUninitialize(
+     _In_  HAMSICONTEXT amsiContext);
+ 
++_Windows_SupportedOS_10240_ 
++
+ STDAPI AmsiOpenSession(
+     _In_  HAMSICONTEXT amsiContext,
+     _Out_ HAMSISESSION* amsiSession);
+ 
++_Windows_SupportedOS_10240_ 
++
+ STDAPI_(VOID) AmsiCloseSession(
+     _In_  HAMSICONTEXT amsiContext,
+     _In_  HAMSISESSION amsiSession);
+ 
++_Windows_SupportedOS_10240_ 
++
+ STDAPI AmsiScanBuffer(
+     _In_  HAMSICONTEXT amsiContext,
+     _In_reads_bytes_(length) PVOID buffer,
+@@ -992,6 +1004,8 @@ STDAPI AmsiNotifyOperation(
+     _In_opt_  LPCWSTR contentName,
+     _Out_ AMSI_RESULT* result);
+ 
++_Windows_SupportedOS_10240_ 
++
+ STDAPI AmsiScanString(
+     _In_  HAMSICONTEXT amsiContext,
+     _In_  LPCWSTR string,

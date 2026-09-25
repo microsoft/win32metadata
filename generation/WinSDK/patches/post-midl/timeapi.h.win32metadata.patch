@@ -1,0 +1,64 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h
+index 63d76285d4..ae46e091e7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/timeapi.h
+@@ -12,6 +12,7 @@
+ 
+ #ifndef _TIMERAPI_H_
+ #define _TIMERAPI_H_
++#include "win32metadata_annotations.h"
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -38,13 +39,13 @@ extern "C" {
+ #define TIMERR_STRUCT         (TIMERR_BASE+33)     /* time struct size */
+ 
+ /* timer device capabilities data structure */
+-typedef struct timecaps_tag {
++typedef struct   timecaps_tag {
+     UINT    wPeriodMin;     /* minimum period supported  */
+     UINT    wPeriodMax;     /* maximum period supported  */
+ } TIMECAPS, *PTIMECAPS, NEAR *NPTIMECAPS, FAR *LPTIMECAPS;
+ 
+ /* timer function prototypes */
+-WINMMAPI
++_Windows_SupportedOS_Windows2000_ WINMMAPI
+ MMRESULT
+ WINAPI
+ timeGetSystemTime(
+@@ -54,7 +55,7 @@ timeGetSystemTime(
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+-WINMMAPI
++_Windows_SupportedOS_Windows2000_ WINMMAPI
+ DWORD
+ WINAPI
+ timeGetTime(
+@@ -63,7 +64,7 @@ timeGetTime(
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+-WINMMAPI
++_Windows_SupportedOS_Windows2000_ WINMMAPI
+ MMRESULT
+ WINAPI
+ timeGetDevCaps(
+@@ -71,6 +72,8 @@ timeGetDevCaps(
+     _In_ UINT cbtc
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -78,6 +81,8 @@ timeBeginPeriod(
+     _In_ UINT uPeriod
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ WINMMAPI
+ MMRESULT
+ WINAPI

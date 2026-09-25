@@ -1,0 +1,121 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h
+index e1f737c146..810f56c1be 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpSSdk.h
+@@ -16,6 +16,7 @@ Abstract:
+ #define   _CALLOUT_H_
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -33,7 +34,7 @@ extern "C" {
+ 
+ 
+ typedef DWORD  DHCP_IP_ADDRESS;
+-typedef struct _DHCP_SERVER_OPTIONS {
++typedef struct  _DHCP_SERVER_OPTIONS {
+     BYTE                       *MessageType;
+     DHCP_IP_ADDRESS UNALIGNED  *SubnetMask;
+     DHCP_IP_ADDRESS UNALIGNED  *RequestedAddress;
+@@ -112,7 +113,7 @@ typedef
+ DWORD
+ (APIENTRY *LPDHCP_CONTROL)(
+     IN DWORD dwControlCode,
+-    IN LPVOID lpReserved
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID lpReserved
+ )
+ /*++
+ 
+@@ -138,9 +139,9 @@ DWORD
+     IN OUT LPBYTE *Packet,
+     IN OUT DWORD *PacketSize,
+     IN DWORD IpAddress,
+-    IN LPVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID Reserved,
+     IN OUT LPVOID *PktContext,
+-    OUT LPBOOL ProcessIt
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBOOL ProcessIt
+ )
+ /*++
+ 
+@@ -194,8 +195,8 @@ DWORD
+     IN OUT DWORD *PacketSize,
+     IN DWORD ControlCode,
+     IN DWORD IpAddress,
+-    IN LPVOID Reserved,
+-    IN LPVOID PktContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID PktContext
+ )
+ /*++
+ 
+@@ -253,13 +254,13 @@ Arguments:
+ typedef
+ DWORD
+ (APIENTRY *LPDHCP_PROB)(
+-    IN LPBYTE Packet,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPBYTE Packet,
+     IN DWORD PacketSize,
+     IN DWORD ControlCode,
+     IN DWORD IpAddress,
+     IN DWORD AltAddress,
+-    IN LPVOID Reserved,
+-    IN LPVOID PktContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID PktContext
+ )
+ /*++
+ 
+@@ -306,15 +307,15 @@ Arguments:
+ typedef
+ DWORD
+ (APIENTRY *LPDHCP_GIVE_ADDRESS)(
+-    IN LPBYTE Packet,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPBYTE Packet,
+     IN DWORD PacketSize,
+     IN DWORD ControlCode,
+     IN DWORD IpAddress,
+     IN DWORD AltAddress,
+     IN DWORD AddrType,
+     IN DWORD LeaseTime,
+-    IN LPVOID Reserved,
+-    IN LPVOID PktContext
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID PktContext
+ )
+ /*++
+ 
+@@ -359,10 +360,10 @@ Arguments:
+ typedef
+ DWORD
+ (APIENTRY *LPDHCP_HANDLE_OPTIONS)(
+-    IN LPBYTE Packet,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPBYTE Packet,
+     IN DWORD PacketSize,
+-    IN LPVOID Reserved,
+-    IN LPVOID PktContext,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID PktContext,
+     IN OUT LPDHCP_SERVER_OPTIONS ServerOptions
+ )
+ /*++
+@@ -400,7 +401,7 @@ typedef
+ DWORD
+ (APIENTRY *LPDHCP_DELETE_CLIENT)(
+     IN DWORD IpAddress,
+-    IN LPBYTE HwAddress,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN LPBYTE HwAddress,
+     IN ULONG HwAddressLength,
+     IN DWORD Reserved,
+     IN DWORD ClientType
+@@ -429,7 +430,7 @@ Arguments:
+ ;
+ 
+ typedef
+-struct      _DHCP_CALLOUT_TABLE {
++struct       _DHCP_CALLOUT_TABLE {
+     LPDHCP_CONTROL                 DhcpControlHook;
+     LPDHCP_NEWPKT                  DhcpNewPktHook;
+     LPDHCP_DROP_SEND               DhcpPktDropHook;

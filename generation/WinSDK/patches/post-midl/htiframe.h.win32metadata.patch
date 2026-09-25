@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
+index 059b2416cc..644100e04c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiframe.h
+@@ -99,6 +99,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -133,7 +134,7 @@ EXTERN_C const IID IID_ITargetNotify;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("863a99a0-21bc-11d0-82b4-00a0c90c29c5")
+-    ITargetNotify : public IUnknown
++      ITargetNotify : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnCreate( 
+@@ -239,7 +240,7 @@ EXTERN_C const IID IID_ITargetNotify2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3050f6b1-98b5-11cf-bb82-00aa00bdce0b")
+-    ITargetNotify2 : public ITargetNotify
++      ITargetNotify2 : public ITargetNotify
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetOptionString( 

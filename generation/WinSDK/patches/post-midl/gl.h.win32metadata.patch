@@ -1,0 +1,134 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gl/GL.h b/generation/WinSDK/RecompiledIdlHeaders/um/gl/GL.h
+index 435623adcd..c32556dfe1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gl/GL.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gl/GL.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0004    // Increment this if a change has global effects
+ 
+ Copyright (c) 1985-96, Microsoft Corporation
+@@ -1156,7 +1157,7 @@ typedef void GLvoid;
+ 
+ WINGDIAPI void APIENTRY glAccum (GLenum op, GLfloat value);
+ WINGDIAPI void APIENTRY glAlphaFunc (GLenum func, GLclampf ref);
+-WINGDIAPI GLboolean APIENTRY glAreTexturesResident (GLsizei n, const GLuint *textures, GLboolean *residences);
++WINGDIAPI GLboolean APIENTRY glAreTexturesResident (GLsizei n, const GLuint *textures, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLboolean *residences);
+ WINGDIAPI void APIENTRY glArrayElement (GLint i);
+ WINGDIAPI void APIENTRY glBegin (GLenum mode);
+ WINGDIAPI void APIENTRY glBindTexture (GLenum target, GLuint texture);
+@@ -1242,7 +1243,7 @@ WINGDIAPI void APIENTRY glEvalMesh1 (GLenum mode, GLint i1, GLint i2);
+ WINGDIAPI void APIENTRY glEvalMesh2 (GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2);
+ WINGDIAPI void APIENTRY glEvalPoint1 (GLint i);
+ WINGDIAPI void APIENTRY glEvalPoint2 (GLint i, GLint j);
+-WINGDIAPI void APIENTRY glFeedbackBuffer (GLsizei size, GLenum type, GLfloat *buffer);
++WINGDIAPI void APIENTRY glFeedbackBuffer (GLsizei size, GLenum type, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *buffer);
+ WINGDIAPI void APIENTRY glFinish (void);
+ WINGDIAPI void APIENTRY glFlush (void);
+ WINGDIAPI void APIENTRY glFogf (GLenum pname, GLfloat param);
+@@ -1252,36 +1253,36 @@ WINGDIAPI void APIENTRY glFogiv (GLenum pname, const GLint *params);
+ WINGDIAPI void APIENTRY glFrontFace (GLenum mode);
+ WINGDIAPI void APIENTRY glFrustum (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
+ WINGDIAPI GLuint APIENTRY glGenLists (GLsizei range);
+-WINGDIAPI void APIENTRY glGenTextures (GLsizei n, GLuint *textures);
+-WINGDIAPI void APIENTRY glGetBooleanv (GLenum pname, GLboolean *params);
+-WINGDIAPI void APIENTRY glGetClipPlane (GLenum plane, GLdouble *equation);
+-WINGDIAPI void APIENTRY glGetDoublev (GLenum pname, GLdouble *params);
++WINGDIAPI void APIENTRY glGenTextures (GLsizei n, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLuint *textures);
++WINGDIAPI void APIENTRY glGetBooleanv (GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLboolean *params);
++WINGDIAPI void APIENTRY glGetClipPlane (GLenum plane, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble *equation);
++WINGDIAPI void APIENTRY glGetDoublev (GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble *params);
+ WINGDIAPI GLenum APIENTRY glGetError (void);
+-WINGDIAPI void APIENTRY glGetFloatv (GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetIntegerv (GLenum pname, GLint *params);
+-WINGDIAPI void APIENTRY glGetLightfv (GLenum light, GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetLightiv (GLenum light, GLenum pname, GLint *params);
+-WINGDIAPI void APIENTRY glGetMapdv (GLenum target, GLenum query, GLdouble *v);
+-WINGDIAPI void APIENTRY glGetMapfv (GLenum target, GLenum query, GLfloat *v);
+-WINGDIAPI void APIENTRY glGetMapiv (GLenum target, GLenum query, GLint *v);
+-WINGDIAPI void APIENTRY glGetMaterialfv (GLenum face, GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetMaterialiv (GLenum face, GLenum pname, GLint *params);
+-WINGDIAPI void APIENTRY glGetPixelMapfv (GLenum map, GLfloat *values);
+-WINGDIAPI void APIENTRY glGetPixelMapuiv (GLenum map, GLuint *values);
+-WINGDIAPI void APIENTRY glGetPixelMapusv (GLenum map, GLushort *values);
+-WINGDIAPI void APIENTRY glGetPointerv (GLenum pname, GLvoid* *params);
+-WINGDIAPI void APIENTRY glGetPolygonStipple (GLubyte *mask);
++WINGDIAPI void APIENTRY glGetFloatv (GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetIntegerv (GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
++WINGDIAPI void APIENTRY glGetLightfv (GLenum light, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetLightiv (GLenum light, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
++WINGDIAPI void APIENTRY glGetMapdv (GLenum target, GLenum query, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble *v);
++WINGDIAPI void APIENTRY glGetMapfv (GLenum target, GLenum query, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *v);
++WINGDIAPI void APIENTRY glGetMapiv (GLenum target, GLenum query, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *v);
++WINGDIAPI void APIENTRY glGetMaterialfv (GLenum face, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetMaterialiv (GLenum face, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
++WINGDIAPI void APIENTRY glGetPixelMapfv (GLenum map, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *values);
++WINGDIAPI void APIENTRY glGetPixelMapuiv (GLenum map, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLuint *values);
++WINGDIAPI void APIENTRY glGetPixelMapusv (GLenum map, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLushort *values);
++WINGDIAPI void APIENTRY glGetPointerv (GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLvoid* *params);
++WINGDIAPI void APIENTRY glGetPolygonStipple (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLubyte *mask);
+ WINGDIAPI const GLubyte * APIENTRY glGetString (GLenum name);
+-WINGDIAPI void APIENTRY glGetTexEnvfv (GLenum target, GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetTexEnviv (GLenum target, GLenum pname, GLint *params);
+-WINGDIAPI void APIENTRY glGetTexGendv (GLenum coord, GLenum pname, GLdouble *params);
+-WINGDIAPI void APIENTRY glGetTexGenfv (GLenum coord, GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetTexGeniv (GLenum coord, GLenum pname, GLint *params);
+-WINGDIAPI void APIENTRY glGetTexImage (GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels);
+-WINGDIAPI void APIENTRY glGetTexLevelParameterfv (GLenum target, GLint level, GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetTexLevelParameteriv (GLenum target, GLint level, GLenum pname, GLint *params);
+-WINGDIAPI void APIENTRY glGetTexParameterfv (GLenum target, GLenum pname, GLfloat *params);
+-WINGDIAPI void APIENTRY glGetTexParameteriv (GLenum target, GLenum pname, GLint *params);
++WINGDIAPI void APIENTRY glGetTexEnvfv (GLenum target, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetTexEnviv (GLenum target, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
++WINGDIAPI void APIENTRY glGetTexGendv (GLenum coord, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble *params);
++WINGDIAPI void APIENTRY glGetTexGenfv (GLenum coord, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetTexGeniv (GLenum coord, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
++WINGDIAPI void APIENTRY glGetTexImage (GLenum target, GLint level, GLenum format, GLenum type, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLvoid *pixels);
++WINGDIAPI void APIENTRY glGetTexLevelParameterfv (GLenum target, GLint level, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetTexLevelParameteriv (GLenum target, GLint level, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
++WINGDIAPI void APIENTRY glGetTexParameterfv (GLenum target, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
++WINGDIAPI void APIENTRY glGetTexParameteriv (GLenum target, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
+ WINGDIAPI void APIENTRY glHint (GLenum target, GLenum mode);
+ WINGDIAPI void APIENTRY glIndexMask (GLuint mask);
+ WINGDIAPI void APIENTRY glIndexPointer (GLenum type, GLsizei stride, const GLvoid *pointer);
+@@ -1391,7 +1392,7 @@ WINGDIAPI void APIENTRY glRasterPos4iv (const GLint *v);
+ WINGDIAPI void APIENTRY glRasterPos4s (GLshort x, GLshort y, GLshort z, GLshort w);
+ WINGDIAPI void APIENTRY glRasterPos4sv (const GLshort *v);
+ WINGDIAPI void APIENTRY glReadBuffer (GLenum mode);
+-WINGDIAPI void APIENTRY glReadPixels (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels);
++WINGDIAPI void APIENTRY glReadPixels (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLvoid *pixels);
+ WINGDIAPI void APIENTRY glRectd (GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2);
+ WINGDIAPI void APIENTRY glRectdv (const GLdouble *v1, const GLdouble *v2);
+ WINGDIAPI void APIENTRY glRectf (GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
+@@ -1406,7 +1407,7 @@ WINGDIAPI void APIENTRY glRotatef (GLfloat angle, GLfloat x, GLfloat y, GLfloat
+ WINGDIAPI void APIENTRY glScaled (GLdouble x, GLdouble y, GLdouble z);
+ WINGDIAPI void APIENTRY glScalef (GLfloat x, GLfloat y, GLfloat z);
+ WINGDIAPI void APIENTRY glScissor (GLint x, GLint y, GLsizei width, GLsizei height);
+-WINGDIAPI void APIENTRY glSelectBuffer (GLsizei size, GLuint *buffer);
++WINGDIAPI void APIENTRY glSelectBuffer (GLsizei size, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLuint *buffer);
+ WINGDIAPI void APIENTRY glShadeModel (GLenum mode);
+ WINGDIAPI void APIENTRY glStencilFunc (GLenum func, GLint ref, GLuint mask);
+ WINGDIAPI void APIENTRY glStencilMask (GLuint mask);
+@@ -1500,7 +1501,7 @@ typedef void (APIENTRY * PFNGLCOLORPOINTEREXTPROC) (GLint size, GLenum type, GLs
+ typedef void (APIENTRY * PFNGLINDEXPOINTEREXTPROC) (GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer);
+ typedef void (APIENTRY * PFNGLTEXCOORDPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer);
+ typedef void (APIENTRY * PFNGLEDGEFLAGPOINTEREXTPROC) (GLsizei stride, GLsizei count, const GLboolean *pointer);
+-typedef void (APIENTRY * PFNGLGETPOINTERVEXTPROC) (GLenum pname, GLvoid* *params);
++typedef void (APIENTRY * PFNGLGETPOINTERVEXTPROC) (GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLvoid* *params);
+ typedef void (APIENTRY * PFNGLARRAYELEMENTARRAYEXTPROC)(GLenum mode, GLsizei count, const GLvoid* pi);
+ 
+ /* WIN_draw_range_elements */
+@@ -1517,11 +1518,11 @@ typedef void (APIENTRY * PFNGLCOLORSUBTABLEEXTPROC)
+     (GLenum target, GLsizei start, GLsizei count, GLenum format,
+      GLenum type, const GLvoid *data);
+ typedef void (APIENTRY * PFNGLGETCOLORTABLEEXTPROC)
+-    (GLenum target, GLenum format, GLenum type, GLvoid *data);
++    (GLenum target, GLenum format, GLenum type, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLvoid *data);
+ typedef void (APIENTRY * PFNGLGETCOLORTABLEPARAMETERIVEXTPROC)
+-    (GLenum target, GLenum pname, GLint *params);
++    (GLenum target, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint *params);
+ typedef void (APIENTRY * PFNGLGETCOLORTABLEPARAMETERFVEXTPROC)
+-    (GLenum target, GLenum pname, GLfloat *params);
++    (GLenum target, GLenum pname, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat *params);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

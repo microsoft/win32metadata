@@ -1,0 +1,51 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h b/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
+index 681b81a9a3..8eadb7a121 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/endpointvolume.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -120,12 +121,12 @@ EXTERN_C const IID IID_IAudioEndpointVolumeCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("657804FA-D6AD-4496-8A60-352752AF4F89")
++    MIDL_INTERFACE("657804FA-D6AD-4496-8A60-352752AF4F89") _Windows_SupportedOS_WindowsVista_ 
+     IAudioEndpointVolumeCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnNotify( 
+-            PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) = 0;
+         
+     };
+     
+@@ -205,7 +206,7 @@ EXTERN_C const IID IID_IAudioEndpointVolume;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5CDF2C82-841E-4546-9722-0CF74078229A")
++    MIDL_INTERFACE("5CDF2C82-841E-4546-9722-0CF74078229A") _Windows_SupportedOS_WindowsVista_ 
+     IAudioEndpointVolume : public IUnknown
+     {
+     public:
+@@ -559,7 +560,7 @@ EXTERN_C const IID IID_IAudioEndpointVolumeEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("66E11784-F695-4F28-A505-A7080081A78F")
++    MIDL_INTERFACE("66E11784-F695-4F28-A505-A7080081A78F") _Windows_SupportedOS_Windows7_ 
+     IAudioEndpointVolumeEx : public IAudioEndpointVolume
+     {
+     public:
+@@ -848,7 +849,7 @@ EXTERN_C const IID IID_IAudioMeterInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C02216F6-8C67-4B5B-9D00-D008E73E0064")
++    MIDL_INTERFACE("C02216F6-8C67-4B5B-9D00-D008E73E0064") _Windows_SupportedOS_WindowsVista_ 
+     IAudioMeterInformation : public IUnknown
+     {
+     public:

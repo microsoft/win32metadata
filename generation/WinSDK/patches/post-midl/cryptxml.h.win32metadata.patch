@@ -1,0 +1,587 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
+index b28b56862b..43d3873c7d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptxml.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*-------------------------------------------------------------------
+ //
+ //  Copyright (C) Microsoft, 2007
+@@ -405,7 +406,7 @@ HRESULT
+     _Out_writes_bytes_to_( cbData, *pcbRead )
+                     BYTE                *pbData,
+     _In_            ULONG               cbData,
+-    _Out_range_( 0, cbData )
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_( 0, cbData )
+                     ULONG               *pcbRead
+     );
+ 
+@@ -501,10 +502,10 @@ HRESULT
+     Informational flags.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_STATUS{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_STATUS{
+     ULONG                               cbSize;    
+-    DWORD                               dwErrorStatus;
+-    DWORD                               dwInfoStatus;
++    _Win32_AssociatedEnum_(CRYPT_XML_STATUS_ERROR_STATUS) DWORD                               dwErrorStatus;
++    _Win32_AssociatedEnum_(CRYPT_XML_STATUS_INFO_STATUS) DWORD                               dwInfoStatus;
+ }CRYPT_XML_STATUS, *PCRYPT_XML_STATUS;
+ 
+ #define CRYPT_XML_STATUS_NO_ERROR                           0x00000000
+@@ -607,7 +608,7 @@ typedef struct _CRYPT_XML_STATUS{
+     </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_ALGORITHM{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_ALGORITHM{
+     ULONG                               cbSize;    
+     LPCWSTR                             wszAlgorithm;
+     CRYPT_XML_BLOB                      Encoded;
+@@ -636,11 +637,11 @@ typedef struct _CRYPT_XML_ALGORITHM{
+     [callback] Pointer to a function to create a transform. 
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_TRANSFORM_INFO{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_TRANSFORM_INFO{
+     ULONG                               cbSize;    
+     LPCWSTR                             wszAlgorithm;
+     ULONG                               cbBufferSize;
+-    DWORD                               dwFlags;
++    _Win32_AssociatedEnum_(CRYPT_XML_TRANSFORM_FLAGS) DWORD                               dwFlags;
+     PFN_CRYPT_XML_CREATE_TRANSFORM      pfnCreateTransform;
+ }CRYPT_XML_TRANSFORM_INFO, *PCRYPT_XML_TRANSFORM_INFO;
+ 
+@@ -674,7 +675,7 @@ typedef struct _CRYPT_XML_TRANSFORM_INFO{
+     Array of  PCRYPT_XML_TRANSFORM_INFO
+ 
+  ****************************************************************************/
+-typedef struct _CRYPT_XML_TRANSFORM_CHAIN_CONFIG{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_TRANSFORM_CHAIN_CONFIG{
+     ULONG                               cbSize;    
+     ULONG                               cTransformInfo;
+     _Field_size_(cTransformInfo)
+@@ -803,7 +804,7 @@ Schema:
+ 
+ ****************************************************************************/
+ typedef struct _CRYPT_XML_KEY_VALUE{
+-    DWORD                               dwType;
++    _Win32_AssociatedEnum_(CRYPT_XML_KEY_VALUE_TYPE) DWORD                               dwType;
+     union
+     {
+         CRYPT_XML_KEY_DSA_KEY_VALUE     DSAKeyValue;
+@@ -870,7 +871,7 @@ typedef struct _CRYPT_XML_ISSUER_SERIAL{
+ 
+ ****************************************************************************/
+ typedef struct _CRYPT_XML_X509DATA_ITEM{
+-    DWORD                               dwType;
++    _Win32_AssociatedEnum_(CRYPT_XML_X509DATA_TYPE) DWORD                               dwType;
+     union
+     {
+         CRYPT_XML_ISSUER_SERIAL         IssuerSerial;
+@@ -955,7 +956,7 @@ typedef struct _CRYPT_XML_X509DATA{
+ 
+ ****************************************************************************/
+ typedef struct _CRYPT_XML_KEY_INFO_ITEM{
+-    DWORD                               dwType;
++    _Win32_AssociatedEnum_(CRYPT_XML_KEYINFO_TYPE) DWORD                               dwType;
+     union
+     {
+         LPCWSTR                         wszKeyName;
+@@ -1014,7 +1015,7 @@ Schema:
+    </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_KEY_INFO{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_KEY_INFO{
+     ULONG                               cbSize;
+     LPCWSTR                             wszId;
+     UINT                                cKeyInfo;
+@@ -1056,7 +1057,7 @@ typedef struct _CRYPT_XML_KEY_INFO{
+     each holding information about Transform applied to the signed data.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_REFERENCE{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_REFERENCE{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hReference;
+     LPCWSTR                             wszId;
+@@ -1104,7 +1105,7 @@ typedef struct _CRYPT_XML_REFERENCES{
+     Contains canonicalized <SignedInfo> element.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_SIGNED_INFO{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_SIGNED_INFO{
+     ULONG                               cbSize;    
+     LPCWSTR                             wszId;
+     CRYPT_XML_ALGORITHM                 Canonicalization;
+@@ -1158,7 +1159,7 @@ typedef struct _CRYPT_XML_SIGNED_INFO{
+     </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_OBJECT{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_OBJECT{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hObject;
+     LPCWSTR                             wszId;
+@@ -1209,7 +1210,7 @@ rgObject
+     </complexType>
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_SIGNATURE{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_SIGNATURE{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hSignature;
+     LPCWSTR                             wszId;
+@@ -1240,7 +1241,7 @@ typedef struct _CRYPT_XML_SIGNATURE{
+     Contains XML document.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_DOC_CTXT{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_DOC_CTXT{
+     ULONG                               cbSize;    
+     HCRYPTXML                           hDocCtxt;
+     CRYPT_XML_TRANSFORM_CHAIN_CONFIG    *pTransformsConfig;
+@@ -1258,7 +1259,7 @@ typedef struct _CRYPT_XML_DOC_CTXT{
+  encapsulated by the handle is fully released.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlClose(
+@@ -1272,7 +1273,7 @@ CryptXmlClose(
+  default Transform Chain Engine.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+ CryptXmlGetTransforms(
+@@ -1312,12 +1313,12 @@ CryptXmlGetTransforms(
+  	[out] Handle to the Signature object.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+ CryptXmlOpenToEncode(
+     _In_opt_        const CRYPT_XML_TRANSFORM_CHAIN_CONFIG    *pConfig,
+-                    DWORD               dwFlags,
++                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags,
+     _In_opt_        LPCWSTR             wszId,
+     _In_reads_opt_(cProperty) 
+                     const CRYPT_XML_PROPERTY* rgProperty, 
+@@ -1354,12 +1355,12 @@ CryptXmlOpenToEncode(
+  	[out] Handle to the Document Context object.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+ CryptXmlOpenToDecode(
+     _In_opt_        const CRYPT_XML_TRANSFORM_CHAIN_CONFIG    *pConfig,
+-                    DWORD               dwFlags,
++                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags,
+     _In_reads_opt_(cProperty) 
+                     const CRYPT_XML_PROPERTY* rgProperty, 
+     _In_            ULONG               cProperty, 
+@@ -1404,7 +1405,7 @@ CryptXmlOpenToDecode(
+     Otherwise, use CRYPT_XML_FLAG_ADD_OBJECT_CREATE_COPY flag to create in-memory copy.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlAddObject(
+@@ -1459,7 +1460,7 @@ CryptXmlAddObject(
+     [out] Pointer to a Reference Handle.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlCreateReference(
+@@ -1508,7 +1509,7 @@ Remarks:
+     The CryptXmlDigestReference function always calls pDataProviderIn->fpnClose.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlDigestReference(
+@@ -1541,7 +1542,7 @@ CryptXmlDigestReference(
+  must be NULL.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlSetHMACSecret(
+@@ -1652,14 +1653,14 @@ typedef enum
+     [in] Specifies the canonicalization method.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlSign(
+     _In_            HCRYPTXML           hSignature,
+     _In_opt_        HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hKey,
+-                    DWORD               dwKeySpec,
+-                    DWORD               dwFlags,
++                    _Win32_AssociatedEnum_(CERT_KEY_SPEC) DWORD               dwKeySpec,
++                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags,
+                     CRYPT_XML_KEYINFO_SPEC dwKeyInfoSpec,
+     _In_opt_        const void          *pvKeyInfoSpec,
+     _In_            const CRYPT_XML_ALGORITHM *pSignatureMethod,
+@@ -1686,13 +1687,13 @@ CryptXmlSign(
+         [out] Pointer to BCRYPT_KEY_HANDLE that receives imported key handle.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlImportPublicKey(
+-                    DWORD               dwFlags,
++                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags,
+     _In_            const CRYPT_XML_KEY_VALUE *pKeyValue,
+-    _Out_           BCRYPT_KEY_HANDLE   *phKey
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_           BCRYPT_KEY_HANDLE   *phKey
+     );
+ 
+ /****************************************************************************
+@@ -1713,13 +1714,13 @@ CryptXmlImportPublicKey(
+         CRYPT_XML_FLAG_DISABLE_EXTENSIONS
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlVerifySignature(
+     _In_            HCRYPTXML           hSignature,
+     _In_opt_        BCRYPT_KEY_HANDLE   hKey,
+-                    DWORD               dwFlags
++                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags
+     );
+ 
+ /****************************************************************************
+@@ -1729,7 +1730,7 @@ CryptXmlVerifySignature(
+  a handle to Document Context. 
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlGetDocContext(
+@@ -1744,7 +1745,7 @@ CryptXmlGetDocContext(
+  by a handle to Signature.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlGetSignature(
+@@ -1758,7 +1759,7 @@ CryptXmlGetSignature(
+ The CryptXmlGetReference function returns data structure encapsulated 
+ by a handle to Reference.
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlGetReference(
+@@ -1773,7 +1774,7 @@ The CryptXmlGetStatus function returns a CRYPT_XML_STATUS for array
+ of Signature, single Signature, Reference or Manifest.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+ CryptXmlGetStatus(
+@@ -1804,7 +1805,7 @@ CryptXmlGetStatus(
+     [in, callback] An application-defined callback to receive constructed XML.
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+ CryptXmlEncode(
+@@ -1862,12 +1863,12 @@ NOTE: the BCrypt* and NCrypt* functions that are defined in Bcrypt.h and Ncrypt.
+ 
+ ****************************************************************************/
+ typedef 
+-struct _CRYPT_XML_ALGORITHM_INFO
++struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_ALGORITHM_INFO
+ {
+     DWORD                               cbSize;
+     WCHAR                               *wszAlgorithmURI;
+     WCHAR                               *wszName;
+-    DWORD                               dwGroupId;
++    _Win32_AssociatedEnum_(CRYPT_XML_GROUP_ID) DWORD                               dwGroupId;
+     WCHAR                               *wszCNGAlgid;
+     WCHAR                               *wszCNGExtraAlgid;
+     DWORD                               dwSignFlags;	    // NCryptSignHash flags
+@@ -1890,12 +1891,12 @@ struct _CRYPT_XML_ALGORITHM_INFO
+     The caller must free ppAlgInfo by calling LocalFree()
+ 
+ ****************************************************************************/
+-_Success_( return == 0 )
++_Windows_SupportedOS_Windows7_ _Success_( return == 0 )
+ HRESULT
+ WINAPI 
+ CryptXmlGetAlgorithmInfo(
+     _In_            const CRYPT_XML_ALGORITHM       *pXmlAlgorithm,
+-                    DWORD                           dwFlags,
++                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD                           dwFlags,
+     _Outptr_     CRYPT_XML_ALGORITHM_INFO        **ppAlgInfo
+     );
+ 
+@@ -2075,7 +2076,7 @@ _Success_( return == 0 )
+ HRESULT
+ (WINAPI *CryptXmlDllCreateDigest)(
+     _In_            const CRYPT_XML_ALGORITHM *pDigestMethod,
+-    _Out_range_( 0, CRYPT_XML_DIGEST_VALUE_MAX )
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_( 0, CRYPT_XML_DIGEST_VALUE_MAX )
+                     ULONG               *pcbSize,
+     _Out_           CRYPT_XML_DIGEST    *phDigest
+     );
+@@ -2215,7 +2216,7 @@ HRESULT
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) 
+                     BYTE                *pbOutput,
+     _In_            ULONG               cbOutput,
+-    _Out_range_( 0, cbOutput )
++    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_( 0, cbOutput )
+                     ULONG               *pcbResult
+     );
+ 
+@@ -2319,7 +2320,7 @@ HRESULT
+         A pointer to the implementation of the CryptXmlDllGetAlgorithmInfo.
+ 
+ ****************************************************************************/
+-typedef struct _CRYPT_XML_CRYPTOGRAPHIC_INTERFACE{
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CRYPT_XML_CRYPTOGRAPHIC_INTERFACE{
+     ULONG                               cbSize;
+     CryptXmlDllEncodeAlgorithm          fpCryptXmlEncodeAlgorithm;
+     CryptXmlDllCreateDigest             fpCryptXmlCreateDigest;
+@@ -2383,7 +2384,7 @@ _Success_( return == 0 )
+ HRESULT
+ (WINAPI * CryptXmlDllCreateKey)(
+     _In_            const CRYPT_XML_BLOB *pEncoded,
+-    _Out_           BCRYPT_KEY_HANDLE   *phKey
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_           BCRYPT_KEY_HANDLE   *phKey
+     );
+ 
+ #ifdef __cplusplus
+@@ -2391,6 +2392,195 @@ HRESULT
+ #endif /* __cplusplus */
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_FLAG_DISABLE_EXTENSIONS")
++#undef CRYPT_XML_FLAG_DISABLE_EXTENSIONS
++#pragma push_macro("CRYPT_XML_FLAG_NO_SERIALIZE")
++#undef CRYPT_XML_FLAG_NO_SERIALIZE
++#pragma push_macro("CRYPT_XML_SIGN_ADD_KEYVALUE")
++#undef CRYPT_XML_SIGN_ADD_KEYVALUE
++enum CRYPT_XML_FLAGS : unsigned int
++{
++    CRYPT_XML_FLAG_DISABLE_EXTENSIONS = 268435456U,
++    CRYPT_XML_FLAG_NO_SERIALIZE = 2147483648U,
++    CRYPT_XML_SIGN_ADD_KEYVALUE = 1U,
++};
++#pragma pop_macro("CRYPT_XML_SIGN_ADD_KEYVALUE")
++#pragma pop_macro("CRYPT_XML_FLAG_NO_SERIALIZE")
++#pragma pop_macro("CRYPT_XML_FLAG_DISABLE_EXTENSIONS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_KEY_VALUE_TYPE_DSA")
++#undef CRYPT_XML_KEY_VALUE_TYPE_DSA
++#pragma push_macro("CRYPT_XML_KEY_VALUE_TYPE_RSA")
++#undef CRYPT_XML_KEY_VALUE_TYPE_RSA
++#pragma push_macro("CRYPT_XML_KEY_VALUE_TYPE_ECDSA")
++#undef CRYPT_XML_KEY_VALUE_TYPE_ECDSA
++#pragma push_macro("CRYPT_XML_KEY_VALUE_TYPE_CUSTOM")
++#undef CRYPT_XML_KEY_VALUE_TYPE_CUSTOM
++enum CRYPT_XML_KEY_VALUE_TYPE : unsigned int
++{
++    CRYPT_XML_KEY_VALUE_TYPE_DSA = 1U,
++    CRYPT_XML_KEY_VALUE_TYPE_RSA = 2U,
++    CRYPT_XML_KEY_VALUE_TYPE_ECDSA = 3U,
++    CRYPT_XML_KEY_VALUE_TYPE_CUSTOM = 4U,
++};
++#pragma pop_macro("CRYPT_XML_KEY_VALUE_TYPE_CUSTOM")
++#pragma pop_macro("CRYPT_XML_KEY_VALUE_TYPE_ECDSA")
++#pragma pop_macro("CRYPT_XML_KEY_VALUE_TYPE_RSA")
++#pragma pop_macro("CRYPT_XML_KEY_VALUE_TYPE_DSA")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL")
++#undef CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL
++#pragma push_macro("CRYPT_XML_X509DATA_TYPE_SKI")
++#undef CRYPT_XML_X509DATA_TYPE_SKI
++#pragma push_macro("CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME")
++#undef CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME
++#pragma push_macro("CRYPT_XML_X509DATA_TYPE_CERTIFICATE")
++#undef CRYPT_XML_X509DATA_TYPE_CERTIFICATE
++#pragma push_macro("CRYPT_XML_X509DATA_TYPE_CRL")
++#undef CRYPT_XML_X509DATA_TYPE_CRL
++#pragma push_macro("CRYPT_XML_X509DATA_TYPE_CUSTOM")
++#undef CRYPT_XML_X509DATA_TYPE_CUSTOM
++enum CRYPT_XML_X509DATA_TYPE : unsigned int
++{
++    CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL = 1U,
++    CRYPT_XML_X509DATA_TYPE_SKI = 2U,
++    CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME = 3U,
++    CRYPT_XML_X509DATA_TYPE_CERTIFICATE = 4U,
++    CRYPT_XML_X509DATA_TYPE_CRL = 5U,
++    CRYPT_XML_X509DATA_TYPE_CUSTOM = 6U,
++};
++#pragma pop_macro("CRYPT_XML_X509DATA_TYPE_CUSTOM")
++#pragma pop_macro("CRYPT_XML_X509DATA_TYPE_CRL")
++#pragma pop_macro("CRYPT_XML_X509DATA_TYPE_CERTIFICATE")
++#pragma pop_macro("CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME")
++#pragma pop_macro("CRYPT_XML_X509DATA_TYPE_SKI")
++#pragma pop_macro("CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_STATUS_INTERNAL_REFERENCE")
++#undef CRYPT_XML_STATUS_INTERNAL_REFERENCE
++#pragma push_macro("CRYPT_XML_STATUS_KEY_AVAILABLE")
++#undef CRYPT_XML_STATUS_KEY_AVAILABLE
++#pragma push_macro("CRYPT_XML_STATUS_DIGESTING")
++#undef CRYPT_XML_STATUS_DIGESTING
++#pragma push_macro("CRYPT_XML_STATUS_DIGEST_VALID")
++#undef CRYPT_XML_STATUS_DIGEST_VALID
++#pragma push_macro("CRYPT_XML_STATUS_SIGNATURE_VALID")
++#undef CRYPT_XML_STATUS_SIGNATURE_VALID
++#pragma push_macro("CRYPT_XML_STATUS_OPENED_TO_ENCODE")
++#undef CRYPT_XML_STATUS_OPENED_TO_ENCODE
++enum CRYPT_XML_STATUS_INFO_STATUS : unsigned int
++{
++    CRYPT_XML_STATUS_INTERNAL_REFERENCE = 1U,
++    CRYPT_XML_STATUS_KEY_AVAILABLE = 2U,
++    CRYPT_XML_STATUS_DIGESTING = 4U,
++    CRYPT_XML_STATUS_DIGEST_VALID = 8U,
++    CRYPT_XML_STATUS_SIGNATURE_VALID = 65536U,
++    CRYPT_XML_STATUS_OPENED_TO_ENCODE = 2147483648U,
++};
++#pragma pop_macro("CRYPT_XML_STATUS_OPENED_TO_ENCODE")
++#pragma pop_macro("CRYPT_XML_STATUS_SIGNATURE_VALID")
++#pragma pop_macro("CRYPT_XML_STATUS_DIGEST_VALID")
++#pragma pop_macro("CRYPT_XML_STATUS_DIGESTING")
++#pragma pop_macro("CRYPT_XML_STATUS_KEY_AVAILABLE")
++#pragma pop_macro("CRYPT_XML_STATUS_INTERNAL_REFERENCE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_TRANSFORM_ON_STREAM")
++#undef CRYPT_XML_TRANSFORM_ON_STREAM
++#pragma push_macro("CRYPT_XML_TRANSFORM_ON_NODESET")
++#undef CRYPT_XML_TRANSFORM_ON_NODESET
++#pragma push_macro("CRYPT_XML_TRANSFORM_URI_QUERY_STRING")
++#undef CRYPT_XML_TRANSFORM_URI_QUERY_STRING
++enum [[clang::flag_enum]] CRYPT_XML_TRANSFORM_FLAGS : unsigned int
++{
++    CRYPT_XML_TRANSFORM_ON_STREAM = 1U,
++    CRYPT_XML_TRANSFORM_ON_NODESET = 2U,
++    CRYPT_XML_TRANSFORM_URI_QUERY_STRING = 3U,
++};
++#pragma pop_macro("CRYPT_XML_TRANSFORM_URI_QUERY_STRING")
++#pragma pop_macro("CRYPT_XML_TRANSFORM_ON_NODESET")
++#pragma pop_macro("CRYPT_XML_TRANSFORM_ON_STREAM")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_GROUP_ID_HASH")
++#undef CRYPT_XML_GROUP_ID_HASH
++#pragma push_macro("CRYPT_XML_GROUP_ID_SIGN")
++#undef CRYPT_XML_GROUP_ID_SIGN
++enum CRYPT_XML_GROUP_ID : unsigned int
++{
++    CRYPT_XML_GROUP_ID_HASH = 1U,
++    CRYPT_XML_GROUP_ID_SIGN = 2U,
++};
++#pragma pop_macro("CRYPT_XML_GROUP_ID_SIGN")
++#pragma pop_macro("CRYPT_XML_GROUP_ID_HASH")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_KEYINFO_TYPE_KEYNAME")
++#undef CRYPT_XML_KEYINFO_TYPE_KEYNAME
++#pragma push_macro("CRYPT_XML_KEYINFO_TYPE_KEYVALUE")
++#undef CRYPT_XML_KEYINFO_TYPE_KEYVALUE
++#pragma push_macro("CRYPT_XML_KEYINFO_TYPE_RETRIEVAL")
++#undef CRYPT_XML_KEYINFO_TYPE_RETRIEVAL
++#pragma push_macro("CRYPT_XML_KEYINFO_TYPE_X509DATA")
++#undef CRYPT_XML_KEYINFO_TYPE_X509DATA
++#pragma push_macro("CRYPT_XML_KEYINFO_TYPE_CUSTOM")
++#undef CRYPT_XML_KEYINFO_TYPE_CUSTOM
++enum CRYPT_XML_KEYINFO_TYPE : unsigned int
++{
++    CRYPT_XML_KEYINFO_TYPE_KEYNAME = 1U,
++    CRYPT_XML_KEYINFO_TYPE_KEYVALUE = 2U,
++    CRYPT_XML_KEYINFO_TYPE_RETRIEVAL = 3U,
++    CRYPT_XML_KEYINFO_TYPE_X509DATA = 4U,
++    CRYPT_XML_KEYINFO_TYPE_CUSTOM = 5U,
++};
++#pragma pop_macro("CRYPT_XML_KEYINFO_TYPE_CUSTOM")
++#pragma pop_macro("CRYPT_XML_KEYINFO_TYPE_X509DATA")
++#pragma pop_macro("CRYPT_XML_KEYINFO_TYPE_RETRIEVAL")
++#pragma pop_macro("CRYPT_XML_KEYINFO_TYPE_KEYVALUE")
++#pragma pop_macro("CRYPT_XML_KEYINFO_TYPE_KEYNAME")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPT_XML_STATUS_ERROR_NOT_RESOLVED")
++#undef CRYPT_XML_STATUS_ERROR_NOT_RESOLVED
++#pragma push_macro("CRYPT_XML_STATUS_ERROR_DIGEST_INVALID")
++#undef CRYPT_XML_STATUS_ERROR_DIGEST_INVALID
++#pragma push_macro("CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM")
++#undef CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM
++#pragma push_macro("CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM")
++#undef CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM
++#pragma push_macro("CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID")
++#undef CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID
++#pragma push_macro("CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED")
++#undef CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED
++enum CRYPT_XML_STATUS_ERROR_STATUS : unsigned int
++{
++    CRYPT_XML_STATUS_ERROR_NOT_RESOLVED = 1U,
++    CRYPT_XML_STATUS_ERROR_DIGEST_INVALID = 2U,
++    CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM = 5U,
++    CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM = 8U,
++    CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID = 65536U,
++    CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED = 131072U,
++};
++#pragma pop_macro("CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED")
++#pragma pop_macro("CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID")
++#pragma pop_macro("CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM")
++#pragma pop_macro("CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM")
++#pragma pop_macro("CRYPT_XML_STATUS_ERROR_DIGEST_INVALID")
++#pragma pop_macro("CRYPT_XML_STATUS_ERROR_NOT_RESOLVED")
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_APPXDEPLOYMENT) */
+ #pragma endregion
+ 

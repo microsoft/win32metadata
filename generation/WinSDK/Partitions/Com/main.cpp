@@ -22,3 +22,5 @@
 #include <comcat.h>
 #include <ctxtcall.h>
 
+
+#include <txlogpub.h>

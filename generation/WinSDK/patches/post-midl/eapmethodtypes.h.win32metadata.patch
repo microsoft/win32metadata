@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h
+index 710f1e8684..e3167d2a5e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodtypes.h
+@@ -12,6 +12,7 @@
+ #define EAPMETHODAPIS_H
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -22,7 +23,7 @@ extern "C" {
+ #endif
+ 
+ // structure that represents EAP packet on the wire
+-typedef struct tagEapPacket
++typedef struct   tagEapPacket
+ {
+    BYTE Code;
+    BYTE Id;
+@@ -41,7 +42,7 @@ typedef
+ #endif
+ 
+ // possible values for 'code' in EAPPacket
+-enum tagEapCode
++enum   tagEapCode
+ {
+    EapCodeMinimum = 1,
+    EapCodeRequest = 1,

@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h b/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
+index 99de383084..fa601c06ec 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
+@@ -9,6 +9,7 @@
+ #define _UAL_H_INCLUDED
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #include <winsock2.h>
+ 
+ #if defined (_MSC_VER)
+@@ -24,7 +25,7 @@ extern "C" {
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN8
+ 
+-typedef struct tagUAL_DATA_BLOB
++typedef struct   tagUAL_DATA_BLOB
+ {
+     DWORD               Size;
+     GUID                RoleGuid;
+@@ -33,24 +34,24 @@ typedef struct tagUAL_DATA_BLOB
+     WCHAR               UserName[MAX_PATH];
+ } UAL_DATA_BLOB, *PUAL_DATA_BLOB;
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+-UalStart(
++  UalStart(
+     _In_ PUAL_DATA_BLOB Data);
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+-UalStop(
++  UalStop(
+     _In_ PUAL_DATA_BLOB Data);
+     
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+-UalInstrument(
++  UalInstrument(
+     _In_ PUAL_DATA_BLOB Data);
+     
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+-UalRegisterProduct(
++  UalRegisterProduct(
+     _In_z_ const WCHAR* wszProductName,
+     _In_z_ const WCHAR* wszRoleName,
+     _In_z_ const WCHAR* wszGuid);

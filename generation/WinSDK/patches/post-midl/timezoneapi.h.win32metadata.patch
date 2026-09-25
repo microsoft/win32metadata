@@ -1,0 +1,148 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+index 7b72887b26..e85cfb2c59 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+@@ -18,6 +18,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -32,7 +33,7 @@ extern "C" {
+ 
+ #define TIME_ZONE_ID_INVALID ((DWORD)0xFFFFFFFF)
+ 
+-typedef struct _TIME_ZONE_INFORMATION {
++typedef struct  _TIME_ZONE_INFORMATION {
+     LONG Bias;
+     WCHAR StandardName[ 32 ];
+     SYSTEMTIME StandardDate;
+@@ -42,7 +43,7 @@ typedef struct _TIME_ZONE_INFORMATION {
+     LONG DaylightBias;
+ } TIME_ZONE_INFORMATION, *PTIME_ZONE_INFORMATION, *LPTIME_ZONE_INFORMATION;
+ 
+-typedef struct _TIME_DYNAMIC_ZONE_INFORMATION {
++typedef struct  _TIME_DYNAMIC_ZONE_INFORMATION {
+     LONG Bias;
+     WCHAR StandardName[ 32 ];
+     SYSTEMTIME StandardDate;
+@@ -56,6 +57,8 @@ typedef struct _TIME_DYNAMIC_ZONE_INFORMATION {
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SystemTimeToTzSpecificLocalTime(
+@@ -66,6 +69,8 @@ SystemTimeToTzSpecificLocalTime(
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TzSpecificLocalTimeToSystemTime(
+@@ -76,6 +81,8 @@ TzSpecificLocalTimeToSystemTime(
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Windows_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ FileTimeToSystemTime(
+@@ -85,6 +92,8 @@ FileTimeToSystemTime(
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SystemTimeToFileTime(
+@@ -94,6 +103,8 @@ SystemTimeToFileTime(
+ 
+ WINBASEAPI
+ _Success_(return != TIME_ZONE_ID_INVALID)
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetTimeZoneInformation(
+@@ -101,6 +112,8 @@ GetTimeZoneInformation(
+     );
+ 
+ WINBASEAPI
++_Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SetTimeZoneInformation(
+@@ -110,6 +123,8 @@ SetTimeZoneInformation(
+ #if (_WIN32_WINNT >= 0x0600)
+ 
+ WINBASEAPI
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SetDynamicTimeZoneInformation(
+@@ -122,6 +137,8 @@ SetDynamicTimeZoneInformation(
+ 
+ WINBASEAPI
+ _Success_(return != TIME_ZONE_ID_INVALID)
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetDynamicTimeZoneInformation(
+@@ -132,7 +149,8 @@ GetDynamicTimeZoneInformation(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
+-_Success_(return != FALSE)
++_Windows_SupportedOS_WindowsVista_ _Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetTimeZoneInformationForYear(
+@@ -149,6 +167,8 @@ GetTimeZoneInformationForYear(
+ 
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Windows8_
++_Win32_ImportLibrary_("ADVAPI32.dll")
+ DWORD
+ WINAPI
+ EnumDynamicTimeZoneInformation(
+@@ -158,6 +178,8 @@ EnumDynamicTimeZoneInformation(
+ 
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_Windows8_
++_Win32_ImportLibrary_("ADVAPI32.dll")
+ DWORD
+ WINAPI
+ GetDynamicTimeZoneInformationEffectiveYears(
+@@ -168,6 +190,8 @@ GetDynamicTimeZoneInformationEffectiveYears(
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SystemTimeToTzSpecificLocalTimeEx(
+@@ -178,6 +202,8 @@ SystemTimeToTzSpecificLocalTimeEx(
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Windows_SupportedOS_Windows7_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TzSpecificLocalTimeToSystemTimeEx(

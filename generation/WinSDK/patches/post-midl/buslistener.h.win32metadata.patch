@@ -1,0 +1,44 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusListener.h
+index 629bddeeab..a4081706a4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusListener.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/BusListener.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * BusListener is an abstract base class (interface) implemented by users of the
+@@ -52,7 +53,7 @@ typedef struct _alljoyn_busattachment_handle*               alljoyn_busattachmen
+  * @param context  The context pointer that was passed into the alljoyn_buslistener_create function
+  * @param bus      The alljoyn_busattachment the listener is registered with.
+  */
+-typedef void (AJ_CALL * alljoyn_buslistener_listener_registered_ptr)(const void* context, alljoyn_busattachment bus);
++typedef void (AJ_CALL * alljoyn_buslistener_listener_registered_ptr)(const void* context, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busattachment bus);
+ 
+ /**
+  * Type for the ListenerUnregistered callback.
+@@ -125,7 +126,7 @@ typedef void (AJ_CALL * alljoyn_buslistener_bus_disconnected_ptr)(const void* co
+  * @param propName       The well-known name that has changed.
+  * @param propValue      The new value of the property; NULL if not present
+  */
+-typedef void (AJ_CALL * alljoyn_buslistener_bus_prop_changed_ptr)(const void* context, const char* prop_name, alljoyn_msgarg prop_value);
++typedef void (AJ_CALL * alljoyn_buslistener_bus_prop_changed_ptr)(const void* context, const char* prop_name, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg prop_value);
+ 
+ /**
+  * Struct containing callbacks used for creation of an alljoyn_buslistener.
+@@ -175,14 +176,14 @@ typedef struct {
+  *
+  * @return Handle to newly allocated alljoyn_buslistener.
+  */
+-extern AJ_API alljoyn_buslistener AJ_CALL alljoyn_buslistener_create(const alljoyn_buslistener_callbacks* callbacks, const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_buslistener AJ_CALL alljoyn_buslistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_buslistener_callbacks* callbacks, _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
+ 
+ /**
+  * Destroy an alljoyn_buslistener.
+  *
+  * @param listener alljoyn_buslistener to destroy.
+  */
+-extern AJ_API void AJ_CALL alljoyn_buslistener_destroy(alljoyn_buslistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_buslistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_buslistener listener);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

@@ -1,0 +1,256 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h
+index c6c0b3a5b6..06c0284fe4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h
+@@ -27725,4 +27725,251 @@ __inline NTSTATUS_FROM_WIN32(long x) { return x <= 0 ? (NTSTATUS)x : (NTSTATUS)
+ // end_ntsecapi
+ 
+ #endif // WIN32_NO_STATUS // winnt
++
++#ifdef WIN32METADATA
++#pragma push_macro("FACILITY_MCA_ERROR_CODE")
++#undef FACILITY_MCA_ERROR_CODE
++#pragma push_macro("FACILITY_DEBUGGER")
++#undef FACILITY_DEBUGGER
++#pragma push_macro("FACILITY_RPC_RUNTIME")
++#undef FACILITY_RPC_RUNTIME
++#pragma push_macro("FACILITY_RPC_STUBS")
++#undef FACILITY_RPC_STUBS
++#pragma push_macro("FACILITY_IO_ERROR_CODE")
++#undef FACILITY_IO_ERROR_CODE
++#pragma push_macro("FACILITY_CODCLASS_ERROR_CODE")
++#undef FACILITY_CODCLASS_ERROR_CODE
++#pragma push_macro("FACILITY_NTWIN32")
++#undef FACILITY_NTWIN32
++#pragma push_macro("FACILITY_NTCERT")
++#undef FACILITY_NTCERT
++#pragma push_macro("FACILITY_NTSSPI")
++#undef FACILITY_NTSSPI
++#pragma push_macro("FACILITY_TERMINAL_SERVER")
++#undef FACILITY_TERMINAL_SERVER
++#pragma push_macro("FACILITY_USB_ERROR_CODE")
++#undef FACILITY_USB_ERROR_CODE
++#pragma push_macro("FACILITY_HID_ERROR_CODE")
++#undef FACILITY_HID_ERROR_CODE
++#pragma push_macro("FACILITY_FIREWIRE_ERROR_CODE")
++#undef FACILITY_FIREWIRE_ERROR_CODE
++#pragma push_macro("FACILITY_CLUSTER_ERROR_CODE")
++#undef FACILITY_CLUSTER_ERROR_CODE
++#pragma push_macro("FACILITY_ACPI_ERROR_CODE")
++#undef FACILITY_ACPI_ERROR_CODE
++#pragma push_macro("FACILITY_SXS_ERROR_CODE")
++#undef FACILITY_SXS_ERROR_CODE
++#pragma push_macro("FACILITY_TRANSACTION")
++#undef FACILITY_TRANSACTION
++#pragma push_macro("FACILITY_COMMONLOG")
++#undef FACILITY_COMMONLOG
++#pragma push_macro("FACILITY_VIDEO")
++#undef FACILITY_VIDEO
++#pragma push_macro("FACILITY_FILTER_MANAGER")
++#undef FACILITY_FILTER_MANAGER
++#pragma push_macro("FACILITY_MONITOR")
++#undef FACILITY_MONITOR
++#pragma push_macro("FACILITY_GRAPHICS_KERNEL")
++#undef FACILITY_GRAPHICS_KERNEL
++#pragma push_macro("FACILITY_CAMERA")
++#undef FACILITY_CAMERA
++#pragma push_macro("FACILITY_DRIVER_FRAMEWORK")
++#undef FACILITY_DRIVER_FRAMEWORK
++#pragma push_macro("FACILITY_FVE_ERROR_CODE")
++#undef FACILITY_FVE_ERROR_CODE
++#pragma push_macro("FACILITY_FWP_ERROR_CODE")
++#undef FACILITY_FWP_ERROR_CODE
++#pragma push_macro("FACILITY_NDIS_ERROR_CODE")
++#undef FACILITY_NDIS_ERROR_CODE
++#pragma push_macro("FACILITY_QUIC_ERROR_CODE")
++#undef FACILITY_QUIC_ERROR_CODE
++#pragma push_macro("FACILITY_TPM")
++#undef FACILITY_TPM
++#pragma push_macro("FACILITY_RTPM")
++#undef FACILITY_RTPM
++#pragma push_macro("FACILITY_HYPERVISOR")
++#undef FACILITY_HYPERVISOR
++#pragma push_macro("FACILITY_IPSEC")
++#undef FACILITY_IPSEC
++#pragma push_macro("FACILITY_VIRTUALIZATION")
++#undef FACILITY_VIRTUALIZATION
++#pragma push_macro("FACILITY_VOLMGR")
++#undef FACILITY_VOLMGR
++#pragma push_macro("FACILITY_BCD_ERROR_CODE")
++#undef FACILITY_BCD_ERROR_CODE
++#pragma push_macro("FACILITY_WIN32K_NTUSER")
++#undef FACILITY_WIN32K_NTUSER
++#pragma push_macro("FACILITY_WIN32K_NTGDI")
++#undef FACILITY_WIN32K_NTGDI
++#pragma push_macro("FACILITY_RESUME_KEY_FILTER")
++#undef FACILITY_RESUME_KEY_FILTER
++#pragma push_macro("FACILITY_RDBSS")
++#undef FACILITY_RDBSS
++#pragma push_macro("FACILITY_BTH_ATT")
++#undef FACILITY_BTH_ATT
++#pragma push_macro("FACILITY_SECUREBOOT")
++#undef FACILITY_SECUREBOOT
++#pragma push_macro("FACILITY_AUDIO_KERNEL")
++#undef FACILITY_AUDIO_KERNEL
++#pragma push_macro("FACILITY_VSM")
++#undef FACILITY_VSM
++#pragma push_macro("FACILITY_NT_IORING")
++#undef FACILITY_NT_IORING
++#pragma push_macro("FACILITY_VOLSNAP")
++#undef FACILITY_VOLSNAP
++#pragma push_macro("FACILITY_SDBUS")
++#undef FACILITY_SDBUS
++#pragma push_macro("FACILITY_SHARED_VHDX")
++#undef FACILITY_SHARED_VHDX
++#pragma push_macro("FACILITY_SMB")
++#undef FACILITY_SMB
++#pragma push_macro("FACILITY_XVS")
++#undef FACILITY_XVS
++#pragma push_macro("FACILITY_INTERIX")
++#undef FACILITY_INTERIX
++#pragma push_macro("FACILITY_SPACES")
++#undef FACILITY_SPACES
++#pragma push_macro("FACILITY_SECURITY_CORE")
++#undef FACILITY_SECURITY_CORE
++#pragma push_macro("FACILITY_SYSTEM_INTEGRITY")
++#undef FACILITY_SYSTEM_INTEGRITY
++#pragma push_macro("FACILITY_LICENSING")
++#undef FACILITY_LICENSING
++#pragma push_macro("FACILITY_PLATFORM_MANIFEST")
++#undef FACILITY_PLATFORM_MANIFEST
++#pragma push_macro("FACILITY_APP_EXEC")
++#undef FACILITY_APP_EXEC
++#pragma push_macro("FACILITY_UNIONFS")
++#undef FACILITY_UNIONFS
++#pragma push_macro("FACILITY_PLATFORM_RUNTIME_MECHANISM")
++#undef FACILITY_PLATFORM_RUNTIME_MECHANISM
++#pragma push_macro("FACILITY_WIN_ACCEL")
++#undef FACILITY_WIN_ACCEL
++#pragma push_macro("FACILITY_MAXIMUM_VALUE")
++#undef FACILITY_MAXIMUM_VALUE
++enum NTSTATUS_FACILITY_CODE : unsigned int
++{
++    FACILITY_MCA_ERROR_CODE = 5U,
++    FACILITY_DEBUGGER = 1U,
++    FACILITY_RPC_RUNTIME = 2U,
++    FACILITY_RPC_STUBS = 3U,
++    FACILITY_IO_ERROR_CODE = 4U,
++    FACILITY_CODCLASS_ERROR_CODE = 6U,
++    FACILITY_NTWIN32 = 7U,
++    FACILITY_NTCERT = 8U,
++    FACILITY_NTSSPI = 9U,
++    FACILITY_TERMINAL_SERVER = 10U,
++    FACILITY_USB_ERROR_CODE = 16U,
++    FACILITY_HID_ERROR_CODE = 17U,
++    FACILITY_FIREWIRE_ERROR_CODE = 18U,
++    FACILITY_CLUSTER_ERROR_CODE = 19U,
++    FACILITY_ACPI_ERROR_CODE = 20U,
++    FACILITY_SXS_ERROR_CODE = 21U,
++    FACILITY_TRANSACTION = 25U,
++    FACILITY_COMMONLOG = 26U,
++    FACILITY_VIDEO = 27U,
++    FACILITY_FILTER_MANAGER = 28U,
++    FACILITY_MONITOR = 29U,
++    FACILITY_GRAPHICS_KERNEL = 30U,
++    FACILITY_CAMERA = 31U,
++    FACILITY_DRIVER_FRAMEWORK = 32U,
++    FACILITY_FVE_ERROR_CODE = 33U,
++    FACILITY_FWP_ERROR_CODE = 34U,
++    FACILITY_NDIS_ERROR_CODE = 35U,
++    FACILITY_QUIC_ERROR_CODE = 36U,
++    FACILITY_TPM = 41U,
++    FACILITY_RTPM = 42U,
++    FACILITY_HYPERVISOR = 53U,
++    FACILITY_IPSEC = 54U,
++    FACILITY_VIRTUALIZATION = 55U,
++    FACILITY_VOLMGR = 56U,
++    FACILITY_BCD_ERROR_CODE = 57U,
++    FACILITY_WIN32K_NTUSER = 62U,
++    FACILITY_WIN32K_NTGDI = 63U,
++    FACILITY_RESUME_KEY_FILTER = 64U,
++    FACILITY_RDBSS = 65U,
++    FACILITY_BTH_ATT = 66U,
++    FACILITY_SECUREBOOT = 67U,
++    FACILITY_AUDIO_KERNEL = 68U,
++    FACILITY_VSM = 69U,
++    FACILITY_NT_IORING = 70U,
++    FACILITY_VOLSNAP = 80U,
++    FACILITY_SDBUS = 81U,
++    FACILITY_SHARED_VHDX = 92U,
++    FACILITY_SMB = 93U,
++    FACILITY_XVS = 94U,
++    FACILITY_INTERIX = 153U,
++    FACILITY_SPACES = 231U,
++    FACILITY_SECURITY_CORE = 232U,
++    FACILITY_SYSTEM_INTEGRITY = 233U,
++    FACILITY_LICENSING = 234U,
++    FACILITY_PLATFORM_MANIFEST = 235U,
++    FACILITY_APP_EXEC = 236U,
++    FACILITY_UNIONFS = 237U,
++    FACILITY_PLATFORM_RUNTIME_MECHANISM = 238U,
++    FACILITY_WIN_ACCEL = 239U,
++    FACILITY_MAXIMUM_VALUE = 240U,
++};
++#pragma pop_macro("FACILITY_MAXIMUM_VALUE")
++#pragma pop_macro("FACILITY_WIN_ACCEL")
++#pragma pop_macro("FACILITY_PLATFORM_RUNTIME_MECHANISM")
++#pragma pop_macro("FACILITY_UNIONFS")
++#pragma pop_macro("FACILITY_APP_EXEC")
++#pragma pop_macro("FACILITY_PLATFORM_MANIFEST")
++#pragma pop_macro("FACILITY_LICENSING")
++#pragma pop_macro("FACILITY_SYSTEM_INTEGRITY")
++#pragma pop_macro("FACILITY_SECURITY_CORE")
++#pragma pop_macro("FACILITY_SPACES")
++#pragma pop_macro("FACILITY_INTERIX")
++#pragma pop_macro("FACILITY_XVS")
++#pragma pop_macro("FACILITY_SMB")
++#pragma pop_macro("FACILITY_SHARED_VHDX")
++#pragma pop_macro("FACILITY_SDBUS")
++#pragma pop_macro("FACILITY_VOLSNAP")
++#pragma pop_macro("FACILITY_NT_IORING")
++#pragma pop_macro("FACILITY_VSM")
++#pragma pop_macro("FACILITY_AUDIO_KERNEL")
++#pragma pop_macro("FACILITY_SECUREBOOT")
++#pragma pop_macro("FACILITY_BTH_ATT")
++#pragma pop_macro("FACILITY_RDBSS")
++#pragma pop_macro("FACILITY_RESUME_KEY_FILTER")
++#pragma pop_macro("FACILITY_WIN32K_NTGDI")
++#pragma pop_macro("FACILITY_WIN32K_NTUSER")
++#pragma pop_macro("FACILITY_BCD_ERROR_CODE")
++#pragma pop_macro("FACILITY_VOLMGR")
++#pragma pop_macro("FACILITY_VIRTUALIZATION")
++#pragma pop_macro("FACILITY_IPSEC")
++#pragma pop_macro("FACILITY_HYPERVISOR")
++#pragma pop_macro("FACILITY_RTPM")
++#pragma pop_macro("FACILITY_TPM")
++#pragma pop_macro("FACILITY_QUIC_ERROR_CODE")
++#pragma pop_macro("FACILITY_NDIS_ERROR_CODE")
++#pragma pop_macro("FACILITY_FWP_ERROR_CODE")
++#pragma pop_macro("FACILITY_FVE_ERROR_CODE")
++#pragma pop_macro("FACILITY_DRIVER_FRAMEWORK")
++#pragma pop_macro("FACILITY_CAMERA")
++#pragma pop_macro("FACILITY_GRAPHICS_KERNEL")
++#pragma pop_macro("FACILITY_MONITOR")
++#pragma pop_macro("FACILITY_FILTER_MANAGER")
++#pragma pop_macro("FACILITY_VIDEO")
++#pragma pop_macro("FACILITY_COMMONLOG")
++#pragma pop_macro("FACILITY_TRANSACTION")
++#pragma pop_macro("FACILITY_SXS_ERROR_CODE")
++#pragma pop_macro("FACILITY_ACPI_ERROR_CODE")
++#pragma pop_macro("FACILITY_CLUSTER_ERROR_CODE")
++#pragma pop_macro("FACILITY_FIREWIRE_ERROR_CODE")
++#pragma pop_macro("FACILITY_HID_ERROR_CODE")
++#pragma pop_macro("FACILITY_USB_ERROR_CODE")
++#pragma pop_macro("FACILITY_TERMINAL_SERVER")
++#pragma pop_macro("FACILITY_NTSSPI")
++#pragma pop_macro("FACILITY_NTCERT")
++#pragma pop_macro("FACILITY_NTWIN32")
++#pragma pop_macro("FACILITY_CODCLASS_ERROR_CODE")
++#pragma pop_macro("FACILITY_IO_ERROR_CODE")
++#pragma pop_macro("FACILITY_RPC_STUBS")
++#pragma pop_macro("FACILITY_RPC_RUNTIME")
++#pragma pop_macro("FACILITY_DEBUGGER")
++#pragma pop_macro("FACILITY_MCA_ERROR_CODE")
++#endif
++
+ #endif // _NTSTATUS_

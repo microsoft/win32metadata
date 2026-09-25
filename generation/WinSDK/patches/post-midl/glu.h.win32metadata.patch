@@ -1,0 +1,350 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gl/GLU.h b/generation/WinSDK/RecompiledIdlHeaders/um/gl/GLU.h
+index 9bdc3d0cf8..5898c69538 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gl/GLU.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gl/GLU.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0004    // Increment this if a change has global effects
+ 
+ Copyright (c) 1985-95, Microsoft Corporation
+@@ -87,7 +88,7 @@ void APIENTRY gluPickMatrix (
+     GLdouble y, 
+     GLdouble width, 
+     GLdouble height, 
+-    GLint    viewport[4]);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLint    viewport[4]);
+ 
+ void APIENTRY gluLookAt (
+     GLdouble eyex, 
+@@ -104,23 +105,23 @@ int APIENTRY gluProject (
+     GLdouble        objx, 
+     GLdouble        objy, 
+     GLdouble        objz,  
+-    const GLdouble  modelMatrix[16], 
+-    const GLdouble  projMatrix[16], 
+-    const GLint     viewport[4], 
+-    GLdouble        *winx, 
+-    GLdouble        *winy, 
+-    GLdouble        *winz);
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLdouble  modelMatrix[16], 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLdouble  projMatrix[16], 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLint     viewport[4], 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble        *winx, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble        *winy, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble        *winz);
+ 
+ int APIENTRY gluUnProject (
+     GLdouble       winx, 
+     GLdouble       winy, 
+     GLdouble       winz, 
+-    const GLdouble modelMatrix[16], 
+-    const GLdouble projMatrix[16], 
+-    const GLint    viewport[4], 
+-    GLdouble       *objx, 
+-    GLdouble       *objy, 
+-    GLdouble       *objz);
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLdouble modelMatrix[16], 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLdouble projMatrix[16], 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLint    viewport[4], 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble       *objx, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble       *objy, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble       *objz);
+ 
+ 
+ int APIENTRY gluScaleImage (
+@@ -132,7 +133,7 @@ int APIENTRY gluScaleImage (
+     GLint       widthout, 
+     GLint       heightout, 
+     GLenum      typeout, 
+-    void        *dataout);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void        *dataout);
+ 
+ 
+ int APIENTRY gluBuild1DMipmaps (
+@@ -181,26 +182,26 @@ typedef struct GLUtesselator GLUtriangulatorObj;
+ 
+ GLUquadric* APIENTRY gluNewQuadric (void);
+ void APIENTRY gluDeleteQuadric (
+-    GLUquadric          *state);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *state);
+ 
+ void APIENTRY gluQuadricNormals (
+-    GLUquadric          *quadObject, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *quadObject, 
+     GLenum              normals);
+ 
+ void APIENTRY gluQuadricTexture (
+-    GLUquadric          *quadObject, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *quadObject, 
+     GLboolean           textureCoords);
+ 
+ void APIENTRY gluQuadricOrientation (
+-    GLUquadric          *quadObject, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *quadObject, 
+     GLenum              orientation);
+ 
+ void APIENTRY gluQuadricDrawStyle (
+-    GLUquadric          *quadObject, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *quadObject, 
+     GLenum              drawStyle);
+ 
+ void APIENTRY gluCylinder (
+-    GLUquadric          *qobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *qobj, 
+     GLdouble            baseRadius, 
+     GLdouble            topRadius, 
+     GLdouble            height, 
+@@ -208,14 +209,14 @@ void APIENTRY gluCylinder (
+     GLint               stacks);
+ 
+ void APIENTRY gluDisk (
+-    GLUquadric          *qobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *qobj, 
+     GLdouble            innerRadius, 
+     GLdouble            outerRadius, 
+     GLint               slices, 
+     GLint               loops);
+ 
+ void APIENTRY gluPartialDisk (
+-    GLUquadric          *qobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *qobj, 
+     GLdouble            innerRadius, 
+     GLdouble            outerRadius, 
+     GLint               slices, 
+@@ -224,138 +225,138 @@ void APIENTRY gluPartialDisk (
+     GLdouble            sweepAngle);
+ 
+ void APIENTRY gluSphere (
+-    GLUquadric          *qobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *qobj, 
+     GLdouble            radius, 
+     GLint               slices, 
+     GLint               stacks);
+ 
+ void APIENTRY gluQuadricCallback (
+-    GLUquadric          *qobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUquadric          *qobj, 
+     GLenum              which, 
+-    void                (CALLBACK* fn)());
++    _WIN32META_ANNOTATION_("win32metadata:in") void                (CALLBACK* fn)());
+ 
+ GLUtesselator* APIENTRY  gluNewTess(          
+     void );
+ 
+ void APIENTRY  gluDeleteTess(       
+-    GLUtesselator       *tess );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess );
+ 
+ void APIENTRY  gluTessBeginPolygon( 
+-    GLUtesselator       *tess,
+-    void                *polygon_data );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                *polygon_data );
+ 
+ void APIENTRY  gluTessBeginContour( 
+-    GLUtesselator       *tess );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess );
+ 
+ void APIENTRY  gluTessVertex(       
+-    GLUtesselator       *tess,
+-    GLdouble            coords[3], 
+-    void                *data );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble            coords[3], 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                *data );
+ 
+ void APIENTRY  gluTessEndContour(   
+-    GLUtesselator       *tess );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess );
+ 
+ void APIENTRY  gluTessEndPolygon(   
+-    GLUtesselator       *tess );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess );
+ 
+ void APIENTRY  gluTessProperty(     
+-    GLUtesselator       *tess,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess,
+     GLenum              which, 
+     GLdouble            value );
+  
+ void APIENTRY  gluTessNormal(       
+-    GLUtesselator       *tess, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess, 
+     GLdouble            x,
+     GLdouble            y, 
+     GLdouble            z );
+ 
+ void APIENTRY  gluTessCallback(     
+-    GLUtesselator       *tess,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess,
+     GLenum              which, 
+-    void                (CALLBACK *fn)());
++    _WIN32META_ANNOTATION_("win32metadata:in") void                (CALLBACK *fn)());
+ 
+ void APIENTRY  gluGetTessProperty(  
+-    GLUtesselator       *tess,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator       *tess,
+     GLenum              which, 
+-    GLdouble            *value );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble            *value );
+  
+ GLUnurbs* APIENTRY gluNewNurbsRenderer (void);
+ 
+ void APIENTRY gluDeleteNurbsRenderer (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluBeginSurface (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluBeginCurve (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluEndCurve (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluEndSurface (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluBeginTrim (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluEndTrim (
+-    GLUnurbs            *nobj);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj);
+ 
+ void APIENTRY gluPwlCurve (
+-    GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
+     GLint               count, 
+-    GLfloat             *array, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat             *array, 
+     GLint               stride, 
+     GLenum              type);
+ 
+ void APIENTRY gluNurbsCurve (
+-    GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
+     GLint               nknots, 
+-    GLfloat             *knot, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat             *knot, 
+     GLint               stride, 
+-    GLfloat             *ctlarray, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat             *ctlarray, 
+     GLint               order, 
+     GLenum              type);
+ 
+ void APIENTRY 
+ gluNurbsSurface(     
+-    GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
+     GLint               sknot_count, 
+-    float               *sknot, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") float               *sknot, 
+     GLint               tknot_count, 
+-    GLfloat             *tknot, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat             *tknot, 
+     GLint               s_stride, 
+     GLint               t_stride, 
+-    GLfloat             *ctlarray, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat             *ctlarray, 
+     GLint               sorder, 
+     GLint               torder, 
+     GLenum              type);
+ 
+ void APIENTRY 
+ gluLoadSamplingMatrices (
+-    GLUnurbs            *nobj, 
+-    const GLfloat       modelMatrix[16], 
+-    const GLfloat       projMatrix[16], 
+-    const GLint         viewport[4] );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLfloat       modelMatrix[16], 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLfloat       projMatrix[16], 
++    _WIN32META_ANNOTATION_("win32metadata:in") const GLint         viewport[4] );
+ 
+ void APIENTRY 
+ gluNurbsProperty (
+-    GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
+     GLenum              property, 
+     GLfloat             value );
+ 
+ void APIENTRY 
+ gluGetNurbsProperty (
+-    GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
+     GLenum              property, 
+-    GLfloat             *value );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat             *value );
+ 
+ void APIENTRY 
+ gluNurbsCallback (
+-    GLUnurbs            *nobj, 
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUnurbs            *nobj, 
+     GLenum              which, 
+-    void                (CALLBACK* fn)() );
++    _WIN32META_ANNOTATION_("win32metadata:in") void                (CALLBACK* fn)() );
+ 
+ 
+ /****           Callback function prototypes    ****/
+@@ -366,23 +367,23 @@ typedef void (CALLBACK* GLUquadricErrorProc) (GLenum);
+ /* gluTessCallback */
+ typedef void (CALLBACK* GLUtessBeginProc)        (GLenum);
+ typedef void (CALLBACK* GLUtessEdgeFlagProc)     (GLboolean);
+-typedef void (CALLBACK* GLUtessVertexProc)       (void *);
++typedef void (CALLBACK* GLUtessVertexProc)       (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
+ typedef void (CALLBACK* GLUtessEndProc)          (void);
+ typedef void (CALLBACK* GLUtessErrorProc)        (GLenum);
+-typedef void (CALLBACK* GLUtessCombineProc)      (GLdouble[3],
+-                                                  void*[4], 
+-                                                  GLfloat[4],
+-                                                  void** );
+-typedef void (CALLBACK* GLUtessBeginDataProc)    (GLenum, void *);
+-typedef void (CALLBACK* GLUtessEdgeFlagDataProc) (GLboolean, void *);
+-typedef void (CALLBACK* GLUtessVertexDataProc)   (void *, void *);
+-typedef void (CALLBACK* GLUtessEndDataProc)      (void *);
+-typedef void (CALLBACK* GLUtessErrorDataProc)    (GLenum, void *);
+-typedef void (CALLBACK* GLUtessCombineDataProc)  (GLdouble[3],
+-                                                  void*[4], 
+-                                                  GLfloat[4],
+-                                                  void**,
+-                                                  void* );
++typedef void (CALLBACK* GLUtessCombineProc)      (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble[3],
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void*[4], 
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat[4],
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** );
++typedef void (CALLBACK* GLUtessBeginDataProc)    (GLenum, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++typedef void (CALLBACK* GLUtessEdgeFlagDataProc) (GLboolean, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++typedef void (CALLBACK* GLUtessVertexDataProc)   (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++typedef void (CALLBACK* GLUtessEndDataProc)      (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++typedef void (CALLBACK* GLUtessErrorDataProc)    (GLenum, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++typedef void (CALLBACK* GLUtessCombineDataProc)  (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLdouble[3],
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void*[4], 
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLfloat[4],
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void**,
++                                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* );
+ 
+ /* gluNurbsCallback */
+ typedef void (CALLBACK* GLUnurbsErrorProc)   (GLenum);
+@@ -559,12 +560,12 @@ typedef void (CALLBACK* GLUnurbsErrorProc)   (GLenum);
+ 
+ /****           Backwards compatibility for old tesselator           ****/
+ 
+-void APIENTRY   gluBeginPolygon( GLUtesselator *tess );
++void APIENTRY   gluBeginPolygon( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator *tess );
+ 
+-void APIENTRY   gluNextContour(  GLUtesselator *tess, 
++void APIENTRY   gluNextContour(  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator *tess, 
+                                  GLenum        type );
+ 
+-void APIENTRY   gluEndPolygon(   GLUtesselator *tess );
++void APIENTRY   gluEndPolygon(   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLUtesselator *tess );
+ 
+ /* Contours types -- obsolete! */
+ #define GLU_CW          100120

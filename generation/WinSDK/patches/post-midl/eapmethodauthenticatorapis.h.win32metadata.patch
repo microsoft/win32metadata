@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h
+index d2c47a1458..b332308a18 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodauthenticatorapis.h
+@@ -12,6 +12,7 @@
+ #define EAP_METHOD_AUTHENTICATOR_APIS_H
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -70,7 +71,7 @@ extern "C"
+     // Structures used by EAP methods on the peer to communicate with the host.
+ 
+     // List of functions corresponding to the particular EAP method
+-    typedef struct _EAP_AUTHENTICATOR_METHOD_ROUTINES
++    typedef struct   _EAP_AUTHENTICATOR_METHOD_ROUTINES
+     {
+         DWORD dwSizeInBytes; // unused
+         EAP_METHOD_TYPE* pEapType;

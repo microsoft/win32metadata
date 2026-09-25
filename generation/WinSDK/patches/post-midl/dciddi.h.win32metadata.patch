@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dciddi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dciddi.h
+index cd28bd6ac0..e64ce634b2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dciddi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dciddi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*******************************************************************
+  *
+  *      FILE:           dciddi.h
+@@ -220,8 +221,8 @@ typedef struct _DCICREATEINPUT {
+ typedef
+ void
+ (*ENUM_CALLBACK) (
+-    LPDCISURFACEINFO lpSurfaceInfo,
+-    LPVOID lpContext
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDCISURFACEINFO lpSurfaceInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpContext
+     );
+ 
+ typedef struct _DCIENUMINPUT {

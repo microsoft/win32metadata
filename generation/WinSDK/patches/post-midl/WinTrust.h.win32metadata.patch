@@ -1,0 +1,453 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
+index 5025403f58..d1b78a8e79 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinTrust.h
+@@ -16,6 +16,7 @@
+ #define WINTRUST_H
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or Wintrust Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINTRUST)
+@@ -97,17 +98,17 @@ typedef struct _WINTRUST_DATA
+     LPVOID          pPolicyCallbackData;        // optional: used to pass data between the app and policy
+     LPVOID          pSIPClientData;             // optional: used to pass data between the app and SIP.
+ 
+-    DWORD           dwUIChoice;                 // required: UI choice.  One of the following.
++    _Win32_AssociatedEnum_(WINTRUST_DATA_UICHOICE) DWORD           dwUIChoice;                 // required: UI choice.  One of the following.
+ #                       define      WTD_UI_ALL              1
+ #                       define      WTD_UI_NONE             2
+ #                       define      WTD_UI_NOBAD            3
+ #                       define      WTD_UI_NOGOOD           4
+ 
+-    DWORD           fdwRevocationChecks;        // required: certificate revocation check options
++    _Win32_AssociatedEnum_(WINTRUST_DATA_REVOCATION_CHECKS) DWORD           fdwRevocationChecks;        // required: certificate revocation check options
+ #                       define      WTD_REVOKE_NONE         0x00000000
+ #                       define      WTD_REVOKE_WHOLECHAIN   0x00000001
+ 
+-    DWORD           dwUnionChoice;              // required: which structure is being passed in?
++    _Win32_AssociatedEnum_(WINTRUST_DATA_UNION_CHOICE) DWORD           dwUnionChoice;              // required: which structure is being passed in?
+ #                       define      WTD_CHOICE_FILE         1
+ #                       define      WTD_CHOICE_CATALOG      2
+ #                       define      WTD_CHOICE_BLOB         3
+@@ -124,7 +125,7 @@ typedef struct _WINTRUST_DATA
+         struct WINTRUST_DETACHED_SIG_INFO_ *pDetachedSig;
+     };
+ 
+-    DWORD           dwStateAction;                      // optional (Catalog File Processing)
++    _Win32_AssociatedEnum_(WINTRUST_DATA_STATE_ACTION) DWORD           dwStateAction;                      // optional (Catalog File Processing)
+ #                       define      WTD_STATEACTION_IGNORE           0x00000000
+ #                       define      WTD_STATEACTION_VERIFY           0x00000001
+ #                       define      WTD_STATEACTION_CLOSE            0x00000002
+@@ -135,7 +136,7 @@ typedef struct _WINTRUST_DATA
+ 
+     WCHAR           *pwszURLReference;          // optional: (future) used to determine zone.
+ 
+-    DWORD           dwProvFlags;
++    _Win32_AssociatedEnum_(WINTRUST_DATA_PROVIDER_FLAGS) DWORD           dwProvFlags;
+ #       define WTD_PROV_FLAGS_MASK                      0x0000FFFF
+ #       define WTD_USE_IE4_TRUST_FLAG                   0x00000001
+ #       define WTD_NO_IE4_CHAIN_FLAG                    0x00000002
+@@ -154,7 +155,7 @@ typedef struct _WINTRUST_DATA
+ #       define WTD_MOTW                                 0x00004000 // Mark-Of-The-Web
+ #       define WTD_CODE_INTEGRITY_DRIVER_MODE           0x00008000 // Code Integrity driver mode
+ 
+-    DWORD           dwUIContext;
++    _Win32_AssociatedEnum_(WINTRUST_DATA_UICONTEXT) DWORD           dwUIContext;
+ #       define WTD_UICONTEXT_EXECUTE                    0
+ #       define WTD_UICONTEXT_INSTALL                    1
+ 
+@@ -174,7 +175,7 @@ typedef struct WINTRUST_SIGNATURE_SETTINGS_
+ {
+     DWORD cbStruct;             //sizeof(WINTRUST_SIGNATURE_SETTINGS)
+     DWORD dwIndex;              //Index of the signature to validate
+-    DWORD dwFlags;              
++    _Win32_AssociatedEnum_(WINTRUST_SIGNATURE_SETTINGS_FLAGS) DWORD dwFlags;              
+     DWORD cSecondarySigs;       //A count of the secondary signatures
+     DWORD dwVerifiedSigIndex;   //The index of the signature that was verified
+     PCERT_STRONG_SIGN_PARA pCryptoPolicy; //Crypto policy the signature must pass
+@@ -459,13 +460,13 @@ typedef struct WINTRUST_CERT_INFO_
+ //    Any publisher or timestamp chain error. If WTD_SAFER_FLAG wasn't set in
+ //    dwProvFlags, any signed code verification error.
+ //
+-extern LONG WINAPI WinVerifyTrust(HWND hwnd, GUID *pgActionID,
+-                                  LPVOID pWVTData);
++_Windows_SupportedOS_WindowsXP_ extern LONG WINAPI WinVerifyTrust(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgActionID,
++                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pWVTData);
+ 
+ // This API returns a Win32 error code, previously it was declared to return HRESULT.
+ // Do not test the result with SUCCEEDED() or FAILED(), any non-zero value represents
+ // verification failure. To avoid this problem use WinVerifyTrust() instead.
+-extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *pWinTrustData);
++_Windows_SupportedOS_WindowsXP_ extern long WINAPI WinVerifyTrustEx(HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgActionID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WINTRUST_DATA *pWinTrustData);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+@@ -521,7 +522,7 @@ extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *
+ //  This API call is exported from WINTRUST.DLL and is the recommended method
+ //  of retrieving the DWORD representing the Policy Flags.
+ //
+-extern void WINAPI      WintrustGetRegPolicyFlags(DWORD *pdwPolicyFlags);
++_Windows_SupportedOS_WindowsXP_ extern void WINAPI      WintrustGetRegPolicyFlags(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Win32_AssociatedEnum_(WINTRUST_POLICY_FLAGS) DWORD *pdwPolicyFlags);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ //
+@@ -532,7 +533,7 @@ extern void WINAPI      WintrustGetRegPolicyFlags(DWORD *pdwPolicyFlags);
+ //  WintrustGetRegPolicyFlags to get the current value and or/and the value
+ //  you need then call the set the flags.
+ //
+-extern BOOL WINAPI      WintrustSetRegPolicyFlags(DWORD dwPolicyFlags);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI      WintrustSetRegPolicyFlags(_Win32_AssociatedEnum_(WINTRUST_POLICY_FLAGS) DWORD dwPolicyFlags);
+ 
+ 
+ 
+@@ -1095,7 +1096,7 @@ typedef struct _CRYPT_PROVIDER_DEFUSAGE
+ //      TRUE:                           No fatal errors
+ //      FALSE:                          Errors occured.  See GetLastError()
+ //
+-extern BOOL WINAPI  WintrustAddActionID(_In_ GUID *pgActionID,
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI  WintrustAddActionID(_In_ GUID *pgActionID,
+                                         _In_ DWORD fdwFlags,
+                                         _In_ CRYPT_REGISTER_ACTIONID *psProvInfo);
+ 
+@@ -1116,7 +1117,7 @@ extern BOOL WINAPI  WintrustAddActionID(_In_ GUID *pgActionID,
+ //      TRUE:                           No fatal errors
+ //      FALSE:                          Errors occured.  See GetLastError()
+ //
+-extern BOOL WINAPI  WintrustRemoveActionID(_In_ GUID *pgActionID);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI  WintrustRemoveActionID(_In_ GUID *pgActionID);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ //
+@@ -1128,7 +1129,7 @@ extern BOOL WINAPI  WintrustRemoveActionID(_In_ GUID *pgActionID);
+ //      TRUE                            success.
+ //      FALSE                           fail.
+ //
+-extern BOOL WINAPI WintrustLoadFunctionPointers(GUID *pgActionID, CRYPT_PROVIDER_FUNCTIONS *pPfns);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI WintrustLoadFunctionPointers(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgActionID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_FUNCTIONS *pPfns);
+ 
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -1144,7 +1145,7 @@ extern BOOL WINAPI WintrustLoadFunctionPointers(GUID *pgActionID, CRYPT_PROVIDER
+ //      TRUE                            success.
+ //      FALSE                           fail.
+ //
+-extern BOOL WINAPI              WintrustAddDefaultForUsage(_In_ const char *pszUsageOID,
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI              WintrustAddDefaultForUsage(_In_ const char *pszUsageOID,
+                                                            _In_ CRYPT_PROVIDER_REGDEFUSAGE *psDefUsage);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -1162,24 +1163,30 @@ extern BOOL WINAPI              WintrustAddDefaultForUsage(_In_ const char *pszU
+ //
+ #define                             DWACTION_ALLOCANDFILL           1
+ #define                             DWACTION_FREE                   2
+-extern BOOL WINAPI              WintrustGetDefaultForUsage(_In_ DWORD dwAction,
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI              WintrustGetDefaultForUsage(_Win32_AssociatedEnum_(WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION) _In_ DWORD dwAction,
+                                                            _In_ const char *pszUsageOID,
+                                                            _Inout_ CRYPT_PROVIDER_DEFUSAGE *psUsage);
+ 
+-extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(CRYPT_PROVIDER_DATA *pProvData,
++_Windows_SupportedOS_WindowsXP_ 
++
++extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_DATA *pProvData,
+                                                                        DWORD idxSigner,
+                                                                        BOOL fCounterSigner,
+                                                                        DWORD idxCounterSigner);
+-extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(CRYPT_PROVIDER_SGNR *pSgnr,
++_Windows_SupportedOS_WindowsXP_ 
++
++extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_SGNR *pSgnr,
+                                                                      DWORD idxCert);
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
+ extern CRYPT_PROVIDER_DATA * WINAPI     WTHelperProvDataFromStateData(HANDLE hStateData);
+ 
+-extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(CRYPT_PROVIDER_DATA *pProvData,
+-                                                                            GUID *pgProviderID);
+-extern BOOL WINAPI                      WTHelperCertIsSelfSigned(DWORD dwEncoding, CERT_INFO *pCert);
++_Windows_SupportedOS_WindowsXP_ extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_DATA *pProvData,
++                                                                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pgProviderID);
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI                      WTHelperCertIsSelfSigned(DWORD dwEncoding, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CERT_INFO *pCert);
+ 
+-extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(CRYPT_PROVIDER_DATA *pProvData);
++_Windows_SupportedOS_WindowsVista_ extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CRYPT_PROVIDER_DATA *pProvData);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ //
+@@ -1647,7 +1654,7 @@ typedef struct _WIN_SPUB_TRUSTED_PUBLISHER_DATA
+ //
+ //      Note, initially all certs are removed from the above store.
+ //
+-extern BOOL WINAPI OpenPersonalTrustDBDialogEx(
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI OpenPersonalTrustDBDialogEx(
+     _In_opt_ HWND hwndParent,
+     _In_ DWORD dwFlags,
+     _Inout_opt_ PVOID *pvReserved
+@@ -1660,7 +1667,7 @@ extern BOOL WINAPI OpenPersonalTrustDBDialogEx(
+ 
+ 
+ // Calls above with dwFlags = 0 and pvReserved = NULL
+-extern BOOL WINAPI OpenPersonalTrustDBDialog(
++_Windows_SupportedOS_WindowsXP_ extern BOOL WINAPI OpenPersonalTrustDBDialog(
+     _In_opt_ HWND hwndParent
+     );
+ 
+@@ -1673,7 +1680,7 @@ extern BOOL WINAPI OpenPersonalTrustDBDialog(
+ //
+ //  Unless explicitly set, the default is not to include page hashes.
+ //
+-extern
++_Windows_SupportedOS_WindowsVista_ extern
+ void
+ WINAPI
+ WintrustSetDefaultIncludePEPageHashes(
+@@ -1697,4 +1704,247 @@ WintrustSetDefaultIncludePEPageHashes(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINTRUST) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DWACTION_ALLOCANDFILL")
++#undef DWACTION_ALLOCANDFILL
++#pragma push_macro("DWACTION_FREE")
++#undef DWACTION_FREE
++enum WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION : unsigned int
++{
++    DWACTION_ALLOCANDFILL = 1U,
++    DWACTION_FREE = 2U,
++};
++#pragma pop_macro("DWACTION_FREE")
++#pragma pop_macro("DWACTION_ALLOCANDFILL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTPF_TRUSTTEST")
++#undef WTPF_TRUSTTEST
++#pragma push_macro("WTPF_TESTCANBEVALID")
++#undef WTPF_TESTCANBEVALID
++#pragma push_macro("WTPF_IGNOREEXPIRATION")
++#undef WTPF_IGNOREEXPIRATION
++#pragma push_macro("WTPF_IGNOREREVOKATION")
++#undef WTPF_IGNOREREVOKATION
++#pragma push_macro("WTPF_OFFLINEOK_IND")
++#undef WTPF_OFFLINEOK_IND
++#pragma push_macro("WTPF_OFFLINEOK_COM")
++#undef WTPF_OFFLINEOK_COM
++#pragma push_macro("WTPF_OFFLINEOKNBU_IND")
++#undef WTPF_OFFLINEOKNBU_IND
++#pragma push_macro("WTPF_OFFLINEOKNBU_COM")
++#undef WTPF_OFFLINEOKNBU_COM
++#pragma push_macro("WTPF_VERIFY_V1_OFF")
++#undef WTPF_VERIFY_V1_OFF
++#pragma push_macro("WTPF_IGNOREREVOCATIONONTS")
++#undef WTPF_IGNOREREVOCATIONONTS
++#pragma push_macro("WTPF_ALLOWONLYPERTRUST")
++#undef WTPF_ALLOWONLYPERTRUST
++enum [[clang::flag_enum]] WINTRUST_POLICY_FLAGS : unsigned int
++{
++    WTPF_TRUSTTEST = 32U,
++    WTPF_TESTCANBEVALID = 128U,
++    WTPF_IGNOREEXPIRATION = 256U,
++    WTPF_IGNOREREVOKATION = 512U,
++    WTPF_OFFLINEOK_IND = 1024U,
++    WTPF_OFFLINEOK_COM = 2048U,
++    WTPF_OFFLINEOKNBU_IND = 4096U,
++    WTPF_OFFLINEOKNBU_COM = 8192U,
++    WTPF_VERIFY_V1_OFF = 65536U,
++    WTPF_IGNOREREVOCATIONONTS = 131072U,
++    WTPF_ALLOWONLYPERTRUST = 262144U,
++};
++#pragma pop_macro("WTPF_ALLOWONLYPERTRUST")
++#pragma pop_macro("WTPF_IGNOREREVOCATIONONTS")
++#pragma pop_macro("WTPF_VERIFY_V1_OFF")
++#pragma pop_macro("WTPF_OFFLINEOKNBU_COM")
++#pragma pop_macro("WTPF_OFFLINEOKNBU_IND")
++#pragma pop_macro("WTPF_OFFLINEOK_COM")
++#pragma pop_macro("WTPF_OFFLINEOK_IND")
++#pragma pop_macro("WTPF_IGNOREREVOKATION")
++#pragma pop_macro("WTPF_IGNOREEXPIRATION")
++#pragma pop_macro("WTPF_TESTCANBEVALID")
++#pragma pop_macro("WTPF_TRUSTTEST")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTD_USE_IE4_TRUST_FLAG")
++#undef WTD_USE_IE4_TRUST_FLAG
++#pragma push_macro("WTD_NO_IE4_CHAIN_FLAG")
++#undef WTD_NO_IE4_CHAIN_FLAG
++#pragma push_macro("WTD_NO_POLICY_USAGE_FLAG")
++#undef WTD_NO_POLICY_USAGE_FLAG
++#pragma push_macro("WTD_REVOCATION_CHECK_NONE")
++#undef WTD_REVOCATION_CHECK_NONE
++#pragma push_macro("WTD_REVOCATION_CHECK_END_CERT")
++#undef WTD_REVOCATION_CHECK_END_CERT
++#pragma push_macro("WTD_REVOCATION_CHECK_CHAIN")
++#undef WTD_REVOCATION_CHECK_CHAIN
++#pragma push_macro("WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#undef WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT
++#pragma push_macro("WTD_SAFER_FLAG")
++#undef WTD_SAFER_FLAG
++#pragma push_macro("WTD_HASH_ONLY_FLAG")
++#undef WTD_HASH_ONLY_FLAG
++#pragma push_macro("WTD_USE_DEFAULT_OSVER_CHECK")
++#undef WTD_USE_DEFAULT_OSVER_CHECK
++#pragma push_macro("WTD_LIFETIME_SIGNING_FLAG")
++#undef WTD_LIFETIME_SIGNING_FLAG
++#pragma push_macro("WTD_CACHE_ONLY_URL_RETRIEVAL")
++#undef WTD_CACHE_ONLY_URL_RETRIEVAL
++#pragma push_macro("WTD_DISABLE_MD2_MD4")
++#undef WTD_DISABLE_MD2_MD4
++#pragma push_macro("WTD_MOTW")
++#undef WTD_MOTW
++enum [[clang::flag_enum]] WINTRUST_DATA_PROVIDER_FLAGS : unsigned int
++{
++    WTD_USE_IE4_TRUST_FLAG = 1U,
++    WTD_NO_IE4_CHAIN_FLAG = 2U,
++    WTD_NO_POLICY_USAGE_FLAG = 4U,
++    WTD_REVOCATION_CHECK_NONE = 16U,
++    WTD_REVOCATION_CHECK_END_CERT = 32U,
++    WTD_REVOCATION_CHECK_CHAIN = 64U,
++    WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 128U,
++    WTD_SAFER_FLAG = 256U,
++    WTD_HASH_ONLY_FLAG = 512U,
++    WTD_USE_DEFAULT_OSVER_CHECK = 1024U,
++    WTD_LIFETIME_SIGNING_FLAG = 2048U,
++    WTD_CACHE_ONLY_URL_RETRIEVAL = 4096U,
++    WTD_DISABLE_MD2_MD4 = 8192U,
++    WTD_MOTW = 16384U,
++};
++#pragma pop_macro("WTD_MOTW")
++#pragma pop_macro("WTD_DISABLE_MD2_MD4")
++#pragma pop_macro("WTD_CACHE_ONLY_URL_RETRIEVAL")
++#pragma pop_macro("WTD_LIFETIME_SIGNING_FLAG")
++#pragma pop_macro("WTD_USE_DEFAULT_OSVER_CHECK")
++#pragma pop_macro("WTD_HASH_ONLY_FLAG")
++#pragma pop_macro("WTD_SAFER_FLAG")
++#pragma pop_macro("WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#pragma pop_macro("WTD_REVOCATION_CHECK_CHAIN")
++#pragma pop_macro("WTD_REVOCATION_CHECK_END_CERT")
++#pragma pop_macro("WTD_REVOCATION_CHECK_NONE")
++#pragma pop_macro("WTD_NO_POLICY_USAGE_FLAG")
++#pragma pop_macro("WTD_NO_IE4_CHAIN_FLAG")
++#pragma pop_macro("WTD_USE_IE4_TRUST_FLAG")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTD_UI_ALL")
++#undef WTD_UI_ALL
++#pragma push_macro("WTD_UI_NONE")
++#undef WTD_UI_NONE
++#pragma push_macro("WTD_UI_NOBAD")
++#undef WTD_UI_NOBAD
++#pragma push_macro("WTD_UI_NOGOOD")
++#undef WTD_UI_NOGOOD
++enum WINTRUST_DATA_UICHOICE : unsigned int
++{
++    WTD_UI_ALL = 1U,
++    WTD_UI_NONE = 2U,
++    WTD_UI_NOBAD = 3U,
++    WTD_UI_NOGOOD = 4U,
++};
++#pragma pop_macro("WTD_UI_NOGOOD")
++#pragma pop_macro("WTD_UI_NOBAD")
++#pragma pop_macro("WTD_UI_NONE")
++#pragma pop_macro("WTD_UI_ALL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WSS_VERIFY_SPECIFIC")
++#undef WSS_VERIFY_SPECIFIC
++#pragma push_macro("WSS_GET_SECONDARY_SIG_COUNT")
++#undef WSS_GET_SECONDARY_SIG_COUNT
++enum [[clang::flag_enum]] WINTRUST_SIGNATURE_SETTINGS_FLAGS : unsigned int
++{
++    WSS_VERIFY_SPECIFIC = 1U,
++    WSS_GET_SECONDARY_SIG_COUNT = 2U,
++};
++#pragma pop_macro("WSS_GET_SECONDARY_SIG_COUNT")
++#pragma pop_macro("WSS_VERIFY_SPECIFIC")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTD_STATEACTION_IGNORE")
++#undef WTD_STATEACTION_IGNORE
++#pragma push_macro("WTD_STATEACTION_VERIFY")
++#undef WTD_STATEACTION_VERIFY
++#pragma push_macro("WTD_STATEACTION_CLOSE")
++#undef WTD_STATEACTION_CLOSE
++#pragma push_macro("WTD_STATEACTION_AUTO_CACHE")
++#undef WTD_STATEACTION_AUTO_CACHE
++#pragma push_macro("WTD_STATEACTION_AUTO_CACHE_FLUSH")
++#undef WTD_STATEACTION_AUTO_CACHE_FLUSH
++enum WINTRUST_DATA_STATE_ACTION : unsigned int
++{
++    WTD_STATEACTION_IGNORE = 0U,
++    WTD_STATEACTION_VERIFY = 1U,
++    WTD_STATEACTION_CLOSE = 2U,
++    WTD_STATEACTION_AUTO_CACHE = 3U,
++    WTD_STATEACTION_AUTO_CACHE_FLUSH = 4U,
++};
++#pragma pop_macro("WTD_STATEACTION_AUTO_CACHE_FLUSH")
++#pragma pop_macro("WTD_STATEACTION_AUTO_CACHE")
++#pragma pop_macro("WTD_STATEACTION_CLOSE")
++#pragma pop_macro("WTD_STATEACTION_VERIFY")
++#pragma pop_macro("WTD_STATEACTION_IGNORE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTD_CHOICE_FILE")
++#undef WTD_CHOICE_FILE
++#pragma push_macro("WTD_CHOICE_CATALOG")
++#undef WTD_CHOICE_CATALOG
++#pragma push_macro("WTD_CHOICE_BLOB")
++#undef WTD_CHOICE_BLOB
++#pragma push_macro("WTD_CHOICE_SIGNER")
++#undef WTD_CHOICE_SIGNER
++#pragma push_macro("WTD_CHOICE_CERT")
++#undef WTD_CHOICE_CERT
++enum WINTRUST_DATA_UNION_CHOICE : unsigned int
++{
++    WTD_CHOICE_FILE = 1U,
++    WTD_CHOICE_CATALOG = 2U,
++    WTD_CHOICE_BLOB = 3U,
++    WTD_CHOICE_SIGNER = 4U,
++    WTD_CHOICE_CERT = 5U,
++};
++#pragma pop_macro("WTD_CHOICE_CERT")
++#pragma pop_macro("WTD_CHOICE_SIGNER")
++#pragma pop_macro("WTD_CHOICE_BLOB")
++#pragma pop_macro("WTD_CHOICE_CATALOG")
++#pragma pop_macro("WTD_CHOICE_FILE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTD_REVOKE_NONE")
++#undef WTD_REVOKE_NONE
++#pragma push_macro("WTD_REVOKE_WHOLECHAIN")
++#undef WTD_REVOKE_WHOLECHAIN
++enum WINTRUST_DATA_REVOCATION_CHECKS : unsigned int
++{
++    WTD_REVOKE_NONE = 0U,
++    WTD_REVOKE_WHOLECHAIN = 1U,
++};
++#pragma pop_macro("WTD_REVOKE_WHOLECHAIN")
++#pragma pop_macro("WTD_REVOKE_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WTD_UICONTEXT_EXECUTE")
++#undef WTD_UICONTEXT_EXECUTE
++#pragma push_macro("WTD_UICONTEXT_INSTALL")
++#undef WTD_UICONTEXT_INSTALL
++enum WINTRUST_DATA_UICONTEXT : unsigned int
++{
++    WTD_UICONTEXT_EXECUTE = 0U,
++    WTD_UICONTEXT_INSTALL = 1U,
++};
++#pragma pop_macro("WTD_UICONTEXT_INSTALL")
++#pragma pop_macro("WTD_UICONTEXT_EXECUTE")
++#endif
++
+ #endif // WINTRUST_H

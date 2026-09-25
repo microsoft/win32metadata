@@ -1,0 +1,250 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
+index 151673ada9..d5a4334b2e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/winstring.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ // Copyright (C) Microsoft Corporation. All rights reserved.
+ 
+ #ifndef __WINSTRING_H_
+@@ -21,120 +22,138 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsCreateString(
+-    _In_reads_opt_(length) PCNZWCH sourceString,
+-    UINT32 length,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
++    _WIN32META_ANNOTATION_("win32metadata:const") _In_reads_opt_(length) PCNZWCH sourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* string
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsCreateStringReference(
+-    _In_reads_opt_(length+1) PCWSTR sourceString,
+-    UINT32 length,
+-    _Out_ HSTRING_HEADER* hstringHeader,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
++    _In_reads_opt_(length+1)  PCWSTR sourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
++    _Out_  HSTRING_HEADER* hstringHeader,
++    _Win32_RAIIFree_(WindowsDeleteString) _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsDeleteString(
+     _In_opt_ HSTRING string
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsDuplicateString(
+     _In_opt_ HSTRING string,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+-STDAPI_(UINT32)
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI_(UINT32)
++ 
+ WindowsGetStringLen(
+     _In_opt_ HSTRING string
+     );
+ 
+-STDAPI_(PCWSTR)
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI_(PCWSTR)
++ 
+ WindowsGetStringRawBuffer(
+     _In_opt_ HSTRING string,
+     _Out_opt_ UINT32* length
+     );
+ 
+-STDAPI_(BOOL)
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI_(BOOL)
++ 
+ WindowsIsStringEmpty(
+     _In_opt_ HSTRING string
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsStringHasEmbeddedNull(
+     _In_opt_ HSTRING string,
+     _Out_ BOOL* hasEmbedNull
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsCompareStringOrdinal(
+     _In_opt_ HSTRING string1,
+     _In_opt_ HSTRING string2,
+     _Out_ INT32* result
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsSubstring(
+     _In_opt_ HSTRING string,
+-    UINT32 startIndex,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 startIndex,
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsSubstringWithSpecifiedLength(
+     _In_opt_ HSTRING string,
+-    UINT32 startIndex,
+-    UINT32 length,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 startIndex,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsConcatString(
+     _In_opt_ HSTRING string1,
+     _In_opt_ HSTRING string2,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsReplaceString(
+     _In_opt_ HSTRING string,
+     _In_opt_ HSTRING stringReplaced,
+     _In_opt_ HSTRING stringReplaceWith,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsTrimStringStart(
+     _In_opt_ HSTRING string,
+     _In_opt_ HSTRING trimString,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsTrimStringEnd(
+     _In_opt_ HSTRING string,
+     _In_opt_ HSTRING trimString,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* newString
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* newString
+     );
+ 
+ // Two-phase construction
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsPreallocateStringBuffer(
+-    UINT32 length,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length,
+     _Outptr_result_buffer_(length+1) WCHAR** charBuffer,
+-    _Outptr_ _Result_nullonfailure_ HSTRING_BUFFER* bufferHandle
++    _Win32_RAIIFree_(WindowsDeleteStringBuffer, -1, 0) _Outptr_ _Result_nullonfailure_ HSTRING_BUFFER* bufferHandle
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsPromoteStringBuffer(
+     _In_ HSTRING_BUFFER bufferHandle,
+-    _Outptr_result_maybenull_ _Result_nullonfailure_ HSTRING* string
++    _Outptr_result_maybenull_ _Result_nullonfailure_ _Win32_RAIIFree_(WindowsDeleteString) HSTRING* string
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsDeleteStringBuffer(
+     _In_opt_ HSTRING_BUFFER bufferHandle
+     );
+@@ -153,6 +172,7 @@ extern "C"
+ // Windows String Marshaler Exports
+ ULONG
+ __RPC_USER
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ HSTRING_UserSize(
+     __RPC__in ULONG* pFlags,
+     ULONG StartingSize,
+@@ -161,6 +181,7 @@ HSTRING_UserSize(
+ 
+ UCHAR*
+ __RPC_USER
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ HSTRING_UserMarshal(
+     __RPC__in ULONG* pFlags,
+     __RPC__inout_xcount(0) UCHAR* pBuffer,
+@@ -169,6 +190,7 @@ HSTRING_UserMarshal(
+ 
+ UCHAR*
+ __RPC_USER
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ HSTRING_UserUnmarshal(
+     __RPC__in ULONG* pFlags,
+     __RPC__in_xcount(0) UCHAR* pBuffer,
+@@ -177,6 +199,7 @@ HSTRING_UserUnmarshal(
+ 
+ void
+ __RPC_USER
++_Windows_SupportedOS_Windows8_ _Windows_SupportedOS_Server2012_
+ HSTRING_UserFree(
+     __RPC__in ULONG* pFlags,
+     __RPC__in HSTRING* ppidl
+@@ -197,11 +220,12 @@ HSTRING_UserFree(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ // HSTRING Inspection
+-typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK)(_In_ void* context, UINT_PTR readAddress, UINT32 length, _Out_writes_(length) BYTE* buffer);
+-STDAPI
++typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK)(_In_ void* context, _WIN32META_ANNOTATION_("win32metadata:in") UINT_PTR readAddress, _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length, _Out_writes_(length) BYTE* buffer);
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-0.dll") STDAPI
++ 
+ WindowsInspectString(
+     _In_ UINT_PTR targetHString,
+-    USHORT machine,
++    _WIN32META_ANNOTATION_("win32metadata:in") USHORT machine,
+     _In_ PINSPECT_HSTRING_CALLBACK callback,
+     _In_opt_ void* context,
+     _Out_ UINT32* length,
+@@ -209,11 +233,12 @@ WindowsInspectString(
+     );
+ 
+ // HSTRING Inspection 2
+-typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK2)(_In_ void* context, UINT64 readAddress, UINT32 length, _Out_writes_(length) BYTE* buffer);
+-STDAPI
++typedef HRESULT (WINAPI *PINSPECT_HSTRING_CALLBACK2)(_In_ void* context, _WIN32META_ANNOTATION_("win32metadata:in") UINT64 readAddress, _WIN32META_ANNOTATION_("win32metadata:in") UINT32 length, _Out_writes_(length) BYTE* buffer);
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-string-l1-1-1.dll") STDAPI
++ 
+ WindowsInspectString2(
+     _In_ UINT64 targetHString,
+-    USHORT machine,
++    _WIN32META_ANNOTATION_("win32metadata:in") USHORT machine,
+     _In_ PINSPECT_HSTRING_CALLBACK2 callback,
+     _In_opt_ void* context,
+     _Out_ UINT32* length,

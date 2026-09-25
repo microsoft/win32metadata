@@ -1,0 +1,52 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h b/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h
+index ae2164814c..9af660272b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PNPXAssoc.h
+@@ -99,6 +99,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -117,8 +118,8 @@ EXTERN_C const IID IID_IPNPXAssociation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0bd7e521-4da6-42d5-81ba-1981b6b94075")
+-    IPNPXAssociation : public IUnknown
++    MIDL_INTERFACE("0bd7e521-4da6-42d5-81ba-1981b6b94075") _Windows_SupportedOS_WindowsVista_ 
++      IPNPXAssociation : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Associate( 
+@@ -172,7 +173,7 @@ EXTERN_C const IID IID_IPNPXAssociation;
+         END_INTERFACE
+     } IPNPXAssociationVtbl;
+ 
+-    interface IPNPXAssociation
++    interface _Windows_SupportedOS_WindowsVista_ IPNPXAssociation
+     {
+         CONST_VTBL struct IPNPXAssociationVtbl *lpVtbl;
+     };
+@@ -223,8 +224,8 @@ EXTERN_C const IID IID_IPNPXDeviceAssociation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EED366D0-35B8-4fc5-8D20-7E5BD31F6DED")
+-    IPNPXDeviceAssociation : public IUnknown
++    MIDL_INTERFACE("EED366D0-35B8-4fc5-8D20-7E5BD31F6DED") _Windows_SupportedOS_WindowsVista_ 
++      IPNPXDeviceAssociation : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Associate( 
+@@ -284,7 +285,7 @@ EXTERN_C const IID IID_IPNPXDeviceAssociation;
+         END_INTERFACE
+     } IPNPXDeviceAssociationVtbl;
+ 
+-    interface IPNPXDeviceAssociation
++    interface _Windows_SupportedOS_WindowsVista_ IPNPXDeviceAssociation
+     {
+         CONST_VTBL struct IPNPXDeviceAssociationVtbl *lpVtbl;
+     };

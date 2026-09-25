@@ -18,7 +18,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.26100.7705" GeneratePathProperty="true"/>
     <Partition Include="Partitions\**\main.cpp"/>
+    <WinmdIncludeDir Include="AdditionalHeaders"/>
+    <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
+    <WinmdScopeHeader Include="activation.h;CoreWindow.h;corewindow.h;DocumentSource.h;documentsource.h;EventToken.h;eventtoken.h;hstring.h;inspectable.h"/>
+    <WinmdScopeHeader Include="manual.h;MemoryBuffer.h;memorybuffer.h;midlbase.h;rdpappcontainerclient.h"/>
+    <WinmdScopeHeader Include="roapi.h;robuffer.h;roerrorapi.h;rometadata.h;rometadataresolution.h;roparameterizediid.h;roregistrationapi.h"/>
+    <WinmdScopeHeader Include="shcore.h;WeakReference.h;weakreference.h;webapplication.h"/>
+    <WinmdScopeHeader Include="windows.graphics.effects.interop.h;windows.graphics.interop.h;windows.ui.composition.interop.h"/>
+    <WinmdScopeHeader Include="winstring.h;Wsdevlicensing.h;wsdevlicensing.h"/>
   </ItemGroup>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets"/>

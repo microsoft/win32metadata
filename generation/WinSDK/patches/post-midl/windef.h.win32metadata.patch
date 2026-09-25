@@ -1,0 +1,240 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
+index cdc03d4897..f79ab9c566 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/windef.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /****************************************************************************
+@@ -37,7 +38,7 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ DECLARE_HANDLE            (HWND);
+-DECLARE_HANDLE            (HHOOK);
++DECLARE_HANDLE            (HHOOK) _WIN32META_ANNOTATION_("win32metadata:raii_free=UnhookWindowsHookEx")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+@@ -60,42 +61,42 @@ DECLARE_HANDLE            (HEVENT);
+ 
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+ #ifdef STRICT
+-typedef void NEAR* HGDIOBJ;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void NEAR* HGDIOBJ;
+ #else
+-DECLARE_HANDLE(HGDIOBJ);
++DECLARE_HANDLE(HGDIOBJ) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ #endif
+ 
+ #if !defined(_MAC) || !defined(WIN_INTERNAL)
+-DECLARE_HANDLE(HACCEL);
++DECLARE_HANDLE(HACCEL) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyAcceleratorTable")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HBITMAP);
+-DECLARE_HANDLE(HBRUSH);
++DECLARE_HANDLE(HBITMAP) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HBRUSH) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ #if(WINVER >= 0x0400)
+-DECLARE_HANDLE(HCOLORSPACE);
++DECLARE_HANDLE(HCOLORSPACE) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteColorSpace")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif /* WINVER >= 0x0400 */
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HDC);
++DECLARE_HANDLE(HDC) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+-DECLARE_HANDLE(HGLRC);          // OpenGL
+-DECLARE_HANDLE(HDESK);
+-DECLARE_HANDLE(HENHMETAFILE);
++DECLARE_HANDLE(HGLRC) _WIN32META_ANNOTATION_("win32metadata:raii_free=wglDeleteContext")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;          // OpenGL
++DECLARE_HANDLE(HDESK) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseDesktop")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HENHMETAFILE) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteEnhMetaFile")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HFONT);
++DECLARE_HANDLE(HFONT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+-DECLARE_HANDLE(HICON);
++DECLARE_HANDLE(HICON) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyIcon")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #if !defined(_MAC) || !defined(WIN_INTERNAL)
+-DECLARE_HANDLE(HMENU);
++DECLARE_HANDLE(HMENU) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyMenu")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+-DECLARE_HANDLE(HPALETTE);
+-DECLARE_HANDLE(HPEN);
++DECLARE_HANDLE(HPALETTE) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HPEN) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ 
+ #if(WINVER >= 0x0400)
+-DECLARE_HANDLE(HWINEVENTHOOK);
++DECLARE_HANDLE(HWINEVENTHOOK) _WIN32META_ANNOTATION_("win32metadata:raii_free=UnhookWinEvent")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif /* WINVER >= 0x0400 */
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -107,7 +108,7 @@ DECLARE_HANDLE(HWINEVENTHOOK);
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-DECLARE_HANDLE(HMONITOR);
++DECLARE_HANDLE(HMONITOR) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -128,9 +129,9 @@ DECLARE_HANDLE(HUMPD);
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ #ifndef _MAC
+-typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyCursor") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") _Win32_AlsoUsableFor_(HICON) typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
+ #else
+-DECLARE_HANDLE(HCURSOR);    /* HICONs & HCURSORs are not polymorphic */
++DECLARE_HANDLE(HCURSOR) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyCursor")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;    /* HICONs & HCURSORs are not polymorphic */
+ #endif
+ 
+ typedef DWORD   COLORREF;
+@@ -253,7 +254,7 @@ typedef struct APP_LOCAL_DEVICE_ID
+ 
+ #define _DPI_AWARENESS_CONTEXTS_
+ 
+-DECLARE_HANDLE(DPI_AWARENESS_CONTEXT);
++DECLARE_HANDLE(DPI_AWARENESS_CONTEXT) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ typedef enum DPI_AWARENESS {
+     DPI_AWARENESS_INVALID           = -1,
+@@ -276,5 +277,132 @@ typedef enum DPI_HOSTING_BEHAVIOR {
+ 
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DC_BINNAMES")
++#undef DC_BINNAMES
++#pragma push_macro("DC_BINS")
++#undef DC_BINS
++#pragma push_macro("DC_COLLATE")
++#undef DC_COLLATE
++#pragma push_macro("DC_COLORDEVICE")
++#undef DC_COLORDEVICE
++#pragma push_macro("DC_COPIES")
++#undef DC_COPIES
++#pragma push_macro("DC_DRIVER")
++#undef DC_DRIVER
++#pragma push_macro("DC_DUPLEX")
++#undef DC_DUPLEX
++#pragma push_macro("DC_ENUMRESOLUTIONS")
++#undef DC_ENUMRESOLUTIONS
++#pragma push_macro("DC_EXTRA")
++#undef DC_EXTRA
++#pragma push_macro("DC_FIELDS")
++#undef DC_FIELDS
++#pragma push_macro("DC_FILEDEPENDENCIES")
++#undef DC_FILEDEPENDENCIES
++#pragma push_macro("DC_MAXEXTENT")
++#undef DC_MAXEXTENT
++#pragma push_macro("DC_MEDIAREADY")
++#undef DC_MEDIAREADY
++#pragma push_macro("DC_MEDIATYPENAMES")
++#undef DC_MEDIATYPENAMES
++#pragma push_macro("DC_MEDIATYPES")
++#undef DC_MEDIATYPES
++#pragma push_macro("DC_MINEXTENT")
++#undef DC_MINEXTENT
++#pragma push_macro("DC_ORIENTATION")
++#undef DC_ORIENTATION
++#pragma push_macro("DC_NUP")
++#undef DC_NUP
++#pragma push_macro("DC_PAPERNAMES")
++#undef DC_PAPERNAMES
++#pragma push_macro("DC_PAPERS")
++#undef DC_PAPERS
++#pragma push_macro("DC_PAPERSIZE")
++#undef DC_PAPERSIZE
++#pragma push_macro("DC_PERSONALITY")
++#undef DC_PERSONALITY
++#pragma push_macro("DC_PRINTERMEM")
++#undef DC_PRINTERMEM
++#pragma push_macro("DC_PRINTRATE")
++#undef DC_PRINTRATE
++#pragma push_macro("DC_PRINTRATEPPM")
++#undef DC_PRINTRATEPPM
++#pragma push_macro("DC_PRINTRATEUNIT")
++#undef DC_PRINTRATEUNIT
++#pragma push_macro("DC_SIZE")
++#undef DC_SIZE
++#pragma push_macro("DC_STAPLE")
++#undef DC_STAPLE
++#pragma push_macro("DC_TRUETYPE")
++#undef DC_TRUETYPE
++#pragma push_macro("DC_VERSION")
++#undef DC_VERSION
++enum PRINTER_DEVICE_CAPABILITIES : unsigned short
++{
++    DC_BINNAMES = 12,
++    DC_BINS = 6,
++    DC_COLLATE = 22,
++    DC_COLORDEVICE = 32,
++    DC_COPIES = 18,
++    DC_DRIVER = 11,
++    DC_DUPLEX = 7,
++    DC_ENUMRESOLUTIONS = 13,
++    DC_EXTRA = 9,
++    DC_FIELDS = 1,
++    DC_FILEDEPENDENCIES = 14,
++    DC_MAXEXTENT = 5,
++    DC_MEDIAREADY = 29,
++    DC_MEDIATYPENAMES = 34,
++    DC_MEDIATYPES = 35,
++    DC_MINEXTENT = 4,
++    DC_ORIENTATION = 17,
++    DC_NUP = 33,
++    DC_PAPERNAMES = 16,
++    DC_PAPERS = 2,
++    DC_PAPERSIZE = 3,
++    DC_PERSONALITY = 25,
++    DC_PRINTERMEM = 28,
++    DC_PRINTRATE = 26,
++    DC_PRINTRATEPPM = 31,
++    DC_PRINTRATEUNIT = 27,
++    DC_SIZE = 8,
++    DC_STAPLE = 30,
++    DC_TRUETYPE = 15,
++    DC_VERSION = 10,
++};
++#pragma pop_macro("DC_VERSION")
++#pragma pop_macro("DC_TRUETYPE")
++#pragma pop_macro("DC_STAPLE")
++#pragma pop_macro("DC_SIZE")
++#pragma pop_macro("DC_PRINTRATEUNIT")
++#pragma pop_macro("DC_PRINTRATEPPM")
++#pragma pop_macro("DC_PRINTRATE")
++#pragma pop_macro("DC_PRINTERMEM")
++#pragma pop_macro("DC_PERSONALITY")
++#pragma pop_macro("DC_PAPERSIZE")
++#pragma pop_macro("DC_PAPERS")
++#pragma pop_macro("DC_PAPERNAMES")
++#pragma pop_macro("DC_NUP")
++#pragma pop_macro("DC_ORIENTATION")
++#pragma pop_macro("DC_MINEXTENT")
++#pragma pop_macro("DC_MEDIATYPES")
++#pragma pop_macro("DC_MEDIATYPENAMES")
++#pragma pop_macro("DC_MEDIAREADY")
++#pragma pop_macro("DC_MAXEXTENT")
++#pragma pop_macro("DC_FILEDEPENDENCIES")
++#pragma pop_macro("DC_FIELDS")
++#pragma pop_macro("DC_EXTRA")
++#pragma pop_macro("DC_ENUMRESOLUTIONS")
++#pragma pop_macro("DC_DUPLEX")
++#pragma pop_macro("DC_DRIVER")
++#pragma pop_macro("DC_COPIES")
++#pragma pop_macro("DC_COLORDEVICE")
++#pragma pop_macro("DC_COLLATE")
++#pragma pop_macro("DC_BINS")
++#pragma pop_macro("DC_BINNAMES")
++#endif
++
+ #endif /* _WINDEF_ */
+ 

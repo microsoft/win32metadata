@@ -1,0 +1,94 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
+index f42471fd62..c9f3c49cb8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msports.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -47,6 +48,7 @@ Return Value:
+ 
+   --*/
+ LONG
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ SerialDisplayAdvancedSettings(_In_ HWND             ParentHwnd,
+                               _In_ HDEVINFO         DeviceInfoSet,
+                               _In_ PSP_DEVINFO_DATA DeviceInfoData
+@@ -90,7 +92,7 @@ BOOL
+ 
+ #endif
+ 
+-DECLARE_HANDLE(HCOMDB);
++DECLARE_HANDLE(HCOMDB) _WIN32META_ANNOTATION_("win32metadata:raii_free=ComDBClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HCOMDB *PHCOMDB;
+ #define HCOMDB_INVALID_HANDLE_VALUE ((HCOMDB) INVALID_HANDLE_VALUE)
+ 
+@@ -102,8 +104,10 @@ typedef HCOMDB *PHCOMDB;
+ 
+ LONG
+ WINAPI
++
++
+ ComDBOpen (
+-    _Out_ PHCOMDB PHComDB
++    _Win32_RAIIFree_(ComDBClose, -1, 0) _Out_  PHCOMDB PHComDB
+     );
+ /*++
+ 
+@@ -125,6 +129,7 @@ Return Value:
+ 
+ LONG
+ WINAPI
++
+ ComDBClose (
+     _In_ HCOMDB HComDB
+     );
+@@ -149,6 +154,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++
++
+ ComDBGetCurrentPortUsage (
+     _In_        HCOMDB   HComDB,
+     _Out_writes_bytes_opt_(BufferSize) PBYTE Buffer,
+@@ -198,6 +205,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++
++
+ ComDBClaimNextFreePort (
+     _In_ HCOMDB   HComDB,
+     _Out_ LPDWORD ComNumber
+@@ -226,6 +235,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++
++
+ ComDBClaimPort (
+     _In_        HCOMDB   HComDB,
+     _In_        DWORD    ComNumber,
+@@ -261,6 +272,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++
++
+ ComDBReleasePort (
+     _In_ HCOMDB   HComDB,
+     _In_ DWORD    ComNumber
+@@ -290,6 +303,8 @@ Return Value:
+ 
+ LONG
+ WINAPI
++
++
+ ComDBResizeDatabase (
+     _In_ HCOMDB   HComDB,
+     _In_ DWORD    NewSize

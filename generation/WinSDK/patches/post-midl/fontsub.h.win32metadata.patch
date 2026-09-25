@@ -1,0 +1,122 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h b/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
+index a58d255cbe..a39f22d250 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fontsub.h
+@@ -9,6 +9,7 @@
+ #ifndef FONTSUB_DOT_H_DEFINED
+ #define FONTSUB_DOT_H_DEFINED
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -22,28 +23,37 @@ extern "C" {
+ #define CONST const
+ #endif     
+ 
++
++
+ typedef void *(__cdecl *CFP_ALLOCPROC)(size_t);
+-typedef void *(__cdecl *CFP_REALLOCPROC)(void *, size_t);
+-typedef void (__cdecl *CFP_FREEPROC)(void *);
+ 
++
++typedef void *(__cdecl *CFP_REALLOCPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *, size_t);
++
++
++typedef void (__cdecl *CFP_FREEPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++
++_Windows_SupportedOS_WindowsXP_ 
++
++_Win32_ImportLibrary_("fontsub.dll")
+ unsigned long __cdecl CreateFontPackage(
+ 	CONST unsigned char * puchSrcBuffer, /* input TTF or TTC buffer */
+ 	CONST unsigned long ulSrcBufferSize, /* size of input TTF or TTC buffer data */
+-	unsigned char ** ppuchFontPackageBuffer, /* output package buffer */
+-	unsigned long * pulFontPackageBufferSize, /* output package buffer size */
+-	unsigned long * pulBytesWritten,  /* output package buffer data length */
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char ** ppuchFontPackageBuffer, /* output package buffer */
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long * pulFontPackageBufferSize, /* output package buffer size */
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long * pulBytesWritten,  /* output package buffer data length */
+ 	CONST unsigned short usFlag, /* subset, compress, or both, TTF or TTC, Chars or Glyphs */
+ 	CONST unsigned short usTTCIndex,	/* TTC Index, only used if TTC bit set */
+ 	CONST unsigned short usSubsetFormat, /* Old Subset, Subset or Delta */
+ 	CONST unsigned short usSubsetLanguage,	/* Language in Name table to keep */
+-	CONST unsigned short usSubsetPlatform,	/* if ListType is Character, Platform of cmap to use for glyph list */
+-	CONST unsigned short usSubsetEncoding,	/* if ListType is Character, Encoding of cmap to use for glyph list */
++	_Win32_AssociatedEnum_(CREATE_FONT_PACKAGE_SUBSET_PLATFORM) CONST unsigned short usSubsetPlatform,	/* if ListType is Character, Platform of cmap to use for glyph list */
++	_Win32_AssociatedEnum_(CREATE_FONT_PACKAGE_SUBSET_ENCODING) CONST unsigned short usSubsetEncoding,	/* if ListType is Character, Encoding of cmap to use for glyph list */
+ 	CONST unsigned short *pusSubsetKeepList, /* List of Characters or Glyphs to keep */
+ 	CONST unsigned short usSubsetListCount,	 /* number of elements in list */
+ 	CFP_ALLOCPROC lpfnAllocate,	  /* call back function to allocate temp buffers and output buffers */
+ 	CFP_REALLOCPROC lpfnReAllocate,	  /* call back function to reallocate temp and output buffers */
+ 	CFP_FREEPROC lpfnFree,	 /* call back function to free buffer allocated with lpfnAllocate and lpfnReAllocate */
+-	void * lpvReserved);
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * lpvReserved);
+ 
+ /* for usSubsetFormat */
+ #define TTFCFP_SUBSET 0	  /* Straight Subset Font - Backward compatibility */
+@@ -71,18 +81,21 @@ unsigned long __cdecl CreateFontPackage(
+ #define TTFCFP_FLAGS_TTC 0x0004  /* if bit off, its a TTF */
+ #define TTFCFP_FLAGS_GLYPHLIST 0x0008 /* if bit off, list is characters */
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
++_Win32_ImportLibrary_("fontsub.dll")
+ unsigned long __cdecl MergeFontPackage(CONST unsigned char * puchMergeFontBuffer, /* buffer containing font to merge with */
+ 			CONST unsigned long ulMergeFontBufferSize,	/* size of buffer containing font to merge with */
+ 			CONST unsigned char * puchFontPackageBuffer, /* buffer containing a font package to merge with the MergeFontBuffer */
+ 			CONST unsigned long ulFontPackageBufferSize, /* length of FontPakageBuffer */
+-			unsigned char **ppuchDestBuffer, /* output: pointer to output buffer containing a TTF to install */
+-			unsigned long *pulDestBufferSize, /* output: length of output buffer containing TTF to install */
+-			unsigned long *pulBytesWritten, /* output: number of bytes in buffer used for TTF */
++			_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char **ppuchDestBuffer, /* output: pointer to output buffer containing a TTF to install */
++			_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *pulDestBufferSize, /* output: length of output buffer containing TTF to install */
++			_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *pulBytesWritten, /* output: number of bytes in buffer used for TTF */
+ 			CONST unsigned short usMode, /* kind of action to perform, see #defines below */ 
+ 			CFP_ALLOCPROC lpfnAllocate,	  /* call back function to allocate output and intermediate buffers */
+ 			CFP_REALLOCPROC lpfnReAllocate,	  /* call back function to allocate or reallocate output and intermediate buffers */
+ 			CFP_FREEPROC lpfnFree,	 /* call back function to free buffer allocated with lpfnReAllocate */
+-			void *lpvReserved);
++			_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *lpvReserved);
+ 
+ /* for usModes */
+ #define TTFMFP_SUBSET 0   /* copy a Straight Subset Font package to Dest buffer */
+@@ -183,4 +196,37 @@ unsigned long __cdecl MergeFontPackage(CONST unsigned char * puchMergeFontBuffer
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTFCFP_STD_MAC_CHAR_SET")
++#undef TTFCFP_STD_MAC_CHAR_SET
++#pragma push_macro("TTFCFP_SYMBOL_CHAR_SET")
++#undef TTFCFP_SYMBOL_CHAR_SET
++#pragma push_macro("TTFCFP_UNICODE_CHAR_SET")
++#undef TTFCFP_UNICODE_CHAR_SET
++enum CREATE_FONT_PACKAGE_SUBSET_ENCODING : short
++{
++    TTFCFP_STD_MAC_CHAR_SET = 0,
++    TTFCFP_SYMBOL_CHAR_SET = 0,
++    TTFCFP_UNICODE_CHAR_SET = 1,
++};
++#pragma pop_macro("TTFCFP_UNICODE_CHAR_SET")
++#pragma pop_macro("TTFCFP_SYMBOL_CHAR_SET")
++#pragma pop_macro("TTFCFP_STD_MAC_CHAR_SET")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TTFCFP_UNICODE_PLATFORMID")
++#undef TTFCFP_UNICODE_PLATFORMID
++#pragma push_macro("TTFCFP_ISO_PLATFORMID")
++#undef TTFCFP_ISO_PLATFORMID
++enum CREATE_FONT_PACKAGE_SUBSET_PLATFORM : short
++{
++    TTFCFP_UNICODE_PLATFORMID = 0,
++    TTFCFP_ISO_PLATFORMID = 2,
++};
++#pragma pop_macro("TTFCFP_ISO_PLATFORMID")
++#pragma pop_macro("TTFCFP_UNICODE_PLATFORMID")
++#endif
++
+ #endif /* FONTSUB_DOT_H_DEFINED */

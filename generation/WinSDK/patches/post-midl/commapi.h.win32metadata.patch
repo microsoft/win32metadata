@@ -1,0 +1,173 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/commapi.h
+index b07322c27a..90554ebecc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/commapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/commapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * commapi.h - ApiSet Contract for api-ms-win-core-comm-l1                       *
+@@ -29,6 +30,7 @@ extern "C" {
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ ClearCommBreak(
+     _In_ HANDLE hFile
+     );
+@@ -36,6 +38,7 @@ ClearCommBreak(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ ClearCommError(
+     _In_ HANDLE hFile,
+     _Out_opt_ LPDWORD lpErrors,
+@@ -45,6 +48,7 @@ ClearCommError(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ SetupComm(
+     _In_ HANDLE hFile,
+     _In_ DWORD dwInQueue,
+@@ -54,6 +58,7 @@ SetupComm(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ EscapeCommFunction(
+     _In_ HANDLE hFile,
+     _In_ DWORD dwFunc
+@@ -63,6 +68,7 @@ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ GetCommConfig(
+     _In_ HANDLE hCommDev,
+     _Out_writes_bytes_opt_(*lpdwSize) LPCOMMCONFIG lpCC,
+@@ -72,6 +78,7 @@ GetCommConfig(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ GetCommMask(
+     _In_ HANDLE hFile,
+     _Out_ LPDWORD lpEvtMask
+@@ -80,6 +87,7 @@ GetCommMask(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ GetCommModemStatus(
+     _In_ HANDLE hFile,
+     _Out_ LPDWORD lpModemStat
+@@ -88,6 +96,7 @@ GetCommModemStatus(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ GetCommProperties(
+     _In_ HANDLE hFile,
+     _Inout_ LPCOMMPROP lpCommProp
+@@ -96,6 +105,7 @@ GetCommProperties(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ GetCommState(
+     _In_ HANDLE hFile,
+     _Out_ LPDCB lpDCB
+@@ -104,6 +114,7 @@ GetCommState(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ GetCommTimeouts(
+     _In_ HANDLE hFile,
+     _Out_ LPCOMMTIMEOUTS lpCommTimeouts
+@@ -112,6 +123,7 @@ GetCommTimeouts(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ PurgeComm(
+     _In_ HANDLE hFile,
+     _In_ DWORD dwFlags
+@@ -120,6 +132,7 @@ PurgeComm(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ SetCommBreak(
+     _In_ HANDLE hFile
+     );
+@@ -127,6 +140,7 @@ SetCommBreak(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ SetCommConfig(
+     _In_ HANDLE hCommDev,
+     _In_reads_bytes_(dwSize) LPCOMMCONFIG lpCC,
+@@ -136,6 +150,7 @@ SetCommConfig(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ SetCommMask(
+     _In_ HANDLE hFile,
+     _In_ DWORD dwEvtMask
+@@ -144,6 +159,7 @@ SetCommMask(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ SetCommState(
+     _In_ HANDLE hFile,
+     _In_ LPDCB lpDCB
+@@ -152,6 +168,7 @@ SetCommState(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ SetCommTimeouts(
+     _In_ HANDLE hFile,
+     _In_ LPCOMMTIMEOUTS lpCommTimeouts
+@@ -160,6 +177,7 @@ SetCommTimeouts(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ TransmitCommChar(
+     _In_ HANDLE hFile,
+     _In_ char cChar
+@@ -168,15 +186,17 @@ TransmitCommChar(
+ WINBASEAPI
+ BOOL
+ WINAPI
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_ _Win32_SetLastError_
+ WaitCommEvent(
+     _In_ HANDLE hFile,
+-    _Inout_ LPDWORD lpEvtMask,
+-    _Inout_opt_ LPOVERLAPPED lpOverlapped
++    _Inout_ _Win32_Retained_ LPDWORD lpEvtMask,
++    _Inout_opt_ _Win32_Retained_ LPOVERLAPPED lpOverlapped
+     );
+ 
+ WINBASEAPI
+ HANDLE
+ WINAPI
++_Windows_SupportedOS_16299_ _Win32_RAIIFree_(CloseHandle, -1)
+ OpenCommPort(
+     _In_ ULONG uPortNumber,
+     _In_ DWORD dwDesiredAccess,
+@@ -186,6 +206,7 @@ OpenCommPort(
+ WINBASEAPI
+ ULONG
+ WINAPI
++_Windows_SupportedOS_17134_
+ GetCommPorts(
+     _Out_writes_(uPortNumbersCount) PULONG lpPortNumbers,
+     _In_ ULONG uPortNumbersCount,

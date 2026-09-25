@@ -1,0 +1,88 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/batclass.h b/generation/WinSDK/RecompiledIdlHeaders/shared/batclass.h
+index 577d300b98..5b9e20af42 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/batclass.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/batclass.h
+@@ -215,8 +215,16 @@ NTSTATUS
+ 
+ typedef BCLASS_SET_STATUS_NOTIFY_CALLBACK *PBCLASS_SET_STATUS_NOTIFY_CALLBACK;
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_NOTIFY_VERSION_1)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_NOTIFY_VERSION_1                    1
++#endif
++#ifndef _WINDOWS_
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_NOTIFY_VERSION_2)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_NOTIFY_VERSION_2                    2
++#endif
++#ifndef _WINDOWS_
+ 
+ _Function_class_(BCLASS_SET_INFORMATION_CALLBACK)
+ _IRQL_requires_same_
+@@ -391,7 +399,11 @@ typedef struct {
+     BCLASS_DISABLE_PEAK_POWER_NOTIFY    DisablePeakPowerNotify;
+ } BATTERY_MINIPORT_INFO_V1_2, *PBATTERY_MINIPORT_INFO_V1_2;
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(CHARGE_REQUIREMENT_MAX_POWER_SOURCE_TYPES)) || (((!defined(_WINDOWS_))))
+ #define CHARGE_REQUIREMENT_MAX_POWER_SOURCE_TYPES 2
++#endif
++#ifndef _WINDOWS_
+ 
+ typedef struct _ADAPTER_INFORMATION {
+     ULONG                               AcAdapterCount;
+@@ -437,8 +449,16 @@ typedef struct _BATTERY_MINIPORT_UPDATE_DATA {
+ typedef BATTERY_MINIPORT_UPDATE_DATA BATTERY_MINIPORT_UPDATE_DATA_V2;
+ typedef PBATTERY_MINIPORT_UPDATE_DATA PBATTERY_MINIPORT_UPDATE_DATA_V2;
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_MINIPORT_UPDATE_DATA_VER_1)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_MINIPORT_UPDATE_DATA_VER_1               0x00000001
++#endif
++#ifndef _WINDOWS_
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_MINIPORT_UPDATE_DATA_VER_2)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_MINIPORT_UPDATE_DATA_VER_2               0x00000002
++#endif
++#ifndef _WINDOWS_
+ 
+ #define BATTERY_MINIPORT_UPDATE_DATA_VER_1_SIZE          sizeof(BATTERY_MINIPORT_UPDATE_DATA)
+ #define BATTERY_MINIPORT_UPDATE_DATA_VER_2_SIZE          sizeof(BATTERY_MINIPORT_UPDATE_DATA_V2)
+@@ -449,13 +469,37 @@ typedef PBATTERY_MINIPORT_UPDATE_DATA PBATTERY_MINIPORT_UPDATE_DATA_V2;
+ // Miniport info struct version info.
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_CLASS_MAJOR_VERSION)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_CLASS_MAJOR_VERSION     0x0001
++#endif
++#ifndef _WINDOWS_
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_CLASS_MINOR_VERSION)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_CLASS_MINOR_VERSION     0x0000
++#endif
++#ifndef _WINDOWS_
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_CLASS_MINOR_VERSION_1)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_CLASS_MINOR_VERSION_1   0x0001
++#endif
++#ifndef _WINDOWS_
++#endif
++#if (defined(WIN32METADATA) && !defined(BATTERY_CLASS_MINOR_VERSION_2)) || (((!defined(_WINDOWS_))))
+ #define BATTERY_CLASS_MINOR_VERSION_2   0x0002
++#endif
++#ifndef _WINDOWS_
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(ADAPTER_CLASS_MAJOR_VERSION)) || (((!defined(_WINDOWS_))))
+ #define ADAPTER_CLASS_MAJOR_VERSION     0x0001
++#endif
++#ifndef _WINDOWS_
++#endif
++#if (defined(WIN32METADATA) && !defined(ADAPTER_CLASS_MINOR_VERSION)) || (((!defined(_WINDOWS_))))
+ #define ADAPTER_CLASS_MINOR_VERSION     0x0000
++#endif
++#ifndef _WINDOWS_
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ 

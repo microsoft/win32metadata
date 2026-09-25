@@ -1,0 +1,461 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
+index bc9f6717c7..39e7ceb08f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -221,7 +222,7 @@ typedef struct DXGI_ADAPTER_DESC
+ typedef HANDLE HMONITOR;
+ 
+ #endif
+-DECLARE_HANDLE(HMONITOR);
++DECLARE_HANDLE(HMONITOR) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ typedef struct DXGI_OUTPUT_DESC
+     {
+@@ -273,7 +274,11 @@ enum DXGI_SWAP_EFFECT
+     } 	DXGI_SWAP_EFFECT;
+ 
+ typedef 
+-enum DXGI_SWAP_CHAIN_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ DXGI_SWAP_CHAIN_FLAG
+     {
+         DXGI_SWAP_CHAIN_FLAG_NONPREROTATED	= 1,
+         DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH	= 2,
+@@ -299,7 +304,7 @@ typedef struct DXGI_SWAP_CHAIN_DESC
+     HWND OutputWindow;
+     BOOL Windowed;
+     DXGI_SWAP_EFFECT SwapEffect;
+-    UINT Flags;
++    _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG) UINT Flags;
+     } 	DXGI_SWAP_CHAIN_DESC;
+ 
+ 
+@@ -318,7 +323,7 @@ EXTERN_C const IID IID_IDXGIObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aec22fb8-76f3-4639-9be0-28eb43a67a2e")
++    MIDL_INTERFACE("aec22fb8-76f3-4639-9be0-28eb43a67a2e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIObject : public IUnknown
+     {
+     public:
+@@ -468,7 +473,7 @@ EXTERN_C const IID IID_IDXGIDeviceSubObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3d3e0379-f9de-4d58-bb6c-18d62992f1a6")
++    MIDL_INTERFACE("3d3e0379-f9de-4d58-bb6c-18d62992f1a6") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIDeviceSubObject : public IDXGIObject
+     {
+     public:
+@@ -608,13 +613,13 @@ EXTERN_C const IID IID_IDXGIResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("035f3ab4-482e-4e50-b41f-8a7f8bd8960b")
++    MIDL_INTERFACE("035f3ab4-482e-4e50-b41f-8a7f8bd8960b") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIResource : public IDXGIDeviceSubObject
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSharedHandle( 
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *pSharedHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pSharedHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetUsage( 
+             /* [annotation][out] */ 
+@@ -622,11 +627,11 @@ EXTERN_C const IID IID_IDXGIResource;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetEvictionPriority( 
+             /* [annotation][in] */ 
+-            _In_  UINT EvictionPriority) = 0;
++            _Win32_AssociatedEnum_(DXGI_RESOURCE_PRIORITY) _In_  UINT EvictionPriority) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEvictionPriority( 
+             /* [annotation][retval][out] */ 
+-            _Out_  UINT *pEvictionPriority) = 0;
++            _Win32_AssociatedEnum_(DXGI_RESOURCE_PRIORITY) _Out_  UINT *pEvictionPriority) = 0;
+         
+     };
+     
+@@ -795,7 +800,7 @@ EXTERN_C const IID IID_IDXGIKeyedMutex;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9d8e1289-d7b3-465f-8126-250e349af85d")
++    MIDL_INTERFACE("9d8e1289-d7b3-465f-8126-250e349af85d") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIKeyedMutex : public IDXGIDeviceSubObject
+     {
+     public:
+@@ -974,19 +979,19 @@ EXTERN_C const IID IID_IDXGISurface;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cafcb56c-6ac3-4889-bf47-9e23bbd260ec")
++    MIDL_INTERFACE("cafcb56c-6ac3-4889-bf47-9e23bbd260ec") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGISurface : public IDXGIDeviceSubObject
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDesc( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_SURFACE_DESC *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_SURFACE_DESC *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Map( 
+             /* [annotation][out] */ 
+             _Out_  DXGI_MAPPED_RECT *pLockedRect,
+             /* [annotation][in] */ 
+-            _In_  UINT MapFlags) = 0;
++            _Win32_AssociatedEnum_(DXGI_MAP_FLAGS) _In_  UINT MapFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Unmap( void) = 0;
+         
+@@ -1148,7 +1153,7 @@ EXTERN_C const IID IID_IDXGISurface1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4AE63092-6327-4c1b-80AE-BFE12EA32B86")
++    MIDL_INTERFACE("4AE63092-6327-4c1b-80AE-BFE12EA32B86") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
+     IDXGISurface1 : public IDXGISurface
+     {
+     public:
+@@ -1350,11 +1355,11 @@ EXTERN_C const IID IID_IDXGIAdapter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2411e7e1-12ac-4ccf-bd14-9798e8534dc0")
++    MIDL_INTERFACE("2411e7e1-12ac-4ccf-bd14-9798e8534dc0") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIAdapter : public IDXGIObject
+     {
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumOutputs( 
+             /* [annotation][in] */ 
+             _In_  UINT Output,
+             /* [annotation][out][in] */ 
+@@ -1362,7 +1367,7 @@ EXTERN_C const IID IID_IDXGIAdapter;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDesc( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_ADAPTER_DESC *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_ADAPTER_DESC *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CheckInterfaceSupport( 
+             /* [annotation][in] */ 
+@@ -1532,19 +1537,19 @@ EXTERN_C const IID IID_IDXGIOutput;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ae02eedb-c735-4690-8d52-5a8dc20213aa")
++    MIDL_INTERFACE("ae02eedb-c735-4690-8d52-5a8dc20213aa") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIOutput : public IDXGIObject
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDesc( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_OUTPUT_DESC *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_OUTPUT_DESC *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayModeList( 
+             /* [annotation][in] */ 
+             _In_  DXGI_FORMAT EnumFormat,
+             /* [annotation][in] */ 
+-            _In_  UINT Flags,
++            _Win32_AssociatedEnum_(DXGI_ENUM_MODES) _In_  UINT Flags,
+             /* [annotation][out][in] */ 
+             _Inout_  UINT *pNumModes,
+             /* [annotation][out] */ 
+@@ -1843,15 +1848,15 @@ EXTERN_C const IID IID_IDXGISwapChain;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a")
++    MIDL_INTERFACE("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGISwapChain : public IDXGIDeviceSubObject
+     {
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE Present( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Present( 
+             /* [annotation][in] */ 
+             _In_  UINT SyncInterval,
+             /* [annotation][in] */ 
+-            _In_  UINT Flags) = 0;
++            _Win32_AssociatedEnum_(DXGI_PRESENT) _In_  UINT Flags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBuffer( 
+             /* [annotation][in] */ 
+@@ -1875,7 +1880,7 @@ EXTERN_C const IID IID_IDXGISwapChain;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDesc( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_SWAP_CHAIN_DESC *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_SWAP_CHAIN_DESC *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ResizeBuffers( 
+             /* [annotation][in] */ 
+@@ -1887,7 +1892,7 @@ EXTERN_C const IID IID_IDXGISwapChain;
+             /* [annotation][in] */ 
+             _In_  DXGI_FORMAT NewFormat,
+             /* [annotation][in] */ 
+-            _In_  UINT SwapChainFlags) = 0;
++            _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG) _In_  UINT SwapChainFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ResizeTarget( 
+             /* [annotation][in] */ 
+@@ -2156,7 +2161,7 @@ EXTERN_C const IID IID_IDXGIFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7b7166ec-21c7-44ae-b21a-c9ae321ae369")
++    MIDL_INTERFACE("7b7166ec-21c7-44ae-b21a-c9ae321ae369") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIFactory : public IDXGIObject
+     {
+     public:
+@@ -2168,13 +2173,13 @@ EXTERN_C const IID IID_IDXGIFactory;
+         
+         virtual HRESULT STDMETHODCALLTYPE MakeWindowAssociation( 
+             HWND WindowHandle,
+-            UINT Flags) = 0;
++            _Win32_AssociatedEnum_(DXGI_MWA_FLAGS) UINT Flags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetWindowAssociation( 
+             /* [annotation][out] */ 
+             _Out_  HWND *pWindowHandle) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE CreateSwapChain( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE CreateSwapChain( 
+             /* [annotation][in] */ 
+             _In_  IUnknown *pDevice,
+             /* [annotation][in] */ 
+@@ -2357,7 +2362,7 @@ EXTERN_C const IID IID_IDXGIFactory;
+ HRESULT WINAPI CreateDXGIFactory(REFIID riid, _COM_Outptr_ void **ppFactory);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+-HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _COM_Outptr_ void **ppFactory);
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _COM_Outptr_ void **ppFactory);
+ 
+ 
+ extern RPC_IF_HANDLE __MIDL_itf_dxgi_0000_0010_v0_0_c_ifspec;
+@@ -2374,7 +2379,7 @@ EXTERN_C const IID IID_IDXGIDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("54ec77fa-1377-44e6-8c32-88fd5f44c84c")
++    MIDL_INTERFACE("54ec77fa-1377-44e6-8c32-88fd5f44c84c") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIDevice : public IDXGIObject
+     {
+     public:
+@@ -2579,7 +2584,11 @@ EXTERN_C const IID IID_IDXGIDevice;
+ /* [local] */ 
+ 
+ typedef 
+-enum DXGI_ADAPTER_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ DXGI_ADAPTER_FLAG
+     {
+         DXGI_ADAPTER_FLAG_NONE	= 0,
+         DXGI_ADAPTER_FLAG_REMOTE	= 1,
+@@ -2598,7 +2607,7 @@ typedef struct DXGI_ADAPTER_DESC1
+     SIZE_T DedicatedSystemMemory;
+     SIZE_T SharedSystemMemory;
+     LUID AdapterLuid;
+-    UINT Flags;
++    _Win32_AssociatedEnum_(DXGI_ADAPTER_FLAG) UINT Flags;
+     } 	DXGI_ADAPTER_DESC1;
+ 
+ typedef struct DXGI_DISPLAY_COLOR_SPACE
+@@ -2624,11 +2633,11 @@ EXTERN_C const IID IID_IDXGIFactory1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387")
++    MIDL_INTERFACE("770aae78-f26f-4dba-a829-253c83d1b387") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
+     IDXGIFactory1 : public IDXGIFactory
+     {
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE EnumAdapters1( 
+             /* [annotation][in] */ 
+             _In_  UINT Adapter,
+             /* [annotation][out] */ 
+@@ -2827,13 +2836,13 @@ EXTERN_C const IID IID_IDXGIAdapter1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("29038f61-3839-4626-91fd-086879011a05")
++    MIDL_INTERFACE("29038f61-3839-4626-91fd-086879011a05") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
+     IDXGIAdapter1 : public IDXGIAdapter
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDesc1( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_ADAPTER_DESC1 *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_ADAPTER_DESC1 *pDesc) = 0;
+         
+     };
+     
+@@ -2995,7 +3004,7 @@ EXTERN_C const IID IID_IDXGIDevice1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77db970f-6276-48ba-ba28-070143b4392c")
++    MIDL_INTERFACE("77db970f-6276-48ba-ba28-070143b4392c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows7_ 
+     IDXGIDevice1 : public IDXGIDevice
+     {
+     public:
+@@ -3223,6 +3232,144 @@ extern RPC_IF_HANDLE __MIDL_itf_dxgi_0000_0014_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXGI_PRESENT_TEST")
++#undef DXGI_PRESENT_TEST
++#pragma push_macro("DXGI_PRESENT_DO_NOT_SEQUENCE")
++#undef DXGI_PRESENT_DO_NOT_SEQUENCE
++#pragma push_macro("DXGI_PRESENT_RESTART")
++#undef DXGI_PRESENT_RESTART
++#pragma push_macro("DXGI_PRESENT_DO_NOT_WAIT")
++#undef DXGI_PRESENT_DO_NOT_WAIT
++#pragma push_macro("DXGI_PRESENT_STEREO_PREFER_RIGHT")
++#undef DXGI_PRESENT_STEREO_PREFER_RIGHT
++#pragma push_macro("DXGI_PRESENT_STEREO_TEMPORARY_MONO")
++#undef DXGI_PRESENT_STEREO_TEMPORARY_MONO
++#pragma push_macro("DXGI_PRESENT_RESTRICT_TO_OUTPUT")
++#undef DXGI_PRESENT_RESTRICT_TO_OUTPUT
++#pragma push_macro("DXGI_PRESENT_USE_DURATION")
++#undef DXGI_PRESENT_USE_DURATION
++#pragma push_macro("DXGI_PRESENT_ALLOW_TEARING")
++#undef DXGI_PRESENT_ALLOW_TEARING
++enum [[clang::flag_enum]] DXGI_PRESENT : unsigned int
++{
++    DXGI_PRESENT_TEST = 1U,
++    DXGI_PRESENT_DO_NOT_SEQUENCE = 2U,
++    DXGI_PRESENT_RESTART = 4U,
++    DXGI_PRESENT_DO_NOT_WAIT = 8U,
++    DXGI_PRESENT_STEREO_PREFER_RIGHT = 16U,
++    DXGI_PRESENT_STEREO_TEMPORARY_MONO = 32U,
++    DXGI_PRESENT_RESTRICT_TO_OUTPUT = 64U,
++    DXGI_PRESENT_USE_DURATION = 256U,
++    DXGI_PRESENT_ALLOW_TEARING = 512U,
++};
++#pragma pop_macro("DXGI_PRESENT_ALLOW_TEARING")
++#pragma pop_macro("DXGI_PRESENT_USE_DURATION")
++#pragma pop_macro("DXGI_PRESENT_RESTRICT_TO_OUTPUT")
++#pragma pop_macro("DXGI_PRESENT_STEREO_TEMPORARY_MONO")
++#pragma pop_macro("DXGI_PRESENT_STEREO_PREFER_RIGHT")
++#pragma pop_macro("DXGI_PRESENT_DO_NOT_WAIT")
++#pragma pop_macro("DXGI_PRESENT_RESTART")
++#pragma pop_macro("DXGI_PRESENT_DO_NOT_SEQUENCE")
++#pragma pop_macro("DXGI_PRESENT_TEST")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXGI_MWA_NO_WINDOW_CHANGES")
++#undef DXGI_MWA_NO_WINDOW_CHANGES
++#pragma push_macro("DXGI_MWA_NO_ALT_ENTER")
++#undef DXGI_MWA_NO_ALT_ENTER
++#pragma push_macro("DXGI_MWA_NO_PRINT_SCREEN")
++#undef DXGI_MWA_NO_PRINT_SCREEN
++#pragma push_macro("DXGI_MWA_VALID")
++#undef DXGI_MWA_VALID
++enum [[clang::flag_enum]] DXGI_MWA_FLAGS : unsigned int
++{
++    DXGI_MWA_NO_WINDOW_CHANGES = 1U,
++    DXGI_MWA_NO_ALT_ENTER = 2U,
++    DXGI_MWA_NO_PRINT_SCREEN = 4U,
++    DXGI_MWA_VALID = 7U,
++};
++#pragma pop_macro("DXGI_MWA_VALID")
++#pragma pop_macro("DXGI_MWA_NO_PRINT_SCREEN")
++#pragma pop_macro("DXGI_MWA_NO_ALT_ENTER")
++#pragma pop_macro("DXGI_MWA_NO_WINDOW_CHANGES")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXGI_MAP_READ")
++#undef DXGI_MAP_READ
++#pragma push_macro("DXGI_MAP_WRITE")
++#undef DXGI_MAP_WRITE
++#pragma push_macro("DXGI_MAP_DISCARD")
++#undef DXGI_MAP_DISCARD
++enum [[clang::flag_enum]] DXGI_MAP_FLAGS : unsigned int
++{
++    DXGI_MAP_READ = 1U,
++    DXGI_MAP_WRITE = 2U,
++    DXGI_MAP_DISCARD = 4U,
++};
++#pragma pop_macro("DXGI_MAP_DISCARD")
++#pragma pop_macro("DXGI_MAP_WRITE")
++#pragma pop_macro("DXGI_MAP_READ")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXGI_RESOURCE_PRIORITY_MINIMUM")
++#undef DXGI_RESOURCE_PRIORITY_MINIMUM
++#pragma push_macro("DXGI_RESOURCE_PRIORITY_LOW")
++#undef DXGI_RESOURCE_PRIORITY_LOW
++#pragma push_macro("DXGI_RESOURCE_PRIORITY_NORMAL")
++#undef DXGI_RESOURCE_PRIORITY_NORMAL
++#pragma push_macro("DXGI_RESOURCE_PRIORITY_HIGH")
++#undef DXGI_RESOURCE_PRIORITY_HIGH
++#pragma push_macro("DXGI_RESOURCE_PRIORITY_MAXIMUM")
++#undef DXGI_RESOURCE_PRIORITY_MAXIMUM
++enum DXGI_RESOURCE_PRIORITY : unsigned int
++{
++    DXGI_RESOURCE_PRIORITY_MINIMUM = 671088640U,
++    DXGI_RESOURCE_PRIORITY_LOW = 1342177280U,
++    DXGI_RESOURCE_PRIORITY_NORMAL = 2013265920U,
++    DXGI_RESOURCE_PRIORITY_HIGH = 2684354560U,
++    DXGI_RESOURCE_PRIORITY_MAXIMUM = 3355443200U,
++};
++#pragma pop_macro("DXGI_RESOURCE_PRIORITY_MAXIMUM")
++#pragma pop_macro("DXGI_RESOURCE_PRIORITY_HIGH")
++#pragma pop_macro("DXGI_RESOURCE_PRIORITY_NORMAL")
++#pragma pop_macro("DXGI_RESOURCE_PRIORITY_LOW")
++#pragma pop_macro("DXGI_RESOURCE_PRIORITY_MINIMUM")
++#endif
++
+ #endif
+ 
+ 
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_DXGI_ENUM_MODES
++#define WIN32METADATA_ENUM_DXGI_ENUM_MODES
++#pragma push_macro("DXGI_ENUM_MODES_INTERLACED")
++#undef DXGI_ENUM_MODES_INTERLACED
++#pragma push_macro("DXGI_ENUM_MODES_SCALING")
++#undef DXGI_ENUM_MODES_SCALING
++#pragma push_macro("DXGI_ENUM_MODES_STEREO")
++#undef DXGI_ENUM_MODES_STEREO
++#pragma push_macro("DXGI_ENUM_MODES_DISABLED_STEREO")
++#undef DXGI_ENUM_MODES_DISABLED_STEREO
++namespace Windows { namespace MetadataEnumValues {
++namespace DXGI_ENUM_MODESValues {
++enum [[clang::flag_enum]] DXGI_ENUM_MODES : unsigned int
++{
++    DXGI_ENUM_MODES_INTERLACED = 1U,
++    DXGI_ENUM_MODES_SCALING = 2U,
++    DXGI_ENUM_MODES_STEREO = 4U,
++    DXGI_ENUM_MODES_DISABLED_STEREO = 8U,
++};
++}
++} }
++#pragma pop_macro("DXGI_ENUM_MODES_DISABLED_STEREO")
++#pragma pop_macro("DXGI_ENUM_MODES_STEREO")
++#pragma pop_macro("DXGI_ENUM_MODES_SCALING")
++#pragma pop_macro("DXGI_ENUM_MODES_INTERLACED")
++#endif
++#endif
