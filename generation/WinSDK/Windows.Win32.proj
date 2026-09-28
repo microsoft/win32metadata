@@ -29,5 +29,10 @@
     <WinmdScopeHeader Include="winstring.h;Wsdevlicensing.h;wsdevlicensing.h"/>
   </ItemGroup>
 
+  <Target Name="ValidatePatchedSdkHeaders" BeforeTargets="BuildWin32MetadataTools">
+    <Error Condition="!Exists('$(SdkIncRoot)\um')"
+           Text="Patched SDK headers were not found at '$(SdkIncRoot)'. Run scripts\BuildMetadataBin.ps1 so the SDK patches are applied before generating the WinMD."/>
+  </Target>
+
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets"/>
 </Project>

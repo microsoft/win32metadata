@@ -8,7 +8,8 @@
 dotnet build BuildTools -c Release
 ```
 
-`BuildMetadataBin.ps1` builds the packaged Rust tool when needed and generates
+`BuildMetadataBin.ps1` recreates the SDK header tree, applies all checked-in
+header patches, builds the packaged Rust tool when needed, and generates
 `bin\Windows.Win32.winmd` from all partitions for x64, x86, and arm64.
 
 For a targeted inner loop:
