@@ -26,6 +26,15 @@ if (!$skipInstallTools.IsPresent)
     Install-BuildTools
 }
 
+Write-Host "Preparing patched SDK headers..."
+& "$PSScriptRoot\RecompileIdlFilesForScraping.ps1" -SkipInstallTools
+ThrowOnNativeProcessError
+
+if (!(Test-Path $recompiledIdlHeadersDir))
+{
+    throw "Patched SDK headers were not generated at $recompiledIdlHeadersDir."
+}
+
 $assemblyVersion = nbgv get-version -v AssemblyVersion
 
 $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
