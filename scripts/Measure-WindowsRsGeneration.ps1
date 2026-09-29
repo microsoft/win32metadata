@@ -216,6 +216,8 @@ if (!$OutputRoot) {
 $OutputRoot = [System.IO.Path]::GetFullPath($OutputRoot)
 New-Item -ItemType Directory -Force -Path $OutputRoot | Out-Null
 
+Install-BuildTools
+
 $toolDir = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64"
 $tool = Join-Path $toolDir "win32metadata-tools.exe"
 $requestedVariants = if ($Variant -eq "both") { @("unpatched", "patched") } else { @($Variant) }
@@ -272,10 +274,10 @@ $scopeHeaders = @(
     "Wsdevlicensing.h", "wsdevlicensing.h"
 )
 $includePaths = @(
-    $recompiledIdlHeadersDir,
-    (Join-Path $windowsWin32ProjectRoot "inc"),
     (Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"),
-    (Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage")
+    (Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage"),
+    (Join-Path $windowsWin32ProjectRoot "inc"),
+    $recompiledIdlHeadersDir
 )
 $sdkLibRoot = Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"
 $assemblyVersion = nbgv get-version -v AssemblyVersion

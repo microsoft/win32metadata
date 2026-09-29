@@ -76,7 +76,8 @@ $actualText = [System.Text.RegularExpressions.Regex]::Replace(
 
 function Assert-InvalidAnnotation {
     param(
-        [string]$Name
+        [string]$Name,
+        [string]$ExpectedError
     )
 
     $invalidRoot = Join-Path $sample "invalid"
@@ -97,16 +98,28 @@ function Assert-InvalidAnnotation {
     if ($LASTEXITCODE -eq 0) {
         throw "Invalid annotation case '$Name' unexpectedly generated a WinMD."
     }
-    if (($messages -join "`n") -notmatch "(?i)error") {
-        throw "Invalid annotation case '$Name' failed without an explicit error."
+    $messageText = $messages -join "`n"
+    if ($messageText -match "(?i)failed to find \.rdl files") {
+        throw "Invalid annotation case '$Name' failed before validating its annotation."
+    }
+    if ($messageText -notmatch $ExpectedError) {
+        throw "Invalid annotation case '$Name' did not report the expected annotation error:`n$messageText"
     }
 }
 
-Assert-InvalidAnnotation "UnknownAnnotation"
-Assert-InvalidAnnotation "MissingAnnotationValue"
-Assert-InvalidAnnotation "EmptyAnnotationValue"
-Assert-InvalidAnnotation "UnexpectedAnnotationValue"
-Assert-InvalidAnnotation "InvalidAnnotationTarget"
+$packageToolDirectory = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64"
+$previousLibClangPath = $env:LIBCLANG_PATH
+try {
+    $env:LIBCLANG_PATH = $packageToolDirectory
+    Assert-InvalidAnnotation "UnknownAnnotation" "(?i)(unknown_contract|unknown annotation)"
+    Assert-InvalidAnnotation "MissingAnnotationValue" "(?i)(import_library|missing|required).*(value|argument)"
+    Assert-InvalidAnnotation "EmptyAnnotationValue" "(?i)(import_library|empty|required).*(value|argument)"
+    Assert-InvalidAnnotation "UnexpectedAnnotationValue" "(?i)(set_last_error|unexpected|accept).*(value|argument)"
+    Assert-InvalidAnnotation "InvalidAnnotationTarget" "(?i)(associated_constant|invalid target|enum)"
+}
+finally {
+    $env:LIBCLANG_PATH = $previousLibClangPath
+}
 
 function Assert-MatchCount {
     param(
