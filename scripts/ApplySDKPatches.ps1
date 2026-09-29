@@ -51,30 +51,45 @@ if ($patchFiles.Count -eq 0) {
     return
 }
 
-$appliedCount = 0
-$failedCount = 0
+$combinedPatch = [System.IO.Path]::GetTempFileName()
+try {
+    $writer = [System.IO.StreamWriter]::new(
+        $combinedPatch,
+        $false,
+        [System.Text.UTF8Encoding]::new($false))
+    try {
+        foreach ($patchFile in $patchFiles) {
+            $content = [System.IO.File]::ReadAllText($patchFile.FullName)
+            $writer.Write($content)
+            if (!$content.EndsWith("`n")) {
+                $writer.WriteLine()
+            }
+        }
+    }
+    finally {
+        $writer.Dispose()
+    }
 
-foreach ($patchFile in $patchFiles) {
-    $relativeName = $patchFile.FullName.Substring($patchDir.Length + 1)
-    Write-Host "Applying $Phase patch: $relativeName..."
-
+    Write-Host "Applying $($patchFiles.Count) $Phase SDK patches..."
     # Strip generation/WinSDK/RecompiledIdlHeaders from the stored patch paths,
-    # then apply the header-relative path to the generated object tree.
-    git -C $rootDir apply -p4 "--directory=$patchTarget" $patchFile.FullName 2>&1 |
+    # then apply the header-relative paths to the generated object tree.
+    git -C $rootDir apply --whitespace=nowarn -p4 "--directory=$patchTarget" $combinedPatch 2>&1 |
         ForEach-Object { Write-Host "  $_" }
-    if ($LASTEXITCODE -eq 0) {
-        Write-Host "  Applied successfully" -ForegroundColor Green
-        $appliedCount++
-    } else {
-        Write-Warning "  FAILED to apply patch: $relativeName"
-        Write-Warning "  The SDK headers may have changed. Regenerate this patch against the new SDK."
-        $failedCount++
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "The combined $Phase patch application failed. Checking individual patch files..."
+        foreach ($patchFile in $patchFiles) {
+            git -C $rootDir apply --check --whitespace=nowarn -p4 "--directory=$patchTarget" $patchFile.FullName *> $null
+            if ($LASTEXITCODE -ne 0) {
+                $relativeName = $patchFile.FullName.Substring($patchDir.Length + 1)
+                Write-Warning "  FAILED patch: $relativeName"
+            }
+        }
+        Write-Error "$Phase patches failed. Regenerate failing patches against the new SDK headers."
+        exit 1
     }
 }
-
-Write-Host "SDK $Phase patches: $appliedCount applied, $failedCount failed (of $($patchFiles.Count))."
-
-if ($failedCount -gt 0) {
-    Write-Error "$Phase patches failed. Regenerate failing patches against the new SDK headers."
-    exit 1
+finally {
+    Remove-Item $combinedPatch -Force -ErrorAction SilentlyContinue
 }
+
+Write-Host "SDK $Phase patches: $($patchFiles.Count) applied, 0 failed."

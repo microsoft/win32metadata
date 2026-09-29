@@ -1,0 +1,475 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
+index c46976b943..b4c9e05d8b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/consoleapi2.h
+@@ -16,6 +16,7 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
++#include <win32metadata_annotations.h>
+ #include <minwinbase.h>
+ 
+ #include <wincontypes.h>
+@@ -50,6 +51,77 @@ extern "C" {
+ 
+ #define COMMON_LVB_SBCSDBCS        0x0300 // SBCS or DBCS flag.
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("FOREGROUND_BLUE")
++#pragma push_macro("FOREGROUND_GREEN")
++#pragma push_macro("FOREGROUND_RED")
++#pragma push_macro("FOREGROUND_INTENSITY")
++#pragma push_macro("BACKGROUND_BLUE")
++#pragma push_macro("BACKGROUND_GREEN")
++#pragma push_macro("BACKGROUND_RED")
++#pragma push_macro("BACKGROUND_INTENSITY")
++#pragma push_macro("COMMON_LVB_LEADING_BYTE")
++#pragma push_macro("COMMON_LVB_TRAILING_BYTE")
++#pragma push_macro("COMMON_LVB_GRID_HORIZONTAL")
++#pragma push_macro("COMMON_LVB_GRID_LVERTICAL")
++#pragma push_macro("COMMON_LVB_GRID_RVERTICAL")
++#pragma push_macro("COMMON_LVB_REVERSE_VIDEO")
++#pragma push_macro("COMMON_LVB_UNDERSCORE")
++#pragma push_macro("COMMON_LVB_SBCSDBCS")
++#undef FOREGROUND_BLUE
++#undef FOREGROUND_GREEN
++#undef FOREGROUND_RED
++#undef FOREGROUND_INTENSITY
++#undef BACKGROUND_BLUE
++#undef BACKGROUND_GREEN
++#undef BACKGROUND_RED
++#undef BACKGROUND_INTENSITY
++#undef COMMON_LVB_LEADING_BYTE
++#undef COMMON_LVB_TRAILING_BYTE
++#undef COMMON_LVB_GRID_HORIZONTAL
++#undef COMMON_LVB_GRID_LVERTICAL
++#undef COMMON_LVB_GRID_RVERTICAL
++#undef COMMON_LVB_REVERSE_VIDEO
++#undef COMMON_LVB_UNDERSCORE
++#undef COMMON_LVB_SBCSDBCS
++enum [[clang::flag_enum]] CONSOLE_CHARACTER_ATTRIBUTES : WORD {
++    FOREGROUND_BLUE = 0x0001,
++    FOREGROUND_GREEN = 0x0002,
++    FOREGROUND_RED = 0x0004,
++    FOREGROUND_INTENSITY = 0x0008,
++    BACKGROUND_BLUE = 0x0010,
++    BACKGROUND_GREEN = 0x0020,
++    BACKGROUND_RED = 0x0040,
++    BACKGROUND_INTENSITY = 0x0080,
++    COMMON_LVB_LEADING_BYTE = 0x0100,
++    COMMON_LVB_TRAILING_BYTE = 0x0200,
++    COMMON_LVB_GRID_HORIZONTAL = 0x0400,
++    COMMON_LVB_GRID_LVERTICAL = 0x0800,
++    COMMON_LVB_GRID_RVERTICAL = 0x1000,
++    COMMON_LVB_REVERSE_VIDEO = 0x4000,
++    COMMON_LVB_UNDERSCORE = 0x8000,
++    COMMON_LVB_SBCSDBCS = 0x0300,
++};
++#pragma pop_macro("COMMON_LVB_SBCSDBCS")
++#pragma pop_macro("COMMON_LVB_UNDERSCORE")
++#pragma pop_macro("COMMON_LVB_REVERSE_VIDEO")
++#pragma pop_macro("COMMON_LVB_GRID_RVERTICAL")
++#pragma pop_macro("COMMON_LVB_GRID_LVERTICAL")
++#pragma pop_macro("COMMON_LVB_GRID_HORIZONTAL")
++#pragma pop_macro("COMMON_LVB_TRAILING_BYTE")
++#pragma pop_macro("COMMON_LVB_LEADING_BYTE")
++#pragma pop_macro("BACKGROUND_INTENSITY")
++#pragma pop_macro("BACKGROUND_RED")
++#pragma pop_macro("BACKGROUND_GREEN")
++#pragma pop_macro("BACKGROUND_BLUE")
++#pragma pop_macro("FOREGROUND_INTENSITY")
++#pragma pop_macro("FOREGROUND_RED")
++#pragma pop_macro("FOREGROUND_GREEN")
++#pragma pop_macro("FOREGROUND_BLUE")
++#endif
++
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -61,6 +133,8 @@ FillConsoleOutputCharacterA(
+     _Out_ LPDWORD lpNumberOfCharsWritten
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -78,17 +152,21 @@ FillConsoleOutputCharacterW(
+ #define FillConsoleOutputCharacter  FillConsoleOutputCharacterA
+ #endif // !UNICODE
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ FillConsoleOutputAttribute(
+     _In_ HANDLE hConsoleOutput,
+-    _In_ WORD wAttribute,
++    _In_  WORD wAttribute,
+     _In_ DWORD nLength,
+     _In_ COORD dwWriteCoord,
+     _Out_ LPDWORD lpNumberOfAttrsWritten
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -97,6 +175,9 @@ GenerateConsoleCtrlEvent(
+     _In_ DWORD dwProcessGroupId
+     );
+ 
++_Win32_RAIIFree_(CloseHandle, -1, 0) 
++_Win32_SetLastError_
++
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -105,9 +186,11 @@ CreateConsoleScreenBuffer(
+     _In_ DWORD dwShareMode,
+     _In_opt_ CONST SECURITY_ATTRIBUTES* lpSecurityAttributes,
+     _In_ DWORD dwFlags,
+-    _Reserved_ LPVOID lpScreenBufferData
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPVOID lpScreenBufferData
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -115,6 +198,8 @@ SetConsoleActiveScreenBuffer(
+     _In_ HANDLE hConsoleOutput
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -122,6 +207,8 @@ FlushConsoleInputBuffer(
+     _In_ HANDLE hConsoleInput
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -129,6 +216,8 @@ SetConsoleCP(
+     _In_ UINT wCodePageID
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -141,6 +230,8 @@ typedef struct _CONSOLE_CURSOR_INFO {
+     BOOL   bVisible;
+ } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -149,6 +240,8 @@ GetConsoleCursorInfo(
+     _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -160,11 +253,13 @@ SetConsoleCursorInfo(
+ typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
+     COORD dwSize;
+     COORD dwCursorPosition;
+-    WORD  wAttributes;
++    _Win32_AssociatedEnum_(CONSOLE_CHARACTER_ATTRIBUTES) WORD  wAttributes;
+     SMALL_RECT srWindow;
+     COORD dwMaximumWindowSize;
+ } CONSOLE_SCREEN_BUFFER_INFO, *PCONSOLE_SCREEN_BUFFER_INFO;
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -173,18 +268,20 @@ GetConsoleScreenBufferInfo(
+     _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
+     );
+ 
+-typedef struct _CONSOLE_SCREEN_BUFFER_INFOEX {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CONSOLE_SCREEN_BUFFER_INFOEX {
+     ULONG cbSize;
+     COORD dwSize;
+     COORD dwCursorPosition;
+-    WORD wAttributes;
++    _Win32_AssociatedEnum_(CONSOLE_CHARACTER_ATTRIBUTES) WORD wAttributes;
+     SMALL_RECT srWindow;
+     COORD dwMaximumWindowSize;
+-    WORD wPopupAttributes;
++     WORD wPopupAttributes;
+     BOOL bFullscreenSupported;
+     COLORREF ColorTable[16];
+ } CONSOLE_SCREEN_BUFFER_INFOEX, *PCONSOLE_SCREEN_BUFFER_INFOEX;
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -193,6 +290,8 @@ GetConsoleScreenBufferInfoEx(
+     _Inout_ PCONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -201,6 +300,8 @@ SetConsoleScreenBufferInfoEx(
+     _In_ PCONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -209,6 +310,8 @@ SetConsoleScreenBufferSize(
+     _In_ COORD dwSize
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -217,6 +320,8 @@ SetConsoleCursorPosition(
+     _In_ COORD dwCursorPosition
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ COORD
+ WINAPI
+@@ -224,14 +329,18 @@ GetLargestConsoleWindowSize(
+     _In_ HANDLE hConsoleOutput
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ SetConsoleTextAttribute(
+     _In_ HANDLE hConsoleOutput,
+-    _In_ WORD wAttributes
++    _In_ _Win32_AssociatedEnum_(CONSOLE_CHARACTER_ATTRIBUTES) WORD wAttributes
+     );
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -241,6 +350,8 @@ SetConsoleWindowInfo(
+     _In_ CONST SMALL_RECT* lpConsoleWindow
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -252,6 +363,8 @@ WriteConsoleOutputCharacterA(
+     _Out_ LPDWORD lpNumberOfCharsWritten
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -269,17 +382,21 @@ WriteConsoleOutputCharacterW(
+ #define WriteConsoleOutputCharacter  WriteConsoleOutputCharacterA
+ #endif // !UNICODE
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ WriteConsoleOutputAttribute(
+     _In_ HANDLE hConsoleOutput,
+-    _In_reads_(nLength) CONST WORD* lpAttribute,
++    _In_reads_(nLength)  CONST WORD* lpAttribute,
+     _In_ DWORD nLength,
+     _In_ COORD dwWriteCoord,
+     _Out_ LPDWORD lpNumberOfAttrsWritten
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -291,6 +408,8 @@ ReadConsoleOutputCharacterA(
+     _Out_ LPDWORD lpNumberOfCharsRead
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -308,17 +427,21 @@ ReadConsoleOutputCharacterW(
+ #define ReadConsoleOutputCharacter  ReadConsoleOutputCharacterA
+ #endif // !UNICODE
+ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ ReadConsoleOutputAttribute(
+     _In_ HANDLE hConsoleOutput,
+-    _Out_writes_(nLength) LPWORD lpAttribute,
++    _Out_writes_(nLength)  LPWORD lpAttribute,
+     _In_ DWORD nLength,
+     _In_ COORD dwReadCoord,
+     _Out_ LPDWORD lpNumberOfAttrsRead
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -329,6 +452,8 @@ WriteConsoleInputA(
+     _Out_ LPDWORD lpNumberOfEventsWritten
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -345,6 +470,8 @@ WriteConsoleInputW(
+ #define WriteConsoleInput  WriteConsoleInputA
+ #endif // !UNICODE
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -356,6 +483,8 @@ ScrollConsoleScreenBufferA(
+     _In_ CONST CHAR_INFO* lpFill
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -373,6 +502,8 @@ ScrollConsoleScreenBufferW(
+ #define ScrollConsoleScreenBuffer  ScrollConsoleScreenBufferA
+ #endif // !UNICODE
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -384,6 +515,8 @@ WriteConsoleOutputA(
+     _Inout_ PSMALL_RECT lpWriteRegion
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -401,6 +534,8 @@ WriteConsoleOutputW(
+ #define WriteConsoleOutput  WriteConsoleOutputA
+ #endif // !UNICODE
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -412,6 +547,8 @@ ReadConsoleOutputA(
+     _Inout_ PSMALL_RECT lpReadRegion
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -429,6 +566,8 @@ ReadConsoleOutputW(
+ #define ReadConsoleOutput  ReadConsoleOutputA
+ #endif // !UNICODE
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -437,6 +576,8 @@ GetConsoleTitleA(
+     _In_ DWORD nSize
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -453,6 +594,8 @@ GetConsoleTitleW(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -461,6 +604,8 @@ GetConsoleOriginalTitleA(
+     _In_ DWORD nSize
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -477,6 +622,8 @@ GetConsoleOriginalTitleW(
+ 
+ #endif /* _WIN32_WINNT >= 0x0600 */
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -484,6 +631,8 @@ SetConsoleTitleA(
+     _In_ LPCSTR lpConsoleTitle
+     );
+ 
++
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI

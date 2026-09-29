@@ -1,0 +1,1440 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
+index 77ea809b47..2fa43c379a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Msi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*****************************************************************************\
+ *                                                                             *
+@@ -88,7 +89,7 @@
+ // Installer generic handle definitions
+ // --------------------------------------------------------------------------
+ 
+-typedef unsigned long MSIHANDLE;     // abstract generic handle, 0 == no handle
++_WIN32META_ANNOTATION_("win32metadata:raii_free=MsiCloseHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef unsigned long MSIHANDLE;     // abstract generic handle, 0 == no handle
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -98,14 +99,14 @@ extern "C" {
+ // All handles obtained from API calls must be closed when no longer needed
+ // Normally succeeds, returning TRUE. 
+ 
+-UINT WINAPI MsiCloseHandle(MSIHANDLE hAny);
++_Windows_SupportedOS_Windows8_ UINT WINAPI MsiCloseHandle(MSIHANDLE hAny);
+ 
+ // Close all handles open in the process, a diagnostic call
+ // This should NOT be used as a cleanup mechanism -- use PMSIHANDLE class
+ // Can be called at termination to assure that all handles have been closed
+ // Returns 0 if all handles have been close, else number of open handles
+ 
+-UINT WINAPI MsiCloseAllHandles();
++_Windows_SupportedOS_Windows8_ UINT WINAPI MsiCloseAllHandles();
+ 
+ #ifdef __cplusplus
+ }
+@@ -163,9 +164,9 @@ typedef enum tagINSTALLMESSAGE
+ } INSTALLMESSAGE;
+ 
+ // external error handler supplied to installation API functions
+-typedef int (WINAPI *INSTALLUI_HANDLERA)(LPVOID pvContext, UINT iMessageType, LPCSTR szMessage);
++typedef int (WINAPI *INSTALLUI_HANDLERA)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvContext, UINT iMessageType, LPCSTR szMessage);
+ // external error handler supplied to installation API functions
+-typedef int (WINAPI *INSTALLUI_HANDLERW)(LPVOID pvContext, UINT iMessageType, LPCWSTR szMessage);
++typedef int (WINAPI *INSTALLUI_HANDLERW)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvContext, UINT iMessageType, LPCWSTR szMessage);
+ #ifdef UNICODE
+ #define INSTALLUI_HANDLER  INSTALLUI_HANDLERW
+ #else
+@@ -528,18 +529,18 @@ extern "C" {
+ 
+ // Enable internal UI
+ 
+-INSTALLUILEVEL WINAPI MsiSetInternalUI(
++_Windows_SupportedOS_Windows8_ INSTALLUILEVEL WINAPI MsiSetInternalUI(
+ 	_In_ INSTALLUILEVEL  dwUILevel,     // UI level
+ 	_Inout_opt_ HWND  *phWnd);          // handle of owner window
+ 
+ // Enable external UI handling, returns any previous handler or NULL if none.
+ // Messages are designated with a combination of bits from INSTALLLOGMODE enum.
+ 
+-INSTALLUI_HANDLERA WINAPI MsiSetExternalUIA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLUI_HANDLERA WINAPI MsiSetExternalUIA(
+ 	_In_opt_ INSTALLUI_HANDLERA puiHandler,  // for progress and error handling 
+ 	_In_ DWORD              dwMessageFilter, // bit flags designating messages to handle
+ 	_In_opt_ LPVOID             pvContext);  // application context
+-INSTALLUI_HANDLERW WINAPI MsiSetExternalUIW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLUI_HANDLERW WINAPI MsiSetExternalUIW(
+ 	_In_opt_ INSTALLUI_HANDLERW puiHandler,  // for progress and error handling 
+ 	_In_ DWORD              dwMessageFilter, // bit flags designating messages to handle
+ 	_In_opt_ LPVOID             pvContext);  // application context
+@@ -551,7 +552,7 @@ INSTALLUI_HANDLERW WINAPI MsiSetExternalUIW(
+ 
+ #if (_WIN32_MSI >= 310)
+ 
+-UINT WINAPI MsiSetExternalUIRecord(
++_Windows_SupportedOS_Windows8_ UINT WINAPI MsiSetExternalUIRecord(
+ 	_In_opt_ INSTALLUI_HANDLER_RECORD puiHandler,         // for progress and error handling 
+ 	_In_ DWORD              dwMessageFilter,              // bit flags designating messages to handle
+ 	_In_opt_ LPVOID             pvContext,                // application context
+@@ -563,12 +564,12 @@ UINT WINAPI MsiSetExternalUIRecord(
+ // with control over which log messages are passed to the specified log file.
+ // Messages are designated with a combination of bits from INSTALLLOGMODE enum.
+ 
+-UINT WINAPI MsiEnableLogA(
+-	_In_ DWORD     dwLogMode,           // bit flags designating operations to report
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnableLogA(
++	_Win32_AssociatedEnum_(INSTALLLOGMODE) _In_ DWORD     dwLogMode,           // bit flags designating operations to report
+ 	_In_opt_ LPCSTR  szLogFile,       // log file, or NULL to disable logging
+ 	_In_ DWORD     dwLogAttributes);    // INSTALLLOGATTRIBUTES flags
+-UINT WINAPI MsiEnableLogW(
+-	_In_ DWORD     dwLogMode,           // bit flags designating operations to report
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnableLogW(
++	_Win32_AssociatedEnum_(INSTALLLOGMODE) _In_ DWORD     dwLogMode,           // bit flags designating operations to report
+ 	_In_opt_ LPCWSTR  szLogFile,       // log file, or NULL to disable logging
+ 	_In_ DWORD     dwLogAttributes);    // INSTALLLOGATTRIBUTES flags
+ #ifdef UNICODE
+@@ -583,9 +584,9 @@ UINT WINAPI MsiEnableLogW(
+ 
+ // Return the installed state for a product
+ 
+-INSTALLSTATE WINAPI MsiQueryProductStateA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiQueryProductStateA(
+ 	_In_ LPCSTR  szProduct);
+-INSTALLSTATE WINAPI MsiQueryProductStateW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiQueryProductStateW(
+ 	_In_ LPCWSTR  szProduct);
+ #ifdef UNICODE
+ #define MsiQueryProductState  MsiQueryProductStateW
+@@ -595,12 +596,12 @@ INSTALLSTATE WINAPI MsiQueryProductStateW(
+ 
+ // Return product info
+ 
+-UINT WINAPI MsiGetProductInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductInfoA(
+ 	_In_ LPCSTR   szProduct,                              // product code
+ 	_In_ LPCSTR   szAttribute,                            // attribute name, case-sensitive
+ 	_Out_writes_opt_(*pcchValueBuf) LPSTR lpValueBuf,     // returned value, NULL if not desired
+ 	_Inout_opt_                     LPDWORD pcchValueBuf);  // in/out buffer character count
+-UINT WINAPI MsiGetProductInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductInfoW(
+ 	_In_ LPCWSTR   szProduct,                              // product code
+ 	_In_ LPCWSTR   szAttribute,                            // attribute name, case-sensitive
+ 	_Out_writes_opt_(*pcchValueBuf) LPWSTR lpValueBuf,     // returned value, NULL if not desired
+@@ -614,14 +615,14 @@ UINT WINAPI MsiGetProductInfoW(
+ #if (_WIN32_MSI >= 300)
+ // Retrieve product info for a particular product instance
+ 
+-UINT WINAPI MsiGetProductInfoExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductInfoExA(
+ 		_In_ LPCSTR szProductCode,                  // Information is queried on this product
+ 		_In_opt_ LPCSTR szUserSid,                  // Account of this product instance
+ 		_In_ MSIINSTALLCONTEXT dwContext,             // Context of this product instance
+ 		_In_ LPCSTR szProperty,                     // Property being queried
+ 		_Out_writes_opt_(*pcchValue) LPSTR szValue, // Value read
+ 		_Inout_opt_ LPDWORD pcchValue);               // size of the szValue buffer
+-UINT WINAPI MsiGetProductInfoExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductInfoExW(
+ 		_In_ LPCWSTR szProductCode,                  // Information is queried on this product
+ 		_In_opt_ LPCWSTR szUserSid,                  // Account of this product instance
+ 		_In_ MSIINSTALLCONTEXT dwContext,             // Context of this product instance
+@@ -638,10 +639,10 @@ UINT WINAPI MsiGetProductInfoExW(
+ // Install a new product.
+ // Either may be NULL, but the DATABASE property must be specfied
+ 
+-UINT WINAPI MsiInstallProductA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiInstallProductA(
+ 	_In_ LPCSTR      szPackagePath,        // location of package to install
+ 	_In_opt_ LPCSTR      szCommandLine);   // command line <property settings>
+-UINT WINAPI MsiInstallProductW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiInstallProductW(
+ 	_In_ LPCWSTR      szPackagePath,        // location of package to install
+ 	_In_opt_ LPCWSTR      szCommandLine);   // command line <property settings>
+ #ifdef UNICODE
+@@ -653,13 +654,13 @@ UINT WINAPI MsiInstallProductW(
+ // Install/uninstall an advertised or installed product
+ // No action if installed and INSTALLSTATE_DEFAULT specified
+ 
+-UINT WINAPI MsiConfigureProductA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiConfigureProductA(
+ 	_In_ LPCSTR      szProduct,       // product code
+-	_In_ int          iInstallLevel,    // how much of the product to install
++	_Win32_AssociatedEnum_(INSTALLLEVEL) _In_ int          iInstallLevel,    // how much of the product to install
+ 	_In_ INSTALLSTATE eInstallState);   // local/source/default/absent/lock/uncache
+-UINT WINAPI MsiConfigureProductW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiConfigureProductW(
+ 	_In_ LPCWSTR      szProduct,       // product code
+-	_In_ int          iInstallLevel,    // how much of the product to install
++	_Win32_AssociatedEnum_(INSTALLLEVEL) _In_ int          iInstallLevel,    // how much of the product to install
+ 	_In_ INSTALLSTATE eInstallState);   // local/source/default/absent/lock/uncache
+ #ifdef UNICODE
+ #define MsiConfigureProduct  MsiConfigureProductW
+@@ -670,14 +671,14 @@ UINT WINAPI MsiConfigureProductW(
+ // Install/uninstall an advertised or installed product
+ // No action if installed and INSTALLSTATE_DEFAULT specified
+ 
+-UINT WINAPI MsiConfigureProductExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiConfigureProductExA(
+ 	_In_ LPCSTR      szProduct,            // product code
+-	_In_ int          iInstallLevel,         // how much of the product to install
++	_Win32_AssociatedEnum_(INSTALLLEVEL) _In_ int          iInstallLevel,         // how much of the product to install
+ 	_In_ INSTALLSTATE eInstallState,         // local/source/default/absent/lock/uncache
+ 	_In_opt_ LPCSTR      szCommandLine);   // command line <property settings>
+-UINT WINAPI MsiConfigureProductExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiConfigureProductExW(
+ 	_In_ LPCWSTR      szProduct,            // product code
+-	_In_ int          iInstallLevel,         // how much of the product to install
++	_Win32_AssociatedEnum_(INSTALLLEVEL) _In_ int          iInstallLevel,         // how much of the product to install
+ 	_In_ INSTALLSTATE eInstallState,         // local/source/default/absent/lock/uncache
+ 	_In_opt_ LPCWSTR      szCommandLine);   // command line <property settings>
+ #ifdef UNICODE
+@@ -688,12 +689,12 @@ UINT WINAPI MsiConfigureProductExW(
+ 
+ // Reinstall product, used to validate or correct problems
+ 
+-UINT WINAPI MsiReinstallProductA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiReinstallProductA(
+ 	_In_ LPCSTR      szProduct,        // product code
+-	_In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
+-UINT WINAPI MsiReinstallProductW(
++	_Win32_AssociatedEnum_(REINSTALLMODE) _In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiReinstallProductW(
+ 	_In_ LPCWSTR      szProduct,        // product code
+-	_In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
++	_Win32_AssociatedEnum_(REINSTALLMODE) _In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
+ #ifdef UNICODE
+ #define MsiReinstallProduct  MsiReinstallProductW
+ #else
+@@ -709,7 +710,7 @@ UINT WINAPI MsiReinstallProductW(
+ // If dwOptions includes MSIADVERTISEOPTIONFLAGS_INSTANCE, then a new instance is advertised. Use of
+ //    this option requires that szTransforms include the instance transform that changes the product code
+ 
+-UINT WINAPI MsiAdvertiseProductExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiAdvertiseProductExA(
+ 	_In_ LPCSTR	szPackagePath,      // location of package
+ 	_In_opt_ LPCSTR    szScriptfilePath,   // if NULL, product is locally advertised
+ 	_In_opt_ LPCSTR    szTransforms,       // list of transforms to be applied
+@@ -717,7 +718,7 @@ UINT WINAPI MsiAdvertiseProductExA(
+ 	_In_ DWORD       dwPlatform,         // the MSIARCHITECTUREFLAGS that control for which platform
+ 	                                //   to create the script, ignored if szScriptfilePath is NULL
+ 	_In_ DWORD       dwOptions);         // the MSIADVERTISEOPTIONFLAGS that specify extra advertise parameters
+-UINT WINAPI MsiAdvertiseProductExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiAdvertiseProductExW(
+ 	_In_ LPCWSTR	szPackagePath,      // location of package
+ 	_In_opt_ LPCWSTR    szScriptfilePath,   // if NULL, product is locally advertised
+ 	_In_opt_ LPCWSTR    szTransforms,       // list of transforms to be applied
+@@ -735,12 +736,12 @@ UINT WINAPI MsiAdvertiseProductExW(
+ 
+ // Output reg and shortcut info to script file for Assign or Publish
+ 
+-UINT WINAPI MsiAdvertiseProductA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiAdvertiseProductA(
+ 	_In_ LPCSTR      szPackagePath,    // location of package
+ 	_In_opt_ LPCSTR      szScriptfilePath,  // if NULL, product is locally advertised
+ 	_In_opt_ LPCSTR      szTransforms,      // list of transforms to be applied
+ 	_In_ LANGID        lgidLanguage);     // install language
+-UINT WINAPI MsiAdvertiseProductW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiAdvertiseProductW(
+ 	_In_ LPCWSTR      szPackagePath,    // location of package
+ 	_In_opt_ LPCWSTR      szScriptfilePath,  // if NULL, product is locally advertised
+ 	_In_opt_ LPCWSTR      szTransforms,      // list of transforms to be applied
+@@ -761,13 +762,13 @@ UINT WINAPI MsiAdvertiseProductW(
+ //    returned by SHGetSpecialFolderLocation(?), it will hold the shortcuts.
+ // if fRemoveItems is TRUE, items that are present will be removed
+ 
+-UINT WINAPI MsiProcessAdvertiseScriptA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProcessAdvertiseScriptA(
+ 	_In_ LPCSTR      szScriptFile,  // path to script from MsiAdvertiseProduct
+ 	_In_opt_ LPCSTR      szIconFolder,  // optional path to folder for icon files and transforms
+ 	_In_opt_ HKEY         hRegData,      // optional parent registry key
+ 	_In_ BOOL         fShortcuts,    // TRUE if shortcuts output to special folder
+ 	_In_ BOOL         fRemoveItems); // TRUE if specified items are to be removed
+-UINT WINAPI MsiProcessAdvertiseScriptW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProcessAdvertiseScriptW(
+ 	_In_ LPCWSTR      szScriptFile,  // path to script from MsiAdvertiseProduct
+ 	_In_opt_ LPCWSTR      szIconFolder,  // optional path to folder for icon files and transforms
+ 	_In_opt_ HKEY         hRegData,      // optional parent registry key
+@@ -785,12 +786,12 @@ UINT WINAPI MsiProcessAdvertiseScriptW(
+ // Process advertise script file using the supplied dwFlags control flags
+ // if fRemoveItems is TRUE, items that are present will be removed
+ 
+-UINT WINAPI MsiAdvertiseScriptA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiAdvertiseScriptA(
+ 	_In_ LPCSTR      szScriptFile,  // path to script from MsiAdvertiseProduct
+ 	_In_ DWORD         dwFlags,       // the SCRIPTFLAGS bit flags that control the script execution
+ 	_In_opt_ PHKEY         phRegData,     // optional parent registry key
+ 	_In_ BOOL          fRemoveItems); // TRUE if specified items are to be removed
+-UINT WINAPI MsiAdvertiseScriptW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiAdvertiseScriptW(
+ 	_In_ LPCWSTR      szScriptFile,  // path to script from MsiAdvertiseProduct
+ 	_In_ DWORD         dwFlags,       // the SCRIPTFLAGS bit flags that control the script execution
+ 	_In_opt_ PHKEY         phRegData,     // optional parent registry key
+@@ -805,7 +806,7 @@ UINT WINAPI MsiAdvertiseScriptW(
+ //   product code, language, version, readable name, path to package
+ // Returns TRUE is success, FALSE if szScriptFile is not a valid script file
+ 
+-UINT WINAPI MsiGetProductInfoFromScriptA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductInfoFromScriptA(
+ 	_In_                               LPCSTR  szScriptFile,    // path to installer script file
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1) LPSTR   lpProductBuf39,  // buffer for product code string GUID, 39 chars
+ 	_Out_opt_                          LANGID   *plgidLanguage,  // return language Id
+@@ -814,7 +815,7 @@ UINT WINAPI MsiGetProductInfoFromScriptA(
+ 	_Inout_opt_                        LPDWORD   pcchNameBuf,    // in/out name buffer character count
+ 	_Out_writes_opt_(*pcchPackageBuf)  LPSTR   lpPackageBuf,   // buffer for path to product package
+ 	_Inout_opt_                        LPDWORD   pcchPackageBuf);// in/out path buffer character count
+-UINT WINAPI MsiGetProductInfoFromScriptW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductInfoFromScriptW(
+ 	_In_                               LPCWSTR  szScriptFile,    // path to installer script file
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1) LPWSTR   lpProductBuf39,  // buffer for product code string GUID, 39 chars
+ 	_Out_opt_                          LANGID   *plgidLanguage,  // return language Id
+@@ -831,10 +832,10 @@ UINT WINAPI MsiGetProductInfoFromScriptW(
+ 
+ // Return the product code for a registered component, called once by apps
+ 
+-UINT WINAPI MsiGetProductCodeA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductCodeA(
+ 	_In_ LPCSTR   szComponent,   // component Id registered for this product
+ 	_Out_writes_(MAX_GUID_CHARS+1) LPSTR lpBuf39);   // returned string GUID, sized for 39 characters
+-UINT WINAPI MsiGetProductCodeW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductCodeW(
+ 	_In_ LPCWSTR   szComponent,   // component Id registered for this product
+ 	_Out_writes_(MAX_GUID_CHARS+1) LPWSTR lpBuf39);   // returned string GUID, sized for 39 characters
+ #ifdef UNICODE
+@@ -845,7 +846,7 @@ UINT WINAPI MsiGetProductCodeW(
+ 
+ // Return the registered user information for an installed product
+ 
+-USERINFOSTATE WINAPI MsiGetUserInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ USERINFOSTATE WINAPI MsiGetUserInfoA(
+ 	_In_                                   LPCSTR  szProduct,    // product code, string GUID
+ 	_Out_writes_opt_(*pcchUserNameBuf) LPSTR   lpUserNameBuf,    // return user name           
+ 	_Inout_opt_                        LPDWORD   pcchUserNameBuf, // in/out buffer character count
+@@ -853,7 +854,7 @@ USERINFOSTATE WINAPI MsiGetUserInfoA(
+ 	_Inout_opt_                        LPDWORD   pcchOrgNameBuf,  // in/out buffer character count
+ 	_Out_writes_opt_(*pcchSerialBuf)   LPSTR   lpSerialBuf,      // return product serial number
+ 	_Inout_opt_                        LPDWORD   pcchSerialBuf);  // in/out buffer character count
+-USERINFOSTATE WINAPI MsiGetUserInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ USERINFOSTATE WINAPI MsiGetUserInfoW(
+ 	_In_                                   LPCWSTR  szProduct,    // product code, string GUID
+ 	_Out_writes_opt_(*pcchUserNameBuf) LPWSTR   lpUserNameBuf,    // return user name           
+ 	_Inout_opt_                        LPDWORD   pcchUserNameBuf, // in/out buffer character count
+@@ -869,9 +870,9 @@ USERINFOSTATE WINAPI MsiGetUserInfoW(
+ 
+ // Obtain and store user info and PID from installation wizard (first run)
+ 
+-UINT WINAPI MsiCollectUserInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiCollectUserInfoA(
+ 	_In_ LPCSTR  szProduct);     // product code, string GUID
+-UINT WINAPI MsiCollectUserInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiCollectUserInfoW(
+ 	_In_ LPCWSTR  szProduct);     // product code, string GUID
+ #ifdef UNICODE
+ #define MsiCollectUserInfo  MsiCollectUserInfoW
+@@ -885,12 +886,12 @@ UINT WINAPI MsiCollectUserInfoW(
+ 
+ // Patch all possible installed products.
+ 
+-UINT WINAPI MsiApplyPatchA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiApplyPatchA(
+ 	_In_ LPCSTR szPatchPackage,       // location of patch package
+ 	_In_opt_ LPCSTR szInstallPackage, // location of package for install to patch <optional>
+ 	_In_ INSTALLTYPE eInstallType,      // type of install to patch
+ 	_In_opt_ LPCSTR szCommandLine);   // command line <property settings>
+-UINT WINAPI MsiApplyPatchW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiApplyPatchW(
+ 	_In_ LPCWSTR szPatchPackage,       // location of patch package
+ 	_In_opt_ LPCWSTR szInstallPackage, // location of package for install to patch <optional>
+ 	_In_ INSTALLTYPE eInstallType,      // type of install to patch
+@@ -903,12 +904,12 @@ UINT WINAPI MsiApplyPatchW(
+ 
+ // Return patch info for first visible patch
+ 
+-UINT WINAPI MsiGetPatchInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetPatchInfoA(
+ 	_In_ LPCSTR szPatch,                              // patch code
+ 	_In_ LPCSTR szAttribute,                          // attribute name, case-sensitive
+ 	_Out_writes_opt_(*pcchValueBuf) LPSTR lpValueBuf, // returned value, NULL if not desired
+ 	_Inout_opt_ LPDWORD pcchValueBuf);                  // in/out buffer character count
+-UINT WINAPI MsiGetPatchInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetPatchInfoW(
+ 	_In_ LPCWSTR szPatch,                              // patch code
+ 	_In_ LPCWSTR szAttribute,                          // attribute name, case-sensitive
+ 	_Out_writes_opt_(*pcchValueBuf) LPWSTR lpValueBuf, // returned value, NULL if not desired
+@@ -921,13 +922,13 @@ UINT WINAPI MsiGetPatchInfoW(
+ 
+ // Enumerate all patches for a product in contexts visible to caller
+ 
+-UINT WINAPI MsiEnumPatchesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumPatchesA(
+ 	_In_ LPCSTR szProduct,
+ 	_In_ DWORD iPatchIndex,
+ 	_Out_writes_(MAX_GUID_CHARS+1)   LPSTR  lpPatchBuf,
+ 	_Out_writes_(*pcchTransformsBuf) LPSTR  lpTransformsBuf,
+ 	_Inout_ LPDWORD  pcchTransformsBuf);
+-UINT WINAPI MsiEnumPatchesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumPatchesW(
+ 	_In_ LPCWSTR szProduct,
+ 	_In_ DWORD iPatchIndex,
+ 	_Out_writes_(MAX_GUID_CHARS+1)   LPWSTR  lpPatchBuf,
+@@ -942,12 +943,12 @@ UINT WINAPI MsiEnumPatchesW(
+ #if (_WIN32_MSI >= 300)
+ // Remove one or more patches from the specified product.
+ 
+-UINT WINAPI MsiRemovePatchesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRemovePatchesA(
+ 	_In_ LPCSTR szPatchList,         // semi-colon delimited list of patches to remove; patch can be referenced by patch package path or Patch GUID
+ 	_In_ LPCSTR szProductCode,       // ProductCode GUID of product with patch to remove
+ 	_In_ INSTALLTYPE eUninstallType,   // type of patch uninstall to perform. Must be INSTALLTYPE_SINGLE_INSTANCE.
+ 	_In_opt_ LPCSTR szPropertyList); // command line property settings using PROPERTY=VALUE pairs
+-UINT WINAPI MsiRemovePatchesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiRemovePatchesW(
+ 	_In_ LPCWSTR szPatchList,         // semi-colon delimited list of patches to remove; patch can be referenced by patch package path or Patch GUID
+ 	_In_ LPCWSTR szProductCode,       // ProductCode GUID of product with patch to remove
+ 	_In_ INSTALLTYPE eUninstallType,   // type of patch uninstall to perform. Must be INSTALLTYPE_SINGLE_INSTANCE.
+@@ -960,14 +961,14 @@ UINT WINAPI MsiRemovePatchesW(
+ 
+ // Extract XML data from the patch
+ 
+-UINT WINAPI MsiExtractPatchXMLDataA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ UINT WINAPI MsiExtractPatchXMLDataA(
+ 	_In_ LPCSTR szPatchPath,                         // Patch file to open
+-	_Reserved_ DWORD dwReserved,                       // Reserved
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,                       // Reserved
+ 	_Out_writes_opt_(*pcchXMLData) LPSTR szXMLData,  // Buffer that gets the XML data
+ 	_Inout_opt_ LPDWORD pcchXMLData);                  // in/out XML data buffer character count
+-UINT WINAPI MsiExtractPatchXMLDataW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ UINT WINAPI MsiExtractPatchXMLDataW(
+ 	_In_ LPCWSTR szPatchPath,                         // Patch file to open
+-	_Reserved_ DWORD dwReserved,                       // Reserved
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,                       // Reserved
+ 	_Out_writes_opt_(*pcchXMLData) LPWSTR szXMLData,  // Buffer that gets the XML data
+ 	_Inout_opt_ LPDWORD pcchXMLData);                  // in/out XML data buffer character count
+ #ifdef UNICODE
+@@ -979,7 +980,7 @@ UINT WINAPI MsiExtractPatchXMLDataW(
+ // Retrieve extended patch info for a particular patch applied
+ // to a particular product instance.
+ 
+-UINT WINAPI MsiGetPatchInfoExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetPatchInfoExA(
+         _In_ LPCSTR szPatchCode,                    // target patch to query
+         _In_ LPCSTR szProductCode,                  // target product of patch application
+         _In_opt_ LPCSTR szUserSid,                  // Account of this product instance
+@@ -987,7 +988,7 @@ UINT WINAPI MsiGetPatchInfoExA(
+         _In_ LPCSTR szProperty,                     // property of patch to retrieve
+         _Out_writes_opt_(*pcchValue) LPSTR lpValue, // address buffer for data
+         _Inout_opt_ LPDWORD pcchValue);               // in/out value buffer character count
+-UINT WINAPI MsiGetPatchInfoExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetPatchInfoExW(
+         _In_ LPCWSTR szPatchCode,                    // target patch to query
+         _In_ LPCWSTR szProductCode,                  // target product of patch application
+         _In_opt_ LPCWSTR szUserSid,                  // Account of this product instance
+@@ -1004,11 +1005,11 @@ UINT WINAPI MsiGetPatchInfoExW(
+ // Apply multiple patches to the specified product or to all eligible products
+ // on the machine
+ 
+-UINT WINAPI MsiApplyMultiplePatchesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiApplyMultiplePatchesA(
+         _In_ LPCSTR szPatchPackages,       // Patches to apply
+         _In_opt_ LPCSTR szProductCode,     // target product of patch application
+         _In_opt_ LPCSTR szPropertiesList); // Properties settings
+-UINT WINAPI MsiApplyMultiplePatchesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiApplyMultiplePatchesW(
+         _In_ LPCWSTR szPatchPackages,       // Patches to apply
+         _In_opt_ LPCWSTR szProductCode,     // target product of patch application
+         _In_opt_ LPCWSTR szPropertiesList); // Properties settings
+@@ -1022,13 +1023,13 @@ UINT WINAPI MsiApplyMultiplePatchesW(
+ // patch files, XML files, and/or XML blobs. Patches already applied to the product
+ // are taken into account
+ 
+-UINT WINAPI MsiDeterminePatchSequenceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDeterminePatchSequenceA(
+ 	_In_ LPCSTR szProductCode,                                   // Product code GUID of an installed product
+ 	_In_opt_ LPCSTR szUserSid,                                   // User account we're interested in
+ 	_In_ MSIINSTALLCONTEXT dwContext,                              // Installation context we're interested in
+ 	_In_ DWORD cPatchInfo,                                         // Number of patches in the array
+ 	_Inout_updates_(cPatchInfo) PMSIPATCHSEQUENCEINFOA pPatchInfo); // Array of patch sequence information data
+-UINT WINAPI MsiDeterminePatchSequenceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDeterminePatchSequenceW(
+ 	_In_ LPCWSTR szProductCode,                                   // Product code GUID of an installed product
+ 	_In_opt_ LPCWSTR szUserSid,                                   // User account we're interested in
+ 	_In_ MSIINSTALLCONTEXT dwContext,                              // Installation context we're interested in
+@@ -1044,11 +1045,11 @@ UINT WINAPI MsiDeterminePatchSequenceW(
+ // XML files, and/or XML blobs. Does not take into account either products or patches
+ // already installed on the machine.
+ 
+-UINT WINAPI MsiDetermineApplicablePatchesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDetermineApplicablePatchesA(
+ 	_In_ LPCSTR szProductPackagePath,                            // Fully qualified path to a product MSI database
+ 	_In_ DWORD cPatchInfo,                                         // Number of patches in the array
+ 	_Inout_updates_(cPatchInfo) PMSIPATCHSEQUENCEINFOA pPatchInfo); // Array of patch sequence information data
+-UINT WINAPI MsiDetermineApplicablePatchesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiDetermineApplicablePatchesW(
+ 	_In_ LPCWSTR szProductPackagePath,                            // Fully qualified path to a product MSI database
+ 	_In_ DWORD cPatchInfo,                                         // Number of patches in the array
+ 	_Inout_updates_(cPatchInfo) PMSIPATCHSEQUENCEINFOW pPatchInfo); // Array of patch sequence information data
+@@ -1061,7 +1062,7 @@ UINT WINAPI MsiDetermineApplicablePatchesW(
+ // Enumerates all patches applied for a single product or all products based upon
+ // enumeration context and filter.
+ 
+-UINT WINAPI MsiEnumPatchesExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumPatchesExA(
+ 	_In_opt_ LPCSTR szProductCode,                                   // Enumerate patches on instances of this product
+ 	_In_opt_ LPCSTR szUserSid,                                       // Account for enumeration
+ 	_In_ DWORD dwContext,                                              // Contexts for enumeration
+@@ -1072,7 +1073,7 @@ UINT WINAPI MsiEnumPatchesExA(
+ 	_Out_opt_ MSIINSTALLCONTEXT *pdwTargetProductContext,              //Enumerated patch's context
+ 	_Out_writes_opt_(*pcchTargetUserSid) LPSTR  szTargetUserSid,     // Enumerated patch's user account
+ 	_Inout_opt_ LPDWORD pcchTargetUserSid);                            // in/out character count of szTargetUserSid
+-UINT WINAPI MsiEnumPatchesExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumPatchesExW(
+ 	_In_opt_ LPCWSTR szProductCode,                                   // Enumerate patches on instances of this product
+ 	_In_opt_ LPCWSTR szUserSid,                                       // Account for enumeration
+ 	_In_ DWORD dwContext,                                              // Contexts for enumeration
+@@ -1097,10 +1098,10 @@ UINT WINAPI MsiEnumPatchesExW(
+ 
+ // Return the installed state for a product feature
+ 
+-INSTALLSTATE WINAPI MsiQueryFeatureStateA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiQueryFeatureStateA(
+ 	_In_ LPCSTR  szProduct,
+ 	_In_ LPCSTR  szFeature);
+-INSTALLSTATE WINAPI MsiQueryFeatureStateW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiQueryFeatureStateW(
+ 	_In_ LPCWSTR  szProduct,
+ 	_In_ LPCWSTR  szFeature);
+ #ifdef UNICODE
+@@ -1112,13 +1113,13 @@ INSTALLSTATE WINAPI MsiQueryFeatureStateW(
+ #if (_WIN32_MSI >= 300)	
+ // Retrieve the installed state for a product feature in a particular product instance
+ 
+-UINT WINAPI MsiQueryFeatureStateExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiQueryFeatureStateExA(
+ 		_In_ LPCSTR szProductCode,        // Information is queried on this product
+ 		_In_opt_ LPCSTR szUserSid,        // Account of this product instance
+ 		_In_ MSIINSTALLCONTEXT dwContext,   // Context of this product instance
+ 		_In_ LPCSTR szFeature,            // Name of the feature being queried
+ 		_Out_opt_ INSTALLSTATE *pdwState);  // State value
+-UINT WINAPI MsiQueryFeatureStateExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiQueryFeatureStateExW(
+ 		_In_ LPCWSTR szProductCode,        // Information is queried on this product
+ 		_In_opt_ LPCWSTR szUserSid,        // Account of this product instance
+ 		_In_ MSIINSTALLCONTEXT dwContext,   // Context of this product instance
+@@ -1134,10 +1135,10 @@ UINT WINAPI MsiQueryFeatureStateExW(
+ // Indicate intent to use a product feature, increments usage count
+ // Prompts for CD if not loaded, does not install feature
+ 
+-INSTALLSTATE WINAPI MsiUseFeatureA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiUseFeatureA(
+ 	_In_ LPCSTR  szProduct,
+ 	_In_ LPCSTR  szFeature);
+-INSTALLSTATE WINAPI MsiUseFeatureW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiUseFeatureW(
+ 	_In_ LPCWSTR  szProduct,
+ 	_In_ LPCWSTR  szFeature);
+ #ifdef UNICODE
+@@ -1150,16 +1151,16 @@ INSTALLSTATE WINAPI MsiUseFeatureW(
+ // Prompts for CD if not loaded, does not install feature
+ // Allows for bypassing component detection where performance is critical
+ 
+-INSTALLSTATE WINAPI MsiUseFeatureExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiUseFeatureExA(
+ 	_In_ LPCSTR  szProduct,          // product code
+ 	_In_ LPCSTR  szFeature,          // feature ID
+ 	_In_ DWORD     dwInstallMode,      // INSTALLMODE_NODETECTION, else 0
+-	_Reserved_ DWORD     dwReserved);  // reserved, must be 0
+-INSTALLSTATE WINAPI MsiUseFeatureExW(
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved);  // reserved, must be 0
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiUseFeatureExW(
+ 	_In_ LPCWSTR  szProduct,          // product code
+ 	_In_ LPCWSTR  szFeature,          // feature ID
+ 	_In_ DWORD     dwInstallMode,      // INSTALLMODE_NODETECTION, else 0
+-	_Reserved_ DWORD     dwReserved);  // reserved, must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved);  // reserved, must be 0
+ #ifdef UNICODE
+ #define MsiUseFeatureEx  MsiUseFeatureExW
+ #else
+@@ -1168,12 +1169,12 @@ INSTALLSTATE WINAPI MsiUseFeatureExW(
+ 
+ // Return the usage metrics for a product feature
+ 
+-UINT WINAPI MsiGetFeatureUsageA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureUsageA(
+ 	_In_ LPCSTR      szProduct,            // product code
+ 	_In_ LPCSTR      szFeature,            // feature ID
+ 	_Out_opt_ LPDWORD       pdwUseCount,     // returned use count
+ 	_Out_opt_ LPWORD        pwDateUsed);     // last date used (DOS date format)
+-UINT WINAPI MsiGetFeatureUsageW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureUsageW(
+ 	_In_ LPCWSTR      szProduct,            // product code
+ 	_In_ LPCWSTR      szFeature,            // feature ID
+ 	_Out_opt_ LPDWORD       pdwUseCount,     // returned use count
+@@ -1186,11 +1187,11 @@ UINT WINAPI MsiGetFeatureUsageW(
+ 
+ // Force the installed state for a product feature
+ 
+-UINT WINAPI MsiConfigureFeatureA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiConfigureFeatureA(
+ 	_In_ LPCSTR  szProduct,
+ 	_In_ LPCSTR  szFeature,
+ 	_In_ INSTALLSTATE eInstallState);   // local/source/default/absent/lock/uncache
+-UINT WINAPI MsiConfigureFeatureW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiConfigureFeatureW(
+ 	_In_ LPCWSTR  szProduct,
+ 	_In_ LPCWSTR  szFeature,
+ 	_In_ INSTALLSTATE eInstallState);   // local/source/default/absent/lock/uncache
+@@ -1203,14 +1204,14 @@ UINT WINAPI MsiConfigureFeatureW(
+ 
+ // Reinstall feature, used to validate or correct problems
+ 
+-UINT WINAPI MsiReinstallFeatureA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiReinstallFeatureA(
+ 	_In_ LPCSTR      szProduct,        // product code
+ 	_In_ LPCSTR      szFeature,        // feature ID, NULL for entire product
+-	_In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
+-UINT WINAPI MsiReinstallFeatureW(
++	_Win32_AssociatedEnum_(REINSTALLMODE) _In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiReinstallFeatureW(
+ 	_In_ LPCWSTR      szProduct,        // product code
+ 	_In_ LPCWSTR      szFeature,        // feature ID, NULL for entire product
+-	_In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
++	_Win32_AssociatedEnum_(REINSTALLMODE) _In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
+ #ifdef UNICODE
+ #define MsiReinstallFeature  MsiReinstallFeatureW
+ #else
+@@ -1228,18 +1229,18 @@ UINT WINAPI MsiReinstallFeatureW(
+ // then calls MsiConfigureFeature if any of its components are uninstalled
+ // then calls MsiLocateComponent to obtain the path the its key file
+ 
+-UINT WINAPI MsiProvideComponentA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideComponentA(
+ 	_In_ LPCSTR     szProduct,                               // product code in case install required
+ 	_In_ LPCSTR     szFeature,                               // feature ID in case install required
+ 	_In_ LPCSTR     szComponent,                             // component ID
+-	_In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_Out_writes_opt_(*pcchPathBuf)  LPSTR      lpPathBuf,    // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD      pcchPathBuf); // in/out buffer character count
+-UINT WINAPI MsiProvideComponentW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideComponentW(
+ 	_In_ LPCWSTR     szProduct,                               // product code in case install required
+ 	_In_ LPCWSTR     szFeature,                               // feature ID in case install required
+ 	_In_ LPCWSTR     szComponent,                             // component ID
+-	_In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR      lpPathBuf,    // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD      pcchPathBuf); // in/out buffer character count
+ #ifdef UNICODE
+@@ -1251,16 +1252,16 @@ UINT WINAPI MsiProvideComponentW(
+ // Return full component path for a qualified component, performing any necessary installation. 
+ // Prompts for source if necessary and increments the usage count for the feature.
+ 
+-UINT WINAPI MsiProvideQualifiedComponentA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideQualifiedComponentA(
+ 	_In_ LPCSTR     szCategory,                           // component category ID
+ 	_In_ LPCSTR     szQualifier,                          // specifies which component to access
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,     // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
+-UINT WINAPI MsiProvideQualifiedComponentW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideQualifiedComponentW(
+ 	_In_ LPCWSTR     szCategory,                           // component category ID
+ 	_In_ LPCWSTR     szQualifier,                          // specifies which component to access
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,     // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
+ #ifdef UNICODE
+@@ -1274,22 +1275,22 @@ UINT WINAPI MsiProvideQualifiedComponentW(
+ // The szProduct parameter specifies the product to match that has published the qualified
+ // component. If null, this API works the same as MsiProvideQualifiedComponent. 
+ 
+-UINT WINAPI MsiProvideQualifiedComponentExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideQualifiedComponentExA(
+ 	_In_ LPCSTR     szCategory,                           // component category ID
+ 	_In_ LPCSTR     szQualifier,                          // specifies which component to access
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_In_opt_ LPCSTR     szProduct,                        // the product code 
+-	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
+-	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused1,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused2,                      // not used, must be zero
+ 	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,     // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
+-UINT WINAPI MsiProvideQualifiedComponentExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideQualifiedComponentExW(
+ 	_In_ LPCWSTR     szCategory,                           // component category ID
+ 	_In_ LPCWSTR     szQualifier,                          // specifies which component to access
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_In_opt_ LPCWSTR     szProduct,                        // the product code 
+-	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
+-	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused1,                      // not used, must be zero
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD        dwUnused2,                      // not used, must be zero
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,     // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
+ #ifdef UNICODE
+@@ -1300,12 +1301,12 @@ UINT WINAPI MsiProvideQualifiedComponentExW(
+ 
+ // Return full path to an installed component
+ 
+-INSTALLSTATE WINAPI MsiGetComponentPathA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiGetComponentPathA(
+ 	_In_ LPCSTR   szProduct,                        // product code for client product
+ 	_In_ LPCSTR   szComponent,                      // component Id, string GUID
+ 	_Out_writes_opt_(*pcchBuf)  LPSTR  lpPathBuf,   // returned path
+ 	_Inout_opt_                 LPDWORD  pcchBuf);    // in/out buffer character count
+-INSTALLSTATE WINAPI MsiGetComponentPathW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiGetComponentPathW(
+ 	_In_ LPCWSTR   szProduct,                        // product code for client product
+ 	_In_ LPCWSTR   szComponent,                      // component Id, string GUID
+ 	_Out_writes_opt_(*pcchBuf)  LPWSTR  lpPathBuf,   // returned path
+@@ -1320,14 +1321,14 @@ INSTALLSTATE WINAPI MsiGetComponentPathW(
+ // Return full path to an installed component for a given user
+ // and context
+ 
+-INSTALLSTATE WINAPI MsiGetComponentPathExA(		
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiGetComponentPathExA(		
+ 	_In_					LPCSTR		szProductCode,		// ProductCode
+ 	_In_					LPCSTR		szComponentCode,	// ComponentCode
+ 	_In_opt_				LPCSTR		szUserSid,		// User account
+ 	_In_opt_				MSIINSTALLCONTEXT	dwContext,		// Install context
+ 	_Out_writes_opt_(*pcchOutPathBuffer)	LPSTR			lpOutPathBuffer,	// returned path
+ 	_Inout_opt_				LPDWORD			pcchOutPathBuffer);	// in/out buffer character count
+-INSTALLSTATE WINAPI MsiGetComponentPathExW(		
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiGetComponentPathExW(		
+ 	_In_					LPCWSTR		szProductCode,		// ProductCode
+ 	_In_					LPCWSTR		szComponentCode,	// ComponentCode
+ 	_In_opt_				LPCWSTR		szUserSid,		// User account
+@@ -1352,18 +1353,18 @@ INSTALLSTATE WINAPI MsiGetComponentPathExW(
+ // The szAppContext is the full path to the .cfg file or the app exe to which the assembly being requested 
+ // has been privatised to, which is null for global assemblies
+ 
+-UINT WINAPI MsiProvideAssemblyA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideAssemblyA(
+ 	_In_ LPCSTR    szAssemblyName,                       // stringized assembly name
+ 	_In_opt_ LPCSTR    szAppContext,                     // specifies the full path to the parent asm's .cfg file, null for global assemblies
+-	_In_ DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+-	_In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(MSIASSEMBLYINFO) _In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
+ 	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,    // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf); // in/out buffer character count
+-UINT WINAPI MsiProvideAssemblyW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiProvideAssemblyW(
+ 	_In_ LPCWSTR    szAssemblyName,                       // stringized assembly name
+ 	_In_opt_ LPCWSTR    szAppContext,                     // specifies the full path to the parent asm's .cfg file, null for global assemblies
+-	_In_ DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+-	_In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
++	_Win32_AssociatedEnum_(INSTALLMODE) _In_ DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_Win32_AssociatedEnum_(MSIASSEMBLYINFO) _In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,    // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf); // in/out buffer character count
+ #ifdef UNICODE
+@@ -1377,13 +1378,13 @@ UINT WINAPI MsiProvideAssemblyW(
+ #if (_WIN32_MSI >= 300)
+ // Query the installed state of a component in the specified product instance
+ 
+-UINT WINAPI MsiQueryComponentStateA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiQueryComponentStateA(
+ 		_In_ LPCSTR szProductCode,       // Information is queried on this product
+ 		_In_opt_ LPCSTR szUserSid,       // Account of this product instance
+ 		_In_ MSIINSTALLCONTEXT dwContext,  // Context of this product instance
+ 		_In_ LPCSTR szComponentCode,     // Name of the component being queried
+ 		_Out_opt_ INSTALLSTATE *pdwState); // State value
+-UINT WINAPI MsiQueryComponentStateW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiQueryComponentStateW(
+ 		_In_ LPCWSTR szProductCode,       // Information is queried on this product
+ 		_In_opt_ LPCWSTR szUserSid,       // Account of this product instance
+ 		_In_ MSIINSTALLCONTEXT dwContext,  // Context of this product instance
+@@ -1404,10 +1405,10 @@ UINT WINAPI MsiQueryComponentStateW(
+ 
+ // Enumerate the registered products, either installed or advertised
+ 
+-UINT WINAPI MsiEnumProductsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumProductsA(
+ 	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+-UINT WINAPI MsiEnumProductsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumProductsW(
+ 	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+ #ifdef UNICODE
+@@ -1419,7 +1420,7 @@ UINT WINAPI MsiEnumProductsW(
+ #if (_WIN32_MSI >= 300)
+ // Enumerate the registered products, either installed or advertised in
+ // the specified context
+-UINT WINAPI MsiEnumProductsExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumProductsExA(
+ 		_In_opt_ LPCSTR szProductCode,                                      // Enumerate instances of this product
+ 		_In_opt_ LPCSTR szUserSid,                                          // Account for enumeration
+ 		_In_ DWORD dwContext,                                                 // Contexts for enumeration
+@@ -1430,7 +1431,7 @@ UINT WINAPI MsiEnumProductsExA(
+ 		_Inout_opt_ LPDWORD pcchSid);                                         // in/out character count of szSid 
+ // Enumerate the registered products, either installed or advertised in
+ // the specified context
+-UINT WINAPI MsiEnumProductsExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumProductsExW(
+ 		_In_opt_ LPCWSTR szProductCode,                                      // Enumerate instances of this product
+ 		_In_opt_ LPCWSTR szUserSid,                                          // Account for enumeration
+ 		_In_ DWORD dwContext,                                                 // Contexts for enumeration
+@@ -1450,14 +1451,14 @@ UINT WINAPI MsiEnumProductsExW(
+ 
+ // Enumerate products with given upgrade code
+ 
+-UINT WINAPI MsiEnumRelatedProductsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumRelatedProductsA(
+ 	_In_ LPCSTR  lpUpgradeCode,                               // upgrade code of products to enumerate
+-	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved,                            // reserved, must be 0
+ 	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+-UINT WINAPI MsiEnumRelatedProductsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumRelatedProductsW(
+ 	_In_ LPCWSTR  lpUpgradeCode,                               // upgrade code of products to enumerate
+-	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD     dwReserved,                            // reserved, must be 0
+ 	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+ #ifdef UNICODE
+@@ -1471,12 +1472,12 @@ UINT WINAPI MsiEnumRelatedProductsW(
+ // Enumerate the advertised features for a given product.
+ // If parent is not required, supplying NULL will improve performance.
+ 
+-UINT WINAPI MsiEnumFeaturesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumFeaturesA(
+ 	_In_ LPCSTR  szProduct,
+ 	_In_ DWORD     iFeatureIndex,                                    // 0-based index into published features
+ 	_Out_writes_(MAX_FEATURE_CHARS+1)      LPSTR   lpFeatureBuf,   // feature name buffer,   size=MAX_FEATURE_CHARS+1
+ 	_Out_writes_opt_(MAX_FEATURE_CHARS+1)  LPSTR   lpParentBuf);   // parent feature buffer, size=MAX_FEATURE_CHARS+1
+-UINT WINAPI MsiEnumFeaturesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumFeaturesW(
+ 	_In_ LPCWSTR  szProduct,
+ 	_In_ DWORD     iFeatureIndex,                                    // 0-based index into published features
+ 	_Out_writes_(MAX_FEATURE_CHARS+1)      LPWSTR   lpFeatureBuf,   // feature name buffer,   size=MAX_FEATURE_CHARS+1
+@@ -1489,10 +1490,10 @@ UINT WINAPI MsiEnumFeaturesW(
+ 
+ // Enumerate the installed components for all products
+ 
+-UINT WINAPI MsiEnumComponentsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentsA(
+ 	_In_ DWORD    iComponentIndex,                              // 0-based index into installed components
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPSTR   lpComponentBuf);  // buffer of char count: 39 (size of string GUID)
+-UINT WINAPI MsiEnumComponentsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentsW(
+ 	_In_ DWORD    iComponentIndex,                              // 0-based index into installed components
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpComponentBuf);  // buffer of char count: 39 (size of string GUID)
+ #ifdef UNICODE
+@@ -1505,7 +1506,7 @@ UINT WINAPI MsiEnumComponentsW(
+ // Enumerate installed components for all products for a given users 
+ // and context
+ 
+-UINT WINAPI MsiEnumComponentsExA(	
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentsExA(	
+ 	_In_opt_				LPCSTR		szUserSid,			// Account for enumeration
+ 	_In_					DWORD			dwContext,			// Contexts for enumeration
+ 	_In_					DWORD			dwIndex,			// 0-based index into installed components
+@@ -1513,7 +1514,7 @@ UINT WINAPI MsiEnumComponentsExA(
+ 	_Out_opt_				MSIINSTALLCONTEXT*	pdwInstalledContext,		// Enumerated component's context
+ 	_Out_writes_opt_(*pcchSid)		LPSTR			szSid,				// Enumerated component's user account
+ 	_Inout_opt_				LPDWORD			pcchSid);			// in/out character count of szSid 
+-UINT WINAPI MsiEnumComponentsExW(	
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentsExW(	
+ 	_In_opt_				LPCWSTR		szUserSid,			// Account for enumeration
+ 	_In_					DWORD			dwContext,			// Contexts for enumeration
+ 	_In_					DWORD			dwIndex,			// 0-based index into installed components
+@@ -1531,11 +1532,11 @@ UINT WINAPI MsiEnumComponentsExW(
+ 
+ // Enumerate the client products for a component
+ 
+-UINT WINAPI MsiEnumClientsA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumClientsA(
+ 	_In_ LPCSTR  szComponent,
+ 	_In_ DWORD     iProductIndex,                               // 0-based index into client products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+-UINT WINAPI MsiEnumClientsW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumClientsW(
+ 	_In_ LPCWSTR  szComponent,
+ 	_In_ DWORD     iProductIndex,                               // 0-based index into client products
+ 	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
+@@ -1549,19 +1550,19 @@ UINT WINAPI MsiEnumClientsW(
+ // Enumerate the client products for a component for a given users 
+ // and context
+ 
+-UINT WINAPI MsiEnumClientsExA (	
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumClientsExA (	
+ 	_In_					LPCSTR		szComponent,		// ComponentCode for enumeration
+ 	_In_opt_				LPCSTR		szUserSid,		// Account for enumeration
+-	_In_					DWORD			dwContext,		// Contexts for enumeration
++	_Win32_AssociatedEnum_(MSIINSTALLCONTEXT) _In_					DWORD			dwContext,		// Contexts for enumeration
+ 	_In_					DWORD			dwProductIndex,		// 0-based index into component clients
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)	CHAR			szProductBuf[39],	// Enumerated component's client ProductCode
+ 	_Out_opt_				MSIINSTALLCONTEXT	*pdwInstalledContext,	// Enumerated component's client product's context
+ 	_Out_writes_opt_(*pcchSid)		LPSTR			szSid,			// Enumerated user account
+ 	_Inout_opt_				LPDWORD			pcchSid);		// in/out character count of szSid 
+-UINT WINAPI MsiEnumClientsExW (	
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumClientsExW (	
+ 	_In_					LPCWSTR		szComponent,		// ComponentCode for enumeration
+ 	_In_opt_				LPCWSTR		szUserSid,		// Account for enumeration
+-	_In_					DWORD			dwContext,		// Contexts for enumeration
++	_Win32_AssociatedEnum_(MSIINSTALLCONTEXT) _In_					DWORD			dwContext,		// Contexts for enumeration
+ 	_In_					DWORD			dwProductIndex,		// 0-based index into component clients
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)	WCHAR			szProductBuf[39],	// Enumerated component's client ProductCode
+ 	_Out_opt_				MSIINSTALLCONTEXT	*pdwInstalledContext,	// Enumerated component's client product's context
+@@ -1576,14 +1577,14 @@ UINT WINAPI MsiEnumClientsExW (
+ 
+ // Enumerate the qualifiers for an advertised component.
+ 
+-UINT WINAPI MsiEnumComponentQualifiersA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentQualifiersA(
+ 	_In_                                       LPCSTR   szComponent,             // generic component ID that is qualified
+ 	_In_                                       DWORD      iIndex,	               // 0-based index into qualifiers
+ 	_Out_writes_(*pcchQualifierBuf)            LPSTR    lpQualifierBuf,          // qualifier buffer
+ 	_Inout_                                    LPDWORD    pcchQualifierBuf,        // in/out qualifier buffer character count
+ 	_Out_writes_opt_(*pcchApplicationDataBuf)  LPSTR    lpApplicationDataBuf,    // description buffer
+ 	_Inout_opt_                                LPDWORD    pcchApplicationDataBuf); // in/out description buffer character count
+-UINT WINAPI MsiEnumComponentQualifiersW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiEnumComponentQualifiersW(
+ 	_In_                                       LPCWSTR   szComponent,             // generic component ID that is qualified
+ 	_In_                                       DWORD      iIndex,	               // 0-based index into qualifiers
+ 	_Out_writes_(*pcchQualifierBuf)            LPWSTR    lpQualifierBuf,          // qualifier buffer
+@@ -1602,12 +1603,12 @@ UINT WINAPI MsiEnumComponentQualifiersW(
+ 
+ // Open the installation for a product to obtain detailed information
+ 
+-UINT WINAPI MsiOpenProductA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenProductA(
+ 	_In_ LPCSTR   szProduct,     // product code
+-	_Out_ MSIHANDLE  *hProduct);   // returned product handle, must be closed
+-UINT WINAPI MsiOpenProductW(
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE  *hProduct);   // returned product handle, must be closed
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenProductW(
+ 	_In_ LPCWSTR   szProduct,     // product code
+-	_Out_ MSIHANDLE  *hProduct);   // returned product handle, must be closed
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE  *hProduct);   // returned product handle, must be closed
+ #ifdef UNICODE
+ #define MsiOpenProduct  MsiOpenProductW
+ #else
+@@ -1616,12 +1617,12 @@ UINT WINAPI MsiOpenProductW(
+ 
+ // Open a product package in order to access product properties
+ 
+-UINT WINAPI MsiOpenPackageA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenPackageA(
+ 	_In_ LPCSTR    szPackagePath,      // path to package, or database handle: #nnnn
+-	_Out_ MSIHANDLE  *hProduct);         // returned product handle, must be closed
+-UINT WINAPI MsiOpenPackageW(
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE  *hProduct);         // returned product handle, must be closed
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenPackageW(
+ 	_In_ LPCWSTR    szPackagePath,      // path to package, or database handle: #nnnn
+-	_Out_ MSIHANDLE  *hProduct);         // returned product handle, must be closed
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE  *hProduct);         // returned product handle, must be closed
+ #ifdef UNICODE
+ #define MsiOpenPackage  MsiOpenPackageW
+ #else
+@@ -1634,14 +1635,14 @@ UINT WINAPI MsiOpenPackageW(
+ // Option to create a "safe" engine that does not look at machine state
+ //  and does not allow for modification of machine state
+ 
+-UINT WINAPI MsiOpenPackageExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenPackageExA(
+ 	_In_ LPCSTR   szPackagePath,  // path to package, or database handle: #nnnn
+ 	_In_ DWORD      dwOptions,      // options flags to indicate whether or not to ignore machine state
+-	_Out_ MSIHANDLE *hProduct);     // returned product handle, must be closed
+-UINT WINAPI MsiOpenPackageExW(
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE *hProduct);     // returned product handle, must be closed
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiOpenPackageExW(
+ 	_In_ LPCWSTR   szPackagePath,  // path to package, or database handle: #nnnn
+ 	_In_ DWORD      dwOptions,      // options flags to indicate whether or not to ignore machine state
+-	_Out_ MSIHANDLE *hProduct);     // returned product handle, must be closed
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE *hProduct);     // returned product handle, must be closed
+ #ifdef UNICODE
+ #define MsiOpenPackageEx  MsiOpenPackageExW
+ #else
+@@ -1652,16 +1653,16 @@ UINT WINAPI MsiOpenPackageExW(
+ 
+ #if (_WIN32_MSI >= 400)
+ 
+-UINT WINAPI MsiGetPatchFileListA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetPatchFileListA(
+ 	_In_  LPCSTR    szProductCode,
+ 	_In_  LPCSTR    szPatchPackages,
+ 	_Out_ LPDWORD      pcFiles,
+-	_Outptr_result_buffer_maybenull_(*pcFiles)MSIHANDLE** pphFileRecords);
+-UINT WINAPI MsiGetPatchFileListW(
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Outptr_result_buffer_maybenull_(*pcFiles)MSIHANDLE** pphFileRecords);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetPatchFileListW(
+ 	_In_  LPCWSTR    szProductCode,
+ 	_In_  LPCWSTR    szPatchPackages,
+ 	_Out_ LPDWORD      pcFiles,
+-	_Outptr_result_buffer_maybenull_(*pcFiles)MSIHANDLE** pphFileRecords);
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Outptr_result_buffer_maybenull_(*pcFiles)MSIHANDLE** pphFileRecords);
+ #ifdef UNICODE
+ #define MsiGetPatchFileList  MsiGetPatchFileListW
+ #else
+@@ -1672,12 +1673,12 @@ UINT WINAPI MsiGetPatchFileListW(
+ 
+ // Provide the value for an installation property.
+ 
+-UINT WINAPI MsiGetProductPropertyA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductPropertyA(
+ 	_In_ MSIHANDLE   hProduct,                                   // product handle obtained from MsiOpenProduct
+ 	_In_ LPCSTR    szProperty,                                 // property name, case-sensitive
+ 	_Out_writes_opt_(*pcchValueBuf)  LPSTR     lpValueBuf,     // returned value, NULL if not desired
+ 	_Inout_opt_                      LPDWORD     pcchValueBuf);  // in/out buffer character count
+-UINT WINAPI MsiGetProductPropertyW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetProductPropertyW(
+ 	_In_ MSIHANDLE   hProduct,                                   // product handle obtained from MsiOpenProduct
+ 	_In_ LPCWSTR    szProperty,                                 // property name, case-sensitive
+ 	_Out_writes_opt_(*pcchValueBuf)  LPWSTR     lpValueBuf,     // returned value, NULL if not desired
+@@ -1692,9 +1693,9 @@ UINT WINAPI MsiGetProductPropertyW(
+ // Determine whether a file is a package
+ // Returns ERROR_SUCCESS if file is a package.
+ 
+-UINT WINAPI MsiVerifyPackageA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiVerifyPackageA(
+ 	_In_ LPCSTR      szPackagePath);   // location of package
+-UINT WINAPI MsiVerifyPackageW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiVerifyPackageW(
+ 	_In_ LPCWSTR      szPackagePath);   // location of package
+ #ifdef UNICODE
+ #define MsiVerifyPackage  MsiVerifyPackageW
+@@ -1709,7 +1710,7 @@ UINT WINAPI MsiVerifyPackageW(
+ //   1 = highest priority, feature installed if parent is installed
+ //  >1 = decreasing priority, feature installation based on InstallLevel property
+ 
+-UINT WINAPI MsiGetFeatureInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureInfoA(
+ 	_In_                             MSIHANDLE   hProduct,      // product handle obtained from MsiOpenProduct
+ 	_In_                             LPCSTR    szFeature,     // feature name
+ 	_Out_opt_                        LPDWORD     lpAttributes,  // attribute flags for the feature, using INSTALLFEATUREATTRIBUTE
+@@ -1717,7 +1718,7 @@ UINT WINAPI MsiGetFeatureInfoA(
+ 	_Inout_opt_                      LPDWORD     pcchTitleBuf,  // in/out buffer character count
+ 	_Out_writes_opt_(*pcchHelpBuf)   LPSTR     lpHelpBuf,     // returned description, NULL if not desired
+ 	_Inout_opt_                      LPDWORD     pcchHelpBuf);  // in/out buffer character count
+-UINT WINAPI MsiGetFeatureInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFeatureInfoW(
+ 	_In_                             MSIHANDLE   hProduct,      // product handle obtained from MsiOpenProduct
+ 	_In_                             LPCWSTR    szFeature,     // feature name
+ 	_Out_opt_                        LPDWORD     lpAttributes,  // attribute flags for the feature, using INSTALLFEATUREATTRIBUTE
+@@ -1740,11 +1741,11 @@ UINT WINAPI MsiGetFeatureInfoW(
+ // This would typically occur due to failue to establish feature availability
+ // The product feature having the smallest incremental cost is installed
+ 
+-UINT WINAPI MsiInstallMissingComponentA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiInstallMissingComponentA(
+ 	_In_ LPCSTR      szProduct,        // product code
+ 	_In_ LPCSTR      szComponent,      // component Id, string GUID
+ 	_In_ INSTALLSTATE eInstallState);    // local/source/default, absent invalid
+-UINT WINAPI MsiInstallMissingComponentW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiInstallMissingComponentW(
+ 	_In_ LPCWSTR      szProduct,        // product code
+ 	_In_ LPCWSTR      szComponent,      // component Id, string GUID
+ 	_In_ INSTALLSTATE eInstallState);    // local/source/default, absent invalid
+@@ -1759,10 +1760,10 @@ UINT WINAPI MsiInstallMissingComponentW(
+ // The missing component is determined from the product's File table, then
+ // the product feature having the smallest incremental cost is installed
+ 
+-UINT WINAPI MsiInstallMissingFileA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiInstallMissingFileA(
+ 	_In_ LPCSTR      szProduct,        // product code
+ 	_In_ LPCSTR      szFile);          // file name, without path
+-UINT WINAPI MsiInstallMissingFileW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiInstallMissingFileW(
+ 	_In_ LPCWSTR      szProduct,        // product code
+ 	_In_ LPCWSTR      szFile);          // file name, without path
+ #ifdef UNICODE
+@@ -1776,11 +1777,11 @@ UINT WINAPI MsiInstallMissingFileW(
+ // but is not guaranteed to find the correct product for the caller.
+ // MsiGetComponentPath should always be called when possible.
+ 
+-INSTALLSTATE WINAPI MsiLocateComponentA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiLocateComponentA(
+ 	_In_ LPCSTR szComponent,                         // component Id, string GUID
+ 	_Out_writes_opt_(*pcchBuf)  LPSTR  lpPathBuf,    // returned path
+ 	_Inout_opt_                 LPDWORD  pcchBuf);     // in/out buffer character count
+-INSTALLSTATE WINAPI MsiLocateComponentW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ INSTALLSTATE WINAPI MsiLocateComponentW(
+ 	_In_ LPCWSTR szComponent,                         // component Id, string GUID
+ 	_Out_writes_opt_(*pcchBuf)  LPWSTR  lpPathBuf,    // returned path
+ 	_Inout_opt_                 LPDWORD  pcchBuf);     // in/out buffer character count
+@@ -1800,14 +1801,14 @@ INSTALLSTATE WINAPI MsiLocateComponentW(
+ // and removes all network sources from the list. A NULL or empty value for
+ // the user name indicates the per-machine install.
+ 
+-UINT WINAPI MsiSourceListClearAllA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearAllA(
+ 	_In_ LPCSTR szProduct,          // product code
+ 	_In_opt_ LPCSTR szUserName,     // user name or NULL/empty for per-machine
+-	_Reserved_  DWORD    dwReserved); // reserved - must be 0
+-UINT WINAPI MsiSourceListClearAllW(
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD    dwReserved); // reserved - must be 0
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearAllW(
+ 	_In_ LPCWSTR szProduct,          // product code
+ 	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
+-	_Reserved_  DWORD    dwReserved); // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  DWORD    dwReserved); // reserved - must be 0
+ #ifdef UNICODE
+ #define MsiSourceListClearAll  MsiSourceListClearAllW
+ #else
+@@ -1818,15 +1819,15 @@ UINT WINAPI MsiSourceListClearAllW(
+ // and adds the provided source as a new network source. A NULL or empty 
+ // value for the user name indicates the per-machine install.
+ 
+-UINT WINAPI MsiSourceListAddSourceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddSourceA(
+ 	_In_ LPCSTR szProduct,          // product code
+ 	_In_opt_ LPCSTR szUserName,     // user name or NULL/empty for per-machine
+-	_Reserved_ DWORD    dwReserved,   // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved,   // reserved - must be 0
+ 	_In_ LPCSTR szSource);          // new source
+-UINT WINAPI MsiSourceListAddSourceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddSourceW(
+ 	_In_ LPCWSTR szProduct,          // product code
+ 	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
+-	_Reserved_ DWORD    dwReserved,   // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved,   // reserved - must be 0
+ 	_In_ LPCWSTR szSource);          // new source
+ #ifdef UNICODE
+ #define MsiSourceListAddSource  MsiSourceListAddSourceW
+@@ -1837,14 +1838,14 @@ UINT WINAPI MsiSourceListAddSourceW(
+ // Forces the installer to reevaluate the list of sources the next time that
+ // the specified product needs a source.
+ 
+-UINT WINAPI MsiSourceListForceResolutionA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListForceResolutionA(
+ 	_In_ LPCSTR szProduct,          // product code
+ 	_In_opt_ LPCSTR szUserName,     // user name or NULL/empty for per-machine
+-	_Reserved_ DWORD    dwReserved);  // reserved - must be 0
+-UINT WINAPI MsiSourceListForceResolutionW(
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);  // reserved - must be 0
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListForceResolutionW(
+ 	_In_ LPCWSTR szProduct,          // product code
+ 	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
+-	_Reserved_ DWORD    dwReserved);  // reserved - must be 0
++	_WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD    dwReserved);  // reserved - must be 0
+ #ifdef UNICODE
+ #define MsiSourceListForceResolution  MsiSourceListForceResolutionW
+ #else
+@@ -1857,14 +1858,14 @@ UINT WINAPI MsiSourceListForceResolutionW(
+ // Adds a source or moves a source within the list of sources for the 
+ // specified product or patch instance. The source can be network/url type.
+ 
+-UINT WINAPI MsiSourceListAddSourceExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddSourceExA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode,// Source will be added to this product or patch
+ 	_In_opt_ LPCSTR szUserSid,           // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,      // Context of this product/patch instance
+ 	_In_ DWORD dwOptions,                  // Additional qualifiers
+ 	_In_ LPCSTR szSource,                // source to be added/re-ordered
+ 	_In_ DWORD dwIndex);                   // new index for the source
+-UINT WINAPI MsiSourceListAddSourceExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddSourceExW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode,// Source will be added to this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,           // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,      // Context of this product/patch instance
+@@ -1879,7 +1880,7 @@ UINT WINAPI MsiSourceListAddSourceExW(
+ 
+ // Add or update a media source for the specified product or patch instance
+ 
+-UINT WINAPI MsiSourceListAddMediaDiskA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddMediaDiskA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode,// Disk will be added to this product or patch
+ 	_In_opt_ LPCSTR szUserSid,           // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,      // Context of this product/patch instance
+@@ -1887,7 +1888,7 @@ UINT WINAPI MsiSourceListAddMediaDiskA(
+ 	_In_ DWORD dwDiskId,                   // ID of the disk to be added/updated
+ 	_In_opt_ LPCSTR szVolumeLabel,       // Volume Label of the disk
+ 	_In_opt_ LPCSTR szDiskPrompt);       // Disk Prompt of the disk
+-UINT WINAPI MsiSourceListAddMediaDiskW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListAddMediaDiskW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode,// Disk will be added to this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,           // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,      // Context of this product/patch instance
+@@ -1903,13 +1904,13 @@ UINT WINAPI MsiSourceListAddMediaDiskW(
+ 
+ // Remove an existing source for the specified product or patch instance
+ 
+-UINT WINAPI MsiSourceListClearSourceA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearSourceA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode, // Source will be cleared for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+ 	_In_ DWORD dwOptions,                   // Additional qualifiers
+ 	_In_ LPCSTR szSource);                // source to be removed
+-UINT WINAPI MsiSourceListClearSourceW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearSourceW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode, // Source will be cleared for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+@@ -1924,13 +1925,13 @@ UINT WINAPI MsiSourceListClearSourceW(
+ // Remove an existing registered disk under the media source for the specified product or
+ // patch instance
+ 
+-UINT WINAPI MsiSourceListClearMediaDiskA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearMediaDiskA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode, // Disk will be cleared for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+ 	_In_ DWORD dwOptions,                   // Additional qualifiers
+ 	_In_ DWORD dwDiskId);                   // DiskID to be removed
+-UINT WINAPI MsiSourceListClearMediaDiskW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearMediaDiskW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode, // Disk will be cleared for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+@@ -1945,12 +1946,12 @@ UINT WINAPI MsiSourceListClearMediaDiskW(
+ // Remove all existing sources of the given source type for the specified product or patch
+ // instance
+ 
+-UINT WINAPI MsiSourceListClearAllExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearAllExA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode, // All sources will be cleared for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+ 	_In_ DWORD dwOptions);                  // Additional qualifiers
+-UINT WINAPI MsiSourceListClearAllExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListClearAllExW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode, // All sources will be cleared for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+@@ -1964,12 +1965,12 @@ UINT WINAPI MsiSourceListClearAllExW(
+ // Forces the installer to reevaluate the list of sources the next time that
+ // the specified product or patch instance needs a source.
+ 
+-UINT WINAPI MsiSourceListForceResolutionExA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListForceResolutionExA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode,  // Source Resolution will be forced for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,             // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,        // Context of this product/patch instance
+ 	_In_ DWORD dwOptions);                   // Additional qualifiers
+-UINT WINAPI MsiSourceListForceResolutionExW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListForceResolutionExW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode,  // Source Resolution will be forced for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,             // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,        // Context of this product/patch instance
+@@ -1982,14 +1983,14 @@ UINT WINAPI MsiSourceListForceResolutionExW(
+ 
+ // Set the source list property to the provided value for the specified product or patch instance
+ 
+-UINT WINAPI MsiSourceListSetInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListSetInfoA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode, // Source Info will be set for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+ 	_In_ DWORD dwOptions,                   // Additional qualifiers
+ 	_In_ LPCSTR szProperty,               // Property being set/modified
+ 	_In_ LPCSTR szValue);                 // Value to be set
+-UINT WINAPI MsiSourceListSetInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListSetInfoW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode, // Source Info will be set for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,       // Context of this product/patch instance
+@@ -2004,7 +2005,7 @@ UINT WINAPI MsiSourceListSetInfoW(
+ 
+ // Query the given source list property for the specified product or patch instance
+ 
+-UINT WINAPI MsiSourceListGetInfoA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListGetInfoA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode,        // Source Info will be queried for this produt or patch
+ 	_In_opt_ LPCSTR szUserSid,                   // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,              // Context of this product/patch instance
+@@ -2012,7 +2013,7 @@ UINT WINAPI MsiSourceListGetInfoA(
+ 	_In_ LPCSTR szProperty,                      // Property being queried
+ 	_Out_writes_opt_(*pcchValue)  LPSTR szValue, // Buffer to get the value
+ 	_Inout_opt_ LPDWORD pcchValue);                // in/out character count of szValue
+-UINT WINAPI MsiSourceListGetInfoW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListGetInfoW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode,        // Source Info will be queried for this produt or patch
+ 	_In_opt_ LPCWSTR szUserSid,                   // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,              // Context of this product/patch instance
+@@ -2028,7 +2029,7 @@ UINT WINAPI MsiSourceListGetInfoW(
+ 
+ // Enumerate all sources for the specified product or patch instance
+ 
+-UINT WINAPI MsiSourceListEnumSourcesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListEnumSourcesA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode,             // Sources will be enumerated for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,                        // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,                   // Context of this product/patch instance
+@@ -2036,7 +2037,7 @@ UINT WINAPI MsiSourceListEnumSourcesA(
+ 	_In_ DWORD dwIndex,                                 // Index value for enumeration
+ 	_Out_writes_opt_(*pcchSource)  LPSTR szSource,    // Buffer to receive the enumerated source
+ 	_Inout_opt_                    LPDWORD pcchSource); // in/out character count of szSource
+-UINT WINAPI MsiSourceListEnumSourcesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListEnumSourcesW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode,             // Sources will be enumerated for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,                        // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,                   // Context of this product/patch instance
+@@ -2052,7 +2053,7 @@ UINT WINAPI MsiSourceListEnumSourcesW(
+ 
+ // Enumerate all registered media disks for the specified product or patch instance
+ 
+-UINT WINAPI MsiSourceListEnumMediaDisksA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListEnumMediaDisksA(
+ 	_In_ LPCSTR szProductCodeOrPatchCode,                      // Disks will be enumerated for this product or patch
+ 	_In_opt_ LPCSTR szUserSid,                                 // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,                            // Context of this product/patch instance
+@@ -2063,7 +2064,7 @@ UINT WINAPI MsiSourceListEnumMediaDisksA(
+ 	_Inout_opt_                         LPDWORD pcchVolumeLabel, // in/out character count of szVolumeLabel
+ 	_Out_writes_opt_(*pcchDiskPrompt)   LPSTR szDiskPrompt,    // DiskPrompt of the disk being enumerated
+ 	_Inout_opt_                         LPDWORD pcchDiskPrompt); // in/out character count of szDiskPrompt
+-UINT WINAPI MsiSourceListEnumMediaDisksW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiSourceListEnumMediaDisksW(
+ 	_In_ LPCWSTR szProductCodeOrPatchCode,                      // Disks will be enumerated for this product or patch
+ 	_In_opt_ LPCWSTR szUserSid,                                 // Account of this product/patch instance
+ 	_In_ MSIINSTALLCONTEXT dwContext,                            // Context of this product/patch instance
+@@ -2088,13 +2089,13 @@ UINT WINAPI MsiSourceListEnumMediaDisksW(
+ 
+ // Give the version string and language for a specified file
+ 
+-UINT WINAPI MsiGetFileVersionA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFileVersionA(
+ 	_In_                               LPCSTR    szFilePath,       // path to the file
+ 	_Out_writes_opt_(*pcchVersionBuf)  LPSTR     lpVersionBuf,     // returned version string
+ 	_Inout_opt_                        LPDWORD     pcchVersionBuf,   // in/out buffer byte count
+ 	_Out_writes_opt_(*pcchLangBuf)     LPSTR     lpLangBuf,        // returned language string
+ 	_Inout_opt_                        LPDWORD     pcchLangBuf);     // in/out buffer byte count
+-UINT WINAPI MsiGetFileVersionW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFileVersionW(
+ 	_In_                               LPCWSTR    szFilePath,       // path to the file
+ 	_Out_writes_opt_(*pcchVersionBuf)  LPWSTR     lpVersionBuf,     // returned version string
+ 	_Inout_opt_                        LPDWORD     pcchVersionBuf,   // in/out buffer byte count
+@@ -2109,11 +2110,11 @@ UINT WINAPI MsiGetFileVersionW(
+ 
+ #if (_WIN32_MSI >=  150)
+ 
+-UINT WINAPI MsiGetFileHashA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFileHashA(
+ 	_In_ LPCSTR         szFilePath,  // path to the file
+ 	_In_ DWORD            dwOptions,   // options
+ 	_Inout_ PMSIFILEHASHINFO pHash);     // returned file hash info
+-UINT WINAPI MsiGetFileHashW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetFileHashW(
+ 	_In_ LPCWSTR         szFilePath,  // path to the file
+ 	_In_ DWORD            dwOptions,   // options
+ 	_Inout_ PMSIFILEHASHINFO pHash);     // returned file hash info
+@@ -2128,13 +2129,13 @@ UINT WINAPI MsiGetFileHashW(
+ #if (_WIN32_MSI >= 150)
+ #ifndef _MSI_NO_CRYPTO
+ 
+-HRESULT WINAPI MsiGetFileSignatureInformationA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ HRESULT WINAPI MsiGetFileSignatureInformationA(
+ 	_In_ LPCSTR szSignedObjectPath,                     // path to the signed object
+ 	_In_ DWORD dwFlags,                                   // special extra error case flags
+ 	_Outptr_ PCCERT_CONTEXT  *ppcCertContext,          // returned signer cert context
+ 	_Out_writes_bytes_opt_(*pcbHashData) LPBYTE   pbHashData,   // returned hash buffer, NULL if not desired
+ 	_Inout_opt_ LPDWORD pcbHashData);                     // in/out buffer byte count
+-HRESULT WINAPI MsiGetFileSignatureInformationW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ HRESULT WINAPI MsiGetFileSignatureInformationW(
+ 	_In_ LPCWSTR szSignedObjectPath,                     // path to the signed object
+ 	_In_ DWORD dwFlags,                                   // special extra error case flags
+ 	_Outptr_ PCCERT_CONTEXT  *ppcCertContext,          // returned signer cert context
+@@ -2159,12 +2160,12 @@ HRESULT WINAPI MsiGetFileSignatureInformationW(
+ // examine a shortcut, and retrieve its descriptor information 
+ // if available.
+ 
+-UINT WINAPI MsiGetShortcutTargetA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetShortcutTargetA(
+ 	_In_                                   LPCSTR    szShortcutPath,    // full file path for the shortcut
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)     LPSTR     szProductCode,     // returned product code   - GUID
+ 	_Out_writes_opt_(MAX_FEATURE_CHARS+1)  LPSTR     szFeatureId,       // returned Feature Id.
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)     LPSTR     szComponentCode);  // returned component code - GUID
+-UINT WINAPI MsiGetShortcutTargetW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiGetShortcutTargetW(
+ 	_In_                                   LPCWSTR    szShortcutPath,    // full file path for the shortcut
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)     LPWSTR     szProductCode,     // returned product code   - GUID
+ 	_Out_writes_opt_(MAX_FEATURE_CHARS+1)  LPWSTR     szFeatureId,       // returned Feature Id.
+@@ -2182,13 +2183,13 @@ UINT WINAPI MsiGetShortcutTargetW(
+ // checks to see if a product is managed
+ // checks per-machine if called from system context, per-user if from
+ // user context
+-UINT WINAPI MsiIsProductElevatedA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiIsProductElevatedA(
+ 	_In_ LPCSTR szProduct,  // product code
+ 	_Out_ BOOL *pfElevated);  // result   
+ // checks to see if a product is managed
+ // checks per-machine if called from system context, per-user if from
+ // user context
+-UINT WINAPI MsiIsProductElevatedW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiIsProductElevatedW(
+ 	_In_ LPCWSTR szProduct,  // product code
+ 	_Out_ BOOL *pfElevated);  // result   
+ #ifdef UNICODE
+@@ -2204,9 +2205,9 @@ UINT WINAPI MsiIsProductElevatedW(
+ 
+ // Caller notifies us of a user who's been moved and results in a sid change.
+ 
+-UINT WINAPI MsiNotifySidChangeA(_In_ LPCSTR pOldSid,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiNotifySidChangeA(_In_ LPCSTR pOldSid,
+                                 _In_ LPCSTR pNewSid);
+-UINT WINAPI MsiNotifySidChangeW(_In_ LPCWSTR pOldSid,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiNotifySidChangeW(_In_ LPCWSTR pOldSid,
+                                 _In_ LPCWSTR pNewSid);
+ #ifdef UNICODE
+ #define MsiNotifySidChange  MsiNotifySidChangeW
+@@ -2223,17 +2224,17 @@ UINT WINAPI MsiNotifySidChangeW(_In_ LPCWSTR pOldSid,
+ #if (_WIN32_MSI >=  450)
+ 
+ // Start a multi package transaction
+-UINT WINAPI MsiBeginTransactionA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiBeginTransactionA(
+ 	_In_ LPCSTR szName,                         // A name to identify the transaction
+ 	_In_ DWORD dwTransactionAttributes,           // Attributes to control the nature of the transaction
+-	_Out_ MSIHANDLE* phTransactionHandle,         // Transaction handle
+-	_Out_ HANDLE* phChangeOfOwnerEvent);          // Change Of Owner Event handle
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE* phTransactionHandle,         // Transaction handle
++	_Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phChangeOfOwnerEvent);          // Change Of Owner Event handle
+ // Start a multi package transaction
+-UINT WINAPI MsiBeginTransactionW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ UINT WINAPI MsiBeginTransactionW(
+ 	_In_ LPCWSTR szName,                         // A name to identify the transaction
+ 	_In_ DWORD dwTransactionAttributes,           // Attributes to control the nature of the transaction
+-	_Out_ MSIHANDLE* phTransactionHandle,         // Transaction handle
+-	_Out_ HANDLE* phChangeOfOwnerEvent);          // Change Of Owner Event handle
++	_Win32_RAIIFree_(MsiCloseHandle, -1, 0) _Out_ MSIHANDLE* phTransactionHandle,         // Transaction handle
++	_Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phChangeOfOwnerEvent);          // Change Of Owner Event handle
+ #ifdef UNICODE
+ #define MsiBeginTransaction  MsiBeginTransactionW
+ #else
+@@ -2241,14 +2242,14 @@ UINT WINAPI MsiBeginTransactionW(
+ #endif // !UNICODE
+ 
+ // End a multi package transaction
+-UINT WINAPI MsiEndTransaction(
+-	_In_ DWORD dwTransactionState);      // Flags to indicate how to end a transaction
++_Windows_SupportedOS_Windows8_ UINT WINAPI MsiEndTransaction(
++	_Win32_AssociatedEnum_(MSITRANSACTIONSTATE) _In_ DWORD dwTransactionState);      // Flags to indicate how to end a transaction
+ 
+ // Join an already created multi package transaction
+-UINT WINAPI MsiJoinTransaction(
++_Windows_SupportedOS_Windows8_ UINT WINAPI MsiJoinTransaction(
+ 	_In_ MSIHANDLE hTransactionHandle,   //Transaction handle returned by MsiBeginTransaction
+ 	_In_ DWORD dwTransactionAttributes,  //Transaction attributes
+-	_Out_ HANDLE* phChangeOfOwnerEvent); //Change Of Owner Event handle
++	_Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phChangeOfOwnerEvent); //Change Of Owner Event handle
+ 
+ 
+ #endif // #if (_WIN32_MSI >= 450)
+@@ -2444,5 +2445,20 @@ UINT WINAPI MsiJoinTransaction(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MSIASSEMBLYINFO_NETASSEMBLY")
++#undef MSIASSEMBLYINFO_NETASSEMBLY
++#pragma push_macro("MSIASSEMBLYINFO_WIN32ASSEMBLY")
++#undef MSIASSEMBLYINFO_WIN32ASSEMBLY
++enum MSIASSEMBLYINFO : unsigned int
++{
++    MSIASSEMBLYINFO_NETASSEMBLY = 0U,
++    MSIASSEMBLYINFO_WIN32ASSEMBLY = 1U,
++};
++#pragma pop_macro("MSIASSEMBLYINFO_WIN32ASSEMBLY")
++#pragma pop_macro("MSIASSEMBLYINFO_NETASSEMBLY")
++#endif
++
+ #endif // _MSI_H_
+ 

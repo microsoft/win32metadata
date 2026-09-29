@@ -1,0 +1,114 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
+index e067444153..370a0e04a3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MSWSock.h
+@@ -22,6 +22,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if !defined(_WINSOCK_DEPRECATED_BY)
+ #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
+@@ -104,7 +105,11 @@ extern "C" {
+  *
+  * This Ioctl code is available only on WinXP SP2 and Win2k3 SP1.
+  */
++#endif
++#if (defined(WIN32METADATA) && !defined(SIO_SOCKET_CLOSE_NOTIFY)) || (((((_WIN32_WINNT < 0x0600) && (_WIN32_WINNT >= 0x0501)))))
+ #define SIO_SOCKET_CLOSE_NOTIFY     _WSAIOW(IOC_VENDOR,13)
++#endif
++#if((_WIN32_WINNT < 0x0600) && (_WIN32_WINNT >= 0x0501))
+ 
+ #endif //(_WIN32_WINNT < 0x0600 && _WIN32_WINNT >= 0x0501)
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -127,7 +132,7 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ _WINSOCK_DEPRECATED_BY("WSARecv()")
+ #if(_WIN32_WINNT < 0x0600)
+-int
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("MSWSOCK.dll") _Win32_SetLastError_ int
+ PASCAL FAR
+ WSARecvEx(
+     _In_ SOCKET s,
+@@ -136,7 +141,7 @@ WSARecvEx(
+     _Inout_ int FAR *flags
+     );
+ #else //(_WIN32_WINNT < 0x0600)
+-INT
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("mswsock.dll") INT
+ PASCAL FAR
+ WSARecvEx(
+     _In_ SOCKET s,
+@@ -148,7 +153,7 @@ WSARecvEx(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+-typedef struct _TRANSMIT_FILE_BUFFERS {
++typedef struct   _TRANSMIT_FILE_BUFFERS {
+     LPVOID Head;
+     DWORD HeadLength;
+     LPVOID Tail;
+@@ -162,9 +167,10 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
+ #define TF_USE_SYSTEM_THREAD  0x10
+ #define TF_USE_KERNEL_APC     0x20
+ 
++
+ BOOL
+ PASCAL FAR
+-TransmitFile (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") TransmitFile (
+     _In_ SOCKET hSocket,
+     _In_ HANDLE hFile,
+     _In_ DWORD nNumberOfBytesToWrite,
+@@ -174,9 +180,10 @@ TransmitFile (
+     _In_  DWORD dwReserved
+     );
+ 
++
+ BOOL
+ PASCAL FAR
+-AcceptEx (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") AcceptEx (
+     _In_ SOCKET sListenSocket,
+     _In_ SOCKET sAcceptSocket,
+     _Out_writes_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
+@@ -187,9 +194,10 @@ AcceptEx (
+     _Inout_ LPOVERLAPPED lpOverlapped
+     );
+ 
++
+ VOID
+ PASCAL FAR
+-GetAcceptExSockaddrs (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") GetAcceptExSockaddrs (
+     _In_reads_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
+     _In_ DWORD dwReceiveDataLength,
+     _In_ DWORD dwLocalAddressLength,
+@@ -395,7 +403,7 @@ typedef struct _NLA_BLOB {
+         // header.type -> NLA_CONNECTIVITY
+         struct {
+             NLA_CONNECTIVITY_TYPE type;
+-            NLA_INTERNET internet;
++            _Win32_AssociatedEnum_(NLA_INTERNET) NLA_INTERNET internet;
+         } connectivity;
+ 
+         // header.type -> NLA_ICS
+@@ -635,7 +643,7 @@ typedef INT (PASCAL FAR * LPFN_RIONOTIFY)(
+ );
+ 
+ typedef RIO_BUFFERID (PASCAL FAR * LPFN_RIOREGISTERBUFFER)(
+-    _In_ PCHAR DataBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCHAR DataBuffer,
+     _In_ DWORD DataLength
+ );
+ 
+@@ -650,7 +658,7 @@ typedef BOOL (PASCAL FAR * LPFN_RIORESIZEREQUESTQUEUE) (
+     _In_ DWORD MaxOutstandingSend
+ );
+ 
+-typedef struct _RIO_EXTENSION_FUNCTION_TABLE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _RIO_EXTENSION_FUNCTION_TABLE {
+     DWORD cbSize;
+ 
+     LPFN_RIORECEIVE RIOReceive;

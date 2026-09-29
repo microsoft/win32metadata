@@ -1,0 +1,75 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12shader.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12shader.h
+index 6593cd5b89..964dfc0bcc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12shader.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12shader.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //////////////////////////////////////////////////////////////////////////////
+ //
+ //  Copyright (c) Microsoft Corporation.
+@@ -308,7 +309,7 @@ DEFINE_GUID(IID_ID3D12ShaderReflectionType,
+ #undef INTERFACE
+ #define INTERFACE ID3D12ShaderReflectionType
+ 
+-DECLARE_INTERFACE(ID3D12ShaderReflectionType)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12ShaderReflectionType)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D12_SHADER_TYPE_DESC *pDesc) PURE;
+ 
+@@ -333,7 +334,7 @@ DEFINE_GUID(IID_ID3D12ShaderReflectionVariable,
+ #undef INTERFACE
+ #define INTERFACE ID3D12ShaderReflectionVariable
+ 
+-DECLARE_INTERFACE(ID3D12ShaderReflectionVariable)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12ShaderReflectionVariable)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D12_SHADER_VARIABLE_DESC *pDesc) PURE;
+ 
+@@ -351,9 +352,9 @@ DEFINE_GUID(IID_ID3D12ShaderReflectionConstantBuffer,
+ #undef INTERFACE
+ #define INTERFACE ID3D12ShaderReflectionConstantBuffer
+ 
+-DECLARE_INTERFACE(ID3D12ShaderReflectionConstantBuffer)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12ShaderReflectionConstantBuffer)
+ {
+-    STDMETHOD(GetDesc)(THIS_ D3D12_SHADER_BUFFER_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D12_SHADER_BUFFER_DESC *pDesc) PURE;
+ 
+     STDMETHOD_(ID3D12ShaderReflectionVariable*, GetVariableByIndex)(THIS_ _In_ UINT Index) PURE;
+     STDMETHOD_(ID3D12ShaderReflectionVariable*, GetVariableByName)(THIS_ _In_ LPCSTR Name) PURE;
+@@ -372,7 +373,7 @@ DEFINE_GUID(IID_ID3D12ShaderReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D12ShaderReflection
+ 
+-DECLARE_INTERFACE_(ID3D12ShaderReflection, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12ShaderReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid,
+                               _Out_ LPVOID *ppv) PURE;
+@@ -426,7 +427,7 @@ DEFINE_GUID(IID_ID3D12LibraryReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D12LibraryReflection
+ 
+-DECLARE_INTERFACE_(ID3D12LibraryReflection, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12LibraryReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -445,7 +446,7 @@ DEFINE_GUID(IID_ID3D12FunctionReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D12FunctionReflection
+ 
+-DECLARE_INTERFACE(ID3D12FunctionReflection)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12FunctionReflection)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D12_FUNCTION_DESC * pDesc) PURE;
+ 
+@@ -472,7 +473,7 @@ DEFINE_GUID(IID_ID3D12FunctionParameterReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D12FunctionParameterReflection
+ 
+-DECLARE_INTERFACE(ID3D12FunctionParameterReflection)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D12FunctionParameterReflection)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D12_PARAMETER_DESC * pDesc) PURE;
+ };

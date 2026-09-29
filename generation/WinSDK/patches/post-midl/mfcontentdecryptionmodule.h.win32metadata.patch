@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfcontentdecryptionmodule.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfcontentdecryptionmodule.h
+index d21a9bcf2f..3efb412596 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfcontentdecryptionmodule.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfcontentdecryptionmodule.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -111,7 +112,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4e233efd-1dd2-49e8-b577-d63eee4c0d33")
++    MIDL_INTERFACE("4e233efd-1dd2-49e8-b577-d63eee4c0d33") _Windows_SupportedOS_19041_ 
+     IMFContentDecryptionModuleSession : public IUnknown
+     {
+     public:
+@@ -301,7 +302,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSessionCallbacks;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3f96ee40-ad81-4096-8470-59a4b770f89a")
++    MIDL_INTERFACE("3f96ee40-ad81-4096-8470-59a4b770f89a") _Windows_SupportedOS_19041_ 
+     IMFContentDecryptionModuleSessionCallbacks : public IUnknown
+     {
+     public:
+@@ -407,7 +408,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("87be986c-10be-4943-bf48-4b54ce1983a2")
++    MIDL_INTERFACE("87be986c-10be-4943-bf48-4b54ce1983a2") _Windows_SupportedOS_19041_ 
+     IMFContentDecryptionModule : public IUnknown
+     {
+     public:
+@@ -600,7 +601,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleAccess;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a853d1f4-e2a0-4303-9edc-f1a68ee43136")
++    MIDL_INTERFACE("a853d1f4-e2a0-4303-9edc-f1a68ee43136") _Windows_SupportedOS_19041_ 
+     IMFContentDecryptionModuleAccess : public IUnknown
+     {
+     public:
+@@ -728,7 +729,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7d5abf16-4cbb-4e08-b977-9ba59049943e")
++    MIDL_INTERFACE("7d5abf16-4cbb-4e08-b977-9ba59049943e") _Windows_SupportedOS_19041_ 
+     IMFContentDecryptionModuleFactory : public IUnknown
+     {
+     public:
+@@ -841,7 +842,7 @@ EXTERN_GUID(MF_ENCRYPTEDMEDIAEXTENSIONS_ACTIVATABLE_CLASS_ID,
+     0x77631a31, 0xe5e7, 0x4785, 0xbf, 0x17, 0x20, 0xf5, 0x7b, 0x22, 0x48, 0x02);
+ EXTERN_GUID(MF_ENCRYPTEDMEDIAEXTENSIONS_INITIALIZATION_DATA,
+     0x3e73735c, 0xe6c0, 0x481d, 0x82, 0x60, 0xee, 0x5d, 0xb1, 0x34, 0x3b, 0x5f);
+-STDAPI MFCreateEncryptedMediaExtensionsStoreActivate(
++_Windows_SupportedOS_19041_ _Win32_ImportLibrary_("mf.dll") STDAPI MFCreateEncryptedMediaExtensionsStoreActivate(
+     _In_ IMFPMPHostApp *pmpHost,
+     _In_ IStream *objectStream,
+     _In_ LPCWSTR classId,

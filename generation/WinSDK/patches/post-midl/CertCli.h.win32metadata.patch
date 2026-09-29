@@ -1,0 +1,421 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
+index 24d4f92dc5..62a1ffd8e2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertCli.h
+@@ -162,6 +162,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -181,12 +182,12 @@ EXTERN_C const IID IID_ICertGetConfig;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("c7ea09c0-ce17-11d0-8833-00a0c903b83c")
+-    ICertGetConfig : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertGetConfig : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetConfig( 
+-            /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrOut) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(CERT_GET_CONFIG_FLAGS) LONG Flags,
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrOut) = 0;
+         
+     };
+     
+@@ -262,7 +263,7 @@ EXTERN_C const IID IID_ICertGetConfig;
+         END_INTERFACE
+     } ICertGetConfigVtbl;
+ 
+-    interface ICertGetConfig
++    interface _Windows_SupportedOS_Server2003_ ICertGetConfig
+     {
+         CONST_VTBL struct ICertGetConfigVtbl *lpVtbl;
+     };
+@@ -321,7 +322,7 @@ EXTERN_C const IID IID_ICertConfig;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("372fce34-4324-11d0-8810-00a0c903b83c")
+-    ICertConfig : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertConfig : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Reset( 
+@@ -333,11 +334,11 @@ EXTERN_C const IID IID_ICertConfig;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetField( 
+             /* [in] */ __RPC__in const BSTR strFieldName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrOut) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrOut) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConfig( 
+             /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrOut) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrOut) = 0;
+         
+     };
+     
+@@ -430,7 +431,7 @@ EXTERN_C const IID IID_ICertConfig;
+         END_INTERFACE
+     } ICertConfigVtbl;
+ 
+-    interface ICertConfig
++    interface _Windows_SupportedOS_Server2003_ ICertConfig
+     {
+         CONST_VTBL struct ICertConfigVtbl *lpVtbl;
+     };
+@@ -498,7 +499,7 @@ EXTERN_C const IID IID_ICertConfig2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7a18edde-7e78-4163-8ded-78e2c9cee924")
+-    ICertConfig2 : public ICertConfig
++    _Windows_SupportedOS_Server2003_ ICertConfig2 : public ICertConfig
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetSharedFolder( 
+@@ -600,7 +601,7 @@ EXTERN_C const IID IID_ICertConfig2;
+         END_INTERFACE
+     } ICertConfig2Vtbl;
+ 
+-    interface ICertConfig2
++    interface _Windows_SupportedOS_Server2003_ ICertConfig2
+     {
+         CONST_VTBL struct ICertConfig2Vtbl *lpVtbl;
+     };
+@@ -671,8 +672,8 @@ EXTERN_C const IID IID_ICertRequest;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("014e4840-5523-11d0-8812-00a0c903b83c")
+-    ICertRequest : public IDispatch
++    MIDL_INTERFACE("014e4840-5523-11d0-8812-00a0c903b83c") _Windows_SupportedOS_WindowsXP_ 
++      ICertRequest : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Submit( 
+@@ -694,17 +695,17 @@ EXTERN_C const IID IID_ICertRequest;
+             /* [retval][out] */ __RPC__out LONG *pRequestId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDispositionMessage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDispositionMessage) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrDispositionMessage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCACertificate( 
+             /* [in] */ LONG fExchangeCertificate,
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrCertificate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCertificate( 
+             /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrCertificate) = 0;
+         
+     };
+     
+@@ -819,7 +820,7 @@ EXTERN_C const IID IID_ICertRequest;
+         END_INTERFACE
+     } ICertRequestVtbl;
+ 
+-    interface ICertRequest
++    interface _Windows_SupportedOS_WindowsXP_ ICertRequest
+     {
+         CONST_VTBL struct ICertRequestVtbl *lpVtbl;
+     };
+@@ -895,20 +896,20 @@ EXTERN_C const IID IID_ICertRequest2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a4772988-4a85-4fa9-824e-b5cf5c16405a")
+-    ICertRequest2 : public ICertRequest
++    MIDL_INTERFACE("a4772988-4a85-4fa9-824e-b5cf5c16405a") _Windows_SupportedOS_WindowsXP_ 
++      ICertRequest2 : public ICertRequest
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetIssuedCertificate( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG RequestId,
+             /* [in] */ __RPC__in const BSTR strSerialNumber,
+-            /* [retval][out] */ __RPC__out LONG *pDisposition) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(CR_DISP) __RPC__out LONG *pDisposition) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetErrorMessageText( 
+             /* [in] */ LONG hrMessage,
+             /* [in] */ LONG Flags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrErrorMessageText) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrErrorMessageText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCAProperty( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+@@ -926,13 +927,13 @@ EXTERN_C const IID IID_ICertRequest2;
+         virtual HRESULT STDMETHODCALLTYPE GetCAPropertyDisplayName( 
+             /* [in] */ __RPC__in const BSTR strConfig,
+             /* [in] */ LONG PropId,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDisplayName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrDisplayName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFullResponseProperty( 
+-            /* [in] */ LONG PropId,
++            /* [in] */ _Win32_AssociatedEnum_(FULL_RESPONSE_PROPERTY_ID) LONG PropId,
+             /* [in] */ LONG PropIndex,
+-            /* [in] */ LONG PropType,
+-            /* [in] */ LONG Flags,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_PROPERTY_TYPE) LONG PropType,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_REQUEST_OUT_TYPE) LONG Flags,
+             /* [retval][out] */ __RPC__out VARIANT *pvarPropertyValue) = 0;
+         
+     };
+@@ -1096,7 +1097,7 @@ EXTERN_C const IID IID_ICertRequest2;
+         END_INTERFACE
+     } ICertRequest2Vtbl;
+ 
+-    interface ICertRequest2
++    interface _Windows_SupportedOS_WindowsXP_ ICertRequest2
+     {
+         CONST_VTBL struct ICertRequest2Vtbl *lpVtbl;
+     };
+@@ -1184,7 +1185,7 @@ EXTERN_C const IID IID_ICertRequest2;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509EnrollmentAuthFlags
++enum  X509EnrollmentAuthFlags
+     {
+         X509AuthNone	= 0,
+         X509AuthAnonymous	= 1,
+@@ -1210,7 +1211,7 @@ EXTERN_C const IID IID_ICertRequest3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("AFC8F92B-33A2-4861-BF36-2933B7CD67B3")
+-    ICertRequest3 : public ICertRequest2
++    _Windows_SupportedOS_Windows7_ ICertRequest3 : public ICertRequest2
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetCredential( 
+@@ -1220,13 +1221,13 @@ EXTERN_C const IID IID_ICertRequest3;
+             /* [in] */ __RPC__in BSTR strPassword) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRequestIdString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrRequestId) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrRequestId) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIssuedCertificate2( 
+             /* [in] */ __RPC__in BSTR strConfig,
+             /* [in] */ __RPC__in BSTR strRequestId,
+             /* [in] */ __RPC__in BSTR strSerialNumber,
+-            /* [retval][out] */ __RPC__out LONG *pDisposition) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(CR_DISP) __RPC__out LONG *pDisposition) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRefreshPolicy( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -1418,7 +1419,7 @@ EXTERN_C const IID IID_ICertRequest3;
+         END_INTERFACE
+     } ICertRequest3Vtbl;
+ 
+-    interface ICertRequest3
++    interface _Windows_SupportedOS_Windows7_ ICertRequest3
+     {
+         CONST_VTBL struct ICertRequest3Vtbl *lpVtbl;
+     };
+@@ -1943,6 +1944,197 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("FR_PROP_NONE")
++#undef FR_PROP_NONE
++#pragma push_macro("FR_PROP_FULLRESPONSE")
++#undef FR_PROP_FULLRESPONSE
++#pragma push_macro("FR_PROP_STATUSINFOCOUNT")
++#undef FR_PROP_STATUSINFOCOUNT
++#pragma push_macro("FR_PROP_BODYPARTSTRING")
++#undef FR_PROP_BODYPARTSTRING
++#pragma push_macro("FR_PROP_STATUS")
++#undef FR_PROP_STATUS
++#pragma push_macro("FR_PROP_STATUSSTRING")
++#undef FR_PROP_STATUSSTRING
++#pragma push_macro("FR_PROP_OTHERINFOCHOICE")
++#undef FR_PROP_OTHERINFOCHOICE
++#pragma push_macro("FR_PROP_FAILINFO")
++#undef FR_PROP_FAILINFO
++#pragma push_macro("FR_PROP_PENDINFOTOKEN")
++#undef FR_PROP_PENDINFOTOKEN
++#pragma push_macro("FR_PROP_PENDINFOTIME")
++#undef FR_PROP_PENDINFOTIME
++#pragma push_macro("FR_PROP_ISSUEDCERTIFICATEHASH")
++#undef FR_PROP_ISSUEDCERTIFICATEHASH
++#pragma push_macro("FR_PROP_ISSUEDCERTIFICATE")
++#undef FR_PROP_ISSUEDCERTIFICATE
++#pragma push_macro("FR_PROP_ISSUEDCERTIFICATECHAIN")
++#undef FR_PROP_ISSUEDCERTIFICATECHAIN
++#pragma push_macro("FR_PROP_ISSUEDCERTIFICATECRLCHAIN")
++#undef FR_PROP_ISSUEDCERTIFICATECRLCHAIN
++#pragma push_macro("FR_PROP_ENCRYPTEDKEYHASH")
++#undef FR_PROP_ENCRYPTEDKEYHASH
++#pragma push_macro("FR_PROP_FULLRESPONSENOPKCS7")
++#undef FR_PROP_FULLRESPONSENOPKCS7
++#pragma push_macro("FR_PROP_CAEXCHANGECERTIFICATEHASH")
++#undef FR_PROP_CAEXCHANGECERTIFICATEHASH
++#pragma push_macro("FR_PROP_CAEXCHANGECERTIFICATE")
++#undef FR_PROP_CAEXCHANGECERTIFICATE
++#pragma push_macro("FR_PROP_CAEXCHANGECERTIFICATECHAIN")
++#undef FR_PROP_CAEXCHANGECERTIFICATECHAIN
++#pragma push_macro("FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN")
++#undef FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN
++#pragma push_macro("FR_PROP_ATTESTATIONCHALLENGE")
++#undef FR_PROP_ATTESTATIONCHALLENGE
++#pragma push_macro("FR_PROP_ATTESTATIONPROVIDERNAME")
++#undef FR_PROP_ATTESTATIONPROVIDERNAME
++enum FULL_RESPONSE_PROPERTY_ID : int
++{
++    FR_PROP_NONE = 0,
++    FR_PROP_FULLRESPONSE = 1,
++    FR_PROP_STATUSINFOCOUNT = 2,
++    FR_PROP_BODYPARTSTRING = 3,
++    FR_PROP_STATUS = 4,
++    FR_PROP_STATUSSTRING = 5,
++    FR_PROP_OTHERINFOCHOICE = 6,
++    FR_PROP_FAILINFO = 7,
++    FR_PROP_PENDINFOTOKEN = 8,
++    FR_PROP_PENDINFOTIME = 9,
++    FR_PROP_ISSUEDCERTIFICATEHASH = 10,
++    FR_PROP_ISSUEDCERTIFICATE = 11,
++    FR_PROP_ISSUEDCERTIFICATECHAIN = 12,
++    FR_PROP_ISSUEDCERTIFICATECRLCHAIN = 13,
++    FR_PROP_ENCRYPTEDKEYHASH = 14,
++    FR_PROP_FULLRESPONSENOPKCS7 = 15,
++    FR_PROP_CAEXCHANGECERTIFICATEHASH = 16,
++    FR_PROP_CAEXCHANGECERTIFICATE = 17,
++    FR_PROP_CAEXCHANGECERTIFICATECHAIN = 18,
++    FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN = 19,
++    FR_PROP_ATTESTATIONCHALLENGE = 20,
++    FR_PROP_ATTESTATIONPROVIDERNAME = 21,
++};
++#pragma pop_macro("FR_PROP_ATTESTATIONPROVIDERNAME")
++#pragma pop_macro("FR_PROP_ATTESTATIONCHALLENGE")
++#pragma pop_macro("FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN")
++#pragma pop_macro("FR_PROP_CAEXCHANGECERTIFICATECHAIN")
++#pragma pop_macro("FR_PROP_CAEXCHANGECERTIFICATE")
++#pragma pop_macro("FR_PROP_CAEXCHANGECERTIFICATEHASH")
++#pragma pop_macro("FR_PROP_FULLRESPONSENOPKCS7")
++#pragma pop_macro("FR_PROP_ENCRYPTEDKEYHASH")
++#pragma pop_macro("FR_PROP_ISSUEDCERTIFICATECRLCHAIN")
++#pragma pop_macro("FR_PROP_ISSUEDCERTIFICATECHAIN")
++#pragma pop_macro("FR_PROP_ISSUEDCERTIFICATE")
++#pragma pop_macro("FR_PROP_ISSUEDCERTIFICATEHASH")
++#pragma pop_macro("FR_PROP_PENDINFOTIME")
++#pragma pop_macro("FR_PROP_PENDINFOTOKEN")
++#pragma pop_macro("FR_PROP_FAILINFO")
++#pragma pop_macro("FR_PROP_OTHERINFOCHOICE")
++#pragma pop_macro("FR_PROP_STATUSSTRING")
++#pragma pop_macro("FR_PROP_STATUS")
++#pragma pop_macro("FR_PROP_BODYPARTSTRING")
++#pragma pop_macro("FR_PROP_STATUSINFOCOUNT")
++#pragma pop_macro("FR_PROP_FULLRESPONSE")
++#pragma pop_macro("FR_PROP_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CR_IN_BASE64HEADER")
++#undef CR_IN_BASE64HEADER
++#pragma push_macro("CR_IN_BASE64")
++#undef CR_IN_BASE64
++#pragma push_macro("CR_IN_BINARY")
++#undef CR_IN_BINARY
++enum CERT_IMPORT_FLAGS : int
++{
++    CR_IN_BASE64HEADER = 0,
++    CR_IN_BASE64 = 1,
++    CR_IN_BINARY = 2,
++};
++#pragma pop_macro("CR_IN_BINARY")
++#pragma pop_macro("CR_IN_BASE64")
++#pragma pop_macro("CR_IN_BASE64HEADER")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CC_DEFAULTCONFIG")
++#undef CC_DEFAULTCONFIG
++#pragma push_macro("CC_FIRSTCONFIG")
++#undef CC_FIRSTCONFIG
++#pragma push_macro("CC_LOCALACTIVECONFIG")
++#undef CC_LOCALACTIVECONFIG
++#pragma push_macro("CC_LOCALCONFIG")
++#undef CC_LOCALCONFIG
++#pragma push_macro("CC_UIPICKCONFIG")
++#undef CC_UIPICKCONFIG
++#pragma push_macro("CC_UIPICKCONFIGSKIPLOCALCA")
++#undef CC_UIPICKCONFIGSKIPLOCALCA
++enum CERT_GET_CONFIG_FLAGS : int
++{
++    CC_DEFAULTCONFIG = 0,
++    CC_FIRSTCONFIG = 2,
++    CC_LOCALACTIVECONFIG = 4,
++    CC_LOCALCONFIG = 3,
++    CC_UIPICKCONFIG = 1,
++    CC_UIPICKCONFIGSKIPLOCALCA = 5,
++};
++#pragma pop_macro("CC_UIPICKCONFIGSKIPLOCALCA")
++#pragma pop_macro("CC_UIPICKCONFIG")
++#pragma pop_macro("CC_LOCALCONFIG")
++#pragma pop_macro("CC_LOCALACTIVECONFIG")
++#pragma pop_macro("CC_FIRSTCONFIG")
++#pragma pop_macro("CC_DEFAULTCONFIG")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CR_DISP_DENIED")
++#undef CR_DISP_DENIED
++#pragma push_macro("CR_DISP_ERROR")
++#undef CR_DISP_ERROR
++#pragma push_macro("CR_DISP_INCOMPLETE")
++#undef CR_DISP_INCOMPLETE
++#pragma push_macro("CR_DISP_ISSUED")
++#undef CR_DISP_ISSUED
++#pragma push_macro("CR_DISP_ISSUED_OUT_OF_BAND")
++#undef CR_DISP_ISSUED_OUT_OF_BAND
++#pragma push_macro("CR_DISP_UNDER_SUBMISSION")
++#undef CR_DISP_UNDER_SUBMISSION
++enum CR_DISP : unsigned int
++{
++    CR_DISP_DENIED = 2U,
++    CR_DISP_ERROR = 1U,
++    CR_DISP_INCOMPLETE = 0U,
++    CR_DISP_ISSUED = 3U,
++    CR_DISP_ISSUED_OUT_OF_BAND = 4U,
++    CR_DISP_UNDER_SUBMISSION = 5U,
++};
++#pragma pop_macro("CR_DISP_UNDER_SUBMISSION")
++#pragma pop_macro("CR_DISP_ISSUED_OUT_OF_BAND")
++#pragma pop_macro("CR_DISP_ISSUED")
++#pragma pop_macro("CR_DISP_INCOMPLETE")
++#pragma pop_macro("CR_DISP_ERROR")
++#pragma pop_macro("CR_DISP_DENIED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CR_OUT_BASE64HEADER")
++#undef CR_OUT_BASE64HEADER
++#pragma push_macro("CR_OUT_BASE64")
++#undef CR_OUT_BASE64
++#pragma push_macro("CR_OUT_BINARY")
++#undef CR_OUT_BINARY
++enum CERT_REQUEST_OUT_TYPE : int
++{
++    CR_OUT_BASE64HEADER = 0,
++    CR_OUT_BASE64 = 1,
++    CR_OUT_BINARY = 2,
++};
++#pragma pop_macro("CR_OUT_BINARY")
++#pragma pop_macro("CR_OUT_BASE64")
++#pragma pop_macro("CR_OUT_BASE64HEADER")
++#endif
++
+ #endif
+ 
+ 

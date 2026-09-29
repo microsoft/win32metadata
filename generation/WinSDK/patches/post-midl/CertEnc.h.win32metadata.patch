@@ -1,0 +1,285 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
+index 3bb9bcc4a7..e601929444 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertEnc.h
+@@ -216,6 +216,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -235,7 +236,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("12a88820-7494-11d0-8816-00a0c903b83c")
+-    ICertEncodeStringArray : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeStringArray : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -249,18 +250,18 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetValue( 
+             /* [in] */ LONG Index,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Reset( 
+             /* [in] */ LONG Count,
+-            /* [in] */ LONG StringType) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(CERT_RDN_ATTR_VALUE_TYPE) LONG StringType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetValue( 
+             /* [in] */ LONG Index,
+             /* [in] */ __RPC__in const BSTR str) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Encode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+     };
+     
+@@ -368,7 +369,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray;
+         END_INTERFACE
+     } ICertEncodeStringArrayVtbl;
+ 
+-    interface ICertEncodeStringArray
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeStringArray
+     {
+         CONST_VTBL struct ICertEncodeStringArrayVtbl *lpVtbl;
+     };
+@@ -454,7 +455,7 @@ EXTERN_C const IID IID_ICertEncodeStringArray2;
+         
+         virtual HRESULT STDMETHODCALLTYPE EncodeBlob( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
+         
+     };
+     
+@@ -658,7 +659,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("15e2f230-a0a2-11d0-8821-00a0c903b83c")
+-    ICertEncodeLongArray : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeLongArray : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -679,7 +680,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
+             /* [in] */ LONG Value) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Encode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+     };
+     
+@@ -781,7 +782,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray;
+         END_INTERFACE
+     } ICertEncodeLongArrayVtbl;
+ 
+-    interface ICertEncodeLongArray
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeLongArray
+     {
+         CONST_VTBL struct ICertEncodeLongArrayVtbl *lpVtbl;
+     };
+@@ -864,7 +865,7 @@ EXTERN_C const IID IID_ICertEncodeLongArray2;
+         
+         virtual HRESULT STDMETHODCALLTYPE EncodeBlob( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
+         
+     };
+     
+@@ -1059,7 +1060,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2f9469a0-a470-11d0-8821-00a0c903b83c")
+-    ICertEncodeDateArray : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeDateArray : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -1080,7 +1081,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
+             /* [in] */ DATE Value) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Encode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+     };
+     
+@@ -1182,7 +1183,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray;
+         END_INTERFACE
+     } ICertEncodeDateArrayVtbl;
+ 
+-    interface ICertEncodeDateArray
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeDateArray
+     {
+         CONST_VTBL struct ICertEncodeDateArrayVtbl *lpVtbl;
+     };
+@@ -1265,7 +1266,7 @@ EXTERN_C const IID IID_ICertEncodeDateArray2;
+         
+         virtual HRESULT STDMETHODCALLTYPE EncodeBlob( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
+         
+     };
+     
+@@ -1460,7 +1461,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("01958640-bbff-11d0-8825-00a0c903b83c")
+-    ICertEncodeCRLDistInfo : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeCRLDistInfo : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -1481,7 +1482,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [in] */ LONG DistPointIndex,
+             /* [in] */ LONG NameIndex,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Reset( 
+             /* [in] */ LONG DistPointCount) = 0;
+@@ -1493,11 +1494,11 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+         virtual HRESULT STDMETHODCALLTYPE SetNameEntry( 
+             /* [in] */ LONG DistPointIndex,
+             /* [in] */ LONG NameIndex,
+-            /* [in] */ LONG NameChoice,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_ALT_NAME) LONG NameChoice,
+             /* [in] */ __RPC__in const BSTR strName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Encode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+     };
+     
+@@ -1621,7 +1622,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo;
+         END_INTERFACE
+     } ICertEncodeCRLDistInfoVtbl;
+ 
+-    interface ICertEncodeCRLDistInfo
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeCRLDistInfo
+     {
+         CONST_VTBL struct ICertEncodeCRLDistInfoVtbl *lpVtbl;
+     };
+@@ -1713,7 +1714,7 @@ EXTERN_C const IID IID_ICertEncodeCRLDistInfo2;
+         
+         virtual HRESULT STDMETHODCALLTYPE EncodeBlob( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
+         
+     };
+     
+@@ -1951,7 +1952,7 @@ EXTERN_C const IID IID_ICertEncodeAltName;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1c9a8c70-1271-11d1-9bd4-00c04fb683fa")
+-    ICertEncodeAltName : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeAltName : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -1966,18 +1967,18 @@ EXTERN_C const IID IID_ICertEncodeAltName;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [in] */ LONG NameIndex,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Reset( 
+             /* [in] */ LONG NameCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetNameEntry( 
+             /* [in] */ LONG NameIndex,
+-            /* [in] */ LONG NameChoice,
++            /* [in] */ _Win32_AssociatedEnum_(CERT_ALT_NAME) LONG NameChoice,
+             /* [in] */ __RPC__in const BSTR strName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Encode( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+     };
+     
+@@ -2086,7 +2087,7 @@ EXTERN_C const IID IID_ICertEncodeAltName;
+         END_INTERFACE
+     } ICertEncodeAltNameVtbl;
+ 
+-    interface ICertEncodeAltName
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeAltName
+     {
+         CONST_VTBL struct ICertEncodeAltNameVtbl *lpVtbl;
+     };
+@@ -2172,12 +2173,12 @@ EXTERN_C const IID IID_ICertEncodeAltName2;
+         
+         virtual HRESULT STDMETHODCALLTYPE EncodeBlob( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetNameBlob( 
+             /* [in] */ LONG NameIndex,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetNameEntryBlob( 
+             /* [in] */ LONG NameIndex,
+@@ -2409,7 +2410,7 @@ EXTERN_C const IID IID_ICertEncodeBitString;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6db525be-1278-11d1-9bd4-00c04fb683fa")
+-    ICertEncodeBitString : public IDispatch
++    _Windows_SupportedOS_Server2003_ ICertEncodeBitString : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -2419,12 +2420,12 @@ EXTERN_C const IID IID_ICertEncodeBitString;
+             /* [retval][out] */ __RPC__out LONG *pBitCount) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBitString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBitString) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBitString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Encode( 
+             /* [in] */ LONG BitCount,
+             /* [in] */ __RPC__in BSTR strBitString,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBinary) = 0;
+         
+     };
+     
+@@ -2516,7 +2517,7 @@ EXTERN_C const IID IID_ICertEncodeBitString;
+         END_INTERFACE
+     } ICertEncodeBitStringVtbl;
+ 
+-    interface ICertEncodeBitString
++    interface _Windows_SupportedOS_Server2003_ ICertEncodeBitString
+     {
+         CONST_VTBL struct ICertEncodeBitStringVtbl *lpVtbl;
+     };
+@@ -2596,11 +2597,11 @@ EXTERN_C const IID IID_ICertEncodeBitString2;
+             /* [in] */ __RPC__in const BSTR strBitString,
+             /* [defaultvalue][in] */ EncodingType EncodingIn,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBitStringBlob( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBitString) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrBitString) = 0;
+         
+     };
+     

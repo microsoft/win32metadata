@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
+index 0bf1a86aa1..af0075eb2d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/htiface.h
+@@ -100,6 +100,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -158,7 +159,7 @@ EXTERN_C const IID IID_ITargetFrame;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("d5f78c80-5252-11cf-90fa-00AA0042106e")
+-    ITargetFrame : public IUnknown
++      ITargetFrame : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetFrameName( 

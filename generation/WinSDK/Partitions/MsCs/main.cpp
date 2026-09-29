@@ -14,3 +14,5 @@ typedef NTSTATUS* PNTSTATUS;
 #include <smbclnt.h>
 #include <cluadmex.h>
 #include <msclus.h>
+
+#include <windns.h>

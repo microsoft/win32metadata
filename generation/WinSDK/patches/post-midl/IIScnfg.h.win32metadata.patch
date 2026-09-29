@@ -1,0 +1,16 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IIScnfg.h b/generation/WinSDK/RecompiledIdlHeaders/um/IIScnfg.h
+index 8a072d88b8..bc46077e09 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IIScnfg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IIScnfg.h
+@@ -1075,7 +1075,11 @@
+ //
+ //  Bogus value - do not use
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(MD_SCRIPTMAPFLAG_ALLOWED_ON_READ_DIR)) || (((defined(REMOVE))))
+ #define MD_SCRIPTMAPFLAG_ALLOWED_ON_READ_DIR        0x00000001
++#endif
++#ifdef REMOVE   // SteveBr
+ #endif // REMOVE
+ 
+ 

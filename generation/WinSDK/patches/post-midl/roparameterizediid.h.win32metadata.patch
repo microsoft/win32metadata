@@ -1,0 +1,50 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
+index 4ca629766e..50b4a8cf7b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roparameterizediid.h
+@@ -6,6 +6,7 @@
+ 
+ #ifndef _ROPARAMETERIXEDIID_H
+ #define _ROPARAMETERIXEDIID_H
++#include "win32metadata_annotations.h"
+ 
+ #ifdef _CONTRACT_GEN
+ #include <nt.h>
+@@ -17,7 +18,7 @@
+ #include <rpc.h>
+ #include <basetyps.h>
+ 
+-DECLARE_HANDLE(ROPARAMIIDHANDLE);
++DECLARE_HANDLE(ROPARAMIIDHANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=RoFreeParameterizedTypeExtra")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ //struct ROPARAMIIDHANDLE__; typedef struct ROPARAMIIDHANDLE__ *ROPARAMIIDHANDLE;
+ 
+ struct IRoSimpleMetaDataBuilder
+@@ -65,20 +66,26 @@ struct IRoMetaDataLocator
+     ) const = 0;
+ };
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-roparameterizediid-l1-1-0.dll") 
++
+ STDAPI
+ RoGetParameterizedTypeInstanceIID(
+-    UINT32 nameElementCount,
++    _WIN32META_ANNOTATION_("win32metadata:in") UINT32 nameElementCount,
+     _In_reads_(nameElementCount) PCWSTR* nameElements,
+     _In_ const IRoMetaDataLocator& metaDataLocator,
+     _Out_ GUID* iid,
+-    _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
++    _Win32_RAIIFree_(RoFreeParameterizedTypeExtra, -1, 0) _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-roparameterizediid-l1-1-0.dll") 
++
+ STDAPI_(void)
+ RoFreeParameterizedTypeExtra(
+     _In_ ROPARAMIIDHANDLE extra
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-roparameterizediid-l1-1-0.dll") 
++
+ STDAPI_(PCSTR)
+ RoParameterizedTypeExtraGetTypeSignature(
+     _In_ ROPARAMIIDHANDLE extra

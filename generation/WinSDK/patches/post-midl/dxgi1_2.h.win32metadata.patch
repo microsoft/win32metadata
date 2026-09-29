@@ -1,0 +1,188 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h
+index 18653cd01c..2f139e5ddb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_2.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -140,7 +141,7 @@ EXTERN_C const IID IID_IDXGIDisplayControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ea9dbf1a-c88e-4486-854a-98aa0138f30c")
++    MIDL_INTERFACE("ea9dbf1a-c88e-4486-854a-98aa0138f30c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIDisplayControl : public IUnknown
+     {
+     public:
+@@ -290,13 +291,13 @@ EXTERN_C const IID IID_IDXGIOutputDuplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("191cfac3-a341-470d-b26e-a864f428319c")
++    MIDL_INTERFACE("191cfac3-a341-470d-b26e-a864f428319c") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIOutputDuplication : public IDXGIObject
+     {
+     public:
+         virtual void STDMETHODCALLTYPE GetDesc( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_OUTDUPL_DESC *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_OUTDUPL_DESC *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE AcquireNextFrame( 
+             /* [annotation][in] */ 
+@@ -567,7 +568,7 @@ EXTERN_C const IID IID_IDXGISurface2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aba496dd-b617-4cb8-a866-bc44d7eb1fa2")
++    MIDL_INTERFACE("aba496dd-b617-4cb8-a866-bc44d7eb1fa2") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGISurface2 : public IDXGISurface1
+     {
+     public:
+@@ -772,7 +773,7 @@ EXTERN_C const IID IID_IDXGIResource1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("30961379-4609-4a41-998e-54fe567ee0c1")
++    MIDL_INTERFACE("30961379-4609-4a41-998e-54fe567ee0c1") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIResource1 : public IDXGIResource
+     {
+     public:
+@@ -789,7 +790,7 @@ EXTERN_C const IID IID_IDXGIResource1;
+             /* [annotation][in] */ 
+             _In_opt_  LPCWSTR lpName,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *pHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *pHandle) = 0;
+         
+     };
+     
+@@ -1000,7 +1001,7 @@ EXTERN_C const IID IID_IDXGIDevice2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("05008617-fbfd-4051-a790-144884b4f6a9")
++    MIDL_INTERFACE("05008617-fbfd-4051-a790-144884b4f6a9") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIDevice2 : public IDXGIDevice1
+     {
+     public:
+@@ -1286,7 +1287,7 @@ typedef struct DXGI_SWAP_CHAIN_DESC1
+     DXGI_SCALING Scaling;
+     DXGI_SWAP_EFFECT SwapEffect;
+     DXGI_ALPHA_MODE AlphaMode;
+-    UINT Flags;
++    _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG) UINT Flags;
+     } 	DXGI_SWAP_CHAIN_DESC1;
+ 
+ typedef struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC
+@@ -1322,17 +1323,17 @@ EXTERN_C const IID IID_IDXGISwapChain1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("790a45f7-0d42-4876-983a-0a55cfe6f4aa")
++    MIDL_INTERFACE("790a45f7-0d42-4876-983a-0a55cfe6f4aa") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGISwapChain1 : public IDXGISwapChain
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDesc1( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_SWAP_CHAIN_DESC1 *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_SWAP_CHAIN_DESC1 *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFullscreenDesc( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_SWAP_CHAIN_FULLSCREEN_DESC *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_SWAP_CHAIN_FULLSCREEN_DESC *pDesc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHwnd( 
+             /* [annotation][out] */ 
+@@ -1344,11 +1345,11 @@ EXTERN_C const IID IID_IDXGISwapChain1;
+             /* [annotation][out] */ 
+             _COM_Outptr_  void **ppUnk) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE Present1( 
++        _WIN32META_ANNOTATION_("win32metadata:can_return_multiple_success_values") _Win32_PreserveResult_ virtual HRESULT STDMETHODCALLTYPE Present1( 
+             /* [annotation][in] */ 
+             _In_  UINT SyncInterval,
+             /* [annotation][in] */ 
+-            _In_  UINT PresentFlags,
++            _Win32_AssociatedEnum_(DXGI_PRESENT) _In_  UINT PresentFlags,
+             /* [annotation][in] */ 
+             _In_  const DXGI_PRESENT_PARAMETERS *pPresentParameters) = 0;
+         
+@@ -1717,7 +1718,7 @@ EXTERN_C const IID IID_IDXGIFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("50c83a1c-e072-4c48-87b0-3630fa36a6d0")
++    MIDL_INTERFACE("50c83a1c-e072-4c48-87b0-3630fa36a6d0") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIFactory2 : public IDXGIFactory1
+     {
+     public:
+@@ -2151,7 +2152,7 @@ typedef struct DXGI_ADAPTER_DESC2
+     SIZE_T DedicatedSystemMemory;
+     SIZE_T SharedSystemMemory;
+     LUID AdapterLuid;
+-    UINT Flags;
++    _Win32_AssociatedEnum_(DXGI_ADAPTER_FLAG) UINT Flags;
+     DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
+     DXGI_COMPUTE_PREEMPTION_GRANULARITY ComputePreemptionGranularity;
+     } 	DXGI_ADAPTER_DESC2;
+@@ -2172,13 +2173,13 @@ EXTERN_C const IID IID_IDXGIAdapter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5")
++    MIDL_INTERFACE("0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIAdapter2 : public IDXGIAdapter1
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDesc2( 
+             /* [annotation][out] */ 
+-            _Out_  DXGI_ADAPTER_DESC2 *pDesc) = 0;
++            _Win32_Retval_ _Out_  DXGI_ADAPTER_DESC2 *pDesc) = 0;
+         
+     };
+     
+@@ -2350,7 +2351,7 @@ EXTERN_C const IID IID_IDXGIOutput1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00cddea8-939b-4b83-a340-a685226666cc")
++    MIDL_INTERFACE("00cddea8-939b-4b83-a340-a685226666cc") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_ 
+     IDXGIOutput1 : public IDXGIOutput
+     {
+     public:
+@@ -2358,7 +2359,7 @@ EXTERN_C const IID IID_IDXGIOutput1;
+             /* [annotation][in] */ 
+             _In_  DXGI_FORMAT EnumFormat,
+             /* [annotation][in] */ 
+-            _In_  UINT Flags,
++            _Win32_AssociatedEnum_(DXGI_ENUM_MODES) _In_  UINT Flags,
+             /* [annotation][out][in] */ 
+             _Inout_  UINT *pNumModes,
+             /* [annotation][out] */ 
+@@ -2681,6 +2682,21 @@ extern RPC_IF_HANDLE __MIDL_itf_dxgi1_2_0000_0009_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DXGI_SHARED_RESOURCE_READ")
++#undef DXGI_SHARED_RESOURCE_READ
++#pragma push_macro("DXGI_SHARED_RESOURCE_WRITE")
++#undef DXGI_SHARED_RESOURCE_WRITE
++enum [[clang::flag_enum]] DXGI_SHARED_RESOURCE_RW : unsigned int
++{
++    DXGI_SHARED_RESOURCE_READ = 2147483648U,
++    DXGI_SHARED_RESOURCE_WRITE = 1U,
++};
++#pragma pop_macro("DXGI_SHARED_RESOURCE_WRITE")
++#pragma pop_macro("DXGI_SHARED_RESOURCE_READ")
++#endif
++
+ #endif
+ 
+ 

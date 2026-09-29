@@ -1,0 +1,270 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
+index f384c5147e..c4cd7d483d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleacc.h
+@@ -148,6 +148,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ //=--------------------------------------------------------------------------=
+ // OLEACC.H
+ //=--------------------------------------------------------------------------=
+@@ -166,11 +167,11 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ typedef LRESULT (STDAPICALLTYPE *LPFNLRESULTFROMOBJECT)(REFIID riid, WPARAM wParam, LPUNKNOWN punk);
+-typedef HRESULT (STDAPICALLTYPE *LPFNOBJECTFROMLRESULT)(LRESULT lResult, REFIID riid, WPARAM wParam, void** ppvObject);
+-typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMWINDOW)(HWND hwnd, DWORD dwId, REFIID riid, void** ppvObject);
+-typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMPOINT)(POINT ptScreen, IAccessible** ppacc, VARIANT* pvarChild);
+-typedef HRESULT (STDAPICALLTYPE *LPFNCREATESTDACCESSIBLEOBJECT)(HWND hwnd, LONG idObject, REFIID riid, void** ppvObject);
+-typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLECHILDREN)(IAccessible* paccContainer, LONG iChildStart,LONG cChildren,VARIANT* rgvarChildren,LONG* pcObtained);
++typedef HRESULT (STDAPICALLTYPE *LPFNOBJECTFROMLRESULT)(LRESULT lResult, REFIID riid, WPARAM wParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject);
++typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMWINDOW)(HWND hwnd, DWORD dwId, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject);
++typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLEOBJECTFROMPOINT)(POINT ptScreen, IAccessible** ppacc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT* pvarChild);
++typedef HRESULT (STDAPICALLTYPE *LPFNCREATESTDACCESSIBLEOBJECT)(HWND hwnd, LONG idObject, REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject);
++typedef HRESULT (STDAPICALLTYPE *LPFNACCESSIBLECHILDREN)(IAccessible* paccContainer, LONG iChildStart,LONG cChildren,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT* rgvarChildren,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG* pcObtained);
+ 
+ //=--------------------------------------------------------------------------=
+ // GUIDs
+@@ -191,16 +192,16 @@ DEFINE_GUID(IIS_ControlAccessible,   0x38c682a6, 0x9731, 0x43f2, 0x9f, 0xae, 0xe
+ // MSAA API Prototypes
+ //=--------------------------------------------------------------------------=
+ 
+-STDAPI_(LRESULT) LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);
+-STDAPI          ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);
+-STDAPI          WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);
+-STDAPI          AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);
+-STDAPI          AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);
+-STDAPI          AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);
+-STDAPI          AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LRESULT)   LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);
++_Windows_SupportedOS_WindowsXP_ STDAPI            ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);
++_Windows_SupportedOS_Windows2000_ STDAPI            WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);
++_Windows_SupportedOS_Windows2000_ STDAPI            AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);
++_Windows_SupportedOS_Windows2000_ STDAPI            AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);
++_Windows_SupportedOS_Windows2000_ STDAPI            AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);
++_Windows_SupportedOS_Windows2000_ STDAPI            AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);
+ 
+-STDAPI_(UINT)   GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);
+-STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ STDAPI_(UINT)     GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ STDAPI_(UINT)     GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);
+ 
+ #ifdef UNICODE
+ #define GetRoleText     GetRoleTextW
+@@ -208,20 +209,20 @@ STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWS
+ #define GetRoleText     GetRoleTextA
+ #endif // UNICODE
+ 
+-STDAPI_(UINT)   GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);
+-STDAPI_(UINT)   GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ STDAPI_(UINT)     GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ STDAPI_(UINT)     GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);
+ #ifdef UNICODE
+ #define GetStateText    GetStateTextW
+ #else
+ #define GetStateText    GetStateTextA
+ #endif // UNICODE
+ 
+-STDAPI_(VOID)   GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);
++_Windows_SupportedOS_Windows2000_ STDAPI_(VOID)     GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);
+ 
+-STDAPI          CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
++_Windows_SupportedOS_Windows2000_ STDAPI            CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
+ 
+-STDAPI          CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
+-STDAPI          CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI            CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI            CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);
+ 
+ #ifdef UNICODE
+ #define CreateStdAccessibleProxy     CreateStdAccessibleProxyW
+@@ -235,9 +236,9 @@ STDAPI          CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassNam
+ #define ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK 0x0000008
+ #define ANRUS_PRIORITY_AUDIO_DYNAMIC_DUCK 0x0000010
+ 
+-STDAPI          AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _In_ DWORD dwUtilityState);
++_Windows_SupportedOS_Windows8_ STDAPI            AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _Win32_AssociatedEnum_(ACC_UTILITY_STATE_FLAGS) _In_ DWORD dwUtilityState);
+ 
+-STDAPI          AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);
++_Windows_SupportedOS_Windows8_ STDAPI            AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);
+ 
+ 
+ // Simple Owner-Drawn Menu support...
+@@ -246,7 +247,7 @@ STDAPI          AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarge
+ 
+ // Menu's dwItemData should point to one of these structs:
+ // (or can point to an app-defined struct containing this as the first member)
+-typedef struct tagMSAAMENUINFO {
++typedef struct   tagMSAAMENUINFO {
+     DWORD   dwMSAASignature; // Must be MSAA_MENU_SIG
+     DWORD   cchWText;        // Length of text, in Unicode characters, excluding terminating NUL
+     LPWSTR  pszWText;        // NUL-terminated text, in Unicode
+@@ -378,7 +379,11 @@ typedef /* [unique] */  __RPC_unique_pointer IAccessible *LPACCESSIBLE;
+ #define	SELFLAG_VALID	( 0x1f )
+ 
+ #ifndef STATE_SYSTEM_UNAVAILABLE
++#endif
++#if (defined(WIN32METADATA) && !defined(STATE_SYSTEM_NORMAL)) || (((!defined(STATE_SYSTEM_UNAVAILABLE))))
+ #define	STATE_SYSTEM_NORMAL	( 0 )
++#endif
++#ifndef STATE_SYSTEM_UNAVAILABLE
+ 
+ #define	STATE_SYSTEM_UNAVAILABLE	( 0x1 )
+ 
+@@ -582,7 +587,7 @@ EXTERN_C const IID IID_IAccessible;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("618736e0-3c3d-11cf-810c-00aa00389b71")
++    MIDL_INTERFACE("618736e0-3c3d-11cf-810c-00aa00389b71") _Windows_SupportedOS_Windows2000_ 
+     IAccessible : public IDispatch
+     {
+     public:
+@@ -603,17 +608,17 @@ EXTERN_C const IID IID_IAccessible;
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accName( 
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszName) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accValue( 
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszValue) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accDescription( 
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDescription) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accRole( 
+             /* [optional][in] */ VARIANT varChild,
+@@ -628,11 +633,11 @@ EXTERN_C const IID IID_IAccessible;
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accHelp( 
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszHelp) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszHelp) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accHelpTopic( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pszHelpFile,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pszHelpFile,
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  long *pidTopic) = 0;
+@@ -640,7 +645,7 @@ EXTERN_C const IID IID_IAccessible;
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accKeyboardShortcut( 
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accFocus( 
+             /* [annotation][retval][out] */ 
+@@ -653,7 +658,7 @@ EXTERN_C const IID IID_IAccessible;
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accDefaultAction( 
+             /* [optional][in] */ VARIANT varChild,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszDefaultAction) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDefaultAction) = 0;
+         
+         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accSelect( 
+             /* [annotation][in] */ 
+@@ -1051,7 +1056,7 @@ EXTERN_C const IID IID_IAccessibleHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("03022430-ABC4-11d0-BDE2-00AA001A1953")
++    MIDL_INTERFACE("03022430-ABC4-11d0-BDE2-00AA001A1953") _Windows_SupportedOS_WindowsXP_ 
+     IAccessibleHandler : public IUnknown
+     {
+     public:
+@@ -1148,7 +1153,7 @@ EXTERN_C const IID IID_IAccessibleWindowlessSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BF3ABD9C-76DA-4389-9EB6-1427D25ABAB7")
++    MIDL_INTERFACE("BF3ABD9C-76DA-4389-9EB6-1427D25ABAB7") _Windows_SupportedOS_Windows8_ 
+     IAccessibleWindowlessSite : public IUnknown
+     {
+     public:
+@@ -1307,7 +1312,7 @@ EXTERN_C const IID IID_IAccIdentity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7852b78d-1cfd-41c1-a615-9c0c85960b5f")
++    MIDL_INTERFACE("7852b78d-1cfd-41c1-a615-9c0c85960b5f") _Windows_SupportedOS_Windows2000_ 
+     IAccIdentity : public IUnknown
+     {
+     public:
+@@ -1402,7 +1407,7 @@ EXTERN_C const IID IID_IAccPropServer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("76c0dbbb-15e0-4e7b-b61b-20eeea2001e0")
++    MIDL_INTERFACE("76c0dbbb-15e0-4e7b-b61b-20eeea2001e0") _Windows_SupportedOS_WindowsXP_ 
+     IAccPropServer : public IUnknown
+     {
+     public:
+@@ -1505,7 +1510,7 @@ EXTERN_C const IID IID_IAccPropServices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6e26e776-04f0-495d-80e4-3330352e3169")
++    MIDL_INTERFACE("6e26e776-04f0-495d-80e4-3330352e3169") _Windows_SupportedOS_WindowsXP_ 
+     IAccPropServices : public IUnknown
+     {
+     public:
+@@ -1679,7 +1684,7 @@ EXTERN_C const IID IID_IAccPropServices;
+             /* [annotation][in] */ 
+             _In_  DWORD dwIDStringLen,
+             /* [annotation][out] */ 
+-            _Out_  HMENU *phmenu,
++            _Win32_RAIIFree_(DestroyMenu, -1, 0) _Out_  HMENU *phmenu,
+             /* [annotation][out] */ 
+             _Out_  DWORD *pidChild) = 0;
+         
+@@ -2045,7 +2050,7 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+ void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+-unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+ void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
+@@ -2096,6 +2101,29 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("ANRUS_ON_SCREEN_KEYBOARD_ACTIVE")
++#undef ANRUS_ON_SCREEN_KEYBOARD_ACTIVE
++#pragma push_macro("ANRUS_TOUCH_MODIFICATION_ACTIVE")
++#undef ANRUS_TOUCH_MODIFICATION_ACTIVE
++#pragma push_macro("ANRUS_PRIORITY_AUDIO_ACTIVE")
++#undef ANRUS_PRIORITY_AUDIO_ACTIVE
++#pragma push_macro("ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK")
++#undef ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK
++enum [[clang::flag_enum]] ACC_UTILITY_STATE_FLAGS : unsigned int
++{
++    ANRUS_ON_SCREEN_KEYBOARD_ACTIVE = 1U,
++    ANRUS_TOUCH_MODIFICATION_ACTIVE = 2U,
++    ANRUS_PRIORITY_AUDIO_ACTIVE = 4U,
++    ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK = 8U,
++};
++#pragma pop_macro("ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK")
++#pragma pop_macro("ANRUS_PRIORITY_AUDIO_ACTIVE")
++#pragma pop_macro("ANRUS_TOUCH_MODIFICATION_ACTIVE")
++#pragma pop_macro("ANRUS_ON_SCREEN_KEYBOARD_ACTIVE")
++#endif
++
+ #endif
+ 
+ 

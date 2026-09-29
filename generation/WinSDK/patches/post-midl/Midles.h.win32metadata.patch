@@ -1,0 +1,340 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
+index 89b4c7034c..2f399dac21 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
+@@ -20,6 +20,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -51,7 +52,7 @@ typedef enum
+ 
+ typedef void (__RPC_USER *  MIDL_ES_ALLOC )
+                 ( IN OUT  void  *   state,
+-                  OUT     char  **  pbuffer,
++                  _WIN32META_ANNOTATION_("win32metadata:in") OUT     char  **  pbuffer,
+                   IN OUT  unsigned int * psize );
+ 
+ typedef void (__RPC_USER *  MIDL_ES_WRITE)
+@@ -61,7 +62,7 @@ typedef void (__RPC_USER *  MIDL_ES_WRITE)
+ 
+ typedef void (__RPC_USER *  MIDL_ES_READ)
+                 ( IN OUT  void  *   state,
+-                  OUT     char  **  pbuffer,
++                  _WIN32META_ANNOTATION_("win32metadata:in") OUT     char  **  pbuffer,
+                   IN OUT  unsigned int * psize );
+ 
+ typedef handle_t    MIDL_ES_HANDLE;
+@@ -74,86 +75,104 @@ typedef struct _MIDL_TYPE_PICKLING_INFO
+ } MIDL_TYPE_PICKLING_INFO,  * PMIDL_TYPE_PICKLING_INFO;
+ 
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ RPC_STATUS  RPC_ENTRY
+ MesEncodeIncrementalHandleCreate(
+-    void          * UserState,
+-    MIDL_ES_ALLOC   AllocFn,
+-    MIDL_ES_WRITE   WriteFn,
+-    handle_t      * pHandle );
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void          * UserState,
++     MIDL_ES_ALLOC   AllocFn,
++     MIDL_ES_WRITE   WriteFn,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t      * pHandle );
++
++_Windows_SupportedOS_Windows2000_ 
+ 
+ RPC_STATUS  RPC_ENTRY
+ MesDecodeIncrementalHandleCreate(
+-    void         *  UserState,
+-    MIDL_ES_READ    ReadFn,
+-    handle_t     *  pHandle );
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void         *  UserState,
++     MIDL_ES_READ    ReadFn,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t     *  pHandle );
++
+ 
++_Windows_SupportedOS_Windows2000_ 
+ 
+ RPC_STATUS  RPC_ENTRY
+ MesIncrementalHandleReset(
+-    handle_t        Handle,
+-    void     *      UserState,
+-    MIDL_ES_ALLOC   AllocFn,
+-    MIDL_ES_WRITE   WriteFn,
+-    MIDL_ES_READ    ReadFn,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t        Handle,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void     *      UserState,
++     MIDL_ES_ALLOC   AllocFn,
++     MIDL_ES_WRITE   WriteFn,
++     MIDL_ES_READ    ReadFn,
+     MIDL_ES_CODE    Operation );
+ 
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ RPC_STATUS  RPC_ENTRY
+ MesEncodeFixedBufferHandleCreate(
+-    _Out_writes_bytes_(BufferSize) char *pBuffer,
++     _Out_writes_bytes_(BufferSize) char *pBuffer,
+     _In_ unsigned long BufferSize,
+-    _Out_ unsigned long *pEncodedSize,
+-    _Out_ handle_t *pHandle
++     _Out_ unsigned long *pEncodedSize,
++    _Out_  handle_t *pHandle
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ RPC_STATUS  RPC_ENTRY
+ MesEncodeDynBufferHandleCreate(
+-    _Outptr_result_bytebuffer_(*pEncodedSize) char **pBuffer,
+-    _Out_ unsigned long *pEncodedSize,
+-    _Out_ handle_t *pHandle
++     _Outptr_result_bytebuffer_(*pEncodedSize) char **pBuffer,
++     _Out_ unsigned long *pEncodedSize,
++    _Out_  handle_t *pHandle
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ RPC_STATUS  RPC_ENTRY
+ MesDecodeBufferHandleCreate(
+-    _In_reads_bytes_(BufferSize ) char * Buffer,
++     _In_reads_bytes_(BufferSize ) char * Buffer,
+     _In_ unsigned long   BufferSize,
+-    _Out_ handle_t  * pHandle
++    _Out_  handle_t  * pHandle
+     );
+ 
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ RPC_STATUS  RPC_ENTRY
+ MesBufferHandleReset(
+     _In_ handle_t Handle,
+-    _In_ unsigned long HandleStyle,
++    _In_  unsigned long HandleStyle,
+     _In_ MIDL_ES_CODE Operation,
+     _In_opt_ _At_(*pBuffer, _Pre_readable_byte_size_(BufferSize)) char **pBuffer,
+     _In_ unsigned long BufferSize,
+-    _Out_opt_ unsigned long *pEncodedSize
++     _Out_opt_ unsigned long *pEncodedSize
+     );
+ 
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ RPC_STATUS  RPC_ENTRY
+-MesHandleFree( handle_t  Handle );
++MesHandleFree( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t  Handle );
++
++_Windows_SupportedOS_Windows2000_ 
+ 
+ RPC_STATUS  RPC_ENTRY
+ MesInqProcEncodingId(
+-    handle_t                    Handle,
+-    PRPC_SYNTAX_IDENTIFIER      pInterfaceId,
+-    unsigned long  *   pProcNum );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                    Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_SYNTAX_IDENTIFIER      pInterfaceId,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *   pProcNum );
+ 
+ 
+ size_t  RPC_ENTRY
+-NdrMesSimpleTypeAlignSize ( handle_t );
++NdrMesSimpleTypeAlignSize ( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t );
+ 
+ void  RPC_ENTRY
+ NdrMesSimpleTypeDecode(
+-    handle_t            Handle,
+-    void            *   pObject,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t            Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void            *   pObject,
+     short               Size );
+ 
+ void  RPC_ENTRY
+ NdrMesSimpleTypeEncode(
+-    handle_t                Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
+     const MIDL_STUB_DESC *  pStubDesc,
+     const void           *  pObject,
+     short                   Size );
+@@ -161,69 +180,71 @@ NdrMesSimpleTypeEncode(
+ 
+ size_t  RPC_ENTRY
+ NdrMesTypeAlignSize(
+-    handle_t                Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
+     const MIDL_STUB_DESC *  pStubDesc,
+-    PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
+     const void           *  pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeEncode(
+-    handle_t                Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
+     const MIDL_STUB_DESC *  pStubDesc,
+-    PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
+     const void           *  pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeDecode(
+-    handle_t                Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
+     const MIDL_STUB_DESC *  pStubDesc,
+-    PFORMAT_STRING          pFormatString,
+-    void                 *  pObject );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                 *  pObject );
+ 
+ size_t  RPC_ENTRY
+ NdrMesTypeAlignSize2(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,
+     const MIDL_STUB_DESC *          pStubDesc,
+-    PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
+     const void           *          pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeEncode2(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,    
+     const MIDL_STUB_DESC *          pStubDesc,
+-    PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
+     const void           *          pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeDecode2(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,    
+     const MIDL_STUB_DESC *          pStubDesc,
+-    PFORMAT_STRING                  pFormatString,
+-    void                 *          pObject );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                 *          pObject );
+ 
+ void RPC_ENTRY
+ NdrMesTypeFree2(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,
+     const MIDL_STUB_DESC          * pStubDesc,
+-    PFORMAT_STRING                  pFormatString,
+-    void                 *          pObject );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                 *          pObject );
+ 
+ void  RPC_VAR_ENTRY
+ NdrMesProcEncodeDecode(
+-    handle_t                Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
+     const MIDL_STUB_DESC *  pStubDesc,
+-    PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
+     ... );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ CLIENT_CALL_RETURN  RPC_VAR_ENTRY
+ NdrMesProcEncodeDecode2(
+-    handle_t                Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
+     const MIDL_STUB_DESC *  pStubDesc,
+-    PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
+     ...
+     );
+ 
+@@ -231,65 +252,65 @@ NdrMesProcEncodeDecode2(
+ // ndr64 entries.
+ size_t  RPC_ENTRY
+ NdrMesTypeAlignSize3(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+-    const unsigned long *          ArrTypeOffset[],
++    _WIN32META_ANNOTATION_("win32metadata:in") const unsigned long *          ArrTypeOffset[],
+     unsigned long                   nTypeIndex,
+     const void          *           pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeEncode3(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,    
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+-    const unsigned long *          ArrTypeOffset[],
++    _WIN32META_ANNOTATION_("win32metadata:in") const unsigned long *          ArrTypeOffset[],
+     unsigned long                   nTypeIndex,
+     const void          *           pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeDecode3(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,    
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+-    const unsigned long *          ArrTypeOffset[],
++    _WIN32META_ANNOTATION_("win32metadata:in") const unsigned long *          ArrTypeOffset[],
+     unsigned long                   nTypeIndex,
+-    void                *           pObject );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                *           pObject );
+ 
+ void  RPC_ENTRY
+ NdrMesTypeFree3(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,    
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+-    const unsigned long *          ArrTypeOffset[],
++    _WIN32META_ANNOTATION_("win32metadata:in") const unsigned long *          ArrTypeOffset[],
+     unsigned long                   nTypeIndex,
+-    void                *           pObject );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                *           pObject );
+ 
+ 
+ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ NdrMesProcEncodeDecode3(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+     unsigned long                   nProcNum,
+-    void                           *pReturnValue,    
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                           *pReturnValue,    
+     ... );
+ 
+ void  RPC_ENTRY
+ NdrMesSimpleTypeDecodeAll(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+-    void                *           pObject,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                *           pObject,
+     short                           Size );
+ 
+ void  RPC_ENTRY
+ NdrMesSimpleTypeEncodeAll(
+-    handle_t                        Handle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                        Handle,
+     const MIDL_STUBLESS_PROXY_INFO* pProxyInfo,
+     const void          *           pObject,
+     short                           Size );
+ 
+ size_t  RPC_ENTRY
+-NdrMesSimpleTypeAlignSizeAll ( handle_t Handle,
++NdrMesSimpleTypeAlignSizeAll ( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t Handle,
+                                const MIDL_STUBLESS_PROXY_INFO*  pProxyInfo );
+ 
+ 

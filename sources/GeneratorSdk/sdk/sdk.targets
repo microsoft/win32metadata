@@ -24,8 +24,9 @@
       <_WinmdArch Include="$(TargetArchitectures)"/>
     </ItemGroup>
     <PropertyGroup>
+      <_WinmdPartitionFile>$(WinmdObjDir)\partitions.rsp</_WinmdPartitionFile>
       <_WinmdArgs>scrape</_WinmdArgs>
-      <_WinmdArgs>$(_WinmdArgs) @(Partition->'--partition &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) --partition-file &quot;$(_WinmdPartitionFile)&quot;</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdIncludeDir->'--include &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(ImportLibs->'--lib &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(_WinmdArch->'--arch %(Identity)', ' ')</_WinmdArgs>
@@ -37,6 +38,12 @@
       <_WinmdArgs>$(_WinmdArgs) --obj &quot;$(WinmdObjDir)&quot; --output &quot;$(OutputWinmd)&quot;</_WinmdArgs>
     </PropertyGroup>
 
+    <MakeDir Directories="$(WinmdObjDir)"/>
+    <WriteLinesToFile File="$(_WinmdPartitionFile)"
+                      Lines="@(Partition->'%(FullPath)')"
+                      Overwrite="true"
+                      WriteOnlyWhenDifferent="true"
+                      Encoding="UTF-8"/>
     <Message Text="Generating $(OutputWinmd) with windows-clang/windows-rdl/windows-metadata" Importance="high"/>
     <Exec Command="&quot;$(Win32MetadataToolsExe)&quot; $(_WinmdArgs)"
           EnvironmentVariables="LIBCLANG_PATH=$(LibClangPath)"

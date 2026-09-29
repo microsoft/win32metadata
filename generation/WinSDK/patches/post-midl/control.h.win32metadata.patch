@@ -1,0 +1,204 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/control.h b/generation/WinSDK/RecompiledIdlHeaders/um/control.h
+index 0fd3a2756d..daafd84cd6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/control.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/control.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -363,7 +364,7 @@ DEFINE_GUID(IID_IMediaControl,0x56a868b1,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b1-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b1-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IMediaControl : public IDispatch
+     {
+     public:
+@@ -585,7 +586,7 @@ DEFINE_GUID(IID_IMediaEvent,0x56a868b6,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b6-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b6-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IMediaEvent : public IDispatch
+     {
+     public:
+@@ -790,7 +791,7 @@ DEFINE_GUID(IID_IMediaEventEx,0x56a868c0,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868c0-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868c0-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IMediaEventEx : public IMediaEvent
+     {
+     public:
+@@ -1009,7 +1010,7 @@ DEFINE_GUID(IID_IMediaPosition,0x56a868b2,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b2-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b2-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IMediaPosition : public IDispatch
+     {
+     public:
+@@ -1257,7 +1258,7 @@ DEFINE_GUID(IID_IBasicAudio,0x56a868b3,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b3-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b3-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IBasicAudio : public IDispatch
+     {
+     public:
+@@ -1428,7 +1429,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b4-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b4-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IVideoWindow : public IDispatch
+     {
+     public:
+@@ -1436,7 +1437,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
+             /* [in] */ __RPC__in BSTR strCaption) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Caption( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strCaption) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strCaption) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_WindowStyle( 
+             /* [in] */ long WindowStyle) = 0;
+@@ -1460,7 +1461,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
+             /* [in] */ long WindowState) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WindowState( 
+-            /* [retval][out] */ __RPC__out long *WindowState) = 0;
++            /* [retval][out] */ _Win32_AssociatedEnum_(SHOW_WINDOW_CMD) __RPC__out long *WindowState) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_BackgroundPalette( 
+             /* [in] */ long BackgroundPalette) = 0;
+@@ -1558,7 +1559,7 @@ DEFINE_GUID(IID_IVideoWindow,0x56a868b4,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0
+             /* [out] */ __RPC__out long *pHeight) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE HideCursor( 
+-            /* [in] */ long HideCursor) = 0;
++            /* [in] */ _Win32_AssociatedEnum_(OA_BOOL) long HideCursor) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsCursorHidden( 
+             /* [out] */ __RPC__out long *CursorHidden) = 0;
+@@ -2012,7 +2013,7 @@ DEFINE_GUID(IID_IBasicVideo,0x56a868b5,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b5-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b5-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IBasicVideo : public IDispatch
+     {
+     public:
+@@ -2517,7 +2518,7 @@ DEFINE_GUID(IID_IBasicVideo2,0x329bb360,0xf6ea,0x11d1,0x90,0x38,0x00,0xa0,0xc9,0
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("329bb360-f6ea-11d1-9038-00a0c9697298")
++    MIDL_INTERFACE("329bb360-f6ea-11d1-9038-00a0c9697298") _Windows_SupportedOS_Windows2000_ 
+     IBasicVideo2 : public IBasicVideo
+     {
+     public:
+@@ -2927,7 +2928,7 @@ DEFINE_GUID(IID_IDeferredCommand,0x56a868b8,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0x
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b8-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b8-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IDeferredCommand : public IUnknown
+     {
+     public:
+@@ -3042,7 +3043,7 @@ DEFINE_GUID(IID_IQueueCommand,0x56a868b7,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56a868b7-0ad4-11ce-b03a-0020af0ba770")
++    MIDL_INTERFACE("56a868b7-0ad4-11ce-b03a-0020af0ba770") _Windows_SupportedOS_Windows2000_ 
+     IQueueCommand : public IUnknown
+     {
+     public:
+@@ -3186,10 +3187,10 @@ DEFINE_GUID(IID_IFilterInfo,0x56a868ba,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
+             /* [out] */ __RPC__deref_out_opt IDispatch **ppUnk) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_VendorInfo( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strVendorInfo) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strVendorInfo) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Filter( 
+             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk) = 0;
+@@ -3201,7 +3202,7 @@ DEFINE_GUID(IID_IFilterInfo,0x56a868ba,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x
+             /* [retval][out] */ __RPC__out LONG *pbIsSource) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Filename( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrFilename) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrFilename) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Filename( 
+             /* [in] */ __RPC__in BSTR strFilename) = 0;
+@@ -3399,7 +3400,7 @@ DEFINE_GUID(IID_IRegFilterInfo,0x56a868bb,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Filter( 
+             /* [out] */ __RPC__deref_out_opt IDispatch **ppUnk) = 0;
+@@ -3548,10 +3549,10 @@ DEFINE_GUID(IID_IMediaTypeInfo,0x56a868bc,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strType) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Subtype( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strType) = 0;
+         
+     };
+     
+@@ -3709,13 +3710,13 @@ DEFINE_GUID(IID_IPinInfo,0x56a868bd,0x0ad4,0x11ce,0xb0,0x3a,0x00,0x20,0xaf,0x0b,
+             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppUnk) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ppUnk) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Direction( 
+             /* [retval][out] */ __RPC__out LONG *ppDirection) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PinID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strPinID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *strPinID) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MediaTypes( 
+             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppUnk) = 0;
+@@ -3960,7 +3961,7 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bc9bcf80-dcd2-11d2-abf6-00a0c905f375")
++    MIDL_INTERFACE("bc9bcf80-dcd2-11d2-abf6-00a0c905f375") _Windows_SupportedOS_WindowsXP_ 
+     IAMStats : public IDispatch
+     {
+     public:
+@@ -3971,7 +3972,7 @@ DEFINE_GUID(IID_IAMStats,0xbc9bcf80,0xdcd2,0x11d2,0xab,0xf6,0x00,0xa0,0xc9,0x05,
+         
+         virtual HRESULT STDMETHODCALLTYPE GetValueByIndex( 
+             /* [in] */ long lIndex,
+-            /* [out] */ __RPC__deref_out_opt BSTR *szName,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *szName,
+             /* [out] */ __RPC__out long *lCount,
+             /* [out] */ __RPC__out double *dLast,
+             /* [out] */ __RPC__out double *dAverage,

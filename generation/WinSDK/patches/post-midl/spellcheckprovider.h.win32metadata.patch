@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h
+index 0ac38aa555..f063c69587 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/spellcheckprovider.h
+@@ -81,6 +81,7 @@ extern "C"{
+ 
+ // Copyright (c) Microsoft Corporation. All Rights Reserved.
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #ifndef MIN_SPELLING_NTDDI
+@@ -103,8 +104,8 @@ EXTERN_C const IID IID_ISpellCheckProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("73E976E0-8ED4-4EB1-80D7-1BE0A16B0C38")
+-    ISpellCheckProvider : public IUnknown
++    MIDL_INTERFACE("73E976E0-8ED4-4EB1-80D7-1BE0A16B0C38") _Windows_SupportedOS_Windows8_ 
++      ISpellCheckProvider : public IUnknown
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LanguageTag( 
+@@ -259,7 +260,7 @@ EXTERN_C const IID IID_ISpellCheckProvider;
+         END_INTERFACE
+     } ISpellCheckProviderVtbl;
+ 
+-    interface ISpellCheckProvider
++    interface _Windows_SupportedOS_Windows8_ ISpellCheckProvider
+     {
+         CONST_VTBL struct ISpellCheckProviderVtbl *lpVtbl;
+     };
+@@ -422,7 +423,7 @@ EXTERN_C const IID IID_ISpellCheckProviderFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F671E11-77D6-4C92-AEFB-615215E3A4BE")
++    MIDL_INTERFACE("9F671E11-77D6-4C92-AEFB-615215E3A4BE") _Windows_SupportedOS_Windows8_ 
+     ISpellCheckProviderFactory : public IUnknown
+     {
+     public:

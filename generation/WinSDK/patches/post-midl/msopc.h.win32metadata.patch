@@ -1,0 +1,288 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msopc.h b/generation/WinSDK/RecompiledIdlHeaders/um/msopc.h
+index 4d0db63a65..8c6692f482 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msopc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msopc.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -343,7 +344,7 @@ EXTERN_C const IID IID_IOpcUri;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bc9c1b9b-d62c-49eb-aef0-3b4e0b28ebed")
++    MIDL_INTERFACE("bc9c1b9b-d62c-49eb-aef0-3b4e0b28ebed") _Windows_SupportedOS_Windows7_ 
+     IOpcUri : public IUri
+     {
+     public:
+@@ -702,7 +703,7 @@ EXTERN_C const IID IID_IOpcPartUri;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7d3babe7-88b2-46ba-85cb-4203cb016c87")
++    MIDL_INTERFACE("7d3babe7-88b2-46ba-85cb-4203cb016c87") _Windows_SupportedOS_Windows7_ 
+     IOpcPartUri : public IOpcUri
+     {
+     public:
+@@ -1382,7 +1383,7 @@ EXTERN_C const IID IID_IOpcPackage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE70")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE70") _Windows_SupportedOS_Windows7_ 
+     IOpcPackage : public IUnknown
+     {
+     public:
+@@ -1482,7 +1483,7 @@ EXTERN_C const IID IID_IOpcPart;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE71")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE71") _Windows_SupportedOS_Windows7_ 
+     IOpcPart : public IUnknown
+     {
+     public:
+@@ -1621,7 +1622,7 @@ EXTERN_C const IID IID_IOpcRelationship;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE72")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE72") _Windows_SupportedOS_Windows7_ 
+     IOpcRelationship : public IUnknown
+     {
+     public:
+@@ -1760,7 +1761,7 @@ EXTERN_C const IID IID_IOpcPartSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE73")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE73") _Windows_SupportedOS_Windows7_ 
+     IOpcPartSet : public IUnknown
+     {
+     public:
+@@ -1919,7 +1920,7 @@ EXTERN_C const IID IID_IOpcRelationshipSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE74")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE74") _Windows_SupportedOS_Windows7_ 
+     IOpcRelationshipSet : public IUnknown
+     {
+     public:
+@@ -2112,7 +2113,7 @@ EXTERN_C const IID IID_IOpcPartEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE75")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE75") _Windows_SupportedOS_Windows7_ 
+     IOpcPartEnumerator : public IUnknown
+     {
+     public:
+@@ -2238,7 +2239,7 @@ EXTERN_C const IID IID_IOpcRelationshipEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE76")
++    MIDL_INTERFACE("42195949-3B79-4fc8-89C6-FC7FB979EE76") _Windows_SupportedOS_Windows7_ 
+     IOpcRelationshipEnumerator : public IUnknown
+     {
+     public:
+@@ -2364,7 +2365,7 @@ EXTERN_C const IID IID_IOpcSignaturePartReference;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e24231ca-59f4-484e-b64b-36eeda36072c")
++    MIDL_INTERFACE("e24231ca-59f4-484e-b64b-36eeda36072c") _Windows_SupportedOS_Windows7_ 
+     IOpcSignaturePartReference : public IUnknown
+     {
+     public:
+@@ -2507,7 +2508,7 @@ EXTERN_C const IID IID_IOpcSignatureRelationshipReference;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("57babac6-9d4a-4e50-8b86-e5d4051eae7c")
++    MIDL_INTERFACE("57babac6-9d4a-4e50-8b86-e5d4051eae7c") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureRelationshipReference : public IUnknown
+     {
+     public:
+@@ -2663,7 +2664,7 @@ EXTERN_C const IID IID_IOpcRelationshipSelector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f8f26c7f-b28f-4899-84c8-5d5639ede75f")
++    MIDL_INTERFACE("f8f26c7f-b28f-4899-84c8-5d5639ede75f") _Windows_SupportedOS_Windows7_ 
+     IOpcRelationshipSelector : public IUnknown
+     {
+     public:
+@@ -2763,7 +2764,7 @@ EXTERN_C const IID IID_IOpcSignatureReference;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1b47005e-3011-4edc-be6f-0f65e5ab0342")
++    MIDL_INTERFACE("1b47005e-3011-4edc-be6f-0f65e5ab0342") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureReference : public IUnknown
+     {
+     public:
+@@ -2919,7 +2920,7 @@ EXTERN_C const IID IID_IOpcSignatureCustomObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5d77a19e-62c1-44e7-becd-45da5ae51a56")
++    MIDL_INTERFACE("5d77a19e-62c1-44e7-becd-45da5ae51a56") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureCustomObject : public IUnknown
+     {
+     public:
+@@ -3010,7 +3011,7 @@ EXTERN_C const IID IID_IOpcDigitalSignature;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("52ab21dd-1cd0-4949-bc80-0c1232d00cb4")
++    MIDL_INTERFACE("52ab21dd-1cd0-4949-bc80-0c1232d00cb4") _Windows_SupportedOS_Windows7_ 
+     IOpcDigitalSignature : public IUnknown
+     {
+     public:
+@@ -3295,7 +3296,7 @@ EXTERN_C const IID IID_IOpcSigningOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("50d2d6a5-7aeb-46c0-b241-43ab0e9b407e")
++    MIDL_INTERFACE("50d2d6a5-7aeb-46c0-b241-43ab0e9b407e") _Windows_SupportedOS_Windows7_ 
+     IOpcSigningOptions : public IUnknown
+     {
+     public:
+@@ -3590,7 +3591,7 @@ EXTERN_C const IID IID_IOpcDigitalSignatureManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d5e62a0b-696d-462f-94df-72e33cef2659")
++    MIDL_INTERFACE("d5e62a0b-696d-462f-94df-72e33cef2659") _Windows_SupportedOS_Windows7_ 
+     IOpcDigitalSignatureManager : public IUnknown
+     {
+     public:
+@@ -3796,7 +3797,7 @@ EXTERN_C const IID IID_IOpcSignaturePartReferenceEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("80eb1561-8c77-49cf-8266-459b356ee99a")
++    MIDL_INTERFACE("80eb1561-8c77-49cf-8266-459b356ee99a") _Windows_SupportedOS_Windows7_ 
+     IOpcSignaturePartReferenceEnumerator : public IUnknown
+     {
+     public:
+@@ -3922,7 +3923,7 @@ EXTERN_C const IID IID_IOpcSignatureRelationshipReferenceEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("773ba3e4-f021-48e4-aa04-9816db5d3495")
++    MIDL_INTERFACE("773ba3e4-f021-48e4-aa04-9816db5d3495") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureRelationshipReferenceEnumerator : public IUnknown
+     {
+     public:
+@@ -4048,7 +4049,7 @@ EXTERN_C const IID IID_IOpcRelationshipSelectorEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5e50a181-a91b-48ac-88d2-bca3d8f8c0b1")
++    MIDL_INTERFACE("5e50a181-a91b-48ac-88d2-bca3d8f8c0b1") _Windows_SupportedOS_Windows7_ 
+     IOpcRelationshipSelectorEnumerator : public IUnknown
+     {
+     public:
+@@ -4174,7 +4175,7 @@ EXTERN_C const IID IID_IOpcSignatureReferenceEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("cfa59a45-28b1-4868-969e-fa8097fdc12a")
++    MIDL_INTERFACE("cfa59a45-28b1-4868-969e-fa8097fdc12a") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureReferenceEnumerator : public IUnknown
+     {
+     public:
+@@ -4300,7 +4301,7 @@ EXTERN_C const IID IID_IOpcSignatureCustomObjectEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5ee4fe1d-e1b0-4683-8079-7ea0fcf80b4c")
++    MIDL_INTERFACE("5ee4fe1d-e1b0-4683-8079-7ea0fcf80b4c") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureCustomObjectEnumerator : public IUnknown
+     {
+     public:
+@@ -4426,7 +4427,7 @@ EXTERN_C const IID IID_IOpcCertificateEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("85131937-8f24-421f-b439-59ab24d140b8")
++    MIDL_INTERFACE("85131937-8f24-421f-b439-59ab24d140b8") _Windows_SupportedOS_Windows7_ 
+     IOpcCertificateEnumerator : public IUnknown
+     {
+     public:
+@@ -4552,7 +4553,7 @@ EXTERN_C const IID IID_IOpcDigitalSignatureEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("967b6882-0ba3-4358-b9e7-b64c75063c5e")
++    MIDL_INTERFACE("967b6882-0ba3-4358-b9e7-b64c75063c5e") _Windows_SupportedOS_Windows7_ 
+     IOpcDigitalSignatureEnumerator : public IUnknown
+     {
+     public:
+@@ -4678,7 +4679,7 @@ EXTERN_C const IID IID_IOpcSignaturePartReferenceSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6c9fe28c-ecd9-4b22-9d36-7fdde670fec0")
++    MIDL_INTERFACE("6c9fe28c-ecd9-4b22-9d36-7fdde670fec0") _Windows_SupportedOS_Windows7_ 
+     IOpcSignaturePartReferenceSet : public IUnknown
+     {
+     public:
+@@ -4803,7 +4804,7 @@ EXTERN_C const IID IID_IOpcSignatureRelationshipReferenceSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9f863ca5-3631-404c-828d-807e0715069b")
++    MIDL_INTERFACE("9f863ca5-3631-404c-828d-807e0715069b") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureRelationshipReferenceSet : public IUnknown
+     {
+     public:
+@@ -4949,7 +4950,7 @@ EXTERN_C const IID IID_IOpcRelationshipSelectorSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6e34c269-a4d3-47c0-b5c4-87ff2b3b6136")
++    MIDL_INTERFACE("6e34c269-a4d3-47c0-b5c4-87ff2b3b6136") _Windows_SupportedOS_Windows7_ 
+     IOpcRelationshipSelectorSet : public IUnknown
+     {
+     public:
+@@ -5070,7 +5071,7 @@ EXTERN_C const IID IID_IOpcSignatureReferenceSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f3b02d31-ab12-42dd-9e2f-2b16761c3c1e")
++    MIDL_INTERFACE("f3b02d31-ab12-42dd-9e2f-2b16761c3c1e") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureReferenceSet : public IUnknown
+     {
+     public:
+@@ -5203,7 +5204,7 @@ EXTERN_C const IID IID_IOpcSignatureCustomObjectSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8f792ac5-7947-4e11-bc3d-2659ff046ae1")
++    MIDL_INTERFACE("8f792ac5-7947-4e11-bc3d-2659ff046ae1") _Windows_SupportedOS_Windows7_ 
+     IOpcSignatureCustomObjectSet : public IUnknown
+     {
+     public:
+@@ -5324,7 +5325,7 @@ EXTERN_C const IID IID_IOpcCertificateSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("56ea4325-8e2d-4167-b1a4-e486d24c8fa7")
++    MIDL_INTERFACE("56ea4325-8e2d-4167-b1a4-e486d24c8fa7") _Windows_SupportedOS_Windows7_ 
+     IOpcCertificateSet : public IUnknown
+     {
+     public:
+@@ -5437,7 +5438,7 @@ EXTERN_C const IID IID_IOpcFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6d0b4446-cd73-4ab3-94f4-8ccdf6116154")
++    MIDL_INTERFACE("6d0b4446-cd73-4ab3-94f4-8ccdf6116154") _Windows_SupportedOS_Windows7_ 
+     IOpcFactory : public IUnknown
+     {
+     public:

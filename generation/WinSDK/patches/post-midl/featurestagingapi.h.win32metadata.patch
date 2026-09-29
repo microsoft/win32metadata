@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/featurestagingapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/featurestagingapi.h
+index 35e58e4089..4f35989927 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/featurestagingapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/featurestagingapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*********************************************************************************
+ *                                                                                *
+ * featurestagingapi.h -- ApiSet Contract for api-ms-win-core-featurestaging-l1 *
+@@ -51,7 +52,7 @@ typedef struct FEATURE_ERROR
+     PCSTR originName;
+ } FEATURE_ERROR;
+ 
+-DECLARE_HANDLE(FEATURE_STATE_CHANGE_SUBSCRIPTION);
++DECLARE_HANDLE(FEATURE_STATE_CHANGE_SUBSCRIPTION) _WIN32META_ANNOTATION_("win32metadata:raii_free=UnsubscribeFeatureStateChangeNotification")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef void WINAPI FEATURE_STATE_CHANGE_CALLBACK(_In_opt_ void* context);
+ typedef FEATURE_STATE_CHANGE_CALLBACK *PFEATURE_STATE_CHANGE_CALLBACK;
+ 
+@@ -81,7 +82,7 @@ RecordFeatureError(
+ EXTERN_C
+ void
+ SubscribeFeatureStateChangeNotification(
+-    _Outptr_ FEATURE_STATE_CHANGE_SUBSCRIPTION* subscription,
++    _Win32_RAIIFree_(UnsubscribeFeatureStateChangeNotification, -1, 0) _Outptr_ FEATURE_STATE_CHANGE_SUBSCRIPTION* subscription,
+     _In_ PFEATURE_STATE_CHANGE_CALLBACK callback,
+     _In_opt_ void* context
+     );

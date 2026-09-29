@@ -1,0 +1,1081 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
+index eb2800ade3..1032a5563f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Vfw.h
+@@ -41,6 +41,7 @@
+ #define _INC_VFW
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -127,7 +128,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ 
+ #define ICVERSION       0x0104
+ 
+-DECLARE_HANDLE(HIC);     /* Handle to a Installable Compressor */
++DECLARE_HANDLE(HIC) _WIN32META_ANNOTATION_("win32metadata:raii_free=ICClose")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;     /* Handle to a Installable Compressor */
+ 
+ //
+ // this code in biCompression means the DIB must be accesed via
+@@ -184,8 +185,16 @@ DECLARE_HANDLE(HIC);     /* Handle to a Installable Compressor */
+ #define ICMODE_DRAW             8
+ #endif
+ #ifndef _WIN32					// ;Internal
++#endif
++#if (defined(WIN32METADATA) && !defined(ICMODE_INTERNALF_FUNCTION32)) || (((!defined(_WIN32))))
+ #define ICMODE_INTERNALF_FUNCTION32	0x8000	// ;Internal
++#endif
++#ifndef _WIN32					// ;Internal
++#endif
++#if (defined(WIN32METADATA) && !defined(ICMODE_INTERNALF_MASK)) || (((!defined(_WIN32))))
+ #define ICMODE_INTERNALF_MASK		0x8000	// ;Internal
++#endif
++#ifndef _WIN32					// ;Internal
+ #endif						// ;Internal
+ 
+ /* Flags for AVI file index */
+@@ -297,7 +306,7 @@ DECLARE_HANDLE(HIC);     /* Handle to a Installable Compressor */
+ /************************************************************************
+ ************************************************************************/
+ 
+-typedef struct {
++typedef struct   {
+     DWORD               dwSize;         // sizeof(ICOPEN)
+     DWORD               fccType;        // 'vidc'
+     DWORD               fccHandler;     //
+@@ -312,7 +321,7 @@ typedef struct {
+ /************************************************************************
+ ************************************************************************/
+ 
+-typedef struct {
++typedef struct   {
+     DWORD   dwSize;                 // sizeof(ICINFO)
+     DWORD   fccType;                // compressor type     'vidc' 'audc'
+     DWORD   fccHandler;             // compressor sub-type 'rle ' 'jpeg' 'pcm '
+@@ -344,7 +353,7 @@ typedef struct {
+ 
+ #define ICCOMPRESS_KEYFRAME	0x00000001L
+ 
+-typedef struct {
++typedef struct   {
+     DWORD               dwFlags;        // flags
+ 
+     LPBITMAPINFOHEADER  lpbiOutput;     // output format
+@@ -371,7 +380,7 @@ typedef struct {
+ 
+ #define ICCOMPRESSFRAMES_PADDING	0x00000001
+ 
+-typedef struct {
++typedef struct   {
+     DWORD               dwFlags;        // flags
+ 
+     LPBITMAPINFOHEADER  lpbiOutput;     // output format
+@@ -397,7 +406,7 @@ typedef struct {
+     LONG (CALLBACK *PutData)(_In_ LPARAM lOutput, _In_ LONG lFrame, _In_reads_bytes_(len) LPVOID lpBits, _In_ LONG len);
+ } ICCOMPRESSFRAMES;
+ 
+-typedef struct {
++typedef struct   {
+     DWORD		dwFlags;
+     LPARAM		lParam;
+ 
+@@ -421,7 +430,7 @@ typedef struct {
+ #define ICDECOMPRESS_NULLFRAME    0x10000000L   // repeat last frame
+ #define ICDECOMPRESS_NOTKEYFRAME  0x08000000L   // this frame is not a key frame
+ 
+-typedef struct {
++typedef struct   {
+     DWORD               dwFlags;    // flags (from AVI index...)
+ 
+     LPBITMAPINFOHEADER  lpbiInput;  // BITMAPINFO of compressed data
+@@ -435,7 +444,7 @@ typedef struct {
+     DWORD		ckid;	    // ckid from AVI file
+ } ICDECOMPRESS;
+ 
+-typedef struct {
++typedef struct   {
+     //
+     // same as ICM_DECOMPRESS
+     //
+@@ -475,7 +484,7 @@ typedef struct {
+ #define ICDRAW_RENDER       0x00000080L   // used to render data not draw it
+ #define ICDRAW_BUFFER       0x00000100L   // please buffer this data offscreen, we will need to update it
+ 
+-typedef struct {
++typedef struct   {
+     DWORD               dwFlags;        // flags
+ 
+     HPALETTE            hpal;           // palette to draw with
+@@ -508,7 +517,7 @@ typedef struct {
+ #define ICDRAW_NULLFRAME    0x10000000L	  // repeat last frame
+ #define ICDRAW_NOTKEYFRAME  0x08000000L   // this frame is not a key frame
+ 
+-typedef struct {
++typedef struct   {
+     DWORD               dwFlags;        // flags
+     LPVOID		lpFormat;       // format of frame to decompress
+     LPVOID              lpData;         // frame data to decompress
+@@ -516,7 +525,7 @@ typedef struct {
+     LONG                lTime;          // time in drawbegin units (see dwRate and dwScale)
+ } ICDRAW;
+ 
+-typedef struct {
++typedef struct   {
+     LPBITMAPINFOHEADER	lpbiIn;		// format to be drawn
+     LPBITMAPINFOHEADER	lpbiSuggest;	// location for suggested format (or NULL to get size)
+     int			dxSrc;		// source extent or 0
+@@ -543,17 +552,17 @@ typedef struct {
+ 	
+ ************************************************************************/
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ VFWAPI
+-ICInfo(
++  ICInfo(
+     _In_ DWORD fccType,
+     _In_ DWORD fccHandler,
+     _Out_ ICINFO FAR * lpicinfo
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ VFWAPI
+-ICInstall(
++  ICInstall(
+     _In_ DWORD fccType,
+     _In_ DWORD fccHandler,
+     _In_ LPARAM lParam,
+@@ -561,49 +570,49 @@ ICInstall(
+     _In_ UINT wFlags
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ VFWAPI
+-ICRemove(
++  ICRemove(
+     _In_ DWORD fccType,
+     _In_ DWORD fccHandler,
+     _In_ UINT wFlags
+     );
+ 
+-_Success_(return != 0)
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ LRESULT
+ VFWAPI
+-ICGetInfo(
++  ICGetInfo(
+     _In_ HIC hic,
+     _Out_writes_bytes_to_(cb,return) ICINFO FAR *picinfo,
+     _In_ DWORD cb
+     );
+ 
+-HIC
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(ICClose, -1, 0) HIC
+ VFWAPI
+-ICOpen(
++  ICOpen(
+     _In_ DWORD fccType,
+     _In_ DWORD fccHandler,
+     _In_ UINT wMode
+     );
+ 
+-HIC
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(ICClose, -1, 0) HIC
+ VFWAPI
+-ICOpenFunction(
++  ICOpenFunction(
+     _In_ DWORD fccType,
+     _In_ DWORD fccHandler,
+     _In_ UINT wMode,
+     _In_ FARPROC lpfnHandler
+     );
+ 
+-LRESULT
++_Windows_SupportedOS_Windows2000_ LRESULT
+ VFWAPI
+-ICClose(
++  ICClose(
+     _In_ HIC hic
+     );
+ 
+-LRESULT
++_Windows_SupportedOS_Windows2000_ LRESULT
+ VFWAPI
+-ICSendMessage(
++  ICSendMessage(
+     _In_ HIC hic,
+     _In_ UINT msg,
+     _In_ DWORD_PTR dw1,
+@@ -691,9 +700,9 @@ static DWORD dwICValue;
+  *  compress a single frame
+  *
+  */
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ VFWAPIV
+-ICCompress(
++  ICCompress(
+     _In_       HIC                 hic,
+     _In_       DWORD               dwFlags,        // flags
+     _In_       LPBITMAPINFOHEADER  lpbiOutput,     // output format
+@@ -768,9 +777,9 @@ ICCompress(
+  */
+ #define ICDECOMPRESS_HURRYUP    0x80000000L     // don't draw just buffer (hurry up!)
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ VFWAPIV
+-ICDecompress(
++  ICDecompress(
+     _In_  HIC                 hic,
+     _In_  DWORD               dwFlags,    // flags (from AVI index...)
+     _In_  LPBITMAPINFOHEADER  lpbiFormat, // BITMAPINFO of compressed data
+@@ -996,9 +1005,9 @@ ICDecompressExQuery(
+ #define ICDRAW_FULLSCREEN   0x00000002L   // draw to full screen
+ #define ICDRAW_HDC          0x00000004L   // draw to a HDC/HWND
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ VFWAPIV
+-ICDrawBegin(
++  ICDrawBegin(
+     _In_     HIC                 hic,
+     _In_     DWORD               dwFlags,        // flags
+     _In_opt_ HPALETTE            hpal,           // palette to draw with
+@@ -1027,9 +1036,9 @@ ICDrawBegin(
+ #define ICDRAW_HURRYUP      0x80000000L   // don't draw just buffer (hurry up!)
+ #define ICDRAW_UPDATE       0x40000000L   // don't draw just update screen
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ VFWAPIV
+-ICDraw(
++  ICDraw(
+     _In_ HIC                        hic,
+     _In_ DWORD                      dwFlags,                  // flags
+     _In_ LPVOID                     lpFormat,                 // format of frame to decompress
+@@ -1159,9 +1168,9 @@ helper routines for DrawDib and MCIAVI...
+ #define ICDrawOpen(fccType, fccHandler, lpbiIn) \
+     ICLocate(fccType, fccHandler, lpbiIn, NULL, ICMODE_DRAW)
+ 
+-HIC
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(ICClose, -1, 0) HIC
+ VFWAPI
+-ICLocate(
++  ICLocate(
+     _In_     DWORD fccType,
+     _In_     DWORD fccHandler,
+     _In_     LPBITMAPINFOHEADER lpbiIn,
+@@ -1169,9 +1178,9 @@ ICLocate(
+     _In_     WORD wFlags
+     );
+ 
+-HIC
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(ICClose, -1, 0) HIC
+ VFWAPI
+-ICGetDisplayFormat(
++  ICGetDisplayFormat(
+     _In_opt_  HIC hic,
+     _In_      LPBITMAPINFOHEADER lpbiIn,
+     _Out_     LPBITMAPINFOHEADER lpbiOut,
+@@ -1184,9 +1193,9 @@ ICGetDisplayFormat(
+ Higher level functions
+ ************************************************************************/
+ 
+-HANDLE
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ VFWAPI
+-ICImageCompress(
++  ICImageCompress(
+     _In_         HIC                 hic,        // compressor to use
+     _In_         UINT                uiFlags,    // flags (none yet)
+     _In_         LPBITMAPINFO        lpbiIn,     // format to compress from
+@@ -1196,9 +1205,9 @@ ICImageCompress(
+     _Inout_opt_  LONG FAR *          plSize      // compress to this size (0=whatever)
+     );
+ 
+-HANDLE
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ VFWAPI
+-ICImageDecompress(
++  ICImageDecompress(
+     _In_opt_ HIC                 hic,        // compressor to use
+     _In_     UINT                uiFlags,    // flags (none yet)
+     _In_     LPBITMAPINFO        lpbiIn,     // format to decompress from
+@@ -1210,7 +1219,7 @@ ICImageDecompress(
+ // Structure used by ICSeqCompressFrame and ICCompressorChoose routines
+ // Make sure this matches the autodoc in icm.c!
+ //
+-typedef struct {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    {
+     LONG		cbSize;		// set to sizeof(COMPVARS) before
+ 					// calling ICCompressorChoose
+     DWORD		dwFlags;	// see below...
+@@ -1238,9 +1247,9 @@ typedef struct {
+ //
+ //  allows user to choose compressor, quality etc...
+ //
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ VFWAPI
+-ICCompressorChoose(
++  ICCompressorChoose(
+     _In_opt_  HWND        hwnd,               // parent window for dialog
+     _In_      UINT        uiFlags,            // flags
+     _In_opt_  LPVOID      pvIn,               // input format (optional)
+@@ -1257,32 +1266,32 @@ ICCompressorChoose(
+ 						// can handle the input format
+ 						// or input data
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ VFWAPI
+-ICSeqCompressFrameStart(
++  ICSeqCompressFrameStart(
+     _In_ PCOMPVARS pc,
+     _In_ LPBITMAPINFO lpbiIn
+     );
+ 
+-void
++_Windows_SupportedOS_Windows2000_ void
+ VFWAPI
+-ICSeqCompressFrameEnd(
++  ICSeqCompressFrameEnd(
+     _In_ PCOMPVARS pc
+     );
+ 
+-LPVOID
++_Windows_SupportedOS_Windows2000_ LPVOID
+ VFWAPI
+-ICSeqCompressFrame(
++  ICSeqCompressFrame(
+     _In_        PCOMPVARS               pc,         // set by ICCompressorChoose
+-    _Reserved_  UINT                    uiFlags,    // flags
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_  UINT                    uiFlags,    // flags
+     _In_        LPVOID                  lpBits,     // input DIB bits
+     _Out_       BOOL FAR               *pfKey,     // did it end up being a key frame?
+     _Inout_opt_ LONG FAR               *plSize     // size to compress to/of returned image
+     );
+ 
+-void
++_Windows_SupportedOS_Windows2000_ void
+ VFWAPI
+-ICCompressorFree(
++  ICCompressorFree(
+     _In_ PCOMPVARS pc
+     );
+ 
+@@ -1337,16 +1346,16 @@ extern BOOL VFWAPI DrawDibInit(void);			// ;Internal
+ **  DrawDibOpen()
+ **
+ */
+-extern HDRAWDIB VFWAPI DrawDibOpen(void);
++_Windows_SupportedOS_Windows2000_ extern HDRAWDIB VFWAPI   DrawDibOpen(void);
+ 
+ /*
+ **  DrawDibClose()
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibClose(
++  DrawDibClose(
+     _In_ HDRAWDIB hdd
+     );
+ 
+@@ -1354,10 +1363,10 @@ DrawDibClose(
+ ** DrawDibGetBuffer()
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ LPVOID
+ VFWAPI
+-DrawDibGetBuffer(
++  DrawDibGetBuffer(
+     _In_ HDRAWDIB hdd,
+     _Out_ LPBITMAPINFOHEADER lpbi,
+     _In_ DWORD dwSize,
+@@ -1375,10 +1384,10 @@ extern UINT VFWAPI DrawDibError(HDRAWDIB hdd);		// ;Internal
+ **  get the palette used for drawing DIBs
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) extern
+ HPALETTE
+ VFWAPI
+-DrawDibGetPalette(
++  DrawDibGetPalette(
+     _In_ HDRAWDIB hdd
+     );
+ 
+@@ -1389,10 +1398,10 @@ DrawDibGetPalette(
+ **  get the palette used for drawing DIBs
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibSetPalette(
++  DrawDibSetPalette(
+     _In_     HDRAWDIB hdd,
+     _In_opt_ HPALETTE hpal
+     );
+@@ -1400,10 +1409,10 @@ DrawDibSetPalette(
+ /*
+ **  DrawDibChangePalette()
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibChangePalette(
++  DrawDibChangePalette(
+     _In_ HDRAWDIB hdd,
+     _In_ int iStart,
+     _In_ int iLen,
+@@ -1416,10 +1425,10 @@ DrawDibChangePalette(
+ **  realize the palette in a HDD
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ UINT
+ VFWAPI
+-DrawDibRealize(
++  DrawDibRealize(
+     _In_ HDRAWDIB hdd,
+     _In_ HDC hdc,
+     _In_ BOOL fBackground
+@@ -1431,10 +1440,10 @@ DrawDibRealize(
+ **  start of streaming playback
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibStart(
++  DrawDibStart(
+     _In_ HDRAWDIB hdd,
+     _In_ DWORD rate
+     );
+@@ -1445,10 +1454,10 @@ DrawDibStart(
+ **  start of streaming playback
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibStop(
++  DrawDibStop(
+     _In_ HDRAWDIB hdd
+     );
+ 
+@@ -1458,10 +1467,10 @@ DrawDibStop(
+ **  prepare to draw
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibBegin(
++  DrawDibBegin(
+     _In_     HDRAWDIB hdd,
+     _In_opt_ HDC      hdc,
+     _In_     int      dxDst,
+@@ -1478,10 +1487,10 @@ DrawDibBegin(
+ **  actualy draw a DIB to the screen.
+ **
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibDraw(
++  DrawDibDraw(
+     _In_     HDRAWDIB hdd,
+     _In_     HDC      hdc,
+     _In_     int      xDst,
+@@ -1508,17 +1517,17 @@ DrawDibDraw(
+ /*
+ **  DrawDibEnd()
+ */
+-extern
++_Windows_SupportedOS_Windows2000_ extern
+ BOOL
+ VFWAPI
+-DrawDibEnd(
++  DrawDibEnd(
+     _In_ HDRAWDIB hdd
+     );
+ 
+ /*
+ **  DrawDibTime()  [for debugging purposes only]
+ */
+-typedef struct {
++typedef struct   {
+     LONG    timeCount;
+     LONG    timeDraw;
+     LONG    timeDecompress;
+@@ -1528,9 +1537,9 @@ typedef struct {
+     LONG    timeSetDIBits;
+ }   DRAWDIBTIME, FAR *LPDRAWDIBTIME;
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ VFWAPI
+-DrawDibTime(
++  DrawDibTime(
+     _In_  HDRAWDIB hdd,
+     _Out_ LPDRAWDIBTIME lpddtime
+     );
+@@ -1542,9 +1551,9 @@ DrawDibTime(
+ #define PD_STRETCHDIB_1_2_OK    0x0008      /* ... */
+ #define PD_STRETCHDIB_1_N_OK    0x0010      /* ... */
+ 
+-LRESULT
++_Windows_SupportedOS_Windows2000_ LRESULT
+ VFWAPI
+-DrawDibProfileDisplay(
++  DrawDibProfileDisplay(
+     _In_ LPBITMAPINFOHEADER lpbi
+     );
+ 
+@@ -1891,7 +1900,7 @@ extern "C" {            /* Assume C declarations for C++ */
+  *
+  * for Unicode/Ansi thunking we need to declare three versions of this!
+  */
+-typedef struct _AVISTREAMINFOW {
++typedef struct   _AVISTREAMINFOW {
+     DWORD		fccType;
+     DWORD               fccHandler;
+     DWORD               dwFlags;        /* Contains AVITF_* flags */
+@@ -1912,7 +1921,7 @@ typedef struct _AVISTREAMINFOW {
+     WCHAR		szName[64];
+ } AVISTREAMINFOW, FAR * LPAVISTREAMINFOW;
+ 
+-typedef struct _AVISTREAMINFOA {
++typedef struct   _AVISTREAMINFOA {
+     DWORD		fccType;
+     DWORD               fccHandler;
+     DWORD               dwFlags;        /* Contains AVITF_* flags */
+@@ -1951,7 +1960,7 @@ typedef struct _AVISTREAMINFOA {
+  */
+ 
+ 
+-typedef struct _AVIFILEINFOW {
++typedef struct   _AVIFILEINFOW {
+     DWORD		dwMaxBytesPerSec;	// max. transfer rate
+     DWORD		dwFlags;		// the ever-present flags
+     DWORD		dwCaps;
+@@ -1970,7 +1979,7 @@ typedef struct _AVIFILEINFOW {
+     WCHAR		szFileType[64];		// descriptive string for file type?
+ } AVIFILEINFOW, FAR * LPAVIFILEINFOW;
+ 
+-typedef struct _AVIFILEINFOA {
++typedef struct   _AVIFILEINFOA {
+     DWORD		dwMaxBytesPerSec;	// max. transfer rate
+     DWORD		dwFlags;		// the ever-present flags
+     DWORD		dwCaps;
+@@ -2018,7 +2027,7 @@ typedef BOOL (FAR PASCAL * AVISAVECALLBACK)(int);
+ /* matches the AutoDoc in avisave.c !!!                            	*/
+ /************************************************************************/
+ 
+-typedef struct {
++typedef struct   {
+     DWORD	fccType;		    /* stream type, for consistency */
+     DWORD       fccHandler;                 /* compressor */
+     DWORD       dwKeyFrameEvery;            /* keyframe rate */
+@@ -2061,7 +2070,7 @@ extern "C" {            /* Assume C declarations for C++ */
+ #undef  INTERFACE
+ #define INTERFACE   IAVIStream
+ 
+-DECLARE_INTERFACE_(IAVIStream, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIStream, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2105,7 +2114,7 @@ typedef       IAVIStream FAR* PAVISTREAM;
+ #undef  INTERFACE
+ #define INTERFACE   IAVIStreaming
+ 
+-DECLARE_INTERFACE_(IAVIStreaming, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIStreaming, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2127,7 +2136,7 @@ typedef       IAVIStreaming FAR* PAVISTREAMING;
+ #undef  INTERFACE
+ #define INTERFACE   IAVIEditStream
+ 
+-DECLARE_INTERFACE_(IAVIEditStream, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIEditStream, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2170,7 +2179,7 @@ typedef IAVIPersistFile FAR* PAVIPERSISTFILE;
+ #define INTERFACE   IAVIFile
+ #define PAVIFILE IAVIFile FAR*
+ 
+-DECLARE_INTERFACE_(IAVIFile, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IAVIFile, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2211,7 +2220,7 @@ typedef       IAVIFile FAR* PAVIFILE;
+ #define INTERFACE   IGetFrame
+ #define PGETFRAME   IGetFrame FAR*
+ 
+-DECLARE_INTERFACE_(IGetFrame, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IGetFrame, IUnknown)
+ {
+     // *** IUnknown methods ***
+     STDMETHOD(QueryInterface) (THIS_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -2261,16 +2270,16 @@ DEFINE_AVIGUID(CLSID_AVIFile,           0x00020000, 0, 0);
+ // functions
+ //
+ 
+-STDAPI_(void) AVIFileInit(void);   // Call this first!
+-STDAPI_(void) AVIFileExit(void);
++_Windows_SupportedOS_Windows2000_ STDAPI_(void)   AVIFileInit(void);   // Call this first!
++_Windows_SupportedOS_Windows2000_ STDAPI_(void)   AVIFileExit(void);
+ 
+-STDAPI_(ULONG) AVIFileAddRef       (PAVIFILE pfile);
+-STDAPI_(ULONG) AVIFileRelease      (PAVIFILE pfile);
++_Windows_SupportedOS_Windows2000_ STDAPI_(ULONG)   AVIFileAddRef       (PAVIFILE pfile);
++_Windows_SupportedOS_Windows2000_ STDAPI_(ULONG)   AVIFileRelease      (PAVIFILE pfile);
+ 
+ #ifdef _WIN32
+-STDAPI AVIFileOpenA       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileOpenA       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCSTR szFile,
+ 			  UINT uMode, _In_opt_ LPCLSID lpHandler);
+-STDAPI AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
+ 			  UINT uMode, _In_opt_ LPCLSID lpHandler);
+ #ifdef UNICODE
+ #define AVIFileOpen	  AVIFileOpenW	
+@@ -2284,8 +2293,8 @@ STDAPI AVIFileOpen       (PAVIFILE FAR * ppfile, LPCSTR szFile,
+ #endif
+ 
+ #ifdef _WIN32
+-STDAPI AVIFileInfoW (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOW pfi, _In_ LONG lSize);
+-STDAPI AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileInfoW (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOW pfi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
+ #ifdef UNICODE
+ #define AVIFileInfo	AVIFileInfoW
+ #else
+@@ -2297,12 +2306,12 @@ STDAPI AVIFileInfo (PAVIFILE pfile, LPAVIFILEINFO pfi, LONG lSize);
+ #endif
+ 
+ 
+-STDAPI AVIFileGetStream     (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR * ppavi, _In_ DWORD fccType, _In_ LONG lParam);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileGetStream     (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR * ppavi, _In_ DWORD fccType, _In_ LONG lParam);
+ 
+ 
+ #ifdef _WIN32
+-STDAPI AVIFileCreateStreamW (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOW FAR * psi);
+-STDAPI AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileCreateStreamW (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOW FAR * psi);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
+ #ifdef UNICODE
+ #define AVIFileCreateStream	AVIFileCreateStreamW
+ #else
+@@ -2313,34 +2322,34 @@ STDAPI AVIFileCreateStream(PAVIFILE pfile, PAVISTREAM FAR *ppavi, AVISTREAMINFO
+ #define AVIFileCreateStreamW AVIFileCreateStream	    /* ;Internal */
+ #endif
+ 
+-STDAPI AVIFileWriteData	(_In_ PAVIFILE pfile,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileWriteData	(_In_ PAVIFILE pfile,
+ 					 _In_ DWORD ckid,
+ 					 _In_reads_bytes_(cbData) LPVOID lpData,
+ 					 _In_ LONG cbData);
+-STDAPI AVIFileReadData	(_In_ PAVIFILE pfile,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileReadData	(_In_ PAVIFILE pfile,
+ 					 _In_ DWORD ckid,
+ 					 _Out_writes_bytes_to_(*lpcbData, *lpcbData) LPVOID lpData,
+ 					 _Inout_ LONG FAR *lpcbData);
+-STDAPI AVIFileEndRecord	(_In_ PAVIFILE pfile);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIFileEndRecord	(_In_ PAVIFILE pfile);
+ 
+-STDAPI_(ULONG) AVIStreamAddRef       (PAVISTREAM pavi);
+-STDAPI_(ULONG) AVIStreamRelease      (PAVISTREAM pavi);
++_Windows_SupportedOS_Windows2000_ STDAPI_(ULONG)   AVIStreamAddRef       (PAVISTREAM pavi);
++_Windows_SupportedOS_Windows2000_ STDAPI_(ULONG)   AVIStreamRelease      (PAVISTREAM pavi);
+ 
+-STDAPI AVIStreamInfoW (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOW psi, _In_ LONG lSize);
+-STDAPI AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamInfoW (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOW psi, _In_ LONG lSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
+ #ifdef UNICODE
+ #define AVIStreamInfo	AVIStreamInfoW
+ #else
+ #define AVIStreamInfo	AVIStreamInfoA
+ #endif
+ 
+-STDAPI_(LONG) AVIStreamFindSample(_In_ PAVISTREAM pavi, _In_ LONG lPos, _In_ LONG lFlags);
+-STDAPI AVIStreamReadFormat   (_In_ PAVISTREAM pavi, _In_ LONG lPos,_Out_writes_bytes_to_opt_(*lpcbFormat,*lpcbFormat) LPVOID lpFormat,_Inout_ LONG FAR *lpcbFormat);
+-STDAPI AVIStreamSetFormat    (_In_ PAVISTREAM pavi, _In_ LONG lPos,_In_reads_bytes_(cbFormat) LPVOID lpFormat, _In_ LONG cbFormat);
+-STDAPI AVIStreamReadData     (_In_ PAVISTREAM pavi, _In_ DWORD fcc, _Out_writes_bytes_to_opt_(*lpcb, *lpcb) LPVOID lp, _Inout_ LONG FAR *lpcb);
+-STDAPI AVIStreamWriteData    (_In_ PAVISTREAM pavi, _In_ DWORD fcc, _In_reads_bytes_(cb) LPVOID lp, _In_ LONG cb);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LONG)   AVIStreamFindSample(_In_ PAVISTREAM pavi, _In_ LONG lPos, _In_ LONG lFlags);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamReadFormat   (_In_ PAVISTREAM pavi, _In_ LONG lPos,_Out_writes_bytes_to_opt_(*lpcbFormat,*lpcbFormat) LPVOID lpFormat,_Inout_ LONG FAR *lpcbFormat);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamSetFormat    (_In_ PAVISTREAM pavi, _In_ LONG lPos,_In_reads_bytes_(cbFormat) LPVOID lpFormat, _In_ LONG cbFormat);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamReadData     (_In_ PAVISTREAM pavi, _In_ DWORD fcc, _Out_writes_bytes_to_opt_(*lpcb, *lpcb) LPVOID lp, _Inout_ LONG FAR *lpcb);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamWriteData    (_In_ PAVISTREAM pavi, _In_ DWORD fcc, _In_reads_bytes_(cb) LPVOID lp, _In_ LONG cb);
+ 
+-STDAPI AVIStreamRead         (_In_ PAVISTREAM pavi,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamRead         (_In_ PAVISTREAM pavi,
+ 			      _In_ LONG lStart,
+ 			      _In_ LONG lSamples,
+ 			      _Out_writes_bytes_opt_(cbBuffer) LPVOID lpBuffer,
+@@ -2349,7 +2358,7 @@ STDAPI AVIStreamRead         (_In_ PAVISTREAM pavi,
+ 			      _Out_opt_ LONG FAR * plSamples);
+ #define AVISTREAMREAD_CONVENIENT	(-1L)
+ 
+-STDAPI AVIStreamWrite        (_In_ PAVISTREAM pavi,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamWrite        (_In_ PAVISTREAM pavi,
+ 			      _In_ LONG lStart, _In_ LONG lSamples,
+ 			      _In_reads_bytes_(cbBuffer) LPVOID lpBuffer, _In_ LONG cbBuffer, _In_ DWORD dwFlags,
+ 			      _Out_opt_ LONG FAR *plSampWritten,
+@@ -2357,22 +2366,22 @@ STDAPI AVIStreamWrite        (_In_ PAVISTREAM pavi,
+ 
+ // Right now, these just use AVIStreamInfo() to get information, then
+ // return some of it.  Can they be more efficient?
+-STDAPI_(LONG) AVIStreamStart        (_In_ PAVISTREAM pavi);
+-STDAPI_(LONG) AVIStreamLength       (_In_ PAVISTREAM pavi);
+-STDAPI_(LONG) AVIStreamTimeToSample (_In_ PAVISTREAM pavi, _In_ LONG lTime);
+-STDAPI_(LONG) AVIStreamSampleToTime (_In_ PAVISTREAM pavi, _In_ LONG lSample);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LONG)   AVIStreamStart        (_In_ PAVISTREAM pavi);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LONG)   AVIStreamLength       (_In_ PAVISTREAM pavi);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LONG)   AVIStreamTimeToSample (_In_ PAVISTREAM pavi, _In_ LONG lTime);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LONG)   AVIStreamSampleToTime (_In_ PAVISTREAM pavi, _In_ LONG lSample);
+ 
+ 
+-STDAPI AVIStreamBeginStreaming(_In_ PAVISTREAM pavi, _In_ LONG lStart, _In_ LONG lEnd, _In_ LONG lRate);
+-STDAPI AVIStreamEndStreaming(_In_ PAVISTREAM pavi);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamBeginStreaming(_In_ PAVISTREAM pavi, _In_ LONG lStart, _In_ LONG lEnd, _In_ LONG lRate);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamEndStreaming(_In_ PAVISTREAM pavi);
+ 
+ //
+ // helper functions for using IGetFrame
+ //
+-STDAPI_(PGETFRAME) AVIStreamGetFrameOpen(_In_ PAVISTREAM pavi,
++_Windows_SupportedOS_Windows2000_ STDAPI_(PGETFRAME)   AVIStreamGetFrameOpen(_In_ PAVISTREAM pavi,
+ 					 _In_opt_ LPBITMAPINFOHEADER lpbiWanted);
+-STDAPI_(LPVOID) AVIStreamGetFrame(_In_ PGETFRAME pg, _In_ LONG lPos);
+-STDAPI AVIStreamGetFrameClose(_In_ PGETFRAME pg);
++_Windows_SupportedOS_Windows2000_ STDAPI_(LPVOID)   AVIStreamGetFrame(_In_ PGETFRAME pg, _In_ LONG lPos);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamGetFrameClose(_In_ PGETFRAME pg);
+ 
+ 
+ // !!! We need some way to place an advise on a stream....
+@@ -2381,10 +2390,10 @@ STDAPI AVIStreamGetFrameClose(_In_ PGETFRAME pg);
+ 
+ 
+ // Shortcut function
+-STDAPI AVIStreamOpenFromFileA(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LPCSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamOpenFromFileA(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LPCSTR szFile,
+ 			     _In_ DWORD fccType, _In_ LONG lParam,
+ 			     _In_ UINT mode, _In_opt_ CLSID FAR *pclsidHandler);
+-STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
+ 			     _In_ DWORD fccType, _In_ LONG lParam,
+ 			     _In_ UINT mode, _In_opt_ CLSID FAR *pclsidHandler);
+ #ifdef UNICODE
+@@ -2394,7 +2403,7 @@ STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
+ #endif
+ 
+ // Use to create disembodied streams
+-STDAPI AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ LONG lParam2,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ LONG lParam2,
+ 		       _In_opt_ CLSID FAR *pclsidHandler);
+ 
+ 
+@@ -2516,13 +2525,13 @@ STDAPI AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ L
+ #define comptypeDIB         mmioFOURCC('D', 'I', 'B', ' ')
+ #endif
+ 
+-STDAPI AVIMakeCompressedStream(
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIMakeCompressedStream(
+ 		_Outptr_ PAVISTREAM FAR *	    ppsCompressed,
+ 		_In_ PAVISTREAM		    ppsSource,
+ 		_In_ AVICOMPRESSOPTIONS FAR *    lpOptions,
+ 		_In_opt_ CLSID FAR *pclsidHandler);
+ 
+-EXTERN_C HRESULT CDECL AVISaveA (LPCSTR               szFile,
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT CDECL   AVISaveA (LPCSTR               szFile,
+ 		_In_opt_ CLSID FAR *pclsidHandler,
+ 		_In_ AVISAVECALLBACK     lpfnCallback,
+ 		_In_ int                 nStreams,
+@@ -2530,13 +2539,13 @@ EXTERN_C HRESULT CDECL AVISaveA (LPCSTR               szFile,
+ 		_In_ LPAVICOMPRESSOPTIONS lpOptions,
+ 		...);
+ 
+-STDAPI AVISaveVA(LPCSTR               szFile,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVISaveVA(LPCSTR               szFile,
+ 		_In_opt_ CLSID FAR *pclsidHandler,
+ 		_In_ AVISAVECALLBACK     lpfnCallback,
+ 		_In_ int                 nStreams,
+ 		_In_reads_(nStreams) PAVISTREAM FAR *    ppavi,
+ 		_In_reads_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
+-EXTERN_C HRESULT CDECL AVISaveW (LPCWSTR               szFile,
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT CDECL   AVISaveW (LPCWSTR               szFile,
+ 		_In_opt_ CLSID FAR *pclsidHandler,
+ 		_In_ AVISAVECALLBACK     lpfnCallback,
+ 		_In_ int                 nStreams,
+@@ -2544,7 +2553,7 @@ EXTERN_C HRESULT CDECL AVISaveW (LPCWSTR               szFile,
+ 		_In_ LPAVICOMPRESSOPTIONS lpOptions,
+ 		...);
+ 
+-STDAPI AVISaveVW(LPCWSTR               szFile,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVISaveVW(LPCWSTR               szFile,
+ 		_In_opt_ CLSID FAR *pclsidHandler,
+ 		_In_ AVISAVECALLBACK     lpfnCallback,
+ 		_In_ int                 nStreams,
+@@ -2560,13 +2569,13 @@ STDAPI AVISaveVW(LPCWSTR               szFile,
+ 
+ 
+ 
+-STDAPI_(INT_PTR) AVISaveOptions(_In_ HWND hwnd,
++_Windows_SupportedOS_Windows2000_ STDAPI_(INT_PTR)   AVISaveOptions(_In_ HWND hwnd,
+ 			     _In_ UINT	uiFlags,
+ 			     _In_ int	nStreams,
+ 			     _In_reads_(nStreams) PAVISTREAM FAR *ppavi,
+ 			     _Inout_updates_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
+ 
+-STDAPI AVISaveOptionsFree(int nStreams,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVISaveOptionsFree(int nStreams,
+ 			     _In_reads_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
+ 
+ // FLAGS FOR uiFlags:
+@@ -2575,18 +2584,18 @@ STDAPI AVISaveOptionsFree(int nStreams,
+ // These determine what the compression options dialog for video streams
+ // will look like.
+ 
+-STDAPI AVIBuildFilterW(_Out_writes_(cbFilter) LPWSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
+-STDAPI AVIBuildFilterA(_Out_writes_(cbFilter) LPSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   AVIBuildFilterW(_Out_writes_(cbFilter) LPWSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   AVIBuildFilterA(_Out_writes_(cbFilter) LPSTR lpszFilter, _In_ LONG cbFilter, _In_ BOOL fSaving);
+ #ifdef UNICODE
+ #define AVIBuildFilter	AVIBuildFilterW
+ #else
+ #define AVIBuildFilter	AVIBuildFilterA
+ #endif
+-STDAPI AVIMakeFileFromStreams(_Outptr_ PAVIFILE FAR *	ppfile,
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIMakeFileFromStreams(_Outptr_ PAVIFILE FAR *	ppfile,
+ 			       _In_ int		nStreams,
+ 			       _In_reads_(nStreams) PAVISTREAM FAR *	papStreams);
+ 
+-STDAPI AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ PAVISTREAM FAR *ppstream);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ PAVISTREAM FAR *ppstream);
+ 
+ /****************************************************************************
+  *
+@@ -2594,34 +2603,34 @@ STDAPI AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ P
+  *
+  ***************************************************************************/
+ 
+-STDAPI AVIPutFileOnClipboard(_In_ PAVIFILE pf);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIPutFileOnClipboard(_In_ PAVIFILE pf);
+ 
+-STDAPI AVIGetFromClipboard(_Outptr_ PAVIFILE FAR * lppf);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIGetFromClipboard(_Outptr_ PAVIFILE FAR * lppf);
+ 
+-STDAPI AVIClearClipboard(void);
++_Windows_SupportedOS_Windows2000_ STDAPI   AVIClearClipboard(void);
+ 
+ /****************************************************************************
+  *
+  *  Editing routines
+  *
+  ***************************************************************************/
+-STDAPI CreateEditableStream(
++_Windows_SupportedOS_Windows2000_ STDAPI   CreateEditableStream(
+ 		_Outptr_ PAVISTREAM FAR *	    ppsEditable,
+ 		_In_ PAVISTREAM		    psSource);
+ 
+-STDAPI EditStreamCut(_In_ PAVISTREAM pavi, _Inout_ LONG FAR *plStart, _Inout_ LONG FAR *plLength, _Outptr_ PAVISTREAM FAR * ppResult);
++_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamCut(_In_ PAVISTREAM pavi, _Inout_ LONG FAR *plStart, _Inout_ LONG FAR *plLength, _Outptr_ PAVISTREAM FAR * ppResult);
+ 
+-STDAPI EditStreamCopy(_In_ PAVISTREAM pavi, _Inout_ LONG FAR *plStart, _Inout_ LONG FAR *plLength, _Outptr_ PAVISTREAM FAR * ppResult);
++_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamCopy(_In_ PAVISTREAM pavi, _Inout_ LONG FAR *plStart, _Inout_ LONG FAR *plLength, _Outptr_ PAVISTREAM FAR * ppResult);
+ 
+-STDAPI EditStreamPaste(_In_ PAVISTREAM pavi, _Inout_ LONG FAR *plPos, _Inout_ LONG FAR *plLength, _In_ PAVISTREAM pstream, _In_ LONG lStart, _In_ LONG lEnd);
++_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamPaste(_In_ PAVISTREAM pavi, _Inout_ LONG FAR *plPos, _Inout_ LONG FAR *plLength, _In_ PAVISTREAM pstream, _In_ LONG lStart, _In_ LONG lEnd);
+ 
+-STDAPI EditStreamClone(_In_ PAVISTREAM pavi, _Outptr_ PAVISTREAM FAR *ppResult);
++_Windows_SupportedOS_Windows2000_ STDAPI   EditStreamClone(_In_ PAVISTREAM pavi, _Outptr_ PAVISTREAM FAR *ppResult);
+ 
+ 
+-STDAPI EditStreamSetNameA(_In_ PAVISTREAM pavi, _In_ LPCSTR lpszName);
+-STDAPI EditStreamSetNameW(_In_ PAVISTREAM pavi, _In_ LPCWSTR lpszName);
+-STDAPI EditStreamSetInfoW(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOW lpInfo, _In_ LONG cbInfo);
+-STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetNameA(_In_ PAVISTREAM pavi, _In_ LPCSTR lpszName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetNameW(_In_ PAVISTREAM pavi, _In_ LPCWSTR lpszName);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetInfoW(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOW lpInfo, _In_ LONG cbInfo);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI   EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
+ #ifdef UNICODE
+ #define EditStreamSetInfo	EditStreamSetInfoW
+ #define EditStreamSetName	EditStreamSetNameW
+@@ -2750,18 +2759,18 @@ STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVIST
+ #define MCIWndSM SendMessage    /* SendMessage in C */
+ #endif  /* __cplusplus */
+ #define MCIWND_WINDOW_CLASS TEXT("MCIWndClass")
+-HWND
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ HWND
+ VFWAPIV
+-MCIWndCreateA(
++  MCIWndCreateA(
+     _In_opt_ HWND hwndParent,
+     _In_opt_ HINSTANCE hInstance,
+     _In_     DWORD dwStyle,
+     _In_opt_ LPCSTR szFile
+     );
+ 
+-HWND
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ HWND
+ VFWAPIV
+-MCIWndCreateW(
++  MCIWndCreateW(
+     _In_opt_ HWND hwndParent,
+     _In_opt_ HINSTANCE hInstance,
+     _In_     DWORD dwStyle,
+@@ -2773,7 +2782,7 @@ MCIWndCreateW(
+ #else
+ #define MCIWndCreate    MCIWndCreateA
+ #endif
+-BOOL VFWAPIV MCIWndRegisterClass(void);
++_Windows_SupportedOS_Windows2000_ BOOL VFWAPIV   MCIWndRegisterClass(void);
+ 
+ // Flags for the MCIWndOpen command
+ #define MCIWNDOPENF_NEW	            0x0001  // open a new file
+@@ -3094,7 +3103,7 @@ BOOL VFWAPIV MCIWndRegisterClass(void);
+ 
+ 
+ /* video data types */
+-DECLARE_HANDLE(HVIDEO);                 // generic handle
++DECLARE_HANDLE(HVIDEO) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;                 // generic handle
+ typedef HVIDEO FAR * LPHVIDEO;
+ #endif                                  // ifndef RCINVOKED
+ 
+@@ -3183,7 +3192,7 @@ installable video codecs, and the audio compression manager).
+ 
+ ****************************************************************************/
+ /* video data block header */
+-typedef struct videohdr_tag {
++typedef struct   videohdr_tag {
+     LPBYTE      lpData;                 /* pointer to locked data buffer */
+     DWORD       dwBufferLength;         /* Length of data buffer */
+     DWORD       dwBytesUsed;            /* Bytes actually used */
+@@ -3531,7 +3540,7 @@ typedef struct channel_caps_tag {
+ //  Structures
+ // ------------------------------------------------------------------
+ 
+-typedef struct tagCapDriverCaps {
++typedef struct   tagCapDriverCaps {
+     UINT        wDeviceIndex;               // Driver index in system.ini
+     BOOL        fHasOverlay;                // Can device overlay?
+     BOOL        fHasDlgVideoSource;         // Has Video source dlg?
+@@ -3547,7 +3556,7 @@ typedef struct tagCapDriverCaps {
+     HANDLE      hVideoExtOut;               // Driver Ext Out channel
+ } CAPDRIVERCAPS, *PCAPDRIVERCAPS, FAR *LPCAPDRIVERCAPS;
+ 
+-typedef struct tagCapStatus {
++typedef struct   tagCapStatus {
+     UINT        uiImageWidth;               // Width of the image
+     UINT        uiImageHeight;              // Height of the image
+     BOOL        fLiveWindow;                // Now Previewing video?
+@@ -3569,7 +3578,7 @@ typedef struct tagCapStatus {
+ } CAPSTATUS, *PCAPSTATUS, FAR *LPCAPSTATUS;
+ 
+                                             // Default values in parenthesis
+-typedef struct tagCaptureParms {
++typedef struct   tagCaptureParms {
+     DWORD       dwRequestMicroSecPerFrame;  // Requested capture rate
+     BOOL        fMakeUserHitOKToCapture;    // Show "Hit OK to cap" dlg?
+     UINT        wPercentDropForError;       // Give error msg if > (10%)
+@@ -3610,7 +3619,7 @@ typedef struct tagCaptureParms {
+ #define AVSTREAMMASTER_AUDIO            0 /* Audio master (VFW 1.0, 1.1) */
+ #define AVSTREAMMASTER_NONE             1 /* No master */
+ 
+-typedef struct tagCapInfoChunk {
++typedef struct   tagCapInfoChunk {
+     FOURCC      fccInfoID;                  // Chunk ID, "ICOP" for copyright
+     LPVOID      lpData;                     // pointer to data
+     LONG        cbData;                     // size of lpData
+@@ -3647,23 +3656,23 @@ typedef LRESULT (CALLBACK* CAPCONTROLCALLBACK)(_In_ HWND hWnd, _In_ int nState);
+ //  The only exported functions from AVICAP.DLL
+ // ------------------------------------------------------------------
+ 
+-HWND VFWAPI capCreateCaptureWindowA (
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ HWND VFWAPI   capCreateCaptureWindowA (
+         LPCSTR lpszWindowName,
+         _In_ DWORD dwStyle,
+         _In_ int x, _In_ int y, _In_ int nWidth, _In_ int nHeight,
+         _In_opt_ HWND hwndParent, _In_ int nID);
+ 
+-BOOL VFWAPI capGetDriverDescriptionA (UINT wDriverIndex,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL VFWAPI   capGetDriverDescriptionA (UINT wDriverIndex,
+         _Out_writes_(cbName) LPSTR lpszName, _In_ int cbName,
+         _Out_writes_(cbVer) LPSTR lpszVer, _In_ int cbVer);
+ 
+-HWND VFWAPI capCreateCaptureWindowW (
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ HWND VFWAPI   capCreateCaptureWindowW (
+         LPCWSTR lpszWindowName,
+         DWORD dwStyle,
+         _In_ int x, _In_ int y, _In_ int nWidth, _In_ int nHeight,
+         _In_opt_ HWND hwndParent, _In_ int nID);
+ 
+-BOOL VFWAPI capGetDriverDescriptionW (UINT wDriverIndex,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL VFWAPI   capGetDriverDescriptionW (UINT wDriverIndex,
+         _Out_writes_(cbName) LPWSTR lpszName, _In_ int cbName,
+         _Out_writes_(cbVer) LPWSTR lpszVer, _In_ int cbVer);
+ #ifdef UNICODE
+@@ -3779,27 +3788,27 @@ extern "C" {            /* Assume C declarations for C++ */
+  ***************************************************************************/
+ #ifdef OFN_READONLY
+ 
+-    BOOL
++    _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL
+     VFWAPI
+-    GetOpenFileNamePreviewA(
++      GetOpenFileNamePreviewA(
+         _Inout_ LPOPENFILENAMEA lpofn
+         );
+ 
+-    BOOL
++    _WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ BOOL
+     VFWAPI
+-    GetSaveFileNamePreviewA(
++      GetSaveFileNamePreviewA(
+         _Inout_ LPOPENFILENAMEA lpofn
+         );
+ 
+-    BOOL
++    _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL
+     VFWAPI
+-    GetOpenFileNamePreviewW(
++      GetOpenFileNamePreviewW(
+         _Inout_ LPOPENFILENAMEW lpofn
+         );
+ 
+-    BOOL
++    _WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ BOOL
+     VFWAPI
+-    GetSaveFileNamePreviewW(
++      GetSaveFileNamePreviewW(
+         _Inout_ LPOPENFILENAMEW lpofn
+         );
+ 

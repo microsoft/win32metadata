@@ -1,0 +1,2133 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
+index 7fa7fd00c3..10e5f8a035 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcndr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -293,7 +294,7 @@ typedef struct _NDR_SCONTEXT
+ 
+ #define cbNDRContext 20         /* size of context on WIRE */
+ 
+-typedef void (__RPC_USER  * NDR_RUNDOWN)(void  * context);
++typedef void (__RPC_USER  * NDR_RUNDOWN)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * context);
+ 
+ typedef void (__RPC_USER  * NDR_NOTIFY_ROUTINE)(void);
+ 
+@@ -398,7 +399,7 @@ NDRSContextUnmarshall2(
+     _In_ unsigned long        Flags
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsDestroyClientContext (
+@@ -565,7 +566,7 @@ typedef unsigned char  *    RPC_BUFPTR;
+ typedef unsigned long       RPC_LENGTH;
+ 
+ // Expression evaluation callback routine prototype.
+-typedef void (__RPC_USER  * EXPR_EVAL)( struct _MIDL_STUB_MESSAGE  * );
++typedef void (__RPC_USER  * EXPR_EVAL)( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _MIDL_STUB_MESSAGE  * );
+ 
+ typedef const unsigned char  * PFORMAT_STRING;
+ 
+@@ -687,7 +688,7 @@ typedef struct _MIDL_STUB_MESSAGE
+ 
+     /* Allocation and Free routine to be used by the Ndr routines. */
+     void  *             ( __RPC_API * pfnAllocate)( size_t );
+-    void                    ( __RPC_API * pfnFree)(void  *);
++    void                    ( __RPC_API * pfnFree)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *);
+ 
+     /*
+      * Top of parameter stack.  Used for "single call" stubs during marshalling
+@@ -824,10 +825,10 @@ typedef  struct _MIDL_STUB_MESSAGE MIDL_STUB_MESSAGE,   *PMIDL_STUB_MESSAGE;
+  */
+ typedef void  *
+         ( __RPC_API * GENERIC_BINDING_ROUTINE)
+-        (void  *);
++        (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *);
+ typedef void
+         ( __RPC_API * GENERIC_UNBIND_ROUTINE)
+-        (void  *, unsigned char  *);
++        (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *);
+ 
+ typedef struct _GENERIC_BINDING_ROUTINE_PAIR
+     {
+@@ -856,7 +857,7 @@ typedef struct __GENERIC_BINDING_INFO
+ #endif
+ 
+ typedef void ( __RPC_USER * XMIT_HELPER_ROUTINE)
+-    ( PMIDL_STUB_MESSAGE );
++    ( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE );
+ 
+ typedef struct _XMIT_ROUTINE_QUINTUPLE
+     {
+@@ -868,25 +869,25 @@ typedef struct _XMIT_ROUTINE_QUINTUPLE
+ 
+ typedef unsigned long
+ ( __RPC_USER * USER_MARSHAL_SIZING_ROUTINE)
+-    (unsigned long  *,
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *,
+      unsigned long,
+-     void  * );
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * );
+ 
+ typedef unsigned char  *
+ ( __RPC_USER * USER_MARSHAL_MARSHALLING_ROUTINE)
+-    (unsigned long  *,
+-     unsigned char  * ,
+-     void  * );
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  * ,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * );
+ 
+ typedef unsigned char  *
+ ( __RPC_USER * USER_MARSHAL_UNMARSHALLING_ROUTINE)
+-    (unsigned long  *,
+-     unsigned char  *,
+-     void  * );
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * );
+ 
+ typedef void ( __RPC_USER * USER_MARSHAL_FREEING_ROUTINE)
+-    (unsigned long  *,
+-     void  * );
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * );
+ 
+ typedef struct _USER_MARSHAL_ROUTINE_QUADRUPLE
+     {
+@@ -950,51 +951,51 @@ typedef enum _IDL_CS_CONVERT
+ 
+ typedef void
+ ( __RPC_USER * CS_TYPE_NET_SIZE_ROUTINE)
+-    (RPC_BINDING_HANDLE     hBinding,
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE     hBinding,
+      unsigned long          ulNetworkCodeSet,
+      unsigned long          ulLocalBufferSize,
+-     IDL_CS_CONVERT     *   conversionType,
+-     unsigned long      *   pulNetworkBufferSize,
+-     error_status_t     *   pStatus);
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IDL_CS_CONVERT     *   conversionType,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulNetworkBufferSize,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") error_status_t     *   pStatus);
+ 
+ typedef void
+ ( __RPC_USER * CS_TYPE_LOCAL_SIZE_ROUTINE)
+-    (RPC_BINDING_HANDLE     hBinding,
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE     hBinding,
+      unsigned long          ulNetworkCodeSet,
+      unsigned long          ulNetworkBufferSize,
+-     IDL_CS_CONVERT     *   conversionType,
+-     unsigned long      *   pulLocalBufferSize,
+-     error_status_t     *   pStatus);
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") IDL_CS_CONVERT     *   conversionType,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulLocalBufferSize,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") error_status_t     *   pStatus);
+ 
+ typedef void
+ ( __RPC_USER * CS_TYPE_TO_NETCS_ROUTINE)
+-    (RPC_BINDING_HANDLE     hBinding,
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE     hBinding,
+      unsigned long          ulNetworkCodeSet,
+-     void               *   pLocalData,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void               *   pLocalData,
+      unsigned long          ulLocalDataLength,
+-     byte               *   pNetworkData,
+-     unsigned long      *   pulNetworkDataLength,
+-     error_status_t     *   pStatus);
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") byte               *   pNetworkData,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulNetworkDataLength,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") error_status_t     *   pStatus);
+ 
+ typedef void
+ ( __RPC_USER * CS_TYPE_FROM_NETCS_ROUTINE)
+-    (RPC_BINDING_HANDLE     hBinding,
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE     hBinding,
+      unsigned long          ulNetworkCodeSet,
+-     byte               *   pNetworkData,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") byte               *   pNetworkData,
+      unsigned long          ulNetworkDataLength,
+      unsigned long          ulLocalBufferSize,
+-     void               *   pLocalData,
+-     unsigned long      *   pulLocalDataLength,
+-     error_status_t     *   pStatus);
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void               *   pLocalData,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulLocalDataLength,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") error_status_t     *   pStatus);
+ 
+ typedef void
+ ( __RPC_USER * CS_TAG_GETTING_ROUTINE)
+-    (RPC_BINDING_HANDLE     hBinding,
++    (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE     hBinding,
+      int                    fServerSide,
+-     unsigned long      *   pulSendingTag,
+-     unsigned long      *   pulDesiredReceivingTag,
+-     unsigned long      *   pulReceivingTag,
+-     error_status_t     *   pStatus);
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulSendingTag,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulDesiredReceivingTag,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long      *   pulReceivingTag,
++     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") error_status_t     *   pStatus);
+ 
+ void __RPC_USER
+ RpcCsGetTags(
+@@ -1033,7 +1034,7 @@ typedef struct _MIDL_STUB_DESC
+     void  *    RpcInterfaceInformation;
+ 
+     void  *    ( __RPC_API * pfnAllocate)(size_t);
+-    void       ( __RPC_API * pfnFree)(void  *);
++    void       ( __RPC_API * pfnFree)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *);
+ 
+     union
+         {
+@@ -1114,7 +1115,7 @@ typedef struct _MIDL_FORMAT_STRING
+ /*
+  * Stub thunk used for some interpreted server stubs.
+  */
+-typedef void ( __RPC_API * STUB_THUNK)( PMIDL_STUB_MESSAGE );
++typedef void ( __RPC_API * STUB_THUNK)( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE );
+ 
+ #ifndef _MANAGED
+ typedef long ( __RPC_API * SERVER_ROUTINE)();
+@@ -1297,22 +1298,22 @@ NdrServerGetSupportedSyntaxes(
+     // SAL can't adequately express buffer sizes from rpc format strings
+ #pragma warning(disable:28740)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleTypeMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
+     unsigned char           FormatChar
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrPointerMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+@@ -1335,40 +1336,40 @@ NdrCsTagMarshall(
+ 
+ /* Structures */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrSimpleStructMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantStructMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantVaryingStructMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexStructMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Arrays */
+@@ -1377,45 +1378,45 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrFixedArrayMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantArrayMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantVaryingArrayMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrVaryingArrayMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexArrayMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Strings */
+@@ -1424,18 +1425,18 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrNonConformantStringMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantStringMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Unions */
+@@ -1444,18 +1445,18 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrEncapsulatedUnionMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrNonEncapsulatedUnionMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Byte count pointer */
+@@ -1464,9 +1465,9 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrByteCountPointerMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Transmit as and represent as*/
+@@ -1475,31 +1476,31 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrXmitOrRepAsMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrUserMarshalMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrInterfacePointerMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Context handles */
+@@ -1508,7 +1509,7 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrClientContextMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
+     NDR_CCONTEXT            ContextHandle,
+     int                     fCheck
+     );
+@@ -1517,8 +1518,8 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerContextMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    NDR_SCONTEXT            ContextHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") NDR_SCONTEXT            ContextHandle,
+     NDR_RUNDOWN             RundownRoutine
+     );
+ 
+@@ -1526,22 +1527,22 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerContextNewMarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    NDR_SCONTEXT            ContextHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") NDR_SCONTEXT            ContextHandle,
+     NDR_RUNDOWN             RundownRoutine,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /*
+  * Unmarshall routines
+  */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleTypeUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
+     unsigned char           FormatChar
+     );
+ 
+@@ -1569,9 +1570,9 @@ RPCRTAPI
+ unsigned char *
+ RPC_ENTRY
+ NdrRangeUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char **        ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char **        ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1579,8 +1580,8 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrCorrelationInitialize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    void  *                 pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *                 pMemory,
+     unsigned long           CacheSize,
+     unsigned long           flags
+     );
+@@ -1589,35 +1590,35 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrCorrelationPass(
+-    PMIDL_STUB_MESSAGE      pStubMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrCorrelationFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrPointerUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+ /* Structures */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrSimpleStructUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1625,9 +1626,9 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantStructUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1635,19 +1636,19 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantVaryingStructUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexStructUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1657,19 +1658,19 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrFixedArrayUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantArrayUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1677,9 +1678,9 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantVaryingArrayUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1687,19 +1688,19 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrVaryingArrayUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrComplexArrayUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1709,19 +1710,19 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrNonConformantStringUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrConformantStringUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1731,9 +1732,9 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrEncapsulatedUnionUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1741,9 +1742,9 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrNonEncapsulatedUnionUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1753,9 +1754,9 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrByteCountPointerUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1765,33 +1766,33 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrXmitOrRepAsUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrUserMarshalUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrInterfacePointerUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *  *     ppMemory,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *  *     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     unsigned char           fMustAlloc
+     );
+ 
+@@ -1801,21 +1802,21 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrClientContextUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    NDR_CCONTEXT        *   pContextHandle,
+-    RPC_BINDING_HANDLE      BindHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") NDR_CCONTEXT        *   pContextHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE      BindHandle
+     );
+ 
+ RPCRTAPI
+ NDR_SCONTEXT
+ RPC_ENTRY
+ NdrServerContextUnmarshall(
+-    PMIDL_STUB_MESSAGE      pStubMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg
+     );
+ 
+ /* New context handle flavors */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ NDR_SCONTEXT
+ RPC_ENTRY
+ NdrContextHandleInitialize(
+@@ -1835,13 +1836,13 @@ NdrServerContextNewUnmarshall(
+  * Buffer sizing routines
+  */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPointerBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+@@ -1864,40 +1865,40 @@ NdrCsTagBufferSize(
+ 
+ /* Structures */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleStructBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantStructBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantVaryingStructBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrComplexStructBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Arrays */
+@@ -1906,65 +1907,65 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrFixedArrayBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantArrayBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantVaryingArrayBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrVaryingArrayBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrComplexArrayBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Strings */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantStringBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrNonConformantStringBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Unions */
+@@ -1973,18 +1974,18 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrEncapsulatedUnionBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrNonEncapsulatedUnionBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Byte count pointer */
+@@ -1993,9 +1994,9 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrByteCountPointerBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Transmit as and represent as*/
+@@ -2004,42 +2005,42 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrXmitOrRepAsBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrUserMarshalBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrInterfacePointerBufferSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ // Context Handle size
+ //
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrContextHandleSize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /*
+@@ -2050,8 +2051,8 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrPointerMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+@@ -2087,32 +2088,32 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrSimpleStructMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrConformantStructMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrConformantVaryingStructMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrComplexStructMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Arrays */
+@@ -2121,40 +2122,40 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrFixedArrayMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrConformantArrayMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrConformantVaryingArrayMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrVaryingArrayMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrComplexArrayMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Strings */
+@@ -2163,16 +2164,16 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrConformantStringMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrNonConformantStringMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Unions */
+@@ -2181,16 +2182,16 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrEncapsulatedUnionMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrNonEncapsulatedUnionMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Transmit as and represent as*/
+@@ -2199,8 +2200,8 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrXmitOrRepAsMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* User_marshal */
+@@ -2209,8 +2210,8 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrUserMarshalMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Interface pointer */
+@@ -2219,21 +2220,21 @@ RPCRTAPI
+ unsigned long
+ RPC_ENTRY
+ NdrInterfacePointerMemorySize(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /*
+  * Freeing routines
+  */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPointerFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+@@ -2251,36 +2252,36 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrSimpleStructFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantStructFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantVaryingStructFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrComplexStructFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Arrays */
+@@ -2289,45 +2290,45 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrFixedArrayFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantArrayFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConformantVaryingArrayFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrVaryingArrayFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrComplexArrayFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Unions */
+@@ -2336,18 +2337,18 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrEncapsulatedUnionFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrNonEncapsulatedUnionFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Byte count */
+@@ -2356,9 +2357,9 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrByteCountPointerFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Transmit as and represent as*/
+@@ -2367,31 +2368,31 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrXmitOrRepAsFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* User_marshal */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrUserMarshalFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /* Interface pointer */
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrInterfacePointerFree(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pMemory,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ /*
+@@ -2402,17 +2403,17 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConvert2(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     long                    NumberParams
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrConvert(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat
+     );
+ 
+ #define USER_MARSHAL_FC_BYTE         1
+@@ -2432,8 +2433,8 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrUserMarshalSimpleTypeConvert(
+-    unsigned long *         pFlags,
+-    unsigned char *         pBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *         pFlags,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char *         pBuffer,
+     unsigned char           FormatChar
+     );
+ 
+@@ -2445,9 +2446,9 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrClientInitializeNew(
+-    PRPC_MESSAGE            pRpcMsg,
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
+     unsigned int            ProcNum
+     );
+ 
+@@ -2455,18 +2456,18 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrServerInitializeNew(
+-    PRPC_MESSAGE            pRpcMsg,
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PMIDL_STUB_DESC         pStubDescriptor
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerInitializePartial(
+-    PRPC_MESSAGE            pRpcMsg,
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
+     unsigned long           RequestedBufferSize
+     );
+ 
+@@ -2474,9 +2475,9 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrClientInitialize(
+-    PRPC_MESSAGE            pRpcMsg,
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
+     unsigned int            ProcNum
+     );
+ 
+@@ -2484,76 +2485,76 @@ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrServerInitialize(
+-    PRPC_MESSAGE            pRpcMsg,
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PMIDL_STUB_DESC         pStubDescriptor
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrServerInitializeUnmarshall (
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PMIDL_STUB_DESC         pStubDescriptor,
+-    PRPC_MESSAGE            pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerInitializeMarshall (
+-    PRPC_MESSAGE            pRpcMsg,
+-    PMIDL_STUB_MESSAGE      pStubMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE            pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrGetBuffer(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
+     unsigned long           BufferLength,
+-    RPC_BINDING_HANDLE      Handle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE      Handle
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrNsGetBuffer(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
+     unsigned long           BufferLength,
+-    RPC_BINDING_HANDLE      Handle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE      Handle
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrSendReceive(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char *         pBufferEnd
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char *         pBufferEnd
+     );
+ 
+ RPCRTAPI
+ unsigned char  *
+ RPC_ENTRY
+ NdrNsSendReceive(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    unsigned char  *        pBufferEnd,
+-    RPC_BINDING_HANDLE  *   pAutoHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned char  *        pBufferEnd,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_BINDING_HANDLE  *   pAutoHandle
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrFreeBuffer(
+-    PMIDL_STUB_MESSAGE      pStubMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg
+     );
+ 
+ RPCRTAPI
+ HRESULT
+ RPC_ENTRY
+ NdrGetDcomProtocolVersion(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    RPC_VERSION *           pVersion );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RPC_VERSION *           pVersion );
+ 
+ #pragma warning(pop)
+ 
+@@ -2563,10 +2564,10 @@ NdrGetDcomProtocolVersion(
+ 
+ /* client */
+ 
+-CLIENT_CALL_RETURN RPC_VAR_ENTRY
++_Windows_SupportedOS_Windows2000_ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ NdrClientCall2(
+-    PMIDL_STUB_DESC         pStubDescriptor,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     ...
+     );
+ 
+@@ -2577,10 +2578,10 @@ NdrClientCall(
+     ...
+     );
+ 
+-CLIENT_CALL_RETURN RPC_VAR_ENTRY
++_Windows_SupportedOS_Windows2000_ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ NdrAsyncClientCall(
+-    PMIDL_STUB_DESC         pStubDescriptor,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     ...
+     );
+ 
+@@ -2616,10 +2617,10 @@ NdrMesProcEncodeDecode4(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-CLIENT_CALL_RETURN RPC_VAR_ENTRY
++_Windows_SupportedOS_Windows2000_ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ NdrDcomAsyncClientCall(
+-    PMIDL_STUB_DESC         pStubDescriptor,
+-    PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_DESC         pStubDescriptor,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
+     ...
+     );
+ 
+@@ -2660,11 +2661,11 @@ struct IRpcStubBuffer;      // Forward declaration
+ 
+ 
+ // Raw RPC only
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrAsyncServerCall(
+-    PRPC_MESSAGE                pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg
+     );
+ 
+ // old dcom async scheme
+@@ -2691,8 +2692,8 @@ RPC_ENTRY
+ NdrDcomAsyncStubCall(
+     struct IRpcStubBuffer    *  pThis,
+     struct IRpcChannelBuffer *  pChannel,
+-    PRPC_MESSAGE                pRpcMsg,
+-    unsigned long            *  pdwStubPhase
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long            *  pdwStubPhase
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+@@ -2701,21 +2702,21 @@ NdrDcomAsyncStubCall(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ long
+ RPC_ENTRY
+ NdrStubCall2(
+-    void  *    pThis, // struct IRpcStubBuffer
+-    void  * pChannel, // struct IRpcChannelBuffer
+-    PRPC_MESSAGE                pRpcMsg,
+-    unsigned long  *            pdwStubPhase
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *    pThis, // struct IRpcStubBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * pChannel, // struct IRpcChannelBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *            pdwStubPhase
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerCall2(
+-    PRPC_MESSAGE                pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg
+     );
+ 
+ RPCRTAPI
+@@ -2763,9 +2764,9 @@ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ NdrMapCommAndFaultStatus(
+-    PMIDL_STUB_MESSAGE          pStubMsg,
+-    unsigned long  *            pCommStatus,
+-    unsigned long  *            pFaultStatus,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE          pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *            pCommStatus,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *            pFaultStatus,
+     RPC_STATUS                  Status
+     );
+ 
+@@ -2791,42 +2792,42 @@ RPC_CLIENT_FREE (
+      RpcSs* package
+ --*/
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ RpcSsAllocate (
+     _In_ size_t Size
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsDisableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsEnableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsFree (
+     _In_ void  * NodeToFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_SS_THREAD_HANDLE
+ RPC_ENTRY
+ RpcSsGetThreadHandle (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsSetClientAllocFree (
+@@ -2834,14 +2835,14 @@ RpcSsSetClientAllocFree (
+     _In_ RPC_CLIENT_FREE   * ClientFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsSetThreadHandle (
+     _In_ RPC_SS_THREAD_HANDLE Id
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ RpcSsSwapClientAllocFree (
+@@ -2855,7 +2856,7 @@ RpcSsSwapClientAllocFree (
+      RpcSm* package
+ --*/
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ RpcSmAllocate (
+@@ -2863,49 +2864,49 @@ RpcSmAllocate (
+     _Out_ RPC_STATUS  *   pStatus
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmClientFree (
+     _In_  void        *   pNodeToFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmDestroyClientContext (
+     _In_ void         * * ContextHandle
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmDisableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmEnableAllocate (
+     void
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmFree (
+     _In_ void         *   NodeToFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_SS_THREAD_HANDLE
+ RPC_ENTRY
+ RpcSmGetThreadHandle (
+     _Out_ RPC_STATUS  *   pStatus
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmSetClientAllocFree (
+@@ -2913,14 +2914,14 @@ RpcSmSetClientAllocFree (
+     _In_ RPC_CLIENT_FREE  * ClientFree
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmSetThreadHandle (
+     _In_ RPC_SS_THREAD_HANDLE Id
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSmSwapClientAllocFree (
+@@ -2938,19 +2939,19 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrRpcSsEnableAllocate(
+-    PMIDL_STUB_MESSAGE      pMessage );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pMessage );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrRpcSsDisableAllocate(
+-    PMIDL_STUB_MESSAGE      pMessage );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pMessage );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrRpcSmSetClientToOsf(
+-    PMIDL_STUB_MESSAGE      pMessage );
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pMessage );
+ 
+ RPCRTAPI
+ void  *
+@@ -3000,7 +3001,7 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrFullPointerXlatFree(
+-    PFULL_PTR_XLAT_TABLES   pXlatTables
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFULL_PTR_XLAT_TABLES   pXlatTables
+     );
+ 
+ 
+@@ -3008,17 +3009,17 @@ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ NdrAllocate(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
+     size_t                  Len
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrClearOutParameters(
+-    PMIDL_STUB_MESSAGE      pStubMsg,
+-    PFORMAT_STRING          pFormat,
+-    void  *                 ArgAddr
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE      pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormat,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *                 ArgAddr
+     );
+ 
+ 
+@@ -3026,14 +3027,14 @@ NdrClearOutParameters(
+  * Proxy APIs
+  ****************************************************************************/
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void  *
+ RPC_ENTRY
+ NdrOleAllocate (
+     _In_ size_t Size
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrOleFree (
+@@ -3155,7 +3156,7 @@ typedef struct _NDR_USER_MARSHAL_INFO
+ #endif
+ 
+ 
+-RPC_STATUS
++_Windows_SupportedOS_Windows2000_ RPC_STATUS
+ RPC_ENTRY
+ NdrGetUserMarshalInfo (
+     _In_ unsigned long * pFlags,
+@@ -3174,19 +3175,19 @@ NdrCreateServerInterfaceFromStub(
+ /*
+  * Interpreter calls
+  */
+-CLIENT_CALL_RETURN RPC_VAR_ENTRY
++_Windows_SupportedOS_Windows2000_ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ NdrClientCall3(
+-    MIDL_STUBLESS_PROXY_INFO   *pProxyInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MIDL_STUBLESS_PROXY_INFO   *pProxyInfo,
+     unsigned long               nProcNum,
+-    void *                      pReturnValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *                      pReturnValue,
+     ...
+     );
+ 
+-CLIENT_CALL_RETURN RPC_VAR_ENTRY
++_Windows_SupportedOS_WindowsXP_ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ Ndr64AsyncClientCall(
+-    MIDL_STUBLESS_PROXY_INFO   *pProxyInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MIDL_STUBLESS_PROXY_INFO   *pProxyInfo,
+     unsigned long               nProcNum,
+-    void *                      pReturnValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *                      pReturnValue,
+     ...
+     );
+ 
+@@ -3198,9 +3199,9 @@ Ndr64AsyncClientCall(
+ 
+ CLIENT_CALL_RETURN RPC_VAR_ENTRY
+ Ndr64DcomAsyncClientCall(
+-    MIDL_STUBLESS_PROXY_INFO   *pProxyInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MIDL_STUBLESS_PROXY_INFO   *pProxyInfo,
+     unsigned long               nProcNum,
+-    void *                      pReturnValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *                      pReturnValue,
+     ...
+     );
+ 
+@@ -3223,14 +3224,14 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ Ndr64AsyncServerCall64(
+-    PRPC_MESSAGE                pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void
+ RPC_ENTRY
+ Ndr64AsyncServerCallAll(
+-    PRPC_MESSAGE                pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg
+     );
+ 
+ RPCRTAPI
+@@ -3256,8 +3257,8 @@ RPC_ENTRY
+ Ndr64DcomAsyncStubCall(
+     struct IRpcStubBuffer    *  pThis,
+     struct IRpcChannelBuffer *  pChannel,
+-    PRPC_MESSAGE                pRpcMsg,
+-    unsigned long            *  pdwStubPhase
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long            *  pdwStubPhase
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+@@ -3266,28 +3267,28 @@ Ndr64DcomAsyncStubCall(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ long
+ RPC_ENTRY
+ NdrStubCall3 (
+-    void  *    pThis, // struct IRpcStubBuffer
+-    void  * pChannel, // struct IRpcChannelBuffer
+-    PRPC_MESSAGE                pRpcMsg,
+-    unsigned long  *            pdwStubPhase
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  *    pThis, // struct IRpcStubBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void  * pChannel, // struct IRpcChannelBuffer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long  *            pdwStubPhase
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerCallAll(
+-    PRPC_MESSAGE                pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrServerCallNdr64(
+-    PRPC_MESSAGE                pRpcMsg
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRPC_MESSAGE                pRpcMsg
+     );
+ 
+ 
+@@ -3304,38 +3305,38 @@ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPartialIgnoreClientMarshall(
+-    PMIDL_STUB_MESSAGE          pStubMsg,
+-    void *                      pMemory
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE          pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *                      pMemory
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPartialIgnoreServerUnmarshall(
+-    PMIDL_STUB_MESSAGE          pStubMsg,
+-    void **                     ppMemory
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE          pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **                     ppMemory
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPartialIgnoreClientBufferSize(
+-    PMIDL_STUB_MESSAGE          pStubMsg,
+-    void *                      pMemory
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE          pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *                      pMemory
+     );
+ 
+ RPCRTAPI
+ void
+ RPC_ENTRY
+ NdrPartialIgnoreServerInitialize(
+-    PMIDL_STUB_MESSAGE          pStubMsg,
+-    void **                     ppMemory,
+-    PFORMAT_STRING              pFormat
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PMIDL_STUB_MESSAGE          pStubMsg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **                     ppMemory,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING              pFormat
+     );
+ 
+ 
+-void RPC_ENTRY
+-RpcUserFree( handle_t AsyncHandle, void * pBuffer );
++_Windows_SupportedOS_WindowsXP_ void RPC_ENTRY
++RpcUserFree( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t AsyncHandle, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pBuffer );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion

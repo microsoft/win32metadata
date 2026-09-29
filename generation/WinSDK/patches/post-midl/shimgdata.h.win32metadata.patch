@@ -1,0 +1,108 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h b/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
+index 2f366dd110..9824c484a3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -135,7 +136,7 @@ EXTERN_C const IID IID_IShellImageDataFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9be8ed5c-edab-4d75-90f3-bd5bdbb21c82")
++    MIDL_INTERFACE("9be8ed5c-edab-4d75-90f3-bd5bdbb21c82") _Windows_SupportedOS_WindowsXP_ 
+     IShellImageDataFactory : public IUnknown
+     {
+     public:
+@@ -258,7 +259,7 @@ EXTERN_C const IID IID_IShellImageData;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bfdeec12-8040-4403-a5ea-9e07dafcf530")
++    MIDL_INTERFACE("bfdeec12-8040-4403-a5ea-9e07dafcf530") _Windows_SupportedOS_WindowsXP_ 
+     IShellImageData : public IUnknown
+     {
+     public:
+@@ -269,8 +270,8 @@ EXTERN_C const IID IID_IShellImageData;
+         
+         virtual HRESULT STDMETHODCALLTYPE Draw( 
+             /* [in] */ HDC hdc,
+-            /* [in] */ LPRECT prcDest,
+-            /* [in] */ LPRECT prcSrc) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPRECT prcDest,
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPRECT prcSrc) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE NextFrame( void) = 0;
+         
+@@ -293,25 +294,25 @@ EXTERN_C const IID IID_IShellImageData;
+         virtual HRESULT STDMETHODCALLTYPE IsDecoded( void) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentPage( 
+-            /* [out] */ ULONG *pnPage) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pnPage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPageCount( 
+-            /* [out] */ ULONG *pcPages) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcPages) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SelectPage( 
+             /* [in] */ ULONG iPage) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSize( 
+-            /* [out] */ SIZE *pSize) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SIZE *pSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRawDataFormat( 
+-            /* [out] */ GUID *pDataFormat) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pDataFormat) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPixelFormat( 
+-            /* [out] */ PixelFormat *pFormat) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PixelFormat *pFormat) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDelay( 
+-            /* [out] */ DWORD *pdwDelay) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwDelay) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProperties( 
+             /* [in] */ DWORD dwMode,
+@@ -335,22 +336,22 @@ EXTERN_C const IID IID_IShellImageData;
+             /* [in] */ UINT cch) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetResolution( 
+-            /* [out] */ ULONG *puResolutionX,
+-            /* [out] */ ULONG *puResolutionY) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *puResolutionX,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *puResolutionY) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEncoderParams( 
+-            /* [in] */ GUID *pguidFmt,
+-            /* [out] */ EncoderParameters **ppEncParams) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") GUID *pguidFmt,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") EncoderParameters **ppEncParams) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RegisterAbort( 
+             /* [in] */ IShellImageDataAbort *pAbort,
+             /* [out] */ IShellImageDataAbort **ppAbortPrev) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CloneFrame( 
+-            /* [out] */ Image **ppImg) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") Image **ppImg) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ReplaceFrame( 
+-            /* [in] */ Image *pImg) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") Image *pImg) = 0;
+         
+     };
+     
+@@ -661,7 +662,7 @@ EXTERN_C const IID IID_IShellImageDataAbort;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("53fb8e58-50c0-4003-b4aa-0c8df28e7f3a")
++    MIDL_INTERFACE("53fb8e58-50c0-4003-b4aa-0c8df28e7f3a") _Windows_SupportedOS_WindowsXP_ 
+     IShellImageDataAbort : public IUnknown
+     {
+     public:

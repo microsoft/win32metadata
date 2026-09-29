@@ -1,0 +1,111 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h
+index 4b64434d23..34124bc556 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h
+@@ -123,9 +123,17 @@ typedef struct _IEEE1394_API_REQUEST {
+ #define IEEE1394_API_ADD_VIRTUAL_DEVICE             0x00000001
+ #define IEEE1394_API_REMOVE_VIRTUAL_DEVICE          0x00000002
+ #if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394_API_DEVICE_ACCESS_TRANSFER)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394_API_DEVICE_ACCESS_TRANSFER         0x00000003
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394_API_SET_LOCAL_NODE_PROPERTIES)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394_API_SET_LOCAL_NODE_PROPERTIES      0x00000004
+ #endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
+ 
+ //
+ // flags for the add/remove requests
+@@ -180,36 +188,88 @@ typedef struct _IEEE1394_NOTIFICATION_DATA {
+ // Type definitions
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_NOTIFICATION_DEVICE_ACCESS)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_NOTIFICATION_DEVICE_ACCESS    0x00000001
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_NOTIFICATION_BUS_RESET)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_NOTIFICATION_BUS_RESET        0x00000002
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
+ 
+ //
+ // AccessChange.AccessFlags field
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_DEVICE_OWNERSHIP_LOCAL_NODE)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_DEVICE_OWNERSHIP_LOCAL_NODE         0x00000001
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_RESOURCE_OWNERSHIP_LOCAL_NODE)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_RESOURCE_OWNERSHIP_LOCAL_NODE       0x00000002
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_DEVICE_OWNERSHIP_REMOTE_NODE)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_DEVICE_OWNERSHIP_REMOTE_NODE        0x00000004
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_RESOURCE_OWNERSHIP_REMOTE_NODE)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_RESOURCE_OWNERSHIP_REMOTE_NODE      0x00000008
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_ACCESS_SHARED_READ)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_ACCESS_SHARED_READ                  0x00000010
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_ACCESS_SHARED_WRITE)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_ACCESS_SHARED_WRITE                 0x00000020
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_ACCESS_EXCLUSIVE)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_ACCESS_EXCLUSIVE                    0x00000040
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
+ 
+ //
+ // AccessChange.fulFlags field
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_REMOTE_ACCESS_TRANSFER_REQUEST)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_REMOTE_ACCESS_TRANSFER_REQUEST      0x00000001
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
+ 
+ //
+ // BusReset.BusResetFlags
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_BUS_RESET_LOCAL_NODE_IS_ROOT)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_BUS_RESET_LOCAL_NODE_IS_ROOT       0x00000001
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_BUS_RESET_LOCAL_NODE_IS_IRM)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_BUS_RESET_LOCAL_NODE_IS_IRM        0x00000002
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
++#if (defined(WIN32METADATA) && !defined(IEEE1394API_BUS_RESET_LOCAL_NODE_INITIATED)) || ((((_WIN32_WINNT <= _WIN32_WINNT_WIN2K))))
+ #define IEEE1394API_BUS_RESET_LOCAL_NODE_INITIATED     0x00000004
++#endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
+ 
+ #endif
+ 

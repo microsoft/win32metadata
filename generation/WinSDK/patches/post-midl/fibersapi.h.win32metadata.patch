@@ -1,0 +1,65 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h
+index 0383dfc960..2a8f48f3d6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fibersapi.h
+@@ -16,6 +16,7 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -30,13 +31,20 @@ extern "C" {
+ #define FLS_OUT_OF_INDEXES ((DWORD)0xFFFFFFFF)
+ #endif
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++
++_Win32_SetLastError_
+ WINBASEAPI
+ DWORD
+ WINAPI
+ FlsAlloc(
+-    _In_opt_ PFLS_CALLBACK_FUNCTION lpCallback
++     _In_opt_ PFLS_CALLBACK_FUNCTION lpCallback
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ PVOID
+ WINAPI
+@@ -44,14 +52,20 @@ FlsGetValue(
+     _In_ DWORD dwFlsIndex
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+ FlsSetValue(
+     _In_ DWORD dwFlsIndex,
+-    _In_opt_ PVOID lpFlsData
++     _In_opt_ PVOID lpFlsData
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -69,6 +83,8 @@ FlsFree(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ WINBASEAPI
+ BOOL
+ WINAPI

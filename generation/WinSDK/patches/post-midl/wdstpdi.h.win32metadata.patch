@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h
+index 6c67302706..6b9df0bae1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdstpdi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2006 Microsoft Corporation
+@@ -210,15 +211,15 @@ WdsTransportProviderRefreshSettings(
+ 
+ //---Functions provided by the multicast server----------------------
+ 
+-HRESULT
++_Windows_SupportedOS_Server2008_ HRESULT
+ WDSMCSAPI
+ WdsTransportServerRegisterCallback(
+     _In_ HANDLE hProvider,
+     _In_ TRANSPORTPROVIDER_CALLBACK_ID CallbackId,
+-    _In_ PVOID pfnCallback
++    _In_  PVOID pfnCallback
+ );
+ 
+-HRESULT
++_Windows_SupportedOS_Server2008_ HRESULT
+ WDSMCSAPI
+ WdsTransportServerCompleteRead(
+     _In_ HANDLE hProvider,
+@@ -227,7 +228,7 @@ WdsTransportServerCompleteRead(
+     _In_ HRESULT hReadResult
+ );
+ 
+-HRESULT
++_Windows_SupportedOS_Server2008_ HRESULT
+ WDSMCSAPI
+ WdsTransportServerTrace(
+     _In_ HANDLE hProvider,
+@@ -236,7 +237,7 @@ WdsTransportServerTrace(
+     ...
+ );
+ 
+-HRESULT
++_Windows_SupportedOS_Server2008_ HRESULT
+ WDSMCSAPI
+ WdsTransportServerTraceV(
+     _In_ HANDLE hProvider,
+@@ -245,14 +246,14 @@ WdsTransportServerTraceV(
+     _In_ va_list Params
+ );
+ 
+-PVOID
++_Windows_SupportedOS_Server2008_ PVOID
+ WDSMCSAPI
+ WdsTransportServerAllocateBuffer(
+     _In_ HANDLE hProvider,
+     _In_ ULONG ulBufferSize
+ );
+ 
+-HRESULT
++_Windows_SupportedOS_Server2008_ HRESULT
+ WDSMCSAPI
+ WdsTransportServerFreeBuffer(
+     _In_ HANDLE hProvider,

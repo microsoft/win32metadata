@@ -1,0 +1,16 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddcdrm.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddcdrm.h
+index 001794f8ad..8dbc8277fa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddcdrm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddcdrm.h
+@@ -74,7 +74,11 @@ extern "C" {
+ #define IOCTL_CDROM_SET_VOLUME            CTL_CODE(IOCTL_CDROM_BASE, 0x000A, METHOD_BUFFERED, FILE_READ_ACCESS)
+ #define IOCTL_CDROM_READ_Q_CHANNEL        CTL_CODE(IOCTL_CDROM_BASE, 0x000B, METHOD_BUFFERED, FILE_READ_ACCESS)
+ #if (NTDDI_VERSION < NTDDI_WS03)
++#endif
++#if defined(WIN32METADATA) || (((NTDDI_VERSION < NTDDI_WS03)))
+ #define IOCTL_CDROM_GET_CONTROL           CTL_CODE(IOCTL_CDROM_BASE, 0x000D, METHOD_BUFFERED, FILE_READ_ACCESS)
++#endif
++#if (NTDDI_VERSION < NTDDI_WS03)
+ #else
+ #define OBSOLETE_IOCTL_CDROM_GET_CONTROL  CTL_CODE(IOCTL_CDROM_BASE, 0x000D, METHOD_BUFFERED, FILE_READ_ACCESS)
+ #endif

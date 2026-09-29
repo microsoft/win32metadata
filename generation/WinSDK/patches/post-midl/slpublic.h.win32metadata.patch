@@ -1,0 +1,442 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h b/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
+index cd708ed5df..a4882a0464 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/slpublic.h
+@@ -17,6 +17,7 @@ Abstract:
+ #define _SLPUBLIC_H_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -35,7 +36,7 @@ typedef PVOID HSLC;
+  
+ typedef PVOID HSLP;
+     
+-typedef enum _tagSLDATATYPE
++typedef enum   _tagSLDATATYPE
+ {
+     SL_DATA_NONE        = REG_NONE,
+     SL_DATA_SZ          = REG_SZ,
+@@ -48,7 +49,7 @@ typedef enum _tagSLDATATYPE
+ //
+ // Type of SL Id
+ //
+-typedef enum _tagSLIDTYPE
++typedef enum   _tagSLIDTYPE
+ {
+     SL_ID_APPLICATION = 0,
+     SL_ID_PRODUCT_SKU,
+@@ -64,7 +65,7 @@ typedef enum _tagSLIDTYPE
+ //
+ // Licensing status
+ //
+-typedef enum _tagSLLICENSINGSTATUS
++typedef enum   _tagSLLICENSINGSTATUS
+ {
+     SL_LICENSING_STATUS_UNLICENSED,
+     SL_LICENSING_STATUS_LICENSED,
+@@ -76,7 +77,7 @@ typedef enum _tagSLLICENSINGSTATUS
+ //
+ // Licensing status
+ //
+-typedef struct _tagSL_LICENSING_STATUS
++typedef struct   _tagSL_LICENSING_STATUS
+ {
+     SLID SkuId;                          // SKU id
+     SLLICENSINGSTATUS eStatus;           // licensing status, see SLLICENSINGSTATUS
+@@ -89,13 +90,13 @@ typedef struct _tagSL_LICENSING_STATUS
+ //
+ // Product activation structures
+ //
+-typedef enum _tagSL_ACTIVATION_TYPE
++typedef enum   _tagSL_ACTIVATION_TYPE
+ {
+     SL_ACTIVATION_TYPE_DEFAULT          = 0,
+     SL_ACTIVATION_TYPE_ACTIVE_DIRECTORY = 1,
+ } SL_ACTIVATION_TYPE;
+ 
+-typedef struct _tagSL_ACTIVATION_INFO_HEADER
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _tagSL_ACTIVATION_INFO_HEADER
+ {
+     DWORD                       cbSize;
+     SL_ACTIVATION_TYPE          type;
+@@ -104,7 +105,7 @@ typedef struct _tagSL_ACTIVATION_INFO_HEADER
+ //
+ // Active directory activation (header.type == SL_ACTIVATION_TYPE_ACTIVE_DIRECTORY)
+ //
+-typedef struct _tagSL_AD_ACTIVATION_INFO
++typedef struct   _tagSL_AD_ACTIVATION_INFO
+ {
+     SL_ACTIVATION_INFO_HEADER   header;
+     PCWSTR                      pwszProductKey;
+@@ -199,7 +200,7 @@ typedef enum
+ #define SPP_MIGRATION_GATHER_ALL                            0xFFFFFFFF
+ 
+ 
+-typedef enum _SL_GENUINE_STATE
++typedef enum   _SL_GENUINE_STATE
+ {
+     SL_GEN_STATE_IS_GENUINE         = 0,
+     SL_GEN_STATE_INVALID_LICENSE,
+@@ -208,7 +209,7 @@ typedef enum _SL_GENUINE_STATE
+     SL_GEN_STATE_LAST, 
+ } SL_GENUINE_STATE;
+ 
+-typedef struct _tagSL_NONGENUINE_UI_OPTIONS
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _tagSL_NONGENUINE_UI_OPTIONS
+ {
+     DWORD                       cbSize;
+     CONST SLID*                 pComponentId;
+@@ -233,7 +234,7 @@ typedef struct _tagSL_NONGENUINE_UI_OPTIONS
+ 
+ #define SL_DEFAULT_MIGRATION_ENCRYPTOR_URI                  L"msft:spp/migrationencryptor/tokenact/1.0"
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLOpen(
+@@ -253,7 +254,7 @@ Return Error:
+     E_INVALIDARG
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLClose(
+@@ -275,7 +276,7 @@ Return Error:
+     E_INVALIDARG
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLInstallProofOfPurchase(
+@@ -380,7 +381,7 @@ Return Error:
+     SL_E_MISMATCHED_PRODUCT_SKU
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLUninstallProofOfPurchase(
+@@ -408,7 +409,7 @@ Return Error:
+     SL_E_PKEY_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLInstallLicense(
+@@ -446,7 +447,7 @@ Return Error:
+     SL_E_INVALID_LICENSE
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLUninstallLicense(
+@@ -475,7 +476,7 @@ Return Error:
+     SL_E_LICENSE_FILE_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLConsumeRight(
+@@ -483,7 +484,7 @@ SLConsumeRight(
+     _In_                        CONST SLID*                 pAppId,
+     _In_opt_                    CONST SLID*                 pProductSkuId,
+     _In_opt_                    PCWSTR                      pwszRightName,
+-    _Reserved_                  PVOID                       pvReserved
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_                  PVOID                       pvReserved
+     );
+ /*++
+ Routine Description:
+@@ -518,7 +519,7 @@ Return Error:
+     SL_E_PRODUCT_SKU_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetProductSkuInformation(
+@@ -570,7 +571,7 @@ Return Error:
+     SL_E_VALUE_NOT_FOUND
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetPKeyInformation(
+@@ -627,7 +628,7 @@ Return Error:
+     
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetLicenseInformation(
+@@ -679,7 +680,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetLicensingStatusInformation(
+@@ -725,7 +726,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetPolicyInformation(
+@@ -767,7 +768,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetPolicyInformationDWORD(
+@@ -799,7 +800,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetServiceInformation(
+@@ -865,7 +866,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetApplicationInformation(
+@@ -939,7 +940,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLActivateProduct(
+@@ -1014,7 +1015,7 @@ Return Error:
+     Network errors
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetServerStatus(
+@@ -1160,7 +1161,7 @@ Return Error:
+ 
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGenerateOfflineInstallationId(
+@@ -1192,7 +1193,7 @@ Return Error:
+     SL_E_PKEY_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGenerateOfflineInstallationIdEx(
+@@ -1253,7 +1254,7 @@ Return Error:
+     TODO: (ADA) more error codes here.
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLDepositOfflineConfirmationId(
+@@ -1288,7 +1289,7 @@ Return Error:
+     SL_E_PRODUCT_SKU_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLDepositOfflineConfirmationIdEx(
+@@ -1353,7 +1354,7 @@ Return Error:
+     
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetPKeyId(
+@@ -1396,7 +1397,7 @@ Return Error:
+     
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetInstalledProductKeyIds(
+@@ -1431,7 +1432,7 @@ Return Error:
+     SL_E_VALUE_NOT_FOUND
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLSetCurrentProductKey(
+@@ -1463,7 +1464,7 @@ Return Error:
+     SL_E_OPERATION_NOT_ALLOWED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetSLIDList(
+@@ -1552,7 +1553,7 @@ Return Error:
+     SL_E_NOT_SUPPORT
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetLicenseFileId(
+@@ -1590,7 +1591,7 @@ Return Error:
+     SL_E_LICENSE_FILE_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLGetLicense(
+@@ -1624,7 +1625,7 @@ Return Error:
+     SL_E_LICENSE_FILE_NOT_INSTALLED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLFireEvent(
+@@ -1657,7 +1658,7 @@ Return Error:
+     SL_E_EVENT_NOT_REGISTERED
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLRegisterEvent(
+@@ -1698,7 +1699,7 @@ Return Error:
+     SL_E_INVALID_EVENT_ID
+ --*/
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_Windows8_ __control_entrypoint(DllExport)
+ HRESULT
+ WINAPI
+ SLUnregisterEvent(
+@@ -1741,7 +1742,7 @@ Return Error:
+     SL_E_EVENT_NOT_REGISTERED
+ --*/
+ 
+-HRESULT 
++_Windows_SupportedOS_WindowsVista_ HRESULT 
+ WINAPI
+ SLGetWindowsInformation(
+     _In_                        PCWSTR                      pwszValueName,
+@@ -1781,7 +1782,7 @@ Return Error:
+     
+ --*/
+ 
+-HRESULT 
++_Windows_SupportedOS_WindowsVista_ HRESULT 
+ WINAPI
+ SLGetWindowsInformationDWORD(
+     _In_ PCWSTR pwszValueName,
+@@ -1809,7 +1810,7 @@ Return Error:
+     
+ --*/
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ SLIsGenuineLocal(
+     _In_                        CONST SLID*                 pAppId,
+@@ -1892,7 +1893,7 @@ Return Error:
+ --*/
+ 
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ SLAcquireGenuineTicket(
+     _Outptr_result_bytebuffer_(*pcbTicketBlob) VOID**       ppTicketBlob,  
+@@ -1938,7 +1939,7 @@ Return Error:
+ 
+ --*/
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ SLSetGenuineInformation(
+     _In_                        CONST SLID*                 pQueryId,
+@@ -2005,7 +2006,7 @@ Return Value:
+         of specified value name
+ --*/
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ SLGetReferralInformation(
+     _In_                        HSLC                        hSLC,
+@@ -2312,7 +2313,7 @@ Return Value:
+ 
+ --*/                
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ SLGetGenuineInformation(
+     _In_                        CONST SLID*                 pQueryId,
+@@ -2593,7 +2594,7 @@ Return Error:
+     Other error codes.
+ 
+ --*/
+-STDAPI
++_Windows_SupportedOS_10240_ STDAPI
+ SLQueryLicenseValueFromApp(
+     _In_                        PCWSTR                      valueName,
+     _Out_opt_                   ULONG*                      valueType,

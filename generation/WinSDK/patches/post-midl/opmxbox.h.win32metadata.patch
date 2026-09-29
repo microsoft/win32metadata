@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/opmxbox.h b/generation/WinSDK/RecompiledIdlHeaders/um/opmxbox.h
+index 54f5fafd53..be0dd79daa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/opmxbox.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/opmxbox.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //
+ //---------------------------------------------------------------------------
+ //
+@@ -46,12 +47,12 @@ HRESULT OPMXboxEnableHDCP(
+ //
+ // Retrieve HDCP on/off status
+ //
+-HRESULT OPMXboxGetHDCPStatus(OPM_HDCP_STATUS *pHDCPStatus);
++HRESULT OPMXboxGetHDCPStatus(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_STATUS *pHDCPStatus);
+ 
+ //
+ // Retrieve HDCP on/off status and type
+ //
+-HRESULT OPMXboxGetHDCPStatusAndType(OPM_HDCP_STATUS *pHDCPStatus, OPM_HDCP_TYPE *pHDCPType);
++HRESULT OPMXboxGetHDCPStatusAndType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_STATUS *pHDCPStatus, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_TYPE *pHDCPType);
+ 
+ #ifdef __cplusplus 
+ }

@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlGuid.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlGuid.h
+index fcf3cf4579..28cc5a067a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlGuid.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlGuid.h
+@@ -122,8 +122,12 @@ DEFINE_GUID(IID_IShellImageStore,            0x48c8118c, 0xb924, 0x11d1, 0x98, 0
+ 
+ #if (NTDDI_VERSION < NTDDI_VISTA) // removed in Windows Vista
+ // {1EBDCF80-A200-11d0-A3A4-00C04FD706EC}
++#endif
++#if defined(WIN32METADATA) || ((((NTDDI_VERSION < NTDDI_VISTA))))
+ DEFINE_GUID(CLSID_ShellThumbnailDiskCache,   0x1ebdcf80, 0xa200, 0x11d0, 0xa3, 0xa4, 0x0, 0xc0, 0x4f, 0xd7, 0x6, 0xec);
+ #endif
++#if (NTDDI_VERSION < NTDDI_VISTA) // removed in Windows Vista
++#endif
+ 
+ 
+ // {BCFCE0A0-EC17-11d0-8D10-00A0C90F2719}

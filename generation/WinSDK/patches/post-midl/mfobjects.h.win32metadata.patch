@@ -1,0 +1,304 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h
+index e73fc20431..df61684eb9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfobjects.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -307,7 +308,7 @@ EXTERN_C const IID IID_IMFAttributes;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2cd2d921-c447-44a7-a13c-4adabfc247e3")
++    MIDL_INTERFACE("2cd2d921-c447-44a7-a13c-4adabfc247e3") _Windows_SupportedOS_WindowsVista_ 
+     IMFAttributes : public IUnknown
+     {
+     public:
+@@ -816,11 +817,11 @@ enum MF_ATTRIBUTE_SERIALIZE_OPTIONS
+     {
+         MF_ATTRIBUTE_SERIALIZE_UNKNOWN_BYREF	= 0x1
+     } ;
+-STDAPI MFSerializeAttributesToStream(
++_Windows_SupportedOS_WindowsVista_ STDAPI MFSerializeAttributesToStream(
+   IMFAttributes * pAttr, 
+   DWORD dwOptions, 
+   IStream * pStm);
+-STDAPI MFDeserializeAttributesFromStream(
++_Windows_SupportedOS_WindowsVista_ STDAPI MFDeserializeAttributesFromStream(
+   IMFAttributes * pAttr, 
+   DWORD dwOptions, 
+   IStream * pStm);
+@@ -840,7 +841,7 @@ EXTERN_C const IID IID_IMFMediaBuffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("045FA593-8799-42b8-BC8D-8968C6453507")
++    MIDL_INTERFACE("045FA593-8799-42b8-BC8D-8968C6453507") _Windows_SupportedOS_WindowsVista_ 
+     IMFMediaBuffer : public IUnknown
+     {
+     public:
+@@ -983,7 +984,7 @@ EXTERN_C const IID IID_IMFSample;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c40a00f2-b93a-4d80-ae8c-5a1c634f58e4")
++    MIDL_INTERFACE("c40a00f2-b93a-4d80-ae8c-5a1c634f58e4") _Windows_SupportedOS_WindowsVista_ 
+     IMFSample : public IMFAttributes
+     {
+     public:
+@@ -1534,7 +1535,7 @@ EXTERN_C const IID IID_IMF2DBuffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7DC9D5F9-9ED9-44ec-9BBF-0600BB589FBB")
++    MIDL_INTERFACE("7DC9D5F9-9ED9-44ec-9BBF-0600BB589FBB") _Windows_SupportedOS_WindowsVista_ 
+     IMF2DBuffer : public IUnknown
+     {
+     public:
+@@ -1729,7 +1730,7 @@ EXTERN_C const IID IID_IMF2DBuffer2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("33ae5ea6-4316-436f-8ddd-d73d22f829ec")
++    MIDL_INTERFACE("33ae5ea6-4316-436f-8ddd-d73d22f829ec") _Windows_SupportedOS_Windows8_ 
+     IMF2DBuffer2 : public IMF2DBuffer
+     {
+     public:
+@@ -1915,7 +1916,7 @@ EXTERN_C const IID IID_IMFDXGIBuffer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e7174cfa-1c9e-48b1-8866-626226bfc258")
++    MIDL_INTERFACE("e7174cfa-1c9e-48b1-8866-626226bfc258") _Windows_SupportedOS_Windows8_ 
+     IMFDXGIBuffer : public IUnknown
+     {
+     public:
+@@ -2215,7 +2216,7 @@ EXTERN_C const IID IID_IMFMediaType;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("44ae0fa8-ea31-4109-8d2e-4cae4997c555")
++    MIDL_INTERFACE("44ae0fa8-ea31-4109-8d2e-4cae4997c555") _Windows_SupportedOS_WindowsVista_ 
+     IMFMediaType : public IMFAttributes
+     {
+     public:
+@@ -2678,7 +2679,7 @@ EXTERN_C const IID IID_IMFAudioMediaType;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("26a0adc3-ce26-4672-9304-69552edd3faf")
++    MIDL_INTERFACE("26a0adc3-ce26-4672-9304-69552edd3faf") _Windows_SupportedOS_WindowsVista_ 
+     IMFAudioMediaType : public IMFMediaType
+     {
+     public:
+@@ -3447,7 +3448,7 @@ EXTERN_C const IID IID_IMFVideoMediaType;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b99f381f-a8f9-47a2-a5af-ca3a225a3890")
++    MIDL_INTERFACE("b99f381f-a8f9-47a2-a5af-ca3a225a3890") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoMediaType : public IMFMediaType
+     {
+     public:
+@@ -3910,7 +3911,7 @@ EXTERN_C const IID IID_IMFAsyncResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ac6b7889-0740-4d51-8619-905994a55cc6")
++    MIDL_INTERFACE("ac6b7889-0740-4d51-8619-905994a55cc6") _Windows_SupportedOS_WindowsVista_ 
+     IMFAsyncResult : public IUnknown
+     {
+     public:
+@@ -4041,7 +4042,7 @@ EXTERN_C const IID IID_IMFAsyncCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a27003cf-2354-4f2a-8d6a-ab7cff15437e")
++    MIDL_INTERFACE("a27003cf-2354-4f2a-8d6a-ab7cff15437e") _Windows_SupportedOS_WindowsVista_ 
+     IMFAsyncCallback : public IUnknown
+     {
+     public:
+@@ -4157,7 +4158,7 @@ EXTERN_C const IID IID_IMFAsyncCallbackLogging;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c7a4dca1-f5f0-47b6-b92b-bf0106d25791")
++    MIDL_INTERFACE("c7a4dca1-f5f0-47b6-b92b-bf0106d25791") _Windows_SupportedOS_Windows8_ 
+     IMFAsyncCallbackLogging : public IMFAsyncCallback
+     {
+     public:
+@@ -4422,7 +4423,7 @@ EXTERN_C const IID IID_IMFMediaEvent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DF598932-F10C-4E39-BBA2-C308F101DAA3")
++    MIDL_INTERFACE("DF598932-F10C-4E39-BBA2-C308F101DAA3") _Windows_SupportedOS_WindowsVista_ 
+     IMFMediaEvent : public IMFAttributes
+     {
+     public:
+@@ -4853,13 +4854,13 @@ EXTERN_C const IID IID_IMFMediaEventGenerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2CD0BD52-BCD5-4B89-B62C-EADC0C031E7D")
++    MIDL_INTERFACE("2CD0BD52-BCD5-4B89-B62C-EADC0C031E7D") _Windows_SupportedOS_WindowsVista_ 
+     IMFMediaEventGenerator : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetEvent( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _Win32_AssociatedEnum_(MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS) _In_  DWORD dwFlags,
+             /* [annotation][out] */ 
+             _Out_  IMFMediaEvent **ppEvent) = 0;
+         
+@@ -5045,7 +5046,7 @@ EXTERN_C const IID IID_IMFRemoteAsyncCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a27003d0-2354-4f2a-8d6a-ab7cff15437e")
++    MIDL_INTERFACE("a27003d0-2354-4f2a-8d6a-ab7cff15437e") _Windows_SupportedOS_WindowsVista_ 
+     IMFRemoteAsyncCallback : public IUnknown
+     {
+     public:
+@@ -5155,7 +5156,7 @@ EXTERN_C const IID IID_IMFByteStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ad4c1b00-4bf7-422f-9175-756693d9130d")
++    MIDL_INTERFACE("ad4c1b00-4bf7-422f-9175-756693d9130d") _Windows_SupportedOS_WindowsVista_ 
+     IMFByteStream : public IUnknown
+     {
+     public:
+@@ -5575,7 +5576,7 @@ EXTERN_C const IID IID_IMFByteStreamProxyClassFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a6b43f84-5c0a-42e8-a44d-b1857a76992f")
++    MIDL_INTERFACE("a6b43f84-5c0a-42e8-a44d-b1857a76992f") _Windows_SupportedOS_Windows8_ 
+     IMFByteStreamProxyClassFactory : public IUnknown
+     {
+     public:
+@@ -5712,7 +5713,7 @@ EXTERN_C const IID IID_IMFSampleOutputStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8feed468-6f7e-440d-869a-49bdd283ad0d")
++    MIDL_INTERFACE("8feed468-6f7e-440d-869a-49bdd283ad0d") _Windows_SupportedOS_Windows8_ 
+     IMFSampleOutputStream : public IUnknown
+     {
+     public:
+@@ -5829,7 +5830,7 @@ EXTERN_C const IID IID_IMFCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5BC8A76B-869A-46a3-9B03-FA218A66AEBE")
++    MIDL_INTERFACE("5BC8A76B-869A-46a3-9B03-FA218A66AEBE") _Windows_SupportedOS_WindowsVista_ 
+     IMFCollection : public IUnknown
+     {
+     public:
+@@ -5989,7 +5990,7 @@ EXTERN_C const IID IID_IMFMediaEventQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("36f846fc-2256-48b6-b58e-e2b638316581")
++    MIDL_INTERFACE("36f846fc-2256-48b6-b58e-e2b638316581") _Windows_SupportedOS_WindowsVista_ 
+     IMFMediaEventQueue : public IUnknown
+     {
+     public:
+@@ -6186,7 +6187,7 @@ EXTERN_C const IID IID_IMFActivate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7FEE9E9A-4A89-47a6-899C-B6A53A70FB67")
++    MIDL_INTERFACE("7FEE9E9A-4A89-47a6-899C-B6A53A70FB67") _Windows_SupportedOS_WindowsVista_ 
+     IMFActivate : public IMFAttributes
+     {
+     public:
+@@ -6612,7 +6613,7 @@ EXTERN_C const IID IID_IMFPluginControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5c6c44bf-1db6-435b-9249-e8cd10fdec96")
++    MIDL_INTERFACE("5c6c44bf-1db6-435b-9249-e8cd10fdec96") _Windows_SupportedOS_Windows7_ 
+     IMFPluginControl : public IUnknown
+     {
+     public:
+@@ -6807,7 +6808,7 @@ EXTERN_C const IID IID_IMFPluginControl2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C6982083-3DDC-45CB-AF5E-0F7A8CE4DE77")
++    MIDL_INTERFACE("C6982083-3DDC-45CB-AF5E-0F7A8CE4DE77") _Windows_SupportedOS_Windows8_ 
+     IMFPluginControl2 : public IMFPluginControl
+     {
+     public:
+@@ -6974,7 +6975,7 @@ EXTERN_C const IID IID_IMFDXGIDeviceManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("eb533d5d-2db6-40f8-97a9-494692014f07")
++    MIDL_INTERFACE("eb533d5d-2db6-40f8-97a9-494692014f07") _Windows_SupportedOS_Windows8_ 
+     IMFDXGIDeviceManager : public IUnknown
+     {
+     public:
+@@ -7002,7 +7003,7 @@ EXTERN_C const IID IID_IMFDXGIDeviceManager;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenDeviceHandle( 
+             /* [annotation] */ 
+-            _Out_  HANDLE *phDevice) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phDevice) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ResetDevice( 
+             /* [annotation] */ 
+@@ -7197,7 +7198,7 @@ EXTERN_C const IID IID_IMFMuxStreamAttributesManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CE8BD576-E440-43B3-BE34-1E53F565F7E8")
++    MIDL_INTERFACE("CE8BD576-E440-43B3-BE34-1E53F565F7E8") _Windows_SupportedOS_15063_ 
+     IMFMuxStreamAttributesManager : public IUnknown
+     {
+     public:
+@@ -7301,7 +7302,7 @@ EXTERN_C const IID IID_IMFMuxStreamMediaTypeManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("505A2C72-42F7-4690-AEAB-8F513D0FFDB8")
++    MIDL_INTERFACE("505A2C72-42F7-4690-AEAB-8F513D0FFDB8") _Windows_SupportedOS_15063_ 
+     IMFMuxStreamMediaTypeManager : public IUnknown
+     {
+     public:
+@@ -7461,7 +7462,7 @@ EXTERN_C const IID IID_IMFMuxStreamSampleManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("74ABBC19-B1CC-4E41-BB8B-9D9B86A8F6CA")
++    MIDL_INTERFACE("74ABBC19-B1CC-4E41-BB8B-9D9B86A8F6CA") _Windows_SupportedOS_15063_ 
+     IMFMuxStreamSampleManager : public IUnknown
+     {
+     public:
+@@ -7795,6 +7796,21 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MF_EVENT_FLAG_NONE")
++#undef MF_EVENT_FLAG_NONE
++#pragma push_macro("MF_EVENT_FLAG_NO_WAIT")
++#undef MF_EVENT_FLAG_NO_WAIT
++enum MEDIA_EVENT_GENERATOR_GET_EVENT_FLAGS : unsigned int
++{
++    MF_EVENT_FLAG_NONE = 0U,
++    MF_EVENT_FLAG_NO_WAIT = 1U,
++};
++#pragma pop_macro("MF_EVENT_FLAG_NO_WAIT")
++#pragma pop_macro("MF_EVENT_FLAG_NONE")
++#endif
++
+ #endif
+ 
+ 

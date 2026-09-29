@@ -1,0 +1,229 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RasError.h b/generation/WinSDK/RecompiledIdlHeaders/um/RasError.h
+index decc792c1f..5b5bdd1e5f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RasError.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RasError.h
+@@ -53,7 +53,7 @@ Abstract:
+  * Incorrect information was specified.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The port information cannot be set.
+ //
+@@ -70,7 +70,7 @@ Abstract:
+  * The specified port is not connected.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // An invalid event was detected.
+ //
+@@ -97,7 +97,7 @@ Abstract:
+  * An invalid buffer was specified.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // A route was specified that is not available.
+ //
+@@ -114,7 +114,7 @@ Abstract:
+  * A route was specified that is not allocated.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // An invalid compression was specified.
+ //
+@@ -161,7 +161,7 @@ Abstract:
+  * A connection to the remote computer could not be established, so the port used for this connection was closed.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ //  No endpoints could be determined.
+ //
+@@ -198,7 +198,7 @@ Abstract:
+  * The system found invalid information in the phone book file.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // A string could not be loaded.
+ //
+@@ -245,7 +245,7 @@ Abstract:
+  * The modem (or other connecting device) is already in use or is not configured properly.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // Your computer could not be registered on the remote network.
+ //
+@@ -267,7 +267,7 @@ Abstract:
+  * The device attached to the port is not the one expected.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // A string was detected that could not be converted.
+ //
+@@ -284,7 +284,7 @@ Abstract:
+  * The remote server is not responding in a timely fashion.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // No asynchronous net is available.
+ //
+@@ -371,7 +371,7 @@ Abstract:
+  * The account does not have permission to dial in.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The remote access server is not responding.
+ //
+@@ -498,7 +498,7 @@ Abstract:
+  * The system was unable to read the usage from the media.INI file.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The system was unable to read the maximum connection BPS rate from the media.INI file.
+ //
+@@ -545,7 +545,7 @@ Abstract:
+  * There was no dial tone.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The modem (or other connecting device) reported a general error.
+ //
+@@ -722,7 +722,7 @@ Abstract:
+  * The authorization state is invalid.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // ERROR_WRITING_INITBPS
+ //
+@@ -759,7 +759,7 @@ Abstract:
+  * The operation could not finish because it could not start the Remote Access Connection Manager service in time. Please try the operation again.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The two-way port is initializing.  Wait a few seconds and redial.
+ //
+@@ -776,7 +776,7 @@ Abstract:
+  * No active ISDN lines are available.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // No ISDN channels are available to make the call.
+ //
+@@ -813,7 +813,7 @@ Abstract:
+  * The connection was terminated because the remote computer did not respond in a timely manner.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The connection was terminated by the remote computer.
+ //
+@@ -845,7 +845,7 @@ Abstract:
+  * The phone number, including prefix and suffix, is too long.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The IPX protocol cannot dial out on the modem (or other connecting device) because this computer is not configured for dialing out (it is an IPX router).
+ //
+@@ -872,7 +872,7 @@ Abstract:
+  * The IPX protocol cannot be used for dialing out on more than one modem (or other connecting device) at a time.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // Cannot access TCPCFG.DLL.
+ //
+@@ -894,7 +894,7 @@ Abstract:
+  * SLIP cannot be used unless the IP protocol is installed.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // Computer registration is not complete.
+ //
+@@ -966,7 +966,7 @@ Abstract:
+  * The remote computer does not support the required data encryption type.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The remote computer requires data encryption.
+ //
+@@ -1035,7 +1035,7 @@ Abstract:
+  */
+ 
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ 
+ //
+ // ERROR_WRONG_MODULE
+@@ -1088,7 +1088,7 @@ Abstract:
+  * Remote Access Services could not be started automatically.  Additional information is provided in the event log.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // Internet Connection Sharing is already enabled on the connection.
+ //
+@@ -1225,7 +1225,7 @@ Abstract:
+  * It was not possible to verify the identity of the server.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // To dial out using this connection you must use a smart card.
+ //
+@@ -1242,7 +1242,7 @@ Abstract:
+  * An attempted function is not valid for this connection.%0
+  */
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ //
+ // The connection requires a certificate, and no valid certificate was found.  For further assistance, click More Info or search Help and Support Center for this error number.
+ //
+@@ -1437,7 +1437,7 @@ Abstract:
+  * Cannot delete a connection while it is connected.%0
+  */
+ 
+-#if (WINVER <= 0x600)
++#if defined(WIN32METADATA) || ((WINVER <= 0x600))
+ 
+ #define ERROR_RASQEC_RESOURCE_CREATION_FAILED (RASBASE+218)
+ /*

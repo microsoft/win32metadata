@@ -1,0 +1,1126 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h b/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
+index 9580b3414f..791ba8722d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winddi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -194,12 +195,12 @@ typedef struct _RECTFX
+ } RECTFX, *PRECTFX;
+ 
+ 
+-DECLARE_HANDLE(HBM);
+-DECLARE_HANDLE(HDEV);
+-DECLARE_HANDLE(HSURF);
+-DECLARE_HANDLE(DHSURF);
+-DECLARE_HANDLE(DHPDEV);
+-DECLARE_HANDLE(HDRVOBJ);
++DECLARE_HANDLE(HBM) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDEV) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HSURF) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(DHSURF) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(DHPDEV) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDRVOBJ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #define LTOFX(x)            ((x)<<4)
+ 
+@@ -1565,7 +1566,7 @@ typedef struct _CLIPOBJ
+ 
+ typedef struct _DRIVEROBJ DRIVEROBJ;
+ 
+-typedef BOOL (CALLBACK * FREEOBJPROC)(DRIVEROBJ *pDriverObj);
++typedef BOOL (CALLBACK * FREEOBJPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DRIVEROBJ *pDriverObj);
+ 
+ typedef struct _DRIVEROBJ
+ {
+@@ -1747,25 +1748,25 @@ typedef struct _XLATEOBJ
+  * BRUSHOBJ callbacks
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ PVOID APIENTRY BRUSHOBJ_pvAllocRbrush(
+-    BRUSHOBJ *pbo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pbo,
+     ULONG     cj
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ PVOID APIENTRY BRUSHOBJ_pvGetRbrush(
+-    BRUSHOBJ *pbo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pbo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY BRUSHOBJ_ulGetBrushColor(
+-    BRUSHOBJ *pbo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pbo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) ENGAPI
+ HANDLE APIENTRY BRUSHOBJ_hGetColorTransform(
+-    BRUSHOBJ *pbo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pbo
+     );
+ 
+ /*
+@@ -1802,24 +1803,24 @@ typedef struct _ENUMRECTS
+     RECTL       arcl[1];
+ } ENUMRECTS;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY CLIPOBJ_cEnumStart(
+-    CLIPOBJ *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *pco,
+     BOOL     bAll,
+     __in_data_source(USER_MODE) ULONG    iType,
+     __in_data_source(USER_MODE) ULONG    iDirection,
+     __in_data_source(USER_MODE) ULONG    cLimit
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY CLIPOBJ_bEnum(
+-    CLIPOBJ *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *pco,
+     ULONG    cj,
+-    ULONG   *pul
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG   *pul
+     );
+ 
+-PATHOBJ* APIENTRY CLIPOBJ_ppoGetPath(
+-    CLIPOBJ* pco
++_Windows_SupportedOS_Windows2000_ PATHOBJ* APIENTRY CLIPOBJ_ppoGetPath(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ* pco
+     );
+ 
+ /*
+@@ -1932,23 +1933,23 @@ typedef struct _FONTINFO /* fi */
+     ULONG   cjMaxGlyph32;
+ } FONTINFO, *PFONTINFO;
+ 
+-ULONG APIENTRY FONTOBJ_cGetAllGlyphHandles(
+-    FONTOBJ *pfo,
+-    HGLYPH  *phg
++_Windows_SupportedOS_Windows2000_ ULONG APIENTRY FONTOBJ_cGetAllGlyphHandles(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *pfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HGLYPH  *phg
+     );
+ 
+-VOID APIENTRY FONTOBJ_vGetInfo(
+-    FONTOBJ  *pfo,
++_Windows_SupportedOS_Windows2000_ VOID APIENTRY FONTOBJ_vGetInfo(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ  *pfo,
+     __in_data_source(USER_MODE) ULONG     cjSize,
+-    FONTINFO *pfi
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTINFO *pfi
+     );
+ 
+-ULONG APIENTRY FONTOBJ_cGetGlyphs(
+-    FONTOBJ *pfo,
++_Windows_SupportedOS_Windows2000_ ULONG APIENTRY FONTOBJ_cGetGlyphs(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *pfo,
+     __in_data_source(USER_MODE) ULONG    iMode,
+     ULONG    cGlyph,
+-    HGLYPH  *phg,
+-    PVOID   *ppvGlyph
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HGLYPH  *phg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID   *ppvGlyph
+     );
+ 
+ #if (NTDDI_VERSION <= NTDDI_WINXP)
+@@ -1956,21 +1957,21 @@ GAMMA_TABLES* APIENTRY FONTOBJ_pGetGammaTables(
+     FONTOBJ *pfo);
+ #endif // (NTDDI_VERSION <= NTDDI_WINXP)
+ 
+-XFORMOBJ * APIENTRY FONTOBJ_pxoGetXform(
++_Windows_SupportedOS_Windows2000_ XFORMOBJ * APIENTRY FONTOBJ_pxoGetXform(
+     _In_ FONTOBJ *pfo
+     );
+ 
+-IFIMETRICS * APIENTRY FONTOBJ_pifi(
++_Windows_SupportedOS_Windows2000_ IFIMETRICS * APIENTRY FONTOBJ_pifi(
+     _In_ FONTOBJ *pfo
+     );
+ 
+-FD_GLYPHSET * APIENTRY FONTOBJ_pfdg(
+-    FONTOBJ *pfo
++_Windows_SupportedOS_Windows2000_ FD_GLYPHSET * APIENTRY FONTOBJ_pfdg(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *pfo
+     );
+ 
+-PVOID APIENTRY FONTOBJ_pvTrueTypeFontFile(
+-    FONTOBJ *pfo,
+-    ULONG   *pcjFile
++_Windows_SupportedOS_Windows2000_ PVOID APIENTRY FONTOBJ_pvTrueTypeFontFile(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *pfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG   *pcjFile
+     );
+ 
+ PBYTE APIENTRY FONTOBJ_pjOpenTypeTablePointer (
+@@ -1988,8 +1989,8 @@ LPWSTR APIENTRY FONTOBJ_pwszFontFilePaths (
+ 
+ #define FO_ATTR_MODE_ROTATE         1
+ 
+-PFD_GLYPHATTR APIENTRY FONTOBJ_pQueryGlyphAttrs(
+-    FONTOBJ       *pfo,
++_Windows_SupportedOS_Windows2000_ PFD_GLYPHATTR APIENTRY FONTOBJ_pQueryGlyphAttrs(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ       *pfo,
+     __in_data_source(USER_MODE) ULONG          iMode
+     );
+ 
+@@ -2055,30 +2056,30 @@ typedef struct  _CLIPLINE
+     RUN     arun[1];
+ } CLIPLINE, *PCLIPLINE;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY PATHOBJ_vEnumStart(
+-    PATHOBJ *ppo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ *ppo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY PATHOBJ_bEnum(
+-    PATHOBJ  *ppo,
+-    PATHDATA *ppd
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ  *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHDATA *ppd
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY PATHOBJ_vEnumStartClipLines(
+-    PATHOBJ   *ppo,
+-    CLIPOBJ   *pco,
+-    SURFOBJ   *pso,
+-    LINEATTRS *pla
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ   *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ   *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ   *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LINEATTRS *pla
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY PATHOBJ_bEnumClipLines(
+-    PATHOBJ  *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ  *ppo,
+     ULONG     cb,
+-    CLIPLINE *pcl
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPLINE *pcl
+     );
+ 
+ ENGAPI
+@@ -2106,38 +2107,38 @@ BOOL APIENTRY PATHOBJ_bCloseFigure(
+     _In_ PATHOBJ *ppo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY PATHOBJ_vGetBounds(
+-    PATHOBJ *ppo,
+-    PRECTFX prectfx
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRECTFX prectfx
+     );
+ 
+ /*
+  * STROBJ callbacks
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY STROBJ_vEnumStart(
+-    STROBJ *pstro
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ *pstro
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY STROBJ_bEnum(
+-    STROBJ    *pstro,
+-    ULONG     *pc,
+-    PGLYPHPOS *ppgpos
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ    *pstro,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG     *pc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PGLYPHPOS *ppgpos
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY STROBJ_bEnumPositionsOnly(
+-    STROBJ    *pstro,
+-    ULONG     *pc,
+-    PGLYPHPOS *ppgpos
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ    *pstro,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG     *pc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PGLYPHPOS *ppgpos
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ DWORD APIENTRY STROBJ_dwGetCodePage(
+-    STROBJ  *pstro
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ  *pstro
+     );
+ 
+ ENGAPI
+@@ -2150,12 +2151,12 @@ FIX APIENTRY STROBJ_fxBreakExtra(
+     STROBJ  *pstro
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY STROBJ_bGetAdvanceWidths(
+-    STROBJ   *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ   *pso,
+     __in_data_source(USER_MODE) ULONG     iFirst,
+     ULONG     c,
+-    POINTQF  *pptqD
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTQF  *pptqD
+     );
+ 
+ 
+@@ -2227,19 +2228,19 @@ BOOL APIENTRY STROBJ_bGetAdvanceWidths(
+ #define XF_LTOFX        2L
+ #define XF_INV_FXTOL    3L
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY XFORMOBJ_iGetXform(
+     _In_      XFORMOBJ *pxo,
+     _Out_opt_ XFORML   *pxform
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY XFORMOBJ_bApplyXform(
+-    XFORMOBJ *pxo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XFORMOBJ *pxo,
+     __in_data_source(USER_MODE)  __out_validated(GRAPHIC) ULONG     iMode,
+     ULONG     cPoints,
+-    PVOID     pvIn,
+-    PVOID     pvOut
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID     pvIn,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID     pvOut
+     );
+ 
+ DECLSPEC_DEPRECATED_DDK
+@@ -2265,28 +2266,28 @@ HANDLE APIENTRY XFORMOBJ_cmGetTransform(
+ #define XO_SRCBITFIELDS  4
+ #define XO_DESTBITFIELDS 5
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY XLATEOBJ_iXlate(
+-    XLATEOBJ *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *pxlo,
+     ULONG iColor
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG * APIENTRY XLATEOBJ_piVector(
+-    XLATEOBJ *pxlo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *pxlo
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ ULONG APIENTRY XLATEOBJ_cGetPalette(
+-    XLATEOBJ *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *pxlo,
+     __in_data_source(USER_MODE) ULONG     iPal,
+     ULONG     cPal,
+-    ULONG    *pPal
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG    *pPal
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) ENGAPI
+ HANDLE APIENTRY XLATEOBJ_hGetColorTransform(
+-    XLATEOBJ *pxlo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *pxlo
+     );
+ 
+ /*
+@@ -2335,23 +2336,23 @@ ULONG APIENTRY EngGetLastError();
+ #define HOOK_FLAGS                      0x0003b5ef
+ #endif
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) ENGAPI
+ HBITMAP APIENTRY EngCreateBitmap(
+     SIZEL sizl,
+     LONG  lWidth,
+     __in_data_source(USER_MODE) ULONG iFormat,
+     __in_data_source(USER_MODE) FLONG fl,
+-    __in_data_source(USER_MODE) PVOID pvBits
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) PVOID pvBits
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ HSURF APIENTRY EngCreateDeviceSurface(
+     __in_data_source(USER_MODE) DHSURF dhsurf,
+     __in_data_source(USER_MODE) SIZEL sizl,
+     ULONG iFormatCompat
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) ENGAPI
+ HBITMAP APIENTRY EngCreateDeviceBitmap(
+     __in_data_source(USER_MODE) DHSURF dhsurf,
+     __in_data_source(USER_MODE) SIZEL sizl,
+@@ -2367,29 +2368,29 @@ HBITMAP APIENTRY EngCreateRedirectionDeviceBitmap(
+     );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngDeleteSurface(
+     __in_data_source(USER_MODE) HSURF hsurf
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ SURFOBJ * APIENTRY EngLockSurface(
+     HSURF hsurf
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngUnlockSurface(
+-    __in_data_source(USER_MODE) SURFOBJ *pso
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) SURFOBJ *pso
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngEraseSurface(
+-    SURFOBJ *pso,
+-    RECTL   *prcl,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL   *prcl,
+     __in_data_source(USER_MODE) ULONG    iColor
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngAssociateSurface(
+     HSURF hsurf,
+     HDEV  hdev,
+@@ -2415,14 +2416,14 @@ BOOL APIENTRY EngModifySurface(
+     VOID*   pvReserved
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngMarkBandingSurface(
+     __in_data_source(USER_MODE) HSURF hsurf
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngCheckAbort(
+-    SURFOBJ *pso
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *pso
+     );
+ 
+ /*
+@@ -2432,20 +2433,20 @@ BOOL APIENTRY EngCheckAbort(
+ ENGAPI
+ PATHOBJ * APIENTRY EngCreatePath();
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngDeletePath(
+-    PATHOBJ *ppo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ *ppo
+     );
+ 
+ /*
+  * Engine callbacks - Palettes
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DeleteObject, -1, 0) ENGAPI
+ HPALETTE APIENTRY EngCreatePalette(
+     __in_data_source(USER_MODE) ULONG  iMode,
+     __in_data_source(USER_MODE) ULONG  cColors,
+-    __in_data_source(USER_MODE) ULONG *pulColors,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) ULONG *pulColors,
+     __in_data_source(USER_MODE) FLONG  flRed,
+     __in_data_source(USER_MODE) FLONG  flGreen,
+     __in_data_source(USER_MODE) FLONG  flBlue
+@@ -2458,7 +2459,7 @@ ULONG APIENTRY EngQueryPalette(
+     ULONG       cColors,
+     ULONG      *pulColors);
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngDeletePalette(
+     __in_data_source(USER_MODE) HPALETTE hpal
+     );
+@@ -2467,10 +2468,10 @@ BOOL APIENTRY EngDeletePalette(
+  * Engine callbacks - Clipping
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ CLIPOBJ * APIENTRY EngCreateClip();
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngDeleteClip(
+     _In_opt_ CLIPOBJ *pco
+     );
+@@ -3376,7 +3377,7 @@ VOID APIENTRY DrvNotify(
+ #define WOC_RGN_SPRITE          0x0200
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+-typedef VOID (CALLBACK * WNDOBJCHANGEPROC)(WNDOBJ *pwo, FLONG fl);
++typedef VOID (CALLBACK * WNDOBJCHANGEPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WNDOBJ *pwo, FLONG fl);
+ 
+ #define WO_RGN_CLIENT_DELTA     0x0001
+ #define WO_RGN_CLIENT           0x0002
+@@ -3536,7 +3537,7 @@ BOOL APIENTRY DrvSwapBuffers(
+  * Function prototypes - Engine Simulations
+  */
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngBitBlt(
+     _In_ SURFOBJ  *psoTrg,
+     _In_ SURFOBJ  *psoSrc,
+@@ -3551,77 +3552,77 @@ BOOL APIENTRY EngBitBlt(
+     __in_data_source(USER_MODE) ROP4      rop4
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngLineTo(
+-    SURFOBJ   *pso,
+-    CLIPOBJ   *pco,
+-    BRUSHOBJ  *pbo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ   *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ   *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ  *pbo,
+     __in_data_source(USER_MODE) LONG       x1,
+     __in_data_source(USER_MODE) LONG       y1,
+     __in_data_source(USER_MODE) LONG       x2,
+     __in_data_source(USER_MODE) LONG       y2,
+-    RECTL     *prclBounds,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL     *prclBounds,
+     __in_data_source(USER_MODE) MIX        mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStretchBlt(
+-    SURFOBJ         *psoDest,
+-    SURFOBJ         *psoSrc,
+-    SURFOBJ         *psoMask,
+-    CLIPOBJ         *pco,
+-    XLATEOBJ        *pxlo,
+-    __in_data_source(USER_MODE) COLORADJUSTMENT *pca,
+-    __in_data_source(USER_MODE) POINTL          *pptlHTOrg,
+-    __in_data_source(USER_MODE) RECTL           *prclDest,
+-    __in_data_source(USER_MODE) RECTL           *prclSrc,
+-    POINTL          *pptlMask,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoDest,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoMask,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ         *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ        *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) COLORADJUSTMENT *pca,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) POINTL          *pptlHTOrg,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) RECTL           *prclDest,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) RECTL           *prclSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL          *pptlMask,
+     __in_data_source(USER_MODE) ULONG            iMode
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStretchBltROP(
+-    SURFOBJ         *psoDest,
+-    SURFOBJ         *psoSrc,
+-    SURFOBJ         *psoMask,
+-    CLIPOBJ         *pco,
+-    XLATEOBJ        *pxlo,
+-    COLORADJUSTMENT *pca,
+-    POINTL          *pptlHTOrg,
+-    __in_data_source(USER_MODE) RECTL           *prclDest,
+-    __in_data_source(USER_MODE) RECTL           *prclSrc,
+-    POINTL          *pptlMask,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoDest,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoMask,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ         *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ        *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COLORADJUSTMENT *pca,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL          *pptlHTOrg,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) RECTL           *prclDest,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) RECTL           *prclSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL          *pptlMask,
+     __in_data_source(USER_MODE) ULONG            iMode,
+-    BRUSHOBJ        *pbo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ        *pbo,
+     __in_data_source(USER_MODE) DWORD            rop4
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngAlphaBlend(
+-    SURFOBJ       *psoDest,
+-    SURFOBJ       *psoSrc,
+-    CLIPOBJ       *pco,
+-    XLATEOBJ      *pxlo,
+-    RECTL         *prclDest,
+-    RECTL         *prclSrc,
+-    BLENDOBJ      *pBlendObj
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ       *psoDest,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ       *psoSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ       *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ      *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL         *prclDest,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL         *prclSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BLENDOBJ      *pBlendObj
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngGradientFill(
+-    SURFOBJ         *psoDest,
+-    CLIPOBJ         *pco,
+-    XLATEOBJ        *pxlo,
+-    TRIVERTEX       *pVertex,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoDest,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ         *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ        *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") TRIVERTEX       *pVertex,
+     ULONG            nVertex,
+-    PVOID            pMesh,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID            pMesh,
+     ULONG            nMesh,
+-    RECTL           *prclExtents,
+-    POINTL          *pptlDitherOrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL           *prclExtents,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL          *pptlDitherOrg,
+     __in_data_source(USER_MODE) ULONG            ulMode
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngTransparentBlt(
+     _In_ SURFOBJ    *psoDst,
+     _In_ SURFOBJ    *psoSrc,
+@@ -3633,74 +3634,74 @@ BOOL APIENTRY EngTransparentBlt(
+     __in_data_source(USER_MODE) ULONG      bCalledFromBitBlt
+     ); 
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngTextOut(
+-    SURFOBJ  *pso,
+-    STROBJ   *pstro,
+-    FONTOBJ  *pfo,
+-    CLIPOBJ  *pco,
+-    RECTL    *prclExtra,
+-    RECTL    *prclOpaque,
+-    BRUSHOBJ *pboFore,
+-    BRUSHOBJ *pboOpaque,
+-    POINTL   *pptlOrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ  *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ   *pstro,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ  *pfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ  *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL    *prclExtra,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL    *prclOpaque,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pboFore,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pboOpaque,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL   *pptlOrg,
+     __in_data_source(USER_MODE) MIX       mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStrokePath(
+-    SURFOBJ   *pso,
+-    PATHOBJ   *ppo,
+-    CLIPOBJ   *pco,
+-    XFORMOBJ  *pxo,
+-    BRUSHOBJ  *pbo,
+-    POINTL    *pptlBrushOrg,
+-    __in_data_source(USER_MODE) LINEATTRS *plineattrs,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ   *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ   *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ   *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XFORMOBJ  *pxo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ  *pbo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL    *pptlBrushOrg,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) LINEATTRS *plineattrs,
+     __in_data_source(USER_MODE) MIX        mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngFillPath(
+-    SURFOBJ  *pso,
+-    PATHOBJ  *ppo,
+-    CLIPOBJ  *pco,
+-    BRUSHOBJ *pbo,
+-    POINTL   *pptlBrushOrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ  *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ  *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ  *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pbo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL   *pptlBrushOrg,
+     __in_data_source(USER_MODE) MIX       mix,
+     __in_data_source(USER_MODE) FLONG     flOptions
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngStrokeAndFillPath(
+-    SURFOBJ   *pso,
+-    PATHOBJ   *ppo,
+-    CLIPOBJ   *pco,
+-    XFORMOBJ  *pxo,
+-    BRUSHOBJ  *pboStroke,
+-    LINEATTRS *plineattrs,
+-    BRUSHOBJ  *pboFill,
+-    POINTL    *pptlBrushOrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ   *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ   *ppo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ   *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XFORMOBJ  *pxo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ  *pboStroke,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LINEATTRS *plineattrs,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ  *pboFill,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL    *pptlBrushOrg,
+     __in_data_source(USER_MODE) MIX        mixFill,
+     __in_data_source(USER_MODE) FLONG      flOptions
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngPaint(
+-    SURFOBJ  *pso,
+-    CLIPOBJ  *pco,
+-    BRUSHOBJ *pbo,
+-    POINTL   *pptlBrushOrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ  *pso,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ  *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *pbo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL   *pptlBrushOrg,
+     __in_data_source(USER_MODE) MIX       mix
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngCopyBits(
+-    SURFOBJ  *psoDest,
+-    SURFOBJ  *psoSrc,
+-    CLIPOBJ  *pco,
+-    XLATEOBJ *pxlo,
+-    __in_data_source(USER_MODE) RECTL    *prclDest,
+-    __in_data_source(USER_MODE) POINTL   *pptlSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ  *psoDest,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ  *psoSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ  *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) RECTL    *prclDest,
++    _WIN32META_ANNOTATION_("win32metadata:out") __in_data_source(USER_MODE) POINTL   *pptlSrc
+     );
+ 
+ ENGAPI
+@@ -3725,18 +3726,18 @@ VOID APIENTRY EngMovePointer(
+     RECTL    *prcl
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ BOOL APIENTRY EngPlgBlt(
+-    SURFOBJ         *psoTrg,
+-    SURFOBJ         *psoSrc,
+-    SURFOBJ         *psoMsk,
+-    CLIPOBJ         *pco,
+-    XLATEOBJ        *pxlo,
+-    COLORADJUSTMENT *pca,
+-    POINTL          *pptlBrushOrg,
+-    POINTFIX        *pptfx,
+-    RECTL           *prcl,
+-    POINTL          *pptl,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoTrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoSrc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ         *psoMsk,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ         *pco,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ        *pxlo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COLORADJUSTMENT *pca,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL          *pptlBrushOrg,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTFIX        *pptfx,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL           *prcl,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL          *pptl,
+     __in_data_source(USER_MODE) ULONG            iMode
+     );
+ 
+@@ -3795,14 +3796,14 @@ LONG APIENTRY HT_ComputeRGBGammaTable(
+     _Out_writes_bytes_(GammaTableEntries * 3)   LPBYTE  pGammaTable
+     );
+ 
+-LONG APIENTRY HT_Get8BPPFormatPalette(
++_Windows_SupportedOS_Windows2000_ LONG APIENTRY HT_Get8BPPFormatPalette(
+     _Out_opt_   LPPALETTEENTRY  pPaletteEntry,
+     _In_        USHORT          RedGamma,
+     _In_        USHORT          GreenGamma,
+     _In_        USHORT          BlueGamma
+     );
+ 
+-LONG APIENTRY HT_Get8BPPMaskPalette(
++_Windows_SupportedOS_Windows2000_ LONG APIENTRY HT_Get8BPPMaskPalette(
+     _Out_opt_   LPPALETTEENTRY  pPaletteEntry,
+     _In_        BOOL            Use8BPPMaskPal,
+     _In_        BYTE            CMYMask,
+@@ -4057,12 +4058,12 @@ PVOID APIENTRY EngMapModule(
+ // callback for extra PDEV information
+ //
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ LPWSTR APIENTRY EngGetPrinterDataFileName(
+     _In_                    HDEV hdev
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ LPWSTR APIENTRY EngGetDriverName(
+     _In_                    HDEV hdev
+     );
+@@ -4088,12 +4089,12 @@ BOOL APIENTRY EngGetType1FontList(
+ // Manipulating resource sections
+ //
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(CloseHandle, -1, 0) ENGAPI
+ HANDLE APIENTRY EngLoadModule(
+     _In_                    LPWSTR pwsz
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ PVOID APIENTRY EngFindResource(
+     _In_                    HANDLE h,
+     _In_                    int    iName,
+@@ -4101,7 +4102,7 @@ PVOID APIENTRY EngFindResource(
+     _Out_                   PULONG pulSize
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngFreeModule(
+     _In_                    HANDLE h
+     );
+@@ -4168,24 +4169,24 @@ BOOL APIENTRY EngLpkInstalled();
+ // Semaphores
+ //
+ 
+-DECLARE_HANDLE(HSEMAPHORE);
++DECLARE_HANDLE(HSEMAPHORE) _WIN32META_ANNOTATION_("win32metadata:raii_free=EngDeleteSemaphore")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(EngDeleteSemaphore, -1, 0) ENGAPI
+ HSEMAPHORE APIENTRY EngCreateSemaphore(
+     VOID
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngAcquireSemaphore(
+     _In_                    HSEMAPHORE hsem
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngReleaseSemaphore(
+     _In_                    HSEMAPHORE hsem
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngDeleteSemaphore(
+     _In_                    HSEMAPHORE hsem
+     );
+@@ -4228,7 +4229,7 @@ BOOL APIENTRY EngIsSemaphoreSharedByCurrentThread(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_LONGHORN)
+-DECLARE_HANDLE(HFASTMUTEX);
++DECLARE_HANDLE(HFASTMUTEX) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ ENGAPI
+ HFASTMUTEX APIENTRY EngCreateFastMutex();
+@@ -4270,18 +4271,18 @@ VOID APIENTRY EngDeleteSafeSemaphore(
+     _Inout_                 ENGSAFESEMAPHORE *pssem
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngMultiByteToUnicodeN(
+     _Out_writes_bytes_to_(MaxBytesInUnicodeString, *BytesInUnicodeString)   LPWSTR UnicodeString,
+     _In_                                                                ULONG MaxBytesInUnicodeString,
+     _Out_opt_                                                           PULONG BytesInUnicodeString,
+-    _In_reads_bytes_(BytesInMultiByteString)                                 PCHAR MultiByteString,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(BytesInMultiByteString)                                 PCHAR MultiByteString,
+     _In_                                                                ULONG BytesInMultiByteString
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngUnicodeToMultiByteN(
+-    _Out_writes_bytes_to_(MaxBytesInMultiByteString, *BytesInMultiByteString)   PCHAR MultiByteString,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_to_(MaxBytesInMultiByteString, *BytesInMultiByteString)   PCHAR MultiByteString,
+     _In_                                                                    ULONG MaxBytesInMultiByteString,
+     _Out_opt_                                                               PULONG BytesInMultiByteString,
+     _In_reads_bytes_(BytesInUnicodeString)                                       PWSTR UnicodeString,
+@@ -4503,12 +4504,12 @@ typedef struct _ENG_TIME_FIELDS {
+     USHORT usWeekday;     // range [0..6] == [Sunday..Saturday]
+ } ENG_TIME_FIELDS, *PENG_TIME_FIELDS;
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngQueryLocalTime(
+     _Out_                   PENG_TIME_FIELDS
+     );
+ 
+-_Success_(return != 0)
++_Windows_SupportedOS_Windows2000_ _Success_(return != 0)
+ ENGAPI
+ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
+     _In_                    INT nCodePage,
+@@ -4516,7 +4517,7 @@ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
+     _In_                    INT cChars
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ INT APIENTRY EngMultiByteToWideChar(
+     _In_                                    UINT CodePage,
+     _Out_writes_bytes_opt_(BytesInWideCharString) _Null_terminated_ LPWSTR WideCharString,
+@@ -4525,7 +4526,7 @@ INT APIENTRY EngMultiByteToWideChar(
+     _In_                                    INT BytesInMultiByteString
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ INT APIENTRY EngWideCharToMultiByte(
+     _In_                                    UINT CodePage,
+     _In_reads_bytes_opt_(BytesInWideCharString) _Null_terminated_ LPWSTR WideCharString,
+@@ -4534,7 +4535,7 @@ INT APIENTRY EngWideCharToMultiByte(
+     _In_                                    INT BytesInMultiByteString
+     );
+ 
+-ENGAPI
++_Windows_SupportedOS_Windows2000_ ENGAPI
+ VOID APIENTRY EngGetCurrentCodePage(
+     _Out_   PUSHORT OemCodePage,
+     _Out_   PUSHORT AnsiCodePage
+@@ -4825,96 +4826,96 @@ EngQueryEMFInfo(
+ // DDI entrypoint function prototypes
+ //
+ 
+-typedef BOOL   (APIENTRY *PFN_DrvEnableDriver)(ULONG,ULONG,PDRVENABLEDATA);
+-typedef DHPDEV (APIENTRY *PFN_DrvEnablePDEV) (PDEVMODEW,LPWSTR,ULONG,HSURF*,ULONG,GDIINFO*,ULONG,PDEVINFO,HDEV,LPWSTR,HANDLE);
++typedef BOOL   (APIENTRY *PFN_DrvEnableDriver)(ULONG,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDRVENABLEDATA);
++typedef DHPDEV (APIENTRY *PFN_DrvEnablePDEV) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVMODEW,LPWSTR,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HSURF*,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GDIINFO*,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVINFO,HDEV,LPWSTR,HANDLE);
+ typedef VOID   (APIENTRY *PFN_DrvCompletePDEV)(DHPDEV,HDEV);
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-typedef ULONG  (APIENTRY *PFN_DrvResetDevice)(DHPDEV,PVOID);
++typedef ULONG  (APIENTRY *PFN_DrvResetDevice)(DHPDEV,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
+ #endif
+ typedef VOID   (APIENTRY *PFN_DrvDisablePDEV)(DHPDEV);
+-typedef VOID   (APIENTRY *PFN_DrvSynchronize)(DHPDEV,RECTL *);
++typedef VOID   (APIENTRY *PFN_DrvSynchronize)(DHPDEV,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *);
+ typedef HSURF  (APIENTRY *PFN_DrvEnableSurface)(DHPDEV);
+ typedef VOID   (APIENTRY *PFN_DrvDisableDriver)(VOID);
+ typedef VOID   (APIENTRY *PFN_DrvDisableSurface)(DHPDEV);
+ typedef BOOL   (APIENTRY *PFN_DrvAssertMode)(DHPDEV, BOOL);
+-typedef BOOL   (APIENTRY *PFN_DrvTextOut)(SURFOBJ *,STROBJ *,FONTOBJ *,CLIPOBJ *,RECTL *,RECTL *,BRUSHOBJ *,BRUSHOBJ *,POINTL *,MIX);
+-typedef BOOL   (APIENTRY *PFN_DrvStretchBlt)(SURFOBJ *,SURFOBJ *,SURFOBJ *,CLIPOBJ *,XLATEOBJ *,COLORADJUSTMENT *,POINTL *,RECTL *,RECTL *,POINTL *,ULONG);
+-typedef BOOL   (APIENTRY *PFN_DrvStretchBltROP)(SURFOBJ *,SURFOBJ *,SURFOBJ *,CLIPOBJ *,XLATEOBJ *,COLORADJUSTMENT *,POINTL *,RECTL *,RECTL *,POINTL *,ULONG, BRUSHOBJ *,ROP4);
+-typedef BOOL   (APIENTRY *PFN_DrvTransparentBlt)(SURFOBJ *, SURFOBJ *, CLIPOBJ *, XLATEOBJ *, RECTL *, RECTL *, ULONG, ULONG);
+-typedef BOOL   (APIENTRY *PFN_DrvPlgBlt)(SURFOBJ *,SURFOBJ *,SURFOBJ *,CLIPOBJ *,XLATEOBJ *,COLORADJUSTMENT *,POINTL *,POINTFIX *,RECTL *,POINTL *,ULONG);
+-typedef BOOL   (APIENTRY *PFN_DrvBitBlt)(SURFOBJ *,SURFOBJ *,SURFOBJ *,CLIPOBJ *,XLATEOBJ *,RECTL *,POINTL *,POINTL *,BRUSHOBJ *,POINTL *,ROP4);
+-typedef BOOL   (APIENTRY *PFN_DrvRealizeBrush)(BRUSHOBJ *,SURFOBJ *,SURFOBJ *,SURFOBJ *,XLATEOBJ *,ULONG);
+-typedef BOOL   (APIENTRY *PFN_DrvCopyBits)(SURFOBJ *,SURFOBJ *,CLIPOBJ *,XLATEOBJ *,RECTL *,POINTL *);
+-typedef ULONG  (APIENTRY *PFN_DrvDitherColor)(DHPDEV, ULONG, ULONG, ULONG *);
+-typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmap)(DHPDEV, SIZEL, ULONG);
++typedef BOOL   (APIENTRY *PFN_DrvTextOut)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") STROBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,MIX);
++typedef BOOL   (APIENTRY *PFN_DrvStretchBlt)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COLORADJUSTMENT *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,ULONG);
++typedef BOOL   (APIENTRY *PFN_DrvStretchBltROP)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COLORADJUSTMENT *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,ROP4);
++typedef BOOL   (APIENTRY *PFN_DrvTransparentBlt)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *, ULONG, ULONG);
++typedef BOOL   (APIENTRY *PFN_DrvPlgBlt)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COLORADJUSTMENT *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTFIX *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,ULONG);
++typedef BOOL   (APIENTRY *PFN_DrvBitBlt)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,ROP4);
++typedef BOOL   (APIENTRY *PFN_DrvRealizeBrush)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,ULONG);
++typedef BOOL   (APIENTRY *PFN_DrvCopyBits)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *);
++typedef ULONG  (APIENTRY *PFN_DrvDitherColor)(DHPDEV, ULONG, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
++_Win32_RAIIFree_(DeleteObject, -1, 0) typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmap)(DHPDEV, SIZEL, ULONG);
+ typedef VOID   (APIENTRY *PFN_DrvDeleteDeviceBitmap)(DHSURF);
+-typedef BOOL   (APIENTRY *PFN_DrvSetPalette)(DHPDEV, PALOBJ *, FLONG, ULONG, ULONG);
+-typedef ULONG  (APIENTRY *PFN_DrvEscape)(SURFOBJ *, ULONG, ULONG, PVOID, ULONG, PVOID);
+-typedef ULONG  (APIENTRY *PFN_DrvDrawEscape)(SURFOBJ *, ULONG, CLIPOBJ *, RECTL *, ULONG, PVOID);
++typedef BOOL   (APIENTRY *PFN_DrvSetPalette)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PALOBJ *, FLONG, ULONG, ULONG);
++typedef ULONG  (APIENTRY *PFN_DrvEscape)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, ULONG, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
++typedef ULONG  (APIENTRY *PFN_DrvDrawEscape)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-typedef PIFIMETRICS (APIENTRY *PFN_DrvQueryFont)(DHPDEV, ULONG_PTR, ULONG, ULONG_PTR *);
+-typedef PVOID  (APIENTRY *PFN_DrvQueryFontTree)(DHPDEV, ULONG_PTR, ULONG, ULONG, ULONG_PTR *);
++typedef PIFIMETRICS (APIENTRY *PFN_DrvQueryFont)(DHPDEV, ULONG_PTR, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR *);
++typedef PVOID  (APIENTRY *PFN_DrvQueryFontTree)(DHPDEV, ULONG_PTR, ULONG, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR *);
+ #else
+-typedef PIFIMETRICS (APIENTRY *PFN_DrvQueryFont)(DHPDEV, ULONG_PTR, ULONG, ULONG *);
+-typedef PVOID  (APIENTRY *PFN_DrvQueryFontTree)(DHPDEV, ULONG_PTR, ULONG, ULONG, ULONG *);
++typedef PIFIMETRICS (APIENTRY *PFN_DrvQueryFont)(DHPDEV, ULONG_PTR, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
++typedef PVOID  (APIENTRY *PFN_DrvQueryFontTree)(DHPDEV, ULONG_PTR, ULONG, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+-typedef LONG   (APIENTRY *PFN_DrvQueryFontData)(DHPDEV, FONTOBJ *, ULONG, HGLYPH, GLYPHDATA *, PVOID, ULONG);
++typedef LONG   (APIENTRY *PFN_DrvQueryFontData)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *, ULONG, HGLYPH, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLYPHDATA *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, ULONG);
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-typedef VOID   (APIENTRY *PFN_DrvFree)(PVOID, ULONG_PTR);
++typedef VOID   (APIENTRY *PFN_DrvFree)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, ULONG_PTR);
+ #else
+-typedef VOID   (APIENTRY *PFN_DrvFree)(PVOID, ULONG);
++typedef VOID   (APIENTRY *PFN_DrvFree)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, ULONG);
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+-typedef VOID   (APIENTRY *PFN_DrvDestroyFont)(FONTOBJ *);
+-typedef LONG   (APIENTRY *PFN_DrvQueryFontCaps)(ULONG, ULONG *);
++typedef VOID   (APIENTRY *PFN_DrvDestroyFont)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *);
++typedef LONG   (APIENTRY *PFN_DrvQueryFontCaps)(ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
+-typedef HFF    (APIENTRY *PFN_DrvLoadFontFile)(ULONG, ULONG_PTR *, PVOID *, ULONG *, DESIGNVECTOR *, ULONG, ULONG);
++typedef HFF    (APIENTRY *PFN_DrvLoadFontFile)(ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG_PTR *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DESIGNVECTOR *, ULONG, ULONG);
+ #else
+ typedef HFF    (APIENTRY *PFN_DrvLoadFontFile)(ULONG, ULONG_PTR *, PVOID *, ULONG *, ULONG);
+ #endif
+ typedef BOOL   (APIENTRY *PFN_DrvUnloadFontFile)(ULONG_PTR);
+-typedef ULONG  (APIENTRY *PFN_DrvSetPointerShape)(SURFOBJ *, SURFOBJ *, SURFOBJ *,XLATEOBJ *,LONG,LONG,LONG,LONG,RECTL *,FLONG);
+-typedef VOID   (APIENTRY *PFN_DrvMovePointer)(SURFOBJ *pso,LONG x,LONG y,RECTL *prcl);
+-typedef BOOL   (APIENTRY *PFN_DrvSendPage)(SURFOBJ *);
+-typedef BOOL   (APIENTRY *PFN_DrvStartPage)(SURFOBJ *pso);
+-typedef BOOL   (APIENTRY *PFN_DrvStartDoc)(SURFOBJ *pso, LPWSTR pwszDocName, DWORD dwJobId);
+-typedef BOOL   (APIENTRY *PFN_DrvEndDoc)(SURFOBJ *pso, FLONG fl);
++typedef ULONG  (APIENTRY *PFN_DrvSetPointerShape)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ *,LONG,LONG,LONG,LONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,FLONG);
++typedef VOID   (APIENTRY *PFN_DrvMovePointer)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *pso,LONG x,LONG y,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *prcl);
++typedef BOOL   (APIENTRY *PFN_DrvSendPage)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *);
++typedef BOOL   (APIENTRY *PFN_DrvStartPage)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *pso);
++typedef BOOL   (APIENTRY *PFN_DrvStartDoc)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *pso, LPWSTR pwszDocName, DWORD dwJobId);
++typedef BOOL   (APIENTRY *PFN_DrvEndDoc)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *pso, FLONG fl);
+ typedef BOOL   (APIENTRY *PFN_DrvQuerySpoolType)(DHPDEV dhpdev, LPWSTR pwchType);
+-typedef BOOL   (APIENTRY *PFN_DrvLineTo)(SURFOBJ *,CLIPOBJ *,BRUSHOBJ *,LONG,LONG,LONG,LONG,RECTL *,MIX);
+-typedef BOOL   (APIENTRY *PFN_DrvStrokePath)(SURFOBJ *,PATHOBJ *,CLIPOBJ *,XFORMOBJ *,BRUSHOBJ *,POINTL *,LINEATTRS *,MIX);
+-typedef BOOL   (APIENTRY *PFN_DrvFillPath)(SURFOBJ *,PATHOBJ *,CLIPOBJ *,BRUSHOBJ *,POINTL *,MIX,FLONG);
+-typedef BOOL   (APIENTRY *PFN_DrvStrokeAndFillPath)(SURFOBJ *,PATHOBJ *,CLIPOBJ *,XFORMOBJ *,BRUSHOBJ *,LINEATTRS *,BRUSHOBJ *,POINTL *,MIX,FLONG);
+-typedef BOOL   (APIENTRY *PFN_DrvPaint)(SURFOBJ *,CLIPOBJ *,BRUSHOBJ *,POINTL *,MIX);
+-typedef ULONG  (APIENTRY *PFN_DrvGetGlyphMode)(DHPDEV dhpdev,FONTOBJ *pfo);
++typedef BOOL   (APIENTRY *PFN_DrvLineTo)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,LONG,LONG,LONG,LONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,MIX);
++typedef BOOL   (APIENTRY *PFN_DrvStrokePath)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XFORMOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LINEATTRS *,MIX);
++typedef BOOL   (APIENTRY *PFN_DrvFillPath)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,MIX,FLONG);
++typedef BOOL   (APIENTRY *PFN_DrvStrokeAndFillPath)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PATHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XFORMOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LINEATTRS *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,MIX,FLONG);
++typedef BOOL   (APIENTRY *PFN_DrvPaint)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BRUSHOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,MIX);
++typedef ULONG  (APIENTRY *PFN_DrvGetGlyphMode)(DHPDEV dhpdev,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *pfo);
+ typedef BOOL   (APIENTRY *PFN_DrvResetPDEV)(DHPDEV dhpdevOld, DHPDEV dhpdevNew);
+-typedef ULONG_PTR  (APIENTRY *PFN_DrvSaveScreenBits)(SURFOBJ *, ULONG, ULONG_PTR, RECTL *);
+-typedef ULONG  (APIENTRY *PFN_DrvGetModes)(HANDLE, ULONG, DEVMODEW *);
+-typedef LONG   (APIENTRY *PFN_DrvQueryTrueTypeTable)(ULONG_PTR, ULONG, ULONG, PTRDIFF, ULONG, BYTE *, PBYTE *, ULONG *);
+-typedef LONG   (APIENTRY *PFN_DrvQueryTrueTypeSection)(ULONG, ULONG, ULONG, HANDLE *, PTRDIFF *);
+-typedef LONG   (APIENTRY *PFN_DrvQueryTrueTypeOutline)(DHPDEV, FONTOBJ *, HGLYPH, BOOL, GLYPHDATA *, ULONG, TTPOLYGONHEADER *);
+-typedef PVOID  (APIENTRY *PFN_DrvGetTrueTypeFile)(ULONG_PTR, ULONG *);
+-typedef LONG   (APIENTRY *PFN_DrvQueryFontFile)(ULONG_PTR, ULONG, ULONG, ULONG *);
+-typedef PFD_GLYPHATTR   (APIENTRY *PFN_DrvQueryGlyphAttrs)(FONTOBJ *, ULONG );
+-typedef BOOL   (APIENTRY *PFN_DrvQueryAdvanceWidths)(DHPDEV,FONTOBJ *,ULONG,HGLYPH *,PVOID,ULONG);
+-typedef ULONG  (APIENTRY *PFN_DrvFontManagement)(SURFOBJ *,FONTOBJ *,ULONG,ULONG,PVOID,ULONG,PVOID);
+-typedef BOOL   (APIENTRY *PFN_DrvSetPixelFormat)(SURFOBJ *,LONG,HWND);
+-typedef LONG   (APIENTRY *PFN_DrvDescribePixelFormat)(DHPDEV,LONG,ULONG,PIXELFORMATDESCRIPTOR *);
+-typedef BOOL   (APIENTRY *PFN_DrvSwapBuffers)(SURFOBJ *, WNDOBJ *);
+-typedef BOOL   (APIENTRY *PFN_DrvStartBanding)(SURFOBJ *, POINTL *ppointl);
+-typedef BOOL   (APIENTRY *PFN_DrvNextBand)(SURFOBJ *, POINTL *ppointl);
+-typedef BOOL   (APIENTRY *PFN_DrvQueryPerBandInfo)(SURFOBJ *,PERBANDINFO *);
+-typedef BOOL   (APIENTRY *PFN_DrvEnableDirectDraw)(DHPDEV, DD_CALLBACKS *,DD_SURFACECALLBACKS *, DD_PALETTECALLBACKS *);
++typedef ULONG_PTR  (APIENTRY *PFN_DrvSaveScreenBits)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, ULONG, ULONG_PTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *);
++typedef ULONG  (APIENTRY *PFN_DrvGetModes)(HANDLE, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DEVMODEW *);
++typedef LONG   (APIENTRY *PFN_DrvQueryTrueTypeTable)(ULONG_PTR, ULONG, ULONG, PTRDIFF, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
++typedef LONG   (APIENTRY *PFN_DrvQueryTrueTypeSection)(ULONG, ULONG, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PTRDIFF *);
++typedef LONG   (APIENTRY *PFN_DrvQueryTrueTypeOutline)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *, HGLYPH, BOOL, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GLYPHDATA *, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") TTPOLYGONHEADER *);
++typedef PVOID  (APIENTRY *PFN_DrvGetTrueTypeFile)(ULONG_PTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
++typedef LONG   (APIENTRY *PFN_DrvQueryFontFile)(ULONG_PTR, ULONG, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *);
++typedef PFD_GLYPHATTR   (APIENTRY *PFN_DrvQueryGlyphAttrs)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *, ULONG );
++typedef BOOL   (APIENTRY *PFN_DrvQueryAdvanceWidths)(DHPDEV,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HGLYPH *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID,ULONG);
++typedef ULONG  (APIENTRY *PFN_DrvFontManagement)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FONTOBJ *,ULONG,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
++typedef BOOL   (APIENTRY *PFN_DrvSetPixelFormat)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,LONG,HWND);
++typedef LONG   (APIENTRY *PFN_DrvDescribePixelFormat)(DHPDEV,LONG,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PIXELFORMATDESCRIPTOR *);
++typedef BOOL   (APIENTRY *PFN_DrvSwapBuffers)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WNDOBJ *);
++typedef BOOL   (APIENTRY *PFN_DrvStartBanding)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *ppointl);
++typedef BOOL   (APIENTRY *PFN_DrvNextBand)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *ppointl);
++typedef BOOL   (APIENTRY *PFN_DrvQueryPerBandInfo)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PERBANDINFO *);
++typedef BOOL   (APIENTRY *PFN_DrvEnableDirectDraw)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DD_CALLBACKS *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DD_SURFACECALLBACKS *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DD_PALETTECALLBACKS *);
+ typedef VOID   (APIENTRY *PFN_DrvDisableDirectDraw)(DHPDEV);
+-typedef BOOL   (APIENTRY *PFN_DrvGetDirectDrawInfo)(DHPDEV, DD_HALINFO *, DWORD *, VIDEOMEMORY *, DWORD *, DWORD *);
+-typedef HANDLE (APIENTRY *PFN_DrvIcmCreateColorTransform)(DHPDEV,LPLOGCOLORSPACEW,LPVOID,ULONG,LPVOID,ULONG,LPVOID,ULONG,DWORD);
++typedef BOOL   (APIENTRY *PFN_DrvGetDirectDrawInfo)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DD_HALINFO *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VIDEOMEMORY *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *);
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef HANDLE (APIENTRY *PFN_DrvIcmCreateColorTransform)(DHPDEV,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPLOGCOLORSPACEW,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID,ULONG,DWORD);
+ typedef BOOL   (APIENTRY *PFN_DrvIcmDeleteColorTransform)(DHPDEV,HANDLE);
+-typedef BOOL   (APIENTRY *PFN_DrvIcmCheckBitmapBits)(DHPDEV,HANDLE,SURFOBJ *,PBYTE);
+-typedef BOOL   (APIENTRY *PFN_DrvIcmSetDeviceGammaRamp)(DHPDEV,ULONG,LPVOID);
+-typedef BOOL   (APIENTRY *PFN_DrvAlphaBlend)(SURFOBJ*,SURFOBJ*,CLIPOBJ*,XLATEOBJ*,PRECTL,PRECTL,BLENDOBJ *);
+-typedef BOOL   (APIENTRY *PFN_DrvGradientFill)(SURFOBJ*,CLIPOBJ*,XLATEOBJ*,TRIVERTEX*,ULONG,PVOID,ULONG,RECTL *,POINTL *,ULONG);
+-typedef BOOL   (APIENTRY *PFN_DrvQueryDeviceSupport)(SURFOBJ*,XLATEOBJ*,XFORMOBJ*,ULONG,ULONG,PVOID,ULONG,PVOID);
+-typedef HBITMAP (APIENTRY *PFN_DrvDeriveSurface)(DD_DIRECTDRAW_GLOBAL*,DD_SURFACE_LOCAL*);
+-typedef VOID   (APIENTRY *PFN_DrvSynchronizeSurface)(SURFOBJ*, RECTL*, FLONG);
+-typedef VOID   (APIENTRY *PFN_DrvNotify)(SURFOBJ*, ULONG, PVOID);
++typedef BOOL   (APIENTRY *PFN_DrvIcmCheckBitmapBits)(DHPDEV,HANDLE,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE);
++typedef BOOL   (APIENTRY *PFN_DrvIcmSetDeviceGammaRamp)(DHPDEV,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
++typedef BOOL   (APIENTRY *PFN_DrvAlphaBlend)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRECTL,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PRECTL,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BLENDOBJ *);
++typedef BOOL   (APIENTRY *PFN_DrvGradientFill)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLIPOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") TRIVERTEX*,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL *,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POINTL *,ULONG);
++typedef BOOL   (APIENTRY *PFN_DrvQueryDeviceSupport)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XLATEOBJ*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") XFORMOBJ*,ULONG,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID,ULONG,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
++_Win32_RAIIFree_(DeleteObject, -1, 0) typedef HBITMAP (APIENTRY *PFN_DrvDeriveSurface)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DD_DIRECTDRAW_GLOBAL*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DD_SURFACE_LOCAL*);
++typedef VOID   (APIENTRY *PFN_DrvSynchronizeSurface)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL*, FLONG);
++typedef VOID   (APIENTRY *PFN_DrvNotify)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID);
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ typedef LONG (APIENTRY *PFN_DrvRenderHint)(
+@@ -4940,18 +4941,18 @@ typedef struct _DRH_APIBITMAPDATA
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmapEx)(DHPDEV, SIZEL, ULONG, DWORD, DHSURF, DWORD, DWORD, HANDLE*);
++_Win32_RAIIFree_(DeleteObject, -1, 0) typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmapEx)(DHPDEV, SIZEL, ULONG, DWORD, DHSURF, DWORD, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE*);
+ #else
+ typedef HBITMAP (APIENTRY *PFN_DrvCreateDeviceBitmapEx)(DHPDEV, SIZEL, ULONG, DWORD, DHSURF, DWORD, HANDLE*);
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ typedef VOID    (APIENTRY *PFN_DrvDeleteDeviceBitmapEx)(DHSURF);
+-typedef BOOL    (APIENTRY *PFN_DrvAssociateSharedSurface)(SURFOBJ*, HANDLE, HANDLE, SIZEL);
+-typedef NTSTATUS (APIENTRY *PFN_DrvSynchronizeRedirectionBitmaps)(DHPDEV, UINT64*);
+-typedef BOOL    (APIENTRY *PFN_DrvAccumulateD3DDirtyRect)(SURFOBJ*, CDDDXGK_REDIRBITMAPPRESENTINFO*);
+-typedef BOOL    (APIENTRY *PFN_DrvStartDxInterop)(SURFOBJ*, BOOL, PVOID KernelModeDeviceHandle);
+-typedef BOOL    (APIENTRY *PFN_DrvEndDxInterop)(SURFOBJ*, BOOL, BOOL*, PVOID KernelModeDeviceHandle);
+-typedef VOID    (APIENTRY *PFN_DrvLockDisplayArea)(DHPDEV, RECTL*);
+-typedef VOID    (APIENTRY *PFN_DrvUnlockDisplayArea)(DHPDEV, RECTL*);
++typedef BOOL    (APIENTRY *PFN_DrvAssociateSharedSurface)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*, HANDLE, HANDLE, SIZEL);
++typedef NTSTATUS (APIENTRY *PFN_DrvSynchronizeRedirectionBitmaps)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT64*);
++typedef BOOL    (APIENTRY *PFN_DrvAccumulateD3DDirtyRect)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CDDDXGK_REDIRBITMAPPRESENTINFO*);
++typedef BOOL    (APIENTRY *PFN_DrvStartDxInterop)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*, BOOL, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID KernelModeDeviceHandle);
++typedef BOOL    (APIENTRY *PFN_DrvEndDxInterop)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SURFOBJ*, BOOL, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL*, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID KernelModeDeviceHandle);
++typedef VOID    (APIENTRY *PFN_DrvLockDisplayArea)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL*);
++typedef VOID    (APIENTRY *PFN_DrvUnlockDisplayArea)(DHPDEV, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECTL*);
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)

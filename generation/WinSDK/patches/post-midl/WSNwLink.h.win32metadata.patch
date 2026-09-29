@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h b/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h
+index 6e4b829981..0ff4f5e74c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WSNwLink.h
+@@ -35,6 +35,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -128,7 +129,7 @@
+ 
+ #define IPX_ADDRESS             0x4007
+ 
+-typedef struct _IPX_ADDRESS_DATA {
++typedef struct   _IPX_ADDRESS_DATA {
+     INT   adapternum;  /* input: 0-based adapter number */
+     UCHAR netnum[4];   /* output: IPX network number */
+     UCHAR nodenum[6];  /* output: IPX node address */

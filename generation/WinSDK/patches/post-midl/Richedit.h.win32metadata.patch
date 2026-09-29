@@ -1,0 +1,1125 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
+index 5bebec4417..a73b368fb8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
+@@ -11,6 +11,7 @@
+ #define _RICHEDIT_
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #include <wtypes.h>
+ #include <objbase.h>
+ 
+@@ -357,9 +358,9 @@ typedef enum tagTextMode
+ #define IMF_SMODE_NONE			0x0002
+ 
+ // EM_GETIMECOMPTEXT wparam structure
+-typedef struct _imecomptext {
++typedef struct  _imecomptext {
+ 	LONG	cb; 		// count of bytes in the output buffer.
+-	DWORD	flags;		// value specifying the composition string type.
++	_Win32_AssociatedEnum_(IMECOMPTEXT_FLAGS) DWORD	flags;		// value specifying the composition string type.
+ 						//	Currently only support ICT_RESULTREADSTR
+ } IMECOMPTEXT;
+ #define ICT_RESULTREADSTR		1
+@@ -458,7 +459,7 @@ typedef struct _tableCellParms
+ #define EM_CALLAUTOCORRECTPROC	(WM_USER + 255)
+ 
+ // AutoCorrect callback
+-typedef int (WINAPI *AutoCorrectProc)(LANGID langid, const WCHAR *pszBefore, WCHAR *pszAfter, LONG cchAfter, LONG *pcchReplaced);
++typedef int (WINAPI *AutoCorrectProc)(LANGID langid, const WCHAR *pszBefore, _WIN32META_ANNOTATION_("win32metadata:in") WCHAR *pszAfter, LONG cchAfter, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pcchReplaced);
+ 
+ #define ATP_NOCHANGE			0
+ #define ATP_CHANGE				1
+@@ -548,7 +549,7 @@ typedef struct tagRICHEDIT_IMAGE_PARAMETERS
+ typedef struct _endcomposition
+ {
+ 	NMHDR	nmhdr;
+-	DWORD	dwCode;
++	_Win32_AssociatedEnum_(ENDCOMPOSITIONNOTIFY_CODE) DWORD	dwCode;
+ } ENDCOMPOSITIONNOTIFY;
+ 
+ // Constants for ENDCOMPOSITIONNOTIFY dwCode
+@@ -667,32 +668,32 @@ typedef struct _endcomposition
+ 
+ #ifdef _WIN32
+ // Extended edit word break proc (character set aware) 
+-typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet, INT action);
++typedef LONG (*EDITWORDBREAKPROCEX)(_WIN32META_ANNOTATION_("win32metadata:in") char *pchText, LONG cchText, BYTE bCharSet, INT action);
+ #endif
+ 
+ // All character format measurements are in twips 
+-typedef struct _charformat
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _charformat
+ {
+ 	UINT		cbSize;
+-	DWORD		dwMask;
+-	DWORD		dwEffects;
++	_Win32_AssociatedEnum_(CFM_MASK) DWORD		dwMask;
++	_Win32_AssociatedEnum_(CFE_EFFECTS) DWORD		dwEffects;
+ 	LONG		yHeight;
+ 	LONG		yOffset;
+ 	COLORREF	crTextColor;
+-	BYTE		bCharSet;
++	_Win32_AssociatedEnum_(FONT_CHARSET) BYTE		bCharSet;
+ 	BYTE		bPitchAndFamily;
+ 	char		szFaceName[LF_FACESIZE];
+ } CHARFORMATA;
+ 
+-typedef struct _charformatw
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _charformatw
+ {
+ 	UINT		cbSize;
+-	DWORD		dwMask;
+-	DWORD		dwEffects;
++	_Win32_AssociatedEnum_(CFM_MASK) DWORD		dwMask;
++	_Win32_AssociatedEnum_(CFE_EFFECTS) DWORD		dwEffects;
+ 	LONG		yHeight;
+ 	LONG		yOffset;
+ 	COLORREF	crTextColor;
+-	BYTE		bCharSet;
++	_Win32_AssociatedEnum_(FONT_CHARSET) BYTE		bCharSet;
+ 	BYTE		bPitchAndFamily;
+ 	WCHAR		szFaceName[LF_FACESIZE];
+ } CHARFORMATW;
+@@ -1023,7 +1024,7 @@ typedef struct _textrangew
+ #define TEXTRANGE	TEXTRANGEA
+ #endif // _RICHEDIT_VER >= 0x0200 
+ 
+-typedef DWORD (CALLBACK *EDITSTREAMCALLBACK)(DWORD_PTR dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb);
++typedef DWORD (CALLBACK *EDITSTREAMCALLBACK)(DWORD_PTR dwCookie, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE pbBuff, LONG cb, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LONG *pcb);
+ 
+ typedef struct _editstream
+ {
+@@ -1130,11 +1131,11 @@ typedef struct _formatrange
+ #define lDefaultTab 720
+ #define MAX_TABLE_CELLS 63
+ 
+-typedef struct _paraformat
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _paraformat
+ {
+ 	UINT	cbSize;
+-	DWORD	dwMask;
+-	WORD	wNumbering;
++	_Win32_AssociatedEnum_(PARAFORMAT_MASK) DWORD	dwMask;
++	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING) WORD	wNumbering;
+ 	union
+ 	{
+ 		WORD	wReserved;
+@@ -1143,7 +1144,7 @@ typedef struct _paraformat
+ 	LONG	dxStartIndent;
+ 	LONG	dxRightIndent;
+ 	LONG	dxOffset;
+-	WORD	wAlignment;
++	_Win32_AssociatedEnum_(PARAFORMAT_ALIGNMENT) WORD	wAlignment;
+ 	SHORT	cTabCount;
+ 	LONG	rgxTabs[MAX_TAB_STOPS];
+ } PARAFORMAT;
+@@ -1158,13 +1159,13 @@ struct PARAFORMAT2 : _paraformat
+ 	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)
+ 	BYTE	bOutlineLevel;			// Outline level
+ 	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
+-	WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
++	_Win32_AssociatedEnum_(PARAFORMAT_SHADING_STYLE) WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
+ 	WORD	wNumberingStart;		// Starting value for numbering
+ 	WORD	wNumberingStyle;		// Alignment, roman/arabic, (), ), ., etc.
+ 	WORD	wNumberingTab;			// Space bet FirstIndent & 1st-line text
+ 	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)
+ 	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half pts)
+-	WORD	wBorders;				// Border styles (nibble/border)
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)
+ };
+ 
+ #else	// Regular C-style	
+@@ -1192,13 +1193,13 @@ typedef struct _paraformat2
+ 	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)	
+ 	BYTE	bOutlineLevel;			// Outline Level						
+ 	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
+-	WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
++	_Win32_AssociatedEnum_(PARAFORMAT_SHADING_STYLE) WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
+ 	WORD	wNumberingStart;		// Starting value for numbering 			
+ 	WORD	wNumberingStyle;		// Alignment, Roman/Arabic, (), ), ., etc.
+ 	WORD	wNumberingTab;			// Space bet 1st indent and 1st-line text
+ 	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)	
+ 	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half twips)	
+-	WORD	wBorders;				// Border styles (nibble/border)		
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)		
+ } PARAFORMAT2;
+ 
+ #endif // C++	
+@@ -1330,7 +1331,7 @@ typedef struct _selchange
+ {
+ 	NMHDR nmhdr;
+ 	CHARRANGE chrg;
+-	WORD seltyp;
++	_Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltyp;
+ } SELCHANGE;
+ 
+ #if (_RICHEDIT_VER >= 0x0800)
+@@ -1439,7 +1440,7 @@ typedef struct _encorrecttext
+ {
+ 	NMHDR nmhdr;
+ 	CHARRANGE chrg;
+-	WORD seltyp;
++	_Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltyp;
+ } ENCORRECTTEXT;
+ 
+ // East Asia specific 
+@@ -1466,7 +1467,7 @@ typedef struct _compcolor
+ // Paste Special 
+ typedef struct _repastespecial
+ {
+-	DWORD		dwAspect;
++	_Win32_AssociatedEnum_(DVASPECT) DWORD		dwAspect;
+ 	DWORD_PTR	dwParam;
+ } REPASTESPECIAL;
+ 
+@@ -1510,7 +1511,7 @@ typedef struct _settextex
+ typedef struct _gettextex
+ {
+ 	DWORD	cb; 			// Count of bytes in the string
+-	DWORD	flags;			// Flags (see the GT_XXX defines
++	_Win32_AssociatedEnum_(GETTEXTEX_FLAGS) DWORD	flags;			// Flags (see the GT_XXX defines
+ 	UINT	codepage;		// Code page for translation (CP_ACP for sys default,
+ 							//	1200 for Unicode, -1 for control default)
+ 	LPCSTR	lpDefaultChar;	// Replacement for unmappable chars
+@@ -1528,13 +1529,13 @@ typedef struct _gettextex
+ // EM_GETTEXTLENGTHEX info; this struct is passed in the wparam of the msg 
+ typedef struct _gettextlengthex
+ {
+-	DWORD	flags;			// Flags (see GTL_XXX defines)
++	_Win32_AssociatedEnum_(GETTEXTLENGTHEX_FLAGS) DWORD	flags;			// Flags (see GTL_XXX defines)
+ 	UINT	codepage;		// Code page for translation (CP_ACP for default,
+ 							//	1200 for Unicode)
+ } GETTEXTLENGTHEX;
+ 	
+ // BiDi specific features 
+-typedef struct _bidioptions
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _bidioptions
+ {
+ 	UINT	cbSize;
+ 	WORD	wMask;
+@@ -1543,8 +1544,16 @@ typedef struct _bidioptions
+ 
+ // BIDIOPTIONS masks 
+ #if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOM_DEFPARADIR)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOM_DEFPARADIR			0x0001	// Default paragraph direction (implies alignment) (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOM_PLAINTEXT)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOM_PLAINTEXT			0x0002	// Use plain text layout (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
+ #endif // _RICHEDIT_VER == 0x0100 
+ #define BOM_NEUTRALOVERRIDE 	0x0004	// Override neutral layout (obsolete) 
+ #define BOM_CONTEXTREADING		0x0008	// Context reading order 
+@@ -1556,8 +1565,16 @@ typedef struct _bidioptions
+ 
+ // BIDIOPTIONS effects 
+ #if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOE_RTLDIR)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOE_RTLDIR				0x0001	// Default paragraph direction (implies alignment) (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
++#endif
++#if (defined(WIN32METADATA) && !defined(BOE_PLAINTEXT)) || ((((_RICHEDIT_VER == 0x0100))))
+ #define BOE_PLAINTEXT			0x0002	// Use plain text layout (obsolete) 
++#endif
++#if (_RICHEDIT_VER == 0x0100)
+ #endif // _RICHEDIT_VER == 0x0100 
+ #define BOE_NEUTRALOVERRIDE 	0x0004	// Override neutral layout (obsolete) 
+ #define BOE_CONTEXTREADING		0x0008	// Context reading order 
+@@ -1601,7 +1618,7 @@ typedef struct hyphresult
+ } HYPHRESULT;
+ 
+ void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
+-typedef struct tagHyphenateInfo
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagHyphenateInfo
+ {
+ 	SHORT cbSize;			// Size of HYPHENATEINFO structure
+ 	SHORT dxHyphenateZone;	// If a space character is closer to the margin
+@@ -1643,4 +1660,880 @@ typedef struct tagHyphenateInfo
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CFE_UNDERLINE")
++#undef CFE_UNDERLINE
++#pragma push_macro("CFU_CF1UNDERLINE")
++#undef CFU_CF1UNDERLINE
++#pragma push_macro("CFU_INVERT")
++#undef CFU_INVERT
++#pragma push_macro("CFU_UNDERLINETHICKLONGDASH")
++#undef CFU_UNDERLINETHICKLONGDASH
++#pragma push_macro("CFU_UNDERLINETHICKDOTTED")
++#undef CFU_UNDERLINETHICKDOTTED
++#pragma push_macro("CFU_UNDERLINETHICKDASHDOTDOT")
++#undef CFU_UNDERLINETHICKDASHDOTDOT
++#pragma push_macro("CFU_UNDERLINETHICKDASHDOT")
++#undef CFU_UNDERLINETHICKDASHDOT
++#pragma push_macro("CFU_UNDERLINETHICKDASH")
++#undef CFU_UNDERLINETHICKDASH
++#pragma push_macro("CFU_UNDERLINELONGDASH")
++#undef CFU_UNDERLINELONGDASH
++#pragma push_macro("CFU_UNDERLINEHEAVYWAVE")
++#undef CFU_UNDERLINEHEAVYWAVE
++#pragma push_macro("CFU_UNDERLINEDOUBLEWAVE")
++#undef CFU_UNDERLINEDOUBLEWAVE
++#pragma push_macro("CFU_UNDERLINEHAIRLINE")
++#undef CFU_UNDERLINEHAIRLINE
++#pragma push_macro("CFU_UNDERLINETHICK")
++#undef CFU_UNDERLINETHICK
++#pragma push_macro("CFU_UNDERLINEWAVE")
++#undef CFU_UNDERLINEWAVE
++#pragma push_macro("CFU_UNDERLINEDASHDOTDOT")
++#undef CFU_UNDERLINEDASHDOTDOT
++#pragma push_macro("CFU_UNDERLINEDASHDOT")
++#undef CFU_UNDERLINEDASHDOT
++#pragma push_macro("CFU_UNDERLINEDASH")
++#undef CFU_UNDERLINEDASH
++#pragma push_macro("CFU_UNDERLINEDOTTED")
++#undef CFU_UNDERLINEDOTTED
++#pragma push_macro("CFU_UNDERLINEDOUBLE")
++#undef CFU_UNDERLINEDOUBLE
++#pragma push_macro("CFU_UNDERLINEWORD")
++#undef CFU_UNDERLINEWORD
++#pragma push_macro("CFU_UNDERLINE")
++#undef CFU_UNDERLINE
++#pragma push_macro("CFU_UNDERLINENONE")
++#undef CFU_UNDERLINENONE
++enum [[clang::flag_enum]] CFE_UNDERLINE : unsigned int
++{
++    CFU_CF1UNDERLINE = 255U,
++    CFU_INVERT = 254U,
++    CFU_UNDERLINETHICKLONGDASH = 18U,
++    CFU_UNDERLINETHICKDOTTED = 17U,
++    CFU_UNDERLINETHICKDASHDOTDOT = 16U,
++    CFU_UNDERLINETHICKDASHDOT = 15U,
++    CFU_UNDERLINETHICKDASH = 14U,
++    CFU_UNDERLINELONGDASH = 13U,
++    CFU_UNDERLINEHEAVYWAVE = 12U,
++    CFU_UNDERLINEDOUBLEWAVE = 11U,
++    CFU_UNDERLINEHAIRLINE = 10U,
++    CFU_UNDERLINETHICK = 9U,
++    CFU_UNDERLINEWAVE = 8U,
++    CFU_UNDERLINEDASHDOTDOT = 7U,
++    CFU_UNDERLINEDASHDOT = 6U,
++    CFU_UNDERLINEDASH = 5U,
++    CFU_UNDERLINEDOTTED = 4U,
++    CFU_UNDERLINEDOUBLE = 3U,
++    CFU_UNDERLINEWORD = 2U,
++    CFU_UNDERLINE = 1U,
++    CFU_UNDERLINENONE = 0U,
++};
++#pragma pop_macro("CFU_UNDERLINENONE")
++#pragma pop_macro("CFU_UNDERLINE")
++#pragma pop_macro("CFU_UNDERLINEWORD")
++#pragma pop_macro("CFU_UNDERLINEDOUBLE")
++#pragma pop_macro("CFU_UNDERLINEDOTTED")
++#pragma pop_macro("CFU_UNDERLINEDASH")
++#pragma pop_macro("CFU_UNDERLINEDASHDOT")
++#pragma pop_macro("CFU_UNDERLINEDASHDOTDOT")
++#pragma pop_macro("CFU_UNDERLINEWAVE")
++#pragma pop_macro("CFU_UNDERLINETHICK")
++#pragma pop_macro("CFU_UNDERLINEHAIRLINE")
++#pragma pop_macro("CFU_UNDERLINEDOUBLEWAVE")
++#pragma pop_macro("CFU_UNDERLINEHEAVYWAVE")
++#pragma pop_macro("CFU_UNDERLINELONGDASH")
++#pragma pop_macro("CFU_UNDERLINETHICKDASH")
++#pragma pop_macro("CFU_UNDERLINETHICKDASHDOT")
++#pragma pop_macro("CFU_UNDERLINETHICKDASHDOTDOT")
++#pragma pop_macro("CFU_UNDERLINETHICKDOTTED")
++#pragma pop_macro("CFU_UNDERLINETHICKLONGDASH")
++#pragma pop_macro("CFU_INVERT")
++#pragma pop_macro("CFU_CF1UNDERLINE")
++#pragma pop_macro("CFE_UNDERLINE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WB_CLASSIFY")
++#undef WB_CLASSIFY
++#pragma push_macro("WB_ISDELIMITER")
++#undef WB_ISDELIMITER
++#pragma push_macro("WB_LEFT")
++#undef WB_LEFT
++#pragma push_macro("WB_LEFTBREAK")
++#undef WB_LEFTBREAK
++#pragma push_macro("WB_MOVEWORDLEFT")
++#undef WB_MOVEWORDLEFT
++#pragma push_macro("WB_MOVEWORDRIGHT")
++#undef WB_MOVEWORDRIGHT
++#pragma push_macro("WB_RIGHT")
++#undef WB_RIGHT
++#pragma push_macro("WB_RIGHTBREAK")
++#undef WB_RIGHTBREAK
++enum WORD_BREAK_ACTION : int
++{
++    WB_CLASSIFY = 3,
++    WB_ISDELIMITER = 2,
++    WB_LEFT = 0,
++    WB_LEFTBREAK = 6,
++    WB_MOVEWORDLEFT = 4,
++    WB_MOVEWORDRIGHT = 5,
++    WB_RIGHT = 1,
++    WB_RIGHTBREAK = 7,
++};
++#pragma pop_macro("WB_RIGHTBREAK")
++#pragma pop_macro("WB_RIGHT")
++#pragma pop_macro("WB_MOVEWORDRIGHT")
++#pragma pop_macro("WB_MOVEWORDLEFT")
++#pragma pop_macro("WB_LEFTBREAK")
++#pragma pop_macro("WB_LEFT")
++#pragma pop_macro("WB_ISDELIMITER")
++#pragma pop_macro("WB_CLASSIFY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CFM_SUBSCRIPT")
++#undef CFM_SUBSCRIPT
++#pragma push_macro("CFM_SUPERSCRIPT")
++#undef CFM_SUPERSCRIPT
++#pragma push_macro("CFM_EFFECTS")
++#undef CFM_EFFECTS
++#pragma push_macro("CFM_ALL")
++#undef CFM_ALL
++#pragma push_macro("CFM_BOLD")
++#undef CFM_BOLD
++#pragma push_macro("CFM_CHARSET")
++#undef CFM_CHARSET
++#pragma push_macro("CFM_COLOR")
++#undef CFM_COLOR
++#pragma push_macro("CFM_FACE")
++#undef CFM_FACE
++#pragma push_macro("CFM_ITALIC")
++#undef CFM_ITALIC
++#pragma push_macro("CFM_OFFSET")
++#undef CFM_OFFSET
++#pragma push_macro("CFM_PROTECTED")
++#undef CFM_PROTECTED
++#pragma push_macro("CFM_SIZE")
++#undef CFM_SIZE
++#pragma push_macro("CFM_STRIKEOUT")
++#undef CFM_STRIKEOUT
++#pragma push_macro("CFM_UNDERLINE")
++#undef CFM_UNDERLINE
++#pragma push_macro("CFM_LINK")
++#undef CFM_LINK
++#pragma push_macro("CFM_SMALLCAPS")
++#undef CFM_SMALLCAPS
++#pragma push_macro("CFM_ALLCAPS")
++#undef CFM_ALLCAPS
++#pragma push_macro("CFM_HIDDEN")
++#undef CFM_HIDDEN
++#pragma push_macro("CFM_OUTLINE")
++#undef CFM_OUTLINE
++#pragma push_macro("CFM_SHADOW")
++#undef CFM_SHADOW
++#pragma push_macro("CFM_EMBOSS")
++#undef CFM_EMBOSS
++#pragma push_macro("CFM_IMPRINT")
++#undef CFM_IMPRINT
++#pragma push_macro("CFM_DISABLED")
++#undef CFM_DISABLED
++#pragma push_macro("CFM_REVISED")
++#undef CFM_REVISED
++#pragma push_macro("CFM_REVAUTHOR")
++#undef CFM_REVAUTHOR
++#pragma push_macro("CFM_ANIMATION")
++#undef CFM_ANIMATION
++#pragma push_macro("CFM_STYLE")
++#undef CFM_STYLE
++#pragma push_macro("CFM_KERNING")
++#undef CFM_KERNING
++#pragma push_macro("CFM_SPACING")
++#undef CFM_SPACING
++#pragma push_macro("CFM_WEIGHT")
++#undef CFM_WEIGHT
++#pragma push_macro("CFM_UNDERLINETYPE")
++#undef CFM_UNDERLINETYPE
++#pragma push_macro("CFM_COOKIE")
++#undef CFM_COOKIE
++#pragma push_macro("CFM_LCID")
++#undef CFM_LCID
++#pragma push_macro("CFM_BACKCOLOR")
++#undef CFM_BACKCOLOR
++#pragma push_macro("CFM_EFFECTS2")
++#undef CFM_EFFECTS2
++#pragma push_macro("CFM_ALL2")
++#undef CFM_ALL2
++#pragma push_macro("CFM_FONTBOUND")
++#undef CFM_FONTBOUND
++#pragma push_macro("CFM_LINKPROTECTED")
++#undef CFM_LINKPROTECTED
++#pragma push_macro("CFM_EXTENDED")
++#undef CFM_EXTENDED
++#pragma push_macro("CFM_MATHNOBUILDUP")
++#undef CFM_MATHNOBUILDUP
++#pragma push_macro("CFM_MATH")
++#undef CFM_MATH
++#pragma push_macro("CFM_MATHORDINARY")
++#undef CFM_MATHORDINARY
++#pragma push_macro("CFM_ALLEFFECTS")
++#undef CFM_ALLEFFECTS
++enum [[clang::flag_enum]] CFM_MASK : unsigned int
++{
++    CFM_SUBSCRIPT = 196608U,
++    CFM_SUPERSCRIPT = 196608U,
++    CFM_EFFECTS = 1073741887U,
++    CFM_ALL = 4160749631U,
++    CFM_BOLD = 1U,
++    CFM_CHARSET = 134217728U,
++    CFM_COLOR = 1073741824U,
++    CFM_FACE = 536870912U,
++    CFM_ITALIC = 2U,
++    CFM_OFFSET = 268435456U,
++    CFM_PROTECTED = 16U,
++    CFM_SIZE = 2147483648U,
++    CFM_STRIKEOUT = 8U,
++    CFM_UNDERLINE = 4U,
++    CFM_LINK = 32U,
++    CFM_SMALLCAPS = 64U,
++    CFM_ALLCAPS = 128U,
++    CFM_HIDDEN = 256U,
++    CFM_OUTLINE = 512U,
++    CFM_SHADOW = 1024U,
++    CFM_EMBOSS = 2048U,
++    CFM_IMPRINT = 4096U,
++    CFM_DISABLED = 8192U,
++    CFM_REVISED = 16384U,
++    CFM_REVAUTHOR = 32768U,
++    CFM_ANIMATION = 262144U,
++    CFM_STYLE = 524288U,
++    CFM_KERNING = 1048576U,
++    CFM_SPACING = 2097152U,
++    CFM_WEIGHT = 4194304U,
++    CFM_UNDERLINETYPE = 8388608U,
++    CFM_COOKIE = 16777216U,
++    CFM_LCID = 33554432U,
++    CFM_BACKCOLOR = 67108864U,
++    CFM_EFFECTS2 = 1141080063U,
++    CFM_ALL2 = 4294967295U,
++    CFM_FONTBOUND = 1048576U,
++    CFM_LINKPROTECTED = 8388608U,
++    CFM_EXTENDED = 33554432U,
++    CFM_MATHNOBUILDUP = 134217728U,
++    CFM_MATH = 268435456U,
++    CFM_MATHORDINARY = 536870912U,
++    CFM_ALLEFFECTS = 2115207167U,
++};
++#pragma pop_macro("CFM_ALLEFFECTS")
++#pragma pop_macro("CFM_MATHORDINARY")
++#pragma pop_macro("CFM_MATH")
++#pragma pop_macro("CFM_MATHNOBUILDUP")
++#pragma pop_macro("CFM_EXTENDED")
++#pragma pop_macro("CFM_LINKPROTECTED")
++#pragma pop_macro("CFM_FONTBOUND")
++#pragma pop_macro("CFM_ALL2")
++#pragma pop_macro("CFM_EFFECTS2")
++#pragma pop_macro("CFM_BACKCOLOR")
++#pragma pop_macro("CFM_LCID")
++#pragma pop_macro("CFM_COOKIE")
++#pragma pop_macro("CFM_UNDERLINETYPE")
++#pragma pop_macro("CFM_WEIGHT")
++#pragma pop_macro("CFM_SPACING")
++#pragma pop_macro("CFM_KERNING")
++#pragma pop_macro("CFM_STYLE")
++#pragma pop_macro("CFM_ANIMATION")
++#pragma pop_macro("CFM_REVAUTHOR")
++#pragma pop_macro("CFM_REVISED")
++#pragma pop_macro("CFM_DISABLED")
++#pragma pop_macro("CFM_IMPRINT")
++#pragma pop_macro("CFM_EMBOSS")
++#pragma pop_macro("CFM_SHADOW")
++#pragma pop_macro("CFM_OUTLINE")
++#pragma pop_macro("CFM_HIDDEN")
++#pragma pop_macro("CFM_ALLCAPS")
++#pragma pop_macro("CFM_SMALLCAPS")
++#pragma pop_macro("CFM_LINK")
++#pragma pop_macro("CFM_UNDERLINE")
++#pragma pop_macro("CFM_STRIKEOUT")
++#pragma pop_macro("CFM_SIZE")
++#pragma pop_macro("CFM_PROTECTED")
++#pragma pop_macro("CFM_OFFSET")
++#pragma pop_macro("CFM_ITALIC")
++#pragma pop_macro("CFM_FACE")
++#pragma pop_macro("CFM_COLOR")
++#pragma pop_macro("CFM_CHARSET")
++#pragma pop_macro("CFM_BOLD")
++#pragma pop_macro("CFM_ALL")
++#pragma pop_macro("CFM_EFFECTS")
++#pragma pop_macro("CFM_SUPERSCRIPT")
++#pragma pop_macro("CFM_SUBSCRIPT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CFE_ALLCAPS")
++#undef CFE_ALLCAPS
++#pragma push_macro("CFE_AUTOBACKCOLOR")
++#undef CFE_AUTOBACKCOLOR
++#pragma push_macro("CFE_DISABLED")
++#undef CFE_DISABLED
++#pragma push_macro("CFE_EMBOSS")
++#undef CFE_EMBOSS
++#pragma push_macro("CFE_HIDDEN")
++#undef CFE_HIDDEN
++#pragma push_macro("CFE_IMPRINT")
++#undef CFE_IMPRINT
++#pragma push_macro("CFE_OUTLINE")
++#undef CFE_OUTLINE
++#pragma push_macro("CFE_REVISED")
++#undef CFE_REVISED
++#pragma push_macro("CFE_SHADOW")
++#undef CFE_SHADOW
++#pragma push_macro("CFE_SMALLCAPS")
++#undef CFE_SMALLCAPS
++#pragma push_macro("CFE_AUTOCOLOR")
++#undef CFE_AUTOCOLOR
++#pragma push_macro("CFE_BOLD")
++#undef CFE_BOLD
++#pragma push_macro("CFE_ITALIC")
++#undef CFE_ITALIC
++#pragma push_macro("CFE_STRIKEOUT")
++#undef CFE_STRIKEOUT
++#pragma push_macro("CFE_UNDERLINE")
++#undef CFE_UNDERLINE
++#pragma push_macro("CFE_PROTECTED")
++#undef CFE_PROTECTED
++#pragma push_macro("CFE_LINK")
++#undef CFE_LINK
++#pragma push_macro("CFE_SUBSCRIPT")
++#undef CFE_SUBSCRIPT
++#pragma push_macro("CFE_SUPERSCRIPT")
++#undef CFE_SUPERSCRIPT
++#pragma push_macro("CFE_FONTBOUND")
++#undef CFE_FONTBOUND
++#pragma push_macro("CFE_LINKPROTECTED")
++#undef CFE_LINKPROTECTED
++#pragma push_macro("CFE_EXTENDED")
++#undef CFE_EXTENDED
++#pragma push_macro("CFE_MATHNOBUILDUP")
++#undef CFE_MATHNOBUILDUP
++#pragma push_macro("CFE_MATH")
++#undef CFE_MATH
++#pragma push_macro("CFE_MATHORDINARY")
++#undef CFE_MATHORDINARY
++enum [[clang::flag_enum]] CFE_EFFECTS : unsigned int
++{
++    CFE_ALLCAPS = 128U,
++    CFE_AUTOBACKCOLOR = 67108864U,
++    CFE_DISABLED = 8192U,
++    CFE_EMBOSS = 2048U,
++    CFE_HIDDEN = 256U,
++    CFE_IMPRINT = 4096U,
++    CFE_OUTLINE = 512U,
++    CFE_REVISED = 16384U,
++    CFE_SHADOW = 1024U,
++    CFE_SMALLCAPS = 64U,
++    CFE_AUTOCOLOR = 1073741824U,
++    CFE_BOLD = 1U,
++    CFE_ITALIC = 2U,
++    CFE_STRIKEOUT = 8U,
++    CFE_UNDERLINE = 4U,
++    CFE_PROTECTED = 16U,
++    CFE_LINK = 32U,
++    CFE_SUBSCRIPT = 65536U,
++    CFE_SUPERSCRIPT = 131072U,
++    CFE_FONTBOUND = 1048576U,
++    CFE_LINKPROTECTED = 8388608U,
++    CFE_EXTENDED = 33554432U,
++    CFE_MATHNOBUILDUP = 134217728U,
++    CFE_MATH = 268435456U,
++    CFE_MATHORDINARY = 536870912U,
++};
++#pragma pop_macro("CFE_MATHORDINARY")
++#pragma pop_macro("CFE_MATH")
++#pragma pop_macro("CFE_MATHNOBUILDUP")
++#pragma pop_macro("CFE_EXTENDED")
++#pragma pop_macro("CFE_LINKPROTECTED")
++#pragma pop_macro("CFE_FONTBOUND")
++#pragma pop_macro("CFE_SUPERSCRIPT")
++#pragma pop_macro("CFE_SUBSCRIPT")
++#pragma pop_macro("CFE_LINK")
++#pragma pop_macro("CFE_PROTECTED")
++#pragma pop_macro("CFE_UNDERLINE")
++#pragma pop_macro("CFE_STRIKEOUT")
++#pragma pop_macro("CFE_ITALIC")
++#pragma pop_macro("CFE_BOLD")
++#pragma pop_macro("CFE_AUTOCOLOR")
++#pragma pop_macro("CFE_SMALLCAPS")
++#pragma pop_macro("CFE_SHADOW")
++#pragma pop_macro("CFE_REVISED")
++#pragma pop_macro("CFE_OUTLINE")
++#pragma pop_macro("CFE_IMPRINT")
++#pragma pop_macro("CFE_HIDDEN")
++#pragma pop_macro("CFE_EMBOSS")
++#pragma pop_macro("CFE_DISABLED")
++#pragma pop_macro("CFE_AUTOBACKCOLOR")
++#pragma pop_macro("CFE_ALLCAPS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PFM_STARTINDENT")
++#undef PFM_STARTINDENT
++#pragma push_macro("PFM_RIGHTINDENT")
++#undef PFM_RIGHTINDENT
++#pragma push_macro("PFM_OFFSET")
++#undef PFM_OFFSET
++#pragma push_macro("PFM_ALIGNMENT")
++#undef PFM_ALIGNMENT
++#pragma push_macro("PFM_TABSTOPS")
++#undef PFM_TABSTOPS
++#pragma push_macro("PFM_NUMBERING")
++#undef PFM_NUMBERING
++#pragma push_macro("PFM_OFFSETINDENT")
++#undef PFM_OFFSETINDENT
++#pragma push_macro("PFM_SPACEBEFORE")
++#undef PFM_SPACEBEFORE
++#pragma push_macro("PFM_SPACEAFTER")
++#undef PFM_SPACEAFTER
++#pragma push_macro("PFM_LINESPACING")
++#undef PFM_LINESPACING
++#pragma push_macro("PFM_STYLE")
++#undef PFM_STYLE
++#pragma push_macro("PFM_BORDER")
++#undef PFM_BORDER
++#pragma push_macro("PFM_SHADING")
++#undef PFM_SHADING
++#pragma push_macro("PFM_NUMBERINGSTYLE")
++#undef PFM_NUMBERINGSTYLE
++#pragma push_macro("PFM_NUMBERINGTAB")
++#undef PFM_NUMBERINGTAB
++#pragma push_macro("PFM_NUMBERINGSTART")
++#undef PFM_NUMBERINGSTART
++#pragma push_macro("PFM_RTLPARA")
++#undef PFM_RTLPARA
++#pragma push_macro("PFM_KEEP")
++#undef PFM_KEEP
++#pragma push_macro("PFM_KEEPNEXT")
++#undef PFM_KEEPNEXT
++#pragma push_macro("PFM_PAGEBREAKBEFORE")
++#undef PFM_PAGEBREAKBEFORE
++#pragma push_macro("PFM_NOLINENUMBER")
++#undef PFM_NOLINENUMBER
++#pragma push_macro("PFM_NOWIDOWCONTROL")
++#undef PFM_NOWIDOWCONTROL
++#pragma push_macro("PFM_DONOTHYPHEN")
++#undef PFM_DONOTHYPHEN
++#pragma push_macro("PFM_SIDEBYSIDE")
++#undef PFM_SIDEBYSIDE
++#pragma push_macro("PFM_COLLAPSED")
++#undef PFM_COLLAPSED
++#pragma push_macro("PFM_OUTLINELEVEL")
++#undef PFM_OUTLINELEVEL
++#pragma push_macro("PFM_BOX")
++#undef PFM_BOX
++#pragma push_macro("PFM_RESERVED2")
++#undef PFM_RESERVED2
++#pragma push_macro("PFM_TABLEROWDELIMITER")
++#undef PFM_TABLEROWDELIMITER
++#pragma push_macro("PFM_TEXTWRAPPINGBREAK")
++#undef PFM_TEXTWRAPPINGBREAK
++#pragma push_macro("PFM_TABLE")
++#undef PFM_TABLE
++#pragma push_macro("PFM_ALL")
++#undef PFM_ALL
++#pragma push_macro("PFM_EFFECTS")
++#undef PFM_EFFECTS
++#pragma push_macro("PFM_ALL2")
++#undef PFM_ALL2
++enum [[clang::flag_enum]] PARAFORMAT_MASK : unsigned int
++{
++    PFM_STARTINDENT = 1U,
++    PFM_RIGHTINDENT = 2U,
++    PFM_OFFSET = 4U,
++    PFM_ALIGNMENT = 8U,
++    PFM_TABSTOPS = 16U,
++    PFM_NUMBERING = 32U,
++    PFM_OFFSETINDENT = 2147483648U,
++    PFM_SPACEBEFORE = 64U,
++    PFM_SPACEAFTER = 128U,
++    PFM_LINESPACING = 256U,
++    PFM_STYLE = 1024U,
++    PFM_BORDER = 2048U,
++    PFM_SHADING = 4096U,
++    PFM_NUMBERINGSTYLE = 8192U,
++    PFM_NUMBERINGTAB = 16384U,
++    PFM_NUMBERINGSTART = 32768U,
++    PFM_RTLPARA = 65536U,
++    PFM_KEEP = 131072U,
++    PFM_KEEPNEXT = 262144U,
++    PFM_PAGEBREAKBEFORE = 524288U,
++    PFM_NOLINENUMBER = 1048576U,
++    PFM_NOWIDOWCONTROL = 2097152U,
++    PFM_DONOTHYPHEN = 4194304U,
++    PFM_SIDEBYSIDE = 8388608U,
++    PFM_COLLAPSED = 16777216U,
++    PFM_OUTLINELEVEL = 33554432U,
++    PFM_BOX = 67108864U,
++    PFM_RESERVED2 = 134217728U,
++    PFM_TABLEROWDELIMITER = 268435456U,
++    PFM_TEXTWRAPPINGBREAK = 536870912U,
++    PFM_TABLE = 1073741824U,
++    PFM_ALL = 2147549247U,
++    PFM_EFFECTS = 1358888960U,
++    PFM_ALL2 = 3506437631U,
++};
++#pragma pop_macro("PFM_ALL2")
++#pragma pop_macro("PFM_EFFECTS")
++#pragma pop_macro("PFM_ALL")
++#pragma pop_macro("PFM_TABLE")
++#pragma pop_macro("PFM_TEXTWRAPPINGBREAK")
++#pragma pop_macro("PFM_TABLEROWDELIMITER")
++#pragma pop_macro("PFM_RESERVED2")
++#pragma pop_macro("PFM_BOX")
++#pragma pop_macro("PFM_OUTLINELEVEL")
++#pragma pop_macro("PFM_COLLAPSED")
++#pragma pop_macro("PFM_SIDEBYSIDE")
++#pragma pop_macro("PFM_DONOTHYPHEN")
++#pragma pop_macro("PFM_NOWIDOWCONTROL")
++#pragma pop_macro("PFM_NOLINENUMBER")
++#pragma pop_macro("PFM_PAGEBREAKBEFORE")
++#pragma pop_macro("PFM_KEEPNEXT")
++#pragma pop_macro("PFM_KEEP")
++#pragma pop_macro("PFM_RTLPARA")
++#pragma pop_macro("PFM_NUMBERINGSTART")
++#pragma pop_macro("PFM_NUMBERINGTAB")
++#pragma pop_macro("PFM_NUMBERINGSTYLE")
++#pragma pop_macro("PFM_SHADING")
++#pragma pop_macro("PFM_BORDER")
++#pragma pop_macro("PFM_STYLE")
++#pragma pop_macro("PFM_LINESPACING")
++#pragma pop_macro("PFM_SPACEAFTER")
++#pragma pop_macro("PFM_SPACEBEFORE")
++#pragma pop_macro("PFM_OFFSETINDENT")
++#pragma pop_macro("PFM_NUMBERING")
++#pragma pop_macro("PFM_TABSTOPS")
++#pragma pop_macro("PFM_ALIGNMENT")
++#pragma pop_macro("PFM_OFFSET")
++#pragma pop_macro("PFM_RIGHTINDENT")
++#pragma pop_macro("PFM_STARTINDENT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SEL_EMPTY")
++#undef SEL_EMPTY
++#pragma push_macro("SEL_TEXT")
++#undef SEL_TEXT
++#pragma push_macro("SEL_OBJECT")
++#undef SEL_OBJECT
++#pragma push_macro("SEL_MULTICHAR")
++#undef SEL_MULTICHAR
++#pragma push_macro("SEL_MULTIOBJECT")
++#undef SEL_MULTIOBJECT
++#pragma push_macro("GCM_RIGHTMOUSEDROP")
++#undef GCM_RIGHTMOUSEDROP
++enum [[clang::flag_enum]] RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE : unsigned short
++{
++    SEL_EMPTY = 0,
++    SEL_TEXT = 1,
++    SEL_OBJECT = 2,
++    SEL_MULTICHAR = 4,
++    SEL_MULTIOBJECT = 8,
++    GCM_RIGHTMOUSEDROP = 32768,
++};
++#pragma pop_macro("GCM_RIGHTMOUSEDROP")
++#pragma pop_macro("SEL_MULTIOBJECT")
++#pragma pop_macro("SEL_MULTICHAR")
++#pragma pop_macro("SEL_OBJECT")
++#pragma pop_macro("SEL_TEXT")
++#pragma pop_macro("SEL_EMPTY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("GT_DEFAULT")
++#undef GT_DEFAULT
++#pragma push_macro("GT_NOHIDDENTEXT")
++#undef GT_NOHIDDENTEXT
++#pragma push_macro("GT_RAWTEXT")
++#undef GT_RAWTEXT
++#pragma push_macro("GT_SELECTION")
++#undef GT_SELECTION
++#pragma push_macro("GT_USECRLF")
++#undef GT_USECRLF
++enum GETTEXTEX_FLAGS : unsigned int
++{
++    GT_DEFAULT = 0U,
++    GT_NOHIDDENTEXT = 8U,
++    GT_RAWTEXT = 4U,
++    GT_SELECTION = 2U,
++    GT_USECRLF = 1U,
++};
++#pragma pop_macro("GT_USECRLF")
++#pragma pop_macro("GT_SELECTION")
++#pragma pop_macro("GT_RAWTEXT")
++#pragma pop_macro("GT_NOHIDDENTEXT")
++#pragma pop_macro("GT_DEFAULT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ECN_ENDCOMPOSITION")
++#undef ECN_ENDCOMPOSITION
++#pragma push_macro("ECN_NEWTEXT")
++#undef ECN_NEWTEXT
++enum ENDCOMPOSITIONNOTIFY_CODE : unsigned int
++{
++    ECN_ENDCOMPOSITION = 1U,
++    ECN_NEWTEXT = 2U,
++};
++#pragma pop_macro("ECN_NEWTEXT")
++#pragma pop_macro("ECN_ENDCOMPOSITION")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ICT_RESULTREADSTR")
++#undef ICT_RESULTREADSTR
++enum IMECOMPTEXT_FLAGS : unsigned int
++{
++    ICT_RESULTREADSTR = 1U,
++};
++#pragma pop_macro("ICT_RESULTREADSTR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("GTL_DEFAULT")
++#undef GTL_DEFAULT
++#pragma push_macro("GTL_USECRLF")
++#undef GTL_USECRLF
++#pragma push_macro("GTL_PRECISE")
++#undef GTL_PRECISE
++#pragma push_macro("GTL_CLOSE")
++#undef GTL_CLOSE
++#pragma push_macro("GTL_NUMCHARS")
++#undef GTL_NUMCHARS
++#pragma push_macro("GTL_NUMBYTES")
++#undef GTL_NUMBYTES
++enum [[clang::flag_enum]] GETTEXTLENGTHEX_FLAGS : unsigned int
++{
++    GTL_DEFAULT = 0U,
++    GTL_USECRLF = 1U,
++    GTL_PRECISE = 2U,
++    GTL_CLOSE = 4U,
++    GTL_NUMCHARS = 8U,
++    GTL_NUMBYTES = 16U,
++};
++#pragma pop_macro("GTL_NUMBYTES")
++#pragma pop_macro("GTL_NUMCHARS")
++#pragma pop_macro("GTL_CLOSE")
++#pragma pop_macro("GTL_PRECISE")
++#pragma pop_macro("GTL_USECRLF")
++#pragma pop_macro("GTL_DEFAULT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PFNS_PAREN")
++#undef PFNS_PAREN
++#pragma push_macro("PFNS_PARENS")
++#undef PFNS_PARENS
++#pragma push_macro("PFNS_PERIOD")
++#undef PFNS_PERIOD
++#pragma push_macro("PFNS_PLAIN")
++#undef PFNS_PLAIN
++#pragma push_macro("PFNS_NONUMBER")
++#undef PFNS_NONUMBER
++#pragma push_macro("PFNS_NEWNUMBER")
++#undef PFNS_NEWNUMBER
++enum PARAFORMAT_NUMBERING_STYLE : unsigned short
++{
++    PFNS_PAREN = 0,
++    PFNS_PARENS = 256,
++    PFNS_PERIOD = 512,
++    PFNS_PLAIN = 768,
++    PFNS_NONUMBER = 1024,
++    PFNS_NEWNUMBER = 32768,
++};
++#pragma pop_macro("PFNS_NEWNUMBER")
++#pragma pop_macro("PFNS_NONUMBER")
++#pragma pop_macro("PFNS_PLAIN")
++#pragma pop_macro("PFNS_PERIOD")
++#pragma pop_macro("PFNS_PARENS")
++#pragma pop_macro("PFNS_PAREN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PFA_LEFT")
++#undef PFA_LEFT
++#pragma push_macro("PFA_RIGHT")
++#undef PFA_RIGHT
++#pragma push_macro("PFA_CENTER")
++#undef PFA_CENTER
++#pragma push_macro("PFA_JUSTIFY")
++#undef PFA_JUSTIFY
++#pragma push_macro("PFA_FULL_INTERWORD")
++#undef PFA_FULL_INTERWORD
++#pragma push_macro("PFA_FULL_NEWSPAPER")
++#undef PFA_FULL_NEWSPAPER
++#pragma push_macro("PFA_FULL_INTERLETTER")
++#undef PFA_FULL_INTERLETTER
++#pragma push_macro("PFA_FULL_SCALED")
++#undef PFA_FULL_SCALED
++#pragma push_macro("PFA_FULL_GLYPHS")
++#undef PFA_FULL_GLYPHS
++enum PARAFORMAT_ALIGNMENT : unsigned short
++{
++    PFA_LEFT = 1,
++    PFA_RIGHT = 2,
++    PFA_CENTER = 3,
++    PFA_JUSTIFY = 4,
++    PFA_FULL_INTERWORD = 4,
++    PFA_FULL_NEWSPAPER = 5,
++    PFA_FULL_INTERLETTER = 6,
++    PFA_FULL_SCALED = 7,
++    PFA_FULL_GLYPHS = 8,
++};
++#pragma pop_macro("PFA_FULL_GLYPHS")
++#pragma pop_macro("PFA_FULL_SCALED")
++#pragma pop_macro("PFA_FULL_INTERLETTER")
++#pragma pop_macro("PFA_FULL_NEWSPAPER")
++#pragma pop_macro("PFA_FULL_INTERWORD")
++#pragma pop_macro("PFA_JUSTIFY")
++#pragma pop_macro("PFA_CENTER")
++#pragma pop_macro("PFA_RIGHT")
++#pragma pop_macro("PFA_LEFT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PFN_BULLET")
++#undef PFN_BULLET
++#pragma push_macro("PFN_ARABIC")
++#undef PFN_ARABIC
++#pragma push_macro("PFN_LCLETTER")
++#undef PFN_LCLETTER
++#pragma push_macro("PFN_UCLETTER")
++#undef PFN_UCLETTER
++#pragma push_macro("PFN_LCROMAN")
++#undef PFN_LCROMAN
++#pragma push_macro("PFN_UCROMAN")
++#undef PFN_UCROMAN
++enum [[clang::flag_enum]] PARAFORMAT_NUMBERING : unsigned short
++{
++    PFN_BULLET = 1,
++    PFN_ARABIC = 2,
++    PFN_LCLETTER = 3,
++    PFN_UCLETTER = 4,
++    PFN_LCROMAN = 5,
++    PFN_UCROMAN = 6,
++};
++#pragma pop_macro("PFN_UCROMAN")
++#pragma pop_macro("PFN_LCROMAN")
++#pragma pop_macro("PFN_UCLETTER")
++#pragma pop_macro("PFN_LCLETTER")
++#pragma pop_macro("PFN_ARABIC")
++#pragma pop_macro("PFN_BULLET")
++#endif
++
+ #endif // !_RICHEDIT_ 
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_PARAFORMAT_BORDERS
++#define WIN32METADATA_ENUM_PARAFORMAT_BORDERS
++#pragma push_macro("PARAFORMAT_BORDERS_LEFT")
++#undef PARAFORMAT_BORDERS_LEFT
++#pragma push_macro("PARAFORMAT_BORDERS_RIGHT")
++#undef PARAFORMAT_BORDERS_RIGHT
++#pragma push_macro("PARAFORMAT_BORDERS_TOP")
++#undef PARAFORMAT_BORDERS_TOP
++#pragma push_macro("PARAFORMAT_BORDERS_BOTTOM")
++#undef PARAFORMAT_BORDERS_BOTTOM
++#pragma push_macro("PARAFORMAT_BORDERS_INSIDE")
++#undef PARAFORMAT_BORDERS_INSIDE
++#pragma push_macro("PARAFORMAT_BORDERS_OUTSIDE")
++#undef PARAFORMAT_BORDERS_OUTSIDE
++#pragma push_macro("PARAFORMAT_BORDERS_AUTOCOLOR")
++#undef PARAFORMAT_BORDERS_AUTOCOLOR
++namespace Windows { namespace MetadataEnumValues {
++namespace PARAFORMAT_BORDERSValues {
++enum [[clang::flag_enum]] PARAFORMAT_BORDERS : unsigned short
++{
++    PARAFORMAT_BORDERS_LEFT = 1,
++    PARAFORMAT_BORDERS_RIGHT = 2,
++    PARAFORMAT_BORDERS_TOP = 4,
++    PARAFORMAT_BORDERS_BOTTOM = 8,
++    PARAFORMAT_BORDERS_INSIDE = 16,
++    PARAFORMAT_BORDERS_OUTSIDE = 32,
++    PARAFORMAT_BORDERS_AUTOCOLOR = 64,
++};
++}
++} }
++#pragma pop_macro("PARAFORMAT_BORDERS_AUTOCOLOR")
++#pragma pop_macro("PARAFORMAT_BORDERS_OUTSIDE")
++#pragma pop_macro("PARAFORMAT_BORDERS_INSIDE")
++#pragma pop_macro("PARAFORMAT_BORDERS_BOTTOM")
++#pragma pop_macro("PARAFORMAT_BORDERS_TOP")
++#pragma pop_macro("PARAFORMAT_BORDERS_RIGHT")
++#pragma pop_macro("PARAFORMAT_BORDERS_LEFT")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_PARAFORMAT_SHADING_STYLE
++#define WIN32METADATA_ENUM_PARAFORMAT_SHADING_STYLE
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_NONE")
++#undef PARAFORMAT_SHADING_STYLE_NONE
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_HORIZ")
++#undef PARAFORMAT_SHADING_STYLE_DARK_HORIZ
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_VERT")
++#undef PARAFORMAT_SHADING_STYLE_DARK_VERT
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_GRID")
++#undef PARAFORMAT_SHADING_STYLE_DARK_GRID
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_DARK_TRELLIS")
++#undef PARAFORMAT_SHADING_STYLE_DARK_TRELLIS
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_HORZ")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_HORZ
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_VERT")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_VERT
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_GRID")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_GRID
++#pragma push_macro("PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS")
++#undef PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS
++namespace Windows { namespace MetadataEnumValues {
++namespace PARAFORMAT_SHADING_STYLEValues {
++enum PARAFORMAT_SHADING_STYLE : unsigned short
++{
++    PARAFORMAT_SHADING_STYLE_NONE = 0,
++    PARAFORMAT_SHADING_STYLE_DARK_HORIZ = 1,
++    PARAFORMAT_SHADING_STYLE_DARK_VERT = 2,
++    PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG = 3,
++    PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG = 4,
++    PARAFORMAT_SHADING_STYLE_DARK_GRID = 5,
++    PARAFORMAT_SHADING_STYLE_DARK_TRELLIS = 6,
++    PARAFORMAT_SHADING_STYLE_LIGHT_HORZ = 7,
++    PARAFORMAT_SHADING_STYLE_LIGHT_VERT = 8,
++    PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG = 9,
++    PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG = 10,
++    PARAFORMAT_SHADING_STYLE_LIGHT_GRID = 11,
++    PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS = 12,
++};
++}
++} }
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_GRID")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_VERT")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_LIGHT_HORZ")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_TRELLIS")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_GRID")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_VERT")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_DARK_HORIZ")
++#pragma pop_macro("PARAFORMAT_SHADING_STYLE_NONE")
++#endif
++#endif

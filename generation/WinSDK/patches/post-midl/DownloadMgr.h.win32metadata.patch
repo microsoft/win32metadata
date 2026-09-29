@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
+index a1640c9cac..6c4b0d99b6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DownloadMgr.h
+@@ -78,6 +78,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -109,7 +110,7 @@ EXTERN_C const IID IID_IDownloadManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("988934A4-064B-11D3-BB80-00104B35E7F9")
+-    IDownloadManager : public IUnknown
++      IDownloadManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Download( 

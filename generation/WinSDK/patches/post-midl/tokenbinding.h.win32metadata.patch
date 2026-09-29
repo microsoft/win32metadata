@@ -1,0 +1,112 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h b/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h
+index e02370de9f..d1cb53f986 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tokenbinding.h
+@@ -18,6 +18,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -28,12 +29,12 @@
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
+ 
+-typedef enum TOKENBINDING_TYPE{
++typedef enum   TOKENBINDING_TYPE{
+     TOKENBINDING_TYPE_PROVIDED = 0,
+     TOKENBINDING_TYPE_REFERRED = 1,
+ }TOKENBINDING_TYPE;
+ 
+-typedef enum TOKENBINDING_EXTENSION_FORMAT{
++typedef enum   TOKENBINDING_EXTENSION_FORMAT{
+     TOKENBINDING_EXTENSION_FORMAT_UNDEFINED = 0,
+ }TOKENBINDING_EXTENSION_FORMAT;
+ 
+@@ -45,12 +46,12 @@ typedef enum TOKENBINDING_KEY_PARAMETERS_TYPE{
+ }TOKENBINDING_KEY_PARAMETERS_TYPE;
+ 
+ #pragma pack(push, 1)
+-typedef struct TOKENBINDING_IDENTIFIER{
++typedef struct   TOKENBINDING_IDENTIFIER{
+     BYTE keyType; // TOKENBINDING_KEY_PARAMETERS_TYPE
+ }TOKENBINDING_IDENTIFIER;
+ #pragma pack(pop)
+ 
+-typedef struct TOKENBINDING_RESULT_DATA{
++typedef struct   TOKENBINDING_RESULT_DATA{
+     TOKENBINDING_TYPE bindingType;
+     DWORD identifierSize;
+     TOKENBINDING_IDENTIFIER *identifierData;
+@@ -59,17 +60,17 @@ typedef struct TOKENBINDING_RESULT_DATA{
+     PVOID extensionData;
+ }TOKENBINDING_RESULT_DATA;
+ 
+-typedef struct TOKENBINDING_RESULT_LIST{
++typedef struct   TOKENBINDING_RESULT_LIST{
+     DWORD resultCount;
+     TOKENBINDING_RESULT_DATA *resultData;
+ }TOKENBINDING_RESULT_LIST;
+ 
+-typedef struct TOKENBINDING_KEY_TYPES{
++typedef struct   TOKENBINDING_KEY_TYPES{
+     DWORD keyCount;
+     TOKENBINDING_KEY_PARAMETERS_TYPE *keyType;
+ }TOKENBINDING_KEY_TYPES;
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingGenerateBinding(
+     _In_ TOKENBINDING_KEY_PARAMETERS_TYPE keyType,
+     _In_ PCWSTR targetURL,
+@@ -83,7 +84,7 @@ TokenBindingGenerateBinding(
+     _Outptr_opt_ TOKENBINDING_RESULT_DATA **resultData
+ );
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingGenerateMessage(
+     _In_count_(tokenBindingsCount) const void *tokenBindings[],
+     _In_count_(tokenBindingsCount) const DWORD tokenBindingsSize[],
+@@ -92,7 +93,7 @@ TokenBindingGenerateMessage(
+     _Out_ DWORD *tokenBindingMessageSize
+ );
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingVerifyMessage(
+     _In_reads_bytes_(tokenBindingMessageSize) const void *tokenBindingMessage,
+     _In_ DWORD tokenBindingMessageSize,
+@@ -102,25 +103,25 @@ TokenBindingVerifyMessage(
+     _Outptr_ TOKENBINDING_RESULT_LIST **resultList
+ );
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingGetKeyTypesClient(
+     _Outptr_ TOKENBINDING_KEY_TYPES **keyTypes
+ );
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingGetKeyTypesServer(
+     _Outptr_ TOKENBINDING_KEY_TYPES **keyTypes
+ );
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingDeleteBinding(
+     _In_ PCWSTR targetURL
+ );
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingDeleteAllBindings();
+ 
+-STDAPI_(SECURITY_STATUS)
++_Windows_SupportedOS_10240_ STDAPI_(SECURITY_STATUS)
+ TokenBindingGenerateID(
+     _In_ TOKENBINDING_KEY_PARAMETERS_TYPE keyType,
+     _In_reads_bytes_(publicKeySize) const void *publicKey,

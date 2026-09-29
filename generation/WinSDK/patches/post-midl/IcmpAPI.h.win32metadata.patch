@@ -1,0 +1,102 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
+index e7907cb5de..7c24b678c2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IcmpAPI.h
+@@ -28,6 +28,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ //
+ // Establish DLL function linkage if supported by the current build
+@@ -75,7 +76,8 @@ extern "C" {
+ //
+ //--
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_RAIIFree_(IcmpCloseHandle) IPHLPAPI_DLL_LINKAGE
++ 
+ HANDLE
+ WINAPI
+ IcmpCreateFile(
+@@ -104,7 +106,8 @@ IcmpCreateFile(
+ //
+ //--
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(IcmpCloseHandle) IPHLPAPI_DLL_LINKAGE
++ 
+ HANDLE
+ WINAPI
+ Icmp6CreateFile(
+@@ -133,7 +136,8 @@ Icmp6CreateFile(
+ //
+ //--
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ BOOL
+ WINAPI
+ IcmpCloseHandle(
+@@ -194,7 +198,8 @@ IcmpCloseHandle(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ DWORD
+ WINAPI
+ IcmpSendEcho(
+@@ -283,7 +288,8 @@ IcmpSendEcho(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ DWORD
+ WINAPI
+ IcmpSendEcho2(
+@@ -312,7 +318,8 @@ IcmpSendEcho2(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ DWORD
+ WINAPI
+ IcmpSendEcho2Ex(
+@@ -343,7 +350,8 @@ IcmpSendEcho2Ex(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ DWORD
+ WINAPI
+ Icmp6SendEcho2(
+@@ -397,7 +405,8 @@ Icmp6SendEcho2(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ DWORD
+ WINAPI
+ IcmpParseReplies(
+@@ -407,7 +416,8 @@ IcmpParseReplies(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+-IPHLPAPI_DLL_LINKAGE
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ IPHLPAPI_DLL_LINKAGE
++ 
+ DWORD
+ WINAPI
+ Icmp6ParseReplies(

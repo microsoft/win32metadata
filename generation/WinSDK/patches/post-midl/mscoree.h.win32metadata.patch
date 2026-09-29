@@ -1,0 +1,199 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h b/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
+index 8c44a207d4..aff2f09cc2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -577,30 +578,30 @@ EXTERN_GUID(IID_ICLRProbingAssemblyEnum, 0xd0c5fb1f, 0x416b, 0x4f97, 0x81, 0xf4,
+ EXTERN_GUID(IID_ICLRHostBindingPolicyManager, 0x4b3545e7, 0x1856, 0x48c9, 0xa8, 0xba, 0x24, 0xb2, 0x1a, 0x75, 0x3c, 0x09);
+ EXTERN_GUID(IID_ITypeNameBuilder, 0xB81FF171, 0x20F3, 0x11d2, 0x8d, 0xcc, 0x00, 0xa0, 0xc9, 0xb0, 0x05, 0x23);
+ EXTERN_GUID(IID_ITypeNameFactory, 0xB81FF171, 0x20F3, 0x11d2, 0x8d, 0xcc, 0x00, 0xa0, 0xc9, 0xb0, 0x05, 0x21);
+-DEPRECATED_CLR_STDAPI GetCORSystemDirectory(_Out_writes_to_(cchBuffer, *dwLength) LPWSTR pbuffer, DWORD  cchBuffer, DWORD* dwLength);
+-DEPRECATED_CLR_STDAPI GetCORVersion(_Out_writes_to_(cchBuffer, *dwLength) LPWSTR pbBuffer, DWORD cchBuffer, DWORD* dwLength);
+-DEPRECATED_CLR_STDAPI GetFileVersion(LPCWSTR szFilename, _Out_writes_to_opt_(cchBuffer, *dwLength) LPWSTR szBuffer, DWORD cchBuffer, DWORD* dwLength);
+-DEPRECATED_CLR_STDAPI GetCORRequiredVersion(_Out_writes_to_(cchBuffer, *dwLength) LPWSTR pbuffer, DWORD cchBuffer, DWORD* dwLength);
+-DEPRECATED_CLR_STDAPI GetRequestedRuntimeInfo(LPCWSTR pExe, LPCWSTR pwszVersion, LPCWSTR pConfigurationFile, DWORD startupFlags, DWORD runtimeInfoFlags, _Out_writes_opt_(dwDirectory) LPWSTR pDirectory, DWORD dwDirectory, _Out_opt_ DWORD *dwDirectoryLength, _Out_writes_opt_(cchBuffer) LPWSTR pVersion, DWORD cchBuffer, _Out_opt_ DWORD* dwlength);
+-DEPRECATED_CLR_STDAPI GetRequestedRuntimeVersion(_In_ LPWSTR pExe, _Out_writes_to_(cchBuffer, *pdwLength) LPWSTR pVersion, DWORD cchBuffer, _Out_ DWORD* dwLength);
+-DEPRECATED_CLR_STDAPI CorBindToRuntimeHost(LPCWSTR pwszVersion, LPCWSTR pwszBuildFlavor, LPCWSTR pwszHostConfigFile, VOID* pReserved, DWORD startupFlags, REFCLSID rclsid, REFIID riid, LPVOID FAR *ppv);
+-DEPRECATED_CLR_STDAPI CorBindToRuntimeEx(LPCWSTR pwszVersion, LPCWSTR pwszBuildFlavor, DWORD startupFlags, REFCLSID rclsid, REFIID riid, LPVOID FAR *ppv);
+-DEPRECATED_CLR_STDAPI CorBindToRuntimeByCfg(IStream* pCfgStream, DWORD reserved, DWORD startupFlags, REFCLSID rclsid,REFIID riid, LPVOID FAR* ppv);
+-DEPRECATED_CLR_STDAPI CorBindToRuntime(LPCWSTR pwszVersion, LPCWSTR pwszBuildFlavor, REFCLSID rclsid, REFIID riid, LPVOID FAR *ppv);
+-DEPRECATED_CLR_STDAPI CorBindToCurrentRuntime(LPCWSTR pwszFileName, REFCLSID rclsid, REFIID riid, LPVOID FAR *ppv);
+-DEPRECATED_CLR_STDAPI ClrCreateManagedInstance(LPCWSTR pTypeName, REFIID riid, void **ppObject);
+-DECLARE_DEPRECATED void STDMETHODCALLTYPE CorMarkThreadInThreadPool();
+-DEPRECATED_CLR_STDAPI RunDll32ShimW(HWND hwnd, HINSTANCE hinst, LPCWSTR lpszCmdLine, int nCmdShow);
+-DEPRECATED_CLR_STDAPI LoadLibraryShim(LPCWSTR szDllName, LPCWSTR szVersion, LPVOID pvReserved, HMODULE *phModDll);
+-DEPRECATED_CLR_STDAPI CallFunctionShim(LPCWSTR szDllName, LPCSTR szFunctionName, LPVOID lpvArgument1, LPVOID lpvArgument2, LPCWSTR szVersion, LPVOID pvReserved);
+-DEPRECATED_CLR_STDAPI GetRealProcAddress(LPCSTR pwszProcName, VOID** ppv);
+-DECLARE_DEPRECATED void STDMETHODCALLTYPE CorExitProcess(int exitCode);
+-DEPRECATED_CLR_STDAPI LoadStringRC(UINT iResouceID, _Out_writes_z_(iMax) LPWSTR szBuffer, int iMax, int bQuiet);
+-DEPRECATED_CLR_STDAPI LoadStringRCEx(LCID lcid, UINT iResouceID, _Out_writes_z_(iMax) LPWSTR szBuffer, int iMax, int bQuiet, int *pcwchUsed);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetCORSystemDirectory(_Out_writes_to_(cchBuffer, *dwLength) LPWSTR pbuffer, _WIN32META_ANNOTATION_("win32metadata:in") DWORD  cchBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* dwLength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetCORVersion(_Out_writes_to_(cchBuffer, *dwLength) LPWSTR pbBuffer, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* dwLength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetFileVersion(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szFilename, _Out_writes_to_opt_(cchBuffer, *dwLength) LPWSTR szBuffer, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* dwLength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetCORRequiredVersion(_Out_writes_to_(cchBuffer, *dwLength) LPWSTR pbuffer, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* dwLength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetRequestedRuntimeInfo(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pExe, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszVersion, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pConfigurationFile, _WIN32META_ANNOTATION_("win32metadata:in") DWORD startupFlags, _WIN32META_ANNOTATION_("win32metadata:in") DWORD runtimeInfoFlags, _Out_writes_opt_(dwDirectory) LPWSTR pDirectory, _WIN32META_ANNOTATION_("win32metadata:in") DWORD dwDirectory, _Out_opt_ DWORD *dwDirectoryLength, _Out_writes_opt_(cchBuffer) LPWSTR pVersion, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _Out_opt_ DWORD* dwlength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetRequestedRuntimeVersion(_In_ LPWSTR pExe, _Out_writes_to_(cchBuffer, *pdwLength) LPWSTR pVersion, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _Out_ DWORD* dwLength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CorBindToRuntimeHost(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszVersion, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszBuildFlavor, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszHostConfigFile, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID* pReserved, _WIN32META_ANNOTATION_("win32metadata:in") DWORD startupFlags, _WIN32META_ANNOTATION_("win32metadata:in") REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *ppv);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CorBindToRuntimeEx(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszVersion, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszBuildFlavor, _WIN32META_ANNOTATION_("win32metadata:in") DWORD startupFlags, _WIN32META_ANNOTATION_("win32metadata:in") REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *ppv);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CorBindToRuntimeByCfg(_WIN32META_ANNOTATION_("win32metadata:in") IStream* pCfgStream, _WIN32META_ANNOTATION_("win32metadata:in") DWORD reserved, _WIN32META_ANNOTATION_("win32metadata:in") DWORD startupFlags, _WIN32META_ANNOTATION_("win32metadata:in") REFCLSID rclsid,_WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR* ppv);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CorBindToRuntime(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszVersion, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszBuildFlavor, _WIN32META_ANNOTATION_("win32metadata:in") REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *ppv);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CorBindToCurrentRuntime(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwszFileName, _WIN32META_ANNOTATION_("win32metadata:in") REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *ppv);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI ClrCreateManagedInstance(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pTypeName, _WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void **ppObject);
++_Win32_ImportLibrary_("mscoree.dll") DECLARE_DEPRECATED void STDMETHODCALLTYPE CorMarkThreadInThreadPool();
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI RunDll32ShimW(_WIN32META_ANNOTATION_("win32metadata:in") HWND hwnd, _WIN32META_ANNOTATION_("win32metadata:in") HINSTANCE hinst, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR lpszCmdLine, _WIN32META_ANNOTATION_("win32metadata:in") int nCmdShow);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI LoadLibraryShim(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szDllName, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szVersion, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvReserved, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HMODULE *phModDll);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CallFunctionShim(_WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szDllName, _WIN32META_ANNOTATION_("win32metadata:in") LPCSTR szFunctionName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvArgument1, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpvArgument2, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szVersion, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvReserved);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetRealProcAddress(_WIN32META_ANNOTATION_("win32metadata:in") LPCSTR pwszProcName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID** ppv);
++_Win32_ImportLibrary_("mscoree.dll") DECLARE_DEPRECATED void STDMETHODCALLTYPE CorExitProcess(_WIN32META_ANNOTATION_("win32metadata:in") int exitCode);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI LoadStringRC(_WIN32META_ANNOTATION_("win32metadata:in") UINT iResouceID, _Out_writes_z_(iMax) LPWSTR szBuffer, _WIN32META_ANNOTATION_("win32metadata:in") int iMax, _WIN32META_ANNOTATION_("win32metadata:in") int bQuiet);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI LoadStringRCEx(_WIN32META_ANNOTATION_("win32metadata:in") LCID lcid, _WIN32META_ANNOTATION_("win32metadata:in") UINT iResouceID, _Out_writes_z_(iMax) LPWSTR szBuffer, _WIN32META_ANNOTATION_("win32metadata:in") int iMax, _WIN32META_ANNOTATION_("win32metadata:in") int bQuiet, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int *pcwchUsed);
+ typedef HRESULT (__stdcall *FLockClrVersionCallback) ();
+-DEPRECATED_CLR_STDAPI LockClrVersion(FLockClrVersionCallback hostCallback,FLockClrVersionCallback *pBeginHostSetup,FLockClrVersionCallback *pEndHostSetup);
+-DEPRECATED_CLR_STDAPI CreateDebuggingInterfaceFromVersion(int iDebuggerVersion, LPCWSTR szDebuggeeVersion, IUnknown ** ppCordb);
+-DEPRECATED_CLR_STDAPI GetVersionFromProcess(HANDLE hProcess, _Out_writes_to_(cchBuffer, *pdwLength) LPWSTR pVersion, DWORD cchBuffer, _Out_ DWORD* dwLength);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI LockClrVersion(_WIN32META_ANNOTATION_("win32metadata:in") FLockClrVersionCallback hostCallback,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FLockClrVersionCallback *pBeginHostSetup,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FLockClrVersionCallback *pEndHostSetup);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI CreateDebuggingInterfaceFromVersion(_WIN32META_ANNOTATION_("win32metadata:in") int iDebuggerVersion, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szDebuggeeVersion, _WIN32META_ANNOTATION_("win32metadata:out") IUnknown ** ppCordb);
++_Win32_ImportLibrary_("mscoree.dll") DEPRECATED_CLR_STDAPI GetVersionFromProcess(_WIN32META_ANNOTATION_("win32metadata:in") HANDLE hProcess, _Out_writes_to_(cchBuffer, *pdwLength) LPWSTR pVersion, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _Out_ DWORD* dwLength);
+ typedef /* [public] */ 
+ enum __MIDL___MIDL_itf_mscoree_0000_0000_0001
+     {
+@@ -609,9 +610,9 @@ enum __MIDL___MIDL_itf_mscoree_0000_0000_0001
+         HOST_TYPE_CORFLAG	= 0x2
+     } 	HOST_TYPE;
+ 
+-STDAPI CorLaunchApplication(HOST_TYPE dwClickOnceHost, LPCWSTR pwzAppFullName, DWORD dwManifestPaths, LPCWSTR* ppwzManifestPaths, DWORD dwActivationData, LPCWSTR* ppwzActivationData, LPPROCESS_INFORMATION lpProcessInformation);
++_Win32_ImportLibrary_("mscoree.dll") STDAPI CorLaunchApplication(_WIN32META_ANNOTATION_("win32metadata:in")  HOST_TYPE dwClickOnceHost, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR pwzAppFullName, _WIN32META_ANNOTATION_("win32metadata:in") DWORD dwManifestPaths, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR* ppwzManifestPaths, _WIN32META_ANNOTATION_("win32metadata:in") DWORD dwActivationData, _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR* ppwzActivationData, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPPROCESS_INFORMATION lpProcessInformation);
+ typedef HRESULT ( __stdcall *FExecuteInAppDomainCallback )( 
+-    void *cookie);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *cookie);
+ 
+ typedef /* [public] */ 
+ enum __MIDL___MIDL_itf_mscoree_0000_0000_0002
+@@ -664,7 +665,7 @@ enum __MIDL___MIDL_itf_mscoree_0000_0000_0005
+         APPDOMAIN_FORCE_TRIVIAL_WAIT_OPERATIONS	= 0x8
+     } 	APPDOMAIN_SECURITY_FLAGS;
+ 
+-STDAPI GetRequestedRuntimeVersionForCLSID(REFCLSID rclsid, _Out_writes_opt_(cchBuffer) LPWSTR pVersion, DWORD cchBuffer, _Out_opt_ DWORD* dwLength, CLSID_RESOLUTION_FLAGS dwResolutionFlags);
++_Win32_ImportLibrary_("mscoree.dll") STDAPI GetRequestedRuntimeVersionForCLSID(_WIN32META_ANNOTATION_("win32metadata:in") REFCLSID rclsid, _Out_writes_opt_(cchBuffer) LPWSTR pVersion, _WIN32META_ANNOTATION_("win32metadata:in") DWORD cchBuffer, _Out_opt_ DWORD* dwLength, _WIN32META_ANNOTATION_("win32metadata:in")  CLSID_RESOLUTION_FLAGS dwResolutionFlags);
+ 
+ 
+ extern RPC_IF_HANDLE __MIDL_itf_mscoree_0000_0000_v0_0_c_ifspec;
+@@ -1058,7 +1059,7 @@ typedef VOID ( *LPOVERLAPPED_COMPLETION_ROUTINE )(
+ 
+ #endif // __midl
+ typedef VOID ( __stdcall *PTLS_CALLBACK_FUNCTION )( 
+-    PVOID __MIDL____MIDL_itf_mscoree_0000_00040005);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID __MIDL____MIDL_itf_mscoree_0000_00040005);
+ 
+ 
+ 
+@@ -1778,7 +1779,7 @@ EXTERN_C const IID IID_ICorRuntimeHost;
+             /* [annotation][in] */ 
+             _In_  HANDLE hFile,
+             /* [annotation][out] */ 
+-            _Out_  HMODULE *hMapAddress) = 0;
++            _Win32_RAIIFree_(FreeLibrary, 0) _Out_  HMODULE *hMapAddress) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetConfiguration( 
+             /* [annotation][out] */ 
+@@ -3891,7 +3892,7 @@ EXTERN_C const IID IID_IHostIoCompletionManager;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateIoCompletionPort( 
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phPort) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phPort) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CloseIoCompletionPort( 
+             /* [annotation][in] */ 
+@@ -5105,7 +5106,7 @@ EXTERN_C const IID IID_IHostSyncManager;
+             /* [annotation][out] */ 
+             _Out_  IHostManualEvent **ppEvent) = 0;
+         
+-        virtual HRESULT STDMETHODCALLTYPE CreateSemaphore( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE CreateSemaphore( 
+             /* [annotation][in] */ 
+             _In_  DWORD dwInitial,
+             /* [annotation][in] */ 
+@@ -7180,7 +7181,7 @@ EXTERN_C const IID IID_IHostAssemblyManager;
+ /* interface __MIDL_itf_mscoree_0000_0042 */
+ /* [local] */ 
+ 
+-STDAPI GetCLRIdentityManager(REFIID riid, IUnknown **ppManager);
++_Win32_ImportLibrary_("mscoree.dll") STDAPI GetCLRIdentityManager(_WIN32META_ANNOTATION_("win32metadata:in") REFIID riid, _WIN32META_ANNOTATION_("win32metadata:out") IUnknown **ppManager);
+ EXTERN_GUID(IID_IHostControl, 0x02CA073C, 0x7079, 0x4860, 0x88, 0x0A, 0xC2, 0xF7, 0xA4, 0x49, 0xC9, 0x91);
+ 
+ 
+@@ -7927,7 +7928,7 @@ EXTERN_C const IID IID_ITypeName;
+             /* [annotation][in] */ 
+             _In_  DWORD count,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *rgbszNames,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *rgbszNames,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  DWORD *pCount) = 0;
+         
+@@ -7957,7 +7958,7 @@ EXTERN_C const IID IID_ITypeName;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAssemblyName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *rgbszAssemblyNames) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *rgbszAssemblyNames) = 0;
+         
+     };
+     
+@@ -8136,7 +8137,7 @@ EXTERN_C const IID IID_ITypeNameBuilder;
+         
+         virtual HRESULT STDMETHODCALLTYPE ToString( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pszStringRepresentation) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszStringRepresentation) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Clear( void) = 0;
+         
+@@ -8506,10 +8507,10 @@ EXTERN_C const IID IID_IManagedObject;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSerializedBuffer( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pBSTR) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pBSTR) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetObjectIdentity( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pBSTRGUID,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pBSTRGUID,
+             /* [out] */ __RPC__out int *AppDomainID,
+             /* [out] */ __RPC__out int *pCCW) = 0;
+         
+@@ -8847,7 +8848,7 @@ EXTERN_C const IID IID_IHostSecurityManager;
+             /* [annotation][in] */ 
+             _In_  BOOL bOpenAsSelf,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phThreadToken) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phThreadToken) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetThreadToken( 
+             /* [annotation][in] */ 
+@@ -9001,16 +9002,16 @@ EXTERN_C const IID IID_ICLRAppDomainResourceMonitor;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentAllocated( 
+             /* [in] */ DWORD dwAppDomainId,
+-            /* [out] */ ULONGLONG *pBytesAllocated) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pBytesAllocated) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentSurvived( 
+             /* [in] */ DWORD dwAppDomainId,
+-            /* [out] */ ULONGLONG *pAppDomainBytesSurvived,
+-            /* [out] */ ULONGLONG *pTotalBytesSurvived) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pAppDomainBytesSurvived,
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pTotalBytesSurvived) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCurrentCpuTime( 
+             /* [in] */ DWORD dwAppDomainId,
+-            /* [out] */ ULONGLONG *pMilliseconds) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pMilliseconds) = 0;
+         
+     };
+     

@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dde.h b/generation/WinSDK/RecompiledIdlHeaders/um/dde.h
+index e47a5d7987..dd50010865 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dde.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dde.h
+@@ -17,6 +17,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -177,12 +178,16 @@ typedef struct {
+  * DDE SECURITY
+  */
+ 
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
+ BOOL
+ WINAPI
+ DdeSetQualityOfService(
+     HWND hwndClient,
+     CONST SECURITY_QUALITY_OF_SERVICE *pqosNew,
+-    PSECURITY_QUALITY_OF_SERVICE pqosPrev);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSECURITY_QUALITY_OF_SERVICE pqosPrev);
++
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
+ 
+ BOOL
+ WINAPI
+@@ -193,10 +198,10 @@ ImpersonateDdeClientWindow(
+ /*
+  * DDE message packing APIs
+  */
+-LPARAM APIENTRY PackDDElParam(_In_ UINT msg, _In_ UINT_PTR uiLo, _In_ UINT_PTR uiHi);
+-BOOL   APIENTRY UnpackDDElParam(_In_ UINT msg, _In_ LPARAM lParam, _Out_ PUINT_PTR puiLo, _Out_ PUINT_PTR puiHi);
+-BOOL   APIENTRY FreeDDElParam(_In_ UINT msg, _In_ LPARAM lParam);
+-LPARAM APIENTRY ReuseDDElParam(LPARAM lParam, UINT msgIn, UINT msgOut, UINT_PTR uiLo, UINT_PTR uiHi);
++_Windows_SupportedOS_Windows2000_ LPARAM APIENTRY PackDDElParam(_In_ UINT msg, _In_ UINT_PTR uiLo, _In_ UINT_PTR uiHi);
++_Windows_SupportedOS_Windows2000_ BOOL   APIENTRY UnpackDDElParam(_In_ UINT msg, _In_ LPARAM lParam, _Out_ PUINT_PTR puiLo, _Out_ PUINT_PTR puiHi);
++_Windows_SupportedOS_Windows2000_ BOOL   APIENTRY FreeDDElParam(_In_ UINT msg, _In_ LPARAM lParam);
++_Windows_SupportedOS_Windows2000_ LPARAM APIENTRY ReuseDDElParam(LPARAM lParam, UINT msgIn, UINT msgOut, UINT_PTR uiLo, UINT_PTR uiHi);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion

@@ -1,0 +1,53 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h b/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h
+index 61533a5450..cf40fdc75e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xpsobjectmodel_2.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __xpsobjectmodel_2_h__
+ #define __xpsobjectmodel_2_h__
++#include <win32metadata_annotations.h>
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -99,16 +100,18 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e8a45033-640e-43fa-9bdf-fddeaa31c6a0")
++    MIDL_INTERFACE("e8a45033-640e-43fa-9bdf-fddeaa31c6a0") _Windows_SupportedOS_Windows81_ 
+     IXpsOMPackageWriter3D : public IXpsOMPackageWriter
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE AddModelTexture( 
+             /* [annotation][in] */ 
+             _In_  IOpcPartUri *texturePartName,
+             /* [annotation][in] */ 
+             _In_  IStream *textureData) = 0;
+         
++        
+         virtual HRESULT STDMETHODCALLTYPE SetModelPrintTicket( 
+             /* [annotation][in] */ 
+             _In_  IOpcPartUri *printTicketPartName,
+@@ -269,10 +272,11 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("60ba71b8-3101-4984-9199-f4ea775ff01d")
++    MIDL_INTERFACE("60ba71b8-3101-4984-9199-f4ea775ff01d") _Windows_SupportedOS_Windows81_ 
+     IXpsDocumentPackageTarget3D : public IUnknown
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE GetXpsOMPackageWriter3D( 
+             /* [annotation][in] */ 
+             _In_  IOpcPartUri *documentSequencePartName,
+@@ -285,6 +289,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IXpsOMPackageWriter3D **packageWriter) = 0;
+         
++        
+         virtual HRESULT STDMETHODCALLTYPE GetXpsOMFactory( 
+             /* [annotation][retval][out] */ 
+             _Out_retval_  IXpsOMObjectFactory **xpsFactory) = 0;

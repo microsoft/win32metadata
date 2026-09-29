@@ -1,0 +1,496 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h b/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h
+index 2b3b869d9b..4c26a43a9e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/netfw.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -399,7 +400,7 @@ extern "C"{
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-HRESULT
++_Windows_SupportedOS_Windows8_ HRESULT
+ WINAPI
+ NetworkIsolationSetupAppContainerBinaries (
+     _In_ PSID applicationContainerSid,
+@@ -485,45 +486,45 @@ typedef void (CALLBACK *PAC_CHANGES_CALLBACK_FN) (
+     _In_ const INET_FIREWALL_AC_CHANGE *pChange
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationRegisterForAppContainerChanges(
+     _In_ DWORD flags,
+     _In_ PAC_CHANGES_CALLBACK_FN callback,
+     _In_opt_ PVOID context,
+-    _Out_ HANDLE *registrationObject
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE *registrationObject
+     );
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationUnregisterForAppContainerChanges(
+     _In_ HANDLE registrationObject 
+     );
+-HRESULT
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("firewallapi.dll") HRESULT
+ WINAPI
+ NetworkIsolationEnumerateAppContainerRules(
+     _Outptr_ IEnumVARIANT ** newEnum
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationFreeAppContainers(
+     _In_ PINET_FIREWALL_APP_CONTAINER pPublicAppCs 
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationEnumAppContainers(
+     _In_  DWORD Flags,
+     _Out_ DWORD *pdwNumPublicAppCs,
+     _Outptr_result_buffer_(*pdwNumPublicAppCs) PINET_FIREWALL_APP_CONTAINER *ppPublicAppCs 
+     );
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationGetAppContainerConfig(
+     _Out_ DWORD *pdwNumPublicAppCs,
+     _Outptr_result_buffer_(*pdwNumPublicAppCs) PSID_AND_ATTRIBUTES *appContainerSids
+     );
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationSetAppContainerConfig(
+     _In_ DWORD dwNumPublicAppCs,
+@@ -540,7 +541,7 @@ typedef enum _NETISO_ERROR_TYPE
+     NETISO_ERROR_TYPE_MAX                       = 0x04
+ } NETISO_ERROR_TYPE;
+ #endif //__NET_ISOLATION_DIAG_TYPES__
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ NetworkIsolationDiagnoseConnectFailureAndGetInfo(
+     _In_ LPCWSTR wszServerName,
+@@ -555,16 +556,16 @@ typedef void (CALLBACK *PNETISO_EDP_ID_CALLBACK_FN) (
+     );
+ #define NETISO_GEID_FOR_WDAG 0x01
+ #define NETISO_GEID_FOR_NEUTRAL_AWARE 0x02
+-DWORD
++_Windows_SupportedOS_10240_ _Win32_ImportLibrary_("firewallapi.dll") DWORD
+ WINAPI
+ NetworkIsolationGetEnterpriseIdAsync(
+     _In_z_ LPCWSTR wszServerName,
+     _In_   DWORD   dwFlags,
+     _In_opt_ void *  context,
+     _In_   PNETISO_EDP_ID_CALLBACK_FN callback,
+-    _Out_  HANDLE *hOperation 
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *hOperation 
+     );
+-DWORD
++_Windows_SupportedOS_10240_ _Win32_ImportLibrary_("firewallapi.dll") DWORD
+ WINAPI
+ NetworkIsolationGetEnterpriseIdClose(
+     _In_ HANDLE hOperation,
+@@ -664,7 +665,7 @@ EXTERN_C const IID IID_INetFwRemoteAdminSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D4BECDDF-6F73-4A83-B832-9C66874CD20E")
++    MIDL_INTERFACE("D4BECDDF-6F73-4A83-B832-9C66874CD20E") _Windows_SupportedOS_WindowsVista_ 
+     INetFwRemoteAdminSettings : public IDispatch
+     {
+     public:
+@@ -686,7 +687,7 @@ EXTERN_C const IID IID_INetFwRemoteAdminSettings;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *remoteAddrs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *remoteAddrs) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
+             /* [annotation][in] */ 
+@@ -904,7 +905,7 @@ EXTERN_C const IID IID_INetFwIcmpSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A6207B2E-7CDD-426A-951E-5E1CBC5AFEAD")
++    MIDL_INTERFACE("A6207B2E-7CDD-426A-951E-5E1CBC5AFEAD") _Windows_SupportedOS_WindowsVista_ 
+     INetFwIcmpSettings : public IDispatch
+     {
+     public:
+@@ -1300,13 +1301,13 @@ EXTERN_C const IID IID_INetFwOpenPort;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E0483BA0-47FF-4D9C-A6D6-7741D0B195F7")
++    MIDL_INTERFACE("E0483BA0-47FF-4D9C-A6D6-7741D0B195F7") _Windows_SupportedOS_WindowsVista_ 
+     INetFwOpenPort : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -1346,7 +1347,7 @@ EXTERN_C const IID IID_INetFwOpenPort;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *remoteAddrs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *remoteAddrs) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
+             /* [annotation][in] */ 
+@@ -1631,7 +1632,7 @@ EXTERN_C const IID IID_INetFwOpenPorts;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C0E9D7FA-E07E-430A-B19A-090CE82D92E2")
++    MIDL_INTERFACE("C0E9D7FA-E07E-430A-B19A-090CE82D92E2") _Windows_SupportedOS_WindowsVista_ 
+     INetFwOpenPorts : public IDispatch
+     {
+     public:
+@@ -1844,13 +1845,13 @@ EXTERN_C const IID IID_INetFwService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("79FD57C8-908E-4A36-9888-D5B3F0A444CF")
++    MIDL_INTERFACE("79FD57C8-908E-4A36-9888-D5B3F0A444CF") _Windows_SupportedOS_WindowsVista_ 
+     INetFwService : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [annotation][retval][out] */ 
+@@ -1878,7 +1879,7 @@ EXTERN_C const IID IID_INetFwService;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *remoteAddrs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *remoteAddrs) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
+             /* [annotation][in] */ 
+@@ -2136,7 +2137,7 @@ EXTERN_C const IID IID_INetFwServices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("79649BB4-903E-421B-94C9-79848E79F6EE")
++    MIDL_INTERFACE("79649BB4-903E-421B-94C9-79848E79F6EE") _Windows_SupportedOS_WindowsVista_ 
+     INetFwServices : public IDispatch
+     {
+     public:
+@@ -2315,13 +2316,13 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B5E64FFA-C2C5-444E-A301-FB5E00018050")
++    MIDL_INTERFACE("B5E64FFA-C2C5-444E-A301-FB5E00018050") _Windows_SupportedOS_WindowsVista_ 
+     INetFwAuthorizedApplication : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -2329,7 +2330,7 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ProcessImageFileName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *imageFileName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *imageFileName) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ProcessImageFileName( 
+             /* [annotation][in] */ 
+@@ -2353,7 +2354,7 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *remoteAddrs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *remoteAddrs) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
+             /* [annotation][in] */ 
+@@ -2607,7 +2608,7 @@ EXTERN_C const IID IID_INetFwAuthorizedApplications;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("644EFD52-CCF9-486C-97A2-39F352570B30")
++    MIDL_INTERFACE("644EFD52-CCF9-486C-97A2-39F352570B30") _Windows_SupportedOS_WindowsVista_ 
+     INetFwAuthorizedApplications : public IDispatch
+     {
+     public:
+@@ -2812,13 +2813,13 @@ EXTERN_C const IID IID_INetFwRule;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AF230D27-BABA-4E42-ACED-F524F22CFCE2")
++    MIDL_INTERFACE("AF230D27-BABA-4E42-ACED-F524F22CFCE2") _Windows_SupportedOS_WindowsVista_ 
+     INetFwRule : public IDispatch
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -2826,7 +2827,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *desc) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *desc) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -2834,7 +2835,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ApplicationName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *imageFileName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *imageFileName) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ApplicationName( 
+             /* [annotation][in] */ 
+@@ -2842,7 +2843,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *serviceName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *serviceName) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ServiceName( 
+             /* [annotation][in] */ 
+@@ -2858,7 +2859,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalPorts( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *portNumbers) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *portNumbers) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalPorts( 
+             /* [annotation][in] */ 
+@@ -2866,7 +2867,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemotePorts( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *portNumbers) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *portNumbers) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemotePorts( 
+             /* [annotation][in] */ 
+@@ -2874,7 +2875,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalAddresses( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *localAddrs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *localAddrs) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalAddresses( 
+             /* [annotation][in] */ 
+@@ -2882,7 +2883,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *remoteAddrs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *remoteAddrs) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
+             /* [annotation][in] */ 
+@@ -2890,7 +2891,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IcmpTypesAndCodes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *icmpTypesAndCodes) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *icmpTypesAndCodes) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IcmpTypesAndCodes( 
+             /* [annotation][in] */ 
+@@ -2914,7 +2915,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_InterfaceTypes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *interfaceTypes) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *interfaceTypes) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_InterfaceTypes( 
+             /* [annotation][in] */ 
+@@ -2930,7 +2931,7 @@ EXTERN_C const IID IID_INetFwRule;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Grouping( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *context) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *context) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Grouping( 
+             /* [annotation][in] */ 
+@@ -3416,7 +3417,7 @@ EXTERN_C const IID IID_INetFwRule2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9C27C8DA-189B-4DDE-89F7-8B39A316782C")
++    MIDL_INTERFACE("9C27C8DA-189B-4DDE-89F7-8B39A316782C") _Windows_SupportedOS_Windows7_ 
+     INetFwRule2 : public INetFwRule
+     {
+     public:
+@@ -3903,13 +3904,13 @@ EXTERN_C const IID IID_INetFwRule3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B21563FF-D696-4222-AB46-4E89B73AB34A")
++    MIDL_INTERFACE("B21563FF-D696-4222-AB46-4E89B73AB34A") _Windows_SupportedOS_Windows8_ 
+     INetFwRule3 : public INetFwRule2
+     {
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalAppPackageId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *wszPackageId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *wszPackageId) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalAppPackageId( 
+             /* [annotation][in] */ 
+@@ -3917,7 +3918,7 @@ EXTERN_C const IID IID_INetFwRule3;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalUserOwner( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *wszUserOwner) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *wszUserOwner) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalUserOwner( 
+             /* [annotation][in] */ 
+@@ -3925,7 +3926,7 @@ EXTERN_C const IID IID_INetFwRule3;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalUserAuthorizedList( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *wszUserAuthList) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *wszUserAuthList) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalUserAuthorizedList( 
+             /* [annotation][in] */ 
+@@ -3933,7 +3934,7 @@ EXTERN_C const IID IID_INetFwRule3;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteUserAuthorizedList( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *wszUserAuthList) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *wszUserAuthList) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteUserAuthorizedList( 
+             /* [annotation][in] */ 
+@@ -3941,7 +3942,7 @@ EXTERN_C const IID IID_INetFwRule3;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteMachineAuthorizedList( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *wszUserAuthList) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *wszUserAuthList) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteMachineAuthorizedList( 
+             /* [annotation][in] */ 
+@@ -4539,7 +4540,7 @@ EXTERN_C const IID IID_INetFwRules;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9C4C6277-5027-441E-AFAE-CA1F542DA009")
++    MIDL_INTERFACE("9C4C6277-5027-441E-AFAE-CA1F542DA009") _Windows_SupportedOS_WindowsVista_ 
+     INetFwRules : public IDispatch
+     {
+     public:
+@@ -4744,7 +4745,7 @@ EXTERN_C const IID IID_INetFwServiceRestriction;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8267BBE3-F890-491C-B7B6-2DB1EF0E5D2B")
++    MIDL_INTERFACE("8267BBE3-F890-491C-B7B6-2DB1EF0E5D2B") _Windows_SupportedOS_WindowsVista_ 
+     INetFwServiceRestriction : public IDispatch
+     {
+     public:
+@@ -4939,7 +4940,7 @@ EXTERN_C const IID IID_INetFwProfile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("174A0DDA-E9F9-449D-993B-21AB667CA456")
++    MIDL_INTERFACE("174A0DDA-E9F9-449D-993B-21AB667CA456") _Windows_SupportedOS_WindowsVista_ 
+     INetFwProfile : public IDispatch
+     {
+     public:
+@@ -5257,7 +5258,7 @@ EXTERN_C const IID IID_INetFwPolicy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D46D2478-9AC9-4008-9DC7-5563CE5536CC")
++    MIDL_INTERFACE("D46D2478-9AC9-4008-9DC7-5563CE5536CC") _Windows_SupportedOS_WindowsVista_ 
+     INetFwPolicy : public IDispatch
+     {
+     public:
+@@ -5423,7 +5424,7 @@ EXTERN_C const IID IID_INetFwPolicy2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("98325047-C671-4174-8D81-DEFCD3F03186")
++    MIDL_INTERFACE("98325047-C671-4174-8D81-DEFCD3F03186") _Windows_SupportedOS_WindowsVista_ 
+     INetFwPolicy2 : public IDispatch
+     {
+     public:
+@@ -5917,7 +5918,7 @@ EXTERN_C const IID IID_INetFwMgr;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F7898AF5-CAC4-4632-A2EC-DA06E5111AF2")
++    MIDL_INTERFACE("F7898AF5-CAC4-4632-A2EC-DA06E5111AF2") _Windows_SupportedOS_WindowsVista_ 
+     INetFwMgr : public IDispatch
+     {
+     public:
+@@ -6154,7 +6155,7 @@ EXTERN_C const IID IID_INetFwProduct;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("71881699-18f4-458b-b892-3ffce5e07f75")
++    MIDL_INTERFACE("71881699-18f4-458b-b892-3ffce5e07f75") _Windows_SupportedOS_Windows7_ 
+     INetFwProduct : public IDispatch
+     {
+     public:
+@@ -6168,7 +6169,7 @@ EXTERN_C const IID IID_INetFwProduct;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *displayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *displayName) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
+             /* [annotation][in] */ 
+@@ -6176,7 +6177,7 @@ EXTERN_C const IID IID_INetFwProduct;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_PathToSignedProductExe( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+     };
+     
+@@ -6355,7 +6356,7 @@ EXTERN_C const IID IID_INetFwProducts;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("39EB36E0-2097-40BD-8AF2-63A13B525362")
++    MIDL_INTERFACE("39EB36E0-2097-40BD-8AF2-63A13B525362") _Windows_SupportedOS_Windows7_ 
+     INetFwProducts : public IDispatch
+     {
+     public:

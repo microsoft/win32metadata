@@ -1,0 +1,77 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h b/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h
+index b10ed97be2..de1b58849e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/odbcss.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************
+ *                                                       *
+ *   Copyright (C) Microsoft. All rights reserved.       *
+@@ -620,27 +621,27 @@ typedef struct sqlperf
+ #define SQL_VARLEN_DATA (-10)	//	Use default length for column
+ 
+ // BCP functions
+-DBINT	SQL_API bcp_batch (HDBC);
+-RETCODE SQL_API bcp_bind (HDBC, LPCBYTE, INT, DBINT, LPCBYTE, INT, INT, INT);
+-RETCODE SQL_API bcp_colfmt (HDBC, INT, BYTE, INT, DBINT, LPCBYTE, INT, INT);
+-RETCODE SQL_API bcp_collen (HDBC, DBINT, INT);
+-RETCODE SQL_API bcp_colptr (HDBC, LPCBYTE, INT);
+-RETCODE SQL_API bcp_columns (HDBC, INT);
+-RETCODE SQL_API bcp_control (HDBC, INT, void *);
+-DBINT	SQL_API bcp_done (HDBC);
+-RETCODE SQL_API bcp_exec (HDBC, LPDBINT);
+-RETCODE SQL_API bcp_getcolfmt (HDBC, INT, INT, void *, INT, INT *);
+-RETCODE SQL_API bcp_initA (HDBC, LPCSTR, LPCSTR, LPCSTR, INT);
+-RETCODE SQL_API bcp_initW (HDBC, LPCWSTR, LPCWSTR, LPCWSTR, INT);
+-RETCODE SQL_API bcp_moretext (HDBC, DBINT, LPCBYTE);
+-RETCODE SQL_API bcp_readfmtA (HDBC, LPCSTR);
+-RETCODE SQL_API bcp_readfmtW (HDBC, LPCWSTR);
+-RETCODE SQL_API bcp_sendrow (HDBC);
+-RETCODE SQL_API bcp_setcolfmt (HDBC, INT, INT, void *, INT);
+-RETCODE SQL_API bcp_writefmtA (HDBC, LPCSTR);
+-RETCODE SQL_API bcp_writefmtW (HDBC, LPCWSTR);
+-CHAR *	SQL_API dbprtypeA (INT);
+-WCHAR * SQL_API dbprtypeW (INT);
++DBINT	SQL_API bcp_batch (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC);
++RETCODE SQL_API bcp_bind (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCBYTE, INT, DBINT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCBYTE, INT, INT, INT);
++RETCODE SQL_API bcp_colfmt (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, INT, BYTE, INT, DBINT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCBYTE, INT, INT);
++RETCODE SQL_API bcp_collen (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, DBINT, INT);
++RETCODE SQL_API bcp_colptr (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCBYTE, INT);
++RETCODE SQL_API bcp_columns (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, INT);
++RETCODE SQL_API bcp_control (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, INT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *);
++DBINT	SQL_API bcp_done (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC);
++RETCODE SQL_API bcp_exec (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDBINT);
++RETCODE SQL_API bcp_getcolfmt (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, INT, INT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *, INT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT *);
++_WIN32META_ANNOTATION_("win32metadata:ansi") RETCODE SQL_API bcp_initA (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, LPCSTR, LPCSTR, LPCSTR, INT);
++_WIN32META_ANNOTATION_("win32metadata:unicode") RETCODE SQL_API bcp_initW (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, LPCWSTR, LPCWSTR, LPCWSTR, INT);
++RETCODE SQL_API bcp_moretext (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, DBINT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCBYTE);
++_WIN32META_ANNOTATION_("win32metadata:ansi") RETCODE SQL_API bcp_readfmtA (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, LPCSTR);
++_WIN32META_ANNOTATION_("win32metadata:unicode") RETCODE SQL_API bcp_readfmtW (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, LPCWSTR);
++RETCODE SQL_API bcp_sendrow (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC);
++RETCODE SQL_API bcp_setcolfmt (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, INT, INT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *, INT);
++_WIN32META_ANNOTATION_("win32metadata:ansi") RETCODE SQL_API bcp_writefmtA (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, LPCSTR);
++_WIN32META_ANNOTATION_("win32metadata:unicode") RETCODE SQL_API bcp_writefmtW (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HDBC, LPCWSTR);
++_WIN32META_ANNOTATION_("win32metadata:ansi") CHAR *	SQL_API dbprtypeA (INT);
++_WIN32META_ANNOTATION_("win32metadata:unicode") WCHAR * SQL_API dbprtypeW (INT);
+ 
+ #ifdef UNICODE
+ #define bcp_init		bcp_initW
+@@ -658,13 +659,13 @@ WCHAR * SQL_API dbprtypeW (INT);
+ #endif
+ 
+ //	SQL Server catalog extensions for distributed queries
+-SQLRETURN SQL_API SQLLinkedServers (SQLHSTMT);
+-SQLRETURN SQL_API SQLLinkedCatalogsA (SQLHSTMT, LPCSTR, SWORD);
+-SQLRETURN SQL_API SQLLinkedCatalogsW (SQLHSTMT, LPCWSTR, SWORD);
++SQLRETURN SQL_API SQLLinkedServers (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT);
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLLinkedCatalogsA (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT, LPCSTR, SWORD);
++_WIN32META_ANNOTATION_("win32metadata:unicode") SQLRETURN SQL_API SQLLinkedCatalogsW (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT, LPCWSTR, SWORD);
+ 
+ //	SQL Server extensions for server enumeration
+-HANDLE   SQL_API SQLInitEnumServers(_In_ LPWSTR pwchServerName, _In_ LPWSTR pwchInstanceName);
+-RETCODE  SQL_API SQLGetNextEnumeration (HANDLE hEnumHandle,BYTE * prgEnumData,INT * piEnumLength);
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE   SQL_API SQLInitEnumServers(_In_ LPWSTR pwchServerName, _In_ LPWSTR pwchInstanceName);
++RETCODE  SQL_API SQLGetNextEnumeration (HANDLE hEnumHandle,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE * prgEnumData,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT * piEnumLength);
+ RETCODE  SQL_API SQLCloseEnumServers (HANDLE hEnumHandle);
+ 
+ #ifdef UNICODE

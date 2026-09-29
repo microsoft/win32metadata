@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h b/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h
+index 4a688113bc..6fb031e08c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dsound.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*==========================================================================;
+  *
+  *  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -465,16 +466,16 @@ typedef const DSBPOSITIONNOTIFY *LPCDSBPOSITIONNOTIFY;
+ // DirectSound API
+ //
+ 
+-typedef BOOL (CALLBACK *LPDSENUMCALLBACKA)(LPGUID, LPCSTR, LPCSTR, LPVOID);
+-typedef BOOL (CALLBACK *LPDSENUMCALLBACKW)(LPGUID, LPCWSTR, LPCWSTR, LPVOID);
++typedef BOOL (CALLBACK *LPDSENUMCALLBACKA)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGUID, LPCSTR, LPCSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
++typedef BOOL (CALLBACK *LPDSENUMCALLBACKW)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGUID, LPCWSTR, LPCWSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
+ 
+ extern _Check_return_ HRESULT WINAPI DirectSoundCreate(_In_opt_ LPCGUID pcGuidDevice, _Outptr_ LPDIRECTSOUND *ppDS, _Pre_null_ LPUNKNOWN pUnkOuter);
+-extern HRESULT WINAPI DirectSoundEnumerateA(_In_ LPDSENUMCALLBACKA pDSEnumCallback, _In_opt_ LPVOID pContext);
+-extern HRESULT WINAPI DirectSoundEnumerateW(_In_ LPDSENUMCALLBACKW pDSEnumCallback, _In_opt_ LPVOID pContext);
++_WIN32META_ANNOTATION_("win32metadata:ansi") extern HRESULT WINAPI DirectSoundEnumerateA(_In_ LPDSENUMCALLBACKA pDSEnumCallback, _In_opt_ LPVOID pContext);
++_WIN32META_ANNOTATION_("win32metadata:unicode") extern HRESULT WINAPI DirectSoundEnumerateW(_In_ LPDSENUMCALLBACKW pDSEnumCallback, _In_opt_ LPVOID pContext);
+ 
+ extern HRESULT WINAPI DirectSoundCaptureCreate(_In_opt_ LPCGUID pcGuidDevice, _Outptr_ LPDIRECTSOUNDCAPTURE *ppDSC, _Pre_null_ LPUNKNOWN pUnkOuter);
+-extern HRESULT WINAPI DirectSoundCaptureEnumerateA(_In_ LPDSENUMCALLBACKA pDSEnumCallback, _In_opt_ LPVOID pContext);
+-extern HRESULT WINAPI DirectSoundCaptureEnumerateW(_In_ LPDSENUMCALLBACKW pDSEnumCallback, _In_opt_ LPVOID pContext);
++_WIN32META_ANNOTATION_("win32metadata:ansi") extern HRESULT WINAPI DirectSoundCaptureEnumerateA(_In_ LPDSENUMCALLBACKA pDSEnumCallback, _In_opt_ LPVOID pContext);
++_WIN32META_ANNOTATION_("win32metadata:unicode") extern HRESULT WINAPI DirectSoundCaptureEnumerateW(_In_ LPDSENUMCALLBACKW pDSEnumCallback, _In_opt_ LPVOID pContext);
+ 
+ #if DIRECTSOUND_VERSION >= 0x0800
+ extern HRESULT WINAPI DirectSoundCreate8(_In_opt_ LPCGUID pcGuidDevice, _Outptr_ LPDIRECTSOUND8 *ppDS8, _Pre_null_ LPUNKNOWN pUnkOuter);
+@@ -494,7 +495,7 @@ extern HRESULT WINAPI DirectSoundFullDuplexCreate
+ );
+ #define DirectSoundFullDuplexCreate8 DirectSoundFullDuplexCreate
+ 
+-extern HRESULT WINAPI GetDeviceID(_In_opt_ LPCGUID pGuidSrc, _Out_ LPGUID pGuidDest);
++_Win32_ImportLibrary_("dsound.dll") extern HRESULT WINAPI GetDeviceID(_In_opt_ LPCGUID pGuidSrc, _Out_ LPGUID pGuidDest);
+ #endif // DIRECTSOUND_VERSION >= 0x0800
+ 
+ #ifdef UNICODE

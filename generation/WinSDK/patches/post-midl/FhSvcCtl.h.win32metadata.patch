@@ -1,0 +1,82 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FhSvcCtl.h b/generation/WinSDK/RecompiledIdlHeaders/um/FhSvcCtl.h
+index 9c81aab721..4f0f372a1e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FhSvcCtl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FhSvcCtl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Microsoft Windows - File History
+@@ -47,56 +48,63 @@ typedef enum {
+     BackupCancelled = 4                   // Backup cancelled by the user initiated action
+ } FhBackupStopReason;
+ 
+-DECLARE_HANDLE (FH_SERVICE_PIPE_HANDLE);
++DECLARE_HANDLE (FH_SERVICE_PIPE_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=FhServiceClosePipe")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+-__declspec(deprecated("FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceOpenPipe(
+     _In_ BOOL StartServiceIfStopped,
+-    _Out_ FH_SERVICE_PIPE_HANDLE *Pipe
++    _Win32_RAIIFree_(FhServiceClosePipe, -1, 0) _Out_  FH_SERVICE_PIPE_HANDLE *Pipe
+     );
+ 
+-__declspec(deprecated("FhServiceClosePipe is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceClosePipe is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceClosePipe(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe
+     );
+ 
+-__declspec(deprecated("FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceStartBackup(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe,
+     _In_ BOOL LowPriorityIo
+     );
+ 
+-__declspec(deprecated("FhServiceStopBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceStopBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceStopBackup(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe,
+     _In_ BOOL StopTracking
+     );
+ 
+-__declspec(deprecated("FhServiceReloadConfiguration is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceReloadConfiguration is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceReloadConfiguration(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe
+     );
+ 
+-__declspec(deprecated("FhServiceBlockBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceBlockBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceBlockBackup(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe
+     );
+ 
+-__declspec(deprecated("FhServiceUnblockBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
++_Windows_SupportedOS_Windows8_ __declspec(deprecated("FhServiceUnblockBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
++ 
+ FhServiceUnblockBackup(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe
+     );

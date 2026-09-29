@@ -1,0 +1,348 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
+index 3cc4f24de6..da40bcd6a1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqlext.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************
+ *                                                       *
+ *   Copyright (C) Microsoft. All rights reserved.       *
+@@ -157,11 +158,11 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ // Connection attribute 120 and 121 are defined in sqlspi.h
+ 
+ /* SQL_CONNECT_OPT_DRVR_START is not meaningful for 3.0 driver */
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_CONNECT_OPT_DRVR_START      1000
+ #endif  /* ODBCVER < 0x0300 */
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_CONN_OPT_MAX                SQL_PACKET_SIZE
+ #define SQL_CONN_OPT_MIN                SQL_ACCESS_MODE
+ #endif /* ODBCVER < 0x0300 */
+@@ -277,7 +278,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ #define SQL_ATTR_ASYNC_STMT_EVENT           29
+ #endif /* ODBCVER >= 0x0380 */
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_STMT_OPT_MAX                SQL_ROW_NUMBER
+ #define SQL_STMT_OPT_MIN    SQL_QUERY_TIMEOUT
+ #endif      /* ODBCVER < 0x0300 */
+@@ -560,7 +561,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ #endif  /* ODBCVER >= 0x0350 */
+ 
+ #define SQL_TYPE_NULL                   0
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_TYPE_MIN                    SQL_BIT
+ #define SQL_TYPE_MAX                    SQL_VARCHAR
+ #endif
+@@ -639,7 +640,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ #define SQL_COLUMN_QUALIFIER_NAME       17
+ #define SQL_COLUMN_LABEL                18
+ #define SQL_COLATT_OPT_MAX              SQL_COLUMN_LABEL
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_COLUMN_DRIVER_START         1000
+ #endif  /* ODBCVER < 0x0300 */
+ 
+@@ -699,7 +700,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ /* from X/Open are in the 10000 range.       */
+ /*-------------------------------------------*/
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_EXT_API_LAST            SQL_API_SQLBINDPARAMETER
+ #define SQL_NUM_FUNCTIONS           23
+ #define SQL_EXT_API_START           40
+@@ -854,7 +855,7 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ /* of numbers for driver-specific values.       */
+ /*----------------------------------------------*/
+ 
+-#if (ODBCVER < 0x0300)
++#if defined(WIN32METADATA) || ((ODBCVER < 0x0300))
+ #define SQL_INFO_LAST                       SQL_QUALIFIER_LOCATION
+ #define SQL_INFO_DRIVER_START               1000
+ #endif /* ODBCVER < 0x0300 */
+@@ -1785,8 +1786,8 @@ typedef SQLTCHAR SQLSTATE[SQL_SQLSTATE_SIZE+1];
+ 
+ #ifndef RC_INVOKED
+ 
+-SQLRETURN SQL_API SQLDriverConnect(
+-    SQLHDBC            hdbc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLDriverConnect(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHDBC            hdbc,
+     SQLHWND            hwnd,
+     _In_reads_(cchConnStrIn)
+     SQLCHAR           *szConnStrIn,
+@@ -1903,8 +1904,8 @@ SQLRETURN SQL_API SQLDriverConnect(
+ "VALUE,VALUES,VARCHAR,VARYING,VIEW,WHEN,WHENEVER,WHERE,WITH,WORK,WRITE,"\
+ "YEAR,ZONE"
+ 
+-SQLRETURN SQL_API SQLBrowseConnect(
+-    SQLHDBC            hdbc,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLBrowseConnect(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHDBC            hdbc,
+     _In_reads_(cchConnStrIn)
+     SQLCHAR           *szConnStrIn,
+     SQLSMALLINT        cchConnStrIn,
+@@ -1916,21 +1917,21 @@ SQLRETURN SQL_API SQLBrowseConnect(
+ 
+ #if (ODBCVER >= 0x0300)
+ SQLRETURN   SQL_API SQLBulkOperations(
+-    SQLHSTMT            StatementHandle,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT            StatementHandle,
+     SQLSMALLINT         Operation);
+ #endif  /* ODBCVER >= 0x0300 */
+ 
+-SQLRETURN SQL_API SQLColAttributes(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLColAttributes(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       icol,
+     SQLUSMALLINT       fDescType,
+-    SQLPOINTER         rgbDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLPOINTER         rgbDesc,
+     SQLSMALLINT        cbDescMax,
+-    SQLSMALLINT       *pcbDesc,
+-    SQLLEN            * pfDesc);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLSMALLINT       *pcbDesc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLLEN            * pfDesc);
+ 
+-SQLRETURN SQL_API SQLColumnPrivileges(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLColumnPrivileges(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+     SQLSMALLINT        cchCatalogName,
+@@ -1945,7 +1946,7 @@ SQLRETURN SQL_API SQLColumnPrivileges(
+     SQLSMALLINT        cchColumnName);
+ 
+ SQLRETURN SQL_API SQLDescribeParam(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       ipar,
+     _Out_opt_
+     SQLSMALLINT       *pfSqlType,
+@@ -1957,7 +1958,7 @@ SQLRETURN SQL_API SQLDescribeParam(
+     SQLSMALLINT       *pfNullable);
+ 
+ SQLRETURN SQL_API SQLExtendedFetch(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       fFetchType,
+     SQLLEN             irow,
+     _Out_opt_
+@@ -1965,8 +1966,8 @@ SQLRETURN SQL_API SQLExtendedFetch(
+     _Out_opt_
+     SQLUSMALLINT      *rgfRowStatus);
+ 
+-SQLRETURN SQL_API SQLForeignKeys(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLForeignKeys(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _In_reads_opt_(cchPkCatalogName)
+     SQLCHAR           *szPkCatalogName,
+     SQLSMALLINT        cchPkCatalogName,
+@@ -1987,30 +1988,30 @@ SQLRETURN SQL_API SQLForeignKeys(
+     SQLSMALLINT        cchFkTableName);
+ 
+ SQLRETURN SQL_API SQLMoreResults(
+-    SQLHSTMT           hstmt);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt);
+ 
+-SQLRETURN SQL_API SQLNativeSql
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLNativeSql
+ (
+-    SQLHDBC            hdbc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHDBC            hdbc,
+     _In_reads_(cchSqlStrIn) SQLCHAR* szSqlStrIn,
+     SQLINTEGER  cchSqlStrIn,
+     _Out_writes_opt_(cchSqlStrMax) SQLCHAR* szSqlStr,
+     SQLINTEGER         cchSqlStrMax,
+-    SQLINTEGER        *pcbSqlStr
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLINTEGER        *pcbSqlStr
+ );
+ 
+ SQLRETURN SQL_API SQLNumParams(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _Out_opt_
+     SQLSMALLINT       *pcpar);
+ 
+ SQLRETURN SQL_API SQLParamOptions(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLULEN            crow,
+-    SQLULEN            *pirow);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLULEN            *pirow);
+ 
+-SQLRETURN SQL_API SQLPrimaryKeys(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLPrimaryKeys(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+     SQLSMALLINT        cchCatalogName,
+@@ -2021,8 +2022,8 @@ SQLRETURN SQL_API SQLPrimaryKeys(
+     SQLCHAR           *szTableName,
+     SQLSMALLINT        cchTableName);
+ 
+-SQLRETURN SQL_API SQLProcedureColumns(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLProcedureColumns(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+     SQLSMALLINT        cchCatalogName,
+@@ -2036,8 +2037,8 @@ SQLRETURN SQL_API SQLProcedureColumns(
+     SQLCHAR           *szColumnName,
+     SQLSMALLINT        cchColumnName);
+ 
+-SQLRETURN SQL_API SQLProcedures(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLProcedures(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+     SQLSMALLINT        cchCatalogName,
+@@ -2051,13 +2052,13 @@ SQLRETURN SQL_API SQLProcedures(
+ 
+ 
+ SQLRETURN SQL_API SQLSetPos(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLSETPOSIROW      irow,
+     SQLUSMALLINT       fOption,
+     SQLUSMALLINT       fLock);
+ 
+-SQLRETURN SQL_API SQLTablePrivileges(
+-    SQLHSTMT           hstmt,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLTablePrivileges(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     _In_reads_opt_(cchCatalogName)
+     SQLCHAR           *szCatalogName,
+     SQLSMALLINT        cchCatalogName,
+@@ -2068,8 +2069,8 @@ SQLRETURN SQL_API SQLTablePrivileges(
+     SQLCHAR           *szTableName,
+     SQLSMALLINT        cchTableName);
+ 
+-SQLRETURN SQL_API SQLDrivers(
+-    SQLHENV            henv,
++_WIN32META_ANNOTATION_("win32metadata:ansi") SQLRETURN SQL_API SQLDrivers(
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHENV            henv,
+     SQLUSMALLINT       fDirection,
+     _Out_writes_opt_(cchDriverDescMax)
+     SQLCHAR           *szDriverDesc,
+@@ -2083,16 +2084,16 @@ SQLRETURN SQL_API SQLDrivers(
+     SQLSMALLINT       *pcchDrvrAttr);
+ 
+ SQLRETURN SQL_API SQLBindParameter(
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       ipar,
+     SQLSMALLINT        fParamType,
+     SQLSMALLINT        fCType,
+     SQLSMALLINT        fSqlType,
+     SQLULEN            cbColDef,
+     SQLSMALLINT        ibScale,
+-    SQLPOINTER         rgbValue,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLPOINTER         rgbValue,
+     SQLLEN             cbValueMax,
+-    SQLLEN             *pcbValue);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLLEN             *pcbValue);
+ 
+ #endif /* RC_INVOKED */
+ 
+@@ -2106,26 +2107,78 @@ SQLRETURN SQL_API SQLBindParameter(
+ #define SQLAllocEnv(phenv)  SQLAllocHandleStd(SQL_HANDLE_ENV, SQL_NULL_HANDLE, phenv)
+ 
+ /* Internal type subcodes */
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_YEAR)) || (((defined(ODBC_STD))))
+ #define SQL_YEAR                        SQL_CODE_YEAR
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_MONTH)) || (((defined(ODBC_STD))))
+ #define SQL_MONTH                       SQL_CODE_MONTH
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY)) || (((defined(ODBC_STD))))
+ #define SQL_DAY                         SQL_CODE_DAY
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_HOUR)) || (((defined(ODBC_STD))))
+ #define SQL_HOUR                        SQL_CODE_HOUR
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_MINUTE)) || (((defined(ODBC_STD))))
+ #define SQL_MINUTE                      SQL_CODE_MINUTE
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_SECOND                      SQL_CODE_SECOND
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_YEAR_TO_MONTH)) || (((defined(ODBC_STD))))
+ #define SQL_YEAR_TO_MONTH               SQL_CODE_YEAR_TO_MONTH
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY_TO_HOUR)) || (((defined(ODBC_STD))))
+ #define SQL_DAY_TO_HOUR                 SQL_CODE_DAY_TO_HOUR
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY_TO_MINUTE)) || (((defined(ODBC_STD))))
+ #define SQL_DAY_TO_MINUTE               SQL_CODE_DAY_TO_MINUTE
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_DAY_TO_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_DAY_TO_SECOND               SQL_CODE_DAY_TO_SECOND
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_HOUR_TO_MINUTE)) || (((defined(ODBC_STD))))
+ #define SQL_HOUR_TO_MINUTE              SQL_CODE_HOUR_TO_MINUTE
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_HOUR_TO_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_HOUR_TO_SECOND              SQL_CODE_HOUR_TO_SECOND
++#endif
++#ifdef ODBC_STD
++#endif
++#if (defined(WIN32METADATA) && !defined(SQL_MINUTE_TO_SECOND)) || (((defined(ODBC_STD))))
+ #define SQL_MINUTE_TO_SECOND            SQL_CODE_MINUTE_TO_SECOND
++#endif
++#ifdef ODBC_STD
+ #endif /* ODBC_STD */
+ 
+ #if (ODBCVER >= 0x0300)
+ #ifndef RC_INVOKED
+ SQLRETURN SQL_API SQLAllocHandleStd(
+     SQLSMALLINT     fHandleType,
+-    SQLHANDLE       hInput,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHANDLE       hInput,
+     _Out_
+     SQLHANDLE      *phOutput);
+ #endif /* RC_INVOKED */
+@@ -2155,7 +2208,7 @@ SQLRETURN SQL_API SQLAllocHandleStd(
+ #ifndef RC_INVOKED
+ 
+ SQLRETURN SQL_API SQLSetScrollOptions(    /*      Use SQLSetStmtOptions */
+-    SQLHSTMT           hstmt,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SQLHSTMT           hstmt,
+     SQLUSMALLINT       fConcurrency,
+     SQLLEN             crowKeyset,
+     SQLUSMALLINT       crowRowset);

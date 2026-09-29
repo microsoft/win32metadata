@@ -3,7 +3,7 @@
 //! This is the minimal alternate pipeline. Its inputs are the existing partition translation
 //! units, the SDK header roots, optionally the SDK import-library root, and the target
 //! architectures. The root namespace, reachability scope, assembly identity, clang language
-//! settings, and intermediate RDL have simple defaults and require no RSP or JSON sidecars.
+//! settings and intermediate RDL have simple defaults and require no JSON sidecars.
 
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
@@ -78,6 +78,25 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
                 return Ok(options);
             }
             "--partition" => options.partitions.push(args.path(&option)?),
+            "--partition-file" => {
+                let path = args.os_path(&option)?;
+                let contents = std::fs::read_to_string(&path).map_err(|error| {
+                    format!(
+                        "failed to read `--partition-file {}`: {error}",
+                        path.display()
+                    )
+                })?;
+                for (index, line) in contents.lines().enumerate() {
+                    let line = if index == 0 {
+                        line.strip_prefix('\u{feff}').unwrap_or(line)
+                    } else {
+                        line
+                    };
+                    if !line.is_empty() {
+                        options.partitions.push(PathBuf::from(line));
+                    }
+                }
+            }
             "--include" => options.includes.push(args.path(&option)?),
             "--lib" => options.libs.push(args.path(&option)?),
             "--arch" => options.archs.push(args.value(&option)?),
@@ -553,6 +572,9 @@ pub fn help_text() -> &'static str {
     [--obj <dir>]
 
   --partition   Partition translation unit to scrape. Repeatable.
+  --partition-file
+                UTF-8 file containing one partition translation-unit path per line.
+                Repeatable and may be combined with --partition.
   --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
@@ -576,7 +598,7 @@ pub fn help_text() -> &'static str {
   --obj         Intermediate directory for the generated RDL and per-architecture
                 WinMDs. Defaults to the directory of --output.
 
-Declarations are partitioned by defining header. There are no RSP or JSON inputs."
+Declarations are partitioned by defining header. There are no JSON inputs."
 }
 
 #[cfg(test)]
@@ -620,6 +642,40 @@ mod tests {
     fn partitions_are_required() {
         let error = parse_args(&["--include", "inc", "--output", "obj/out.winmd"]).unwrap_err();
         assert!(error.contains("--partition"), "{error}");
+    }
+
+    #[test]
+    fn partitions_can_be_read_from_a_file() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-partitions-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(&root).unwrap();
+        let list = root.join("partitions.rsp");
+        std::fs::write(
+            &list,
+            "\u{feff}Partitions/Foundation/main.cpp\r\nPartitions/Kernel/main.cpp\r\n",
+        )
+        .unwrap();
+
+        let options = parse_args(&[
+            "--partition-file",
+            list.to_str().unwrap(),
+            "--include",
+            "inc",
+            "--output",
+            "obj/out.winmd",
+        ])
+        .unwrap();
+        assert_eq!(
+            options.partitions,
+            vec![
+                PathBuf::from("Partitions/Foundation/main.cpp"),
+                PathBuf::from("Partitions/Kernel/main.cpp")
+            ]
+        );
+
+        std::fs::remove_dir_all(root).ok();
     }
 
     #[test]

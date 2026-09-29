@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h b/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h
+index 1b1db0b47b..b6ca8257c1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/swdevicedef.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation
+@@ -29,14 +30,14 @@ enum _SW_DEVICE_CAPABILITIES
+     SWDeviceCapabilitiesDriverRequired = 0x00000008
+ } SW_DEVICE_CAPABILITIES, *PSW_DEVICE_CAPABILITIES;
+ 
+-typedef struct _SW_DEVICE_CREATE_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SW_DEVICE_CREATE_INFO
+ {
+     ULONG cbSize;
+     __in PCWSTR pszInstanceId;
+-    __in_opt PCZZWSTR pszzHardwareIds;
+-    __in_opt PCZZWSTR pszzCompatibleIds;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") __in_opt PCZZWSTR pszzHardwareIds;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") __in_opt PCZZWSTR pszzCompatibleIds;
+     __in_opt const GUID *pContainerId;
+-    ULONG CapabilityFlags;
++     ULONG CapabilityFlags;
+     __in_opt PCWSTR pszDeviceDescription;
+     __in_opt PCWSTR pszDeviceLocation;
+     __in_opt const SECURITY_DESCRIPTOR *pSecurityDescriptor;

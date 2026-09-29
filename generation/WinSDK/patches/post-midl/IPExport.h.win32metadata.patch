@@ -1,0 +1,122 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h b/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h
+index d3e08716f1..7c1c6c21b8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IPExport.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region App Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -50,7 +51,7 @@ typedef struct in6_addr IPv6Addr;
+ // option should be formatted as specified in RFC 791.
+ //
+ 
+-typedef struct ip_option_information {
++typedef struct   ip_option_information {
+     UCHAR   Ttl;                // Time To Live
+     UCHAR   Tos;                // Type Of Service
+     UCHAR   Flags;              // IP header flags
+@@ -61,7 +62,7 @@ typedef struct ip_option_information {
+ 
+ #if defined(_WIN64)
+ 
+-typedef struct ip_option_information32 {
++typedef struct   ip_option_information32 {
+     UCHAR   Ttl;
+     UCHAR   Tos;
+     UCHAR   Flags;
+@@ -76,7 +77,7 @@ typedef struct ip_option_information32 {
+ // to an echo request.
+ //
+ 
+-typedef struct icmp_echo_reply {
++typedef struct   icmp_echo_reply {
+     IPAddr  Address;            // Replying address
+     ULONG   Status;             // Reply IP_STATUS
+     ULONG   RoundTripTime;      // RTT in milliseconds
+@@ -89,7 +90,7 @@ typedef struct icmp_echo_reply {
+ 
+ #if defined(_WIN64)
+ 
+-typedef struct icmp_echo_reply32 {
++typedef struct   icmp_echo_reply32 {
+     IPAddr  Address;
+     ULONG   Status;
+     ULONG   RoundTripTime;
+@@ -103,7 +104,7 @@ typedef struct icmp_echo_reply32 {
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ #include <pshpack1.h>
+-typedef struct _IPV6_ADDRESS_EX {
++typedef struct   _IPV6_ADDRESS_EX {
+     USHORT sin6_port;
+     ULONG  sin6_flowinfo;
+     USHORT sin6_addr[8];
+@@ -111,7 +112,7 @@ typedef struct _IPV6_ADDRESS_EX {
+ } IPV6_ADDRESS_EX, *PIPV6_ADDRESS_EX;
+ #include <poppack.h>
+ 
+-typedef struct icmpv6_echo_reply_lh {
++typedef struct   icmpv6_echo_reply_lh {
+     IPV6_ADDRESS_EX Address;    // Replying address.
+     ULONG Status;               // Reply IP_STATUS.
+     unsigned int RoundTripTime; // RTT in milliseconds.
+@@ -123,39 +124,39 @@ typedef ICMPV6_ECHO_REPLY_LH *PICMPV6_ECHO_REPLY;
+ 
+ #endif
+ 
+-typedef struct arp_send_reply {
++typedef struct   arp_send_reply {
+     IPAddr  DestAddress;
+     IPAddr  SrcAddress;
+ } ARP_SEND_REPLY, *PARP_SEND_REPLY;
+ 
+-typedef struct tcp_reserve_port_range {
++typedef struct   tcp_reserve_port_range {
+     USHORT  UpperRange;
+     USHORT  LowerRange;
+ } TCP_RESERVE_PORT_RANGE, *PTCP_RESERVE_PORT_RANGE;
+ 
+ #define MAX_ADAPTER_NAME 128
+ 
+-typedef struct _IP_ADAPTER_INDEX_MAP {
++typedef struct   _IP_ADAPTER_INDEX_MAP {
+     ULONG   Index;
+     WCHAR   Name[MAX_ADAPTER_NAME];
+ } IP_ADAPTER_INDEX_MAP, *PIP_ADAPTER_INDEX_MAP;
+ 
+-typedef struct _IP_INTERFACE_INFO {
++typedef struct   _IP_INTERFACE_INFO {
+     LONG    NumAdapters;
+     IP_ADAPTER_INDEX_MAP Adapter[1];
+ } IP_INTERFACE_INFO,*PIP_INTERFACE_INFO;
+ 
+-typedef struct _IP_UNIDIRECTIONAL_ADAPTER_ADDRESS {
++typedef struct   _IP_UNIDIRECTIONAL_ADAPTER_ADDRESS {
+     ULONG   NumAdapters;
+     IPAddr  Address[1];
+ } IP_UNIDIRECTIONAL_ADAPTER_ADDRESS, *PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS;
+ 
+-typedef struct _IP_ADAPTER_ORDER_MAP {
++typedef struct   _IP_ADAPTER_ORDER_MAP {
+     ULONG   NumAdapters;
+     ULONG   AdapterOrder[1];
+ } IP_ADAPTER_ORDER_MAP, *PIP_ADAPTER_ORDER_MAP;
+ 
+-typedef struct _IP_MCAST_COUNTER_INFO {
++typedef struct   _IP_MCAST_COUNTER_INFO {
+     ULONG64 InMcastOctets;
+     ULONG64 OutMcastOctets;
+     ULONG64 InMcastPkts;
+@@ -262,7 +263,7 @@ typedef struct _IP_MCAST_COUNTER_INFO {
+ 
+ #define MAX_OPT_SIZE    40         // Maximum length of IP options in bytes
+ 
+-#ifdef CHICAGO
++#if defined(WIN32METADATA) || (defined(CHICAGO))
+ 
+ // Ioctls code exposed by Memphis tcpip stack.
+ // For NT these ioctls are define in ntddip.h  (private\inc)

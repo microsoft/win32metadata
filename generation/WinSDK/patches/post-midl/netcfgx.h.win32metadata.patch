@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/netcfgx.h b/generation/WinSDK/RecompiledIdlHeaders/um/netcfgx.h
+index 0bde13460d..e04e02a769 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/netcfgx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/netcfgx.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1678,7 +1679,7 @@ EXTERN_C const IID IID_INetCfgComponent;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenParamKey( 
+             /* [annotation][out] */ 
+-            _At_(*phkey, _Out_opt_)  HKEY *phkey) = 0;
++            _Win32_RAIIFree_(RegCloseKey, -1, 0) _At_(*phkey, _Out_opt_)  HKEY *phkey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RaisePropertyUi( 
+             /* [annotation][in] */ 

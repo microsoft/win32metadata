@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h
+index 59c1243877..7eb8ea4409 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/socketapi.h
+@@ -24,12 +24,15 @@ extern "C"
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN8
+ 
++_Windows_SupportedOS_Windows8_ 
++
+ HRESULT WINAPI SetSocketMediaStreamingMode(_In_ BOOL value);
+ 
+ #endif // NTDDI_VERSION >= NTDDI_WIN8

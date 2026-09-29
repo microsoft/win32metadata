@@ -1,0 +1,301 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12video.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12video.h
+index d97491776e..0867b920d3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12video.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12video.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -513,7 +514,7 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0946B7C9-EBF6-4047-BB73-8683E27DBB1F")
++    MIDL_INTERFACE("0946B7C9-EBF6-4047-BB73-8683E27DBB1F") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecoderHeap : public ID3D12Pageable
+     {
+     public:
+@@ -656,7 +657,7 @@ EXTERN_C const IID IID_ID3D12VideoDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1F052807-0B46-4ACC-8A89-364F793718A4")
++    MIDL_INTERFACE("1F052807-0B46-4ACC-8A89-364F793718A4") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDevice : public IUnknown
+     {
+     public:
+@@ -818,7 +819,7 @@ EXTERN_C const IID IID_ID3D12VideoDecoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C59B6BDC-7720-4074-A136-17A156037470")
++    MIDL_INTERFACE("C59B6BDC-7720-4074-A136-17A156037470") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecoder : public ID3D12Pageable
+     {
+     public:
+@@ -1215,7 +1216,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("304FDB32-BEDE-410A-8545-943AC6A46138")
++    MIDL_INTERFACE("304FDB32-BEDE-410A-8545-943AC6A46138") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoProcessor : public ID3D12Pageable
+     {
+     public:
+@@ -1557,7 +1558,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B60536E-AD29-4E64-A269-F853837E5E53")
++    MIDL_INTERFACE("3B60536E-AD29-4E64-A269-F853837E5E53") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecodeCommandList : public ID3D12CommandList
+     {
+     public:
+@@ -1942,7 +1943,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AEB2543A-167F-4682-ACC8-D159ED4A6209")
++    MIDL_INTERFACE("AEB2543A-167F-4682-ACC8-D159ED4A6209") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoProcessCommandList : public ID3D12CommandList
+     {
+     public:
+@@ -2362,7 +2363,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D52F011B-B56E-453C-A05A-A7F311C8F472")
++    MIDL_INTERFACE("D52F011B-B56E-453C-A05A-A7F311C8F472") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecodeCommandList1 : public ID3D12VideoDecodeCommandList
+     {
+     public:
+@@ -2701,7 +2702,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("542C5C4D-7596-434F-8C93-4EFA6766F267")
++    MIDL_INTERFACE("542C5C4D-7596-434F-8C93-4EFA6766F267") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoProcessCommandList1 : public ID3D12VideoProcessCommandList
+     {
+     public:
+@@ -3102,7 +3103,7 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("33FDAE0E-098B-428F-87BB-34B695DE08F8")
++    MIDL_INTERFACE("33FDAE0E-098B-428F-87BB-34B695DE08F8") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_19041_ 
+     ID3D12VideoMotionEstimator : public ID3D12Pageable
+     {
+     public:
+@@ -3279,7 +3280,7 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5BE17987-743A-4061-834B-23D22DAEA505")
++    MIDL_INTERFACE("5BE17987-743A-4061-834B-23D22DAEA505") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_19041_ 
+     ID3D12VideoMotionVectorHeap : public ID3D12Pageable
+     {
+     public:
+@@ -3439,7 +3440,7 @@ EXTERN_C const IID IID_ID3D12VideoDevice1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("981611AD-A144-4C83-9890-F30E26D658AB")
++    MIDL_INTERFACE("981611AD-A144-4C83-9890-F30E26D658AB") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDevice1 : public ID3D12VideoDevice
+     {
+     public:
+@@ -3661,7 +3662,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8455293A-0CBD-4831-9B39-FBDBAB724723")
++    MIDL_INTERFACE("8455293A-0CBD-4831-9B39-FBDBAB724723") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_19041_ 
+     ID3D12VideoEncodeCommandList : public ID3D12CommandList
+     {
+     public:
+@@ -4237,7 +4238,7 @@ EXTERN_C const IID IID_ID3D12VideoDecoder1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("79A2E5FB-CCD2-469A-9FDE-195D10951F7E")
++    MIDL_INTERFACE("79A2E5FB-CCD2-469A-9FDE-195D10951F7E") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_19041_ 
+     ID3D12VideoDecoder1 : public ID3D12VideoDecoder
+     {
+     public:
+@@ -4396,7 +4397,7 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DA1D98C5-539F-41B2-BF6B-1198A03B6D26")
++    MIDL_INTERFACE("DA1D98C5-539F-41B2-BF6B-1198A03B6D26") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecoderHeap1 : public ID3D12VideoDecoderHeap
+     {
+     public:
+@@ -4555,7 +4556,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessor1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F3CFE615-553F-425C-86D8-EE8C1B1FB01C")
++    MIDL_INTERFACE("F3CFE615-553F-425C-86D8-EE8C1B1FB01C") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoProcessor1 : public ID3D12VideoProcessor
+     {
+     public:
+@@ -4738,7 +4739,7 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("554E41E8-AE8E-4A8C-B7D2-5B4F274A30E4")
++    MIDL_INTERFACE("554E41E8-AE8E-4A8C-B7D2-5B4F274A30E4") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_19041_ 
+     ID3D12VideoExtensionCommand : public ID3D12Pageable
+     {
+     public:
+@@ -4898,7 +4899,7 @@ EXTERN_C const IID IID_ID3D12VideoDevice2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F019AC49-F838-4A95-9B17-579437C8F513")
++    MIDL_INTERFACE("F019AC49-F838-4A95-9B17-579437C8F513") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDevice2 : public ID3D12VideoDevice1
+     {
+     public:
+@@ -5197,7 +5198,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6e120880-c114-4153-8036-d247051e1729")
++    MIDL_INTERFACE("6e120880-c114-4153-8036-d247051e1729") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecodeCommandList2 : public ID3D12VideoDecodeCommandList1
+     {
+     public:
+@@ -5561,7 +5562,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2aee8c37-9562-42da-8abf-61efeb2e4513")
++    MIDL_INTERFACE("2aee8c37-9562-42da-8abf-61efeb2e4513") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDecodeCommandList3 : public ID3D12VideoDecodeCommandList2
+     {
+     public:
+@@ -5923,7 +5924,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("db525ae4-6ad6-473c-baa7-59b2e37082e4")
++    MIDL_INTERFACE("db525ae4-6ad6-473c-baa7-59b2e37082e4") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoProcessCommandList2 : public ID3D12VideoProcessCommandList1
+     {
+     public:
+@@ -6289,7 +6290,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1a0a4ca4-9f08-40ce-9558-b411fd2666ff")
++    MIDL_INTERFACE("1a0a4ca4-9f08-40ce-9558-b411fd2666ff") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoProcessCommandList3 : public ID3D12VideoProcessCommandList2
+     {
+     public:
+@@ -6653,7 +6654,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("94971eca-2bdb-4769-88cf-3675ea757ebc")
++    MIDL_INTERFACE("94971eca-2bdb-4769-88cf-3675ea757ebc") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncodeCommandList1 : public ID3D12VideoEncodeCommandList
+     {
+     public:
+@@ -7682,9 +7683,9 @@ typedef struct D3D12_VIDEO_ENCODER_PROFILE_DESC
+     UINT DataSize;
+     union 
+         {
+-        D3D12_VIDEO_ENCODER_PROFILE_H264 *pH264Profile;
+-        D3D12_VIDEO_ENCODER_PROFILE_HEVC *pHEVCProfile;
+-        D3D12_VIDEO_ENCODER_AV1_PROFILE *pAV1Profile;
++        _Win32_AssociatedEnum_(D3D12_VIDEO_ENCODER_PROFILE_H264) D3D12_VIDEO_ENCODER_PROFILE_H264 *pH264Profile;
++        _Win32_AssociatedEnum_(D3D12_VIDEO_ENCODER_PROFILE_HEVC) D3D12_VIDEO_ENCODER_PROFILE_HEVC *pHEVCProfile;
++        _Win32_AssociatedEnum_(D3D12_VIDEO_ENCODER_AV1_PROFILE) D3D12_VIDEO_ENCODER_AV1_PROFILE *pAV1Profile;
+         } 	;
+     } 	D3D12_VIDEO_ENCODER_PROFILE_DESC;
+ 
+@@ -7749,7 +7750,7 @@ typedef struct D3D12_VIDEO_ENCODER_LEVEL_SETTING
+     UINT DataSize;
+     union 
+         {
+-        D3D12_VIDEO_ENCODER_LEVELS_H264 *pH264LevelSetting;
++        _Win32_AssociatedEnum_(D3D12_VIDEO_ENCODER_LEVELS_H264) D3D12_VIDEO_ENCODER_LEVELS_H264 *pH264LevelSetting;
+         D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC *pHEVCLevelSetting;
+         D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS *pAV1LevelSetting;
+         } 	;
+@@ -8435,7 +8436,7 @@ EXTERN_C const IID IID_ID3D12VideoEncoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2E0D212D-8DF9-44A6-A770-BB289B182737")
++    MIDL_INTERFACE("2E0D212D-8DF9-44A6-A770-BB289B182737") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncoder : public ID3D12Pageable
+     {
+     public:
+@@ -8640,7 +8641,7 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("22B35D96-876A-44C0-B25E-FB8C9C7F1C4A")
++    MIDL_INTERFACE("22B35D96-876A-44C0-B25E-FB8C9C7F1C4A") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncoderHeap : public ID3D12Pageable
+     {
+     public:
+@@ -8851,7 +8852,7 @@ EXTERN_C const IID IID_ID3D12VideoDevice3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4243ADB4-3A32-4666-973C-0CCC5625DC44")
++    MIDL_INTERFACE("4243ADB4-3A32-4666-973C-0CCC5625DC44") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDevice3 : public ID3D12VideoDevice2
+     {
+     public:
+@@ -9459,7 +9460,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("895491e2-e701-46a9-9a1f-8d3480ed867a")
++    MIDL_INTERFACE("895491e2-e701-46a9-9a1f-8d3480ed867a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncodeCommandList2 : public ID3D12VideoEncodeCommandList1
+     {
+     public:
+@@ -9843,7 +9844,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7f027b22-1515-4e85-aa0d-026486580576")
++    MIDL_INTERFACE("7f027b22-1515-4e85-aa0d-026486580576") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncodeCommandList3 : public ID3D12VideoEncodeCommandList2
+     {
+     public:
+@@ -10248,7 +10249,7 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ea8f1968-4aa0-43a4-9d30-ba86ec84d4f9")
++    MIDL_INTERFACE("ea8f1968-4aa0-43a4-9d30-ba86ec84d4f9") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncoderHeap1 : public ID3D12VideoEncoderHeap
+     {
+     public:
+@@ -10448,7 +10449,7 @@ EXTERN_C const IID IID_ID3D12VideoDevice4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e59ad09e-f1ae-42bb-8983-9f6e5586c4eb")
++    MIDL_INTERFACE("e59ad09e-f1ae-42bb-8983-9f6e5586c4eb") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoDevice4 : public ID3D12VideoDevice3
+     {
+     public:
+@@ -11300,7 +11301,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("69aeb5b7-55f2-4012-8b73-3a88d65a204c")
++    MIDL_INTERFACE("69aeb5b7-55f2-4012-8b73-3a88d65a204c") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12VideoEncodeCommandList4 : public ID3D12VideoEncodeCommandList3
+     {
+     public:

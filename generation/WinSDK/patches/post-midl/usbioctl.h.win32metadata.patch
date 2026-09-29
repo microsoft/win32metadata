@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/usbioctl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/usbioctl.h
+index e06a5c4931..749ddc6ea0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/usbioctl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/usbioctl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -1092,7 +1093,7 @@ typedef struct _USB_ID_STRING {
+     USHORT LanguageId;      // laguage id where apllicable
+     USHORT Pad;
+     ULONG LengthInBytes;    // length of <Buffer> in Bytes includes NULLs etc
+-    PWCHAR Buffer;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR Buffer;
+ 
+ } USB_ID_STRING, *PUSB_ID_STRING;
+ 

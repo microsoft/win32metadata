@@ -1,0 +1,411 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/cfg.h b/generation/WinSDK/RecompiledIdlHeaders/shared/cfg.h
+index a3137de0d2..98d6e09cba 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/cfg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/cfg.h
+@@ -339,5 +339,406 @@ typedef enum _PNP_VETO_TYPE {
+ #endif
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DN_CHANGEABLE_FLAGS")
++#undef DN_CHANGEABLE_FLAGS
++#pragma push_macro("DN_ROOT_ENUMERATED")
++#undef DN_ROOT_ENUMERATED
++#pragma push_macro("DN_DRIVER_LOADED")
++#undef DN_DRIVER_LOADED
++#pragma push_macro("DN_ENUM_LOADED")
++#undef DN_ENUM_LOADED
++#pragma push_macro("DN_STARTED")
++#undef DN_STARTED
++#pragma push_macro("DN_MANUAL")
++#undef DN_MANUAL
++#pragma push_macro("DN_NEED_TO_ENUM")
++#undef DN_NEED_TO_ENUM
++#pragma push_macro("DN_NOT_FIRST_TIME")
++#undef DN_NOT_FIRST_TIME
++#pragma push_macro("DN_HARDWARE_ENUM")
++#undef DN_HARDWARE_ENUM
++#pragma push_macro("DN_LIAR")
++#undef DN_LIAR
++#pragma push_macro("DN_HAS_MARK")
++#undef DN_HAS_MARK
++#pragma push_macro("DN_HAS_PROBLEM")
++#undef DN_HAS_PROBLEM
++#pragma push_macro("DN_FILTERED")
++#undef DN_FILTERED
++#pragma push_macro("DN_MOVED")
++#undef DN_MOVED
++#pragma push_macro("DN_DISABLEABLE")
++#undef DN_DISABLEABLE
++#pragma push_macro("DN_REMOVABLE")
++#undef DN_REMOVABLE
++#pragma push_macro("DN_PRIVATE_PROBLEM")
++#undef DN_PRIVATE_PROBLEM
++#pragma push_macro("DN_MF_PARENT")
++#undef DN_MF_PARENT
++#pragma push_macro("DN_MF_CHILD")
++#undef DN_MF_CHILD
++#pragma push_macro("DN_WILL_BE_REMOVED")
++#undef DN_WILL_BE_REMOVED
++#pragma push_macro("DN_NOT_FIRST_TIMEE")
++#undef DN_NOT_FIRST_TIMEE
++#pragma push_macro("DN_STOP_FREE_RES")
++#undef DN_STOP_FREE_RES
++#pragma push_macro("DN_REBAL_CANDIDATE")
++#undef DN_REBAL_CANDIDATE
++#pragma push_macro("DN_BAD_PARTIAL")
++#undef DN_BAD_PARTIAL
++#pragma push_macro("DN_NT_ENUMERATOR")
++#undef DN_NT_ENUMERATOR
++#pragma push_macro("DN_NT_DRIVER")
++#undef DN_NT_DRIVER
++#pragma push_macro("DN_NEEDS_LOCKING")
++#undef DN_NEEDS_LOCKING
++#pragma push_macro("DN_ARM_WAKEUP")
++#undef DN_ARM_WAKEUP
++#pragma push_macro("DN_APM_ENUMERATOR")
++#undef DN_APM_ENUMERATOR
++#pragma push_macro("DN_APM_DRIVER")
++#undef DN_APM_DRIVER
++#pragma push_macro("DN_SILENT_INSTALL")
++#undef DN_SILENT_INSTALL
++#pragma push_macro("DN_NO_SHOW_IN_DM")
++#undef DN_NO_SHOW_IN_DM
++#pragma push_macro("DN_BOOT_LOG_PROB")
++#undef DN_BOOT_LOG_PROB
++#pragma push_macro("DN_NEED_RESTART")
++#undef DN_NEED_RESTART
++#pragma push_macro("DN_DRIVER_BLOCKED")
++#undef DN_DRIVER_BLOCKED
++#pragma push_macro("DN_LEGACY_DRIVER")
++#undef DN_LEGACY_DRIVER
++#pragma push_macro("DN_CHILD_WITH_INVALID_ID")
++#undef DN_CHILD_WITH_INVALID_ID
++#pragma push_macro("DN_DEVICE_DISCONNECTED")
++#undef DN_DEVICE_DISCONNECTED
++#pragma push_macro("DN_QUERY_REMOVE_PENDING")
++#undef DN_QUERY_REMOVE_PENDING
++#pragma push_macro("DN_QUERY_REMOVE_ACTIVE")
++#undef DN_QUERY_REMOVE_ACTIVE
++enum [[clang::flag_enum]] CM_DEVNODE_STATUS_FLAGS : unsigned int
++{
++    DN_CHANGEABLE_FLAGS = 1639670464U,
++    DN_ROOT_ENUMERATED = 1U,
++    DN_DRIVER_LOADED = 2U,
++    DN_ENUM_LOADED = 4U,
++    DN_STARTED = 8U,
++    DN_MANUAL = 16U,
++    DN_NEED_TO_ENUM = 32U,
++    DN_NOT_FIRST_TIME = 64U,
++    DN_HARDWARE_ENUM = 128U,
++    DN_LIAR = 256U,
++    DN_HAS_MARK = 512U,
++    DN_HAS_PROBLEM = 1024U,
++    DN_FILTERED = 2048U,
++    DN_MOVED = 4096U,
++    DN_DISABLEABLE = 8192U,
++    DN_REMOVABLE = 16384U,
++    DN_PRIVATE_PROBLEM = 32768U,
++    DN_MF_PARENT = 65536U,
++    DN_MF_CHILD = 131072U,
++    DN_WILL_BE_REMOVED = 262144U,
++    DN_NOT_FIRST_TIMEE = 524288U,
++    DN_STOP_FREE_RES = 1048576U,
++    DN_REBAL_CANDIDATE = 2097152U,
++    DN_BAD_PARTIAL = 4194304U,
++    DN_NT_ENUMERATOR = 8388608U,
++    DN_NT_DRIVER = 16777216U,
++    DN_NEEDS_LOCKING = 33554432U,
++    DN_ARM_WAKEUP = 67108864U,
++    DN_APM_ENUMERATOR = 134217728U,
++    DN_APM_DRIVER = 268435456U,
++    DN_SILENT_INSTALL = 536870912U,
++    DN_NO_SHOW_IN_DM = 1073741824U,
++    DN_BOOT_LOG_PROB = 2147483648U,
++    DN_NEED_RESTART = 256U,
++    DN_DRIVER_BLOCKED = 64U,
++    DN_LEGACY_DRIVER = 4096U,
++    DN_CHILD_WITH_INVALID_ID = 512U,
++    DN_DEVICE_DISCONNECTED = 33554432U,
++    DN_QUERY_REMOVE_PENDING = 65536U,
++    DN_QUERY_REMOVE_ACTIVE = 131072U,
++};
++#pragma pop_macro("DN_QUERY_REMOVE_ACTIVE")
++#pragma pop_macro("DN_QUERY_REMOVE_PENDING")
++#pragma pop_macro("DN_DEVICE_DISCONNECTED")
++#pragma pop_macro("DN_CHILD_WITH_INVALID_ID")
++#pragma pop_macro("DN_LEGACY_DRIVER")
++#pragma pop_macro("DN_DRIVER_BLOCKED")
++#pragma pop_macro("DN_NEED_RESTART")
++#pragma pop_macro("DN_BOOT_LOG_PROB")
++#pragma pop_macro("DN_NO_SHOW_IN_DM")
++#pragma pop_macro("DN_SILENT_INSTALL")
++#pragma pop_macro("DN_APM_DRIVER")
++#pragma pop_macro("DN_APM_ENUMERATOR")
++#pragma pop_macro("DN_ARM_WAKEUP")
++#pragma pop_macro("DN_NEEDS_LOCKING")
++#pragma pop_macro("DN_NT_DRIVER")
++#pragma pop_macro("DN_NT_ENUMERATOR")
++#pragma pop_macro("DN_BAD_PARTIAL")
++#pragma pop_macro("DN_REBAL_CANDIDATE")
++#pragma pop_macro("DN_STOP_FREE_RES")
++#pragma pop_macro("DN_NOT_FIRST_TIMEE")
++#pragma pop_macro("DN_WILL_BE_REMOVED")
++#pragma pop_macro("DN_MF_CHILD")
++#pragma pop_macro("DN_MF_PARENT")
++#pragma pop_macro("DN_PRIVATE_PROBLEM")
++#pragma pop_macro("DN_REMOVABLE")
++#pragma pop_macro("DN_DISABLEABLE")
++#pragma pop_macro("DN_MOVED")
++#pragma pop_macro("DN_FILTERED")
++#pragma pop_macro("DN_HAS_PROBLEM")
++#pragma pop_macro("DN_HAS_MARK")
++#pragma pop_macro("DN_LIAR")
++#pragma pop_macro("DN_HARDWARE_ENUM")
++#pragma pop_macro("DN_NOT_FIRST_TIME")
++#pragma pop_macro("DN_NEED_TO_ENUM")
++#pragma pop_macro("DN_MANUAL")
++#pragma pop_macro("DN_STARTED")
++#pragma pop_macro("DN_ENUM_LOADED")
++#pragma pop_macro("DN_DRIVER_LOADED")
++#pragma pop_macro("DN_ROOT_ENUMERATED")
++#pragma pop_macro("DN_CHANGEABLE_FLAGS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CM_PROB_NOT_CONFIGURED")
++#undef CM_PROB_NOT_CONFIGURED
++#pragma push_macro("CM_PROB_DEVLOADER_FAILED")
++#undef CM_PROB_DEVLOADER_FAILED
++#pragma push_macro("CM_PROB_OUT_OF_MEMORY")
++#undef CM_PROB_OUT_OF_MEMORY
++#pragma push_macro("CM_PROB_ENTRY_IS_WRONG_TYPE")
++#undef CM_PROB_ENTRY_IS_WRONG_TYPE
++#pragma push_macro("CM_PROB_LACKED_ARBITRATOR")
++#undef CM_PROB_LACKED_ARBITRATOR
++#pragma push_macro("CM_PROB_BOOT_CONFIG_CONFLICT")
++#undef CM_PROB_BOOT_CONFIG_CONFLICT
++#pragma push_macro("CM_PROB_FAILED_FILTER")
++#undef CM_PROB_FAILED_FILTER
++#pragma push_macro("CM_PROB_DEVLOADER_NOT_FOUND")
++#undef CM_PROB_DEVLOADER_NOT_FOUND
++#pragma push_macro("CM_PROB_INVALID_DATA")
++#undef CM_PROB_INVALID_DATA
++#pragma push_macro("CM_PROB_FAILED_START")
++#undef CM_PROB_FAILED_START
++#pragma push_macro("CM_PROB_LIAR")
++#undef CM_PROB_LIAR
++#pragma push_macro("CM_PROB_NORMAL_CONFLICT")
++#undef CM_PROB_NORMAL_CONFLICT
++#pragma push_macro("CM_PROB_NOT_VERIFIED")
++#undef CM_PROB_NOT_VERIFIED
++#pragma push_macro("CM_PROB_NEED_RESTART")
++#undef CM_PROB_NEED_RESTART
++#pragma push_macro("CM_PROB_REENUMERATION")
++#undef CM_PROB_REENUMERATION
++#pragma push_macro("CM_PROB_PARTIAL_LOG_CONF")
++#undef CM_PROB_PARTIAL_LOG_CONF
++#pragma push_macro("CM_PROB_UNKNOWN_RESOURCE")
++#undef CM_PROB_UNKNOWN_RESOURCE
++#pragma push_macro("CM_PROB_REINSTALL")
++#undef CM_PROB_REINSTALL
++#pragma push_macro("CM_PROB_REGISTRY")
++#undef CM_PROB_REGISTRY
++#pragma push_macro("CM_PROB_VXDLDR")
++#undef CM_PROB_VXDLDR
++#pragma push_macro("CM_PROB_WILL_BE_REMOVED")
++#undef CM_PROB_WILL_BE_REMOVED
++#pragma push_macro("CM_PROB_DISABLED")
++#undef CM_PROB_DISABLED
++#pragma push_macro("CM_PROB_DEVLOADER_NOT_READY")
++#undef CM_PROB_DEVLOADER_NOT_READY
++#pragma push_macro("CM_PROB_DEVICE_NOT_THERE")
++#undef CM_PROB_DEVICE_NOT_THERE
++#pragma push_macro("CM_PROB_MOVED")
++#undef CM_PROB_MOVED
++#pragma push_macro("CM_PROB_TOO_EARLY")
++#undef CM_PROB_TOO_EARLY
++#pragma push_macro("CM_PROB_NO_VALID_LOG_CONF")
++#undef CM_PROB_NO_VALID_LOG_CONF
++#pragma push_macro("CM_PROB_FAILED_INSTALL")
++#undef CM_PROB_FAILED_INSTALL
++#pragma push_macro("CM_PROB_HARDWARE_DISABLED")
++#undef CM_PROB_HARDWARE_DISABLED
++#pragma push_macro("CM_PROB_CANT_SHARE_IRQ")
++#undef CM_PROB_CANT_SHARE_IRQ
++#pragma push_macro("CM_PROB_FAILED_ADD")
++#undef CM_PROB_FAILED_ADD
++#pragma push_macro("CM_PROB_DISABLED_SERVICE")
++#undef CM_PROB_DISABLED_SERVICE
++#pragma push_macro("CM_PROB_TRANSLATION_FAILED")
++#undef CM_PROB_TRANSLATION_FAILED
++#pragma push_macro("CM_PROB_NO_SOFTCONFIG")
++#undef CM_PROB_NO_SOFTCONFIG
++#pragma push_macro("CM_PROB_BIOS_TABLE")
++#undef CM_PROB_BIOS_TABLE
++#pragma push_macro("CM_PROB_IRQ_TRANSLATION_FAILED")
++#undef CM_PROB_IRQ_TRANSLATION_FAILED
++#pragma push_macro("CM_PROB_FAILED_DRIVER_ENTRY")
++#undef CM_PROB_FAILED_DRIVER_ENTRY
++#pragma push_macro("CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD")
++#undef CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD
++#pragma push_macro("CM_PROB_DRIVER_FAILED_LOAD")
++#undef CM_PROB_DRIVER_FAILED_LOAD
++#pragma push_macro("CM_PROB_DRIVER_SERVICE_KEY_INVALID")
++#undef CM_PROB_DRIVER_SERVICE_KEY_INVALID
++#pragma push_macro("CM_PROB_LEGACY_SERVICE_NO_DEVICES")
++#undef CM_PROB_LEGACY_SERVICE_NO_DEVICES
++#pragma push_macro("CM_PROB_DUPLICATE_DEVICE")
++#undef CM_PROB_DUPLICATE_DEVICE
++#pragma push_macro("CM_PROB_FAILED_POST_START")
++#undef CM_PROB_FAILED_POST_START
++#pragma push_macro("CM_PROB_HALTED")
++#undef CM_PROB_HALTED
++#pragma push_macro("CM_PROB_PHANTOM")
++#undef CM_PROB_PHANTOM
++#pragma push_macro("CM_PROB_SYSTEM_SHUTDOWN")
++#undef CM_PROB_SYSTEM_SHUTDOWN
++#pragma push_macro("CM_PROB_HELD_FOR_EJECT")
++#undef CM_PROB_HELD_FOR_EJECT
++#pragma push_macro("CM_PROB_DRIVER_BLOCKED")
++#undef CM_PROB_DRIVER_BLOCKED
++#pragma push_macro("CM_PROB_REGISTRY_TOO_LARGE")
++#undef CM_PROB_REGISTRY_TOO_LARGE
++#pragma push_macro("CM_PROB_SETPROPERTIES_FAILED")
++#undef CM_PROB_SETPROPERTIES_FAILED
++#pragma push_macro("CM_PROB_WAITING_ON_DEPENDENCY")
++#undef CM_PROB_WAITING_ON_DEPENDENCY
++#pragma push_macro("CM_PROB_UNSIGNED_DRIVER")
++#undef CM_PROB_UNSIGNED_DRIVER
++#pragma push_macro("CM_PROB_USED_BY_DEBUGGER")
++#undef CM_PROB_USED_BY_DEBUGGER
++#pragma push_macro("CM_PROB_DEVICE_RESET")
++#undef CM_PROB_DEVICE_RESET
++#pragma push_macro("CM_PROB_CONSOLE_LOCKED")
++#undef CM_PROB_CONSOLE_LOCKED
++#pragma push_macro("CM_PROB_NEED_CLASS_CONFIG")
++#undef CM_PROB_NEED_CLASS_CONFIG
++#pragma push_macro("CM_PROB_GUEST_ASSIGNMENT_FAILED")
++#undef CM_PROB_GUEST_ASSIGNMENT_FAILED
++enum CM_PROB : unsigned int
++{
++    CM_PROB_NOT_CONFIGURED = 1U,
++    CM_PROB_DEVLOADER_FAILED = 2U,
++    CM_PROB_OUT_OF_MEMORY = 3U,
++    CM_PROB_ENTRY_IS_WRONG_TYPE = 4U,
++    CM_PROB_LACKED_ARBITRATOR = 5U,
++    CM_PROB_BOOT_CONFIG_CONFLICT = 6U,
++    CM_PROB_FAILED_FILTER = 7U,
++    CM_PROB_DEVLOADER_NOT_FOUND = 8U,
++    CM_PROB_INVALID_DATA = 9U,
++    CM_PROB_FAILED_START = 10U,
++    CM_PROB_LIAR = 11U,
++    CM_PROB_NORMAL_CONFLICT = 12U,
++    CM_PROB_NOT_VERIFIED = 13U,
++    CM_PROB_NEED_RESTART = 14U,
++    CM_PROB_REENUMERATION = 15U,
++    CM_PROB_PARTIAL_LOG_CONF = 16U,
++    CM_PROB_UNKNOWN_RESOURCE = 17U,
++    CM_PROB_REINSTALL = 18U,
++    CM_PROB_REGISTRY = 19U,
++    CM_PROB_VXDLDR = 20U,
++    CM_PROB_WILL_BE_REMOVED = 21U,
++    CM_PROB_DISABLED = 22U,
++    CM_PROB_DEVLOADER_NOT_READY = 23U,
++    CM_PROB_DEVICE_NOT_THERE = 24U,
++    CM_PROB_MOVED = 25U,
++    CM_PROB_TOO_EARLY = 26U,
++    CM_PROB_NO_VALID_LOG_CONF = 27U,
++    CM_PROB_FAILED_INSTALL = 28U,
++    CM_PROB_HARDWARE_DISABLED = 29U,
++    CM_PROB_CANT_SHARE_IRQ = 30U,
++    CM_PROB_FAILED_ADD = 31U,
++    CM_PROB_DISABLED_SERVICE = 32U,
++    CM_PROB_TRANSLATION_FAILED = 33U,
++    CM_PROB_NO_SOFTCONFIG = 34U,
++    CM_PROB_BIOS_TABLE = 35U,
++    CM_PROB_IRQ_TRANSLATION_FAILED = 36U,
++    CM_PROB_FAILED_DRIVER_ENTRY = 37U,
++    CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD = 38U,
++    CM_PROB_DRIVER_FAILED_LOAD = 39U,
++    CM_PROB_DRIVER_SERVICE_KEY_INVALID = 40U,
++    CM_PROB_LEGACY_SERVICE_NO_DEVICES = 41U,
++    CM_PROB_DUPLICATE_DEVICE = 42U,
++    CM_PROB_FAILED_POST_START = 43U,
++    CM_PROB_HALTED = 44U,
++    CM_PROB_PHANTOM = 45U,
++    CM_PROB_SYSTEM_SHUTDOWN = 46U,
++    CM_PROB_HELD_FOR_EJECT = 47U,
++    CM_PROB_DRIVER_BLOCKED = 48U,
++    CM_PROB_REGISTRY_TOO_LARGE = 49U,
++    CM_PROB_SETPROPERTIES_FAILED = 50U,
++    CM_PROB_WAITING_ON_DEPENDENCY = 51U,
++    CM_PROB_UNSIGNED_DRIVER = 52U,
++    CM_PROB_USED_BY_DEBUGGER = 53U,
++    CM_PROB_DEVICE_RESET = 54U,
++    CM_PROB_CONSOLE_LOCKED = 55U,
++    CM_PROB_NEED_CLASS_CONFIG = 56U,
++    CM_PROB_GUEST_ASSIGNMENT_FAILED = 57U,
++};
++#pragma pop_macro("CM_PROB_GUEST_ASSIGNMENT_FAILED")
++#pragma pop_macro("CM_PROB_NEED_CLASS_CONFIG")
++#pragma pop_macro("CM_PROB_CONSOLE_LOCKED")
++#pragma pop_macro("CM_PROB_DEVICE_RESET")
++#pragma pop_macro("CM_PROB_USED_BY_DEBUGGER")
++#pragma pop_macro("CM_PROB_UNSIGNED_DRIVER")
++#pragma pop_macro("CM_PROB_WAITING_ON_DEPENDENCY")
++#pragma pop_macro("CM_PROB_SETPROPERTIES_FAILED")
++#pragma pop_macro("CM_PROB_REGISTRY_TOO_LARGE")
++#pragma pop_macro("CM_PROB_DRIVER_BLOCKED")
++#pragma pop_macro("CM_PROB_HELD_FOR_EJECT")
++#pragma pop_macro("CM_PROB_SYSTEM_SHUTDOWN")
++#pragma pop_macro("CM_PROB_PHANTOM")
++#pragma pop_macro("CM_PROB_HALTED")
++#pragma pop_macro("CM_PROB_FAILED_POST_START")
++#pragma pop_macro("CM_PROB_DUPLICATE_DEVICE")
++#pragma pop_macro("CM_PROB_LEGACY_SERVICE_NO_DEVICES")
++#pragma pop_macro("CM_PROB_DRIVER_SERVICE_KEY_INVALID")
++#pragma pop_macro("CM_PROB_DRIVER_FAILED_LOAD")
++#pragma pop_macro("CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD")
++#pragma pop_macro("CM_PROB_FAILED_DRIVER_ENTRY")
++#pragma pop_macro("CM_PROB_IRQ_TRANSLATION_FAILED")
++#pragma pop_macro("CM_PROB_BIOS_TABLE")
++#pragma pop_macro("CM_PROB_NO_SOFTCONFIG")
++#pragma pop_macro("CM_PROB_TRANSLATION_FAILED")
++#pragma pop_macro("CM_PROB_DISABLED_SERVICE")
++#pragma pop_macro("CM_PROB_FAILED_ADD")
++#pragma pop_macro("CM_PROB_CANT_SHARE_IRQ")
++#pragma pop_macro("CM_PROB_HARDWARE_DISABLED")
++#pragma pop_macro("CM_PROB_FAILED_INSTALL")
++#pragma pop_macro("CM_PROB_NO_VALID_LOG_CONF")
++#pragma pop_macro("CM_PROB_TOO_EARLY")
++#pragma pop_macro("CM_PROB_MOVED")
++#pragma pop_macro("CM_PROB_DEVICE_NOT_THERE")
++#pragma pop_macro("CM_PROB_DEVLOADER_NOT_READY")
++#pragma pop_macro("CM_PROB_DISABLED")
++#pragma pop_macro("CM_PROB_WILL_BE_REMOVED")
++#pragma pop_macro("CM_PROB_VXDLDR")
++#pragma pop_macro("CM_PROB_REGISTRY")
++#pragma pop_macro("CM_PROB_REINSTALL")
++#pragma pop_macro("CM_PROB_UNKNOWN_RESOURCE")
++#pragma pop_macro("CM_PROB_PARTIAL_LOG_CONF")
++#pragma pop_macro("CM_PROB_REENUMERATION")
++#pragma pop_macro("CM_PROB_NEED_RESTART")
++#pragma pop_macro("CM_PROB_NOT_VERIFIED")
++#pragma pop_macro("CM_PROB_NORMAL_CONFLICT")
++#pragma pop_macro("CM_PROB_LIAR")
++#pragma pop_macro("CM_PROB_FAILED_START")
++#pragma pop_macro("CM_PROB_INVALID_DATA")
++#pragma pop_macro("CM_PROB_DEVLOADER_NOT_FOUND")
++#pragma pop_macro("CM_PROB_FAILED_FILTER")
++#pragma pop_macro("CM_PROB_BOOT_CONFIG_CONFLICT")
++#pragma pop_macro("CM_PROB_LACKED_ARBITRATOR")
++#pragma pop_macro("CM_PROB_ENTRY_IS_WRONG_TYPE")
++#pragma pop_macro("CM_PROB_OUT_OF_MEMORY")
++#pragma pop_macro("CM_PROB_DEVLOADER_FAILED")
++#pragma pop_macro("CM_PROB_NOT_CONFIGURED")
++#endif
++
+ #endif // _CFG_INCLUDED_
+ 

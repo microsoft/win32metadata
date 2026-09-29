@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h b/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
+index e7e196b86d..da0990257d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WiaDevD.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /****************************************************************************
+ *
+ *  (C) COPYRIGHT 1998-2000, MICROSOFT CORP.
+@@ -35,7 +36,7 @@ extern "C" {
+ 
+ #undef  INTERFACE
+ #define INTERFACE IWiaUIExtension2
+-typedef struct tagDEVICEDIALOGDATA2
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagDEVICEDIALOGDATA2
+ {
+     DWORD           cbSize;           // Size of the structure in bytes
+     IWiaItem2       *pIWiaItemRoot;   // Valid root item
+@@ -57,7 +58,7 @@ DECLARE_INTERFACE_IID_(IWiaUIExtension2, IUnknown, "305600d7-5088-46d7-9a15-b77b
+ 
+     // *** IWiaUIExtension2 methods ***
+     STDMETHOD(DeviceDialog)(_In_ THIS_ PDEVICEDIALOGDATA2 pDeviceDialogData ) PURE;
+-    STDMETHOD(GetDeviceIcon)(_In_ THIS_ BSTR bstrDeviceId, _Out_ HICON *phIcon, ULONG nSize) PURE;
++    STDMETHOD(GetDeviceIcon)(_In_ THIS_ BSTR bstrDeviceId, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phIcon, ULONG nSize) PURE;
+ };
+ 
+ // {305600d7-5088-46d7-9a15-b77b09cdba7a}
+@@ -65,7 +66,7 @@ DEFINE_GUID(IID_IWiaUIExtension2, 0x305600D7, 0x5088, 0x46D7, 0x9A, 0x15, 0xB7,
+ 
+ #endif //#if (_WIN32_WINNT >= 0x0600)
+ 
+-typedef struct tagDEVICEDIALOGDATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagDEVICEDIALOGDATA
+ {
+     DWORD            cbSize;           // Size of the structure in bytes
+     HWND             hwndParent;       // Parent window
+@@ -92,14 +93,14 @@ DECLARE_INTERFACE_IID_(IWiaUIExtension, IUnknown, "da319113-50ee-4c80-b460-57d00
+ 
+     // *** IWiaUIExtension methods ***
+     STDMETHOD(DeviceDialog)(_In_ THIS_ PDEVICEDIALOGDATA pDeviceDialogData) PURE;
+-    STDMETHOD(GetDeviceIcon)(_In_ THIS_ BSTR bstrDeviceId, _Out_ HICON *phIcon, ULONG nSize) PURE;
+-    STDMETHOD(GetDeviceBitmapLogo)(_In_ THIS_ BSTR bstrDeviceId, _Out_ HBITMAP *phBitmap, ULONG nMaxWidth, ULONG nMaxHeight) PURE;
++    STDMETHOD(GetDeviceIcon)(_In_ THIS_ BSTR bstrDeviceId, _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_ HICON *phIcon, ULONG nSize) PURE;
++    STDMETHOD(GetDeviceBitmapLogo)(_In_ THIS_ BSTR bstrDeviceId, _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_ HBITMAP *phBitmap, ULONG nMaxWidth, ULONG nMaxHeight) PURE;
+ };
+ 
+ // {da319113-50ee-4c80-b460-57d005d44a2c}
+ DEFINE_GUID(IID_IWiaUIExtension, 0xDA319113, 0x50EE, 0x4C80, 0xB4, 0x60, 0x57, 0xD0, 0x05, 0xD4, 0x4A, 0x2C);
+ 
+-typedef HRESULT (WINAPI *DeviceDialogFunction)(PDEVICEDIALOGDATA);
++typedef HRESULT (WINAPI *DeviceDialogFunction)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDEVICEDIALOGDATA);
+ 
+ #define SHELLEX_WIAUIEXTENSION_NAME TEXT("WiaDialogExtensionHandlers")
+ 

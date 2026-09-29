@@ -1,0 +1,366 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
+index 69cba58388..1430b9e6b8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/sslprovider.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 2004  Microsoft Corporation
+@@ -340,7 +341,7 @@ SECURITY_STATUS
+ WINAPI
+ SslCreateEphemeralKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phEphemeralKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phEphemeralKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    DWORD   dwKeyType,
+@@ -352,7 +353,7 @@ SslCreateEphemeralKey(
+ typedef SECURITY_STATUS
+ (WINAPI * SslCreateEphemeralKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phEphemeralKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phEphemeralKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    DWORD   dwKeyType,
+@@ -584,11 +585,11 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS
+ WINAPI
+ SslFreeBuffer(
+-    PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID   pvInput);
+ 
+ typedef SECURITY_STATUS
+ (WINAPI * SslFreeBufferFn)(
+-    PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID   pvInput);
+ 
+ 
+ //+-------------------------------------------------------------------------
+@@ -628,7 +629,7 @@ SslGenerateMasterKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_opt_ NCRYPT_KEY_HANDLE hPrivateKey,
+     _In_    NCRYPT_KEY_HANDLE hPublicKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    PNCryptBufferDesc pParameterList,
+@@ -642,7 +643,7 @@ typedef SECURITY_STATUS
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_opt_ NCRYPT_KEY_HANDLE hPrivateKey,
+     _In_    NCRYPT_KEY_HANDLE hPublicKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    PNCryptBufferDesc pParameterList,
+@@ -663,8 +664,8 @@ WINAPI
+ SslGenerateSessionKeys(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hMasterKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phReadKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phReadKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
+     _In_    PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -672,8 +673,8 @@ typedef SECURITY_STATUS
+ (WINAPI * SslGenerateSessionKeysFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hMasterKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phReadKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phReadKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
+     _In_    PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -764,7 +765,7 @@ SECURITY_STATUS
+ WINAPI
+ SslImportKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszBlobType,
+     _In_reads_bytes_(cbKeyBlob) PBYTE pbKeyBlob,
+     _In_    DWORD   cbKeyBlob,
+@@ -773,7 +774,7 @@ SslImportKey(
+ typedef SECURITY_STATUS
+ (WINAPI * SslImportKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszBlobType,
+     _In_reads_bytes_(cbKeyBlob) PBYTE pbKeyBlob,
+     _In_    DWORD   cbKeyBlob,
+@@ -798,7 +799,7 @@ WINAPI
+ SslImportMasterKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hPrivateKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    NCryptBufferDesc *pParameterList,
+@@ -810,7 +811,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslImportMasterKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hPrivateKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    NCryptBufferDesc *pParameterList,
+@@ -853,14 +854,14 @@ SECURITY_STATUS
+ WINAPI
+ SslOpenPrivateKey(
+     _In_   NCRYPT_PROV_HANDLE hSslProvider,
+-    _Out_  NCRYPT_KEY_HANDLE *phPrivateKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_  NCRYPT_KEY_HANDLE *phPrivateKey,
+     _In_   PCCERT_CONTEXT pCertContext,
+     _In_   DWORD dwFlags);
+ 
+ typedef SECURITY_STATUS
+ (WINAPI * SslOpenPrivateKeyFn)(
+     _In_   NCRYPT_PROV_HANDLE hSslProvider,
+-    _Out_  NCRYPT_KEY_HANDLE *phPrivateKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_  NCRYPT_KEY_HANDLE *phPrivateKey,
+     _In_   PCCERT_CONTEXT pCertContext,
+     _In_   DWORD dwFlags);
+ 
+@@ -872,13 +873,13 @@ typedef SECURITY_STATUS
+ SECURITY_STATUS
+ WINAPI
+ SslOpenProvider(
+-    _Out_   NCRYPT_PROV_HANDLE *phSslProvider,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_PROV_HANDLE *phSslProvider,
+     _In_    LPCWSTR pszProviderName,
+     _In_    DWORD   dwFlags);
+ 
+ typedef SECURITY_STATUS
+ (WINAPI * SslOpenProviderFn)(
+-    _Out_   NCRYPT_PROV_HANDLE *phSslProvider,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_PROV_HANDLE *phSslProvider,
+     _In_    LPCWSTR pszProviderName,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1082,7 +1083,7 @@ WINAPI
+ SslGeneratePreMasterKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hPublicKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phPreMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phPreMasterKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    PNCryptBufferDesc pParameterList,
+@@ -1095,7 +1096,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslGeneratePreMasterKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hPublicKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phPreMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phPreMasterKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_    PNCryptBufferDesc pParameterList,
+@@ -1134,7 +1135,7 @@ WINAPI
+ SslExportKeyingMaterial(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hMasterKey,
+-    _In_    PCHAR   sLabel,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_    PCHAR   sLabel,
+     _In_reads_bytes_opt_(cbRandoms) PBYTE pbRandoms,
+     _In_    DWORD   cbRandoms,
+     _In_reads_bytes_opt_(cbContextValue) PBYTE pbContextValue,
+@@ -1147,7 +1148,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslExportKeyingMaterialFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hMasterKey,
+-    _In_    PCHAR   sLabel,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_    PCHAR   sLabel,
+     _In_reads_bytes_opt_(cbRandoms) PBYTE pbRandoms,
+     _In_    DWORD   cbRandoms,
+     _In_reads_bytes_opt_(cbContextValue) PBYTE pbContextValue,
+@@ -1173,7 +1174,7 @@ WINAPI
+ SslExtractEarlyKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_opt_ NCRYPT_KEY_HANDLE hPreSharedKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phEarlyKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phEarlyKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+@@ -1183,7 +1184,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslExtractEarlyKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_opt_ NCRYPT_KEY_HANDLE hPreSharedKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phEarlyKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phEarlyKey,
+     _In_    DWORD   dwProtocol,
+     _In_    DWORD   dwCipherSuite,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+@@ -1209,7 +1210,7 @@ SslExtractHandshakeKey(
+     _In_    NCRYPT_KEY_HANDLE hPrivateKey,
+     _In_    NCRYPT_KEY_HANDLE hPublicKey,
+     _In_    NCRYPT_KEY_HANDLE hEarlyKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phHandshakeKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phHandshakeKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1219,7 +1220,7 @@ typedef SECURITY_STATUS
+     _In_    NCRYPT_KEY_HANDLE hPrivateKey,
+     _In_    NCRYPT_KEY_HANDLE hPublicKey,
+     _In_    NCRYPT_KEY_HANDLE hEarlyKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phHandshakeKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phHandshakeKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_RS5)
+@@ -1239,7 +1240,7 @@ WINAPI
+ SslExtractMasterKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hHandshakeKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1247,7 +1248,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslExtractMasterKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hHandshakeKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phMasterKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_RS5)
+@@ -1276,8 +1277,8 @@ SslExpandTrafficKeys(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hBaseKey,
+     _In_    NCRYPT_HASH_HANDLE hHashValue,
+-    _Out_opt_ NCRYPT_KEY_HANDLE *phClientTrafficKey,
+-    _Out_opt_ NCRYPT_KEY_HANDLE *phServerTrafficKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_opt_ NCRYPT_KEY_HANDLE *phClientTrafficKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_opt_ NCRYPT_KEY_HANDLE *phServerTrafficKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1286,8 +1287,8 @@ typedef SECURITY_STATUS
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hBaseKey,
+     _In_    NCRYPT_HASH_HANDLE hHashValue,
+-    _Out_opt_ NCRYPT_KEY_HANDLE *phClientTrafficKey,
+-    _Out_opt_ NCRYPT_KEY_HANDLE *phServerTrafficKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_opt_ NCRYPT_KEY_HANDLE *phClientTrafficKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_opt_ NCRYPT_KEY_HANDLE *phServerTrafficKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_RS5)
+@@ -1314,7 +1315,7 @@ WINAPI
+ SslExpandWriteKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hBaseTrafficKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1322,7 +1323,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslExpandWriteKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hBaseTrafficKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phWriteKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_RS5)
+@@ -1350,7 +1351,7 @@ SslExpandExporterMasterKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hBaseKey,
+     _In_    NCRYPT_HASH_HANDLE hHashValue,
+-    _Out_   NCRYPT_KEY_HANDLE *phExporterMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phExporterMasterKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1359,7 +1360,7 @@ typedef SECURITY_STATUS
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hBaseKey,
+     _In_    NCRYPT_HASH_HANDLE hHashValue,
+-    _Out_   NCRYPT_KEY_HANDLE *phExporterMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phExporterMasterKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_RS5)
+@@ -1381,7 +1382,7 @@ SslExpandResumptionMasterKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hMasterKey,
+     _In_    NCRYPT_HASH_HANDLE hHashValue,
+-    _Out_   NCRYPT_KEY_HANDLE *phResumptionMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phResumptionMasterKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ 
+@@ -1390,7 +1391,7 @@ typedef SECURITY_STATUS
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hMasterKey,
+     _In_    NCRYPT_HASH_HANDLE hHashValue,
+-    _Out_   NCRYPT_KEY_HANDLE *phResumptionMasterKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phResumptionMasterKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD   dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_VB)
+@@ -1438,7 +1439,7 @@ WINAPI
+ SslExpandBinderKey(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hEarlyKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phBinderKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phBinderKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD dwFlags);
+ 
+@@ -1446,7 +1447,7 @@ typedef SECURITY_STATUS
+ (WINAPI * SslExpandBinderKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hSslProvider,
+     _In_    NCRYPT_KEY_HANDLE hEarlyKey,
+-    _Out_   NCRYPT_KEY_HANDLE *phBinderKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phBinderKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_VB)
+@@ -1469,7 +1470,7 @@ SslExpandPreSharedKey(
+     _In_    NCRYPT_KEY_HANDLE hResumptionMasterKey,
+     _In_reads_bytes_opt_(cbTicketNonce) PBYTE pbTicketNonce,
+     _In_    DWORD cbTicketNonce,
+-    _Out_   NCRYPT_KEY_HANDLE *phPreSharedKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phPreSharedKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD dwFlags);
+ 
+@@ -1479,7 +1480,7 @@ typedef SECURITY_STATUS
+     _In_    NCRYPT_KEY_HANDLE hResumptionMasterKey,
+     _In_reads_bytes_opt_(cbTicketNonce) PBYTE pbTicketNonce,
+     _In_    DWORD cbTicketNonce,
+-    _Out_   NCRYPT_KEY_HANDLE *phPreSharedKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phPreSharedKey,
+     _In_opt_ PNCryptBufferDesc pParameterList,
+     _In_    DWORD dwFlags);
+ #endif  //(NTDDI_VERSION >= NTDDI_WIN10_VB)
+@@ -1589,9 +1590,13 @@ typedef NTSTATUS
+     _In_    ULONG dwFlags);
+ 
+ #ifdef KERNEL_MODE_CNG
++#endif
++#if (defined(WIN32METADATA) && !defined(CRYPT_PROVIDER_IOCTL__GET_SCHANNEL_INTERFACE)) || (((defined(KERNEL_MODE_CNG))))
+ #define CRYPT_PROVIDER_IOCTL__GET_SCHANNEL_INTERFACE \
+     CTL_CODE(FILE_DEVICE_CRYPT_PROVIDER, 0x0007, METHOD_BUFFERED, FILE_READ_ACCESS)
+ #endif
++#ifdef KERNEL_MODE_CNG
++#endif
+ 
+ SECURITY_STATUS
+ WINAPI

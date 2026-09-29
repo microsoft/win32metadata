@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/evr9.h b/generation/WinSDK/RecompiledIdlHeaders/um/evr9.h
+index 52e7088484..3049336064 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/evr9.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/evr9.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -104,7 +105,7 @@ EXTERN_C const IID IID_IEVRVideoStreamControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d0cfe38b-93e7-4772-8957-0400c49a4485")
++    MIDL_INTERFACE("d0cfe38b-93e7-4772-8957-0400c49a4485") _Windows_SupportedOS_WindowsVista_ 
+     IEVRVideoStreamControl : public IUnknown
+     {
+     public:
+@@ -201,7 +202,7 @@ EXTERN_C const IID IID_IMFVideoProcessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6AB0000C-FECE-4d1f-A2AC-A9573530656E")
++    MIDL_INTERFACE("6AB0000C-FECE-4d1f-A2AC-A9573530656E") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoProcessor : public IUnknown
+     {
+     public:
+@@ -463,7 +464,7 @@ EXTERN_C const IID IID_IMFVideoMixerBitmap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("814C7B20-0FDB-4eec-AF8F-F957C8F69EDC")
++    MIDL_INTERFACE("814C7B20-0FDB-4eec-AF8F-F957C8F69EDC") _Windows_SupportedOS_WindowsVista_ 
+     IMFVideoMixerBitmap : public IUnknown
+     {
+     public:

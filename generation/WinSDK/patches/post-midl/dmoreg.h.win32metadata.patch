@@ -1,0 +1,25 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmoreg.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmoreg.h
+index 77eca2aa92..dd364bcec0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dmoreg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmoreg.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //------------------------------------------------------------------------------
+ // File: DMOReg.h
+ //
+@@ -101,11 +102,11 @@ STDAPI DMOEnum(
+ STDAPI DMOGetTypes(
+    REFCLSID clsidDMO,
+    unsigned long ulInputTypesRequested,
+-   unsigned long *pulInputTypesSupplied,
+-   DMO_PARTIAL_MEDIATYPE *pInputTypes,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *pulInputTypesSupplied,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_PARTIAL_MEDIATYPE *pInputTypes,
+    unsigned long ulOutputTypesRequested,
+-   unsigned long *pulOutputTypesSupplied,
+-   DMO_PARTIAL_MEDIATYPE *pOutputTypes
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") unsigned long *pulOutputTypesSupplied,
++   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_PARTIAL_MEDIATYPE *pOutputTypes
+ );
+ 
+ STDAPI DMOGetName(

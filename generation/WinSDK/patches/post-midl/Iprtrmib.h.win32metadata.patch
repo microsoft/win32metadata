@@ -1,0 +1,56 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h b/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h
+index 562b61cb87..cc1f1f4ec1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/Iprtrmib.h
+@@ -23,6 +23,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+@@ -140,7 +141,7 @@ Abstract:
+ //                                                                          //
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-typedef struct _MIB_OPAQUE_QUERY
++typedef struct  _MIB_OPAQUE_QUERY
+ {
+     DWORD  dwVarId;
+     DWORD  rgdwVarIndex[ANY_SIZE];
+@@ -181,8 +182,8 @@ typedef enum _TCPIP_OWNER_MODULE_INFO_CLASS {
+ } TCPIP_OWNER_MODULE_INFO_CLASS, *PTCPIP_OWNER_MODULE_INFO_CLASS;
+ 
+ typedef struct _TCPIP_OWNER_MODULE_BASIC_INFO {
+-    PWCHAR pModuleName;
+-    PWCHAR pModulePath;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR pModuleName;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PWCHAR pModulePath;
+ } TCPIP_OWNER_MODULE_BASIC_INFO, *PTCPIP_OWNER_MODULE_BASIC_INFO;
+ 
+ typedef struct _MIB_IPMCAST_BOUNDARY
+@@ -251,20 +252,20 @@ typedef struct _MIB_IPDESTTABLE
+     MIB_IPDESTROW     table[ANY_SIZE];
+ }MIB_IPDESTTABLE, *PMIB_IPDESTTABLE;
+ 
+-typedef struct _MIB_BEST_IF
++typedef struct   _MIB_BEST_IF
+ {
+     DWORD       dwDestAddr;
+     DWORD       dwIfIndex;
+ }MIB_BEST_IF, *PMIB_BEST_IF;
+ 
+-typedef struct _MIB_PROXYARP
++typedef struct   _MIB_PROXYARP
+ {
+     DWORD       dwAddress;
+     DWORD       dwMask;
+     DWORD       dwIfIndex;
+ }MIB_PROXYARP, *PMIB_PROXYARP;
+ 
+-typedef struct _MIB_IFSTATUS
++typedef struct   _MIB_IFSTATUS
+ {
+     DWORD       dwIfIndex;
+     DWORD       dwAdminStatus;

@@ -1,0 +1,131 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h
+index eacc2a2ee6..e737259886 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AccCtrl.h
+@@ -18,6 +18,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if (_MSC_VER >= 800)
+ #if (_MSC_VER >= 1200)
+@@ -120,9 +121,9 @@ typedef enum _MULTIPLE_TRUSTEE_OPERATION
+ } MULTIPLE_TRUSTEE_OPERATION;
+ 
+ 
+-typedef struct  _OBJECTS_AND_SID
++typedef struct    _OBJECTS_AND_SID
+ {
+-    DWORD   ObjectsPresent;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD   ObjectsPresent;
+     GUID    ObjectTypeGuid;
+     GUID    InheritedObjectTypeGuid;
+     SID     * pSid;
+@@ -130,7 +131,7 @@ typedef struct  _OBJECTS_AND_SID
+ 
+ typedef struct  _OBJECTS_AND_NAME_A
+ {
+-    DWORD          ObjectsPresent;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD          ObjectsPresent;
+     SE_OBJECT_TYPE ObjectType;
+     LPSTR    ObjectTypeName;
+     LPSTR    InheritedObjectTypeName;
+@@ -138,7 +139,7 @@ typedef struct  _OBJECTS_AND_NAME_A
+ } OBJECTS_AND_NAME_A, *POBJECTS_AND_NAME_A;
+ typedef struct  _OBJECTS_AND_NAME_W
+ {
+-    DWORD          ObjectsPresent;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD          ObjectsPresent;
+     SE_OBJECT_TYPE ObjectType;
+     LPWSTR   ObjectTypeName;
+     LPWSTR   InheritedObjectTypeName;
+@@ -319,14 +320,14 @@ typedef struct _EXPLICIT_ACCESS_A
+ {
+     DWORD        grfAccessPermissions;
+     ACCESS_MODE  grfAccessMode;
+-    DWORD        grfInheritance;
++    _Win32_AssociatedEnum_(ACE_FLAGS) DWORD        grfInheritance;
+     TRUSTEE_A    Trustee;
+ } EXPLICIT_ACCESS_A, *PEXPLICIT_ACCESS_A, EXPLICIT_ACCESSA, *PEXPLICIT_ACCESSA;
+ typedef struct _EXPLICIT_ACCESS_W
+ {
+     DWORD        grfAccessPermissions;
+     ACCESS_MODE  grfAccessMode;
+-    DWORD        grfInheritance;
++    _Win32_AssociatedEnum_(ACE_FLAGS) DWORD        grfInheritance;
+     TRUSTEE_W    Trustee;
+ } EXPLICIT_ACCESS_W, *PEXPLICIT_ACCESS_W, EXPLICIT_ACCESSW, *PEXPLICIT_ACCESSW;
+ #ifdef UNICODE
+@@ -381,10 +382,10 @@ typedef ULONG INHERIT_FLAGS, *PINHERIT_FLAGS;
+ typedef struct _ACTRL_ACCESS_ENTRYA
+ {
+     TRUSTEE_A       Trustee;
+-    ULONG           fAccessFlags;
++    _Win32_AssociatedEnum_(ACTRL_ACCESS_ENTRY_ACCESS_FLAGS) ULONG           fAccessFlags;
+     ACCESS_RIGHTS   Access;
+     ACCESS_RIGHTS   ProvSpecificAccess;
+-    INHERIT_FLAGS   Inheritance;
++    _Win32_AssociatedEnum_(ACE_FLAGS) INHERIT_FLAGS   Inheritance;
+     LPSTR           lpInheritProperty;
+ } ACTRL_ACCESS_ENTRYA, *PACTRL_ACCESS_ENTRYA;
+ //
+@@ -393,10 +394,10 @@ typedef struct _ACTRL_ACCESS_ENTRYA
+ typedef struct _ACTRL_ACCESS_ENTRYW
+ {
+     TRUSTEE_W       Trustee;
+-    ULONG           fAccessFlags;
++    _Win32_AssociatedEnum_(ACTRL_ACCESS_ENTRY_ACCESS_FLAGS) ULONG           fAccessFlags;
+     ACCESS_RIGHTS   Access;
+     ACCESS_RIGHTS   ProvSpecificAccess;
+-    INHERIT_FLAGS   Inheritance;
++    _Win32_AssociatedEnum_(ACE_FLAGS) INHERIT_FLAGS   Inheritance;
+     LPWSTR          lpInheritProperty;
+ } ACTRL_ACCESS_ENTRYW, *PACTRL_ACCESS_ENTRYW;
+ #ifdef UNICODE
+@@ -813,4 +814,45 @@ typedef PINHERITED_FROMA PINHERITED_FROM;
+ #endif
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TREE_SEC_INFO_SET")
++#undef TREE_SEC_INFO_SET
++#pragma push_macro("TREE_SEC_INFO_RESET")
++#undef TREE_SEC_INFO_RESET
++#pragma push_macro("TREE_SEC_INFO_RESET_KEEP_EXPLICIT")
++#undef TREE_SEC_INFO_RESET_KEEP_EXPLICIT
++enum TREE_SEC_INFO : unsigned int
++{
++    TREE_SEC_INFO_SET = 1U,
++    TREE_SEC_INFO_RESET = 2U,
++    TREE_SEC_INFO_RESET_KEEP_EXPLICIT = 3U,
++};
++#pragma pop_macro("TREE_SEC_INFO_RESET_KEEP_EXPLICIT")
++#pragma pop_macro("TREE_SEC_INFO_RESET")
++#pragma pop_macro("TREE_SEC_INFO_SET")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ACTRL_ACCESS_ALLOWED")
++#undef ACTRL_ACCESS_ALLOWED
++#pragma push_macro("ACTRL_ACCESS_DENIED")
++#undef ACTRL_ACCESS_DENIED
++#pragma push_macro("ACTRL_AUDIT_SUCCESS")
++#undef ACTRL_AUDIT_SUCCESS
++#pragma push_macro("ACTRL_AUDIT_FAILURE")
++#undef ACTRL_AUDIT_FAILURE
++enum ACTRL_ACCESS_ENTRY_ACCESS_FLAGS : unsigned int
++{
++    ACTRL_ACCESS_ALLOWED = 1U,
++    ACTRL_ACCESS_DENIED = 2U,
++    ACTRL_AUDIT_SUCCESS = 4U,
++    ACTRL_AUDIT_FAILURE = 8U,
++};
++#pragma pop_macro("ACTRL_AUDIT_FAILURE")
++#pragma pop_macro("ACTRL_AUDIT_SUCCESS")
++#pragma pop_macro("ACTRL_ACCESS_DENIED")
++#pragma pop_macro("ACTRL_ACCESS_ALLOWED")
++#endif
++
+ #endif /* __ACCESS_CONTROL__ */

@@ -1,0 +1,61 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
+index c68c36d24b..44cba6bd7e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ratings.h
+@@ -8,6 +8,7 @@
+ #define _RATINGS_H_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -15,26 +16,32 @@
+ #include <winerror.h>
+ #include <shlwapi.h>
+ 
+-STDAPI RatingEnable(HWND hwndParent, LPCSTR pszUsername, BOOL fEnable);
+-STDAPI RatingEnableW(HWND hwndParent, LPCWSTR pszUsername, BOOL fEnable);
+-STDAPI RatingCheckUserAccess(_In_opt_ LPCSTR pszUsername, _In_opt_ LPCSTR pszURL, _In_opt_ LPCSTR pszRatingInfo,
++
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingEnable(HWND hwndParent, LPCSTR pszUsername, BOOL fEnable);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingEnableW(HWND hwndParent, LPCWSTR pszUsername, BOOL fEnable);
++
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingCheckUserAccess(_In_opt_ LPCSTR pszUsername, _In_opt_ LPCSTR pszURL, _In_opt_ LPCSTR pszRatingInfo,
+     _In_reads_bytes_opt_(cbData) LPBYTE pData, DWORD cbData, _Out_opt_ void **ppRatingDetails);
+-STDAPI RatingCheckUserAccessW(_In_opt_ LPCWSTR pszUsername, _In_opt_ LPCWSTR pszURL, _In_opt_ LPCWSTR pszRatingInfo,
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingCheckUserAccessW(_In_opt_ LPCWSTR pszUsername, _In_opt_ LPCWSTR pszURL, _In_opt_ LPCWSTR pszRatingInfo,
+     _In_reads_bytes_opt_(cbData) LPBYTE pData, DWORD cbData, _Out_opt_ void **ppRatingDetails);
+-STDAPI RatingAccessDeniedDialog(HWND hDlg, _In_opt_ LPCSTR pszUsername, LPCSTR pszContentDescription, _Out_ void *pRatingDetails);
+-STDAPI RatingAccessDeniedDialogW(HWND hDlg, _In_opt_ LPCWSTR pszUsername, LPCWSTR pszContentDescription, _Out_ void *pRatingDetails);
+-STDAPI RatingAccessDeniedDialog2(HWND hDlg, _In_opt_ LPCSTR pszUsername, _Out_ void *pRatingDetails);
+-STDAPI RatingAccessDeniedDialog2W(HWND hDlg, _In_opt_ LPCWSTR pszUsername, _Out_ void *pRatingDetails);
++
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingAccessDeniedDialog(HWND hDlg, _In_opt_ LPCSTR pszUsername, LPCSTR pszContentDescription, _Out_ void *pRatingDetails);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingAccessDeniedDialogW(HWND hDlg, _In_opt_ LPCWSTR pszUsername, LPCWSTR pszContentDescription, _Out_ void *pRatingDetails);
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingAccessDeniedDialog2(HWND hDlg, _In_opt_ LPCSTR pszUsername, _Out_ void *pRatingDetails);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingAccessDeniedDialog2W(HWND hDlg, _In_opt_ LPCWSTR pszUsername, _Out_ void *pRatingDetails);
+ STDAPI RatingFreeDetails(_In_opt_ void *pRatingDetails);
+ STDAPI RatingObtainCancel(HANDLE hRatingObtainQuery);
+-STDAPI RatingObtainQuery(LPCSTR pszTargetUrl, DWORD dwUserData,
+-    void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCSTR pszRating, void *lpvRatingDetails),
+-    _Out_opt_ HANDLE *phRatingObtainQuery);
+-STDAPI RatingObtainQueryW(LPCWSTR pszTargetUrl, DWORD dwUserData,
+-    void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCWSTR pszRating, void *lpvRatingDetails),
+-    _Out_opt_ HANDLE *phRatingObtainQuery);
+-STDAPI RatingSetupUI(HWND hDlg, LPCSTR pszUsername);
+-STDAPI RatingSetupUIW(HWND hDlg, LPCWSTR pszUsername);
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingObtainQuery(LPCSTR pszTargetUrl, DWORD dwUserData,
++    _WIN32META_ANNOTATION_("win32metadata:in") void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCSTR pszRating, void *lpvRatingDetails),
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingObtainQueryW(LPCWSTR pszTargetUrl, DWORD dwUserData,
++    _WIN32META_ANNOTATION_("win32metadata:in") void (*fCallback)(DWORD dwUserData, HRESULT hr, LPCWSTR pszRating, void *lpvRatingDetails),
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_ HANDLE *phRatingObtainQuery);
++_WIN32META_ANNOTATION_("win32metadata:ansi") STDAPI RatingSetupUI(HWND hDlg, LPCSTR pszUsername);
++_WIN32META_ANNOTATION_("win32metadata:unicode") STDAPI RatingSetupUIW(HWND hDlg, LPCWSTR pszUsername);
+ #ifdef _INC_COMMCTRL
+ STDAPI RatingAddPropertyPage(PROPSHEETHEADER *ppsh);
+ #endif

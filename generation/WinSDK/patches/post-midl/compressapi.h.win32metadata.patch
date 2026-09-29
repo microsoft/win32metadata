@@ -1,0 +1,196 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
+index c6f8f5b1cc..e00af284ba 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/compressapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -29,10 +30,10 @@ extern "C" {
+ #pragma region Application or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-DECLARE_HANDLE(COMPRESSOR_HANDLE);
++DECLARE_HANDLE(COMPRESSOR_HANDLE) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseCompressor")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef COMPRESSOR_HANDLE *PCOMPRESSOR_HANDLE;
+ 
+-typedef COMPRESSOR_HANDLE DECOMPRESSOR_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseDecompressor") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef COMPRESSOR_HANDLE DECOMPRESSOR_HANDLE;
+ typedef COMPRESSOR_HANDLE *PDECOMPRESSOR_HANDLE;
+ 
+ #define COMPRESS_ALGORITHM_INVALID      0
+@@ -55,13 +56,13 @@ typedef VOID (__cdecl *PFN_COMPRESS_FREE) (
+     _In_ PVOID Memory
+     );
+ 
+-typedef struct _COMPRESS_ALLOCATION_ROUTINES {
++typedef struct   _COMPRESS_ALLOCATION_ROUTINES {
+     PFN_COMPRESS_ALLOCATE Allocate;
+     PFN_COMPRESS_FREE Free;
+     PVOID UserContext;
+ } COMPRESS_ALLOCATION_ROUTINES, *PCOMPRESS_ALLOCATION_ROUTINES;
+ 
+-typedef enum {
++typedef enum   {
+     COMPRESS_INFORMATION_CLASS_INVALID = 0,
+     COMPRESS_INFORMATION_CLASS_BLOCK_SIZE,
+     COMPRESS_INFORMATION_CLASS_LEVEL
+@@ -69,35 +70,35 @@ typedef enum {
+ 
+ // Compression routines
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-CreateCompressor (
+-    _In_ DWORD Algorithm,
++  _Win32_SetLastError_ CreateCompressor (
++    _Win32_AssociatedEnum_(COMPRESS_ALGORITHM) _In_ DWORD Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PCOMPRESSOR_HANDLE CompressorHandle
++    _Win32_RAIIFree_(CloseCompressor, -1, 0) _Out_ PCOMPRESSOR_HANDLE  CompressorHandle
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-SetCompressorInformation (
++  _Win32_SetLastError_ SetCompressorInformation (
+     _In_ COMPRESSOR_HANDLE CompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _In_reads_bytes_(CompressInformationSize) LPCVOID CompressInformation,
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-QueryCompressorInformation (
++  _Win32_SetLastError_ QueryCompressorInformation (
+     _In_ COMPRESSOR_HANDLE CompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _Out_writes_bytes_(CompressInformationSize) PVOID CompressInformation,
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-Compress (
++  _Win32_SetLastError_ Compress (
+     _In_ COMPRESSOR_HANDLE CompressorHandle,
+     _In_reads_bytes_opt_(UncompressedDataSize) LPCVOID UncompressedData,
+     _In_ SIZE_T UncompressedDataSize,
+@@ -106,49 +107,49 @@ Compress (
+     _Out_ PSIZE_T CompressedDataSize
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-ResetCompressor (
++  _Win32_SetLastError_ ResetCompressor (
+     _In_ COMPRESSOR_HANDLE CompressorHandle
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-CloseCompressor (
++  _Win32_SetLastError_ CloseCompressor (
+     _In_ COMPRESSOR_HANDLE CompressorHandle
+     );
+ 
+ // Decompression routines
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-CreateDecompressor (
+-    _In_ DWORD Algorithm,
++  _Win32_SetLastError_ CreateDecompressor (
++    _Win32_AssociatedEnum_(COMPRESS_ALGORITHM) _In_ DWORD Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
++    _Win32_RAIIFree_(CloseDecompressor, -1, 0) _Out_ PDECOMPRESSOR_HANDLE  DecompressorHandle
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-SetDecompressorInformation (
++  _Win32_SetLastError_ SetDecompressorInformation (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _In_reads_bytes_(CompressInformationSize) LPCVOID CompressInformation,
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-QueryDecompressorInformation (
++  _Win32_SetLastError_ QueryDecompressorInformation (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle,
+     _In_ COMPRESS_INFORMATION_CLASS CompressInformationClass,
+     _Out_writes_bytes_(CompressInformationSize) PVOID CompressInformation,
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-Decompress (
++  _Win32_SetLastError_ Decompress (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle,
+     _In_reads_bytes_opt_(CompressedDataSize) LPCVOID CompressedData,
+     _In_ SIZE_T CompressedDataSize,
+@@ -157,15 +158,15 @@ Decompress (
+     _Out_opt_ PSIZE_T UncompressedDataSize
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-ResetDecompressor (
++  _Win32_SetLastError_ ResetDecompressor (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
+-BOOL
++_Windows_SupportedOS_Windows8_ BOOL
+ WINAPI
+-CloseDecompressor (
++  _Win32_SetLastError_ CloseDecompressor (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
+@@ -176,4 +177,27 @@ CloseDecompressor (
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("COMPRESS_ALGORITHM_MSZIP")
++#undef COMPRESS_ALGORITHM_MSZIP
++#pragma push_macro("COMPRESS_ALGORITHM_XPRESS")
++#undef COMPRESS_ALGORITHM_XPRESS
++#pragma push_macro("COMPRESS_ALGORITHM_XPRESS_HUFF")
++#undef COMPRESS_ALGORITHM_XPRESS_HUFF
++#pragma push_macro("COMPRESS_ALGORITHM_LZMS")
++#undef COMPRESS_ALGORITHM_LZMS
++enum COMPRESS_ALGORITHM : unsigned int
++{
++    COMPRESS_ALGORITHM_MSZIP = 2U,
++    COMPRESS_ALGORITHM_XPRESS = 3U,
++    COMPRESS_ALGORITHM_XPRESS_HUFF = 4U,
++    COMPRESS_ALGORITHM_LZMS = 5U,
++};
++#pragma pop_macro("COMPRESS_ALGORITHM_LZMS")
++#pragma pop_macro("COMPRESS_ALGORITHM_XPRESS_HUFF")
++#pragma pop_macro("COMPRESS_ALGORITHM_XPRESS")
++#pragma pop_macro("COMPRESS_ALGORITHM_MSZIP")
++#endif
++
+ #endif

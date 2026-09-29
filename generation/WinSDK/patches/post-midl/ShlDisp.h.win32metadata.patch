@@ -1,0 +1,248 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
+index 11b4942409..05381b1fb5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ShlDisp.h
+@@ -367,6 +367,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -772,7 +773,7 @@ EXTERN_C const IID IID_DFConstraint;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+@@ -944,7 +945,7 @@ EXTERN_C const IID IID_FolderItem;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -952,7 +953,7 @@ EXTERN_C const IID IID_FolderItem;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_GetLink( 
+             /* [annotation][retval][out] */ 
+@@ -992,7 +993,7 @@ EXTERN_C const IID IID_FolderItem;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Verbs( 
+             /* [annotation][retval][out] */ 
+@@ -1502,7 +1503,7 @@ EXTERN_C const IID IID_FolderItemVerb;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE DoIt( void) = 0;
+         
+@@ -1881,7 +1882,7 @@ EXTERN_C const IID IID_Folder;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Title( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Application( 
+             /* [annotation][retval][out] */ 
+@@ -1926,7 +1927,7 @@ EXTERN_C const IID IID_Folder;
+             /* [annotation][in] */ 
+             _In_  int iColumn,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+     };
+     
+@@ -3508,7 +3509,7 @@ EXTERN_C const IID IID_IShellLinkDual;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Path( 
+             /* [annotation][in] */ 
+@@ -3516,7 +3517,7 @@ EXTERN_C const IID IID_IShellLinkDual;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -3524,7 +3525,7 @@ EXTERN_C const IID IID_IShellLinkDual;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_WorkingDirectory( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
+             /* [annotation][in] */ 
+@@ -3532,7 +3533,7 @@ EXTERN_C const IID IID_IShellLinkDual;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Arguments( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Arguments( 
+             /* [annotation][in] */ 
+@@ -3560,7 +3561,7 @@ EXTERN_C const IID IID_IShellLinkDual;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetIconLocation( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbs,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbs,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  int *piIcon) = 0;
+         
+@@ -4157,8 +4158,8 @@ EXTERN_C const IID IID_IShellFolderViewDual;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E7A1AF80-4D96-11CF-960C-0080C7F4EE85")
+-    IShellFolderViewDual : public IDispatch
++    MIDL_INTERFACE("E7A1AF80-4D96-11CF-960C-0080C7F4EE85") _Windows_SupportedOS_WindowsXP_ 
++      IShellFolderViewDual : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Application( 
+@@ -4193,7 +4194,7 @@ EXTERN_C const IID IID_IShellFolderViewDual;
+             /* [optional][in] */ VARIANT vx,
+             /* [optional][in] */ VARIANT vy,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbs) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbs) = 0;
+         
+         virtual /* [helpcontext][helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Script( 
+             /* [annotation][retval][out] */ 
+@@ -4340,7 +4341,7 @@ EXTERN_C const IID IID_IShellFolderViewDual;
+         END_INTERFACE
+     } IShellFolderViewDualVtbl;
+ 
+-    interface IShellFolderViewDual
++    interface _Windows_SupportedOS_WindowsXP_ IShellFolderViewDual
+     {
+         CONST_VTBL struct IShellFolderViewDualVtbl *lpVtbl;
+     };
+@@ -4422,8 +4423,8 @@ EXTERN_C const IID IID_IShellFolderViewDual2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("31C147b6-0ADE-4A3C-B514-DDF932EF6D17")
+-    IShellFolderViewDual2 : public IShellFolderViewDual
++    MIDL_INTERFACE("31C147b6-0ADE-4A3C-B514-DDF932EF6D17") _Windows_SupportedOS_WindowsXP_ 
++      IShellFolderViewDual2 : public IShellFolderViewDual
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentViewMode( 
+@@ -4593,7 +4594,7 @@ EXTERN_C const IID IID_IShellFolderViewDual2;
+         END_INTERFACE
+     } IShellFolderViewDual2Vtbl;
+ 
+-    interface IShellFolderViewDual2
++    interface _Windows_SupportedOS_WindowsXP_ IShellFolderViewDual2
+     {
+         CONST_VTBL struct IShellFolderViewDual2Vtbl *lpVtbl;
+     };
+@@ -4685,13 +4686,13 @@ EXTERN_C const IID IID_IShellFolderViewDual3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("29EC8E6C-46D3-411f-BAAA-611A6C9CAC66")
++    MIDL_INTERFACE("29EC8E6C-46D3-411f-BAAA-611A6C9CAC66") _Windows_SupportedOS_WindowsVista_ 
+     IShellFolderViewDual3 : public IShellFolderViewDual2
+     {
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_GroupBy( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrGroupBy) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrGroupBy) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_GroupBy( 
+             /* [annotation][in] */ 
+@@ -4707,7 +4708,7 @@ EXTERN_C const IID IID_IShellFolderViewDual3;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SortColumns( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrSortColumns) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrSortColumns) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_SortColumns( 
+             /* [annotation][in] */ 
+@@ -7909,7 +7910,7 @@ EXTERN_C const IID IID_IFileSearchBand;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SearchID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrSearchID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrSearchID) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Scope( 
+             /* [annotation][retval][out] */ 
+@@ -8122,7 +8123,7 @@ EXTERN_C const IID IID_IWebWizardHost;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Caption( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrCaption) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrCaption) = 0;
+         
+         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Property( 
+             /* [annotation][in] */ 
+@@ -8375,7 +8376,7 @@ EXTERN_C const IID IID_IWebWizardHost2;
+             /* [annotation][in] */ 
+             _In_  BSTR value,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *signedValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *signedValue) = 0;
+         
+     };
+     
+@@ -8872,7 +8873,7 @@ EXTERN_C const IID IID_IAutoComplete;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00bb2762-6a77-11d0-a535-00c04fd7d062")
++    MIDL_INTERFACE("00bb2762-6a77-11d0-a535-00c04fd7d062") _Windows_SupportedOS_Windows2000_ 
+     IAutoComplete : public IUnknown
+     {
+     public:
+@@ -9001,7 +9002,7 @@ EXTERN_C const IID IID_IAutoComplete2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EAC04BC0-3791-11d2-BB95-0060977B464C")
++    MIDL_INTERFACE("EAC04BC0-3791-11d2-BB95-0060977B464C") _Windows_SupportedOS_Windows2000_ 
+     IAutoComplete2 : public IAutoComplete
+     {
+     public:
+@@ -9316,7 +9317,7 @@ EXTERN_C const IID IID_IDataObjectAsyncCapability;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3D8B0590-F691-11d2-8EA9-006097DF5BD4")
++    MIDL_INTERFACE("3D8B0590-F691-11d2-8EA9-006097DF5BD4") _Windows_SupportedOS_Windows8_ 
+     IDataObjectAsyncCapability : public IUnknown
+     {
+     public:

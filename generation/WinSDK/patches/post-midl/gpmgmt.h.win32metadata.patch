@@ -1,0 +1,774 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gpmgmt.h b/generation/WinSDK/RecompiledIdlHeaders/um/gpmgmt.h
+index d1c3ef1e79..4521d75bff 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gpmgmt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gpmgmt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -929,7 +930,7 @@ EXTERN_C const IID IID_IGPM;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F5FAE809-3BD6-4DA9-A65E-17665B41D763")
++    MIDL_INTERFACE("F5FAE809-3BD6-4DA9-A65E-17665B41D763") _Windows_SupportedOS_WindowsVista_ 
+     IGPM : public IDispatch
+     {
+     public:
+@@ -1285,17 +1286,17 @@ EXTERN_C const IID IID_IGPMDomain;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6B21CC14-5A00-4F44-A738-FEEC8A94C7E3")
++    MIDL_INTERFACE("6B21CC14-5A00-4F44-A738-FEEC8A94C7E3") _Windows_SupportedOS_WindowsVista_ 
+     IGPMDomain : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainController( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateGPO( 
+             /* [annotation][retval][out] */ 
+@@ -1587,13 +1588,13 @@ EXTERN_C const IID IID_IGPMBackupDir;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B1568BED-0A93-4ACC-810F-AFE7081019B9")
++    MIDL_INTERFACE("B1568BED-0A93-4ACC-810F-AFE7081019B9") _Windows_SupportedOS_WindowsVista_ 
+     IGPMBackupDir : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDirectory( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetBackup( 
+             /* [annotation][in] */ 
+@@ -1770,21 +1771,21 @@ EXTERN_C const IID IID_IGPMSitesContainer;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4725A899-2782-4D27-A6BB-D499246FFD72")
++    MIDL_INTERFACE("4725A899-2782-4D27-A6BB-D499246FFD72") _Windows_SupportedOS_WindowsVista_ 
+     IGPMSitesContainer : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainController( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Forest( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSite( 
+             /* [annotation][in] */ 
+@@ -1979,7 +1980,7 @@ EXTERN_C const IID IID_IGPMSearchCriteria;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D6F11C42-829B-48D4-83F5-3615B67DFC22")
++    MIDL_INTERFACE("D6F11C42-829B-48D4-83F5-3615B67DFC22") _Windows_SupportedOS_WindowsVista_ 
+     IGPMSearchCriteria : public IDispatch
+     {
+     public:
+@@ -2136,25 +2137,25 @@ EXTERN_C const IID IID_IGPMTrustee;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B466DA8-C1A4-4B2A-999A-BEFCDD56CEFB")
++    MIDL_INTERFACE("3B466DA8-C1A4-4B2A-999A-BEFCDD56CEFB") _Windows_SupportedOS_WindowsVista_ 
+     IGPMTrustee : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeSid( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeDomain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeDSPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeType( 
+             /* [annotation][retval][out] */ 
+@@ -2337,7 +2338,7 @@ EXTERN_C const IID IID_IGPMPermission;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("35EBCA40-E1A1-4A02-8905-D79416FB464A")
++    MIDL_INTERFACE("35EBCA40-E1A1-4A02-8905-D79416FB464A") _Windows_SupportedOS_WindowsVista_ 
+     IGPMPermission : public IDispatch
+     {
+     public:
+@@ -2538,7 +2539,7 @@ EXTERN_C const IID IID_IGPMSecurityInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B6C31ED4-1C93-4D3E-AE84-EB6D61161B60")
++    MIDL_INTERFACE("B6C31ED4-1C93-4D3E-AE84-EB6D61161B60") _Windows_SupportedOS_WindowsVista_ 
+     IGPMSecurityInfo : public IDispatch
+     {
+     public:
+@@ -2754,25 +2755,25 @@ EXTERN_C const IID IID_IGPMBackup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D8A16A35-3B0D-416B-8D02-4DF6F95A7119")
++    MIDL_INTERFACE("D8A16A35-3B0D-416B-8D02-4DF6F95A7119") _Windows_SupportedOS_WindowsVista_ 
+     IGPMBackup : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPOID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPODomain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPODisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
+             /* [annotation][retval][out] */ 
+@@ -2780,11 +2781,11 @@ EXTERN_C const IID IID_IGPMBackup;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Comment( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDir( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
+         
+@@ -3032,7 +3033,7 @@ EXTERN_C const IID IID_IGPMBackupCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C786FC0F-26D8-4BAB-A745-39CA7E800CAC")
++    MIDL_INTERFACE("C786FC0F-26D8-4BAB-A745-39CA7E800CAC") _Windows_SupportedOS_WindowsVista_ 
+     IGPMBackupCollection : public IDispatch
+     {
+     public:
+@@ -3217,7 +3218,7 @@ EXTERN_C const IID IID_IGPMSOM;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C0A7F09E-05A1-4F0C-8158-9E5C33684F6B")
++    MIDL_INTERFACE("C0A7F09E-05A1-4F0C-8158-9E5C33684F6B") _Windows_SupportedOS_WindowsVista_ 
+     IGPMSOM : public IDispatch
+     {
+     public:
+@@ -3231,11 +3232,11 @@ EXTERN_C const IID IID_IGPMSOM;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateGPOLink( 
+             /* [annotation][in] */ 
+@@ -3491,7 +3492,7 @@ EXTERN_C const IID IID_IGPMSOMCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ADC1688E-00E4-4495-ABBA-BED200DF0CAB")
++    MIDL_INTERFACE("ADC1688E-00E4-4495-ABBA-BED200DF0CAB") _Windows_SupportedOS_WindowsVista_ 
+     IGPMSOMCollection : public IDispatch
+     {
+     public:
+@@ -3668,13 +3669,13 @@ EXTERN_C const IID IID_IGPMWMIFilter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EF2FF9B4-3C27-459A-B979-038305CEC75D")
++    MIDL_INTERFACE("EF2FF9B4-3C27-459A-B979-038305CEC75D") _Windows_SupportedOS_WindowsVista_ 
+     IGPMWMIFilter : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -3682,7 +3683,7 @@ EXTERN_C const IID IID_IGPMWMIFilter;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -3690,7 +3691,7 @@ EXTERN_C const IID IID_IGPMWMIFilter;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetQueryList( 
+             /* [annotation][retval][out] */ 
+@@ -3908,7 +3909,7 @@ EXTERN_C const IID IID_IGPMWMIFilterCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5782D582-1A36-4661-8A94-C3C32551945B")
++    MIDL_INTERFACE("5782D582-1A36-4661-8A94-C3C32551945B") _Windows_SupportedOS_WindowsVista_ 
+     IGPMWMIFilterCollection : public IDispatch
+     {
+     public:
+@@ -4085,7 +4086,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("49ED785A-3237-4FF2-B1F0-FDF5A8D5A1EE")
++    MIDL_INTERFACE("49ED785A-3237-4FF2-B1F0-FDF5A8D5A1EE") _Windows_SupportedOS_WindowsVista_ 
+     IGPMRSOP : public IDispatch
+     {
+     public:
+@@ -4095,7 +4096,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Namespace( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LoggingComputer( 
+             /* [annotation][in] */ 
+@@ -4103,7 +4104,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoggingComputer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LoggingUser( 
+             /* [annotation][in] */ 
+@@ -4111,7 +4112,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoggingUser( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LoggingFlags( 
+             /* [annotation][in] */ 
+@@ -4135,7 +4136,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningDomainController( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningSiteName( 
+             /* [annotation][in] */ 
+@@ -4143,7 +4144,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningSiteName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUser( 
+             /* [annotation][in] */ 
+@@ -4151,7 +4152,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningUser( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUserSOM( 
+             /* [annotation][in] */ 
+@@ -4159,7 +4160,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningUserSOM( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUserWMIFilters( 
+             /* [annotation][in] */ 
+@@ -4183,7 +4184,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningComputer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningComputerSOM( 
+             /* [annotation][in] */ 
+@@ -4191,7 +4192,7 @@ EXTERN_C const IID IID_IGPMRSOP;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningComputerSOM( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningComputerWMIFilters( 
+             /* [annotation][in] */ 
+@@ -4684,13 +4685,13 @@ EXTERN_C const IID IID_IGPMGPO;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("58CC4352-1CA3-48E5-9864-1DA4D6E0D60F")
++    MIDL_INTERFACE("58CC4352-1CA3-48E5-9864-1DA4D6E0D60F") _Windows_SupportedOS_WindowsVista_ 
+     IGPMGPO : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
+             /* [annotation][in] */ 
+@@ -4698,15 +4699,15 @@ EXTERN_C const IID IID_IGPMGPO;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreationTime( 
+             /* [annotation][retval][out] */ 
+@@ -5255,7 +5256,7 @@ EXTERN_C const IID IID_IGPMGPOCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F0F0D5CF-70CA-4C39-9E29-B642F8726C01")
++    MIDL_INTERFACE("F0F0D5CF-70CA-4C39-9E29-B642F8726C01") _Windows_SupportedOS_WindowsVista_ 
+     IGPMGPOCollection : public IDispatch
+     {
+     public:
+@@ -5434,17 +5435,17 @@ EXTERN_C const IID IID_IGPMGPOLink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("434B99BD-5DE7-478A-809C-C251721DF70C")
++    MIDL_INTERFACE("434B99BD-5DE7-478A-809C-C251721DF70C") _Windows_SupportedOS_WindowsVista_ 
+     IGPMGPOLink : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPOID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPODomain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
+             /* [annotation][retval][out] */ 
+@@ -5683,7 +5684,7 @@ EXTERN_C const IID IID_IGPMGPOLinksCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("189D7B68-16BD-4D0D-A2EC-2E6AA2288C7F")
++    MIDL_INTERFACE("189D7B68-16BD-4D0D-A2EC-2E6AA2288C7F") _Windows_SupportedOS_WindowsVista_ 
+     IGPMGPOLinksCollection : public IDispatch
+     {
+     public:
+@@ -5862,7 +5863,7 @@ EXTERN_C const IID IID_IGPMCSECollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2E52A97D-0A4A-4A6F-85DB-201622455DA0")
++    MIDL_INTERFACE("2E52A97D-0A4A-4A6F-85DB-201622455DA0") _Windows_SupportedOS_WindowsVista_ 
+     IGPMCSECollection : public IDispatch
+     {
+     public:
+@@ -6041,17 +6042,17 @@ EXTERN_C const IID IID_IGPMClientSideExtension;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("69DA7488-B8DB-415E-9266-901BE4D49928")
++    MIDL_INTERFACE("69DA7488-B8DB-415E-9266-901BE4D49928") _Windows_SupportedOS_WindowsVista_ 
+     IGPMClientSideExtension : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsUserEnabled( 
+             /* [annotation][retval][out] */ 
+@@ -6229,7 +6230,7 @@ EXTERN_C const IID IID_IGPMAsyncCancel;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DDC67754-BE67-4541-8166-F48166868C9C")
++    MIDL_INTERFACE("DDC67754-BE67-4541-8166-F48166868C9C") _Windows_SupportedOS_WindowsVista_ 
+     IGPMAsyncCancel : public IDispatch
+     {
+     public:
+@@ -6374,7 +6375,7 @@ EXTERN_C const IID IID_IGPMAsyncProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6AAC29F8-5948-4324-BF70-423818942DBC")
++    MIDL_INTERFACE("6AAC29F8-5948-4324-BF70-423818942DBC") _Windows_SupportedOS_WindowsVista_ 
+     IGPMAsyncProgress : public IDispatch
+     {
+     public:
+@@ -6539,7 +6540,7 @@ EXTERN_C const IID IID_IGPMStatusMsgCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9B6E1AF0-1A92-40F3-A59D-F36AC1F728B7")
++    MIDL_INTERFACE("9B6E1AF0-1A92-40F3-A59D-F36AC1F728B7") _Windows_SupportedOS_WindowsVista_ 
+     IGPMStatusMsgCollection : public IDispatch
+     {
+     public:
+@@ -6718,29 +6719,29 @@ EXTERN_C const IID IID_IGPMStatusMessage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8496C22F-F3DE-4A1F-8F58-603CAAA93D7B")
++    MIDL_INTERFACE("8496C22F-F3DE-4A1F-8F58-603CAAA93D7B") _Windows_SupportedOS_WindowsVista_ 
+     IGPMStatusMessage : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ErrorCode( void) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtensionName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SettingsName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OperationCode( void) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Message( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+     };
+     
+@@ -6924,7 +6925,7 @@ EXTERN_C const IID IID_IGPMConstants;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("50EF73E6-D35C-4C8D-BE63-7EA5D2AAC5C4")
++    MIDL_INTERFACE("50EF73E6-D35C-4C8D-BE63-7EA5D2AAC5C4") _Windows_SupportedOS_WindowsVista_ 
+     IGPMConstants : public IDispatch
+     {
+     public:
+@@ -7860,7 +7861,7 @@ EXTERN_C const IID IID_IGPMResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("86DFF7E9-F76F-42AB-9570-CEBC6BE8A52D")
++    MIDL_INTERFACE("86DFF7E9-F76F-42AB-9570-CEBC6BE8A52D") _Windows_SupportedOS_WindowsVista_ 
+     IGPMResult : public IDispatch
+     {
+     public:
+@@ -8031,7 +8032,7 @@ EXTERN_C const IID IID_IGPMMapEntryCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BB0BF49B-E53F-443F-B807-8BE22BFB6D42")
++    MIDL_INTERFACE("BB0BF49B-E53F-443F-B807-8BE22BFB6D42") _Windows_SupportedOS_WindowsVista_ 
+     IGPMMapEntryCollection : public IDispatch
+     {
+     public:
+@@ -8210,17 +8211,17 @@ EXTERN_C const IID IID_IGPMMapEntry;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8E79AD06-2381-4444-BE4C-FF693E6E6F2B")
++    MIDL_INTERFACE("8E79AD06-2381-4444-BE4C-FF693E6E6F2B") _Windows_SupportedOS_WindowsVista_ 
+     IGPMMapEntry : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Source( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrSource) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrSource) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Destination( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDestination) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDestination) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationOption( 
+             /* [annotation][retval][out] */ 
+@@ -8398,7 +8399,7 @@ EXTERN_C const IID IID_IGPMMigrationTable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("48F823B1-EFAF-470B-B6ED-40D14EE1A4EC")
++    MIDL_INTERFACE("48F823B1-EFAF-470B-B6ED-40D14EE1A4EC") _Windows_SupportedOS_WindowsVista_ 
+     IGPMMigrationTable : public IDispatch
+     {
+     public:
+@@ -8684,13 +8685,13 @@ EXTERN_C const IID IID_IGPMBackupDirEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F8DC55ED-3BA0-4864-AAD4-D365189EE1D5")
++    MIDL_INTERFACE("F8DC55ED-3BA0-4864-AAD4-D365189EE1D5") _Windows_SupportedOS_WindowsVista_ 
+     IGPMBackupDirEx : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDir( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrBackupDir) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrBackupDir) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupType( 
+             /* [annotation][retval][out] */ 
+@@ -8880,7 +8881,7 @@ EXTERN_C const IID IID_IGPMStarterGPOBackupCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C998031D-ADD0-4bb5-8DEA-298505D8423B")
++    MIDL_INTERFACE("C998031D-ADD0-4bb5-8DEA-298505D8423B") _Windows_SupportedOS_WindowsVista_ 
+     IGPMStarterGPOBackupCollection : public IDispatch
+     {
+     public:
+@@ -9057,33 +9058,33 @@ EXTERN_C const IID IID_IGPMStarterGPOBackup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("51D98EDA-A87E-43dd-B80A-0B66EF1938D6")
++    MIDL_INTERFACE("51D98EDA-A87E-43dd-B80A-0B66EF1938D6") _Windows_SupportedOS_WindowsVista_ 
+     IGPMStarterGPOBackup : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDir( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrBackupDir) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrBackupDir) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Comment( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrComment) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrComment) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDisplayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDisplayName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrTemplateDomain) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrTemplateDomain) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StarterGPOID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrTemplateID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrTemplateID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
+             /* [annotation][retval][out] */ 
+@@ -9348,7 +9349,7 @@ EXTERN_C const IID IID_IGPM2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00238F8A-3D86-41ac-8F5E-06A6638A634A")
++    MIDL_INTERFACE("00238F8A-3D86-41ac-8F5E-06A6638A634A") _Windows_SupportedOS_WindowsVista_ 
+     IGPM2 : public IGPM
+     {
+     public:
+@@ -9663,13 +9664,13 @@ EXTERN_C const IID IID_IGPMStarterGPO;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DFC3F61B-8880-4490-9337-D29C7BA8C2F0")
++    MIDL_INTERFACE("DFC3F61B-8880-4490-9337-D29C7BA8C2F0") _Windows_SupportedOS_WindowsVista_ 
+     IGPMStarterGPO : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
+             /* [annotation][in] */ 
+@@ -9677,7 +9678,7 @@ EXTERN_C const IID IID_IGPMStarterGPO;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -9685,11 +9686,11 @@ EXTERN_C const IID IID_IGPMStarterGPO;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Author( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Product( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreationTime( 
+             /* [annotation][retval][out] */ 
+@@ -9697,7 +9698,7 @@ EXTERN_C const IID IID_IGPMStarterGPO;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModifiedTime( 
+             /* [annotation][retval][out] */ 
+@@ -9717,7 +9718,7 @@ EXTERN_C const IID IID_IGPMStarterGPO;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StarterGPOVersion( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
+         
+@@ -10128,7 +10129,7 @@ EXTERN_C const IID IID_IGPMStarterGPOCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2E522729-2219-44ad-933A-64DFD650C423")
++    MIDL_INTERFACE("2E522729-2219-44ad-933A-64DFD650C423") _Windows_SupportedOS_WindowsVista_ 
+     IGPMStarterGPOCollection : public IDispatch
+     {
+     public:
+@@ -10305,7 +10306,7 @@ EXTERN_C const IID IID_IGPMDomain2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7CA6BB8B-F1EB-490a-938D-3C4E51C768E6")
++    MIDL_INTERFACE("7CA6BB8B-F1EB-490a-938D-3C4E51C768E6") _Windows_SupportedOS_WindowsVista_ 
+     IGPMDomain2 : public IGPMDomain
+     {
+     public:
+@@ -10660,7 +10661,7 @@ EXTERN_C const IID IID_IGPMConstants2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("05AE21B0-AC09-4032-A26F-9E7DA786DC19")
++    MIDL_INTERFACE("05AE21B0-AC09-4032-A26F-9E7DA786DC19") _Windows_SupportedOS_WindowsVista_ 
+     IGPMConstants2 : public IGPMConstants
+     {
+     public:
+@@ -11542,13 +11543,13 @@ EXTERN_C const IID IID_IGPMGPO2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8A66A210-B78B-4d99-88E2-C306A817C925")
++    MIDL_INTERFACE("8A66A210-B78B-4d99-88E2-C306A817C925") _Windows_SupportedOS_WindowsVista_ 
+     IGPMGPO2 : public IGPMGPO
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -12009,7 +12010,7 @@ EXTERN_C const IID IID_IGPMDomain3;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InfrastructureDC( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InfrastructureDC( 
+             /* [annotation][in] */ 
+@@ -12377,7 +12378,7 @@ EXTERN_C const IID IID_IGPMGPO3;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InfrastructureDC( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InfrastructureDC( 
+             /* [annotation][in] */ 
