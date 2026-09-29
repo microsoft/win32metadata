@@ -4,8 +4,9 @@
 # GitHub Actions workflow so PR checks work without Azure DevOps integration.
 #
 # Pipeline structure:
-#   One job builds the Rust-backed WinmdGenerator SDK, emits the multi-architecture
-#   winmd, consumes the local package in an integration sample, and runs tests.
+#   1. Three parallel scrape jobs apply the checked-in SDK patches and generate
+#      architecture-specific RDL/WinMD artifacts.
+#   2. One build job merges those artifacts, packages, and runs tests.
 
 name: PR Validation
 
@@ -34,10 +35,15 @@ env:
   BUILD_CONFIGURATION: Release
 
 jobs:
-  build-test:
-    name: 'Build, test, package'
+  scrape:
+    name: 'Scrape headers: ${{ matrix.arch }}'
     runs-on: windows-2022
-    timeout-minutes: 360
+    timeout-minutes: 180
+
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, x86, arm64]
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -55,13 +61,62 @@ jobs:
         shell: pwsh
         run: rustup show
 
-      - name: Build metadata binary
+      - name: Build metadata for ${{ matrix.arch }}
         shell: pwsh
-        run: .\scripts\BuildMetadataBin.ps1
+        run: .\scripts\BuildMetadataBin.ps1 -arch ${{ matrix.arch }}
+
+      - name: Upload generated architecture
+        uses: ./.github/actions/upload-artifact-with-retry
+        with:
+          name: generated_${{ matrix.arch }}
+          path: |
+            generation/WinSDK/obj/winmd/rdl
+            generation/WinSDK/obj/winmd/Windows.Win32.${{ matrix.arch }}.winmd
+          retention-days: 1
+
+      - name: Upload build logs
+        uses: ./.github/actions/upload-artifact-with-retry
+        if: always()
+        with:
+          name: scrape_logs_${{ matrix.arch }}
+          path: bin/logs
+          retention-days: 7
+
+  build-test:
+    name: 'Build, test, package'
+    needs: [scrape]
+    runs-on: windows-2022
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+
+      - uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
+
+      - name: Install pinned Rust toolchain
+        shell: pwsh
+        run: rustup show
+
+      - name: Download generated architectures
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: generated_*
+          path: generation/WinSDK/obj/arch-inputs
+
+      - name: Merge metadata architectures
+        shell: pwsh
+        run: .\scripts\MergeMetadataArchitectures.ps1
 
       - name: Package
         shell: pwsh
-        run: .\scripts\DoPackages.ps1
+        run: .\scripts\DoPackages.ps1 -SkipInstallTools -SkipNativeToolsBuild
 
       - name: Test packaged WinmdGenerator SDK
         shell: pwsh
@@ -69,12 +124,12 @@ jobs:
 
       - name: Build samples
         shell: pwsh
-        run: .\scripts\DoSamples.ps1
+        run: .\scripts\DoSamples.ps1 -SkipInstallTools
 
       - name: Run tests
         continue-on-error: ${{ github.event_name == 'pull_request' && github.base_ref == 'feature/shift-left-annotations' }}
         shell: pwsh
-        run: .\scripts\DoTests.ps1
+        run: .\scripts\DoTests.ps1 -SkipInstallTools
 
       - name: Download baseline winmd from target branch
         if: github.event_name == 'pull_request'

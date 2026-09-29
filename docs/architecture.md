@@ -39,12 +39,21 @@ instead of falling back to a name list or synthetic declaration.
 ## Repository build
 
 `generation/WinSDK/Windows.Win32.proj` consumes the same SDK targets used by the
-NuGet package. Its 321 partition translation units are compiled for all three
+NuGet package. Its 322 partition translation units are compiled for all three
 architectures and merged into `bin/Windows.Win32.winmd`.
 
 ```powershell
 .\scripts\BuildMetadataBin.ps1
 ```
+
+The local build applies the checked-in SDK patches before scraping. MSBuild
+passes the 322 translation-unit paths through a generated list file so the build
+also works from long Windows worktree paths.
+
+CI runs x64, x86, and ARM64 as separate jobs. Each job regenerates and patches
+its own clean SDK header tree before scraping. The final job downloads those
+RDL/WinMD pairs and runs `scripts\MergeMetadataArchitectures.ps1`; it does not
+rescrape unpatched headers.
 
 For a faster raw-tool inner loop:
 

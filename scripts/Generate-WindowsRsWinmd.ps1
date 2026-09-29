@@ -14,6 +14,9 @@
 .PARAMETER Namespace
     Root namespace for the selected partitions. Defaults to Windows.Win32.
 
+.PARAMETER AssemblyVersion
+    Four-part assembly version for reproducible output comparisons.
+
 .PARAMETER SkipBuild
     Use the previously built Rust executable.
 #>
@@ -28,6 +31,9 @@ param (
 
     [ValidateNotNullOrEmpty()]
     [string]$Namespace = "Windows.Win32",
+
+    [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')]
+    [string]$AssemblyVersion,
 
     [switch]$SkipBuild
 )
@@ -81,6 +87,11 @@ $arguments = @(
     "--output", $outputPath,
     "--obj", $objDir
 )
+
+if ($AssemblyVersion)
+{
+    $arguments += @("--assembly-version", $AssemblyVersion)
+}
 
 foreach ($name in $Partition)
 {
