@@ -183,6 +183,32 @@ function Get-WinmdSummary {
     }
 }
 
+function New-SyntheticPartitions {
+    param(
+        [Parameter(Mandatory)]
+        [string[]]$SourcePaths,
+
+        [Parameter(Mandatory)]
+        [string]$Destination
+    )
+
+    New-Item -ItemType Directory -Force -Path $Destination | Out-Null
+    @($SourcePaths | ForEach-Object {
+        $sourcePath = [System.IO.Path]::GetFullPath($_)
+        $partitionName = Split-Path (Split-Path $sourcePath -Parent) -Leaf
+        $wrapper = Join-Path $Destination "$partitionName.cpp"
+        $content = @"
+#include <win32metadata_annotations.h>
+#include "$sourcePath"
+"@
+        [System.IO.File]::WriteAllText(
+            $wrapper,
+            $content,
+            [System.Text.UTF8Encoding]::new($false))
+        $wrapper
+    })
+}
+
 if (!$OutputRoot) {
     $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
     $OutputRoot = Join-Path $rootDir "obj\WindowsRsBenchmarks\$timestamp"
@@ -279,6 +305,18 @@ foreach ($currentVariant in $variants) {
     }
 
     $headers = Get-ChildItem $recompiledIdlHeadersDir -File -Recurse
+    $generationPartitions = $partitionPaths
+    if ($currentVariant -eq "unpatched") {
+        $generationPartitions = New-SyntheticPartitions `
+            -SourcePaths $partitionPaths `
+            -Destination (Join-Path $variantRoot "synthetic-partitions")
+    }
+    $syntheticTranslationUnits = if ($currentVariant -eq "unpatched") {
+        $generationPartitions.Count
+    }
+    else {
+        0
+    }
     $variantResult = [ordered]@{
         variant = $currentVariant
         patchCount = if ($currentVariant -eq "patched") {
@@ -288,6 +326,7 @@ foreach ($currentVariant in $variants) {
             0
         }
         partitionCount = $partitionPaths.Count
+        syntheticTranslationUnits = $syntheticTranslationUnits
         headerCount = @($headers | Where-Object Extension -eq ".h").Count
         inputFileCount = $headers.Count
         inputBytes = ($headers | Measure-Object Length -Sum).Sum
@@ -320,7 +359,7 @@ foreach ($currentVariant in $variants) {
         $runRoot = Join-Path $variantRoot $run.name
         $output = Join-Path $runRoot "Windows.Win32.winmd"
         $arguments = @("scrape")
-        foreach ($path in $partitionPaths) {
+        foreach ($path in $generationPartitions) {
             $arguments += @("--partition", $path)
         }
         foreach ($path in $includePaths) {
