@@ -38,7 +38,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d7c4b02199fee7c5d21a5ae7d8cfa79a6ef5bb2fc834d6e9058e89c825efdc55"
 dependencies = [
  "cfg-if",
- "windows-link 0.2.1",
+ "windows-link",
 ]
 
 [[package]]
@@ -80,7 +80,9 @@ checksum = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
 name = "win32metadata-tools"
 version = "0.1.0"
 dependencies = [
+ "clang-sys",
  "windows-clang",
+ "windows-default",
  "windows-metadata",
  "windows-rdl",
 ]
@@ -88,22 +90,17 @@ dependencies = [
 [[package]]
 name = "windows-clang"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=1753cce23c6bd4c90cda900b34a75dfe18f9b6f2#1753cce23c6bd4c90cda900b34a75dfe18f9b6f2"
+source = "git+https://github.com/jevansaks/windows-rs?rev=d08dd0c613bb13c0bf6d7e206fd9abdb818824ff#d08dd0c613bb13c0bf6d7e206fd9abdb818824ff"
 dependencies = [
  "clang-sys",
- "proc-macro2",
- "quote",
- "syn",
  "windows-default",
  "windows-metadata",
- "windows-rdl",
- "windows-threading",
 ]
 
 [[package]]
 name = "windows-default"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=1753cce23c6bd4c90cda900b34a75dfe18f9b6f2#1753cce23c6bd4c90cda900b34a75dfe18f9b6f2"
+source = "git+https://github.com/jevansaks/windows-rs?rev=d08dd0c613bb13c0bf6d7e206fd9abdb818824ff#d08dd0c613bb13c0bf6d7e206fd9abdb818824ff"
 
 [[package]]
 name = "windows-link"
@@ -112,31 +109,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
 
 [[package]]
-name = "windows-link"
-version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=1753cce23c6bd4c90cda900b34a75dfe18f9b6f2#1753cce23c6bd4c90cda900b34a75dfe18f9b6f2"
-
-[[package]]
 name = "windows-metadata"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=1753cce23c6bd4c90cda900b34a75dfe18f9b6f2#1753cce23c6bd4c90cda900b34a75dfe18f9b6f2"
+source = "git+https://github.com/jevansaks/windows-rs?rev=d08dd0c613bb13c0bf6d7e206fd9abdb818824ff#d08dd0c613bb13c0bf6d7e206fd9abdb818824ff"
 
 [[package]]
 name = "windows-rdl"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=1753cce23c6bd4c90cda900b34a75dfe18f9b6f2#1753cce23c6bd4c90cda900b34a75dfe18f9b6f2"
+source = "git+https://github.com/jevansaks/windows-rs?rev=d08dd0c613bb13c0bf6d7e206fd9abdb818824ff#d08dd0c613bb13c0bf6d7e206fd9abdb818824ff"
 dependencies = [
  "proc-macro2",
  "quote",
  "syn",
  "windows-default",
  "windows-metadata",
-]
-
-[[package]]
-name = "windows-threading"
-version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=1753cce23c6bd4c90cda900b34a75dfe18f9b6f2#1753cce23c6bd4c90cda900b34a75dfe18f9b6f2"
-dependencies = [
- "windows-link 0.100.0",
 ]

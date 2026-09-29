@@ -39,13 +39,15 @@ if ($LASTEXITCODE -ne 0) {
     throw "The consuming WinmdGenerator project failed."
 }
 
-$packagedAnnotationHeader = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc\win32metadata_annotations.h"
-$sourceAnnotationHeader = Join-Path $root "generation\WinSDK\AdditionalHeaders\win32metadata_annotations.h"
-if (!(Test-Path $packagedAnnotationHeader)) {
-    throw "The package did not contain win32metadata_annotations.h."
-}
-if ((Get-FileHash $packagedAnnotationHeader).Hash -cne (Get-FileHash $sourceAnnotationHeader).Hash) {
-    throw "The packaged annotation header differs from the repository source."
+foreach ($header in @("win32metadata_annotations.h", "win32metadata_sal.h")) {
+    $packagedHeader = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc\$header"
+    $sourceHeader = Join-Path $root "generation\WinSDK\AdditionalHeaders\$header"
+    if (!(Test-Path $packagedHeader)) {
+        throw "The package did not contain $header."
+    }
+    if ((Get-FileHash $packagedHeader).Hash -cne (Get-FileHash $sourceHeader).Hash) {
+        throw "The packaged $header differs from the repository source."
+    }
 }
 
 dotnet build (Join-Path $root "sources\WinmdUtils\WinmdUtils.csproj") -c Release
@@ -157,7 +159,13 @@ if ($actualText -notmatch '\[DllImport\s*\(\s*""\s*,\s*CallingConvention\s*=\s*C
 if ($actualText -notmatch 'public interface ISampleFactory[\s\S]*?Exception Create[\s\S]*?\[PreserveSig\][\s\S]*?Exception TryCreate') {
     throw "HRESULT interface methods were not projected with the PreserveResult distinction."
 }
-if ($actualText -notmatch '\[InvalidHandleValue\s*\(\s*-1L?\s*\)\][\s\S]*?\[InvalidHandleValue\s*\(\s*0L?\s*\)\][\s\S]*?\[RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\][\s\S]*?SAMPLE_RESOURCE_HANDLE') {
+$resourceHandleAttributes = [System.Text.RegularExpressions.Regex]::Match(
+    $actualText,
+    '(?s)((?:\[[^\r\n]+\]\s*)+)public struct SAMPLE_RESOURCE_HANDLE'
+).Groups[1].Value
+if ($resourceHandleAttributes -notmatch '\[InvalidHandleValue\s*\(\s*-1L?\s*\)\]' -or
+    $resourceHandleAttributes -notmatch '\[InvalidHandleValue\s*\(\s*0L?\s*\)\]' -or
+    $resourceHandleAttributes -notmatch '\[RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\]') {
     throw "The typedef RAII and invalid-handle contract was not emitted."
 }
 if ($actualText -notmatch '\[AlsoUsableFor\s*\(\s*"SAMPLE_HANDLE"\s*\)\][\s\S]*?SAMPLE_COMPAT_HANDLE') {
@@ -169,7 +177,13 @@ if ($actualText -notmatch '\[return:\s*AssociatedEnum\s*\(\s*"SAMPLE_MODE"\s*\)\
 if ($actualText -notmatch 'SampleGetMode\s*\(\s*\[In\]\s*\[AssociatedEnum\s*\(\s*"SAMPLE_MODE"\s*\)\]') {
     throw "The parameter AssociatedEnum contract was not emitted."
 }
-if ($actualText -notmatch '\[return:\s*InvalidHandleValue\s*\(\s*-1L?\s*\)\][\s\S]*?\[return:\s*InvalidHandleValue\s*\(\s*0L?\s*\)\][\s\S]*?\[return:\s*RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\][\s\S]*?SampleOpenHandle') {
+$openHandleAttributes = [System.Text.RegularExpressions.Regex]::Match(
+    $actualText,
+    '(?s)(\[DllImport[^\r\n]+\]\s*(?:\[return:[^\r\n]+\]\s*)*)public static extern SAMPLE_HANDLE SampleOpenHandle'
+).Groups[1].Value
+if ($openHandleAttributes -notmatch '\[return:\s*InvalidHandleValue\s*\(\s*-1L?\s*\)\]' -or
+    $openHandleAttributes -notmatch '\[return:\s*InvalidHandleValue\s*\(\s*0L?\s*\)\]' -or
+    $openHandleAttributes -notmatch '\[return:\s*RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\]') {
     throw "The return RAII contract was not emitted."
 }
 if ($actualText -notmatch 'SampleCreateHandle\s*\(\s*\[Out\]\s*\[RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\]\s*\[InvalidHandleValue\s*\(\s*-1L?\s*\)\]\s*\[InvalidHandleValue\s*\(\s*0L?\s*\)\]') {

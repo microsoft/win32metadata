@@ -8,6 +8,8 @@
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
 
+use clang_sys::{clang_getCString, clang_getClangVersion, load};
+
 use crate::args::Args;
 use crate::catch::catch;
 
@@ -53,7 +55,7 @@ impl std::fmt::Display for Provisioned {
 
 /// The libclang version `windows-clang` is built and tested against.
 pub fn pinned_version() -> &'static str {
-    windows_clang::LIBCLANG_VERSION
+    "22.1.8"
 }
 
 /// Locates libclang, points `LIBCLANG_PATH` at it, and reports what was loaded.
@@ -82,7 +84,7 @@ pub fn provision(explicit: Option<&Path>, verify: bool) -> Result<Provisioned, S
             None => {
                 let directory = catch(
                     &format!("failed to provision the pinned libclang {pinned}"),
-                    windows_clang::libclang_dir,
+                    || libclang_dir(pinned),
                 )
                 .map_err(|error| {
                     format!(
@@ -100,7 +102,7 @@ pub fn provision(explicit: Option<&Path>, verify: bool) -> Result<Provisioned, S
         },
     };
 
-    let version = catch("failed to load libclang", windows_clang::clang_version)
+    let version = catch("failed to load libclang", clang_version)
         .and_then(|result| result.map_err(|error| format!("failed to load libclang: {error}")))
         .map_err(|error| {
             format!(
@@ -111,10 +113,11 @@ pub fn provision(explicit: Option<&Path>, verify: bool) -> Result<Provisioned, S
         })?;
 
     if verify {
-        catch(
-            "libclang version check failed",
-            windows_clang::assert_libclang_version,
-        )?;
+        if !version_is_pinned(&version, pinned) {
+            return Err(format!(
+                "libclang version mismatch: expected {pinned}, loaded `{version}`"
+            ));
+        }
     }
 
     Ok(Provisioned {
@@ -122,6 +125,170 @@ pub fn provision(explicit: Option<&Path>, verify: bool) -> Result<Provisioned, S
         version,
         source,
     })
+}
+
+fn libclang_dir(version: &str) -> PathBuf {
+    let (id, rid) = if cfg!(target_arch = "x86_64") {
+        ("libclang.runtime.win-x64", "win-x64")
+    } else if cfg!(target_arch = "aarch64") {
+        ("libclang.runtime.win-arm64", "win-arm64")
+    } else {
+        panic!(
+            "automatic libclang provisioning supports only x64 and arm64 hosts; set LIBCLANG_PATH"
+        );
+    };
+    let native = nuget_package(id, version)
+        .join("runtimes")
+        .join(rid)
+        .join("native");
+    assert!(
+        native.join("libclang.dll").is_file(),
+        "`{}` is missing libclang.dll",
+        native.display()
+    );
+    native
+}
+
+fn clang_version() -> Result<String, String> {
+    load().map_err(|error| format!("failed to load libclang: {error}"))?;
+    let version = unsafe { clang_getClangVersion() };
+    let value = unsafe { std::ffi::CStr::from_ptr(clang_getCString(version)) }
+        .to_string_lossy()
+        .into_owned();
+    unsafe {
+        clang_sys::clang_disposeString(version);
+    }
+    Ok(value)
+}
+
+fn version_is_pinned(reported: &str, pinned: &str) -> bool {
+    reported.match_indices(pinned).any(|(index, _)| {
+        let before = reported[..index]
+            .chars()
+            .next_back()
+            .is_none_or(|character| !character.is_ascii_digit() && character != '.');
+        let after = reported[index + pinned.len()..]
+            .chars()
+            .next()
+            .is_none_or(|character| !character.is_ascii_digit() && character != '.');
+        before && after
+    })
+}
+
+pub fn clang_resource_dir(cache_root: &Path) -> Result<String, String> {
+    if let Ok(directory) = std::env::var("CLANG_RESOURCE_DIR") {
+        return Ok(directory.replace('\\', "/"));
+    }
+
+    let cache = cache_root.join("clang-resource").join(pinned_version());
+    if !cache.join("include").join("intrin.h").is_file() {
+        fetch_clang_resource_headers(&cache)?;
+    }
+    Ok(cache.to_string_lossy().replace('\\', "/"))
+}
+
+fn fetch_clang_resource_headers(cache: &Path) -> Result<(), String> {
+    std::fs::create_dir_all(cache)
+        .map_err(|error| format!("failed to create `{}`: {error}", cache.display()))?;
+    let include = cache.join("include");
+    let work = cache.join("_git");
+    if work.exists() {
+        std::fs::remove_dir_all(&work).ok();
+    }
+    let tag = format!("llvmorg-{}", pinned_version());
+    let status = system_tool("git.exe")
+        .args([
+            "clone",
+            "--filter=blob:none",
+            "--no-checkout",
+            "--depth",
+            "1",
+            "--branch",
+            &tag,
+            "https://github.com/llvm/llvm-project",
+        ])
+        .arg(&work)
+        .status()
+        .map_err(|error| format!("failed to fetch clang resource headers: {error}"))?;
+    if !status.success() {
+        return Err(format!("git clone of llvm-project at {tag} failed"));
+    }
+    for arguments in [
+        &["sparse-checkout", "set", "--no-cone", "clang/lib/Headers"][..],
+        &["checkout"][..],
+    ] {
+        let status = system_tool("git.exe")
+            .arg("-C")
+            .arg(&work)
+            .args(arguments)
+            .status()
+            .map_err(|error| format!("failed to run git {}: {error}", arguments.join(" ")))?;
+        if !status.success() {
+            return Err(format!("git {} failed", arguments.join(" ")));
+        }
+    }
+    if include.exists() {
+        std::fs::remove_dir_all(&include).ok();
+    }
+    std::fs::rename(work.join("clang").join("lib").join("Headers"), &include)
+        .map_err(|error| format!("failed to install clang resource headers: {error}"))?;
+    std::fs::remove_dir_all(&work).ok();
+    Ok(())
+}
+
+fn nuget_package(id: &str, version: &str) -> PathBuf {
+    let root = std::env::var_os("NUGET_PACKAGES").map_or_else(
+        || {
+            PathBuf::from(
+                std::env::var_os("USERPROFILE").expect("NUGET_PACKAGES or USERPROFILE must be set"),
+            )
+            .join(".nuget")
+            .join("packages")
+        },
+        PathBuf::from,
+    );
+    let package = root.join(id).join(version);
+    if package.is_dir() {
+        return package;
+    }
+
+    std::fs::create_dir_all(&package)
+        .unwrap_or_else(|error| panic!("failed to create `{}`: {error}", package.display()));
+    let archive = std::env::temp_dir().join(format!(
+        "{}-{}-{id}.{version}.nupkg",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map_or(0, |duration| duration.as_nanos())
+    ));
+    let url = format!("https://www.nuget.org/api/v2/package/{id}/{version}");
+    let download = system_tool("curl.exe")
+        .args(["-sSL", &url, "-o"])
+        .arg(&archive)
+        .status()
+        .unwrap_or_else(|error| panic!("failed to download `{id}` {version}: {error}"));
+    assert!(download.success(), "failed to download {url}");
+    let extract = system_tool("tar.exe")
+        .arg("-xf")
+        .arg(&archive)
+        .arg("-C")
+        .arg(&package)
+        .status()
+        .unwrap_or_else(|error| panic!("failed to extract `{id}` {version}: {error}"));
+    std::fs::remove_file(&archive).ok();
+    assert!(
+        extract.success(),
+        "failed to extract `{id}` {version} into `{}`",
+        package.display()
+    );
+    package
+}
+
+fn system_tool(name: &str) -> std::process::Command {
+    let system32 = std::env::var_os("SystemRoot")
+        .map(|root| Path::new(&root).join("System32").join(name))
+        .filter(|path| path.is_file());
+    std::process::Command::new(system32.unwrap_or_else(|| PathBuf::from(name)))
 }
 
 fn set_libclang_path(directory: &Path) {

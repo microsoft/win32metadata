@@ -4,11 +4,12 @@ use std::collections::HashSet;
 use std::ffi::{OsStr, OsString};
 use std::path::{Path, PathBuf};
 
-use windows_clang::Arch;
-use windows_rdl::{ArchInput, merge_arch_rdl};
+use windows_rdl::ArchInput;
 
 use crate::args::{Args, required, set_once};
+#[cfg(test)]
 use crate::compile::compile_inputs;
+use crate::compile::patch_assembly_version;
 
 const DEFAULT_NAMESPACE: &str = "Windows.Win32";
 
@@ -188,12 +189,7 @@ fn execute(options: &Options) -> Result<(), String> {
     let mut names = HashSet::new();
     let mut inputs = Vec::with_capacity(options.inputs.len());
     for input in &options.inputs {
-        let arch = Arch::known(&input.arch).ok_or_else(|| {
-            format!(
-                "unknown architecture `{}`; expected x64, arm64, or x86",
-                input.arch
-            )
-        })?;
+        let bits = architecture_bits(&input.arch)?;
         if !names.insert(input.arch.as_str()) {
             return Err(format!("duplicate architecture `{}`", input.arch));
         }
@@ -237,7 +233,7 @@ fn execute(options: &Options) -> Result<(), String> {
         inputs.push(ArchInput {
             rdl_dir: rdl_dir.clone(),
             winmd: winmd.clone(),
-            bits: arch.bits,
+            bits,
         });
     }
     if !names.contains("x64") {
@@ -252,23 +248,123 @@ fn execute(options: &Options) -> Result<(), String> {
             output_rdl.display()
         )
     })?;
-    merge_arch_rdl(
+    merge_architecture_rdl(
         &inputs,
-        None,
         options.namespace.as_deref().unwrap_or(DEFAULT_NAMESPACE),
         output_rdl,
+        output_winmd,
+        assembly_name(options)?,
+        options.assembly_version,
     )
     .map_err(|error| format!("failed to merge architectures: {error}"))?;
 
-    compile_inputs(
-        std::slice::from_ref(output_rdl),
-        &[],
-        assembly_name(options)?,
-        options.assembly_version,
-        output_winmd,
-    )?;
     println!("Merged RDL: {}", output_rdl.display());
     println!("Merged WinMD: {}", output_winmd.display());
+    Ok(())
+}
+
+fn architecture_bits(name: &str) -> Result<i32, String> {
+    match name {
+        "x86" => Ok(1),
+        "x64" => Ok(2),
+        "arm64" => Ok(4),
+        _ => Err(format!(
+            "unknown architecture `{name}`; expected x64, arm64, or x86"
+        )),
+    }
+}
+
+pub(crate) fn merge_architecture_rdl(
+    inputs: &[ArchInput],
+    namespace: &str,
+    output_dir: &Path,
+    output_winmd: &Path,
+    assembly_name: &str,
+    assembly_version: Option<[u16; 4]>,
+) -> Result<(), String> {
+    if let Some(parent) = output_winmd.parent() {
+        std::fs::create_dir_all(parent)
+            .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
+    }
+
+    let temp = std::env::temp_dir().join(format!(
+        "win32metadata-arch-merge-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map_or(0, |duration| duration.as_nanos())
+    ));
+    std::fs::create_dir_all(&temp)
+        .map_err(|error| format!("failed to create `{}`: {error}", temp.display()))?;
+    let merged = temp.join(format!("{assembly_name}.winmd"));
+
+    let result = (|| {
+        let mut merger = windows_metadata::merge();
+        for input in inputs {
+            merger.arch_input(&input.winmd, input.bits);
+        }
+        merger
+            .output(&merged)
+            .merge()
+            .map_err(|error| format!("failed to merge architecture metadata: {error}"))?;
+        if let Some(version) = assembly_version {
+            patch_assembly_version(&merged, version)?;
+        }
+        validate_assembly_identity(&merged, assembly_name)?;
+
+        let mut partitions = std::collections::HashMap::new();
+        for input in inputs {
+            for entry in std::fs::read_dir(&input.rdl_dir)
+                .map_err(|error| format!("failed to read `{}`: {error}", input.rdl_dir.display()))?
+            {
+                let path = entry
+                    .map_err(|error| {
+                        format!("failed to read `{}`: {error}", input.rdl_dir.display())
+                    })?
+                    .path();
+                if path.extension().is_none_or(|extension| extension != "rdl") {
+                    continue;
+                }
+                let Some(stem) = path.file_stem().and_then(|stem| stem.to_str()) else {
+                    continue;
+                };
+                for name in windows_rdl::item_names(&path, namespace)
+                    .map_err(|error| format!("failed to index `{}`: {error}", path.display()))?
+                {
+                    partitions.entry(name).or_insert_with(|| stem.to_string());
+                }
+            }
+        }
+
+        windows_rdl::writer()
+            .input(&merged)
+            .partition(partitions)
+            .output(output_dir)
+            .write()
+            .map_err(|error| format!("failed to restore RDL partitions: {error}"))?;
+        std::fs::copy(&merged, output_winmd)
+            .map(|_| ())
+            .map_err(|error| format!("failed to write `{}`: {error}", output_winmd.display()))
+    })();
+    std::fs::remove_dir_all(temp).ok();
+    result
+}
+
+fn validate_assembly_identity(path: &Path, expected_name: &str) -> Result<(), String> {
+    let file = windows_metadata::reader::File::read(path)
+        .ok_or_else(|| format!("failed to read merged metadata `{}`", path.display()))?;
+    let name = file.assembly_name().ok_or_else(|| {
+        format!(
+            "merged metadata `{}` has no assembly identity",
+            path.display()
+        )
+    })?;
+    if name != expected_name {
+        return Err(format!(
+            "merged metadata assembly name was `{}`, expected `{expected_name}`",
+            name
+        ));
+    }
     Ok(())
 }
 
@@ -387,6 +483,7 @@ The command only merges and compiles existing artifacts."
 #[cfg(test)]
 mod tests {
     use super::*;
+    use windows_metadata::HasAttributes;
 
     fn parse_args(args: &[&str]) -> Result<Options, String> {
         parse(Args::new(args.iter().map(OsString::from).collect()))
@@ -552,12 +649,12 @@ mod tests {
         std::fs::create_dir_all(&x86_rdl).unwrap();
         std::fs::write(
             x64_rdl.join("Test.rdl"),
-            "#[win32] mod Test { const COMMON: i32 = 1; const X64_ONLY: i32 = 2; }",
+            "#[win32] mod Test { struct ARCH_VALUE { value: i64 } const COMMON: i32 = 1; const X64_ONLY: i32 = 2; }",
         )
         .unwrap();
         std::fs::write(
             x86_rdl.join("Test.rdl"),
-            "#[win32] mod Test { const COMMON: i32 = 1; const X86_ONLY: i32 = 3; }",
+            "#[win32] mod Test { struct ARCH_VALUE { value: i32 } const COMMON: i32 = 1; const X86_ONLY: i32 = 3; }",
         )
         .unwrap();
         let x64_winmd = root.join("x64.winmd");
@@ -605,7 +702,28 @@ mod tests {
         let rdl = std::fs::read_to_string(output_rdl.join("Test.rdl")).unwrap();
         assert!(rdl.contains("#[arch(X64)]"));
         assert!(rdl.contains("#[arch(X86)]"));
-        assert!(windows_metadata::reader::Index::read(&output_winmd).is_some());
+        let index = windows_metadata::reader::Index::read(&output_winmd).unwrap();
+        let mut variants = index
+            .types()
+            .filter(|ty| ty.namespace() == "Test" && ty.name() == "ARCH_VALUE")
+            .map(|ty| {
+                (
+                    ty.arches(),
+                    ty.fields()
+                        .find(|field| field.name() == "value")
+                        .unwrap()
+                        .ty(),
+                )
+            })
+            .collect::<Vec<_>>();
+        variants.sort_by_key(|(arches, _)| *arches);
+        assert_eq!(
+            variants,
+            [
+                (1, windows_metadata::Type::I32),
+                (2, windows_metadata::Type::I64)
+            ]
+        );
         assert!(x64_rdl.join("Test.rdl").is_file());
         assert!(x86_rdl.join("Test.rdl").is_file());
         std::fs::remove_dir_all(&root).ok();

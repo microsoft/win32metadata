@@ -25,5 +25,6 @@
     <file src="bin\GeneratorSdk\tools\win-x64\libclang.dll" target="tools\win-x64"/>
     <file src="generation\WinSDK\inc\*" target="tools\assets\WinSDK\inc"/>
     <file src="generation\WinSDK\AdditionalHeaders\win32metadata_annotations.h" target="tools\assets\WinSDK\inc"/>
+    <file src="generation\WinSDK\AdditionalHeaders\win32metadata_sal.h" target="tools\assets\WinSDK\inc"/>
   </files>
 </package>

@@ -56,6 +56,7 @@ Roughly 15 seconds from a clean object directory.
 | Option | Meaning |
 | --- | --- |
 | `--partition <path>` | Partition translation unit. Repeatable. |
+| `--partition-root <path>` | Directory of partition subdirectories containing `main.cpp`. Repeatable. |
 | `--include <dir>` | Header root. Repeatable, searched in the order given. |
 | `--lib <dir-or-file>` | SDK import-library directory or file. Repeatable. |
 | `--arch <x64\|arm64\|x86>` | Repeatable. Defaults to `x64`. |

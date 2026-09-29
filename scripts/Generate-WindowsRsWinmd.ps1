@@ -67,7 +67,8 @@ if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
 
 $sdkLibRoot = Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"
 
-if ($Partition.Count -eq 0)
+$usePartitionRoot = $Partition.Count -eq 0
+if ($usePartitionRoot)
 {
     $Partition = Get-ChildItem (Join-Path $windowsWin32ProjectRoot "Partitions") -Directory |
         Where-Object { Test-Path (Join-Path $_.FullName "main.cpp") } |
@@ -90,14 +91,21 @@ foreach ($include in $includePaths)
     $arguments += @("--include", $include)
 }
 
-foreach ($name in $Partition)
+if ($usePartitionRoot)
 {
-    $main = Join-Path $windowsWin32ProjectRoot "Partitions\$name\main.cpp"
-    if (!(Test-Path $main))
+    $arguments += @("--partition-root", (Join-Path $windowsWin32ProjectRoot "Partitions"))
+}
+else
+{
+    foreach ($name in $Partition)
     {
-        throw "Partition '$name' was not found at $main."
+        $main = Join-Path $windowsWin32ProjectRoot "Partitions\$name\main.cpp"
+        if (!(Test-Path $main))
+        {
+            throw "Partition '$name' was not found at $main."
+        }
+        $arguments += @("--partition", $main)
     }
-    $arguments += @("--partition", $main)
 }
 
 foreach ($arch in $Architecture)

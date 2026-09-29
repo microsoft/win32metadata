@@ -196,7 +196,9 @@ function New-SyntheticPartitions {
     @($SourcePaths | ForEach-Object {
         $sourcePath = [System.IO.Path]::GetFullPath($_)
         $partitionName = Split-Path (Split-Path $sourcePath -Parent) -Leaf
-        $wrapper = Join-Path $Destination "$partitionName.cpp"
+        $partitionDirectory = Join-Path $Destination $partitionName
+        New-Item -ItemType Directory -Force -Path $partitionDirectory | Out-Null
+        $wrapper = Join-Path $partitionDirectory "main.cpp"
         $content = @"
 #include <win32metadata_annotations.h>
 #include "$sourcePath"
@@ -248,7 +250,8 @@ elseif (!(Test-Path $tool)) {
     throw "The staged native tool was not found at '$tool'."
 }
 
-if ($Partition.Count -eq 0) {
+$usePartitionRoot = $Partition.Count -eq 0
+if ($usePartitionRoot) {
     $Partition = Get-ChildItem (Join-Path $windowsWin32ProjectRoot "Partitions") -Directory |
         Where-Object { Test-Path (Join-Path $_.FullName "main.cpp") } |
         Sort-Object Name |
@@ -361,8 +364,19 @@ foreach ($currentVariant in $variants) {
         $runRoot = Join-Path $variantRoot $run.name
         $output = Join-Path $runRoot "Windows.Win32.winmd"
         $arguments = @("scrape")
-        foreach ($path in $generationPartitions) {
-            $arguments += @("--partition", $path)
+        if ($usePartitionRoot) {
+            $partitionRoot = if ($currentVariant -eq "unpatched") {
+                Join-Path $variantRoot "synthetic-partitions"
+            }
+            else {
+                Join-Path $windowsWin32ProjectRoot "Partitions"
+            }
+            $arguments += @("--partition-root", $partitionRoot)
+        }
+        else {
+            foreach ($path in $generationPartitions) {
+                $arguments += @("--partition", $path)
+            }
         }
         foreach ($path in $includePaths) {
             $arguments += @("--include", $path)
