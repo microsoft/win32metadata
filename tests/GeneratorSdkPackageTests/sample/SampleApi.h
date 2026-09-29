@@ -123,6 +123,12 @@ extern "C" void SampleBuffers(
         _WIN32META_ANNOTATION_("win32metadata:not_null_terminated")
         _WIN32META_ANNOTATION_("win32metadata:null_null_terminated"));
 
+extern "C" void SampleOutputBuffers(
+    _Out_ unsigned long* elementCount,
+    _Outptr_result_buffer_maybenull_(*elementCount) int** values,
+    _Out_ unsigned long* byteCount,
+    _Outptr_result_bytebuffer_(*byteCount) void** bytes);
+
 #if defined(_M_IX86)
 extern "C" int SampleX86Only(void);
 #else

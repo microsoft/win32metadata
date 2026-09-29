@@ -639,19 +639,17 @@ fn build_inputs(options: &Options, root_dirs: &[String]) -> Result<Vec<Input>, S
     for (index, (_context, sources)) in groups.into_iter().enumerate() {
         let mut source = String::new();
         let mut includes = BTreeSet::new();
-        for (source_index, (path, content)) in sources.into_iter().enumerate() {
+        for (path, content) in sources {
             source.push_str(&format!("\n// {}\n", path.display()));
-            if source_index == 0 {
-                source.push_str(&content);
-                includes.extend(content.lines().filter_map(include_key).map(str::to_string));
-            } else {
-                for line in content.lines() {
-                    if let Some(include) = include_key(line)
-                        && includes.insert(include.to_string())
-                    {
+            for line in content.lines() {
+                if let Some(include) = include_key(line) {
+                    if includes.insert(include.to_string()) {
                         source.push_str(line.trim());
                         source.push('\n');
                     }
+                } else {
+                    source.push_str(line);
+                    source.push('\n');
                 }
             }
         }
@@ -1183,6 +1181,38 @@ mod tests {
                 root.join("ucrt"),
                 root.join("winrt"),
             ]
+        );
+        std::fs::remove_dir_all(root).ok();
+    }
+
+    #[test]
+    fn grouped_inputs_preserve_each_include_context() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-group-context-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        std::fs::create_dir_all(&root).unwrap();
+        let first = root.join("first.cpp");
+        let second = root.join("second.cpp");
+        std::fs::write(&first, "extern \"C\" {\n#include <first.h>\n}\n").unwrap();
+        std::fs::write(&second, "extern \"C\" {\n#include <second.h>\n}\n").unwrap();
+
+        let options = Options {
+            partitions: vec![first, second],
+            ..Default::default()
+        };
+        let inputs = build_inputs(&options, &[]).unwrap();
+        assert_eq!(inputs.len(), 1);
+        assert!(
+            inputs[0]
+                .source
+                .contains("extern \"C\" {\n#include <first.h>\n}")
+        );
+        assert!(
+            inputs[0]
+                .source
+                .contains("extern \"C\" {\n#include <second.h>\n}")
         );
         std::fs::remove_dir_all(root).ok();
     }

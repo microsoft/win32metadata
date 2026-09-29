@@ -43,6 +43,9 @@ public sealed class Apis
 	[return: InvalidHandleValue (0L)]
 	public static extern SAMPLE_HANDLE SampleOpenHandle ();
 
+	[DllImport ("", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true, PreserveSig = false)]
+	public unsafe static extern void SampleOutputBuffers ([Out] uint* elementCount, [Out][NativeArrayInfo (CountParamIndex = 0)] int** values, [Out] uint* byteCount, [Out][MemorySize (BytesParamIndex = 2)] void** bytes);
+
 	[DllImport ("", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 	public static extern Exception SamplePreservedResult ();
 

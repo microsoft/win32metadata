@@ -198,6 +198,9 @@ if ($actualText -notmatch 'ISampleFactory[\s\S]*?Create\s*\(\s*\[Out\]\s*\[RetVa
 if ($actualText -notmatch 'SampleBuffers[\s\S]*?NativeArrayInfo[\s\S]*?MemorySize[\s\S]*?NotNullTerminated[\s\S]*?NullNullTerminated') {
     throw "The buffer and termination contracts were not emitted."
 }
+if ($actualText -notmatch 'SampleOutputBuffers[\s\S]*?NativeArrayInfo[\s\S]*?MemorySize') {
+    throw "The output-pointer buffer contracts were not emitted."
+}
 if ($actualText -notmatch '\[DllImport\s*\(\s*"samplemerged\.dll"[\s\S]*?SetLastError\s*=\s*true[\s\S]*?\[SupportedOSPlatform\s*\(\s*"windows6\.1"\s*\)\][\s\S]*?SampleMergedContract') {
     throw "Compatible redeclarations did not merge import, SetLastError, and availability metadata."
 }
