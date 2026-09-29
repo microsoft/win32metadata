@@ -129,6 +129,14 @@ extern "C" void SampleOutputBuffers(
     _Out_ unsigned long* byteCount,
     _Outptr_result_bytebuffer_(*byteCount) void** bytes);
 
+extern "C" void SampleLegacyBuffers(
+    _Out_opt_bytecap_post_bytecount_(capacity, *written) void* buffer,
+    unsigned long capacity,
+    _Out_ unsigned long* written,
+    _In_reads_z_(characterCount) const char* input,
+    unsigned long characterCount,
+    _Outptr_result_z_ char** output);
+
 #if defined(_M_IX86)
 extern "C" int SampleX86Only(void);
 #else

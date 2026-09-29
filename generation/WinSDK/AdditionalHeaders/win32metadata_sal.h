@@ -19,6 +19,11 @@
 #define _In_opt_ __attribute__((annotate("_In_opt_")))
 #undef _In_opt_z_
 #define _In_opt_z_ __attribute__((annotate("_In_opt_z_")))
+#undef _In_NLS_string_
+#define _In_NLS_string_(c) __attribute__((annotate("_In_reads_or_z_(" #c ")")))
+#undef _In_range_
+#define _In_range_(minimum, maximum) \
+    __attribute__((annotate("_In_range_(" #minimum "," #maximum ")")))
 #undef _Out_
 #define _Out_ __attribute__((annotate("_Out_")))
 #undef _Out_z_
@@ -31,6 +36,8 @@
 #define _Inout_z_ __attribute__((annotate("_Inout_z_")))
 #undef _Inout_opt_
 #define _Inout_opt_ __attribute__((annotate("_Inout_opt_")))
+#undef _Inout_opt_z_
+#define _Inout_opt_z_ __attribute__((annotate("_Inout_opt_z_")))
 #undef _Outptr_
 #define _Outptr_ __attribute__((annotate("_Outptr_")))
 #undef _Outptr_opt_
@@ -39,6 +46,21 @@
 #define _Outptr_result_maybenull_ __attribute__((annotate("_Outptr_result_maybenull_")))
 #undef _Outptr_opt_result_maybenull_
 #define _Outptr_opt_result_maybenull_ __attribute__((annotate("_Outptr_opt_result_maybenull_")))
+#undef _Outptr_result_z_
+#define _Outptr_result_z_ __attribute__((annotate("_Outptr_result_z_")))
+#undef _Outptr_result_maybenull_z_
+#define _Outptr_result_maybenull_z_ __attribute__((annotate("_Outptr_result_maybenull_z_")))
+#undef _Outptr_result_nullonfailure_
+#define _Outptr_result_nullonfailure_ \
+    __attribute__((annotate("_Outptr_result_maybenull_")))
+#undef _Outptr_opt_result_z_
+#define _Outptr_opt_result_z_ __attribute__((annotate("_Outptr_opt_result_z_")))
+#undef _Outptr_opt_result_maybenull_z_
+#define _Outptr_opt_result_maybenull_z_ \
+    __attribute__((annotate("_Outptr_opt_result_maybenull_z_")))
+#undef _Outptr_opt_result_nullonfailure_
+#define _Outptr_opt_result_nullonfailure_ \
+    __attribute__((annotate("_Outptr_opt_result_maybenull_")))
 #undef _COM_Outptr_
 #define _COM_Outptr_ __attribute__((annotate("_COM_Outptr_")))
 #undef _COM_Outptr_opt_
@@ -49,6 +71,9 @@
 #define _COM_Outptr_opt_result_maybenull_ __attribute__((annotate("_COM_Outptr_opt_result_maybenull_")))
 #undef _Reserved_
 #define _Reserved_ __attribute__((annotate("_Reserved_")))
+#undef _Out_range_
+#define _Out_range_(minimum, maximum) \
+    __attribute__((annotate("_Out_range_(" #minimum "," #maximum ")")))
 
 #undef _In_reads_
 #define _In_reads_(c) __attribute__((annotate("_In_reads_(" #c ")")))
@@ -58,6 +83,12 @@
 #define _In_reads_bytes_(c) __attribute__((annotate("_In_reads_bytes_(" #c ")")))
 #undef _In_reads_bytes_opt_
 #define _In_reads_bytes_opt_(c) __attribute__((annotate("_In_reads_bytes_opt_(" #c ")")))
+#undef _In_reads_z_
+#define _In_reads_z_(c) __attribute__((annotate("_In_reads_z_(" #c ")")))
+#undef _In_reads_or_z_
+#define _In_reads_or_z_(c) __attribute__((annotate("_In_reads_or_z_(" #c ")")))
+#undef _In_reads_or_z_opt_
+#define _In_reads_or_z_opt_(c) __attribute__((annotate("_In_reads_or_z_opt_(" #c ")")))
 #undef _Out_writes_
 #define _Out_writes_(c) __attribute__((annotate("_Out_writes_(" #c ")")))
 #undef _Out_writes_z_
@@ -175,6 +206,12 @@
 #define _Inout_updates_opt_(c) __attribute__((annotate("_Inout_updates_opt_(" #c ")")))
 #undef _Inout_updates_bytes_
 #define _Inout_updates_bytes_(c) __attribute__((annotate("_Inout_updates_bytes_(" #c ")")))
+#undef _Inout_bytecount_
+#define _Inout_bytecount_(c) __attribute__((annotate("_Inout_updates_bytes_(" #c ")")))
+#undef _Inout_opt_bytecount_
+#define _Inout_opt_bytecount_(c) __attribute__((annotate("_Inout_updates_bytes_opt_(" #c ")")))
+#undef _Inout_count_
+#define _Inout_count_(c) __attribute__((annotate("_Inout_updates_(" #c ")")))
 
 #undef _Out_writes_all_
 #define _Out_writes_all_(c) __attribute__((annotate("_Out_writes_all_(" #c ")")))
@@ -182,6 +219,20 @@
 #define _Out_writes_all_opt_(c) __attribute__((annotate("_Out_writes_all_opt_(" #c ")")))
 #undef _Out_writes_bytes_all_opt_
 #define _Out_writes_bytes_all_opt_(c) __attribute__((annotate("_Out_writes_bytes_all_opt_(" #c ")")))
+#undef _Out_bytecapcount_
+#define _Out_bytecapcount_(c) __attribute__((annotate("_Out_writes_bytes_(" #c ")")))
+#undef _Out_cap_post_count_
+#define _Out_cap_post_count_(s, c) __attribute__((annotate("_Out_writes_to_(" #s "," #c ")")))
+#undef _Out_opt_bytecap_post_bytecount_
+#define _Out_opt_bytecap_post_bytecount_(s, c) \
+    __attribute__((annotate("_Out_writes_bytes_to_opt_(" #s "," #c ")")))
+#undef _Out_opt_cap_post_count_
+#define _Out_opt_cap_post_count_(s, c) \
+    __attribute__((annotate("_Out_writes_to_opt_(" #s "," #c ")")))
+#undef _Out_z_cap_
+#define _Out_z_cap_(c) __attribute__((annotate("_Out_writes_z_(" #c ")")))
+#undef _Out_opt_z_cap_
+#define _Out_opt_z_cap_(c) __attribute__((annotate("_Out_writes_opt_z_(" #c ")")))
 #undef _Inout_updates_all_
 #define _Inout_updates_all_(c) __attribute__((annotate("_Inout_updates_all_(" #c ")")))
 #undef _Inout_updates_all_opt_

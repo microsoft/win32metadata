@@ -201,6 +201,9 @@ if ($actualText -notmatch 'SampleBuffers[\s\S]*?NativeArrayInfo[\s\S]*?MemorySiz
 if ($actualText -notmatch 'SampleOutputBuffers[\s\S]*?NativeArrayInfo[\s\S]*?MemorySize') {
     throw "The output-pointer buffer contracts were not emitted."
 }
+if ($actualText -notmatch 'SampleLegacyBuffers[\s\S]*?MemorySize[\s\S]*?NativeArrayInfo') {
+    throw "Legacy buffer-size and terminated-string contracts were not emitted."
+}
 if ($actualText -notmatch '\[DllImport\s*\(\s*"samplemerged\.dll"[\s\S]*?SetLastError\s*=\s*true[\s\S]*?\[SupportedOSPlatform\s*\(\s*"windows6\.1"\s*\)\][\s\S]*?SampleMergedContract') {
     throw "Compatible redeclarations did not merge import, SetLastError, and availability metadata."
 }
