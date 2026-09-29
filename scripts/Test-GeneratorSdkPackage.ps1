@@ -74,6 +74,40 @@ $actualText = [System.Text.RegularExpressions.Regex]::Replace(
 )
 [System.IO.File]::WriteAllText($actual, $actualText)
 
+function Assert-InvalidAnnotation {
+    param(
+        [string]$Name
+    )
+
+    $invalidRoot = Join-Path $sample "invalid"
+    $partition = Join-Path $invalidRoot "$Name.cpp"
+    $work = Join-Path $root "obj\GeneratorSdkPackageTests\invalid\$Name"
+    $output = Join-Path $work "$Name.winmd"
+    New-Item -ItemType Directory -Force -Path $work | Out-Null
+
+    $messages = @(& (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
+        --partition $partition `
+        --include $invalidRoot `
+        --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
+        --arch x64 `
+        --scope-header $Name `
+        --namespace "Sample.Invalid" `
+        --obj $work `
+        --output $output 2>&1 | ForEach-Object { $_.ToString() })
+    if ($LASTEXITCODE -eq 0) {
+        throw "Invalid annotation case '$Name' unexpectedly generated a WinMD."
+    }
+    if (($messages -join "`n") -notmatch "(?i)error") {
+        throw "Invalid annotation case '$Name' failed without an explicit error."
+    }
+}
+
+Assert-InvalidAnnotation "UnknownAnnotation"
+Assert-InvalidAnnotation "MissingAnnotationValue"
+Assert-InvalidAnnotation "EmptyAnnotationValue"
+Assert-InvalidAnnotation "UnexpectedAnnotationValue"
+Assert-InvalidAnnotation "InvalidAnnotationTarget"
+
 function Assert-MatchCount {
     param(
         [string]$Pattern,
