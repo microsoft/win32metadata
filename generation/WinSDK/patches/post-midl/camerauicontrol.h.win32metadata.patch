@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CameraUIControl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CameraUIControl.h
+index e2f59bd6e4..4c7be36078 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CameraUIControl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CameraUIControl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -157,7 +158,7 @@ EXTERN_C const IID IID_ICameraUIControlEventCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1BFA0C2C-FBCD-4776-BDA4-88BF974E74F4")
++    MIDL_INTERFACE("1BFA0C2C-FBCD-4776-BDA4-88BF974E74F4") _Windows_SupportedOS_Windows8_ 
+     ICameraUIControlEventCallback : public IUnknown
+     {
+     public:
+@@ -284,7 +285,7 @@ EXTERN_C const IID IID_ICameraUIControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B8733ADF-3D68-4b8f-BB08-E28A0BED0376")
++    MIDL_INTERFACE("B8733ADF-3D68-4b8f-BB08-E28A0BED0376") _Windows_SupportedOS_Windows8_ 
+     ICameraUIControl : public IUnknown
+     {
+     public:
+@@ -320,7 +321,7 @@ EXTERN_C const IID IID_ICameraUIControl;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetActiveItem( 
+             /* [annotation][out] */ 
+-            _Outptr_opt_  BSTR *pbstrActiveItemPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Outptr_opt_  BSTR *pbstrActiveItemPath) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSelectedItems( 
+             /* [annotation][out] */ 

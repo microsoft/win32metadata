@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusimaging.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusimaging.h
+index 3b5ae8b680..28f23d36cf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusimaging.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusimaging.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /**************************************************************************\
+ * 
+@@ -88,7 +89,7 @@ public:
+     // Return total number of bytes in the IStream
+ 
+     STDMETHOD(CountBytes)(
+-        OUT UINT *pcb
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT *pcb
+         ) = 0;
+     
+     // Locks "cb" bytes, starting from "ulOffset" in the stream, and returns the

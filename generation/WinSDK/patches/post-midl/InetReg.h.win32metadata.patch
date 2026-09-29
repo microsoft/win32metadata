@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/InetReg.h b/generation/WinSDK/RecompiledIdlHeaders/um/InetReg.h
+index 8a2c967e6d..c005557ff9 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/InetReg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/InetReg.h
+@@ -444,16 +444,28 @@
+ 
+ #ifdef UNIX
+ // Registry item containing the exe name to check for disabling OE
++#endif
++#if (defined(WIN32METADATA) && !defined(IE_USE_OE_PRESENT_HKEY)) || (((defined(UNIX))))
+ #define IE_USE_OE_PRESENT_HKEY HKEY_LOCAL_MACHINE
++#endif
++#ifdef UNIX
+ #define IE_USE_OE_PRESENT_KEY  TEXT("Software\\Microsoft\\Windows\\CurrentVersion\\app.paths\\msimn.exe")
+ #define IE_USE_OE_PRESENT_VALUE NULL
+ 
+ // locations for new OE control variables for unix
++#endif
++#if (defined(WIN32METADATA) && !defined(IE_USE_OE_MAIL_HKEY)) || (((defined(UNIX))))
+ #define IE_USE_OE_MAIL_HKEY  HKEY_CURRENT_USER
++#endif
++#ifdef UNIX
+ #define IE_USE_OE_MAIL_KEY   TEXT("Software\\Microsoft\\Internet Explorer\\Mail")
+ #define IE_USE_OE_MAIL_VALUE TEXT("Use Outlook Express")
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(IE_USE_OE_NEWS_HKEY)) || (((defined(UNIX))))
+ #define IE_USE_OE_NEWS_HKEY  HKEY_CURRENT_USER
++#endif
++#ifdef UNIX
+ #define IE_USE_OE_NEWS_KEY   TEXT("Software\\Microsoft\\Internet Explorer\\News")
+ #define IE_USE_OE_NEWS_VALUE TEXT("Use Outlook Express")
+ #endif // UNIX

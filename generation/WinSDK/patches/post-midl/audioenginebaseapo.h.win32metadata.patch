@@ -1,0 +1,89 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h b/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
+index af745cafed..0c22dfb5ad 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audioenginebaseapo.h
+@@ -147,6 +147,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ //
+@@ -216,7 +217,7 @@ typedef struct APO_CONNECTION_DESCRIPTOR
+     } 	APO_CONNECTION_DESCRIPTOR;
+ 
+ typedef 
+-enum APO_FLAG
++enum   APO_FLAG
+     {
+         APO_FLAG_NONE	= 0,
+         APO_FLAG_INPLACE	= 0x1,
+@@ -246,7 +247,7 @@ typedef struct APO_REG_PROPERTIES
+ 
+ typedef struct APO_REG_PROPERTIES *PAPO_REG_PROPERTIES;
+ 
+-typedef struct APOInitBaseStruct
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  APOInitBaseStruct
+     {
+     UINT32 cbSize;
+     CLSID clsid;
+@@ -526,11 +527,11 @@ EXTERN_C const IID IID_IAudioProcessingObjectConfiguration;
+             /* [annotation][in] */ 
+             _In_  UINT32 u32NumInputConnections,
+             /* [annotation][in] */ 
+-            _In_  APO_CONNECTION_DESCRIPTOR **ppInputConnections,
++            _WIN32META_ANNOTATION_("win32metadata:array_count_param=0") _In_  APO_CONNECTION_DESCRIPTOR **ppInputConnections,
+             /* [annotation][in] */ 
+             _In_  UINT32 u32NumOutputConnections,
+             /* [annotation][in] */ 
+-            _In_  APO_CONNECTION_DESCRIPTOR **ppOutputConnections) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _In_  APO_CONNECTION_DESCRIPTOR **ppOutputConnections) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE UnlockForProcess( void) = 0;
+         
+@@ -808,7 +809,7 @@ EXTERN_C const IID IID_IAudioDeviceModulesClient;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("98F37DAC-D0B6-49F5-896A-AA4D169A4C48")
+-    IAudioDeviceModulesClient : public IUnknown
++     IAudioDeviceModulesClient : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetAudioDeviceModulesManager( 
+@@ -889,7 +890,7 @@ EXTERN_C const IID IID_IAudioDeviceModulesClient;
+ //
+ // APO registration functions
+ //
+-typedef HRESULT (WINAPI FNAPONOTIFICATIONCALLBACK)(APO_REG_PROPERTIES* pProperties, VOID* pvRefData);
++typedef HRESULT (WINAPI FNAPONOTIFICATIONCALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") APO_REG_PROPERTIES* pProperties, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID* pvRefData);
+ extern HRESULT WINAPI RegisterAPO(APO_REG_PROPERTIES const* pProperties);
+ extern HRESULT WINAPI UnregisterAPO(REFCLSID clsid);
+ extern HRESULT WINAPI RegisterAPONotification(HANDLE hEvent);
+@@ -1204,7 +1205,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4CEB0AAB-FA19-48ED-A857-87771AE1B768")
+-    IApoAuxiliaryInputConfiguration : public IUnknown
++     IApoAuxiliaryInputConfiguration : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AddAuxiliaryInput( 
+@@ -1333,7 +1334,7 @@ EXTERN_C const IID IID_IApoAuxiliaryInputRT;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F851809C-C177-49A0-B1B2-B66F017943AB")
+-    IApoAuxiliaryInputRT : public IUnknown
++     IApoAuxiliaryInputRT : public IUnknown
+     {
+     public:
+         virtual void STDMETHODCALLTYPE AcceptInput( 
+@@ -1424,7 +1425,7 @@ EXTERN_C const IID IID_IApoAcousticEchoCancellation;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("25385759-3236-4101-A943-25693DFB5D2D")
+-    IApoAcousticEchoCancellation : public IUnknown
++     IApoAcousticEchoCancellation : public IUnknown
+     {
+     public:
+     };

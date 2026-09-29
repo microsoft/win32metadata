@@ -1,0 +1,49 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/minwindef.h b/generation/WinSDK/RecompiledIdlHeaders/shared/minwindef.h
+index 384fd6d2aa..b0c97cb4cf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/minwindef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/minwindef.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /****************************************************************************
+ *                                                                           *
+ * minwindef.h -- Basic Windows Type Definitions for minwin partition        *
+@@ -208,8 +209,8 @@ typedef LONG_PTR            LRESULT;
+ 
+ typedef HANDLE NEAR         *SPHANDLE;
+ typedef HANDLE FAR          *LPHANDLE;
+-typedef HANDLE              HGLOBAL;
+-typedef HANDLE              HLOCAL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=GlobalFree") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE              HGLOBAL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=LocalFree") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE              HLOCAL;
+ typedef HANDLE              GLOBALHANDLE;
+ typedef HANDLE              LOCALHANDLE;
+ 
+@@ -244,19 +245,19 @@ typedef INT_PTR (WINAPI *PROC)(void);
+ 
+ typedef WORD                ATOM;   //BUGBUG - might want to remove this from minwin
+ 
+-DECLARE_HANDLE(HKEY);
++DECLARE_HANDLE(HKEY) _WIN32META_ANNOTATION_("win32metadata:raii_free=RegCloseKey")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ typedef HKEY *PHKEY;
+-DECLARE_HANDLE(HMETAFILE);
+-DECLARE_HANDLE(HINSTANCE);
+-typedef HINSTANCE HMODULE;      /* HMODULEs can be used in place of HINSTANCEs */
+-DECLARE_HANDLE(HRGN);
+-DECLARE_HANDLE(HRSRC);
++DECLARE_HANDLE(HMETAFILE) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteMetaFile")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HINSTANCE) _WIN32META_ANNOTATION_("win32metadata:raii_free=FreeLibrary")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=FreeLibrary") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") _Win32_AlsoUsableFor_(HINSTANCE) typedef HINSTANCE HMODULE;      /* HMODULEs can be used in place of HINSTANCEs */
++DECLARE_HANDLE(HRGN) _WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HRSRC) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ DECLARE_HANDLE(HSPRITE);
+ DECLARE_HANDLE(HLSURF);
+ DECLARE_HANDLE(HSTR);
+-DECLARE_HANDLE(HTASK);
+-DECLARE_HANDLE(HWINSTA);
+-DECLARE_HANDLE(HKL);
++DECLARE_HANDLE(HTASK) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HWINSTA) _WIN32META_ANNOTATION_("win32metadata:raii_free=CloseWindowStation")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HKL) _WIN32META_ANNOTATION_("win32metadata:raii_free=UnloadKeyboardLayout")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ #ifndef _MAC
+ typedef int HFILE;

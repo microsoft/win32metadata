@@ -13,3 +13,5 @@
 #include <xaudio2fx.h>
 #include <hrtfapoapi.h>
 #include <xapo.h>
+
+// x3daudio.h is blocked: the reader skips DirectX::XMFLOAT3.

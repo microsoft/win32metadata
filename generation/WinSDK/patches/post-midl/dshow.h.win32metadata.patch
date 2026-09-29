@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dshow.h b/generation/WinSDK/RecompiledIdlHeaders/um/dshow.h
+index 27458a5ef7..ca3462ceaa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dshow.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dshow.h
+@@ -106,4 +106,19 @@
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("OATRUE")
++#undef OATRUE
++#pragma push_macro("OAFALSE")
++#undef OAFALSE
++enum OA_BOOL : int
++{
++    OATRUE = -1,
++    OAFALSE = 0,
++};
++#pragma pop_macro("OAFALSE")
++#pragma pop_macro("OATRUE")
++#endif
++
+ #endif // __DSHOW_INCLUDED__

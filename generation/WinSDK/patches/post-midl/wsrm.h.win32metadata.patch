@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h
+index 41d1df1286..61a437e1d8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsrm.h
+@@ -15,6 +15,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -96,7 +97,7 @@ enum eWINDOW_ADVANCE_METHOD
+ //
+ // Structures
+ //
+-typedef struct _RM_SEND_WINDOW
++typedef struct   _RM_SEND_WINDOW
+ {
+     ULONG   RateKbitsPerSec;            // Send rate
+     ULONG   WindowSizeInMSecs;

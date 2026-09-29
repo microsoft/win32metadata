@@ -1,0 +1,50 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinNls32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinNls32.h
+index c1deb3a530..b589777782 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinNls32.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinNls32.h
+@@ -17,6 +17,7 @@ Abstract:
+ #define _WINNLS32_
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -62,22 +63,22 @@ typedef NPIMEPROA NPIMEPRO;
+ typedef LPIMEPROA LPIMEPRO;
+ #endif // UNICODE
+ 
+-BOOL  WINAPI IMPGetIMEA( IN HWND, OUT LPIMEPROA);
+-BOOL  WINAPI IMPGetIMEW( IN HWND, OUT LPIMEPROW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL  WINAPI IMPGetIMEA( IN HWND, _WIN32META_ANNOTATION_("win32metadata:in") OUT LPIMEPROA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL  WINAPI IMPGetIMEW( IN HWND, _WIN32META_ANNOTATION_("win32metadata:in") OUT LPIMEPROW);
+ #ifdef UNICODE
+ #define IMPGetIME  IMPGetIMEW
+ #else
+ #define IMPGetIME  IMPGetIMEA
+ #endif // !UNICODE
+-BOOL  WINAPI IMPQueryIMEA( IN OUT LPIMEPROA);
+-BOOL  WINAPI IMPQueryIMEW( IN OUT LPIMEPROW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL  WINAPI IMPQueryIMEA( IN OUT LPIMEPROA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL  WINAPI IMPQueryIMEW( IN OUT LPIMEPROW);
+ #ifdef UNICODE
+ #define IMPQueryIME  IMPQueryIMEW
+ #else
+ #define IMPQueryIME  IMPQueryIMEA
+ #endif // !UNICODE
+-BOOL  WINAPI IMPSetIMEA( IN HWND, IN LPIMEPROA);
+-BOOL  WINAPI IMPSetIMEW( IN HWND, IN LPIMEPROW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL  WINAPI IMPSetIMEA( IN HWND, _WIN32META_ANNOTATION_("win32metadata:out") IN LPIMEPROA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL  WINAPI IMPSetIMEW( IN HWND, _WIN32META_ANNOTATION_("win32metadata:out") IN LPIMEPROW);
+ #ifdef UNICODE
+ #define IMPSetIME  IMPSetIMEW
+ #else
+@@ -85,6 +86,8 @@ BOOL  WINAPI IMPSetIMEW( IN HWND, IN LPIMEPROW);
+ #endif // !UNICODE
+ 
+ UINT  WINAPI WINNLSGetIMEHotkey( IN HWND);
++_Windows_SupportedOS_Windows2000_ 
++
+ BOOL  WINAPI WINNLSEnableIME( IN HWND, IN BOOL);
+ BOOL  WINAPI WINNLSGetEnableStatus( IN HWND);
+ 

@@ -1,0 +1,55 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
+index a08f793dc1..a616ba737a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SensAPI.h
+@@ -32,6 +32,7 @@ Revision History:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -48,7 +49,7 @@ extern "C" {
+ #define NETWORK_ALIVE_INTERNET   0x00000008
+ 
+ 
+-typedef struct tagQOCINFO
++typedef struct   tagQOCINFO
+ {
+     DWORD dwSize;
+     DWORD dwFlags;
+@@ -67,21 +68,30 @@ typedef struct tagQOCINFO
+ 
+ #if !defined(__midl)
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ 
++
++_Win32_SetLastError_
+ BOOL APIENTRY
+ IsDestinationReachableA(
+     LPCSTR lpszDestination,
+-    LPQOCINFO lpQOCInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPQOCINFO lpQOCInfo
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ 
++
++_Win32_SetLastError_
+ BOOL APIENTRY
+ IsDestinationReachableW(
+     LPCWSTR lpszDestination,
+-    LPQOCINFO lpQOCInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPQOCINFO lpQOCInfo
+     );
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
++_Win32_SetLastError_
+ BOOL APIENTRY
+ IsNetworkAlive(
+-    LPDWORD lpdwFlags
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpdwFlags
+     );
+ 
+ #endif // !defined(__midl)

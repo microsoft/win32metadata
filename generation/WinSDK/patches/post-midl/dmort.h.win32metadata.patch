@@ -1,0 +1,60 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h
+index aa3bca83fc..9d8facc6d6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmort.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //------------------------------------------------------------------------------
+ // File: DMORt.h
+ //
+@@ -31,21 +32,21 @@
+ // The format block allocated by MoInitMediaType must be freed by calling
+ // MoFreeMediaType().
+ //
+-STDAPI MoInitMediaType(DMO_MEDIA_TYPE *pmt, DWORD cbFormat);
++STDAPI MoInitMediaType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_MEDIA_TYPE *pmt, DWORD cbFormat);
+ 
+ //
+ // Frees the format block and releases any IUnknown, but does not free the
+ // DMO_MEDIA_TYPE structure itself.  Input parameter must point to an
+ // DMO_MEDIA_TYPE structure previously initialized by MoInitMediaType().
+ //
+-STDAPI MoFreeMediaType(DMO_MEDIA_TYPE *pmt);
++STDAPI MoFreeMediaType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_MEDIA_TYPE *pmt);
+ 
+ //
+ // Copies the DMO_MEDIA_TYPE members.  Also duplicates the format block and
+ // the IUnknown pointer.  Both parameters must point to valid DMO_MEDIA_TYPE
+ // structures.  Target structure must be later freed using MoFreeMediaType().
+ //
+-STDAPI MoCopyMediaType(DMO_MEDIA_TYPE *pmtDest, const DMO_MEDIA_TYPE *pmtSrc);
++STDAPI MoCopyMediaType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_MEDIA_TYPE *pmtDest, const DMO_MEDIA_TYPE *pmtSrc);
+ 
+ 
+ 
+@@ -58,14 +59,14 @@ STDAPI MoCopyMediaType(DMO_MEDIA_TYPE *pmtDest, const DMO_MEDIA_TYPE *pmtSrc);
+ // DMO_MEDIA_TYPE structures allocated by MoCreateMediaType() must be freed
+ // by calling MoDeleteMediaType().
+ //
+-STDAPI MoCreateMediaType(DMO_MEDIA_TYPE **ppmt, DWORD cbFormat);
++STDAPI MoCreateMediaType( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_MEDIA_TYPE **ppmt, DWORD cbFormat);
+ 
+ //
+ // Frees any format block, releases any IUnknown, and deletes the
+ // DMO_MEDIA_TYPE structure itself.  The input parameter must point to an
+ // DMO_MEDIA_TYPE structure previously allocated by MoCreateMediaType().
+ //
+-STDAPI MoDeleteMediaType(DMO_MEDIA_TYPE *pmt);
++STDAPI MoDeleteMediaType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_MEDIA_TYPE *pmt);
+ 
+ //
+ // Allocates a new DMO_MEDIA_TYPE structure and copies pmtSrc into it like
+@@ -73,7 +74,7 @@ STDAPI MoDeleteMediaType(DMO_MEDIA_TYPE *pmt);
+ // as well as a new format block for the target mediatype.  Trager mediatype
+ // must later be freed using MoDeleteMediaType().
+ //
+-STDAPI MoDuplicateMediaType(DMO_MEDIA_TYPE **ppmtDest, const DMO_MEDIA_TYPE *pmtSrc);
++STDAPI MoDuplicateMediaType( _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMO_MEDIA_TYPE **ppmtDest, const DMO_MEDIA_TYPE *pmtSrc);
+ 
+ 
+ 

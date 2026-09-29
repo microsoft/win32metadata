@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h
+index ea09cd585a..e8ee0b63d3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/SessionPortListener.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * alljoyn_sessionportlistener is a collection of functions implemented by users
+@@ -52,7 +53,7 @@ typedef struct _alljoyn_sessionportlistener_handle*         alljoyn_sessionportl
+  * @return   Return true if JoinSession request is accepted. false if rejected.
+  */
+ typedef QCC_BOOL (AJ_CALL * alljoyn_sessionportlistener_acceptsessionjoiner_ptr)(const void* context, alljoyn_sessionport sessionPort,
+-                                                                                 const char* joiner,  const alljoyn_sessionopts opts);
++                                                                                 const char* joiner,  _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionopts opts);
+ 
+ /**
+  * Type for the SessionJoined callback.
+@@ -94,15 +95,15 @@ typedef struct {
+  *
+  * @return Handle to newly allocated alljoyn_sessionportlistener.
+  */
+-extern AJ_API alljoyn_sessionportlistener AJ_CALL alljoyn_sessionportlistener_create(const alljoyn_sessionportlistener_callbacks* callbacks,
+-                                                                                     const void* context);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_sessionportlistener AJ_CALL alljoyn_sessionportlistener_create(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_sessionportlistener_callbacks* callbacks,
++                                                                                     _WIN32META_ANNOTATION_("win32metadata:in") const void* context);
+ 
+ /**
+  * Destroy an alljoyn_sessionportlistener.
+  *
+  * @param listener alljoyn_sessionportlistener to destroy.
+  */
+-extern AJ_API void AJ_CALL alljoyn_sessionportlistener_destroy(alljoyn_sessionportlistener listener);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_sessionportlistener_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_sessionportlistener listener);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

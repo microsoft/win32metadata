@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits2_0.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits2_0.h
+index 474122b2d0..c74e95dcdd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits2_0.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits2_0.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -130,7 +131,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("443c8934-90ff-48ed-bcde-26f5c7450042")
++    MIDL_INTERFACE("443c8934-90ff-48ed-bcde-26f5c7450042") _Windows_SupportedOS_WindowsVista_ 
+     IBackgroundCopyJob3 : public IBackgroundCopyJob2
+     {
+     public:
+@@ -638,7 +639,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("83e81b93-0873-474d-8a8c-f2018b1a939c")
++    MIDL_INTERFACE("83e81b93-0873-474d-8a8c-f2018b1a939c") _Windows_SupportedOS_WindowsVista_ 
+     IBackgroundCopyFile2 : public IBackgroundCopyFile
+     {
+     public:
+@@ -646,7 +647,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile2;
+             /* [annotation][unique][out][in] */ 
+             _Inout_  DWORD *RangeCount,
+             /* [annotation][size_is][size_is][out] */ 
+-            _Out_writes_(*RangeCount)  BG_FILE_RANGE **Ranges) = 0;
++            _Win32_RAIIFree_(CoTaskMemFree) _Out_writes_(*RangeCount)  BG_FILE_RANGE **Ranges) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetRemoteName( 
+             __RPC__in LPCWSTR Val) = 0;

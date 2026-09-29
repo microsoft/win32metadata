@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/QosPol.h b/generation/WinSDK/RecompiledIdlHeaders/um/QosPol.h
+index 2fa4c845b2..6c7370c552 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/QosPol.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/QosPol.h
+@@ -19,6 +19,7 @@ Revision History:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -46,7 +47,7 @@ Revision History:
+ 
+ 
+ // Identity Policy Element attribute structure
+-typedef struct _IDPE_ATTR {
++typedef struct   _IDPE_ATTR {
+ 
+     USHORT  PeAttribLength;
+     

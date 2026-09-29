@@ -1,0 +1,75 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dbt.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dbt.h
+index 188f6d20f6..818a8bb55b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Dbt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dbt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*****************************************************************************
+  *
+  *  (C) Copyright MICROSOFT Corp., 1993-1999
+@@ -211,7 +212,7 @@ typedef unsigned short wchar_t;
+ 
+ struct _DEV_BROADCAST_HDR {     /* */
+     DWORD       dbch_size;
+-    DWORD       dbch_devicetype;
++    _Win32_AssociatedEnum_(DEV_BROADCAST_HDR_DEVICE_TYPE) DWORD       dbch_devicetype;
+     DWORD       dbch_reserved;
+ };
+ 
+@@ -338,7 +339,7 @@ struct _DEV_BROADCAST_VOLUME { /* */
+     DWORD       dbcv_devicetype;
+     DWORD       dbcv_reserved;
+     DWORD       dbcv_unitmask;
+-    WORD        dbcv_flags;
++    _Win32_AssociatedEnum_(DEV_BROADCAST_VOLUME_FLAGS) WORD        dbcv_flags;
+ };
+ 
+ typedef struct  _DEV_BROADCAST_VOLUME   DEV_BROADCAST_VOLUME;
+@@ -493,6 +494,47 @@ struct _DEV_BROADCAST_USERDEFINED { /* */
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("DBT_DEVTYP_DEVICEINTERFACE")
++#undef DBT_DEVTYP_DEVICEINTERFACE
++#pragma push_macro("DBT_DEVTYP_HANDLE")
++#undef DBT_DEVTYP_HANDLE
++#pragma push_macro("DBT_DEVTYP_OEM")
++#undef DBT_DEVTYP_OEM
++#pragma push_macro("DBT_DEVTYP_PORT")
++#undef DBT_DEVTYP_PORT
++#pragma push_macro("DBT_DEVTYP_VOLUME")
++#undef DBT_DEVTYP_VOLUME
++enum DEV_BROADCAST_HDR_DEVICE_TYPE : unsigned int
++{
++    DBT_DEVTYP_DEVICEINTERFACE = 5U,
++    DBT_DEVTYP_HANDLE = 6U,
++    DBT_DEVTYP_OEM = 0U,
++    DBT_DEVTYP_PORT = 3U,
++    DBT_DEVTYP_VOLUME = 2U,
++};
++#pragma pop_macro("DBT_DEVTYP_VOLUME")
++#pragma pop_macro("DBT_DEVTYP_PORT")
++#pragma pop_macro("DBT_DEVTYP_OEM")
++#pragma pop_macro("DBT_DEVTYP_HANDLE")
++#pragma pop_macro("DBT_DEVTYP_DEVICEINTERFACE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DBTF_MEDIA")
++#undef DBTF_MEDIA
++#pragma push_macro("DBTF_NET")
++#undef DBTF_NET
++enum DEV_BROADCAST_VOLUME_FLAGS : unsigned short
++{
++    DBTF_MEDIA = 1,
++    DBTF_NET = 2,
++};
++#pragma pop_macro("DBTF_NET")
++#pragma pop_macro("DBTF_MEDIA")
++#endif
++
+ #endif  // _DBT_H
+ 
+ 

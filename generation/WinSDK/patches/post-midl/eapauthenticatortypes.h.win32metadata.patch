@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapauthenticatortypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapauthenticatortypes.h
+index 9dc7ee3ca3..1d98995729 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eapauthenticatortypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapauthenticatortypes.h
+@@ -52,10 +52,11 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [v1_enum] */ 
+-enum _EAP_AUTHENTICATOR_SEND_TIMEOUT
++enum   _EAP_AUTHENTICATOR_SEND_TIMEOUT
+     {
+         EAP_AUTHENTICATOR_SEND_TIMEOUT_NONE	= 0,
+         EAP_AUTHENTICATOR_SEND_TIMEOUT_BASIC	= ( EAP_AUTHENTICATOR_SEND_TIMEOUT_NONE + 1 ) ,

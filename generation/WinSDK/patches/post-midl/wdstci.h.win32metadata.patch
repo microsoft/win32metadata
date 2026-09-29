@@ -1,0 +1,164 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h
+index a055f544f2..f3d1769d01 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdstci.h
+@@ -20,6 +20,7 @@ Environment:
+ #ifndef _WDSTCI_H
+ #define _WDSTCI_H
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -51,7 +52,7 @@ extern "C"
+ #define WDS_TRANSPORTCLIENT_AUTH    0x1
+ #define WDS_TRANSPORTCLIENT_NO_AUTH 0x2
+ 
+-typedef enum _TRANSPORTCLIENT_CALLBACK_ID
++typedef enum   _TRANSPORTCLIENT_CALLBACK_ID
+ {
+     WDS_TRANSPORTCLIENT_SESSION_START = 0,
+     WDS_TRANSPORTCLIENT_RECEIVE_CONTENTS,
+@@ -63,7 +64,7 @@ typedef enum _TRANSPORTCLIENT_CALLBACK_ID
+     WDS_TRANSPORTCLIENT_MAX_CALLBACKS,
+ } TRANSPORTCLIENT_CALLBACK_ID, *PTRANSPORTCLIENT_CALLBACK_ID;
+ 
+-typedef struct _TRANSPORTCLIENT_SESSION_INFO
++typedef struct   _TRANSPORTCLIENT_SESSION_INFO
+ {
+     //
+     // The length of this structure in bytes.
+@@ -150,7 +151,7 @@ VOID
+ 
+ //----------------------------------------------------------------- Structures.
+ 
+-typedef struct _WDS_TRANSPORTCLIENT_REQUEST
++typedef struct   _WDS_TRANSPORTCLIENT_REQUEST
+ {
+     //
+     // The length of this structure.
+@@ -166,7 +167,7 @@ typedef struct _WDS_TRANSPORTCLIENT_REQUEST
+     //
+     // The level of authentication to send to the server.
+     //
+-    ULONG ulAuthLevel;
++    _Win32_AssociatedEnum_(WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL) ULONG ulAuthLevel;
+ 
+     //
+     // Server name.
+@@ -220,34 +221,39 @@ typedef struct _WDS_TRANSPORTCLIENT_CALLBACKS
+ 
+ //----------------------------------------------------------------- Functions.
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientInitialize (
+     VOID
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientInitializeSession (
+     _In_ PWDS_TRANSPORTCLIENT_REQUEST pSessionRequest,
+-    _In_ PVOID pCallerData,
+-    _Out_ PHANDLE hSessionKey
++    _In_  PVOID pCallerData,
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE hSessionKey
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientRegisterCallback (
+     _In_ HANDLE hSessionKey,
+     _In_ TRANSPORTCLIENT_CALLBACK_ID CallbackId,
+-    _In_ PVOID pfnCallback
++    _In_  PVOID pfnCallback
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientStartSession (
+     _In_ HANDLE hSessionKey
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientCompleteReceive (
+@@ -256,6 +262,7 @@ WdsTransportClientCompleteReceive (
+     _In_ PULARGE_INTEGER pullOffset
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientCancelSession (
+@@ -269,6 +276,7 @@ WdsTransportClientCancelSessionEx (
+     _In_ DWORD dwErrorCode
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientWaitForCompletion (
+@@ -276,6 +284,7 @@ WdsTransportClientWaitForCompletion (
+     _In_ ULONG uTimeout
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientQueryStatus (
+@@ -284,24 +293,28 @@ WdsTransportClientQueryStatus (
+     _Out_ PULONG puErrorCode
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientCloseSession (
+     _In_ HANDLE hSessionKey
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientAddRefBuffer (
+     _In_ PVOID pvBuffer
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientReleaseBuffer (
+     _In_ PVOID pvBuffer
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientShutdown (
+@@ -325,4 +338,19 @@ WdsTransportClientNegotiateRequiredDataRange (
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("WDS_TRANSPORTCLIENT_AUTH")
++#undef WDS_TRANSPORTCLIENT_AUTH
++#pragma push_macro("WDS_TRANSPORTCLIENT_NO_AUTH")
++#undef WDS_TRANSPORTCLIENT_NO_AUTH
++enum WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL : unsigned int
++{
++    WDS_TRANSPORTCLIENT_AUTH = 1U,
++    WDS_TRANSPORTCLIENT_NO_AUTH = 2U,
++};
++#pragma pop_macro("WDS_TRANSPORTCLIENT_NO_AUTH")
++#pragma pop_macro("WDS_TRANSPORTCLIENT_AUTH")
++#endif
++
+ #endif

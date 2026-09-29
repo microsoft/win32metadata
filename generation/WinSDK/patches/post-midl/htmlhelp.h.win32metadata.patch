@@ -1,0 +1,191 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h
+index 8e0828c8db..2788482fed 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/HtmlHelp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /****************************************************************************
+ *                                                                           *
+ * HtmlHelp.h                                                                *
+@@ -370,21 +371,21 @@ typedef struct tagHHNTRACK
+     HH_WINTYPE* phhWinType; // Current window type structure
+ } HHNTRACK;
+ 
+-HWND
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("hhctrl.ocx") HWND
+ WINAPI
+ HtmlHelpA(
+     _In_opt_ HWND hwndCaller,
+     _In_ LPCSTR pszFile,
+-    _In_ UINT uCommand,
++    _Win32_AssociatedEnum_(HTML_HELP_COMMAND) _In_ UINT uCommand,
+     _In_ DWORD_PTR dwData
+     );
+ 
+-HWND
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("hhctrl.ocx") HWND
+ WINAPI
+ HtmlHelpW(
+     _In_opt_ HWND hwndCaller,
+     _In_ LPCWSTR pszFile,
+-    _In_ UINT uCommand,
++    _Win32_AssociatedEnum_(HTML_HELP_COMMAND) _In_ UINT uCommand,
+     _In_ DWORD_PTR dwData
+     );
+ #ifdef UNICODE
+@@ -436,4 +437,155 @@ typedef struct tagHH_GLOBAL_PROPERTY
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("HH_DISPLAY_TOPIC")
++#undef HH_DISPLAY_TOPIC
++#pragma push_macro("HH_HELP_FINDER")
++#undef HH_HELP_FINDER
++#pragma push_macro("HH_DISPLAY_TOC")
++#undef HH_DISPLAY_TOC
++#pragma push_macro("HH_DISPLAY_INDEX")
++#undef HH_DISPLAY_INDEX
++#pragma push_macro("HH_DISPLAY_SEARCH")
++#undef HH_DISPLAY_SEARCH
++#pragma push_macro("HH_SET_WIN_TYPE")
++#undef HH_SET_WIN_TYPE
++#pragma push_macro("HH_GET_WIN_TYPE")
++#undef HH_GET_WIN_TYPE
++#pragma push_macro("HH_GET_WIN_HANDLE")
++#undef HH_GET_WIN_HANDLE
++#pragma push_macro("HH_ENUM_INFO_TYPE")
++#undef HH_ENUM_INFO_TYPE
++#pragma push_macro("HH_SET_INFO_TYPE")
++#undef HH_SET_INFO_TYPE
++#pragma push_macro("HH_SYNC")
++#undef HH_SYNC
++#pragma push_macro("HH_RESERVED1")
++#undef HH_RESERVED1
++#pragma push_macro("HH_RESERVED2")
++#undef HH_RESERVED2
++#pragma push_macro("HH_RESERVED3")
++#undef HH_RESERVED3
++#pragma push_macro("HH_KEYWORD_LOOKUP")
++#undef HH_KEYWORD_LOOKUP
++#pragma push_macro("HH_DISPLAY_TEXT_POPUP")
++#undef HH_DISPLAY_TEXT_POPUP
++#pragma push_macro("HH_HELP_CONTEXT")
++#undef HH_HELP_CONTEXT
++#pragma push_macro("HH_TP_HELP_CONTEXTMENU")
++#undef HH_TP_HELP_CONTEXTMENU
++#pragma push_macro("HH_TP_HELP_WM_HELP")
++#undef HH_TP_HELP_WM_HELP
++#pragma push_macro("HH_CLOSE_ALL")
++#undef HH_CLOSE_ALL
++#pragma push_macro("HH_ALINK_LOOKUP")
++#undef HH_ALINK_LOOKUP
++#pragma push_macro("HH_GET_LAST_ERROR")
++#undef HH_GET_LAST_ERROR
++#pragma push_macro("HH_ENUM_CATEGORY")
++#undef HH_ENUM_CATEGORY
++#pragma push_macro("HH_ENUM_CATEGORY_IT")
++#undef HH_ENUM_CATEGORY_IT
++#pragma push_macro("HH_RESET_IT_FILTER")
++#undef HH_RESET_IT_FILTER
++#pragma push_macro("HH_SET_INCLUSIVE_FILTER")
++#undef HH_SET_INCLUSIVE_FILTER
++#pragma push_macro("HH_SET_EXCLUSIVE_FILTER")
++#undef HH_SET_EXCLUSIVE_FILTER
++#pragma push_macro("HH_INITIALIZE")
++#undef HH_INITIALIZE
++#pragma push_macro("HH_UNINITIALIZE")
++#undef HH_UNINITIALIZE
++#pragma push_macro("HH_SET_QUERYSERVICE")
++#undef HH_SET_QUERYSERVICE
++#pragma push_macro("HH_PRETRANSLATEMESSAGE")
++#undef HH_PRETRANSLATEMESSAGE
++#pragma push_macro("HH_SET_GLOBAL_PROPERTY")
++#undef HH_SET_GLOBAL_PROPERTY
++#pragma push_macro("HH_SAFE_DISPLAY_TOPIC")
++#undef HH_SAFE_DISPLAY_TOPIC
++#pragma push_macro("HH_MAX_TABS")
++#undef HH_MAX_TABS
++#pragma push_macro("HH_MAX_TABS_CUSTOM")
++#undef HH_MAX_TABS_CUSTOM
++#pragma push_macro("HH_FTS_DEFAULT_PROXIMITY")
++#undef HH_FTS_DEFAULT_PROXIMITY
++enum HTML_HELP_COMMAND : int
++{
++    HH_DISPLAY_TOPIC = 0,
++    HH_HELP_FINDER = 0,
++    HH_DISPLAY_TOC = 1,
++    HH_DISPLAY_INDEX = 2,
++    HH_DISPLAY_SEARCH = 3,
++    HH_SET_WIN_TYPE = 4,
++    HH_GET_WIN_TYPE = 5,
++    HH_GET_WIN_HANDLE = 6,
++    HH_ENUM_INFO_TYPE = 7,
++    HH_SET_INFO_TYPE = 8,
++    HH_SYNC = 9,
++    HH_RESERVED1 = 10,
++    HH_RESERVED2 = 11,
++    HH_RESERVED3 = 12,
++    HH_KEYWORD_LOOKUP = 13,
++    HH_DISPLAY_TEXT_POPUP = 14,
++    HH_HELP_CONTEXT = 15,
++    HH_TP_HELP_CONTEXTMENU = 16,
++    HH_TP_HELP_WM_HELP = 17,
++    HH_CLOSE_ALL = 18,
++    HH_ALINK_LOOKUP = 19,
++    HH_GET_LAST_ERROR = 20,
++    HH_ENUM_CATEGORY = 21,
++    HH_ENUM_CATEGORY_IT = 22,
++    HH_RESET_IT_FILTER = 23,
++    HH_SET_INCLUSIVE_FILTER = 24,
++    HH_SET_EXCLUSIVE_FILTER = 25,
++    HH_INITIALIZE = 28,
++    HH_UNINITIALIZE = 29,
++    HH_SET_QUERYSERVICE = 30,
++    HH_PRETRANSLATEMESSAGE = 253,
++    HH_SET_GLOBAL_PROPERTY = 252,
++    HH_SAFE_DISPLAY_TOPIC = 32,
++    HH_MAX_TABS = 19,
++    HH_MAX_TABS_CUSTOM = 9,
++    HH_FTS_DEFAULT_PROXIMITY = -1,
++};
++#pragma pop_macro("HH_FTS_DEFAULT_PROXIMITY")
++#pragma pop_macro("HH_MAX_TABS_CUSTOM")
++#pragma pop_macro("HH_MAX_TABS")
++#pragma pop_macro("HH_SAFE_DISPLAY_TOPIC")
++#pragma pop_macro("HH_SET_GLOBAL_PROPERTY")
++#pragma pop_macro("HH_PRETRANSLATEMESSAGE")
++#pragma pop_macro("HH_SET_QUERYSERVICE")
++#pragma pop_macro("HH_UNINITIALIZE")
++#pragma pop_macro("HH_INITIALIZE")
++#pragma pop_macro("HH_SET_EXCLUSIVE_FILTER")
++#pragma pop_macro("HH_SET_INCLUSIVE_FILTER")
++#pragma pop_macro("HH_RESET_IT_FILTER")
++#pragma pop_macro("HH_ENUM_CATEGORY_IT")
++#pragma pop_macro("HH_ENUM_CATEGORY")
++#pragma pop_macro("HH_GET_LAST_ERROR")
++#pragma pop_macro("HH_ALINK_LOOKUP")
++#pragma pop_macro("HH_CLOSE_ALL")
++#pragma pop_macro("HH_TP_HELP_WM_HELP")
++#pragma pop_macro("HH_TP_HELP_CONTEXTMENU")
++#pragma pop_macro("HH_HELP_CONTEXT")
++#pragma pop_macro("HH_DISPLAY_TEXT_POPUP")
++#pragma pop_macro("HH_KEYWORD_LOOKUP")
++#pragma pop_macro("HH_RESERVED3")
++#pragma pop_macro("HH_RESERVED2")
++#pragma pop_macro("HH_RESERVED1")
++#pragma pop_macro("HH_SYNC")
++#pragma pop_macro("HH_SET_INFO_TYPE")
++#pragma pop_macro("HH_ENUM_INFO_TYPE")
++#pragma pop_macro("HH_GET_WIN_HANDLE")
++#pragma pop_macro("HH_GET_WIN_TYPE")
++#pragma pop_macro("HH_SET_WIN_TYPE")
++#pragma pop_macro("HH_DISPLAY_SEARCH")
++#pragma pop_macro("HH_DISPLAY_INDEX")
++#pragma pop_macro("HH_DISPLAY_TOC")
++#pragma pop_macro("HH_HELP_FINDER")
++#pragma pop_macro("HH_DISPLAY_TOPIC")
++#endif
++
+ #endif // __HTMLHELP_H__

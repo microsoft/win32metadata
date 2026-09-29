@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Sens.h b/generation/WinSDK/RecompiledIdlHeaders/um/Sens.h
+index 3f96000332..0df82591ae 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Sens.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Sens.h
+@@ -122,4 +122,19 @@ DEFINE_GUID(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CONNECTION_LAN")
++#undef CONNECTION_LAN
++#pragma push_macro("CONNECTION_WAN")
++#undef CONNECTION_WAN
++enum SENS_CONNECTION_TYPE : unsigned int
++{
++    CONNECTION_LAN = 0U,
++    CONNECTION_WAN = 1U,
++};
++#pragma pop_macro("CONNECTION_WAN")
++#pragma pop_macro("CONNECTION_LAN")
++#endif
++
+ #endif // __SENS_H__

@@ -1,0 +1,133 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h
+index 0a3efa1c3d..cc85a5d1f2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -326,7 +327,7 @@ EXTERN_C const IID IID_INetworkListManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00000-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00000-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     INetworkListManager : public IDispatch
+     {
+     public:
+@@ -587,7 +588,7 @@ EXTERN_C const IID IID_INetworkListManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00001-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00001-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     INetworkListManagerEvents : public IUnknown
+     {
+     public:
+@@ -682,13 +683,13 @@ EXTERN_C const IID IID_INetwork;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00002-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00002-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     INetwork : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][retval][string][out] */ 
+-            _Out_retval_  BSTR *pszNetworkName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszNetworkName) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetName( 
+             /* [annotation][string][in] */ 
+@@ -696,7 +697,7 @@ EXTERN_C const IID IID_INetwork;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][retval][string][out] */ 
+-            _Out_retval_  BSTR *pszDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pszDescription) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetDescription( 
+             /* [annotation][string][in] */ 
+@@ -1276,7 +1277,7 @@ EXTERN_C const IID IID_IEnumNetworks;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00003-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00003-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     IEnumNetworks : public IDispatch
+     {
+     public:
+@@ -1489,7 +1490,7 @@ EXTERN_C const IID IID_INetworkEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00004-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00004-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     INetworkEvents : public IUnknown
+     {
+     public:
+@@ -1623,7 +1624,7 @@ EXTERN_C const IID IID_INetworkConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00005-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00005-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     INetworkConnection : public IDispatch
+     {
+     public:
+@@ -2065,7 +2066,7 @@ EXTERN_C const IID IID_IEnumNetworkConnections;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00006-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00006-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     IEnumNetworkConnections : public IDispatch
+     {
+     public:
+@@ -2274,7 +2275,7 @@ EXTERN_C const IID IID_INetworkConnectionEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00007-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00007-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_WindowsVista_ 
+     INetworkConnectionEvents : public IUnknown
+     {
+     public:
+@@ -2382,7 +2383,7 @@ EXTERN_C const IID IID_INetworkCostManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00008-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00008-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_Windows8_ 
+     INetworkCostManager : public IUnknown
+     {
+     public:
+@@ -2509,7 +2510,7 @@ EXTERN_C const IID IID_INetworkCostManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB00009-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB00009-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_Windows8_ 
+     INetworkCostManagerEvents : public IUnknown
+     {
+     public:
+@@ -2613,7 +2614,7 @@ EXTERN_C const IID IID_INetworkConnectionCost;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB0000a-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB0000a-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_Windows8_ 
+     INetworkConnectionCost : public IUnknown
+     {
+     public:
+@@ -2713,7 +2714,7 @@ EXTERN_C const IID IID_INetworkConnectionCostEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCB0000b-570F-4A9B-8D69-199FDBA5723B")
++    MIDL_INTERFACE("DCB0000b-570F-4A9B-8D69-199FDBA5723B") _Windows_SupportedOS_Windows8_ 
+     INetworkConnectionCostEvents : public IUnknown
+     {
+     public:

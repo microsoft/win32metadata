@@ -1,0 +1,50 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h
+index 9993b298c7..1aa3d2e95d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusinit.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************
+ *
+ * Copyright (c) 2000-2003 Microsoft Corporation
+@@ -33,13 +34,13 @@ enum DebugEventLevel
+ // Callback function that GDI+ can call, on debug builds, for assertions
+ // and warnings.
+ 
+-typedef VOID (WINAPI *DebugEventProc)(DebugEventLevel level, CHAR *message);
++typedef VOID (WINAPI *DebugEventProc)(_WIN32META_ANNOTATION_("win32metadata:in") DebugEventLevel level, _WIN32META_ANNOTATION_("win32metadata:in") CHAR *message);
+ 
+ // Notification functions which the user must call appropriately if
+ // "SuppressBackgroundThread" (below) is set.
+ 
+-typedef Status (WINAPI *NotificationHookProc)(OUT ULONG_PTR *token);
+-typedef VOID (WINAPI *NotificationUnhookProc)(ULONG_PTR token);
++typedef Status (WINAPI *NotificationHookProc)(_WIN32META_ANNOTATION_("win32metadata:in") OUT ULONG_PTR *token);
++typedef VOID (WINAPI *NotificationUnhookProc)(_WIN32META_ANNOTATION_("win32metadata:in") ULONG_PTR token);
+ 
+ // Input structure for GdiplusStartup()
+ 
+@@ -144,10 +145,10 @@ struct GdiplusStartupOutput
+ // input  - may not be NULL
+ // output - may be NULL only if input->SuppressBackgroundThread is FALSE.
+ 
+-extern "C" Status WINAPI GdiplusStartup(
+-    OUT ULONG_PTR *token,
+-    const GdiplusStartupInput *input,
+-    OUT GdiplusStartupOutput *output);
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("gdiplus.dll") extern "C" Status WINAPI GdiplusStartup(
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT ULONG_PTR *token,
++    _WIN32META_ANNOTATION_("win32metadata:in") const GdiplusStartupInput *input,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT GdiplusStartupOutput *output);
+ 
+ // GDI+ termination. Must be called before GDI+ is unloaded. 
+ // Must not be called from DllMain - can cause deadlock.
+@@ -155,7 +156,7 @@ extern "C" Status WINAPI GdiplusStartup(
+ // GDI+ API's may not be called after GdiplusShutdown. Pay careful attention
+ // to GDI+ object destructors.
+ 
+-extern "C" VOID WINAPI GdiplusShutdown(ULONG_PTR token);
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("gdiplus.dll") extern "C" VOID WINAPI GdiplusShutdown(_WIN32META_ANNOTATION_("win32metadata:in") ULONG_PTR token);
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(pop)

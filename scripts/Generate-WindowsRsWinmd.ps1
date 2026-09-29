@@ -38,7 +38,10 @@ $ErrorActionPreference = "Stop"
 $manifest = Join-Path $rootDir "tools\rust\Cargo.toml"
 $tool = Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
 $headerRoot = $recompiledIdlHeadersDir
-$localIncludes = Join-Path $windowsWin32ProjectRoot "inc"
+$localIncludes = @(
+    (Join-Path $windowsWin32ProjectRoot "inc"),
+    (Join-Path $windowsWin32ProjectRoot "AdditionalHeaders")
+)
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
 $outputStem = [System.IO.Path]::GetFileNameWithoutExtension($outputPath)
 $objDir = Join-Path $windowsWin32ProjectRoot "obj\windows-rs\$outputStem"
@@ -74,13 +77,17 @@ Write-Host "Generating $($Partition.Count) partition(s) for $($Architecture -joi
 
 $arguments = @(
     "scrape",
-    "--include", $localIncludes,
     "--include", $headerRoot,
     "--lib", $sdkLibRoot,
     "--namespace", $Namespace,
     "--output", $outputPath,
     "--obj", $objDir
 )
+
+foreach ($include in $localIncludes)
+{
+    $arguments += @("--include", $include)
+}
 
 foreach ($name in $Partition)
 {

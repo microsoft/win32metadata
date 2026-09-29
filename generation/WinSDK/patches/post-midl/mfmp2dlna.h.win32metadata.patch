@@ -1,0 +1,31 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h
+index a2eb0ec995..051321ee0b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfmp2dlna.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -85,10 +86,11 @@ EXTERN_C const IID IID_IMFDLNASinkInit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0c012799-1b61-4c10-bda9-04445be5f561")
++    MIDL_INTERFACE("0c012799-1b61-4c10-bda9-04445be5f561") _Windows_SupportedOS_Windows7_ 
+     IMFDLNASinkInit : public IUnknown
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+             IMFByteStream *pByteStream,
+             BOOL fPal) = 0;
+@@ -170,7 +172,7 @@ EXTERN_GUID( MF_MP2DLNA_VIDEO_BIT_RATE, 0xe88548de, 0x73b4, 0x42d7, 0x9c, 0x75,
+ EXTERN_GUID( MF_MP2DLNA_AUDIO_BIT_RATE, 0x2d1c070e, 0x2b5f, 0x4ab3, 0xa7, 0xe6, 0x8d, 0x94, 0x3b, 0xa8, 0xd0, 0x0a);
+ EXTERN_GUID( MF_MP2DLNA_ENCODE_QUALITY, 0xb52379d7, 0x1d46, 0x4fb6, 0xa3, 0x17, 0xa4, 0xa5, 0xf6, 0x09, 0x59, 0xf8);
+ EXTERN_GUID( MF_MP2DLNA_STATISTICS, 0x75e488a3, 0xd5ad, 0x4898, 0x85, 0xe0, 0xbc, 0xce, 0x24, 0xa7, 0x22, 0xd7 );
+-typedef struct _MFMPEG2DLNASINKSTATS         
++typedef struct  _MFMPEG2DLNASINKSTATS         
+ {                                            
+    DWORDLONG  cBytesWritten;                 
+    BOOL       fPAL;                          

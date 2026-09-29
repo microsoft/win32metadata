@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/contentpartner.h b/generation/WinSDK/RecompiledIdlHeaders/um/contentpartner.h
+index 76fae6264c..daa1d6a4c8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/contentpartner.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/contentpartner.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -564,17 +565,17 @@ EXTERN_C const IID IID_IWMPContentContainer;
+             /* [out] */ __RPC__out ULONG *pContentID) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPrice( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPrice) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPrice) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetType( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContentCount( 
+             /* [out] */ __RPC__out ULONG *pcContent) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContentPrice( 
+             /* [in] */ ULONG idxContent,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPrice) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPrice) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContentID( 
+             /* [in] */ ULONG idxContent,
+@@ -1427,7 +1428,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
+         
+         virtual HRESULT STDMETHODCALLTYPE CanBuySilent( 
+             /* [in] */ __RPC__in_opt IWMPContentContainerList *pInfo,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrTotalPrice,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTotalPrice,
+             /* [out] */ __RPC__out VARIANT_BOOL *pSilentOK) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Buy( 
+@@ -1437,7 +1438,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
+         virtual HRESULT STDMETHODCALLTYPE GetStreamingURL( 
+             /* [in] */ WMPStreamingType st,
+             /* [in] */ __RPC__in VARIANT *pStreamContext,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrURL) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrURL) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Download( 
+             /* [in] */ __RPC__in_opt IWMPContentContainerList *pInfo,
+@@ -1462,7 +1463,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
+             /* [in] */ DWORD dwCatalogSchemaVersion,
+             /* [in] */ LCID catalogLCID,
+             /* [out] */ __RPC__out DWORD *pdwNewCatalogVersion,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCatalogURL,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrCatalogURL,
+             /* [out] */ __RPC__out VARIANT *pExpirationDate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTemplate( 
+@@ -1473,7 +1474,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
+             /* [in] */ __RPC__in VARIANT *pClickContext,
+             /* [in] */ __RPC__in BSTR bstrFilter,
+             /* [in] */ __RPC__in BSTR bstrViewParams,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrTemplateURL,
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrTemplateURL,
+             /* [out] */ __RPC__out WMPTemplateSize *pTemplateSize) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE UpdateDevice( 

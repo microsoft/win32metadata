@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h
+index 769df188fd..8122e3e46a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h
+@@ -15,6 +15,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -142,7 +143,7 @@ EXTERN_C const IID IID_IWMPPluginUI;
+         
+         virtual HRESULT STDMETHODCALLTYPE Create( 
+             /* [in] */ HWND hwndParent,
+-            /* [out] */ HWND *phwndWindow) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HWND *phwndWindow) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Destroy( void) = 0;
+         
+@@ -151,14 +152,15 @@ EXTERN_C const IID IID_IWMPPluginUI;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [in] */ const WCHAR *pwszName,
+-            /* [out] */ VARIANT *pvarProperty) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarProperty) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
+             /* [in] */ const WCHAR *pwszName,
+             /* [in] */ const VARIANT *pvarProperty) = 0;
+         
++        
+         virtual HRESULT STDMETHODCALLTYPE TranslateAccelerator( 
+-            /* [in] */ LPMSG lpmsg) = 0;
++            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPMSG lpmsg) = 0;
+         
+     };
+     

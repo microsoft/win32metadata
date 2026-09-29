@@ -1,0 +1,103 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsatcominterfacei.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsatcominterfacei.h
+index 0f7de13871..f5eb626f13 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsatcominterfacei.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsatcominterfacei.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -252,7 +253,7 @@ EXTERN_C const IID IID_IProvideWinSATAssessmentInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0CD1C380-52D3-4678-AC6F-E929E480BE9E")
++    MIDL_INTERFACE("0CD1C380-52D3-4678-AC6F-E929E480BE9E") _Windows_SupportedOS_WindowsVista_ 
+     IProvideWinSATAssessmentInfo : public IDispatch
+     {
+     public:
+@@ -260,10 +261,10 @@ EXTERN_C const IID IID_IProvideWinSATAssessmentInfo;
+             /* [retval][out] */ __RPC__out float *score) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Title( 
+-            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *title) = 0;
++            /* [string][retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt_string BSTR *title) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *description) = 0;
++            /* [string][retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt_string BSTR *description) = 0;
+         
+     };
+     
+@@ -412,7 +413,7 @@ EXTERN_C const IID IID_IProvideWinSATResultsInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F8334D5D-568E-4075-875F-9DF341506640")
++    MIDL_INTERFACE("F8334D5D-568E-4075-875F-9DF341506640") _Windows_SupportedOS_WindowsVista_ 
+     IProvideWinSATResultsInfo : public IDispatch
+     {
+     public:
+@@ -430,7 +431,7 @@ EXTERN_C const IID IID_IProvideWinSATResultsInfo;
+             /* [retval][out] */ __RPC__out float *level) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RatingStateDesc( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *description) = 0;
+         
+     };
+     
+@@ -596,7 +597,7 @@ EXTERN_C const IID IID_IQueryRecentWinSATAssessment;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F8AD5D1F-3B47-4bdc-9375-7C6B1DA4ECA7")
++    MIDL_INTERFACE("F8AD5D1F-3B47-4bdc-9375-7C6B1DA4ECA7") _Windows_SupportedOS_WindowsVista_ 
+     IQueryRecentWinSATAssessment : public IDispatch
+     {
+     public:
+@@ -749,7 +750,7 @@ EXTERN_C const IID IID_IProvideWinSATVisuals;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A9F4ADE0-871A-42a3-B813-3078D25162C9")
++    MIDL_INTERFACE("A9F4ADE0-871A-42a3-B813-3078D25162C9") _Windows_SupportedOS_WindowsVista_ 
+     IProvideWinSATVisuals : public IUnknown
+     {
+     public:
+@@ -757,7 +758,7 @@ EXTERN_C const IID IID_IProvideWinSATVisuals;
+             /* [in] */ WINSAT_BITMAP_SIZE bitmapSize,
+             WINSAT_ASSESSMENT_STATE state,
+             float rating,
+-            /* [out] */ __RPC__deref_out_opt HBITMAP *pBitmap) = 0;
++            /* [out] */ _Win32_RAIIFree_(DeleteObject, -1, 0) __RPC__deref_out_opt HBITMAP *pBitmap) = 0;
+         
+     };
+     
+@@ -839,7 +840,7 @@ EXTERN_C const IID IID_IQueryAllWinSATAssessments;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0B89ED1D-6398-4fea-87FC-567D8D19176F")
++    MIDL_INTERFACE("0B89ED1D-6398-4fea-87FC-567D8D19176F") _Windows_SupportedOS_WindowsVista_ 
+     IQueryAllWinSATAssessments : public IDispatch
+     {
+     public:
+@@ -981,7 +982,7 @@ EXTERN_C const IID IID_IWinSATInitiateEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("262A1918-BA0D-41d5-92C2-FAB4633EE74F")
++    MIDL_INTERFACE("262A1918-BA0D-41d5-92C2-FAB4633EE74F") _Windows_SupportedOS_WindowsVista_ 
+     IWinSATInitiateEvents : public IUnknown
+     {
+     public:
+@@ -1082,7 +1083,7 @@ EXTERN_C const IID IID_IInitiateWinSATAssessment;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D983FC50-F5BF-49d5-B5ED-CCCB18AA7FC1")
++    MIDL_INTERFACE("D983FC50-F5BF-49d5-B5ED-CCCB18AA7FC1") _Windows_SupportedOS_WindowsVista_ 
+     IInitiateWinSATAssessment : public IUnknown
+     {
+     public:

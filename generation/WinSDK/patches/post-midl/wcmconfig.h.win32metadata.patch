@@ -1,0 +1,239 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wcmconfig.h b/generation/WinSDK/RecompiledIdlHeaders/um/wcmconfig.h
+index d275715573..a38e7b0049 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wcmconfig.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wcmconfig.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -219,7 +220,7 @@ EXTERN_C const IID IID_IItemEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BB7-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BB7-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     IItemEnumerator : public IUnknown
+     {
+     public:
+@@ -345,7 +346,7 @@ EXTERN_C const IID IID_ISettingsIdentity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BB6-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BB6-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ISettingsIdentity : public IUnknown
+     {
+     public:
+@@ -355,7 +356,7 @@ EXTERN_C const IID IID_ISettingsIdentity;
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *Name,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Value) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetAttribute( 
+             /* [annotation][in] */ 
+@@ -487,7 +488,7 @@ EXTERN_C const IID IID_ITargetInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BB8-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BB8-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ITargetInfo : public IUnknown
+     {
+     public:
+@@ -501,7 +502,7 @@ EXTERN_C const IID IID_ITargetInfo;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTemporaryStoreLocation( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TemporaryStoreLocation) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TemporaryStoreLocation) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetTemporaryStoreLocation( 
+             /* [annotation][string][in] */ 
+@@ -509,7 +510,7 @@ EXTERN_C const IID IID_ITargetInfo;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTargetID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TargetID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TargetID) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetTargetID( 
+             /* [annotation][in] */ 
+@@ -517,7 +518,7 @@ EXTERN_C const IID IID_ITargetInfo;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTargetProcessorArchitecture( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ProcessorArchitecture) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ProcessorArchitecture) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetTargetProcessorArchitecture( 
+             /* [annotation][string][in] */ 
+@@ -529,7 +530,7 @@ EXTERN_C const IID IID_ITargetInfo;
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *Property,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Value) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetProperty( 
+             /* [annotation][in] */ 
+@@ -549,7 +550,7 @@ EXTERN_C const IID IID_ITargetInfo;
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *Location,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ExpandedLocation) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ExpandedLocation) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ExpandTargetPath( 
+             /* [annotation][in] */ 
+@@ -557,7 +558,7 @@ EXTERN_C const IID IID_ITargetInfo;
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *Location,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ExpandedLocation) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ExpandedLocation) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetModulePath( 
+             /* [annotation][string][in] */ 
+@@ -569,7 +570,7 @@ EXTERN_C const IID IID_ITargetInfo;
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *Module,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HMODULE *ModuleHandle) = 0;
++            _Win32_RAIIFree_(FreeLibrary, 0) _Out_retval_  HMODULE *ModuleHandle) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetWow64Context( 
+             /* [annotation][string][in] */ 
+@@ -583,7 +584,7 @@ EXTERN_C const IID IID_ITargetInfo;
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *Value,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TranslatedValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TranslatedValue) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetSchemaHiveLocation( 
+             /* [annotation][in] */ 
+@@ -591,7 +592,7 @@ EXTERN_C const IID IID_ITargetInfo;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSchemaHiveLocation( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pHiveLocation) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pHiveLocation) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetSchemaHiveMountName( 
+             /* [annotation][in] */ 
+@@ -599,7 +600,7 @@ EXTERN_C const IID IID_ITargetInfo;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSchemaHiveMountName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pMountName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pMountName) = 0;
+         
+     };
+     
+@@ -895,7 +896,7 @@ EXTERN_C const IID IID_ISettingsEngine;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BB9-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BB9-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ISettingsEngine : public IUnknown
+     {
+     public:
+@@ -921,7 +922,7 @@ EXTERN_C const IID IID_ISettingsEngine;
+             /* [annotation][in] */ 
+             _In_  LONG HResult,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Message) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Message) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateSettingsIdentity( 
+             /* [annotation][retval][out] */ 
+@@ -1237,13 +1238,13 @@ EXTERN_C const IID IID_ISettingsItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BBB-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BBB-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ISettingsItem : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Name) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetValue( 
+             /* [annotation][retval][out] */ 
+@@ -1307,7 +1308,7 @@ EXTERN_C const IID IID_ISettingsItem;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetListKeyInformation( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *KeyName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *KeyName,
+             /* [annotation][retval][out] */ 
+             _Out_retval_  WcmDataType *DataType) = 0;
+         
+@@ -1333,7 +1334,7 @@ EXTERN_C const IID IID_ISettingsItem;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *Path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *Path) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRestrictionFacets( 
+             /* [annotation][retval][out] */ 
+@@ -1637,7 +1638,7 @@ EXTERN_C const IID IID_ISettingsNamespace;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BBA-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BBA-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ISettingsNamespace : public IUnknown
+     {
+     public:
+@@ -1818,13 +1819,13 @@ EXTERN_C const IID IID_ISettingsResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BBC-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BBC-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ISettingsResult : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *description) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *description) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetErrorCode( 
+             /* [annotation][retval][out] */ 
+@@ -1832,7 +1833,7 @@ EXTERN_C const IID IID_ISettingsResult;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetContextDescription( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *description) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *description) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLine( 
+             /* [annotation][retval][out] */ 
+@@ -1844,7 +1845,7 @@ EXTERN_C const IID IID_ISettingsResult;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSource( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *file) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *file) = 0;
+         
+     };
+     
+@@ -1979,7 +1980,7 @@ EXTERN_C const IID IID_ISettingsContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F7D7BBD-20B3-11DA-81A5-0030F1642E3C")
++    MIDL_INTERFACE("9F7D7BBD-20B3-11DA-81A5-0030F1642E3C") _Windows_SupportedOS_WindowsVista_ 
+     ISettingsContext : public IUnknown
+     {
+     public:

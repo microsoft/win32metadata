@@ -4,14 +4,14 @@
     <WinmdRootNamespace>Sample.Api</WinmdRootNamespace>
     <WinmdAssemblyName>Sample.Metadata</WinmdAssemblyName>
     <WinmdVersion>1.2.3.4</WinmdVersion>
-    <TargetArchitectures>x64</TargetArchitectures>
-    <UseWinSDKAssets>false</UseWinSDKAssets>
+    <TargetArchitectures>x64;x86;arm64</TargetArchitectures>
   </PropertyGroup>
 
   <ItemGroup>
     <Partition Include="main.cpp"/>
+    <Partition Include="secondary.cpp"/>
     <WinmdIncludeDir Include="$(MSBuildProjectDirectory)"/>
-    <WinmdIncludeDir Include="$(MSBuildProjectDirectory)\..\..\..\generation\WinSDK\AdditionalHeaders"/>
     <WinmdScopeHeader Include="SampleApi"/>
+    <WinmdScopeHeader Include="SupportedOsApi"/>
   </ItemGroup>
 </Project>

@@ -1,0 +1,515 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rtccore.h b/generation/WinSDK/RecompiledIdlHeaders/um/rtccore.h
+index f301d44b97..6082af6592 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/rtccore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/rtccore.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1527,7 +1528,7 @@ EXTERN_C const IID IID_IRTCClient;
+             /* [annotation][in] */ 
+             _In_  RTC_AUDIO_DEVICE enDevice,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDeviceName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDeviceName) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_PreferredVolume( 
+             /* [annotation][in] */ 
+@@ -1555,7 +1556,7 @@ EXTERN_C const IID IID_IRTCClient;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_PreferredVideoDevice( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDeviceName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDeviceName) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ActiveMedia( 
+             /* [annotation][retval][out] */ 
+@@ -1595,7 +1596,7 @@ EXTERN_C const IID IID_IRTCClient;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_LocalUserURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserURI) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_LocalUserURI( 
+             /* [annotation][in] */ 
+@@ -1603,7 +1604,7 @@ EXTERN_C const IID IID_IRTCClient;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_LocalUserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserName) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_LocalUserName( 
+             /* [annotation][in] */ 
+@@ -3255,7 +3256,7 @@ EXTERN_C const IID IID_IRTCClientPresence2;
+             /* [annotation][in] */ 
+             _In_  RTC_PRESENCE_PROPERTY enProperty,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrProperty) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrProperty) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetPresenceData( 
+             /* [annotation][in] */ 
+@@ -3265,15 +3266,15 @@ EXTERN_C const IID IID_IRTCClientPresence2;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPresenceData( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrNamespace,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrNamespace,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrData) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLocalPresenceInfo( 
+             /* [annotation][out] */ 
+             _Out_  RTC_PRESENCE_STATUS *penStatus,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrNotes) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrNotes) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddBuddyEx( 
+             /* [annotation][in] */ 
+@@ -4121,33 +4122,33 @@ EXTERN_C const IID IID_IRTCProfile;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Key( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrKey) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrKey) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_XML( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrXML) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrXML) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderURI( 
+             /* [annotation][in] */ 
+             _In_  RTC_PROVIDER_URI enURI,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrURI) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderData( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrData) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClientName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClientBanner( 
+             /* [annotation][retval][out] */ 
+@@ -4155,31 +4156,31 @@ EXTERN_C const IID IID_IRTCProfile;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClientMinVer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrMinVer) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrMinVer) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClientCurVer( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrCurVer) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrCurVer) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClientUpdateURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUpdateURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUpdateURI) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ClientData( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrData) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_UserURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserURI) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserName) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_UserAccount( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserAccount) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserAccount) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetCredentials( 
+             /* [annotation][in] */ 
+@@ -4441,7 +4442,7 @@ EXTERN_C const IID IID_IRTCProfile2;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Realm( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrRealm) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrRealm) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Realm( 
+             /* [annotation][in] */ 
+@@ -4792,11 +4793,11 @@ EXTERN_C const IID IID_IRTCSession;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_RedirectedUserURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserURI) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_RedirectedUserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE NextRedirectedUser( void) = 0;
+         
+@@ -5511,7 +5512,7 @@ EXTERN_C const IID IID_IRTCSessionCallControl;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ReferredByURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrReferredByURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrReferredByURI) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_ReferCookie( 
+             /* [annotation][in] */ 
+@@ -5519,7 +5520,7 @@ EXTERN_C const IID IID_IRTCSessionCallControl;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_ReferCookie( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrReferCookie) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrReferCookie) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_IsReferred( 
+             /* [annotation][retval][out] */ 
+@@ -5684,11 +5685,11 @@ EXTERN_C const IID IID_IRTCParticipant;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_UserURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUserURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUserURI) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Removable( 
+             /* [annotation][retval][out] */ 
+@@ -5835,7 +5836,7 @@ EXTERN_C const IID IID_IRTCRoamingEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+     };
+     
+@@ -6537,7 +6538,7 @@ EXTERN_C const IID IID_IRTCRegistrationStateChangeEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+     };
+     
+@@ -6725,7 +6726,7 @@ EXTERN_C const IID IID_IRTCSessionStateChangeEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+     };
+     
+@@ -6915,9 +6916,9 @@ EXTERN_C const IID IID_IRTCSessionStateChangeEvent2;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRemoteSessionDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrContentType,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrContentType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSessionDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSessionDescription) = 0;
+         
+     };
+     
+@@ -7146,7 +7147,7 @@ EXTERN_C const IID IID_IRTCSessionOperationCompleteEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+     };
+     
+@@ -7326,9 +7327,9 @@ EXTERN_C const IID IID_IRTCSessionOperationCompleteEvent2;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRemoteSessionDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrContentType,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrContentType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSessionDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSessionDescription) = 0;
+         
+     };
+     
+@@ -8075,11 +8076,11 @@ EXTERN_C const IID IID_IRTCMessagingEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Message( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrMessage) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrMessage) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MessageHeader( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrMessageHeader) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrMessageHeader) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserStatus( 
+             /* [annotation][retval][out] */ 
+@@ -8434,7 +8435,7 @@ EXTERN_C const IID IID_IRTCBuddyEvent2;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+     };
+     
+@@ -9128,11 +9129,11 @@ EXTERN_C const IID IID_IRTCInfoEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Info( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrInfo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrInfo) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InfoHeader( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrInfoHeader) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrInfoHeader) = 0;
+         
+     };
+     
+@@ -9551,9 +9552,9 @@ EXTERN_C const IID IID_IRTCReInviteEvent;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRemoteSessionDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrContentType,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrContentType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSessionDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSessionDescription) = 0;
+         
+     };
+     
+@@ -9744,7 +9745,7 @@ EXTERN_C const IID IID_IRTCPresencePropertyEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PresenceProperty( 
+             /* [annotation][retval][out] */ 
+@@ -9752,7 +9753,7 @@ EXTERN_C const IID IID_IRTCPresencePropertyEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrValue) = 0;
+         
+     };
+     
+@@ -9932,13 +9933,13 @@ EXTERN_C const IID IID_IRTCPresenceDataEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetPresenceData( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrNamespace,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrNamespace,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrData) = 0;
+         
+     };
+     
+@@ -10111,13 +10112,13 @@ EXTERN_C const IID IID_IRTCPresenceStatusEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetLocalPresenceInfo( 
+             /* [annotation][out] */ 
+             _Out_  RTC_PRESENCE_STATUS *penStatus,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrNotes) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrNotes) = 0;
+         
+     };
+     
+@@ -11105,7 +11106,7 @@ EXTERN_C const IID IID_IRTCPresenceContact;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_PresentityURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrPresentityURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrPresentityURI) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_PresentityURI( 
+             /* [annotation][in] */ 
+@@ -11113,7 +11114,7 @@ EXTERN_C const IID IID_IRTCPresenceContact;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrName) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -11121,7 +11122,7 @@ EXTERN_C const IID IID_IRTCPresenceContact;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrData) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Data( 
+             /* [annotation][in] */ 
+@@ -11287,7 +11288,7 @@ EXTERN_C const IID IID_IRTCBuddy;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Notes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrNotes) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrNotes) = 0;
+         
+     };
+     
+@@ -11472,7 +11473,7 @@ EXTERN_C const IID IID_IRTCBuddy2;
+             /* [annotation][in] */ 
+             _In_  RTC_PRESENCE_PROPERTY enProperty,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrProperty) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrProperty) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EnumeratePresenceDevices( 
+             /* [annotation][retval][out] */ 
+@@ -12091,7 +12092,7 @@ EXTERN_C const IID IID_IRTCBuddyGroup;
+     public:
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrGroupName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrGroupName) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -12115,7 +12116,7 @@ EXTERN_C const IID IID_IRTCBuddyGroup;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrData) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_Data( 
+             /* [annotation][in] */ 
+@@ -12866,11 +12867,11 @@ EXTERN_C const IID IID_IRTCUserSearchQuery;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrValue) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SearchTerms( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrNames) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrNames) = 0;
+         
+         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_SearchPreference( 
+             /* [annotation][in] */ 
+@@ -12890,7 +12891,7 @@ EXTERN_C const IID IID_IRTCUserSearchQuery;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SearchDomain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDomain) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDomain) = 0;
+         
+     };
+     
+@@ -13041,7 +13042,7 @@ EXTERN_C const IID IID_IRTCUserSearchResult;
+             /* [annotation][in] */ 
+             _In_  RTC_USER_SEARCH_COLUMN enColumn,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrValue) = 0;
+         
+     };
+     
+@@ -13497,7 +13498,7 @@ EXTERN_C const IID IID_IRTCSessionReferStatusEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatusText) = 0;
+         
+     };
+     
+@@ -13677,15 +13678,15 @@ EXTERN_C const IID IID_IRTCSessionReferredEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReferredByURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrReferredByURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrReferredByURI) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReferToURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrReferoURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrReferoURI) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReferCookie( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrReferCookie) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrReferCookie) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Accept( void) = 0;
+         
+@@ -14119,19 +14120,19 @@ EXTERN_C const IID IID_IRTCPresenceDevice;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Notes( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrNotes) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrNotes) = 0;
+         
+         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_PresenceProperty( 
+             /* [annotation][in] */ 
+             _In_  RTC_PRESENCE_PROPERTY enProperty,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrProperty) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrProperty) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPresenceData( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrNamespace,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrNamespace,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrData) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrData) = 0;
+         
+     };
+     

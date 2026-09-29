@@ -1,0 +1,648 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h
+index d814c88e52..aede92179c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/OleDlg.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0002    Increment this if a change has global effects
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -289,12 +290,12 @@ typedef UINT (CALLBACK *LPFNOLEUIHOOK)(HWND, UINT, WPARAM, LPARAM);
+ #define OLEUI_ERR_STANDARDMAX           116  // Start here for specific errors.
+ 
+ // Miscellaneous utility functions.
+-STDAPI_(BOOL) OleUIAddVerbMenuW(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCWSTR lpszShortType,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(BOOL) OleUIAddVerbMenuW(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCWSTR lpszShortType,
+         HMENU hMenu, UINT uPos, UINT uIDVerbMin, UINT uIDVerbMax,
+-        BOOL bAddConvert, UINT idConvert, _Out_ HMENU *lphMenu);
+-STDAPI_(BOOL) OleUIAddVerbMenuA(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCSTR lpszShortType,
++        BOOL bAddConvert, UINT idConvert, _Win32_RAIIFree_(DestroyMenu, -1, 0) _Out_ HMENU *lphMenu);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(BOOL) OleUIAddVerbMenuA(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCSTR lpszShortType,
+         HMENU hMenu, UINT uPos, UINT uIDVerbMin, UINT uIDVerbMax,
+-        BOOL bAddConvert, UINT idConvert, _Out_ HMENU *lphMenu);
++        BOOL bAddConvert, UINT idConvert, _Win32_RAIIFree_(DestroyMenu, -1, 0) _Out_ HMENU *lphMenu);
+ #ifdef UNICODE
+ #define OleUIAddVerbMenu OleUIAddVerbMenuW
+ #else
+@@ -308,7 +309,7 @@ typedef struct tagOLEUIINSERTOBJECTW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(INSERT_OBJECT_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -339,7 +340,7 @@ typedef struct tagOLEUIINSERTOBJECTA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(INSERT_OBJECT_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -367,8 +368,8 @@ typedef struct tagOLEUIINSERTOBJECTA
+ 
+ } OLEUIINSERTOBJECTA, *POLEUIINSERTOBJECTA, *LPOLEUIINSERTOBJECTA;
+ 
+-STDAPI_(UINT) OleUIInsertObjectW(_In_ LPOLEUIINSERTOBJECTW);
+-STDAPI_(UINT) OleUIInsertObjectA(_In_ LPOLEUIINSERTOBJECTA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIInsertObjectW(_In_ LPOLEUIINSERTOBJECTW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIInsertObjectA(_In_ LPOLEUIINSERTOBJECTA);
+ 
+ #ifdef UNICODE
+ #define tagOLEUIINSERTOBJECT tagOLEUIINSERTOBJECTW
+@@ -529,7 +530,7 @@ typedef struct tagOLEUIPASTESPECIALW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(PASTE_SPECIAL_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -563,7 +564,7 @@ typedef struct tagOLEUIPASTESPECIALA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(PASTE_SPECIAL_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -606,8 +607,8 @@ typedef struct tagOLEUIPASTESPECIALA
+ #define LPOLEUIPASTESPECIAL LPOLEUIPASTESPECIALA
+ #endif
+ 
+-STDAPI_(UINT) OleUIPasteSpecialW(_In_ LPOLEUIPASTESPECIALW);
+-STDAPI_(UINT) OleUIPasteSpecialA(_In_ LPOLEUIPASTESPECIALA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIPasteSpecialW(_In_ LPOLEUIPASTESPECIALW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIPasteSpecialA(_In_ LPOLEUIPASTESPECIALA);
+ #ifdef UNICODE
+ #define OleUIPasteSpecial OleUIPasteSpecialW
+ #else
+@@ -646,7 +647,7 @@ STDAPI_(UINT) OleUIPasteSpecialA(_In_ LPOLEUIPASTESPECIALA);
+ #undef  INTERFACE
+ #define INTERFACE   IOleUILinkContainerW
+ 
+-DECLARE_INTERFACE_(IOleUILinkContainerW, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IOleUILinkContainerW, IUnknown)
+ {
+         // *** IUnknown methods *** //
+         STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -676,7 +677,7 @@ typedef IOleUILinkContainerW FAR* LPOLEUILINKCONTAINERW;
+ #undef  INTERFACE
+ #define INTERFACE   IOleUILinkContainerA
+ 
+-DECLARE_INTERFACE_(IOleUILinkContainerA, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IOleUILinkContainerA, IUnknown)
+ {
+         // *** IUnknown methods *** //
+         STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -717,7 +718,7 @@ typedef struct tagOLEUIEDITLINKSW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: Flags
++        _Win32_AssociatedEnum_(EDIT_LINKS_FLAGS) DWORD           dwFlags;        // IN-OUT: Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -736,7 +737,7 @@ typedef struct tagOLEUIEDITLINKSA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: Flags
++        _Win32_AssociatedEnum_(EDIT_LINKS_FLAGS) DWORD           dwFlags;        // IN-OUT: Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -766,8 +767,8 @@ typedef struct tagOLEUIEDITLINKSA
+ #define OLEUI_ELERR_LINKCNTRNULL        (OLEUI_ERR_STANDARDMAX+0)
+ #define OLEUI_ELERR_LINKCNTRINVALID     (OLEUI_ERR_STANDARDMAX+1)
+ 
+-STDAPI_(UINT) OleUIEditLinksW(_In_ LPOLEUIEDITLINKSW);
+-STDAPI_(UINT) OleUIEditLinksA(_In_ LPOLEUIEDITLINKSA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIEditLinksW(_In_ LPOLEUIEDITLINKSW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIEditLinksA(_In_ LPOLEUIEDITLINKSA);
+ 
+ #ifdef UNICODE
+ #define OleUIEditLinks OleUIEditLinksW
+@@ -789,7 +790,7 @@ typedef struct tagOLEUICHANGEICONW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(CHANGE_ICON_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -812,7 +813,7 @@ typedef struct tagOLEUICHANGEICONA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(CHANGE_ICON_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -831,8 +832,8 @@ typedef struct tagOLEUICHANGEICONA
+ 
+ } OLEUICHANGEICONA, *POLEUICHANGEICONA, *LPOLEUICHANGEICONA;
+ 
+-STDAPI_(UINT) OleUIChangeIconW(_In_ LPOLEUICHANGEICONW);
+-STDAPI_(UINT) OleUIChangeIconA(_In_ LPOLEUICHANGEICONA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIChangeIconW(_In_ LPOLEUICHANGEICONW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIChangeIconA(_In_ LPOLEUICHANGEICONA);
+ 
+ #ifdef UNICODE
+ #define tagOLEUICHANGEICON tagOLEUICHANGEICONW
+@@ -873,7 +874,7 @@ typedef struct tagOLEUICONVERTW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(UI_CONVERT_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -913,7 +914,7 @@ typedef struct tagOLEUICONVERTA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(UI_CONVERT_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -949,8 +950,8 @@ typedef struct tagOLEUICONVERTA
+ 
+ } OLEUICONVERTA, *POLEUICONVERTA, *LPOLEUICONVERTA;
+ 
+-STDAPI_(UINT) OleUIConvertW(_In_ LPOLEUICONVERTW);
+-STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIConvertW(_In_ LPOLEUICONVERTW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
+ 
+ #ifdef UNICODE
+ #define tagOLEUICONVERT tagOLEUICONVERTW
+@@ -968,7 +969,7 @@ STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
+ 
+ // Determine if there is at least one class that can Convert or ActivateAs
+ // the given clsid.
+-STDAPI_(BOOL) OleUICanConvertOrActivateAs(
++_Windows_SupportedOS_Windows2000_ STDAPI_(BOOL) OleUICanConvertOrActivateAs(
+         _In_ REFCLSID rClsid, BOOL fIsLinkedObject, WORD wFormat);
+ 
+ // Convert Dialog flags
+@@ -996,7 +997,7 @@ typedef struct tagOLEUIBUSYW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: see below
++        _Win32_AssociatedEnum_(BUSY_DIALOG_FLAGS) DWORD           dwFlags;        // IN-OUT: see below
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -1015,7 +1016,7 @@ typedef struct tagOLEUIBUSYA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: see below
++        _Win32_AssociatedEnum_(BUSY_DIALOG_FLAGS) DWORD           dwFlags;        // IN-OUT: see below
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -1030,8 +1031,8 @@ typedef struct tagOLEUIBUSYA
+ 
+ } OLEUIBUSYA, *POLEUIBUSYA, *LPOLEUIBUSYA;
+ 
+-STDAPI_(UINT) OleUIBusyW(_In_ LPOLEUIBUSYW);
+-STDAPI_(UINT) OleUIBusyA(_In_ LPOLEUIBUSYA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIBusyW(_In_ LPOLEUIBUSYW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIBusyA(_In_ LPOLEUIBUSYA);
+ 
+ #ifdef UNICODE
+ #define tagOLEUIBUSY tagOLEUIBUSYW
+@@ -1068,7 +1069,7 @@ typedef struct tagOLEUICHANGESOURCEW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(CHANGE_SOURCE_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -1095,7 +1096,7 @@ typedef struct tagOLEUICHANGESOURCEA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(CHANGE_SOURCE_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -1118,8 +1119,8 @@ typedef struct tagOLEUICHANGESOURCEA
+ 
+ } OLEUICHANGESOURCEA, *POLEUICHANGESOURCEA, *LPOLEUICHANGESOURCEA;
+ 
+-STDAPI_(UINT) OleUIChangeSourceW(_In_ LPOLEUICHANGESOURCEW);
+-STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIChangeSourceW(_In_ LPOLEUICHANGESOURCEW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
+ 
+ #ifdef UNICODE
+ #define tagOLEUICHANGESOURCE tagOLEUICHANGESOURCEW
+@@ -1157,7 +1158,7 @@ STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
+ #undef  INTERFACE
+ #define INTERFACE   IOleUIObjInfoW
+ 
+-DECLARE_INTERFACE_(IOleUIObjInfoW, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IOleUIObjInfoW, IUnknown)
+ {
+         // *** IUnknown methods *** //
+         STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -1188,7 +1189,7 @@ typedef IOleUIObjInfoW FAR* LPOLEUIOBJINFOW;
+ #undef  INTERFACE
+ #define INTERFACE   IOleUIObjInfoA
+ 
+-DECLARE_INTERFACE_(IOleUIObjInfoA, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IOleUIObjInfoA, IUnknown)
+ {
+         // *** IUnknown methods *** //
+         STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -1229,7 +1230,7 @@ typedef IOleUIObjInfoA FAR* LPOLEUIOBJINFOA;
+ #undef  INTERFACE
+ #define INTERFACE   IOleUILinkInfoW
+ 
+-DECLARE_INTERFACE_(IOleUILinkInfoW, IOleUILinkContainerW)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IOleUILinkInfoW, IOleUILinkContainerW)
+ {
+         // *** IUnknown methods *** //
+         STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -1263,7 +1264,7 @@ typedef IOleUILinkInfoW FAR* LPOLEUILINKINFOW;
+ #undef  INTERFACE
+ #define INTERFACE   IOleUILinkInfoA
+ 
+-DECLARE_INTERFACE_(IOleUILinkInfoA, IOleUILinkContainerA)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IOleUILinkInfoA, IOleUILinkContainerA)
+ {
+         // *** IUnknown methods *** //
+         STDMETHOD(QueryInterface) (THIS_ _In_ REFIID riid, _Outptr_ LPVOID FAR* ppvObj) PURE;
+@@ -1351,7 +1352,7 @@ typedef struct tagOLEUIVIEWPROPSW
+ {
+         // These IN fields are standard across all OLEUI property pages.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: flags specific to view page
++        _Win32_AssociatedEnum_(VIEW_OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: flags specific to view page
+         DWORD           dwReserved1[2];
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback (not used in this dialog)
+         LPARAM          lCustData;      // Custom data to pass to hook
+@@ -1368,7 +1369,7 @@ typedef struct tagOLEUIVIEWPROPSA
+ {
+         // These IN fields are standard across all OLEUI property pages.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: flags specific to view page
++        _Win32_AssociatedEnum_(VIEW_OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: flags specific to view page
+         DWORD           dwReserved1[2];
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback (not used in this dialog)
+         LPARAM          lCustData;      // Custom data to pass to hook
+@@ -1481,7 +1482,7 @@ typedef struct tagOLEUIOBJECTPROPSW
+ {
+         // These IN fields are standard across all OLEUI property sheets.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: global flags for the sheet
++        _Win32_AssociatedEnum_(OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: global flags for the sheet
+ 
+         // Standard PROPSHEETHEADER used for extensibility
+         LPPROPSHEETHEADERW   lpPS;         // IN: property sheet header
+@@ -1505,7 +1506,7 @@ typedef struct tagOLEUIOBJECTPROPSA
+ {
+         // These IN fields are standard across all OLEUI property sheets.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: global flags for the sheet
++        _Win32_AssociatedEnum_(OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: global flags for the sheet
+ 
+         // Standard PROPSHEETHEADER used for extensibility
+         LPPROPSHEETHEADERA  lpPS;         // IN: property sheet header
+@@ -1525,8 +1526,8 @@ typedef struct tagOLEUIOBJECTPROPSA
+ 
+ } OLEUIOBJECTPROPSA, *POLEUIOBJECTPROPSA, FAR* LPOLEUIOBJECTPROPSA;
+ 
+-STDAPI_(UINT) OleUIObjectPropertiesW(_In_ LPOLEUIOBJECTPROPSW);
+-STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIObjectPropertiesW(_In_ LPOLEUIOBJECTPROPSW);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
+ 
+ #ifdef UNICODE
+ #define tagOLEUIOBJECTPROPS tagOLEUIOBJECTPROPSW
+@@ -1581,8 +1582,8 @@ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
+ /////////////////////////////////////////////////////////////////////////////
+ // PROMPT USER DIALOGS
+ 
+-int __cdecl OleUIPromptUserW(int nTemplate, HWND hwndParent, ...);
+-int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:unicode") int __cdecl OleUIPromptUserW(int nTemplate, HWND hwndParent, ...);
++_Windows_SupportedOS_Windows2000_ _WIN32META_ANNOTATION_("win32metadata:ansi") int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
+ 
+ #ifdef UNICODE
+ #define OleUIPromptUser OleUIPromptUserW
+@@ -1590,9 +1591,9 @@ int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
+ #define OleUIPromptUser OleUIPromptUserA
+ #endif
+ 
+-STDAPI_(BOOL) OleUIUpdateLinksW(LPOLEUILINKCONTAINERW lpOleUILinkCntr,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ STDAPI_(BOOL) OleUIUpdateLinksW(LPOLEUILINKCONTAINERW lpOleUILinkCntr,
+         HWND hwndParent, _In_ LPWSTR lpszTitle, int cLinks);
+-STDAPI_(BOOL) OleUIUpdateLinksA(LPOLEUILINKCONTAINERA lpOleUILinkCntr,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ STDAPI_(BOOL) OleUIUpdateLinksA(LPOLEUILINKCONTAINERA lpOleUILinkCntr,
+         HWND hwndParent, _In_ LPSTR lpszTitle, int cLinks);
+ 
+ #ifdef UNICODE
+@@ -1615,6 +1616,285 @@ STDAPI_(BOOL) OleUIUpdateLinksA(LPOLEUILINKCONTAINERA lpOleUILinkCntr,
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("BZ_DISABLECANCELBUTTON")
++#undef BZ_DISABLECANCELBUTTON
++#pragma push_macro("BZ_DISABLESWITCHTOBUTTON")
++#undef BZ_DISABLESWITCHTOBUTTON
++#pragma push_macro("BZ_DISABLERETRYBUTTON")
++#undef BZ_DISABLERETRYBUTTON
++#pragma push_macro("BZ_NOTRESPONDINGDIALOG")
++#undef BZ_NOTRESPONDINGDIALOG
++enum [[clang::flag_enum]] BUSY_DIALOG_FLAGS : unsigned int
++{
++    BZ_DISABLECANCELBUTTON = 1U,
++    BZ_DISABLESWITCHTOBUTTON = 2U,
++    BZ_DISABLERETRYBUTTON = 4U,
++    BZ_NOTRESPONDINGDIALOG = 8U,
++};
++#pragma pop_macro("BZ_NOTRESPONDINGDIALOG")
++#pragma pop_macro("BZ_DISABLERETRYBUTTON")
++#pragma pop_macro("BZ_DISABLESWITCHTOBUTTON")
++#pragma pop_macro("BZ_DISABLECANCELBUTTON")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CF_SHOWHELPBUTTON")
++#undef CF_SHOWHELPBUTTON
++#pragma push_macro("CF_SETCONVERTDEFAULT")
++#undef CF_SETCONVERTDEFAULT
++#pragma push_macro("CF_SETACTIVATEDEFAULT")
++#undef CF_SETACTIVATEDEFAULT
++#pragma push_macro("CF_SELECTCONVERTTO")
++#undef CF_SELECTCONVERTTO
++#pragma push_macro("CF_SELECTACTIVATEAS")
++#undef CF_SELECTACTIVATEAS
++#pragma push_macro("CF_DISABLEDISPLAYASICON")
++#undef CF_DISABLEDISPLAYASICON
++#pragma push_macro("CF_DISABLEACTIVATEAS")
++#undef CF_DISABLEACTIVATEAS
++#pragma push_macro("CF_HIDECHANGEICON")
++#undef CF_HIDECHANGEICON
++#pragma push_macro("CF_CONVERTONLY")
++#undef CF_CONVERTONLY
++enum [[clang::flag_enum]] UI_CONVERT_FLAGS : unsigned int
++{
++    CF_SHOWHELPBUTTON = 1U,
++    CF_SETCONVERTDEFAULT = 2U,
++    CF_SETACTIVATEDEFAULT = 4U,
++    CF_SELECTCONVERTTO = 8U,
++    CF_SELECTACTIVATEAS = 16U,
++    CF_DISABLEDISPLAYASICON = 32U,
++    CF_DISABLEACTIVATEAS = 64U,
++    CF_HIDECHANGEICON = 128U,
++    CF_CONVERTONLY = 256U,
++};
++#pragma pop_macro("CF_CONVERTONLY")
++#pragma pop_macro("CF_HIDECHANGEICON")
++#pragma pop_macro("CF_DISABLEACTIVATEAS")
++#pragma pop_macro("CF_DISABLEDISPLAYASICON")
++#pragma pop_macro("CF_SELECTACTIVATEAS")
++#pragma pop_macro("CF_SELECTCONVERTTO")
++#pragma pop_macro("CF_SETACTIVATEDEFAULT")
++#pragma pop_macro("CF_SETCONVERTDEFAULT")
++#pragma pop_macro("CF_SHOWHELPBUTTON")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CIF_SHOWHELP")
++#undef CIF_SHOWHELP
++#pragma push_macro("CIF_SELECTCURRENT")
++#undef CIF_SELECTCURRENT
++#pragma push_macro("CIF_SELECTDEFAULT")
++#undef CIF_SELECTDEFAULT
++#pragma push_macro("CIF_SELECTFROMFILE")
++#undef CIF_SELECTFROMFILE
++#pragma push_macro("CIF_USEICONEXE")
++#undef CIF_USEICONEXE
++enum [[clang::flag_enum]] CHANGE_ICON_FLAGS : unsigned int
++{
++    CIF_SHOWHELP = 1U,
++    CIF_SELECTCURRENT = 2U,
++    CIF_SELECTDEFAULT = 4U,
++    CIF_SELECTFROMFILE = 8U,
++    CIF_USEICONEXE = 16U,
++};
++#pragma pop_macro("CIF_USEICONEXE")
++#pragma pop_macro("CIF_SELECTFROMFILE")
++#pragma pop_macro("CIF_SELECTDEFAULT")
++#pragma pop_macro("CIF_SELECTCURRENT")
++#pragma pop_macro("CIF_SHOWHELP")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CSF_SHOWHELP")
++#undef CSF_SHOWHELP
++#pragma push_macro("CSF_VALIDSOURCE")
++#undef CSF_VALIDSOURCE
++#pragma push_macro("CSF_ONLYGETSOURCE")
++#undef CSF_ONLYGETSOURCE
++#pragma push_macro("CSF_EXPLORER")
++#undef CSF_EXPLORER
++enum [[clang::flag_enum]] CHANGE_SOURCE_FLAGS : unsigned int
++{
++    CSF_SHOWHELP = 1U,
++    CSF_VALIDSOURCE = 2U,
++    CSF_ONLYGETSOURCE = 4U,
++    CSF_EXPLORER = 8U,
++};
++#pragma pop_macro("CSF_EXPLORER")
++#pragma pop_macro("CSF_ONLYGETSOURCE")
++#pragma pop_macro("CSF_VALIDSOURCE")
++#pragma pop_macro("CSF_SHOWHELP")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ELF_SHOWHELP")
++#undef ELF_SHOWHELP
++#pragma push_macro("ELF_DISABLEUPDATENOW")
++#undef ELF_DISABLEUPDATENOW
++#pragma push_macro("ELF_DISABLEOPENSOURCE")
++#undef ELF_DISABLEOPENSOURCE
++#pragma push_macro("ELF_DISABLECHANGESOURCE")
++#undef ELF_DISABLECHANGESOURCE
++#pragma push_macro("ELF_DISABLECANCELLINK")
++#undef ELF_DISABLECANCELLINK
++enum [[clang::flag_enum]] EDIT_LINKS_FLAGS : unsigned int
++{
++    ELF_SHOWHELP = 1U,
++    ELF_DISABLEUPDATENOW = 2U,
++    ELF_DISABLEOPENSOURCE = 4U,
++    ELF_DISABLECHANGESOURCE = 8U,
++    ELF_DISABLECANCELLINK = 16U,
++};
++#pragma pop_macro("ELF_DISABLECANCELLINK")
++#pragma pop_macro("ELF_DISABLECHANGESOURCE")
++#pragma pop_macro("ELF_DISABLEOPENSOURCE")
++#pragma pop_macro("ELF_DISABLEUPDATENOW")
++#pragma pop_macro("ELF_SHOWHELP")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("IOF_SHOWHELP")
++#undef IOF_SHOWHELP
++#pragma push_macro("IOF_SELECTCREATENEW")
++#undef IOF_SELECTCREATENEW
++#pragma push_macro("IOF_SELECTCREATEFROMFILE")
++#undef IOF_SELECTCREATEFROMFILE
++#pragma push_macro("IOF_CHECKLINK")
++#undef IOF_CHECKLINK
++#pragma push_macro("IOF_CHECKDISPLAYASICON")
++#undef IOF_CHECKDISPLAYASICON
++#pragma push_macro("IOF_CREATENEWOBJECT")
++#undef IOF_CREATENEWOBJECT
++#pragma push_macro("IOF_CREATEFILEOBJECT")
++#undef IOF_CREATEFILEOBJECT
++#pragma push_macro("IOF_CREATELINKOBJECT")
++#undef IOF_CREATELINKOBJECT
++#pragma push_macro("IOF_DISABLELINK")
++#undef IOF_DISABLELINK
++#pragma push_macro("IOF_VERIFYSERVERSEXIST")
++#undef IOF_VERIFYSERVERSEXIST
++#pragma push_macro("IOF_DISABLEDISPLAYASICON")
++#undef IOF_DISABLEDISPLAYASICON
++#pragma push_macro("IOF_HIDECHANGEICON")
++#undef IOF_HIDECHANGEICON
++#pragma push_macro("IOF_SHOWINSERTCONTROL")
++#undef IOF_SHOWINSERTCONTROL
++#pragma push_macro("IOF_SELECTCREATECONTROL")
++#undef IOF_SELECTCREATECONTROL
++enum [[clang::flag_enum]] INSERT_OBJECT_FLAGS : unsigned int
++{
++    IOF_SHOWHELP = 1U,
++    IOF_SELECTCREATENEW = 2U,
++    IOF_SELECTCREATEFROMFILE = 4U,
++    IOF_CHECKLINK = 8U,
++    IOF_CHECKDISPLAYASICON = 16U,
++    IOF_CREATENEWOBJECT = 32U,
++    IOF_CREATEFILEOBJECT = 64U,
++    IOF_CREATELINKOBJECT = 128U,
++    IOF_DISABLELINK = 256U,
++    IOF_VERIFYSERVERSEXIST = 512U,
++    IOF_DISABLEDISPLAYASICON = 1024U,
++    IOF_HIDECHANGEICON = 2048U,
++    IOF_SHOWINSERTCONTROL = 4096U,
++    IOF_SELECTCREATECONTROL = 8192U,
++};
++#pragma pop_macro("IOF_SELECTCREATECONTROL")
++#pragma pop_macro("IOF_SHOWINSERTCONTROL")
++#pragma pop_macro("IOF_HIDECHANGEICON")
++#pragma pop_macro("IOF_DISABLEDISPLAYASICON")
++#pragma pop_macro("IOF_VERIFYSERVERSEXIST")
++#pragma pop_macro("IOF_DISABLELINK")
++#pragma pop_macro("IOF_CREATELINKOBJECT")
++#pragma pop_macro("IOF_CREATEFILEOBJECT")
++#pragma pop_macro("IOF_CREATENEWOBJECT")
++#pragma pop_macro("IOF_CHECKDISPLAYASICON")
++#pragma pop_macro("IOF_CHECKLINK")
++#pragma pop_macro("IOF_SELECTCREATEFROMFILE")
++#pragma pop_macro("IOF_SELECTCREATENEW")
++#pragma pop_macro("IOF_SHOWHELP")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("OPF_OBJECTISLINK")
++#undef OPF_OBJECTISLINK
++#pragma push_macro("OPF_NOFILLDEFAULT")
++#undef OPF_NOFILLDEFAULT
++#pragma push_macro("OPF_SHOWHELP")
++#undef OPF_SHOWHELP
++#pragma push_macro("OPF_DISABLECONVERT")
++#undef OPF_DISABLECONVERT
++enum [[clang::flag_enum]] OBJECT_PROPERTIES_FLAGS : unsigned int
++{
++    OPF_OBJECTISLINK = 1U,
++    OPF_NOFILLDEFAULT = 2U,
++    OPF_SHOWHELP = 4U,
++    OPF_DISABLECONVERT = 8U,
++};
++#pragma pop_macro("OPF_DISABLECONVERT")
++#pragma pop_macro("OPF_SHOWHELP")
++#pragma pop_macro("OPF_NOFILLDEFAULT")
++#pragma pop_macro("OPF_OBJECTISLINK")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("VPF_SELECTRELATIVE")
++#undef VPF_SELECTRELATIVE
++#pragma push_macro("VPF_DISABLERELATIVE")
++#undef VPF_DISABLERELATIVE
++#pragma push_macro("VPF_DISABLESCALE")
++#undef VPF_DISABLESCALE
++enum [[clang::flag_enum]] VIEW_OBJECT_PROPERTIES_FLAGS : unsigned int
++{
++    VPF_SELECTRELATIVE = 1U,
++    VPF_DISABLERELATIVE = 2U,
++    VPF_DISABLESCALE = 4U,
++};
++#pragma pop_macro("VPF_DISABLESCALE")
++#pragma pop_macro("VPF_DISABLERELATIVE")
++#pragma pop_macro("VPF_SELECTRELATIVE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("PSF_SHOWHELP")
++#undef PSF_SHOWHELP
++#pragma push_macro("PSF_SELECTPASTE")
++#undef PSF_SELECTPASTE
++#pragma push_macro("PSF_SELECTPASTELINK")
++#undef PSF_SELECTPASTELINK
++#pragma push_macro("PSF_CHECKDISPLAYASICON")
++#undef PSF_CHECKDISPLAYASICON
++#pragma push_macro("PSF_DISABLEDISPLAYASICON")
++#undef PSF_DISABLEDISPLAYASICON
++#pragma push_macro("PSF_HIDECHANGEICON")
++#undef PSF_HIDECHANGEICON
++#pragma push_macro("PSF_STAYONCLIPBOARDCHANGE")
++#undef PSF_STAYONCLIPBOARDCHANGE
++#pragma push_macro("PSF_NOREFRESHDATAOBJECT")
++#undef PSF_NOREFRESHDATAOBJECT
++enum [[clang::flag_enum]] PASTE_SPECIAL_FLAGS : unsigned int
++{
++    PSF_SHOWHELP = 1U,
++    PSF_SELECTPASTE = 2U,
++    PSF_SELECTPASTELINK = 4U,
++    PSF_CHECKDISPLAYASICON = 8U,
++    PSF_DISABLEDISPLAYASICON = 16U,
++    PSF_HIDECHANGEICON = 32U,
++    PSF_STAYONCLIPBOARDCHANGE = 64U,
++    PSF_NOREFRESHDATAOBJECT = 128U,
++};
++#pragma pop_macro("PSF_NOREFRESHDATAOBJECT")
++#pragma pop_macro("PSF_STAYONCLIPBOARDCHANGE")
++#pragma pop_macro("PSF_HIDECHANGEICON")
++#pragma pop_macro("PSF_DISABLEDISPLAYASICON")
++#pragma pop_macro("PSF_CHECKDISPLAYASICON")
++#pragma pop_macro("PSF_SELECTPASTELINK")
++#pragma pop_macro("PSF_SELECTPASTE")
++#pragma pop_macro("PSF_SHOWHELP")
++#endif
++
+ #endif  //_OLEDLG_H_
+ 
+ /////////////////////////////////////////////////////////////////////////////

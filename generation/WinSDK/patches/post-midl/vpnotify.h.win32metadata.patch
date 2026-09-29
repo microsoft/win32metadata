@@ -1,0 +1,67 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
+index e1d5d309c3..17ee7483ff 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
+@@ -11,6 +11,7 @@
+ #define __IVPNotify__
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -20,39 +21,49 @@ extern "C" {
+ #endif
+ 
+ // interface IVPBaseNotify
+-DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPBaseNotify, IUnknown)
+ {
+ 	// this function initializes the reconnection to the decoder. 
++	
++	
+ 	STDMETHOD (RenegotiateVPParameters)(THIS
+ 					   ) PURE;
+ 
+ };
+ 
+ // interface IVPNotify
+-DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPNotify, IVPBaseNotify)
+ {
+     // function to set the mode (bob, weave etc)
++    
++    
+     STDMETHOD (SetDeinterlaceMode)(THIS_ 
+ 				   IN AMVP_MODE mode
+ 				  ) PURE;
+ 
+     // function to get the mode (bob, weave etc)
++    
++    
+     STDMETHOD (GetDeinterlaceMode)(THIS_ 
+-				   OUT AMVP_MODE *pMode
++				   _WIN32META_ANNOTATION_("win32metadata:in") OUT AMVP_MODE *pMode
+ 				  ) PURE;
+ };
+ 
+ // interface IVPNotify
+-DECLARE_INTERFACE_(IVPNotify2, IVPNotify)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Windows2000_ IVPNotify2, IVPNotify)
+ {
+ // function to set the mode (bob, weave etc)
++    
++    
+     STDMETHOD (SetVPSyncMaster)(THIS_ 
+ 				   IN BOOL bVPSyncMaster
+ 				  ) PURE;
+ 
+     // function to get the mode (bob, weave etc)
++    
++    
+     STDMETHOD (GetVPSyncMaster)(THIS_ 
+-				   OUT BOOL *pbVPSyncMaster
++				   _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL *pbVPSyncMaster
+ 				  ) PURE;
+ 
+     /*

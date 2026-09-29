@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h b/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h
+index e1927c7442..3a44c04411 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/appnotify.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * psmapp.h - ApiSet Contract for api-ms-win-core-psm-app-l1                     *
+@@ -44,10 +45,11 @@ typedef struct _APPSTATE_REGISTRATION *PAPPSTATE_REGISTRATION;
+ APICONTRACT
+ ULONG
+ NTAPI
++
+ RegisterAppStateChangeNotification(
+-    _In_ PAPPSTATE_CHANGE_ROUTINE Routine,
+-    _In_opt_ PVOID Context,
+-    _Out_ PAPPSTATE_REGISTRATION* Registration
++    _In_  PAPPSTATE_CHANGE_ROUTINE Routine,
++    _In_opt_  PVOID Context,
++    _Out_  PAPPSTATE_REGISTRATION* Registration
+     );
+ 
+ APICONTRACT

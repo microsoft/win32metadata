@@ -1,0 +1,645 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
+index 5fed8633f1..4b4bcc279b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ras.h
+@@ -31,6 +31,7 @@ Abstract:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or CmdLineTools Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS)
+@@ -52,7 +53,11 @@ extern "C" {
+ #ifdef USES_RAS_QUARANTINE_APIS
+ #include <naptypes.h>
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(RASNAP_ProbationTime)) || (((defined(USES_RAS_QUARANTINE_APIS))))
+ #define RASNAP_ProbationTime            0x00000001
++#endif
++#ifdef USES_RAS_QUARANTINE_APIS
+ 
+ typedef struct _tagRasNapState
+ {
+@@ -145,7 +150,7 @@ RASTUNNELENDPOINT
+ #define RAS_MaxReplyMessage   1024
+ #define RAS_MaxDnsSuffix      256
+ 
+-DECLARE_HANDLE( HRASCONN );
++DECLARE_HANDLE( HRASCONN ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #define LPHRASCONN HRASCONN*
+ 
+ #if (WINVER >= 0x501)
+@@ -903,7 +908,7 @@ RASPPPCCP
+ */
+ #if (WINVER >= 0x601)
+ 
+-typedef struct _RASPPP_PROJECTION_INFO {
++typedef struct  _RASPPP_PROJECTION_INFO {
+ 
+     // IPv4 Projection Parameters
+     DWORD        dwIPv4NegotiationError;
+@@ -920,10 +925,10 @@ typedef struct _RASPPP_PROJECTION_INFO {
+     // LCP Options
+     BOOL         fBundled;
+     BOOL         fMultilink;
+-    DWORD        dwAuthenticationProtocol;
+-    DWORD        dwAuthenticationData;
+-    DWORD        dwServerAuthenticationProtocol;
+-    DWORD        dwServerAuthenticationData;
++    _Win32_AssociatedEnum_(RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL) DWORD        dwAuthenticationProtocol;
++    _Win32_AssociatedEnum_(RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA) DWORD        dwAuthenticationData;
++    _Win32_AssociatedEnum_(RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL) DWORD        dwServerAuthenticationProtocol;
++    _Win32_AssociatedEnum_(RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA) DWORD        dwServerAuthenticationData;
+     DWORD        dwEapTypeId;
+     DWORD        dwServerEapTypeId;
+     DWORD        dwLcpOptions;
+@@ -967,7 +972,7 @@ typedef struct _RASIKEV2_PROJECTION_INFO {
+     DWORD         dwAuthenticationProtocol;
+     DWORD         dwEapTypeId;
+ 
+-    DWORD         dwFlags;
++    _Win32_AssociatedEnum_(RASIKEV_PROJECTION_INFO_FLAGS) DWORD         dwFlags;
+     DWORD         dwEncryptionMethod;
+ 
+     DWORD         numIPv4ServerAddresses;
+@@ -1032,9 +1037,9 @@ RAS_PROJECTION_INFO, *PRAS_PROJECTION_INFO;
+ ** For RASDIALFUNC2, subsequent callback notifications for all
+ ** subentries can be cancelled by returning FALSE.
+ */
+-typedef VOID (WINAPI *RASDIALFUNC)( UINT, RASCONNSTATE, DWORD );
+-typedef VOID (WINAPI *RASDIALFUNC1)( HRASCONN, UINT, RASCONNSTATE, DWORD, DWORD );
+-typedef DWORD (WINAPI *RASDIALFUNC2)( ULONG_PTR, DWORD, HRASCONN, UINT, RASCONNSTATE, DWORD, DWORD );
++typedef VOID (WINAPI *RASDIALFUNC)( UINT,  RASCONNSTATE, DWORD );
++typedef VOID (WINAPI *RASDIALFUNC1)( HRASCONN, UINT,  RASCONNSTATE, DWORD, DWORD );
++typedef DWORD (WINAPI *RASDIALFUNC2)( ULONG_PTR, DWORD, HRASCONN, UINT,  RASCONNSTATE, DWORD, DWORD );
+ 
+ 
+ /* Information describing a RAS-capable device.
+@@ -1594,7 +1599,7 @@ RASENTRYW
+ #define RASET_Phone     1  // Phone lines: modem, ISDN, X.25, etc
+ #define RASET_Vpn       2  // Virtual private network
+ 
+-#if (WINVER < 0x600)
++#if defined(WIN32METADATA) || ((WINVER < 0x600))
+ #define RASET_Direct    3  // Direct connect: serial, parallel
+ #endif // (WINVER < 0x600)
+ 
+@@ -1611,7 +1616,7 @@ RASENTRYW
+ ** PROTOTYPE IN NEW CODE.  SUPPORT FOR IT MAY BE REMOVED
+ ** IN FUTURE VERSIONS OF RAS.
+ */
+-typedef BOOL (WINAPI *ORASADFUNC)( HWND, LPSTR, DWORD, LPDWORD );
++typedef BOOL (WINAPI *ORASADFUNC)( HWND, LPSTR, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD );
+ 
+ #if (WINVER >= 0x400)
+ 
+@@ -1657,8 +1662,8 @@ RASADPARAMS
+ 
+ /* Prototype AutoDial DLL function.
+ */
+-typedef BOOL (WINAPI *RASADFUNCA)( LPSTR, LPSTR, LPRASADPARAMS, LPDWORD );
+-typedef BOOL (WINAPI *RASADFUNCW)( LPWSTR, LPWSTR, LPRASADPARAMS, LPDWORD );
++typedef BOOL (WINAPI *RASADFUNCA)( LPSTR, LPSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASADPARAMS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD );
++typedef BOOL (WINAPI *RASADFUNCW)( LPWSTR, LPWSTR, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASADPARAMS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD );
+ 
+ #ifdef UNICODE
+ #define RASADFUNC RASADFUNCW
+@@ -1837,31 +1842,31 @@ RASEAPUSERIDENTITYW
+ #define LPRASEAPUSERIDENTITY  RASEAPUSERIDENTITY*
+ 
+ typedef DWORD (WINAPI *PFNRASGETBUFFER) (
+-                            PBYTE *ppBuffer,
+-                            PDWORD pdwSize
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE *ppBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSize
+                             );
+ 
+ typedef DWORD (WINAPI *PFNRASFREEBUFFER) (
+-                            PBYTE pBufer);
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pBufer);
+ 
+ typedef DWORD (WINAPI *PFNRASSENDBUFFER) (
+                             HANDLE hPort,
+-                            PBYTE  pBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE  pBuffer,
+                             DWORD  dwSize
+                             );
+ 
+ typedef DWORD (WINAPI *PFNRASRECEIVEBUFFER) (
+                             HANDLE hPort,
+-                            PBYTE pBuffer,
+-                            PDWORD pdwSize,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSize,
+                             DWORD  dwTimeOut,
+                             HANDLE hEvent
+                             );
+ 
+ typedef DWORD (WINAPI *PFNRASRETRIEVEBUFFER) (
+                             HANDLE hPort,
+-                            PBYTE pBuffer,
+-                            PDWORD pdwSize
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE pBuffer,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD pdwSize
+                             );
+ 
+ typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
+@@ -1874,8 +1879,8 @@ typedef  DWORD (WINAPI *RasCustomScriptExecuteFn) (
+                             PFNRASRECEIVEBUFFER pfnRasReceiveBuffer,
+                             PFNRASRETRIEVEBUFFER pfnRasRetrieveBuffer,
+                             HWND hWnd,
+-                            RASDIALPARAMS *pRasDialParams,
+-                            PVOID pvReserved
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RASDIALPARAMS *pRasDialParams,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvReserved
+                             );
+ 
+ #endif // (WINVER >= 0x500)
+@@ -1894,8 +1899,8 @@ RASCOMMSETTINGS
+ 
+ typedef DWORD (WINAPI *PFNRASSETCOMMSETTINGS) (
+                             HANDLE hPort,
+-                            RASCOMMSETTINGS *pRasCommSettings,
+-                            PVOID  pvReserved
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RASCOMMSETTINGS *pRasCommSettings,
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID  pvReserved
+                             );
+ 
+ #define RASCUSTOMSCRIPTEXTENSIONS struct tagRASCUSTOMSCRIPTEXTENSIONS
+@@ -1910,148 +1915,154 @@ RASCUSTOMSCRIPTEXTENSIONS
+ 
+ /* External RAS API function prototypes.
+ */
+-DWORD APIENTRY RasDialA( _In_opt_ LPRASDIALEXTENSIONS, _In_opt_ LPCSTR, _In_ LPRASDIALPARAMSA, _In_ DWORD,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasDialA( _In_opt_ LPRASDIALEXTENSIONS, _In_opt_ LPCSTR, _In_ LPRASDIALPARAMSA, _In_ DWORD,
+                          _In_opt_ LPVOID, _Out_ LPHRASCONN );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
++
+ DWORD APIENTRY RasDialW( _In_opt_ LPRASDIALEXTENSIONS, _In_opt_ LPCWSTR, _In_ LPRASDIALPARAMSW, _In_ DWORD,
+                          _In_opt_ LPVOID, _Out_ LPHRASCONN );
+ 
+-DWORD APIENTRY RasEnumConnectionsA( _Inout_opt_ LPRASCONNA, _Inout_ LPDWORD, _Out_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
+ 
+-DWORD APIENTRY RasEnumConnectionsW( _Inout_opt_ LPRASCONNW, _Inout_ LPDWORD, _Out_ LPDWORD );
++DWORD APIENTRY RasEnumConnectionsA( _WIN32META_ANNOTATION_("win32metadata:memory_size_param=1") _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _Inout_opt_ LPRASCONNA, _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasEnumEntriesA( _In_opt_ LPCSTR, _In_opt_ LPCSTR, _Inout_opt_ LPRASENTRYNAMEA, _Inout_ LPDWORD,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
++
++DWORD APIENTRY RasEnumConnectionsW( _WIN32META_ANNOTATION_("win32metadata:memory_size_param=1") _WIN32META_ANNOTATION_("win32metadata:array_count_param=2") _Inout_opt_ LPRASCONNW, _Inout_ LPDWORD, _Out_ LPDWORD );
++
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumEntriesA( _In_opt_ LPCSTR, _In_opt_ LPCSTR, _Inout_opt_ LPRASENTRYNAMEA, _Inout_ LPDWORD,
+                                 _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasEnumEntriesW( _In_opt_ LPCWSTR, _In_opt_ LPCWSTR, _Inout_opt_ LPRASENTRYNAMEW, _Inout_ LPDWORD,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumEntriesW( _In_opt_ LPCWSTR, _In_opt_ LPCWSTR, _Inout_opt_ LPRASENTRYNAMEW, _Inout_ LPDWORD,
+                                 _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetConnectStatusA( _In_ HRASCONN, _Inout_ LPRASCONNSTATUSA );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetConnectStatusA( _In_ HRASCONN, _Inout_ LPRASCONNSTATUSA );
+ 
+-DWORD APIENTRY RasGetConnectStatusW( _In_ HRASCONN, _Inout_ LPRASCONNSTATUSW );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetConnectStatusW( _In_ HRASCONN, _Inout_ LPRASCONNSTATUSW );
+ 
+-DWORD APIENTRY RasGetErrorStringA( _In_ UINT ResourceId, _Out_writes_(InBufSize) LPSTR lpszString, _In_ DWORD  InBufSize);
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetErrorStringA( _In_ UINT ResourceId, _Out_writes_(InBufSize) LPSTR lpszString, _In_ DWORD  InBufSize);
+ 
+-DWORD APIENTRY RasGetErrorStringW( _In_ UINT ResourceId, _Out_writes_(InBufSize) LPWSTR lpszString, _In_ DWORD  InBufSize);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetErrorStringW( _In_ UINT ResourceId, _Out_writes_(InBufSize) LPWSTR lpszString, _In_ DWORD  InBufSize);
+ 
+-DWORD APIENTRY RasHangUpA( _In_ HRASCONN );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasHangUpA( _In_ HRASCONN );
+ 
+-DWORD APIENTRY RasHangUpW( _In_ HRASCONN );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasHangUpW( _In_ HRASCONN );
+ 
+-DWORD APIENTRY RasGetProjectionInfoA( _In_ HRASCONN, _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetProjectionInfoA( _In_ HRASCONN,  _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetProjectionInfoW( _In_ HRASCONN, _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetProjectionInfoW( _In_ HRASCONN,  _In_ RASPROJECTION, _Out_ LPVOID, _Inout_ LPDWORD );
+ 
+-DWORD APIENTRY RasCreatePhonebookEntryA( _In_ HWND, _In_opt_ LPCSTR );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasCreatePhonebookEntryA( _In_ HWND, _In_opt_ LPCSTR );
+ 
+-DWORD APIENTRY RasCreatePhonebookEntryW( _In_ HWND, _In_opt_ LPCWSTR );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasCreatePhonebookEntryW( _In_ HWND, _In_opt_ LPCWSTR );
+ 
+-DWORD APIENTRY RasEditPhonebookEntryA( _In_ HWND, _In_opt_ LPCSTR, _In_ LPCSTR );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEditPhonebookEntryA( _In_ HWND, _In_opt_ LPCSTR, _In_ LPCSTR );
+ 
+-DWORD APIENTRY RasEditPhonebookEntryW( _In_ HWND, _In_opt_ LPCWSTR, _In_ LPCWSTR );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEditPhonebookEntryW( _In_ HWND, _In_opt_ LPCWSTR, _In_ LPCWSTR );
+ 
+-DWORD APIENTRY RasSetEntryDialParamsA( _In_opt_ LPCSTR, _In_ LPRASDIALPARAMSA, _In_ BOOL );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetEntryDialParamsA( _In_opt_ LPCSTR, _In_ LPRASDIALPARAMSA, _In_ BOOL );
+ 
+-DWORD APIENTRY RasSetEntryDialParamsW( _In_opt_ LPCWSTR, _In_ LPRASDIALPARAMSW, _In_ BOOL );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetEntryDialParamsW( _In_opt_ LPCWSTR, _In_ LPRASDIALPARAMSW, _In_ BOOL );
+ 
+-DWORD APIENTRY RasGetEntryDialParamsA( _In_opt_ LPCSTR, _Inout_ LPRASDIALPARAMSA, _Out_ LPBOOL );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEntryDialParamsA( _In_opt_ LPCSTR, _Inout_ LPRASDIALPARAMSA, _Out_ LPBOOL );
+ 
+-DWORD APIENTRY RasGetEntryDialParamsW( _In_opt_ LPCWSTR, _Inout_ LPRASDIALPARAMSW, _Out_ LPBOOL );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEntryDialParamsW( _In_opt_ LPCWSTR, _Inout_ LPRASDIALPARAMSW, _Out_ LPBOOL );
+ 
+-DWORD APIENTRY RasEnumDevicesA( _Inout_opt_ LPRASDEVINFOA, _Inout_ LPDWORD, _Out_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumDevicesA( _Inout_opt_ LPRASDEVINFOA, _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasEnumDevicesW( _Inout_opt_ LPRASDEVINFOW, _Inout_ LPDWORD, _Out_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumDevicesW( _Inout_opt_ LPRASDEVINFOW, _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetCountryInfoA( _Inout_opt_ LPRASCTRYINFOA, _Inout_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetCountryInfoA( _Inout_opt_ LPRASCTRYINFOA, _Inout_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetCountryInfoW( _Inout_opt_ LPRASCTRYINFOW, _Inout_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetCountryInfoW( _Inout_opt_ LPRASCTRYINFOW, _Inout_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _Inout_opt_ LPRASENTRYA, _Inout_ LPDWORD, _Out_opt_ LPBYTE, _Inout_opt_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _Inout_opt_ LPRASENTRYA, _Inout_ LPDWORD, _Out_opt_ LPBYTE, _Inout_opt_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _Inout_opt_ LPRASENTRYW, _Inout_ LPDWORD, _Out_opt_ LPBYTE, _Inout_opt_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _Inout_opt_ LPRASENTRYW, _Inout_ LPDWORD, _Out_opt_ LPBYTE, _Inout_opt_ LPDWORD );
+ 
+-DWORD APIENTRY RasSetEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ LPRASENTRYA, _In_ DWORD, _In_opt_ LPBYTE, _In_ DWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ LPRASENTRYA, _In_ DWORD, _In_opt_ LPBYTE, _In_ DWORD );
+ 
+-DWORD APIENTRY RasSetEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ LPRASENTRYW, _In_ DWORD, _In_opt_ LPBYTE, _In_ DWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ LPRASENTRYW, _In_ DWORD, _In_opt_ LPBYTE, _In_ DWORD );
+ 
+-DWORD APIENTRY RasRenameEntryA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ LPCSTR );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasRenameEntryA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ LPCSTR );
+ 
+-DWORD APIENTRY RasRenameEntryW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ LPCWSTR );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasRenameEntryW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ LPCWSTR );
+ 
+-DWORD APIENTRY RasDeleteEntryA( _In_opt_ LPCSTR, _In_ LPCSTR );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasDeleteEntryA( _In_opt_ LPCSTR, _In_ LPCSTR );
+ 
+-DWORD APIENTRY RasDeleteEntryW( _In_opt_ LPCWSTR, _In_ LPCWSTR );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasDeleteEntryW( _In_opt_ LPCWSTR, _In_ LPCWSTR );
+ 
+-DWORD APIENTRY RasValidateEntryNameA( _In_opt_ LPCSTR, _In_ LPCSTR );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasValidateEntryNameA( _In_opt_ LPCSTR, _In_ LPCSTR );
+ 
+-DWORD APIENTRY RasValidateEntryNameW( _In_opt_ LPCWSTR, _In_ LPCWSTR );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasValidateEntryNameW( _In_opt_ LPCWSTR, _In_ LPCWSTR );
+ 
+-DWORD APIENTRY RasConnectionNotificationA( _In_ HRASCONN, _In_ HANDLE, _In_ DWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasConnectionNotificationA( _In_ HRASCONN, _In_ HANDLE, _In_ DWORD );
+ 
+-DWORD APIENTRY RasConnectionNotificationW( _In_ HRASCONN, _In_ HANDLE, _In_ DWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasConnectionNotificationW( _In_ HRASCONN, _In_ HANDLE, _In_ DWORD );
+ 
+ #if (WINVER >= 0x401)
+-DWORD APIENTRY RasGetSubEntryHandleA( _In_ HRASCONN, _In_ DWORD, _Out_ LPHRASCONN );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetSubEntryHandleA( _In_ HRASCONN, _In_ DWORD, _Out_ LPHRASCONN );
+ 
+-DWORD APIENTRY RasGetSubEntryHandleW( _In_ HRASCONN, _In_ DWORD, _Out_ LPHRASCONN );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetSubEntryHandleW( _In_ HRASCONN, _In_ DWORD, _Out_ LPHRASCONN );
+ 
+-DWORD APIENTRY RasGetCredentialsA( _In_opt_ LPCSTR, _In_ LPCSTR, _Inout_ LPRASCREDENTIALSA );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetCredentialsA( _In_opt_ LPCSTR, _In_ LPCSTR, _Inout_ LPRASCREDENTIALSA );
+ 
+-DWORD APIENTRY RasGetCredentialsW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _Inout_ LPRASCREDENTIALSW );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetCredentialsW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _Inout_ LPRASCREDENTIALSW );
+ 
+-DWORD APIENTRY RasSetCredentialsA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ LPRASCREDENTIALSA, _In_ BOOL );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetCredentialsA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ LPRASCREDENTIALSA, _In_ BOOL );
+ 
+-DWORD APIENTRY RasSetCredentialsW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ LPRASCREDENTIALSW, _In_ BOOL );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetCredentialsW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ LPRASCREDENTIALSW, _In_ BOOL );
+ 
+-DWORD APIENTRY RasGetSubEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ DWORD,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetSubEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ DWORD,
+                     _Inout_opt_  LPRASSUBENTRYA, _Inout_opt_ LPDWORD, _Out_opt_  LPBYTE, _Inout_opt_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetSubEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ DWORD,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetSubEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ DWORD,
+                     _Inout_opt_ LPRASSUBENTRYW, _Inout_opt_ LPDWORD, _Out_opt_ LPBYTE, _Inout_opt_ LPDWORD );
+ 
+-DWORD APIENTRY RasSetSubEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ DWORD,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetSubEntryPropertiesA( _In_opt_ LPCSTR, _In_ LPCSTR, _In_ DWORD,
+                     _In_ LPRASSUBENTRYA, _In_ DWORD, _In_opt_  LPBYTE, _In_ DWORD );
+ 
+-DWORD APIENTRY RasSetSubEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ DWORD,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetSubEntryPropertiesW( _In_opt_ LPCWSTR, _In_ LPCWSTR, _In_ DWORD,
+                     _In_ LPRASSUBENTRYW, _In_ DWORD, _In_opt_  LPBYTE, _In_ DWORD );
+ 
+-DWORD APIENTRY RasGetAutodialAddressA( _In_opt_ LPCSTR, _In_opt_ LPDWORD, _Inout_opt_ LPRASAUTODIALENTRYA,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetAutodialAddressA( _In_opt_ LPCSTR, _In_opt_ LPDWORD, _Inout_opt_ LPRASAUTODIALENTRYA,
+                                        _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetAutodialAddressW( _In_opt_ LPCWSTR, _In_opt_ LPDWORD, _Inout_opt_ LPRASAUTODIALENTRYW,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetAutodialAddressW( _In_opt_ LPCWSTR, _In_opt_ LPDWORD, _Inout_opt_ LPRASAUTODIALENTRYW,
+                                        _Inout_ LPDWORD, _Out_ LPDWORD );
+ 
+-DWORD APIENTRY RasSetAutodialAddressA( _In_opt_   LPCSTR, _In_ DWORD, _In_opt_   LPRASAUTODIALENTRYA,
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialAddressA( _In_opt_   LPCSTR, _In_ DWORD, _In_opt_   LPRASAUTODIALENTRYA,
+                                        _In_ DWORD, _In_ DWORD );
+ 
+-DWORD APIENTRY RasSetAutodialAddressW( _In_opt_   LPCWSTR, _In_ DWORD, _In_opt_   LPRASAUTODIALENTRYW,
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialAddressW( _In_opt_   LPCWSTR, _In_ DWORD, _In_opt_   LPRASAUTODIALENTRYW,
+                                        _In_ DWORD, _In_ DWORD );
+ 
+-DWORD APIENTRY RasEnumAutodialAddressesA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumAutodialAddressesA(
+     _Inout_updates_bytes_opt_(*lpdwcbRasAutodialAddresses) LPSTR *lppRasAutodialAddresses,
+     _Inout_  LPDWORD lpdwcbRasAutodialAddresses,
+     _Out_    LPDWORD lpdwcRasAutodialAddresses);
+ 
+-DWORD APIENTRY RasEnumAutodialAddressesW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasEnumAutodialAddressesW(
+     _Inout_updates_bytes_opt_(*lpdwcbRasAutodialAddresses) LPWSTR *lppRasAutodialAddresses,
+     _Inout_  LPDWORD lpdwcbRasAutodialAddresses,
+     _Out_    LPDWORD lpdwcRasAutodialAddresses);
+ 
+-DWORD APIENTRY RasGetAutodialEnableA( _In_ DWORD, _Out_ LPBOOL );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetAutodialEnableA( _In_ DWORD, _Out_ LPBOOL );
+ 
+-DWORD APIENTRY RasGetAutodialEnableW( _In_ DWORD, _Out_ LPBOOL );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetAutodialEnableW( _In_ DWORD, _Out_ LPBOOL );
+ 
+-DWORD APIENTRY RasSetAutodialEnableA( _In_ DWORD, _In_ BOOL );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialEnableA( _In_ DWORD, _In_ BOOL );
+ 
+-DWORD APIENTRY RasSetAutodialEnableW( _In_ DWORD, _In_ BOOL );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialEnableW( _In_ DWORD, _In_ BOOL );
+ 
+-DWORD APIENTRY RasGetAutodialParamA( _In_ DWORD, _Out_ LPVOID, _Inout_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetAutodialParamA( _In_ DWORD, _Out_ LPVOID, _Inout_ LPDWORD );
+ 
+-DWORD APIENTRY RasGetAutodialParamW( _In_ DWORD, _Out_ LPVOID, _Inout_ LPDWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetAutodialParamW( _In_ DWORD, _Out_ LPVOID, _Inout_ LPDWORD );
+ 
+-DWORD APIENTRY RasSetAutodialParamA( _In_ DWORD, _In_ LPVOID, _In_ DWORD );
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialParamA( _In_ DWORD, _In_ LPVOID, _In_ DWORD );
+ 
+-DWORD APIENTRY RasSetAutodialParamW( _In_ DWORD, _In_ LPVOID, _In_ DWORD );
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetAutodialParamW( _In_ DWORD, _In_ LPVOID, _In_ DWORD );
+ 
+ DWORD APIENTRY RasGetPCscf(_Out_ LPWSTR lpszPCscf);
+ 
+@@ -2086,12 +2097,12 @@ typedef DWORD (WINAPI *RasCustomHangUpFn) (
+ 
+ typedef DWORD (WINAPI *RasCustomDialFn) (
+         HINSTANCE           hInstDll,
+-        LPRASDIALEXTENSIONS lpRasDialExtensions,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASDIALEXTENSIONS lpRasDialExtensions,
+         LPCWSTR             lpszPhonebook,
+-        LPRASDIALPARAMS     lpRasDialParams,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPRASDIALPARAMS     lpRasDialParams,
+         DWORD               dwNotifierType,
+-        LPVOID              lpvNotifier,
+-        LPHRASCONN          lphRasConn,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID              lpvNotifier,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHRASCONN          lphRasConn,
+         DWORD               dwFlags
+         );
+ 
+@@ -2106,22 +2117,22 @@ typedef DWORD (WINAPI *RasCustomDeleteEntryNotifyFn) (
+ #define RCD_Eap         0x00000002
+ #define RCD_Logon       0x00000004
+ 
+-DWORD APIENTRY RasInvokeEapUI( _In_ HRASCONN, _In_ DWORD, _In_ LPRASDIALEXTENSIONS, _In_ HWND);
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasInvokeEapUI( _In_ HRASCONN, _In_ DWORD, _In_ LPRASDIALEXTENSIONS, _In_ HWND);
+ 
+-DWORD APIENTRY RasGetLinkStatistics(_In_ HRASCONN hRasConn,
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetLinkStatistics(_In_ HRASCONN hRasConn,
+                                     _In_ DWORD dwSubEntry,
+                                     _Inout_ RAS_STATS *lpStatistics );
+ 
+-DWORD APIENTRY RasGetConnectionStatistics( _In_ HRASCONN hRasConn,
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetConnectionStatistics( _In_ HRASCONN hRasConn,
+                                            _Inout_ RAS_STATS *lpStatistics );
+ 
+-DWORD APIENTRY RasClearLinkStatistics(_In_ HRASCONN hRasConn,
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasClearLinkStatistics(_In_ HRASCONN hRasConn,
+                                       _In_ DWORD dwSubEntry);
+ 
+ 
+-DWORD APIENTRY RasClearConnectionStatistics( _In_ HRASCONN hRasConn );
++_Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasClearConnectionStatistics( _In_ HRASCONN hRasConn );
+ 
+-DWORD APIENTRY RasGetEapUserDataA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEapUserDataA(
+                    _In_opt_ HANDLE hToken,
+                    _In_opt_ LPCSTR pszPhonebook,
+                    _In_ LPCSTR pszEntry,
+@@ -2129,83 +2140,83 @@ DWORD APIENTRY RasGetEapUserDataA(
+                    _Inout_ DWORD *pdwSizeofEapData );
+ 
+ 
+-DWORD APIENTRY RasGetEapUserDataW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEapUserDataW(
+                    _In_opt_ HANDLE  hToken,
+                    _In_opt_ LPCWSTR pszPhonebook,
+                    _In_ LPCWSTR pszEntry,
+                    _Out_opt_ BYTE    *pbEapData,
+                    _Inout_ DWORD *pdwSizeofEapData );
+ 
+-DWORD APIENTRY RasSetEapUserDataA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetEapUserDataA(
+                    _In_opt_ HANDLE hToken,
+                    _In_opt_ LPCSTR pszPhonebook,
+                    _In_ LPCSTR pszEntry,
+                    _In_ BYTE   *pbEapData,
+                    _In_ DWORD dwSizeofEapData );
+ 
+-DWORD APIENTRY RasSetEapUserDataW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetEapUserDataW(
+                    _In_opt_ HANDLE  hToken,
+                    _In_opt_ LPCWSTR pszPhonebook,
+                    _In_ LPCWSTR pszEntry,
+                    _In_ BYTE    *pbEapData,
+                    _In_ DWORD dwSizeofEapData );
+ 
+-DWORD APIENTRY RasGetCustomAuthDataA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetCustomAuthDataA(
+                    _In_opt_ LPCSTR pszPhonebook,
+                    _In_ LPCSTR pszEntry,
+                    _Out_writes_bytes_opt_(*pdwSizeofCustomAuthData) BYTE   *pbCustomAuthData,
+                    _Inout_ DWORD  *pdwSizeofCustomAuthData );
+ 
+ 
+-DWORD APIENTRY RasGetCustomAuthDataW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetCustomAuthDataW(
+                    _In_opt_ LPCWSTR pszPhonebook,
+                    _In_ LPCWSTR pszEntry,
+                    _Out_writes_bytes_opt_(*pdwSizeofCustomAuthData) BYTE    *pbCustomAuthData,
+                    _Inout_ DWORD   *pdwSizeofCustomAuthData );
+ 
+-DWORD APIENTRY RasSetCustomAuthDataA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetCustomAuthDataA(
+                    _In_opt_ LPCSTR pszPhonebook,
+                    _In_ LPCSTR pszEntry,
+                    _In_reads_bytes_(dwSizeofCustomAuthData) BYTE   *pbCustomAuthData,
+                    _In_ DWORD  dwSizeofCustomAuthData
+                    );
+ 
+-DWORD APIENTRY RasSetCustomAuthDataW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasSetCustomAuthDataW(
+                    _In_opt_ LPCWSTR pszPhonebook,
+                    _In_ LPCWSTR pszEntry,
+                    _In_reads_bytes_(dwSizeofCustomAuthData) BYTE    *pbCustomAuthData,
+                    _In_ DWORD   dwSizeofCustomAuthData
+                    );
+-DWORD APIENTRY RasGetEapUserIdentityW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEapUserIdentityW(
+                    _In_opt_ LPCWSTR              pszPhonebook,
+                    _In_ LPCWSTR                  pszEntry,
+                    _In_ DWORD                    dwFlags,
+                    _In_ HWND                     hwnd,
+                    _Out_ LPRASEAPUSERIDENTITYW*  ppRasEapUserIdentity
+ );
+-DWORD APIENTRY RasGetEapUserIdentityA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD APIENTRY RasGetEapUserIdentityA(
+                    _In_opt_ LPCSTR                   pszPhonebook,
+                    _In_ LPCSTR                   pszEntry,
+                    _In_ DWORD                    dwFlags,
+                    _In_ HWND                     hwnd,
+                    _Out_ LPRASEAPUSERIDENTITYA*   ppRasEapUserIdentity
+ );
+-VOID APIENTRY RasFreeEapUserIdentityW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ VOID APIENTRY RasFreeEapUserIdentityW(
+                    _In_ LPRASEAPUSERIDENTITYW    pRasEapUserIdentity
+ );
+-VOID APIENTRY RasFreeEapUserIdentityA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ VOID APIENTRY RasFreeEapUserIdentityA(
+                    _In_ LPRASEAPUSERIDENTITYA    pRasEapUserIdentity
+ );
+ #endif
+ 
+ #if (WINVER >= 0x501)
+ 
+-DWORD APIENTRY  RasDeleteSubEntryA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ DWORD APIENTRY  RasDeleteSubEntryA(
+                 _In_opt_ LPCSTR pszPhonebook,
+                 _In_ LPCSTR pszEntry,
+                 _In_ DWORD  dwSubentryId );
+ 
+-DWORD APIENTRY  RasDeleteSubEntryW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ DWORD APIENTRY  RasDeleteSubEntryW(
+                 _In_opt_ LPCWSTR pszPhonebook,
+                 _In_ LPCWSTR pszEntry,
+                 _In_ DWORD   dwSubEntryId );
+@@ -2244,14 +2255,14 @@ RASUPDATECONN
+ 
+ #define LPRASUPDATECONN  RASUPDATECONN*
+ 
+-DWORD APIENTRY
++_Windows_SupportedOS_Windows7_ DWORD APIENTRY
+ RasUpdateConnection(
+         _In_ HRASCONN        hrasconn,
+         _In_ LPRASUPDATECONN lprasupdateconn);
+ 
+ /* Ras Projection information for PPP or IKEv2
+ */
+-DWORD APIENTRY
++_Windows_SupportedOS_Windows7_ DWORD APIENTRY
+ RasGetProjectionInfoEx(
+         _In_ HRASCONN              hrasconn,
+         _Inout_opt_ PRAS_PROJECTION_INFO  pRasProjection,
+@@ -2363,4 +2374,98 @@ RasGetProjectionInfoEx(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_CMDTOOLS) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASEDM_DialAll")
++#undef RASEDM_DialAll
++#pragma push_macro("RASEDM_DialAsNeeded")
++#undef RASEDM_DialAsNeeded
++enum RASENTRY_DIAL_MODE : unsigned int
++{
++    RASEDM_DialAll = 1U,
++    RASEDM_DialAsNeeded = 2U,
++};
++#pragma pop_macro("RASEDM_DialAsNeeded")
++#pragma pop_macro("RASEDM_DialAll")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASLCPAD_CHAP_MD5")
++#undef RASLCPAD_CHAP_MD5
++#pragma push_macro("RASLCPAD_CHAP_MS")
++#undef RASLCPAD_CHAP_MS
++#pragma push_macro("RASLCPAD_CHAP_MSV2")
++#undef RASLCPAD_CHAP_MSV2
++enum RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA : unsigned int
++{
++    RASLCPAD_CHAP_MD5 = 5U,
++    RASLCPAD_CHAP_MS = 128U,
++    RASLCPAD_CHAP_MSV2 = 129U,
++};
++#pragma pop_macro("RASLCPAD_CHAP_MSV2")
++#pragma pop_macro("RASLCPAD_CHAP_MS")
++#pragma pop_macro("RASLCPAD_CHAP_MD5")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASLCPAP_PAP")
++#undef RASLCPAP_PAP
++#pragma push_macro("RASLCPAP_SPAP")
++#undef RASLCPAP_SPAP
++#pragma push_macro("RASLCPAP_CHAP")
++#undef RASLCPAP_CHAP
++#pragma push_macro("RASLCPAP_EAP")
++#undef RASLCPAP_EAP
++enum RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL : unsigned int
++{
++    RASLCPAP_PAP = 49187U,
++    RASLCPAP_SPAP = 49191U,
++    RASLCPAP_CHAP = 49699U,
++    RASLCPAP_EAP = 49703U,
++};
++#pragma pop_macro("RASLCPAP_EAP")
++#pragma pop_macro("RASLCPAP_CHAP")
++#pragma pop_macro("RASLCPAP_SPAP")
++#pragma pop_macro("RASLCPAP_PAP")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASIKEv2_FLAGS_MOBIKESUPPORTED")
++#undef RASIKEv2_FLAGS_MOBIKESUPPORTED
++#pragma push_macro("RASIKEv2_FLAGS_BEHIND_NAT")
++#undef RASIKEv2_FLAGS_BEHIND_NAT
++#pragma push_macro("RASIKEv2_FLAGS_SERVERBEHIND_NAT")
++#undef RASIKEv2_FLAGS_SERVERBEHIND_NAT
++enum [[clang::flag_enum]] RASIKEV_PROJECTION_INFO_FLAGS : unsigned int
++{
++    RASIKEv2_FLAGS_MOBIKESUPPORTED = 1U,
++    RASIKEv2_FLAGS_BEHIND_NAT = 2U,
++    RASIKEv2_FLAGS_SERVERBEHIND_NAT = 4U,
++};
++#pragma pop_macro("RASIKEv2_FLAGS_SERVERBEHIND_NAT")
++#pragma pop_macro("RASIKEv2_FLAGS_BEHIND_NAT")
++#pragma pop_macro("RASIKEv2_FLAGS_MOBIKESUPPORTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASCONNSTATE")
++#undef RASCONNSTATE
++typedef enum tagRASCONNSTATE RASCONNSTATE;
++#pragma pop_macro("RASCONNSTATE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASCONNSUBSTATE")
++#undef RASCONNSUBSTATE
++typedef enum tagRASCONNSUBSTATE RASCONNSUBSTATE;
++#pragma pop_macro("RASCONNSUBSTATE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("RASPROJECTION")
++#undef RASPROJECTION
++typedef enum tagRASPROJECTION RASPROJECTION;
++#pragma pop_macro("RASPROJECTION")
++#endif
++
+ #endif // _RAS_H_

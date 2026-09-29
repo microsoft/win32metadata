@@ -1,0 +1,92 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
+index a93eb437f1..2104c258bd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/poclass.h
+@@ -27,6 +27,7 @@ Revision History:
+ 
+ #include <devpropdef.h>
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ //
+ // This is of type DEVPROP_TYPE_UINT32 and represents the NT processor
+@@ -107,7 +108,7 @@ typedef struct _BATTERY_QUERY_INFORMATION {
+     ULONG                           AtRate;
+ } BATTERY_QUERY_INFORMATION, *PBATTERY_QUERY_INFORMATION;
+ 
+-typedef struct _BATTERY_INFORMATION {
++typedef struct   _BATTERY_INFORMATION {
+     ULONG       Capabilities;
+     UCHAR       Technology;
+     UCHAR       Reserved[3];
+@@ -192,7 +193,7 @@ typedef enum {
+ // Generic Payload for IOCTL_BATTERY_SET_INFORMATION.
+ //
+ 
+-typedef struct _BATTERY_SET_INFORMATION {
++typedef struct   _BATTERY_SET_INFORMATION {
+     ULONG                         BatteryTag;
+     BATTERY_SET_INFORMATION_LEVEL InformationLevel;
+     UCHAR                         Buffer[1];
+@@ -317,7 +318,7 @@ typedef struct _BATTERY_USB_CHARGER_STATUS
+ #define BATTERY_USB_CHARGER_STATUS_UCM_PD                           0x00000002
+ 
+ 
+-typedef struct _BATTERY_WAIT_STATUS {
++typedef struct   _BATTERY_WAIT_STATUS {
+     ULONG       BatteryTag;
+     ULONG       Timeout;
+     ULONG       PowerState;
+@@ -325,7 +326,7 @@ typedef struct _BATTERY_WAIT_STATUS {
+     ULONG       HighCapacity;
+ } BATTERY_WAIT_STATUS, *PBATTERY_WAIT_STATUS;
+ 
+-typedef struct _BATTERY_STATUS {
++typedef struct   _BATTERY_STATUS {
+     ULONG       PowerState;
+     ULONG       Capacity;
+     ULONG       Voltage;
+@@ -399,7 +400,7 @@ typedef struct _POWER_ADAPTER_CHARGE_REQUIREMENT {
+ #define MAX_BATTERY_STRING_SIZE 128
+ 
+ // Struct for accessing the packed date format in BatteryManufactureDate.
+-typedef struct _BATTERY_MANUFACTURE_DATE
++typedef struct   _BATTERY_MANUFACTURE_DATE
+ {
+     UCHAR   Day;
+     UCHAR   Month;
+@@ -642,14 +643,22 @@ typedef struct _THERMAL_COOLING_INTERFACE {
+ } THERMAL_COOLING_INTERFACE, *PTHERMAL_COOLING_INTERFACE;
+ 
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(THERMAL_COOLING_INTERFACE_VERSION)) || (((!defined(_WINDOWS_))))
+ #define THERMAL_COOLING_INTERFACE_VERSION 1
++#endif
++#ifndef _WINDOWS_
+ 
+ //
+ // The following THERMAL_DEVICE_* definitions are deprecated and should not be
+ // used. Use THERMAL_COOLING_* instead.
+ //
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(THERMAL_DEVICE_INTERFACE_VERSION)) || (((!defined(_WINDOWS_))))
+ #define THERMAL_DEVICE_INTERFACE_VERSION 1
++#endif
++#ifndef _WINDOWS_
+ 
+ typedef THERMAL_COOLING_INTERFACE THERMAL_DEVICE_INTERFACE;
+ typedef THERMAL_COOLING_INTERFACE *PTHERMAL_DEVICE_INTERFACE;
+@@ -723,7 +732,11 @@ typedef struct _POWER_LIMIT_INTERFACE {
+     PQUERY_POWER_LIMIT            QueryPowerLimit;
+ } POWER_LIMIT_INTERFACE, *PPOWER_LIMIT_INTERFACE;
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(POWER_LIMIT_INTERFACE_VERSION)) || (((!defined(_WINDOWS_))))
+ #define POWER_LIMIT_INTERFACE_VERSION 1
++#endif
++#ifndef _WINDOWS_
+ 
+ #endif // _WINDOWS_
+ 

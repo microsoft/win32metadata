@@ -1,0 +1,416 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
+index 28820adfc5..4e7957de1e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WerApi.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*++
+ 
+@@ -29,7 +30,7 @@ extern "C" {
+ 
+ //////////////////////// Defines //////////////////////////////////////////////
+ 
+-typedef HANDLE HREPORT;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WerReportCloseHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HREPORT;
+ 
+ //
+ // Do not add heap dumps for reports for the process
+@@ -293,7 +294,7 @@ typedef enum _WER_REPORT_TYPE
+ 
+ #define WER_SUBMIT_DISCARD_IF_QUEUED            WER_SUBMIT_NO_QUEUE
+ 
+-typedef struct _WER_REPORT_INFORMATION
++typedef struct   _WER_REPORT_INFORMATION
+ {
+     DWORD dwSize;
+     HANDLE hProcess;
+@@ -435,15 +436,19 @@ typedef enum _WER_CONSENT
+     WerConsentMax
+ }WER_CONSENT;
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ HRESULT
+ WINAPI
+ WerReportCreate(
+     _In_ PCWSTR pwzEventType,
+     _In_ WER_REPORT_TYPE repType,
+     _In_opt_ PWER_REPORT_INFORMATION pReportInformation,
+-    _Out_ HREPORT *phReportHandle
++    _Win32_RAIIFree_(WerReportCloseHandle, -1, 0) _Out_ HREPORT *phReportHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ HRESULT
+ WINAPI
+ WerReportSetParameter(
+@@ -453,16 +458,18 @@ WerReportSetParameter(
+     _In_ PCWSTR pwzValue
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ HRESULT
+ WINAPI
+ WerReportAddFile(
+     _In_ HREPORT hReportHandle,
+     _In_ PCWSTR pwzPath,
+     _In_ WER_FILE_TYPE repFileType,
+-    _In_ DWORD  dwFileFlags
++    _Win32_AssociatedEnum_(WER_FILE) _In_ DWORD  dwFileFlags
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerReportSetUIOption(
+     _In_ HREPORT hReportHandle,
+@@ -470,12 +477,12 @@ WerReportSetUIOption(
+     _In_ PCWSTR pwzValue
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerReportSubmit(
+     _In_ HREPORT hReportHandle,
+     _In_ WER_CONSENT consent,
+-    _In_ DWORD  dwFlags,
++    _Win32_AssociatedEnum_(WER_SUBMIT_FLAGS) _In_ DWORD  dwFlags,
+     _Out_opt_ PWER_SUBMIT_RESULT pSubmitResult
+     );
+ 
+@@ -513,7 +520,7 @@ typedef enum _WER_DUMP_TYPE
+     WerDumpTypeMax = 5
+ } WER_DUMP_TYPE;
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerReportAddDump(
+     _In_ HREPORT hReportHandle,
+@@ -525,7 +532,7 @@ WerReportAddDump(
+     _In_ DWORD dwFlags
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerReportCloseHandle(
+     _In_ HREPORT hReportHandle
+@@ -600,51 +607,51 @@ WerReportCloseHandle(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerRegisterFile(
+     _In_ PCWSTR pwzFile,
+     _In_ WER_REGISTER_FILE_TYPE regFileType,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(WER_FILE) _In_ DWORD dwFlags
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerUnregisterFile(
+     _In_ PCWSTR pwzFilePath
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerRegisterMemoryBlock(
+     _In_ PVOID pvAddress,
+     _In_ DWORD dwSize
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerUnregisterMemoryBlock(
+     _In_ PVOID pvAddress
+     );
+     
+-STDAPI
++_Windows_SupportedOS_15063_ STDAPI
+ WerRegisterExcludedMemoryBlock(
+     _In_ const void* address,
+     _In_ DWORD size
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_15063_ STDAPI
+ WerUnregisterExcludedMemoryBlock(
+     _In_ const void* address
+     );
+     
+-STDAPI
++_Windows_SupportedOS_15063_ STDAPI
+ WerRegisterCustomMetadata(
+     _In_ PCWSTR key,
+     _In_ PCWSTR value
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_15063_ STDAPI
+ WerUnregisterCustomMetadata(
+     _In_ PCWSTR key
+     );
+@@ -655,23 +662,23 @@ WerUnregisterCustomMetadata(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-STDAPI
++_Windows_SupportedOS_15063_ STDAPI
+ WerRegisterAdditionalProcess(
+     _In_ DWORD processId,
+     _In_ DWORD captureExtraInfoForThreadId
+     );
+     
+-STDAPI
++_Windows_SupportedOS_15063_ STDAPI
+ WerUnregisterAdditionalProcess(
+     _In_ DWORD processId
+     );
+     
+-STDAPI
++_Windows_SupportedOS_16299_ STDAPI
+ WerRegisterAppLocalDump(
+     _In_ PCWSTR localAppDataRelativePath
+     );
+ 
+-STDAPI
++_Windows_SupportedOS_16299_ STDAPI
+ WerUnregisterAppLocalDump();
+ 
+ STDAPI
+@@ -685,17 +692,17 @@ WerSetMaxProcessHoldMilliseconds(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerSetFlags(
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(WER_FAULT_REPORTING) _In_ DWORD dwFlags
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerGetFlags(
+     _In_ HANDLE hProcess,
+-    _Out_ PDWORD pdwFlags
++    _Win32_AssociatedEnum_(WER_FAULT_REPORTING) _Out_ PDWORD pdwFlags
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+@@ -707,14 +714,14 @@ WerGetFlags(
+ //
+ // ++++++++++++++++++++++++++ Application Setup APIs ++++++++++++++++++++++++++++++++++++++
+ //
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerAddExcludedApplication(
+     _In_ PCWSTR pwzExeName,
+     _In_ BOOL bAllUsers
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_WindowsVista_ HRESULT
+ WINAPI
+ WerRemoveExcludedApplication(
+     _In_ PCWSTR pwzExeName,
+@@ -733,14 +740,14 @@ WerRemoveExcludedApplication(
+ 
+ #define WER_MAX_REGISTERED_RUNTIME_EXCEPTION_MODULES 16
+ 
+-HRESULT
++_Windows_SupportedOS_Windows7_ HRESULT
+ WINAPI
+ WerRegisterRuntimeExceptionModule(
+     _In_ PCWSTR pwszOutOfProcessCallbackDll,
+     _In_ PVOID pContext
+     );
+ 
+-HRESULT
++_Windows_SupportedOS_Windows7_ HRESULT
+ WINAPI
+ WerUnregisterRuntimeExceptionModule(
+     _In_ PCWSTR pwszOutOfProcessCallbackDll,
+@@ -816,7 +823,7 @@ typedef enum _REPORT_STORE_TYPES
+     E_STORE_INVALID=4
+ } REPORT_STORE_TYPES;
+ 
+-typedef PVOID HREPORTSTORE, *PHREPORTSTORE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WerStoreClose") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef PVOID HREPORTSTORE, *PHREPORTSTORE;
+ 
+ /*++
+ 
+@@ -952,34 +959,34 @@ typedef struct _WER_REPORT_METADATA_V3
+     ULONGLONG LegacyBucketId;
+ } WER_REPORT_METADATA_V3, *PWER_REPORT_METADATA_V3;
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_15063_ __control_entrypoint(DllExport)
+ HRESULT
+ WerStoreOpen(
+     _In_ REPORT_STORE_TYPES repStoreType,
+-    _Out_ PHREPORTSTORE phReportStore
++    _Win32_RAIIFree_(WerStoreClose, -1, 0) _Out_ PHREPORTSTORE phReportStore
+     );
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_15063_ __control_entrypoint(DllExport)
+ VOID
+ WerStoreClose(
+     _In_opt_ _Post_invalid_ HREPORTSTORE hReportStore
+     );
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_15063_ __control_entrypoint(DllExport)
+ HRESULT
+ WerStoreGetFirstReportKey(
+     _In_ HREPORTSTORE hReportStore,
+     _Outptr_result_maybenull_z_ PCWSTR* ppszReportKey
+     );
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_15063_ __control_entrypoint(DllExport)
+ HRESULT
+ WerStoreGetNextReportKey(
+     _In_ HREPORTSTORE hReportStore,
+     _Outptr_result_maybenull_z_ PCWSTR* ppszReportKey
+     );
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_15063_ __control_entrypoint(DllExport)
+ HRESULT
+ WerStoreQueryReportMetadataV2(
+     _In_ HREPORTSTORE hReportStore,
+@@ -995,7 +1002,7 @@ WerStoreQueryReportMetadataV3(
+     _Out_ PWER_REPORT_METADATA_V3 pReportMetadata
+ );
+ 
+-__control_entrypoint(DllExport)
++_Windows_SupportedOS_15063_ __control_entrypoint(DllExport)
+ VOID
+ WerFreeString(
+     _In_ PCWSTR pwszStr
+@@ -1077,5 +1084,108 @@ WerStoreUploadReport(
+ 
+ #ifdef __cplusplus
+ }
++
++#ifdef WIN32METADATA
++#pragma push_macro("WER_FILE_ANONYMOUS_DATA")
++#undef WER_FILE_ANONYMOUS_DATA
++#pragma push_macro("WER_FILE_DELETE_WHEN_DONE")
++#undef WER_FILE_DELETE_WHEN_DONE
++enum [[clang::flag_enum]] WER_FILE : unsigned int
++{
++    WER_FILE_ANONYMOUS_DATA = 2U,
++    WER_FILE_DELETE_WHEN_DONE = 1U,
++};
++#pragma pop_macro("WER_FILE_DELETE_WHEN_DONE")
++#pragma pop_macro("WER_FILE_ANONYMOUS_DATA")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WER_SUBMIT_ADD_REGISTERED_DATA")
++#undef WER_SUBMIT_ADD_REGISTERED_DATA
++#pragma push_macro("WER_SUBMIT_HONOR_RECOVERY")
++#undef WER_SUBMIT_HONOR_RECOVERY
++#pragma push_macro("WER_SUBMIT_HONOR_RESTART")
++#undef WER_SUBMIT_HONOR_RESTART
++#pragma push_macro("WER_SUBMIT_NO_ARCHIVE")
++#undef WER_SUBMIT_NO_ARCHIVE
++#pragma push_macro("WER_SUBMIT_NO_CLOSE_UI")
++#undef WER_SUBMIT_NO_CLOSE_UI
++#pragma push_macro("WER_SUBMIT_NO_QUEUE")
++#undef WER_SUBMIT_NO_QUEUE
++#pragma push_macro("WER_SUBMIT_OUTOFPROCESS")
++#undef WER_SUBMIT_OUTOFPROCESS
++#pragma push_macro("WER_SUBMIT_OUTOFPROCESS_ASYNC")
++#undef WER_SUBMIT_OUTOFPROCESS_ASYNC
++#pragma push_macro("WER_SUBMIT_QUEUE")
++#undef WER_SUBMIT_QUEUE
++#pragma push_macro("WER_SUBMIT_SHOW_DEBUG")
++#undef WER_SUBMIT_SHOW_DEBUG
++#pragma push_macro("WER_SUBMIT_START_MINIMIZED")
++#undef WER_SUBMIT_START_MINIMIZED
++#pragma push_macro("WER_SUBMIT_BYPASS_DATA_THROTTLING")
++#undef WER_SUBMIT_BYPASS_DATA_THROTTLING
++#pragma push_macro("WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY")
++#undef WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY
++#pragma push_macro("WER_SUBMIT_REPORT_MACHINE_ID")
++#undef WER_SUBMIT_REPORT_MACHINE_ID
++enum [[clang::flag_enum]] WER_SUBMIT_FLAGS : unsigned int
++{
++    WER_SUBMIT_ADD_REGISTERED_DATA = 16U,
++    WER_SUBMIT_HONOR_RECOVERY = 1U,
++    WER_SUBMIT_HONOR_RESTART = 2U,
++    WER_SUBMIT_NO_ARCHIVE = 256U,
++    WER_SUBMIT_NO_CLOSE_UI = 64U,
++    WER_SUBMIT_NO_QUEUE = 128U,
++    WER_SUBMIT_OUTOFPROCESS = 32U,
++    WER_SUBMIT_OUTOFPROCESS_ASYNC = 1024U,
++    WER_SUBMIT_QUEUE = 4U,
++    WER_SUBMIT_SHOW_DEBUG = 8U,
++    WER_SUBMIT_START_MINIMIZED = 512U,
++    WER_SUBMIT_BYPASS_DATA_THROTTLING = 2048U,
++    WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY = 4096U,
++    WER_SUBMIT_REPORT_MACHINE_ID = 8192U,
++};
++#pragma pop_macro("WER_SUBMIT_REPORT_MACHINE_ID")
++#pragma pop_macro("WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY")
++#pragma pop_macro("WER_SUBMIT_BYPASS_DATA_THROTTLING")
++#pragma pop_macro("WER_SUBMIT_START_MINIMIZED")
++#pragma pop_macro("WER_SUBMIT_SHOW_DEBUG")
++#pragma pop_macro("WER_SUBMIT_QUEUE")
++#pragma pop_macro("WER_SUBMIT_OUTOFPROCESS_ASYNC")
++#pragma pop_macro("WER_SUBMIT_OUTOFPROCESS")
++#pragma pop_macro("WER_SUBMIT_NO_QUEUE")
++#pragma pop_macro("WER_SUBMIT_NO_CLOSE_UI")
++#pragma pop_macro("WER_SUBMIT_NO_ARCHIVE")
++#pragma pop_macro("WER_SUBMIT_HONOR_RESTART")
++#pragma pop_macro("WER_SUBMIT_HONOR_RECOVERY")
++#pragma pop_macro("WER_SUBMIT_ADD_REGISTERED_DATA")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION")
++#undef WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION
++#pragma push_macro("WER_FAULT_REPORTING_FLAG_NOHEAP")
++#undef WER_FAULT_REPORTING_FLAG_NOHEAP
++#pragma push_macro("WER_FAULT_REPORTING_FLAG_QUEUE")
++#undef WER_FAULT_REPORTING_FLAG_QUEUE
++#pragma push_macro("WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD")
++#undef WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD
++#pragma push_macro("WER_FAULT_REPORTING_ALWAYS_SHOW_UI")
++#undef WER_FAULT_REPORTING_ALWAYS_SHOW_UI
++enum [[clang::flag_enum]] WER_FAULT_REPORTING : unsigned int
++{
++    WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION = 4U,
++    WER_FAULT_REPORTING_FLAG_NOHEAP = 1U,
++    WER_FAULT_REPORTING_FLAG_QUEUE = 2U,
++    WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD = 8U,
++    WER_FAULT_REPORTING_ALWAYS_SHOW_UI = 16U,
++};
++#pragma pop_macro("WER_FAULT_REPORTING_ALWAYS_SHOW_UI")
++#pragma pop_macro("WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD")
++#pragma pop_macro("WER_FAULT_REPORTING_FLAG_QUEUE")
++#pragma pop_macro("WER_FAULT_REPORTING_FLAG_NOHEAP")
++#pragma pop_macro("WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION")
++#endif
++
+ #endif
+ 

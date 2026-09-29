@@ -1,0 +1,55 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h b/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
+index 539c7a02d5..2bfb188ca0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FaxRoute.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -49,15 +50,15 @@ extern "C" {
+ // callback routines
+ //
+ 
+-typedef LONG (WINAPI *PFAXROUTEADDFILE)(DWORD JobId, LPCWSTR FileName, GUID *Guid);
++typedef LONG (WINAPI *PFAXROUTEADDFILE)(DWORD JobId, LPCWSTR FileName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *Guid);
+ typedef LONG (WINAPI *PFAXROUTEDELETEFILE)(DWORD JobId, LPCWSTR FileName);
+-typedef BOOL (WINAPI *PFAXROUTEGETFILE)(DWORD JobId, DWORD Index, _Out_writes_bytes_opt_(*RequiredSize) LPWSTR FileNameBuffer, LPDWORD RequiredSize);
+-typedef BOOL (WINAPI *PFAXROUTEENUMFILE)(DWORD JobId, GUID *GuidOwner, GUID *GuidCaller, LPCWSTR FileName, PVOID Context);
+-typedef BOOL (WINAPI *PFAXROUTEENUMFILES)(DWORD JobId, GUID *Guid,PFAXROUTEENUMFILE FileEnumerator, PVOID Context);
+-typedef BOOL (WINAPI *PFAXROUTEMODIFYROUTINGDATA)(DWORD JobId, LPCWSTR RoutingGuid, LPBYTE RoutingData, DWORD RoutingDataSize );
++typedef BOOL (WINAPI *PFAXROUTEGETFILE)(DWORD JobId, DWORD Index, _Out_writes_bytes_opt_(*RequiredSize) LPWSTR FileNameBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD RequiredSize);
++typedef BOOL (WINAPI *PFAXROUTEENUMFILE)(DWORD JobId, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *GuidOwner, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *GuidCaller, LPCWSTR FileName, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Context);
++typedef BOOL (WINAPI *PFAXROUTEENUMFILES)(DWORD JobId, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *Guid,PFAXROUTEENUMFILE FileEnumerator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID Context);
++typedef BOOL (WINAPI *PFAXROUTEMODIFYROUTINGDATA)(DWORD JobId, LPCWSTR RoutingGuid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE RoutingData, DWORD RoutingDataSize );
+ 
+ 
+-typedef struct _FAX_ROUTE_CALLBACKROUTINES {
++typedef struct   _FAX_ROUTE_CALLBACKROUTINES {
+     DWORD                       SizeOfStruct;                // size of the struct set by the fax service
+     PFAXROUTEADDFILE            FaxRouteAddFile;
+     PFAXROUTEDELETEFILE         FaxRouteDeleteFile;
+@@ -71,7 +72,7 @@ typedef struct _FAX_ROUTE_CALLBACKROUTINES {
+ // routing data structure
+ //
+ 
+-typedef struct _FAX_ROUTE {
++typedef struct   _FAX_ROUTE {
+     DWORD           SizeOfStruct;       // size of the struct set by the fax service
+     DWORD           JobId;              // Fax job identifier
+     DWORDLONG       ElapsedTime;        // Elapsed time for whole fax job in Coordinated Universal Time (UTC)
+@@ -136,11 +137,11 @@ FaxRouteSetRoutingInfo(
+     );
+ 
+ 
+-typedef BOOL (WINAPI *PFAXROUTEINITIALIZE)               (HANDLE,PFAX_ROUTE_CALLBACKROUTINES);
+-typedef BOOL (WINAPI *PFAXROUTEMETHOD)                   (const FAX_ROUTE*,PVOID*,LPDWORD);
++typedef BOOL (WINAPI *PFAXROUTEINITIALIZE)               (HANDLE,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFAX_ROUTE_CALLBACKROUTINES);
++typedef BOOL (WINAPI *PFAXROUTEMETHOD)                   (const FAX_ROUTE*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID*,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD);
+ typedef BOOL (WINAPI *PFAXROUTEDEVICEENABLE)             (LPCWSTR,DWORD,LONG);
+ typedef BOOL (WINAPI *PFAXROUTEDEVICECHANGENOTIFICATION) (DWORD,BOOL);
+-typedef BOOL (WINAPI *PFAXROUTEGETROUTINGINFO)           (LPCWSTR,DWORD,LPBYTE,LPDWORD);
++typedef BOOL (WINAPI *PFAXROUTEGETROUTINGINFO)           (LPCWSTR,DWORD,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD);
+ typedef BOOL (WINAPI *PFAXROUTESETROUTINGINFO)           (LPCWSTR,DWORD,const BYTE*,DWORD);
+ 
+ #ifdef __cplusplus

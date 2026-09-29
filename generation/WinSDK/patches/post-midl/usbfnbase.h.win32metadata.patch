@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/usbfnbase.h b/generation/WinSDK/RecompiledIdlHeaders/shared/usbfnbase.h
+index f35a3f8982..46a2b5e96f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/usbfnbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/usbfnbase.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (C) Microsoft Corporation. All rights reserved.
+@@ -285,10 +286,10 @@ typedef struct _USBFN_NOTIFICATION
+ 
+     union 
+     {
+-        USBFN_BUS_SPEED BusSpeed;
++        _Win32_AssociatedEnum_(USBFN_BUS_SPEED) USBFN_BUS_SPEED BusSpeed;
+         USB_DEFAULT_PIPE_SETUP_PACKET SetupPacket;
+         USHORT ConfigurationValue;
+-        USBFN_PORT_TYPE PortType;
++        _Win32_AssociatedEnum_(USBFN_PORT_TYPE) USBFN_PORT_TYPE PortType;
+         ALTERNATE_INTERFACE AlternateInterface;
+     } u;
+ 

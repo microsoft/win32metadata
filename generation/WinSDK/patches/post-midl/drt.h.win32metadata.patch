@@ -1,0 +1,214 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
+index 8690977834..d00db525d4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/drt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+---------------------------------------------------------------------------
+ //
+ // Microsoft Windows
+@@ -283,7 +284,7 @@ typedef const DRT_SECURITY_PROVIDER *PCDRT_SECURITY_PROVIDER;
+ 
+ typedef PVOID   DRT_BOOTSTRAP_RESOLVE_CONTEXT;
+ 
+-typedef void (CALLBACK* DRT_BOOTSTRAP_RESOLVE_CALLBACK)(HRESULT hr, PVOID pvContext, SOCKET_ADDRESS_LIST* pAddresses, BOOL fFatalError);
++typedef void (CALLBACK* DRT_BOOTSTRAP_RESOLVE_CALLBACK)(HRESULT hr, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvContext, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SOCKET_ADDRESS_LIST* pAddresses, BOOL fFatalError);
+ 
+ typedef struct drt_bootstrap_provider_tag
+ {
+@@ -397,20 +398,20 @@ typedef struct drt_event_data_tag
+     {
+         struct
+         {
+-            DRT_LEAFSET_KEY_CHANGE_TYPE change;
++            _Win32_AssociatedEnum_(DRT_LEAFSET_KEY_CHANGE_TYPE) DRT_LEAFSET_KEY_CHANGE_TYPE change;
+             DRT_DATA localKey;
+             DRT_DATA remoteKey;
+         } leafsetKeyChange;
+ 
+         struct
+         {
+-            DRT_REGISTRATION_STATE  state;
++            _Win32_AssociatedEnum_(DRT_REGISTRATION_STATE) DRT_REGISTRATION_STATE  state;
+             DRT_DATA localKey;
+         } registrationStateChange;
+ 
+         struct
+         {
+-            DRT_STATUS status;
++            _Win32_AssociatedEnum_(DRT_STATUS) DRT_STATUS status;
+             struct
+             {
+                 ULONG                   cntAddress;
+@@ -425,71 +426,71 @@ typedef const DRT_EVENT_DATA *PCDRT_EVENT_DATA;
+ //////////////////////////////////////////////////////////////////////////////
+ // DRT Default Module Management APIs
+ 
+-HRESULT WINAPI DrtCreatePnrpBootstrapResolver(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") HRESULT WINAPI DrtCreatePnrpBootstrapResolver(
+     _In_        BOOL   fPublish,
+     _In_        PCWSTR pwzPeerName,
+     _In_opt_    PCWSTR pwzCloudName,
+     _In_opt_    PCWSTR pwzPublishingIdentity,
+     _Out_       DRT_BOOTSTRAP_PROVIDER** ppResolver);
+ 
+-void WINAPI DrtDeletePnrpBootstrapResolver(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") void WINAPI DrtDeletePnrpBootstrapResolver(
+     _In_        DRT_BOOTSTRAP_PROVIDER* pResolver);
+ 
+-HRESULT WINAPI DrtCreateDnsBootstrapResolver(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") HRESULT WINAPI DrtCreateDnsBootstrapResolver(
+     _In_ USHORT port,
+     _In_ PCWSTR pwszAddress,
+     _Out_ DRT_BOOTSTRAP_PROVIDER** ppModule
+     );
+ 
+-void WINAPI DrtDeleteDnsBootstrapResolver(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") void WINAPI DrtDeleteDnsBootstrapResolver(
+     _In_ DRT_BOOTSTRAP_PROVIDER* pResolver
+     );
+ 
+-HRESULT WINAPI DrtCreateIpv6UdpTransport(
+-                DRT_SCOPE scope,
+-                ULONG dwScopeId,
+-                ULONG dwLocalityThreshold,
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drttransport.dll") HRESULT WINAPI DrtCreateIpv6UdpTransport(
++                _WIN32META_ANNOTATION_("win32metadata:in")  DRT_SCOPE scope,
++                _WIN32META_ANNOTATION_("win32metadata:in") ULONG dwScopeId,
++                _WIN32META_ANNOTATION_("win32metadata:in") ULONG dwLocalityThreshold,
+     _Inout_     USHORT *pwPort,
+     _Out_       HDRT_TRANSPORT *phTransport);
+ 
+-HRESULT WINAPI DrtDeleteIpv6UdpTransport(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drttransport.dll") HRESULT WINAPI DrtDeleteIpv6UdpTransport(
+     _In_        HDRT_TRANSPORT hTransport);
+ 
+-HRESULT WINAPI DrtCreateDerivedKeySecurityProvider(
+-    _In_        PCCERT_CONTEXT pRootCert,
+-    _In_opt_    PCCERT_CONTEXT pLocalCert,
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") HRESULT WINAPI DrtCreateDerivedKeySecurityProvider(
++    _WIN32META_ANNOTATION_("win32metadata:const") _In_        PCCERT_CONTEXT pRootCert,
++    _WIN32META_ANNOTATION_("win32metadata:const") _In_opt_    PCCERT_CONTEXT pLocalCert,
+     _Out_       DRT_SECURITY_PROVIDER** ppSecurityProvider);
+ 
+-HRESULT WINAPI DrtCreateDerivedKey(
+-    _In_        PCCERT_CONTEXT pLocalCert,
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") HRESULT WINAPI DrtCreateDerivedKey(
++    _WIN32META_ANNOTATION_("win32metadata:const") _In_        PCCERT_CONTEXT pLocalCert,
+     _Out_       DRT_DATA* pKey);
+ 
+-void WINAPI DrtDeleteDerivedKeySecurityProvider(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") void WINAPI DrtDeleteDerivedKeySecurityProvider(
+     _In_        DRT_SECURITY_PROVIDER* pSecurityProvider);
+ 
+-HRESULT WINAPI DrtCreateNullSecurityProvider(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") HRESULT WINAPI DrtCreateNullSecurityProvider(
+     _Out_ DRT_SECURITY_PROVIDER** ppSecurityProvider);
+ 
+-void WINAPI DrtDeleteNullSecurityProvider(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drtprov.dll") void WINAPI DrtDeleteNullSecurityProvider(
+     _In_ DRT_SECURITY_PROVIDER* pSecurityProvider);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ // DRT Lifetime Management APIs
+ 
+-HRESULT WINAPI DrtOpen(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtOpen(
+     _In_        const DRT_SETTINGS* pSettings,
+     _In_opt_    HANDLE hEvent,
+     _In_opt_    const PVOID pvContext,
+     _Out_       HDRT *phDrt);
+ 
+-VOID WINAPI DrtClose(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") VOID WINAPI DrtClose(
+     _In_        HDRT hDrt);
+ 
+-HRESULT WINAPI DrtGetEventDataSize(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetEventDataSize(
+     _In_        HDRT hDrt,
+     _Out_       ULONG          *pulEventDataLen);
+     
+-HRESULT WINAPI DrtGetEventData(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetEventData(
+     _In_        HDRT hDrt,
+     _In_        ULONG          ulEventDataLen,
+     _Out_writes_bytes_all_(ulEventDataLen) DRT_EVENT_DATA *pEventData);
+@@ -497,65 +498,65 @@ HRESULT WINAPI DrtGetEventData(
+ //////////////////////////////////////////////////////////////////////////////
+ // DRT Key Registration APIs
+ 
+-HRESULT WINAPI DrtRegisterKey(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtRegisterKey(
+     _In_        HDRT hDrt,
+     _In_        DRT_REGISTRATION *pRegistration,
+     _In_opt_    PVOID pvKeyContext,
+     _Out_       HDRT_REGISTRATION_CONTEXT *phKeyRegistration);
+ 
+-HRESULT WINAPI DrtUpdateKey(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtUpdateKey(
+     _In_        HDRT_REGISTRATION_CONTEXT hKeyRegistration,
+     _In_        DRT_DATA *pAppData
+     );
+ 
+-VOID WINAPI DrtUnregisterKey(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") VOID WINAPI DrtUnregisterKey(
+     _In_        HDRT_REGISTRATION_CONTEXT hKeyRegistration);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ // DRT Search APIs
+ 
+-HRESULT WINAPI DrtStartSearch(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtStartSearch(
+     _In_        HDRT hDrt,
+     _In_        DRT_DATA *pKey,
+     _In_opt_    const DRT_SEARCH_INFO *pInfo,
+-                ULONG timeout,
++                _WIN32META_ANNOTATION_("win32metadata:in") ULONG timeout,
+     _In_        HANDLE hEvent,
+     _In_opt_    const PVOID pvContext,
+     _Out_       HDRT_SEARCH_CONTEXT* hSearchContext);
+ 
+-HRESULT WINAPI DrtContinueSearch(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtContinueSearch(
+     _In_        HDRT_SEARCH_CONTEXT hSearchContext);
+ 
+-HRESULT WINAPI DrtGetSearchResultSize(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetSearchResultSize(
+     _In_        HDRT_SEARCH_CONTEXT hSearchContext,
+     _Out_       ULONG               *pulSearchResultSize);
+ 
+-HRESULT WINAPI DrtGetSearchResult(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetSearchResult(
+     _In_        HDRT_SEARCH_CONTEXT hSearchContext,
+     _Inout_     ULONG               ulSearchResultSize, 
+     _Out_writes_bytes_all_(ulSearchResultSize) DRT_SEARCH_RESULT   *pSearchResult);
+ 
+-HRESULT WINAPI DrtGetSearchPathSize(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetSearchPathSize(
+     _In_        HDRT_SEARCH_CONTEXT hSearchContext,
+     _Out_       ULONG               *pulSearchPathSize);
+ 
+-HRESULT WINAPI DrtGetSearchPath(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetSearchPath(
+     _In_        HDRT_SEARCH_CONTEXT hSearchContext,
+     _Inout_     ULONG               ulSearchPathSize, 
+     _Out_writes_bytes_all_(ulSearchPathSize) DRT_ADDRESS_LIST   *pSearchPath);
+ 
+-HRESULT WINAPI DrtEndSearch(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtEndSearch(
+     _In_        HDRT_SEARCH_CONTEXT hSearchContext);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ // DRT Instance name related APIs
+ 
+-HRESULT WINAPI DrtGetInstanceName(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetInstanceName(
+     _In_        HDRT    hDrt,
+     _In_        ULONG   ulcbInstanceNameSize,
+     _Out_writes_bytes_all_(ulcbInstanceNameSize) PWSTR  pwzDrtInstanceName);
+ 
+-HRESULT WINAPI DrtGetInstanceNameSize(
++_Windows_SupportedOS_Windows7_ _Win32_ImportLibrary_("drt.dll") HRESULT WINAPI DrtGetInstanceNameSize(
+     _In_        HDRT    hDrt,
+     _Out_       ULONG*  pulcbInstanceNameSize);
+ 

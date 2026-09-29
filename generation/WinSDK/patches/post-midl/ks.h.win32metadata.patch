@@ -1,0 +1,453 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ks.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ks.h
+index 64d983f7c8..96e605fbc0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ks.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ks.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -437,7 +438,7 @@ typedef struct {
+ 
+ #define KSEVENTF_EVENT_HANDLE       0x00000001
+ #define KSEVENTF_SEMAPHORE_HANDLE   0x00000002
+-#if defined(_NTDDK_)
++#if defined(WIN32METADATA) || (defined(_NTDDK_))
+ #define KSEVENTF_EVENT_OBJECT       0x00000004
+ #define KSEVENTF_SEMAPHORE_OBJECT   0x00000008
+ #define KSEVENTF_DPC                0x00000010
+@@ -2582,21 +2583,73 @@ typedef enum {
+ 
+ #if defined(_NTDDK_)
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_STREAMREAD      0x00000000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_STREAMWRITE     0x00000001
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_ALLOCATEMDL     0x00000010
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_PROBEANDLOCK    0x00000020
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_SYSTEMADDRESS   0x00000040
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_MODIFY          0x00000200
++#endif
++#if defined(_NTDDK_)
+ #define KSPROBE_STREAMWRITEMODIFY (KSPROBE_MODIFY | KSPROBE_STREAMWRITE)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPROBE_ALLOWFORMATCHANGE   0x00000080
++#endif
++#if defined(_NTDDK_)
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSSTREAM_READ           KSPROBE_STREAMREAD
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSSTREAM_WRITE          KSPROBE_STREAMWRITE
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSSTREAM_PAGED_DATA     0x00000000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSSTREAM_NONPAGED_DATA  0x00000100
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSSTREAM_SYNCHRONOUS    0x00001000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSSTREAM_FAILUREEXCEPTION 0x00002000
++#endif
++#if defined(_NTDDK_)
+ 
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ typedef
+@@ -2856,9 +2909,21 @@ typedef struct {
+     LIST_ENTRY          BufferList;
+ } KSBUFFER_ITEM, *PKSBUFFER_ITEM;
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSEVENT_ENTRY_DELETED   1
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSEVENT_ENTRY_ONESHOT   2
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSEVENT_ENTRY_BUFFERED  4
++#endif
++#if defined(_NTDDK_)
+ 
+ struct _KSEVENT_ENTRY {
+     LIST_ENTRY      ListEntry;
+@@ -2887,7 +2952,11 @@ typedef enum {
+     KSEVENTS_ERESOURCE
+ } KSEVENTS_LOCKTYPE;
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSDISPATCH_FASTIO       0x80000000
++#endif
++#if defined(_NTDDK_)
+ 
+ typedef struct {
+     PDRIVER_DISPATCH        Create;
+@@ -2903,10 +2972,26 @@ VOID
+     _In_ PKSOBJECT_CREATE_ITEM CreateItem
+     );
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSCREATE_ITEM_SECURITYCHANGED       0x00000001
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSCREATE_ITEM_WILDCARD              0x00000002
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSCREATE_ITEM_NOPARAMETERS          0x00000004
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSCREATE_ITEM_FREEONSTOP            0x00000008
++#endif
++#if defined(_NTDDK_)
+ 
+ #define DEFINE_KSCREATE_DISPATCH_TABLE( tablename )\
+     KSOBJECT_CREATE_ITEM tablename[] =
+@@ -3055,7 +3140,11 @@ NTSTATUS
+     _Inout_ PWCHAR *String
+     );
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define BUS_INTERFACE_REFERENCE_VERSION    0x100
++#endif
++#if defined(_NTDDK_)
+     
+ typedef struct {
+     //
+@@ -3131,7 +3220,15 @@ typedef struct {
+ 
+ #if defined(_NTDDK_)
+ 
++#endif
++#endif
++#endif
++#if (defined(WIN32METADATA) && !defined(IOCTL_KS_HANDSHAKE)) || ((WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)) && (NTDDI_VERSION >= NTDDI_WINXP) && defined(_NTDDK_))
+ #define IOCTL_KS_HANDSHAKE             CTL_CODE(FILE_DEVICE_KS, 0x007, METHOD_NEITHER, FILE_ANY_ACCESS)
++#endif
++#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
++#if (NTDDI_VERSION >= NTDDI_WINXP)
++#if defined(_NTDDK_)
+ 
+ typedef struct {
+     GUID ProtocolId;
+@@ -3552,7 +3649,11 @@ struct KSAUTOMATION_TABLE_ {
+     sizeof(KSEVENT_ITEM),\
+     NULL
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define MIN_DEV_VER_FOR_QI (0x100)
++#endif
++#if defined(_NTDDK_)
+ 
+ struct _KSDEVICE_DISPATCH {
+     PFNKSDEVICECREATE Add;
+@@ -3610,7 +3711,11 @@ struct _KSALLOCATOR_DISPATCH {
+ //
+ //     - QueryInterface dispatch of KSDEVICE_DISPATCH
+ //
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSDEVICE_DESCRIPTOR_VERSION (0x100)
++#endif
++#if defined(_NTDDK_)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+@@ -3623,9 +3728,21 @@ struct _KSALLOCATOR_DISPATCH {
+ //           - Using an earlier version descriptor on later versions of
+ //             AVStream causes no flags to be specificed.
+ //
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_VISTA)))
+ #define KSDEVICE_DESCRIPTOR_VERSION_2 (0x110)
++#endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_VISTA)))
+ #define MIN_DEV_VER_FOR_FLAGS (0x110)
++#endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+@@ -3638,12 +3755,32 @@ struct _KSDEVICE_DESCRIPTOR {
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+     ULONG Flags; 
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_VISTA)))
+ #define KSDEVICE_FLAG_ENABLE_REMOTE_WAKEUP  0x00000001
++#endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_VISTA)
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_VISTA)))
+ #define KSDEVICE_FLAG_LOWPOWER_PASSTHROUGH  0x00000002
++#endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
++#endif
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_VISTA)) && ((NTDDI_VERSION >= NTDDI_WINTHRESHOLD)))
+ #define KSDEVICE_FLAG_ENABLE_QUERYINTERFACE 0x00000004
+ #endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_VISTA)
++#if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
++#endif
+ 
+ #if !defined(_WIN64)
+     PVOID Alignment;
+@@ -3659,17 +3796,43 @@ struct _KSFILTER_DESCRIPTOR {
+     ULONG Version;
+ #define KSFILTER_DESCRIPTOR_VERSION ((ULONG)-1)
+     ULONG Flags;
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSFILTER_FLAG_DISPATCH_LEVEL_PROCESSING 0x00000001
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSFILTER_FLAG_CRITICAL_PROCESSING 0x00000002
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSFILTER_FLAG_HYPERCRITICAL_PROCESSING 0x00000004
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSFILTER_FLAG_RECEIVE_ZERO_LENGTH_SAMPLES 0x00000008
++#endif
++#if defined(_NTDDK_)
+ #if (NTDDI_VERSION >= NTDDI_WINXPSP2)
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_WINXPSP2)))
+ #define KSFILTER_FLAG_DENY_USERMODE_ACCESS 0x80000000
++#endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_WINXPSP2)
+ #endif // (NTDDI_VERSION >= NTDDI_WINXPSP2)
+ // This flag is added to prioritize the ReferenceGUID when creating
+ // filter factory over the reference string.  All devices that publish
+ // camera profiles must set this flag.
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSFILTER_FLAG_PRIORITIZE_REFERENCEGUID    0x00000010
++#endif
++#if defined(_NTDDK_)
+     const GUID* ReferenceGuid;
+     ULONG PinDescriptorsCount;
+     ULONG PinDescriptorSize;
+@@ -3731,30 +3894,112 @@ struct _KSPIN_DESCRIPTOR_EX {
+     const KSAUTOMATION_TABLE* AutomationTable;
+     KSPIN_DESCRIPTOR PinDescriptor;
+     ULONG Flags;
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_DISPATCH_LEVEL_PROCESSING KSFILTER_FLAG_DISPATCH_LEVEL_PROCESSING
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_CRITICAL_PROCESSING KSFILTER_FLAG_CRITICAL_PROCESSING
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_HYPERCRITICAL_PROCESSING KSFILTER_FLAG_HYPERCRITICAL_PROCESSING
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_ASYNCHRONOUS_PROCESSING 0x00000008
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_DO_NOT_INITIATE_PROCESSING 0x00000010
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_INITIATE_PROCESSING_ON_EVERY_ARRIVAL 0x00000020
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_FRAMES_NOT_REQUIRED_FOR_PROCESSING 0x00000040
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_ENFORCE_FIFO 0x00000080
++#endif
++#if defined(_NTDDK_)
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_GENERATE_MAPPINGS 0x00000100
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_DISTINCT_TRAILING_EDGE 0x00000200
++#endif
++#if defined(_NTDDK_)
+ 
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_PROCESS_IN_RUN_STATE_ONLY 0x00010000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_SPLITTER 0x00020000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_USE_STANDARD_TRANSPORT 0x00040000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_DO_NOT_USE_STANDARD_TRANSPORT 0x00080000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_FIXED_FORMAT 0x00100000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_GENERATE_EOS_EVENTS 0x00200000
++#endif
++#if defined(_NTDDK_)
+ #define KSPIN_FLAG_RENDERER (KSPIN_FLAG_PROCESS_IN_RUN_STATE_ONLY|KSPIN_FLAG_GENERATE_EOS_EVENTS)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_IMPLEMENT_CLOCK 0x00400000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_SOME_FRAMES_REQUIRED_FOR_PROCESSING 0x00800000
++#endif
++#if defined(_NTDDK_)
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)))
+ #define KSPIN_FLAG_PROCESS_IF_ANY_IN_RUN_STATE 0x01000000
++#endif
++#if defined(_NTDDK_)
+ #if (NTDDI_VERSION >= NTDDI_WINXPSP2)
++#endif
++#endif
++#if defined(WIN32METADATA) || ((defined(_NTDDK_)) && ((NTDDI_VERSION >= NTDDI_WINXPSP2)))
+ #define KSPIN_FLAG_DENY_USERMODE_ACCESS 0x80000000
++#endif
++#if defined(_NTDDK_)
++#if (NTDDI_VERSION >= NTDDI_WINXPSP2)
+ #endif // (NTDDI_VERSION >= NTDDI_WINXPSP2)
+     ULONG InstancesPossible;
+     ULONG InstancesNecessary;
+@@ -6457,7 +6702,7 @@ WINAPI
+ KsCreateAllocator2(
+     _In_ HANDLE ConnectionHandle,
+     _In_ PKSALLOCATOR_FRAMING AllocatorFraming,
+-    _Out_ PHANDLE AllocatorHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE AllocatorHandle
+     );
+ 
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+@@ -6467,7 +6712,7 @@ NTAPI
+ KsCreateClock2(
+     _In_ HANDLE ConnectionHandle,
+     _In_ PKSCLOCK_CREATE ClockCreate,
+-    _Out_ PHANDLE ClockHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE ClockHandle
+     );
+ 
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+@@ -6478,7 +6723,7 @@ KsCreatePin2(
+     _In_ HANDLE FilterHandle,
+     _In_ PKSPIN_CONNECT Connect,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PHANDLE ConnectionHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE ConnectionHandle
+     );
+ 
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+@@ -6489,7 +6734,7 @@ KsCreateTopologyNode2(
+     _In_ HANDLE ParentHandle,
+     _In_ PKSNODE_CREATE NodeCreate,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PHANDLE NodeHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ PHANDLE NodeHandle
+     );
+     
+ #endif

@@ -1,0 +1,220 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/wtypes.h b/generation/WinSDK/RecompiledIdlHeaders/shared/wtypes.h
+index e784123350..be0be54ec1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/wtypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/wtypes.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -165,34 +166,34 @@ typedef LONG_PTR LPARAM;
+ typedef LONG_PTR LRESULT;
+ 
+ #endif // !_LRESULT_DEFINED
+-typedef void * HANDLE;
+-typedef void *HMODULE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void * HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=FreeLibrary") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HMODULE;
+ 
+-typedef void *HINSTANCE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=FreeLibrary") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HINSTANCE;
+ 
+-typedef void *HTASK;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HTASK;
+ 
+-typedef void *HKEY;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=RegCloseKey") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HKEY;
+ 
+-typedef void *HDESK;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseDesktop") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HDESK;
+ 
+ typedef void *HMF;
+ 
+ typedef void *HEMF;
+ 
+-typedef void *HPEN;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HPEN;
+ 
+-typedef void *HRSRC;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HRSRC;
+ 
+ typedef void *HSTR;
+ 
+-typedef void *HWINSTA;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=CloseWindowStation") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HWINSTA;
+ 
+-typedef void *HKL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=UnloadKeyboardLayout") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HKL;
+ 
+-typedef void *HGDIOBJ;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef void *HGDIOBJ;
+ 
+-typedef HANDLE HDWP;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE HDWP;
+ 
+ #ifndef _HFILE_DEFINED
+ #define _HFILE_DEFINED
+@@ -360,7 +361,11 @@ enum tagDVASPECT
+     } 	DVASPECT;
+ 
+ typedef 
+-enum tagSTGC
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ tagSTGC
+     {
+         STGC_DEFAULT	= 0,
+         STGC_OVERWRITE	= 1,
+@@ -481,7 +486,7 @@ typedef struct _userHENHMETAFILE
+         } 	u;
+     } 	userHENHMETAFILE;
+ 
+-typedef struct _userBITMAP
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _userBITMAP
+     {
+     LONG bmType;
+     LONG bmWidth;
+@@ -546,25 +551,25 @@ typedef /* [unique] */  __RPC_unique_pointer RemotableHandle *wireHMONITOR;
+ #if 0
+ typedef /* [wire_marshal] */ void *HWND;
+ 
+-typedef /* [wire_marshal] */ void *HMENU;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyMenu") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HMENU;
+ 
+-typedef /* [wire_marshal] */ void *HACCEL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyAcceleratorTable") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HACCEL;
+ 
+-typedef /* [wire_marshal] */ void *HBRUSH;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HBRUSH;
+ 
+-typedef /* [wire_marshal] */ void *HFONT;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HFONT;
+ 
+-typedef /* [wire_marshal] */ void *HDC;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HDC;
+ 
+-typedef /* [wire_marshal] */ void *HICON;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyIcon") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HICON;
+ 
+-typedef /* [wire_marshal] */ void *HRGN;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HRGN;
+ 
+-typedef /* [wire_marshal] */ void *HMONITOR;
++_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HMONITOR;
+ 
+ #ifndef _HCURSOR_DEFINED
+ #define _HCURSOR_DEFINED
+-typedef HICON HCURSOR;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyCursor") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HICON HCURSOR;
+ 
+ #endif // !_HCURSOR_DEFINED
+ #endif //0
+@@ -630,17 +635,17 @@ typedef /* [unique] */  __RPC_unique_pointer userHMETAFILE *wireHMETAFILE;
+ typedef /* [unique] */  __RPC_unique_pointer userHMETAFILEPICT *wireHMETAFILEPICT;
+ 
+ #if 0
+-typedef /* [wire_marshal] */ void *HGLOBAL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=GlobalFree") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HGLOBAL;
+ 
+-typedef HGLOBAL HLOCAL;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=LocalFree") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HGLOBAL HLOCAL;
+ 
+-typedef /* [wire_marshal] */ void *HBITMAP;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HBITMAP;
+ 
+-typedef /* [wire_marshal] */ void *HPALETTE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HPALETTE;
+ 
+-typedef /* [wire_marshal] */ void *HENHMETAFILE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteEnhMetaFile") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HENHMETAFILE;
+ 
+-typedef /* [wire_marshal] */ void *HMETAFILE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=DeleteMetaFile") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef /* [wire_marshal] */ void *HMETAFILE;
+ 
+ #endif //0
+ typedef /* [wire_marshal] */ void *HMETAFILEPICT;
+@@ -734,10 +739,10 @@ typedef DECIMAL *LPDECIMAL;
+ typedef /* [unique] */  __RPC_unique_pointer FLAGGED_WORD_BLOB *wireBSTR;
+ 
+ #ifndef _PREFAST_
+-typedef /* [wire_marshal] */ OLECHAR *BSTR;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=SysFreeString") typedef /* [wire_marshal] */ OLECHAR *BSTR;
+ 
+ #else // _PREFAST_
+-typedef _Null_terminated_ OLECHAR *BSTR;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=SysFreeString") typedef _Null_terminated_ OLECHAR *BSTR;
+ #endif
+ typedef BSTR *LPBSTR;
+ 
+@@ -760,7 +765,7 @@ typedef struct tagBSTRBLOB *LPBSTRBLOB;
+ #endif
+ #define VARIANT_TRUE ((VARIANT_BOOL)-1)
+ #define VARIANT_FALSE ((VARIANT_BOOL)0)
+-typedef struct tagCLIPDATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagCLIPDATA
+     {
+     ULONG cbSize;
+     LONG ulClipFmt;
+@@ -830,7 +835,11 @@ typedef unsigned short VARTYPE;
+  *  VT_BSTR_BLOB                      Reserved for system use
+  */
+ 
+-enum VARENUM
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ VARENUM
+     {
+         VT_EMPTY	= 0,
+         VT_NULL	= 1,
+@@ -889,14 +898,14 @@ typedef ULONG PROPID;
+ 
+ #ifndef PROPERTYKEY_DEFINED
+ #define PROPERTYKEY_DEFINED
+-typedef struct _tagpropertykey
++typedef struct   _tagpropertykey
+     {
+     GUID fmtid;
+     DWORD pid;
+     } 	PROPERTYKEY;
+ 
+ #endif
+-typedef struct tagCSPLATFORM
++typedef struct   tagCSPLATFORM
+     {
+     DWORD dwPlatformId;
+     DWORD dwVersionHi;
+@@ -904,7 +913,7 @@ typedef struct tagCSPLATFORM
+     DWORD dwProcessorArch;
+     } 	CSPLATFORM;
+ 
+-typedef struct tagQUERYCONTEXT
++typedef struct   tagQUERYCONTEXT
+     {
+     DWORD dwContext;
+     CSPLATFORM Platform;
+@@ -964,6 +973,21 @@ extern RPC_IF_HANDLE __MIDL_itf_wtypes_0000_0001_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("ROTFLAGS_REGISTRATIONKEEPSALIVE")
++#undef ROTFLAGS_REGISTRATIONKEEPSALIVE
++#pragma push_macro("ROTFLAGS_ALLOWANYCLIENT")
++#undef ROTFLAGS_ALLOWANYCLIENT
++enum [[clang::flag_enum]] ROT_FLAGS : unsigned int
++{
++    ROTFLAGS_REGISTRATIONKEEPSALIVE = 1U,
++    ROTFLAGS_ALLOWANYCLIENT = 2U,
++};
++#pragma pop_macro("ROTFLAGS_ALLOWANYCLIENT")
++#pragma pop_macro("ROTFLAGS_REGISTRATIONKEEPSALIVE")
++#endif
++
+ #endif
+ 
+ 

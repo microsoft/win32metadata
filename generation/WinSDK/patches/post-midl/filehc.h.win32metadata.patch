@@ -1,0 +1,122 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h b/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
+index d1db360332..79db1b82a5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/FileHC.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+     Copyright (c) 2002  Microsoft Corporation
+@@ -30,8 +31,8 @@ struct FH_OVERLAPPED;
+ 
+ typedef	VOID
+ (*PFN_IO_COMPLETION)(
+-		IN	struct	FIO_CONTEXT*	pContext,
+-		IN	struct	FH_OVERLAPPED*	lpo, 
++		_WIN32META_ANNOTATION_("win32metadata:out") IN	struct	FIO_CONTEXT*	pContext,
++		_WIN32META_ANNOTATION_("win32metadata:out") IN	struct	FH_OVERLAPPED*	lpo, 
+ 		IN	DWORD		cb, 
+ 		IN	DWORD		dwCompletionStatus
+ 		);
+@@ -196,13 +197,13 @@ FIOWriteFileEx(
+ //	pfIsStuffed - return FALSE
+ //	pfStoredWithDots - return FALSE
+ //
+-typedef	
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef	
+ HANDLE	
+ (__stdcall	*FCACHE_CREATE_CALLBACK) (
+ 		IN	LPSTR	lpstrName, 
+-		IN	LPVOID	lpvData, 
+-		OUT	DWORD*	cbFileSize,
+-		OUT	DWORD*	cbFileSizeHigh
++		_WIN32META_ANNOTATION_("win32metadata:out") IN	LPVOID	lpvData, 
++		_WIN32META_ANNOTATION_("win32metadata:in") OUT	DWORD*	cbFileSize,
++		_WIN32META_ANNOTATION_("win32metadata:in") OUT	DWORD*	cbFileSizeHigh
+ 		) ;
+ 
+ 
+@@ -224,17 +225,17 @@ HANDLE
+ //		SMTP and POP3 protocols.  if this is FALSE then the message is stored without
+ //		DOT stuffing.
+ //
+-typedef	
++_Win32_RAIIFree_(CloseHandle, -1, 0) typedef	
+ HANDLE	
+ (__stdcall	*FCACHE_RICHCREATE_CALLBACK) (
+ 		IN	LPSTR	lpstrName, 
+-		IN	LPVOID	lpvData, 
+-		OUT	DWORD*	cbFileSize, 
+-		OUT	DWORD*	cbFileSizeHigh,
+-        OUT BOOL*   pfDidWeScanIt,
+-        OUT BOOL*   pfIsStuffed,
+-		OUT	BOOL*	pfStoredWithDots, 
+-		OUT	BOOL*	pfStoredWithTerminatingDot
++		_WIN32META_ANNOTATION_("win32metadata:out") IN	LPVOID	lpvData, 
++		_WIN32META_ANNOTATION_("win32metadata:in") OUT	DWORD*	cbFileSize, 
++		_WIN32META_ANNOTATION_("win32metadata:in") OUT	DWORD*	cbFileSizeHigh,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL*   pfDidWeScanIt,
++        _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL*   pfIsStuffed,
++		_WIN32META_ANNOTATION_("win32metadata:in") OUT	BOOL*	pfStoredWithDots, 
++		_WIN32META_ANNOTATION_("win32metadata:in") OUT	BOOL*	pfStoredWithTerminatingDot
+ 		) ;
+ 
+ //
+@@ -397,9 +398,9 @@ GetFileSizeFromContext(	IN	struct FIO_CONTEXT*	pContext,
+ typedef	
+ int
+ (__stdcall	*CACHE_KEY_COMPARE)(	IN	DWORD	cbKey1, 
+-									IN	LPBYTE	lpbKey1,
++									_WIN32META_ANNOTATION_("win32metadata:out") IN	LPBYTE	lpbKey1,
+ 									IN	DWORD	cbKey2, 
+-									IN	LPBYTE	lpbKey2
++									_WIN32META_ANNOTATION_("win32metadata:out") IN	LPBYTE	lpbKey2
+ 									) ;
+ 
+ //
+@@ -410,7 +411,7 @@ int
+ //
+ typedef
+ DWORD
+-(__stdcall	*CACHE_KEY_HASH)(	IN	LPBYTE	lpbKey, 
++(__stdcall	*CACHE_KEY_HASH)(	_WIN32META_ANNOTATION_("win32metadata:out") IN	LPBYTE	lpbKey, 
+ 								IN	DWORD	cbKey
+ 								) ;
+ 
+@@ -424,8 +425,8 @@ DWORD
+ typedef	
+ BOOL
+ (__stdcall	*CACHE_READ_CALLBACK)(	IN	DWORD	cb, 
+-									IN	LPBYTE	lpb, 
+-									IN	LPVOID	lpvContext
++									_WIN32META_ANNOTATION_("win32metadata:out") IN	LPBYTE	lpb, 
++									_WIN32META_ANNOTATION_("win32metadata:out") IN	LPVOID	lpvContext
+ 									) ;
+ 
+ //	
+@@ -439,7 +440,7 @@ BOOL
+ typedef
+ void
+ (__stdcall	*CACHE_DESTROY_CALLBACK)(	IN	DWORD	cb, 
+-										IN	LPBYTE	lpb
++										_WIN32META_ANNOTATION_("win32metadata:out") IN	LPBYTE	lpb
+ 										) ;
+ 
+ //
+@@ -454,11 +455,11 @@ BOOL
+ (WINAPI	*CACHE_ACCESS_CHECK)(	IN	PSECURITY_DESCRIPTOR	pSecurityDescriptor,
+ 								IN	HANDLE					hClientToken,
+ 								IN	DWORD					dwDesiredAccess, 
+-								IN	PGENERIC_MAPPING		GenericMapping, 
+-								IN	PRIVILEGE_SET*			PrivilegeSet, 
+-								IN	LPDWORD					PrivilegeSetLength,
+-								IN	LPDWORD					GrantedAccess, 
+-								IN	LPBOOL					AccessStatus
++								_WIN32META_ANNOTATION_("win32metadata:out") IN	PGENERIC_MAPPING		GenericMapping, 
++								_WIN32META_ANNOTATION_("win32metadata:out") IN	PRIVILEGE_SET*			PrivilegeSet, 
++								_WIN32META_ANNOTATION_("win32metadata:out") IN	LPDWORD					PrivilegeSetLength,
++								_WIN32META_ANNOTATION_("win32metadata:out") IN	LPDWORD					GrantedAccess, 
++								_WIN32META_ANNOTATION_("win32metadata:out") IN	LPBOOL					AccessStatus
+ 								) ;
+ 
+ 

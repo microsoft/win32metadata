@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IEDial.h b/generation/WinSDK/RecompiledIdlHeaders/um/IEDial.h
+index a991af8918..b0feeb5fdf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IEDial.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IEDial.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -390,7 +391,7 @@ EXTERN_C const IID IID_IDialBranding;
+             /* [annotation][in] */ 
+             _In_  DWORD dwIndex,
+             /* [annotation][out] */ 
+-            _Out_  HBITMAP *phBitmap) = 0;
++            _Win32_RAIIFree_(DeleteObject, -1, 0) _Out_  HBITMAP *phBitmap) = 0;
+         
+     };
+     

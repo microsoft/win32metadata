@@ -1,0 +1,34 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Filterr.h b/generation/WinSDK/RecompiledIdlHeaders/um/Filterr.h
+index 1610d7f2b6..e175409650 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Filterr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Filterr.h
+@@ -1,5 +1,13 @@
+ #ifndef _FILTERR_H_
+ #define _FILTERR_H_
++#if (defined(WIN32METADATA) && !defined(NOT_AN_ERROR)) || (((!defined(FACILITY_WINDOWS))))
++#define NOT_AN_ERROR                     ((HRESULT)0x00080000L)
++#endif
++
++#if (defined(WIN32METADATA) && !defined(STATUS_SEVERITY_COFAIL)) || (((!defined(FACILITY_WINDOWS))))
++#define STATUS_SEVERITY_COFAIL           0x3
++#endif
++
+ #ifndef FACILITY_WINDOWS
+ //
+ //  Values are 32 bit values laid out as follows:
+@@ -39,7 +47,6 @@
+ //
+ #define STATUS_SEVERITY_SUCCESS          0x0
+ #define STATUS_SEVERITY_COERROR          0x2
+-#define STATUS_SEVERITY_COFAIL           0x3
+ 
+ 
+ //
+@@ -51,7 +58,6 @@
+ //        the above defines inside the FACILITY_WINDOWS guard instead
+ //        of leaving it empty.
+ //
+-#define NOT_AN_ERROR                     ((HRESULT)0x00080000L)
+ 
+ #endif // FACILITY_WINDOWS
+ //

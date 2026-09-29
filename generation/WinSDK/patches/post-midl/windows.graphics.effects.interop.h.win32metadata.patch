@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.graphics.effects.interop.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.graphics.effects.interop.h
+index 4999de0fea..4fa85a72be 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.graphics.effects.interop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/windows.graphics.effects.interop.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ //---------------------------------------------------------------------------
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -59,7 +60,7 @@ DECLARE_INTERFACE_IID_(IGraphicsEffectD2D1Interop, IUnknown, "2FC57384-A068-44D7
+         ) PURE;
+ 
+     STDMETHOD(GetNamedPropertyMapping)(
+-        LPCWSTR name,
++        _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR name,
+         _Out_ UINT * index,
+         _Out_ GRAPHICS_EFFECT_PROPERTY_MAPPING * mapping
+         ) PURE;
+@@ -69,12 +70,12 @@ DECLARE_INTERFACE_IID_(IGraphicsEffectD2D1Interop, IUnknown, "2FC57384-A068-44D7
+         ) PURE;
+ 
+     STDMETHOD(GetProperty)(
+-        UINT index,
++        _WIN32META_ANNOTATION_("win32metadata:in") UINT index,
+         _Outptr_ Windows::Foundation::IPropertyValue ** value
+         ) PURE;
+ 
+     STDMETHOD(GetSource)(
+-        UINT index,
++        _WIN32META_ANNOTATION_("win32metadata:in") UINT index,
+         _Outptr_ IGraphicsEffectSource ** source
+         ) PURE;
+ 

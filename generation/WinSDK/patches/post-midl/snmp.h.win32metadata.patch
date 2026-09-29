@@ -1,0 +1,531 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
+index badd88df8d..2d8afe8ecf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Snmp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (C) 1992-1999 Microsoft Corporation
+@@ -330,40 +331,40 @@ SnmpExtensionClose(
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONINIT)(
+     DWORD                 dwUpTimeReference,
+-    HANDLE *              phSubagentTrapEvent,
+-    AsnObjectIdentifier * pFirstSupportedRegion
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE *              phSubagentTrapEvent,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pFirstSupportedRegion
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONINITEX)(
+-    AsnObjectIdentifier * pNextSupportedRegion
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pNextSupportedRegion
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONMONITOR)(
+-    LPVOID            pAgentMgmtData
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID            pAgentMgmtData
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONQUERY)(
+     BYTE              bPduType,
+-    SnmpVarBindList * pVarBindList,
+-    AsnInteger32 *    pErrorStatus,
+-    AsnInteger32 *    pErrorIndex
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVarBindList,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorStatus,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorIndex
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONQUERYEX)(
+     UINT              nRequestType,
+     UINT              nTransactionId,
+-    SnmpVarBindList * pVarBindList,
+-    AsnOctetString *  pContextInfo,
+-    AsnInteger32 *    pErrorStatus,
+-    AsnInteger32 *    pErrorIndex
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVarBindList,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString *  pContextInfo,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorStatus,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *    pErrorIndex
+     );
+ 
+ typedef BOOL (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONTRAP)(
+-    AsnObjectIdentifier * pEnterpriseOid,
+-    AsnInteger32 *        pGenericTrapId,
+-    AsnInteger32 *        pSpecificTrapId,
+-    AsnTimeticks *        pTimeStamp,
+-    SnmpVarBindList *     pVarBindList
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pEnterpriseOid,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *        pGenericTrapId,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnInteger32 *        pSpecificTrapId,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnTimeticks *        pTimeStamp,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList *     pVarBindList
+     );
+ 
+ typedef VOID (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONCLOSE)(
+@@ -375,167 +376,167 @@ typedef VOID (SNMP_FUNC_TYPE * PFNSNMPEXTENSIONCLOSE)(
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOidCpy(
+-    AsnObjectIdentifier * pOidDst,
+-    AsnObjectIdentifier * pOidSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidSrc
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOidAppend(
+-    AsnObjectIdentifier * pOidDst,
+-    AsnObjectIdentifier * pOidSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOidSrc
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOidNCmp(
+-    AsnObjectIdentifier * pOid1,
+-    AsnObjectIdentifier * pOid2,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid2,
+     UINT                  nSubIds
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOidCmp(
+-    AsnObjectIdentifier * pOid1,
+-    AsnObjectIdentifier * pOid2
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid2
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilOidFree(
+-    AsnObjectIdentifier * pOid
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnObjectIdentifier * pOid
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOctetsCmp(
+-    AsnOctetString * pOctets1,
+-    AsnOctetString * pOctets2
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets2
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOctetsNCmp(
+-    AsnOctetString * pOctets1,
+-    AsnOctetString * pOctets2,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets1,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets2,
+     UINT             nChars
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilOctetsCpy(
+-    AsnOctetString * pOctetsDst,
+-    AsnOctetString * pOctetsSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctetsDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctetsSrc
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilOctetsFree(
+-    AsnOctetString * pOctets
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnOctetString * pOctets
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilAsnAnyCpy(
+-    AsnAny * pAnyDst,
+-    AsnAny * pAnySrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAnyDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAnySrc
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilAsnAnyFree(
+-    AsnAny * pAny
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAny
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilVarBindCpy(
+-    SnmpVarBind * pVbDst,
+-    SnmpVarBind * pVbSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBind * pVbDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBind * pVbSrc
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilVarBindFree(
+-    SnmpVarBind * pVb
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBind * pVb
+     );
+ 
+-SNMPAPI
++_Windows_SupportedOS_Windows2000_ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpUtilVarBindListCpy(
+-    SnmpVarBindList * pVblDst,
+-    SnmpVarBindList * pVblSrc
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVblDst,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVblSrc
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilVarBindListFree(
+-    SnmpVarBindList * pVbl
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SnmpVarBindList * pVbl
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilMemFree(
+-    LPVOID pMem
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pMem
+     );
+ 
+-LPVOID
++_Windows_SupportedOS_Windows2000_ LPVOID
+ SNMP_FUNC_TYPE
+ SnmpUtilMemAlloc(
+     UINT nBytes
+     );
+ 
+-LPVOID
++_Windows_SupportedOS_Windows2000_ LPVOID
+ SNMP_FUNC_TYPE
+ SnmpUtilMemReAlloc(
+-    LPVOID pMem,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pMem,
+     UINT   nBytes
+     );
+ 
+-LPSTR
++_Windows_SupportedOS_Windows2000_ LPSTR
+ SNMP_FUNC_TYPE
+ SnmpUtilOidToA(
+-    IN AsnObjectIdentifier *Oid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN AsnObjectIdentifier *Oid
+     );
+ 
+-LPSTR
++_Windows_SupportedOS_Windows2000_ LPSTR
+ SNMP_FUNC_TYPE
+ SnmpUtilIdsToA(
+-    IN UINT *Ids,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN UINT *Ids,
+     IN UINT IdLength
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilPrintOid(
+-    IN AsnObjectIdentifier *Oid
++    _WIN32META_ANNOTATION_("win32metadata:out") IN AsnObjectIdentifier *Oid
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilPrintAsnAny(
+-    AsnAny * pAny
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") AsnAny * pAny
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ SNMP_FUNC_TYPE
+ SnmpSvcGetUptime(
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpSvcSetLogLevel(
+-    INT nLogLevel
++    _Win32_AssociatedEnum_(SNMP_LOG) INT nLogLevel
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpSvcSetLogType(
+-    INT nLogType
++    _Win32_AssociatedEnum_(SNMP_OUTPUT_LOG_TYPE) INT nLogType
+     );
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+@@ -562,7 +563,7 @@ SnmpSvcSetLogType(
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ SNMP_FUNC_TYPE
+ SnmpUtilDbgPrint(
+     IN INT nLogLevel,   // see log levels above...
+@@ -675,4 +676,229 @@ SnmpUtilDbgPrint(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SNMP_PDU_GET")
++#undef SNMP_PDU_GET
++#pragma push_macro("SNMP_PDU_GETNEXT")
++#undef SNMP_PDU_GETNEXT
++#pragma push_macro("SNMP_PDU_RESPONSE")
++#undef SNMP_PDU_RESPONSE
++#pragma push_macro("SNMP_PDU_SET")
++#undef SNMP_PDU_SET
++#pragma push_macro("SNMP_PDU_GETBULK")
++#undef SNMP_PDU_GETBULK
++#pragma push_macro("SNMP_PDU_TRAP")
++#undef SNMP_PDU_TRAP
++enum SNMP_PDU_TYPE : unsigned int
++{
++    SNMP_PDU_GET = 160U,
++    SNMP_PDU_GETNEXT = 161U,
++    SNMP_PDU_RESPONSE = 162U,
++    SNMP_PDU_SET = 163U,
++    SNMP_PDU_GETBULK = 165U,
++    SNMP_PDU_TRAP = 167U,
++};
++#pragma pop_macro("SNMP_PDU_TRAP")
++#pragma pop_macro("SNMP_PDU_GETBULK")
++#pragma pop_macro("SNMP_PDU_SET")
++#pragma pop_macro("SNMP_PDU_RESPONSE")
++#pragma pop_macro("SNMP_PDU_GETNEXT")
++#pragma pop_macro("SNMP_PDU_GET")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SNMP_EXTENSION_GET")
++#undef SNMP_EXTENSION_GET
++#pragma push_macro("SNMP_EXTENSION_GET_NEXT")
++#undef SNMP_EXTENSION_GET_NEXT
++#pragma push_macro("SNMP_EXTENSION_SET_TEST")
++#undef SNMP_EXTENSION_SET_TEST
++#pragma push_macro("SNMP_EXTENSION_SET_COMMIT")
++#undef SNMP_EXTENSION_SET_COMMIT
++#pragma push_macro("SNMP_EXTENSION_SET_UNDO")
++#undef SNMP_EXTENSION_SET_UNDO
++#pragma push_macro("SNMP_EXTENSION_SET_CLEANUP")
++#undef SNMP_EXTENSION_SET_CLEANUP
++enum SNMP_EXTENSION_REQUEST_TYPE : unsigned int
++{
++    SNMP_EXTENSION_GET = 160U,
++    SNMP_EXTENSION_GET_NEXT = 161U,
++    SNMP_EXTENSION_SET_TEST = 224U,
++    SNMP_EXTENSION_SET_COMMIT = 163U,
++    SNMP_EXTENSION_SET_UNDO = 225U,
++    SNMP_EXTENSION_SET_CLEANUP = 226U,
++};
++#pragma pop_macro("SNMP_EXTENSION_SET_CLEANUP")
++#pragma pop_macro("SNMP_EXTENSION_SET_UNDO")
++#pragma pop_macro("SNMP_EXTENSION_SET_COMMIT")
++#pragma pop_macro("SNMP_EXTENSION_SET_TEST")
++#pragma pop_macro("SNMP_EXTENSION_GET_NEXT")
++#pragma pop_macro("SNMP_EXTENSION_GET")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SNMP_GENERICTRAP_COLDSTART")
++#undef SNMP_GENERICTRAP_COLDSTART
++#pragma push_macro("SNMP_GENERICTRAP_WARMSTART")
++#undef SNMP_GENERICTRAP_WARMSTART
++#pragma push_macro("SNMP_GENERICTRAP_LINKDOWN")
++#undef SNMP_GENERICTRAP_LINKDOWN
++#pragma push_macro("SNMP_GENERICTRAP_LINKUP")
++#undef SNMP_GENERICTRAP_LINKUP
++#pragma push_macro("SNMP_GENERICTRAP_AUTHFAILURE")
++#undef SNMP_GENERICTRAP_AUTHFAILURE
++#pragma push_macro("SNMP_GENERICTRAP_EGPNEIGHLOSS")
++#undef SNMP_GENERICTRAP_EGPNEIGHLOSS
++#pragma push_macro("SNMP_GENERICTRAP_ENTERSPECIFIC")
++#undef SNMP_GENERICTRAP_ENTERSPECIFIC
++enum SNMP_GENERICTRAP : unsigned int
++{
++    SNMP_GENERICTRAP_COLDSTART = 0U,
++    SNMP_GENERICTRAP_WARMSTART = 1U,
++    SNMP_GENERICTRAP_LINKDOWN = 2U,
++    SNMP_GENERICTRAP_LINKUP = 3U,
++    SNMP_GENERICTRAP_AUTHFAILURE = 4U,
++    SNMP_GENERICTRAP_EGPNEIGHLOSS = 5U,
++    SNMP_GENERICTRAP_ENTERSPECIFIC = 6U,
++};
++#pragma pop_macro("SNMP_GENERICTRAP_ENTERSPECIFIC")
++#pragma pop_macro("SNMP_GENERICTRAP_EGPNEIGHLOSS")
++#pragma pop_macro("SNMP_GENERICTRAP_AUTHFAILURE")
++#pragma pop_macro("SNMP_GENERICTRAP_LINKUP")
++#pragma pop_macro("SNMP_GENERICTRAP_LINKDOWN")
++#pragma pop_macro("SNMP_GENERICTRAP_WARMSTART")
++#pragma pop_macro("SNMP_GENERICTRAP_COLDSTART")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SNMP_ERRORSTATUS_NOERROR")
++#undef SNMP_ERRORSTATUS_NOERROR
++#pragma push_macro("SNMP_ERRORSTATUS_TOOBIG")
++#undef SNMP_ERRORSTATUS_TOOBIG
++#pragma push_macro("SNMP_ERRORSTATUS_NOSUCHNAME")
++#undef SNMP_ERRORSTATUS_NOSUCHNAME
++#pragma push_macro("SNMP_ERRORSTATUS_BADVALUE")
++#undef SNMP_ERRORSTATUS_BADVALUE
++#pragma push_macro("SNMP_ERRORSTATUS_READONLY")
++#undef SNMP_ERRORSTATUS_READONLY
++#pragma push_macro("SNMP_ERRORSTATUS_GENERR")
++#undef SNMP_ERRORSTATUS_GENERR
++#pragma push_macro("SNMP_ERRORSTATUS_NOACCESS")
++#undef SNMP_ERRORSTATUS_NOACCESS
++#pragma push_macro("SNMP_ERRORSTATUS_WRONGTYPE")
++#undef SNMP_ERRORSTATUS_WRONGTYPE
++#pragma push_macro("SNMP_ERRORSTATUS_WRONGLENGTH")
++#undef SNMP_ERRORSTATUS_WRONGLENGTH
++#pragma push_macro("SNMP_ERRORSTATUS_WRONGENCODING")
++#undef SNMP_ERRORSTATUS_WRONGENCODING
++#pragma push_macro("SNMP_ERRORSTATUS_WRONGVALUE")
++#undef SNMP_ERRORSTATUS_WRONGVALUE
++#pragma push_macro("SNMP_ERRORSTATUS_NOCREATION")
++#undef SNMP_ERRORSTATUS_NOCREATION
++#pragma push_macro("SNMP_ERRORSTATUS_INCONSISTENTVALUE")
++#undef SNMP_ERRORSTATUS_INCONSISTENTVALUE
++#pragma push_macro("SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE")
++#undef SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE
++#pragma push_macro("SNMP_ERRORSTATUS_COMMITFAILED")
++#undef SNMP_ERRORSTATUS_COMMITFAILED
++#pragma push_macro("SNMP_ERRORSTATUS_UNDOFAILED")
++#undef SNMP_ERRORSTATUS_UNDOFAILED
++#pragma push_macro("SNMP_ERRORSTATUS_AUTHORIZATIONERROR")
++#undef SNMP_ERRORSTATUS_AUTHORIZATIONERROR
++#pragma push_macro("SNMP_ERRORSTATUS_NOTWRITABLE")
++#undef SNMP_ERRORSTATUS_NOTWRITABLE
++#pragma push_macro("SNMP_ERRORSTATUS_INCONSISTENTNAME")
++#undef SNMP_ERRORSTATUS_INCONSISTENTNAME
++enum SNMP_ERROR_STATUS : unsigned int
++{
++    SNMP_ERRORSTATUS_NOERROR = 0U,
++    SNMP_ERRORSTATUS_TOOBIG = 1U,
++    SNMP_ERRORSTATUS_NOSUCHNAME = 2U,
++    SNMP_ERRORSTATUS_BADVALUE = 3U,
++    SNMP_ERRORSTATUS_READONLY = 4U,
++    SNMP_ERRORSTATUS_GENERR = 5U,
++    SNMP_ERRORSTATUS_NOACCESS = 6U,
++    SNMP_ERRORSTATUS_WRONGTYPE = 7U,
++    SNMP_ERRORSTATUS_WRONGLENGTH = 8U,
++    SNMP_ERRORSTATUS_WRONGENCODING = 9U,
++    SNMP_ERRORSTATUS_WRONGVALUE = 10U,
++    SNMP_ERRORSTATUS_NOCREATION = 11U,
++    SNMP_ERRORSTATUS_INCONSISTENTVALUE = 12U,
++    SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE = 13U,
++    SNMP_ERRORSTATUS_COMMITFAILED = 14U,
++    SNMP_ERRORSTATUS_UNDOFAILED = 15U,
++    SNMP_ERRORSTATUS_AUTHORIZATIONERROR = 16U,
++    SNMP_ERRORSTATUS_NOTWRITABLE = 17U,
++    SNMP_ERRORSTATUS_INCONSISTENTNAME = 18U,
++};
++#pragma pop_macro("SNMP_ERRORSTATUS_INCONSISTENTNAME")
++#pragma pop_macro("SNMP_ERRORSTATUS_NOTWRITABLE")
++#pragma pop_macro("SNMP_ERRORSTATUS_AUTHORIZATIONERROR")
++#pragma pop_macro("SNMP_ERRORSTATUS_UNDOFAILED")
++#pragma pop_macro("SNMP_ERRORSTATUS_COMMITFAILED")
++#pragma pop_macro("SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE")
++#pragma pop_macro("SNMP_ERRORSTATUS_INCONSISTENTVALUE")
++#pragma pop_macro("SNMP_ERRORSTATUS_NOCREATION")
++#pragma pop_macro("SNMP_ERRORSTATUS_WRONGVALUE")
++#pragma pop_macro("SNMP_ERRORSTATUS_WRONGENCODING")
++#pragma pop_macro("SNMP_ERRORSTATUS_WRONGLENGTH")
++#pragma pop_macro("SNMP_ERRORSTATUS_WRONGTYPE")
++#pragma pop_macro("SNMP_ERRORSTATUS_NOACCESS")
++#pragma pop_macro("SNMP_ERRORSTATUS_GENERR")
++#pragma pop_macro("SNMP_ERRORSTATUS_READONLY")
++#pragma pop_macro("SNMP_ERRORSTATUS_BADVALUE")
++#pragma pop_macro("SNMP_ERRORSTATUS_NOSUCHNAME")
++#pragma pop_macro("SNMP_ERRORSTATUS_TOOBIG")
++#pragma pop_macro("SNMP_ERRORSTATUS_NOERROR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SNMP_OUTPUT_TO_CONSOLE")
++#undef SNMP_OUTPUT_TO_CONSOLE
++#pragma push_macro("SNMP_OUTPUT_TO_LOGFILE")
++#undef SNMP_OUTPUT_TO_LOGFILE
++#pragma push_macro("SNMP_OUTPUT_TO_DEBUGGER")
++#undef SNMP_OUTPUT_TO_DEBUGGER
++enum SNMP_OUTPUT_LOG_TYPE : unsigned int
++{
++    SNMP_OUTPUT_TO_CONSOLE = 1U,
++    SNMP_OUTPUT_TO_LOGFILE = 2U,
++    SNMP_OUTPUT_TO_DEBUGGER = 8U,
++};
++#pragma pop_macro("SNMP_OUTPUT_TO_DEBUGGER")
++#pragma pop_macro("SNMP_OUTPUT_TO_LOGFILE")
++#pragma pop_macro("SNMP_OUTPUT_TO_CONSOLE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SNMP_LOG_SILENT")
++#undef SNMP_LOG_SILENT
++#pragma push_macro("SNMP_LOG_FATAL")
++#undef SNMP_LOG_FATAL
++#pragma push_macro("SNMP_LOG_ERROR")
++#undef SNMP_LOG_ERROR
++#pragma push_macro("SNMP_LOG_WARNING")
++#undef SNMP_LOG_WARNING
++#pragma push_macro("SNMP_LOG_TRACE")
++#undef SNMP_LOG_TRACE
++#pragma push_macro("SNMP_LOG_VERBOSE")
++#undef SNMP_LOG_VERBOSE
++enum SNMP_LOG : int
++{
++    SNMP_LOG_SILENT = 0,
++    SNMP_LOG_FATAL = 1,
++    SNMP_LOG_ERROR = 2,
++    SNMP_LOG_WARNING = 3,
++    SNMP_LOG_TRACE = 4,
++    SNMP_LOG_VERBOSE = 5,
++};
++#pragma pop_macro("SNMP_LOG_VERBOSE")
++#pragma pop_macro("SNMP_LOG_TRACE")
++#pragma pop_macro("SNMP_LOG_WARNING")
++#pragma pop_macro("SNMP_LOG_ERROR")
++#pragma pop_macro("SNMP_LOG_FATAL")
++#pragma pop_macro("SNMP_LOG_SILENT")
++#endif
++
+ #endif // _INC_SNMP

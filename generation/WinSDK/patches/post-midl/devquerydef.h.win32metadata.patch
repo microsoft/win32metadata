@@ -1,0 +1,9 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h b/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h
+index e4e74299a8..79ff2cd55a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/devquerydef.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation

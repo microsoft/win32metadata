@@ -15,9 +15,10 @@ partition translation units + header roots + import libraries
 [windows-rs](https://github.com/microsoft/windows-rs).
 
 The `Microsoft.Windows.WinmdGenerator` NuGet package is an MSBuild SDK containing
-that native executable, its pinned `libclang.dll`, and thin `Sdk.props` and
-`Sdk.targets` wrappers. The package does not contain the former C# scraper,
-constants scraper, emitter, response files, or JSON fixup databases.
+that native executable, its pinned `libclang.dll`, the canonical
+`win32metadata_annotations.h` vocabulary, and thin `Sdk.props` and `Sdk.targets`
+wrappers. The package does not contain the former C# scraper, constants scraper,
+emitter, response files, or JSON fixup databases.
 
 ## Inputs
 

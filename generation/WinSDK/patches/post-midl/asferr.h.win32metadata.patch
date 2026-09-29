@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/asferr.h b/generation/WinSDK/RecompiledIdlHeaders/um/asferr.h
+index d9d3f536d9..be38925ff3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/asferr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/asferr.h
+@@ -476,5 +476,28 @@
+ //
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("STATUS_SEVERITY_SUCCESS")
++#undef STATUS_SEVERITY_SUCCESS
++#pragma push_macro("STATUS_SEVERITY_INFORMATIONAL")
++#undef STATUS_SEVERITY_INFORMATIONAL
++#pragma push_macro("STATUS_SEVERITY_WARNING")
++#undef STATUS_SEVERITY_WARNING
++#pragma push_macro("STATUS_SEVERITY_ERROR")
++#undef STATUS_SEVERITY_ERROR
++enum NTSTATUS_SEVERITY_CODE : unsigned int
++{
++    STATUS_SEVERITY_SUCCESS = 0U,
++    STATUS_SEVERITY_INFORMATIONAL = 1U,
++    STATUS_SEVERITY_WARNING = 2U,
++    STATUS_SEVERITY_ERROR = 3U,
++};
++#pragma pop_macro("STATUS_SEVERITY_ERROR")
++#pragma pop_macro("STATUS_SEVERITY_WARNING")
++#pragma pop_macro("STATUS_SEVERITY_INFORMATIONAL")
++#pragma pop_macro("STATUS_SEVERITY_SUCCESS")
++#endif
++
+ #endif // _ASFERR_H
+ 

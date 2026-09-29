@@ -39,6 +39,15 @@ if ($LASTEXITCODE -ne 0) {
     throw "The consuming WinmdGenerator project failed."
 }
 
+$packagedAnnotationHeader = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc\win32metadata_annotations.h"
+$sourceAnnotationHeader = Join-Path $root "generation\WinSDK\AdditionalHeaders\win32metadata_annotations.h"
+if (!(Test-Path $packagedAnnotationHeader)) {
+    throw "The package did not contain win32metadata_annotations.h."
+}
+if ((Get-FileHash $packagedAnnotationHeader).Hash -cne (Get-FileHash $sourceAnnotationHeader).Hash) {
+    throw "The packaged annotation header differs from the repository source."
+}
+
 dotnet build (Join-Path $root "sources\WinmdUtils\WinmdUtils.csproj") -c Release
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to build WinmdUtils."
@@ -65,6 +74,24 @@ $actualText = [System.Text.RegularExpressions.Regex]::Replace(
 )
 [System.IO.File]::WriteAllText($actual, $actualText)
 
+function Assert-MatchCount {
+    param(
+        [string]$Pattern,
+        [int]$Expected,
+        [string]$Description
+    )
+
+    $count = [System.Text.RegularExpressions.Regex]::Matches($actualText, $Pattern).Count
+    if ($count -ne $Expected) {
+        throw "$Description count was $count; expected $Expected."
+    }
+}
+
+Assert-MatchCount 'public const uint SAMPLE_MODE_EXTERNAL\b' 1 "Associated constant"
+Assert-MatchCount 'public struct SAMPLE_POINT\b' 1 "Duplicate type"
+Assert-MatchCount 'public static extern int SampleAdd\b' 1 "Duplicate import"
+Assert-MatchCount 'public delegate int PSAMPLE_CALLBACK\b' 1 "Duplicate delegate"
+
 if ($actualText -notmatch "public const uint SAMPLE_MODE_EXTERNAL\s*=\s*3758096385u?;") {
     throw "The source-associated dependency constant was not emitted."
 }
@@ -74,7 +101,123 @@ if ($actualText -notmatch '\[AssociatedConstant\s*\(\s*"SAMPLE_MODE_EXTERNAL"\s*
 if ($actualText -notmatch '\[SupportedOSPlatform\s*\(\s*"windows10\.0\.19041\.662"\s*\)\][\s\S]*?SampleAdd') {
     throw "The fixed Windows 10 build availability was not emitted on SampleAdd."
 }
-if ($actualText -match "SAMPLE_MODE_EXTERNAL_VALUE|DEPENDENCY_NOISE|DependencyShouldNotEmit") {
+if ($actualText -notmatch '\[DllImport\s*\(\s*"sampleapi\.dll"[\s\S]*?SetLastError\s*=\s*true[\s\S]*?SampleAdd') {
+    throw "The import library or SetLastError contract was not emitted on SampleAdd."
+}
+if ($actualText -notmatch '\[DllImport\s*\(\s*""\s*,\s*CallingConvention\s*=\s*CallingConvention\.Cdecl\s*,\s*ExactSpelling\s*=\s*true\s*\)\]\s*public static extern Exception SamplePreservedResult') {
+    throw "HRESULT PreserveResult was not emitted."
+}
+if ($actualText -notmatch 'public interface ISampleFactory[\s\S]*?Exception Create[\s\S]*?\[PreserveSig\][\s\S]*?Exception TryCreate') {
+    throw "HRESULT interface methods were not projected with the PreserveResult distinction."
+}
+if ($actualText -notmatch '\[InvalidHandleValue\s*\(\s*-1L?\s*\)\][\s\S]*?\[InvalidHandleValue\s*\(\s*0L?\s*\)\][\s\S]*?\[RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\][\s\S]*?SAMPLE_RESOURCE_HANDLE') {
+    throw "The typedef RAII and invalid-handle contract was not emitted."
+}
+if ($actualText -notmatch '\[AlsoUsableFor\s*\(\s*"SAMPLE_HANDLE"\s*\)\][\s\S]*?SAMPLE_COMPAT_HANDLE') {
+    throw "The AlsoUsableFor contract was not emitted."
+}
+if ($actualText -notmatch '\[return:\s*AssociatedEnum\s*\(\s*"SAMPLE_MODE"\s*\)\][\s\S]*?SampleGetMode') {
+    throw "The return AssociatedEnum contract was not emitted."
+}
+if ($actualText -notmatch 'SampleGetMode\s*\(\s*\[In\]\s*\[AssociatedEnum\s*\(\s*"SAMPLE_MODE"\s*\)\]') {
+    throw "The parameter AssociatedEnum contract was not emitted."
+}
+if ($actualText -notmatch '\[return:\s*InvalidHandleValue\s*\(\s*-1L?\s*\)\][\s\S]*?\[return:\s*InvalidHandleValue\s*\(\s*0L?\s*\)\][\s\S]*?\[return:\s*RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\][\s\S]*?SampleOpenHandle') {
+    throw "The return RAII contract was not emitted."
+}
+if ($actualText -notmatch 'SampleCreateHandle\s*\(\s*\[Out\]\s*\[RAIIFree\s*\(\s*"SampleCloseHandle"\s*\)\]\s*\[InvalidHandleValue\s*\(\s*-1L?\s*\)\]\s*\[InvalidHandleValue\s*\(\s*0L?\s*\)\]') {
+    throw "The output RAII contract was not emitted."
+}
+if ($actualText -notmatch 'SampleUseHandle\s*\(\s*\[In\]\s*\[Retained\]') {
+    throw "The Retained contract was not emitted."
+}
+if ($actualText -notmatch 'ISampleFactory[\s\S]*?Create\s*\(\s*\[Out\]\s*\[RetVal\]\s*\[ComOutPtr\]') {
+    throw "The COM retval contract was not emitted."
+}
+if ($actualText -notmatch 'SampleBuffers[\s\S]*?NativeArrayInfo[\s\S]*?MemorySize[\s\S]*?NotNullTerminated[\s\S]*?NullNullTerminated') {
+    throw "The buffer and termination contracts were not emitted."
+}
+if ($actualText -notmatch '\[DllImport\s*\(\s*"samplemerged\.dll"[\s\S]*?SetLastError\s*=\s*true[\s\S]*?\[SupportedOSPlatform\s*\(\s*"windows6\.1"\s*\)\][\s\S]*?SampleMergedContract') {
+    throw "Compatible redeclarations did not merge import, SetLastError, and availability metadata."
+}
+if ($actualText -notmatch '\[SupportedArchitecture\s*\(\s*1\s*\)\][\s\S]*?struct SAMPLE_ARCH_VALUE[\s\S]*?public int value;' -or
+    $actualText -notmatch '\[SupportedArchitecture\s*\(\s*6\s*\)\][\s\S]*?struct SAMPLE_ARCH_VALUE[\s\S]*?public long value;') {
+    throw "Architecture-varying type declarations were not preserved."
+}
+if ($actualText -notmatch '\[SupportedArchitecture\s*\(\s*1\s*\)\][\s\S]*?SampleX86Only' -or
+    $actualText -notmatch '\[SupportedArchitecture\s*\(\s*6\s*\)\][\s\S]*?SampleWideOnly') {
+    throw "Architecture-varying function declarations were not preserved."
+}
+if ($actualText -notmatch 'struct SAMPLE_ARRAYS[\s\S]*?public byte\[\] bytes;[\s\S]*?public int\[\] values;') {
+    throw "Const array fields were not preserved."
+}
+if ($actualText -notmatch 'delegate int PSAMPLE_CALLBACK[\s\S]*?struct SAMPLE_CALLBACKS[\s\S]*?public PSAMPLE_CALLBACK chained;[\s\S]*?PSAMPLE_CALLBACK\* pointer;' -or
+    $actualText -match 'struct SAMPLE_CALLBACKS[\s\S]*?byte\* anonymous;') {
+    throw "Chained, pointer, or anonymous callback fields were not preserved."
+}
+if ($actualText -notmatch '\[Alignment\s*\(\s*8\s*\)\]\s*public struct SAMPLE_PACKED') {
+    throw "Explicit alignment was not preserved."
+}
+
+Add-Type -AssemblyName System.Reflection.Metadata
+$winmdStream = [System.IO.File]::OpenRead($winmd)
+try {
+    $peReader = [System.Reflection.PortableExecutable.PEReader]::new($winmdStream)
+    $metadataReader = [System.Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($peReader)
+    $packedLayout = $null
+    foreach ($typeHandle in $metadataReader.TypeDefinitions) {
+        $type = $metadataReader.GetTypeDefinition($typeHandle)
+        if ($metadataReader.GetString($type.Name) -eq "SAMPLE_PACKED") {
+            $packedLayout = $type.GetLayout()
+            break
+        }
+    }
+    if ($null -eq $packedLayout -or $packedLayout.IsDefault -or $packedLayout.PackingSize -ne 2) {
+        throw "Packing size 2 was not preserved on SAMPLE_PACKED."
+    }
+}
+finally {
+    if ($peReader) {
+        $peReader.Dispose()
+    }
+    $winmdStream.Dispose()
+}
+
+$supportedOs = [ordered]@{
+    SampleWindows2000 = "windows5.0"
+    SampleWindowsXP = "windows5.1.2600"
+    SampleWindowsVista = "windows6.0.6000"
+    SampleWindowsVistaSP1 = "windows6.0.6001"
+    SampleWindows7 = "windows6.1"
+    SampleWindows8 = "windows8.0"
+    SampleWindows81 = "windows8.1"
+    SampleWindows10_10240 = "windows10.0.10240"
+    SampleWindows10_10586 = "windows10.0.10586"
+    SampleWindows10_14393 = "windows10.0.14393"
+    SampleWindows10_15063 = "windows10.0.15063"
+    SampleWindows10_16299 = "windows10.0.16299"
+    SampleWindows10_17134 = "windows10.0.17134"
+    SampleWindows10_17763 = "windows10.0.17763"
+    SampleWindows10_18362 = "windows10.0.18362"
+    SampleWindows10_19041 = "windows10.0.19041"
+    SampleWindows10_19041_662 = "windows10.0.19041.662"
+    SampleWindows10_20348 = "windows10.0.20348"
+    SampleWindows10_22631 = "windows10.0.22631"
+    SampleWindows10_26100 = "windows10.0.26100"
+    SampleServer2000 = "windowsserver2000"
+    SampleServer2003 = "windowsserver2003"
+    SampleServer2008 = "windowsserver2008"
+    SampleServer2012 = "windowsserver2012"
+    SampleServer2016 = "windowsserver2016"
+}
+foreach ($entry in $supportedOs.GetEnumerator()) {
+    $pattern = '\[SupportedOSPlatform\s*\(\s*"' + [regex]::Escape($entry.Value) + '"\s*\)\][\s\S]*?' + [regex]::Escape($entry.Key)
+    if ($actualText -notmatch $pattern) {
+        throw "SupportedOS '$($entry.Value)' was not emitted on $($entry.Key)."
+    }
+}
+
+if ($actualText -match "SAMPLE_MODE_EXTERNAL_VALUE|DEPENDENCY_NOISE|DependencyShouldNotEmit|CLEANUP_DEPENDENCY_NOISE|CleanupDependencyShouldNotEmit|static extern int SampleCloseHandle") {
     throw "Unrelated dependency declarations were emitted."
 }
 

@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvdeo.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvdeo.h
+index b977bce362..f463126b6f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvdeo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddvdeo.h
+@@ -1865,12 +1865,32 @@ typedef struct _CHAR_INFO {
+ //
+ // Share of foncache.h
+ //
++#endif
++#if (defined(WIN32METADATA) && !defined(BITMAP_BITS_BYTE_ALIGN)) || (((!defined(_WINCON_))))
+ #define BITMAP_BITS_BYTE_ALIGN   8 // BYTE align is 8 bit
++#endif
++#ifndef _WINCON_
++#endif
++#if (defined(WIN32METADATA) && !defined(BITMAP_BITS_WORD_ALIGN)) || (((!defined(_WINCON_))))
+ #define BITMAP_BITS_WORD_ALIGN  16 // WORD align is 16 bit
++#endif
++#ifndef _WINCON_
++#endif
++#if (defined(WIN32METADATA) && !defined(BITMAP_ARRAY_BYTE)) || (((!defined(_WINCON_))))
+ #define BITMAP_ARRAY_BYTE  3       // BYTE array is 8 bit  (shift count = 3)
++#endif
++#ifndef _WINCON_
+ 
++#endif
++#if (defined(WIN32METADATA) && !defined(BITMAP_PLANES)) || (((!defined(_WINCON_))))
+ #define BITMAP_PLANES      1
++#endif
++#ifndef _WINCON_
++#endif
++#if (defined(WIN32METADATA) && !defined(BITMAP_BITS_PIXEL)) || (((!defined(_WINCON_))))
+ #define BITMAP_BITS_PIXEL  1
++#endif
++#ifndef _WINCON_
+ 
+ 
+ #define BYTE_ALIGN  sizeof(UCHAR)

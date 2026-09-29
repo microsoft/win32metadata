@@ -1,0 +1,12 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h b/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h
+index 3a8ba6720f..c0213659d0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/transportsettingcommon.h
+@@ -16,6 +16,7 @@ Environment:
+ 
+ #ifndef _TRANSPORT_SETTING_COMMON_
+ #define _TRANSPORT_SETTING_COMMON_
++#include "win32metadata_annotations.h"
+ 
+ #ifdef _MSC_VER
+ 

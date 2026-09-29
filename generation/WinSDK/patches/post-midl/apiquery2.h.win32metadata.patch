@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/apiquery2.h b/generation/WinSDK/RecompiledIdlHeaders/um/apiquery2.h
+index f8a037836e..697e4fc071 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/apiquery2.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/apiquery2.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * apiquery2.h -- ApiSet Contract for api-ms-win-core-apiquery-l2                *
+@@ -41,6 +42,7 @@ IsApiSetImplemented(
+ APICONTRACT
+ HRESULT
+ APIENTRY
++_Win32_ImportLibrary_("api-ms-win-core-apiquery-l2-1-1.dll")
+ GetApiSetModuleBaseName(
+     _In_ PCSTR contractName,
+     _In_ UINT32 bufferLength,

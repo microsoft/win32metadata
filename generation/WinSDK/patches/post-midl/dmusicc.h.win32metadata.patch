@@ -1,0 +1,155 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmusicc.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmusicc.h
+index 4c244614f2..9ca31039cb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dmusicc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmusicc.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /************************************************************************
+ *                                                                       *
+ *   dmusicc.h -- This module defines the DirectMusic core API's         *
+@@ -355,21 +356,21 @@ DECLARE_INTERFACE_(IDirectMusic, IUnknown)
+ 
+     /*  IDirectMusic */
+     STDMETHOD(EnumPort)             (THIS_ DWORD dwIndex,
+-                                           LPDMUS_PORTCAPS pPortCaps) PURE;
+-    STDMETHOD(CreateMusicBuffer)    (THIS_ LPDMUS_BUFFERDESC pBufferDesc,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDMUS_PORTCAPS pPortCaps) PURE;
++    STDMETHOD(CreateMusicBuffer)    (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDMUS_BUFFERDESC pBufferDesc,
+                                            LPDIRECTMUSICBUFFER *ppBuffer,
+                                            LPUNKNOWN pUnkOuter) PURE;
+     STDMETHOD(CreatePort)           (THIS_ REFCLSID rclsidPort,
+-                                           LPDMUS_PORTPARAMS pPortParams,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDMUS_PORTPARAMS pPortParams,
+                                            LPDIRECTMUSICPORT *ppPort,
+                                            LPUNKNOWN pUnkOuter) PURE;
+     STDMETHOD(EnumMasterClock)      (THIS_ DWORD dwIndex,
+-                                           LPDMUS_CLOCKINFO lpClockInfo) PURE;
+-    STDMETHOD(GetMasterClock)       (THIS_ LPGUID pguidClock,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDMUS_CLOCKINFO lpClockInfo) PURE;
++    STDMETHOD(GetMasterClock)       (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGUID pguidClock,
+                                            IReferenceClock **ppReferenceClock) PURE;
+     STDMETHOD(SetMasterClock)       (THIS_ REFGUID rguidClock) PURE;
+     STDMETHOD(Activate)             (THIS_ BOOL fEnable) PURE;
+-    STDMETHOD(GetDefaultPort)       (THIS_ LPGUID pguidPort) PURE;
++    STDMETHOD(GetDefaultPort)       (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGUID pguidPort) PURE;
+     STDMETHOD(SetDirectSound)       (THIS_ LPDIRECTSOUND pDirectSound,
+                                            HWND hWnd) PURE;
+ };
+@@ -422,7 +423,7 @@ DECLARE_INTERFACE_(IDirectMusicBuffer, IUnknown)
+ 
+     /*  IDirectMusicBuffer */
+     STDMETHOD(Flush)                (THIS) PURE;
+-    STDMETHOD(TotalTime)            (THIS_ LPREFERENCE_TIME prtTime) PURE;
++    STDMETHOD(TotalTime)            (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPREFERENCE_TIME prtTime) PURE;
+ 
+     STDMETHOD(PackStructured)       (THIS_ REFERENCE_TIME rt,
+                                            DWORD dwChannelGroup,
+@@ -431,19 +432,19 @@ DECLARE_INTERFACE_(IDirectMusicBuffer, IUnknown)
+     STDMETHOD(PackUnstructured)     (THIS_ REFERENCE_TIME rt,
+                                            DWORD dwChannelGroup,
+                                            DWORD cb,
+-                                           LPBYTE lpb) PURE;
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE lpb) PURE;
+ 
+     STDMETHOD(ResetReadPtr)         (THIS) PURE;
+-    STDMETHOD(GetNextEvent)         (THIS_ LPREFERENCE_TIME prt,
+-                                           LPDWORD pdwChannelGroup,
+-                                           LPDWORD pdwLength,
+-                                           LPBYTE *ppData) PURE;
++    STDMETHOD(GetNextEvent)         (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPREFERENCE_TIME prt,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwChannelGroup,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwLength,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE *ppData) PURE;
+ 
+-    STDMETHOD(GetRawBufferPtr)      (THIS_ LPBYTE *ppData) PURE;
+-    STDMETHOD(GetStartTime)         (THIS_ LPREFERENCE_TIME prt) PURE;
+-    STDMETHOD(GetUsedBytes)         (THIS_ LPDWORD pcb) PURE;
+-    STDMETHOD(GetMaxBytes)          (THIS_ LPDWORD pcb) PURE;
+-    STDMETHOD(GetBufferFormat)      (THIS_ LPGUID pGuidFormat) PURE;
++    STDMETHOD(GetRawBufferPtr)      (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE *ppData) PURE;
++    STDMETHOD(GetStartTime)         (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPREFERENCE_TIME prt) PURE;
++    STDMETHOD(GetUsedBytes)         (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pcb) PURE;
++    STDMETHOD(GetMaxBytes)          (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pcb) PURE;
++    STDMETHOD(GetBufferFormat)      (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPGUID pGuidFormat) PURE;
+ 
+     STDMETHOD(SetStartTime)         (THIS_ REFERENCE_TIME rt) PURE;
+     STDMETHOD(SetUsedBytes)         (THIS_ DWORD cb) PURE;
+@@ -466,7 +467,7 @@ DECLARE_INTERFACE_(IDirectMusicInstrument, IUnknown)
+     STDMETHOD_(ULONG,Release)           (THIS) PURE;
+ 
+     /* IDirectMusicInstrument */
+-    STDMETHOD(GetPatch)                 (THIS_ DWORD* pdwPatch) PURE;
++    STDMETHOD(GetPatch)                 (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* pdwPatch) PURE;
+     STDMETHOD(SetPatch)                 (THIS_ DWORD dwPatch) PURE;
+ };
+ 
+@@ -510,7 +511,7 @@ DECLARE_INTERFACE_(IDirectMusicCollection, IUnknown)
+     STDMETHOD(GetInstrument)            (THIS_ DWORD dwPatch,
+                                                IDirectMusicInstrument** ppInstrument) PURE;
+     STDMETHOD(EnumInstrument)           (THIS_ DWORD dwIndex,
+-                                               DWORD* pdwPatch,
++                                               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* pdwPatch,
+                                                LPWSTR pwszName,
+                                                DWORD dwNameLen) PURE;
+ };
+@@ -532,8 +533,8 @@ DECLARE_INTERFACE_(IDirectMusicDownload , IUnknown)
+     STDMETHOD_(ULONG,Release)       (THIS) PURE;
+ 
+     /* IDirectMusicDownload */
+-    STDMETHOD(GetBuffer)            (THIS_ void** ppvBuffer,
+-                                           DWORD* pdwSize) PURE;
++    STDMETHOD(GetBuffer)            (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvBuffer,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* pdwSize) PURE;
+ };
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP) /* Windows XP or greater */
+@@ -557,9 +558,9 @@ DECLARE_INTERFACE_(IDirectMusicPortDownload, IUnknown)
+                                            IDirectMusicDownload** ppIDMDownload) PURE;
+     STDMETHOD(AllocateBuffer)       (THIS_ DWORD dwSize,
+                                            IDirectMusicDownload** ppIDMDownload) PURE;
+-    STDMETHOD(GetDLId)              (THIS_ DWORD* pdwStartDLId,
++    STDMETHOD(GetDLId)              (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* pdwStartDLId,
+                                            DWORD dwCount) PURE;
+-    STDMETHOD(GetAppend)            (THIS_ DWORD* pdwAppend) PURE;
++    STDMETHOD(GetAppend)            (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD* pdwAppend) PURE;
+     STDMETHOD(Download)             (THIS_ IDirectMusicDownload* pIDMDownload) PURE;
+     STDMETHOD(Unload)               (THIS_ IDirectMusicDownload* pIDMDownload) PURE;
+ };
+@@ -649,27 +650,27 @@ DECLARE_INTERFACE_(IDirectMusicPort, IUnknown)
+     STDMETHOD(Read)                 (THIS_ LPDIRECTMUSICBUFFER pBuffer) PURE;
+     STDMETHOD(DownloadInstrument)   (THIS_ IDirectMusicInstrument *pInstrument,
+                                      IDirectMusicDownloadedInstrument **ppDownloadedInstrument,
+-                                     DMUS_NOTERANGE *pNoteRanges,
++                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DMUS_NOTERANGE *pNoteRanges,
+                                      DWORD dwNumNoteRanges) PURE;
+     STDMETHOD(UnloadInstrument)     (THIS_ IDirectMusicDownloadedInstrument *pDownloadedInstrument) PURE;
+     STDMETHOD(GetLatencyClock)      (THIS_ IReferenceClock **ppClock) PURE;
+-    STDMETHOD(GetRunningStats)      (THIS_ LPDMUS_SYNTHSTATS pStats) PURE;
++    STDMETHOD(GetRunningStats)      (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDMUS_SYNTHSTATS pStats) PURE;
+     STDMETHOD(Compact)              (THIS) PURE;
+-    STDMETHOD(GetCaps)              (THIS_ LPDMUS_PORTCAPS pPortCaps) PURE;
++    STDMETHOD(GetCaps)              (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDMUS_PORTCAPS pPortCaps) PURE;
+     STDMETHOD(DeviceIoControl)      (THIS_ DWORD dwIoControlCode,
+-                                           LPVOID lpInBuffer,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpInBuffer,
+                                            DWORD nInBufferSize,
+-                                           LPVOID lpOutBuffer,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpOutBuffer,
+                                            DWORD nOutBufferSize,
+-                                           LPDWORD lpBytesReturned,
+-                                           LPOVERLAPPED lpOverlapped) PURE;
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpBytesReturned,
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOVERLAPPED lpOverlapped) PURE;
+     STDMETHOD(SetNumChannelGroups)  (THIS_ DWORD dwChannelGroups) PURE;
+-    STDMETHOD(GetNumChannelGroups)  (THIS_ LPDWORD pdwChannelGroups) PURE;
++    STDMETHOD(GetNumChannelGroups)  (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwChannelGroups) PURE;
+     STDMETHOD(Activate)             (THIS_ BOOL fActive) PURE;
+     STDMETHOD(SetChannelPriority)   (THIS_ DWORD dwChannelGroup, DWORD dwChannel, DWORD dwPriority) PURE;
+-    STDMETHOD(GetChannelPriority)   (THIS_ DWORD dwChannelGroup, DWORD dwChannel, LPDWORD pdwPriority) PURE;
++    STDMETHOD(GetChannelPriority)   (THIS_ DWORD dwChannelGroup, DWORD dwChannel, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwPriority) PURE;
+     STDMETHOD(SetDirectSound)       (THIS_ LPDIRECTSOUND pDirectSound, LPDIRECTSOUNDBUFFER pDirectSoundBuffer) PURE;
+-    STDMETHOD(GetFormat)            (THIS_ LPWAVEFORMATEX pWaveFormatEx, LPDWORD pdwWaveFormatExSize, LPDWORD pdwBufferSize) PURE;
++    STDMETHOD(GetFormat)            (THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPWAVEFORMATEX pWaveFormatEx, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwWaveFormatExSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwBufferSize) PURE;
+ };
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP) /* Windows XP or greater */

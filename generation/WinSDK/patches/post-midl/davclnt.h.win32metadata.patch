@@ -1,0 +1,106 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h b/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h
+index c369d61a73..3bf73ed22c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/davclnt.h
+@@ -18,6 +18,7 @@ Revision History:
+ #define _DAV_CLNT_H_
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -80,6 +81,8 @@ typedef DWORD (CALLBACK *PFNDAVAUTHCALLBACK)(
+     _Out_ PFNDAVAUTHCALLBACK_FREECRED *pFreeCred    // Callback to free the memory allocated for creds by the callback
+ );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -92,6 +95,8 @@ DavAddConnection(
+     _In_ DWORD CertSize
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -99,6 +104,8 @@ DavDeleteConnection(
+     _In_ HANDLE ConnectionHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -108,7 +115,7 @@ DavGetUNCFromHTTPPath (
+     _Inout_ LPDWORD lpSize
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ DavGetHTTPFromUNCPath (
+@@ -117,7 +124,7 @@ DavGetHTTPFromUNCPath (
+     _Inout_ LPDWORD lpSize
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ DavGetTheLockOwnerOfTheFile(
+@@ -126,7 +133,7 @@ DavGetTheLockOwnerOfTheFile(
+     _Inout_ PULONG LockOwnerNameLengthInBytes
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ DavGetExtendedError(
+@@ -136,21 +143,21 @@ DavGetExtendedError(
+     _Inout_ DWORD *cChSize
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ DavFlushFile(
+     _In_ HANDLE hFile
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ DavInvalidateCache(
+     _In_ LPCWSTR URLName
+     );
+ 
+-_Success_(return == ERROR_SUCCESS)
++_Windows_SupportedOS_WindowsVista_ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+ DavCancelConnectionsToServer(
+@@ -158,12 +165,12 @@ DavCancelConnectionsToServer(
+     _In_ BOOL fForce
+     );
+ 
+-OPAQUE_HANDLE
++_Windows_SupportedOS_WindowsVista_ OPAQUE_HANDLE
+ WINAPI
+ DavRegisterAuthCallback(_In_ PFNDAVAUTHCALLBACK CallBack,
+                         _In_ ULONG Version);
+ 
+-VOID
++_Windows_SupportedOS_WindowsVista_ VOID
+ WINAPI
+ DavUnregisterAuthCallback(_In_ OPAQUE_HANDLE hCallback);
+ 

@@ -1,0 +1,98 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mciapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mciapi.h
+index 3818db1e60..afa55f10f8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mciapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mciapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /********************************************************************************
+ *                                                                               *
+ * mciapi.h -- ApiSet Contract for api-ms-win-mm-mci-l1-1-0                      *
+@@ -46,7 +47,7 @@ typedef UINT (CALLBACK *YIELDPROC)(MCIDEVICEID mciId, DWORD dwYieldData);
+ /* MCI function prototypes */
+ #ifdef _WIN32
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MCIERROR
+ WINAPI
+ mciSendCommandA(
+@@ -56,7 +57,7 @@ mciSendCommandA(
+     _In_opt_ DWORD_PTR dwParam2
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MCIERROR
+ WINAPI
+ mciSendCommandW(
+@@ -71,7 +72,7 @@ mciSendCommandW(
+ #else
+ #define mciSendCommand  mciSendCommandA
+ #endif // !UNICODE
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MCIERROR
+ WINAPI
+ mciSendStringA(
+@@ -81,7 +82,7 @@ mciSendStringA(
+     _In_opt_ HWND hwndCallback
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MCIERROR
+ WINAPI
+ mciSendStringW(
+@@ -96,14 +97,14 @@ mciSendStringW(
+ #else
+ #define mciSendString  mciSendStringA
+ #endif // !UNICODE
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MCIDEVICEID
+ WINAPI
+ mciGetDeviceIDA(
+     _In_ LPCSTR pszDevice
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MCIDEVICEID
+ WINAPI
+ mciGetDeviceIDW(
+@@ -115,7 +116,7 @@ mciGetDeviceIDW(
+ #else
+ #define mciGetDeviceID  mciGetDeviceIDA
+ #endif // !UNICODE
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ MCIDEVICEID
+ WINAPI
+ mciGetDeviceIDFromElementIDA(
+@@ -123,7 +124,7 @@ mciGetDeviceIDFromElementIDA(
+     _In_ LPCSTR lpstrType
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ MCIDEVICEID
+ WINAPI
+ mciGetDeviceIDFromElementIDW(
+@@ -136,7 +137,7 @@ mciGetDeviceIDFromElementIDW(
+ #else
+ #define mciGetDeviceIDFromElementID  mciGetDeviceIDFromElementIDA
+ #endif // !UNICODE
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") WINMMAPI
+ BOOL
+ WINAPI
+ mciGetErrorStringA(
+@@ -145,7 +146,7 @@ mciGetErrorStringA(
+     _In_ UINT cchText
+     );
+ 
+-WINMMAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") WINMMAPI
+ BOOL
+ WINAPI
+ mciGetErrorStringW(

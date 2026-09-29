@@ -1,0 +1,157 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h b/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h
+index f45ca72379..727843521c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/minwinbase.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /************************************************************************
+ *                                                                       *
+ *   minwinbase.h -- This module defines the 32-Bit Windows Base APIs    *
+@@ -272,7 +273,7 @@ typedef struct _PROCESS_HEAP_ENTRY {
+ 
+ typedef struct _REASON_CONTEXT {
+     ULONG Version;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(POWER_REQUEST_CONTEXT_FLAGS) DWORD Flags;
+     union {
+         struct {
+             HMODULE LocalizedReasonModule;
+@@ -300,7 +301,7 @@ typedef struct _REASON_CONTEXT {
+ #define RIP_EVENT                   9
+ 
+ typedef DWORD (WINAPI *PTHREAD_START_ROUTINE)(
+-    LPVOID lpThreadParameter
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpThreadParameter
+     );
+ typedef PTHREAD_START_ROUTINE LPTHREAD_START_ROUTINE;
+ 
+@@ -362,12 +363,12 @@ typedef struct _OUTPUT_DEBUG_STRING_INFO {
+ 
+ typedef struct _RIP_INFO {
+     DWORD dwError;
+-    DWORD dwType;
++    _Win32_AssociatedEnum_(RIP_INFO_TYPE) DWORD dwType;
+ } RIP_INFO, *LPRIP_INFO;
+ 
+ 
+ typedef struct _DEBUG_EVENT {
+-    DWORD dwDebugEventCode;
++    _Win32_AssociatedEnum_(DEBUG_EVENT_CODE) DWORD dwDebugEventCode;
+     DWORD dwProcessId;
+     DWORD dwThreadId;
+     union {
+@@ -469,5 +470,114 @@ typedef PCONTEXT LPCONTEXT;
+ #endif
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("FIND_FIRST_EX_CASE_SENSITIVE")
++#undef FIND_FIRST_EX_CASE_SENSITIVE
++#pragma push_macro("FIND_FIRST_EX_LARGE_FETCH")
++#undef FIND_FIRST_EX_LARGE_FETCH
++#pragma push_macro("FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY")
++#undef FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY
++enum [[clang::flag_enum]] FIND_FIRST_EX_FLAGS : unsigned int
++{
++    FIND_FIRST_EX_CASE_SENSITIVE = 1U,
++    FIND_FIRST_EX_LARGE_FETCH = 2U,
++    FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY = 4U,
++};
++#pragma pop_macro("FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY")
++#pragma pop_macro("FIND_FIRST_EX_LARGE_FETCH")
++#pragma pop_macro("FIND_FIRST_EX_CASE_SENSITIVE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LOCKFILE_EXCLUSIVE_LOCK")
++#undef LOCKFILE_EXCLUSIVE_LOCK
++#pragma push_macro("LOCKFILE_FAIL_IMMEDIATELY")
++#undef LOCKFILE_FAIL_IMMEDIATELY
++enum [[clang::flag_enum]] LOCK_FILE_FLAGS : unsigned int
++{
++    LOCKFILE_EXCLUSIVE_LOCK = 2U,
++    LOCKFILE_FAIL_IMMEDIATELY = 1U,
++};
++#pragma pop_macro("LOCKFILE_FAIL_IMMEDIATELY")
++#pragma pop_macro("LOCKFILE_EXCLUSIVE_LOCK")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CREATE_PROCESS_DEBUG_EVENT")
++#undef CREATE_PROCESS_DEBUG_EVENT
++#pragma push_macro("CREATE_THREAD_DEBUG_EVENT")
++#undef CREATE_THREAD_DEBUG_EVENT
++#pragma push_macro("EXCEPTION_DEBUG_EVENT")
++#undef EXCEPTION_DEBUG_EVENT
++#pragma push_macro("EXIT_PROCESS_DEBUG_EVENT")
++#undef EXIT_PROCESS_DEBUG_EVENT
++#pragma push_macro("EXIT_THREAD_DEBUG_EVENT")
++#undef EXIT_THREAD_DEBUG_EVENT
++#pragma push_macro("LOAD_DLL_DEBUG_EVENT")
++#undef LOAD_DLL_DEBUG_EVENT
++#pragma push_macro("OUTPUT_DEBUG_STRING_EVENT")
++#undef OUTPUT_DEBUG_STRING_EVENT
++#pragma push_macro("RIP_EVENT")
++#undef RIP_EVENT
++#pragma push_macro("UNLOAD_DLL_DEBUG_EVENT")
++#undef UNLOAD_DLL_DEBUG_EVENT
++enum DEBUG_EVENT_CODE : unsigned int
++{
++    CREATE_PROCESS_DEBUG_EVENT = 3U,
++    CREATE_THREAD_DEBUG_EVENT = 2U,
++    EXCEPTION_DEBUG_EVENT = 1U,
++    EXIT_PROCESS_DEBUG_EVENT = 5U,
++    EXIT_THREAD_DEBUG_EVENT = 4U,
++    LOAD_DLL_DEBUG_EVENT = 6U,
++    OUTPUT_DEBUG_STRING_EVENT = 8U,
++    RIP_EVENT = 9U,
++    UNLOAD_DLL_DEBUG_EVENT = 7U,
++};
++#pragma pop_macro("UNLOAD_DLL_DEBUG_EVENT")
++#pragma pop_macro("RIP_EVENT")
++#pragma pop_macro("OUTPUT_DEBUG_STRING_EVENT")
++#pragma pop_macro("LOAD_DLL_DEBUG_EVENT")
++#pragma pop_macro("EXIT_THREAD_DEBUG_EVENT")
++#pragma pop_macro("EXIT_PROCESS_DEBUG_EVENT")
++#pragma pop_macro("EXCEPTION_DEBUG_EVENT")
++#pragma pop_macro("CREATE_THREAD_DEBUG_EVENT")
++#pragma pop_macro("CREATE_PROCESS_DEBUG_EVENT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("LHND")
++#undef LHND
++#pragma push_macro("LMEM_FIXED")
++#undef LMEM_FIXED
++#pragma push_macro("LMEM_MOVEABLE")
++#undef LMEM_MOVEABLE
++#pragma push_macro("LMEM_ZEROINIT")
++#undef LMEM_ZEROINIT
++#pragma push_macro("LPTR")
++#undef LPTR
++#pragma push_macro("NONZEROLHND")
++#undef NONZEROLHND
++#pragma push_macro("NONZEROLPTR")
++#undef NONZEROLPTR
++enum [[clang::flag_enum]] LOCAL_ALLOC_FLAGS : unsigned int
++{
++    LHND = 66U,
++    LMEM_FIXED = 0U,
++    LMEM_MOVEABLE = 2U,
++    LMEM_ZEROINIT = 64U,
++    LPTR = 64U,
++    NONZEROLHND = 2U,
++    NONZEROLPTR = 0U,
++};
++#pragma pop_macro("NONZEROLPTR")
++#pragma pop_macro("NONZEROLHND")
++#pragma pop_macro("LPTR")
++#pragma pop_macro("LMEM_ZEROINIT")
++#pragma pop_macro("LMEM_MOVEABLE")
++#pragma pop_macro("LMEM_FIXED")
++#pragma pop_macro("LHND")
++#endif
++
+ #endif // _MINWINBASE_
+ 

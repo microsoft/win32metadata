@@ -1,0 +1,840 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h
+index 9e5af2caac..a4ddc42fbb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mbnapi.h
+@@ -683,6 +683,7 @@ extern "C"{
+ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -866,7 +867,7 @@ EXTERN_C const IID IID_IDummyMBNUCMExt;
+ /* [local] */ 
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("42FAAC0B-BDCC-11DC-A8A8-001321F1405F") 
+-enum MBN_SIGNAL_CONSTANTS
++enum  MBN_SIGNAL_CONSTANTS
+     {
+         MBN_RSSI_DEFAULT	= 0xffffffff,
+         MBN_RSSI_DISABLE	= 0,
+@@ -879,7 +880,7 @@ enum MBN_SIGNAL_CONSTANTS
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6002-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_CELLULAR_CLASS
++enum  MBN_CELLULAR_CLASS
+     {
+         MBN_CELLULAR_CLASS_NONE	= 0,
+         MBN_CELLULAR_CLASS_GSM	= 0x1,
+@@ -887,7 +888,7 @@ enum MBN_CELLULAR_CLASS
+     } 	MBN_CELLULAR_CLASS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6012-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_VOICE_CLASS
++enum  MBN_VOICE_CLASS
+     {
+         MBN_VOICE_CLASS_NONE	= 0,
+         MBN_VOICE_CLASS_NO_VOICE	= 0x1,
+@@ -896,7 +897,7 @@ enum MBN_VOICE_CLASS
+     } 	MBN_VOICE_CLASS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("6E1348BB-BDCB-11DC-A8A8-001321F1405F") 
+-enum MBN_PROVIDER_STATE
++enum  MBN_PROVIDER_STATE
+     {
+         MBN_PROVIDER_STATE_NONE	= 0,
+         MBN_PROVIDER_STATE_HOME	= 0x1,
+@@ -908,14 +909,14 @@ enum MBN_PROVIDER_STATE
+     } 	MBN_PROVIDER_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("934092FD-BDCB-11DC-A8A8-001321F1405F") 
+-enum MBN_PROVIDER_CONSTANTS
++enum  MBN_PROVIDER_CONSTANTS
+     {
+         MBN_PROVIDERNAME_LEN	= 20,
+         MBN_PROVIDERID_LEN	= 6
+     } 	MBN_PROVIDER_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("59C235E7-BDC9-11DC-A8A8-001321F1405F") 
+-enum MBN_INTERFACE_CAPS_CONSTANTS
++enum  MBN_INTERFACE_CAPS_CONSTANTS
+     {
+         MBN_DEVICEID_LEN	= 18,
+         MBN_MANUFACTURER_LEN	= 32,
+@@ -924,7 +925,7 @@ enum MBN_INTERFACE_CAPS_CONSTANTS
+     } 	MBN_INTERFACE_CAPS_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("83A34F4C-BDC4-11DC-A8A8-001321F1405F") 
+-enum MBN_DATA_CLASS
++enum  MBN_DATA_CLASS
+     {
+         MBN_DATA_CLASS_NONE	= 0,
+         MBN_DATA_CLASS_GPRS	= 0x1,
+@@ -946,7 +947,7 @@ enum MBN_DATA_CLASS
+     } 	MBN_DATA_CLASS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("2308C1F7-BDC8-11DC-A8A8-001321F1405F") 
+-enum MBN_CTRL_CAPS
++enum  MBN_CTRL_CAPS
+     {
+         MBN_CTRL_CAPS_NONE	= 0,
+         MBN_CTRL_CAPS_REG_MANUAL	= 0x1,
+@@ -960,7 +961,7 @@ enum MBN_CTRL_CAPS
+     } 	MBN_CTRL_CAPS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("E4096459-BDC8-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_CAPS
++enum  MBN_SMS_CAPS
+     {
+         MBN_SMS_CAPS_NONE	= 0,
+         MBN_SMS_CAPS_PDU_RECEIVE	= 0x1,
+@@ -970,7 +971,7 @@ enum MBN_SMS_CAPS
+     } 	MBN_SMS_CAPS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("5DB6A98B-BDC5-11DC-A8A8-001321F1405F") 
+-enum MBN_BAND_CLASS
++enum  MBN_BAND_CLASS
+     {
+         MBN_BAND_CLASS_NONE	= 0,
+         MBN_BAND_CLASS_0	= 0x1,
+@@ -994,7 +995,7 @@ enum MBN_BAND_CLASS
+         MBN_BAND_CLASS_CUSTOM	= 0x80000000
+     } 	MBN_BAND_CLASS;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("CD1A4B17-BDC9-11DC-A8A8-001321F1405F") struct MBN_INTERFACE_CAPS
++typedef /* [uuid] */  DECLSPEC_UUID("CD1A4B17-BDC9-11DC-A8A8-001321F1405F") struct  MBN_INTERFACE_CAPS
+     {
+     MBN_CELLULAR_CLASS cellularClass;
+     MBN_VOICE_CLASS voiceClass;
+@@ -1011,7 +1012,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("CD1A4B17-BDC9-11DC-A8A8-001321F1405F") stru
+     BSTR firmwareInfo;
+     } 	MBN_INTERFACE_CAPS;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9005-4BBB-AAEE-338E368AF6FA") struct MBN_PROVIDER
++typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9005-4BBB-AAEE-338E368AF6FA") struct  MBN_PROVIDER
+     {
+     BSTR providerID;
+     ULONG providerState;
+@@ -1019,7 +1020,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9005-4BBB-AAEE-338E368AF6FA") stru
+     ULONG dataClass;
+     } 	MBN_PROVIDER;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("9AA005AE-540B-46F1-9244-8826D188F821") struct MBN_PROVIDER2
++typedef /* [uuid] */  DECLSPEC_UUID("9AA005AE-540B-46F1-9244-8826D188F821") struct  MBN_PROVIDER2
+     {
+     MBN_PROVIDER provider;
+     MBN_CELLULAR_CLASS cellularClass;
+@@ -1028,7 +1029,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("9AA005AE-540B-46F1-9244-8826D188F821") stru
+     } 	MBN_PROVIDER2;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6003-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_READY_STATE
++enum  MBN_READY_STATE
+     {
+         MBN_READY_STATE_OFF	= 0,
+         MBN_READY_STATE_INITIALIZED	= ( MBN_READY_STATE_OFF + 1 ) ,
+@@ -1042,7 +1043,7 @@ enum MBN_READY_STATE
+     } 	MBN_READY_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("EFB7C00D-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_ACTIVATION_STATE
++enum  MBN_ACTIVATION_STATE
+     {
+         MBN_ACTIVATION_STATE_NONE	= 0,
+         MBN_ACTIVATION_STATE_ACTIVATED	= ( MBN_ACTIVATION_STATE_NONE + 1 ) ,
+@@ -1052,14 +1053,14 @@ enum MBN_ACTIVATION_STATE
+     } 	MBN_ACTIVATION_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("F601E1EB-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_CONNECTION_MODE
++enum  MBN_CONNECTION_MODE
+     {
+         MBN_CONNECTION_MODE_PROFILE	= 0,
+         MBN_CONNECTION_MODE_TMP_PROFILE	= ( MBN_CONNECTION_MODE_PROFILE + 1 ) 
+     } 	MBN_CONNECTION_MODE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("6D8846E5-BDD1-11DC-A8A8-001321F1405F") 
+-enum MBN_VOICE_CALL_STATE
++enum  MBN_VOICE_CALL_STATE
+     {
+         MBN_VOICE_CALL_STATE_NONE	= 0,
+         MBN_VOICE_CALL_STATE_IN_PROGRESS	= ( MBN_VOICE_CALL_STATE_NONE + 1 ) ,
+@@ -1067,14 +1068,14 @@ enum MBN_VOICE_CALL_STATE
+     } 	MBN_VOICE_CALL_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("D5F1726B-BDCE-11DC-A8A8-001321F1405F") 
+-enum MBN_REGISTRATION_CONSTANTS
++enum  MBN_REGISTRATION_CONSTANTS
+     {
+         MBN_ROAMTEXT_LEN	= 64,
+         MBN_CDMA_DEFAULT_PROVIDER_ID	= 0
+     } 	MBN_REGISTRATION_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6009-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_REGISTER_STATE
++enum  MBN_REGISTER_STATE
+     {
+         MBN_REGISTER_STATE_NONE	= 0,
+         MBN_REGISTER_STATE_DEREGISTERED	= ( MBN_REGISTER_STATE_NONE + 1 ) ,
+@@ -1086,7 +1087,7 @@ enum MBN_REGISTER_STATE
+     } 	MBN_REGISTER_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("D7F73F35-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_REGISTER_MODE
++enum  MBN_REGISTER_MODE
+     {
+         MBN_REGISTER_MODE_NONE	= 0,
+         MBN_REGISTER_MODE_AUTOMATIC	= ( MBN_REGISTER_MODE_NONE + 1 ) ,
+@@ -1094,14 +1095,14 @@ enum MBN_REGISTER_MODE
+     } 	MBN_REGISTER_MODE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("C75E76F5-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_CONSTANTS
++enum  MBN_PIN_CONSTANTS
+     {
+         MBN_ATTEMPTS_REMAINING_UNKNOWN	= 0xffffffff,
+         MBN_PIN_LENGTH_UNKNOWN	= 0xffffffff
+     } 	MBN_PIN_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("D11BD29D-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_STATE
++enum  MBN_PIN_STATE
+     {
+         MBN_PIN_STATE_NONE	= 0,
+         MBN_PIN_STATE_ENTER	= ( MBN_PIN_STATE_NONE + 1 ) ,
+@@ -1109,7 +1110,7 @@ enum MBN_PIN_STATE
+     } 	MBN_PIN_STATE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("DCBBBAB6-6005-4BBB-AAEE-338E368AF6FA") 
+-enum MBN_PIN_TYPE
++enum  MBN_PIN_TYPE
+     {
+         MBN_PIN_TYPE_NONE	= 0,
+         MBN_PIN_TYPE_CUSTOM	= ( MBN_PIN_TYPE_NONE + 1 ) ,
+@@ -1124,7 +1125,7 @@ enum MBN_PIN_TYPE
+         MBN_PIN_TYPE_SUBSIDY_LOCK	= ( MBN_PIN_TYPE_CORPORATE_PIN + 1 ) 
+     } 	MBN_PIN_TYPE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9006-4BBB-AAEE-338E368AF6FA") struct MBN_PIN_INFO
++typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9006-4BBB-AAEE-338E368AF6FA") struct  MBN_PIN_INFO
+     {
+     MBN_PIN_STATE pinState;
+     MBN_PIN_TYPE pinType;
+@@ -1132,14 +1133,14 @@ typedef /* [uuid] */  DECLSPEC_UUID("DCBBBAB6-9006-4BBB-AAEE-338E368AF6FA") stru
+     } 	MBN_PIN_INFO;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("BD8A2871-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_MODE
++enum  MBN_PIN_MODE
+     {
+         MBN_PIN_MODE_ENABLED	= 1,
+         MBN_PIN_MODE_DISABLED	= ( MBN_PIN_MODE_ENABLED + 1 ) 
+     } 	MBN_PIN_MODE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("C2A93665-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_PIN_FORMAT
++enum  MBN_PIN_FORMAT
+     {
+         MBN_PIN_FORMAT_NONE	= 0,
+         MBN_PIN_FORMAT_NUMERIC	= ( MBN_PIN_FORMAT_NONE + 1 ) ,
+@@ -1151,7 +1152,7 @@ enum MBN_PIN_FORMAT
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("0E62803F-BDD0-11DC-A8A8-001321F1405F") 
+-enum MBN_CONTEXT_CONSTANTS
++enum  MBN_CONTEXT_CONSTANTS
+     {
+         MBN_ACCESSSTRING_LEN	= 100,
+         MBN_USERNAME_LEN	= 255,
+@@ -1160,7 +1161,7 @@ enum MBN_CONTEXT_CONSTANTS
+     } 	MBN_CONTEXT_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("E24B42EF-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_AUTH_PROTOCOL
++enum  MBN_AUTH_PROTOCOL
+     {
+         MBN_AUTH_PROTOCOL_NONE	= 0,
+         MBN_AUTH_PROTOCOL_PAP	= ( MBN_AUTH_PROTOCOL_NONE + 1 ) ,
+@@ -1169,14 +1170,14 @@ enum MBN_AUTH_PROTOCOL
+     } 	MBN_AUTH_PROTOCOL;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("E6A360B9-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_COMPRESSION
++enum  MBN_COMPRESSION
+     {
+         MBN_COMPRESSION_NONE	= 0,
+         MBN_COMPRESSION_ENABLE	= ( MBN_COMPRESSION_NONE + 1 ) 
+     } 	MBN_COMPRESSION;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("EB4731EB-BDCD-11DC-A8A8-001321F1405F") 
+-enum MBN_CONTEXT_TYPE
++enum  MBN_CONTEXT_TYPE
+     {
+         MBN_CONTEXT_TYPE_NONE	= 0,
+         MBN_CONTEXT_TYPE_INTERNET	= ( MBN_CONTEXT_TYPE_NONE + 1 ) ,
+@@ -1187,7 +1188,7 @@ enum MBN_CONTEXT_TYPE
+         MBN_CONTEXT_TYPE_PURCHASE	= ( MBN_CONTEXT_TYPE_CUSTOM + 1 ) 
+     } 	MBN_CONTEXT_TYPE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("FE1F7B6F-BDCD-11DC-A8A8-001321F1405F") struct MBN_CONTEXT
++typedef /* [uuid] */  DECLSPEC_UUID("FE1F7B6F-BDCD-11DC-A8A8-001321F1405F") struct  MBN_CONTEXT
+     {
+     ULONG contextID;
+     MBN_CONTEXT_TYPE contextType;
+@@ -1207,7 +1208,7 @@ enum MBN_SMS_CONSTANTS
+     } 	WWAEXT_SMS_CONSTANTS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("FC208FC1-BDE5-11DC-A8A8-001321F1405F") 
+-enum MBN_MSG_STATUS
++enum  MBN_MSG_STATUS
+     {
+         MBN_MSG_STATUS_NEW	= 0,
+         MBN_MSG_STATUS_OLD	= ( MBN_MSG_STATUS_NEW + 1 ) ,
+@@ -1216,7 +1217,7 @@ enum MBN_MSG_STATUS
+     } 	MBN_MSG_STATUS;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("29912B29-BDD4-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_CDMA_LANG
++enum  MBN_SMS_CDMA_LANG
+     {
+         MBN_SMS_CDMA_LANG_NONE	= 0,
+         MBN_SMS_CDMA_LANG_ENGLISH	= ( MBN_SMS_CDMA_LANG_NONE + 1 ) ,
+@@ -1229,7 +1230,7 @@ enum MBN_SMS_CDMA_LANG
+     } 	MBN_SMS_CDMA_LANG;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("7F8E74CB-BDD4-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_CDMA_ENCODING
++enum  MBN_SMS_CDMA_ENCODING
+     {
+         MBN_SMS_CDMA_ENCODING_OCTET	= 0,
+         MBN_SMS_CDMA_ENCODING_EPM	= ( MBN_SMS_CDMA_ENCODING_OCTET + 1 ) ,
+@@ -1244,7 +1245,7 @@ enum MBN_SMS_CDMA_ENCODING
+     } 	MBN_SMS_CDMA_ENCODING;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("0D42B514-BDDC-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_FLAG
++enum  MBN_SMS_FLAG
+     {
+         MBN_SMS_FLAG_ALL	= 0,
+         MBN_SMS_FLAG_INDEX	= ( MBN_SMS_FLAG_ALL + 1 ) ,
+@@ -1254,28 +1255,28 @@ enum MBN_SMS_FLAG
+         MBN_SMS_FLAG_DRAFT	= ( MBN_SMS_FLAG_SENT + 1 ) 
+     } 	MBN_SMS_FLAG;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("406BFD60-BDDC-11DC-A8A8-001321F1405F") struct MBN_SMS_FILTER
++typedef /* [uuid] */  DECLSPEC_UUID("406BFD60-BDDC-11DC-A8A8-001321F1405F") struct  MBN_SMS_FILTER
+     {
+     MBN_SMS_FLAG flag;
+     ULONG messageIndex;
+     } 	MBN_SMS_FILTER;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("8098009D-BDDC-11DC-A8A8-001321F1405F") 
+-enum MBN_SMS_STATUS_FLAG
++enum  MBN_SMS_STATUS_FLAG
+     {
+         MBN_SMS_FLAG_NONE	= 0,
+         MBN_SMS_FLAG_MESSAGE_STORE_FULL	= 0x1,
+         MBN_SMS_FLAG_NEW_MESSAGE	= 0x2
+     } 	MBN_SMS_STATUS_FLAG;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("1F6E9CA3-BDE6-11DC-A8A8-001321F1405F") struct MBN_SMS_STATUS_INFO
++typedef /* [uuid] */  DECLSPEC_UUID("1F6E9CA3-BDE6-11DC-A8A8-001321F1405F") struct  MBN_SMS_STATUS_INFO
+     {
+     ULONG flag;
+     ULONG messageIndex;
+     } 	MBN_SMS_STATUS_INFO;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("4B0FE227-3709-41e2-8A78-E98C0CD0CB09") 
+-enum MBN_SMS_FORMAT
++enum  MBN_SMS_FORMAT
+     {
+         MBN_SMS_FORMAT_NONE	= 0,
+         MBN_SMS_FORMAT_PDU	= 0x1,
+@@ -1283,7 +1284,7 @@ enum MBN_SMS_FORMAT
+     } 	MBN_SMS_FORMAT;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("532A3FE4-BDE6-11DC-A8A8-001321F1405F") 
+-enum MBN_RADIO
++enum  MBN_RADIO
+     {
+         MBN_RADIO_OFF	= 0,
+         MBN_RADIO_ON	= ( MBN_RADIO_OFF + 1 ) 
+@@ -1299,7 +1300,7 @@ enum MBN_DEVICE_SERVICE_SESSIONS_STATE
+ #pragma endregion
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-typedef /* [uuid] */  DECLSPEC_UUID("60436154-3466-48A4-82E2-9A461527A8C5") struct MBN_DEVICE_SERVICE
++typedef /* [uuid] */  DECLSPEC_UUID("60436154-3466-48A4-82E2-9A461527A8C5") struct  MBN_DEVICE_SERVICE
+     {
+     BSTR deviceServiceID;
+     VARIANT_BOOL dataWriteSupported;
+@@ -1307,7 +1308,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("60436154-3466-48A4-82E2-9A461527A8C5") stru
+     } 	MBN_DEVICE_SERVICE;
+ 
+ typedef /* [helpstring][v1_enum][version][uuid] */  DECLSPEC_UUID("386077A0-275B-45B6-9B32-C343A6749E86") 
+-enum MBN_DEVICE_SERVICES_INTERFACE_STATE
++enum  MBN_DEVICE_SERVICES_INTERFACE_STATE
+     {
+         MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL	= 0,
+         MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_REMOVAL	= ( MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL + 1 ) 
+@@ -1329,15 +1330,15 @@ EXTERN_C const IID IID_IMbnConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-200D-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-200D-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnection : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectionID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *ConnectionID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ConnectionID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InterfaceID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *InterfaceID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *InterfaceID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Connect( 
+             /* [annotation][in] */ 
+@@ -1353,7 +1354,7 @@ EXTERN_C const IID IID_IMbnConnection;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetConnectionState( 
+             /* [ref][out] */ __RPC__out MBN_ACTIVATION_STATE *ConnectionState,
+-            /* [ref][out] */ __RPC__deref_out_opt BSTR *ProfileName) = 0;
++            /* [ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ProfileName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetVoiceCallState( 
+             /* [retval][ref][out] */ __RPC__out MBN_VOICE_CALL_STATE *voiceCallState) = 0;
+@@ -1503,7 +1504,7 @@ EXTERN_C const IID IID_IMbnConnectionEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-200E-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-200E-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionEvents : public IUnknown
+     {
+     public:
+@@ -1654,12 +1655,12 @@ EXTERN_C const IID IID_IMbnInterface;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2001-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2001-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnInterface : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InterfaceID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *InterfaceID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *InterfaceID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetInterfaceCapability( 
+             /* [retval][ref][out] */ __RPC__out MBN_INTERFACE_CAPS *interfaceCaps) = 0;
+@@ -1876,7 +1877,7 @@ EXTERN_C const IID IID_IMbnInterfaceEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2002-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2002-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnInterfaceEvents : public IUnknown
+     {
+     public:
+@@ -2079,7 +2080,7 @@ EXTERN_C const IID IID_IMbnInterfaceManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-201B-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-201B-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnInterfaceManager : public IUnknown
+     {
+     public:
+@@ -2188,7 +2189,7 @@ EXTERN_C const IID IID_IMbnInterfaceManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-201C-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-201C-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnInterfaceManagerEvents : public IUnknown
+     {
+     public:
+@@ -2297,7 +2298,7 @@ EXTERN_C const IID IID_IMbnRegistration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2009-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2009-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnRegistration : public IUnknown
+     {
+     public:
+@@ -2308,13 +2309,13 @@ EXTERN_C const IID IID_IMbnRegistration;
+             /* [retval][ref][out] */ __RPC__out MBN_REGISTER_MODE *registerMode) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetProviderID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *providerID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *providerID) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetProviderName( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *providerName) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *providerName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRoamingText( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *roamingText) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *roamingText) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAvailableDataClasses( 
+             /* [retval][ref][out] */ __RPC__out ULONG *availableDataClasses) = 0;
+@@ -2504,7 +2505,7 @@ EXTERN_C const IID IID_IMbnRegistrationEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-200A-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-200A-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnRegistrationEvents : public IUnknown
+     {
+     public:
+@@ -2647,7 +2648,7 @@ EXTERN_C const IID IID_IMbnConnectionManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-201D-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-201D-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionManager : public IUnknown
+     {
+     public:
+@@ -2756,7 +2757,7 @@ EXTERN_C const IID IID_IMbnConnectionManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-201E-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-201E-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionManagerEvents : public IUnknown
+     {
+     public:
+@@ -2865,7 +2866,7 @@ EXTERN_C const IID IID_IMbnPinManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2005-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2005-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnPinManager : public IUnknown
+     {
+     public:
+@@ -2987,7 +2988,7 @@ EXTERN_C const IID IID_IMbnPinManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2006-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2006-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnPinManagerEvents : public IUnknown
+     {
+     public:
+@@ -3108,7 +3109,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2008-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2008-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnPinEvents : public IUnknown
+     {
+     public:
+@@ -3310,15 +3311,15 @@ EXTERN_C const IID IID_IMbnSubscriberInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("459ECC43-BCF5-11DC-A8A8-001321F1405F")
++    MIDL_INTERFACE("459ECC43-BCF5-11DC-A8A8-001321F1405F") _Windows_SupportedOS_Windows7_ 
+     IMbnSubscriberInformation : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubscriberID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *SubscriberID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *SubscriberID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SimIccID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *SimIccID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *SimIccID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TelephoneNumbers( 
+             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *TelephoneNumbers) = 0;
+@@ -3426,7 +3427,7 @@ EXTERN_C const IID IID_IMbnSignal;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2003-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2003-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSignal : public IUnknown
+     {
+     public:
+@@ -3531,7 +3532,7 @@ EXTERN_C const IID IID_IMbnSignalEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2004-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2004-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSignalEvents : public IUnknown
+     {
+     public:
+@@ -3627,7 +3628,7 @@ EXTERN_C const IID IID_IMbnConnectionContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-200B-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-200B-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionContext : public IUnknown
+     {
+     public:
+@@ -3742,7 +3743,7 @@ EXTERN_C const IID IID_IMbnConnectionContextEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-200C-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-200C-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionContextEvents : public IUnknown
+     {
+     public:
+@@ -3859,7 +3860,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-200F-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-200F-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionProfileManager : public IUnknown
+     {
+     public:
+@@ -3989,12 +3990,12 @@ EXTERN_C const IID IID_IMbnConnectionProfile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2010-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2010-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionProfile : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetProfileXmlData( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *profileData) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *profileData) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UpdateProfile( 
+             /* [annotation][string][in] */ 
+@@ -4105,7 +4106,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2011-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2011-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionProfileEvents : public IUnknown
+     {
+     public:
+@@ -4201,12 +4202,12 @@ EXTERN_C const IID IID_IMbnSmsConfiguration;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2012-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2012-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSmsConfiguration : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceCenterAddress( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *scAddress) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *scAddress) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ServiceCenterAddress( 
+             /* [annotation][in] */ 
+@@ -4354,7 +4355,7 @@ EXTERN_C const IID IID_IMbnSmsReadMsgPdu;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2013-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2013-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSmsReadMsgPdu : public IUnknown
+     {
+     public:
+@@ -4365,7 +4366,7 @@ EXTERN_C const IID IID_IMbnSmsReadMsgPdu;
+             /* [retval][ref][out] */ __RPC__out MBN_MSG_STATUS *Status) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PduData( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *PduData) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *PduData) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Message( 
+             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *Message) = 0;
+@@ -4481,7 +4482,7 @@ EXTERN_C const IID IID_IMbnSmsReadMsgTextCdma;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2014-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2014-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSmsReadMsgTextCdma : public IUnknown
+     {
+     public:
+@@ -4492,10 +4493,10 @@ EXTERN_C const IID IID_IMbnSmsReadMsgTextCdma;
+             /* [retval][ref][out] */ __RPC__out MBN_MSG_STATUS *Status) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *Address) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Address) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *Timestamp) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *Timestamp) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EncodingID( 
+             /* [retval][ref][out] */ __RPC__out MBN_SMS_CDMA_ENCODING *EncodingID) = 0;
+@@ -4652,7 +4653,7 @@ EXTERN_C const IID IID_IMbnSms;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2015-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2015-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSms : public IUnknown
+     {
+     public:
+@@ -4879,7 +4880,7 @@ EXTERN_C const IID IID_IMbnSmsEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2016-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2016-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnSmsEvents : public IUnknown
+     {
+     public:
+@@ -5105,7 +5106,7 @@ EXTERN_C const IID IID_IMbnServiceActivation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2017-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2017-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnServiceActivation : public IUnknown
+     {
+     public:
+@@ -5205,7 +5206,7 @@ EXTERN_C const IID IID_IMbnServiceActivationEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2018-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2018-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnServiceActivationEvents : public IUnknown
+     {
+     public:
+@@ -5317,7 +5318,7 @@ EXTERN_C const IID IID_IMbnVendorSpecificOperation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2019-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2019-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnVendorSpecificOperation : public IUnknown
+     {
+     public:
+@@ -5415,7 +5416,7 @@ EXTERN_C const IID IID_IMbnVendorSpecificEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-201A-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-201A-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnVendorSpecificEvents : public IUnknown
+     {
+     public:
+@@ -5536,7 +5537,7 @@ EXTERN_C const IID IID_IMbnConnectionProfileManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-201F-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-201F-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnConnectionProfileManagerEvents : public IUnknown
+     {
+     public:
+@@ -5645,7 +5646,7 @@ EXTERN_C const IID IID_IMbnRadio;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCCCCAB6-201F-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCCCCAB6-201F-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnRadio : public IUnknown
+     {
+     public:
+@@ -5767,7 +5768,7 @@ EXTERN_C const IID IID_IMbnRadioEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCDDDAB6-201F-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCDDDAB6-201F-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnRadioEvents : public IUnknown
+     {
+     public:
+@@ -5884,7 +5885,7 @@ EXTERN_C const IID IID_IMbnMultiCarrier;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2020-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2020-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows8_ 
+     IMbnMultiCarrier : public IUnknown
+     {
+     public:
+@@ -6047,7 +6048,7 @@ EXTERN_C const IID IID_IMbnMultiCarrierEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCDDDAB6-2021-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCDDDAB6-2021-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows8_ 
+     IMbnMultiCarrierEvents : public IUnknown
+     {
+     public:
+@@ -6315,7 +6316,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("20A26258-6811-4478-AC1D-13324E45E41C")
++    MIDL_INTERFACE("20A26258-6811-4478-AC1D-13324E45E41C") _Windows_SupportedOS_Windows8_ 
+     IMbnDeviceServicesManager : public IUnknown
+     {
+     public:
+@@ -6413,7 +6414,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FC5AC347-1592-4068-80BB-6A57580150D8")
++    MIDL_INTERFACE("FC5AC347-1592-4068-80BB-6A57580150D8") _Windows_SupportedOS_Windows8_ 
+     IMbnDeviceServicesContext : public IUnknown
+     {
+     public:
+@@ -6546,7 +6547,7 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0A900C19-6824-4E97-B76E-CF239D0CA642")
++    MIDL_INTERFACE("0A900C19-6824-4E97-B76E-CF239D0CA642") _Windows_SupportedOS_Windows8_ 
+     IMbnDeviceServicesEvents : public IUnknown
+     {
+     public:
+@@ -6872,7 +6873,7 @@ EXTERN_C const IID IID_IMbnDeviceService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B3BB9A71-DC70-4BE9-A4DA-7886AE8B191B")
++    MIDL_INTERFACE("B3BB9A71-DC70-4BE9-A4DA-7886AE8B191B") _Windows_SupportedOS_Windows8_ 
+     IMbnDeviceService : public IUnknown
+     {
+     public:
+@@ -6917,10 +6918,10 @@ EXTERN_C const IID IID_IMbnDeviceService;
+             _Out_  ULONG *requestID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InterfaceID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *InterfaceID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *InterfaceID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceServiceID( 
+-            /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *DeviceServiceID) = 0;
++            /* [retval][ref][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *DeviceServiceID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsCommandSessionOpen( 
+             /* [retval][ref][out] */ __RPC__out BOOL *value) = 0;
+@@ -7211,7 +7212,7 @@ EXTERN_C const IID IID_IMbnPin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DCBBBAB6-2007-4BBB-AAEE-338E368AF6FA")
++    MIDL_INTERFACE("DCBBBAB6-2007-4BBB-AAEE-338E368AF6FA") _Windows_SupportedOS_Windows7_ 
+     IMbnPin : public IUnknown
+     {
+     public:

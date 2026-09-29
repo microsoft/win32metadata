@@ -1,0 +1,207 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h b/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h
+index cd5956dd0b..b4db7896b8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/compstui.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1990-1995  Microsoft Corporation
+@@ -638,7 +639,7 @@ extern "C" {
+ #define OPTPF_MASK                  0x7f
+ #endif
+ 
+-typedef struct _OPTPARAM {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _OPTPARAM {
+     WORD        cbSize;         // size of this structure
+     BYTE        Flags;          // OPTPF_xxxx flags
+     BYTE        Style;          // style use in this structure
+@@ -761,7 +762,7 @@ typedef struct _OPTPARAM {
+ 
+ #define OPTCF_MASK      0x01
+ 
+-typedef struct _OPTCOMBO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _OPTCOMBO {
+     WORD        cbSize;
+     BYTE        Flags;
+     WORD        cListItem;
+@@ -822,7 +823,7 @@ typedef struct _OPTCOMBO {
+ #define OTS_MASK                        0x00ff
+ #endif
+ 
+-typedef struct _OPTTYPE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _OPTTYPE {
+     WORD        cbSize;
+     BYTE        Type;           // TVOT_xxxx type of OPTIONS
+     BYTE        Flags;          // OPTTF_xxx flags
+@@ -985,7 +986,7 @@ typedef struct _OPTTYPE {
+ #define EPF_MASK                    0x00ff
+ #endif
+ 
+-typedef struct _EXTPUSH {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _EXTPUSH {
+     WORD                cbSize;         // size of the structure
+     WORD                Flags;          // EPCBF_xxx flags
+     LPTSTR              pTitle;         // extended push botton title
+@@ -1117,7 +1118,7 @@ typedef struct _EXTPUSH {
+ #define ECBF_MASK                       0x00ff
+ #endif
+ 
+-typedef struct _EXTCHKBOX {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _EXTCHKBOX {
+     WORD        cbSize;         // size of the structure
+     WORD        Flags;          // ECBF_xxx flags
+     LPTSTR      pTitle;         // extended checkbox title
+@@ -1394,7 +1395,7 @@ typedef struct _EXTCHKBOX {
+ 
+ #define OIEXTF_ANSI_STRING      0x0001
+ 
+-typedef struct _OIEXT {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _OIEXT {
+     WORD        cbSize;
+     WORD        Flags;
+     HINSTANCE   hInstCaller;
+@@ -1431,7 +1432,7 @@ typedef struct _OIEXT {
+ //
+ 
+ 
+-typedef struct _OPTITEM {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _OPTITEM {
+     WORD        cbSize;                 // size of this structure
+     BYTE        Level;                  // level in the tree view
+     BYTE        DlgPageIdx;             // Index to the pDlgPage
+@@ -1756,7 +1757,7 @@ typedef struct _OPTITEM {
+ #define CPSUICB_ACTION_ITEMS_APPLIED    4
+ 
+ 
+-typedef struct _CPSUICBPARAM {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _CPSUICBPARAM {
+     WORD        cbSize;             // size of this structure
+     WORD        Reason;             // CPSUICB_REASON_XXXXX callback reason
+     HWND        hDlg;               // handle of the dialog box
+@@ -1773,7 +1774,7 @@ typedef struct _CPSUICBPARAM {
+     } CPSUICBPARAM, *PCPSUICBPARAM;
+ 
+ 
+-typedef LONG (APIENTRY *_CPSUICALLBACK)(PCPSUICBPARAM pCPSUICBParam);
++typedef LONG (APIENTRY *_CPSUICALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCPSUICBPARAM pCPSUICBParam);
+ #define CPSUICALLBACK   LONG APIENTRY
+ 
+ 
+@@ -1978,7 +1979,7 @@ typedef LONG (APIENTRY *_CPSUICALLBACK)(PCPSUICBPARAM pCPSUICBParam);
+ #define DPF_ICONID_AS_HICON             0x0001
+ #define DPF_USE_HDLGTEMPLATE            0x0002
+ 
+-typedef struct _DLGPAGE {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DLGPAGE {
+     WORD        cbSize;         // size of this structure
+     WORD        Flags;          // DPF_xxxx flags
+     DLGPROC     DlgProc;        // caller's dialog box subclass procedue
+@@ -2140,7 +2141,7 @@ typedef struct _DLGPAGE {
+ 
+ #define CPSUI_PDLGPAGE_TREEVIWONLY      CPSUI_PDLGPAGE_TREEVIEWONLY
+ 
+-typedef struct _COMPROPSHEETUI {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _COMPROPSHEETUI {
+     WORD            cbSize;             // size of this structure
+     WORD            Flags;              // CPSUIF_xxxx flags
+     HINSTANCE       hInstCaller;        // caller's hInstance
+@@ -2349,7 +2350,7 @@ typedef struct _COMPROPSHEETUI {
+ #define SR_OWNER            0
+ #define SR_OWNER_PARENT     1
+ 
+-typedef struct _SETRESULT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _SETRESULT_INFO {
+     WORD        cbSize;
+     WORD        wReserved;
+     HANDLE      hSetResult;
+@@ -2380,7 +2381,7 @@ typedef struct _SETRESULT_INFO {
+ #define INSPSUIPAGE_MODE_INDEX          4
+ 
+ 
+-typedef struct _INSERTPSUIPAGE_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _INSERTPSUIPAGE_INFO {
+     WORD        cbSize;
+     BYTE        Type;
+     BYTE        Mode;
+@@ -2404,7 +2405,7 @@ typedef LONG_PTR (CALLBACK *PFNCOMPROPSHEET)(HANDLE hComPropSheet,
+                                              LPARAM lParam2);
+ 
+ 
+-typedef struct _PSPINFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PSPINFO {
+     WORD            cbSize;
+     WORD            wReserved;
+     HANDLE          hComPropSheet;
+@@ -3259,7 +3260,7 @@ typedef struct _CPSUIDATABLOCK {
+ 
+ #define PSUIINFO_UNICODE                    0x0001
+ 
+-typedef struct _PROPSHEETUI_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PROPSHEETUI_INFO {
+     WORD            cbSize;
+     WORD            Version;
+     WORD            Flags;
+@@ -3277,7 +3278,7 @@ typedef struct _PROPSHEETUI_INFO {
+ // PROPSHEETUI_GETICON_INFO
+ //
+ 
+-typedef struct _PROPSHEETUI_GETICON_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PROPSHEETUI_GETICON_INFO {
+     WORD    cbSize;
+     WORD    Flags;
+     WORD    cxIcon;
+@@ -3286,7 +3287,7 @@ typedef struct _PROPSHEETUI_GETICON_INFO {
+     } PROPSHEETUI_GETICON_INFO, *PPROPSHEETUI_GETICON_INFO;
+ 
+ 
+-typedef LONG (FAR WINAPI *PFNPROPSHEETUI)(PPROPSHEETUI_INFO   pPSUIInfo,
++typedef LONG (FAR WINAPI *PFNPROPSHEETUI)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPROPSHEETUI_INFO   pPSUIInfo,
+                                    LPARAM              lParam);
+ 
+ 
+@@ -3610,7 +3611,7 @@ typedef LONG (FAR WINAPI *PFNPROPSHEETUI)(PPROPSHEETUI_INFO   pPSUIInfo,
+ #define PSUIHDRF_DEFTITLE       0x0010
+ #define PSUIHDRF_EXACT_PTITLE   0x0020
+ 
+-typedef struct _PROPSHEETUI_INFO_HEADER {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PROPSHEETUI_INFO_HEADER {
+     WORD                    cbSize;
+     WORD                    Flags;
+     LPTSTR                  pTitle;
+@@ -3766,7 +3767,7 @@ typedef struct _PROPSHEETUI_INFO_HEADER {
+ 
+ LONG
+ APIENTRY
+-CommonPropertySheetUIA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") CommonPropertySheetUIA(
+     HWND hWndOwner,
+     __callback PFNPROPSHEETUI pfnPropSheetUI,
+     LPARAM lParam,
+@@ -3775,7 +3776,7 @@ CommonPropertySheetUIA(
+ 
+ LONG
+ APIENTRY
+-CommonPropertySheetUIW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") CommonPropertySheetUIW(
+     HWND hWndOwner,
+     __callback PFNPROPSHEETUI pfnPropSheetUI,
+     LPARAM lParam,
+@@ -3786,7 +3787,7 @@ CommonPropertySheetUIW(
+ 
+ LONG
+ APIENTRY
+-CommonPropertySheetUIA(
++_WIN32META_ANNOTATION_("win32metadata:ansi") CommonPropertySheetUIA(
+     HWND hWndOwner,
+     PFNPROPSHEETUI pfnPropSheetUI,
+     LPARAM lParam,
+@@ -3795,7 +3796,7 @@ CommonPropertySheetUIA(
+ 
+ LONG
+ APIENTRY
+-CommonPropertySheetUIW(
++_WIN32META_ANNOTATION_("win32metadata:unicode") CommonPropertySheetUIW(
+     HWND hWndOwner,
+     PFNPROPSHEETUI pfnPropSheetUI,
+     LPARAM lParam,

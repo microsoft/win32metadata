@@ -1,6 +1,13 @@
+param(
+    [switch]$SkipInstallTools,
+    [switch]$SkipSDKPatches
+)
+
 . "$PSScriptRoot\CommonUtils.ps1"
 
-Install-BuildTools
+if (!$SkipInstallTools) {
+    Install-BuildTools
+}
 
 $cppPkgPath = Get-WinSdkCppPkgPath
 $sdkBinDir = "$cppPkgPath\c\bin\$([System.IO.Path]::GetFileName($cppPkgPath) -replace "\d+$", "0")\x86"
@@ -44,9 +51,14 @@ Copy-Item "$d3dIncludeDir\dxgiformat.*" "$recompiledIdlHeadersDir\shared" -Recur
 Write-Host "Copying additional headers from $windowsWin32ProjectRoot\AdditionalHeaders to $recompiledIdlHeadersDir\um..."
 Copy-Item "$windowsWin32ProjectRoot\AdditionalHeaders\*" "$recompiledIdlHeadersDir\um" -Recurse
 
-Write-Host "Applying SDK patches to IDL files (pre-MIDL)..."
-& $PSScriptRoot\ApplySDKPatches.ps1 -Phase pre-midl
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+if ($SkipSDKPatches) {
+    Write-Host "Skipping SDK patches to IDL files (pre-MIDL)."
+}
+else {
+    Write-Host "Applying SDK patches to IDL files (pre-MIDL)..."
+    & $PSScriptRoot\ApplySDKPatches.ps1 -Phase pre-midl
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
 
 Write-Host "Converting MIDL attributes to SAL annotations..."
 $idlFilesToRecompile = [System.Collections.ArrayList]@()
@@ -187,8 +199,13 @@ foreach ($winHvHeader in $winHvHeadersToRestore) {
     Copy-Item (Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders\$winHvHeader") $fullPath -Force
 }
 
-Write-Host "Applying SDK patches to header files (post-MIDL)..."
-& $PSScriptRoot\ApplySDKPatches.ps1 -Phase post-midl
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+if ($SkipSDKPatches) {
+    Write-Host "Skipping SDK patches to header files (post-MIDL)."
+}
+else {
+    Write-Host "Applying SDK patches to header files (post-MIDL)..."
+    & $PSScriptRoot\ApplySDKPatches.ps1 -Phase post-midl
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
 
 $ErrorActionPreference = "Stop"

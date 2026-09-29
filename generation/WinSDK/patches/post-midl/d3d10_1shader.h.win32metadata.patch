@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10_1shader.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10_1shader.h
+index b8908a49ff..e42a3753a2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d10_1shader.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d10_1shader.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //////////////////////////////////////////////////////////////////////////////
+ //
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -77,7 +78,7 @@ typedef struct _D3D10_SHADER_DEBUG_VAR_INFO
+ {
+     // Index into token list for declaring identifier
+     UINT TokenId;
+-    D3D10_SHADER_VARIABLE_TYPE Type;
++    _Win32_AssociatedEnum_(D3D_SHADER_VARIABLE_TYPE) D3D10_SHADER_VARIABLE_TYPE Type;
+     // register and component for this variable, only valid/necessary for arrays
+     UINT Register;
+     UINT Component;
+@@ -110,7 +111,7 @@ typedef struct _D3D10_SHADER_DEBUG_SCOPEVAR_INFO
+     UINT TokenId;
+ 
+     D3D10_SHADER_DEBUG_VARTYPE VarType; // variable or function (different namespaces)
+-    D3D10_SHADER_VARIABLE_CLASS Class;
++    _Win32_AssociatedEnum_(D3D_SHADER_VARIABLE_CLASS) D3D10_SHADER_VARIABLE_CLASS Class;
+     UINT Rows;          // number of rows (matrices)
+     UINT Columns;       // number of columns (vectors and matrices)
+ 
+@@ -260,7 +261,7 @@ DEFINE_GUID(IID_ID3D10ShaderReflection1,
+ #undef INTERFACE
+ #define INTERFACE ID3D10ShaderReflection1
+ 
+-DECLARE_INTERFACE_(ID3D10ShaderReflection1, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D10ShaderReflection1, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ REFIID iid, LPVOID *ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -285,7 +286,7 @@ DECLARE_INTERFACE_(ID3D10ShaderReflection1, IUnknown)
+     STDMETHOD(GetConversionInstructionCount)(THIS_ _Out_ UINT* pCount) PURE;
+     STDMETHOD(GetBitwiseInstructionCount)(THIS_ _Out_ UINT* pCount) PURE;
+     
+-    STDMETHOD(GetGSInputPrimitive)(THIS_ _Out_ D3D10_PRIMITIVE* pPrim) PURE;
++    STDMETHOD(GetGSInputPrimitive)(THIS_ _Win32_AssociatedEnum_(D3D_PRIMITIVE) _Out_ D3D10_PRIMITIVE* pPrim) PURE;
+     STDMETHOD(IsLevel9Shader)(THIS_ _Out_ BOOL* pbLevel9Shader) PURE;
+     STDMETHOD(IsSampleFrequencyShader)(THIS_ _Out_ BOOL* pbSampleFrequency) PURE;
+ };

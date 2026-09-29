@@ -1,0 +1,13 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Sti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Sti.h
+index 45fe83b845..a7db21057c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Sti.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Sti.h
+@@ -628,7 +628,7 @@ interface IStillImageW;
+ 
+ interface IStiDevice;
+ 
+-STDMETHODIMP StiCreateInstanceW(HINSTANCE hinst, DWORD dwVer, interface IStillImageW **ppSti, LPUNKNOWN punkOuter);
++STDMETHODIMP StiCreateInstanceW(HINSTANCE hinst, DWORD dwVer, _COM_Outptr_ interface IStillImageW **ppSti, LPUNKNOWN punkOuter);
+ 
+ #if defined(UNICODE) || defined(STI_UNICODE)
+ #define IID_IStillImage     IID_IStillImageW

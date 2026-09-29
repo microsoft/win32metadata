@@ -1,0 +1,127 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h b/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h
+index 582aa5c818..521b16f59e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mergemod.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*****************************************************************************\
+                                                                              
+  mergemod.h - - Interface for MergeMod COM object                            
+@@ -276,8 +277,8 @@ extern RPC_IF_HANDLE __MIDL_itf_mergemod_0000_v0_0_s_ifspec;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [in] */ unsigned long cFetch,
+-            /* [out] */ BSTR __RPC_FAR *rgbstrStrings,
+-            /* [retval][out] */ unsigned long __RPC_FAR *pcFetched) = 0;
++            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *rgbstrStrings,
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned long __RPC_FAR *pcFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ unsigned long cSkip) = 0;
+@@ -434,10 +435,10 @@ void __RPC_STUB IEnumMsmString_Clone_Stub(
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
+             /* [in] */ long Item,
+-            /* [retval][out] */ BSTR __RPC_FAR *Return) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *Return) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+-            /* [retval][out] */ long __RPC_FAR *Count) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long __RPC_FAR *Count) = 0;
+         
+         virtual /* [hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+             /* [retval][out] */ IUnknown __RPC_FAR *__RPC_FAR *NewEnum) = 0;
+@@ -608,22 +609,22 @@ void __RPC_STUB IMsmStrings_get__NewEnum_Stub(
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+-            /* [retval][out] */ msmErrorType __RPC_FAR *ErrorType) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") msmErrorType __RPC_FAR *ErrorType) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+-            /* [retval][out] */ BSTR __RPC_FAR *ErrorPath) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *ErrorPath) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Language( 
+-            /* [retval][out] */ short __RPC_FAR *ErrorLanguage) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") short __RPC_FAR *ErrorLanguage) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DatabaseTable( 
+-            /* [retval][out] */ BSTR __RPC_FAR *ErrorTable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *ErrorTable) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DatabaseKeys( 
+             /* [retval][out] */ IMsmStrings __RPC_FAR *__RPC_FAR *ErrorKeys) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModuleTable( 
+-            /* [retval][out] */ BSTR __RPC_FAR *ErrorTable) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *ErrorTable) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModuleKeys( 
+             /* [retval][out] */ IMsmStrings __RPC_FAR *__RPC_FAR *ErrorKeys) = 0;
+@@ -870,7 +871,7 @@ void __RPC_STUB IMsmError_get_ModuleKeys_Stub(
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [in] */ unsigned long cFetch,
+             /* [out] */ IMsmError __RPC_FAR *__RPC_FAR *rgmsmErrors,
+-            /* [retval][out] */ unsigned long __RPC_FAR *pcFetched) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned long __RPC_FAR *pcFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ unsigned long cSkip) = 0;
+@@ -1027,7 +1028,7 @@ void __RPC_STUB IEnumMsmError_Clone_Stub(
+             /* [retval][out] */ IMsmError __RPC_FAR *__RPC_FAR *Return) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+-            /* [retval][out] */ long __RPC_FAR *Count) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long __RPC_FAR *Count) = 0;
+         
+         virtual /* [hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+             /* [retval][out] */ IUnknown __RPC_FAR *__RPC_FAR *NewEnum) = 0;
+@@ -1199,13 +1200,13 @@ void __RPC_STUB IMsmErrors_get__NewEnum_Stub(
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Module( 
+-            /* [retval][out] */ BSTR __RPC_FAR *Module) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *Module) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Language( 
+-            /* [retval][out] */ short __RPC_FAR *Language) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") short __RPC_FAR *Language) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Version( 
+-            /* [retval][out] */ BSTR __RPC_FAR *Version) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR __RPC_FAR *Version) = 0;
+         
+     };
+     
+@@ -1373,7 +1374,7 @@ void __RPC_STUB IMsmDependency_get_Version_Stub(
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+             /* [in] */ unsigned long cFetch,
+             /* [out] */ IMsmDependency __RPC_FAR *__RPC_FAR *rgmsmDependencies,
+-            /* [retval][out] */ unsigned long __RPC_FAR *pcFetched) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned long __RPC_FAR *pcFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Skip( 
+             /* [in] */ unsigned long cSkip) = 0;
+@@ -1530,7 +1531,7 @@ void __RPC_STUB IEnumMsmDependency_Clone_Stub(
+             /* [retval][out] */ IMsmDependency __RPC_FAR *__RPC_FAR *Return) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
+-            /* [retval][out] */ long __RPC_FAR *Count) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long __RPC_FAR *Count) = 0;
+         
+         virtual /* [hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
+             /* [retval][out] */ IUnknown __RPC_FAR *__RPC_FAR *NewEnum) = 0;
+@@ -3649,8 +3650,12 @@ DEFINE_GUID(IID_IMsmConfigurableItem, 0x4D6E6284, 0xD21D, 0x401E, 0x84, 0xF6, 0x
+ DEFINE_GUID(IID_IEnumMsmConfigurableItem, 0x832C6969, 0x4826, 0x4C24, 0xA3, 0x97, 0xB7, 0x00, 0x2D, 0x81, 0x96, 0xE6);
+ DEFINE_GUID(IID_IMsmConfigurableItems, 0x55BF723C, 0x9A0D, 0x463E, 0xB4, 0x2B, 0xB4, 0xFB, 0xC7, 0xBE, 0x3C, 0x7C);
+ DEFINE_GUID(IID_IMsmConfigureModule, 0xAC013209, 0x18A7, 0x4851, 0x8A, 0x21, 0x23, 0x53, 0x44, 0x3D, 0x70, 0xA0);
++#endif
++#if defined(WIN32METADATA) || ((((_WIN32_MSM >= 150))))
+ DEFINE_GUID(CLSID_MsmMerge2, 0xF94985D5,0x29F9,0x4743, 0x98,0x05,0x99,0xBC,0x3F,0x35,0xB6,0x78);
+ #endif
++#if (_WIN32_MSM >= 150)
++#endif
+ 
+ #endif // __mergemod_h__
+ 

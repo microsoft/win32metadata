@@ -1,0 +1,1649 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h b/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h
+index 7d953b3813..184b191657 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fwpmu.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*
+    Copyright (c) Microsoft Corporation
+ 
+@@ -3330,7 +3331,7 @@ static const IPSEC_CIPHER_TRANSFORM_ID0 IPSEC_CIPHER_TRANSFORM_ID_GCM_AES_256 =
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-void WINAPI FwpmFreeMemory0(_Inout_ void** p);
++_Windows_SupportedOS_WindowsVista_ void WINAPI FwpmFreeMemory0(_Inout_ void** p);
+ 
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+@@ -3339,21 +3340,21 @@ void WINAPI FwpmFreeMemory0(_Inout_ void** p);
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmEngineOpen0(
+-   _In_opt_ const wchar_t* serverName,
++   _Reserved_ _In_opt_ const wchar_t* serverName,
+    _In_ UINT32 authnService,
+    _In_opt_ SEC_WINNT_AUTH_IDENTITY_W* authIdentity,
+    _In_opt_ const FWPM_SESSION0* session,
+-   _Out_ HANDLE* engineHandle
++   _Win32_RAIIFree_(FwpmEngineClose0, -1, 0) _Out_ HANDLE* engineHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmEngineClose0(_Inout_ HANDLE engineHandle);
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmEngineGetOption0(
+    _In_ HANDLE engineHandle,
+@@ -3361,7 +3362,7 @@ FwpmEngineGetOption0(
+    _Outptr_ FWP_VALUE0** value
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmEngineSetOption0(
+    _In_ HANDLE engineHandle,
+@@ -3369,7 +3370,7 @@ FwpmEngineSetOption0(
+    _In_ const FWP_VALUE0* newValue
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmEngineGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -3381,7 +3382,7 @@ FwpmEngineGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmEngineSetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -3392,15 +3393,15 @@ FwpmEngineSetSecurityInfo0(
+    _In_opt_ const ACL* sacl
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSessionCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_SESSION_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmSessionDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSessionEnum0(
+    _In_ HANDLE engineHandle,
+@@ -3410,7 +3411,7 @@ FwpmSessionEnum0(
+    _Out_ UINT32* numEntriesReturned
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSessionDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+@@ -3426,18 +3427,18 @@ FwpmSessionDestroyEnumHandle0(
+ 
+ #define FWPM_TXN_READ_ONLY (0x00000001)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmTransactionBegin0(
+    _In_ HANDLE engineHandle,
+    _In_ UINT32 flags
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmTransactionCommit0(_In_ HANDLE engineHandle);
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmTransactionAbort0(_In_ HANDLE engineHandle);
+ 
+@@ -3448,7 +3449,7 @@ FwpmTransactionAbort0(_In_ HANDLE engineHandle);
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderAdd0(
+    _In_ HANDLE engineHandle,
+@@ -3456,14 +3457,14 @@ FwpmProviderAdd0(
+    _In_opt_ PSECURITY_DESCRIPTOR sd
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderDeleteByKey0(
+    _In_ HANDLE engineHandle,
+    _In_ const GUID* key
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderGetByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3471,15 +3472,15 @@ FwpmProviderGetByKey0(
+    _Outptr_ FWPM_PROVIDER0** provider
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_PROVIDER_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmProviderDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderEnum0(
+    _In_ HANDLE engineHandle,
+@@ -3489,14 +3490,14 @@ FwpmProviderEnum0(
+    _Out_ UINT32* numEntriesReturned
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3509,7 +3510,7 @@ FwpmProviderGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3526,24 +3527,24 @@ typedef void (CALLBACK *FWPM_PROVIDER_CHANGE_CALLBACK0)(
+                            _In_ const FWPM_PROVIDER_CHANGE0* change
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderSubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_PROVIDER_SUBSCRIPTION0* subscription,
+    _In_ FWPM_PROVIDER_CHANGE_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* changeHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderUnsubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -3559,7 +3560,7 @@ FwpmProviderSubscriptionsGet0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextAdd0(
+    _In_ HANDLE engineHandle,
+@@ -3569,7 +3570,7 @@ FwpmProviderContextAdd0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmProviderContextAdd1(
+    _In_ HANDLE engineHandle,
+@@ -3580,7 +3581,7 @@ FwpmProviderContextAdd1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmProviderContextAdd2(
+    _In_ HANDLE engineHandle,
+@@ -3602,21 +3603,21 @@ FwpmProviderContextAdd3(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+ 
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextDeleteById0(
+    _In_ HANDLE engineHandle,
+    _In_ UINT64 id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextDeleteByKey0(
+    _In_ HANDLE engineHandle,
+    _In_ const GUID* key
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextGetById0(
+    _In_ HANDLE engineHandle,
+@@ -3625,7 +3626,7 @@ FwpmProviderContextGetById0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmProviderContextGetById1(
+    _In_ HANDLE engineHandle,
+@@ -3635,7 +3636,7 @@ FwpmProviderContextGetById1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmProviderContextGetById2(
+    _In_ HANDLE engineHandle,
+@@ -3655,7 +3656,7 @@ FwpmProviderContextGetById3(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+ 
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextGetByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3664,7 +3665,7 @@ FwpmProviderContextGetByKey0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmProviderContextGetByKey1(
+    _In_ HANDLE engineHandle,
+@@ -3674,7 +3675,7 @@ FwpmProviderContextGetByKey1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmProviderContextGetByKey2(
+    _In_ HANDLE engineHandle,
+@@ -3693,15 +3694,15 @@ FwpmProviderContextGetByKey3(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmProviderContextDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextEnum0(
+    _In_ HANDLE engineHandle,
+@@ -3713,7 +3714,7 @@ FwpmProviderContextEnum0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmProviderContextEnum1(
+    _In_ HANDLE engineHandle,
+@@ -3726,7 +3727,7 @@ FwpmProviderContextEnum1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmProviderContextEnum2(
+    _In_ HANDLE engineHandle,
+@@ -3752,14 +3753,14 @@ FwpmProviderContextEnum3(
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3772,7 +3773,7 @@ FwpmProviderContextGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3789,24 +3790,24 @@ typedef void (CALLBACK *FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0)(
+                            _In_ const FWPM_PROVIDER_CONTEXT_CHANGE0* change
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextSubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* changeHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextUnsubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmProviderContextSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -3822,7 +3823,7 @@ FwpmProviderContextSubscriptionsGet0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerAdd0(
+    _In_ HANDLE engineHandle,
+@@ -3830,14 +3831,14 @@ FwpmSubLayerAdd0(
+    _In_opt_ PSECURITY_DESCRIPTOR sd
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerDeleteByKey0(
+    _In_ HANDLE engineHandle,
+    _In_ const GUID* key
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerGetByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3845,15 +3846,15 @@ FwpmSubLayerGetByKey0(
+    _Outptr_ FWPM_SUBLAYER0** subLayer
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_SUBLAYER_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmSubLayerDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerEnum0(
+    _In_ HANDLE engineHandle,
+@@ -3863,14 +3864,14 @@ FwpmSubLayerEnum0(
+    _Out_ UINT32* numEntriesReturned
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3883,7 +3884,7 @@ FwpmSubLayerGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3900,24 +3901,24 @@ typedef void (CALLBACK *FWPM_SUBLAYER_CHANGE_CALLBACK0)(
+                            _In_ const FWPM_SUBLAYER_CHANGE0* change
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerSubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_SUBLAYER_SUBSCRIPTION0* subscription,
+    _In_ FWPM_SUBLAYER_CHANGE_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* changeHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerUnsubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmSubLayerSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -3933,7 +3934,7 @@ FwpmSubLayerSubscriptionsGet0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerGetById0(
+    _In_ HANDLE engineHandle,
+@@ -3941,7 +3942,7 @@ FwpmLayerGetById0(
+    _Outptr_ FWPM_LAYER0** layer
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerGetByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3949,15 +3950,15 @@ FwpmLayerGetByKey0(
+    _Outptr_ FWPM_LAYER0** layer
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_LAYER_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmLayerDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerEnum0(
+    _In_ HANDLE engineHandle,
+@@ -3967,14 +3968,14 @@ FwpmLayerEnum0(
+    _Out_ UINT32* numEntriesReturned
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -3987,7 +3988,7 @@ FwpmLayerGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmLayerSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4006,7 +4007,7 @@ FwpmLayerSetSecurityInfoByKey0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutAdd0(
+    _In_ HANDLE engineHandle,
+@@ -4015,21 +4016,21 @@ FwpmCalloutAdd0(
+    _Out_opt_ UINT32* id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutDeleteById0(
+    _In_ HANDLE engineHandle,
+    _In_ UINT32 id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutDeleteByKey0(
+    _In_ HANDLE engineHandle,
+    _In_ const GUID* key
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutGetById0(
+    _In_ HANDLE engineHandle,
+@@ -4037,7 +4038,7 @@ FwpmCalloutGetById0(
+    _Outptr_ FWPM_CALLOUT0** callout
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutGetByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4045,15 +4046,15 @@ FwpmCalloutGetByKey0(
+    _Outptr_ FWPM_CALLOUT0** callout
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_CALLOUT_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmCalloutDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4063,14 +4064,14 @@ FwpmCalloutEnum0(
+    _Out_ UINT32* numEntriesReturned
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4083,7 +4084,7 @@ FwpmCalloutGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4100,24 +4101,24 @@ typedef void (CALLBACK *FWPM_CALLOUT_CHANGE_CALLBACK0)(
+                            _In_ const FWPM_CALLOUT_CHANGE0* change
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutSubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_CALLOUT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_CALLOUT_CHANGE_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* changeHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutUnsubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmCalloutSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -4133,7 +4134,7 @@ FwpmCalloutSubscriptionsGet0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterAdd0(
+    _In_ HANDLE engineHandle,
+@@ -4142,21 +4143,21 @@ FwpmFilterAdd0(
+    _Out_opt_ UINT64* id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterDeleteById0(
+    _In_ HANDLE engineHandle,
+    _In_ UINT64 id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterDeleteByKey0(
+    _In_ HANDLE engineHandle,
+    _In_ const GUID* key
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterGetById0(
+    _In_ HANDLE engineHandle,
+@@ -4164,7 +4165,7 @@ FwpmFilterGetById0(
+    _Outptr_ FWPM_FILTER0** filter
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterGetByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4172,15 +4173,15 @@ FwpmFilterGetByKey0(
+    _Outptr_ FWPM_FILTER0** filter
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_FILTER_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmFilterDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4190,14 +4191,14 @@ FwpmFilterEnum0(
+    _Out_ UINT32* numEntriesReturned
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4210,7 +4211,7 @@ FwpmFilterGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4227,24 +4228,24 @@ typedef void (CALLBACK *FWPM_FILTER_CHANGE_CALLBACK0)(
+                            _In_ const FWPM_FILTER_CHANGE0* change
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterSubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_FILTER_SUBSCRIPTION0* subscription,
+    _In_ FWPM_FILTER_CHANGE_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* changeHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterUnsubscribeChanges0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE changeHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmFilterSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -4253,7 +4254,7 @@ FwpmFilterSubscriptionsGet0(
+    _Out_ UINT32* numEntries
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmGetAppIdFromFileName0(
+    _In_ PCWSTR fileName,
+@@ -4278,7 +4279,7 @@ FwpmGetAppIdFromFileName0(
+ #define FWPM_TUNNEL_FLAG_RESERVED0 (0x00000004)
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmIPsecTunnelAdd0(
+    _In_ HANDLE engineHandle,
+@@ -4292,7 +4293,7 @@ FwpmIPsecTunnelAdd0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmIPsecTunnelAdd1(
+    _In_ HANDLE engineHandle,
+@@ -4308,7 +4309,7 @@ FwpmIPsecTunnelAdd1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmIPsecTunnelAdd2(
+    _In_ HANDLE engineHandle,
+@@ -4340,7 +4341,7 @@ FwpmIPsecTunnelAdd3(
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmIPsecTunnelDeleteByKey0(
+    _In_ HANDLE engineHandle,
+@@ -4355,7 +4356,7 @@ FwpmIPsecTunnelDeleteByKey0(
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecGetStatistics0(
+    _In_ HANDLE engineHandle,
+@@ -4363,7 +4364,7 @@ IPsecGetStatistics0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecGetStatistics1(
+    _In_ HANDLE engineHandle,
+@@ -4371,7 +4372,7 @@ IPsecGetStatistics1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextCreate0(
+    _In_ HANDLE engineHandle,
+@@ -4381,7 +4382,7 @@ IPsecSaContextCreate0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextCreate1(
+    _In_ HANDLE engineHandle,
+@@ -4392,14 +4393,14 @@ IPsecSaContextCreate1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextDeleteById0(
+    _In_ HANDLE engineHandle,
+    _In_ UINT64 id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextGetById0(
+    _In_ HANDLE engineHandle,
+@@ -4408,7 +4409,7 @@ IPsecSaContextGetById0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextGetById1(
+    _In_ HANDLE engineHandle,
+@@ -4417,7 +4418,7 @@ IPsecSaContextGetById1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextGetSpi0(
+    _In_ HANDLE engineHandle,
+@@ -4427,7 +4428,7 @@ IPsecSaContextGetSpi0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextGetSpi1(
+    _In_ HANDLE engineHandle,
+@@ -4436,7 +4437,7 @@ IPsecSaContextGetSpi1(
+    _Out_ IPSEC_SA_SPI* inboundSpi
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextSetSpi0(
+    _In_ HANDLE engineHandle,
+@@ -4446,7 +4447,7 @@ IPsecSaContextSetSpi0(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextAddInbound0(
+    _In_ HANDLE engineHandle,
+@@ -4454,7 +4455,7 @@ IPsecSaContextAddInbound0(
+    _In_ const IPSEC_SA_BUNDLE0* inboundBundle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextAddOutbound0(
+    _In_ HANDLE engineHandle,
+@@ -4463,7 +4464,7 @@ IPsecSaContextAddOutbound0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextAddInbound1(
+    _In_ HANDLE engineHandle,
+@@ -4471,7 +4472,7 @@ IPsecSaContextAddInbound1(
+    _In_ const IPSEC_SA_BUNDLE1* inboundBundle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextAddOutbound1(
+    _In_ HANDLE engineHandle,
+@@ -4480,7 +4481,7 @@ IPsecSaContextAddOutbound1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextExpire0(
+    _In_ HANDLE engineHandle,
+@@ -4499,7 +4500,7 @@ IPsecSaContextExpire0(
+ #define IPSEC_SA_BUNDLE_UPDATE_PEER_V4_PRIVATE_ADDRESS (0x20ui64)
+ #define IPSEC_SA_BUNDLE_UPDATE_MM_SA_ID                (0x40ui64)
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextUpdate0(
+    _In_ HANDLE engineHandle,
+@@ -4508,15 +4509,15 @@ IPsecSaContextUpdate0(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const IPSEC_SA_CONTEXT_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(IPsecSaContextDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4527,7 +4528,7 @@ IPsecSaContextEnum0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaContextEnum1(
+    _In_ HANDLE engineHandle,
+@@ -4538,7 +4539,7 @@ IPsecSaContextEnum1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaContextDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+@@ -4553,24 +4554,24 @@ typedef void (CALLBACK *IPSEC_SA_CONTEXT_CALLBACK0)(
+   _In_ const IPSEC_SA_CONTEXT_CHANGE0 *change
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecSaContextSubscribe0(
+   _In_ HANDLE engineHandle,
+   _In_ const IPSEC_SA_CONTEXT_SUBSCRIPTION0 *subscription,
+   _In_ IPSEC_SA_CONTEXT_CALLBACK0 callback,
+   _In_opt_ void *context,
+-  _Out_ HANDLE* eventsHandle
++  _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecSaContextUnsubscribe0(
+   _In_ HANDLE engineHandle,
+   _Inout_ HANDLE eventsHandle
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecSaContextSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -4582,15 +4583,15 @@ IPsecSaContextSubscriptionsGet0(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const IPSEC_SA_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(IPsecSaDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4601,7 +4602,7 @@ IPsecSaEnum0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecSaEnum1(
+    _In_ HANDLE engineHandle,
+@@ -4612,14 +4613,14 @@ IPsecSaEnum1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaDbGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -4631,7 +4632,7 @@ IPsecSaDbGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IPsecSaDbSetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -4650,22 +4651,22 @@ IPsecSaDbSetSecurityInfo0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecDospGetStatistics0(
+    _In_ HANDLE engineHandle,
+    _Out_ IPSEC_DOSP_STATISTICS0* idpStatistics
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecDospStateCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const IPSEC_DOSP_STATE_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(IPsecDospStateDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecDospStateEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4675,14 +4676,14 @@ IPsecDospStateEnum0(
+    _Out_ UINT32* numEntries
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecDospStateDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecDospGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -4694,7 +4695,7 @@ IPsecDospGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IPsecDospSetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -4741,23 +4742,23 @@ typedef struct _IPSEC_KEY_MANAGER_CALLBACKS0 {
+    IPSEC_KEY_MANAGER_NOTIFY_KEY0 keyNotify;
+ } IPSEC_KEY_MANAGER_CALLBACKS0;
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecKeyManagerAddAndRegister0(
+    _In_ HANDLE engineHandle,
+    _In_ const IPSEC_KEY_MANAGER0* keyManager,
+    _In_ const IPSEC_KEY_MANAGER_CALLBACKS0* keyManagerCallbacks,
+-   _Out_ HANDLE* keyMgmtHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* keyMgmtHandle
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecKeyManagerUnregisterAndDelete0(
+   _In_ HANDLE engineHandle,
+   _In_ HANDLE keyMgmtHandle
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecKeyManagersGet0(
+    _In_ HANDLE engineHandle,
+@@ -4765,11 +4766,11 @@ IPsecKeyManagersGet0(
+    _Out_ UINT32* numEntries
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecKeyManagerGetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+-   _Reserved_ const void* reserved,
++   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const void* reserved,
+    _In_ SECURITY_INFORMATION securityInfo,
+    _Outptr_result_maybenull_ PSID* sidOwner,
+    _Outptr_result_maybenull_ PSID* sidGroup,
+@@ -4778,11 +4779,11 @@ IPsecKeyManagerGetSecurityInfoByKey0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IPsecKeyManagerSetSecurityInfoByKey0(
+    _In_ HANDLE engineHandle,
+-   _Reserved_ const void* reserved,
++   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ const void* reserved,
+    _In_ SECURITY_INFORMATION securityInfo,
+    _In_opt_ const SID* sidOwner,
+    _In_opt_ const SID* sidGroup,
+@@ -4798,7 +4799,7 @@ IPsecKeyManagerSetSecurityInfoByKey0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextGetStatistics0(
+    _In_ HANDLE engineHandle,
+@@ -4806,7 +4807,7 @@ IkeextGetStatistics0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IkeextGetStatistics1(
+    _In_ HANDLE engineHandle,
+@@ -4814,14 +4815,14 @@ IkeextGetStatistics1(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaDeleteById0(
+    _In_ HANDLE engineHandle,
+    _In_ UINT64 id
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaGetById0(
+    _In_ HANDLE engineHandle,
+@@ -4830,7 +4831,7 @@ IkeextSaGetById0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IkeextSaGetById1(
+    _In_ HANDLE engineHandle,
+@@ -4841,7 +4842,7 @@ IkeextSaGetById1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IkeextSaGetById2(
+    _In_ HANDLE engineHandle,
+@@ -4851,15 +4852,15 @@ IkeextSaGetById2(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const IKEEXT_SA_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(IkeextSaDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4870,7 +4871,7 @@ IkeextSaEnum0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ IkeextSaEnum1(
+    _In_ HANDLE engineHandle,
+@@ -4882,7 +4883,7 @@ IkeextSaEnum1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ IkeextSaEnum2(
+    _In_ HANDLE engineHandle,
+@@ -4894,14 +4895,14 @@ IkeextSaEnum2(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaDbGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -4913,7 +4914,7 @@ IkeextSaDbGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ IkeextSaDbSetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -4930,15 +4931,15 @@ IkeextSaDbSetSecurityInfo0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmNetEventCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_NET_EVENT_ENUM_TEMPLATE0* enumTemplate,
+-   _Out_ HANDLE* enumHandle
++   _Win32_RAIIFree_(FwpmNetEventDestroyEnumHandle0, -1, 0) _Out_ HANDLE* enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmNetEventEnum0(
+    _In_ HANDLE engineHandle,
+@@ -4949,7 +4950,7 @@ FwpmNetEventEnum0(
+    );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmNetEventEnum1(
+    _In_ HANDLE engineHandle,
+@@ -4961,7 +4962,7 @@ FwpmNetEventEnum1(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN7)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmNetEventEnum2(
+    _In_ HANDLE engineHandle,
+@@ -4973,7 +4974,7 @@ FwpmNetEventEnum2(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
+-DWORD
++_Windows_SupportedOS_14393_ DWORD
+ WINAPI
+ FwpmNetEventEnum3(
+    _In_ HANDLE engineHandle,
+@@ -5008,14 +5009,14 @@ FwpmNetEventEnum5(
+    );
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmNetEventDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmNetEventsGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -5027,7 +5028,7 @@ FwpmNetEventsGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ WINAPI
+ FwpmNetEventsSetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -5044,24 +5045,24 @@ typedef void (CALLBACK *FWPM_NET_EVENT_CALLBACK0)(
+                            _In_ const FWPM_NET_EVENT1* event
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmNetEventSubscribe0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_NET_EVENT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_NET_EVENT_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* eventsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmNetEventUnsubscribe0(
+    _In_ HANDLE engineHandle,
+    _Inout_ HANDLE eventsHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmNetEventSubscriptionsGet0(
+    _In_ HANDLE engineHandle,
+@@ -5078,14 +5079,14 @@ typedef void (CALLBACK *FWPM_NET_EVENT_CALLBACK1)(
+                            _In_ const FWPM_NET_EVENT2* event
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmNetEventSubscribe1(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_NET_EVENT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_NET_EVENT_CALLBACK1 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* eventsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+    );
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -5097,14 +5098,14 @@ typedef void (CALLBACK *FWPM_NET_EVENT_CALLBACK2)(
+                            _In_ const FWPM_NET_EVENT3* event
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_14393_ DWORD
+ WINAPI
+ FwpmNetEventSubscribe2(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_NET_EVENT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_NET_EVENT_CALLBACK2 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* eventsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+    );
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
+@@ -5123,7 +5124,7 @@ FwpmNetEventSubscribe3(
+    _In_ const FWPM_NET_EVENT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_NET_EVENT_CALLBACK3 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* eventsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+    );
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS4)
+@@ -5142,7 +5143,7 @@ FwpmNetEventSubscribe4(
+    _In_ const FWPM_NET_EVENT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_NET_EVENT_CALLBACK4 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* eventsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+    );
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+@@ -5170,7 +5171,7 @@ FwpmDynamicKeywordSubscribe0(
+    _In_ DWORD flags,
+    _In_ FWPM_DYNAMIC_KEYWORD_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* subscriptionHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* subscriptionHandle
+    );
+ 
+ DWORD
+@@ -5189,7 +5190,7 @@ FwpmDynamicKeywordUnsubscribe0(
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmSystemPortsGet0(
+    _In_opt_ HANDLE engineHandle,
+@@ -5201,17 +5202,17 @@ typedef void (CALLBACK *FWPM_SYSTEM_PORTS_CALLBACK0)(
+                            _In_ const FWPM_SYSTEM_PORTS0* sysPorts
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmSystemPortsSubscribe0(
+    _In_opt_ HANDLE engineHandle,
+-   _Reserved_ void* reserved,
++   _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ void* reserved,
+    _In_ FWPM_SYSTEM_PORTS_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* sysPortsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* sysPortsHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows7_ DWORD
+ WINAPI
+ FwpmSystemPortsUnsubscribe0(
+    _In_opt_ HANDLE engineHandle,
+@@ -5222,7 +5223,7 @@ FwpmSystemPortsUnsubscribe0(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionGetById0(
+    _In_ HANDLE engineHandle,
+@@ -5230,7 +5231,7 @@ FwpmConnectionGetById0(
+    _Outptr_ FWPM_CONNECTION0** connection
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionEnum0(
+     _In_ HANDLE engineHandle,
+@@ -5240,15 +5241,15 @@ FwpmConnectionEnum0(
+     _Out_ UINT32 *numEntriesReturned
+     );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionCreateEnumHandle0(
+    _In_ HANDLE engineHandle,
+    _In_opt_ const FWPM_CONNECTION_ENUM_TEMPLATE0 *enumTemplate,
+-   _Out_ HANDLE *enumHandle
++   _Win32_RAIIFree_(FwpmConnectionDestroyEnumHandle0, -1, 0) _Out_ HANDLE *enumHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionDestroyEnumHandle0(
+    _In_ HANDLE engineHandle,
+@@ -5257,7 +5258,7 @@ FwpmConnectionDestroyEnumHandle0(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -5269,7 +5270,7 @@ FwpmConnectionGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionSetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -5289,17 +5290,17 @@ typedef void (CALLBACK *FWPM_CONNECTION_CALLBACK0)(
+    _In_ const FWPM_CONNECTION0* connection
+ );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionSubscribe0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_CONNECTION_SUBSCRIPTION0* subscription,
+    _In_ FWPM_CONNECTION_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* eventsHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* eventsHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmConnectionUnsubscribe0(
+     _In_ HANDLE engineHandle,
+@@ -5326,17 +5327,17 @@ typedef DWORD (CALLBACK *FWPM_VSWITCH_EVENT_CALLBACK0)(
+                            _In_ const FWPM_VSWITCH_EVENT0* vSwitchEvent
+                            );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmvSwitchEventSubscribe0(
+    _In_ HANDLE engineHandle,
+    _In_ const FWPM_VSWITCH_EVENT_SUBSCRIPTION0* subscription,
+    _In_ FWPM_VSWITCH_EVENT_CALLBACK0 callback,
+    _In_opt_ void* context,
+-   _Out_ HANDLE* subscriptionHandle
++   _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* subscriptionHandle
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmvSwitchEventUnsubscribe0(
+    _In_ HANDLE engineHandle,
+@@ -5346,7 +5347,7 @@ FwpmvSwitchEventUnsubscribe0(
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmvSwitchEventsGetSecurityInfo0(
+    _In_ HANDLE engineHandle,
+@@ -5358,7 +5359,7 @@ FwpmvSwitchEventsGetSecurityInfo0(
+    _Outptr_ PSECURITY_DESCRIPTOR* securityDescriptor
+    );
+ 
+-DWORD
++_Windows_SupportedOS_Windows8_ DWORD
+ WINAPI
+ FwpmvSwitchEventsSetSecurityInfo0(
+    _In_ HANDLE engineHandle,

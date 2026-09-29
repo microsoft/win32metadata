@@ -32,7 +32,7 @@
 | `WinmdAssemblyName` | Assembly identity. | Output file stem |
 | `WinmdVersion` | Four-part assembly version. | `255.255.255.255` |
 | `WinmdObjDir` | RDL and per-architecture intermediate directory. | `obj\winmd` |
-| `UseWinSDKAssets` | Include the packaged WinSDK annotation shim. | `true` |
+| `UseWinSDKAssets` | Include the packaged WinSDK annotation headers, including `win32metadata_annotations.h`. | `true` |
 | `Win32MetadataToolsExe` | Override the packaged native tool path. | Package host tool |
 | `LibClangPath` | Directory containing the pinned `libclang.dll`. | Package host tool directory |
 
@@ -49,3 +49,7 @@
 The SDK deliberately has no response-file, manual C#, enum JSON, auto-type JSON,
 or function-pointer-fixup inputs. Those metadata semantics must be expressed in
 the source headers and libraries.
+
+Projects that use the Win32 metadata annotations should leave `UseWinSDKAssets`
+enabled and include `win32metadata_annotations.h` from their headers. The same
+canonical header is used by repository generation and the packaged SDK.

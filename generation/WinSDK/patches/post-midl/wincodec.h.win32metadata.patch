@@ -1,0 +1,834 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h
+index f04e1f9622..fb9f694680 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -529,7 +530,7 @@ typedef interface ID2D1Device ID2D1Device;
+ typedef interface ID2D1Image ID2D1Image;
+ typedef UINT32 WICColor;
+ 
+-typedef /* [public] */ struct WICRect
++typedef /* [public] */ struct  WICRect
+     {
+     INT X;
+     INT Y;
+@@ -543,7 +544,7 @@ typedef /* [wire_marshal] */ void *WICInProcPointer;
+ 
+ #endif
+ typedef /* [public] */ 
+-enum WICColorContextType
++enum  WICColorContextType
+     {
+         WICColorContextUninitialized	= 0,
+         WICColorContextProfile	= 0x1,
+@@ -680,7 +681,7 @@ DEFINE_GUID(GUID_WICPixelFormat16bppYQuantizedDctCoefficients,           0xA355F
+ DEFINE_GUID(GUID_WICPixelFormat16bppCbQuantizedDctCoefficients,          0xD2C4FF61, 0x56A5, 0x49C2, 0x8B, 0x5C, 0x4C, 0x19, 0x25, 0x96, 0x48, 0x37);
+ DEFINE_GUID(GUID_WICPixelFormat16bppCrQuantizedDctCoefficients,          0x2FE354F0, 0x1680, 0x42D8, 0x92, 0x31, 0xE7, 0x3C, 0x05, 0x65, 0xBF, 0xC1);
+ typedef /* [public] */ 
+-enum WICBitmapCreateCacheOption
++enum  WICBitmapCreateCacheOption
+     {
+         WICBitmapNoCache	= 0,
+         WICBitmapCacheOnDemand	= 0x1,
+@@ -689,7 +690,7 @@ enum WICBitmapCreateCacheOption
+     } 	WICBitmapCreateCacheOption;
+ 
+ typedef /* [public] */ 
+-enum WICDecodeOptions
++enum  WICDecodeOptions
+     {
+         WICDecodeMetadataCacheOnDemand	= 0,
+         WICDecodeMetadataCacheOnLoad	= 0x1,
+@@ -697,7 +698,7 @@ enum WICDecodeOptions
+     } 	WICDecodeOptions;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapEncoderCacheOption
++enum  WICBitmapEncoderCacheOption
+     {
+         WICBitmapEncoderCacheInMemory	= 0,
+         WICBitmapEncoderCacheTempFile	= 0x1,
+@@ -706,7 +707,7 @@ enum WICBitmapEncoderCacheOption
+     } 	WICBitmapEncoderCacheOption;
+ 
+ typedef /* [public] */ 
+-enum WICComponentType
++enum  WICComponentType
+     {
+         WICDecoder	= 0x1,
+         WICEncoder	= 0x2,
+@@ -719,7 +720,7 @@ enum WICComponentType
+     } 	WICComponentType;
+ 
+ typedef /* [public] */ 
+-enum WICComponentEnumerateOptions
++enum  WICComponentEnumerateOptions
+     {
+         WICComponentEnumerateDefault	= 0,
+         WICComponentEnumerateRefresh	= 0x1,
+@@ -729,7 +730,7 @@ enum WICComponentEnumerateOptions
+         WICCOMPONENTENUMERATEOPTIONS_FORCE_DWORD	= 0x7fffffff
+     } 	WICComponentEnumerateOptions;
+ 
+-typedef /* [public] */ struct WICBitmapPattern
++typedef /* [public] */ struct  WICBitmapPattern
+     {
+     ULARGE_INTEGER Position;
+     ULONG Length;
+@@ -739,7 +740,7 @@ typedef /* [public] */ struct WICBitmapPattern
+     } 	WICBitmapPattern;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapInterpolationMode
++enum  WICBitmapInterpolationMode
+     {
+         WICBitmapInterpolationModeNearestNeighbor	= 0,
+         WICBitmapInterpolationModeLinear	= 0x1,
+@@ -750,7 +751,7 @@ enum WICBitmapInterpolationMode
+     } 	WICBitmapInterpolationMode;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapPaletteType
++enum  WICBitmapPaletteType
+     {
+         WICBitmapPaletteTypeCustom	= 0,
+         WICBitmapPaletteTypeMedianCut	= 0x1,
+@@ -770,7 +771,7 @@ enum WICBitmapPaletteType
+     } 	WICBitmapPaletteType;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapDitherType
++enum  WICBitmapDitherType
+     {
+         WICBitmapDitherTypeNone	= 0,
+         WICBitmapDitherTypeSolid	= 0,
+@@ -786,7 +787,7 @@ enum WICBitmapDitherType
+     } 	WICBitmapDitherType;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapAlphaChannelOption
++enum  WICBitmapAlphaChannelOption
+     {
+         WICBitmapUseAlpha	= 0,
+         WICBitmapUsePremultipliedAlpha	= 0x1,
+@@ -795,7 +796,7 @@ enum WICBitmapAlphaChannelOption
+     } 	WICBitmapAlphaChannelOption;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapTransformOptions
++enum  WICBitmapTransformOptions
+     {
+         WICBitmapTransformRotate0	= 0,
+         WICBitmapTransformRotate90	= 0x1,
+@@ -807,7 +808,7 @@ enum WICBitmapTransformOptions
+     } 	WICBitmapTransformOptions;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapLockFlags
++enum  WICBitmapLockFlags
+     {
+         WICBitmapLockRead	= 0x1,
+         WICBitmapLockWrite	= 0x2,
+@@ -815,7 +816,7 @@ enum WICBitmapLockFlags
+     } 	WICBitmapLockFlags;
+ 
+ typedef /* [public] */ 
+-enum WICBitmapDecoderCapabilities
++enum  WICBitmapDecoderCapabilities
+     {
+         WICBitmapDecoderCapabilitySameEncoder	= 0x1,
+         WICBitmapDecoderCapabilityCanDecodeAllImages	= 0x2,
+@@ -826,7 +827,7 @@ enum WICBitmapDecoderCapabilities
+     } 	WICBitmapDecoderCapabilities;
+ 
+ typedef /* [public] */ 
+-enum WICProgressOperation
++enum  WICProgressOperation
+     {
+         WICProgressOperationCopyPixels	= 0x1,
+         WICProgressOperationWritePixels	= 0x2,
+@@ -835,7 +836,7 @@ enum WICProgressOperation
+     } 	WICProgressOperation;
+ 
+ typedef /* [public] */ 
+-enum WICProgressNotification
++enum  WICProgressNotification
+     {
+         WICProgressNotificationBegin	= 0x10000,
+         WICProgressNotificationEnd	= 0x20000,
+@@ -845,7 +846,7 @@ enum WICProgressNotification
+     } 	WICProgressNotification;
+ 
+ typedef /* [public] */ 
+-enum WICComponentSigning
++enum  WICComponentSigning
+     {
+         WICComponentSigned	= 0x1,
+         WICComponentUnsigned	= 0x2,
+@@ -1056,7 +1057,7 @@ enum WICPngTimeProperties
+     } 	WICPngTimeProperties;
+ 
+ typedef /* [public] */ 
+-enum WICHeifProperties
++enum  WICHeifProperties
+     {
+         WICHeifOrientation	= 0x1,
+         WICHeifLayeredImageCanvasColor	= 0x2,
+@@ -1065,7 +1066,7 @@ enum WICHeifProperties
+     } 	WICHeifProperties;
+ 
+ typedef /* [public] */ 
+-enum WICHeifHdrProperties
++enum  WICHeifHdrProperties
+     {
+         WICHeifHdrMaximumLuminanceLevel	= 0x1,
+         WICHeifHdrMaximumFrameAverageLuminanceLevel	= 0x2,
+@@ -1076,14 +1077,14 @@ enum WICHeifHdrProperties
+     } 	WICHeifHdrProperties;
+ 
+ typedef /* [public] */ 
+-enum WICWebpAnimProperties
++enum  WICWebpAnimProperties
+     {
+         WICWebpAnimLoopCount	= 0x1,
+         WICWebpAnimProperties_FORCE_DWORD	= 0x7fffffff
+     } 	WICWebpAnimProperties;
+ 
+ typedef /* [public] */ 
+-enum WICWebpAnmfProperties
++enum  WICWebpAnmfProperties
+     {
+         WICWebpAnmfFrameDuration	= 0x1,
+         WICWebpAnmfProperties_FORCE_DWORD	= 0x7fffffff
+@@ -1134,7 +1135,7 @@ enum WICPixelFormatNumericRepresentation
+     } 	WICPixelFormatNumericRepresentation;
+ 
+ typedef /* [public] */ 
+-enum WICPlanarOptions
++enum  WICPlanarOptions
+     {
+         WICPlanarOptionsDefault	= 0,
+         WICPlanarOptionsPreserveSubsampling	= 0x1,
+@@ -1167,7 +1168,7 @@ enum WICJpegScanType
+     } 	WICJpegScanType;
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8) || defined(_WIN7_PLATFORM_UPDATE)
+-typedef /* [public] */ struct WICImageParameters
++typedef /* [public] */ struct   WICImageParameters
+     {
+     D2D1_PIXEL_FORMAT PixelFormat;
+     FLOAT DpiX;
+@@ -1179,14 +1180,14 @@ typedef /* [public] */ struct WICImageParameters
+     } 	WICImageParameters;
+ 
+ #endif
+-typedef /* [public] */ struct WICBitmapPlaneDescription
++typedef /* [public] */ struct  WICBitmapPlaneDescription
+     {
+     WICPixelFormatGUID Format;
+     UINT Width;
+     UINT Height;
+     } 	WICBitmapPlaneDescription;
+ 
+-typedef /* [public] */ struct WICBitmapPlane
++typedef /* [public] */ struct  WICBitmapPlane
+     {
+     WICPixelFormatGUID Format;
+     /* [size_is] */ BYTE *pbBuffer;
+@@ -1234,7 +1235,7 @@ EXTERN_C const IID IID_IWICPalette;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000040-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000040-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICPalette : public IUnknown
+     {
+     public:
+@@ -1462,7 +1463,7 @@ EXTERN_C const IID IID_IWICBitmapSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000120-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000120-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapSource : public IUnknown
+     {
+     public:
+@@ -1621,7 +1622,7 @@ EXTERN_C const IID IID_IWICFormatConverter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000301-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000301-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICFormatConverter : public IWICBitmapSource
+     {
+     public:
+@@ -1805,7 +1806,7 @@ EXTERN_C const IID IID_IWICPlanarFormatConverter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BEBEE9CB-83B0-4DCC-8132-B0AAA55EAC96")
++    MIDL_INTERFACE("BEBEE9CB-83B0-4DCC-8132-B0AAA55EAC96") _Windows_SupportedOS_Windows81_ 
+     IWICPlanarFormatConverter : public IWICBitmapSource
+     {
+     public:
+@@ -1993,7 +1994,7 @@ EXTERN_C const IID IID_IWICBitmapScaler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000302-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000302-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapScaler : public IWICBitmapSource
+     {
+     public:
+@@ -2148,7 +2149,7 @@ EXTERN_C const IID IID_IWICBitmapClipper;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E4FBCF03-223D-4e81-9333-D635556DD1B5")
++    MIDL_INTERFACE("E4FBCF03-223D-4e81-9333-D635556DD1B5") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapClipper : public IWICBitmapSource
+     {
+     public:
+@@ -2295,7 +2296,7 @@ EXTERN_C const IID IID_IWICBitmapFlipRotator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5009834F-2D6A-41ce-9E1B-17C5AFF7A782")
++    MIDL_INTERFACE("5009834F-2D6A-41ce-9E1B-17C5AFF7A782") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapFlipRotator : public IWICBitmapSource
+     {
+     public:
+@@ -2622,7 +2623,7 @@ EXTERN_C const IID IID_IWICBitmapLock;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000123-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000123-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapLock : public IUnknown
+     {
+     public:
+@@ -2756,7 +2757,7 @@ EXTERN_C const IID IID_IWICBitmap;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000121-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000121-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmap : public IWICBitmapSource
+     {
+     public:
+@@ -2937,7 +2938,7 @@ EXTERN_C const IID IID_IWICColorContext;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3C613A02-34B2-44ea-9A7C-45AEA9C6FD6D")
++    MIDL_INTERFACE("3C613A02-34B2-44ea-9A7C-45AEA9C6FD6D") _Windows_SupportedOS_WindowsXP_ 
+     IWICColorContext : public IUnknown
+     {
+     public:
+@@ -3101,7 +3102,7 @@ EXTERN_C const IID IID_IWICColorTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B66F034F-D0E2-40ab-B436-6DE39E321A94")
++    MIDL_INTERFACE("B66F034F-D0E2-40ab-B436-6DE39E321A94") _Windows_SupportedOS_WindowsXP_ 
+     IWICColorTransform : public IWICBitmapSource
+     {
+     public:
+@@ -3256,7 +3257,7 @@ EXTERN_C const IID IID_IWICFastMetadataEncoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B84E2C09-78C9-4AC4-8BD3-524AE1663A2F")
++    MIDL_INTERFACE("B84E2C09-78C9-4AC4-8BD3-524AE1663A2F") _Windows_SupportedOS_WindowsXP_ 
+     IWICFastMetadataEncoder : public IUnknown
+     {
+     public:
+@@ -3352,7 +3353,7 @@ EXTERN_C const IID IID_IWICStream;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("135FF860-22B7-4ddf-B0F6-218F4F299A43")
++    MIDL_INTERFACE("135FF860-22B7-4ddf-B0F6-218F4F299A43") _Windows_SupportedOS_WindowsXP_ 
+     IWICStream : public IStream
+     {
+     public:
+@@ -3621,7 +3622,7 @@ EXTERN_C const IID IID_IWICEnumMetadataItem;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DC2BB46D-3F07-481E-8625-220C4AEDBB33")
++    MIDL_INTERFACE("DC2BB46D-3F07-481E-8625-220C4AEDBB33") _Windows_SupportedOS_WindowsXP_ 
+     IWICEnumMetadataItem : public IUnknown
+     {
+     public:
+@@ -3755,7 +3756,7 @@ EXTERN_C const IID IID_IWICMetadataQueryReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("30989668-E1C9-4597-B395-458EEDB808DF")
++    MIDL_INTERFACE("30989668-E1C9-4597-B395-458EEDB808DF") _Windows_SupportedOS_WindowsXP_ 
+     IWICMetadataQueryReader : public IUnknown
+     {
+     public:
+@@ -3893,7 +3894,7 @@ EXTERN_C const IID IID_IWICMetadataQueryWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A721791A-0DEF-4d06-BD91-2118BF1DB10B")
++    MIDL_INTERFACE("A721791A-0DEF-4d06-BD91-2118BF1DB10B") _Windows_SupportedOS_WindowsXP_ 
+     IWICMetadataQueryWriter : public IWICMetadataQueryReader
+     {
+     public:
+@@ -4252,7 +4253,7 @@ EXTERN_C const IID IID_IWICBitmapFrameEncode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("00000105-a8f2-4877-ba0a-fd2b6645fb94")
++    MIDL_INTERFACE("00000105-a8f2-4877-ba0a-fd2b6645fb94") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapFrameEncode : public IUnknown
+     {
+     public:
+@@ -4493,7 +4494,7 @@ EXTERN_C const IID IID_IWICPlanarBitmapFrameEncode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F928B7B8-2221-40C1-B72E-7E82F1974D1A")
++    MIDL_INTERFACE("F928B7B8-2221-40C1-B72E-7E82F1974D1A") _Windows_SupportedOS_Windows81_ 
+     IWICPlanarBitmapFrameEncode : public IUnknown
+     {
+     public:
+@@ -4612,7 +4613,7 @@ EXTERN_C const IID IID_IWICImageEncoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("04C75BF8-3CE1-473B-ACC5-3CC4F5E94999")
++    MIDL_INTERFACE("04C75BF8-3CE1-473B-ACC5-3CC4F5E94999") _Windows_SupportedOS_Windows8_ 
+     IWICImageEncoder : public IUnknown
+     {
+     public:
+@@ -4758,7 +4759,7 @@ EXTERN_C const IID IID_IWICBitmapDecoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9EDDE9E7-8DEE-47ea-99DF-E6FAF2ED44BF")
++    MIDL_INTERFACE("9EDDE9E7-8DEE-47ea-99DF-E6FAF2ED44BF") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapDecoder : public IUnknown
+     {
+     public:
+@@ -4995,7 +4996,7 @@ EXTERN_C const IID IID_IWICBitmapSourceTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B16811B-6A43-4ec9-B713-3D5A0C13B940")
++    MIDL_INTERFACE("3B16811B-6A43-4ec9-B713-3D5A0C13B940") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapSourceTransform : public IUnknown
+     {
+     public:
+@@ -5311,7 +5312,7 @@ EXTERN_C const IID IID_IWICPlanarBitmapSourceTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3AFF9CCE-BE95-4303-B927-E7D16FF4A613")
++    MIDL_INTERFACE("3AFF9CCE-BE95-4303-B927-E7D16FF4A613") _Windows_SupportedOS_Windows81_ 
+     IWICPlanarBitmapSourceTransform : public IUnknown
+     {
+     public:
+@@ -5447,7 +5448,7 @@ EXTERN_C const IID IID_IWICBitmapFrameDecode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3B16811B-6A43-4ec9-A813-3D930C13B940")
++    MIDL_INTERFACE("3B16811B-6A43-4ec9-A813-3D930C13B940") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapFrameDecode : public IWICBitmapSource
+     {
+     public:
+@@ -5848,7 +5849,7 @@ EXTERN_C const IID IID_IWICProgressiveLevelControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DAAC296F-7AA5-4dbf-8D15-225C5976F891")
++    MIDL_INTERFACE("DAAC296F-7AA5-4dbf-8D15-225C5976F891") _Windows_SupportedOS_Windows7_ 
+     IWICProgressiveLevelControl : public IUnknown
+     {
+     public:
+@@ -6413,7 +6414,7 @@ EXTERN_C const IID IID_IWICProgressCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4776F9CD-9517-45FA-BF24-E89C5EC5C60C")
++    MIDL_INTERFACE("4776F9CD-9517-45FA-BF24-E89C5EC5C60C") _Windows_SupportedOS_Windows7_ 
+     IWICProgressCallback : public IUnknown
+     {
+     public:
+@@ -6514,7 +6515,7 @@ EXTERN_C const IID IID_IWICBitmapCodecProgressNotification;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("64C1024E-C3CF-4462-8078-88C2B11C46D9")
++    MIDL_INTERFACE("64C1024E-C3CF-4462-8078-88C2B11C46D9") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapCodecProgressNotification : public IUnknown
+     {
+     public:
+@@ -6624,7 +6625,7 @@ EXTERN_C const IID IID_IWICComponentInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23BC3F0A-698B-4357-886B-F24D50671334")
++    MIDL_INTERFACE("23BC3F0A-698B-4357-886B-F24D50671334") _Windows_SupportedOS_WindowsXP_ 
+     IWICComponentInfo : public IUnknown
+     {
+     public:
+@@ -6834,7 +6835,7 @@ EXTERN_C const IID IID_IWICFormatConverterInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9F34FB65-13F4-4f15-BC57-3726B5E53D9F")
++    MIDL_INTERFACE("9F34FB65-13F4-4f15-BC57-3726B5E53D9F") _Windows_SupportedOS_WindowsXP_ 
+     IWICFormatConverterInfo : public IWICComponentInfo
+     {
+     public:
+@@ -7031,7 +7032,7 @@ EXTERN_C const IID IID_IWICBitmapCodecInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E87A44C4-B76E-4c47-8B09-298EB12A2714")
++    MIDL_INTERFACE("E87A44C4-B76E-4c47-8B09-298EB12A2714") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapCodecInfo : public IWICComponentInfo
+     {
+     public:
+@@ -7402,13 +7403,13 @@ EXTERN_C const IID IID_IWICBitmapEncoderInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("94C9B4EE-A09F-4f92-8A1E-4A9BCE7E76FB")
++    MIDL_INTERFACE("94C9B4EE-A09F-4f92-8A1E-4A9BCE7E76FB") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapEncoderInfo : public IWICBitmapCodecInfo
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
+             /* [annotation][out] */ 
+-            _Out_  IWICBitmapEncoder **ppIBitmapEncoder) = 0;
++            _COM_Outptr_ _Out_  IWICBitmapEncoder **ppIBitmapEncoder) = 0;
+         
+     };
+     
+@@ -7713,7 +7714,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D8CD007F-D08F-4191-9BFC-236EA7F0E4B5")
++    MIDL_INTERFACE("D8CD007F-D08F-4191-9BFC-236EA7F0E4B5") _Windows_SupportedOS_WindowsXP_ 
+     IWICBitmapDecoderInfo : public IWICBitmapCodecInfo
+     {
+     public:
+@@ -7735,7 +7736,7 @@ EXTERN_C const IID IID_IWICBitmapDecoderInfo;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
+             /* [annotation][out] */ 
+-            _Out_  IWICBitmapDecoder **ppIBitmapDecoder) = 0;
++            _COM_Outptr_ _Out_  IWICBitmapDecoder **ppIBitmapDecoder) = 0;
+         
+     };
+     
+@@ -8081,7 +8082,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E8EDA601-3D48-431a-AB44-69059BE88BBE")
++    MIDL_INTERFACE("E8EDA601-3D48-431a-AB44-69059BE88BBE") _Windows_SupportedOS_WindowsXP_ 
+     IWICPixelFormatInfo : public IWICComponentInfo
+     {
+     public:
+@@ -8321,7 +8322,7 @@ EXTERN_C const IID IID_IWICPixelFormatInfo2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A9DB33A2-AF5F-43C7-B679-74F5984B5AA4")
++    MIDL_INTERFACE("A9DB33A2-AF5F-43C7-B679-74F5984B5AA4") _Windows_SupportedOS_Windows7_ 
+     IWICPixelFormatInfo2 : public IWICPixelFormatInfo
+     {
+     public:
+@@ -8562,7 +8563,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ec5ec8a9-c395-4314-9c77-54d7a935ff70")
++    MIDL_INTERFACE("ec5ec8a9-c395-4314-9c77-54d7a935ff70") _Windows_SupportedOS_WindowsXP_ 
+     IWICImagingFactory : public IUnknown
+     {
+     public:
+@@ -8572,7 +8573,7 @@ EXTERN_C const IID IID_IWICImagingFactory;
+             /* [annotation][unique][in] */ 
+             _In_  const GUID *pguidVendor,
+             /* [annotation][in] */ 
+-            _In_  DWORD dwDesiredAccess,
++            _Win32_AssociatedEnum_(GENERIC_ACCESS_RIGHTS) _In_  DWORD dwDesiredAccess,
+             /* [annotation][in] */ 
+             _In_  WICDecodeOptions metadataOptions,
+             /* [annotation][retval][out] */ 
+@@ -9146,7 +9147,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7B816B45-1996-4476-B132-DE9E247C8AF0")
++    MIDL_INTERFACE("7B816B45-1996-4476-B132-DE9E247C8AF0") _Windows_SupportedOS_Windows8_ 
+     IWICImagingFactory2 : public IWICImagingFactory
+     {
+     public:
+@@ -9957,12 +9958,12 @@ EXTERN_C const IID IID_IWICImagingFactory3;
+ /* [local] */ 
+ 
+ #endif
+-HRESULT WINAPI WICConvertBitmapSource(
++_Windows_SupportedOS_WindowsXP_ HRESULT WINAPI  WICConvertBitmapSource(
+      _In_ REFWICPixelFormatGUID dstFormat, // Destination pixel format
+      _In_ IWICBitmapSource  *pISrc,    // Source bitmap
+      _Outptr_ IWICBitmapSource **ppIDst   // Destination bitmap, a copy or addrefed source
+      );
+-HRESULT WINAPI WICCreateBitmapFromSection(
++_Windows_SupportedOS_WindowsXP_ HRESULT WINAPI  WICCreateBitmapFromSection(
+      _In_ UINT width,
+      _In_ UINT height,
+      _In_ REFWICPixelFormatGUID pixelFormat,
+@@ -9971,7 +9972,7 @@ HRESULT WINAPI WICCreateBitmapFromSection(
+      _In_ UINT offset,
+      _Outptr_ IWICBitmap **ppIBitmap
+      );
+-HRESULT WINAPI WICCreateBitmapFromSectionEx(
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI WICCreateBitmapFromSectionEx(
+      _In_ UINT width,
+      _In_ UINT height,
+      _In_ REFWICPixelFormatGUID pixelFormat,
+@@ -9981,17 +9982,17 @@ HRESULT WINAPI WICCreateBitmapFromSectionEx(
+      _In_ WICSectionAccessLevel desiredAccessLevel,
+      _Outptr_ IWICBitmap **ppIBitmap
+      );
+-HRESULT WINAPI WICMapGuidToShortName(
++_Windows_SupportedOS_WindowsXP_ HRESULT WINAPI  WICMapGuidToShortName(
+     _In_ REFGUID guid,
+     _In_ UINT cchName,
+     _Inout_updates_opt_(cchName) WCHAR *wzName,
+     _Out_ UINT *pcchActual
+    );
+-HRESULT WINAPI WICMapShortNameToGuid(
++_Windows_SupportedOS_WindowsXP_ HRESULT WINAPI  WICMapShortNameToGuid(
+     _In_ PCWSTR wzName,
+     _Out_ GUID *pguid
+    );
+-HRESULT WINAPI WICMapSchemaToName(
++_Windows_SupportedOS_WindowsXP_ HRESULT WINAPI  WICMapSchemaToName(
+     _In_ REFGUID guidMetadataFormat,
+     _In_ LPWSTR pwzSchema,
+     _In_ UINT cchName,
+@@ -10010,7 +10011,7 @@ HRESULT WINAPI WICMapSchemaToName(
+ #define WINCODEC_ERR_ACCESSDENIED                     E_ACCESSDENIED
+ #define WINCODEC_ERR_VALUEOVERFLOW                    INTSAFE_E_ARITHMETIC_OVERFLOW
+ typedef /* [public] */ 
+-enum WICTiffCompressionOption
++enum  WICTiffCompressionOption
+     {
+         WICTiffCompressionDontCare	= 0,
+         WICTiffCompressionNone	= 0x1,
+@@ -10061,7 +10062,7 @@ enum WICHeifCompressionOption
+     } 	WICHeifCompressionOption;
+ 
+ typedef /* [public] */ 
+-enum WICNamedWhitePoint
++enum  WICNamedWhitePoint
+     {
+         WICWhitePointDefault	= 0x1,
+         WICWhitePointDaylight	= 0x2,
+@@ -10078,7 +10079,7 @@ enum WICNamedWhitePoint
+     } 	WICNamedWhitePoint;
+ 
+ typedef /* [public] */ 
+-enum WICRawCapabilities
++enum  WICRawCapabilities
+     {
+         WICRawCapabilityNotSupported	= 0,
+         WICRawCapabilityGetSupported	= 0x1,
+@@ -10087,7 +10088,7 @@ enum WICRawCapabilities
+     } 	WICRawCapabilities;
+ 
+ typedef /* [public] */ 
+-enum WICRawRotationCapabilities
++enum  WICRawRotationCapabilities
+     {
+         WICRawRotationCapabilityNotSupported	= 0,
+         WICRawRotationCapabilityGetSupported	= 0x1,
+@@ -10096,7 +10097,7 @@ enum WICRawRotationCapabilities
+         WICRAWROTATIONCAPABILITIES_FORCE_DWORD	= 0x7fffffff
+     } 	WICRawRotationCapabilities;
+ 
+-typedef /* [public] */ struct WICRawCapabilitiesInfo
++typedef /* [public] */ struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")   WICRawCapabilitiesInfo
+     {
+     UINT cbSize;
+     UINT CodecMajorVersion;
+@@ -10119,7 +10120,7 @@ typedef /* [public] */ struct WICRawCapabilitiesInfo
+     } 	WICRawCapabilitiesInfo;
+ 
+ typedef /* [public] */ 
+-enum WICRawParameterSet
++enum  WICRawParameterSet
+     {
+         WICAsShotParameterSet	= 0x1,
+         WICUserAdjustedParameterSet	= 0x2,
+@@ -10128,7 +10129,7 @@ enum WICRawParameterSet
+     } 	WICRawParameterSet;
+ 
+ typedef /* [public] */ 
+-enum WICRawRenderMode
++enum  WICRawRenderMode
+     {
+         WICRawRenderModeDraft	= 0x1,
+         WICRawRenderModeNormal	= 0x2,
+@@ -10136,13 +10137,13 @@ enum WICRawRenderMode
+         WICRAWRENDERMODE_FORCE_DWORD	= 0x7fffffff
+     } 	WICRawRenderMode;
+ 
+-typedef /* [public] */ struct WICRawToneCurvePoint
++typedef /* [public] */ struct  WICRawToneCurvePoint
+     {
+     double Input;
+     double Output;
+     } 	WICRawToneCurvePoint;
+ 
+-typedef /* [public] */ struct WICRawToneCurve
++typedef /* [public] */ struct  WICRawToneCurve
+     {
+     UINT cPoints;
+     WICRawToneCurvePoint aPoints[ 1 ];
+@@ -10178,7 +10179,7 @@ EXTERN_C const IID IID_IWICDevelopRawNotificationCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("95c75a6e-3e8c-4ec2-85a8-aebcc551e59b")
++    MIDL_INTERFACE("95c75a6e-3e8c-4ec2-85a8-aebcc551e59b") _Windows_SupportedOS_WindowsXP_ 
+     IWICDevelopRawNotificationCallback : public IUnknown
+     {
+     public:
+@@ -10265,7 +10266,7 @@ EXTERN_C const IID IID_IWICDevelopRaw;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fbec5e44-f7be-4b65-b7f8-c0c81fef026d")
++    MIDL_INTERFACE("fbec5e44-f7be-4b65-b7f8-c0c81fef026d") _Windows_SupportedOS_WindowsXP_ 
+     IWICDevelopRaw : public IWICBitmapFrameDecode
+     {
+     public:
+@@ -10915,7 +10916,7 @@ void __RPC_STUB IWICDevelopRaw_Remote_GetToneCurve_Stub(
+ /* [local] */ 
+ 
+ typedef /* [public] */ 
+-enum WICDdsDimension
++enum  WICDdsDimension
+     {
+         WICDdsTexture1D	= 0,
+         WICDdsTexture2D	= 0x1,
+@@ -10925,7 +10926,7 @@ enum WICDdsDimension
+     } 	WICDdsDimension;
+ 
+ typedef /* [public] */ 
+-enum WICDdsAlphaMode
++enum  WICDdsAlphaMode
+     {
+         WICDdsAlphaModeUnknown	= 0,
+         WICDdsAlphaModeStraight	= 0x1,
+@@ -10935,7 +10936,7 @@ enum WICDdsAlphaMode
+         WICDDSALPHAMODE_FORCE_DWORD	= 0x7fffffff
+     } 	WICDdsAlphaMode;
+ 
+-typedef /* [public] */ struct WICDdsParameters
++typedef /* [public] */ struct  WICDdsParameters
+     {
+     UINT Width;
+     UINT Height;
+@@ -10963,7 +10964,7 @@ EXTERN_C const IID IID_IWICDdsDecoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("409cd537-8532-40cb-9774-e2feb2df4e9c")
++    MIDL_INTERFACE("409cd537-8532-40cb-9774-e2feb2df4e9c") _Windows_SupportedOS_Windows81_ 
+     IWICDdsDecoder : public IUnknown
+     {
+     public:
+@@ -11075,7 +11076,7 @@ EXTERN_C const IID IID_IWICDdsEncoder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5cacdb4c-407e-41b3-b936-d0f010cd6732")
++    MIDL_INTERFACE("5cacdb4c-407e-41b3-b936-d0f010cd6732") _Windows_SupportedOS_Windows81_ 
+     IWICDdsEncoder : public IUnknown
+     {
+     public:
+@@ -11186,7 +11187,7 @@ EXTERN_C const IID IID_IWICDdsEncoder;
+ /* interface __MIDL_itf_wincodec_0000_0048 */
+ /* [local] */ 
+ 
+-typedef /* [public] */ struct WICDdsFormatInfo
++typedef /* [public] */ struct  WICDdsFormatInfo
+     {
+     DXGI_FORMAT DxgiFormat;
+     UINT BytesPerBlock;
+@@ -11210,7 +11211,7 @@ EXTERN_C const IID IID_IWICDdsFrameDecode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3d4c0c61-18a4-41e4-bd80-481a4fc9f464")
++    MIDL_INTERFACE("3d4c0c61-18a4-41e4-bd80-481a4fc9f464") _Windows_SupportedOS_Windows81_ 
+     IWICDdsFrameDecode : public IUnknown
+     {
+     public:
+@@ -11339,7 +11340,7 @@ EXTERN_C const IID IID_IWICJpegFrameDecode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8939F66E-C46A-4c21-A9D1-98B327CE1679")
++    MIDL_INTERFACE("8939F66E-C46A-4c21-A9D1-98B327CE1679") _Windows_SupportedOS_10240_ 
+     IWICJpegFrameDecode : public IUnknown
+     {
+     public:
+@@ -11575,7 +11576,7 @@ EXTERN_C const IID IID_IWICJpegFrameEncode;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2F0C601F-D2C6-468C-ABFA-49495D983ED1")
++    MIDL_INTERFACE("2F0C601F-D2C6-468C-ABFA-49495D983ED1") _Windows_SupportedOS_10240_ 
+     IWICJpegFrameEncode : public IUnknown
+     {
+     public:
+@@ -11718,10 +11719,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal(  __RPC__in unsigned long *, __R
+ unsigned char * __RPC_USER  HBITMAP_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
+ void                      __RPC_USER  HBITMAP_UserFree(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HPALETTE_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
+ unsigned char * __RPC_USER  HPALETTE_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
+@@ -11748,10 +11749,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal64(  __RPC__in unsigned long *, _
+ unsigned char * __RPC_USER  HBITMAP_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
+ void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HPALETTE_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
+ unsigned char * __RPC_USER  HPALETTE_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 

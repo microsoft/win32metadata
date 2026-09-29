@@ -1,0 +1,198 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/bcrypt_provider.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/bcrypt_provider.h
+index a47782d5d4..73d54aed60 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/bcrypt_provider.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/bcrypt_provider.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ //
+ #pragma once
+@@ -40,7 +41,7 @@ typedef struct _BCRYPT_ECC_PARAMETER_HEADER
+ //
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI *BCryptOpenAlgorithmProviderFn)(
+-    _Out_   BCRYPT_ALG_HANDLE   *phAlgorithm,
++    _Win32_RAIIFree_(BCryptCloseAlgorithmProvider, 0) _Out_   BCRYPT_ALG_HANDLE   *phAlgorithm,
+     _In_    LPCWSTR pszAlgId,
+     _In_    ULONG   dwFlags);
+ 
+@@ -84,7 +85,7 @@ typedef VOID
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptGenerateSymmetricKeyFn)(
+     _Inout_                         BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_                           BCRYPT_KEY_HANDLE   *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                           BCRYPT_KEY_HANDLE   *phKey,
+     _Out_writes_bytes_all_(cbKeyObject)  PUCHAR   pbKeyObject,
+     _In_                            ULONG   cbKeyObject,
+     _In_reads_bytes_(cbSecret)           PUCHAR   pbSecret,
+@@ -96,7 +97,7 @@ typedef _Must_inspect_result_ NTSTATUS
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptGenerateKeyPairFn)(
+     _Inout_ BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_   BCRYPT_KEY_HANDLE   *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_   BCRYPT_KEY_HANDLE   *phKey,
+     _In_    ULONG   dwLength,
+     _In_    ULONG   dwFlags);
+ 
+@@ -154,7 +155,7 @@ typedef _Must_inspect_result_ NTSTATUS
+     _In_                            BCRYPT_ALG_HANDLE hAlgorithm,
+     _In_opt_                        BCRYPT_KEY_HANDLE hImportKey,
+     _In_                            LPCWSTR pszBlobType,
+-    _Out_                           BCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                           BCRYPT_KEY_HANDLE *phKey,
+     _Out_writes_bytes_all_(cbKeyObject)  PUCHAR   pbKeyObject,
+     _In_                            ULONG   cbKeyObject,
+     _In_reads_bytes_(cbInput)            PUCHAR   pbInput,
+@@ -168,7 +169,7 @@ typedef _Must_inspect_result_ NTSTATUS
+     _In_                            BCRYPT_ALG_HANDLE hAlgorithm,
+     _In_opt_                        BCRYPT_KEY_HANDLE hImportKey,
+     _In_                            LPCWSTR pszBlobType,
+-    _Out_                           BCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                           BCRYPT_KEY_HANDLE *phKey,
+     _In_reads_bytes_(cbInput)       PUCHAR pbInput,
+     _In_                            ULONG cbInput,
+     _In_                            ULONG dwFlags);
+@@ -178,7 +179,7 @@ typedef _Must_inspect_result_ NTSTATUS
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptDuplicateKeyFn)(
+     _In_                            BCRYPT_KEY_HANDLE   hKey,
+-    _Out_                           BCRYPT_KEY_HANDLE   *phNewKey,
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_                           BCRYPT_KEY_HANDLE   *phNewKey,
+     _Out_writes_bytes_all_(cbKeyObject)  PUCHAR   pbKeyObject,
+     _In_                            ULONG   cbKeyObject,
+     _In_                            ULONG   dwFlags);
+@@ -233,7 +234,7 @@ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptSecretAgreementFn)(
+     _In_    BCRYPT_KEY_HANDLE       hPrivKey,
+     _In_    BCRYPT_KEY_HANDLE       hPubKey,
+-    _Out_   BCRYPT_SECRET_HANDLE    *phAgreedSecret,
++    _Win32_RAIIFree_(BCryptDestroySecret, 0) _Out_   BCRYPT_SECRET_HANDLE    *phAgreedSecret,
+     _In_    ULONG                   dwFlags);
+ 
+ //
+@@ -264,7 +265,7 @@ typedef _Must_inspect_result_ NTSTATUS
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptCreateHashFn)(
+     _Inout_                          BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_                           BCRYPT_HASH_HANDLE  *phHash,
++    _Win32_RAIIFree_(BCryptDestroyHash, 0) _Out_                           BCRYPT_HASH_HANDLE  *phHash,
+     _Out_writes_bytes_all_(cbHashObject) PUCHAR   pbHashObject,
+     _In_                            ULONG   cbHashObject,
+     _In_reads_bytes_opt_(cbSecret)       PUCHAR   pbSecret,   // optional
+@@ -294,7 +295,7 @@ typedef _Must_inspect_result_ NTSTATUS
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptCreateMultiHashFn)(
+     _Inout_                                     BCRYPT_ALG_HANDLE   hAlgorithm,
+-    _Out_                                       BCRYPT_HASH_HANDLE *phHash,
++    _Win32_RAIIFree_(BCryptDestroyHash, 0) _Out_                                       BCRYPT_HASH_HANDLE *phHash,
+     _In_                                        ULONG               nHashes,
+     _Out_writes_bytes_all_opt_(cbHashObject)    PUCHAR              pbHashObject,
+     _In_                                        ULONG               cbHashObject,
+@@ -315,7 +316,7 @@ typedef _Must_inspect_result_ NTSTATUS
+ typedef _Must_inspect_result_ NTSTATUS
+ (WINAPI * BCryptDuplicateHashFn)(
+     _In_                            BCRYPT_HASH_HANDLE hHash,
+-    _Out_                           BCRYPT_HASH_HANDLE * phNewHash,
++    _Win32_RAIIFree_(BCryptDestroyHash, 0) _Out_                           BCRYPT_HASH_HANDLE * phNewHash,
+     _Out_writes_bytes_all_(cbHashObject) PUCHAR pbHashObject,
+     _In_                            ULONG   cbHashObject,
+     _In_                            ULONG   dwFlags);
+@@ -378,7 +379,7 @@ typedef struct _BCRYPT_CIPHER_FUNCTION_TABLE
+     BCryptDestroyKeyFn              DestroyKey;
+ } BCRYPT_CIPHER_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetCipherInterface(
+@@ -416,7 +417,7 @@ typedef struct _BCRYPT_HASH_FUNCTION_TABLE
+ #endif
+ } BCRYPT_HASH_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetHashInterface(
+@@ -451,7 +452,7 @@ typedef struct _BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE
+     BCryptVerifySignatureFn         VerifySignature;
+ } BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetAsymmetricEncryptionInterface(
+@@ -486,7 +487,7 @@ typedef struct _BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE
+     BCryptDestroyKeyFn              DestroyKey;
+ } BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetSecretAgreementInterface(
+@@ -520,7 +521,7 @@ typedef struct _BCRYPT_SIGNATURE_FUNCTION_TABLE
+     BCryptDestroyKeyFn              DestroyKey;
+ } BCRYPT_SIGNATURE_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetSignatureInterface(
+@@ -547,7 +548,7 @@ typedef struct _BCRYPT_RNG_FUNCTION_TABLE
+     BCryptGenRandomFn               GenRandom;
+ } BCRYPT_RNG_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetRngInterface(
+@@ -582,7 +583,7 @@ typedef struct _BCRYPT_KEY_DERIVATION_FUNCTION_TABLE
+     BCryptDuplicateKeyFn            DuplicateKey;
+ } BCRYPT_KEY_DERIVATION_FUNCTION_TABLE;
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcryptprimitives.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ GetKeyDerivationInterface(
+@@ -646,7 +647,7 @@ typedef struct _CRYPT_PROV_IOCTL_OUTPUT_PARAMS {
+ // Provider Registration Functions
+ //
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcrypt.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptRegisterProvider(
+@@ -654,7 +655,7 @@ BCryptRegisterProvider(
+     _In_ ULONG dwFlags,
+     _In_ PCRYPT_PROVIDER_REG pReg);
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcrypt.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptUnregisterProvider(
+@@ -662,7 +663,7 @@ BCryptUnregisterProvider(
+ 
+ //
+ //
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcrypt.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptAddContextFunctionProvider(
+@@ -673,7 +674,7 @@ BCryptAddContextFunctionProvider(
+     _In_ LPCWSTR pszProvider,
+     _In_ ULONG dwPosition);
+ 
+-_Must_inspect_result_
++_Win32_ImportLibrary_("bcrypt.dll") _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+ BCryptRemoveContextFunctionProvider(

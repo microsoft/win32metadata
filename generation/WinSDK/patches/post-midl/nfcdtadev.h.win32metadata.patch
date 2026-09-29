@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/nfcdtadev.h b/generation/WinSDK/RecompiledIdlHeaders/shared/nfcdtadev.h
+index 07f9b442c0..b4782a7a3c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/nfcdtadev.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/nfcdtadev.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (C) Microsoft Corporation. All rights reserved.
+@@ -470,7 +471,7 @@ typedef enum _NFC_SE_EMULATION_MODE
+ typedef struct _NFC_SE_INFO
+ {
+     NFC_SE_HANDLE hSecureElement;
+-    NFC_SE_TYPE eSecureElementType;
++    _Win32_AssociatedEnum_(SECURE_ELEMENT_TYPE) NFC_SE_TYPE eSecureElementType;
+ } NFC_SE_INFO, *PNFC_SE_INFO;
+ 
+ typedef struct _NFC_SE_LIST
+@@ -511,7 +512,7 @@ typedef struct _NFC_SE_AID_ROUTING_INFO
+ 
+ typedef struct _NFC_SE_ROUTING_TABLE_ENTRY
+ {
+-    NFC_SE_ROUTING_TABLE_TYPE eRoutingType;
++    _Win32_AssociatedEnum_(SECURE_ELEMENT_ROUTING_TYPE) NFC_SE_ROUTING_TABLE_TYPE eRoutingType;
+     union
+     {
+         NFC_SE_TECH_ROUTING_INFO TechRoutingInfo;
+@@ -536,7 +537,7 @@ typedef struct _NFC_SE_ROUTING_TABLE
+ typedef struct _NFC_SE_EVENT_INFO
+ {
+     NFC_SE_HANDLE hSecureElement;
+-    NFC_SE_EVENT_TYPE eEventType;
++    _Win32_AssociatedEnum_(SECURE_ELEMENT_EVENT_TYPE) NFC_SE_EVENT_TYPE eEventType;
+     DWORD cbEventData;
+     _Field_size_bytes_(cbEventData) BYTE pbEventData[ANYSIZE_ARRAY];
+ } NFC_SE_EVENT_INFO, *PNFC_SE_EVENT_INFO;

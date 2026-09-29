@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/HttpFilt.h b/generation/WinSDK/RecompiledIdlHeaders/um/HttpFilt.h
+index b9d113b284..bacb9b9a12 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/HttpFilt.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/HttpFilt.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1997-1999  Microsoft Corporation
+@@ -242,7 +243,7 @@ enum SF_STATUS_TYPE
+ //  pvNotification points to this structure for all request notification types
+ //
+ 
+-typedef struct _HTTP_FILTER_CONTEXT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _HTTP_FILTER_CONTEXT
+ {
+     DWORD          cbSize;
+ 
+@@ -668,15 +669,15 @@ typedef struct _HTTP_FILTER_VERSION
+ DWORD
+ WINAPI
+ HttpFilterProc(
+-    HTTP_FILTER_CONTEXT *      pfc,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HTTP_FILTER_CONTEXT *      pfc,
+     DWORD                      NotificationType,
+-    VOID *                     pvNotification
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VOID *                     pvNotification
+     );
+ 
+ BOOL
+ WINAPI
+ GetFilterVersion(
+-    HTTP_FILTER_VERSION * pVer
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HTTP_FILTER_VERSION * pVer
+     );
+ 
+ BOOL

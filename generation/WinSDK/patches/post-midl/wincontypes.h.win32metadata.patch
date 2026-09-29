@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wincontypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/wincontypes.h
+index 765ebd8775..3d54870337 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wincontypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wincontypes.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -153,7 +154,7 @@ typedef struct _CONSOLE_FONT_INFO {
+     COORD  dwFontSize;
+ } CONSOLE_FONT_INFO, *PCONSOLE_FONT_INFO;
+ 
+-typedef VOID* HPCON;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=ClosePseudoConsole") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef VOID* HPCON;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion

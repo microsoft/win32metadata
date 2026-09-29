@@ -1,0 +1,25 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/errors.h b/generation/WinSDK/RecompiledIdlHeaders/um/errors.h
+index ddab291594..b700ecc31d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/errors.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/errors.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //------------------------------------------------------------------------------
+ // File: Errors.h
+ //
+@@ -31,11 +32,11 @@ extern "C" {
+ 
+ #include <VFWMSGS.H>                    // includes all message definitions
+ 
+-typedef BOOL (WINAPI* AMGETERRORTEXTPROCA)(HRESULT, char *, DWORD);
+-typedef BOOL (WINAPI* AMGETERRORTEXTPROCW)(HRESULT, WCHAR *, DWORD);
++typedef BOOL (WINAPI* AMGETERRORTEXTPROCA)(HRESULT, _WIN32META_ANNOTATION_("win32metadata:in") char *, DWORD);
++typedef BOOL (WINAPI* AMGETERRORTEXTPROCW)(HRESULT, _WIN32META_ANNOTATION_("win32metadata:in") WCHAR *, DWORD);
+ 
+-AMOVIEAPI DWORD WINAPI AMGetErrorTextA( HRESULT hr , _Out_writes_(MaxLen) LPSTR pbuffer , DWORD MaxLen);
+-AMOVIEAPI DWORD WINAPI AMGetErrorTextW( HRESULT hr , _Out_writes_(MaxLen) LPWSTR pbuffer , DWORD MaxLen);
++_WIN32META_ANNOTATION_("win32metadata:ansi") AMOVIEAPI DWORD WINAPI AMGetErrorTextA( HRESULT hr , _Out_writes_(MaxLen) LPSTR pbuffer , DWORD MaxLen);
++_WIN32META_ANNOTATION_("win32metadata:unicode") AMOVIEAPI DWORD WINAPI AMGetErrorTextW( HRESULT hr , _Out_writes_(MaxLen) LPWSTR pbuffer , DWORD MaxLen);
+ 
+ 
+ #ifdef UNICODE

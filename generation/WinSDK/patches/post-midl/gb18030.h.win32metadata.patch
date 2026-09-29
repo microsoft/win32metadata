@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gb18030.h b/generation/WinSDK/RecompiledIdlHeaders/um/gb18030.h
+index 870ddf9ad6..1d6779d082 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gb18030.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gb18030.h
+@@ -1,5 +1,6 @@
+ #ifndef __GB18030_H
+ #define __GB18030_H
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -95,6 +96,10 @@
+ //
+ ////////////////////////////////////////////////////////////////////////////
+ 
++_Windows_SupportedOS_WindowsXP_
++_Windows_SupportedOS_Server2003_
++_Win32_SetLastError_
++_Win32_ImportLibrary_("c_g18030.dll")
+ STDAPI_(DWORD) NlsDllCodePageTranslation(
+     DWORD CodePage,
+     DWORD dwFlags,

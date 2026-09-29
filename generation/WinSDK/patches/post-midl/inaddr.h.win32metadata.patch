@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/inaddr.h b/generation/WinSDK/RecompiledIdlHeaders/shared/inaddr.h
+index 596d52fec1..5a8b2e08d3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/inaddr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/inaddr.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation
+@@ -22,7 +23,7 @@ Environment:
+ // IPv4 Internet address
+ // This is an 'on-wire' format structure.
+ //
+-typedef struct in_addr {
++typedef struct   in_addr {
+         union {
+                 struct { UCHAR s_b1,s_b2,s_b3,s_b4; } S_un_b;
+                 struct { USHORT s_w1,s_w2; } S_un_w;

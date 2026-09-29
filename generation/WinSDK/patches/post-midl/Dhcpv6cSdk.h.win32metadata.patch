@@ -1,0 +1,132 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
+index 6de24f3b0b..a6a14fc7c2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -83,7 +84,7 @@ extern "C" {
+ #ifndef DHCPV6API_PARAMS_DEFINED
+ #define DHCPV6API_PARAMS_DEFINED
+ 
+-typedef struct _DHCPV6CAPI_PARAMS {                  // use this structure to request params
++typedef struct   _DHCPV6CAPI_PARAMS {                  // use this structure to request params
+     ULONG                        Flags;         // for future use
+     ULONG                        OptionId;      // what option is this?
+     BOOL                         IsVendor;      // is this vendor specific?
+@@ -93,12 +94,12 @@ typedef struct _DHCPV6CAPI_PARAMS {                  // use this structure to re
+ 
+ #endif // DHCPV6API_PARAMS_DEFINED
+ 
+-typedef struct _DHCPV6CAPI_PARAMS_ARRAY {          // array of params..
++typedef struct   _DHCPV6CAPI_PARAMS_ARRAY {          // array of params..
+     ULONG                            nParams;       // size of array
+     LPDHCPV6CAPI_PARAMS              Params;        // actual array
+ } DHCPV6CAPI_PARAMS_ARRAY, *PDHCPV6CAPI_PARAMS_ARRAY, *LPDHCPV6CAPI_PARAMS_ARRAY;
+ 
+-typedef struct _DHCPV6CAPI_CLASSID {                // defines a client class id.
++typedef struct   _DHCPV6CAPI_CLASSID {                // defines a client class id.
+     ULONG                          Flags;         // must be zero currently.
+     #ifdef __midl
+         [size_is(nBytesData)] LPBYTE Data;
+@@ -123,7 +124,7 @@ enum
+     STATUS_NOPREFIX_AVAIL = 6   //The server doesn't have prefix to offer to the requesting client.
+ }StatusCode;
+ 
+-typedef struct _DHCPV6Prefix{
++typedef struct   _DHCPV6Prefix{
+     UCHAR  prefix[16];               //128 bit prefix
+     DWORD prefixLength;		//(48-64 bits)
+     DWORD preferredLifeTime; 	//The Preferred Lifetime of the Prefix returned or requested in seconds
+@@ -131,7 +132,7 @@ typedef struct _DHCPV6Prefix{
+     StatusCode status;              //The status code returned by the server for the prefix
+ }DHCPV6Prefix, *PDHCPV6Prefix, *LPDHCPV6Prefix;
+ 
+-typedef struct _DHCPV6PrefixLeaseInformation {
++typedef struct   _DHCPV6PrefixLeaseInformation {
+         DWORD nPrefixes;		// number of prefixes.
+         _Field_size_(nPrefixes) LPDHCPV6Prefix prefixArray;  // Array of prefixes
+ 	DWORD iaid;                     //The 32 bit Identity Association identifier for the prefix option.
+@@ -150,27 +151,27 @@ typedef struct _DHCPV6PrefixLeaseInformation {
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-VOID
++_Windows_SupportedOS_WindowsVista_ VOID
+ APIENTRY
+-Dhcpv6CApiInitialize(
+-    OUT     LPDWORD                Version
++  Dhcpv6CApiInitialize(
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                Version
+ );
+ 
+-VOID
++_Windows_SupportedOS_WindowsVista_ VOID
+ APIENTRY
+-Dhcpv6CApiCleanup(
++  Dhcpv6CApiCleanup(
+     VOID
+ );
+ 
+-DWORD                                             // win32 status
++_Windows_SupportedOS_WindowsVista_ DWORD                                             // win32 status
+ APIENTRY
+-Dhcpv6RequestParams(                                // request parameters of client
++  Dhcpv6RequestParams(                                // request parameters of client
+ IN      BOOL		     		              forceNewInform,
+-IN      LPVOID                 		reserved,
++_WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 		reserved,
+ _In_ IN      LPWSTR                 		adapterName,
+-IN      LPDHCPV6CAPI_CLASSID     	classId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCPV6CAPI_CLASSID     	classId,
+ IN OUT  DHCPV6CAPI_PARAMS_ARRAY 	recdParams,
+-IN      LPBYTE                 		buffer,
++_WIN32META_ANNOTATION_("win32metadata:out") IN      LPBYTE                 		buffer,
+ IN OUT  LPDWORD                		pSize
+ );
+ 
+@@ -180,31 +181,31 @@ IN OUT  LPDWORD                		pSize
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ APIENTRY
+-Dhcpv6RequestPrefix(
++  Dhcpv6RequestPrefix(
+ IN _In_ LPWSTR		adapterName,
+-IN LPDHCPV6CAPI_CLASSID 		pclassId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6CAPI_CLASSID 		pclassId,
+ IN OUT LPDHCPV6PrefixLeaseInformation	prefixleaseInfo,
+ _Out_ DWORD* 			pdwTimeToWait
+ );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ APIENTRY
+-Dhcpv6RenewPrefix(
++  Dhcpv6RenewPrefix(
+ IN _In_ LPWSTR		adapterName,
+-IN LPDHCPV6CAPI_CLASSID 		pclassId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6CAPI_CLASSID 		pclassId,
+ IN OUT LPDHCPV6PrefixLeaseInformation	prefixleaseInfo,
+ _Out_ DWORD* 			pdwTimeToWait,
+ IN DWORD 				bValidatePrefix
+ );
+ 
+-DWORD
++_Windows_SupportedOS_WindowsVista_ DWORD
+ APIENTRY
+-Dhcpv6ReleasePrefix(
++  Dhcpv6ReleasePrefix(
+ _In_ IN LPWSTR				adapterName,
+-IN LPDHCPV6CAPI_CLASSID     		classId,
+-IN LPDHCPV6PrefixLeaseInformation	leaseInfo
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6CAPI_CLASSID     		classId,
++_WIN32META_ANNOTATION_("win32metadata:out") IN LPDHCPV6PrefixLeaseInformation	leaseInfo
+ );
+ 
+ 

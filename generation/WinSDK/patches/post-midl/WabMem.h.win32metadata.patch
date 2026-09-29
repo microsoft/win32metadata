@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WabMem.h b/generation/WinSDK/RecompiledIdlHeaders/um/WabMem.h
+index c924e7a48b..eafd178109 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WabMem.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WabMem.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //
+ //    Copyright (C) Microsoft.  All rights reserved.
+ //
+@@ -34,19 +35,19 @@ typedef MAPIFREEBUFFER FAR 		*LPMAPIFREEBUFFER;
+ typedef SCODE (STDMETHODCALLTYPE WABALLOCATEBUFFER)(
+    LPWABOBJECT     lpWABObject,
+ 	ULONG			cbSize,
+-	LPVOID FAR *	lppBuffer
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *	lppBuffer
+ );
+ 
+ typedef SCODE (STDMETHODCALLTYPE WABALLOCATEMORE)(
+    LPWABOBJECT     lpWABObject,
+ 	ULONG			cbSize,
+-	LPVOID			lpObject,
+-	LPVOID FAR *	lppBuffer
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID			lpObject,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID FAR *	lppBuffer
+ );
+ 
+ typedef ULONG (STDAPICALLTYPE WABFREEBUFFER)(
+    LPWABOBJECT     lpWABObject,
+-	LPVOID			lpBuffer
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID			lpBuffer
+ );
+ 
+ typedef WABALLOCATEBUFFER FAR	*LPWABALLOCATEBUFFER;
