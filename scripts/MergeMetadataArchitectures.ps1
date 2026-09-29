@@ -13,7 +13,10 @@ param
     $AssemblyVersion,
 
     [switch]
-    $SkipInstallTools
+    $SkipInstallTools,
+
+    [switch]
+    $SkipNativeToolsBuild
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -25,7 +28,12 @@ if (!$SkipInstallTools.IsPresent)
     Install-BuildTools
 }
 
-$tool = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe"
+$toolDir = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64"
+$tool = Join-Path $toolDir "win32metadata-tools.exe"
+if (!$SkipNativeToolsBuild.IsPresent)
+{
+    & "$PSScriptRoot\Build-Win32MetadataTools.ps1" -OutputDir $toolDir
+}
 if (!(Test-Path $tool))
 {
     throw "WinmdGenerator tool was not found at $tool."
