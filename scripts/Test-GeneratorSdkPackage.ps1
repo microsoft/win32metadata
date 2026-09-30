@@ -141,8 +141,7 @@ $actualText = [System.Text.RegularExpressions.Regex]::Replace(
 function Assert-InvalidAnnotation {
     param(
         [string]$Name,
-        [string]$ExpectedError,
-        [string]$ClangResourceOverride
+        [string]$ExpectedError
     )
 
     $invalidRoot = Join-Path $sample "invalid"
@@ -151,28 +150,15 @@ function Assert-InvalidAnnotation {
     $output = Join-Path $work "$Name.winmd"
     New-Item -ItemType Directory -Force -Path $work | Out-Null
 
-    $previousOverride = $env:CLANG_RESOURCE_DIR
-    try {
-        if ($ClangResourceOverride) {
-            $env:CLANG_RESOURCE_DIR = $ClangResourceOverride
-        }
-        else {
-            Remove-Item Env:\CLANG_RESOURCE_DIR -ErrorAction SilentlyContinue
-        }
-        $messages = @(& (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
-            --partition $partition `
-            --include $invalidRoot `
-            --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
-            --arch x64 `
-            --arch x86 `
-            --scope-header $Name `
-            --namespace "Sample.Invalid" `
-            --obj $work `
-            --output $output 2>&1 | ForEach-Object { $_.ToString() })
-    }
-    finally {
-        $env:CLANG_RESOURCE_DIR = $previousOverride
-    }
+    $messages = @(& (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
+        --partition $partition `
+        --include $invalidRoot `
+        --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
+        --arch x64 `
+        --scope-header $Name `
+        --namespace "Sample.Invalid" `
+        --obj $work `
+        --output $output 2>&1 | ForEach-Object { $_.ToString() })
     if ($LASTEXITCODE -eq 0) {
         throw "Invalid annotation case '$Name' unexpectedly generated a WinMD."
     }
@@ -186,18 +172,100 @@ function Assert-InvalidAnnotation {
     $global:LASTEXITCODE = 0
 }
 
+function Assert-ResourceOverrideGeneration {
+    param(
+        [string]$Name,
+        [string]$ClangResourceOverride
+    )
+
+    $work = Join-Path $root "obj\GeneratorSdkPackageTests\resource-override\$Name"
+    $output = Join-Path $work "$Name.winmd"
+    Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item -ItemType Directory -Force -Path $work | Out-Null
+
+    $previousOverride = $env:CLANG_RESOURCE_DIR
+    try {
+        $env:CLANG_RESOURCE_DIR = $ClangResourceOverride
+        $messages = @(& (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
+            --partition (Join-Path $sample "main.cpp") `
+            --partition (Join-Path $sample "secondary.cpp") `
+            --include $sample `
+            --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
+            --arch x64 `
+            --arch x86 `
+            --scope-header SampleApi `
+            --scope-header SupportedOsApi `
+            --scope-header AOrderUse `
+            --scope-header FeatureMacro `
+            --scope-header MacroExpanded `
+            --namespace "Sample.Api" `
+            --assembly-name "Sample.Override.$Name" `
+            --assembly-version "1.2.3.4" `
+            --obj $work `
+            --output $output 2>&1 | ForEach-Object { $_.ToString() })
+        $exitCode = $LASTEXITCODE
+    }
+    finally {
+        $env:CLANG_RESOURCE_DIR = $previousOverride
+    }
+
+    $messageText = $messages -join "`n"
+    if ($exitCode -ne 0) {
+        throw "Valid resource-override case '$Name' failed with exit code ${exitCode}:`n$messageText"
+    }
+    if (!(Test-Path $output -PathType Leaf)) {
+        throw "Valid resource-override case '$Name' did not produce '$output'."
+    }
+    if ($messageText -notmatch "Scraping 2 partition\(s\) as 2 translation unit\(s\) for x64, x86") {
+        throw "Valid resource-override case '$Name' did not run the required x64+x86 generation:`n$messageText"
+    }
+    if ($messageText -notmatch "Metadata: 2 namespace\(s\), 53 type\(s\), 39 function\(s\), 5 constant\(s\)") {
+        throw "Valid resource-override case '$Name' produced unexpected metadata counts:`n$messageText"
+    }
+    $overrideAssembly = [System.Reflection.AssemblyName]::GetAssemblyName($output)
+    if ($overrideAssembly.Name -ne "Sample.Override.$Name" -or
+        $overrideAssembly.Version.ToString() -ne "1.2.3.4") {
+        throw "Valid resource-override case '$Name' produced unexpected assembly '$overrideAssembly'."
+    }
+
+    $dump = Join-Path $work "$Name.apidump.cs"
+    dotnet $winmdUtils dump --winmd $output --output $dump
+    if ($LASTEXITCODE -ne 0) {
+        throw "Valid resource-override case '$Name' could not dump its generated WinMD."
+    }
+    $dumpText = [System.IO.File]::ReadAllText($dump)
+    foreach ($pattern in @(
+        'public const string SAMPLE_MACRO_HEADER = "MacroExpanded\.h";'
+        'public const uint SAMPLE_MODE_EXTERNAL = 3758096385u?;'
+        'public static extern int SampleAdd\b'
+        'public unsafe static extern int SampleCreateDirectValue\b'
+        '\[AssociatedConstant\s*\(\s*"SAMPLE_MODE_EXTERNAL"\s*\)\]'
+    )) {
+        if ($dumpText -notmatch $pattern) {
+            throw "Valid resource-override case '$Name' omitted expected API pattern '$pattern'."
+        }
+    }
+}
+
 $packageToolDirectory = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64"
 $previousLibClangPath = $env:LIBCLANG_PATH
 try {
     $env:LIBCLANG_PATH = $packageToolDirectory
-    Assert-InvalidAnnotation "UnknownAnnotation" "(?i)(unknown_contract|unknown annotation)" (Join-Path $root "obj\missing-clang-resource")
+    $staleResource = Join-Path $root "obj\missing-clang-resource"
+    Remove-Item $staleResource -Recurse -Force -ErrorAction SilentlyContinue
+    if (Test-Path $staleResource) {
+        throw "Failed to establish the stale CLANG_RESOURCE_DIR test precondition."
+    }
+    Assert-ResourceOverrideGeneration "Stale" $staleResource
     Write-Host "Package-local Clang resources took precedence over a stale CLANG_RESOURCE_DIR."
     $mismatchedResource = Join-Path $root "obj\GeneratorSdkPackageTests\mismatched-clang-resource"
     Remove-Item $mismatchedResource -Recurse -Force -ErrorAction SilentlyContinue
     New-Item -ItemType Directory -Force -Path (Join-Path $mismatchedResource "include") | Out-Null
     [System.IO.File]::WriteAllText((Join-Path $mismatchedResource "include\intrin.h"), "not Clang $ClangResourceVersion")
-    Assert-InvalidAnnotation "MissingAnnotationValue" "(?i)(import_library|missing|required).*(value|argument)" $mismatchedResource
+    Assert-ResourceOverrideGeneration "Mismatched" $mismatchedResource
     Write-Host "Package-local Clang resources took precedence over a mismatched CLANG_RESOURCE_DIR."
+    Assert-InvalidAnnotation "UnknownAnnotation" "(?i)(unknown_contract|unknown annotation)"
+    Assert-InvalidAnnotation "MissingAnnotationValue" "(?i)(import_library|missing|required).*(value|argument)"
     Assert-InvalidAnnotation "EmptyAnnotationValue" "(?i)(import_library|empty|required).*(value|argument)"
     Assert-InvalidAnnotation "UnexpectedAnnotationValue" "(?i)(set_last_error|unexpected|accept).*(value|argument)"
     Assert-InvalidAnnotation "InvalidAnnotationTarget" "(?i)(associated_constant|invalid target|enum)"
