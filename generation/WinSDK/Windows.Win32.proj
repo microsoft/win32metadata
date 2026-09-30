@@ -10,16 +10,31 @@
     <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(RepoRootPath)bin\Windows.Win32.winmd</OutputWinmd>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
     <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
-    <SdkIncRoot>$(MSBuildThisFileDirectory)obj\RecompiledIdlHeaders</SdkIncRoot>
+    <SdkIncRoot>$(PkgMicrosoft_Windows_SDK_CPP)\c\include\10.0.28000.0</SdkIncRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
     <UseWinSDKAssets>true</UseWinSDKAssets>
+    <WinmdUseSdkHeaderManifest>true</WinmdUseSdkHeaderManifest>
+    <RestoreSources>https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.26100.7705" GeneratePathProperty="true"/>
-    <Partition Include="Partitions\**\main.cpp"/>
+    <PackageReference Update="Microsoft.Windows.SDK.CPP" Version="10.0.28000.2270" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.28000.2270" GeneratePathProperty="true"/>
+    <WinmdIncludeDir Include="AdditionalHeaders"/>
+    <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
+    <WinmdScopeHeader Include="activation.h;CoreWindow.h;corewindow.h;DocumentSource.h;documentsource.h;EventToken.h;eventtoken.h;hstring.h;inspectable.h"/>
+    <WinmdScopeHeader Include="manual.h;MemoryBuffer.h;memorybuffer.h;midlbase.h;rdpappcontainerclient.h"/>
+    <WinmdScopeHeader Include="roapi.h;robuffer.h;roerrorapi.h;rometadata.h;rometadataresolution.h;roparameterizediid.h;roregistrationapi.h"/>
+    <WinmdScopeHeader Include="shcore.h;WeakReference.h;weakreference.h;webapplication.h"/>
+    <WinmdScopeHeader Include="windows.graphics.effects.interop.h;windows.graphics.interop.h;windows.ui.composition.interop.h"/>
+    <WinmdScopeHeader Include="winstring.h;Wsdevlicensing.h;wsdevlicensing.h"/>
   </ItemGroup>
+
+  <Target Name="ValidateSdkHeaders" BeforeTargets="BuildWin32MetadataTools">
+    <Error Condition="!Exists('$(SdkIncRoot)\um')"
+           Text="Pinned Microsoft.Windows.SDK.CPP headers were not found at '$(SdkIncRoot)'."/>
+  </Target>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets"/>
 </Project>

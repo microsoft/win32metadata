@@ -15,7 +15,7 @@
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build" DependsOnTargets="BuildWin32MetadataTools">
-    <Error Condition="'@(Partition)' == ''" Text="At least one Partition item is required."/>
+    <Error Condition="'@(Partition)' == '' and '$(WinmdUseSdkHeaderManifest)' != 'true'" Text="At least one Partition item is required unless WinmdUseSdkHeaderManifest is true."/>
     <Error Condition="'@(WinmdIncludeDir)' == ''" Text="At least one WinmdIncludeDir item is required."/>
     <Error Condition="!Exists('$(Win32MetadataToolsExe)')" Text="WinmdGenerator tool not found at '$(Win32MetadataToolsExe)'."/>
     <Error Condition="!Exists('$(LibClangPath)\libclang.dll')" Text="libclang.dll not found in '$(LibClangPath)'."/>
@@ -25,6 +25,7 @@
     </ItemGroup>
     <PropertyGroup>
       <_WinmdArgs>scrape</_WinmdArgs>
+      <_WinmdArgs Condition="'$(WinmdUseSdkHeaderManifest)' == 'true'">$(_WinmdArgs) --win32-sdk</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(Partition->'--partition &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdIncludeDir->'--include &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(ImportLibs->'--lib &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>

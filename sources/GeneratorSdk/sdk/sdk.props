@@ -26,6 +26,7 @@
     <WinSDKAssets Condition="'$(WinSDKAssets)' == ''">$(Win32MetadataAssetsDir)\WinSDK</WinSDKAssets>
     <SdkIncRoot Condition="'$(SdkIncRoot)' == ''">$(TargetPlatformSdkRootOverride)\include\$(TargetPlatformVersion)</SdkIncRoot>
     <UseWinSDKAssets Condition="'$(UseWinSDKAssets)' == ''">true</UseWinSDKAssets>
+    <WinmdUseSdkHeaderManifest Condition="'$(WinmdUseSdkHeaderManifest)' == ''">false</WinmdUseSdkHeaderManifest>
   </PropertyGroup>
 
   <ItemGroup>

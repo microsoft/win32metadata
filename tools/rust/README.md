@@ -1,23 +1,28 @@
 # win32metadata-tools
 
-A command-line front end over a single pinned windows-rs revision providing
+A command-line front end over the pinned windows-rs producer revision, providing
 `windows-clang`, `windows-rdl`, and `windows-metadata`.
 
-`scrape` is the minimal alternate pipeline: partition `main.cpp` files plus the SDK header
-root in, one WinMD out. It has no RSP or JSON inputs, and it does not carry forward the
-switches of the existing scraper/emitter. The intermediate RDL is written under the object
-directory.
+The production `scrape --win32-sdk` path reads the pinned raw Windows SDK headers and
+constructs the producer-supported aggregate plus satellite inputs: two translation units
+per architecture. x64, x86, and arm64 extraction runs in parallel, then the per-architecture
+WinMDs are merged into one output. Focused partition translation units remain available for
+package fixtures and inner-loop debugging.
 
 ```text
-partition main.cpp + SDK include root [+ SDK lib root]
-    -> windows-clang -> RDL under obj -> windows-rdl -> WinMD
+raw SDK headers + import libraries + annotation contracts
+    -> aggregate/satellite Input
+    -> windows-clang Snapshot
+    -> emit_by_header_with_options
+    -> per-architecture RDL/WinMD
+    -> merged WinMD
 ```
 
 ## Commands
 
 | Command | Purpose |
 | --- | --- |
-| `scrape` | Partition translation units -> WinMD. |
+| `scrape` | SDK headers or focused partition translation units -> WinMD. |
 | `roundtrip` | WinMD -> RDL -> WinMD fidelity harness (`scripts\Test-WindowsRdlRoundTrip.ps1`). |
 | `libclang` | Resolve, load, and report the pinned libclang. |
 
@@ -29,86 +34,65 @@ From the repository root:
 .\scripts\Generate-WindowsRsWinmd.ps1
 ```
 
-This resolves the repository's patched SDK-header copy and restored SDK import
-libraries automatically, scrapes every partition for x64, x86, and arm64, and
-writes `bin\Windows.Win32.winmd`. Pass `-Partition Foundation,Bluetooth,Bits`
-or `-Architecture x64` for a faster inner-loop subset. The direct tool invocation is:
+By default this restores the pinned `Microsoft.Windows.SDK.CPP` packages, reads the raw
+`10.0.28000.0` headers, and generates `bin\Windows.Win32.winmd` for x64, x86, and arm64.
+Pass `-Architecture x64` for a single-architecture run. Passing `-Partition
+Foundation,Bluetooth` selects focused legacy partition inputs instead of the production
+header manifest.
+
+The production MSBuild path is:
 
 ```powershell
-cargo run --quiet --locked --manifest-path tools\rust\Cargo.toml -- scrape `
-  --partition generation\WinSDK\Partitions\Foundation\main.cpp `
-  --include generation\WinSDK\inc `
-  --include generation\WinSDK\RecompiledIdlHeaders `
-  --output obj\windows-clang\Windows.Win32.winmd
+.\scripts\BuildMetadataBin.ps1
 ```
-
-```text
-Scraping 1 partition(s) for x64 into C:\repos\win32metadata\obj\windows-clang\rdl
-RDL: C:\repos\win32metadata\obj\windows-clang\rdl
-WinMD: C:\repos\win32metadata\obj\windows-clang\Windows.Win32.winmd
-Metadata: 4029 type(s), 4170 function(s), 22171 constant(s)
-```
-
-Roughly 15 seconds from a clean object directory.
 
 ## Options
 
 | Option | Meaning |
 | --- | --- |
-| `--partition <path>` | Partition translation unit. Repeatable. |
-| `--include <dir>` | Header root. Repeatable, searched in the order given. |
+| `--win32-sdk` | Use the pinned aggregate + satellite Windows SDK header manifest. |
+| `--partition <path>` | Focused partition translation unit. Repeatable. |
+| `--partition-root <path>` | Directory of partition subdirectories containing `main.cpp`. Repeatable. |
+| `--include <dir>` | Header root. Repeatable, searched in order. |
 | `--lib <dir-or-file>` | SDK import-library directory or file. Repeatable. |
 | `--arch <x64\|arm64\|x86>` | Repeatable. Defaults to `x64`. |
 | `--scope <segment>` | Header directory segment emitted unconditionally. Repeatable. |
-| `--scope-header <header>` | Header stem emitted unconditionally. Repeatable. |
+| `--scope-header <header>` | Header name emitted unconditionally. Repeatable. |
+| `--symbol <name>` | Emit a focused function and its dependencies. Repeatable. |
+| `--constant <name>` | Emit a focused constant. Repeatable. |
 | `--namespace <name>` | Root namespace. Defaults to `Windows.Win32`. |
 | `--assembly-name <name>` | Assembly identity. Defaults to the output file stem. |
 | `--assembly-version <A.B.C.D>` | Four-part assembly version. |
 | `--output <path>` | WinMD to write. |
-| `--obj <dir>` | Intermediate directory. Defaults to the directory of `--output`. |
+| `--obj <dir>` | Intermediate directory. Defaults to the output directory. |
 
-**`--include` order matters.** Directories are passed to clang in the order given, so the
-repository's `generation\WinSDK\inc` must precede the SDK root for its `sal.h` to win. An
-include directory containing `shared`, `um`, `ucrt`, or `winrt` is expanded into those
-subdirectories, so an SDK root is named once.
+**`--include` order matters.** Directories are passed to clang in the order given. An
+include directory containing `shared`, `um`, `um\cpdk`, `ucrt`, or `winrt` is expanded
+into those subdirectories, so an SDK root is named once.
 
-**`--lib`** recovers the symbol -> DLL mapping that headers do not carry. Without it every
-function records an empty library. A directory is expanded into its `.lib` files sorted by
-name; resolution is first-wins. Supplying import libraries also drops functions that no
-library exports.
+`win32metadata_sal.h` and `win32metadata_annotations.h` are force-included for every input,
+and `WIN32METADATA=1` is defined. This captures the annotation contracts without modifying
+the SDK headers.
 
-**`--arch`** may be repeated. The first architecture is canonical and writes the RDL
-partitions; the rest are scraped to per-architecture WinMDs in the object directory and
-folded back in, so symbols present on only some architectures are tagged. A
-non-canonical architecture needs version-matched clang resource headers, which are fetched
-once into `<obj>\target\windows-clang`.
+**`--lib`** recovers symbol-to-DLL mappings from import libraries. Resolution is
+first-wins. Supplying import libraries also filters out functions that have neither an
+exported symbol nor an explicit import-library annotation.
 
-The remaining parser behavior is fixed: output is partitioned by defining header,
-`-x c++ -std=c++17 -fms-compatibility -ferror-limit=0 -Wno-pragma-once-outside-header
--DWIN32METADATA=1 -D_COM_NO_STANDARD_GUIDS_=1`, a `shared`/`um` reachability scope, and
-the bundled Windows metadata as the reference that supplies the `Windows.Win32.Metadata`
-attribute vocabulary during the RDL compile. `_COM_NO_STANDARD_GUIDS_` suppresses MSVC
-smart-pointer conveniences from `comdef.h`; those C++ helpers are not Win32 ABI metadata.
+**`--arch`** may be repeated. Each architecture is extracted and compiled independently;
+multi-architecture runs execute those workers in parallel and merge their WinMDs so
+architecture-specific declarations are tagged.
+
+The parser uses C++20 with Microsoft extensions, output is partitioned by defining header,
+and the bundled Windows metadata supplies framework and external Win32 reference types
+during RDL emission.
 
 ## libclang
 
-`windows-clang` pins libclang **22.1.8**. It is taken from `LIBCLANG_PATH` when set,
-otherwise the `libclang.runtime.win-<arch>` NuGet package is restored on demand into the
-NuGet global cache using `curl` and `tar` from `System32`. The loaded version is checked
-against the pinned one, and every failure reports the manual `nuget install` fallback.
+The tool pins libclang **22.1.8**. It uses `LIBCLANG_PATH` when set; otherwise the
+`libclang.runtime.win-<arch>` NuGet package is restored on demand into the NuGet global
+cache. Matching clang resource headers are cached under
+`<obj>\clang-resource\22.1.8`. The loaded libclang version is verified before extraction.
 
 ```powershell
 cargo run --quiet --locked --manifest-path tools\rust\Cargo.toml -- libclang
 ```
-
-## Known gaps
-
-- **SAL.** `generation\WinSDK\inc\sal.h` is written for ClangSharp. `windows-clang` reads
-  either portable `annotate` stubs or SDK SAL attribute tokens, so annotation fidelity under
-  this shim is unverified and is expected to move with the annotation specification.
-- **Architecture-dependent constants.** Multi-architecture generation succeeds, but
-  `windows-rdl` 0.100.0 currently leaves duplicate constants such as `CONTEXT_ALL` and
-  `MAXUINT_PTR` in the flat `Windows.Win32.Apis` container. The architecture merge needs
-  to coalesce or tag those fields before the full WinMD passes the duplicate-constant gate.
-- **API equivalence.** The generated WinMD is not yet compared against the released
-  metadata; that is deliberately deferred.

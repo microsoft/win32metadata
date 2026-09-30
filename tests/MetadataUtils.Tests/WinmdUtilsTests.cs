@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -13,6 +14,18 @@ namespace MetadataUtils.Tests
 
     public class WinmdUtilsTests
     {
+        [Fact]
+        public void GenericSignatureTypeProvider_FormatsGenericInstantiation()
+        {
+            var provider = new GenericSignatureTypeProvider();
+
+            Assert.Equal(
+                "System.Collections.Generic.Dictionary<string, int>",
+                provider.GetGenericInstantiation(
+                    "System.Collections.Generic.Dictionary",
+                    ImmutableArray.Create("string", "int")));
+        }
+
         [Fact]
         public void GetTypes_MultipleInterfacesPresent_CorrectNumberOfMethodsReturned()
         {

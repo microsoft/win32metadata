@@ -1,30 +1,61 @@
-//! `scrape`: partition `main.cpp` files -> WinMD, using windows-clang and windows-rdl.
+//! `scrape`: Windows SDK headers or focused partition inputs -> WinMD.
 //!
-//! This is the minimal alternate pipeline. Its inputs are the existing partition translation
-//! units, the SDK header roots, optionally the SDK import-library root, and the target
-//! architectures. The root namespace, reachability scope, assembly identity, clang language
-//! settings, and intermediate RDL have simple defaults and require no RSP or JSON sidecars.
+//! The production path uses the pinned producer's aggregate + satellite header manifest.
+//! Focused partition translation units remain available for package fixtures and inner-loop
+//! debugging. Neither path requires RSP or JSON metadata sidecars.
 
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
 
-use windows_clang::{Arch, Clang, clang};
+use windows_clang::{
+    Annotation, AnnotationTarget, EmitOptions, FactData, Input, MetadataReferences,
+};
 use windows_metadata::reader::{Index, Item};
-use windows_rdl::{ArchInput, merge_arch_rdl, reader};
+use windows_rdl::ArchInput;
 
 use crate::args::{Args, required, set_once};
-use crate::catch::catch;
+use crate::compile::compile_inputs;
 use crate::libclang;
+use crate::merge_arch::merge_architecture_rdl;
 
 const DEFAULT_NAMESPACE: &str = "Windows.Win32";
+const ANNOTATION_HEADER: &str = "win32metadata_annotations.h";
+const SAL_HEADER: &str = "win32metadata_sal.h";
+
+#[derive(Clone, Debug)]
+struct Arch {
+    name: String,
+    triple: String,
+    bits: i32,
+    defines: Vec<String>,
+}
+
+impl Arch {
+    fn known(name: &str) -> Option<Self> {
+        let (triple, bits) = match name {
+            "x64" => ("x86_64-pc-windows-msvc", 2),
+            "arm64" => ("aarch64-pc-windows-msvc", 4),
+            "x86" => ("i686-pc-windows-msvc", 1),
+            _ => return None,
+        };
+        Some(Self {
+            name: name.to_string(),
+            triple: triple.to_string(),
+            bits,
+            defines: Vec::new(),
+        })
+    }
+}
 
 /// Parse the SDK headers as C++ so `extern "C"`, `__declspec`, and SAL are understood.
 /// `-ferror-limit=0` keeps clang from dropping later declarations after a tolerated error.
-const CLANG_ARGS: [&str; 8] = [
+const CLANG_ARGS: [&str; 9] = [
     "-x",
     "c++",
-    "-std=c++17",
+    "-std=c++20",
     "-fms-compatibility",
+    "-fms-extensions",
     "-ferror-limit=0",
     "-Wno-pragma-once-outside-header",
     "-DWIN32METADATA=1",
@@ -44,6 +75,7 @@ const SDK_INCLUDE_SUBDIRS: [&[&str]; 5] =
 pub struct Options {
     pub help: bool,
     partitions: Vec<PathBuf>,
+    partition_roots: Vec<PathBuf>,
     includes: Vec<PathBuf>,
     libs: Vec<PathBuf>,
     archs: Vec<String>,
@@ -51,6 +83,7 @@ pub struct Options {
     scope_headers: Vec<String>,
     symbols: Vec<String>,
     constants: Vec<String>,
+    win32_sdk: bool,
     namespace: Option<String>,
     assembly_name: Option<String>,
     assembly_version: Option<[u16; 4]>,
@@ -78,6 +111,7 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
                 return Ok(options);
             }
             "--partition" => options.partitions.push(args.path(&option)?),
+            "--partition-root" => options.partition_roots.push(args.path(&option)?),
             "--include" => options.includes.push(args.path(&option)?),
             "--lib" => options.libs.push(args.path(&option)?),
             "--arch" => options.archs.push(args.value(&option)?),
@@ -85,6 +119,7 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
             "--scope-header" => options.scope_headers.push(args.value(&option)?),
             "--symbol" => options.symbols.push(args.value(&option)?),
             "--constant" => options.constants.push(args.value(&option)?),
+            "--win32-sdk" => options.win32_sdk = true,
             "--namespace" => set_once(&mut options.namespace, args.value(&option)?, &option)?,
             "--assembly-name" => {
                 set_once(&mut options.assembly_name, args.value(&option)?, &option)?
@@ -124,8 +159,11 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
 }
 
 fn validate(options: &Options) -> Result<(), String> {
-    if options.partitions.is_empty() {
-        return Err("at least one `--partition <main.cpp>` is required".to_string());
+    if !options.win32_sdk && options.partitions.is_empty() && options.partition_roots.is_empty() {
+        return Err(
+            "at least one `--partition <main.cpp>`, `--partition-root <dir>`, or `--win32-sdk` is required"
+                .to_string(),
+        );
     }
     if options.includes.is_empty() {
         return Err("at least one `--include <dir>` is required".to_string());
@@ -147,8 +185,7 @@ fn validate(options: &Options) -> Result<(), String> {
     Ok(())
 }
 
-/// Requested architectures, defaulting to a single x64 pass. The first is canonical: it
-/// writes the RDL partitions the other architectures are merged into.
+/// Requested architectures, defaulting to a single x64 pass.
 fn archs(options: &Options) -> Vec<String> {
     if options.archs.is_empty() {
         vec!["x64".to_string()]
@@ -167,6 +204,16 @@ fn scopes(options: &Options) -> Vec<&str> {
 
 fn namespace(options: &Options) -> &str {
     options.namespace.as_deref().unwrap_or(DEFAULT_NAMESPACE)
+}
+
+fn scope_header_suffixes(options: &Options) -> impl Iterator<Item = String> + '_ {
+    options.scope_headers.iter().map(|header| {
+        if Path::new(header).extension().is_some() {
+            header.clone()
+        } else {
+            format!("{header}.h")
+        }
+    })
 }
 
 fn assembly_name(options: &Options) -> Result<&str, String> {
@@ -194,10 +241,6 @@ fn obj_dir(options: &Options) -> PathBuf {
 }
 
 /// Resolves every path option against the current directory up front.
-///
-/// A multi-architecture scrape moves the process working directory (see [`execute`]) so the
-/// clang resource-header cache `windows-clang` keeps at the relative path `target/windows-clang`
-/// lands in the object directory instead of the repository root.
 fn absolutize(options: &mut Options) -> Result<(), String> {
     fn one(path: &mut PathBuf) -> Result<(), String> {
         *path = std::path::absolute(&*path)
@@ -206,6 +249,7 @@ fn absolutize(options: &mut Options) -> Result<(), String> {
     }
 
     options.partitions.iter_mut().try_for_each(one)?;
+    options.partition_roots.iter_mut().try_for_each(one)?;
     options.includes.iter_mut().try_for_each(one)?;
     options.libs.iter_mut().try_for_each(one)?;
     for path in [options.output.as_mut(), options.obj.as_mut()]
@@ -213,6 +257,34 @@ fn absolutize(options: &mut Options) -> Result<(), String> {
         .flatten()
     {
         one(path)?;
+    }
+    expand_partition_roots(options)?;
+    Ok(())
+}
+
+fn expand_partition_roots(options: &mut Options) -> Result<(), String> {
+    for root in &options.partition_roots {
+        if !root.is_dir() {
+            return Err(format!(
+                "`--partition-root {}` is not a directory",
+                root.display()
+            ));
+        }
+
+        let mut partitions = std::fs::read_dir(root)
+            .map_err(|error| format!("failed to read `{}`: {error}", root.display()))?
+            .filter_map(Result::ok)
+            .map(|entry| entry.path().join("main.cpp"))
+            .filter(|path| path.is_file())
+            .collect::<Vec<_>>();
+        partitions.sort();
+        if partitions.is_empty() {
+            return Err(format!(
+                "`--partition-root {}` contains no immediate partition directories with main.cpp",
+                root.display()
+            ));
+        }
+        options.partitions.extend(partitions);
     }
     Ok(())
 }
@@ -257,6 +329,40 @@ fn include_dirs(options: &Options) -> Result<Vec<PathBuf>, String> {
 /// Symbol -> DLL resolution is first-wins, so a directory is sorted by name and a file named
 /// directly on the command line keeps its position.
 fn lib_files(options: &Options) -> Result<Vec<PathBuf>, String> {
+    if options.win32_sdk {
+        if options.libs.is_empty() {
+            return Err("`--win32-sdk` requires an SDK import-library directory".to_string());
+        }
+
+        return crate::win32_headers::IMPORT_LIBS
+            .iter()
+            .map(|name| {
+                options
+                    .libs
+                    .iter()
+                    .find_map(|path| {
+                        if path.is_dir() {
+                            let candidate = path.join(name);
+                            candidate.is_file().then_some(candidate)
+                        } else if path.is_file()
+                            && path
+                                .file_name()
+                                .is_some_and(|file| file.eq_ignore_ascii_case(name))
+                        {
+                            Some(path.clone())
+                        } else {
+                            None
+                        }
+                    })
+                    .ok_or_else(|| {
+                        format!(
+                            "pinned producer import library `{name}` was not found in any `--lib` location"
+                        )
+                    })
+            })
+            .collect();
+    }
+
     let mut files = Vec::new();
 
     for lib in &options.libs {
@@ -303,47 +409,266 @@ fn path_arg(path: &Path, option: &str) -> Result<String, String> {
         .ok_or_else(|| format!("`{option}` path is not valid Unicode: {}", path.display()))
 }
 
-/// Builds the architecture-invariant parse: language settings, SDK includes, reachability
-/// scope, partition sources, and the symbol -> DLL mappings recovered from import libraries.
-fn build_clang(options: &Options) -> Result<Clang, String> {
-    let mut builder = clang();
-    builder.args(CLANG_ARGS);
-    builder.resolution_default();
+struct ScrapeConfiguration {
+    inputs: Vec<Input>,
+    args: Vec<String>,
+    libraries: LibraryMap,
+    references: MetadataReferences,
+    exclusions: MetadataReferences,
+    annotation_header: String,
+    sal_header: String,
+    has_import_libraries: bool,
+}
 
-    for dir in include_dirs(options)? {
-        builder.args(["-isystem", &path_arg(&dir, "--include")?]);
+#[derive(Default)]
+struct LibraryMap(HashMap<String, String>);
+
+impl LibraryMap {
+    fn import_library(&mut self, path: &Path) -> Result<(), String> {
+        let bytes = std::fs::read(path)
+            .map_err(|error| format!("failed to read `{}`: {error}", path.display()))?;
+        for import in windows_rdl::implib::read(&bytes).map_err(|error| error.to_string())? {
+            self.0.entry(import.symbol).or_insert(import.dll);
+        }
+        Ok(())
     }
 
-    for partition in &options.partitions {
-        let source = std::fs::read_to_string(partition).map_err(|error| {
-            format!(
-                "failed to read `--partition {}`: {error}",
-                partition.display()
-            )
-        })?;
-        builder.input_text(&source);
+    fn resolved_library(&self, symbol: &str) -> Option<&str> {
+        self.0.get(symbol).map(String::as_str)
+    }
+
+    fn set_library(&mut self, symbol: &str, library: &str) {
+        self.0.insert(symbol.to_string(), library.to_string());
+    }
+}
+
+fn apply_library_overrides(libraries: &mut LibraryMap) -> Result<(), String> {
+    for entry in crate::win32_headers::LIBRARY_OVERRIDES {
+        let actual = libraries.resolved_library(entry.symbol);
+        if actual != entry.sdk_library {
+            return Err(format!(
+                "SDK library mapping for `{}` changed: expected {:?}, found {:?}",
+                entry.symbol, entry.sdk_library, actual
+            ));
+        }
+    }
+    for entry in crate::win32_headers::LIBRARY_OVERRIDES {
+        libraries.set_library(entry.symbol, entry.corrected_library);
+    }
+    Ok(())
+}
+
+fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String> {
+    let include_dirs = include_dirs(options)?;
+    let required_header = |name: &str| {
+        include_dirs
+            .iter()
+            .map(|directory| directory.join(name))
+            .find(|path| path.is_file())
+            .ok_or_else(|| format!("`{name}` was not found in any `--include` directory"))
+            .and_then(|path| path_arg(&path, "--include"))
+    };
+    let annotation_header = required_header(ANNOTATION_HEADER)?;
+    let sal_header = required_header(SAL_HEADER)?;
+
+    let root_dirs = include_dirs
+        .iter()
+        .filter(|directory| {
+            directory
+                .file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| {
+                    scopes(options)
+                        .iter()
+                        .any(|scope| name.eq_ignore_ascii_case(scope))
+                })
+        })
+        .map(|directory| path_arg(directory, "--include"))
+        .collect::<Result<Vec<_>, _>>()?;
+    let inputs = build_inputs(options, &include_dirs, &root_dirs)?;
+
+    let mut args = CLANG_ARGS
+        .iter()
+        .map(|argument| argument.to_string())
+        .collect::<Vec<_>>();
+    args.extend(["-include".to_string(), sal_header.clone()]);
+    args.extend(["-include".to_string(), annotation_header.clone()]);
+    for directory in &include_dirs {
+        args.extend(["-isystem".to_string(), path_arg(directory, "--include")?]);
     }
 
     let libs = lib_files(options)?;
+    let mut libraries = LibraryMap::default();
     for lib in &libs {
-        builder
-            .import_library(lib)
-            .map_err(|error| format!("failed to read `{}`: {error}", lib.display()))?;
+        libraries.import_library(lib)?;
     }
-    if !libs.is_empty() {
-        // Only meaningful with import-library coverage; without it every function would go.
-        builder.drop_lib_less();
+    if options.win32_sdk {
+        apply_library_overrides(&mut libraries)?;
     }
 
-    builder.scopes(scopes(options));
-    for header in &options.scope_headers {
-        builder.scope_header(header);
+    let winrt_reference =
+        || windows_metadata::reader::File::new(windows_default::WINRT.to_vec()).unwrap();
+    let win32_reference =
+        || windows_metadata::reader::File::new(windows_default::WIN32.to_vec()).unwrap();
+    let generating_win32 = namespace(options) == DEFAULT_NAMESPACE;
+    let references = if generating_win32 {
+        MetadataReferences::new([winrt_reference()])
+    } else {
+        MetadataReferences::new([winrt_reference(), win32_reference()])
+    };
+    let exclusions = if generating_win32 {
+        MetadataReferences::new(std::iter::empty::<windows_metadata::reader::File>())
+    } else {
+        MetadataReferences::new([winrt_reference(), win32_reference()])
+    };
+
+    Ok(ScrapeConfiguration {
+        inputs,
+        args,
+        libraries,
+        references,
+        exclusions,
+        annotation_header,
+        sal_header,
+        has_import_libraries: !libs.is_empty(),
+    })
+}
+
+fn build_inputs(
+    options: &Options,
+    include_dirs: &[PathBuf],
+    root_dirs: &[String],
+) -> Result<Vec<Input>, String> {
+    const PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
+    const GUID_RESET: &str = "\n#undef INITGUID\n#include <guiddef.h>\n";
+
+    fn include_name(line: &str) -> Option<&str> {
+        let include = line.trim().strip_prefix("#include")?.trim();
+        let closing = match include.as_bytes().first()? {
+            b'<' => b'>',
+            b'"' => b'"',
+            _ => return None,
+        };
+        let end = include.as_bytes()[1..]
+            .iter()
+            .position(|candidate| *candidate == closing)?
+            + 2;
+        Some(&include[1..end - 1])
     }
-    builder.symbols(&options.symbols);
-    builder.constants(&options.constants);
-    builder.resolution_default();
-    builder.namespace(namespace(options));
-    Ok(builder)
+
+    fn file_name(header: &str) -> &str {
+        header.rsplit(['/', '\\']).next().unwrap()
+    }
+
+    fn resolve_header(header: &str, include_dirs: &[PathBuf]) -> Option<PathBuf> {
+        include_dirs
+            .iter()
+            .map(|directory| directory.join(header))
+            .find(|path| path.is_file())
+    }
+
+    let headers = if options.win32_sdk {
+        crate::win32_headers::HEADERS
+            .iter()
+            .chain(crate::win32_headers::SATELLITE_HEADERS)
+            .map(|header| header.to_string())
+            .collect::<Vec<_>>()
+    } else {
+        let mut headers = BTreeMap::<String, String>::new();
+        for partition in &options.partitions {
+            let source = std::fs::read_to_string(partition).map_err(|error| {
+                format!(
+                    "failed to read `--partition {}`: {error}",
+                    partition.display()
+                )
+            })?;
+            for header in source.lines().filter_map(include_name) {
+                if [ANNOTATION_HEADER, SAL_HEADER]
+                    .iter()
+                    .any(|forced| file_name(header).eq_ignore_ascii_case(forced))
+                {
+                    continue;
+                }
+                headers
+                    .entry(header.to_ascii_lowercase())
+                    .or_insert_with(|| header.to_string());
+            }
+        }
+        headers.into_values().collect()
+    };
+
+    let excluded_roots = crate::win32_headers::EXCLUDE_HEADERS
+        .iter()
+        .filter_map(|header| resolve_header(header, include_dirs))
+        .map(|path| path_arg(&path, "--include"))
+        .collect::<Result<Vec<_>, _>>()?;
+    let prelude = if namespace(options) == DEFAULT_NAMESPACE {
+        PRELUDE
+    } else {
+        ""
+    };
+
+    let has_device_topology = headers.iter().any(|header| {
+        file_name(header).eq_ignore_ascii_case("devicetopology.h")
+            && crate::win32_headers::SATELLITE_HEADERS
+                .iter()
+                .any(|candidate| file_name(header).eq_ignore_ascii_case(candidate))
+    });
+    let mut main_source = prelude.to_string();
+    if has_device_topology {
+        main_source.push_str("\n#include <ks.h>");
+    }
+    let mut satellite_source = format!("{prelude}{GUID_RESET}");
+    let mut main_roots = Vec::new();
+    let mut satellite_roots = Vec::new();
+    let mut main_count = 0usize;
+    let mut satellite_count = 0usize;
+    for header in headers {
+        let path = resolve_header(&header, include_dirs).ok_or_else(|| {
+            format!("header `{header}` was not found in any `--include` directory")
+        })?;
+        let root = path_arg(&path, "--include")?;
+        let satellite = crate::win32_headers::SATELLITE_HEADERS
+            .iter()
+            .any(|candidate| file_name(&header).eq_ignore_ascii_case(candidate));
+        if satellite {
+            if file_name(&header).eq_ignore_ascii_case("devicetopology.h") {
+                satellite_source.push_str("\n#include <ks.h>\n#define _KS_");
+            }
+            satellite_source.push_str(&format!("\n#include <{header}>"));
+            satellite_source.push_str(GUID_RESET);
+            satellite_roots.push(root);
+            satellite_count += 1;
+        } else {
+            main_source.push_str(&format!("\n#include <{header}>"));
+            main_roots.push(root);
+            main_count += 1;
+        }
+    }
+
+    let mut inputs = Vec::with_capacity(2);
+    if main_count != 0 {
+        inputs.push(
+            Input::new("win32metadata-aggregate.cpp", main_source)
+                .with_roots(main_roots)
+                .with_root_dirs(root_dirs.iter().cloned())
+                .with_root_suffixes(scope_header_suffixes(options))
+                .with_excluded_roots(excluded_roots.iter().cloned()),
+        );
+    }
+    if satellite_count != 0 {
+        inputs.push(
+            Input::new("win32metadata-satellites.cpp", satellite_source)
+                .with_roots(satellite_roots),
+        );
+    }
+    if options.win32_sdk && inputs.len() != 2 {
+        return Err(format!(
+            "the Win32 SDK manifest must produce one aggregate and one satellite input, but produced {}",
+            inputs.len()
+        ));
+    }
+    Ok(inputs)
 }
 
 fn execute(options: &Options) -> Result<(), String> {
@@ -355,70 +680,80 @@ fn execute(options: &Options) -> Result<(), String> {
     let rdl_dir = obj.join("rdl");
     let arch_names = archs(options);
 
-    let builder = build_clang(options)?;
+    let configuration = build_configuration(options)?;
 
     println!(
-        "Scraping {} partition(s) for {} into {}",
+        "Scraping {} partition(s) as {} translation unit(s) for {} into {}",
         options.partitions.len(),
+        configuration.inputs.len(),
         arch_names.join(", "),
         rdl_dir.display()
     );
+    println!(
+        "Using annotation contract {} and SAL contract {}",
+        configuration.annotation_header, configuration.sal_header
+    );
 
-    // Non-canonical architectures need version-matched clang resource headers, which
-    // `windows-clang` caches at the relative path `target/windows-clang`. Move into the
-    // object directory so the cache lands there; every path option is already absolute.
-    if arch_names.len() > 1 && std::env::var_os("CLANG_RESOURCE_DIR").is_none() {
-        std::fs::create_dir_all(&obj)
-            .map_err(|error| format!("failed to create `{}`: {error}", obj.display()))?;
-        std::env::set_current_dir(&obj)
-            .map_err(|error| format!("failed to enter `{}`: {error}", obj.display()))?;
-    }
-
-    let canonical = arch(&arch_names[0])?;
     let resource_dir = if arch_names.len() > 1 {
-        Some(catch(
-            "failed to fetch the clang resource headers",
-            windows_clang::clang_resource_dir,
-        )?)
+        Some(libclang::clang_resource_dir(&obj)?)
     } else {
         None
     };
 
-    let mut merged = Vec::new();
-    for (index, name) in arch_names.iter().enumerate() {
-        let arch = arch(name)?;
-        // The canonical architecture writes the RDL partitions the others merge into.
-        let arch_rdl_dir = if index == 0 {
-            rdl_dir.clone()
-        } else {
-            obj.join(name)
-        };
-        let arch_winmd = obj.join(format!("Windows.Win32.{name}.winmd"));
-
-        scrape_arch(
-            &builder,
-            &arch,
-            resource_dir
-                .as_deref()
-                .filter(|_| arch.bits != canonical.bits),
-            &arch_rdl_dir,
-            &arch_winmd,
-            options,
-        )?;
-
-        merged.push(ArchInput {
-            rdl_dir: arch_rdl_dir,
-            winmd: arch_winmd,
-            bits: arch.bits,
-        });
-    }
+    let merged = std::thread::scope(|scope| {
+        let handles = arch_names
+            .iter()
+            .enumerate()
+            .map(|(index, name)| {
+                let configuration = &configuration;
+                let resource_dir = resource_dir.as_deref();
+                let rdl_dir = &rdl_dir;
+                let obj = &obj;
+                scope.spawn(move || -> Result<ArchInput, String> {
+                    let arch = arch(name)?;
+                    let arch_rdl_dir = if index == 0 {
+                        rdl_dir.clone()
+                    } else {
+                        obj.join(name)
+                    };
+                    let arch_winmd = obj.join(format!("Windows.Win32.{name}.winmd"));
+                    scrape_arch(
+                        configuration,
+                        &arch,
+                        resource_dir,
+                        &arch_rdl_dir,
+                        &arch_winmd,
+                        options,
+                    )?;
+                    Ok(ArchInput {
+                        rdl_dir: arch_rdl_dir,
+                        winmd: arch_winmd,
+                        bits: arch.bits,
+                    })
+                })
+            })
+            .collect::<Vec<_>>();
+        handles
+            .into_iter()
+            .map(|handle| {
+                handle
+                    .join()
+                    .map_err(|_| "architecture scrape worker panicked".to_string())?
+            })
+            .collect::<Result<Vec<_>, String>>()
+    })?;
 
     if merged.len() > 1 {
-        // Fold the per-architecture surfaces back into the defining-header partitions so
-        // symbols that exist on only some architectures are tagged, then rebuild.
-        merge_arch_rdl(&merged, None, namespace(options), &rdl_dir)
-            .map_err(|error| format!("failed to merge architectures: {error}"))?;
-        compile(&rdl_dir, output, options)?;
+        // Merge the per-architecture binaries directly, then decompile that authoritative
+        // result back into the defining-header partitions for inspection and caching.
+        merge_architecture_rdl(
+            &merged,
+            namespace(options),
+            &rdl_dir,
+            output,
+            assembly_name(options)?,
+            options.assembly_version,
+        )?;
     } else {
         copy(&merged[0].winmd, output)?;
     }
@@ -436,7 +771,7 @@ fn arch(name: &str) -> Result<Arch, String> {
 
 /// Scrapes one architecture into its own RDL directory and compiles those partitions.
 fn scrape_arch(
-    builder: &Clang,
+    configuration: &ScrapeConfiguration,
     arch: &Arch,
     resource_dir: Option<&str>,
     rdl_dir: &Path,
@@ -445,14 +780,185 @@ fn scrape_arch(
 ) -> Result<(), String> {
     clear_rdl_dir(rdl_dir)?;
 
-    let mut builder = builder.clone();
-    builder.target(&arch.triple).output(rdl_dir);
-    if let Some(dir) = resource_dir {
-        builder.args(["-resource-dir", dir]).exclude_path(dir);
+    let mut owned_args = configuration.args.clone();
+    owned_args.push(format!("--target={}", arch.triple));
+    owned_args.extend(arch.defines.iter().cloned());
+    if arch.name != "x64"
+        && let Some(dir) = resource_dir
+    {
+        owned_args.extend(["-resource-dir".to_string(), dir.to_string()]);
+    }
+    let args = owned_args.iter().map(String::as_str).collect::<Vec<_>>();
+
+    let started = std::time::Instant::now();
+    let snapshot = windows_clang::extract(configuration.inputs.clone(), &args)
+        .map_err(|error| format!("failed to extract {} metadata: {error}", arch.name))?;
+    println!(
+        "Extracted {} facts for {} in {:.2}s",
+        snapshot.facts().len(),
+        arch.name,
+        started.elapsed().as_secs_f32()
+    );
+
+    if std::env::var_os("WINDOWS_CLANG_DIAGNOSTICS").is_some() {
+        for (fact, reason) in snapshot.unsupported().filter(|(fact, _)| fact.root) {
+            eprintln!("unsupported {}: {reason}", fact.name);
+        }
     }
 
-    catch("the header scrape panicked", || builder.write_by_header())?
-        .map_err(|error| format!("failed to generate RDL in `{}`: {error}", rdl_dir.display()))?;
+    let mut links_by_name = BTreeMap::<&str, BTreeSet<&str>>::new();
+    for fact in snapshot.facts().iter().filter(|fact| fact.root) {
+        if let FactData::Function { link_name, .. } = &fact.data {
+            links_by_name
+                .entry(&fact.name)
+                .or_default()
+                .insert(link_name);
+        }
+    }
+    let resolve_library = |name: &str, link_name: &str| {
+        configuration
+            .libraries
+            .resolved_library(link_name)
+            .or_else(|| {
+                links_by_name
+                    .get(name)
+                    .is_some_and(|links| links.len() == 1)
+                    .then(|| configuration.libraries.resolved_library(name))
+                    .flatten()
+            })
+    };
+    let libraries = snapshot
+        .facts()
+        .iter()
+        .filter(|fact| fact.root)
+        .filter_map(|fact| {
+            let FactData::Function { link_name, .. } = &fact.data else {
+                return None;
+            };
+            resolve_library(&fact.name, link_name)
+                .map(|library| (link_name.clone(), library.to_string()))
+        })
+        .collect::<BTreeMap<_, _>>();
+
+    let has_import_annotation = |fact: &windows_clang::Fact| {
+        snapshot
+            .annotations()
+            .get(&AnnotationTarget::Declaration(fact.origin.clone()))
+            .is_some_and(|annotations| {
+                annotations
+                    .iter()
+                    .any(|annotation| matches!(annotation, Annotation::ImportLibrary(_)))
+            })
+    };
+    let requested_symbols = options
+        .symbols
+        .iter()
+        .map(String::as_str)
+        .collect::<BTreeSet<_>>();
+    let selected_functions = if !requested_symbols.is_empty() {
+        let mut found = BTreeSet::new();
+        let mut links = BTreeSet::new();
+        for fact in snapshot.facts().iter().filter(|fact| fact.root) {
+            if let FactData::Function { link_name, .. } = &fact.data
+                && requested_symbols.contains(fact.name.as_str())
+            {
+                found.insert(fact.name.as_str());
+                links.insert(link_name.clone());
+            }
+        }
+        if let Some(missing) = requested_symbols
+            .iter()
+            .find(|name| !found.contains(**name))
+        {
+            return Err(format!("selected function `{missing}` was not found"));
+        }
+        Some(links)
+    } else if configuration.has_import_libraries {
+        Some(
+            snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root)
+                .filter_map(|fact| {
+                    let FactData::Function { link_name, .. } = &fact.data else {
+                        return None;
+                    };
+                    (libraries.contains_key(link_name) || has_import_annotation(fact))
+                        .then(|| link_name.clone())
+                })
+                .collect(),
+        )
+    } else {
+        None
+    };
+
+    let mut excluded_types = configuration.exclusions.excluded_types().clone();
+    let mut excluded_functions = configuration.exclusions.excluded_functions().clone();
+    let mut excluded_constants = configuration.exclusions.excluded_constants().clone();
+    if !options.symbols.is_empty() || !options.constants.is_empty() {
+        excluded_types.extend(
+            snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root && !matches!(fact.data, FactData::Function { .. }))
+                .map(|fact| fact.name.clone()),
+        );
+        excluded_constants.extend(
+            snapshot
+                .constants()
+                .iter()
+                .map(|constant| constant.name.clone()),
+        );
+    }
+    if !options.constants.is_empty() {
+        excluded_functions.extend(
+            snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root && matches!(fact.data, FactData::Function { .. }))
+                .map(|fact| fact.name.clone()),
+        );
+        let selected = options.constants.iter().collect::<BTreeSet<_>>();
+        let found = snapshot
+            .constants()
+            .iter()
+            .filter(|constant| selected.contains(&constant.name))
+            .map(|constant| constant.name.as_str())
+            .collect::<BTreeSet<_>>();
+        if let Some(missing) = selected.iter().find(|name| !found.contains(name.as_str())) {
+            return Err(format!("selected constant `{missing}` was not found"));
+        }
+        for name in &options.constants {
+            excluded_constants.remove(name);
+        }
+    }
+
+    let mut emit = EmitOptions::new(namespace(options), configuration.references.types());
+    emit.libraries = Some(&libraries);
+    emit.library = (!configuration.has_import_libraries).then_some("");
+    emit.excluded_types = Some(&excluded_types);
+    emit.excluded_functions = Some(&excluded_functions);
+    emit.excluded_constants = Some(&excluded_constants);
+    emit.functions = selected_functions.as_ref();
+    let partitions = snapshot
+        .emit_by_header_with_options(&emit)
+        .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
+
+    let mut stems = BTreeSet::new();
+    for (header, rdl) in partitions {
+        let stem = Path::new(&header)
+            .file_stem()
+            .and_then(|stem| stem.to_str())
+            .ok_or_else(|| format!("invalid defining header `{header}`"))?
+            .to_ascii_lowercase();
+        if !stems.insert(stem.clone()) {
+            return Err(format!(
+                "multiple defining headers map to RDL partition `{stem}.rdl`"
+            ));
+        }
+        std::fs::write(rdl_dir.join(format!("{stem}.rdl")), rdl)
+            .map_err(|error| format!("failed to write `{stem}.rdl`: {error}"))?;
+    }
 
     compile(rdl_dir, winmd, options)
 }
@@ -462,24 +968,13 @@ fn scrape_arch(
 /// Emit the metadata-only pseudo-attribute vocabulary into the output while the bundled
 /// references resolve framework and external Win32 types used by generated declarations.
 fn compile(rdl_dir: &Path, winmd: &Path, options: &Options) -> Result<(), String> {
-    if let Some(parent) = winmd.parent() {
-        std::fs::create_dir_all(parent)
-            .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
-    }
-
-    let mut compiler = reader();
-    compiler
-        .input(rdl_dir)
-        .input_text(windows_rdl::WIN32_METADATA_RDL)
-        .reference_default()
-        .assembly_name(assembly_name(options)?)
-        .output(winmd);
-    if let Some(version) = options.assembly_version {
-        compiler.assembly_version(version);
-    }
-    compiler
-        .write()
-        .map_err(|error| format!("failed to compile `{}`: {error}", winmd.display()))
+    compile_inputs(
+        &[rdl_dir.to_path_buf()],
+        &[],
+        assembly_name(options)?,
+        options.assembly_version,
+        winmd,
+    )
 }
 
 fn copy(from: &Path, to: &Path) -> Result<(), String> {
@@ -520,8 +1015,10 @@ fn summarize(winmd: &Path) -> Result<String, String> {
         )
     })?;
 
+    let mut namespaces = BTreeSet::new();
     let mut counts = [0usize; 3];
-    for (_, _, item) in index.iter_items() {
+    for (namespace, _, item) in index.iter_items() {
+        namespaces.insert(namespace);
         match item {
             Item::Type(_) => counts[0] += 1,
             Item::Fn(_) => counts[1] += 1,
@@ -530,8 +1027,11 @@ fn summarize(winmd: &Path) -> Result<String, String> {
     }
 
     Ok(format!(
-        "Metadata: {} type(s), {} function(s), {} constant(s)",
-        counts[0], counts[1], counts[2]
+        "Metadata: {} namespace(s), {} type(s), {} function(s), {} constant(s)",
+        namespaces.len(),
+        counts[0],
+        counts[1],
+        counts[2]
     ))
 }
 
@@ -539,6 +1039,7 @@ pub fn help_text() -> &'static str {
     "Usage:
   win32metadata-tools scrape \\
     --partition <main.cpp>... \\
+    [--partition-root <dir>]... \\
     --include <dir>... \\
     [--lib <dir-or-file>]... \\
     [--arch <x64|arm64|x86>]... \\
@@ -546,6 +1047,7 @@ pub fn help_text() -> &'static str {
     [--scope-header <header>]... \
     [--symbol <name>]... \\
     [--constant <name>]... \\
+    [--win32-sdk] \\
     [--namespace <root>] \\
     [--assembly-name <name>] \\
     [--assembly-version <A.B.C.D>] \\
@@ -553,6 +1055,9 @@ pub fn help_text() -> &'static str {
     [--obj <dir>]
 
   --partition   Partition translation unit to scrape. Repeatable.
+  --partition-root
+                Directory whose immediate child directories contain partition main.cpp
+                translation units. Repeatable.
   --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
@@ -567,6 +1072,8 @@ pub fn help_text() -> &'static str {
                 named here and unrelated declarations are omitted.
   --constant    Exact source-owned loose constant to emit. Repeatable. When present,
                 functions, types, and unselected constants are omitted.
+  --win32-sdk   Use the pinned producer's aggregate + satellite Windows SDK header
+                manifest instead of partition translation units.
   --namespace   Root namespace for emitted declarations. Defaults to Windows.Win32.
   --assembly-name
                 Output assembly name. Defaults to the --output file stem.
@@ -620,6 +1127,34 @@ mod tests {
     fn partitions_are_required() {
         let error = parse_args(&["--include", "inc", "--output", "obj/out.winmd"]).unwrap_err();
         assert!(error.contains("--partition"), "{error}");
+    }
+
+    #[test]
+    fn partition_roots_satisfy_required_input() {
+        let options = parse_args(&[
+            "--partition-root",
+            "Partitions",
+            "--include",
+            "inc",
+            "--output",
+            "obj/out.winmd",
+        ])
+        .unwrap();
+        assert_eq!(options.partition_roots, vec![PathBuf::from("Partitions")]);
+    }
+
+    #[test]
+    fn win32_sdk_manifest_satisfies_required_input() {
+        let options = parse_args(&[
+            "--win32-sdk",
+            "--include",
+            "inc",
+            "--output",
+            "obj/out.winmd",
+        ])
+        .unwrap();
+        assert!(options.win32_sdk);
+        assert!(options.partitions.is_empty());
     }
 
     #[test]
@@ -698,6 +1233,34 @@ mod tests {
     }
 
     #[test]
+    fn headers_use_one_aggregate_and_one_satellite_input() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-aggregate-inputs-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        std::fs::create_dir_all(&root).unwrap();
+        let first = root.join("first.cpp");
+        let second = root.join("second.cpp");
+        std::fs::write(&first, "#include <first.h>\n").unwrap();
+        std::fs::write(&second, "#include <ntddstor.h>\n").unwrap();
+        std::fs::write(root.join("first.h"), "#pragma once\n").unwrap();
+        std::fs::write(root.join("ntddstor.h"), "#pragma once\n").unwrap();
+
+        let options = Options {
+            partitions: vec![first, second],
+            ..Default::default()
+        };
+        let inputs = build_inputs(&options, &[root.clone()], &[]).unwrap();
+        assert_eq!(inputs.len(), 2);
+        assert!(inputs[0].source.contains("#include <first.h>"));
+        assert!(!inputs[0].source.contains("#include <ntddstor.h>"));
+        assert!(inputs[1].source.contains("#include <ntddstor.h>"));
+        assert!(inputs[1].source.contains("#undef INITGUID"));
+        std::fs::remove_dir_all(root).ok();
+    }
+
+    #[test]
     fn repeated_single_valued_options_are_rejected() {
         let error = parse_with(&["--output", "other.winmd"]).unwrap_err();
         assert!(error.contains("only be specified once"), "{error}");
@@ -724,6 +1287,10 @@ mod tests {
         .unwrap();
         assert_eq!(scopes(&options), vec!["sample"]);
         assert_eq!(options.scope_headers, vec!["SampleApi"]);
+        assert_eq!(
+            scope_header_suffixes(&options).collect::<Vec<_>>(),
+            vec!["SampleApi.h"]
+        );
         assert_eq!(options.symbols, vec!["GetSample", "SetSample"]);
         assert_eq!(namespace(&options), "Contoso.Api");
         assert_eq!(assembly_name(&options).unwrap(), "Contoso.Metadata");

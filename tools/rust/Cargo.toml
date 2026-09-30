@@ -9,6 +9,8 @@ name = "win32metadata-tools"
 path = "src/main.rs"
 
 [dependencies]
-windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "1753cce23c6bd4c90cda900b34a75dfe18f9b6f2" }
-windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "1753cce23c6bd4c90cda900b34a75dfe18f9b6f2" }
-windows-rdl = { git = "https://github.com/jevansaks/windows-rs", rev = "1753cce23c6bd4c90cda900b34a75dfe18f9b6f2" }
+clang-sys = { version = "1.9.0", features = ["runtime"] }
+windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }
+windows-default = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }
+windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }
+windows-rdl = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }

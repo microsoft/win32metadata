@@ -8,6 +8,8 @@ use windows_rdl::reader;
 
 use crate::args::{Args, required, set_once};
 
+pub(crate) const METADATA_RDL: &str = include_str!("metadata.rdl");
+
 #[derive(Default, Debug)]
 struct Options {
     help: bool,
@@ -137,27 +139,46 @@ pub(crate) fn compile_inputs(
     assembly_version: Option<[u16; 4]>,
     output: &std::path::Path,
 ) -> Result<(), String> {
-    if let Some(parent) = output.parent() {
-        std::fs::create_dir_all(parent)
-            .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
-    }
+    let started = std::time::Instant::now();
+    let parent = output.parent().unwrap_or_else(|| std::path::Path::new("."));
+    std::fs::create_dir_all(parent)
+        .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
 
-    let mut compiler = reader();
-    for input in inputs {
-        compiler.input(input);
-    }
-    compiler
-        .input_text(windows_rdl::WIN32_METADATA_RDL)
-        .reference_default()
-        .references(references)
-        .assembly_name(assembly_name)
-        .output(output);
-    if let Some(version) = assembly_version {
-        compiler.assembly_version(version);
-    }
-    compiler
-        .write()
-        .map_err(|error| format!("failed to compile `{}`: {error}", output.display()))?;
+    let staging = parent.join(format!(
+        ".win32metadata-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map_or(0, |duration| duration.as_nanos())
+    ));
+    std::fs::create_dir_all(&staging)
+        .map_err(|error| format!("failed to create `{}`: {error}", staging.display()))?;
+    let staged = staging.join(format!("{assembly_name}.winmd"));
+
+    let result: Result<(), String> = (|| {
+        let mut compiler = reader();
+        for input in inputs {
+            compiler.input(input);
+        }
+        compiler
+            .input_text(METADATA_RDL)
+            .reference_default()
+            .references(references)
+            .output(&staged)
+            .write()
+            .map_err(|error| format!("failed to compile `{}`: {error}", output.display()))?;
+
+        if let Some(version) = assembly_version {
+            patch_assembly_version(&staged, version)?;
+        }
+
+        std::fs::copy(&staged, output)
+            .map(|_| ())
+            .map_err(|error| format!("failed to write `{}`: {error}", output.display()))?;
+        Ok(())
+    })();
+    std::fs::remove_dir_all(&staging).ok();
+    result?;
 
     let index = Index::read(output).ok_or_else(|| {
         format!(
@@ -166,12 +187,44 @@ pub(crate) fn compile_inputs(
         )
     })?;
     println!(
-        "Compiled {} RDL input(s) into {} metadata item(s): {}",
+        "Compiled {} RDL input(s) into {} metadata item(s) in {:.2}s: {}",
         inputs.len(),
         index.iter_items().count(),
+        started.elapsed().as_secs_f32(),
         output.display()
     );
     Ok(())
+}
+
+pub(crate) fn patch_assembly_version(
+    path: &std::path::Path,
+    version: [u16; 4],
+) -> Result<(), String> {
+    const DEFAULT_ASSEMBLY_ROW_PREFIX: [u8; 12] = [
+        0x04, 0x80, 0x00, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00,
+    ];
+
+    let mut bytes = std::fs::read(path)
+        .map_err(|error| format!("failed to read `{}`: {error}", path.display()))?;
+    let matches = bytes
+        .windows(DEFAULT_ASSEMBLY_ROW_PREFIX.len())
+        .enumerate()
+        .filter_map(|(index, candidate)| {
+            (candidate == DEFAULT_ASSEMBLY_ROW_PREFIX).then_some(index)
+        })
+        .collect::<Vec<_>>();
+    let [offset] = matches.as_slice() else {
+        return Err(format!(
+            "could not uniquely locate the metadata assembly row in `{}`",
+            path.display()
+        ));
+    };
+    for (index, value) in version.into_iter().enumerate() {
+        let start = offset + 4 + index * 2;
+        bytes[start..start + 2].copy_from_slice(&value.to_le_bytes());
+    }
+    std::fs::write(path, bytes)
+        .map_err(|error| format!("failed to update `{}`: {error}", path.display()))
 }
 
 pub fn help_text() -> &'static str {

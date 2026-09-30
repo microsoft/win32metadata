@@ -1,9 +1,10 @@
 <#
 .SYNOPSIS
-    Generates a WinMD directly from selected SDK-header partitions with windows-rs.
+    Generates a WinMD from the pinned raw Windows SDK headers with windows-rs.
 
 .PARAMETER Partition
-    Partition names under generation\WinSDK\Partitions. Defaults to every partition.
+    Optional partition names under generation\WinSDK\Partitions for a focused run.
+    By default, uses the upstream aggregate + satellite SDK header manifest.
 
 .PARAMETER Architecture
     Target architectures to scrape and merge. Defaults to x64, x86, and arm64.
@@ -37,15 +38,28 @@ param (
 $ErrorActionPreference = "Stop"
 $manifest = Join-Path $rootDir "tools\rust\Cargo.toml"
 $tool = Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
-$headerRoot = $recompiledIdlHeadersDir
-$localIncludes = Join-Path $windowsWin32ProjectRoot "inc"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
 $outputStem = [System.IO.Path]::GetFileNameWithoutExtension($outputPath)
 $objDir = Join-Path $windowsWin32ProjectRoot "obj\windows-rs\$outputStem"
 
+if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
+{
+    & dotnet restore "$rootDir\BuildTools\BuildTools.proj" --configfile "$rootDir\nuget.Config" --verbosity quiet
+    ThrowOnNativeProcessError
+}
+
+$sdkPackageRoot = Get-WinSdkCppPkgPath
+$headerRoot = Join-Path $sdkPackageRoot "c\include\10.0.28000.0"
+$includePaths = @(
+    (Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"),
+    (Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage"),
+    (Join-Path $windowsWin32ProjectRoot "inc"),
+    $headerRoot
+)
+
 if (!(Test-Path $headerRoot))
 {
-    throw "Patched SDK headers were not found at $headerRoot. Run scripts\RecompileIdlFilesForScraping.ps1 first."
+    throw "Pinned SDK headers were not found at $headerRoot. Restore BuildTools.proj first."
 }
 
 if (!$SkipBuild.IsPresent)
@@ -54,42 +68,63 @@ if (!$SkipBuild.IsPresent)
     ThrowOnNativeProcessError
 }
 
-if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
-{
-    & dotnet restore "$rootDir\BuildTools\BuildTools.proj" --configfile "$rootDir\nuget.Config" --verbosity quiet
-    ThrowOnNativeProcessError
-}
-
 $sdkLibRoot = Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"
+$assemblyVersion = nbgv get-version -v AssemblyVersion
+$scopeHeaders = @(
+    "activation.h", "CoreWindow.h", "corewindow.h", "DocumentSource.h", "documentsource.h",
+    "EventToken.h", "eventtoken.h", "hstring.h", "inspectable.h", "manual.h",
+    "MemoryBuffer.h", "memorybuffer.h", "midlbase.h", "rdpappcontainerclient.h", "roapi.h",
+    "robuffer.h", "roerrorapi.h", "rometadata.h", "rometadataresolution.h",
+    "roparameterizediid.h", "roregistrationapi.h", "shcore.h", "WeakReference.h",
+    "weakreference.h", "webapplication.h", "windows.graphics.effects.interop.h",
+    "windows.graphics.interop.h", "windows.ui.composition.interop.h", "winstring.h",
+    "Wsdevlicensing.h", "wsdevlicensing.h"
+)
 
-if ($Partition.Count -eq 0)
+$useSdkHeaderManifest = $Partition.Count -eq 0
+if ($useSdkHeaderManifest)
 {
-    $Partition = Get-ChildItem (Join-Path $windowsWin32ProjectRoot "Partitions") -Directory |
-        Where-Object { Test-Path (Join-Path $_.FullName "main.cpp") } |
-        Sort-Object Name |
-        Select-Object -ExpandProperty Name
+    Write-Host "Generating the upstream aggregate + satellite SDK inputs for $($Architecture -join ', ')"
 }
-
-Write-Host "Generating $($Partition.Count) partition(s) for $($Architecture -join ', ')"
+else
+{
+    Write-Host "Generating $($Partition.Count) selected partition manifest(s) for $($Architecture -join ', ')"
+}
 
 $arguments = @(
     "scrape",
-    "--include", $localIncludes,
-    "--include", $headerRoot,
     "--lib", $sdkLibRoot,
     "--namespace", $Namespace,
+    "--assembly-name", $outputStem,
+    "--assembly-version", $assemblyVersion,
     "--output", $outputPath,
     "--obj", $objDir
 )
 
-foreach ($name in $Partition)
+foreach ($include in $includePaths)
 {
-    $main = Join-Path $windowsWin32ProjectRoot "Partitions\$name\main.cpp"
-    if (!(Test-Path $main))
+    $arguments += @("--include", $include)
+}
+
+if ($useSdkHeaderManifest)
+{
+    $arguments += "--win32-sdk"
+    foreach ($header in $scopeHeaders)
     {
-        throw "Partition '$name' was not found at $main."
+        $arguments += @("--scope-header", $header)
     }
-    $arguments += @("--partition", $main)
+}
+else
+{
+    foreach ($name in $Partition)
+    {
+        $main = Join-Path $windowsWin32ProjectRoot "Partitions\$name\main.cpp"
+        if (!(Test-Path $main))
+        {
+            throw "Partition '$name' was not found at $main."
+        }
+        $arguments += @("--partition", $main)
+    }
 }
 
 foreach ($arch in $Architecture)

@@ -7,6 +7,7 @@ mod libclang;
 mod merge_arch;
 mod roundtrip;
 mod scrape;
+mod win32_headers;
 
 use std::env;
 

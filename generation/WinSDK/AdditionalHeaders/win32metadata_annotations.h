@@ -1,17 +1,11 @@
 #pragma once
 
+#include <sal.h>
+
 #if defined(WIN32METADATA) && defined(__clang__)
 #define _WIN32META_ANNOTATION_(text) __attribute__((annotate(text)))
 #else
 #define _WIN32META_ANNOTATION_(text)
-#endif
-
-#ifndef _Out_retval_
-#define _Out_retval_ _Out_ _Win32_Retval_
-#endif
-
-#ifndef _COM_Outptr_retval_
-#define _COM_Outptr_retval_ _COM_Outptr_ _Win32_Retval_
 #endif
 
 #define _Win32_SetLastError_ \
@@ -32,6 +26,13 @@
     _WIN32META_ANNOTATION_("win32metadata:associated_constant=" #name)
 #define _Win32_Retval_ \
     _WIN32META_ANNOTATION_("win32metadata:retval")
+
+#if defined(WIN32METADATA) && defined(__clang__)
+#undef _Out_retval_
+#define _Out_retval_ _Out_ _Win32_Retval_
+#undef _COM_Outptr_retval_
+#define _COM_Outptr_retval_ _COM_Outptr_ _Win32_Retval_
+#endif
 
 #define _Windows_SupportedOS_Windows2000_ \
     _WIN32META_ANNOTATION_("win32metadata:supported_os=windows5.0")

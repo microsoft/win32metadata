@@ -1930,8 +1930,12 @@ namespace WinmdUtilsProgram
 
                     try
                     {
-                        var fullTypeName = new ICSharpCode.Decompiler.TypeSystem.FullTypeName(fullName);
-                        var syntaxTree = decompiler.DecompileType(fullTypeName);
+                        var syntaxTree = decompiler.Decompile(handle);
+                        if (!string.IsNullOrEmpty(ns))
+                        {
+                            writer.WriteLine($"namespace {ns};");
+                            writer.WriteLine();
+                        }
                         writer.WriteLine(syntaxTree.ToString());
                     }
                     catch (Exception ex)
