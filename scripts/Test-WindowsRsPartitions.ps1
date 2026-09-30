@@ -31,8 +31,7 @@ param(
 . "$PSScriptRoot\CommonUtils.ps1"
 
 $ErrorActionPreference = "Stop"
-$manifest = Join-Path $rootDir "tools\rust\Cargo.toml"
-$tool = Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
+$tool = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe"
 $headerRoot = $recompiledIdlHeadersDir
 $localIncludes = Join-Path $windowsWin32ProjectRoot "inc"
 $outputRoot = Join-Path $windowsWin32ProjectRoot "obj\partition-preflight"
@@ -45,11 +44,10 @@ if ($Clean -and (Test-Path $outputRoot)) {
 New-Item -ItemType Directory -Force -Path $workRoot, $logRoot | Out-Null
 
 if (!$SkipBuild) {
-    & cargo build --release --locked --manifest-path $manifest
-    ThrowOnNativeProcessError
+    & "$PSScriptRoot\Build-Win32MetadataTools.ps1" -OutputDir (Split-Path $tool)
 }
 if (!(Test-Path $tool)) {
-    throw "windows-rs metadata tool was not found at '$tool'."
+    throw "Staged windows-rs metadata tool was not found at '$tool'. Run without -SkipBuild first."
 }
 
 if ($Partition.Count -eq 0) {
@@ -67,38 +65,10 @@ $partitionPaths = foreach ($name in $Partition) {
     [pscustomobject]@{ Name = $name; Main = $main }
 }
 
-# Provision cross-target resource headers once, then share the immutable cache
-# across child processes rather than cloning it under every partition object directory.
-if (!$env:CLANG_RESOURCE_DIR) {
-    $provisionRoot = Join-Path $outputRoot "resource-provision"
-    $provisionInput = Join-Path $provisionRoot "main.cpp"
-    $provisionOutput = Join-Path $provisionRoot "provision.winmd"
-    New-Item -ItemType Directory -Force -Path $provisionRoot | Out-Null
-    [System.IO.File]::WriteAllText($provisionInput, "typedef int WIN32METADATA_PREFLIGHT;")
-
-    $provisionMessages = @(& $tool scrape `
-        --include $localIncludes `
-        --include $headerRoot `
-        --partition $provisionInput `
-        --arch x64 --arch x86 --arch arm64 `
-        --output $provisionOutput `
-        --obj $provisionRoot 2>&1)
-    $provisionExitCode = $LASTEXITCODE
-
-    $intrin = Get-ChildItem $provisionRoot -Filter intrin.h -File -Recurse |
-        Select-Object -First 1
-    if (!$intrin) {
-        throw "The Clang resource-header cache was not provisioned under '$provisionRoot' (exit code $provisionExitCode):`n$($provisionMessages -join [Environment]::NewLine)"
-    }
-    $env:CLANG_RESOURCE_DIR = $intrin.DirectoryName
-}
-
 Write-Host "Preflighting $($partitionPaths.Count) partition(s) for x64, x86, and arm64"
 Write-Host "Throttle: $ThrottleLimit"
-Write-Host "Clang resource directory: $env:CLANG_RESOURCE_DIR"
 
 $started = Get-Date
-$resourceDir = $env:CLANG_RESOURCE_DIR
 $results = @($partitionPaths | ForEach-Object -ThrottleLimit $ThrottleLimit -Parallel {
     $item = $_
     $tool = $using:tool
@@ -106,14 +76,12 @@ $results = @($partitionPaths | ForEach-Object -ThrottleLimit $ThrottleLimit -Par
     $headerRoot = $using:headerRoot
     $workRoot = $using:workRoot
     $logRoot = $using:logRoot
-    $resourceDir = $using:resourceDir
 
     $jobRoot = Join-Path $workRoot $item.Name
     $output = Join-Path $jobRoot "$($item.Name).winmd"
     $log = Join-Path $logRoot "$($item.Name).log"
     New-Item -ItemType Directory -Force -Path $jobRoot | Out-Null
 
-    $env:CLANG_RESOURCE_DIR = $resourceDir
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
     $messages = @(& $tool scrape `
         --include $localIncludes `

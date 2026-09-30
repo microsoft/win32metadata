@@ -1,4 +1,4 @@
-// Win32 Metadata API Surface
+﻿// Win32 Metadata API Surface
 // Source: SampleWinmd.winmd
 
 // ═══════════════════════════════════════════════════════════════
@@ -15,7 +15,14 @@ using Windows.Win32.Foundation.Metadata;
 
 public sealed class Apis
 {
+	public const int SAMPLE_FEATURE_ENABLED = 1;
+
+	public const int SAMPLE_INCLUDE_ORDER_TOKEN = 41;
+
 	public const SAMPLE_HANDLE SAMPLE_INVALID_HANDLE = -1;
+
+	[NativeEncoding ("ansi")]
+	public const string SAMPLE_MACRO_HEADER = "MacroExpanded.h";
 
 	public const uint SAMPLE_MODE_EXTERNAL = 3758096385u;
 
@@ -251,6 +258,13 @@ public delegate int SAMPLE_CALLBACKS_anonymous ([In] int arg0);
 
 namespace Sample.Api;
 
+using System.Runtime.InteropServices;
+
+[UnmanagedFunctionPointer (/*Could not decode attribute arguments.*/)]
+public delegate int SAMPLE_CALLBACKS_anonymous_2 ([In] int arg0);
+
+namespace Sample.Api;
+
 using Sample.Api;
 using Windows.Win32.Foundation.Metadata;
 
@@ -259,6 +273,20 @@ using Windows.Win32.Foundation.Metadata;
 public struct SAMPLE_COMPAT_HANDLE
 {
 	public SAMPLE_RESOURCE_HANDLE Value;
+}
+
+namespace Sample.Api;
+
+public struct SAMPLE_DIRECT_DECLARATION
+{
+	public int value;
+}
+
+namespace Sample.Api;
+
+public struct SAMPLE_FEATURE_MACRO
+{
+	public int value;
 }
 
 namespace Sample.Api;
@@ -273,6 +301,13 @@ public struct SAMPLE_HANDLE
 
 namespace Sample.Api;
 
+public struct SAMPLE_MACRO_EXPANDED_INCLUDE
+{
+	public int value;
+}
+
+namespace Sample.Api;
+
 using Windows.Win32.Foundation.Metadata;
 
 [AssociatedConstant ("SAMPLE_MODE_EXTERNAL")]
@@ -280,6 +315,13 @@ public enum SAMPLE_MODE : uint
 {
 	SAMPLE_MODE_NONE,
 	SAMPLE_MODE_FAST
+}
+
+namespace Sample.Api;
+
+public struct SAMPLE_ORDERED_INCLUDE
+{
+	public int value;
 }
 
 namespace Sample.Api;

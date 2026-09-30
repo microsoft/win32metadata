@@ -174,8 +174,14 @@ jobs:
   - task: PowerShell@2
     displayName: Do tests
     inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoTests.ps1
-      arguments: -SkipInstallTools
+      targetType: inline
+      script: |
+        $arguments = @("-SkipInstallTools")
+        if ("$(Build.Reason)" -eq "PullRequest" -and
+            "$(System.PullRequest.TargetBranch)" -eq "refs/heads/feature/shift-left-annotations") {
+          $arguments += "-AllowKnownGeneratorGaps"
+        }
+        & "$(Build.SourcesDirectory)\scripts\DoTests.ps1" @arguments
       pwsh: true
 
   - task: EsrpCodeSigning@1

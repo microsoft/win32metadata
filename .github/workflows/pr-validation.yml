@@ -72,9 +72,13 @@ jobs:
         run: .\scripts\DoSamples.ps1
 
       - name: Run tests
-        continue-on-error: ${{ github.event_name == 'pull_request' && github.base_ref == 'feature/shift-left-annotations' }}
         shell: pwsh
-        run: .\scripts\DoTests.ps1
+        run: |
+          if ("${{ github.event_name }}" -eq "pull_request" -and "${{ github.base_ref }}" -eq "feature/shift-left-annotations") {
+            .\scripts\DoTests.ps1 -AllowKnownGeneratorGaps
+          } else {
+            .\scripts\DoTests.ps1
+          }
 
       - name: Download baseline winmd from target branch
         if: github.event_name == 'pull_request'

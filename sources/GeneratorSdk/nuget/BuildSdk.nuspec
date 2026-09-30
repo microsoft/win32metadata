@@ -21,8 +21,10 @@
     <file src="images\windows.png" target="images"/>
     <file src="sources\GeneratorSdk\sdk\sdk.props" target="sdk\Sdk.props"/>
     <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk\Sdk.targets"/>
+    <file src="eng\Versions.props" target="tools\assets"/>
     <file src="bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe" target="tools\win-x64"/>
     <file src="bin\GeneratorSdk\tools\win-x64\libclang.dll" target="tools\win-x64"/>
+    <file src="bin\GeneratorSdk\tools\win-x64\clang-resource\22.1.8\**\*" target="tools\win-x64\clang-resource\22.1.8"/>
     <file src="generation\WinSDK\inc\*" target="tools\assets\WinSDK\inc"/>
     <file src="generation\WinSDK\AdditionalHeaders\win32metadata_annotations.h" target="tools\assets\WinSDK\inc"/>
     <file src="generation\WinSDK\AdditionalHeaders\win32metadata_sal.h" target="tools\assets\WinSDK\inc"/>

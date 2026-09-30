@@ -98,7 +98,14 @@ stages:
     - task: PowerShell@2
       displayName: Do tests
       inputs:
-        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoTests.ps1
+        targetType: inline
+        script: |
+          $arguments = @("-SkipInstallTools")
+          if ("$(Build.Reason)" -eq "PullRequest" -and
+              "$(System.PullRequest.TargetBranch)" -eq "refs/heads/feature/shift-left-annotations") {
+            $arguments += "-AllowKnownGeneratorGaps"
+          }
+          & "$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoTests.ps1" @arguments
         pwsh: true
 
     - task: onebranch.pipeline.signing@1

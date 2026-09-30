@@ -243,7 +243,7 @@ $scopeHeaders = @(
     "Wsdevlicensing.h", "wsdevlicensing.h"
 )
 $sdkPackageRoot = Get-WinSdkCppPkgPath
-$sdkHeaderRoot = Join-Path $sdkPackageRoot "c\include\10.0.28000.0"
+$sdkHeaderRoot = Join-Path $sdkPackageRoot "c\include\$(Get-WinSdkHeaderVersion)"
 $includePaths = @(
     (Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"),
     (Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage"),

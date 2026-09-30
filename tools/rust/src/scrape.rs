@@ -567,35 +567,41 @@ fn build_inputs(
             .find(|path| path.is_file())
     }
 
-    let headers = if options.win32_sdk {
-        crate::win32_headers::HEADERS
+    if !options.win32_sdk {
+        return options
+            .partitions
             .iter()
-            .chain(crate::win32_headers::SATELLITE_HEADERS)
-            .map(|header| header.to_string())
-            .collect::<Vec<_>>()
-    } else {
-        let mut headers = BTreeMap::<String, String>::new();
-        for partition in &options.partitions {
-            let source = std::fs::read_to_string(partition).map_err(|error| {
-                format!(
-                    "failed to read `--partition {}`: {error}",
-                    partition.display()
-                )
-            })?;
-            for header in source.lines().filter_map(include_name) {
-                if [ANNOTATION_HEADER, SAL_HEADER]
-                    .iter()
-                    .any(|forced| file_name(header).eq_ignore_ascii_case(forced))
-                {
-                    continue;
-                }
-                headers
-                    .entry(header.to_ascii_lowercase())
-                    .or_insert_with(|| header.to_string());
-            }
-        }
-        headers.into_values().collect()
-    };
+            .map(|partition| {
+                let source = std::fs::read_to_string(partition).map_err(|error| {
+                    format!(
+                        "failed to read `--partition {}`: {error}",
+                        partition.display()
+                    )
+                })?;
+                let roots = source
+                    .lines()
+                    .filter_map(include_name)
+                    .filter(|header| {
+                        ![ANNOTATION_HEADER, SAL_HEADER]
+                            .iter()
+                            .any(|forced| file_name(header).eq_ignore_ascii_case(forced))
+                    })
+                    .filter_map(|header| resolve_header(header, include_dirs))
+                    .map(|path| path_arg(&path, "--include"))
+                    .collect::<Result<Vec<_>, _>>()?;
+                Ok(Input::new(path_arg(partition, "--partition")?, source)
+                    .with_roots(roots)
+                    .with_root_dirs(root_dirs.iter().cloned())
+                    .with_root_suffixes(scope_header_suffixes(options)))
+            })
+            .collect();
+    }
+
+    let headers = crate::win32_headers::HEADERS
+        .iter()
+        .chain(crate::win32_headers::SATELLITE_HEADERS)
+        .map(|header| header.to_string())
+        .collect::<Vec<_>>();
 
     let excluded_roots = crate::win32_headers::EXCLUDE_HEADERS
         .iter()
@@ -662,7 +668,7 @@ fn build_inputs(
                 .with_roots(satellite_roots),
         );
     }
-    if options.win32_sdk && inputs.len() != 2 {
+    if inputs.len() != 2 {
         return Err(format!(
             "the Win32 SDK manifest must produce one aggregate and one satellite input, but produced {}",
             inputs.len()
@@ -1233,7 +1239,7 @@ mod tests {
     }
 
     #[test]
-    fn headers_use_one_aggregate_and_one_satellite_input() {
+    fn custom_translation_units_are_not_rewritten() {
         let root = std::env::temp_dir().join(format!(
             "win32metadata-tools-aggregate-inputs-{}",
             std::process::id()
@@ -1242,8 +1248,11 @@ mod tests {
         std::fs::create_dir_all(&root).unwrap();
         let first = root.join("first.cpp");
         let second = root.join("second.cpp");
-        std::fs::write(&first, "#include <first.h>\n").unwrap();
-        std::fs::write(&second, "#include <ntddstor.h>\n").unwrap();
+        let first_source =
+            "#define FEATURE 1\n#include <first.h>\ntypedef int DIRECT_DECLARATION;\n";
+        let second_source = "#define SATELLITE_HEADER <ntddstor.h>\n#include SATELLITE_HEADER\n";
+        std::fs::write(&first, first_source).unwrap();
+        std::fs::write(&second, second_source).unwrap();
         std::fs::write(root.join("first.h"), "#pragma once\n").unwrap();
         std::fs::write(root.join("ntddstor.h"), "#pragma once\n").unwrap();
 
@@ -1253,10 +1262,11 @@ mod tests {
         };
         let inputs = build_inputs(&options, &[root.clone()], &[]).unwrap();
         assert_eq!(inputs.len(), 2);
+        assert_eq!(inputs[0].source, first_source);
+        assert_eq!(inputs[1].source, second_source);
         assert!(inputs[0].source.contains("#include <first.h>"));
-        assert!(!inputs[0].source.contains("#include <ntddstor.h>"));
-        assert!(inputs[1].source.contains("#include <ntddstor.h>"));
-        assert!(inputs[1].source.contains("#undef INITGUID"));
+        assert!(inputs[0].source.contains("DIRECT_DECLARATION"));
+        assert!(inputs[1].source.contains("#include SATELLITE_HEADER"));
         std::fs::remove_dir_all(root).ok();
     }
 

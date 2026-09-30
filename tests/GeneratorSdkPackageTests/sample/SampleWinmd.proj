@@ -13,5 +13,8 @@
     <WinmdIncludeDir Include="$(MSBuildProjectDirectory)"/>
     <WinmdScopeHeader Include="SampleApi"/>
     <WinmdScopeHeader Include="SupportedOsApi"/>
+    <WinmdScopeHeader Include="AOrderUse"/>
+    <WinmdScopeHeader Include="FeatureMacro"/>
+    <WinmdScopeHeader Include="MacroExpanded"/>
   </ItemGroup>
 </Project>

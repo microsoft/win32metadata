@@ -470,7 +470,10 @@ namespace WinmdUtilsProgram
             var suggestedRemappingRegEx = new Regex(@"Recommended remapping: '([^\']*)'");
             bool suggestedRemappingsFound = false;
 
-            var files = Directory.GetFiles(Path.Combine(projectRoot, "obj/scratch"), "*.txt", SearchOption.AllDirectories);
+            var scratchDirectory = Path.Combine(projectRoot, "obj/scratch");
+            var files = Directory.Exists(scratchDirectory)
+                ? Directory.GetFiles(scratchDirectory, "*.txt", SearchOption.AllDirectories)
+                : Array.Empty<string>();
             foreach (var file in files)
             {
                 var lines = File.ReadLines(file);

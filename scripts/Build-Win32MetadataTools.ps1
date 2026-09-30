@@ -32,5 +32,6 @@ if (!(Test-Path $libclang)) {
 New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
 Copy-Item $tool (Join-Path $OutputDir "win32metadata-tools.exe") -Force
 Copy-Item $libclang (Join-Path $OutputDir "libclang.dll") -Force
+& "$PSScriptRoot\Prepare-ClangResourceHeaders.ps1" -OutputDir $OutputDir
 
 Write-Host "Staged WinmdGenerator native tools in $OutputDir"

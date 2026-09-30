@@ -8,6 +8,7 @@ $sample = Join-Path $root "tests\GeneratorSdkPackageTests\sample"
 $expected = Join-Path $root "tests\GeneratorSdkPackageTests\expected\SampleWinmd.apidump.cs"
 $actual = Join-Path $root "obj\GeneratorSdkPackageTests\SampleWinmd.apidump.cs"
 $packages = Join-Path $root "obj\GeneratorSdkPackageTests\packages"
+$deepObj = Join-Path $root "obj\GeneratorSdkPackageTests\deep-consumer-path\one\two\three\four\five\six\seven\winmd"
 
 dotnet pack (Join-Path $root "sources\GeneratorSdk\nuget\BuildSdk.proj") -c Release
 if ($LASTEXITCODE -ne 0) {
@@ -34,9 +35,25 @@ if (Test-Path $packages) {
 }
 $env:NUGET_PACKAGES = $packages
 
-dotnet build (Join-Path $sample "SampleWinmd.proj") -c Release "-p:RestoreConfigFile=$(Join-Path $sample 'NuGet.config')"
+$sampleProject = Join-Path $sample "SampleWinmd.proj"
+dotnet restore $sampleProject "-p:RestoreConfigFile=$(Join-Path $sample 'NuGet.config')"
 if ($LASTEXITCODE -ne 0) {
-    throw "The consuming WinmdGenerator project failed."
+    throw "The consuming WinmdGenerator project failed to restore."
+}
+
+$previousClangResourceDir = $env:CLANG_RESOURCE_DIR
+$previousGitAllowProtocol = $env:GIT_ALLOW_PROTOCOL
+try {
+    Remove-Item Env:\CLANG_RESOURCE_DIR -ErrorAction SilentlyContinue
+    $env:GIT_ALLOW_PROTOCOL = "file"
+    dotnet build $sampleProject -c Release --no-restore "-p:WinmdObjDir=$deepObj"
+    if ($LASTEXITCODE -ne 0) {
+        throw "The consuming WinmdGenerator project failed during offline generation."
+    }
+}
+finally {
+    $env:CLANG_RESOURCE_DIR = $previousClangResourceDir
+    $env:GIT_ALLOW_PROTOCOL = $previousGitAllowProtocol
 }
 
 foreach ($header in @("win32metadata_annotations.h", "win32metadata_sal.h")) {
@@ -48,6 +65,11 @@ foreach ($header in @("win32metadata_annotations.h", "win32metadata_sal.h")) {
     if ((Get-FileHash $packagedHeader).Hash -cne (Get-FileHash $sourceHeader).Hash) {
         throw "The packaged $header differs from the repository source."
     }
+}
+
+$packagedResourceHeader = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\clang-resource\22.1.8\include\intrin.h"
+if (!(Test-Path $packagedResourceHeader)) {
+    throw "The package did not contain the pinned Clang 22.1.8 resource headers."
 }
 
 dotnet build (Join-Path $root "sources\WinmdUtils\WinmdUtils.csproj") -c Release
@@ -234,6 +256,16 @@ if ($actualText -notmatch 'delegate int PSAMPLE_CALLBACK[\s\S]*?struct SAMPLE_CA
 }
 if ($actualText -notmatch '\[Alignment\s*\(\s*8\s*\)\]\s*public struct SAMPLE_PACKED') {
     throw "Explicit alignment was not preserved."
+}
+foreach ($type in @(
+    "SAMPLE_DIRECT_DECLARATION",
+    "SAMPLE_ORDERED_INCLUDE",
+    "SAMPLE_FEATURE_MACRO",
+    "SAMPLE_MACRO_EXPANDED_INCLUDE"
+)) {
+    if ($actualText -notmatch "public struct $type\b") {
+        throw "Translation-unit semantics did not preserve $type."
+    }
 }
 
 Add-Type -AssemblyName System.Reflection.Metadata

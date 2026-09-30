@@ -36,8 +36,7 @@ param (
 . "$PSScriptRoot\CommonUtils.ps1"
 
 $ErrorActionPreference = "Stop"
-$manifest = Join-Path $rootDir "tools\rust\Cargo.toml"
-$tool = Join-Path $rootDir "tools\rust\target\release\win32metadata-tools.exe"
+$tool = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
 $outputStem = [System.IO.Path]::GetFileNameWithoutExtension($outputPath)
 $objDir = Join-Path $windowsWin32ProjectRoot "obj\windows-rs\$outputStem"
@@ -49,7 +48,7 @@ if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
 }
 
 $sdkPackageRoot = Get-WinSdkCppPkgPath
-$headerRoot = Join-Path $sdkPackageRoot "c\include\10.0.28000.0"
+$headerRoot = Join-Path $sdkPackageRoot "c\include\$(Get-WinSdkHeaderVersion)"
 $includePaths = @(
     (Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"),
     (Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage"),
@@ -64,8 +63,11 @@ if (!(Test-Path $headerRoot))
 
 if (!$SkipBuild.IsPresent)
 {
-    & cargo build --release --locked --manifest-path $manifest
-    ThrowOnNativeProcessError
+    & "$PSScriptRoot\Build-Win32MetadataTools.ps1" -OutputDir (Split-Path $tool)
+}
+elseif (!(Test-Path $tool))
+{
+    throw "Staged windows-rs metadata tool was not found at '$tool'. Run without -SkipBuild first."
 }
 
 $sdkLibRoot = Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"

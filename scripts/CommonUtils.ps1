@@ -105,13 +105,6 @@ function Replace-Text
     Set-Content -path $path -Encoding UTF8 -value $content
 }
 
-function Get-LibMappingsFile
-{
-    $libMappingOutputFileName = Join-Path -Path $windowsWin32ProjectRoot -ChildPath "libMappings.rsp"
-
-    return $libMappingOutputFileName
-}
-
 function Get-NugetPropsProperty
 {
     Param ([string] $name, [string]$projectName)
@@ -143,24 +136,27 @@ function Get-WinSdkCppX64PkgPath
     return Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Windows_SDK_CPP_x64")
 }
 
+function Get-RepoBuildProperty
+{
+    Param ([string] $name)
+
+    $item = Select-Xml -Path "$rootDir\eng\Versions.props" -XPath "/Project/PropertyGroup/$name"
+    if (!$item)
+    {
+        throw "Repository build property '$name' was not found."
+    }
+    return $item.Node.InnerText
+}
+
+function Get-WinSdkHeaderVersion
+{
+    return Get-RepoBuildProperty("WindowsSdkHeaderVersion")
+}
+
 function Get-Win32MetadataLastReleaseWinmdPath
 {
     $dir = Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Windows_SDK_Win32Metadata")
     return Join-Path $dir "Windows.Win32.winmd"
-}
-
-function Invoke-PrepLibMappingsFile
-{
-    $libMappingOutputFileName = Get-LibMappingsFile
-    if (!(Test-Path $libMappingOutputFileName))
-    {
-        $libPkgPath = Get-WinSdkCppX64PkgPath
-        $libDirectory = "$libPkgPath\c\um\x64"
-
-        Write-Host "Creating lib mapping file: $libMappingOutputFileName using $libDirectory"
-
-        & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
-    }
 }
 
 function Invoke-RecompileMidlHeaders

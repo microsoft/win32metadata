@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
+  <Import Project="$(MSBuildThisFileDirectory)..\tools\assets\Versions.props"
+          Condition="Exists('$(MSBuildThisFileDirectory)..\tools\assets\Versions.props')"/>
+  <Import Project="$(MSBuildThisFileDirectory)..\..\..\eng\Versions.props"
+          Condition="'$(WindowsSdkCppPackageVersion)' == '' and Exists('$(MSBuildThisFileDirectory)..\..\..\eng\Versions.props')"/>
+
   <PropertyGroup>
     <MicrosoftNoTargetsSdkImported Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">true</MicrosoftNoTargetsSdkImported>
   </PropertyGroup>
@@ -30,6 +35,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.19041.5" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="$(WinmdGeneratorTargetSdkPackageVersion)" GeneratePathProperty="true"/>
   </ItemGroup>
 </Project>

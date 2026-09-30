@@ -88,10 +88,12 @@ during RDL emission.
 
 ## libclang
 
-The tool pins libclang **22.1.8**. It uses `LIBCLANG_PATH` when set; otherwise the
-`libclang.runtime.win-<arch>` NuGet package is restored on demand into the NuGet global
-cache. Matching clang resource headers are cached under
-`<obj>\clang-resource\22.1.8`. The loaded libclang version is verified before extraction.
+The tool pins libclang **22.1.8**. The packaged SDK places `libclang.dll` and its
+matching resource headers beside the executable under
+`clang-resource\22.1.8`. Consumer generation resolves those files package-locally
+and never clones LLVM. Standalone development builds may still restore the pinned
+`libclang.runtime.win-<arch>` NuGet package for the DLL; stage the tool with
+`scripts\Build-Win32MetadataTools.ps1` before multi-architecture generation.
 
 ```powershell
 cargo run --quiet --locked --manifest-path tools\rust\Cargo.toml -- libclang

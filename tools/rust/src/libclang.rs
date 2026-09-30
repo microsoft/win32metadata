@@ -177,63 +177,48 @@ fn version_is_pinned(reported: &str, pinned: &str) -> bool {
 
 pub fn clang_resource_dir(cache_root: &Path) -> Result<String, String> {
     if let Ok(directory) = std::env::var("CLANG_RESOURCE_DIR") {
-        return Ok(directory.replace('\\', "/"));
+        return resource_root(Path::new(&directory))
+            .map(|path| path.to_string_lossy().replace('\\', "/"))
+            .ok_or_else(|| {
+                format!("CLANG_RESOURCE_DIR `{directory}` does not contain include/intrin.h")
+            });
     }
 
-    let cache = cache_root.join("clang-resource").join(pinned_version());
-    if !cache.join("include").join("intrin.h").is_file() {
-        fetch_clang_resource_headers(&cache)?;
+    let relative = Path::new("clang-resource").join(pinned_version());
+    let mut candidates = Vec::new();
+    if let Some(directory) = std::env::var_os("LIBCLANG_PATH") {
+        candidates.push(PathBuf::from(directory).join(&relative));
     }
-    Ok(cache.to_string_lossy().replace('\\', "/"))
-}
+    if let Ok(executable) = std::env::current_exe()
+        && let Some(directory) = executable.parent()
+    {
+        candidates.push(directory.join(&relative));
+    }
+    candidates.push(cache_root.join(&relative));
 
-fn fetch_clang_resource_headers(cache: &Path) -> Result<(), String> {
-    std::fs::create_dir_all(cache)
-        .map_err(|error| format!("failed to create `{}`: {error}", cache.display()))?;
-    let include = cache.join("include");
-    let work = cache.join("_git");
-    if work.exists() {
-        std::fs::remove_dir_all(&work).ok();
-    }
-    let tag = format!("llvmorg-{}", pinned_version());
-    let status = system_tool("git.exe")
-        .args([
-            "clone",
-            "--filter=blob:none",
-            "--no-checkout",
-            "--depth",
-            "1",
-            "--branch",
-            &tag,
-            "https://github.com/llvm/llvm-project",
-        ])
-        .arg(&work)
-        .status()
-        .map_err(|error| format!("failed to fetch clang resource headers: {error}"))?;
-    if !status.success() {
-        return Err(format!("git clone of llvm-project at {tag} failed"));
-    }
-    for arguments in [
-        &["sparse-checkout", "set", "--no-cone", "clang/lib/Headers"][..],
-        &["checkout"][..],
-    ] {
-        let status = system_tool("git.exe")
-            .arg("-C")
-            .arg(&work)
-            .args(arguments)
-            .status()
-            .map_err(|error| format!("failed to run git {}: {error}", arguments.join(" ")))?;
-        if !status.success() {
-            return Err(format!("git {} failed", arguments.join(" ")));
+    for candidate in candidates {
+        if let Some(root) = resource_root(&candidate) {
+            return Ok(root.to_string_lossy().replace('\\', "/"));
         }
     }
-    if include.exists() {
-        std::fs::remove_dir_all(&include).ok();
+
+    Err(format!(
+        "Clang {} resource headers were not found beside libclang.dll or the generator executable. \
+         Restore or rebuild Microsoft.Windows.WinmdGenerator; generation never downloads headers.",
+        pinned_version()
+    ))
+}
+
+fn resource_root(path: &Path) -> Option<PathBuf> {
+    if path.join("include").join("intrin.h").is_file() {
+        Some(path.to_path_buf())
+    } else if path.join("intrin.h").is_file()
+        && path.file_name().is_some_and(|name| name == "include")
+    {
+        path.parent().map(Path::to_path_buf)
+    } else {
+        None
     }
-    std::fs::rename(work.join("clang").join("lib").join("Headers"), &include)
-        .map_err(|error| format!("failed to install clang resource headers: {error}"))?;
-    std::fs::remove_dir_all(&work).ok();
-    Ok(())
 }
 
 fn nuget_package(id: &str, version: &str) -> PathBuf {
@@ -336,4 +321,25 @@ fn help_text() -> &'static str {
 Resolves the pinned libclang, loads it, and prints the version and directory.
 Restores the `libclang.runtime.win-<arch>` NuGet package on demand unless
 `LIBCLANG_PATH` is already set."
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn resource_root_accepts_root_or_include_directory() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-libclang-resource-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        std::fs::create_dir_all(root.join("include")).unwrap();
+        std::fs::write(root.join("include").join("intrin.h"), "").unwrap();
+
+        assert_eq!(resource_root(&root), Some(root.clone()));
+        assert_eq!(resource_root(&root.join("include")), Some(root.clone()));
+
+        std::fs::remove_dir_all(root).ok();
+    }
 }

@@ -10,7 +10,7 @@
     <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(RepoRootPath)bin\Windows.Win32.winmd</OutputWinmd>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
     <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
-    <SdkIncRoot>$(PkgMicrosoft_Windows_SDK_CPP)\c\include\10.0.28000.0</SdkIncRoot>
+    <SdkIncRoot>$(PkgMicrosoft_Windows_SDK_CPP)\c\include\$(WindowsSdkHeaderVersion)</SdkIncRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
     <UseWinSDKAssets>true</UseWinSDKAssets>
     <WinmdUseSdkHeaderManifest>true</WinmdUseSdkHeaderManifest>
@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.Windows.SDK.CPP" Version="10.0.28000.2270" GeneratePathProperty="true"/>
-    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.28000.2270" GeneratePathProperty="true"/>
+    <PackageReference Update="Microsoft.Windows.SDK.CPP" Version="$(WindowsSdkCppPackageVersion)" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="$(WindowsSdkCppPackageVersion)" GeneratePathProperty="true"/>
     <WinmdIncludeDir Include="AdditionalHeaders"/>
     <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
