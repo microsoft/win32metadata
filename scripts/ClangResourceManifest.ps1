@@ -61,12 +61,12 @@ function Test-ClangResourceTree {
     }
     $resolvedHeaders = (Resolve-Path $resolvedHeaders).Path
     if ($RequirePackagedManifest) {
-        $actualPaths = @(Get-ChildItem $resolvedRoot -File -Recurse |
+        $actualPaths = @(Get-ChildItem $resolvedRoot -File -Recurse -Force |
             Where-Object { $_.FullName -cne (Join-Path $resolvedRoot "manifest.tsv") } |
             ForEach-Object { [System.IO.Path]::GetRelativePath($resolvedRoot, $_.FullName).Replace("\", "/") })
     }
     else {
-        $actualPaths = @(Get-ChildItem $resolvedHeaders -File -Recurse |
+        $actualPaths = @(Get-ChildItem $resolvedHeaders -File -Recurse -Force |
             ForEach-Object {
                 "$($HeaderDirectory.Replace('\', '/').TrimEnd('/'))/$([System.IO.Path]::GetRelativePath($resolvedHeaders, $_.FullName).Replace('\', '/'))"
             })

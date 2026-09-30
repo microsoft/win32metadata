@@ -71,6 +71,47 @@ foreach ($header in @("win32metadata_annotations.h", "win32metadata_sal.h")) {
 $packagedResourceRoot = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\clang-resource\$ClangResourceVersion"
 Test-ClangResourceTree -Root $packagedResourceRoot -RequirePackagedManifest -ThrowOnError | Out-Null
 
+function Assert-HiddenResourceIsRejected {
+    param(
+        [string]$RelativePath,
+        [switch]$HideParent
+    )
+
+    $path = Join-Path $packagedResourceRoot $RelativePath
+    $parent = Split-Path $path
+    New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    [System.IO.File]::WriteAllText($path, "unexpected")
+    if ($HideParent) {
+        (Get-Item $parent -Force).Attributes = (Get-Item $parent -Force).Attributes -bor
+            [System.IO.FileAttributes]::Hidden
+    }
+    else {
+        (Get-Item $path -Force).Attributes = (Get-Item $path -Force).Attributes -bor
+            [System.IO.FileAttributes]::Hidden
+    }
+
+    try {
+        if (Test-ClangResourceTree -Root $packagedResourceRoot -RequirePackagedManifest) {
+            throw "The Clang resource manifest accepted hidden extra path '$RelativePath'."
+        }
+    }
+    finally {
+        if ($HideParent) {
+            (Get-Item $parent -Force).Attributes = (Get-Item $parent -Force).Attributes -band
+                (-bnot [System.IO.FileAttributes]::Hidden)
+            Remove-Item $parent -Recurse -Force
+        }
+        else {
+            Remove-Item $path -Force
+        }
+    }
+}
+
+Assert-HiddenResourceIsRejected ".unexpected-resource"
+Assert-HiddenResourceIsRejected ".unexpected-directory\resource.h" -HideParent
+Test-ClangResourceTree -Root $packagedResourceRoot -RequirePackagedManifest -ThrowOnError | Out-Null
+Write-Host "Clang resource validation rejected hidden files and files under hidden directories."
+
 dotnet build (Join-Path $root "sources\WinmdUtils\WinmdUtils.csproj") -c Release
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to build WinmdUtils."
@@ -123,6 +164,7 @@ function Assert-InvalidAnnotation {
             --include $invalidRoot `
             --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
             --arch x64 `
+            --arch x86 `
             --scope-header $Name `
             --namespace "Sample.Invalid" `
             --obj $work `
