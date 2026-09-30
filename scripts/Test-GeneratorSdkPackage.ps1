@@ -69,9 +69,7 @@ foreach ($header in @("win32metadata_annotations.h", "win32metadata_sal.h")) {
 }
 
 $packagedResourceRoot = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\clang-resource\$ClangResourceVersion"
-if (!(Test-ClangResourceTree -Root $packagedResourceRoot -RequirePackagedManifest)) {
-    throw "The package did not contain the complete pinned Clang $ClangResourceVersion resource tree."
-}
+Test-ClangResourceTree -Root $packagedResourceRoot -RequirePackagedManifest -ThrowOnError | Out-Null
 
 dotnet build (Join-Path $root "sources\WinmdUtils\WinmdUtils.csproj") -c Release
 if ($LASTEXITCODE -ne 0) {

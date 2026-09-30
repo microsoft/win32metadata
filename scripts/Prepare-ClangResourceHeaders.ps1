@@ -46,10 +46,10 @@ if (!$cacheIsValid) {
         throw "Failed to fetch llvm-project commit $commit."
     }
     git -C $cache checkout --quiet --detach FETCH_HEAD
-    if ($LASTEXITCODE -ne 0 -or
-        !(Test-ClangResourceTree -Root $cache -HeaderDirectory "clang\lib\Headers")) {
+    if ($LASTEXITCODE -ne 0) {
         throw "llvm-project commit $commit did not provide the Clang $version resource headers."
     }
+    Test-ClangResourceTree -Root $cache -HeaderDirectory "clang\lib\Headers" -ThrowOnError | Out-Null
 }
 
 $staging = "$destination.staging-$PID"
@@ -59,9 +59,12 @@ Copy-Item (Join-Path $cache "clang\lib\Headers\*") (Join-Path $staging "include"
 Copy-Item (Join-Path $cache "LICENSE.TXT") (Join-Path $staging "LICENSE.TXT") -Force
 Copy-Item $ClangResourceManifest (Join-Path $staging "manifest.tsv") -Force
 
-if (!(Test-ClangResourceTree -Root $staging -RequirePackagedManifest)) {
+try {
+    Test-ClangResourceTree -Root $staging -RequirePackagedManifest -ThrowOnError | Out-Null
+}
+catch {
     Remove-Item $staging -Recurse -Force
-    throw "Failed to stage the Clang $version resource headers in '$destination'."
+    throw
 }
 if (Test-Path $destination) {
     Remove-Item $destination -Recurse -Force

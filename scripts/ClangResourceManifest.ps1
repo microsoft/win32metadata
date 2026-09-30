@@ -28,11 +28,19 @@ function Test-ClangResourceTree {
         [Parameter(Mandatory = $true)]
         [string]$Root,
         [string]$HeaderDirectory = "include",
-        [switch]$RequirePackagedManifest
+        [switch]$RequirePackagedManifest,
+        [switch]$ThrowOnError
     )
 
-    if (!(Test-Path $Root -PathType Container)) {
+    function Fail-ClangResourceTreeValidation([string]$Message) {
+        if ($ThrowOnError) {
+            throw "Clang resource tree '$Root' is invalid: $Message"
+        }
         return $false
+    }
+
+    if (!(Test-Path $Root -PathType Container)) {
+        return Fail-ClangResourceTreeValidation "the root directory does not exist"
     }
 
     if ($RequirePackagedManifest) {
@@ -40,7 +48,7 @@ function Test-ClangResourceTree {
         if (!(Test-Path $packagedManifest -PathType Leaf) -or
             (Get-FileHash $packagedManifest -Algorithm SHA256).Hash -cne
                 (Get-FileHash $ClangResourceManifest -Algorithm SHA256).Hash) {
-            return $false
+            return Fail-ClangResourceTreeValidation "manifest.tsv is missing or differs from the pinned manifest"
         }
     }
 
@@ -49,7 +57,7 @@ function Test-ClangResourceTree {
     $resolvedHeaders = Join-Path $resolvedRoot $HeaderDirectory
     if (!(Test-Path $resolvedHeaders -PathType Container) -or
         !(Test-Path (Join-Path $resolvedRoot "LICENSE.TXT") -PathType Leaf)) {
-        return $false
+        return Fail-ClangResourceTreeValidation "the header directory or LICENSE.TXT is missing"
     }
     if ($RequirePackagedManifest) {
         $actualPaths = @(Get-ChildItem $resolvedRoot -File -Recurse |
@@ -69,8 +77,9 @@ function Test-ClangResourceTree {
             $_.Path
         }
     })
-    if (@(Compare-Object $expectedPaths $actualPaths -CaseSensitive).Count -ne 0) {
-        return $false
+    $pathDifferences = @(Compare-Object $expectedPaths $actualPaths -CaseSensitive)
+    if ($pathDifferences.Count -ne 0) {
+        return Fail-ClangResourceTreeValidation "the file set differs from the pinned manifest: $($pathDifferences | ConvertTo-Json -Compress)"
     }
 
     foreach ($entry in $entries) {
@@ -82,9 +91,12 @@ function Test-ClangResourceTree {
         }
         $file = Join-Path $Root $relativePath
         if (!(Test-Path $file -PathType Leaf) -or
-            (Get-Item $file).Length -ne $entry.Size -or
-            (Get-FileHash $file -Algorithm SHA256).Hash -cne $entry.Hash) {
-            return $false
+            (Get-Item $file).Length -ne $entry.Size) {
+            return Fail-ClangResourceTreeValidation "'$($entry.Path)' is missing or has an unexpected size"
+        }
+        $actualHash = (Get-FileHash $file -Algorithm SHA256).Hash
+        if ($actualHash -cne $entry.Hash) {
+            return Fail-ClangResourceTreeValidation "'$($entry.Path)' has SHA-256 $actualHash; expected $($entry.Hash)"
         }
     }
 
