@@ -59,14 +59,17 @@ function Test-ClangResourceTree {
         !(Test-Path (Join-Path $resolvedRoot "LICENSE.TXT") -PathType Leaf)) {
         return Fail-ClangResourceTreeValidation "the header directory or LICENSE.TXT is missing"
     }
+    $resolvedHeaders = (Resolve-Path $resolvedHeaders).Path
     if ($RequirePackagedManifest) {
         $actualPaths = @(Get-ChildItem $resolvedRoot -File -Recurse |
             Where-Object { $_.FullName -cne (Join-Path $resolvedRoot "manifest.tsv") } |
-            ForEach-Object { $_.FullName.Substring($resolvedRoot.Length + 1).Replace("\", "/") })
+            ForEach-Object { [System.IO.Path]::GetRelativePath($resolvedRoot, $_.FullName).Replace("\", "/") })
     }
     else {
         $actualPaths = @(Get-ChildItem $resolvedHeaders -File -Recurse |
-            ForEach-Object { $_.FullName.Substring($resolvedRoot.Length + 1).Replace("\", "/") })
+            ForEach-Object {
+                "$($HeaderDirectory.Replace('\', '/').TrimEnd('/'))/$([System.IO.Path]::GetRelativePath($resolvedHeaders, $_.FullName).Replace('\', '/'))"
+            })
         $actualPaths += "LICENSE.TXT"
     }
     $expectedPaths = @($entries | ForEach-Object {
