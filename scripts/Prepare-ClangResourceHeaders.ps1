@@ -34,6 +34,7 @@ if (!$cacheIsValid) {
         throw "Failed to initialize the Clang resource-header cache."
     }
     git -C $cache config core.longpaths true
+    git -C $cache config core.autocrlf false
     git -C $cache remote add origin https://github.com/llvm/llvm-project
     git -C $cache sparse-checkout init --no-cone
     @(
