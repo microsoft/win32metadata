@@ -9,6 +9,7 @@ $expected = Join-Path $root "tests\GeneratorSdkPackageTests\expected\SampleWinmd
 $actual = Join-Path $root "obj\GeneratorSdkPackageTests\SampleWinmd.apidump.cs"
 $packages = Join-Path $root "obj\GeneratorSdkPackageTests\packages"
 $deepObj = Join-Path $root "obj\GeneratorSdkPackageTests\deep-consumer-path\one\two\three\four\five\six\seven\winmd"
+. "$PSScriptRoot\ClangResourceManifest.ps1"
 
 dotnet pack (Join-Path $root "sources\GeneratorSdk\nuget\BuildSdk.proj") -c Release
 if ($LASTEXITCODE -ne 0) {
@@ -67,9 +68,9 @@ foreach ($header in @("win32metadata_annotations.h", "win32metadata_sal.h")) {
     }
 }
 
-$packagedResourceHeader = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\clang-resource\22.1.8\include\intrin.h"
-if (!(Test-Path $packagedResourceHeader)) {
-    throw "The package did not contain the pinned Clang 22.1.8 resource headers."
+$packagedResourceRoot = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\clang-resource\$ClangResourceVersion"
+if (!(Test-ClangResourceTree -Root $packagedResourceRoot -RequirePackagedManifest)) {
+    throw "The package did not contain the complete pinned Clang $ClangResourceVersion resource tree."
 }
 
 dotnet build (Join-Path $root "sources\WinmdUtils\WinmdUtils.csproj") -c Release
@@ -101,7 +102,8 @@ $actualText = [System.Text.RegularExpressions.Regex]::Replace(
 function Assert-InvalidAnnotation {
     param(
         [string]$Name,
-        [string]$ExpectedError
+        [string]$ExpectedError,
+        [string]$ClangResourceOverride
     )
 
     $invalidRoot = Join-Path $sample "invalid"
@@ -110,15 +112,27 @@ function Assert-InvalidAnnotation {
     $output = Join-Path $work "$Name.winmd"
     New-Item -ItemType Directory -Force -Path $work | Out-Null
 
-    $messages = @(& (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
-        --partition $partition `
-        --include $invalidRoot `
-        --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
-        --arch x64 `
-        --scope-header $Name `
-        --namespace "Sample.Invalid" `
-        --obj $work `
-        --output $output 2>&1 | ForEach-Object { $_.ToString() })
+    $previousOverride = $env:CLANG_RESOURCE_DIR
+    try {
+        if ($ClangResourceOverride) {
+            $env:CLANG_RESOURCE_DIR = $ClangResourceOverride
+        }
+        else {
+            Remove-Item Env:\CLANG_RESOURCE_DIR -ErrorAction SilentlyContinue
+        }
+        $messages = @(& (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
+            --partition $partition `
+            --include $invalidRoot `
+            --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
+            --arch x64 `
+            --scope-header $Name `
+            --namespace "Sample.Invalid" `
+            --obj $work `
+            --output $output 2>&1 | ForEach-Object { $_.ToString() })
+    }
+    finally {
+        $env:CLANG_RESOURCE_DIR = $previousOverride
+    }
     if ($LASTEXITCODE -eq 0) {
         throw "Invalid annotation case '$Name' unexpectedly generated a WinMD."
     }
@@ -136,8 +150,14 @@ $packageToolDirectory = Join-Path $packages "microsoft.windows.winmdgenerator\$v
 $previousLibClangPath = $env:LIBCLANG_PATH
 try {
     $env:LIBCLANG_PATH = $packageToolDirectory
-    Assert-InvalidAnnotation "UnknownAnnotation" "(?i)(unknown_contract|unknown annotation)"
-    Assert-InvalidAnnotation "MissingAnnotationValue" "(?i)(import_library|missing|required).*(value|argument)"
+    Assert-InvalidAnnotation "UnknownAnnotation" "(?i)(unknown_contract|unknown annotation)" (Join-Path $root "obj\missing-clang-resource")
+    Write-Host "Package-local Clang resources took precedence over a stale CLANG_RESOURCE_DIR."
+    $mismatchedResource = Join-Path $root "obj\GeneratorSdkPackageTests\mismatched-clang-resource"
+    Remove-Item $mismatchedResource -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item -ItemType Directory -Force -Path (Join-Path $mismatchedResource "include") | Out-Null
+    [System.IO.File]::WriteAllText((Join-Path $mismatchedResource "include\intrin.h"), "not Clang $ClangResourceVersion")
+    Assert-InvalidAnnotation "MissingAnnotationValue" "(?i)(import_library|missing|required).*(value|argument)" $mismatchedResource
+    Write-Host "Package-local Clang resources took precedence over a mismatched CLANG_RESOURCE_DIR."
     Assert-InvalidAnnotation "EmptyAnnotationValue" "(?i)(import_library|empty|required).*(value|argument)"
     Assert-InvalidAnnotation "UnexpectedAnnotationValue" "(?i)(set_last_error|unexpected|accept).*(value|argument)"
     Assert-InvalidAnnotation "InvalidAnnotationTarget" "(?i)(associated_constant|invalid target|enum)"

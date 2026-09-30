@@ -6,9 +6,11 @@
 //! the remediation steps a build engineer needs.
 
 use std::ffi::OsString;
+use std::fs;
 use std::path::{Path, PathBuf};
 
 use clang_sys::{clang_getCString, clang_getClangVersion, load};
+use sha2::{Digest, Sha256};
 
 use crate::args::Args;
 use crate::catch::catch;
@@ -57,6 +59,9 @@ impl std::fmt::Display for Provisioned {
 pub fn pinned_version() -> &'static str {
     "22.1.8"
 }
+
+const RESOURCE_COMMIT: &str = "ca7933e47d3a3451d81e72ac174dcb5aa28b59d1";
+const RESOURCE_MANIFEST: &str = include_str!("clang-resource-manifest.tsv");
 
 /// Locates libclang, points `LIBCLANG_PATH` at it, and reports what was loaded.
 ///
@@ -176,49 +181,152 @@ fn version_is_pinned(reported: &str, pinned: &str) -> bool {
 }
 
 pub fn clang_resource_dir(cache_root: &Path) -> Result<String, String> {
-    if let Ok(directory) = std::env::var("CLANG_RESOURCE_DIR") {
-        return resource_root(Path::new(&directory))
-            .map(|path| path.to_string_lossy().replace('\\', "/"))
-            .ok_or_else(|| {
-                format!("CLANG_RESOURCE_DIR `{directory}` does not contain include/intrin.h")
-            });
-    }
-
     let relative = Path::new("clang-resource").join(pinned_version());
-    let mut candidates = Vec::new();
+    let mut candidates = Vec::<(&str, PathBuf)>::new();
     if let Some(directory) = std::env::var_os("LIBCLANG_PATH") {
-        candidates.push(PathBuf::from(directory).join(&relative));
+        candidates.push(("LIBCLANG_PATH", PathBuf::from(directory).join(&relative)));
     }
     if let Ok(executable) = std::env::current_exe()
         && let Some(directory) = executable.parent()
     {
-        candidates.push(directory.join(&relative));
+        candidates.push(("generator executable", directory.join(&relative)));
     }
-    candidates.push(cache_root.join(&relative));
+    if let Some(directory) = std::env::var_os("CLANG_RESOURCE_DIR") {
+        candidates.push(("CLANG_RESOURCE_DIR", PathBuf::from(directory)));
+    }
+    candidates.push(("object cache", cache_root.join(&relative)));
 
-    for candidate in candidates {
-        if let Some(root) = resource_root(&candidate) {
-            return Ok(root.to_string_lossy().replace('\\', "/"));
+    let mut invalid = Vec::new();
+    for (source, candidate) in candidates {
+        let root = if candidate.file_name().is_some_and(|name| name == "include") {
+            candidate.parent().map(Path::to_path_buf)
+        } else {
+            Some(candidate.clone())
+        };
+        let Some(root) = root else {
+            continue;
+        };
+        if !root.exists() {
+            continue;
+        }
+        match validate_resource_tree(&root, RESOURCE_MANIFEST) {
+            Ok(()) => return Ok(root.to_string_lossy().replace('\\', "/")),
+            Err(error) => invalid.push(format!("{source} `{}`: {error}", root.display())),
         }
     }
 
+    let invalid = if invalid.is_empty() {
+        String::new()
+    } else {
+        format!("\nRejected resource trees:\n  {}", invalid.join("\n  "))
+    };
     Err(format!(
-        "Clang {} resource headers were not found beside libclang.dll or the generator executable. \
-         Restore or rebuild Microsoft.Windows.WinmdGenerator; generation never downloads headers.",
-        pinned_version()
+        "The complete Clang {} resource tree from llvm-project {} was not found beside \
+         libclang.dll or the generator executable. Restore or rebuild \
+         Microsoft.Windows.WinmdGenerator; generation never downloads headers.{invalid}",
+        pinned_version(),
+        RESOURCE_COMMIT,
     ))
 }
 
-fn resource_root(path: &Path) -> Option<PathBuf> {
-    if path.join("include").join("intrin.h").is_file() {
-        Some(path.to_path_buf())
-    } else if path.join("intrin.h").is_file()
-        && path.file_name().is_some_and(|name| name == "include")
+fn validate_resource_tree(root: &Path, manifest: &str) -> Result<(), String> {
+    let expected_preamble = format!(
+        "# version\t{}\n# llvm-project-commit\t{}\n# sha256\tsize\tpath\n",
+        pinned_version(),
+        RESOURCE_COMMIT
+    );
+    if !manifest
+        .replace("\r\n", "\n")
+        .starts_with(&expected_preamble)
     {
-        path.parent().map(Path::to_path_buf)
-    } else {
-        None
+        return Err(
+            "pinned manifest metadata does not match the configured version and commit".to_string(),
+        );
     }
+
+    let packaged_manifest = fs::read_to_string(root.join("manifest.tsv"))
+        .map_err(|error| format!("missing or unreadable manifest.tsv: {error}"))?;
+    if packaged_manifest != manifest {
+        return Err("manifest.tsv does not match the pinned manifest".to_string());
+    }
+
+    let mut expected = std::collections::BTreeMap::new();
+    for line in manifest.lines().skip(3) {
+        let mut fields = line.splitn(3, '\t');
+        let hash = fields.next().unwrap_or_default();
+        let size = fields
+            .next()
+            .ok_or_else(|| format!("invalid pinned manifest entry `{line}`"))?
+            .parse::<u64>()
+            .map_err(|error| format!("invalid size in pinned manifest entry `{line}`: {error}"))?;
+        let path = fields
+            .next()
+            .ok_or_else(|| format!("invalid pinned manifest entry `{line}`"))?;
+        expected.insert(path.to_string(), (hash.to_string(), size));
+    }
+
+    let mut actual = Vec::new();
+    collect_resource_files(root, root, &mut actual)?;
+    actual.sort();
+    actual.retain(|path| path != "manifest.tsv");
+    let expected_paths = expected.keys().cloned().collect::<Vec<_>>();
+    if actual != expected_paths {
+        return Err(format!(
+            "file set differs from the pinned manifest (expected {}, found {})",
+            expected_paths.len(),
+            actual.len()
+        ));
+    }
+
+    for (relative, (expected_hash, expected_size)) in expected {
+        let path = root.join(relative.replace('/', std::path::MAIN_SEPARATOR_STR));
+        let bytes = fs::read(&path)
+            .map_err(|error| format!("failed to read `{}`: {error}", path.display()))?;
+        if bytes.len() as u64 != expected_size {
+            return Err(format!(
+                "`{}` has size {}; expected {expected_size}",
+                path.display(),
+                bytes.len()
+            ));
+        }
+        let actual_hash = format!("{:X}", Sha256::digest(&bytes));
+        if actual_hash != expected_hash {
+            return Err(format!(
+                "`{}` has SHA-256 {actual_hash}; expected {expected_hash}",
+                path.display()
+            ));
+        }
+    }
+    Ok(())
+}
+
+fn collect_resource_files(
+    root: &Path,
+    directory: &Path,
+    files: &mut Vec<String>,
+) -> Result<(), String> {
+    for entry in fs::read_dir(directory)
+        .map_err(|error| format!("failed to enumerate `{}`: {error}", directory.display()))?
+    {
+        let entry = entry.map_err(|error| {
+            format!(
+                "failed to enumerate an entry under `{}`: {error}",
+                directory.display()
+            )
+        })?;
+        let path = entry.path();
+        if path.is_dir() {
+            collect_resource_files(root, &path, files)?;
+        } else if path.is_file() {
+            files.push(
+                path.strip_prefix(root)
+                    .map_err(|error| format!("failed to relativize `{}`: {error}", path.display()))?
+                    .to_string_lossy()
+                    .replace('\\', "/"),
+            );
+        }
+    }
+    Ok(())
 }
 
 fn nuget_package(id: &str, version: &str) -> PathBuf {
@@ -328,17 +436,23 @@ mod tests {
     use super::*;
 
     #[test]
-    fn resource_root_accepts_root_or_include_directory() {
+    fn resource_tree_requires_every_manifest_file_and_hash() {
         let root = std::env::temp_dir().join(format!(
             "win32metadata-libclang-resource-{}",
             std::process::id()
         ));
         std::fs::remove_dir_all(&root).ok();
         std::fs::create_dir_all(root.join("include")).unwrap();
-        std::fs::write(root.join("include").join("intrin.h"), "").unwrap();
+        std::fs::write(root.join("include").join("intrin.h"), "test").unwrap();
+        let hash = format!("{:X}", Sha256::digest(b"test"));
+        let manifest = format!(
+            "# version\t22.1.8\n# llvm-project-commit\t{RESOURCE_COMMIT}\n# sha256\tsize\tpath\n{hash}\t4\tinclude/intrin.h\n"
+        );
+        std::fs::write(root.join("manifest.tsv"), &manifest).unwrap();
 
-        assert_eq!(resource_root(&root), Some(root.clone()));
-        assert_eq!(resource_root(&root.join("include")), Some(root.clone()));
+        assert_eq!(validate_resource_tree(&root, &manifest), Ok(()));
+        std::fs::write(root.join("include").join("intrin.h"), "wrong").unwrap();
+        assert!(validate_resource_tree(&root, &manifest).is_err());
 
         std::fs::remove_dir_all(root).ok();
     }

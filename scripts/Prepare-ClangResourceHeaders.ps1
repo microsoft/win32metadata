@@ -4,19 +4,26 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$version = "22.1.8"
-$commit = "ca7933e47d3a3451d81e72ac174dcb5aa28b59d1"
-$destination = Join-Path $OutputDir "clang-resource\$version"
-$destinationHeader = Join-Path $destination "include\intrin.h"
+. "$PSScriptRoot\ClangResourceManifest.ps1"
 
-if (Test-Path $destinationHeader) {
+$version = $ClangResourceVersion
+$commit = $ClangResourceCommit
+$destination = Join-Path $OutputDir "clang-resource\$version"
+
+if (Test-ClangResourceTree -Root $destination -RequirePackagedManifest) {
     Write-Host "Using staged Clang $version resource headers in $destination"
     return
 }
 
 $cache = Join-Path $env:TEMP "win32metadata-clang-$version-$commit"
-$cacheHeader = Join-Path $cache "clang\lib\Headers\intrin.h"
-if (!(Test-Path $cacheHeader)) {
+$cacheIsValid = $false
+if (Test-Path $cache) {
+    $cacheHead = git -C $cache rev-parse HEAD 2>$null
+    $cacheIsValid = $LASTEXITCODE -eq 0 -and
+        $cacheHead -ceq $commit -and
+        (Test-ClangResourceTree -Root $cache -HeaderDirectory "clang\lib\Headers")
+}
+if (!$cacheIsValid) {
     if (Test-Path $cache) {
         Remove-Item $cache -Recurse -Force
     }
@@ -38,19 +45,25 @@ if (!(Test-Path $cacheHeader)) {
         throw "Failed to fetch llvm-project commit $commit."
     }
     git -C $cache checkout --quiet --detach FETCH_HEAD
-    if ($LASTEXITCODE -ne 0 -or !(Test-Path $cacheHeader)) {
+    if ($LASTEXITCODE -ne 0 -or
+        !(Test-ClangResourceTree -Root $cache -HeaderDirectory "clang\lib\Headers")) {
         throw "llvm-project commit $commit did not provide the Clang $version resource headers."
     }
 }
 
+$staging = "$destination.staging-$PID"
+Remove-Item $staging -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force -Path (Join-Path $staging "include") | Out-Null
+Copy-Item (Join-Path $cache "clang\lib\Headers\*") (Join-Path $staging "include") -Recurse -Force
+Copy-Item (Join-Path $cache "LICENSE.TXT") (Join-Path $staging "LICENSE.TXT") -Force
+Copy-Item $ClangResourceManifest (Join-Path $staging "manifest.tsv") -Force
+
+if (!(Test-ClangResourceTree -Root $staging -RequirePackagedManifest)) {
+    Remove-Item $staging -Recurse -Force
+    throw "Failed to stage the Clang $version resource headers in '$destination'."
+}
 if (Test-Path $destination) {
     Remove-Item $destination -Recurse -Force
 }
-New-Item -ItemType Directory -Force -Path (Join-Path $destination "include") | Out-Null
-Copy-Item (Join-Path $cache "clang\lib\Headers\*") (Join-Path $destination "include") -Recurse -Force
-Copy-Item (Join-Path $cache "LICENSE.TXT") (Join-Path $destination "LICENSE.TXT") -Force
-
-if (!(Test-Path $destinationHeader)) {
-    throw "Failed to stage the Clang $version resource headers in '$destination'."
-}
+Move-Item $staging $destination
 Write-Host "Staged Clang $version resource headers from llvm-project $commit in $destination"

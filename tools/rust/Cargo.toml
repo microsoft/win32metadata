@@ -10,6 +10,7 @@ path = "src/main.rs"
 
 [dependencies]
 clang-sys = { version = "1.9.0", features = ["runtime"] }
+sha2 = "0.10.9"
 windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }
 windows-default = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }
 windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "d08dd0c613bb13c0bf6d7e206fd9abdb818824ff" }

@@ -47,9 +47,18 @@ else {
         "IntegrityTests.NoInvalidPointersToDelegates" = "10BB45B351DA26B0BF9B053DA1759F23E0EE702F1002B7CD18889EE1E846188C"
         "IntegrityTests.NoBrokenArchTypes" = "D620067C2212E4AFB38AB0CC3B3E5B513814630FBCC1E9632B650B094EB2BE54"
     }
+    $expectedPasses = @(
+        "RaiiFreeAttributeTests.AllRaiiTypesHaveInvalidHandleValueAttribute"
+        "IntegrityTests.NoDuplicateTypes"
+        "IntegrityTests.NoSuggestedRemappings"
+        "IntegrityTests.NoCyclicalNamespaces"
+    )
+    $expectedTotal = $expectedFailures.Count + $expectedPasses.Count
 
     if (!$counters -or
+        [int]$counters.total -ne $expectedTotal -or
         [int]$counters.total -ne [int]$counters.executed -or
+        [int]$counters.passed -ne $expectedPasses.Count -or
         [int]$counters.failed -ne $expectedFailures.Count -or
         @("error", "timeout", "aborted", "notRunnable", "notExecuted", "disconnected") |
             Where-Object { [int]$counters.$_ -ne 0 }) {
@@ -74,20 +83,38 @@ else {
         }
     }
 
-    $actualFailures = [ordered]@{}
-    foreach ($result in $failedResults) {
-        $testName = $result.testName
+    function Get-TestIdentity {
+        param([System.Xml.XmlElement]$Result)
+
+        $testName = $Result.testName
         $interfaceName = [regex]::Match($testName, 'Name = "([^"]+)"')
         if ($testName -match "InterfaceTests\.Interface_Layouts_Correct" -and
             $interfaceName.Success) {
-            $id = "InterfaceTests.Interface_Layouts_Correct:$($interfaceName.Groups[1].Value)"
+            return "InterfaceTests.Interface_Layouts_Correct:$($interfaceName.Groups[1].Value)"
         }
-        elseif ($testName -match "Windows\.Win32\.Tests\.(IntegrityTests\.[A-Za-z0-9_]+)") {
-            $id = $Matches[1]
+        if ($testName -match "Windows\.Win32\.Tests\.([A-Za-z0-9_]+\.[A-Za-z0-9_]+)") {
+            return $Matches[1]
         }
-        else {
-            $id = $testName
+        return $testName
+    }
+
+    function Assert-ExactTestSet {
+        param(
+            [string[]]$Actual,
+            [string[]]$Expected,
+            [string]$Outcome
+        )
+
+        $missing = @($Expected | Where-Object { $_ -notin $Actual })
+        $unexpected = @($Actual | Where-Object { $_ -notin $Expected })
+        if ($missing.Count -ne 0 -or $unexpected.Count -ne 0) {
+            throw "Windows.Win32.Tests $Outcome set changed.`nMissing: $($missing -join ', ')`nUnexpected: $($unexpected -join ', ')"
         }
+    }
+
+    $actualFailures = [ordered]@{}
+    foreach ($result in $failedResults) {
+        $id = Get-TestIdentity $result
 
         if ($actualFailures.Contains($id)) {
             throw "Windows.Win32.Tests reported duplicate failed result '$id'."
@@ -107,10 +134,25 @@ else {
         $actualFailures[$id] = $diagnostic
     }
 
-    $missing = @($expectedFailures.Keys | Where-Object { !$actualFailures.Contains($_) })
-    $unexpected = @($actualFailures.Keys | Where-Object { !$expectedFailures.Contains($_) })
-    if ($missing.Count -ne 0 -or $unexpected.Count -ne 0) {
-        throw "Windows.Win32.Tests failure set changed.`nMissing: $($missing -join ', ')`nUnexpected: $($unexpected -join ', ')"
+    $passedResults = @($results.SelectNodes("//*[local-name()='UnitTestResult' and @outcome='Passed']"))
+    $actualPasses = @($passedResults | ForEach-Object { Get-TestIdentity $_ })
+    if (($actualPasses | Select-Object -Unique).Count -ne $actualPasses.Count) {
+        throw "Windows.Win32.Tests reported a duplicate passing test identity."
+    }
+    Assert-ExactTestSet @($actualFailures.Keys) @($expectedFailures.Keys) "failure"
+    Assert-ExactTestSet $actualPasses $expectedPasses "passing"
+
+    # Keep a live negative regression for the gate itself: removing any reviewed
+    # passing result must be rejected even when the nine failures are unchanged.
+    $missingPassWasRejected = $false
+    try {
+        Assert-ExactTestSet @($actualPasses | Where-Object { $_ -cne $expectedPasses[0] }) $expectedPasses "passing"
+    }
+    catch {
+        $missingPassWasRejected = $true
+    }
+    if (!$missingPassWasRejected) {
+        throw "Windows.Win32.Tests gate regression: a missing passing test was accepted."
     }
 
     foreach ($entry in $expectedFailures.GetEnumerator()) {
@@ -124,7 +166,7 @@ else {
         }
     }
 
-    Write-Host "Windows.Win32.Tests reported the exact reviewed set of $($expectedFailures.Count) generator convergence failures."
+    Write-Host "Windows.Win32.Tests reported the exact reviewed outcomes for all $expectedTotal tests."
     $global:LASTEXITCODE = 0
 }
 
