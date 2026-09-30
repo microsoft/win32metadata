@@ -107,6 +107,7 @@ function Assert-InvalidAnnotation {
     if ($messageText -notmatch $ExpectedError) {
         throw "Invalid annotation case '$Name' did not report the expected annotation error:`n$messageText"
     }
+    $global:LASTEXITCODE = 0
 }
 
 $packageToolDirectory = Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64"
