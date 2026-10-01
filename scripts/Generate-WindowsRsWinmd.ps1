@@ -9,6 +9,9 @@
 .PARAMETER Architecture
     Target architectures to scrape and merge. Defaults to x64, x86, and arm64.
 
+.PARAMETER UsePartitionAuthority
+    Generate from every checked-in WinSDK partition translation unit and settings file.
+
 .PARAMETER OutputWinmd
     Output WinMD path.
 
@@ -24,6 +27,8 @@ param (
 
     [ValidateSet("x64", "arm64", "x86")]
     [string[]]$Architecture = @("x64", "x86", "arm64"),
+
+    [switch]$UsePartitionAuthority,
 
     [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.winmd",
 
@@ -50,9 +55,13 @@ if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
 $sdkPackageRoot = Get-WinSdkCppPkgPath
 $headerRoot = Join-Path $sdkPackageRoot "c\include\$(Get-WinSdkHeaderVersion)"
 $includePaths = @(
-    (Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"),
-    (Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage"),
-    (Join-Path $windowsWin32ProjectRoot "inc"),
+    if ($UsePartitionAuthority.IsPresent) {
+        Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders"
+        Join-Path $windowsWin32ProjectRoot "AdditionalHeaders\cpdk"
+    }
+    Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"
+    Join-Path $windowsWin32ProjectRoot "Partitions\Com.StructuredStorage"
+    Join-Path $windowsWin32ProjectRoot "inc"
     $headerRoot
 )
 
@@ -83,8 +92,15 @@ $scopeHeaders = @(
     "Wsdevlicensing.h", "wsdevlicensing.h"
 )
 
-$useSdkHeaderManifest = $Partition.Count -eq 0
-if ($useSdkHeaderManifest)
+if ($UsePartitionAuthority.IsPresent -and $Partition.Count -ne 0) {
+    throw "-UsePartitionAuthority cannot be combined with -Partition."
+}
+$useSdkHeaderManifest = $Partition.Count -eq 0 -and !$UsePartitionAuthority.IsPresent
+if ($UsePartitionAuthority.IsPresent)
+{
+    Write-Host "Generating all checked-in partition translation units for $($Architecture -join ', ')"
+}
+elseif ($useSdkHeaderManifest)
 {
     Write-Host "Generating the upstream aggregate + satellite SDK inputs for $($Architecture -join ', ')"
 }
@@ -108,7 +124,14 @@ foreach ($include in $includePaths)
     $arguments += @("--include", $include)
 }
 
-if ($useSdkHeaderManifest)
+if ($UsePartitionAuthority.IsPresent)
+{
+    $arguments += @(
+        "--win32-sdk",
+        "--partition-root", (Join-Path $windowsWin32ProjectRoot "Partitions")
+    )
+}
+elseif ($useSdkHeaderManifest)
 {
     $arguments += "--win32-sdk"
     foreach ($header in $scopeHeaders)

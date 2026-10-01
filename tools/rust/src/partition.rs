@@ -278,7 +278,11 @@ fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<Path
             return Some(candidate);
         }
     }
-    None
+    include_dirs
+        .iter()
+        .map(|directory| directory.join(scoped_relative))
+        .filter(|candidate| candidate.exists())
+        .next()
 }
 
 fn is_sdk_scope(value: &str) -> bool {
@@ -362,6 +366,7 @@ mod tests {
         }
         std::fs::write(custom.join("provider.h"), "").unwrap();
         std::fs::write(shared.join("status.h"), "").unwrap();
+        std::fs::write(shared.join("shared-only.h"), "").unwrap();
         std::fs::write(um.join("status.h"), "").unwrap();
         std::fs::write(partition_dir.join("manual.h"), "").unwrap();
 
@@ -374,6 +379,7 @@ mod tests {
                 values: vec![
                     "<IncludeRoot>/um/provider.h".to_string(),
                     "<IncludeRoot>/shared/status.h".to_string(),
+                    "<IncludeRoot>/um/shared-only.h".to_string(),
                     "<PartitionDir>/manual.h".to_string(),
                 ],
             }],
@@ -386,6 +392,7 @@ mod tests {
             [
                 custom.join("provider.h"),
                 shared.join("status.h"),
+                shared.join("shared-only.h"),
                 partition_dir.join("manual.h"),
             ]
         );
@@ -409,7 +416,7 @@ mod tests {
                 .iter()
                 .map(|partition| partition.include_roots().count())
                 .sum::<usize>(),
-            1574
+            1570
         );
         assert_eq!(
             partitions
@@ -418,7 +425,7 @@ mod tests {
                 .map(|root| root.replace('\\', "/").to_ascii_lowercase())
                 .collect::<BTreeSet<_>>()
                 .len(),
-            1565
+            1561
         );
 
         let counts = option_counts(&partitions);
@@ -444,5 +451,28 @@ mod tests {
             ]
         );
         assert_eq!(input_namespaces(&partitions).unwrap().len(), 321);
+    }
+
+    #[test]
+    fn every_checked_in_partition_root_resolves() {
+        let win_sdk = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("..")
+            .join("..")
+            .join("generation")
+            .join("WinSDK");
+        let recompiled = win_sdk.join("RecompiledIdlHeaders");
+        let include_dirs = [
+            recompiled.join("shared"),
+            recompiled.join("um"),
+            recompiled.join("ucrt"),
+            recompiled.join("winrt"),
+            win_sdk.join("AdditionalHeaders").join("cpdk"),
+            win_sdk.join("AdditionalHeaders"),
+            win_sdk.join("Partitions").join("Com.StructuredStorage"),
+            win_sdk.join("inc"),
+        ];
+        for partition in load_active(&win_sdk.join("Partitions")).unwrap() {
+            partition.resolve_roots(&include_dirs).unwrap();
+        }
     }
 }

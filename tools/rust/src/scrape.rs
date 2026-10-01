@@ -10,6 +10,7 @@ use std::path::{Path, PathBuf};
 
 use windows_clang::{
     Annotation, AnnotationTarget, EmitOptions, FactData, Input, MetadataReferences,
+    PartitionedInput,
 };
 use windows_metadata::reader::{Index, Item};
 use windows_rdl::ArchInput;
@@ -410,7 +411,7 @@ fn path_arg(path: &Path, option: &str) -> Result<String, String> {
 }
 
 struct ScrapeConfiguration {
-    inputs: Vec<Input>,
+    inputs: ScrapeInputs,
     args: Vec<String>,
     libraries: LibraryMap,
     references: MetadataReferences,
@@ -418,6 +419,33 @@ struct ScrapeConfiguration {
     annotation_header: String,
     sal_header: String,
     has_import_libraries: bool,
+    partition_exclusions: BTreeSet<String>,
+}
+
+#[derive(Clone)]
+enum ScrapeInputs {
+    Common(Vec<Input>),
+    Partitioned(Vec<PartitionedInput>),
+}
+
+impl ScrapeInputs {
+    fn len(&self) -> usize {
+        match self {
+            Self::Common(inputs) => inputs.len(),
+            Self::Partitioned(inputs) => inputs.len(),
+        }
+    }
+
+    fn extract(&self, args: &[&str]) -> Result<windows_clang::Snapshot, windows_clang::Error> {
+        match self {
+            Self::Common(inputs) => windows_clang::extract(inputs.clone(), args),
+            Self::Partitioned(inputs) => windows_clang::extract_partitioned(inputs.clone(), args),
+        }
+    }
+
+    fn partitioned(&self) -> bool {
+        matches!(self, Self::Partitioned(_))
+    }
 }
 
 #[derive(Default)]
@@ -486,6 +514,7 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         .map(|directory| path_arg(directory, "--include"))
         .collect::<Result<Vec<_>, _>>()?;
     let inputs = build_inputs(options, &include_dirs, &root_dirs)?;
+    let partition_exclusions = partition_setting_values(options, "--exclude")?;
 
     let mut args = CLANG_ARGS
         .iter()
@@ -531,14 +560,29 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         annotation_header,
         sal_header,
         has_import_libraries: !libs.is_empty(),
+        partition_exclusions,
     })
+}
+
+fn partition_setting_values(options: &Options, name: &str) -> Result<BTreeSet<String>, String> {
+    let mut result = BTreeSet::new();
+    for main in &options.partitions {
+        if main
+            .parent()
+            .is_some_and(|directory| directory.join("settings.rsp").is_file())
+        {
+            let partition = crate::partition::load_main(main)?;
+            result.extend(partition.values(name).map(str::to_string));
+        }
+    }
+    Ok(result)
 }
 
 fn build_inputs(
     options: &Options,
     include_dirs: &[PathBuf],
     root_dirs: &[String],
-) -> Result<Vec<Input>, String> {
+) -> Result<ScrapeInputs, String> {
     const PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
     const GUID_RESET: &str = "\n#undef INITGUID\n#include <guiddef.h>\n";
 
@@ -568,56 +612,82 @@ fn build_inputs(
     }
 
     if !options.partitions.is_empty() {
-        return options
-            .partitions
-            .iter()
-            .map(|partition| {
-                if partition
-                    .parent()
-                    .is_some_and(|directory| directory.join("settings.rsp").is_file())
-                {
-                    let partition = crate::partition::load_main(partition)?;
-                    let resolved = partition.resolve_roots(include_dirs)?;
-                    let roots = resolved
-                        .files
-                        .iter()
-                        .map(|path| path_arg(path, "--include"))
-                        .collect::<Result<Vec<_>, _>>()?;
-                    let mut partition_root_dirs = resolved
-                        .directories
-                        .iter()
-                        .map(|path| path_arg(path, "--include"))
-                        .collect::<Result<Vec<_>, _>>()?;
-                    partition_root_dirs.extend(root_dirs.iter().cloned());
-                    return Ok(Input::new(partition.input_name()?, partition.source)
-                        .with_roots(roots)
-                        .with_root_dirs(partition_root_dirs)
-                        .with_root_suffixes(scope_header_suffixes(options)));
-                }
-
-                let source = std::fs::read_to_string(partition).map_err(|error| {
-                    format!(
-                        "failed to read `--partition {}`: {error}",
-                        partition.display()
-                    )
-                })?;
-                let roots = source
-                    .lines()
-                    .filter_map(include_name)
-                    .filter(|header| {
-                        ![ANNOTATION_HEADER, SAL_HEADER]
-                            .iter()
-                            .any(|forced| file_name(header).eq_ignore_ascii_case(forced))
-                    })
-                    .filter_map(|header| resolve_header(header, include_dirs))
-                    .map(|path| path_arg(&path, "--include"))
+        let mut common = Vec::new();
+        let mut partitioned = Vec::new();
+        for partition in &options.partitions {
+            if partition
+                .parent()
+                .is_some_and(|directory| directory.join("settings.rsp").is_file())
+            {
+                let partition = crate::partition::load_main(partition)?;
+                let resolved = partition.resolve_roots(include_dirs)?;
+                let roots = resolved
+                    .files
+                    .iter()
+                    .map(|path| path_arg(path, "--include"))
                     .collect::<Result<Vec<_>, _>>()?;
-                Ok(Input::new(path_arg(partition, "--partition")?, source)
+                let partition_root_dirs = resolved
+                    .directories
+                    .iter()
+                    .map(|path| path_arg(path, "--include"))
+                    .collect::<Result<Vec<_>, _>>()?;
+                let input_name = partition.input_name()?;
+                let namespace = partition.namespace()?.to_string();
+                let identity = partition.name;
+                let input = Input::new(input_name, partition.source)
+                    .with_roots(roots)
+                    .with_root_dirs(partition_root_dirs);
+                let mut input = input.partitioned(identity.clone());
+                let mut owner_roots = resolved.files;
+                for directory in resolved.directories {
+                    collect_files(&directory, &mut owner_roots)?;
+                }
+                owner_roots.sort();
+                owner_roots.dedup();
+                for root in owner_roots {
+                    input = input.with_root(
+                        path_arg(&root, "--include")?,
+                        identity.clone(),
+                        namespace.clone(),
+                    );
+                }
+                partitioned.push(input);
+                continue;
+            }
+
+            let source = std::fs::read_to_string(partition).map_err(|error| {
+                format!(
+                    "failed to read `--partition {}`: {error}",
+                    partition.display()
+                )
+            })?;
+            let roots = source
+                .lines()
+                .filter_map(include_name)
+                .filter(|header| {
+                    ![ANNOTATION_HEADER, SAL_HEADER]
+                        .iter()
+                        .any(|forced| file_name(header).eq_ignore_ascii_case(forced))
+                })
+                .filter_map(|header| resolve_header(header, include_dirs))
+                .map(|path| path_arg(&path, "--include"))
+                .collect::<Result<Vec<_>, _>>()?;
+            common.push(
+                Input::new(path_arg(partition, "--partition")?, source)
                     .with_roots(roots)
                     .with_root_dirs(root_dirs.iter().cloned())
-                    .with_root_suffixes(scope_header_suffixes(options)))
-            })
-            .collect();
+                    .with_root_suffixes(scope_header_suffixes(options)),
+            );
+        }
+        return match (common.is_empty(), partitioned.is_empty()) {
+            (false, false) => Err(
+                "partition-authority inputs with settings.rsp cannot be mixed with custom translation units"
+                    .to_string(),
+            ),
+            (false, true) => Ok(ScrapeInputs::Common(common)),
+            (true, false) => Ok(ScrapeInputs::Partitioned(partitioned)),
+            (true, true) => unreachable!("validated non-empty partitions"),
+        };
     }
 
     let headers = crate::win32_headers::HEADERS
@@ -697,7 +767,27 @@ fn build_inputs(
             inputs.len()
         ));
     }
-    Ok(inputs)
+    Ok(ScrapeInputs::Common(inputs))
+}
+
+fn collect_files(directory: &Path, files: &mut Vec<PathBuf>) -> Result<(), String> {
+    let mut entries = std::fs::read_dir(directory)
+        .map_err(|error| format!("failed to read `{}`: {error}", directory.display()))?
+        .map(|entry| {
+            entry
+                .map(|entry| entry.path())
+                .map_err(|error| format!("failed to read `{}`: {error}", directory.display()))
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+    entries.sort();
+    for path in entries {
+        if path.is_dir() {
+            collect_files(&path, files)?;
+        } else if path.is_file() {
+            files.push(path);
+        }
+    }
+    Ok(())
 }
 
 fn execute(options: &Options) -> Result<(), String> {
@@ -830,7 +920,9 @@ fn scrape_arch(
     let args = owned_args.iter().map(String::as_str).collect::<Vec<_>>();
 
     let started = std::time::Instant::now();
-    let snapshot = windows_clang::extract(configuration.inputs.clone(), &args)
+    let snapshot = configuration
+        .inputs
+        .extract(&args)
         .map_err(|error| format!("failed to extract {} metadata: {error}", arch.name))?;
     println!(
         "Extracted {} facts for {} in {:.2}s",
@@ -940,6 +1032,9 @@ fn scrape_arch(
     let mut excluded_types = configuration.exclusions.excluded_types().clone();
     let mut excluded_functions = configuration.exclusions.excluded_functions().clone();
     let mut excluded_constants = configuration.exclusions.excluded_constants().clone();
+    excluded_types.extend(configuration.partition_exclusions.iter().cloned());
+    excluded_functions.extend(configuration.partition_exclusions.iter().cloned());
+    excluded_constants.extend(configuration.partition_exclusions.iter().cloned());
     if !options.symbols.is_empty() || !options.constants.is_empty() {
         excluded_types.extend(
             snapshot
@@ -985,24 +1080,45 @@ fn scrape_arch(
     emit.excluded_functions = Some(&excluded_functions);
     emit.excluded_constants = Some(&excluded_constants);
     emit.functions = selected_functions.as_ref();
-    let partitions = snapshot
-        .emit_by_header_with_options(&emit)
-        .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
-
-    let mut stems = BTreeSet::new();
-    for (header, rdl) in partitions {
-        let stem = Path::new(&header)
-            .file_stem()
-            .and_then(|stem| stem.to_str())
-            .ok_or_else(|| format!("invalid defining header `{header}`"))?
-            .to_ascii_lowercase();
-        if !stems.insert(stem.clone()) {
-            return Err(format!(
-                "multiple defining headers map to RDL partition `{stem}.rdl`"
-            ));
+    if configuration.inputs.partitioned() {
+        let partitions = snapshot
+            .emit_partitioned_with_options(&emit)
+            .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
+        for (index, (partition, rdl)) in partitions.into_iter().enumerate() {
+            let stem = partition
+                .partition
+                .chars()
+                .map(|value| {
+                    if value.is_ascii_alphanumeric() {
+                        value.to_ascii_lowercase()
+                    } else {
+                        '_'
+                    }
+                })
+                .collect::<String>();
+            let file = format!("{stem}-{index:04}.rdl");
+            std::fs::write(rdl_dir.join(&file), rdl)
+                .map_err(|error| format!("failed to write `{file}`: {error}"))?;
         }
-        std::fs::write(rdl_dir.join(format!("{stem}.rdl")), rdl)
-            .map_err(|error| format!("failed to write `{stem}.rdl`: {error}"))?;
+    } else {
+        let partitions = snapshot
+            .emit_by_header_with_options(&emit)
+            .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
+        let mut stems = BTreeSet::new();
+        for (header, rdl) in partitions {
+            let stem = Path::new(&header)
+                .file_stem()
+                .and_then(|stem| stem.to_str())
+                .ok_or_else(|| format!("invalid defining header `{header}`"))?
+                .to_ascii_lowercase();
+            if !stems.insert(stem.clone()) {
+                return Err(format!(
+                    "multiple defining headers map to RDL partition `{stem}.rdl`"
+                ));
+            }
+            std::fs::write(rdl_dir.join(format!("{stem}.rdl")), rdl)
+                .map_err(|error| format!("failed to write `{stem}.rdl`: {error}"))?;
+        }
     }
 
     compile(rdl_dir, winmd, options)?;
@@ -1372,13 +1488,52 @@ mod tests {
             ..Default::default()
         };
         let inputs = build_inputs(&options, &[root.clone()], &[]).unwrap();
-        assert_eq!(inputs.len(), 2);
+        let ScrapeInputs::Common(inputs) = inputs else {
+            panic!("custom translation units unexpectedly used partition authority");
+        };
         assert_eq!(inputs[0].source, first_source);
         assert_eq!(inputs[1].source, second_source);
         assert!(inputs[0].source.contains("#include <first.h>"));
         assert!(inputs[0].source.contains("DIRECT_DECLARATION"));
         assert!(inputs[1].source.contains("#include SATELLITE_HEADER"));
         std::fs::remove_dir_all(root).ok();
+    }
+
+    #[test]
+    fn partition_settings_create_tagged_namespace_inputs() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-partitioned-inputs-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let partition = root.join("Test");
+        std::fs::create_dir_all(&partition).unwrap();
+        let main = partition.join("main.cpp");
+        std::fs::write(&main, "typedef unsigned VALUE;\n").unwrap();
+        std::fs::write(
+            partition.join("settings.rsp"),
+            "--exclude\nVALUE\n--traverse\n<PartitionDir>/main.cpp\n--namespace\nExample.Test\n",
+        )
+        .unwrap();
+
+        let options = Options {
+            partitions: vec![main.clone()],
+            ..Default::default()
+        };
+        let inputs = build_inputs(&options, &[root.clone()], &[]).unwrap();
+        let ScrapeInputs::Partitioned(inputs) = inputs else {
+            panic!("partition settings did not enable partition authority");
+        };
+        assert_eq!(inputs.len(), 1);
+        assert_eq!(inputs[0].identity, "Test");
+        let main = main.to_string_lossy().replace('\\', "/");
+        assert_eq!(inputs[0].roots[&main].partition, "Test");
+        assert_eq!(inputs[0].roots[&main].namespace, "Example.Test");
+        assert_eq!(
+            partition_setting_values(&options, "--exclude").unwrap(),
+            BTreeSet::from(["VALUE".to_string()])
+        );
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
