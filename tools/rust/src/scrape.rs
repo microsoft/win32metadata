@@ -567,11 +567,34 @@ fn build_inputs(
             .find(|path| path.is_file())
     }
 
-    if !options.win32_sdk {
+    if !options.partitions.is_empty() {
         return options
             .partitions
             .iter()
             .map(|partition| {
+                if partition
+                    .parent()
+                    .is_some_and(|directory| directory.join("settings.rsp").is_file())
+                {
+                    let partition = crate::partition::load_main(partition)?;
+                    let resolved = partition.resolve_roots(include_dirs)?;
+                    let roots = resolved
+                        .files
+                        .iter()
+                        .map(|path| path_arg(path, "--include"))
+                        .collect::<Result<Vec<_>, _>>()?;
+                    let mut partition_root_dirs = resolved
+                        .directories
+                        .iter()
+                        .map(|path| path_arg(path, "--include"))
+                        .collect::<Result<Vec<_>, _>>()?;
+                    partition_root_dirs.extend(root_dirs.iter().cloned());
+                    return Ok(Input::new(partition.input_name()?, partition.source)
+                        .with_roots(roots)
+                        .with_root_dirs(partition_root_dirs)
+                        .with_root_suffixes(scope_header_suffixes(options)));
+                }
+
                 let source = std::fs::read_to_string(partition).map_err(|error| {
                     format!(
                         "failed to read `--partition {}`: {error}",
@@ -715,7 +738,7 @@ fn execute(options: &Options) -> Result<(), String> {
                 let resource_dir = resource_dir.as_deref();
                 let rdl_dir = &rdl_dir;
                 let obj = &obj;
-                scope.spawn(move || -> Result<ArchInput, String> {
+                scope.spawn(move || -> Result<Option<ArchInput>, String> {
                     let arch = arch(name)?;
                     let arch_rdl_dir = if index == 0 {
                         rdl_dir.clone()
@@ -723,19 +746,21 @@ fn execute(options: &Options) -> Result<(), String> {
                         obj.join(name)
                     };
                     let arch_winmd = obj.join(format!("Windows.Win32.{name}.winmd"));
-                    scrape_arch(
+                    if scrape_arch(
                         configuration,
                         &arch,
                         resource_dir,
                         &arch_rdl_dir,
                         &arch_winmd,
                         options,
-                    )?;
-                    Ok(ArchInput {
+                    )? {
+                        return Ok(None);
+                    }
+                    Ok(Some(ArchInput {
                         rdl_dir: arch_rdl_dir,
                         winmd: arch_winmd,
                         bits: arch.bits,
-                    })
+                    }))
                 })
             })
             .collect::<Vec<_>>();
@@ -747,7 +772,15 @@ fn execute(options: &Options) -> Result<(), String> {
                     .map_err(|_| "architecture scrape worker panicked".to_string())?
             })
             .collect::<Result<Vec<_>, String>>()
-    })?;
+    })?
+    .into_iter()
+    .flatten()
+    .collect::<Vec<_>>();
+
+    if merged.is_empty() {
+        println!("Fact audit completed before RDL planning");
+        return Ok(());
+    }
 
     if merged.len() > 1 {
         // Merge the per-architecture binaries directly, then decompile that authoritative
@@ -783,7 +816,7 @@ fn scrape_arch(
     rdl_dir: &Path,
     winmd: &Path,
     options: &Options,
-) -> Result<(), String> {
+) -> Result<bool, String> {
     clear_rdl_dir(rdl_dir)?;
 
     let mut owned_args = configuration.args.clone();
@@ -805,6 +838,12 @@ fn scrape_arch(
         arch.name,
         started.elapsed().as_secs_f32()
     );
+    if let Some(path) = std::env::var_os("WIN32METADATA_FACT_AUDIT") {
+        write_fact_audit(&snapshot, &PathBuf::from(path), &arch.name)?;
+        if std::env::var_os("WIN32METADATA_FACT_AUDIT_ONLY").is_some() {
+            return Ok(true);
+        }
+    }
 
     if std::env::var_os("WINDOWS_CLANG_DIAGNOSTICS").is_some() {
         for (fact, reason) in snapshot.unsupported().filter(|(fact, _)| fact.root) {
@@ -966,7 +1005,79 @@ fn scrape_arch(
             .map_err(|error| format!("failed to write `{stem}.rdl`: {error}"))?;
     }
 
-    compile(rdl_dir, winmd, options)
+    compile(rdl_dir, winmd, options)?;
+    Ok(false)
+}
+
+fn write_fact_audit(
+    snapshot: &windows_clang::Snapshot,
+    path: &Path,
+    arch: &str,
+) -> Result<(), String> {
+    let path = path.with_extension(format!("{arch}.tsv"));
+    let roots = std::env::var_os("WIN32METADATA_FACT_AUDIT_ROOTS")
+        .map(PathBuf::from)
+        .map(|path| {
+            std::fs::read_to_string(&path)
+                .map_err(|error| format!("failed to read `{}`: {error}", path.display()))
+        })
+        .transpose()?
+        .map(|source| {
+            source
+                .lines()
+                .map(normalize_audit_path)
+                .filter(|line| !line.is_empty())
+                .collect::<Vec<_>>()
+        });
+    if let Some(parent) = path.parent() {
+        std::fs::create_dir_all(parent)
+            .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
+    }
+    let mut lines = Vec::new();
+    for fact in snapshot
+        .facts()
+        .iter()
+        .filter(|fact| roots.is_some() || fact.root)
+    {
+        if !audit_root_matches(&fact.spelling.file, roots.as_deref()) {
+            continue;
+        }
+        let annotations = snapshot
+            .annotations()
+            .get(&AnnotationTarget::Declaration(fact.origin.clone()));
+        lines.push(format!(
+            "fact\t{}\t{:?}\t{}\t{:?}\t{:?}",
+            fact.spelling.file, fact.kind, fact.name, fact.data, annotations
+        ));
+    }
+    for constant in snapshot.constants() {
+        if !audit_root_matches(&constant.spelling.file, roots.as_deref()) {
+            continue;
+        }
+        lines.push(format!(
+            "constant\t{}\tConstant\t{}\t{:?}\t{:?}",
+            constant.spelling.file, constant.name, constant.ty, constant.value
+        ));
+    }
+    lines.sort();
+    std::fs::write(&path, lines.join("\n"))
+        .map_err(|error| format!("failed to write `{}`: {error}", path.display()))
+}
+
+fn normalize_audit_path(path: &str) -> String {
+    path.trim()
+        .replace('\\', "/")
+        .trim_start_matches('/')
+        .to_ascii_lowercase()
+}
+
+fn audit_root_matches(path: &str, roots: Option<&[String]>) -> bool {
+    roots.is_none_or(|roots| {
+        let path = normalize_audit_path(path);
+        roots
+            .iter()
+            .any(|root| path == *root || path.ends_with(&format!("/{root}")))
+    })
 }
 
 /// Compiles a directory of RDL partitions into a WinMD.
@@ -1268,6 +1379,20 @@ mod tests {
         assert!(inputs[0].source.contains("DIRECT_DECLARATION"));
         assert!(inputs[1].source.contains("#include SATELLITE_HEADER"));
         std::fs::remove_dir_all(root).ok();
+    }
+
+    #[test]
+    fn fact_audit_roots_match_windows_paths_by_normalized_suffix() {
+        let roots = vec!["um/audioendpoints.h".to_string()];
+        assert!(audit_root_matches(
+            r"C:\sdk\Include\um\AudioEndpoints.h",
+            Some(&roots)
+        ));
+        assert!(!audit_root_matches(
+            r"C:\sdk\Include\shared\AudioEndpoints.h",
+            Some(&roots)
+        ));
+        assert!(audit_root_matches("anything.h", None));
     }
 
     #[test]

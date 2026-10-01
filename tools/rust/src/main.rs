@@ -5,6 +5,7 @@ mod catch;
 mod compile;
 mod libclang;
 mod merge_arch;
+mod partition;
 mod roundtrip;
 mod scrape;
 mod win32_headers;
