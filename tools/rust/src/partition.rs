@@ -1,14 +1,61 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
-const APPROVED_CROSS_NAMESPACE_ROOTS: [&str; 7] = [
-    "shared/ntddstor.h",
-    "shared/uuids.h",
-    "um/audioendpoints.h",
-    "um/dxcore.h",
-    "um/dxcore_interface.h",
-    "um/endpointvolume.h",
-    "um/idispids.h",
+struct ApprovedRootConflict {
+    path: &'static str,
+    owners: &'static [(&'static str, &'static str)],
+}
+
+const APPROVED_CROSS_NAMESPACE_ROOTS: [ApprovedRootConflict; 7] = [
+    ApprovedRootConflict {
+        path: "shared/ntddstor.h",
+        owners: &[
+            ("Fs", "Windows.Win32.Storage.FileSystem"),
+            ("Ioctl", "Windows.Win32.System.Ioctl"),
+        ],
+    },
+    ApprovedRootConflict {
+        path: "shared/uuids.h",
+        owners: &[
+            ("Media", "Windows.Win32.Media"),
+            ("Mf", "Windows.Win32.Media.MediaFoundation"),
+        ],
+    },
+    ApprovedRootConflict {
+        path: "um/audioendpoints.h",
+        owners: &[
+            ("Audio", "Windows.Win32.Media.Audio"),
+            ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints"),
+        ],
+    },
+    ApprovedRootConflict {
+        path: "um/dxcore.h",
+        owners: &[
+            ("DXCore", "Windows.Win32.Graphics.DXCore"),
+            ("Display", "Windows.Win32.Devices.Display"),
+        ],
+    },
+    ApprovedRootConflict {
+        path: "um/dxcore_interface.h",
+        owners: &[
+            ("DXCore", "Windows.Win32.Graphics.DXCore"),
+            ("Display", "Windows.Win32.Devices.Display"),
+        ],
+    },
+    ApprovedRootConflict {
+        path: "um/endpointvolume.h",
+        owners: &[
+            ("Audio", "Windows.Win32.Media.Audio"),
+            ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints"),
+        ],
+    },
+    ApprovedRootConflict {
+        path: "um/idispids.h",
+        owners: &[
+            ("ComOle", "Windows.Win32.System.Ole"),
+            ("InternetExplorer", "Windows.Win32.Web.InternetExplorer"),
+        ],
+    },
 ];
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -421,9 +468,18 @@ pub fn validate_resolved_root_ownership(
             .iter()
             .map(|claim| claim.namespace.as_str())
             .collect::<BTreeSet<_>>();
+        let observed_owners = claims
+            .iter()
+            .map(|claim| (claim.partition.as_str(), claim.namespace.as_str()))
+            .collect::<BTreeSet<_>>();
         let allowed = APPROVED_CROSS_NAMESPACE_ROOTS
             .iter()
-            .any(|suffix| path == *suffix || path.ends_with(&format!("/{suffix}")));
+            .find(|approved| {
+                path == approved.path || path.ends_with(&format!("/{}", approved.path))
+            })
+            .is_some_and(|approved| {
+                observed_owners == approved.owners.iter().copied().collect::<BTreeSet<_>>()
+            });
         if namespaces.len() > 1 && !allowed {
             let owners = claims
                 .iter()
@@ -952,6 +1008,43 @@ mod tests {
     }
 
     #[test]
+    fn root_preflight_rejects_expansion_of_an_approved_owner_set() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-preflight-expanded-owner-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("ntddstor.h"), "").unwrap();
+
+        let partitions = [
+            test_partition(
+                &root,
+                "Fs",
+                "Windows.Win32.Storage.FileSystem",
+                &["<IncludeRoot>/shared/ntddstor.h"],
+            ),
+            test_partition(
+                &root,
+                "Ioctl",
+                "Windows.Win32.System.Ioctl",
+                &["<IncludeRoot>/shared/ntddstor.h"],
+            ),
+            test_partition(
+                &root,
+                "Unexpected",
+                "Windows.Win32.Unexpected",
+                &["<IncludeRoot>/shared/ntddstor.h"],
+            ),
+        ];
+        let error = validate_resolved_root_ownership(&partitions, &[shared]).unwrap_err();
+        assert!(error.contains("claimed by multiple namespaces"), "{error}");
+        assert!(error.contains("Windows.Win32.Unexpected"), "{error}");
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
     fn root_preflight_rejects_duplicate_partition_roots() {
         let root = std::env::temp_dir().join(format!(
             "win32metadata-partition-preflight-duplicate-{}",
@@ -1162,6 +1255,9 @@ mod tests {
         assert_eq!(
             conflicts.keys().map(String::as_str).collect::<Vec<_>>(),
             APPROVED_CROSS_NAMESPACE_ROOTS
+                .iter()
+                .map(|approved| approved.path)
+                .collect::<Vec<_>>()
         );
         assert_eq!(input_namespaces(&partitions).unwrap().len(), 321);
     }
