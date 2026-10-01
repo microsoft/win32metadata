@@ -10,7 +10,7 @@ use std::path::{Path, PathBuf};
 
 use windows_clang::{
     Annotation, AnnotationTarget, EmitOptions, FactData, Input, MetadataReferences,
-    PartitionedInput,
+    PartitionedInput, RootPartition,
 };
 use windows_metadata::reader::{Index, Item};
 use windows_rdl::ArchInput;
@@ -419,7 +419,6 @@ struct ScrapeConfiguration {
     annotation_header: String,
     sal_header: String,
     has_import_libraries: bool,
-    partition_exclusions: BTreeSet<String>,
 }
 
 #[derive(Clone)]
@@ -514,8 +513,6 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         .map(|directory| path_arg(directory, "--include"))
         .collect::<Result<Vec<_>, _>>()?;
     let inputs = build_inputs(options, &include_dirs, &root_dirs)?;
-    let partition_exclusions = partition_setting_values(options, "--exclude")?;
-
     let mut args = CLANG_ARGS
         .iter()
         .map(|argument| argument.to_string())
@@ -560,22 +557,7 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         annotation_header,
         sal_header,
         has_import_libraries: !libs.is_empty(),
-        partition_exclusions,
     })
-}
-
-fn partition_setting_values(options: &Options, name: &str) -> Result<BTreeSet<String>, String> {
-    let mut result = BTreeSet::new();
-    for main in &options.partitions {
-        if main
-            .parent()
-            .is_some_and(|directory| directory.join("settings.rsp").is_file())
-        {
-            let partition = crate::partition::load_main(main)?;
-            result.extend(partition.values(name).map(str::to_string));
-        }
-    }
-    Ok(result)
 }
 
 fn build_inputs(
@@ -611,6 +593,40 @@ fn build_inputs(
             .find(|path| path.is_file())
     }
 
+    fn resolve_partition_include_directory(
+        value: &str,
+        include_dirs: &[PathBuf],
+    ) -> Result<String, String> {
+        let normalized = value.replace('\\', "/");
+        if let Some(relative) = normalized.strip_prefix("<RepoRoot>/") {
+            return path_arg(
+                &Path::new(env!("CARGO_MANIFEST_DIR"))
+                    .join("..")
+                    .join("..")
+                    .join(relative),
+                "--include-directory",
+            );
+        }
+        if let Some(relative) = normalized.strip_prefix("<IncludeRoot>/") {
+            let relative = relative.to_ascii_lowercase();
+            return include_dirs
+                .iter()
+                .find(|directory| {
+                    directory
+                        .to_string_lossy()
+                        .replace('\\', "/")
+                        .to_ascii_lowercase()
+                        .ends_with(&format!("/{relative}"))
+                })
+                .map(|directory| path_arg(directory, "--include-directory"))
+                .transpose()?
+                .ok_or_else(|| {
+                    format!("partition include directory `{value}` was not found in SDK includes")
+                });
+        }
+        path_arg(Path::new(value), "--include-directory")
+    }
+
     if !options.partitions.is_empty() {
         let mut common = Vec::new();
         let mut partitioned = Vec::new();
@@ -632,12 +648,59 @@ fn build_inputs(
                     .map(|path| path_arg(path, "--include"))
                     .collect::<Result<Vec<_>, _>>()?;
                 let input_name = partition.input_name()?;
-                let namespace = partition.namespace()?.to_string();
-                let identity = partition.name;
+                let policy = partition.policy()?;
+                let namespace = policy.namespace;
+                let identity = partition.name.clone();
+                let mut root_partition = RootPartition::new(identity.clone(), namespace.clone());
+                for (source, target) in policy.remaps {
+                    root_partition = root_partition.with_remap(source, target);
+                }
+                for exclusion in policy.exclusions {
+                    root_partition = root_partition.with_exclusion(exclusion);
+                }
+                for (function, library) in policy.libraries {
+                    root_partition = root_partition.with_library(function, library);
+                }
+                for (name, override_type) in policy.type_overrides {
+                    match override_type {
+                        crate::partition::TypeOverride::U32 => {
+                            root_partition = root_partition.with_u32_type(name);
+                        }
+                    }
+                }
+                for (name, attributes) in policy.attributes {
+                    for attribute in attributes {
+                        match attribute {
+                            crate::partition::ForcedAttribute::Flags => {
+                                root_partition = root_partition.with_flags(name.clone());
+                            }
+                        }
+                    }
+                }
+                for name in policy.preserve_auto_fnptr_level {
+                    root_partition =
+                        root_partition.with_preserved_auto_function_pointer_level(name);
+                }
+                if policy.exclude_empty_records {
+                    root_partition = root_partition.exclude_empty_records();
+                }
+                let standard = policy.standard;
+                let include_directories = policy
+                    .include_directories
+                    .iter()
+                    .map(|value| resolve_partition_include_directory(value, include_dirs))
+                    .collect::<Result<Vec<_>, _>>()?;
+                let _legacy_output = policy.legacy_output;
                 let input = Input::new(input_name, partition.source)
                     .with_roots(roots)
                     .with_root_dirs(partition_root_dirs);
                 let mut input = input.partitioned(identity.clone());
+                if standard.as_deref() == Some("c++20") {
+                    input = input.with_cpp20();
+                }
+                for directory in include_directories {
+                    input = input.with_include_directory(directory);
+                }
                 let mut owner_roots = resolved.files;
                 for directory in resolved.directories {
                     collect_files(&directory, &mut owner_roots)?;
@@ -645,11 +708,8 @@ fn build_inputs(
                 owner_roots.sort();
                 owner_roots.dedup();
                 for root in owner_roots {
-                    input = input.with_root(
-                        path_arg(&root, "--include")?,
-                        identity.clone(),
-                        namespace.clone(),
-                    );
+                    input = input
+                        .with_root_partition(path_arg(&root, "--include")?, root_partition.clone());
                 }
                 partitioned.push(input);
                 continue;
@@ -1032,9 +1092,6 @@ fn scrape_arch(
     let mut excluded_types = configuration.exclusions.excluded_types().clone();
     let mut excluded_functions = configuration.exclusions.excluded_functions().clone();
     let mut excluded_constants = configuration.exclusions.excluded_constants().clone();
-    excluded_types.extend(configuration.partition_exclusions.iter().cloned());
-    excluded_functions.extend(configuration.partition_exclusions.iter().cloned());
-    excluded_constants.extend(configuration.partition_exclusions.iter().cloned());
     if !options.symbols.is_empty() || !options.constants.is_empty() {
         excluded_types.extend(
             snapshot
@@ -1507,12 +1564,14 @@ mod tests {
         ));
         std::fs::remove_dir_all(&root).ok();
         let partition = root.join("Test");
+        let shared = root.join("sdk").join("shared");
         std::fs::create_dir_all(&partition).unwrap();
+        std::fs::create_dir_all(&shared).unwrap();
         let main = partition.join("main.cpp");
         std::fs::write(&main, "typedef unsigned VALUE;\n").unwrap();
         std::fs::write(
             partition.join("settings.rsp"),
-            "--exclude\nVALUE\n--traverse\n<PartitionDir>/main.cpp\n--namespace\nExample.Test\n",
+            "--exclude\nVALUE\n--remap\nOLD=NEW\n--with-librarypath\nGetValue=test.dll\n--with-type\nVALUE=uint\n--with-attribute\nVALUE=Flags\n--preserve-auto-fnptr-level\nCALLBACK\n--config\nexclude-empty-records\n--std\nc++20\n--include-directory\n<IncludeRoot>/shared\n--traverse\n<PartitionDir>/main.cpp\n--namespace\nExample.Test\n",
         )
         .unwrap();
 
@@ -1520,7 +1579,7 @@ mod tests {
             partitions: vec![main.clone()],
             ..Default::default()
         };
-        let inputs = build_inputs(&options, &[root.clone()], &[]).unwrap();
+        let inputs = build_inputs(&options, &[shared.clone()], &[]).unwrap();
         let ScrapeInputs::Partitioned(inputs) = inputs else {
             panic!("partition settings did not enable partition authority");
         };
@@ -1530,9 +1589,70 @@ mod tests {
         assert_eq!(inputs[0].roots[&main].partition, "Test");
         assert_eq!(inputs[0].roots[&main].namespace, "Example.Test");
         assert_eq!(
-            partition_setting_values(&options, "--exclude").unwrap(),
+            inputs[0].roots[&main].exclusions,
             BTreeSet::from(["VALUE".to_string()])
         );
+        assert_eq!(inputs[0].roots[&main].remaps["OLD"], "NEW");
+        assert_eq!(inputs[0].roots[&main].libraries["GetValue"], "test.dll");
+        assert!(inputs[0].roots[&main].u32_types.contains("VALUE"));
+        assert!(inputs[0].roots[&main].flags.contains("VALUE"));
+        assert!(
+            inputs[0].roots[&main]
+                .preserved_auto_function_pointer_levels
+                .contains("CALLBACK")
+        );
+        assert!(inputs[0].roots[&main].exclude_empty_records);
+        assert!(inputs[0].arguments.contains(&"-std=c++20".to_string()));
+        assert!(inputs[0].arguments.contains(&format!(
+            "-I{}",
+            shared.to_string_lossy().replace('\\', "/")
+        )));
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn partition_settings_keep_duplicate_function_libraries_owner_scoped() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-partitioned-libraries-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let partitions = [("Audio", "DSOUND.dll"), ("Tbs", "tbs.dll")];
+        let mut mains = Vec::new();
+        for (name, library) in partitions {
+            let directory = root.join(name);
+            std::fs::create_dir_all(&directory).unwrap();
+            let main = directory.join("main.cpp");
+            std::fs::write(&main, "void GetDeviceID(void);\n").unwrap();
+            std::fs::write(
+                directory.join("settings.rsp"),
+                format!(
+                    "--with-librarypath\nGetDeviceID={library}\n--traverse\n<PartitionDir>/main.cpp\n--namespace\nExample.{name}\n"
+                ),
+            )
+            .unwrap();
+            mains.push(main);
+        }
+
+        let options = Options {
+            partitions: mains,
+            ..Default::default()
+        };
+        let ScrapeInputs::Partitioned(inputs) =
+            build_inputs(&options, &[root.clone()], &[]).unwrap()
+        else {
+            panic!("partition settings did not enable partition authority");
+        };
+        assert_eq!(inputs.len(), 2);
+        for input in inputs {
+            let main = input.input.name.clone();
+            let expected = match input.identity.as_str() {
+                "Audio" => "DSOUND.dll",
+                "Tbs" => "tbs.dll",
+                identity => panic!("unexpected partition `{identity}`"),
+            };
+            assert_eq!(input.roots[&main].libraries["GetDeviceID"], expected);
+        }
         std::fs::remove_dir_all(root).unwrap();
     }
 

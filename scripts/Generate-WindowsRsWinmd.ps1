@@ -54,8 +54,9 @@ if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
 
 $sdkPackageRoot = Get-WinSdkCppPkgPath
 $headerRoot = Join-Path $sdkPackageRoot "c\include\$(Get-WinSdkHeaderVersion)"
+$useCheckedInPartitionInputs = $UsePartitionAuthority.IsPresent -or $Partition.Count -ne 0
 $includePaths = @(
-    if ($UsePartitionAuthority.IsPresent) {
+    if ($useCheckedInPartitionInputs) {
         Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders"
         Join-Path $windowsWin32ProjectRoot "AdditionalHeaders\cpdk"
     }

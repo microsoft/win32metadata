@@ -1,7 +1,5 @@
-use std::path::{Path, PathBuf};
-
-#[cfg(test)]
 use std::collections::{BTreeMap, BTreeSet};
+use std::path::{Path, PathBuf};
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Setting {
@@ -23,6 +21,31 @@ pub struct ResolvedRoots {
     pub directories: Vec<PathBuf>,
 }
 
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum TypeOverride {
+    U32,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum ForcedAttribute {
+    Flags,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct PartitionPolicy {
+    pub namespace: String,
+    pub exclusions: BTreeSet<String>,
+    pub remaps: BTreeMap<String, String>,
+    pub type_overrides: BTreeMap<String, TypeOverride>,
+    pub attributes: BTreeMap<String, BTreeSet<ForcedAttribute>>,
+    pub libraries: BTreeMap<String, String>,
+    pub preserve_auto_fnptr_level: BTreeSet<String>,
+    pub exclude_empty_records: bool,
+    pub standard: Option<String>,
+    pub include_directories: Vec<String>,
+    pub legacy_output: Option<String>,
+}
+
 impl Partition {
     pub fn input_name(&self) -> Result<String, String> {
         self.directory
@@ -37,16 +60,9 @@ impl Partition {
             })
     }
 
-    pub fn namespace(&self) -> Result<&str, String> {
-        let values = self.values("--namespace").collect::<Vec<_>>();
-        match values.as_slice() {
-            [namespace] if !namespace.is_empty() => Ok(namespace),
-            [] => Err(format!("partition `{}` has no --namespace", self.name)),
-            _ => Err(format!(
-                "partition `{}` must have exactly one --namespace value",
-                self.name
-            )),
-        }
+    #[cfg(test)]
+    pub fn namespace(&self) -> Result<String, String> {
+        Ok(self.policy()?.namespace)
     }
 
     pub fn values<'a>(&'a self, name: &'a str) -> impl Iterator<Item = &'a str> + 'a {
@@ -54,6 +70,171 @@ impl Partition {
             .iter()
             .filter(move |setting| setting.name == name)
             .flat_map(|setting| setting.values.iter().map(String::as_str))
+    }
+
+    pub fn key_value_pairs(&self, name: &str) -> Result<BTreeMap<String, String>, String> {
+        let mut result = BTreeMap::new();
+        for value in self.values(name) {
+            let (source, target) = value.split_once('=').ok_or_else(|| {
+                format!(
+                    "partition `{}` setting `{name}` value `{value}` must contain `=`",
+                    self.name
+                )
+            })?;
+            if source.is_empty() || target.is_empty() {
+                return Err(format!(
+                    "partition `{}` setting `{name}` value `{value}` must have non-empty source and target",
+                    self.name
+                ));
+            }
+            result.insert(source.to_string(), target.to_string());
+        }
+        Ok(result)
+    }
+
+    pub fn policy(&self) -> Result<PartitionPolicy, String> {
+        const SUPPORTED: [&str; 12] = [
+            "--config",
+            "--exclude",
+            "--include-directory",
+            "--namespace",
+            "--output",
+            "--preserve-auto-fnptr-level",
+            "--remap",
+            "--std",
+            "--traverse",
+            "--with-attribute",
+            "--with-librarypath",
+            "--with-type",
+        ];
+        for setting in &self.settings {
+            if !SUPPORTED.contains(&setting.name.as_str()) {
+                return Err(format!(
+                    "partition `{}` has unsupported setting `{}`",
+                    self.name, setting.name
+                ));
+            }
+        }
+
+        let namespaces = self.values("--namespace").collect::<Vec<_>>();
+        let namespace = match namespaces.as_slice() {
+            [namespace] if !namespace.is_empty() => (*namespace).to_string(),
+            [] => return Err(format!("partition `{}` has no --namespace", self.name)),
+            _ => {
+                return Err(format!(
+                    "partition `{}` must have exactly one --namespace value",
+                    self.name
+                ));
+            }
+        };
+
+        let mut exclude_empty_records = false;
+        for value in self.values("--config") {
+            match value {
+                "exclude-empty-records" => exclude_empty_records = true,
+                _ => {
+                    return Err(format!(
+                        "partition `{}` has unsupported --config value `{value}`",
+                        self.name
+                    ));
+                }
+            }
+        }
+
+        let standards = self.values("--std").collect::<Vec<_>>();
+        let standard = match standards.as_slice() {
+            [] => None,
+            ["c++20"] => Some("c++20".to_string()),
+            [value] => {
+                return Err(format!(
+                    "partition `{}` has unsupported --std value `{value}`",
+                    self.name
+                ));
+            }
+            _ => {
+                return Err(format!(
+                    "partition `{}` must have at most one --std value",
+                    self.name
+                ));
+            }
+        };
+
+        let mut type_overrides = BTreeMap::new();
+        for (name, value) in self.key_value_pairs("--with-type")? {
+            let ty = match value.as_str() {
+                "uint" => TypeOverride::U32,
+                _ => {
+                    return Err(format!(
+                        "partition `{}` has unsupported --with-type value `{name}={value}`",
+                        self.name
+                    ));
+                }
+            };
+            type_overrides.insert(name, ty);
+        }
+
+        let mut attributes = BTreeMap::<String, BTreeSet<ForcedAttribute>>::new();
+        for value in self.values("--with-attribute") {
+            let (name, value) = value.split_once('=').ok_or_else(|| {
+                format!(
+                    "partition `{}` setting `--with-attribute` value `{value}` must contain `=`",
+                    self.name
+                )
+            })?;
+            let attribute = match value {
+                "Flags" => ForcedAttribute::Flags,
+                _ => {
+                    return Err(format!(
+                        "partition `{}` has unsupported --with-attribute value `{name}={value}`",
+                        self.name
+                    ));
+                }
+            };
+            attributes
+                .entry(name.to_string())
+                .or_default()
+                .insert(attribute);
+        }
+
+        let outputs = self.values("--output").collect::<Vec<_>>();
+        let legacy_output = match outputs.as_slice() {
+            [] => None,
+            [r"<GeneratedSourceDir>\<PartitionName>.cs"] => {
+                Some(r"<GeneratedSourceDir>\<PartitionName>.cs".to_string())
+            }
+            [value] => {
+                return Err(format!(
+                    "partition `{}` has unsupported legacy --output value `{value}`",
+                    self.name
+                ));
+            }
+            _ => {
+                return Err(format!(
+                    "partition `{}` must have at most one --output value",
+                    self.name
+                ));
+            }
+        };
+
+        Ok(PartitionPolicy {
+            namespace,
+            exclusions: self.values("--exclude").map(str::to_string).collect(),
+            remaps: self.key_value_pairs("--remap")?,
+            type_overrides,
+            attributes,
+            libraries: self.key_value_pairs("--with-librarypath")?,
+            preserve_auto_fnptr_level: self
+                .values("--preserve-auto-fnptr-level")
+                .map(str::to_string)
+                .collect(),
+            exclude_empty_records,
+            standard,
+            include_directories: self
+                .values("--include-directory")
+                .map(str::to_string)
+                .collect(),
+            legacy_output,
+        })
     }
 
     pub fn traverse(&self) -> impl Iterator<Item = &str> {
@@ -170,7 +351,7 @@ fn load_directory(directory: PathBuf) -> Result<Partition, String> {
         source,
         settings,
     };
-    partition.namespace()?;
+    partition.policy()?;
     if partition.traverse().next().is_none() {
         return Err(format!(
             "partition `{}` has no --traverse values",
@@ -205,10 +386,7 @@ pub fn parse_settings(source: &str) -> Result<Vec<Setting>, String> {
 
 #[cfg(test)]
 pub fn namespaces(partitions: &[Partition]) -> Result<BTreeSet<String>, String> {
-    partitions
-        .iter()
-        .map(|partition| partition.namespace().map(str::to_string))
-        .collect()
+    partitions.iter().map(Partition::namespace).collect()
 }
 
 #[cfg(test)]
@@ -227,7 +405,7 @@ pub fn option_counts(partitions: &[Partition]) -> BTreeMap<String, usize> {
 pub fn input_namespaces(partitions: &[Partition]) -> Result<BTreeMap<String, String>, String> {
     partitions
         .iter()
-        .map(|partition| Ok((partition.input_name()?, partition.namespace()?.to_string())))
+        .map(|partition| Ok((partition.input_name()?, partition.namespace()?)))
         .collect()
 }
 
@@ -237,7 +415,7 @@ pub fn root_namespace_conflicts(
 ) -> Result<BTreeMap<String, BTreeSet<String>>, String> {
     let mut owners = BTreeMap::<String, BTreeSet<String>>::new();
     for partition in partitions {
-        let namespace = partition.namespace()?.to_string();
+        let namespace = partition.namespace()?;
         for root in partition.normalized_include_roots() {
             owners.entry(root).or_default().insert(namespace.clone());
         }
@@ -332,6 +510,67 @@ mod tests {
         assert_eq!(settings[0].name, "--exclude");
         assert_eq!(settings[1].name, "--traverse");
         assert_eq!(settings[2].values, ["B"]);
+    }
+
+    #[test]
+    fn key_value_pairs_apply_later_overrides() {
+        let partition = Partition {
+            name: "Test".to_string(),
+            directory: PathBuf::new(),
+            source: String::new(),
+            settings: parse_settings("--remap\nA=B\n--remap\nA=C\nD=E\n").unwrap(),
+        };
+        assert_eq!(
+            partition.key_value_pairs("--remap").unwrap(),
+            BTreeMap::from([
+                ("A".to_string(), "C".to_string()),
+                ("D".to_string(), "E".to_string()),
+            ])
+        );
+    }
+
+    #[test]
+    fn policy_rejects_unknown_switches_and_values() {
+        let partition = Partition {
+            name: "Test".to_string(),
+            directory: PathBuf::new(),
+            source: String::new(),
+            settings: parse_settings(
+                "--namespace\nWindows.Win32.Test\n--traverse\n<IncludeRoot>/um/test.h\n\
+                 --with-type\nVALUE=ushort\n",
+            )
+            .unwrap(),
+        };
+        assert_eq!(
+            partition.policy().unwrap_err(),
+            "partition `Test` has unsupported --with-type value `VALUE=ushort`"
+        );
+
+        let partition = Partition {
+            settings: parse_settings(
+                "--namespace\nWindows.Win32.Test\n--traverse\n<IncludeRoot>/um/test.h\n\
+                 --unknown\nvalue\n",
+            )
+            .unwrap(),
+            ..partition
+        };
+        assert_eq!(
+            partition.policy().unwrap_err(),
+            "partition `Test` has unsupported setting `--unknown`"
+        );
+
+        let partition = Partition {
+            settings: parse_settings(
+                "--namespace\nWindows.Win32.Test\n--traverse\n<IncludeRoot>/um/test.h\n\
+                 --output\nother.cs\n",
+            )
+            .unwrap(),
+            ..partition
+        };
+        assert_eq!(
+            partition.policy().unwrap_err(),
+            "partition `Test` has unsupported legacy --output value `other.cs`"
+        );
     }
 
     #[test]
@@ -436,6 +675,120 @@ mod tests {
         assert_eq!(counts["--with-attribute"], 23);
         assert_eq!(counts["--with-librarypath"], 6);
         assert_eq!(counts["--with-type"], 52);
+
+        let policies = partitions
+            .iter()
+            .map(Partition::policy)
+            .collect::<Result<Vec<_>, _>>()
+            .unwrap();
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| policy.exclusions.len())
+                .sum::<usize>(),
+            562
+        );
+        assert_eq!(
+            partitions
+                .iter()
+                .map(|partition| partition.values("--exclude").count())
+                .sum::<usize>(),
+            563
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| policy.remaps.len())
+                .sum::<usize>(),
+            188
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| policy.type_overrides.len())
+                .sum::<usize>(),
+            74
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| { policy.attributes.values().map(BTreeSet::len).sum::<usize>() })
+                .sum::<usize>(),
+            29
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| policy.libraries.len())
+                .sum::<usize>(),
+            13
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| policy.preserve_auto_fnptr_level.len())
+                .sum::<usize>(),
+            2
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .filter(|policy| policy.exclude_empty_records)
+                .count(),
+            3
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .filter(|policy| policy.standard.as_deref() == Some("c++20"))
+                .count(),
+            2
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .map(|policy| policy.include_directories.len())
+                .sum::<usize>(),
+            4
+        );
+        assert_eq!(
+            policies
+                .iter()
+                .filter(|policy| policy.legacy_output.is_some())
+                .count(),
+            1
+        );
+
+        let policy = |name: &str| {
+            partitions
+                .iter()
+                .find(|partition| partition.name == name)
+                .unwrap()
+                .policy()
+                .unwrap()
+        };
+        assert_eq!(
+            policy("Security.Cryptography").remaps["_PIN_INFO"],
+            "PIN_INFO"
+        );
+        assert_eq!(
+            policy("Audio.DirectSound").libraries["GetDeviceID"],
+            "DSOUND.dll"
+        );
+        assert_eq!(policy("Tbs").libraries["GetDeviceID"], "tbs.dll");
+        assert_eq!(
+            policy("Direct3D9").type_overrides["D3DFORMAT"],
+            TypeOverride::U32
+        );
+        assert!(
+            policy("Direct3D11").attributes["D3D11_CREATE_DEVICE_FLAG"]
+                .contains(&ForcedAttribute::Flags)
+        );
+        assert!(
+            policy("Identity")
+                .preserve_auto_fnptr_level
+                .contains("PLSA_REDIRECTED_LOGON_CALLBACK")
+        );
 
         let conflicts = root_namespace_conflicts(&partitions).unwrap();
         assert_eq!(
