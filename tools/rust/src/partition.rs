@@ -1,6 +1,16 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
+const APPROVED_CROSS_NAMESPACE_ROOTS: [&str; 7] = [
+    "shared/ntddstor.h",
+    "shared/uuids.h",
+    "um/audioendpoints.h",
+    "um/dxcore.h",
+    "um/dxcore_interface.h",
+    "um/endpointvolume.h",
+    "um/idispids.h",
+];
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Setting {
     pub name: String,
@@ -19,6 +29,21 @@ pub struct Partition {
 pub struct ResolvedRoots {
     pub files: Vec<PathBuf>,
     pub directories: Vec<PathBuf>,
+}
+
+#[derive(Clone, Debug)]
+struct ResolvedRootClaim {
+    partition: String,
+    namespace: String,
+    requested: String,
+    path: PathBuf,
+    scope_fallback: Option<(String, String)>,
+}
+
+#[derive(Debug)]
+struct IncludeRootResolution {
+    path: PathBuf,
+    scope_fallback: Option<(String, String)>,
 }
 
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
@@ -260,12 +285,14 @@ impl Partition {
             let path = if let Some(relative) = value.strip_prefix("<PartitionDir>/") {
                 self.directory.join(relative)
             } else if let Some(relative) = value.strip_prefix("<IncludeRoot>/") {
-                resolve_include_root(relative, include_dirs).ok_or_else(|| {
-                    format!(
-                        "partition `{}` root `{value}` was not found in the configured include directories",
-                        self.name
-                    )
-                })?
+                resolve_include_root(relative, include_dirs)
+                    .map(|resolution| resolution.path)
+                    .ok_or_else(|| {
+                        format!(
+                            "partition `{}` root `{value}` was not found in the configured include directories",
+                            self.name
+                        )
+                    })?
             } else {
                 return Err(format!(
                     "partition `{}` has unsupported --traverse value `{value}`",
@@ -285,6 +312,151 @@ impl Partition {
             }
         }
         Ok(result)
+    }
+}
+
+pub fn validate_resolved_root_ownership(
+    partitions: &[Partition],
+    include_dirs: &[PathBuf],
+) -> Result<(), String> {
+    let mut claims = Vec::<ResolvedRootClaim>::new();
+    let mut requested_roots = BTreeMap::<(String, String), Vec<String>>::new();
+    for partition in partitions {
+        let namespace = partition.policy()?.namespace;
+        for requested in partition.traverse() {
+            requested_roots
+                .entry((partition.name.clone(), normalize_path_identity(requested)))
+                .or_default()
+                .push(requested.to_string());
+            let (path, scope_fallback) = if let Some(relative) =
+                requested.strip_prefix("<PartitionDir>/")
+            {
+                (partition.directory.join(relative), None)
+            } else if let Some(relative) = requested.strip_prefix("<IncludeRoot>/") {
+                let resolution =
+                        resolve_include_root(relative, include_dirs).ok_or_else(|| {
+                            format!(
+                                "partition `{}` root `{requested}` was not found in the configured include directories",
+                                partition.name
+                            )
+                        })?;
+                (resolution.path, resolution.scope_fallback)
+            } else {
+                return Err(format!(
+                    "partition `{}` has unsupported --traverse value `{requested}`",
+                    partition.name
+                ));
+            };
+
+            let mut paths = Vec::new();
+            if path.is_file() {
+                paths.push(path);
+            } else if path.is_dir() {
+                collect_root_files(&path, &mut paths)?;
+            } else {
+                return Err(format!(
+                    "partition `{}` root `{requested}` resolved to missing path `{}`",
+                    partition.name,
+                    path.display()
+                ));
+            }
+            paths.sort();
+            paths.dedup();
+            claims.extend(paths.into_iter().map(|path| ResolvedRootClaim {
+                partition: partition.name.clone(),
+                namespace: namespace.clone(),
+                requested: requested.to_string(),
+                path,
+                scope_fallback: scope_fallback.clone(),
+            }));
+        }
+    }
+
+    let mut errors = Vec::new();
+    for ((partition, _), roots) in requested_roots {
+        if roots.len() > 1 {
+            let spellings = roots.iter().collect::<BTreeSet<_>>();
+            let description = if spellings.len() == 1 {
+                "duplicate root"
+            } else {
+                "case- or separator-only duplicate roots"
+            };
+            errors.push(format!(
+                "partition `{partition}` has {description}: {}",
+                spellings
+                    .into_iter()
+                    .map(|root| format!("`{root}`"))
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            ));
+        }
+    }
+
+    let mut claims_by_path = BTreeMap::<String, Vec<ResolvedRootClaim>>::new();
+    for claim in claims {
+        claims_by_path
+            .entry(normalized_physical_path(&claim.path)?)
+            .or_default()
+            .push(claim);
+    }
+
+    for (path, claims) in claims_by_path {
+        for claim in claims.iter().filter(|claim| claim.scope_fallback.is_some()) {
+            let paired = claims.iter().any(|candidate| {
+                candidate.partition == claim.partition && candidate.scope_fallback.is_none()
+            });
+            if !paired {
+                let (requested_scope, actual_scope) =
+                    claim.scope_fallback.as_ref().expect("filtered fallback");
+                errors.push(format!(
+                    "partition `{}` root `{}` requested SDK scope `{requested_scope}` but resolved under `{actual_scope}` to `{}` without explicitly rooting that physical header",
+                    claim.partition,
+                    claim.requested,
+                    claim.path.display()
+                ));
+            }
+        }
+
+        let namespaces = claims
+            .iter()
+            .map(|claim| claim.namespace.as_str())
+            .collect::<BTreeSet<_>>();
+        let allowed = APPROVED_CROSS_NAMESPACE_ROOTS
+            .iter()
+            .any(|suffix| path == *suffix || path.ends_with(&format!("/{suffix}")));
+        if namespaces.len() > 1 && !allowed {
+            let owners = claims
+                .iter()
+                .map(|claim| {
+                    format!(
+                        "{} ({}) via {}",
+                        claim.partition, claim.namespace, claim.requested
+                    )
+                })
+                .collect::<BTreeSet<_>>()
+                .into_iter()
+                .collect::<Vec<_>>()
+                .join("; ");
+            errors.push(format!(
+                "physical root `{}` is claimed by multiple namespaces: {owners}",
+                claims[0].path.display()
+            ));
+        }
+    }
+
+    errors.sort();
+    errors.dedup();
+    if errors.is_empty() {
+        Ok(())
+    } else {
+        Err(format!(
+            "partition root ownership preflight failed:\n{}",
+            errors
+                .into_iter()
+                .map(|error| format!("- {error}"))
+                .collect::<Vec<_>>()
+                .join("\n")
+        ))
     }
 }
 
@@ -432,7 +604,7 @@ fn normalize_path(path: &str) -> String {
         .to_ascii_lowercase()
 }
 
-fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<PathBuf> {
+fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<IncludeRootResolution> {
     let relative = relative.replace('\\', "/");
     let (scope, scoped_relative) = relative.split_once('/').unwrap_or(("", &relative));
     for directory in include_dirs {
@@ -453,20 +625,78 @@ fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<Path
             }
         };
         if candidate.exists() {
-            return Some(candidate);
+            return Some(IncludeRootResolution {
+                path: candidate,
+                scope_fallback: None,
+            });
         }
     }
-    include_dirs
-        .iter()
-        .map(|directory| directory.join(scoped_relative))
-        .filter(|candidate| candidate.exists())
-        .next()
+    include_dirs.iter().find_map(|directory| {
+        let candidate = directory.join(scoped_relative);
+        if !candidate.exists() {
+            return None;
+        }
+        let actual_scope = directory
+            .file_name()
+            .and_then(|name| name.to_str())
+            .unwrap_or_default();
+        let scope_fallback = (is_sdk_scope(scope)
+            && is_sdk_scope(actual_scope)
+            && !scope.eq_ignore_ascii_case(actual_scope))
+        .then(|| (scope.to_string(), actual_scope.to_string()));
+        Some(IncludeRootResolution {
+            path: candidate,
+            scope_fallback,
+        })
+    })
 }
 
 fn is_sdk_scope(value: &str) -> bool {
     ["shared", "um", "ucrt", "winrt"]
         .iter()
         .any(|scope| value.eq_ignore_ascii_case(scope))
+}
+
+fn collect_root_files(directory: &Path, files: &mut Vec<PathBuf>) -> Result<(), String> {
+    let mut entries = std::fs::read_dir(directory)
+        .map_err(|error| {
+            format!(
+                "failed to read root directory `{}`: {error}",
+                directory.display()
+            )
+        })?
+        .map(|entry| {
+            entry.map(|entry| entry.path()).map_err(|error| {
+                format!(
+                    "failed to read root directory `{}`: {error}",
+                    directory.display()
+                )
+            })
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+    entries.sort();
+    for entry in entries {
+        if entry.is_dir() {
+            collect_root_files(&entry, files)?;
+        } else if entry.is_file() {
+            files.push(entry);
+        }
+    }
+    Ok(())
+}
+
+fn normalized_physical_path(path: &Path) -> Result<String, String> {
+    std::fs::canonicalize(path)
+        .map_err(|error| format!("failed to canonicalize root `{}`: {error}", path.display()))
+        .map(|path| {
+            path.to_string_lossy()
+                .replace('\\', "/")
+                .to_ascii_lowercase()
+        })
+}
+
+fn normalize_path_identity(path: &str) -> String {
+    path.trim().replace('\\', "/").to_ascii_lowercase()
 }
 
 #[cfg(test)]
@@ -640,6 +870,131 @@ mod tests {
     }
 
     #[test]
+    fn root_preflight_rejects_unpaired_sdk_scope_fallback() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-preflight-fallback-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        let um = root.join("um");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::create_dir_all(&um).unwrap();
+        std::fs::write(shared.join("dciddi.h"), "").unwrap();
+
+        let partition = test_partition(
+            &root,
+            "Direct2D",
+            "Windows.Win32.Graphics.Direct2D",
+            &["<IncludeRoot>/um/dciddi.h"],
+        );
+        let error = validate_resolved_root_ownership(&[partition], &[shared, um]).unwrap_err();
+        assert!(
+            error.contains("requested SDK scope `um` but resolved under `shared`"),
+            "{error}"
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn root_preflight_accepts_explicitly_paired_sdk_scope_fallback() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-preflight-paired-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        let um = root.join("um");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::create_dir_all(&um).unwrap();
+        std::fs::write(shared.join("usb.h"), "").unwrap();
+
+        let partition = test_partition(
+            &root,
+            "Buses",
+            "Windows.Win32.Devices.Usb",
+            &["<IncludeRoot>/shared/usb.h", "<IncludeRoot>/um/usb.h"],
+        );
+        validate_resolved_root_ownership(&[partition], &[shared, um]).unwrap();
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn root_preflight_rejects_unapproved_cross_namespace_owner() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-preflight-owner-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("collision.h"), "").unwrap();
+
+        let partitions = [
+            test_partition(
+                &root,
+                "First",
+                "Windows.Win32.First",
+                &["<IncludeRoot>/shared/collision.h"],
+            ),
+            test_partition(
+                &root,
+                "Second",
+                "Windows.Win32.Second",
+                &["<IncludeRoot>/shared/collision.h"],
+            ),
+        ];
+        let error = validate_resolved_root_ownership(&partitions, &[shared]).unwrap_err();
+        assert!(error.contains("claimed by multiple namespaces"), "{error}");
+        assert!(error.contains("Windows.Win32.First"), "{error}");
+        assert!(error.contains("Windows.Win32.Second"), "{error}");
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn root_preflight_rejects_duplicate_partition_roots() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-preflight-duplicate-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("duplicate.h"), "").unwrap();
+
+        let partition = test_partition(
+            &root,
+            "Duplicate",
+            "Windows.Win32.Duplicate",
+            &[
+                "<IncludeRoot>/shared/duplicate.h",
+                "<IncludeRoot>/shared/duplicate.h",
+            ],
+        );
+        let error = validate_resolved_root_ownership(&[partition], &[shared]).unwrap_err();
+        assert!(error.contains("has duplicate root"), "{error}");
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    fn test_partition(root: &Path, name: &str, namespace: &str, roots: &[&str]) -> Partition {
+        Partition {
+            name: name.to_string(),
+            directory: root.join(name),
+            source: String::new(),
+            settings: vec![
+                Setting {
+                    name: "--traverse".to_string(),
+                    values: roots.iter().map(|root| (*root).to_string()).collect(),
+                },
+                Setting {
+                    name: "--namespace".to_string(),
+                    values: vec![namespace.to_string()],
+                },
+            ],
+        }
+    }
+
+    #[test]
     fn checked_in_partition_authority_is_complete() {
         let root = Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("..")
@@ -655,7 +1010,7 @@ mod tests {
                 .iter()
                 .map(|partition| partition.include_roots().count())
                 .sum::<usize>(),
-            1570
+            1568
         );
         assert_eq!(
             partitions
@@ -664,7 +1019,20 @@ mod tests {
                 .map(|root| root.replace('\\', "/").to_ascii_lowercase())
                 .collect::<BTreeSet<_>>()
                 .len(),
-            1561
+            1560
+        );
+        assert_eq!(
+            partitions
+                .iter()
+                .filter(|partition| {
+                    partition.include_roots().any(|root| {
+                        let root = root.replace('\\', "/").to_ascii_lowercase();
+                        root.ends_with("/shared/dciddi.h") || root.ends_with("/um/dciddi.h")
+                    })
+                })
+                .map(|partition| partition.name.as_str())
+                .collect::<Vec<_>>(),
+            ["WinProg"]
         );
 
         let counts = option_counts(&partitions);
@@ -793,15 +1161,7 @@ mod tests {
         let conflicts = root_namespace_conflicts(&partitions).unwrap();
         assert_eq!(
             conflicts.keys().map(String::as_str).collect::<Vec<_>>(),
-            [
-                "shared/ntddstor.h",
-                "shared/uuids.h",
-                "um/audioendpoints.h",
-                "um/dxcore.h",
-                "um/dxcore_interface.h",
-                "um/endpointvolume.h",
-                "um/idispids.h",
-            ]
+            APPROVED_CROSS_NAMESPACE_ROOTS
         );
         assert_eq!(input_namespaces(&partitions).unwrap().len(), 321);
     }
@@ -824,8 +1184,10 @@ mod tests {
             win_sdk.join("Partitions").join("Com.StructuredStorage"),
             win_sdk.join("inc"),
         ];
-        for partition in load_active(&win_sdk.join("Partitions")).unwrap() {
+        let partitions = load_active(&win_sdk.join("Partitions")).unwrap();
+        for partition in &partitions {
             partition.resolve_roots(&include_dirs).unwrap();
         }
+        validate_resolved_root_ownership(&partitions, &include_dirs).unwrap();
     }
 }

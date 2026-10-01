@@ -628,6 +628,29 @@ fn build_inputs(
     }
 
     if !options.partitions.is_empty() {
+        let authority_partitions = options
+            .partitions
+            .iter()
+            .filter(|partition| {
+                partition
+                    .parent()
+                    .is_some_and(|directory| directory.join("settings.rsp").is_file())
+            })
+            .map(|partition| crate::partition::load_main(partition))
+            .collect::<Result<Vec<_>, _>>()?;
+        if !authority_partitions.is_empty() {
+            if authority_partitions.len() != options.partitions.len() {
+                return Err(
+                    "partition-authority inputs with settings.rsp cannot be mixed with custom translation units"
+                        .to_string(),
+                );
+            }
+            crate::partition::validate_resolved_root_ownership(
+                &authority_partitions,
+                include_dirs,
+            )?;
+        }
+
         let mut common = Vec::new();
         let mut partitioned = Vec::new();
         for partition in &options.partitions {
