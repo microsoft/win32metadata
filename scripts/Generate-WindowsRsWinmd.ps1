@@ -42,6 +42,7 @@ param (
 
 $ErrorActionPreference = "Stop"
 $tool = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe"
+$namespaceRoutes = Join-Path $windowsWin32ProjectRoot "requiredNamespacesForNames.rsp"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
 $outputStem = [System.IO.Path]::GetFileNameWithoutExtension($outputPath)
 $objDir = Join-Path $windowsWin32ProjectRoot "obj\windows-rs\$outputStem"
@@ -129,7 +130,8 @@ if ($UsePartitionAuthority.IsPresent)
 {
     $arguments += @(
         "--win32-sdk",
-        "--partition-root", (Join-Path $windowsWin32ProjectRoot "Partitions")
+        "--partition-root", (Join-Path $windowsWin32ProjectRoot "Partitions"),
+        "--namespace-routes", $namespaceRoutes
     )
 }
 elseif ($useSdkHeaderManifest)
@@ -151,6 +153,7 @@ else
         }
         $arguments += @("--partition", $main)
     }
+    $arguments += @("--namespace-routes", $namespaceRoutes)
 }
 
 foreach ($arch in $Architecture)

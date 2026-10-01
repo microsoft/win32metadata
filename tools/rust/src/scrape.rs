@@ -82,6 +82,7 @@ pub struct Options {
     archs: Vec<String>,
     scopes: Vec<String>,
     scope_headers: Vec<String>,
+    namespace_routes: Option<PathBuf>,
     symbols: Vec<String>,
     constants: Vec<String>,
     win32_sdk: bool,
@@ -118,6 +119,9 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
             "--arch" => options.archs.push(args.value(&option)?),
             "--scope" => options.scopes.push(args.value(&option)?),
             "--scope-header" => options.scope_headers.push(args.value(&option)?),
+            "--namespace-routes" => {
+                set_once(&mut options.namespace_routes, args.path(&option)?, &option)?
+            }
             "--symbol" => options.symbols.push(args.value(&option)?),
             "--constant" => options.constants.push(args.value(&option)?),
             "--win32-sdk" => options.win32_sdk = true,
@@ -164,6 +168,14 @@ fn validate(options: &Options) -> Result<(), String> {
         return Err(
             "at least one `--partition <main.cpp>`, `--partition-root <dir>`, or `--win32-sdk` is required"
                 .to_string(),
+        );
+    }
+    if options.namespace_routes.is_some()
+        && options.partitions.is_empty()
+        && options.partition_roots.is_empty()
+    {
+        return Err(
+            "`--namespace-routes` requires `--partition` or `--partition-root`".to_string(),
         );
     }
     if options.includes.is_empty() {
@@ -253,9 +265,13 @@ fn absolutize(options: &mut Options) -> Result<(), String> {
     options.partition_roots.iter_mut().try_for_each(one)?;
     options.includes.iter_mut().try_for_each(one)?;
     options.libs.iter_mut().try_for_each(one)?;
-    for path in [options.output.as_mut(), options.obj.as_mut()]
-        .into_iter()
-        .flatten()
+    for path in [
+        options.namespace_routes.as_mut(),
+        options.output.as_mut(),
+        options.obj.as_mut(),
+    ]
+    .into_iter()
+    .flatten()
     {
         one(path)?;
     }
@@ -412,6 +428,7 @@ fn path_arg(path: &Path, option: &str) -> Result<String, String> {
 
 struct ScrapeConfiguration {
     inputs: ScrapeInputs,
+    namespace_routes: Option<crate::namespace_routes::NamespaceRoutes>,
     args: Vec<String>,
     libraries: LibraryMap,
     references: MetadataReferences,
@@ -513,6 +530,11 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         .map(|directory| path_arg(directory, "--include"))
         .collect::<Result<Vec<_>, _>>()?;
     let inputs = build_inputs(options, &include_dirs, &root_dirs)?;
+    let namespace_routes = options
+        .namespace_routes
+        .as_deref()
+        .map(crate::namespace_routes::NamespaceRoutes::load)
+        .transpose()?;
     let mut args = CLANG_ARGS
         .iter()
         .map(|argument| argument.to_string())
@@ -550,6 +572,7 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
 
     Ok(ScrapeConfiguration {
         inputs,
+        namespace_routes,
         args,
         libraries,
         references,
@@ -1161,9 +1184,12 @@ fn scrape_arch(
     emit.excluded_constants = Some(&excluded_constants);
     emit.functions = selected_functions.as_ref();
     if configuration.inputs.partitioned() {
-        let partitions = snapshot
-            .emit_partitioned_with_options(&emit)
-            .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
+        let partitions = if let Some(routes) = &configuration.namespace_routes {
+            snapshot.emit_partitioned_with_options_and_authorities(&emit, &routes.authorities())
+        } else {
+            snapshot.emit_partitioned_with_options(&emit)
+        }
+        .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
         for (index, (partition, rdl)) in partitions.into_iter().enumerate() {
             let stem = partition
                 .partition
@@ -1358,6 +1384,7 @@ pub fn help_text() -> &'static str {
     [--arch <x64|arm64|x86>]... \\
     [--scope <path-segment>]... \\
     [--scope-header <header>]... \
+    [--namespace-routes <routes.rsp>] \\
     [--symbol <name>]... \\
     [--constant <name>]... \\
     [--win32-sdk] \\
@@ -1381,6 +1408,8 @@ pub fn help_text() -> &'static str {
                 Repeatable. Defaults to shared and um.
   --scope-header
                 Header stem whose declarations are emitted unconditionally. Repeatable.
+  --namespace-routes
+                Strict native-name to namespace routes for partitioned Windows SDK emission.
   --symbol      Exact source function to emit. Repeatable. When present, functions not
                 named here and unrelated declarations are omitted.
   --constant    Exact source-owned loose constant to emit. Repeatable. When present,
@@ -1454,6 +1483,31 @@ mod tests {
         ])
         .unwrap();
         assert_eq!(options.partition_roots, vec![PathBuf::from("Partitions")]);
+    }
+
+    #[test]
+    fn namespace_routes_are_typed_path_input() {
+        let options =
+            parse_with(&["--namespace-routes", "requiredNamespacesForNames.rsp"]).unwrap();
+        assert_eq!(
+            options.namespace_routes,
+            Some(PathBuf::from("requiredNamespacesForNames.rsp"))
+        );
+    }
+
+    #[test]
+    fn namespace_routes_require_partitioned_inputs() {
+        let error = parse_args(&[
+            "--win32-sdk",
+            "--namespace-routes",
+            "requiredNamespacesForNames.rsp",
+            "--include",
+            "inc",
+            "--output",
+            "obj/out.winmd",
+        ])
+        .unwrap_err();
+        assert!(error.contains("--partition"), "{error}");
     }
 
     #[test]

@@ -5,6 +5,7 @@ mod catch;
 mod compile;
 mod libclang;
 mod merge_arch;
+mod namespace_routes;
 mod partition;
 mod roundtrip;
 mod scrape;
