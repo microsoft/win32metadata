@@ -78,19 +78,207 @@ pub struct ResolvedRoots {
     pub directories: Vec<PathBuf>,
 }
 
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub struct WindowsPathIdentity(String);
+
+impl WindowsPathIdentity {
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
+}
+
+impl std::fmt::Display for WindowsPathIdentity {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.0.fmt(formatter)
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SdkScopeResolution {
+    pub requested: Option<String>,
+    pub actual: Option<String>,
+}
+
+impl SdkScopeResolution {
+    fn fallback(&self) -> Option<(&str, &str)> {
+        match (&self.requested, &self.actual) {
+            (Some(requested), Some(actual)) if !requested.eq_ignore_ascii_case(actual) => {
+                Some((requested, actual))
+            }
+            _ => None,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct ResolvedTraversalRoot {
+    pub requested: String,
+    pub path: PathBuf,
+    pub canonical_path: WindowsPathIdentity,
+    pub sdk_scope: Option<SdkScopeResolution>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct PhysicalFile {
+    pub path: PathBuf,
+    pub canonical_path: WindowsPathIdentity,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct ResolvedDirectoryRoot {
+    pub root: ResolvedTraversalRoot,
+    pub files: Vec<PhysicalFile>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct MissingTraversalRoot {
+    pub requested: String,
+    pub path: Option<PathBuf>,
+    pub requested_sdk_scope: Option<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct UnsupportedTraversalRoot {
+    pub requested: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum TraversalRoot {
+    File(ResolvedTraversalRoot),
+    Directory(ResolvedDirectoryRoot),
+    Missing(MissingTraversalRoot),
+    Unsupported(UnsupportedTraversalRoot),
+}
+
+impl TraversalRoot {
+    pub fn requested(&self) -> &str {
+        match self {
+            Self::File(root) => &root.requested,
+            Self::Directory(root) => &root.root.requested,
+            Self::Missing(root) => &root.requested,
+            Self::Unsupported(root) => &root.requested,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct LogicalPartition {
+    pub identity: String,
+    pub directory: PathBuf,
+    pub input: PathBuf,
+    pub source: String,
+    pub policy: PartitionPolicy,
+    pub roots: Vec<TraversalRoot>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum DuplicateRootKind {
+    Exact,
+    CaseOrSeparatorOnly,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct DuplicateTraversalRoot {
+    pub partition: String,
+    pub kind: DuplicateRootKind,
+    pub spellings: Vec<String>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct MissingRootAudit {
+    pub partition: String,
+    pub root: MissingTraversalRoot,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct UnsupportedRootAudit {
+    pub partition: String,
+    pub root: UnsupportedTraversalRoot,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SdkScopeFallback {
+    pub partition: String,
+    pub namespace: String,
+    pub requested: String,
+    pub path: PathBuf,
+    pub requested_scope: String,
+    pub actual_scope: String,
+    pub explicitly_paired: bool,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct PhysicalRootOwner {
+    pub partition: String,
+    pub namespace: String,
+    pub requested_roots: Vec<String>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum PhysicalRootOverlapKind {
+    SameNamespace,
+    ApprovedCrossNamespace,
+    Unapproved,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct PhysicalRootOverlap {
+    pub path: PathBuf,
+    pub canonical_path: WindowsPathIdentity,
+    pub owners: Vec<PhysicalRootOwner>,
+    pub kind: PhysicalRootOverlapKind,
+}
+
+#[derive(Clone, Debug, Default, Eq, PartialEq)]
+pub struct TraversalPolicyAudit {
+    pub missing_roots: Vec<MissingRootAudit>,
+    pub unsupported_roots: Vec<UnsupportedRootAudit>,
+    pub duplicate_roots: Vec<DuplicateTraversalRoot>,
+    pub sdk_scope_fallbacks: Vec<SdkScopeFallback>,
+    pub physical_overlaps: Vec<PhysicalRootOverlap>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct CompileEnvironmentException {
+    pub partition: String,
+    pub standard: Option<String>,
+    pub include_directories: Vec<String>,
+    pub partition_local_roots: Vec<String>,
+    pub has_nonordinary_main_source: bool,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct TraversalPolicy {
+    pub partitions: Vec<LogicalPartition>,
+    pub audit: TraversalPolicyAudit,
+    pub compile_environment_exceptions: Vec<CompileEnvironmentException>,
+}
+
 #[derive(Clone, Debug)]
 struct ResolvedRootClaim {
     partition: String,
     namespace: String,
     requested: String,
     path: PathBuf,
-    scope_fallback: Option<(String, String)>,
+    canonical_path: WindowsPathIdentity,
+    scope_fallback: bool,
 }
 
 #[derive(Debug)]
 struct IncludeRootResolution {
     path: PathBuf,
-    scope_fallback: Option<(String, String)>,
+    sdk_scope: SdkScopeResolution,
+}
+
+#[derive(Debug)]
+struct PendingScopeFallback {
+    partition: String,
+    namespace: String,
+    requested: String,
+    path: PathBuf,
+    requested_scope: String,
+    actual_scope: String,
+    physical_paths: Vec<WindowsPathIdentity>,
 }
 
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
@@ -328,195 +516,458 @@ impl Partition {
 
     pub fn resolve_roots(&self, include_dirs: &[PathBuf]) -> Result<ResolvedRoots, String> {
         let mut result = ResolvedRoots::default();
-        for value in self.traverse() {
-            let path = if let Some(relative) = value.strip_prefix("<PartitionDir>/") {
-                self.directory.join(relative)
-            } else if let Some(relative) = value.strip_prefix("<IncludeRoot>/") {
-                resolve_include_root(relative, include_dirs)
-                    .map(|resolution| resolution.path)
-                    .ok_or_else(|| {
-                        format!(
-                            "partition `{}` root `{value}` was not found in the configured include directories",
+        for requested in self.traverse() {
+            match resolve_traversal_root(self, requested, include_dirs)? {
+                TraversalRoot::File(root) => result.files.push(root.path),
+                TraversalRoot::Directory(root) => result.directories.push(root.root.path),
+                TraversalRoot::Missing(root) => {
+                    return match root.path {
+                        Some(path) => Err(format!(
+                            "partition `{}` root `{requested}` resolved to missing path `{}`",
+                            self.name,
+                            path.display()
+                        )),
+                        None => Err(format!(
+                            "partition `{}` root `{requested}` was not found in the configured include directories",
                             self.name
-                        )
-                    })?
-            } else {
-                return Err(format!(
-                    "partition `{}` has unsupported --traverse value `{value}`",
-                    self.name
-                ));
-            };
-            if path.is_file() {
-                result.files.push(path);
-            } else if path.is_dir() {
-                result.directories.push(path);
-            } else {
-                return Err(format!(
-                    "partition `{}` root `{value}` resolved to missing path `{}`",
-                    self.name,
-                    path.display()
-                ));
+                        )),
+                    };
+                }
+                TraversalRoot::Unsupported(_) => {
+                    return Err(format!(
+                        "partition `{}` has unsupported --traverse value `{requested}`",
+                        self.name
+                    ));
+                }
             }
         }
         Ok(result)
     }
 }
 
-pub fn validate_resolved_root_ownership(
-    partitions: &[Partition],
-    include_dirs: &[PathBuf],
-) -> Result<(), String> {
-    let mut claims = Vec::<ResolvedRootClaim>::new();
-    let mut requested_roots = BTreeMap::<(String, String), Vec<String>>::new();
-    for partition in partitions {
-        let namespace = partition.policy()?.namespace;
-        for requested in partition.traverse() {
-            requested_roots
-                .entry((partition.name.clone(), normalize_path_identity(requested)))
-                .or_default()
-                .push(requested.to_string());
-            let (path, scope_fallback) = if let Some(relative) =
-                requested.strip_prefix("<PartitionDir>/")
-            {
-                (partition.directory.join(relative), None)
-            } else if let Some(relative) = requested.strip_prefix("<IncludeRoot>/") {
-                let resolution =
-                        resolve_include_root(relative, include_dirs).ok_or_else(|| {
-                            format!(
-                                "partition `{}` root `{requested}` was not found in the configured include directories",
-                                partition.name
-                            )
-                        })?;
-                (resolution.path, resolution.scope_fallback)
-            } else {
-                return Err(format!(
-                    "partition `{}` has unsupported --traverse value `{requested}`",
-                    partition.name
-                ));
-            };
-
-            let mut paths = Vec::new();
-            if path.is_file() {
-                paths.push(path);
-            } else if path.is_dir() {
-                collect_root_files(&path, &mut paths)?;
-            } else {
-                return Err(format!(
-                    "partition `{}` root `{requested}` resolved to missing path `{}`",
-                    partition.name,
-                    path.display()
-                ));
+#[allow(dead_code)]
+impl TraversalPolicy {
+    pub fn canonical_physical_files(&self) -> BTreeMap<WindowsPathIdentity, PathBuf> {
+        let mut result = BTreeMap::new();
+        for root in self
+            .partitions
+            .iter()
+            .flat_map(|partition| partition.roots.iter())
+        {
+            match root {
+                TraversalRoot::File(root) => {
+                    result
+                        .entry(root.canonical_path.clone())
+                        .or_insert_with(|| root.path.clone());
+                }
+                TraversalRoot::Directory(root) => {
+                    for file in &root.files {
+                        result
+                            .entry(file.canonical_path.clone())
+                            .or_insert_with(|| file.path.clone());
+                    }
+                }
+                TraversalRoot::Missing(_) | TraversalRoot::Unsupported(_) => {}
             }
-            paths.sort();
-            paths.dedup();
-            claims.extend(paths.into_iter().map(|path| ResolvedRootClaim {
-                partition: partition.name.clone(),
-                namespace: namespace.clone(),
-                requested: requested.to_string(),
-                path,
-                scope_fallback: scope_fallback.clone(),
-            }));
         }
+        result
     }
 
-    let mut errors = Vec::new();
-    for ((partition, _), roots) in requested_roots {
-        if roots.len() > 1 {
-            let spellings = roots.iter().collect::<BTreeSet<_>>();
-            let description = if spellings.len() == 1 {
-                "duplicate root"
-            } else {
-                "case- or separator-only duplicate roots"
+    pub fn file_root_count(&self) -> usize {
+        self.partitions
+            .iter()
+            .flat_map(|partition| partition.roots.iter())
+            .filter(|root| matches!(root, TraversalRoot::File(_)))
+            .count()
+    }
+
+    pub fn directory_root_count(&self) -> usize {
+        self.partitions
+            .iter()
+            .flat_map(|partition| partition.roots.iter())
+            .filter(|root| matches!(root, TraversalRoot::Directory(_)))
+            .count()
+    }
+}
+
+#[allow(dead_code)]
+impl TraversalPolicyAudit {
+    pub fn is_clean(&self) -> bool {
+        self.missing_roots.is_empty()
+            && self.unsupported_roots.is_empty()
+            && self.duplicate_roots.is_empty()
+            && self
+                .sdk_scope_fallbacks
+                .iter()
+                .all(|fallback| fallback.explicitly_paired)
+            && self
+                .physical_overlaps
+                .iter()
+                .all(|overlap| overlap.kind != PhysicalRootOverlapKind::Unapproved)
+    }
+
+    pub fn ensure_clean(&self) -> Result<(), String> {
+        let mut errors = Vec::new();
+        for missing in &self.missing_roots {
+            errors.push(match &missing.root.path {
+                Some(path) => format!(
+                    "partition `{}` root `{}` resolved to missing path `{}`",
+                    missing.partition,
+                    missing.root.requested,
+                    path.display()
+                ),
+                None => format!(
+                    "partition `{}` root `{}` was not found in the configured include directories",
+                    missing.partition, missing.root.requested
+                ),
+            });
+        }
+        for unsupported in &self.unsupported_roots {
+            errors.push(format!(
+                "partition `{}` has unsupported --traverse value `{}`",
+                unsupported.partition, unsupported.root.requested
+            ));
+        }
+        for duplicate in &self.duplicate_roots {
+            let description = match duplicate.kind {
+                DuplicateRootKind::Exact => "duplicate root",
+                DuplicateRootKind::CaseOrSeparatorOnly => "case- or separator-only duplicate roots",
             };
             errors.push(format!(
-                "partition `{partition}` has {description}: {}",
-                spellings
-                    .into_iter()
+                "partition `{}` has {description}: {}",
+                duplicate.partition,
+                duplicate
+                    .spellings
+                    .iter()
                     .map(|root| format!("`{root}`"))
                     .collect::<Vec<_>>()
                     .join(", ")
             ));
         }
+        for fallback in self
+            .sdk_scope_fallbacks
+            .iter()
+            .filter(|fallback| !fallback.explicitly_paired)
+        {
+            errors.push(format!(
+                "partition `{}` root `{}` requested SDK scope `{}` but resolved under `{}` to `{}` without explicitly rooting that physical header",
+                fallback.partition,
+                fallback.requested,
+                fallback.requested_scope,
+                fallback.actual_scope,
+                fallback.path.display()
+            ));
+        }
+        for overlap in self
+            .physical_overlaps
+            .iter()
+            .filter(|overlap| overlap.kind == PhysicalRootOverlapKind::Unapproved)
+        {
+            let owners = overlap
+                .owners
+                .iter()
+                .map(|owner| {
+                    format!(
+                        "{} ({}) via {}",
+                        owner.partition,
+                        owner.namespace,
+                        owner
+                            .requested_roots
+                            .iter()
+                            .map(|root| format!("`{root}`"))
+                            .collect::<Vec<_>>()
+                            .join(", ")
+                    )
+                })
+                .collect::<Vec<_>>()
+                .join("; ");
+            errors.push(format!(
+                "physical root `{}` is claimed by multiple namespaces/partitions outside the approved owner contract: {owners}",
+                overlap.path.display()
+            ));
+        }
+        errors.sort();
+        errors.dedup();
+        if errors.is_empty() {
+            Ok(())
+        } else {
+            Err(format!(
+                "partition root ownership preflight failed:\n{}",
+                errors
+                    .into_iter()
+                    .map(|error| format!("- {error}"))
+                    .collect::<Vec<_>>()
+                    .join("\n")
+            ))
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub fn load_traversal_policy(
+    partition_root: &Path,
+    include_dirs: &[PathBuf],
+) -> Result<TraversalPolicy, String> {
+    compile_traversal_policy(&load_active(partition_root)?, include_dirs)
+}
+
+pub fn compile_traversal_policy(
+    partitions: &[Partition],
+    include_dirs: &[PathBuf],
+) -> Result<TraversalPolicy, String> {
+    let mut logical_partitions = Vec::new();
+    let mut audit = TraversalPolicyAudit::default();
+    let mut claims = Vec::<ResolvedRootClaim>::new();
+    let mut pending_fallbacks = Vec::<PendingScopeFallback>::new();
+    let mut compile_environment_exceptions = Vec::new();
+
+    for partition in partitions {
+        let policy = partition.policy()?;
+        let mut requested_roots = BTreeMap::<String, Vec<String>>::new();
+        let mut roots = Vec::new();
+        for requested in partition.traverse() {
+            requested_roots
+                .entry(normalize_path_identity(requested))
+                .or_default()
+                .push(requested.to_string());
+
+            let root = resolve_traversal_root(partition, requested, include_dirs)?;
+            match &root {
+                TraversalRoot::File(root) => {
+                    record_root_claim(
+                        &mut claims,
+                        partition,
+                        &policy.namespace,
+                        root,
+                        &root.path,
+                        &root.canonical_path,
+                    );
+                    record_scope_fallback(
+                        &mut pending_fallbacks,
+                        partition,
+                        &policy.namespace,
+                        root,
+                        vec![root.canonical_path.clone()],
+                    );
+                }
+                TraversalRoot::Directory(directory) => {
+                    for file in &directory.files {
+                        record_root_claim(
+                            &mut claims,
+                            partition,
+                            &policy.namespace,
+                            &directory.root,
+                            &file.path,
+                            &file.canonical_path,
+                        );
+                    }
+                    record_scope_fallback(
+                        &mut pending_fallbacks,
+                        partition,
+                        &policy.namespace,
+                        &directory.root,
+                        directory
+                            .files
+                            .iter()
+                            .map(|file| file.canonical_path.clone())
+                            .collect(),
+                    );
+                }
+                TraversalRoot::Missing(root) => {
+                    audit.missing_roots.push(MissingRootAudit {
+                        partition: partition.name.clone(),
+                        root: root.clone(),
+                    });
+                }
+                TraversalRoot::Unsupported(root) => {
+                    audit.unsupported_roots.push(UnsupportedRootAudit {
+                        partition: partition.name.clone(),
+                        root: root.clone(),
+                    });
+                }
+            }
+            roots.push(root);
+        }
+
+        for spellings in requested_roots
+            .into_values()
+            .filter(|roots| roots.len() > 1)
+        {
+            let unique = spellings.iter().collect::<BTreeSet<_>>();
+            let kind = if unique.len() == 1 {
+                DuplicateRootKind::Exact
+            } else {
+                DuplicateRootKind::CaseOrSeparatorOnly
+            };
+            let mut spellings = unique.into_iter().cloned().collect::<Vec<_>>();
+            sort_strings_case_insensitive(&mut spellings);
+            audit.duplicate_roots.push(DuplicateTraversalRoot {
+                partition: partition.name.clone(),
+                kind,
+                spellings,
+            });
+        }
+
+        let partition_local_roots = roots
+            .iter()
+            .map(TraversalRoot::requested)
+            .filter(|requested| partition_relative(requested).is_some())
+            .map(str::to_string)
+            .collect::<Vec<_>>();
+        let has_nonordinary_main_source = has_nonordinary_main_source(&partition.source);
+        if policy.standard.is_some()
+            || !policy.include_directories.is_empty()
+            || !partition_local_roots.is_empty()
+            || has_nonordinary_main_source
+        {
+            compile_environment_exceptions.push(CompileEnvironmentException {
+                partition: partition.name.clone(),
+                standard: policy.standard.clone(),
+                include_directories: policy.include_directories.clone(),
+                partition_local_roots,
+                has_nonordinary_main_source,
+            });
+        }
+
+        logical_partitions.push(LogicalPartition {
+            identity: partition.name.clone(),
+            directory: partition.directory.clone(),
+            input: partition.directory.join("main.cpp"),
+            source: partition.source.clone(),
+            policy,
+            roots,
+        });
     }
 
-    let mut claims_by_path = BTreeMap::<String, Vec<ResolvedRootClaim>>::new();
+    logical_partitions
+        .sort_by(|left, right| compare_case_insensitive(&left.identity, &right.identity));
+    compile_environment_exceptions
+        .sort_by(|left, right| compare_case_insensitive(&left.partition, &right.partition));
+    audit.missing_roots.sort_by(|left, right| {
+        compare_case_insensitive(&left.partition, &right.partition)
+            .then_with(|| compare_case_insensitive(&left.root.requested, &right.root.requested))
+    });
+    audit.unsupported_roots.sort_by(|left, right| {
+        compare_case_insensitive(&left.partition, &right.partition)
+            .then_with(|| compare_case_insensitive(&left.root.requested, &right.root.requested))
+    });
+    audit.duplicate_roots.sort_by(|left, right| {
+        compare_case_insensitive(&left.partition, &right.partition)
+            .then_with(|| left.kind.cmp(&right.kind))
+            .then_with(|| left.spellings.cmp(&right.spellings))
+    });
+
+    let mut claims_by_path = BTreeMap::<WindowsPathIdentity, Vec<ResolvedRootClaim>>::new();
     for claim in claims {
         claims_by_path
-            .entry(normalized_physical_path(&claim.path)?)
+            .entry(claim.canonical_path.clone())
             .or_default()
             .push(claim);
     }
 
-    for (path, claims) in claims_by_path {
-        for claim in claims.iter().filter(|claim| claim.scope_fallback.is_some()) {
-            let paired = claims.iter().any(|candidate| {
-                candidate.partition == claim.partition && candidate.scope_fallback.is_none()
-            });
-            if !paired {
-                let (requested_scope, actual_scope) =
-                    claim.scope_fallback.as_ref().expect("filtered fallback");
-                errors.push(format!(
-                    "partition `{}` root `{}` requested SDK scope `{requested_scope}` but resolved under `{actual_scope}` to `{}` without explicitly rooting that physical header",
-                    claim.partition,
-                    claim.requested,
-                    claim.path.display()
-                ));
-            }
-        }
-
-        let namespaces = claims
-            .iter()
-            .map(|claim| claim.namespace.as_str())
-            .collect::<BTreeSet<_>>();
-        let observed_owners = claims
-            .iter()
-            .map(|claim| (claim.partition.as_str(), claim.namespace.as_str()))
-            .collect::<BTreeSet<_>>();
-        let allowed = APPROVED_CROSS_NAMESPACE_ROOTS
-            .iter()
-            .find(|approved| {
-                path == approved.path || path.ends_with(&format!("/{}", approved.path))
-            })
-            .is_some_and(|approved| {
-                observed_owners == approved.owners.iter().copied().collect::<BTreeSet<_>>()
-            });
-        if namespaces.len() > 1 && !allowed {
-            let owners = claims
-                .iter()
-                .map(|claim| {
-                    format!(
-                        "{} ({}) via {}",
-                        claim.partition, claim.namespace, claim.requested
-                    )
+    for pending in pending_fallbacks {
+        let explicitly_paired = !pending.physical_paths.is_empty()
+            && pending.physical_paths.iter().all(|path| {
+                claims_by_path.get(path).is_some_and(|claims| {
+                    claims
+                        .iter()
+                        .any(|claim| claim.partition == pending.partition && !claim.scope_fallback)
                 })
-                .collect::<BTreeSet<_>>()
-                .into_iter()
-                .collect::<Vec<_>>()
-                .join("; ");
-            errors.push(format!(
-                "physical root `{}` is claimed by multiple namespaces: {owners}",
-                claims[0].path.display()
-            ));
-        }
+            });
+        audit.sdk_scope_fallbacks.push(SdkScopeFallback {
+            partition: pending.partition,
+            namespace: pending.namespace,
+            requested: pending.requested,
+            path: pending.path,
+            requested_scope: pending.requested_scope,
+            actual_scope: pending.actual_scope,
+            explicitly_paired,
+        });
     }
+    audit.sdk_scope_fallbacks.sort_by(|left, right| {
+        compare_case_insensitive(&left.partition, &right.partition)
+            .then_with(|| compare_case_insensitive(&left.requested, &right.requested))
+    });
 
-    errors.sort();
-    errors.dedup();
-    if errors.is_empty() {
-        Ok(())
-    } else {
-        Err(format!(
-            "partition root ownership preflight failed:\n{}",
-            errors
-                .into_iter()
-                .map(|error| format!("- {error}"))
-                .collect::<Vec<_>>()
-                .join("\n")
-        ))
+    for (canonical_path, mut path_claims) in claims_by_path {
+        path_claims.sort_by(|left, right| {
+            compare_case_insensitive(&left.partition, &right.partition)
+                .then_with(|| compare_case_insensitive(&left.namespace, &right.namespace))
+                .then_with(|| compare_case_insensitive(&left.requested, &right.requested))
+        });
+        let mut owner_requests = BTreeMap::<(String, String), BTreeSet<String>>::new();
+        for claim in &path_claims {
+            owner_requests
+                .entry((claim.partition.clone(), claim.namespace.clone()))
+                .or_default()
+                .insert(claim.requested.clone());
+        }
+        if owner_requests.len() < 2 {
+            continue;
+        }
+
+        let owners = owner_requests
+            .into_iter()
+            .map(
+                |((partition, namespace), requested_roots)| PhysicalRootOwner {
+                    partition,
+                    namespace,
+                    requested_roots: requested_roots.into_iter().collect(),
+                },
+            )
+            .collect::<Vec<_>>();
+        let observed_owners = owners
+            .iter()
+            .map(|owner| (owner.partition.as_str(), owner.namespace.as_str()))
+            .collect::<BTreeSet<_>>();
+        let approved = APPROVED_CROSS_NAMESPACE_ROOTS
+            .iter()
+            .find(|approved| path_matches_contract(&canonical_path, approved.path));
+        let kind = if let Some(approved) = approved {
+            if observed_owners == approved.owners.iter().copied().collect::<BTreeSet<_>>() {
+                PhysicalRootOverlapKind::ApprovedCrossNamespace
+            } else {
+                PhysicalRootOverlapKind::Unapproved
+            }
+        } else if owners
+            .iter()
+            .map(|owner| owner.namespace.as_str())
+            .collect::<BTreeSet<_>>()
+            .len()
+            == 1
+        {
+            PhysicalRootOverlapKind::SameNamespace
+        } else {
+            PhysicalRootOverlapKind::Unapproved
+        };
+        audit.physical_overlaps.push(PhysicalRootOverlap {
+            path: path_claims[0].path.clone(),
+            canonical_path,
+            owners,
+            kind,
+        });
     }
+    audit
+        .physical_overlaps
+        .sort_by(|left, right| left.canonical_path.cmp(&right.canonical_path));
+
+    Ok(TraversalPolicy {
+        partitions: logical_partitions,
+        audit,
+        compile_environment_exceptions,
+    })
 }
 
-#[cfg(test)]
+pub fn validate_resolved_root_ownership(
+    partitions: &[Partition],
+    include_dirs: &[PathBuf],
+) -> Result<(), String> {
+    compile_traversal_policy(partitions, include_dirs)?
+        .audit
+        .ensure_clean()
+}
+
+#[allow(dead_code)]
 pub fn load_active(root: &Path) -> Result<Vec<Partition>, String> {
     let mut directories = std::fs::read_dir(root)
         .map_err(|error| format!("failed to read `{}`: {error}", root.display()))?
@@ -526,15 +977,7 @@ pub fn load_active(root: &Path) -> Result<Vec<Partition>, String> {
                 .map_err(|error| format!("failed to read `{}`: {error}", root.display()))
         })
         .collect::<Result<Vec<_>, _>>()?;
-    directories.sort_by(|left, right| {
-        left.file_name()
-            .map(|name| name.to_string_lossy().to_ascii_lowercase())
-            .cmp(
-                &right
-                    .file_name()
-                    .map(|name| name.to_string_lossy().to_ascii_lowercase()),
-            )
-    });
+    sort_paths_case_insensitive(&mut directories);
 
     directories
         .into_iter()
@@ -660,30 +1103,153 @@ fn normalize_path(path: &str) -> String {
         .to_ascii_lowercase()
 }
 
+fn resolve_traversal_root(
+    partition: &Partition,
+    requested: &str,
+    include_dirs: &[PathBuf],
+) -> Result<TraversalRoot, String> {
+    let (path, sdk_scope) = if let Some(relative) = partition_relative(requested) {
+        (partition.directory.join(relative), None)
+    } else if let Some(relative) = include_relative(requested) {
+        let Some(resolution) = resolve_include_root(relative, include_dirs) else {
+            return Ok(TraversalRoot::Missing(MissingTraversalRoot {
+                requested: requested.to_string(),
+                path: None,
+                requested_sdk_scope: relative
+                    .split_once(['/', '\\'])
+                    .and_then(|(scope, _)| sdk_scope(scope))
+                    .map(str::to_string),
+            }));
+        };
+        (resolution.path, Some(resolution.sdk_scope))
+    } else {
+        return Ok(TraversalRoot::Unsupported(UnsupportedTraversalRoot {
+            requested: requested.to_string(),
+        }));
+    };
+
+    if path.is_file() {
+        Ok(TraversalRoot::File(ResolvedTraversalRoot {
+            requested: requested.to_string(),
+            canonical_path: windows_path_identity(&path)?,
+            path,
+            sdk_scope,
+        }))
+    } else if path.is_dir() {
+        let canonical_path = windows_path_identity(&path)?;
+        let mut paths = Vec::new();
+        collect_root_files(&path, &mut paths)?;
+        let mut files = paths
+            .into_iter()
+            .map(|path| {
+                Ok(PhysicalFile {
+                    canonical_path: windows_path_identity(&path)?,
+                    path,
+                })
+            })
+            .collect::<Result<Vec<_>, String>>()?;
+        files.sort_by(|left, right| {
+            left.canonical_path
+                .cmp(&right.canonical_path)
+                .then_with(|| left.path.cmp(&right.path))
+        });
+        files.dedup_by(|left, right| left.canonical_path == right.canonical_path);
+        Ok(TraversalRoot::Directory(ResolvedDirectoryRoot {
+            root: ResolvedTraversalRoot {
+                requested: requested.to_string(),
+                path,
+                canonical_path,
+                sdk_scope,
+            },
+            files,
+        }))
+    } else {
+        let requested_sdk_scope = sdk_scope.as_ref().and_then(|scope| scope.requested.clone());
+        Ok(TraversalRoot::Missing(MissingTraversalRoot {
+            requested: requested.to_string(),
+            path: Some(path),
+            requested_sdk_scope,
+        }))
+    }
+}
+
+fn record_root_claim(
+    claims: &mut Vec<ResolvedRootClaim>,
+    partition: &Partition,
+    namespace: &str,
+    root: &ResolvedTraversalRoot,
+    path: &Path,
+    canonical_path: &WindowsPathIdentity,
+) {
+    claims.push(ResolvedRootClaim {
+        partition: partition.name.clone(),
+        namespace: namespace.to_string(),
+        requested: root.requested.clone(),
+        path: path.to_path_buf(),
+        canonical_path: canonical_path.clone(),
+        scope_fallback: root
+            .sdk_scope
+            .as_ref()
+            .is_some_and(|scope| scope.fallback().is_some()),
+    });
+}
+
+fn record_scope_fallback(
+    fallbacks: &mut Vec<PendingScopeFallback>,
+    partition: &Partition,
+    namespace: &str,
+    root: &ResolvedTraversalRoot,
+    physical_paths: Vec<WindowsPathIdentity>,
+) {
+    let Some((requested_scope, actual_scope)) = root
+        .sdk_scope
+        .as_ref()
+        .and_then(SdkScopeResolution::fallback)
+    else {
+        return;
+    };
+    fallbacks.push(PendingScopeFallback {
+        partition: partition.name.clone(),
+        namespace: namespace.to_string(),
+        requested: root.requested.clone(),
+        path: root.path.clone(),
+        requested_scope: requested_scope.to_string(),
+        actual_scope: actual_scope.to_string(),
+        physical_paths,
+    });
+}
+
 fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<IncludeRootResolution> {
     let relative = relative.replace('\\', "/");
     let (scope, scoped_relative) = relative.split_once('/').unwrap_or(("", &relative));
+    let requested_scope = sdk_scope(scope).map(str::to_string);
     for directory in include_dirs {
         let directory_scope = directory
             .file_name()
             .and_then(|name| name.to_str())
             .unwrap_or_default();
-        let candidate = if directory_scope.eq_ignore_ascii_case(scope) {
-            directory.join(scoped_relative)
+        let (candidate, actual_scope) = if directory_scope.eq_ignore_ascii_case(scope) {
+            (
+                directory.join(scoped_relative),
+                sdk_scope(directory_scope).map(str::to_string),
+            )
         } else if is_sdk_scope(directory_scope) {
             continue;
         } else {
             let scoped = directory.join(&relative);
             if scoped.exists() {
-                scoped
+                (scoped, requested_scope.clone())
             } else {
-                directory.join(scoped_relative)
+                (directory.join(scoped_relative), None)
             }
         };
         if candidate.exists() {
             return Some(IncludeRootResolution {
                 path: candidate,
-                scope_fallback: None,
+                sdk_scope: SdkScopeResolution {
+                    requested: requested_scope,
+                    actual: actual_scope,
+                },
             });
         }
     }
@@ -696,21 +1262,24 @@ fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<Incl
             .file_name()
             .and_then(|name| name.to_str())
             .unwrap_or_default();
-        let scope_fallback = (is_sdk_scope(scope)
-            && is_sdk_scope(actual_scope)
-            && !scope.eq_ignore_ascii_case(actual_scope))
-        .then(|| (scope.to_string(), actual_scope.to_string()));
         Some(IncludeRootResolution {
             path: candidate,
-            scope_fallback,
+            sdk_scope: SdkScopeResolution {
+                requested: requested_scope.clone(),
+                actual: sdk_scope(actual_scope).map(str::to_string),
+            },
         })
     })
 }
 
-fn is_sdk_scope(value: &str) -> bool {
+fn sdk_scope(value: &str) -> Option<&'static str> {
     ["shared", "um", "ucrt", "winrt"]
-        .iter()
-        .any(|scope| value.eq_ignore_ascii_case(scope))
+        .into_iter()
+        .find(|scope| value.eq_ignore_ascii_case(scope))
+}
+
+fn is_sdk_scope(value: &str) -> bool {
+    sdk_scope(value).is_some()
 }
 
 fn collect_root_files(directory: &Path, files: &mut Vec<PathBuf>) -> Result<(), String> {
@@ -730,7 +1299,7 @@ fn collect_root_files(directory: &Path, files: &mut Vec<PathBuf>) -> Result<(), 
             })
         })
         .collect::<Result<Vec<_>, _>>()?;
-    entries.sort();
+    sort_paths_case_insensitive(&mut entries);
     for entry in entries {
         if entry.is_dir() {
             collect_root_files(&entry, files)?;
@@ -741,23 +1310,133 @@ fn collect_root_files(directory: &Path, files: &mut Vec<PathBuf>) -> Result<(), 
     Ok(())
 }
 
-fn normalized_physical_path(path: &Path) -> Result<String, String> {
+fn windows_path_identity(path: &Path) -> Result<WindowsPathIdentity, String> {
     std::fs::canonicalize(path)
         .map_err(|error| format!("failed to canonicalize root `{}`: {error}", path.display()))
         .map(|path| {
-            path.to_string_lossy()
-                .replace('\\', "/")
-                .to_ascii_lowercase()
+            WindowsPathIdentity(
+                path.to_string_lossy()
+                    .replace('\\', "/")
+                    .to_ascii_lowercase(),
+            )
         })
+}
+
+fn partition_relative(value: &str) -> Option<&str> {
+    value
+        .strip_prefix("<PartitionDir>/")
+        .or_else(|| value.strip_prefix(r"<PartitionDir>\"))
+}
+
+fn include_relative(value: &str) -> Option<&str> {
+    value
+        .strip_prefix("<IncludeRoot>/")
+        .or_else(|| value.strip_prefix(r"<IncludeRoot>\"))
+}
+
+fn path_matches_contract(path: &WindowsPathIdentity, contract: &str) -> bool {
+    path.as_str() == contract || path.as_str().ends_with(&format!("/{contract}"))
 }
 
 fn normalize_path_identity(path: &str) -> String {
     path.trim().replace('\\', "/").to_ascii_lowercase()
 }
 
+fn compare_case_insensitive(left: &str, right: &str) -> std::cmp::Ordering {
+    left.to_ascii_lowercase()
+        .cmp(&right.to_ascii_lowercase())
+        .then_with(|| left.cmp(right))
+}
+
+fn sort_strings_case_insensitive(values: &mut [String]) {
+    values.sort_by(|left, right| compare_case_insensitive(left, right));
+}
+
+fn sort_paths_case_insensitive(paths: &mut [PathBuf]) {
+    paths.sort_by(|left, right| {
+        compare_case_insensitive(
+            &left.to_string_lossy().replace('\\', "/"),
+            &right.to_string_lossy().replace('\\', "/"),
+        )
+    });
+}
+
+fn has_nonordinary_main_source(source: &str) -> bool {
+    let mut in_block_comment = false;
+    let mut continued_directive = false;
+    for raw in source.lines() {
+        let line = strip_comments(raw, &mut in_block_comment);
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+        if continued_directive {
+            continued_directive = line.ends_with('\\');
+            continue;
+        }
+        if is_preprocessor_directive(line, "include") || is_preprocessor_directive(line, "define") {
+            continued_directive = line.ends_with('\\');
+            continue;
+        }
+        return true;
+    }
+    false
+}
+
+fn strip_comments(line: &str, in_block_comment: &mut bool) -> String {
+    let mut remaining = line;
+    let mut result = String::new();
+    loop {
+        if *in_block_comment {
+            let Some(end) = remaining.find("*/") else {
+                return result;
+            };
+            remaining = &remaining[end + 2..];
+            *in_block_comment = false;
+            continue;
+        }
+        let line_comment = remaining.find("//");
+        let block_comment = remaining.find("/*");
+        match (line_comment, block_comment) {
+            (Some(line), Some(block)) if line < block => {
+                result.push_str(&remaining[..line]);
+                return result;
+            }
+            (_, Some(block)) => {
+                result.push_str(&remaining[..block]);
+                remaining = &remaining[block + 2..];
+                *in_block_comment = true;
+            }
+            (Some(line), None) => {
+                result.push_str(&remaining[..line]);
+                return result;
+            }
+            (None, None) => {
+                result.push_str(remaining);
+                return result;
+            }
+        }
+    }
+}
+
+fn is_preprocessor_directive(line: &str, expected: &str) -> bool {
+    let Some(directive) = line.strip_prefix('#') else {
+        return false;
+    };
+    let directive = directive.trim_start();
+    let Some(rest) = directive.strip_prefix(expected) else {
+        return false;
+    };
+    rest.is_empty()
+        || rest.chars().next().is_some_and(|character| {
+            character.is_whitespace() || character == '<' || character == '"'
+        })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+    use sha2::Digest;
 
     #[test]
     fn settings_preserve_order_and_all_option_values() {
@@ -944,7 +1623,20 @@ mod tests {
             "Windows.Win32.Graphics.Direct2D",
             &["<IncludeRoot>/um/dciddi.h"],
         );
-        let error = validate_resolved_root_ownership(&[partition], &[shared, um]).unwrap_err();
+        let policy = compile_traversal_policy(&[partition], &[shared.clone(), um.clone()]).unwrap();
+        assert_eq!(
+            policy.audit.sdk_scope_fallbacks,
+            [SdkScopeFallback {
+                partition: "Direct2D".to_string(),
+                namespace: "Windows.Win32.Graphics.Direct2D".to_string(),
+                requested: "<IncludeRoot>/um/dciddi.h".to_string(),
+                path: shared.join("dciddi.h"),
+                requested_scope: "um".to_string(),
+                actual_scope: "shared".to_string(),
+                explicitly_paired: false,
+            }]
+        );
+        let error = policy.audit.ensure_clean().unwrap_err();
         assert!(
             error.contains("requested SDK scope `um` but resolved under `shared`"),
             "{error}"
@@ -971,7 +1663,11 @@ mod tests {
             "Windows.Win32.Devices.Usb",
             &["<IncludeRoot>/shared/usb.h", "<IncludeRoot>/um/usb.h"],
         );
-        validate_resolved_root_ownership(&[partition], &[shared, um]).unwrap();
+        let policy = compile_traversal_policy(&[partition], &[shared.clone(), um.clone()]).unwrap();
+        assert!(policy.audit.is_clean());
+        assert_eq!(policy.audit.sdk_scope_fallbacks.len(), 1);
+        assert!(policy.audit.sdk_scope_fallbacks[0].explicitly_paired);
+        policy.audit.ensure_clean().unwrap();
         std::fs::remove_dir_all(root).unwrap();
     }
 
@@ -1069,6 +1765,133 @@ mod tests {
         std::fs::remove_dir_all(root).unwrap();
     }
 
+    #[test]
+    fn root_audit_reports_all_missing_unsupported_and_duplicate_roots() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-audit-all-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("case.h"), "").unwrap();
+        std::fs::write(shared.join("duplicate.h"), "").unwrap();
+
+        let partition = test_partition(
+            &root,
+            "Audit",
+            "Windows.Win32.Audit",
+            &[
+                "<IncludeRoot>/shared/case.h",
+                "<IncludeRoot>/SHARED/case.h",
+                "<IncludeRoot>/shared/duplicate.h",
+                "<IncludeRoot>/shared/duplicate.h",
+                "<IncludeRoot>/shared/missing.h",
+                "<Unsupported>/shared/other.h",
+            ],
+        );
+        let policy = compile_traversal_policy(&[partition], &[shared]).unwrap();
+        assert_eq!(policy.audit.missing_roots.len(), 1);
+        assert_eq!(policy.audit.unsupported_roots.len(), 1);
+        assert_eq!(
+            policy
+                .audit
+                .duplicate_roots
+                .iter()
+                .map(|duplicate| duplicate.kind)
+                .collect::<Vec<_>>(),
+            [
+                DuplicateRootKind::Exact,
+                DuplicateRootKind::CaseOrSeparatorOnly
+            ]
+        );
+        let error = policy.audit.ensure_clean().unwrap_err();
+        assert!(error.contains("missing.h"), "{error}");
+        assert!(error.contains("<Unsupported>/shared/other.h"), "{error}");
+        assert!(error.contains("has duplicate root"), "{error}");
+        assert!(
+            error.contains("case- or separator-only duplicate roots"),
+            "{error}"
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn directory_roots_expand_to_canonical_files_deterministically() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-directory-root-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        let headers = shared.join("headers");
+        let nested = headers.join("nested");
+        std::fs::create_dir_all(&nested).unwrap();
+        std::fs::write(headers.join("b.h"), "").unwrap();
+        std::fs::write(headers.join("A.h"), "").unwrap();
+        std::fs::write(nested.join("c.h"), "").unwrap();
+
+        let partition = test_partition(
+            &root,
+            "Directory",
+            "Windows.Win32.Directory",
+            &["<IncludeRoot>/shared/headers"],
+        );
+        let policy = compile_traversal_policy(&[partition], &[shared]).unwrap();
+        assert_eq!(policy.file_root_count(), 0);
+        assert_eq!(policy.directory_root_count(), 1);
+        assert_eq!(policy.canonical_physical_files().len(), 3);
+        let TraversalRoot::Directory(directory) = &policy.partitions[0].roots[0] else {
+            panic!("directory root was not retained as a directory");
+        };
+        assert_eq!(
+            directory
+                .files
+                .iter()
+                .map(|file| {
+                    file.path
+                        .strip_prefix(&headers)
+                        .unwrap()
+                        .to_string_lossy()
+                        .replace('\\', "/")
+                })
+                .collect::<Vec<_>>(),
+            ["A.h", "b.h", "nested/c.h"]
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn compiled_policy_order_is_independent_of_partition_input_order() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-determinism-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("a.h"), "").unwrap();
+        std::fs::write(shared.join("b.h"), "").unwrap();
+        let first = test_partition(
+            &root,
+            "First",
+            "Windows.Win32.First",
+            &["<IncludeRoot>/shared/a.h"],
+        );
+        let second = test_partition(
+            &root,
+            "Second",
+            "Windows.Win32.Second",
+            &["<IncludeRoot>/shared/b.h"],
+        );
+
+        let forward =
+            compile_traversal_policy(&[first.clone(), second.clone()], &[shared.clone()]).unwrap();
+        let reverse = compile_traversal_policy(&[second, first], &[shared]).unwrap();
+        assert_eq!(forward, reverse);
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
     fn test_partition(root: &Path, name: &str, namespace: &str, roots: &[&str]) -> Partition {
         Partition {
             name: name.to_string(),
@@ -1087,16 +1910,56 @@ mod tests {
         }
     }
 
-    #[test]
-    fn checked_in_partition_authority_is_complete() {
-        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+    fn checked_in_win_sdk() -> PathBuf {
+        Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("..")
             .join("..")
             .join("generation")
             .join("WinSDK")
-            .join("Partitions");
+    }
+
+    fn checked_in_include_dirs(win_sdk: &Path) -> Vec<PathBuf> {
+        let recompiled = win_sdk.join("RecompiledIdlHeaders");
+        vec![
+            recompiled.join("shared"),
+            recompiled.join("um"),
+            recompiled.join("ucrt"),
+            recompiled.join("winrt"),
+            win_sdk.join("AdditionalHeaders").join("cpdk"),
+            win_sdk.join("AdditionalHeaders"),
+            win_sdk.join("Partitions").join("Com.StructuredStorage"),
+            win_sdk.join("inc"),
+        ]
+    }
+
+    fn checked_in_traversal_policy() -> TraversalPolicy {
+        let win_sdk = checked_in_win_sdk();
+        load_traversal_policy(
+            &win_sdk.join("Partitions"),
+            &checked_in_include_dirs(&win_sdk),
+        )
+        .unwrap()
+    }
+
+    #[test]
+    fn checked_in_partition_authority_is_complete() {
+        let root = checked_in_win_sdk().join("Partitions");
         let partitions = load_active(&root).unwrap();
         assert_eq!(partitions.len(), 321);
+        assert_eq!(
+            format!(
+                "{:X}",
+                sha2::Sha256::digest(
+                    partitions
+                        .iter()
+                        .map(|partition| partition.name.as_str())
+                        .collect::<Vec<_>>()
+                        .join("\n")
+                        .as_bytes()
+                )
+            ),
+            "798D67C1B5C4A73185B992B10BF729962B3B4CBB2AD7FAF06A325128C3333397"
+        );
         assert_eq!(namespaces(&partitions).unwrap().len(), 306);
         assert_eq!(
             partitions
@@ -1263,23 +2126,271 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_traversal_policy_is_clean_and_canonical() {
+        let policy = checked_in_traversal_policy();
+        assert_eq!(policy.partitions.len(), 321);
+        assert_eq!(
+            policy
+                .partitions
+                .iter()
+                .map(|partition| partition.roots.len())
+                .sum::<usize>(),
+            1570
+        );
+        assert_eq!(policy.file_root_count(), 1570);
+        assert_eq!(policy.directory_root_count(), 0);
+        assert_eq!(policy.canonical_physical_files().len(), 1559);
+        assert!(policy.audit.missing_roots.is_empty());
+        assert!(policy.audit.unsupported_roots.is_empty());
+        assert!(policy.audit.duplicate_roots.is_empty());
+        assert_eq!(
+            policy
+                .audit
+                .sdk_scope_fallbacks
+                .iter()
+                .map(|fallback| (
+                    fallback.partition.as_str(),
+                    fallback.requested.as_str(),
+                    fallback.requested_scope.as_str(),
+                    fallback.actual_scope.as_str(),
+                    fallback.explicitly_paired,
+                ))
+                .collect::<Vec<_>>(),
+            [
+                ("Buses", "<IncludeRoot>/um/usb.h", "um", "shared", true),
+                (
+                    "WindowsFilteringPlatform",
+                    "<IncludeRoot>/um/fwpmtypes.h",
+                    "um",
+                    "shared",
+                    true
+                ),
+                (
+                    "WindowsFilteringPlatform",
+                    "<IncludeRoot>/um/fwptypes.h",
+                    "um",
+                    "shared",
+                    true
+                ),
+            ]
+        );
+        assert!(policy.audit.is_clean());
+        policy.audit.ensure_clean().unwrap();
+    }
+
+    #[test]
+    fn checked_in_cross_namespace_owner_contract_is_exact() {
+        let policy = checked_in_traversal_policy();
+        let approved = policy
+            .audit
+            .physical_overlaps
+            .iter()
+            .filter(|overlap| overlap.kind == PhysicalRootOverlapKind::ApprovedCrossNamespace)
+            .map(|overlap| {
+                let contract = APPROVED_CROSS_NAMESPACE_ROOTS
+                    .iter()
+                    .find(|contract| path_matches_contract(&overlap.canonical_path, contract.path))
+                    .unwrap();
+                (
+                    contract.path,
+                    overlap
+                        .owners
+                        .iter()
+                        .map(|owner| (owner.partition.as_str(), owner.namespace.as_str()))
+                        .collect::<Vec<_>>(),
+                )
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(
+            approved,
+            [
+                (
+                    "shared/ntddstor.h",
+                    vec![
+                        ("Fs", "Windows.Win32.Storage.FileSystem"),
+                        ("Ioctl", "Windows.Win32.System.Ioctl"),
+                    ],
+                ),
+                (
+                    "shared/uuids.h",
+                    vec![
+                        ("Media", "Windows.Win32.Media"),
+                        ("Mf", "Windows.Win32.Media.MediaFoundation"),
+                    ],
+                ),
+                (
+                    "um/audioendpoints.h",
+                    vec![
+                        ("Audio", "Windows.Win32.Media.Audio"),
+                        ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints",),
+                    ],
+                ),
+                (
+                    "um/dxcore.h",
+                    vec![
+                        ("DXCore", "Windows.Win32.Graphics.DXCore"),
+                        ("Display", "Windows.Win32.Devices.Display"),
+                    ],
+                ),
+                (
+                    "um/dxcore_interface.h",
+                    vec![
+                        ("DXCore", "Windows.Win32.Graphics.DXCore"),
+                        ("Display", "Windows.Win32.Devices.Display"),
+                    ],
+                ),
+                (
+                    "um/endpointvolume.h",
+                    vec![
+                        ("Audio", "Windows.Win32.Media.Audio"),
+                        ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints",),
+                    ],
+                ),
+                (
+                    "um/idispids.h",
+                    vec![
+                        ("ComOle", "Windows.Win32.System.Ole"),
+                        ("InternetExplorer", "Windows.Win32.Web.InternetExplorer",),
+                    ],
+                ),
+            ]
+        );
+
+        let same_namespace = policy
+            .audit
+            .physical_overlaps
+            .iter()
+            .filter(|overlap| overlap.kind == PhysicalRootOverlapKind::SameNamespace)
+            .collect::<Vec<_>>();
+        assert_eq!(same_namespace.len(), 1);
+        assert!(
+            same_namespace[0]
+                .canonical_path
+                .as_str()
+                .ends_with("/um/psapi.h")
+        );
+        assert_eq!(
+            same_namespace[0]
+                .owners
+                .iter()
+                .map(|owner| (owner.partition.as_str(), owner.namespace.as_str()))
+                .collect::<Vec<_>>(),
+            [
+                ("PsApi1", "Windows.Win32.System.ProcessStatus"),
+                ("PsApi2", "Windows.Win32.System.ProcessStatus"),
+            ]
+        );
+        assert_eq!(policy.audit.physical_overlaps.len(), 8);
+    }
+
+    #[test]
+    fn checked_in_compile_environment_exception_inventory_is_exact() {
+        let policy = checked_in_traversal_policy();
+        assert_eq!(policy.compile_environment_exceptions.len(), 38);
+        assert_eq!(
+            policy
+                .compile_environment_exceptions
+                .iter()
+                .filter_map(|exception| {
+                    exception
+                        .standard
+                        .as_deref()
+                        .map(|standard| (exception.partition.as_str(), standard))
+                })
+                .collect::<Vec<_>>(),
+            [("Media.DShow", "c++20"), ("Mf", "c++20")]
+        );
+        assert_eq!(
+            policy
+                .compile_environment_exceptions
+                .iter()
+                .filter(|exception| !exception.include_directories.is_empty())
+                .map(|exception| (
+                    exception.partition.clone(),
+                    exception.include_directories.clone()
+                ))
+                .collect::<Vec<_>>(),
+            [(
+                "DXCore".to_string(),
+                vec![
+                    r"<RepoRoot>\generation\scraper".to_string(),
+                    "<IncludeRoot>/shared".to_string(),
+                    "<IncludeRoot>/um".to_string(),
+                    "<IncludeRoot>/winrt".to_string(),
+                ]
+            )]
+        );
+        assert_eq!(
+            policy
+                .compile_environment_exceptions
+                .iter()
+                .filter(|exception| !exception.partition_local_roots.is_empty())
+                .map(|exception| (
+                    exception.partition.clone(),
+                    exception.partition_local_roots.clone()
+                ))
+                .collect::<Vec<_>>(),
+            [
+                (
+                    "Com.StructuredStorage".to_string(),
+                    vec!["<PartitionDir>/manual.h".to_string()]
+                ),
+                (
+                    "Threading".to_string(),
+                    vec!["<PartitionDir>/main.cpp".to_string()]
+                ),
+            ]
+        );
+        assert_eq!(
+            policy
+                .compile_environment_exceptions
+                .iter()
+                .filter(|exception| exception.has_nonordinary_main_source)
+                .map(|exception| exception.partition.as_str())
+                .collect::<Vec<_>>(),
+            [
+                "Certificates",
+                "Cloudapi",
+                "Com.Events",
+                "Cos",
+                "Debug",
+                "Debug.ActiveScript",
+                "Debug.WebApp",
+                "Display",
+                "HtmlHelp",
+                "Identity",
+                "InternetExplorer",
+                "IO",
+                "IpHlp",
+                "MsChap",
+                "MsCs",
+                "Ndf",
+                "Printing",
+                "RRas",
+                "Security",
+                "Security.AppLocker",
+                "Security.ConfigurationSnapin",
+                "Security.Cryptography",
+                "Security.Cryptography.Catalog",
+                "Security.Cryptography.Sip",
+                "Security.Cryptography.UI",
+                "Security.DiagnosticDataQuery",
+                "Security.DirectoryServices",
+                "Security.LicenseProtection",
+                "Security.Tpm",
+                "Security.WinTrust",
+                "Security.WinWlx",
+                "Threading",
+                "WinLocation",
+                "WinProg",
+            ]
+        );
+    }
+
+    #[test]
     fn every_checked_in_partition_root_resolves() {
-        let win_sdk = Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("..")
-            .join("..")
-            .join("generation")
-            .join("WinSDK");
-        let recompiled = win_sdk.join("RecompiledIdlHeaders");
-        let include_dirs = [
-            recompiled.join("shared"),
-            recompiled.join("um"),
-            recompiled.join("ucrt"),
-            recompiled.join("winrt"),
-            win_sdk.join("AdditionalHeaders").join("cpdk"),
-            win_sdk.join("AdditionalHeaders"),
-            win_sdk.join("Partitions").join("Com.StructuredStorage"),
-            win_sdk.join("inc"),
-        ];
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
         let partitions = load_active(&win_sdk.join("Partitions")).unwrap();
         for partition in &partitions {
             partition.resolve_roots(&include_dirs).unwrap();
