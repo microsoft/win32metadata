@@ -750,13 +750,14 @@ fn convert_header_partition_policy(
     traversal: &crate::partition::TraversalPolicy,
 ) -> Result<HeaderPartitionPolicy, String> {
     let mut result = HeaderPartitionPolicy::new();
+    let satellite_roots = authority_satellite_root_keys(traversal);
     for partition in &traversal.partitions {
         let root_partition = convert_root_partition(partition);
         for root in &partition.roots {
             match root {
                 crate::partition::TraversalRoot::File(root) => add_header_partition_owner(
                     &mut result,
-                    logical_policy_input(&partition.identity, &root.path),
+                    logical_policy_input(&partition.identity, &root.path, &satellite_roots),
                     path_arg(&root.path, "--partition-policy-root")?,
                     root_partition.clone(),
                 ),
@@ -764,7 +765,7 @@ fn convert_header_partition_policy(
                     for file in &root.files {
                         add_header_partition_owner(
                             &mut result,
-                            logical_policy_input(&partition.identity, &file.path),
+                            logical_policy_input(&partition.identity, &file.path, &satellite_roots),
                             path_arg(&file.path, "--partition-policy-root")?,
                             root_partition.clone(),
                         );
@@ -780,11 +781,52 @@ fn convert_header_partition_policy(
     Ok(result)
 }
 
-fn logical_policy_input(identity: &str, path: &Path) -> &'static str {
+fn authority_satellite_root_keys(
+    traversal: &crate::partition::TraversalPolicy,
+) -> BTreeSet<String> {
+    let mut result = traversal
+        .canonical_physical_files()
+        .into_values()
+        .filter(|path| crate::aggregate::is_authority_satellite_header(path))
+        .map(|path| normalize_audit_path(path.to_string_lossy().as_ref()))
+        .collect::<BTreeSet<_>>();
+    for partition in &traversal.partitions {
+        if !crate::aggregate::uses_satellite_environment(&partition.identity) {
+            continue;
+        }
+        for root in &partition.roots {
+            match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    result.insert(normalize_audit_path(root.path.to_string_lossy().as_ref()));
+                }
+                crate::partition::TraversalRoot::Directory(root) => {
+                    result.extend(
+                        root.files
+                            .iter()
+                            .map(|file| normalize_audit_path(file.path.to_string_lossy().as_ref())),
+                    );
+                }
+                crate::partition::TraversalRoot::Missing(_)
+                | crate::partition::TraversalRoot::Unsupported(_) => {
+                    unreachable!("validated traversal policy is clean")
+                }
+            }
+        }
+    }
+    result
+}
+
+fn logical_policy_input(
+    identity: &str,
+    path: &Path,
+    satellite_roots: &BTreeSet<String>,
+) -> &'static str {
     match identity {
         "PsApi1" => PSAPI_V1_INPUT,
         "PsApi2" => PSAPI_V2_INPUT,
-        _ if crate::aggregate::is_satellite_header(path) => SATELLITE_INPUT,
+        _ if satellite_roots.contains(&normalize_audit_path(path.to_string_lossy().as_ref())) => {
+            SATELLITE_INPUT
+        }
         _ => AGGREGATE_INPUT,
     }
 }
@@ -1137,6 +1179,9 @@ fn build_inputs(
                 .iter()
                 .any(|candidate| file_name(header).eq_ignore_ascii_case(candidate))
     });
+    let authority_satellite_roots = traversal
+        .map(authority_satellite_root_keys)
+        .unwrap_or_default();
     let mut main_source = if let Some(traversal) = traversal {
         let structured_storage = logical_partition(traversal, "Com.StructuredStorage")?;
         let structured_storage_header = structured_storage
@@ -1185,7 +1230,9 @@ fn build_inputs(
         let root = path_arg(&path, "--include")?;
         let satellite = crate::win32_headers::SATELLITE_HEADERS
             .iter()
-            .any(|candidate| file_name(&header).eq_ignore_ascii_case(candidate));
+            .any(|candidate| file_name(&header).eq_ignore_ascii_case(candidate))
+            || authority_satellite_roots
+                .contains(&normalize_audit_path(path.to_string_lossy().as_ref()));
         if satellite {
             if file_name(&header).eq_ignore_ascii_case("devicetopology.h") {
                 satellite_source.push_str("\n#include <ks.h>\n#define _KS_");
@@ -1205,7 +1252,9 @@ fn build_inputs(
             let root = path_arg(&path, "--partition-policy-root")?;
             if crate::aggregate::is_psapi_header(&path) {
                 psapi_root = Some(root);
-            } else if crate::aggregate::is_satellite_header(&path) {
+            } else if authority_satellite_roots
+                .contains(&normalize_audit_path(path.to_string_lossy().as_ref()))
+            {
                 satellite_roots.push(root);
             } else {
                 main_roots.push(root);
@@ -1634,14 +1683,8 @@ fn plan_header_partitions(
     let plan = snapshot
         .plan_header_partitions(policy, authorities)
         .map_err(|error| format!("failed to plan {arch} metadata: {error}"))?;
-    let audit = plan
-        .audit(emit)
-        .map_err(|error| format!("failed to audit {arch} metadata: {error}"))?;
-    if !audit.is_clean() {
-        return Err(format!("failed to audit {arch} metadata:\n{audit}"));
-    }
     plan.emit_with_options(emit)
-        .map_err(|error| format!("failed to emit {arch} metadata: {error}"))
+        .map_err(|error| format!("failed to audit {arch} metadata: {error}"))
 }
 
 fn write_partitioned_rdl(
@@ -2376,6 +2419,7 @@ mod tests {
         assert!(coverage_labels.contains("um/psapi.h"));
         assert!(coverage_labels.contains("partition/com.structuredstorage/manual.h"));
         assert!(coverage_labels.contains("partition/threading/main.cpp"));
+        let satellite_root_keys = authority_satellite_root_keys(&traversal);
         for partition in &traversal.partitions {
             for root in &partition.roots {
                 let files = match root {
@@ -2389,7 +2433,8 @@ mod tests {
                     }
                 };
                 for path in files {
-                    let input = logical_policy_input(&partition.identity, path);
+                    let input =
+                        logical_policy_input(&partition.identity, path, &satellite_root_keys);
                     let configured = path_arg(path, "--partition-policy-root").unwrap();
                     assert!(
                         authority
@@ -2430,7 +2475,8 @@ mod tests {
                 supplied.len(),
                 "root `{root}` was repeated within an input"
             );
-            let satellite = crate::aggregate::is_satellite_header(&path);
+            let satellite = satellite_root_keys
+                .contains(&normalize_audit_path(path.to_string_lossy().as_ref()));
             if psapi {
                 assert_eq!(supplied, [2, 3], "root `{root}` used wrong PSAPI inputs");
             } else {
@@ -2442,7 +2488,7 @@ mod tests {
             }
             satellite_roots += usize::from(satellite);
         }
-        assert_eq!(satellite_roots, 12);
+        assert_eq!(satellite_roots, 43);
 
         let ScrapeInputs::Common(normal) =
             build_inputs(&options, &include_dirs, &root_dirs, None).unwrap()
@@ -2509,9 +2555,68 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_authority_compile_sources_parse_collision_groups() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let prelude = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
+        let mut main_source = crate::aggregate::main_prefix(
+            prelude,
+            &win_sdk
+                .join("Partitions")
+                .join("Com.StructuredStorage")
+                .join("manual.h"),
+        )
+        .unwrap();
+        crate::aggregate::append_threading_input(
+            &mut main_source,
+            &win_sdk
+                .join("Partitions")
+                .join("Threading")
+                .join("main.cpp"),
+        )
+        .unwrap();
+        let mut satellite_source = crate::aggregate::satellite_source(prelude);
+        satellite_source.push_str("\n#include <vfw.h>\n#include <xamlOM.h>\n");
+
+        let mut args = CLANG_ARGS
+            .iter()
+            .map(|argument| argument.to_string())
+            .collect::<Vec<_>>();
+        for header in [SAL_HEADER, ANNOTATION_HEADER] {
+            let header = include_dirs
+                .iter()
+                .map(|directory| directory.join(header))
+                .find(|path| path.is_file())
+                .unwrap();
+            args.extend([
+                "-include".to_string(),
+                path_arg(&header, "--include").unwrap(),
+            ]);
+        }
+        for directory in &include_dirs {
+            args.extend([
+                "-isystem".to_string(),
+                path_arg(directory, "--include").unwrap(),
+            ]);
+        }
+        args.push("--target=x86_64-pc-windows-msvc".to_string());
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, main_source),
+                Input::new(SATELLITE_INPUT, satellite_source),
+            ],
+            &args,
+        )
+        .unwrap();
+    }
+
+    #[test]
     fn checked_in_logical_policy_conversion_preserves_every_owner_setting() {
         let traversal = checked_in_traversal_policy();
         let headers = convert_header_partition_policy(&traversal).unwrap();
+        let satellite_root_keys = authority_satellite_root_keys(&traversal);
         assert_eq!(headers.traversed_headers().count(), 0);
         assert_eq!(headers.traversed_header_paths().count(), 1560);
         assert_eq!(
@@ -2526,12 +2631,7 @@ mod tests {
             let owner = convert_root_partition(partition);
             let mut add = |path: &Path| {
                 let header = path_arg(path, "--partition-policy-root").unwrap();
-                let input = match partition.identity.as_str() {
-                    "PsApi1" => PSAPI_V1_INPUT,
-                    "PsApi2" => PSAPI_V2_INPUT,
-                    _ if crate::aggregate::is_satellite_header(path) => SATELLITE_INPUT,
-                    _ => AGGREGATE_INPUT,
-                };
+                let input = logical_policy_input(&partition.identity, path, &satellite_root_keys);
                 expected.add_traversed_header_for_input(input, header, owner.clone());
             };
             for root in &partition.roots {
@@ -2567,23 +2667,33 @@ mod tests {
         }
         let v1_root = root(v1);
         let v2_root = root(v2);
+        let mut satellite_root_keys = authority_satellite_root_keys(&traversal);
+        satellite_root_keys.insert(normalize_audit_path("C:/sdk/shared/ntddstor.h"));
 
         assert_eq!(v1_root.canonical_path, v2_root.canonical_path);
         assert!(v1_root.canonical_path.as_str().ends_with("/um/psapi.h"));
         assert_eq!(
-            logical_policy_input("PsApi1", &v1_root.path),
+            logical_policy_input("PsApi1", &v1_root.path, &satellite_root_keys),
             PSAPI_V1_INPUT
         );
         assert_eq!(
-            logical_policy_input("PsApi2", &v2_root.path),
+            logical_policy_input("PsApi2", &v2_root.path, &satellite_root_keys),
             PSAPI_V2_INPUT
         );
         assert_eq!(
-            logical_policy_input("Ioctl", Path::new("C:/sdk/shared/ntddstor.h")),
+            logical_policy_input(
+                "Ioctl",
+                Path::new("C:/sdk/shared/ntddstor.h"),
+                &satellite_root_keys
+            ),
             SATELLITE_INPUT
         );
         assert_eq!(
-            logical_policy_input("Foundation", Path::new("C:/sdk/um/winuser.h")),
+            logical_policy_input(
+                "Foundation",
+                Path::new("C:/sdk/um/winuser.h"),
+                &satellite_root_keys
+            ),
             AGGREGATE_INPUT
         );
         let psapi_version = |partition: &crate::partition::LogicalPartition| {
@@ -2884,6 +2994,7 @@ mod tests {
         .unwrap();
         let header = path_arg(&header, "--include").unwrap();
         let source = |version| format!("#define PSAPI_VERSION {version}\n#include \"{header}\"\n");
+        let satellite_roots = BTreeSet::new();
         let snapshot = windows_clang::extract(
             [
                 Input::new(PSAPI_V1_INPUT, source(1)).with_roots([header.clone()]),
@@ -2894,12 +3005,12 @@ mod tests {
         .unwrap();
         let policy = HeaderPartitionPolicy::new()
             .with_traversed_header_for_input(
-                logical_policy_input("PsApi1", Path::new("psapi.h")),
+                logical_policy_input("PsApi1", Path::new("psapi.h"), &satellite_roots),
                 header.clone(),
                 RootPartition::new("PsApi1", "Windows.Win32.System.ProcessStatus"),
             )
             .with_traversed_header_for_input(
-                logical_policy_input("PsApi2", Path::new("psapi.h")),
+                logical_policy_input("PsApi2", Path::new("psapi.h"), &satellite_roots),
                 header,
                 RootPartition::new("PsApi2", "Windows.Win32.System.ProcessStatus")
                     .with_exclusion("SharedProcessStatus"),

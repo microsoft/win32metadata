@@ -18,10 +18,15 @@ typedef struct _OLD_LARGE_INTEGER {
 #define _NTDEF_
 "#;
 
+const AUTHORITY_SATELLITE_PARTITIONS: &[&str] =
+    &["Display", "HtmlHelp", "IO", "MsChap", "Printing"];
+
+const AUTHORITY_SATELLITE_HEADERS: &[&str] = &["vfw.h", "xamlOM.h"];
+
 pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<String, String> {
     let mut source = String::from(GLOBAL_DEFINES);
     source.push_str(prelude);
-    source.push_str(COMPATIBILITY_SHIMS);
+    append_security_seed(&mut source);
 
     append_headers(
         &mut source,
@@ -34,20 +39,12 @@ pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<St
         ],
     );
     append_com_structured_storage(&mut source, structured_storage_header)?;
-    append_display(&mut source);
-    append_headers(
-        &mut source,
-        &["winnt.h", "winerror.h", "dxcore.h", "dxcore_interface.h"],
-    );
-    append_html_help(&mut source);
     append_identity(&mut source);
     append_internet_explorer(&mut source);
-    append_io(&mut source);
     append_ip_helper(&mut source);
+    append_graphics_prerequisites(&mut source);
     append_direct_show(&mut source);
     append_media_foundation(&mut source);
-    append_extern_c_headers(&mut source, &["mschapp.h"]);
-    append_printing(&mut source);
     append_rras(&mut source);
     append_winprog(&mut source);
     Ok(source)
@@ -81,7 +78,18 @@ fn quoted_include_path(path: &Path, description: &str) -> Result<String, String>
 }
 
 pub fn satellite_source(prelude: &str) -> String {
-    format!("{GLOBAL_DEFINES}{prelude}")
+    let mut source = format!("{GLOBAL_DEFINES}{prelude}");
+    append_graphics_prerequisites(&mut source);
+    append_headers(
+        &mut source,
+        &["winnt.h", "winerror.h", "dxcore.h", "dxcore_interface.h"],
+    );
+    append_display(&mut source);
+    append_html_help(&mut source);
+    append_io(&mut source);
+    append_extern_c_headers(&mut source, &["mschapp.h"]);
+    append_printing(&mut source);
+    source
 }
 
 pub fn psapi_source(prelude: &str, version: u8) -> String {
@@ -98,6 +106,24 @@ pub fn is_satellite_header(path: &Path) -> bool {
                 .iter()
                 .any(|candidate| name.eq_ignore_ascii_case(candidate))
         })
+}
+
+pub fn uses_satellite_environment(identity: &str) -> bool {
+    AUTHORITY_SATELLITE_PARTITIONS
+        .iter()
+        .any(|candidate| identity.eq_ignore_ascii_case(candidate))
+}
+
+pub fn is_authority_satellite_header(path: &Path) -> bool {
+    is_satellite_header(path)
+        || path
+            .file_name()
+            .and_then(|name| name.to_str())
+            .is_some_and(|name| {
+                AUTHORITY_SATELLITE_HEADERS
+                    .iter()
+                    .any(|candidate| name.eq_ignore_ascii_case(candidate))
+            })
 }
 
 pub fn is_psapi_header(path: &Path) -> bool {
@@ -131,6 +157,37 @@ fn append_com_structured_storage(
     )?;
     source.push_str(&format!("#include \"{structured_storage_header}\"\n"));
     Ok(())
+}
+
+fn append_security_seed(source: &mut String) {
+    append_headers(source, &["winsock2.h", "IPExport.h"]);
+    source.push_str(
+        "\n#define PIO_APC_ROUTINE_DEFINED\n\
+         #include <winternl.h>\n\
+         #include <icmpapi.h>\n\
+         #undef PIO_APC_ROUTINE_DEFINED\n",
+    );
+    source.push_str(COMPATIBILITY_SHIMS);
+    append_headers(source, &["NTSecAPI.h", "sspi.h", "wincred.h", "NTSecPKG.h"]);
+    append_extern_c_headers(source, &["schannel.h"]);
+}
+
+fn append_graphics_prerequisites(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "ddraw.h",
+            "ddrawi.h",
+            "ddrawint.h",
+            "ddkernel.h",
+            "dvp.h",
+            "dxmini.h",
+            "dmemmgr.h",
+            "d3d9.h",
+            "d3d9types.h",
+            "d3d9caps.h",
+        ],
+    );
 }
 
 fn append_display(source: &mut String) {
@@ -168,12 +225,8 @@ fn append_html_help(source: &mut String) {
 fn append_identity(source: &mut String) {
     append_headers(
         source,
-        &["winnt.h", "NTSecAPI.h", "sspi.h", "wincred.h", "NTSecPKG.h"],
-    );
-    append_extern_c_headers(source, &["schannel.h"]);
-    append_headers(
-        source,
         &[
+            "winnt.h",
             "winbase.h",
             "securitybaseapi.h",
             "subauth.h",
@@ -244,13 +297,6 @@ fn append_io(source: &mut String) {
 }
 
 fn append_ip_helper(source: &mut String) {
-    append_headers(source, &["winsock2.h", "IPExport.h"]);
-    source.push_str(
-        "\n#define PIO_APC_ROUTINE_DEFINED\n\
-         #include <winternl.h>\n\
-         #include <icmpapi.h>\n\
-         #undef PIO_APC_ROUTINE_DEFINED\n",
-    );
     append_headers(
         source,
         &[
@@ -267,12 +313,12 @@ fn append_ip_helper(source: &mut String) {
 }
 
 fn append_direct_show(source: &mut String) {
+    append_headers(source, &["d3d9helper.h"]);
     append_headers(
         source,
         &[
             "ks.h",
             "ksmedia.h",
-            "d3d9helper.h",
             "vptype.h",
             "gdipluseffects.h",
             "segment.h",
@@ -283,7 +329,6 @@ fn append_direct_show(source: &mut String) {
             "ocidl.h",
             "wingdi.h",
             "camerauicontrol.h",
-            "ddraw.h",
             "wmcodecdsp.h",
             "windows.devices.midi.h",
             "qnetwork.h",
@@ -342,6 +387,7 @@ fn append_direct_show(source: &mut String) {
 }
 
 fn append_media_foundation(source: &mut String) {
+    append_headers(source, &["d3d9.h", "d3d9types.h", "d3d9caps.h"]);
     append_headers(
         source,
         &[
@@ -350,9 +396,6 @@ fn append_media_foundation(source: &mut String) {
             "d3d11_1.h",
             "d3d11_4.h",
             "d3d12video.h",
-            "d3d9.h",
-            "d3d9types.h",
-            "d3d9caps.h",
             "wmcodecdsp.h",
             "dxva9typ.h",
             "dxva.h",
@@ -403,11 +446,13 @@ fn append_printing(source: &mut String) {
             "prcomoem.h",
             "prdrvcom.h",
             "PrinterExtension.h",
-            "prnasnot.h",
         ],
     );
-    append_extern_c_headers(source, &["prnasntp.h"]);
-    append_headers(source, &["prntfont.h", "tcpxcv.h", "usbprint.h"]);
+    append_extern_c_headers(source, &["prnasnot.h"]);
+    append_headers(
+        source,
+        &["prnasntp.h", "prntfont.h", "tcpxcv.h", "usbprint.h"],
+    );
     append_extern_c_headers(source, &["winppi.h"]);
     append_headers(
         source,
@@ -505,36 +550,88 @@ mod tests {
 
     #[test]
     fn authority_source_preserves_first_include_constraints() {
-        let mut source = main_prefix(
+        let mut main = main_prefix(
             "#define SECURITY_WIN32\n#include <windows.h>\n",
             Path::new(r"C:\repo\generation\WinSDK\Partitions\Com.StructuredStorage\manual.h"),
         )
         .unwrap();
         append_threading_input(
-            &mut source,
+            &mut main,
             Path::new(r"C:\repo\generation\WinSDK\Partitions\Threading\main.cpp"),
         )
         .unwrap();
+        let satellite = satellite_source("#define SECURITY_WIN32\n#include <windows.h>\n");
 
-        let windows = source.find("#include <windows.h>").unwrap();
+        let windows = main.find("#include <windows.h>").unwrap();
         assert!(
-            source
-                .find("MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS")
+            main.find("MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS")
                 .unwrap()
                 < windows
         );
-        assert!(source.find("CERT_CHAIN_PARA_HAS_EXTRA_FIELDS").unwrap() < windows);
+        assert!(main.find("CERT_CHAIN_PARA_HAS_EXTRA_FIELDS").unwrap() < windows);
         assert!(
-            source.find("#define SCHANNEL_USE_BLACKLISTS").unwrap()
-                < source.find("#include <schannel.h>").unwrap()
+            main.find("#define SCHANNEL_USE_BLACKLISTS").unwrap()
+                < main.find("#include <schannel.h>").unwrap()
         );
         assert!(
-            source.find("#define PIO_APC_ROUTINE_DEFINED").unwrap()
-                < source.find("#include <icmpapi.h>").unwrap()
+            main.find("#define PIO_APC_ROUTINE_DEFINED").unwrap()
+                < main.find("#include <winternl.h>").unwrap()
         );
         assert!(
-            source.find("Com.StructuredStorage/manual.h").unwrap()
-                < source.find("Partitions/Threading/main.cpp").unwrap()
+            main.find("#include <winternl.h>").unwrap()
+                < main.find("typedef NTSTATUS* PNTSTATUS").unwrap()
+        );
+        assert!(
+            main.find("typedef NTSTATUS* PNTSTATUS").unwrap()
+                < main.find("#define _NTDEF_").unwrap()
+        );
+        assert!(
+            main.find("#define _NTDEF_").unwrap() < main.find("#include <NTSecAPI.h>").unwrap()
+        );
+        assert!(
+            main.find("Com.StructuredStorage/manual.h").unwrap()
+                < main.find("Partitions/Threading/main.cpp").unwrap()
+        );
+        assert!(main.contains("#include <strmif.h>"));
+        assert!(main.contains("#include <subauth.h>"));
+        assert!(main.contains("#include <avifmt.h>"));
+        assert!(main.contains("#include <segment.h>"));
+        assert!(!main.contains("#include <winddi.h>"));
+        assert!(!main.contains("#include <infotech.h>"));
+        assert!(!main.contains("#include <mschapp.h>"));
+        assert!(satellite.contains("#include <winddi.h>"));
+        assert!(satellite.contains("#include <infotech.h>"));
+        assert!(satellite.contains("#include <mschapp.h>"));
+        assert!(!satellite.contains("#include <strmif.h>"));
+        assert!(!satellite.contains("#include <subauth.h>"));
+        assert!(!satellite.contains("#include <avifmt.h>"));
+        assert!(!satellite.contains("#include <segment.h>"));
+
+        for source in [&main, &satellite] {
+            let ddraw = source.find("#include <ddraw.h>").unwrap();
+            let ddrawi = source.find("#include <ddrawi.h>").unwrap();
+            let ddrawint = source.find("#include <ddrawint.h>").unwrap();
+            let ddkernel = source.find("#include <ddkernel.h>").unwrap();
+            let dvp = source.find("#include <dvp.h>").unwrap();
+            assert!(ddraw < ddrawi && ddrawi < ddrawint && ddrawint < ddkernel && ddkernel < dvp);
+            let d3d9 = source.find("#include <d3d9.h>").unwrap();
+            let d3d9types = source.find("#include <d3d9types.h>").unwrap();
+            let d3d9caps = source.find("#include <d3d9caps.h>").unwrap();
+            assert!(d3d9 < d3d9types && d3d9types < d3d9caps);
+        }
+        assert!(
+            satellite.find("#include <d3d9caps.h>").unwrap()
+                < satellite.find("#include <winddi.h>").unwrap()
+        );
+        assert!(
+            main.find("#include <d3d9helper.h>").unwrap() < main.find("#include <vmr9.h>").unwrap()
+        );
+        assert!(
+            main.find("#include <vmr9.h>").unwrap() < main.find("#include <dxva2api.h>").unwrap()
+        );
+        assert!(
+            main.find("#include <dxva2api.h>").unwrap()
+                < main.find("#include <dxva2swdev.h>").unwrap()
         );
     }
 
@@ -549,6 +646,13 @@ mod tests {
         assert!(!is_psapi_header(Path::new(
             r"C:\sdk\um\processthreadsapi.h"
         )));
+        assert!(uses_satellite_environment("Display"));
+        assert!(uses_satellite_environment("mschap"));
+        assert!(!uses_satellite_environment("Media.DShow"));
+        assert!(is_authority_satellite_header(Path::new(
+            r"C:\sdk\um\xamlOM.h"
+        )));
+        assert!(is_authority_satellite_header(Path::new(r"C:\sdk\um\VFW.H")));
     }
 
     #[test]
