@@ -698,6 +698,18 @@ const REENTRANT_AUTHORITY_HEADERS: &[&str] =
 
 const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
     (
+        "shared/ksuuids.h",
+        AGGREGATE_INPUT,
+        true,
+        "uuids.h includes this GUID catalog first, so its constants are materialized with the parent catalog's provenance",
+    ),
+    (
+        "shared/transportsettingcommon.h",
+        AGGREGATE_INPUT,
+        true,
+        "mstcpip.h materializes TRANSPORT_SETTING_ID under the shared include guard before this direct visit",
+    ),
+    (
         "um/asptlb.h",
         AGGREGATE_INPUT,
         false,
@@ -714,6 +726,12 @@ const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
         AGGREGATE_INPUT,
         false,
         "the legacy Js source excludes chakrart.h because it is incompatible with the jsrt9.h mode",
+    ),
+    (
+        "um/d3d9helper.h",
+        AGGREGATE_INPUT,
+        true,
+        "d3d9.h materializes the Direct3D 9 surface under the shared _D3D9_H_ guard before this direct visit",
     ),
     (
         "um/icodecapi.h",
@@ -734,10 +752,22 @@ const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
         "the legacy MAPI source excludes inline Unicode helper implementations from metadata",
     ),
     (
+        "um/mpeg2error.h",
+        AGGREGATE_INPUT,
+        true,
+        "its HRESULT constants are materialized, but constant ownership follows the HRESULT root fact before spelling fallback",
+    ),
+    (
         "um/msoav.h",
         AGGREGATE_INPUT,
         false,
         "the legacy Internet Explorer source excludes msoav.h because the SDK omits MSOAPI_",
+    ),
+    (
+        "um/mshtmlc.h",
+        AGGREGATE_INPUT,
+        true,
+        "Mshtml.h materializes this declaration surface under the shared __mshtml_h__ guard before this direct visit",
     ),
     (
         "um/faxcom.h",
@@ -788,10 +818,10 @@ const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
         "the OLE1 header conflicts with the aggregate OLE2 declaration surface",
     ),
     (
-        "um/pnrpns.h",
+        "um/pbdaerrors.h",
         AGGREGATE_INPUT,
-        false,
-        "p2p.h supplies the PNRP declarations and directly including pnrpns.h repeats its GUIDs",
+        true,
+        "its HRESULT constants are materialized, but constant ownership follows the HRESULT root fact before spelling fallback",
     ),
     (
         "um/routprot.h",
@@ -804,6 +834,12 @@ const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
         AGGREGATE_INPUT,
         false,
         "the legacy RPC source intentionally excludes C-only proxy implementation metadata",
+    ),
+    (
+        "um/rtlsupportapi.h",
+        AGGREGATE_INPUT,
+        true,
+        "winnt.h materializes the RTL support APIs from its integrated section before this direct visit",
     ),
     (
         "um/tapi3cc.h",
@@ -836,10 +872,40 @@ const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
         "the legacy VDS source documents that vdshwprv.h cannot be combined with vds.h",
     ),
     (
+        "um/wab.h",
+        AGGREGATE_INPUT,
+        true,
+        "wab.h is an umbrella whose owned child headers carry the Address Book declarations",
+    ),
+    (
+        "um/wiamindr.h",
+        AGGREGATE_INPUT,
+        true,
+        "wiamindr.h only selects the productive NTDDI-specific wiamindr_lh.h declaration header",
+    ),
+    (
         "um/winenclave.h",
         AGGREGATE_INPUT,
         false,
         "winenclave.h rejects translation units that include windows.h",
+    ),
+    (
+        "um/winsock.h",
+        AGGREGATE_INPUT,
+        true,
+        "the aggregate prelude's winsock2.h sets the shared Winsock guard and materializes the compatible Winsock surface",
+    ),
+    (
+        "um/wmsysprf.h",
+        AGGREGATE_INPUT,
+        true,
+        "its profile GUIDs are materialized, but constant ownership follows the GUID root fact before spelling fallback",
+    ),
+    (
+        "um/wsdapi.h",
+        AGGREGATE_INPUT,
+        true,
+        "wsdapi.h is an umbrella whose owned child headers carry the Web Services on Devices declarations",
     ),
 ];
 
@@ -3898,13 +3964,18 @@ mod tests {
                 .map(|(root, _, _, _)| *root)
                 .collect::<Vec<_>>(),
             [
+                "shared/ksuuids.h",
+                "shared/transportsettingcommon.h",
                 "um/asptlb.h",
                 "um/cellularapi_oem.h",
                 "um/chakrart.h",
+                "um/d3d9helper.h",
                 "um/icodecapi.h",
                 "um/iiswebsocket.h",
                 "um/mapiunicodehelp.h",
+                "um/mpeg2error.h",
                 "um/msoav.h",
+                "um/mshtmlc.h",
                 "um/faxcom.h",
                 "um/msp.h",
                 "um/mspaddr.h",
@@ -3913,19 +3984,52 @@ mod tests {
                 "um/ntlsa.h",
                 "um/oledbguid.h",
                 "um/ole.h",
-                "um/pnrpns.h",
+                "um/pbdaerrors.h",
                 "um/routprot.h",
                 "um/rpcproxy.h",
+                "um/rtlsupportapi.h",
                 "um/tapi3cc.h",
                 "um/termmgr.h",
                 "um/tune.h",
                 "um/tvratings_enum.h",
                 "um/vdshwprv.h",
+                "um/wab.h",
+                "um/wiamindr.h",
                 "um/winenclave.h",
+                "um/winsock.h",
+                "um/wmsysprf.h",
+                "um/wsdapi.h",
             ]
         );
+        assert_eq!(
+            COVERAGE_UNPRODUCTIVE_ALLOWLIST
+                .iter()
+                .filter(|(_, _, expected_visit, _)| *expected_visit)
+                .map(|(root, _, _, _)| *root)
+                .collect::<Vec<_>>(),
+            [
+                "shared/ksuuids.h",
+                "shared/transportsettingcommon.h",
+                "um/d3d9helper.h",
+                "um/mpeg2error.h",
+                "um/mshtmlc.h",
+                "um/pbdaerrors.h",
+                "um/rtlsupportapi.h",
+                "um/wab.h",
+                "um/wiamindr.h",
+                "um/winsock.h",
+                "um/wmsysprf.h",
+                "um/wsdapi.h",
+            ]
+        );
+        assert_eq!(
+            COVERAGE_UNPRODUCTIVE_ALLOWLIST
+                .iter()
+                .filter(|(_, _, expected_visit, _)| !*expected_visit)
+                .count(),
+            23
+        );
         for (label, input, expected_visit, reason) in COVERAGE_UNPRODUCTIVE_ALLOWLIST {
-            assert!(!expected_visit, "{label}");
             assert!(!reason.is_empty(), "{label}");
             let root = source_plan
                 .roots
@@ -3937,6 +4041,20 @@ mod tests {
                 root.owned_inputs
                     .iter()
                     .any(|owner| owner.name().eq_ignore_ascii_case(input)),
+                "{label}"
+            );
+            let input = [
+                AuthorityInput::Aggregate,
+                AuthorityInput::Satellite,
+                AuthorityInput::PsApiV1,
+                AuthorityInput::PsApiV2,
+            ]
+            .into_iter()
+            .find(|candidate| candidate.name().eq_ignore_ascii_case(input))
+            .unwrap();
+            assert_eq!(
+                !*expected_visit,
+                is_intentionally_unvisited_root(label, input),
                 "{label}"
             );
         }
