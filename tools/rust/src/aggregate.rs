@@ -7,6 +7,23 @@ const GLOBAL_DEFINES: &str = "\
 #define QCC_OS_GROUP_WINDOWS
 ";
 
+const AGGREGATE_FIRST_INCLUDE_DEFINES: &str = "\
+#define WSMAN_API_VERSION_1_1
+#define GDIPVER 0x0110
+#define _DDKIMM_H_
+#define __STREAMS__
+#define DEFINE_DEVSVCGUID DEFINE_GUID
+#define DEFINE_DEVSVCPROPKEY DEFINE_PROPERTYKEY
+#ifndef ARGUMENT_PRESENT
+#define ARGUMENT_PRESENT(ArgumentPointer) ((CHAR *)((ULONG_PTR)(ArgumentPointer)) != (CHAR *)(NULL))
+#endif
+";
+
+const SATELLITE_FIRST_INCLUDE_DEFINES: &str = "\
+#define FE_IME
+#define DEFINE_CONSOLEV2_PROPERTIES
+";
+
 const COMPATIBILITY_SHIMS: &str = r#"
 typedef NTSTATUS* PNTSTATUS;
 typedef LPVOID* PPVOID;
@@ -15,24 +32,54 @@ typedef struct _OLD_LARGE_INTEGER {
     ULONG LowPart;
     LONG HighPart;
 } OLD_LARGE_INTEGER, *POLD_LARGE_INTEGER;
-#define _NTDEF_
 "#;
 
 const AUTHORITY_SATELLITE_PARTITIONS: &[&str] = &[
+    "Console",
     "DirectDraw",
     "Display",
-    "HtmlHelp",
     "IO",
     "MsChap",
     "Printing",
+    "Search",
 ];
 
-const AUTHORITY_SATELLITE_HEADERS: &[&str] = &["vfw.h", "xamlOM.h"];
+const AUTHORITY_SATELLITE_HEADERS: &[&str] = &[
+    "advpub.h",
+    "cfgmgr32.h",
+    "ntddcdvd.h",
+    "srpapi.h",
+    "tbs.h",
+    "vfw.h",
+    "xamlOM.h",
+];
 
 pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<String, String> {
-    let mut source = String::from(GLOBAL_DEFINES);
+    let mut source = format!("{GLOBAL_DEFINES}{AGGREGATE_FIRST_INCLUDE_DEFINES}");
     source.push_str(prelude);
+    source.push_str(COMPATIBILITY_SHIMS);
     append_security_seed(&mut source);
+    append_direct_draw_prerequisites(&mut source);
+    append_winrm(&mut source);
+    append_gdiplus(&mut source);
+    append_dxcore(&mut source);
+    append_html_help(&mut source);
+    append_active_directory(&mut source);
+    append_authorization_ui(&mut source);
+    append_devinst(&mut source);
+    append_fax(&mut source);
+    append_http_server(&mut source);
+    append_tapi3(&mut source);
+    append_com(&mut source);
+    append_vss(&mut source);
+    append_input_ime(&mut source);
+    append_hid(&mut source);
+    append_nfc(&mut source);
+    append_mstv(&mut source);
+    append_kernel_streaming(&mut source);
+    append_audio(&mut source);
+    append_device_services(&mut source);
+    append_sec_bitomet(&mut source);
 
     append_headers(
         &mut source,
@@ -48,10 +95,11 @@ pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<St
     append_identity(&mut source);
     append_internet_explorer(&mut source);
     append_ip_helper(&mut source);
-    append_direct_draw_prerequisites(&mut source);
     append_d3d9_prerequisites(&mut source);
-    append_direct_show(&mut source);
+    append_direct3d(&mut source);
     append_media_foundation(&mut source);
+    append_direct_show(&mut source);
+    append_speech(&mut source);
     append_rras(&mut source);
     append_winprog(&mut source);
     Ok(source)
@@ -65,6 +113,17 @@ pub fn append_threading_input(source: &mut String, threading_input: &Path) -> Re
     source.push_str(&format!("#include \"{threading_input}\"\n"));
     source.push_str("#pragma pop_macro(\"ProcThreadAttributeValue\")\n");
     source.push_str("#pragma pop_macro(\"MakeProcThreadAttributeConst\")\n");
+    Ok(())
+}
+
+pub fn append_kernel_input(source: &mut String, kernel_header: &Path) -> Result<(), String> {
+    let kernel_header = quoted_include_path(kernel_header, "Kernel aggregate header")?;
+
+    source.push_str("\n#pragma push_macro(\"_NTDEF_\")\n#undef _NTDEF_\n");
+    source.push_str("#define WIN32METADATA_NTDEF_UNIQUE_ONLY\n");
+    source.push_str(&format!("#include \"{kernel_header}\"\n"));
+    source.push_str("#undef WIN32METADATA_NTDEF_UNIQUE_ONLY\n");
+    source.push_str("#pragma pop_macro(\"_NTDEF_\")\n");
     Ok(())
 }
 
@@ -85,20 +144,20 @@ fn quoted_include_path(path: &Path, description: &str) -> Result<String, String>
 }
 
 pub fn satellite_source(prelude: &str) -> String {
-    let mut source = format!("{GLOBAL_DEFINES}{prelude}");
+    let mut source = format!("{GLOBAL_DEFINES}{SATELLITE_FIRST_INCLUDE_DEFINES}{prelude}");
+    append_console(&mut source);
+    append_cfgmgr_satellite(&mut source);
+    append_storage_satellite(&mut source);
     append_direct_draw_prerequisites(&mut source);
+    append_audio_satellite(&mut source);
     append_headers(&mut source, &["dxmini.h", "dmemmgr.h"]);
     append_d3d9_prerequisites(&mut source);
-    append_headers(
-        &mut source,
-        &["winnt.h", "winerror.h", "dxcore.h", "dxcore_interface.h"],
-    );
     append_display(&mut source);
-    append_html_help(&mut source);
     append_io(&mut source);
     append_extern_c_headers(&mut source, &["mschapp.h"]);
     append_printing(&mut source);
-    append_headers(&mut source, &["mmreg.h"]);
+    append_multimedia(&mut source);
+    append_search(&mut source);
     source
 }
 
@@ -136,6 +195,7 @@ pub fn is_authority_satellite_header(path: &Path) -> bool {
             })
 }
 
+#[cfg(test)]
 pub fn is_psapi_header(path: &Path) -> bool {
     path.file_name()
         .and_then(|name| name.to_str())
@@ -175,11 +235,463 @@ fn append_security_seed(source: &mut String) {
         "\n#define PIO_APC_ROUTINE_DEFINED\n\
          #include <winternl.h>\n\
          #include <icmpapi.h>\n\
-         #undef PIO_APC_ROUTINE_DEFINED\n",
+         #undef PIO_APC_ROUTINE_DEFINED\n\
+         #ifndef _NTDEF_\n\
+         #define _NTDEF_\n\
+         #endif\n",
     );
-    source.push_str(COMPATIBILITY_SHIMS);
     append_headers(source, &["NTSecAPI.h", "sspi.h", "wincred.h", "NTSecPKG.h"]);
     append_extern_c_headers(source, &["schannel.h"]);
+}
+
+fn append_console(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "propkeydef.h",
+            "wincon.h",
+            "winconp.h",
+            "consoleapi.h",
+            "consoleapi2.h",
+            "consoleapi3.h",
+            "consoleapis.h",
+            "wincontypes.h",
+        ],
+    );
+    source.push_str("\n#undef DEFINE_CONSOLEV2_PROPERTIES\n#undef FE_IME\n");
+}
+
+fn append_winrm(source: &mut String) {
+    append_headers(source, &["wsman.h", "wsmandisp.h", "wsmerror.h"]);
+    source.push_str("\n#undef WSMAN_API_VERSION_1_1\n");
+}
+
+fn append_gdiplus(source: &mut String) {
+    append_headers(source, &["ddraw.h", "gdiplus.h"]);
+    source.push_str("\n#undef GDIPVER\n");
+}
+
+fn append_dxcore(source: &mut String) {
+    append_headers(
+        source,
+        &["winnt.h", "winerror.h", "dxcore.h", "dxcore_interface.h"],
+    );
+}
+
+fn append_active_directory(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "ntsecapi.h",
+            "shlobj_core.h",
+            "cmnquery.h",
+            "dsclient.h",
+            "objsel.h",
+            "dsquery.h",
+            "dsadmin.h",
+            "adsprop.h",
+            "ntdsapi.h",
+            "schedule.h",
+            "dsrole.h",
+            "dsparse.h",
+            "DsGetDC.h",
+            "iads.h",
+            "adssts.h",
+            "adshlp.h",
+            "ntdsbmsg.h",
+        ],
+    );
+    source.push_str("\n#undef hrError\n");
+}
+
+fn append_in_out_headers(source: &mut String, headers: &[&str]) {
+    source.push_str(
+        "\n#pragma push_macro(\"IN\")\n\
+         #pragma push_macro(\"OUT\")\n\
+         #undef IN\n\
+         #undef OUT\n\
+         #define IN _In_\n\
+         #define OUT _Out_\n",
+    );
+    append_headers(source, headers);
+    source.push_str("\n#pragma pop_macro(\"OUT\")\n#pragma pop_macro(\"IN\")\n");
+}
+
+fn append_authorization_ui(source: &mut String) {
+    append_in_out_headers(
+        source,
+        &[
+            "accctrl.h",
+            "adtgen.h",
+            "authz.h",
+            "azroles.h",
+            "aclui.h",
+            "aclapi.h",
+            "sddl.h",
+        ],
+    );
+}
+
+fn append_devinst(source: &mut String) {
+    source.push_str("\n#pragma push_macro(\"UNICODE\")\n#define UNICODE\n");
+    append_headers(
+        source,
+        &[
+            "setupapi.h",
+            "cfg.h",
+            "newdev.h",
+            "devguid.h",
+            "infstr.h",
+            "wdmguid.h",
+        ],
+    );
+    source.push_str("\n#pragma pop_macro(\"UNICODE\")\n");
+}
+
+fn append_fax(source: &mut String) {
+    source.push_str("\n#pragma push_macro(\"WIN32\")\n#define WIN32 1\n");
+    append_in_out_headers(
+        source,
+        &[
+            "winfax.h",
+            "faxdev.h",
+            "faxcomex.h",
+            "faxroute.h",
+            "faxext.h",
+            "fxsutility.h",
+            "faxmmc.h",
+        ],
+    );
+    source.push_str("\n#pragma pop_macro(\"WIN32\")\n");
+}
+
+fn append_http_server(source: &mut String) {
+    append_in_out_headers(source, &["WinSock2.h", "http.h", "winhttp.h"]);
+}
+
+fn append_tapi3(source: &mut String) {
+    source.push_str("\n#pragma push_macro(\"WIN32\")\n#define WIN32 1\n");
+    append_headers(
+        source,
+        &[
+            "tapi.h",
+            "TSPI.h",
+            "tapi3err.h",
+            "tapi3.h",
+            "tapi3if.h",
+            "tapi3ds.h",
+            "rend.h",
+            "mdhcp.h",
+            "wabdefs.h",
+            "tnef.h",
+        ],
+    );
+    source.push_str("\n#undef cbDisplayName\n#undef cbEmailName\n#undef cbSeverName\n");
+    source.push_str("\n#pragma pop_macro(\"WIN32\")\n");
+}
+
+fn append_com(source: &mut String) {
+    source.push_str(
+        "\n#pragma push_macro(\"NONAMELESSUNION\")\n\
+         #pragma push_macro(\"USE_COM_CONTEXT_DEF\")\n\
+         #pragma push_macro(\"IN\")\n\
+         #pragma push_macro(\"OUT\")\n\
+         #undef NONAMELESSUNION\n\
+         #undef USE_COM_CONTEXT_DEF\n\
+         #undef IN\n\
+         #undef OUT\n\
+         #define NONAMELESSUNION\n\
+         #define USE_COM_CONTEXT_DEF\n\
+         #define IN _In_\n\
+         #define OUT _Out_\n",
+    );
+    append_headers(
+        source,
+        &[
+            "wtypes.h",
+            "olectl.h",
+            "vbinterf.h",
+            "ocidl.h",
+            "docobj.h",
+            "oleidl.h",
+            "objidl.h",
+            "oledlg.h",
+            "ole2.h",
+            "objbase.h",
+            "comcat.h",
+            "ctxtcall.h",
+        ],
+    );
+    source.push_str("\n#pragma pop_macro(\"OUT\")\n#pragma pop_macro(\"IN\")\n");
+    source.push_str(
+        "#pragma pop_macro(\"USE_COM_CONTEXT_DEF\")\n\
+         #pragma pop_macro(\"NONAMELESSUNION\")\n",
+    );
+}
+
+fn append_vss(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "objbase.h",
+            "ObjIdl.h",
+            "combaseapi.h",
+            "vdssys.h",
+            "vss.h",
+            "vswriter.h",
+            "vsmgmt.h",
+            "vsbackup.h",
+            "vsadmin.h",
+            "vsprov.h",
+            "vsserror.h",
+        ],
+    );
+}
+
+fn append_search(source: &mut String) {
+    source.push_str(
+        "\n#pragma push_macro(\"QUERY_H_RESTRICTION_PERMISSIVE\")\n\
+         #pragma push_macro(\"oledb_deprecated\")\n\
+         #undef QUERY_H_RESTRICTION_PERMISSIVE\n\
+         #undef oledb_deprecated\n\
+         #define QUERY_H_RESTRICTION_PERMISSIVE 1\n\
+         #define oledb_deprecated\n",
+    );
+    append_headers(
+        source,
+        &[
+            "filter.h",
+            "indexsrv.h",
+            "ocidl.h",
+            "searchapi.h",
+            "shobjidl_core.h",
+            "structuredquerycondition.h",
+            "structuredquery.h",
+            "filtereg.h",
+            "search.h",
+            "subsmgr.h",
+            "msdadc.h",
+            "msdaguid.h",
+            "msdaora.h",
+            "msdaosp.h",
+            "msdasc.h",
+            "msdasql_interfaces.h",
+            "msdasql.h",
+            "msdatsrc.h",
+            "msdshape.h",
+            "odbcinst.h",
+            "odbcss.h",
+            "oledbdep.h",
+            "oledberr.h",
+            "persist.h",
+            "query.h",
+            "simpdata.h",
+            "sql.h",
+            "sqlext.h",
+            "sqloledb.h",
+            "sqlspi.h",
+            "sqltypes.h",
+            "sqlucode.h",
+            "stgprop.h",
+            "windowssearcherrors.h",
+        ],
+    );
+    source.push_str(
+        "\n#pragma pop_macro(\"oledb_deprecated\")\n\
+         #pragma pop_macro(\"QUERY_H_RESTRICTION_PERMISSIVE\")\n",
+    );
+}
+
+fn append_speech(source: &mut String) {
+    source.push_str(
+        "\n#pragma push_macro(\"_SAPI_VER\")\n\
+         #undef _SAPI_VER\n\
+         #define _SAPI_VER 0x053\n",
+    );
+    append_headers(source, &["sapiddk.h", "sperror.h"]);
+    source.push_str("\n#pragma pop_macro(\"_SAPI_VER\")\n");
+}
+
+fn append_input_ime(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "winbase.h",
+            "winnt.h",
+            "winuser.h",
+            "msime.h",
+            "imm.h",
+            "immdev.h",
+            "imepad.h",
+            "msimeapi.h",
+            "ime_cmodes.h",
+            "dimm.h",
+        ],
+    );
+    source.push_str("\n#undef _DDKIMM_H_\n");
+}
+
+fn append_hid(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "mmsystem.h",
+            "dinput.h",
+            "dinputd.h",
+            "ntddkbd.h",
+            "ntddmou.h",
+            "hidsdi.h",
+            "hidusage.h",
+            "hidpi.h",
+            "hidclass.h",
+            "gpiobuttontypes.h",
+        ],
+    );
+}
+
+fn append_nfc(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "devpropdef.h",
+            "winioctl.h",
+            "nfcsedev.h",
+            "nfcdtadev.h",
+            "nfcradiodev.h",
+        ],
+    );
+}
+
+fn append_mstv(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "ks.h",
+            "ksmedia.h",
+            "tuner.h",
+            "segment.h",
+            "msvidctl.h",
+            "regbag.h",
+            "bdatypes.h",
+            "sbe.h",
+            "encdec.h",
+            "tvratings.h",
+            "mpeg2data.h",
+            "atscpsipparser.h",
+            "dsattrib.h",
+            "bdaiface.h",
+            "bdatif.h",
+            "mpeg2psiparser.h",
+            "dvbsiparser.h",
+            "strmif.h",
+            "mpeg2structs.h",
+            "bdamedia.h",
+            "mpeg2bits.h",
+            "atsmedia.h",
+        ],
+    );
+}
+
+fn append_kernel_streaming(source: &mut String) {
+    append_headers(
+        source,
+        &["commdlg.h", "ks.h", "ksmedia.h", "strmif.h", "ksproxy.h"],
+    );
+    source.push_str("\n#undef __STREAMS__\n");
+}
+
+fn append_audio(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "mmsystem.h",
+            "ks.h",
+            "ksmedia.h",
+            "spatialaudiohrtf.h",
+            "spatialaudioclient.h",
+            "mmeapi.h",
+            "mmdeviceapi.h",
+            "audioclient.h",
+            "audiopolicy.h",
+            "spatialaudiometadata.h",
+            "audiosessiontypes.h",
+            "functiondiscoverykeys_devpkey.h",
+            "audioclientactivationparams.h",
+            "audiostatemonitorapi.h",
+            "msacm.h",
+            "playsoundapi.h",
+            "msacmdrv.h",
+        ],
+    );
+}
+
+fn append_device_services(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "propkeydef.h",
+            "devpropdef.h",
+            "icontact.h",
+            "contactaggregation.h",
+            "icontactproperties.h",
+            "portabledevice.h",
+            "portabledevicetypes.h",
+            "portabledeviceapi.h",
+            "portabledeviceconnectapi.h",
+            "wpdmtpextensions.h",
+            "wpdshellextension.h",
+            "bridgedeviceservice.h",
+            "deviceservices.h",
+            "calendardeviceservice.h",
+            "dmprocessxmlfiltered.h",
+            "hintsdeviceservice.h",
+            "messagedeviceservice.h",
+            "metadatadeviceservice.h",
+            "notesdeviceservice.h",
+            "radiomgr.h",
+            "statusdeviceservice.h",
+            "syncdeviceservice.h",
+            "taskdeviceservice.h",
+            "contactdeviceservice.h",
+            "ringtonedeviceservice.h",
+            "anchorsyncdeviceservice.h",
+            "fullenumsyncdeviceservice.h",
+        ],
+    );
+    source.push_str("\n#undef DEFINE_DEVSVCPROPKEY\n#undef DEFINE_DEVSVCGUID\n");
+}
+
+fn append_sec_bitomet(source: &mut String) {
+    append_headers(
+        source,
+        &[
+            "winbio.h",
+            "winbio_types.h",
+            "winbio_err.h",
+            "winbio_adapter.h",
+            "winbio_ioctl.h",
+        ],
+    );
+    source.push_str("\n#undef ARGUMENT_PRESENT\n");
+}
+
+fn append_storage_satellite(source: &mut String) {
+    append_headers(source, &["ntddstor.h"]);
+    append_headers(source, &["ntddcdrm.h", "ntddcdvd.h", "ntddtape.h"]);
+}
+
+fn append_cfgmgr_satellite(source: &mut String) {
+    source.push_str("\n#pragma push_macro(\"UNICODE\")\n#define UNICODE\n");
+    append_headers(source, &["cfgmgr32.h", "srpapi.h", "advpub.h"]);
+    source.push_str("\n#pragma pop_macro(\"UNICODE\")\n");
+}
+
+fn append_audio_satellite(source: &mut String) {
+    source.push_str("\n#pragma push_macro(\"_IKsControl_\")\n#define _IKsControl_\n");
+    append_headers(source, &["ks.h", "ksmedia.h"]);
+    source.push_str("\n#define _KS_\n");
+    append_headers(source, &["devicetopology.h", "endpointvolume.h"]);
+    source.push_str("\n#pragma pop_macro(\"_IKsControl_\")\n");
 }
 
 fn append_direct_draw_prerequisites(source: &mut String) {
@@ -193,9 +705,49 @@ fn append_d3d9_prerequisites(source: &mut String) {
     append_headers(source, &["d3d9.h", "d3d9types.h", "d3d9caps.h"]);
 }
 
+fn append_direct3d(source: &mut String) {
+    source.push_str("\n#define D3D10_NO_HELPERS\n");
+    append_headers(
+        source,
+        &[
+            "d3d10_1.h",
+            "d3d10.h",
+            "d3d10sdklayers.h",
+            "d3d10shader.h",
+            "d3d10effect.h",
+            "d3d10misc.h",
+            "d3d10_1shader.h",
+        ],
+    );
+    source.push_str("\n#undef D3D10_NO_HELPERS\n#define D3D11_NO_HELPERS\n");
+    append_headers(
+        source,
+        &[
+            "d3dcommon.h",
+            "d3dshadercacheregistration.h",
+            "d3d11.h",
+            "d3d11_1.h",
+            "d3d11_2.h",
+            "d3d11_3.h",
+            "d3d11_4.h",
+            "d3d11sdklayers.h",
+            "d3d11shader.h",
+            "d3d11shadertracing.h",
+            "d3dcsx.h",
+            "d3d11on12.h",
+            "d3d9on12.h",
+        ],
+    );
+    source.push_str("\n#undef D3D11_NO_HELPERS\n");
+}
+
 fn append_display(source: &mut String) {
     source.push_str(
-        "\n#define IN _In_\n\
+        "\n#pragma push_macro(\"IN\")\n\
+         #pragma push_macro(\"OUT\")\n\
+         #undef IN\n\
+         #undef OUT\n\
+         #define IN _In_\n\
          #define OUT _Out_\n",
     );
     append_headers(
@@ -203,6 +755,7 @@ fn append_display(source: &mut String) {
         &["winnt.h", "winddi.h", "devpropdef.h", "ntddvdeo.h"],
     );
     source.push_str("\n#define USERMODE_DRIVER\n#include <winddi.h>\n#undef USERMODE_DRIVER\n");
+    source.push_str("\n#pragma pop_macro(\"OUT\")\n#pragma pop_macro(\"IN\")\n");
 }
 
 fn append_html_help(source: &mut String) {
@@ -361,7 +914,18 @@ fn append_direct_show(source: &mut String) {
             "mmreg.h",
             "dvdmedia.h",
             "dvdevcod.h",
-            "dshow.h",
+        ],
+    );
+    source.push_str(
+        "\n#pragma push_macro(\"OUR_GUID_ENTRY\")\n\
+         #undef OUR_GUID_ENTRY\n\
+         #define OUR_GUID_ENTRY(...)\n\
+         #include <dshow.h>\n\
+         #pragma pop_macro(\"OUR_GUID_ENTRY\")\n",
+    );
+    append_headers(
+        source,
+        &[
             "audevcod.h",
             "dxva.h",
             "vfwmsgs.h",
@@ -430,6 +994,48 @@ fn append_media_foundation(source: &mut String) {
             "playto.h",
         ],
     );
+}
+
+fn append_multimedia(source: &mut String) {
+    source.push_str(
+        "\n#pragma push_macro(\"MMNOJOYDEV\")\n\
+         #undef MMNOJOYDEV\n\
+         #define MMNOJOYDEV\n",
+    );
+    append_headers(
+        source,
+        &[
+            "commdlg.h",
+            "ks.h",
+            "ksmedia.h",
+            "combaseapi.h",
+            "mmeapi.h",
+            "mmreg.h",
+            "mmsystem.h",
+            "digitalv.h",
+            "avifmt.h",
+        ],
+    );
+    // VFW repeats AVIFMT without sharing avifmt.h's include guard.
+    source.push_str("\n#define NOAVIFMT\n#include <vfw.h>\n#undef NOAVIFMT\n");
+    append_headers(
+        source,
+        &[
+            "joystickapi.h",
+            "mmddk.h",
+            "mmiscapi.h",
+            "timeapi.h",
+            "mciapi.h",
+            "minwindef.h",
+            "corecrt_io.h",
+            "asferr.h",
+            "mciavi.h",
+            "msacmdlg.h",
+            "nserror.h",
+            "vfwext.h",
+        ],
+    );
+    source.push_str("\n#pragma pop_macro(\"MMNOJOYDEV\")\n");
 }
 
 fn append_printing(source: &mut String) {
@@ -504,7 +1110,6 @@ fn append_winprog(source: &mut String) {
     append_headers(
         source,
         &[
-            "advpub.h",
             "ime.h",
             "winnls32.h",
             "exdisp.h",
@@ -563,15 +1168,48 @@ mod tests {
             Path::new(r"C:\repo\generation\WinSDK\Partitions\Threading\main.cpp"),
         )
         .unwrap();
+        append_kernel_input(
+            &mut main,
+            Path::new(r"C:\repo\generation\WinSDK\RecompiledIdlHeaders\shared\ntdef.h"),
+        )
+        .unwrap();
         let satellite = satellite_source("#define SECURITY_WIN32\n#include <windows.h>\n");
 
         let windows = main.find("#include <windows.h>").unwrap();
+        let satellite_windows = satellite.find("#include <windows.h>").unwrap();
         assert!(
             main.find("MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS")
                 .unwrap()
                 < windows
         );
         assert!(main.find("CERT_CHAIN_PARA_HAS_EXTRA_FIELDS").unwrap() < windows);
+        assert!(satellite.find("#define FE_IME").unwrap() < satellite_windows);
+        assert!(
+            satellite
+                .find("#define DEFINE_CONSOLEV2_PROPERTIES")
+                .unwrap()
+                < satellite_windows
+        );
+        assert!(main.find("#define WSMAN_API_VERSION_1_1").unwrap() < windows);
+        assert!(main.find("#define GDIPVER 0x0110").unwrap() < windows);
+        let console = satellite.find("#include <consoleapis.h>").unwrap();
+        let restore_console = satellite
+            .find("#undef DEFINE_CONSOLEV2_PROPERTIES")
+            .unwrap();
+        assert!(satellite_windows < console && console < restore_console);
+        let wsman = main.find("#include <wsman.h>").unwrap();
+        let wsman_disp = main.find("#include <wsmandisp.h>").unwrap();
+        let wsman_error = main.find("#include <wsmerror.h>").unwrap();
+        let restore_wsman = main.find("#undef WSMAN_API_VERSION_1_1").unwrap();
+        assert!(windows < wsman && wsman < wsman_disp && wsman_disp < wsman_error);
+        assert!(wsman_error < restore_wsman);
+        let gdiplus = main.find("#include <gdiplus.h>").unwrap();
+        let restore_gdiplus = main.find("#undef GDIPVER").unwrap();
+        assert!(windows < gdiplus && gdiplus < restore_gdiplus);
+        assert!(
+            restore_gdiplus < main.find("#include <gdipluseffects.h>").unwrap(),
+            "the later DirectShow dependency must not materialize GDI+ roots before the umbrella"
+        );
         assert!(
             main.find("#define SCHANNEL_USE_BLACKLISTS").unwrap()
                 < main.find("#include <schannel.h>").unwrap()
@@ -580,39 +1218,98 @@ mod tests {
             main.find("#define PIO_APC_ROUTINE_DEFINED").unwrap()
                 < main.find("#include <winternl.h>").unwrap()
         );
-        assert!(
-            main.find("#include <winternl.h>").unwrap()
-                < main.find("typedef NTSTATUS* PNTSTATUS").unwrap()
-        );
-        assert!(
-            main.find("typedef NTSTATUS* PNTSTATUS").unwrap()
-                < main.find("#define _NTDEF_").unwrap()
-        );
-        assert!(
-            main.find("#define _NTDEF_").unwrap() < main.find("#include <NTSecAPI.h>").unwrap()
-        );
+        let compatibility = main.find("typedef NTSTATUS* PNTSTATUS").unwrap();
+        assert!(windows < compatibility);
+        assert!(compatibility < main.find("#include <NTSecAPI.h>").unwrap());
+        let ntdef = compatibility + main[compatibility..].find("#define _NTDEF_").unwrap();
+        let ntsecapi = ntdef + main[ntdef..].find("#include <NTSecAPI.h>").unwrap();
+        assert!(compatibility < ntdef && ntdef < ntsecapi);
         assert!(
             main.find("Com.StructuredStorage/manual.h").unwrap()
                 < main.find("Partitions/Threading/main.cpp").unwrap()
         );
+        let threading = main.find("Partitions/Threading/main.cpp").unwrap();
+        let kernel = main.find("RecompiledIdlHeaders/shared/ntdef.h").unwrap();
+        assert!(windows < threading && threading < kernel);
+        assert!(
+            main[..kernel]
+                .rfind("#define WIN32METADATA_NTDEF_UNIQUE_ONLY")
+                .is_some()
+        );
+        assert!(main[kernel..].contains("#pragma pop_macro(\"_NTDEF_\")"));
         assert!(main.contains("#include <strmif.h>"));
         assert!(main.contains("#include <subauth.h>"));
         assert!(main.contains("#include <avifmt.h>"));
         assert!(main.contains("#include <segment.h>"));
+        assert!(main.contains("#include <dxcore.h>"));
+        assert!(main.contains("#include <dxcore_interface.h>"));
+        assert!(!main.contains("#include <query.h>"));
+        assert!(main.contains("#include <sapiddk.h>"));
+        assert!(
+            main.find("#include <dshow.h>").unwrap() < main.find("#include <sapiddk.h>").unwrap()
+        );
+        let com_define = main.find("#define NONAMELESSUNION").unwrap();
+        let com_header = main.find("#include <wtypes.h>").unwrap();
+        let com_restore = main.find("#pragma pop_macro(\"NONAMELESSUNION\")").unwrap();
+        assert!(windows < com_define && com_define < com_header && com_header < com_restore);
+        assert!(main.contains("#include <dimm.h>"));
+        assert!(main.contains("#include <ksproxy.h>"));
+        assert!(main.contains("#include <portabledeviceapi.h>"));
+        assert!(main.contains("#include <vss.h>"));
         assert!(!main.contains("#include <winddi.h>"));
-        assert!(!main.contains("#include <infotech.h>"));
+        assert!(main.contains("#include <infotech.h>"));
+        assert!(!main.contains("#include <consoleapis.h>"));
         assert!(!main.contains("#include <mschapp.h>"));
         assert!(satellite.contains("#include <winddi.h>"));
-        assert!(satellite.contains("#include <infotech.h>"));
+        assert!(!satellite.contains("#include <infotech.h>"));
+        assert!(satellite.contains("#include <consoleapis.h>"));
         assert!(satellite.contains("#include <mschapp.h>"));
+        assert!(satellite.contains("#include <query.h>"));
+        assert!(
+            satellite
+                .find("#define QUERY_H_RESTRICTION_PERMISSIVE 1")
+                .unwrap()
+                < satellite.find("#include <query.h>").unwrap()
+        );
         assert!(satellite.contains("#include <dxmini.h>"));
         assert!(satellite.contains("#include <dmemmgr.h>"));
+        assert!(satellite.contains("#include <ntddstor.h>"));
+        assert!(!satellite.contains("#include <ntddchgr.h>"));
+        assert!(!satellite.contains("#include <ntdddisk.h>"));
+        assert!(satellite.contains("#include <endpointvolume.h>"));
+        assert!(satellite.contains("#include <devicetopology.h>"));
+        assert!(!satellite.contains("#include <dxcore.h>"));
+        assert!(!satellite.contains("#include <dxcore_interface.h>"));
         assert!(!satellite.contains("#include <strmif.h>"));
         assert!(!satellite.contains("#include <subauth.h>"));
-        assert!(!satellite.contains("#include <avifmt.h>"));
+        assert!(satellite.contains("#include <avifmt.h>"));
         assert!(!satellite.contains("#include <segment.h>"));
         assert!(!main.contains("#include <dxmini.h>"));
         assert!(!main.contains("#include <dmemmgr.h>"));
+        let mmreg = satellite.find("#include <mmreg.h>").unwrap();
+        let avifmt = satellite.find("#include <avifmt.h>").unwrap();
+        let no_avifmt = satellite.find("#define NOAVIFMT").unwrap();
+        let vfw = satellite.find("#include <vfw.h>").unwrap();
+        let restore_avifmt = satellite.find("#undef NOAVIFMT").unwrap();
+        assert!(mmreg < avifmt && avifmt < no_avifmt && no_avifmt < vfw && vfw < restore_avifmt);
+        assert_eq!(satellite.matches("#include <vfw.h>").count(), 1);
+        assert_eq!(satellite.matches("#include <winddi.h>").count(), 4);
+        assert!(
+            satellite.find("#define MMNOJOYDEV").unwrap()
+                < satellite.find("#include <joystickapi.h>").unwrap()
+        );
+        assert!(
+            satellite.find("#include <joystickapi.h>").unwrap()
+                < satellite.find("#pragma pop_macro(\"MMNOJOYDEV\")").unwrap()
+        );
+        assert!(
+            satellite.find("#include <ntddstor.h>").unwrap()
+                < satellite.find("#include <ntddcdrm.h>").unwrap()
+        );
+        assert!(
+            satellite.find("#include <ks.h>").unwrap()
+                < satellite.find("#include <devicetopology.h>").unwrap()
+        );
 
         for source in [&main, &satellite] {
             let ddraw = source.find("#include <ddraw.h>").unwrap();
@@ -634,12 +1331,20 @@ mod tests {
             main.find("#include <d3d9helper.h>").unwrap() < main.find("#include <vmr9.h>").unwrap()
         );
         assert!(
-            main.find("#include <vmr9.h>").unwrap() < main.find("#include <dxva2api.h>").unwrap()
+            main.find("#include <uuids.h>").unwrap() < main.find("#include <avifmt.h>").unwrap()
         );
-        assert!(
-            main.find("#include <dxva2api.h>").unwrap()
-                < main.find("#include <dxva2swdev.h>").unwrap()
-        );
+        let d3d10_define = main.find("#define D3D10_NO_HELPERS").unwrap();
+        let d3d10 = main.find("#include <d3d10.h>").unwrap();
+        let d3d10_restore = main.find("#undef D3D10_NO_HELPERS").unwrap();
+        assert!(windows < d3d10_define && d3d10_define < d3d10 && d3d10 < d3d10_restore);
+        let d3d11_define = main.find("#define D3D11_NO_HELPERS").unwrap();
+        let d3d11 = main.find("#include <d3d11.h>").unwrap();
+        let d3d11_restore = main.find("#undef D3D11_NO_HELPERS").unwrap();
+        assert!(d3d10_restore < d3d11_define && d3d11_define < d3d11 && d3d11 < d3d11_restore);
+        let vmr9 = main.find("#include <vmr9.h>").unwrap();
+        let dxva2api = vmr9 + main[vmr9..].find("#include <dxva2api.h>").unwrap();
+        let dxva2swdev = dxva2api + main[dxva2api..].find("#include <dxva2swdev.h>").unwrap();
+        assert!(vmr9 < dxva2api && dxva2api < dxva2swdev);
     }
 
     #[test]
@@ -655,12 +1360,17 @@ mod tests {
         )));
         assert!(uses_satellite_environment("Display"));
         assert!(uses_satellite_environment("DirectDraw"));
+        assert!(uses_satellite_environment("Console"));
         assert!(uses_satellite_environment("mschap"));
+        assert!(!uses_satellite_environment("HtmlHelp"));
         assert!(!uses_satellite_environment("Media.DShow"));
         assert!(is_authority_satellite_header(Path::new(
             r"C:\sdk\um\xamlOM.h"
         )));
         assert!(is_authority_satellite_header(Path::new(r"C:\sdk\um\VFW.H")));
+        assert!(is_authority_satellite_header(Path::new(
+            r"C:\sdk\shared\tbs.h"
+        )));
     }
 
     #[test]

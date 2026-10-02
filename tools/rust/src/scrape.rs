@@ -29,7 +29,9 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
-    "395FAD2C5729FF81F35311F9D591CA05B9EF4FDCE96173FAB9BBCAF8AFB7E811";
+    "A7395A3462909DD391578B2F854A3FA6E448ADC7EF44EF4CB90810E63979CF62";
+const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
+const GUID_RESET: &str = "\n#undef INITGUID\n#include <guiddef.h>\n";
 
 #[derive(Clone, Debug)]
 struct Arch {
@@ -529,7 +531,180 @@ struct LogicalPartitionConfiguration {
 struct CoverageRoot {
     configured: String,
     label: String,
+    owning_inputs: Vec<String>,
 }
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+enum AuthorityInput {
+    Aggregate,
+    Satellite,
+    PsApiV1,
+    PsApiV2,
+}
+
+impl AuthorityInput {
+    fn name(self) -> &'static str {
+        match self {
+            Self::Aggregate => AGGREGATE_INPUT,
+            Self::Satellite => SATELLITE_INPUT,
+            Self::PsApiV1 => PSAPI_V1_INPUT,
+            Self::PsApiV2 => PSAPI_V2_INPUT,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum AuthorityIncludeRole {
+    OwnedRoot,
+    DependencyOnly,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+struct AuthorityIncludeSite {
+    role: AuthorityIncludeRole,
+    review_reason: &'static str,
+}
+
+#[derive(Clone, Debug)]
+struct AuthorityPhysicalRoot {
+    path: PathBuf,
+    label: String,
+    owned_inputs: BTreeSet<AuthorityInput>,
+}
+
+#[derive(Clone, Debug)]
+struct AuthorityRootPlan {
+    roots: BTreeMap<crate::partition::WindowsPathIdentity, AuthorityPhysicalRoot>,
+    owner_inputs: BTreeMap<(String, crate::partition::WindowsPathIdentity), AuthorityInput>,
+}
+
+#[derive(Clone, Debug)]
+struct AuthoritySourcePlan {
+    roots: AuthorityRootPlan,
+    sources: BTreeMap<AuthorityInput, String>,
+    include_sites:
+        BTreeMap<(crate::partition::WindowsPathIdentity, AuthorityInput), AuthorityIncludeSite>,
+}
+
+#[derive(Clone, Copy)]
+struct SharedRootOwnerInput {
+    path: &'static str,
+    partition: &'static str,
+    input: AuthorityInput,
+}
+
+// Keep the seven non-PSAPI overlap decisions isolated until the grouped legacy-owner
+// audit can update this exact surface.
+const SHARED_ROOT_OWNER_INPUTS: &[SharedRootOwnerInput] = &[
+    SharedRootOwnerInput {
+        path: "shared/ntddstor.h",
+        partition: "Ioctl",
+        input: AuthorityInput::Satellite,
+    },
+    SharedRootOwnerInput {
+        path: "shared/uuids.h",
+        partition: "Mf",
+        input: AuthorityInput::Aggregate,
+    },
+    SharedRootOwnerInput {
+        path: "um/audioendpoints.h",
+        partition: "Audio",
+        input: AuthorityInput::Aggregate,
+    },
+    SharedRootOwnerInput {
+        path: "um/audioendpoints.h",
+        partition: "Audio.Endpoints",
+        input: AuthorityInput::Aggregate,
+    },
+    SharedRootOwnerInput {
+        path: "um/dxcore.h",
+        partition: "DXCore",
+        input: AuthorityInput::Aggregate,
+    },
+    SharedRootOwnerInput {
+        path: "um/dxcore_interface.h",
+        partition: "DXCore",
+        input: AuthorityInput::Aggregate,
+    },
+    SharedRootOwnerInput {
+        path: "um/endpointvolume.h",
+        partition: "Audio",
+        input: AuthorityInput::Satellite,
+    },
+    SharedRootOwnerInput {
+        path: "um/endpointvolume.h",
+        partition: "Audio.Endpoints",
+        input: AuthorityInput::Satellite,
+    },
+    SharedRootOwnerInput {
+        path: "um/idispids.h",
+        partition: "InternetExplorer",
+        input: AuthorityInput::Aggregate,
+    },
+];
+
+struct HeaderPolicyOverrideContract {
+    path: &'static str,
+    default_partition: &'static str,
+    overrides: &'static [(&'static str, &'static str)],
+}
+
+const HEADER_POLICY_OVERRIDE_CONTRACTS: &[HeaderPolicyOverrideContract] = &[
+    HeaderPolicyOverrideContract {
+        path: "shared/ntddstor.h",
+        default_partition: "Ioctl",
+        overrides: &[("STORAGE_BUS_TYPE", "Fs")],
+    },
+    HeaderPolicyOverrideContract {
+        path: "um/audioendpoints.h",
+        default_partition: "Audio.Endpoints",
+        overrides: &[("ENDPOINT_FORMAT_RESET_MIX_ONLY", "Audio")],
+    },
+    HeaderPolicyOverrideContract {
+        path: "um/endpointvolume.h",
+        default_partition: "Audio.Endpoints",
+        overrides: &[
+            ("AUDIO_VOLUME_NOTIFICATION_DATA", "Audio"),
+            ("ENDPOINT_HARDWARE_SUPPORT_VOLUME", "Audio"),
+            ("ENDPOINT_HARDWARE_SUPPORT_MUTE", "Audio"),
+            ("ENDPOINT_HARDWARE_SUPPORT_METER", "Audio"),
+        ],
+    },
+];
+
+const AGGREGATE_TRANSITIVE_ROOTS: &[(&str, &str)] = &[
+    ("gdiplusenums.h", "um/gdiplusenums.h"),
+    ("gdiplustypes.h", "um/gdiplustypes.h"),
+    ("gdiplusinit.h", "um/gdiplusinit.h"),
+    ("gdipluscolor.h", "um/gdipluscolor.h"),
+    ("gdipluscolormatrix.h", "um/gdipluscolormatrix.h"),
+    ("gdiplusgpstubs.h", "um/gdiplusgpstubs.h"),
+    ("gdiplusimaging.h", "um/gdiplusimaging.h"),
+    ("gdiplusmetaheader.h", "um/gdiplusmetaheader.h"),
+    ("gdipluspixelformats.h", "um/gdipluspixelformats.h"),
+    ("gdipluseffects.h", "um/gdipluseffects.h"),
+    ("gdiplusflat.h", "um/gdiplusflat.h"),
+    ("gdiplusmem.h", "um/gdiplusmem.h"),
+    ("devpkey.h", "shared/devpkey.h"),
+    ("ksuuids.h", "shared/ksuuids.h"),
+    ("uuids.h", "shared/uuids.h"),
+];
+
+const REENTRANT_AUTHORITY_HEADERS: &[&str] = &["winddi.h"];
+
+const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[(
+    "um/cellularapi_oem.h",
+    AGGREGATE_INPUT,
+    false,
+    "the pinned SDK omits imported RilAPITypes.h; the legacy source also skips this header",
+)];
+
+const PSAPI_V1_SYNTHESIZED_CONSTANTS: &[&str] = &[
+    "LIST_MODULES_DEFAULT",
+    "LIST_MODULES_32BIT",
+    "LIST_MODULES_64BIT",
+    "LIST_MODULES_ALL",
+];
 
 #[derive(Clone)]
 enum ScrapeInputs {
@@ -593,6 +768,410 @@ fn apply_library_overrides(libraries: &mut LibraryMap) -> Result<(), String> {
         libraries.set_library(entry.symbol, entry.corrected_library);
     }
     Ok(())
+}
+
+fn source_include_name(line: &str) -> Option<&str> {
+    let include = line.trim().strip_prefix("#include")?.trim();
+    let closing = match include.as_bytes().first()? {
+        b'<' => b'>',
+        b'"' => b'"',
+        _ => return None,
+    };
+    let end = include.as_bytes()[1..]
+        .iter()
+        .position(|candidate| *candidate == closing)?
+        + 2;
+    Some(&include[1..end - 1])
+}
+
+fn source_file_name(path: &str) -> &str {
+    path.rsplit(['/', '\\']).next().unwrap_or(path)
+}
+
+fn resolve_source_header(header: &str, include_dirs: &[PathBuf]) -> Option<PathBuf> {
+    let path = Path::new(header);
+    if path.is_absolute() && path.is_file() {
+        return Some(path.to_path_buf());
+    }
+    include_dirs
+        .iter()
+        .map(|directory| directory.join(path))
+        .find(|candidate| candidate.is_file())
+}
+
+fn shared_root_owner_input(
+    partition: &str,
+    inventory_path: &str,
+) -> Result<Option<AuthorityInput>, String> {
+    let matching_path = SHARED_ROOT_OWNER_INPUTS
+        .iter()
+        .filter(|entry| entry.path.eq_ignore_ascii_case(inventory_path))
+        .collect::<Vec<_>>();
+    if matching_path.is_empty() {
+        return Ok(None);
+    }
+    matching_path
+        .into_iter()
+        .find(|entry| entry.partition.eq_ignore_ascii_case(partition))
+        .map(|entry| Some(entry.input))
+        .ok_or_else(|| {
+            format!(
+                "shared authority root `{inventory_path}` has no reviewed input assignment for `{partition}`"
+            )
+        })
+}
+
+fn authority_owner_input(
+    partition: &str,
+    path: &Path,
+    inventory_path: &str,
+) -> Result<AuthorityInput, String> {
+    match partition {
+        "PsApi1" => return Ok(AuthorityInput::PsApiV1),
+        "PsApi2" => return Ok(AuthorityInput::PsApiV2),
+        _ => {}
+    }
+    if let Some(input) = shared_root_owner_input(partition, inventory_path)? {
+        return Ok(input);
+    }
+    Ok(
+        if crate::aggregate::uses_satellite_environment(partition)
+            || crate::aggregate::is_authority_satellite_header(path)
+        {
+            AuthorityInput::Satellite
+        } else {
+            AuthorityInput::Aggregate
+        },
+    )
+}
+
+fn build_authority_root_plan(
+    traversal: &crate::partition::TraversalPolicy,
+) -> Result<AuthorityRootPlan, String> {
+    let mut result = AuthorityRootPlan {
+        roots: BTreeMap::new(),
+        owner_inputs: BTreeMap::new(),
+    };
+
+    for partition in &traversal.partitions {
+        let mut add = |path: &Path,
+                       canonical_path: &crate::partition::WindowsPathIdentity,
+                       inventory_path: &str|
+         -> Result<(), String> {
+            let input = authority_owner_input(&partition.identity, path, inventory_path)?;
+            let root = result
+                .roots
+                .entry(canonical_path.clone())
+                .or_insert_with(|| AuthorityPhysicalRoot {
+                    path: path.to_path_buf(),
+                    label: inventory_path.to_string(),
+                    owned_inputs: BTreeSet::new(),
+                });
+            if root.label != inventory_path {
+                return Err(format!(
+                    "canonical authority root `{canonical_path}` has conflicting labels `{}` and `{inventory_path}`",
+                    root.label
+                ));
+            }
+            root.owned_inputs.insert(input);
+            if let Some(existing) = result
+                .owner_inputs
+                .insert((partition.identity.clone(), canonical_path.clone()), input)
+                && existing != input
+            {
+                return Err(format!(
+                    "logical owner `{}` selected both `{}` and `{}` for `{inventory_path}`",
+                    partition.identity,
+                    existing.name(),
+                    input.name()
+                ));
+            }
+            Ok(())
+        };
+
+        for root in &partition.roots {
+            match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    add(&root.path, &root.canonical_path, &root.inventory_path)?
+                }
+                crate::partition::TraversalRoot::Directory(root) => {
+                    for file in &root.files {
+                        add(&file.path, &file.canonical_path, &file.inventory_path)?;
+                    }
+                }
+                crate::partition::TraversalRoot::Missing(_)
+                | crate::partition::TraversalRoot::Unsupported(_) => {
+                    unreachable!("validated traversal policy is clean")
+                }
+            }
+        }
+    }
+
+    let expected = traversal.canonical_physical_files().len();
+    if result.roots.len() != expected {
+        return Err(format!(
+            "authority root plan contains {} physical roots; expected {expected}",
+            result.roots.len()
+        ));
+    }
+    for root in result.roots.values() {
+        let expected_inputs = if root.label.eq_ignore_ascii_case("um/psapi.h") {
+            BTreeSet::from([AuthorityInput::PsApiV1, AuthorityInput::PsApiV2])
+        } else {
+            let [input] = root.owned_inputs.iter().copied().collect::<Vec<_>>()[..] else {
+                return Err(format!(
+                    "ordinary authority root `{}` selected multiple owning inputs: {:?}",
+                    root.label, root.owned_inputs
+                ));
+            };
+            BTreeSet::from([input])
+        };
+        if root.owned_inputs != expected_inputs {
+            return Err(format!(
+                "authority root `{}` selected owning inputs {:?}; expected {:?}",
+                root.label, root.owned_inputs, expected_inputs
+            ));
+        }
+    }
+    Ok(result)
+}
+
+fn absolutize_authority_source(
+    source: &str,
+    include_dirs: &[PathBuf],
+) -> Result<(String, BTreeMap<String, usize>), String> {
+    let mut result = String::new();
+    let mut includes = BTreeMap::new();
+    for line in source.lines() {
+        if let Some(header) = source_include_name(line)
+            && let Some(path) = resolve_source_header(header, include_dirs)
+        {
+            let path = path_arg(&path, "--include")?;
+            let normalized = normalize_audit_path(&path);
+            let count = includes.entry(normalized).or_insert(0);
+            let reentrant = REENTRANT_AUTHORITY_HEADERS
+                .iter()
+                .any(|candidate| source_file_name(&path).eq_ignore_ascii_case(candidate));
+            if *count == 0 || reentrant {
+                result.push_str(&format!("#include \"{path}\"\n"));
+            }
+            *count += 1;
+        } else {
+            result.push_str(line);
+            result.push('\n');
+        }
+    }
+    Ok((result, includes))
+}
+
+fn append_authority_root(
+    source: &mut String,
+    path: &Path,
+    input: AuthorityInput,
+) -> Result<(), String> {
+    let path = path_arg(path, "--partition-policy-root")?;
+    if source_file_name(&path).eq_ignore_ascii_case("cellularapi_oem.h") {
+        source.push_str(&format!(
+            "\n#if __has_include(\"RilAPITypes.h\")\n#include \"{path}\"\n#endif\n"
+        ));
+    } else {
+        source.push_str(&format!("\n#include \"{path}\"\n"));
+    }
+    if input == AuthorityInput::Satellite {
+        source.push_str(GUID_RESET);
+    }
+    Ok(())
+}
+
+fn build_authority_source_plan(
+    traversal: &crate::partition::TraversalPolicy,
+    include_dirs: &[PathBuf],
+) -> Result<AuthoritySourcePlan, String> {
+    let roots = build_authority_root_plan(traversal)?;
+    let structured_storage = logical_partition(traversal, "Com.StructuredStorage")?;
+    let structured_storage_header = structured_storage
+        .roots
+        .iter()
+        .find_map(|root| match root {
+            crate::partition::TraversalRoot::File(root)
+                if root.requested.replace('\\', "/") == "<PartitionDir>/manual.h" =>
+            {
+                Some(&root.path)
+            }
+            _ => None,
+        })
+        .ok_or_else(|| {
+            "logical partition `Com.StructuredStorage` did not contain `<PartitionDir>/manual.h`"
+                .to_string()
+        })?;
+    let threading_input = &logical_partition(traversal, "Threading")?.input;
+    let kernel_header = logical_partition(traversal, "Kernel")?
+        .roots
+        .iter()
+        .find_map(|root| match root {
+            crate::partition::TraversalRoot::File(root) => Some(&root.path),
+            _ => None,
+        })
+        .ok_or_else(|| "logical partition `Kernel` did not contain ntdef.h".to_string())?;
+    let aggregate = crate::aggregate::main_prefix(WIN32_SDK_PRELUDE, structured_storage_header)?;
+    let satellite = format!(
+        "{}{GUID_RESET}",
+        crate::aggregate::satellite_source(WIN32_SDK_PRELUDE)
+    );
+    let raw_sources = [
+        (AuthorityInput::Aggregate, aggregate),
+        (AuthorityInput::Satellite, satellite),
+        (
+            AuthorityInput::PsApiV1,
+            crate::aggregate::psapi_source(WIN32_SDK_PRELUDE, 1),
+        ),
+        (
+            AuthorityInput::PsApiV2,
+            crate::aggregate::psapi_source(WIN32_SDK_PRELUDE, 2),
+        ),
+    ];
+    let mut sources = BTreeMap::new();
+    let mut included = BTreeMap::<AuthorityInput, BTreeSet<String>>::new();
+    let mut transitively_materialized = BTreeSet::new();
+    let mut deferred_materialized = BTreeSet::new();
+    for (input, source) in raw_sources {
+        let (source, paths) = absolutize_authority_source(&source, include_dirs)?;
+        included.insert(input, paths.into_keys().collect());
+        sources.insert(input, source);
+    }
+    for (header, _) in AGGREGATE_TRANSITIVE_ROOTS {
+        let path = resolve_source_header(header, include_dirs).ok_or_else(|| {
+            format!("reviewed aggregate transitive root `{header}` was not found")
+        })?;
+        let normalized = normalize_audit_path(&path_arg(&path, "--include")?);
+        included
+            .get_mut(&AuthorityInput::Aggregate)
+            .expect("aggregate authority source exists")
+            .insert(normalized.clone());
+        transitively_materialized.insert((AuthorityInput::Aggregate, normalized));
+    }
+    for path in [threading_input, kernel_header] {
+        let normalized = normalize_audit_path(&path_arg(path, "--partition-policy-root")?);
+        included
+            .get_mut(&AuthorityInput::Aggregate)
+            .expect("aggregate authority source exists")
+            .insert(normalized.clone());
+        deferred_materialized.insert((AuthorityInput::Aggregate, normalized));
+    }
+
+    let mut ordered_roots = roots.roots.iter().collect::<Vec<_>>();
+    ordered_roots.sort_by(|left, right| {
+        left.1
+            .label
+            .to_ascii_lowercase()
+            .cmp(&right.1.label.to_ascii_lowercase())
+            .then_with(|| left.1.label.cmp(&right.1.label))
+    });
+    for (_, root) in ordered_roots {
+        let normalized =
+            normalize_audit_path(path_arg(&root.path, "--partition-policy-root")?.as_str());
+        for input in &root.owned_inputs {
+            let paths = included
+                .get_mut(input)
+                .expect("all authority inputs have generated sources");
+            if paths.insert(normalized.clone()) {
+                append_authority_root(
+                    sources
+                        .get_mut(input)
+                        .expect("all authority inputs have generated sources"),
+                    &root.path,
+                    *input,
+                )?;
+            }
+        }
+    }
+    crate::aggregate::append_threading_input(
+        sources
+            .get_mut(&AuthorityInput::Aggregate)
+            .expect("aggregate authority source exists"),
+        threading_input,
+    )?;
+    crate::aggregate::append_kernel_input(
+        sources
+            .get_mut(&AuthorityInput::Aggregate)
+            .expect("aggregate authority source exists"),
+        kernel_header,
+    )?;
+
+    let path_to_identity = roots
+        .roots
+        .iter()
+        .map(|(identity, root)| {
+            (
+                normalize_audit_path(root.path.to_string_lossy().as_ref()),
+                identity.clone(),
+            )
+        })
+        .collect::<BTreeMap<_, _>>();
+    let mut include_sites = BTreeMap::new();
+    for (input, paths) in &included {
+        for path in paths {
+            let Some(identity) = path_to_identity.get(path) else {
+                continue;
+            };
+            let root = roots
+                .roots
+                .get(identity)
+                .expect("canonical authority identity exists");
+            let role = if root.owned_inputs.contains(input) {
+                AuthorityIncludeRole::OwnedRoot
+            } else {
+                AuthorityIncludeRole::DependencyOnly
+            };
+            include_sites.insert(
+                (identity.clone(), *input),
+                AuthorityIncludeSite {
+                    role,
+                    review_reason: match (
+                        role,
+                        transitively_materialized.contains(&(*input, path.clone())),
+                        deferred_materialized.contains(&(*input, path.clone())),
+                    ) {
+                        (AuthorityIncludeRole::OwnedRoot, true, false) => {
+                            "reviewed transitive aggregate umbrella ownership"
+                        }
+                        (AuthorityIncludeRole::OwnedRoot, false, true) => {
+                            "reviewed deferred aggregate root ownership"
+                        }
+                        (AuthorityIncludeRole::OwnedRoot, false, false) => {
+                            "canonical traversal ownership"
+                        }
+                        (AuthorityIncludeRole::OwnedRoot, true, true) => {
+                            unreachable!("authority root cannot be both transitive and deferred")
+                        }
+                        (AuthorityIncludeRole::DependencyOnly, _, _) => {
+                            "reviewed aggregate compile-environment dependency"
+                        }
+                    },
+                },
+            );
+        }
+    }
+    for (identity, root) in &roots.roots {
+        for input in &root.owned_inputs {
+            if !include_sites
+                .get(&(identity.clone(), *input))
+                .is_some_and(|site| site.role == AuthorityIncludeRole::OwnedRoot)
+            {
+                return Err(format!(
+                    "authority root `{}` was not materialized in owning input `{}`",
+                    root.label,
+                    input.name()
+                ));
+            }
+        }
+    }
+
+    Ok(AuthoritySourcePlan {
+        roots,
+        sources,
+        include_sites,
+    })
 }
 
 fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String> {
@@ -750,25 +1329,62 @@ fn convert_header_partition_policy(
     traversal: &crate::partition::TraversalPolicy,
 ) -> Result<HeaderPartitionPolicy, String> {
     let mut result = HeaderPartitionPolicy::new();
-    let satellite_roots = authority_satellite_root_keys(traversal);
+    let root_plan = build_authority_root_plan(traversal)?;
     for partition in &traversal.partitions {
         let root_partition = convert_root_partition(partition);
+        let mut add = |path: &Path,
+                       canonical_path: &crate::partition::WindowsPathIdentity,
+                       inventory_path: &str|
+         -> Result<(), String> {
+            let input = logical_policy_input(&root_plan, &partition.identity, canonical_path)?;
+            let header = path_arg(path, "--partition-policy-root")?;
+            if let Some(contract) = HEADER_POLICY_OVERRIDE_CONTRACTS
+                .iter()
+                .find(|contract| contract.path.eq_ignore_ascii_case(inventory_path))
+            {
+                if !partition
+                    .identity
+                    .eq_ignore_ascii_case(contract.default_partition)
+                {
+                    if contract
+                        .overrides
+                        .iter()
+                        .any(|(_, owner)| owner.eq_ignore_ascii_case(&partition.identity))
+                    {
+                        return Ok(());
+                    }
+                    return Err(format!(
+                        "shared authority root `{inventory_path}` has unexpected logical owner `{}`",
+                        partition.identity
+                    ));
+                }
+                add_header_partition_owner(
+                    &mut result,
+                    input,
+                    header.clone(),
+                    root_partition.clone(),
+                );
+                for (name, owner) in contract.overrides {
+                    result.add_traversed_header_override_for_input(
+                        input,
+                        header.clone(),
+                        *name,
+                        convert_root_partition(logical_partition(traversal, owner)?),
+                    );
+                }
+                return Ok(());
+            }
+            add_header_partition_owner(&mut result, input, header, root_partition.clone());
+            Ok(())
+        };
         for root in &partition.roots {
             match root {
-                crate::partition::TraversalRoot::File(root) => add_header_partition_owner(
-                    &mut result,
-                    logical_policy_input(&partition.identity, &root.path, &satellite_roots),
-                    path_arg(&root.path, "--partition-policy-root")?,
-                    root_partition.clone(),
-                ),
+                crate::partition::TraversalRoot::File(root) => {
+                    add(&root.path, &root.canonical_path, &root.inventory_path)?
+                }
                 crate::partition::TraversalRoot::Directory(root) => {
                     for file in &root.files {
-                        add_header_partition_owner(
-                            &mut result,
-                            logical_policy_input(&partition.identity, &file.path, &satellite_roots),
-                            path_arg(&file.path, "--partition-policy-root")?,
-                            root_partition.clone(),
-                        );
+                        add(&file.path, &file.canonical_path, &file.inventory_path)?;
                     }
                 }
                 crate::partition::TraversalRoot::Missing(_)
@@ -778,57 +1394,42 @@ fn convert_header_partition_policy(
             }
         }
     }
+    let psapi = logical_partition(traversal, "PsApi1")?
+        .roots
+        .iter()
+        .find_map(|root| match root {
+            crate::partition::TraversalRoot::File(root) => Some(&root.path),
+            _ => None,
+        })
+        .ok_or_else(|| "logical partition `PsApi1` did not contain psapi.h".to_string())?;
+    let psapi = path_arg(psapi, "--partition-policy-root")?;
+    let psapi_v1 = convert_root_partition(logical_partition(traversal, "PsApi1")?);
+    for name in PSAPI_V1_SYNTHESIZED_CONSTANTS {
+        for input in [PSAPI_V1_INPUT, PSAPI_V2_INPUT] {
+            result.add_traversed_header_override_for_input(
+                input,
+                psapi.clone(),
+                *name,
+                psapi_v1.clone(),
+            );
+        }
+    }
     Ok(result)
 }
 
-fn authority_satellite_root_keys(
-    traversal: &crate::partition::TraversalPolicy,
-) -> BTreeSet<String> {
-    let mut result = traversal
-        .canonical_physical_files()
-        .into_values()
-        .filter(|path| crate::aggregate::is_authority_satellite_header(path))
-        .map(|path| normalize_audit_path(path.to_string_lossy().as_ref()))
-        .collect::<BTreeSet<_>>();
-    for partition in &traversal.partitions {
-        if !crate::aggregate::uses_satellite_environment(&partition.identity) {
-            continue;
-        }
-        for root in &partition.roots {
-            match root {
-                crate::partition::TraversalRoot::File(root) => {
-                    result.insert(normalize_audit_path(root.path.to_string_lossy().as_ref()));
-                }
-                crate::partition::TraversalRoot::Directory(root) => {
-                    result.extend(
-                        root.files
-                            .iter()
-                            .map(|file| normalize_audit_path(file.path.to_string_lossy().as_ref())),
-                    );
-                }
-                crate::partition::TraversalRoot::Missing(_)
-                | crate::partition::TraversalRoot::Unsupported(_) => {
-                    unreachable!("validated traversal policy is clean")
-                }
-            }
-        }
-    }
-    result
-}
-
 fn logical_policy_input(
+    root_plan: &AuthorityRootPlan,
     identity: &str,
-    path: &Path,
-    satellite_roots: &BTreeSet<String>,
-) -> &'static str {
-    match identity {
-        "PsApi1" => PSAPI_V1_INPUT,
-        "PsApi2" => PSAPI_V2_INPUT,
-        _ if satellite_roots.contains(&normalize_audit_path(path.to_string_lossy().as_ref())) => {
-            SATELLITE_INPUT
-        }
-        _ => AGGREGATE_INPUT,
-    }
+    canonical_path: &crate::partition::WindowsPathIdentity,
+) -> Result<&'static str, String> {
+    root_plan
+        .owner_inputs
+        .get(&(identity.to_string(), canonical_path.clone()))
+        .copied()
+        .map(AuthorityInput::name)
+        .ok_or_else(|| {
+            format!("logical owner `{identity}` has no input assignment for `{canonical_path}`")
+        })
 }
 
 fn add_header_partition_owner(
@@ -891,44 +1492,20 @@ fn logical_partition<'a>(
 fn coverage_roots(
     traversal: &crate::partition::TraversalPolicy,
 ) -> Result<Vec<CoverageRoot>, String> {
-    let mut physical = BTreeMap::new();
-    for root in traversal
-        .partitions
-        .iter()
-        .flat_map(|partition| &partition.roots)
-    {
-        let files = match root {
-            crate::partition::TraversalRoot::File(root) => {
-                vec![(&root.path, &root.canonical_path, &root.inventory_path)]
-            }
-            crate::partition::TraversalRoot::Directory(root) => root
-                .files
-                .iter()
-                .map(|file| (&file.path, &file.canonical_path, &file.inventory_path))
-                .collect(),
-            crate::partition::TraversalRoot::Missing(_)
-            | crate::partition::TraversalRoot::Unsupported(_) => {
-                unreachable!("validated traversal policy is clean")
-            }
-        };
-        for (path, identity, inventory_path) in files {
-            if let Some((_, existing)) = physical.get(identity) {
-                if existing != inventory_path {
-                    return Err(format!(
-                        "canonical traversal root `{identity}` has conflicting inventory paths `{existing}` and `{inventory_path}`"
-                    ));
-                }
-            } else {
-                physical.insert(identity.clone(), (path.clone(), inventory_path.to_string()));
-            }
-        }
-    }
-    let mut roots = physical
+    let plan = build_authority_root_plan(traversal)?;
+    let mut roots = plan
+        .roots
         .into_values()
-        .map(|(path, label)| {
+        .map(|root| {
             Ok(CoverageRoot {
-                configured: path_arg(&path, "--partition-policy-root")?,
-                label,
+                configured: path_arg(&root.path, "--partition-policy-root")?,
+                label: root.label,
+                owning_inputs: root
+                    .owned_inputs
+                    .into_iter()
+                    .map(AuthorityInput::name)
+                    .map(str::to_string)
+                    .collect(),
             })
         })
         .collect::<Result<Vec<_>, String>>()?;
@@ -1156,6 +1733,64 @@ fn build_inputs(
         };
     }
 
+    if let Some(traversal) = traversal {
+        let plan = build_authority_source_plan(traversal, include_dirs)?;
+        if plan.include_sites.is_empty()
+            || plan
+                .include_sites
+                .values()
+                .any(|site| site.review_reason.is_empty())
+        {
+            return Err("aggregate authority include-site audit was incomplete".to_string());
+        }
+        let excluded_roots = crate::win32_headers::EXCLUDE_HEADERS
+            .iter()
+            .filter_map(|header| resolve_header(header, include_dirs))
+            .map(|path| path_arg(&path, "--include"))
+            .collect::<Result<Vec<_>, _>>()?;
+        let mut inputs = Vec::with_capacity(4);
+        for input in [
+            AuthorityInput::Aggregate,
+            AuthorityInput::Satellite,
+            AuthorityInput::PsApiV1,
+            AuthorityInput::PsApiV2,
+        ] {
+            let mut physical = plan
+                .roots
+                .roots
+                .values()
+                .filter(|root| root.owned_inputs.contains(&input))
+                .collect::<Vec<_>>();
+            physical.sort_by(|left, right| {
+                left.label
+                    .to_ascii_lowercase()
+                    .cmp(&right.label.to_ascii_lowercase())
+                    .then_with(|| left.label.cmp(&right.label))
+            });
+            let roots = physical
+                .iter()
+                .map(|root| path_arg(&root.path, "--partition-policy-root"))
+                .collect::<Result<Vec<_>, _>>()?;
+            let source = plan
+                .sources
+                .get(&input)
+                .cloned()
+                .expect("all authority inputs have generated sources");
+            let mut value = Input::new(input.name(), source).with_roots(roots);
+            if input == AuthorityInput::Aggregate {
+                value = value.with_excluded_roots(excluded_roots.iter().cloned());
+            }
+            inputs.push(value);
+        }
+        if inputs.len() != 4 {
+            return Err(format!(
+                "the aggregate authority plan must produce 4 inputs, but produced {}",
+                inputs.len()
+            ));
+        }
+        return Ok(ScrapeInputs::Common(inputs));
+    }
+
     let headers = crate::win32_headers::HEADERS
         .iter()
         .chain(crate::win32_headers::SATELLITE_HEADERS)
@@ -1179,60 +1814,23 @@ fn build_inputs(
                 .iter()
                 .any(|candidate| file_name(header).eq_ignore_ascii_case(candidate))
     });
-    let authority_satellite_roots = traversal
-        .map(authority_satellite_root_keys)
-        .unwrap_or_default();
-    let mut main_source = if let Some(traversal) = traversal {
-        let structured_storage = logical_partition(traversal, "Com.StructuredStorage")?;
-        let structured_storage_header = structured_storage
-            .roots
-            .iter()
-            .find_map(|root| match root {
-                crate::partition::TraversalRoot::File(root)
-                    if root.requested.replace('\\', "/")
-                        == "<PartitionDir>/manual.h" =>
-                {
-                    Some(root)
-                }
-                _ => None,
-            })
-            .ok_or_else(|| {
-                "logical partition `Com.StructuredStorage` did not contain `<PartitionDir>/manual.h`"
-                    .to_string()
-            })?;
-        crate::aggregate::main_prefix(prelude, &structured_storage_header.path)?
-    } else {
-        prelude.to_string()
-    };
+    let mut main_source = prelude.to_string();
     if has_device_topology {
         main_source.push_str("\n#include <ks.h>");
     }
-    let mut satellite_source = if traversal.is_some() {
-        format!(
-            "{}{GUID_RESET}",
-            crate::aggregate::satellite_source(prelude)
-        )
-    } else {
-        format!("{prelude}{GUID_RESET}")
-    };
+    let mut satellite_source = format!("{prelude}{GUID_RESET}");
     let mut main_roots = Vec::new();
     let mut satellite_roots = Vec::new();
-    let mut psapi_root = None;
     let mut main_count = 0usize;
     let mut satellite_count = 0usize;
     for header in headers {
-        if traversal.is_some() && file_name(&header).eq_ignore_ascii_case("psapi.h") {
-            continue;
-        }
         let path = resolve_header(&header, include_dirs).ok_or_else(|| {
             format!("header `{header}` was not found in any `--include` directory")
         })?;
         let root = path_arg(&path, "--include")?;
         let satellite = crate::win32_headers::SATELLITE_HEADERS
             .iter()
-            .any(|candidate| file_name(&header).eq_ignore_ascii_case(candidate))
-            || authority_satellite_roots
-                .contains(&normalize_audit_path(path.to_string_lossy().as_ref()));
+            .any(|candidate| file_name(&header).eq_ignore_ascii_case(candidate));
         if satellite {
             if file_name(&header).eq_ignore_ascii_case("devicetopology.h") {
                 satellite_source.push_str("\n#include <ks.h>\n#define _KS_");
@@ -1247,32 +1845,6 @@ fn build_inputs(
             main_count += 1;
         }
     }
-    if let Some(traversal) = traversal {
-        for path in traversal.canonical_physical_files().into_values() {
-            let root = path_arg(&path, "--partition-policy-root")?;
-            if crate::aggregate::is_psapi_header(&path) {
-                psapi_root = Some(root);
-            } else if authority_satellite_roots
-                .contains(&normalize_audit_path(path.to_string_lossy().as_ref()))
-            {
-                satellite_roots.push(root);
-            } else {
-                main_roots.push(root);
-            }
-        }
-        crate::aggregate::append_threading_input(
-            &mut main_source,
-            &logical_partition(traversal, "Threading")?.input,
-        )?;
-        for roots in [&mut main_roots, &mut satellite_roots] {
-            let mut unique = BTreeMap::new();
-            for root in roots.drain(..) {
-                unique.insert(normalize_audit_path(&root), root);
-            }
-            roots.extend(unique.into_values());
-        }
-    }
-
     let mut inputs = Vec::with_capacity(2);
     if main_count != 0 {
         inputs.push(
@@ -1286,21 +1858,9 @@ fn build_inputs(
     if satellite_count != 0 {
         inputs.push(Input::new(SATELLITE_INPUT, satellite_source).with_roots(satellite_roots));
     }
-    if traversal.is_some() {
-        let psapi_root = psapi_root.ok_or_else(|| {
-            "logical partition policy did not contain the shared Psapi.h root".to_string()
-        })?;
-        for (version, name) in [(1, PSAPI_V1_INPUT), (2, PSAPI_V2_INPUT)] {
-            inputs.push(
-                Input::new(name, crate::aggregate::psapi_source(prelude, version))
-                    .with_roots([psapi_root.clone()]),
-            );
-        }
-    }
-    let expected_inputs = if traversal.is_some() { 4 } else { 2 };
-    if inputs.len() != expected_inputs {
+    if inputs.len() != 2 {
         return Err(format!(
-            "the Win32 SDK manifest must produce {expected_inputs} input(s), but produced {}",
+            "the Win32 SDK manifest must produce 2 inputs, but produced {}",
             inputs.len(),
         ));
     }
@@ -1715,10 +2275,33 @@ fn write_extraction_coverage(
     roots: &[CoverageRoot],
     path: &Path,
 ) -> Result<(), String> {
-    let mut observed = BTreeSet::new();
+    let mut visited = BTreeSet::new();
+    let mut dependency_visits = BTreeSet::new();
+    for included in snapshot.included_files() {
+        let Some(root) = matching_coverage_root(roots, &included.path) else {
+            continue;
+        };
+        if let Some(input) = root
+            .owning_inputs
+            .iter()
+            .find(|input| input.eq_ignore_ascii_case(&included.input))
+        {
+            visited.insert((root.label.clone(), input.clone()));
+        } else {
+            dependency_visits.insert((root.label.clone(), included.input.clone()));
+        }
+    }
+
+    let mut productive = BTreeSet::new();
     for fact in snapshot.facts() {
         if let Some(root) = fact_coverage_root(roots, fact) {
-            observed.insert(root.label.as_str());
+            if let Some(input) = root
+                .owning_inputs
+                .iter()
+                .find(|input| input.eq_ignore_ascii_case(&fact.origin.tu))
+            {
+                productive.insert((root.label.clone(), input.clone()));
+            }
         }
     }
 
@@ -1733,17 +2316,37 @@ fn write_extraction_coverage(
             .and_then(|fact| fact_coverage_root(roots, fact))
             .or_else(|| matching_coverage_root(roots, &constant.spelling.file));
         if let Some(root) = root {
-            observed.insert(root.label.as_str());
+            let input = facts_by_origin
+                .get(&constant.root)
+                .map(|fact| fact.origin.tu.as_str());
+            if let Some(input) = input
+                && let Some(input) = root
+                    .owning_inputs
+                    .iter()
+                    .find(|owner| owner.eq_ignore_ascii_case(input))
+            {
+                productive.insert((root.label.clone(), input.clone()));
+            }
         }
     }
 
-    let report = extraction_coverage_report(roots, &observed);
+    let (report, failures) =
+        extraction_coverage_report(roots, &visited, &productive, &dependency_visits);
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent)
             .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
     }
     std::fs::write(path, report)
-        .map_err(|error| format!("failed to write `{}`: {error}", path.display()))
+        .map_err(|error| format!("failed to write `{}`: {error}", path.display()))?;
+    if failures.is_empty() {
+        Ok(())
+    } else {
+        Err(format!(
+            "extraction coverage found {} issue(s):\n{}",
+            failures.len(),
+            failures.join("\n")
+        ))
+    }
 }
 
 fn fact_coverage_root<'a>(
@@ -1787,27 +2390,121 @@ fn source_path_matches(configured: &str, extracted: &str) -> bool {
             .is_some_and(|prefix| prefix.ends_with('/'))
 }
 
-fn extraction_coverage_report(roots: &[CoverageRoot], observed: &BTreeSet<&str>) -> String {
-    let unobserved = roots
+fn extraction_coverage_report(
+    roots: &[CoverageRoot],
+    visited: &BTreeSet<(String, String)>,
+    productive: &BTreeSet<(String, String)>,
+    dependency_visits: &BTreeSet<(String, String)>,
+) -> (String, Vec<String>) {
+    let mut pairs = roots
         .iter()
-        .filter(|root| !observed.contains(root.label.as_str()))
+        .flat_map(|root| {
+            root.owning_inputs
+                .iter()
+                .map(|input| (root.label.clone(), input.clone()))
+        })
         .collect::<Vec<_>>();
+    pairs.sort();
+    let unvisited = pairs
+        .iter()
+        .filter(|pair| !visited.contains(*pair))
+        .cloned()
+        .collect::<Vec<_>>();
+    let zero_fact = pairs
+        .iter()
+        .filter(|pair| visited.contains(*pair) && !productive.contains(*pair))
+        .cloned()
+        .collect::<Vec<_>>();
+    let applicable_allowlist = COVERAGE_UNPRODUCTIVE_ALLOWLIST
+        .iter()
+        .filter(|(root, input, _, _)| pairs.contains(&((*root).to_string(), (*input).to_string())))
+        .collect::<Vec<_>>();
+    let allowlisted = applicable_allowlist
+        .iter()
+        .map(|(root, input, _, _)| ((*root).to_string(), (*input).to_string()))
+        .collect::<BTreeSet<_>>();
+    let mut failures = unvisited
+        .iter()
+        .filter(|pair| !allowlisted.contains(*pair))
+        .map(|(root, input)| format!("unvisited\t{input}\t{root}"))
+        .collect::<Vec<_>>();
+    failures.extend(
+        zero_fact
+            .iter()
+            .filter(|pair| !allowlisted.contains(*pair))
+            .map(|(root, input)| format!("uncategorized-zero-fact\t{input}\t{root}")),
+    );
+    failures.extend(
+        applicable_allowlist
+            .iter()
+            .filter(|(root, input, expected_visit, _)| {
+                let pair = ((*root).to_string(), (*input).to_string());
+                productive.contains(&pair) || visited.contains(&pair) != *expected_visit
+            })
+            .map(|(root, input, _, _)| format!("stale-unproductive-allowlist\t{input}\t{root}")),
+    );
+    let categorized = pairs
+        .iter()
+        .filter(|pair| allowlisted.contains(*pair) && !productive.contains(*pair))
+        .count();
+    let uncategorized = unvisited
+        .iter()
+        .chain(zero_fact.iter())
+        .filter(|pair| !allowlisted.contains(*pair))
+        .count();
+
     let mut lines = vec![
-        "version\t1".to_string(),
+        "version\t2".to_string(),
         format!("summary\tcanonical_roots\t{}", roots.len()),
+        format!("summary\towning_root_pairs\t{}", pairs.len()),
         format!(
-            "summary\tobserved_roots\t{}",
-            roots.len().saturating_sub(unobserved.len())
+            "summary\tvisited_root_pairs\t{}",
+            pairs.len().saturating_sub(unvisited.len())
         ),
-        format!("summary\tunobserved_roots\t{}", unobserved.len()),
+        format!("summary\tproductive_root_pairs\t{}", productive.len()),
+        format!("summary\tunvisited_root_pairs\t{}", unvisited.len()),
+        format!("summary\tvisited_zero_fact_pairs\t{}", zero_fact.len()),
+        format!("summary\tcategorized_unproductive_pairs\t{categorized}"),
+        format!("summary\tuncategorized_unproductive_pairs\t{uncategorized}"),
+        format!(
+            "summary\tdependency_only_visits\t{}",
+            dependency_visits.len()
+        ),
     ];
+    for (root, input) in &pairs {
+        let visit = if visited.contains(&(root.clone(), input.clone())) {
+            "visited"
+        } else {
+            "unvisited"
+        };
+        let facts = if productive.contains(&(root.clone(), input.clone())) {
+            "productive"
+        } else if allowlisted.contains(&(root.clone(), input.clone())) {
+            "categorized-unproductive"
+        } else {
+            "uncategorized-zero-fact"
+        };
+        lines.push(format!("root\t{input}\t{visit}\t{facts}\t{root}"));
+    }
     lines.extend(
-        unobserved
-            .into_iter()
-            .map(|root| format!("unobserved\tuncategorized\t{}", root.label)),
+        dependency_visits
+            .iter()
+            .map(|(root, input)| format!("dependency\t{input}\t{root}")),
+    );
+    lines.extend(
+        applicable_allowlist
+            .iter()
+            .map(|(root, input, expected_visit, reason)| {
+                let expected_visit = if *expected_visit {
+                    "visited"
+                } else {
+                    "unvisited"
+                };
+                format!("allowlist\t{input}\t{root}\t{expected_visit}\t{reason}")
+            }),
     );
     lines.push(String::new());
-    lines.join("\n")
+    (lines.join("\n"), failures)
 }
 
 fn write_fact_audit(
@@ -2412,6 +3109,129 @@ mod tests {
             })
             .map(|path| path_arg(path, "--include").unwrap())
             .collect::<Vec<_>>();
+        let source_plan = build_authority_source_plan(&traversal, &include_dirs).unwrap();
+        assert_eq!(source_plan.roots.roots.len(), 1559);
+        assert_eq!(
+            source_plan
+                .include_sites
+                .values()
+                .filter(|site| site.role == AuthorityIncludeRole::OwnedRoot)
+                .count(),
+            1560
+        );
+        assert!(
+            source_plan
+                .include_sites
+                .values()
+                .any(|site| site.role == AuthorityIncludeRole::DependencyOnly)
+        );
+        assert!(
+            source_plan
+                .include_sites
+                .values()
+                .all(|site| { !site.review_reason.is_empty() })
+        );
+        let site = |label: &str, input: AuthorityInput| {
+            let identity = source_plan
+                .roots
+                .roots
+                .iter()
+                .find(|(_, root)| root.label.eq_ignore_ascii_case(label))
+                .map(|(identity, _)| identity.clone())
+                .unwrap();
+            source_plan.include_sites.get(&(identity, input))
+        };
+        assert_eq!(
+            site("um/avifmt.h", AuthorityInput::Aggregate).unwrap().role,
+            AuthorityIncludeRole::OwnedRoot
+        );
+        assert_eq!(
+            site("um/avifmt.h", AuthorityInput::Satellite).unwrap().role,
+            AuthorityIncludeRole::DependencyOnly
+        );
+        for label in [
+            "um/ddraw.h",
+            "um/ddrawi.h",
+            "um/ddrawint.h",
+            "um/ddkernel.h",
+            "um/dvp.h",
+        ] {
+            assert_eq!(
+                site(label, AuthorityInput::Satellite).unwrap().role,
+                AuthorityIncludeRole::OwnedRoot
+            );
+            assert_eq!(
+                site(label, AuthorityInput::Aggregate).unwrap().role,
+                AuthorityIncludeRole::DependencyOnly
+            );
+        }
+        for label in ["um/dxcore.h", "um/dxcore_interface.h"] {
+            assert_eq!(
+                site(label, AuthorityInput::Aggregate).unwrap().role,
+                AuthorityIncludeRole::OwnedRoot
+            );
+            assert!(site(label, AuthorityInput::Satellite).is_none());
+        }
+        for (header, inventory_label) in AGGREGATE_TRANSITIVE_ROOTS {
+            let transitive = site(inventory_label, AuthorityInput::Aggregate).unwrap();
+            assert_eq!(transitive.role, AuthorityIncludeRole::OwnedRoot);
+            assert_eq!(
+                transitive.review_reason,
+                "reviewed transitive aggregate umbrella ownership"
+            );
+            let path = resolve_source_header(header, &include_dirs).unwrap();
+            let include = format!("#include \"{}\"", path_arg(&path, "--include").unwrap());
+            let expected_direct_dependencies =
+                usize::from(["gdipluseffects.h", "uuids.h"].contains(header));
+            assert_eq!(
+                source_plan
+                    .sources
+                    .get(&AuthorityInput::Aggregate)
+                    .unwrap()
+                    .matches(&include)
+                    .count(),
+                expected_direct_dependencies,
+                "{header} used an unexpected direct include count"
+            );
+        }
+        let aggregate_source = source_plan.sources.get(&AuthorityInput::Aggregate).unwrap();
+        let absolute_include = |name: &str| {
+            let path = resolve_source_header(name, &include_dirs).unwrap();
+            format!("#include \"{}\"", path_arg(&path, "--include").unwrap())
+        };
+        assert!(
+            aggregate_source.find(&absolute_include("uuids.h")).unwrap()
+                < aggregate_source
+                    .find(&absolute_include("avifmt.h"))
+                    .unwrap()
+        );
+        for label in ["partition/threading/main.cpp", "shared/ntdef.h"] {
+            let deferred = site(label, AuthorityInput::Aggregate).unwrap();
+            assert_eq!(deferred.role, AuthorityIncludeRole::OwnedRoot);
+            assert_eq!(
+                deferred.review_reason,
+                "reviewed deferred aggregate root ownership"
+            );
+        }
+        let threading = aggregate_source
+            .find("Partitions/Threading/main.cpp")
+            .unwrap();
+        let kernel = aggregate_source
+            .find("RecompiledIdlHeaders/shared/ntdef.h")
+            .unwrap();
+        assert!(threading < kernel);
+        assert_eq!(
+            aggregate_source.rfind("#include").unwrap(),
+            aggregate_source[..kernel].rfind("#include").unwrap()
+        );
+        let satellite_source = source_plan.sources.get(&AuthorityInput::Satellite).unwrap();
+        assert_eq!(
+            satellite_source
+                .matches(&absolute_include("winddi.h"))
+                .count(),
+            4,
+            "bounded USERMODE_DRIVER reinclusions must be preserved"
+        );
 
         let ScrapeInputs::Common(authority) =
             build_inputs(&options, &include_dirs, &root_dirs, Some(&traversal)).unwrap()
@@ -2433,7 +3253,7 @@ mod tests {
         );
         assert_eq!(traversal.partitions.len(), 321);
         assert_eq!(traversal.canonical_physical_files().len(), 1559);
-        assert_eq!(traversal.file_root_count(), 1570);
+        assert_eq!(traversal.file_root_count(), 1565);
         assert_eq!(traversal.directory_root_count(), 0);
         let coverage = coverage_roots(&traversal).unwrap();
         assert_eq!(coverage.len(), 1559);
@@ -2445,7 +3265,7 @@ mod tests {
         assert!(coverage_labels.contains("um/psapi.h"));
         assert!(coverage_labels.contains("partition/com.structuredstorage/manual.h"));
         assert!(coverage_labels.contains("partition/threading/main.cpp"));
-        let satellite_root_keys = authority_satellite_root_keys(&traversal);
+        let root_plan = build_authority_root_plan(&traversal).unwrap();
         let direct_draw = logical_partition(&traversal, "DirectDraw").unwrap();
         let direct_draw_roots = direct_draw
             .roots
@@ -2463,7 +3283,18 @@ mod tests {
             .collect::<Vec<_>>();
         assert_eq!(direct_draw_roots.len(), 7);
         assert!(direct_draw_roots.iter().all(|path| {
-            satellite_root_keys.contains(&normalize_audit_path(path.to_string_lossy().as_ref()))
+            let partition = logical_partition(&traversal, "DirectDraw").unwrap();
+            let canonical = partition
+                .roots
+                .iter()
+                .find_map(|root| match root {
+                    crate::partition::TraversalRoot::File(root) if &root.path == *path => {
+                        Some(&root.canonical_path)
+                    }
+                    _ => None,
+                })
+                .unwrap();
+            logical_policy_input(&root_plan, "DirectDraw", canonical).unwrap() == SATELLITE_INPUT
         }));
         let usb = traversal
             .canonical_physical_files()
@@ -2471,24 +3302,43 @@ mod tests {
             .find(|(canonical, _)| canonical.as_str().ends_with("/shared/usb.h"))
             .map(|(_, path)| path)
             .expect("checked-in traversal policy did not contain shared/usb.h");
-        assert!(
-            !satellite_root_keys.contains(&normalize_audit_path(usb.to_string_lossy().as_ref()))
-        );
+        let avifmt = traversal
+            .canonical_physical_files()
+            .into_iter()
+            .find(|(canonical, _)| canonical.as_str().ends_with("/um/avifmt.h"))
+            .map(|(_, path)| path)
+            .expect("checked-in traversal policy did not contain um/avifmt.h");
+        let physical_input = |path: &Path| {
+            root_plan
+                .roots
+                .values()
+                .find(|root| root.path == path)
+                .and_then(|root| root.owned_inputs.iter().next())
+                .copied()
+                .unwrap()
+        };
+        assert_eq!(physical_input(&usb), AuthorityInput::Aggregate);
+        assert_eq!(physical_input(&avifmt), AuthorityInput::Aggregate);
         for partition in &traversal.partitions {
             for root in &partition.roots {
                 let files = match root {
-                    crate::partition::TraversalRoot::File(root) => vec![&root.path],
-                    crate::partition::TraversalRoot::Directory(root) => {
-                        root.files.iter().map(|file| &file.path).collect()
+                    crate::partition::TraversalRoot::File(root) => {
+                        vec![(&root.path, &root.canonical_path)]
                     }
+                    crate::partition::TraversalRoot::Directory(root) => root
+                        .files
+                        .iter()
+                        .map(|file| (&file.path, &file.canonical_path))
+                        .collect(),
                     crate::partition::TraversalRoot::Missing(_)
                     | crate::partition::TraversalRoot::Unsupported(_) => {
                         panic!("checked-in traversal policy was not clean")
                     }
                 };
-                for path in files {
+                for (path, canonical_path) in files {
                     let input =
-                        logical_policy_input(&partition.identity, path, &satellite_root_keys);
+                        logical_policy_input(&root_plan, &partition.identity, canonical_path)
+                            .unwrap();
                     let configured = path_arg(path, "--partition-policy-root").unwrap();
                     assert!(
                         authority
@@ -2529,8 +3379,7 @@ mod tests {
                 supplied.len(),
                 "root `{root}` was repeated within an input"
             );
-            let satellite = satellite_root_keys
-                .contains(&normalize_audit_path(path.to_string_lossy().as_ref()));
+            let satellite = physical_input(&path) == AuthorityInput::Satellite;
             if psapi {
                 assert_eq!(supplied, [2, 3], "root `{root}` used wrong PSAPI inputs");
             } else {
@@ -2542,10 +3391,13 @@ mod tests {
             }
             satellite_roots += usize::from(satellite);
         }
-        assert_eq!(satellite_roots, 50);
+        assert_eq!(satellite_roots, 90);
         let usb = path_arg(&usb, "--partition-policy-root").unwrap();
         assert!(authority[0].roots.contains(&usb));
         assert!(!authority[1].roots.contains(&usb));
+        let avifmt = path_arg(&avifmt, "--partition-policy-root").unwrap();
+        assert!(authority[0].roots.contains(&avifmt));
+        assert!(!authority[1].roots.contains(&avifmt));
 
         let ScrapeInputs::Common(normal) =
             build_inputs(&options, &include_dirs, &root_dirs, None).unwrap()
@@ -2599,47 +3451,165 @@ mod tests {
                 .source
                 .contains("Partitions/Threading/main.cpp")
         );
-        assert!(
-            authority[2]
+        for (input, version) in [(&authority[2], 1), (&authority[3], 2)] {
+            let define = input
                 .source
-                .contains("#define PSAPI_VERSION 1\n#include <psapi.h>")
-        );
-        assert!(
-            authority[3]
+                .find(&format!("#define PSAPI_VERSION {version}"))
+                .unwrap();
+            let include = input
                 .source
-                .contains("#define PSAPI_VERSION 2\n#include <psapi.h>")
-        );
+                .to_ascii_lowercase()
+                .find("/psapi.h\"")
+                .unwrap();
+            assert!(define < include);
+        }
+        let satellite = &authority[1].source;
+        let satellite_lower = satellite.to_ascii_lowercase();
+        let mmreg = satellite_lower.find("/mmreg.h\"").unwrap();
+        let avifmt = satellite_lower.find("/avifmt.h\"").unwrap();
+        let no_avifmt = satellite.find("#define NOAVIFMT").unwrap();
+        let vfw = satellite_lower.find("/vfw.h\"").unwrap();
+        let restore_avifmt = satellite.find("#undef NOAVIFMT").unwrap();
+        assert!(mmreg < avifmt && avifmt < no_avifmt && no_avifmt < vfw && vfw < restore_avifmt);
+        assert_eq!(satellite_lower.matches("/vfw.h\"").count(), 1);
+        for header in ["ntddcdvd.h", "tbs.h"] {
+            let resolved = resolve(header);
+            assert!(
+                authority[1].roots.contains(&resolved),
+                "{header} was not isolated in the satellite input"
+            );
+            assert!(!authority[0].roots.contains(&resolved));
+        }
+        for header in [
+            "ntdddisk.h",
+            "ntddchgr.h",
+            "Windows.Media.SpeechRecognition.h",
+        ] {
+            let resolved = resolve(header);
+            assert!(
+                !authority
+                    .iter()
+                    .any(|input| input.roots.contains(&resolved))
+            );
+        }
+        let search = logical_partition(&traversal, "Search").unwrap();
+        for root in &search.roots {
+            let crate::partition::TraversalRoot::File(root) = root else {
+                panic!("Search unexpectedly contains a directory root");
+            };
+            let root = path_arg(&root.path, "--partition-policy-root").unwrap();
+            assert!(authority[1].roots.contains(&root));
+            assert!(!authority[0].roots.contains(&root));
+        }
+        assert!(authority[1].source.contains("/query.h\""));
+        assert!(!authority[0].source.contains("/query.h\""));
+        let cellular = resolve("cellularapi_oem.h");
+        assert!(authority[0].roots.contains(&cellular));
+        assert!(!authority[1].roots.contains(&cellular));
         assert!(
-            authority[1].source.find("#include <mmreg.h>").unwrap()
-                < authority[1].source.find("#include <vfw.h>").unwrap()
+            authority[0]
+                .source
+                .contains("#if __has_include(\"RilAPITypes.h\")")
+        );
+        assert_eq!(
+            COVERAGE_UNPRODUCTIVE_ALLOWLIST,
+            [(
+                "um/cellularapi_oem.h",
+                AGGREGATE_INPUT,
+                false,
+                "the pinned SDK omits imported RilAPITypes.h; the legacy source also skips this header",
+            )]
         );
     }
 
     #[test]
-    fn checked_in_authority_compile_sources_parse_collision_groups() {
+    fn checked_in_authority_compile_environment_sources_parse() {
         ensure_libclang();
         let win_sdk = checked_in_win_sdk();
         let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let structured_storage_header = logical_partition(&traversal, "Com.StructuredStorage")
+            .unwrap()
+            .roots
+            .iter()
+            .find_map(|root| match root {
+                crate::partition::TraversalRoot::File(root)
+                    if root.requested.replace('\\', "/") == "<PartitionDir>/manual.h" =>
+                {
+                    Some(root.path.as_path())
+                }
+                _ => None,
+            })
+            .unwrap();
+        let kernel_header = logical_partition(&traversal, "Kernel")
+            .unwrap()
+            .roots
+            .iter()
+            .find_map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => Some(root.path.as_path()),
+                _ => None,
+            })
+            .unwrap();
+        let mut main =
+            crate::aggregate::main_prefix(WIN32_SDK_PRELUDE, structured_storage_header).unwrap();
+        main.push_str(
+            "\n#include <celib.h>\n\
+             #include <ntddndis.h>\n\
+             #if __has_include(\"RilAPITypes.h\")\n\
+             #include <cellularapi_oem.h>\n\
+             #endif\n",
+        );
+        crate::aggregate::append_kernel_input(&mut main, kernel_header).unwrap();
+        let mut satellite = format!(
+            "{}{GUID_RESET}",
+            crate::aggregate::satellite_source(WIN32_SDK_PRELUDE)
+        );
+        satellite.push_str("\n#include <tbs.h>\n");
+        let (main, _) = absolutize_authority_source(&main, &include_dirs).unwrap();
+        let (satellite, _) = absolutize_authority_source(&satellite, &include_dirs).unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+
+        for (name, source) in [(AGGREGATE_INPUT, main), (SATELLITE_INPUT, satellite)] {
+            let snapshot = windows_clang::extract([Input::new(name, source)], &args)
+                .unwrap_or_else(|error| panic!("{name}: {error}"));
+            let expected: &[&str] = if name == AGGREGATE_INPUT {
+                &["MPEG2StreamType", "ADDRALIAS"]
+            } else {
+                &["_CONSOLECONTROL", "IWordBreaker", "TPM_DEVICE_INFO"]
+            };
+            for expected in expected.iter().copied() {
+                assert!(
+                    snapshot.facts().iter().any(|fact| fact.name == expected),
+                    "{name} did not preserve `{expected}` through its isolated source block"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn checked_in_avi_headers_preserve_old_71_surface_without_duplicate_owners() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let find_header = |name: &str| {
+            include_dirs
+                .iter()
+                .map(|directory| directory.join(name))
+                .find(|path| path.is_file())
+                .unwrap()
+        };
+        let avifmt = find_header("avifmt.h");
+        let vfw = find_header("Vfw.h");
+        let windef = find_header("windef.h");
+        let wingdi = find_header("wingdi.h");
+        let guiddef = find_header("guiddef.h");
         let prelude = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
-        let mut main_source = crate::aggregate::main_prefix(
-            prelude,
-            &win_sdk
-                .join("Partitions")
-                .join("Com.StructuredStorage")
-                .join("manual.h"),
-        )
-        .unwrap();
-        main_source.push_str("\n#include <usb.h>\n");
-        crate::aggregate::append_threading_input(
-            &mut main_source,
-            &win_sdk
-                .join("Partitions")
-                .join("Threading")
-                .join("main.cpp"),
-        )
-        .unwrap();
-        let mut satellite_source = crate::aggregate::satellite_source(prelude);
-        satellite_source.push_str("\n#include <vfw.h>\n#include <xamlOM.h>\n");
+        let main_source = format!("{prelude}\n#include <mmreg.h>\n#include <avifmt.h>\n");
+        let satellite_source = format!(
+            "{prelude}\n#include <mmreg.h>\n#include <avifmt.h>\n\
+             #define NOAVIFMT\n#include <vfw.h>\n#undef NOAVIFMT\n"
+        );
 
         let mut args = CLANG_ARGS
             .iter()
@@ -2664,14 +3634,188 @@ mod tests {
         }
         args.push("--target=x86_64-pc-windows-msvc".to_string());
         let args = args.iter().map(String::as_str).collect::<Vec<_>>();
-        windows_clang::extract(
+        let snapshot = windows_clang::extract(
             [
-                Input::new(AGGREGATE_INPUT, main_source),
-                Input::new(SATELLITE_INPUT, satellite_source),
+                Input::new(AGGREGATE_INPUT, main_source).with_roots(
+                    [&avifmt, &windef, &wingdi, &guiddef]
+                        .map(|path| path_arg(path, "--include").unwrap()),
+                ),
+                Input::new(SATELLITE_INPUT, satellite_source).with_roots([path_arg(
+                    &vfw,
+                    "--include",
+                )
+                .unwrap()]),
             ],
             &args,
         )
         .unwrap();
+
+        const OLD_71_AVI_CONSTANTS: &[&str] = &[
+            "AVI_HEADERSIZE",
+            "AVIF_COPYRIGHTED",
+            "AVIF_HASINDEX",
+            "AVIF_ISINTERLEAVED",
+            "AVIF_MUSTUSEINDEX",
+            "AVIF_WASCAPTUREFILE",
+            "AVIIF_COMPUSE",
+            "AVIIF_FIRSTPART",
+            "AVIIF_KEYFRAME",
+            "AVIIF_LASTPART",
+            "AVIIF_LIST",
+            "AVIIF_NOTIME",
+            "AVISF_DISABLED",
+            "AVISF_VIDEO_PALCHANGES",
+        ];
+        const SHARED_AVI_CONSTANTS: &[&str] = &[
+            "AVI_HEADERSIZE",
+            "AVIF_COPYRIGHTED",
+            "AVIF_HASINDEX",
+            "AVIF_ISINTERLEAVED",
+            "AVIF_MUSTUSEINDEX",
+            "AVIF_WASCAPTUREFILE",
+            "AVIIF_COMPUSE",
+            "AVIIF_FIRSTPART",
+            "AVIIF_KEYFRAME",
+            "AVIIF_LASTPART",
+            "AVIIF_LIST",
+            "AVIIF_MIDPART",
+            "AVIIF_NOTIME",
+            "AVISF_DISABLED",
+            "AVISF_VIDEO_PALCHANGES",
+            "ckidAVIMAINHDR",
+            "ckidAVINEWINDEX",
+            "ckidAVIPADDING",
+            "ckidSTREAMFORMAT",
+            "ckidSTREAMHANDLERDATA",
+            "ckidSTREAMHEADER",
+            "ckidSTREAMNAME",
+            "cktypeDIBbits",
+            "cktypeDIBcompressed",
+            "cktypePALchange",
+            "cktypeWAVEbytes",
+            "formtypeAVI",
+            "listtypeAVIHEADER",
+            "listtypeAVIMOVIE",
+            "listtypeAVIRECORD",
+            "listtypeSTREAMHEADER",
+            "streamtypeAUDIO",
+            "streamtypeMIDI",
+            "streamtypeTEXT",
+            "streamtypeVIDEO",
+        ];
+        const AVI_RECORDS: &[&str] = &[
+            "MainAVIHeader",
+            "AVIStreamHeader",
+            "AVIINDEXENTRY",
+            "AVIPALCHANGE",
+        ];
+        const AVI_DEPENDENCY_TYPES: &[&str] =
+            &["tagRECT", "RECT", "tagPALETTEENTRY", "PALETTEENTRY"];
+
+        let traversal = checked_in_traversal_policy();
+        let policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path_arg(&avifmt, "--include").unwrap(),
+                convert_root_partition(logical_partition(&traversal, "Media.DShow").unwrap()),
+            )
+            .with_traversed_header_for_input(
+                SATELLITE_INPUT,
+                path_arg(&vfw, "--include").unwrap(),
+                convert_root_partition(logical_partition(&traversal, "Multimedia").unwrap()),
+            )
+            .with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path_arg(&windef, "--include").unwrap(),
+                convert_root_partition(logical_partition(&traversal, "Foundation").unwrap()),
+            )
+            .with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path_arg(&wingdi, "--include").unwrap(),
+                convert_root_partition(logical_partition(&traversal, "Gdi").unwrap()),
+            )
+            .with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path_arg(&guiddef, "--include").unwrap(),
+                convert_root_partition(logical_partition(&traversal, "Com").unwrap()),
+            );
+        let references = BTreeMap::new();
+        let selected_functions = BTreeSet::from(["AVIFileInit".to_string()]);
+        let selected_types = AVI_RECORDS
+            .iter()
+            .chain(AVI_DEPENDENCY_TYPES)
+            .copied()
+            .collect::<BTreeSet<_>>();
+        let excluded_types = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| !matches!(fact.data, FactData::Function { .. }))
+            .filter(|fact| !selected_types.contains(fact.name.as_str()))
+            .map(|fact| fact.name.clone())
+            .collect::<BTreeSet<_>>();
+        let selected_constants = SHARED_AVI_CONSTANTS
+            .iter()
+            .copied()
+            .collect::<BTreeSet<_>>();
+        let excluded_constants = snapshot
+            .constants()
+            .iter()
+            .filter(|constant| !selected_constants.contains(constant.name.as_str()))
+            .map(|constant| constant.name.clone())
+            .collect::<BTreeSet<_>>();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, &references);
+        emit.library = Some("");
+        emit.functions = Some(&selected_functions);
+        emit.excluded_types = Some(&excluded_types);
+        emit.excluded_constants = Some(&excluded_constants);
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let direct_show = partitions
+            .iter()
+            .find(|(partition, _)| partition.partition == "Media.DShow")
+            .unwrap()
+            .1;
+        let multimedia = partitions
+            .iter()
+            .find(|(partition, _)| partition.partition == "Multimedia")
+            .unwrap()
+            .1;
+
+        let mut unexpected_constants = Vec::new();
+        for name in SHARED_AVI_CONSTANTS {
+            let declaration = format!("const {name}");
+            let count = partitions
+                .values()
+                .map(|rdl| rdl.matches(&declaration).count())
+                .sum::<usize>();
+            if !OLD_71_AVI_CONSTANTS.contains(name) && count != 0 {
+                unexpected_constants.push((*name, count));
+            }
+            assert!(!multimedia.contains(&declaration), "{multimedia}");
+        }
+        assert!(
+            unexpected_constants.is_empty(),
+            "OLD 71-absent AVI constants were emitted: {unexpected_constants:?}"
+        );
+        for name in OLD_71_AVI_CONSTANTS {
+            let declaration = format!("const {name}");
+            assert_eq!(
+                direct_show.matches(&declaration).count(),
+                1,
+                "{direct_show}"
+            );
+        }
+        for name in AVI_RECORDS {
+            assert!(direct_show.contains(name), "{direct_show}");
+            assert!(!multimedia.contains(name), "{multimedia}");
+        }
+        assert!(multimedia.contains("fn AVIFileInit("), "{multimedia}");
+        assert!(!direct_show.contains("fn AVIFileInit("), "{direct_show}");
     }
 
     #[test]
@@ -2756,10 +3900,512 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_shared_header_overrides_match_legacy_owners() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let root = scratch("shared-header-overrides");
+        let shared = root.join("shared");
+        let um = root.join("um");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::create_dir_all(&um).unwrap();
+        let write = |directory: &Path, name: &str, contents: &str| {
+            let path = directory.join(name);
+            std::fs::write(&path, contents).unwrap();
+            path
+        };
+        let ntddstor = write(
+            &shared,
+            "ntddstor.h",
+            "enum STORAGE_BUS_TYPE { BusTypeUnknown };\n\
+             enum STORAGE_PROPERTY_ID { StorageDeviceProperty };\n",
+        );
+        let audioendpoints = write(
+            &um,
+            "audioendpoints.h",
+            "struct IAudioEndpointFormatControl { int value; };\n\
+             #define ENDPOINT_FORMAT_RESET_MIX_ONLY 1\n",
+        );
+        let endpointvolume = write(
+            &um,
+            "endpointvolume.h",
+            "struct AUDIO_VOLUME_NOTIFICATION_DATA { int value; };\n\
+             struct IAudioEndpointVolume { int value; };\n\
+             #define ENDPOINT_HARDWARE_SUPPORT_VOLUME 1\n\
+             #define ENDPOINT_HARDWARE_SUPPORT_MUTE 2\n\
+             #define ENDPOINT_HARDWARE_SUPPORT_METER 4\n",
+        );
+        let uuids = write(&shared, "uuids.h", "#define MEDIATYPE_Video 1\n");
+        let olectl = write(
+            &um,
+            "olectl.h",
+            "#define DISPID_READYSTATE 1\n\
+             #define DISPID_READYSTATECHANGE 2\n\
+             #define DISPID_AMBIENT_TRANSFERPRIORITY 3\n\
+             #define DISPID_AMBIENT_CODEPAGE 4\n\
+             #define DISPID_AMBIENT_CHARSET 5\n",
+        );
+        let idispids = write(
+            &um,
+            "idispids.h",
+            "#define DISPID_READYSTATE 1\n\
+             #define DISPID_READYSTATECHANGE 2\n\
+             #define DISPID_AMBIENT_TRANSFERPRIORITY 3\n\
+             #define DISPID_AMBIENT_CODEPAGE 4\n\
+             #define DISPID_AMBIENT_CHARSET 5\n\
+             #define DISPID_AMBIENT_OFFLINEIFNOTCONNECTED 6\n\
+             #define DISPID_AMBIENT_SILENT 7\n",
+        );
+        let dxcore = write(
+            &um,
+            "dxcore.h",
+            "struct IDXCoreAdapterFactory { int value; };\n\
+             extern \"C\" int DXCoreCreateAdapterFactory();\n",
+        );
+        let dxcore_interface = write(
+            &um,
+            "dxcore_interface.h",
+            "struct IDXCoreAdapter { int value; };\n",
+        );
+        let include =
+            |path: &Path| format!("#include \"{}\"\n", path_arg(path, "--include").unwrap());
+        let aggregate_source = format!(
+            "{}{}{}{}{}{}",
+            include(&audioendpoints),
+            include(&uuids),
+            include(&olectl),
+            include(&idispids),
+            include(&dxcore),
+            include(&dxcore_interface),
+        );
+        let satellite_source = format!("{}{}", include(&ntddstor), include(&endpointvolume));
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, aggregate_source).with_roots(
+                    [
+                        &audioendpoints,
+                        &uuids,
+                        &olectl,
+                        &idispids,
+                        &dxcore,
+                        &dxcore_interface,
+                    ]
+                    .map(|path| path_arg(path, "--include").unwrap()),
+                ),
+                Input::new(SATELLITE_INPUT, satellite_source).with_roots(
+                    [&ntddstor, &endpointvolume].map(|path| path_arg(path, "--include").unwrap()),
+                ),
+            ],
+            &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        let traversal = checked_in_traversal_policy();
+        let owner =
+            |identity| convert_root_partition(logical_partition(&traversal, identity).unwrap());
+        let header = |path: &Path| path_arg(path, "--partition-policy-root").unwrap();
+        let mut policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(SATELLITE_INPUT, header(&ntddstor), owner("Ioctl"))
+            .with_traversed_header_override_for_input(
+                SATELLITE_INPUT,
+                header(&ntddstor),
+                "STORAGE_BUS_TYPE",
+                owner("Fs"),
+            )
+            .with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header(&audioendpoints),
+                owner("Audio.Endpoints"),
+            )
+            .with_traversed_header_override_for_input(
+                AGGREGATE_INPUT,
+                header(&audioendpoints),
+                "ENDPOINT_FORMAT_RESET_MIX_ONLY",
+                owner("Audio"),
+            )
+            .with_traversed_header_for_input(
+                SATELLITE_INPUT,
+                header(&endpointvolume),
+                owner("Audio.Endpoints"),
+            );
+        for name in [
+            "AUDIO_VOLUME_NOTIFICATION_DATA",
+            "ENDPOINT_HARDWARE_SUPPORT_VOLUME",
+            "ENDPOINT_HARDWARE_SUPPORT_MUTE",
+            "ENDPOINT_HARDWARE_SUPPORT_METER",
+        ] {
+            policy.add_traversed_header_override_for_input(
+                SATELLITE_INPUT,
+                header(&endpointvolume),
+                name,
+                owner("Audio"),
+            );
+        }
+        for (path, identity) in [
+            (&uuids, "Mf"),
+            (&olectl, "ComOle"),
+            (&idispids, "InternetExplorer"),
+            (&dxcore, "DXCore"),
+            (&dxcore_interface, "DXCore"),
+        ] {
+            policy.add_traversed_header_for_input(AGGREGATE_INPUT, header(path), owner(identity));
+        }
+        let references = BTreeMap::new();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, &references);
+        emit.library = Some("");
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let namespace_output = |namespace: &str| {
+            partitions
+                .iter()
+                .filter(|(partition, _)| partition.namespace == namespace)
+                .map(|(_, rdl)| rdl.as_str())
+                .collect::<String>()
+        };
+
+        let file_system = namespace_output("Windows.Win32.Storage.FileSystem");
+        let ioctl = namespace_output("Windows.Win32.System.Ioctl");
+        assert!(file_system.contains("STORAGE_BUS_TYPE"), "{file_system}");
+        assert!(!ioctl.contains("STORAGE_BUS_TYPE"), "{ioctl}");
+        assert!(ioctl.contains("STORAGE_PROPERTY_ID"), "{ioctl}");
+
+        let audio = namespace_output("Windows.Win32.Media.Audio");
+        let endpoints = namespace_output("Windows.Win32.Media.Audio.Endpoints");
+        assert!(
+            audio.contains("const ENDPOINT_FORMAT_RESET_MIX_ONLY"),
+            "{audio}"
+        );
+        assert!(
+            endpoints.contains("IAudioEndpointFormatControl"),
+            "{endpoints}"
+        );
+        assert!(audio.contains("AUDIO_VOLUME_NOTIFICATION_DATA"), "{audio}");
+        for name in [
+            "ENDPOINT_HARDWARE_SUPPORT_VOLUME",
+            "ENDPOINT_HARDWARE_SUPPORT_MUTE",
+            "ENDPOINT_HARDWARE_SUPPORT_METER",
+        ] {
+            assert!(audio.contains(&format!("const {name}")), "{audio}");
+        }
+        assert!(endpoints.contains("IAudioEndpointVolume"), "{endpoints}");
+
+        let media_foundation = namespace_output("Windows.Win32.Media.MediaFoundation");
+        assert!(
+            media_foundation.contains("MEDIATYPE_Video"),
+            "{media_foundation}"
+        );
+        let media = namespace_output("Windows.Win32.Media");
+        assert!(!media.contains("MEDIATYPE_Video"), "{media}");
+
+        let internet_explorer = namespace_output("Windows.Win32.Web.InternetExplorer");
+        for name in [
+            "DISPID_AMBIENT_OFFLINEIFNOTCONNECTED",
+            "DISPID_AMBIENT_SILENT",
+        ] {
+            assert!(
+                internet_explorer.contains(&format!("const {name}")),
+                "{internet_explorer}"
+            );
+        }
+        for name in [
+            "DISPID_READYSTATE",
+            "DISPID_READYSTATECHANGE",
+            "DISPID_AMBIENT_TRANSFERPRIORITY",
+            "DISPID_AMBIENT_CODEPAGE",
+            "DISPID_AMBIENT_CHARSET",
+        ] {
+            assert!(
+                !internet_explorer.contains(&format!("const {name}")),
+                "{internet_explorer}"
+            );
+        }
+        let ole = namespace_output("Windows.Win32.System.Ole");
+        assert!(ole.contains("const DISPID_READYSTATE"), "{ole}");
+
+        let dxcore_output = namespace_output("Windows.Win32.Graphics.DXCore");
+        assert!(
+            dxcore_output.contains("IDXCoreAdapterFactory"),
+            "{dxcore_output}"
+        );
+        assert!(
+            dxcore_output.contains("fn DXCoreCreateAdapterFactory("),
+            "{dxcore_output}"
+        );
+        let display = namespace_output("Windows.Win32.Devices.Display");
+        assert!(!display.contains("IDXCoreAdapterFactory"), "{display}");
+        assert!(!display.contains("DXCoreCreateAdapterFactory"), "{display}");
+    }
+
+    #[test]
+    fn checked_in_first_include_macros_materialize_expected_declarations() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let find_header = |name: &str| {
+            include_dirs
+                .iter()
+                .map(|directory| directory.join(name))
+                .find(|path| path.is_file())
+                .unwrap_or_else(|| panic!("missing checked-in header `{name}`"))
+        };
+        let winconp = find_header("winconp.h");
+        let consoleapis = find_header("consoleapis.h");
+        let wsman = find_header("wsman.h");
+        let gdipluseffects = find_header("gdipluseffects.h");
+        let source = format!(
+            "#define FE_IME\n\
+             #define DEFINE_CONSOLEV2_PROPERTIES\n\
+             #define WSMAN_API_VERSION_1_1\n\
+             #define GDIPVER 0x0110\n\
+             {WIN32_SDK_PRELUDE}\n\
+             #include <propkeydef.h>\n\
+             #include <wincon.h>\n\
+             #include <winconp.h>\n\
+             #include <consoleapi.h>\n\
+             #include <consoleapi2.h>\n\
+             #include <consoleapi3.h>\n\
+             #include <consoleapis.h>\n\
+             #include <wincontypes.h>\n\
+             #undef DEFINE_CONSOLEV2_PROPERTIES\n\
+             #undef FE_IME\n\
+             #include <wsman.h>\n\
+             #undef WSMAN_API_VERSION_1_1\n\
+             #include <gdiplus.h>\n\
+             #undef GDIPVER\n"
+        );
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots(
+                [&winconp, &consoleapis, &wsman, &gdipluseffects]
+                    .map(|path| path_arg(path, "--include").unwrap()),
+            )],
+            &args,
+        )
+        .unwrap();
+        let names = snapshot
+            .facts()
+            .iter()
+            .map(|fact| fact.name.as_str())
+            .collect::<BTreeSet<_>>();
+        for name in [
+            "RegisterConsoleIME",
+            "UnregisterConsoleIME",
+            "ConsoleControl",
+            "WSMAN_CONNECT_DATA",
+            "WSManCreateShellEx",
+            "WSManDisconnectShell",
+            "GdipCreateEffect",
+        ] {
+            assert!(names.contains(name), "missing `{name}`");
+        }
+    }
+
+    #[test]
+    fn checked_in_kernel_root_materializes_after_user_mode_headers() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let ntdef = include_dirs
+            .iter()
+            .map(|directory| directory.join("ntdef.h"))
+            .find(|path| path.is_file())
+            .expect("missing checked-in ntdef.h");
+        let mut source = format!(
+            "{WIN32_SDK_PRELUDE}\n\
+             #define PIO_APC_ROUTINE_DEFINED\n\
+             #include <winternl.h>\n\
+             #undef PIO_APC_ROUTINE_DEFINED\n\
+             #define _NTDEF_\n"
+        );
+        crate::aggregate::append_kernel_input(&mut source, &ntdef).unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source)
+                .with_roots([path_arg(&ntdef, "--include").unwrap()])],
+            &args,
+        )
+        .unwrap();
+        let ntdef = path_arg(&ntdef, "--include").unwrap();
+        let names = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| {
+                source_path_matches(&ntdef, &fact.expansion.file)
+                    || source_path_matches(&ntdef, &fact.spelling.file)
+            })
+            .map(|fact| fact.name.as_str())
+            .collect::<BTreeSet<_>>();
+        for name in ["KIRQL", "NT_PRODUCT_TYPE"] {
+            assert!(names.contains(name), "missing `{name}` from ntdef.h");
+        }
+        for duplicate in ["PROCESSOR_NUMBER", "GROUP_AFFINITY"] {
+            assert!(
+                !names.contains(duplicate),
+                "ntdef.h retained winnt-shared duplicate `{duplicate}`"
+            );
+        }
+
+        let traversal = checked_in_traversal_policy();
+        let mut policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            ntdef.clone(),
+            convert_root_partition(logical_partition(&traversal, "Kernel").unwrap()),
+        );
+        let dependency = RootPartition::new("Dependency", "Windows.Win32.Foundation");
+        let dependency_headers = snapshot
+            .facts()
+            .iter()
+            .map(|fact| fact.spelling.file.as_str())
+            .chain(
+                snapshot
+                    .constants()
+                    .iter()
+                    .map(|constant| constant.spelling.file.as_str()),
+            )
+            .filter(|path| !source_path_matches(&ntdef, path))
+            .filter(|path| Path::new(path).is_file())
+            .collect::<BTreeSet<_>>();
+        for header in dependency_headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header.to_string(),
+                dependency.clone(),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let kernel = partitions
+            .iter()
+            .find(|(partition, _)| partition.partition == "Kernel")
+            .unwrap()
+            .1;
+        for declaration in ["type KIRQL", "enum NT_PRODUCT_TYPE"] {
+            assert!(
+                kernel.contains(declaration),
+                "Kernel output did not contain `{declaration}`:\n{kernel}"
+            );
+        }
+        for duplicate in ["PROCESSOR_NUMBER", "GROUP_AFFINITY"] {
+            assert!(
+                !kernel.contains(duplicate),
+                "Kernel output retained duplicate `{duplicate}`:\n{kernel}"
+            );
+        }
+    }
+
+    #[test]
+    fn checked_in_historical_computed_constants_still_emit() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let find_header = |name: &str| {
+            include_dirs
+                .iter()
+                .map(|directory| directory.join(name))
+                .find(|path| path.is_file())
+                .unwrap_or_else(|| panic!("missing checked-in header `{name}`"))
+        };
+        let winnt = find_header("winnt.h");
+        let mmddk = find_header("mmddk.h");
+        let mciapi = find_header("mciapi.h");
+        let source = format!(
+            "#define MMNOJOYDEV\n{WIN32_SDK_PRELUDE}\n\
+             #include <mmddk.h>\n\
+             #include <mciapi.h>\n\
+             #undef MMNOJOYDEV\n"
+        );
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(SATELLITE_INPUT, source).with_roots(
+                [&winnt, &mmddk, &mciapi].map(|path| path_arg(path, "--include").unwrap()),
+            )],
+            &args,
+        )
+        .unwrap();
+        let selected = BTreeSet::from([
+            "WAVE_FORMAT_PCM_S",
+            "MCIERR_INVALID_DEVICE_ID",
+            "TOKEN_ALL_ACCESS",
+            "KEY_ALL_ACCESS",
+            "PROCESS_ALL_ACCESS",
+        ]);
+        let traversal = checked_in_traversal_policy();
+        let header = |path: &Path| path_arg(path, "--partition-policy-root").unwrap();
+        let policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(
+                SATELLITE_INPUT,
+                header(&winnt),
+                convert_root_partition(logical_partition(&traversal, "Foundation").unwrap()),
+            )
+            .with_traversed_header_for_input(
+                SATELLITE_INPUT,
+                header(&mmddk),
+                convert_root_partition(logical_partition(&traversal, "Multimedia").unwrap()),
+            )
+            .with_traversed_header_for_input(
+                SATELLITE_INPUT,
+                header(&mciapi),
+                convert_root_partition(logical_partition(&traversal, "Multimedia").unwrap()),
+            );
+        let excluded_types = snapshot
+            .facts()
+            .iter()
+            .map(|fact| fact.name.clone())
+            .collect::<BTreeSet<_>>();
+        let excluded_constants = snapshot
+            .constants()
+            .iter()
+            .filter(|constant| !selected.contains(constant.name.as_str()))
+            .map(|constant| constant.name.clone())
+            .collect::<BTreeSet<_>>();
+        let references = BTreeMap::new();
+        let functions = BTreeSet::new();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, &references);
+        emit.library = Some("");
+        emit.functions = Some(&functions);
+        emit.excluded_types = Some(&excluded_types);
+        emit.excluded_constants = Some(&excluded_constants);
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let output = plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64")
+            .unwrap()
+            .into_values()
+            .collect::<String>();
+        for name in selected {
+            assert_eq!(
+                output.matches(&format!("const {name}")).count(),
+                1,
+                "{output}"
+            );
+        }
+    }
+
+    #[test]
     fn checked_in_logical_policy_conversion_preserves_every_owner_setting() {
         let traversal = checked_in_traversal_policy();
         let headers = convert_header_partition_policy(&traversal).unwrap();
-        let satellite_root_keys = authority_satellite_root_keys(&traversal);
+        let root_plan = build_authority_root_plan(&traversal).unwrap();
         assert_eq!(headers.traversed_headers().count(), 0);
         assert_eq!(headers.traversed_header_paths().count(), 1560);
         assert_eq!(
@@ -2772,17 +4418,45 @@ mod tests {
         let mut expected = HeaderPartitionPolicy::new();
         for partition in &traversal.partitions {
             let owner = convert_root_partition(partition);
-            let mut add = |path: &Path| {
+            let mut add = |path: &Path,
+                           canonical_path: &crate::partition::WindowsPathIdentity,
+                           inventory_path: &str| {
                 let header = path_arg(path, "--partition-policy-root").unwrap();
-                let input = logical_policy_input(&partition.identity, path, &satellite_root_keys);
-                expected.add_traversed_header_for_input(input, header, owner.clone());
+                let input =
+                    logical_policy_input(&root_plan, &partition.identity, canonical_path).unwrap();
+                if let Some(contract) = HEADER_POLICY_OVERRIDE_CONTRACTS
+                    .iter()
+                    .find(|contract| contract.path.eq_ignore_ascii_case(inventory_path))
+                {
+                    if partition.identity == contract.default_partition {
+                        expected.add_traversed_header_for_input(
+                            input,
+                            header.clone(),
+                            owner.clone(),
+                        );
+                        for (name, override_owner) in contract.overrides {
+                            expected.add_traversed_header_override_for_input(
+                                input,
+                                header.clone(),
+                                *name,
+                                convert_root_partition(
+                                    logical_partition(&traversal, override_owner).unwrap(),
+                                ),
+                            );
+                        }
+                    }
+                } else {
+                    expected.add_traversed_header_for_input(input, header, owner.clone());
+                }
             };
             for root in &partition.roots {
                 match root {
-                    crate::partition::TraversalRoot::File(root) => add(&root.path),
+                    crate::partition::TraversalRoot::File(root) => {
+                        add(&root.path, &root.canonical_path, &root.inventory_path)
+                    }
                     crate::partition::TraversalRoot::Directory(root) => {
                         for file in &root.files {
-                            add(&file.path);
+                            add(&file.path, &file.canonical_path, &file.inventory_path);
                         }
                     }
                     crate::partition::TraversalRoot::Missing(_)
@@ -2790,6 +4464,27 @@ mod tests {
                         panic!("checked-in traversal policy was not clean")
                     }
                 }
+            }
+        }
+        let psapi = logical_partition(&traversal, "PsApi1")
+            .unwrap()
+            .roots
+            .iter()
+            .find_map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => Some(&root.path),
+                _ => None,
+            })
+            .unwrap();
+        let psapi = path_arg(psapi, "--partition-policy-root").unwrap();
+        let psapi_owner = convert_root_partition(logical_partition(&traversal, "PsApi1").unwrap());
+        for name in PSAPI_V1_SYNTHESIZED_CONSTANTS {
+            for input in [PSAPI_V1_INPUT, PSAPI_V2_INPUT] {
+                expected.add_traversed_header_override_for_input(
+                    input,
+                    psapi.clone(),
+                    *name,
+                    psapi_owner.clone(),
+                );
             }
         }
         assert_eq!(headers, expected);
@@ -2810,34 +4505,35 @@ mod tests {
         }
         let v1_root = root(v1);
         let v2_root = root(v2);
-        let mut satellite_root_keys = authority_satellite_root_keys(&traversal);
-        satellite_root_keys.insert(normalize_audit_path("C:/sdk/shared/ntddstor.h"));
+        let root_plan = build_authority_root_plan(&traversal).unwrap();
 
         assert_eq!(v1_root.canonical_path, v2_root.canonical_path);
         assert!(v1_root.canonical_path.as_str().ends_with("/um/psapi.h"));
         assert_eq!(
-            logical_policy_input("PsApi1", &v1_root.path, &satellite_root_keys),
+            logical_policy_input(&root_plan, "PsApi1", &v1_root.canonical_path).unwrap(),
             PSAPI_V1_INPUT
         );
         assert_eq!(
-            logical_policy_input("PsApi2", &v2_root.path, &satellite_root_keys),
+            logical_policy_input(&root_plan, "PsApi2", &v2_root.canonical_path).unwrap(),
             PSAPI_V2_INPUT
         );
         assert_eq!(
-            logical_policy_input(
+            authority_owner_input(
                 "Ioctl",
                 Path::new("C:/sdk/shared/ntddstor.h"),
-                &satellite_root_keys
-            ),
-            SATELLITE_INPUT
+                "shared/ntddstor.h",
+            )
+            .unwrap(),
+            AuthorityInput::Satellite
         );
         assert_eq!(
-            logical_policy_input(
+            authority_owner_input(
                 "Foundation",
                 Path::new("C:/sdk/um/winuser.h"),
-                &satellite_root_keys
-            ),
-            AGGREGATE_INPUT
+                "um/winuser.h",
+            )
+            .unwrap(),
+            AuthorityInput::Aggregate
         );
         let psapi_version = |partition: &crate::partition::LogicalPartition| {
             partition
@@ -3137,7 +4833,6 @@ mod tests {
         .unwrap();
         let header = path_arg(&header, "--include").unwrap();
         let source = |version| format!("#define PSAPI_VERSION {version}\n#include \"{header}\"\n");
-        let satellite_roots = BTreeSet::new();
         let snapshot = windows_clang::extract(
             [
                 Input::new(PSAPI_V1_INPUT, source(1)).with_roots([header.clone()]),
@@ -3148,12 +4843,12 @@ mod tests {
         .unwrap();
         let policy = HeaderPartitionPolicy::new()
             .with_traversed_header_for_input(
-                logical_policy_input("PsApi1", Path::new("psapi.h"), &satellite_roots),
+                PSAPI_V1_INPUT,
                 header.clone(),
                 RootPartition::new("PsApi1", "Windows.Win32.System.ProcessStatus"),
             )
             .with_traversed_header_for_input(
-                logical_policy_input("PsApi2", Path::new("psapi.h"), &satellite_roots),
+                PSAPI_V2_INPUT,
                 header,
                 RootPartition::new("PsApi2", "Windows.Win32.System.ProcessStatus")
                     .with_exclusion("SharedProcessStatus"),
@@ -3393,10 +5088,12 @@ mod tests {
             CoverageRoot {
                 configured: path_arg(&macros, "--include").unwrap(),
                 label: "macros.h".to_string(),
+                owning_inputs: Vec::new(),
             },
             CoverageRoot {
                 configured: path_arg(&public, "--include").unwrap(),
                 label: "public.h".to_string(),
+                owning_inputs: Vec::new(),
             },
         ];
         assert_eq!(fact_coverage_root(&roots, fact).unwrap().label, "public.h");
@@ -3404,33 +5101,132 @@ mod tests {
     }
 
     #[test]
-    fn extraction_coverage_report_is_stable_and_non_failing() {
+    fn extraction_coverage_report_is_input_qualified_and_stable() {
         let roots = vec![
             CoverageRoot {
                 configured: "C:/sdk/shared/a.h".to_string(),
                 label: "shared/a.h".to_string(),
+                owning_inputs: vec![AGGREGATE_INPUT.to_string()],
             },
             CoverageRoot {
                 configured: "C:/sdk/um/b.h".to_string(),
                 label: "um/b.h".to_string(),
+                owning_inputs: vec![AGGREGATE_INPUT.to_string()],
             },
             CoverageRoot {
                 configured: "C:/sdk/um/c.h".to_string(),
                 label: "um/c.h".to_string(),
+                owning_inputs: vec![SATELLITE_INPUT.to_string()],
             },
         ];
-        let observed = BTreeSet::from(["um/b.h"]);
-        let report = extraction_coverage_report(&roots, &observed);
-        assert_eq!(report, extraction_coverage_report(&roots, &observed));
+        let visited = BTreeSet::from([
+            ("shared/a.h".to_string(), AGGREGATE_INPUT.to_string()),
+            ("um/b.h".to_string(), AGGREGATE_INPUT.to_string()),
+        ]);
+        let productive = BTreeSet::from([("um/b.h".to_string(), AGGREGATE_INPUT.to_string())]);
+        let dependencies = BTreeSet::from([("um/c.h".to_string(), AGGREGATE_INPUT.to_string())]);
+        let (report, failures) =
+            extraction_coverage_report(&roots, &visited, &productive, &dependencies);
+        assert_eq!(
+            (report.clone(), failures.clone()),
+            extraction_coverage_report(&roots, &visited, &productive, &dependencies)
+        );
         assert_eq!(
             report,
-            "version\t1\n\
+            "version\t2\n\
              summary\tcanonical_roots\t3\n\
-             summary\tobserved_roots\t1\n\
-             summary\tunobserved_roots\t2\n\
-             unobserved\tuncategorized\tshared/a.h\n\
-             unobserved\tuncategorized\tum/c.h\n"
+             summary\towning_root_pairs\t3\n\
+             summary\tvisited_root_pairs\t2\n\
+             summary\tproductive_root_pairs\t1\n\
+             summary\tunvisited_root_pairs\t1\n\
+             summary\tvisited_zero_fact_pairs\t1\n\
+             summary\tcategorized_unproductive_pairs\t0\n\
+             summary\tuncategorized_unproductive_pairs\t2\n\
+             summary\tdependency_only_visits\t1\n\
+             root\twin32metadata-aggregate.cpp\tvisited\tuncategorized-zero-fact\tshared/a.h\n\
+             root\twin32metadata-aggregate.cpp\tvisited\tproductive\tum/b.h\n\
+             root\twin32metadata-satellites.cpp\tunvisited\tuncategorized-zero-fact\tum/c.h\n\
+             dependency\twin32metadata-aggregate.cpp\tum/c.h\n"
         );
+        assert_eq!(
+            failures,
+            [
+                "unvisited\twin32metadata-satellites.cpp\tum/c.h",
+                "uncategorized-zero-fact\twin32metadata-aggregate.cpp\tshared/a.h",
+            ]
+        );
+    }
+
+    #[test]
+    fn extraction_coverage_uses_clang_visits_per_owning_input() {
+        ensure_libclang();
+        let root = scratch("coverage-inclusions");
+        let aggregate_only = root.join("aggregate-only.h");
+        let satellite_owned = root.join("satellite-owned.h");
+        let skipped = root.join("skipped.h");
+        for path in [&aggregate_only, &satellite_owned, &skipped] {
+            std::fs::write(path, "#pragma once\n").unwrap();
+        }
+        let include =
+            |path: &Path| format!("#include \"{}\"\n", path_arg(path, "--include").unwrap());
+        let aggregate_source = format!(
+            "{}{}#if 0\n{}#endif\n",
+            include(&aggregate_only),
+            include(&satellite_owned),
+            include(&skipped)
+        );
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, aggregate_source).with_roots([path_arg(
+                    &aggregate_only,
+                    "--include",
+                )
+                .unwrap()]),
+                Input::new(SATELLITE_INPUT, include(&satellite_owned)).with_roots([path_arg(
+                    &satellite_owned,
+                    "--include",
+                )
+                .unwrap()]),
+            ],
+            &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        let roots = vec![
+            CoverageRoot {
+                configured: path_arg(&aggregate_only, "--include").unwrap(),
+                label: "aggregate-only.h".to_string(),
+                owning_inputs: vec![AGGREGATE_INPUT.to_string()],
+            },
+            CoverageRoot {
+                configured: path_arg(&satellite_owned, "--include").unwrap(),
+                label: "satellite-owned.h".to_string(),
+                owning_inputs: vec![SATELLITE_INPUT.to_string()],
+            },
+            CoverageRoot {
+                configured: path_arg(&skipped, "--include").unwrap(),
+                label: "skipped.h".to_string(),
+                owning_inputs: vec![AGGREGATE_INPUT.to_string()],
+            },
+        ];
+        let report = root.join("coverage.tsv");
+        let error = write_extraction_coverage(&snapshot, &roots, &report).unwrap_err();
+        assert!(error.contains("found 3 issue(s)"), "{error}");
+        assert!(
+            error.contains("unvisited\twin32metadata-aggregate.cpp\tskipped.h"),
+            "{error}"
+        );
+        let report = std::fs::read_to_string(&report).unwrap();
+        assert!(report.contains(
+            "root\twin32metadata-aggregate.cpp\tvisited\tuncategorized-zero-fact\taggregate-only.h"
+        ));
+        assert!(report.contains(
+            "root\twin32metadata-satellites.cpp\tvisited\tuncategorized-zero-fact\tsatellite-owned.h"
+        ));
+        assert!(report.contains(
+            "root\twin32metadata-aggregate.cpp\tunvisited\tuncategorized-zero-fact\tskipped.h"
+        ));
+        assert!(report.contains("dependency\twin32metadata-aggregate.cpp\tsatellite-owned.h"));
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

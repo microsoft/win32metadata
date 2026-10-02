@@ -15,45 +15,7 @@ struct ApprovedRootOwner {
     compile_variant: Option<&'static str>,
 }
 
-const APPROVED_MULTI_PARTITION_ROOTS: [ApprovedRootConflict; 8] = [
-    ApprovedRootConflict {
-        path: "shared/ntddstor.h",
-        owners: &[
-            ApprovedRootOwner {
-                partition: "Fs",
-                namespace: "Windows.Win32.Storage.FileSystem",
-                policy_sha256: "96BD798C3FF920EA63F5D91B808EF73FD396F77E803FFB0B7C15565E4A4BC5C2",
-                compile_environment_sha256: "B412202E85E2D7D29DBF2284B54A9BD2C7BC87AC1FFF7452C3EAA9170997349B",
-                compile_variant: None,
-            },
-            ApprovedRootOwner {
-                partition: "Ioctl",
-                namespace: "Windows.Win32.System.Ioctl",
-                policy_sha256: "4965447C9B1330BD33560DCD4E1006E6C3DEF5247CDE286E7502167CF2CE6B65",
-                compile_environment_sha256: "39ED17C05B01796D2F30B589912214F212F2FBB401D0D4A460396D648FC9A799",
-                compile_variant: None,
-            },
-        ],
-    },
-    ApprovedRootConflict {
-        path: "shared/uuids.h",
-        owners: &[
-            ApprovedRootOwner {
-                partition: "Media",
-                namespace: "Windows.Win32.Media",
-                policy_sha256: "2C765F19CEACC913D53DA028BF52A6176C333039EDD8C9F7D401ACD70460A314",
-                compile_environment_sha256: "8F76592C5D98BED573DD87DA26157B524D258B8477340C15E1CE8EFD31411C77",
-                compile_variant: None,
-            },
-            ApprovedRootOwner {
-                partition: "Mf",
-                namespace: "Windows.Win32.Media.MediaFoundation",
-                policy_sha256: "7F91F6AF054A4F4BB60510C9FF57E14CF871E3800985C7B38D0D283414A14574",
-                compile_environment_sha256: "93E81862C5BE2A2ACE94949CD57BE6D0EFD5E185F8F9D49DCB650D91CC8D690A",
-                compile_variant: None,
-            },
-        ],
-    },
+const APPROVED_MULTI_PARTITION_ROOTS: [ApprovedRootConflict; 3] = [
     ApprovedRootConflict {
         path: "um/audioendpoints.h",
         owners: &[
@@ -74,44 +36,6 @@ const APPROVED_MULTI_PARTITION_ROOTS: [ApprovedRootConflict; 8] = [
         ],
     },
     ApprovedRootConflict {
-        path: "um/dxcore.h",
-        owners: &[
-            ApprovedRootOwner {
-                partition: "DXCore",
-                namespace: "Windows.Win32.Graphics.DXCore",
-                policy_sha256: "D9B5FE6AEE501FDDE09C539C1AB8BACD62E4ADB76E5E316850735EABAF2CB8B0",
-                compile_environment_sha256: "33EBEF8E597894B8D20C8F7A5B37215AD1C22D2B28BD2FBE4CCAEFFC513C0DA3",
-                compile_variant: None,
-            },
-            ApprovedRootOwner {
-                partition: "Display",
-                namespace: "Windows.Win32.Devices.Display",
-                policy_sha256: "10B4E11B8F730850C8244DD072B83D9CC5AEA168D62E3CF6DBE9B898912FFCFC",
-                compile_environment_sha256: "8C4678D75B12047FBEC9F9E14A62702CEAC11A56117A784C92ADD44E0E4771EF",
-                compile_variant: None,
-            },
-        ],
-    },
-    ApprovedRootConflict {
-        path: "um/dxcore_interface.h",
-        owners: &[
-            ApprovedRootOwner {
-                partition: "DXCore",
-                namespace: "Windows.Win32.Graphics.DXCore",
-                policy_sha256: "D9B5FE6AEE501FDDE09C539C1AB8BACD62E4ADB76E5E316850735EABAF2CB8B0",
-                compile_environment_sha256: "33EBEF8E597894B8D20C8F7A5B37215AD1C22D2B28BD2FBE4CCAEFFC513C0DA3",
-                compile_variant: None,
-            },
-            ApprovedRootOwner {
-                partition: "Display",
-                namespace: "Windows.Win32.Devices.Display",
-                policy_sha256: "10B4E11B8F730850C8244DD072B83D9CC5AEA168D62E3CF6DBE9B898912FFCFC",
-                compile_environment_sha256: "8C4678D75B12047FBEC9F9E14A62702CEAC11A56117A784C92ADD44E0E4771EF",
-                compile_variant: None,
-            },
-        ],
-    },
-    ApprovedRootConflict {
         path: "um/endpointvolume.h",
         owners: &[
             ApprovedRootOwner {
@@ -126,25 +50,6 @@ const APPROVED_MULTI_PARTITION_ROOTS: [ApprovedRootConflict; 8] = [
                 namespace: "Windows.Win32.Media.Audio.Endpoints",
                 policy_sha256: "72DBA8685DCAC68BD917608E2162467423053CB94743E48E124A09AFA61E0D2A",
                 compile_environment_sha256: "B29ED46475C7A51BAD52270F15B0A3CB80C45523BBE5A02B87C7C06BB1BDB06F",
-                compile_variant: None,
-            },
-        ],
-    },
-    ApprovedRootConflict {
-        path: "um/idispids.h",
-        owners: &[
-            ApprovedRootOwner {
-                partition: "ComOle",
-                namespace: "Windows.Win32.System.Ole",
-                policy_sha256: "4D7E5BEC36147C749680010F5D66185EF907B42CB44443A38ABBC6E1F6A3BB63",
-                compile_environment_sha256: "8B2AB405FD8C915084D6CCA63462A742E872FB957452238A57EFFF2227CB2965",
-                compile_variant: None,
-            },
-            ApprovedRootOwner {
-                partition: "InternetExplorer",
-                namespace: "Windows.Win32.Web.InternetExplorer",
-                policy_sha256: "376283B3E68EC9672FD5A153B22A459B8E01A210580372206EA5CAAF406DB4C6",
-                compile_environment_sha256: "913FFB704A8188E556B8000DA6899F20D8C1BF94272BBBC573E13F0AF687260B",
                 compile_variant: None,
             },
         ],
@@ -2746,7 +2651,7 @@ mod tests {
                 .iter()
                 .map(|partition| partition.include_roots().count())
                 .sum::<usize>(),
-            1568
+            1563
         );
         assert_eq!(
             partitions
@@ -2774,7 +2679,7 @@ mod tests {
         let counts = option_counts(&partitions);
         assert_eq!(counts["--namespace"], 321);
         assert_eq!(counts["--traverse"], 321);
-        assert_eq!(counts["--exclude"], 106);
+        assert_eq!(counts["--exclude"], 107);
         assert_eq!(counts["--remap"], 13);
         assert_eq!(counts["--with-attribute"], 23);
         assert_eq!(counts["--with-librarypath"], 6);
@@ -2790,14 +2695,14 @@ mod tests {
                 .iter()
                 .map(|policy| policy.exclusions.len())
                 .sum::<usize>(),
-            562
+            591
         );
         assert_eq!(
             partitions
                 .iter()
                 .map(|partition| partition.values("--exclude").count())
                 .sum::<usize>(),
-            563
+            592
         );
         assert_eq!(
             policies
@@ -2897,11 +2802,7 @@ mod tests {
         let conflicts = root_namespace_conflicts(&partitions).unwrap();
         assert_eq!(
             conflicts.keys().map(String::as_str).collect::<Vec<_>>(),
-            APPROVED_MULTI_PARTITION_ROOTS
-                .iter()
-                .take(7)
-                .map(|approved| approved.path)
-                .collect::<Vec<_>>()
+            ["um/audioendpoints.h", "um/endpointvolume.h"]
         );
         assert_eq!(input_namespaces(&partitions).unwrap().len(), 321);
     }
@@ -2911,7 +2812,7 @@ mod tests {
         let policy = checked_in_traversal_policy();
         assert_eq!(
             policy.canonical_inventory_sha256(),
-            "395FAD2C5729FF81F35311F9D591CA05B9EF4FDCE96173FAB9BBCAF8AFB7E811"
+            "A7395A3462909DD391578B2F854A3FA6E448ADC7EF44EF4CB90810E63979CF62"
         );
         assert_eq!(policy.partitions.len(), 321);
         assert_eq!(
@@ -2920,9 +2821,9 @@ mod tests {
                 .iter()
                 .map(|partition| partition.roots.len())
                 .sum::<usize>(),
-            1570
+            1565
         );
-        assert_eq!(policy.file_root_count(), 1570);
+        assert_eq!(policy.file_root_count(), 1565);
         assert_eq!(policy.directory_root_count(), 0);
         assert_eq!(policy.canonical_physical_files().len(), 1559);
         assert!(policy.audit.missing_roots.is_empty());
@@ -3022,20 +2923,6 @@ mod tests {
             cross_namespace,
             [
                 (
-                    "shared/ntddstor.h",
-                    vec![
-                        ("Fs", "Windows.Win32.Storage.FileSystem"),
-                        ("Ioctl", "Windows.Win32.System.Ioctl"),
-                    ],
-                ),
-                (
-                    "shared/uuids.h",
-                    vec![
-                        ("Media", "Windows.Win32.Media"),
-                        ("Mf", "Windows.Win32.Media.MediaFoundation"),
-                    ],
-                ),
-                (
                     "um/audioendpoints.h",
                     vec![
                         ("Audio", "Windows.Win32.Media.Audio"),
@@ -3043,31 +2930,10 @@ mod tests {
                     ],
                 ),
                 (
-                    "um/dxcore.h",
-                    vec![
-                        ("DXCore", "Windows.Win32.Graphics.DXCore"),
-                        ("Display", "Windows.Win32.Devices.Display"),
-                    ],
-                ),
-                (
-                    "um/dxcore_interface.h",
-                    vec![
-                        ("DXCore", "Windows.Win32.Graphics.DXCore"),
-                        ("Display", "Windows.Win32.Devices.Display"),
-                    ],
-                ),
-                (
                     "um/endpointvolume.h",
                     vec![
                         ("Audio", "Windows.Win32.Media.Audio"),
                         ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints",),
-                    ],
-                ),
-                (
-                    "um/idispids.h",
-                    vec![
-                        ("ComOle", "Windows.Win32.System.Ole"),
-                        ("InternetExplorer", "Windows.Win32.Web.InternetExplorer",),
                     ],
                 ),
             ]
@@ -3104,7 +2970,7 @@ mod tests {
                 ),
             ]
         );
-        assert_eq!(policy.audit.physical_overlaps.len(), 8);
+        assert_eq!(policy.audit.physical_overlaps.len(), 3);
     }
 
     #[test]
