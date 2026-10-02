@@ -2086,6 +2086,32 @@ mod tests {
         .unwrap()
     }
 
+    fn checked_in_clang_args(include_dirs: &[PathBuf]) -> Vec<String> {
+        let mut args = CLANG_ARGS
+            .iter()
+            .map(|argument| argument.to_string())
+            .collect::<Vec<_>>();
+        for header in [SAL_HEADER, ANNOTATION_HEADER] {
+            let header = include_dirs
+                .iter()
+                .map(|directory| directory.join(header))
+                .find(|path| path.is_file())
+                .unwrap();
+            args.extend([
+                "-include".to_string(),
+                path_arg(&header, "--include").unwrap(),
+            ]);
+        }
+        for directory in include_dirs {
+            args.extend([
+                "-isystem".to_string(),
+                path_arg(directory, "--include").unwrap(),
+            ]);
+        }
+        args.push("--target=x86_64-pc-windows-msvc".to_string());
+        args
+    }
+
     fn ensure_libclang() {
         static LIBCLANG: OnceLock<Result<(), String>> = OnceLock::new();
         LIBCLANG
@@ -2583,6 +2609,10 @@ mod tests {
                 .source
                 .contains("#define PSAPI_VERSION 2\n#include <psapi.h>")
         );
+        assert!(
+            authority[1].source.find("#include <mmreg.h>").unwrap()
+                < authority[1].source.find("#include <vfw.h>").unwrap()
+        );
     }
 
     #[test]
@@ -2642,6 +2672,87 @@ mod tests {
             &args,
         )
         .unwrap();
+    }
+
+    #[test]
+    fn multimedia_legacy_order_deduplicates_ictype_constants() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let find_header = |name: &str| {
+            include_dirs
+                .iter()
+                .map(|directory| directory.join(name))
+                .find(|path| path.is_file())
+                .unwrap()
+        };
+        let mmreg = find_header("mmreg.h");
+        let vfw = find_header("Vfw.h");
+        let prelude = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, format!("{prelude}\n#include <mmreg.h>\n"))
+                    .with_roots([path_arg(&mmreg, "--include").unwrap()]),
+                Input::new(
+                    SATELLITE_INPUT,
+                    format!("{prelude}\n#include <mmreg.h>\n#include <Vfw.h>\n"),
+                )
+                .with_roots([path_arg(&vfw, "--include").unwrap()]),
+            ],
+            &args,
+        )
+        .unwrap();
+        let owner = RootPartition::new("Multimedia", "Windows.Win32.Media.Multimedia");
+        let policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path_arg(&mmreg, "--include").unwrap(),
+                owner.clone(),
+            )
+            .with_traversed_header_for_input(
+                SATELLITE_INPUT,
+                path_arg(&vfw, "--include").unwrap(),
+                owner,
+            );
+        let references = BTreeMap::new();
+        let excluded_types = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| !matches!(fact.data, FactData::Function { .. }))
+            .map(|fact| fact.name.clone())
+            .collect::<BTreeSet<_>>();
+        let excluded_functions = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| matches!(fact.data, FactData::Function { .. }))
+            .map(|fact| fact.name.clone())
+            .collect::<BTreeSet<_>>();
+        let excluded_constants = snapshot
+            .constants()
+            .iter()
+            .filter(|constant| !["ICTYPE_AUDIO", "ICTYPE_VIDEO"].contains(&constant.name.as_str()))
+            .map(|constant| constant.name.clone())
+            .collect::<BTreeSet<_>>();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, &references);
+        emit.library = Some("");
+        emit.excluded_types = Some(&excluded_types);
+        emit.excluded_functions = Some(&excluded_functions);
+        emit.excluded_constants = Some(&excluded_constants);
+        let output = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap()
+        .into_values()
+        .collect::<String>();
+
+        assert_eq!(output.matches("const ICTYPE_AUDIO").count(), 1, "{output}");
+        assert_eq!(output.matches("const ICTYPE_VIDEO").count(), 1, "{output}");
     }
 
     #[test]

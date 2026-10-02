@@ -98,6 +98,7 @@ pub fn satellite_source(prelude: &str) -> String {
     append_io(&mut source);
     append_extern_c_headers(&mut source, &["mschapp.h"]);
     append_printing(&mut source);
+    append_headers(&mut source, &["mmreg.h"]);
     source
 }
 
