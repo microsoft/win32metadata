@@ -1,59 +1,171 @@
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 struct ApprovedRootConflict {
     path: &'static str,
-    owners: &'static [(&'static str, &'static str)],
+    owners: &'static [ApprovedRootOwner],
 }
 
-const APPROVED_CROSS_NAMESPACE_ROOTS: [ApprovedRootConflict; 7] = [
+struct ApprovedRootOwner {
+    partition: &'static str,
+    namespace: &'static str,
+    policy_sha256: &'static str,
+    compile_environment_sha256: &'static str,
+    compile_variant: Option<&'static str>,
+}
+
+const APPROVED_MULTI_PARTITION_ROOTS: [ApprovedRootConflict; 8] = [
     ApprovedRootConflict {
         path: "shared/ntddstor.h",
         owners: &[
-            ("Fs", "Windows.Win32.Storage.FileSystem"),
-            ("Ioctl", "Windows.Win32.System.Ioctl"),
+            ApprovedRootOwner {
+                partition: "Fs",
+                namespace: "Windows.Win32.Storage.FileSystem",
+                policy_sha256: "96BD798C3FF920EA63F5D91B808EF73FD396F77E803FFB0B7C15565E4A4BC5C2",
+                compile_environment_sha256: "B412202E85E2D7D29DBF2284B54A9BD2C7BC87AC1FFF7452C3EAA9170997349B",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "Ioctl",
+                namespace: "Windows.Win32.System.Ioctl",
+                policy_sha256: "4965447C9B1330BD33560DCD4E1006E6C3DEF5247CDE286E7502167CF2CE6B65",
+                compile_environment_sha256: "39ED17C05B01796D2F30B589912214F212F2FBB401D0D4A460396D648FC9A799",
+                compile_variant: None,
+            },
         ],
     },
     ApprovedRootConflict {
         path: "shared/uuids.h",
         owners: &[
-            ("Media", "Windows.Win32.Media"),
-            ("Mf", "Windows.Win32.Media.MediaFoundation"),
+            ApprovedRootOwner {
+                partition: "Media",
+                namespace: "Windows.Win32.Media",
+                policy_sha256: "2C765F19CEACC913D53DA028BF52A6176C333039EDD8C9F7D401ACD70460A314",
+                compile_environment_sha256: "8F76592C5D98BED573DD87DA26157B524D258B8477340C15E1CE8EFD31411C77",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "Mf",
+                namespace: "Windows.Win32.Media.MediaFoundation",
+                policy_sha256: "7F91F6AF054A4F4BB60510C9FF57E14CF871E3800985C7B38D0D283414A14574",
+                compile_environment_sha256: "93E81862C5BE2A2ACE94949CD57BE6D0EFD5E185F8F9D49DCB650D91CC8D690A",
+                compile_variant: None,
+            },
         ],
     },
     ApprovedRootConflict {
         path: "um/audioendpoints.h",
         owners: &[
-            ("Audio", "Windows.Win32.Media.Audio"),
-            ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints"),
+            ApprovedRootOwner {
+                partition: "Audio",
+                namespace: "Windows.Win32.Media.Audio",
+                policy_sha256: "5BEDDA0121A46E1F0C36C746A86DC0D7F6432233958170DC3F2314A33FDE0650",
+                compile_environment_sha256: "A49DB8DFF1118F23836531A07BE33CDECBF75B99BDD6B6C591001E83AB125428",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "Audio.Endpoints",
+                namespace: "Windows.Win32.Media.Audio.Endpoints",
+                policy_sha256: "72DBA8685DCAC68BD917608E2162467423053CB94743E48E124A09AFA61E0D2A",
+                compile_environment_sha256: "B29ED46475C7A51BAD52270F15B0A3CB80C45523BBE5A02B87C7C06BB1BDB06F",
+                compile_variant: None,
+            },
         ],
     },
     ApprovedRootConflict {
         path: "um/dxcore.h",
         owners: &[
-            ("DXCore", "Windows.Win32.Graphics.DXCore"),
-            ("Display", "Windows.Win32.Devices.Display"),
+            ApprovedRootOwner {
+                partition: "DXCore",
+                namespace: "Windows.Win32.Graphics.DXCore",
+                policy_sha256: "D9B5FE6AEE501FDDE09C539C1AB8BACD62E4ADB76E5E316850735EABAF2CB8B0",
+                compile_environment_sha256: "33EBEF8E597894B8D20C8F7A5B37215AD1C22D2B28BD2FBE4CCAEFFC513C0DA3",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "Display",
+                namespace: "Windows.Win32.Devices.Display",
+                policy_sha256: "10B4E11B8F730850C8244DD072B83D9CC5AEA168D62E3CF6DBE9B898912FFCFC",
+                compile_environment_sha256: "8C4678D75B12047FBEC9F9E14A62702CEAC11A56117A784C92ADD44E0E4771EF",
+                compile_variant: None,
+            },
         ],
     },
     ApprovedRootConflict {
         path: "um/dxcore_interface.h",
         owners: &[
-            ("DXCore", "Windows.Win32.Graphics.DXCore"),
-            ("Display", "Windows.Win32.Devices.Display"),
+            ApprovedRootOwner {
+                partition: "DXCore",
+                namespace: "Windows.Win32.Graphics.DXCore",
+                policy_sha256: "D9B5FE6AEE501FDDE09C539C1AB8BACD62E4ADB76E5E316850735EABAF2CB8B0",
+                compile_environment_sha256: "33EBEF8E597894B8D20C8F7A5B37215AD1C22D2B28BD2FBE4CCAEFFC513C0DA3",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "Display",
+                namespace: "Windows.Win32.Devices.Display",
+                policy_sha256: "10B4E11B8F730850C8244DD072B83D9CC5AEA168D62E3CF6DBE9B898912FFCFC",
+                compile_environment_sha256: "8C4678D75B12047FBEC9F9E14A62702CEAC11A56117A784C92ADD44E0E4771EF",
+                compile_variant: None,
+            },
         ],
     },
     ApprovedRootConflict {
         path: "um/endpointvolume.h",
         owners: &[
-            ("Audio", "Windows.Win32.Media.Audio"),
-            ("Audio.Endpoints", "Windows.Win32.Media.Audio.Endpoints"),
+            ApprovedRootOwner {
+                partition: "Audio",
+                namespace: "Windows.Win32.Media.Audio",
+                policy_sha256: "5BEDDA0121A46E1F0C36C746A86DC0D7F6432233958170DC3F2314A33FDE0650",
+                compile_environment_sha256: "A49DB8DFF1118F23836531A07BE33CDECBF75B99BDD6B6C591001E83AB125428",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "Audio.Endpoints",
+                namespace: "Windows.Win32.Media.Audio.Endpoints",
+                policy_sha256: "72DBA8685DCAC68BD917608E2162467423053CB94743E48E124A09AFA61E0D2A",
+                compile_environment_sha256: "B29ED46475C7A51BAD52270F15B0A3CB80C45523BBE5A02B87C7C06BB1BDB06F",
+                compile_variant: None,
+            },
         ],
     },
     ApprovedRootConflict {
         path: "um/idispids.h",
         owners: &[
-            ("ComOle", "Windows.Win32.System.Ole"),
-            ("InternetExplorer", "Windows.Win32.Web.InternetExplorer"),
+            ApprovedRootOwner {
+                partition: "ComOle",
+                namespace: "Windows.Win32.System.Ole",
+                policy_sha256: "4D7E5BEC36147C749680010F5D66185EF907B42CB44443A38ABBC6E1F6A3BB63",
+                compile_environment_sha256: "8B2AB405FD8C915084D6CCA63462A742E872FB957452238A57EFFF2227CB2965",
+                compile_variant: None,
+            },
+            ApprovedRootOwner {
+                partition: "InternetExplorer",
+                namespace: "Windows.Win32.Web.InternetExplorer",
+                policy_sha256: "376283B3E68EC9672FD5A153B22A459B8E01A210580372206EA5CAAF406DB4C6",
+                compile_environment_sha256: "913FFB704A8188E556B8000DA6899F20D8C1BF94272BBBC573E13F0AF687260B",
+                compile_variant: None,
+            },
+        ],
+    },
+    ApprovedRootConflict {
+        path: "um/psapi.h",
+        owners: &[
+            ApprovedRootOwner {
+                partition: "PsApi1",
+                namespace: "Windows.Win32.System.ProcessStatus",
+                policy_sha256: "BF3F6B6F6F12C06D1C950C7AAF71F0EB9B17C45421F197483549E82820661E6B",
+                compile_environment_sha256: "0CF65D917FA3BCE0C60CA6D771FC65FDE698F45171A1EB30416BBD527AEDB69D",
+                compile_variant: Some("PSAPI_VERSION=1"),
+            },
+            ApprovedRootOwner {
+                partition: "PsApi2",
+                namespace: "Windows.Win32.System.ProcessStatus",
+                policy_sha256: "7C266AD373480557E79B83510BC08F92D3A98BDDF170D6FD0CA11EA5A4C2B14E",
+                compile_environment_sha256: "55B418833573FBED308811D234FAB775292BF5A0DB653AF4930A3777EB321AD0",
+                compile_variant: Some("PSAPI_VERSION=2"),
+            },
         ],
     },
 ];
@@ -82,6 +194,7 @@ pub struct ResolvedRoots {
 pub struct WindowsPathIdentity(String);
 
 impl WindowsPathIdentity {
+    #[allow(dead_code)]
     pub fn as_str(&self) -> &str {
         &self.0
     }
@@ -115,6 +228,7 @@ pub struct ResolvedTraversalRoot {
     pub requested: String,
     pub path: PathBuf,
     pub canonical_path: WindowsPathIdentity,
+    pub inventory_path: String,
     pub sdk_scope: Option<SdkScopeResolution>,
 }
 
@@ -122,6 +236,7 @@ pub struct ResolvedTraversalRoot {
 pub struct PhysicalFile {
     pub path: PathBuf,
     pub canonical_path: WindowsPathIdentity,
+    pub inventory_path: String,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -168,6 +283,7 @@ pub struct LogicalPartition {
     pub input: PathBuf,
     pub source: String,
     pub policy: PartitionPolicy,
+    pub compile_environment: CompileEnvironmentIdentity,
     pub roots: Vec<TraversalRoot>,
 }
 
@@ -212,12 +328,17 @@ pub struct PhysicalRootOwner {
     pub partition: String,
     pub namespace: String,
     pub requested_roots: Vec<String>,
+    pub policy: PartitionPolicy,
+    pub policy_sha256: String,
+    pub compile_environment: CompileEnvironmentIdentity,
+    pub compile_environment_sha256: String,
+    pub compile_variant: Option<String>,
 }
 
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum PhysicalRootOverlapKind {
-    SameNamespace,
     ApprovedCrossNamespace,
+    ApprovedCompileVariants,
     Unapproved,
 }
 
@@ -225,6 +346,7 @@ pub enum PhysicalRootOverlapKind {
 pub struct PhysicalRootOverlap {
     pub path: PathBuf,
     pub canonical_path: WindowsPathIdentity,
+    pub inventory_path: String,
     pub owners: Vec<PhysicalRootOwner>,
     pub kind: PhysicalRootOverlapKind,
 }
@@ -244,7 +366,25 @@ pub struct CompileEnvironmentException {
     pub standard: Option<String>,
     pub include_directories: Vec<String>,
     pub partition_local_roots: Vec<String>,
+    pub defines: Vec<SourceDefine>,
+    pub source_sha256: String,
     pub has_nonordinary_main_source: bool,
+}
+
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub struct SourceDefine {
+    // Ordered textual definition; source_sha256 retains surrounding #undef and conditional context.
+    pub name: String,
+    pub value: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct CompileEnvironmentIdentity {
+    pub standard: Option<String>,
+    pub include_directories: Vec<String>,
+    pub partition_local_roots: Vec<String>,
+    pub defines: Vec<SourceDefine>,
+    pub source_sha256: String,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -261,12 +401,16 @@ struct ResolvedRootClaim {
     requested: String,
     path: PathBuf,
     canonical_path: WindowsPathIdentity,
+    inventory_path: String,
+    policy: PartitionPolicy,
+    compile_environment: CompileEnvironmentIdentity,
     scope_fallback: bool,
 }
 
 #[derive(Debug)]
 struct IncludeRootResolution {
     path: PathBuf,
+    inventory_path: String,
     sdk_scope: SdkScopeResolution,
 }
 
@@ -279,6 +423,14 @@ struct PendingScopeFallback {
     requested_scope: String,
     actual_scope: String,
     physical_paths: Vec<WindowsPathIdentity>,
+}
+
+#[derive(Clone, Debug)]
+struct RootOwnerClaims {
+    namespace: String,
+    requested_roots: BTreeSet<String>,
+    policy: PartitionPolicy,
+    compile_environment: CompileEnvironmentIdentity,
 }
 
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
@@ -304,6 +456,18 @@ pub struct PartitionPolicy {
     pub standard: Option<String>,
     pub include_directories: Vec<String>,
     pub legacy_output: Option<String>,
+}
+
+impl CompileEnvironmentIdentity {
+    pub fn sha256(&self) -> String {
+        compile_environment_sha256(self)
+    }
+}
+
+impl PartitionPolicy {
+    pub fn sha256(&self) -> String {
+        partition_policy_sha256(self)
+    }
 }
 
 impl Partition {
@@ -588,6 +752,63 @@ impl TraversalPolicy {
             .filter(|root| matches!(root, TraversalRoot::Directory(_)))
             .count()
     }
+
+    pub fn canonical_inventory_sha256(&self) -> String {
+        struct Entry<'a> {
+            physical_path: &'a str,
+            requested_root: &'a str,
+            partition: &'a str,
+            namespace: &'a str,
+            policy: &'a PartitionPolicy,
+            compile_environment: &'a CompileEnvironmentIdentity,
+        }
+
+        let mut entries = Vec::new();
+        for partition in &self.partitions {
+            for root in &partition.roots {
+                let requested_root = root.requested();
+                match root {
+                    TraversalRoot::File(root) => entries.push(Entry {
+                        physical_path: &root.inventory_path,
+                        requested_root,
+                        partition: &partition.identity,
+                        namespace: &partition.policy.namespace,
+                        policy: &partition.policy,
+                        compile_environment: &partition.compile_environment,
+                    }),
+                    TraversalRoot::Directory(root) => {
+                        entries.extend(root.files.iter().map(|file| Entry {
+                            physical_path: &file.inventory_path,
+                            requested_root,
+                            partition: &partition.identity,
+                            namespace: &partition.policy.namespace,
+                            policy: &partition.policy,
+                            compile_environment: &partition.compile_environment,
+                        }));
+                    }
+                    TraversalRoot::Missing(_) | TraversalRoot::Unsupported(_) => {}
+                }
+            }
+        }
+        entries.sort_by(|left, right| {
+            compare_case_insensitive(left.physical_path, right.physical_path)
+                .then_with(|| compare_case_insensitive(left.requested_root, right.requested_root))
+                .then_with(|| compare_case_insensitive(left.partition, right.partition))
+                .then_with(|| compare_case_insensitive(left.namespace, right.namespace))
+        });
+
+        let mut hasher = StableHasher::new("win32metadata traversal inventory v1");
+        hasher.usize(entries.len());
+        for entry in entries {
+            hasher.string(entry.physical_path);
+            hasher.string(entry.requested_root);
+            hasher.string(entry.partition);
+            hasher.string(entry.namespace);
+            hash_partition_policy(&mut hasher, entry.policy);
+            hash_compile_environment(&mut hasher, entry.compile_environment);
+        }
+        hasher.finish()
+    }
 }
 
 #[allow(dead_code)]
@@ -667,10 +888,18 @@ impl TraversalPolicyAudit {
                 .owners
                 .iter()
                 .map(|owner| {
+                    let variant = owner
+                        .compile_variant
+                        .as_deref()
+                        .map(|variant| format!(", variant {variant}"))
+                        .unwrap_or_default();
                     format!(
-                        "{} ({}) via {}",
+                        "{} ({}, policy {}, compile {}{}) via {}",
                         owner.partition,
                         owner.namespace,
+                        owner.policy_sha256,
+                        owner.compile_environment_sha256,
+                        variant,
                         owner
                             .requested_roots
                             .iter()
@@ -682,8 +911,9 @@ impl TraversalPolicyAudit {
                 .collect::<Vec<_>>()
                 .join("; ");
             errors.push(format!(
-                "physical root `{}` is claimed by multiple namespaces/partitions outside the approved owner contract: {owners}",
-                overlap.path.display()
+                "physical root `{}` (`{}`) has owners or compile variants outside the approved exact contract: {owners}",
+                overlap.path.display(),
+                overlap.inventory_path
             ));
         }
         errors.sort();
@@ -723,6 +953,13 @@ pub fn compile_traversal_policy(
 
     for partition in partitions {
         let policy = partition.policy()?;
+        let partition_local_roots = partition
+            .traverse()
+            .filter(|requested| partition_relative(requested).is_some())
+            .map(str::to_string)
+            .collect::<Vec<_>>();
+        let compile_environment =
+            compile_environment_identity(partition, &policy, partition_local_roots.clone());
         let mut requested_roots = BTreeMap::<String, Vec<String>>::new();
         let mut roots = Vec::new();
         for requested in partition.traverse() {
@@ -738,9 +975,12 @@ pub fn compile_traversal_policy(
                         &mut claims,
                         partition,
                         &policy.namespace,
+                        &policy,
+                        &compile_environment,
                         root,
                         &root.path,
                         &root.canonical_path,
+                        &root.inventory_path,
                     );
                     record_scope_fallback(
                         &mut pending_fallbacks,
@@ -756,9 +996,12 @@ pub fn compile_traversal_policy(
                             &mut claims,
                             partition,
                             &policy.namespace,
+                            &policy,
+                            &compile_environment,
                             &directory.root,
                             &file.path,
                             &file.canonical_path,
+                            &file.inventory_path,
                         );
                     }
                     record_scope_fallback(
@@ -808,13 +1051,8 @@ pub fn compile_traversal_policy(
             });
         }
 
-        let partition_local_roots = roots
-            .iter()
-            .map(TraversalRoot::requested)
-            .filter(|requested| partition_relative(requested).is_some())
-            .map(str::to_string)
-            .collect::<Vec<_>>();
-        let has_nonordinary_main_source = has_nonordinary_main_source(&partition.source);
+        let has_nonordinary_main_source =
+            has_nonordinary_main_source(&partition.source, &compile_environment.defines);
         if policy.standard.is_some()
             || !policy.include_directories.is_empty()
             || !partition_local_roots.is_empty()
@@ -825,6 +1063,8 @@ pub fn compile_traversal_policy(
                 standard: policy.standard.clone(),
                 include_directories: policy.include_directories.clone(),
                 partition_local_roots,
+                defines: compile_environment.defines.clone(),
+                source_sha256: compile_environment.source_sha256.clone(),
                 has_nonordinary_main_source,
             });
         }
@@ -835,6 +1075,7 @@ pub fn compile_traversal_policy(
             input: partition.directory.join("main.cpp"),
             source: partition.source.clone(),
             policy,
+            compile_environment,
             roots,
         });
     }
@@ -895,12 +1136,19 @@ pub fn compile_traversal_policy(
                 .then_with(|| compare_case_insensitive(&left.namespace, &right.namespace))
                 .then_with(|| compare_case_insensitive(&left.requested, &right.requested))
         });
-        let mut owner_requests = BTreeMap::<(String, String), BTreeSet<String>>::new();
+        let mut owner_requests = BTreeMap::<String, RootOwnerClaims>::new();
         for claim in &path_claims {
             owner_requests
-                .entry((claim.partition.clone(), claim.namespace.clone()))
-                .or_default()
-                .insert(claim.requested.clone());
+                .entry(claim.partition.clone())
+                .and_modify(|owner| {
+                    owner.requested_roots.insert(claim.requested.clone());
+                })
+                .or_insert_with(|| RootOwnerClaims {
+                    namespace: claim.namespace.clone(),
+                    requested_roots: BTreeSet::from([claim.requested.clone()]),
+                    policy: claim.policy.clone(),
+                    compile_environment: claim.compile_environment.clone(),
+                });
         }
         if owner_requests.len() < 2 {
             continue;
@@ -908,41 +1156,53 @@ pub fn compile_traversal_policy(
 
         let owners = owner_requests
             .into_iter()
-            .map(
-                |((partition, namespace), requested_roots)| PhysicalRootOwner {
-                    partition,
-                    namespace,
-                    requested_roots: requested_roots.into_iter().collect(),
-                },
-            )
+            .map(|(partition, owner)| PhysicalRootOwner {
+                partition,
+                namespace: owner.namespace,
+                requested_roots: owner.requested_roots.into_iter().collect(),
+                policy_sha256: owner.policy.sha256(),
+                compile_environment_sha256: owner.compile_environment.sha256(),
+                compile_variant: compile_variant(&owner.compile_environment),
+                policy: owner.policy,
+                compile_environment: owner.compile_environment,
+            })
             .collect::<Vec<_>>();
-        let observed_owners = owners
-            .iter()
-            .map(|owner| (owner.partition.as_str(), owner.namespace.as_str()))
-            .collect::<BTreeSet<_>>();
-        let approved = APPROVED_CROSS_NAMESPACE_ROOTS
-            .iter()
-            .find(|approved| path_matches_contract(&canonical_path, approved.path));
-        let kind = if let Some(approved) = approved {
-            if observed_owners == approved.owners.iter().copied().collect::<BTreeSet<_>>() {
-                PhysicalRootOverlapKind::ApprovedCrossNamespace
+        let approved = APPROVED_MULTI_PARTITION_ROOTS.iter().find_map(|approved| {
+            path_claims
+                .iter()
+                .find(|claim| path_matches_contract(&claim.inventory_path, approved.path))
+                .map(|claim| (approved, claim.inventory_path.clone()))
+        });
+        let (kind, inventory_path) = if let Some((approved, inventory_path)) = approved {
+            if owners_match_contract(&owners, approved.owners) {
+                if approved
+                    .owners
+                    .iter()
+                    .any(|owner| owner.compile_variant.is_some())
+                {
+                    (
+                        PhysicalRootOverlapKind::ApprovedCompileVariants,
+                        inventory_path,
+                    )
+                } else {
+                    (
+                        PhysicalRootOverlapKind::ApprovedCrossNamespace,
+                        inventory_path,
+                    )
+                }
             } else {
-                PhysicalRootOverlapKind::Unapproved
+                (PhysicalRootOverlapKind::Unapproved, inventory_path)
             }
-        } else if owners
-            .iter()
-            .map(|owner| owner.namespace.as_str())
-            .collect::<BTreeSet<_>>()
-            .len()
-            == 1
-        {
-            PhysicalRootOverlapKind::SameNamespace
         } else {
-            PhysicalRootOverlapKind::Unapproved
+            (
+                PhysicalRootOverlapKind::Unapproved,
+                path_claims[0].inventory_path.clone(),
+            )
         };
         audit.physical_overlaps.push(PhysicalRootOverlap {
             path: path_claims[0].path.clone(),
             canonical_path,
+            inventory_path,
             owners,
             kind,
         });
@@ -1108,20 +1368,31 @@ fn resolve_traversal_root(
     requested: &str,
     include_dirs: &[PathBuf],
 ) -> Result<TraversalRoot, String> {
-    let (path, sdk_scope) = if let Some(relative) = partition_relative(requested) {
-        (partition.directory.join(relative), None)
+    let (path, inventory_path, sdk_scope) = if let Some(relative) = partition_relative(requested) {
+        (
+            partition.directory.join(relative),
+            join_inventory_path(
+                &format!(
+                    "partition/{}",
+                    partition.name.replace('\\', "/").to_ascii_lowercase()
+                ),
+                relative,
+            ),
+            None,
+        )
     } else if let Some(relative) = include_relative(requested) {
         let Some(resolution) = resolve_include_root(relative, include_dirs) else {
             return Ok(TraversalRoot::Missing(MissingTraversalRoot {
                 requested: requested.to_string(),
                 path: None,
-                requested_sdk_scope: relative
-                    .split_once(['/', '\\'])
-                    .and_then(|(scope, _)| sdk_scope(scope))
-                    .map(str::to_string),
+                requested_sdk_scope: requested_sdk_scope(relative).map(str::to_string),
             }));
         };
-        (resolution.path, Some(resolution.sdk_scope))
+        (
+            resolution.path,
+            resolution.inventory_path,
+            Some(resolution.sdk_scope),
+        )
     } else {
         return Ok(TraversalRoot::Unsupported(UnsupportedTraversalRoot {
             requested: requested.to_string(),
@@ -1133,18 +1404,24 @@ fn resolve_traversal_root(
             requested: requested.to_string(),
             canonical_path: windows_path_identity(&path)?,
             path,
+            inventory_path,
             sdk_scope,
         }))
     } else if path.is_dir() {
         let canonical_path = windows_path_identity(&path)?;
         let mut paths = Vec::new();
         collect_root_files(&path, &mut paths)?;
+        let directory_path = path.clone();
         let mut files = paths
             .into_iter()
-            .map(|path| {
+            .map(|file_path| {
+                let relative = file_path
+                    .strip_prefix(&directory_path)
+                    .unwrap_or(Path::new(""));
                 Ok(PhysicalFile {
-                    canonical_path: windows_path_identity(&path)?,
-                    path,
+                    canonical_path: windows_path_identity(&file_path)?,
+                    inventory_path: join_inventory_path(&inventory_path, relative),
+                    path: file_path,
                 })
             })
             .collect::<Result<Vec<_>, String>>()?;
@@ -1159,6 +1436,7 @@ fn resolve_traversal_root(
                 requested: requested.to_string(),
                 path,
                 canonical_path,
+                inventory_path,
                 sdk_scope,
             },
             files,
@@ -1177,9 +1455,12 @@ fn record_root_claim(
     claims: &mut Vec<ResolvedRootClaim>,
     partition: &Partition,
     namespace: &str,
+    policy: &PartitionPolicy,
+    compile_environment: &CompileEnvironmentIdentity,
     root: &ResolvedTraversalRoot,
     path: &Path,
     canonical_path: &WindowsPathIdentity,
+    inventory_path: &str,
 ) {
     claims.push(ResolvedRootClaim {
         partition: partition.name.clone(),
@@ -1187,6 +1468,9 @@ fn record_root_claim(
         requested: root.requested.clone(),
         path: path.to_path_buf(),
         canonical_path: canonical_path.clone(),
+        inventory_path: inventory_path.to_string(),
+        policy: policy.clone(),
+        compile_environment: compile_environment.clone(),
         scope_fallback: root
             .sdk_scope
             .as_ref()
@@ -1220,7 +1504,25 @@ fn record_scope_fallback(
 }
 
 fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<IncludeRootResolution> {
-    let relative = relative.replace('\\', "/");
+    let relative = relative.replace('\\', "/").trim_matches('/').to_string();
+    if let Some(scope) = sdk_scope(&relative) {
+        return include_dirs.iter().find_map(|directory| {
+            let directory_scope = directory
+                .file_name()
+                .and_then(|name| name.to_str())
+                .unwrap_or_default();
+            directory_scope
+                .eq_ignore_ascii_case(scope)
+                .then(|| IncludeRootResolution {
+                    path: directory.clone(),
+                    inventory_path: scope.to_string(),
+                    sdk_scope: SdkScopeResolution {
+                        requested: Some(scope.to_string()),
+                        actual: Some(scope.to_string()),
+                    },
+                })
+        });
+    }
     let (scope, scoped_relative) = relative.split_once('/').unwrap_or(("", &relative));
     let requested_scope = sdk_scope(scope).map(str::to_string);
     for directory in include_dirs {
@@ -1245,6 +1547,7 @@ fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<Incl
         };
         if candidate.exists() {
             return Some(IncludeRootResolution {
+                inventory_path: include_inventory_path(directory, &candidate, include_dirs),
                 path: candidate,
                 sdk_scope: SdkScopeResolution {
                     requested: requested_scope,
@@ -1263,6 +1566,7 @@ fn resolve_include_root(relative: &str, include_dirs: &[PathBuf]) -> Option<Incl
             .and_then(|name| name.to_str())
             .unwrap_or_default();
         Some(IncludeRootResolution {
+            inventory_path: include_inventory_path(directory, &candidate, include_dirs),
             path: candidate,
             sdk_scope: SdkScopeResolution {
                 requested: requested_scope.clone(),
@@ -1278,8 +1582,66 @@ fn sdk_scope(value: &str) -> Option<&'static str> {
         .find(|scope| value.eq_ignore_ascii_case(scope))
 }
 
+fn requested_sdk_scope(value: &str) -> Option<&'static str> {
+    let normalized = value.replace('\\', "/");
+    let scope = normalized.split('/').next().unwrap_or_default();
+    sdk_scope(scope)
+}
+
 fn is_sdk_scope(value: &str) -> bool {
     sdk_scope(value).is_some()
+}
+
+fn include_inventory_path(directory: &Path, candidate: &Path, include_dirs: &[PathBuf]) -> String {
+    let base = directory
+        .file_name()
+        .and_then(|name| name.to_str())
+        .unwrap_or("include")
+        .to_ascii_lowercase();
+    let matching = include_dirs
+        .iter()
+        .filter(|include| {
+            include
+                .file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| name.eq_ignore_ascii_case(&base))
+        })
+        .collect::<Vec<_>>();
+    let label = if matching.len() > 1 {
+        let ordinal = matching
+            .iter()
+            .position(|include| *include == &directory)
+            .unwrap_or_default()
+            + 1;
+        if ordinal == 1 {
+            base
+        } else {
+            format!("{base}#{ordinal}")
+        }
+    } else {
+        base
+    };
+    join_inventory_path(
+        &label,
+        candidate.strip_prefix(directory).unwrap_or(Path::new("")),
+    )
+}
+
+fn join_inventory_path(base: &str, relative: impl AsRef<Path>) -> String {
+    let relative = relative
+        .as_ref()
+        .to_string_lossy()
+        .replace('\\', "/")
+        .trim_matches('/')
+        .to_ascii_lowercase();
+    if relative.is_empty() {
+        base.to_ascii_lowercase()
+    } else {
+        format!(
+            "{}/{relative}",
+            base.trim_end_matches('/').to_ascii_lowercase()
+        )
+    }
 }
 
 fn collect_root_files(directory: &Path, files: &mut Vec<PathBuf>) -> Result<(), String> {
@@ -1323,19 +1685,26 @@ fn windows_path_identity(path: &Path) -> Result<WindowsPathIdentity, String> {
 }
 
 fn partition_relative(value: &str) -> Option<&str> {
-    value
-        .strip_prefix("<PartitionDir>/")
-        .or_else(|| value.strip_prefix(r"<PartitionDir>\"))
+    virtual_root_relative(value, "<PartitionDir>")
 }
 
 fn include_relative(value: &str) -> Option<&str> {
-    value
-        .strip_prefix("<IncludeRoot>/")
-        .or_else(|| value.strip_prefix(r"<IncludeRoot>\"))
+    virtual_root_relative(value, "<IncludeRoot>")
 }
 
-fn path_matches_contract(path: &WindowsPathIdentity, contract: &str) -> bool {
-    path.as_str() == contract || path.as_str().ends_with(&format!("/{contract}"))
+fn virtual_root_relative<'a>(value: &'a str, root: &str) -> Option<&'a str> {
+    let prefix = value.get(..root.len())?;
+    if !prefix.eq_ignore_ascii_case(root) {
+        return None;
+    }
+    let suffix = value.get(root.len()..)?;
+    suffix
+        .strip_prefix('/')
+        .or_else(|| suffix.strip_prefix('\\'))
+}
+
+fn path_matches_contract(path: &str, contract: &str) -> bool {
+    path.eq_ignore_ascii_case(contract)
 }
 
 fn normalize_path_identity(path: &str) -> String {
@@ -1361,7 +1730,238 @@ fn sort_paths_case_insensitive(paths: &mut [PathBuf]) {
     });
 }
 
-fn has_nonordinary_main_source(source: &str) -> bool {
+struct StableHasher(Sha256);
+
+impl StableHasher {
+    fn new(domain: &str) -> Self {
+        let mut result = Self(Sha256::new());
+        result.string(domain);
+        result
+    }
+
+    fn string(&mut self, value: &str) {
+        self.0.update((value.len() as u64).to_le_bytes());
+        self.0.update(value.as_bytes());
+    }
+
+    fn bool(&mut self, value: bool) {
+        self.0.update([u8::from(value)]);
+    }
+
+    fn usize(&mut self, value: usize) {
+        self.0.update((value as u64).to_le_bytes());
+    }
+
+    fn option_string(&mut self, value: Option<&str>) {
+        self.bool(value.is_some());
+        if let Some(value) = value {
+            self.string(value);
+        }
+    }
+
+    fn finish(self) -> String {
+        format!("{:X}", self.0.finalize())
+    }
+}
+
+fn partition_policy_sha256(policy: &PartitionPolicy) -> String {
+    let mut hasher = StableHasher::new("win32metadata partition policy v1");
+    hash_partition_policy(&mut hasher, policy);
+    hasher.finish()
+}
+
+fn hash_partition_policy(hasher: &mut StableHasher, policy: &PartitionPolicy) {
+    hasher.string(&policy.namespace);
+    hasher.usize(policy.exclusions.len());
+    for exclusion in &policy.exclusions {
+        hasher.string(exclusion);
+    }
+    hasher.usize(policy.remaps.len());
+    for (source, target) in &policy.remaps {
+        hasher.string(source);
+        hasher.string(target);
+    }
+    hasher.usize(policy.type_overrides.len());
+    for (name, override_type) in &policy.type_overrides {
+        hasher.string(name);
+        hasher.string(match override_type {
+            TypeOverride::U32 => "u32",
+        });
+    }
+    hasher.usize(policy.attributes.len());
+    for (name, attributes) in &policy.attributes {
+        hasher.string(name);
+        hasher.usize(attributes.len());
+        for attribute in attributes {
+            hasher.string(match attribute {
+                ForcedAttribute::Flags => "flags",
+            });
+        }
+    }
+    hasher.usize(policy.libraries.len());
+    for (function, library) in &policy.libraries {
+        hasher.string(function);
+        hasher.string(library);
+    }
+    hasher.usize(policy.preserve_auto_fnptr_level.len());
+    for name in &policy.preserve_auto_fnptr_level {
+        hasher.string(name);
+    }
+    hasher.bool(policy.exclude_empty_records);
+    hasher.option_string(policy.standard.as_deref());
+    hasher.usize(policy.include_directories.len());
+    for directory in &policy.include_directories {
+        hasher.string(directory);
+    }
+    hasher.option_string(policy.legacy_output.as_deref());
+}
+
+fn compile_environment_sha256(environment: &CompileEnvironmentIdentity) -> String {
+    let mut hasher = StableHasher::new("win32metadata compile environment v1");
+    hash_compile_environment(&mut hasher, environment);
+    hasher.finish()
+}
+
+fn hash_compile_environment(hasher: &mut StableHasher, environment: &CompileEnvironmentIdentity) {
+    hasher.option_string(environment.standard.as_deref());
+    hasher.usize(environment.include_directories.len());
+    for directory in &environment.include_directories {
+        hasher.string(directory);
+    }
+    hasher.usize(environment.partition_local_roots.len());
+    for root in &environment.partition_local_roots {
+        hasher.string(root);
+    }
+    hasher.usize(environment.defines.len());
+    for define in &environment.defines {
+        hasher.string(&define.name);
+        hasher.string(&define.value);
+    }
+    hasher.string(&environment.source_sha256);
+}
+
+fn compile_environment_identity(
+    partition: &Partition,
+    policy: &PartitionPolicy,
+    partition_local_roots: Vec<String>,
+) -> CompileEnvironmentIdentity {
+    CompileEnvironmentIdentity {
+        standard: policy.standard.clone(),
+        include_directories: policy.include_directories.clone(),
+        partition_local_roots,
+        defines: source_defines(&partition.source),
+        source_sha256: source_sha256(&partition.source),
+    }
+}
+
+fn source_sha256(source: &str) -> String {
+    let normalized = normalize_source(source);
+    format!("{:X}", Sha256::digest(normalized.as_bytes()))
+}
+
+fn normalize_source(source: &str) -> String {
+    source
+        .trim_start_matches('\u{feff}')
+        .replace("\r\n", "\n")
+        .replace('\r', "\n")
+}
+
+fn source_defines(source: &str) -> Vec<SourceDefine> {
+    let source = normalize_source(source);
+    let lines = source.lines().collect::<Vec<_>>();
+    let mut result = Vec::new();
+    let mut index = 0;
+    while index < lines.len() {
+        let line = lines[index].trim_start();
+        let Some(directive) = line.strip_prefix('#') else {
+            index += 1;
+            continue;
+        };
+        let directive = directive.trim_start();
+        let Some(first) = directive.strip_prefix("define") else {
+            index += 1;
+            continue;
+        };
+        if first
+            .chars()
+            .next()
+            .is_some_and(|character| !character.is_whitespace())
+        {
+            index += 1;
+            continue;
+        }
+
+        let mut definition = first.trim_start().to_string();
+        while definition.trim_end().ends_with('\\') && index + 1 < lines.len() {
+            index += 1;
+            definition.push('\n');
+            definition.push_str(lines[index].trim());
+        }
+        let mut in_block_comment = false;
+        definition = definition
+            .lines()
+            .map(|line| strip_comments(line, &mut in_block_comment))
+            .collect::<Vec<_>>()
+            .join("\n")
+            .trim()
+            .to_string();
+        if !definition.is_empty() {
+            let identifier_end = definition
+                .find(|character: char| !(character.is_ascii_alphanumeric() || character == '_'))
+                .unwrap_or(definition.len());
+            let split = if definition[identifier_end..].starts_with('(') {
+                definition[identifier_end..]
+                    .find(')')
+                    .map(|end| identifier_end + end + 1)
+                    .unwrap_or(definition.len())
+            } else {
+                definition
+                    .find(char::is_whitespace)
+                    .unwrap_or(definition.len())
+            };
+            result.push(SourceDefine {
+                name: definition[..split].to_string(),
+                value: definition[split..].trim().to_string(),
+            });
+        }
+        index += 1;
+    }
+    result
+}
+
+fn is_boilerplate_define(define: &SourceDefine) -> bool {
+    // These shared legacy prelude defines remain in compile identity but do not alone make an
+    // otherwise ordinary include-only main.cpp an exception.
+    ["SECURITY_WIN32", "QCC_OS_GROUP_WINDOWS"]
+        .iter()
+        .any(|name| define.name.eq_ignore_ascii_case(name))
+}
+
+fn compile_variant(environment: &CompileEnvironmentIdentity) -> Option<String> {
+    environment
+        .defines
+        .iter()
+        .find(|define| define.name.eq_ignore_ascii_case("PSAPI_VERSION"))
+        .map(|define| format!("PSAPI_VERSION={}", define.value))
+}
+
+fn owners_match_contract(observed: &[PhysicalRootOwner], expected: &[ApprovedRootOwner]) -> bool {
+    observed.len() == expected.len()
+        && expected.iter().all(|expected| {
+            observed.iter().any(|observed| {
+                observed.partition == expected.partition
+                    && observed.namespace == expected.namespace
+                    && observed.policy_sha256 == expected.policy_sha256
+                    && observed.compile_environment_sha256 == expected.compile_environment_sha256
+                    && observed.compile_variant.as_deref() == expected.compile_variant
+            })
+        })
+}
+
+fn has_nonordinary_main_source(source: &str, defines: &[SourceDefine]) -> bool {
+    if defines.iter().any(|define| !is_boilerplate_define(define)) {
+        return true;
+    }
     let mut in_block_comment = false;
     let mut continued_directive = false;
     for raw in source.lines() {
@@ -1697,9 +2297,45 @@ mod tests {
             ),
         ];
         let error = validate_resolved_root_ownership(&partitions, &[shared]).unwrap_err();
-        assert!(error.contains("claimed by multiple namespaces"), "{error}");
+        assert!(
+            error.contains("outside the approved exact contract"),
+            "{error}"
+        );
         assert!(error.contains("Windows.Win32.First"), "{error}");
         assert!(error.contains("Windows.Win32.Second"), "{error}");
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn root_preflight_rejects_unapproved_same_namespace_owners() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-same-namespace-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("same.h"), "").unwrap();
+        let partitions = vec![
+            test_partition(
+                &root,
+                "First",
+                "Windows.Win32.Same",
+                &["<IncludeRoot>/shared/same.h"],
+            ),
+            test_partition(
+                &root,
+                "Second",
+                "Windows.Win32.Same",
+                &["<IncludeRoot>/shared/same.h"],
+            ),
+        ];
+        let error = validate_resolved_root_ownership(&partitions, &[shared]).unwrap_err();
+        assert!(
+            error.contains("outside the approved exact contract"),
+            "{error}"
+        );
+        assert!(error.contains("Windows.Win32.Same"), "{error}");
         std::fs::remove_dir_all(root).unwrap();
     }
 
@@ -1735,9 +2371,58 @@ mod tests {
             ),
         ];
         let error = validate_resolved_root_ownership(&partitions, &[shared]).unwrap_err();
-        assert!(error.contains("claimed by multiple namespaces"), "{error}");
+        assert!(
+            error.contains("outside the approved exact contract"),
+            "{error}"
+        );
         assert!(error.contains("Windows.Win32.Unexpected"), "{error}");
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_psapi_contract_rejects_compile_environment_or_policy_changes() {
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let partitions = load_active(&win_sdk.join("Partitions")).unwrap();
+
+        let mut changed_environment = partitions.clone();
+        let psapi1 = changed_environment
+            .iter_mut()
+            .find(|partition| partition.name == "PsApi1")
+            .unwrap();
+        let original_source = psapi1.source.clone();
+        psapi1.source = psapi1
+            .source
+            .replace("#define PSAPI_VERSION 1", "#define PSAPI_VERSION 3");
+        assert_ne!(psapi1.source, original_source);
+        let error =
+            validate_resolved_root_ownership(&changed_environment, &include_dirs).unwrap_err();
+        assert!(error.contains("um/psapi.h"), "{error}");
+        assert!(error.contains("PsApi1"), "{error}");
+        assert!(
+            error.contains("outside the approved exact contract"),
+            "{error}"
+        );
+
+        let mut changed_policy = partitions;
+        let psapi2 = changed_policy
+            .iter_mut()
+            .find(|partition| partition.name == "PsApi2")
+            .unwrap();
+        psapi2
+            .settings
+            .iter_mut()
+            .find(|setting| setting.name == "--exclude")
+            .unwrap()
+            .values
+            .push("Synthetic.Policy.Change".to_string());
+        let error = validate_resolved_root_ownership(&changed_policy, &include_dirs).unwrap_err();
+        assert!(error.contains("um/psapi.h"), "{error}");
+        assert!(error.contains("PsApi2"), "{error}");
+        assert!(
+            error.contains("outside the approved exact contract"),
+            "{error}"
+        );
     }
 
     #[test]
@@ -1862,6 +2547,42 @@ mod tests {
     }
 
     #[test]
+    fn exact_sdk_scope_directory_roots_resolve_with_case_and_slash_variants() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-scope-directory-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&root).ok();
+        let shared = root.join("shared");
+        std::fs::create_dir_all(&shared).unwrap();
+        std::fs::write(shared.join("root.h"), "").unwrap();
+
+        for requested in [
+            "<IncludeRoot>/shared",
+            r"<IncludeRoot>\SHARED",
+            "<includeroot>/Shared/",
+        ] {
+            let partition =
+                test_partition(&root, "Directory", "Windows.Win32.Directory", &[requested]);
+            let roots = partition
+                .resolve_roots(std::slice::from_ref(&shared))
+                .unwrap();
+            assert!(roots.files.is_empty());
+            assert_eq!(roots.directories, [shared.clone()]);
+
+            let policy =
+                compile_traversal_policy(&[partition], std::slice::from_ref(&shared)).unwrap();
+            let TraversalRoot::Directory(directory) = &policy.partitions[0].roots[0] else {
+                panic!("exact SDK scope did not resolve as a directory");
+            };
+            assert_eq!(directory.root.path, shared);
+            assert_eq!(directory.root.inventory_path, "shared");
+            assert_eq!(directory.files[0].inventory_path, "shared/root.h");
+        }
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
     fn compiled_policy_order_is_independent_of_partition_input_order() {
         let root = std::env::temp_dir().join(format!(
             "win32metadata-partition-determinism-{}",
@@ -1890,6 +2611,65 @@ mod tests {
         let reverse = compile_traversal_policy(&[second, first], &[shared]).unwrap();
         assert_eq!(forward, reverse);
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn canonical_inventory_digest_tracks_ownership_and_policy_not_checkout_paths() {
+        fn create_inventory(
+            root: &Path,
+            swap_owners: bool,
+            add_exclusion: bool,
+        ) -> TraversalPolicy {
+            let shared = root.join("shared");
+            std::fs::create_dir_all(&shared).unwrap();
+            std::fs::write(shared.join("a.h"), "").unwrap();
+            std::fs::write(shared.join("b.h"), "").unwrap();
+            let (first_root, second_root) = if swap_owners {
+                ("<IncludeRoot>/shared/b.h", "<IncludeRoot>/shared/a.h")
+            } else {
+                ("<IncludeRoot>/shared/a.h", "<IncludeRoot>/shared/b.h")
+            };
+            let mut first = test_partition(root, "First", "Windows.Win32.First", &[first_root]);
+            if add_exclusion {
+                first.settings.push(Setting {
+                    name: "--exclude".to_string(),
+                    values: vec!["ChangedPolicy".to_string()],
+                });
+            }
+            let second = test_partition(root, "Second", "Windows.Win32.Second", &[second_root]);
+            compile_traversal_policy(&[first, second], &[shared]).unwrap()
+        }
+
+        let first_root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-digest-first-{}",
+            std::process::id()
+        ));
+        let second_root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-digest-second-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&first_root).ok();
+        std::fs::remove_dir_all(&second_root).ok();
+
+        let baseline = create_inventory(&first_root, false, false);
+        let relocated = create_inventory(&second_root, false, false);
+        let swapped = create_inventory(&first_root, true, false);
+        let changed_policy = create_inventory(&first_root, false, true);
+        assert_eq!(
+            baseline.canonical_inventory_sha256(),
+            relocated.canonical_inventory_sha256()
+        );
+        assert_ne!(
+            baseline.canonical_inventory_sha256(),
+            swapped.canonical_inventory_sha256()
+        );
+        assert_ne!(
+            baseline.canonical_inventory_sha256(),
+            changed_policy.canonical_inventory_sha256()
+        );
+
+        std::fs::remove_dir_all(first_root).unwrap();
+        std::fs::remove_dir_all(second_root).unwrap();
     }
 
     fn test_partition(root: &Path, name: &str, namespace: &str, roots: &[&str]) -> Partition {
@@ -2117,8 +2897,9 @@ mod tests {
         let conflicts = root_namespace_conflicts(&partitions).unwrap();
         assert_eq!(
             conflicts.keys().map(String::as_str).collect::<Vec<_>>(),
-            APPROVED_CROSS_NAMESPACE_ROOTS
+            APPROVED_MULTI_PARTITION_ROOTS
                 .iter()
+                .take(7)
                 .map(|approved| approved.path)
                 .collect::<Vec<_>>()
         );
@@ -2128,6 +2909,10 @@ mod tests {
     #[test]
     fn checked_in_traversal_policy_is_clean_and_canonical() {
         let policy = checked_in_traversal_policy();
+        assert_eq!(
+            policy.canonical_inventory_sha256(),
+            "395FAD2C5729FF81F35311F9D591CA05B9EF4FDCE96173FAB9BBCAF8AFB7E811"
+        );
         assert_eq!(policy.partitions.len(), 321);
         assert_eq!(
             policy
@@ -2179,17 +2964,49 @@ mod tests {
     }
 
     #[test]
-    fn checked_in_cross_namespace_owner_contract_is_exact() {
+    fn lower_priority_duplicate_include_roots_do_not_change_inventory_identity() {
+        let win_sdk = checked_in_win_sdk();
+        let partition_root = win_sdk.join("Partitions");
+        let baseline =
+            load_traversal_policy(&partition_root, &checked_in_include_dirs(&win_sdk)).unwrap();
+        let duplicate_root = std::env::temp_dir().join(format!(
+            "win32metadata-partition-duplicate-includes-{}",
+            std::process::id()
+        ));
+        std::fs::remove_dir_all(&duplicate_root).ok();
+        let mut include_dirs = checked_in_include_dirs(&win_sdk);
+        for name in ["shared", "um", "ucrt", "winrt", "cpdk"] {
+            let directory = duplicate_root.join(name);
+            std::fs::create_dir_all(&directory).unwrap();
+            include_dirs.push(directory);
+        }
+
+        let with_duplicates = load_traversal_policy(&partition_root, &include_dirs).unwrap();
+        with_duplicates.audit.ensure_clean().unwrap();
+        assert_eq!(
+            with_duplicates.canonical_inventory_sha256(),
+            baseline.canonical_inventory_sha256()
+        );
+        assert_eq!(
+            with_duplicates.audit.physical_overlaps,
+            baseline.audit.physical_overlaps
+        );
+
+        std::fs::remove_dir_all(duplicate_root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_multi_partition_owner_contract_is_exact() {
         let policy = checked_in_traversal_policy();
-        let approved = policy
+        let cross_namespace = policy
             .audit
             .physical_overlaps
             .iter()
             .filter(|overlap| overlap.kind == PhysicalRootOverlapKind::ApprovedCrossNamespace)
             .map(|overlap| {
-                let contract = APPROVED_CROSS_NAMESPACE_ROOTS
+                let contract = APPROVED_MULTI_PARTITION_ROOTS
                     .iter()
-                    .find(|contract| path_matches_contract(&overlap.canonical_path, contract.path))
+                    .find(|contract| path_matches_contract(&overlap.inventory_path, contract.path))
                     .unwrap();
                 (
                     contract.path,
@@ -2202,7 +3019,7 @@ mod tests {
             })
             .collect::<Vec<_>>();
         assert_eq!(
-            approved,
+            cross_namespace,
             [
                 (
                     "shared/ntddstor.h",
@@ -2256,28 +3073,35 @@ mod tests {
             ]
         );
 
-        let same_namespace = policy
+        let compile_variants = policy
             .audit
             .physical_overlaps
             .iter()
-            .filter(|overlap| overlap.kind == PhysicalRootOverlapKind::SameNamespace)
+            .filter(|overlap| overlap.kind == PhysicalRootOverlapKind::ApprovedCompileVariants)
             .collect::<Vec<_>>();
-        assert_eq!(same_namespace.len(), 1);
-        assert!(
-            same_namespace[0]
-                .canonical_path
-                .as_str()
-                .ends_with("/um/psapi.h")
-        );
+        assert_eq!(compile_variants.len(), 1);
+        assert_eq!(compile_variants[0].inventory_path, "um/psapi.h");
         assert_eq!(
-            same_namespace[0]
+            compile_variants[0]
                 .owners
                 .iter()
-                .map(|owner| (owner.partition.as_str(), owner.namespace.as_str()))
+                .map(|owner| (
+                    owner.partition.as_str(),
+                    owner.namespace.as_str(),
+                    owner.compile_variant.as_deref()
+                ))
                 .collect::<Vec<_>>(),
             [
-                ("PsApi1", "Windows.Win32.System.ProcessStatus"),
-                ("PsApi2", "Windows.Win32.System.ProcessStatus"),
+                (
+                    "PsApi1",
+                    "Windows.Win32.System.ProcessStatus",
+                    Some("PSAPI_VERSION=1")
+                ),
+                (
+                    "PsApi2",
+                    "Windows.Win32.System.ProcessStatus",
+                    Some("PSAPI_VERSION=2")
+                ),
             ]
         );
         assert_eq!(policy.audit.physical_overlaps.len(), 8);
@@ -2286,7 +3110,82 @@ mod tests {
     #[test]
     fn checked_in_compile_environment_exception_inventory_is_exact() {
         let policy = checked_in_traversal_policy();
-        assert_eq!(policy.compile_environment_exceptions.len(), 38);
+        assert_eq!(
+            policy
+                .compile_environment_exceptions
+                .iter()
+                .map(|exception| exception.partition.as_str())
+                .collect::<Vec<_>>(),
+            [
+                "ActiveDirectory",
+                "Authorization.UI",
+                "Certificates",
+                "Cloudapi",
+                "Com",
+                "Com.Events",
+                "Com.StructuredStorage",
+                "ComOle",
+                "Console",
+                "Cos",
+                "Debug",
+                "Debug.ActiveScript",
+                "Debug.WebApp",
+                "DevInst",
+                "Direct3D",
+                "Direct3D10",
+                "Direct3D11",
+                "Direct3D11on12",
+                "Direct3D9on12",
+                "Display",
+                "DXCore",
+                "Fax",
+                "Gdiplus",
+                "HtmlHelp",
+                "HttpServer",
+                "Identity",
+                "Iis",
+                "Input.Ime",
+                "InternetExplorer",
+                "IO",
+                "IpHlp",
+                "Kernel",
+                "Media.DShow",
+                "Media.KernelStreaming",
+                "Mf",
+                "MsChap",
+                "MsCs",
+                "Multimedia",
+                "Ndf",
+                "Printing",
+                "PsApi1",
+                "PsApi2",
+                "RRas",
+                "Search",
+                "SecBitomet",
+                "Security",
+                "Security.AppLocker",
+                "Security.ConfigurationSnapin",
+                "Security.Cryptography",
+                "Security.Cryptography.Catalog",
+                "Security.Cryptography.Sip",
+                "Security.Cryptography.UI",
+                "Security.DiagnosticDataQuery",
+                "Security.DirectoryServices",
+                "Security.LicenseProtection",
+                "Security.Tpm",
+                "Security.WinTrust",
+                "Security.WinWlx",
+                "Speech",
+                "Tapi3",
+                "Threading",
+                "WinContacts",
+                "WinLocation",
+                "WinProg",
+                "WinRm",
+                "WpdSdk",
+            ]
+        );
+        assert_eq!(policy.compile_environment_exceptions.len(), 66);
         assert_eq!(
             policy
                 .compile_environment_exceptions
@@ -2345,45 +3244,36 @@ mod tests {
             policy
                 .compile_environment_exceptions
                 .iter()
-                .filter(|exception| exception.has_nonordinary_main_source)
+                .filter(|exception| !exception.has_nonordinary_main_source)
                 .map(|exception| exception.partition.as_str())
                 .collect::<Vec<_>>(),
-            [
-                "Certificates",
-                "Cloudapi",
-                "Com.Events",
-                "Cos",
-                "Debug",
-                "Debug.ActiveScript",
-                "Debug.WebApp",
-                "Display",
-                "HtmlHelp",
-                "Identity",
-                "InternetExplorer",
-                "IO",
-                "IpHlp",
-                "MsChap",
-                "MsCs",
-                "Ndf",
-                "Printing",
-                "RRas",
-                "Security",
-                "Security.AppLocker",
-                "Security.ConfigurationSnapin",
-                "Security.Cryptography",
-                "Security.Cryptography.Catalog",
-                "Security.Cryptography.Sip",
-                "Security.Cryptography.UI",
-                "Security.DiagnosticDataQuery",
-                "Security.DirectoryServices",
-                "Security.LicenseProtection",
-                "Security.Tpm",
-                "Security.WinTrust",
-                "Security.WinWlx",
-                "Threading",
-                "WinLocation",
-                "WinProg",
-            ]
+            ["Com.StructuredStorage", "DXCore", "Media.DShow", "Mf",]
+        );
+        let defines = |name: &str| {
+            policy
+                .compile_environment_exceptions
+                .iter()
+                .find(|exception| exception.partition == name)
+                .unwrap()
+                .defines
+                .iter()
+                .filter(|define| !is_boilerplate_define(define))
+                .cloned()
+                .collect::<Vec<_>>()
+        };
+        assert_eq!(
+            defines("PsApi1"),
+            [SourceDefine {
+                name: "PSAPI_VERSION".to_string(),
+                value: "1".to_string(),
+            }]
+        );
+        assert_eq!(
+            defines("PsApi2"),
+            [SourceDefine {
+                name: "PSAPI_VERSION".to_string(),
+                value: "2".to_string(),
+            }]
         );
     }
 
