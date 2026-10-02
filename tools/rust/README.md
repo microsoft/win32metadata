@@ -20,6 +20,13 @@ declared in C++ namespaces such as `DirectX`; it does not select unrelated decla
 from those headers. Explicit namespace routes still take precedence, and missing or
 ambiguous type definitions remain errors.
 
+Header-plan dependency failures are reported together, with the selected roots that
+reach each blocker. With `WINDOWS_CLANG_TIMINGS=1`, `phase=plan-dependencies` reports
+selected roots, processed unique dependencies, resolved dependencies, and unique blockers.
+These are dependency-closure counts, not an overall completion percentage: children of
+missing, ambiguous, or unsupported types cannot be inspected, and later layout, ownership,
+routing, and RDL validation may still fail. A blocked plan never emits partial RDL.
+
 Authority mode validates the canonical ownership/policy/compile-environment inventory digest
 before extraction. Compile-environment identity alone does not create another translation unit;
 PSAPI remains the only proven incompatible same-header compile variant.

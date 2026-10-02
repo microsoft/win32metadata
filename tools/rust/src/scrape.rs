@@ -5745,6 +5745,67 @@ mod tests {
     }
 
     #[test]
+    fn aggregate_dependencies_report_independent_blockers_together() {
+        ensure_libclang();
+        let root = scratch("aggregate-dependency-blockers");
+        let dependencies = root.join("dependencies.h");
+        let public = root.join("public.h");
+        std::fs::write(
+            &dependencies,
+            "class HiddenA { int secret; };\n\
+             class HiddenB { int secret; };\n\
+             struct Intermediate { HiddenA value; };\n",
+        )
+        .unwrap();
+        std::fs::write(
+            &public,
+            "#include \"dependencies.h\"\n\
+             struct PublicA { Intermediate first; HiddenB second; };\n\
+             struct PublicB { Intermediate shared; };\n",
+        )
+        .unwrap();
+        let public = path_arg(&public, "--include").unwrap();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, format!("#include \"{public}\"\n"))
+                    .with_roots([public.clone()]),
+            ],
+            &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            public,
+            RootPartition::new("Public", "Windows.Win32.Public"),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let error = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &EmitOptions::new(DEFAULT_NAMESPACE, references.types()),
+            "x64",
+        )
+        .unwrap_err();
+        for expected in [
+            "HiddenA",
+            "HiddenB",
+            "PublicA",
+            "PublicB",
+            "selected_roots=2",
+            "processed_unique_dependencies=3",
+            "resolved_dependencies=1",
+            "unique_blockers=2",
+        ] {
+            assert!(error.contains(expected), "missing `{expected}`:\n{error}");
+        }
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
     fn checked_in_ftp_uuid_records_retain_data_layout() {
         use windows_metadata::reader::HasAttributes;
 
