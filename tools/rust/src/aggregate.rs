@@ -1,6 +1,7 @@
 use std::path::Path;
 
 const GLOBAL_DEFINES: &str = "\
+#define WIN32METADATA_AGGREGATE_ROUTING
 #define MICROSOFT_WINDOWS_WINBASE_H_DEFINE_INTERLOCKED_CPLUSPLUS_OVERLOADS 0
 #define CERT_CHAIN_PARA_HAS_EXTRA_FIELDS
 #define SCHANNEL_USE_BLACKLISTS
@@ -35,18 +36,32 @@ typedef struct _OLD_LARGE_INTEGER {
 "#;
 
 const AUTHORITY_SATELLITE_PARTITIONS: &[&str] = &[
+    "ClrHosting",
     "Console",
+    "Debug.ActiveScript",
+    "Debug.Extensions",
     "DirectDraw",
     "Display",
     "IO",
     "MsChap",
+    "MsCs",
+    "Multimedia",
+    "Nps",
     "Printing",
     "Search",
+    "Security.Cryptography",
+    "Tablet",
+    "Wibe",
 ];
 
 const AUTHORITY_SATELLITE_HEADERS: &[&str] = &[
+    "cardmod.h",
     "advpub.h",
     "cfgmgr32.h",
+    "d3dcaps.h",
+    "d3dtypes.h",
+    "ImageHlp.h",
+    "infocard.h",
     "ntddcdvd.h",
     "srpapi.h",
     "tbs.h",
@@ -60,7 +75,9 @@ pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<St
     source.push_str(COMPATIBILITY_SHIMS);
     append_security_seed(&mut source);
     append_direct_draw_prerequisites(&mut source);
+    append_audio_apo(&mut source);
     append_winrm(&mut source);
+    append_headers(&mut source, &["shimgdata.h"]);
     append_gdiplus(&mut source);
     append_dxcore(&mut source);
     append_html_help(&mut source);
@@ -76,7 +93,9 @@ pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<St
     append_hid(&mut source);
     append_nfc(&mut source);
     append_mstv(&mut source);
+    source.push_str("\n#pragma push_macro(\"_IKsControl_\")\n#define _IKsControl_\n");
     append_kernel_streaming(&mut source);
+    source.push_str("\n#pragma pop_macro(\"_IKsControl_\")\n");
     append_audio(&mut source);
     append_device_services(&mut source);
     append_sec_bitomet(&mut source);
@@ -387,7 +406,9 @@ fn append_tapi3(source: &mut String) {
             "tnef.h",
         ],
     );
-    source.push_str("\n#undef cbDisplayName\n#undef cbEmailName\n#undef cbSeverName\n");
+    source.push_str(
+        "\n#undef cbDisplayName\n#undef cbEmailName\n#undef cbSeverName\n#undef hrSuccess\n",
+    );
     source.push_str("\n#pragma pop_macro(\"WIN32\")\n");
 }
 
@@ -692,6 +713,23 @@ fn append_audio_satellite(source: &mut String) {
     append_headers(source, &["ks.h", "ksmedia.h"]);
     source.push_str("\n#define _KS_\n");
     append_headers(source, &["devicetopology.h", "endpointvolume.h"]);
+    source.push_str("\n#pragma pop_macro(\"_IKsControl_\")\n");
+}
+
+fn append_audio_apo(source: &mut String) {
+    source.push_str("\n#pragma push_macro(\"_IKsControl_\")\n#define _IKsControl_\n");
+    append_headers(source, &["ks.h", "ksmedia.h"]);
+    source.push_str("\n#define _KS_\n");
+    append_headers(
+        source,
+        &[
+            "mmsystem.h",
+            "audioenginebaseapo.h",
+            "audiomediatype.h",
+            "audioengineextensionapo.h",
+            "AudioAPOTypes.h",
+        ],
+    );
     source.push_str("\n#pragma pop_macro(\"_IKsControl_\")\n");
 }
 
@@ -1134,6 +1172,7 @@ fn append_winprog(source: &mut String) {
             "defaultbrowsersyncsettings.h",
             "delayloadhandler.h",
             "deletebrowsinghistory.h",
+            "unexposeenums2managed.h",
         ],
     );
 }
@@ -1363,15 +1402,26 @@ mod tests {
         assert!(uses_satellite_environment("Display"));
         assert!(uses_satellite_environment("DirectDraw"));
         assert!(uses_satellite_environment("Console"));
+        assert!(uses_satellite_environment("Multimedia"));
+        assert!(uses_satellite_environment("Debug.Extensions"));
         assert!(uses_satellite_environment("mschap"));
+        assert!(!uses_satellite_environment("Audio.Apo"));
         assert!(!uses_satellite_environment("HtmlHelp"));
         assert!(!uses_satellite_environment("Media.DShow"));
+        assert!(!uses_satellite_environment("P2p"));
+        assert!(!uses_satellite_environment("WinSock"));
         assert!(is_authority_satellite_header(Path::new(
             r"C:\sdk\um\xamlOM.h"
         )));
         assert!(is_authority_satellite_header(Path::new(r"C:\sdk\um\VFW.H")));
         assert!(is_authority_satellite_header(Path::new(
             r"C:\sdk\shared\tbs.h"
+        )));
+        assert!(is_authority_satellite_header(Path::new(
+            r"C:\sdk\um\ImageHlp.h"
+        )));
+        assert!(is_authority_satellite_header(Path::new(
+            r"C:\sdk\um\cpdk\cardmod.h"
         )));
     }
 

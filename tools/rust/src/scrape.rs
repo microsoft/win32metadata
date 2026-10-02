@@ -31,7 +31,8 @@ const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
     "A7395A3462909DD391578B2F854A3FA6E448ADC7EF44EF4CB90810E63979CF62";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
-const GUID_RESET: &str = "\n#undef INITGUID\n#include <guiddef.h>\n";
+const GUID_RESET: &str =
+    "\n#undef INITGUID\n#include <guiddef.h>\n#include <devpropdef.h>\n#include <propkeydef.h>\n";
 
 #[derive(Clone, Debug)]
 struct Arch {
@@ -609,12 +610,12 @@ const SHARED_ROOT_OWNER_INPUTS: &[SharedRootOwnerInput] = &[
     SharedRootOwnerInput {
         path: "um/audioendpoints.h",
         partition: "Audio",
-        input: AuthorityInput::Aggregate,
+        input: AuthorityInput::Satellite,
     },
     SharedRootOwnerInput {
         path: "um/audioendpoints.h",
         partition: "Audio.Endpoints",
-        input: AuthorityInput::Aggregate,
+        input: AuthorityInput::Satellite,
     },
     SharedRootOwnerInput {
         path: "um/dxcore.h",
@@ -687,17 +688,170 @@ const AGGREGATE_TRANSITIVE_ROOTS: &[(&str, &str)] = &[
     ("gdiplusmem.h", "um/gdiplusmem.h"),
     ("devpkey.h", "shared/devpkey.h"),
     ("ksuuids.h", "shared/ksuuids.h"),
+    ("ntddscsi.h", "shared/ntddscsi.h"),
     ("uuids.h", "shared/uuids.h"),
+    ("verrsrc.h", "um/verrsrc.h"),
 ];
 
-const REENTRANT_AUTHORITY_HEADERS: &[&str] = &["winddi.h"];
+const REENTRANT_AUTHORITY_HEADERS: &[&str] =
+    &["devpropdef.h", "guiddef.h", "propkeydef.h", "winddi.h"];
 
-const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[(
-    "um/cellularapi_oem.h",
-    AGGREGATE_INPUT,
-    false,
-    "the pinned SDK omits imported RilAPITypes.h; the legacy source also skips this header",
-)];
+const COVERAGE_UNPRODUCTIVE_ALLOWLIST: &[(&str, &str, bool, &str)] = &[
+    (
+        "um/asptlb.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy IIS source omits asptlb.h; its generic COM coclass names conflict with other aggregate UUID declarations",
+    ),
+    (
+        "um/cellularapi_oem.h",
+        AGGREGATE_INPUT,
+        false,
+        "the pinned SDK omits imported RilAPITypes.h; the legacy source also skips this header",
+    ),
+    (
+        "um/chakrart.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Js source excludes chakrart.h because it is incompatible with the jsrt9.h mode",
+    ),
+    (
+        "um/icodecapi.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Media Foundation source excludes icodecapi.h and uses codecapi.h for this surface",
+    ),
+    (
+        "um/iiswebsocket.h",
+        AGGREGATE_INPUT,
+        false,
+        "iiswebsocket.h requires the excluded httpserv.h C++ server implementation surface",
+    ),
+    (
+        "um/mapiunicodehelp.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy MAPI source excludes inline Unicode helper implementations from metadata",
+    ),
+    (
+        "um/msoav.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Internet Explorer source excludes msoav.h because the SDK omits MSOAPI_",
+    ),
+    (
+        "um/faxcom.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Fax source excludes faxcom.h because FaxServer has a conflicting UUID in faxcomex.h",
+    ),
+    (
+        "um/msp.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Tapi3 source excludes the MSP implementation surface",
+    ),
+    (
+        "um/mspaddr.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Tapi3 source excludes ATL MSP class implementations",
+    ),
+    (
+        "um/mspcall.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Tapi3 source excludes ATL MSP class implementations",
+    ),
+    (
+        "um/mspstrm.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Tapi3 source excludes ATL MSP class implementations",
+    ),
+    (
+        "um/ntlsa.h",
+        AGGREGATE_INPUT,
+        false,
+        "ntlsa.h duplicates the NTSecAPI security closure used by the aggregate source",
+    ),
+    (
+        "um/oledbguid.h",
+        SATELLITE_INPUT,
+        false,
+        "the legacy Search source excludes oledbguid.h because it duplicates oledb.h declarations",
+    ),
+    (
+        "um/ole.h",
+        AGGREGATE_INPUT,
+        false,
+        "the OLE1 header conflicts with the aggregate OLE2 declaration surface",
+    ),
+    (
+        "um/pnrpns.h",
+        AGGREGATE_INPUT,
+        false,
+        "p2p.h supplies the PNRP declarations and directly including pnrpns.h repeats its GUIDs",
+    ),
+    (
+        "um/routprot.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy routing sources exclude routprot.h because its SDK closure is incomplete",
+    ),
+    (
+        "um/rpcproxy.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy RPC source intentionally excludes C-only proxy implementation metadata",
+    ),
+    (
+        "um/tapi3cc.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Tapi3 source excludes duplicate call-center declarations",
+    ),
+    (
+        "um/termmgr.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy Tapi3 source intentionally excludes terminal manager implementation metadata",
+    ),
+    (
+        "um/tune.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy MsTv source excludes C++ tuning-model helper classes",
+    ),
+    (
+        "um/tvratings_enum.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy MsTv source excludes duplicate TV rating declarations",
+    ),
+    (
+        "um/vdshwprv.h",
+        AGGREGATE_INPUT,
+        false,
+        "the legacy VDS source documents that vdshwprv.h cannot be combined with vds.h",
+    ),
+    (
+        "um/winenclave.h",
+        AGGREGATE_INPUT,
+        false,
+        "winenclave.h rejects translation units that include windows.h",
+    ),
+];
+
+fn is_intentionally_unvisited_root(label: &str, input: AuthorityInput) -> bool {
+    COVERAGE_UNPRODUCTIVE_ALLOWLIST
+        .iter()
+        .any(|(root, owner, expected_visit, _)| {
+            !expected_visit
+                && label.eq_ignore_ascii_case(root)
+                && input.name().eq_ignore_ascii_case(owner)
+        })
+}
 
 const PSAPI_V1_SYNTHESIZED_CONSTANTS: &[&str] = &[
     "LIST_MODULES_DEFAULT",
@@ -974,12 +1128,147 @@ fn append_authority_root(
         source.push_str(&format!(
             "\n#if __has_include(\"RilAPITypes.h\")\n#include \"{path}\"\n#endif\n"
         ));
+    } else if source_file_name(&path).eq_ignore_ascii_case("x3daudio.h") {
+        source.push_str(&format!(
+            "\n#pragma push_macro(\"_XM_NO_INTRINSICS_\")\n\
+             #undef _XM_NO_INTRINSICS_\n\
+             #define _XM_NO_INTRINSICS_\n\
+             #include \"{path}\"\n\
+             #pragma pop_macro(\"_XM_NO_INTRINSICS_\")\n"
+        ));
     } else {
         source.push_str(&format!("\n#include \"{path}\"\n"));
     }
-    if input == AuthorityInput::Satellite {
+    if matches!(input, AuthorityInput::Aggregate | AuthorityInput::Satellite) {
         source.push_str(GUID_RESET);
     }
+    Ok(())
+}
+
+fn authority_owning_inputs_by_path(
+    roots: &AuthorityRootPlan,
+) -> Result<BTreeMap<String, AuthorityInput>, String> {
+    let mut result = BTreeMap::new();
+    for root in roots.roots.values() {
+        let [input] = root.owned_inputs.iter().copied().collect::<Vec<_>>()[..] else {
+            continue;
+        };
+        let path = path_arg(&root.path, "--partition-policy-root")?;
+        result.insert(normalize_audit_path(&path), input);
+    }
+    Ok(result)
+}
+
+fn authority_root_for_source_header<'a>(
+    roots: &'a AuthorityRootPlan,
+    header: &str,
+    resolved: Option<&Path>,
+) -> Option<&'a AuthorityPhysicalRoot> {
+    if let Some(resolved) = resolved {
+        let resolved = normalize_audit_path(resolved.to_string_lossy().as_ref());
+        if let Some(root) = roots
+            .roots
+            .values()
+            .find(|root| normalize_audit_path(root.path.to_string_lossy().as_ref()) == resolved)
+        {
+            return Some(root);
+        }
+    }
+
+    let header = normalize_audit_path(header);
+    let mut matches = roots.roots.values().filter(|root| {
+        let label = normalize_audit_path(&root.label);
+        label == header
+            || label
+                .strip_suffix(&header)
+                .is_some_and(|prefix| prefix.ends_with('/'))
+    });
+    let root = matches.next()?;
+    matches.next().is_none().then_some(root)
+}
+
+fn append_partition_source_headers(
+    aggregate: &mut String,
+    satellite: &mut String,
+    traversal: &crate::partition::TraversalPolicy,
+    roots: &AuthorityRootPlan,
+    include_dirs: &[PathBuf],
+) -> Result<(), String> {
+    let owning_inputs = authority_owning_inputs_by_path(roots)?;
+    for partition in &traversal.partitions {
+        if ["Kernel", "PsApi1", "PsApi2", "Threading"]
+            .iter()
+            .any(|candidate| partition.identity.eq_ignore_ascii_case(candidate))
+        {
+            continue;
+        }
+        let source = std::fs::read_to_string(&partition.input).map_err(|error| {
+            format!(
+                "failed to read compile environment `{}`: {error}",
+                partition.input.display()
+            )
+        })?;
+        for header in source.lines().filter_map(source_include_name) {
+            if ["intrinfix.h", "windows.fixed.h"]
+                .iter()
+                .any(|candidate| source_file_name(header).eq_ignore_ascii_case(candidate))
+                || REENTRANT_AUTHORITY_HEADERS
+                    .iter()
+                    .any(|candidate| source_file_name(header).eq_ignore_ascii_case(candidate))
+            {
+                continue;
+            }
+            let resolved = resolve_source_header(header, include_dirs).or_else(|| {
+                partition
+                    .input
+                    .parent()
+                    .map(|directory| directory.join(header))
+                    .filter(|candidate| candidate.is_file())
+            });
+            let root = authority_root_for_source_header(roots, header, resolved.as_deref());
+            let path = root
+                .map(|root| path_arg(&root.path, "--partition-policy-root"))
+                .or_else(|| resolved.as_deref().map(|path| path_arg(path, "--include")))
+                .transpose()?;
+            let default_input = if crate::aggregate::uses_satellite_environment(&partition.identity)
+                || crate::aggregate::is_authority_satellite_header(Path::new(header))
+            {
+                AuthorityInput::Satellite
+            } else {
+                AuthorityInput::Aggregate
+            };
+            let input = root
+                .and_then(|root| root.owned_inputs.iter().copied().next())
+                .or_else(|| {
+                    path.as_deref()
+                        .and_then(|path| owning_inputs.get(&normalize_audit_path(path)))
+                        .copied()
+                })
+                .unwrap_or(default_input);
+            let include = path.as_deref().unwrap_or(header);
+            if root.is_some_and(|root| is_intentionally_unvisited_root(&root.label, input)) {
+                continue;
+            }
+            if input == AuthorityInput::Aggregate
+                && AGGREGATE_TRANSITIVE_ROOTS
+                    .iter()
+                    .any(|(candidate, _)| source_file_name(include).eq_ignore_ascii_case(candidate))
+            {
+                continue;
+            }
+            match input {
+                AuthorityInput::Aggregate => {
+                    aggregate.push_str(&format!("\n#include \"{include}\"{GUID_RESET}"));
+                }
+                AuthorityInput::Satellite => {
+                    satellite.push_str(&format!("\n#include \"{include}\"{GUID_RESET}"));
+                }
+                AuthorityInput::PsApiV1 | AuthorityInput::PsApiV2 => {}
+            }
+        }
+    }
+    aggregate.push('\n');
+    satellite.push('\n');
     Ok(())
 }
 
@@ -990,14 +1279,7 @@ fn append_authority_manifest(
     include_dirs: &[PathBuf],
 ) -> Result<(), String> {
     // Canonical roots scope extraction; source inclusion still follows the curated SDK manifest.
-    let mut owning_inputs = BTreeMap::new();
-    for root in roots.roots.values() {
-        let [input] = root.owned_inputs.iter().copied().collect::<Vec<_>>()[..] else {
-            continue;
-        };
-        let path = path_arg(&root.path, "--partition-policy-root")?;
-        owning_inputs.insert(normalize_audit_path(&path), input);
-    }
+    let owning_inputs = authority_owning_inputs_by_path(roots)?;
 
     for header in crate::win32_headers::HEADERS {
         if header.eq_ignore_ascii_case("psapi.h") {
@@ -1009,12 +1291,15 @@ fn append_authority_manifest(
         {
             continue;
         }
-        let path = resolve_source_header(header, include_dirs)
+        let resolved = resolve_source_header(header, include_dirs)
             .ok_or_else(|| format!("authority manifest header `{header}` was not found"))?;
-        let path = path_arg(&path, "--include")?;
-        let input = owning_inputs
-            .get(&normalize_audit_path(&path))
-            .copied()
+        let root = authority_root_for_source_header(roots, header, Some(&resolved));
+        let path = root
+            .map(|root| path_arg(&root.path, "--partition-policy-root"))
+            .unwrap_or_else(|| path_arg(&resolved, "--include"))?;
+        let input = root
+            .and_then(|root| root.owned_inputs.iter().copied().next())
+            .or_else(|| owning_inputs.get(&normalize_audit_path(&path)).copied())
             .unwrap_or_else(|| {
                 if crate::aggregate::is_authority_satellite_header(Path::new(header)) {
                     AuthorityInput::Satellite
@@ -1023,13 +1308,19 @@ fn append_authority_manifest(
                 }
             });
         if input == AuthorityInput::Satellite {
-            satellite.push_str(&format!("\n#include <{header}>{GUID_RESET}"));
+            satellite.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
         } else {
-            aggregate.push_str(&format!("\n#include <{header}>"));
+            aggregate.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
         }
     }
     for header in crate::win32_headers::SATELLITE_HEADERS {
-        satellite.push_str(&format!("\n#include <{header}>{GUID_RESET}"));
+        let resolved = resolve_source_header(header, include_dirs)
+            .ok_or_else(|| format!("authority manifest header `{header}` was not found"))?;
+        let root = authority_root_for_source_header(roots, header, Some(&resolved));
+        let path = root
+            .map(|root| path_arg(&root.path, "--partition-policy-root"))
+            .unwrap_or_else(|| path_arg(&resolved, "--include"))?;
+        satellite.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
     }
     aggregate.push('\n');
     satellite.push('\n');
@@ -1068,10 +1359,18 @@ fn build_authority_source_plan(
         .ok_or_else(|| "logical partition `Kernel` did not contain ntdef.h".to_string())?;
     let mut aggregate =
         crate::aggregate::main_prefix(WIN32_SDK_PRELUDE, structured_storage_header)?;
+    aggregate.push_str(GUID_RESET);
     let mut satellite = format!(
         "{}{GUID_RESET}",
         crate::aggregate::satellite_source(WIN32_SDK_PRELUDE)
     );
+    append_partition_source_headers(
+        &mut aggregate,
+        &mut satellite,
+        traversal,
+        &roots,
+        include_dirs,
+    )?;
     append_authority_manifest(&mut aggregate, &mut satellite, &roots, include_dirs)?;
     let cellular_header = roots
         .roots
@@ -1126,6 +1425,35 @@ fn build_authority_source_plan(
         deferred_materialized.insert((AuthorityInput::Aggregate, normalized));
     }
 
+    let mut ordered_roots = roots.roots.iter().collect::<Vec<_>>();
+    ordered_roots.sort_by(|left, right| {
+        left.1
+            .label
+            .to_ascii_lowercase()
+            .cmp(&right.1.label.to_ascii_lowercase())
+            .then_with(|| left.1.label.cmp(&right.1.label))
+    });
+    for (_, root) in ordered_roots {
+        let normalized =
+            normalize_audit_path(path_arg(&root.path, "--partition-policy-root")?.as_str());
+        for input in &root.owned_inputs {
+            if is_intentionally_unvisited_root(&root.label, *input) {
+                continue;
+            }
+            let paths = included
+                .get_mut(input)
+                .expect("all authority inputs have generated sources");
+            if paths.insert(normalized.clone()) {
+                append_authority_root(
+                    sources
+                        .get_mut(input)
+                        .expect("all authority inputs have generated sources"),
+                    &root.path,
+                    *input,
+                )?;
+            }
+        }
+    }
     crate::aggregate::append_threading_input(
         sources
             .get_mut(&AuthorityInput::Aggregate)
@@ -3203,16 +3531,16 @@ mod tests {
                 transitive.review_reason,
                 "reviewed transitive aggregate umbrella ownership"
             );
-            let path = resolve_source_header(header, &include_dirs).unwrap();
-            let include = format!("#include \"{}\"", path_arg(&path, "--include").unwrap());
             let expected_direct_dependencies =
                 usize::from(["gdipluseffects.h", "uuids.h"].contains(header));
+            let suffix = format!("/{}\"", header.to_ascii_lowercase());
             assert_eq!(
                 source_plan
                     .sources
                     .get(&AuthorityInput::Aggregate)
                     .unwrap()
-                    .matches(&include)
+                    .to_ascii_lowercase()
+                    .matches(&suffix)
                     .count(),
                 expected_direct_dependencies,
                 "{header} used an unexpected direct include count"
@@ -3220,42 +3548,46 @@ mod tests {
         }
         let aggregate_source = source_plan.sources.get(&AuthorityInput::Aggregate).unwrap();
         let satellite_source = source_plan.sources.get(&AuthorityInput::Satellite).unwrap();
-        let absolute_include = |name: &str| {
-            let path = resolve_source_header(name, &include_dirs).unwrap();
-            format!("#include \"{}\"", path_arg(&path, "--include").unwrap())
-        };
+        let include_suffix = |name: &str| format!("/{}\"", name.to_ascii_lowercase());
+        let aggregate_lower = aggregate_source.to_ascii_lowercase();
+        let satellite_lower = satellite_source.to_ascii_lowercase();
         assert!(
-            aggregate_source
-                .find(&absolute_include("shellscalingapi.h"))
+            aggregate_lower
+                .find(&include_suffix("shellscalingapi.h"))
                 .unwrap()
-                < aggregate_source
-                    .find(&absolute_include("tlhelp32.h"))
-                    .unwrap()
+                < aggregate_lower.find(&include_suffix("tlhelp32.h")).unwrap()
         );
-        assert!(!aggregate_source.contains(&absolute_include("psapi.h")));
-        assert!(!satellite_source.contains(&absolute_include("psapi.h")));
+        assert!(!aggregate_lower.contains(&include_suffix("psapi.h")));
+        assert!(!satellite_lower.contains(&include_suffix("psapi.h")));
+        for header in ["ImageHlp.h", "cardmod.h", "infocard.h"] {
+            let suffix = include_suffix(header);
+            assert!(!aggregate_lower.contains(&suffix), "{header}");
+            assert!(satellite_lower.contains(&suffix), "{header}");
+        }
+        for header in ["AudioAPOTypes.h", "p2p.h", "SpOrder.h"] {
+            let suffix = include_suffix(header);
+            assert!(aggregate_lower.contains(&suffix), "{header}");
+            assert!(!satellite_lower.contains(&suffix), "{header}");
+        }
         for header in ["sql.h", "sqlext.h"] {
-            let include = absolute_include(header);
-            assert!(!aggregate_source.contains(&include), "{header}");
-            assert!(satellite_source.contains(&include), "{header}");
+            let suffix = include_suffix(header);
+            assert!(!aggregate_lower.contains(&suffix), "{header}");
+            assert!(satellite_lower.contains(&suffix), "{header}");
         }
         for header in [
             "chakrart.h",
-            "ImageHlp.h",
             "msoav.h",
             "rpcproxy.h",
             "tune.h",
             "vdshwprv.h",
         ] {
-            let include = absolute_include(header);
-            assert!(!aggregate_source.contains(&include), "{header}");
-            assert!(!satellite_source.contains(&include), "{header}");
+            let suffix = include_suffix(header);
+            assert!(!aggregate_lower.contains(&suffix), "{header}");
+            assert!(!satellite_lower.contains(&suffix), "{header}");
         }
         assert!(
-            aggregate_source.find(&absolute_include("uuids.h")).unwrap()
-                < aggregate_source
-                    .find(&absolute_include("avifmt.h"))
-                    .unwrap()
+            aggregate_lower.find(&include_suffix("uuids.h")).unwrap()
+                < aggregate_lower.find(&include_suffix("avifmt.h")).unwrap()
         );
         for label in ["partition/threading/main.cpp", "shared/ntdef.h"] {
             let deferred = site(label, AuthorityInput::Aggregate).unwrap();
@@ -3277,9 +3609,7 @@ mod tests {
             aggregate_source[..kernel].rfind("#include").unwrap()
         );
         assert_eq!(
-            satellite_source
-                .matches(&absolute_include("winddi.h"))
-                .count(),
+            satellite_lower.matches(&include_suffix("winddi.h")).count(),
             4,
             "bounded USERMODE_DRIVER reinclusions must be preserved"
         );
@@ -3442,7 +3772,7 @@ mod tests {
             }
             satellite_roots += usize::from(satellite);
         }
-        assert_eq!(satellite_roots, 90);
+        assert_eq!(satellite_roots, 156);
         let usb = path_arg(&usb, "--partition-policy-root").unwrap();
         assert!(authority[0].roots.contains(&usb));
         assert!(!authority[1].roots.contains(&usb));
@@ -3563,14 +3893,53 @@ mod tests {
                 .contains("#if __has_include(\"RilAPITypes.h\")")
         );
         assert_eq!(
-            COVERAGE_UNPRODUCTIVE_ALLOWLIST,
-            [(
+            COVERAGE_UNPRODUCTIVE_ALLOWLIST
+                .iter()
+                .map(|(root, _, _, _)| *root)
+                .collect::<Vec<_>>(),
+            [
+                "um/asptlb.h",
                 "um/cellularapi_oem.h",
-                AGGREGATE_INPUT,
-                false,
-                "the pinned SDK omits imported RilAPITypes.h; the legacy source also skips this header",
-            )]
+                "um/chakrart.h",
+                "um/icodecapi.h",
+                "um/iiswebsocket.h",
+                "um/mapiunicodehelp.h",
+                "um/msoav.h",
+                "um/faxcom.h",
+                "um/msp.h",
+                "um/mspaddr.h",
+                "um/mspcall.h",
+                "um/mspstrm.h",
+                "um/ntlsa.h",
+                "um/oledbguid.h",
+                "um/ole.h",
+                "um/pnrpns.h",
+                "um/routprot.h",
+                "um/rpcproxy.h",
+                "um/tapi3cc.h",
+                "um/termmgr.h",
+                "um/tune.h",
+                "um/tvratings_enum.h",
+                "um/vdshwprv.h",
+                "um/winenclave.h",
+            ]
         );
+        for (label, input, expected_visit, reason) in COVERAGE_UNPRODUCTIVE_ALLOWLIST {
+            assert!(!expected_visit, "{label}");
+            assert!(!reason.is_empty(), "{label}");
+            let root = source_plan
+                .roots
+                .roots
+                .values()
+                .find(|root| root.label.eq_ignore_ascii_case(label))
+                .unwrap();
+            assert!(
+                root.owned_inputs
+                    .iter()
+                    .any(|owner| owner.name().eq_ignore_ascii_case(input)),
+                "{label}"
+            );
+        }
     }
 
     #[test]
@@ -3597,6 +3966,126 @@ mod tests {
                 assert!(
                     snapshot.facts().iter().any(|fact| fact.name == expected),
                     "{name} did not preserve `{expected}` through its isolated source block"
+                );
+            }
+            let expected_scoped_enums: &[(&str, &str)] = if name == AGGREGATE_INPUT {
+                &[("__MIDL___MIDL_itf_devicetopology_0000_0000_0013", "Network")]
+            } else {
+                &[
+                    ("__MIDL___MIDL_itf_devicetopology_0000_0000_0013", "Network"),
+                    ("JsDebugReadMemoryFlags", "None"),
+                    ("_PaddingMode", "None"),
+                ]
+            };
+            for (enum_name, variant_name) in expected_scoped_enums {
+                let fact = snapshot
+                    .facts()
+                    .iter()
+                    .find(|fact| fact.name == *enum_name)
+                    .unwrap_or_else(|| panic!("{name} did not preserve enum `{enum_name}`"));
+                let FactData::Enum {
+                    variants, scoped, ..
+                } = &fact.data
+                else {
+                    panic!("{name} did not preserve `{enum_name}` as an enum");
+                };
+                assert!(*scoped, "{name} did not scope `{enum_name}`");
+                assert!(
+                    variants.iter().any(|variant| variant.name == *variant_name),
+                    "{name} did not preserve `{enum_name}.{variant_name}`"
+                );
+            }
+            let expected_aliases: &[&str] = if name == AGGREGATE_INPUT {
+                &["ConnectorType"]
+            } else {
+                &["ConnectorType", "PaddingMode"]
+            };
+            for alias in expected_aliases {
+                assert!(
+                    snapshot
+                        .facts()
+                        .iter()
+                        .any(|fact| fact.name == *alias
+                            && matches!(fact.data, FactData::Typedef { .. })),
+                    "{name} did not preserve typedef `{alias}`"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn checked_in_authority_scoped_enums_preserve_focused_header_behavior() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let resolve = |header: &str| {
+            include_dirs
+                .iter()
+                .map(|directory| directory.join(header))
+                .find(|path| path.is_file())
+                .unwrap()
+        };
+
+        for (input, header, source_prefix, enum_name, variant_name, alias) in [
+            (
+                "focused-infocard.cpp",
+                "infocard.h",
+                "",
+                "_PaddingMode",
+                "None",
+                Some("PaddingMode"),
+            ),
+            (
+                "focused-jscript9diag.cpp",
+                "jscript9diag.h",
+                "",
+                "JsDebugReadMemoryFlags",
+                "None",
+                None,
+            ),
+            (
+                "focused-devicetopology.cpp",
+                "devicetopology.h",
+                "#include <ks.h>\n#define _KS_\n",
+                "__MIDL___MIDL_itf_devicetopology_0000_0000_0013",
+                "Network",
+                Some("ConnectorType"),
+            ),
+        ] {
+            let root = resolve(header);
+            let source = format!("{WIN32_SDK_PRELUDE}{source_prefix}#include <{header}>\n");
+            assert!(!source.contains("WIN32METADATA_AGGREGATE_ROUTING"));
+            let snapshot = windows_clang::extract(
+                [Input::new(input, source).with_roots([path_arg(&root, "--include").unwrap()])],
+                &args,
+            )
+            .unwrap_or_else(|error| panic!("{input}: {error}"));
+            let fact = snapshot
+                .facts()
+                .iter()
+                .find(|fact| fact.name == enum_name)
+                .unwrap_or_else(|| panic!("{input} did not preserve enum `{enum_name}`"));
+            let FactData::Enum {
+                variants, scoped, ..
+            } = &fact.data
+            else {
+                panic!("{input} did not preserve `{enum_name}` as an enum");
+            };
+            assert!(!scoped, "{input} unexpectedly scoped `{enum_name}`");
+            assert!(
+                variants.iter().any(|variant| variant.name == variant_name),
+                "{input} did not preserve `{enum_name}.{variant_name}`"
+            );
+            if let Some(alias) = alias {
+                assert!(
+                    snapshot
+                        .facts()
+                        .iter()
+                        .any(|fact| fact.name == alias
+                            && matches!(fact.data, FactData::Typedef { .. })),
+                    "{input} did not preserve typedef `{alias}`"
                 );
             }
         }
