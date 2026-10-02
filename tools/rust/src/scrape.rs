@@ -2420,6 +2420,34 @@ mod tests {
         assert!(coverage_labels.contains("partition/com.structuredstorage/manual.h"));
         assert!(coverage_labels.contains("partition/threading/main.cpp"));
         let satellite_root_keys = authority_satellite_root_keys(&traversal);
+        let direct_draw = logical_partition(&traversal, "DirectDraw").unwrap();
+        let direct_draw_roots = direct_draw
+            .roots
+            .iter()
+            .flat_map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => vec![&root.path],
+                crate::partition::TraversalRoot::Directory(root) => {
+                    root.files.iter().map(|file| &file.path).collect()
+                }
+                crate::partition::TraversalRoot::Missing(_)
+                | crate::partition::TraversalRoot::Unsupported(_) => {
+                    panic!("checked-in traversal policy was not clean")
+                }
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(direct_draw_roots.len(), 7);
+        assert!(direct_draw_roots.iter().all(|path| {
+            satellite_root_keys.contains(&normalize_audit_path(path.to_string_lossy().as_ref()))
+        }));
+        let usb = traversal
+            .canonical_physical_files()
+            .into_iter()
+            .find(|(canonical, _)| canonical.as_str().ends_with("/shared/usb.h"))
+            .map(|(_, path)| path)
+            .expect("checked-in traversal policy did not contain shared/usb.h");
+        assert!(
+            !satellite_root_keys.contains(&normalize_audit_path(usb.to_string_lossy().as_ref()))
+        );
         for partition in &traversal.partitions {
             for root in &partition.roots {
                 let files = match root {
@@ -2488,7 +2516,10 @@ mod tests {
             }
             satellite_roots += usize::from(satellite);
         }
-        assert_eq!(satellite_roots, 43);
+        assert_eq!(satellite_roots, 50);
+        let usb = path_arg(&usb, "--partition-policy-root").unwrap();
+        assert!(authority[0].roots.contains(&usb));
+        assert!(!authority[1].roots.contains(&usb));
 
         let ScrapeInputs::Common(normal) =
             build_inputs(&options, &include_dirs, &root_dirs, None).unwrap()
@@ -2568,6 +2599,7 @@ mod tests {
                 .join("manual.h"),
         )
         .unwrap();
+        main_source.push_str("\n#include <usb.h>\n");
         crate::aggregate::append_threading_input(
             &mut main_source,
             &win_sdk

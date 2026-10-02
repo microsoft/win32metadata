@@ -18,8 +18,14 @@ typedef struct _OLD_LARGE_INTEGER {
 #define _NTDEF_
 "#;
 
-const AUTHORITY_SATELLITE_PARTITIONS: &[&str] =
-    &["Display", "HtmlHelp", "IO", "MsChap", "Printing"];
+const AUTHORITY_SATELLITE_PARTITIONS: &[&str] = &[
+    "DirectDraw",
+    "Display",
+    "HtmlHelp",
+    "IO",
+    "MsChap",
+    "Printing",
+];
 
 const AUTHORITY_SATELLITE_HEADERS: &[&str] = &["vfw.h", "xamlOM.h"];
 
@@ -42,7 +48,8 @@ pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<St
     append_identity(&mut source);
     append_internet_explorer(&mut source);
     append_ip_helper(&mut source);
-    append_graphics_prerequisites(&mut source);
+    append_direct_draw_prerequisites(&mut source);
+    append_d3d9_prerequisites(&mut source);
     append_direct_show(&mut source);
     append_media_foundation(&mut source);
     append_rras(&mut source);
@@ -79,7 +86,9 @@ fn quoted_include_path(path: &Path, description: &str) -> Result<String, String>
 
 pub fn satellite_source(prelude: &str) -> String {
     let mut source = format!("{GLOBAL_DEFINES}{prelude}");
-    append_graphics_prerequisites(&mut source);
+    append_direct_draw_prerequisites(&mut source);
+    append_headers(&mut source, &["dxmini.h", "dmemmgr.h"]);
+    append_d3d9_prerequisites(&mut source);
     append_headers(
         &mut source,
         &["winnt.h", "winerror.h", "dxcore.h", "dxcore_interface.h"],
@@ -172,22 +181,15 @@ fn append_security_seed(source: &mut String) {
     append_extern_c_headers(source, &["schannel.h"]);
 }
 
-fn append_graphics_prerequisites(source: &mut String) {
+fn append_direct_draw_prerequisites(source: &mut String) {
     append_headers(
         source,
-        &[
-            "ddraw.h",
-            "ddrawi.h",
-            "ddrawint.h",
-            "ddkernel.h",
-            "dvp.h",
-            "dxmini.h",
-            "dmemmgr.h",
-            "d3d9.h",
-            "d3d9types.h",
-            "d3d9caps.h",
-        ],
+        &["ddraw.h", "ddrawi.h", "ddrawint.h", "ddkernel.h", "dvp.h"],
     );
+}
+
+fn append_d3d9_prerequisites(source: &mut String) {
+    append_headers(source, &["d3d9.h", "d3d9types.h", "d3d9caps.h"]);
 }
 
 fn append_display(source: &mut String) {
@@ -602,10 +604,14 @@ mod tests {
         assert!(satellite.contains("#include <winddi.h>"));
         assert!(satellite.contains("#include <infotech.h>"));
         assert!(satellite.contains("#include <mschapp.h>"));
+        assert!(satellite.contains("#include <dxmini.h>"));
+        assert!(satellite.contains("#include <dmemmgr.h>"));
         assert!(!satellite.contains("#include <strmif.h>"));
         assert!(!satellite.contains("#include <subauth.h>"));
         assert!(!satellite.contains("#include <avifmt.h>"));
         assert!(!satellite.contains("#include <segment.h>"));
+        assert!(!main.contains("#include <dxmini.h>"));
+        assert!(!main.contains("#include <dmemmgr.h>"));
 
         for source in [&main, &satellite] {
             let ddraw = source.find("#include <ddraw.h>").unwrap();
@@ -647,6 +653,7 @@ mod tests {
             r"C:\sdk\um\processthreadsapi.h"
         )));
         assert!(uses_satellite_environment("Display"));
+        assert!(uses_satellite_environment("DirectDraw"));
         assert!(uses_satellite_environment("mschap"));
         assert!(!uses_satellite_environment("Media.DShow"));
         assert!(is_authority_satellite_header(Path::new(
