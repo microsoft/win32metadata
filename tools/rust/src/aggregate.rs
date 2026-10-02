@@ -148,6 +148,7 @@ pub fn satellite_source(prelude: &str) -> String {
     append_console(&mut source);
     append_cfgmgr_satellite(&mut source);
     append_storage_satellite(&mut source);
+    append_headers(&mut source, &["tbs.h"]);
     append_direct_draw_prerequisites(&mut source);
     append_audio_satellite(&mut source);
     append_headers(&mut source, &["dxmini.h", "dmemmgr.h"]);
@@ -1274,6 +1275,7 @@ mod tests {
         assert!(satellite.contains("#include <dxmini.h>"));
         assert!(satellite.contains("#include <dmemmgr.h>"));
         assert!(satellite.contains("#include <ntddstor.h>"));
+        assert!(satellite.contains("#include <tbs.h>"));
         assert!(!satellite.contains("#include <ntddchgr.h>"));
         assert!(!satellite.contains("#include <ntdddisk.h>"));
         assert!(satellite.contains("#include <endpointvolume.h>"));

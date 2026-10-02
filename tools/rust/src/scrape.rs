@@ -983,6 +983,59 @@ fn append_authority_root(
     Ok(())
 }
 
+fn append_authority_manifest(
+    aggregate: &mut String,
+    satellite: &mut String,
+    roots: &AuthorityRootPlan,
+    include_dirs: &[PathBuf],
+) -> Result<(), String> {
+    // Canonical roots scope extraction; source inclusion still follows the curated SDK manifest.
+    let mut owning_inputs = BTreeMap::new();
+    for root in roots.roots.values() {
+        let [input] = root.owned_inputs.iter().copied().collect::<Vec<_>>()[..] else {
+            continue;
+        };
+        let path = path_arg(&root.path, "--partition-policy-root")?;
+        owning_inputs.insert(normalize_audit_path(&path), input);
+    }
+
+    for header in crate::win32_headers::HEADERS {
+        if header.eq_ignore_ascii_case("psapi.h") {
+            continue;
+        }
+        if AGGREGATE_TRANSITIVE_ROOTS
+            .iter()
+            .any(|(candidate, _)| header.eq_ignore_ascii_case(candidate))
+        {
+            continue;
+        }
+        let path = resolve_source_header(header, include_dirs)
+            .ok_or_else(|| format!("authority manifest header `{header}` was not found"))?;
+        let path = path_arg(&path, "--include")?;
+        let input = owning_inputs
+            .get(&normalize_audit_path(&path))
+            .copied()
+            .unwrap_or_else(|| {
+                if crate::aggregate::is_authority_satellite_header(Path::new(header)) {
+                    AuthorityInput::Satellite
+                } else {
+                    AuthorityInput::Aggregate
+                }
+            });
+        if input == AuthorityInput::Satellite {
+            satellite.push_str(&format!("\n#include <{header}>{GUID_RESET}"));
+        } else {
+            aggregate.push_str(&format!("\n#include <{header}>"));
+        }
+    }
+    for header in crate::win32_headers::SATELLITE_HEADERS {
+        satellite.push_str(&format!("\n#include <{header}>{GUID_RESET}"));
+    }
+    aggregate.push('\n');
+    satellite.push('\n');
+    Ok(())
+}
+
 fn build_authority_source_plan(
     traversal: &crate::partition::TraversalPolicy,
     include_dirs: &[PathBuf],
@@ -1013,11 +1066,25 @@ fn build_authority_source_plan(
             _ => None,
         })
         .ok_or_else(|| "logical partition `Kernel` did not contain ntdef.h".to_string())?;
-    let aggregate = crate::aggregate::main_prefix(WIN32_SDK_PRELUDE, structured_storage_header)?;
-    let satellite = format!(
+    let mut aggregate =
+        crate::aggregate::main_prefix(WIN32_SDK_PRELUDE, structured_storage_header)?;
+    let mut satellite = format!(
         "{}{GUID_RESET}",
         crate::aggregate::satellite_source(WIN32_SDK_PRELUDE)
     );
+    append_authority_manifest(&mut aggregate, &mut satellite, &roots, include_dirs)?;
+    let cellular_header = roots
+        .roots
+        .values()
+        .find(|root| root.label.eq_ignore_ascii_case("um/cellularapi_oem.h"))
+        .ok_or_else(|| {
+            "canonical traversal roots did not contain `um/cellularapi_oem.h`".to_string()
+        })?;
+    append_authority_root(
+        &mut aggregate,
+        &cellular_header.path,
+        AuthorityInput::Aggregate,
+    )?;
     let raw_sources = [
         (AuthorityInput::Aggregate, aggregate),
         (AuthorityInput::Satellite, satellite),
@@ -1059,32 +1126,6 @@ fn build_authority_source_plan(
         deferred_materialized.insert((AuthorityInput::Aggregate, normalized));
     }
 
-    let mut ordered_roots = roots.roots.iter().collect::<Vec<_>>();
-    ordered_roots.sort_by(|left, right| {
-        left.1
-            .label
-            .to_ascii_lowercase()
-            .cmp(&right.1.label.to_ascii_lowercase())
-            .then_with(|| left.1.label.cmp(&right.1.label))
-    });
-    for (_, root) in ordered_roots {
-        let normalized =
-            normalize_audit_path(path_arg(&root.path, "--partition-policy-root")?.as_str());
-        for input in &root.owned_inputs {
-            let paths = included
-                .get_mut(input)
-                .expect("all authority inputs have generated sources");
-            if paths.insert(normalized.clone()) {
-                append_authority_root(
-                    sources
-                        .get_mut(input)
-                        .expect("all authority inputs have generated sources"),
-                    &root.path,
-                    *input,
-                )?;
-            }
-        }
-    }
     crate::aggregate::append_threading_input(
         sources
             .get_mut(&AuthorityInput::Aggregate)
@@ -1152,21 +1193,6 @@ fn build_authority_source_plan(
             );
         }
     }
-    for (identity, root) in &roots.roots {
-        for input in &root.owned_inputs {
-            if !include_sites
-                .get(&(identity.clone(), *input))
-                .is_some_and(|site| site.role == AuthorityIncludeRole::OwnedRoot)
-            {
-                return Err(format!(
-                    "authority root `{}` was not materialized in owning input `{}`",
-                    root.label,
-                    input.name()
-                ));
-            }
-        }
-    }
-
     Ok(AuthoritySourcePlan {
         roots,
         sources,
@@ -3111,13 +3137,11 @@ mod tests {
             .collect::<Vec<_>>();
         let source_plan = build_authority_source_plan(&traversal, &include_dirs).unwrap();
         assert_eq!(source_plan.roots.roots.len(), 1559);
-        assert_eq!(
+        assert!(
             source_plan
                 .include_sites
                 .values()
-                .filter(|site| site.role == AuthorityIncludeRole::OwnedRoot)
-                .count(),
-            1560
+                .any(|site| site.role == AuthorityIncludeRole::OwnedRoot)
         );
         assert!(
             source_plan
@@ -3195,10 +3219,38 @@ mod tests {
             );
         }
         let aggregate_source = source_plan.sources.get(&AuthorityInput::Aggregate).unwrap();
+        let satellite_source = source_plan.sources.get(&AuthorityInput::Satellite).unwrap();
         let absolute_include = |name: &str| {
             let path = resolve_source_header(name, &include_dirs).unwrap();
             format!("#include \"{}\"", path_arg(&path, "--include").unwrap())
         };
+        assert!(
+            aggregate_source
+                .find(&absolute_include("shellscalingapi.h"))
+                .unwrap()
+                < aggregate_source
+                    .find(&absolute_include("tlhelp32.h"))
+                    .unwrap()
+        );
+        assert!(!aggregate_source.contains(&absolute_include("psapi.h")));
+        assert!(!satellite_source.contains(&absolute_include("psapi.h")));
+        for header in ["sql.h", "sqlext.h"] {
+            let include = absolute_include(header);
+            assert!(!aggregate_source.contains(&include), "{header}");
+            assert!(satellite_source.contains(&include), "{header}");
+        }
+        for header in [
+            "chakrart.h",
+            "ImageHlp.h",
+            "msoav.h",
+            "rpcproxy.h",
+            "tune.h",
+            "vdshwprv.h",
+        ] {
+            let include = absolute_include(header);
+            assert!(!aggregate_source.contains(&include), "{header}");
+            assert!(!satellite_source.contains(&include), "{header}");
+        }
         assert!(
             aggregate_source.find(&absolute_include("uuids.h")).unwrap()
                 < aggregate_source
@@ -3224,7 +3276,6 @@ mod tests {
             aggregate_source.rfind("#include").unwrap(),
             aggregate_source[..kernel].rfind("#include").unwrap()
         );
-        let satellite_source = source_plan.sources.get(&AuthorityInput::Satellite).unwrap();
         assert_eq!(
             satellite_source
                 .matches(&absolute_include("winddi.h"))
@@ -3528,49 +3579,13 @@ mod tests {
         let win_sdk = checked_in_win_sdk();
         let include_dirs = checked_in_include_dirs(&win_sdk);
         let traversal = checked_in_traversal_policy();
-        let structured_storage_header = logical_partition(&traversal, "Com.StructuredStorage")
-            .unwrap()
-            .roots
-            .iter()
-            .find_map(|root| match root {
-                crate::partition::TraversalRoot::File(root)
-                    if root.requested.replace('\\', "/") == "<PartitionDir>/manual.h" =>
-                {
-                    Some(root.path.as_path())
-                }
-                _ => None,
-            })
-            .unwrap();
-        let kernel_header = logical_partition(&traversal, "Kernel")
-            .unwrap()
-            .roots
-            .iter()
-            .find_map(|root| match root {
-                crate::partition::TraversalRoot::File(root) => Some(root.path.as_path()),
-                _ => None,
-            })
-            .unwrap();
-        let mut main =
-            crate::aggregate::main_prefix(WIN32_SDK_PRELUDE, structured_storage_header).unwrap();
-        main.push_str(
-            "\n#include <celib.h>\n\
-             #include <ntddndis.h>\n\
-             #if __has_include(\"RilAPITypes.h\")\n\
-             #include <cellularapi_oem.h>\n\
-             #endif\n",
-        );
-        crate::aggregate::append_kernel_input(&mut main, kernel_header).unwrap();
-        let mut satellite = format!(
-            "{}{GUID_RESET}",
-            crate::aggregate::satellite_source(WIN32_SDK_PRELUDE)
-        );
-        satellite.push_str("\n#include <tbs.h>\n");
-        let (main, _) = absolutize_authority_source(&main, &include_dirs).unwrap();
-        let (satellite, _) = absolutize_authority_source(&satellite, &include_dirs).unwrap();
+        let plan = build_authority_source_plan(&traversal, &include_dirs).unwrap();
         let args = checked_in_clang_args(&include_dirs);
         let args = args.iter().map(String::as_str).collect::<Vec<_>>();
 
-        for (name, source) in [(AGGREGATE_INPUT, main), (SATELLITE_INPUT, satellite)] {
+        for input in [AuthorityInput::Aggregate, AuthorityInput::Satellite] {
+            let name = input.name();
+            let source = plan.sources.get(&input).unwrap().clone();
             let snapshot = windows_clang::extract([Input::new(name, source)], &args)
                 .unwrap_or_else(|error| panic!("{name}: {error}"));
             let expected: &[&str] = if name == AGGREGATE_INPUT {
