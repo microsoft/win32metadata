@@ -1861,9 +1861,29 @@ fn add_header_partition_owner(
     policy.add_traversed_header_for_input(input, header, partition);
 }
 
+// OLD 71 emitted the sole numeric logical namespace into its valid parent namespace.
+const LEGACY_EMISSION_NAMESPACE_OVERRIDES: &[(&str, &str, &str)] = &[(
+    "Devices.1394",
+    "Windows.Win32.Devices.1394",
+    "Windows.Win32.Devices",
+)];
+
+fn emitted_partition_namespace<'a>(partition: &'a crate::partition::LogicalPartition) -> &'a str {
+    LEGACY_EMISSION_NAMESPACE_OVERRIDES
+        .iter()
+        .find(|(identity, logical, _)| {
+            partition.identity == *identity && partition.policy.namespace == *logical
+        })
+        .map(|(_, _, emitted)| *emitted)
+        .unwrap_or(&partition.policy.namespace)
+}
+
 fn convert_root_partition(partition: &crate::partition::LogicalPartition) -> RootPartition {
     let policy = &partition.policy;
-    let mut result = RootPartition::new(partition.identity.clone(), policy.namespace.clone());
+    let mut result = RootPartition::new(
+        partition.identity.clone(),
+        emitted_partition_namespace(partition),
+    );
     for (source, target) in &policy.remaps {
         result = result.with_remap(source.clone(), target.clone());
     }
@@ -5024,8 +5044,97 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_numeric_logical_namespace_matches_old_71_emission() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "Devices.1394").unwrap();
+        let [crate::partition::TraversalRoot::File(root)] = partition.roots.as_slice() else {
+            panic!("Devices.1394 did not have one physical file root");
+        };
+        let header = path_arg(&root.path, "--partition-policy-root").unwrap();
+        let source = format!("{WIN32_SDK_PRELUDE}\n#include \"{header}\"\n");
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let mut policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            header.clone(),
+            convert_root_partition(partition),
+        );
+        let dependency = RootPartition::new("Dependency", "Windows.Win32.Foundation");
+        let dependency_headers = snapshot
+            .facts()
+            .iter()
+            .map(|fact| fact.spelling.file.as_str())
+            .chain(
+                snapshot
+                    .constants()
+                    .iter()
+                    .map(|constant| constant.spelling.file.as_str()),
+            )
+            .filter(|path| !source_path_matches(&header, path))
+            .filter(|path| Path::new(path).is_file())
+            .collect::<BTreeSet<_>>();
+        for dependency_header in dependency_headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                dependency_header.to_string(),
+                dependency.clone(),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let (emitted, rdl) = partitions
+            .iter()
+            .find(|(emitted, _)| emitted.partition == "Devices.1394")
+            .unwrap();
+        assert_eq!(emitted.partition, "Devices.1394");
+        assert_eq!(emitted.namespace, "Windows.Win32.Devices");
+        for name in ["IEEE1394_VDEV_PNP_REQUEST", "IEEE1394_API_REQUEST"] {
+            assert!(rdl.contains(name), "{rdl}");
+        }
+    }
+
+    #[test]
     fn checked_in_logical_policy_conversion_preserves_every_owner_setting() {
         let traversal = checked_in_traversal_policy();
+        assert_eq!(
+            traversal
+                .partitions
+                .iter()
+                .filter_map(|partition| {
+                    let emitted = emitted_partition_namespace(partition);
+                    (emitted != partition.policy.namespace.as_str()).then_some((
+                        partition.identity.as_str(),
+                        partition.policy.namespace.as_str(),
+                        emitted,
+                    ))
+                })
+                .collect::<Vec<_>>(),
+            [(
+                "Devices.1394",
+                "Windows.Win32.Devices.1394",
+                "Windows.Win32.Devices",
+            )]
+        );
         let headers = convert_header_partition_policy(&traversal).unwrap();
         let root_plan = build_authority_root_plan(&traversal).unwrap();
         assert_eq!(headers.traversed_headers().count(), 0);
