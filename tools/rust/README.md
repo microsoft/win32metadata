@@ -13,6 +13,13 @@ rather than becoming a public root. x64, x86, and arm64 extraction runs in paral
 per-architecture WinMDs are merged into one output. Focused partition translation units remain
 available for package fixtures and inner-loop debugging.
 
+In logical authority mode, explicitly traversed headers retain their assigned namespaces.
+Required dependency types from other headers use the default `Windows.Win32` namespace
+instead of inheriting a referring partition's namespace. This includes exact dependencies
+declared in C++ namespaces such as `DirectX`; it does not select unrelated declarations
+from those headers. Explicit namespace routes still take precedence, and missing or
+ambiguous type definitions remain errors.
+
 Authority mode validates the canonical ownership/policy/compile-environment inventory digest
 before extraction. Compile-environment identity alone does not create another translation unit;
 PSAPI remains the only proven incompatible same-header compile variant.

@@ -517,6 +517,7 @@ struct ScrapeConfiguration {
     libraries: LibraryMap,
     references: MetadataReferences,
     exclusions: MetadataReferences,
+    policy_exclusions: BTreeSet<String>,
     annotation_header: String,
     sal_header: String,
     has_import_libraries: bool,
@@ -674,6 +675,24 @@ const HEADER_POLICY_OVERRIDE_CONTRACTS: &[HeaderPolicyOverrideContract] = &[
             ("ENDPOINT_HARDWARE_SUPPORT_METER", "Audio"),
         ],
         excluded_names: &[],
+    },
+    HeaderPolicyOverrideContract {
+        path: "um/mmdeviceapi.h",
+        default_partition: "Audio",
+        overrides: &[],
+        excluded_names: &["E_NOTFOUND"],
+    },
+    HeaderPolicyOverrideContract {
+        path: "um/devicetopology.h",
+        default_partition: "Audio",
+        overrides: &[],
+        excluded_names: &["E_NOTFOUND"],
+    },
+    HeaderPolicyOverrideContract {
+        path: "um/xamlOM.h",
+        default_partition: "Xaml_Diagnostics",
+        overrides: &[],
+        excluded_names: &["E_NOTFOUND"],
     },
     HeaderPolicyOverrideContract {
         path: "um/winineti.h",
@@ -959,6 +978,17 @@ impl ScrapeInputs {
 
     fn partitioned(&self) -> bool {
         matches!(self, Self::Partitioned(_))
+    }
+
+    fn policy_exclusions(&self) -> BTreeSet<String> {
+        match self {
+            Self::Common(_) => BTreeSet::new(),
+            Self::Partitioned(inputs) => inputs
+                .iter()
+                .flat_map(|input| input.roots.values())
+                .flat_map(|root| root.exclusions.iter().cloned())
+                .collect(),
+        }
     }
 }
 
@@ -1653,6 +1683,22 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         &root_dirs,
         logical_partitions.as_ref().map(|policy| &policy.traversal),
     )?;
+    let mut policy_exclusions = inputs.policy_exclusions();
+    if let Some(logical) = &logical_partitions {
+        policy_exclusions.extend(
+            logical
+                .traversal
+                .partitions
+                .iter()
+                .flat_map(|partition| partition.policy.exclusions.iter().cloned()),
+        );
+        policy_exclusions.extend(
+            HEADER_POLICY_OVERRIDE_CONTRACTS
+                .iter()
+                .flat_map(|contract| contract.excluded_names.iter().copied())
+                .map(str::to_string),
+        );
+    }
     let namespace_routes = options
         .namespace_routes
         .as_deref()
@@ -1705,6 +1751,7 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         libraries,
         references,
         exclusions,
+        policy_exclusions,
         annotation_header,
         sal_header,
         has_import_libraries: !libs.is_empty(),
@@ -2460,6 +2507,26 @@ fn arch(name: &str) -> Result<Arch, String> {
         .ok_or_else(|| format!("unknown architecture `{name}`; expected x64, arm64, or x86"))
 }
 
+fn implicit_selected_functions(
+    snapshot: &windows_clang::Snapshot,
+    excluded_functions: &BTreeSet<String>,
+    libraries: &BTreeMap<String, String>,
+    has_import_annotation: impl Fn(&windows_clang::Fact) -> bool,
+) -> BTreeSet<String> {
+    snapshot
+        .facts()
+        .iter()
+        .filter(|fact| fact.root && !excluded_functions.contains(&fact.name))
+        .filter_map(|fact| {
+            let FactData::Function { link_name, .. } = &fact.data else {
+                return None;
+            };
+            (libraries.contains_key(link_name) || has_import_annotation(fact))
+                .then(|| link_name.clone())
+        })
+        .collect()
+}
+
 /// Scrapes one architecture into its own RDL directory and compiles those partitions.
 fn scrape_arch(
     configuration: &ScrapeConfiguration,
@@ -2583,20 +2650,14 @@ fn scrape_arch(
         }
         Some(links)
     } else if configuration.has_import_libraries {
-        Some(
-            snapshot
-                .facts()
-                .iter()
-                .filter(|fact| fact.root)
-                .filter_map(|fact| {
-                    let FactData::Function { link_name, .. } = &fact.data else {
-                        return None;
-                    };
-                    (libraries.contains_key(link_name) || has_import_annotation(fact))
-                        .then(|| link_name.clone())
-                })
-                .collect(),
-        )
+        let mut excluded_functions = configuration.exclusions.excluded_functions().clone();
+        excluded_functions.extend(configuration.policy_exclusions.iter().cloned());
+        Some(implicit_selected_functions(
+            &snapshot,
+            &excluded_functions,
+            &libraries,
+            has_import_annotation,
+        ))
     } else {
         None
     };
@@ -2702,7 +2763,7 @@ fn plan_header_partitions(
         .plan_header_partitions(policy, authorities)
         .map_err(|error| format!("failed to plan {arch} metadata: {error}"))?;
     plan.emit_with_options(emit)
-        .map_err(|error| format!("failed to audit {arch} metadata: {error}"))
+        .map_err(|error| format!("failed to emit {arch} partitioned metadata: {error}"))
 }
 
 fn write_partitioned_rdl(
@@ -3295,6 +3356,37 @@ mod tests {
             &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
         )
         .unwrap()
+    }
+
+    #[test]
+    fn implicit_library_selection_omits_excluded_functions() {
+        ensure_libclang();
+        let root = scratch("implicit-library-selection");
+        let header = root.join("selection.h");
+        std::fs::write(
+            &header,
+            "extern \"C\" int Kept(void);\nextern \"C\" int Excluded(void);\n",
+        )
+        .unwrap();
+        let header_arg = path_arg(&header, "--include").unwrap();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, format!("#include \"{header_arg}\"\n"))
+                    .with_roots([header_arg]),
+            ],
+            &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        let libraries = BTreeMap::from([
+            ("Excluded".to_string(), "test.dll".to_string()),
+            ("Kept".to_string(), "test.dll".to_string()),
+        ]);
+        let excluded = BTreeSet::from(["Excluded".to_string()]);
+
+        assert_eq!(
+            implicit_selected_functions(&snapshot, &excluded, &libraries, |_| false),
+            BTreeSet::from(["Kept".to_string()])
+        );
     }
 
     #[test]
@@ -4615,6 +4707,10 @@ mod tests {
              #define DISPID_AMBIENT_OFFLINEIFNOTCONNECTED 6\n\
              #define DISPID_AMBIENT_SILENT 7\n",
         );
+        let infotech = write(&um, "infotech.h", "#define E_NOTFOUND 0x8000100D\n");
+        let mmdeviceapi = write(&um, "mmdeviceapi.h", "#define E_NOTFOUND 0x80070490\n");
+        let devicetopology = write(&um, "devicetopology.h", "#define E_NOTFOUND 0x80070490\n");
+        let xamlom = write(&um, "xamlOM.h", "#define E_NOTFOUND 0x80070490\n");
         let dxcore = write(
             &um,
             "dxcore.h",
@@ -4629,15 +4725,23 @@ mod tests {
         let include =
             |path: &Path| format!("#include \"{}\"\n", path_arg(path, "--include").unwrap());
         let aggregate_source = format!(
-            "{}{}{}{}{}{}",
+            "{}{}{}{}{}{}{}{}",
             include(&audioendpoints),
             include(&uuids),
             include(&olectl),
             include(&idispids),
+            include(&infotech),
+            include(&mmdeviceapi),
             include(&dxcore),
             include(&dxcore_interface),
         );
-        let satellite_source = format!("{}{}", include(&ntddstor), include(&endpointvolume));
+        let satellite_source = format!(
+            "{}{}{}{}",
+            include(&ntddstor),
+            include(&endpointvolume),
+            include(&devicetopology),
+            include(&xamlom),
+        );
         let snapshot = windows_clang::extract(
             [
                 Input::new(AGGREGATE_INPUT, aggregate_source).with_roots(
@@ -4646,13 +4750,16 @@ mod tests {
                         &uuids,
                         &olectl,
                         &idispids,
+                        &infotech,
+                        &mmdeviceapi,
                         &dxcore,
                         &dxcore_interface,
                     ]
                     .map(|path| path_arg(path, "--include").unwrap()),
                 ),
                 Input::new(SATELLITE_INPUT, satellite_source).with_roots(
-                    [&ntddstor, &endpointvolume].map(|path| path_arg(path, "--include").unwrap()),
+                    [&ntddstor, &endpointvolume, &devicetopology, &xamlom]
+                        .map(|path| path_arg(path, "--include").unwrap()),
                 ),
             ],
             &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
@@ -4703,10 +4810,29 @@ mod tests {
             (&uuids, "Mf"),
             (&olectl, "ComOle"),
             (&idispids, "InternetExplorer"),
+            (&infotech, "HtmlHelp"),
             (&dxcore, "DXCore"),
             (&dxcore_interface, "DXCore"),
         ] {
             policy.add_traversed_header_for_input(AGGREGATE_INPUT, header(path), owner(identity));
+        }
+        for (path, identity) in [
+            (&mmdeviceapi, "Audio"),
+            (&devicetopology, "Audio"),
+            (&xamlom, "Xaml_Diagnostics"),
+        ] {
+            let input = if path == &mmdeviceapi {
+                AGGREGATE_INPUT
+            } else {
+                SATELLITE_INPUT
+            };
+            policy.add_traversed_header_for_input(input, header(path), owner(identity));
+            policy.add_traversed_header_override_for_input(
+                input,
+                header(path),
+                "E_NOTFOUND",
+                owner(identity).with_exclusion("E_NOTFOUND"),
+            );
         }
         let references = BTreeMap::new();
         let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, &references);
@@ -4784,6 +4910,22 @@ mod tests {
         }
         let ole = namespace_output("Windows.Win32.System.Ole");
         assert!(ole.contains("const DISPID_READYSTATE"), "{ole}");
+
+        let html_help = namespace_output("Windows.Win32.Data.HtmlHelp");
+        assert!(html_help.contains("const E_NOTFOUND"), "{html_help}");
+        assert!(!audio.contains("const E_NOTFOUND"), "{audio}");
+        let xaml_diagnostics = namespace_output("Windows.Win32.UI.Xaml.Diagnostics");
+        assert!(
+            !xaml_diagnostics.contains("const E_NOTFOUND"),
+            "{xaml_diagnostics}"
+        );
+        assert_eq!(
+            partitions
+                .values()
+                .map(|rdl| rdl.matches("const E_NOTFOUND").count())
+                .sum::<usize>(),
+            1
+        );
 
         let dxcore_output = namespace_output("Windows.Win32.Graphics.DXCore");
         assert!(
@@ -5351,6 +5493,255 @@ mod tests {
             }
         }
         assert_eq!(headers, expected);
+    }
+
+    #[test]
+    fn checked_in_x3daudio_policy_preserves_sdk_surface() {
+        let traversal = checked_in_traversal_policy();
+        let xaudio2 = logical_partition(&traversal, "Xaudio2").unwrap();
+        assert!(xaudio2.roots.iter().any(|root| {
+            matches!(
+                root,
+                crate::partition::TraversalRoot::File(root)
+                    if root.inventory_path.eq_ignore_ascii_case("um/x3daudio.h")
+            )
+        }));
+        assert_eq!(
+            xaudio2.policy.exclusions,
+            BTreeSet::from(["CXAPOBase".to_string()])
+        );
+    }
+
+    #[test]
+    fn checked_in_x3daudio_emits_required_dependencies_in_default_namespace() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let x3daudio = include_dirs
+            .iter()
+            .map(|directory| directory.join("x3daudio.h"))
+            .find(|path| path.is_file())
+            .unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let header = path_arg(&x3daudio, "--include").unwrap();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("#define _XM_NO_INTRINSICS_\n{WIN32_SDK_PRELUDE}\n#include <x3daudio.h>\n"),
+            )
+            .with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let traversal = checked_in_traversal_policy();
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            header,
+            convert_root_partition(logical_partition(&traversal, "Xaudio2").unwrap()),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let xaudio2 = partitions
+            .iter()
+            .filter(|(partition, _)| partition.namespace == "Windows.Win32.Media.Audio.XAudio2")
+            .map(|(_, rdl)| rdl.as_str())
+            .collect::<String>();
+        let dependencies = partitions
+            .iter()
+            .filter(|(partition, _)| partition.namespace == DEFAULT_NAMESPACE)
+            .map(|(_, rdl)| rdl.as_str())
+            .collect::<String>();
+
+        for name in [
+            "X3DAUDIO_HANDLE_BYTESIZE",
+            "X3DAUDIO_PI",
+            "X3DAUDIO_2PI",
+            "X3DAUDIO_SPEED_OF_SOUND",
+            "X3DAUDIO_CALCULATE_MATRIX",
+            "X3DAUDIO_CALCULATE_DELAY",
+            "X3DAUDIO_CALCULATE_LPF_DIRECT",
+            "X3DAUDIO_CALCULATE_LPF_REVERB",
+            "X3DAUDIO_CALCULATE_REVERB",
+            "X3DAUDIO_CALCULATE_DOPPLER",
+            "X3DAUDIO_CALCULATE_EMITTER_ANGLE",
+            "X3DAUDIO_CALCULATE_ZEROCENTER",
+            "X3DAUDIO_CALCULATE_REDIRECT_TO_LFE",
+        ] {
+            assert!(xaudio2.contains(&format!("const {name}")), "{xaudio2}");
+        }
+        for name in [
+            "X3DAUDIO_VECTOR",
+            "X3DAUDIO_DISTANCE_CURVE_POINT",
+            "X3DAUDIO_DISTANCE_CURVE",
+            "X3DAUDIO_CONE",
+            "X3DAUDIO_LISTENER",
+            "X3DAUDIO_EMITTER",
+            "X3DAUDIO_DSP_SETTINGS",
+            "X3DAudioInitialize",
+            "X3DAudioCalculate",
+        ] {
+            assert!(xaudio2.contains(name), "{xaudio2}");
+        }
+        assert!(dependencies.contains("struct XMFLOAT3"), "{dependencies}");
+        assert!(!xaudio2.contains("struct XMFLOAT3"), "{xaudio2}");
+        for unrelated in ["struct XMFLOAT2", "struct XMFLOAT4", "fn XMVector"] {
+            assert!(
+                partitions.values().all(|rdl| !rdl.contains(unrelated)),
+                "unrelated DirectXMath declaration `{unrelated}` was emitted"
+            );
+        }
+
+        let root = scratch("x3daudio-default-namespace");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("X3DAudio.winmd");
+        compile_inputs(&[rdl_dir], &[], "X3DAudio", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        index.expect(DEFAULT_NAMESPACE, "XMFLOAT3");
+        index.expect("Windows.Win32.Media.Audio.XAudio2", "X3DAUDIO_LISTENER");
+        index.expect("Windows.Win32.Media.Audio.XAudio2", "X3DAUDIO_EMITTER");
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_webauthn_verification_request_emits_reference_member() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "WebAuthn").unwrap();
+        let headers = partition
+            .roots
+            .iter()
+            .map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    path_arg(&root.path, "--include").unwrap()
+                }
+                _ => panic!("unexpected non-file WebAuthn traversal root"),
+            })
+            .collect::<Vec<_>>();
+        let source = format!(
+            "{WIN32_SDK_PRELUDE}\n\
+             #include <webauthn.h>\n\
+             #include <webauthnplugin.h>\n\
+             #include <pluginauthenticator.h>\n"
+        );
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots(headers.clone())],
+            &args,
+        )
+        .unwrap();
+        let request = snapshot
+            .facts()
+            .iter()
+            .find(|fact| fact.name == "_WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST")
+            .unwrap();
+        let FactData::Record { fields, .. } = &request.data else {
+            panic!(
+                "verification request was not extracted as a record: {:?}",
+                request.data
+            );
+        };
+        assert_eq!(
+            fields
+                .iter()
+                .map(|field| (field.offset, field.size, field.align))
+                .collect::<Vec<_>>(),
+            [(0, 8, 8), (64, 8, 8), (128, 8, 8), (192, 8, 8)]
+        );
+
+        let mut policy = HeaderPartitionPolicy::new();
+        for header in headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header,
+                convert_root_partition(partition),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("webauthn-reference-member");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("WebAuthn.winmd");
+        compile_inputs(&[rdl_dir], &[], "WebAuthn", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let request = index
+            .types()
+            .find(|ty| {
+                ty.namespace() == "Windows.Win32.Security.Authentication.WebAuthn"
+                    && ty.name() == "WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST"
+            })
+            .unwrap();
+        assert_eq!(
+            request
+                .fields()
+                .map(|field| field.name().to_string())
+                .collect::<Vec<_>>(),
+            [
+                "hwnd",
+                "rguidTransactionId",
+                "pwszUsername",
+                "pwszDisplayHint"
+            ]
+        );
+        assert_eq!(
+            request
+                .fields()
+                .find(|field| field.name() == "rguidTransactionId")
+                .unwrap()
+                .ty(),
+            Type::PtrConst(Box::new(Type::value_named(DEFAULT_NAMESPACE, "GUID")), 1)
+        );
+        let options = index.expect(
+            "Windows.Win32.Security.Authentication.WebAuthn",
+            "WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS",
+        );
+        assert_eq!(
+            options
+                .fields()
+                .find(|field| field.name() == "ppwszCredentialHints")
+                .unwrap()
+                .ty(),
+            Type::PtrMut(Box::new(Type::value_named(DEFAULT_NAMESPACE, "PCWSTR")), 1)
+        );
+        assert_eq!(
+            index.expect(DEFAULT_NAMESPACE, "PCWSTR").underlying_type(),
+            Some(Type::PtrConst(Box::new(Type::U16), 1))
+        );
+        std::fs::remove_dir_all(&root).unwrap();
     }
 
     #[test]

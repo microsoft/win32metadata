@@ -11,7 +11,7 @@ path = "src/main.rs"
 [dependencies]
 clang-sys = { version = "1.9.0", features = ["runtime"] }
 sha2 = "0.10.9"
-windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "48632c95258e1782a67d8427753c38e22333f297" }
-windows-default = { git = "https://github.com/jevansaks/windows-rs", rev = "48632c95258e1782a67d8427753c38e22333f297" }
-windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "48632c95258e1782a67d8427753c38e22333f297" }
-windows-rdl = { git = "https://github.com/jevansaks/windows-rs", rev = "48632c95258e1782a67d8427753c38e22333f297" }
+windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "d7bf45f6b362d85b20acb0f5d7ff05ad400c8edd" }
+windows-default = { git = "https://github.com/jevansaks/windows-rs", rev = "d7bf45f6b362d85b20acb0f5d7ff05ad400c8edd" }
+windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "d7bf45f6b362d85b20acb0f5d7ff05ad400c8edd" }
+windows-rdl = { git = "https://github.com/jevansaks/windows-rs", rev = "d7bf45f6b362d85b20acb0f5d7ff05ad400c8edd" }
