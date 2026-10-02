@@ -10,7 +10,12 @@
     Target architectures to scrape and merge. Defaults to x64, x86, and arm64.
 
 .PARAMETER UsePartitionAuthority
-    Generate from every checked-in WinSDK partition translation unit and settings file.
+    Generate one aggregate plus one satellite input, plus the two PSAPI compile variants,
+    and route them with the checked-in logical partition traversal policy.
+
+.PARAMETER ExtractionCoverage
+    Write an x64 canonical traversal-root provenance report and stop before RDL/WinMD output.
+    Requires UsePartitionAuthority.
 
 .PARAMETER OutputWinmd
     Output WinMD path.
@@ -30,6 +35,8 @@ param (
 
     [switch]$UsePartitionAuthority,
 
+    [string]$ExtractionCoverage,
+
     [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.winmd",
 
     [ValidateNotNullOrEmpty()]
@@ -44,6 +51,11 @@ $ErrorActionPreference = "Stop"
 $tool = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe"
 $namespaceRoutes = Join-Path $windowsWin32ProjectRoot "requiredNamespacesForNames.rsp"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
+$coveragePath = if ($ExtractionCoverage) {
+    [System.IO.Path]::GetFullPath($ExtractionCoverage)
+} else {
+    $null
+}
 $outputStem = [System.IO.Path]::GetFileNameWithoutExtension($outputPath)
 $objDir = Join-Path $windowsWin32ProjectRoot "obj\windows-rs\$outputStem"
 
@@ -81,8 +93,16 @@ elseif (!(Test-Path $tool))
     throw "Staged windows-rs metadata tool was not found at '$tool'. Run without -SkipBuild first."
 }
 
-$sdkLibRoot = Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"
-$assemblyVersion = nbgv get-version -v AssemblyVersion
+$sdkLibRoot = if ($coveragePath) {
+    $null
+} else {
+    Join-Path (Get-WinSdkCppX64PkgPath) "c\um\x64"
+}
+$assemblyVersion = if ($coveragePath) {
+    $null
+} else {
+    nbgv get-version -v AssemblyVersion
+}
 $scopeHeaders = @(
     "activation.h", "CoreWindow.h", "corewindow.h", "DocumentSource.h", "documentsource.h",
     "EventToken.h", "eventtoken.h", "hstring.h", "inspectable.h", "manual.h",
@@ -97,10 +117,19 @@ $scopeHeaders = @(
 if ($UsePartitionAuthority.IsPresent -and $Partition.Count -ne 0) {
     throw "-UsePartitionAuthority cannot be combined with -Partition."
 }
-$useSdkHeaderManifest = $Partition.Count -eq 0 -and !$UsePartitionAuthority.IsPresent
+if ($UsePartitionAuthority.IsPresent -and $Namespace -ne "Windows.Win32") {
+    throw "-UsePartitionAuthority requires -Namespace Windows.Win32."
+}
+if ($coveragePath -and !$UsePartitionAuthority.IsPresent) {
+    throw "-ExtractionCoverage requires -UsePartitionAuthority."
+}
+if ($coveragePath -and ($Architecture.Count -ne 1 -or $Architecture[0] -ne "x64")) {
+    throw "-ExtractionCoverage requires exactly -Architecture x64."
+}
+$useSdkHeaderManifest = $Partition.Count -eq 0
 if ($UsePartitionAuthority.IsPresent)
 {
-    Write-Host "Generating all checked-in partition translation units for $($Architecture -join ', ')"
+    Write-Host "Generating aggregate + satellite + PSAPI variant inputs with checked-in logical partition authority for $($Architecture -join ', ')"
 }
 elseif ($useSdkHeaderManifest)
 {
@@ -113,13 +142,21 @@ else
 
 $arguments = @(
     "scrape",
-    "--lib", $sdkLibRoot,
     "--namespace", $Namespace,
-    "--assembly-name", $outputStem,
-    "--assembly-version", $assemblyVersion,
-    "--output", $outputPath,
     "--obj", $objDir
 )
+
+if ($coveragePath) {
+    $arguments += @("--extraction-coverage", $coveragePath)
+}
+else {
+    $arguments += @(
+        "--lib", $sdkLibRoot,
+        "--assembly-name", $outputStem,
+        "--assembly-version", $assemblyVersion,
+        "--output", $outputPath
+    )
+}
 
 foreach ($include in $includePaths)
 {
@@ -130,7 +167,7 @@ if ($UsePartitionAuthority.IsPresent)
 {
     $arguments += @(
         "--win32-sdk",
-        "--partition-root", (Join-Path $windowsWin32ProjectRoot "Partitions"),
+        "--partition-policy-root", (Join-Path $windowsWin32ProjectRoot "Partitions"),
         "--namespace-routes", $namespaceRoutes
     )
 }
@@ -169,4 +206,9 @@ if (!(Test-Path $tool))
 & $tool @arguments
 ThrowOnNativeProcessError
 
-Write-Host "Generated WinMD: $outputPath"
+if ($coveragePath) {
+    Write-Host "Generated extraction coverage report: $coveragePath"
+}
+else {
+    Write-Host "Generated WinMD: $outputPath"
+}

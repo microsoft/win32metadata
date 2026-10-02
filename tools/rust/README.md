@@ -4,16 +4,25 @@ A command-line front end over the pinned windows-rs producer revision, providing
 `windows-clang`, `windows-rdl`, and `windows-metadata`.
 
 The production `scrape --win32-sdk` path reads the pinned raw Windows SDK headers and
-constructs the producer-supported aggregate plus satellite inputs: two translation units
-per architecture. x64, x86, and arm64 extraction runs in parallel, then the per-architecture
-WinMDs are merged into one output. Focused partition translation units remain available for
-package fixtures and inner-loop debugging.
+constructs the producer-supported aggregate plus satellite inputs. Logical authority adds
+only the two required `PSAPI_VERSION` compile variants; it never expands into one input per
+partition. `--partition-policy-root` routes physical header provenance through the checked-in
+logical partition policies. Every physical owner is qualified to its assigned aggregate,
+satellite, or PSAPI input, so the same header included elsewhere remains dependency closure
+rather than becoming a public root. x64, x86, and arm64 extraction runs in parallel, then the
+per-architecture WinMDs are merged into one output. Focused partition translation units remain
+available for package fixtures and inner-loop debugging.
+
+Authority mode validates the canonical ownership/policy/compile-environment inventory digest
+before extraction. Compile-environment identity alone does not create another translation unit;
+PSAPI remains the only proven incompatible same-header compile variant.
 
 ```text
 raw SDK headers + import libraries + annotation contracts
     -> aggregate/satellite Input
     -> windows-clang Snapshot
-    -> emit_by_header_with_options
+    -> optional HeaderPartitionPolicy audit
+    -> emit by physical header or logical partition
     -> per-architecture RDL/WinMD
     -> merged WinMD
 ```
@@ -38,7 +47,9 @@ By default this restores the pinned `Microsoft.Windows.SDK.CPP` packages, reads 
 `10.0.28000.0` headers, and generates `bin\Windows.Win32.winmd` for x64, x86, and arm64.
 Pass `-Architecture x64` for a single-architecture run. Passing `-Partition
 Foundation,Bluetooth` selects focused legacy partition inputs instead of the production
-header manifest.
+header manifest. `-UsePartitionAuthority` selects aggregate extraction with checked-in
+logical ownership and two focused PSAPI variants; it does not create one translation unit
+per partition.
 
 The production MSBuild path is:
 
@@ -53,6 +64,7 @@ The production MSBuild path is:
 | `--win32-sdk` | Use the pinned aggregate + satellite Windows SDK header manifest. |
 | `--partition <path>` | Focused partition translation unit. Repeatable. |
 | `--partition-root <path>` | Directory of partition subdirectories containing `main.cpp`. Repeatable. |
+| `--partition-policy-root <path>` | Route aggregate extraction with the logical policies under this partition root. |
 | `--include <dir>` | Header root. Repeatable, searched in order. |
 | `--lib <dir-or-file>` | SDK import-library directory or file. Repeatable. |
 | `--arch <x64\|arm64\|x86>` | Repeatable. Defaults to `x64`. |
@@ -63,8 +75,14 @@ The production MSBuild path is:
 | `--namespace <name>` | Root namespace. Defaults to `Windows.Win32`. |
 | `--assembly-name <name>` | Assembly identity. Defaults to the output file stem. |
 | `--assembly-version <A.B.C.D>` | Four-part assembly version. |
+| `--extraction-coverage <path>` | x64-only canonical traversal-root provenance report; stops before RDL/WinMD. |
 | `--output <path>` | WinMD to write. |
 | `--obj <dir>` | Intermediate directory. Defaults to the output directory. |
+
+Extraction coverage does not read import libraries. Its versioned TSV contains canonical,
+observed, and unobserved counts followed by every unobserved root as
+`unobserved<TAB>uncategorized<TAB><stable-root>`; an unobserved root is evidence to classify,
+not an automatic failure.
 
 **`--include` order matters.** Directories are passed to clang in the order given. An
 include directory containing `shared`, `um`, `um\cpdk`, `ucrt`, or `winrt` is expanded

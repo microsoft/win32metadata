@@ -1,5 +1,6 @@
 //! Command-line front end for the pinned windows-rs metadata crates.
 
+mod aggregate;
 mod args;
 mod catch;
 mod compile;
@@ -59,7 +60,7 @@ fn help_text() -> &'static str {
   win32metadata-tools <command> [options]
 
 Commands:
-  scrape      Partition main.cpp files -> WinMD, via windows-clang and windows-rdl.
+  scrape      SDK headers or focused partition inputs -> WinMD.
   compile     Compile one or more generated RDL inputs into a single WinMD.
   merge-arch  Merge cached per-architecture RDL and WinMD inputs.
   roundtrip   Round-trip a WinMD through RDL back into a WinMD.

@@ -15,7 +15,7 @@
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build" DependsOnTargets="BuildWin32MetadataTools">
-    <Error Condition="'@(Partition)' == '' and '@(WinmdPartitionRoot)' == '' and '$(WinmdUseSdkHeaderManifest)' != 'true'" Text="At least one Partition or WinmdPartitionRoot item is required unless WinmdUseSdkHeaderManifest is true."/>
+    <Error Condition="'@(Partition)' == '' and '@(WinmdPartitionRoot)' == '' and '@(WinmdPartitionPolicyRoot)' == '' and '$(WinmdUseSdkHeaderManifest)' != 'true'" Text="At least one Partition, WinmdPartitionRoot, or WinmdPartitionPolicyRoot item is required unless WinmdUseSdkHeaderManifest is true."/>
     <Error Condition="'@(WinmdIncludeDir)' == ''" Text="At least one WinmdIncludeDir item is required."/>
     <Error Condition="!Exists('$(Win32MetadataToolsExe)')" Text="WinmdGenerator tool not found at '$(Win32MetadataToolsExe)'."/>
     <Error Condition="!Exists('$(LibClangPath)\libclang.dll')" Text="libclang.dll not found in '$(LibClangPath)'."/>
@@ -27,12 +27,14 @@
       <_WinmdArgs>scrape</_WinmdArgs>
       <_WinmdArgs Condition="'$(WinmdUseSdkHeaderManifest)' == 'true'">$(_WinmdArgs) --win32-sdk</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdPartitionRoot->'--partition-root &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(WinmdPartitionPolicyRoot->'--partition-policy-root &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(Partition->'--partition &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdIncludeDir->'--include &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(ImportLibs->'--lib &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(_WinmdArch->'--arch %(Identity)', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdScope->'--scope &quot;%(Identity)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdScopeHeader->'--scope-header &quot;%(Identity)&quot;', ' ')</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) @(WinmdNamespaceRoutes->'--namespace-routes &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) --namespace &quot;$(WinmdRootNamespace)&quot;</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) --assembly-name &quot;$(WinmdAssemblyName)&quot;</_WinmdArgs>
       <_WinmdArgs Condition="'$(WinmdVersion)' != ''">$(_WinmdArgs) --assembly-version &quot;$(WinmdVersion)&quot;</_WinmdArgs>

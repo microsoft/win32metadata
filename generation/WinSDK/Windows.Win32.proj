@@ -21,7 +21,8 @@
   <ItemGroup>
     <PackageReference Update="Microsoft.Windows.SDK.CPP" Version="$(WindowsSdkCppPackageVersion)" GeneratePathProperty="true"/>
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="$(WindowsSdkCppPackageVersion)" GeneratePathProperty="true"/>
-    <WinmdPartitionRoot Include="Partitions" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
+    <WinmdPartitionPolicyRoot Include="Partitions" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
+    <WinmdNamespaceRoutes Include="requiredNamespacesForNames.rsp" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdIncludeDir Include="RecompiledIdlHeaders" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdIncludeDir Include="AdditionalHeaders\cpdk" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdIncludeDir Include="AdditionalHeaders"/>
