@@ -2400,7 +2400,9 @@ fn execute(options: &Options) -> Result<(), String> {
     let rdl_dir = obj.join("rdl");
     let arch_names = archs(options);
 
-    let configuration = build_configuration(options)?;
+    let configuration = timed_phase("build-configuration", "all", || {
+        build_configuration(options)
+    })?;
 
     println!(
         "Scraping {} as {} translation unit(s) for {} into {}",
@@ -2752,6 +2754,23 @@ fn scrape_arch(
     Ok(false)
 }
 
+fn timed_phase<T>(
+    phase: &str,
+    arch: &str,
+    operation: impl FnOnce() -> Result<T, String>,
+) -> Result<T, String> {
+    let started = std::time::Instant::now();
+    let result = operation();
+    if std::env::var_os("WINDOWS_CLANG_TIMINGS").is_some() {
+        eprintln!(
+            "win32metadata-tools timing phase={phase} arch={arch} status={} elapsed_ms={:.3}",
+            if result.is_ok() { "ok" } else { "error" },
+            started.elapsed().as_secs_f64() * 1000.0
+        );
+    }
+    result
+}
+
 fn plan_header_partitions(
     snapshot: &windows_clang::Snapshot,
     policy: &HeaderPartitionPolicy,
@@ -2759,11 +2778,15 @@ fn plan_header_partitions(
     emit: &EmitOptions<'_>,
     arch: &str,
 ) -> Result<BTreeMap<RdlPartition, String>, String> {
-    let plan = snapshot
-        .plan_header_partitions(policy, authorities)
-        .map_err(|error| format!("failed to plan {arch} metadata: {error}"))?;
-    plan.emit_with_options(emit)
-        .map_err(|error| format!("failed to emit {arch} partitioned metadata: {error}"))
+    let plan = timed_phase("header-ownership", arch, || {
+        snapshot
+            .plan_header_partitions(policy, authorities)
+            .map_err(|error| format!("failed to plan {arch} metadata: {error}"))
+    })?;
+    timed_phase("header-emission", arch, || {
+        plan.emit_with_options(emit)
+            .map_err(|error| format!("failed to emit {arch} partitioned metadata: {error}"))
+    })
 }
 
 fn write_partitioned_rdl(
@@ -5741,6 +5764,101 @@ mod tests {
             index.expect(DEFAULT_NAMESPACE, "PCWSTR").underlying_type(),
             Some(Type::PtrConst(Box::new(Type::U16), 1))
         );
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_glu_opaque_classes_emit_with_pointer_apis() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "OpenGL").unwrap();
+        let headers = partition
+            .roots
+            .iter()
+            .map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    path_arg(&root.path, "--include").unwrap()
+                }
+                _ => panic!("unexpected non-file OpenGL traversal root"),
+            })
+            .collect::<Vec<_>>();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("{WIN32_SDK_PRELUDE}\n#include <GL/gl.h>\n#include <GL/glu.h>\n"),
+            )
+            .with_roots(headers.clone())],
+            &args,
+        )
+        .unwrap();
+        let mut policy = HeaderPartitionPolicy::new();
+        for header in headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header,
+                convert_root_partition(partition),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("glu-opaque-classes");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("OpenGL.winmd");
+        compile_inputs(&[rdl_dir], &[], "OpenGL", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Graphics.OpenGL";
+        for (name, create, delete) in [
+            ("GLUnurbs", "gluNewNurbsRenderer", "gluDeleteNurbsRenderer"),
+            ("GLUquadric", "gluNewQuadric", "gluDeleteQuadric"),
+            ("GLUtesselator", "gluNewTess", "gluDeleteTess"),
+        ] {
+            assert_eq!(index.expect(namespace, name).fields().count(), 0, "{name}");
+            let pointer = Type::PtrMut(Box::new(Type::value_named(namespace, name)), 1);
+            let Item::Fn(create) = index.expect_item(namespace, create) else {
+                panic!("missing creation function `{create}`");
+            };
+            let signature = create.signature(&[]);
+            assert_eq!(signature.return_type, pointer, "{name}");
+            assert!(signature.types.is_empty(), "{name}");
+            let Item::Fn(delete) = index.expect_item(namespace, delete) else {
+                panic!("missing deletion function `{delete}`");
+            };
+            let signature = delete.signature(&[]);
+            assert_eq!(signature.return_type, Type::Void, "{name}");
+            assert_eq!(signature.types, [pointer], "{name}");
+        }
+        for (alias, name) in [
+            ("GLUnurbsObj", "GLUnurbs"),
+            ("GLUquadricObj", "GLUquadric"),
+            ("GLUtesselatorObj", "GLUtesselator"),
+            ("GLUtriangulatorObj", "GLUtesselator"),
+        ] {
+            assert_eq!(
+                index.expect(namespace, alias).underlying_type(),
+                Some(Type::value_named(namespace, name)),
+                "{alias}"
+            );
+        }
         std::fs::remove_dir_all(&root).unwrap();
     }
 

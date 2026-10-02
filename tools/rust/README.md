@@ -18,7 +18,10 @@ Required dependency types from other headers use the default `Windows.Win32` nam
 instead of inheriting a referring partition's namespace. This includes exact dependencies
 declared in C++ namespaces such as `DirectX`; it does not select unrelated declarations
 from those headers. Explicit namespace routes still take precedence, and missing or
-ambiguous type definitions remain errors.
+ambiguous declarations remain errors. Forward-declared non-UUID C++ classes, such as the
+GLU opaque types, use named empty records just like incomplete structs. Pointers and
+typedef aliases preserve that identity; no complete layout is inferred, and by-value
+use remains an error.
 
 Header-plan dependency failures are reported together, with the selected roots that
 reach each blocker. With `WINDOWS_CLANG_TIMINGS=1`, `phase=plan-dependencies` reports
@@ -26,6 +29,10 @@ selected roots, processed unique dependencies, resolved dependencies, and unique
 These are dependency-closure counts, not an overall completion percentage: children of
 missing, ambiguous, or unsupported types cannot be inspected, and later layout, ownership,
 routing, and RDL validation may still fail. A blocked plan never emits partial RDL.
+
+The same timing flag reports consumer configuration, header ownership, and header emission
+durations, including failed phases. Header emission includes the producer's root and
+dependency planning times; do not add those nested timings to it when computing totals.
 
 Authority mode validates the canonical ownership/policy/compile-environment inventory digest
 before extraction. Compile-environment identity alone does not create another translation unit;
