@@ -5745,6 +5745,96 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_ftp_uuid_records_retain_data_layout() {
+        use windows_metadata::reader::HasAttributes;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let header = include_dirs
+            .iter()
+            .map(|directory| directory.join("ftpext.h"))
+            .find(|path| path.is_file())
+            .unwrap();
+        let header = path_arg(&header, "--include").unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("{WIN32_SDK_PRELUDE}\n#include <ftpext.h>\n"),
+            )
+            .with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let records = [
+            ("CONFIGURATION_ENTRY", 2),
+            ("LOGGING_PARAMETERS", 18),
+            ("PRE_PROCESS_PARAMETERS", 13),
+            ("POST_PROCESS_PARAMETERS", 20),
+        ];
+        for (name, expected_fields) in records {
+            let fact = snapshot
+                .facts()
+                .iter()
+                .find(|fact| fact.name == name && fact.definition)
+                .unwrap();
+            let FactData::Record { fields, .. } = &fact.data else {
+                panic!(
+                    "UUID data record `{name}` was misclassified: {:?}",
+                    fact.data
+                );
+            };
+            assert_eq!(fields.len(), expected_fields, "{name}");
+        }
+
+        let traversal = checked_in_traversal_policy();
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            header,
+            convert_root_partition(logical_partition(&traversal, "Iis").unwrap()),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("ftp-uuid-data-records");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("Ftp.winmd");
+        compile_inputs(&[rdl_dir], &[], "Ftp", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        for (name, expected_fields) in records {
+            let record = index.expect("Windows.Win32.System.Iis", name);
+            assert_eq!(record.fields().count(), expected_fields, "{name}");
+            let guid = record.find_attribute("GuidAttribute").unwrap();
+            assert_eq!(guid.namespace(), "Windows.Foundation.Metadata", "{name}");
+            assert_eq!(guid.value().len(), 11, "{name}");
+        }
+        for interface in [
+            "IFtpPreprocessProvider",
+            "AsyncIFtpPreprocessProvider",
+            "IFtpPostprocessProvider",
+            "AsyncIFtpPostprocessProvider",
+        ] {
+            index.expect("Windows.Win32.System.Iis", interface);
+        }
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
     fn checked_in_psapi_variants_share_one_header_with_exact_distinct_policies() {
         let traversal = checked_in_traversal_policy();
         let v1 = logical_partition(&traversal, "PsApi1").unwrap();
