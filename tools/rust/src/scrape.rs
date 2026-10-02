@@ -648,6 +648,7 @@ struct HeaderPolicyOverrideContract {
     path: &'static str,
     default_partition: &'static str,
     overrides: &'static [(&'static str, &'static str)],
+    excluded_names: &'static [&'static str],
 }
 
 const HEADER_POLICY_OVERRIDE_CONTRACTS: &[HeaderPolicyOverrideContract] = &[
@@ -655,11 +656,13 @@ const HEADER_POLICY_OVERRIDE_CONTRACTS: &[HeaderPolicyOverrideContract] = &[
         path: "shared/ntddstor.h",
         default_partition: "Ioctl",
         overrides: &[("STORAGE_BUS_TYPE", "Fs")],
+        excluded_names: &[],
     },
     HeaderPolicyOverrideContract {
         path: "um/audioendpoints.h",
         default_partition: "Audio.Endpoints",
         overrides: &[("ENDPOINT_FORMAT_RESET_MIX_ONLY", "Audio")],
+        excluded_names: &[],
     },
     HeaderPolicyOverrideContract {
         path: "um/endpointvolume.h",
@@ -670,6 +673,13 @@ const HEADER_POLICY_OVERRIDE_CONTRACTS: &[HeaderPolicyOverrideContract] = &[
             ("ENDPOINT_HARDWARE_SUPPORT_MUTE", "Audio"),
             ("ENDPOINT_HARDWARE_SUPPORT_METER", "Audio"),
         ],
+        excluded_names: &[],
+    },
+    HeaderPolicyOverrideContract {
+        path: "um/winineti.h",
+        default_partition: "WinInet",
+        overrides: &[],
+        excluded_names: &["PFN_DIAL_HANDLER"],
     },
 ];
 
@@ -1784,6 +1794,14 @@ fn convert_header_partition_policy(
                     header.clone(),
                     root_partition.clone(),
                 );
+                for name in contract.excluded_names {
+                    result.add_traversed_header_override_for_input(
+                        input,
+                        header.clone(),
+                        *name,
+                        root_partition.clone().with_exclusion(*name),
+                    );
+                }
                 for (name, owner) in contract.overrides {
                     result.add_traversed_header_override_for_input(
                         input,
@@ -5044,6 +5062,112 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_wininet_duplicate_callback_uses_public_header_owner() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "WinInet").unwrap();
+        let root = |label: &str| {
+            partition
+                .roots
+                .iter()
+                .find_map(|root| match root {
+                    crate::partition::TraversalRoot::File(root)
+                        if root.inventory_path.eq_ignore_ascii_case(label) =>
+                    {
+                        Some(&root.path)
+                    }
+                    _ => None,
+                })
+                .unwrap_or_else(|| panic!("WinInet did not contain `{label}`"))
+        };
+        let public = path_arg(root("um/wininet.h"), "--partition-policy-root").unwrap();
+        let internal = path_arg(root("um/winineti.h"), "--partition-policy-root").unwrap();
+        let source =
+            format!("{WIN32_SDK_PRELUDE}\n#include \"{public}\"\n#include \"{internal}\"\n");
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots([public.clone(), internal.clone()])],
+            &args,
+        )
+        .unwrap();
+        let owner = convert_root_partition(partition);
+        let mut policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(AGGREGATE_INPUT, public.clone(), owner.clone())
+            .with_traversed_header_for_input(AGGREGATE_INPUT, internal.clone(), owner.clone())
+            .with_traversed_header_override_for_input(
+                AGGREGATE_INPUT,
+                internal.clone(),
+                "PFN_DIAL_HANDLER",
+                owner.with_exclusion("PFN_DIAL_HANDLER"),
+            );
+        let dependency = RootPartition::new("Dependency", "Windows.Win32.Foundation");
+        let dependency_headers = snapshot
+            .facts()
+            .iter()
+            .map(|fact| fact.spelling.file.as_str())
+            .chain(
+                snapshot
+                    .constants()
+                    .iter()
+                    .map(|constant| constant.spelling.file.as_str()),
+            )
+            .filter(|path| {
+                !source_path_matches(&public, path) && !source_path_matches(&internal, path)
+            })
+            .filter(|path| Path::new(path).is_file())
+            .collect::<BTreeSet<_>>();
+        for dependency_header in dependency_headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                dependency_header.to_string(),
+                dependency.clone(),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let excluded_types = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| fact.name != "PFN_DIAL_HANDLER")
+            .map(|fact| fact.name.clone())
+            .collect::<BTreeSet<_>>();
+        let excluded_constants = snapshot
+            .constants()
+            .iter()
+            .map(|constant| constant.name.clone())
+            .collect::<BTreeSet<_>>();
+        let functions = BTreeSet::new();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        emit.functions = Some(&functions);
+        emit.excluded_types = Some(&excluded_types);
+        emit.excluded_constants = Some(&excluded_constants);
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let output = partitions
+            .iter()
+            .filter(|(emitted, _)| emitted.namespace == "Windows.Win32.Networking.WinInet")
+            .map(|(_, rdl)| rdl.as_str())
+            .collect::<String>();
+        assert_eq!(
+            output.matches("extern fn PFN_DIAL_HANDLER").count(),
+            1,
+            "{output}"
+        );
+    }
+
+    #[test]
     fn checked_in_numeric_logical_namespace_matches_old_71_emission() {
         ensure_libclang();
         let win_sdk = checked_in_win_sdk();
@@ -5165,6 +5289,14 @@ mod tests {
                             header.clone(),
                             owner.clone(),
                         );
+                        for name in contract.excluded_names {
+                            expected.add_traversed_header_override_for_input(
+                                input,
+                                header.clone(),
+                                *name,
+                                owner.clone().with_exclusion(*name),
+                            );
+                        }
                         for (name, override_owner) in contract.overrides {
                             expected.add_traversed_header_override_for_input(
                                 input,
