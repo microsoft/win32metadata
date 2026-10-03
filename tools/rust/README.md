@@ -31,6 +31,11 @@ is unchanged. No cleanup or invalid-handle annotations are inferred from the dec
 Canonical string-pointer aliases retain their resolved namespace, including aliases reached
 through ANSI or Unicode `TCHAR` typedefs. When references do not supply the canonical alias,
 required dependency closure emits it locally; cross-namespace uses are qualified.
+Collision planning also follows exact same-input typedef chains before deciding that
+declarations differ. The SDK's `typedef LONG NTSTATUS` and `typedef long NTSTATUS`
+therefore retain the same existing public owner; an equivalent extra spelling must
+not create a scoped identity that breaks the Kernel exclusion or constant references.
+Genuinely different types still require separate collision handling.
 
 Clustering records with multiple concrete bases are projected directly from their SDK
 definitions. Their former `MsCs` exclusions only prevented duplicate definitions alongside

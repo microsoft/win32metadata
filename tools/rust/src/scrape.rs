@@ -6794,6 +6794,55 @@ mod tests {
         );
     }
 
+    #[test]
+    fn checked_in_ntstatus_constants_resolve_native_owner_types() {
+        use windows_metadata::Type;
+
+        let win_sdk = checked_in_win_sdk();
+        let ntdef = win_sdk
+            .join("RecompiledIdlHeaders")
+            .join("shared")
+            .join("ntdef.h");
+        let mut source = String::from(
+            "#define PIO_APC_ROUTINE_DEFINED\n\
+             #include <winternl.h>\n\
+             #undef PIO_APC_ROUTINE_DEFINED\n\
+             #include <winddi.h>\n\
+             #define _NTDEF_\n",
+        );
+        crate::aggregate::append_kernel_input(&mut source, &ntdef).unwrap();
+        with_checked_in_header_group(
+            "ntstatus-native-owners",
+            AGGREGATE_INPUT,
+            &source,
+            &[
+                ("Foundation", &["ntstatus.h"]),
+                ("WinProg", &["winternl.h"]),
+                ("Display", &["winddi.h"]),
+                ("Kernel", &["ntdef.h"]),
+            ],
+            &[],
+            |index| {
+                let namespace = "Windows.Win32.System.WindowsProgramming";
+                assert_eq!(
+                    index.expect(namespace, "NTSTATUS").underlying_type(),
+                    Some(Type::I32)
+                );
+                for name in ["STATUS_SUCCESS", "STATUS_ACCESS_DENIED", "DBG_CONTINUE"] {
+                    let Item::Const(field) = index.expect_item("Windows.Win32.Foundation", name)
+                    else {
+                        panic!("missing {name}");
+                    };
+                    assert_eq!(
+                        field.ty(),
+                        Type::value_named(namespace, "NTSTATUS"),
+                        "{name}"
+                    );
+                }
+            },
+        );
+    }
+
     fn with_checked_in_header_group(
         tag: &str,
         input: &str,
