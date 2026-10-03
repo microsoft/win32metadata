@@ -23,6 +23,13 @@ GLU opaque types, use named empty records just like incomplete structs. Pointers
 typedef aliases preserve that identity; no complete layout is inferred, and by-value
 use remains an error.
 
+Equivalent declarations claimed by different logical partitions coalesce when their
+resolved namespace and effective emitted semantics agree, including annotations,
+UUID/flags handling, and the symbol's actual import library. Unrelated policy-map
+entries do not create a conflict. The canonical selected declaration supplies the
+output bucket; genuinely conflicting claims still report every owner. Different
+destination namespaces remain an error rather than choosing an arbitrary owner.
+
 For an exact SDK `DECLARE_HANDLE` expansion whose verified private dummy record is
 explicitly excluded, header planning retains the public handle as a named `*mut void`
 typedef. Aliases and pointer depth remain intact; nonexcluded and legacy handle output

@@ -6843,6 +6843,128 @@ mod tests {
         );
     }
 
+    #[test]
+    fn checked_in_marshal_redeclarations_share_authoritative_namespace() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut roots = Vec::new();
+        for (partition, name) in [
+            ("ComOle", "oaidl.h"),
+            ("Com.StructuredStorage", "propidl.h"),
+        ] {
+            let path = include_dirs
+                .iter()
+                .map(|directory| directory.join(name))
+                .find(|path| path.is_file())
+                .unwrap();
+            let header = path_arg(&path, "--include").unwrap();
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header.clone(),
+                convert_root_partition(logical_partition(&traversal, partition).unwrap()),
+            );
+            roots.push(header);
+        }
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("{WIN32_SDK_PRELUDE}\n#include <oaidl.h>\n#include <propidl.h>\n"),
+            )
+            .with_roots(roots)],
+            &args,
+        )
+        .unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let names = ["BSTR", "VARIANT"]
+            .into_iter()
+            .flat_map(|name| {
+                ["Free", "Marshal", "Size", "Unmarshal"]
+                    .into_iter()
+                    .flat_map(move |operation| {
+                        ["", "64"]
+                            .into_iter()
+                            .map(move |suffix| format!("{name}_User{operation}{suffix}"))
+                    })
+            })
+            .collect::<BTreeSet<_>>();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        emit.functions = Some(&names);
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        for name in &names {
+            assert_eq!(
+                partitions
+                    .values()
+                    .map(|rdl| rdl.matches(&format!("fn {name}(")).count())
+                    .sum::<usize>(),
+                1,
+                "{name} must be emitted once despite repeated header declarations"
+            );
+        }
+        let root = scratch("marshal-authoritative-redeclarations");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("Marshal.winmd");
+        compile_inputs(&[rdl_dir], &[], "Marshal", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        for name in names {
+            let namespace = if name.starts_with("BSTR_") {
+                "Windows.Win32.System.Com.Marshal"
+            } else {
+                "Windows.Win32.System.Variant"
+            };
+            assert!(
+                matches!(index.expect_item(namespace, &name), Item::Fn(_)),
+                "{namespace}.{name}"
+            );
+        }
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_lcid_redeclarations_share_namespace() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "lcid-shared-namespace",
+            AGGREGATE_INPUT,
+            "#include <winnt.h>\n#include <wtypes.h>\n",
+            &[("Backup", &["winnt.h"]), ("Base", &["wtypes.h"])],
+            &[],
+            |index| {
+                let namespace = "Windows.Win32.System.SystemServices";
+                assert_eq!(
+                    index
+                        .iter()
+                        .filter(|(ns, name, _)| *ns == namespace && *name == "LCID")
+                        .count(),
+                    1
+                );
+                let locale = index
+                    .expect(namespace, "QUERYCONTEXT")
+                    .fields()
+                    .find(|field| field.name() == "Locale")
+                    .unwrap();
+                assert_eq!(locale.ty(), Type::value_named(namespace, "LCID"));
+            },
+        );
+    }
+
     fn with_checked_in_header_group(
         tag: &str,
         input: &str,
