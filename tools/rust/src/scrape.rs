@@ -29,7 +29,7 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
-    "FC2A550DAEABA781521A9A6AA1FEFA5FE4E164EF6C2A173C9D052F315C4F05A7";
+    "9CB294C0BA2F823C36EFB7E703AA0BE866216EDDC318E23F6663BC82A6ED3F7A";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
 const GUID_RESET: &str =
     "\n#undef INITGUID\n#include <guiddef.h>\n#include <devpropdef.h>\n#include <propkeydef.h>\n";
@@ -7505,6 +7505,55 @@ mod tests {
             assert_eq!(method.signature(&[]).types, [expected]);
         }
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_directdraw_mdl_preserves_native_record_and_pointer_alias() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "directdraw-native-mdl",
+            SATELLITE_INPUT,
+            "#include <dxmini.h>\n",
+            &[("DirectDraw", &["dxmini.h"])],
+            &[],
+            |index| {
+                let namespace = "Windows.Win32.Graphics.DirectDraw";
+                let mdl = Type::value_named(namespace, "MDL");
+                assert_eq!(
+                    index
+                        .expect(namespace, "MDL")
+                        .fields()
+                        .map(|field| (field.name().to_string(), field.ty()))
+                        .collect::<Vec<_>>(),
+                    [
+                        ("MdlNext", Type::PtrMut(Box::new(mdl.clone()), 1)),
+                        ("MdlSize", Type::I16),
+                        ("MdlFlags", Type::I16),
+                        (
+                            "Process",
+                            Type::PtrMut(Box::new(Type::value_named(namespace, "_EPROCESS")), 1),
+                        ),
+                        ("lpMappedSystemVa", Type::PtrMut(Box::new(Type::U32), 1)),
+                        ("lpStartVa", Type::PtrMut(Box::new(Type::U32), 1)),
+                        ("ByteCount", Type::U32),
+                        ("ByteOffset", Type::U32),
+                    ]
+                    .map(|(name, ty)| (name.to_string(), ty))
+                );
+                assert_eq!(
+                    index.expect(namespace, "PMDL").underlying_type(),
+                    Some(Type::PtrMut(Box::new(mdl), 1))
+                );
+                let field = index
+                    .expect(namespace, "DDTRANSFERININFO")
+                    .fields()
+                    .find(|field| field.name() == "lpDestMDL")
+                    .unwrap();
+                assert_eq!(field.ty(), Type::value_named(namespace, "PMDL"));
+                assert_eq!(index.get(namespace, "DDMDL").count(), 0);
+            },
+        );
     }
 
     fn with_checked_in_header_group(

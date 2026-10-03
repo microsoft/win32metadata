@@ -86,6 +86,13 @@ Likewise, `DWRITE_FONT_AXIS_TAG` and `JsRuntimeVersion` are emitted from their S
 definitions instead of excluding them in favor of removed manual C# enums. The remaining
 Js constant exclusions and the selected non-edge header mode are unchanged.
 
+DirectDraw likewise emits the native `MDL` record and `PMDL` pointer alias from
+`dxmini.h`, including the named alias in `DDTRANSFERININFO.lpDestMDL`. The former
+`_MDL=DDMDL` / `PMDL=DDMDL*` pair was a C# projection substitution, not a native
+declaration rename. Partition `--remap` targets must be declaration identifiers;
+type expressions now fail policy validation before SDK extraction rather than
+becoming invalid RDL declaration names.
+
 The aggregate defines `USE_COM_CONTEXT_DEF` before its first include, as the
 focused Com input does. Defining it only around later COM includes is too late
 when an earlier dependency has already guarded `objidlbase.h`; the complete

@@ -488,6 +488,17 @@ impl Partition {
             }
         };
 
+        let remaps = self.key_value_pairs("--remap")?;
+        for (source, target) in &remaps {
+            if !crate::namespace_routes::valid_identifier(target) {
+                return Err(format!(
+                    "partition `{}` has invalid --remap target `{source}={target}`; \
+                     expected a declaration identifier, not a type expression",
+                    self.name
+                ));
+            }
+        }
+
         let mut type_overrides = BTreeMap::new();
         for (name, value) in self.key_value_pairs("--with-type")? {
             let ty = match value.as_str() {
@@ -548,7 +559,7 @@ impl Partition {
         Ok(PartitionPolicy {
             namespace,
             exclusions: self.values("--exclude").map(str::to_string).collect(),
-            remaps: self.key_value_pairs("--remap")?,
+            remaps,
             type_overrides,
             attributes,
             libraries: self.key_value_pairs("--with-librarypath")?,
@@ -2000,6 +2011,44 @@ mod tests {
     }
 
     #[test]
+    fn policy_remaps_require_declaration_identifiers() {
+        let partition = Partition {
+            name: "Test".to_string(),
+            directory: PathBuf::new(),
+            source: String::new(),
+            settings: Vec::new(),
+        };
+        for target in ["DDMDL*", "void*", "MDL[]", "MDL&", "N.MDL", "A B", "123"] {
+            let partition = Partition {
+                settings: parse_settings(&format!(
+                    "--namespace\nWindows.Win32.Test\n--remap\nPMDL={target}\n"
+                ))
+                .unwrap(),
+                ..partition.clone()
+            };
+            assert_eq!(
+                partition.policy().unwrap_err(),
+                format!(
+                    "partition `Test` has invalid --remap target `PMDL={target}`; \
+                     expected a declaration identifier, not a type expression"
+                )
+            );
+        }
+        let partition = Partition {
+            settings: parse_settings(
+                "--namespace\nWindows.Win32.Test\n--remap\nPMDL=MDL*\n\
+                 --remap\nPMDL=_PointerAlias2\n",
+            )
+            .unwrap(),
+            ..partition
+        };
+        assert_eq!(
+            partition.policy().unwrap().remaps,
+            BTreeMap::from([("PMDL".to_string(), "_PointerAlias2".to_string())])
+        );
+    }
+
+    #[test]
     fn policy_rejects_unknown_switches_and_values() {
         let partition = Partition {
             name: "Test".to_string(),
@@ -2680,7 +2729,7 @@ mod tests {
         assert_eq!(counts["--namespace"], 321);
         assert_eq!(counts["--traverse"], 321);
         assert_eq!(counts["--exclude"], 104);
-        assert_eq!(counts["--remap"], 13);
+        assert_eq!(counts["--remap"], 12);
         assert_eq!(counts["--with-attribute"], 23);
         assert_eq!(counts["--with-librarypath"], 6);
         assert_eq!(counts["--with-type"], 52);
@@ -2709,7 +2758,7 @@ mod tests {
                 .iter()
                 .map(|policy| policy.remaps.len())
                 .sum::<usize>(),
-            188
+            186
         );
         assert_eq!(
             policies
@@ -2780,6 +2829,7 @@ mod tests {
             policy("Security.Cryptography").remaps["_PIN_INFO"],
             "PIN_INFO"
         );
+        assert!(policy("DirectDraw").remaps.is_empty());
         assert_eq!(
             policy("Audio.DirectSound").libraries["GetDeviceID"],
             "DSOUND.dll"
@@ -2812,7 +2862,7 @@ mod tests {
         let policy = checked_in_traversal_policy();
         assert_eq!(
             policy.canonical_inventory_sha256(),
-            "FC2A550DAEABA781521A9A6AA1FEFA5FE4E164EF6C2A173C9D052F315C4F05A7"
+            "9CB294C0BA2F823C36EFB7E703AA0BE866216EDDC318E23F6663BC82A6ED3F7A"
         );
         assert_eq!(policy.partitions.len(), 321);
         assert_eq!(

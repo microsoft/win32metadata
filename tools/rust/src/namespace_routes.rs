@@ -108,15 +108,16 @@ impl NamespaceRoutes {
     }
 }
 
+pub(crate) fn valid_identifier(identifier: &str) -> bool {
+    let mut chars = identifier.chars();
+    chars
+        .next()
+        .is_some_and(|first| first.is_ascii_alphabetic() || first == '_')
+        && chars.all(|value| value.is_ascii_alphanumeric() || value == '_')
+}
+
 fn valid_namespace(namespace: &str) -> bool {
-    namespace.starts_with("Windows.Win32.")
-        && namespace.split('.').all(|segment| {
-            let mut chars = segment.chars();
-            chars
-                .next()
-                .is_some_and(|first| first.is_ascii_alphabetic() || first == '_')
-                && chars.all(|value| value.is_ascii_alphanumeric() || value == '_')
-        })
+    namespace.starts_with("Windows.Win32.") && namespace.split('.').all(valid_identifier)
 }
 
 #[cfg(test)]
