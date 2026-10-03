@@ -29,7 +29,7 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
-    "A7395A3462909DD391578B2F854A3FA6E448ADC7EF44EF4CB90810E63979CF62";
+    "B8AA0D0C48F3D731CF9B79AD4B2CAA7C17E530F2C82EE086DECEF78CAAE59F46";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
 const GUID_RESET: &str =
     "\n#undef INITGUID\n#include <guiddef.h>\n#include <devpropdef.h>\n#include <propkeydef.h>\n";
@@ -5859,6 +5859,189 @@ mod tests {
                 "{alias}"
             );
         }
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_clustering_records_emit_native_multiple_inheritance() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "MsCs").unwrap();
+        let headers = partition
+            .roots
+            .iter()
+            .map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    path_arg(&root.path, "--include").unwrap()
+                }
+                _ => panic!("unexpected non-file MsCs traversal root"),
+            })
+            .collect::<Vec<_>>();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!(
+                    "{WIN32_SDK_PRELUDE}\n\
+                     #define QCC_OS_GROUP_WINDOWS\n\
+                     #include <resapi.h>\n\
+                     #include <smbclnt.h>\n\
+                     #include <cluadmex.h>\n\
+                     #include <msclus.h>\n"
+                ),
+            )
+            .with_roots(headers.clone())],
+            &args,
+        )
+        .unwrap();
+        let mut policy = HeaderPartitionPolicy::new();
+        for header in headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header,
+                convert_root_partition(partition),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("clustering-native-inheritance");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("Clustering.winmd");
+        compile_inputs(&[rdl_dir], &[], "Clustering", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Networking.Clustering";
+        for (name, base, base2) in [
+            (
+                "CLUSPROP_RESOURCE_CLASS_INFO",
+                "CLUSPROP_VALUE",
+                "CLUS_RESOURCE_CLASS_INFO",
+            ),
+            (
+                "CLUSTER_SHARED_VOLUME_RENAME_INPUT",
+                "CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME",
+                "CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME",
+            ),
+            (
+                "CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT",
+                "CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME",
+                "CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME",
+            ),
+            (
+                "CLUSPROP_PARTITION_INFO",
+                "CLUSPROP_VALUE",
+                "CLUS_PARTITION_INFO",
+            ),
+            (
+                "CLUSPROP_PARTITION_INFO_EX",
+                "CLUSPROP_VALUE",
+                "CLUS_PARTITION_INFO_EX",
+            ),
+            (
+                "CLUSPROP_PARTITION_INFO_EX2",
+                "CLUSPROP_PARTITION_INFO_EX",
+                "CLUS_PARTITION_INFO_EX2",
+            ),
+            ("CLUSPROP_FTSET_INFO", "CLUSPROP_VALUE", "CLUS_FTSET_INFO"),
+            (
+                "CLUSPROP_SCSI_ADDRESS",
+                "CLUSPROP_VALUE",
+                "CLUS_SCSI_ADDRESS",
+            ),
+        ] {
+            assert_eq!(
+                index
+                    .expect(namespace, name)
+                    .fields()
+                    .map(|field| (field.name(), field.ty()))
+                    .collect::<Vec<_>>(),
+                [
+                    ("Base", Type::value_named(namespace, base)),
+                    ("Base2", Type::value_named(namespace, base2)),
+                ],
+                "{name}"
+            );
+            assert_eq!(
+                index
+                    .expect(namespace, &format!("P{name}"))
+                    .underlying_type(),
+                Some(Type::PtrMut(
+                    Box::new(Type::value_named(namespace, name)),
+                    1
+                )),
+                "{name}"
+            );
+        }
+        let buffer = index.expect(namespace, "CLUSPROP_BUFFER_HELPER");
+        for (field, alias) in [
+            ("pResourceClassInfoValue", "PCLUSPROP_RESOURCE_CLASS_INFO"),
+            ("pScsiAddressValue", "PCLUSPROP_SCSI_ADDRESS"),
+            ("pPartitionInfoValue", "PCLUSPROP_PARTITION_INFO"),
+            ("pPartitionInfoValueEx", "PCLUSPROP_PARTITION_INFO_EX"),
+            ("pPartitionInfoValueEx2", "PCLUSPROP_PARTITION_INFO_EX2"),
+        ] {
+            assert_eq!(
+                buffer
+                    .fields()
+                    .find(|candidate| candidate.name() == field)
+                    .unwrap()
+                    .ty(),
+                Type::value_named(namespace, alias),
+                "{field}"
+            );
+        }
+        assert_eq!(
+            index
+                .expect(namespace, "CLUSTER_BATCH_COMMAND")
+                .fields()
+                .find(|field| field.name() == "wzName")
+                .unwrap()
+                .ty(),
+            Type::value_named(DEFAULT_NAMESPACE, "PCWSTR")
+        );
+        assert_eq!(
+            index.expect(DEFAULT_NAMESPACE, "PCWSTR").underlying_type(),
+            Some(Type::PtrConst(Box::new(Type::U16), 1))
+        );
+        for (name, provider_parameter) in [
+            ("OpenClusterCryptProvider", 1),
+            ("OpenClusterCryptProviderEx", 2),
+            ("POPEN_CLUSTER_CRYPT_PROVIDER", 1),
+            ("POPEN_CLUSTER_CRYPT_PROVIDEREX", 2),
+        ] {
+            let method = match index.expect_item(namespace, name) {
+                Item::Fn(method) => method,
+                Item::Type(delegate) => delegate
+                    .methods()
+                    .find(|method| method.name() == "Invoke")
+                    .unwrap(),
+                _ => panic!("missing function or callback `{name}`"),
+            };
+            assert_eq!(
+                method.signature(&[]).types[provider_parameter],
+                Type::value_named(DEFAULT_NAMESPACE, "PCSTR"),
+                "{name}"
+            );
+        }
+        index.expect(DEFAULT_NAMESPACE, "PCSTR");
         std::fs::remove_dir_all(&root).unwrap();
     }
 

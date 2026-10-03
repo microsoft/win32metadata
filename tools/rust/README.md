@@ -23,6 +23,15 @@ GLU opaque types, use named empty records just like incomplete structs. Pointers
 typedef aliases preserve that identity; no complete layout is inferred, and by-value
 use remains an error.
 
+Canonical string-pointer aliases retain their resolved namespace, including aliases reached
+through ANSI or Unicode `TCHAR` typedefs. When references do not supply the canonical alias,
+required dependency closure emits it locally; cross-namespace uses are qualified.
+
+Clustering records with multiple concrete bases are projected directly from their SDK
+definitions. Their former `MsCs` exclusions only prevented duplicate definitions alongside
+legacy manual C# replacements; those exclusions and replacements are no longer needed.
+Explicit exclusions otherwise remain hard constraints, including for required dependencies.
+
 Header-plan dependency failures are reported together, with the selected roots that
 reach each blocker. With `WINDOWS_CLANG_TIMINGS=1`, `phase=plan-dependencies` reports
 selected roots, processed unique dependencies, resolved dependencies, and unique blockers.
