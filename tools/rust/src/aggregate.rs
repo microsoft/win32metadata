@@ -9,6 +9,7 @@ const GLOBAL_DEFINES: &str = "\
 ";
 
 const AGGREGATE_FIRST_INCLUDE_DEFINES: &str = "\
+#define USE_COM_CONTEXT_DEF
 #define WSMAN_API_VERSION_1_1
 #define GDIPVER 0x0110
 #define _DDKIMM_H_
@@ -415,15 +416,12 @@ fn append_tapi3(source: &mut String) {
 fn append_com(source: &mut String) {
     source.push_str(
         "\n#pragma push_macro(\"NONAMELESSUNION\")\n\
-         #pragma push_macro(\"USE_COM_CONTEXT_DEF\")\n\
          #pragma push_macro(\"IN\")\n\
          #pragma push_macro(\"OUT\")\n\
          #undef NONAMELESSUNION\n\
-         #undef USE_COM_CONTEXT_DEF\n\
          #undef IN\n\
          #undef OUT\n\
          #define NONAMELESSUNION\n\
-         #define USE_COM_CONTEXT_DEF\n\
          #define IN _In_\n\
          #define OUT _Out_\n",
     );
@@ -446,7 +444,7 @@ fn append_com(source: &mut String) {
     );
     source.push_str("\n#pragma pop_macro(\"OUT\")\n#pragma pop_macro(\"IN\")\n");
     source.push_str(
-        "#pragma pop_macro(\"USE_COM_CONTEXT_DEF\")\n\
+        "#undef USE_COM_CONTEXT_DEF\n\
          #pragma pop_macro(\"NONAMELESSUNION\")\n",
     );
 }
@@ -1232,6 +1230,7 @@ mod tests {
         );
         assert!(main.find("#define WSMAN_API_VERSION_1_1").unwrap() < windows);
         assert!(main.find("#define GDIPVER 0x0110").unwrap() < windows);
+        assert!(main.find("#define USE_COM_CONTEXT_DEF").unwrap() < windows);
         let console = satellite.find("#include <consoleapis.h>").unwrap();
         let restore_console = satellite
             .find("#undef DEFINE_CONSOLEV2_PROPERTIES")
@@ -1292,6 +1291,8 @@ mod tests {
         let com_header = main.find("#include <wtypes.h>").unwrap();
         let com_restore = main.find("#pragma pop_macro(\"NONAMELESSUNION\")").unwrap();
         assert!(windows < com_define && com_define < com_header && com_header < com_restore);
+        let com_context_restore = main.find("#undef USE_COM_CONTEXT_DEF").unwrap();
+        assert!(com_header < com_context_restore && com_context_restore < com_restore);
         assert!(main.contains("#include <dimm.h>"));
         assert!(main.contains("#include <ksproxy.h>"));
         assert!(main.contains("#include <portabledeviceapi.h>"));

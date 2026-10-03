@@ -40,6 +40,25 @@ Likewise, `DWRITE_FONT_AXIS_TAG` and `JsRuntimeVersion` are emitted from their S
 definitions instead of excluding them in favor of removed manual C# enums. The remaining
 Js constant exclusions and the selected non-edge header mode are unchanged.
 
+The aggregate defines `USE_COM_CONTEXT_DEF` before its first include, as the
+focused Com input does. Defining it only around later COM includes is too late
+when an earlier dependency has already guarded `objidlbase.h`; the complete
+`IContext` and `IEnumContextProps` interfaces must remain visible.
+
+Required SDK records, delegates, and pointer aliases are not replaced by the
+removed C# generator's remaps or manual declarations. The reviewed policy
+restorations include `LIST_ENTRY32/64`, the enclave callback aliases,
+`NDR_SCONTEXT`, `RO_REGISTRATION_COOKIE`, and
+`SslGetCipherSuitePRFHashAlgorithmFn`. Backup no longer excludes all empty
+records: required incomplete pointees such as `_ACTIVATION_CONTEXT` retain a
+named opaque identity without an invented layout. The SDK's incomplete
+`IStiDeviceW` and its `PSTIDEVICEW` pointer remain distinct from the complete
+`IStiDevice` interface rather than silently redirecting the alias.
+`SymbolSearchInfo` and `TypeSearchInfo` use their native data layout and base;
+`EnumerateChildrenEx` remains in the COM interface hierarchy, not removed from
+the vtable. Focused regressions compile the header-defined types and selected
+API signatures to WinMD and read back these distinctions.
+
 Header-plan dependency failures are reported together, with the selected roots that
 reach each blocker. With `WINDOWS_CLANG_TIMINGS=1`, `phase=plan-dependencies` reports
 selected roots, processed unique dependencies, resolved dependencies, and unique blockers.

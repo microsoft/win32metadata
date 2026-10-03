@@ -29,7 +29,7 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
-    "A0FC7F479A9FD6E409B4678CC759093E1F5934E70C1F8AC1982826B023417695";
+    "FC2A550DAEABA781521A9A6AA1FEFA5FE4E164EF6C2A173C9D052F315C4F05A7";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
 const GUID_RESET: &str =
     "\n#undef INITGUID\n#include <guiddef.h>\n#include <devpropdef.h>\n#include <propkeydef.h>\n";
@@ -6310,6 +6310,553 @@ mod tests {
             create.signature(&[]).types[1],
             Type::value_named(namespace, "JsRuntimeVersion")
         );
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_com_context_interfaces_survive_early_includes() {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let objidlbase = include_dirs
+            .iter()
+            .map(|directory| directory.join("objidlbase.h"))
+            .find(|path| path.is_file())
+            .unwrap();
+        let mut source = crate::aggregate::main_prefix(
+            WIN32_SDK_PRELUDE,
+            &win_sdk.join("Partitions/Com.StructuredStorage/manual.h"),
+        )
+        .unwrap();
+        let end = source
+            .find("#pragma pop_macro(\"NONAMELESSUNION\")")
+            .unwrap()
+            + "#pragma pop_macro(\"NONAMELESSUNION\")".len();
+        source.truncate(end);
+        let header = path_arg(&objidlbase, "--include").unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let traversal = checked_in_traversal_policy();
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            header,
+            convert_root_partition(logical_partition(&traversal, "Com").unwrap()),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("com-context-first-include");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("ComContext.winmd");
+        compile_inputs(&[rdl_dir], &[], "ComContext", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        for (name, methods) in [
+            (
+                "IContext",
+                &[
+                    "SetProperty",
+                    "RemoveProperty",
+                    "GetProperty",
+                    "EnumContextProps",
+                ][..],
+            ),
+            (
+                "IEnumContextProps",
+                &["Next", "Skip", "Reset", "Clone", "Count"][..],
+            ),
+        ] {
+            let interface = index.expect("Windows.Win32.System.Com", name);
+            assert_eq!(
+                interface
+                    .methods()
+                    .map(|method| method.name())
+                    .collect::<Vec<_>>(),
+                methods,
+                "{name} must retain its full interface definition and method order"
+            );
+        }
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_ssl_callback_emits_native_array_parameter() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let sslprovider = include_dirs
+            .iter()
+            .map(|directory| directory.join("sslprovider.h"))
+            .find(|path| path.is_file())
+            .unwrap();
+        let header = path_arg(&sslprovider, "--include").unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                SATELLITE_INPUT,
+                format!(
+                    "{WIN32_SDK_PRELUDE}\n\
+                     #include <bcrypt.h>\n\
+                     #include <ncrypt.h>\n\
+                     #include <sslprovider.h>\n"
+                ),
+            )
+            .with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let traversal = checked_in_traversal_policy();
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            SATELLITE_INPUT,
+            header,
+            convert_root_partition(logical_partition(&traversal, "Security.Cryptography").unwrap()),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("ssl-native-callback");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("SslProvider.winmd");
+        compile_inputs(&[rdl_dir], &[], "SslProvider", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Security.Cryptography";
+        let callback = index.expect(namespace, "SslGetCipherSuitePRFHashAlgorithmFn");
+        let invoke = callback
+            .methods()
+            .find(|method| method.name() == "Invoke")
+            .unwrap();
+        let signature = invoke.signature(&[]);
+        assert_eq!(signature.types.len(), 6);
+        assert_eq!(signature.types[4], Type::PtrMut(Box::new(Type::U16), 1));
+        assert_eq!(
+            index
+                .expect(namespace, "NCRYPT_SSL_FUNCTION_TABLE")
+                .fields()
+                .find(|field| field.name() == "GetCipherSuitePRFHashAlgorithm")
+                .unwrap()
+                .ty(),
+            Type::class_named(namespace, "SslGetCipherSuitePRFHashAlgorithmFn")
+        );
+        let Item::Fn(function) = index.expect_item(namespace, "SslGetCipherSuitePRFHashAlgorithm")
+        else {
+            panic!("missing SslGetCipherSuitePRFHashAlgorithm");
+        };
+        assert_eq!(function.signature(&[]).types, signature.types);
+        assert_eq!(function.signature(&[]).return_type, signature.return_type);
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_ro_registration_cookie_preserves_native_pointer() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "ro-registration-cookie",
+            AGGREGATE_INPUT,
+            "#include <roapi.h>\n",
+            &[("WinRT", &["roapi.h"])],
+            &[
+                "RoRegisterActivationFactories",
+                "RoRevokeActivationFactories",
+            ],
+            |index| {
+                let namespace = "Windows.Win32.System.WinRT";
+                let record = "_RO_REGISTRATION_COOKIE";
+                assert_eq!(index.expect(namespace, record).fields().count(), 0);
+                assert_eq!(
+                    index
+                        .expect(namespace, "RO_REGISTRATION_COOKIE")
+                        .underlying_type(),
+                    Some(Type::PtrMut(
+                        Box::new(Type::value_named(namespace, record)),
+                        1
+                    ))
+                );
+                for (name, parameter, ty) in [
+                    (
+                        "RoRegisterActivationFactories",
+                        3,
+                        Type::PtrMut(
+                            Box::new(Type::value_named(namespace, "RO_REGISTRATION_COOKIE")),
+                            1,
+                        ),
+                    ),
+                    (
+                        "RoRevokeActivationFactories",
+                        0,
+                        Type::value_named(namespace, "RO_REGISTRATION_COOKIE"),
+                    ),
+                ] {
+                    let Item::Fn(method) = index.expect_item(namespace, name) else {
+                        panic!("missing {name}");
+                    };
+                    assert_eq!(method.signature(&[]).types[parameter], ty, "{name}");
+                }
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_rpc_context_preserves_native_record_and_pointer() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "rpc-native-context",
+            AGGREGATE_INPUT,
+            "#include <rpc.h>\n#include <rpcndr.h>\n",
+            &[("Rpc", &["rpcndr.h"])],
+            &["NDRSContextMarshall", "NDRSContextUnmarshall"],
+            |index| {
+                let namespace = "Windows.Win32.System.Rpc";
+                let record = index.expect(namespace, "_NDR_SCONTEXT");
+                assert_eq!(
+                    record
+                        .fields()
+                        .map(|field| field.name())
+                        .collect::<Vec<_>>(),
+                    ["pad", "userContext"]
+                );
+                assert_eq!(
+                    record
+                        .fields()
+                        .find(|field| field.name() == "userContext")
+                        .unwrap()
+                        .ty(),
+                    Type::PtrMut(Box::new(Type::Void), 1)
+                );
+                assert_eq!(
+                    index.expect(namespace, "NDR_SCONTEXT").underlying_type(),
+                    Some(Type::PtrMut(
+                        Box::new(Type::value_named(namespace, "_NDR_SCONTEXT")),
+                        1,
+                    ))
+                );
+                let Item::Fn(marshal) = index.expect_item(namespace, "NDRSContextMarshall") else {
+                    panic!("missing NDRSContextMarshall");
+                };
+                assert_eq!(
+                    marshal.signature(&[]).types[0],
+                    Type::value_named(namespace, "NDR_SCONTEXT")
+                );
+                let Item::Fn(unmarshal) = index.expect_item(namespace, "NDRSContextUnmarshall")
+                else {
+                    panic!("missing NDRSContextUnmarshall");
+                };
+                assert_eq!(
+                    unmarshal.signature(&[]).return_type,
+                    Type::value_named(namespace, "NDR_SCONTEXT")
+                );
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_winnt_retains_required_list_and_activation_types() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "winnt-required-records",
+            AGGREGATE_INPUT,
+            "#include <winnt.h>\n#include <threadpoolapiset.h>\n",
+            &[
+                ("Backup", &["winnt.h"]),
+                ("Threading", &["threadpoolapiset.h"]),
+            ],
+            &[
+                "CreateThreadpoolIo",
+                "CreateThreadpoolTimer",
+                "CreateThreadpoolWait",
+                "CreateThreadpoolWork",
+                "TrySubmitThreadpoolCallback",
+            ],
+            |index| {
+                let namespace = "Windows.Win32.System.SystemServices";
+                for (name, field_type) in [("LIST_ENTRY32", Type::U32), ("LIST_ENTRY64", Type::U64)]
+                {
+                    let record = index.expect(namespace, name);
+                    assert_eq!(
+                        record
+                            .fields()
+                            .map(|field| (field.name(), field.ty()))
+                            .collect::<Vec<_>>(),
+                        [("Flink", field_type.clone()), ("Blink", field_type)]
+                    );
+                    assert_eq!(
+                        index
+                            .expect(namespace, &format!("P{name}"))
+                            .underlying_type(),
+                        Some(Type::PtrMut(
+                            Box::new(Type::value_named(namespace, name)),
+                            1
+                        ))
+                    );
+                }
+                assert_eq!(
+                    index
+                        .expect(namespace, "_ACTIVATION_CONTEXT")
+                        .fields()
+                        .count(),
+                    0
+                );
+                let environment = index.expect(namespace, "TP_CALLBACK_ENVIRON_V3");
+                assert_eq!(
+                    environment
+                        .fields()
+                        .find(|field| field.name() == "ActivationContext")
+                        .unwrap()
+                        .ty(),
+                    Type::PtrMut(
+                        Box::new(Type::value_named(namespace, "_ACTIVATION_CONTEXT")),
+                        1
+                    )
+                );
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_enclave_retains_required_callback_aliases() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "enclave-required-callback",
+            AGGREGATE_INPUT,
+            "#include <minwinbase.h>\n#include <enclaveapi.h>\n",
+            &[("Base", &["minwinbase.h"]), ("Enclave", &["enclaveapi.h"])],
+            &["CallEnclave"],
+            |index| {
+                let namespace = "Windows.Win32.System.SystemServices";
+                let callback = index.expect(namespace, "PENCLAVE_ROUTINE");
+                let invoke = callback
+                    .methods()
+                    .find(|method| method.name() == "Invoke")
+                    .unwrap();
+                assert_eq!(
+                    index.expect(DEFAULT_NAMESPACE, "LPVOID").underlying_type(),
+                    Some(Type::PtrMut(Box::new(Type::Void), 1))
+                );
+                assert_eq!(
+                    invoke.signature(&[]).types,
+                    [Type::value_named(DEFAULT_NAMESPACE, "LPVOID")]
+                );
+                assert_eq!(
+                    invoke.signature(&[]).return_type,
+                    Type::value_named(DEFAULT_NAMESPACE, "LPVOID")
+                );
+                assert_eq!(
+                    index
+                        .expect(namespace, "LPENCLAVE_ROUTINE")
+                        .underlying_type(),
+                    Some(Type::class_named(namespace, "PENCLAVE_ROUTINE"))
+                );
+                let Item::Fn(call) =
+                    index.expect_item("Windows.Win32.System.Environment", "CallEnclave")
+                else {
+                    panic!("missing CallEnclave");
+                };
+                assert_eq!(
+                    call.signature(&[]).types[0],
+                    Type::value_named(namespace, "LPENCLAVE_ROUTINE")
+                );
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_sti_preserves_distinct_incomplete_alias_identity() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "sti-incomplete-alias",
+            AGGREGATE_INPUT,
+            "#include <sti.h>\n",
+            &[("ImagingDevice", &["sti.h"])],
+            &[],
+            |index| {
+                let namespace = "Windows.Win32.Devices.Fax";
+                assert_eq!(index.expect(namespace, "IStiDeviceW").fields().count(), 0);
+                assert_eq!(
+                    index.expect(namespace, "PSTIDEVICEW").underlying_type(),
+                    Some(Type::PtrMut(
+                        Box::new(Type::value_named(namespace, "IStiDeviceW")),
+                        1
+                    ))
+                );
+                let device = index.expect(namespace, "IStiDevice");
+                assert!(
+                    device
+                        .methods()
+                        .any(|method| method.name() == "GetCapabilities")
+                );
+                assert!(
+                    device
+                        .methods()
+                        .any(|method| method.name() == "GetLastErrorInfo")
+                );
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_debug_search_records_preserve_com_methods() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "debug-native-search-records",
+            SATELLITE_INPUT,
+            "#include <dbgeng.h>\n#include <DbgModel.h>\n",
+            &[("Debug.Extensions", &["DbgModel.h"])],
+            &[],
+            |index| {
+                let namespace = "Windows.Win32.System.Diagnostics.Debug.Extensions";
+                assert_eq!(
+                    index
+                        .expect(namespace, "SymbolSearchInfo")
+                        .fields()
+                        .map(|field| (field.name(), field.ty()))
+                        .collect::<Vec<_>>(),
+                    [
+                        ("HeaderSize", Type::U32),
+                        ("InfoSize", Type::U32),
+                        ("SearchOptions", Type::U32)
+                    ]
+                );
+                assert_eq!(
+                    index
+                        .expect(namespace, "TypeSearchInfo")
+                        .fields()
+                        .find(|field| field.name() == "Base")
+                        .unwrap()
+                        .ty(),
+                    Type::value_named(namespace, "SymbolSearchInfo")
+                );
+                let interface = index.expect(namespace, "IDebugHostSymbol2");
+                let method = interface
+                    .methods()
+                    .find(|method| method.name() == "EnumerateChildrenEx")
+                    .unwrap();
+                assert_eq!(
+                    method.signature(&[]).types[2],
+                    Type::PtrMut(
+                        Box::new(Type::value_named(namespace, "SymbolSearchInfo")),
+                        1
+                    )
+                );
+                assert_eq!(
+                    interface
+                        .methods()
+                        .map(|method| method.name())
+                        .collect::<Vec<_>>(),
+                    ["EnumerateChildrenEx", "GetLanguage"]
+                );
+                assert_eq!(
+                    index
+                        .expect(namespace, "IDebugHostSymbol3")
+                        .methods()
+                        .map(|method| method.name())
+                        .collect::<Vec<_>>(),
+                    ["GetCompilerInformation"]
+                );
+            },
+        );
+    }
+
+    fn with_checked_in_header_group(
+        tag: &str,
+        input: &str,
+        includes: &str,
+        groups: &[(&str, &[&str])],
+        functions: &[&str],
+        check: impl FnOnce(&Index),
+    ) {
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut roots = Vec::new();
+        for (partition, headers) in groups {
+            for name in *headers {
+                let header = include_dirs
+                    .iter()
+                    .map(|directory| directory.join(name))
+                    .find(|path| path.is_file())
+                    .unwrap_or_else(|| panic!("missing checked-in header `{name}`"));
+                let header = path_arg(&header, "--include").unwrap();
+                policy.add_traversed_header_for_input(
+                    input,
+                    header.clone(),
+                    convert_root_partition(logical_partition(&traversal, partition).unwrap()),
+                );
+                roots.push(header);
+            }
+        }
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(input, format!("{WIN32_SDK_PRELUDE}\n{includes}")).with_roots(roots)],
+            &args,
+        )
+        .unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let functions = functions
+            .iter()
+            .map(|name| name.to_string())
+            .collect::<BTreeSet<_>>();
+        emit.functions = Some(&functions);
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch(tag);
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("HeaderGroup.winmd");
+        compile_inputs(&[rdl_dir], &[], "HeaderGroup", None, &winmd).unwrap();
+        check(&Index::read(&winmd).unwrap());
         std::fs::remove_dir_all(&root).unwrap();
     }
 
