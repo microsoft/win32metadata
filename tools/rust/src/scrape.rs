@@ -6725,9 +6725,15 @@ mod tests {
                     panic!("missing CallEnclave");
                 };
                 assert_eq!(
-                    call.signature(&[]).types[0],
-                    Type::value_named(namespace, "LPENCLAVE_ROUTINE")
+                    call.signature(&[]).types,
+                    [
+                        Type::value_named(namespace, "LPENCLAVE_ROUTINE"),
+                        Type::value_named(DEFAULT_NAMESPACE, "LPVOID"),
+                        Type::I32,
+                        Type::PtrMut(Box::new(Type::value_named(DEFAULT_NAMESPACE, "LPVOID")), 1)
+                    ]
                 );
+                assert_eq!(call.signature(&[]).return_type, Type::I32);
             },
         );
     }

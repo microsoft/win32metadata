@@ -47,7 +47,10 @@ Thus TBS's `PTBS_HCONTEXT` retains its pointer to `PVOID` without introducing a 
 `PVOID`. ClrProfiling and WinRT.Metadata each retain their authored `PCCOR_SIGNATURE`;
 an outer mutable pointer still refers to that const-pointer alias rather than an
 unrepresentable mixed raw-pointer chain. Representable same-mutability function and
-field chains keep their existing raw projection. Unselected functions do not force alias
+field chains keep their existing raw projection unless a selected function also reaches
+a named callback that directly uses the exact alias. This preserves the shared `LPVOID`
+identity in `CallEnclave`, its output pointer, and `PENCLAVE_ROUTINE` without letting
+unrelated rooted callbacks retain aliases. Unselected functions do not force alias
 retention merely because their declarations came from a traversed header.
 
 Independently declared roots retain an identity in each explicitly assigned namespace.
