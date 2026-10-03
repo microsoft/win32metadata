@@ -57,6 +57,11 @@ the retained routes agree on one namespace. Included-only `DECLARE_HANDLE` alias
 such as `HWND`, `HDC`, and `HBITMAP`, therefore remain qualified to the default namespace
 in foreign record fields and signatures.
 
+`DEFINE_DEVPROPKEY` and `DEFINE_PROPERTYKEY` constants use their planned record
+identity, including declaration remaps and explicit or default namespace routes,
+just like ordinary type references. Their GUID and property ID values remain
+unchanged; required key records from unlisted headers stay dependency-only.
+
 The independent `AVIIF_LIST` and `AVIIF_KEYFRAME` definitions likewise remain in both
 DirectShow and Multimedia. `NOAVIFMT` still prevents duplicate AVI records, but does
 not guard these two earlier literal definitions in `Vfw.h`.

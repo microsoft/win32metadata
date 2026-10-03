@@ -7556,6 +7556,132 @@ mod tests {
         );
     }
 
+    #[test]
+    fn checked_in_device_property_keys_use_routed_record_type() {
+        use windows_metadata::reader::HasAttributes;
+        use windows_metadata::{Type, Value};
+
+        for owned in [true, false] {
+            let mut groups: Vec<(&str, &[&str])> = vec![("Display", &["ntddvdeo.h"])];
+            let key_namespace = if owned {
+                groups.push(("Devices.Properties", &["devpropdef.h"]));
+                "Windows.Win32.Devices.Properties"
+            } else {
+                DEFAULT_NAMESPACE
+            };
+            with_checked_in_header_group(
+                &format!("device-property-key-owned-{owned}"),
+                AGGREGATE_INPUT,
+                "#include <devpropdef.h>\n#include <ntddvdeo.h>\n",
+                &groups,
+                &[],
+                |index| {
+                    let Item::Const(field) = index
+                        .expect_item("Windows.Win32.Devices.Display", "DEVPKEY_Device_ActivityId")
+                    else {
+                        panic!("missing device property key");
+                    };
+                    assert_eq!(field.ty(), Type::value_named(key_namespace, "DEVPROPKEY"));
+                    assert_eq!(field.constant().unwrap().value(), Value::U32(4));
+                    assert_eq!(
+                        field
+                            .find_attribute("GuidAttribute")
+                            .unwrap()
+                            .value()
+                            .into_iter()
+                            .map(|(_, value)| value)
+                            .collect::<Vec<_>>(),
+                        [
+                            Value::U32(0xc50a3f10),
+                            Value::U16(0xaa5c),
+                            Value::U16(0x4247),
+                            Value::U8(0xb8),
+                            Value::U8(0x30),
+                            Value::U8(0xd6),
+                            Value::U8(0xa6),
+                            Value::U8(0xf8),
+                            Value::U8(0xea),
+                            Value::U8(0xa3),
+                            Value::U8(0x10),
+                        ]
+                    );
+                    assert_eq!(
+                        index
+                            .expect(key_namespace, "DEVPROPKEY")
+                            .fields()
+                            .map(|field| field.name())
+                            .collect::<Vec<_>>(),
+                        ["fmtid", "pid"]
+                    );
+                },
+            );
+        }
+    }
+
+    #[test]
+    fn checked_in_property_keys_use_routed_record_type() {
+        use windows_metadata::reader::HasAttributes;
+        use windows_metadata::{Type, Value};
+
+        for owned in [true, false] {
+            let mut groups: Vec<(&str, &[&str])> =
+                vec![("FunctionDiscovery", &["functiondiscoverykeys.h"])];
+            let key_namespace = if owned {
+                groups.push(("Base", &["wtypes.h"]));
+                "Windows.Win32.System.SystemServices"
+            } else {
+                DEFAULT_NAMESPACE
+            };
+            with_checked_in_header_group(
+                &format!("property-key-owned-{owned}"),
+                AGGREGATE_INPUT,
+                "#include <functiondiscoverykeys.h>\n",
+                &groups,
+                &[],
+                |index| {
+                    let Item::Const(field) = index.expect_item(
+                        "Windows.Win32.Devices.FunctionDiscovery",
+                        "PKEY_FunctionInstance",
+                    ) else {
+                        panic!("missing property key");
+                    };
+                    assert_eq!(field.ty(), Type::value_named(key_namespace, "PROPERTYKEY"));
+                    assert_eq!(field.constant().unwrap().value(), Value::U32(1));
+                    assert_eq!(
+                        field
+                            .find_attribute("GuidAttribute")
+                            .unwrap()
+                            .value()
+                            .into_iter()
+                            .map(|(_, value)| value)
+                            .collect::<Vec<_>>(),
+                        [
+                            Value::U32(0x08c0c253),
+                            Value::U16(0xa154),
+                            Value::U16(0x4746),
+                            Value::U8(0x90),
+                            Value::U8(0x05),
+                            Value::U8(0x82),
+                            Value::U8(0xde),
+                            Value::U8(0x53),
+                            Value::U8(0x17),
+                            Value::U8(0x14),
+                            Value::U8(0x8b),
+                        ]
+                    );
+                    assert_eq!(
+                        index
+                            .expect(key_namespace, "PROPERTYKEY")
+                            .fields()
+                            .map(|field| field.name())
+                            .collect::<Vec<_>>(),
+                        ["fmtid", "pid"]
+                    );
+                },
+            );
+        }
+    }
+
     fn with_checked_in_header_group(
         tag: &str,
         input: &str,
