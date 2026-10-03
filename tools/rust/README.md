@@ -23,6 +23,11 @@ GLU opaque types, use named empty records just like incomplete structs. Pointers
 typedef aliases preserve that identity; no complete layout is inferred, and by-value
 use remains an error.
 
+For an exact SDK `DECLARE_HANDLE` expansion whose verified private dummy record is
+explicitly excluded, header planning retains the public handle as a named `*mut void`
+typedef. Aliases and pointer depth remain intact; nonexcluded and legacy handle output
+is unchanged. No cleanup or invalid-handle annotations are inferred from the declaration.
+
 Canonical string-pointer aliases retain their resolved namespace, including aliases reached
 through ANSI or Unicode `TCHAR` typedefs. When references do not supply the canonical alias,
 required dependency closure emits it locally; cross-namespace uses are qualified.
@@ -31,6 +36,9 @@ Clustering records with multiple concrete bases are projected directly from thei
 definitions. Their former `MsCs` exclusions only prevented duplicate definitions alongside
 legacy manual C# replacements; those exclusions and replacements are no longer needed.
 Explicit exclusions otherwise remain hard constraints, including for required dependencies.
+Likewise, `DWRITE_FONT_AXIS_TAG` and `JsRuntimeVersion` are emitted from their SDK enum
+definitions instead of excluding them in favor of removed manual C# enums. The remaining
+Js constant exclusions and the selected non-edge header mode are unchanged.
 
 Header-plan dependency failures are reported together, with the selected roots that
 reach each blocker. With `WINDOWS_CLANG_TIMINGS=1`, `phase=plan-dependencies` reports
@@ -38,6 +46,8 @@ selected roots, processed unique dependencies, resolved dependencies, and unique
 These are dependency-closure counts, not an overall completion percentage: children of
 missing, ambiguous, or unsupported types cannot be inspected, and later layout, ownership,
 routing, and RDL validation may still fail. A blocked plan never emits partial RDL.
+After dependency closure succeeds, required owner-excluded types are also reported as a
+deterministic batch with selected-root referrers, rather than one failure per full run.
 
 The same timing flag reports consumer configuration, header ownership, and header emission
 durations, including failed phases. Header emission includes the producer's root and

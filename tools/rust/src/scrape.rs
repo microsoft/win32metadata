@@ -29,7 +29,7 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
-    "B8AA0D0C48F3D731CF9B79AD4B2CAA7C17E530F2C82EE086DECEF78CAAE59F46";
+    "A0FC7F479A9FD6E409B4678CC759093E1F5934E70C1F8AC1982826B023417695";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
 const GUID_RESET: &str =
     "\n#undef INITGUID\n#include <guiddef.h>\n#include <devpropdef.h>\n#include <propkeydef.h>\n";
@@ -6042,6 +6042,274 @@ mod tests {
             );
         }
         index.expect(DEFAULT_NAMESPACE, "PCSTR");
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_compression_handles_preserve_public_pointer_abi() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "CmpApi").unwrap();
+        let [crate::partition::TraversalRoot::File(root)] = partition.roots.as_slice() else {
+            panic!("CmpApi did not have one physical file root");
+        };
+        let header = path_arg(&root.path, "--include").unwrap();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("{WIN32_SDK_PRELUDE}\n#include <compressapi.h>\n"),
+            )
+            .with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            header,
+            convert_root_partition(partition),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("compression-handle-abi");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("Compression.winmd");
+        compile_inputs(&[rdl_dir], &[], "Compression", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Storage.Compression";
+        let handle = Type::value_named(namespace, "COMPRESSOR_HANDLE");
+        assert_eq!(
+            index
+                .expect(namespace, "COMPRESSOR_HANDLE")
+                .underlying_type(),
+            Some(Type::PtrMut(Box::new(Type::Void), 1))
+        );
+        assert_eq!(
+            index
+                .expect(namespace, "DECOMPRESSOR_HANDLE")
+                .underlying_type(),
+            Some(handle.clone())
+        );
+        for name in ["PCOMPRESSOR_HANDLE", "PDECOMPRESSOR_HANDLE"] {
+            assert_eq!(
+                index.expect(namespace, name).underlying_type(),
+                Some(Type::PtrMut(Box::new(handle.clone()), 1)),
+                "{name}"
+            );
+        }
+        for (name, parameter, alias) in [
+            ("CreateCompressor", 2, "PCOMPRESSOR_HANDLE"),
+            ("CreateDecompressor", 2, "PDECOMPRESSOR_HANDLE"),
+            ("Compress", 0, "COMPRESSOR_HANDLE"),
+            ("Decompress", 0, "DECOMPRESSOR_HANDLE"),
+            ("CloseCompressor", 0, "COMPRESSOR_HANDLE"),
+            ("CloseDecompressor", 0, "DECOMPRESSOR_HANDLE"),
+        ] {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing function `{name}`");
+            };
+            assert_eq!(
+                method.signature(&[]).types[parameter],
+                Type::value_named(namespace, alias),
+                "{name}"
+            );
+        }
+        assert!(!index.types().any(|ty| ty.name() == "COMPRESSOR_HANDLE__"));
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_directwrite_font_axis_tags_emit_from_sdk() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "DirectWrite").unwrap();
+        let headers = partition
+            .roots
+            .iter()
+            .map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    path_arg(&root.path, "--include").unwrap()
+                }
+                _ => panic!("unexpected non-file DirectWrite traversal root"),
+            })
+            .collect::<Vec<_>>();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!(
+                    "{WIN32_SDK_PRELUDE}\n\
+                     #include <dcommon.h>\n\
+                     #include <dwrite.h>\n\
+                     #include <dwrite_1.h>\n\
+                     #include <dwrite_3.h>\n\
+                     #include <dwrite_2.h>\n"
+                ),
+            )
+            .with_roots(headers.clone())],
+            &args,
+        )
+        .unwrap();
+        let mut policy = HeaderPartitionPolicy::new();
+        for header in headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header,
+                convert_root_partition(partition),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let expected = [
+            ("DWRITE_FONT_AXIS_TAG_WEIGHT", *b"wght"),
+            ("DWRITE_FONT_AXIS_TAG_WIDTH", *b"wdth"),
+            ("DWRITE_FONT_AXIS_TAG_SLANT", *b"slnt"),
+            ("DWRITE_FONT_AXIS_TAG_OPTICAL_SIZE", *b"opsz"),
+            ("DWRITE_FONT_AXIS_TAG_ITALIC", *b"ital"),
+        ];
+        for (name, tag) in expected {
+            let declaration = format!("{name} = {}", u32::from_le_bytes(tag));
+            assert!(
+                partitions.values().any(|rdl| rdl.contains(&declaration)),
+                "missing native tag value `{declaration}`"
+            );
+        }
+        let root = scratch("directwrite-native-font-axis-tags");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("DirectWrite.winmd");
+        compile_inputs(&[rdl_dir], &[], "DirectWrite", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Graphics.DirectWrite";
+        let tags = index.expect(namespace, "DWRITE_FONT_AXIS_TAG");
+        assert_eq!(tags.underlying_type(), Some(Type::U32));
+        for (name, _) in expected {
+            assert!(tags.fields().any(|field| field.name() == name), "{name}");
+        }
+        for name in ["DWRITE_FONT_AXIS_VALUE", "DWRITE_FONT_AXIS_RANGE"] {
+            assert_eq!(
+                index
+                    .expect(namespace, name)
+                    .fields()
+                    .find(|field| field.name() == "axisTag")
+                    .unwrap()
+                    .ty(),
+                Type::value_named(namespace, "DWRITE_FONT_AXIS_TAG"),
+                "{name}"
+            );
+        }
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn checked_in_js_runtime_version_emits_from_sdk() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let partition = logical_partition(&traversal, "Js").unwrap();
+        let headers = partition
+            .roots
+            .iter()
+            .map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    path_arg(&root.path, "--include").unwrap()
+                }
+                _ => panic!("unexpected non-file Js traversal root"),
+            })
+            .collect::<Vec<_>>();
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("{WIN32_SDK_PRELUDE}\n#include <jsrt.h>\n#include <jsrt9.h>\n"),
+            )
+            .with_roots(headers.clone())],
+            &args,
+        )
+        .unwrap();
+        let mut policy = HeaderPartitionPolicy::new();
+        for header in headers {
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header,
+                convert_root_partition(partition),
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("js-native-runtime-version");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("Js.winmd");
+        compile_inputs(&[rdl_dir], &[], "Js", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.System.Js";
+        let version = index.expect(namespace, "JsRuntimeVersion");
+        assert_eq!(version.underlying_type(), Some(Type::I32));
+        for name in ["JsRuntimeVersion10", "JsRuntimeVersion11"] {
+            assert!(version.fields().any(|field| field.name() == name), "{name}");
+        }
+        let Item::Fn(create) = index.expect_item(namespace, "JsCreateRuntime") else {
+            panic!("missing JsCreateRuntime");
+        };
+        assert_eq!(
+            create.signature(&[]).types[1],
+            Type::value_named(namespace, "JsRuntimeVersion")
+        );
         std::fs::remove_dir_all(&root).unwrap();
     }
 

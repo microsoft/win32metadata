@@ -2695,14 +2695,14 @@ mod tests {
                 .iter()
                 .map(|policy| policy.exclusions.len())
                 .sum::<usize>(),
-            583
+            581
         );
         assert_eq!(
             partitions
                 .iter()
                 .map(|partition| partition.values("--exclude").count())
                 .sum::<usize>(),
-            584
+            582
         );
         assert_eq!(
             policies
@@ -2812,7 +2812,7 @@ mod tests {
         let policy = checked_in_traversal_policy();
         assert_eq!(
             policy.canonical_inventory_sha256(),
-            "B8AA0D0C48F3D731CF9B79AD4B2CAA7C17E530F2C82EE086DECEF78CAAE59F46"
+            "A0FC7F479A9FD6E409B4678CC759093E1F5934E70C1F8AC1982826B023417695"
         );
         assert_eq!(policy.partitions.len(), 321);
         assert_eq!(
