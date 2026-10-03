@@ -6828,6 +6828,13 @@ mod tests {
                     index.expect(namespace, "NTSTATUS").underlying_type(),
                     Some(Type::I32)
                 );
+                assert_eq!(
+                    index
+                        .expect("Windows.Win32.Devices.Display", "NTSTATUS")
+                        .underlying_type(),
+                    Some(Type::I32)
+                );
+                assert!(!index.contains("Windows.Win32.System.Kernel", "NTSTATUS"));
                 for name in ["STATUS_SUCCESS", "STATUS_ACCESS_DENIED", "DBG_CONTINUE"] {
                     let Item::Const(field) = index.expect_item("Windows.Win32.Foundation", name)
                     else {
@@ -6961,6 +6968,219 @@ mod tests {
                     .find(|field| field.name() == "Locale")
                     .unwrap();
                 assert_eq!(locale.ty(), Type::value_named(namespace, "LCID"));
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_network_handle_redeclarations_retain_header_namespaces() {
+        use windows_metadata::Type;
+
+        let families = [
+            (
+                "WinHttp",
+                "winhttp.h",
+                "Windows.Win32.Networking.WinHttp",
+                "WinHttpCloseHandle",
+                "WinHttpConnect",
+            ),
+            (
+                "WinInet",
+                "wininet.h",
+                "Windows.Win32.Networking.WinInet",
+                "InternetCloseHandle",
+                "InternetConnectW",
+            ),
+        ];
+        let source = "#include <winhttp.h>\n#include <wininet.h>\n";
+        let check_family = |index: &Index, namespace: &str, close: &str, connect: &str| {
+            index.expect(namespace, "HINTERNET");
+            index.expect(namespace, "INTERNET_PORT");
+            let Item::Fn(close) = index.expect_item(namespace, close) else {
+                panic!("missing {close}");
+            };
+            assert_eq!(
+                close.signature(&[]).types[0],
+                Type::value_named(namespace, "HINTERNET")
+            );
+            let Item::Fn(connect) = index.expect_item(namespace, connect) else {
+                panic!("missing {connect}");
+            };
+            let signature = connect.signature(&[]);
+            assert_eq!(
+                signature.return_type,
+                Type::value_named(namespace, "HINTERNET")
+            );
+            assert_eq!(
+                signature.types[0],
+                Type::value_named(namespace, "HINTERNET")
+            );
+            assert_eq!(
+                signature.types[2],
+                Type::value_named(namespace, "INTERNET_PORT")
+            );
+        };
+        for (partition, header, namespace, close, connect) in families {
+            with_checked_in_header_group(
+                &format!("network-handle-{partition}"),
+                AGGREGATE_INPUT,
+                source,
+                &[(partition, &[header])],
+                &[close, connect],
+                |index| check_family(index, namespace, close, connect),
+            );
+        }
+        with_checked_in_header_group(
+            "network-handle-header-namespaces",
+            AGGREGATE_INPUT,
+            source,
+            &[("WinHttp", &["winhttp.h"]), ("WinInet", &["wininet.h"])],
+            &[
+                "WinHttpCloseHandle",
+                "WinHttpConnect",
+                "InternetCloseHandle",
+                "InternetConnectW",
+            ],
+            |index| {
+                for (_, _, namespace, close, connect) in families {
+                    check_family(index, namespace, close, connect);
+                }
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_serial_guids_retain_header_namespaces() {
+        use windows_metadata::Value;
+        use windows_metadata::reader::HasAttributes;
+
+        let source = "#include <winioctl.h>\n#include <ntddser.h>\n";
+        let owners = [
+            ("Ioctl", "winioctl.h", "Windows.Win32.System.Ioctl"),
+            (
+                "SerPorts",
+                "ntddser.h",
+                "Windows.Win32.Devices.SerialCommunication",
+            ),
+        ];
+        let check_guids = |index: &Index, namespace: &str| {
+            for (name, data1, data2, data3, data4) in [
+                (
+                    "GUID_DEVINTERFACE_COMPORT",
+                    0x86E0D1E0,
+                    0x8089,
+                    0x11D0,
+                    [0x9C, 0xE4, 0x08, 0x00, 0x3E, 0x30, 0x1F, 0x73],
+                ),
+                (
+                    "GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR",
+                    0x4D36E978,
+                    0xE325,
+                    0x11CE,
+                    [0xBF, 0xC1, 0x08, 0x00, 0x2B, 0xE1, 0x03, 0x18],
+                ),
+            ] {
+                let Item::Const(field) = index.expect_item(namespace, name) else {
+                    panic!("missing {namespace}.{name}");
+                };
+                let attribute = field.find_attribute("GuidAttribute").unwrap();
+                let actual = attribute
+                    .value()
+                    .into_iter()
+                    .map(|(_, value)| value)
+                    .collect::<Vec<_>>();
+                let mut expected = vec![Value::U32(data1), Value::U16(data2), Value::U16(data3)];
+                expected.extend(data4.into_iter().map(Value::U8));
+                assert_eq!(
+                    actual, expected,
+                    "{namespace}.{name} must preserve every GUID component"
+                );
+            }
+        };
+        for (partition, header, namespace) in owners {
+            with_checked_in_header_group(
+                &format!("serial-guids-{partition}"),
+                AGGREGATE_INPUT,
+                source,
+                &[(partition, &[header])],
+                &[],
+                |index| check_guids(index, namespace),
+            );
+        }
+        with_checked_in_header_group(
+            "serial-guids-header-namespaces",
+            AGGREGATE_INPUT,
+            source,
+            &[("Ioctl", &["winioctl.h"]), ("SerPorts", &["ntddser.h"])],
+            &[],
+            |index| {
+                for (_, _, namespace) in owners {
+                    check_guids(index, namespace);
+                }
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_d2d_record_aliases_retain_header_namespaces() {
+        use windows_metadata::Type;
+
+        let source = "#include <dwrite.h>\n#include <wincodec.h>\n#include <d2d1.h>\n";
+        let owners = [
+            ("Direct2D", "d2d1.h", "Windows.Win32.Graphics.Direct2D"),
+            (
+                "Direct2D.Common",
+                "dcommon.h",
+                "Windows.Win32.Graphics.Direct2D.Common",
+            ),
+        ];
+        let check_types = |index: &Index, namespace: &str| {
+            for name in [
+                "D2D1_POINT_2U",
+                "D2D1_RECT_F",
+                "D2D1_SIZE_F",
+                "D2D1_MATRIX_3X2_F",
+            ] {
+                index.expect(namespace, name);
+            }
+            if namespace == "Windows.Win32.Graphics.Direct2D" {
+                let bounds = index
+                    .expect(namespace, "D2D1_LAYER_PARAMETERS")
+                    .fields()
+                    .find(|field| field.name() == "contentBounds")
+                    .unwrap();
+                assert_eq!(bounds.ty(), Type::value_named(namespace, "D2D1_RECT_F"));
+            }
+        };
+        for (partition, header, namespace) in owners {
+            with_checked_in_header_group(
+                &format!("d2d-record-aliases-{partition}"),
+                AGGREGATE_INPUT,
+                source,
+                &[
+                    ("DirectWrite", &["dwrite.h"]),
+                    ("Wic", &["wincodec.h"]),
+                    (partition, &[header]),
+                ],
+                &[],
+                |index| check_types(index, namespace),
+            );
+        }
+        with_checked_in_header_group(
+            "d2d-record-alias-header-namespaces",
+            AGGREGATE_INPUT,
+            source,
+            &[
+                ("DirectWrite", &["dwrite.h"]),
+                ("Wic", &["wincodec.h"]),
+                ("Direct2D", &["d2d1.h"]),
+                ("Direct2D.Common", &["dcommon.h"]),
+            ],
+            &[],
+            |index| {
+                for (_, _, namespace) in owners {
+                    check_types(index, namespace);
+                }
             },
         );
     }

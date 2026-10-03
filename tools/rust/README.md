@@ -26,9 +26,16 @@ use remains an error.
 Equivalent declarations claimed by different logical partitions coalesce when their
 resolved namespace and effective emitted semantics agree, including annotations,
 UUID/flags handling, and the symbol's actual import library. Unrelated policy-map
-entries do not create a conflict. The canonical selected declaration supplies the
-output bucket; genuinely conflicting claims still report every owner. Different
-destination namespaces remain an error rather than choosing an arbitrary owner.
+entries do not create a conflict. A stable policy/source route supplies the output
+bucket, independent of declaration order; genuinely conflicting claims still report
+every owner.
+
+Independently declared roots retain an identity in each explicitly assigned namespace.
+Exact declaration references preserve each API family's aliases, record fields, and
+signatures, including WinHTTP/WinINet handles and Direct2D record aliases. Duplicate
+GUID declarations retain their values in both namespaces. Each spelling declaration
+must resolve to one namespace: conflicting claims on a single declaration still fail
+rather than choosing an arbitrary owner. Legacy partitioned behavior is unchanged.
 
 For an exact SDK `DECLARE_HANDLE` expansion whose verified private dummy record is
 explicitly excluded, header planning retains the public handle as a named `*mut void`
@@ -40,9 +47,12 @@ through ANSI or Unicode `TCHAR` typedefs. When references do not supply the cano
 required dependency closure emits it locally; cross-namespace uses are qualified.
 Collision planning also follows exact same-input typedef chains before deciding that
 declarations differ. The SDK's `typedef LONG NTSTATUS` and `typedef long NTSTATUS`
-therefore retain the same existing public owner; an equivalent extra spelling must
-not create a scoped identity that breaks the Kernel exclusion or constant references.
-Genuinely different types still require separate collision handling.
+are equivalent even when explicit header ownership requires separate namespaces.
+References from an explicitly suppressed declaration can retain the existing preferred
+owner only when every retained variant is equivalent. This preserves the Kernel
+exclusion and Foundation constant references to WindowsProgramming's `NTSTATUS`,
+while Display keeps its own identity. Missing aliases do not acquire invented routes;
+genuinely different types still require separate collision handling.
 
 Clustering records with multiple concrete bases are projected directly from their SDK
 definitions. Their former `MsCs` exclusions only prevented duplicate definitions alongside
