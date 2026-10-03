@@ -161,6 +161,8 @@ raw SDK headers + import libraries + annotation contracts
 | Command | Purpose |
 | --- | --- |
 | `scrape` | SDK headers or focused partition translation units -> WinMD. |
+| `compile` | Generated RDL -> WinMD without repeating SDK extraction. |
+| `merge-arch` | Matching cached per-architecture RDL/WinMD pairs -> merged RDL and WinMD. |
 | `roundtrip` | WinMD -> RDL -> WinMD fidelity harness (`scripts\Test-WindowsRdlRoundTrip.ps1`). |
 | `libclang` | Resolve, load, and report the pinned libclang. |
 
@@ -185,6 +187,27 @@ The production MSBuild path is:
 ```powershell
 .\scripts\BuildMetadataBin.ps1
 ```
+
+### Merging cached architectures
+
+Keep each architecture's generated RDL with its matching WinMD. Supply x64 first
+as the canonical partition source, followed by the other architectures:
+
+```powershell
+.\bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe merge-arch `
+    --arch x64 --rdl .\cache\x64\rdl --winmd .\cache\x64\Windows.Win32.winmd `
+    --arch x86 --rdl .\cache\x86\rdl --winmd .\cache\x86\Windows.Win32.winmd `
+    --arch arm64 --rdl .\cache\arm64\rdl --winmd .\cache\arm64\Windows.Win32.winmd `
+    --namespace Windows.Win32 --assembly-name Windows.Win32 `
+    --output-rdl .\merged\rdl --output-winmd .\merged\Windows.Win32.winmd
+```
+
+Both output paths must be fresh and separate from the inputs; the output WinMD
+must not be inside the RDL output directory. The merger preserves architecture
+availability and differing definitions. RDL partition ownership uses qualified
+namespace/item identities across the root namespace and all descendants, so
+equal short names in different namespaces do not overwrite one another. Input
+order determines the first owner; paths within each input are sorted.
 
 ## Options
 

@@ -314,24 +314,30 @@ pub(crate) fn merge_architecture_rdl(
         validate_assembly_identity(&merged, assembly_name)?;
 
         let mut partitions = std::collections::HashMap::new();
+        let namespace_prefix = format!("{namespace}.");
         for input in inputs {
-            for entry in std::fs::read_dir(&input.rdl_dir)
+            let mut paths = std::fs::read_dir(&input.rdl_dir)
                 .map_err(|error| format!("failed to read `{}`: {error}", input.rdl_dir.display()))?
-            {
-                let path = entry
-                    .map_err(|error| {
-                        format!("failed to read `{}`: {error}", input.rdl_dir.display())
-                    })?
-                    .path();
+                .map(|entry| entry.map(|entry| entry.path()))
+                .collect::<Result<Vec<_>, _>>()
+                .map_err(|error| {
+                    format!("failed to read `{}`: {error}", input.rdl_dir.display())
+                })?;
+            paths.sort();
+            for path in paths {
                 if path.extension().is_none_or(|extension| extension != "rdl") {
                     continue;
                 }
                 let Some(stem) = path.file_stem().and_then(|stem| stem.to_str()) else {
                     continue;
                 };
-                for name in windows_rdl::item_names(&path, namespace)
+                for name in windows_rdl::qualified_item_names(&path)
                     .map_err(|error| format!("failed to index `{}`: {error}", path.display()))?
                 {
+                    if name.namespace != namespace && !name.namespace.starts_with(&namespace_prefix)
+                    {
+                        continue;
+                    }
                     partitions.entry(name).or_insert_with(|| stem.to_string());
                 }
             }
@@ -339,7 +345,7 @@ pub(crate) fn merge_architecture_rdl(
 
         windows_rdl::writer()
             .input(&merged)
-            .partition(partitions)
+            .partition_qualified(partitions)
             .output(output_dir)
             .write()
             .map_err(|error| format!("failed to restore RDL partitions: {error}"))?;
@@ -735,5 +741,171 @@ mod tests {
         assert!(x64_rdl.join("Test.rdl").is_file());
         assert!(x86_rdl.join("Test.rdl").is_file());
         std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn merged_rdl_preserves_qualified_names_and_first_input_partitions() {
+        let root = std::env::temp_dir().join(format!(
+            "win32metadata-tools-merge-qualified-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(&root).unwrap();
+        let mut inputs = Vec::new();
+        for (arch, bits, prefix, scalar) in [
+            ("x64", 2, "", "u64"),
+            ("x86", 1, "Later", "u32"),
+            ("arm64", 4, "Arm", "u64"),
+        ] {
+            let rdl = root.join(arch);
+            std::fs::create_dir_all(&rdl).unwrap();
+            for (stem, text) in [
+                (
+                    "Root",
+                    "#[win32] mod Test { struct ROOT_VALUE { value: u32 } const COMMON: u32 = 7; } #[win32] mod TestAdjacent { struct OUTSIDE { value: u32 } }"
+                        .to_string(),
+                ),
+                (
+                    "Alpha",
+                    format!(
+                        "#[win32] mod Test {{ mod Alpha {{ struct SHARED {{ value: {scalar} }} mod Deep {{ struct SHARED {{ value: u16 }} }} }} }}"
+                    ),
+                ),
+                (
+                    "Beta",
+                    "#[win32] mod Test { mod Beta { struct SHARED { value: u32 } } }".to_string(),
+                ),
+            ] {
+                std::fs::write(rdl.join(format!("{prefix}{stem}.rdl")), text).unwrap();
+            }
+            if arch != "x64" {
+                let namespace = if arch == "x86" { "X86Only" } else { "ArmOnly" };
+                std::fs::write(
+                    rdl.join(format!("{namespace}.rdl")),
+                    format!(
+                        "#[win32] mod Test {{ mod {namespace} {{ const ONLY: u32 = {bits}; }} }}"
+                    ),
+                )
+                .unwrap();
+            }
+            let winmd = root.join(format!("{arch}.winmd"));
+            compile_inputs(
+                std::slice::from_ref(&rdl),
+                &[],
+                "Test.Metadata",
+                None,
+                &winmd,
+            )
+            .unwrap();
+            inputs.push(Input {
+                arch: arch.to_string(),
+                rdl_dir: Some(rdl),
+                winmd: Some(winmd),
+            });
+        }
+
+        let output_rdl = root.join("merged");
+        let output_winmd = root.join("merged.winmd");
+        execute(&Options {
+            inputs,
+            namespace: Some("Test".to_string()),
+            assembly_name: Some("Test.Metadata".to_string()),
+            output_rdl: Some(output_rdl.clone()),
+            output_winmd: Some(output_winmd.clone()),
+            ..Default::default()
+        })
+        .unwrap();
+
+        let files = std::fs::read_dir(&output_rdl)
+            .unwrap()
+            .map(|entry| entry.unwrap().file_name().to_string_lossy().into_owned())
+            .collect::<std::collections::BTreeSet<_>>();
+        assert_eq!(
+            files,
+            [
+                "Alpha.rdl",
+                "ArmOnly.rdl",
+                "Beta.rdl",
+                "Root.rdl",
+                "X86Only.rdl"
+            ]
+            .into_iter()
+            .map(str::to_string)
+            .collect()
+        );
+        let alpha = std::fs::read_to_string(output_rdl.join("Alpha.rdl")).unwrap();
+        let beta = std::fs::read_to_string(output_rdl.join("Beta.rdl")).unwrap();
+        assert!(
+            !std::fs::read_to_string(output_rdl.join("Root.rdl"))
+                .unwrap()
+                .contains("TestAdjacent")
+        );
+        assert!(alpha.contains("mod Alpha"));
+        assert!(!alpha.contains("mod Beta"));
+        assert!(beta.contains("mod Beta"));
+        assert!(!beta.contains("mod Alpha"));
+        assert!(
+            std::fs::read_to_string(output_rdl.join("X86Only.rdl"))
+                .unwrap()
+                .contains("#[arch(X86)]")
+        );
+        assert!(
+            std::fs::read_to_string(output_rdl.join("ArmOnly.rdl"))
+                .unwrap()
+                .contains("#[arch(Arm64)]")
+        );
+
+        let check = |path: &std::path::Path| {
+            let index = windows_metadata::reader::Index::read(path).unwrap();
+            let mut variants = index
+                .types()
+                .filter(|ty| ty.namespace() == "Test.Alpha" && ty.name() == "SHARED")
+                .map(|ty| (ty.arches(), ty.fields().next().unwrap().ty()))
+                .collect::<Vec<_>>();
+            variants.sort_by_key(|(arches, _)| *arches);
+            assert_eq!(
+                variants,
+                [
+                    (1, windows_metadata::Type::U32),
+                    (6, windows_metadata::Type::U64)
+                ]
+            );
+            assert_eq!(
+                index
+                    .expect("Test.Beta", "SHARED")
+                    .fields()
+                    .next()
+                    .unwrap()
+                    .ty(),
+                windows_metadata::Type::U32
+            );
+            assert_eq!(
+                index
+                    .expect("Test.Alpha.Deep", "SHARED")
+                    .fields()
+                    .next()
+                    .unwrap()
+                    .ty(),
+                windows_metadata::Type::U16
+            );
+            assert!(index.contains("Test", "ROOT_VALUE"));
+            for (namespace, arches, value) in [("Test.X86Only", 1, 1u32), ("Test.ArmOnly", 4, 4u32)]
+            {
+                let windows_metadata::reader::Item::Const(field) =
+                    index.expect_item(namespace, "ONLY")
+                else {
+                    panic!("missing {namespace}.ONLY");
+                };
+                assert_eq!(field.arches(), arches);
+                assert_eq!(
+                    field.constant().unwrap().value(),
+                    windows_metadata::Value::U32(value)
+                );
+            }
+        };
+        check(&output_winmd);
+        let roundtrip = root.join("roundtrip.winmd");
+        compile_inputs(&[output_rdl], &[], "Test.Metadata", None, &roundtrip).unwrap();
+        check(&roundtrip);
+        std::fs::remove_dir_all(root).unwrap();
     }
 }
