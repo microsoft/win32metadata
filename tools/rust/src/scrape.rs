@@ -7326,6 +7326,187 @@ mod tests {
         std::fs::remove_dir_all(root).unwrap();
     }
 
+    #[test]
+    fn checked_in_void_alias_owners_preserve_native_projection() {
+        use windows_metadata::Type;
+
+        let source = "#include <tbs.h>\n";
+        let owners = [
+            ("Backup", "winnt.h", "Windows.Win32.System.SystemServices"),
+            ("Tbs", "tbs.h", "Windows.Win32.System.TpmBaseServices"),
+        ];
+        let check = |index: &Index, namespace: &str| {
+            let pointer = Some(Type::PtrMut(Box::new(Type::Void), 1));
+            if namespace == "Windows.Win32.System.SystemServices" {
+                assert!(!index.contains(namespace, "PVOID"));
+                assert_eq!(index.expect(namespace, "PSID").underlying_type(), pointer);
+            } else {
+                assert_eq!(index.expect(namespace, "PVOID").underlying_type(), pointer);
+                assert_eq!(
+                    index.expect(namespace, "TBS_HCONTEXT").underlying_type(),
+                    Some(Type::value_named(namespace, "PVOID"))
+                );
+                let Item::Fn(close) = index.expect_item(namespace, "Tbsip_Context_Close") else {
+                    panic!("missing Tbsip_Context_Close");
+                };
+                assert_eq!(
+                    close.signature(&[]).types,
+                    [Type::value_named(namespace, "TBS_HCONTEXT")]
+                );
+            }
+        };
+        for (partition, header, namespace) in owners {
+            with_checked_in_header_group(
+                &format!("void-alias-{partition}"),
+                AGGREGATE_INPUT,
+                source,
+                &[(partition, &[header])],
+                if partition == "Tbs" {
+                    &["Tbsip_Context_Close"]
+                } else {
+                    &[]
+                },
+                |index| check(index, namespace),
+            );
+        }
+        with_checked_in_header_group(
+            "void-alias-combined-owners",
+            AGGREGATE_INPUT,
+            source,
+            &[("Backup", &["winnt.h"]), ("Tbs", &["tbs.h"])],
+            &["Tbsip_Context_Close"],
+            |index| {
+                for (_, _, namespace) in owners {
+                    check(index, namespace);
+                }
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_assert_macro_owners_preserve_native_projection() {
+        use windows_metadata::Type;
+
+        let source = "#include <ifdef.h>\n";
+        let owners = [
+            ("Backup", "winnt.h", "Windows.Win32.System.SystemServices"),
+            ("Ndis", "ifdef.h", "Windows.Win32.NetworkManagement.Ndis"),
+        ];
+        let check = |index: &Index, namespace: &str| {
+            assert_eq!(
+                index.expect(namespace, "__C_ASSERT__").underlying_type(),
+                Some(Type::ArrayFixed(Box::new(Type::I8), 1))
+            );
+            assert_eq!(
+                index
+                    .iter()
+                    .filter(|(ns, name, _)| *ns == namespace && *name == "__C_ASSERT__")
+                    .count(),
+                1
+            );
+        };
+        for (partition, header, namespace) in owners {
+            with_checked_in_header_group(
+                &format!("assert-macro-{partition}"),
+                AGGREGATE_INPUT,
+                source,
+                &[(partition, &[header])],
+                &[],
+                |index| check(index, namespace),
+            );
+        }
+        with_checked_in_header_group(
+            "assert-macro-combined-owners",
+            AGGREGATE_INPUT,
+            source,
+            &[("Backup", &["winnt.h"]), ("Ndis", &["ifdef.h"])],
+            &[],
+            |index| {
+                for (_, _, namespace) in owners {
+                    check(index, namespace);
+                }
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_macro_handle_dependency_is_namespace_qualified() {
+        use windows_metadata::Type;
+
+        ensure_libclang();
+        let root = scratch("macro-handle-qualification");
+        std::fs::create_dir_all(&root).unwrap();
+        let header = root.join("owner.h");
+        std::fs::write(
+            &header,
+            "struct WindowHolder { HWND window; HDC dc; HBITMAP bitmap; };\n\
+             extern \"C\" HWND PassWindow(HWND window);\n\
+             extern \"C\" HDC PassDeviceContext(HDC dc);\n\
+             extern \"C\" HBITMAP PassBitmap(HBITMAP bitmap);\n",
+        )
+        .unwrap();
+        let header = path_arg(&header, "--include").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(
+            [Input::new(
+                AGGREGATE_INPUT,
+                format!("{WIN32_SDK_PRELUDE}\n#include \"{header}\"\n"),
+            )
+            .with_roots([header.clone()])],
+            &args,
+        )
+        .unwrap();
+        let namespace = "Example.WindowHandle";
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            header,
+            RootPartition::new("WindowHandle", namespace),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("MacroHandle.winmd");
+        compile_inputs(&[rdl_dir], &[], "MacroHandle", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        for (handle, field_name, function) in [
+            ("HWND", "window", "PassWindow"),
+            ("HDC", "dc", "PassDeviceContext"),
+            ("HBITMAP", "bitmap", "PassBitmap"),
+        ] {
+            let expected = Type::value_named(DEFAULT_NAMESPACE, handle);
+            index.expect(DEFAULT_NAMESPACE, handle);
+            let field = index
+                .expect(namespace, "WindowHolder")
+                .fields()
+                .find(|field| field.name() == field_name)
+                .unwrap();
+            assert_eq!(field.ty(), expected);
+            let Item::Fn(method) = index.expect_item(namespace, function) else {
+                panic!("missing {function}");
+            };
+            assert_eq!(method.signature(&[]).return_type, expected);
+            assert_eq!(method.signature(&[]).types, [expected]);
+        }
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
     fn with_checked_in_header_group(
         tag: &str,
         input: &str,

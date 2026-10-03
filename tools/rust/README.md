@@ -36,12 +36,27 @@ entries do not create a conflict. A stable policy/source route supplies the outp
 bucket, independent of declaration order; genuinely conflicting claims still report
 every owner.
 
+Only the exact typedef declaration retained by dependency closure contributes a
+canonical alias route. Projected-away roots do not create conflicts or redirect raw
+pointers through another owner's alias. Thus Backup's `PSID` remains a direct void
+pointer while TBS retains its own `PVOID` and the `TBS_HCONTEXT` alias relationship.
+
 Independently declared roots retain an identity in each explicitly assigned namespace.
 Exact declaration references preserve each API family's aliases, record fields, and
 signatures, including WinHTTP/WinINet handles and Direct2D record aliases. Duplicate
-GUID declarations retain their values in both namespaces. Each spelling declaration
+GUID declarations retain their values in both namespaces. Each declaration identity
 must resolve to one namespace: conflicting claims on a single declaration still fail
 rather than choosing an arbitrary owner. Legacy partitioned behavior is unchanged.
+
+Macro-produced declarations use expansion provenance for routing, so separate
+`C_ASSERT` expansions can retain one array alias per namespace without mistaking their
+shared macro definition for one declaration assigned conflicting owners.
+
+Emitted type references still resolve by declaration spelling, and qualify only when
+the retained routes agree on one namespace. Included-only `DECLARE_HANDLE` aliases,
+such as `HWND`, `HDC`, and `HBITMAP`, therefore remain qualified to the default namespace
+in foreign record fields and signatures.
+
 The independent `AVIIF_LIST` and `AVIIF_KEYFRAME` definitions likewise remain in both
 DirectShow and Multimedia. `NOAVIFMT` still prevents duplicate AVI records, but does
 not guard these two earlier literal definitions in `Vfw.h`.
