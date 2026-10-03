@@ -4363,7 +4363,9 @@ mod tests {
     }
 
     #[test]
-    fn checked_in_avi_headers_preserve_old_71_surface_without_duplicate_owners() {
+    fn checked_in_avi_headers_preserve_source_owned_records_and_constants() {
+        use windows_metadata::{Type, Value};
+
         ensure_libclang();
         let win_sdk = checked_in_win_sdk();
         let include_dirs = checked_in_include_dirs(&win_sdk);
@@ -4441,6 +4443,8 @@ mod tests {
             "AVISF_DISABLED",
             "AVISF_VIDEO_PALCHANGES",
         ];
+        // Vfw.h defines these outside its NOAVIFMT-controlled record block.
+        const VFW_AVI_CONSTANTS: &[(&str, i32)] = &[("AVIIF_KEYFRAME", 16), ("AVIIF_LIST", 1)];
         const SHARED_AVI_CONSTANTS: &[&str] = &[
             "AVI_HEADERSIZE",
             "AVIF_COPYRIGHTED",
@@ -4571,7 +4575,15 @@ mod tests {
             if !OLD_71_AVI_CONSTANTS.contains(name) && count != 0 {
                 unexpected_constants.push((*name, count));
             }
-            assert!(!multimedia.contains(&declaration), "{multimedia}");
+            assert_eq!(
+                multimedia.matches(&declaration).count(),
+                usize::from(
+                    VFW_AVI_CONSTANTS
+                        .iter()
+                        .any(|(vfw_name, _)| vfw_name == name)
+                ),
+                "{multimedia}"
+            );
         }
         assert!(
             unexpected_constants.is_empty(),
@@ -4591,6 +4603,31 @@ mod tests {
         }
         assert!(multimedia.contains("fn AVIFileInit("), "{multimedia}");
         assert!(!direct_show.contains("fn AVIFileInit("), "{direct_show}");
+
+        let root = scratch("avi-source-owned-constants");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("AviHeaders.winmd");
+        compile_inputs(&[rdl_dir], &[], "AviHeaders", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        for namespace in [
+            "Windows.Win32.Media.DirectShow",
+            "Windows.Win32.Media.Multimedia",
+        ] {
+            for (name, value) in VFW_AVI_CONSTANTS {
+                let Item::Const(field) = index.expect_item(namespace, name) else {
+                    panic!("missing {namespace}.{name}");
+                };
+                assert_eq!(field.ty(), Type::I32);
+                assert_eq!(field.constant().unwrap().value(), Value::I32(*value));
+            }
+        }
+        for name in AVI_RECORDS {
+            index.expect("Windows.Win32.Media.DirectShow", name);
+            assert!(!index.contains("Windows.Win32.Media.Multimedia", name));
+        }
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

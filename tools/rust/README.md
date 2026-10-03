@@ -36,6 +36,9 @@ signatures, including WinHTTP/WinINet handles and Direct2D record aliases. Dupli
 GUID declarations retain their values in both namespaces. Each spelling declaration
 must resolve to one namespace: conflicting claims on a single declaration still fail
 rather than choosing an arbitrary owner. Legacy partitioned behavior is unchanged.
+The independent `AVIIF_LIST` and `AVIIF_KEYFRAME` definitions likewise remain in both
+DirectShow and Multimedia. `NOAVIFMT` still prevents duplicate AVI records, but does
+not guard these two earlier literal definitions in `Vfw.h`.
 
 For an exact SDK `DECLARE_HANDLE` expansion whose verified private dummy record is
 explicitly excluded, header planning retains the public handle as a named `*mut void`
