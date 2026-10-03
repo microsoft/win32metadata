@@ -4,7 +4,7 @@ _DL_EUI48
 <IncludeRoot>/shared/fwpmtypes.h
 <IncludeRoot>/shared/fwpstypes.h
 <IncludeRoot>/shared/fwptypes.h
-<IncludeRoot>/shared/fwpvi.h.h
+<IncludeRoot>/shared/fwpvi.h
 <IncludeRoot>/shared/iketypes.h
 <IncludeRoot>/shared/ipsectypes.h
 <IncludeRoot>/um/fwpmtypes.h

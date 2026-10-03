@@ -1,26 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Pack">
-  <PropertyGroup>
-    <PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell>
-  </PropertyGroup>
-
-  <Target Name="StampPropsFile" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
-    <PropertyGroup>
-      <StampPropsScript>
-        $(PowerShell)
-
-        Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted
-        
-        $mainNugetVersion = nbgv get-version -v NuGetPackageVersion -p ..\..\..
-        . ..\..\..\scripts\CommonUtils.ps1
-
-        copy ..\sdk\sdk.props ..\sdk\sdk.stamped.props
-
-        [hashtable]$textToReplaceTable = @{ "10.0.19041.202-preview" = $mainNugetVersion }
-        Replace-Text "..\sdk\sdk.stamped.props" $textToReplaceTable
-      </StampPropsScript>
-    </PropertyGroup>
-
-    <Exec Command="$(StampPropsScript)" EchoOff="false" />
+  <Target Name="BuildNativeTools" BeforeTargets="GenerateNuspec" Condition="'$(SkipNativeToolsBuild)' != 'true'">
+    <Exec Command="pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)..\..\..\scripts\Build-Win32MetadataTools.ps1&quot;"/>
   </Target>
 
   <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">

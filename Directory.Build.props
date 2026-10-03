@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
+  <Import Project="$(MSBuildThisFileDirectory)eng\Versions.props"
+          Condition="'$(WindowsSdkCppPackageVersion)' == ''"/>
   <!--
     Directory.Build.props is automatically picked up and imported by
     Microsoft.Common.props. This file needs to exist, even if empty so that
