@@ -180,6 +180,45 @@ typedef struct _SIGNER_SUBJECT_INFO {
     };
 } SIGNER_SUBJECT_INFO, *PSIGNER_SUBJECT_INFO;
 
+typedef struct _SIGNER_SIGN_EX2_PARAMS {
+    DWORD                  dwFlags;
+    PSIGNER_SUBJECT_INFO   pSubjectInfo;
+    PSIGNER_CERT           pSigningCert;
+    PSIGNER_SIGNATURE_INFO pSignatureInfo;
+    PSIGNER_PROVIDER_INFO  pProviderInfo;
+    DWORD                  dwTimestampFlags;
+    PCSTR                  pszAlgorithmOid;
+    PCWSTR                 pwszTimestampURL;
+    PCRYPT_ATTRIBUTES      pCryptAttrs;
+    PVOID                  pSipData;
+    PSIGNER_CONTEXT        *pSignerContext;
+    PCERT_STRONG_SIGN_PARA pCryptoPolicy;
+    PVOID                  pReserved;
+} SIGNER_SIGN_EX2_PARAMS, *PSIGNER_SIGN_EX2_PARAMS;
+
+typedef struct _SIGNER_SIGN_EX3_PARAMS {
+    DWORD                    dwFlags;
+    PSIGNER_SUBJECT_INFO     pSubjectInfo;
+    PSIGNER_CERT             pSignerCert;
+    PSIGNER_SIGNATURE_INFO   pSignatureInfo;
+    PSIGNER_PROVIDER_INFO    pProviderInfo;
+    DWORD                    dwTimestampFlags;
+    PCSTR                    pszTimestampAlgorithmOid;
+    PCWSTR                   pwszHttpTimeStamp;
+    PCRYPT_ATTRIBUTES        psRequest;
+    PSIGNER_DIGEST_SIGN_INFO pSignCallBack;
+    PSIGNER_CONTEXT          *ppSignerContext;
+    PCERT_STRONG_SIGN_PARA   pCryptoPolicy;
+    PVOID                    pReserved;
+} SIGNER_SIGN_EX3_PARAMS, *PSIGNER_SIGN_EX3_PARAMS;
+
+// Passed as pSipData to SignerSignEx2 or SignerSignEx3 when signing an app package.
+// pSignerParams points to a SIGNER_SIGN_EX3_PARAMS when used with SignerSignEx3.
+typedef struct _APPX_SIP_CLIENT_DATA {
+    PSIGNER_SIGN_EX2_PARAMS pSignerParams;
+    IUnknown                *pAppxSipState;
+} APPX_SIP_CLIENT_DATA, *PAPPX_SIP_CLIENT_DATA;
+
 HRESULT WINAPI SignError(void);
 
 HRESULT WINAPI SignerFreeSignerContext(
