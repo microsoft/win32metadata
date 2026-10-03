@@ -7346,6 +7346,13 @@ mod tests {
                     index.expect(namespace, "TBS_HCONTEXT").underlying_type(),
                     Some(Type::value_named(namespace, "PVOID"))
                 );
+                assert_eq!(
+                    index.expect(namespace, "PTBS_HCONTEXT").underlying_type(),
+                    Some(Type::PtrMut(
+                        Box::new(Type::value_named(namespace, "PVOID")),
+                        1
+                    ))
+                );
                 let Item::Fn(close) = index.expect_item(namespace, "Tbsip_Context_Close") else {
                     panic!("missing Tbsip_Context_Close");
                 };
@@ -7379,6 +7386,35 @@ mod tests {
                 for (_, _, namespace) in owners {
                     check(index, namespace);
                 }
+            },
+        );
+    }
+
+    #[test]
+    fn checked_in_selected_mixed_pointer_use_retains_required_alias() {
+        use windows_metadata::Type;
+
+        with_checked_in_header_group(
+            "selected-mixed-pvoid",
+            AGGREGATE_INPUT,
+            "#include <tbs.h>\n",
+            &[("Backup", &["winnt.h"]), ("Tbs", &["tbs.h"])],
+            &["ReadPointerRaw", "Tbsip_Context_Close"],
+            |index| {
+                let namespace = "Windows.Win32.System.SystemServices";
+                let pointer = Type::value_named(namespace, "PVOID");
+                assert_eq!(
+                    index.expect(namespace, "PVOID").underlying_type(),
+                    Some(Type::PtrMut(Box::new(Type::Void), 1))
+                );
+                let Item::Fn(read) = index.expect_item(namespace, "ReadPointerRaw") else {
+                    panic!("missing ReadPointerRaw");
+                };
+                assert_eq!(read.signature(&[]).return_type, pointer);
+                assert_eq!(
+                    read.signature(&[]).types,
+                    [Type::PtrConst(Box::new(pointer), 1)]
+                );
             },
         );
     }
@@ -7676,6 +7712,59 @@ mod tests {
                             .map(|field| field.name())
                             .collect::<Vec<_>>(),
                         ["fmtid", "pid"]
+                    );
+                },
+            );
+        }
+    }
+
+    #[test]
+    fn checked_in_clr_signature_pointer_retains_const_alias() {
+        use windows_metadata::Type;
+
+        for metadata_owned in [false, true] {
+            let mut groups: Vec<(&str, &[&str])> = vec![("ClrProfiling", &["corprof.h"])];
+            if metadata_owned {
+                groups.push(("WinRT.Metadata", &["cor.h", "CorHdr.h"]));
+            }
+            with_checked_in_header_group(
+                &format!("clrprofiling-signature-metadata-owned-{metadata_owned}"),
+                AGGREGATE_INPUT,
+                "#include <CorHdr.h>\n#include <cor.h>\n#include <corprof.h>\n",
+                &groups,
+                &[],
+                |index| {
+                    let namespace = "Windows.Win32.System.Diagnostics.ClrProfiling";
+                    for name in ["LPCBYTE", "PCCOR_SIGNATURE"] {
+                        assert_eq!(
+                            index.expect(namespace, name).underlying_type(),
+                            Some(Type::PtrConst(Box::new(Type::U8), 1))
+                        );
+                    }
+                    if metadata_owned {
+                        assert_eq!(
+                            index
+                                .expect("Windows.Win32.System.WinRT.Metadata", "PCCOR_SIGNATURE")
+                                .underlying_type(),
+                            Some(Type::PtrConst(Box::new(Type::U8), 1))
+                        );
+                    }
+                    let interface = index.expect(namespace, "ICorProfilerInfo8");
+                    let method = interface
+                        .methods()
+                        .find(|method| method.name() == "GetDynamicFunctionInfo")
+                        .unwrap();
+                    assert_eq!(
+                        method.signature(&[]).types[2],
+                        Type::PtrMut(Box::new(Type::value_named(namespace, "PCCOR_SIGNATURE")), 1)
+                    );
+                    let method = interface
+                        .methods()
+                        .find(|method| method.name() == "GetFunctionFromIP3")
+                        .unwrap();
+                    assert_eq!(
+                        method.signature(&[]).types[0],
+                        Type::value_named(namespace, "LPCBYTE")
                     );
                 },
             );

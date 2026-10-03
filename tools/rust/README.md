@@ -41,6 +41,15 @@ canonical alias route. Projected-away roots do not create conflicts or redirect 
 pointers through another owner's alias. Thus Backup's `PSID` remains a direct void
 pointer while TBS retains its own `PVOID` and the `TBS_HCONTEXT` alias relationship.
 
+Canonical raw-pointer declarations retain their exact nominal identity when a selected
+pointer typedef refers through them or a selected use crosses a mutable/const boundary.
+Thus TBS's `PTBS_HCONTEXT` retains its pointer to `PVOID` without introducing a Backup
+`PVOID`. ClrProfiling and WinRT.Metadata each retain their authored `PCCOR_SIGNATURE`;
+an outer mutable pointer still refers to that const-pointer alias rather than an
+unrepresentable mixed raw-pointer chain. Representable same-mutability function and
+field chains keep their existing raw projection. Unselected functions do not force alias
+retention merely because their declarations came from a traversed header.
+
 Independently declared roots retain an identity in each explicitly assigned namespace.
 Exact declaration references preserve each API family's aliases, record fields, and
 signatures, including WinHTTP/WinINet handles and Direct2D record aliases. Duplicate
