@@ -23,6 +23,12 @@ GLU opaque types, use named empty records just like incomplete structs. Pointers
 typedef aliases preserve that identity; no complete layout is inferred, and by-value
 use remains an error.
 
+Exact declaration matching includes the translation unit. An included-only declaration
+is not rewritten to another header's scoped alias merely because that alias is the only
+owned variant in its input. For example, a satellite `GetQueuedCompletionStatus` keeps
+its original inline pointer parameter even when the aggregate owns separate IIS and
+MSXML `PULONG_PTR` aliases; no extra default nominal alias is introduced.
+
 Equivalent declarations claimed by different logical partitions coalesce when their
 resolved namespace and effective emitted semantics agree, including annotations,
 UUID/flags handling, and the symbol's actual import library. Unrelated policy-map

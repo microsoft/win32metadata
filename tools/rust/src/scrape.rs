@@ -7222,6 +7222,110 @@ mod tests {
         );
     }
 
+    #[test]
+    fn checked_in_satellite_alias_keeps_unowned_declaration_route() {
+        use windows_metadata::Type;
+
+        let aggregate_source = "#include <httpfilt.h>\n#include <msxml6.h>\n";
+        let satellite_source = "#include <msxml6.h>\n";
+        let namespace = "Windows.Win32.System.IO";
+        let expected_pointer = Type::PtrMut(Box::new(Type::U64), 1);
+        let check_api = |index: &Index| {
+            let Item::Fn(method) = index.expect_item(namespace, "GetQueuedCompletionStatus") else {
+                panic!("missing GetQueuedCompletionStatus");
+            };
+            assert_eq!(method.signature(&[]).types[2], expected_pointer);
+        };
+        let mut had_unowned_alias = false;
+        with_checked_in_header_group(
+            "satellite-alias-control",
+            SATELLITE_INPUT,
+            satellite_source,
+            &[("IO", &["ioapiset.h"])],
+            &["GetQueuedCompletionStatus"],
+            |index| {
+                check_api(index);
+                had_unowned_alias = index.contains(DEFAULT_NAMESPACE, "PULONG_PTR");
+            },
+        );
+
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut inputs = Vec::new();
+        for (input, source, owners) in [
+            (
+                AGGREGATE_INPUT,
+                aggregate_source,
+                &[("Iis", "httpfilt.h"), ("MsXml", "msxml6.h")][..],
+            ),
+            (
+                SATELLITE_INPUT,
+                satellite_source,
+                &[("IO", "ioapiset.h")][..],
+            ),
+        ] {
+            let mut roots = Vec::new();
+            for (partition, name) in owners {
+                let path = include_dirs
+                    .iter()
+                    .map(|directory| directory.join(name))
+                    .find(|path| path.is_file())
+                    .unwrap();
+                let header = path_arg(&path, "--include").unwrap();
+                policy.add_traversed_header_for_input(
+                    input,
+                    header.clone(),
+                    convert_root_partition(logical_partition(&traversal, partition).unwrap()),
+                );
+                roots.push(header);
+            }
+            inputs.push(
+                Input::new(input, format!("{WIN32_SDK_PRELUDE}\n{source}")).with_roots(roots),
+            );
+        }
+        let args = checked_in_clang_args(&include_dirs);
+        let args = args.iter().map(String::as_str).collect::<Vec<_>>();
+        let snapshot = windows_clang::extract(inputs, &args).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let functions = BTreeSet::from(["GetQueuedCompletionStatus".to_string()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.library = Some("");
+        emit.functions = Some(&functions);
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let root = scratch("satellite-alias-unowned-route");
+        let rdl_dir = root.join("rdl");
+        std::fs::create_dir_all(&rdl_dir).unwrap();
+        write_partitioned_rdl(&rdl_dir, partitions).unwrap();
+        let winmd = root.join("SatelliteAlias.winmd");
+        compile_inputs(&[rdl_dir], &[], "SatelliteAlias", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        check_api(&index);
+        assert_eq!(
+            index.contains(DEFAULT_NAMESPACE, "PULONG_PTR"),
+            had_unowned_alias
+        );
+        for ns in ["Windows.Win32.System.Iis", "Windows.Win32.Data.Xml.MsXml"] {
+            assert_eq!(
+                index.expect(ns, "PULONG_PTR").underlying_type(),
+                Some(expected_pointer.clone()),
+                "{ns}.PULONG_PTR"
+            );
+        }
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
     fn with_checked_in_header_group(
         tag: &str,
         input: &str,
