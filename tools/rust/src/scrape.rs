@@ -29,7 +29,7 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
-    "9CB294C0BA2F823C36EFB7E703AA0BE866216EDDC318E23F6663BC82A6ED3F7A";
+    "F492BAA4D29D5B3F8BD3CC5971C0B9C32A541C92B82A1833B73B3125A96228F4";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
 const GUID_RESET: &str =
     "\n#undef INITGUID\n#include <guiddef.h>\n#include <devpropdef.h>\n#include <propkeydef.h>\n";
@@ -5805,6 +5805,399 @@ mod tests {
     }
 
     #[test]
+    fn checked_in_gdiplus_imports_emit_all_supported_native_functions() {
+        for target in ["x64", "x86"] {
+            check_gdiplus_imported_functions(target);
+        }
+    }
+
+    fn check_gdiplus_imported_functions(target: &str) {
+        ensure_libclang();
+        let architecture = arch(target).unwrap();
+        let root = scratch(&format!("gdiplus-imported-functions-{target}"));
+        let win_sdk = checked_in_win_sdk();
+        let include_dirs = checked_in_include_dirs(&win_sdk);
+        let traversal = checked_in_traversal_policy();
+        let gdiplus = logical_partition(&traversal, "Gdiplus").unwrap();
+        let roots = gdiplus
+            .roots
+            .iter()
+            .map(|root| match root {
+                crate::partition::TraversalRoot::File(root) => {
+                    path_arg(&root.path, "--include").unwrap()
+                }
+                _ => panic!("unexpected non-file GDI+ traversal root"),
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(roots.len(), 12);
+        let source_plan = build_authority_source_plan(&traversal, &include_dirs).unwrap();
+        let aggregate = &source_plan.sources[&AuthorityInput::Aggregate];
+        let end = aggregate.find("\n#undef GDIPVER\n").unwrap() + "\n#undef GDIPVER\n".len();
+        let mut source = aggregate[..end].to_string();
+        source.push_str(
+            "\nstatic_assert(__is_standard_layout(Gdiplus::PointF));\n\
+             static_assert(__is_standard_layout(Gdiplus::RectF));\n\
+             static_assert(__is_standard_layout(Gdiplus::PathData));\n\
+             static_assert(!__is_trivially_copyable(Gdiplus::PointF));\n\
+             static_assert(__is_trivially_copyable(Gdiplus::RectF));\n\
+             static_assert(!__is_trivially_copyable(Gdiplus::PathData));\n\
+             static_assert(sizeof(Gdiplus::PointF) == 8 && alignof(Gdiplus::PointF) == 4);\n\
+             static_assert(sizeof(Gdiplus::Point) == 8 && alignof(Gdiplus::Point) == 4);\n\
+             static_assert(sizeof(Gdiplus::RectF) == 16 && alignof(Gdiplus::RectF) == 4);\n\
+             static_assert(sizeof(Gdiplus::Rect) == 16 && alignof(Gdiplus::Rect) == 4);\n",
+        );
+        source.push_str(if target == "x86" {
+            "static_assert(sizeof(Gdiplus::PathData) == 12 && alignof(Gdiplus::PathData) == 4);\n"
+        } else {
+            "static_assert(sizeof(Gdiplus::PathData) == 24 && alignof(Gdiplus::PathData) == 8);\n"
+        });
+        let mut args = checked_in_clang_args(&include_dirs);
+        args.retain(|argument| !argument.starts_with("--target="));
+        args.push(format!("--target={}", architecture.triple));
+        args.extend(architecture.defines.iter().cloned());
+        if target == "x86" {
+            let staged_tools =
+                Path::new(env!("CARGO_MANIFEST_DIR")).join(r"..\..\bin\GeneratorSdk\tools\win-x64");
+            args.extend([
+                "-resource-dir".to_string(),
+                libclang::clang_resource_dir(&staged_tools).unwrap(),
+            ]);
+        }
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let functions = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| {
+                fact.root
+                    && fact.name.starts_with("Gdip")
+                    && matches!(fact.data, FactData::Function { .. })
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(functions.len(), 632);
+        assert_eq!(
+            functions
+                .iter()
+                .filter(|fact| matches!(
+                    fact.data,
+                    FactData::Function {
+                        convention: windows_clang::CallingConvention::C,
+                        ..
+                    }
+                ))
+                .map(|fact| fact.name.as_str())
+                .collect::<BTreeSet<_>>(),
+            BTreeSet::from(["GdipGetMetafileHeaderFromWmf"]),
+        );
+
+        let package_root = std::env::var_os("NUGET_PACKAGES").map_or_else(
+            || {
+                PathBuf::from(std::env::var_os("USERPROFILE").unwrap())
+                    .join(".nuget")
+                    .join("packages")
+            },
+            PathBuf::from,
+        );
+        let version = include_str!("../../../eng/Versions.props")
+            .split_once("<WindowsSdkCppPackageVersion>")
+            .unwrap()
+            .1
+            .split_once("</WindowsSdkCppPackageVersion>")
+            .unwrap()
+            .0;
+        let lib_options = Options {
+            win32_sdk: true,
+            libs: vec![
+                package_root
+                    .join("microsoft.windows.sdk.cpp.x64")
+                    .join(version)
+                    .join("c")
+                    .join("um")
+                    .join("x64"),
+            ],
+            ..Default::default()
+        };
+        let mut native_libraries = LibraryMap::default();
+        for path in lib_files(&lib_options).unwrap() {
+            native_libraries.import_library(&path).unwrap();
+        }
+        apply_library_overrides(&mut native_libraries).unwrap();
+        let libraries = functions
+            .iter()
+            .filter_map(|fact| {
+                let FactData::Function { link_name, .. } = &fact.data else {
+                    unreachable!()
+                };
+                native_libraries
+                    .resolved_library(link_name)
+                    .map(|dll| (link_name.clone(), dll.to_string()))
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(libraries.len(), 629);
+        assert!(
+            libraries
+                .values()
+                .all(|dll| dll.eq_ignore_ascii_case("gdiplus.dll")),
+            "{libraries:?}"
+        );
+        let excluded = BTreeSet::new();
+        let selected = implicit_selected_functions(&snapshot, &excluded, &libraries, |_| false);
+        assert_eq!(selected.len(), 629);
+        let unsupported = BTreeSet::from([
+            "GdipSetImageAttributesICMMode",
+            "GdipFontCollectionEnumerable",
+            "GdipFontCollectionEnumerate",
+        ]);
+        assert_eq!(
+            functions
+                .iter()
+                .filter(|fact| !selected.contains(&fact.name))
+                .map(|fact| fact.name.as_str())
+                .collect::<BTreeSet<_>>(),
+            unsupported
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.functions = Some(&selected);
+        emit.libraries = Some(&libraries);
+        let policy = convert_header_partition_policy(&traversal).unwrap();
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, target).unwrap();
+        let rdl = root.join("rdl");
+        std::fs::create_dir_all(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let winmd = root.join("GdiPlus.winmd");
+        compile_inputs(&[rdl], &[], "GdiPlus", None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        assert_gdiplus_geometry_layouts(&index, target);
+        let namespace = "Windows.Win32.Graphics.GdiPlus";
+        let emitted = index
+            .iter_items()
+            .filter_map(|(ns, name, item)| {
+                (name.starts_with("Gdip") && matches!(item, Item::Fn(_)))
+                    .then_some((ns, name.to_string()))
+            })
+            .collect::<BTreeSet<_>>();
+        assert_eq!(
+            emitted,
+            selected
+                .iter()
+                .map(|name| (namespace, name.clone()))
+                .collect()
+        );
+        for fact in functions {
+            if !selected.contains(&fact.name) {
+                continue;
+            }
+            let FactData::Function {
+                params, convention, ..
+            } = &fact.data
+            else {
+                unreachable!()
+            };
+            let Item::Fn(method) = index.expect_item(namespace, &fact.name) else {
+                panic!("missing GDI+ function `{}`", fact.name);
+            };
+            let import = method.impl_map().unwrap();
+            assert!(
+                import
+                    .import_scope()
+                    .name()
+                    .eq_ignore_ascii_case("gdiplus.dll")
+            );
+            assert_eq!(import.import_name(), fact.name);
+            let expected_convention = match convention {
+                windows_clang::CallingConvention::Platform => "system",
+                windows_clang::CallingConvention::C => "C",
+            };
+            assert_eq!(
+                method.calling_convention(),
+                expected_convention,
+                "{}",
+                fact.name
+            );
+            assert_eq!(
+                method.signature(&[]).types.len(),
+                params.len(),
+                "{}",
+                fact.name
+            );
+        }
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    fn assert_gdiplus_geometry_layouts(index: &Index, target: &str) {
+        use windows_metadata::reader::TypeCategory;
+        use windows_metadata::{Type, TypeAttributes};
+
+        let namespace = "Windows.Win32.Graphics.GdiPlus";
+        let pointer_size = if target == "x86" { 4_usize } else { 8 };
+        let point_pointer = Type::PtrMut(Box::new(Type::value_named(namespace, "PointF")), 1);
+        let byte_pointer = Type::PtrMut(Box::new(Type::U8), 1);
+        let expected = [
+            (
+                "PointF",
+                vec![("X", Type::F32, 0), ("Y", Type::F32, 4)],
+                8,
+                4,
+            ),
+            (
+                "Point",
+                vec![("X", Type::I32, 0), ("Y", Type::I32, 4)],
+                8,
+                4,
+            ),
+            (
+                "RectF",
+                vec![
+                    ("X", Type::F32, 0),
+                    ("Y", Type::F32, 4),
+                    ("Width", Type::F32, 8),
+                    ("Height", Type::F32, 12),
+                ],
+                16,
+                4,
+            ),
+            (
+                "Rect",
+                vec![
+                    ("X", Type::I32, 0),
+                    ("Y", Type::I32, 4),
+                    ("Width", Type::I32, 8),
+                    ("Height", Type::I32, 12),
+                ],
+                16,
+                4,
+            ),
+            (
+                "PathData",
+                vec![
+                    ("Count", Type::I32, 0),
+                    ("Points", point_pointer, pointer_size),
+                    ("Types", byte_pointer, pointer_size * 2),
+                ],
+                pointer_size * 3,
+                pointer_size,
+            ),
+        ];
+        for (name, expected_fields, expected_size, expected_alignment) in expected {
+            let definition = index.expect(namespace, name);
+            assert_eq!(definition.category(), TypeCategory::Struct, "{name}");
+            assert!(
+                definition
+                    .flags()
+                    .contains(TypeAttributes::SequentialLayout),
+                "{name}"
+            );
+            assert!(
+                !definition.flags().contains(TypeAttributes::ExplicitLayout),
+                "{name}"
+            );
+            assert_eq!(definition.methods().count(), 0, "{name}");
+            let fields = definition.fields().collect::<Vec<_>>();
+            assert_eq!(fields.len(), expected_fields.len(), "{name}");
+            let layout = definition
+                .class_layout()
+                .map(|row| (row.packing_size(), row.class_size()));
+            let packing = match layout {
+                Some((packing, _)) if packing != 0 => usize::from(packing),
+                _ => 8,
+            };
+            let mut offset = 0_usize;
+            let mut alignment = 1;
+            for (field, (field_name, expected_type, expected_offset)) in
+                fields.iter().zip(expected_fields)
+            {
+                assert_eq!(field.name(), field_name, "{name}");
+                let actual_type = field.ty();
+                assert_eq!(actual_type, expected_type, "{name}.{field_name}");
+                let natural_size = match actual_type {
+                    Type::F32 | Type::I32 => 4,
+                    Type::PtrMut(_, 1) => pointer_size,
+                    _ => panic!("unexpected field type: {name}.{field_name}={actual_type:?}"),
+                };
+                let field_alignment = natural_size.min(packing);
+                offset = offset.div_ceil(field_alignment) * field_alignment;
+                alignment = alignment.max(field_alignment);
+                assert_eq!(offset, expected_offset, "{name}.{field_name}");
+                offset += natural_size;
+            }
+            let size = offset.div_ceil(alignment) * alignment;
+            assert_eq!(
+                (size, alignment),
+                (expected_size, expected_alignment),
+                "{name}"
+            );
+            if let Some((_, declared_size)) = layout {
+                assert!(
+                    declared_size == 0 || usize::try_from(declared_size).unwrap() == size,
+                    "{name}"
+                );
+            }
+        }
+        for (alias, name) in [
+            ("GpPointF", "PointF"),
+            ("GpPoint", "Point"),
+            ("GpRectF", "RectF"),
+            ("GpRect", "Rect"),
+            ("GpPathData", "PathData"),
+        ] {
+            assert_eq!(
+                index.expect(namespace, alias).underlying_type(),
+                Some(Type::value_named(namespace, name)),
+                "{alias}",
+            );
+        }
+        for (name, alias, has_count) in [
+            ("GdipGetPathData", "GpPathData", false),
+            ("GdipGetPathPoints", "GpPointF", true),
+            ("GdipGetPathPointsI", "GpPoint", true),
+            ("GdipGetPathGradientRect", "GpRectF", false),
+            ("GdipGetPathGradientRectI", "GpRect", false),
+        ] {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing `{name}`");
+            };
+            let signature = method.signature(&[]);
+            let mut expected = vec![
+                Type::PtrMut(Box::new(Type::Void), 1),
+                Type::PtrMut(Box::new(Type::value_named(namespace, alias)), 1),
+            ];
+            if has_count {
+                expected.push(Type::I32);
+            }
+            assert_eq!(signature.types, expected, "{name}");
+            assert_eq!(
+                signature.return_type,
+                Type::value_named(namespace, "GpStatus"),
+                "{name}"
+            );
+        }
+        let Item::Fn(method) = index.expect_item(namespace, "GdipAddPathArc") else {
+            panic!("missing GdipAddPathArc");
+        };
+        let signature = method.signature(&[]);
+        let mut expected = vec![Type::PtrMut(Box::new(Type::Void), 1)];
+        expected.resize(7, Type::F32);
+        assert_eq!(signature.types, expected);
+        assert_eq!(
+            signature.return_type,
+            Type::value_named(namespace, "GpStatus")
+        );
+    }
+
+    #[test]
     fn checked_in_glu_opaque_classes_emit_with_pointer_apis() {
         use windows_metadata::Type;
 
@@ -8853,6 +9246,37 @@ mod tests {
         };
         let error = include_dirs(&options).unwrap_err();
         assert!(error.contains("is not a directory"), "{error}");
+    }
+
+    #[test]
+    fn sdk_import_libraries_include_gdiplus_without_discovering_unlisted_files() {
+        let root = scratch("sdk-import-libraries");
+        for name in crate::win32_headers::IMPORT_LIBS
+            .iter()
+            .copied()
+            .chain(["gdiplus.lib", "unlisted.lib"])
+        {
+            std::fs::write(root.join(name), b"").unwrap();
+        }
+        let options = Options {
+            win32_sdk: true,
+            libs: vec![root.clone()],
+            ..Default::default()
+        };
+        let files = lib_files(&options).unwrap();
+        assert!(files.contains(&root.join("gdiplus.lib")));
+        assert!(!files.contains(&root.join("unlisted.lib")));
+        assert_eq!(
+            files,
+            crate::win32_headers::IMPORT_LIBS
+                .iter()
+                .map(|name| root.join(name))
+                .collect::<Vec<_>>()
+        );
+        std::fs::remove_file(root.join("gdiplus.lib")).unwrap();
+        let error = lib_files(&options).unwrap_err();
+        assert!(error.contains("gdiplus.lib"), "{error}");
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

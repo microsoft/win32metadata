@@ -23,6 +23,13 @@ GLU opaque types, use named empty records just like incomplete structs. Pointers
 typedef aliases preserve that identity; no complete layout is inferred, and by-value
 use remains an error.
 
+Explicitly owned, selected native entry points can retain their C++ namespace
+identity during header planning. Their required non-POD class dependencies may
+expose public native data fields when there are no bases or virtual behavior.
+This is not general C++ class import: ordinary unselected classes remain
+unsupported, nontrivial by-value uses are rejected, and methods, constructors,
+destructors, and lifetime behavior are not projected.
+
 Exact declaration matching includes the translation unit. An included-only declaration
 is not rewritten to another header's scoped alias merely because that alias is the only
 owned variant in its input. For example, a satellite `GetQueuedCompletionStatus` keeps
@@ -128,6 +135,14 @@ named opaque identity without an invented layout. The SDK's incomplete
 `EnumerateChildrenEx` remains in the COM interface hierarchy, not removed from
 the vtable. Focused regressions compile the header-defined types and selected
 API signatures to WinMD and read back these distinctions.
+
+Gdiplus no longer excludes `PathData`. The original GDI+ integration
+(`b9994fad7ab7f7849d48ecb31ae7559daaae1a16`) paired that exclusion with a
+manual `autoTypes.json` `PathData = IntPtr` typedef. That replacement is no
+longer present; the selected API now requires the SDK's actual data layout
+instead. This changes only that exclusion and the reviewed authority digest,
+not header roots, include environments, or namespace routes. It does not
+restore the synthetic typedef or infer C++ lifetime management.
 
 Header-plan dependency failures are reported together, with the selected roots that
 reach each blocker. With `WINDOWS_CLANG_TIMINGS=1`, `phase=plan-dependencies` reports
@@ -247,6 +262,10 @@ the SDK headers.
 **`--lib`** recovers symbol-to-DLL mappings from import libraries. Resolution is
 first-wins. Supplying import libraries also filters out functions that have neither an
 exported symbol nor an explicit import-library annotation.
+In `--win32-sdk` mode, only the curated `win32_headers::IMPORT_LIBS` list is read,
+not every library in the directory. This includes `gdiplus.lib`, so supported
+GDI+ entry points are selected even from unannotated SDK headers. Declarations
+without an import mapping or explicit import annotation remain unselected.
 
 **`--arch`** may be repeated. Each architecture is extracted and compiled independently;
 multi-architecture runs execute those workers in parallel and merge their WinMDs so
@@ -263,7 +282,9 @@ matching resource headers beside the executable under
 `clang-resource\22.1.8`. Consumer generation resolves those files package-locally
 and never clones LLVM. Standalone development builds may still restore the pinned
 `libclang.runtime.win-<arch>` NuGet package for the DLL; stage the tool with
-`scripts\Build-Win32MetadataTools.ps1` before multi-architecture generation.
+`scripts\Build-Win32MetadataTools.ps1` before multi-architecture generation or
+the checked-in SDK regression tests. The x86 GDI+ regression validates and uses
+the same staged resource tree without changing process-wide environment variables.
 
 ```powershell
 cargo run --quiet --locked --manifest-path tools\rust\Cargo.toml -- libclang

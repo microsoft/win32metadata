@@ -412,11 +412,12 @@ pub const SATELLITE_HEADERS: &[&str] = &[
     "devicetopology.h",
 ];
 
-/// Import-library order from the pinned producer. Symbol routing is first-wins.
+/// Curated SDK imports, retaining upstream order. Symbol routing is first-wins.
 pub const IMPORT_LIBS: &[&str] = &[
     "shcore.lib",
     "kernel32.lib",
     "gdi32.lib",
+    "gdiplus.lib",
     "user32.lib",
     "msimg32.lib",
     "opengl32.lib",

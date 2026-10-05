@@ -2862,6 +2862,18 @@ mod tests {
         let policy = checked_in_traversal_policy();
         assert_eq!(
             policy.canonical_inventory_sha256(),
+            "F492BAA4D29D5B3F8BD3CC5971C0B9C32A541C92B82A1833B73B3125A96228F4"
+        );
+        let mut legacy_policy = policy.clone();
+        let gdiplus = legacy_policy
+            .partitions
+            .iter_mut()
+            .find(|partition| partition.identity == "Gdiplus")
+            .unwrap();
+        assert!(gdiplus.policy.exclusions.is_empty());
+        gdiplus.policy.exclusions.insert("PathData".to_string());
+        assert_eq!(
+            legacy_policy.canonical_inventory_sha256(),
             "9CB294C0BA2F823C36EFB7E703AA0BE866216EDDC318E23F6663BC82A6ED3F7A"
         );
         assert_eq!(policy.partitions.len(), 321);
