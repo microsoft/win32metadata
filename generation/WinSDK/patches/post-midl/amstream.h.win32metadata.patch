@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h b/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h
-index 3aad0d3e65..d38302cc0e 100644
+index 3aad0d3e65..aa5813acff 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/amstream.h
 @@ -1,3 +1,4 @@
@@ -50,49 +50,17 @@ index 3aad0d3e65..d38302cc0e 100644
  enum __MIDL___MIDL_itf_amstream_0000_0000_0002
      {
          AMMSF_ADDDEFAULTRENDERER	= 0x1,
-@@ -137,7 +169,37 @@ enum __MIDL___MIDL_itf_amstream_0000_0000_0002
+@@ -137,6 +169,7 @@ enum __MIDL___MIDL_itf_amstream_0000_0000_0002
          AMMSF_STOPIFNOSAMPLES	= 0x4,
          AMMSF_NOSTALL	= 0x8
      } ;
 +#endif
  
-+#ifdef WIN32METADATA
-+#pragma push_macro("AMMSF_RENDERTYPEMASK")
-+#undef AMMSF_RENDERTYPEMASK
-+#pragma push_macro("AMMSF_RENDERTOEXISTING")
-+#undef AMMSF_RENDERTOEXISTING
-+#pragma push_macro("AMMSF_RENDERALLSTREAMS")
-+#undef AMMSF_RENDERALLSTREAMS
-+#pragma push_macro("AMMSF_NORENDER")
-+#undef AMMSF_NORENDER
-+#pragma push_macro("AMMSF_NOCLOCK")
-+#undef AMMSF_NOCLOCK
-+#pragma push_macro("AMMSF_RUN")
-+#undef AMMSF_RUN
-+enum [[clang::flag_enum]] AMMSF_RENDER_FLAGS : int
-+{
-+    AMMSF_RENDERTYPEMASK = 3,
-+    AMMSF_RENDERTOEXISTING = 0,
-+    AMMSF_RENDERALLSTREAMS = 1,
-+    AMMSF_NORENDER = 2,
-+    AMMSF_NOCLOCK = 4,
-+    AMMSF_RUN = 8,
-+};
-+#pragma pop_macro("AMMSF_RUN")
-+#pragma pop_macro("AMMSF_NOCLOCK")
-+#pragma pop_macro("AMMSF_NORENDER")
-+#pragma pop_macro("AMMSF_RENDERALLSTREAMS")
-+#pragma pop_macro("AMMSF_RENDERTOEXISTING")
-+#pragma pop_macro("AMMSF_RENDERTYPEMASK")
-+#else
  enum __MIDL___MIDL_itf_amstream_0000_0000_0003
      {
-         AMMSF_RENDERTYPEMASK	= 0x3,
-@@ -147,8 +209,13 @@ enum __MIDL___MIDL_itf_amstream_0000_0000_0003
-         AMMSF_NOCLOCK	= 0x4,
+@@ -148,7 +181,11 @@ enum __MIDL___MIDL_itf_amstream_0000_0000_0003
          AMMSF_RUN	= 0x8
      } ;
-+#endif
  typedef /* [public][v1_enum] */ 
 -enum __MIDL___MIDL_itf_amstream_0000_0000_0004
 +enum
@@ -103,7 +71,7 @@ index 3aad0d3e65..d38302cc0e 100644
      {
          Disabled	= 0,
          ReadData	= 1,
-@@ -179,7 +246,7 @@ EXTERN_C const IID IID_IAMMultiMediaStream;
+@@ -179,7 +216,7 @@ EXTERN_C const IID IID_IAMMultiMediaStream;
              /* [annotation][in] */ 
              _In_  STREAM_TYPE StreamType,
              /* [annotation][in] */ 
@@ -112,7 +80,7 @@ index 3aad0d3e65..d38302cc0e 100644
              /* [annotation][in] */ 
              _In_  IGraphBuilder *pFilterGraph) = 0;
          
-@@ -197,7 +264,7 @@ EXTERN_C const IID IID_IAMMultiMediaStream;
+@@ -197,7 +234,7 @@ EXTERN_C const IID IID_IAMMultiMediaStream;
              /* [annotation][in] */ 
              _In_  const MSPID *PurposeId,
              /* [annotation][in] */ 
@@ -121,7 +89,7 @@ index 3aad0d3e65..d38302cc0e 100644
              /* [annotation][out] */ 
              _Out_  IMediaStream **ppNewStream) = 0;
          
-@@ -978,7 +1045,7 @@ EXTERN_C const IID IID_IDirectDrawMediaSampleAllocator;
+@@ -978,7 +1015,7 @@ EXTERN_C const IID IID_IDirectDrawMediaSampleAllocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -130,7 +98,7 @@ index 3aad0d3e65..d38302cc0e 100644
      IDirectDrawMediaSampleAllocator : public IUnknown
      {
      public:
-@@ -1063,7 +1130,7 @@ EXTERN_C const IID IID_IDirectDrawMediaSample;
+@@ -1063,7 +1100,7 @@ EXTERN_C const IID IID_IDirectDrawMediaSample;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -139,7 +107,7 @@ index 3aad0d3e65..d38302cc0e 100644
      IDirectDrawMediaSample : public IUnknown
      {
      public:
-@@ -1754,6 +1821,10 @@ extern RPC_IF_HANDLE __MIDL_itf_amstream_0000_0007_v0_0_s_ifspec;
+@@ -1754,6 +1791,10 @@ extern RPC_IF_HANDLE __MIDL_itf_amstream_0000_0007_v0_0_s_ifspec;
  }
  #endif
  

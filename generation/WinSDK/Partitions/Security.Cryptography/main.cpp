@@ -37,5 +37,3 @@ typedef NTSTATUS* PNTSTATUS;
 #include <cspdk.h>
 #include <msclmd.h>
 #include <cardmod.h>
-
-#include <devioctl.h>

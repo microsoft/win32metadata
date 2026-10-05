@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
-index 9b3376d2b1..392a6c5256 100644
+index 9b3376d2b1..7efa0af18a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSAPI.h
 @@ -25,6 +25,7 @@ Abstract:
@@ -250,23 +250,10 @@ index 9b3376d2b1..392a6c5256 100644
      NTMS_GUID ObjectId;
  } NTMS_NOTIFICATIONINFORMATION, *LPNTMS_NOTIFICATIONINFORMATION;
  
-@@ -1941,4 +1942,19 @@ GetVolumesFromDriveA(
+@@ -1941,4 +1942,6 @@ GetVolumesFromDriveA(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("NTMS_OMID_TYPE_FILESYSTEM_INFO")
-+#undef NTMS_OMID_TYPE_FILESYSTEM_INFO
-+#pragma push_macro("NTMS_OMID_TYPE_RAW_LABEL")
-+#undef NTMS_OMID_TYPE_RAW_LABEL
-+enum NTMS_OMID_TYPE : unsigned int
-+{
-+    NTMS_OMID_TYPE_FILESYSTEM_INFO = 2U,
-+    NTMS_OMID_TYPE_RAW_LABEL = 1U,
-+};
-+#pragma pop_macro("NTMS_OMID_TYPE_RAW_LABEL")
-+#pragma pop_macro("NTMS_OMID_TYPE_FILESYSTEM_INFO")
-+#endif
 +
  #endif // _INCL_NTMSAPI_H_

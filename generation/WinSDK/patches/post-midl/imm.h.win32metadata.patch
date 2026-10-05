@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
-index b7ebb2e69d..ed02316029 100644
+index b7ebb2e69d..52526dd69f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imm.h
 @@ -1,4 +1,5 @@
@@ -390,44 +390,11 @@ index b7ebb2e69d..ed02316029 100644
  #endif /* WINVER >= 0x0602 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -777,5 +778,382 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+@@ -777,5 +778,349 @@ BOOL WINAPI ImmDisableLegacyIME(void);
  }
  #endif
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("IGP_GETIMEVERSION")
-+#undef IGP_GETIMEVERSION
-+#pragma push_macro("IGP_PROPERTY")
-+#undef IGP_PROPERTY
-+#pragma push_macro("IGP_CONVERSION")
-+#undef IGP_CONVERSION
-+#pragma push_macro("IGP_SENTENCE")
-+#undef IGP_SENTENCE
-+#pragma push_macro("IGP_UI")
-+#undef IGP_UI
-+#pragma push_macro("IGP_SETCOMPSTR")
-+#undef IGP_SETCOMPSTR
-+#pragma push_macro("IGP_SELECT")
-+#undef IGP_SELECT
-+enum IGP_ID : unsigned int
-+{
-+    IGP_GETIMEVERSION = 4294967292U,
-+    IGP_PROPERTY = 4U,
-+    IGP_CONVERSION = 8U,
-+    IGP_SENTENCE = 12U,
-+    IGP_UI = 16U,
-+    IGP_SETCOMPSTR = 20U,
-+    IGP_SELECT = 24U,
-+};
-+#pragma pop_macro("IGP_SELECT")
-+#pragma pop_macro("IGP_SETCOMPSTR")
-+#pragma pop_macro("IGP_UI")
-+#pragma pop_macro("IGP_SENTENCE")
-+#pragma pop_macro("IGP_CONVERSION")
-+#pragma pop_macro("IGP_PROPERTY")
-+#pragma pop_macro("IGP_GETIMEVERSION")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("SCS_SETSTR")

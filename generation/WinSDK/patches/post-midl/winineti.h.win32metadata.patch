@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
-index 63c850c407..5ab059cbd2 100644
+index 63c850c407..235faabb27 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
 @@ -1,3 +1,4 @@
@@ -441,24 +441,7 @@ index 63c850c407..5ab059cbd2 100644
  
  
  #ifdef _WS2DEF_
-@@ -2250,8 +2251,16 @@ BOOLAPI HttpWebSocketQueryCloseStatus(
- // callback function for INTERNET_OPTION_GLOBAL_CALLBACK option
- //
- 
-+#endif
-+#if (defined(WIN32METADATA) && !defined(INTERNET_GLOBAL_CALLBACK_SENDING_HTTP_HEADERS)) || (((defined(_WS2DEF_))))
- #define INTERNET_GLOBAL_CALLBACK_SENDING_HTTP_HEADERS          0x00000001
-+#endif
-+#ifdef _WS2DEF_
-+#endif
-+#if (defined(WIN32METADATA) && !defined(INTERNET_GLOBAL_CALLBACK_DETECTING_PROXY)) || (((defined(_WS2DEF_))))
- #define INTERNET_GLOBAL_CALLBACK_DETECTING_PROXY               0x00000002
-+#endif
-+#ifdef _WS2DEF_
- 
- typedef
- DWORD
-@@ -2328,5 +2337,52 @@ typedef DWORD
+@@ -2328,5 +2329,52 @@ typedef DWORD
  #endif
  
  #endif // !define(_WININETEX_)

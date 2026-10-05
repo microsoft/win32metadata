@@ -10,7 +10,7 @@
     <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(RepoRootPath)bin\Windows.Win32.winmd</OutputWinmd>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
     <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
-    <SdkIncRoot Condition="'$(SdkIncRoot)' == ''">$(MSBuildThisFileDirectory)obj\RecompiledIdlHeaders</SdkIncRoot>
+    <SdkIncRoot>$(PkgMicrosoft_Windows_SDK_CPP)\c\include\$(WindowsSdkHeaderVersion)</SdkIncRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
     <UseWinSDKAssets>true</UseWinSDKAssets>
     <WinmdUseSdkHeaderManifest>true</WinmdUseSdkHeaderManifest>
@@ -23,7 +23,8 @@
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="$(WindowsSdkCppPackageVersion)" GeneratePathProperty="true"/>
     <WinmdPartitionPolicyRoot Include="Partitions" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdNamespaceRoutes Include="requiredNamespacesForNames.rsp" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
-    <WinmdIncludeDir Include="$(SdkIncRoot)"/>
+    <WinmdIncludeDir Include="RecompiledIdlHeaders" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
+    <WinmdIncludeDir Include="AdditionalHeaders\cpdk" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdIncludeDir Include="AdditionalHeaders"/>
     <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64"/>
@@ -35,9 +36,9 @@
     <WinmdScopeHeader Include="winstring.h;Wsdevlicensing.h;wsdevlicensing.h"/>
   </ItemGroup>
 
-  <Target Name="ValidatePatchedSdkHeaders" BeforeTargets="BuildWin32MetadataTools">
+  <Target Name="ValidateSdkHeaders" BeforeTargets="BuildWin32MetadataTools">
     <Error Condition="!Exists('$(SdkIncRoot)\um')"
-           Text="Patched SDK headers were not found at '$(SdkIncRoot)'. Run scripts\BuildMetadataBin.ps1 so the SDK patches are applied before generating the WinMD."/>
+           Text="Pinned Microsoft.Windows.SDK.CPP headers were not found at '$(SdkIncRoot)'."/>
   </Target>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets"/>

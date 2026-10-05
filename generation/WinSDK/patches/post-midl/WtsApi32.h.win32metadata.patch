@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
-index f907576fa1..eade79f74b 100644
+index f907576fa1..d6db8957e5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 @@ -15,6 +15,7 @@
@@ -917,76 +917,11 @@ index f907576fa1..eade79f74b 100644
  WTSGetChildSessionId(
      _Out_ PULONG pSessionId
      );
-@@ -1675,5 +1718,72 @@ WTSActiveSessionExists(
+@@ -1675,5 +1718,7 @@ WTSActiveSessionExists(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("WTS_SECURITY_CURRENT_GUEST_ACCESS")
-+#undef WTS_SECURITY_CURRENT_GUEST_ACCESS
-+#pragma push_macro("WTS_SECURITY_USER_ACCESS")
-+#undef WTS_SECURITY_USER_ACCESS
-+#pragma push_macro("WTS_SECURITY_CURRENT_USER_ACCESS")
-+#undef WTS_SECURITY_CURRENT_USER_ACCESS
-+#pragma push_macro("WTS_SECURITY_ALL_ACCESS")
-+#undef WTS_SECURITY_ALL_ACCESS
-+#pragma push_macro("WTS_SECURITY_QUERY_INFORMATION")
-+#undef WTS_SECURITY_QUERY_INFORMATION
-+#pragma push_macro("WTS_SECURITY_SET_INFORMATION")
-+#undef WTS_SECURITY_SET_INFORMATION
-+#pragma push_macro("WTS_SECURITY_RESET")
-+#undef WTS_SECURITY_RESET
-+#pragma push_macro("WTS_SECURITY_VIRTUAL_CHANNELS")
-+#undef WTS_SECURITY_VIRTUAL_CHANNELS
-+#pragma push_macro("WTS_SECURITY_REMOTE_CONTROL")
-+#undef WTS_SECURITY_REMOTE_CONTROL
-+#pragma push_macro("WTS_SECURITY_LOGON")
-+#undef WTS_SECURITY_LOGON
-+#pragma push_macro("WTS_SECURITY_LOGOFF")
-+#undef WTS_SECURITY_LOGOFF
-+#pragma push_macro("WTS_SECURITY_MESSAGE")
-+#undef WTS_SECURITY_MESSAGE
-+#pragma push_macro("WTS_SECURITY_CONNECT")
-+#undef WTS_SECURITY_CONNECT
-+#pragma push_macro("WTS_SECURITY_DISCONNECT")
-+#undef WTS_SECURITY_DISCONNECT
-+#pragma push_macro("WTS_SECURITY_GUEST_ACCESS")
-+#undef WTS_SECURITY_GUEST_ACCESS
-+enum [[clang::flag_enum]] WTS_SECURITY_FLAGS : unsigned int
-+{
-+    WTS_SECURITY_CURRENT_GUEST_ACCESS = 72U,
-+    WTS_SECURITY_USER_ACCESS = 329U,
-+    WTS_SECURITY_CURRENT_USER_ACCESS = 590U,
-+    WTS_SECURITY_ALL_ACCESS = 983999U,
-+    WTS_SECURITY_QUERY_INFORMATION = 1U,
-+    WTS_SECURITY_SET_INFORMATION = 2U,
-+    WTS_SECURITY_RESET = 4U,
-+    WTS_SECURITY_VIRTUAL_CHANNELS = 8U,
-+    WTS_SECURITY_REMOTE_CONTROL = 16U,
-+    WTS_SECURITY_LOGON = 32U,
-+    WTS_SECURITY_LOGOFF = 64U,
-+    WTS_SECURITY_MESSAGE = 128U,
-+    WTS_SECURITY_CONNECT = 256U,
-+    WTS_SECURITY_DISCONNECT = 512U,
-+    WTS_SECURITY_GUEST_ACCESS = 32U,
-+};
-+#pragma pop_macro("WTS_SECURITY_GUEST_ACCESS")
-+#pragma pop_macro("WTS_SECURITY_DISCONNECT")
-+#pragma pop_macro("WTS_SECURITY_CONNECT")
-+#pragma pop_macro("WTS_SECURITY_MESSAGE")
-+#pragma pop_macro("WTS_SECURITY_LOGOFF")
-+#pragma pop_macro("WTS_SECURITY_LOGON")
-+#pragma pop_macro("WTS_SECURITY_REMOTE_CONTROL")
-+#pragma pop_macro("WTS_SECURITY_VIRTUAL_CHANNELS")
-+#pragma pop_macro("WTS_SECURITY_RESET")
-+#pragma pop_macro("WTS_SECURITY_SET_INFORMATION")
-+#pragma pop_macro("WTS_SECURITY_QUERY_INFORMATION")
-+#pragma pop_macro("WTS_SECURITY_ALL_ACCESS")
-+#pragma pop_macro("WTS_SECURITY_CURRENT_USER_ACCESS")
-+#pragma pop_macro("WTS_SECURITY_USER_ACCESS")
-+#pragma pop_macro("WTS_SECURITY_CURRENT_GUEST_ACCESS")
-+#endif
 +
  #endif  /* !_INC_WTSAPI */
  

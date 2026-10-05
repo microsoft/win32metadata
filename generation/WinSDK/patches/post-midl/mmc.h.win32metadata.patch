@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
-index 8553834c8a..7d538f248e 100644
+index 8553834c8a..04a4883281 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/MMC.h
 @@ -1,3 +1,4 @@
@@ -52,170 +52,7 @@ index 8553834c8a..7d538f248e 100644
      IHeaderCtrl : public IUnknown
      {
      public:
-@@ -2112,6 +2113,71 @@ EXTERN_C const IID IID_IHeaderCtrl;
- /* [local] */ 
- 
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_SPECIAL")
-+#undef CCM_INSERTIONPOINTID_MASK_SPECIAL
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_SHARED")
-+#undef CCM_INSERTIONPOINTID_MASK_SHARED
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_CREATE_PRIMARY")
-+#undef CCM_INSERTIONPOINTID_MASK_CREATE_PRIMARY
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_ADD_PRIMARY")
-+#undef CCM_INSERTIONPOINTID_MASK_ADD_PRIMARY
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_ADD_3RDPARTY")
-+#undef CCM_INSERTIONPOINTID_MASK_ADD_3RDPARTY
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_RESERVED")
-+#undef CCM_INSERTIONPOINTID_MASK_RESERVED
-+#pragma push_macro("CCM_INSERTIONPOINTID_MASK_FLAGINDEX")
-+#undef CCM_INSERTIONPOINTID_MASK_FLAGINDEX
-+#pragma push_macro("CCM_INSERTIONPOINTID_PRIMARY_TOP")
-+#undef CCM_INSERTIONPOINTID_PRIMARY_TOP
-+#pragma push_macro("CCM_INSERTIONPOINTID_PRIMARY_NEW")
-+#undef CCM_INSERTIONPOINTID_PRIMARY_NEW
-+#pragma push_macro("CCM_INSERTIONPOINTID_PRIMARY_TASK")
-+#undef CCM_INSERTIONPOINTID_PRIMARY_TASK
-+#pragma push_macro("CCM_INSERTIONPOINTID_PRIMARY_VIEW")
-+#undef CCM_INSERTIONPOINTID_PRIMARY_VIEW
-+#pragma push_macro("CCM_INSERTIONPOINTID_PRIMARY_HELP")
-+#undef CCM_INSERTIONPOINTID_PRIMARY_HELP
-+#pragma push_macro("CCM_INSERTIONPOINTID_3RDPARTY_NEW")
-+#undef CCM_INSERTIONPOINTID_3RDPARTY_NEW
-+#pragma push_macro("CCM_INSERTIONPOINTID_3RDPARTY_TASK")
-+#undef CCM_INSERTIONPOINTID_3RDPARTY_TASK
-+#pragma push_macro("CCM_INSERTIONPOINTID_ROOT_MENU")
-+#undef CCM_INSERTIONPOINTID_ROOT_MENU
-+enum CCM_INSERTIONPOINTID : int
-+{
-+    CCM_INSERTIONPOINTID_MASK_SPECIAL = -65536,
-+    CCM_INSERTIONPOINTID_MASK_SHARED = -2147483648,
-+    CCM_INSERTIONPOINTID_MASK_CREATE_PRIMARY = 1073741824,
-+    CCM_INSERTIONPOINTID_MASK_ADD_PRIMARY = 536870912,
-+    CCM_INSERTIONPOINTID_MASK_ADD_3RDPARTY = 268435456,
-+    CCM_INSERTIONPOINTID_MASK_RESERVED = 268369920,
-+    CCM_INSERTIONPOINTID_MASK_FLAGINDEX = 31,
-+    CCM_INSERTIONPOINTID_PRIMARY_TOP = -1610612736,
-+    CCM_INSERTIONPOINTID_PRIMARY_NEW = -1610612735,
-+    CCM_INSERTIONPOINTID_PRIMARY_TASK = -1610612734,
-+    CCM_INSERTIONPOINTID_PRIMARY_VIEW = -1610612733,
-+    CCM_INSERTIONPOINTID_PRIMARY_HELP = -1610612732,
-+    CCM_INSERTIONPOINTID_3RDPARTY_NEW = -1879048191,
-+    CCM_INSERTIONPOINTID_3RDPARTY_TASK = -1879048190,
-+    CCM_INSERTIONPOINTID_ROOT_MENU = -2147483648,
-+};
-+#pragma pop_macro("CCM_INSERTIONPOINTID_ROOT_MENU")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_3RDPARTY_TASK")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_3RDPARTY_NEW")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_PRIMARY_HELP")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_PRIMARY_VIEW")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_PRIMARY_TASK")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_PRIMARY_NEW")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_PRIMARY_TOP")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_FLAGINDEX")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_RESERVED")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_ADD_3RDPARTY")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_ADD_PRIMARY")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_CREATE_PRIMARY")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_SHARED")
-+#pragma pop_macro("CCM_INSERTIONPOINTID_MASK_SPECIAL")
-+#else
- enum __MIDL___MIDL_itf_mmc_0000_0006_0001
-     {
-         CCM_INSERTIONPOINTID_MASK_SPECIAL	= 0xffff0000,
-@@ -2130,7 +2196,29 @@ enum __MIDL___MIDL_itf_mmc_0000_0006_0001
-         CCM_INSERTIONPOINTID_3RDPARTY_TASK	= 0x90000002,
-         CCM_INSERTIONPOINTID_ROOT_MENU	= 0x80000000
-     } ;
-+#endif
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("CCM_INSERTIONALLOWED_TOP")
-+#undef CCM_INSERTIONALLOWED_TOP
-+#pragma push_macro("CCM_INSERTIONALLOWED_NEW")
-+#undef CCM_INSERTIONALLOWED_NEW
-+#pragma push_macro("CCM_INSERTIONALLOWED_TASK")
-+#undef CCM_INSERTIONALLOWED_TASK
-+#pragma push_macro("CCM_INSERTIONALLOWED_VIEW")
-+#undef CCM_INSERTIONALLOWED_VIEW
-+enum CCM_INSERTIONALLOWED : int
-+{
-+    CCM_INSERTIONALLOWED_TOP = 1,
-+    CCM_INSERTIONALLOWED_NEW = 2,
-+    CCM_INSERTIONALLOWED_TASK = 4,
-+    CCM_INSERTIONALLOWED_VIEW = 8,
-+};
-+#pragma pop_macro("CCM_INSERTIONALLOWED_VIEW")
-+#pragma pop_macro("CCM_INSERTIONALLOWED_TASK")
-+#pragma pop_macro("CCM_INSERTIONALLOWED_NEW")
-+#pragma pop_macro("CCM_INSERTIONALLOWED_TOP")
-+#else
- enum __MIDL___MIDL_itf_mmc_0000_0006_0002
-     {
-         CCM_INSERTIONALLOWED_TOP	= ( 1L << (( CCM_INSERTIONPOINTID_PRIMARY_TOP & CCM_INSERTIONPOINTID_MASK_FLAGINDEX ) ) ) ,
-@@ -2138,12 +2226,52 @@ enum __MIDL___MIDL_itf_mmc_0000_0006_0002
-         CCM_INSERTIONALLOWED_TASK	= ( 1L << (( CCM_INSERTIONPOINTID_PRIMARY_TASK & CCM_INSERTIONPOINTID_MASK_FLAGINDEX ) ) ) ,
-         CCM_INSERTIONALLOWED_VIEW	= ( 1L << (( CCM_INSERTIONPOINTID_PRIMARY_VIEW & CCM_INSERTIONPOINTID_MASK_FLAGINDEX ) ) ) 
-     } ;
-+#endif
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("CCM_COMMANDID_MASK_RESERVED")
-+#undef CCM_COMMANDID_MASK_RESERVED
-+enum CCM_COMMANDID_MASK_CONSTANTS : unsigned int
-+{
-+    CCM_COMMANDID_MASK_RESERVED = 4294901760U,
-+};
-+#pragma pop_macro("CCM_COMMANDID_MASK_RESERVED")
-+#else
- enum __MIDL___MIDL_itf_mmc_0000_0006_0003
-     {
-         CCM_COMMANDID_MASK_RESERVED	= 0xffff0000
-     } ;
-+#endif
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("CCM_SPECIAL_SEPARATOR")
-+#undef CCM_SPECIAL_SEPARATOR
-+#pragma push_macro("CCM_SPECIAL_SUBMENU")
-+#undef CCM_SPECIAL_SUBMENU
-+#pragma push_macro("CCM_SPECIAL_DEFAULT_ITEM")
-+#undef CCM_SPECIAL_DEFAULT_ITEM
-+#pragma push_macro("CCM_SPECIAL_INSERTION_POINT")
-+#undef CCM_SPECIAL_INSERTION_POINT
-+#pragma push_macro("CCM_SPECIAL_TESTONLY")
-+#undef CCM_SPECIAL_TESTONLY
-+#pragma push_macro("CCM_SPECIAL_ELEVATION_ICON")
-+#undef CCM_SPECIAL_ELEVATION_ICON
-+enum CCM_SPECIAL : int
-+{
-+    CCM_SPECIAL_SEPARATOR = 1,
-+    CCM_SPECIAL_SUBMENU = 2,
-+    CCM_SPECIAL_DEFAULT_ITEM = 4,
-+    CCM_SPECIAL_INSERTION_POINT = 8,
-+    CCM_SPECIAL_TESTONLY = 16,
-+    CCM_SPECIAL_ELEVATION_ICON = 32,
-+};
-+#pragma pop_macro("CCM_SPECIAL_ELEVATION_ICON")
-+#pragma pop_macro("CCM_SPECIAL_TESTONLY")
-+#pragma pop_macro("CCM_SPECIAL_INSERTION_POINT")
-+#pragma pop_macro("CCM_SPECIAL_DEFAULT_ITEM")
-+#pragma pop_macro("CCM_SPECIAL_SUBMENU")
-+#pragma pop_macro("CCM_SPECIAL_SEPARATOR")
-+#else
- enum __MIDL___MIDL_itf_mmc_0000_0006_0004
-     {
-         CCM_SPECIAL_SEPARATOR	= 0x1,
-@@ -2153,6 +2281,7 @@ enum __MIDL___MIDL_itf_mmc_0000_0006_0004
-         CCM_SPECIAL_TESTONLY	= 0x10,
-         CCM_SPECIAL_ELEVATION_ICON	= 0x20
-     } ;
-+#endif
- 
- 
- extern RPC_IF_HANDLE __MIDL_itf_mmc_0000_0006_v0_0_c_ifspec;
-@@ -2169,7 +2298,7 @@ EXTERN_C const IID IID_IContextMenuCallback;
+@@ -2169,7 +2170,7 @@ EXTERN_C const IID IID_IContextMenuCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -224,7 +61,7 @@ index 8553834c8a..7d538f248e 100644
      IContextMenuCallback : public IUnknown
      {
      public:
-@@ -2256,7 +2385,7 @@ EXTERN_C const IID IID_IContextMenuProvider;
+@@ -2256,7 +2257,7 @@ EXTERN_C const IID IID_IContextMenuProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -233,7 +70,7 @@ index 8553834c8a..7d538f248e 100644
      IContextMenuProvider : public IContextMenuCallback
      {
      public:
-@@ -2404,7 +2533,7 @@ EXTERN_C const IID IID_IExtendContextMenu;
+@@ -2404,7 +2405,7 @@ EXTERN_C const IID IID_IExtendContextMenu;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -242,7 +79,7 @@ index 8553834c8a..7d538f248e 100644
      IExtendContextMenu : public IUnknown
      {
      public:
-@@ -2531,7 +2660,7 @@ EXTERN_C const IID IID_IImageList;
+@@ -2531,7 +2532,7 @@ EXTERN_C const IID IID_IImageList;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -251,7 +88,7 @@ index 8553834c8a..7d538f248e 100644
      IImageList : public IUnknown
      {
      public:
-@@ -2599,7 +2728,7 @@ EXTERN_C const IID IID_IImageList;
+@@ -2599,7 +2600,7 @@ EXTERN_C const IID IID_IImageList;
          END_INTERFACE
      } IImageListVtbl;
  
@@ -260,7 +97,7 @@ index 8553834c8a..7d538f248e 100644
      {
          CONST_VTBL struct IImageListVtbl *lpVtbl;
      };
-@@ -2647,7 +2776,7 @@ EXTERN_C const IID IID_IResultData;
+@@ -2647,7 +2648,7 @@ EXTERN_C const IID IID_IResultData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -269,7 +106,7 @@ index 8553834c8a..7d538f248e 100644
      IResultData : public IUnknown
      {
      public:
-@@ -2948,7 +3077,7 @@ EXTERN_C const IID IID_IConsoleNameSpace;
+@@ -2948,7 +2949,7 @@ EXTERN_C const IID IID_IConsoleNameSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -278,7 +115,7 @@ index 8553834c8a..7d538f248e 100644
      IConsoleNameSpace : public IUnknown
      {
      public:
-@@ -3141,7 +3270,7 @@ EXTERN_C const IID IID_IConsoleNameSpace2;
+@@ -3141,7 +3142,7 @@ EXTERN_C const IID IID_IConsoleNameSpace2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -287,7 +124,7 @@ index 8553834c8a..7d538f248e 100644
      IConsoleNameSpace2 : public IConsoleNameSpace
      {
      public:
-@@ -3316,7 +3445,7 @@ EXTERN_C const IID IID_IConsoleNameSpace2;
+@@ -3316,7 +3317,7 @@ EXTERN_C const IID IID_IConsoleNameSpace2;
  /* [local] */ 
  
  
@@ -296,7 +133,7 @@ index 8553834c8a..7d538f248e 100644
  
  
  
-@@ -3334,7 +3463,7 @@ EXTERN_C const IID IID_IPropertySheetCallback;
+@@ -3334,7 +3335,7 @@ EXTERN_C const IID IID_IPropertySheetCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -305,7 +142,7 @@ index 8553834c8a..7d538f248e 100644
      IPropertySheetCallback : public IUnknown
      {
      public:
-@@ -3434,7 +3563,7 @@ EXTERN_C const IID IID_IPropertySheetProvider;
+@@ -3434,7 +3435,7 @@ EXTERN_C const IID IID_IPropertySheetProvider;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -314,7 +151,7 @@ index 8553834c8a..7d538f248e 100644
      IPropertySheetProvider : public IUnknown
      {
      public:
-@@ -3601,7 +3730,7 @@ EXTERN_C const IID IID_IExtendPropertySheet;
+@@ -3601,7 +3602,7 @@ EXTERN_C const IID IID_IExtendPropertySheet;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -323,7 +160,7 @@ index 8553834c8a..7d538f248e 100644
      IExtendPropertySheet : public IUnknown
      {
      public:
-@@ -3709,7 +3838,7 @@ EXTERN_C const IID IID_IControlbar;
+@@ -3709,7 +3710,7 @@ EXTERN_C const IID IID_IControlbar;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -332,7 +169,7 @@ index 8553834c8a..7d538f248e 100644
      IControlbar : public IUnknown
      {
      public:
-@@ -3834,7 +3963,7 @@ EXTERN_C const IID IID_IExtendControlbar;
+@@ -3834,7 +3835,7 @@ EXTERN_C const IID IID_IExtendControlbar;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -341,7 +178,7 @@ index 8553834c8a..7d538f248e 100644
      IExtendControlbar : public IUnknown
      {
      public:
-@@ -3942,7 +4071,7 @@ EXTERN_C const IID IID_IToolbar;
+@@ -3942,7 +3943,7 @@ EXTERN_C const IID IID_IToolbar;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -350,7 +187,7 @@ index 8553834c8a..7d538f248e 100644
      IToolbar : public IUnknown
      {
      public:
-@@ -4134,7 +4263,7 @@ EXTERN_C const IID IID_IConsoleVerb;
+@@ -4134,7 +4135,7 @@ EXTERN_C const IID IID_IConsoleVerb;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -359,7 +196,7 @@ index 8553834c8a..7d538f248e 100644
      IConsoleVerb : public IUnknown
      {
      public:
-@@ -4276,7 +4405,7 @@ EXTERN_C const IID IID_ISnapinAbout;
+@@ -4276,7 +4277,7 @@ EXTERN_C const IID IID_ISnapinAbout;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -368,7 +205,7 @@ index 8553834c8a..7d538f248e 100644
      ISnapinAbout : public IUnknown
      {
      public:
-@@ -4294,15 +4423,15 @@ EXTERN_C const IID IID_ISnapinAbout;
+@@ -4294,15 +4295,15 @@ EXTERN_C const IID IID_ISnapinAbout;
          
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSnapinImage( 
              /* [annotation][out] */ 
@@ -388,7 +225,7 @@ index 8553834c8a..7d538f248e 100644
              /* [annotation][out] */ 
              _Out_  COLORREF *cMask) = 0;
          
-@@ -4427,7 +4556,7 @@ EXTERN_C const IID IID_IMenuButton;
+@@ -4427,7 +4428,7 @@ EXTERN_C const IID IID_IMenuButton;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -397,7 +234,7 @@ index 8553834c8a..7d538f248e 100644
      IMenuButton : public IUnknown
      {
      public:
-@@ -4564,7 +4693,7 @@ EXTERN_C const IID IID_ISnapinHelp;
+@@ -4564,7 +4565,7 @@ EXTERN_C const IID IID_ISnapinHelp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -406,7 +243,7 @@ index 8553834c8a..7d538f248e 100644
      ISnapinHelp : public IUnknown
      {
      public:
-@@ -4660,7 +4789,7 @@ EXTERN_C const IID IID_IExtendPropertySheet2;
+@@ -4660,7 +4661,7 @@ EXTERN_C const IID IID_IExtendPropertySheet2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -415,7 +252,7 @@ index 8553834c8a..7d538f248e 100644
      IExtendPropertySheet2 : public IExtendPropertySheet
      {
      public:
-@@ -4668,11 +4797,11 @@ EXTERN_C const IID IID_IExtendPropertySheet2;
+@@ -4668,11 +4669,11 @@ EXTERN_C const IID IID_IExtendPropertySheet2;
              /* [annotation][in] */ 
              _In_  LPDATAOBJECT lpIDataObject,
              /* [annotation][out] */ 
@@ -430,7 +267,7 @@ index 8553834c8a..7d538f248e 100644
              /* [annotation][out] */ 
              _Out_  BOOL *bStretch) = 0;
          
-@@ -4786,7 +4915,7 @@ EXTERN_C const IID IID_IHeaderCtrl2;
+@@ -4786,7 +4787,7 @@ EXTERN_C const IID IID_IHeaderCtrl2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -439,7 +276,7 @@ index 8553834c8a..7d538f248e 100644
      IHeaderCtrl2 : public IHeaderCtrl
      {
      public:
-@@ -4983,7 +5112,7 @@ EXTERN_C const IID IID_ISnapinHelp2;
+@@ -4983,7 +4984,7 @@ EXTERN_C const IID IID_ISnapinHelp2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -448,7 +285,7 @@ index 8553834c8a..7d538f248e 100644
      ISnapinHelp2 : public ISnapinHelp
      {
      public:
-@@ -5154,7 +5283,7 @@ EXTERN_C const IID IID_IEnumTASK;
+@@ -5154,7 +5155,7 @@ EXTERN_C const IID IID_IEnumTASK;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -457,7 +294,7 @@ index 8553834c8a..7d538f248e 100644
      IEnumTASK : public IUnknown
      {
      public:
-@@ -5284,7 +5413,7 @@ EXTERN_C const IID IID_IExtendTaskPad;
+@@ -5284,7 +5285,7 @@ EXTERN_C const IID IID_IExtendTaskPad;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -466,7 +303,7 @@ index 8553834c8a..7d538f248e 100644
      IExtendTaskPad : public IUnknown
      {
      public:
-@@ -5468,7 +5597,7 @@ EXTERN_C const IID IID_IConsole2;
+@@ -5468,7 +5469,7 @@ EXTERN_C const IID IID_IConsole2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -475,7 +312,7 @@ index 8553834c8a..7d538f248e 100644
      IConsole2 : public IConsole
      {
      public:
-@@ -5693,7 +5822,7 @@ EXTERN_C const IID IID_IDisplayHelp;
+@@ -5693,7 +5694,7 @@ EXTERN_C const IID IID_IDisplayHelp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -484,7 +321,7 @@ index 8553834c8a..7d538f248e 100644
      IDisplayHelp : public IUnknown
      {
      public:
-@@ -5780,7 +5909,7 @@ EXTERN_C const IID IID_IRequiredExtensions;
+@@ -5780,7 +5781,7 @@ EXTERN_C const IID IID_IRequiredExtensions;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -493,7 +330,7 @@ index 8553834c8a..7d538f248e 100644
      IRequiredExtensions : public IUnknown
      {
      public:
-@@ -5889,7 +6018,7 @@ EXTERN_C const IID IID_IStringTable;
+@@ -5889,7 +5890,7 @@ EXTERN_C const IID IID_IStringTable;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -502,7 +339,7 @@ index 8553834c8a..7d538f248e 100644
      IStringTable : public IUnknown
      {
      public:
-@@ -6078,7 +6207,7 @@ typedef struct _MMC_COLUMN_DATA
+@@ -6078,7 +6079,7 @@ typedef struct _MMC_COLUMN_DATA
      ULONG_PTR ulReserved;
      } 	MMC_COLUMN_DATA;
  
@@ -511,7 +348,7 @@ index 8553834c8a..7d538f248e 100644
      {
      int cbSize;
      int nNumCols;
-@@ -6092,7 +6221,7 @@ typedef struct _MMC_SORT_DATA
+@@ -6092,7 +6093,7 @@ typedef struct _MMC_SORT_DATA
      ULONG_PTR ulReserved;
      } 	MMC_SORT_DATA;
  
@@ -520,7 +357,7 @@ index 8553834c8a..7d538f248e 100644
      {
      int cbSize;
      int nNumItems;
-@@ -6115,7 +6244,7 @@ EXTERN_C const IID IID_IColumnData;
+@@ -6115,7 +6116,7 @@ EXTERN_C const IID IID_IColumnData;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -529,7 +366,7 @@ index 8553834c8a..7d538f248e 100644
      IColumnData : public IUnknown
      {
      public:
-@@ -6269,7 +6398,7 @@ EXTERN_C const IID IID_IMessageView;
+@@ -6269,7 +6270,7 @@ EXTERN_C const IID IID_IMessageView;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -538,7 +375,7 @@ index 8553834c8a..7d538f248e 100644
      IMessageView : public IUnknown
      {
      public:
-@@ -6392,7 +6521,7 @@ typedef struct _RDCITEMHDR
+@@ -6392,7 +6393,7 @@ typedef struct _RDCITEMHDR
  
  #define	RDCI_ScopeItem	( 0x80000000 )
  
@@ -547,7 +384,7 @@ index 8553834c8a..7d538f248e 100644
      {
      DWORD cbSize;
      DWORD dwFlags;
-@@ -6418,7 +6547,7 @@ EXTERN_C const IID IID_IResultDataCompareEx;
+@@ -6418,7 +6419,7 @@ EXTERN_C const IID IID_IResultDataCompareEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -556,7 +393,7 @@ index 8553834c8a..7d538f248e 100644
      IResultDataCompareEx : public IUnknown
      {
      public:
-@@ -6609,7 +6738,7 @@ EXTERN_C const IID IID_IComponentData2;
+@@ -6609,7 +6610,7 @@ EXTERN_C const IID IID_IComponentData2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -565,7 +402,7 @@ index 8553834c8a..7d538f248e 100644
      IComponentData2 : public IComponentData
      {
      public:
-@@ -6778,7 +6907,7 @@ EXTERN_C const IID IID_IComponent2;
+@@ -6778,7 +6779,7 @@ EXTERN_C const IID IID_IComponent2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -574,7 +411,7 @@ index 8553834c8a..7d538f248e 100644
      IComponent2 : public IComponent
      {
      public:
-@@ -6987,7 +7116,7 @@ EXTERN_C const IID IID_IContextMenuCallback2;
+@@ -6987,7 +6988,7 @@ EXTERN_C const IID IID_IContextMenuCallback2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -583,7 +420,7 @@ index 8553834c8a..7d538f248e 100644
      IContextMenuCallback2 : public IUnknown
      {
      public:
-@@ -7074,7 +7203,7 @@ EXTERN_C const IID IID_IMMCVersionInfo;
+@@ -7074,7 +7075,7 @@ EXTERN_C const IID IID_IMMCVersionInfo;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -592,7 +429,7 @@ index 8553834c8a..7d538f248e 100644
      IMMCVersionInfo : public IUnknown
      {
      public:
-@@ -7192,7 +7321,7 @@ EXTERN_C const IID IID_IExtendView;
+@@ -7192,7 +7193,7 @@ EXTERN_C const IID IID_IExtendView;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -601,7 +438,7 @@ index 8553834c8a..7d538f248e 100644
      IExtendView : public IUnknown
      {
      public:
-@@ -7283,7 +7412,7 @@ EXTERN_C const IID IID_IViewExtensionCallback;
+@@ -7283,7 +7284,7 @@ EXTERN_C const IID IID_IViewExtensionCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -610,7 +447,7 @@ index 8553834c8a..7d538f248e 100644
      IViewExtensionCallback : public IUnknown
      {
      public:
-@@ -7370,7 +7499,7 @@ EXTERN_C const IID IID_IConsolePower;
+@@ -7370,7 +7371,7 @@ EXTERN_C const IID IID_IConsolePower;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -619,7 +456,7 @@ index 8553834c8a..7d538f248e 100644
      IConsolePower : public IUnknown
      {
      public:
-@@ -7474,7 +7603,7 @@ EXTERN_C const IID IID_IConsolePowerSink;
+@@ -7474,7 +7475,7 @@ EXTERN_C const IID IID_IConsolePowerSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -628,7 +465,7 @@ index 8553834c8a..7d538f248e 100644
      IConsolePowerSink : public IUnknown
      {
      public:
-@@ -7569,7 +7698,7 @@ EXTERN_C const IID IID_INodeProperties;
+@@ -7569,7 +7570,7 @@ EXTERN_C const IID IID_INodeProperties;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -637,7 +474,7 @@ index 8553834c8a..7d538f248e 100644
      INodeProperties : public IUnknown
      {
      public:
-@@ -7579,7 +7708,7 @@ EXTERN_C const IID IID_INodeProperties;
+@@ -7579,7 +7580,7 @@ EXTERN_C const IID IID_INodeProperties;
              /* [annotation][in] */ 
              _In_  BSTR szPropertyName,
              /* [annotation][out] */ 
@@ -646,7 +483,7 @@ index 8553834c8a..7d538f248e 100644
          
      };
      
-@@ -7664,7 +7793,7 @@ EXTERN_C const IID IID_IConsole3;
+@@ -7664,7 +7665,7 @@ EXTERN_C const IID IID_IConsole3;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -655,7 +492,7 @@ index 8553834c8a..7d538f248e 100644
      IConsole3 : public IConsole2
      {
      public:
-@@ -7891,7 +8020,7 @@ EXTERN_C const IID IID_IResultData2;
+@@ -7891,7 +7892,7 @@ EXTERN_C const IID IID_IResultData2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -664,7 +501,7 @@ index 8553834c8a..7d538f248e 100644
      IResultData2 : public IResultData
      {
      public:
-@@ -8168,10 +8297,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal(  __RPC__in unsigned long *, __R
+@@ -8168,10 +8169,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal(  __RPC__in unsigned long *, __R
  unsigned char * __RPC_USER  HBITMAP_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
  void                      __RPC_USER  HBITMAP_UserFree(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
  
@@ -679,7 +516,7 @@ index 8553834c8a..7d538f248e 100644
  
  unsigned long             __RPC_USER  HPALETTE_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
  unsigned char * __RPC_USER  HPALETTE_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
-@@ -8193,10 +8322,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal64(  __RPC__in unsigned long *, _
+@@ -8193,10 +8194,10 @@ unsigned char * __RPC_USER  HBITMAP_UserMarshal64(  __RPC__in unsigned long *, _
  unsigned char * __RPC_USER  HBITMAP_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HBITMAP * ); 
  void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned long *, __RPC__in HBITMAP * ); 
  
@@ -694,7 +531,7 @@ index 8553834c8a..7d538f248e 100644
  
  unsigned long             __RPC_USER  HPALETTE_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HPALETTE * ); 
  unsigned char * __RPC_USER  HPALETTE_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HPALETTE * ); 
-@@ -8214,6 +8343,11 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
+@@ -8214,6 +8215,11 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
  }
  #endif
  

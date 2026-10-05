@@ -6,4 +6,3 @@
 #include <sdkddkver.h>
 
 #include <windows.h>
-#include <atlthunk.h>

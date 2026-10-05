@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
-index 44285099cb..6c8831e66f 100644
+index 44285099cb..78d635e1f4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CommCtrl.h
 @@ -22,6 +22,7 @@
@@ -1229,7 +1229,7 @@ index 44285099cb..6c8831e66f 100644
      _In_ int ixOffset, _In_ int iyOffset);
  #endif
  
-@@ -7960,5 +7975,2089 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
+@@ -7960,5 +7975,2076 @@ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UI
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
@@ -1798,19 +1798,6 @@ index 44285099cb..6c8831e66f 100644
 +#pragma pop_macro("MCGIP_CALENDARCONTROL")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("I_GROUPIDCALLBACK")
-+#undef I_GROUPIDCALLBACK
-+#pragma push_macro("I_GROUPIDNONE")
-+#undef I_GROUPIDNONE
-+enum LVITEMA_GROUP_ID : int
-+{
-+    I_GROUPIDCALLBACK = -1,
-+    I_GROUPIDNONE = -2,
-+};
-+#pragma pop_macro("I_GROUPIDNONE")
-+#pragma pop_macro("I_GROUPIDCALLBACK")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("HICF_ACCELERATOR")

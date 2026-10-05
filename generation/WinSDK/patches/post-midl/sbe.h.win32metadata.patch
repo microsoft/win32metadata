@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h b/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
-index deb27eb916..7bacf95e94 100644
+index deb27eb916..4476cbc4be 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sbe.h
 @@ -222,6 +222,7 @@ extern "C"{
@@ -28,33 +28,7 @@ index deb27eb916..7bacf95e94 100644
          
      };
      
-@@ -350,11 +351,25 @@ EXTERN_C const IID IID_IStreamBufferInitialize;
- /* [local] */ 
- 
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("RECORDING_TYPE_CONTENT")
-+#undef RECORDING_TYPE_CONTENT
-+#pragma push_macro("RECORDING_TYPE_REFERENCE")
-+#undef RECORDING_TYPE_REFERENCE
-+enum RECORDING_TYPE : int
-+{
-+    RECORDING_TYPE_CONTENT = 0,
-+    RECORDING_TYPE_REFERENCE = 1,
-+};
-+#pragma pop_macro("RECORDING_TYPE_REFERENCE")
-+#pragma pop_macro("RECORDING_TYPE_CONTENT")
-+#else
- enum __MIDL___MIDL_itf_sbe_0000_0001_0001
-     {
-         RECORDING_TYPE_CONTENT	= 0,
-         RECORDING_TYPE_REFERENCE	= ( RECORDING_TYPE_CONTENT + 1 ) 
-     } ;
-+#endif
- 
- 
- extern RPC_IF_HANDLE __MIDL_itf_sbe_0000_0001_v0_0_c_ifspec;
-@@ -371,7 +386,7 @@ EXTERN_C const IID IID_IStreamBufferSink;
+@@ -371,7 +372,7 @@ EXTERN_C const IID IID_IStreamBufferSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -63,7 +37,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferSink : public IUnknown
      {
      public:
-@@ -488,7 +503,7 @@ EXTERN_C const IID IID_IStreamBufferSink2;
+@@ -488,7 +489,7 @@ EXTERN_C const IID IID_IStreamBufferSink2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -72,7 +46,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferSink2 : public IStreamBufferSink
      {
      public:
-@@ -601,7 +616,7 @@ EXTERN_C const IID IID_IStreamBufferSink3;
+@@ -601,7 +602,7 @@ EXTERN_C const IID IID_IStreamBufferSink3;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -81,7 +55,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferSink3 : public IStreamBufferSink2
      {
      public:
-@@ -726,7 +741,7 @@ EXTERN_C const IID IID_IStreamBufferSource;
+@@ -726,7 +727,7 @@ EXTERN_C const IID IID_IStreamBufferSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -90,7 +64,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferSource : public IUnknown
      {
      public:
-@@ -813,7 +828,7 @@ EXTERN_C const IID IID_IStreamBufferRecordControl;
+@@ -813,7 +814,7 @@ EXTERN_C const IID IID_IStreamBufferRecordControl;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -99,7 +73,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferRecordControl : public IUnknown
      {
      public:
-@@ -934,7 +949,7 @@ EXTERN_C const IID IID_IStreamBufferRecComp;
+@@ -934,7 +935,7 @@ EXTERN_C const IID IID_IStreamBufferRecComp;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -108,7 +82,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferRecComp : public IUnknown
      {
      public:
-@@ -1201,7 +1216,7 @@ EXTERN_C const IID IID_IStreamBufferRecordingAttribute;
+@@ -1201,7 +1202,7 @@ EXTERN_C const IID IID_IStreamBufferRecordingAttribute;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -117,7 +91,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferRecordingAttribute : public IUnknown
      {
      public:
-@@ -1410,7 +1425,7 @@ EXTERN_C const IID IID_IEnumStreamBufferRecordingAttrib;
+@@ -1410,7 +1411,7 @@ EXTERN_C const IID IID_IEnumStreamBufferRecordingAttrib;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -126,7 +100,7 @@ index deb27eb916..7bacf95e94 100644
      IEnumStreamBufferRecordingAttrib : public IUnknown
      {
      public:
-@@ -1538,7 +1553,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure;
+@@ -1538,7 +1539,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -135,7 +109,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferConfigure : public IUnknown
      {
      public:
-@@ -1698,7 +1713,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure2;
+@@ -1698,7 +1699,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -144,7 +118,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferConfigure2 : public IStreamBufferConfigure
      {
      public:
-@@ -1892,7 +1907,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
+@@ -1892,7 +1893,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("7E2D2A1E-7192-4bd7-80C1-061FD1D10402")
@@ -153,7 +127,7 @@ index deb27eb916..7bacf95e94 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE SetStartRecConfig( 
-@@ -2031,7 +2046,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
+@@ -2031,7 +2032,7 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
          END_INTERFACE
      } IStreamBufferConfigure3Vtbl;
  
@@ -162,7 +136,7 @@ index deb27eb916..7bacf95e94 100644
      {
          CONST_VTBL struct IStreamBufferConfigure3Vtbl *lpVtbl;
      };
-@@ -2117,7 +2132,7 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
+@@ -2117,7 +2118,7 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -171,7 +145,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferMediaSeeking : public IMediaSeeking
      {
      public:
-@@ -2361,7 +2376,7 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
+@@ -2361,7 +2362,7 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -180,7 +154,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferMediaSeeking2 : public IStreamBufferMediaSeeking
      {
      public:
-@@ -2640,7 +2655,7 @@ EXTERN_C const IID IID_IStreamBufferDataCounters;
+@@ -2640,7 +2641,7 @@ EXTERN_C const IID IID_IStreamBufferDataCounters;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -189,7 +163,7 @@ index deb27eb916..7bacf95e94 100644
      IStreamBufferDataCounters : public IUnknown
      {
      public:
-@@ -2831,7 +2846,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
+@@ -2831,7 +2832,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("caede759-b6b1-11db-a578-0018f3fa24c6")
@@ -198,7 +172,7 @@ index deb27eb916..7bacf95e94 100644
      {
      public:
          virtual HRESULT STDMETHODCALLTYPE GetEvent( 
-@@ -2900,7 +2915,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
+@@ -2900,7 +2901,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
          END_INTERFACE
      } ISBE2GlobalEventVtbl;
  
@@ -207,7 +181,7 @@ index deb27eb916..7bacf95e94 100644
      {
          CONST_VTBL struct ISBE2GlobalEventVtbl *lpVtbl;
      };
-@@ -2945,7 +2960,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent2;
+@@ -2945,7 +2946,7 @@ EXTERN_C const IID IID_ISBE2GlobalEvent2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -216,7 +190,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2GlobalEvent2 : public ISBE2GlobalEvent
      {
      public:
-@@ -3088,7 +3103,7 @@ EXTERN_C const IID IID_ISBE2SpanningEvent;
+@@ -3088,7 +3089,7 @@ EXTERN_C const IID IID_ISBE2SpanningEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -225,7 +199,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2SpanningEvent : public IUnknown
      {
      public:
-@@ -3187,7 +3202,7 @@ EXTERN_C const IID IID_ISBE2Crossbar;
+@@ -3187,7 +3188,7 @@ EXTERN_C const IID IID_ISBE2Crossbar;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -234,7 +208,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2Crossbar : public IUnknown
      {
      public:
-@@ -3321,7 +3336,7 @@ EXTERN_C const IID IID_ISBE2StreamMap;
+@@ -3321,7 +3322,7 @@ EXTERN_C const IID IID_ISBE2StreamMap;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -243,7 +217,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2StreamMap : public IUnknown
      {
      public:
-@@ -3434,7 +3449,7 @@ EXTERN_C const IID IID_ISBE2EnumStream;
+@@ -3434,7 +3435,7 @@ EXTERN_C const IID IID_ISBE2EnumStream;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -252,7 +226,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2EnumStream : public IUnknown
      {
      public:
-@@ -3562,7 +3577,7 @@ EXTERN_C const IID IID_ISBE2MediaTypeProfile;
+@@ -3562,7 +3563,7 @@ EXTERN_C const IID IID_ISBE2MediaTypeProfile;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -261,7 +235,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2MediaTypeProfile : public IUnknown
      {
      public:
-@@ -3692,7 +3707,7 @@ EXTERN_C const IID IID_ISBE2FileScan;
+@@ -3692,7 +3693,7 @@ EXTERN_C const IID IID_ISBE2FileScan;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -270,7 +244,7 @@ index deb27eb916..7bacf95e94 100644
      ISBE2FileScan : public IUnknown
      {
      public:
-@@ -3786,6 +3801,8 @@ extern RPC_IF_HANDLE __MIDL_itf_sbe_0000_0023_v0_0_s_ifspec;
+@@ -3786,6 +3787,8 @@ extern RPC_IF_HANDLE __MIDL_itf_sbe_0000_0023_v0_0_s_ifspec;
  }
  #endif
  

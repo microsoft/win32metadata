@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
-index dded3769a1..981bd731dc 100644
+index dded3769a1..103a563623 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wingdi.h
 @@ -1,3 +1,4 @@
@@ -1059,23 +1059,7 @@ index dded3769a1..981bd731dc 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -4730,7 +4731,15 @@ typedef HRESULT (WINAPI *DDRAWMARSHCALLBACKMARSHAL)(_In_ HGDIOBJ hGdiObj, _In_ L
- typedef HRESULT (WINAPI *DDRAWMARSHCALLBACKUNMARSHAL)(_In_ LPVOID pData, _Out_ HDC *phdc, _Out_ LPVOID *ppDDrawRef);
- typedef HRESULT (WINAPI *DDRAWMARSHCALLBACKRELEASE)(_In_ LPVOID pDDrawRef);
- 
-+#endif
-+#endif
-+#endif
-+#if (defined(WIN32METADATA) && !defined(GDIREGISTERDDRAWPACKETVERSION)) || (((defined(COMBOX_SANDBOX))) && (((_WIN32_WINNT >= 0x0600))) && ((WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP))))
- #define GDIREGISTERDDRAWPACKETVERSION   0x1
-+#endif
-+#ifdef  COMBOX_SANDBOX
-+#if (_WIN32_WINNT >= 0x0600)
-+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
- 
- typedef struct {
-     DWORD                       dwSize;
-@@ -4826,7 +4835,7 @@ typedef struct _BLENDFUNCTION
+@@ -4826,7 +4827,7 @@ typedef struct _BLENDFUNCTION
  
  #define AC_SRC_ALPHA                0x01
  
@@ -1084,7 +1068,7 @@ index dded3769a1..981bd731dc 100644
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
      _In_ int yoriginDest,
-@@ -4839,7 +4848,7 @@ WINGDIAPI BOOL WINAPI AlphaBlend(
+@@ -4839,7 +4840,7 @@ WINGDIAPI BOOL WINAPI AlphaBlend(
      _In_ int hSrc,
      _In_ BLENDFUNCTION ftn);
  
@@ -1093,7 +1077,7 @@ index dded3769a1..981bd731dc 100644
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
      _In_ int yoriginDest,
-@@ -4862,7 +4871,7 @@ WINGDIAPI BOOL WINAPI TransparentBlt(
+@@ -4862,7 +4863,7 @@ WINGDIAPI BOOL WINAPI TransparentBlt(
  #define GRADIENT_FILL_TRIANGLE  0x00000002
  #define GRADIENT_FILL_OP_FLAG   0x000000ff
  
@@ -1102,7 +1086,7 @@ index dded3769a1..981bd731dc 100644
  BOOL
  WINAPI
  GradientFill(
-@@ -4871,7 +4880,7 @@ GradientFill(
+@@ -4871,7 +4872,7 @@ GradientFill(
      _In_ ULONG nVertex,
      _In_ PVOID pMesh,
      _In_ ULONG nMesh,
@@ -1111,7 +1095,7 @@ index dded3769a1..981bd731dc 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4885,17 +4894,17 @@ GradientFill(
+@@ -4885,17 +4886,17 @@ GradientFill(
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  
@@ -1133,7 +1117,7 @@ index dded3769a1..981bd731dc 100644
  
  #endif
  
-@@ -4903,50 +4912,50 @@ WINGDIAPI BOOL  WINAPI GdiGradientFill( _In_ HDC hdc,
+@@ -4903,50 +4904,50 @@ WINGDIAPI BOOL  WINAPI GdiGradientFill( _In_ HDC hdc,
  
  #ifndef NOMETAFILE
  
@@ -1198,7 +1182,7 @@ index dded3769a1..981bd731dc 100644
                                                      _In_ UINT cchBuffer,
                                                      _Out_writes_opt_(cchBuffer) LPWSTR lpDescription);
  #ifdef UNICODE
-@@ -4954,42 +4963,42 @@ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
+@@ -4954,42 +4955,42 @@ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
  #else
  #define GetEnhMetaFileDescription  GetEnhMetaFileDescriptionA
  #endif // !UNICODE
@@ -1252,7 +1236,7 @@ index dded3769a1..981bd731dc 100644
  #ifdef UNICODE
  #define GetTextMetrics  GetTextMetricsW
  #else
-@@ -5029,22 +5038,22 @@ typedef struct tagDIBSECTION {
+@@ -5029,22 +5030,22 @@ typedef struct tagDIBSECTION {
  } DIBSECTION, FAR *LPDIBSECTION, *PDIBSECTION;
  
  
@@ -1283,7 +1267,7 @@ index dded3769a1..981bd731dc 100644
      _When_((pbmi->bmiHeader.biBitCount != 0), _Outptr_result_bytebuffer_(_Inexpressible_(GDI_DIBSIZE((pbmi->bmiHeader)))))
      _When_((pbmi->bmiHeader.biBitCount == 0), _Outptr_result_bytebuffer_((pbmi->bmiHeader).biSizeImage))
                      VOID            **ppvBits,
-@@ -5052,12 +5061,12 @@ WINGDIAPI _Success_(return != NULL) HBITMAP WINAPI CreateDIBSection(
+@@ -5052,12 +5053,12 @@ WINGDIAPI _Success_(return != NULL) HBITMAP WINAPI CreateDIBSection(
      _In_            DWORD             offset);
  
  
@@ -1298,7 +1282,7 @@ index dded3769a1..981bd731dc 100644
                                          _In_ UINT iStart,
                                          _In_ UINT cEntries,
                                          _In_reads_(cEntries) CONST RGBQUAD *prgbq);
-@@ -5112,9 +5121,9 @@ typedef struct  tagCOLORADJUSTMENT {
+@@ -5112,9 +5113,9 @@ typedef struct  tagCOLORADJUSTMENT {
      SHORT  caRedGreenTint;
  } COLORADJUSTMENT, *PCOLORADJUSTMENT, FAR *LPCOLORADJUSTMENT;
  
@@ -1311,7 +1295,7 @@ index dded3769a1..981bd731dc 100644
  
  #ifdef STRICT
  typedef BOOL (CALLBACK* ABORTPROC)( _In_ HDC, _In_ int);
-@@ -5122,7 +5131,7 @@ typedef BOOL (CALLBACK* ABORTPROC)( _In_ HDC, _In_ int);
+@@ -5122,7 +5123,7 @@ typedef BOOL (CALLBACK* ABORTPROC)( _In_ HDC, _In_ int);
  typedef FARPROC ABORTPROC;
  #endif
  
@@ -1320,7 +1304,7 @@ index dded3769a1..981bd731dc 100644
      int     cbSize;
      LPCSTR   lpszDocName;
      LPCSTR   lpszOutput;
-@@ -5131,7 +5140,7 @@ typedef struct _DOCINFOA {
+@@ -5131,7 +5132,7 @@ typedef struct _DOCINFOA {
      DWORD    fwType;
  #endif /* WINVER */
  } DOCINFOA, *LPDOCINFOA;
@@ -1329,7 +1313,7 @@ index dded3769a1..981bd731dc 100644
      int     cbSize;
      LPCWSTR  lpszDocName;
      LPCWSTR  lpszOutput;
-@@ -5153,45 +5162,45 @@ typedef LPDOCINFOA LPDOCINFO;
+@@ -5153,45 +5154,45 @@ typedef LPDOCINFOA LPDOCINFO;
  #define DI_ROPS_READ_DESTINATION    0x00000002
  #endif /* WINVER >= 0x0400 */
  
@@ -1404,7 +1388,7 @@ index dded3769a1..981bd731dc 100644
  #ifdef UNICODE
  #define GetObject  GetObjectW
  #else
-@@ -5220,55 +5229,55 @@ GetObject(
+@@ -5220,55 +5221,55 @@ GetObject(
  #endif  /* _M_CEE */
  
  
@@ -1492,7 +1476,7 @@ index dded3769a1..981bd731dc 100644
  #ifdef UNICODE
  #define GetTextFace  GetTextFaceW
  #else
-@@ -5283,10 +5292,10 @@ typedef struct tagKERNINGPAIR {
+@@ -5283,10 +5284,10 @@ typedef struct tagKERNINGPAIR {
     int  iKernAmount;
  } KERNINGPAIR, *LPKERNINGPAIR;
  
@@ -1505,7 +1489,7 @@ index dded3769a1..981bd731dc 100644
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
  #ifdef UNICODE
-@@ -5296,13 +5305,13 @@ WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
+@@ -5296,13 +5297,13 @@ WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
  #endif // !UNICODE
  
  
@@ -1524,7 +1508,7 @@ index dded3769a1..981bd731dc 100644
  
  #if(WINVER >= 0x0400)
  
-@@ -5319,17 +5328,17 @@ typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
+@@ -5319,17 +5320,17 @@ typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
  #define ICMENUMPROC  ICMENUMPROCA
  #endif // !UNICODE
  
@@ -1547,7 +1531,7 @@ index dded3769a1..981bd731dc 100644
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
  #ifdef UNICODE
-@@ -5338,19 +5347,19 @@ WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
+@@ -5338,19 +5339,19 @@ WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
  #define GetLogColorSpace  GetLogColorSpaceA
  #endif // !UNICODE
  
@@ -1573,7 +1557,7 @@ index dded3769a1..981bd731dc 100644
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
  #ifdef UNICODE
-@@ -5359,27 +5368,27 @@ WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
+@@ -5359,27 +5360,27 @@ WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
  #define GetICMProfile  GetICMProfileA
  #endif // !UNICODE
  
@@ -1610,7 +1594,7 @@ index dded3769a1..981bd731dc 100644
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
-@@ -5394,7 +5403,7 @@ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ L
+@@ -5394,7 +5395,7 @@ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ L
  #endif /* WINVER >= 0x0400 */
  
  #if (WINVER >= 0x0500)
@@ -1619,7 +1603,7 @@ index dded3769a1..981bd731dc 100644
  #endif
  
  #ifndef NOMETAFILE
-@@ -5561,7 +5570,7 @@ WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hP
+@@ -5561,7 +5562,7 @@ WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hP
  
  typedef struct tagEMR
  {
@@ -1628,7 +1612,7 @@ index dded3769a1..981bd731dc 100644
      DWORD   nSize;              // Length of the record in bytes.
                                  // This must be a multiple of 4.
  } EMR, *PEMR;
-@@ -5757,7 +5766,7 @@ typedef struct tagEMRMODIFYWORLDTRANSFORM
+@@ -5757,7 +5758,7 @@ typedef struct tagEMRMODIFYWORLDTRANSFORM
  {
      EMR     emr;
      XFORM   xform;
@@ -1637,7 +1621,7 @@ index dded3769a1..981bd731dc 100644
  } EMRMODIFYWORLDTRANSFORM, *PEMRMODIFYWORLDTRANSFORM;
  
  typedef struct tagEMRSETPIXELV
-@@ -5906,7 +5915,7 @@ typedef struct tagEMREXTSELECTCLIPRGN
+@@ -5906,7 +5907,7 @@ typedef struct tagEMREXTSELECTCLIPRGN
  {
      EMR     emr;
      DWORD   cbRgnData;          // Size of region data in bytes
@@ -1646,7 +1630,7 @@ index dded3769a1..981bd731dc 100644
      BYTE    RgnData[1];
  } EMREXTSELECTCLIPRGN, *PEMREXTSELECTCLIPRGN;
  
-@@ -6283,7 +6292,7 @@ typedef struct tagEMRGRADIENTFILL
+@@ -6283,7 +6284,7 @@ typedef struct tagEMRGRADIENTFILL
      RECTL     rclBounds;          // Inclusive-inclusive bounds in device units
      DWORD     nVer;
      DWORD     nTri;
@@ -1655,7 +1639,7 @@ index dded3769a1..981bd731dc 100644
      TRIVERTEX Ver[1];
  }EMRGRADIENTFILL,*PEMRGRADIENTFILL;
  
-@@ -6327,23 +6336,23 @@ typedef struct tagEMRTRANSPARENTBLT
+@@ -6327,23 +6328,23 @@ typedef struct tagEMRTRANSPARENTBLT
  
  // OpenGL wgl prototypes
  
@@ -1691,7 +1675,7 @@ index dded3769a1..981bd731dc 100644
  
  typedef struct _POINTFLOAT {
      FLOAT   x;
-@@ -6360,10 +6369,10 @@ typedef struct _GLYPHMETRICSFLOAT {
+@@ -6360,10 +6361,10 @@ typedef struct _GLYPHMETRICSFLOAT {
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
@@ -1706,7 +1690,7 @@ index dded3769a1..981bd731dc 100644
  #ifdef UNICODE
  #define wglUseFontOutlines  wglUseFontOutlinesW
  #else
-@@ -6446,14 +6455,14 @@ typedef struct tagLAYERPLANEDESCRIPTOR { // lpd
+@@ -6446,14 +6447,14 @@ typedef struct tagLAYERPLANEDESCRIPTOR { // lpd
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  
@@ -1728,7 +1712,7 @@ index dded3769a1..981bd731dc 100644
  
  #if (WINVER >= 0x0500)
  
-@@ -6489,5 +6498,3362 @@ WINGDIAPI DWORD WINAPI wglSwapMultipleBuffers(UINT, CONST WGLSWAP *);
+@@ -6489,5 +6490,2984 @@ WINGDIAPI DWORD WINAPI wglSwapMultipleBuffers(UINT, CONST WGLSWAP *);
  #pragma warning(pop)
  #endif
  
@@ -2713,71 +2697,6 @@ index dded3769a1..981bd731dc 100644
 +#pragma pop_macro("OUT_DEFAULT_PRECIS")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("FW_DONTCARE")
-+#undef FW_DONTCARE
-+#pragma push_macro("FW_THIN")
-+#undef FW_THIN
-+#pragma push_macro("FW_EXTRALIGHT")
-+#undef FW_EXTRALIGHT
-+#pragma push_macro("FW_LIGHT")
-+#undef FW_LIGHT
-+#pragma push_macro("FW_NORMAL")
-+#undef FW_NORMAL
-+#pragma push_macro("FW_MEDIUM")
-+#undef FW_MEDIUM
-+#pragma push_macro("FW_SEMIBOLD")
-+#undef FW_SEMIBOLD
-+#pragma push_macro("FW_BOLD")
-+#undef FW_BOLD
-+#pragma push_macro("FW_EXTRABOLD")
-+#undef FW_EXTRABOLD
-+#pragma push_macro("FW_HEAVY")
-+#undef FW_HEAVY
-+#pragma push_macro("FW_ULTRALIGHT")
-+#undef FW_ULTRALIGHT
-+#pragma push_macro("FW_REGULAR")
-+#undef FW_REGULAR
-+#pragma push_macro("FW_DEMIBOLD")
-+#undef FW_DEMIBOLD
-+#pragma push_macro("FW_ULTRABOLD")
-+#undef FW_ULTRABOLD
-+#pragma push_macro("FW_BLACK")
-+#undef FW_BLACK
-+enum FONT_WEIGHT : unsigned int
-+{
-+    FW_DONTCARE = 0U,
-+    FW_THIN = 100U,
-+    FW_EXTRALIGHT = 200U,
-+    FW_LIGHT = 300U,
-+    FW_NORMAL = 400U,
-+    FW_MEDIUM = 500U,
-+    FW_SEMIBOLD = 600U,
-+    FW_BOLD = 700U,
-+    FW_EXTRABOLD = 800U,
-+    FW_HEAVY = 900U,
-+    FW_ULTRALIGHT = 200U,
-+    FW_REGULAR = 400U,
-+    FW_DEMIBOLD = 600U,
-+    FW_ULTRABOLD = 800U,
-+    FW_BLACK = 900U,
-+};
-+#pragma pop_macro("FW_BLACK")
-+#pragma pop_macro("FW_ULTRABOLD")
-+#pragma pop_macro("FW_DEMIBOLD")
-+#pragma pop_macro("FW_REGULAR")
-+#pragma pop_macro("FW_ULTRALIGHT")
-+#pragma pop_macro("FW_HEAVY")
-+#pragma pop_macro("FW_EXTRABOLD")
-+#pragma pop_macro("FW_BOLD")
-+#pragma pop_macro("FW_SEMIBOLD")
-+#pragma pop_macro("FW_MEDIUM")
-+#pragma pop_macro("FW_NORMAL")
-+#pragma pop_macro("FW_LIGHT")
-+#pragma pop_macro("FW_EXTRALIGHT")
-+#pragma pop_macro("FW_THIN")
-+#pragma pop_macro("FW_DONTCARE")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("ANSI_CHARSET")
@@ -3121,53 +3040,7 @@ index dded3769a1..981bd731dc 100644
 +#pragma pop_macro("GM_COMPATIBLE")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DEFAULT_PITCH")
-+#undef DEFAULT_PITCH
-+#pragma push_macro("FIXED_PITCH")
-+#undef FIXED_PITCH
-+#pragma push_macro("VARIABLE_PITCH")
-+#undef VARIABLE_PITCH
-+enum FONT_PITCH : unsigned char
-+{
-+    DEFAULT_PITCH = 0,
-+    FIXED_PITCH = 1,
-+    VARIABLE_PITCH = 2,
-+};
-+#pragma pop_macro("VARIABLE_PITCH")
-+#pragma pop_macro("FIXED_PITCH")
-+#pragma pop_macro("DEFAULT_PITCH")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("FF_DECORATIVE")
-+#undef FF_DECORATIVE
-+#pragma push_macro("FF_DONTCARE")
-+#undef FF_DONTCARE
-+#pragma push_macro("FF_MODERN")
-+#undef FF_MODERN
-+#pragma push_macro("FF_ROMAN")
-+#undef FF_ROMAN
-+#pragma push_macro("FF_SCRIPT")
-+#undef FF_SCRIPT
-+#pragma push_macro("FF_SWISS")
-+#undef FF_SWISS
-+enum FONT_FAMILY : unsigned char
-+{
-+    FF_DECORATIVE = 80,
-+    FF_DONTCARE = 0,
-+    FF_MODERN = 48,
-+    FF_ROMAN = 16,
-+    FF_SCRIPT = 64,
-+    FF_SWISS = 32,
-+};
-+#pragma pop_macro("FF_SWISS")
-+#pragma pop_macro("FF_SCRIPT")
-+#pragma pop_macro("FF_ROMAN")
-+#pragma pop_macro("FF_MODERN")
-+#pragma pop_macro("FF_DONTCARE")
-+#pragma pop_macro("FF_DECORATIVE")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("BLACKNESS")
@@ -3903,279 +3776,12 @@ index dded3769a1..981bd731dc 100644
 +#pragma pop_macro("EMR_HEADER")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DM_SPECVERSION")
-+#undef DM_SPECVERSION
-+#pragma push_macro("DM_ORIENTATION")
-+#undef DM_ORIENTATION
-+#pragma push_macro("DM_PAPERSIZE")
-+#undef DM_PAPERSIZE
-+#pragma push_macro("DM_PAPERLENGTH")
-+#undef DM_PAPERLENGTH
-+#pragma push_macro("DM_PAPERWIDTH")
-+#undef DM_PAPERWIDTH
-+#pragma push_macro("DM_SCALE")
-+#undef DM_SCALE
-+#pragma push_macro("DM_POSITION")
-+#undef DM_POSITION
-+#pragma push_macro("DM_NUP")
-+#undef DM_NUP
-+#pragma push_macro("DM_DISPLAYORIENTATION")
-+#undef DM_DISPLAYORIENTATION
-+#pragma push_macro("DM_COPIES")
-+#undef DM_COPIES
-+#pragma push_macro("DM_DEFAULTSOURCE")
-+#undef DM_DEFAULTSOURCE
-+#pragma push_macro("DM_PRINTQUALITY")
-+#undef DM_PRINTQUALITY
-+#pragma push_macro("DM_COLOR")
-+#undef DM_COLOR
-+#pragma push_macro("DM_DUPLEX")
-+#undef DM_DUPLEX
-+#pragma push_macro("DM_YRESOLUTION")
-+#undef DM_YRESOLUTION
-+#pragma push_macro("DM_TTOPTION")
-+#undef DM_TTOPTION
-+#pragma push_macro("DM_COLLATE")
-+#undef DM_COLLATE
-+#pragma push_macro("DM_FORMNAME")
-+#undef DM_FORMNAME
-+#pragma push_macro("DM_LOGPIXELS")
-+#undef DM_LOGPIXELS
-+#pragma push_macro("DM_BITSPERPEL")
-+#undef DM_BITSPERPEL
-+#pragma push_macro("DM_PELSWIDTH")
-+#undef DM_PELSWIDTH
-+#pragma push_macro("DM_PELSHEIGHT")
-+#undef DM_PELSHEIGHT
-+#pragma push_macro("DM_DISPLAYFLAGS")
-+#undef DM_DISPLAYFLAGS
-+#pragma push_macro("DM_DISPLAYFREQUENCY")
-+#undef DM_DISPLAYFREQUENCY
-+#pragma push_macro("DM_ICMMETHOD")
-+#undef DM_ICMMETHOD
-+#pragma push_macro("DM_ICMINTENT")
-+#undef DM_ICMINTENT
-+#pragma push_macro("DM_MEDIATYPE")
-+#undef DM_MEDIATYPE
-+#pragma push_macro("DM_DITHERTYPE")
-+#undef DM_DITHERTYPE
-+#pragma push_macro("DM_PANNINGWIDTH")
-+#undef DM_PANNINGWIDTH
-+#pragma push_macro("DM_PANNINGHEIGHT")
-+#undef DM_PANNINGHEIGHT
-+#pragma push_macro("DM_DISPLAYFIXEDOUTPUT")
-+#undef DM_DISPLAYFIXEDOUTPUT
-+#pragma push_macro("DM_INTERLACED")
-+#undef DM_INTERLACED
-+#pragma push_macro("DM_UPDATE")
-+#undef DM_UPDATE
-+#pragma push_macro("DM_COPY")
-+#undef DM_COPY
-+#pragma push_macro("DM_PROMPT")
-+#undef DM_PROMPT
-+#pragma push_macro("DM_MODIFY")
-+#undef DM_MODIFY
-+#pragma push_macro("DM_IN_BUFFER")
-+#undef DM_IN_BUFFER
-+#pragma push_macro("DM_IN_PROMPT")
-+#undef DM_IN_PROMPT
-+#pragma push_macro("DM_OUT_BUFFER")
-+#undef DM_OUT_BUFFER
-+#pragma push_macro("DM_OUT_DEFAULT")
-+#undef DM_OUT_DEFAULT
-+enum [[clang::flag_enum]] DEVMODE_FIELD_FLAGS : unsigned int
-+{
-+    DM_SPECVERSION = 1025U,
-+    DM_ORIENTATION = 1U,
-+    DM_PAPERSIZE = 2U,
-+    DM_PAPERLENGTH = 4U,
-+    DM_PAPERWIDTH = 8U,
-+    DM_SCALE = 16U,
-+    DM_POSITION = 32U,
-+    DM_NUP = 64U,
-+    DM_DISPLAYORIENTATION = 128U,
-+    DM_COPIES = 256U,
-+    DM_DEFAULTSOURCE = 512U,
-+    DM_PRINTQUALITY = 1024U,
-+    DM_COLOR = 2048U,
-+    DM_DUPLEX = 4096U,
-+    DM_YRESOLUTION = 8192U,
-+    DM_TTOPTION = 16384U,
-+    DM_COLLATE = 32768U,
-+    DM_FORMNAME = 65536U,
-+    DM_LOGPIXELS = 131072U,
-+    DM_BITSPERPEL = 262144U,
-+    DM_PELSWIDTH = 524288U,
-+    DM_PELSHEIGHT = 1048576U,
-+    DM_DISPLAYFLAGS = 2097152U,
-+    DM_DISPLAYFREQUENCY = 4194304U,
-+    DM_ICMMETHOD = 8388608U,
-+    DM_ICMINTENT = 16777216U,
-+    DM_MEDIATYPE = 33554432U,
-+    DM_DITHERTYPE = 67108864U,
-+    DM_PANNINGWIDTH = 134217728U,
-+    DM_PANNINGHEIGHT = 268435456U,
-+    DM_DISPLAYFIXEDOUTPUT = 536870912U,
-+    DM_INTERLACED = 2U,
-+    DM_UPDATE = 1U,
-+    DM_COPY = 2U,
-+    DM_PROMPT = 4U,
-+    DM_MODIFY = 8U,
-+    DM_IN_BUFFER = 8U,
-+    DM_IN_PROMPT = 4U,
-+    DM_OUT_BUFFER = 2U,
-+    DM_OUT_DEFAULT = 1U,
-+};
-+#pragma pop_macro("DM_OUT_DEFAULT")
-+#pragma pop_macro("DM_OUT_BUFFER")
-+#pragma pop_macro("DM_IN_PROMPT")
-+#pragma pop_macro("DM_IN_BUFFER")
-+#pragma pop_macro("DM_MODIFY")
-+#pragma pop_macro("DM_PROMPT")
-+#pragma pop_macro("DM_COPY")
-+#pragma pop_macro("DM_UPDATE")
-+#pragma pop_macro("DM_INTERLACED")
-+#pragma pop_macro("DM_DISPLAYFIXEDOUTPUT")
-+#pragma pop_macro("DM_PANNINGHEIGHT")
-+#pragma pop_macro("DM_PANNINGWIDTH")
-+#pragma pop_macro("DM_DITHERTYPE")
-+#pragma pop_macro("DM_MEDIATYPE")
-+#pragma pop_macro("DM_ICMINTENT")
-+#pragma pop_macro("DM_ICMMETHOD")
-+#pragma pop_macro("DM_DISPLAYFREQUENCY")
-+#pragma pop_macro("DM_DISPLAYFLAGS")
-+#pragma pop_macro("DM_PELSHEIGHT")
-+#pragma pop_macro("DM_PELSWIDTH")
-+#pragma pop_macro("DM_BITSPERPEL")
-+#pragma pop_macro("DM_LOGPIXELS")
-+#pragma pop_macro("DM_FORMNAME")
-+#pragma pop_macro("DM_COLLATE")
-+#pragma pop_macro("DM_TTOPTION")
-+#pragma pop_macro("DM_YRESOLUTION")
-+#pragma pop_macro("DM_DUPLEX")
-+#pragma pop_macro("DM_COLOR")
-+#pragma pop_macro("DM_PRINTQUALITY")
-+#pragma pop_macro("DM_DEFAULTSOURCE")
-+#pragma pop_macro("DM_COPIES")
-+#pragma pop_macro("DM_DISPLAYORIENTATION")
-+#pragma pop_macro("DM_NUP")
-+#pragma pop_macro("DM_POSITION")
-+#pragma pop_macro("DM_SCALE")
-+#pragma pop_macro("DM_PAPERWIDTH")
-+#pragma pop_macro("DM_PAPERLENGTH")
-+#pragma pop_macro("DM_PAPERSIZE")
-+#pragma pop_macro("DM_ORIENTATION")
-+#pragma pop_macro("DM_SPECVERSION")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DMCOLOR_MONOCHROME")
-+#undef DMCOLOR_MONOCHROME
-+#pragma push_macro("DMCOLOR_COLOR")
-+#undef DMCOLOR_COLOR
-+enum DEVMODE_COLOR : short
-+{
-+    DMCOLOR_MONOCHROME = 1,
-+    DMCOLOR_COLOR = 2,
-+};
-+#pragma pop_macro("DMCOLOR_COLOR")
-+#pragma pop_macro("DMCOLOR_MONOCHROME")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DMDUP_SIMPLEX")
-+#undef DMDUP_SIMPLEX
-+#pragma push_macro("DMDUP_VERTICAL")
-+#undef DMDUP_VERTICAL
-+#pragma push_macro("DMDUP_HORIZONTAL")
-+#undef DMDUP_HORIZONTAL
-+enum DEVMODE_DUPLEX : short
-+{
-+    DMDUP_SIMPLEX = 1,
-+    DMDUP_VERTICAL = 2,
-+    DMDUP_HORIZONTAL = 3,
-+};
-+#pragma pop_macro("DMDUP_HORIZONTAL")
-+#pragma pop_macro("DMDUP_VERTICAL")
-+#pragma pop_macro("DMDUP_SIMPLEX")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DMCOLLATE_FALSE")
-+#undef DMCOLLATE_FALSE
-+#pragma push_macro("DMCOLLATE_TRUE")
-+#undef DMCOLLATE_TRUE
-+enum DEVMODE_COLLATE : short
-+{
-+    DMCOLLATE_FALSE = 0,
-+    DMCOLLATE_TRUE = 1,
-+};
-+#pragma pop_macro("DMCOLLATE_TRUE")
-+#pragma pop_macro("DMCOLLATE_FALSE")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DMDO_DEFAULT")
-+#undef DMDO_DEFAULT
-+#pragma push_macro("DMDO_90")
-+#undef DMDO_90
-+#pragma push_macro("DMDO_180")
-+#undef DMDO_180
-+#pragma push_macro("DMDO_270")
-+#undef DMDO_270
-+enum DEVMODE_DISPLAY_ORIENTATION : unsigned int
-+{
-+    DMDO_DEFAULT = 0U,
-+    DMDO_90 = 1U,
-+    DMDO_180 = 2U,
-+    DMDO_270 = 3U,
-+};
-+#pragma pop_macro("DMDO_270")
-+#pragma pop_macro("DMDO_180")
-+#pragma pop_macro("DMDO_90")
-+#pragma pop_macro("DMDO_DEFAULT")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DMDFO_DEFAULT")
-+#undef DMDFO_DEFAULT
-+#pragma push_macro("DMDFO_STRETCH")
-+#undef DMDFO_STRETCH
-+#pragma push_macro("DMDFO_CENTER")
-+#undef DMDFO_CENTER
-+enum DEVMODE_DISPLAY_FIXED_OUTPUT : unsigned int
-+{
-+    DMDFO_DEFAULT = 0U,
-+    DMDFO_STRETCH = 1U,
-+    DMDFO_CENTER = 2U,
-+};
-+#pragma pop_macro("DMDFO_CENTER")
-+#pragma pop_macro("DMDFO_STRETCH")
-+#pragma pop_macro("DMDFO_DEFAULT")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DMTT_BITMAP")
-+#undef DMTT_BITMAP
-+#pragma push_macro("DMTT_DOWNLOAD")
-+#undef DMTT_DOWNLOAD
-+#pragma push_macro("DMTT_SUBDEV")
-+#undef DMTT_SUBDEV
-+#pragma push_macro("DMTT_DOWNLOAD_OUTLINE")
-+#undef DMTT_DOWNLOAD_OUTLINE
-+enum DEVMODE_TRUETYPE_OPTION : short
-+{
-+    DMTT_BITMAP = 1,
-+    DMTT_DOWNLOAD = 2,
-+    DMTT_SUBDEV = 3,
-+    DMTT_DOWNLOAD_OUTLINE = 4,
-+};
-+#pragma pop_macro("DMTT_DOWNLOAD_OUTLINE")
-+#pragma pop_macro("DMTT_SUBDEV")
-+#pragma pop_macro("DMTT_DOWNLOAD")
-+#pragma pop_macro("DMTT_BITMAP")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("PAN_FAMILY_ANY")

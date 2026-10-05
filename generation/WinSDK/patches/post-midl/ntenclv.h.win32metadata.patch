@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h b/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h
-index 26882f4210..d38af989fa 100644
+index 26882f4210..173c817d94 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ntenclv.h
 @@ -17,11 +17,16 @@ Abstract:
@@ -40,19 +40,10 @@ index 26882f4210..d38af989fa 100644
      UINT32 Flags;
      UINT32 SigningLevel;
      UINT32 EnclaveType;
-@@ -59,11 +68,24 @@ typedef struct ENCLAVE_IDENTITY {
+@@ -59,11 +68,15 @@ typedef struct ENCLAVE_IDENTITY {
  #define ENCLAVE_FLAG_DYNAMIC_DEBUG_ENABLED      0x00000002
  #define ENCLAVE_FLAG_DYNAMIC_DEBUG_ACTIVE       0x00000004
  
-+#ifdef WIN32METADATA
-+enum [[clang::flag_enum]]
-+    _Win32_AssociatedConstant_(ENCLAVE_FLAG_FULL_DEBUG_ENABLED)
-+    _Win32_AssociatedConstant_(ENCLAVE_FLAG_DYNAMIC_DEBUG_ENABLED)
-+    _Win32_AssociatedConstant_(ENCLAVE_FLAG_DYNAMIC_DEBUG_ACTIVE)
-+    ENCLAVE_IDENTITY_FLAGS : unsigned int
-+{
-+};
-+#endif
 +
  #define VBS_ENCLAVE_REPORT_PKG_HEADER_VERSION_CURRENT (1)
  
@@ -66,7 +57,7 @@ index 26882f4210..d38af989fa 100644
      UINT32 PackageSize;
      UINT32 Version;
      UINT32 SignatureScheme;
-@@ -76,14 +98,21 @@ typedef struct VBS_ENCLAVE_REPORT_PKG_HEADER {
+@@ -76,14 +89,21 @@ typedef struct VBS_ENCLAVE_REPORT_PKG_HEADER {
  
  #define ENCLAVE_REPORT_DATA_LENGTH      64
  
@@ -90,19 +81,11 @@ index 26882f4210..d38af989fa 100644
      UINT32 DataType;
      UINT32 Size;
  } VBS_ENCLAVE_REPORT_VARDATA_HEADER;
-@@ -91,7 +120,19 @@ typedef struct VBS_ENCLAVE_REPORT_VARDATA_HEADER {
+@@ -91,7 +111,11 @@ typedef struct VBS_ENCLAVE_REPORT_VARDATA_HEADER {
  #define VBS_ENCLAVE_VARDATA_INVALID     0x00000000
  #define VBS_ENCLAVE_VARDATA_MODULE      0x00000001
  
 -typedef struct VBS_ENCLAVE_REPORT_MODULE {
-+#ifdef WIN32METADATA
-+enum
-+    _Win32_AssociatedConstant_(VBS_ENCLAVE_VARDATA_INVALID)
-+    _Win32_AssociatedConstant_(VBS_ENCLAVE_VARDATA_MODULE)
-+    VBS_ENCLAVE_REPORT_DATA_TYPE : unsigned int
-+{
-+};
-+#endif
 +
 +typedef struct
 +    
@@ -111,7 +94,7 @@ index 26882f4210..d38af989fa 100644
      VBS_ENCLAVE_REPORT_VARDATA_HEADER Header;
      UINT8 UniqueId[IMAGE_ENCLAVE_LONG_ID_LENGTH];
      UINT8 AuthorId[IMAGE_ENCLAVE_LONG_ID_LENGTH];
-@@ -104,7 +145,10 @@ typedef struct VBS_ENCLAVE_REPORT_MODULE {
+@@ -104,7 +128,10 @@ typedef struct VBS_ENCLAVE_REPORT_MODULE {
  #pragma pack(pop)
  #pragma warning(pop)
  

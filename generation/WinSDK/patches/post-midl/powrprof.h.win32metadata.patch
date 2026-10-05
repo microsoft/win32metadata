@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
-index 7d68d1419c..e78b53fb2a 100644
+index 7d68d1419c..b8d0cdc789 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/powrprof.h
 @@ -18,6 +18,7 @@
@@ -707,138 +707,12 @@ index 7d68d1419c..e78b53fb2a 100644
  STDAPI_(DWORD)
  PowerReportThermalEvent (
      _In_ PTHERMAL_EVENT Event
-@@ -1108,4 +1246,134 @@ PowerReportThermalEvent (
+@@ -1108,4 +1246,8 @@ PowerReportThermalEvent (
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("PDCAP_D0_SUPPORTED")
-+#undef PDCAP_D0_SUPPORTED
-+#pragma push_macro("PDCAP_D1_SUPPORTED")
-+#undef PDCAP_D1_SUPPORTED
-+#pragma push_macro("PDCAP_D2_SUPPORTED")
-+#undef PDCAP_D2_SUPPORTED
-+#pragma push_macro("PDCAP_D3_SUPPORTED")
-+#undef PDCAP_D3_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D0_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D0_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D1_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D1_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D2_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D2_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D3_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D3_SUPPORTED
-+#pragma push_macro("PDCAP_WARM_EJECT_SUPPORTED")
-+#undef PDCAP_WARM_EJECT_SUPPORTED
-+#pragma push_macro("PDCAP_S0_SUPPORTED")
-+#undef PDCAP_S0_SUPPORTED
-+#pragma push_macro("PDCAP_S1_SUPPORTED")
-+#undef PDCAP_S1_SUPPORTED
-+#pragma push_macro("PDCAP_S2_SUPPORTED")
-+#undef PDCAP_S2_SUPPORTED
-+#pragma push_macro("PDCAP_S3_SUPPORTED")
-+#undef PDCAP_S3_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S0_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S0_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S1_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S1_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S2_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S2_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S3_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S3_SUPPORTED
-+#pragma push_macro("PDCAP_S4_SUPPORTED")
-+#undef PDCAP_S4_SUPPORTED
-+#pragma push_macro("PDCAP_S5_SUPPORTED")
-+#undef PDCAP_S5_SUPPORTED
-+enum [[clang::flag_enum]] DEVICE_POWER_CAPABILITIES : unsigned int
-+{
-+    PDCAP_D0_SUPPORTED = 1U,
-+    PDCAP_D1_SUPPORTED = 2U,
-+    PDCAP_D2_SUPPORTED = 4U,
-+    PDCAP_D3_SUPPORTED = 8U,
-+    PDCAP_WAKE_FROM_D0_SUPPORTED = 16U,
-+    PDCAP_WAKE_FROM_D1_SUPPORTED = 32U,
-+    PDCAP_WAKE_FROM_D2_SUPPORTED = 64U,
-+    PDCAP_WAKE_FROM_D3_SUPPORTED = 128U,
-+    PDCAP_WARM_EJECT_SUPPORTED = 256U,
-+    PDCAP_S0_SUPPORTED = 65536U,
-+    PDCAP_S1_SUPPORTED = 131072U,
-+    PDCAP_S2_SUPPORTED = 262144U,
-+    PDCAP_S3_SUPPORTED = 524288U,
-+    PDCAP_WAKE_FROM_S0_SUPPORTED = 1048576U,
-+    PDCAP_WAKE_FROM_S1_SUPPORTED = 2097152U,
-+    PDCAP_WAKE_FROM_S2_SUPPORTED = 4194304U,
-+    PDCAP_WAKE_FROM_S3_SUPPORTED = 8388608U,
-+    PDCAP_S4_SUPPORTED = 16777216U,
-+    PDCAP_S5_SUPPORTED = 33554432U,
-+};
-+#pragma pop_macro("PDCAP_S5_SUPPORTED")
-+#pragma pop_macro("PDCAP_S4_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S3_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S2_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S1_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S0_SUPPORTED")
-+#pragma pop_macro("PDCAP_S3_SUPPORTED")
-+#pragma pop_macro("PDCAP_S2_SUPPORTED")
-+#pragma pop_macro("PDCAP_S1_SUPPORTED")
-+#pragma pop_macro("PDCAP_S0_SUPPORTED")
-+#pragma pop_macro("PDCAP_WARM_EJECT_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D3_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D2_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D1_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D0_SUPPORTED")
-+#pragma pop_macro("PDCAP_D3_SUPPORTED")
-+#pragma pop_macro("PDCAP_D2_SUPPORTED")
-+#pragma pop_macro("PDCAP_D1_SUPPORTED")
-+#pragma pop_macro("PDCAP_D0_SUPPORTED")
-+#endif
 +
  #endif // _POWRPROF_H_
 +
-+#ifdef WIN32METADATA
-+#ifndef WIN32METADATA_ENUM_POWER_COOLING_MODE
-+#define WIN32METADATA_ENUM_POWER_COOLING_MODE
-+#pragma push_macro("PO_TZ_ACTIVE")
-+#undef PO_TZ_ACTIVE
-+#pragma push_macro("PO_TZ_PASSIVE")
-+#undef PO_TZ_PASSIVE
-+#pragma push_macro("PO_TZ_INVALID_MODE")
-+#undef PO_TZ_INVALID_MODE
-+namespace Windows { namespace MetadataEnumValues {
-+namespace POWER_COOLING_MODEValues {
-+enum POWER_COOLING_MODE : unsigned short
-+{
-+    PO_TZ_ACTIVE = 0,
-+    PO_TZ_PASSIVE = 1,
-+    PO_TZ_INVALID_MODE = 2,
-+};
-+}
-+} }
-+#pragma pop_macro("PO_TZ_INVALID_MODE")
-+#pragma pop_macro("PO_TZ_PASSIVE")
-+#pragma pop_macro("PO_TZ_ACTIVE")
-+#endif
-+#endif
 +
-+#if defined(WIN32METADATA) && !defined(WIN32METADATA_POWER_INFORMATION_TYPES)
-+#define WIN32METADATA_POWER_INFORMATION_TYPES
-+typedef struct PROCESSOR_POWER_INFORMATION
-+{
-+    DWORD Number;
-+    DWORD MaxMhz;
-+    DWORD CurrentMhz;
-+    DWORD MhzLimit;
-+    DWORD MaxIdleState;
-+    DWORD CurrentIdleState;
-+} PROCESSOR_POWER_INFORMATION;
-+
-+typedef struct SYSTEM_POWER_INFORMATION
-+{
-+    DWORD MaxIdlenessAllowed;
-+    DWORD Idleness;
-+    DWORD TimeRemaining;
-+    Windows::MetadataEnumValues::POWER_COOLING_MODEValues::POWER_COOLING_MODE CoolingMode;
-+} SYSTEM_POWER_INFORMATION;
-+
-+#endif

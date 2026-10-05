@@ -18,5 +18,3 @@
 #include <msfeedsid.h>
 #include <wmpids.h>
 #include <wmsysprf.h>
-
-#include <evcode.h>

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h
-index 5cf30f27d2..0f1dd26a84 100644
+index 5cf30f27d2..ee7dfc57f9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfcaptureengine.h
 @@ -1,3 +1,4 @@
@@ -7,51 +7,7 @@ index 5cf30f27d2..0f1dd26a84 100644
  
  
  /* this ALWAYS GENERATED file contains the definitions for the interfaces */
-@@ -167,6 +168,35 @@ enum MF_CAPTURE_ENGINE_SINK_TYPE
-     } 	MF_CAPTURE_ENGINE_SINK_TYPE;
- 
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW")
-+#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW
-+#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD")
-+#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD
-+#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO")
-+#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO
-+#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO")
-+#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO
-+#pragma push_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA")
-+#undef MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA
-+#pragma push_macro("MF_CAPTURE_ENGINE_MEDIASOURCE")
-+#undef MF_CAPTURE_ENGINE_MEDIASOURCE
-+enum MF_CAPTURE_ENGINE_SOURCE : unsigned int
-+{
-+    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW = 4294967290U,
-+    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD = 4294967289U,
-+    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO = 4294967288U,
-+    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO = 4294967287U,
-+    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA = 4294967286U,
-+    MF_CAPTURE_ENGINE_MEDIASOURCE = 4294967295U,
-+};
-+#pragma pop_macro("MF_CAPTURE_ENGINE_MEDIASOURCE")
-+#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA")
-+#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO")
-+#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO")
-+#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD")
-+#pragma pop_macro("MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW")
-+#else
- enum __MIDL___MIDL_itf_mfcaptureengine_0000_0000_0001
-     {
-         MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW	= 0xfffffffa,
-@@ -176,6 +206,7 @@ enum __MIDL___MIDL_itf_mfcaptureengine_0000_0000_0001
-         MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA	= 0xfffffff6,
-         MF_CAPTURE_ENGINE_MEDIASOURCE	= 0xffffffff
-     } ;
-+#endif
- typedef 
- enum MF_CAPTURE_ENGINE_STREAM_CATEGORY
-     {
-@@ -258,7 +289,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnEventCallback;
+@@ -258,7 +259,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnEventCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -60,7 +16,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureEngineOnEventCallback : public IUnknown
      {
      public:
-@@ -345,7 +376,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnSampleCallback;
+@@ -345,7 +346,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnSampleCallback;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -69,7 +25,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureEngineOnSampleCallback : public IUnknown
      {
      public:
-@@ -432,7 +463,7 @@ EXTERN_C const IID IID_IMFCaptureSink;
+@@ -432,7 +433,7 @@ EXTERN_C const IID IID_IMFCaptureSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -78,7 +34,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureSink : public IUnknown
      {
      public:
-@@ -591,7 +622,7 @@ EXTERN_C const IID IID_IMFCaptureRecordSink;
+@@ -591,7 +592,7 @@ EXTERN_C const IID IID_IMFCaptureRecordSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -87,7 +43,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureRecordSink : public IMFCaptureSink
      {
      public:
-@@ -815,7 +846,7 @@ EXTERN_C const IID IID_IMFCapturePreviewSink;
+@@ -815,7 +816,7 @@ EXTERN_C const IID IID_IMFCapturePreviewSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -96,7 +52,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCapturePreviewSink : public IMFCaptureSink
      {
      public:
-@@ -1082,7 +1113,7 @@ EXTERN_C const IID IID_IMFCapturePhotoSink;
+@@ -1082,7 +1083,7 @@ EXTERN_C const IID IID_IMFCapturePhotoSink;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -105,7 +61,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCapturePhotoSink : public IMFCaptureSink
      {
      public:
-@@ -1251,7 +1282,7 @@ EXTERN_C const IID IID_IMFCaptureSource;
+@@ -1251,7 +1252,7 @@ EXTERN_C const IID IID_IMFCaptureSource;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -114,7 +70,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureSource : public IUnknown
      {
      public:
-@@ -1572,7 +1603,7 @@ EXTERN_C const IID IID_IMFCaptureEngine;
+@@ -1572,7 +1573,7 @@ EXTERN_C const IID IID_IMFCaptureEngine;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -123,7 +79,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureEngine : public IUnknown
      {
      public:
-@@ -1763,7 +1794,7 @@ EXTERN_C const IID IID_IMFCaptureEngineClassFactory;
+@@ -1763,7 +1764,7 @@ EXTERN_C const IID IID_IMFCaptureEngineClassFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -132,7 +88,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureEngineClassFactory : public IUnknown
      {
      public:
-@@ -1867,7 +1898,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnSampleCallback2;
+@@ -1867,7 +1868,7 @@ EXTERN_C const IID IID_IMFCaptureEngineOnSampleCallback2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -141,7 +97,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureEngineOnSampleCallback2 : public IMFCaptureEngineOnSampleCallback
      {
      public:
-@@ -1964,7 +1995,7 @@ EXTERN_C const IID IID_IMFCaptureSink2;
+@@ -1964,7 +1965,7 @@ EXTERN_C const IID IID_IMFCaptureSink2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -150,7 +106,7 @@ index 5cf30f27d2..0f1dd26a84 100644
      IMFCaptureSink2 : public IMFCaptureSink
      {
      public:
-@@ -2123,6 +2154,8 @@ extern RPC_IF_HANDLE __MIDL_itf_mfcaptureengine_0000_0011_v0_0_s_ifspec;
+@@ -2123,6 +2124,8 @@ extern RPC_IF_HANDLE __MIDL_itf_mfcaptureengine_0000_0011_v0_0_s_ifspec;
  }
  #endif
  

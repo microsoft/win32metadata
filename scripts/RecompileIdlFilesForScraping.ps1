@@ -1,15 +1,6 @@
-param
-(
-    [switch]
-    $SkipInstallTools
-)
-
 . "$PSScriptRoot\CommonUtils.ps1"
 
-if (!$SkipInstallTools.IsPresent)
-{
-    Install-BuildTools
-}
+Install-BuildTools
 
 $cppPkgPath = Get-WinSdkCppPkgPath
 $sdkBinDir = "$cppPkgPath\c\bin\$([System.IO.Path]::GetFileName($cppPkgPath) -replace "\d+$", "0")\x86"

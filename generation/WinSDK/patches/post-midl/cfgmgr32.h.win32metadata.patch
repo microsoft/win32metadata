@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
-index cfd6383749..069b8fc41d 100644
+index cfd6383749..f9aa519b4b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/cfgmgr32.h
 @@ -1,3 +1,4 @@
@@ -2049,7 +2049,7 @@ index cfd6383749..069b8fc41d 100644
  DWORD
  WINAPI
  CM_MapCrToWin32Err(
-@@ -4764,5 +4765,752 @@ CM_MapCrToWin32Err(
+@@ -4764,5 +4765,628 @@ CM_MapCrToWin32Err(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP) */
  #pragma endregion
  
@@ -2294,95 +2294,8 @@ index cfd6383749..069b8fc41d 100644
 +#pragma pop_macro("CM_CDFLAGS_DRIVER")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL")
-+#undef CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL
-+#pragma push_macro("CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL")
-+#undef CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL
-+#pragma push_macro("CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL")
-+#undef CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL
-+enum CM_REMOVAL_POLICY : unsigned int
-+{
-+    CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL = 1U,
-+    CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL = 2U,
-+    CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL = 3U,
-+};
-+#pragma pop_macro("CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL")
-+#pragma pop_macro("CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL")
-+#pragma pop_macro("CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("CM_INSTALL_STATE_INSTALLED")
-+#undef CM_INSTALL_STATE_INSTALLED
-+#pragma push_macro("CM_INSTALL_STATE_NEEDS_REINSTALL")
-+#undef CM_INSTALL_STATE_NEEDS_REINSTALL
-+#pragma push_macro("CM_INSTALL_STATE_FAILED_INSTALL")
-+#undef CM_INSTALL_STATE_FAILED_INSTALL
-+#pragma push_macro("CM_INSTALL_STATE_FINISH_INSTALL")
-+#undef CM_INSTALL_STATE_FINISH_INSTALL
-+enum CM_INSTALL_STATE : unsigned int
-+{
-+    CM_INSTALL_STATE_INSTALLED = 0U,
-+    CM_INSTALL_STATE_NEEDS_REINSTALL = 1U,
-+    CM_INSTALL_STATE_FAILED_INSTALL = 2U,
-+    CM_INSTALL_STATE_FINISH_INSTALL = 3U,
-+};
-+#pragma pop_macro("CM_INSTALL_STATE_FINISH_INSTALL")
-+#pragma pop_macro("CM_INSTALL_STATE_FAILED_INSTALL")
-+#pragma pop_macro("CM_INSTALL_STATE_NEEDS_REINSTALL")
-+#pragma pop_macro("CM_INSTALL_STATE_INSTALLED")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("CM_DEVCAP_LOCKSUPPORTED")
-+#undef CM_DEVCAP_LOCKSUPPORTED
-+#pragma push_macro("CM_DEVCAP_EJECTSUPPORTED")
-+#undef CM_DEVCAP_EJECTSUPPORTED
-+#pragma push_macro("CM_DEVCAP_REMOVABLE")
-+#undef CM_DEVCAP_REMOVABLE
-+#pragma push_macro("CM_DEVCAP_DOCKDEVICE")
-+#undef CM_DEVCAP_DOCKDEVICE
-+#pragma push_macro("CM_DEVCAP_UNIQUEID")
-+#undef CM_DEVCAP_UNIQUEID
-+#pragma push_macro("CM_DEVCAP_SILENTINSTALL")
-+#undef CM_DEVCAP_SILENTINSTALL
-+#pragma push_macro("CM_DEVCAP_RAWDEVICEOK")
-+#undef CM_DEVCAP_RAWDEVICEOK
-+#pragma push_macro("CM_DEVCAP_SURPRISEREMOVALOK")
-+#undef CM_DEVCAP_SURPRISEREMOVALOK
-+#pragma push_macro("CM_DEVCAP_HARDWAREDISABLED")
-+#undef CM_DEVCAP_HARDWAREDISABLED
-+#pragma push_macro("CM_DEVCAP_NONDYNAMIC")
-+#undef CM_DEVCAP_NONDYNAMIC
-+#pragma push_macro("CM_DEVCAP_SECUREDEVICE")
-+#undef CM_DEVCAP_SECUREDEVICE
-+enum [[clang::flag_enum]] CM_DEVCAP : unsigned int
-+{
-+    CM_DEVCAP_LOCKSUPPORTED = 1U,
-+    CM_DEVCAP_EJECTSUPPORTED = 2U,
-+    CM_DEVCAP_REMOVABLE = 4U,
-+    CM_DEVCAP_DOCKDEVICE = 8U,
-+    CM_DEVCAP_UNIQUEID = 16U,
-+    CM_DEVCAP_SILENTINSTALL = 32U,
-+    CM_DEVCAP_RAWDEVICEOK = 64U,
-+    CM_DEVCAP_SURPRISEREMOVALOK = 128U,
-+    CM_DEVCAP_HARDWAREDISABLED = 256U,
-+    CM_DEVCAP_NONDYNAMIC = 512U,
-+    CM_DEVCAP_SECUREDEVICE = 1024U,
-+};
-+#pragma pop_macro("CM_DEVCAP_SECUREDEVICE")
-+#pragma pop_macro("CM_DEVCAP_NONDYNAMIC")
-+#pragma pop_macro("CM_DEVCAP_HARDWAREDISABLED")
-+#pragma pop_macro("CM_DEVCAP_SURPRISEREMOVALOK")
-+#pragma pop_macro("CM_DEVCAP_RAWDEVICEOK")
-+#pragma pop_macro("CM_DEVCAP_SILENTINSTALL")
-+#pragma pop_macro("CM_DEVCAP_UNIQUEID")
-+#pragma pop_macro("CM_DEVCAP_DOCKDEVICE")
-+#pragma pop_macro("CM_DEVCAP_REMOVABLE")
-+#pragma pop_macro("CM_DEVCAP_EJECTSUPPORTED")
-+#pragma pop_macro("CM_DEVCAP_LOCKSUPPORTED")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("mDD_Width")
@@ -2492,43 +2405,6 @@ index cfd6383749..069b8fc41d 100644
 +#pragma pop_macro("fIOD_PortType")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("mIRQD_Share")
-+#undef mIRQD_Share
-+#pragma push_macro("fIRQD_Exclusive")
-+#undef fIRQD_Exclusive
-+#pragma push_macro("fIRQD_Share")
-+#undef fIRQD_Share
-+#pragma push_macro("fIRQD_Share_Bit")
-+#undef fIRQD_Share_Bit
-+#pragma push_macro("fIRQD_Level_Bit")
-+#undef fIRQD_Level_Bit
-+#pragma push_macro("mIRQD_Edge_Level")
-+#undef mIRQD_Edge_Level
-+#pragma push_macro("fIRQD_Level")
-+#undef fIRQD_Level
-+#pragma push_macro("fIRQD_Edge")
-+#undef fIRQD_Edge
-+enum [[clang::flag_enum]] IRQD_FLAGS : unsigned int
-+{
-+    mIRQD_Share = 1U,
-+    fIRQD_Exclusive = 0U,
-+    fIRQD_Share = 1U,
-+    fIRQD_Share_Bit = 0U,
-+    fIRQD_Level_Bit = 1U,
-+    mIRQD_Edge_Level = 2U,
-+    fIRQD_Level = 0U,
-+    fIRQD_Edge = 2U,
-+};
-+#pragma pop_macro("fIRQD_Edge")
-+#pragma pop_macro("fIRQD_Level")
-+#pragma pop_macro("mIRQD_Edge_Level")
-+#pragma pop_macro("fIRQD_Level_Bit")
-+#pragma pop_macro("fIRQD_Share_Bit")
-+#pragma pop_macro("fIRQD_Share")
-+#pragma pop_macro("fIRQD_Exclusive")
-+#pragma pop_macro("mIRQD_Share")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("mMD_MemoryType")

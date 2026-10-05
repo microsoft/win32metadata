@@ -8,6 +8,3 @@
 
 #include <msxml6.h>
 #include <msxml.h>
-#include <olectl.h>
-#include <msxml6did.h>
-#include <msxmldid.h>

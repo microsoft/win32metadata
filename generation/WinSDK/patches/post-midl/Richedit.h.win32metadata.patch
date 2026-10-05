@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
-index 5bebec4417..a73b368fb8 100644
+index 5bebec4417..1485db505c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Richedit.h
 @@ -11,6 +11,7 @@
@@ -199,41 +199,7 @@ index 5bebec4417..a73b368fb8 100644
  {
  	UINT	cbSize;
  	WORD	wMask;
-@@ -1543,8 +1544,16 @@ typedef struct _bidioptions
- 
- // BIDIOPTIONS masks 
- #if (_RICHEDIT_VER == 0x0100)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(BOM_DEFPARADIR)) || ((((_RICHEDIT_VER == 0x0100))))
- #define BOM_DEFPARADIR			0x0001	// Default paragraph direction (implies alignment) (obsolete) 
-+#endif
-+#if (_RICHEDIT_VER == 0x0100)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(BOM_PLAINTEXT)) || ((((_RICHEDIT_VER == 0x0100))))
- #define BOM_PLAINTEXT			0x0002	// Use plain text layout (obsolete) 
-+#endif
-+#if (_RICHEDIT_VER == 0x0100)
- #endif // _RICHEDIT_VER == 0x0100 
- #define BOM_NEUTRALOVERRIDE 	0x0004	// Override neutral layout (obsolete) 
- #define BOM_CONTEXTREADING		0x0008	// Context reading order 
-@@ -1556,8 +1565,16 @@ typedef struct _bidioptions
- 
- // BIDIOPTIONS effects 
- #if (_RICHEDIT_VER == 0x0100)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(BOE_RTLDIR)) || ((((_RICHEDIT_VER == 0x0100))))
- #define BOE_RTLDIR				0x0001	// Default paragraph direction (implies alignment) (obsolete) 
-+#endif
-+#if (_RICHEDIT_VER == 0x0100)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(BOE_PLAINTEXT)) || ((((_RICHEDIT_VER == 0x0100))))
- #define BOE_PLAINTEXT			0x0002	// Use plain text layout (obsolete) 
-+#endif
-+#if (_RICHEDIT_VER == 0x0100)
- #endif // _RICHEDIT_VER == 0x0100 
- #define BOE_NEUTRALOVERRIDE 	0x0004	// Override neutral layout (obsolete) 
- #define BOE_CONTEXTREADING		0x0008	// Context reading order 
-@@ -1601,7 +1618,7 @@ typedef struct hyphresult
+@@ -1601,7 +1602,7 @@ typedef struct hyphresult
  } HYPHRESULT;
  
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
@@ -242,103 +208,11 @@ index 5bebec4417..a73b368fb8 100644
  {
  	SHORT cbSize;			// Size of HYPHENATEINFO structure
  	SHORT dxHyphenateZone;	// If a space character is closer to the margin
-@@ -1643,4 +1660,880 @@ typedef struct tagHyphenateInfo
+@@ -1643,4 +1644,759 @@ typedef struct tagHyphenateInfo
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("CFE_UNDERLINE")
-+#undef CFE_UNDERLINE
-+#pragma push_macro("CFU_CF1UNDERLINE")
-+#undef CFU_CF1UNDERLINE
-+#pragma push_macro("CFU_INVERT")
-+#undef CFU_INVERT
-+#pragma push_macro("CFU_UNDERLINETHICKLONGDASH")
-+#undef CFU_UNDERLINETHICKLONGDASH
-+#pragma push_macro("CFU_UNDERLINETHICKDOTTED")
-+#undef CFU_UNDERLINETHICKDOTTED
-+#pragma push_macro("CFU_UNDERLINETHICKDASHDOTDOT")
-+#undef CFU_UNDERLINETHICKDASHDOTDOT
-+#pragma push_macro("CFU_UNDERLINETHICKDASHDOT")
-+#undef CFU_UNDERLINETHICKDASHDOT
-+#pragma push_macro("CFU_UNDERLINETHICKDASH")
-+#undef CFU_UNDERLINETHICKDASH
-+#pragma push_macro("CFU_UNDERLINELONGDASH")
-+#undef CFU_UNDERLINELONGDASH
-+#pragma push_macro("CFU_UNDERLINEHEAVYWAVE")
-+#undef CFU_UNDERLINEHEAVYWAVE
-+#pragma push_macro("CFU_UNDERLINEDOUBLEWAVE")
-+#undef CFU_UNDERLINEDOUBLEWAVE
-+#pragma push_macro("CFU_UNDERLINEHAIRLINE")
-+#undef CFU_UNDERLINEHAIRLINE
-+#pragma push_macro("CFU_UNDERLINETHICK")
-+#undef CFU_UNDERLINETHICK
-+#pragma push_macro("CFU_UNDERLINEWAVE")
-+#undef CFU_UNDERLINEWAVE
-+#pragma push_macro("CFU_UNDERLINEDASHDOTDOT")
-+#undef CFU_UNDERLINEDASHDOTDOT
-+#pragma push_macro("CFU_UNDERLINEDASHDOT")
-+#undef CFU_UNDERLINEDASHDOT
-+#pragma push_macro("CFU_UNDERLINEDASH")
-+#undef CFU_UNDERLINEDASH
-+#pragma push_macro("CFU_UNDERLINEDOTTED")
-+#undef CFU_UNDERLINEDOTTED
-+#pragma push_macro("CFU_UNDERLINEDOUBLE")
-+#undef CFU_UNDERLINEDOUBLE
-+#pragma push_macro("CFU_UNDERLINEWORD")
-+#undef CFU_UNDERLINEWORD
-+#pragma push_macro("CFU_UNDERLINE")
-+#undef CFU_UNDERLINE
-+#pragma push_macro("CFU_UNDERLINENONE")
-+#undef CFU_UNDERLINENONE
-+enum [[clang::flag_enum]] CFE_UNDERLINE : unsigned int
-+{
-+    CFU_CF1UNDERLINE = 255U,
-+    CFU_INVERT = 254U,
-+    CFU_UNDERLINETHICKLONGDASH = 18U,
-+    CFU_UNDERLINETHICKDOTTED = 17U,
-+    CFU_UNDERLINETHICKDASHDOTDOT = 16U,
-+    CFU_UNDERLINETHICKDASHDOT = 15U,
-+    CFU_UNDERLINETHICKDASH = 14U,
-+    CFU_UNDERLINELONGDASH = 13U,
-+    CFU_UNDERLINEHEAVYWAVE = 12U,
-+    CFU_UNDERLINEDOUBLEWAVE = 11U,
-+    CFU_UNDERLINEHAIRLINE = 10U,
-+    CFU_UNDERLINETHICK = 9U,
-+    CFU_UNDERLINEWAVE = 8U,
-+    CFU_UNDERLINEDASHDOTDOT = 7U,
-+    CFU_UNDERLINEDASHDOT = 6U,
-+    CFU_UNDERLINEDASH = 5U,
-+    CFU_UNDERLINEDOTTED = 4U,
-+    CFU_UNDERLINEDOUBLE = 3U,
-+    CFU_UNDERLINEWORD = 2U,
-+    CFU_UNDERLINE = 1U,
-+    CFU_UNDERLINENONE = 0U,
-+};
-+#pragma pop_macro("CFU_UNDERLINENONE")
-+#pragma pop_macro("CFU_UNDERLINE")
-+#pragma pop_macro("CFU_UNDERLINEWORD")
-+#pragma pop_macro("CFU_UNDERLINEDOUBLE")
-+#pragma pop_macro("CFU_UNDERLINEDOTTED")
-+#pragma pop_macro("CFU_UNDERLINEDASH")
-+#pragma pop_macro("CFU_UNDERLINEDASHDOT")
-+#pragma pop_macro("CFU_UNDERLINEDASHDOTDOT")
-+#pragma pop_macro("CFU_UNDERLINEWAVE")
-+#pragma pop_macro("CFU_UNDERLINETHICK")
-+#pragma pop_macro("CFU_UNDERLINEHAIRLINE")
-+#pragma pop_macro("CFU_UNDERLINEDOUBLEWAVE")
-+#pragma pop_macro("CFU_UNDERLINEHEAVYWAVE")
-+#pragma pop_macro("CFU_UNDERLINELONGDASH")
-+#pragma pop_macro("CFU_UNDERLINETHICKDASH")
-+#pragma pop_macro("CFU_UNDERLINETHICKDASHDOT")
-+#pragma pop_macro("CFU_UNDERLINETHICKDASHDOTDOT")
-+#pragma pop_macro("CFU_UNDERLINETHICKDOTTED")
-+#pragma pop_macro("CFU_UNDERLINETHICKLONGDASH")
-+#pragma pop_macro("CFU_INVERT")
-+#pragma pop_macro("CFU_CF1UNDERLINE")
-+#pragma pop_macro("CFE_UNDERLINE")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("WB_CLASSIFY")
@@ -914,35 +788,6 @@ index 5bebec4417..a73b368fb8 100644
 +#pragma pop_macro("GTL_DEFAULT")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("PFNS_PAREN")
-+#undef PFNS_PAREN
-+#pragma push_macro("PFNS_PARENS")
-+#undef PFNS_PARENS
-+#pragma push_macro("PFNS_PERIOD")
-+#undef PFNS_PERIOD
-+#pragma push_macro("PFNS_PLAIN")
-+#undef PFNS_PLAIN
-+#pragma push_macro("PFNS_NONUMBER")
-+#undef PFNS_NONUMBER
-+#pragma push_macro("PFNS_NEWNUMBER")
-+#undef PFNS_NEWNUMBER
-+enum PARAFORMAT_NUMBERING_STYLE : unsigned short
-+{
-+    PFNS_PAREN = 0,
-+    PFNS_PARENS = 256,
-+    PFNS_PERIOD = 512,
-+    PFNS_PLAIN = 768,
-+    PFNS_NONUMBER = 1024,
-+    PFNS_NEWNUMBER = 32768,
-+};
-+#pragma pop_macro("PFNS_NEWNUMBER")
-+#pragma pop_macro("PFNS_NONUMBER")
-+#pragma pop_macro("PFNS_PLAIN")
-+#pragma pop_macro("PFNS_PERIOD")
-+#pragma pop_macro("PFNS_PARENS")
-+#pragma pop_macro("PFNS_PAREN")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("PFA_LEFT")

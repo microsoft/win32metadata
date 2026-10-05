@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
-index 3ac25a4f11..51c6935302 100644
+index 3ac25a4f11..e10917867f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/UIAutomationClient.h
 @@ -612,12 +612,13 @@ extern "C"{
@@ -1536,7 +1536,7 @@ index 3ac25a4f11..51c6935302 100644
      IUIAutomation6 : public IUIAutomation5
      {
      public:
-@@ -26549,3 +26550,1710 @@ extern RPC_IF_HANDLE __MIDL_itf_uiautomationclient_0000_0001_v0_0_s_ifspec;
+@@ -26549,3 +26550,1694 @@ extern RPC_IF_HANDLE __MIDL_itf_uiautomationclient_0000_0001_v0_0_s_ifspec;
  #endif
  
  
@@ -3214,22 +3214,6 @@ index 3ac25a4f11..51c6935302 100644
 +#endif
 +#endif
 +
-+#ifdef WIN32METADATA
-+#ifndef WIN32METADATA_ENUM_UIA_CHANGE_ID
-+#define WIN32METADATA_ENUM_UIA_CHANGE_ID
-+#pragma push_macro("UIA_SummaryChangeId")
-+#undef UIA_SummaryChangeId
-+namespace Windows { namespace MetadataEnumValues {
-+namespace UIA_CHANGE_IDValues {
-+enum UIA_CHANGE_ID : int
-+{
-+    UIA_SummaryChangeId = 90000,
-+};
-+}
-+} }
-+#pragma pop_macro("UIA_SummaryChangeId")
-+#endif
-+#endif
 +
 +#ifdef WIN32METADATA
 +#ifndef WIN32METADATA_ENUM_UIA_METADATA_ID

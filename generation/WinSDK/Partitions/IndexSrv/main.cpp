@@ -10,5 +10,3 @@
 #include <filter.h>
 #include <indexsrv.h>
 #include <filterr.h>
-
-#include <cmdtree.h>

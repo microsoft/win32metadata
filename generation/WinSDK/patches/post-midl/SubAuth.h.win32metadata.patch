@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h b/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
-index 227870b8e9..a5cc5b6a08 100644
+index 227870b8e9..7bd5b11f6b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/SubAuth.h
 @@ -16,6 +16,7 @@ Revision History:
@@ -64,24 +64,11 @@ index 227870b8e9..a5cc5b6a08 100644
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationFilter(
      IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
-@@ -402,5 +411,20 @@ Msv1_0SubAuthenticationFilter(
+@@ -402,5 +411,7 @@ Msv1_0SubAuthenticationFilter(
  }
  #endif
  
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("MSV1_0_PASSTHRU")
-+#undef MSV1_0_PASSTHRU
-+#pragma push_macro("MSV1_0_GUEST_LOGON")
-+#undef MSV1_0_GUEST_LOGON
-+enum MSV1_0 : unsigned int
-+{
-+    MSV1_0_PASSTHRU = 1U,
-+    MSV1_0_GUEST_LOGON = 2U,
-+};
-+#pragma pop_macro("MSV1_0_GUEST_LOGON")
-+#pragma pop_macro("MSV1_0_PASSTHRU")
-+#endif
 +
  #endif /* _NTSUBAUTH_ */
  

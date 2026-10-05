@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h b/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h
-index f53c1b2f69..15a1b3edac 100644
+index f53c1b2f69..d2b003674b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/tuner.h
 @@ -1069,6 +1069,7 @@ extern "C"{
@@ -10,475 +10,7 @@ index f53c1b2f69..15a1b3edac 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -1100,6 +1101,459 @@ extern "C"{
- 
- 
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("DISPID_TUNER_TS_UNIQUENAME")
-+#undef DISPID_TUNER_TS_UNIQUENAME
-+#pragma push_macro("DISPID_TUNER_TS_FRIENDLYNAME")
-+#undef DISPID_TUNER_TS_FRIENDLYNAME
-+#pragma push_macro("DISPID_TUNER_TS_CLSID")
-+#undef DISPID_TUNER_TS_CLSID
-+#pragma push_macro("DISPID_TUNER_TS_NETWORKTYPE")
-+#undef DISPID_TUNER_TS_NETWORKTYPE
-+#pragma push_macro("DISPID_TUNER_TS__NETWORKTYPE")
-+#undef DISPID_TUNER_TS__NETWORKTYPE
-+#pragma push_macro("DISPID_TUNER_TS_CREATETUNEREQUEST")
-+#undef DISPID_TUNER_TS_CREATETUNEREQUEST
-+#pragma push_macro("DISPID_TUNER_TS_ENUMCATEGORYGUIDS")
-+#undef DISPID_TUNER_TS_ENUMCATEGORYGUIDS
-+#pragma push_macro("DISPID_TUNER_TS_ENUMDEVICEMONIKERS")
-+#undef DISPID_TUNER_TS_ENUMDEVICEMONIKERS
-+#pragma push_macro("DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES")
-+#undef DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES
-+#pragma push_macro("DISPID_TUNER_TS_FREQMAP")
-+#undef DISPID_TUNER_TS_FREQMAP
-+#pragma push_macro("DISPID_TUNER_TS_DEFLOCATOR")
-+#undef DISPID_TUNER_TS_DEFLOCATOR
-+#pragma push_macro("DISPID_TUNER_TS_CLONE")
-+#undef DISPID_TUNER_TS_CLONE
-+#pragma push_macro("DISPID_TUNER_TR_TUNINGSPACE")
-+#undef DISPID_TUNER_TR_TUNINGSPACE
-+#pragma push_macro("DISPID_TUNER_TR_COMPONENTS")
-+#undef DISPID_TUNER_TR_COMPONENTS
-+#pragma push_macro("DISPID_TUNER_TR_CLONE")
-+#undef DISPID_TUNER_TR_CLONE
-+#pragma push_macro("DISPID_TUNER_TR_LOCATOR")
-+#undef DISPID_TUNER_TR_LOCATOR
-+#pragma push_macro("DISPID_TUNER_CT_CATEGORY")
-+#undef DISPID_TUNER_CT_CATEGORY
-+#pragma push_macro("DISPID_TUNER_CT_MEDIAMAJORTYPE")
-+#undef DISPID_TUNER_CT_MEDIAMAJORTYPE
-+#pragma push_macro("DISPID_TUNER_CT__MEDIAMAJORTYPE")
-+#undef DISPID_TUNER_CT__MEDIAMAJORTYPE
-+#pragma push_macro("DISPID_TUNER_CT_MEDIASUBTYPE")
-+#undef DISPID_TUNER_CT_MEDIASUBTYPE
-+#pragma push_macro("DISPID_TUNER_CT__MEDIASUBTYPE")
-+#undef DISPID_TUNER_CT__MEDIASUBTYPE
-+#pragma push_macro("DISPID_TUNER_CT_MEDIAFORMATTYPE")
-+#undef DISPID_TUNER_CT_MEDIAFORMATTYPE
-+#pragma push_macro("DISPID_TUNER_CT__MEDIAFORMATTYPE")
-+#undef DISPID_TUNER_CT__MEDIAFORMATTYPE
-+#pragma push_macro("DISPID_TUNER_CT_MEDIATYPE")
-+#undef DISPID_TUNER_CT_MEDIATYPE
-+#pragma push_macro("DISPID_TUNER_CT_CLONE")
-+#undef DISPID_TUNER_CT_CLONE
-+#pragma push_macro("DISPID_TUNER_LCT_LANGID")
-+#undef DISPID_TUNER_LCT_LANGID
-+#pragma push_macro("DISPID_TUNER_MP2CT_TYPE")
-+#undef DISPID_TUNER_MP2CT_TYPE
-+#pragma push_macro("DISPID_TUNER_ATSCCT_FLAGS")
-+#undef DISPID_TUNER_ATSCCT_FLAGS
-+#pragma push_macro("DISPID_TUNER_L_CARRFREQ")
-+#undef DISPID_TUNER_L_CARRFREQ
-+#pragma push_macro("DISPID_TUNER_L_INNERFECMETHOD")
-+#undef DISPID_TUNER_L_INNERFECMETHOD
-+#pragma push_macro("DISPID_TUNER_L_INNERFECRATE")
-+#undef DISPID_TUNER_L_INNERFECRATE
-+#pragma push_macro("DISPID_TUNER_L_OUTERFECMETHOD")
-+#undef DISPID_TUNER_L_OUTERFECMETHOD
-+#pragma push_macro("DISPID_TUNER_L_OUTERFECRATE")
-+#undef DISPID_TUNER_L_OUTERFECRATE
-+#pragma push_macro("DISPID_TUNER_L_MOD")
-+#undef DISPID_TUNER_L_MOD
-+#pragma push_macro("DISPID_TUNER_L_SYMRATE")
-+#undef DISPID_TUNER_L_SYMRATE
-+#pragma push_macro("DISPID_TUNER_L_CLONE")
-+#undef DISPID_TUNER_L_CLONE
-+#pragma push_macro("DISPID_TUNER_L_ATSC_PHYS_CHANNEL")
-+#undef DISPID_TUNER_L_ATSC_PHYS_CHANNEL
-+#pragma push_macro("DISPID_TUNER_L_ATSC_TSID")
-+#undef DISPID_TUNER_L_ATSC_TSID
-+#pragma push_macro("DISPID_TUNER_L_ATSC_MP2_PROGNO")
-+#undef DISPID_TUNER_L_ATSC_MP2_PROGNO
-+#pragma push_macro("DISPID_TUNER_L_DVBT_BANDWIDTH")
-+#undef DISPID_TUNER_L_DVBT_BANDWIDTH
-+#pragma push_macro("DISPID_TUNER_L_DVBT_LPINNERFECMETHOD")
-+#undef DISPID_TUNER_L_DVBT_LPINNERFECMETHOD
-+#pragma push_macro("DISPID_TUNER_L_DVBT_LPINNERFECRATE")
-+#undef DISPID_TUNER_L_DVBT_LPINNERFECRATE
-+#pragma push_macro("DISPID_TUNER_L_DVBT_GUARDINTERVAL")
-+#undef DISPID_TUNER_L_DVBT_GUARDINTERVAL
-+#pragma push_macro("DISPID_TUNER_L_DVBT_HALPHA")
-+#undef DISPID_TUNER_L_DVBT_HALPHA
-+#pragma push_macro("DISPID_TUNER_L_DVBT_TRANSMISSIONMODE")
-+#undef DISPID_TUNER_L_DVBT_TRANSMISSIONMODE
-+#pragma push_macro("DISPID_TUNER_L_DVBT_INUSE")
-+#undef DISPID_TUNER_L_DVBT_INUSE
-+#pragma push_macro("DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID")
-+#undef DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID
-+#pragma push_macro("DISPID_TUNER_L_DVBS_POLARISATION")
-+#undef DISPID_TUNER_L_DVBS_POLARISATION
-+#pragma push_macro("DISPID_TUNER_L_DVBS_WEST")
-+#undef DISPID_TUNER_L_DVBS_WEST
-+#pragma push_macro("DISPID_TUNER_L_DVBS_ORBITAL")
-+#undef DISPID_TUNER_L_DVBS_ORBITAL
-+#pragma push_macro("DISPID_TUNER_L_DVBS_AZIMUTH")
-+#undef DISPID_TUNER_L_DVBS_AZIMUTH
-+#pragma push_macro("DISPID_TUNER_L_DVBS_ELEVATION")
-+#undef DISPID_TUNER_L_DVBS_ELEVATION
-+#pragma push_macro("DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE")
-+#undef DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE
-+#pragma push_macro("DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE")
-+#undef DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE
-+#pragma push_macro("DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE")
-+#undef DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE
-+#pragma push_macro("DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE")
-+#undef DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE
-+#pragma push_macro("DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE")
-+#undef DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE
-+#pragma push_macro("DISPID_TUNER_L_DVBS2_ROLLOFF")
-+#undef DISPID_TUNER_L_DVBS2_ROLLOFF
-+#pragma push_macro("DISPID_TUNER_L_DVBS2_PILOT")
-+#undef DISPID_TUNER_L_DVBS2_PILOT
-+#pragma push_macro("DISPID_TUNER_L_ANALOG_STANDARD")
-+#undef DISPID_TUNER_L_ANALOG_STANDARD
-+#pragma push_macro("DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL")
-+#undef DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL
-+#pragma push_macro("DISPID_TUNER_C_TYPE")
-+#undef DISPID_TUNER_C_TYPE
-+#pragma push_macro("DISPID_TUNER_C_STATUS")
-+#undef DISPID_TUNER_C_STATUS
-+#pragma push_macro("DISPID_TUNER_C_LANGID")
-+#undef DISPID_TUNER_C_LANGID
-+#pragma push_macro("DISPID_TUNER_C_DESCRIPTION")
-+#undef DISPID_TUNER_C_DESCRIPTION
-+#pragma push_macro("DISPID_TUNER_C_CLONE")
-+#undef DISPID_TUNER_C_CLONE
-+#pragma push_macro("DISPID_TUNER_C_MP2_PID")
-+#undef DISPID_TUNER_C_MP2_PID
-+#pragma push_macro("DISPID_TUNER_C_MP2_PCRPID")
-+#undef DISPID_TUNER_C_MP2_PCRPID
-+#pragma push_macro("DISPID_TUNER_C_MP2_PROGNO")
-+#undef DISPID_TUNER_C_MP2_PROGNO
-+#pragma push_macro("DISPID_TUNER_C_ANALOG_AUDIO")
-+#undef DISPID_TUNER_C_ANALOG_AUDIO
-+#pragma push_macro("DISPID_TUNER_TS_DVB_SYSTEMTYPE")
-+#undef DISPID_TUNER_TS_DVB_SYSTEMTYPE
-+#pragma push_macro("DISPID_TUNER_TS_DVB2_NETWORK_ID")
-+#undef DISPID_TUNER_TS_DVB2_NETWORK_ID
-+#pragma push_macro("DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ")
-+#undef DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ
-+#pragma push_macro("DISPID_TUNER_TS_DVBS_HI_OSC_FREQ")
-+#undef DISPID_TUNER_TS_DVBS_HI_OSC_FREQ
-+#pragma push_macro("DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ")
-+#undef DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ
-+#pragma push_macro("DISPID_TUNER_TS_DVBS_INPUT_RANGE")
-+#undef DISPID_TUNER_TS_DVBS_INPUT_RANGE
-+#pragma push_macro("DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION")
-+#undef DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION
-+#pragma push_macro("DISPID_TUNER_TS_AR_MINFREQUENCY")
-+#undef DISPID_TUNER_TS_AR_MINFREQUENCY
-+#pragma push_macro("DISPID_TUNER_TS_AR_MAXFREQUENCY")
-+#undef DISPID_TUNER_TS_AR_MAXFREQUENCY
-+#pragma push_macro("DISPID_TUNER_TS_AR_STEP")
-+#undef DISPID_TUNER_TS_AR_STEP
-+#pragma push_macro("DISPID_TUNER_TS_AR_COUNTRYCODE")
-+#undef DISPID_TUNER_TS_AR_COUNTRYCODE
-+#pragma push_macro("DISPID_TUNER_TS_AUX_COUNTRYCODE")
-+#undef DISPID_TUNER_TS_AUX_COUNTRYCODE
-+#pragma push_macro("DISPID_TUNER_TS_ATV_MINCHANNEL")
-+#undef DISPID_TUNER_TS_ATV_MINCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_ATV_MAXCHANNEL")
-+#undef DISPID_TUNER_TS_ATV_MAXCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_ATV_INPUTTYPE")
-+#undef DISPID_TUNER_TS_ATV_INPUTTYPE
-+#pragma push_macro("DISPID_TUNER_TS_ATV_COUNTRYCODE")
-+#undef DISPID_TUNER_TS_ATV_COUNTRYCODE
-+#pragma push_macro("DISPID_TUNER_TS_ATSC_MINMINORCHANNEL")
-+#undef DISPID_TUNER_TS_ATSC_MINMINORCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_ATSC_MAXMINORCHANNEL")
-+#undef DISPID_TUNER_TS_ATSC_MAXMINORCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_ATSC_MINPHYSCHANNEL")
-+#undef DISPID_TUNER_TS_ATSC_MINPHYSCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL")
-+#undef DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_DC_MINMAJORCHANNEL")
-+#undef DISPID_TUNER_TS_DC_MINMAJORCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_DC_MAXMAJORCHANNEL")
-+#undef DISPID_TUNER_TS_DC_MAXMAJORCHANNEL
-+#pragma push_macro("DISPID_TUNER_TS_DC_MINSOURCEID")
-+#undef DISPID_TUNER_TS_DC_MINSOURCEID
-+#pragma push_macro("DISPID_TUNER_TS_DC_MAXSOURCEID")
-+#undef DISPID_TUNER_TS_DC_MAXSOURCEID
-+#pragma push_macro("DISPID_CHTUNER_ATVAC_CHANNEL")
-+#undef DISPID_CHTUNER_ATVAC_CHANNEL
-+#pragma push_macro("DISPID_CHTUNER_ATVDC_SYSTEM")
-+#undef DISPID_CHTUNER_ATVDC_SYSTEM
-+#pragma push_macro("DISPID_CHTUNER_ATVDC_CONTENT")
-+#undef DISPID_CHTUNER_ATVDC_CONTENT
-+#pragma push_macro("DISPID_CHTUNER_CIDTR_CHANNELID")
-+#undef DISPID_CHTUNER_CIDTR_CHANNELID
-+#pragma push_macro("DISPID_CHTUNER_CTR_CHANNEL")
-+#undef DISPID_CHTUNER_CTR_CHANNEL
-+#pragma push_macro("DISPID_CHTUNER_ACTR_MINOR_CHANNEL")
-+#undef DISPID_CHTUNER_ACTR_MINOR_CHANNEL
-+#pragma push_macro("DISPID_CHTUNER_DCTR_MAJOR_CHANNEL")
-+#undef DISPID_CHTUNER_DCTR_MAJOR_CHANNEL
-+#pragma push_macro("DISPID_CHTUNER_DCTR_SRCID")
-+#undef DISPID_CHTUNER_DCTR_SRCID
-+#pragma push_macro("DISPID_DVBTUNER_DVBC_ATTRIBUTESVALID")
-+#undef DISPID_DVBTUNER_DVBC_ATTRIBUTESVALID
-+#pragma push_macro("DISPID_DVBTUNER_DVBC_PID")
-+#undef DISPID_DVBTUNER_DVBC_PID
-+#pragma push_macro("DISPID_DVBTUNER_DVBC_TAG")
-+#undef DISPID_DVBTUNER_DVBC_TAG
-+#pragma push_macro("DISPID_DVBTUNER_DVBC_COMPONENTTYPE")
-+#undef DISPID_DVBTUNER_DVBC_COMPONENTTYPE
-+#pragma push_macro("DISPID_DVBTUNER_ONID")
-+#undef DISPID_DVBTUNER_ONID
-+#pragma push_macro("DISPID_DVBTUNER_TSID")
-+#undef DISPID_DVBTUNER_TSID
-+#pragma push_macro("DISPID_DVBTUNER_SID")
-+#undef DISPID_DVBTUNER_SID
-+#pragma push_macro("DISPID_MP2TUNER_TSID")
-+#undef DISPID_MP2TUNER_TSID
-+#pragma push_macro("DISPID_MP2TUNER_PROGNO")
-+#undef DISPID_MP2TUNER_PROGNO
-+#pragma push_macro("DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST")
-+#undef DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST
-+enum DISPID_TUNER : int
-+{
-+    DISPID_TUNER_TS_UNIQUENAME = 1,
-+    DISPID_TUNER_TS_FRIENDLYNAME = 2,
-+    DISPID_TUNER_TS_CLSID = 3,
-+    DISPID_TUNER_TS_NETWORKTYPE = 4,
-+    DISPID_TUNER_TS__NETWORKTYPE = 5,
-+    DISPID_TUNER_TS_CREATETUNEREQUEST = 6,
-+    DISPID_TUNER_TS_ENUMCATEGORYGUIDS = 7,
-+    DISPID_TUNER_TS_ENUMDEVICEMONIKERS = 8,
-+    DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES = 9,
-+    DISPID_TUNER_TS_FREQMAP = 10,
-+    DISPID_TUNER_TS_DEFLOCATOR = 11,
-+    DISPID_TUNER_TS_CLONE = 12,
-+    DISPID_TUNER_TR_TUNINGSPACE = 1,
-+    DISPID_TUNER_TR_COMPONENTS = 2,
-+    DISPID_TUNER_TR_CLONE = 3,
-+    DISPID_TUNER_TR_LOCATOR = 4,
-+    DISPID_TUNER_CT_CATEGORY = 1,
-+    DISPID_TUNER_CT_MEDIAMAJORTYPE = 2,
-+    DISPID_TUNER_CT__MEDIAMAJORTYPE = 3,
-+    DISPID_TUNER_CT_MEDIASUBTYPE = 4,
-+    DISPID_TUNER_CT__MEDIASUBTYPE = 5,
-+    DISPID_TUNER_CT_MEDIAFORMATTYPE = 6,
-+    DISPID_TUNER_CT__MEDIAFORMATTYPE = 7,
-+    DISPID_TUNER_CT_MEDIATYPE = 8,
-+    DISPID_TUNER_CT_CLONE = 9,
-+    DISPID_TUNER_LCT_LANGID = 100,
-+    DISPID_TUNER_MP2CT_TYPE = 200,
-+    DISPID_TUNER_ATSCCT_FLAGS = 300,
-+    DISPID_TUNER_L_CARRFREQ = 1,
-+    DISPID_TUNER_L_INNERFECMETHOD = 2,
-+    DISPID_TUNER_L_INNERFECRATE = 3,
-+    DISPID_TUNER_L_OUTERFECMETHOD = 4,
-+    DISPID_TUNER_L_OUTERFECRATE = 5,
-+    DISPID_TUNER_L_MOD = 6,
-+    DISPID_TUNER_L_SYMRATE = 7,
-+    DISPID_TUNER_L_CLONE = 8,
-+    DISPID_TUNER_L_ATSC_PHYS_CHANNEL = 201,
-+    DISPID_TUNER_L_ATSC_TSID = 202,
-+    DISPID_TUNER_L_ATSC_MP2_PROGNO = 203,
-+    DISPID_TUNER_L_DVBT_BANDWIDTH = 301,
-+    DISPID_TUNER_L_DVBT_LPINNERFECMETHOD = 302,
-+    DISPID_TUNER_L_DVBT_LPINNERFECRATE = 303,
-+    DISPID_TUNER_L_DVBT_GUARDINTERVAL = 304,
-+    DISPID_TUNER_L_DVBT_HALPHA = 305,
-+    DISPID_TUNER_L_DVBT_TRANSMISSIONMODE = 306,
-+    DISPID_TUNER_L_DVBT_INUSE = 307,
-+    DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID = 351,
-+    DISPID_TUNER_L_DVBS_POLARISATION = 401,
-+    DISPID_TUNER_L_DVBS_WEST = 402,
-+    DISPID_TUNER_L_DVBS_ORBITAL = 403,
-+    DISPID_TUNER_L_DVBS_AZIMUTH = 404,
-+    DISPID_TUNER_L_DVBS_ELEVATION = 405,
-+    DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE = 406,
-+    DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE = 407,
-+    DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE = 408,
-+    DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE = 409,
-+    DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE = 410,
-+    DISPID_TUNER_L_DVBS2_ROLLOFF = 411,
-+    DISPID_TUNER_L_DVBS2_PILOT = 412,
-+    DISPID_TUNER_L_ANALOG_STANDARD = 601,
-+    DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL = 701,
-+    DISPID_TUNER_C_TYPE = 1,
-+    DISPID_TUNER_C_STATUS = 2,
-+    DISPID_TUNER_C_LANGID = 3,
-+    DISPID_TUNER_C_DESCRIPTION = 4,
-+    DISPID_TUNER_C_CLONE = 5,
-+    DISPID_TUNER_C_MP2_PID = 101,
-+    DISPID_TUNER_C_MP2_PCRPID = 102,
-+    DISPID_TUNER_C_MP2_PROGNO = 103,
-+    DISPID_TUNER_C_ANALOG_AUDIO = 201,
-+    DISPID_TUNER_TS_DVB_SYSTEMTYPE = 101,
-+    DISPID_TUNER_TS_DVB2_NETWORK_ID = 102,
-+    DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ = 1001,
-+    DISPID_TUNER_TS_DVBS_HI_OSC_FREQ = 1002,
-+    DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ = 1003,
-+    DISPID_TUNER_TS_DVBS_INPUT_RANGE = 1004,
-+    DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION = 1005,
-+    DISPID_TUNER_TS_AR_MINFREQUENCY = 101,
-+    DISPID_TUNER_TS_AR_MAXFREQUENCY = 102,
-+    DISPID_TUNER_TS_AR_STEP = 103,
-+    DISPID_TUNER_TS_AR_COUNTRYCODE = 104,
-+    DISPID_TUNER_TS_AUX_COUNTRYCODE = 101,
-+    DISPID_TUNER_TS_ATV_MINCHANNEL = 101,
-+    DISPID_TUNER_TS_ATV_MAXCHANNEL = 102,
-+    DISPID_TUNER_TS_ATV_INPUTTYPE = 103,
-+    DISPID_TUNER_TS_ATV_COUNTRYCODE = 104,
-+    DISPID_TUNER_TS_ATSC_MINMINORCHANNEL = 201,
-+    DISPID_TUNER_TS_ATSC_MAXMINORCHANNEL = 202,
-+    DISPID_TUNER_TS_ATSC_MINPHYSCHANNEL = 203,
-+    DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL = 204,
-+    DISPID_TUNER_TS_DC_MINMAJORCHANNEL = 301,
-+    DISPID_TUNER_TS_DC_MAXMAJORCHANNEL = 302,
-+    DISPID_TUNER_TS_DC_MINSOURCEID = 303,
-+    DISPID_TUNER_TS_DC_MAXSOURCEID = 304,
-+    DISPID_CHTUNER_ATVAC_CHANNEL = 101,
-+    DISPID_CHTUNER_ATVDC_SYSTEM = 101,
-+    DISPID_CHTUNER_ATVDC_CONTENT = 102,
-+    DISPID_CHTUNER_CIDTR_CHANNELID = 101,
-+    DISPID_CHTUNER_CTR_CHANNEL = 101,
-+    DISPID_CHTUNER_ACTR_MINOR_CHANNEL = 201,
-+    DISPID_CHTUNER_DCTR_MAJOR_CHANNEL = 301,
-+    DISPID_CHTUNER_DCTR_SRCID = 302,
-+    DISPID_DVBTUNER_DVBC_ATTRIBUTESVALID = 101,
-+    DISPID_DVBTUNER_DVBC_PID = 102,
-+    DISPID_DVBTUNER_DVBC_TAG = 103,
-+    DISPID_DVBTUNER_DVBC_COMPONENTTYPE = 104,
-+    DISPID_DVBTUNER_ONID = 101,
-+    DISPID_DVBTUNER_TSID = 102,
-+    DISPID_DVBTUNER_SID = 103,
-+    DISPID_MP2TUNER_TSID = 101,
-+    DISPID_MP2TUNER_PROGNO = 102,
-+    DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST = 1,
-+};
-+#pragma pop_macro("DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST")
-+#pragma pop_macro("DISPID_MP2TUNER_PROGNO")
-+#pragma pop_macro("DISPID_MP2TUNER_TSID")
-+#pragma pop_macro("DISPID_DVBTUNER_SID")
-+#pragma pop_macro("DISPID_DVBTUNER_TSID")
-+#pragma pop_macro("DISPID_DVBTUNER_ONID")
-+#pragma pop_macro("DISPID_DVBTUNER_DVBC_COMPONENTTYPE")
-+#pragma pop_macro("DISPID_DVBTUNER_DVBC_TAG")
-+#pragma pop_macro("DISPID_DVBTUNER_DVBC_PID")
-+#pragma pop_macro("DISPID_DVBTUNER_DVBC_ATTRIBUTESVALID")
-+#pragma pop_macro("DISPID_CHTUNER_DCTR_SRCID")
-+#pragma pop_macro("DISPID_CHTUNER_DCTR_MAJOR_CHANNEL")
-+#pragma pop_macro("DISPID_CHTUNER_ACTR_MINOR_CHANNEL")
-+#pragma pop_macro("DISPID_CHTUNER_CTR_CHANNEL")
-+#pragma pop_macro("DISPID_CHTUNER_CIDTR_CHANNELID")
-+#pragma pop_macro("DISPID_CHTUNER_ATVDC_CONTENT")
-+#pragma pop_macro("DISPID_CHTUNER_ATVDC_SYSTEM")
-+#pragma pop_macro("DISPID_CHTUNER_ATVAC_CHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_DC_MAXSOURCEID")
-+#pragma pop_macro("DISPID_TUNER_TS_DC_MINSOURCEID")
-+#pragma pop_macro("DISPID_TUNER_TS_DC_MAXMAJORCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_DC_MINMAJORCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_ATSC_MINPHYSCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_ATSC_MAXMINORCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_ATSC_MINMINORCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_ATV_COUNTRYCODE")
-+#pragma pop_macro("DISPID_TUNER_TS_ATV_INPUTTYPE")
-+#pragma pop_macro("DISPID_TUNER_TS_ATV_MAXCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_ATV_MINCHANNEL")
-+#pragma pop_macro("DISPID_TUNER_TS_AUX_COUNTRYCODE")
-+#pragma pop_macro("DISPID_TUNER_TS_AR_COUNTRYCODE")
-+#pragma pop_macro("DISPID_TUNER_TS_AR_STEP")
-+#pragma pop_macro("DISPID_TUNER_TS_AR_MAXFREQUENCY")
-+#pragma pop_macro("DISPID_TUNER_TS_AR_MINFREQUENCY")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS_INPUT_RANGE")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS_HI_OSC_FREQ")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ")
-+#pragma pop_macro("DISPID_TUNER_TS_DVB2_NETWORK_ID")
-+#pragma pop_macro("DISPID_TUNER_TS_DVB_SYSTEMTYPE")
-+#pragma pop_macro("DISPID_TUNER_C_ANALOG_AUDIO")
-+#pragma pop_macro("DISPID_TUNER_C_MP2_PROGNO")
-+#pragma pop_macro("DISPID_TUNER_C_MP2_PCRPID")
-+#pragma pop_macro("DISPID_TUNER_C_MP2_PID")
-+#pragma pop_macro("DISPID_TUNER_C_CLONE")
-+#pragma pop_macro("DISPID_TUNER_C_DESCRIPTION")
-+#pragma pop_macro("DISPID_TUNER_C_LANGID")
-+#pragma pop_macro("DISPID_TUNER_C_STATUS")
-+#pragma pop_macro("DISPID_TUNER_C_TYPE")
-+#pragma pop_macro("DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL")
-+#pragma pop_macro("DISPID_TUNER_L_ANALOG_STANDARD")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS2_PILOT")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS2_ROLLOFF")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE")
-+#pragma pop_macro("DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS_ELEVATION")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS_AZIMUTH")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS_ORBITAL")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS_WEST")
-+#pragma pop_macro("DISPID_TUNER_L_DVBS_POLARISATION")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_INUSE")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_TRANSMISSIONMODE")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_HALPHA")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_GUARDINTERVAL")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_LPINNERFECRATE")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_LPINNERFECMETHOD")
-+#pragma pop_macro("DISPID_TUNER_L_DVBT_BANDWIDTH")
-+#pragma pop_macro("DISPID_TUNER_L_ATSC_MP2_PROGNO")
-+#pragma pop_macro("DISPID_TUNER_L_ATSC_TSID")
-+#pragma pop_macro("DISPID_TUNER_L_ATSC_PHYS_CHANNEL")
-+#pragma pop_macro("DISPID_TUNER_L_CLONE")
-+#pragma pop_macro("DISPID_TUNER_L_SYMRATE")
-+#pragma pop_macro("DISPID_TUNER_L_MOD")
-+#pragma pop_macro("DISPID_TUNER_L_OUTERFECRATE")
-+#pragma pop_macro("DISPID_TUNER_L_OUTERFECMETHOD")
-+#pragma pop_macro("DISPID_TUNER_L_INNERFECRATE")
-+#pragma pop_macro("DISPID_TUNER_L_INNERFECMETHOD")
-+#pragma pop_macro("DISPID_TUNER_L_CARRFREQ")
-+#pragma pop_macro("DISPID_TUNER_ATSCCT_FLAGS")
-+#pragma pop_macro("DISPID_TUNER_MP2CT_TYPE")
-+#pragma pop_macro("DISPID_TUNER_LCT_LANGID")
-+#pragma pop_macro("DISPID_TUNER_CT_CLONE")
-+#pragma pop_macro("DISPID_TUNER_CT_MEDIATYPE")
-+#pragma pop_macro("DISPID_TUNER_CT__MEDIAFORMATTYPE")
-+#pragma pop_macro("DISPID_TUNER_CT_MEDIAFORMATTYPE")
-+#pragma pop_macro("DISPID_TUNER_CT__MEDIASUBTYPE")
-+#pragma pop_macro("DISPID_TUNER_CT_MEDIASUBTYPE")
-+#pragma pop_macro("DISPID_TUNER_CT__MEDIAMAJORTYPE")
-+#pragma pop_macro("DISPID_TUNER_CT_MEDIAMAJORTYPE")
-+#pragma pop_macro("DISPID_TUNER_CT_CATEGORY")
-+#pragma pop_macro("DISPID_TUNER_TR_LOCATOR")
-+#pragma pop_macro("DISPID_TUNER_TR_CLONE")
-+#pragma pop_macro("DISPID_TUNER_TR_COMPONENTS")
-+#pragma pop_macro("DISPID_TUNER_TR_TUNINGSPACE")
-+#pragma pop_macro("DISPID_TUNER_TS_CLONE")
-+#pragma pop_macro("DISPID_TUNER_TS_DEFLOCATOR")
-+#pragma pop_macro("DISPID_TUNER_TS_FREQMAP")
-+#pragma pop_macro("DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES")
-+#pragma pop_macro("DISPID_TUNER_TS_ENUMDEVICEMONIKERS")
-+#pragma pop_macro("DISPID_TUNER_TS_ENUMCATEGORYGUIDS")
-+#pragma pop_macro("DISPID_TUNER_TS_CREATETUNEREQUEST")
-+#pragma pop_macro("DISPID_TUNER_TS__NETWORKTYPE")
-+#pragma pop_macro("DISPID_TUNER_TS_NETWORKTYPE")
-+#pragma pop_macro("DISPID_TUNER_TS_CLSID")
-+#pragma pop_macro("DISPID_TUNER_TS_FRIENDLYNAME")
-+#pragma pop_macro("DISPID_TUNER_TS_UNIQUENAME")
-+#else
- enum __MIDL___MIDL_itf_tuner_0000_0000_0001
-     {
-         DISPID_TUNER_TS_UNIQUENAME	= 1,
-@@ -1215,6 +1669,7 @@ enum __MIDL___MIDL_itf_tuner_0000_0000_0001
-         DISPID_MP2TUNER_PROGNO	= 102,
-         DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST	= 1
-     } ;
-+#endif
- 
- 
- extern RPC_IF_HANDLE __MIDL_itf_tuner_0000_0000_v0_0_c_ifspec;
-@@ -1232,7 +1687,7 @@ EXTERN_C const IID IID_ITuningSpaces;
+@@ -1232,7 +1233,7 @@ EXTERN_C const IID IID_ITuningSpaces;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("901284E4-33FE-4b69-8D63-634A596F3756")
@@ -487,7 +19,7 @@ index f53c1b2f69..15a1b3edac 100644
      {
      public:
          virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-@@ -1356,7 +1811,7 @@ EXTERN_C const IID IID_ITuningSpaces;
+@@ -1356,7 +1357,7 @@ EXTERN_C const IID IID_ITuningSpaces;
          END_INTERFACE
      } ITuningSpacesVtbl;
  
@@ -496,7 +28,7 @@ index f53c1b2f69..15a1b3edac 100644
      {
          CONST_VTBL struct ITuningSpacesVtbl *lpVtbl;
      };
-@@ -1424,7 +1879,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
+@@ -1424,7 +1425,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("5B692E84-E2F1-11d2-9493-00C04F72D980")
@@ -505,7 +37,7 @@ index f53c1b2f69..15a1b3edac 100644
      {
      public:
          virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-@@ -1662,7 +2117,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
+@@ -1662,7 +1663,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
          END_INTERFACE
      } ITuningSpaceContainerVtbl;
  
@@ -514,7 +46,7 @@ index f53c1b2f69..15a1b3edac 100644
      {
          CONST_VTBL struct ITuningSpaceContainerVtbl *lpVtbl;
      };
-@@ -1756,13 +2211,13 @@ EXTERN_C const IID IID_ITuningSpace;
+@@ -1756,13 +1757,13 @@ EXTERN_C const IID IID_ITuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -530,7 +62,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_UniqueName( 
              /* [annotation][in] */ 
-@@ -1770,7 +2225,7 @@ EXTERN_C const IID IID_ITuningSpace;
+@@ -1770,7 +1771,7 @@ EXTERN_C const IID IID_ITuningSpace;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
              /* [annotation][retval][out] */ 
@@ -539,7 +71,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FriendlyName( 
              /* [annotation][in] */ 
-@@ -1778,11 +2233,11 @@ EXTERN_C const IID IID_ITuningSpace;
+@@ -1778,11 +1779,11 @@ EXTERN_C const IID IID_ITuningSpace;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
              /* [annotation][retval][out] */ 
@@ -553,7 +85,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NetworkType( 
              /* [annotation][in] */ 
-@@ -1818,7 +2273,7 @@ EXTERN_C const IID IID_ITuningSpace;
+@@ -1818,7 +1819,7 @@ EXTERN_C const IID IID_ITuningSpace;
          
          virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FrequencyMapping( 
              /* [annotation][retval][out] */ 
@@ -562,7 +94,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FrequencyMapping( 
              __RPC__in BSTR Mapping) = 0;
-@@ -2137,7 +2592,7 @@ EXTERN_C const IID IID_IEnumTuningSpaces;
+@@ -2137,7 +2138,7 @@ EXTERN_C const IID IID_IEnumTuningSpaces;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -571,7 +103,7 @@ index f53c1b2f69..15a1b3edac 100644
      IEnumTuningSpaces : public IUnknown
      {
      public:
-@@ -2267,7 +2722,7 @@ EXTERN_C const IID IID_IDVBTuningSpace;
+@@ -2267,7 +2268,7 @@ EXTERN_C const IID IID_IDVBTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -580,7 +112,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBTuningSpace : public ITuningSpace
      {
      public:
-@@ -2600,7 +3055,7 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
+@@ -2600,7 +2601,7 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -589,7 +121,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBTuningSpace2 : public IDVBTuningSpace
      {
      public:
-@@ -2952,7 +3407,7 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
+@@ -2952,7 +2953,7 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -598,7 +130,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBSTuningSpace : public IDVBTuningSpace2
      {
      public:
-@@ -2982,7 +3437,7 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
+@@ -2982,7 +2983,7 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InputRange( 
              /* [annotation][retval][out] */ 
@@ -607,7 +139,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InputRange( 
              /* [annotation][in] */ 
-@@ -3427,7 +3882,7 @@ EXTERN_C const IID IID_IAuxInTuningSpace;
+@@ -3427,7 +3428,7 @@ EXTERN_C const IID IID_IAuxInTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -616,7 +148,7 @@ index f53c1b2f69..15a1b3edac 100644
      IAuxInTuningSpace : public ITuningSpace
      {
      public:
-@@ -4068,7 +4523,7 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
+@@ -4068,7 +4069,7 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -625,7 +157,7 @@ index f53c1b2f69..15a1b3edac 100644
      IAnalogTVTuningSpace : public ITuningSpace
      {
      public:
-@@ -4479,7 +4934,7 @@ EXTERN_C const IID IID_IATSCTuningSpace;
+@@ -4479,7 +4480,7 @@ EXTERN_C const IID IID_IATSCTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -634,7 +166,7 @@ index f53c1b2f69..15a1b3edac 100644
      IATSCTuningSpace : public IAnalogTVTuningSpace
      {
      public:
-@@ -4963,7 +5418,7 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
+@@ -4963,7 +4964,7 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -643,7 +175,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDigitalCableTuningSpace : public IATSCTuningSpace
      {
      public:
-@@ -5520,7 +5975,7 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
+@@ -5520,7 +5521,7 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -652,7 +184,7 @@ index f53c1b2f69..15a1b3edac 100644
      IAnalogRadioTuningSpace : public ITuningSpace
      {
      public:
-@@ -6293,7 +6748,7 @@ EXTERN_C const IID IID_ITuneRequest;
+@@ -6293,7 +6294,7 @@ EXTERN_C const IID IID_ITuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -661,7 +193,7 @@ index f53c1b2f69..15a1b3edac 100644
      ITuneRequest : public IDispatch
      {
      public:
-@@ -6494,13 +6949,13 @@ EXTERN_C const IID IID_IChannelIDTuneRequest;
+@@ -6494,13 +6495,13 @@ EXTERN_C const IID IID_IChannelIDTuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -677,7 +209,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ChannelID( 
              /* [annotation][in] */ 
-@@ -6702,7 +7157,7 @@ EXTERN_C const IID IID_IChannelTuneRequest;
+@@ -6702,7 +6703,7 @@ EXTERN_C const IID IID_IChannelTuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -686,7 +218,7 @@ index f53c1b2f69..15a1b3edac 100644
      IChannelTuneRequest : public ITuneRequest
      {
      public:
-@@ -6910,7 +7365,7 @@ EXTERN_C const IID IID_IATSCChannelTuneRequest;
+@@ -6910,7 +6911,7 @@ EXTERN_C const IID IID_IATSCChannelTuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -695,7 +227,7 @@ index f53c1b2f69..15a1b3edac 100644
      IATSCChannelTuneRequest : public IChannelTuneRequest
      {
      public:
-@@ -7137,7 +7592,7 @@ EXTERN_C const IID IID_IDigitalCableTuneRequest;
+@@ -7137,7 +7138,7 @@ EXTERN_C const IID IID_IDigitalCableTuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -704,7 +236,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDigitalCableTuneRequest : public IATSCChannelTuneRequest
      {
      public:
-@@ -7409,7 +7864,7 @@ EXTERN_C const IID IID_IDVBTuneRequest;
+@@ -7409,7 +7410,7 @@ EXTERN_C const IID IID_IDVBTuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -713,7 +245,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBTuneRequest : public ITuneRequest
      {
      public:
-@@ -7669,7 +8124,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequest;
+@@ -7669,7 +7670,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequest;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -722,7 +254,7 @@ index f53c1b2f69..15a1b3edac 100644
      IMPEG2TuneRequest : public ITuneRequest
      {
      public:
-@@ -7903,7 +8358,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequestFactory;
+@@ -7903,7 +7904,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequestFactory;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -731,7 +263,7 @@ index f53c1b2f69..15a1b3edac 100644
      IMPEG2TuneRequestFactory : public IDispatch
      {
      public:
-@@ -8056,7 +8511,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequestSupport;
+@@ -8056,7 +8057,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequestSupport;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -740,7 +272,7 @@ index f53c1b2f69..15a1b3edac 100644
      IMPEG2TuneRequestSupport : public IUnknown
      {
      public:
-@@ -8259,7 +8714,7 @@ EXTERN_C const IID IID_ITunerCapEx;
+@@ -8259,7 +8260,7 @@ EXTERN_C const IID IID_ITunerCapEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -749,7 +281,7 @@ index f53c1b2f69..15a1b3edac 100644
      ITunerCapEx : public IUnknown
      {
      public:
-@@ -9119,7 +9574,7 @@ EXTERN_C const IID IID_IComponentType;
+@@ -9119,7 +9120,7 @@ EXTERN_C const IID IID_IComponentType;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -758,7 +290,7 @@ index f53c1b2f69..15a1b3edac 100644
      IComponentType : public IDispatch
      {
      public:
-@@ -9133,7 +9588,7 @@ EXTERN_C const IID IID_IComponentType;
+@@ -9133,7 +9134,7 @@ EXTERN_C const IID IID_IComponentType;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaMajorType( 
              /* [annotation][retval][out] */ 
@@ -767,7 +299,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaMajorType( 
              /* [annotation][in] */ 
-@@ -9149,7 +9604,7 @@ EXTERN_C const IID IID_IComponentType;
+@@ -9149,7 +9150,7 @@ EXTERN_C const IID IID_IComponentType;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaSubType( 
              /* [annotation][retval][out] */ 
@@ -776,7 +308,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaSubType( 
              /* [annotation][in] */ 
-@@ -9165,7 +9620,7 @@ EXTERN_C const IID IID_IComponentType;
+@@ -9165,7 +9166,7 @@ EXTERN_C const IID IID_IComponentType;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaFormatType( 
              /* [annotation][retval][out] */ 
@@ -785,7 +317,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaFormatType( 
              /* [annotation][in] */ 
-@@ -9476,7 +9931,7 @@ EXTERN_C const IID IID_ILanguageComponentType;
+@@ -9476,7 +9477,7 @@ EXTERN_C const IID IID_ILanguageComponentType;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -794,7 +326,7 @@ index f53c1b2f69..15a1b3edac 100644
      ILanguageComponentType : public IComponentType
      {
      public:
-@@ -9792,7 +10247,7 @@ EXTERN_C const IID IID_IMPEG2ComponentType;
+@@ -9792,7 +9793,7 @@ EXTERN_C const IID IID_IMPEG2ComponentType;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -803,7 +335,7 @@ index f53c1b2f69..15a1b3edac 100644
      IMPEG2ComponentType : public ILanguageComponentType
      {
      public:
-@@ -10127,7 +10582,7 @@ EXTERN_C const IID IID_IATSCComponentType;
+@@ -10127,7 +10128,7 @@ EXTERN_C const IID IID_IATSCComponentType;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -812,7 +344,7 @@ index f53c1b2f69..15a1b3edac 100644
      IATSCComponentType : public IMPEG2ComponentType
      {
      public:
-@@ -10481,7 +10936,7 @@ EXTERN_C const IID IID_IEnumComponentTypes;
+@@ -10481,7 +10482,7 @@ EXTERN_C const IID IID_IEnumComponentTypes;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -821,7 +353,7 @@ index f53c1b2f69..15a1b3edac 100644
      IEnumComponentTypes : public IUnknown
      {
      public:
-@@ -10611,7 +11066,7 @@ EXTERN_C const IID IID_IComponentTypes;
+@@ -10611,7 +10612,7 @@ EXTERN_C const IID IID_IComponentTypes;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -830,7 +362,7 @@ index f53c1b2f69..15a1b3edac 100644
      IComponentTypes : public IDispatch
      {
      public:
-@@ -11116,7 +11571,7 @@ EXTERN_C const IID IID_IAnalogAudioComponentType;
+@@ -11116,7 +11117,7 @@ EXTERN_C const IID IID_IAnalogAudioComponentType;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -839,7 +371,7 @@ index f53c1b2f69..15a1b3edac 100644
      IAnalogAudioComponentType : public IComponentType
      {
      public:
-@@ -11432,7 +11887,7 @@ EXTERN_C const IID IID_IMPEG2Component;
+@@ -11432,7 +11433,7 @@ EXTERN_C const IID IID_IMPEG2Component;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -848,7 +380,7 @@ index f53c1b2f69..15a1b3edac 100644
      IMPEG2Component : public IComponent
      {
      public:
-@@ -11728,7 +12183,7 @@ EXTERN_C const IID IID_IEnumComponents;
+@@ -11728,7 +11729,7 @@ EXTERN_C const IID IID_IEnumComponents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -857,7 +389,7 @@ index f53c1b2f69..15a1b3edac 100644
      IEnumComponents : public IUnknown
      {
      public:
-@@ -11858,7 +12313,7 @@ EXTERN_C const IID IID_IComponents;
+@@ -11858,7 +11859,7 @@ EXTERN_C const IID IID_IComponents;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -866,7 +398,7 @@ index f53c1b2f69..15a1b3edac 100644
      IComponents : public IDispatch
      {
      public:
-@@ -12345,7 +12800,7 @@ EXTERN_C const IID IID_ILocator;
+@@ -12345,7 +12346,7 @@ EXTERN_C const IID IID_ILocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -875,7 +407,7 @@ index f53c1b2f69..15a1b3edac 100644
      ILocator : public IDispatch
      {
      public:
-@@ -12676,7 +13131,7 @@ EXTERN_C const IID IID_IAnalogLocator;
+@@ -12676,7 +12677,7 @@ EXTERN_C const IID IID_IAnalogLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -884,7 +416,7 @@ index f53c1b2f69..15a1b3edac 100644
      IAnalogLocator : public ILocator
      {
      public:
-@@ -12974,7 +13429,7 @@ EXTERN_C const IID IID_IDigitalLocator;
+@@ -12974,7 +12975,7 @@ EXTERN_C const IID IID_IDigitalLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -893,7 +425,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDigitalLocator : public ILocator
      {
      public:
-@@ -13246,7 +13701,7 @@ EXTERN_C const IID IID_IATSCLocator;
+@@ -13246,7 +13247,7 @@ EXTERN_C const IID IID_IATSCLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -902,7 +434,7 @@ index f53c1b2f69..15a1b3edac 100644
      IATSCLocator : public IDigitalLocator
      {
      public:
-@@ -13571,7 +14026,7 @@ EXTERN_C const IID IID_IATSCLocator2;
+@@ -13571,7 +13572,7 @@ EXTERN_C const IID IID_IATSCLocator2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -911,7 +443,7 @@ index f53c1b2f69..15a1b3edac 100644
      IATSCLocator2 : public IATSCLocator
      {
      public:
-@@ -13907,7 +14362,7 @@ EXTERN_C const IID IID_IDigitalCableLocator;
+@@ -13907,7 +13908,7 @@ EXTERN_C const IID IID_IDigitalCableLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -920,7 +452,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDigitalCableLocator : public IATSCLocator2
      {
      public:
-@@ -14236,7 +14691,7 @@ EXTERN_C const IID IID_IDVBTLocator;
+@@ -14236,7 +14237,7 @@ EXTERN_C const IID IID_IDVBTLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -929,7 +461,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBTLocator : public IDigitalLocator
      {
      public:
-@@ -14691,7 +15146,7 @@ EXTERN_C const IID IID_IDVBTLocator2;
+@@ -14691,7 +14692,7 @@ EXTERN_C const IID IID_IDVBTLocator2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -938,7 +470,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBTLocator2 : public IDVBTLocator
      {
      public:
-@@ -15117,7 +15572,7 @@ EXTERN_C const IID IID_IDVBSLocator;
+@@ -15117,7 +15118,7 @@ EXTERN_C const IID IID_IDVBSLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -947,7 +479,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBSLocator : public IDigitalLocator
      {
      public:
-@@ -15520,7 +15975,7 @@ EXTERN_C const IID IID_IDVBSLocator2;
+@@ -15520,7 +15521,7 @@ EXTERN_C const IID IID_IDVBSLocator2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -956,7 +488,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBSLocator2 : public IDVBSLocator
      {
      public:
-@@ -16066,7 +16521,7 @@ EXTERN_C const IID IID_IDVBCLocator;
+@@ -16066,7 +16067,7 @@ EXTERN_C const IID IID_IDVBCLocator;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -965,7 +497,7 @@ index f53c1b2f69..15a1b3edac 100644
      IDVBCLocator : public IDigitalLocator
      {
      public:
-@@ -16703,7 +17158,7 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
+@@ -16703,7 +16704,7 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -974,7 +506,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESOpenMmiEvent : public IESEvent
      {
      public:
-@@ -16723,9 +17178,9 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
+@@ -16723,9 +16724,9 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
          
          virtual HRESULT STDMETHODCALLTYPE GetDialogStringData( 
              /* [annotation][out] */ 
@@ -986,7 +518,7 @@ index f53c1b2f69..15a1b3edac 100644
          
      };
      
-@@ -16883,7 +17338,7 @@ EXTERN_C const IID IID_IESCloseMmiEvent;
+@@ -16883,7 +16884,7 @@ EXTERN_C const IID IID_IESCloseMmiEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -995,7 +527,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESCloseMmiEvent : public IESEvent
      {
      public:
-@@ -17016,7 +17471,7 @@ EXTERN_C const IID IID_IESValueUpdatedEvent;
+@@ -17016,7 +17017,7 @@ EXTERN_C const IID IID_IESValueUpdatedEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1004,7 +536,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESValueUpdatedEvent : public IESEvent
      {
      public:
-@@ -17149,7 +17604,7 @@ EXTERN_C const IID IID_IESRequestTunerEvent;
+@@ -17149,7 +17150,7 @@ EXTERN_C const IID IID_IESRequestTunerEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1013,7 +545,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESRequestTunerEvent : public IESEvent
      {
      public:
-@@ -17321,7 +17776,7 @@ EXTERN_C const IID IID_IESIsdbCasResponseEvent;
+@@ -17321,7 +17322,7 @@ EXTERN_C const IID IID_IESIsdbCasResponseEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1022,7 +554,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESIsdbCasResponseEvent : public IESEvent
      {
      public:
-@@ -17499,7 +17954,7 @@ EXTERN_C const IID IID_IGpnvsCommonBase;
+@@ -17499,7 +17500,7 @@ EXTERN_C const IID IID_IGpnvsCommonBase;
      public:
          virtual HRESULT STDMETHODCALLTYPE GetValueUpdateName( 
              /* [annotation][retval][out] */ 
@@ -1031,7 +563,7 @@ index f53c1b2f69..15a1b3edac 100644
          
      };
      
-@@ -17695,7 +18150,7 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
+@@ -17695,7 +17696,7 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1040,7 +572,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESLicenseRenewalResultEvent : public IESEvent
      {
      public:
-@@ -17705,7 +18160,7 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
+@@ -17705,7 +17706,7 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
          
          virtual HRESULT STDMETHODCALLTYPE GetFileName( 
              /* [annotation][retval][out] */ 
@@ -1049,7 +581,7 @@ index f53c1b2f69..15a1b3edac 100644
          
          virtual HRESULT STDMETHODCALLTYPE IsRenewalSuccessful( 
              /* [annotation][retval][out] */ 
-@@ -17958,7 +18413,7 @@ EXTERN_C const IID IID_IESFileExpiryDateEvent;
+@@ -17958,7 +17959,7 @@ EXTERN_C const IID IID_IESFileExpiryDateEvent;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1058,7 +590,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESFileExpiryDateEvent : public IESEvent
      {
      public:
-@@ -18156,7 +18611,7 @@ EXTERN_C const IID IID_IESEventService;
+@@ -18156,7 +18157,7 @@ EXTERN_C const IID IID_IESEventService;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1067,7 +599,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESEventService : public IUnknown
      {
      public:
-@@ -18241,7 +18696,7 @@ EXTERN_C const IID IID_IESEventServiceConfiguration;
+@@ -18241,7 +18242,7 @@ EXTERN_C const IID IID_IESEventServiceConfiguration;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1076,7 +608,7 @@ index f53c1b2f69..15a1b3edac 100644
      IESEventServiceConfiguration : public IUnknown
      {
      public:
-@@ -18657,7 +19112,7 @@ EXTERN_C const IID IID_IPersistTuneXml;
+@@ -18657,7 +18658,7 @@ EXTERN_C const IID IID_IPersistTuneXml;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1085,7 +617,7 @@ index f53c1b2f69..15a1b3edac 100644
      IPersistTuneXml : public IPersist
      {
      public:
-@@ -18776,7 +19231,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility;
+@@ -18776,7 +18777,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1094,7 +626,7 @@ index f53c1b2f69..15a1b3edac 100644
      IPersistTuneXmlUtility : public IUnknown
      {
      public:
-@@ -18867,7 +19322,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
+@@ -18867,7 +18868,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1103,7 +635,7 @@ index f53c1b2f69..15a1b3edac 100644
      IPersistTuneXmlUtility2 : public IPersistTuneXmlUtility
      {
      public:
-@@ -18875,7 +19330,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
+@@ -18875,7 +18876,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
              /* [annotation][in] */ 
              _In_  ITuneRequest *piTuneRequest,
              /* [annotation][retval][out] */ 
@@ -1112,7 +644,7 @@ index f53c1b2f69..15a1b3edac 100644
          
      };
      
-@@ -18970,7 +19425,7 @@ EXTERN_C const IID IID_IBDACreateTuneRequestEx;
+@@ -18970,7 +18971,7 @@ EXTERN_C const IID IID_IBDACreateTuneRequestEx;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
@@ -1121,7 +653,7 @@ index f53c1b2f69..15a1b3edac 100644
      IBDACreateTuneRequestEx : public IUnknown
      {
      public:
-@@ -19458,6 +19913,8 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+@@ -19458,6 +19459,8 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
  }
  #endif
  

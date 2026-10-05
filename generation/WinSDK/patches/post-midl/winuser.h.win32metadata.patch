@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
-index f99e9294f5..3a176f023c 100644
+index f99e9294f5..ba09d338dc 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinUser.h
 @@ -1,3 +1,4 @@
@@ -61,15 +61,6 @@ index f99e9294f5..3a176f023c 100644
  int
  WINAPIV
  wsprintfW(
-@@ -792,7 +793,7 @@ wsprintfW(
- #define WH_CBT              5
- #define WH_SYSMSGFILTER     6
- #define WH_MOUSE            7
--#if defined(_WIN32_WINDOWS)
-+#if defined(WIN32METADATA) || (defined(_WIN32_WINDOWS))
- #define WH_HARDWARE         8
- #endif
- #define WH_DEBUG            9
 @@ -892,7 +893,7 @@ typedef struct tagCBTACTIVATESTRUCT
  /*
   * WTSSESSION_NOTIFICATION struct pointed by lParam, for WM_WTSSESSION_CHANGE
@@ -5934,15 +5925,6 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetIconInfoExW(
-@@ -11042,7 +11047,7 @@ GetIconInfoExW(
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
- #pragma endregion
- 
--#ifdef OEMRESOURCE
-+#if defined(WIN32METADATA) || (defined(OEMRESOURCE))
- 
- 
- /*
 @@ -11548,13 +11553,13 @@ typedef enum {
  
  #ifndef NOMSG
@@ -6060,12 +6042,8 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  DlgDirSelectComboBoxExW(
-@@ -11717,8 +11722,12 @@ DlgDirSelectComboBoxExW(
- #endif /* WINVER >= 0x0400 */
- 
+@@ -11719,6 +11724,8 @@ DlgDirSelectComboBoxExW(
  #if defined(_WIN32_WCE) && (_WIN32_WCE >= 0x0500)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(DS_USEPIXELS)) || (((defined(_WIN32_WCE) && (_WIN32_WCE >= 0x0500))))
  #define DS_USEPIXELS        0x8000L
  #endif
 +#if defined(_WIN32_WCE) && (_WIN32_WCE >= 0x0500)
@@ -6073,12 +6051,8 @@ index f99e9294f5..3a176f023c 100644
  
  
  #define DM_GETDEFID         (WM_USER+0)
-@@ -11824,8 +11833,12 @@ DlgDirSelectComboBoxExW(
- #define LB_ITEMFROMPOINT        0x01A9
- #endif /* WINVER >= 0x0400 */
+@@ -11826,6 +11833,8 @@ DlgDirSelectComboBoxExW(
  #if defined(_WIN32_WCE) && (_WIN32_WCE >= 0x0400)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(LB_MULTIPLEADDSTRING)) || (((defined(_WIN32_WCE) && (_WIN32_WCE >= 0x0400))))
  #define LB_MULTIPLEADDSTRING    0x01B1
  #endif
 +#if defined(_WIN32_WCE) && (_WIN32_WCE >= 0x0400)
@@ -6086,12 +6060,8 @@ index f99e9294f5..3a176f023c 100644
  
  
  #if(_WIN32_WINNT >= 0x0501)
-@@ -11962,8 +11975,12 @@ DlgDirSelectComboBoxExW(
- #define CB_SETDROPPEDWIDTH          0x0160
- #define CB_INITSTORAGE              0x0161
+@@ -11964,6 +11973,8 @@ DlgDirSelectComboBoxExW(
  #if defined(_WIN32_WCE) &&(_WIN32_WCE >= 0x0400)
-+#endif
-+#if (defined(WIN32METADATA) && !defined(CB_MULTIPLEADDSTRING)) || (((defined(_WIN32_WCE) &&(_WIN32_WCE >= 0x0400))))
  #define CB_MULTIPLEADDSTRING        0x0163
  #endif
 +#if defined(_WIN32_WCE) &&(_WIN32_WCE >= 0x0400)
@@ -6099,7 +6069,7 @@ index f99e9294f5..3a176f023c 100644
  #endif /* WINVER >= 0x0400 */
  
  #if(_WIN32_WINNT >= 0x0501)
-@@ -12035,10 +12052,10 @@ DlgDirSelectComboBoxExW(
+@@ -12035,10 +12046,10 @@ DlgDirSelectComboBoxExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6112,7 +6082,7 @@ index f99e9294f5..3a176f023c 100644
      int     nMin;
      int     nMax;
      UINT    nPage;
-@@ -12047,21 +12064,21 @@ typedef struct tagSCROLLINFO
+@@ -12047,21 +12058,21 @@ typedef struct tagSCROLLINFO
  }   SCROLLINFO, FAR *LPSCROLLINFO;
  typedef SCROLLINFO CONST FAR *LPCSCROLLINFO;
  
@@ -6138,7 +6108,7 @@ index f99e9294f5..3a176f023c 100644
      _Inout_ LPSCROLLINFO lpsi);
  
  
-@@ -12100,7 +12117,7 @@ typedef struct tagMDICREATESTRUCTA {
+@@ -12100,7 +12111,7 @@ typedef struct tagMDICREATESTRUCTA {
      int y;
      int cx;
      int cy;
@@ -6147,7 +6117,7 @@ index f99e9294f5..3a176f023c 100644
      LPARAM lParam;        /* app-defined stuff */
  } MDICREATESTRUCTA, *LPMDICREATESTRUCTA;
  typedef struct tagMDICREATESTRUCTW {
-@@ -12111,7 +12128,7 @@ typedef struct tagMDICREATESTRUCTW {
+@@ -12111,7 +12122,7 @@ typedef struct tagMDICREATESTRUCTW {
      int y;
      int cx;
      int cy;
@@ -6156,7 +6126,7 @@ index f99e9294f5..3a176f023c 100644
      LPARAM lParam;        /* app-defined stuff */
  } MDICREATESTRUCTW, *LPMDICREATESTRUCTW;
  #ifdef UNICODE
-@@ -12127,7 +12144,7 @@ typedef struct tagCLIENTCREATESTRUCT {
+@@ -12127,7 +12138,7 @@ typedef struct tagCLIENTCREATESTRUCT {
      UINT idFirstChild;
  } CLIENTCREATESTRUCT, *LPCLIENTCREATESTRUCT;
  
@@ -6165,7 +6135,7 @@ index f99e9294f5..3a176f023c 100644
  LRESULT
  WINAPI
  DefFrameProcA(
-@@ -12136,7 +12153,7 @@ DefFrameProcA(
+@@ -12136,7 +12147,7 @@ DefFrameProcA(
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -6174,7 +6144,7 @@ index f99e9294f5..3a176f023c 100644
  LRESULT
  WINAPI
  DefFrameProcW(
-@@ -12151,7 +12168,7 @@ DefFrameProcW(
+@@ -12151,7 +12162,7 @@ DefFrameProcW(
  #define DefFrameProc  DefFrameProcA
  #endif // !UNICODE
  
@@ -6183,7 +6153,7 @@ index f99e9294f5..3a176f023c 100644
  #ifndef _MAC
  LRESULT
  WINAPI
-@@ -12159,12 +12176,12 @@ WINAPI
+@@ -12159,12 +12170,12 @@ WINAPI
  LRESULT
  CALLBACK
  #endif
@@ -6198,7 +6168,7 @@ index f99e9294f5..3a176f023c 100644
  #ifndef _MAC
  LRESULT
  WINAPI
-@@ -12172,7 +12189,7 @@ WINAPI
+@@ -12172,7 +12183,7 @@ WINAPI
  LRESULT
  CALLBACK
  #endif
@@ -6207,7 +6177,7 @@ index f99e9294f5..3a176f023c 100644
      _In_ HWND hWnd,
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
-@@ -12185,7 +12202,7 @@ DefMDIChildProcW(
+@@ -12185,7 +12196,7 @@ DefMDIChildProcW(
  
  #ifndef NOMSG
  
@@ -6216,7 +6186,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  TranslateMDISysAccel(
-@@ -12194,19 +12211,19 @@ TranslateMDISysAccel(
+@@ -12194,19 +12205,19 @@ TranslateMDISysAccel(
  
  #endif /* !NOMSG */
  
@@ -6239,7 +6209,7 @@ index f99e9294f5..3a176f023c 100644
      _In_ int X,
      _In_ int Y,
      _In_ int nWidth,
-@@ -12214,13 +12231,13 @@ CreateMDIWindowA(
+@@ -12214,13 +12225,13 @@ CreateMDIWindowA(
      _In_opt_ HWND hWndParent,
      _In_opt_ HINSTANCE hInstance,
      _In_ LPARAM lParam);
@@ -6255,7 +6225,7 @@ index f99e9294f5..3a176f023c 100644
      _In_ int X,
      _In_ int Y,
      _In_ int nWidth,
-@@ -12235,21 +12252,21 @@ CreateMDIWindowW(
+@@ -12235,21 +12246,21 @@ CreateMDIWindowW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -6281,7 +6251,7 @@ index f99e9294f5..3a176f023c 100644
      _In_opt_ CONST RECT * lpRect,
      _In_ UINT cKids,
      _In_reads_opt_(cKids) const HWND FAR * lpKids);
-@@ -12367,7 +12384,7 @@ typedef LPHELPWININFOA LPHELPWININFO;
+@@ -12367,7 +12378,7 @@ typedef LPHELPWININFOA LPHELPWININFO;
  
  
  
@@ -6290,7 +6260,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  WinHelpA(
-@@ -12375,7 +12392,7 @@ WinHelpA(
+@@ -12375,7 +12386,7 @@ WinHelpA(
      _In_opt_ LPCSTR lpszHelp,
      _In_ UINT uCommand,
      _In_ ULONG_PTR dwData);
@@ -6299,7 +6269,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  WinHelpW(
-@@ -12412,12 +12429,12 @@ WinHelpW(
+@@ -12412,12 +12423,12 @@ WinHelpW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(WINVER >= 0x0500)
@@ -6314,7 +6284,7 @@ index f99e9294f5..3a176f023c 100644
  #endif /* WINVER >= 0x0500 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -12609,7 +12626,7 @@ GetGuiResources(
+@@ -12609,7 +12620,7 @@ GetGuiResources(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6323,7 +6293,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT cbSize;
      UINT dwLatency;       // Latency in millisecs
-@@ -12854,7 +12871,7 @@ typedef enum tagHANDEDNESS {
+@@ -12854,7 +12865,7 @@ typedef enum tagHANDEDNESS {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6332,7 +6302,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT    cbSize;
      int     iBorderWidth;
-@@ -12875,7 +12892,7 @@ typedef struct tagNONCLIENTMETRICSA
+@@ -12875,7 +12886,7 @@ typedef struct tagNONCLIENTMETRICSA
      int     iPaddedBorderWidth;
  #endif /* WINVER >= 0x0600 */
  }   NONCLIENTMETRICSA, *PNONCLIENTMETRICSA, FAR* LPNONCLIENTMETRICSA;
@@ -6341,7 +6311,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT    cbSize;
      int     iBorderWidth;
-@@ -12929,18 +12946,18 @@ typedef LPNONCLIENTMETRICSA LPNONCLIENTMETRICS;
+@@ -12929,18 +12940,18 @@ typedef LPNONCLIENTMETRICSA LPNONCLIENTMETRICS;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6363,7 +6333,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT    cbSize;
      int     iHorzSpacing;
-@@ -12948,7 +12965,7 @@ typedef struct tagICONMETRICSA
+@@ -12948,7 +12959,7 @@ typedef struct tagICONMETRICSA
      int     iTitleWrap;
      LOGFONTA lfFont;
  }   ICONMETRICSA, *PICONMETRICSA, *LPICONMETRICSA;
@@ -6372,7 +6342,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT    cbSize;
      int     iHorzSpacing;
-@@ -12968,26 +12985,26 @@ typedef LPICONMETRICSA LPICONMETRICS;
+@@ -12968,26 +12979,26 @@ typedef LPICONMETRICSA LPICONMETRICS;
  #endif /* NOGDI */
  #endif /* _WINGDI_ */
  
@@ -6404,7 +6374,7 @@ index f99e9294f5..3a176f023c 100644
      LPWSTR    lpszActivePort;
      LPWSTR    lpszPort;
      UINT    iBaudRate;
-@@ -13008,16 +13025,16 @@ typedef LPSERIALKEYSA LPSERIALKEYS;
+@@ -13008,16 +13019,16 @@ typedef LPSERIALKEYSA LPSERIALKEYS;
  #define SERKF_INDICATOR     0x00000004
  
  
@@ -6425,7 +6395,7 @@ index f99e9294f5..3a176f023c 100644
      LPWSTR  lpszDefaultScheme;
  }   HIGHCONTRASTW, *LPHIGHCONTRASTW;
  #ifdef UNICODE
-@@ -13078,41 +13095,41 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
+@@ -13078,41 +13089,41 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
  #ifdef _WINGDI_
  #ifndef NOGDI
  
@@ -6477,7 +6447,7 @@ index f99e9294f5..3a176f023c 100644
      _In_opt_ LPVOID lParam);
  #ifdef UNICODE
  #define ChangeDisplaySettingsEx  ChangeDisplaySettingsExW
-@@ -13124,19 +13141,19 @@ ChangeDisplaySettingsExW(
+@@ -13124,19 +13135,19 @@ ChangeDisplaySettingsExW(
  #define ENUM_CURRENT_SETTINGS       ((DWORD)-1)
  #define ENUM_REGISTRY_SETTINGS      ((DWORD)-2)
  
@@ -6501,7 +6471,7 @@ index f99e9294f5..3a176f023c 100644
      _Inout_ DEVMODEW* lpDevMode);
  #ifdef UNICODE
  #define EnumDisplaySettings  EnumDisplaySettingsW
-@@ -13146,22 +13163,22 @@ EnumDisplaySettingsW(
+@@ -13146,22 +13157,22 @@ EnumDisplaySettingsW(
  
  #if(WINVER >= 0x0500)
  
@@ -6530,7 +6500,7 @@ index f99e9294f5..3a176f023c 100644
  #ifdef UNICODE
  #define EnumDisplaySettingsEx  EnumDisplaySettingsExW
  #else
-@@ -13172,7 +13189,7 @@ EnumDisplaySettingsExW(
+@@ -13172,7 +13183,7 @@ EnumDisplaySettingsExW(
  #define EDS_RAWMODE                   0x00000002
  #define EDS_ROTATEDMODE               0x00000004
  
@@ -6539,7 +6509,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  EnumDisplayDevicesA(
-@@ -13180,7 +13197,7 @@ EnumDisplayDevicesA(
+@@ -13180,7 +13191,7 @@ EnumDisplayDevicesA(
      _In_ DWORD iDevNum,
      _Inout_ PDISPLAY_DEVICEA lpDisplayDevice,
      _In_ DWORD dwFlags);
@@ -6548,7 +6518,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  EnumDisplayDevicesW(
-@@ -13201,15 +13218,15 @@ EnumDisplayDevicesW(
+@@ -13201,15 +13212,15 @@ EnumDisplayDevicesW(
  
  #if(WINVER >= 0x0601)
  
@@ -6567,7 +6537,7 @@ index f99e9294f5..3a176f023c 100644
  LONG
  WINAPI
  SetDisplayConfig(
-@@ -13217,28 +13234,28 @@ SetDisplayConfig(
+@@ -13217,28 +13228,28 @@ SetDisplayConfig(
      _In_reads_opt_(numPathArrayElements) DISPLAYCONFIG_PATH_INFO* pathArray,
      _In_ UINT32 numModeInfoArrayElements,
      _In_reads_opt_(numModeInfoArrayElements) DISPLAYCONFIG_MODE_INFO* modeInfoArray,
@@ -6602,7 +6572,7 @@ index f99e9294f5..3a176f023c 100644
  LONG
  WINAPI
  DisplayConfigSetDeviceInfo(
-@@ -13251,24 +13268,24 @@ DisplayConfigSetDeviceInfo(
+@@ -13251,24 +13262,24 @@ DisplayConfigSetDeviceInfo(
  #endif /* _WINGDI_ */
  
  
@@ -6635,7 +6605,7 @@ index f99e9294f5..3a176f023c 100644
  #ifdef UNICODE
  #define SystemParametersInfo  SystemParametersInfoW
  #else
-@@ -13277,14 +13294,14 @@ SystemParametersInfoW(
+@@ -13277,14 +13288,14 @@ SystemParametersInfoW(
  
  
  #if(WINVER >= 0x0605)
@@ -6652,7 +6622,7 @@ index f99e9294f5..3a176f023c 100644
      _In_ UINT fWinIni,
      _In_ UINT dpi);
  
-@@ -13301,7 +13318,7 @@ SystemParametersInfoForDpi(
+@@ -13301,7 +13312,7 @@ SystemParametersInfoForDpi(
  /*
   * Accessibility support
   */
@@ -6661,7 +6631,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT  cbSize;
      DWORD dwFlags;
-@@ -13328,10 +13345,10 @@ typedef struct tagFILTERKEYS
+@@ -13328,10 +13339,10 @@ typedef struct tagFILTERKEYS
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6674,7 +6644,7 @@ index f99e9294f5..3a176f023c 100644
  } STICKYKEYS, *LPSTICKYKEYS;
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -13371,7 +13388,7 @@ typedef struct tagSTICKYKEYS
+@@ -13371,7 +13382,7 @@ typedef struct tagSTICKYKEYS
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6683,7 +6653,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT cbSize;
      DWORD dwFlags;
-@@ -13407,7 +13424,7 @@ typedef struct tagMOUSEKEYS
+@@ -13407,7 +13418,7 @@ typedef struct tagMOUSEKEYS
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6692,7 +6662,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT  cbSize;
      DWORD dwFlags;
-@@ -13443,32 +13460,32 @@ typedef struct tagACCESSTIMEOUT
+@@ -13443,32 +13454,32 @@ typedef struct tagACCESSTIMEOUT
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6735,7 +6705,7 @@ index f99e9294f5..3a176f023c 100644
      DWORD iWindowsEffectMSec;
      LPWSTR  lpszWindowsEffectDLL;
      DWORD iWindowsEffectOrdinal;
-@@ -13494,7 +13511,7 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
+@@ -13494,7 +13505,7 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
  #pragma region Desktop or PC Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  #if(_WIN32_WINNT >= 0x0600)
@@ -6744,7 +6714,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  SoundSentry(VOID);
-@@ -13504,7 +13521,7 @@ SoundSentry(VOID);
+@@ -13504,7 +13515,7 @@ SoundSentry(VOID);
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -6753,7 +6723,7 @@ index f99e9294f5..3a176f023c 100644
  {
      UINT cbSize;
      DWORD dwFlags;
-@@ -13527,7 +13544,7 @@ typedef struct tagTOGGLEKEYS
+@@ -13527,7 +13538,7 @@ typedef struct tagTOGGLEKEYS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(_WIN32_WINNT >= 0x0600)
@@ -6762,7 +6732,7 @@ index f99e9294f5..3a176f023c 100644
      UINT cbSize;   // sizeof(AudioDescriptionType)
      BOOL Enabled;  // On/Off
      LCID Locale;   // locale ID for language
-@@ -13559,14 +13576,14 @@ SetDebugErrorLevel(
+@@ -13559,14 +13570,14 @@ SetDebugErrorLevel(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6780,7 +6750,7 @@ index f99e9294f5..3a176f023c 100644
  int
  WINAPI
  InternalGetWindowText(
-@@ -13608,26 +13625,26 @@ CancelShutdown(
+@@ -13608,26 +13619,26 @@ CancelShutdown(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6813,7 +6783,7 @@ index f99e9294f5..3a176f023c 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -13641,7 +13658,7 @@ MonitorFromWindow(
+@@ -13641,7 +13652,7 @@ MonitorFromWindow(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6822,7 +6792,7 @@ index f99e9294f5..3a176f023c 100644
  {
      DWORD   cbSize;
      RECT    rcMonitor;
-@@ -13685,13 +13702,13 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
+@@ -13685,13 +13696,13 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
  #endif // UNICODE
  #endif
  
@@ -6838,7 +6808,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetMonitorInfoW(
-@@ -13703,9 +13720,9 @@ GetMonitorInfoW(
+@@ -13703,9 +13714,9 @@ GetMonitorInfoW(
  #define GetMonitorInfo  GetMonitorInfoA
  #endif // !UNICODE
  
@@ -6850,7 +6820,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  EnumDisplayMonitors(
-@@ -13726,7 +13743,7 @@ EnumDisplayMonitors(
+@@ -13726,7 +13737,7 @@ EnumDisplayMonitors(
   * WinEvents - Active Accessibility hooks
   */
  
@@ -6859,7 +6829,7 @@ index f99e9294f5..3a176f023c 100644
  VOID
  WINAPI
  NotifyWinEvent(
-@@ -13744,7 +13761,7 @@ typedef VOID (CALLBACK* WINEVENTPROC)(
+@@ -13744,7 +13755,7 @@ typedef VOID (CALLBACK* WINEVENTPROC)(
      DWORD         idEventThread,
      DWORD         dwmsEventTime);
  
@@ -6868,7 +6838,7 @@ index f99e9294f5..3a176f023c 100644
  HWINEVENTHOOK
  WINAPI
  SetWinEventHook(
-@@ -13757,7 +13774,7 @@ SetWinEventHook(
+@@ -13757,7 +13768,7 @@ SetWinEventHook(
      _In_ DWORD dwFlags);
  
  #if(_WIN32_WINNT >= 0x0501)
@@ -6877,7 +6847,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  IsWinEventHookInstalled(
-@@ -13778,7 +13795,7 @@ IsWinEventHookInstalled(
+@@ -13778,7 +13789,7 @@ IsWinEventHookInstalled(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6886,7 +6856,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  UnhookWinEvent(
-@@ -14396,10 +14413,10 @@ UnhookWinEvent(
+@@ -14396,10 +14407,10 @@ UnhookWinEvent(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6899,7 +6869,7 @@ index f99e9294f5..3a176f023c 100644
      HWND    hwndActive;
      HWND    hwndFocus;
      HWND    hwndCapture;
-@@ -14428,14 +14445,14 @@ typedef struct tagGUITHREADINFO
+@@ -14428,14 +14439,14 @@ typedef struct tagGUITHREADINFO
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6916,7 +6886,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  BlockInput(
-@@ -14445,13 +14462,13 @@ BlockInput(
+@@ -14445,13 +14456,13 @@ BlockInput(
  
  #define USER_DEFAULT_SCREEN_DPI 96
  
@@ -6932,7 +6902,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  IsProcessDPIAware(
-@@ -14460,68 +14477,68 @@ IsProcessDPIAware(
+@@ -14460,68 +14471,68 @@ IsProcessDPIAware(
  #endif /* _WIN32_WINNT >= 0x0600 */
  
  #if(WINVER >= 0x0605)
@@ -7012,7 +6982,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  EnableNonClientDpiScaling(
-@@ -14537,7 +14554,7 @@ InheritWindowMonitor(
+@@ -14537,7 +14548,7 @@ InheritWindowMonitor(
  #endif /* WINVER >= 0x0605 */
  
  #if(WINVER >= 0x0605)
@@ -7021,7 +6991,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  SetProcessDpiAwarenessContext(
-@@ -14558,18 +14575,18 @@ GetDpiAwarenessContextForProcess(
+@@ -14558,18 +14569,18 @@ GetDpiAwarenessContextForProcess(
  
  #if(WINVER >= 0x0606)
  
@@ -7043,7 +7013,7 @@ index f99e9294f5..3a176f023c 100644
  DPI_HOSTING_BEHAVIOR
  WINAPI
  GetWindowDpiHostingBehavior(
-@@ -14578,14 +14595,14 @@ GetWindowDpiHostingBehavior(
+@@ -14578,14 +14589,14 @@ GetWindowDpiHostingBehavior(
  #endif /* WINVER >= 0x0606 */
  
  
@@ -7060,7 +7030,7 @@ index f99e9294f5..3a176f023c 100644
  UINT
  WINAPI
  GetWindowModuleFileNameW(
-@@ -14645,10 +14662,10 @@ GetWindowModuleFileNameW(
+@@ -14645,10 +14656,10 @@ GetWindowModuleFileNameW(
  /*
   * Information about the global cursor.
   */
@@ -7073,7 +7043,7 @@ index f99e9294f5..3a176f023c 100644
      HCURSOR hCursor;
      POINT   ptScreenPos;
  } CURSORINFO, *PCURSORINFO, *LPCURSORINFO;
-@@ -14659,7 +14676,7 @@ typedef struct tagCURSORINFO
+@@ -14659,7 +14670,7 @@ typedef struct tagCURSORINFO
  #define CURSOR_SUPPRESSED  0x00000002
  #endif /* WINVER >= 0x0602 */
  
@@ -7082,7 +7052,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetCursorInfo(
-@@ -14674,13 +14691,13 @@ GetCursorInfo(
+@@ -14674,13 +14685,13 @@ GetCursorInfo(
  /*
   * Window information snapshot
   */
@@ -7099,7 +7069,7 @@ index f99e9294f5..3a176f023c 100644
      DWORD dwWindowStatus;
      UINT cxWindowBorders;
      UINT cyWindowBorders;
-@@ -14690,7 +14707,7 @@ typedef struct tagWINDOWINFO
+@@ -14690,7 +14701,7 @@ typedef struct tagWINDOWINFO
  
  #define WS_ACTIVECAPTION    0x0001
  
@@ -7108,7 +7078,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetWindowInfo(
-@@ -14700,14 +14717,14 @@ GetWindowInfo(
+@@ -14700,14 +14711,14 @@ GetWindowInfo(
  /*
   * Titlebar information.
   */
@@ -7125,7 +7095,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetTitleBarInfo(
-@@ -14715,7 +14732,7 @@ GetTitleBarInfo(
+@@ -14715,7 +14726,7 @@ GetTitleBarInfo(
      _Inout_ PTITLEBARINFO pti);
  
  #if(WINVER >= 0x0600)
@@ -7134,7 +7104,7 @@ index f99e9294f5..3a176f023c 100644
  {
      DWORD cbSize;
      RECT rcTitleBar;
-@@ -14727,7 +14744,7 @@ typedef struct tagTITLEBARINFOEX
+@@ -14727,7 +14738,7 @@ typedef struct tagTITLEBARINFOEX
  /*
   * Menubar information
   */
@@ -7143,7 +7113,7 @@ index f99e9294f5..3a176f023c 100644
  {
      DWORD cbSize;
      RECT rcBar;          // rect of bar, popup, item
-@@ -14738,19 +14755,19 @@ typedef struct tagMENUBARINFO
+@@ -14738,19 +14749,19 @@ typedef struct tagMENUBARINFO
      BOOL fUnused:30;     // reserved
  } MENUBARINFO, *PMENUBARINFO, *LPMENUBARINFO;
  
@@ -7166,7 +7136,7 @@ index f99e9294f5..3a176f023c 100644
  {
      DWORD cbSize;
      RECT rcScrollBar;
-@@ -14761,29 +14778,29 @@ typedef struct tagSCROLLBARINFO
+@@ -14761,29 +14772,29 @@ typedef struct tagSCROLLBARINFO
      DWORD rgstate[CCHILDREN_SCROLLBAR + 1];
  } SCROLLBARINFO, *PSCROLLBARINFO, *LPSCROLLBARINFO;
  
@@ -7201,7 +7171,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetComboBoxInfo(
-@@ -14803,12 +14820,12 @@ GetComboBoxInfo(
+@@ -14803,12 +14814,12 @@ GetComboBoxInfo(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7216,7 +7186,7 @@ index f99e9294f5..3a176f023c 100644
  
  
  /*
-@@ -14817,7 +14834,7 @@ GetAncestor(
+@@ -14817,7 +14828,7 @@ GetAncestor(
   * fields will get returned.  In other words, it is kind of a cross between
   * ChildWindowFromPointEx and WindowFromPoint.
   */
@@ -7225,7 +7195,7 @@ index f99e9294f5..3a176f023c 100644
  HWND
  WINAPI
  RealChildWindowFromPoint(
-@@ -14829,7 +14846,7 @@ RealChildWindowFromPoint(
+@@ -14829,7 +14840,7 @@ RealChildWindowFromPoint(
   * This gets the name of the window TYPE, not class.  This allows us to
   * recognize ThunderButton32 et al.
   */
@@ -7234,7 +7204,7 @@ index f99e9294f5..3a176f023c 100644
  UINT
  WINAPI
  RealGetWindowClassA(
-@@ -14840,7 +14857,7 @@ RealGetWindowClassA(
+@@ -14840,7 +14851,7 @@ RealGetWindowClassA(
   * This gets the name of the window TYPE, not class.  This allows us to
   * recognize ThunderButton32 et al.
   */
@@ -7243,7 +7213,7 @@ index f99e9294f5..3a176f023c 100644
  UINT
  WINAPI
  RealGetWindowClassW(
-@@ -14856,7 +14873,7 @@ RealGetWindowClassW(
+@@ -14856,7 +14867,7 @@ RealGetWindowClassW(
  /*
   * Alt-Tab Switch window information.
   */
@@ -7252,7 +7222,7 @@ index f99e9294f5..3a176f023c 100644
  {
      DWORD cbSize;
      int cItems;
-@@ -14869,7 +14886,7 @@ typedef struct tagALTTABINFO
+@@ -14869,7 +14880,7 @@ typedef struct tagALTTABINFO
      POINT ptStart;
  } ALTTABINFO, *PALTTABINFO, *LPALTTABINFO;
  
@@ -7261,7 +7231,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetAltTabInfoA(
-@@ -14878,7 +14895,7 @@ GetAltTabInfoA(
+@@ -14878,7 +14889,7 @@ GetAltTabInfoA(
      _Inout_ PALTTABINFO pati,
      _Out_writes_opt_(cchItemText) LPSTR pszItemText,
      _In_ UINT cchItemText);
@@ -7270,7 +7240,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetAltTabInfoW(
-@@ -14897,7 +14914,7 @@ GetAltTabInfoW(
+@@ -14897,7 +14908,7 @@ GetAltTabInfoW(
   * Listbox information.
   * Returns the number of items per row.
   */
@@ -7279,7 +7249,7 @@ index f99e9294f5..3a176f023c 100644
  DWORD
  WINAPI
  GetListBoxInfo(
-@@ -14914,7 +14931,7 @@ GetListBoxInfo(
+@@ -14914,7 +14925,7 @@ GetListBoxInfo(
  
  
  #if(_WIN32_WINNT >= 0x0500)
@@ -7288,7 +7258,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  LockWorkStation(
-@@ -14923,7 +14940,7 @@ LockWorkStation(
+@@ -14923,7 +14934,7 @@ LockWorkStation(
  
  #if(_WIN32_WINNT >= 0x0500)
  
@@ -7297,7 +7267,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  UserHandleGrantAccess(
-@@ -14945,7 +14962,7 @@ UserHandleGrantAccess(
+@@ -14945,7 +14956,7 @@ UserHandleGrantAccess(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7306,7 +7276,7 @@ index f99e9294f5..3a176f023c 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -15012,7 +15029,7 @@ typedef struct tagRAWMOUSE {
+@@ -15012,7 +15023,7 @@ typedef struct tagRAWMOUSE {
      /*
       * Indicator flags.
       */
@@ -7315,7 +7285,7 @@ index f99e9294f5..3a176f023c 100644
  
      /*
       * The transition state of the mouse buttons.
-@@ -15204,12 +15221,12 @@ typedef struct tagRAWINPUT {
+@@ -15204,12 +15215,12 @@ typedef struct tagRAWINPUT {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7330,7 +7300,7 @@ index f99e9294f5..3a176f023c 100644
      _Out_writes_bytes_to_opt_(*pcbSize, return) LPVOID pData,
      _Inout_ PUINT pcbSize,
      _In_ UINT cbSizeHeader);
-@@ -15255,9 +15272,9 @@ typedef struct tagRID_DEVICE_INFO_HID {
+@@ -15255,9 +15266,9 @@ typedef struct tagRID_DEVICE_INFO_HID {
      USHORT usUsage;
  } RID_DEVICE_INFO_HID, *PRID_DEVICE_INFO_HID;
  
@@ -7342,7 +7312,7 @@ index f99e9294f5..3a176f023c 100644
      union {
          RID_DEVICE_INFO_MOUSE mouse;
          RID_DEVICE_INFO_KEYBOARD keyboard;
-@@ -15265,20 +15282,20 @@ typedef struct tagRID_DEVICE_INFO {
+@@ -15265,20 +15276,20 @@ typedef struct tagRID_DEVICE_INFO {
      } DUMMYUNIONNAME;
  } RID_DEVICE_INFO, *PRID_DEVICE_INFO, *LPRID_DEVICE_INFO;
  
@@ -7367,7 +7337,7 @@ index f99e9294f5..3a176f023c 100644
      _Inout_updates_bytes_to_opt_(*pcbSize, *pcbSize) LPVOID pData,
      _Inout_ PUINT pcbSize);
  #ifdef UNICODE
-@@ -15291,7 +15308,7 @@ GetRawInputDeviceInfoW(
+@@ -15291,7 +15302,7 @@ GetRawInputDeviceInfoW(
  /*
   * Raw Input Bulk Read: GetRawInputBuffer
   */
@@ -7376,7 +7346,7 @@ index f99e9294f5..3a176f023c 100644
  UINT
  WINAPI
  GetRawInputBuffer(
-@@ -15305,7 +15322,7 @@ GetRawInputBuffer(
+@@ -15305,7 +15316,7 @@ GetRawInputBuffer(
  typedef struct tagRAWINPUTDEVICE {
      USHORT usUsagePage; // Toplevel collection UsagePage
      USHORT usUsage;     // Toplevel collection Usage
@@ -7385,7 +7355,7 @@ index f99e9294f5..3a176f023c 100644
      HWND hwndTarget;    // Target hwnd. NULL = follows keyboard focus
  } RAWINPUTDEVICE, *PRAWINPUTDEVICE, *LPRAWINPUTDEVICE;
  
-@@ -15347,7 +15364,7 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
+@@ -15347,7 +15358,7 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7394,7 +7364,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  RegisterRawInputDevices(
-@@ -15355,7 +15372,7 @@ RegisterRawInputDevices(
+@@ -15355,7 +15366,7 @@ RegisterRawInputDevices(
      _In_ UINT uiNumDevices,
      _In_ UINT cbSize);
  
@@ -7403,7 +7373,7 @@ index f99e9294f5..3a176f023c 100644
  UINT
  WINAPI
  GetRegisteredRawInputDevices(
-@@ -15366,10 +15383,10 @@ GetRegisteredRawInputDevices(
+@@ -15366,10 +15377,10 @@ GetRegisteredRawInputDevices(
  
  typedef struct tagRAWINPUTDEVICELIST {
      HANDLE hDevice;
@@ -7416,7 +7386,7 @@ index f99e9294f5..3a176f023c 100644
  UINT
  WINAPI
  GetRawInputDeviceList(
-@@ -15377,7 +15394,7 @@ GetRawInputDeviceList(
+@@ -15377,7 +15388,7 @@ GetRawInputDeviceList(
      _Inout_ PUINT puiNumDevices,
      _In_ UINT cbSize);
  
@@ -7425,7 +7395,7 @@ index f99e9294f5..3a176f023c 100644
  LRESULT
  WINAPI
  DefRawInputProc(
-@@ -15456,21 +15473,21 @@ typedef struct tagPOINTER_DEVICE_CURSOR_INFO {
+@@ -15456,21 +15467,21 @@ typedef struct tagPOINTER_DEVICE_CURSOR_INFO {
      POINTER_DEVICE_CURSOR_TYPE cursor;
  } POINTER_DEVICE_CURSOR_INFO;
  
@@ -7450,7 +7420,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetPointerDeviceProperties(
-@@ -15478,14 +15495,14 @@ GetPointerDeviceProperties(
+@@ -15478,14 +15489,14 @@ GetPointerDeviceProperties(
      _Inout_ UINT32* propertyCount,
      _Out_writes_opt_(*propertyCount) POINTER_DEVICE_PROPERTY *pointerProperties);
  
@@ -7467,7 +7437,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetPointerDeviceRects(
-@@ -15493,7 +15510,7 @@ GetPointerDeviceRects(
+@@ -15493,7 +15504,7 @@ GetPointerDeviceRects(
      _Out_writes_(1) RECT* pointerDeviceRect,
      _Out_writes_(1) RECT* displayRect);
  
@@ -7476,7 +7446,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetPointerDeviceCursors(
-@@ -15501,7 +15518,7 @@ GetPointerDeviceCursors(
+@@ -15501,7 +15512,7 @@ GetPointerDeviceCursors(
      _Inout_ UINT32* cursorCount,
      _Out_writes_opt_(*cursorCount) POINTER_DEVICE_CURSOR_INFO *deviceCursors);
  
@@ -7485,7 +7455,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetRawPointerDeviceData(
-@@ -15625,12 +15642,12 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
+@@ -15625,12 +15636,12 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7500,7 +7470,7 @@ index f99e9294f5..3a176f023c 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -15650,9 +15667,9 @@ ChangeWindowMessageFilter(
+@@ -15650,9 +15661,9 @@ ChangeWindowMessageFilter(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7512,7 +7482,7 @@ index f99e9294f5..3a176f023c 100644
  } CHANGEFILTERSTRUCT, *PCHANGEFILTERSTRUCT;
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -15668,13 +15685,13 @@ typedef struct tagCHANGEFILTERSTRUCT {
+@@ -15668,13 +15679,13 @@ typedef struct tagCHANGEFILTERSTRUCT {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7528,7 +7498,7 @@ index f99e9294f5..3a176f023c 100644
      _Inout_opt_ PCHANGEFILTERSTRUCT pChangeFilterStruct);   // Optional
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -15697,7 +15714,7 @@ ChangeWindowMessageFilterEx(
+@@ -15697,7 +15708,7 @@ ChangeWindowMessageFilterEx(
  /*
   * Gesture information handle
   */
@@ -7537,7 +7507,7 @@ index f99e9294f5..3a176f023c 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -15732,7 +15749,7 @@ DECLARE_HANDLE(HGESTUREINFO);
+@@ -15732,7 +15743,7 @@ DECLARE_HANDLE(HGESTUREINFO);
   *     message lParam into the GetGestureExtraArgs function to retrieve extended
   *     argument information.
   */
@@ -7546,7 +7516,7 @@ index f99e9294f5..3a176f023c 100644
      UINT cbSize;                    // size, in bytes, of this structure (including variable length Args field)
      DWORD dwFlags;                  // see GF_* flags
      DWORD dwID;                     // gesture ID, see GID_* defines
-@@ -15753,7 +15770,7 @@ typedef GESTUREINFO const * PCGESTUREINFO;
+@@ -15753,7 +15764,7 @@ typedef GESTUREINFO const * PCGESTUREINFO;
   *     in progress and a gesture will be generated if one is recognized under the
   *     current gesture settings.
   */
@@ -7555,7 +7525,7 @@ index f99e9294f5..3a176f023c 100644
      UINT cbSize;                    // size, in bytes, of this structure
      DWORD dwFlags;                  // unused
      HWND hwndTarget;                // handle to window targeted by the gesture
-@@ -15773,7 +15790,7 @@ typedef struct tagGESTURENOTIFYSTRUCT {
+@@ -15773,7 +15784,7 @@ typedef struct tagGESTURENOTIFYSTRUCT {
   * Gesture information retrieval
   *   - HGESTUREINFO is received by a window in the lParam of a WM_GESTURE message.
   */
@@ -7564,7 +7534,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetGestureInfo(
-@@ -15786,7 +15803,7 @@ GetGestureInfo(
+@@ -15786,7 +15797,7 @@ GetGestureInfo(
   *   - Size, in bytes, of the extra argument data is available in the cbExtraArgs
   *     field of the GESTUREINFO structure retrieved using the GetGestureInfo function.
   */
@@ -7573,7 +7543,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetGestureExtraArgs(
-@@ -15804,7 +15821,7 @@ GetGestureExtraArgs(
+@@ -15804,7 +15815,7 @@ GetGestureExtraArgs(
   *     one of the PostMessage or SendMessage class of API functions, the handle
   *     is transfered with the message and need not be closed by the application.
   */
@@ -7582,7 +7552,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  CloseGestureInfoHandle(
-@@ -15819,7 +15836,7 @@ CloseGestureInfoHandle(
+@@ -15819,7 +15830,7 @@ CloseGestureInfoHandle(
   *     system defaults.
   */
  typedef struct tagGESTURECONFIG {
@@ -7591,7 +7561,7 @@ index f99e9294f5..3a176f023c 100644
      DWORD dwWant;                   // settings related to gesture ID that are to be turned on
      DWORD dwBlock;                  // settings related to gesture ID that are to be turned off
  } GESTURECONFIG, *PGESTURECONFIG;
-@@ -15872,7 +15889,7 @@ typedef struct tagGESTURECONFIG {
+@@ -15872,7 +15883,7 @@ typedef struct tagGESTURECONFIG {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7600,7 +7570,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  SetGestureConfig(
-@@ -15887,7 +15904,7 @@ SetGestureConfig(
+@@ -15887,7 +15898,7 @@ SetGestureConfig(
  #define GCF_INCLUDE_ANCESTORS           0x00000001      // If specified, GetGestureConfig returns consolidated configuration
                                                          // for the specified window and it's parent window chain
  
@@ -7609,7 +7579,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetGestureConfig(
-@@ -15927,14 +15944,14 @@ GetGestureConfig(
+@@ -15927,14 +15938,14 @@ GetGestureConfig(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7626,7 +7596,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  ShutdownBlockReasonQuery(
-@@ -15942,7 +15959,7 @@ ShutdownBlockReasonQuery(
+@@ -15942,7 +15953,7 @@ ShutdownBlockReasonQuery(
      _Out_writes_opt_(*pcchBuff) LPWSTR pwszBuff,
      _Inout_ DWORD *pcchBuff);
  
@@ -7635,7 +7605,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  ShutdownBlockReasonDestroy(
-@@ -15990,13 +16007,13 @@ typedef enum tagINPUT_MESSAGE_ORIGIN_ID {
+@@ -15990,13 +16001,13 @@ typedef enum tagINPUT_MESSAGE_ORIGIN_ID {
  /*
   * API to determine the input source of the current messsage.
   */
@@ -7651,7 +7621,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  GetCIMSSM(
-@@ -16097,13 +16114,13 @@ SetDisplayAutoRotationPreferences(
+@@ -16097,13 +16108,13 @@ SetDisplayAutoRotationPreferences(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
@@ -7667,7 +7637,7 @@ index f99e9294f5..3a176f023c 100644
  BOOL
  WINAPI
  SetProcessRestrictionExemption(
-@@ -16344,7 +16361,7 @@ BOOL
+@@ -16344,7 +16355,7 @@ BOOL
  WINAPI
  ApplyWindowAction(
      HWND hwnd,
@@ -7676,12 +7646,11 @@ index f99e9294f5..3a176f023c 100644
  
  #endif // NTDDI_VERSION >= NTDDI_WIN11_GE
  
-@@ -16485,7 +16502,7304 @@ EnterMoveSizeLoop(
+@@ -16485,7 +16496,6602 @@ EnterMoveSizeLoop(
  }
  #endif  /* __cplusplus */
  
--#endif /* !_WINUSER_ */
- 
++
 +#ifdef WIN32METADATA
 +#pragma push_macro("BDR_RAISEDOUTER")
 +#undef BDR_RAISEDOUTER
@@ -7736,157 +7705,7 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("BDR_RAISEDOUTER")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DFC_CAPTION")
-+#undef DFC_CAPTION
-+#pragma push_macro("DFC_MENU")
-+#undef DFC_MENU
-+#pragma push_macro("DFC_SCROLL")
-+#undef DFC_SCROLL
-+#pragma push_macro("DFC_BUTTON")
-+#undef DFC_BUTTON
-+#pragma push_macro("DFC_POPUPMENU")
-+#undef DFC_POPUPMENU
-+enum DFC_TYPE : unsigned int
-+{
-+    DFC_CAPTION = 1U,
-+    DFC_MENU = 2U,
-+    DFC_SCROLL = 3U,
-+    DFC_BUTTON = 4U,
-+    DFC_POPUPMENU = 5U,
-+};
-+#pragma pop_macro("DFC_POPUPMENU")
-+#pragma pop_macro("DFC_BUTTON")
-+#pragma pop_macro("DFC_SCROLL")
-+#pragma pop_macro("DFC_MENU")
-+#pragma pop_macro("DFC_CAPTION")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("DFCS_CAPTIONCLOSE")
-+#undef DFCS_CAPTIONCLOSE
-+#pragma push_macro("DFCS_CAPTIONMIN")
-+#undef DFCS_CAPTIONMIN
-+#pragma push_macro("DFCS_CAPTIONMAX")
-+#undef DFCS_CAPTIONMAX
-+#pragma push_macro("DFCS_CAPTIONRESTORE")
-+#undef DFCS_CAPTIONRESTORE
-+#pragma push_macro("DFCS_CAPTIONHELP")
-+#undef DFCS_CAPTIONHELP
-+#pragma push_macro("DFCS_MENUARROW")
-+#undef DFCS_MENUARROW
-+#pragma push_macro("DFCS_MENUCHECK")
-+#undef DFCS_MENUCHECK
-+#pragma push_macro("DFCS_MENUBULLET")
-+#undef DFCS_MENUBULLET
-+#pragma push_macro("DFCS_MENUARROWRIGHT")
-+#undef DFCS_MENUARROWRIGHT
-+#pragma push_macro("DFCS_SCROLLUP")
-+#undef DFCS_SCROLLUP
-+#pragma push_macro("DFCS_SCROLLDOWN")
-+#undef DFCS_SCROLLDOWN
-+#pragma push_macro("DFCS_SCROLLLEFT")
-+#undef DFCS_SCROLLLEFT
-+#pragma push_macro("DFCS_SCROLLRIGHT")
-+#undef DFCS_SCROLLRIGHT
-+#pragma push_macro("DFCS_SCROLLCOMBOBOX")
-+#undef DFCS_SCROLLCOMBOBOX
-+#pragma push_macro("DFCS_SCROLLSIZEGRIP")
-+#undef DFCS_SCROLLSIZEGRIP
-+#pragma push_macro("DFCS_SCROLLSIZEGRIPRIGHT")
-+#undef DFCS_SCROLLSIZEGRIPRIGHT
-+#pragma push_macro("DFCS_BUTTONCHECK")
-+#undef DFCS_BUTTONCHECK
-+#pragma push_macro("DFCS_BUTTONRADIOIMAGE")
-+#undef DFCS_BUTTONRADIOIMAGE
-+#pragma push_macro("DFCS_BUTTONRADIOMASK")
-+#undef DFCS_BUTTONRADIOMASK
-+#pragma push_macro("DFCS_BUTTONRADIO")
-+#undef DFCS_BUTTONRADIO
-+#pragma push_macro("DFCS_BUTTON3STATE")
-+#undef DFCS_BUTTON3STATE
-+#pragma push_macro("DFCS_BUTTONPUSH")
-+#undef DFCS_BUTTONPUSH
-+#pragma push_macro("DFCS_INACTIVE")
-+#undef DFCS_INACTIVE
-+#pragma push_macro("DFCS_PUSHED")
-+#undef DFCS_PUSHED
-+#pragma push_macro("DFCS_CHECKED")
-+#undef DFCS_CHECKED
-+#pragma push_macro("DFCS_TRANSPARENT")
-+#undef DFCS_TRANSPARENT
-+#pragma push_macro("DFCS_HOT")
-+#undef DFCS_HOT
-+#pragma push_macro("DFCS_ADJUSTRECT")
-+#undef DFCS_ADJUSTRECT
-+#pragma push_macro("DFCS_FLAT")
-+#undef DFCS_FLAT
-+#pragma push_macro("DFCS_MONO")
-+#undef DFCS_MONO
-+enum [[clang::flag_enum]] DFCS_STATE : unsigned int
-+{
-+    DFCS_CAPTIONCLOSE = 0U,
-+    DFCS_CAPTIONMIN = 1U,
-+    DFCS_CAPTIONMAX = 2U,
-+    DFCS_CAPTIONRESTORE = 3U,
-+    DFCS_CAPTIONHELP = 4U,
-+    DFCS_MENUARROW = 0U,
-+    DFCS_MENUCHECK = 1U,
-+    DFCS_MENUBULLET = 2U,
-+    DFCS_MENUARROWRIGHT = 4U,
-+    DFCS_SCROLLUP = 0U,
-+    DFCS_SCROLLDOWN = 1U,
-+    DFCS_SCROLLLEFT = 2U,
-+    DFCS_SCROLLRIGHT = 3U,
-+    DFCS_SCROLLCOMBOBOX = 5U,
-+    DFCS_SCROLLSIZEGRIP = 8U,
-+    DFCS_SCROLLSIZEGRIPRIGHT = 16U,
-+    DFCS_BUTTONCHECK = 0U,
-+    DFCS_BUTTONRADIOIMAGE = 1U,
-+    DFCS_BUTTONRADIOMASK = 2U,
-+    DFCS_BUTTONRADIO = 4U,
-+    DFCS_BUTTON3STATE = 8U,
-+    DFCS_BUTTONPUSH = 16U,
-+    DFCS_INACTIVE = 256U,
-+    DFCS_PUSHED = 512U,
-+    DFCS_CHECKED = 1024U,
-+    DFCS_TRANSPARENT = 2048U,
-+    DFCS_HOT = 4096U,
-+    DFCS_ADJUSTRECT = 8192U,
-+    DFCS_FLAT = 16384U,
-+    DFCS_MONO = 32768U,
-+};
-+#pragma pop_macro("DFCS_MONO")
-+#pragma pop_macro("DFCS_FLAT")
-+#pragma pop_macro("DFCS_ADJUSTRECT")
-+#pragma pop_macro("DFCS_HOT")
-+#pragma pop_macro("DFCS_TRANSPARENT")
-+#pragma pop_macro("DFCS_CHECKED")
-+#pragma pop_macro("DFCS_PUSHED")
-+#pragma pop_macro("DFCS_INACTIVE")
-+#pragma pop_macro("DFCS_BUTTONPUSH")
-+#pragma pop_macro("DFCS_BUTTON3STATE")
-+#pragma pop_macro("DFCS_BUTTONRADIO")
-+#pragma pop_macro("DFCS_BUTTONRADIOMASK")
-+#pragma pop_macro("DFCS_BUTTONRADIOIMAGE")
-+#pragma pop_macro("DFCS_BUTTONCHECK")
-+#pragma pop_macro("DFCS_SCROLLSIZEGRIPRIGHT")
-+#pragma pop_macro("DFCS_SCROLLSIZEGRIP")
-+#pragma pop_macro("DFCS_SCROLLCOMBOBOX")
-+#pragma pop_macro("DFCS_SCROLLRIGHT")
-+#pragma pop_macro("DFCS_SCROLLLEFT")
-+#pragma pop_macro("DFCS_SCROLLDOWN")
-+#pragma pop_macro("DFCS_SCROLLUP")
-+#pragma pop_macro("DFCS_MENUARROWRIGHT")
-+#pragma pop_macro("DFCS_MENUBULLET")
-+#pragma pop_macro("DFCS_MENUCHECK")
-+#pragma pop_macro("DFCS_MENUARROW")
-+#pragma pop_macro("DFCS_CAPTIONHELP")
-+#pragma pop_macro("DFCS_CAPTIONRESTORE")
-+#pragma pop_macro("DFCS_CAPTIONMAX")
-+#pragma pop_macro("DFCS_CAPTIONMIN")
-+#pragma pop_macro("DFCS_CAPTIONCLOSE")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("CDS_FULLSCREEN")
@@ -8918,317 +8737,9 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("DESKTOP_DELETE")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("ALERT_SYSTEM_INFORMATIONAL")
-+#undef ALERT_SYSTEM_INFORMATIONAL
-+#pragma push_macro("ALERT_SYSTEM_WARNING")
-+#undef ALERT_SYSTEM_WARNING
-+#pragma push_macro("ALERT_SYSTEM_ERROR")
-+#undef ALERT_SYSTEM_ERROR
-+#pragma push_macro("ALERT_SYSTEM_QUERY")
-+#undef ALERT_SYSTEM_QUERY
-+#pragma push_macro("ALERT_SYSTEM_CRITICAL")
-+#undef ALERT_SYSTEM_CRITICAL
-+enum ALERT_SYSTEM_SEV : unsigned int
-+{
-+    ALERT_SYSTEM_INFORMATIONAL = 1U,
-+    ALERT_SYSTEM_WARNING = 2U,
-+    ALERT_SYSTEM_ERROR = 3U,
-+    ALERT_SYSTEM_QUERY = 4U,
-+    ALERT_SYSTEM_CRITICAL = 5U,
-+};
-+#pragma pop_macro("ALERT_SYSTEM_CRITICAL")
-+#pragma pop_macro("ALERT_SYSTEM_QUERY")
-+#pragma pop_macro("ALERT_SYSTEM_ERROR")
-+#pragma pop_macro("ALERT_SYSTEM_WARNING")
-+#pragma pop_macro("ALERT_SYSTEM_INFORMATIONAL")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("APPCOMMAND_BROWSER_BACKWARD")
-+#undef APPCOMMAND_BROWSER_BACKWARD
-+#pragma push_macro("APPCOMMAND_BROWSER_FORWARD")
-+#undef APPCOMMAND_BROWSER_FORWARD
-+#pragma push_macro("APPCOMMAND_BROWSER_REFRESH")
-+#undef APPCOMMAND_BROWSER_REFRESH
-+#pragma push_macro("APPCOMMAND_BROWSER_STOP")
-+#undef APPCOMMAND_BROWSER_STOP
-+#pragma push_macro("APPCOMMAND_BROWSER_SEARCH")
-+#undef APPCOMMAND_BROWSER_SEARCH
-+#pragma push_macro("APPCOMMAND_BROWSER_FAVORITES")
-+#undef APPCOMMAND_BROWSER_FAVORITES
-+#pragma push_macro("APPCOMMAND_BROWSER_HOME")
-+#undef APPCOMMAND_BROWSER_HOME
-+#pragma push_macro("APPCOMMAND_VOLUME_MUTE")
-+#undef APPCOMMAND_VOLUME_MUTE
-+#pragma push_macro("APPCOMMAND_VOLUME_DOWN")
-+#undef APPCOMMAND_VOLUME_DOWN
-+#pragma push_macro("APPCOMMAND_VOLUME_UP")
-+#undef APPCOMMAND_VOLUME_UP
-+#pragma push_macro("APPCOMMAND_MEDIA_NEXTTRACK")
-+#undef APPCOMMAND_MEDIA_NEXTTRACK
-+#pragma push_macro("APPCOMMAND_MEDIA_PREVIOUSTRACK")
-+#undef APPCOMMAND_MEDIA_PREVIOUSTRACK
-+#pragma push_macro("APPCOMMAND_MEDIA_STOP")
-+#undef APPCOMMAND_MEDIA_STOP
-+#pragma push_macro("APPCOMMAND_MEDIA_PLAY_PAUSE")
-+#undef APPCOMMAND_MEDIA_PLAY_PAUSE
-+#pragma push_macro("APPCOMMAND_LAUNCH_MAIL")
-+#undef APPCOMMAND_LAUNCH_MAIL
-+#pragma push_macro("APPCOMMAND_LAUNCH_MEDIA_SELECT")
-+#undef APPCOMMAND_LAUNCH_MEDIA_SELECT
-+#pragma push_macro("APPCOMMAND_LAUNCH_APP1")
-+#undef APPCOMMAND_LAUNCH_APP1
-+#pragma push_macro("APPCOMMAND_LAUNCH_APP2")
-+#undef APPCOMMAND_LAUNCH_APP2
-+#pragma push_macro("APPCOMMAND_BASS_DOWN")
-+#undef APPCOMMAND_BASS_DOWN
-+#pragma push_macro("APPCOMMAND_BASS_BOOST")
-+#undef APPCOMMAND_BASS_BOOST
-+#pragma push_macro("APPCOMMAND_BASS_UP")
-+#undef APPCOMMAND_BASS_UP
-+#pragma push_macro("APPCOMMAND_TREBLE_DOWN")
-+#undef APPCOMMAND_TREBLE_DOWN
-+#pragma push_macro("APPCOMMAND_TREBLE_UP")
-+#undef APPCOMMAND_TREBLE_UP
-+#pragma push_macro("APPCOMMAND_MICROPHONE_VOLUME_MUTE")
-+#undef APPCOMMAND_MICROPHONE_VOLUME_MUTE
-+#pragma push_macro("APPCOMMAND_MICROPHONE_VOLUME_DOWN")
-+#undef APPCOMMAND_MICROPHONE_VOLUME_DOWN
-+#pragma push_macro("APPCOMMAND_MICROPHONE_VOLUME_UP")
-+#undef APPCOMMAND_MICROPHONE_VOLUME_UP
-+#pragma push_macro("APPCOMMAND_HELP")
-+#undef APPCOMMAND_HELP
-+#pragma push_macro("APPCOMMAND_FIND")
-+#undef APPCOMMAND_FIND
-+#pragma push_macro("APPCOMMAND_NEW")
-+#undef APPCOMMAND_NEW
-+#pragma push_macro("APPCOMMAND_OPEN")
-+#undef APPCOMMAND_OPEN
-+#pragma push_macro("APPCOMMAND_CLOSE")
-+#undef APPCOMMAND_CLOSE
-+#pragma push_macro("APPCOMMAND_SAVE")
-+#undef APPCOMMAND_SAVE
-+#pragma push_macro("APPCOMMAND_PRINT")
-+#undef APPCOMMAND_PRINT
-+#pragma push_macro("APPCOMMAND_UNDO")
-+#undef APPCOMMAND_UNDO
-+#pragma push_macro("APPCOMMAND_REDO")
-+#undef APPCOMMAND_REDO
-+#pragma push_macro("APPCOMMAND_COPY")
-+#undef APPCOMMAND_COPY
-+#pragma push_macro("APPCOMMAND_CUT")
-+#undef APPCOMMAND_CUT
-+#pragma push_macro("APPCOMMAND_PASTE")
-+#undef APPCOMMAND_PASTE
-+#pragma push_macro("APPCOMMAND_REPLY_TO_MAIL")
-+#undef APPCOMMAND_REPLY_TO_MAIL
-+#pragma push_macro("APPCOMMAND_FORWARD_MAIL")
-+#undef APPCOMMAND_FORWARD_MAIL
-+#pragma push_macro("APPCOMMAND_SEND_MAIL")
-+#undef APPCOMMAND_SEND_MAIL
-+#pragma push_macro("APPCOMMAND_SPELL_CHECK")
-+#undef APPCOMMAND_SPELL_CHECK
-+#pragma push_macro("APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE")
-+#undef APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE
-+#pragma push_macro("APPCOMMAND_MIC_ON_OFF_TOGGLE")
-+#undef APPCOMMAND_MIC_ON_OFF_TOGGLE
-+#pragma push_macro("APPCOMMAND_CORRECTION_LIST")
-+#undef APPCOMMAND_CORRECTION_LIST
-+#pragma push_macro("APPCOMMAND_MEDIA_PLAY")
-+#undef APPCOMMAND_MEDIA_PLAY
-+#pragma push_macro("APPCOMMAND_MEDIA_PAUSE")
-+#undef APPCOMMAND_MEDIA_PAUSE
-+#pragma push_macro("APPCOMMAND_MEDIA_RECORD")
-+#undef APPCOMMAND_MEDIA_RECORD
-+#pragma push_macro("APPCOMMAND_MEDIA_FAST_FORWARD")
-+#undef APPCOMMAND_MEDIA_FAST_FORWARD
-+#pragma push_macro("APPCOMMAND_MEDIA_REWIND")
-+#undef APPCOMMAND_MEDIA_REWIND
-+#pragma push_macro("APPCOMMAND_MEDIA_CHANNEL_UP")
-+#undef APPCOMMAND_MEDIA_CHANNEL_UP
-+#pragma push_macro("APPCOMMAND_MEDIA_CHANNEL_DOWN")
-+#undef APPCOMMAND_MEDIA_CHANNEL_DOWN
-+#pragma push_macro("APPCOMMAND_DELETE")
-+#undef APPCOMMAND_DELETE
-+#pragma push_macro("APPCOMMAND_DWM_FLIP3D")
-+#undef APPCOMMAND_DWM_FLIP3D
-+enum APPCOMMAND_ID : unsigned int
-+{
-+    APPCOMMAND_BROWSER_BACKWARD = 1U,
-+    APPCOMMAND_BROWSER_FORWARD = 2U,
-+    APPCOMMAND_BROWSER_REFRESH = 3U,
-+    APPCOMMAND_BROWSER_STOP = 4U,
-+    APPCOMMAND_BROWSER_SEARCH = 5U,
-+    APPCOMMAND_BROWSER_FAVORITES = 6U,
-+    APPCOMMAND_BROWSER_HOME = 7U,
-+    APPCOMMAND_VOLUME_MUTE = 8U,
-+    APPCOMMAND_VOLUME_DOWN = 9U,
-+    APPCOMMAND_VOLUME_UP = 10U,
-+    APPCOMMAND_MEDIA_NEXTTRACK = 11U,
-+    APPCOMMAND_MEDIA_PREVIOUSTRACK = 12U,
-+    APPCOMMAND_MEDIA_STOP = 13U,
-+    APPCOMMAND_MEDIA_PLAY_PAUSE = 14U,
-+    APPCOMMAND_LAUNCH_MAIL = 15U,
-+    APPCOMMAND_LAUNCH_MEDIA_SELECT = 16U,
-+    APPCOMMAND_LAUNCH_APP1 = 17U,
-+    APPCOMMAND_LAUNCH_APP2 = 18U,
-+    APPCOMMAND_BASS_DOWN = 19U,
-+    APPCOMMAND_BASS_BOOST = 20U,
-+    APPCOMMAND_BASS_UP = 21U,
-+    APPCOMMAND_TREBLE_DOWN = 22U,
-+    APPCOMMAND_TREBLE_UP = 23U,
-+    APPCOMMAND_MICROPHONE_VOLUME_MUTE = 24U,
-+    APPCOMMAND_MICROPHONE_VOLUME_DOWN = 25U,
-+    APPCOMMAND_MICROPHONE_VOLUME_UP = 26U,
-+    APPCOMMAND_HELP = 27U,
-+    APPCOMMAND_FIND = 28U,
-+    APPCOMMAND_NEW = 29U,
-+    APPCOMMAND_OPEN = 30U,
-+    APPCOMMAND_CLOSE = 31U,
-+    APPCOMMAND_SAVE = 32U,
-+    APPCOMMAND_PRINT = 33U,
-+    APPCOMMAND_UNDO = 34U,
-+    APPCOMMAND_REDO = 35U,
-+    APPCOMMAND_COPY = 36U,
-+    APPCOMMAND_CUT = 37U,
-+    APPCOMMAND_PASTE = 38U,
-+    APPCOMMAND_REPLY_TO_MAIL = 39U,
-+    APPCOMMAND_FORWARD_MAIL = 40U,
-+    APPCOMMAND_SEND_MAIL = 41U,
-+    APPCOMMAND_SPELL_CHECK = 42U,
-+    APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE = 43U,
-+    APPCOMMAND_MIC_ON_OFF_TOGGLE = 44U,
-+    APPCOMMAND_CORRECTION_LIST = 45U,
-+    APPCOMMAND_MEDIA_PLAY = 46U,
-+    APPCOMMAND_MEDIA_PAUSE = 47U,
-+    APPCOMMAND_MEDIA_RECORD = 48U,
-+    APPCOMMAND_MEDIA_FAST_FORWARD = 49U,
-+    APPCOMMAND_MEDIA_REWIND = 50U,
-+    APPCOMMAND_MEDIA_CHANNEL_UP = 51U,
-+    APPCOMMAND_MEDIA_CHANNEL_DOWN = 52U,
-+    APPCOMMAND_DELETE = 53U,
-+    APPCOMMAND_DWM_FLIP3D = 54U,
-+};
-+#pragma pop_macro("APPCOMMAND_DWM_FLIP3D")
-+#pragma pop_macro("APPCOMMAND_DELETE")
-+#pragma pop_macro("APPCOMMAND_MEDIA_CHANNEL_DOWN")
-+#pragma pop_macro("APPCOMMAND_MEDIA_CHANNEL_UP")
-+#pragma pop_macro("APPCOMMAND_MEDIA_REWIND")
-+#pragma pop_macro("APPCOMMAND_MEDIA_FAST_FORWARD")
-+#pragma pop_macro("APPCOMMAND_MEDIA_RECORD")
-+#pragma pop_macro("APPCOMMAND_MEDIA_PAUSE")
-+#pragma pop_macro("APPCOMMAND_MEDIA_PLAY")
-+#pragma pop_macro("APPCOMMAND_CORRECTION_LIST")
-+#pragma pop_macro("APPCOMMAND_MIC_ON_OFF_TOGGLE")
-+#pragma pop_macro("APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE")
-+#pragma pop_macro("APPCOMMAND_SPELL_CHECK")
-+#pragma pop_macro("APPCOMMAND_SEND_MAIL")
-+#pragma pop_macro("APPCOMMAND_FORWARD_MAIL")
-+#pragma pop_macro("APPCOMMAND_REPLY_TO_MAIL")
-+#pragma pop_macro("APPCOMMAND_PASTE")
-+#pragma pop_macro("APPCOMMAND_CUT")
-+#pragma pop_macro("APPCOMMAND_COPY")
-+#pragma pop_macro("APPCOMMAND_REDO")
-+#pragma pop_macro("APPCOMMAND_UNDO")
-+#pragma pop_macro("APPCOMMAND_PRINT")
-+#pragma pop_macro("APPCOMMAND_SAVE")
-+#pragma pop_macro("APPCOMMAND_CLOSE")
-+#pragma pop_macro("APPCOMMAND_OPEN")
-+#pragma pop_macro("APPCOMMAND_NEW")
-+#pragma pop_macro("APPCOMMAND_FIND")
-+#pragma pop_macro("APPCOMMAND_HELP")
-+#pragma pop_macro("APPCOMMAND_MICROPHONE_VOLUME_UP")
-+#pragma pop_macro("APPCOMMAND_MICROPHONE_VOLUME_DOWN")
-+#pragma pop_macro("APPCOMMAND_MICROPHONE_VOLUME_MUTE")
-+#pragma pop_macro("APPCOMMAND_TREBLE_UP")
-+#pragma pop_macro("APPCOMMAND_TREBLE_DOWN")
-+#pragma pop_macro("APPCOMMAND_BASS_UP")
-+#pragma pop_macro("APPCOMMAND_BASS_BOOST")
-+#pragma pop_macro("APPCOMMAND_BASS_DOWN")
-+#pragma pop_macro("APPCOMMAND_LAUNCH_APP2")
-+#pragma pop_macro("APPCOMMAND_LAUNCH_APP1")
-+#pragma pop_macro("APPCOMMAND_LAUNCH_MEDIA_SELECT")
-+#pragma pop_macro("APPCOMMAND_LAUNCH_MAIL")
-+#pragma pop_macro("APPCOMMAND_MEDIA_PLAY_PAUSE")
-+#pragma pop_macro("APPCOMMAND_MEDIA_STOP")
-+#pragma pop_macro("APPCOMMAND_MEDIA_PREVIOUSTRACK")
-+#pragma pop_macro("APPCOMMAND_MEDIA_NEXTTRACK")
-+#pragma pop_macro("APPCOMMAND_VOLUME_UP")
-+#pragma pop_macro("APPCOMMAND_VOLUME_DOWN")
-+#pragma pop_macro("APPCOMMAND_VOLUME_MUTE")
-+#pragma pop_macro("APPCOMMAND_BROWSER_HOME")
-+#pragma pop_macro("APPCOMMAND_BROWSER_FAVORITES")
-+#pragma pop_macro("APPCOMMAND_BROWSER_SEARCH")
-+#pragma pop_macro("APPCOMMAND_BROWSER_STOP")
-+#pragma pop_macro("APPCOMMAND_BROWSER_REFRESH")
-+#pragma pop_macro("APPCOMMAND_BROWSER_FORWARD")
-+#pragma pop_macro("APPCOMMAND_BROWSER_BACKWARD")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("ATF_TIMEOUTON")
-+#undef ATF_TIMEOUTON
-+#pragma push_macro("ATF_ONOFFFEEDBACK")
-+#undef ATF_ONOFFFEEDBACK
-+enum [[clang::flag_enum]] ATF_FLAGS : unsigned int
-+{
-+    ATF_TIMEOUTON = 1U,
-+    ATF_ONOFFFEEDBACK = 2U,
-+};
-+#pragma pop_macro("ATF_ONOFFFEEDBACK")
-+#pragma pop_macro("ATF_TIMEOUTON")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("GC_ALLGESTURES")
-+#undef GC_ALLGESTURES
-+#pragma push_macro("GC_ZOOM")
-+#undef GC_ZOOM
-+#pragma push_macro("GC_PAN")
-+#undef GC_PAN
-+#pragma push_macro("GC_PAN_WITH_SINGLE_FINGER_VERTICALLY")
-+#undef GC_PAN_WITH_SINGLE_FINGER_VERTICALLY
-+#pragma push_macro("GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY")
-+#undef GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY
-+#pragma push_macro("GC_PAN_WITH_GUTTER")
-+#undef GC_PAN_WITH_GUTTER
-+#pragma push_macro("GC_PAN_WITH_INERTIA")
-+#undef GC_PAN_WITH_INERTIA
-+#pragma push_macro("GC_ROTATE")
-+#undef GC_ROTATE
-+#pragma push_macro("GC_TWOFINGERTAP")
-+#undef GC_TWOFINGERTAP
-+#pragma push_macro("GC_PRESSANDTAP")
-+#undef GC_PRESSANDTAP
-+#pragma push_macro("GC_ROLLOVER")
-+#undef GC_ROLLOVER
-+enum [[clang::flag_enum]] GESTURECONFIG_FLAGS : unsigned int
-+{
-+    GC_ALLGESTURES = 1U,
-+    GC_ZOOM = 1U,
-+    GC_PAN = 1U,
-+    GC_PAN_WITH_SINGLE_FINGER_VERTICALLY = 2U,
-+    GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY = 4U,
-+    GC_PAN_WITH_GUTTER = 8U,
-+    GC_PAN_WITH_INERTIA = 16U,
-+    GC_ROTATE = 1U,
-+    GC_TWOFINGERTAP = 1U,
-+    GC_PRESSANDTAP = 1U,
-+    GC_ROLLOVER = 1U,
-+};
-+#pragma pop_macro("GC_ROLLOVER")
-+#pragma pop_macro("GC_PRESSANDTAP")
-+#pragma pop_macro("GC_TWOFINGERTAP")
-+#pragma pop_macro("GC_ROTATE")
-+#pragma pop_macro("GC_PAN_WITH_INERTIA")
-+#pragma pop_macro("GC_PAN_WITH_GUTTER")
-+#pragma pop_macro("GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY")
-+#pragma pop_macro("GC_PAN_WITH_SINGLE_FINGER_VERTICALLY")
-+#pragma pop_macro("GC_PAN")
-+#pragma pop_macro("GC_ZOOM")
-+#pragma pop_macro("GC_ALLGESTURES")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("MK_LBUTTON")
@@ -9264,139 +8775,6 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("MK_LBUTTON")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("SS_LEFT")
-+#undef SS_LEFT
-+#pragma push_macro("SS_CENTER")
-+#undef SS_CENTER
-+#pragma push_macro("SS_RIGHT")
-+#undef SS_RIGHT
-+#pragma push_macro("SS_ICON")
-+#undef SS_ICON
-+#pragma push_macro("SS_BLACKRECT")
-+#undef SS_BLACKRECT
-+#pragma push_macro("SS_GRAYRECT")
-+#undef SS_GRAYRECT
-+#pragma push_macro("SS_WHITERECT")
-+#undef SS_WHITERECT
-+#pragma push_macro("SS_BLACKFRAME")
-+#undef SS_BLACKFRAME
-+#pragma push_macro("SS_GRAYFRAME")
-+#undef SS_GRAYFRAME
-+#pragma push_macro("SS_WHITEFRAME")
-+#undef SS_WHITEFRAME
-+#pragma push_macro("SS_USERITEM")
-+#undef SS_USERITEM
-+#pragma push_macro("SS_SIMPLE")
-+#undef SS_SIMPLE
-+#pragma push_macro("SS_LEFTNOWORDWRAP")
-+#undef SS_LEFTNOWORDWRAP
-+#pragma push_macro("SS_OWNERDRAW")
-+#undef SS_OWNERDRAW
-+#pragma push_macro("SS_BITMAP")
-+#undef SS_BITMAP
-+#pragma push_macro("SS_ENHMETAFILE")
-+#undef SS_ENHMETAFILE
-+#pragma push_macro("SS_ETCHEDHORZ")
-+#undef SS_ETCHEDHORZ
-+#pragma push_macro("SS_ETCHEDVERT")
-+#undef SS_ETCHEDVERT
-+#pragma push_macro("SS_ETCHEDFRAME")
-+#undef SS_ETCHEDFRAME
-+#pragma push_macro("SS_TYPEMASK")
-+#undef SS_TYPEMASK
-+#pragma push_macro("SS_REALSIZECONTROL")
-+#undef SS_REALSIZECONTROL
-+#pragma push_macro("SS_NOPREFIX")
-+#undef SS_NOPREFIX
-+#pragma push_macro("SS_NOTIFY")
-+#undef SS_NOTIFY
-+#pragma push_macro("SS_CENTERIMAGE")
-+#undef SS_CENTERIMAGE
-+#pragma push_macro("SS_RIGHTJUST")
-+#undef SS_RIGHTJUST
-+#pragma push_macro("SS_REALSIZEIMAGE")
-+#undef SS_REALSIZEIMAGE
-+#pragma push_macro("SS_SUNKEN")
-+#undef SS_SUNKEN
-+#pragma push_macro("SS_EDITCONTROL")
-+#undef SS_EDITCONTROL
-+#pragma push_macro("SS_ENDELLIPSIS")
-+#undef SS_ENDELLIPSIS
-+#pragma push_macro("SS_PATHELLIPSIS")
-+#undef SS_PATHELLIPSIS
-+#pragma push_macro("SS_WORDELLIPSIS")
-+#undef SS_WORDELLIPSIS
-+#pragma push_macro("SS_ELLIPSISMASK")
-+#undef SS_ELLIPSISMASK
-+enum STATIC_STYLES : unsigned int
-+{
-+    SS_LEFT = 0U,
-+    SS_CENTER = 1U,
-+    SS_RIGHT = 2U,
-+    SS_ICON = 3U,
-+    SS_BLACKRECT = 4U,
-+    SS_GRAYRECT = 5U,
-+    SS_WHITERECT = 6U,
-+    SS_BLACKFRAME = 7U,
-+    SS_GRAYFRAME = 8U,
-+    SS_WHITEFRAME = 9U,
-+    SS_USERITEM = 10U,
-+    SS_SIMPLE = 11U,
-+    SS_LEFTNOWORDWRAP = 12U,
-+    SS_OWNERDRAW = 13U,
-+    SS_BITMAP = 14U,
-+    SS_ENHMETAFILE = 15U,
-+    SS_ETCHEDHORZ = 16U,
-+    SS_ETCHEDVERT = 17U,
-+    SS_ETCHEDFRAME = 18U,
-+    SS_TYPEMASK = 31U,
-+    SS_REALSIZECONTROL = 64U,
-+    SS_NOPREFIX = 128U,
-+    SS_NOTIFY = 256U,
-+    SS_CENTERIMAGE = 512U,
-+    SS_RIGHTJUST = 1024U,
-+    SS_REALSIZEIMAGE = 2048U,
-+    SS_SUNKEN = 4096U,
-+    SS_EDITCONTROL = 8192U,
-+    SS_ENDELLIPSIS = 16384U,
-+    SS_PATHELLIPSIS = 32768U,
-+    SS_WORDELLIPSIS = 49152U,
-+    SS_ELLIPSISMASK = 49152U,
-+};
-+#pragma pop_macro("SS_ELLIPSISMASK")
-+#pragma pop_macro("SS_WORDELLIPSIS")
-+#pragma pop_macro("SS_PATHELLIPSIS")
-+#pragma pop_macro("SS_ENDELLIPSIS")
-+#pragma pop_macro("SS_EDITCONTROL")
-+#pragma pop_macro("SS_SUNKEN")
-+#pragma pop_macro("SS_REALSIZEIMAGE")
-+#pragma pop_macro("SS_RIGHTJUST")
-+#pragma pop_macro("SS_CENTERIMAGE")
-+#pragma pop_macro("SS_NOTIFY")
-+#pragma pop_macro("SS_NOPREFIX")
-+#pragma pop_macro("SS_REALSIZECONTROL")
-+#pragma pop_macro("SS_TYPEMASK")
-+#pragma pop_macro("SS_ETCHEDFRAME")
-+#pragma pop_macro("SS_ETCHEDVERT")
-+#pragma pop_macro("SS_ETCHEDHORZ")
-+#pragma pop_macro("SS_ENHMETAFILE")
-+#pragma pop_macro("SS_BITMAP")
-+#pragma pop_macro("SS_OWNERDRAW")
-+#pragma pop_macro("SS_LEFTNOWORDWRAP")
-+#pragma pop_macro("SS_SIMPLE")
-+#pragma pop_macro("SS_USERITEM")
-+#pragma pop_macro("SS_WHITEFRAME")
-+#pragma pop_macro("SS_GRAYFRAME")
-+#pragma pop_macro("SS_BLACKFRAME")
-+#pragma pop_macro("SS_WHITERECT")
-+#pragma pop_macro("SS_GRAYRECT")
-+#pragma pop_macro("SS_BLACKRECT")
-+#pragma pop_macro("SS_ICON")
-+#pragma pop_macro("SS_RIGHT")
-+#pragma pop_macro("SS_CENTER")
-+#pragma pop_macro("SS_LEFT")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("GR_GLOBAL")
@@ -10113,7 +9491,7 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("KEYEVENTF_KEYUP")
 +#pragma pop_macro("KEYEVENTF_EXTENDEDKEY")
 +#endif
- 
++
 +#ifdef WIN32METADATA
 +#pragma push_macro("MOUSEEVENTF_ABSOLUTE")
 +#undef MOUSEEVENTF_ABSOLUTE
@@ -10175,7 +9553,7 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("MOUSEEVENTF_LEFTDOWN")
 +#pragma pop_macro("MOUSEEVENTF_ABSOLUTE")
 +#endif
- 
++
 +#ifdef WIN32METADATA
 +#pragma push_macro("INPUT_MOUSE")
 +#undef INPUT_MOUSE
@@ -11801,27 +11179,6 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("SW_HIDE")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("SW_PARENTCLOSING")
-+#undef SW_PARENTCLOSING
-+#pragma push_macro("SW_OTHERZOOM")
-+#undef SW_OTHERZOOM
-+#pragma push_macro("SW_PARENTOPENING")
-+#undef SW_PARENTOPENING
-+#pragma push_macro("SW_OTHERUNZOOM")
-+#undef SW_OTHERUNZOOM
-+enum SHOW_WINDOW_STATUS : unsigned int
-+{
-+    SW_PARENTCLOSING = 1U,
-+    SW_OTHERZOOM = 2U,
-+    SW_PARENTOPENING = 3U,
-+    SW_OTHERUNZOOM = 4U,
-+};
-+#pragma pop_macro("SW_OTHERUNZOOM")
-+#pragma pop_macro("SW_PARENTOPENING")
-+#pragma pop_macro("SW_OTHERZOOM")
-+#pragma pop_macro("SW_PARENTCLOSING")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("SW_SCROLLCHILDREN")
@@ -14787,97 +14144,7 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("LLKHF_EXTENDED")
 +#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("FVIRTKEY")
-+#undef FVIRTKEY
-+#pragma push_macro("FNOINVERT")
-+#undef FNOINVERT
-+#pragma push_macro("FSHIFT")
-+#undef FSHIFT
-+#pragma push_macro("FCONTROL")
-+#undef FCONTROL
-+#pragma push_macro("FALT")
-+#undef FALT
-+enum [[clang::flag_enum]] ACCEL_VIRT_FLAGS : unsigned char
-+{
-+    FVIRTKEY = 1,
-+    FNOINVERT = 2,
-+    FSHIFT = 4,
-+    FCONTROL = 8,
-+    FALT = 16,
-+};
-+#pragma pop_macro("FALT")
-+#pragma pop_macro("FCONTROL")
-+#pragma pop_macro("FSHIFT")
-+#pragma pop_macro("FNOINVERT")
-+#pragma pop_macro("FVIRTKEY")
-+#endif
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("SB_LINEUP")
-+#undef SB_LINEUP
-+#pragma push_macro("SB_LINELEFT")
-+#undef SB_LINELEFT
-+#pragma push_macro("SB_LINEDOWN")
-+#undef SB_LINEDOWN
-+#pragma push_macro("SB_LINERIGHT")
-+#undef SB_LINERIGHT
-+#pragma push_macro("SB_PAGEUP")
-+#undef SB_PAGEUP
-+#pragma push_macro("SB_PAGELEFT")
-+#undef SB_PAGELEFT
-+#pragma push_macro("SB_PAGEDOWN")
-+#undef SB_PAGEDOWN
-+#pragma push_macro("SB_PAGERIGHT")
-+#undef SB_PAGERIGHT
-+#pragma push_macro("SB_THUMBPOSITION")
-+#undef SB_THUMBPOSITION
-+#pragma push_macro("SB_THUMBTRACK")
-+#undef SB_THUMBTRACK
-+#pragma push_macro("SB_TOP")
-+#undef SB_TOP
-+#pragma push_macro("SB_LEFT")
-+#undef SB_LEFT
-+#pragma push_macro("SB_RIGHT")
-+#undef SB_RIGHT
-+#pragma push_macro("SB_BOTTOM")
-+#undef SB_BOTTOM
-+#pragma push_macro("SB_ENDSCROLL")
-+#undef SB_ENDSCROLL
-+enum SCROLLBAR_COMMAND : int
-+{
-+    SB_LINEUP = 0,
-+    SB_LINELEFT = 0,
-+    SB_LINEDOWN = 1,
-+    SB_LINERIGHT = 1,
-+    SB_PAGEUP = 2,
-+    SB_PAGELEFT = 2,
-+    SB_PAGEDOWN = 3,
-+    SB_PAGERIGHT = 3,
-+    SB_THUMBPOSITION = 4,
-+    SB_THUMBTRACK = 5,
-+    SB_TOP = 6,
-+    SB_LEFT = 6,
-+    SB_RIGHT = 7,
-+    SB_BOTTOM = 7,
-+    SB_ENDSCROLL = 8,
-+};
-+#pragma pop_macro("SB_ENDSCROLL")
-+#pragma pop_macro("SB_BOTTOM")
-+#pragma pop_macro("SB_RIGHT")
-+#pragma pop_macro("SB_LEFT")
-+#pragma pop_macro("SB_TOP")
-+#pragma pop_macro("SB_THUMBTRACK")
-+#pragma pop_macro("SB_THUMBPOSITION")
-+#pragma pop_macro("SB_PAGERIGHT")
-+#pragma pop_macro("SB_PAGEDOWN")
-+#pragma pop_macro("SB_PAGELEFT")
-+#pragma pop_macro("SB_PAGEUP")
-+#pragma pop_macro("SB_LINERIGHT")
-+#pragma pop_macro("SB_LINEDOWN")
-+#pragma pop_macro("SB_LINELEFT")
-+#pragma pop_macro("SB_LINEUP")
-+#endif
 +
 +#ifdef WIN32METADATA
 +#pragma push_macro("DI_MASK")
@@ -14909,10 +14176,10 @@ index f99e9294f5..3a176f023c 100644
 +#pragma pop_macro("DI_MASK")
 +#endif
 +
-+#endif /* !_WINUSER_ */
-+
-+
-+
+ #endif /* !_WINUSER_ */
+ 
+ 
+ 
 +
 +#ifdef WIN32METADATA
 +#ifndef WIN32METADATA_ENUM_SYSTEM_CURSOR_ID

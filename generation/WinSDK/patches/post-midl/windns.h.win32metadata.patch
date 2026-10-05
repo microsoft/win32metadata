@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
-index f213f55c62..573477e95a 100644
+index f213f55c62..9a0da5c419 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinDNS.h
 @@ -1,3 +1,4 @@
@@ -426,14 +426,12 @@ index f213f55c62..573477e95a 100644
      _Inout_     PMDNS_QUERY_HANDLE pHandle
      );
  
-@@ -1908,4 +1909,139 @@ DnsIsZtEnabled(VOID);
+@@ -1908,4 +1909,107 @@ DnsIsZtEnabled(VOID);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
 +
 +#ifdef WIN32METADATA
-+#pragma push_macro("DNS_QUERY_PARSE_ALL_RECORDS")
-+#undef DNS_QUERY_PARSE_ALL_RECORDS
 +#pragma push_macro("DNS_QUERY_STANDARD")
 +#undef DNS_QUERY_STANDARD
 +#pragma push_macro("DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE")
@@ -482,23 +480,8 @@ index f213f55c62..573477e95a 100644
 +#undef DNS_QUERY_RESERVED
 +#pragma push_macro("DNS_QUERY_CACHE_ONLY")
 +#undef DNS_QUERY_CACHE_ONLY
-+#pragma push_macro("DNS_QUERY_REQUEST_VERSION1")
-+#undef DNS_QUERY_REQUEST_VERSION1
-+#pragma push_macro("DNS_QUERY_REQUEST_VERSION2")
-+#undef DNS_QUERY_REQUEST_VERSION2
-+#pragma push_macro("DNS_QUERY_RESULTS_VERSION1")
-+#undef DNS_QUERY_RESULTS_VERSION1
-+#pragma push_macro("DNS_QUERY_REQUEST_VERSION3")
-+#undef DNS_QUERY_REQUEST_VERSION3
-+#pragma push_macro("DNS_QUERY_RAW_RESULTS_VERSION1")
-+#undef DNS_QUERY_RAW_RESULTS_VERSION1
-+#pragma push_macro("DNS_QUERY_RAW_REQUEST_VERSION1")
-+#undef DNS_QUERY_RAW_REQUEST_VERSION1
-+#pragma push_macro("DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE")
-+#undef DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE
 +enum [[clang::flag_enum]] DNS_QUERY_OPTIONS : unsigned int
 +{
-+    DNS_QUERY_PARSE_ALL_RECORDS = 0U,
 +    DNS_QUERY_STANDARD = 0U,
 +    DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE = 1U,
 +    DNS_QUERY_USE_TCP_ONLY = 2U,
@@ -523,21 +506,7 @@ index f213f55c62..573477e95a 100644
 +    DNS_QUERY_DNSSEC_REQUIRED = 67108864U,
 +    DNS_QUERY_RESERVED = 4026531840U,
 +    DNS_QUERY_CACHE_ONLY = 16U,
-+    DNS_QUERY_REQUEST_VERSION1 = 1U,
-+    DNS_QUERY_REQUEST_VERSION2 = 2U,
-+    DNS_QUERY_RESULTS_VERSION1 = 1U,
-+    DNS_QUERY_REQUEST_VERSION3 = 3U,
-+    DNS_QUERY_RAW_RESULTS_VERSION1 = 1U,
-+    DNS_QUERY_RAW_REQUEST_VERSION1 = 1U,
-+    DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE = 1U,
 +};
-+#pragma pop_macro("DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE")
-+#pragma pop_macro("DNS_QUERY_RAW_REQUEST_VERSION1")
-+#pragma pop_macro("DNS_QUERY_RAW_RESULTS_VERSION1")
-+#pragma pop_macro("DNS_QUERY_REQUEST_VERSION3")
-+#pragma pop_macro("DNS_QUERY_RESULTS_VERSION1")
-+#pragma pop_macro("DNS_QUERY_REQUEST_VERSION2")
-+#pragma pop_macro("DNS_QUERY_REQUEST_VERSION1")
 +#pragma pop_macro("DNS_QUERY_CACHE_ONLY")
 +#pragma pop_macro("DNS_QUERY_RESERVED")
 +#pragma pop_macro("DNS_QUERY_DNSSEC_REQUIRED")
@@ -562,7 +531,6 @@ index f213f55c62..573477e95a 100644
 +#pragma pop_macro("DNS_QUERY_USE_TCP_ONLY")
 +#pragma pop_macro("DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE")
 +#pragma pop_macro("DNS_QUERY_STANDARD")
-+#pragma pop_macro("DNS_QUERY_PARSE_ALL_RECORDS")
 +#endif
 +
  #endif // _WINDNS_INCLUDED_

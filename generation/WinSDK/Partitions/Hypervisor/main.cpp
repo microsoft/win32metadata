@@ -2,7 +2,6 @@
 #define QCC_OS_GROUP_WINDOWS
 
 #include "intrinfix.h"
-#include <devioctl.h>
 
 #include "windows.fixed.h"
 #include <sdkddkver.h>
