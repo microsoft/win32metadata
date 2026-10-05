@@ -7,4 +7,5 @@
 #include <sdkddkver.h>
 
 #include <expandedresources.h>
+#include <gamingexperience.h>
 #include <gameux.h>
