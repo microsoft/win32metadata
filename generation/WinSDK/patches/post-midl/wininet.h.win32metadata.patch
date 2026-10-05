@@ -1,7 +1,7 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h b/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
-index f3dd7607d1..0dc2a598d8 100644
---- a/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/wininet.h
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h
+index f3dd7607d1..396ce50e64 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinInet.h
 @@ -1,3 +1,4 @@
 +#include <win32metadata_annotations.h>
  /*++
@@ -1720,12 +1720,13 @@ index f3dd7607d1..0dc2a598d8 100644
  PrivacyGetZonePreferenceW(
      _In_ DWORD dwZone,
      _In_ DWORD dwType,
-@@ -4137,6 +4138,339 @@ HttpIsHostHstsEnabled(
+@@ -4137,6 +4138,349 @@ HttpIsHostHstsEnabled(
  
  #endif // !defined(_WININET_)
  
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_FTP_FLAGS_)
++#define _WIN32METADATA_WININET_H_FTP_FLAGS_
 +#pragma push_macro("FTP_TRANSFER_TYPE_ASCII")
 +#undef FTP_TRANSFER_TYPE_ASCII
 +#pragma push_macro("FTP_TRANSFER_TYPE_BINARY")
@@ -1751,7 +1752,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("FTP_TRANSFER_TYPE_ASCII")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_INTERNET_CONNECTION_)
++#define _WIN32METADATA_WININET_H_INTERNET_CONNECTION_
 +#pragma push_macro("INTERNET_CONNECTION_CONFIGURED")
 +#undef INTERNET_CONNECTION_CONFIGURED
 +#pragma push_macro("INTERNET_CONNECTION_LAN")
@@ -1785,7 +1787,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("INTERNET_CONNECTION_CONFIGURED")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_HTTP_ADDREQ_FLAG_)
++#define _WIN32METADATA_WININET_H_HTTP_ADDREQ_FLAG_
 +#pragma push_macro("HTTP_ADDREQ_FLAG_ADD")
 +#undef HTTP_ADDREQ_FLAG_ADD
 +#pragma push_macro("HTTP_ADDREQ_FLAG_ADD_IF_NEW")
@@ -1815,7 +1818,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("HTTP_ADDREQ_FLAG_ADD")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_INTERNET_COOKIE_FLAGS_)
++#define _WIN32METADATA_WININET_H_INTERNET_COOKIE_FLAGS_
 +#pragma push_macro("INTERNET_COOKIE_HTTPONLY")
 +#undef INTERNET_COOKIE_HTTPONLY
 +#pragma push_macro("INTERNET_COOKIE_THIRD_PARTY")
@@ -1833,7 +1837,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("INTERNET_COOKIE_HTTPONLY")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_PROXY_AUTO_DETECT_TYPE_)
++#define _WIN32METADATA_WININET_H_PROXY_AUTO_DETECT_TYPE_
 +#pragma push_macro("PROXY_AUTO_DETECT_TYPE_DHCP")
 +#undef PROXY_AUTO_DETECT_TYPE_DHCP
 +#pragma push_macro("PROXY_AUTO_DETECT_TYPE_DNS_A")
@@ -1847,7 +1852,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("PROXY_AUTO_DETECT_TYPE_DHCP")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_INTERNET_AUTODIAL_)
++#define _WIN32METADATA_WININET_H_INTERNET_AUTODIAL_
 +#pragma push_macro("INTERNET_AUTODIAL_FAILIFSECURITYCHECK")
 +#undef INTERNET_AUTODIAL_FAILIFSECURITYCHECK
 +#pragma push_macro("INTERNET_AUTODIAL_FORCE_ONLINE")
@@ -1869,7 +1875,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("INTERNET_AUTODIAL_FAILIFSECURITYCHECK")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_GOPHER_TYPE_)
++#define _WIN32METADATA_WININET_H_GOPHER_TYPE_
 +#pragma push_macro("GOPHER_TYPE_ASK")
 +#undef GOPHER_TYPE_ASK
 +#pragma push_macro("GOPHER_TYPE_BINARY")
@@ -1971,7 +1978,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("GOPHER_TYPE_ASK")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_INTERNET_PER_CONN_)
++#define _WIN32METADATA_WININET_H_INTERNET_PER_CONN_
 +#pragma push_macro("INTERNET_PER_CONN_AUTOCONFIG_URL")
 +#undef INTERNET_PER_CONN_AUTOCONFIG_URL
 +#pragma push_macro("INTERNET_PER_CONN_AUTODISCOVERY_FLAGS")
@@ -2013,7 +2021,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("INTERNET_PER_CONN_AUTOCONFIG_URL")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_INTERNET_ACCESS_TYPE_)
++#define _WIN32METADATA_WININET_H_INTERNET_ACCESS_TYPE_
 +#pragma push_macro("INTERNET_OPEN_TYPE_DIRECT")
 +#undef INTERNET_OPEN_TYPE_DIRECT
 +#pragma push_macro("INTERNET_OPEN_TYPE_PRECONFIG")
@@ -2031,7 +2040,8 @@ index f3dd7607d1..0dc2a598d8 100644
 +#pragma pop_macro("INTERNET_OPEN_TYPE_DIRECT")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININET_H_INTERNET_STATE_)
++#define _WIN32METADATA_WININET_H_INTERNET_STATE_
 +#pragma push_macro("INTERNET_STATE_CONNECTED")
 +#undef INTERNET_STATE_CONNECTED
 +#pragma push_macro("INTERNET_STATE_DISCONNECTED")

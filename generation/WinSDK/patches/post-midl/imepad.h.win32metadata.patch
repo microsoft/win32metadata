@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h b/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
-index 5d990dd627..682bd73fe0 100644
+index 5d990dd627..a3ae6268fb 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/imepad.h
 @@ -1,3 +1,4 @@
@@ -47,12 +47,13 @@ index 5d990dd627..682bd73fe0 100644
                         WPARAM wParam,
                         LPARAM lParam) PURE;
  };
-@@ -640,4 +641,87 @@ DECLARE_INTERFACE_(IImePad, IUnknown)
+@@ -640,4 +641,88 @@ DECLARE_INTERFACE_(IImePad, IUnknown)
  
  #endif //_IME_PAD_H_
  
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_IMEPAD_H_IME_PAD_REQUEST_FLAGS_)
++#define _WIN32METADATA_IMEPAD_H_IME_PAD_REQUEST_FLAGS_
 +#pragma push_macro("IMEPADREQ_INSERTSTRING")
 +#undef IMEPADREQ_INSERTSTRING
 +#pragma push_macro("IMEPADREQ_SENDCONTROL")

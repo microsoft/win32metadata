@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
-index 4083a3eb7b..fe3f51b0a1 100644
+index 4083a3eb7b..86b4445dba 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/commdlg.h
 @@ -1,3 +1,4 @@
@@ -294,13 +294,14 @@ index 4083a3eb7b..fe3f51b0a1 100644
  #ifdef UNICODE
  #define PageSetupDlg  PageSetupDlgW
  #else
-@@ -1264,5 +1265,585 @@ WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
+@@ -1264,5 +1265,592 @@ WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
  #endif  /* !_INC_COMMDLG */
  #if _MSC_VER >= 1200
  #pragma warning(pop)
 +
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_OPEN_FILENAME_FLAGS_)
++#define _WIN32METADATA_COMMDLG_H_OPEN_FILENAME_FLAGS_
 +#pragma push_macro("OFN_READONLY")
 +#undef OFN_READONLY
 +#pragma push_macro("OFN_OVERWRITEPROMPT")
@@ -410,7 +411,8 @@ index 4083a3eb7b..fe3f51b0a1 100644
 +#pragma pop_macro("OFN_READONLY")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_OPEN_FILENAME_FLAGS_EX_)
++#define _WIN32METADATA_COMMDLG_H_OPEN_FILENAME_FLAGS_EX_
 +#pragma push_macro("OFN_EX_NONE")
 +#undef OFN_EX_NONE
 +#pragma push_macro("OFN_EX_NOPLACESBAR")
@@ -424,7 +426,8 @@ index 4083a3eb7b..fe3f51b0a1 100644
 +#pragma pop_macro("OFN_EX_NONE")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_PAGESETUPDLG_FLAGS_)
++#define _WIN32METADATA_COMMDLG_H_PAGESETUPDLG_FLAGS_
 +#pragma push_macro("PSD_DEFAULTMINMARGINS")
 +#undef PSD_DEFAULTMINMARGINS
 +#pragma push_macro("PSD_DISABLEMARGINS")
@@ -506,7 +509,8 @@ index 4083a3eb7b..fe3f51b0a1 100644
 +#pragma pop_macro("PSD_DEFAULTMINMARGINS")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_CHOOSEFONT_FLAGS_)
++#define _WIN32METADATA_COMMDLG_H_CHOOSEFONT_FLAGS_
 +#pragma push_macro("CF_APPLY")
 +#undef CF_APPLY
 +#pragma push_macro("CF_ANSIONLY")
@@ -628,7 +632,8 @@ index 4083a3eb7b..fe3f51b0a1 100644
 +#pragma pop_macro("CF_APPLY")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_FINDREPLACE_FLAGS_)
++#define _WIN32METADATA_COMMDLG_H_FINDREPLACE_FLAGS_
 +#pragma push_macro("FR_DOWN")
 +#undef FR_DOWN
 +#pragma push_macro("FR_WHOLEWORD")
@@ -730,7 +735,8 @@ index 4083a3eb7b..fe3f51b0a1 100644
 +#pragma pop_macro("FR_DOWN")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_PRINTDLGEX_FLAGS_)
++#define _WIN32METADATA_COMMDLG_H_PRINTDLGEX_FLAGS_
 +#pragma push_macro("PD_ALLPAGES")
 +#undef PD_ALLPAGES
 +#pragma push_macro("PD_COLLATE")
@@ -848,7 +854,8 @@ index 4083a3eb7b..fe3f51b0a1 100644
 +#pragma pop_macro("PD_ALLPAGES")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_COMMDLG_H_CHOOSEFONT_FONT_TYPE_)
++#define _WIN32METADATA_COMMDLG_H_CHOOSEFONT_FONT_TYPE_
 +#pragma push_macro("BOLD_FONTTYPE")
 +#undef BOLD_FONTTYPE
 +#pragma push_macro("ITALIC_FONTTYPE")

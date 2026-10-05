@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h b/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
-index 1fcfeaee21..17b4254773 100644
+index 1fcfeaee21..352f2ac88b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mssign.h
 @@ -1,3 +1,4 @@
@@ -241,7 +241,7 @@ index 1fcfeaee21..17b4254773 100644
      _In_       DWORD                  dwIndex,
      _In_       SIGNER_SUBJECT_INFO    *pSubjectInfo,
      _In_       PCWSTR                 pwszHttpTimeStamp,
-@@ -277,9 +278,106 @@ HRESULT WINAPI SignerTimeStampEx3(
+@@ -277,9 +278,112 @@ HRESULT WINAPI SignerTimeStampEx3(
      _In_opt_   PVOID                  pSipData,
      _Out_      SIGNER_CONTEXT         **ppSignerContext,
      _In_opt_   PCERT_STRONG_SIGN_PARA pCryptoPolicy,
@@ -252,7 +252,8 @@ index 1fcfeaee21..17b4254773 100644
  #ifdef __cplusplus
  }
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_MSSIGN_H_SIGNER_TIMESTAMP_FLAGS_)
++#define _WIN32METADATA_MSSIGN_H_SIGNER_TIMESTAMP_FLAGS_
 +#pragma push_macro("SIGNER_TIMESTAMP_AUTHENTICODE")
 +#undef SIGNER_TIMESTAMP_AUTHENTICODE
 +#pragma push_macro("SIGNER_TIMESTAMP_RFC3161")
@@ -266,7 +267,8 @@ index 1fcfeaee21..17b4254773 100644
 +#pragma pop_macro("SIGNER_TIMESTAMP_AUTHENTICODE")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_MSSIGN_H_SIGNER_SUBJECT_CHOICE_)
++#define _WIN32METADATA_MSSIGN_H_SIGNER_SUBJECT_CHOICE_
 +#pragma push_macro("SIGNER_SUBJECT_FILE")
 +#undef SIGNER_SUBJECT_FILE
 +#pragma push_macro("SIGNER_SUBJECT_BLOB")
@@ -280,7 +282,8 @@ index 1fcfeaee21..17b4254773 100644
 +#pragma pop_macro("SIGNER_SUBJECT_FILE")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_MSSIGN_H_SIGNER_SIGNATURE_ATTRIBUTE_CHOICE_)
++#define _WIN32METADATA_MSSIGN_H_SIGNER_SIGNATURE_ATTRIBUTE_CHOICE_
 +#pragma push_macro("SIGNER_NO_ATTR")
 +#undef SIGNER_NO_ATTR
 +#pragma push_macro("SIGNER_AUTHCODE_ATTR")
@@ -294,7 +297,8 @@ index 1fcfeaee21..17b4254773 100644
 +#pragma pop_macro("SIGNER_NO_ATTR")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_MSSIGN_H_SIGNER_PRIVATE_KEY_CHOICE_)
++#define _WIN32METADATA_MSSIGN_H_SIGNER_PRIVATE_KEY_CHOICE_
 +#pragma push_macro("PVK_TYPE_FILE_NAME")
 +#undef PVK_TYPE_FILE_NAME
 +#pragma push_macro("PVK_TYPE_KEYCONTAINER")
@@ -308,7 +312,8 @@ index 1fcfeaee21..17b4254773 100644
 +#pragma pop_macro("PVK_TYPE_FILE_NAME")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_MSSIGN_H_SIGNER_CERT_POLICY_)
++#define _WIN32METADATA_MSSIGN_H_SIGNER_CERT_POLICY_
 +#pragma push_macro("SIGNER_CERT_POLICY_STORE")
 +#undef SIGNER_CERT_POLICY_STORE
 +#pragma push_macro("SIGNER_CERT_POLICY_CHAIN")
@@ -330,7 +335,8 @@ index 1fcfeaee21..17b4254773 100644
 +#pragma pop_macro("SIGNER_CERT_POLICY_STORE")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_MSSIGN_H_SIGNER_CERT_CHOICE_)
++#define _WIN32METADATA_MSSIGN_H_SIGNER_CERT_CHOICE_
 +#pragma push_macro("SIGNER_CERT_SPC_FILE")
 +#undef SIGNER_CERT_SPC_FILE
 +#pragma push_macro("SIGNER_CERT_STORE")

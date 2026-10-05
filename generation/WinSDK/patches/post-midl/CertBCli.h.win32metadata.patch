@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
-index eebe909fa8..f2e2ca7d98 100644
+index eebe909fa8..e7831822ae 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
 @@ -17,6 +17,7 @@
@@ -285,12 +285,13 @@ index eebe909fa8..f2e2ca7d98 100644
  HRESULT
  CERTBCLI_API
  CertSrvServerControlW(
-@@ -703,4 +722,19 @@ FNCERTSRVSERVERCONTROLW *pfnCertSrvServerControl = CertSrvServerControl;
+@@ -703,4 +722,20 @@ FNCERTSRVSERVERCONTROLW *pfnCertSrvServerControl = CertSrvServerControl;
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_CERTBCLI_H_CSBACKUP_TYPE_)
++#define _WIN32METADATA_CERTBCLI_H_CSBACKUP_TYPE_
 +#pragma push_macro("CSBACKUP_TYPE_FULL")
 +#undef CSBACKUP_TYPE_FULL
 +#pragma push_macro("CSBACKUP_TYPE_LOGS_ONLY")

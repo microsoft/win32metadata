@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
-index e30ee02631..a120bc42eb 100644
+index e30ee02631..1083d9714f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTSecAPI.h
 @@ -15,6 +15,7 @@ Revision History:
@@ -791,12 +791,13 @@ index e30ee02631..a120bc42eb 100644
  NTAPI
  AuditFree(
      _In_ __drv_freesMem(Mem) _Post_invalid_ PVOID Buffer
-@@ -5750,4 +5759,351 @@ typedef struct _PKU2U_CERTIFICATE_S4U_LOGON {
+@@ -5750,4 +5759,362 @@ typedef struct _PKU2U_CERTIFICATE_S4U_LOGON {
  
  #if _MSC_VER >= 1200
  #pragma warning(pop)
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_MSV_SUB_AUTHENTICATION_FILTER_)
++#define _WIN32METADATA_NTSECAPI_H_MSV_SUB_AUTHENTICATION_FILTER_
 +#pragma push_macro("LOGON_GUEST")
 +#undef LOGON_GUEST
 +#pragma push_macro("LOGON_NOENCRYPTION")
@@ -838,7 +839,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("LOGON_GUEST")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_KERB_TICKET_FLAGS_)
++#define _WIN32METADATA_NTSECAPI_H_KERB_TICKET_FLAGS_
 +#pragma push_macro("KERB_TICKET_FLAGS_forwardable")
 +#undef KERB_TICKET_FLAGS_forwardable
 +#pragma push_macro("KERB_TICKET_FLAGS_forwarded")
@@ -900,7 +902,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("KERB_TICKET_FLAGS_forwardable")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_DOMAIN_PASSWORD_PROPERTIES_)
++#define _WIN32METADATA_NTSECAPI_H_DOMAIN_PASSWORD_PROPERTIES_
 +#pragma push_macro("DOMAIN_PASSWORD_COMPLEX")
 +#undef DOMAIN_PASSWORD_COMPLEX
 +#pragma push_macro("DOMAIN_PASSWORD_NO_ANON_CHANGE")
@@ -930,7 +933,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("DOMAIN_PASSWORD_COMPLEX")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_TRUSTED_DOMAIN_TRUST_TYPE_)
++#define _WIN32METADATA_NTSECAPI_H_TRUSTED_DOMAIN_TRUST_TYPE_
 +#pragma push_macro("TRUST_TYPE_DOWNLEVEL")
 +#undef TRUST_TYPE_DOWNLEVEL
 +#pragma push_macro("TRUST_TYPE_UPLEVEL")
@@ -952,7 +956,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("TRUST_TYPE_DOWNLEVEL")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_MSV_SUBAUTH_LOGON_PARAMETER_CONTROL_)
++#define _WIN32METADATA_NTSECAPI_H_MSV_SUBAUTH_LOGON_PARAMETER_CONTROL_
 +#pragma push_macro("MSV1_0_CLEARTEXT_PASSWORD_ALLOWED")
 +#undef MSV1_0_CLEARTEXT_PASSWORD_ALLOWED
 +#pragma push_macro("MSV1_0_UPDATE_LOGON_STATISTICS")
@@ -998,7 +1003,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("MSV1_0_CLEARTEXT_PASSWORD_ALLOWED")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_KERB_REQUEST_FLAGS_)
++#define _WIN32METADATA_NTSECAPI_H_KERB_REQUEST_FLAGS_
 +#pragma push_macro("KERB_REQUEST_ADD_CREDENTIAL")
 +#undef KERB_REQUEST_ADD_CREDENTIAL
 +#pragma push_macro("KERB_REQUEST_REPLACE_CREDENTIAL")
@@ -1016,7 +1022,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("KERB_REQUEST_ADD_CREDENTIAL")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_TRUSTED_DOMAIN_TRUST_DIRECTION_)
++#define _WIN32METADATA_NTSECAPI_H_TRUSTED_DOMAIN_TRUST_DIRECTION_
 +#pragma push_macro("TRUST_DIRECTION_DISABLED")
 +#undef TRUST_DIRECTION_DISABLED
 +#pragma push_macro("TRUST_DIRECTION_INBOUND")
@@ -1038,7 +1045,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("TRUST_DIRECTION_DISABLED")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS_)
++#define _WIN32METADATA_NTSECAPI_H_MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS_
 +#pragma push_macro("MSV1_0_CRED_LM_PRESENT")
 +#undef MSV1_0_CRED_LM_PRESENT
 +#pragma push_macro("MSV1_0_CRED_NT_PRESENT")
@@ -1056,7 +1064,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("MSV1_0_CRED_LM_PRESENT")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_KERB_CRYPTO_KEY_TYPE_)
++#define _WIN32METADATA_NTSECAPI_H_KERB_CRYPTO_KEY_TYPE_
 +#pragma push_macro("KERB_ETYPE_DES_CBC_CRC")
 +#undef KERB_ETYPE_DES_CBC_CRC
 +#pragma push_macro("KERB_ETYPE_DES_CBC_MD4")
@@ -1086,7 +1095,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("KERB_ETYPE_DES_CBC_CRC")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_LSA_AUTH_INFORMATION_AUTH_TYPE_)
++#define _WIN32METADATA_NTSECAPI_H_LSA_AUTH_INFORMATION_AUTH_TYPE_
 +#pragma push_macro("TRUST_AUTH_TYPE_NONE")
 +#undef TRUST_AUTH_TYPE_NONE
 +#pragma push_macro("TRUST_AUTH_TYPE_NT4OWF")
@@ -1108,7 +1118,8 @@ index e30ee02631..a120bc42eb 100644
 +#pragma pop_macro("TRUST_AUTH_TYPE_NONE")
 +#endif
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_NTSECAPI_H_TRUSTED_DOMAIN_TRUST_ATTRIBUTES_)
++#define _WIN32METADATA_NTSECAPI_H_TRUSTED_DOMAIN_TRUST_ATTRIBUTES_
 +#pragma push_macro("TRUST_ATTRIBUTE_NON_TRANSITIVE")
 +#undef TRUST_ATTRIBUTE_NON_TRANSITIVE
 +#pragma push_macro("TRUST_ATTRIBUTE_UPLEVEL_ONLY")

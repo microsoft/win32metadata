@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
-index 63c850c407..235faabb27 100644
+index 63c850c407..ca91c7b59e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Winineti.h
 @@ -1,3 +1,4 @@
@@ -441,12 +441,13 @@ index 63c850c407..235faabb27 100644
  
  
  #ifdef _WS2DEF_
-@@ -2328,5 +2329,52 @@ typedef DWORD
+@@ -2328,5 +2329,53 @@ typedef DWORD
  #endif
  
  #endif // !define(_WININETEX_)
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_WININETI_H_CACHE_CONFIG_)
++#define _WIN32METADATA_WININETI_H_CACHE_CONFIG_
 +#pragma push_macro("CACHE_CONFIG_FORCE_CLEANUP_FC")
 +#undef CACHE_CONFIG_FORCE_CLEANUP_FC
 +#pragma push_macro("CACHE_CONFIG_DISK_CACHE_PATHS_FC")
