@@ -10,6 +10,7 @@ mod namespace_routes;
 mod partition;
 mod roundtrip;
 mod scrape;
+mod staging;
 mod win32_headers;
 
 use std::env;

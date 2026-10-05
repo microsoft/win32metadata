@@ -288,15 +288,7 @@ pub(crate) fn merge_architecture_rdl(
             .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
     }
 
-    let temp = std::env::temp_dir().join(format!(
-        "win32metadata-arch-merge-{}-{}",
-        std::process::id(),
-        std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .map_or(0, |duration| duration.as_nanos())
-    ));
-    std::fs::create_dir_all(&temp)
-        .map_err(|error| format!("failed to create `{}`: {error}", temp.display()))?;
+    let temp = crate::staging::create_directory(&std::env::temp_dir(), "win32metadata-arch-merge")?;
     let merged = temp.join(format!("{assembly_name}.winmd"));
 
     let result = (|| {

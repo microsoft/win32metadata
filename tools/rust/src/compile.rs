@@ -141,18 +141,7 @@ pub(crate) fn compile_inputs(
 ) -> Result<(), String> {
     let started = std::time::Instant::now();
     let parent = output.parent().unwrap_or_else(|| std::path::Path::new("."));
-    std::fs::create_dir_all(parent)
-        .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
-
-    let staging = parent.join(format!(
-        ".win32metadata-{}-{}",
-        std::process::id(),
-        std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .map_or(0, |duration| duration.as_nanos())
-    ));
-    std::fs::create_dir_all(&staging)
-        .map_err(|error| format!("failed to create `{}`: {error}", staging.display()))?;
+    let staging = crate::staging::create_directory(parent, ".win32metadata")?;
     let staged = staging.join(format!("{assembly_name}.winmd"));
 
     let result: Result<(), String> = (|| {
@@ -355,5 +344,77 @@ mod Windows {
         index.expect("Windows.Win32.Foundation", "WIN32_ERROR");
         index.expect("Windows.Win32.System.Power", "POWER_PLATFORM_ROLE_VERSION");
         std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn concurrent_same_assembly_compiles_keep_outputs_isolated() {
+        const WORKERS: usize = 4;
+        let root = crate::staging::create_directory(
+            &std::env::temp_dir(),
+            "win32metadata-parallel-compile",
+        )
+        .unwrap();
+        let barrier = std::sync::Barrier::new(WORKERS);
+        std::thread::scope(|scope| {
+            let workers = (0..WORKERS)
+                .map(|worker| {
+                    let root = &root;
+                    let barrier = &barrier;
+                    scope.spawn(move || {
+                        let input = root.join(format!("input-{worker}.rdl"));
+                        let output = root.join(format!("output-{worker}.winmd"));
+                        std::fs::write(
+                            &input,
+                            format!("#[win32]\nmod Sample {{ const OWNER: u32 = {worker}; }}"),
+                        )
+                        .unwrap();
+                        barrier.wait();
+                        compile_inputs(
+                            std::slice::from_ref(&input),
+                            &[],
+                            "Sample.Shared",
+                            Some([1, 2, 3, 4]),
+                            &output,
+                        )
+                        .unwrap();
+                        let index = Index::read(&output).unwrap();
+                        let windows_metadata::reader::Item::Const(field) =
+                            index.expect_item("Sample", "OWNER")
+                        else {
+                            panic!("missing worker identity");
+                        };
+                        assert_eq!(
+                            field.constant().unwrap().value(),
+                            windows_metadata::Value::U32(worker.try_into().unwrap())
+                        );
+                        (input, output)
+                    })
+                })
+                .collect::<Vec<_>>();
+            for worker in workers {
+                let (input, output) = worker.join().unwrap();
+                let sequential = output.with_extension("sequential.winmd");
+                compile_inputs(
+                    &[input],
+                    &[],
+                    "Sample.Shared",
+                    Some([1, 2, 3, 4]),
+                    &sequential,
+                )
+                .unwrap();
+                assert_eq!(
+                    std::fs::read(output).unwrap(),
+                    std::fs::read(sequential).unwrap()
+                );
+            }
+        });
+        assert!(std::fs::read_dir(&root).unwrap().all(|entry| {
+            !entry
+                .unwrap()
+                .file_name()
+                .to_string_lossy()
+                .starts_with(".win32metadata-")
+        }));
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

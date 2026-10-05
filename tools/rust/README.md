@@ -270,6 +270,10 @@ without an import mapping or explicit import annotation remain unselected.
 **`--arch`** may be repeated. Each architecture is extracted and compiled independently;
 multi-architecture runs execute those workers in parallel and merge their WinMDs so
 architecture-specific declarations are tagged.
+Compilation and cached architecture merging atomically reserve distinct staging directories.
+Process-local counters and collision retries prevent workers compiling the same assembly
+from sharing temporary files or deleting each other's output; wall-clock timestamps are
+not used as uniqueness guarantees.
 
 The parser uses C++20 with Microsoft extensions, output is partitioned by defining header,
 and the bundled Windows metadata supplies framework and external Win32 reference types
