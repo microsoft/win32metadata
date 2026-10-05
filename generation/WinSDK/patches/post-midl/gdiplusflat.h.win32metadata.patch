@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
-index ba094eef74..251fde38a7 100644
+index ba094eef74..635b505dec 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
 @@ -1,3 +1,4 @@
@@ -48,7 +48,7 @@ index ba094eef74..251fde38a7 100644
 -GpStatus WINGDIPAPI
 -GdipGetPointCount(GpPath* path, INT* count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPointCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath* path, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
++GdipGetPointCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath* path, _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
@@ -59,12 +59,12 @@ index ba094eef74..251fde38a7 100644
 -GpStatus WINGDIPAPI
 -GdipGetPathPoints(GpPath*, GpPointF* points, INT count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPathPoints(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath*, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPointF* points, _WIN32META_ANNOTATION_("win32metadata:in") INT count);
++GdipGetPathPoints(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath*, _WIN32META_ANNOTATION_("win32metadata:out") GpPointF* points, _WIN32META_ANNOTATION_("win32metadata:in") INT count);
  
 -GpStatus WINGDIPAPI
 -GdipGetPathPointsI(GpPath*, GpPoint* points, INT count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPathPointsI(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath*, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPoint* points, _WIN32META_ANNOTATION_("win32metadata:in") INT count);
++GdipGetPathPointsI(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath*, _WIN32META_ANNOTATION_("win32metadata:out") GpPoint* points, _WIN32META_ANNOTATION_("win32metadata:in") INT count);
  
 -GpStatus WINGDIPAPI
 -GdipGetPathFillMode(GpPath *path, GpFillMode *fillmode);
@@ -114,7 +114,7 @@ index ba094eef74..251fde38a7 100644
 -GpStatus WINGDIPAPI
 -GdipGetPathLastPoint(GpPath* path, GpPointF* lastPoint);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPathLastPoint(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath* path, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPointF* lastPoint);
++GdipGetPathLastPoint(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath* path, _WIN32META_ANNOTATION_("win32metadata:out") GpPointF* lastPoint);
  
 -GpStatus WINGDIPAPI
 -GdipAddPathLine(GpPath *path, REAL x1, REAL y1, REAL x2, REAL y2);
@@ -1319,12 +1319,12 @@ index ba094eef74..251fde38a7 100644
 -GpStatus WINGDIPAPI
 -GdipGetPathGradientPointCount(GpPathGradient *brush, INT* count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPathGradientPointCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathGradient *brush, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
++GdipGetPathGradientPointCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathGradient *brush, _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
  
 -GpStatus WINGDIPAPI
 -GdipGetPathGradientSurroundColorCount(GpPathGradient *brush, INT* count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPathGradientSurroundColorCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathGradient *brush, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
++GdipGetPathGradientSurroundColorCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathGradient *brush, _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
  
 -GpStatus WINGDIPAPI
 -GdipSetPathGradientGammaCorrection(GpPathGradient *brush, 

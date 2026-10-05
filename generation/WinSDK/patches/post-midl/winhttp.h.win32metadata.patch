@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
-index ddcdcb381a..f8e7ceb4fa 100644
+index ddcdcb381a..576cb60825 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 @@ -16,6 +16,7 @@ Abstract:
@@ -587,7 +587,7 @@ index ddcdcb381a..f8e7ceb4fa 100644
  (
      _In_ HINTERNET hWebSocket,
      _In_ WINHTTP_WEB_SOCKET_BUFFER_TYPE eBufferType,
-@@ -2201,22 +2202,22 @@ WinHttpWebSocketSend
+@@ -2201,10 +2202,10 @@ WinHttpWebSocketSend
      _In_ DWORD dwBufferLength
  );
  
@@ -600,9 +600,7 @@ index ddcdcb381a..f8e7ceb4fa 100644
  (
      _In_ HINTERNET hWebSocket,
      _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
-     _In_ DWORD dwBufferLength,
--    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead,
+@@ -2213,10 +2214,10 @@ WinHttpWebSocketReceive
      _Out_ WINHTTP_WEB_SOCKET_BUFFER_TYPE *peBufferType
  );
  
@@ -628,7 +626,7 @@ index ddcdcb381a..f8e7ceb4fa 100644
  (
      _In_ HINTERNET hWebSocket,
      _In_ USHORT usStatus,
-@@ -2235,16 +2236,16 @@ WinHttpWebSocketClose
+@@ -2235,10 +2236,10 @@ WinHttpWebSocketClose
      _In_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength
  );
  
@@ -641,22 +639,6 @@ index ddcdcb381a..f8e7ceb4fa 100644
  (
      _In_ HINTERNET hWebSocket,
      _Out_ USHORT *pusStatus,
-     _Out_writes_bytes_to_opt_(dwReasonLength, *pdwReasonLengthConsumed) PVOID pvReason,
-     _In_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD dwReasonLength,
--    _Out_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed
-+    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, WINHTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed
- );
- 
- typedef enum _WINHTTP_PROTOCOL_OPERATION
-@@ -2288,7 +2289,7 @@ WinHttpProtocolReceive
-     _In_ ULONGLONG Flags,
-     _Out_writes_bytes_to_(dwBufferLength, *pdwBytesRead) PVOID pvBuffer,
-     _In_ DWORD dwBufferLength,
--    _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead
-+    _WIN32META_ANNOTATION_("win32metadata:in") _Out_range_(0, dwBufferLength) DWORD *pdwBytesRead
- );
- 
- 
 @@ -2524,5 +2525,127 @@ typedef struct _WINHTTP_FAST_FORWARDING_STATUS
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
