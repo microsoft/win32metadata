@@ -82,17 +82,6 @@ Custom names use an explicit `_Win32_` owner prefix and PascalCase semantic name
 example, use `_Win32_SetLastError_`, `_Win32_ImportLibrary_(...)`,
 `_Win32_Retval_`, and `_Win32_Retained_`.
 
-The valueless caller-owned buffer annotation is:
-
-```cpp
-#define _Win32_ContainsInteriorPointers_ \
-    _WIN32META_ANNOTATION_("ContainsInteriorPointers")
-```
-
-It takes no arguments and emits
-`Windows.Win32.Foundation.Metadata.ContainsInteriorPointersAttribute()` on the
-corresponding metadata parameter. Its payload has no parentheses or values.
-
 IDL `[retval]` does not survive in MIDL-generated headers as SAL. It remains in comments
 such as `/* [retval] */`, which windows-rs parses. C/C++-authored declarations without
 that comment combine ordinary direction SAL with `_Win32_Retval_`:
@@ -150,6 +139,19 @@ BOOL WINAPI ReadThings(
     _In_ DWORD count);
 ```
 
+`_Out_writes_bytes_(cbBuf)` describes a buffer capacity of `cbBuf` bytes.
+`_Out_writes_bytes_to_(cbBuf, *pcbWritten)` additionally describes the initialized
+byte extent returned in `*pcbWritten`. The optional-buffer spellings are
+`_Out_writes_bytes_opt_` and `_Out_writes_bytes_to_opt_`, respectively. For an
+illustrative API with a byte-count output:
+
+```cpp
+BOOL WINAPI ReadBytes(
+    _Out_writes_bytes_to_(cbBuf, *pcbWritten) BYTE* buffer,
+    _In_ DWORD cbBuf,
+    _Out_ DWORD* pcbWritten);
+```
+
 Do not place custom return annotations after the closing parenthesis.
 
 `_Win32_ContainsInteriorPointers_` is valid only on a caller-owned buffer parameter,
@@ -167,6 +169,14 @@ BOOL WINAPI EnumPrinterDriversW(
     _Out_ LPDWORD pcbNeeded,
     _Out_ LPDWORD pcReturned);
 ```
+
+The selected SDK declares `pDriverInfo` with `_Out_writes_bytes_opt_(cbBuf)`;
+the example preserves that SAL spelling. `pcReturned` counts `DRIVER_INFO` records,
+not bytes. For [EnumPrinterDrivers](https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers),
+`pcbNeeded` receives bytes copied on success or the required byte size when the
+buffer is too small. Neither output is renamed or given a different unit here;
+the illustrative `ReadBytes` declaration above is not a replacement printer
+signature.
 
 Consumers reject values, arguments, duplicates, and placement on functions, return
 values, fields, records, or typedefs with source-located diagnostics. A parameter must
@@ -209,7 +219,7 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional integer literals or object-like macros such as `INVALID_HANDLE_VALUE`. The consumer resolves macros in the declaration's preprocessor context, evaluates each constant expression, and emits one `RAIIFree` attribute plus one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
 | `Retained` | `_Win32_Retained_` | Pointer parameter retained by the API beyond the function call. The caller must follow the API documentation to determine when the referenced storage may be released. Absence does not remove the address-stability requirement for consuming `ContainsInteriorPointers` output. |
-| `ContainsInteriorPointers` | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter only. Returned data may contain absolute native pointers borrowing storage within that same allocation. The allocation must remain alive and at a stable address continuously through native production and all pointer consumption/copying. Valueless, non-repeatable, not inherited. |
+| `ContainsInteriorPointers` | `_Win32_ContainsInteriorPointers_`, expanding to `_WIN32META_ANNOTATION_("ContainsInteriorPointers")` | Caller-owned output/inout buffer parameter only. Emits `Windows.Win32.Foundation.Metadata.ContainsInteriorPointersAttribute()` with no arguments or values. Returned data may contain absolute native pointers borrowing storage within that same allocation. The allocation must remain alive and at a stable address continuously through native production and all pointer consumption/copying. Valueless, non-repeatable, not inherited. |
 | array count/capacity/byte size | Existing SAL and native array declarations | Use `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, their byte-count variants, and related standard forms. Do not define parallel Win32 annotations. |
 | `AlsoUsableFor("TYPE")` | `_Win32_AlsoUsableFor_(TYPE)` | Typedef. |
 | `AssociatedEnum("TYPE")` | `_Win32_AssociatedEnum_(TYPE)` | Parameter, return value, or field when direct enum typing is impossible. `__typefix` is analyzer metadata, not a projection contract. |
