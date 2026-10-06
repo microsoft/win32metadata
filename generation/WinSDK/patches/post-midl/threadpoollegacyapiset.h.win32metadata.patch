@@ -59,7 +59,7 @@ index f0b98656cb..0da9d373e4 100644
  WINAPI
  CreateTimerQueueTimer(
 -    _Outptr_ PHANDLE phNewTimer,
-+    _Win32_RAIIFree_(CloseHandle, -1, 0) _Outptr_ PHANDLE phNewTimer,
++    _Win32_RAIIFree_(DeleteTimerQueueTimer, -1, 0) _Outptr_ PHANDLE phNewTimer,
      _In_opt_ HANDLE TimerQueue,
 -    _In_ WAITORTIMERCALLBACK Callback,
 -    _In_opt_ PVOID Parameter,
