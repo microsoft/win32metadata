@@ -471,7 +471,73 @@ header spellings, even where the documentation uses a different name.
 | [GetCurrentPackageInfo](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo), [GetCurrentPackageInfo2](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo2), [GetPackageInfo](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo), [GetPackageInfo2](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo2) | `buffer` | The buffer contains `PACKAGE_INFO` records with path/identity strings and nested `PACKAGE_ID` string pointers. |
 | [GetPackageApplicationIds](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageapplicationids) | `buffer` | This single byte buffer contains the array of app-ID string pointers and the strings they reference; `count` counts entries in that pointer table. It has no separate pointer-array output parameter. |
 
+#### Verified follow-up sidecar inventory
+
+This bounded follow-up adds 32 distinct API/parameter sites to the initial 40:
+17 from the first reviewed cohort and 15 from the second. The emitted inventory
+therefore contains 72 markers, using the same parameter-only, valueless attribute.
+No native parameter types, flags, existing attributes, or attribute declarations
+change. The inventory test checks the exact set and the `01 00 00 00` marker blob.
+
+The review used the Windows SDK 10.0.26100.0 declarations and exact emitted
+parameter names. Native x64 observations confirm the specific pointer-bearing
+results described below, not every architecture, provider, information level, or
+flag combination. The second cohort's SDK size, offset, and selector assertions
+were also checked; layout assertions alone do not establish pointer provenance.
+Only explicitly reviewed A/W counterparts are included.
+
+| API | Parameter | Contract basis and reviewed evidence |
+| --- | --- | --- |
+| [GetAdaptersAddresses](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersaddresses) | `AdapterAddresses` | The supplied allocation contains linked adapter records, strings, and socket-address lists. An x64 probe found seven nonnull fields pointing into it. |
+| [GetAdaptersInfo](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo) | `AdapterInfo` | Linked adapter records share caller storage; an x64 probe confirmed `Next` points into that allocation. |
+| [GetPerAdapterInfo](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getperadapterinfo) | `pPerAdapterInfo` | DNS information records/lists share caller storage; an x64 probe confirmed one nonnull interior pointer. |
+| [GetOwnerModuleFromTcpEntry](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcpentry) | `pBuffer` | The documentation explicitly includes both the structure's pointers and their module-name/path data in the caller buffer. |
+| [QueryServiceConfigA/W](https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfigw) | `lpServiceConfig` | The configuration structure and its referenced strings occupy one caller-sized buffer. A W probe found all five string pointers inside; A/W declarations have the corresponding encoded layouts. |
+| [QueryServiceConfig2A/W](https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2w) | `lpBuffer` | `SERVICE_CONFIG_DESCRIPTION` returns a structure and its referenced string in caller storage, confirmed by a W probe. Flat information levels remain conservatively covered. |
+| [EnumServicesStatusA/W](https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusw) | `lpServices` | The documented buffer holds records plus their referenced strings. Separate A/W probes each found all 670 name/display-name pointers inside, with none outside. |
+| [EnumDependentServicesA/W](https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumdependentservicesw) | `lpServices` | The explicit documented buffer contract includes records and referenced strings. The native probe could not open the service because access was denied; no runtime containment result is claimed. |
+| [QueryServiceLockStatusA/W](https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicelockstatusw) | `lpLockStatus` | The documented caller buffer holds `QUERY_SERVICE_LOCK_STATUS` and its referenced strings. No lock was created or lock-owner runtime scenario exercised. |
+| [WSAEnumNameSpaceProvidersA/W](https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersw) | `lpnspBuffer` | Separate A/W probes found all five returned provider identifier strings in each caller allocation. |
+| [WSAEnumNameSpaceProvidersExA/W](https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexw) | `lpnspBuffer` | The documentation places fixed records at the head and referenced variable data before the buffer end. ExA/ExW probes found five interior identifier strings each; null provider-specific blob pointers do not validate blob-bearing providers. |
+| [CryptDecodeObject](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptdecodeobject) | `pvStructInfo` | Default decoding appends auxiliary data to the output structure's allocation. An OCTET STRING probe confirmed its data pointer is inside the output. NOCOPY borrowing is a separate caveat below. |
+| [EvtGetChannelConfigProperty](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetchannelconfigproperty) | `PropertyValueBuffer` | An `EvtChannelConfigAccess` probe returned an `EVT_VARIANT` whose string pointer is inside caller storage. Scalar properties remain conservatively covered. |
+| [EvtGetQueryInfo](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetqueryinfo) | `PropertyValueBuffer` | SDK selectors specify string-array names and UInt32-array statuses. Probes confirmed interior array/string pointers in a 38-byte names result and an interior array pointer in a 20-byte statuses result. |
+| [EvtGetEventInfo](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgeteventinfo) | `PropertyValueBuffer` | An `EvtEventPath` probe returned a string variant with its pointer inside the 30-byte caller result. |
+| [EvtRender](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtrender) | `Buffer` | Values mode returns `EVT_VARIANT` arrays; a single-XPath probe confirmed an interior string pointer in a 40-byte result. XML/bookmark text modes are flat. Preserve the SDK/emitted optional-output contract despite the documentation's input label. |
+| [EvtGetPublisherMetadataProperty](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetpublishermetadataproperty) | `PublisherMetadataPropertyBuffer` | A GUID-property probe confirmed `GuidVal` points into the 32-byte result; SDK selectors also support strings. Object-array handles are separate resources, not interior pointers. |
+| [EvtGetObjectArrayProperty](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetobjectarrayproperty) | `PropertyValueBuffer` | A channel-reference-path probe confirmed a string pointer inside the 30-byte result. The object-array handle is separately owned, not the containing buffer. |
+| [EvtGetEventMetadataProperty](https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgeteventmetadataproperty) | `EventMetadataPropertyBuffer` | The event-template selector returns a string variant; a probe confirmed its pointer is inside the 466-byte result. Scalar selectors remain conservatively covered. |
+| [GdipGetImageEncoders](https://learn.microsoft.com/windows/win32/api/gdiplusimagecodec/nf-gdiplusimagecodec-getimageencoders) | `encoders` | A probe found 30 nonnull codec string/signature pointers inside the caller allocation. |
+| [GdipGetImageDecoders](https://learn.microsoft.com/windows/win32/api/gdiplusimagecodec/nf-gdiplusimagecodec-getimagedecoders) | `decoders` | A probe found 48 nonnull codec string/signature pointers inside the caller allocation. |
+| [WNetEnumResourceW](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcew) | `lpBuffer` | The documentation explicitly requires storage for `NETRESOURCE` records and the strings their members point to. |
+| [WNetGetResourceInformationW](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationw) | `lpBuffer` | The documentation places `NETRESOURCE` in the first part and its referenced strings in the remainder. The separate `lplpSystem` output borrows this storage, as noted below. |
+| [WNetGetUniversalNameW](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew) | `lpBuffer` | The documented buffer includes the selected structure and its referenced UNC/connection strings. |
+| [HttpReceiveHttpRequest](https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceivehttprequest) | `RequestBuffer` | Caller storage receives `HTTP_REQUEST` and copied request/body data; `pEntityChunks` addresses copied body data. Asynchronous completion lifetime is independent. |
+
 #### Exclusions and relationship limitations
+
+[CryptDecodeObjectEx](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptdecodeobjectex)
+is deferred: `CRYPT_DECODE_ALLOC_FLAG` changes `pvStructInfo` from containing caller
+storage into an output pointer slot for a separate allocation. The current marker
+does not encode that storage-role/ownership switch. Both decode APIs also support
+`CRYPT_DECODE_NOCOPY_FLAG`, which can borrow `pbEncoded`. Marking
+`CryptDecodeObject.pvStructInfo` does not establish the input buffer's stability or
+lifetime, and `pbEncoded` is not annotated.
+
+`WNetGetResourceInformationW.lplpSystem` separately points into `lpBuffer`, not its
+own output-slot allocation. It is not annotated; that cross-parameter borrowing
+relationship remains unencoded. `HttpReceiveHttpRequest` asynchronous I/O requires
+storage to survive completion independently of interior-pointer consumption;
+existing `Overlapped`/`Retained` metadata is unchanged.
+
+[EvtGetLogInfo](https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_log_property_id)
+is excluded because its SDK selectors return only scalar FileTime, UInt64, UInt32,
+and Boolean values. Merely returning `EVT_VARIANT` is not proof of a pointer-bearing
+supported result. `GetNetworkParams` remains unproven in this review.
+`NetShareEnum` returns callee-allocated storage, and `GetOutlineTextMetricsA/W`
+uses offsets for its name fields. None is added by this follow-up. Other
+counterparts and cohorts require their own review; the count is not an
+exhaustiveness claim.
 
 [GetPackagesByPackageFamily](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackagesbypackagefamily)
 and [FindPackagesByPackageFamily](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-findpackagesbypackagefamily)

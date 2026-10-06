@@ -16,6 +16,8 @@ namespace Windows.Win32.Tests
         private static readonly string[] AnnotatedBuffers =
         {
             "AddJobA::pData", "AddJobW::pData",
+            "CryptDecodeObject::pvStructInfo",
+            "EnumDependentServicesA::lpServices", "EnumDependentServicesW::lpServices",
             "EnumFormsA::pForm", "EnumFormsW::pForm",
             "EnumJobsA::pJob", "EnumJobsW::pJob",
             "EnumMonitorsA::pMonitor", "EnumMonitorsW::pMonitor",
@@ -25,9 +27,21 @@ namespace Windows.Win32.Tests
             "EnumPrintersA::pPrinterEnum", "EnumPrintersW::pPrinterEnum",
             "EnumPrintProcessorDatatypesA::pDatatypes", "EnumPrintProcessorDatatypesW::pDatatypes",
             "EnumPrintProcessorsA::pPrintProcessorInfo", "EnumPrintProcessorsW::pPrintProcessorInfo",
+            "EnumServicesStatusA::lpServices", "EnumServicesStatusW::lpServices",
             "EnumServicesStatusExA::lpServices", "EnumServicesStatusExW::lpServices",
+            "EvtGetChannelConfigProperty::PropertyValueBuffer",
+            "EvtGetEventInfo::PropertyValueBuffer",
+            "EvtGetEventMetadataProperty::EventMetadataPropertyBuffer",
+            "EvtGetObjectArrayProperty::PropertyValueBuffer",
+            "EvtGetPublisherMetadataProperty::PublisherMetadataPropertyBuffer",
+            "EvtGetQueryInfo::PropertyValueBuffer",
+            "EvtRender::Buffer",
+            "GdipGetImageDecoders::decoders", "GdipGetImageEncoders::encoders",
+            "GetAdaptersAddresses::AdapterAddresses", "GetAdaptersInfo::AdapterInfo",
             "GetFormA::pForm", "GetFormW::pForm",
             "GetJobA::pJob", "GetJobW::pJob",
+            "GetOwnerModuleFromTcpEntry::pBuffer",
+            "GetPerAdapterInfo::pPerAdapterInfo",
             "GetPrinterA::pPrinter", "GetPrinterW::pPrinter",
             "GetPrinterDriverA::pDriverInfo", "GetPrinterDriverW::pDriverInfo",
             "GetPrinterDriver2W::pDriverInfo",
@@ -38,6 +52,15 @@ namespace Windows.Win32.Tests
             "GetPackageId::buffer",
             "GetPackageInfo::buffer", "GetPackageInfo2::buffer",
             "PackageIdFromFullName::buffer",
+            "HttpReceiveHttpRequest::RequestBuffer",
+            "QueryServiceConfigA::lpServiceConfig", "QueryServiceConfigW::lpServiceConfig",
+            "QueryServiceConfig2A::lpBuffer", "QueryServiceConfig2W::lpBuffer",
+            "QueryServiceLockStatusA::lpLockStatus", "QueryServiceLockStatusW::lpLockStatus",
+            "WNetEnumResourceW::lpBuffer",
+            "WNetGetResourceInformationW::lpBuffer",
+            "WNetGetUniversalNameW::lpBuffer",
+            "WSAEnumNameSpaceProvidersA::lpnspBuffer", "WSAEnumNameSpaceProvidersW::lpnspBuffer",
+            "WSAEnumNameSpaceProvidersExA::lpnspBuffer", "WSAEnumNameSpaceProvidersExW::lpnspBuffer",
         };
 
         [Fact]
@@ -136,6 +159,12 @@ namespace Windows.Win32.Tests
         [InlineData("PackageFullNameFromId")]
         [InlineData("EnumPrinterKeyA")]
         [InlineData("EnumPrinterKeyW")]
+        [InlineData("CryptDecodeObjectEx")]
+        [InlineData("EvtGetLogInfo")]
+        [InlineData("GetNetworkParams")]
+        [InlineData("GetOutlineTextMetricsA")]
+        [InlineData("GetOutlineTextMetricsW")]
+        [InlineData("NetShareEnum")]
         public void DifferentStorageContractsAreNotAnnotated(string methodName)
         {
             using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
