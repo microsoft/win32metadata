@@ -4,9 +4,10 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`a71662f435eaf24dde7346b684cb4cffc64ca376`](https://github.com/jevansaks/windows-rs/commit/a71662f435eaf24dde7346b684cb4cffc64ca376).
-This is the existing pipeline fork baseline, not an assertion that every historical
-fork change has been upstreamed.
+[`0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9`](https://github.com/jevansaks/windows-rs/commit/0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9),
+published in `jevansaks/windows-rs`. Its parent is the existing pipeline baseline
+`a71662f435eaf24dde7346b684cb4cffc64ca376`; this ledger does not claim that every
+historical fork change has been upstreamed.
 
 | Dependency | Role |
 | --- | --- |
@@ -44,18 +45,37 @@ checks the unchanged API golden and offline generation.
 
 **Adoption:** consumer integration on the producer revision above. Optional-free
 capture preserves Optional; it does not infer cleanup ownership or a SafeHandle.
-Double-NUL capture alone is not double-NUL emission; that requires the core fix below.
+The separate producer fix below supplies double-NUL emission.
 
 **Removal condition:** replace the bridge only when native annotation extraction
 passes these same gates without it, including the absence of support-header APIs.
 
-## Pending core adoption
+## Local producer fixes
 
 Both defects were independently reproduced on public windows-rs
-`143aa57cf5c96c140c69758948b46eb9a2d8ede7`. The current pin above does **not**
-include their fixes. No core implementation is duplicated in this repository.
+`143aa57cf5c96c140c69758948b46eb9a2d8ede7`. Both local fixes are in the exact
+adoption commit above; no core implementation is duplicated in this repository.
 
-| Upstream issue and standalone repro | Required local fix | Adoption status | Removal condition |
+| Upstream issue and standalone repro | Local fix | Verification | Removal condition |
 | --- | --- | --- | --- |
-| [microsoft/windows-rs#5041](https://github.com/microsoft/windows-rs/issues/5041), runnable nested-record fixture in the issue | Preserve enclosing TypeRef identity during RDL compilation and supported metadata copy/merge/roundtrip paths. | Awaiting the verified producer commit; not adopted. | Adopt an upstream revision containing the fix and retain nested-reference/roundtrip regressions. |
-| [microsoft/windows-rs#5042](https://github.com/microsoft/windows-rs/issues/5042), runnable captured-annotation fixture in the issue | Carry captured `_NullNull_terminated_` from parameter facts through RDL to `NullNullTerminatedAttribute`, without changing string/pointer types. | Awaiting the verified producer commit; not adopted. | Adopt an upstream revision containing the fix and retain double-NUL and negative-control regressions. |
+| [microsoft/windows-rs#5041](https://github.com/microsoft/windows-rs/issues/5041) | Preserve enclosing TypeRef identity through RDL, metadata copy/merge/remap, and bindgen. | Producer `nested_roundtrip` and `inline_nested_identity` gates; consumer `tests\fixtures\nested_identity.rdl` through compile/cached merge/recompile. | Adopt an upstream revision containing the fix; retain these regressions. |
+| [microsoft/windows-rs#5042](https://github.com/microsoft/windows-rs/issues/5042) | Carry captured `_NullNull_terminated_` from parameter facts through RDL to `NullNullTerminatedAttribute`, without changing pointer/string types. | Producer `captured_double_null_sal_remains_distinct`; consumer synthetic and actual SDK SAL gates above. | Adopt an upstream revision containing the fix; retain double-NUL and negative controls. |
+
+The issues contain minimal standalone repros. From a windows-rs checkout at the
+adopted revision, run the committed producer regressions:
+
+```powershell
+cargo test -p test_metadata --test nested_roundtrip --quiet
+cargo test -p test_bindgen --test bindgen inline_nested_identity --quiet
+cargo test -p windows-clang --test annotations captured_double_null_sal_remains_distinct --quiet
+```
+
+The consumer nested-identity gate is:
+
+```powershell
+cargo test --release --manifest-path .\tools\rust\Cargo.toml compiled_and_merged_nested_references_keep_enclosing_identity
+```
+
+Two unrelated full `test_rdl` failures and three full `test_bindgen` failures also
+reproduce on the unchanged `a716` baseline. They are not fixes or passing gates
+claimed by this adoption.

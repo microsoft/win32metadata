@@ -3477,6 +3477,11 @@ mod tests {
                         name == "CaptureSingleNull",
                         "{label}: ordinary termination on {name}"
                     );
+                    assert_eq!(
+                        annotation.null_null_terminated,
+                        matches!(name, "CaptureDoubleNull" | "CaptureDoubleNullOnly"),
+                        "{label}: double-NUL termination on {name}"
+                    );
                 }
                 let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
                     &source_path,
@@ -3548,10 +3553,21 @@ mod tests {
                         flags |= ParamAttributes::Optional;
                     }
                     assert_eq!(parameter.flags(), flags, "{label}: emitted {name}");
-                    if !matches!(name, "CaptureDoubleNull" | "CaptureDoubleNullOnly") {
-                        assert!(
-                            !parameter.has_attribute("NullNullTerminatedAttribute"),
-                            "{label}: invented double-NUL contract on {name}"
+                    let double_null = matches!(name, "CaptureDoubleNull" | "CaptureDoubleNullOnly");
+                    assert_eq!(
+                        parameter.has_attribute("NullNullTerminatedAttribute"),
+                        double_null,
+                        "{label}: double-NUL contract on {name}"
+                    );
+                    assert!(
+                        !method.has_attribute("NullNullTerminatedAttribute"),
+                        "{label}: parameter contract leaked to {name}"
+                    );
+                    if double_null {
+                        assert_eq!(
+                            signature.types[0],
+                            Type::PtrMut(Box::new(Type::U16), 1),
+                            "{label}: double-NUL must not change {name}'s pointer type"
                         );
                     }
                     if matches!(name, "CaptureCounted" | "CaptureDoubleNull") {
@@ -3665,6 +3681,11 @@ mod tests {
             let rows = method.params_by_sequence(signature.types.len()).unwrap();
             let parameter = rows.params()[position].unwrap();
             assert_eq!(parameter.flags(), expected_flags, "{name}");
+            assert_eq!(
+                parameter.has_attribute("NullNullTerminatedAttribute"),
+                name == "GetVolumePathNamesForVolumeNameW",
+                "{name}"
+            );
             if name == "GetVolumePathNamesForVolumeNameW" {
                 let count = parameter
                     .find_attribute("NativeArrayInfoAttribute")

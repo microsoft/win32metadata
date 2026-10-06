@@ -263,7 +263,7 @@ headers dependency-only so their configuration constants do not become public AP
 Optional-free capture retains Optional, not an inferred cleanup contract.
 
 See the [producer adoption ledger](ADOPTION.md) for upstream issues, exact pins,
-portable regressions, pending core fixes, and retirement conditions.
+portable regressions, local core fixes, and retirement conditions.
 
 **`--lib`** recovers symbol-to-DLL mappings from import libraries. Resolution is
 first-wins. Supplying import libraries also filters out functions that have neither an

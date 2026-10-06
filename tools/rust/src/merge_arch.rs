@@ -736,6 +736,74 @@ mod tests {
     }
 
     #[test]
+    fn compiled_and_merged_nested_references_keep_enclosing_identity() {
+        fn assert_nested_identity(path: &Path) {
+            let index = windows_metadata::reader::Index::read(path).unwrap();
+            for namespace in ["Test", "Test.Other"] {
+                let outer = index.expect(namespace, "Outer");
+                let field = outer
+                    .fields()
+                    .find(|field| field.name() == "Anonymous")
+                    .unwrap();
+                assert_eq!(
+                    field.ty(),
+                    windows_metadata::Type::value_named(namespace, "Outer/Outer_0"),
+                    "{}: {namespace}.Outer.Anonymous",
+                    path.display()
+                );
+            }
+        }
+
+        let root = crate::staging::create_directory(
+            &std::env::temp_dir(),
+            "win32metadata-tools-nested-adoption",
+        )
+        .unwrap();
+        let mut inputs = Vec::new();
+        for arch in ["x64", "x86"] {
+            let rdl = root.join(arch);
+            std::fs::create_dir_all(&rdl).unwrap();
+            std::fs::write(
+                rdl.join("Nested.rdl"),
+                include_str!("../tests/fixtures/nested_identity.rdl"),
+            )
+            .unwrap();
+            let winmd = root.join(format!("{arch}.winmd"));
+            compile_inputs(
+                std::slice::from_ref(&rdl),
+                &[],
+                "Nested.Metadata",
+                None,
+                &winmd,
+            )
+            .unwrap();
+            assert_nested_identity(&winmd);
+            inputs.push(Input {
+                arch: arch.to_string(),
+                rdl_dir: Some(rdl),
+                winmd: Some(winmd),
+            });
+        }
+        let output_rdl = root.join("merged");
+        let output_winmd = root.join("merged.winmd");
+        execute(&Options {
+            inputs,
+            namespace: Some("Test".to_string()),
+            assembly_name: Some("Nested.Metadata".to_string()),
+            output_rdl: Some(output_rdl.clone()),
+            output_winmd: Some(output_winmd.clone()),
+            ..Default::default()
+        })
+        .unwrap();
+        assert_nested_identity(&output_winmd);
+
+        let roundtrip = root.join("roundtrip.winmd");
+        compile_inputs(&[output_rdl], &[], "Nested.Metadata", None, &roundtrip).unwrap();
+        assert_nested_identity(&roundtrip);
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
     fn merged_rdl_preserves_qualified_names_and_first_input_partitions() {
         let root = std::env::temp_dir().join(format!(
             "win32metadata-tools-merge-qualified-{}",
