@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h b/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
-index 30193c9754..69c439ca09 100644
+index d90b9fd62a..cd9e928e0e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
 @@ -1,3 +1,4 @@
@@ -548,15 +548,6 @@ index 30193c9754..69c439ca09 100644
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
              /* [in] */ BSTR workingDirectory) = 0;
-@@ -6420,7 +6421,7 @@ EXTERN_C const IID IID_IExecAction2;
-     {
-     public:
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_HideAppWindow( 
--            /* [retval][out] */ VARIANT_BOOL *pHideAppWindow) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pHideAppWindow) = 0;
-         
-         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_HideAppWindow( 
-             /* [in] */ VARIANT_BOOL hideAppWindow) = 0;
 @@ -6638,18 +6639,18 @@ EXTERN_C const IID IID_IShowMessageAction;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -1059,54 +1050,6 @@ index 30193c9754..69c439ca09 100644
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UseUnifiedSchedulingEngine( 
              /* [in] */ VARIANT_BOOL useUnifiedEngine) = 0;
-@@ -9628,13 +9629,13 @@ EXTERN_C const IID IID_ITaskSettings3;
-     {
-     public:
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisallowStartOnRemoteAppSession( 
--            /* [retval][out] */ VARIANT_BOOL *pDisallowStart) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pDisallowStart) = 0;
-         
-         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_DisallowStartOnRemoteAppSession( 
-             /* [in] */ VARIANT_BOOL disallowStart) = 0;
-         
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UseUnifiedSchedulingEngine( 
--            /* [retval][out] */ VARIANT_BOOL *pUseUnifiedEngine) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pUseUnifiedEngine) = 0;
-         
-         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UseUnifiedSchedulingEngine( 
-             /* [in] */ VARIANT_BOOL useUnifiedEngine) = 0;
-@@ -9649,7 +9650,7 @@ EXTERN_C const IID IID_ITaskSettings3;
-             /* [retval][out] */ IMaintenanceSettings **ppMaintenanceSettings) = 0;
-         
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Volatile( 
--            /* [retval][out] */ VARIANT_BOOL *pVolatile) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pVolatile) = 0;
-         
-         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Volatile( 
-             /* [in] */ VARIANT_BOOL Volatile) = 0;
-@@ -10178,19 +10179,19 @@ EXTERN_C const IID IID_IMaintenanceSettings;
-             /* [in] */ BSTR value) = 0;
-         
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Period( 
--            /* [retval][out] */ BSTR *target) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *target) = 0;
-         
-         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Deadline( 
-             /* [in] */ BSTR value) = 0;
-         
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Deadline( 
--            /* [retval][out] */ BSTR *target) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *target) = 0;
-         
-         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Exclusive( 
-             /* [in] */ VARIANT_BOOL value) = 0;
-         
-         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Exclusive( 
--            /* [retval][out] */ VARIANT_BOOL *target) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *target) = 0;
-         
-     };
-     
 @@ -10388,7 +10389,7 @@ EXTERN_C const IID IID_IRegisteredTaskCollection;
  
  #if defined(__cplusplus) && !defined(CINTERFACE)

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
-index 01a3b56cc5..90ec2242d1 100644
+index 23e5b07171..cf90ef14b7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dwrite_3.h
 @@ -9,20 +9,21 @@
@@ -437,7 +437,7 @@ index 01a3b56cc5..90ec2242d1 100644
          _In_reads_(fontAxisValueCount) DWRITE_FONT_AXIS_VALUE const* fontAxisValues,
          UINT32 fontAxisValueCount,
 -        _Deref_out_range_(0, textLength) UINT32* mappedLength,
-+        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Deref_out_range_(0, textLength) UINT32* mappedLength,
++        _WIN32META_ANNOTATION_("win32metadata:out") _Deref_out_range_(0, textLength) UINT32* mappedLength,
          _Out_ FLOAT* scale,
          _COM_Outptr_ IDWriteFontFace5** mappedFontFace
          ) PURE;
