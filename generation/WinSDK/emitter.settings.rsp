@@ -2348,6 +2348,75 @@ IPsecSaEnum1::engineHandle=FWPM_ENGINE_HANDLE
 IWICBitmapSource::CopyPixels::prc=[Optional]
 NotifyServiceStatusChangeA::pNotifyBuffer=[Retained]
 NotifyServiceStatusChangeW::pNotifyBuffer=[Retained]
+# Caller-owned buffers containing absolute pointers into the same allocation.
+# Contracts and exclusions: docs/copilot/plans/shift-left-annotation-spec.md
+# https://learn.microsoft.com/windows/win32/printdocs/addjob
+AddJobA::pData=[ContainsInteriorPointers]
+AddJobW::pData=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumforms
+# https://learn.microsoft.com/windows/win32/printdocs/getform
+EnumFormsA::pForm=[ContainsInteriorPointers]
+EnumFormsW::pForm=[ContainsInteriorPointers]
+GetFormA::pForm=[ContainsInteriorPointers]
+GetFormW::pForm=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumjobs
+# https://learn.microsoft.com/windows/win32/printdocs/getjob
+EnumJobsA::pJob=[ContainsInteriorPointers]
+EnumJobsW::pJob=[ContainsInteriorPointers]
+GetJobA::pJob=[ContainsInteriorPointers]
+GetJobW::pJob=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enummonitors
+EnumMonitorsA::pMonitor=[ContainsInteriorPointers]
+EnumMonitorsW::pMonitor=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumports
+EnumPortsA::pPort=[ContainsInteriorPointers]
+EnumPortsW::pPort=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex
+EnumPrinterDataExA::pEnumValues=[ContainsInteriorPointers]
+EnumPrinterDataExW::pEnumValues=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
+# https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
+# https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
+# GetPrinterDriver2A always returns ERROR_NOT_SUPPORTED; it has no output contract.
+EnumPrinterDriversA::pDriverInfo=[ContainsInteriorPointers]
+EnumPrinterDriversW::pDriverInfo=[ContainsInteriorPointers]
+GetPrinterDriverA::pDriverInfo=[ContainsInteriorPointers]
+GetPrinterDriverW::pDriverInfo=[ContainsInteriorPointers]
+GetPrinterDriver2W::pDriverInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumprinters
+# https://learn.microsoft.com/windows/win32/printdocs/getprinter
+EnumPrintersA::pPrinterEnum=[ContainsInteriorPointers]
+EnumPrintersW::pPrinterEnum=[ContainsInteriorPointers]
+GetPrinterA::pPrinter=[ContainsInteriorPointers]
+GetPrinterW::pPrinter=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
+EnumPrintProcessorDatatypesA::pDatatypes=[ContainsInteriorPointers]
+EnumPrintProcessorDatatypesW::pDatatypes=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
+EnumPrintProcessorsA::pPrintProcessorInfo=[ContainsInteriorPointers]
+EnumPrintProcessorsW::pPrintProcessorInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
+EnumServicesStatusExA::lpServices=[ContainsInteriorPointers]
+EnumServicesStatusExW::lpServices=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation
+GetTokenInformation::TokenInformation=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageid
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageid
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packageidfromfullname
+GetCurrentPackageId::buffer=[ContainsInteriorPointers]
+GetPackageId::buffer=[ContainsInteriorPointers]
+PackageIdFromFullName::buffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo2
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo2
+GetCurrentPackageInfo::buffer=[ContainsInteriorPointers]
+GetCurrentPackageInfo2::buffer=[ContainsInteriorPointers]
+GetPackageInfo::buffer=[ContainsInteriorPointers]
+GetPackageInfo2::buffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageapplicationids
+# The pointer table and app ID strings share this single byte buffer.
+GetPackageApplicationIds::buffer=[ContainsInteriorPointers]
 PSCreateMemoryPropertyStore::ppv=[ComOutPtr]
 FwpmCalloutCreateEnumHandle0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE*
 FwpmCalloutEnum0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE

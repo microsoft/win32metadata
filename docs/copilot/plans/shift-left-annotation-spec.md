@@ -82,6 +82,17 @@ Custom names use an explicit `_Win32_` owner prefix and PascalCase semantic name
 example, use `_Win32_SetLastError_`, `_Win32_ImportLibrary_(...)`,
 `_Win32_Retval_`, and `_Win32_Retained_`.
 
+The valueless caller-owned buffer annotation is:
+
+```cpp
+#define _Win32_ContainsInteriorPointers_ \
+    _WIN32META_ANNOTATION_("ContainsInteriorPointers")
+```
+
+It takes no arguments and emits
+`Windows.Win32.Foundation.Metadata.ContainsInteriorPointersAttribute()` on the
+corresponding metadata parameter. Its payload has no parentheses or values.
+
 IDL `[retval]` does not survive in MIDL-generated headers as SAL. It remains in comments
 such as `/* [retval] */`, which windows-rs parses. C/C++-authored declarations without
 that comment combine ordinary direction SAL with `_Win32_Retval_`:
@@ -141,6 +152,27 @@ BOOL WINAPI ReadThings(
 
 Do not place custom return annotations after the closing parenthesis.
 
+`_Win32_ContainsInteriorPointers_` is valid only on a caller-owned buffer parameter,
+before its type alongside ordinary output/inout SAL. Clang attaches it to the
+`ParmVarDecl`, not to the containing function or the buffer's record type:
+
+```cpp
+BOOL WINAPI EnumPrinterDriversW(
+    _In_opt_ LPWSTR pName,
+    _In_opt_ LPWSTR pEnvironment,
+    _In_ DWORD Level,
+    _Out_writes_bytes_opt_(cbBuf) _Win32_ContainsInteriorPointers_
+    LPBYTE pDriverInfo,
+    _In_ DWORD cbBuf,
+    _Out_ LPDWORD pcbNeeded,
+    _Out_ LPDWORD pcReturned);
+```
+
+Consumers reject values, arguments, duplicates, and placement on functions, return
+values, fields, records, or typedefs with source-located diagnostics. A parameter must
+be a pointer to caller-owned output/inout buffer storage; authors must verify the
+same-allocation relationship from the API contract, not infer it from pointer fields.
+
 ### Records, interfaces, and enums
 
 Attributes appear between the declaration keyword and name.
@@ -176,7 +208,8 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional integer literals or object-like macros such as `INVALID_HANDLE_VALUE`. The consumer resolves macros in the declaration's preprocessor context, evaluates each constant expression, and emits one `RAIIFree` attribute plus one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
-| `Retained` | `_Win32_Retained_` | Pointer parameter retained by the API beyond the function call. The caller must follow the API documentation to determine when the referenced storage may be released. Without this annotation, the pointer does not need to remain valid after the call returns. |
+| `Retained` | `_Win32_Retained_` | Pointer parameter retained by the API beyond the function call. The caller must follow the API documentation to determine when the referenced storage may be released. Absence does not remove the address-stability requirement for consuming `ContainsInteriorPointers` output. |
+| `ContainsInteriorPointers` | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter only. Returned data may contain absolute native pointers borrowing storage within that same allocation. The allocation must remain alive and at a stable address continuously through native production and all pointer consumption/copying. Valueless, non-repeatable, not inherited. |
 | array count/capacity/byte size | Existing SAL and native array declarations | Use `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, their byte-count variants, and related standard forms. Do not define parallel Win32 annotations. |
 | `AlsoUsableFor("TYPE")` | `_Win32_AlsoUsableFor_(TYPE)` | Typedef. |
 | `AssociatedEnum("TYPE")` | `_Win32_AssociatedEnum_(TYPE)` | Parameter, return value, or field when direct enum typing is impossible. `__typefix` is analyzer metadata, not a projection contract. |
@@ -328,6 +361,7 @@ duplicating the complete scan-derived mapping.
 | `enums.json` | Guarded unscoped enum declarations and direct enum typing; preserve loose constants and associate them with `_Win32_AssociatedConstant_`. |
 | `functionPointerFixups.json` | Replace with callback typedef-alias resolution and correct pointer-depth handling in the generator; use a guarded corrected declaration only when the SDK declaration itself is unsuitable for metadata. |
 | `emitter.settings.rsp --memberRemap` | Correct guarded declaration/name in the header; use an annotation only when the native spelling must remain different. |
+| `emitter.settings.rsp --memberRemap` entries using `[ContainsInteriorPointers]` | Prefix the same caller-owned buffer parameter with `_Win32_ContainsInteriorPointers_`, preserving native types and SAL. Keep these sidecars as the bridge until the header transport and consumer support ship; do not silently drop them. |
 | scraper type/tag remaps | Correct typedef/tag relationship in headers; namespace-qualified C++ types remain native. |
 | exclusions | Correct header guards or metadata-only exclusion annotation if the declaration truly must not be emitted. No silent consumer list. |
 | array/string/size overrides | Correct the declaration type and existing SAL/MIDL contract; do not add parallel Win32 buffer annotations. |
@@ -352,6 +386,115 @@ references a declaration owned elsewhere.
   producer-specific return/parameter ownership.
 
 ## Reviewed semantic decisions
+
+### Caller-owned buffers containing interior pointers
+
+This use-site contract addresses
+[microsoft/CsWin32#1839](https://github.com/microsoft/CsWin32/issues/1839).
+It is not a blanket assertion that a structure has pointer fields. The same record
+may be used by APIs with different storage and ownership rules.
+
+The caller must keep the containing allocation alive and continuously at the address
+used by native code, from the call that produces the pointers until the last
+dereference or copy of their pointed-to data. Pinning only for the native call or
+using `GC.KeepAlive` is insufficient for movable managed buffers. Copying a native
+record copies its addresses, not its pointees; moving the bytes and re-pinning later
+does not repair those addresses. Stable storage can be caller-pinned, stack, or
+unmanaged storage, subject to the API's lifetime and alignment requirements.
+
+`ContainsInteriorPointers` does not mean that native code retains the input buffer
+(`Retained`), that an allocation is owned or needs cleanup (`RAIIFree`), or that data
+is offset-based/self-relative. A self-relative security descriptor alone is not a
+reason to annotate a buffer. A returned absolute pointer into a containing allocation
+is, even when its pointee is itself self-relative.
+
+The annotation is conservative across supported information levels/discriminators:
+at least one supported result layout may contain such pointers. It neither asserts
+that every result or every pointer field has that provenance nor describes record
+types, counts, byte extents, success conditions, encodings, alignment, or bounds.
+Keep existing SAL and consult each API's documentation for these details. In
+particular, `EnumServicesStatusEx.pcbBytesNeeded` reports space needed for remaining
+entries, not a universal success-time valid byte extent. Projection consumers should
+preserve the native pointer parameter and suppress convenience span/ref overloads
+that pin movable storage only during the call. No custom stable-span type is required.
+
+The current winmd bridge uses the existing emitter response-file mechanism:
+
+```text
+--memberRemap
+EnumPrinterDriversW::pDriverInfo=[ContainsInteriorPointers]
+```
+
+The attribute is declared in `generation/WinSDK/manual/Metadata.cs`, with
+`AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)`.
+Its parameterless constructor and lack of named arguments encode a valueless custom
+attribute on the parameter. Existing generic custom-attribute emission handles it;
+there is no new scraper inference or special attribute registry. General header
+transport/ingestion is separate work: the macro, placement, and validation above are
+its proposed contract, not a claim that the current ClangSharp scraper ingests it.
+
+#### Verified initial sidecar inventory
+
+`A/W` below means both declarations. Only the specified buffer parameters are
+annotated; their record types, input parameters, size outputs, and return values are
+not. The printer function/record documentation and `winspool.h`, the token
+documentation and `securitybaseapi.h`/`winnt.h`, and the package documentation and
+`appmodel.h` define the output layouts. Parameter names below use the selected SDK
+header spellings, even where the documentation uses a different name.
+
+| API | Parameter | Contract basis |
+| --- | --- | --- |
+| [AddJobA/W](https://learn.microsoft.com/windows/win32/printdocs/addjob) | `pData` | `ADDJOB_INFO_1` and its pointed-to path string share the supplied buffer. |
+| [EnumFormsA/W](https://learn.microsoft.com/windows/win32/printdocs/enumforms), [GetFormA/W](https://learn.microsoft.com/windows/win32/printdocs/getform) | `pForm` | Returned `FORM_INFO_1/2` records include name/string pointers; the caller supplies the result storage. No separately owned string allocation is returned. |
+| [EnumJobsA/W](https://learn.microsoft.com/windows/win32/printdocs/enumjobs), [GetJobA/W](https://learn.microsoft.com/windows/win32/printdocs/getjob) | `pJob` | The buffer includes `JOB_INFO` records and the strings/data their members point to. Scalar-only job information levels remain conservatively covered. |
+| [EnumMonitorsA/W](https://learn.microsoft.com/windows/win32/printdocs/enummonitors) | `pMonitor` | The buffer includes `MONITOR_INFO_1/2` records and their strings. Documentation calls this parameter `pMonitors`. |
+| [EnumPortsA/W](https://learn.microsoft.com/windows/win32/printdocs/enumports) | `pPort` | The buffer includes `PORT_INFO_1/2` records and their strings. Documentation calls this parameter `pPorts`. |
+| [EnumPrinterDataExA/W](https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex) | `pEnumValues` | Returned [PRINTER_ENUM_VALUES](https://learn.microsoft.com/windows/win32/printdocs/printer-enum-values) records point to retrieved names and value data in the result storage. |
+| [EnumPrinterDriversA/W](https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers), [GetPrinterDriverA/W](https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver), [GetPrinterDriver2W](https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2) | `pDriverInfo` | The buffer includes `DRIVER_INFO` records and their strings/other pointed-to data. |
+| [EnumPrintersA/W](https://learn.microsoft.com/windows/win32/printdocs/enumprinters) | `pPrinterEnum` | The buffer includes `PRINTER_INFO` records and pointed-to strings/data. |
+| [GetPrinterA/W](https://learn.microsoft.com/windows/win32/printdocs/getprinter) | `pPrinter` | The buffer includes the selected `PRINTER_INFO` record and pointed-to strings/data, including absolute pointers to DEVMODE/security-descriptor storage where present. |
+| [EnumPrintProcessorDatatypesA/W](https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes) | `pDatatypes` | The buffer includes `DATATYPES_INFO_1` records and their strings. |
+| [EnumPrintProcessorsA/W](https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors) | `pPrintProcessorInfo` | The buffer includes `PRINTPROCESSOR_INFO_1` records and their strings. |
+| [EnumServicesStatusExA/W](https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw) | `lpServices` | The documentation explicitly includes `ENUM_SERVICE_STATUS_PROCESS` records and the strings their members point to in this buffer. |
+| [GetTokenInformation](https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation) | `TokenInformation` | Information-class-dependent records such as `TOKEN_USER`, `TOKEN_GROUPS`, `TOKEN_OWNER`, and `TOKEN_DEFAULT_DACL` point to SID/ACL storage in the supplied result buffer. Scalar-only classes remain conservatively covered. |
+| [GetCurrentPackageId](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageid), [GetPackageId](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageid), [PackageIdFromFullName](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packageidfromfullname) | `buffer` | The buffer contains a `PACKAGE_ID` and its pointed-to identity strings, rather than an independent allocation. |
+| [GetCurrentPackageInfo](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo), [GetCurrentPackageInfo2](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo2), [GetPackageInfo](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo), [GetPackageInfo2](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo2) | `buffer` | The buffer contains `PACKAGE_INFO` records with path/identity strings and nested `PACKAGE_ID` string pointers. |
+| [GetPackageApplicationIds](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageapplicationids) | `buffer` | This single byte buffer contains the array of app-ID string pointers and the strings they reference; `count` counts entries in that pointer table. It has no separate pointer-array output parameter. |
+
+#### Exclusions and relationship limitations
+
+[GetPackagesByPackageFamily](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackagesbypackagefamily)
+and [FindPackagesByPackageFamily](https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-findpackagesbypackagefamily)
+return `packageFullNames` as a separate caller-supplied pointer array whose elements
+point into the companion `buffer` of UTF-16 characters. The string buffer itself does
+not contain pointers, and the pointer array does not point into its own allocation.
+Annotating either parameter with this single-buffer marker would be false. A future
+cross-parameter provenance relationship must identify both the pointer-bearing output
+and its borrowed-storage parameter so consumers can suppress unsafe projections of the
+companion buffer too. These APIs remain an explicitly uncovered projection hazard,
+not a declaration that their current convenience overloads are safe.
+
+Do not annotate flat package full-name/family-name/path outputs, the independent
+string outputs of `PackageNameAndPublisherIdFromFamilyName`, or package dependency
+outputs allocated with `HeapAlloc` merely because the API is in `appmodel.h`.
+`PackageFullNameFromId`/`PackageFamilyNameFromId` consume pointer-bearing input records
+but return flat strings. Separately owned allocations and offset-only data require
+their own contracts, not this marker.
+
+`GetPackageInfo3` and numbered `FindPackagesByPackageFamily` variants are not declared
+in the selected headers; do not invent annotations or declarations for them.
+[GetCurrentPackageInfo3](https://learn.microsoft.com/windows/win32/appxpkg/appmodel/nf-appmodel-getcurrentpackageinfo3)
+is not annotated: its currently declared discriminator is
+`PackageInfo3Type_PackageInfoGeneration`, and its public documentation mixes a
+generation-ID description with `PACKAGE_INFO` array wording. A clarified, supported
+pointer-bearing result contract is required before adding a sidecar.
+
+`GetPrinterDriver2A` is declared but documented to always return
+`ERROR_NOT_SUPPORTED`, so only `GetPrinterDriver2W` has an annotated output contract.
+Flat printer directory/name/registry-data outputs, `EnumPrinterKey` MULTI_SZ output,
+separately allocated printer notification data, and pointer-bearing printer input
+records are not blanket-annotated. This inventory is reviewed coverage, not exhaustive
+discovery of every Win32 interior-pointer-producing API.
 
 ### COM outputs
 

@@ -77,6 +77,25 @@ public class ConstAttribute : Attribute
     }
 }
 
+/// <summary>
+/// Indicates that data written to the caller-owned buffer parameter may contain absolute
+/// native pointers to storage within that same allocation.
+/// </summary>
+/// <remarks>
+/// The allocation must remain alive and at a stable address continuously from native
+/// production through all consumption or copying of the pointed-to data. Copying a record
+/// does not copy its pointees. This does not imply native retention or allocation ownership,
+/// and does not describe offset-based self-relative data. Some information levels may not
+/// contain interior pointers.
+/// </remarks>
+[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
+public class ContainsInteriorPointersAttribute : Attribute
+{
+    public ContainsInteriorPointersAttribute()
+    {
+    }
+}
+
 [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Struct, AllowMultiple = false, Inherited = false)]
 [ComVisible(true)]
 public class CppAttributeList : Attribute
