@@ -2093,6 +2093,12 @@ fn build_inputs(
     }
 
     if !options.partitions.is_empty() {
+        // The forced capture bridge loads these SDK implementation headers, not API roots.
+        let capture_excluded_roots = ["driverspecs.h", "specstrings.h", "specstrings_strict.h"]
+            .iter()
+            .filter_map(|header| resolve_header(header, include_dirs))
+            .map(|path| path_arg(&path, "--include"))
+            .collect::<Result<Vec<_>, _>>()?;
         let authority_partitions = options
             .partitions
             .iter()
@@ -2181,7 +2187,8 @@ fn build_inputs(
                 let _legacy_output = policy.legacy_output;
                 let input = Input::new(input_name, partition.source)
                     .with_roots(roots)
-                    .with_root_dirs(partition_root_dirs);
+                    .with_root_dirs(partition_root_dirs)
+                    .with_excluded_roots(capture_excluded_roots.iter().cloned());
                 let mut input = input.partitioned(identity.clone());
                 if standard.as_deref() == Some("c++20") {
                     input = input.with_cpp20();
@@ -2224,7 +2231,8 @@ fn build_inputs(
                 Input::new(path_arg(partition, "--partition")?, source)
                     .with_roots(roots)
                     .with_root_dirs(root_dirs.iter().cloned())
-                    .with_root_suffixes(scope_header_suffixes(options)),
+                    .with_root_suffixes(scope_header_suffixes(options))
+                    .with_excluded_roots(capture_excluded_roots.iter().cloned()),
             );
         }
         return match (common.is_empty(), partitioned.is_empty()) {
@@ -3357,6 +3365,318 @@ mod tests {
             .get_or_init(|| libclang::provision(None, true).map(|_| ()))
             .as_ref()
             .unwrap();
+    }
+
+    fn sdk_package_root(package: &str) -> PathBuf {
+        let root = std::env::var_os("NUGET_PACKAGES").map_or_else(
+            || {
+                PathBuf::from(std::env::var_os("USERPROFILE").unwrap())
+                    .join(".nuget")
+                    .join("packages")
+            },
+            PathBuf::from,
+        );
+        let version = include_str!("../../../eng/Versions.props")
+            .split_once("<WindowsSdkCppPackageVersion>")
+            .unwrap()
+            .1
+            .split_once("</WindowsSdkCppPackageVersion>")
+            .unwrap()
+            .0;
+        root.join(package).join(version)
+    }
+
+    fn sdk_header_root() -> PathBuf {
+        let header_version = include_str!("../../../eng/Versions.props")
+            .split_once("<WindowsSdkHeaderVersion>")
+            .unwrap()
+            .1
+            .split_once("</WindowsSdkHeaderVersion>")
+            .unwrap()
+            .0;
+        sdk_package_root("microsoft.windows.sdk.cpp")
+            .join("c")
+            .join("Include")
+            .join(header_version)
+    }
+
+    #[test]
+    fn sdk_sal_capture_preserves_parameter_contracts() {
+        use windows_metadata::{HasAttributes, ParamAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = checked_in_win_sdk();
+        let fixture = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("tests")
+            .join("fixtures")
+            .join("sal_capture.cpp");
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let source = std::fs::read_to_string(&fixture).unwrap();
+        let expected = [
+            ("CaptureOutptrAlias", false, true, false),
+            ("CaptureOutAlias", false, true, false),
+            ("CaptureOutptrDirect", false, true, false),
+            ("CaptureOutDirect", false, true, false),
+            ("CaptureFreesOptional", false, false, true),
+            ("CaptureFreesRequired", false, false, false),
+            ("CaptureInOptional", true, false, true),
+            ("CaptureUnannotated", false, false, false),
+            ("CaptureDoubleNull", false, true, true),
+            ("CaptureDoubleNullOnly", false, false, false),
+            ("CapturePostOnly", false, false, false),
+            ("CaptureSingleNull", true, false, false),
+            ("CaptureCounted", true, false, false),
+            ("CaptureBinary", false, true, false),
+        ];
+        let selected = expected
+            .iter()
+            .map(|(name, ..)| name.to_string())
+            .collect::<BTreeSet<_>>();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        for packaged_sal in [false, true] {
+            let mut includes = vec![win_sdk.join("AdditionalHeaders")];
+            if packaged_sal {
+                includes.push(win_sdk.join("inc"));
+            }
+            includes.push(sdk_header_root());
+            let includes = include_dirs(&Options {
+                includes,
+                ..Default::default()
+            })
+            .unwrap();
+            for order in 0..3 {
+                let label = format!("sal-capture-packaged-{packaged_sal}-order-{order}");
+                let root = scratch(&label);
+                let mut args = checked_in_clang_args(&includes);
+                args.push(format!("-DCAPTURE_INCLUDE_ORDER={order}"));
+                let snapshot = windows_clang::extract(
+                    [Input::new(&source_path, &source).with_roots([source_path.clone()])],
+                    &args.iter().map(String::as_str).collect::<Vec<_>>(),
+                )
+                .unwrap();
+                for (name, input, output, optional) in expected {
+                    let fact = snapshot
+                        .facts()
+                        .iter()
+                        .find(|fact| fact.root && fact.name == name)
+                        .unwrap_or_else(|| panic!("{label}: missing {name}"));
+                    let FactData::Function { params, .. } = &fact.data else {
+                        panic!("{label}: {name} is not a function");
+                    };
+                    let annotation = &params[0].annotation;
+                    assert_eq!(
+                        (annotation.input, annotation.output, annotation.optional),
+                        (input, output, optional),
+                        "{label}: captured {name}"
+                    );
+                    assert_eq!(
+                        annotation.null_terminated,
+                        name == "CaptureSingleNull",
+                        "{label}: ordinary termination on {name}"
+                    );
+                }
+                let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+                    &source_path,
+                    source_path.clone(),
+                    RootPartition::new("SalCapture", "Test.Sal"),
+                );
+                let mut emit = EmitOptions::new("Test.Sal", references.types());
+                emit.functions = Some(&selected);
+                emit.library = Some("capture.dll");
+                let partitions = plan_header_partitions(
+                    &snapshot,
+                    &policy,
+                    &NamespaceAuthorities::new(),
+                    &emit,
+                    "x64",
+                )
+                .unwrap();
+                let rdl = root.join("rdl");
+                std::fs::create_dir_all(&rdl).unwrap();
+                write_partitioned_rdl(&rdl, partitions).unwrap();
+                let winmd = root.join("SalCapture.winmd");
+                compile_inputs(&[rdl], &[], "SalCapture", None, &winmd).unwrap();
+                let index = Index::read(&winmd).unwrap();
+                let emitted = index
+                    .iter_items()
+                    .filter_map(|(namespace, name, item)| {
+                        (namespace == "Test.Sal" && matches!(item, Item::Fn(_)))
+                            .then_some(name.to_string())
+                    })
+                    .collect::<BTreeSet<_>>();
+                assert_eq!(emitted, selected, "{label}");
+                for (name, expected_type) in [
+                    ("CAPTURE_HANDLE", Type::PtrMut(Box::new(Type::Void), 1)),
+                    (
+                        "CAPTURE_LOCAL",
+                        Type::value_named("Test.Sal", "CAPTURE_HANDLE"),
+                    ),
+                    (
+                        "CAPTURE_HANDLE_PTR",
+                        Type::PtrMut(Box::new(Type::value_named("Test.Sal", "CAPTURE_HANDLE")), 1),
+                    ),
+                ] {
+                    let fields = index.expect("Test.Sal", name).fields().collect::<Vec<_>>();
+                    assert_eq!(fields.len(), 1, "{label}: alias {name}");
+                    assert_eq!(fields[0].ty(), expected_type, "{label}: alias {name}");
+                }
+                for (name, _, output, optional) in expected {
+                    let Item::Fn(method) = index.expect_item("Test.Sal", name) else {
+                        panic!("{label}: missing emitted {name}");
+                    };
+                    let signature = method.signature(&[]);
+                    if matches!(name, "CaptureOutptrAlias" | "CaptureOutAlias") {
+                        assert_eq!(
+                            signature.types[0],
+                            Type::value_named("Test.Sal", "CAPTURE_HANDLE_PTR"),
+                            "{label}: preserve {name}'s pointer alias"
+                        );
+                    }
+                    let rows = method.params_by_sequence(signature.types.len()).unwrap();
+                    let parameter = rows.params()[0].unwrap();
+                    let inferred_output =
+                        matches!(name, "CaptureDoubleNullOnly" | "CapturePostOnly");
+                    let mut flags = if output || inferred_output {
+                        ParamAttributes::Out
+                    } else {
+                        ParamAttributes::In
+                    };
+                    if optional {
+                        flags |= ParamAttributes::Optional;
+                    }
+                    assert_eq!(parameter.flags(), flags, "{label}: emitted {name}");
+                    if !matches!(name, "CaptureDoubleNull" | "CaptureDoubleNullOnly") {
+                        assert!(
+                            !parameter.has_attribute("NullNullTerminatedAttribute"),
+                            "{label}: invented double-NUL contract on {name}"
+                        );
+                    }
+                    if matches!(name, "CaptureCounted" | "CaptureDoubleNull") {
+                        let count = parameter
+                            .find_attribute("NativeArrayInfoAttribute")
+                            .unwrap()
+                            .value();
+                        assert!(
+                            count.contains(&("CountParamIndex".to_string(), Value::I16(1))),
+                            "{label}: {name} count {count:?}"
+                        );
+                    }
+                    if name == "CaptureBinary" {
+                        let size = parameter
+                            .find_attribute("MemorySizeAttribute")
+                            .unwrap()
+                            .value();
+                        assert!(
+                            size.contains(&("BytesParamIndex".to_string(), Value::I16(1))),
+                            "{label}: binary byte count {size:?}"
+                        );
+                    }
+                }
+                std::fs::remove_dir_all(root).unwrap();
+            }
+        }
+    }
+
+    #[test]
+    fn sdk_sal_capture_preserves_native_api_contracts() {
+        use windows_metadata::{HasAttributes, ParamAttributes, Type, Value};
+
+        ensure_libclang();
+        let root = scratch("sal-capture-native");
+        let win_sdk = checked_in_win_sdk();
+        let selected = [
+            "DuplicateHandle",
+            "LocalFree",
+            "GetVolumePathNamesForVolumeNameW",
+        ];
+        let winmd = root.join("SalCaptureNative.winmd");
+        execute(&Options {
+            partitions: vec![
+                Path::new(env!("CARGO_MANIFEST_DIR"))
+                    .join("tests")
+                    .join("fixtures")
+                    .join("sal_capture_native.cpp"),
+            ],
+            includes: vec![
+                win_sdk.join("AdditionalHeaders"),
+                win_sdk.join("inc"),
+                sdk_header_root(),
+            ],
+            libs: vec![
+                sdk_package_root("microsoft.windows.sdk.cpp.x64")
+                    .join("c")
+                    .join("um")
+                    .join("x64")
+                    .join("kernel32.lib"),
+            ],
+            symbols: selected.iter().map(|name| name.to_string()).collect(),
+            archs: vec!["x64".to_string()],
+            assembly_name: Some("SalCaptureNative".to_string()),
+            output: Some(winmd.clone()),
+            obj: Some(root.join("obj")),
+            ..Default::default()
+        })
+        .unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let emitted = index
+            .iter_items()
+            .filter_map(|(_, name, item)| matches!(item, Item::Fn(_)).then_some(name))
+            .collect::<BTreeSet<_>>();
+        assert_eq!(emitted, selected.into_iter().collect());
+        for (name, position, expected_flags, expected_type) in [
+            (
+                "DuplicateHandle",
+                3,
+                ParamAttributes::Out,
+                Some(Type::value_named(DEFAULT_NAMESPACE, "LPHANDLE")),
+            ),
+            (
+                "LocalFree",
+                0,
+                ParamAttributes::In | ParamAttributes::Optional,
+                Some(Type::value_named(DEFAULT_NAMESPACE, "HLOCAL")),
+            ),
+            (
+                "GetVolumePathNamesForVolumeNameW",
+                1,
+                ParamAttributes::Out | ParamAttributes::Optional,
+                None,
+            ),
+        ] {
+            let Item::Fn(method) = index.expect_item(DEFAULT_NAMESPACE, name) else {
+                panic!("missing {name}");
+            };
+            let import = method.impl_map().unwrap();
+            assert!(
+                import
+                    .import_scope()
+                    .name()
+                    .eq_ignore_ascii_case("kernel32.dll")
+            );
+            assert_eq!(import.import_name(), name);
+            assert_eq!(method.calling_convention(), "system");
+            let signature = method.signature(&[]);
+            if let Some(expected_type) = expected_type {
+                assert_eq!(signature.types[position], expected_type, "{name}");
+            }
+            let rows = method.params_by_sequence(signature.types.len()).unwrap();
+            let parameter = rows.params()[position].unwrap();
+            assert_eq!(parameter.flags(), expected_flags, "{name}");
+            if name == "GetVolumePathNamesForVolumeNameW" {
+                let count = parameter
+                    .find_attribute("NativeArrayInfoAttribute")
+                    .unwrap()
+                    .value();
+                assert!(
+                    count.contains(&("CountParamIndex".to_string(), Value::I16(2))),
+                    "{name}: {count:?}"
+                );
+            }
+        }
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     fn scratch(name: &str) -> PathBuf {
@@ -5893,27 +6213,10 @@ mod tests {
             BTreeSet::from(["GdipGetMetafileHeaderFromWmf"]),
         );
 
-        let package_root = std::env::var_os("NUGET_PACKAGES").map_or_else(
-            || {
-                PathBuf::from(std::env::var_os("USERPROFILE").unwrap())
-                    .join(".nuget")
-                    .join("packages")
-            },
-            PathBuf::from,
-        );
-        let version = include_str!("../../../eng/Versions.props")
-            .split_once("<WindowsSdkCppPackageVersion>")
-            .unwrap()
-            .1
-            .split_once("</WindowsSdkCppPackageVersion>")
-            .unwrap()
-            .0;
         let lib_options = Options {
             win32_sdk: true,
             libs: vec![
-                package_root
-                    .join("microsoft.windows.sdk.cpp.x64")
-                    .join(version)
+                sdk_package_root("microsoft.windows.sdk.cpp.x64")
                     .join("c")
                     .join("um")
                     .join("x64"),

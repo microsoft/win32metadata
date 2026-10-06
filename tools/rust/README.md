@@ -257,7 +257,13 @@ into those subdirectories, so an SDK root is named once.
 
 `win32metadata_sal.h` and `win32metadata_annotations.h` are force-included for every input,
 and `WIN32METADATA=1` is defined. This captures the annotation contracts without modifying
-the SDK headers.
+the SDK headers. The SAL bridge loads the SDK's `specstrings.h` rewrites before applying
+capture overrides, without disabling strict mode. Focused inputs keep those implementation
+headers dependency-only so their configuration constants do not become public API.
+Optional-free capture retains Optional, not an inferred cleanup contract.
+
+See the [producer adoption ledger](ADOPTION.md) for upstream issues, exact pins,
+portable regressions, pending core fixes, and retirement conditions.
 
 **`--lib`** recovers symbol-to-DLL mappings from import libraries. Resolution is
 first-wins. Supplying import libraries also filters out functions that have neither an

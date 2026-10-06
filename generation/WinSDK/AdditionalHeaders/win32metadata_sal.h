@@ -5,11 +5,20 @@
 // clang parses and then silently drops. The only annotation form clang reliably
 // surfaces is `__attribute__((annotate("...")))`.
 //
-// Force-include this shim before translation units. It loads the real <sal.h> first
-// so its include guard is set, then redefines the SAL macros consumed by
-// windows-clang as annotate attributes that libclang exposes.
+// Force-include this shim before translation units. Load the SDK's strict SAL
+// rewrites before applying capture overrides, so later SDK includes cannot erase
+// them. Keep the SDK's strict level unchanged.
 
-#include <sal.h>
+#include <specstrings.h>
+
+#undef _Frees_ptr_
+#define _Frees_ptr_ __attribute__((annotate("_Frees_ptr_")))
+#undef _Frees_ptr_opt_
+#define _Frees_ptr_opt_ __attribute__((annotate("_Frees_ptr_opt_")))
+#undef _Post_
+#define _Post_ __attribute__((annotate("_Post_")))
+#undef _NullNull_terminated_
+#define _NullNull_terminated_ __attribute__((annotate("_NullNull_terminated_")))
 
 #undef _In_
 #define _In_ __attribute__((annotate("_In_")))
