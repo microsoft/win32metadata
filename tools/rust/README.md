@@ -30,6 +30,16 @@ This is not general C++ class import: ordinary unselected classes remain
 unsupported, nontrivial by-value uses are rejected, and methods, constructors,
 destructors, and lifetime behavior are not projected.
 
+An explicitly annotated class definition can instead request pointer-only nominal
+identity: `class _Win32_NativeOpaque_ NativeClass { ... };`. The capture header emits
+the valueless `win32metadata:native_opaque` marker only for metadata generation
+with Clang; native metadata-off builds are unchanged. The producer retains an
+empty named pointee through pointers, references, and pointer typedefs without
+projecting fields, methods, bases, layout, inheritance, or lifetime behavior.
+Every by-value use is an error. The marker is valid only on a named non-COM C++ class
+definition, not a forward declaration, struct, union, template, typedef, function,
+or parameter. Unmarked classes keep their existing projection.
+
 Exact declaration matching includes the translation unit. An included-only declaration
 is not rewritten to another header's scoped alias merely because that alias is the only
 owned variant in its input. For example, a satellite `GetQueuedCompletionStatus` keeps
@@ -189,19 +199,75 @@ From the repository root:
 .\scripts\Generate-WindowsRsWinmd.ps1
 ```
 
-By default this restores the pinned `Microsoft.Windows.SDK.CPP` packages, reads the raw
-`10.0.28000.0` headers, and generates `bin\Windows.Win32.winmd` for x64, x86, and arm64.
+By default this uses the pinned `Microsoft.Windows.SDK.CPP` packages and logical
+partition authority, and generates `bin\Windows.Win32.winmd` for x64, x86, and arm64.
 Pass `-Architecture x64` for a single-architecture run. Passing `-Partition
 Foundation,Bluetooth` selects focused legacy partition inputs instead of the production
-header manifest. `-UsePartitionAuthority` selects aggregate extraction with checked-in
-logical ownership and two focused PSAPI variants; it does not create one translation unit
-per partition.
+header manifest. Production extraction uses aggregate + satellite and the two PSAPI
+variants, not one translation unit per partition. `-UsePartitionAuthority` remains
+accepted explicitly. `-RawSdk` (or `-UsePartitionAuthority:$false`) selects the raw
+NuGet SDK manifest without checked-in header preparation or logical authority.
 
 The production MSBuild path is:
 
 ```powershell
 .\scripts\BuildMetadataBin.ps1
 ```
+
+Both scripts prepare `generation\WinSDK\obj\RecompiledIdlHeaders` from the checked-in
+pristine `RecompiledIdlHeaders` mirror and apply sorted `patches\post-midl\*.patch`
+files exactly once. There is no MIDL rewrite. The prepared tree **replaces** the first
+include root; the remaining five roots, canonical authorities, namespace routes and
+native library selection are unchanged. Zero patches are recorded explicitly: a base
+branch without the annotation corpus is not evidence that the child branch's patches
+were applied.
+
+A per-tree lock covers preparation, all architecture workers, and native completion.
+Repository clean uses that lock too. Source, patch, recipe and prepared-file hashes
+allow reuse only when inputs and outputs still match; changed/added/removed patches
+or mutated/extra output files cause a fresh copy. Files outside the named generated
+header tree are not touched by preparation. Do not run the legacy MIDL preparer
+concurrently with generation.
+
+`BuildMetadataBin.ps1 -arch x64` writes `bin\Windows.Win32.x64.winmd`;
+`Generate-WindowsRsWinmd.ps1 -Architecture x64` still defaults to
+`bin\Windows.Win32.winmd` and is **x64-only**, not cross-architecture evidence.
+`BuildMetadataBin.ps1 -RawSdk`, or direct MSBuild with
+`-p:WinmdUsePartitionAuthority=false`, preserves the explicit raw mode.
+Direct `dotnet build generation\WinSDK -t:EmitWinmd` also defaults to root
+`bin\Windows.Win32.winmd`, not a project-local bin directory.
+
+Preparation records hashes and patch count in `obj\windows-rs-headers.json`.
+Successful generation writes `<output>.provenance.json`, binding the preparation,
+native executable, actual arguments and generated image. Check it without repairing
+stale inputs:
+
+```powershell
+.\scripts\Prepare-WindowsRsHeaders.ps1 -VerifyOutput .\bin\Windows.Win32.winmd
+.\scripts\Test-WindowsRsHeaders.ps1
+```
+
+The fixture test reads real x64/x86/arm64 WinMD output after changing a header patch,
+and covers stale trees, patch errors, quoting, native failure/cancellation, and
+concurrent preparation/clean. Generic packaged SDK consumers keep direct native-tool
+execution and need neither Git nor repository patches after restore. Repository builds
+still use local Cargo with `--locked`; installing a NuGet tool package does not update
+the repository's Cargo pin or supply a missing header patch corpus.
+
+Prerequisites are PowerShell 7, Git, the .NET SDK from `global.json`, Rust from
+`rust-toolchain.toml`, and the restored packages pinned by `eng\Versions.props`.
+The tool builder stages pinned libclang 22.1.8 and its matching resource headers.
+`BuildMetadataBin.ps1` installs/restores repository build tools (including pinned nbgv);
+the lightweight Generate script expects nbgv available and restores SDK references
+when needed.
+
+CI builds this prepared authority path and retains strict metadata TRX results.
+The existing `-AllowKnownGeneratorGaps` option is a raw-era exact **nine failure
+fingerprints plus four passes**, not a strict product pass; CI no longer applies it
+automatically. Changed output requires native/architecture evidence and real fixes or
+reviewed expectation decisions, not widening that allowance. The separately recorded
+Rust 103/104 authority-count discrepancy and held DXC ownership conflict are unchanged
+by build wiring.
 
 ### Merging cached architectures
 

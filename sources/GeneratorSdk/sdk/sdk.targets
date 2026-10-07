@@ -39,10 +39,12 @@
       <_WinmdArgs>$(_WinmdArgs) --assembly-name &quot;$(WinmdAssemblyName)&quot;</_WinmdArgs>
       <_WinmdArgs Condition="'$(WinmdVersion)' != ''">$(_WinmdArgs) --assembly-version &quot;$(WinmdVersion)&quot;</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) --obj &quot;$(WinmdObjDir)&quot; --output &quot;$(OutputWinmd)&quot;</_WinmdArgs>
+      <_WinmdToolCommand Condition="'$(Win32MetadataToolsCommand)' == ''">&quot;$(Win32MetadataToolsExe)&quot;</_WinmdToolCommand>
+      <_WinmdToolCommand Condition="'$(Win32MetadataToolsCommand)' != ''">$(Win32MetadataToolsCommand)</_WinmdToolCommand>
     </PropertyGroup>
 
     <Message Text="Generating $(OutputWinmd) with windows-clang/windows-rdl/windows-metadata" Importance="high"/>
-    <Exec Command="&quot;$(Win32MetadataToolsExe)&quot; $(_WinmdArgs)"
+    <Exec Command="$(_WinmdToolCommand) $(_WinmdArgs)"
           EnvironmentVariables="LIBCLANG_PATH=$(LibClangPath)"
           StandardOutputImportance="high"/>
   </Target>

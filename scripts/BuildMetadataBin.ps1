@@ -9,6 +9,9 @@ param
     [switch]
     $Debug,
 
+    [switch]
+    $RawSdk,
+
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
     $arch = "crossarch"
@@ -46,6 +49,7 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 
 # Explicitly restore the Win32Metadata project to avoid issues restore happening during build
 & dotnet restore "$windowsWin32ProjectRoot" --configfile "$rootDir\nuget.Config"
+ThrowOnNativeProcessError
 
 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 $logFile = "$PSScriptRoot\..\bin\logs\BuildMetadataBin_$timestamp.binlog"
@@ -62,6 +66,9 @@ $buildArgs = @(
 if ($arch -ne "crossarch")
 {
     $buildArgs += "-p:TargetArchitectures=$arch"
+}
+if ($RawSdk) {
+    $buildArgs += "-p:WinmdUsePartitionAuthority=false"
 }
 & dotnet @buildArgs
 ThrowOnNativeProcessError

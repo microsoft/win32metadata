@@ -436,6 +436,7 @@ fn lib_files(options: &Options) -> Result<Vec<PathBuf>, String> {
 
         return crate::win32_headers::IMPORT_LIBS
             .iter()
+            .chain(crate::win32_headers::PARTITION_IMPORT_LIBS)
             .map(|name| {
                 options
                     .libs
@@ -456,7 +457,7 @@ fn lib_files(options: &Options) -> Result<Vec<PathBuf>, String> {
                     })
                     .ok_or_else(|| {
                         format!(
-                            "pinned producer import library `{name}` was not found in any `--lib` location"
+                            "required SDK import library `{name}` was not found in any `--lib` location"
                         )
                     })
             })
@@ -3700,6 +3701,1604 @@ mod tests {
         std::fs::remove_dir_all(root).unwrap();
     }
 
+    #[test]
+    fn clang_flag_enum_preserves_flags_attribute() {
+        use clang_sys::*;
+        use std::ffi::{CStr, CString};
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        extern "C" fn visit(
+            cursor: CXCursor,
+            parent: CXCursor,
+            data: CXClientData,
+        ) -> CXChildVisitResult {
+            if cursor.kind == CXCursor_FlagEnum {
+                // libclang invokes this callback synchronously with the live set below.
+                unsafe {
+                    let name = clang_getCursorSpelling(parent);
+                    let spelling = CStr::from_ptr(clang_getCString(name))
+                        .to_string_lossy()
+                        .into_owned();
+                    clang_disposeString(name);
+                    (*data.cast::<BTreeSet<String>>()).insert(spelling);
+                }
+            }
+            CXChildVisit_Recurse
+        }
+
+        ensure_libclang();
+        clang_sys::load().unwrap();
+        let root = match std::env::var_os("WIN32METADATA_FLAGS_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("clang-flag-enum"),
+        };
+        let source = include_str!("../tests/fixtures/flag_enum.cpp");
+        let fixture = root.join("flag_enum.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let args = ["-x", "c++", "-std=c++20", "--target=x86_64-pc-windows-msvc"];
+        let file = CString::new(source_path.as_str()).unwrap();
+        let clang_args = args.map(|arg| CString::new(arg).unwrap());
+        let pointers = clang_args.each_ref().map(|arg| arg.as_ptr());
+        let mut flagged = BTreeSet::<String>::new();
+        let diagnostics = unsafe {
+            let index = clang_createIndex(0, 0);
+            assert!(!index.is_null());
+            let unit = clang_parseTranslationUnit(
+                index,
+                file.as_ptr(),
+                pointers.as_ptr(),
+                pointers.len().try_into().unwrap(),
+                std::ptr::null_mut(),
+                0,
+                0,
+            );
+            if unit.is_null() {
+                clang_disposeIndex(index);
+                panic!("libclang could not parse the flag-enum fixture");
+            }
+            let diagnostics = clang_getNumDiagnostics(unit);
+            clang_visitChildren(
+                clang_getTranslationUnitCursor(unit),
+                visit,
+                std::ptr::from_mut(&mut flagged).cast(),
+            );
+            clang_disposeTranslationUnit(unit);
+            clang_disposeIndex(index);
+            diagnostics
+        };
+        assert_eq!(
+            diagnostics, 0,
+            "the self-contained C++ fixture must parse cleanly"
+        );
+        assert_eq!(flagged, BTreeSet::from(["NativeFlags".to_string()]));
+
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args,
+        )
+        .unwrap();
+        std::fs::write(root.join("facts.txt"), format!("{:#?}\n", snapshot.facts())).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let emit = EmitOptions::new("Test.FlagEnum", references.types());
+        let partitions = snapshot.emit_by_header_with_options(&emit).unwrap();
+        assert_eq!(partitions.len(), 1);
+        let rdl = partitions.into_values().next().unwrap();
+        let rdl_flags = rdl.matches("#[flags]").count();
+        let input = root.join("actual.rdl");
+        std::fs::write(&input, &rdl).unwrap();
+        let output = root.join("FlagEnum.winmd");
+        compile_inputs(&[input], &[], "FlagEnum", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let mut actual_flags = BTreeMap::new();
+        for (name, prefix) in [("NativeFlags", "Native"), ("PlainEnum", "Plain")] {
+            let definition = index.expect("Test.FlagEnum", name);
+            assert_eq!(
+                definition
+                    .fields()
+                    .find(|field| field.name() == "value__")
+                    .unwrap()
+                    .ty(),
+                Type::U32,
+                "{name} underlying width"
+            );
+            let actual = definition
+                .fields()
+                .filter_map(|field| {
+                    field
+                        .constant()
+                        .map(|constant| (field.name().to_string(), constant.value()))
+                })
+                .collect::<BTreeMap<_, _>>();
+            let expected = [("None", 0), ("Read", 1), ("Write", 2), ("All", 3)]
+                .map(|(suffix, value)| (format!("{prefix}{suffix}"), Value::U32(value)))
+                .into_iter()
+                .collect();
+            assert_eq!(actual, expected, "{name} native member values");
+            actual_flags.insert(
+                name,
+                definition
+                    .find_attribute("FlagsAttribute")
+                    .is_some_and(|attribute| attribute.namespace() == "System"),
+            );
+        }
+        let observed = format!(
+            "Clang CXCursor_FlagEnum parents: {flagged:?}\nRDL #[flags] count: {rdl_flags}\nWinMD System.FlagsAttribute: {actual_flags:?}\nBoth enums retain u32 and values 0, 1, 2, 3.\n"
+        );
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+        assert!(
+            !actual_flags["PlainEnum"],
+            "a plain enum must not acquire FlagsAttribute"
+        );
+        assert!(
+            actual_flags["NativeFlags"],
+            "[[clang::flag_enum]] was recognized by Clang but lost before WinMD; RDL #[flags] count: {rdl_flags}"
+        );
+        assert_eq!(rdl_flags, 1, "only the annotated enum must emit #[flags]");
+    }
+
+    #[test]
+    fn retval_capture_supports_native_off_headers() {
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_NATIVE_RETVAL_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("retval-native"),
+        };
+        let source = include_str!("../tests/fixtures/retval_native.cpp");
+        let fixture = root.join("retval_native.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let mut args = CLANG_ARGS
+            .iter()
+            .filter(|argument| !argument.starts_with("-DWIN32METADATA"))
+            .map(|argument| argument.to_string())
+            .collect::<Vec<_>>();
+        for include in [win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")] {
+            args.extend([
+                "-isystem".to_string(),
+                path_arg(&include, "--include").unwrap(),
+            ]);
+        }
+        args.push("--target=x86_64-pc-windows-msvc".to_string());
+        for control in [
+            None,
+            Some("TEST_EXISTING_NATIVE_RETVAL"),
+            Some("TEST_NATIVE_RETVAL_EXPANSION"),
+        ] {
+            let mut case_args = args.clone();
+            if let Some(control) = control {
+                case_args.push(format!("-D{control}=1"));
+            }
+            let snapshot = windows_clang::extract(
+                [Input::new(&source_path, source).with_roots([source_path.clone()])],
+                &case_args.iter().map(String::as_str).collect::<Vec<_>>(),
+            )
+            .unwrap();
+            assert!(
+                snapshot.annotations().is_empty(),
+                "native-off capture must not add metadata attributes"
+            );
+            if control.is_none() {
+                for name in ["NativeRetval", "NativeComRetval"] {
+                    assert!(
+                        snapshot.facts().iter().any(|fact| fact.name == name
+                            && matches!(fact.data, FactData::Function { .. })),
+                        "{name} must parse with an SDK lacking retval convenience macros"
+                    );
+                }
+            }
+        }
+        let result = "PASS: missing native retval macros use output contracts; existing SDK definitions remain unchanged; metadata-off annotations stay empty.\n";
+        std::fs::write(root.join("result.txt"), result).unwrap();
+        println!("{result}Evidence: {}", root.display());
+    }
+
+    #[test]
+    fn retval_source_channels_emit_one_attribute() {
+        use windows_metadata::{HasAttributes, MethodAttributes};
+
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_RETVAL_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("retval-sources"),
+        };
+        let source = include_str!("../tests/fixtures/retval_sources.cpp");
+        let fixture = root.join("retval_sources.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let args = checked_in_clang_args(&[win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")]);
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let partitions = snapshot
+            .emit_by_header_with_options(&EmitOptions::new("Test.Retval", references.types()))
+            .unwrap();
+        assert_eq!(partitions.len(), 1);
+        let rdl = partitions.into_values().next().unwrap();
+        let input = root.join("actual.rdl");
+        std::fs::write(&input, &rdl).unwrap();
+        let output = root.join("RetvalSources.winmd");
+        compile_inputs(&[input], &[], "RetvalSources", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let interface = index.expect("Test.Retval", "IRetvalSources");
+        assert_eq!(interface.methods().count(), 4);
+        let expected = BTreeMap::from([
+            ("get_Both", 1),
+            ("get_MidlOnly", 1),
+            ("get_SalOnly", 1),
+            ("get_Plain", 0),
+        ]);
+        let mut rdl_counts = BTreeMap::new();
+        let mut metadata_counts = BTreeMap::new();
+        for name in expected.keys() {
+            let line = rdl
+                .lines()
+                .find(|line| line.contains(&format!("fn {name}(")))
+                .unwrap();
+            rdl_counts.insert(*name, line.matches("#[retval]").count());
+            let method = interface
+                .methods()
+                .find(|method| method.name() == *name)
+                .unwrap();
+            assert!(
+                method.flags().contains(MethodAttributes::SpecialName),
+                "{name}"
+            );
+            let parameter = method
+                .params()
+                .find(|parameter| parameter.sequence() == 1)
+                .unwrap();
+            assert_eq!(
+                parameter.direction(),
+                windows_metadata::reader::ParamDirection::Output,
+                "{name}"
+            );
+            metadata_counts.insert(
+                *name,
+                parameter
+                    .attributes()
+                    .filter(|attribute| {
+                        attribute.name() == "RetValAttribute"
+                            && attribute.namespace() == "Windows.Win32.Foundation.Metadata"
+                    })
+                    .count(),
+            );
+        }
+        let observed = format!(
+            "RDL RetVal counts: {rdl_counts:?}\nWinMD RetVal counts: {metadata_counts:?}\nAll four output directions and COM property SpecialName flags remain intact.\n"
+        );
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+        assert_eq!(
+            rdl_counts, expected,
+            "RetVal source channels must converge once"
+        );
+        assert_eq!(metadata_counts, expected, "physical RetVal attributes");
+    }
+
+    #[test]
+    fn native_opaque_class_annotations_preserve_pointer_identity() {
+        use windows_metadata::{HasAttributes, Type};
+
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_OPAQUE_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("native-opaque"),
+        };
+        let source = include_str!("../tests/fixtures/native_opaque.cpp");
+        let fixture = root.join("native_opaque.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let args = checked_in_clang_args(&[win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")]);
+        let native_args = args
+            .iter()
+            .filter(|argument| !argument.starts_with("-DWIN32METADATA"))
+            .map(String::as_str)
+            .collect::<Vec<_>>();
+        let native = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &native_args,
+        )
+        .unwrap();
+        assert!(
+            native.annotations().is_empty(),
+            "metadata-off capture must not add annotations"
+        );
+        std::fs::write(
+            root.join("metadata-off.txt"),
+            "Native C++ layout, nontriviality, and inheritance assertions passed with no metadata annotations.\n",
+        )
+        .unwrap();
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let namespace = "Test.NativeOpaque";
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            &source_path,
+            source_path.clone(),
+            RootPartition::new("NativeOpaque", namespace),
+        );
+        let authorities = NamespaceAuthorities::new();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(namespace, references.types());
+        emit.library = Some("opaque.dll");
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let rdl = root.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let output = root.join("NativeOpaque.winmd");
+        compile_inputs(&[rdl], &[], "NativeOpaque", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        for name in ["OpaqueBase", "OpaqueDerived"] {
+            let definition = index.expect(namespace, name);
+            assert_eq!(
+                definition.category(),
+                windows_metadata::reader::TypeCategory::Struct,
+                "{name} must be nominal, not an inherited interface"
+            );
+            assert_eq!(definition.fields().count(), 0, "{name} fields");
+            assert_eq!(definition.methods().count(), 0, "{name} methods");
+            assert!(definition.class_layout().is_none(), "{name} native layout");
+            assert!(
+                !definition.has_attribute("NativeInheritanceAttribute"),
+                "{name} native inheritance"
+            );
+        }
+        assert!(
+            !index.contains(namespace, "PlainClass"),
+            "unmarked virtual classes must retain their existing void projection"
+        );
+        let Item::Fn(marked) = index.expect_item(namespace, "UseOpaque") else {
+            panic!("missing UseOpaque");
+        };
+        let nominal = Type::value_named(namespace, "OpaqueBase");
+        assert_eq!(
+            marked.signature(&[]).types,
+            [
+                Type::PtrMut(Box::new(nominal.clone()), 1),
+                Type::PtrConst(Box::new(nominal.clone()), 1),
+                Type::PtrMut(Box::new(nominal), 2),
+                Type::PtrMut(Box::new(Type::value_named(namespace, "OpaqueDerived")), 1),
+            ],
+            "marked native identity, constness, and pointer levels"
+        );
+        let Item::Fn(plain) = index.expect_item(namespace, "UsePlain") else {
+            panic!("missing UsePlain");
+        };
+        assert_eq!(
+            plain.signature(&[]).types,
+            [
+                Type::PtrMut(Box::new(Type::Void), 1),
+                Type::PtrConst(Box::new(Type::Void), 1),
+                Type::PtrMut(Box::new(Type::Void), 2),
+            ],
+            "plain-class negative control"
+        );
+        let mut rejections = BTreeMap::new();
+        for case in ["PARAMETER", "RETURN", "FIELD", "ARRAY"] {
+            let mut case_args = args.clone();
+            case_args.push(format!("-DTEST_OPAQUE_VALUE_{case}=1"));
+            let result = windows_clang::extract(
+                [Input::new(&source_path, source).with_roots([source_path.clone()])],
+                &case_args.iter().map(String::as_str).collect::<Vec<_>>(),
+            )
+            .map_err(|error| error.to_string())
+            .and_then(|snapshot| {
+                plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64")
+            });
+            let error = result.expect_err("opaque classes must never be projected by value");
+            std::fs::write(root.join(format!("rejected-{case}.txt")), &error).unwrap();
+            assert!(error.contains("native_opaque"), "{case}: {error}");
+            assert!(error.contains("by value"), "{case}: {error}");
+            rejections.insert(case, error);
+        }
+        let observed = format!(
+            "Marked: {:?}\nPlain: {:?}\nBy-value rejections: {rejections:#?}\n",
+            marked.signature(&[]).types,
+            plain.signature(&[]).types
+        );
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+    }
+
+    fn assert_pcwstr(index: &Index, ty: &windows_metadata::Type) {
+        use windows_metadata::Type;
+
+        let Type::ValueName(name) = ty else {
+            panic!("expected a named PCWSTR, got {ty:?}");
+        };
+        assert_eq!(name.name, "PCWSTR");
+        assert_eq!(
+            index.expect(&name.namespace, &name.name).underlying_type(),
+            Some(Type::PtrConst(Box::new(Type::U16), 1)),
+            "PCWSTR must retain a const 16-bit native pointee"
+        );
+    }
+
+    #[test]
+    fn named_wide_z_annotations_preserve_string_identity() {
+        use windows_metadata::{HasAttributes, ParamAttributes, Type};
+
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_WIDE_Z_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("named-wide-z"),
+        };
+        let source = include_str!("../tests/fixtures/wide_z.cpp");
+        let fixture = root.join("wide_z.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let args = checked_in_clang_args(&[win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")]);
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let fact = snapshot
+            .facts()
+            .iter()
+            .find(|fact| fact.root && fact.name == "CaptureWide")
+            .unwrap();
+        let FactData::Function { params, .. } = &fact.data else {
+            panic!("CaptureWide must be a function");
+        };
+        assert_eq!(params.len(), 4);
+        for (position, parameter) in params.iter().enumerate() {
+            assert!(parameter.annotation.input);
+            assert!(!parameter.annotation.output);
+            assert!(!parameter.annotation.optional);
+            assert_eq!(parameter.annotation.null_terminated, position < 2);
+        }
+        std::fs::write(root.join("facts.txt"), format!("{fact:#?}\n")).unwrap();
+        let namespace = "Test.WideZ";
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            &source_path,
+            source_path.clone(),
+            RootPartition::new("WideZ", namespace),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let emit = EmitOptions::new(namespace, references.types());
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let rdl = root.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let output = root.join("WideZ.winmd");
+        compile_inputs(&[rdl], &[], "WideZ", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let Item::Fn(method) = index.expect_item(namespace, "CaptureWide") else {
+            panic!("missing CaptureWide");
+        };
+        let signature = method.signature(&[]);
+        let observed = format!("CaptureWide: {:?}\n", signature.types);
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+        assert_pcwstr(&index, &signature.types[1]);
+        for position in [2, 3] {
+            assert_eq!(
+                signature.types[position],
+                Type::PtrConst(Box::new(Type::U16), 1),
+                "unterminated and numeric pointers must not become strings"
+            );
+        }
+        let rows = method.params_by_sequence(4).unwrap();
+        for parameter in rows.params() {
+            let parameter = parameter.unwrap();
+            assert_eq!(parameter.flags(), ParamAttributes::In);
+            assert!(!parameter.has_attribute("NullNullTerminatedAttribute"));
+        }
+        assert_pcwstr(&index, &signature.types[0]);
+    }
+
+    #[test]
+    #[ignore = "requires a repaired SDK cohort in WIN32METADATA_NLS_INPUT_ROOT and a fresh WIN32METADATA_NLS_OUTPUT_ROOT"]
+    fn sdk_partitioned_nls_preserves_enum_contracts() {
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_NLS_INPUT_ROOT")
+                .expect("set WIN32METADATA_NLS_INPUT_ROOT to the repaired generation/WinSDK"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_NLS_OUTPUT_ROOT")
+                .expect("set WIN32METADATA_NLS_OUTPUT_ROOT to a new evidence directory"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let includes = include_dirs(&Options {
+            includes: vec![
+                win_sdk.join("RecompiledIdlHeaders"),
+                win_sdk.join("AdditionalHeaders"),
+                win_sdk.join("inc"),
+                sdk_header_root(),
+            ],
+            ..Default::default()
+        })
+        .unwrap();
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let headers = [
+            ("WinNls.h", "Intl"),
+            ("stringapiset.h", "Intl"),
+            ("datetimeapi.h", "Intl"),
+            ("dxgi.h", "Dxgi"),
+        ];
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut roots = Vec::new();
+        let mut source = WIN32_SDK_PRELUDE.to_string();
+        for (header, partition) in headers {
+            let path = includes
+                .iter()
+                .map(|directory| directory.join(header))
+                .find(|path| path.is_file())
+                .unwrap_or_else(|| panic!("missing {header}"));
+            let path = path_arg(&path, "--include").unwrap();
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path.clone(),
+                convert_root_partition(logical_partition(&traversal, partition).unwrap()),
+            );
+            source.push_str(&format!("#include \"{path}\"\n"));
+            roots.push(path);
+        }
+        std::fs::write(output.join("input.cpp"), &source).unwrap();
+        let args = checked_in_clang_args(&includes);
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let enums = [
+            ("FOLD_STRING_MAP_FLAGS", 5, true),
+            ("ENUM_DATE_FORMATS_FLAGS", 8, false),
+            ("TIME_FORMAT_FLAGS", 5, true),
+            ("ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS", 2, false),
+            ("MULTI_BYTE_TO_WIDE_CHAR_FLAGS", 4, true),
+            ("COMPARE_STRING_FLAGS", 10, true),
+            ("IS_VALID_LOCALE_FLAGS", 2, false),
+            ("ENUM_SYSTEM_CODE_PAGES_FLAGS", 2, false),
+            ("COMPARESTRING_RESULT", 3, false),
+        ];
+        let mut native_members = BTreeMap::new();
+        for (name, count, _) in enums {
+            let matches = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.name == name && matches!(fact.data, FactData::Enum { .. }))
+                .collect::<Vec<_>>();
+            let [fact] = matches.as_slice() else {
+                panic!("expected one extracted {name}, found {}", matches.len());
+            };
+            let FactData::Enum {
+                variants, scoped, ..
+            } = &fact.data
+            else {
+                unreachable!()
+            };
+            assert!(!scoped, "{name} must retain unscoped vocabulary semantics");
+            assert_eq!(variants.len(), count, "{name} source members");
+            native_members.insert(
+                name,
+                variants
+                    .iter()
+                    .map(|member| (member.name.clone(), member.value))
+                    .collect::<BTreeMap<_, _>>(),
+            );
+        }
+        std::fs::write(
+            output.join("native-members.txt"),
+            format!("{native_members:#?}\n"),
+        )
+        .unwrap();
+        let associations = [
+            ("CompareStringA", 0, "COMPARESTRING_RESULT"),
+            ("CompareStringEx", 0, "COMPARESTRING_RESULT"),
+            ("CompareStringEx", 2, "COMPARE_STRING_FLAGS"),
+            ("CompareStringOrdinal", 0, "COMPARESTRING_RESULT"),
+            ("CompareStringW", 0, "COMPARESTRING_RESULT"),
+            ("EnumDateFormatsExEx", 3, "ENUM_DATE_FORMATS_FLAGS"),
+            ("EnumSystemCodePagesA", 2, "ENUM_SYSTEM_CODE_PAGES_FLAGS"),
+            ("EnumSystemCodePagesW", 2, "ENUM_SYSTEM_CODE_PAGES_FLAGS"),
+            (
+                "EnumSystemLanguageGroupsA",
+                2,
+                "ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS",
+            ),
+            (
+                "EnumSystemLanguageGroupsW",
+                2,
+                "ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS",
+            ),
+            ("EnumTimeFormatsA", 3, "TIME_FORMAT_FLAGS"),
+            ("EnumTimeFormatsW", 3, "TIME_FORMAT_FLAGS"),
+            ("FoldStringA", 1, "FOLD_STRING_MAP_FLAGS"),
+            ("FoldStringW", 1, "FOLD_STRING_MAP_FLAGS"),
+            ("GetDateFormatEx", 2, "ENUM_DATE_FORMATS_FLAGS"),
+            ("GetTimeFormatEx", 2, "TIME_FORMAT_FLAGS"),
+            (
+                "IsValidLanguageGroup",
+                2,
+                "ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS",
+            ),
+            ("IsValidLocale", 2, "IS_VALID_LOCALE_FLAGS"),
+            ("MultiByteToWideChar", 2, "MULTI_BYTE_TO_WIDE_CHAR_FLAGS"),
+        ];
+        let selected = associations
+            .iter()
+            .map(|(name, ..)| name.to_string())
+            .collect();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.functions = Some(&selected);
+        emit.library = Some("kernel32.dll");
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let rdl = output.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let winmd = output.join("Windows.Win32.winmd");
+        compile_inputs(
+            &[rdl],
+            &[],
+            DEFAULT_NAMESPACE,
+            Some([71, 0, 122, 35729]),
+            &winmd,
+        )
+        .unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Globalization";
+        let mut member_count = 0;
+        let mut actual_flags = BTreeMap::new();
+        for (name, expected) in &native_members {
+            let definition = index.expect(namespace, name);
+            actual_flags.insert(
+                *name,
+                definition
+                    .find_attribute("FlagsAttribute")
+                    .is_some_and(|attribute| attribute.namespace() == "System"),
+            );
+            let underlying = definition
+                .fields()
+                .find(|field| field.name() == "value__")
+                .unwrap();
+            assert_eq!(
+                underlying.ty(),
+                if *name == "COMPARESTRING_RESULT" {
+                    Type::I32
+                } else {
+                    Type::U32
+                }
+            );
+            let actual = definition
+                .fields()
+                .filter_map(|field| {
+                    field.constant().map(|constant| {
+                        let value = match constant.value() {
+                            Value::I32(value) => i64::from(value),
+                            Value::U32(value) => i64::from(value),
+                            value => {
+                                panic!("{name}.{} has unexpected value {value:?}", field.name())
+                            }
+                        };
+                        (field.name().to_string(), value)
+                    })
+                })
+                .collect::<BTreeMap<_, _>>();
+            assert_eq!(&actual, expected, "{name} physical members");
+            member_count += actual.len();
+        }
+        assert_eq!(member_count, 41);
+        for (name, sequence, expected) in associations {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing {name}");
+            };
+            let parameter = method
+                .params()
+                .find(|parameter| parameter.sequence() == sequence)
+                .unwrap_or_else(|| panic!("missing {name} parameter {sequence}"));
+            let attribute = parameter
+                .find_attribute("AssociatedEnumAttribute")
+                .unwrap_or_else(|| panic!("missing {name}:{sequence} association"));
+            assert!(
+                attribute
+                    .value()
+                    .iter()
+                    .any(|(_, value)| *value == Value::Utf8(expected.to_string())),
+                "{name}:{sequence}: {:?}",
+                attribute.value()
+            );
+            assert!(
+                index.contains(namespace, expected),
+                "dangling {name}:{sequence} association"
+            );
+        }
+        for name in ["CSTR_LESS_THAN", "CSTR_EQUAL", "CSTR_GREATER_THAN"] {
+            assert!(native_members["COMPARESTRING_RESULT"].contains_key(name));
+            assert!(!index.iter_items().any(|(_, candidate, item)| candidate == name && matches!(item, Item::Const(_))),
+                "{name} must belong to COMPARESTRING_RESULT, not a standalone constant");
+        }
+        index.expect("Windows.Win32.Graphics.Dxgi", "DXGI_ENUM_MODES");
+        let contracts = "9 enums / 41 source-valued members / 19 bound associations / 3 CSTR fields; native widths, nonempty WinRT references, and independent DXGI namespace owner.\n";
+        std::fs::write(output.join("native-contracts.txt"), contracts).unwrap();
+        println!("Verified native contracts: {contracts}");
+        std::fs::write(output.join("flags.txt"), format!("{actual_flags:#?}\n")).unwrap();
+        let expected_flags = enums
+            .into_iter()
+            .map(|(name, _, flags)| (name, flags))
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            actual_flags, expected_flags,
+            "only the four native [[clang::flag_enum]] vocabularies must have System.FlagsAttribute"
+        );
+        let result = "PASS: partitioned NLS 9 enums / 41 members / 19 bound associations / 3 CSTR fields / 4 Flags enums / 5 plain enums; nonempty WinRT references and independent DXGI namespace owner.\n";
+        std::fs::write(output.join("result.txt"), result).unwrap();
+        println!("{result}Evidence: {}", output.display());
+    }
+
+    #[test]
+    #[ignore = "requires a frozen SDK cohort in WIN32METADATA_DEBUG_INPUT_ROOT and a fresh WIN32METADATA_DEBUG_OUTPUT_ROOT"]
+    fn sdk_partitioned_debug_retains_associated_enum_dependencies() {
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_DEBUG_INPUT_ROOT")
+                .expect("set WIN32METADATA_DEBUG_INPUT_ROOT to the frozen generation/WinSDK"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_DEBUG_OUTPUT_ROOT")
+                .expect("set WIN32METADATA_DEBUG_OUTPUT_ROOT to a new evidence directory"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let includes = include_dirs(&Options {
+            includes: vec![
+                win_sdk.join("RecompiledIdlHeaders"),
+                win_sdk.join("AdditionalHeaders"),
+                win_sdk.join("inc"),
+                sdk_header_root(),
+            ],
+            ..Default::default()
+        })
+        .unwrap();
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let debug = logical_partition(&traversal, "Debug").unwrap();
+        let imagehlp = debug
+            .roots
+            .iter()
+            .find_map(|root| match root {
+                crate::partition::TraversalRoot::File(file)
+                    if file.path.file_name().unwrap() == "ImageHlp.h" =>
+                {
+                    Some(path_arg(&file.path, "--include").unwrap())
+                }
+                _ => None,
+            })
+            .expect("Debug settings must traverse ImageHlp.h");
+        let mut policy = HeaderPartitionPolicy::new();
+        policy.add_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            imagehlp.clone(),
+            convert_root_partition(debug),
+        );
+        let public_source =
+            std::fs::read_to_string(win_sdk.join("Partitions").join("Debug").join("main.cpp"))
+                .unwrap();
+        let dependency_source = format!("{WIN32_SDK_PRELUDE}#include <DbgHelp.h>\n");
+        let dependency_path = output.join("dependency.cpp");
+        std::fs::write(output.join("public.cpp"), &public_source).unwrap();
+        std::fs::write(&dependency_path, &dependency_source).unwrap();
+        let dependency_path = path_arg(&dependency_path, "--partition").unwrap();
+        let args = checked_in_clang_args(&includes);
+        std::fs::write(output.join("arguments.txt"), args.join("\n")).unwrap();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, public_source).with_roots([imagehlp]),
+                Input::new(&dependency_path, dependency_source)
+                    .with_roots([dependency_path.clone()]),
+            ],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let enums = [
+            ("IMAGEHLP_CBA_EVENT_SEVERITY", false),
+            ("SYM_LOAD_FLAGS", true),
+            ("SYM_SRV_STORE_FILE_FLAGS", false),
+            ("SYM_FIND_ID_OPTION", false),
+            ("SYMBOL_INFO_FLAGS", true),
+            ("IMAGEHLP_GET_TYPE_INFO_FLAGS", false),
+            ("MODLOAD_DATA_TYPE", false),
+            ("IMAGE_FILE_CHARACTERISTICS2", true),
+        ];
+        let mut native_members = BTreeMap::new();
+        for (name, _) in enums {
+            let matches = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.name == name && matches!(fact.data, FactData::Enum { .. }))
+                .collect::<Vec<_>>();
+            let [fact] = matches.as_slice() else {
+                panic!("expected one extracted {name}, found {}", matches.len());
+            };
+            assert!(!fact.root, "{name} must remain dependency-only");
+            assert_eq!(fact.origin.tu, dependency_path, "{name} provider input");
+            let FactData::Enum {
+                variants, scoped, ..
+            } = &fact.data
+            else {
+                unreachable!()
+            };
+            assert!(!scoped, "{name}");
+            native_members.insert(
+                name,
+                variants
+                    .iter()
+                    .map(|member| (member.name.clone(), member.value))
+                    .collect::<BTreeMap<_, _>>(),
+            );
+        }
+        std::fs::write(
+            output.join("native-members.txt"),
+            format!("{native_members:#?}\n"),
+        )
+        .unwrap();
+        let mut native_libraries = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![
+                sdk_package_root("microsoft.windows.sdk.cpp.x64")
+                    .join("c")
+                    .join("um")
+                    .join("x64"),
+            ],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            native_libraries.import_library(&path).unwrap();
+        }
+        apply_library_overrides(&mut native_libraries).unwrap();
+        let libraries = snapshot
+            .facts()
+            .iter()
+            .filter_map(|fact| {
+                let FactData::Function { link_name, .. } = &fact.data else {
+                    return None;
+                };
+                native_libraries
+                    .resolved_library(link_name)
+                    .map(|dll| (link_name.clone(), dll.to_string()))
+            })
+            .collect::<BTreeMap<_, _>>();
+        let selected =
+            implicit_selected_functions(&snapshot, &BTreeSet::new(), &libraries, |_| false);
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.functions = Some(&selected);
+        emit.libraries = Some(&libraries);
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let rdl = output.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let winmd = output.join("Windows.Win32.winmd");
+        compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.System.Diagnostics.Debug";
+        let present = enums
+            .iter()
+            .map(|(name, _)| (*name, index.contains(namespace, name)))
+            .collect::<BTreeMap<_, _>>();
+        let mut associations = BTreeMap::<String, Vec<String>>::new();
+        let mut record = |slot: String, values: Vec<(String, Value)>| {
+            for (_, value) in values {
+                if let Value::Utf8(name) = value
+                    && native_members.contains_key(name.as_str())
+                {
+                    associations.entry(name).or_default().push(slot.clone());
+                }
+            }
+        };
+        for definition in index.types().filter(|ty| ty.namespace() == namespace) {
+            for field in definition.fields() {
+                if let Some(attribute) = field.find_attribute("AssociatedEnumAttribute") {
+                    record(
+                        format!("{}.{}", definition.name(), field.name()),
+                        attribute.value(),
+                    );
+                }
+            }
+            for method in definition.methods() {
+                for parameter in method.params() {
+                    if let Some(attribute) = parameter.find_attribute("AssociatedEnumAttribute") {
+                        record(
+                            format!("{}:{}", method.name(), parameter.sequence()),
+                            attribute.value(),
+                        );
+                    }
+                }
+            }
+        }
+        let observed = format!("Definitions: {present:#?}\nAssociations: {associations:#?}\n");
+        std::fs::write(output.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", output.display());
+        assert_eq!(
+            associations.len(),
+            8,
+            "all eight source association families"
+        );
+        assert_eq!(
+            associations.values().map(Vec::len).sum::<usize>(),
+            13,
+            "retained field and parameter associations"
+        );
+        assert!(present.values().all(|present| *present), "{present:?}");
+        let mut member_count = 0;
+        for (name, flags) in enums {
+            let definition = index.expect(namespace, name);
+            assert_eq!(
+                definition
+                    .fields()
+                    .find(|field| field.name() == "value__")
+                    .unwrap()
+                    .ty(),
+                Type::U32,
+                "{name} native width"
+            );
+            let actual = definition
+                .fields()
+                .filter_map(|field| {
+                    field.constant().map(|constant| {
+                        let Value::U32(value) = constant.value() else {
+                            panic!("{name}.{} changed native representation", field.name());
+                        };
+                        (field.name().to_string(), i64::from(value))
+                    })
+                })
+                .collect::<BTreeMap<_, _>>();
+            assert_eq!(actual, native_members[name], "{name} native member values");
+            assert_eq!(
+                definition
+                    .find_attribute("FlagsAttribute")
+                    .is_some_and(|attribute| attribute.namespace() == "System"),
+                flags,
+                "{name} native Flags/plain control"
+            );
+            member_count += actual.len();
+        }
+        let result = format!(
+            "PASS: 8 dependency-only Debug enums / {member_count} native-valued u32 members / {} bound associations / 3 Flags / 5 plain; ImageHlp public roots and cross-TU DbgHelp providers, nonempty WinRT.\n",
+            associations.values().map(Vec::len).sum::<usize>()
+        );
+        std::fs::write(output.join("result.txt"), &result).unwrap();
+        println!("{result}");
+    }
+
+    #[test]
+    fn identical_associated_enums_from_different_headers_remain_ambiguous() {
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_ENUM_ORIGIN_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).unwrap();
+                path
+            }
+            None => scratch("associated-enum-physical-origin"),
+        };
+        let enum_source = "enum [[clang::flag_enum]] MirroredFlags : unsigned int { Low = 1U, High = 0x80000000U };\n";
+        let direct = root.join("direct.h");
+        let dependency = root.join("dependency.h");
+        let consumer = root.join("consumer.h");
+        std::fs::write(&direct, enum_source).unwrap();
+        std::fs::write(&dependency, enum_source).unwrap();
+        assert_eq!(
+            std::fs::read(&direct).unwrap(),
+            std::fs::read(&dependency).unwrap()
+        );
+        std::fs::write(
+            &consumer,
+            "extern \"C\" void Consume([[clang::annotate(\"win32metadata:associated_enum=MirroredFlags\")]] unsigned int value);\n",
+        )
+        .unwrap();
+        let direct = path_arg(&direct, "--include").unwrap();
+        let dependency = path_arg(&dependency, "--include").unwrap();
+        let consumer = path_arg(&consumer, "--include").unwrap();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new("direct.cpp", format!("#include \"{direct}\"\n"))
+                    .with_roots([direct.clone()]),
+                Input::new(
+                    "consumer.cpp",
+                    format!("#include \"{dependency}\"\n#include \"{consumer}\"\n"),
+                )
+                .with_roots([consumer.clone()]),
+            ],
+            &["-x", "c++", "-std=c++20", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        std::fs::write(root.join("facts.txt"), format!("{:#?}\n", snapshot.facts())).unwrap();
+        let definitions = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| {
+                fact.name == "MirroredFlags" && matches!(fact.data, FactData::Enum { .. })
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(definitions.len(), 2);
+        assert_eq!(definitions[0].data, definitions[1].data);
+        assert_ne!(definitions[0].spelling.file, definitions[1].spelling.file);
+        let policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(
+                "direct.cpp",
+                direct,
+                RootPartition::new("Left", "Test.Left"),
+            )
+            .with_traversed_header_for_input(
+                "consumer.cpp",
+                consumer,
+                RootPartition::new("Right", "Test.Right"),
+            );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new("Test", references.types());
+        emit.library = Some("fixture.dll");
+        let error = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::default(),
+            &emit,
+            "x64",
+        )
+        .expect_err("identical enum values must not conflate distinct physical providers");
+        std::fs::write(root.join("expected-conflict.txt"), &error).unwrap();
+        assert!(
+            error.contains("MirroredFlags")
+                && error.contains("found 1 conflict(s)")
+                && error.contains("ambiguous logical owners")
+                && error.contains("Test.Left")
+                && error.contains("Test.Right"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    #[ignore = "requires frozen SDK headers in WIN32METADATA_ENUM_ROUTES_INPUT_ROOT and a fresh WIN32METADATA_ENUM_ROUTES_OUTPUT_ROOT"]
+    fn sdk_partitioned_associated_enum_routes_across_inputs() {
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_ENUM_ROUTES_INPUT_ROOT")
+                .expect("set the frozen SDK input root"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_ENUM_ROUTES_OUTPUT_ROOT")
+                .expect("set a fresh evidence directory"),
+        );
+        std::fs::create_dir(&output).unwrap();
+        let includes = checked_in_include_dirs(&win_sdk);
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        type InputHeaders<'a> = (&'a str, &'a [(&'a str, &'a str)], &'a str);
+        let groups: &[InputHeaders<'_>] = &[
+            (
+                "providers.cpp",
+                &[
+                    ("wincrypt.h", "Security.Cryptography"),
+                    ("cfg.h", "DevInst"),
+                    ("winnt.h", "Backup"),
+                ],
+                "",
+            ),
+            (
+                "consumers.cpp",
+                &[
+                    ("CertEnc.h", "Certificates"),
+                    ("mssip.h", "Security.Cryptography.Sip"),
+                    ("cfgmgr32.h", "DevInst"),
+                    ("cryptuiapi.h", "Security.Cryptography.UI"),
+                    ("clusapi.h", "MsCs"),
+                    ("DbgModel.h", "Debug.Extensions"),
+                ],
+                "#include <wincrypt.h>\n#include <cfg.h>\n",
+            ),
+            (
+                "search.cpp",
+                &[("msdasql_interfaces.h", "Search")],
+                "#include <oledb.h>\n",
+            ),
+        ];
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut inputs = Vec::new();
+        for (name, headers, prelude) in groups {
+            let input_path = output.join(name);
+            let input = path_arg(&input_path, "--partition").unwrap();
+            let mut source = format!("{WIN32_SDK_PRELUDE}{prelude}");
+            let mut roots = Vec::new();
+            for (header, owner) in *headers {
+                let path = includes
+                    .iter()
+                    .map(|directory| directory.join(header))
+                    .find(|path| path.is_file())
+                    .unwrap_or_else(|| panic!("missing {header}"));
+                let path = path_arg(&path, "--include").unwrap();
+                policy.add_traversed_header_for_input(
+                    input.clone(),
+                    path.clone(),
+                    convert_root_partition(logical_partition(&traversal, owner).unwrap()),
+                );
+                source.push_str(&format!("#include \"{path}\"\n"));
+                roots.push(path);
+            }
+            std::fs::write(input_path, &source).unwrap();
+            inputs.push(Input::new(input, source).with_roots(roots));
+        }
+        let args = checked_in_clang_args(&includes);
+        std::fs::write(output.join("arguments.txt"), args.join("\n")).unwrap();
+        let snapshot =
+            windows_clang::extract(inputs, &args.iter().map(String::as_str).collect::<Vec<_>>())
+                .unwrap();
+        let enums = [
+            (
+                "CERT_ALT_NAME",
+                "Windows.Win32.Security.Cryptography",
+                Type::I32,
+                false,
+            ),
+            (
+                "CERT_QUERY_ENCODING_TYPE",
+                "Windows.Win32.Security.Cryptography",
+                Type::U32,
+                true,
+            ),
+            (
+                "CERT_RDN_ATTR_VALUE_TYPE",
+                "Windows.Win32.Security.Cryptography",
+                Type::I32,
+                false,
+            ),
+            (
+                "CM_DEVNODE_STATUS_FLAGS",
+                "Windows.Win32.Devices.DeviceAndDriverInstallation",
+                Type::U32,
+                true,
+            ),
+            (
+                "CRYPT_KEY_FLAGS",
+                "Windows.Win32.Security.Cryptography",
+                Type::U32,
+                true,
+            ),
+            (
+                "OBJECT_SECURITY_INFORMATION",
+                "Windows.Win32.System.SystemServices",
+                Type::U32,
+                true,
+            ),
+            ("VARENUM", "Windows.Win32.System.Variant", Type::I32, true),
+        ];
+        let names = enums
+            .iter()
+            .map(|(name, ..)| *name)
+            .collect::<BTreeSet<_>>();
+        let native_facts = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| names.contains(fact.name.as_str()))
+            .collect::<Vec<_>>();
+        std::fs::write(
+            output.join("native-facts.txt"),
+            format!("{native_facts:#?}\n"),
+        )
+        .unwrap();
+        let mut native_members = BTreeMap::new();
+        let mut native_member_disagreements = Vec::new();
+        let mut emitted_members = BTreeMap::new();
+        for fact in snapshot
+            .facts()
+            .iter()
+            .filter(|fact| names.contains(fact.name.as_str()))
+        {
+            if let FactData::Enum { repr, variants, .. } = &fact.data {
+                let members = variants
+                    .iter()
+                    .map(|member| (member.name.clone(), member.value))
+                    .collect::<BTreeMap<_, _>>();
+                if let Some(previous) = native_members.insert(fact.name.clone(), members.clone())
+                    && previous != members
+                {
+                    native_member_disagreements
+                        .push(format!("{}: {previous:?} != {members:?}", fact.name));
+                }
+                let values = variants
+                    .iter()
+                    .map(|member| {
+                        let value = match repr {
+                            windows_clang::Scalar::U32 => {
+                                assert!(
+                                    (i64::from(i32::MIN)..=i64::from(u32::MAX))
+                                        .contains(&member.value)
+                                );
+                                // Clang's signed value slot can carry a sign-extended U32.
+                                i64::from(member.value as u32)
+                            }
+                            windows_clang::Scalar::I32 => {
+                                i64::from(i32::try_from(member.value).unwrap())
+                            }
+                            other => panic!(
+                                "{} unexpected native enum representation: {other:?}",
+                                fact.name
+                            ),
+                        };
+                        (member.name.clone(), value)
+                    })
+                    .collect::<BTreeMap<_, _>>();
+                if let Some(previous) = emitted_members.insert(fact.name.clone(), values.clone()) {
+                    assert_eq!(previous, values, "{} repr-aware native values", fact.name);
+                }
+            }
+        }
+        std::fs::write(
+            output.join("native-members.txt"),
+            format!("{native_members:#?}\n"),
+        )
+        .unwrap();
+        std::fs::write(
+            output.join("native-member-disagreements.txt"),
+            native_member_disagreements.join("\n"),
+        )
+        .unwrap();
+        std::fs::write(
+            output.join("expected-emitted-members.txt"),
+            format!("{emitted_members:#?}\n"),
+        )
+        .unwrap();
+        assert_eq!(native_members.len(), 7, "all seven native enum providers");
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        let mut baseline = LibraryMap::default();
+        for name in crate::win32_headers::IMPORT_LIBS {
+            baseline.import_library(&directory.join(name)).unwrap();
+        }
+        let mut candidate = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![directory],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            candidate.import_library(&path).unwrap();
+        }
+        for (name, dll) in &baseline.0 {
+            assert_eq!(
+                candidate.resolved_library(name),
+                Some(dll.as_str()),
+                "{name}"
+            );
+        }
+        apply_library_overrides(&mut baseline).unwrap();
+        apply_library_overrides(&mut candidate).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut failures = Vec::new();
+        let mut emitted = Vec::new();
+        let excluded_functions = traversal
+            .partitions
+            .iter()
+            .flat_map(|partition| partition.policy.exclusions.iter().cloned())
+            .chain(
+                HEADER_POLICY_OVERRIDE_CONTRACTS
+                    .iter()
+                    .flat_map(|contract| contract.excluded_names.iter().copied())
+                    .map(str::to_string),
+            )
+            .collect::<BTreeSet<_>>();
+        let has_import_annotation = |fact: &windows_clang::Fact| {
+            snapshot
+                .annotations()
+                .get(&AnnotationTarget::Declaration(fact.origin.clone()))
+                .is_some_and(|annotations| {
+                    annotations
+                        .iter()
+                        .any(|annotation| matches!(annotation, Annotation::ImportLibrary(_)))
+                })
+        };
+        for (label, native) in [
+            ("original-180", &baseline),
+            ("supplemented-247", &candidate),
+        ] {
+            let root = output.join(label);
+            std::fs::create_dir(&root).unwrap();
+            let libraries = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root)
+                .filter_map(|fact| {
+                    let FactData::Function { link_name, .. } = &fact.data else {
+                        return None;
+                    };
+                    native
+                        .resolved_library(link_name)
+                        .map(|dll| (link_name.clone(), dll.to_string()))
+                })
+                .collect::<BTreeMap<_, _>>();
+            let selected = implicit_selected_functions(
+                &snapshot,
+                &excluded_functions,
+                &libraries,
+                has_import_annotation,
+            );
+            std::fs::write(
+                root.join("selected-functions.txt"),
+                format!("{selected:#?}\n"),
+            )
+            .unwrap();
+            std::fs::write(root.join("libraries.txt"), format!("{libraries:#?}\n")).unwrap();
+            let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+            emit.functions = Some(&selected);
+            emit.libraries = Some(&libraries);
+            match plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64") {
+                Ok(partitions) => emitted.push((root, partitions)),
+                Err(error) => {
+                    std::fs::write(root.join("planning-error.txt"), &error).unwrap();
+                    failures.push(format!("{label}: {error}"));
+                }
+            }
+        }
+        assert!(failures.is_empty(), "{}", failures.join("\n"));
+        let mut conflicting_policy = policy.clone();
+        let provider_input = path_arg(&output.join("providers.cpp"), "--partition").unwrap();
+        let provider_header = path_arg(
+            &win_sdk
+                .join("RecompiledIdlHeaders")
+                .join("um")
+                .join("wincrypt.h"),
+            "--include",
+        )
+        .unwrap();
+        conflicting_policy.add_traversed_header_for_input(
+            provider_input,
+            provider_header,
+            RootPartition::new("ConflictingProvider", "Test.ConflictingProvider"),
+        );
+        let conflicting_emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        let conflict = plan_header_partitions(
+            &snapshot,
+            &conflicting_policy,
+            &authorities,
+            &conflicting_emit,
+            "x64",
+        )
+        .expect_err("genuine competing provider ownership must remain an error");
+        std::fs::write(output.join("true-conflict.txt"), &conflict).unwrap();
+        assert!(
+            conflict.contains("CERT_ALT_NAME") && conflict.contains("Test.ConflictingProvider"),
+            "{conflict}"
+        );
+        for (root, partitions) in emitted {
+            let rdl = root.join("rdl");
+            std::fs::create_dir(&rdl).unwrap();
+            write_partitioned_rdl(&rdl, partitions).unwrap();
+            let image = root.join("Windows.Win32.winmd");
+            compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &image).unwrap();
+            let index = Index::read(&image).unwrap();
+            let mut associations = BTreeMap::<String, Vec<String>>::new();
+            let mut record = |slot: String, values: Vec<(String, Value)>| {
+                for (_, value) in values {
+                    if let Value::Utf8(name) = value
+                        && names.contains(name.as_str())
+                    {
+                        associations.entry(name).or_default().push(slot.clone());
+                    }
+                }
+            };
+            for definition in index.types() {
+                for field in definition.fields() {
+                    if let Some(attribute) = field.find_attribute("AssociatedEnumAttribute") {
+                        record(
+                            format!(
+                                "{}.{}.{}",
+                                definition.namespace(),
+                                definition.name(),
+                                field.name()
+                            ),
+                            attribute.value(),
+                        );
+                    }
+                }
+                for method in definition.methods() {
+                    for parameter in method.params() {
+                        if let Some(attribute) = parameter.find_attribute("AssociatedEnumAttribute")
+                        {
+                            record(
+                                format!(
+                                    "{}.{}.{}:{}",
+                                    definition.namespace(),
+                                    definition.name(),
+                                    method.name(),
+                                    parameter.sequence()
+                                ),
+                                attribute.value(),
+                            );
+                        }
+                    }
+                }
+            }
+            std::fs::write(
+                root.join("associations.txt"),
+                format!("{associations:#?}\n"),
+            )
+            .unwrap();
+            assert_eq!(
+                associations.len(),
+                7,
+                "all seven annotation families survive"
+            );
+            for (name, expected_namespace) in [
+                (
+                    "CERT_ALT_NAME",
+                    "Windows.Win32.Security.Cryptography.Certificates.",
+                ),
+                (
+                    "CERT_RDN_ATTR_VALUE_TYPE",
+                    "Windows.Win32.Security.Cryptography.Certificates.",
+                ),
+                (
+                    "CERT_QUERY_ENCODING_TYPE",
+                    "Windows.Win32.Security.Cryptography.Sip.",
+                ),
+                (
+                    "CM_DEVNODE_STATUS_FLAGS",
+                    "Windows.Win32.Devices.DeviceAndDriverInstallation.",
+                ),
+                ("CRYPT_KEY_FLAGS", "Windows.Win32.Security.Cryptography.UI."),
+                (
+                    "OBJECT_SECURITY_INFORMATION",
+                    "Windows.Win32.Networking.Clustering.",
+                ),
+                (
+                    "VARENUM",
+                    "Windows.Win32.System.Diagnostics.Debug.Extensions.",
+                ),
+                ("VARENUM", "Windows.Win32.System.Search."),
+            ] {
+                assert!(
+                    associations[name]
+                        .iter()
+                        .any(|slot| slot.starts_with(expected_namespace)),
+                    "{name} must retain its {expected_namespace} consumer binding"
+                );
+            }
+            for (name, namespace, width, flags) in &enums {
+                assert_eq!(
+                    index.types().filter(|ty| ty.name() == *name).count(),
+                    1,
+                    "{name} unique route"
+                );
+                let definition = index.expect(namespace, name);
+                assert_eq!(
+                    definition
+                        .fields()
+                        .find(|field| field.name() == "value__")
+                        .unwrap()
+                        .ty(),
+                    *width,
+                    "{name} native width"
+                );
+                let actual = definition
+                    .fields()
+                    .filter_map(|field| {
+                        field.constant().map(|constant| {
+                            let value = match constant.value() {
+                                Value::I32(value) => i64::from(value),
+                                Value::U32(value) => i64::from(value),
+                                other => panic!(
+                                    "{name}.{} changed native value kind: {other:?}",
+                                    field.name()
+                                ),
+                            };
+                            (field.name().to_string(), value)
+                        })
+                    })
+                    .collect::<BTreeMap<_, _>>();
+                assert_eq!(actual, emitted_members[*name], "{name} native members");
+                assert_eq!(
+                    definition
+                        .find_attribute("FlagsAttribute")
+                        .is_some_and(|attribute| attribute.namespace() == "System"),
+                    *flags,
+                    "{name} native Flags/plain"
+                );
+            }
+        }
+    }
+
     fn scratch(name: &str) -> PathBuf {
         let path =
             std::env::temp_dir().join(format!("win32metadata-tools-{name}-{}", std::process::id()));
@@ -6147,18 +7746,179 @@ mod tests {
 
     #[test]
     fn checked_in_gdiplus_imports_emit_all_supported_native_functions() {
+        let win_sdk = checked_in_win_sdk();
         for target in ["x64", "x86"] {
-            check_gdiplus_imported_functions(target);
+            let root = scratch(&format!("gdiplus-imported-functions-{target}"));
+            let index = check_gdiplus_imported_functions(target, &win_sdk, &root);
+            assert_gdiplus_geometry_layouts(&index, target, false);
+            std::fs::remove_dir_all(root).unwrap();
         }
     }
 
-    fn check_gdiplus_imported_functions(target: &str) {
+    #[test]
+    #[ignore = "requires an annotated SDK cohort in WIN32METADATA_GDIPLUS_INPUT_ROOT and a fresh WIN32METADATA_GDIPLUS_OUTPUT_ROOT"]
+    fn sdk_partitioned_gdiplus_preserves_native_opaque_pointers() {
+        check_partitioned_gdiplus_native_opaque_pointers();
+    }
+
+    #[test]
+    #[ignore = "requires the GDI+ opaque and filename annotations in WIN32METADATA_GDIPLUS_INPUT_ROOT and a fresh WIN32METADATA_GDIPLUS_OUTPUT_ROOT"]
+    fn sdk_partitioned_gdiplus_preserves_wide_filenames() {
+        use windows_metadata::ParamAttributes;
+
+        let index = check_partitioned_gdiplus_native_opaque_pointers();
+        let mut observed = String::new();
+        for name in ["GdipCreateBitmapFromFile", "GdipCreateBitmapFromFileICM"] {
+            let Item::Fn(method) = index.expect_item("Windows.Win32.Graphics.GdiPlus", name) else {
+                panic!("missing {name}");
+            };
+            let signature = method.signature(&[]);
+            assert_pcwstr(&index, &signature.types[0]);
+            let rows = method.params_by_sequence(signature.types.len()).unwrap();
+            assert_eq!(rows.params()[0].unwrap().flags(), ParamAttributes::In);
+            observed.push_str(&format!("{name}:0\t{:?}\n", signature.types[0]));
+        }
+        let output = PathBuf::from(std::env::var_os("WIN32METADATA_GDIPLUS_OUTPUT_ROOT").unwrap());
+        std::fs::write(output.join("wide-filenames.txt"), &observed).unwrap();
+        println!("{observed}PASS: both native filename inputs retain PCWSTR identity.");
+    }
+
+    fn check_partitioned_gdiplus_native_opaque_pointers() -> Index {
+        use windows_metadata::{HasAttributes, Type};
+
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_GDIPLUS_INPUT_ROOT")
+                .expect("set WIN32METADATA_GDIPLUS_INPUT_ROOT to the annotated generation/WinSDK"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_GDIPLUS_OUTPUT_ROOT")
+                .expect("set WIN32METADATA_GDIPLUS_OUTPUT_ROOT to a new evidence directory"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let index = check_gdiplus_imported_functions("x64", &win_sdk, &output);
+        assert_gdiplus_geometry_layouts(&index, "x64", true);
+        let namespace = "Windows.Win32.Graphics.GdiPlus";
+        let opaque_types = [
+            "GpGraphics",
+            "GpBrush",
+            "GpTexture",
+            "GpSolidFill",
+            "GpLineGradient",
+            "GpPathGradient",
+            "GpHatch",
+            "GpPen",
+            "GpCustomLineCap",
+            "GpAdjustableArrowCap",
+            "GpImage",
+            "GpBitmap",
+            "GpMetafile",
+            "GpImageAttributes",
+            "GpPath",
+            "GpRegion",
+            "GpPathIterator",
+            "GpFontFamily",
+            "GpFont",
+            "GpStringFormat",
+            "GpFontCollection",
+        ];
+        for name in opaque_types {
+            let definition = index.expect(namespace, name);
+            assert_eq!(
+                definition.category(),
+                windows_metadata::reader::TypeCategory::Struct,
+                "{name}"
+            );
+            assert_eq!(definition.fields().count(), 0, "{name} fields");
+            assert_eq!(definition.methods().count(), 0, "{name} methods");
+            assert!(definition.class_layout().is_none(), "{name} layout");
+            assert!(
+                !definition.has_attribute("NativeInheritanceAttribute"),
+                "{name} native inheritance"
+            );
+        }
+        let controls = [
+            ("GdipCreatePath", 1, "GpPath", 2),
+            ("GdipDeletePath", 0, "GpPath", 1),
+            ("GdipCreateBitmapFromFile", 1, "GpBitmap", 2),
+            ("GdipDisposeImage", 0, "GpImage", 1),
+            ("GdipGetImageGraphicsContext", 0, "GpImage", 1),
+            ("GdipGetImageGraphicsContext", 1, "GpGraphics", 2),
+            ("GdipDeleteGraphics", 0, "GpGraphics", 1),
+        ];
+        let mut observed = String::new();
+        for (name, position, pointee, depth) in controls {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing {name}");
+            };
+            let actual = method.signature(&[]).types[position].clone();
+            assert_eq!(
+                actual,
+                Type::PtrMut(Box::new(Type::value_named(namespace, pointee)), depth),
+                "{name}:{position}"
+            );
+            observed.push_str(&format!("{name}:{position}\t{actual:?}\n"));
+        }
+        let matrices = index
+            .types()
+            .filter(|definition| definition.name() == "Matrix")
+            .collect::<Vec<_>>();
+        let [matrix] = matrices.as_slice() else {
+            panic!(
+                "expected one nominal Matrix definition, got {}",
+                matrices.len()
+            );
+        };
+        assert_eq!(
+            matrix.category(),
+            windows_metadata::reader::TypeCategory::Struct,
+            "Matrix must not project native inheritance"
+        );
+        assert_eq!(matrix.fields().count(), 0, "Matrix fields");
+        assert_eq!(matrix.methods().count(), 0, "Matrix methods");
+        assert!(matrix.class_layout().is_none(), "Matrix layout");
+        assert!(
+            !matrix.has_attribute("NativeInheritanceAttribute"),
+            "Matrix native inheritance"
+        );
+        let matrix_type = Type::value_named(matrix.namespace(), matrix.name());
+        let matrix_pointee = if index.contains(namespace, "GpMatrix") {
+            assert_eq!(
+                index.expect(namespace, "GpMatrix").underlying_type(),
+                Some(matrix_type),
+                "the native typedef must lead to the marked Matrix definition"
+            );
+            Type::value_named(namespace, "GpMatrix")
+        } else {
+            matrix_type
+        };
+        let Item::Fn(create_matrix) = index.expect_item(namespace, "GdipCreateMatrix") else {
+            panic!("missing GdipCreateMatrix");
+        };
+        assert_eq!(
+            create_matrix.signature(&[]).types,
+            [Type::PtrMut(Box::new(matrix_pointee), 2)],
+            "native GpMatrix** must reach the marked Matrix definition"
+        );
+        observed.push_str(&format!(
+            "GdipCreateMatrix:0\t{:?}\nMatrix definition: {}.{}\n",
+            create_matrix.signature(&[]).types[0],
+            matrix.namespace(),
+            matrix.name()
+        ));
+        std::fs::write(output.join("opaque-pointers.txt"), &observed).unwrap();
+        let result = "PASS: 629 import-backed GDI+ functions, native calling conventions, geometry layouts/aliases, 22 nominal definitions, and eight native pointer slots.\n";
+        std::fs::write(output.join("result.txt"), result).unwrap();
+        println!("{observed}{result}Evidence: {}", output.display());
+        index
+    }
+
+    fn check_gdiplus_imported_functions(target: &str, win_sdk: &Path, root: &Path) -> Index {
         ensure_libclang();
         let architecture = arch(target).unwrap();
-        let root = scratch(&format!("gdiplus-imported-functions-{target}"));
-        let win_sdk = checked_in_win_sdk();
-        let include_dirs = checked_in_include_dirs(&win_sdk);
-        let traversal = checked_in_traversal_policy();
+        let include_dirs = checked_in_include_dirs(win_sdk);
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &include_dirs)
+                .unwrap();
         let gdiplus = logical_partition(&traversal, "Gdiplus").unwrap();
         let roots = gdiplus
             .roots
@@ -6204,6 +7964,9 @@ mod tests {
                 libclang::clang_resource_dir(&staged_tools).unwrap(),
             ]);
         }
+        std::fs::write(root.join("input.cpp"), &source).unwrap();
+        std::fs::write(root.join("arguments.txt"), args.join("\n")).unwrap();
+        std::fs::write(root.join("roots.txt"), roots.join("\n")).unwrap();
         let snapshot = windows_clang::extract(
             [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
             &args.iter().map(String::as_str).collect::<Vec<_>>(),
@@ -6270,6 +8033,11 @@ mod tests {
         let excluded = BTreeSet::new();
         let selected = implicit_selected_functions(&snapshot, &excluded, &libraries, |_| false);
         assert_eq!(selected.len(), 629);
+        std::fs::write(
+            root.join("selected.txt"),
+            selected.iter().cloned().collect::<Vec<_>>().join("\n"),
+        )
+        .unwrap();
         let unsupported = BTreeSet::from([
             "GdipSetImageAttributesICMMode",
             "GdipFontCollectionEnumerable",
@@ -6304,7 +8072,6 @@ mod tests {
         let winmd = root.join("GdiPlus.winmd");
         compile_inputs(&[rdl], &[], "GdiPlus", None, &winmd).unwrap();
         let index = Index::read(&winmd).unwrap();
-        assert_gdiplus_geometry_layouts(&index, target);
         let namespace = "Windows.Win32.Graphics.GdiPlus";
         let emitted = index
             .iter_items()
@@ -6358,10 +8125,10 @@ mod tests {
                 fact.name
             );
         }
-        std::fs::remove_dir_all(root).unwrap();
+        index
     }
 
-    fn assert_gdiplus_geometry_layouts(index: &Index, target: &str) {
+    fn assert_gdiplus_geometry_layouts(index: &Index, target: &str, opaque_classes: bool) {
         use windows_metadata::reader::TypeCategory;
         use windows_metadata::{Type, TypeAttributes};
 
@@ -6494,8 +8261,20 @@ mod tests {
                 panic!("missing `{name}`");
             };
             let signature = method.signature(&[]);
+            let path_type = if opaque_classes {
+                Type::value_named(
+                    namespace,
+                    if name.starts_with("GdipGetPathGradient") {
+                        "GpPathGradient"
+                    } else {
+                        "GpPath"
+                    },
+                )
+            } else {
+                Type::Void
+            };
             let mut expected = vec![
-                Type::PtrMut(Box::new(Type::Void), 1),
+                Type::PtrMut(Box::new(path_type), 1),
                 Type::PtrMut(Box::new(Type::value_named(namespace, alias)), 1),
             ];
             if has_count {
@@ -6512,7 +8291,12 @@ mod tests {
             panic!("missing GdipAddPathArc");
         };
         let signature = method.signature(&[]);
-        let mut expected = vec![Type::PtrMut(Box::new(Type::Void), 1)];
+        let path_type = if opaque_classes {
+            Type::value_named(namespace, "GpPath")
+        } else {
+            Type::Void
+        };
+        let mut expected = vec![Type::PtrMut(Box::new(path_type), 1)];
         expected.resize(7, Type::F32);
         assert_eq!(signature.types, expected);
         assert_eq!(
@@ -9573,12 +11357,13 @@ mod tests {
     }
 
     #[test]
-    fn sdk_import_libraries_include_gdiplus_without_discovering_unlisted_files() {
+    fn sdk_import_libraries_include_traversed_partitions_without_discovering_unlisted_files() {
         let root = scratch("sdk-import-libraries");
         for name in crate::win32_headers::IMPORT_LIBS
             .iter()
+            .chain(crate::win32_headers::PARTITION_IMPORT_LIBS)
             .copied()
-            .chain(["gdiplus.lib", "unlisted.lib"])
+            .chain(["unlisted.lib"])
         {
             std::fs::write(root.join(name), b"").unwrap();
         }
@@ -9590,17 +11375,466 @@ mod tests {
         let files = lib_files(&options).unwrap();
         assert!(files.contains(&root.join("gdiplus.lib")));
         assert!(!files.contains(&root.join("unlisted.lib")));
+        for name in crate::win32_headers::PARTITION_IMPORT_LIBS {
+            assert!(files.contains(&root.join(name)), "missing {name}");
+        }
         assert_eq!(
             files,
             crate::win32_headers::IMPORT_LIBS
                 .iter()
+                .chain(crate::win32_headers::PARTITION_IMPORT_LIBS)
                 .map(|name| root.join(name))
                 .collect::<Vec<_>>()
         );
+        for architecture in ["x64", "x86", "arm64"] {
+            assert_eq!(
+                lib_files(&Options {
+                    archs: vec![architecture.to_string()],
+                    win32_sdk: true,
+                    libs: vec![root.clone()],
+                    ..Default::default()
+                })
+                .unwrap(),
+                files,
+                "the target architecture must not change the supplied import corpus"
+            );
+        }
+        let supplemental = crate::win32_headers::PARTITION_IMPORT_LIBS[0];
+        std::fs::remove_file(root.join(supplemental)).unwrap();
+        let error = lib_files(&options).unwrap_err();
+        assert!(error.contains(supplemental), "{error}");
+        std::fs::write(root.join(supplemental), b"").unwrap();
         std::fs::remove_file(root.join("gdiplus.lib")).unwrap();
         let error = lib_files(&options).unwrap_err();
         assert!(error.contains("gdiplus.lib"), "{error}");
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn required_partition_imports_preserve_existing_native_library_choices() {
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        let mut previous = LibraryMap::default();
+        for name in crate::win32_headers::IMPORT_LIBS {
+            previous.import_library(&directory.join(name)).unwrap();
+        }
+        let mut current = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![directory],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            current.import_library(&path).unwrap();
+        }
+        for (symbol, library) in &previous.0 {
+            assert_eq!(
+                current.resolved_library(symbol),
+                Some(library.as_str()),
+                "existing first-wins native mapping changed for {symbol}"
+            );
+        }
+        let mut new_providers = BTreeMap::<String, BTreeSet<String>>::new();
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        for name in crate::win32_headers::PARTITION_IMPORT_LIBS {
+            for import in
+                windows_rdl::implib::read(&std::fs::read(directory.join(name)).unwrap()).unwrap()
+            {
+                if previous.resolved_library(&import.symbol).is_none() {
+                    new_providers
+                        .entry(import.symbol)
+                        .or_default()
+                        .insert(import.dll.to_ascii_lowercase());
+                }
+            }
+        }
+        for (symbol, libraries) in new_providers {
+            assert_eq!(
+                libraries.len(),
+                1,
+                "new native library conflict for {symbol}: {libraries:?}"
+            );
+        }
+        for (symbol, library) in [
+            ("lineAccept", "tapi32.dll"),
+            ("ResUtilGetProperties", "resutils.dll"),
+            ("GetIScsiInitiatorNodeNameW", "iscsidsc.dll"),
+        ] {
+            assert!(previous.resolved_library(symbol).is_none(), "{symbol}");
+            assert!(
+                current
+                    .resolved_library(symbol)
+                    .is_some_and(|actual| actual.eq_ignore_ascii_case(library)),
+                "{symbol} must resolve from the required native SDK archive"
+            );
+        }
+        apply_library_overrides(&mut current).unwrap();
+    }
+
+    #[test]
+    #[ignore = "requires frozen WIN32METADATA_IMPORTS_INPUT_ROOT, tab-separated WIN32METADATA_IMPORTS_EXPECTED, and fresh WIN32METADATA_IMPORTS_OUTPUT_ROOT"]
+    fn sdk_partitioned_required_libraries_restore_native_imports() {
+        use windows_metadata::{HasAttributes, Type};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_IMPORTS_INPUT_ROOT").expect("set the frozen SDK input"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_IMPORTS_OUTPUT_ROOT").expect("set a fresh output root"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let expected_path = std::env::var_os("WIN32METADATA_IMPORTS_EXPECTED")
+            .expect("set the native test inventory");
+        let expected_text = std::fs::read_to_string(expected_path).unwrap();
+        std::fs::write(output.join("expected.tsv"), &expected_text).unwrap();
+        let mut groups = BTreeMap::<(String, String, String), BTreeMap<String, String>>::new();
+        for line in expected_text.lines() {
+            let columns = line.split('\t').collect::<Vec<_>>();
+            let [owner, header, namespace, name, dll] = columns.as_slice() else {
+                panic!("expected owner, header, namespace, entrypoint, and native DLL: {line}");
+            };
+            assert!(
+                groups
+                    .entry((owner.to_string(), header.to_string(), namespace.to_string()))
+                    .or_default()
+                    .insert(name.to_string(), dll.to_string())
+                    .is_none(),
+                "duplicate native expectation: {line}"
+            );
+        }
+        assert!(!groups.is_empty());
+        let includes = checked_in_include_dirs(&win_sdk);
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        let mut baseline = LibraryMap::default();
+        for name in crate::win32_headers::IMPORT_LIBS {
+            baseline.import_library(&directory.join(name)).unwrap();
+        }
+        let mut candidate = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![directory.clone()],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            candidate.import_library(&path).unwrap();
+        }
+        for (name, dll) in &baseline.0 {
+            assert_eq!(
+                candidate.resolved_library(name),
+                Some(dll.as_str()),
+                "{name}"
+            );
+        }
+        let mut providers = BTreeMap::<String, BTreeSet<String>>::new();
+        let mut provider_rows = Vec::new();
+        for name in crate::win32_headers::PARTITION_IMPORT_LIBS {
+            for import in
+                windows_rdl::implib::read(&std::fs::read(directory.join(name)).unwrap()).unwrap()
+            {
+                if baseline.resolved_library(&import.symbol).is_none() {
+                    provider_rows.push(format!("{}\t{}\t{name}", import.symbol, import.dll));
+                }
+                providers
+                    .entry(import.symbol)
+                    .or_default()
+                    .insert(import.dll.to_ascii_lowercase());
+            }
+        }
+        std::fs::write(output.join("new-providers.tsv"), provider_rows.join("\n")).unwrap();
+        for (name, dlls) in &providers {
+            if baseline.resolved_library(name).is_none() {
+                assert_eq!(
+                    dlls.len(),
+                    1,
+                    "conflicting new native providers for {name}: {dlls:?}"
+                );
+            }
+        }
+        apply_library_overrides(&mut baseline).unwrap();
+        apply_library_overrides(&mut candidate).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut recovered = Vec::new();
+        let mut newly_emitted = Vec::new();
+        for (number, ((owner, header, namespace), expected)) in groups.iter().enumerate() {
+            let root = output.join(format!("{number:03}-{owner}"));
+            std::fs::create_dir(&root).unwrap();
+            let header_path = path_arg(&win_sdk.join(header), "--include").unwrap();
+            let source =
+                std::fs::read_to_string(win_sdk.join("Partitions").join(owner).join("main.cpp"))
+                    .unwrap();
+            let source = format!("{WIN32_SDK_PRELUDE}\n{source}");
+            let mut roots = vec![header_path.clone()];
+            let mut policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header_path,
+                convert_root_partition(logical_partition(&traversal, owner).unwrap()),
+            );
+            if owner == "Ndf" {
+                let sockets = path_arg(
+                    &win_sdk
+                        .join("RecompiledIdlHeaders")
+                        .join("shared")
+                        .join("ws2def.h"),
+                    "--include",
+                )
+                .unwrap();
+                policy = policy.with_traversed_header_for_input(
+                    AGGREGATE_INPUT,
+                    sockets.clone(),
+                    convert_root_partition(logical_partition(&traversal, "WinSock").unwrap()),
+                );
+                roots.push(sockets);
+            }
+            let args = checked_in_clang_args(&includes);
+            std::fs::write(root.join("input.cpp"), &source).unwrap();
+            std::fs::write(root.join("arguments.txt"), args.join("\n")).unwrap();
+            std::fs::write(root.join("roots.txt"), roots.join("\n")).unwrap();
+            let snapshot = windows_clang::extract(
+                [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
+                &args.iter().map(String::as_str).collect::<Vec<_>>(),
+            )
+            .unwrap();
+            if owner == "Ndf" {
+                assert!(
+                    !snapshot
+                        .facts()
+                        .iter()
+                        .any(|fact| fact.name == "SOCKET_ADDRESS_LIST"
+                            && fact
+                                .spelling
+                                .file
+                                .to_ascii_lowercase()
+                                .ends_with("/ndfapi.h")),
+                    "production winsock2 prelude must suppress the Ndf-local forward declaration"
+                );
+            }
+            let facts = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root && matches!(fact.data, FactData::Function { .. }))
+                .map(|fact| (fact.name.as_str(), fact))
+                .collect::<BTreeMap<_, _>>();
+            std::fs::write(root.join("native-facts.txt"), format!("{facts:#?}")).unwrap();
+            let mut indices = Vec::new();
+            for (label, native) in [("baseline", &baseline), ("candidate", &candidate)] {
+                let libraries = snapshot
+                    .facts()
+                    .iter()
+                    .filter_map(|fact| {
+                        let FactData::Function { link_name, .. } = &fact.data else {
+                            return None;
+                        };
+                        native
+                            .resolved_library(link_name)
+                            .map(|dll| (link_name.clone(), dll.to_string()))
+                    })
+                    .collect::<BTreeMap<_, _>>();
+                let selected =
+                    implicit_selected_functions(&snapshot, &BTreeSet::new(), &libraries, |_| false);
+                let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+                emit.functions = Some(&selected);
+                emit.libraries = Some(&libraries);
+                let partitions =
+                    plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+                let rdl = root.join(format!("{label}-rdl"));
+                std::fs::create_dir(&rdl).unwrap();
+                if partitions.is_empty() {
+                    assert_eq!(label, "baseline", "the candidate must emit native APIs");
+                    std::fs::write(root.join("baseline-empty.txt"), "The production plan emitted no RDL partitions with the original import libraries.\n").unwrap();
+                    indices.push(None);
+                    continue;
+                }
+                write_partitioned_rdl(&rdl, partitions).unwrap();
+                let image = root.join(format!("{label}.winmd"));
+                compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &image).unwrap();
+                indices.push(Some(Index::read(&image).unwrap()));
+            }
+            let inventory = |index: &Index| {
+                index
+                    .iter_items()
+                    .filter_map(|(ns, name, item)| {
+                        let Item::Fn(method) = item else {
+                            return None;
+                        };
+                        let import = method.impl_map()?;
+                        Some((
+                            (ns.to_string(), name.to_string()),
+                            format!(
+                                "{}\t{}\t{}\t{:?}\t{:?}\t{:?}\t{:?}",
+                                import.import_scope().name(),
+                                import.import_name(),
+                                method.calling_convention(),
+                                method.signature(&[]),
+                                method
+                                    .attributes()
+                                    .map(|attribute| (
+                                        attribute.namespace(),
+                                        attribute.name(),
+                                        attribute.value()
+                                    ))
+                                    .collect::<Vec<_>>(),
+                                method.flags(),
+                                method
+                                    .params()
+                                    .map(|parameter| (
+                                        parameter.sequence(),
+                                        parameter.name().to_string(),
+                                        parameter.flags(),
+                                        parameter
+                                            .attributes()
+                                            .map(|attribute| (
+                                                attribute.namespace(),
+                                                attribute.name(),
+                                                attribute.value(),
+                                            ))
+                                            .collect::<Vec<_>>(),
+                                    ))
+                                    .collect::<Vec<_>>(),
+                            ),
+                        ))
+                    })
+                    .collect::<BTreeMap<_, _>>()
+            };
+            let previous = match &indices[0] {
+                Some(index) => inventory(index),
+                None => BTreeMap::new(),
+            };
+            let candidate_index = indices[1].as_ref().expect("candidate native metadata");
+            let current = inventory(candidate_index);
+            for (key, value) in &previous {
+                assert_eq!(
+                    current.get(key),
+                    Some(value),
+                    "changed previous import {key:?}"
+                );
+            }
+            std::fs::write(root.join("baseline-imports.txt"), format!("{previous:#?}")).unwrap();
+            std::fs::write(root.join("candidate-imports.txt"), format!("{current:#?}")).unwrap();
+            for (actual_namespace, name) in
+                current.keys().filter(|key| !previous.contains_key(*key))
+            {
+                let fact = facts
+                    .get(name.as_str())
+                    .unwrap_or_else(|| panic!("missing native {name}"));
+                let FactData::Function {
+                    link_name,
+                    params,
+                    convention,
+                    ..
+                } = &fact.data
+                else {
+                    unreachable!()
+                };
+                assert!(
+                    baseline.resolved_library(link_name).is_none(),
+                    "{name} already supplied"
+                );
+                let dlls = providers.get(link_name).expect("new native provider");
+                assert_eq!(dlls.len(), 1, "new native provider conflict for {name}");
+                let dll = dlls.first().unwrap();
+                let Item::Fn(method) = candidate_index.expect_item(actual_namespace, name) else {
+                    panic!("missing recovered {name}");
+                };
+                let import = method.impl_map().unwrap();
+                assert_eq!(import.import_name(), link_name);
+                assert!(
+                    import.import_scope().name().eq_ignore_ascii_case(dll),
+                    "{name}"
+                );
+                let expected_convention = match convention {
+                    windows_clang::CallingConvention::Platform => "system",
+                    windows_clang::CallingConvention::C => "C",
+                };
+                assert_eq!(method.calling_convention(), expected_convention, "{name}");
+                assert_eq!(method.signature(&[]).types.len(), params.len(), "{name}");
+                let signature = method.signature(&[]);
+                match name.as_str() {
+                    "lineAccept" => {
+                        assert_eq!(signature.return_type, Type::I32);
+                        assert_eq!(signature.types[2], Type::U32);
+                    }
+                    "ResUtilGetProperties" => {
+                        assert_eq!(signature.return_type, Type::U32);
+                        assert_eq!(
+                            signature.types[3..],
+                            [
+                                Type::U32,
+                                Type::PtrMut(Box::new(Type::U32), 1),
+                                Type::PtrMut(Box::new(Type::U32), 1)
+                            ]
+                        );
+                    }
+                    "GetIScsiInitiatorNodeNameW" => {
+                        assert_eq!(signature.return_type, Type::U32);
+                        assert_eq!(signature.types, [Type::PtrMut(Box::new(Type::U16), 1)]);
+                    }
+                    "NdfCreateGroupingIncident" => {
+                        assert!(signature.types.iter().any(|ty| matches!(
+                            ty,
+                            Type::PtrMut(inner, 1) if matches!(
+                                inner.as_ref(),
+                                Type::ValueName(name) if name.namespace == "Windows.Win32.Networking.WinSock"
+                                    && name.name == "SOCKET_ADDRESS_LIST"
+                            )
+                        )), "canonical WinSock SOCKET_ADDRESS_LIST pointer: {signature:?}");
+                    }
+                    _ => {}
+                }
+                let row = format!(
+                    "{actual_namespace}\t{name}\t{dll}\t{expected_convention}\t{signature:?}"
+                );
+                newly_emitted.push(format!(
+                    "{owner}\t{header}\t{}\t{row}",
+                    expected.contains_key(name)
+                ));
+            }
+            for (name, dll) in expected {
+                let key = (namespace.clone(), name.clone());
+                assert!(!previous.contains_key(&key), "{name} was already emitted");
+                let observed = current
+                    .get(&key)
+                    .unwrap_or_else(|| panic!("missing recovered {namespace}.{name}"));
+                assert!(
+                    observed
+                        .split('\t')
+                        .next()
+                        .unwrap()
+                        .eq_ignore_ascii_case(dll),
+                    "{name}: {observed}"
+                );
+                recovered.push(format!("{namespace}\t{name}\t{observed}"));
+            }
+            std::fs::write(output.join("newly-emitted.tsv"), newly_emitted.join("\n")).unwrap();
+            std::fs::write(output.join("recovered.tsv"), recovered.join("\n")).unwrap();
+        }
+        std::fs::write(output.join("recovered.tsv"), recovered.join("\n")).unwrap();
+        println!(
+            "PASS: {} exact native imports recovered with previous import/signature/attribute inventories unchanged.",
+            recovered.len()
+        );
     }
 
     #[test]

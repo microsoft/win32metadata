@@ -11,7 +11,7 @@ name: PR Validation
 
 on:
   pull_request:
-    branches: [main, feature/shift-left-annotations]
+    branches: [main, feature/shift-left-annotations, user/jevansa/windows-rs-pipeline-wrapper]
     paths-ignore:
       - 'apidocs/**'
       - 'docs/**'
@@ -56,8 +56,26 @@ jobs:
         run: rustup show
 
       - name: Build metadata binary
+        id: metadata
         shell: pwsh
         run: .\scripts\BuildMetadataBin.ps1
+
+      - name: Verify prepared input and generated output provenance
+        shell: pwsh
+        run: |
+          .\scripts\Prepare-WindowsRsHeaders.ps1 -VerifyOutput .\bin\Windows.Win32.winmd
+          $receipt = Get-Content .\bin\Windows.Win32.winmd.provenance.json -Raw | ConvertFrom-Json
+          foreach ($option in @("--partition-policy-root", "--namespace-routes", "--win32-sdk")) {
+            if ($option -cnotin $receipt.arguments) { throw "Normal build omitted $option." }
+          }
+          $architectures = for ($i = 0; $i -lt $receipt.arguments.Count; $i++) {
+            if ($receipt.arguments[$i] -ceq "--arch") { $receipt.arguments[++$i] }
+          }
+          if (($architectures -join ";") -cne "x64;x86;arm64") { throw "Normal build architecture scope changed." }
+
+      - name: Test header preparation and patched generation
+        shell: pwsh
+        run: .\scripts\Test-WindowsRsHeaders.ps1
 
       - name: Package
         shell: pwsh
@@ -71,17 +89,12 @@ jobs:
         shell: pwsh
         run: .\scripts\DoSamples.ps1
 
-      - name: Run tests
+      - name: Run strict metadata tests
         shell: pwsh
-        run: |
-          if ("${{ github.event_name }}" -eq "pull_request" -and "${{ github.base_ref }}" -eq "feature/shift-left-annotations") {
-            .\scripts\DoTests.ps1 -AllowKnownGeneratorGaps
-          } else {
-            .\scripts\DoTests.ps1
-          }
+        run: .\scripts\DoTests.ps1
 
       - name: Download baseline winmd from target branch
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request' && steps.metadata.outcome == 'success'
         id: baseline
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
@@ -150,7 +163,7 @@ jobs:
             }
 
       - name: Generate API surface diff
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request' && steps.metadata.outcome == 'success'
         id: apidump
         shell: pwsh
         run: |
@@ -214,7 +227,7 @@ jobs:
           $global:LASTEXITCODE = 0
 
       - name: Upload API diff
-        if: github.event_name == 'pull_request'
+        if: always() && github.event_name == 'pull_request' && steps.apidump.outcome == 'success'
         uses: ./.github/actions/upload-artifact-with-retry
         with:
           name: api-diff
@@ -228,9 +241,19 @@ jobs:
           name: winmd
           path: |
             bin/Windows.Win32.winmd
+            bin/Windows.Win32.winmd.provenance.json
+            generation/WinSDK/obj/windows-rs-headers.json
             bin/current.apidump.cs
             bin/baseline.apidump.cs
             bin/api-diff.patch
+          retention-days: 90
+
+      - name: Upload strict metadata test results
+        uses: ./.github/actions/upload-artifact-with-retry
+        if: always()
+        with:
+          name: metadata-test-results
+          path: obj/Windows.Win32.Tests/results
           retention-days: 90
 
       - name: Upload build logs

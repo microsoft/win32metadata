@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Generates a WinMD from the pinned raw Windows SDK headers with windows-rs.
+    Generates a WinMD from the prepared SDK headers with windows-rs.
 
 .PARAMETER Partition
     Optional partition names under generation\WinSDK\Partitions for a focused run.
@@ -12,6 +12,10 @@
 .PARAMETER UsePartitionAuthority
     Generate one aggregate plus one satellite input, plus the two PSAPI compile variants,
     and route them with the checked-in logical partition traversal policy.
+    This is the default for production generation.
+
+.PARAMETER RawSdk
+    Use the pinned raw NuGet SDK headers without preparation or partition authority.
 
 .PARAMETER ExtractionCoverage
     Write an x64 canonical traversal-root provenance report and stop before RDL/WinMD output.
@@ -35,6 +39,8 @@ param (
 
     [switch]$UsePartitionAuthority,
 
+    [switch]$RawSdk,
+
     [string]$ExtractionCoverage,
 
     [string]$OutputWinmd = "$PSScriptRoot\..\bin\Windows.Win32.winmd",
@@ -48,6 +54,17 @@ param (
 . "$PSScriptRoot\CommonUtils.ps1"
 
 $ErrorActionPreference = "Stop"
+if ($RawSdk -and ($UsePartitionAuthority -or $Partition.Count)) {
+    throw "-RawSdk cannot be combined with -UsePartitionAuthority or -Partition."
+}
+if ($UsePartitionAuthority -and $Partition.Count) {
+    throw "-UsePartitionAuthority cannot be combined with -Partition."
+}
+$authority = if ($PSBoundParameters.ContainsKey("UsePartitionAuthority")) {
+    [bool]$UsePartitionAuthority
+} else {
+    !$RawSdk -and !$Partition.Count
+}
 $tool = Join-Path $rootDir "bin\GeneratorSdk\tools\win-x64\win32metadata-tools.exe"
 $namespaceRoutes = Join-Path $windowsWin32ProjectRoot "requiredNamespacesForNames.rsp"
 $outputPath = [System.IO.Path]::GetFullPath($OutputWinmd)
@@ -67,10 +84,10 @@ if (!(Test-Path "$rootDir\obj\BuildTools.proj\BuildTools.proj.nuget.g.props"))
 
 $sdkPackageRoot = Get-WinSdkCppPkgPath
 $headerRoot = Join-Path $sdkPackageRoot "c\include\$(Get-WinSdkHeaderVersion)"
-$useCheckedInPartitionInputs = $UsePartitionAuthority.IsPresent -or $Partition.Count -ne 0
+$useCheckedInPartitionInputs = $authority -or $Partition.Count -ne 0
 $includePaths = @(
     if ($useCheckedInPartitionInputs) {
-        Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders"
+        $recompiledIdlHeadersDir
         Join-Path $windowsWin32ProjectRoot "AdditionalHeaders\cpdk"
     }
     Join-Path $windowsWin32ProjectRoot "AdditionalHeaders"
@@ -114,20 +131,17 @@ $scopeHeaders = @(
     "Wsdevlicensing.h", "wsdevlicensing.h"
 )
 
-if ($UsePartitionAuthority.IsPresent -and $Partition.Count -ne 0) {
-    throw "-UsePartitionAuthority cannot be combined with -Partition."
-}
-if ($UsePartitionAuthority.IsPresent -and $Namespace -ne "Windows.Win32") {
+if ($authority -and $Namespace -ne "Windows.Win32") {
     throw "-UsePartitionAuthority requires -Namespace Windows.Win32."
 }
-if ($coveragePath -and !$UsePartitionAuthority.IsPresent) {
+if ($coveragePath -and !$authority) {
     throw "-ExtractionCoverage requires -UsePartitionAuthority."
 }
 if ($coveragePath -and ($Architecture.Count -ne 1 -or $Architecture[0] -ne "x64")) {
     throw "-ExtractionCoverage requires exactly -Architecture x64."
 }
 $useSdkHeaderManifest = $Partition.Count -eq 0
-if ($UsePartitionAuthority.IsPresent)
+if ($authority)
 {
     Write-Host "Generating aggregate + satellite + PSAPI variant inputs with checked-in logical partition authority for $($Architecture -join ', ')"
 }
@@ -163,7 +177,7 @@ foreach ($include in $includePaths)
     $arguments += @("--include", $include)
 }
 
-if ($UsePartitionAuthority.IsPresent)
+if ($authority)
 {
     $arguments += @(
         "--win32-sdk",
@@ -203,8 +217,14 @@ if (!(Test-Path $tool))
     throw "windows-rs metadata tool was not found at $tool."
 }
 
-& $tool @arguments
-ThrowOnNativeProcessError
+if ($useCheckedInPartitionInputs) {
+    & "$PSScriptRoot\Prepare-WindowsRsHeaders.ps1" -ToolPath $tool -ToolArguments $arguments
+    ThrowOnNativeProcessError
+}
+else {
+    & $tool @arguments
+    ThrowOnNativeProcessError
+}
 
 if ($coveragePath) {
     Write-Host "Generated extraction coverage report: $coveragePath"
