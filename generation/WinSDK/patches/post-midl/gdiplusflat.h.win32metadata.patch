@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
-index ba094eef74..146f56c953 100644
+index ba094eef74..600f366c7d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusflat.h
 @@ -1,3 +1,4 @@
@@ -425,14 +425,14 @@ index ba094eef74..146f56c953 100644
 -GdipPathIterNextSubpath(GpPathIterator* iterator, INT *resultCount,
 -        INT* startIndex, INT* endIndex, BOOL* isClosed);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterNextSubpath(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT *resultCount,
++GdipPathIterNextSubpath(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") INT *resultCount,
 +        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* startIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* endIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL* isClosed);
  
 -GpStatus WINGDIPAPI
 -GdipPathIterNextSubpathPath(GpPathIterator* iterator, INT* resultCount,
 -        GpPath* path, BOOL* isClosed);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterNextSubpathPath(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* resultCount,
++GdipPathIterNextSubpathPath(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") INT* resultCount,
 +        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath* path, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL* isClosed);
  
 -GpStatus WINGDIPAPI
@@ -445,25 +445,25 @@ index ba094eef74..146f56c953 100644
 -GdipPathIterNextMarker(GpPathIterator* iterator, INT *resultCount,
 -        INT* startIndex, INT* endIndex);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterNextMarker(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT *resultCount,
++GdipPathIterNextMarker(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") INT *resultCount,
 +        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* startIndex, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* endIndex);
  
 -GpStatus WINGDIPAPI
 -GdipPathIterNextMarkerPath(GpPathIterator* iterator, INT* resultCount,
 -        GpPath* path);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterNextMarkerPath(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* resultCount,
++GdipPathIterNextMarkerPath(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") INT* resultCount,
 +        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPath* path);
  
 -GpStatus WINGDIPAPI
 -GdipPathIterGetCount(GpPathIterator* iterator, INT* count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterGetCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
++GdipPathIterGetCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
  
 -GpStatus WINGDIPAPI
 -GdipPathIterGetSubpathCount(GpPathIterator* iterator, INT* count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterGetSubpathCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
++GdipPathIterGetSubpathCount(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") INT* count);
  
 -GpStatus WINGDIPAPI
 -GdipPathIterIsValid(GpPathIterator* iterator, BOOL* valid);
@@ -473,7 +473,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipPathIterHasCurve(GpPathIterator* iterator, BOOL* hasCurve);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipPathIterHasCurve(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL* hasCurve);
++GdipPathIterHasCurve(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathIterator* iterator, _WIN32META_ANNOTATION_("win32metadata:out") BOOL* hasCurve);
  
 -GpStatus WINGDIPAPI
 -GdipPathIterRewind(GpPathIterator* iterator);
@@ -858,7 +858,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetHatchStyle(GpHatch *brush, GpHatchStyle *hatchstyle);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetHatchStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpHatch *brush, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpHatchStyle *hatchstyle);
++GdipGetHatchStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpHatch *brush, _WIN32META_ANNOTATION_("win32metadata:out") GpHatchStyle *hatchstyle);
  
 -GpStatus WINGDIPAPI
 -GdipGetHatchForegroundColor(GpHatch *brush, ARGB* forecol);
@@ -967,7 +967,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetTextureWrapMode(GpTexture *brush, GpWrapMode *wrapmode);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetTextureWrapMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpTexture *brush, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpWrapMode *wrapmode);
++GdipGetTextureWrapMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpTexture *brush, _WIN32META_ANNOTATION_("win32metadata:out") GpWrapMode *wrapmode);
  
 -GpStatus WINGDIPAPI
 -GdipGetTextureImage(GpTexture *brush, GpImage **image);
@@ -1111,7 +1111,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetLineBlendCount(GpLineGradient *brush, INT *count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetLineGammaCorrection(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineGradient *brush, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *useGammaCorrection);
++GdipGetLineGammaCorrection(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineGradient *brush, _WIN32META_ANNOTATION_("win32metadata:out") BOOL *useGammaCorrection);
  
 -GpStatus WINGDIPAPI
 -GdipGetLineBlend(GpLineGradient *brush, REAL *blend, REAL* positions,
@@ -1169,7 +1169,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetLineTransform(GpLineGradient *brush, GpMatrix *matrix);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetLineWrapMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineGradient *brush, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpWrapMode *wrapmode);
++GdipGetLineWrapMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineGradient *brush, _WIN32META_ANNOTATION_("win32metadata:out") GpWrapMode *wrapmode);
  
 -GpStatus WINGDIPAPI
 -GdipSetLineTransform(GpLineGradient *brush, GDIPCONST GpMatrix *matrix);
@@ -1338,7 +1338,7 @@ index ba094eef74..146f56c953 100644
 -                                   BOOL *useGammaCorrection);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetPathGradientGammaCorrection(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathGradient *brush, 
-+                                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *useGammaCorrection);
++                                   _WIN32META_ANNOTATION_("win32metadata:out") BOOL *useGammaCorrection);
  
 -GpStatus WINGDIPAPI
 -GdipGetPathGradientBlendCount(GpPathGradient *brush,
@@ -1395,7 +1395,7 @@ index ba094eef74..146f56c953 100644
 -                                         GpWrapMode *wrapmode);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetPathGradientWrapMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPathGradient *brush,
-+                                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpWrapMode *wrapmode);
++                                         _WIN32META_ANNOTATION_("win32metadata:out") GpWrapMode *wrapmode);
  
 -GpStatus WINGDIPAPI
 -GdipSetPathGradientWrapMode(GpPathGradient *brush,
@@ -1501,7 +1501,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenWidth(GpPen *pen, REAL *width);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenWidth(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *width);
++GdipGetPenWidth(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") REAL *width);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenUnit(GpPen *pen, GpUnit unit);
@@ -1538,17 +1538,17 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenStartCap(GpPen *pen, GpLineCap *startCap);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenStartCap(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineCap *startCap);
++GdipGetPenStartCap(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpLineCap *startCap);
  
 -GpStatus WINGDIPAPI
 -GdipGetPenEndCap(GpPen *pen, GpLineCap *endCap);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenEndCap(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineCap *endCap);
++GdipGetPenEndCap(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpLineCap *endCap);
  
 -GpStatus WINGDIPAPI
 -GdipGetPenDashCap197819(GpPen *pen, GpDashCap *dashCap);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenDashCap197819(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpDashCap *dashCap);
++GdipGetPenDashCap197819(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpDashCap *dashCap);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenLineJoin(GpPen *pen, GpLineJoin lineJoin);
@@ -1558,7 +1558,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenLineJoin(GpPen *pen, GpLineJoin *lineJoin);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenLineJoin(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineJoin *lineJoin);
++GdipGetPenLineJoin(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpLineJoin *lineJoin);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenCustomStartCap(GpPen *pen, GpCustomLineCap* customCap);
@@ -1588,7 +1588,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenMiterLimit(GpPen *pen, REAL *miterLimit);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenMiterLimit(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *miterLimit);
++GdipGetPenMiterLimit(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") REAL *miterLimit);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenMode(GpPen *pen, GpPenAlignment penMode);
@@ -1598,7 +1598,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenMode(GpPen *pen, GpPenAlignment *penMode);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPenAlignment *penMode);
++GdipGetPenMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpPenAlignment *penMode);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenTransform(GpPen *pen, GpMatrix *matrix);
@@ -1664,12 +1664,12 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenFillType(GpPen *pen, GpPenType* type);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenFillType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPenType* type);
++GdipGetPenFillType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpPenType* type);
  
 -GpStatus WINGDIPAPI
 -GdipGetPenDashStyle(GpPen *pen, GpDashStyle *dashstyle);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenDashStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpDashStyle *dashstyle);
++GdipGetPenDashStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") GpDashStyle *dashstyle);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenDashStyle(GpPen *pen, GpDashStyle dashstyle);
@@ -1679,7 +1679,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPenDashOffset(GpPen *pen, REAL *offset);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPenDashOffset(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *offset);
++GdipGetPenDashOffset(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpPen *pen, _WIN32META_ANNOTATION_("win32metadata:out") REAL *offset);
  
 -GpStatus WINGDIPAPI
 -GdipSetPenDashOffset(GpPen *pen, REAL offset);
@@ -1772,7 +1772,7 @@ index ba094eef74..146f56c953 100644
 -                               GpLineJoin* lineJoin);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetCustomLineCapStrokeJoin(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, 
-+                               _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineJoin* lineJoin);
++                               _WIN32META_ANNOTATION_("win32metadata:out") GpLineJoin* lineJoin);
  
 -GpStatus WINGDIPAPI
 -GdipSetCustomLineCapBaseCap(GpCustomLineCap* customCap, GpLineCap baseCap);
@@ -1782,7 +1782,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetCustomLineCapBaseCap(GpCustomLineCap* customCap, GpLineCap* baseCap);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetCustomLineCapBaseCap(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpLineCap* baseCap);
++GdipGetCustomLineCapBaseCap(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, _WIN32META_ANNOTATION_("win32metadata:out") GpLineCap* baseCap);
  
 -GpStatus WINGDIPAPI
 -GdipSetCustomLineCapBaseInset(GpCustomLineCap* customCap, REAL inset);
@@ -1792,7 +1792,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetCustomLineCapBaseInset(GpCustomLineCap* customCap, REAL* inset);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetCustomLineCapBaseInset(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* inset);
++GdipGetCustomLineCapBaseInset(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, _WIN32META_ANNOTATION_("win32metadata:out") REAL* inset);
  
 -GpStatus WINGDIPAPI
 -GdipSetCustomLineCapWidthScale(GpCustomLineCap* customCap, REAL widthScale);
@@ -1802,7 +1802,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetCustomLineCapWidthScale(GpCustomLineCap* customCap, REAL* widthScale);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetCustomLineCapWidthScale(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* widthScale);
++GdipGetCustomLineCapWidthScale(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpCustomLineCap* customCap, _WIN32META_ANNOTATION_("win32metadata:out") REAL* widthScale);
  
  //----------------------------------------------------------------------------
  // AdjustableArrowCap APIs
@@ -1823,7 +1823,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetAdjustableArrowCapHeight(GpAdjustableArrowCap* cap, REAL* height);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetAdjustableArrowCapHeight(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* height);
++GdipGetAdjustableArrowCapHeight(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, _WIN32META_ANNOTATION_("win32metadata:out") REAL* height);
  
 -GpStatus WINGDIPAPI
 -GdipSetAdjustableArrowCapWidth(GpAdjustableArrowCap* cap, REAL width);
@@ -1833,7 +1833,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetAdjustableArrowCapWidth(GpAdjustableArrowCap* cap, REAL* width);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetAdjustableArrowCapWidth(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* width);
++GdipGetAdjustableArrowCapWidth(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, _WIN32META_ANNOTATION_("win32metadata:out") REAL* width);
  
 -GpStatus WINGDIPAPI
 -GdipSetAdjustableArrowCapMiddleInset(GpAdjustableArrowCap* cap, 
@@ -1847,7 +1847,7 @@ index ba094eef74..146f56c953 100644
 -                                     REAL* middleInset);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetAdjustableArrowCapMiddleInset(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, 
-+                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* middleInset);
++                                     _WIN32META_ANNOTATION_("win32metadata:out") REAL* middleInset);
  
 -GpStatus WINGDIPAPI
 -GdipSetAdjustableArrowCapFillState(GpAdjustableArrowCap* cap, BOOL fillState);
@@ -1857,7 +1857,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetAdjustableArrowCapFillState(GpAdjustableArrowCap* cap, BOOL* fillState);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetAdjustableArrowCapFillState(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL* fillState);
++GdipGetAdjustableArrowCapFillState(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpAdjustableArrowCap* cap, _WIN32META_ANNOTATION_("win32metadata:out") BOOL* fillState);
  
  //----------------------------------------------------------------------------
  // Image APIs
@@ -2633,7 +2633,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetCompositingMode(GpGraphics *graphics, CompositingMode *compositingMode);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetCompositingMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CompositingMode *compositingMode);
++GdipGetCompositingMode(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") CompositingMode *compositingMode);
  
 -GpStatus WINGDIPAPI
 -GdipSetRenderingOrigin(GpGraphics *graphics, INT x, INT y);
@@ -2657,7 +2657,7 @@ index ba094eef74..146f56c953 100644
 -                          CompositingQuality *compositingQuality);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetCompositingQuality(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, 
-+                          _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CompositingQuality *compositingQuality);
++                          _WIN32META_ANNOTATION_("win32metadata:out") CompositingQuality *compositingQuality);
                            
 -GpStatus WINGDIPAPI
 -GdipSetSmoothingMode(GpGraphics *graphics, SmoothingMode smoothingMode);
@@ -2687,7 +2687,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetTextRenderingHint(GpGraphics *graphics, TextRenderingHint *mode);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetTextRenderingHint(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") TextRenderingHint *mode);
++GdipGetTextRenderingHint(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") TextRenderingHint *mode);
  
 -GpStatus  WINGDIPAPI
 -GdipSetTextContrast(GpGraphics *graphics, UINT contrast);
@@ -2697,7 +2697,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus  WINGDIPAPI
 -GdipGetTextContrast(GpGraphics *graphics, UINT * contrast);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus  WINGDIPAPI
-+GdipGetTextContrast(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT * contrast);
++GdipGetTextContrast(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") UINT * contrast);
  
 -GpStatus WINGDIPAPI
 -GdipSetInterpolationMode(GpGraphics *graphics, 
@@ -2764,12 +2764,12 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetPageUnit(GpGraphics *graphics, GpUnit *unit);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPageUnit(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpUnit *unit);
++GdipGetPageUnit(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") GpUnit *unit);
  
 -GpStatus WINGDIPAPI
 -GdipGetPageScale(GpGraphics *graphics, REAL *scale);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetPageScale(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *scale);
++GdipGetPageScale(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") REAL *scale);
  
 -GpStatus WINGDIPAPI
 -GdipSetPageUnit(GpGraphics *graphics, GpUnit unit);
@@ -2784,12 +2784,12 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetDpiX(GpGraphics *graphics, REAL* dpi);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetDpiX(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* dpi);
++GdipGetDpiX(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") REAL* dpi);
  
 -GpStatus WINGDIPAPI
 -GdipGetDpiY(GpGraphics *graphics, REAL* dpi);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetDpiY(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL* dpi);
++GdipGetDpiY(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpGraphics *graphics, _WIN32META_ANNOTATION_("win32metadata:out") REAL* dpi);
  
 -GpStatus WINGDIPAPI
 -GdipTransformPoints(GpGraphics *graphics, GpCoordinateSpace destSpace,
@@ -4035,7 +4035,7 @@ index ba094eef74..146f56c953 100644
 -                     BOOL * IsStyleAvailable);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus   WINGDIPAPI
 +GdipIsStyleAvailable(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFontFamily *family, _WIN32META_ANNOTATION_("win32metadata:in") INT style, 
-+                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL * IsStyleAvailable);
++                     _WIN32META_ANNOTATION_("win32metadata:out") BOOL * IsStyleAvailable);
  
  GpStatus WINGDIPAPI
  GdipFontCollectionEnumerable(
@@ -4048,28 +4048,28 @@ index ba094eef74..146f56c953 100644
 -                UINT16 * EmHeight);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetEmHeight(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFontFamily *family, _WIN32META_ANNOTATION_("win32metadata:in") INT style, 
-+                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * EmHeight);
++                _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * EmHeight);
  
 -GpStatus WINGDIPAPI
 -GdipGetCellAscent(GDIPCONST GpFontFamily *family, INT style,
 -                  UINT16 * CellAscent);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetCellAscent(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFontFamily *family, _WIN32META_ANNOTATION_("win32metadata:in") INT style,
-+                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * CellAscent);
++                  _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * CellAscent);
  
 -GpStatus WINGDIPAPI
 -GdipGetCellDescent(GDIPCONST GpFontFamily *family, INT style, 
 -                   UINT16 * CellDescent);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetCellDescent(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFontFamily *family, _WIN32META_ANNOTATION_("win32metadata:in") INT style, 
-+                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * CellDescent);
++                   _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * CellDescent);
  
 -GpStatus WINGDIPAPI
 -GdipGetLineSpacing(GDIPCONST GpFontFamily *family, INT style, 
 -                   UINT16 * LineSpacing);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetLineSpacing(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFontFamily *family, _WIN32META_ANNOTATION_("win32metadata:in") INT style, 
-+                   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * LineSpacing);
++                   _WIN32META_ANNOTATION_("win32metadata:out") UINT16 * LineSpacing);
  
  
  //----------------------------------------------------------------------------
@@ -4140,29 +4140,29 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetFontStyle(GpFont *font, INT *style);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetFontStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpFont *font, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT *style);
++GdipGetFontStyle(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpFont *font, _WIN32META_ANNOTATION_("win32metadata:out") INT *style);
  
 -GpStatus WINGDIPAPI
 -GdipGetFontSize(GpFont *font, REAL *size);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetFontSize(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpFont *font, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *size);
++GdipGetFontSize(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpFont *font, _WIN32META_ANNOTATION_("win32metadata:out") REAL *size);
  
 -GpStatus WINGDIPAPI
 -GdipGetFontUnit(GpFont *font, Unit *unit);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetFontUnit(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpFont *font, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") Unit *unit);
++GdipGetFontUnit(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GpFont *font, _WIN32META_ANNOTATION_("win32metadata:out") Unit *unit);
  
 -GpStatus WINGDIPAPI
 -GdipGetFontHeight(GDIPCONST GpFont *font, GDIPCONST GpGraphics *graphics, 
 -                  REAL *height);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetFontHeight(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFont *font, _WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpGraphics *graphics, 
-+                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *height);
++                  _WIN32META_ANNOTATION_("win32metadata:out") REAL *height);
  
 -GpStatus WINGDIPAPI
 -GdipGetFontHeightGivenDPI(GDIPCONST GpFont *font, REAL dpi, REAL *height);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetFontHeightGivenDPI(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFont *font, _WIN32META_ANNOTATION_("win32metadata:in") REAL dpi, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") REAL *height);
++GdipGetFontHeightGivenDPI(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpFont *font, _WIN32META_ANNOTATION_("win32metadata:in") REAL dpi, _WIN32META_ANNOTATION_("win32metadata:out") REAL *height);
  
 -GpStatus WINGDIPAPI
 -GdipGetLogFontA(GpFont * font, GpGraphics *graphics, LOGFONTA * logfontA);
@@ -4382,7 +4382,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI GdipGetStringFormatFlags(GDIPCONST GpStringFormat *format, 
 -                                             INT *flags);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI GdipGetStringFormatFlags(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format, 
-+                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT *flags);
++                                             _WIN32META_ANNOTATION_("win32metadata:out") INT *flags);
  
 -GpStatus WINGDIPAPI
 -GdipSetStringFormatAlign(GpStringFormat *format, StringAlignment align);
@@ -4394,7 +4394,7 @@ index ba094eef74..146f56c953 100644
 -                         StringAlignment *align);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetStringFormatAlign(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format, 
-+                         _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") StringAlignment *align);
++                         _WIN32META_ANNOTATION_("win32metadata:out") StringAlignment *align);
  
 -GpStatus WINGDIPAPI
 -GdipSetStringFormatLineAlign(GpStringFormat *format,
@@ -4408,7 +4408,7 @@ index ba094eef74..146f56c953 100644
 -                             StringAlignment *align);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetStringFormatLineAlign(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format,
-+                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") StringAlignment *align);
++                             _WIN32META_ANNOTATION_("win32metadata:out") StringAlignment *align);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
@@ -4425,7 +4425,7 @@ index ba094eef74..146f56c953 100644
 -    GDIPCONST GpStringFormat *format,
 -    StringTrimming       *trimming
 +    _WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") StringTrimming       *trimming
++    _WIN32META_ANNOTATION_("win32metadata:out") StringTrimming       *trimming
  );
  
 -GpStatus WINGDIPAPI
@@ -4457,7 +4457,7 @@ index ba094eef74..146f56c953 100644
 -GpStatus WINGDIPAPI
 -GdipGetStringFormatTabStopCount(GDIPCONST GpStringFormat *format, INT * count);
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
-+GdipGetStringFormatTabStopCount(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT * count);
++GdipGetStringFormatTabStopCount(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format, _WIN32META_ANNOTATION_("win32metadata:out") INT * count);
  
 -GpStatus WINGDIPAPI
 -GdipSetStringFormatDigitSubstitution(GpStringFormat *format, LANGID language,
@@ -4473,7 +4473,7 @@ index ba094eef74..146f56c953 100644
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
 +GdipGetStringFormatDigitSubstitution(_WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat *format, 
 +                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LANGID *language,
-+                                     _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") StringDigitSubstitute *substitute);
++                                     _WIN32META_ANNOTATION_("win32metadata:out") StringDigitSubstitute *substitute);
  
 -GpStatus WINGDIPAPI
 +_Win32_ImportLibrary_("gdiplus.dll") GpStatus WINGDIPAPI
@@ -4481,7 +4481,7 @@ index ba094eef74..146f56c953 100644
 -    GDIPCONST GpStringFormat    *format,
 -    INT                         *count
 +    _WIN32META_ANNOTATION_("win32metadata:in") GDIPCONST GpStringFormat    *format,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INT                         *count
++    _WIN32META_ANNOTATION_("win32metadata:out") INT                         *count
  );
  
 -GpStatus WINGDIPAPI
