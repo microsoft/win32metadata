@@ -61,6 +61,35 @@ namespace Windows.Win32.Tests
             "WNetGetUniversalNameW::lpBuffer",
             "WSAEnumNameSpaceProvidersA::lpnspBuffer", "WSAEnumNameSpaceProvidersW::lpnspBuffer",
             "WSAEnumNameSpaceProvidersExA::lpnspBuffer", "WSAEnumNameSpaceProvidersExW::lpnspBuffer",
+            "CertCreateCTLEntryFromCertificateContextProperties::pCtlEntry",
+            "CertGetCertificateContextProperty::pvData",
+            "CertGetEnhancedKeyUsage::pUsage",
+            "CryptExportPublicKeyInfo::pInfo", "CryptExportPublicKeyInfoEx::pInfo",
+            "CryptExportPublicKeyInfoFromBCryptKeyHandle::pInfo",
+            "CryptGetObjectUrl::pUrlArray",
+            "CryptMsgGetParam::pvData",
+            "FindFirstUrlCacheEntryA::lpFirstCacheEntryInfo", "FindFirstUrlCacheEntryW::lpFirstCacheEntryInfo",
+            "FindFirstUrlCacheEntryExA::lpFirstCacheEntryInfo", "FindFirstUrlCacheEntryExW::lpFirstCacheEntryInfo",
+            "FindNextUrlCacheEntryA::lpNextCacheEntryInfo", "FindNextUrlCacheEntryW::lpNextCacheEntryInfo",
+            "FindNextUrlCacheEntryExA::lpNextCacheEntryInfo", "FindNextUrlCacheEntryExW::lpNextCacheEntryInfo",
+            "GetOwnerModuleFromTcp6Entry::pBuffer",
+            "GetOwnerModuleFromUdpEntry::pBuffer", "GetOwnerModuleFromUdp6Entry::pBuffer",
+            "GetUrlCacheEntryInfoA::lpCacheEntryInfo", "GetUrlCacheEntryInfoW::lpCacheEntryInfo",
+            "GetUrlCacheEntryInfoExA::lpCacheEntryInfo", "GetUrlCacheEntryInfoExW::lpCacheEntryInfo",
+            "HttpQueryServiceConfiguration::pOutput",
+            "HttpReceiveClientCertificate::SslClientCertInfo",
+            "IcmpParseReplies::ReplyBuffer",
+            "IcmpSendEcho::ReplyBuffer", "IcmpSendEcho2::ReplyBuffer", "IcmpSendEcho2Ex::ReplyBuffer",
+            "InternetQueryOptionA::lpBuffer", "InternetQueryOptionW::lpBuffer",
+            "RetrieveUrlCacheEntryFileA::lpCacheEntryInfo", "RetrieveUrlCacheEntryFileW::lpCacheEntryInfo",
+            "RetrieveUrlCacheEntryStreamA::lpCacheEntryInfo", "RetrieveUrlCacheEntryStreamW::lpCacheEntryInfo",
+            "WinHttpQueryHeadersEx::pBuffer",
+            "WSCEnumNameSpaceProviders32::lpnspBuffer", "WSCEnumNameSpaceProvidersEx32::lpnspBuffer",
+            "WSALookupServiceNextA::lpqsResults", "WSALookupServiceNextW::lpqsResults",
+            "WNetEnumResourceA::lpBuffer",
+            "WNetGetResourceInformationA::lpBuffer",
+            "WNetGetResourceParentA::lpBuffer", "WNetGetResourceParentW::lpBuffer",
+            "WNetGetUniversalNameA::lpBuffer",
         };
 
         [Fact]
@@ -165,6 +194,26 @@ namespace Windows.Win32.Tests
         [InlineData("GetOutlineTextMetricsA")]
         [InlineData("GetOutlineTextMetricsW")]
         [InlineData("NetShareEnum")]
+        [InlineData("SslGetExtensions")]
+        [InlineData("TdhEnumerateProviderFilters")]
+        [InlineData("AdjustTokenGroups")]
+        [InlineData("HidP_GetExtendedAttributes")]
+        [InlineData("WSAGetServiceClassInfoA")]
+        [InlineData("WSAGetServiceClassInfoW")]
+        [InlineData("Icmp6SendEcho2")]
+        [InlineData("Icmp6ParseReplies")]
+        [InlineData("SetupDiGetDriverInfoDetailA")]
+        [InlineData("SetupDiGetDriverInfoDetailW")]
+        [InlineData("WTSEnumerateListenersA")]
+        [InlineData("WTSEnumerateListenersW")]
+        [InlineData("ConvertIndexToColorName")]
+        [InlineData("CMConvertIndexToColorName")]
+        [InlineData("MrmPeekResourceIndexerMessages")]
+        [InlineData("HcnEnumerateGuestNetworkPortReservations")]
+        [InlineData("HidP_GetLinkCollectionNodes")]
+        [InlineData("WldpQueryDeviceSecurityInformation")]
+        [InlineData("HidD_GetConfiguration")]
+        [InlineData("PxeDhcpv6ParseRelayForw")]
         public void DifferentStorageContractsAreNotAnnotated(string methodName)
         {
             using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
@@ -183,6 +232,33 @@ namespace Windows.Win32.Tests
                         reader.GetParameter(parameterHandle).GetCustomAttributes().Select(reader.GetCustomAttribute),
                         a => GetAttributeTypeName(reader, a) == AttributeName);
                 }
+            }
+        }
+
+        [Theory]
+        [InlineData("CryptGetObjectUrl", "pUrlInfo")]
+        [InlineData("WinHttpQueryHeadersEx", "ppHeaders")]
+        [InlineData("CryptDecodeObject", "pbEncoded")]
+        [InlineData("WNetGetResourceInformationW", "lplpSystem")]
+        [InlineData("WNetGetResourceInformationA", "lplpSystem")]
+        public void BorrowedOrUnprovenParametersAreNotAnnotated(string methodName, string parameterName)
+        {
+            using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
+            using var peReader = new PEReader(stream);
+            MetadataReader reader = peReader.GetMetadataReader();
+            Parameter[] parameters = reader.MethodDefinitions
+                .Select(reader.GetMethodDefinition)
+                .Where(m => reader.GetString(m.Name) == methodName)
+                .SelectMany(m => m.GetParameters())
+                .Select(reader.GetParameter)
+                .Where(p => reader.GetString(p.Name) == parameterName)
+                .ToArray();
+            Assert.NotEmpty(parameters);
+            foreach (Parameter parameter in parameters)
+            {
+                Assert.DoesNotContain(
+                    parameter.GetCustomAttributes().Select(reader.GetCustomAttribute),
+                    a => GetAttributeTypeName(reader, a) == AttributeName);
             }
         }
 

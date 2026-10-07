@@ -473,9 +473,10 @@ header spellings, even where the documentation uses a different name.
 
 #### Verified follow-up sidecar inventory
 
-This bounded follow-up adds 32 distinct API/parameter sites to the initial 40:
-17 from the first reviewed cohort and 15 from the second. The emitted inventory
-therefore contains 72 markers, using the same parameter-only, valueless attribute.
+The first two follow-up cohorts add 32 distinct API/parameter sites to the initial
+40: 17 from the first reviewed cohort and 15 from the second. These cohorts bring
+the inventory to 72 markers; the further cohorts below bring it to 117.
+All use the same parameter-only, valueless attribute.
 No native parameter types, flags, existing attributes, or attribute declarations
 change. The inventory test checks the exact set and the `01 00 00 00` marker blob.
 
@@ -514,7 +515,85 @@ Only explicitly reviewed A/W counterparts are included.
 | [WNetGetUniversalNameW](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew) | `lpBuffer` | The documented buffer includes the selected structure and its referenced UNC/connection strings. |
 | [HttpReceiveHttpRequest](https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceivehttprequest) | `RequestBuffer` | Caller storage receives `HTTP_REQUEST` and copied request/body data; `pEntityChunks` addresses copied body data. Asynchronous completion lifetime is independent. |
 
+#### Further reviewed follow-up inventory
+
+The third reviewed cohort adds exactly 40 distinct sites to the preceding 72,
+bringing the inventory to 112. The final reviewed WNet cohort adds five more,
+for **117 total markers** (77 additions to the initial 40). They extend the same
+sidecar mechanism and exact
+inventory tests, without modifying native types, flags, existing attributes, or
+the attribute declaration. Conditional pointer-bearing selectors justify a
+conservative parameter annotation; they do not imply every selector returns
+interior pointers.
+
+The supplied evidence includes SDK 10.0.26100.0 layout/selector assertions and
+native x64 probes, except for ICMP, which has native x86 layout and pointer proof.
+Contract-backed counterparts are distinguished from individually probed APIs.
+Only these reviewed sites are added; empty/null samples and reserved fields do
+not establish provenance.
+
+| API | Parameter | Contract basis and reviewed evidence |
+| --- | --- | --- |
+| [InternetQueryOptionA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetqueryoptionw) | `lpBuffer` | `INTERNET_OPTION_PROXY` returns `INTERNET_PROXY_INFO`; each synthetic A/W handle query returned two interior string pointers in a 56-byte result. Other options can be flat. No request or global proxy change was made. |
+| [RetrieveUrlCacheEntryFileA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentryfilew), [RetrieveUrlCacheEntryStreamA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreama), [GetUrlCacheEntryInfoA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfow), [GetUrlCacheEntryInfoExA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfoexw) | `lpCacheEntryInfo` | The [INTERNET_CACHE_ENTRY_INFO](https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infow) contract places source URL, local filename, headers, and extension data at the end of the same allocation. The stream contract explicitly includes immediately following strings. These eight sites have checked output declarations and the common packed-record contract, not individual retrieval/locking probes. |
+| [FindFirstUrlCacheEntryA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryw), [FindFirstUrlCacheEntryExA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexw) | `lpFirstCacheEntryInfo` | Basic A/W enumeration each confirmed three nonnull interior pointers in the packed cache-entry result; another field was null. Ex variants are contract-backed, not separately probed. |
+| [FindNextUrlCacheEntryA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryw), [FindNextUrlCacheEntryExA/W](https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryexw) | `lpNextCacheEntryInfo` | Checked output declarations return the same documented packed cache-entry format. No direct next-entry runtime claim is made. |
+| [CertGetEnhancedKeyUsage](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetenhancedkeyusage) | `pUsage` | A synthetic certificate returned a 42-byte usage result containing its OID pointer table and OID string. |
+| [CertCreateCTLEntryFromCertificateContextProperties](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatectlentryfromcertificatecontextproperties) | `pCtlEntry` | A synthetic context returned a 222-byte `CTL_ENTRY` with `SubjectIdentifier.pbData` and `rgAttribute` inside caller storage. |
+| [CertGetCertificateContextProperty](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetcertificatecontextproperty) | `pvData` | `CERT_KEY_PROV_INFO_PROP_ID` returned a 256-byte result with both provider/container name pointers inside; `rgProvParam` was null. Only the synthetic in-memory context was changed. Other properties can be flat. |
+| [CryptGetObjectUrl](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetobjecturl) | `pUrlArray` | Synthetic issuer and CRL extensions each returned a 116-byte result containing the pointer array and URL string. No URL retrieval occurred. The separate `pUrlInfo` output remains unproven. |
+| [CryptMsgGetParam](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptmsggetparam) | `pvData` | `CMSG_HASH_ALGORITHM_PARAM` returned a 48-byte result with an interior OID string; optional parameters were null. This is selector-specific decode evidence, not signature validation. |
+| [CryptExportPublicKeyInfo](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfo), [CryptExportPublicKeyInfoEx](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfoex), [CryptExportPublicKeyInfoFromBCryptKeyHandle](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfofrombcryptkeyhandle) | `pInfo` | Each API returned a 342-byte result containing the algorithm OID and public-key bytes; optional parameters were null. Probes used ephemeral keys without persisted containers or private-key output. |
+| [WSCEnumNameSpaceProviders32](https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceproviders32), [WSCEnumNameSpaceProvidersEx32](https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceprovidersex32) | `lpnspBuffer` | An x64 process querying the 32-bit catalog confirmed five interior identifier pointers in each result. Catalog bitness does not change the caller's result ABI. Ex blob pointers were null, not proof for blob-bearing providers. |
+| [WSALookupServiceNextA/W](https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenextw) | `lpqsResults` | Localhost A/W queries each confirmed five sampled top-level pointers inside the caller allocation, five null, and none outside. The 65,536-byte allocation is not a measured initialized output extent; no trustworthy returned byte extent was obtained. |
+| [GetOwnerModuleFromUdpEntry](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudpentry), [GetOwnerModuleFromTcp6Entry](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcp6entry), [GetOwnerModuleFromUdp6Entry](https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudp6entry) | `pBuffer` | Each API's own remarks explicitly include the structure's pointers and their module-name/path data in this caller buffer. No new per-counterpart runtime claim is made. |
+| [HttpQueryServiceConfiguration](https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserviceconfiguration) | `pOutput` | A read-only `HttpServiceConfigUrlAclInfo` query returned a 102-byte result containing the URL-prefix and security-descriptor string pointers. Other selectors can be flat; no configuration was modified. |
+| [HttpReceiveClientCertificate](https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiveclientcertificate) | `SslClientCertInfo` | The explicit buffer contract includes the certificate-info record plus encoded certificate, or channel-bind-status record plus referenced token. No TLS server was created; asynchronous completion lifetime is independent. |
+| [WinHttpQueryHeadersEx](https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpqueryheadersex) | `pBuffer` | The documented containing buffer holds the parsed header array and strings. A synthetic loopback response returned four records and eight interior name/value pointers in a 290-byte result. `ppHeaders` is a separate pointer slot borrowing this storage, not another containing buffer. |
+| [IcmpSendEcho](https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho), [IcmpSendEcho2](https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2), [IcmpSendEcho2Ex](https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex), [IcmpParseReplies](https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpparsereplies) | `ReplyBuffer` | Separate native x86 loopback probes confirmed the five-byte `ICMP_ECHO_REPLY.Data` payload is inside caller storage, including parsing after asynchronous completion. This is not guessed x64 layout proof: x64 documentation uses `ICMP_ECHO_REPLY32`, which requires separate treatment. |
+| [WNetEnumResourceA](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcea) | `lpBuffer` | The function contract includes `NETRESOURCE` records plus referenced strings in caller storage. Root-provider enumeration confirmed eight nonnull interior pointers. |
+| [WNetGetResourceInformationA](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationa) | `lpBuffer` | This function's explicit contract places `NETRESOURCE` first and variable strings in the remaining caller buffer. No separate A runtime query is claimed; `lplpSystem` independently borrows the containing storage. |
+| [WNetGetUniversalNameA](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamea) | `lpBuffer` | This function's own remarks require the result structure and its referenced UNC strings in caller storage. Contract-backed, not a separate A runtime query. |
+| [WNetGetResourceParentA/W](https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparentw) | `lpBuffer` | Separate synthetic localhost A/W queries confirmed both parent-name and provider-name pointers inside caller storage, not the separate input allocation. |
+
+The WNet native samples establish containment within the 65,536-byte caller
+allocation, not an independently measured initialized output extent. They used
+provider-root enumeration and a synthetic localhost path only; no share or drive
+mapping was created. No further counterpart expansion is implied.
+
 #### Exclusions and relationship limitations
+
+`CryptGetObjectUrl.pUrlInfo` remains deferred: only a null group array with zero
+groups was observed. `SslGetExtensions.genericExtensions` contains a pointer
+into the input `clientHello`, not its own output record; it needs a
+cross-parameter borrowing contract instead. `WinHttpQueryHeadersEx.ppHeaders`
+likewise borrows `pBuffer` and is not marked. None of these relationships is solved
+by annotating a different containing buffer.
+
+`TdhEnumerateProviderFilters` produced no nonempty filter-table result in a bounded
+128-provider query, and `AdjustTokenGroups` had no modifiable group in a duplicated
+token. Those samples do not establish packing or disprove potential interior
+pointers. `HidP_GetExtendedAttributes.GlobalUnknowns` is reserved for system use;
+trailing token data does not prove that field's provenance.
+`WSAGetServiceClassInfoA/W`, DRT result ownership, `FindCertsByIssuer`, and the
+remaining owner-module/cache-container candidates also remain unresolved, not
+automatically expanded.
+
+`Icmp6SendEcho2` and `Icmp6ParseReplies` use the inline IPv6 reply layout rather
+than the IPv4 pointer fields. `SetupDiGetDriverInfoDetailA/W` has inline strings
+and character offsets; its reserved native-sized field is not pointer proof.
+`WTSEnumerateListenersA/W` returns fixed character-array names, and
+`ConvertIndexToColorName`/`CMConvertIndexToColorName` uses `COLOR_NAME` (`char[32]`),
+not allocated string-pointer tables. These APIs are not annotated.
+
+`MrmPeekResourceIndexerMessages` returns library-owned memory destroyed with the
+indexer, and `HcnEnumerateGuestNetworkPortReservations` returns a separately
+allocated output cleaned up with its dedicated free API. Neither output slot is
+containing caller storage. `HidP_GetLinkCollectionNodes` uses integer linkage
+indices and caller-associated `UserContext`, not proven trailing-storage
+pointers. `WldpQueryDeviceSecurityInformation`, the undocumented cookie in
+`HidD_GetConfiguration`, and exact relay-payload provenance for
+`PxeDhcpv6ParseRelayForw` remain unresolved and unmarked.
 
 [CryptDecodeObjectEx](https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptdecodeobjectex)
 is deferred: `CRYPT_DECODE_ALLOC_FLAG` changes `pvStructInfo` from containing caller
@@ -524,7 +603,7 @@ does not encode that storage-role/ownership switch. Both decode APIs also suppor
 `CryptDecodeObject.pvStructInfo` does not establish the input buffer's stability or
 lifetime, and `pbEncoded` is not annotated.
 
-`WNetGetResourceInformationW.lplpSystem` separately points into `lpBuffer`, not its
+`WNetGetResourceInformationA/W.lplpSystem` separately points into `lpBuffer`, not its
 own output-slot allocation. It is not annotated; that cross-parameter borrowing
 relationship remains unencoded. `HttpReceiveHttpRequest` asynchronous I/O requires
 storage to survive completion independently of interior-pointer consumption;
