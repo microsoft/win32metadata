@@ -436,6 +436,7 @@ fn lib_files(options: &Options) -> Result<Vec<PathBuf>, String> {
 
         return crate::win32_headers::IMPORT_LIBS
             .iter()
+            .chain(crate::win32_headers::PARTITION_IMPORT_LIBS)
             .map(|name| {
                 options
                     .libs
@@ -456,7 +457,7 @@ fn lib_files(options: &Options) -> Result<Vec<PathBuf>, String> {
                     })
                     .ok_or_else(|| {
                         format!(
-                            "pinned producer import library `{name}` was not found in any `--lib` location"
+                            "required SDK import library `{name}` was not found in any `--lib` location"
                         )
                     })
             })
@@ -4136,6 +4137,110 @@ mod tests {
         println!("{observed}Evidence: {}", root.display());
     }
 
+    fn assert_pcwstr(index: &Index, ty: &windows_metadata::Type) {
+        use windows_metadata::Type;
+
+        let Type::ValueName(name) = ty else {
+            panic!("expected a named PCWSTR, got {ty:?}");
+        };
+        assert_eq!(name.name, "PCWSTR");
+        assert_eq!(
+            index.expect(&name.namespace, &name.name).underlying_type(),
+            Some(Type::PtrConst(Box::new(Type::U16), 1)),
+            "PCWSTR must retain a const 16-bit native pointee"
+        );
+    }
+
+    #[test]
+    fn named_wide_z_annotations_preserve_string_identity() {
+        use windows_metadata::{HasAttributes, ParamAttributes, Type};
+
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_WIDE_Z_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("named-wide-z"),
+        };
+        let source = include_str!("../tests/fixtures/wide_z.cpp");
+        let fixture = root.join("wide_z.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let args = checked_in_clang_args(&[win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")]);
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let fact = snapshot
+            .facts()
+            .iter()
+            .find(|fact| fact.root && fact.name == "CaptureWide")
+            .unwrap();
+        let FactData::Function { params, .. } = &fact.data else {
+            panic!("CaptureWide must be a function");
+        };
+        assert_eq!(params.len(), 4);
+        for (position, parameter) in params.iter().enumerate() {
+            assert!(parameter.annotation.input);
+            assert!(!parameter.annotation.output);
+            assert!(!parameter.annotation.optional);
+            assert_eq!(parameter.annotation.null_terminated, position < 2);
+        }
+        std::fs::write(root.join("facts.txt"), format!("{fact:#?}\n")).unwrap();
+        let namespace = "Test.WideZ";
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            &source_path,
+            source_path.clone(),
+            RootPartition::new("WideZ", namespace),
+        );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let emit = EmitOptions::new(namespace, references.types());
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        let rdl = root.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let output = root.join("WideZ.winmd");
+        compile_inputs(&[rdl], &[], "WideZ", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let Item::Fn(method) = index.expect_item(namespace, "CaptureWide") else {
+            panic!("missing CaptureWide");
+        };
+        let signature = method.signature(&[]);
+        let observed = format!("CaptureWide: {:?}\n", signature.types);
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+        assert_pcwstr(&index, &signature.types[1]);
+        for position in [2, 3] {
+            assert_eq!(
+                signature.types[position],
+                Type::PtrConst(Box::new(Type::U16), 1),
+                "unterminated and numeric pointers must not become strings"
+            );
+        }
+        let rows = method.params_by_sequence(4).unwrap();
+        for parameter in rows.params() {
+            let parameter = parameter.unwrap();
+            assert_eq!(parameter.flags(), ParamAttributes::In);
+            assert!(!parameter.has_attribute("NullNullTerminatedAttribute"));
+        }
+        assert_pcwstr(&index, &signature.types[0]);
+    }
+
     #[test]
     #[ignore = "requires a repaired SDK cohort in WIN32METADATA_NLS_INPUT_ROOT and a fresh WIN32METADATA_NLS_OUTPUT_ROOT"]
     fn sdk_partitioned_nls_preserves_enum_contracts() {
@@ -7099,6 +7204,32 @@ mod tests {
     #[test]
     #[ignore = "requires an annotated SDK cohort in WIN32METADATA_GDIPLUS_INPUT_ROOT and a fresh WIN32METADATA_GDIPLUS_OUTPUT_ROOT"]
     fn sdk_partitioned_gdiplus_preserves_native_opaque_pointers() {
+        check_partitioned_gdiplus_native_opaque_pointers();
+    }
+
+    #[test]
+    #[ignore = "requires the GDI+ opaque and filename annotations in WIN32METADATA_GDIPLUS_INPUT_ROOT and a fresh WIN32METADATA_GDIPLUS_OUTPUT_ROOT"]
+    fn sdk_partitioned_gdiplus_preserves_wide_filenames() {
+        use windows_metadata::ParamAttributes;
+
+        let index = check_partitioned_gdiplus_native_opaque_pointers();
+        let mut observed = String::new();
+        for name in ["GdipCreateBitmapFromFile", "GdipCreateBitmapFromFileICM"] {
+            let Item::Fn(method) = index.expect_item("Windows.Win32.Graphics.GdiPlus", name) else {
+                panic!("missing {name}");
+            };
+            let signature = method.signature(&[]);
+            assert_pcwstr(&index, &signature.types[0]);
+            let rows = method.params_by_sequence(signature.types.len()).unwrap();
+            assert_eq!(rows.params()[0].unwrap().flags(), ParamAttributes::In);
+            observed.push_str(&format!("{name}:0\t{:?}\n", signature.types[0]));
+        }
+        let output = PathBuf::from(std::env::var_os("WIN32METADATA_GDIPLUS_OUTPUT_ROOT").unwrap());
+        std::fs::write(output.join("wide-filenames.txt"), &observed).unwrap();
+        println!("{observed}PASS: both native filename inputs retain PCWSTR identity.");
+    }
+
+    fn check_partitioned_gdiplus_native_opaque_pointers() -> Index {
         use windows_metadata::{HasAttributes, Type};
 
         let win_sdk = PathBuf::from(
@@ -7224,6 +7355,7 @@ mod tests {
         let result = "PASS: 629 import-backed GDI+ functions, native calling conventions, geometry layouts/aliases, 22 nominal definitions, and eight native pointer slots.\n";
         std::fs::write(output.join("result.txt"), result).unwrap();
         println!("{observed}{result}Evidence: {}", output.display());
+        index
     }
 
     fn check_gdiplus_imported_functions(target: &str, win_sdk: &Path, root: &Path) -> Index {
@@ -10671,12 +10803,13 @@ mod tests {
     }
 
     #[test]
-    fn sdk_import_libraries_include_gdiplus_without_discovering_unlisted_files() {
+    fn sdk_import_libraries_include_traversed_partitions_without_discovering_unlisted_files() {
         let root = scratch("sdk-import-libraries");
         for name in crate::win32_headers::IMPORT_LIBS
             .iter()
+            .chain(crate::win32_headers::PARTITION_IMPORT_LIBS)
             .copied()
-            .chain(["gdiplus.lib", "unlisted.lib"])
+            .chain(["unlisted.lib"])
         {
             std::fs::write(root.join(name), b"").unwrap();
         }
@@ -10688,17 +10821,466 @@ mod tests {
         let files = lib_files(&options).unwrap();
         assert!(files.contains(&root.join("gdiplus.lib")));
         assert!(!files.contains(&root.join("unlisted.lib")));
+        for name in crate::win32_headers::PARTITION_IMPORT_LIBS {
+            assert!(files.contains(&root.join(name)), "missing {name}");
+        }
         assert_eq!(
             files,
             crate::win32_headers::IMPORT_LIBS
                 .iter()
+                .chain(crate::win32_headers::PARTITION_IMPORT_LIBS)
                 .map(|name| root.join(name))
                 .collect::<Vec<_>>()
         );
+        for architecture in ["x64", "x86", "arm64"] {
+            assert_eq!(
+                lib_files(&Options {
+                    archs: vec![architecture.to_string()],
+                    win32_sdk: true,
+                    libs: vec![root.clone()],
+                    ..Default::default()
+                })
+                .unwrap(),
+                files,
+                "the target architecture must not change the supplied import corpus"
+            );
+        }
+        let supplemental = crate::win32_headers::PARTITION_IMPORT_LIBS[0];
+        std::fs::remove_file(root.join(supplemental)).unwrap();
+        let error = lib_files(&options).unwrap_err();
+        assert!(error.contains(supplemental), "{error}");
+        std::fs::write(root.join(supplemental), b"").unwrap();
         std::fs::remove_file(root.join("gdiplus.lib")).unwrap();
         let error = lib_files(&options).unwrap_err();
         assert!(error.contains("gdiplus.lib"), "{error}");
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn required_partition_imports_preserve_existing_native_library_choices() {
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        let mut previous = LibraryMap::default();
+        for name in crate::win32_headers::IMPORT_LIBS {
+            previous.import_library(&directory.join(name)).unwrap();
+        }
+        let mut current = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![directory],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            current.import_library(&path).unwrap();
+        }
+        for (symbol, library) in &previous.0 {
+            assert_eq!(
+                current.resolved_library(symbol),
+                Some(library.as_str()),
+                "existing first-wins native mapping changed for {symbol}"
+            );
+        }
+        let mut new_providers = BTreeMap::<String, BTreeSet<String>>::new();
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        for name in crate::win32_headers::PARTITION_IMPORT_LIBS {
+            for import in
+                windows_rdl::implib::read(&std::fs::read(directory.join(name)).unwrap()).unwrap()
+            {
+                if previous.resolved_library(&import.symbol).is_none() {
+                    new_providers
+                        .entry(import.symbol)
+                        .or_default()
+                        .insert(import.dll.to_ascii_lowercase());
+                }
+            }
+        }
+        for (symbol, libraries) in new_providers {
+            assert_eq!(
+                libraries.len(),
+                1,
+                "new native library conflict for {symbol}: {libraries:?}"
+            );
+        }
+        for (symbol, library) in [
+            ("lineAccept", "tapi32.dll"),
+            ("ResUtilGetProperties", "resutils.dll"),
+            ("GetIScsiInitiatorNodeNameW", "iscsidsc.dll"),
+        ] {
+            assert!(previous.resolved_library(symbol).is_none(), "{symbol}");
+            assert!(
+                current
+                    .resolved_library(symbol)
+                    .is_some_and(|actual| actual.eq_ignore_ascii_case(library)),
+                "{symbol} must resolve from the required native SDK archive"
+            );
+        }
+        apply_library_overrides(&mut current).unwrap();
+    }
+
+    #[test]
+    #[ignore = "requires frozen WIN32METADATA_IMPORTS_INPUT_ROOT, tab-separated WIN32METADATA_IMPORTS_EXPECTED, and fresh WIN32METADATA_IMPORTS_OUTPUT_ROOT"]
+    fn sdk_partitioned_required_libraries_restore_native_imports() {
+        use windows_metadata::{HasAttributes, Type};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_IMPORTS_INPUT_ROOT").expect("set the frozen SDK input"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_IMPORTS_OUTPUT_ROOT").expect("set a fresh output root"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let expected_path = std::env::var_os("WIN32METADATA_IMPORTS_EXPECTED")
+            .expect("set the native test inventory");
+        let expected_text = std::fs::read_to_string(expected_path).unwrap();
+        std::fs::write(output.join("expected.tsv"), &expected_text).unwrap();
+        let mut groups = BTreeMap::<(String, String, String), BTreeMap<String, String>>::new();
+        for line in expected_text.lines() {
+            let columns = line.split('\t').collect::<Vec<_>>();
+            let [owner, header, namespace, name, dll] = columns.as_slice() else {
+                panic!("expected owner, header, namespace, entrypoint, and native DLL: {line}");
+            };
+            assert!(
+                groups
+                    .entry((owner.to_string(), header.to_string(), namespace.to_string()))
+                    .or_default()
+                    .insert(name.to_string(), dll.to_string())
+                    .is_none(),
+                "duplicate native expectation: {line}"
+            );
+        }
+        assert!(!groups.is_empty());
+        let includes = checked_in_include_dirs(&win_sdk);
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        let mut baseline = LibraryMap::default();
+        for name in crate::win32_headers::IMPORT_LIBS {
+            baseline.import_library(&directory.join(name)).unwrap();
+        }
+        let mut candidate = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![directory.clone()],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            candidate.import_library(&path).unwrap();
+        }
+        for (name, dll) in &baseline.0 {
+            assert_eq!(
+                candidate.resolved_library(name),
+                Some(dll.as_str()),
+                "{name}"
+            );
+        }
+        let mut providers = BTreeMap::<String, BTreeSet<String>>::new();
+        let mut provider_rows = Vec::new();
+        for name in crate::win32_headers::PARTITION_IMPORT_LIBS {
+            for import in
+                windows_rdl::implib::read(&std::fs::read(directory.join(name)).unwrap()).unwrap()
+            {
+                if baseline.resolved_library(&import.symbol).is_none() {
+                    provider_rows.push(format!("{}\t{}\t{name}", import.symbol, import.dll));
+                }
+                providers
+                    .entry(import.symbol)
+                    .or_default()
+                    .insert(import.dll.to_ascii_lowercase());
+            }
+        }
+        std::fs::write(output.join("new-providers.tsv"), provider_rows.join("\n")).unwrap();
+        for (name, dlls) in &providers {
+            if baseline.resolved_library(name).is_none() {
+                assert_eq!(
+                    dlls.len(),
+                    1,
+                    "conflicting new native providers for {name}: {dlls:?}"
+                );
+            }
+        }
+        apply_library_overrides(&mut baseline).unwrap();
+        apply_library_overrides(&mut candidate).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut recovered = Vec::new();
+        let mut newly_emitted = Vec::new();
+        for (number, ((owner, header, namespace), expected)) in groups.iter().enumerate() {
+            let root = output.join(format!("{number:03}-{owner}"));
+            std::fs::create_dir(&root).unwrap();
+            let header_path = path_arg(&win_sdk.join(header), "--include").unwrap();
+            let source =
+                std::fs::read_to_string(win_sdk.join("Partitions").join(owner).join("main.cpp"))
+                    .unwrap();
+            let source = format!("{WIN32_SDK_PRELUDE}\n{source}");
+            let mut roots = vec![header_path.clone()];
+            let mut policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                header_path,
+                convert_root_partition(logical_partition(&traversal, owner).unwrap()),
+            );
+            if owner == "Ndf" {
+                let sockets = path_arg(
+                    &win_sdk
+                        .join("RecompiledIdlHeaders")
+                        .join("shared")
+                        .join("ws2def.h"),
+                    "--include",
+                )
+                .unwrap();
+                policy = policy.with_traversed_header_for_input(
+                    AGGREGATE_INPUT,
+                    sockets.clone(),
+                    convert_root_partition(logical_partition(&traversal, "WinSock").unwrap()),
+                );
+                roots.push(sockets);
+            }
+            let args = checked_in_clang_args(&includes);
+            std::fs::write(root.join("input.cpp"), &source).unwrap();
+            std::fs::write(root.join("arguments.txt"), args.join("\n")).unwrap();
+            std::fs::write(root.join("roots.txt"), roots.join("\n")).unwrap();
+            let snapshot = windows_clang::extract(
+                [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
+                &args.iter().map(String::as_str).collect::<Vec<_>>(),
+            )
+            .unwrap();
+            if owner == "Ndf" {
+                assert!(
+                    !snapshot
+                        .facts()
+                        .iter()
+                        .any(|fact| fact.name == "SOCKET_ADDRESS_LIST"
+                            && fact
+                                .spelling
+                                .file
+                                .to_ascii_lowercase()
+                                .ends_with("/ndfapi.h")),
+                    "production winsock2 prelude must suppress the Ndf-local forward declaration"
+                );
+            }
+            let facts = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root && matches!(fact.data, FactData::Function { .. }))
+                .map(|fact| (fact.name.as_str(), fact))
+                .collect::<BTreeMap<_, _>>();
+            std::fs::write(root.join("native-facts.txt"), format!("{facts:#?}")).unwrap();
+            let mut indices = Vec::new();
+            for (label, native) in [("baseline", &baseline), ("candidate", &candidate)] {
+                let libraries = snapshot
+                    .facts()
+                    .iter()
+                    .filter_map(|fact| {
+                        let FactData::Function { link_name, .. } = &fact.data else {
+                            return None;
+                        };
+                        native
+                            .resolved_library(link_name)
+                            .map(|dll| (link_name.clone(), dll.to_string()))
+                    })
+                    .collect::<BTreeMap<_, _>>();
+                let selected =
+                    implicit_selected_functions(&snapshot, &BTreeSet::new(), &libraries, |_| false);
+                let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+                emit.functions = Some(&selected);
+                emit.libraries = Some(&libraries);
+                let partitions =
+                    plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+                let rdl = root.join(format!("{label}-rdl"));
+                std::fs::create_dir(&rdl).unwrap();
+                if partitions.is_empty() {
+                    assert_eq!(label, "baseline", "the candidate must emit native APIs");
+                    std::fs::write(root.join("baseline-empty.txt"), "The production plan emitted no RDL partitions with the original import libraries.\n").unwrap();
+                    indices.push(None);
+                    continue;
+                }
+                write_partitioned_rdl(&rdl, partitions).unwrap();
+                let image = root.join(format!("{label}.winmd"));
+                compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &image).unwrap();
+                indices.push(Some(Index::read(&image).unwrap()));
+            }
+            let inventory = |index: &Index| {
+                index
+                    .iter_items()
+                    .filter_map(|(ns, name, item)| {
+                        let Item::Fn(method) = item else {
+                            return None;
+                        };
+                        let import = method.impl_map()?;
+                        Some((
+                            (ns.to_string(), name.to_string()),
+                            format!(
+                                "{}\t{}\t{}\t{:?}\t{:?}\t{:?}\t{:?}",
+                                import.import_scope().name(),
+                                import.import_name(),
+                                method.calling_convention(),
+                                method.signature(&[]),
+                                method
+                                    .attributes()
+                                    .map(|attribute| (
+                                        attribute.namespace(),
+                                        attribute.name(),
+                                        attribute.value()
+                                    ))
+                                    .collect::<Vec<_>>(),
+                                method.flags(),
+                                method
+                                    .params()
+                                    .map(|parameter| (
+                                        parameter.sequence(),
+                                        parameter.name().to_string(),
+                                        parameter.flags(),
+                                        parameter
+                                            .attributes()
+                                            .map(|attribute| (
+                                                attribute.namespace(),
+                                                attribute.name(),
+                                                attribute.value(),
+                                            ))
+                                            .collect::<Vec<_>>(),
+                                    ))
+                                    .collect::<Vec<_>>(),
+                            ),
+                        ))
+                    })
+                    .collect::<BTreeMap<_, _>>()
+            };
+            let previous = match &indices[0] {
+                Some(index) => inventory(index),
+                None => BTreeMap::new(),
+            };
+            let candidate_index = indices[1].as_ref().expect("candidate native metadata");
+            let current = inventory(candidate_index);
+            for (key, value) in &previous {
+                assert_eq!(
+                    current.get(key),
+                    Some(value),
+                    "changed previous import {key:?}"
+                );
+            }
+            std::fs::write(root.join("baseline-imports.txt"), format!("{previous:#?}")).unwrap();
+            std::fs::write(root.join("candidate-imports.txt"), format!("{current:#?}")).unwrap();
+            for (actual_namespace, name) in
+                current.keys().filter(|key| !previous.contains_key(*key))
+            {
+                let fact = facts
+                    .get(name.as_str())
+                    .unwrap_or_else(|| panic!("missing native {name}"));
+                let FactData::Function {
+                    link_name,
+                    params,
+                    convention,
+                    ..
+                } = &fact.data
+                else {
+                    unreachable!()
+                };
+                assert!(
+                    baseline.resolved_library(link_name).is_none(),
+                    "{name} already supplied"
+                );
+                let dlls = providers.get(link_name).expect("new native provider");
+                assert_eq!(dlls.len(), 1, "new native provider conflict for {name}");
+                let dll = dlls.first().unwrap();
+                let Item::Fn(method) = candidate_index.expect_item(actual_namespace, name) else {
+                    panic!("missing recovered {name}");
+                };
+                let import = method.impl_map().unwrap();
+                assert_eq!(import.import_name(), link_name);
+                assert!(
+                    import.import_scope().name().eq_ignore_ascii_case(dll),
+                    "{name}"
+                );
+                let expected_convention = match convention {
+                    windows_clang::CallingConvention::Platform => "system",
+                    windows_clang::CallingConvention::C => "C",
+                };
+                assert_eq!(method.calling_convention(), expected_convention, "{name}");
+                assert_eq!(method.signature(&[]).types.len(), params.len(), "{name}");
+                let signature = method.signature(&[]);
+                match name.as_str() {
+                    "lineAccept" => {
+                        assert_eq!(signature.return_type, Type::I32);
+                        assert_eq!(signature.types[2], Type::U32);
+                    }
+                    "ResUtilGetProperties" => {
+                        assert_eq!(signature.return_type, Type::U32);
+                        assert_eq!(
+                            signature.types[3..],
+                            [
+                                Type::U32,
+                                Type::PtrMut(Box::new(Type::U32), 1),
+                                Type::PtrMut(Box::new(Type::U32), 1)
+                            ]
+                        );
+                    }
+                    "GetIScsiInitiatorNodeNameW" => {
+                        assert_eq!(signature.return_type, Type::U32);
+                        assert_eq!(signature.types, [Type::PtrMut(Box::new(Type::U16), 1)]);
+                    }
+                    "NdfCreateGroupingIncident" => {
+                        assert!(signature.types.iter().any(|ty| matches!(
+                            ty,
+                            Type::PtrMut(inner, 1) if matches!(
+                                inner.as_ref(),
+                                Type::ValueName(name) if name.namespace == "Windows.Win32.Networking.WinSock"
+                                    && name.name == "SOCKET_ADDRESS_LIST"
+                            )
+                        )), "canonical WinSock SOCKET_ADDRESS_LIST pointer: {signature:?}");
+                    }
+                    _ => {}
+                }
+                let row = format!(
+                    "{actual_namespace}\t{name}\t{dll}\t{expected_convention}\t{signature:?}"
+                );
+                newly_emitted.push(format!(
+                    "{owner}\t{header}\t{}\t{row}",
+                    expected.contains_key(name)
+                ));
+            }
+            for (name, dll) in expected {
+                let key = (namespace.clone(), name.clone());
+                assert!(!previous.contains_key(&key), "{name} was already emitted");
+                let observed = current
+                    .get(&key)
+                    .unwrap_or_else(|| panic!("missing recovered {namespace}.{name}"));
+                assert!(
+                    observed
+                        .split('\t')
+                        .next()
+                        .unwrap()
+                        .eq_ignore_ascii_case(dll),
+                    "{name}: {observed}"
+                );
+                recovered.push(format!("{namespace}\t{name}\t{observed}"));
+            }
+            std::fs::write(output.join("newly-emitted.tsv"), newly_emitted.join("\n")).unwrap();
+            std::fs::write(output.join("recovered.tsv"), recovered.join("\n")).unwrap();
+        }
+        std::fs::write(output.join("recovered.tsv"), recovered.join("\n")).unwrap();
+        println!(
+            "PASS: {} exact native imports recovered with previous import/signature/attribute inventories unchanged.",
+            recovered.len()
+        );
     }
 
     #[test]

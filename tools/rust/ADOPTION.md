@@ -4,8 +4,9 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`ab1e9593dd421d3aa0d6a3710557b7789199d004`](https://github.com/jevansaks/windows-rs/commit/ab1e9593dd421d3aa0d6a3710557b7789199d004),
-published in `jevansaks/windows-rs`. Its redeclaration correction follows the
+[`6f9dcaef699630aacbae363b7f9766afc84b2d41`](https://github.com/jevansaks/windows-rs/commit/6f9dcaef699630aacbae363b7f9766afc84b2d41),
+published in `jevansaks/windows-rs`. Its explicitly terminated named-scalar
+correction follows `ab1e9593dd421d3aa0d6a3710557b7789199d004`, whose redeclaration correction follows the
 native-opaque capability `1dd86adb880fb4b1dc4ebe5f0dd2f6dc45b75355` and AssociatedEnum
 closure revision `15ba1b7f96c770b9d425ebca00a3a73f74bb004e`, whose fixes follow
 the RetVal fix `7f3e04f7cfeb2c31eea00f2330b0159572644828` and native Flags fix
@@ -377,3 +378,99 @@ their expected projection.
 that passes these capture/native-header tests and the producer's `opaque_classes`
 target, ownership, same-leaf namespace, pointer-typedef, callback, and by-value
 controls. Preserve explicit opt-in and rejection semantics.
+
+## Terminated native wide-string aliases
+
+**Upstream issue:** not filed. This was reproduced on the local producer
+`ab1e9593dd421d3aa0d6a3710557b7789199d004`.
+
+**Source contract and first loss:** `_In_z_ const WCHAR*` already preserves
+`input` and `null_terminated` in extracted facts. The native typedef has the
+same 16-bit character type as `wchar_t`; capture is not missing an encoding
+annotation. The old producer selected `PCWSTR` for a terminated direct scalar
+pointer, but did not apply its existing named-scalar canonicalization to
+`WCHAR` in that selector. Later fallback emitted the named case as `*const u16`.
+
+**Local fix and adoption:** producer
+[`6f9dcaef699630aacbae363b7f9766afc84b2d41`](https://github.com/jevansaks/windows-rs/commit/6f9dcaef699630aacbae363b7f9766afc84b2d41)
+reuses that canonicalization only inside the existing explicit-null-termination
+selector. It does not infer strings from
+unannotated numeric pointers, change native declarations, or add capture
+vocabulary, API-name special cases, or a wrapper-side type mapping.
+
+**Regression:** `tests\fixtures\wide_z.cpp` compares terminated `WCHAR` and
+direct `wchar_t` pointers with unterminated `WCHAR` and numeric `unsigned short`
+controls. The production planner, with nonempty WinRT references, must emit
+physical `PCWSTR` for the first two and retain const 16-bit pointers for the
+other two. Input direction and native character width remain unchanged.
+Set `WIN32METADATA_WIDE_Z_OUTPUT_ROOT` to a fresh evidence directory to retain
+the facts, RDL, and WinMD.
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    named_wide_z_annotations_preserve_string_identity -- --nocapture
+```
+
+The opt-in real-header gate below reuses the GDI+ opaque-pointer gate's single
+extraction and all its import, geometry, and nominal-type controls. It also
+requires physical `PCWSTR` inputs for `GdipCreateBitmapFromFile` and
+`GdipCreateBitmapFromFileICM`. Supply the same input/output variables as the
+opaque-pointer gate, with a cohort containing the two `_In_z_` corrections:
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_partitioned_gdiplus_preserves_wide_filenames -- --ignored --nocapture
+```
+
+**Removal condition:** retain these regressions when adopting an upstream
+revision with equivalent explicitly terminated named-scalar string selection.
+
+## Native SDK import-library inputs
+
+`--win32-sdk` appends `win32_headers::PARTITION_IMPORT_LIBS` after the unchanged
+producer import list. The supplement contains explicit native SDK archives,
+not function-to-DLL overrides or an enumeration of every library in a directory.
+Existing first-wins resolutions and library-override preconditions are retained.
+Archives exposing ambiguous provider entrypoints are not added merely because
+some of their exports match missing SDK declarations.
+
+The current import reader returns short-import symbol/DLL strings without
+preserving ordinal or name-transformation semantics. An ordinal import's symbol
+string does not establish that the DLL exports that name. Archive admission
+therefore also checks the raw native import headers for every newly emitted
+function; archives causing unsupported by-name emissions remain outside the
+supplement. This change does not repair ordinal-import transport in the producer.
+
+The normal tests compare every existing native symbol/DLL resolution, check
+all newly resolved symbols for competing DLL providers, and reject missing
+required archives and accidental discovery of unlisted files. Selection is
+independent of the target architecture: it uses the supplied native import
+corpus. The existing SDK pipeline supplies the pinned x64 import corpus for
+all targets. This is not a claim about availability of archives in other SDK
+architecture packages.
+
+The opt-in `sdk_partitioned_required_libraries_restore_native_imports` gate
+uses frozen partition inputs, the production header planner, and nonempty WinRT
+references. Its test-only TSV contains five tab-separated columns: partition
+owner, header path relative to `generation\WinSDK`, namespace, function name,
+and native DLL. The inventory does not drive production selection.
+
+```powershell
+$env:WIN32METADATA_IMPORTS_INPUT_ROOT = (Resolve-Path .\cohort\generation\WinSDK).Path
+$env:WIN32METADATA_IMPORTS_EXPECTED = (Resolve-Path .\native-import-expectations.tsv).Path
+$env:WIN32METADATA_IMPORTS_OUTPUT_ROOT = Join-Path $PWD "obj\native-import-check"
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_partitioned_required_libraries_restore_native_imports -- --ignored --nocapture
+```
+
+It retains the complete new-provider multimap, native facts, baseline/candidate
+RDL and WinMD, and every newly emitted import, including functions outside the
+requested inventory. A legitimately empty baseline plan is recorded explicitly.
+The checks preserve existing import names, conventions, signatures, method and
+parameter attributes, and verify new imports against their native declarations
+and providers. Representative signed, unsigned, and pointer-width controls cover
+TAPI, cluster resource utilities, and iSCSI.
+
+**Removal condition:** a future producer list may absorb these archives only
+while preserving the tested resolution order, conflict checks, and native
+header emission contracts.
