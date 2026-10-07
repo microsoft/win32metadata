@@ -423,7 +423,7 @@ index d6bf1c4c39..3ab54e6b88 100644
 -    OUT LPDWORD ReturnedEntryCount,
 -    OUT PVOID   *SortedBuffer );
 +    OUT LPDWORD ReturnedEntryCount,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID   *SortedBuffer );
++    OUT PVOID   *SortedBuffer );
  
 -NET_API_STATUS NET_API_FUNCTION
 +_Windows_SupportedOS_Windows2000_ NET_API_STATUS NET_API_FUNCTION
@@ -526,7 +526,7 @@ index d6bf1c4c39..3ab54e6b88 100644
 -    IN LPVOID InputArg,
 -    OUT LPVOID *OutputArg
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN LPVOID InputArg,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPVOID *OutputArg
++    OUT LPVOID *OutputArg
      );
  
 -NET_API_STATUS NET_API_FUNCTION

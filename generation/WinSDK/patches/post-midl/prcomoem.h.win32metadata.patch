@@ -38,7 +38,7 @@ index 663a5f2e3f..ba7a712ae9 100644
                                              IN  DWORD     dwClsContext,
                                              IN  REFIID    riid,
 -                                            OUT LPVOID   *ppv) PURE;
-+                                            _WIN32META_ANNOTATION_("win32metadata:in") OUT LPVOID   *ppv) PURE;
++                                            OUT LPVOID   *ppv) PURE;
  
  };
  

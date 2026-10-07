@@ -45,7 +45,7 @@ index 6bf90f1d64..2f0ad55373 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetSyncTime( 
 -            /* [out] */ SYNC_TIME *pSyncTime) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_TIME *pSyncTime) = 0;
++            /* [out] */ SYNC_TIME *pSyncTime) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
 -            /* [out] */ BYTE *pbFlags) = 0;
@@ -259,7 +259,7 @@ index 6bf90f1d64..2f0ad55373 100644
              /* [unique][in] */ BYTE *pbNewOwnerId,
              /* [out][in] */ DWORD *pcbIdSize,
 -            /* [out] */ SYNC_VERSION *pVersionOut) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersionOut) = 0;
++            /* [out] */ SYNC_VERSION *pVersionOut) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE MapRemoteToLocal( 
              /* [in] */ ISyncKnowledge *pRemoteKnowledge,
@@ -337,7 +337,7 @@ index 6bf90f1d64..2f0ad55373 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetMinimumSupportedVersion( 
 -            /* [out] */ SYNC_SERIALIZATION_VERSION *pVersion) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_SERIALIZATION_VERSION *pVersion) = 0;
++            /* [out] */ SYNC_SERIALIZATION_VERSION *pVersion) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetStatistics( 
              /* [in] */ SYNC_STATISTICS which,
@@ -351,7 +351,7 @@ index 6bf90f1d64..2f0ad55373 100644
          virtual HRESULT STDMETHODCALLTYPE CompareToKnowledgeCookie( 
              /* [in] */ IUnknown *pKnowledgeCookie,
 -            /* [out] */ KNOWLEDGE_COOKIE_COMPARISON_RESULT *pResult) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") KNOWLEDGE_COOKIE_COMPARISON_RESULT *pResult) = 0;
++            /* [out] */ KNOWLEDGE_COOKIE_COMPARISON_RESULT *pResult) = 0;
          
      };
      
@@ -375,11 +375,11 @@ index 6bf90f1d64..2f0ad55373 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetStage( 
 -            /* [out] */ SYNC_PROGRESS_STAGE *pStage) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_PROGRESS_STAGE *pStage) = 0;
++            /* [out] */ SYNC_PROGRESS_STAGE *pStage) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetProvider( 
 -            /* [out] */ SYNC_PROVIDER_ROLE *pProviderRole) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_PROVIDER_ROLE *pProviderRole) = 0;
++            /* [out] */ SYNC_PROVIDER_ROLE *pProviderRole) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetChangeWithRecoverableError( 
              /* [out] */ ISyncChange **ppChangeWithRecoverableError) = 0;
@@ -410,7 +410,7 @@ index 6bf90f1d64..2f0ad55373 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetResolveActionForChange( 
 -            /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_RESOLVE_ACTION *pResolveAction) = 0;
++            /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetResolveActionForChange( 
              /* [in] */ SYNC_RESOLVE_ACTION resolveAction) = 0;
@@ -418,7 +418,7 @@ index 6bf90f1d64..2f0ad55373 100644
          virtual HRESULT STDMETHODCALLTYPE GetResolveActionForChangeUnit( 
              /* [in] */ ISyncChangeUnit *pChangeUnit,
 -            /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_RESOLVE_ACTION *pResolveAction) = 0;
++            /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetResolveActionForChangeUnit( 
              /* [in] */ ISyncChangeUnit *pChangeUnit,
@@ -427,7 +427,7 @@ index 6bf90f1d64..2f0ad55373 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetConstraintResolveActionForChange( 
 -            /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
++            /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetConstraintResolveActionForChange( 
              /* [in] */ SYNC_CONSTRAINT_RESOLVE_ACTION constraintResolveAction) = 0;
@@ -435,7 +435,7 @@ index 6bf90f1d64..2f0ad55373 100644
          virtual HRESULT STDMETHODCALLTYPE GetConstraintResolveActionForChangeUnit( 
              /* [in] */ ISyncChangeUnit *pChangeUnit,
 -            /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
++            /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetConstraintResolveActionForChangeUnit( 
              /* [in] */ ISyncChangeUnit *pChangeUnit,
@@ -443,7 +443,7 @@ index 6bf90f1d64..2f0ad55373 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetConstraintConflictReason( 
 -            /* [out] */ CONSTRAINT_CONFLICT_REASON *pConstraintConflictReason) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") CONSTRAINT_CONFLICT_REASON *pConstraintConflictReason) = 0;
++            /* [out] */ CONSTRAINT_CONFLICT_REASON *pConstraintConflictReason) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE IsTemporary( void) = 0;
          
@@ -461,7 +461,7 @@ index 6bf90f1d64..2f0ad55373 100644
          
          virtual HRESULT STDMETHODCALLTYPE OnFullEnumerationNeeded( 
 -            /* [out] */ SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction) = 0;
++            /* [out] */ SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE OnRecoverableError( 
              /* [in] */ IRecoverableError *pRecoverableError) = 0;
@@ -586,7 +586,7 @@ index 6bf90f1d64..2f0ad55373 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetFilterCombinationType( 
 -            /* [out] */ FILTER_COMBINATION_TYPE *pFilterCombinationType) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") FILTER_COMBINATION_TYPE *pFilterCombinationType) = 0;
++            /* [out] */ FILTER_COMBINATION_TYPE *pFilterCombinationType) = 0;
          
      };
      
@@ -720,7 +720,7 @@ index 6bf90f1d64..2f0ad55373 100644
          virtual HRESULT STDMETHODCALLTYPE GetChangeUnitVersion( 
              /* [in] */ const BYTE *pbCurrentReplicaId,
 -            /* [out] */ SYNC_VERSION *pVersion) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersion) = 0;
++            /* [out] */ SYNC_VERSION *pVersion) = 0;
          
      };
      
@@ -747,12 +747,12 @@ index 6bf90f1d64..2f0ad55373 100644
          virtual HRESULT STDMETHODCALLTYPE GetChangeVersion( 
              /* [in] */ const BYTE *pbCurrentReplicaId,
 -            /* [out] */ SYNC_VERSION *pVersion) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersion) = 0;
++            /* [out] */ SYNC_VERSION *pVersion) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetCreationVersion( 
              /* [in] */ const BYTE *pbCurrentReplicaId,
 -            /* [out] */ SYNC_VERSION *pVersion) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_VERSION *pVersion) = 0;
++            /* [out] */ SYNC_VERSION *pVersion) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
 -            /* [out] */ DWORD *pdwFlags) = 0;
@@ -806,7 +806,7 @@ index 6bf90f1d64..2f0ad55373 100644
          virtual HRESULT STDMETHODCALLTYPE GetFilterChange( 
              /* [in] */ DWORD dwFilterKey,
 -            /* [out] */ SYNC_FILTER_CHANGE *pFilterChange) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SYNC_FILTER_CHANGE *pFilterChange) = 0;
++            /* [out] */ SYNC_FILTER_CHANGE *pFilterChange) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetAllChangeUnitsPresentFlag( 
 -            /* [out] */ BOOL *pfAllChangeUnitsPresent) = 0;

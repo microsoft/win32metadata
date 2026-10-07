@@ -352,26 +352,26 @@ index eda8c1dbb8..b05f0018f5 100644
              /* [in] */ LONG dwIndex,
              /* [in] */ LONG dwFlags,
 -            /* [out] */ LPWSTR *pbstrProvName) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *pbstrProvName) = 0;
++            /* [out] */ LPWSTR *pbstrProvName) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE enumContainersWStr( 
              /* [in] */ LONG dwIndex,
 -            /* [out] */ LPWSTR *pbstr) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *pbstr) = 0;
++            /* [out] */ LPWSTR *pbstr) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE freeRequestInfoBlob( 
              /* [in] */ CRYPT_DATA_BLOB pkcs7OrPkcs10) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreNameWStr( 
 -            /* [out] */ LPWSTR *szwName) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
++            /* [out] */ LPWSTR *szwName) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreNameWStr( 
              /* [in] */ LPWSTR szwName) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MyStoreTypeWStr( 
 -            /* [out] */ LPWSTR *szwType) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
++            /* [out] */ LPWSTR *szwType) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MyStoreTypeWStr( 
              /* [in] */ LPWSTR szwType) = 0;
@@ -385,14 +385,14 @@ index eda8c1dbb8..b05f0018f5 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreNameWStr( 
 -            /* [out] */ LPWSTR *szwName) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
++            /* [out] */ LPWSTR *szwName) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreNameWStr( 
              /* [in] */ LPWSTR szwName) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAStoreTypeWStr( 
 -            /* [out] */ LPWSTR *szwType) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
++            /* [out] */ LPWSTR *szwType) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CAStoreTypeWStr( 
              /* [in] */ LPWSTR szwType) = 0;
@@ -406,14 +406,14 @@ index eda8c1dbb8..b05f0018f5 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreNameWStr( 
 -            /* [out] */ LPWSTR *szwName) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
++            /* [out] */ LPWSTR *szwName) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreNameWStr( 
              /* [in] */ LPWSTR szwName) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootStoreTypeWStr( 
 -            /* [out] */ LPWSTR *szwType) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
++            /* [out] */ LPWSTR *szwType) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RootStoreTypeWStr( 
              /* [in] */ LPWSTR szwType) = 0;
@@ -427,14 +427,14 @@ index eda8c1dbb8..b05f0018f5 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreNameWStr( 
 -            /* [out] */ LPWSTR *szwName) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwName) = 0;
++            /* [out] */ LPWSTR *szwName) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreNameWStr( 
              /* [in] */ LPWSTR szwName) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestStoreTypeWStr( 
 -            /* [out] */ LPWSTR *szwType) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwType) = 0;
++            /* [out] */ LPWSTR *szwType) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequestStoreTypeWStr( 
              /* [in] */ LPWSTR szwType) = 0;
@@ -448,14 +448,14 @@ index eda8c1dbb8..b05f0018f5 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContainerNameWStr( 
 -            /* [out] */ LPWSTR *szwContainer) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwContainer) = 0;
++            /* [out] */ LPWSTR *szwContainer) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ContainerNameWStr( 
              /* [in] */ LPWSTR szwContainer) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderNameWStr( 
 -            /* [out] */ LPWSTR *szwProvider) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szwProvider) = 0;
++            /* [out] */ LPWSTR *szwProvider) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ProviderNameWStr( 
              /* [in] */ LPWSTR szwProvider) = 0;
@@ -525,28 +525,28 @@ index eda8c1dbb8..b05f0018f5 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SPCFileNameWStr( 
 -            /* [out] */ LPWSTR *szw) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szw) = 0;
++            /* [out] */ LPWSTR *szw) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_SPCFileNameWStr( 
              /* [in] */ LPWSTR szw) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PVKFileNameWStr( 
 -            /* [out] */ LPWSTR *szw) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szw) = 0;
++            /* [out] */ LPWSTR *szw) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_PVKFileNameWStr( 
              /* [in] */ LPWSTR szw) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgorithmWStr( 
 -            /* [out] */ LPWSTR *szw) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *szw) = 0;
++            /* [out] */ LPWSTR *szw) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_HashAlgorithmWStr( 
              /* [in] */ LPWSTR szw) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RenewalCertificate( 
 -            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCCERT_CONTEXT *ppCertContext) = 0;
++            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RenewalCertificate( 
              /* [in] */ PCCERT_CONTEXT pCertContext) = 0;
@@ -614,7 +614,7 @@ index eda8c1dbb8..b05f0018f5 100644
          virtual HRESULT STDMETHODCALLTYPE GetAlgNameWStr( 
              /* [in] */ LONG algID,
 -            /* [out] */ LPWSTR *ppwsz) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *ppwsz) = 0;
++            /* [out] */ LPWSTR *ppwsz) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ReuseHardwareKeyIfUnableToGenNew( 
              /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew) = 0;
@@ -683,7 +683,7 @@ index eda8c1dbb8..b05f0018f5 100644
 -            /* [in] */ PCRYPT_DATA_BLOB pblobBinary,
 -            /* [out] */ LPWSTR *ppwszString) = 0;
 +            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobBinary,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LPWSTR *ppwszString) = 0;
++            /* [out] */ LPWSTR *ppwszString) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE stringToBinaryBlob( 
              /* [in] */ LONG Flags,
@@ -738,12 +738,12 @@ index eda8c1dbb8..b05f0018f5 100644
 -            /* [in] */ PCRYPT_DATA_BLOB pblobResponse,
 -            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
 +            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") PCRYPT_DATA_BLOB pblobResponse,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCCERT_CONTEXT *ppCertContext) = 0;
++            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE getCertContextFromFileResponseWStr( 
              /* [in] */ LPCWSTR pwszResponseFileName,
 -            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PCCERT_CONTEXT *ppCertContext) = 0;
++            /* [out] */ PCCERT_CONTEXT *ppCertContext) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE createPFXWStr( 
              /* [in] */ LPCWSTR pwszPassword,

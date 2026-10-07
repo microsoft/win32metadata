@@ -55,7 +55,7 @@ index 0150fb5596..19d8763ee7 100644
  NetScheduleJobEnum(
      IN      LPCWSTR         Servername              OPTIONAL,
 -    OUT     LPBYTE *        PointerToBuffer,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT      LPBYTE *        PointerToBuffer,
++    OUT      LPBYTE *        PointerToBuffer,
      IN      DWORD           PrefferedMaximumLength,
 -    OUT     LPDWORD         EntriesRead,
 -    OUT     LPDWORD         TotalEntries,
@@ -70,7 +70,7 @@ index 0150fb5596..19d8763ee7 100644
      IN      LPCWSTR         Servername              OPTIONAL,
      IN      DWORD           JobId,
 -    OUT     LPBYTE *        PointerToBuffer
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT      LPBYTE *        PointerToBuffer
++    OUT      LPBYTE *        PointerToBuffer
      );
  
  #ifdef __cplusplus

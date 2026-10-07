@@ -474,7 +474,7 @@ index ddcdcb381a..95ab8198a9 100644
 -    IN  WINHTTP_AUTOPROXY_OPTIONS * pAutoProxyOptions,
 -    OUT WINHTTP_PROXY_INFO *        pProxyInfo
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN  WINHTTP_AUTOPROXY_OPTIONS * pAutoProxyOptions,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT WINHTTP_PROXY_INFO *        pProxyInfo
++    OUT WINHTTP_PROXY_INFO *        pProxyInfo
  );
  
 -WINHTTPAPI

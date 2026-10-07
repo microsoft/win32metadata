@@ -82,7 +82,7 @@ index 811c3c7e7b..d6ffd63842 100644
      IN  LPCWSTR lpServer OPTIONAL,
      IN  DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
 -    OUT PBYTE *Buffer 
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT  PBYTE *Buffer 
++    OUT  PBYTE *Buffer 
      );
  
 +_Windows_SupportedOS_WindowsVista_ 

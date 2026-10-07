@@ -119,7 +119,7 @@ index 10cd1740df..f22423dfd1 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetInfo( 
 -            /* [out] */ SPEVENTSOURCEINFO *pInfo) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPEVENTSOURCEINFO *pInfo) = 0;
++            /* [out] */ SPEVENTSOURCEINFO *pInfo) = 0;
          
      };
      
@@ -148,14 +148,14 @@ index 10cd1740df..f22423dfd1 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetStatus( 
 -            /* [out] */ SPAUDIOSTATUS *pStatus) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPAUDIOSTATUS *pStatus) = 0;
++            /* [out] */ SPAUDIOSTATUS *pStatus) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetBufferInfo( 
              /* [in] */ const SPAUDIOBUFFERINFO *pBuffInfo) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetBufferInfo( 
 -            /* [out] */ SPAUDIOBUFFERINFO *pBuffInfo) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPAUDIOBUFFERINFO *pBuffInfo) = 0;
++            /* [out] */ SPAUDIOBUFFERINFO *pBuffInfo) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetDefaultFormat( 
 -            /* [out] */ GUID *pFormatId,
@@ -235,7 +235,7 @@ index 10cd1740df..f22423dfd1 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetStatus( 
 -            /* [out] */ SPVOICESTATUS *pStatus,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPVOICESTATUS *pStatus,
++            /* [out] */ SPVOICESTATUS *pStatus,
              /* [out][annotation] */ 
              _Outptr_  LPWSTR *ppszLastBookmark) = 0;
          
@@ -329,7 +329,7 @@ index 10cd1740df..f22423dfd1 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetResultTimes( 
 -            /* [out] */ SPRECORESULTTIMES *pTimes) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECORESULTTIMES *pTimes) = 0;
++            /* [out] */ SPRECORESULTTIMES *pTimes) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetAlternates( 
              /* [in] */ ULONG ulStartElement,
@@ -458,7 +458,7 @@ index 10cd1740df..f22423dfd1 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetStatus( 
 -            /* [out] */ SPRECOCONTEXTSTATUS *pStatus) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECOCONTEXTSTATUS *pStatus) = 0;
++            /* [out] */ SPRECOCONTEXTSTATUS *pStatus) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetMaxAlternates( 
 -            /* [in] */ ULONG *pcAlternates) = 0;
@@ -525,7 +525,7 @@ index 10cd1740df..f22423dfd1 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetStatus( 
 -            /* [out] */ SPRECOGNIZERSTATUS *pStatus) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECOGNIZERSTATUS *pStatus) = 0;
++            /* [out] */ SPRECOGNIZERSTATUS *pStatus) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFormat( 
              /* [in] */ SPSTREAMFORMATTYPE WaveFormatType,

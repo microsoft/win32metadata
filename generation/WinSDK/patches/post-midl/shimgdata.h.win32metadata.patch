@@ -60,7 +60,7 @@ index 2f366dd110..a920df4a0e 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetPixelFormat( 
 -            /* [out] */ PixelFormat *pFormat) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PixelFormat *pFormat) = 0;
++            /* [out] */ PixelFormat *pFormat) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetDelay( 
 -            /* [out] */ DWORD *pdwDelay) = 0;

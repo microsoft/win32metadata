@@ -90,7 +90,7 @@ index af6fcb5bcc..9a61a9a2a4 100644
 -            /* [out] */ PBOOL pbOverwriteAll ) = 0;
 +            /* [in] */  _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR lpTemplateName,
 +            /* [out] */ SCESVC_HANDLE *scesvcHandle,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PVOID *ppvData,
++            /* [out] */ PVOID *ppvData,
 +            /* [out] */ PBOOL pbOverwriteAll ) = 0;
  
 -        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsDirty(
@@ -120,7 +120,7 @@ index af6fcb5bcc..9a61a9a2a4 100644
 +            /* [in] */ SCESVC_HANDLE scesvcHandle,
              /* [in] */ SCESVC_INFO_TYPE sceType,
 -            /* [out] */ PVOID *ppvData,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PVOID *ppvData,
++            /* [out] */ PVOID *ppvData,
              /* [in out] */ PSCE_ENUMERATION_CONTEXT psceEnumHandle ) = 0;
  
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Initialize(

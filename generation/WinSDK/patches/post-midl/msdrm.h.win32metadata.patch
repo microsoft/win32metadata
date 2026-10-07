@@ -136,7 +136,7 @@ index 33a0894f55..17de2b3b15 100644
                      IN DRMENVHANDLE handle,
                      _In_opt_ PWSTR wszAttribute,
 -                    OUT DRMENCODINGTYPE* peEncoding,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT DRMENCODINGTYPE* peEncoding,
++                    OUT DRMENCODINGTYPE* peEncoding,
                      IN OUT UINT* pcBuffer,
 -                    OUT BYTE* pbBuffer);
 +                    OUT BYTE* pbBuffer);
@@ -145,7 +145,7 @@ index 33a0894f55..17de2b3b15 100644
                      IN DRMHANDLE hLibrary,
                      _In_ PWSTR wszProcName,
 -                    OUT FARPROC* ppfnProcAddress);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT FARPROC* ppfnProcAddress);
++                    OUT FARPROC* ppfnProcAddress);
  
  // support for querying bound licenses
  
@@ -173,7 +173,7 @@ index 33a0894f55..17de2b3b15 100644
                      _In_ PWSTR wszAttribute,
                      IN UINT iWhich,
 -                    OUT DRMENCODINGTYPE* peEncoding,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT DRMENCODINGTYPE* peEncoding,
++                    OUT DRMENCODINGTYPE* peEncoding,
                      IN OUT UINT* pcBuffer,
 -                    OUT BYTE* pbBuffer);
 +                    OUT BYTE* pbBuffer);
@@ -294,7 +294,7 @@ index 33a0894f55..17de2b3b15 100644
                          _In_      PWSTR wszAttributeType,
                          IN      UINT iWhich,
 -                        OUT     DRMENCODINGTYPE* peEncoding,
-+                        _WIN32META_ANNOTATION_("win32metadata:in") OUT     DRMENCODINGTYPE* peEncoding,
++                        OUT     DRMENCODINGTYPE* peEncoding,
                          IN OUT   UINT* pcBuffer,
 -                        OUT     BYTE* pbBuffer);
 +                        OUT     BYTE* pbBuffer);
@@ -468,7 +468,7 @@ index 33a0894f55..17de2b3b15 100644
                                  IN      UINT            uIndex,
 -                                OUT     DRM_USAGEPOLICY_TYPE* peUsagePolicyType,
 -                                OUT     BOOL*           pfExclusion,
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     DRM_USAGEPOLICY_TYPE* peUsagePolicyType,
++                                OUT     DRM_USAGEPOLICY_TYPE* peUsagePolicyType,
 +                                OUT     BOOL*           pfExclusion,
                                  IN OUT  UINT*           puNameLength,
                                  _Out_writes_opt_(*puNameLength)       PWSTR           wszName,

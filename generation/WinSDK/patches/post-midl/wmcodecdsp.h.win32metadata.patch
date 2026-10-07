@@ -245,7 +245,7 @@ index 9c914cd297..586eb32c3a 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetDescriptor( 
 -            /* [out] */ TOC_ENTRY_DESCRIPTOR *pDescriptor) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") TOC_ENTRY_DESCRIPTOR *pDescriptor) = 0;
++            /* [out] */ TOC_ENTRY_DESCRIPTOR *pDescriptor) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetSubEntries( 
              /* [in] */ DWORD dwNumSubEntries,
@@ -312,7 +312,7 @@ index 9c914cd297..586eb32c3a 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetDescriptor( 
 -            /* [out] */ TOC_DESCRIPTOR *pDescriptor) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") TOC_DESCRIPTOR *pDescriptor) = 0;
++            /* [out] */ TOC_DESCRIPTOR *pDescriptor) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetDescription( 
              /* [in] */ LPCWSTR pwszDescription) = 0;

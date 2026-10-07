@@ -241,10 +241,10 @@ index 90d850f66c..fed6703a94 100644
 -                    OUT PVOID *ppvContext,
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadLogRestartArea (
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID pvMarshal,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvRestartBuffer,
++                    OUT PVOID* ppvRestartBuffer,
 +                    OUT PULONG pcbRestartBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsn,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppvContext,
++                    OUT PVOID *ppvContext,
                      IN OUT LPOVERLAPPED pOverlapped OPTIONAL
                      );
  #endif /* _WIN32_WINNT */
@@ -259,7 +259,7 @@ index 90d850f66c..fed6703a94 100644
 -                    OUT PCLFS_LSN plsnRestart,
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadPreviousLogRestartArea (
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID pvReadContext,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppvRestartBuffer,
++                    OUT PVOID *ppvRestartBuffer,
 +                    OUT PULONG pcbRestartBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsnRestart,
                      IN OUT LPOVERLAPPED pOverlapped OPTIONAL
@@ -316,7 +316,7 @@ index 90d850f66c..fed6703a94 100644
                      IN ULONG cMaxWriteBuffers,
                      IN ULONG cMaxReadBuffers,
 -                    OUT PVOID *ppvMarshal
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppvMarshal
++                    OUT PVOID *ppvMarshal
                      );
  #endif /* _WIN32_WINNT */
  
@@ -410,12 +410,12 @@ index 90d850f66c..fed6703a94 100644
 -                    OUT PCLFS_LSN plsnUndoNext,
 -                    OUT PCLFS_LSN plsnPrevious,
 -                    OUT PVOID* ppvReadContext,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvReadBuffer,
++                    OUT PVOID* ppvReadBuffer,
 +                    OUT PULONG pcbReadBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_RECORD_TYPE peRecordType,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsnUndoNext,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsnPrevious,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvReadContext,
++                    OUT PVOID* ppvReadContext,
                      IN OUT LPOVERLAPPED pOverlapped OPTIONAL
                      );
  #endif /* _WIN32_WINNT */
@@ -428,7 +428,7 @@ index 90d850f66c..fed6703a94 100644
                      IN OUT PVOID pvReadContext,
 -                    OUT PVOID* ppvBuffer,
 -                    OUT PULONG pcbBuffer,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvBuffer,
++                    OUT PVOID* ppvBuffer,
 +                    OUT PULONG pcbBuffer,
                      IN OUT PCLFS_RECORD_TYPE peRecordType,
                      IN PCLFS_LSN plsnUser OPTIONAL,

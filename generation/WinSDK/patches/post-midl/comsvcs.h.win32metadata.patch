@@ -574,7 +574,7 @@ index 607bf2048d..aac7923753 100644
          virtual HRESULT STDMETHODCALLTYPE AllocResource( 
              /* [in] */ const RESTYPID __MIDL__IHolder0000,
 -            /* [out] */ RESID *__MIDL__IHolder0001) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RESID *__MIDL__IHolder0001) = 0;
++            /* [out] */ RESID *__MIDL__IHolder0001) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE FreeResource( 
              /* [in] */ const RESID __MIDL__IHolder0002) = 0;
@@ -608,7 +608,7 @@ index 607bf2048d..aac7923753 100644
              /* [in] */ const RESTYPID ResTypId,
 -            /* [out] */ RESID *pResId,
 -            /* [out] */ TIMEINSECS *pSecsFreeBeforeDestroy) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RESID *pResId,
++            /* [out] */ RESID *pResId,
 +            /* [out] */ TIMEINSECS *pSecsFreeBeforeDestroy) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE RateResource( 

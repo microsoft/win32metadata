@@ -18,7 +18,7 @@ index b80506543f..cc71932610 100644
      IN  DWORD   reserved2,
      IN  DWORD   offsetflag,
 -    OUT LPBYTE  *bufptr,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE  *bufptr,
++    OUT LPBYTE  *bufptr,
      IN  DWORD   prefmaxlen,
 -    OUT LPDWORD bytesread,
 -    OUT LPDWORD totalavailable

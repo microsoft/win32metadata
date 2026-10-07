@@ -12,7 +12,7 @@ index caedb05d7d..3c9db4e68b 100644
      IN LPCWSTR servername OPTIONAL,
      IN DWORD level,
 -    OUT LPBYTE * bufptr
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr
++    OUT LPBYTE * bufptr
      );
  
  NET_API_STATUS NET_API_FUNCTION
@@ -21,7 +21,7 @@ index caedb05d7d..3c9db4e68b 100644
      IN LPCWSTR servername OPTIONAL,
      IN DWORD level,
 -    OUT LPBYTE * bufptr,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr,
++    OUT LPBYTE * bufptr,
      IN DWORD prefmaxlen,
 -    OUT LPDWORD entriesread,
 -    OUT LPDWORD totalentries,
@@ -35,7 +35,7 @@ index caedb05d7d..3c9db4e68b 100644
      IN LPCWSTR dirname,
      IN DWORD level,
 -    OUT LPBYTE * bufptr
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr
++    OUT LPBYTE * bufptr
      );
  
  NET_API_STATUS NET_API_FUNCTION
@@ -44,7 +44,7 @@ index caedb05d7d..3c9db4e68b 100644
      IN LPCWSTR servername OPTIONAL,
      IN DWORD level,
 -    OUT LPBYTE * bufptr,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr,
++    OUT LPBYTE * bufptr,
      IN DWORD prefmaxlen,
 -    OUT LPDWORD entriesread,
 -    OUT LPDWORD totalentries,
@@ -58,7 +58,7 @@ index caedb05d7d..3c9db4e68b 100644
      IN LPCWSTR dirname,
      IN DWORD level,
 -    OUT LPBYTE * bufptr
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPBYTE * bufptr
++    OUT LPBYTE * bufptr
      );
  
  NET_API_STATUS NET_API_FUNCTION

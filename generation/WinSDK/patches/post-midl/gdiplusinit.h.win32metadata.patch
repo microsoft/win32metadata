@@ -35,7 +35,7 @@ index 9993b298c7..50c6ad55a0 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("gdiplus.dll") extern "C" Status WINAPI GdiplusStartup(
 +    OUT ULONG_PTR *token,
 +    _WIN32META_ANNOTATION_("win32metadata:in") const GdiplusStartupInput *input,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT GdiplusStartupOutput *output);
++    OUT GdiplusStartupOutput *output);
  
  // GDI+ termination. Must be called before GDI+ is unloaded. 
  // Must not be called from DllMain - can cause deadlock.

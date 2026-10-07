@@ -99,7 +99,7 @@ index 9ba32f8775..0cdf7e027a 100644
 +                                _WIN32META_ANNOTATION_("win32metadata:out") IN      SIP_SUBJECTINFO     *pSubjectInfo,
                                  IN OUT  DWORD               *pcbIndirectData,
 -                                OUT     SIP_INDIRECT_DATA   *pIndirectData);
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     SIP_INDIRECT_DATA   *pIndirectData);
++                                OUT     SIP_INDIRECT_DATA   *pIndirectData);
  
  typedef BOOL (WINAPI * pCryptSIPCreateIndirectData)(
 -                                IN      SIP_SUBJECTINFO     *pSubjectInfo,

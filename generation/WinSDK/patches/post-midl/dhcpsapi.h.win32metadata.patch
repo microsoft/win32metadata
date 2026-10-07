@@ -988,7 +988,7 @@ index 5259993040..6f18e902e9 100644
      _In_opt_ IN      LPWSTR                 ClassName,
      _In_opt_ IN      LPWSTR                 VendorName,
 -             OUT     LPDHCP_OPTION         *OptionInfo     // allocate memory using MIDL functions
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION         *OptionInfo     // allocate memory using MIDL functions
++             OUT     LPDHCP_OPTION         *OptionInfo     // allocate memory using MIDL functions
  ) ;
  
  
@@ -1004,7 +1004,7 @@ index 5259993040..6f18e902e9 100644
 -             OUT     LPDHCP_OPTION_ARRAY   *Options,
 -             OUT     DWORD                 *OptionsRead,
 -             OUT     DWORD                 *OptionsTotal
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_ARRAY   *Options,
++             OUT     LPDHCP_OPTION_ARRAY   *Options,
 +             OUT     DWORD                 *OptionsRead,
 +             OUT     DWORD                 *OptionsTotal
  ) ;
@@ -1058,7 +1058,7 @@ index 5259993040..6f18e902e9 100644
 -             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
 -             OUT     LPDHCP_OPTION_VALUE   *OptionValue
 +             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE   *OptionValue
++             OUT     LPDHCP_OPTION_VALUE   *OptionValue
  ) ;
  
 -DWORD
@@ -1072,7 +1072,7 @@ index 5259993040..6f18e902e9 100644
 -             IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
 -             OUT     LPDHCP_OPTION_VALUE   *OptionValue
 +             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE   *OptionValue
++             OUT     LPDHCP_OPTION_VALUE   *OptionValue
  ) ;
  
  
@@ -1091,7 +1091,7 @@ index 5259993040..6f18e902e9 100644
 -             OUT     LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
 -             OUT     DWORD                 *OptionsRead,
 -             OUT     DWORD                 *OptionsTotal
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
++             OUT     LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
 +             OUT     DWORD                 *OptionsRead,
 +             OUT     DWORD                 *OptionsTotal
  ) ;
@@ -1147,7 +1147,7 @@ index 5259993040..6f18e902e9 100644
 -             IN      LPDHCP_CLASS_INFO      PartialClassInfo,
 -             OUT     LPDHCP_CLASS_INFO     *FilledClassInfo
 +             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_CLASS_INFO      PartialClassInfo,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO     *FilledClassInfo
++             OUT     LPDHCP_CLASS_INFO     *FilledClassInfo
  ) ;
  
  
@@ -1161,7 +1161,7 @@ index 5259993040..6f18e902e9 100644
 -             OUT     LPDHCP_CLASS_INFO_ARRAY *ClassInfoArray,
 -             OUT     DWORD                 *nRead,
 -             OUT     DWORD                 *nTotal
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO_ARRAY *ClassInfoArray,
++             OUT     LPDHCP_CLASS_INFO_ARRAY *ClassInfoArray,
 +             OUT     DWORD                 *nRead,
 +             OUT     DWORD                 *nTotal
  ) ;
@@ -1174,7 +1174,7 @@ index 5259993040..6f18e902e9 100644
      _In_opt_ IN      LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
 -             OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
++             OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
  ) ;
  
  DWORD DHCP_API_FUNCTION
@@ -1183,7 +1183,7 @@ index 5259993040..6f18e902e9 100644
      _In_opt_ IN       LPWSTR                 ServerIpAddress,
               IN      DWORD                  Flags,
 -             OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
++             OUT     LPDHCP_ALL_OPTIONS     *OptionStruct   // fills the fields of this structure
  );
  
 -DWORD
@@ -1194,7 +1194,7 @@ index 5259993040..6f18e902e9 100644
 -             IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
 -             OUT     LPDHCP_ALL_OPTION_VALUES *Values
 +             _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO ScopeInfo,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTION_VALUES *Values
++             OUT     LPDHCP_ALL_OPTION_VALUES *Values
  ) ;
  
  DWORD DHCP_API_FUNCTION
@@ -1205,7 +1205,7 @@ index 5259993040..6f18e902e9 100644
 -           IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
 -           OUT     LPDHCP_ALL_OPTION_VALUES *Values
 +           _WIN32META_ANNOTATION_("win32metadata:out") IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
-+           _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ALL_OPTION_VALUES *Values
++           OUT     LPDHCP_ALL_OPTION_VALUES *Values
  );
  
  
@@ -1221,7 +1221,7 @@ index 5259993040..6f18e902e9 100644
 -    IN      LPVOID                 CallbackFn,    // must be NULL
 -    IN      LPVOID                 CallbackData   // must be NULL
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 IdInfo,        // must be NULL
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_SERVER_INFO_ARRAY *Servers,    // output servers list
++    OUT     LPDHCP_SERVER_INFO_ARRAY *Servers,    // output servers list
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackFn,    // must be NULL
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPVOID                 CallbackData   // must be NULL
  );
@@ -1361,7 +1361,7 @@ index 5259993040..6f18e902e9 100644
 -             OUT     LPDHCP_OPTION_ARRAY   *Options,
 -             OUT     DWORD                 *OptionsRead,
 -             OUT     DWORD                 *OptionsTotal
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_ARRAY   *Options,
++             OUT     LPDHCP_OPTION_ARRAY   *Options,
 +             OUT     DWORD                 *OptionsRead,
 +             OUT     DWORD                 *OptionsTotal
  );
@@ -1386,7 +1386,7 @@ index 5259993040..6f18e902e9 100644
      _In_opt_       LPWSTR                 ClassName,
      _In_opt_       LPWSTR                 VendorName,
 -           OUT     LPDHCP_OPTION         *OptionInfo
-+           _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION         *OptionInfo
++           OUT     LPDHCP_OPTION         *OptionInfo
  );
  
  DWORD DHCP_API_FUNCTION
@@ -1508,7 +1508,7 @@ index 5259993040..6f18e902e9 100644
               IN      ULONG                  dwReserved,    // reserved for future
               IN      DHCP_ATTRIB_ID         DhcpAttribId,  // the attrib being queried
 -             OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
++             OUT     LPDHCP_ATTRIB         *pDhcpAttrib    // fill in this field
  );
  
 -DWORD                                             // Status code
@@ -1520,7 +1520,7 @@ index 5259993040..6f18e902e9 100644
 -             IN      DHCP_ATTRIB_ID         pDhcpAttribs[],// array of attribs
 -             OUT     LPDHCP_ATTRIB_ARRAY   *pDhcpAttribArr // Ptr is filled w/ array
 +             _WIN32META_ANNOTATION_("win32metadata:out") IN      DHCP_ATTRIB_ID         pDhcpAttribs[],// array of attribs
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_ATTRIB_ARRAY   *pDhcpAttribArr // Ptr is filled w/ array
++             OUT     LPDHCP_ATTRIB_ARRAY   *pDhcpAttribArr // Ptr is filled w/ array
  );
  
  DWORD                                             // Status code
@@ -1826,7 +1826,7 @@ index 5259993040..6f18e902e9 100644
 -             OUT     LPDHCP_CLASS_INFO_ARRAY_V6 *ClassInfoArray,
 -             OUT     DWORD                 *nRead,
 -             OUT     DWORD                 *nTotal
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO_ARRAY_V6 *ClassInfoArray,
++             OUT     LPDHCP_CLASS_INFO_ARRAY_V6 *ClassInfoArray,
 +             OUT     DWORD                 *nRead,
 +             OUT     DWORD                 *nTotal
  );
@@ -1853,7 +1853,7 @@ index 5259993040..6f18e902e9 100644
  DhcpGetMibInfoV5(
  _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
 -OUT        LPDHCP_MIB_INFO_V5 *MibInfo
-+_WIN32META_ANNOTATION_("win32metadata:in") OUT        LPDHCP_MIB_INFO_V5 *MibInfo
++OUT        LPDHCP_MIB_INFO_V5 *MibInfo
      );
  
  DWORD DHCP_API_FUNCTION
@@ -1871,7 +1871,7 @@ index 5259993040..6f18e902e9 100644
 -                IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
 -                OUT LPDHCP_OPTION_VALUE        *OptionValue
 +                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO    ScopeInfo,
-+                _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDHCP_OPTION_VALUE        *OptionValue
++                OUT LPDHCP_OPTION_VALUE        *OptionValue
          );
  
  DWORD DHCP_API_FUNCTION
@@ -1921,7 +1921,7 @@ index 5259993040..6f18e902e9 100644
 -                IN  LPDHCP_OPTION_SCOPE_INFO        ScopeInfo,
 -                OUT LPDHCP_ALL_OPTION_VALUES_PB    *Values
 +                _WIN32META_ANNOTATION_("win32metadata:out") IN  LPDHCP_OPTION_SCOPE_INFO        ScopeInfo,
-+                _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDHCP_ALL_OPTION_VALUES_PB    *Values
++                OUT LPDHCP_ALL_OPTION_VALUES_PB    *Values
          );
  
  

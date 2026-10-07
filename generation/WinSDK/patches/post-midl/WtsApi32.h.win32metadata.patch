@@ -394,7 +394,7 @@ index f907576fa1..b2572b66ac 100644
      IN DWORD Version,
 -    OUT PWTS_PROCESS_INFOW * ppProcessInfo,
 -    OUT DWORD * pCount
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT PWTS_PROCESS_INFOW * ppProcessInfo,
++    OUT PWTS_PROCESS_INFOW * ppProcessInfo,
 +    OUT DWORD * pCount
      );
  
@@ -407,7 +407,7 @@ index f907576fa1..b2572b66ac 100644
      IN DWORD Version,
 -    OUT PWTS_PROCESS_INFOA * ppProcessInfo,
 -    OUT DWORD * pCount
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT PWTS_PROCESS_INFOA * ppProcessInfo,
++    OUT PWTS_PROCESS_INFOA * ppProcessInfo,
 +    OUT DWORD * pCount
      );
  
@@ -618,7 +618,7 @@ index f907576fa1..b2572b66ac 100644
      IN WTS_VIRTUAL_CLASS,
 -    OUT PVOID *ppBuffer,
 -    OUT DWORD *pBytesReturned
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppBuffer,
++    OUT PVOID *ppBuffer,
 +    OUT DWORD *pBytesReturned
      );
  

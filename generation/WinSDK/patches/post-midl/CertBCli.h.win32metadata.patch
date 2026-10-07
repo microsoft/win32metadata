@@ -51,7 +51,7 @@ index eebe909fa8..5e0056137b 100644
 -    IN  ULONG dwBackupFlags,	// CSBACKUP_TYPE_*
 -    OUT HCSBC *phbc);
 +    _Win32_AssociatedEnum_(CSBACKUP_TYPE) IN  ULONG dwBackupFlags,	// CSBACKUP_TYPE_*
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT HCSBC *phbc);
++    OUT HCSBC *phbc);
  
  #ifdef _CERTBCLI_TYPECHECK
  FNCERTSRVBACKUPPREPAREW *pfnCertSrvBackupPrepare = CertSrvBackupPrepare;
@@ -113,7 +113,7 @@ index eebe909fa8..5e0056137b 100644
 -    IN  HCSBC hbc,
 -    OUT VOID *pvBuffer,
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN  HCSBC hbc,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT VOID *pvBuffer,
++    OUT VOID *pvBuffer,
      IN  DWORD cbBuffer,
 -    OUT DWORD *pcbRead);
 +    OUT DWORD *pcbRead);
@@ -228,7 +228,7 @@ index eebe909fa8..5e0056137b 100644
      IN  WCHAR const *pwszServerName,
      IN  ULONG dwRestoreFlags,		// CSRESTORE_TYPE_*
 -    OUT HCSBC *phbc);
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT HCSBC *phbc);
++    OUT HCSBC *phbc);
  
  #ifdef _CERTBCLI_TYPECHECK
  FNCERTSRVRESTOREPREPAREW *pfnCertSrvRestorePrepare = CertSrvRestorePrepare;
