@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
-index cff7f002a6..0108530eff 100644
+index cff7f002a6..f7471df6a0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/RtmV2.h
 @@ -21,6 +21,7 @@ Revision History:
@@ -19,9 +19,12 @@ index cff7f002a6..0108530eff 100644
  {
      UINT            MaxNextHopsInRoute; // Max. number of equal cost nexthops
                                          // in a route, & Max. number of local
-@@ -178,15 +179,15 @@ RTM_NET_ADDRESS, *PRTM_NET_ADDRESS;
+@@ -176,17 +177,17 @@ RTM_NET_ADDRESS, *PRTM_NET_ADDRESS;
+ // IPv6 Helper functions on addresss
+ //
  
- DWORD
+-DWORD
++_Win32_ImportLibrary_("rtm.dll") DWORD
  RtmConvertNetAddressToIpv6AddressAndLength(
 -    IN  PRTM_NET_ADDRESS         pNetAddress,
 -    OUT PIN6_ADDR                pAddress,
@@ -32,7 +35,8 @@ index cff7f002a6..0108530eff 100644
      IN  DWORD                    dwAddressSize
      );
  
- DWORD
+-DWORD
++_Win32_ImportLibrary_("rtm.dll") DWORD
  RtmConvertIpv6AddressAndLengthToNetAddress(
 -    OUT  PRTM_NET_ADDRESS         pNetAddress,
 +    _WIN32META_ANNOTATION_("win32metadata:in") OUT  PRTM_NET_ADDRESS         pNetAddress,
@@ -65,8 +69,9 @@ index cff7f002a6..0108530eff 100644
  // Registration API Prototypes
  //
  
+-DWORD
 +_Windows_SupportedOS_Server2000_
- DWORD
++_Win32_ImportLibrary_("rtm.dll") DWORD
  WINAPI
  RtmRegisterEntity (
 -    IN      PRTM_ENTITY_INFO                RtmEntityInfo,
@@ -80,15 +85,17 @@ index cff7f002a6..0108530eff 100644
 +    _WIN32META_ANNOTATION_("win32metadata:in") OUT     PRTM_ENTITY_HANDLE              RtmRegHandle
      );
  
+-DWORD
 +_Windows_SupportedOS_Server2000_
- DWORD
++_Win32_ImportLibrary_("rtm.dll") DWORD
  WINAPI
  RtmDeregisterEntity (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle
      );
  
+-DWORD
 +_Windows_SupportedOS_Server2000_
- DWORD
++_Win32_ImportLibrary_("rtm.dll") DWORD
  WINAPI
  RtmGetRegisteredEntities (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -99,7 +106,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseEntities (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -113,7 +120,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmLockDestination(
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -122,7 +129,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetOpaqueInformationPointer (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -136,7 +143,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetEntityMethods (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -147,7 +154,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmInvokeMethod (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -160,7 +167,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmBlockMethods (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -169,7 +176,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetEntityInfo (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -179,7 +186,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetDestInfo (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -191,7 +198,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetRouteInfo (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -200,7 +207,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetNextHopInfo (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -210,7 +217,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseEntityInfo (
      IN      RTM_ENTITY_HANDLE              RtmRegHandle,
@@ -219,7 +226,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseDestInfo (
      IN      RTM_ENTITY_HANDLE              RtmRegHandle,
@@ -228,7 +235,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseRouteInfo (
      IN      RTM_ENTITY_HANDLE              RtmRegHandle,
@@ -237,7 +244,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseNextHopInfo (
      IN      RTM_ENTITY_HANDLE              RtmRegHandle,
@@ -251,7 +258,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmAddRouteToDest (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -268,7 +275,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmDeleteRouteToDest (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -278,7 +285,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmHoldDestination (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -287,7 +294,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetRoutePointer (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -297,7 +304,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmLockRoute(
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -306,7 +313,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmUpdateAndUnlockRoute(
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -323,7 +330,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetExactMatchDestination (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -336,7 +343,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetMostSpecificDestination (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -349,7 +356,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetLessSpecificDestination (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -361,7 +368,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetExactMatchRoute (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -376,7 +383,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmIsBestRoute (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -390,7 +397,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmAddNextHop (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -402,7 +409,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmFindNextHop (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -414,7 +421,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmDeleteNextHop (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -424,7 +431,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetNextHopPointer (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -434,7 +441,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmLockNextHop(
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -443,7 +450,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmCreateDestEnum (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -457,7 +464,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetEnumDests (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -468,7 +475,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseDests (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -478,7 +485,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmCreateRouteEnum (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -491,7 +498,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetEnumRoutes (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -502,7 +509,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseRoutes (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -512,7 +519,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmCreateNextHopEnum (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -524,7 +531,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetEnumNextHops (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -535,7 +542,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseNextHops (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -545,7 +552,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmDeleteEnumHandle (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -554,7 +561,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmRegisterForChangeNotification (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -567,7 +574,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetChangedDests (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -578,7 +585,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReleaseChangedDests (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -589,7 +596,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmIgnoreChangedDests (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -600,7 +607,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetChangeStatus (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -611,7 +618,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmMarkDestForChangeNotification (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -620,7 +627,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmIsMarkedForChangeNotification (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -631,7 +638,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmDeregisterFromChangeNotification (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -640,7 +647,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmCreateRouteList (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -649,7 +656,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmInsertInRouteList (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -660,7 +667,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmCreateRouteListEnum (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -670,7 +677,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmGetListEnumRoutes (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -679,7 +686,7 @@ index cff7f002a6..0108530eff 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmDeleteRouteList (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,
@@ -688,7 +695,7 @@ index cff7f002a6..0108530eff 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2000_ DWORD
++_Win32_ImportLibrary_("rtm.dll") _Windows_SupportedOS_Server2000_ DWORD
  WINAPI
  RtmReferenceHandles (
      IN      RTM_ENTITY_HANDLE               RtmRegHandle,

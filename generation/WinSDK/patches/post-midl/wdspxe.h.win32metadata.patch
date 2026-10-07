@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
-index 662b0c9753..9bc174f5b1 100644
+index 662b0c9753..16ffdbb550 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wdspxe.h
 @@ -14,6 +14,7 @@ Abstract:
@@ -57,7 +57,7 @@ index 662b0c9753..9bc174f5b1 100644
  // Provider Registration and Enumeration APIs
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderRegister (
      _In_ LPCWSTR pszProviderName,
@@ -69,14 +69,14 @@ index 662b0c9753..9bc174f5b1 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderUnRegister (
      _In_ LPCWSTR pszProviderName
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderQueryIndex (
      _In_ LPCWSTR pszProviderName,
@@ -84,7 +84,7 @@ index 662b0c9753..9bc174f5b1 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderEnumFirst (
 -    _Out_ HANDLE *phEnum
@@ -92,7 +92,7 @@ index 662b0c9753..9bc174f5b1 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderEnumNext (
      _In_ HANDLE hEnum,
@@ -101,14 +101,14 @@ index 662b0c9753..9bc174f5b1 100644
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderEnumClose (
      _In_ HANDLE hEnum
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PxeProviderFreeInfo (
      _In_ PPXE_PROVIDER pProvider
      );
@@ -117,7 +117,7 @@ index 662b0c9753..9bc174f5b1 100644
  // Callback Registration
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeRegisterCallback (
      _In_ HANDLE hProvider,
@@ -132,7 +132,7 @@ index 662b0c9753..9bc174f5b1 100644
  // UDP Send/Boot Action
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeSendReply (
      _In_ HANDLE hClientRequest,
@@ -141,7 +141,7 @@ index 662b0c9753..9bc174f5b1 100644
  // Notify of Async Processing
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeAsyncRecvDone (
      _In_ HANDLE hClientRequest,
@@ -150,24 +150,35 @@ index 662b0c9753..9bc174f5b1 100644
  //
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeTrace (
      _In_ HANDLE hProvider,
-@@ -358,6 +359,7 @@ PxeTraceV (
+@@ -346,7 +347,7 @@ PxeTrace (
+     ...
+     );
+ 
+-DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
+ PXEAPI
+ PxeTraceV (
+     _In_ HANDLE hProvider,
+@@ -358,7 +359,8 @@ PxeTraceV (
  //
  // Packet Allocation
  //
+-PVOID
 +_Windows_SupportedOS_Server2008_ _Win32_SetLastError_
- PVOID
++_Win32_ImportLibrary_("WDSPXE.dll") PVOID
  PXEAPI
  PxePacketAllocate (
+     _In_ HANDLE hProvider,
 @@ -366,7 +368,7 @@ PxePacketAllocate (
      _In_ ULONG uSize
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxePacketFree (
      _In_ HANDLE hProvider,
@@ -176,7 +187,7 @@ index 662b0c9753..9bc174f5b1 100644
  // Provider Attributes
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeProviderSetAttribute (
      _In_ HANDLE hProvider,
@@ -185,142 +196,166 @@ index 662b0c9753..9bc174f5b1 100644
  // Dhcp Functions
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeDhcpInitialize (
      _In_reads_bytes_(uRecvPacketLen) PVOID pRecvPacket,
-@@ -399,6 +401,8 @@ PxeDhcpInitialize (
+@@ -399,7 +401,9 @@ PxeDhcpInitialize (
      _Out_ PULONG puReplyPacketLen
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpv6Initialize (
+     _In_reads_bytes_(cbRequest) PVOID pRequest,
 @@ -409,7 +413,7 @@ PxeDhcpv6Initialize (
      _Out_ PULONG pcbReplyUsed
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeDhcpAppendOption (
      _Inout_updates_bytes_(uMaxReplyPacketLen) PVOID pReplyPacket,
-@@ -420,6 +424,8 @@ PxeDhcpAppendOption (
+@@ -420,8 +424,10 @@ PxeDhcpAppendOption (
      _In_reads_bytes_opt_(bOptionLen) PVOID pValue
      );
  
 +_Windows_SupportedOS_Windows8_ 
 +
  _Success_(return == ERROR_SUCCESS)
- DWORD
+-DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
+ PxeDhcpv6AppendOption (
+     _Inout_updates_bytes_to_(cbReply, *pcbReplyUsed) PVOID pReply,
 @@ -432,7 +438,7 @@ PxeDhcpv6AppendOption (
      _In_reads_bytes_(cbOption) PVOID pOption
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeDhcpAppendOptionRaw (
      _Inout_updates_bytes_(uMaxReplyPacketLen) PVOID pReplyPacket,
-@@ -442,6 +448,8 @@ PxeDhcpAppendOptionRaw (
+@@ -442,8 +448,10 @@ PxeDhcpAppendOptionRaw (
      _In_reads_bytes_(uBufferLen) PVOID pBuffer
      );
  
 +_Windows_SupportedOS_Windows8_ 
 +
  _Success_(return == ERROR_SUCCESS)
- DWORD
+-DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
+ PxeDhcpv6AppendOptionRaw (
+     _Inout_updates_bytes_to_(cbReply, *pcbReplyUsed) PVOID pReply,
 @@ -453,7 +461,7 @@ PxeDhcpv6AppendOptionRaw (
      _In_reads_bytes_(cbBuffer) PVOID pBuffer
      );
  
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeDhcpIsValid (
      _In_reads_bytes_(uPacketLen) PVOID pPacket,
-@@ -462,6 +470,8 @@ PxeDhcpIsValid (
+@@ -462,7 +470,9 @@ PxeDhcpIsValid (
      _Out_opt_ PBOOL pbPxeOptionPresent
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpv6IsValid (
-@@ -471,6 +481,7 @@ PxeDhcpv6IsValid (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+@@ -471,7 +481,8 @@ PxeDhcpv6IsValid (
      _Out_opt_ PBOOL pbPxeOptionPresent
      );
  
+-DWORD
 +_Windows_SupportedOS_Server2008_ 
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpGetOptionValue (
-@@ -482,6 +493,9 @@ PxeDhcpGetOptionValue (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+@@ -482,7 +493,10 @@ PxeDhcpGetOptionValue (
      _Outptr_opt_result_bytebuffer_(*pbOptionLen) PVOID *ppOptionValue
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpv6GetOptionValue (
-@@ -493,6 +507,7 @@ PxeDhcpv6GetOptionValue (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+@@ -493,7 +507,8 @@ PxeDhcpv6GetOptionValue (
      _Outptr_opt_result_bytebuffer_(*pwOptionLen) PVOID *ppOptionValue
      );
  
+-DWORD
 +_Windows_SupportedOS_Server2008_ 
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpGetVendorOptionValue (
-@@ -504,6 +519,9 @@ PxeDhcpGetVendorOptionValue (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+@@ -504,7 +519,10 @@ PxeDhcpGetVendorOptionValue (
      _Outptr_opt_result_bytebuffer_(*pbOptionLen) PVOID *ppOptionValue
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpv6GetVendorOptionValue (
-@@ -516,6 +534,8 @@ PxeDhcpv6GetVendorOptionValue (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+@@ -516,7 +534,9 @@ PxeDhcpv6GetVendorOptionValue (
      _Outptr_opt_result_bytebuffer_(*pwOptionLen) PVOID *ppOptionValue
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpv6ParseRelayForw (
-@@ -528,6 +548,8 @@ PxeDhcpv6ParseRelayForw (
+     _In_reads_bytes_(uRelayForwPacketLen) PVOID pRelayForwPacket,
+@@ -528,7 +548,9 @@ PxeDhcpv6ParseRelayForw (
      _Out_ PULONG pcbInnerPacket
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeDhcpv6CreateRelayRepl (
+     _In_reads_(nRelayMessages) PPXE_DHCPV6_NESTED_RELAY_MESSAGE pRelayMessages,
 @@ -543,7 +565,7 @@ PxeDhcpv6CreateRelayRepl (
  //
  // Server Information
  //
 -DWORD
-+_Windows_SupportedOS_Server2008_ DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") _Windows_SupportedOS_Server2008_ DWORD
  PXEAPI
  PxeGetServerInfo (
      _In_ PXE_GSI_TYPE uInfoType,
-@@ -551,6 +573,8 @@ PxeGetServerInfo (
+@@ -551,7 +573,9 @@ PxeGetServerInfo (
      _In_ ULONG uBufferLen
      );
  
+-DWORD
 +_Windows_SupportedOS_Windows8_ 
 +
- DWORD
++_Win32_ImportLibrary_("WDSPXE.dll") DWORD
  PXEAPI
  PxeGetServerInfoEx (
+     _In_ PXE_GSI_TYPE uInfoType,
