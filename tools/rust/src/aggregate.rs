@@ -70,11 +70,16 @@ const AUTHORITY_SATELLITE_HEADERS: &[&str] = &[
     "xamlOM.h",
 ];
 
-pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<String, String> {
+pub fn main_prelude(prelude: &str) -> String {
     let mut source = format!("{GLOBAL_DEFINES}{AGGREGATE_FIRST_INCLUDE_DEFINES}");
     source.push_str(prelude);
     source.push_str(COMPATIBILITY_SHIMS);
     append_security_seed(&mut source);
+    source
+}
+
+pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<String, String> {
+    let mut source = main_prelude(prelude);
     append_direct_draw_prerequisites(&mut source);
     append_audio_apo(&mut source);
     append_winrm(&mut source);
@@ -387,7 +392,7 @@ fn append_fax(source: &mut String) {
 }
 
 fn append_http_server(source: &mut String) {
-    append_in_out_headers(source, &["WinSock2.h", "http.h", "winhttp.h"]);
+    append_in_out_headers(source, &["WinSock2.h", "http.h"]);
 }
 
 fn append_tapi3(source: &mut String) {

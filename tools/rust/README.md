@@ -5,13 +5,21 @@ A command-line front end over the pinned windows-rs producer revision, providing
 
 The production `scrape --win32-sdk` path reads the pinned raw Windows SDK headers and
 constructs the producer-supported aggregate plus satellite inputs. Logical authority adds
-only the two required `PSAPI_VERSION` compile variants; it never expands into one input per
-partition. `--partition-policy-root` routes physical header provenance through the checked-in
+two `PSAPI_VERSION` compile variants and an independent WinHTTP context; it never expands
+into one input per partition. `--partition-policy-root` routes physical header provenance through the checked-in
 logical partition policies. Every physical owner is qualified to its assigned aggregate,
-satellite, or PSAPI input, so the same header included elsewhere remains dependency closure
-rather than becoming a public root. x64, x86, and arm64 extraction runs in parallel, then the
+satellite, PSAPI, or WinHTTP input, so the same header included elsewhere remains dependency
+closure rather than becoming a public root. x64, x86, and arm64 extraction runs in parallel, then the
 per-architecture WinMDs are merged into one output. Focused partition translation units remain
 available for package fixtures and inner-loop debugging.
+
+WinHTTP uses the existing `WinHttp/main.cpp` compile environment in the fifth authority
+input, while WinInet and Winineti remain in the aggregate. Their incompatible
+`_INTERNET_SCHEME_` and `_URL_COMPONENTS_` provider guards must not share a preprocessing
+context: parsing either provider first suppresses declarations from the other. The
+separate snapshots preserve native values, record identities, and provider-local references
+without guard manipulation, aliases, or namespace changes. Explicit raw SDK mode retains
+its original two-input behavior.
 
 In logical authority mode, explicitly traversed headers retain their assigned namespaces.
 Required dependency types from other headers use the default `Windows.Win32` namespace
@@ -203,9 +211,10 @@ By default this uses the pinned `Microsoft.Windows.SDK.CPP` packages and logical
 partition authority, and generates `bin\Windows.Win32.winmd` for x64, x86, and arm64.
 Pass `-Architecture x64` for a single-architecture run. Passing `-Partition
 Foundation,Bluetooth` selects focused legacy partition inputs instead of the production
-header manifest. Production extraction uses aggregate + satellite and the two PSAPI
-variants, not one translation unit per partition. `-UsePartitionAuthority` remains
-accepted explicitly. `-RawSdk` (or `-UsePartitionAuthority:$false`) selects the raw
+header manifest. Production extraction uses aggregate + satellite, two PSAPI variants,
+and the independent WinHTTP context, not one translation unit per partition.
+`-UsePartitionAuthority` remains accepted explicitly. `-RawSdk` (or
+`-UsePartitionAuthority:$false`) selects the raw
 NuGet SDK manifest without checked-in header preparation or logical authority.
 
 The production MSBuild path is:

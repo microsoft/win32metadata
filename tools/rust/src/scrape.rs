@@ -1,7 +1,7 @@
 //! `scrape`: Windows SDK headers or focused partition inputs -> WinMD.
 //!
 //! The production path uses the pinned producer's aggregate + satellite header manifest.
-//! Logical authority adds only the two required PSAPI compile variants. Focused partition
+//! Logical authority adds two PSAPI variants and an independent WinHTTP context. Focused partition
 //! translation units remain available for package fixtures and inner-loop debugging. No path
 //! uses generated RSP, JSON, or extraction-checkpoint sidecars.
 
@@ -28,6 +28,7 @@ const AGGREGATE_INPUT: &str = "win32metadata-aggregate.cpp";
 const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
+const WINHTTP_INPUT: &str = "win32metadata-winhttp.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
     "F492BAA4D29D5B3F8BD3CC5971C0B9C32A541C92B82A1833B73B3125A96228F4";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
@@ -543,15 +544,25 @@ enum AuthorityInput {
     Satellite,
     PsApiV1,
     PsApiV2,
+    WinHttp,
 }
 
 impl AuthorityInput {
+    const ALL: [Self; 5] = [
+        Self::Aggregate,
+        Self::Satellite,
+        Self::PsApiV1,
+        Self::PsApiV2,
+        Self::WinHttp,
+    ];
+
     fn name(self) -> &'static str {
         match self {
             Self::Aggregate => AGGREGATE_INPUT,
             Self::Satellite => SATELLITE_INPUT,
             Self::PsApiV1 => PSAPI_V1_INPUT,
             Self::PsApiV2 => PSAPI_V2_INPUT,
+            Self::WinHttp => WINHTTP_INPUT,
         }
     }
 }
@@ -1090,6 +1101,7 @@ fn authority_owner_input(
     match partition {
         "PsApi1" => return Ok(AuthorityInput::PsApiV1),
         "PsApi2" => return Ok(AuthorityInput::PsApiV2),
+        "WinHttp" => return Ok(AuthorityInput::WinHttp),
         _ => {}
     }
     if let Some(input) = shared_root_owner_input(partition, inventory_path)? {
@@ -1303,7 +1315,7 @@ fn append_partition_source_headers(
 ) -> Result<(), String> {
     let owning_inputs = authority_owning_inputs_by_path(roots)?;
     for partition in &traversal.partitions {
-        if ["Kernel", "PsApi1", "PsApi2", "Threading"]
+        if ["Kernel", "PsApi1", "PsApi2", "Threading", "WinHttp"]
             .iter()
             .any(|candidate| partition.identity.eq_ignore_ascii_case(candidate))
         {
@@ -1370,7 +1382,7 @@ fn append_partition_source_headers(
                 AuthorityInput::Satellite => {
                     satellite.push_str(&format!("\n#include \"{include}\"{GUID_RESET}"));
                 }
-                AuthorityInput::PsApiV1 | AuthorityInput::PsApiV2 => {}
+                AuthorityInput::PsApiV1 | AuthorityInput::PsApiV2 | AuthorityInput::WinHttp => {}
             }
         }
     }
@@ -1414,10 +1426,14 @@ fn append_authority_manifest(
                     AuthorityInput::Aggregate
                 }
             });
-        if input == AuthorityInput::Satellite {
-            satellite.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
-        } else {
-            aggregate.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
+        match input {
+            AuthorityInput::Aggregate => {
+                aggregate.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
+            }
+            AuthorityInput::Satellite => {
+                satellite.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
+            }
+            AuthorityInput::PsApiV1 | AuthorityInput::PsApiV2 | AuthorityInput::WinHttp => {}
         }
     }
     for header in crate::win32_headers::SATELLITE_HEADERS {
@@ -1491,6 +1507,13 @@ fn build_authority_source_plan(
         &cellular_header.path,
         AuthorityInput::Aggregate,
     )?;
+    let winhttp_input = &logical_partition(traversal, "WinHttp")?.input;
+    let winhttp_source = std::fs::read_to_string(winhttp_input).map_err(|error| {
+        format!(
+            "failed to read independent WinHTTP compile environment `{}`: {error}",
+            winhttp_input.display()
+        )
+    })?;
     let raw_sources = [
         (AuthorityInput::Aggregate, aggregate),
         (AuthorityInput::Satellite, satellite),
@@ -1501,6 +1524,10 @@ fn build_authority_source_plan(
         (
             AuthorityInput::PsApiV2,
             crate::aggregate::psapi_source(WIN32_SDK_PRELUDE, 2),
+        ),
+        (
+            AuthorityInput::WinHttp,
+            format!("{WIN32_SDK_PRELUDE}\n{winhttp_source}"),
         ),
     ];
     let mut sources = BTreeMap::new();
@@ -2262,13 +2289,8 @@ fn build_inputs(
             .filter_map(|header| resolve_header(header, include_dirs))
             .map(|path| path_arg(&path, "--include"))
             .collect::<Result<Vec<_>, _>>()?;
-        let mut inputs = Vec::with_capacity(4);
-        for input in [
-            AuthorityInput::Aggregate,
-            AuthorityInput::Satellite,
-            AuthorityInput::PsApiV1,
-            AuthorityInput::PsApiV2,
-        ] {
+        let mut inputs = Vec::with_capacity(AuthorityInput::ALL.len());
+        for input in AuthorityInput::ALL {
             let mut physical = plan
                 .roots
                 .roots
@@ -2296,9 +2318,10 @@ fn build_inputs(
             }
             inputs.push(value);
         }
-        if inputs.len() != 4 {
+        if inputs.len() != AuthorityInput::ALL.len() {
             return Err(format!(
-                "the aggregate authority plan must produce 4 inputs, but produced {}",
+                "the aggregate authority plan must produce {} inputs, but produced {}",
+                AuthorityInput::ALL.len(),
                 inputs.len()
             ));
         }
@@ -3228,8 +3251,8 @@ pub fn help_text() -> &'static str {
                 translation units. Repeatable.
   --partition-policy-root
                 Directory of logical WinSDK partitions whose settings.rsp traversal policy
-                routes one aggregate + satellite extraction plus the two required PSAPI
-                variants. Requires --win32-sdk and cannot be combined with focused inputs.
+                routes aggregate + satellite, two PSAPI variants, and an independent WinHTTP
+                input. Requires --win32-sdk and cannot be combined with focused inputs.
   --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
@@ -5742,6 +5765,40 @@ mod tests {
         let include_suffix = |name: &str| format!("/{}\"", name.to_ascii_lowercase());
         let aggregate_lower = aggregate_source.to_ascii_lowercase();
         let satellite_lower = satellite_source.to_ascii_lowercase();
+        let winhttp_source = source_plan.sources.get(&AuthorityInput::WinHttp).unwrap();
+        let winhttp_lower = winhttp_source.to_ascii_lowercase();
+        for header in ["winhttp.h", "httprequest.h"] {
+            let suffix = include_suffix(header);
+            for (input, source) in &source_plan.sources {
+                assert_eq!(
+                    source.to_ascii_lowercase().matches(&suffix).count(),
+                    usize::from(*input == AuthorityInput::WinHttp),
+                    "{header} must occur only in its independent provider context"
+                );
+            }
+            assert_eq!(
+                site(&format!("um/{header}"), AuthorityInput::WinHttp)
+                    .unwrap()
+                    .role,
+                AuthorityIncludeRole::OwnedRoot
+            );
+        }
+        for header in ["wininet.h", "winineti.h"] {
+            let suffix = include_suffix(header);
+            assert!(aggregate_lower.contains(&suffix), "{header}");
+            assert!(!winhttp_lower.contains(&suffix), "{header}");
+        }
+        assert!(winhttp_lower.contains(&include_suffix("intrinfix.h")));
+        assert!(
+            winhttp_lower.find(&include_suffix("winsock2.h")).unwrap()
+                < winhttp_lower.find(&include_suffix("winhttp.h")).unwrap()
+        );
+        assert!(
+            winhttp_lower.find(&include_suffix("winhttp.h")).unwrap()
+                < winhttp_lower
+                    .find(&include_suffix("httprequest.h"))
+                    .unwrap()
+        );
         assert!(
             aggregate_lower
                 .find(&include_suffix("shellscalingapi.h"))
@@ -5810,7 +5867,7 @@ mod tests {
         else {
             panic!("aggregate authority unexpectedly created PartitionedInput values");
         };
-        assert_eq!(authority.len(), 4);
+        assert_eq!(authority.len(), 5);
         assert_eq!(
             authority
                 .iter()
@@ -5820,7 +5877,8 @@ mod tests {
                 AGGREGATE_INPUT,
                 SATELLITE_INPUT,
                 PSAPI_V1_INPUT,
-                PSAPI_V2_INPUT
+                PSAPI_V2_INPUT,
+                WINHTTP_INPUT
             ]
         );
         assert_eq!(traversal.partitions.len(), 321);
@@ -6168,15 +6226,10 @@ mod tests {
                     .any(|owner| owner.name().eq_ignore_ascii_case(input)),
                 "{label}"
             );
-            let input = [
-                AuthorityInput::Aggregate,
-                AuthorityInput::Satellite,
-                AuthorityInput::PsApiV1,
-                AuthorityInput::PsApiV2,
-            ]
-            .into_iter()
-            .find(|candidate| candidate.name().eq_ignore_ascii_case(input))
-            .unwrap();
+            let input = AuthorityInput::ALL
+                .into_iter()
+                .find(|candidate| candidate.name().eq_ignore_ascii_case(input))
+                .unwrap();
             assert_eq!(
                 !*expected_visit,
                 is_intentionally_unvisited_root(label, input),
@@ -9545,6 +9598,453 @@ mod tests {
                     .unwrap();
                 assert_eq!(locale.ty(), Type::value_named(namespace, "LCID"));
             },
+        );
+    }
+
+    #[test]
+    fn authority_shared_guard_providers_keep_independent_domains() {
+        use windows_metadata::{Type, Value};
+
+        ensure_libclang();
+        let root = scratch("authority-shared-guard-providers");
+        let families = [
+            ("WinHttp", "winhttp.h", "Test.WinHttp", "HttpScheme", 1),
+            ("WinInet", "wininet.h", "Test.WinInet", "InetScheme", 3),
+        ];
+        let mut sources = BTreeMap::<AuthorityInput, (String, Vec<String>)>::new();
+        let mut policy = HeaderPartitionPolicy::new();
+        for (partition, header, namespace, function, first) in families {
+            let path = root.join(header);
+            std::fs::write(
+                &path,
+                format!(
+                    "#ifndef SHARED_SCHEME_GUARD\n\
+                     #define SHARED_SCHEME_GUARD\n\
+                     enum INTERNET_SCHEME {{ SCHEME_HTTP = {first}, SCHEME_HTTPS = {} }};\n\
+                     #endif\n\
+                     #ifndef SHARED_COMPONENTS_GUARD\n\
+                     #define SHARED_COMPONENTS_GUARD\n\
+                     struct URL_COMPONENTS {{ INTERNET_SCHEME scheme; }};\n\
+                     #endif\n\
+                     extern \"C\" INTERNET_SCHEME {function}(URL_COMPONENTS *value);\n",
+                    first + 1
+                ),
+            )
+            .unwrap();
+            let input = authority_owner_input(partition, &path, &format!("um/{header}")).unwrap();
+            let path = path_arg(&path, "--include").unwrap();
+            let (source, roots) = sources.entry(input).or_default();
+            source.push_str(&format!("#include \"{path}\"\n"));
+            roots.push(path.clone());
+            policy.add_traversed_header_for_input(
+                input.name(),
+                path,
+                RootPartition::new(partition, namespace),
+            );
+        }
+        let snapshot = windows_clang::extract(
+            sources.iter().map(|(input, (source, roots))| {
+                Input::new(input.name(), source.clone()).with_roots(roots.clone())
+            }),
+            &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        std::fs::write(root.join("facts.txt"), format!("{:#?}\n", snapshot.facts())).unwrap();
+        let providers = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| {
+                fact.name == "INTERNET_SCHEME" && matches!(fact.data, FactData::Enum { .. })
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(
+            providers.len(),
+            2,
+            "both guarded native providers must survive: {}",
+            root.display()
+        );
+        assert_ne!(providers[0].origin.tu, providers[1].origin.tu);
+        assert_ne!(providers[0].spelling.file, providers[1].spelling.file);
+        for (partition, header, _, _, first) in families {
+            let path = root.join(header);
+            let input = authority_owner_input(partition, &path, &format!("um/{header}")).unwrap();
+            let fact = providers
+                .iter()
+                .find(|fact| fact.origin.tu == input.name())
+                .unwrap();
+            assert_eq!(
+                normalize_audit_path(&fact.spelling.file),
+                normalize_audit_path(&path_arg(&path, "--include").unwrap())
+            );
+            let FactData::Enum { variants, .. } = &fact.data else {
+                unreachable!()
+            };
+            assert_eq!(
+                variants
+                    .iter()
+                    .map(|variant| (variant.name.as_str(), variant.value))
+                    .collect::<Vec<_>>(),
+                [
+                    ("SCHEME_HTTP", i64::from(first)),
+                    ("SCHEME_HTTPS", i64::from(first + 1))
+                ]
+            );
+        }
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let mut emit = EmitOptions::new("Test", references.types());
+        emit.library = Some("fixture.dll");
+        let partitions = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        for (_, _, namespace, function, _) in families {
+            let rdl = partitions
+                .iter()
+                .filter(|(partition, _)| partition.namespace == namespace)
+                .map(|(_, rdl)| rdl.as_str())
+                .collect::<String>();
+            assert!(rdl.contains("INTERNET_SCHEME"), "{rdl}");
+            assert!(rdl.contains("URL_COMPONENTS"), "{rdl}");
+            assert!(rdl.contains(&format!("fn {function}(")), "{rdl}");
+        }
+        let rdl = root.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let image = root.join("Providers.winmd");
+        compile_inputs(&[rdl], &[], "Providers", None, &image).unwrap();
+        let index = Index::read(&image).unwrap();
+        for (_, _, namespace, function, first) in families {
+            let scheme = index.expect(namespace, "INTERNET_SCHEME");
+            for (name, value) in [("SCHEME_HTTP", first), ("SCHEME_HTTPS", first + 1)] {
+                let field = scheme.fields().find(|field| field.name() == name).unwrap();
+                assert_eq!(field.constant().unwrap().value(), Value::I32(value));
+            }
+            let component = index.expect(namespace, "URL_COMPONENTS");
+            assert_eq!(
+                component.fields().next().unwrap().ty(),
+                Type::value_named(namespace, "INTERNET_SCHEME")
+            );
+            let Item::Fn(function) = index.expect_item(namespace, function) else {
+                panic!("missing {function}");
+            };
+            let signature = function.signature(&[]);
+            assert_eq!(
+                signature.return_type,
+                Type::value_named(namespace, "INTERNET_SCHEME")
+            );
+            assert_eq!(
+                signature.types,
+                [Type::PtrMut(
+                    Box::new(Type::value_named(namespace, "URL_COMPONENTS")),
+                    1
+                )]
+            );
+        }
+        let (partition, header, _, _, _) = families[0];
+        let path = root.join(header);
+        let input = authority_owner_input(partition, &path, &format!("um/{header}")).unwrap();
+        policy.add_traversed_header_for_input(
+            input.name(),
+            path_arg(&path, "--include").unwrap(),
+            RootPartition::new("Conflict", "Test.Conflict"),
+        );
+        let error = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::new(),
+            &emit,
+            "x64",
+        )
+        .expect_err("a genuinely competing provider owner must still fail");
+        assert!(error.contains("Test.Conflict"), "{error}");
+        std::fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    #[ignore = "requires frozen arguments in WIN32METADATA_PROVIDER_ARGUMENTS_FILE and a fresh WIN32METADATA_PROVIDER_OUTPUT_ROOT"]
+    fn sdk_independent_winhttp_wininet_providers() {
+        ensure_libclang();
+        let arguments = std::fs::read_to_string(
+            std::env::var_os("WIN32METADATA_PROVIDER_ARGUMENTS_FILE")
+                .expect("set frozen scrape arguments, one argument per line"),
+        )
+        .unwrap();
+        let options = parse_args(&arguments.lines().collect::<Vec<_>>()).unwrap();
+        assert!(options.symbols.is_empty() && options.partitions.is_empty());
+        assert_eq!(lib_files(&options).unwrap().len(), 247);
+        let mut configuration = build_configuration(&options).unwrap();
+        let logical = configuration.logical_partitions.as_ref().unwrap();
+        assert_eq!(logical.traversal.partitions.len(), 321);
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_PROVIDER_OUTPUT_ROOT")
+                .expect("set a fresh provider evidence directory"),
+        );
+        std::fs::create_dir(&output).unwrap();
+        let ScrapeInputs::Common(inputs) =
+            std::mem::replace(&mut configuration.inputs, ScrapeInputs::Common(Vec::new()))
+        else {
+            panic!("expected the production common-input plan");
+        };
+        assert_eq!(inputs.len(), 5);
+        let wininet = logical_partition(&logical.traversal, "WinInet").unwrap();
+        let wininet_source = std::fs::read_to_string(&wininet.input).unwrap();
+        let inputs = inputs
+            .into_iter()
+            .filter(|input| [AGGREGATE_INPUT, WINHTTP_INPUT].contains(&input.name.as_str()))
+            .map(|mut input| {
+                if input.name == AGGREGATE_INPUT {
+                    // Canonical ownership also requires the aggregate's complete first-include
+                    // contract, including COM definitions and security prerequisites.
+                    input.source = format!(
+                        "{}\n{wininet_source}",
+                        crate::aggregate::main_prelude(WIN32_SDK_PRELUDE)
+                    );
+                }
+                std::fs::write(output.join(&input.name), &input.source).unwrap();
+                input
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(inputs.len(), 2);
+        let mut args = configuration.args.clone();
+        args.push("--target=x86_64-pc-windows-msvc".to_string());
+        std::fs::write(output.join("arguments.txt"), args.join("\n")).unwrap();
+        let snapshot =
+            windows_clang::extract(inputs, &args.iter().map(String::as_str).collect::<Vec<_>>())
+                .unwrap();
+        std::fs::write(
+            output.join("included-files.txt"),
+            format!("{:#?}\n", snapshot.included_files()),
+        )
+        .unwrap();
+        for included in snapshot.included_files() {
+            let file = source_file_name(&included.path).to_ascii_lowercase();
+            if ["winhttp.h", "httprequest.h"].contains(&file.as_str()) {
+                assert_eq!(included.input, WINHTTP_INPUT, "{included:?}");
+            }
+            if ["wininet.h", "winineti.h"].contains(&file.as_str()) {
+                assert_eq!(included.input, AGGREGATE_INPUT, "{included:?}");
+            }
+        }
+        let provider_names = [
+            "INTERNET_SCHEME",
+            "LPINTERNET_SCHEME",
+            "URL_COMPONENTS",
+            "URL_COMPONENTSA",
+            "URL_COMPONENTSW",
+            "WININET_PROXY_INFO",
+        ];
+        let facts = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| provider_names.contains(&fact.name.as_str()))
+            .collect::<Vec<_>>();
+        std::fs::write(output.join("provider-facts.txt"), format!("{facts:#?}\n")).unwrap();
+        let native_enum = facts
+            .iter()
+            .find(|fact| {
+                fact.name == "INTERNET_SCHEME"
+                    && fact.origin.tu == AGGREGATE_INPUT
+                    && matches!(fact.data, FactData::Enum { .. })
+            })
+            .unwrap();
+        let FactData::Enum { variants, .. } = &native_enum.data else {
+            unreachable!()
+        };
+        let expected = wininet_scheme_values();
+        assert_eq!(
+            variants
+                .iter()
+                .map(|variant| (variant.name.clone(), variant.value))
+                .collect::<BTreeMap<_, _>>(),
+            expected
+                .iter()
+                .map(|(name, value)| (name.clone(), i64::from(*value)))
+                .collect()
+        );
+        let libraries = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| fact.root)
+            .filter_map(|fact| {
+                let FactData::Function { link_name, .. } = &fact.data else {
+                    return None;
+                };
+                configuration
+                    .libraries
+                    .resolved_library(link_name)
+                    .map(|dll| (link_name.clone(), dll.to_string()))
+            })
+            .collect::<BTreeMap<_, _>>();
+        let mut excluded_functions = configuration.exclusions.excluded_functions().clone();
+        excluded_functions.extend(configuration.policy_exclusions.iter().cloned());
+        let functions =
+            implicit_selected_functions(&snapshot, &excluded_functions, &libraries, |fact| {
+                snapshot
+                    .annotations()
+                    .get(&AnnotationTarget::Declaration(fact.origin.clone()))
+                    .is_some_and(|annotations| {
+                        annotations
+                            .iter()
+                            .any(|annotation| matches!(annotation, Annotation::ImportLibrary(_)))
+                    })
+            });
+        std::fs::write(
+            output.join("selected-functions.txt"),
+            format!("{functions:#?}\n"),
+        )
+        .unwrap();
+        std::fs::write(output.join("libraries.txt"), format!("{libraries:#?}\n")).unwrap();
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, configuration.references.types());
+        emit.functions = Some(&functions);
+        emit.libraries = Some(&libraries);
+        emit.excluded_types = Some(configuration.exclusions.excluded_types());
+        emit.excluded_functions = Some(configuration.exclusions.excluded_functions());
+        emit.excluded_constants = Some(configuration.exclusions.excluded_constants());
+        let authorities = configuration
+            .namespace_routes
+            .as_ref()
+            .unwrap()
+            .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &logical.headers, &authorities, &emit, "x64")
+                .unwrap();
+        let rdl = output.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let image = output.join("Providers.winmd");
+        compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &image).unwrap();
+        let index = Index::read(&image).unwrap();
+        assert_independent_provider_metadata(&index);
+    }
+
+    fn wininet_scheme_values() -> [(String, i32); 16] {
+        [
+            ("PARTIAL", -2),
+            ("UNKNOWN", -1),
+            ("DEFAULT", 0),
+            ("FTP", 1),
+            ("GOPHER", 2),
+            ("HTTP", 3),
+            ("HTTPS", 4),
+            ("FILE", 5),
+            ("NEWS", 6),
+            ("MAILTO", 7),
+            ("SOCKS", 8),
+            ("JAVASCRIPT", 9),
+            ("VBSCRIPT", 10),
+            ("RES", 11),
+            ("FIRST", 1),
+            ("LAST", 11),
+        ]
+        .map(|(name, value)| (format!("INTERNET_SCHEME_{name}"), value))
+    }
+
+    #[test]
+    #[ignore = "readback only; requires an existing WIN32METADATA_PROVIDER_IMAGE"]
+    fn sdk_independent_provider_image_readback() {
+        let image = PathBuf::from(
+            std::env::var_os("WIN32METADATA_PROVIDER_IMAGE")
+                .expect("set an existing provider image; this test does not extract headers"),
+        );
+        assert_independent_provider_metadata(&Index::read(&image).unwrap());
+    }
+
+    fn assert_independent_provider_metadata(index: &Index) {
+        use windows_metadata::{Type, Value};
+
+        let inet = "Windows.Win32.Networking.WinInet";
+        let http = "Windows.Win32.Networking.WinHttp";
+        let scheme = index.expect(inet, "INTERNET_SCHEME");
+        assert_eq!(
+            scheme
+                .fields()
+                .filter(|field| field.constant().is_some())
+                .count(),
+            16
+        );
+        for (name, value) in wininet_scheme_values() {
+            let field = scheme.fields().find(|field| field.name() == name).unwrap();
+            assert_eq!(field.constant().unwrap().value(), Value::I32(value));
+        }
+        for (name, value) in [("HTTP", 1), ("HTTPS", 2), ("FTP", 3), ("SOCKS", 4)] {
+            let Item::Const(field) = index.expect_item(http, &format!("INTERNET_SCHEME_{name}"))
+            else {
+                panic!("missing WinHTTP scheme {name}");
+            };
+            assert_eq!(field.constant().unwrap().value(), Value::I32(value));
+        }
+        for (namespace, record, field) in [
+            (inet, "URL_COMPONENTSA", "nScheme"),
+            (inet, "URL_COMPONENTSW", "nScheme"),
+            (inet, "WININET_PROXY_INFO", "ProxyScheme"),
+            (http, "URL_COMPONENTS", "nScheme"),
+        ] {
+            let field = index
+                .expect(namespace, record)
+                .fields()
+                .find(|candidate| candidate.name() == field)
+                .unwrap();
+            assert_eq!(field.ty(), Type::value_named(namespace, "INTERNET_SCHEME"));
+        }
+        for (namespace, target) in [
+            (inet, Type::value_named(inet, "INTERNET_SCHEME")),
+            (http, Type::I32),
+        ] {
+            assert_eq!(
+                index
+                    .expect(namespace, "LPINTERNET_SCHEME")
+                    .fields()
+                    .next()
+                    .unwrap()
+                    .ty(),
+                Type::PtrMut(Box::new(target), 1)
+            );
+        }
+        for (namespace, function, alias, record) in [
+            (
+                inet,
+                "InternetCrackUrlA",
+                "LPURL_COMPONENTSA",
+                "URL_COMPONENTSA",
+            ),
+            (
+                inet,
+                "InternetCrackUrlW",
+                "LPURL_COMPONENTSW",
+                "URL_COMPONENTSW",
+            ),
+            (
+                http,
+                "WinHttpCrackUrl",
+                "LPURL_COMPONENTS",
+                "URL_COMPONENTS",
+            ),
+        ] {
+            let Item::Fn(function) = index.expect_item(namespace, function) else {
+                panic!("missing {function}");
+            };
+            assert_eq!(
+                function.signature(&[]).types.last().unwrap(),
+                &Type::value_named(namespace, alias)
+            );
+            assert_eq!(
+                index.expect(namespace, alias).fields().next().unwrap().ty(),
+                Type::PtrMut(Box::new(Type::value_named(namespace, record)), 1)
+            );
+        }
+        let Item::Fn(bypass) = index.expect_item(inet, "IsHostInProxyBypassList") else {
+            panic!("missing IsHostInProxyBypassList");
+        };
+        assert_eq!(
+            bypass.signature(&[]).types[0],
+            Type::value_named(inet, "INTERNET_SCHEME")
         );
     }
 
