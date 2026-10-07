@@ -4745,6 +4745,560 @@ mod tests {
         println!("{result}");
     }
 
+    #[test]
+    fn identical_associated_enums_from_different_headers_remain_ambiguous() {
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_ENUM_ORIGIN_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).unwrap();
+                path
+            }
+            None => scratch("associated-enum-physical-origin"),
+        };
+        let enum_source = "enum [[clang::flag_enum]] MirroredFlags : unsigned int { Low = 1U, High = 0x80000000U };\n";
+        let direct = root.join("direct.h");
+        let dependency = root.join("dependency.h");
+        let consumer = root.join("consumer.h");
+        std::fs::write(&direct, enum_source).unwrap();
+        std::fs::write(&dependency, enum_source).unwrap();
+        assert_eq!(
+            std::fs::read(&direct).unwrap(),
+            std::fs::read(&dependency).unwrap()
+        );
+        std::fs::write(
+            &consumer,
+            "extern \"C\" void Consume([[clang::annotate(\"win32metadata:associated_enum=MirroredFlags\")]] unsigned int value);\n",
+        )
+        .unwrap();
+        let direct = path_arg(&direct, "--include").unwrap();
+        let dependency = path_arg(&dependency, "--include").unwrap();
+        let consumer = path_arg(&consumer, "--include").unwrap();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new("direct.cpp", format!("#include \"{direct}\"\n"))
+                    .with_roots([direct.clone()]),
+                Input::new(
+                    "consumer.cpp",
+                    format!("#include \"{dependency}\"\n#include \"{consumer}\"\n"),
+                )
+                .with_roots([consumer.clone()]),
+            ],
+            &["-x", "c++", "-std=c++20", "--target=x86_64-pc-windows-msvc"],
+        )
+        .unwrap();
+        std::fs::write(root.join("facts.txt"), format!("{:#?}\n", snapshot.facts())).unwrap();
+        let definitions = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| {
+                fact.name == "MirroredFlags" && matches!(fact.data, FactData::Enum { .. })
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(definitions.len(), 2);
+        assert_eq!(definitions[0].data, definitions[1].data);
+        assert_ne!(definitions[0].spelling.file, definitions[1].spelling.file);
+        let policy = HeaderPartitionPolicy::new()
+            .with_traversed_header_for_input(
+                "direct.cpp",
+                direct,
+                RootPartition::new("Left", "Test.Left"),
+            )
+            .with_traversed_header_for_input(
+                "consumer.cpp",
+                consumer,
+                RootPartition::new("Right", "Test.Right"),
+            );
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new("Test", references.types());
+        emit.library = Some("fixture.dll");
+        let error = plan_header_partitions(
+            &snapshot,
+            &policy,
+            &NamespaceAuthorities::default(),
+            &emit,
+            "x64",
+        )
+        .expect_err("identical enum values must not conflate distinct physical providers");
+        std::fs::write(root.join("expected-conflict.txt"), &error).unwrap();
+        assert!(
+            error.contains("MirroredFlags")
+                && error.contains("found 1 conflict(s)")
+                && error.contains("ambiguous logical owners")
+                && error.contains("Test.Left")
+                && error.contains("Test.Right"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    #[ignore = "requires frozen SDK headers in WIN32METADATA_ENUM_ROUTES_INPUT_ROOT and a fresh WIN32METADATA_ENUM_ROUTES_OUTPUT_ROOT"]
+    fn sdk_partitioned_associated_enum_routes_across_inputs() {
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_ENUM_ROUTES_INPUT_ROOT")
+                .expect("set the frozen SDK input root"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_ENUM_ROUTES_OUTPUT_ROOT")
+                .expect("set a fresh evidence directory"),
+        );
+        std::fs::create_dir(&output).unwrap();
+        let includes = checked_in_include_dirs(&win_sdk);
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        type InputHeaders<'a> = (&'a str, &'a [(&'a str, &'a str)], &'a str);
+        let groups: &[InputHeaders<'_>] = &[
+            (
+                "providers.cpp",
+                &[
+                    ("wincrypt.h", "Security.Cryptography"),
+                    ("cfg.h", "DevInst"),
+                    ("winnt.h", "Backup"),
+                ],
+                "",
+            ),
+            (
+                "consumers.cpp",
+                &[
+                    ("CertEnc.h", "Certificates"),
+                    ("mssip.h", "Security.Cryptography.Sip"),
+                    ("cfgmgr32.h", "DevInst"),
+                    ("cryptuiapi.h", "Security.Cryptography.UI"),
+                    ("clusapi.h", "MsCs"),
+                    ("DbgModel.h", "Debug.Extensions"),
+                ],
+                "#include <wincrypt.h>\n#include <cfg.h>\n",
+            ),
+            (
+                "search.cpp",
+                &[("msdasql_interfaces.h", "Search")],
+                "#include <oledb.h>\n",
+            ),
+        ];
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut inputs = Vec::new();
+        for (name, headers, prelude) in groups {
+            let input_path = output.join(name);
+            let input = path_arg(&input_path, "--partition").unwrap();
+            let mut source = format!("{WIN32_SDK_PRELUDE}{prelude}");
+            let mut roots = Vec::new();
+            for (header, owner) in *headers {
+                let path = includes
+                    .iter()
+                    .map(|directory| directory.join(header))
+                    .find(|path| path.is_file())
+                    .unwrap_or_else(|| panic!("missing {header}"));
+                let path = path_arg(&path, "--include").unwrap();
+                policy.add_traversed_header_for_input(
+                    input.clone(),
+                    path.clone(),
+                    convert_root_partition(logical_partition(&traversal, owner).unwrap()),
+                );
+                source.push_str(&format!("#include \"{path}\"\n"));
+                roots.push(path);
+            }
+            std::fs::write(input_path, &source).unwrap();
+            inputs.push(Input::new(input, source).with_roots(roots));
+        }
+        let args = checked_in_clang_args(&includes);
+        std::fs::write(output.join("arguments.txt"), args.join("\n")).unwrap();
+        let snapshot =
+            windows_clang::extract(inputs, &args.iter().map(String::as_str).collect::<Vec<_>>())
+                .unwrap();
+        let enums = [
+            (
+                "CERT_ALT_NAME",
+                "Windows.Win32.Security.Cryptography",
+                Type::I32,
+                false,
+            ),
+            (
+                "CERT_QUERY_ENCODING_TYPE",
+                "Windows.Win32.Security.Cryptography",
+                Type::U32,
+                true,
+            ),
+            (
+                "CERT_RDN_ATTR_VALUE_TYPE",
+                "Windows.Win32.Security.Cryptography",
+                Type::I32,
+                false,
+            ),
+            (
+                "CM_DEVNODE_STATUS_FLAGS",
+                "Windows.Win32.Devices.DeviceAndDriverInstallation",
+                Type::U32,
+                true,
+            ),
+            (
+                "CRYPT_KEY_FLAGS",
+                "Windows.Win32.Security.Cryptography",
+                Type::U32,
+                true,
+            ),
+            (
+                "OBJECT_SECURITY_INFORMATION",
+                "Windows.Win32.System.SystemServices",
+                Type::U32,
+                true,
+            ),
+            ("VARENUM", "Windows.Win32.System.Variant", Type::I32, true),
+        ];
+        let names = enums
+            .iter()
+            .map(|(name, ..)| *name)
+            .collect::<BTreeSet<_>>();
+        let native_facts = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| names.contains(fact.name.as_str()))
+            .collect::<Vec<_>>();
+        std::fs::write(
+            output.join("native-facts.txt"),
+            format!("{native_facts:#?}\n"),
+        )
+        .unwrap();
+        let mut native_members = BTreeMap::new();
+        let mut native_member_disagreements = Vec::new();
+        let mut emitted_members = BTreeMap::new();
+        for fact in snapshot
+            .facts()
+            .iter()
+            .filter(|fact| names.contains(fact.name.as_str()))
+        {
+            if let FactData::Enum { repr, variants, .. } = &fact.data {
+                let members = variants
+                    .iter()
+                    .map(|member| (member.name.clone(), member.value))
+                    .collect::<BTreeMap<_, _>>();
+                if let Some(previous) = native_members.insert(fact.name.clone(), members.clone())
+                    && previous != members
+                {
+                    native_member_disagreements
+                        .push(format!("{}: {previous:?} != {members:?}", fact.name));
+                }
+                let values = variants
+                    .iter()
+                    .map(|member| {
+                        let value = match repr {
+                            windows_clang::Scalar::U32 => {
+                                assert!(
+                                    (i64::from(i32::MIN)..=i64::from(u32::MAX))
+                                        .contains(&member.value)
+                                );
+                                // Clang's signed value slot can carry a sign-extended U32.
+                                i64::from(member.value as u32)
+                            }
+                            windows_clang::Scalar::I32 => {
+                                i64::from(i32::try_from(member.value).unwrap())
+                            }
+                            other => panic!(
+                                "{} unexpected native enum representation: {other:?}",
+                                fact.name
+                            ),
+                        };
+                        (member.name.clone(), value)
+                    })
+                    .collect::<BTreeMap<_, _>>();
+                if let Some(previous) = emitted_members.insert(fact.name.clone(), values.clone()) {
+                    assert_eq!(previous, values, "{} repr-aware native values", fact.name);
+                }
+            }
+        }
+        std::fs::write(
+            output.join("native-members.txt"),
+            format!("{native_members:#?}\n"),
+        )
+        .unwrap();
+        std::fs::write(
+            output.join("native-member-disagreements.txt"),
+            native_member_disagreements.join("\n"),
+        )
+        .unwrap();
+        std::fs::write(
+            output.join("expected-emitted-members.txt"),
+            format!("{emitted_members:#?}\n"),
+        )
+        .unwrap();
+        assert_eq!(native_members.len(), 7, "all seven native enum providers");
+        let directory = sdk_package_root("microsoft.windows.sdk.cpp.x64")
+            .join("c")
+            .join("um")
+            .join("x64");
+        let mut baseline = LibraryMap::default();
+        for name in crate::win32_headers::IMPORT_LIBS {
+            baseline.import_library(&directory.join(name)).unwrap();
+        }
+        let mut candidate = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![directory],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            candidate.import_library(&path).unwrap();
+        }
+        for (name, dll) in &baseline.0 {
+            assert_eq!(
+                candidate.resolved_library(name),
+                Some(dll.as_str()),
+                "{name}"
+            );
+        }
+        apply_library_overrides(&mut baseline).unwrap();
+        apply_library_overrides(&mut candidate).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut failures = Vec::new();
+        let mut emitted = Vec::new();
+        let excluded_functions = traversal
+            .partitions
+            .iter()
+            .flat_map(|partition| partition.policy.exclusions.iter().cloned())
+            .chain(
+                HEADER_POLICY_OVERRIDE_CONTRACTS
+                    .iter()
+                    .flat_map(|contract| contract.excluded_names.iter().copied())
+                    .map(str::to_string),
+            )
+            .collect::<BTreeSet<_>>();
+        let has_import_annotation = |fact: &windows_clang::Fact| {
+            snapshot
+                .annotations()
+                .get(&AnnotationTarget::Declaration(fact.origin.clone()))
+                .is_some_and(|annotations| {
+                    annotations
+                        .iter()
+                        .any(|annotation| matches!(annotation, Annotation::ImportLibrary(_)))
+                })
+        };
+        for (label, native) in [
+            ("original-180", &baseline),
+            ("supplemented-247", &candidate),
+        ] {
+            let root = output.join(label);
+            std::fs::create_dir(&root).unwrap();
+            let libraries = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.root)
+                .filter_map(|fact| {
+                    let FactData::Function { link_name, .. } = &fact.data else {
+                        return None;
+                    };
+                    native
+                        .resolved_library(link_name)
+                        .map(|dll| (link_name.clone(), dll.to_string()))
+                })
+                .collect::<BTreeMap<_, _>>();
+            let selected = implicit_selected_functions(
+                &snapshot,
+                &excluded_functions,
+                &libraries,
+                has_import_annotation,
+            );
+            std::fs::write(
+                root.join("selected-functions.txt"),
+                format!("{selected:#?}\n"),
+            )
+            .unwrap();
+            std::fs::write(root.join("libraries.txt"), format!("{libraries:#?}\n")).unwrap();
+            let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+            emit.functions = Some(&selected);
+            emit.libraries = Some(&libraries);
+            match plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64") {
+                Ok(partitions) => emitted.push((root, partitions)),
+                Err(error) => {
+                    std::fs::write(root.join("planning-error.txt"), &error).unwrap();
+                    failures.push(format!("{label}: {error}"));
+                }
+            }
+        }
+        assert!(failures.is_empty(), "{}", failures.join("\n"));
+        let mut conflicting_policy = policy.clone();
+        let provider_input = path_arg(&output.join("providers.cpp"), "--partition").unwrap();
+        let provider_header = path_arg(
+            &win_sdk
+                .join("RecompiledIdlHeaders")
+                .join("um")
+                .join("wincrypt.h"),
+            "--include",
+        )
+        .unwrap();
+        conflicting_policy.add_traversed_header_for_input(
+            provider_input,
+            provider_header,
+            RootPartition::new("ConflictingProvider", "Test.ConflictingProvider"),
+        );
+        let conflicting_emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        let conflict = plan_header_partitions(
+            &snapshot,
+            &conflicting_policy,
+            &authorities,
+            &conflicting_emit,
+            "x64",
+        )
+        .expect_err("genuine competing provider ownership must remain an error");
+        std::fs::write(output.join("true-conflict.txt"), &conflict).unwrap();
+        assert!(
+            conflict.contains("CERT_ALT_NAME") && conflict.contains("Test.ConflictingProvider"),
+            "{conflict}"
+        );
+        for (root, partitions) in emitted {
+            let rdl = root.join("rdl");
+            std::fs::create_dir(&rdl).unwrap();
+            write_partitioned_rdl(&rdl, partitions).unwrap();
+            let image = root.join("Windows.Win32.winmd");
+            compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &image).unwrap();
+            let index = Index::read(&image).unwrap();
+            let mut associations = BTreeMap::<String, Vec<String>>::new();
+            let mut record = |slot: String, values: Vec<(String, Value)>| {
+                for (_, value) in values {
+                    if let Value::Utf8(name) = value
+                        && names.contains(name.as_str())
+                    {
+                        associations.entry(name).or_default().push(slot.clone());
+                    }
+                }
+            };
+            for definition in index.types() {
+                for field in definition.fields() {
+                    if let Some(attribute) = field.find_attribute("AssociatedEnumAttribute") {
+                        record(
+                            format!(
+                                "{}.{}.{}",
+                                definition.namespace(),
+                                definition.name(),
+                                field.name()
+                            ),
+                            attribute.value(),
+                        );
+                    }
+                }
+                for method in definition.methods() {
+                    for parameter in method.params() {
+                        if let Some(attribute) = parameter.find_attribute("AssociatedEnumAttribute")
+                        {
+                            record(
+                                format!(
+                                    "{}.{}.{}:{}",
+                                    definition.namespace(),
+                                    definition.name(),
+                                    method.name(),
+                                    parameter.sequence()
+                                ),
+                                attribute.value(),
+                            );
+                        }
+                    }
+                }
+            }
+            std::fs::write(
+                root.join("associations.txt"),
+                format!("{associations:#?}\n"),
+            )
+            .unwrap();
+            assert_eq!(
+                associations.len(),
+                7,
+                "all seven annotation families survive"
+            );
+            for (name, expected_namespace) in [
+                (
+                    "CERT_ALT_NAME",
+                    "Windows.Win32.Security.Cryptography.Certificates.",
+                ),
+                (
+                    "CERT_RDN_ATTR_VALUE_TYPE",
+                    "Windows.Win32.Security.Cryptography.Certificates.",
+                ),
+                (
+                    "CERT_QUERY_ENCODING_TYPE",
+                    "Windows.Win32.Security.Cryptography.Sip.",
+                ),
+                (
+                    "CM_DEVNODE_STATUS_FLAGS",
+                    "Windows.Win32.Devices.DeviceAndDriverInstallation.",
+                ),
+                ("CRYPT_KEY_FLAGS", "Windows.Win32.Security.Cryptography.UI."),
+                (
+                    "OBJECT_SECURITY_INFORMATION",
+                    "Windows.Win32.Networking.Clustering.",
+                ),
+                (
+                    "VARENUM",
+                    "Windows.Win32.System.Diagnostics.Debug.Extensions.",
+                ),
+                ("VARENUM", "Windows.Win32.System.Search."),
+            ] {
+                assert!(
+                    associations[name]
+                        .iter()
+                        .any(|slot| slot.starts_with(expected_namespace)),
+                    "{name} must retain its {expected_namespace} consumer binding"
+                );
+            }
+            for (name, namespace, width, flags) in &enums {
+                assert_eq!(
+                    index.types().filter(|ty| ty.name() == *name).count(),
+                    1,
+                    "{name} unique route"
+                );
+                let definition = index.expect(namespace, name);
+                assert_eq!(
+                    definition
+                        .fields()
+                        .find(|field| field.name() == "value__")
+                        .unwrap()
+                        .ty(),
+                    *width,
+                    "{name} native width"
+                );
+                let actual = definition
+                    .fields()
+                    .filter_map(|field| {
+                        field.constant().map(|constant| {
+                            let value = match constant.value() {
+                                Value::I32(value) => i64::from(value),
+                                Value::U32(value) => i64::from(value),
+                                other => panic!(
+                                    "{name}.{} changed native value kind: {other:?}",
+                                    field.name()
+                                ),
+                            };
+                            (field.name().to_string(), value)
+                        })
+                    })
+                    .collect::<BTreeMap<_, _>>();
+                assert_eq!(actual, emitted_members[*name], "{name} native members");
+                assert_eq!(
+                    definition
+                        .find_attribute("FlagsAttribute")
+                        .is_some_and(|attribute| attribute.namespace() == "System"),
+                    *flags,
+                    "{name} native Flags/plain"
+                );
+            }
+        }
+    }
+
     fn scratch(name: &str) -> PathBuf {
         let path =
             std::env::temp_dir().join(format!("win32metadata-tools-{name}-{}", std::process::id()));

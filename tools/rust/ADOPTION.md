@@ -4,8 +4,9 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`6f9dcaef699630aacbae363b7f9766afc84b2d41`](https://github.com/jevansaks/windows-rs/commit/6f9dcaef699630aacbae363b7f9766afc84b2d41),
-published in `jevansaks/windows-rs`. Its explicitly terminated named-scalar
+[`60b728861e6f6a0f25a52012934ca81041e710c8`](https://github.com/jevansaks/windows-rs/commit/60b728861e6f6a0f25a52012934ca81041e710c8),
+published in `jevansaks/windows-rs`. Its cross-input associated-enum ownership
+correction follows `6f9dcaef699630aacbae363b7f9766afc84b2d41`, whose explicitly terminated named-scalar
 correction follows `ab1e9593dd421d3aa0d6a3710557b7789199d004`, whose redeclaration correction follows the
 native-opaque capability `1dd86adb880fb4b1dc4ebe5f0dd2f6dc45b75355` and AssociatedEnum
 closure revision `15ba1b7f96c770b9d425ebca00a3a73f74bb004e`, whose fixes follow
@@ -22,6 +23,62 @@ historical fork change has been upstreamed.
 | `windows-rdl` | RDL compilation and WinMD-to-RDL emission. |
 | `windows-metadata` | Metadata identities, reading, writing, and merging. |
 | `windows-default` | Reference metadata; follows the same exact producer revision. |
+
+## Cross-input associated-enum ownership
+
+**Upstream issue:** not filed; this corrects the local pipeline planner.
+
+Producer `60b728861e6f6a0f25a52012934ca81041e710c8` keeps a compatible enum
+provider's existing traversed ownership when an annotated consumer is extracted
+in another translation unit. Dependency copies must not acquire a competing
+consumer-header route. For a dependency-only enum with an explicit namespace
+authority, unrelated partition settings must not create a false conflict.
+Different physical providers, incompatible declarations, and genuine competing
+ownership remain errors.
+
+Provider compatibility preserves the declared enum representation. Clang's
+signed `i64` constant slot can contain either `-2147483648` or `2147483648` for
+the same unsigned 32-bit `0x80000000` member. The producer compares such values
+using the existing representation-width emission rule, not signed-value equality
+or a name-based exception. Signed representations and differing member values
+remain distinct.
+
+The opt-in `sdk_partitioned_associated_enum_routes_across_inputs` regression
+uses three focused translation units over unchanged SDK headers. It separates
+direct enum providers from annotated consumer headers and gives the two VARENUM
+consumers separate inputs. It retains the checked-in logical owner policies,
+namespace authorities, production function-selection exclusions and import
+annotations, and nonempty WinRT references. Both the original 180-library map
+and the supplemented 247-library map are tested against the **same snapshot**,
+through `HeaderPartitionPlan::emit_with_options`, not just initial planning.
+
+On `6f9dcaef`, both maps reproduce the same seven ownership ambiguities. Adding
+the supplemental archives is therefore not required to expose these failures
+in this real-header topology. Successful emission must preserve all seven
+physical definitions, native member values and widths, five Flags/two plain
+enums, consumer associations and unique routes. A deliberately conflicting
+provider owner must still be rejected. Raw source facts remain separate from
+representation-aware expected metadata values.
+
+The normal SDK-free
+`identical_associated_enums_from_different_headers_remain_ambiguous` control
+uses byte-identical enum headers with equal extracted representations and member
+values at different physical paths. Their competing ownership must remain one
+explicit ambiguity; equal values must not turn them into the same provider.
+
+```powershell
+$env:WIN32METADATA_ENUM_ROUTES_INPUT_ROOT = (Resolve-Path .\cohort\generation\WinSDK).Path
+$env:WIN32METADATA_ENUM_ROUTES_OUTPUT_ROOT = Join-Path $PWD "obj\enum-routes-check"
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_partitioned_associated_enum_routes_across_inputs -- --ignored --nocapture
+```
+
+Use a new evidence directory whose parent exists. This regression is not a full
+SDK extraction or a replacement for the producer's signedness, source identity,
+exclusion, authority, and genuine-conflict negative tests.
+
+**Removal condition:** adopt an upstream revision with equivalent generic
+cross-input ownership and authority behavior while retaining these regressions.
 
 ## SAL capture integration
 
