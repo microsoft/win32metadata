@@ -1,0 +1,68 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusgpstubs.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusgpstubs.h
+index f3eb9b8..e64d53b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusgpstubs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusgpstubs.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************\
+ *
+ * Copyright (c) 1998-2001, Microsoft Corp.  All Rights Reserved.
+@@ -50,32 +51,32 @@ class CachedBitmap;
+ //---------------------------------------------------------------------------
+ // Private GDI+ classes for internal type checking
+ //---------------------------------------------------------------------------
+-class GpGraphics {};
+-
+-class GpBrush {};
+-class GpTexture : public GpBrush {};
+-class GpSolidFill : public GpBrush {};
+-class GpLineGradient : public GpBrush {};
+-class GpPathGradient : public GpBrush {};
+-class GpHatch : public GpBrush {};
+-
+-class GpPen {};
+-class GpCustomLineCap {};
+-class GpAdjustableArrowCap : public GpCustomLineCap {};
+-
+-class GpImage {};
+-class GpBitmap : public GpImage {};
+-class GpMetafile : public GpImage {};
+-class GpImageAttributes {};
+-
+-class GpPath {};
+-class GpRegion {};
+-class GpPathIterator {};
+-
+-class GpFontFamily {};
+-class GpFont {};
+-class GpStringFormat {};
+-class GpFontCollection {};
++class _Win32_NativeOpaque_ GpGraphics {};
++
++class _Win32_NativeOpaque_ GpBrush {};
++class _Win32_NativeOpaque_ GpTexture : public GpBrush {};
++class _Win32_NativeOpaque_ GpSolidFill : public GpBrush {};
++class _Win32_NativeOpaque_ GpLineGradient : public GpBrush {};
++class _Win32_NativeOpaque_ GpPathGradient : public GpBrush {};
++class _Win32_NativeOpaque_ GpHatch : public GpBrush {};
++
++class _Win32_NativeOpaque_ GpPen {};
++class _Win32_NativeOpaque_ GpCustomLineCap {};
++class _Win32_NativeOpaque_ GpAdjustableArrowCap : public GpCustomLineCap {};
++
++class _Win32_NativeOpaque_ GpImage {};
++class _Win32_NativeOpaque_ GpBitmap : public GpImage {};
++class _Win32_NativeOpaque_ GpMetafile : public GpImage {};
++class _Win32_NativeOpaque_ GpImageAttributes {};
++
++class _Win32_NativeOpaque_ GpPath {};
++class _Win32_NativeOpaque_ GpRegion {};
++class _Win32_NativeOpaque_ GpPathIterator {};
++
++class _Win32_NativeOpaque_ GpFontFamily {};
++class _Win32_NativeOpaque_ GpFont {};
++class _Win32_NativeOpaque_ GpStringFormat {};
++class _Win32_NativeOpaque_ GpFontCollection {};
+ class GpInstalledFontCollection : public GpFontCollection {};
+ class GpPrivateFontCollection : public GpFontCollection {};
+ 
